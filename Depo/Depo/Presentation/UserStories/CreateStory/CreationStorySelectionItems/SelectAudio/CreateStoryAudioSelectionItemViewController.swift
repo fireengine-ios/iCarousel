@@ -65,6 +65,7 @@ final class CreateStoryAudioSelectionItemViewController: ViewController, NibInit
         super.viewWillAppear(animated)
         configureNavBarActions()
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.CreateStoryMusicSelectionScreen())
         let analyticsService = AnalyticsService()
         analyticsService.logScreen(screen: .createStoryMusicSelection)
     }

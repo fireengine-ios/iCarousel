@@ -63,6 +63,7 @@ final class OptInController: ViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.OTPDoubleOptInScreen())
         setupKeyboard()
         setupButtonsInitialState()
         setupTimer(withRemainingTime: NumericConstants.verificationTimerLimit)

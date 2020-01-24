@@ -17,7 +17,8 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
         dataSource.setSelectionState(selectionState: false)
         dataSource.needShow3DotsInCell = false
         dataSource.canShow3DotsInCell = false
-        dataSource.updateDisplayngType(type: .greed)
+        let displaingType: BaseDataSourceDisplayingType = (type == .Grid) ? .greed : .list
+        dataSource.updateDisplayngType(type: displaingType)
         dataSource.preferedCellReUseID = CollectionViewCellsIdsConstant.baseMultiFileCell
         
 //        ItemOperationManager.default.startUpdateView(view: self)

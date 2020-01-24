@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol OverlayStickerViewControllerDataSourceDelegate {
+protocol OverlayStickerViewControllerDataSourceDelegate: class {
     func didSelectItem(item: SmashStickerResponse, attachmentType: AttachedEntityType)
 }
 
@@ -31,14 +31,12 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     private var imageState = State()
     
     private var currentState: State {
-        get {
-            selectedAttachmentType == .gif ?  gifState : imageState
-        }
+        return selectedAttachmentType == .gif ?  gifState : imageState
     }
     
     private let stickerService: SmashService = SmashServiceImpl()
     
-    var delegate: OverlayStickerViewControllerDataSourceDelegate?
+    weak var delegate: OverlayStickerViewControllerDataSourceDelegate?
     
     private var selectedAttachmentType: AttachedEntityType = .gif {
         didSet {
@@ -130,10 +128,7 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     
         downloader.getImageData(url: url) { data in
             DispatchQueue.global().async {
-                guard
-                    let imageData = data,
-                    let image = OptimizingGifService().optimizeImage(data: imageData, optimizeFor: .cell)
-                else {
+                guard let imageData = data, let image = OptimizingGifService().optimizeImage(data: imageData, optimizeFor: .cell) else {
                     return
                 }
                 

@@ -99,7 +99,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func shareSmallSize(sourceRect: CGRect?) {
         if let items = sharingItems as? [WrapData] {
             let files: [FileForDownload] = items.compactMap { FileForDownload(forMediumURL: $0) }
-            shareFiles(filesForDownload: files, sourceRect: sourceRect)
+            shareFiles(filesForDownload: files, sourceRect: sourceRect, shareType: .smallSize)
         }
         
     }
@@ -107,11 +107,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func shareOrignalSize(sourceRect: CGRect?) {
         if let items = sharingItems as? [WrapData] {
             let files: [FileForDownload] = items.compactMap { FileForDownload(forOriginalURL: $0) }
-            shareFiles(filesForDownload: files, sourceRect: sourceRect)
+            shareFiles(filesForDownload: files, sourceRect: sourceRect, shareType: .originalSize)
         }
     }
     
-    private func shareFiles(filesForDownload: [FileForDownload], sourceRect: CGRect?) {
+    private func shareFiles(filesForDownload: [FileForDownload], sourceRect: CGRect?, shareType: NetmeraEventValues.ShareMethodType) {
         let downloader = FilesDownloader()
         output?.operationStarted(type: .share)
         downloader.getFiles(filesForDownload: filesForDownload, response: { [weak self] fileURLs, directoryURL in
@@ -142,6 +142,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     
                     MenloworksEventsService.shared.onShareItem(with: fileType, toApp: activityTypeString.knownAppName())
                     
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Share(method: shareType, channelType: activityTypeString.knownAppName()))
                     self?.analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                                               eventActions: .share,
                                                               eventLabel: .shareViaApp(activityTypeString.knownAppName()))
@@ -197,6 +198,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     else {
                         return
                     }
+                    
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Share(method: .link, channelType: activityTypeString.knownAppName()))
                 
                     MenloworksEventsService.shared.onShareItem(with: fileType,
                                                                toApp: activityTypeString.knownAppName())
@@ -239,6 +242,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 let image = image,
                 let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
                 else {
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .failure))
                     UIApplication.showErrorAlert(message: TextConstants.errorServer)
                     complition?()
                     return
@@ -297,8 +301,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         } else if let items = remoteItems as? [Item] {
             hideFunctionalityService.startHideOperation(for: items,
                                                         output: self.output,
-                                                        success: self.succesAction(elementType: .hide),
-                                                        fail: self.failAction(elementType: .hide))
+                                                        success: self.successItmesAction(elementType: .hide, relatedItems: items),
+                                                        fail: self.failItmesAction(elementType: .hide, relatedItems: items))
         } else {
             assertionFailure("Unexpected type of items")
         }
@@ -318,8 +322,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
            
         hideFunctionalityService.startHideAlbumsOperation(for: remoteItems,
                                                           output: self.output,
-                                                          success: self.succesAction(elementType: .hide),
-                                                          fail: self.failAction(elementType: .hide))
+                                                          success: self.successItmesAction(elementType: .hide, relatedItems: items),
+                                                          fail: self.failItmesAction(elementType: .hide, relatedItems: items))
     }
     
     func unhide(items: [BaseDataSourceItem]) {
@@ -504,7 +508,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             showAccessAlert()
             return
         }
+        
         if let item = item as? [Item] {
+            
+            if let firstItem = item.first {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Download(type: firstItem.fileType, count: item.count))
+            }
+            
             //FIXME: transform all to BaseDataSourceItem
             if let item = item.first, item.fileType.isFaceImageAlbum || item.fileType.isFaceImageType {
                 downloadFaceImageAlbum(item: item)
@@ -514,6 +524,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                      fail: failAction(elementType: .download))
             }
         } else if let albums = item as? [AlbumItem] {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Download(type: .album, count: albums.count))
             output?.startAsyncOperationDisableScreen()
             albumService.loadItemsBy(albums: albums, success: {[weak self] itemsByAlbums in
                 self?.output?.completeAsyncOperationEnableScreen()
@@ -570,6 +581,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 }
             }
             }, cancel: {}, fail: { errorResponse in
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .failure))
                 UIApplication.showErrorAlert(message: errorResponse.description)
         })
     }
@@ -800,6 +812,7 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
     }
     
     private func save(image: UIImage) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .success))
         MenloworksTagsService.shared.editedPhotoSaved()
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
@@ -809,7 +822,7 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
 
 extension MoreFilesActionsInteractor {
     
-    func succesAction(elementType: ElementTypes) -> FileOperation {
+   func succesAction(elementType: ElementTypes) -> FileOperation {
         let success: FileOperation = { [weak self] in
             self?.trackSuccessEvent(elementType: elementType)
             DispatchQueue.main.async {
@@ -818,6 +831,85 @@ extension MoreFilesActionsInteractor {
             }
         }
         return success
+    }
+    
+    func successItmesAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FileOperation {
+        let success: FileOperation = { [weak self] in
+            self?.trackSuccessEvent(elementType: elementType)
+            self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .success, items: relatedItems)
+            DispatchQueue.main.async {
+                self?.output?.operationFinished(type: elementType)
+                self?.showSuccessPopup(for: elementType)
+            }
+        }
+        return success
+    }
+    
+    private func showSuccessPopup(for elementType: ElementTypes) {
+        let text: String
+        switch elementType {
+        case .download:
+            text = TextConstants.popUpDownloadComplete
+        case .moveToTrash:
+            text = TextConstants.popUpDeleteComplete
+        case .unhide:
+            text = TextConstants.unhidePopupSuccessText
+        case .delete:
+            text = TextConstants.deletePopupSuccessText
+            MenloworksAppEvents.onFileDeleted()
+        case .restore:
+            text = TextConstants.restorePopupSuccessText
+        default:
+            return
+        }
+        UIApplication.showSuccessAlert(message: text)
+    }
+    
+    private func trackSuccessEvent(elementType: ElementTypes) {
+        switch elementType {
+        case .addToFavorites:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .favoriteLike(.favorite))
+        case .removeFromFavorites:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .removefavorites)
+        case .delete, .deleteDeviceOriginal:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete)
+        case .print:
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
+        default:
+            break
+        }
+    }
+    
+    private func trackNetmeraSuccessEvent(elementType: ElementTypes, successStatus: NetmeraEventValues.GeneralStatus, items: [BaseDataSourceItem]) {
+        //TODO: change other parts of actions tracking to this method
+        switch elementType {
+        case .moveToTrash:
+            let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
+            typeToCountDictionary.keys.forEach {
+                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Trash(status: successStatus, type: $0, count: count) else {
+                    return
+                }
+                AnalyticsService.sendNetmeraEvent(event: event)
+            }
+        case .hide:
+            let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
+            typeToCountDictionary.keys.forEach {
+                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Hide(status: successStatus, type: $0, count: count) else {
+                    return
+                }
+                AnalyticsService.sendNetmeraEvent(event: event)
+            }
+        case .unhide:
+            let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
+            typeToCountDictionary.keys.forEach {
+                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Unhide(status: successStatus, type: $0, count: count) else {
+                    return
+                }
+                AnalyticsService.sendNetmeraEvent(event: event)
+            }
+        default:
+            break
+        }
     }
     
     func failAction(elementType: ElementTypes) -> FailResponse {
@@ -839,47 +931,24 @@ extension MoreFilesActionsInteractor {
         return failResponse
     }
     
-    private func trackSuccessEvent(elementType: ElementTypes) {
-        switch elementType {
-        case .addToFavorites:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .favoriteLike(.favorite))
-        case .removeFromFavorites:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .removefavorites)
-        case .delete, .deleteDeviceOriginal:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .delete)
-        case .print:
-            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .print)
-        default:
-            break
-        }
-    }
-    
-    private func showSuccessPopup(for elementType: ElementTypes) {
-        let text: String
-        switch elementType {
-        case .download:
-            text = TextConstants.popUpDownloadComplete
-        case .moveToTrash:
-            text = TextConstants.popUpDeleteComplete
-        case .unhide:
-            text = TextConstants.unhidePopupSuccessText
-        case .delete:
-            text = TextConstants.deletePopupSuccessText
-            MenloworksAppEvents.onFileDeleted()
-        case .restore:
-            text = TextConstants.restorePopupSuccessText
-        default:
-            return
-        }
+    func failItmesAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FailResponse {
         
-        var delay: Double = 0
-        if elementType.isContained(in: [.unhide, .moveToTrash, .restore, .delete]) {
-            delay = 1
+        let failResponse: FailResponse  = { [weak self] value in
+            self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .failure, items: relatedItems)
+            DispatchQueue.toMain {
+                if value.isOutOfSpaceError {
+                    debugLog("failAction 1 isOutOfSpaceError")
+                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
+                        debugLog("failAction 2 showOutOfSpaceAlert")
+                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
+                    }
+                } else {
+                    debugLog("failAction 3 \(value.description)")
+                    self?.output?.operationFailed(type: elementType, message: value.description)
+                }
+            }
         }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            UIApplication.showSuccessAlert(message: text)
-        }
+        return failResponse
     }
     
     private func removeItemsFromPlayer(items: [Item]) {
@@ -1029,14 +1098,14 @@ extension MoreFilesActionsInteractor {
         guard !items.isEmpty else {
             return
         }
-        
+//        elementType: .moveToTrash, relatedItems: items
         RouterVC().showSpiner()
         let okHandler: VoidHandler = { [weak self] in
             self?.output?.operationStarted(type: .moveToTrash)
             self?.removeItemsFromPlayer(items: items)
             self?.fileService.moveToTrash(files: items,
-                                          success: self?.succesAction(elementType: .moveToTrash),
-                                          fail: self?.failAction(elementType: .moveToTrash))
+                                          success: self?.successItmesAction(elementType: .moveToTrash, relatedItems: items),
+                                          fail: self?.failItmesAction(elementType: .moveToTrash, relatedItems: items))
         }
         
         let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
@@ -1057,6 +1126,8 @@ extension MoreFilesActionsInteractor {
             self?.output?.operationStarted(type: .moveToTrash)
             
             self?.albumService.moveToTrash(albums: albums, success: { [weak self] deletedAlbums in
+                self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .success, items: deletedAlbums)
+
                 DispatchQueue.main.async {
                     self?.output?.operationFinished(type: .moveToTrash)
                     ItemOperationManager.default.didMoveToTrashAlbums(albums)
@@ -1068,6 +1139,7 @@ extension MoreFilesActionsInteractor {
                     self?.router.presentViewController(controller: controller)
                 }
                 }, fail: { [weak self] errorRespone in
+                    self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .failure, items: albums)
                     DispatchQueue.main.async {
                         self?.output?.operationFailed(type: .moveToTrash, message: errorRespone.description)
                     }
