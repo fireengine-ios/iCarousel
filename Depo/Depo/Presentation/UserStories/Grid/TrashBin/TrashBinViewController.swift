@@ -22,6 +22,8 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     private lazy var navbarManager = TrashBinNavbarManager(delegate: self)
     private lazy var threeDotsManager = TrashBinThreeDotMenuManager(delegate: self)
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     //MARK: - View lifecycle
     
     deinit {
@@ -31,6 +33,9 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        analyticsService.logScreen(screen: .trashBin)
+        analyticsService.trackDimentionsEveryClickGA(screen: .trashBin)
+        
         needToShowTabBar = true
         ItemOperationManager.default.startUpdateView(view: self)
         sortingManager.addBarView(to: sortPanelContainer)
@@ -62,6 +67,15 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         stopSelectionState()
+    }
+    
+    override func willMove(toParentViewController parent: UIViewController?) {
+        super.willMove(toParentViewController: parent)
+        
+        if parent != nil {
+            //track on each open tab of trash bin 
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .trashBin)
+        }
     }
     
     private func setupRefreshControl() {
