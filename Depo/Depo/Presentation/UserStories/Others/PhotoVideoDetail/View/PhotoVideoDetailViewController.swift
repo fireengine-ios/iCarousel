@@ -77,6 +77,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private(set) var objects = [Item]() {
         didSet {
             collectionView.reloadData()
+            scrollToSelectedIndex()
             collectionView.layoutIfNeeded()
         }
     }
@@ -196,7 +197,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         let indexPath = IndexPath(item: index, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         collectionView.isHidden = false
-    } 
+    }
     
     func customDeinit() {
         ItemOperationManager.default.stopUpdateView(view: self)
@@ -229,13 +230,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
-        objects = items
         selectedIndex = index
-        
-        collectionView.reloadData()
-        collectionView.performBatchUpdates(nil) { [weak self] _ in
-            self?.scrollToSelectedIndex()
-        }
+        objects = items
     }
 
     @objc func onRightBarButtonItem(sender: UIButton) {
@@ -314,8 +310,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool) {
-        self.objects = objectsArray
         self.selectedIndex = selectedIndex
+        objects = objectsArray
     }
     
     func getNavigationController() -> UINavigationController? {
@@ -367,6 +363,9 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
             return
         }
         
+        guard selectedIndex != nil else {
+            return
+        }
         cell.delegate = self
         cell.setObject(object: objects[indexPath.row])
     }
