@@ -458,32 +458,6 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class StandardUserFIRGroupingON: NetmeraEvent {
-        
-        private let kStandardUserFIGroupingONKey = "hjz"
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [:]
-        }
-        
-        override var eventKey : String {
-            return kStandardUserFIGroupingONKey
-        }
-    }
-    
-    final class StandardUserFIGroupingOFF: NetmeraEvent {
-        
-        private let kStandardUserFIGroupingOFFKey = "qml"
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [:]
-        }
-        
-        override var eventKey : String {
-            return kStandardUserFIGroupingOFFKey
-        }
-    }
-    
     final class TwoFactorAuthentication: NetmeraEvent {
         
         private let kTwoFactorAuthenticationKey = "cqh"
@@ -810,18 +784,7 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class NonStandardUserFIGroupingOFF: NetmeraEvent {
-         
-         private let kNonStandardUserFIGroupingOFFKey = "you"
-         
-         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-             return [:]
-         }
-         
-         override var eventKey : String {
-             return kNonStandardUserFIGroupingOFFKey
-         }
-     }
+    
     
     final class Photopick: NetmeraEvent {
         
