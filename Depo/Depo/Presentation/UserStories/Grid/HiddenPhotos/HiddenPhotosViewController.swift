@@ -327,8 +327,10 @@ extension HiddenPhotosViewController {
     }
     
     private func showUnhidePopup() {
+        let isAlbums = !dataSource.allSelectedItems.albums.isEmpty && dataSource.allSelectedItems.photos.isEmpty
+        let message = isAlbums ? TextConstants.unhideAlbumsPopupText : TextConstants.unhideItemsPopupText
         let popup = PopUpController.with(title: TextConstants.actionSheetUnhide,
-                                         message: TextConstants.unhidePopupText,
+                                         message: message,
                                          image: .unhide,
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.ok,

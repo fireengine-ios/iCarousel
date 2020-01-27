@@ -1367,23 +1367,38 @@
 "hidden_bin_album_slider_empty" = "There is no hidden album yet.";
 "hidden_bin_empty" = "There is no hidden item yet.";
 "hidden_bin_navbar_title" = "Hidden";
-"unhide_popup_text" = "The selected 1 item will be visible lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. ";
 
 /*divorce card*/
 "divorce_card_title" = "XX Effect lorem ipsum! Discover new features!";
+
 "trash_bin_album_slider_title" = "My Deleted Albums";
 "trash_bin_album_slider_empty" = "There is no deleted album yet.";
 "trash_bin_empty" = "There is no deleted item yet.";
+
 "delete_confirmation_popup_title" = "Delete permanently";
-"delete_confirmation_popup_text" = "The selected items will be deleted lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
+"delete_items_confirmation_popup_text" = "The selected items will be deleted lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
+"delete_albums_confirmation_popup_text" = "The selected albums will be deleted lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
+"delete_folders_confirmation_popup_text" = "The selected folder will be deleted lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
 "delete_popup_success_text" = "This item deleted permanently";
+
 "restore_confirmation_popup_title" = "Restore";
-"restore_confirmation_popup_text" = "The selected items will be restored lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
 "restore_popup_success_text" = "This item restored permanently";
+
 "delete_from_hidden_bin_popup_success_title" = "Deleted Permanently";
 "delete_from_hidden_bin_popup_success_text" = "This item deleted permanently";
+"delete_popup_text" = "The selected items will be deleted lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
+
 "unhide_popup_success_title" = "Unhide Successful";
 "unhide_popup_success_text" = " This items is back in your gallery";
-"delete_popup_text" = "The selected items will be deleted lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
+
 "turkcell_updater_update_required_title" = "Update required";
 "turkcell_updater_update_required_message" = "Application will be closed";
+
+"unhide_items_popup_text" = "The selected item will be visible lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.";
+"unhide_albums_popup_text" = "The selected albums will be visible lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.";
+
+"move_to_trash_hidden_albums_confirmation_popup_text" = "The selected hidden albums will be deleted lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
+
+"restore_items_confirmation_popup_text" = "The selected items will be restored lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
+"restore_albums_confirmation_popup_text" = "The selected albums will be restored lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
+"restore_folders_confirmation_popup_text" = "The selected folders will be restored lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";

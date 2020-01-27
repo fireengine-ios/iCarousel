@@ -1639,7 +1639,8 @@ struct TextConstants {
     static let hiddenBinAlbumSliderEmpty = NSLocalizedString("hidden_bin_album_slider_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hiddenBinEmpty = NSLocalizedString("hidden_bin_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hiddenBinNavBarTitle = NSLocalizedString("hidden_bin_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let unhidePopupText = NSLocalizedString("unhide_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let unhideItemsPopupText = NSLocalizedString("unhide_items_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let unhideAlbumsPopupText = NSLocalizedString("unhide_albums_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deletePopupText = NSLocalizedString("delete_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let unhidePopupSuccessTitle = NSLocalizedString("unhide_popup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let unhidePopupSuccessText = NSLocalizedString("unhide_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1647,12 +1648,18 @@ struct TextConstants {
     static let deleteFromHiddenBinPopupSuccessTitle = NSLocalizedString("delete_from_hidden_bin_popup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteFromHiddenBinPopupSuccessText = NSLocalizedString("delete_from_hidden_bin_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let moveToTrashHiddenAlbumsConfirmationPopupText = NSLocalizedString("move_to_trash_hidden_albums_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     static let deleteConfirmationPopupTitle = NSLocalizedString("delete_confirmation_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let deleteConfirmationPopupText = NSLocalizedString("delete_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteItemsConfirmationPopupText = NSLocalizedString("delete_items_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteAlbumsConfirmationPopupText = NSLocalizedString("delete_albums_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteFoldersConfirmationPopupText = NSLocalizedString("delete_folders_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deletePopupSuccessText = NSLocalizedString("delete_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let restoreConfirmationPopupTitle = NSLocalizedString("restore_confirmation_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let restoreConfirmationPopupText = NSLocalizedString("restore_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreItemsConfirmationPopupText = NSLocalizedString("restore_items_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreAlbumsConfirmationPopupText = NSLocalizedString("restore_albums_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreFoldersConfirmationPopupText = NSLocalizedString("restore_folders_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let restorePopupSuccessText = NSLocalizedString("restore_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     static let trashBinAlbumSliderTitle = NSLocalizedString("trash_bin_album_slider_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

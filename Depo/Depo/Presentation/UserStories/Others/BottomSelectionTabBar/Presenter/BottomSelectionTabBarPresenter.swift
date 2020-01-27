@@ -159,8 +159,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     self.interactor.unhide(items: selectedItems)
                     self.basePassingPresenter?.stopModeSelected()
                 } else {
-                    let text = String(format: TextConstants.unhidePopupText, allowedNumberLimit)
-                    UIApplication.showErrorAlert(message: text)
+                    let isAlbums = selectedItems is [PeopleItem] || selectedItems is [ThingsItem] || selectedItems is [PlacesItem] || selectedItems is [AlbumItem]
+                    let message = isAlbums ? TextConstants.unhideAlbumsPopupText : TextConstants.unhideItemsPopupText
+                    UIApplication.showErrorAlert(message: message)
                 }
             case .smash:
                 RouterVC().getViewControllerForPresent()?.showSpinner()
