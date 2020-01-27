@@ -1398,7 +1398,7 @@
 "unhide_items_popup_text" = "The selected item will be visible lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.";
 "unhide_albums_popup_text" = "The selected albums will be visible lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.";
 
-"move_to_trash_hidden_albums_confirmation_popup_text" = "";
+"move_to_trash_hidden_albums_confirmation_popup_text" = "The selected hidden albums will be deleted lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
 
 "restore_items_confirmation_popup_text" = "The selected items will be restored lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
 "restore_albums_confirmation_popup_text" = "The selected albums will be restored lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";

@@ -333,8 +333,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        let cancelHandler: PopUpButtonHandler = { [weak self] _ in
-            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .unhide, label: .cancel)
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+            vc.close {
+                self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .unhide, label: .cancel)
+            }
         }
         
         let okHandler: PopUpButtonHandler = { [weak self] vc in
@@ -364,8 +366,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        let cancelHandler: PopUpButtonHandler = { [weak self] _ in
-            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .restore, label: .cancel)
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+            vc.close {
+                self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .restore, label: .cancel)
+            }
         }
 
         let okHandler: PopUpButtonHandler = { [weak self] vc in
@@ -700,8 +704,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func delete(items: [BaseDataSourceItem]) {
-        let cancelHandler: PopUpButtonHandler = { [weak self] _ in
-            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .cancel)
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+            vc.close {
+                self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .cancel)
+            }
         }
         
         let okHandler: PopUpButtonHandler = { [weak self] vc in
@@ -1151,8 +1157,10 @@ extension MoreFilesActionsInteractor {
         
         router.showSpiner()
         
-        let cancelHandler: PopUpButtonHandler = { [weak self] _ in
-            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .cancel)
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+            vc.close {
+                self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .cancel)
+            }
         }
 
         let okHandler: VoidHandler = { [weak self] in
@@ -1217,14 +1225,16 @@ extension MoreFilesActionsInteractor {
                 })
             }
             
-            let cancelHandler: PopUpButtonHandler = { [weak self] _ in
-                self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .cancel)
+            let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+                vc.close {
+                    self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .cancel)
+                }
             }
             
             let isHiddenAlbums = (items.first?.status == .hidden)
             let message = isHiddenAlbums ? TextConstants.moveToTrashHiddenAlbumsConfirmationPopupText : TextConstants.removeAlbums
             let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
-                                                  message: TextConstants.removeAlbums,
+                                                  message: message,
                                                   image: .delete,
                                                   firstButtonTitle: TextConstants.cancel,
                                                   secondButtonTitle: TextConstants.ok,
