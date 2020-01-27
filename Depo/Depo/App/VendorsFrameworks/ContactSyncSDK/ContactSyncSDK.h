@@ -13,6 +13,10 @@
 #import "SyncAdapter.h"
 #import "SyncStatus.h"
 #import "AnalyzeStatus.h"
+#import "Utils.h"
+#import "BackupHelper.h"
+#import "RestoreHelper.h"
+#import "DepoAdapter.h"
 
 @interface ContactSyncSDK : NSObject
 

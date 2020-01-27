@@ -148,22 +148,36 @@ final class LoadingImageView: UIImageView {
             return
         }
         
-        cancelLoadRequest()
-        path = object.patchToPreview
-        
-        loadImageData(object: object, smooth: smooth)
+        loadImage(with: object.patchToPreview)
     }
     
-    private func loadImageData(object: Item, smooth: Bool = false) {
+    func loadImageIncludingGif(with object: Item?, smooth: Bool = false) {
+        guard let object = object else {
+            cancelLoadRequest()
+            
+            if !smooth {
+                originalImage = nil
+                activity.stopAnimating()
+            }
+            return
+        }
+        
+        guard path != object.patchToPreview else {
+            return
+        }
+        
+        cancelLoadRequest()
+
         if !smooth {
             originalImage = nil
             activity.startAnimating()
         }
-
-        url = filesDataSource.getImageData(item: object) { [weak self] imageData in
-            self?.finishLoading(data: imageData)
-                
-        }
+        
+        self.path = object.patchToPreview
+        
+        url = filesDataSource.getImageData(item: object, completeData: { [weak self] data in
+            self?.finishLoading(data: data, animated: smooth)
+        })
     }
     
     func loadImage(with path: PathForItem, smooth: Bool = false) {

@@ -92,16 +92,34 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
     private var confirmationPopUp: UIViewController {
         let itemsCount = operation == .hideAlbums ? albums.count : items.count
         
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+            if self?.operation.isContained(in: [.hide, .hideAlbums]) == true {
+                self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .hide, label: .cancel)
+            }
+            vc.close()
+        }
+        
+        let okHandler: PopUpButtonHandler = { [weak self] vc in
+            if self?.operation.isContained(in: [.hide, .hideAlbums]) == true {
+                self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .hide, label: .ok)
+            }
+            vc.close { [weak self] in
+                self?.hideItems()
+            }
+        }
+        
+        if operation.isContained(in: [.hide, .hideAlbums]) {
+            analyticsService.logScreen(screen: .fileOperationConfirmPopup(.hide))
+            analyticsService.trackDimentionsEveryClickGA(screen: .fileOperationConfirmPopup(.hide))
+        }
+        
         return PopUpController.with(title: operation.confirmationTitle(itemsCount: itemsCount),
                                     message: operation.confirmationMessage(itemsCount: itemsCount),
                                     image: .hide,
                                     firstButtonTitle: TextConstants.cancel,
                                     secondButtonTitle: TextConstants.ok,
-                                    secondAction: { popUp in
-                                        popUp.close { [weak self] in
-                                            self?.hideItems()
-                                        }
-        })
+                                    firstAction: cancelHandler,
+                                    secondAction: okHandler)
     }
 
     //MARK: Service
@@ -273,6 +291,7 @@ extension HideSmashCoordinator {
 
     private func hidePhotos() {
         player.remove(listItems: items)
+        analyticsService.trackFileOperationGAEvent(operationType: .hide, items: items)
         fileService.hide(items: items, success: { [weak self] in
             DispatchQueue.main.async {
                 self?.hiddenSuccessfully()
@@ -286,6 +305,7 @@ extension HideSmashCoordinator {
     }
 
     private func hideAlbums() {
+        analyticsService.trackFileOperationGAEvent(operationType: .hide, itemsType: .albums, itemsCount: albums.count)
         fileService.hide(albums: albums, success: { [weak self] in
             DispatchQueue.main.async {
                 self?.hiddenSuccessfully()
@@ -340,15 +360,15 @@ extension HideSmashCoordinator: HideFuncRoutingProtocol {
     }
 
     func openPremium() {
-        trackSmashEvents(event: .becomePremium)
-        let controller = self.router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
+        trackEvents(event: .becomePremium)
+        let controller = router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
         push(controller: controller)
     }
 
     func openFaceImageGrouping() {
-        trackSmashEvents(event: .enable)
-        if self.faceImageGrouping?.isFaceImageAllowed == true {
-            self.openPeopleAlbum()
+        trackEvents(event: .enable)
+        if faceImageGrouping?.isFaceImageAllowed == true {
+            openPeopleAlbum()
             analyticsService.logScreen(screen: .standardUserWithFIGroupingOnPopUp)
         } else {
             if AuthoritySingleton.shared.accountType.isPremium {
@@ -357,52 +377,59 @@ extension HideSmashCoordinator: HideFuncRoutingProtocol {
                 analyticsService.logScreen(screen: .standardUserWithFIGroupingOffPopUp)
             }
             
-            let controller = self.router.faceImage
+            let controller = router.faceImage
             push(controller: controller)
         }
     }
     
     func popUPClosed() {
-        trackSmashEvents(event: .cancel)
+        trackEvents(event: .cancel)
     }
     
     func becomePremium() {
-        trackSmashEvents(event: .becomePremium)
+        trackEvents(event: .becomePremium)
     }
     
     func proceedWithExistingPeople() {
-        trackSmashEvents(event: .proceedWithExistingPeople)
+        trackEvents(event: .proceedWithExistingPeople)
     }
 }
 
 extension HideSmashCoordinator {
     
-    private enum TracSmashEventsOnPeopleAlbumPopUp {
+    private enum TrackEventsOnPeopleAlbumPopUp {
         case enable
         case becomePremium
         case cancel
         case proceedWithExistingPeople
     }
     
-    private func trackSmashEvents(event: TracSmashEventsOnPeopleAlbumPopUp) {
-        
-        if operation == .smash {
-            
-            var event: GAEventLabel {
-                switch event {
-                case .enable:
-                    return GAEventLabel.enableFIGrouping
-                case .becomePremium:
-                    return GAEventLabel.becomePremium
-                case .proceedWithExistingPeople:
-                    return GAEventLabel.proceedWithExistingPeople
-                case .cancel:
-                    return GAEventLabel.cancel
-                }
+    private func trackEvents(event: TrackEventsOnPeopleAlbumPopUp) {
+        var event: GAEventLabel {
+            switch event {
+            case .enable:
+                return GAEventLabel.enableFIGrouping
+            case .becomePremium:
+                return GAEventLabel.becomePremium
+            case .proceedWithExistingPeople:
+                return GAEventLabel.proceedWithExistingPeople
+            case .cancel:
+                return GAEventLabel.cancel
             }
-
-            analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .smashFIGroupingOff, eventLabel: event)
-            
         }
+
+        let action: GAEventAction
+        
+        if faceImageGrouping?.isFaceImageAllowed == true {
+            action = .standardUserWithFIGroupingOn
+        } else if AuthoritySingleton.shared.accountType.isPremium {
+            action = .nonStandardUserWithFIGroupingOff
+        } else {
+            action = .standardUserWithFIGroupingOff
+        }
+
+        analyticsService.trackCustomGAEvent(eventCategory: .popUp,
+                                            eventActions: action,
+                                            eventLabel: event)
     }
 }

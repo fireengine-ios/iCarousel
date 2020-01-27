@@ -116,7 +116,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         if object.fileType == .video || object.fileType == .image {
             imageScrollView.isHidden = false
-            imageScrollView.imageView.loadImage(with: object)
+            imageScrollView.imageView.loadImageIncludingGif(with: object)
             imageScrollView.adjustFrameToCenter()
             playVideoButton.isHidden = (object.fileType != .video)
             tapGesture.isEnabled = (object.fileType != .video)
