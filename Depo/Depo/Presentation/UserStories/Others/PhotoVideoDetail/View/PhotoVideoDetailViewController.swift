@@ -193,7 +193,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         guard !objects.isEmpty, let index = selectedIndex, index < objects.count else {
             return
         }
-        
+        setupNavigationBar()
         let indexPath = IndexPath(item: index, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         collectionView.isHidden = false
