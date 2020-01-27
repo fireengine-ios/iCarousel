@@ -345,6 +345,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         trackScreen(.fileOperationConfirmPopup(.unhide))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.UnhideConfirmPopUp())
         
         let popup = PopUpController.with(title: TextConstants.actionSheetUnhide,
                                          message: TextConstants.unhidePopupText,
@@ -377,6 +378,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         trackScreen(.fileOperationConfirmPopup(.restore))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.RestoreConfirmPopUp())
         
         let controller = PopUpController.with(title: TextConstants.restoreConfirmationPopupTitle,
                                               message: TextConstants.restoreConfirmationPopupText,
@@ -704,6 +706,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         trackScreen(.fileOperationConfirmPopup(.delete))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeletePermanentlyConfirmPopUp())
         
         let popup = PopUpController.with(title: TextConstants.deleteConfirmationPopupTitle,
                                          message: TextConstants.deleteConfirmationPopupText,
@@ -1158,6 +1161,7 @@ extension MoreFilesActionsInteractor {
         }
         
         trackScreen(.fileOperationConfirmPopup(.trash))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteConfirmPopUp())
         
         let controller = PopUpController.with(title: TextConstants.actionSheetDelete,
                                               message: TextConstants.deleteFilesText,
@@ -1204,6 +1208,7 @@ extension MoreFilesActionsInteractor {
         }
         
         trackScreen(.fileOperationConfirmPopup(.trash))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteConfirmPopUp())
         
         let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
                                               message: TextConstants.removeAlbums,

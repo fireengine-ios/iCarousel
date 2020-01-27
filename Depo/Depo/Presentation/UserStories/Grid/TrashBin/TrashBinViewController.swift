@@ -32,6 +32,8 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.TrashBinScreen())
 
         analyticsService.logScreen(screen: .trashBin)
         analyticsService.trackDimentionsEveryClickGA(screen: .trashBin)
