@@ -905,7 +905,21 @@ extension MoreFilesActionsInteractor {
         default:
             return
         }
-        UIApplication.showSuccessAlert(message: text)
+        
+        let delay: Double
+        if elementType.isContained(in: [.unhide, .restore, .delete, .moveToTrash]) {
+            delay = 1
+            RouterVC().showSpiner()
+        } else {
+            delay = 0
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            if delay > 0 {
+                RouterVC().hideSpiner()
+            }
+            UIApplication.showSuccessAlert(message: text)
+        }
     }
     
     private func trackSuccessEvent(elementType: ElementTypes) {
