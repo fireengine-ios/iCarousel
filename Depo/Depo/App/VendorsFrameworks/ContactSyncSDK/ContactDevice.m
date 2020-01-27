@@ -234,11 +234,13 @@
 - (NSString *)valueForCompare{
     NSString* val = self.value;
     if (val != nil) {
+        int simpleLength = 11;
         NSError *error = nil;
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^0-9]" options:NSRegularExpressionCaseInsensitive error:&error];
         val = [regex stringByReplacingMatchesInString:val options:0 range:NSMakeRange(0, [val length]) withTemplate:@""];
-        if ([val length] >= 11) {
-            val = [val substringWithRange:NSMakeRange([val length] - 11, [val length])];
+        if ([val length] >= simpleLength) {
+            NSUInteger indexToStart = [val length] - simpleLength;
+            val = [val substringWithRange:NSMakeRange(indexToStart, [val length] - indexToStart)];
         }
     }
     return val;
