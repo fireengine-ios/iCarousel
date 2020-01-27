@@ -270,8 +270,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
             return
         }
         
-        let item = items[index]
-        if item.isLocalItem && item.fileType == .image {
+        if let item = items[safe: index], item.isLocalItem && item.fileType == .image {
             setThreeDotsMenu(active: false)
         } else {
             setThreeDotsMenu(active: true)
