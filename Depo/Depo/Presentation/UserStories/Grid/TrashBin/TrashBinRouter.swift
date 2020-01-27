@@ -18,8 +18,8 @@ final class TrashBinRouter {
         router.pushViewController(viewController: controller)
     }
     
-    func openFIRAlbum(album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?) {
-        let controller = router.imageFacePhotosController(album: album, item: item, status: .trashed, moduleOutput: moduleOutput)
+    func openFIRAlbum(album: AlbumItem, item: Item) {
+        let controller = router.imageFacePhotosController(album: album, item: item, status: .trashed, moduleOutput: nil)
         router.pushViewController(viewController: controller)
     }
     
