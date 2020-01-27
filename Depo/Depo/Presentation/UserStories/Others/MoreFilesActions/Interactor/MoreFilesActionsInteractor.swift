@@ -301,8 +301,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         } else if let items = remoteItems as? [Item] {
             hideFunctionalityService.startHideOperation(for: items,
                                                         output: self.output,
-                                                        success: self.successItmesAction(elementType: .hide, relatedItems: items),
-                                                        fail: self.failItmesAction(elementType: .hide, relatedItems: items))
+                                                        success: self.successItemsAction(elementType: .hide, relatedItems: items),
+                                                        fail: self.failItemsAction(elementType: .hide, relatedItems: items))
         } else {
             assertionFailure("Unexpected type of items")
         }
@@ -322,8 +322,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
            
         hideFunctionalityService.startHideAlbumsOperation(for: remoteItems,
                                                           output: self.output,
-                                                          success: self.successItmesAction(elementType: .hide, relatedItems: items),
-                                                          fail: self.failItmesAction(elementType: .hide, relatedItems: items))
+                                                          success: self.successItemsAction(elementType: .hide, relatedItems: items),
+                                                          fail: self.failItemsAction(elementType: .hide, relatedItems: items))
     }
     
     func unhide(items: [BaseDataSourceItem]) {
@@ -857,7 +857,7 @@ extension MoreFilesActionsInteractor {
         return success
     }
     
-    func successItmesAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FileOperation {
+    func successItemsAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FileOperation {
         let success: FileOperation = { [weak self] in
             self?.trackSuccessEvent(elementType: elementType)
             self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .success, items: relatedItems)
@@ -931,6 +931,14 @@ extension MoreFilesActionsInteractor {
                 }
                 AnalyticsService.sendNetmeraEvent(event: event)
             }
+        case .delete:
+            let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
+            typeToCountDictionary.keys.forEach {
+                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Delete(status: successStatus, type: $0, count: count) else {
+                    return
+                }
+                AnalyticsService.sendNetmeraEvent(event: event)
+            }
         default:
             break
         }
@@ -955,7 +963,7 @@ extension MoreFilesActionsInteractor {
         return failResponse
     }
     
-    func failItmesAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FailResponse {
+    func failItemsAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FailResponse {
         
         let failResponse: FailResponse  = { [weak self] value in
             self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .failure, items: relatedItems)
@@ -1070,9 +1078,9 @@ extension MoreFilesActionsInteractor {
             self?.output?.completeAsyncOperationEnableScreen()
             if let error = error {
                 let errorResponse = ErrorResponse.error(error)
-                self?.failAction(elementType: type)(errorResponse)
+                self?.failItemsAction(elementType: type, relatedItems: items)(errorResponse)
             } else {
-                self?.succesAction(elementType: type)()
+                self?.successItemsAction(elementType: type, relatedItems: items)()
             }
         }
     }
@@ -1145,8 +1153,8 @@ extension MoreFilesActionsInteractor {
             self?.analyticsService.trackFileOperationGAEvent(operationType: .trash, items: items)
             self?.removeItemsFromPlayer(items: items)
             self?.fileService.moveToTrash(files: items,
-                                          success: self?.successItmesAction(elementType: .moveToTrash, relatedItems: items),
-                                          fail: self?.failItmesAction(elementType: .moveToTrash, relatedItems: items))
+                                          success: self?.successItemsAction(elementType: .moveToTrash, relatedItems: items),
+                                          fail: self?.failItemsAction(elementType: .moveToTrash, relatedItems: items))
         }
         
         trackScreen(.fileOperationConfirmPopup(.trash))

@@ -53,6 +53,16 @@ final class NetmeraService {
                 group.leave()
             }
             
+            group.enter()
+            var autoLogin = ""
+            var turkcellPassword = ""
+            prepareTurkcellLoginScurityFields { preparedAutoLogin, preparedTurkcellPassword in
+                autoLogin = preparedAutoLogin
+                turkcellPassword = preparedTurkcellPassword
+                group.leave()
+            }
+            
+            
             let twoFactorNetmeraStatus = getTwoFactorStatus()
             let autoSyncState = getAutoSyncStatus()
             let accountType = getAccountType()
@@ -61,16 +71,8 @@ final class NetmeraService {
             let netmeraAutoSyncStatusVideo = photoVideoAutosyncStatus.video
             let verifiedEmailStatus = getVerifiedEmailStatus()
        
-                    //TODO: part two fields
-                    //        lifeboxStorage:{used_percentage_value} : Settings/Account Detail/ My Storage
-                    //        twoFactorAuthentication: On/Off
-                    //        emailVerification: Verified/NotVerified
-                    
-            //        deviceStorage:{used_percentage_value} : It shows how many storage used on the device.
-            //        faceImageGrouping: On/Off
-            //        photopickLeftAnalysis:{count_of_left_analysis} : If user is premium, the value should be 'Free'.
-            //        accountType: Standard/Standard+/Premium : Settings/Account Detail/ Account Type
-
+            
+            
             
             group.notify(queue: DispatchQueue.global()) {
                 let user = NetmeraCustomUser(deviceStorage: Int(deviceUsedStorage*100),
@@ -84,8 +86,8 @@ final class NetmeraService {
                                              autosyncPhotos: netmeraAutoSyncStatusPhoto,
                                              autosyncVideos: netmeraAutoSyncStatusVideo,
                                              packages: activeSubscriptionNames,
-                                             autoLogin: "Null",
-                                             turkcellPassword: "Null")
+                                             autoLogin: autoLogin,
+                                             turkcellPassword: turkcellPassword)
                 
                 user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
                 DispatchQueue.toMain {
@@ -203,6 +205,22 @@ extension NetmeraService {
         }, fail: { errorResponse in
             preparedUserFieldt(activeSubscriptionNames)
         })
+    }
+    
+    private static func prepareTurkcellLoginScurityFields(preparedUserFieldt: @escaping (_ autoLogin: String, _ turkcellPassword: String)->Void) {
+        AccountService().securitySettingsInfo(success: { response in
+            guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
+                let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
+                let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled else {
+                    return
+            }
+            
+            let acceptableAutoLogin = turkCellAutoLogin ? NetmeraEventValues.OnOffSettings.on.text : NetmeraEventValues.OnOffSettings.off.text
+            let acceptableTurkcellPassword = turkCellPasswordOn ? NetmeraEventValues.OnOffSettings.on.text : NetmeraEventValues.OnOffSettings.off.text
+            preparedUserFieldt(acceptableAutoLogin, acceptableTurkcellPassword)
+        }) { error in
+            preparedUserFieldt("Null", "Null")
+        }
     }
     
     private static func getAccountType() -> String {

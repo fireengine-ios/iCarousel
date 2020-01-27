@@ -196,8 +196,10 @@ final class HiddenPhotosDataLoader {
         
         group.notify(queue: .main) {
             if let error = unhideError {
+                self.trackEvent(actionType: .unhide, status: .failure, items: selectedItems.photos + selectedItems.albums)
                 handler(.failed(error))
             } else {
+                self.trackEvent(actionType: .unhide, status: .success, items: selectedItems.photos + selectedItems.albums)
                 handler(.success(()))
             }
         }
@@ -229,8 +231,10 @@ final class HiddenPhotosDataLoader {
         
         group.notify(queue: .main) {
             if let error = deleteError {
+                self.trackEvent(actionType: .moveToTrash, status: .failure, items: selectedItems.photos + selectedItems.albums)
                 handler(.failed(error))
             } else {
+                self.trackEvent(actionType: .moveToTrash, status: .success, items: selectedItems.photos + selectedItems.albums)
                 handler(.success(()))
             }
         }
@@ -517,6 +521,32 @@ final class HiddenPhotosDataLoader {
             } else {
                 handler(.success(()))
             }
+        }
+    }
+    
+    //MARK: - Tracking
+    
+    private func trackEvent(actionType: ElementTypes, status: NetmeraEventValues.GeneralStatus, items: [BaseDataSourceItem]) {
+        
+        let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
+
+        switch actionType {
+        case .restore, .unhide:
+            typeToCountDictionary.keys.forEach {
+                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Unhide(status: status, type: $0, count: count) else {
+                    return
+                }
+                AnalyticsService.sendNetmeraEvent(event: event)
+            }
+        case .moveToTrash:
+            typeToCountDictionary.keys.forEach {
+                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Trash(status: status, type: $0, count: count) else {
+                    return
+                }
+                AnalyticsService.sendNetmeraEvent(event: event)
+            }
+        default:
+            break
         }
     }
 }
