@@ -379,7 +379,8 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        if !(albums.filter { !$0.fileType.isFaceImageAlbum }).isEmpty {
+        let customAlbums = albums.filter { !$0.fileType.isFaceImageAlbum }
+        if !customAlbums.isEmpty {
             reloadData(needShowSpinner: false)
         }
     }
