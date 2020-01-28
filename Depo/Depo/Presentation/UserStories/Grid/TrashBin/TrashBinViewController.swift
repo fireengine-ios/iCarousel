@@ -32,9 +32,6 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        analyticsService.logScreen(screen: .trashBin)
-        analyticsService.trackDimentionsEveryClickGA(screen: .trashBin)
         
         needToShowTabBar = true
         ItemOperationManager.default.startUpdateView(view: self)
@@ -77,6 +74,9 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         if parent != nil {
             //track on each open tab of trash bin 
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .trashBin)
+            
+            analyticsService.logScreen(screen: .trashBin)
+            analyticsService.trackDimentionsEveryClickGA(screen: .trashBin)
         }
     }
     
