@@ -297,6 +297,7 @@ class ContactsSyncService: BaseRequestService {
     private func setup() {
         updateAccessToken()
         SyncSettings.shared().url = RouteRequests.baseContactsUrl.absoluteString
+        SyncSettings.shared().depo_URL = RouteRequests.baseContactsUrlShort.absoluteString
         switch RouteRequests.currentServerEnvironment {
         case .production:
             SyncSettings.shared().environment = .productionEnvironment
