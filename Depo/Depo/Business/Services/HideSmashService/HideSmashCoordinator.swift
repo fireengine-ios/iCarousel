@@ -92,10 +92,11 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
     private var confirmationPopUp: UIViewController {
         let itemsCount = operation == .hideAlbums ? albums.count : items.count
         
-        let cancelHandler: PopUpButtonHandler = { [weak self] _ in
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
             if self?.operation.isContained(in: [.hide, .hideAlbums]) == true {
                 self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .hide, label: .cancel)
             }
+            vc.close()
         }
         
         let okHandler: PopUpButtonHandler = { [weak self] vc in

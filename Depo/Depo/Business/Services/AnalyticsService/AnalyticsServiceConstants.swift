@@ -545,7 +545,7 @@ enum GACustomEventKeys {
         case .category:
             return "eventCategory"
         case .action:
-            return "eventActions"
+            return "eventAction"
         case .label:
             return "eventLabel"
         case .value:

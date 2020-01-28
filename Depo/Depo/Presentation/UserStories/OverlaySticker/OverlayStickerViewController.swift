@@ -100,17 +100,20 @@ final class OverlayStickerViewController: ViewController {
             let gifsToStickersIds = self.overlayingStickerImageView.getAttachmentGifStickersIDs()
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SmashSave(action: isConfirmed ? .save : .cancel, stickerId: gifsToStickersIds.gifsIDs, gifId: gifsToStickersIds.stickersIDs))
             
-            self.showSpinnerIncludeNavigationBar()
+            if isConfirmed {
+                
+                self.showSpinnerIncludeNavigationBar()
             
-            guard let (originalImage, attachments) = self.overlayingStickerImageView.getCondition() else {
-                assertionFailure()
-                return
-            }
-            
-            self.overlayStickers(resultName: self.imageName ?? self.defaultName,
-                                 originalImage: originalImage,
-                                 attachments: attachments) { [weak self] result in
-                                    self?.saveResult(result: result)
+                guard let (originalImage, attachments) = self.overlayingStickerImageView.getCondition() else {
+                    assertionFailure()
+                    return
+                }
+                
+                self.overlayStickers(resultName: self.imageName ?? self.defaultName,
+                                     originalImage: originalImage,
+                                     attachments: attachments) { [weak self] result in
+                                        self?.saveResult(result: result)
+                }
             }
         }
     }

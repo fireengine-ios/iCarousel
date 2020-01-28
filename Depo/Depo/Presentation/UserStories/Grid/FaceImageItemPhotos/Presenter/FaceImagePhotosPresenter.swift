@@ -24,6 +24,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         self.isSearchItem = isSearchItem
         super.init()
         dataSource = FaceImagePhotosDataSource(sortingRules: sortedRule)
+        (dataSource as? FaceImagePhotosDataSource)?.item = item
         
         ItemOperationManager.default.startUpdateView(view: self)
     }
