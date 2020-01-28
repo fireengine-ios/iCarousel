@@ -179,6 +179,7 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
                                             completion(true)
         })
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SmashConfirmPopUp())
         UIApplication.topController()?.present(popUp, animated: true, completion: nil)
         
     }
@@ -370,11 +371,14 @@ extension HideSmashCoordinator: HideFuncRoutingProtocol {
         if faceImageGrouping?.isFaceImageAllowed == true {
             openPeopleAlbum()
             analyticsService.logScreen(screen: .standardUserWithFIGroupingOnPopUp)
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.StandardUserFIRGroupingON())
         } else {
             if AuthoritySingleton.shared.accountType.isPremium {
                 analyticsService.logScreen(screen: .nonStandardUserWithFIGroupingOffPopUp)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.NonStandardUserFIGroupingOFF())
             } else {
                 analyticsService.logScreen(screen: .standardUserWithFIGroupingOffPopUp)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.StandardUserFIGroupingOFF())
             }
             
             let controller = router.faceImage

@@ -77,6 +77,8 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
             
             analyticsService.logScreen(screen: .trashBin)
             analyticsService.trackDimentionsEveryClickGA(screen: .trashBin)
+            
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.TrashBinScreen())
         }
     }
     

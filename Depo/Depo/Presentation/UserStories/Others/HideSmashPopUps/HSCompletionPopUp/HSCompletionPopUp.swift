@@ -193,6 +193,7 @@ final class HSCompletionPopUp: BasePopUpController {
         contentView = popUpView
 
         configureAppearance()
+        trackScreenEvents()
     }
 
     override func viewDidLayoutSubviews() {
@@ -305,6 +306,15 @@ final class HSCompletionPopUp: BasePopUpController {
             break
         }
         
+    }
+    
+    private func trackScreenEvents() {
+        switch mode {
+        case .smash:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SaveSmashSuccessfullyPopUp())
+        case .hiddenAlbums, .showBottomCloseButton, .showOpenSmartAlbumButton:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SaveHiddenSuccessfullyPopUp())
+        }
     }
 }
 
