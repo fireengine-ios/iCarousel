@@ -149,6 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
                 XPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
                 Netmera.requestPushNotificationAuthorization(forTypes: [.alert, .badge, .sound])
+                AnalyticsPermissionNetmeraEvent.sendNotificationPermissionNetmeraEvents()
                 ///call processLocalMediaItems either here or in the AppDelegate
                 ///application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings)
                 ///it depends on iOS version
@@ -381,14 +382,14 @@ extension AppDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         debugLog("AppDelegate didRegisterForRemoteNotificationsWithDeviceToken")
         MenloworksTagsService.shared.onNotificationPermissionChanged(true)
-        
+        AnalyticsPermissionNetmeraEvent.sendNotificationPermissionNetmeraEvents()
         XPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         debugLog("AppDelegate didFailToRegisterForRemoteNotificationsWithError")
         MenloworksTagsService.shared.onNotificationPermissionChanged(false)
-
+        AnalyticsPermissionNetmeraEvent.sendNotificationPermissionNetmeraEvents()
         XPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
     }
     
