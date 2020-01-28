@@ -207,11 +207,10 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
                 guard let `self` = self else { return }
                 self.passcodeStorage.systemCallOnScreen = false
                 DispatchQueue.main.async {
+                    AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(granted)
                     if granted {
-                        AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(true)
                         completionHandler(true)
                     } else {
-                        AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(false)
                         self.showSettingsAlert(completionHandler: completionHandler)
                     }
                 }
