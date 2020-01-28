@@ -256,11 +256,18 @@ class PhotosAlbumService: BaseRequestService {
         
         loadAllItemsFrom(albums: moveToTrashAlbums) { items in
             debugLog("PhotosAlbumService loadAllItemsFrom")
-
             let fileService = WrapItemFileService()
             fileService.moveToTrash(files: items, success: nil, fail: nil)
             self.moveToTrashAlbums(moveToTrashAlbums, success: success, fail: fail)
         }
+    }
+    
+    func moveToTrash(albums: [AlbumItem], albumItems: [Item], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
+        debugLog("PhotosAlbumService completelyDelete")
+        
+        let fileService = WrapItemFileService()
+        fileService.moveToTrash(files: albumItems, success: nil, fail: nil)
+        self.moveToTrashAlbums(albums, success: success, fail: fail)
     }
     
     func addPhotosToAlbum(parameters: AddPhotosToAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {

@@ -15,7 +15,7 @@ protocol UserInfoSubViewViewControllerActionsDelegate: class {
     func premiumButtonPressed()
 }
 
-final class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput {
+final class UserInfoSubViewViewController: ViewController, UserInfoSubViewViewInput, NibInit {
 
     var output: UserInfoSubViewViewOutput!
     

@@ -417,8 +417,29 @@ extension NetmeraEvents.Screens {
         }
     }
     
-//    not found:
-//    SaveHiddenSuccessfullyPopUp
+    final class NonStandardUserFIGroupingOFF: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "you"
+        }
+    }
+    
+    final class StandardUserFIRGroupingON: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "hjz"
+        }
+    }
+    
+    final class StandardUserFIGroupingOFF: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "qml"
+        }
+    }
+    
+    final class SaveHiddenSuccessfullyPopUp: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "hbh"
+        }
+    }
 }
 
 

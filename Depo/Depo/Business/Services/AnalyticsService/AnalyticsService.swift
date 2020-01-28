@@ -590,6 +590,30 @@ extension AnalyticsService: AnalyticsGA {
         return items
     }
     
+    func trackAlbumOperationGAEvent(operationType: GAOperationType, albums: [BaseDataSourceItem]) {
+        guard let album = albums.first else {
+            return
+        }
+        
+        let type: GAEventLabel.FileType
+        switch album.fileType {
+        case .photoAlbum:
+            type = .albums
+        case .faceImageAlbum(.people):
+            type = .people
+        case .faceImageAlbum(.things):
+            type = .things
+        case .faceImageAlbum(.places):
+            type = .places
+        default:
+            return
+        }
+        
+        trackFileOperationGAEvent(operationType: operationType,
+                                  itemsType: type,
+                                  itemsCount: albums.count)
+    }
+    
     func trackFileOperationGAEvent(operationType: GAOperationType, itemsType: GAEventLabel.FileType, itemsCount: Int) {
         let itemsOperation = GADementionValues.ItemsOperationCount(count: itemsCount, operationType: operationType)
         prepareDimentionsParametrs(screen: nil, itemsOperationCount: itemsOperation) { dimentionParameters in
