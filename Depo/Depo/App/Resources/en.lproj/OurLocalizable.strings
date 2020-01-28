@@ -1379,17 +1379,14 @@
 "delete_items_confirmation_popup_text" = "delete_items_confirmation_popup_text";
 "delete_albums_confirmation_popup_text" = "delete_albums_confirmation_popup_text";
 "delete_folders_confirmation_popup_text" = "delete_folders_confirmation_popup_text";
-"delete_popup_success_text" = "This item deleted permanently";
 
 "restore_confirmation_popup_title" = "Restore";
-"restore_popup_success_text" = "This item restored permanently";
 
 "delete_from_hidden_bin_popup_success_title" = "Deleted Permanently";
 "delete_from_hidden_bin_popup_success_text" = "This item deleted permanently";
 "delete_popup_text" = "delete_popup_text";
 
 "unhide_popup_success_title" = "Unhide Successful";
-"unhide_popup_success_text" = " This items is back in your gallery";
 
 "turkcell_updater_update_required_title" = "Update required";
 "turkcell_updater_update_required_message" = "Application will be closed";
@@ -1402,3 +1399,19 @@
 "restore_items_confirmation_popup_text" = "restore_items_confirmation_popup_text";
 "restore_albums_confirmation_popup_text" = "restore_albums_confirmation_popup_text";
 "restore_folders_confirmation_popup_text" = "restore_folders_confirmation_popup_text";
+
+"move_to_trash_items_success_text" = "Deleting items completed";
+"move_to_trash_albums_success_text" = "Deleting albums completed";
+"move_to_trash_folders_success_text" = "Deleting folders completed";
+
+"unhide_items_success_text" = "This items is back in your gallery";
+"unhide_albums_success_text" = "This albums is back in your gallery";
+"unhide_folders_success_text" = "This folders is back in your gallery";
+
+"delete_items_success_text" = "This items deleted permanently";
+"delete_albums_success_text" = "This albums deleted permanently";
+"delete_folders_success_text" = "This folders deleted permanently";
+
+"restore_items_success_text" = "This items restored permanently";
+"restore_albums_success_text" = "This albums restored permanently";
+"restore_folders_success_text" = "This folders restored permanently";

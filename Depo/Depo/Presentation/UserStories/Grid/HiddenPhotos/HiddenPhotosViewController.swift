@@ -361,8 +361,17 @@ extension HiddenPhotosViewController {
     }
     
     private func showUnhideSuccessPopup() {
+        let text: String
+        
+        let isAlbums = !dataSource.allSelectedItems.albums.isEmpty && dataSource.allSelectedItems.photos.isEmpty
+        if isAlbums {
+            text = TextConstants.unhideAlbumsSuccessText
+        } else {
+            text = TextConstants.unhideItemsSuccessText
+        }
+        
         let popup = PopUpController.with(title: TextConstants.unhidePopupSuccessTitle,
-                                         message: TextConstants.unhidePopupSuccessText,
+                                         message: text,
                                          image: .success,
                                          buttonTitle: TextConstants.ok)
         

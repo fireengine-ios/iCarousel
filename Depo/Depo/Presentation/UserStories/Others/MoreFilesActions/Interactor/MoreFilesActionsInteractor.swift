@@ -870,6 +870,12 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
 
 extension MoreFilesActionsInteractor {
     
+    enum DivorseItems {
+        case items
+        case albums
+        case folders
+    }
+    
    func succesAction(elementType: ElementTypes) -> FileOperation {
         let success: FileOperation = { [weak self] in
             self?.trackSuccessEvent(elementType: elementType)
@@ -881,16 +887,89 @@ extension MoreFilesActionsInteractor {
         return success
     }
     
-    func successItemsAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FileOperation {
+    func successItemsAction(elementType: ElementTypes, itemsType: DivorseItems? = nil,  relatedItems: [BaseDataSourceItem]) -> FileOperation {
         let success: FileOperation = { [weak self] in
             self?.trackSuccessEvent(elementType: elementType)
             self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .success, items: relatedItems)
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: elementType)
-                self?.showSuccessPopup(for: elementType)
+                if let itemsType = itemsType {
+                    self?.showDivorseSuccessPopup(for: elementType, divorseItems: itemsType)
+                } else {
+                    self?.showSuccessPopup(for: elementType)
+                }
             }
         }
         return success
+    }
+    
+    private func showDivorseSuccessPopup(for type: ElementTypes, divorseItems: DivorseItems) {
+        let localizations = localizationCouple(for: type)
+
+        let text: String
+        switch divorseItems {
+        case .items:
+            text = localizations.items
+            
+        case .albums:
+            text = localizations.albums
+            
+        case .folders:
+            text = localizations.folders
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            RouterVC().hideSpiner()
+            UIApplication.showSuccessAlert(message: text)
+        }
+    }
+    
+    typealias SuccessLocalizationTriplet = (items: String,
+                                            albums: String,
+                                            folders: String)
+    
+    private func localizationCouple(for type: ElementTypes) -> SuccessLocalizationTriplet {
+        let couple: SuccessLocalizationTriplet
+        switch type {
+        case .moveToTrash:
+            couple = SuccessLocalizationTriplet(
+                items: TextConstants.moveToTrashItemsSuccessText,
+                albums: TextConstants.moveToTrashAlbumsSuccessText,
+                folders: TextConstants.moveToTrashFoldersSuccessText
+            )
+            
+        case .unhide:
+            couple = SuccessLocalizationTriplet(
+                items: TextConstants.unhideItemsSuccessText,
+                albums: TextConstants.unhideAlbumsSuccessText,
+                folders: TextConstants.unhideFoldersSuccessText
+            )
+            
+        case .delete:
+            couple = SuccessLocalizationTriplet(
+                items: TextConstants.deleteItemsSuccessText,
+                albums: TextConstants.deleteAlbumsSuccessText,
+                folders: TextConstants.deleteFoldersSuccessText
+            )
+            
+            MenloworksAppEvents.onFileDeleted()
+        case .restore:
+            couple = SuccessLocalizationTriplet(
+                items: TextConstants.restoreItemsSuccessText,
+                albums: TextConstants.restoreAlbumsSuccessText,
+                folders: TextConstants.restoreFoldersSuccessText
+            )
+            
+        default:
+            couple = SuccessLocalizationTriplet(
+                items: "",
+                albums: "",
+                folders: ""
+            )
+            assertionFailure("unknown ElementType")
+        }
+        
+        return couple
     }
     
     private func showSuccessPopup(for elementType: ElementTypes) {
@@ -898,33 +977,11 @@ extension MoreFilesActionsInteractor {
         switch elementType {
         case .download:
             text = TextConstants.popUpDownloadComplete
-        case .moveToTrash:
-            text = TextConstants.popUpDeleteComplete
-        case .unhide:
-            text = TextConstants.unhidePopupSuccessText
-        case .delete:
-            text = TextConstants.deletePopupSuccessText
-            MenloworksAppEvents.onFileDeleted()
-        case .restore:
-            text = TextConstants.restorePopupSuccessText
         default:
             return
         }
         
-        let delay: Double
-        if elementType.isContained(in: [.unhide, .restore, .delete, .moveToTrash]) {
-            delay = 1
-            RouterVC().showSpiner()
-        } else {
-            delay = 0
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            if delay > 0 {
-                RouterVC().hideSpiner()
-            }
-            UIApplication.showSuccessAlert(message: text)
-        }
+        UIApplication.showSuccessAlert(message: text)
     }
     
     private func trackSuccessEvent(elementType: ElementTypes) {
@@ -1118,7 +1175,18 @@ extension MoreFilesActionsInteractor {
                 let errorResponse = ErrorResponse.error(error)
                 self?.failItemsAction(elementType: type, relatedItems: items)(errorResponse)
             } else {
-                self?.successItemsAction(elementType: type, relatedItems: items)()
+                let itemsType: DivorseItems
+                if self?.isAlbums(items) == true {
+                    itemsType = .albums
+                    
+                } else if photosVideos.allSatisfy({ $0.fileType == .folder }) {
+                    itemsType = .folders
+                    
+                } else {
+                    itemsType = .items
+                }
+                
+                self?.successItemsAction(elementType: type, itemsType: itemsType, relatedItems: items)()
             }
         }
     }
