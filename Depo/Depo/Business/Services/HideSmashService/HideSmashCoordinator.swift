@@ -306,7 +306,7 @@ extension HideSmashCoordinator {
     }
 
     private func hideAlbums() {
-        analyticsService.trackFileOperationGAEvent(operationType: .hide, itemsType: .albums, itemsCount: albums.count)
+        analyticsService.trackAlbumOperationGAEvent(operationType: .hide, albums: items)
         fileService.hide(albums: albums, success: { [weak self] in
             DispatchQueue.main.async {
                 self?.hiddenSuccessfully()

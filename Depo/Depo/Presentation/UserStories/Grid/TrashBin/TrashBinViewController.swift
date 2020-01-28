@@ -33,11 +33,6 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.TrashBinScreen())
-
-        analyticsService.logScreen(screen: .trashBin)
-        analyticsService.trackDimentionsEveryClickGA(screen: .trashBin)
-        
         needToShowTabBar = true
         ItemOperationManager.default.startUpdateView(view: self)
         sortingManager.addBarView(to: sortPanelContainer)
@@ -79,6 +74,11 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         if parent != nil {
             //track on each open tab of trash bin 
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .trashBin)
+            
+            analyticsService.logScreen(screen: .trashBin)
+            analyticsService.trackDimentionsEveryClickGA(screen: .trashBin)
+            
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.TrashBinScreen())
         }
     }
     

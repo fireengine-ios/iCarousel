@@ -1151,7 +1151,7 @@ extension MoreFilesActionsInteractor {
     }
     
     private func unhideAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        analyticsService.trackFileOperationGAEvent(operationType: .unhide, itemsType: .albums, itemsCount: items.count)
+        analyticsService.trackAlbumOperationGAEvent(operationType: .unhide, albums: items)
         fileService.unhideAlbums(items, success: success, fail: fail)
     }
     
@@ -1225,7 +1225,7 @@ extension MoreFilesActionsInteractor {
             let okHandler: VoidHandler = { [weak self] in
                 self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .ok)
                 self?.output?.operationStarted(type: .moveToTrash)
-                self?.analyticsService.trackFileOperationGAEvent(operationType: .trash, itemsType: .albums, itemsCount: albums.count)
+                self?.analyticsService.trackAlbumOperationGAEvent(operationType: .trash, albums: albums)
                 self?.albumService.moveToTrash(albums: moveToTrashAlbums, albumItems: items, success: { [weak self] deletedAlbums in
                     self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .success, items: deletedAlbums)
 
@@ -1304,7 +1304,7 @@ extension MoreFilesActionsInteractor {
     }
     
     private func deleteAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        analyticsService.trackFileOperationGAEvent(operationType: .delete, itemsType: .albums, itemsCount: items.count)
+        analyticsService.trackAlbumOperationGAEvent(operationType: .delete, albums: items)
         albumService.completelyDelete(albums: items, success: { _ in
             success()
         }, fail: { errorResponse in
@@ -1359,7 +1359,7 @@ extension MoreFilesActionsInteractor {
     }
     
     private func putBackAlbums(_ items: [AlbumItem], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        analyticsService.trackFileOperationGAEvent(operationType: .restore, itemsType: .albums, itemsCount: items.count)
+        analyticsService.trackAlbumOperationGAEvent(operationType: .restore, albums: items)
         fileService.putBackAlbums(items, success: success, fail: fail)
     }
     
