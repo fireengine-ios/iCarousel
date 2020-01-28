@@ -209,9 +209,9 @@ extension NetmeraService {
     
     private static func prepareTurkcellLoginScurityFields(preparedUserFieldt: @escaping (_ autoLogin: String, _ turkcellPassword: String)->Void) {
         AccountService().securitySettingsInfo(success: { response in
-            guard let unwrapedSecurityresponse = response as? SecuritySettingsInfoResponse,
-                let turkCellPasswordOn = unwrapedSecurityresponse.turkcellPasswordAuthEnabled,
-                let turkCellAutoLogin = unwrapedSecurityresponse.mobileNetworkAuthEnabled else {
+            guard let unwrapedSecurityResponse = response as? SecuritySettingsInfoResponse,
+                let turkCellPasswordOn = unwrapedSecurityResponse.turkcellPasswordAuthEnabled,
+                let turkCellAutoLogin = unwrapedSecurityResponse.mobileNetworkAuthEnabled else {
                     return
             }
             
