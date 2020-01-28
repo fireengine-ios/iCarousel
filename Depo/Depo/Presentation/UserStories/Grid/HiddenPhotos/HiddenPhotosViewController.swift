@@ -33,6 +33,8 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.HiddenBinScreen())
+        
         analyticsService.logScreen(screen: .hiddenBin)
         analyticsService.trackDimentionsEveryClickGA(screen: .hiddenBin)
         
@@ -296,7 +298,7 @@ extension HiddenPhotosViewController {
             
             switch result {
             case .success(let album):
-                let vc = self.router.imageFacePhotosController(album: album, item: item, status: .hidden, moduleOutput: self)
+                let vc = self.router.imageFacePhotosController(album: album, item: item, status: .hidden, moduleOutput: nil)
                 self.router.pushViewController(viewController: vc)
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
@@ -310,6 +312,7 @@ extension HiddenPhotosViewController {
 extension HiddenPhotosViewController {
     
     private func showDeletePopup() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteConfirmPopUp())
         let popup = PopUpController.with(title: TextConstants.actionSheetDelete,
                                          message: TextConstants.deletePopupText,
                                          image: .delete,
@@ -327,6 +330,7 @@ extension HiddenPhotosViewController {
     }
     
     private func showUnhidePopup() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.UnhideConfirmPopUp())
         let isAlbums = !dataSource.allSelectedItems.albums.isEmpty && dataSource.allSelectedItems.photos.isEmpty
         let message = isAlbums ? TextConstants.unhideAlbumsPopupText : TextConstants.unhideItemsPopupText
         let popup = PopUpController.with(title: TextConstants.actionSheetUnhide,
@@ -417,7 +421,8 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     }
     
     func didUnhideAlbums(_ albums: [AlbumItem]) {
-        remove(albums: albums)
+        let customAlbums = albums.filter { !$0.fileType.isFaceImageAlbum }
+        remove(albums: customAlbums)
     }
     
     func didUnhidePeople(items: [PeopleItem]) {
@@ -449,7 +454,8 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     }
     
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        remove(albums: albums)
+        let customAlbums = albums.filter { !$0.fileType.isFaceImageAlbum }
+        remove(albums: customAlbums)
     }
     
     private func remove(items: [Item]) {
@@ -460,20 +466,12 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(albums: [BaseDataSourceItem]) {
+        if albums.isEmpty {
+            return
+        }
+        
         dataSource.removeSlider(items: albums) { [weak self] in
             self?.reloadPhotos()
         }
-    }
-}
-
-//MARK: - FaceImageItemsModuleOutput
-
-extension HiddenPhotosViewController: FaceImageItemsModuleOutput {
-    
-    func didChangeName(item: WrapData) {}
-    func didReloadData() {}
-    
-    func delete(item: Item) {
-        remove(items: [item])
     }
 }

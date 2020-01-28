@@ -159,6 +159,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             MenloworksTagsService.shared.onLocationPermissionChanged("denied")
         }
         
+        AnalyticsPermissionNetmeraEvent.sendLocationPermissionNetmeraEvents(status)
+        
         if status != .notDetermined, let handler = requestAuthorizationStatusHandler {
             handler(status)
         }

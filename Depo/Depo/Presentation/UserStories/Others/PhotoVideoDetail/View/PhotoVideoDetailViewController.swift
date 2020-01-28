@@ -193,7 +193,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         guard !objects.isEmpty, let index = selectedIndex, index < objects.count else {
             return
         }
-        
+        setupNavigationBar()
         let indexPath = IndexPath(item: index, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         collectionView.isHidden = false
@@ -270,8 +270,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
             return
         }
         
-        let item = items[index]
-        if item.isLocalItem && item.fileType == .image {
+        if let item = items[safe: index], item.isLocalItem && item.fileType == .image {
             setThreeDotsMenu(active: false)
         } else {
             setThreeDotsMenu(active: true)

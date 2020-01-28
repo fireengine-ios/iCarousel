@@ -10,8 +10,8 @@ import UIKit
 
 class UserInfoSubViewModuleInitializer: NSObject {
 
-    class func initializeViewController(with nibName: String) -> UIViewController {
-        let viewController = UserInfoSubViewViewController(nibName: nibName, bundle: nil)
+    class func initializeViewController() -> UserInfoSubViewViewController {
+        let viewController = UserInfoSubViewViewController.initFromNib()
         let configurator = UserInfoSubViewModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController)
         return viewController

@@ -32,9 +32,6 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        analyticsService.logScreen(screen: .trashBin)
-        analyticsService.trackDimentionsEveryClickGA(screen: .trashBin)
         
         needToShowTabBar = true
         ItemOperationManager.default.startUpdateView(view: self)
@@ -77,6 +74,11 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         if parent != nil {
             //track on each open tab of trash bin 
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .trashBin)
+            
+            analyticsService.logScreen(screen: .trashBin)
+            analyticsService.trackDimentionsEveryClickGA(screen: .trashBin)
+            
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.TrashBinScreen())
         }
     }
     
@@ -344,7 +346,7 @@ extension TrashBinViewController {
             
             switch result {
             case .success(let album):
-                self.router.openFIRAlbum(album: album, item: item, moduleOutput: self)
+                self.router.openFIRAlbum(album: album, item: item)
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
             }
@@ -379,7 +381,10 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        reloadData(needShowSpinner: false)
+        let customAlbums = albums.filter { !$0.fileType.isFaceImageAlbum }
+        if !customAlbums.isEmpty {
+            reloadData(needShowSpinner: false)
+        }
     }
     
     //MARK: Restore events
@@ -389,7 +394,8 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
-        remove(albums: albums)
+        let customAlbums = albums.filter { !$0.fileType.isFaceImageAlbum }
+        remove(albums: customAlbums)
     }
     
     func putBackFromTrashPeople(items: [PeopleItem]) {
@@ -428,21 +434,14 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     
     private func remove(albums: [BaseDataSourceItem]) {
         stopSelectionState()
+        
+        if albums.isEmpty {
+            return
+        }
+        
         dataSource.removeSlider(items: albums) { [weak self] in
             self?.reloadItems(needShowSpinner: false)
         }
-    }
-}
-
-//MARK: - FaceImageItemsModuleOutput
-
-extension TrashBinViewController: FaceImageItemsModuleOutput {
-    
-    func didChangeName(item: WrapData) {}
-    func didReloadData() {}
-    
-    func delete(item: Item) {
-        remove(items: [item])
     }
 }
 
