@@ -870,6 +870,8 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
 
 extension MoreFilesActionsInteractor {
     
+    private typealias SuccessLocalizationTriplet = (items: String, albums: String, folders: String)
+
     enum DivorseItems {
         case items
         case albums
@@ -923,10 +925,6 @@ extension MoreFilesActionsInteractor {
             UIApplication.showSuccessAlert(message: text)
         }
     }
-    
-    typealias SuccessLocalizationTriplet = (items: String,
-                                            albums: String,
-                                            folders: String)
     
     private func localizationCouple(for type: ElementTypes) -> SuccessLocalizationTriplet {
         let couple: SuccessLocalizationTriplet
@@ -1260,7 +1258,7 @@ extension MoreFilesActionsInteractor {
             self?.analyticsService.trackFileOperationGAEvent(operationType: .trash, items: items)
             self?.removeItemsFromPlayer(items: items)
             self?.fileService.moveToTrash(files: items,
-                                          success: self?.successItemsAction(elementType: .moveToTrash, relatedItems: items),
+                                          success: self?.successItemsAction(elementType: .moveToTrash, itemsType: .items, relatedItems: items),
                                           fail: self?.failItemsAction(elementType: .moveToTrash, relatedItems: items))
         }
         
@@ -1295,23 +1293,15 @@ extension MoreFilesActionsInteractor {
                 self?.output?.operationStarted(type: .moveToTrash)
                 self?.analyticsService.trackAlbumOperationGAEvent(operationType: .trash, albums: albums)
                 self?.albumService.moveToTrash(albums: moveToTrashAlbums, albumItems: items, success: { [weak self] deletedAlbums in
-                    self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .success, items: deletedAlbums)
-
                     DispatchQueue.main.async {
+                        self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .success, items: deletedAlbums)
                         self?.output?.operationFinished(type: .moveToTrash)
                         ItemOperationManager.default.didMoveToTrashAlbums(moveToTrashAlbums)
-                        
-                        let controller = PopUpController.with(title: TextConstants.success,
-                                                              message: TextConstants.moveToTrashAlbumsSuccess,
-                                                              image: .success,
-                                                              buttonTitle: TextConstants.ok)
-                        self?.router.presentViewController(controller: controller)
+                        self?.successItemsAction(elementType: .moveToTrash, itemsType: .albums, relatedItems: moveToTrashAlbums)()
                     }
                 }, fail: { [weak self] errorRespone in
-                    self?.trackNetmeraSuccessEvent(elementType: .moveToTrash,
-                                                   successStatus: .failure,
-                                                   items: moveToTrashAlbums)
                     DispatchQueue.main.async {
+                        self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .failure, items: moveToTrashAlbums)
                         self?.output?.operationFailed(type: .moveToTrash, message: errorRespone.description)
                     }
                 })

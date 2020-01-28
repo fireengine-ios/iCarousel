@@ -1645,7 +1645,6 @@ struct TextConstants {
     static let unhidePopupSuccessTitle = NSLocalizedString("unhide_popup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let deleteFromHiddenBinPopupSuccessTitle = NSLocalizedString("delete_from_hidden_bin_popup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let deleteFromHiddenBinPopupSuccessText = NSLocalizedString("delete_from_hidden_bin_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let moveToTrashHiddenAlbumsConfirmationPopupText = NSLocalizedString("move_to_trash_hidden_albums_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
@@ -1669,16 +1668,13 @@ struct TextConstants {
     static let moveToTrashAlbumsSuccessText = NSLocalizedString("move_to_trash_albums_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let moveToTrashFoldersSuccessText = NSLocalizedString("move_to_trash_folders_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    
     static let unhideItemsSuccessText = NSLocalizedString("unhide_items_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let unhideAlbumsSuccessText = NSLocalizedString("unhide_albums_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let unhideFoldersSuccessText = NSLocalizedString("unhide_folders_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    
     static let deleteItemsSuccessText = NSLocalizedString("delete_items_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteAlbumsSuccessText = NSLocalizedString("delete_albums_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteFoldersSuccessText = NSLocalizedString("delete_folders_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
     
     static let restoreItemsSuccessText = NSLocalizedString("restore_items_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let restoreAlbumsSuccessText = NSLocalizedString("restore_albums_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
