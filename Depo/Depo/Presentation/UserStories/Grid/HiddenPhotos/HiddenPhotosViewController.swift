@@ -33,6 +33,8 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.HiddenBinScreen())
+        
         analyticsService.logScreen(screen: .hiddenBin)
         analyticsService.trackDimentionsEveryClickGA(screen: .hiddenBin)
         
@@ -310,6 +312,7 @@ extension HiddenPhotosViewController {
 extension HiddenPhotosViewController {
     
     private func showDeletePopup() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteConfirmPopUp())
         let popup = PopUpController.with(title: TextConstants.actionSheetDelete,
                                          message: TextConstants.deletePopupText,
                                          image: .delete,
@@ -327,6 +330,7 @@ extension HiddenPhotosViewController {
     }
     
     private func showUnhidePopup() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.UnhideConfirmPopUp())
         let isAlbums = !dataSource.allSelectedItems.albums.isEmpty && dataSource.allSelectedItems.photos.isEmpty
         let message = isAlbums ? TextConstants.unhideAlbumsPopupText : TextConstants.unhideItemsPopupText
         let popup = PopUpController.with(title: TextConstants.actionSheetUnhide,

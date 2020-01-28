@@ -164,7 +164,7 @@ final class OverlayStickerViewController: ViewController {
     }
     
     private func showPhotoVideoPreview(item: WrapData) {
-        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SmashPreview())
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], status: item.status)
         
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false

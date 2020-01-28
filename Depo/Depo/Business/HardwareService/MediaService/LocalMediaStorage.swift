@@ -193,6 +193,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 completion(true, status)
             }
             MenloworksTagsService.shared.onGalleryPermissionChanged(true)
+            AnalyticsPermissionNetmeraEvent.sendPhotoPermissionNetmeraEvents(true)
         case .notDetermined, .restricted:
             passcodeStorage.systemCallOnScreen = true
             PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
@@ -206,6 +207,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     self.photoLibrary.register(self)
                 }
                 MenloworksTagsService.shared.onGalleryPermissionChanged(isAuthorized)
+                AnalyticsPermissionNetmeraEvent.sendPhotoPermissionNetmeraEvents(isAuthorized)
                 self.isWaitingForPhotoPermission = false
                 completion(isAuthorized, authStatus)
             })
@@ -215,6 +217,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             if redirectToSettings {
                 DispatchQueue.main.async {
                     MenloworksTagsService.shared.onGalleryPermissionChanged(false)
+                    AnalyticsPermissionNetmeraEvent.sendPhotoPermissionNetmeraEvents(false)
                     self.showAccessAlert()
                 }
             }
