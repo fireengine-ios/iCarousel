@@ -1255,7 +1255,7 @@ extension MoreFilesActionsInteractor {
             }
             
             let isHiddenAlbums = (items.first?.status == .hidden)
-            let message = isHiddenAlbums ? TextConstants.moveToTrashHiddenAlbumsConfirmationPopupText : TextConstants.removeAlbums
+            let message = isHiddenAlbums ? TextConstants.moveToTrashHiddenAlbumsConfirmationPopupText : TextConstants.deleteAlbums
             let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
                                                   message: message,
                                                   image: .delete,
