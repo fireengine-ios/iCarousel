@@ -20,6 +20,8 @@ protocol MoreFilesActionsInteractorInput {
     
     func moveToTrash(item: [BaseDataSourceItem])
     
+    func removeAlbums(items: [BaseDataSourceItem])
+    
     func hide(items: [BaseDataSourceItem])
     
     func unhide(items: [BaseDataSourceItem])
