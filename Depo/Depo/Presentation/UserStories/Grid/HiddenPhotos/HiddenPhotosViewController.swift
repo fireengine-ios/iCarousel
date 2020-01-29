@@ -333,8 +333,10 @@ extension HiddenPhotosViewController {
             }
         }
         
+        let isAlbums = !dataSource.allSelectedItems.albums.isEmpty && dataSource.allSelectedItems.photos.isEmpty
+        let message = isAlbums ? TextConstants.moveToTrashHiddenAlbumsConfirmationPopupText : TextConstants.deleteFilesText
         let popup = PopUpController.with(title: TextConstants.actionSheetDelete,
-                                         message: TextConstants.deletePopupText,
+                                         message: message,
                                          image: .delete,
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.ok,
