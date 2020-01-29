@@ -35,8 +35,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
         
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.HiddenBinScreen())
         
-        analyticsService.logScreen(screen: .hiddenBin)
-        analyticsService.trackDimentionsEveryClickGA(screen: .hiddenBin)
+        trackScreen(.hiddenBin)
         
         ItemOperationManager.default.startUpdateView(view: self)
         sortingManager.addBarView(to: sortPanelContainer)
@@ -57,6 +56,11 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
         
         //need to fix crash on show bottom bar
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
+    }
+    
+    private func trackScreen(_ screen: AnalyticsAppScreens) {
+        analyticsService.logScreen(screen: screen)
+        analyticsService.trackDimentionsEveryClickGA(screen: screen)
     }
     
     private func setupRefreshControl() {
@@ -313,16 +317,27 @@ extension HiddenPhotosViewController {
     
     private func showDeletePopup() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteConfirmPopUp())
+        trackScreen(.fileOperationConfirmPopup(.trash))
+        
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .cancel)
+            vc.close()
+        }
+        
+        let okHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .ok)
+            vc.close { [weak self] in
+                self?.deleteSelectedItems()
+            }
+        }
+        
         let popup = PopUpController.with(title: TextConstants.actionSheetDelete,
                                          message: TextConstants.deletePopupText,
                                          image: .delete,
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.ok,
-                                         secondAction: { vc in
-                                            vc.close { [weak self] in
-                                                self?.deleteSelectedItems()
-                                            }
-                                        })
+                                         firstAction: cancelHandler,
+                                         secondAction: okHandler)
         
         router.presentViewController(controller: popup,
                                      animated: false,
@@ -331,6 +346,20 @@ extension HiddenPhotosViewController {
     
     private func showUnhidePopup() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.UnhideConfirmPopUp())
+        trackScreen(.fileOperationConfirmPopup(.unhide))
+        
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .unhide, label: .cancel)
+            vc.close()
+        }
+        
+        let okHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .unhide, label: .ok)
+            vc.close { [weak self] in
+                self?.unhideSelectedItems()
+            }
+        }
+        
         let isAlbums = !dataSource.allSelectedItems.albums.isEmpty && dataSource.allSelectedItems.photos.isEmpty
         let message = isAlbums ? TextConstants.unhideAlbumsPopupText : TextConstants.unhideItemsPopupText
         let popup = PopUpController.with(title: TextConstants.actionSheetUnhide,
@@ -338,11 +367,8 @@ extension HiddenPhotosViewController {
                                          image: .unhide,
                                          firstButtonTitle: TextConstants.cancel,
                                          secondButtonTitle: TextConstants.ok,
-                                         secondAction: { vc in
-                                            vc.close { [weak self] in
-                                                self?.unhideSelectedItems()
-                                            }
-                                         })
+                                         firstAction: cancelHandler,
+                                         secondAction: okHandler)
         
         router.presentViewController(controller: popup,
                                      animated: false,
@@ -350,8 +376,17 @@ extension HiddenPhotosViewController {
     }
     
     private func showDeleteSuccessPopup() {
+        let text: String
+        
+        let isAlbums = !dataSource.allSelectedItems.albums.isEmpty && dataSource.allSelectedItems.photos.isEmpty
+        if isAlbums {
+            text = TextConstants.moveToTrashAlbumsSuccessText
+        } else {
+            text = TextConstants.moveToTrashItemsSuccessText
+        }
+        
         let popup = PopUpController.with(title: TextConstants.deleteFromHiddenBinPopupSuccessTitle,
-                                         message: TextConstants.deleteFromHiddenBinPopupSuccessText,
+                                         message: text,
                                          image: .success,
                                          buttonTitle: TextConstants.ok)
         
@@ -361,8 +396,17 @@ extension HiddenPhotosViewController {
     }
     
     private func showUnhideSuccessPopup() {
+        let text: String
+        
+        let isAlbums = !dataSource.allSelectedItems.albums.isEmpty && dataSource.allSelectedItems.photos.isEmpty
+        if isAlbums {
+            text = TextConstants.unhideAlbumsSuccessText
+        } else {
+            text = TextConstants.unhideItemsSuccessText
+        }
+        
         let popup = PopUpController.with(title: TextConstants.unhidePopupSuccessTitle,
-                                         message: TextConstants.unhidePopupSuccessText,
+                                         message: text,
                                          image: .success,
                                          buttonTitle: TextConstants.ok)
         

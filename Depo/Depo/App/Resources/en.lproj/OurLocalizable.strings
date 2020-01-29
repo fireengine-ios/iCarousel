@@ -27,7 +27,7 @@
 "You successfully set your passcode" = "You successfully set your passcode";
 "Passcode is changed successfully" = "Passcode is changed successfully";
 "Please repeate your new lifebox passcode" = "Please re-enter your new lifebox passcode";
-"Please enter your lifebox passcode" = "Please enter your lifebox passcode";
+"Please enter your lifebox passcode" = "Please enter your passcode";
 "lifebox Passcode" = "lifebox Passcode";
 "Change Passcode" = "Change Passcode";
 "Passcode" = "Passcode";
@@ -1367,38 +1367,40 @@
 "hidden_bin_album_slider_empty" = "There is no hidden album yet.";
 "hidden_bin_empty" = "There is no hidden item yet.";
 "hidden_bin_navbar_title" = "Hidden";
+"unhide_popup_text" = "The selected 1 item will be visible lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. ";
 
 /*divorce card*/
 "divorce_card_title" = "XX Effect lorem ipsum! Discover new features!";
-
 "trash_bin_album_slider_title" = "My Deleted Albums";
 "trash_bin_album_slider_empty" = "There is no deleted album yet.";
 "trash_bin_empty" = "There is no deleted item yet.";
-
 "delete_confirmation_popup_title" = "Delete permanently";
+"delete_confirmation_popup_text" = "The selected items will be deleted lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
+"restore_confirmation_popup_title" = "Restore";
+"restore_confirmation_popup_text" = "The selected items will be restored lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
+"delete_from_hidden_bin_popup_success_title" = "Deleted Permanently";
+"delete_from_hidden_bin_popup_success_text" = "This item deleted permanently";
+"unhide_popup_success_title" = "Unhide Successful";
+"delete_popup_text" = "The selected items will be deleted lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
+"PackagesPolicyTextBillo" = "Subsriptions are renewed on a monthly basis\nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Policy: https://billostorage.com/policy\nTerms of Use:";
+"unhide_items_popup_text" = "unhide_items_popup_text";
+"unhide_albums_popup_text" = "unhide_albums_popup_text";
+"move_to_trash_hidden_albums_confirmation_popup_text" = "move_to_trash_hidden_albums_confirmation_popup_text";
 "delete_items_confirmation_popup_text" = "delete_items_confirmation_popup_text";
 "delete_albums_confirmation_popup_text" = "delete_albums_confirmation_popup_text";
 "delete_folders_confirmation_popup_text" = "delete_folders_confirmation_popup_text";
-"delete_popup_success_text" = "This item deleted permanently";
-
-"restore_confirmation_popup_title" = "Restore";
-"restore_popup_success_text" = "This item restored permanently";
-
-"delete_from_hidden_bin_popup_success_title" = "Deleted Permanently";
-"delete_from_hidden_bin_popup_success_text" = "This item deleted permanently";
-"delete_popup_text" = "delete_popup_text";
-
-"unhide_popup_success_title" = "Unhide Successful";
-"unhide_popup_success_text" = " This items is back in your gallery";
-
-"turkcell_updater_update_required_title" = "Update required";
-"turkcell_updater_update_required_message" = "Application will be closed";
-
-"unhide_items_popup_text" = "unhide_items_popup_text";
-"unhide_albums_popup_text" = "unhide_albums_popup_text";
-
-"move_to_trash_hidden_albums_confirmation_popup_text" = "move_to_trash_hidden_albums_confirmation_popup_text";
-
 "restore_items_confirmation_popup_text" = "restore_items_confirmation_popup_text";
 "restore_albums_confirmation_popup_text" = "restore_albums_confirmation_popup_text";
 "restore_folders_confirmation_popup_text" = "restore_folders_confirmation_popup_text";
+"move_to_trash_items_success_text" = "Item(s) sent to trash bin";
+"move_to_trash_albums_success_text" = "Album(s) sent to trash bin";
+"move_to_trash_folders_success_text" = "Folder(s) sent to trash bin";
+"unhide_items_success_text" = "Item(s) restored";
+"unhide_albums_success_text" = "Album(s) restored";
+"unhide_folders_success_text" = "Folder(s) restored";
+"delete_items_success_text" = "Item(s) deleted permanently";
+"delete_albums_success_text" = "Album(s) deleted permanently";
+"delete_folders_success_text" = "Folder(s) deleted permanently";
+"restore_items_success_text" = "Item(s) restored";
+"restore_albums_success_text" = "Album(s) restored";
+"restore_folders_success_text" = "Folder(s) restored";
