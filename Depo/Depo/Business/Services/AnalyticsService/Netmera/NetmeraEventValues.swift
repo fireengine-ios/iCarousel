@@ -249,6 +249,42 @@ enum NetmeraEventValues {
         }
     }
     
+    ///same for delete
+    enum RestoredType {
+        case photo
+        case video
+        case person
+        case thing
+        case place
+        case album
+        case document
+        case music
+        case folder
+
+        var text: String {
+            switch self {
+            case .photo:
+                return "Photo"
+            case .video:
+                return "Video"
+            case .person:
+                return "Person"
+            case .thing:
+                return "Thing"
+            case .place:
+                return "Place"
+            case .album:
+                return "Album"
+            case .document:
+                return "Document"
+            case .music:
+                return "Music"
+            case.folder:
+                return "Folder"
+            }
+        }
+    }
+    
     enum ShareMethodType {
         case smallSize
         case originalSize

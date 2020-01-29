@@ -1032,6 +1032,14 @@ extension MoreFilesActionsInteractor {
                 }
                 AnalyticsService.sendNetmeraEvent(event: event)
             }
+        case .restore:
+            let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
+            typeToCountDictionary.keys.forEach {
+                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Restore(status: successStatus, type: $0, count: count) else {
+                    return
+                }
+                AnalyticsService.sendNetmeraEvent(event: event)
+            }
         default:
             break
         }
