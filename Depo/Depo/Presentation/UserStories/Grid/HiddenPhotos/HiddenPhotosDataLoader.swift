@@ -16,7 +16,7 @@ protocol HiddenPhotosDataLoaderDelegate: class {
     func failedLoadAlbumPage(error: Error)
 }
 
-final class HiddenPhotosDataLoader {
+final class HiddenPhotosDataLoader: MoreFilesActionsInteractor {
     
     private enum AlbumsOrder: Int {
         case people = 0
@@ -32,8 +32,6 @@ final class HiddenPhotosDataLoader {
     private weak var delegate: HiddenPhotosDataLoaderDelegate?
     
     private lazy var hiddenService = HiddenService()
-    private lazy var fileService = WrapItemFileService()
-    private lazy var albumService = PhotosAlbumService()
     
     private var photoPage = 0
     private var currentAlbumsPage = 0
@@ -162,80 +160,6 @@ final class HiddenPhotosDataLoader {
         }
     }
     
-    func unhide(selectedItems: HiddenPhotosDataSource.SelectedItems, handler: @escaping ResponseVoid) {
-        recover(selectedItems: selectedItems, handler: handler)
-    }
-    
-    func putBack(selectedItems: HiddenPhotosDataSource.SelectedItems, handler: @escaping ResponseVoid) {
-        recover(selectedItems: selectedItems, handler: handler)
-    }
-    
-    private func recover(selectedItems: HiddenPhotosDataSource.SelectedItems, handler: @escaping ResponseVoid) {
-        let group = DispatchGroup()
-        
-        var unhideError: Error? = nil
-        if !selectedItems.photos.isEmpty {
-            group.enter()
-            unhidePhotos(items: selectedItems.photos) { result in
-                if case let .failed(error) = result {
-                    unhideError = error
-                }
-                group.leave()
-            }
-        }
-        
-        if !selectedItems.albums.isEmpty {
-            group.enter()
-            recoverAlbums(items: selectedItems.albums) { result in
-                if case let .failed(error) = result {
-                    unhideError = error
-                }
-                group.leave()
-            }
-        }
-        
-        group.notify(queue: .main) {
-            if let error = unhideError {
-                handler(.failed(error))
-            } else {
-                handler(.success(()))
-            }
-        }
-    }
-    
-    func moveToTrash(selectedItems: HiddenPhotosDataSource.SelectedItems, handler: @escaping ResponseVoid) {
-        let group = DispatchGroup()
-
-        var deleteError: Error? = nil
-        if !selectedItems.photos.isEmpty {
-            group.enter()
-            moveToTrashPhotos(items: selectedItems.photos) { result in
-                if case let .failed(error) = result {
-                    deleteError = error
-                }
-                group.leave()
-            }
-        }
-        
-        if !selectedItems.albums.isEmpty {
-            group.enter()
-            moveToTrashAlbums(items: selectedItems.albums) { result in
-                if case let .failed(error) = result {
-                    deleteError = error
-                }
-                group.leave()
-            }
-        }
-        
-        group.notify(queue: .main) {
-            if let error = deleteError {
-                handler(.failed(error))
-            } else {
-                handler(.success(()))
-            }
-        }
-    }
-    
     //MARK: - Private methods
     
     private func loadCurrentTypeAlbums(handler: @escaping ResponseArrayHandler<BaseDataSourceItem>) {
@@ -355,168 +279,6 @@ final class HiddenPhotosDataLoader {
         
         group.notify(queue: .main) {
             handler(albums, firItems)
-        }
-    }
-    
-    //MARK: - Unhide methods
-    
-    private func unhidePhotos(items: [Item], handler: @escaping ResponseVoid) {
-        fileService.unhide(items: items, success: {
-            handler(.success(()))
-        }, fail: { error in
-            handler(.failed(error))
-        })
-    }
-    
-    private func recoverAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {
-        var peopleItems = [PeopleItem]()
-        var placesItems = [PlacesItem]()
-        var thingsItems = [ThingsItem]()
-        var albumItems = [AlbumItem]()
-        
-        items.forEach {
-            if let peopleItem = $0 as? PeopleItem {
-                peopleItems.append(peopleItem)
-            } else if let placeItem = $0 as? PlacesItem {
-                placesItems.append(placeItem)
-            } else if let thingItem = $0 as? ThingsItem {
-                thingsItems.append(thingItem)
-            } else if let albumItem = $0 as? AlbumItem {
-                albumItems.append(albumItem)
-            }
-        }
-    
-        let group = DispatchGroup()
-        
-        var unhideError: Error? = nil
-        
-        if !peopleItems.isEmpty {
-            group.enter()
-            fileService.unhidePeople(items: peopleItems, success: {
-                group.leave()
-            }, fail: { error in
-                unhideError = error
-                group.leave()
-            })
-        }
-        
-        if !placesItems.isEmpty {
-            group.enter()
-            fileService.unhidePlaces(items: placesItems, success: {
-                group.leave()
-            }, fail: { error in
-                unhideError = error
-                group.leave()
-            })
-        }
-        
-        if !thingsItems.isEmpty {
-            group.enter()
-            fileService.unhideThings(items: thingsItems, success: {
-                group.leave()
-            }, fail: { error in
-                unhideError = error
-                group.leave()
-            })
-        }
-        
-        if !albumItems.isEmpty {
-            group.enter()
-            fileService.unhideAlbums(albumItems, success: {
-                group.leave()
-            }, fail: { error in
-                unhideError = error
-                group.leave()
-            })
-        }
-        
-        group.notify(queue: .main) {
-            if let error = unhideError {
-                handler(.failed(error))
-            } else {
-                handler(.success(()))
-            }
-        }
-    }
-    
-    //MARK: - Move to trash methods
-
-    private func moveToTrashPhotos(items: [Item], handler: @escaping ResponseVoid) {
-        fileService.moveToTrash(files: items, success: {
-            handler(.success(()))
-        }, fail: { errorResponse in
-            handler(.failed(errorResponse))
-        })
-    }
-    
-    private func moveToTrashAlbums(items: [BaseDataSourceItem], handler: @escaping ResponseVoid) {
-        var peopleItems = [PeopleItem]()
-        var placesItems = [PlacesItem]()
-        var thingsItems = [ThingsItem]()
-        var albumItems = [AlbumItem]()
-        
-        items.forEach {
-            if let peopleItem = $0 as? PeopleItem {
-                peopleItems.append(peopleItem)
-            } else if let placeItem = $0 as? PlacesItem {
-                placesItems.append(placeItem)
-            } else if let thingItem = $0 as? ThingsItem {
-                thingsItems.append(thingItem)
-            } else if let albumItem = $0 as? AlbumItem {
-                albumItems.append(albumItem)
-            }
-        }
-    
-        let group = DispatchGroup()
-        
-        var trashError: Error? = nil
-        
-        if !peopleItems.isEmpty {
-            group.enter()
-            fileService.moveToTrashPeople(items: peopleItems, success: {
-                group.leave()
-            }, fail: { error in
-                trashError = error
-                group.leave()
-            })
-        }
-        
-        if !placesItems.isEmpty {
-            group.enter()
-            fileService.moveToTrashPlaces(items: placesItems, success: {
-                group.leave()
-            }, fail: { error in
-                trashError = error
-                group.leave()
-            })
-        }
-        
-        if !thingsItems.isEmpty {
-            group.enter()
-            fileService.moveToTrashThings(items: thingsItems, success: {
-                group.leave()
-            }, fail: { error in
-                trashError = error
-                group.leave()
-            })
-        }
-        
-        if !albumItems.isEmpty {
-            group.enter()
-            albumService.moveToTrash(albums: albumItems, success: { trashedAlbums in
-                group.leave()
-            }, fail: { errorResponse in
-                trashError = errorResponse
-                group.leave()
-            })
-        }
-        
-        group.notify(queue: .main) {
-            if let error = trashError {
-                handler(.failed(error))
-            } else {
-                handler(.success(()))
-            }
         }
     }
 }
