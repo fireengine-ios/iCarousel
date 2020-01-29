@@ -870,6 +870,14 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
 
 extension MoreFilesActionsInteractor {
     
+    private typealias SuccessLocalizationTriplet = (items: String, albums: String, folders: String)
+
+    enum DivorseItems {
+        case items
+        case albums
+        case folders
+    }
+    
    func succesAction(elementType: ElementTypes) -> FileOperation {
         let success: FileOperation = { [weak self] in
             self?.trackSuccessEvent(elementType: elementType)
@@ -881,16 +889,85 @@ extension MoreFilesActionsInteractor {
         return success
     }
     
-    func successItemsAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FileOperation {
+    func successItemsAction(elementType: ElementTypes, itemsType: DivorseItems? = nil,  relatedItems: [BaseDataSourceItem]) -> FileOperation {
         let success: FileOperation = { [weak self] in
             self?.trackSuccessEvent(elementType: elementType)
             self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .success, items: relatedItems)
             DispatchQueue.main.async {
                 self?.output?.operationFinished(type: elementType)
-                self?.showSuccessPopup(for: elementType)
+                if let itemsType = itemsType {
+                    self?.showDivorseSuccessPopup(for: elementType, divorseItems: itemsType)
+                } else {
+                    self?.showSuccessPopup(for: elementType)
+                }
             }
         }
         return success
+    }
+    
+    private func showDivorseSuccessPopup(for type: ElementTypes, divorseItems: DivorseItems) {
+        let localizations = localizationTriplet(for: type)
+
+        let text: String
+        switch divorseItems {
+        case .items:
+            text = localizations.items
+            
+        case .albums:
+            text = localizations.albums
+            
+        case .folders:
+            text = localizations.folders
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            RouterVC().hideSpiner()
+            UIApplication.showSuccessAlert(message: text)
+        }
+    }
+    
+    private func localizationTriplet(for type: ElementTypes) -> SuccessLocalizationTriplet {
+        let triplet: SuccessLocalizationTriplet
+        switch type {
+        case .moveToTrash:
+            triplet = SuccessLocalizationTriplet(
+                items: TextConstants.moveToTrashItemsSuccessText,
+                albums: TextConstants.moveToTrashAlbumsSuccessText,
+                folders: TextConstants.moveToTrashFoldersSuccessText
+            )
+            
+        case .unhide:
+            triplet = SuccessLocalizationTriplet(
+                items: TextConstants.unhideItemsSuccessText,
+                albums: TextConstants.unhideAlbumsSuccessText,
+                folders: TextConstants.unhideFoldersSuccessText
+            )
+            
+        case .delete:
+            triplet = SuccessLocalizationTriplet(
+                items: TextConstants.deleteItemsSuccessText,
+                albums: TextConstants.deleteAlbumsSuccessText,
+                folders: TextConstants.deleteFoldersSuccessText
+            )
+            
+            MenloworksAppEvents.onFileDeleted()
+        case .restore:
+            triplet = SuccessLocalizationTriplet(
+                items: TextConstants.restoreItemsSuccessText,
+                albums: TextConstants.restoreAlbumsSuccessText,
+                folders: TextConstants.restoreFoldersSuccessText
+            )
+            
+        default:
+            triplet = SuccessLocalizationTriplet(
+                items: "",
+                albums: "",
+                folders: ""
+            )
+            assertionFailure("unknown ElementType")
+        }
+        
+        return triplet
     }
     
     private func showSuccessPopup(for elementType: ElementTypes) {
@@ -898,33 +975,11 @@ extension MoreFilesActionsInteractor {
         switch elementType {
         case .download:
             text = TextConstants.popUpDownloadComplete
-        case .moveToTrash:
-            text = TextConstants.popUpDeleteComplete
-        case .unhide:
-            text = TextConstants.unhidePopupSuccessText
-        case .delete:
-            text = TextConstants.deletePopupSuccessText
-            MenloworksAppEvents.onFileDeleted()
-        case .restore:
-            text = TextConstants.restorePopupSuccessText
         default:
             return
         }
         
-        let delay: Double
-        if elementType.isContained(in: [.unhide, .restore, .delete, .moveToTrash]) {
-            delay = 1
-            RouterVC().showSpiner()
-        } else {
-            delay = 0
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            if delay > 0 {
-                RouterVC().hideSpiner()
-            }
-            UIApplication.showSuccessAlert(message: text)
-        }
+        UIApplication.showSuccessAlert(message: text)
     }
     
     private func trackSuccessEvent(elementType: ElementTypes) {
@@ -1118,7 +1173,18 @@ extension MoreFilesActionsInteractor {
                 let errorResponse = ErrorResponse.error(error)
                 self?.failItemsAction(elementType: type, relatedItems: items)(errorResponse)
             } else {
-                self?.successItemsAction(elementType: type, relatedItems: items)()
+                let itemsType: DivorseItems
+                if self?.isAlbums(items) == true {
+                    itemsType = .albums
+                    
+                } else if photosVideos.allSatisfy({ $0.fileType == .folder }) {
+                    itemsType = .folders
+                    
+                } else {
+                    itemsType = .items
+                }
+                
+                self?.successItemsAction(elementType: type, itemsType: itemsType, relatedItems: items)()
             }
         }
     }
@@ -1192,7 +1258,7 @@ extension MoreFilesActionsInteractor {
             self?.analyticsService.trackFileOperationGAEvent(operationType: .trash, items: items)
             self?.removeItemsFromPlayer(items: items)
             self?.fileService.moveToTrash(files: items,
-                                          success: self?.successItemsAction(elementType: .moveToTrash, relatedItems: items),
+                                          success: self?.successItemsAction(elementType: .moveToTrash, itemsType: .items, relatedItems: items),
                                           fail: self?.failItemsAction(elementType: .moveToTrash, relatedItems: items))
         }
         
@@ -1227,23 +1293,15 @@ extension MoreFilesActionsInteractor {
                 self?.output?.operationStarted(type: .moveToTrash)
                 self?.analyticsService.trackAlbumOperationGAEvent(operationType: .trash, albums: albums)
                 self?.albumService.moveToTrash(albums: moveToTrashAlbums, albumItems: items, success: { [weak self] deletedAlbums in
-                    self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .success, items: deletedAlbums)
-
                     DispatchQueue.main.async {
+                        self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .success, items: deletedAlbums)
                         self?.output?.operationFinished(type: .moveToTrash)
                         ItemOperationManager.default.didMoveToTrashAlbums(moveToTrashAlbums)
-                        
-                        let controller = PopUpController.with(title: TextConstants.success,
-                                                              message: TextConstants.moveToTrashAlbumsSuccess,
-                                                              image: .success,
-                                                              buttonTitle: TextConstants.ok)
-                        self?.router.presentViewController(controller: controller)
+                        self?.successItemsAction(elementType: .moveToTrash, itemsType: .albums, relatedItems: moveToTrashAlbums)()
                     }
                 }, fail: { [weak self] errorRespone in
-                    self?.trackNetmeraSuccessEvent(elementType: .moveToTrash,
-                                                   successStatus: .failure,
-                                                   items: moveToTrashAlbums)
                     DispatchQueue.main.async {
+                        self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .failure, items: moveToTrashAlbums)
                         self?.output?.operationFailed(type: .moveToTrash, message: errorRespone.description)
                     }
                 })

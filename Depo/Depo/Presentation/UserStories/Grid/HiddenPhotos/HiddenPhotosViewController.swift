@@ -376,8 +376,17 @@ extension HiddenPhotosViewController {
     }
     
     private func showDeleteSuccessPopup() {
+        let text: String
+        
+        let isAlbums = !dataSource.allSelectedItems.albums.isEmpty && dataSource.allSelectedItems.photos.isEmpty
+        if isAlbums {
+            text = TextConstants.moveToTrashAlbumsSuccessText
+        } else {
+            text = TextConstants.moveToTrashItemsSuccessText
+        }
+        
         let popup = PopUpController.with(title: TextConstants.deleteFromHiddenBinPopupSuccessTitle,
-                                         message: TextConstants.deleteFromHiddenBinPopupSuccessText,
+                                         message: text,
                                          image: .success,
                                          buttonTitle: TextConstants.ok)
         
@@ -387,8 +396,17 @@ extension HiddenPhotosViewController {
     }
     
     private func showUnhideSuccessPopup() {
+        let text: String
+        
+        let isAlbums = !dataSource.allSelectedItems.albums.isEmpty && dataSource.allSelectedItems.photos.isEmpty
+        if isAlbums {
+            text = TextConstants.unhideAlbumsSuccessText
+        } else {
+            text = TextConstants.unhideItemsSuccessText
+        }
+        
         let popup = PopUpController.with(title: TextConstants.unhidePopupSuccessTitle,
-                                         message: TextConstants.unhidePopupSuccessText,
+                                         message: text,
                                          image: .success,
                                          buttonTitle: TextConstants.ok)
         
