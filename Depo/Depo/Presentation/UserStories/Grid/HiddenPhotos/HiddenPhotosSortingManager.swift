@@ -27,6 +27,12 @@ final class HiddenPhotosSortingManager {
     private weak var delegate: HiddenPhotosSortingManagerDelegate?
     private let sortTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
     
+    var isActive = true {
+        didSet {
+            topBar.view.isHidden = !isActive
+        }
+    }
+    
     required init(delegate: HiddenPhotosSortingManagerDelegate?) {
         self.delegate = delegate
     }

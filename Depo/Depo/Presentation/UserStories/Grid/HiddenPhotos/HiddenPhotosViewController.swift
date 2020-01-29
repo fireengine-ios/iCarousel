@@ -113,6 +113,7 @@ extension HiddenPhotosViewController {
     private func startSelectionState() {
         navigationItem.hidesBackButton = true
         navbarManager.setSelectionState()
+        sortingManager.isActive = false
     }
     
     private func stopSelectionState() {
@@ -122,6 +123,7 @@ extension HiddenPhotosViewController {
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
         setMoreButton()
+        sortingManager.isActive = true
     }
     
     private func updateBarsForSelectedObjects(count: Int) {
