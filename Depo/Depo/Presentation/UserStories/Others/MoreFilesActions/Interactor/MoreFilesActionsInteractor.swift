@@ -906,7 +906,7 @@ extension MoreFilesActionsInteractor {
     }
     
     private func showDivorseSuccessPopup(for type: ElementTypes, divorseItems: DivorseItems) {
-        let localizations = localizationCouple(for: type)
+        let localizations = localizationTriplet(for: type)
 
         let text: String
         switch divorseItems {
@@ -926,7 +926,7 @@ extension MoreFilesActionsInteractor {
         }
     }
     
-    private func localizationCouple(for type: ElementTypes) -> SuccessLocalizationTriplet {
+    private func localizationTriplet(for type: ElementTypes) -> SuccessLocalizationTriplet {
         let couple: SuccessLocalizationTriplet
         switch type {
         case .moveToTrash:
