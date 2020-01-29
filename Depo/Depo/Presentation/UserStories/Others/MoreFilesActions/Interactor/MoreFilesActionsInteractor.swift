@@ -927,24 +927,24 @@ extension MoreFilesActionsInteractor {
     }
     
     private func localizationTriplet(for type: ElementTypes) -> SuccessLocalizationTriplet {
-        let couple: SuccessLocalizationTriplet
+        let triplet: SuccessLocalizationTriplet
         switch type {
         case .moveToTrash:
-            couple = SuccessLocalizationTriplet(
+            triplet = SuccessLocalizationTriplet(
                 items: TextConstants.moveToTrashItemsSuccessText,
                 albums: TextConstants.moveToTrashAlbumsSuccessText,
                 folders: TextConstants.moveToTrashFoldersSuccessText
             )
             
         case .unhide:
-            couple = SuccessLocalizationTriplet(
+            triplet = SuccessLocalizationTriplet(
                 items: TextConstants.unhideItemsSuccessText,
                 albums: TextConstants.unhideAlbumsSuccessText,
                 folders: TextConstants.unhideFoldersSuccessText
             )
             
         case .delete:
-            couple = SuccessLocalizationTriplet(
+            triplet = SuccessLocalizationTriplet(
                 items: TextConstants.deleteItemsSuccessText,
                 albums: TextConstants.deleteAlbumsSuccessText,
                 folders: TextConstants.deleteFoldersSuccessText
@@ -952,14 +952,14 @@ extension MoreFilesActionsInteractor {
             
             MenloworksAppEvents.onFileDeleted()
         case .restore:
-            couple = SuccessLocalizationTriplet(
+            triplet = SuccessLocalizationTriplet(
                 items: TextConstants.restoreItemsSuccessText,
                 albums: TextConstants.restoreAlbumsSuccessText,
                 folders: TextConstants.restoreFoldersSuccessText
             )
             
         default:
-            couple = SuccessLocalizationTriplet(
+            triplet = SuccessLocalizationTriplet(
                 items: "",
                 albums: "",
                 folders: ""
@@ -967,7 +967,7 @@ extension MoreFilesActionsInteractor {
             assertionFailure("unknown ElementType")
         }
         
-        return couple
+        return triplet
     }
     
     private func showSuccessPopup(for elementType: ElementTypes) {
