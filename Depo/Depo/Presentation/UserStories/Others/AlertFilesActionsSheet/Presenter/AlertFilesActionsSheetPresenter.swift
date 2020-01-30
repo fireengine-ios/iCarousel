@@ -485,7 +485,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 case .removeAlbum:
                     action = UIAlertAction(title: TextConstants.actionSheetRemove, style: .default, handler: { _ in
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                        self.interactor.moveToTrash(item: currentItems)
+                        self.interactor.removeAlbums(items: currentItems)
                     })
                 case .deleteDeviceOriginal:
                     if let itemsArray = items as? [Item] {

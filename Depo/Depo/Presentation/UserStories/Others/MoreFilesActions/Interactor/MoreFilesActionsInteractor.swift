@@ -748,6 +748,35 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                      fail: failAction(elementType: .deleteDeviceOriginal))
     }
     
+    func removeAlbums(items: [BaseDataSourceItem]) {
+        let okHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.output?.operationStarted(type: .moveToTrash)
+            vc.close { [weak self] in
+                self?.removeAlbums(items)
+            }
+        }
+
+        let popup = PopUpController.with(title: TextConstants.actionSheetRemove,
+                                         message: TextConstants.removeAlbums,
+                                         image: .delete,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         secondAction: okHandler)
+        
+        router.presentViewController(controller: popup, animated: false)
+    }
+    
+    private func removeAlbums(_ items: [BaseDataSourceItem]) {
+        guard let albums = items as? [AlbumItem] else {
+            return
+        }
+        
+        albumService.delete(albums: albums, success: { [weak self] removedAlbums in
+            ItemOperationManager.default.didMoveToTrashAlbums(removedAlbums)
+            self?.succesAction(elementType: .removeAlbum)()
+        }, fail: failAction(elementType: .removeAlbum))
+    }
+    
     private func sync(items: [BaseDataSourceItem]?, action: @escaping VoidHandler, cancel: @escaping VoidHandler, fail: FailResponse?) {
         
         guard let items = items as? [WrapData] else {
