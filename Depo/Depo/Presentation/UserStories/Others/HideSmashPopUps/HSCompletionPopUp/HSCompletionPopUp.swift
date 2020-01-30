@@ -257,19 +257,7 @@ final class HSCompletionPopUp: BasePopUpController {
 
     @IBAction private func onOpenHiddenAlbumTap(_ sender: Any) {
         close(isFinalStep: false) {
-            self.openHiddenBin()
-        }
-    }
-    
-    private func openHiddenBin() {
-        if #available(iOS 13, *) {
-            self.router.navigationController?.dismiss(animated: true, completion: {
-                let controller = self.router.hiddenPhotosViewController()
-                self.router.pushViewController(viewController: controller)
-            })
-        } else {
-            let controller = router.hiddenPhotosViewController()
-            router.pushViewController(viewController: controller)
+            self.delegate?.openHiddenBin()
         }
     }
 

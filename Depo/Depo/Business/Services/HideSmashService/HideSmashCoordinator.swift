@@ -14,6 +14,7 @@ protocol HideFuncRoutingProtocol: class {
     func openFaceImageGrouping()
 
     //HideFuncCompletionPopUp
+    func openHiddenBin()
     func openPeopleAlbumIfPossible()
     //Track events
     func popUPClosed()
@@ -334,6 +335,11 @@ extension HideSmashCoordinator {
 
 extension HideSmashCoordinator: HideFuncRoutingProtocol {
 
+    func openHiddenBin() {
+        let controller = router.hiddenPhotosViewController()
+        push(controller: controller)
+    }
+    
     func openPeopleAlbumIfPossible() {
         preparePeopleAlbumOpenning()
     }

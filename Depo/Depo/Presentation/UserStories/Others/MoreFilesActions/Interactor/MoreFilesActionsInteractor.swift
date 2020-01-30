@@ -872,13 +872,28 @@ extension MoreFilesActionsInteractor {
             return
         }
         
-        var delay: Double = 0
-        if elementType.isContained(in: [.unhide, .moveToTrash, .restore, .delete]) {
+        let delay: Double
+        if elementType.isContained(in: [.unhide, .restore, .delete, .moveToTrash]) {
             delay = 1
+            router.showSpiner()
+        } else {
+            delay = 0
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            UIApplication.showSuccessAlert(message: text)
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+            if delay > 0 {
+                self?.router.hideSpiner()
+            }
+            
+            let popup = PopUpController.with(title: TextConstants.success,
+                                             message: text,
+                                             image: .success,
+                                             buttonTitle: TextConstants.ok) { vc in
+                                                vc.close { [weak self] in
+                                                    self?.output?.successPopupClosed()
+                                                }
+                                            }
+            self?.router.presentViewController(controller: popup)
         }
     }
     
