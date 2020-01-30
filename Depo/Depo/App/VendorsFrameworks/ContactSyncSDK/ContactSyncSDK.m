@@ -1202,8 +1202,8 @@ static bool syncing = false;
 
 + (void)cancelAnalyze
 {
-    [[AnalyzeHelper shared] endOfAnalyzeCycle:CANCELLED];
     [[AnalyzeStatus shared] reset];
+    [[AnalyzeHelper shared] endOfAnalyzeCycle:CANCELLED];
 }
 
 + (void)continueAnalyze
