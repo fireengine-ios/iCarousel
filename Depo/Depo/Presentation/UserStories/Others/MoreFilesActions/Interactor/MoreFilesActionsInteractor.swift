@@ -881,10 +881,8 @@ extension MoreFilesActionsInteractor {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
-            if delay > 0 {
-                self?.router.hideSpiner()
-            }
-            
+            self?.router.hideSpiner()
+
             let popup = PopUpController.with(title: TextConstants.success,
                                              message: text,
                                              image: .success,
