@@ -96,6 +96,11 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     }
     
     @objc private func onRefresh() {
+        if dataSource.isSelectionStateActive {
+            collectionView.refreshControl?.endRefreshing()
+            return
+        }
+        
         reloadData(needShowSpinner: true)
     }
     
