@@ -386,7 +386,7 @@ extension NetmeraEvents.Actions {
             
             let acceptableType: NetmeraEventValues.TrashType
             switch type {
-            case .image, .faceImage(_):
+            case .image:
                 acceptableType = .photo
             case .video:
                 acceptableType = .video
@@ -399,11 +399,11 @@ extension NetmeraEvents.Actions {
                 acceptableType = .music
             case .photoAlbum:
                 acceptableType = .album
-            case .faceImageAlbum(.people):
+            case .faceImageAlbum(.people), .faceImage(.people):
                 acceptableType = .person
-            case .faceImageAlbum(.things):
+            case .faceImageAlbum(.things), .faceImage(.things):
                 acceptableType = .thing
-            case .faceImageAlbum(.places):
+            case .faceImageAlbum(.places), .faceImage(.places):
                 acceptableType = .place
             default:
                 acceptableType = .photo
@@ -446,7 +446,7 @@ extension NetmeraEvents.Actions {
             
             let acceptableType: NetmeraEventValues.RestoredType
             switch type {
-            case .image, .faceImage(_):
+            case .image:
                 acceptableType = .photo
             case .video:
                 acceptableType = .video
@@ -459,11 +459,11 @@ extension NetmeraEvents.Actions {
                 acceptableType = .music
             case .photoAlbum:
                 acceptableType = .album
-            case .faceImageAlbum(.people):
+            case .faceImageAlbum(.people), .faceImage(.people):
                 acceptableType = .person
-            case .faceImageAlbum(.things):
+            case .faceImageAlbum(.things), .faceImage(.things):
                 acceptableType = .thing
-            case .faceImageAlbum(.places):
+            case .faceImageAlbum(.places), .faceImage(.places):
                 acceptableType = .place
             default:
                 acceptableType = .photo
@@ -800,7 +800,7 @@ extension NetmeraEvents.Actions {
             
             let acceptableType: NetmeraEventValues.TrashType
             switch type {
-            case .image, .faceImage(_):
+            case .image:
                 acceptableType = .photo
             case .video:
                 acceptableType = .video
@@ -813,11 +813,11 @@ extension NetmeraEvents.Actions {
                 acceptableType = .music
             case .photoAlbum:
                 acceptableType = .album
-            case .faceImageAlbum(.people):
+            case .faceImageAlbum(.people), .faceImage(.people):
                 acceptableType = .person
-            case .faceImageAlbum(.things):
+            case .faceImageAlbum(.things), .faceImage(.things):
                 acceptableType = .thing
-            case .faceImageAlbum(.places):
+            case .faceImageAlbum(.places), .faceImage(.places):
                 acceptableType = .place
             default:
                 acceptableType = .photo
@@ -926,17 +926,17 @@ extension NetmeraEvents.Actions {
             }
             let acceptableType: NetmeraEventValues.HideUnhideObjectType
             switch type {
-            case .image, .faceImage(_):
+            case .image:
                 acceptableType = .photo
             case .video:
                 acceptableType = .video
             case .photoAlbum:
                 acceptableType = .album
-            case .faceImageAlbum(.people):
+            case .faceImageAlbum(.people), .faceImage(.people):
                 acceptableType = .person
-            case .faceImageAlbum(.things):
+            case .faceImageAlbum(.things), .faceImage(.things):
                 acceptableType = .thing
-            case .faceImageAlbum(.places):
+            case .faceImageAlbum(.places), .faceImage(.places):
                 acceptableType = .place
             default:
                 acceptableType = .photo
@@ -972,17 +972,17 @@ extension NetmeraEvents.Actions {
             }
             let acceptableType: NetmeraEventValues.HideUnhideObjectType
             switch type {
-            case .image, .faceImage(_):
+            case .image:
                 acceptableType = .photo
             case .video:
                 acceptableType = .video
             case .photoAlbum:
                 acceptableType = .album
-            case .faceImageAlbum(.people):
+            case .faceImageAlbum(.people), .faceImage(.people):
                 acceptableType = .person
-            case .faceImageAlbum(.things):
+            case .faceImageAlbum(.things), .faceImage(.things):
                 acceptableType = .thing
-            case .faceImageAlbum(.places):
+            case .faceImageAlbum(.places), .faceImage(.places):
                 acceptableType = .place
             default:
                 acceptableType = .photo
