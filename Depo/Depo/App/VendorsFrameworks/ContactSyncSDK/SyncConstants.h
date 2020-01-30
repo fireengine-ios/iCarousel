@@ -26,16 +26,16 @@
 #endif
 #endif
 
-#define SYNC_VERSION @"4.0.2-200120"
+#define SYNC_VERSION @"4.0.3-210120"
 #define SYNC_USER_AGENT @"iOS ContactSync SDK"
 
 #define SYNC_HEADER_AUTH_TOKEN @"X-Auth-Token"
 #define SYNC_HEADER_CLIENT_VERSION @"X-Client-Version"
 #define SYNC_HEADER_MSISDN @"X-Msisdn"
 
-#define SYNC_DEVICE_ID @"DeviceId_200120"
+#define SYNC_DEVICE_ID @"DeviceId_210120"
 
-#define SYNC_KEY_LAST_SYNC_TIME @"ContactSyncLastTime_200120"
+#define SYNC_KEY_LAST_SYNC_TIME @"ContactSyncLastTime_210120"
 #define SYNC_KEY_LAST_PERIODIC_SYNC_TIME @"ContactPeriodicSyncLastTime_v4"
 #define SYNC_KEY_AUTOMATED @"ContactSyncAutomated"
 #define SYNC_KEY_CHECK_UPDATE @"ContactSyncUpdateKey"

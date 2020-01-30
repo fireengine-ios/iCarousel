@@ -16,6 +16,7 @@ class PasscodeEnterViewController: ViewController, NibInit {
         let vc = PasscodeEnterViewController.initFromNib()
         vc.state = flow.startState
         vc.navigationTitle = navigationTitle
+        vc.modalPresentationStyle = .overFullScreen
         
         return vc
     }

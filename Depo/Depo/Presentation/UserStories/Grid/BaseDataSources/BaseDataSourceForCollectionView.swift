@@ -967,15 +967,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             let object = itemForIndexPath(indexPath: path) {
             
             if !isSelectionStateActive {
-                isSelectionStateActive = true
-                
                 if !isObjctSelected(object: object) {
                     onSelectObject(object: object)
                 }
                 
                 forwardDelegate.onLongPressInCell()
+                updateSelectionCount()
             } else if !isObjctSelected(object: object) {
                 onSelectObject(object: object)
+                updateSelectionCount()
             }
         }
     }
@@ -1012,8 +1012,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag),
                                     activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
         }
-        
-        updateSelectionCount()
     }
     
     func isHeaderSelected(section: Int) -> Bool {
@@ -1328,6 +1326,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         if (isSelectionStateActive) {
             onSelectObject(object: unwrapedObject)
+            updateSelectionCount()
             let cell = collectionView.cellForItem(at: indexPath)
             guard let cell_ = cell as? CollectionViewCellDataProtocol else {
                 return
