@@ -13,10 +13,12 @@ import SwiftyGif
 protocol LoadingImageViewDelegate: class {
     func onImageLoaded(image: UIImage?)
     func onLoadingImageCanceled()
+    func loadingFinished()
 }
 extension LoadingImageViewDelegate {
     func onImageLoaded(image: UIImage?) {}
     func onLoadingImageCanceled() {}
+    func loadingFinished() {}
 }
 
 final class LoadingImageView: UIImageView {
@@ -215,6 +217,7 @@ final class LoadingImageView: UIImageView {
     
     private func finishLoading(data: Data?, animated: Bool = false) {
         var image: UIImage?
+        loadingImageViewDelegate?.loadingFinished()
         if let data = data {
             let format = ImageFormat.get(from: data)
             switch format {
@@ -231,7 +234,7 @@ final class LoadingImageView: UIImageView {
     private func finishLoading(image: UIImage?, animated: Bool = false) {
         path = nil
         url = nil
-        
+        loadingImageViewDelegate?.loadingFinished()
         DispatchQueue.toMain { [weak self] in
             guard let `self` = self else {
                 return
