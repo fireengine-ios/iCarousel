@@ -291,7 +291,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /// present PasscodeEnterViewController
         let passcodeController = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
-        passcodeController.modalPresentationStyle = .overFullScreen
         passcodeController.success = {
             topVC?.dismiss(animated: true, completion: {
                 self.firstResponder?.becomeFirstResponder()
@@ -299,6 +298,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let navVC = NavigationController(rootViewController: passcodeController)
+        navVC.modalPresentationStyle = .overFullScreen
         
         topVC?.present(navVC, animated: false, completion: nil)
     }

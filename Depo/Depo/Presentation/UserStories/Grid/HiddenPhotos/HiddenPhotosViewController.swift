@@ -77,6 +77,11 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     }
     
     @objc private func onRefresh() {
+        if dataSource.isSelectionStateActive {
+            collectionView.refreshControl?.endRefreshing()
+            return
+        }
+        
         reloadData()
     }
     

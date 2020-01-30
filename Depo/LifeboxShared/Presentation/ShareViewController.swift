@@ -81,6 +81,7 @@ final class ShareViewController: UIViewController, ShareController {
         let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         
         let navVC = UINavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .overFullScreen
         self.navVC = navVC
         
         vc.success = {

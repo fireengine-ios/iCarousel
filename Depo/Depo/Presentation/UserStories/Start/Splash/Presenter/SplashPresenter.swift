@@ -66,6 +66,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         }
         
         let navVC = NavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .overFullScreen
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             rootVC.present(navVC, animated: true, completion: nil)
