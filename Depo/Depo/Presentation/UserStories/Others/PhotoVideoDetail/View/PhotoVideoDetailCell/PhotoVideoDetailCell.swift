@@ -12,6 +12,7 @@ import WebKit
 protocol PhotoVideoDetailCellDelegate: class {
     func tapOnSelectedItem()
     func tapOnCellForFullScreen()
+    func imageLoadingFinished()
 }
 
 final class PhotoVideoDetailCell: UICollectionViewCell {
@@ -39,7 +40,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        imageScrollView.imageViewDelegate = self
         contentView.addSubview(webView)
         
         if #available(iOS 11.0, *) {
@@ -175,5 +176,11 @@ extension PhotoVideoDetailCell: UIGestureRecognizerDelegate {
             return false
         }
         return true
+    }
+}
+
+extension PhotoVideoDetailCell: ImageScrollViewDelegate {
+    func imageViewFinishedLoading() {
+        delegate?.imageLoadingFinished()
     }
 }
