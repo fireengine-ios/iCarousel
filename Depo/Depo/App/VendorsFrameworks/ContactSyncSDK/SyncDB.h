@@ -17,7 +17,7 @@
 #define COLUMN_REMOTE_UPDATE_DATE @"REMOTE_UPDATE_DATE"
 #define COLUMN_CHECKSUM @"CHECKSUM"
 
-#define SYNC_DB_FILE_NAME @"contact_sync_sdk_200120.db"
+#define SYNC_DB_FILE_NAME @"contact_sync_sdk_210120.db"
 
 typedef void(^SyncDBMutexRun)(sqlite3 *db);
 

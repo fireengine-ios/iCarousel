@@ -548,6 +548,10 @@
     NSMutableArray *ret = [NSMutableArray new];
     for(id source in [self getDefaultSources]){
         CFTypeRef sourceRef = (__bridge CFTypeRef) source;
+        if (sourceRef == NULL) {
+            SYNC_Log(@"Source reference is not found!!!");
+            continue;
+        }
         CFArrayRef sourceContacts = ABAddressBookCopyArrayOfAllPeopleInSource(_addressBook, sourceRef);
         CFTypeRef sourceNameRef = ABRecordCopyValue(sourceRef, kABSourceNameProperty);
         

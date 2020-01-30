@@ -28,7 +28,7 @@
     if (self){
         _debug = YES;
         _dryRun = YES;
-        _environment = SYNCDevelopmentEnvironment;
+        _environment = SYNCTestEnvironment;
         _syncInterval = SYNC_DEFAULT_INTERVAL;
         _delayInterval = SYNC_DEFAULT_DELAY;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
