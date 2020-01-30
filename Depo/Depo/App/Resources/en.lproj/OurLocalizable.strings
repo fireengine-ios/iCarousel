@@ -1386,9 +1386,9 @@
 "unhide_items_popup_text" = "Item(s) will be unhidden. Are you sure?";
 "unhide_albums_popup_text" = "Album(s) will be unhidden. Are you sure?";
 "move_to_trash_hidden_albums_confirmation_popup_text" = "Album(s) will be sent to Trash Bin. Are you sure?";
-"delete_items_confirmation_popup_text" = "Deleting these item(s) will move them to Trash Bin. Are you sure you want to delete?";
-"delete_albums_confirmation_popup_text" = "Deleting these album(s) will move them to Trash Bin. Are you sure you want to delete?";
-"delete_folders_confirmation_popup_text" = "Deleting these folder(s) will move them to Trash Bin. Are you sure you want to delete?";
+"delete_items_confirmation_popup_text" = "Item(s) will be deleted permanantly from lifebox. Are you sure you want to delete?";
+"delete_albums_confirmation_popup_text" = "Album(s) will be deleted permanantly from lifebox. Are you sure you want to delete?";
+"delete_folders_confirmation_popup_text" = "Folder(s) will be deleted permanantly from lifebox. Are you sure you want to delete?";
 "restore_items_confirmation_popup_text" = "Item(s) will be restored. Are you sure?";
 "restore_albums_confirmation_popup_text" = "Album(s) will be restored. Are you sure?";
 "restore_folders_confirmation_popup_text" = "Folder(s) will be restored. Are you sure?";
