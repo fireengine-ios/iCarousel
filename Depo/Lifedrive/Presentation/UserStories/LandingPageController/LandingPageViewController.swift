@@ -84,6 +84,7 @@ final class LandingPageViewController: ViewController {
     
     private func trackScreen(pageNum: Int) {
         analyticsService.logScreen(screen: .welcomePage(pageNum))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.WelcomePage(pageNum: pageNum))
     }
     
     //MARK: Actions

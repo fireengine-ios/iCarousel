@@ -161,10 +161,162 @@
         case SYNC_RESULT_ERROR_PERMISSION_ADDRESS_BOOK:
             result = @"PERMISSION";
             break;
+        case SYNC_RESULT_ERROR_DEPO:
+            result = @"DEPO_ERROR";
+            break;
         default:
             result = @"";
     }
     
+    return result;
+}
+
+-(void)notifyProgress:(PartialInfo*)partialInfo step:(SYNCStep)step progress:(double)progress {
+    if (partialInfo == nil) {
+        return;
+    }
+    
+    double result;
+    if (progress > 100) {
+        result = 100;
+    } else if (progress < 0) {
+        result = 0;
+    } else {
+        result = progress;
+    }
+    
+    BOOL backup = [SyncSettings shared].mode == SYNCBackup;
+    NSMutableDictionary *weight = [NSMutableDictionary new];
+    if (backup) {
+        [weight setObject:[[NSNumber alloc] initWithDouble:5.0] forKey:@(SYNC_STEP_INITIAL)];
+        
+        // %90
+        [weight setObject:[[NSNumber alloc] initWithDouble:20.0] forKey:@(SYNC_STEP_READ_LOCAL_CONTACTS)];
+        [weight setObject:[[NSNumber alloc] initWithDouble:25.0] forKey:@(SYNC_STEP_ANALYZE)];
+        [weight setObject:[[NSNumber alloc] initWithDouble:50.0] forKey:@(SYNC_STEP_SERVER_IN_PROGRESS)];
+        [weight setObject:[[NSNumber alloc] initWithDouble:5.0] forKey:@(SYNC_STEP_PROCESSING_RESPONSE)];
+        
+        [weight setObject:[[NSNumber alloc] initWithDouble:5.0] forKey:@(SYNC_STEP_UPLOAD_LOG)];
+    } else {
+        [weight setObject:[[NSNumber alloc] initWithDouble:5.0] forKey:@(SYNC_STEP_INITIAL)];
+        
+        // %90
+        [weight setObject:[[NSNumber alloc] initWithDouble:35.0] forKey:@(SYNC_STEP_VCF)];
+        [weight setObject:[[NSNumber alloc] initWithDouble:35.0] forKey:@(SYNC_STEP_ANALYZE)];
+        [weight setObject:[[NSNumber alloc] initWithDouble:25.0] forKey:@(SYNC_STEP_SERVER_IN_PROGRESS)];
+        [weight setObject:[[NSNumber alloc] initWithDouble:5.0] forKey:@(SYNC_STEP_PROCESSING_RESPONSE)];
+        
+        [weight setObject:[[NSNumber alloc] initWithDouble:5.0] forKey:@(SYNC_STEP_UPLOAD_LOG)];
+    }
+    
+    switch (step) {
+        case SYNC_STEP_INITIAL:
+            result = result * ([[weight objectForKey:@(SYNC_STEP_INITIAL)] doubleValue] / 100.0);
+            break;
+        case SYNC_STEP_VCF:
+        case SYNC_STEP_READ_LOCAL_CONTACTS:
+        case SYNC_STEP_ANALYZE:
+        case SYNC_STEP_SERVER_IN_PROGRESS:
+        case SYNC_STEP_PROCESSING_RESPONSE:
+            result = [self calculatePrevProgress:partialInfo step:step weight:weight backup:backup] +
+            [self calculateProgress:partialInfo.totalStep currentStep:partialInfo.currentStep weight:[[weight objectForKey:@(step)] doubleValue] progress:progress backup:backup];
+            break;
+        case SYNC_STEP_UPLOAD_LOG:
+            result = 95 + (result * ([[weight objectForKey:@(SYNC_STEP_UPLOAD_LOG)] doubleValue] / 100.0));
+            break;
+    }
+    
+    _step = step;
+    
+//    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+//    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+//    [formatter setMaximumFractionDigits:2];
+//    [formatter setRoundingMode: NSNumberFormatterRoundHalfUp];
+//    result = [[formatter stringFromNumber:[NSNumber numberWithFloat:result]] doubleValue];
+    if ([_progress doubleValue] != 0 && [_progress doubleValue] > result) {
+        SYNC_Log(@"Something went wrong. PROGRESS: %f - %f Step: %@", result, [_progress doubleValue], @(step));
+    }
+    _progress = [[NSNumber alloc] initWithDouble:result];
+    
+    SYNC_Log(@"PROGRESS: %f Step: %@", result, @(step));
+    
+    void (^callback)(void) = [SyncSettings shared].progressCallback;
+    if (callback){
+        callback();
+    }
+}
+
+-(double)calculateProgress:(NSInteger)totalStep currentStep:(NSInteger)currentStep weight:(double)weight progress:(double)progress backup:(BOOL)backup {
+    double onePartPercentage;
+    if (backup) {
+        if (totalStep == 1) {
+            onePartPercentage = 90.0 / totalStep;
+        } else if (totalStep == currentStep) {
+            onePartPercentage = 90.0 / 2.0;
+        } else {
+            onePartPercentage = 90.0 / (((totalStep - 1) * 2.0) - 0);
+        }
+    } else {
+        onePartPercentage = 90.0 / totalStep;
+    }
+    double thisStepTotalPercentage = (onePartPercentage * weight) / 100.0;
+    double thisStepCurrentPercentage = (thisStepTotalPercentage * progress) / 100.0;
+    return thisStepCurrentPercentage;
+}
+
+-(double)calculatePrevProgress:(PartialInfo*)partialInfo step:(SYNCStep)step weight:(NSDictionary*)weight backup:(BOOL)backup{
+    double result = 0;
+    NSArray *weigths = nil;
+    if (backup) {
+        if (step == SYNC_STEP_READ_LOCAL_CONTACTS) {
+            weigths = @[@(SYNC_STEP_INITIAL)];
+        } else if (step == SYNC_STEP_ANALYZE) {
+            weigths = @[@(SYNC_STEP_INITIAL),
+                        @(SYNC_STEP_READ_LOCAL_CONTACTS)];
+        } else if (step == SYNC_STEP_SERVER_IN_PROGRESS) {
+            weigths = @[@(SYNC_STEP_INITIAL),
+                        @(SYNC_STEP_READ_LOCAL_CONTACTS),
+                        @(SYNC_STEP_ANALYZE)];
+        } else if (step == SYNC_STEP_PROCESSING_RESPONSE) {
+            weigths = @[@(SYNC_STEP_INITIAL),
+                        @(SYNC_STEP_READ_LOCAL_CONTACTS),
+                        @(SYNC_STEP_ANALYZE),
+                        @(SYNC_STEP_SERVER_IN_PROGRESS)];
+        }
+    } else {
+        if (step == SYNC_STEP_VCF) {
+            weigths = @[@(SYNC_STEP_INITIAL)];
+        } else if (step == SYNC_STEP_SERVER_IN_PROGRESS) {
+            weigths = @[@(SYNC_STEP_INITIAL),
+                        @(SYNC_STEP_VCF)];
+        } else if (step == SYNC_STEP_PROCESSING_RESPONSE) {
+            weigths = @[@(SYNC_STEP_INITIAL),
+                        @(SYNC_STEP_VCF),
+                        @(SYNC_STEP_SERVER_IN_PROGRESS)];
+        } else if (step == SYNC_STEP_ANALYZE) {
+            weigths = @[@(SYNC_STEP_INITIAL),
+                        @(SYNC_STEP_VCF),
+                        @(SYNC_STEP_SERVER_IN_PROGRESS),
+                        @(SYNC_STEP_PROCESSING_RESPONSE)];
+        }
+    }
+    
+    for (id s in weigths) {
+        if ([s isEqual: @(SYNC_STEP_INITIAL)]) {
+            result += [[weight objectForKey:s] doubleValue];
+        } else {
+            result += [self calculateProgress:partialInfo.totalStep currentStep:partialInfo.currentStep weight:[[weight objectForKey:s] doubleValue] progress:100.0 backup:backup];
+        }
+    }
+    
+    if (backup) {
+        if (partialInfo.totalStep != 1) {
+            result += (90 * ((partialInfo.currentStep - 1) * 100.0) / (((partialInfo.totalStep - 1) * 2))) / 100.0;
+        }
+    } else {
+        result += (90 * ((partialInfo.currentStep - 1) * 100) / partialInfo.totalStep) / 100;
+    }
+
     return result;
 }
 

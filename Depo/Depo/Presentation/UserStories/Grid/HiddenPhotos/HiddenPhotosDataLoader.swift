@@ -34,6 +34,7 @@ final class HiddenPhotosDataLoader {
     private lazy var hiddenService = HiddenService()
     private lazy var fileService = WrapItemFileService()
     private lazy var albumService = PhotosAlbumService()
+    private lazy var analitycsService: AnalyticsService = factory.resolve()
     
     private var photoPage = 0
     private var currentAlbumsPage = 0
@@ -196,8 +197,10 @@ final class HiddenPhotosDataLoader {
         
         group.notify(queue: .main) {
             if let error = unhideError {
+                self.trackEvent(actionType: .unhide, status: .failure, items: selectedItems.photos + selectedItems.albums)
                 handler(.failed(error))
             } else {
+                self.trackEvent(actionType: .unhide, status: .success, items: selectedItems.photos + selectedItems.albums)
                 handler(.success(()))
             }
         }
@@ -229,8 +232,10 @@ final class HiddenPhotosDataLoader {
         
         group.notify(queue: .main) {
             if let error = deleteError {
+                self.trackEvent(actionType: .moveToTrash, status: .failure, items: selectedItems.photos + selectedItems.albums)
                 handler(.failed(error))
             } else {
+                self.trackEvent(actionType: .moveToTrash, status: .success, items: selectedItems.photos + selectedItems.albums)
                 handler(.success(()))
             }
         }
@@ -361,6 +366,7 @@ final class HiddenPhotosDataLoader {
     //MARK: - Unhide methods
     
     private func unhidePhotos(items: [Item], handler: @escaping ResponseVoid) {
+        analitycsService.trackFileOperationGAEvent(operationType: .unhide, items: items)
         fileService.unhide(items: items, success: {
             handler(.success(()))
         }, fail: { error in
@@ -392,6 +398,7 @@ final class HiddenPhotosDataLoader {
         
         if !peopleItems.isEmpty {
             group.enter()
+            analitycsService.trackFileOperationGAEvent(operationType: .unhide, itemsType: .people, itemsCount: peopleItems.count)
             fileService.unhidePeople(items: peopleItems, success: {
                 group.leave()
             }, fail: { error in
@@ -402,6 +409,7 @@ final class HiddenPhotosDataLoader {
         
         if !placesItems.isEmpty {
             group.enter()
+            analitycsService.trackFileOperationGAEvent(operationType: .unhide, itemsType: .places, itemsCount: placesItems.count)
             fileService.unhidePlaces(items: placesItems, success: {
                 group.leave()
             }, fail: { error in
@@ -412,6 +420,7 @@ final class HiddenPhotosDataLoader {
         
         if !thingsItems.isEmpty {
             group.enter()
+            analitycsService.trackFileOperationGAEvent(operationType: .unhide, itemsType: .things, itemsCount: thingsItems.count)
             fileService.unhideThings(items: thingsItems, success: {
                 group.leave()
             }, fail: { error in
@@ -422,6 +431,7 @@ final class HiddenPhotosDataLoader {
         
         if !albumItems.isEmpty {
             group.enter()
+            analitycsService.trackFileOperationGAEvent(operationType: .unhide, itemsType: .albums, itemsCount: albumItems.count)
             fileService.unhideAlbums(albumItems, success: {
                 group.leave()
             }, fail: { error in
@@ -442,6 +452,7 @@ final class HiddenPhotosDataLoader {
     //MARK: - Move to trash methods
 
     private func moveToTrashPhotos(items: [Item], handler: @escaping ResponseVoid) {
+        analitycsService.trackFileOperationGAEvent(operationType: .trash, items: items)
         fileService.moveToTrash(files: items, success: {
             handler(.success(()))
         }, fail: { errorResponse in
@@ -473,6 +484,7 @@ final class HiddenPhotosDataLoader {
         
         if !peopleItems.isEmpty {
             group.enter()
+            analitycsService.trackFileOperationGAEvent(operationType: .trash, itemsType: .people, itemsCount: peopleItems.count)
             fileService.moveToTrashPeople(items: peopleItems, success: {
                 group.leave()
             }, fail: { error in
@@ -483,6 +495,7 @@ final class HiddenPhotosDataLoader {
         
         if !placesItems.isEmpty {
             group.enter()
+            analitycsService.trackFileOperationGAEvent(operationType: .trash, itemsType: .places, itemsCount: placesItems.count)
             fileService.moveToTrashPlaces(items: placesItems, success: {
                 group.leave()
             }, fail: { error in
@@ -493,6 +506,7 @@ final class HiddenPhotosDataLoader {
         
         if !thingsItems.isEmpty {
             group.enter()
+            analitycsService.trackFileOperationGAEvent(operationType: .trash, itemsType: .things, itemsCount: thingsItems.count)
             fileService.moveToTrashThings(items: thingsItems, success: {
                 group.leave()
             }, fail: { error in
@@ -503,6 +517,7 @@ final class HiddenPhotosDataLoader {
         
         if !albumItems.isEmpty {
             group.enter()
+            analitycsService.trackFileOperationGAEvent(operationType: .trash, itemsType: .albums, itemsCount: albumItems.count)
             albumService.moveToTrash(albums: albumItems, success: { trashedAlbums in
                 group.leave()
             }, fail: { errorResponse in
@@ -517,6 +532,32 @@ final class HiddenPhotosDataLoader {
             } else {
                 handler(.success(()))
             }
+        }
+    }
+    
+    //MARK: - Tracking
+    
+    private func trackEvent(actionType: ElementTypes, status: NetmeraEventValues.GeneralStatus, items: [BaseDataSourceItem]) {
+        
+        let typeToCountDictionary = NetmeraService.getItemsTypeToCount(items: items)
+
+        switch actionType {
+        case .restore, .unhide:
+            typeToCountDictionary.keys.forEach {
+                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Unhide(status: status, type: $0, count: count) else {
+                    return
+                }
+                AnalyticsService.sendNetmeraEvent(event: event)
+            }
+        case .moveToTrash:
+            typeToCountDictionary.keys.forEach {
+                guard let count = typeToCountDictionary[$0], let event = NetmeraEvents.Actions.Trash(status: status, type: $0, count: count) else {
+                    return
+                }
+                AnalyticsService.sendNetmeraEvent(event: event)
+            }
+        default:
+            break
         }
     }
 }

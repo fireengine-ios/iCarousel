@@ -56,11 +56,13 @@ struct RouteRequests {
         }
     }()
     
-    static let baseContactsUrl: URL = {
+    static let baseContactsUrl: URL = baseContactsUrlShort +/ "ttyapi/"
+    
+    static let baseContactsUrlShort: URL = {
         switch currentServerEnvironment {
-        case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/ttyapi/")!
-        case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/ttyapi/")!
-        case .production: return URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
+        case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/")!
+        case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/")!
+        case .production: return URL(string: "https://contactsync.turkcell.com.tr/")!
         }
     }()
     

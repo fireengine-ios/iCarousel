@@ -17,6 +17,7 @@ class IntroduceInteractor: IntroduceInteractorInput {
     }
     
     func trackScreen(pageNum: Int) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.WelcomePage(pageNum: pageNum))
         analyticsManager.logScreen(screen: .welcomePage(pageNum))
     }
 }

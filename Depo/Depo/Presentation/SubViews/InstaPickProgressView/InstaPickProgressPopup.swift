@@ -11,6 +11,7 @@ import SDWebImage
 
 protocol InstaPickProgressPopupDelegate {
     func analyzeDidComplete(analyzeResult: AnalyzeResult)
+    func analyzeDidFail()
 }
 
 final class InstaPickProgressPopup: ViewController, NibInit {
@@ -135,6 +136,7 @@ final class InstaPickProgressPopup: ViewController, NibInit {
                     self?.delegate?.analyzeDidComplete(analyzeResult: result)
                 })
             case .failed(let error):
+                self?.delegate?.analyzeDidFail()
                 self?.showError(error)
             }
         }

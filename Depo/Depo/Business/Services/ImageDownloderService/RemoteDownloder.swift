@@ -96,11 +96,18 @@ class ImageDownloder {
         
         let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global())
         operation.outputBlock = { [weak self] _, data in
-            guard let `self` = self, let data = data else {
+            guard let self = self else {
                 completeImage(nil)
                 return
             }
+            
             self.tokenList[trimmedUrl] = nil
+            
+            guard let data = data else {
+                completeImage(nil)
+                return
+            }
+            
             SDWebImageManager.shared().imageCache?.storeImageData(toDisk: data, forKey: cachePath)
             completeImage(data)
         }
@@ -131,11 +138,18 @@ class ImageDownloder {
         
         let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global())
         operation.outputBlock = { [weak self] image, _ in
-            guard let `self` = self, let image = image as? UIImage else {
+            guard let self = self else {
                 completeImage(nil)
                 return
             }
+            
             self.tokenList[trimmedUrl] = nil
+            
+            guard let image = image as? UIImage else {
+                completeImage(nil)
+                return
+            }
+            
             SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: nil)
             completeImage(image)
         }

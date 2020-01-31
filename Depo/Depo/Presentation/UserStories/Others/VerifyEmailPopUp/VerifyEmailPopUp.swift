@@ -356,7 +356,7 @@ extension VerifyEmailPopUp {
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
                                                           eventActions: .otp,
                                                           eventLabel: .confirmStatus(isSuccess: true))
-                
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.EmailVerification(action: .success))
                 DispatchQueue.main.async { [weak self] in
                     self?.hidePopUp {
                         let popUp = EmailVerifiedPopUp.with(image: .custom(UIImage(named: "Path")),
@@ -375,6 +375,7 @@ extension VerifyEmailPopUp {
                 }
                 
             case .failed(let error):
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.EmailVerification(action: .failure))
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .emailVerification,
                                                           eventActions: .otp,
                                                           eventLabel: .confirmStatus(isSuccess: false),
