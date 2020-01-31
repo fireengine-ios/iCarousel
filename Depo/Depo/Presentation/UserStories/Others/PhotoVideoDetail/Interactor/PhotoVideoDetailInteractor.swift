@@ -80,10 +80,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         let removedObject = array[index]
             
         array.remove(at: index)
-        
-        if index >= array.count {
-            selectedIndex = array.count - 1
-        }
 
         switch type {
         case .hide, .unhide, .delete:
@@ -101,7 +97,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 self?.output.goBack()
             }
         } else {
-            output.updateItems(objects: array, selectedIndex: selectedIndex ?? index, isRightSwipe: isRightSwipe)
+            let nextIndex = index >= array.count ? array.count - 1 : index
+            selectedIndex = nextIndex
+            output.updateItems(objects: array, selectedIndex: nextIndex, isRightSwipe: isRightSwipe)
         }
     }
     
