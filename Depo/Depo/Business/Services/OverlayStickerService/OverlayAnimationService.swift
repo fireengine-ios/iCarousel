@@ -29,6 +29,7 @@ final class OverlayAnimationService {
     }
     
     private var numberOfFrames = 25
+    private let createVideoService = GIF2MP4()
     
     func combine(attachments: [UIImageView],
                   resultName: String,
@@ -81,7 +82,11 @@ final class OverlayAnimationService {
             }
         })
         
-        DispatchQueue.global(qos: .userInitiated).async { 
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            
+            guard let self = self else {
+                return
+            }
             
             let frameCount = attach.contains(where: { $0.images.count > 1}) ? self.numberOfFrames : 1
             
@@ -89,14 +94,14 @@ final class OverlayAnimationService {
 
             if frameCount > 1 {
         
-                GIF2MP4(images: frames)?.convertAndExport(fileName: resultName, completion: { url in
+                self.createVideoService.convertAndExport(images: frames, fileName: resultName) { url in
                     guard let url = url else {
                         completion(.failure(.unknown))
                         return
                     }
                     completion(.success(CreateOverlayStickersSuccessResult(url: url, type: .video)))
-                })
-            
+                }
+
             } else {
 
                 guard let image = frames.first else {

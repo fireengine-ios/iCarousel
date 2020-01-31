@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-enum LoginResponseError {
+enum LoginResponseError: Error {
     case block
     case needCaptcha
     case authenticationDisabledForAccount
@@ -302,7 +302,7 @@ extension SignupResponseError: LocalizedError {
 }
 
 
-enum SpotifyResponseError {
+enum SpotifyResponseError: Error {
     case importError
     case networkError
 

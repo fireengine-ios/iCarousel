@@ -138,6 +138,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     }
     
     @IBAction func onDeleteDuplicatedTapped(_ sender: Any) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .deleteDuplicate))
         output.startOperation(operationType: .analyze)
     }
     
@@ -145,17 +146,23 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     
     func setInitialState() {
         debugLog("SyncContactsViewController setInitialState")
-        viewForInformationAfterBackUp.setSubviewsHidden(true)
         cancelButton.isHidden = true
         operationButtonsStackView.isHidden = true
         manageContactsButton.isHidden = true
+        
+        //FE-2066 Contact Sync SDK Update - HIDE INFO VIEW
+        viewForInformationAfterBackUp.isHidden = true
+//        viewForInformationAfterBackUp.setSubviewsHidden(true)
     }
     
     func setStateWithoutBackUp() {
         debugLog("SyncContactsViewController setStateWithoutBackUp")
         titleLabel.text = TextConstants.settingsBackUpNeverDidIt
         backupDateLabel.text = TextConstants.settingsBackUpNewer
-        viewForInformationAfterBackUp.setSubviewsHidden(true)
+        
+        //FE-2066 Contact Sync SDK Update - HIDE INFO VIEW
+        //If need to show backup info - uncomment this line
+//        viewForInformationAfterBackUp.setSubviewsHidden(true)
         cancelButton.isHidden = true
         restoreButton.isHidden = true
         backUpButton.isHidden = false
@@ -169,7 +176,10 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         debugLog("SyncContactsViewController setStateWithBackUp")
         gradientLoaderIndicator.resetProgress()
         titleLabel.attributedText = titleLabelAttributedTextBeforeBackup
-        viewForInformationAfterBackUp.setSubviewsHidden(false)
+        
+        //FE-2066 Contact Sync SDK Update - HIDE INFO VIEW
+        //If need to show backup info - uncomment these lines
+//        viewForInformationAfterBackUp.setSubviewsHidden(false)
         cancelButton.isHidden = true
         restoreButton.isHidden = false
         backUpButton.isHidden = false
@@ -177,11 +187,13 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         operationButtonsStackView.isHidden = false
         backupDateLabel.isHidden = false
         manageContactsButton.isHidden = false
-        viewForInformationAfterBackUp.isHidden = false
+//        viewForInformationAfterBackUp.isHidden = false
     }
     
     func setOperationState(operationType: SyncOperationType) {
-        viewForInformationAfterBackUp.setSubviewsHidden(true)
+        //FE-2066 Contact Sync SDK Update - HIDE INFO VIEW
+        //If need to show backup info - uncomment this line
+//        viewForInformationAfterBackUp.setSubviewsHidden(true)
         operationButtonsStackView.isHidden = true
         backupDateLabel.isHidden = true
         manageContactsButton.isHidden = true

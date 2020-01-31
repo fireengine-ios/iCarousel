@@ -885,6 +885,7 @@ extension TabBarViewController: TabBarActionHandler {
             router.pushViewController(viewController: controller)
 
         case .upload:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .uploadFromPlus))
             guard !checkReadOnlyPermission() else { return }
             
             let controller = router.uploadPhotos()
@@ -934,6 +935,7 @@ extension TabBarViewController: TabBarActionHandler {
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
         case .importFromSpotify:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .spotifyImport))
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .importSpotify)
             spotifyRoutingService.connectToSpotify(isSettingCell: false, completion: nil)
         }

@@ -131,7 +131,7 @@ class SegmentedController: BaseViewController, NibInit {
     }
     
     func switchSegment(to index: Int) {
-        if segmentedControl.numberOfSegments > index {
+        if segmentedControl.numberOfSegments > index, segmentedControl.selectedSegmentIndex != index {
             segmentedControl.selectedSegmentIndex = index
             segmentDidChange(segmentedControl)
         }

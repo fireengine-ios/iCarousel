@@ -1,6 +1,6 @@
 "update_required" = "Update Required";
 "update_found" = "Update Found";
-"install_" = "Install";
+"install_" = "Install New Version";
 "downloading_new_version" = "Downloading new version...";
 "exit_application" = "Exit";
 "remind_me_later" = "Remind me";

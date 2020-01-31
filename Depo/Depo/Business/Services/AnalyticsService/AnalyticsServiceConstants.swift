@@ -6,6 +6,8 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
+import FirebaseAnalytics
+
 enum AnalyticsEvent {
     case signUp
     case login
@@ -257,6 +259,11 @@ enum AnalyticsAppScreens {
     case standardUserWithFIGroupingOnPopUp
     case smashPreview
     
+    case saveHiddenSuccessPopup
+    case hiddenBin
+    case trashBin
+    case fileOperationConfirmPopup(GAOperationType)
+    
     var name: String {
         switch self {
         ///authorization
@@ -457,6 +464,14 @@ enum AnalyticsAppScreens {
             return "Standard User With F/I Grouping ON Pop Up"
         case .smashPreview:
             return "Smash Preview"
+        case .saveHiddenSuccessPopup:
+            return "Save Hidden Successfully Pop Up"
+        case .hiddenBin:
+            return "Hidden Bin"
+        case .trashBin:
+            return "Trash Bin"
+        case .fileOperationConfirmPopup(let operationType):
+            return operationType.confirmPopupEventActionText
         }
     }
 }
@@ -523,20 +538,43 @@ enum GACustomEventKeys {
     case category
     case action
     case label
+    case value
     
     var key: String {
         switch self {
         case .category:
-            return "GAeventCategory"
+            return "eventCategory"
         case .action:
-            return "GAeventActions"
+            return "eventAction"
         case .label:
-            return "GAeventLabel"
+            return "eventLabel"
+        case .value:
+            return "eventValue"
         }
     }
 }
 
-enum GAEventCantegory {
+enum GACustomEventsType {
+    case event
+    case screen
+    case purchase
+    case selectContent
+    
+    var key: String {
+        switch self {
+        case .event:
+            return "GAEvent"
+        case .screen:
+            return "screenView"
+        case .purchase:
+            return AnalyticsEventEcommercePurchase
+        case .selectContent:
+            return AnalyticsEventSelectContent
+        }
+    }
+}
+
+enum GAEventCategory {
     case enhancedEcommerce
     case functions
     case videoAnalytics
@@ -647,8 +685,15 @@ enum GAEventAction {
     case smashSave
     case smashConfirmPopUp
     case smashSuccessPopUp
-    case smashFIGroupingOff
+    case nonStandardUserWithFIGroupingOff
+    case standardUserWithFIGroupingOff
+    case standardUserWithFIGroupingOn
+    case hiddenBin
+    case trashBin
+    case saveHiddenSuccessPopup
     
+    case fileOperation(GAOperationType)
+    case fileOperationPopup(GAOperationType)
 
     var text: String {
         switch self {
@@ -779,31 +824,63 @@ enum GAEventAction {
             return "Smash Confirm Pop up"
         case .smashSuccessPopUp:
             return "Save Smash Successfully Pop Up"
-        case .smashFIGroupingOff:
+        case .nonStandardUserWithFIGroupingOff:
+            return "NonStandard User With F/I Grouping OFF Pop Up"
+        case .standardUserWithFIGroupingOff:
             return "Standard User With F/I Grouping OFF Pop Up"
+        case .standardUserWithFIGroupingOn:
+            return "Standard User With F/I Grouping ON Pop Up"
         case .smashSave:
             return "Smash Save"
+        case .hiddenBin:
+            return "Hidden Bin"
+        case .trashBin:
+            return "Trash bin"
+        case .saveHiddenSuccessPopup:
+            return "Save Hidden Successfully Pop Up"
+        case .fileOperation(let operationType):
+            return operationType.eventActionText
+        case .fileOperationPopup(let operationType):
+            return operationType.popupEventActionText
         }
     }
 }
 
 enum GAEventLabel {
     enum FileType {
-        case music
-        case video
         case photo
+        case video
+        case people
+        case things
+        case places
+        case story
+        case albums
         case document
+        case music
+        case folder
         
         var text: String {
             switch self {
-            case .music:
-                return "Music"
-            case .video:
-                return "Video"
             case .photo:
                 return "Photo"
+            case .video:
+                return "Video"
+            case .people:
+                return "Person"
+            case .things:
+                return "Thing"
+            case .places:
+                return "Place"
+            case .story:
+                return "Story"
+            case .albums:
+                return "Album"
             case .document:
                 return "Document"
+            case .music:
+                return "Music"
+            case .folder:
+                return "Folder"
             }
         }
     }
@@ -992,9 +1069,11 @@ enum GAEventLabel {
     }
     
     case empty
+    case custom(String)
     
     case success
     case failure
+    case result(Error?)
     case feedbackOpen
     case feedbackSend
     case download(FileType)
@@ -1078,15 +1157,20 @@ enum GAEventLabel {
     case becomePremium
     case proceedWithExistingPeople    
     case divorceButtonVideo
+    case fileTypeOperation(FileType)
     
     var text: String {
         switch self {
         case .empty:
             return ""
+        case .custom(let value):
+            return value
         case .success:
             return "Success"
         case .failure:
             return "Failure"
+        case .result(let error):
+            return error == nil ? "Success" : "Failure"
         case .feedbackOpen:
             return "Open"
         case .feedbackSend:
@@ -1271,6 +1355,8 @@ enum GAEventLabel {
             return "Proceed With Existing People"
         case .divorceButtonVideo:
             return "Divorce Button Video"
+        case .fileTypeOperation(let fileType):
+            return fileType.text
         }
     }
     
@@ -1320,6 +1406,7 @@ enum GADementionsFields {
     case twoFactorAuth
     case spotify
     case dailyDrawleft
+    case itemsCount(GAOperationType)
     
     var text: String {
         switch self {
@@ -1369,6 +1456,8 @@ enum GADementionsFields {
             return "connectStatus"
         case .dailyDrawleft:
             return "dailyDrawleft"
+        case .itemsCount(let operationType):
+            return operationType.itemsCountText
         }
     }
     
@@ -1402,6 +1491,8 @@ enum GAMetrics {
 }
 
 enum GADementionValues {
+    typealias ItemsOperationCount = (count: Int, operationType: GAOperationType)
+    
     enum login {
         case gsm
         case email
@@ -1659,6 +1750,83 @@ enum GADementionValues {
                 return "SEQURITY_QUESTION_ANSWER_IS_INVALID"
                 
             }
+        }
+    }
+}
+
+enum GAOperationType {
+    case hide
+    case unhide
+    case delete
+    case trash
+    case restore
+    
+    var eventActionText: String {
+        switch self {
+        case .hide:
+            return "Hide"
+        case .unhide:
+            return "Unhide"
+        case .delete:
+            return "Delete"
+        case .trash:
+            return "Trash"
+        case .restore:
+            return "Restore"
+        }
+    }
+    
+    var popupEventActionText: String {
+        switch self {
+        case .hide:
+            return "Hide Pop up"
+        case .unhide:
+            return "Unhide Pop up"
+        case .delete:
+            return "Delete Permanently Pop up"
+        case .trash:
+            return "Delete Pop up"
+        case .restore:
+            return "Restore Pop up"
+        }
+    }
+    
+    var confirmPopupEventActionText: String {
+        switch self {
+        case .hide:
+            return "Hide Confirm Pop up"
+        case .unhide:
+            return "Unhide Confirm Pop up"
+        case .delete:
+            return "Delete Permanently Confirm Pop up"
+        case .trash:
+            return "Delete Confirm Pop up"
+        case .restore:
+            return "Restore Confirm Pop up"
+        }
+    }
+    
+    var itemsCountText: String {
+        switch self {
+        case .hide:
+            return "countOfHiddenItems"
+        case .unhide:
+            return "countOfUnhiddenItems"
+        case .delete:
+            return "countOfDeletedItems"
+        case .trash:
+            return "countOfTrashedItems"
+        case .restore:
+            return "countOfRestoredItems"
+        }
+    }
+    
+    var checkingTypes: [GAEventLabel.FileType] {
+        switch self {
+        case .hide, .unhide:
+            return [.photo, .video, .story]
+        case .delete, .trash, .restore:
+            return [.photo, .video, .story, .music, .document, .folder]
         }
     }
 }

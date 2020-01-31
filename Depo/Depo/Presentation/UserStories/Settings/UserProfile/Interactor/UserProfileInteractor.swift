@@ -25,6 +25,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
     var secretQuestionsResponse: SecretQuestionsResponse?
     
     func viewIsReady() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PhotoEditScreen())
         analyticsManager.logScreen(screen: .profileEdit)
         analyticsManager.trackDimentionsEveryClickGA(screen: .profileEdit)
         

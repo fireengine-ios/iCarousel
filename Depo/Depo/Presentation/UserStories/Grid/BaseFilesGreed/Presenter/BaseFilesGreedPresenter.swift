@@ -540,11 +540,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func setupNewBottomBarConfig() {
-        guard let barConfig = interactor.bottomBarConfig,
-            let array = dataSource.getSelectedItems() as? [Item] else {
-                return
+        guard let barConfig = interactor.bottomBarConfig else {
+            return
         }
-        bottomBarPresenter?.setupTabBarWith(items: array, originalConfig: barConfig)
+        
+        let selectedItems = dataSource.getSelectedItems()
+        bottomBarPresenter?.setupTabBarWith(items: selectedItems, originalConfig: barConfig)
     }
     
     func onMoreActions(ofItem: Item?, sender: Any) {

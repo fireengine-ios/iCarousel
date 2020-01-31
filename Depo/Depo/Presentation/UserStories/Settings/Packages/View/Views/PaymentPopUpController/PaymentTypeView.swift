@@ -33,7 +33,7 @@ final class PaymentTypeView: UIView, NibInit {
     @IBOutlet private weak var subtitleLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.lightText
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 16)
+            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
         }
     }
     @IBOutlet private weak var actionButton: BlueButtonWithMediumWhiteText! {

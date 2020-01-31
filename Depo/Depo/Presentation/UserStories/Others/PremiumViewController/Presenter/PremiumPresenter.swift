@@ -187,6 +187,7 @@ extension PremiumPresenter: PremiumViewOutput {
         view.startActivityIndicator()
         premiumView.delegate = self
         interactor.getAccountType()
+        interactor.trackScreen()
     }
 }
 

@@ -9,6 +9,7 @@
 class LBAlbumLikePreviewSliderRouter {
     
     let router = RouterVC()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     // MARK: - Utility methods
     
@@ -48,6 +49,7 @@ class LBAlbumLikePreviewSliderRouter {
     }
     
     private func goToHiddenView() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .hiddenBin)
         let controller = router.hiddenPhotosViewController()
         router.pushViewControllertoTableViewNavBar(viewController: controller)
     }
