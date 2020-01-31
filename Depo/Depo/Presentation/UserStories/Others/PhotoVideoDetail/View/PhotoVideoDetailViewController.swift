@@ -113,6 +113,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
+        
+        showSpinner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -381,6 +383,11 @@ extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
+    
+    func imageLoadingFinished() {
+       hideSpinner()
+    }
+    
     func tapOnCellForFullScreen() {
         isFullScreen.toggle()
     }
