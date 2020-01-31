@@ -48,25 +48,12 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         
         if fileObject.isLocalItem {
             let localId = fileObject.getLocalID()
-            for (index, item) in items.enumerated() {
-                if localId == item.getLocalID() {
-                    selectedIndex = index
-                    break
-                }
+            if let index = items.firstIndex(where: { $0.getLocalID() == localId }) {
+                selectedIndex = index
             }
-        } else {
-            for (index, item) in items.enumerated() {
-                guard let id = fileObject.id else {
-                    continue
-                }
-                if id == item.id {
-                    selectedIndex = index
-                    break
-                }
-            }
+        } else if let index = items.firstIndex(where: { $0.id != nil && $0.id == fileObject.id }) {
+            selectedIndex = index
         }
-        
-        
     }
     
     func onViewIsReady() {
@@ -93,12 +80,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         let removedObject = array[index]
             
         array.remove(at: index)
-        
-        if index >= array.count {
-            selectedIndex = array.count - 1
-        }
-        
-        
+
         switch type {
         case .hide, .unhide, .delete:
             ///its already being called from different place, we dont need to call
@@ -115,7 +97,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 self?.output.goBack()
             }
         } else {
-            output.updateItems(objects: array, selectedIndex: index, isRightSwipe: isRightSwipe)
+            let nextIndex = index >= array.count ? array.count - 1 : index
+            selectedIndex = nextIndex
+            output.updateItems(objects: array, selectedIndex: nextIndex, isRightSwipe: isRightSwipe)
         }
     }
     
