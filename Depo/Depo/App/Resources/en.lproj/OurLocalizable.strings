@@ -1001,7 +1001,8 @@
 "terms_of_use" = "Terms of Use";
 "privacy_policy" = "Privacy Policy";
 "face_tags_description_standart" = "When you enable Face&Image Recognition feature, the photos you have uploaded will be grouped according to the faces and objects. If the location service option is turned on, the photos will also be grouped according to the location information. We will be able to create automated stories for you based on this grouping.";
-"terms_and_use_introduction_checkbox" = "I have read and accepted Terms of Use.\nClick for Privacy Policy details.";
+"terms_and_use_introduction_checkbox" = "I have read and accepted Terms of Use.";
+"privacy_policy" = "For detailed information about your personal data that we collect through lifebox, please read our Privacy Policy.";
 "privacy_policy_condition" = "Privacy Policy";
 "photo_pick_description" = "If you enable the button and connect your Instagram account, we'll be able to provide a personalized, enhanced experience by performing custom analysis on each new PhotoPick analysis.";
 

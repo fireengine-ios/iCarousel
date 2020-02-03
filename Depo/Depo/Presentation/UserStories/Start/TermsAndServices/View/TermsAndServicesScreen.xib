@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermsAndServicesViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermsAndServicesViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
                 <outlet property="acceptButton" destination="kkM-36-uGV" id="Ue8-fu-Mch"/>
                 <outlet property="checkboxesStack" destination="aEZ-sm-9UL" id="K6f-Po-2eV"/>
                 <outlet property="contenViewHeightConstraint" destination="g9r-JR-XPs" id="4Rq-K7-2Bk"/>
                 <outlet property="contentView" destination="WTC-UM-kQA" id="81N-TF-ger"/>
+                <outlet property="privacyPolicyTextView" destination="Khr-2R-F8m" id="TUd-UC-sjc"/>
+                <outlet property="privacyPolicyView" destination="t0s-px-gfW" id="ufn-7A-pm6"/>
                 <outlet property="scrollView" destination="wx0-Ty-pdf" id="2cr-dt-zJE"/>
                 <outlet property="topContraintIOS10" destination="Emx-2B-mwG" id="iRg-dw-zzO"/>
                 <outlet property="view" destination="iN0-l3-epB" id="dBd-vg-Lh5"/>
@@ -22,17 +24,17 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="777"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NavigationBarBackground" translatesAutoresizingMaskIntoConstraints="NO" id="W6m-KL-HEi">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="777"/>
                 </imageView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wx0-Ty-pdf">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="64" width="375" height="713"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="heF-JQ-sC2" userLabel="Container View">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="713"/>
                             <subviews>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="WTC-UM-kQA">
                                     <rect key="frame" x="22" y="56" width="331" height="300"/>
@@ -57,6 +59,25 @@
                                     <rect key="frame" x="24" y="367" width="327" height="149"/>
                                     <viewLayoutGuide key="safeArea" id="48Z-Jc-yGI"/>
                                 </stackView>
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t0s-px-gfW">
+                                    <rect key="frame" x="20" y="526" width="335" height="30"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" text="Lorem ipsum dolor sit er elit  Lorem ipsum dolor sit er elit Lorem ipsum dolor sit er elit " textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Khr-2R-F8m" customClass="IntrinsicTextView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                            <rect key="frame" x="10" y="10" width="315" height="10"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Khr-2R-F8m" secondAttribute="trailing" constant="10" id="PRS-GY-1Jq"/>
+                                        <constraint firstItem="Khr-2R-F8m" firstAttribute="top" secondItem="t0s-px-gfW" secondAttribute="top" constant="10" id="gp2-xn-lWD"/>
+                                        <constraint firstItem="Khr-2R-F8m" firstAttribute="leading" secondItem="t0s-px-gfW" secondAttribute="leading" constant="10" id="jKR-J1-4P8"/>
+                                        <constraint firstAttribute="bottom" secondItem="Khr-2R-F8m" secondAttribute="bottom" constant="10" id="lXk-cj-k7k"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -64,14 +85,17 @@
                                 <constraint firstItem="WTC-UM-kQA" firstAttribute="leading" secondItem="heF-JQ-sC2" secondAttribute="leading" constant="22" id="IFt-9p-mnX"/>
                                 <constraint firstItem="aEZ-sm-9UL" firstAttribute="top" secondItem="WTC-UM-kQA" secondAttribute="bottom" constant="11" id="Ifg-jX-3Pb"/>
                                 <constraint firstItem="WTC-UM-kQA" firstAttribute="top" secondItem="9Kb-k9-w6Q" secondAttribute="bottom" constant="10" id="Lui-dI-oc8"/>
+                                <constraint firstItem="t0s-px-gfW" firstAttribute="top" secondItem="aEZ-sm-9UL" secondAttribute="bottom" constant="10" id="U8v-U4-FeN"/>
                                 <constraint firstItem="9Kb-k9-w6Q" firstAttribute="top" secondItem="heF-JQ-sC2" secondAttribute="top" constant="21" id="Xpf-ka-piJ">
                                     <variation key="widthClass=regular" constant="50"/>
                                 </constraint>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aEZ-sm-9UL" secondAttribute="bottom" constant="87" id="a3z-f2-pr2"/>
                                 <constraint firstItem="aEZ-sm-9UL" firstAttribute="trailing" secondItem="WTC-UM-kQA" secondAttribute="trailing" constant="-2" id="bkx-nz-JO6"/>
                                 <constraint firstItem="aEZ-sm-9UL" firstAttribute="leading" secondItem="WTC-UM-kQA" secondAttribute="leading" constant="2" id="dvv-UV-FUs"/>
                                 <constraint firstAttribute="trailing" secondItem="WTC-UM-kQA" secondAttribute="trailing" constant="22" id="f7i-sh-hWx"/>
                                 <constraint firstItem="9Kb-k9-w6Q" firstAttribute="centerX" secondItem="heF-JQ-sC2" secondAttribute="centerX" id="hGm-ro-4kj"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="t0s-px-gfW" secondAttribute="bottom" constant="87" id="jAv-Uk-2ZF"/>
+                                <constraint firstItem="t0s-px-gfW" firstAttribute="leading" secondItem="heF-JQ-sC2" secondAttribute="leading" constant="20" symbolic="YES" id="joD-2r-tt3"/>
+                                <constraint firstAttribute="trailing" secondItem="t0s-px-gfW" secondAttribute="trailing" constant="20" symbolic="YES" id="r0V-Le-MEF"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -79,7 +103,7 @@
                         <constraint firstItem="heF-JQ-sC2" firstAttribute="leading" secondItem="wx0-Ty-pdf" secondAttribute="leading" id="JID-eL-sxn"/>
                         <constraint firstAttribute="trailing" secondItem="heF-JQ-sC2" secondAttribute="trailing" id="dak-sR-bFd"/>
                         <constraint firstItem="heF-JQ-sC2" firstAttribute="top" secondItem="wx0-Ty-pdf" secondAttribute="top" id="fkz-IE-lkR"/>
-                        <constraint firstAttribute="height" constant="603" id="g5b-DZ-iy1"/>
+                        <constraint firstAttribute="height" priority="250" constant="603" id="g5b-DZ-iy1"/>
                         <constraint firstAttribute="bottom" secondItem="heF-JQ-sC2" secondAttribute="bottom" id="iOi-yb-jHH"/>
                     </constraints>
                 </scrollView>
@@ -92,10 +116,10 @@
                     <variation key="widthClass=regular" image="group-2"/>
                 </imageView>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3Nh-mu-fNi">
-                    <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                    <rect key="frame" x="177.5" y="378.5" width="20" height="20"/>
                 </activityIndicatorView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkM-36-uGV" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
-                    <rect key="frame" x="53.5" y="596" width="268" height="55"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkM-36-uGV" customClass="BlueButtonWithWhiteText" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                    <rect key="frame" x="53.5" y="706" width="268" height="55"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="6qg-kG-aNA"/>
                         <constraint firstAttribute="width" constant="268" id="qVA-Ut-Wzn"/>
@@ -126,8 +150,9 @@
                 <constraint firstItem="kkM-36-uGV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="vhT-k1-Wcj"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="xou-y7-pRa"/>
-            <point key="canvasLocation" x="32.799999999999997" y="104.7976011994003"/>
+            <point key="canvasLocation" x="32.799999999999997" y="154.27286356821591"/>
         </view>
     </objects>
     <resources>
