@@ -676,7 +676,8 @@
 
 - (NSInteger)getContactCount
 {
-    [self fetchAddressBookRef];
+    // do not use fetchAddressBookRef
+//    [self fetchAddressBookRef];
     CFIndex nPeople = ABAddressBookGetPersonCount( _addressBook );
     return nPeople;
 }
