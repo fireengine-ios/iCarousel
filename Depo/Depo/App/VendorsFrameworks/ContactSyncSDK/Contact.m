@@ -68,7 +68,7 @@
             CFRelease(source);
         }
         
-        CFTypeRef modifDate = ABRecordCopyValue(_recordRef,kABPersonModificationDateProperty);
+        CFTypeRef modifDate = ABRecordCopyValue(ref,kABPersonModificationDateProperty);
         NSDate *lastModif=(__bridge NSDate *)(modifDate);
         if (modifDate != NULL){
             CFRelease(modifDate);

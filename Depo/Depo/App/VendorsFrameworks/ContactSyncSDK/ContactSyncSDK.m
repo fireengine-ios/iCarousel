@@ -426,9 +426,10 @@
     NSInteger finalCount = [[ContactUtil shared] getContactCount];
     SYNC_Log(@"Final Contact count => %ld", (long)finalCount);
 
-    NSMutableArray *localContacts = [[ContactUtil shared] fetchLocalContacts];
-    NSInteger finalLocalCount = [localContacts count];
-    SYNC_Log(@"Final Local Contact count => %ld", (long)finalLocalCount);
+    // consuming too much time. we need a better solution
+//    NSMutableArray *localContacts = [[ContactUtil shared] fetchLocalContacts];
+//    NSInteger finalLocalCount = [localContacts count];
+//    SYNC_Log(@"Final Local Contact count => %ld", (long)finalLocalCount);
     
     NSString *errorCode = nil;
     for (id item in messages)
@@ -441,7 +442,7 @@
         NSString *intervalString = [NSString stringWithFormat:@"%f", timeStamp];
         NSString *key = [[NSString alloc] initWithFormat:@"%@-%@", intervalString, self.deviceId];
         [SyncAdapter sendStats:key start:self.initialContactCount
-                        result:finalLocalCount
+                        result:finalCount
                        created:0
                        updated:[self.mergeMap count]
                        deleted:[self.willDelete count]
