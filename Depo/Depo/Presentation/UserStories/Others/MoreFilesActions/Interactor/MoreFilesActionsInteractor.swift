@@ -375,7 +375,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let okHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .restore, label: .ok)
             vc.close { [weak self] in
-                self?.output?.operationStarted(type: .restore)
                 self?.putBackItems(remoteItems)
             }
         }
@@ -1155,6 +1154,7 @@ extension MoreFilesActionsInteractor {
         firOperation: @escaping DivorceItemsOperation)
     {
         output?.startAsyncOperationDisableScreen()
+        output?.operationStarted(type: type)
         
         var peopleItems = [PeopleItem]()
         var placesItems = [PlacesItem]()

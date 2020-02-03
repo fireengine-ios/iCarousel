@@ -34,6 +34,7 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     }
     
     func operationStarted(type: ElementTypes) {
+        basePassingPresenter?.stopModeSelected()
         startAsyncOperationDisableScreen()
     }
     
