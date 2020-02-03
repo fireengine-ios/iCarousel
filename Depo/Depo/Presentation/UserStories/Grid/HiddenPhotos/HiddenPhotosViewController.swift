@@ -22,6 +22,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     private lazy var threeDotsManager = HiddenPhotosThreeDotMenuManager(delegate: self)
     
     private lazy var router = RouterVC()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     //MARK: - View lifecycle
     
@@ -31,6 +32,10 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.HiddenBinScreen())
+        
+        trackScreen(.hiddenBin)
         
         ItemOperationManager.default.startUpdateView(view: self)
         sortingManager.addBarView(to: sortPanelContainer)
@@ -45,10 +50,17 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hiddenBin))
+        
         navigationBarWithGradientStyle()
         
         //need to fix crash on show bottom bar
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
+    }
+    
+    private func trackScreen(_ screen: AnalyticsAppScreens) {
+        analyticsService.logScreen(screen: screen)
+        analyticsService.trackDimentionsEveryClickGA(screen: screen)
     }
     
     private func setupRefreshControl() {
@@ -65,6 +77,11 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     }
     
     @objc private func onRefresh() {
+        if dataSource.isSelectionStateActive {
+            collectionView.refreshControl?.endRefreshing()
+            return
+        }
+        
         reloadData()
     }
     
@@ -99,11 +116,13 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     }
     
     private func unhideSelectedItems() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .unhide))
         let selectedItems = dataSource.allSelectedItems.albums + dataSource.allSelectedItems.photos
         dataLoader.unhide(items: selectedItems)
     }
     
     private func moveToTrashSelectedItems() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
         let selectedItems = dataSource.allSelectedItems.albums + dataSource.allSelectedItems.photos
         dataLoader.moveToTrash(item: selectedItems)
     }
@@ -115,6 +134,7 @@ extension HiddenPhotosViewController {
     private func startSelectionState() {
         navigationItem.hidesBackButton = true
         navbarManager.setSelectionState()
+        sortingManager.isActive = false
     }
     
     private func stopSelectionState() {
@@ -124,6 +144,7 @@ extension HiddenPhotosViewController {
         bottomBarManager.hide()
         collectionView.contentInset.bottom = 0
         setMoreButton()
+        sortingManager.isActive = true
     }
     
     private func updateBarsForSelectedObjects(count: Int) {
@@ -296,7 +317,7 @@ extension HiddenPhotosViewController {
             
             switch result {
             case .success(let album):
-                let vc = self.router.imageFacePhotosController(album: album, item: item, status: .hidden, moduleOutput: self)
+                let vc = self.router.imageFacePhotosController(album: album, item: item, status: .hidden, moduleOutput: nil)
                 self.router.pushViewController(viewController: vc)
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
@@ -318,7 +339,8 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     }
     
     func didUnhideAlbums(_ albums: [AlbumItem]) {
-        remove(albums: albums)
+        let customAlbums = albums.filter { !$0.fileType.isFaceImageAlbum }
+        remove(albums: customAlbums)
     }
     
     func didUnhidePeople(items: [PeopleItem]) {
@@ -350,7 +372,8 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     }
     
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        remove(albums: albums)
+        let customAlbums = albums.filter { !$0.fileType.isFaceImageAlbum }
+        remove(albums: customAlbums)
     }
     
     private func remove(items: [Item]) {
@@ -363,20 +386,13 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     
     private func remove(albums: [BaseDataSourceItem]) {
         stopSelectionState()
+        
+        if albums.isEmpty {
+            return
+        }
+        
         dataSource.removeSlider(items: albums) { [weak self] in
             self?.reloadPhotos()
         }
-    }
-}
-
-//MARK: - FaceImageItemsModuleOutput
-
-extension HiddenPhotosViewController: FaceImageItemsModuleOutput {
-    
-    func didChangeName(item: WrapData) {}
-    func didReloadData() {}
-    
-    func delete(item: Item) {
-        remove(items: [item])
     }
 }

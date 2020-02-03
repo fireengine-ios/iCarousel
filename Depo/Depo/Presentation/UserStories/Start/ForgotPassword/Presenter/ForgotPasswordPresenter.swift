@@ -14,6 +14,7 @@ class ForgotPasswordPresenter: BasePresenter, ForgotPasswordModuleInput, ForgotP
 
     // MARK: input
     func viewIsReady() {
+        interactor.trackScreen()
         view.setupVisableTexts()
         checkLanguage()
     }

@@ -45,6 +45,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
     }
     
     override func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.AlbumsScreen())
         analyticsManager.logScreen(screen: .albums)
         analyticsManager.trackDimentionsEveryClickGA(screen: .albums)
     }
@@ -59,7 +60,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
         
         PhotosAlbumService().addPhotosToAlbum(parameters: parameters, success: { [weak self] in
             debugLog("AlbumsInteractor onAddPhotosToAlbum PhotosAlbumService addPhotosToAlbum success")
-
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .success))
             DispatchQueue.main.async {
                 print("success")
                 self?.output.asyncOperationSuccess()
@@ -71,7 +72,7 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
             }
         }) { [weak self] error in
             debugLog("AlbumsInteractor onAddPhotosToAlbum PhotosAlbumService addPhotosToAlbum error")
-
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .failure))
             DispatchQueue.main.async {
                 self?.output.asyncOperationFail(errorMessage: error.description)
             }

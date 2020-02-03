@@ -11,6 +11,10 @@ class ForgotPasswordInteractor: ForgotPasswordInteractorInput {
     weak var output: ForgotPasswordInteractorOutput!
     private let authenticationService = AuthenticationService()
     
+    func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ForgetPasswordScreen())
+    }
+    
     func sendForgotPasswordRequest(with mail: String, enteredCaptcha: String, captchaUDID: String) {
         guard !mail.isEmpty else {
             DispatchQueue.main.async {

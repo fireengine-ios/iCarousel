@@ -22,6 +22,8 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     private lazy var navbarManager = TrashBinNavbarManager(delegate: self)
     private lazy var threeDotsManager = TrashBinThreeDotMenuManager(delegate: self)
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     //MARK: - View lifecycle
     
     deinit {
@@ -30,7 +32,7 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         needToShowTabBar = true
         ItemOperationManager.default.startUpdateView(view: self)
         sortingManager.addBarView(to: sortPanelContainer)
@@ -48,6 +50,8 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .trashBin))
+        
         if dataSource.isSelectionStateActive {
             navigationBarWithGradientStyle()
         } else {
@@ -64,6 +68,20 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         stopSelectionState()
     }
     
+    override func willMove(toParentViewController parent: UIViewController?) {
+        super.willMove(toParentViewController: parent)
+        
+        if parent != nil {
+            //track on each open tab of trash bin 
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .trashBin)
+            
+            analyticsService.logScreen(screen: .trashBin)
+            analyticsService.trackDimentionsEveryClickGA(screen: .trashBin)
+            
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.TrashBinScreen())
+        }
+    }
+    
     private func setupRefreshControl() {
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = ColorConstants.whiteColor
@@ -78,6 +96,11 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     }
     
     @objc private func onRefresh() {
+        if dataSource.isSelectionStateActive {
+            collectionView.refreshControl?.endRefreshing()
+            return
+        }
+        
         reloadData(needShowSpinner: true)
     }
     
@@ -236,11 +259,13 @@ extension TrashBinViewController: TrashBinInteractorDelegate {
 
 extension TrashBinViewController: TrashBinBottomBarManagerDelegate {
     func onBottomBarDelete() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
         let selectedItems = dataSource.allSelectedItems
         interactor.delete(items: selectedItems)
     }
     
     func onBottomBarRestore() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
         let selectedItems = dataSource.allSelectedItems
         interactor.restore(items: selectedItems)
     }
@@ -271,6 +296,7 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
     }
     
     func onThreeDotsManagerRestore(item: Item?) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
         let selectedItems: [BaseDataSourceItem]
         if let item = item {
             selectedItems = [item]
@@ -282,6 +308,7 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
     }
     
     func onThreeDotsManagerDelete(item: Item?) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
         let selectedItems: [BaseDataSourceItem]
         if let item = item {
             selectedItems = [item]
@@ -293,6 +320,7 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
     }
     
     func onThreeDotsManagerInfo(item: Item?) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .info))
         guard let item = item else {
             return
         }
@@ -323,7 +351,7 @@ extension TrashBinViewController {
             
             switch result {
             case .success(let album):
-                self.router.openFIRAlbum(album: album, item: item, moduleOutput: self)
+                self.router.openFIRAlbum(album: album, item: item)
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
             }
@@ -358,7 +386,10 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        reloadData(needShowSpinner: false)
+        let customAlbums = albums.filter { !$0.fileType.isFaceImageAlbum }
+        if !customAlbums.isEmpty {
+            reloadData(needShowSpinner: false)
+        }
     }
     
     //MARK: Restore events
@@ -368,7 +399,8 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
-        remove(albums: albums)
+        let customAlbums = albums.filter { !$0.fileType.isFaceImageAlbum }
+        remove(albums: customAlbums)
     }
     
     func putBackFromTrashPeople(items: [PeopleItem]) {
@@ -407,21 +439,14 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     
     private func remove(albums: [BaseDataSourceItem]) {
         stopSelectionState()
+        
+        if albums.isEmpty {
+            return
+        }
+        
         dataSource.removeSlider(items: albums) { [weak self] in
             self?.reloadItems(needShowSpinner: false)
         }
-    }
-}
-
-//MARK: - FaceImageItemsModuleOutput
-
-extension TrashBinViewController: FaceImageItemsModuleOutput {
-    
-    func didChangeName(item: WrapData) {}
-    func didReloadData() {}
-    
-    func delete(item: Item) {
-        remove(items: [item])
     }
 }
 

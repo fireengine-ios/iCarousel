@@ -84,16 +84,16 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func updateBars() {
-        if interactor.allItems.isEmpty {
+        guard !interactor.allItems.isEmpty, let index = interactor.currentItemIndex else {
             return
         }
         
-        view.onItemSelected(at: interactor.currentItemIndex, from: interactor.allItems)
+        view.onItemSelected(at: index, from: interactor.allItems)
         
-        let selectedItems = [interactor.allItems[interactor.currentItemIndex]]
+        let selectedItems = [interactor.allItems[index]]
         let allSelectedItemsTypes = selectedItems.map { $0.fileType }
         
-        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: interactor.currentItemIndex)
+        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: index)
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
     }
     
@@ -154,7 +154,10 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     // MARK: presenter output
     
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
-        let currentItem = interactor.allItems[interactor.currentItemIndex]
+        guard let index = interactor.currentItemIndex else {
+            return
+        }
+        let currentItem = interactor.allItems[index]
         selectedItemsCallback([currentItem])
     }
     
@@ -178,6 +181,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         outputView()?.hideSpinner()
 
         debugPrint("failed")
+    }
+    
+    func successPopupClosed() {
+        if interactor.allItems.isEmpty {
+            goBack()
+        }
     }
     
     func goBack() {

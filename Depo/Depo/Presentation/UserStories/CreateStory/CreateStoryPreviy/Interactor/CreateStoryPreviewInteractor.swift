@@ -23,6 +23,8 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
             return
         }
         output?.startShowVideoFromResponse(response: resp)
+        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.CreateStoryPreviewScreen())
         analyticsManager.logScreen(screen: .createStoryPreview)
         analyticsManager.trackDimentionsEveryClickGA(screen: .createStoryPreview)
     }
@@ -44,12 +46,14 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
         
         createStoryService.createStory(createStory: parameter, success: { [weak self] in
             DispatchQueue.main.async {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.CreateStory(status: .success))
                 self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .story, eventLabel: .crateStory(.save))
                 self?.output?.storyCreated()
                 ItemOperationManager.default.newStoryCreated()
             }
             
         }, fail: {[weak self] error in
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.CreateStory(status: .failure))
             DispatchQueue.main.async {
                 self?.output?.storyCreatedWithError()
                 self?.isRequestStarted = false

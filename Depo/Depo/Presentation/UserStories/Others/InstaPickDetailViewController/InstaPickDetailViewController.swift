@@ -91,6 +91,7 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
     //MARK: - Utility Methods(private)
     
     private func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PhotoPickAnalysisDetailScreen())
         let analyticsService: AnalyticsService = factory.resolve()
         analyticsService.logScreen(screen: .photoPickAnalysisDetail)
         analyticsService.trackDimentionsEveryClickGA(screen: .photoPickAnalysisDetail)

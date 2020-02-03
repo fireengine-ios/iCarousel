@@ -13,6 +13,7 @@ class HelpAndSupportInteractor: HelpAndSupportInteractorInput {
     private let analyticsManager: AnalyticsService = factory.resolve()
     
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.FAQScreen())
         analyticsManager.logScreen(screen: .FAQ)
         analyticsManager.trackDimentionsEveryClickGA(screen: .FAQ)
     }

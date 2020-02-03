@@ -16,8 +16,15 @@ struct NumericConstants {
     static let verificationCharacterLimit = 6
     static let verificationTimerLimit = 120//in seconds
     static let maxVerificationAttempts = 3
+    
+    #if LIFEBOX
     static let showFAQViewAttempts = 3
     static let showSupportViewAttempts = 6
+    #elseif LIFEDRIVE
+    static let showFAQViewAttempts = 3000
+    static let showSupportViewAttempts = 6000
+    #endif
+    
     
     static let maxDetailsLoadingAttempts = 5
     static let detailsLoadingTimeAwait = UInt32(2)
@@ -87,6 +94,7 @@ struct NumericConstants {
     static let itemProviderSearchRequest: Int = 1000
     
     static let limitContactsForBackUp: Int = 5000
+    static let contactSyncBulk = 1000
     static let defaultCustomScrollIndicatorOffset: CGFloat = 50
     
     static let myStreamSliderThumbnailsCount: Int = 4

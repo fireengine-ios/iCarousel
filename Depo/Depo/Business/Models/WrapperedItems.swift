@@ -106,7 +106,7 @@ enum ApplicationType: String {
 //    }
 }
 
-enum FileType: Equatable {
+enum FileType: Hashable, Equatable {
     case unknown
     case image
     case video
@@ -1080,7 +1080,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         metaData?.genre = mediaItem.metadata?.genre ?? []
         metaData?.height = Int(mediaItem.metadata?.height ?? 0)
         metaData?.title = mediaItem.metadata?.title
-
         
         if let largeUrl = mediaItem.metadata?.largeUrl {
             metaData?.largeUrl = URL(string: largeUrl)
@@ -1093,6 +1092,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
         if let videoUrl = mediaItem.metadata?.videoPreviewUrl {
             metaData?.videoPreviewURL = URL(string: videoUrl)
+        }
+        if let isVideoSlideshow = mediaItem.metadata?.isVideoSlideshow {
+            metaData?.isVideoSlideshow = isVideoSlideshow
         }
     }
     

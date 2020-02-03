@@ -7,17 +7,17 @@
 //
 
 class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
-
+    
     weak var output: PhotoVideoDetailInteractorOutput!
     
-    var array = [Item]()
+    private var array = [Item]()
     
     var albumUUID: String?
     
     var status: ItemStatus = .active
     var viewType: DetailViewType = .details
     
-    var selectedIndex = 0
+    private var selectedIndex: Int?
     
     var bottomBarConfig: EditingBarConfig!
     
@@ -29,14 +29,23 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         return moreMenuConfig
     }
     
+    var currentItemIndex: Int? {
+        get {
+            return selectedIndex
+        }
+        set {
+            selectedIndex = newValue
+        }
+    }
+    
+    var allItems: [Item] {
+        return array
+    }
+    
     func onSelectItem(fileObject: Item, from items: [Item]) {
         array.removeAll()
         array.append(contentsOf: items)
         
-        /// old logic
-        //selectedIndex = array.index(of: fileObject) ?? 0
-        
-        /// new logic
         if fileObject.isLocalItem {
             let localId = fileObject.getLocalID()
             for (index, item) in items.enumerated() {
@@ -56,23 +65,16 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 }
             }
         }
+        
+        
     }
     
     func onViewIsReady() {
-        output.onShowSelectedItem(at: selectedIndex, from: array)
-    }
-    
-    var currentItemIndex: Int {
-        get {
-            return selectedIndex
+        guard let index = selectedIndex else {
+            return
         }
-        set {
-            selectedIndex = newValue
-        }
-    }
-    
-    var allItems: [Item] {
-        return array
+        
+        output.onShowSelectedItem(at: index, from: array)
     }
 
     func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig {
@@ -82,13 +84,17 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     }
     
     func deleteSelectedItem(type: ElementTypes) {
-        let isRightSwipe = selectedIndex == array.count - 1
+        guard let index = selectedIndex else {
+            return
+        }
         
-        let removedObject = array[selectedIndex]
+        let isRightSwipe = index == array.count - 1
+        
+        let removedObject = array[index]
             
-        array.remove(at: selectedIndex)
+        array.remove(at: index)
         
-        if selectedIndex >= array.count {
+        if index >= array.count {
             selectedIndex = array.count - 1
         }
         
@@ -103,13 +109,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             break
         }
         
-        if array.isEmpty {
-            /// added asyncAfter 1 sec to wait PopUpController about success deleting
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-                self?.output.goBack()
-            }
-        } else {
-            output.updateItems(objects: array, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
+        if !array.isEmpty {
+            output.updateItems(objects: array, selectedIndex: index, isRightSwipe: isRightSwipe)
         }
     }
     

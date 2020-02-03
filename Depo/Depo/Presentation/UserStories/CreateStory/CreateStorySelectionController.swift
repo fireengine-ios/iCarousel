@@ -66,6 +66,7 @@ final class CreateStorySelectionController: BaseViewController, ControlTabBarPro
         
         containerView?.analyzeButton.addTarget(self, action: #selector(openStorySetup), for: .touchUpInside)
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.CreateStoryPhotoSelectionScreen())
         let analyticsService = AnalyticsService()
         analyticsService.logScreen(screen: .createStoryPhotosSelection)
     }

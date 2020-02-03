@@ -220,6 +220,8 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
             return
         }
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackageClick(packageName: name))
+        
         let paymentMethods: [PaymentMethod] = plan.offers.compactMap { offer in
             if let model = offer.model as? PackageModelResponse {
                 return createPaymentMethod(model: model, priceString: offer.priceString, offer: plan, planIndex: planIndex)
@@ -247,6 +249,8 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
                 assertionFailure()
                 return
             }
+            
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackageChannelClick(channelType: paymentType))
             
             if let tag = MenloworksSubscriptionStorage(rawValue: subscriptionPlan.name) {
                 MenloworksAppEvents.onSubscriptionClicked(tag)

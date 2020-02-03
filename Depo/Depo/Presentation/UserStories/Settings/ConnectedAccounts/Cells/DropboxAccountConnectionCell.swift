@@ -85,6 +85,7 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell 
     }
 
     @IBAction func importToDropbox(_ sender: Any) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .dropboxImport))
         presenter.startDropbox()
     }
     
