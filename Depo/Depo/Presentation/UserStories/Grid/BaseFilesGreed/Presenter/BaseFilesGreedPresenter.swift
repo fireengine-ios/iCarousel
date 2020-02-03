@@ -832,8 +832,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         router.showBack()
     }
     
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) { }
-    
     func sortType() -> MoreActionsConfig.ViewType {
         return type
     }
@@ -870,4 +868,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func changeCover() { }
+    
+    func getFIRParent() -> Item? {
+        return nil
+    }
 }

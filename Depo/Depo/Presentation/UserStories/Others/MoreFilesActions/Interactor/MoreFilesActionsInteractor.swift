@@ -436,6 +436,51 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         router.presentViewController(controller: controller)
     }
     
+    private func deletePhotosFromAlbum(items: [BaseDataSourceItem], item: Item) {
+        let okHandler: VoidHandler = { [weak self] in
+            guard let self = self, let items = items as? [Item], item.fileType.isFaceImageType, let id = item.id else {
+                return
+            }
+            
+            let album = self.router.getParentUUID()
+            
+            self.output?.operationStarted(type: .removeFromFaceImageAlbum)
+            
+            let successHandler: PhotosAlbumOperation = { [weak self] in
+                DispatchQueue.main.async {
+                    ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: album)
+                    self?.output?.operationFinished(type: .removeFromFaceImageAlbum)
+                }
+            }
+            
+            let failHandler: FailResponse = { [weak self] error in
+                self?.output?.operationFailed(type: .removeFromFaceImageAlbum, message: error.description)
+            }
+
+            switch item.fileType {
+            case .faceImage(.people):
+                self.peopleService.deletePhotosFromAlbum(id: id, photos: items, success: successHandler, fail: failHandler)
+            case .faceImage(.places):
+                self.placesService.deletePhotosFromAlbum(uuid: album, photos: items, success: successHandler, fail: failHandler)
+            case .faceImage(.things):
+                self.thingsService.deletePhotosFromAlbum(id: id, photos: items, success: successHandler, fail: failHandler)
+            default:
+                break
+            }
+        }
+        
+        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
+                                              message: TextConstants.removeFromAlbum,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        
+        router.presentViewController(controller: controller)
+    }
+    
     func move(item: [BaseDataSourceItem], toPath: String) {
         guard let item = item as? [Item] else { //FIXME: transform all to BaseDataSourceItem
             return
@@ -621,6 +666,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func removeFromAlbum(items: [BaseDataSourceItem]) {
         removeAlbumItems(items)
+    }
+    
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem], item: Item) {
+        deletePhotosFromAlbum(items: items, item: item)
     }
     
     func photos(items: [BaseDataSourceItem]) {

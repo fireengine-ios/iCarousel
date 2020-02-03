@@ -246,7 +246,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .removeFromFaceImageAlbum:
                 self.basePassingPresenter?.stopModeSelected()
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                self.basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems)
+                if let item = self.basePassingPresenter?.getFIRParent() {
+                    self.interactor.deleteFromFaceImageAlbum(items: selectedItems, item: item)
+                }
             case .addToAlbum:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .addToAlbum))
                 self.interactor.addToAlbum(items: selectedItems)

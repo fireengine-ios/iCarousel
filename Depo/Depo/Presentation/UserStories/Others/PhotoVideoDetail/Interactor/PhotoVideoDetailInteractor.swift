@@ -89,8 +89,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
         
         let isRightSwipe = index == array.count - 1
-        
-        let removedObject = array[index]
             
         array.remove(at: index)
         
@@ -98,27 +96,10 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             selectedIndex = array.count - 1
         }
         
-        
-        switch type {
-        case .hide, .unhide, .delete:
-            ///its already being called from different place, we dont need to call
-            break
-        case .removeFromAlbum, .removeFromFaceImageAlbum:
-            ItemOperationManager.default.filesRomovedFromAlbum(items: [removedObject], albumUUID: albumUUID ?? "")
-        default:
-            break
-        }
-        
         if !array.isEmpty {
             output.updateItems(objects: array, selectedIndex: index, isRightSwipe: isRightSwipe)
         }
     }
-    
-    func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64) { }
-    
-    func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64) { }
-    
-    func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], uuid: String) { }
     
     func replaceUploaded(_ item: WrapData) {
         if let indexToChange = array.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) {

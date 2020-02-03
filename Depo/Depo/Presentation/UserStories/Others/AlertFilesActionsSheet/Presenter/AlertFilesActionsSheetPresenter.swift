@@ -511,7 +511,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 case .removeFromFaceImageAlbum:
                     action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                        self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems)
+                        if let item = self.basePassingPresenter?.getFIRParent() {
+                            self.interactor.deleteFromFaceImageAlbum(items: currentItems, item: item)
+                        }
                     })
                 case .instaPick:
                     action = UIAlertAction(title: TextConstants.newInstaPick, style: .default, handler: { _ in
