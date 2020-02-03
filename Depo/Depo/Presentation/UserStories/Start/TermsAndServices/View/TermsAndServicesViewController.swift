@@ -57,6 +57,20 @@ class TermsAndServicesViewController: ViewController {
 
     @IBOutlet private weak var contenViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet private weak var privacyPolicyView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 6
+            newValue.backgroundColor =  UIColor.lrTealishTwo.withAlphaComponent(0.3)
+        }
+    }
+    
+    @IBOutlet weak var privacyPolicyTextView: IntrinsicTextView! {
+        willSet {
+            newValue.delegate = self
+            newValue.backgroundColor = .clear
+        }
+    }
+    
     private let generalTermsCheckboxView = TermsCheckboxTextView.initFromNib()
     private var etkTermsCheckboxView: TermsCheckboxTextView?
     private var globalDataPermissionTermsCheckboxView: TermsCheckboxTextView?
@@ -81,6 +95,7 @@ class TermsAndServicesViewController: ViewController {
         
         configureUI()
         setupIntroductionTextView()
+        setupPrivacyPolicyTextView()
         output.viewIsReady()
     }
     
@@ -124,10 +139,19 @@ class TermsAndServicesViewController: ViewController {
                                                attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
                                                             .foregroundColor: ColorConstants.darkText])
         
+        generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self)
+    }
+    
+    private func setupPrivacyPolicyTextView() {
+        
+        let header = NSMutableAttributedString(string: TextConstants.privacyPolicy,
+                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
+                                                            .foregroundColor: ColorConstants.darkText])
+        
         let rangeLink = header.mutableString.range(of: TextConstants.privacyPolicyCondition)
         header.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions], range: rangeLink)
         
-        generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self)
+        privacyPolicyTextView.attributedText = header
     }
     
     private func setupEtkText() {
@@ -280,7 +304,13 @@ extension TermsAndServicesViewController: TermsCheckboxTextViewDelegate {
 // MARK: - UITextViewDelegate
 extension TermsAndServicesViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        UIApplication.shared.openSafely(URL)
-        return true
+
+        return tappedOnURL(url: URL)
+    }
+    
+    @available(iOS 10.0, *)
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+
+        return tappedOnURL(url: URL)
     }
 }
