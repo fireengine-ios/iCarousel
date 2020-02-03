@@ -114,6 +114,18 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     private func checkEmptyView() {
         emptyView.isHidden = !dataSource.photosIsEmpty
     }
+    
+    private func unhideSelectedItems() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .unhide))
+        let selectedItems = dataSource.allSelectedItems.albums + dataSource.allSelectedItems.photos
+        dataLoader.unhide(items: selectedItems)
+    }
+    
+    private func moveToTrashSelectedItems() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
+        let selectedItems = dataSource.allSelectedItems.albums + dataSource.allSelectedItems.photos
+        dataLoader.moveToTrash(item: selectedItems)
+    }
 }
 
 // MARK: - Selection State Methods
@@ -224,13 +236,11 @@ extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
 
 extension HiddenPhotosViewController: HiddenPhotosBottomBarManagerDelegate {
     func onBottomBarMoveToTrash() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-        showDeletePopup()
+        moveToTrashSelectedItems()
     }
     
     func onBottomBarUnhide() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .unhide))
-        showUnhidePopup()
+        unhideSelectedItems()
     }
 }
 
@@ -259,13 +269,11 @@ extension HiddenPhotosViewController: HiddenPhotosThreeDotMenuManagerDelegate {
     }
     
     func onThreeDotsManagerUnhide() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .unhide))
-        showUnhidePopup()
+        unhideSelectedItems()
     }
     
     func onThreeDotsManagerMoveToTrash() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-        showDeletePopup()
+        moveToTrashSelectedItems()
     }
 }
 
@@ -311,149 +319,6 @@ extension HiddenPhotosViewController {
             case .success(let album):
                 let vc = self.router.imageFacePhotosController(album: album, item: item, status: .hidden, moduleOutput: nil)
                 self.router.pushViewController(viewController: vc)
-            case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
-            }
-        }
-    }
-}
-
-//MARK: - Items processing
-
-extension HiddenPhotosViewController {
-    
-    private func showDeletePopup() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteConfirmPopUp())
-        trackScreen(.fileOperationConfirmPopup(.trash))
-        
-        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
-            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .cancel)
-            vc.close()
-        }
-        
-        let okHandler: PopUpButtonHandler = { [weak self] vc in
-            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .ok)
-            vc.close { [weak self] in
-                self?.deleteSelectedItems()
-            }
-        }
-        
-        let isAlbums = !dataSource.allSelectedItems.albums.isEmpty && dataSource.allSelectedItems.photos.isEmpty
-        let message = isAlbums ? TextConstants.moveToTrashHiddenAlbumsConfirmationPopupText : TextConstants.deleteFilesText
-        let popup = PopUpController.with(title: TextConstants.actionSheetDelete,
-                                         message: message,
-                                         image: .delete,
-                                         firstButtonTitle: TextConstants.cancel,
-                                         secondButtonTitle: TextConstants.ok,
-                                         firstAction: cancelHandler,
-                                         secondAction: okHandler)
-        
-        router.presentViewController(controller: popup,
-                                     animated: false,
-                                     completion: nil)
-    }
-    
-    private func showUnhidePopup() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.UnhideConfirmPopUp())
-        trackScreen(.fileOperationConfirmPopup(.unhide))
-        
-        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
-            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .unhide, label: .cancel)
-            vc.close()
-        }
-        
-        let okHandler: PopUpButtonHandler = { [weak self] vc in
-            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .unhide, label: .ok)
-            vc.close { [weak self] in
-                self?.unhideSelectedItems()
-            }
-        }
-        
-        let isAlbums = !dataSource.allSelectedItems.albums.isEmpty && dataSource.allSelectedItems.photos.isEmpty
-        let message = isAlbums ? TextConstants.unhideAlbumsPopupText : TextConstants.unhideItemsPopupText
-        let popup = PopUpController.with(title: TextConstants.actionSheetUnhide,
-                                         message: message,
-                                         image: .unhide,
-                                         firstButtonTitle: TextConstants.cancel,
-                                         secondButtonTitle: TextConstants.ok,
-                                         firstAction: cancelHandler,
-                                         secondAction: okHandler)
-        
-        router.presentViewController(controller: popup,
-                                     animated: false,
-                                     completion: nil)
-    }
-    
-    private func showDeleteSuccessPopup() {
-        let text: String
-        
-        let isAlbums = !dataSource.allSelectedItems.albums.isEmpty && dataSource.allSelectedItems.photos.isEmpty
-        if isAlbums {
-            text = TextConstants.moveToTrashAlbumsSuccessText
-        } else {
-            text = TextConstants.moveToTrashItemsSuccessText
-        }
-        
-        let popup = PopUpController.with(title: TextConstants.deleteFromHiddenBinPopupSuccessTitle,
-                                         message: text,
-                                         image: .success,
-                                         buttonTitle: TextConstants.ok)
-        
-        router.presentViewController(controller: popup,
-                                     animated: false,
-                                     completion: nil)
-    }
-    
-    private func showUnhideSuccessPopup() {
-        let text: String
-        
-        let isAlbums = !dataSource.allSelectedItems.albums.isEmpty && dataSource.allSelectedItems.photos.isEmpty
-        if isAlbums {
-            text = TextConstants.unhideAlbumsSuccessText
-        } else {
-            text = TextConstants.unhideItemsSuccessText
-        }
-        
-        let popup = PopUpController.with(title: TextConstants.unhidePopupSuccessTitle,
-                                         message: text,
-                                         image: .success,
-                                         buttonTitle: TextConstants.ok)
-        
-        router.presentViewController(controller: popup,
-                                     animated: false,
-                                     completion: nil)
-    }
-    
-    private func deleteSelectedItems() {
-        showSpinner()
-        
-        let selectedItems = dataSource.allSelectedItems
-        stopSelectionState()
-        
-        dataLoader.moveToTrash(selectedItems: selectedItems) { [weak self] result in
-            self?.hideSpinner()
-            
-            switch result {
-            case .success(_):
-                self?.showDeleteSuccessPopup()
-            case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
-            }
-        }
-    }
-    
-    private func unhideSelectedItems() {
-        showSpinner()
-        
-        let selectedItems = dataSource.allSelectedItems
-        stopSelectionState()
-        
-        dataLoader.unhide(selectedItems: selectedItems) { [weak self] result in
-            self?.hideSpinner()
-            
-            switch result {
-            case .success(_):
-                self?.showUnhideSuccessPopup()
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
             }
@@ -512,6 +377,7 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(items: [Item]) {
+        stopSelectionState()
         reloadAlbums()
         dataSource.remove(items: items) { [weak self] in
             self?.checkEmptyView()
@@ -519,6 +385,8 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(albums: [BaseDataSourceItem]) {
+        stopSelectionState()
+        
         if albums.isEmpty {
             return
         }
