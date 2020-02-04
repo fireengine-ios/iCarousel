@@ -719,13 +719,6 @@ class AuthenticationService: BaseRequestService {
                         }
                         
                         handler(.success(headers))
-//                        SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-//
-//
-//
-//                        }, fail: { error in
-//                            handler(.failed(error))
-//                        })
                     }
                     
                 case .failure(let error):
