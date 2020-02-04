@@ -165,6 +165,10 @@ extension TrashBinDataSource {
                 return
             }
             
+            if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
+                self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
+            }
+
             let deleteResult = self.delete(items: items)
             guard !deleteResult.indexPaths.isEmpty else {
                 DispatchQueue.main.async {
@@ -192,7 +196,7 @@ extension TrashBinDataSource {
     }
     
     func updateItem(_ item: Item) {
-        guard let indexPath = indexPath(for: item) else {
+        guard let indexPath = indexPath(for: item.uuid) else {
             return
         }
         
@@ -276,9 +280,9 @@ extension TrashBinDataSource {
         return allItems[safe: indexPath.section - 1]?[safe: indexPath.row]
     }
     
-    private func indexPath(for item: Item) -> IndexPath? {
+    private func indexPath(for uuid: String) -> IndexPath? {
         for (section, items) in allItems.enumerated() {
-            if let row = items.firstIndex(where: { $0.uuid == item.uuid }) {
+            if let row = items.firstIndex(where: { $0.uuid == uuid }) {
                 return IndexPath(row: row, section: section + 1)
             }
         }
@@ -424,6 +428,26 @@ extension TrashBinDataSource {
         let indexPath = IndexPath(item: 0, section: section)
         allItems.append([newItem])
         return (indexPath, section)
+    }
+    
+    private func updateItems(count: Int, forFolder folderUUID: String, increment: Bool) {
+        guard let indexPath = indexPath(for: folderUUID),
+            let item = item(for: indexPath),
+            let childCount = item.childCount else {
+            return
+        }
+    
+        if increment {
+            item.childCount = childCount + Int64(count)
+        } else {
+            item.childCount = childCount - Int64(count)
+        }
+        
+        DispatchQueue.main.async {
+            self.collectionView.performBatchUpdates({
+                self.collectionView.reloadItems(at: [indexPath])
+            }, completion: nil)
+        }
     }
 }
 
