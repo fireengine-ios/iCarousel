@@ -143,6 +143,8 @@
             SYNC_Log(@"!!! CONTACT ID NOT FOUND IN ADDRESS BOOK %@",contact.objectId);
             continue;
         }
+        CFRetain(record);
+        
         CFErrorRef  error = NULL;
         BOOL success = ABAddressBookRemoveRecord(_addressBook, (ABRecordRef)record, &error);
         if (!success) {
@@ -656,6 +658,8 @@
 
         NSString *displayName = contact.generateDisplayName;
         if(!SYNC_STRING_IS_NULL_OR_EMPTY(displayName) && displayName.length > 1000){
+            if (ref!=NULL)
+                CFRelease(ref);
             continue;
         }
         
