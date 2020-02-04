@@ -87,15 +87,27 @@ protocol ItemOperationManagerViewProtocol: class {
 }
 
 extension ItemOperationManagerViewProtocol {
-    func startUploadFile(file: WrapData) {}
+    func startUploadFile(file: WrapData) {
+        DispatchQueue.main.async {
+            UIApplication.shared.isIdleTimerDisabled = true
+        }
+    }
     
-    func startUploadFilesToAlbum(files: [WrapData]) {}
+    func startUploadFilesToAlbum(files: [WrapData]) {
+        DispatchQueue.main.async {
+            UIApplication.shared.isIdleTimerDisabled = true
+        }
+    }
     
     func setProgressForUploadingFile(file: WrapData, progress: Float) {}
     
     func finishedUploadFile(file: WrapData) {}
     
-    func cancelledUpload(file: WrapData) {}
+    func cancelledUpload(file: WrapData) {
+        DispatchQueue.main.async {
+            UIApplication.shared.isIdleTimerDisabled = true
+        }
+    }
     
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {}
     
@@ -131,9 +143,17 @@ extension ItemOperationManagerViewProtocol {
     
     func filesMoved(items: [Item], toFolder folderUUID: String) {}
     
-    func syncFinished() {}
+    func syncFinished() {
+        DispatchQueue.main.async {
+            UIApplication.shared.isIdleTimerDisabled = false
+        }
+    }
     
-    func finishUploadFiles() {}
+    func finishUploadFiles() {
+        DispatchQueue.main.async {
+            UIApplication.shared.isIdleTimerDisabled = false
+        }
+    }
     
     func didHideItems(_ items: [WrapData]) {}
     func didHideAlbums(_ albums: [AlbumItem]) {}
