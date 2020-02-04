@@ -36,7 +36,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Zp-Vl-UsS">
                                     <rect key="frame" x="30" y="35" width="354" height="159"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BRF-9H-wZ4" customClass="LoadingImageView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BRF-9H-wZ4" customClass="LoadingImageView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="354" height="159"/>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFf-uV-QSs">
