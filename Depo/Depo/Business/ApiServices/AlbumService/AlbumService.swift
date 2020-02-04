@@ -207,7 +207,7 @@ class PhotosAlbumService: BaseRequestService {
     func delete(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService deleteAlbums")
 
-        let deleteAlbums = albums.filter { $0.readOnly == nil || $0.readOnly! == false }
+        let deleteAlbums = albums.filter { $0.readOnly != true || $0.fileType.isFaceImageAlbum }
         guard !deleteAlbums.isEmpty else {
             fail?(ErrorResponse.string(TextConstants.removeReadOnlyAlbumError))
             return
@@ -225,7 +225,7 @@ class PhotosAlbumService: BaseRequestService {
     func completelyDelete(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService completelyDelete")
         
-        let deleteAlbums = albums.filter { $0.readOnly == nil || $0.readOnly! == false }
+        let deleteAlbums = albums.filter { $0.readOnly != true || $0.fileType.isFaceImageAlbum }
         guard !deleteAlbums.isEmpty else {
             fail?(ErrorResponse.string(TextConstants.removeReadOnlyAlbumError))
             return

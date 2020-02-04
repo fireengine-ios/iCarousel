@@ -33,6 +33,10 @@ final class FaceImagePhotosDataSource: BaseDataSourceForCollectionView {
         delegate?.didDelete(items: albums)
     }
     
+    override func albumsDeleted(albums: [AlbumItem]) {
+        delegate?.didDelete(items: albums)
+    }
+    
     private func notifyHideItem() {
         if let peopleItem = item as? PeopleItem {
             ItemOperationManager.default.didHidePeople(items: [peopleItem])
