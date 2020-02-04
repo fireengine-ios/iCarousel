@@ -209,27 +209,14 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     }
     
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {
-        if let item = item,
-            let id = item.id {            
-            if item is PeopleItem {
-                interactor.deletePhotosFromPeopleAlbum(items: items, id: id)
-            } else if item is ThingsItem {
-                interactor.deletePhotosFromThingsAlbum(items: items, id: id)
-            } else if item is PlacesItem {
-                interactor.deletePhotosFromPlacesAlbum(items: items, uuid: RouterVC().getParentUUID())
-            }
-        }
+    func getFIRParent() -> Item? {
+        return item
     }
     
     func openInstaPick() { }
     
     func deSelectAll() {
         
-    }
-    
-    func didRemoveFromAlbum(completion: @escaping (() -> Void)) {
-        router.showRemoveFromAlbum(completion: completion)
     }
     
     func printSelected() { }

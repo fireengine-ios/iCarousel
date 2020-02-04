@@ -63,11 +63,6 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        stopSelectionState()
-    }
-    
     override func willMove(toParentViewController parent: UIViewController?) {
         super.willMove(toParentViewController: parent)
         
@@ -430,7 +425,6 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(items: [Item]) {
-        stopSelectionState()
         reloadAlbums()
         dataSource.remove(items: items) { [weak self] in
             self?.checkEmptyView()
@@ -438,8 +432,6 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(albums: [BaseDataSourceItem]) {
-        stopSelectionState()
-        
         if albums.isEmpty {
             return
         }
@@ -483,6 +475,7 @@ extension TrashBinViewController: MoreFilesActionsInteractorOutput {
     }
     
     func operationStarted(type: ElementTypes) {
+        stopSelectionState()
         startAsyncOperation()
     }
     

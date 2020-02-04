@@ -146,7 +146,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
                     self.interactor.hide(items: selectedItems)
-                    self.basePassingPresenter?.stopModeSelected()
                 } else {
                     let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
@@ -157,7 +156,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
                     self.interactor.unhide(items: selectedItems)
-                    self.basePassingPresenter?.stopModeSelected()
                 } else {
                     let isAlbums = selectedItems is [PeopleItem] || selectedItems is [ThingsItem] || selectedItems is [PlacesItem] || selectedItems is [AlbumItem]
                     let message = isAlbums ? TextConstants.unhideAlbumsPopupText : TextConstants.unhideItemsPopupText
@@ -175,7 +173,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
                     self.interactor.moveToTrash(item: selectedItems)
-                    self.basePassingPresenter?.stopModeSelected()
                 } else {
                     let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
@@ -186,7 +183,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
                     self.interactor.delete(items: selectedItems)
-                    self.basePassingPresenter?.stopModeSelected()
                 } else {
                     let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
@@ -194,7 +190,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .restore:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
                 self.interactor.restore(items: selectedItems)
-                self.basePassingPresenter?.stopModeSelected()
             case .download:
                 MenloworksAppEvents.onDownloadClicked()
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
@@ -248,11 +243,12 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 MenloworksAppEvents.onRemoveFromAlbumClicked()
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                 self.interactor.removeFromAlbum(items: selectedItems)
-                self.basePassingPresenter?.stopModeSelected()
             case .removeFromFaceImageAlbum:
                 self.basePassingPresenter?.stopModeSelected()
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                self.basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems)
+                if let item = self.basePassingPresenter?.getFIRParent() {
+                    self.interactor.deleteFromFaceImageAlbum(items: selectedItems, item: item)
+                }
             case .addToAlbum:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .addToAlbum))
                 self.interactor.addToAlbum(items: selectedItems)
@@ -592,6 +588,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     override func operationStarted(type: ElementTypes) {
+        basePassingPresenter?.stopModeSelected()
         startAsyncOperationDisableScreen()
     }
     

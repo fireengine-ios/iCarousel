@@ -303,7 +303,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if selectedItems.count <= allowedNumberLimit {
                             self.interactor.moveToTrash(item: currentItems)
-                            self.basePassingPresenter?.stopModeSelected()
                         } else {
                             let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                             UIApplication.showErrorAlert(message: text)
@@ -317,7 +316,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if currentItems.count <= allowedNumberLimit {
                             self.interactor.hide(items: currentItems)
-                            self.basePassingPresenter?.stopModeSelected()
                         } else {
                             let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
                             UIApplication.showErrorAlert(message: text)
@@ -381,7 +379,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                         MenloworksEventsService.shared.onRemoveFromAlbumClicked()
                         self.interactor.removeFromAlbum(items: currentItems)
-                        self.basePassingPresenter?.stopModeSelected()
                     })
                 case .backUp:
                     action = UIAlertAction(title: TextConstants.actionSheetBackUp, style: .default, handler: { _ in
@@ -476,7 +473,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if currentItems.count <= allowedNumberLimit {
                             self.interactor.delete(items: currentItems)
-                            self.basePassingPresenter?.stopModeSelected()
                         } else {
                             let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                             UIApplication.showErrorAlert(message: text)
@@ -515,8 +511,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 case .removeFromFaceImageAlbum:
                     action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                        self.basePassingPresenter?.stopModeSelected()
-                        self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems)
+                        if let item = self.basePassingPresenter?.getFIRParent() {
+                            self.interactor.deleteFromFaceImageAlbum(items: currentItems, item: item)
+                        }
                     })
                 case .instaPick:
                     action = UIAlertAction(title: TextConstants.newInstaPick, style: .default, handler: { _ in

@@ -37,6 +37,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
         
         trackScreen(.hiddenBin)
         
+        dataLoader.output = self
         ItemOperationManager.default.startUpdateView(view: self)
         sortingManager.addBarView(to: sortPanelContainer)
         setupRefreshControl()
@@ -377,7 +378,6 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(items: [Item]) {
-        stopSelectionState()
         reloadAlbums()
         dataSource.remove(items: items) { [weak self] in
             self?.checkEmptyView()
@@ -385,14 +385,64 @@ extension HiddenPhotosViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(albums: [BaseDataSourceItem]) {
-        stopSelectionState()
-        
         if albums.isEmpty {
             return
         }
         
         dataSource.removeSlider(items: albums) { [weak self] in
             self?.reloadPhotos()
+        }
+    }
+}
+
+//MARK: - MoreFilesActionsInteractorOutput
+
+extension HiddenPhotosViewController: MoreFilesActionsInteractorOutput {
+    
+    func outputView() -> Waiting? {
+        return self
+    }
+    
+    func asyncOperationSuccess() {
+        outputView()?.hideSpinner()
+    }
+    
+    func startAsyncOperation() {
+        outputView()?.showSpinner()
+    }
+    
+    func asyncOperationFail(errorMessage: String?) {
+        asyncOperationSuccess()
+        showMessage(errorMessage: errorMessage)
+    }
+    
+    func operationFinished(type: ElementTypes) {
+        asyncOperationSuccess()
+    }
+    
+    func operationFailed(type: ElementTypes, message: String) {
+        asyncOperationSuccess()
+        if type.isContained(in: ElementTypes.hiddenState) {
+            showMessage(errorMessage: message)
+        }
+    }
+    
+    func operationStarted(type: ElementTypes) {
+        stopSelectionState()
+        startAsyncOperation()
+    }
+    
+    func showWrongFolderPopup() { }
+    func dismiss(animated: Bool) { }
+    func startAsyncOperationDisableScreen() { }
+    func completeAsyncOperationEnableScreen() { }
+    func startCancelableAsync(cancel: @escaping VoidHandler) { }
+    func completeAsyncOperationEnableScreen(errorMessage: String?) { }
+    func startCancelableAsync(with text: String, cancel: @escaping VoidHandler) { }
+    
+    private func showMessage(errorMessage: String?) {
+        if let message = errorMessage {
+            UIApplication.showErrorAlert(message: message)
         }
     }
 }

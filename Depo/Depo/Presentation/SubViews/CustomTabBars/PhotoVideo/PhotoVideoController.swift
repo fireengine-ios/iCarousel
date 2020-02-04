@@ -597,7 +597,6 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
         
     }
     func changeCover() {}
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {}
 }
 
 // MARK: - PhotoVideoNavBarManagerDelegate

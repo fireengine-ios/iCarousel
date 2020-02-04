@@ -33,7 +33,7 @@ class PhotoVideoDetailModuleConfigurator {
                                                                 albumItem: Item? = nil,
                                                                 status: ItemStatus) {
         if let viewController = viewInput as? PhotoVideoDetailViewController {
-            let interactor = PhotoVideoAlbumDetailInteractor()
+            let interactor = PhotoVideoDetailInteractor()
             interactor.albumUUID = albumUUID
             configure(viewController: viewController,
                       bottomBarConfig: bottomBarConfig,
@@ -52,7 +52,7 @@ class PhotoVideoDetailModuleConfigurator {
                                                                 albumItem: Item? = nil,
                                                                 status: ItemStatus) {
         if let viewController = viewInput as? PhotoVideoDetailViewController {
-            let interactor = PhotoVideoAlbumDetailInteractor()
+            let interactor = PhotoVideoDetailInteractor()
             interactor.albumUUID = albumUUID
             configure(viewController: viewController,
                       bottomBarConfig: bottomBarConfig,

@@ -179,6 +179,7 @@ class AlbumService: RemoteItemsService {
 }
 
 typealias AlbumCreatedOperation = (AlbumItem?) -> Void
+typealias AlbumOperationResponse = (_ album: AlbumServiceResponse) -> Void
 typealias PhotosAlbumOperation = () -> Void
 typealias PhotosAlbumDeleteOperation = (_ deletedItems: [AlbumItem]) -> Void
 typealias PhotosFromAlbumsOperation = (_ items: [Item]) -> Void

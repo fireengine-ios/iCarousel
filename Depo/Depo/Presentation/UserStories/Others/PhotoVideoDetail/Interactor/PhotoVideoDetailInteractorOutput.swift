@@ -16,7 +16,5 @@ protocol PhotoVideoDetailInteractorOutput: class {
     
     func updateItems(objects: [Item], selectedIndex: Int, isRightSwipe: Bool)
     
-    func didRemoveFromAlbum(completion: @escaping (() -> Void))
-    
     func startAsyncOperation()
 }

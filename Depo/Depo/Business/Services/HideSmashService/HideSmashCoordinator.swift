@@ -104,6 +104,9 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
             if self?.operation.isContained(in: [.hide, .hideAlbums]) == true {
                 self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .hide, label: .ok)
             }
+            
+            (self?.output as? MoreFilesActionsInteractorOutput)?.operationStarted(type: .hide)
+            
             vc.close { [weak self] in
                 self?.hideItems()
             }
