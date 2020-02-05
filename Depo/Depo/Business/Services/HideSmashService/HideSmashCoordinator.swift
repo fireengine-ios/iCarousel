@@ -14,6 +14,7 @@ protocol HideFuncRoutingProtocol: class {
     func openFaceImageGrouping()
 
     //HideFuncCompletionPopUp
+    func openHiddenBin()
     func openPeopleAlbumIfPossible()
     //Track events
     func popUPClosed()
@@ -103,6 +104,9 @@ final class HideSmashCoordinator: HideFuncServiceProtocol, SmashServiceProtocol 
             if self?.operation.isContained(in: [.hide, .hideAlbums]) == true {
                 self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .hide, label: .ok)
             }
+            
+            (self?.output as? MoreFilesActionsInteractorOutput)?.operationStarted(type: .hide)
+            
             vc.close { [weak self] in
                 self?.hideItems()
             }
@@ -356,6 +360,11 @@ extension HideSmashCoordinator {
 
 extension HideSmashCoordinator: HideFuncRoutingProtocol {
 
+    func openHiddenBin() {
+        let controller = router.hiddenPhotosViewController()
+        push(controller: controller)
+    }
+    
     func openPeopleAlbumIfPossible() {
         preparePeopleAlbumOpenning()
     }
@@ -387,6 +396,7 @@ extension HideSmashCoordinator: HideFuncRoutingProtocol {
     }
     
     func popUPClosed() {
+        (output as? MoreFilesActionsInteractorOutput)?.successPopupClosed()
         trackEvents(event: .cancel)
     }
     

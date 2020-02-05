@@ -81,6 +81,10 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             
         array.remove(at: index)
 
+        if index >= array.count {
+            selectedIndex = array.count - 1
+        }
+        
         switch type {
         case .hide, .unhide, .delete:
             ///its already being called from different place, we dont need to call
@@ -91,14 +95,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             break
         }
         
-        if array.isEmpty {
-            /// added asyncAfter 1 sec to wait PopUpController about success deleting
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-                self?.output.goBack()
-            }
-        } else {
-            let nextIndex = index >= array.count ? array.count - 1 : index
-            selectedIndex = nextIndex
+        if !array.isEmpty {
+            let nextIndex = index == array.count ? array.count - 1 : index
             output.updateItems(objects: array, selectedIndex: nextIndex, isRightSwipe: isRightSwipe)
         }
     }

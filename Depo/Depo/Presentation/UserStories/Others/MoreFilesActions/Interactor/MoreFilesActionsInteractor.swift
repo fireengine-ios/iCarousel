@@ -949,9 +949,9 @@ extension MoreFilesActionsInteractor {
             text = localizations.folders
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            RouterVC().hideSpiner()
-            UIApplication.showSuccessAlert(message: text)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            self?.router.hideSpiner()
+            self?.showSuccessPopup(message: text)
         }
     }
     
@@ -1008,7 +1008,19 @@ extension MoreFilesActionsInteractor {
             return
         }
         
-        UIApplication.showSuccessAlert(message: text)
+        showSuccessPopup(message: text)
+    }
+    
+    private func showSuccessPopup(message: String) {
+        let popup = PopUpController.with(title: TextConstants.success,
+                                         message: message,
+                                         image: .success,
+                                         buttonTitle: TextConstants.ok) { vc in
+                                            vc.close { [weak self] in
+                                                self?.output?.successPopupClosed()
+                                            }
+                                        }
+        router.presentViewController(controller: popup)
     }
     
     private func trackSuccessEvent(elementType: ElementTypes) {
@@ -1075,7 +1087,6 @@ extension MoreFilesActionsInteractor {
     }
     
     func failAction(elementType: ElementTypes) -> FailResponse {
-        
         let failResponse: FailResponse  = { [weak self] value in
             DispatchQueue.toMain {
                 if value.isOutOfSpaceError {
@@ -1094,7 +1105,6 @@ extension MoreFilesActionsInteractor {
     }
     
     func failItemsAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FailResponse {
-        
         let failResponse: FailResponse  = { [weak self] value in
             self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .failure, items: relatedItems)
             DispatchQueue.toMain {
