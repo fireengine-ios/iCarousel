@@ -320,7 +320,8 @@ class StoryService: RemoteItemsService {
                                                   sortBy: sortBy,
                                                   sortOrder: sortOrder,
                                                   page: currentPage,
-                                                  size: requestSize)
+                                                  size: requestSize,
+                                                  hidden: false)
                 
         remote.searchByField(param: searchParam, success: { [weak self] response in
             guard let resultResponse = response as? SearchResponse else {
