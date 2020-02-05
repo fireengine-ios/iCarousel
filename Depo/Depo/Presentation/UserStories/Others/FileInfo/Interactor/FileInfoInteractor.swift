@@ -44,6 +44,10 @@ extension FileInfoInteractor: FileInfoInteractorInput {
                 DispatchQueue.main.async {
                     self?.item?.name = newName
                     self?.output.updated()
+                    
+                    if let item = self?.item {
+                        ItemOperationManager.default.didRenameItem(item)
+                    }
                 }
                 }, fail: { [weak self] error in
                     DispatchQueue.main.async {
