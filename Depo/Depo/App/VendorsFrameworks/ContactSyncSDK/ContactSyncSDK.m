@@ -460,6 +460,7 @@
     
     [[SyncLogger shared] stopLogging];
 
+    [[ContactUtil shared] releaseAddressBookRef];
 }
 
 @end
@@ -541,6 +542,7 @@ static bool syncing = false;
     [[SyncStatus shared] notifyProgress:[self partialInfo] step:SYNC_STEP_INITIAL progress: 60];
     
     if (_mode == SYNCBackup){
+//        [[ContactUtil shared] deleteContacts:[[ContactUtil shared] fetchContacts]];
         [self resolveMsisdn];
         return;
     } else {
@@ -1028,6 +1030,7 @@ static bool syncing = false;
             [[SyncStatus shared] notifyProgress:[self partialInfo] step:SYNC_STEP_UPLOAD_LOG progress: 0];
             [[SyncLogger shared] stopLogging];
             [[SyncStatus shared] notifyProgress:[self partialInfo] step:SYNC_STEP_UPLOAD_LOG progress: 100];
+            [[ContactUtil shared] releaseAddressBookRef];
         } else {
             if (self.backupCallback){
                 self.backupCallback();
