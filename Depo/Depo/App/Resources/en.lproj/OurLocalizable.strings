@@ -1339,7 +1339,7 @@
 "hide_single_album_success_popup_message" = "Selected album hidden successfully.";
 "hide_albums_success_popup_message" = "Selected album(s) hidden successfully.";
 "selected_items_limit_hide" = "You can not hide more than %d items.";
-"hide_single_photo_completion_alert_message" = "Selected photo will only be available in \"Hidden\" Album. You can restore them any time.";
+"hide_single_photo_completion_alert_message" = "Selected item will only be available in \"Hidden\" Album. You can restore them any time.";
 "people_album_warning_alert_title_not_premium_and_no_image_grouping" = "No \"People\" Album Yet!";
 "people_album_warning_alert_title_not_premium_and_image_grouping_on" = "Couldn't Find the Person?";
 "people_album_warning_alert_title_premium_and_no_image_grouping" = "No \"People\" Album Yet!";

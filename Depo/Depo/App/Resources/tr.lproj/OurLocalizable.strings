@@ -1316,7 +1316,7 @@
 
 /*bir kerede gizleme sınırı mı? gizli albümünün total sınırı mı?*/
 "selected_items_limit_hide" = "%d adetten fazla öğe gizleyemezsin.";
-"hide_single_photo_completion_alert_message" = "Seçilen fotoğrafa sadece \"Gizli\" albümünden erişilebilecek. lifebox listelerinde ya da hatırlatmalarında görmeyeceksin. İstediğin zaman geri yükleyebilirsin. Devam etmek istiyor musun?";
+"hide_single_photo_completion_alert_message" = "Seçilen öğeye sadece \"Gizli\" albümünden erişilebilecek. lifebox listelerinde ya da hatırlatmalarında görmeyeceksin. İstediğin zaman geri yükleyebilirsin. Devam etmek istiyor musun?";
 "people_album_warning_alert_title_not_premium_and_no_image_grouping" = "Henüz Kişi Albümün Yok!";
 "people_album_warning_alert_title_not_premium_and_image_grouping_on" = "İstediğin Kişiyi Bulamadın mı?";
 "people_album_warning_alert_title_premium_and_no_image_grouping" = "Henüz Kişi Albümün Yok!";
@@ -1327,7 +1327,7 @@
 "people_album_warning_button_not_premium_and_image_grouping_on" = "Mevcut Kişileri Görüntüle";
 "people_album_warning_button_premium_and_no_image_grouping" = "Yüz/Nesne Gruplamayı Aç!";
 "hide_successed_alert_title" = "Öğe(ler) gizlendi.";
-"hide_successed_alert_with_people_album_title" = "Seçilen kişiye ait fotoğraf(lar) gizlendi.";
+"hide_successed_alert_with_people_album_title" = "Seçilen öğe(ler) gizlendi.";
 "hide_successed_alert_people_album_title" = "İstenmeyen Kişi ve Anıları Gizle!";
 "hide_successed_alert_people_album_description" = "Bir kişiye ait tüm anıları tek tuşla gizleyebilir ya da çöp kutusuna gönderebilirsin. Gizlediğin fotoğraflara sadece \"Gizli\" albümünde ulaşabilirsin.";
 "hide_successed_alert_do_not_show_this_message" = "Bu mesajı bir daha gösterme!";
