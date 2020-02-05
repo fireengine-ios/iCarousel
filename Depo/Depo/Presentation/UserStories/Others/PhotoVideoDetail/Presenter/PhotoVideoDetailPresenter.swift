@@ -183,6 +183,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         debugPrint("failed")
     }
     
+    func successPopupClosed() {
+        if interactor.allItems.isEmpty {
+            goBack()
+        }
+    }
+    
     func goBack() {
         view.hideView()
     }
