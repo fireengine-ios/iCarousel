@@ -57,7 +57,7 @@ class SimpleUpload: UploadRequestParametrs {
         return item.fileData
     }
     
-    let tmpUUId: String
+    let tmpUUID: String
     
     init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool) {
         
@@ -71,9 +71,9 @@ class SimpleUpload: UploadRequestParametrs {
         self.isFavorite = isFavorite
 
         if item.isLocalItem {
-            self.tmpUUId = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
+            self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
         } else {
-            self.tmpUUId = UUID().uuidString
+            self.tmpUUID = UUID().uuidString
         }
     }
     
@@ -99,7 +99,7 @@ class SimpleUpload: UploadRequestParametrs {
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
             HeaderConstant.objecMetaDevice       : UIDevice.current.identifierForVendor?.uuidString ?? "",
 //            HeaderConstant.XMetaRecentServerHash : "s",
-            HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,
+            HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUID,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
             HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
@@ -114,7 +114,7 @@ class SimpleUpload: UploadRequestParametrs {
     var patch: URL {
         return URL(string: destitantionURL.absoluteString
             .appending("/")
-            .appending(tmpUUId))!
+            .appending(tmpUUID))!
     }
     
     var timeout: TimeInterval {
@@ -167,7 +167,7 @@ final class ResumableUpload: UploadRequestParametrs {
     private let range: Range<Int>
     
     let rootFolder: String
-    let tmpUUId: String
+    let tmpUUID: String
     
     let urlToLocalFile: URL? = nil
     private (set) var fileData: Data?
@@ -194,9 +194,9 @@ final class ResumableUpload: UploadRequestParametrs {
         self.isFavorite = isFavorite
 
         if item.isLocalItem {
-            self.tmpUUId = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
+            self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
         } else {
-            self.tmpUUId = UUID().uuidString
+            self.tmpUUID = UUID().uuidString
         }
     }
     
@@ -224,7 +224,7 @@ final class ResumableUpload: UploadRequestParametrs {
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
             HeaderConstant.objecMetaDevice       : UIDevice.current.identifierForVendor?.uuidString ?? "",
 //            HeaderConstant.XMetaRecentServerHash : "s",
-            HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUId,
+            HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUID,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
             HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
@@ -240,7 +240,7 @@ final class ResumableUpload: UploadRequestParametrs {
     var patch: URL {
         return URL(string: destitantionURL.absoluteString
             .appending("/")
-            .appending(tmpUUId)
+            .appending(tmpUUID)
             .appending("?upload-type=resumable"))!
     }
     
