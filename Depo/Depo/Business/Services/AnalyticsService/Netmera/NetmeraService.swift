@@ -62,6 +62,13 @@ final class NetmeraService {
                 group.leave()
             }
             
+            group.enter()
+            var countryCode = ""
+            prepareCountryCode { preparedCountryCode in
+                countryCode = preparedCountryCode
+                group.leave()
+            }
+            
             
             let twoFactorNetmeraStatus = getTwoFactorStatus()
             let autoSyncState = getAutoSyncStatus()
@@ -70,6 +77,7 @@ final class NetmeraService {
             let netmeraAutoSyncStatusPhoto = photoVideoAutosyncStatus.photo
             let netmeraAutoSyncStatusVideo = photoVideoAutosyncStatus.video
             let verifiedEmailStatus = getVerifiedEmailStatus()
+            let buildNumber = getBuildNumber()
        
             
             
@@ -87,7 +95,9 @@ final class NetmeraService {
                                              autosyncVideos: netmeraAutoSyncStatusVideo,
                                              packages: activeSubscriptionNames,
                                              autoLogin: autoLogin,
-                                             turkcellPassword: turkcellPassword)
+                                             turkcellPassword: turkcellPassword,
+                                             buildNumber: buildNumber,
+                                             countryCode: countryCode)
                 
                 user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
                 DispatchQueue.toMain {
@@ -150,7 +160,7 @@ extension NetmeraService {
            let user = NetmeraCustomUser(deviceStorage: 0, photopickLeftAnalysis: "Null", lifeboxStorage: 0, faceImageGrouping: "Null", accountType: "Null",
                twoFactorAuthentication: "Null", autosync: "Null", emailVerification: "Null",
                autosyncPhotos: "Null", autosyncVideos: "Null", packages: ["Null"],
-               autoLogin: "Null", turkcellPassword: "Null")
+               autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null")
            user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
            DispatchQueue.toMain {
                Netmera.update(user)
@@ -186,6 +196,19 @@ extension NetmeraService {
                    preparedUserField(0)
            })
        }
+        
+    private static func prepareCountryCode(preparedCountryCode: @escaping NetmeraFieldCallback) {
+        AccountService().info(
+            success: { response in
+                guard let info = response as? AccountInfoResponse, let countryCode = info.countryCode else {
+                    preparedCountryCode("Null")
+                    return
+                }
+                preparedCountryCode(countryCode)
+        }, fail: { errorResponse in
+            preparedCountryCode("Null")
+        })
+    }
       
     private static func prepareFIRGrouping(preparedUserField: @escaping NetmeraFieldCallback) {
         SingletonStorage.shared.getFaceImageSettingsStatus(success: { isEnabled in
@@ -268,6 +291,10 @@ extension NetmeraService {
         } else {
             return "Null"
         }
+    }
+    
+    private static func getBuildNumber() -> String {
+        return (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "Null"
     }
 
 }
