@@ -102,12 +102,25 @@ final class UploadService: BaseRequestService {
             
             switch uploadType {
             case .autoSync:
-                self.syncFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: success, fail: fail, syncOperationsListCallBack: { [weak self] syncOperations in
-                    
+                self.syncFileList(items: filteredItems,
+                                  uploadStategy: uploadStategy,
+                                  uploadTo: uploadTo,
+                                  folder: folder,
+                                  isFavorites: isFavorites,
+                                  isFromAlbum: isFromAlbum,
+                                  success: success,
+                                  fail: fail,
+                                  syncOperationsListCallBack: { syncOperations in
                     returnedUploadOperation(syncOperations)
                 })
             case .syncToUse:
-                self.syncToUseFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
+                self.syncToUseFileList(items: filteredItems,
+                                       uploadStategy: uploadStategy,
+                                       uploadTo: uploadTo,
+                                       folder: folder,
+                                       isFavorites: isFavorites,
+                                       isFromAlbum: isFromAlbum,
+                                       success: { [weak self] in
                     self?.stopTracking()
                     self?.clearSyncToUseCounters()
                     self?.hideUploadCardIfNeeded()

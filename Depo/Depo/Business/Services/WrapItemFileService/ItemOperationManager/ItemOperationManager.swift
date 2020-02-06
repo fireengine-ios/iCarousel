@@ -89,15 +89,21 @@ protocol ItemOperationManagerViewProtocol: class {
 }
 
 extension ItemOperationManagerViewProtocol {
-    func startUploadFile(file: WrapData) {}
+    func startUploadFile(file: WrapData) {
+        UIApplication.setIdleTimerDisabled(true)
+    }
     
-    func startUploadFilesToAlbum(files: [WrapData]) {}
+    func startUploadFilesToAlbum(files: [WrapData]) {
+        UIApplication.setIdleTimerDisabled(true)
+    }
     
     func setProgressForUploadingFile(file: WrapData, progress: Float) {}
     
     func finishedUploadFile(file: WrapData) {}
     
-    func cancelledUpload(file: WrapData) {}
+    func cancelledUpload(file: WrapData) {
+        UIApplication.setIdleTimerDisabled(true)
+    }
     
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {}
     
@@ -135,9 +141,13 @@ extension ItemOperationManagerViewProtocol {
     
     func didRenameItem(_ item: BaseDataSourceItem) {}
     
-    func syncFinished() {}
+    func syncFinished() {
+        UIApplication.setIdleTimerDisabled(false)
+    }
     
-    func finishUploadFiles() {}
+    func finishUploadFiles() {
+        UIApplication.setIdleTimerDisabled(false)
+    }
     
     func didHideItems(_ items: [WrapData]) {}
     func didHideAlbums(_ albums: [AlbumItem]) {}
