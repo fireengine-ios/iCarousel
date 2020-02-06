@@ -48,22 +48,11 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         
         if fileObject.isLocalItem {
             let localId = fileObject.getLocalID()
-            for (index, item) in items.enumerated() {
-                if localId == item.getLocalID() {
-                    selectedIndex = index
-                    break
-                }
+            if let index = items.firstIndex(where: { $0.getLocalID() == localId }) {
+                selectedIndex = index
             }
-        } else {
-            for (index, item) in items.enumerated() {
-                guard let id = fileObject.id else {
-                    continue
-                }
-                if id == item.id {
-                    selectedIndex = index
-                    break
-                }
-            }
+        } else if let index = items.firstIndex(where: { $0.id != nil && $0.id == fileObject.id }) {
+            selectedIndex = index
         }
         
         
@@ -89,15 +78,16 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
         
         let isRightSwipe = index == array.count - 1
-            
-        array.remove(at: index)
         
+        array.remove(at: index)
+
         if index >= array.count {
             selectedIndex = array.count - 1
         }
-        
+                
         if !array.isEmpty {
-            output.updateItems(objects: array, selectedIndex: index, isRightSwipe: isRightSwipe)
+            let nextIndex = index == array.count ? array.count - 1 : index
+            output.updateItems(objects: array, selectedIndex: nextIndex, isRightSwipe: isRightSwipe)
         }
     }
     

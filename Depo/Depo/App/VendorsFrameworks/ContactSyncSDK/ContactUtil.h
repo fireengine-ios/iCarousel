@@ -42,5 +42,6 @@
 -(NSArray *)getContactIds:(NSArray*)list;
 - (NSString*)getCards:(PartialInfo*)partialInfo;
 - (void)printContacts;
+-(void)releaseAddressBookRef;
 
 @end

@@ -36,6 +36,9 @@
         [defaults setObject:[@(_contactCount) stringValue] forKey:SYNC_KEY_CURRENT_CONTACT_COUNT];
         _bulkCount = [self calculateBulkCount:_contactCount];
         _totalStep = ceil((float) _contactCount / (float) _bulkCount);
+        if (_totalStep <= 0) {
+            _totalStep = 1;
+        }
     }
     
     return self;

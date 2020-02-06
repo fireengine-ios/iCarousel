@@ -233,6 +233,8 @@ final class OverlayStickerImageView: UIImageView {
                 UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseIn, animations: {
                     selectedSticker.alpha = 0
                 }) { _ in
+                    
+                    self.attachments.removeAll(where: { $0.imageView === selectedSticker })
                     selectedSticker.removeFromSuperview()
                 }
             }

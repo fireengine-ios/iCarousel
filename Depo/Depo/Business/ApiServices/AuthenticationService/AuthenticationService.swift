@@ -717,13 +717,8 @@ class AuthenticationService: BaseRequestService {
                             handler(.failed(error))
                             return
                         }
-                        SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                            CacheManager.shared.actualizeCache()
-                            handler(.success(headers))
-                            MenloworksAppEvents.onLogin()
-                        }, fail: { error in
-                            handler(.failed(error))
-                        })
+                        
+                        handler(.success(headers))
                     }
                     
                 case .failure(let error):
