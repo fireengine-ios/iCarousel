@@ -33,46 +33,33 @@
         _objectId = [NSNumber numberWithInt:ABRecordGetRecordID(_recordRef)];
         
         if (cFirstName!=NULL){
-            _firstName=[NSString stringWithFormat:@"%@", cFirstName];
-            CFRelease(cFirstName);
+            _firstName=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cFirstName)];
         }
         if (cMiddleName!=NULL){
-            _middleName=[NSString stringWithFormat:@"%@", cMiddleName];
-            CFRelease(cMiddleName);
+            _middleName=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cMiddleName)];
         }
         if (cLastName!=NULL){
-            _lastName=[NSString stringWithFormat:@"%@", cLastName];
-            CFRelease(cLastName);
+            _lastName=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cLastName)];
         }
         if (cNickName!=NULL){
-            _nickName=[NSString stringWithFormat:@"%@", cNickName];
-            CFRelease(cNickName);
+            _nickName=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cNickName)];
         }
         if (cCompany!=NULL){
-            _company=[NSString stringWithFormat:@"%@", cCompany];
-            CFRelease(cCompany);
+            _company=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cCompany)];
         }
         
         ABRecordRef source = ABPersonCopySource(ref);
-        CFNumberRef cSourceType = (CFNumberRef)ABRecordCopyValue(source, kABSourceTypeProperty);
-        NSNumber *sourceTypeRef = (__bridge NSNumber *)(cSourceType);
+        CFNumberRef cSourceType = ABRecordCopyValue(source, kABSourceTypeProperty);
+        NSNumber *sourceTypeRef = (NSNumber *) CFBridgingRelease(cSourceType);
         int sourceType = [sourceTypeRef intValue];
                                                         
         if (sourceType == kABSourceTypeLocal || sourceType == kABSourceTypeCardDAV) {
             _defaultAccount = true;
         }
-        if (cSourceType != NULL) {
-            CFRelease(cSourceType);
-        }
-        if (source != NULL) {
-            CFRelease(source);
-        }
+        CFRelease(source);
         
-        CFTypeRef modifDate = ABRecordCopyValue(_recordRef,kABPersonModificationDateProperty);
-        NSDate *lastModif=(__bridge NSDate *)(modifDate);
-        if (modifDate != NULL){
-            CFRelease(modifDate);
-        }
+        CFTypeRef modifDate = ABRecordCopyValue(ref,kABPersonModificationDateProperty);
+        NSDate *lastModif=(NSDate *)CFBridgingRelease(modifDate);
         
         _localUpdateDate = SYNC_DATE_AS_NUMBER(lastModif);
         SYNC_Log(@"Source: %d Last Modified Date : %@ %@ %@", sourceType, _objectId, lastModif, _localUpdateDate);

@@ -15,6 +15,10 @@ enum ImageFormat: String {
 
 extension ImageFormat {
     static func get(from data: Data) -> ImageFormat {
+        guard !data.isEmpty else {
+            return .unknown
+        }
+        
         switch data[0] {
         case 0x89:
             return .png

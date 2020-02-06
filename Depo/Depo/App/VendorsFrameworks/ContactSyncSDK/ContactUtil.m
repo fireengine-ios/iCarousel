@@ -45,10 +45,14 @@
  * to use
  */
 -(void)checkAddressbookAccess:(void(^)(BOOL))callback{
-    CFErrorRef error = nil;
+//    CFErrorRef error = nil;
     
     // Request authorization to Address Book
-    _addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+    if (_addressBook != nil) {
+        callback(YES);
+        return;
+    }
+    _addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     
     if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
         ABAddressBookRequestAccessWithCompletion(_addressBook, ^(bool granted, CFErrorRef error) {
@@ -103,12 +107,20 @@
     return vcardStr;
 }
 
+-(void)releaseAddressBookRef {
+    if (_addressBook != nil){
+        CFRelease(_addressBook);
+        _addressBook = nil;
+    }
+}
+
 -(void)fetchAddressBookRef{
     SYNC_Log(@"%@", @"Get AddressBookRef");
     CFErrorRef error = nil;
     
     if (_addressBook != nil){
-        CFRelease(_addressBook);
+        return;
+//        CFRelease(_addressBook);
     }
     SYNC_Log(@"%@", @"Addressbook released");
     // Request authorization to Address Book
@@ -139,12 +151,14 @@
         }
 
         ABRecordRef record = ABAddressBookGetPersonWithRecordID(_addressBook, [contact.objectId intValue]);
+        // do not release. https://stackoverflow.com/a/1809857
         if (record == nil){
             SYNC_Log(@"!!! CONTACT ID NOT FOUND IN ADDRESS BOOK %@",contact.objectId);
             continue;
         }
+        
         CFErrorRef  error = NULL;
-        BOOL success = ABAddressBookRemoveRecord(_addressBook, (ABRecordRef)record, &error);
+        BOOL success = ABAddressBookRemoveRecord(_addressBook, record, &error);
         if (!success) {
             SYNC_Log(@"An error occurred while deleting contact with id: %@ with error: %@", contact.objectId, error);
         }
@@ -156,6 +170,7 @@
     }
 }
 
+// not in use
 - (void)deleteContactDevices:(NSNumber*)contactId devices:(NSArray*)devices
 {
     if (SYNC_NUMBER_IS_NULL_OR_ZERO(contactId)){
@@ -237,6 +252,7 @@
     }
 }
 
+// not in use
 - (void)deleteContactAddresses:(NSNumber*)contactId addresses:(NSArray*)addresses
 {
     if (SYNC_NUMBER_IS_NULL_OR_ZERO(contactId)){
@@ -307,14 +323,9 @@
         NSUInteger recordCount = [_records count];
         NSUInteger startIndex = syncRound * SYNC_RESTORE_THRESHOLD;
         for (NSUInteger i=startIndex; i<recordCount; i++){
-            ABRecordRef record = (__bridge  ABRecordRef)[_records objectAtIndex:i];
-            ABRecordID recordId = ABRecordGetRecordID(record);
-            NSString *recordIdString = [NSString stringWithFormat:@"%d",recordId];
-
+            NSNumber *contactObjectId = [_records objectAtIndex:i];
+            NSString *recordIdString = [NSString stringWithFormat:@"%d", [contactObjectId intValue]];
             [_objectIds addObject:recordIdString];
-            if (record != NULL) {
-                CFRelease(record);
-            }
         }
     }
 
@@ -337,6 +348,7 @@
         isNew = YES;
     } else {
         record = ABAddressBookGetPersonWithRecordID(_addressBook, [contact.objectId intValue]);
+        // do not release. https://stackoverflow.com/a/1809857
         if (record == nil){
             SYNC_Log(@"!!! CONTACT HAS ID BUT NOT FOUND IN ADDRESS BOOK %@",contact.objectId);
             record = ABPersonCreate();
@@ -399,6 +411,7 @@
         ABRecordSetValue(record, kABPersonAddressProperty, addresses, nil);
     }
     
+    NSNumber *contactObjectId = nil;
     if (isNew){
         CFErrorRef error;
         BOOL success = NO;
@@ -409,11 +422,17 @@
             ABRecordID recordId = ABRecordGetRecordID(record);
             //SYNC_Log(@"Record Id: %d", recordId);
             contact.objectId = [NSNumber numberWithInt:recordId];
+            contactObjectId = [NSNumber numberWithInt:recordId];
         }
         
+    } else {
+        ABRecordID recordId = ABRecordGetRecordID(record);
+        contactObjectId = [NSNumber numberWithInt:recordId];
     }
     
-    [_records addObject:(__bridge id)record];
+    if (contactObjectId != nil) {
+        [_records addObject:contactObjectId];
+    }
 
     if(phoneNumbers != nil)
         CFRelease(phoneNumbers);
@@ -421,8 +440,6 @@
         CFRelease(emails);
     if(addresses != nil)
         CFRelease(addresses);
-    if(record != nil)
-        CFRelease(record);
 }
 
 - (void)saveList:(NSArray<Contact*>*)contacts
@@ -457,30 +474,26 @@
 - (Contact*)findContactById:(NSNumber*)objectId
 {
     ABRecordRef record = ABAddressBookGetPersonWithRecordID(_addressBook, [objectId intValue]);
+    // do not release. https://stackoverflow.com/a/1809857
     if (record == NULL){
         return nil;
     }
     Contact *contact = [[Contact alloc] initWithRecordRef:record];
-    if (record != NULL) {
-        CFRelease(record);
-    }
     return contact;
 }
 
 - (NSNumber*)localUpdateDate:(NSNumber*)objectId
 {
     ABRecordRef record = ABAddressBookGetPersonWithRecordID(_addressBook, [objectId intValue]);
+    // do not release. https://stackoverflow.com/a/1809857
     if (record == NULL){
         return nil;
     }
     NSDate *lastModif=(__bridge NSDate *)(ABRecordCopyValue(record,kABPersonModificationDateProperty));
-
-    if (record != NULL) {
-        CFRelease(record);
-    }
     return SYNC_DATE_AS_NUMBER(lastModif);
 }
 
+// not in use
 - (void) printDefaultSource {
     CFTypeRef defaultSourceRef = ABAddressBookCopyDefaultSource(_addressBook);
     CFTypeRef defaultSourceNameRef = ABRecordCopyValue(defaultSourceRef, kABSourceNameProperty);
@@ -502,6 +515,7 @@
     }
 }
 
+// not in use
 - (NSMutableArray*)getDefaultSources
 {
     [self fetchAddressBookRef];
@@ -545,60 +559,74 @@
 
 - (NSMutableArray*)fetchLocalContacts
 {
-    NSMutableArray *ret = [NSMutableArray new];
-    for(id source in [self getDefaultSources]){
-        CFTypeRef sourceRef = (__bridge CFTypeRef) source;
-        if (sourceRef == NULL) {
-            SYNC_Log(@"Source reference is not found!!!");
-            continue;
-        }
-        CFArrayRef sourceContacts = ABAddressBookCopyArrayOfAllPeopleInSource(_addressBook, sourceRef);
-        CFTypeRef sourceNameRef = ABRecordCopyValue(sourceRef, kABSourceNameProperty);
-        
-        NSString *sourceName = (__bridge NSString *) sourceNameRef;
-        CFIndex contactLength = CFArrayGetCount(sourceContacts);
-        
-        SYNC_Log(@"Source name: %@ Count: %ld ", sourceName, (long)contactLength);
-        for ( int i = 0; i < contactLength; i++ ) {
-            ABRecordRef ref = CFArrayGetValueAtIndex(sourceContacts, i);
-            Contact *contact = [[Contact alloc] initWithRecordRef:ref];
-            CFRetain(ref);
-            
-            NSString *displayName = contact.generateDisplayName;
-            if(!SYNC_STRING_IS_NULL_OR_EMPTY(displayName) && displayName.length > 1000){
-                continue;
-            }
-            
-            if (!SYNC_STRING_IS_NULL_OR_EMPTY(contact.firstName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.middleName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.lastName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.nickName)){
-                contact.hasName = YES;
-            } else {
-                contact.hasName = NO;
-            }
-            
-            [self fetchNumbers:contact];
-            [self fetchEmails:contact];
-            [self fetchAddresses:contact];
-            
-            [ret addObject:contact];
-            
-            if (ref != NULL) {
-                CFRelease(ref);
-            }
-        }
-        
-        if (sourceNameRef != NULL) {
-            CFRelease(sourceNameRef);
-        }
-        if (sourceContacts != NULL) {
-            CFRelease(sourceContacts);
-        }
-        if (sourceRef != NULL) {
-            CFRelease(sourceRef);
+    NSMutableArray *contacts = [self fetchContacts];
+    NSMutableArray *localContacts = [NSMutableArray new];
+    for (Contact *c in contacts) {
+        if (c.defaultAccount) {
+            [self fetchNumbers:c];
+            [self fetchEmails:c];
+            [self fetchAddresses:c];
+            [localContacts addObject:c];
         }
     }
-    return ret;
+    return localContacts;
+    
+    // do not remove for now
+//    NSMutableArray *ret = [NSMutableArray new];
+//    for(id source in [self getDefaultSources]){
+//        CFTypeRef sourceRef = (__bridge CFTypeRef) source;
+//        if (sourceRef == NULL) {
+//            SYNC_Log(@"Source reference is not found!!!");
+//            continue;
+//        }
+//        CFArrayRef sourceContacts = ABAddressBookCopyArrayOfAllPeopleInSource(_addressBook, sourceRef);
+//        CFTypeRef sourceNameRef = ABRecordCopyValue(sourceRef, kABSourceNameProperty);
+//
+//        NSString *sourceName = (__bridge NSString *) sourceNameRef;
+//        CFIndex contactLength = CFArrayGetCount(sourceContacts);
+//
+//        SYNC_Log(@"Source name: %@ Count: %ld ", sourceName, (long)contactLength);
+//        for ( int i = 0; i < contactLength; i++ ) {
+//            ABRecordRef ref = CFArrayGetValueAtIndex(sourceContacts, i);
+//            Contact *contact = [[Contact alloc] initWithRecordRef:ref];
+////            CFRetain(ref);
+//
+//            NSString *displayName = contact.generateDisplayName;
+//            if(!SYNC_STRING_IS_NULL_OR_EMPTY(displayName) && displayName.length > 1000){
+//                continue;
+//            }
+//
+//            if (!SYNC_STRING_IS_NULL_OR_EMPTY(contact.firstName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.middleName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.lastName) || !SYNC_STRING_IS_NULL_OR_EMPTY(contact.nickName)){
+//                contact.hasName = YES;
+//            } else {
+//                contact.hasName = NO;
+//            }
+//
+//            [self fetchNumbers:contact];
+//            [self fetchEmails:contact];
+//            [self fetchAddresses:contact];
+//
+//            [ret addObject:contact];
+//
+////            if (ref != NULL) {
+////                CFRelease(ref);
+////            }
+//        }
+//
+//        if (sourceNameRef != NULL) {
+//            CFRelease(sourceNameRef);
+//        }
+//        if (sourceContacts != NULL) {
+//            CFRelease(sourceContacts);
+//        }
+//        if (sourceRef != NULL) {
+//            CFRelease(sourceRef);
+//        }
+//    }
+//    return ret;
 }
 
+// not in use
 - (NSMutableArray*)fetchContactIds
 {
     [self fetchAddressBookRef];
@@ -639,8 +667,8 @@
             break;
         }
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, index );
+        // do not release. https://stackoverflow.com/a/43715622
         Contact *contact = [[Contact alloc] initWithRecordRef:ref];
-        CFRetain(ref);
 
         NSString *displayName = contact.generateDisplayName;
         if(!SYNC_STRING_IS_NULL_OR_EMPTY(displayName) && displayName.length > 1000){
@@ -653,9 +681,6 @@
             contact.hasName = NO;
         }
         [ret addObject:contact];
-
-//        if (ref!=NULL)
-//            CFRelease(ref);
     }
     if (allPeople!=nil)
         CFRelease(allPeople);
@@ -664,7 +689,8 @@
 
 - (NSInteger)getContactCount
 {
-    [self fetchAddressBookRef];
+    // do not use fetchAddressBookRef
+//    [self fetchAddressBookRef];
     CFIndex nPeople = ABAddressBookGetPersonCount( _addressBook );
     return nPeople;
 }
@@ -681,14 +707,11 @@
     for ( int i = 0; i < nPeople; i++ )
     {
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
+        // do not release https://stackoverflow.com/a/43715622
         
         NSNumber *objectId = [NSNumber numberWithInt:ABRecordGetRecordID(ref)];
         
         NSDate *lastModif=(__bridge NSDate *)(ABRecordCopyValue(ref,kABPersonModificationDateProperty));
-        
-        if (ref != NULL) {
-            CFRelease(ref);
-        }
 
         SYNC_Log(@"%@ => %@ / %@", objectId, lastModif, SYNC_DATE_AS_NUMBER(lastModif));
     }
@@ -706,17 +729,11 @@
         CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
         CFStringRef phoneTypeRef = ABMultiValueCopyLabelAtIndex(multiPhones, i);
         
-        NSString *phoneNumber = (__bridge NSString *) phoneNumberRef;
-        NSString *type = (__bridge NSString *) phoneTypeRef;
+        NSString *phoneNumber = (NSString *) CFBridgingRelease(phoneNumberRef);
+        NSString *type = (NSString *) CFBridgingRelease(phoneTypeRef);
         
         if (phoneTypeRef==NULL || type==nil){
             type = (__bridge NSString *)kABOtherLabel;
-        }
-        if (phoneNumberRef != NULL) {
-            CFRelease(phoneNumberRef);
-        }
-        if (phoneTypeRef!=NULL){
-            CFRelease(phoneTypeRef);
         }
         
         ContactPhone *phone = (ContactPhone *)[[ContactPhone alloc] initWithValue:phoneNumber andType:type contactId:contact.objectId];
@@ -740,18 +757,11 @@
         CFStringRef emailRef = ABMultiValueCopyValueAtIndex(multiEmails, i);
         CFStringRef emailTypeRef = ABMultiValueCopyLabelAtIndex(multiEmails, i);
         
-        NSString *mailAddress = (__bridge NSString *) emailRef;
-        NSString *type = (__bridge NSString *) emailTypeRef;
+        NSString *mailAddress = (NSString *) CFBridgingRelease(emailRef);
+        NSString *type = (NSString *) CFBridgingRelease(emailTypeRef);
         
         if (emailTypeRef==NULL || type==nil){
             type = (__bridge NSString *)kABOtherLabel;
-        }
-        
-        if (emailRef!=NULL) {
-            CFRelease(emailRef);
-        }
-        if (emailTypeRef!=NULL){
-            CFRelease(emailTypeRef);
         }
         
         ContactEmail *newMail = [[ContactEmail alloc] initWithValue:mailAddress andType:type contactId:contact.objectId];

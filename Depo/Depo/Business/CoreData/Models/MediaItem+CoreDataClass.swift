@@ -42,6 +42,7 @@ public class MediaItem: NSManagedObject {
         
         isFolder = wrapData.isFolder ?? false
         isTranscoded = wrapData.status.isTranscoded
+        status = wrapData.status.valueForCoreDataMapping()
         
         parent = wrapData.parent
         

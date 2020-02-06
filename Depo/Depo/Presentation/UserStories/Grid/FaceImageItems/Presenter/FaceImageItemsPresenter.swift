@@ -35,7 +35,16 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     private let sumWidthMarginsForHeader: CGFloat = 30
     
     private let sumHeightMarginsForHeader: CGFloat = 40
-
+    
+    override init(sortedRule: SortedRules = .timeDown) {
+        super.init(sortedRule: sortedRule)
+        ItemOperationManager.default.startUpdateView(view: self)
+    }
+    
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
+    }
+    
     override func viewIsReady(collectionView: UICollectionView) {
         if let faceImageType = faceImageType {
             dataSource = FaceImageItemsDataSource(faceImageType: faceImageType, delegate: self)
@@ -269,8 +278,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         let maxCellWidth: CGFloat = UIScreen.main.bounds.width - sumWidthMarginsForHeader
         
         for model in CarouselPagerDataSource.getCarouselPageModels() {
-           other = model.text.height(for:maxCellWidth, font: UIFont.TurkcellSaturaDemFont(size: 18))
-                   + model.title.height(for: maxCellWidth , font: UIFont.TurkcellSaturaFont(size: 14))
+           other = model.text.height(for:maxCellWidth, font: UIFont.TurkcellSaturaDemFont(size: 14))
+                   + model.title.height(for: maxCellWidth , font: UIFont.TurkcellSaturaFont(size: 13))
            maxHeight = max(maxHeight,other)
         }
         
@@ -453,6 +462,34 @@ extension FaceImageItemsPresenter: FaceImageItemsDataSourceDelegate {
             } else {
                 router.showNoDetailsAlert(with: alertText)
             }
+        }
+    }
+}
+
+extension FaceImageItemsPresenter: ItemOperationManagerViewProtocol {
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        if let obj = object as? FaceImageItemsPresenter {
+            return obj.faceImageType == faceImageType && allItems == obj.allItems
+        } else {
+            return false
+        }
+    }
+    
+    func didUnhidePeople(items: [PeopleItem]) {
+        if faceImageType == .people {
+            reloadData()
+        }
+    }
+    
+    func didUnhidePlaces(items: [PlacesItem]) {
+        if faceImageType == .places {
+            reloadData()
+        }
+    }
+    
+    func didUnhideThings(items: [ThingsItem]) {
+        if faceImageType == .things {
+            reloadData()
         }
     }
 }
