@@ -26,7 +26,7 @@
 #endif
 #endif
 
-#define SYNC_VERSION @"4.0.3-210120"
+#define SYNC_VERSION @"4.0.3-040220"
 #define SYNC_USER_AGENT @"iOS ContactSync SDK"
 
 #define SYNC_HEADER_AUTH_TOKEN @"X-Auth-Token"
@@ -42,7 +42,7 @@
 
 #define SYNC_KEY_PROGRESS_RESTORE @"ProgressRestore"
 
-#define SYNC_KEY_CURRENT_STEP @"CurrentStep"
+#define SYNC_KEY_CURRENT_STEP @"CurrentStep030220"
 #define SYNC_KEY_CURRENT_CONTACT_COUNT @"CurrentContactCount"
 
 #define SYNC_KEY_DELAY @"ContactSyncDelay"

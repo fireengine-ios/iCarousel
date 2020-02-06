@@ -22,6 +22,7 @@ final class AlbumCell: BaseCollectionViewCell {
     @IBOutlet private weak var thumbnail: LoadingImageView! {
         willSet {
             newValue.backgroundColor = UIColor.lightGray.lighter(by: 20.0)
+            newValue.contentMode = .scaleAspectFill
         }
     }
     

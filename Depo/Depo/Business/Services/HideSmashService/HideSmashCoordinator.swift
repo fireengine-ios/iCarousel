@@ -396,6 +396,7 @@ extension HideSmashCoordinator: HideFuncRoutingProtocol {
     }
     
     func popUPClosed() {
+        (output as? MoreFilesActionsInteractorOutput)?.successPopupClosed()
         trackEvents(event: .cancel)
     }
     

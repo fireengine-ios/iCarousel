@@ -13,7 +13,7 @@ final class CarouselPageView : UIView {
     let titleLabel : UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont.TurkcellSaturaDemFont(size: 18)
+        label.font = UIFont.TurkcellSaturaDemFont(size: 14)
         label.textColor = ColorConstants.textGrayColor
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false

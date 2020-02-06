@@ -259,7 +259,7 @@ class EditinglBar: CustomTabBar {
         static let hide = ("HideButtonIcon", TextConstants.tabBarHideLabel, "")
         static let unhide = ("UnhideButtonIcon", TextConstants.tabBarUnhideLabel, "")
         static let smash = ("SmashButtonIcon", TextConstants.tabBarSmashLabel, "")
-        static let restore = ("RestoreButtonIcon", "Restore", "")
+        static let restore = ("RestoreButtonIcon", TextConstants.actionSheetRestore, "")
     }
     
     private let tabBarHeight: CGFloat = 49

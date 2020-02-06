@@ -167,6 +167,7 @@ extension PhotoVideoDetailCell: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.scrollView.delegate = self
         self.webView = webView
+        delegate?.imageLoadingFinished()
     }
 }
 
