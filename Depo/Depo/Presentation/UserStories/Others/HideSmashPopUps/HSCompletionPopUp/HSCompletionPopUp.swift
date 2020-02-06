@@ -271,7 +271,9 @@ final class HSCompletionPopUp: BasePopUpController {
 
     @IBAction private func onCloseTap(_ sender: Any) {
         trackOpenPeopleAlbumEvent(isCanceled: true)
-        close()
+        close(isFinalStep: false) { [weak self] in
+            self?.delegate?.popUPClosed()
+        }
     }
 
     @IBAction private func onForgetPopUpTap(_ sender: UIButton) {
