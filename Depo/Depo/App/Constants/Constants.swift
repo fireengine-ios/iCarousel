@@ -471,7 +471,7 @@ struct TextConstants {
     
     // MARK: Terms of Use and Privacy Policy
      static let termsOfUseCell = NSLocalizedString("terms_of_use", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-     static let privacyPolicyCell = NSLocalizedString("privacy_policy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+     static let privacyPolicyCell = NSLocalizedString("privacy_policy_cell", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     
     // MARK: Face Image

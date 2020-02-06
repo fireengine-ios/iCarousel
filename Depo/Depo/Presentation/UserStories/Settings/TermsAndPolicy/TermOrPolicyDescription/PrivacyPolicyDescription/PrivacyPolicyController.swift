@@ -11,8 +11,7 @@ import WebKit
 
 final class PrivacyPolicyController: UIViewController {
     
-    private let langCode = Device.locale
-    private var urlPath =  RouteRequests.privacyPolicy
+    private let privacyPolicyService: PrivacyPolicyService = factory.resolve()
     
     private let webView: WKWebView = {
         let contentController = WKUserContentController()
@@ -51,7 +50,6 @@ final class PrivacyPolicyController: UIViewController {
     }
     
     init() {
-        self.urlPath = urlPath + langCode
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -70,13 +68,9 @@ final class PrivacyPolicyController: UIViewController {
         webView.navigationDelegate = self
         view.addSubview(activityIndicator)
         
-        guard let url = URL(string: urlPath) else {
-            assertionFailure()
-            return
-        }
-        webView.load(URLRequest(url: url))
+        setupWebView()
         startActivity()
-        setTitle(withString: TextConstants.privacyPolicyCell)
+        setTitle(withString: TextConstants.privacyPolicyCondition)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,6 +78,17 @@ final class PrivacyPolicyController: UIViewController {
         
         navigationBarWithGradientStyle()
         backButtonForNavigationItem(title: TextConstants.backTitle)
+    }
+    
+    private func setupWebView() {
+        privacyPolicyService.getPrivacyPolicy { [weak self] response in
+            switch response {
+            case .success(let privacyPolicy):
+                self?.webView.loadHTMLString(privacyPolicy.content, baseURL: nil)
+            case .failed(_):
+                self?.stopActivity()
+            }
+        }
     }
     
     private func startActivity() {
