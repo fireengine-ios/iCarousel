@@ -34,7 +34,7 @@ ictsDeployers = "EXT02D9926" // To enable, uncomment submitters in approval stag
 testFlightDeployers = "TCUSER" // To enable, uncomment submitters in approval stage code
 
 // Email notification
-devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;samet.alkan@turkcell.com.tr;can.kucukakdag@turkcell.com.tr"
+devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;can.kucukakdag@turkcell.com.tr"
 
 xcodeParams = [
         xcodeApp: 'Xcode11.app',
