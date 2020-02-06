@@ -98,6 +98,7 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
             newValue.backgroundColor = UIColor.lrTealishTwo
 
             newValue.titleLabel?.font = UIFont.TurkcellSaturaFont(size: 18)
+            newValue.adjustsFontSizeToFitWidth()
         }
     }
 
