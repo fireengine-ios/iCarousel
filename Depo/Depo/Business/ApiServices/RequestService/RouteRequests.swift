@@ -26,7 +26,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    static var currentServerEnvironment = ServerEnvironment.test
+    static var currentServerEnvironment = ServerEnvironment.production
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
@@ -78,7 +78,7 @@ struct RouteRequests {
     }()
     
     
-    static let privacyPolicyFromAPI = baseUrl +/ "privacyPolicy/get/\(Device.locale)"
+    static let privacyPolicy = baseUrl +/ "privacyPolicy/get/\(Device.locale)"
     
     static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     

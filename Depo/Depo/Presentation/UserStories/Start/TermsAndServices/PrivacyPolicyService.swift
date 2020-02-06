@@ -23,7 +23,7 @@ final class PrivacyPolicyServiceImp: BaseRequestService, PrivacyPolicyService {
     
     func getPrivacyPolicy(completion: @escaping (ResponseResult<PrivacyPolicyResponse>) -> Void) {
         sessionManager
-            .request(RouteRequests.privacyPolicyFromAPI)
+            .request(RouteRequests.privacyPolicy)
             .customValidate().responseData { response in
                 switch response.result {
                 case .success(let data):
