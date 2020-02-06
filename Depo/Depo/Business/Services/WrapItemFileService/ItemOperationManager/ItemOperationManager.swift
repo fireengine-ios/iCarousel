@@ -90,15 +90,11 @@ protocol ItemOperationManagerViewProtocol: class {
 
 extension ItemOperationManagerViewProtocol {
     func startUploadFile(file: WrapData) {
-        DispatchQueue.main.async {
-            UIApplication.shared.isIdleTimerDisabled = true
-        }
+        UIApplication.setIdleTimerDisabled(true)
     }
     
     func startUploadFilesToAlbum(files: [WrapData]) {
-        DispatchQueue.main.async {
-            UIApplication.shared.isIdleTimerDisabled = true
-        }
+        UIApplication.setIdleTimerDisabled(true)
     }
     
     func setProgressForUploadingFile(file: WrapData, progress: Float) {}
@@ -106,9 +102,7 @@ extension ItemOperationManagerViewProtocol {
     func finishedUploadFile(file: WrapData) {}
     
     func cancelledUpload(file: WrapData) {
-        DispatchQueue.main.async {
-            UIApplication.shared.isIdleTimerDisabled = true
-        }
+        UIApplication.setIdleTimerDisabled(true)
     }
     
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {}
@@ -148,15 +142,11 @@ extension ItemOperationManagerViewProtocol {
     func didRenameItem(_ item: BaseDataSourceItem) {}
     
     func syncFinished() {
-        DispatchQueue.main.async {
-            UIApplication.shared.isIdleTimerDisabled = false
-        }
+        UIApplication.setIdleTimerDisabled(false)
     }
     
     func finishUploadFiles() {
-        DispatchQueue.main.async {
-            UIApplication.shared.isIdleTimerDisabled = false
-        }
+        UIApplication.setIdleTimerDisabled(false)
     }
     
     func didHideItems(_ items: [WrapData]) {}
