@@ -45,7 +45,19 @@ final class UploadOperation: Operation {
         self.isPhotoAlbum = isFromAlbum
         
         super.init()
-        self.qualityOfService = (uploadType == .autoSync) ? .background : .userInitiated
+        
+        setupQualityOfService(uploadType: uploadType)
+    }
+    
+    private func setupQualityOfService(uploadType: UploadType) {
+        switch uploadType {
+        case .syncToUse:
+            qualityOfService = .userInteractive
+        case .resumableUpload, .simpleUpload:
+            qualityOfService = .userInitiated
+        case .autoSync:
+            qualityOfService = .background
+        }
     }
     
     //MARK: - Overriding
