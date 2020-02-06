@@ -313,9 +313,14 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         }
     }
     
-    func updateItems(objectsArray: [Item], selectedIndex: Int?, isRightSwipe: Bool) {
+    func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool) {
         self.selectedIndex = selectedIndex
         objects = objectsArray
+    }
+    
+    func onLastRemoved() {
+        selectedIndex = nil
+        objects.removeAll()
     }
     
     func getNavigationController() -> UINavigationController? {

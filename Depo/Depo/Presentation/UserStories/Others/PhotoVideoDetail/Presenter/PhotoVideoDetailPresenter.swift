@@ -193,8 +193,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         view.hideView()
     }
     
-    func updateItems(objects: [Item], selectedIndex: Int?, isRightSwipe: Bool) {
+    func updateItems(objects: [Item], selectedIndex: Int, isRightSwipe: Bool) {
         view.updateItems(objectsArray: objects, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
+    }
+    
+    func onLastRemoved() {
+        view.onLastRemoved()
     }
     
     func selectModeSelected() {

@@ -14,7 +14,9 @@ protocol PhotoVideoDetailViewInput: class {
     
     func onShowSelectedItem(at index: Int, from items: [Item])
     
-    func updateItems(objectsArray: [Item], selectedIndex: Int?, isRightSwipe: Bool)
+    func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool)
+    
+    func onLastRemoved()
     
     func getNavigationController() -> UINavigationController?
     

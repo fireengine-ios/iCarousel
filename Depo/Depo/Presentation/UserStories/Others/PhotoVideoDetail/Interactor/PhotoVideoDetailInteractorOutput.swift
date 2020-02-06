@@ -14,7 +14,9 @@ protocol PhotoVideoDetailInteractorOutput: class {
     
     func goBack()
     
-    func updateItems(objects: [Item], selectedIndex: Int?, isRightSwipe: Bool)
+    func updateItems(objects: [Item], selectedIndex: Int, isRightSwipe: Bool)
+    
+    func onLastRemoved()
     
     func startAsyncOperation()
 }
