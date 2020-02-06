@@ -35,7 +35,7 @@ final class UploadService: BaseRequestService {
     
     
     private var allUploadOperationsCount: Int {
-        return uploadOperations.filter({ $0.uploadType == .fromHomePage && !$0.isCancelled }).count + finishedUploadOperationsCount
+        return uploadOperations.filter({ $0.uploadType == .simpleUpload && !$0.isCancelled }).count + finishedUploadOperationsCount
     }
     private var finishedUploadOperationsCount = 0
     
@@ -75,9 +75,7 @@ final class UploadService: BaseRequestService {
         switch uploadType {
         case .autoSync:
             return .sync
-        case .syncToUse, .fromHomePage:
-            return .upload
-        case .other:
+        case .syncToUse, .simpleUpload:
             return .upload
         }
     }
@@ -176,7 +174,7 @@ final class UploadService: BaseRequestService {
     }
     
     private func hideUploadCardIfNeeded() {
-        if uploadOperations.filter({ $0.uploadType?.isContained(in: [.fromHomePage, .syncToUse]) ?? false }).count == 0 {
+        if uploadOperations.filter({ $0.uploadType?.isContained(in: [.simpleUpload, .syncToUse]) ?? false }).count == 0 {
             CardsManager.default.stopOperationWithType(type: .upload)
         }
     }
@@ -222,7 +220,7 @@ final class UploadService: BaseRequestService {
             // filter all items which md5's are not in the uploadOperations
             let itemsToUpload = items.filter { item -> Bool in
                 (self.uploadOperations.first(where: { operation -> Bool in
-                    if operation.inputItem.md5 == item.md5 && operation.uploadType?.isContained(in: [.autoSync, .fromHomePage]) ?? false {
+                    if operation.inputItem.md5 == item.md5 && operation.uploadType?.isContained(in: [.autoSync, .simpleUpload]) ?? false {
                         operation.cancel()
                         self.uploadOperations.removeIfExists(operation)
                         return false
@@ -345,7 +343,7 @@ final class UploadService: BaseRequestService {
             self.logSyncSettings(state: "StartUploadFileList")
             
             let operations: [UploadOperation] = itemsToUpload.flatMap {
-                let operation = UploadOperation(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
+                let operation = UploadOperation(item: $0, uploadType: .simpleUpload, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
                     self?.dispatchQueue.async { [weak self] in
                         guard let `self` = self else {
                             returnedOprations(nil)
@@ -353,7 +351,7 @@ final class UploadService: BaseRequestService {
                         }
                         
                         let checkIfFinished = {
-                            if self.uploadOperations.filter({ $0.uploadType == .fromHomePage }).isEmpty {
+                            if self.uploadOperations.filter({ $0.uploadType == .simpleUpload }).isEmpty {
                                 self.trackUploadItemsFinished(items: itemsToUpload)
                                 success()
                                 ItemOperationManager.default.syncFinished()
@@ -404,7 +402,7 @@ final class UploadService: BaseRequestService {
             self.uploadQueue.addOperations(operations, waitUntilFinished: false)
             debugLog("UPLOADING upload: \(operations.count) have been added to the upload queue")
             print("UPLOADING upload: \(operations.count) have been added to the upload queue")
-            let oretiontoReturn = self.uploadOperations.filter({ $0.uploadType == .fromHomePage })
+            let oretiontoReturn = self.uploadOperations.filter({ $0.uploadType == .simpleUpload })
             returnedOprations(oretiontoReturn)
 //        }
     }
@@ -548,7 +546,7 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelUploadOperations() {
-        var operationsToRemove = uploadOperations.filter({ $0.uploadType == .fromHomePage })
+        var operationsToRemove = uploadOperations.filter({ $0.uploadType == .simpleUpload })
         
         cancelAndRemove(operations: operationsToRemove)
         
