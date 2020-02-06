@@ -629,7 +629,7 @@ final class UploadService: BaseRequestService {
         finishedVideoSyncOperationsCount = 0
     }
     
-    func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask? {
+    func upload(uploadParam: UploadRequestParametrs, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask? {
         logEvent("StartUpload \(uploadParam.fileName)")
         
         let request = executeUploadRequest(param: uploadParam, response: { data, response, error in

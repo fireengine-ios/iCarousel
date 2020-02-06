@@ -78,7 +78,7 @@ final class UploadOperation: Operation {
         ItemOperationManager.default.startUploadFile(file: inputItem)
         
         SingletonStorage.shared.progressDelegates.add(self)
-        attempmtUpload()
+        attemptUpload()
         
         semaphore.wait()
         
@@ -96,7 +96,19 @@ final class UploadOperation: Operation {
         }
     }
     
-    private func attempmtUpload() {
+    private func attemptUpload() {
+        if uploadType.isContained(in: [.resumableUpload]) {
+            attemptResumableUpload()
+        } else {
+            attemptSimpleUpload()
+        }
+    }
+    
+    private func attemptResumableUpload() {
+        
+    }
+
+    private func attemptSimpleUpload() {
         let customSucces: FileOperationSucces = { [weak self] in
             guard let `self` = self else {
                 return
@@ -135,12 +147,12 @@ final class UploadOperation: Operation {
                     return
                 }
                 
-                let uploadParam = Upload(item: self.inputItem,
-                                         destitantion: responseURL,
-                                         uploadStategy: self.uploadStategy,
-                                         uploadTo: self.uploadTo,
-                                         rootFolder: self.folder,
-                                         isFavorite: self.isFavorites)
+                let uploadParam = SimpleUpload(item: self.inputItem,
+                                               destitantion: responseURL,
+                                               uploadStategy: self.uploadStategy,
+                                               uploadTo: self.uploadTo,
+                                               rootFolder: self.folder,
+                                               isFavorite: self.isFavorites)
                 
                 self.clearingAction = { [weak self] in
                     self?.removeTemporaryFile(at: uploadParam.urlToLocalFile)
@@ -189,7 +201,7 @@ final class UploadOperation: Operation {
                         let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
                         self.dispatchQueue.asyncAfter(deadline: delay, execute: {
                             self.attemptsCount += 1
-                            self.attempmtUpload()
+                            self.attemptUpload()
                         })
                     } else {
                         customFail(error)
@@ -205,7 +217,7 @@ final class UploadOperation: Operation {
             }, fail: customFail)
     }
     
-    private func addPhotoToTheAlbum(with parameters: Upload, response: SearchItemResponse) {
+    private func addPhotoToTheAlbum(with parameters: UploadRequestParametrs, response: SearchItemResponse) {
         if self.isPhotoAlbum {
             let item = Item(remote: response)
             let parameter = AddPhotosToAlbum(albumUUID: parameters.rootFolder, photos: [item])
@@ -226,7 +238,7 @@ final class UploadOperation: Operation {
         return UploadService.default.baseUrl(success: success, fail: fail)
     }
     
-    private func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask? {
+    private func upload(uploadParam: UploadRequestParametrs, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask? {
         return UploadService.default.upload(uploadParam: uploadParam,
                                             success: success,
                                             fail: fail)
