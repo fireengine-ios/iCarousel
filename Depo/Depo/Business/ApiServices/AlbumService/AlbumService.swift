@@ -240,8 +240,9 @@ class PhotosAlbumService: BaseRequestService {
             debugLog("PhotosAlbumService loadAllItemsFrom")
 
             let fileService = WrapItemFileService()
-            fileService.delete(deleteFiles: items, success: nil, fail: nil)
-            self.delete(albums: deleteAlbums, success: wrappedSuccess, fail: fail)
+            fileService.delete(deleteFiles: items, success: { [weak self] in
+                self?.delete(albums: deleteAlbums, success: wrappedSuccess, fail: fail)
+            }, fail: fail)
         }
     }
     
@@ -257,8 +258,9 @@ class PhotosAlbumService: BaseRequestService {
         loadAllItemsFrom(albums: moveToTrashAlbums) { items in
             debugLog("PhotosAlbumService loadAllItemsFrom")
             let fileService = WrapItemFileService()
-            fileService.moveToTrash(files: items, success: nil, fail: nil)
-            self.moveToTrashAlbums(moveToTrashAlbums, success: success, fail: fail)
+            fileService.moveToTrash(files: items, success: { [weak self] in
+                self?.moveToTrashAlbums(moveToTrashAlbums, success: success, fail: fail)
+            }, fail: fail)
         }
     }
     
@@ -266,8 +268,9 @@ class PhotosAlbumService: BaseRequestService {
         debugLog("PhotosAlbumService completelyDelete")
         
         let fileService = WrapItemFileService()
-        fileService.moveToTrash(files: albumItems, success: nil, fail: nil)
-        self.moveToTrashAlbums(albums, success: success, fail: fail)
+        fileService.moveToTrash(files: albumItems, success: { [weak self] in
+            self?.moveToTrashAlbums(albums, success: success, fail: fail)
+        }, fail: fail)
     }
     
     func addPhotosToAlbum(parameters: AddPhotosToAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {

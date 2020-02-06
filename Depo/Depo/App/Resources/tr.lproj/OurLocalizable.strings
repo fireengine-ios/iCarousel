@@ -1356,7 +1356,7 @@
 "trash_bin_album_slider_title" = "Çöp Kutusu";
 "trash_bin_album_slider_empty" = "Çöp Kutusunda Henüz Silinmiş Albüm Yok";
 "trash_bin_empty" = "Çöp Kutusunda Henüz Silinmiş Öğe Yok";
-"delete_confirmation_popup_title" = "Çöp Kutusuna Taşı";
+"delete_confirmation_popup_title" = "Sil";
 "delete_confirmation_popup_text" = "Seçilen öğe(ler) çöp kutusuna taşınacak. 30 gün içinde geri alabileceksin. lifebox hafızanda yer açman gerekirse öncelikle çöp kutusunu boşaltmayı unutma.";
 "restore_confirmation_popup_title" = "Geri Yükle";
 "restore_confirmation_popup_text" = "Seçilen öğe(ler) geri yüklenecek. Devam etmek istiyor musun?";
