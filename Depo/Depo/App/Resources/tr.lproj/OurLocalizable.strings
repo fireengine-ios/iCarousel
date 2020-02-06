@@ -158,7 +158,7 @@
 "Suggestion" = "Öneri";
 "Feedback Form" = "Önerilerin veya şikayetlerin için lütfen bizimle iletişime geçin";
 "Thanks for leaving a comment!" = "Bize Ulaşin";
-"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Lütfen aşağıdaki bilgileri silmeyiniz. Bu bilgiler problemin çözümünde kullanılacak.\nUygulama Sürümü: %@ \nMsisdn: %@ \nTaşıyıcı: %@ \nCihaz: %@ \nCihaz OS: %@ \nDil: %@ \nDil tercihi: %@ \nAğ durumu: %@\nToplam depolama alanı: %lld \nKullanılan depolama alanı: %lld \nPaketler: %@";
+"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Lütfen aşağıdaki bilgileri silmeyiniz. Bu bilgiler problemin çözümünde kullanılacak.\nUygulama Sürümü: %@ \nMsisdn: %@ \nTaşıyıcı: %@ \nCihaz: %@ \nCihaz OS: %@ \nDil: %@ \nAğ Durumu: %@ \nPaketler: %@\nToplam depolama alanı: %lld \nKullanılan depolama alanı: %lld \nİsim: %@\nSoyisim: %@\nE-posta: %@\nKonu: %@";
 "Upload Photos" = "Fotoğrafları Yükle";
 "Add" = "Ekle";
 "Albums" = "Albümler";

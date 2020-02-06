@@ -201,7 +201,7 @@ sent to your phone number %@"*/
 "Suggestion" = "Suggestion";
 "Feedback Form" = "Pour toute suggestion ou réclamation, contactez-nous:";
 "Thanks for leaving a comment!" = "Contactez-nous";
-"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Veuillez ne pas supprimer les informations ci-dessous. Ces éléments seront nécessaires afin de résoudre votre problème. \n\nVersion d’Application: %@\nMsisdn/Numéro: %@\nPorteur: %@\nAppareil: %@\nSystème d'exploitation de l'appareil: %@\nLangue: %@\nLangue de préférence: %@\nStatut du Réseau: %@\nEspace de stockage Total: %lld\nEspace de stockage utilisé: %lld\nOffres: %@";
+"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Veuillez ne pas supprimer les informations ci-dessous. Ces éléments seront nécessaires afin de résoudre votre problème. \n\nVersion d’Application: %@\nMsisdn/Numéro: %@\nPorteur: %@\nAppareil: %@\nSystème d'exploitation de l'appareil: %@\nLangue: %@\nL'état du réseau: %@\nOffres: %@\nEspace de stockage Total: %lld\nEspace de stockage utilisé: %lld\nNom: %@\nNom de famille: %@\ne-mail: %@\nMatière: %@";
 "Upload Photos" = "Télécharger des photos";
 "Add" = "Ajouter";
 "Albums" = "Albums";
