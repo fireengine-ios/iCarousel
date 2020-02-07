@@ -234,7 +234,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 } else {
                     self.interactor.share(item: selectedItems, sourceRect: self.middleTabBarRect)
                 }
-                self.basePassingPresenter?.stopModeSelected()
             case .sync:
                 MenloworksAppEvents.onSyncClicked()
                 self.basePassingPresenter?.stopModeSelected()
