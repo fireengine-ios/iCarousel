@@ -106,6 +106,8 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     func performOperation(forType type: SYNCMode) {
+        UIApplication.setIdleTimerDisabled(true)
+
         if type == .backup {
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactsSyncScreen())
             analyticsService.logScreen(screen: .contactSyncBackUp)
@@ -121,7 +123,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             self?.analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                                       eventActions: .contactOperation(type),
                                                       eventLabel: .success)
-            
+            UIApplication.setIdleTimerDisabled(false)
             debugLog("contactsSyncService.executeOperation finishCallback: \(result)")
             DispatchQueue.main.async {
                 self?.output?.success(response: result, forOperation: opertionType)
@@ -135,6 +137,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                                                       eventLabel: .failure)
 
             debugLog("contactsSyncService.executeOperation errorCallback: \(errorType)")
+            UIApplication.setIdleTimerDisabled(false)
             DispatchQueue.main.async {
                 self?.output?.showError(errorType: errorType)
             }
