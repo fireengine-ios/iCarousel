@@ -55,6 +55,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
+        guard 0..<items.count ~= index else {
+            goBack()
+            return
+        }
+        
         view.onShowSelectedItem(at: index, from: items)
         getSelectedItems { [weak self] selectedItems in
             guard let self = self else {
