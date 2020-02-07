@@ -133,7 +133,7 @@ final class OverlayStickerViewControllerDataSource: NSObject {
                 }
                 
                 DispatchQueue.toMain {
-                    cell.setupGif(image: image)
+                    cell.setupGif(image: image, url: url)
                 }
             }
         }
