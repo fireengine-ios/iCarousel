@@ -155,13 +155,13 @@ extension OverlayStickerViewControllerDataSource: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        guard let cell = cell as? StickerCollectionViewCell else {
+        guard let cell = cell as? StickerCollectionViewCell,
+              let object = currentState.source[safe: indexPath.row]
+        else {
             return
         }
 
-        let object = currentState.source[indexPath.row]
-        cell.setup(with: object, type: selectedAttachmentType)
-        
+        cell.setup(with: object, type: selectedAttachmentType)        
         if selectedAttachmentType == .gif {
             downloadGifForCell(cell: cell, url: object.path)
         }
