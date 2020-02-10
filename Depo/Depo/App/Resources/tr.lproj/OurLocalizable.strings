@@ -1352,31 +1352,6 @@
 "unhide_popup_text" = "Seçilen öğe(ler) eski klasörlerine geri taşınacak ve lifebox listelerinde görüntülenebilmeye başlayacak. Devam etmek istiyor musun?";
 
 /*divorce card*/
-"divorce_card_title" = "";
-"trash_bin_album_slider_title" = "";
-"trash_bin_album_slider_empty" = "";
-"trash_bin_empty" = "";
-"delete_confirmation_popup_title" = "";
-"delete_confirmation_popup_text" = "";
-"delete_popup_success_text" = "";
-"restore_confirmation_popup_title" = "";
-"restore_confirmation_popup_text" = "";
-"restore_popup_success_text" = "";
-"delete_from_hidden_bin_popup_success_title" = "";
-"delete_from_hidden_bin_popup_success_text" = "";
-"unhide_popup_success_title" = "";
-"unhide_popup_success_text" = "";
-"delete_popup_text" = "";
-"PackagesPolicyTextBillo" = "Abonelikler aylık bazda yenilenmekte ve ödeme, satın alma onayından sonra iTunes hesabına faturalandırılmaktadır. \nOtomatik yenileme mevcut dönemin sona ermesinden en az 24 saat önce kapatılmazsa abonelik otomatik olarak yenilenir. \nHesap, mevcut dönemin sona ermesine 24 saat kala yenileme işlemi doğrultusunda ücretlendirilecektir. Ücretler uygulama içi satın alma ekranında gösterildiği gibi yansıtılacaktır.\nAbonelikler kullanıcı tarafından yönetilebilir ve otomatik yenileme, satın alma işleminden sonra kullanıcının Hesap Ayarlarına giderek kapatılabilir. \nGizlilik ve Güvenlik: https://billostorage.com/policy\nKullanım Şartları:";
-"unhide_items_popup_text" = "";
-"unhide_albums_popup_text" = "";
-"move_to_trash_hidden_albums_confirmation_popup_text" = "";
-"delete_items_confirmation_popup_text" = "";
-"delete_albums_confirmation_popup_text" = "";
-"delete_folders_confirmation_popup_text" = "";
-"restore_items_confirmation_popup_text" = "";
-"restore_albums_confirmation_popup_text" = "";
-"restore_folders_confirmation_popup_text" = "";
 "divorce_card_title" = "Hafızalardan Silinecek Aşklar!";
 "trash_bin_album_slider_title" = "Çöp Kutusu";
 "trash_bin_album_slider_empty" = "Çöp Kutusunda Henüz Silinmiş Albüm Yok";

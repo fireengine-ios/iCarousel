@@ -566,7 +566,6 @@
 "dropboxLastUpdatedFiles" = "Last updated on %@ - %d files";
 "PackagesPolicyHeader" = "Auto-renewable subscription nature of the in-app purchase:";
 "PackagesPolicyText" = "Subsriptions are renewed on a monthly basis\nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Policy: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik\nTerms of Use:";
-"PackagesPolicyTextBillo" = "Subsriptions are renewed on a monthly basis\nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Policy: https://billostorage.com/policy\nTerms of Use:";
 "Missing Dates" = "Missing Dates";
 "You have successfully registered, please log in with your credentials" = "You have successfully registered, please log in with your credentials.";
 "Animation" = "Animation";
@@ -1323,11 +1322,6 @@
 "confirmation_popup_message_hide" = "Selected item(s) will only be available in \"Hidden\" Album. You can restore them any time. Are you sure to continue?";
 "confirmation_popup_message_hide_albums" = "Selected album(s) will only be available in \"Hidden\" Album. You can restore them any time. Are you sure to continue?";
 "confirmation_popup_title_hide_single_album" = "Hide Album";
-"confirmation_popup_message_hide_single_album" = "You will not see this album...";
-"smash_screen_title" = "Smash effect";
-"smash_popup_message" = "This edited item will be uploaded to lifebox and saved to device gallery as a new item";
-"Smash" = "Smash";
-"photos_hide_success_message" = "Items are hidden successfully";
 "confirmation_popup_message_hide_single_album" = "Selected album will only be available in \"Hidden\" Album. You can restore them any time. Are you sure to continue?";
 "smash_screen_title" = "Fun Effect";
 "smash_popup_message" = "This edited photo will be saved to device gallery and uploaded on lifebox as a new item.";
@@ -1368,11 +1362,6 @@
 "hide_successed_alert_people_album_description" = "You can hide(move to a hidden album) or delete (move to trash bin) the photos of a specific person with one click";
 "hide_successed_alert_do_not_show_this_message" = "Don’t show this message again.";
 "hide_successed_alert_view_people_album" = "View People Album";
-"smash_successed_alert_title" = "Saved successfully!";
-"smash_successed_alert_second_title" = "What would you like to do?";
-"smash_successed_alert_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
-"smash_successed_simple_alert_title" = "Saved successfully!";
-"smash_successed_simple_alert_description" = "Kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
 "smash_successed_alert_title" = "Saved successfully to your device gallery and uploaded on lifebox!";
 "smash_successed_alert_second_title" = "Have Fun? What's Next?";
 "smash_successed_alert_description" = "Now you can share the edited photo with your friends.\nAlso you can get rid off the undesirable memories by hiding or deleting with one click in the People Album.";
@@ -1395,21 +1384,6 @@
 "unhide_popup_text" = "Selected item(s) will be unhiden and moved back to previous folders. Are you sure to continue?";
 
 /*divorce card*/
-"divorce_card_title" = "XX Effect lorem ipsum! Discover new features!";
-"trash_bin_album_slider_title" = "My Deleted Albums";
-"trash_bin_album_slider_empty" = "There is no deleted album yet.";
-"trash_bin_empty" = "There is no deleted item yet.";
-"delete_confirmation_popup_title" = "Delete permanently";
-"delete_confirmation_popup_text" = "The selected items will be deleted lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
-"delete_popup_success_text" = "This item deleted permanently";
-"restore_confirmation_popup_title" = "Restore";
-"restore_confirmation_popup_text" = "The selected items will be restored lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
-"restore_popup_success_text" = "This item restored permanently";
-"delete_from_hidden_bin_popup_success_title" = "Deleted Permanently";
-"delete_from_hidden_bin_popup_success_text" = "This item deleted permanently";
-"unhide_popup_success_title" = "Unhide Successful";
-"unhide_popup_success_text" = " This items is back in your gallery";
-"delete_popup_text" = "The selected items will be deleted lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet";
 "divorce_card_title" = "Unchain Your Heart!";
 "trash_bin_album_slider_title" = "Trash Bin";
 "trash_bin_album_slider_empty" = "There is no deleted album yet.";

@@ -13,9 +13,6 @@
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "La suppression de cet album ne supprimera pas les fichiers de lifebox. Vous pouvez accéder à ces fichiers depuis l'onglet Photos. Êtes-vous sûr de vouloir procéder à sa suppression ?";
 
 /*Suggested: "Deleting these files will remove them from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?"*/
-/*Fuzzy*/
-"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "La suppression de ce fichier est définitive.Une fois supprimé vous ne pourrez plus y accéder depuis lifebox. Êtes-vous sûr de vouloir procéder à sa suppression ?";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "La suppression de ces fichiers est définitive.Une fois supprimés vous ne pourrez plus y accéder depuis lifebox.";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Le ou les fichiers sélectionnés seront mis dans la corbeille. Vous pourrez les récupérer en 30 jours. N'oubliez pas de vider d'abord la corbeille si vous devez faire de place pour la mémoire de votre lifebox,";
 "Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Le ou les fichiers sélectionnés seront mis dans la corbeille. Vous pourrez les récupérer en 30 jours. N'oubliez pas de vider d'abord la corbeille si vous devez faire de place pour la mémoire de votre lifebox,";
 "Purchase" = "Achat";
@@ -204,7 +201,6 @@ sent to your phone number %@"*/
 "Suggestion" = "Suggestion";
 "Feedback Form" = "Pour toute suggestion ou réclamation, contactez-nous:";
 "Thanks for leaving a comment!" = "Contactez-nous";
-"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Veuillez ne pas supprimer les informations ci-dessous. Ces éléments seront nécessaires afin de résoudre votre problème. \n\nVersion d’Application: %@\nMsisdn/Numéro: %@\nPorteur: %@\nAppareil: %@\nSystème d'exploitation de l'appareil: %@\nLangue: %@\nLangue de préférence: %@\nStatut du Réseau: %@\nEspace de stockage Total: %lld\nEspace de stockage utilisé: %lld\nOffres: %@";
 "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Veuillez ne pas supprimer les informations ci-dessous. Ces éléments seront nécessaires afin de résoudre votre problème. \n\nVersion d’Application: %@\nMsisdn/Numéro: %@\nPorteur: %@\nAppareil: %@\nSystème d'exploitation de l'appareil: %@\nLangue: %@\nL'état du réseau: %@\nOffres: %@\nEspace de stockage Total: %lld\nEspace de stockage utilisé: %lld\nNom: %@\nNom de famille: %@\ne-mail: %@\nMatière: %@";
 "Upload Photos" = "Télécharger des photos";
 "Add" = "Ajouter";
@@ -910,8 +906,6 @@ Please check I have understood the intended command here*/
 
 /*Suggested: "Object Recognition helps you group the things you love"*/
 "object_recognition_short" = "Reconnaissance des objets pour vous souvenir des choses que vous aimez";
-"lorem_ipsum_non_turkcell" = "";
-"lorem_ipsum_turkcell" = "";
 "lorem_ipsum_non_turkcell" = "Veuillez ne pas traduire cela";
 "lorem_ipsum_turkcell" = "Veuillez ne pas traduire cela";
 
@@ -1618,15 +1612,6 @@ Please check I have understood the intended command here*/
 "hide_single_album_success_popup_message" = "Album masqué avec succès";
 "hide_albums_success_popup_message" = "Les albums sélectionnés ont été masqués avec succès.";
 "selected_items_limit_hide" = "Vous ne pouvez pas masqué plus de %d de fichiers.";
-"hide_single_photo_completion_alert_message" = "";
-"people_album_warning_alert_title_not_premium_and_no_image_grouping" = "";
-"people_album_warning_alert_title_not_premium_and_image_grouping_on" = "";
-"people_album_warning_alert_title_premium_and_no_image_grouping" = "";
-"people_album_warning_message_not_premium_and_no_image_grouping" = "";
-"people_album_warning_message_not_premium_and_image_grouping_on" = "";
-"people_album_warning_message_premium_and_no_image_grouping" = "";
-"people_album_warning_button_not_premium_and_no_image_grouping" = "";
-"people_album_warning_button_not_premium_and_image_grouping_on" = "";
 "hide_single_photo_completion_alert_message" = "La photo sélectionnée ne sera disponible que dans l'album \"Caché\". Vous ne le verrez pas dans les listes de Lifebox ou les rappels. Vous pouvez le restaurer à tout moment. Voulez-vous continuer?";
 "people_album_warning_alert_title_not_premium_and_no_image_grouping" = "Vous n’avez pas encore d’album de contact!";
 "people_album_warning_alert_title_not_premium_and_image_grouping_on" = "Vous n'avez pas trouvé la personne que vous recherchez?";
@@ -1640,23 +1625,11 @@ Please check I have understood the intended command here*/
 "hide_successed_alert_title" = "L'image a bien été masquée";
 "hide_successed_alert_with_people_album_title" = "L'image est maintenant masquée !";
 "hide_successed_alert_people_album_title" = "Cacher les photos de quelqu'un !";
-"hide_successed_alert_people_album_description" = "";
 "hide_successed_alert_people_album_description" = "Vous pouvez cacher tous les souvenirs d'une personne en un seul clic ou les envoyer à la corbeille. Vous ne pouvez accéder qu'aux photos que vous avez cachées dans l’album \"Caché\".";
 "hide_successed_alert_do_not_show_this_message" = "Ne pas montrer ce message.";
 "hide_successed_alert_view_people_album" = "Voir l'album des personnes.";
 "smash_successed_alert_title" = "Enregistré !";
 "smash_successed_alert_second_title" = "Que souhaitez-vous faire ?";
-"smash_successed_alert_description" = "";
-"smash_successed_simple_alert_title" = "Sauvegardé !";
-"smash_successed_simple_alert_description" = "";
-
-/*carousel pager*/
-"carousel_view_first_page_title" = "Rassembler vos photos.";
-"carousel_view_first_page_text" = "";
-"carousel_view_second_page_title" = "Rassembler vos photos.";
-"carousel_view_second_page_text" = "";
-"carousel_view_third_page_title" = "";
-"carousel_view_third_page_text" = "";
 "smash_successed_alert_description" = "Vous pouvez partager la photo que vous avez arrangée avec vos amis. Vous pouvez également accéder à l'album \"Personnes\" pour cacher ou supprimer en un clic les personnes / souvenirs que vous ne souhaitez plus rencontrer dans les listes de lifebox.";
 "smash_successed_simple_alert_title" = "Sauvegardé !";
 "smash_successed_simple_alert_description" = "Vous pouvez partager la photo que vous avez arrangée avec vos amis. Vous pouvez également accéder à l'album \"Personnes\" pour cacher ou supprimer en un clic les personnes / souvenirs que vous ne souhaitez plus rencontrer dans les listes de lifebox.";
@@ -1672,34 +1645,6 @@ Please check I have understood the intended command here*/
 "hidden_bin_album_slider_empty" = "Il n'y a pas d'album caché";
 "hidden_bin_empty" = "Il n'y a pas d'objet caché";
 "hidden_bin_navbar_title" = "Caché";
-"unhide_popup_text" = "";
-
-/*divorce card*/
-"divorce_card_title" = "XX Effect lorem ipsum ! Découvrez de nouvelles options !";
-"trash_bin_album_slider_title" = "";
-"trash_bin_album_slider_empty" = "";
-"trash_bin_empty" = "";
-"delete_confirmation_popup_title" = "";
-"delete_confirmation_popup_text" = "";
-"delete_popup_success_text" = "";
-"restore_confirmation_popup_title" = "";
-"restore_confirmation_popup_text" = "";
-"restore_popup_success_text" = "";
-"delete_from_hidden_bin_popup_success_title" = "";
-"delete_from_hidden_bin_popup_success_text" = "";
-"unhide_popup_success_title" = "";
-"unhide_popup_success_text" = "";
-"delete_popup_text" = "";
-"PackagesPolicyTextBillo" = "Les abonnements sont renouvelables mensuellement. \nLe paiement sera facturé sur le compte iTunes lors de la confirmation de l'achat.                                                            \nL'abonnement se renouvelle automatiquement sauf si le renouvellement automatique est désactivé au moins 24 heures avant la fin de la période en cours.\nEn cas de renouvellement, le compte sera débité dans les 24 heures précédant la fin de la période en cours. Les frais sont indiqués dans l'app.\nLes abonnements peuvent être gérés par l'utilisateur et le renouvellement automatique peut être désactivé en accédant aux \"Paramètres du Compte\" de l'utilisateur après l'achat.\nLa période d'essai gratuite inutilisée, sera perdue lorsque l'utilisateur prendra un abonnement payant.\nPolitique de Confidentialité: https://billostorage.com/policy \nTerms of Use:";
-"unhide_items_popup_text" = "";
-"unhide_albums_popup_text" = "";
-"move_to_trash_hidden_albums_confirmation_popup_text" = "";
-"delete_items_confirmation_popup_text" = "";
-"delete_albums_confirmation_popup_text" = "";
-"delete_folders_confirmation_popup_text" = "";
-"restore_items_confirmation_popup_text" = "";
-"restore_albums_confirmation_popup_text" = "";
-"restore_folders_confirmation_popup_text" = "";
 "unhide_popup_text" = "Le ou les éléments sélectionnés seront remplacés dans leurs anciens classeurs et seront  affichés dans les listes de la lifebox. Voulez-vous continuer?";
 
 /*divorce card*/
