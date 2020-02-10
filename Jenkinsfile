@@ -63,7 +63,7 @@ def flavors = [
 artifactory = Artifactory.server 'turkcell-artifactory'
 
 branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
-isDev = branchName == 'special_billo'
+isDev = branchName == 'pre_release_v2'
 echo "Branch Name: ${branchName}"
 
 def readVersion = { app ->
