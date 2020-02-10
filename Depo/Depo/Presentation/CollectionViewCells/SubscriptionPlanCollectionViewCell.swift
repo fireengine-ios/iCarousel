@@ -150,6 +150,11 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
                 let date = dateString(from: renewalDate)
                 dateInfoLabel.text = String(format: TextConstants.renewalDate, date)
             }
+            
+            if let expirationDate = model.subscriptionEndDate, model.subscriptionPlanType == .promo {
+                let date = dateString(from: expirationDate)
+                dateInfoLabel.text = String(format: TextConstants.subscriptionEndDate, date)
+            }
         }
         priceHeightConstraint.constant = 18
     }
