@@ -60,7 +60,7 @@ class TermsAndServicesViewController: ViewController {
     @IBOutlet private weak var privacyPolicyView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 6
-            newValue.backgroundColor =  UIColor.lrTealishTwo.withAlphaComponent(0.3)
+            newValue.backgroundColor =  UIColor.lrTealishTwo.withAlphaComponent(0.05)
         }
     }
     
@@ -68,6 +68,11 @@ class TermsAndServicesViewController: ViewController {
         willSet {
             newValue.delegate = self
             newValue.backgroundColor = .clear
+            newValue.linkTextAttributes = [
+                NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
+                NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
+                NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+            ]
         }
     }
     

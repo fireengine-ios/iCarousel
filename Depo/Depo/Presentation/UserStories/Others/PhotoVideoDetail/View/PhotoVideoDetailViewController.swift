@@ -65,12 +65,12 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     private var selectedIndex: Int? {
         didSet {
-            guard !objects.isEmpty, let index = selectedIndex, index < objects.count else {
-                return
-            }
             setupNavigationBar()
             setupTitle()
-            output.setSelectedItemIndex(selectedIndex: index)
+            
+            if let index = selectedIndex {
+                output.setSelectedItemIndex(selectedIndex: index)
+            }
         }
     }
     
@@ -80,6 +80,13 @@ final class PhotoVideoDetailViewController: BaseViewController {
             scrollToSelectedIndex()
             collectionView.layoutIfNeeded()
         }
+    }
+    
+    private var selectedItem: Item? {
+        if let index = selectedIndex {
+            return objects[safe: index]
+        }
+        return nil
     }
     
     private lazy var threeDotsBarButtonItem: UIBarButtonItem = {
@@ -192,10 +199,13 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     private func scrollToSelectedIndex() {
-        guard !objects.isEmpty, let index = selectedIndex, index < objects.count else {
+        setupNavigationBar()
+        setupTitle()
+
+        guard let index = selectedIndex else  {
             return
         }
-        setupNavigationBar()
+        
         let indexPath = IndexPath(item: index, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         collectionView.isHidden = false
@@ -213,22 +223,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
 
         if status == .hidden {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
+        } else if let selectedItem = selectedItem {
+            navigationItem.rightBarButtonItem?.customView?.isHidden = selectedItem.isLocalItem
         } else {
-            guard !objects.isEmpty, let index = selectedIndex, index < objects.count else {
-                return
-            }
-            let item = objects[index]
-            navigationItem.rightBarButtonItem?.customView?.isHidden = item.isLocalItem
+            navigationItem.rightBarButtonItem?.customView?.isHidden = true
         }
     }
 
     private func setupTitle() {
-        guard !objects.isEmpty, let index = selectedIndex, index < objects.count else {
-            return
-        }
-        if let name = objects[index].name {
-            setNavigationTitle(title: name)
-        }
+        setNavigationTitle(title: selectedItem?.name ?? "")
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
@@ -313,6 +316,11 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool) {
         self.selectedIndex = selectedIndex
         objects = objectsArray
+    }
+    
+    func onLastRemoved() {
+        selectedIndex = nil
+        objects.removeAll()
     }
     
     func getNavigationController() -> UINavigationController? {

@@ -197,6 +197,10 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         view.updateItems(objectsArray: objects, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
     }
     
+    func onLastRemoved() {
+        view.onLastRemoved()
+    }
+    
     func selectModeSelected() {
         
     }
