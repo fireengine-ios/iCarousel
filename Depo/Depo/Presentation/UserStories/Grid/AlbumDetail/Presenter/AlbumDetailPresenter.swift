@@ -19,21 +19,14 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
     override func operationFinished(withType type: ElementTypes, response: Any?) {
         debugLog("AlbumDetailPresenter operationFinished")
 
-        guard let router = self.router as? AlbumDetailRouter else { return }
         switch type {
         case .removeFromAlbum:
             debugLog("AlbumDetailPresenter operationFinished type == removeFromAlbum")
 
-            //onReloadData()
-        case .completelyDeleteAlbums:
-            debugLog("AlbumDetailPresenter operationFinished type == completelyDeleteAlbums")
-
-            router.back()
-            albumDetailModuleOutput?.onAlbumDeleted()
+            //onReloadData(
         case .removeAlbum:
             debugLog("AlbumDetailPresenter operationFinished type == removeAlbum")
 
-            router.back()
             albumDetailModuleOutput?.onAlbumRemoved()
         default:
             return

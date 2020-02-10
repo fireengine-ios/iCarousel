@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class FileListResponse: ObjectRequestResponse {
+final class FileListResponse: ObjectRequestResponse, Map {
     
     var parentFolderName: String?
     var parentFolderList = [ParentFolderList]()

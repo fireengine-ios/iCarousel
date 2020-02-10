@@ -25,13 +25,16 @@ class MusicBar: UIView {
     @IBOutlet weak var progressView: UIView!
     @IBOutlet var contentView: UIView!
     
+    var status: ItemStatus = .active
+    
     @IBAction func actionZoomUpButton(_ sender: UIButton) {
         delegate?.musicBarZoomWillOpen()
         
-        let vc = VisualMusicPlayerModuleInitializer.initializeVisualMusicPlayerController(with: "VisualMusicPlayerViewController")
-        let navigation = NavigationController(rootViewController: vc)
+        let router = RouterVC()
+        let controller = router.musicPlayer(status: status)
+        let navigation = NavigationController(rootViewController: controller)
         navigation.navigationBar.isHidden = false
-        RouterVC().presentViewController(controller: navigation)
+        router.presentViewController(controller: navigation)
     }
     
     @IBAction func actionPlayPauseButton(_ sender: UIButton) {
@@ -149,5 +152,11 @@ extension MusicBar: MediaPlayerDelegate {
     
     func didStopMediaPlayer(_ mediaPlayer: MediaPlayer) {
         playPauseButton.isSelected = true
+    }
+    
+    func changedListItemsInMediaPlayer(_ mediaPlayer: MediaPlayer) {
+        if player.list.isEmpty {
+            removePlayer()
+        }
     }
 }

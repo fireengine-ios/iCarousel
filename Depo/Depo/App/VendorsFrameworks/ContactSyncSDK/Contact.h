@@ -22,8 +22,13 @@
 @property (strong) NSString *lastName;
 @property (strong) NSString *nickName;
 @property (strong) NSString *displayName;
+@property (strong) NSString *company;
+
+@property BOOL dirty;
+@property BOOL defaultAccount;
 
 @property (strong) NSMutableArray *devices;
+@property (strong) NSMutableArray *addresses;
 
 @property BOOL hasName;
 @property BOOL hasPhoneNumber;
@@ -36,8 +41,12 @@
 - (NSString*) toStringValue;
 - (NSString*) toMD5;
 - (void)copyContact:(Contact*)contact;
+- (void)deepCopy:(Contact*)contact;
 - (NSString*)generateDisplayName;
 - (BOOL)isDeviceSizeEqual:(Contact*)other;
 - (BOOL)preEqualCheck:(id)object;
+- (NSString*)nameForCompare;
+- (BOOL)containsSameDevice:(Contact*)contact;
+- (BOOL)nameEquals:(Contact*)contact;
 
 @end

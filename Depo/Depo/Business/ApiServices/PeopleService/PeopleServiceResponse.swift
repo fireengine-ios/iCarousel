@@ -55,7 +55,7 @@ final class PeopleServiceResponse: ObjectRequestResponse {
     }
 }
 
-final class PeoplePageResponse: ObjectRequestResponse {
+final class PeoplePageResponse: ObjectRequestResponse, Map {
     
     var list: [PeopleItemResponse] = []
     

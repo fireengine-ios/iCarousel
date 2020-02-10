@@ -8,6 +8,8 @@
 
 protocol BaseFilesGreedViewInput: class {
 
+    var status: ItemStatus { get set }
+    
     func setupInitialState()
     
     func showCustomPopUpWithInformationAboutAccessToMediaLibrary()
@@ -44,6 +46,10 @@ protocol BaseFilesGreedViewInput: class {
     
     func requestStopped()
     
+    func disableRefresh()
+    
+    func enableRefresh()
+    
     //MARK: ScrollIndicator
     
     func changeScrollIndicatorTitle(with text: String)
@@ -51,4 +57,5 @@ protocol BaseFilesGreedViewInput: class {
     func startScrollCollectionView()
     
     func endScrollCollectionView()
+    
 }

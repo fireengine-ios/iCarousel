@@ -7,7 +7,6 @@
 //
 
 protocol SettingsViewInput: class {
-    func setupVersionLabel()
     func showCellsData(array: [[String]])
     func showPhotoAlertSheet()
     func updatePhoto(image: UIImage)

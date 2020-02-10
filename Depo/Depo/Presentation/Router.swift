@@ -224,8 +224,53 @@ class RouterVC: NSObject {
         navigationController?.popViewController(animated: true)
     }
     
-    func popToViewController(_ vc: UIViewController) {
-        navigationController?.popToViewController(vc, animated: true)
+    func popToViewController(_ vc: UIViewController) {//}, completion: VoidHandler? = nil) {
+        
+        func getNavigation(from navigation: UINavigationController?) -> UINavigationController? {
+            var navigationVC: UINavigationController?
+            
+            if let navVC = navigation, navVC.viewControllers.contains(vc) {
+                navigationVC = navVC
+                
+            } else if let presentingVC = navigation?.presentingViewController {
+                var navController: UINavigationController? = nil
+                
+                if let navVC = presentingVC as? UINavigationController {
+                    navController = getNavigation(from: navVC)
+                    
+                } else if let navVC = presentingVC.navigationController  {
+                    navController = getNavigation(from: navVC)
+                    
+                } else if let tabBar = presentingVC as? TabBarViewController {
+                    navController = getNavigation(from: tabBar.currentViewController?.navigationController)
+                    
+                } else {
+                    return navController
+                }
+                
+                if navController?.viewControllers.contains(vc) == true {
+                    navigationVC = navController
+                }
+            }
+            
+            return navigationVC
+        }
+        
+        if let navigation = getNavigation(from: navigationController) {
+            let pop = {
+                navigation.popToViewController(vc, animated: true)
+            }
+            
+            if let presentedVC = navigation.presentedViewController {
+                presentedVC.dismiss(animated: true) {
+                    pop()
+                }
+            } else {
+                pop()
+            }
+        } else {
+            assertionFailure("didn't found comfortable UINavigationController")
+        }
     }
     
     func popCreateStory() {
@@ -534,13 +579,25 @@ class RouterVC: NSObject {
         return controller
     }
     
+    var trashBin: UIViewController? {
+        let controller = trashBinController()
+        controller.segmentImage = .trashBin
+        return controller
+    }
+    
     var segmentedFiles: UIViewController? {
-        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles else {
+        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
             assertionFailure()
             return SegmentedController()
         }
-        let controllers = [allFiles, documents, musics, favorites]
-        return SegmentedController.initWithControllers(controllers)
+        let controllers = [allFiles, documents, musics, favorites, trashBin]
+        return SegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
+    }
+    
+    // MARK: Music Player
+    
+    func musicPlayer(status: ItemStatus) -> UIViewController {
+        return VisualMusicPlayerModuleInitializer.initializeVisualMusicPlayerController(with: "VisualMusicPlayerViewController", status: status)
     }
     
     
@@ -568,11 +625,12 @@ class RouterVC: NSObject {
     
     // MARK: Folder
     
-    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
+    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
         let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController",
                                                                                                  folder: folder,
                                                                                                  type: type,
                                                                                                  sortType: sortType,
+                                                                                                 status: status,
                                                                                                  moduleOutput: moduleOutput,
                                                                                                  alertSheetExcludeTypes: alertSheetExcludeTypes)
 
@@ -590,8 +648,10 @@ class RouterVC: NSObject {
     
     // MARK: File info
     
-    var fileInfo: UIViewController? {
-        let viewController = FileInfoModuleInitializer.initializeViewController(with: "FileInfoViewController")
+    func fileInfo(item: BaseDataSourceItem, moduleOutput: FileInfoModuleOutput? = nil) -> UIViewController {
+        let viewController = FileInfoModuleInitializer.initializeViewController(with: "FileInfoViewController",
+                                                                                item: item,
+                                                                                moduleOutput: moduleOutput)
         return viewController
     }
     
@@ -658,15 +718,21 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func uploadFromLifeBox(folderUUID: String, soorceUUID: String = "", sortRule: SortedRules = .timeUp) -> UIViewController {
+    func uploadFromLifeBox(
+        folderUUID: String,
+        soorceUUID: String = "",
+        sortRule: SortedRules = .timeUp,
+        type: MoreActionsConfig.ViewType = .Grid
+    ) -> UIViewController {
         if isRootViewControllerAlbumDetail() {
-            return UploadFromLifeBoxModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", albumUUID: folderUUID)
+            return UploadFromLifeBoxModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController",
+                                                                                          albumUUID: folderUUID)
         } else {
             return UploadFromLifeBoxModuleInitializer
                 .initializeFilesForFolderViewController(with: "BaseFilesGreedViewController",
                                                         destinationFolderUUID: folderUUID,
                                                         outputFolderUUID: soorceUUID,
-                                                        sortRule: sortRule)
+                                                        sortRule: sortRule, type: type)
         }
     }
     
@@ -693,36 +759,39 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func filesDetailViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
+    func filesDetailViewController(fileObject: WrapData, items: [WrapData], status: ItemStatus) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
                                                                                     selectedItem: fileObject,
-                                                                                    allItems: items)
+                                                                                    allItems: items,
+                                                                                    status: status)
         let c = controller as! PhotoVideoDetailViewController
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c
     }
     
-    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String) -> UIViewController {
+    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, status: ItemStatus) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
                                                                                          selectedItem: fileObject,
                                                                                          allItems: items,
-                                                                                         albumUUID: albumUUID)
+                                                                                         albumUUID: albumUUID,
+                                                                                         status: status)
         let c = controller as! PhotoVideoDetailViewController
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c
     }
     
-    func filesDetailFaceImageAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController {
+    func filesDetailFaceImageAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?, status: ItemStatus) -> UIViewController {
         let controller = PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
                                                                                          selectedItem: fileObject,
                                                                                          allItems: items,
                                                                                          albumUUID: albumUUID,
-                                                                                         albumItem: albumItem)
+                                                                                         albumItem: albumItem,
+                                                                                         status: status)
         let c = controller as! PhotoVideoDetailViewController
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         return c
     }
-    
+
     // MARK: Albums list
     
     func albumsListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
@@ -739,8 +808,8 @@ class RouterVC: NSObject {
     
     // MARK: Album detail
     
-    func albumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
-        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, moduleOutput: moduleOutput)
+    func albumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
+        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, status: status, moduleOutput: moduleOutput)
         return controller
     }
     
@@ -780,10 +849,11 @@ class RouterVC: NSObject {
     
     // MARK: Face Image Recognition Photos
     
-    func imageFacePhotosController(album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
+    func imageFacePhotosController(album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
         let controller = FaceImagePhotosInitializer.initializeController(with: "FaceImagePhotosViewController",
                                                                          album: album,
                                                                          item: item,
+                                                                         status: status,
                                                                          moduleOutput: moduleOutput,
                                                                          isSearchItem: isSearchItem)
         return controller as! BaseFilesGreedChildrenViewController
@@ -1085,5 +1155,13 @@ class RouterVC: NSObject {
     
     func campaignDetailViewController() -> UIViewController {
         return CampaignDetailViewController.initFromNib()
+    }
+
+    func hiddenPhotosViewController() -> UIViewController {
+        return HiddenPhotosViewController.initFromNib()
+    }
+    
+    func trashBinController() -> TrashBinViewController {
+        return TrashBinViewController.initFromNib()
     }
 }

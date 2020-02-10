@@ -19,6 +19,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
         if isDeleteRequestRunning {
             return
         }
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FreeUpSpace(count: selectedItems.count))
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .freeUpSpace)
         isDeleteRequestRunning = true
         checkAndDelete(items: selectedItems)
@@ -46,9 +47,9 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     }
     
     private func deleteRemotesAndLocals(relatedRemotesUuids: [String], localCoreDataObjectIds: [NSManagedObjectID]) {
-        self.fileService.details(uuids: relatedRemotesUuids, success: { [weak self] updatedRemoteItems in
+        fileService.details(uuids: relatedRemotesUuids, success: { [weak self] updatedRemoteItems in
             
-            let avalableRemoteItems = updatedRemoteItems.filter { $0.status == .active }
+            let avalableRemoteItems = updatedRemoteItems.filter { $0.status.isTranscoded }
             
             let associatedRemoteItemsToDelete = avalableRemoteItems.filter { avalableItem in
                 relatedRemotesUuids.contains(where: {
@@ -70,21 +71,21 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
                     
                 })
             })
-        }, fail: { [weak self] error in
-            UIApplication.showErrorAlert(message: error.description)
-            
-            guard let self = self else {
-                return
-            }
-            
-            self.isDeleteRequestRunning = false
-            if let output = self.output as? FreeAppSpacePresenter {
-                DispatchQueue.main.async {
-                    output.canceled()
+            }, fail: { [weak self] error in
+                UIApplication.showErrorAlert(message: error.description)
+                
+                guard let self = self else {
+                    return
                 }
-            } else {
-                assertionFailure()
-            }
+                
+                self.isDeleteRequestRunning = false
+                if let output = self.output as? FreeAppSpacePresenter {
+                    DispatchQueue.main.async {
+                        output.canceled()
+                    }
+                } else {
+                    assertionFailure()
+                }
         })
     }
     
@@ -142,6 +143,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     }
     
     override func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.FreeUpSpaceScreen())
         analyticsManager.logScreen(screen: .freeAppSpace)
         analyticsManager.trackDimentionsEveryClickGA(screen: .freeAppSpace)
     }

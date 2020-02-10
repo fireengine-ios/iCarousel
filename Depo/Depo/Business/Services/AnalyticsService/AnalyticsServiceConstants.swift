@@ -6,6 +6,8 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
+import FirebaseAnalytics
+
 enum AnalyticsEvent {
     case signUp
     case login
@@ -38,39 +40,75 @@ enum AnalyticsEvent {
     case setPasscode
     case createStory
     
+    
     var token: String {
-        switch self {
-        case .signUp: return "ese4q4"
-        case .login: return "qqnm9p"
-
-        case .uploadPhoto: return "esdqth"
-        case .uploadVideo: return "noawdt"
-        case .uploadFromCamera: return "yx3j4p"
-        case .uploadMusic: return "ba947a"
-        case .uploadDocument: return "jb1jc6"
-
-        case .purchaseTurkcell50: return "trie85"
-        case .purchaseTurkcell100: return "62s83p"
-        case .purchaseTurkcell500: return "wdqlvk"
-        case .purchaseTurkcell2500: return "7bf7gu"
-        case .purchaseTurkcellPremium: return "qexub9"
-
-        case .purchaseNonTurkcell50: return "q3ivog"
-        case .purchaseNonTurkcell100: return "lbrusf"
-        case .purchaseNonTurkcell500: return "x6zaly"
-        case .purchaseNonTurkcell2500: return "zab8u6"
-        case .purchaseNonTurkcellPremium: return "9pyt2d"
-
-        case .importDropbox: return "tdvlrq"
-        case .importFacebook: return "y5dz5j"
-        case .importInstagram: return "jk78lq"
-
-        case .turnOnAutosync: return "kwo7m3"
-        case .contactBackup: return "u440dw"
-        case .freeUpSpace: return "w9vvtl"
-        case .setPasscode: return "ojquhk"
-        case .createStory: return "afp233"
-        }
+        #if LIFEDRIVE
+            switch self {
+            case .signUp: return "vq33ql"
+            case .login: return "6p1zes"
+                
+            case .uploadPhoto: return "bb7rkc"
+            case .uploadVideo: return "syfucn"
+            case .uploadFromCamera: return "f1xmv5"
+            case .uploadMusic: return "92mj33"
+            case .uploadDocument: return "at77np"
+                
+            case .purchaseTurkcell50: return "8oapnp"
+            case .purchaseTurkcell100: return "oziuyb"
+            case .purchaseTurkcell500: return "hmuea4"
+            case .purchaseTurkcell2500: return "br8bqi"
+            case .purchaseTurkcellPremium: return "48qsxv"
+                
+            case .purchaseNonTurkcell50: return "pdouoa"
+            case .purchaseNonTurkcell100: return "qsa0yw"
+            case .purchaseNonTurkcell500: return "alvhrn"
+            case .purchaseNonTurkcell2500: return "lr6i1j"
+            case .purchaseNonTurkcellPremium: return "cxf2hr"
+                
+            case .importDropbox: return "afb0bz"
+            case .importFacebook: return "pto7xt"
+            case .importInstagram: return "kp4fu3"
+                
+            case .turnOnAutosync: return "4nsckx"
+            case .contactBackup: return "c94pqu"
+            case .freeUpSpace: return "3cccmx"
+            case .setPasscode: return "kj4blr"
+            case .createStory: return "x35cgx"
+            }
+        #else
+            switch self {
+            case .signUp: return "ese4q4"
+            case .login: return "qqnm9p"
+                
+            case .uploadPhoto: return "esdqth"
+            case .uploadVideo: return "noawdt"
+            case .uploadFromCamera: return "yx3j4p"
+            case .uploadMusic: return "ba947a"
+            case .uploadDocument: return "jb1jc6"
+                
+            case .purchaseTurkcell50: return "trie85"
+            case .purchaseTurkcell100: return "62s83p"
+            case .purchaseTurkcell500: return "wdqlvk"
+            case .purchaseTurkcell2500: return "7bf7gu"
+            case .purchaseTurkcellPremium: return "qexub9"
+                
+            case .purchaseNonTurkcell50: return "q3ivog"
+            case .purchaseNonTurkcell100: return "lbrusf"
+            case .purchaseNonTurkcell500: return "x6zaly"
+            case .purchaseNonTurkcell2500: return "zab8u6"
+            case .purchaseNonTurkcellPremium: return "9pyt2d"
+                
+            case .importDropbox: return "tdvlrq"
+            case .importFacebook: return "y5dz5j"
+            case .importInstagram: return "jk78lq"
+                
+            case .turnOnAutosync: return "kwo7m3"
+            case .contactBackup: return "u440dw"
+            case .freeUpSpace: return "w9vvtl"
+            case .setPasscode: return "ojquhk"
+            case .createStory: return "afp233"
+            }
+        #endif
     }
         
     var facebookEventName: String {
@@ -212,6 +250,19 @@ enum AnalyticsAppScreens {
     case campaignSamsungPopupBecomePremium
     case campaignDetailDuring
     case campaignDetailAfter
+    
+    //Smash
+    case smashConfirmPopUp
+    case saveSmashSuccessfullyPopUp
+    case nonStandardUserWithFIGroupingOffPopUp
+    case standardUserWithFIGroupingOffPopUp
+    case standardUserWithFIGroupingOnPopUp
+    case smashPreview
+    
+    case saveHiddenSuccessPopup
+    case hiddenBin
+    case trashBin
+    case fileOperationConfirmPopup(GAOperationType)
     
     var name: String {
         switch self {
@@ -401,6 +452,26 @@ enum AnalyticsAppScreens {
             return "Campaign - Detail During"
         case .campaignDetailAfter:
             return "Campaign - Detail After"
+        case .smashConfirmPopUp:
+            return "Smash Confirm Pop up"
+        case .saveSmashSuccessfullyPopUp:
+            return "Save Smash Successfully Pop up"
+        case .nonStandardUserWithFIGroupingOffPopUp:
+            return "NonStandard User With F/I Grouping OFF Pop Up"
+        case .standardUserWithFIGroupingOffPopUp:
+            return "Standard User With F/I Grouping OFF Pop Up"
+        case .standardUserWithFIGroupingOnPopUp:
+            return "Standard User With F/I Grouping ON Pop Up"
+        case .smashPreview:
+            return "Smash Preview"
+        case .saveHiddenSuccessPopup:
+            return "Save Hidden Successfully Pop Up"
+        case .hiddenBin:
+            return "Hidden Bin"
+        case .trashBin:
+            return "Trash Bin"
+        case .fileOperationConfirmPopup(let operationType):
+            return operationType.confirmPopupEventActionText
         }
     }
 }
@@ -467,20 +538,43 @@ enum GACustomEventKeys {
     case category
     case action
     case label
+    case value
     
     var key: String {
         switch self {
         case .category:
-            return "GAeventCategory"
+            return "eventCategory"
         case .action:
-            return "GAeventActions"
+            return "eventAction"
         case .label:
-            return "GAeventLabel"
+            return "eventLabel"
+        case .value:
+            return "eventValue"
         }
     }
 }
 
-enum GAEventCantegory {
+enum GACustomEventsType {
+    case event
+    case screen
+    case purchase
+    case selectContent
+    
+    var key: String {
+        switch self {
+        case .event:
+            return "GAEvent"
+        case .screen:
+            return "screenView"
+        case .purchase:
+            return AnalyticsEventEcommercePurchase
+        case .selectContent:
+            return AnalyticsEventSelectContent
+        }
+    }
+}
+
+enum GAEventCategory {
     case enhancedEcommerce
     case functions
     case videoAnalytics
@@ -587,6 +681,19 @@ enum GAEventAction {
     case giftIcon
     case campaignDetail
     case analyzeWithPhotopick
+    case smash
+    case smashSave
+    case smashConfirmPopUp
+    case smashSuccessPopUp
+    case nonStandardUserWithFIGroupingOff
+    case standardUserWithFIGroupingOff
+    case standardUserWithFIGroupingOn
+    case hiddenBin
+    case trashBin
+    case saveHiddenSuccessPopup
+    
+    case fileOperation(GAOperationType)
+    case fileOperationPopup(GAOperationType)
 
     var text: String {
         switch self {
@@ -711,27 +818,69 @@ enum GAEventAction {
             return "Campaign Detail"
         case .analyzeWithPhotopick:
             return "Analyze with photopick"
+        case .smash:
+            return "Smash"
+        case .smashConfirmPopUp:
+            return "Smash Confirm Pop up"
+        case .smashSuccessPopUp:
+            return "Save Smash Successfully Pop Up"
+        case .nonStandardUserWithFIGroupingOff:
+            return "NonStandard User With F/I Grouping OFF Pop Up"
+        case .standardUserWithFIGroupingOff:
+            return "Standard User With F/I Grouping OFF Pop Up"
+        case .standardUserWithFIGroupingOn:
+            return "Standard User With F/I Grouping ON Pop Up"
+        case .smashSave:
+            return "Smash Save"
+        case .hiddenBin:
+            return "Hidden Bin"
+        case .trashBin:
+            return "Trash bin"
+        case .saveHiddenSuccessPopup:
+            return "Save Hidden Successfully Pop Up"
+        case .fileOperation(let operationType):
+            return operationType.eventActionText
+        case .fileOperationPopup(let operationType):
+            return operationType.popupEventActionText
         }
     }
 }
 
 enum GAEventLabel {
     enum FileType {
-        case music
-        case video
         case photo
+        case video
+        case people
+        case things
+        case places
+        case story
+        case albums
         case document
+        case music
+        case folder
         
         var text: String {
             switch self {
-            case .music:
-                return "Music"
-            case .video:
-                return "Video"
             case .photo:
                 return "Photo"
+            case .video:
+                return "Video"
+            case .people:
+                return "Person"
+            case .things:
+                return "Thing"
+            case .places:
+                return "Place"
+            case .story:
+                return "Story"
+            case .albums:
+                return "Album"
             case .document:
                 return "Document"
+            case .music:
+                return "Music"
+            case .folder:
+                return "Folder"
             }
         }
     }
@@ -920,9 +1069,11 @@ enum GAEventLabel {
     }
     
     case empty
+    case custom(String)
     
     case success
     case failure
+    case result(Error?)
     case feedbackOpen
     case feedbackSend
     case download(FileType)
@@ -1000,15 +1151,26 @@ enum GAEventLabel {
     case supportSignUpForm(_ event: SupportFormSubjectSignUpEvent, isSupportForm: Bool)
     case clickSecurityQuestion(number: Int)
     case campaign(CampaignEvent)
+    case ok
+    case viewPeopleAlbum
+    case enableFIGrouping
+    case becomePremium
+    case proceedWithExistingPeople    
+    case divorceButtonVideo
+    case fileTypeOperation(FileType)
     
     var text: String {
         switch self {
         case .empty:
             return ""
+        case .custom(let value):
+            return value
         case .success:
             return "Success"
         case .failure:
             return "Failure"
+        case .result(let error):
+            return error == nil ? "Success" : "Failure"
         case .feedbackOpen:
             return "Open"
         case .feedbackSend:
@@ -1181,6 +1343,20 @@ enum GAEventLabel {
             return "Q\(number)"
         case .campaign(let event):
             return event.text
+        case .ok:
+            return "OK"
+        case .viewPeopleAlbum:
+            return "View People Album"
+        case .enableFIGrouping:
+            return "Enable F/I Grouping"
+        case .becomePremium:
+            return "Become Premium"
+        case .proceedWithExistingPeople:
+            return "Proceed With Existing People"
+        case .divorceButtonVideo:
+            return "Divorce Button Video"
+        case .fileTypeOperation(let fileType):
+            return fileType.text
         }
     }
     
@@ -1230,6 +1406,7 @@ enum GADementionsFields {
     case twoFactorAuth
     case spotify
     case dailyDrawleft
+    case itemsCount(GAOperationType)
     
     var text: String {
         switch self {
@@ -1279,6 +1456,8 @@ enum GADementionsFields {
             return "connectStatus"
         case .dailyDrawleft:
             return "dailyDrawleft"
+        case .itemsCount(let operationType):
+            return operationType.itemsCountText
         }
     }
     
@@ -1312,6 +1491,8 @@ enum GAMetrics {
 }
 
 enum GADementionValues {
+    typealias ItemsOperationCount = (count: Int, operationType: GAOperationType)
+    
     enum login {
         case gsm
         case email
@@ -1569,6 +1750,83 @@ enum GADementionValues {
                 return "SEQURITY_QUESTION_ANSWER_IS_INVALID"
                 
             }
+        }
+    }
+}
+
+enum GAOperationType {
+    case hide
+    case unhide
+    case delete
+    case trash
+    case restore
+    
+    var eventActionText: String {
+        switch self {
+        case .hide:
+            return "Hide"
+        case .unhide:
+            return "Unhide"
+        case .delete:
+            return "Delete"
+        case .trash:
+            return "Trash"
+        case .restore:
+            return "Restore"
+        }
+    }
+    
+    var popupEventActionText: String {
+        switch self {
+        case .hide:
+            return "Hide Pop up"
+        case .unhide:
+            return "Unhide Pop up"
+        case .delete:
+            return "Delete Permanently Pop up"
+        case .trash:
+            return "Delete Pop up"
+        case .restore:
+            return "Restore Pop up"
+        }
+    }
+    
+    var confirmPopupEventActionText: String {
+        switch self {
+        case .hide:
+            return "Hide Confirm Pop up"
+        case .unhide:
+            return "Unhide Confirm Pop up"
+        case .delete:
+            return "Delete Permanently Confirm Pop up"
+        case .trash:
+            return "Delete Confirm Pop up"
+        case .restore:
+            return "Restore Confirm Pop up"
+        }
+    }
+    
+    var itemsCountText: String {
+        switch self {
+        case .hide:
+            return "countOfHiddenItems"
+        case .unhide:
+            return "countOfUnhiddenItems"
+        case .delete:
+            return "countOfDeletedItems"
+        case .trash:
+            return "countOfTrashedItems"
+        case .restore:
+            return "countOfRestoredItems"
+        }
+    }
+    
+    var checkingTypes: [GAEventLabel.FileType] {
+        switch self {
+        case .hide, .unhide:
+            return [.photo, .video, .story]
+        case .delete, .trash, .restore:
+            return [.photo, .video, .story, .music, .document, .folder]
         }
     }
 }

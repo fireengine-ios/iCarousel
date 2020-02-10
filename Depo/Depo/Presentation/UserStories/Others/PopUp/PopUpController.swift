@@ -78,6 +78,7 @@ final class PopUpController: BasePopUpController {
     private var secondUrl: URL?
     
     lazy var firstAction: PopUpButtonHandler = { vc in
+        vc.hideSpinnerIncludeNavigationBar()
         vc.close()
     }
     lazy var secondAction: PopUpButtonHandler = { vc in

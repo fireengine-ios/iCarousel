@@ -159,31 +159,50 @@ struct RouteRequests {
     // MARK: Album
     
     static let albumList    = "album?contentType=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@"
+    static let albumListWithStatus = baseUrl.absoluteString + albumList + "&status=%@"
     static let details      = "album/%@?page=%@&size=%@&sortBy=%@&sortOrder=%@"
+    static let albumHide = baseUrl +/ "album/hide"
+    static let albumRecover = baseUrl +/ "album/recover"
     
     // MARK: My Streams
     
+    // FIXME: pass paramaerts as request paramerts
     static let people = "person/"
     static let peopleThumbnails = "person/thumbnails"
     static let peoplePage = "person/page?pageSize=%d&pageNumber=%d"
+    static let peoplePageWithStatus = baseUrl.absoluteString + peoplePage + "&status=%@"
     static let peopleAlbum = "album?contentType=album/person&sortBy=createdDate&sortOrder=DESC&page=0&size=1&personInfoId=%d"
+    static let peopleAlbumWithStatus = baseUrl.absoluteString + peopleAlbum + "&status=%@"
     static let peopleAlbums = "person/relatedAlbums/%d"
     static let personVisibility = "person/visibility/"
     static let peopleSearch = "person/label/%@"
     static let peopleMerge = "person/%d"
     static let peopleChangeName = "person/label/%d"
     static let peopleDeletePhotos = "person/photo/delete/%d"
+    static let peopleRecovery = baseUrl.absoluteString + people + "recover"
+    static let peopleTrash = baseUrl.absoluteString + people + "trash"
+    static let peopleDelete = baseUrl.absoluteString + people + "delete"
 //    static let peopleDeletePhoto = "/person/photo/%d/%d"
     static let things = "object/"
     static let thingsThumbnails = "object/thumbnails"
     static let thingsPage = "object/page?pageSize=%d&pageNumber=%d"
+    static let thingsPageWithStatus = baseUrl.absoluteString + thingsPage + "&status=%@"
     static let thingsAlbum = "album?contentType=album/object&sortBy=createdDate&sortOrder=DESC&page=0&size=1&objectInfoId=%d"
+    static let thingsAlbumWithStatus = baseUrl.absoluteString + thingsAlbum + "&status=%@"
     static let thingsDeletePhotos = "object/photo/%d"
+    static let thingsRecovery = baseUrl.absoluteString + things + "recover"
+    static let thingsTrash = baseUrl.absoluteString + things + "trash"
+    static let thingsDelete = baseUrl.absoluteString + things + "delete"
 //    static let thingsDeletePhoto = "object/photo/%d/%d"
     static let places = "location/"
     static let placesThumbnails = "location/thumbnails"
     static let placesPage = "location/page?pageSize=%d&pageNumber=%d"
+    static let placesPageWithStatus = baseUrl.absoluteString + placesPage + "&status=%@"
     static let placesAlbum = "album?contentType=album/location&sortBy=createdDate&sortOrder=DESC&page=0&size=1&locationInfoId=%d"
+    static let placesAlbumWithStatus = baseUrl.absoluteString + placesAlbum + "&status=%@"
+    static let placesRecovery = baseUrl.absoluteString + places + "recover"
+    static let placesTrash = baseUrl.absoluteString + places + "trash"
+    static let placesDelete = baseUrl.absoluteString + places + "delete"
 //    static let placesDeletePhotos = "location/%d"
     
     //MARK : Share
@@ -233,6 +252,9 @@ struct RouteRequests {
         static let importedTracks = importedPlaylists +/ "track"
     }
     
+    // MARK: - Smash
+    
+    static let smashAnimation = baseUrl +/ "external/file/list"
     // MARK: - Campaign
     
     static let campaignApi = baseUrl +/ "campaign"
@@ -306,6 +328,26 @@ struct RouteRequests {
         static let analyzeHistory = instapickApi +/ "getAnalyzeHistory"
         static let analyzeDetails = instapickApi +/ "getAnalyzeDetails"
         static let removeAnalyzes = instapickApi +/ "deleteAnalyze"
+    }
+    
+    enum FileSystem {
+        static let fileList = "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
+        static let trashedList = "filesystem/trashed?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
+        static let hiddenList = baseUrl.absoluteString + "filesystem/hidden?sortBy=%@&sortOrder=%@&page=%@&size=%@&category=photos_and_videos"
+        
+        static let filesystemBase = "filesystem/"
+        
+        static let create = filesystemBase + "createFolder?parentFolderUuid=%@"
+        static let delete = filesystemBase + "delete"
+        static let rename = filesystemBase + "rename/%@"
+        static let move = filesystemBase + "move?targetFolderUuid=%@"
+        static let copy = filesystemBase + "copy?targetFolderUuid=%@"
+        static let details = filesystemBase + "details?minified=true"
+        static let detail = filesystemBase + "detail/%@"
+        static let metaData = filesystemBase + "metadata"
+        static let trash = filesystemBase + "trash"
+        static let hide = baseUrl +/ (filesystemBase + "hide")
+        static let recover = (baseUrl +/ filesystemBase) +/ "recover"
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"

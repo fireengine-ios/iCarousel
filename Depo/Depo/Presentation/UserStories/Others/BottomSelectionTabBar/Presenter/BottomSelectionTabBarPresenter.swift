@@ -23,12 +23,16 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     func setupConfig(withConfig config: EditingBarConfig) {
-        var itemTupple: [(String, String, String)] = []
+        var itemTupple = [PreDetermendType]()
         for type in config.elementsConfig {
             switch type {
+            case .hide:
+                itemTupple.append(EditinglBar.PreDetermendTypes.hide)
+            case .unhide:
+                itemTupple.append(EditinglBar.PreDetermendTypes.unhide)
+            case .smash:
+                itemTupple.append(EditinglBar.PreDetermendTypes.smash)
             case .delete:
-                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
-            case .deleteFaceImage:
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             case .download:
                 itemTupple.append(EditinglBar.PreDetermendTypes.download)
@@ -54,35 +58,45 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.print)
             case .removeAlbum:
                 itemTupple.append(EditinglBar.PreDetermendTypes.removeAlbum)
+            case .moveToTrash:
+                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
+            case .restore:
+                itemTupple.append(EditinglBar.PreDetermendTypes.restore)
             default:
                 break
             }
         }
 
-        view.setupBar(tintColor: config.tintColor,
-                      style: config.style,
-                      items: itemTupple)
+        view.setupBar(tintColor: config.tintColor, style: config.style, items: itemTupple)
     }
 
     func setupTabBarWith(items: [BaseDataSourceItem], originalConfig: EditingBarConfig) {
-        if let downloadIndex = originalConfig.elementsConfig.index(of: .download),
-            let syncIndex = originalConfig.elementsConfig.index(of: .sync),
-            let deleteIndex = originalConfig.elementsConfig.index(of: .delete) {
-            
-            view.disableItems(at: [downloadIndex, syncIndex, deleteIndex])
-//            if items.count < 1 {
-//                view.disableItems(atIntdex: [downloadIndex!, syncIndex!])
-//                return
-//            }
-            
-            if items.contains(where: { $0.isLocalItem != true }) {
-                view.enableItems(at: [deleteIndex, downloadIndex])
-            }
-            
-            if items.contains(where: { $0.isLocalItem == true }) {
-                view.enableItems(at: [syncIndex])
-            }
-            
+        let downloadIndex = originalConfig.elementsConfig.index(of: .download)
+        let syncIndex = originalConfig.elementsConfig.index(of: .sync)
+        let moveToTrashIndex = originalConfig.elementsConfig.index(of: .moveToTrash)
+        let hideIndex = originalConfig.elementsConfig.index(of: .hide)
+        
+        let validIndexes = [downloadIndex, syncIndex, hideIndex, moveToTrashIndex].compactMap { $0 }
+        
+        guard !validIndexes.isEmpty else {
+            return
+        }
+        
+        view.disableItems(at: validIndexes)
+        
+        guard !items.isEmpty else {
+            return
+        }
+        
+        let hasLocal = items.contains(where: { $0.isLocalItem == true })
+        let hasRemote = items.contains(where: { $0.isLocalItem != true })
+        
+        if hasRemote {
+            view.enableItems(at: [moveToTrashIndex, downloadIndex, hideIndex].compactMap { $0 })
+        }
+        
+        if hasLocal {
+            view.enableItems(at: [syncIndex].compactMap { $0 })
         }
     }
     
@@ -125,23 +139,65 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             let type = types[index]
             
             switch type {
-            case .delete:
-                MenloworksAppEvents.onDeleteClicked()
-                
+            case .hide:
+                //TODO: will be another task to implement analytics calls
+//                MenloworksAppEvents.onDeleteClicked()
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hide))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
-                    self.interactor.delete(item: selectedItems)
+                    self.interactor.hide(items: selectedItems)
+                    self.basePassingPresenter?.stopModeSelected()
+                } else {
+                    let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
+                    UIApplication.showErrorAlert(message: text)
+                }
+            case .unhide:
+                //TODO: will be another task to implement analytics calls
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .unhide))
+                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                if selectedItems.count <= allowedNumberLimit {
+                    self.interactor.unhide(items: selectedItems)
+                    self.basePassingPresenter?.stopModeSelected()
+                } else {
+                    let isAlbums = selectedItems is [PeopleItem] || selectedItems is [ThingsItem] || selectedItems is [PlacesItem] || selectedItems is [AlbumItem]
+                    let message = isAlbums ? TextConstants.unhideAlbumsPopupText : TextConstants.unhideItemsPopupText
+                    UIApplication.showErrorAlert(message: message)
+                }
+            case .smash:
+                RouterVC().getViewControllerForPresent()?.showSpinner()
+                self.interactor.smash(item: selectedItems) {
+                    RouterVC().getViewControllerForPresent()?.hideSpinner()
+                }
+                self.basePassingPresenter?.stopModeSelected()
+            case .moveToTrash:
+                MenloworksAppEvents.onDeleteClicked()
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
+                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                if selectedItems.count <= allowedNumberLimit {
+                    self.interactor.moveToTrash(item: selectedItems)
                     self.basePassingPresenter?.stopModeSelected()
                 } else {
                     let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
-            case .deleteFaceImage:
+            case .delete:
                 MenloworksAppEvents.onDeleteClicked()
-                self.interactor.delete(item: selectedItems)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
+                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                if selectedItems.count <= allowedNumberLimit {
+                    self.interactor.delete(items: selectedItems)
+                    self.basePassingPresenter?.stopModeSelected()
+                } else {
+                    let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
+                    UIApplication.showErrorAlert(message: text)
+                }
+            case .restore:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .restore))
+                self.interactor.restore(items: selectedItems)
                 self.basePassingPresenter?.stopModeSelected()
             case .download:
                 MenloworksAppEvents.onDownloadClicked()
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
                     self.basePassingPresenter?.stopModeSelected()
@@ -152,11 +208,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 }
             case .edit:
                 MenloworksTagsService.shared.onEditClicked()
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .edit))
                 RouterVC().getViewControllerForPresent()?.showSpinner()
                 self.interactor.edit(item: selectedItems, complition: {
                     RouterVC().getViewControllerForPresent()?.hideSpinner()
                 })
             case .info:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .info))
                 if let firstSelected = selectedItems.first as? Item {
                     self.router.onInfo(object: firstSelected)
                 }
@@ -165,6 +223,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .move:
                 self.interactor.move(item: selectedItems, toPath: "")
             case .share:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share))
                 /// if albums are selected and in this albums not have filled album show error
                 if let albumItems = selectedItems as? [AlbumItem], albumItems.first(where: { $0.allContentCount != 0 } ) == nil {
                         self.needShowErrorShareEmptyAlbums()
@@ -187,19 +246,24 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 self.interactor.sync(item: selectedItems)
             case .removeFromAlbum:
                 MenloworksAppEvents.onRemoveFromAlbumClicked()
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                 self.interactor.removeFromAlbum(items: selectedItems)
                 self.basePassingPresenter?.stopModeSelected()
             case .removeFromFaceImageAlbum:
                 self.basePassingPresenter?.stopModeSelected()
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                 self.basePassingPresenter?.deleteFromFaceImageAlbum(items: selectedItems)
             case .addToAlbum:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .addToAlbum))
                 self.interactor.addToAlbum(items: selectedItems)
             case .print:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .print))
                 self.interactor.trackEvent(elementType: .print)
                 MenloworksAppEvents.onPrintClicked()
                 self.router.showPrint(items: selectedItems)
             case .removeAlbum:
-                self.interactor.delete(item: selectedItems)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
+                self.interactor.moveToTrash(item: selectedItems)
             default:
                 break
             }
@@ -237,7 +301,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             return
         }
         types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-        types.append(.delete)
+        types.append(.moveToTrash)
         
         constractActions(withTypes: types, forItem: [item]) { [weak self] actions in
             self?.presentAlertSheet(withActions: [headerAction] + actions, presentedBy: sender)
@@ -253,7 +317,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 //This on for player
                 actionTypes = [.musicDetails, .addToPlaylist]//, .move]
                 actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                actionTypes.append(.delete)
+                actionTypes.append(.moveToTrash)
                 
             case .folder:
                 break
@@ -279,12 +343,12 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 case .rar, .zip:
                     actionTypes = [.copy, .move]
                     actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                    actionTypes.append(.delete)
+                    actionTypes.append(.moveToTrash)
                     
                 case .doc, .pdf, .txt, .ppt, .xls, .html:
                     actionTypes = [.move, .copy, .documentDetails]
                     actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-                    actionTypes.append(.delete)
+                    actionTypes.append(.moveToTrash)
                     
                 default:
                     break
@@ -306,13 +370,13 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             filteredTypes = types.filter({ $0 != .print })
         }
         
-        basePassingPresenter?.getSelectedItems { [weak self] selectedIntems in
+        basePassingPresenter?.getSelectedItems { [weak self] selectedItems in
             guard let self = self else {
                 return
             }
             var tempoItems = items
             if tempoItems == nil {
-                guard let wrappedArray = selectedIntems as? [Item] else {
+                guard let wrappedArray = selectedItems as? [Item] else {
                     actionsCallback([])
                     return
                 }
@@ -323,6 +387,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 actionsCallback([])
                 return
             }
+            
             actionsCallback(filteredTypes.map {
                 var action: UIAlertAction
                 switch $0 {
@@ -347,12 +412,21 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 case .delete:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
                         MenloworksAppEvents.onDeleteClicked()
-                        self.interactor.delete(item: currentItems)
+                        self.interactor.delete(items: currentItems)
                     })
-                case .deleteFaceImage:
-                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                        MenloworksAppEvents.onDeleteClicked()
-                        self.interactor.delete(item: currentItems)
+                case .hide:
+                    action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
+                        //TODO: will be another task to implement analytics calls
+//                        MenloworksAppEvents.onDeleteClicked()
+                        self.interactor.hide(items: currentItems)
+                    })
+                case .smash:
+                    //Currently there is no task for smash from action sheet.
+                    assertionFailure("In order to use smash please implement this function")
+                    action = UIAlertAction()
+                case .restore:
+                    action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { _ in
+                        self.interactor.restore(items: currentItems)
                     })
                 case .move:
                     action = UIAlertAction(title: TextConstants.actionSheetMove, style: .default, handler: { _ in
@@ -430,11 +504,12 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 case .addToFavorites:
                     action = UIAlertAction(title: TextConstants.actionSheetAddToFavorites, style: .default, handler: { _ in
                         MenloworksEventsService.shared.onAddToFavoritesClicked()
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .addToFavorites))
                         self.interactor.addToFavorites(items: currentItems)
                     })
                 case .removeFromFavorites:
                     action = UIAlertAction(title: TextConstants.actionSheetRemoveFavorites, style: .default, handler: { _ in
-                        
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .removeFromFavorites))
                         self.interactor.removeFromFavorites(items: currentItems)
                     })
                 case .documentDetails:

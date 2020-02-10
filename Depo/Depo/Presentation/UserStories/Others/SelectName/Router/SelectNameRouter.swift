@@ -15,7 +15,7 @@ class SelectNameRouter: SelectNameRouterInput {
     }
     
     func moveToFolderPage(presenter: SelectNamePresenter, item: Item, isSubFolder: Bool) {
-        let folderVC = router.filesFromFolder(folder: item, type: .Grid, sortType: .None, moduleOutput: presenter)
+        let folderVC = router.filesFromFolder(folder: item, type: .Grid, sortType: .None, status: .active, moduleOutput: presenter)
 
         if
             let tabBarVC = router.defaultTopController?.presentingViewController as? TabBarViewController,
@@ -40,7 +40,7 @@ class SelectNameRouter: SelectNameRouterInput {
     }
     
     func moveToAlbumPage(presenter: SelectNamePresenter, item: AlbumItem) {
-        let albumVC = router.albumDetailController(album: item, type: .List, moduleOutput: presenter)
+        let albumVC = router.albumDetailController(album: item, type: .List, status: .active, moduleOutput: presenter)
         router.pushViewController(viewController: albumVC)
     }
 }

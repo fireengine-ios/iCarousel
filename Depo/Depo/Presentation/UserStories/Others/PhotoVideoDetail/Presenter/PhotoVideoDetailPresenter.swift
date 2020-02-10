@@ -55,6 +55,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
+        guard 0..<items.count ~= index else {
+            goBack()
+            return
+        }
+        
         view.onShowSelectedItem(at: index, from: items)
         getSelectedItems { [weak self] selectedItems in
             guard let self = self else {
@@ -84,16 +89,16 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func updateBars() {
-        if interactor.allItems.isEmpty {
+        guard !interactor.allItems.isEmpty, let index = interactor.currentItemIndex else {
             return
         }
         
-        view.onItemSelected(at: interactor.currentItemIndex, from: interactor.allItems)
+        view.onItemSelected(at: index, from: interactor.allItems)
         
-        let selectedItems = [interactor.allItems[interactor.currentItemIndex]]
+        let selectedItems = [interactor.allItems[index]]
         let allSelectedItemsTypes = selectedItems.map { $0.fileType }
         
-        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: interactor.currentItemIndex)
+        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: index)
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
     }
     
@@ -121,14 +126,24 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         //let currentItem = interactor.allItems[interactor.currentItemIndex]
         var actions = [ElementTypes]()
         
-        switch object.fileType {
-        case .audio, .video, .image:
-            actions = interactor.setupedMoreMenuConfig//ActionSheetPredetermendConfigs.photoVideoDetailActions
-        case .allDocs:
-            actions = ActionSheetPredetermendConfigs.documetsDetailActions
+        switch view.status {
+        case .hidden:
+            actions = ActionSheetPredetermendConfigs.hiddenDetailActions
+        case .trashed:
+            actions = ActionSheetPredetermendConfigs.trashedDetailActions
         default:
-            break
+            switch object.fileType {
+            case .audio:
+                actions = ActionSheetPredetermendConfigs.audioDetailActions
+            case .image, .video:
+                actions = interactor.setupedMoreMenuConfig
+            case .allDocs:
+                actions = ActionSheetPredetermendConfigs.documetsDetailActions
+            default:
+                break
+            }
         }
+        
         alertSheetModule?.showAlertSheet(with: actions,
                                          items: [object],
                                          presentedBy: sender,
@@ -144,7 +159,10 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     // MARK: presenter output
     
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
-        let currentItem = interactor.allItems[interactor.currentItemIndex]
+        guard let index = interactor.currentItemIndex else {
+            return
+        }
+        let currentItem = interactor.allItems[index]
         selectedItemsCallback([currentItem])
     }
     
@@ -156,6 +174,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             interactor.deleteSelectedItem(type: type)
         case .removeFromFavorites, .addToFavorites:
             interactor.onViewIsReady()
+        case .hide, .unhide, .moveToTrash, .restore:
+            interactor.deleteSelectedItem(type: type)
         default:
             break
         }
@@ -166,6 +186,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         outputView()?.hideSpinner()
 
         debugPrint("failed")
+    }
+    
+    func successPopupClosed() {
+        if interactor.allItems.isEmpty {
+            goBack()
+        }
     }
     
     func goBack() {

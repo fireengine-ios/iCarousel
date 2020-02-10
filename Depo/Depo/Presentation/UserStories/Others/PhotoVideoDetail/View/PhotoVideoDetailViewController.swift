@@ -25,7 +25,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private var localPlayer: AVPlayer?
     private var playerController: FixedAVPlayerViewController?
     
-    var hideActions = false
+    var status: ItemStatus = .active
+    var hideTreeDotButton = false
     var editingTabBar: BottomSelectionTabBarViewController!
     private var needToScrollAfterRotation = true
     
@@ -62,20 +63,21 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
     }
     
-    private var selectedIndex = 0 {
+    private var selectedIndex: Int? {
         didSet {
-            guard !objects.isEmpty, selectedIndex < objects.count else {
+            guard !objects.isEmpty, let index = selectedIndex, index < objects.count else {
                 return
             }
             setupNavigationBar()
             setupTitle()
-            output.setSelectedItemIndex(selectedIndex: selectedIndex)
+            output.setSelectedItemIndex(selectedIndex: index)
         }
     }
     
     private(set) var objects = [Item]() {
         didSet {
             collectionView.reloadData()
+            scrollToSelectedIndex()
             collectionView.layoutIfNeeded()
         }
     }
@@ -111,6 +113,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
+        
+        showSpinner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -126,8 +130,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         editingTabBar.view.backgroundColor = UIColor.black
         setupTitle()
         
-        if hideActions {
-            editingTabBar.view.isHidden = true
+        if hideTreeDotButton {
+            navigationItem.rightBarButtonItem?.customView?.isHidden = true
         }
         
         // TODO: EditingBarConfig is not working
@@ -178,7 +182,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         
         /// need to check for PopUpController to dismiss it automaticaly for last photo in PhotoVideoDetail
-        if let presentedViewController = presentedViewController as? PopUpController {
+        if let presentedViewController = presentedViewController as? BasePopUpController {
             presentedViewController.close { [weak self] in
                 self?.dismiss(animated: true)
             }
@@ -188,59 +192,60 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     private func scrollToSelectedIndex() {
-        guard !objects.isEmpty, selectedIndex < objects.count else {
+        guard !objects.isEmpty, let index = selectedIndex, index < objects.count else {
             return
         }
-        let indexPath = IndexPath(item: selectedIndex, section: 0)
+        setupNavigationBar()
+        setupTitle()
+        
+        let indexPath = IndexPath(item: index, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-        self.collectionView.isHidden = false
-    } 
+        collectionView.isHidden = false
+    }
     
-    /// FIXME: temp logic of deinit. ItemOperationManager holds "self" strong
     func customDeinit() {
         ItemOperationManager.default.stopUpdateView(view: self)
         NotificationCenter.default.removeObserver(self)
     }
     
     private func setupNavigationBar() {
-        if navigationItem.rightBarButtonItem == nil {
+        if navigationItem.rightBarButtonItem == nil && !hideTreeDotButton {
             navigationItem.rightBarButtonItem = threeDotsBarButtonItem
         }
 
-        if hideActions {
+        if status == .hidden {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
         } else {
-            guard !objects.isEmpty, selectedIndex < objects.count else {
+            guard !objects.isEmpty, let index = selectedIndex, index < objects.count else {
                 return
             }
-            let item = objects[selectedIndex]
+            let item = objects[index]
             navigationItem.rightBarButtonItem?.customView?.isHidden = item.isLocalItem
         }
     }
 
     private func setupTitle() {
-        guard !objects.isEmpty, selectedIndex < objects.count else {
+        guard !objects.isEmpty, let index = selectedIndex, index < objects.count else {
             return
         }
-        if let name = objects[selectedIndex].name {
+        if let name = objects[index].name {
             setNavigationTitle(title: name)
         }
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
-        objects = items
         selectedIndex = index
-        
-        collectionView.reloadData()
-        collectionView.performBatchUpdates(nil) { [weak self] _ in
-            self?.scrollToSelectedIndex()
-        }
+        objects = items
     }
 
     @objc func onRightBarButtonItem(sender: UIButton) {
+        guard let index = selectedIndex else {
+            return
+        }
+        
         let stackCountViews = navigationController?.viewControllers.count ?? 0
         let inAlbumState = stackCountViews > 1 && navigationController?.viewControllers[stackCountViews - 2] is AlbumDetailViewController
-        output.moreButtonPressed(sender: sender, inAlbumState: inAlbumState, object: objects[selectedIndex], selectedIndex: selectedIndex)
+        output.moreButtonPressed(sender: sender, inAlbumState: inAlbumState, object: objects[index], selectedIndex: index)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -269,8 +274,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
             return
         }
         
-        let item = items[index]
-        if item.isLocalItem && item.fileType == .image {
+        if let item = items[safe: index], item.isLocalItem && item.fileType == .image {
             setThreeDotsMenu(active: false)
         } else {
             setThreeDotsMenu(active: true)
@@ -309,8 +313,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool) {
-        self.objects = objectsArray
         self.selectedIndex = selectedIndex
+        objects = objectsArray
     }
     
     func getNavigationController() -> UINavigationController? {
@@ -358,7 +362,13 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? PhotoVideoDetailCell else { return }
+        guard let cell = cell as? PhotoVideoDetailCell else {
+            return
+        }
+        
+        guard selectedIndex != nil else {
+            return
+        }
         cell.delegate = self
         cell.setObject(object: objects[indexPath.row])
     }
@@ -375,13 +385,22 @@ extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
+    
+    func imageLoadingFinished() {
+       hideSpinner()
+    }
+    
     func tapOnCellForFullScreen() {
         isFullScreen.toggle()
     }
     
     func tapOnSelectedItem() {
+        guard let index = selectedIndex else {
+            return
+        }
+        
         showSpinnerIncludeNavigationBar()
-        let file = objects[selectedIndex]
+        let file = objects[index]
         if file.fileType == .video {
             self.prepareToPlayVideo(file: file)
         }

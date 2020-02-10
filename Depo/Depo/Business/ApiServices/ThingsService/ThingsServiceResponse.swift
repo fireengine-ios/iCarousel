@@ -51,7 +51,7 @@ final class ThingsItemResponse: ObjectRequestResponse {
 //    }
 //}
 
-final class ThingsPageResponse: ObjectRequestResponse {
+final class ThingsPageResponse: ObjectRequestResponse, Map {
     var list: [ThingsItemResponse] = []
     
     override func mapping() {

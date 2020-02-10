@@ -1,6 +1,6 @@
 "update_required" = "Güncelleme gerekli";
 "update_found" = "Güncelleme bulundu";
-"install_" = "Kur";
+"install_" = "Uygulamayı güncelle";
 "downloading_new_version" = "Yeni versiyon indiriliyor...";
 "exit_application" = "Uygulamadan çık";
 "remind_me_later" = "Daha sonra hatırlat";

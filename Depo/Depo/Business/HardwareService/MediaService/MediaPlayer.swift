@@ -112,8 +112,8 @@ final class MediaPlayer: NSObject {
                 return
             }
         
-            self.delegates.invoke { delegate in
-                delegate.mediaPlayer(self, changedCurrentTime: newTime)
+            DispatchQueue.main.async {
+                self.delegates.invoke { $0.mediaPlayer(self, changedCurrentTime: newTime) }
             }
             self.updateNowPlayingInfoCenter(with: newTime)
         }
@@ -148,8 +148,8 @@ final class MediaPlayer: NSObject {
                 self.duration = duration
             }
 
-            delegates.invoke { delegate in
-                delegate.mediaPlayer(self, didStartItemWith: duration)
+            DispatchQueue.main.async {
+                self.delegates.invoke { $0.mediaPlayer(self, didStartItemWith: self.duration) }
             }
             
             if isPlaying {
@@ -274,9 +274,10 @@ final class MediaPlayer: NSObject {
             }
         }
         
-        delegates.invoke { delegate in
-            delegate.changedListItemsInMediaPlayer(self)
+        DispatchQueue.main.async {
+            self.delegates.invoke { $0.changedListItemsInMediaPlayer(self) }
         }
+        
     }
     
     func play(list: [Item], startAt index: Int) {
@@ -311,8 +312,8 @@ final class MediaPlayer: NSObject {
         /// need bcz of player.replaceCurrentItem(with: item)
         /// if item of player == newItem, will not call observeValue(forKeyPath
         if currentItem?.urlToFile == list[index].urlToFile {
-            delegates.invoke { delegate in
-                delegate.mediaPlayer(self, didStartItemWith: duration)
+            DispatchQueue.main.async {
+                self.delegates.invoke { $0.mediaPlayer(self, didStartItemWith: self.duration) }
             }
         } else {
             player.replaceCurrentItem(with: nil)
@@ -364,16 +365,16 @@ final class MediaPlayer: NSObject {
         } else {
             player.play()
         }
-        delegates.invoke { delegate in
-            delegate.didStartMediaPlayer(self)
+        DispatchQueue.main.async {
+            self.delegates.invoke { $0.didStartMediaPlayer(self) }
         }
     }
     
     func pause() {
         player.pause()
         
-        delegates.invoke { delegate in
-            delegate.didStopMediaPlayer(self)
+        DispatchQueue.main.async {
+            self.delegates.invoke { $0.didStopMediaPlayer(self) }
         }
     }
     
@@ -394,8 +395,8 @@ final class MediaPlayer: NSObject {
     @discardableResult
     func playNext() -> Int {
         if list.isEmpty {
-            delegates.invoke { delegate in
-                delegate.closeMediaPlayer()
+            DispatchQueue.main.async {
+                self.delegates.invoke { $0.closeMediaPlayer() }
             }
             return -1
         }
@@ -438,8 +439,8 @@ final class MediaPlayer: NSObject {
     func stop() {
         pause()
         resetTime()
-        delegates.invoke { delegate in
-            delegate.mediaPlayer(self, changedCurrentTime: 0)
+        DispatchQueue.main.async {
+            self.delegates.invoke { $0.mediaPlayer(self, changedCurrentTime: 0) }
         }
     }
     

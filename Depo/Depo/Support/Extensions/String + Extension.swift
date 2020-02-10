@@ -43,10 +43,34 @@ extension String {
     var hasCharacters: Bool {
         return !self.isEmpty
     }
+    
+    var firstLetter: String {
+        if let character = first {
+            return String(describing: character).uppercased()
+        }
+        return ""
+    }
 }
 
 extension Optional where Wrapped == String {
     var hasCharacters: Bool {
         return !(self?.isEmpty ?? true)
     }
+}
+
+//MARK: - path extension related
+
+extension String {
+    
+    func getPathExtension() -> String? {
+        guard let fileNameExtensionSlice = self.split(separator: ".").last else {
+            return nil
+        }
+        return String(fileNameExtensionSlice)
+    }
+    
+    func isPathExtensionGif() -> Bool {
+        return getPathExtension()?.lowercased() == "gif"
+    }
+    
 }

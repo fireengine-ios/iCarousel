@@ -61,8 +61,33 @@ class RemoteItemsService {
         currentPage = 0
         isFull = false
         queueOperations.cancelAllOperations()
-//        CoreDataStack.shared.deleteRemoteFiles()
         nextItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail, newFieldValue: newFieldValue)
+    }
+    
+    func reloadUnhiddenItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        debugLog("RemoteItemsService reloadUnhiddenItems")
+
+        currentPage = 0
+        isFull = false
+        queueOperations.cancelAllOperations()
+        nextUnhiddenItems(sortBy: sortBy, sortOrder: sortOrder, success: success, fail: fail, newFieldValue: newFieldValue)
+    }
+    
+    func nextUnhiddenItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
+        debugLog("RemoteItemsService nextUnhiddenItems")
+        if let unwrapedFieldValue = newFieldValue {
+            fieldValue = unwrapedFieldValue
+        }
+        
+        let serchParam = SearchByFieldParameters(fieldName: contentType,
+                                                 fieldValue: fieldValue,
+                                                 sortBy: sortBy,
+                                                 sortOrder: sortOrder,
+                                                 page: currentPage,
+                                                 size: requestSize,
+                                                 hidden: false)
+        
+        nextItems(with: serchParam, success: success, fail: fail)
     }
     
     func nextItems(fileType: FieldValue, sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems? ) {
@@ -83,7 +108,8 @@ class RemoteItemsService {
                                                  sortBy: sortBy,
                                                  sortOrder: sortOrder,
                                                  page: currentPage,
-                                                 size: requestSize)
+                                                 size: requestSize,
+                                                 hidden: true)
         
         nextItems(with: serchParam, success: success, fail: fail)
     }
@@ -294,7 +320,8 @@ class StoryService: RemoteItemsService {
                                                   sortBy: sortBy,
                                                   sortOrder: sortOrder,
                                                   page: currentPage,
-                                                  size: requestSize)
+                                                  size: requestSize,
+                                                  hidden: false)
                 
         remote.searchByField(param: searchParam, success: { [weak self] response in
             guard let resultResponse = response as? SearchResponse else {
@@ -334,10 +361,10 @@ class FolderService: RemoteItemsService {
     }
     
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
-        debugLog("FilesFromFolderService nextItems")
+        debugLog("FolderService nextItems")
 
         fileService.filesList(rootFolder: rootFolder, sortBy: sortBy, sortOrder: sortOrder,
-                              folderOnly: foldersOnly, remoteServicePage: currentPage,
+                              folderOnly: foldersOnly, remoteServicePage: currentPage, status: .active,
                               success: success, fail: fail)
         currentPage += 1
     }
@@ -347,16 +374,20 @@ class FilesFromFolderService: RemoteItemsService {
     
     let rootFolder: String
     let fileService = FileService.shared
+    let status: ItemStatus
     
-    init(requestSize: Int, rootFolder: String = "") {
+    init(requestSize: Int, rootFolder: String = "", status: ItemStatus) {
         self.rootFolder = rootFolder
+        self.status = status
         super.init(requestSize: requestSize, fieldValue: .document)
     }
     
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
-        debugLog("AllFilesService nextItems")
+        debugLog("FilesFromFolderService nextItems")
 
-        fileService.filesList(rootFolder: rootFolder, sortBy: sortBy, sortOrder: sortOrder, remoteServicePage: currentPage, success: success, fail: fail)
+        fileService.filesList(rootFolder: rootFolder, sortBy: sortBy, sortOrder: sortOrder,
+                              remoteServicePage: currentPage, status: status,
+                              success: success, fail: fail)
         currentPage += 1
     }
 }
@@ -370,7 +401,9 @@ class AllFilesService: RemoteItemsService {
     }
     
     override func nextItems(sortBy: SortType, sortOrder: SortOrder, success: ListRemoteItems?, fail: FailRemoteItems?, newFieldValue: FieldValue? = nil) {
-        fileService.filesList(sortBy: sortBy, sortOrder: sortOrder, remoteServicePage: currentPage, success: success, fail: fail)
+        debugLog("AllFilesService nextItems")
+        
+        fileService.filesList(sortBy: sortBy, sortOrder: sortOrder, remoteServicePage: currentPage, status: .active, success: success, fail: fail)
         currentPage += 1
     }
 }

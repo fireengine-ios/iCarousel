@@ -36,14 +36,17 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
 
     override func trackScreen() {
         if remoteItems is PeopleItemsService {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PeopleScreen())
             analyticsManager.logScreen(screen: .peopleFIR)
             analyticsManager.trackDimentionsEveryClickGA(screen: .peopleFIR)
             analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .recognition, eventLabel: .recognitionFace)
         } else if remoteItems is ThingsItemsService {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ThingsScreen())
             analyticsManager.logScreen(screen: .thingsFIR)
             analyticsManager.trackDimentionsEveryClickGA(screen: .thingsFIR)
             analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .recognition, eventLabel: .recognitionObject)
         } else if remoteItems is PlacesItemsService {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PlacesScreen())
             analyticsManager.logScreen(screen: .placesFIR)
             analyticsManager.trackDimentionsEveryClickGA(screen: .placesFIR)
             analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .recognition, eventLabel: .recognitionPlace)
@@ -115,7 +118,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
         if let item = item as? PeopleItem {
             output.startAsyncOperation()
             
-            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] album in
+            peopleService.getPeopleAlbum(id: Int(id), status: .active, success: { [weak self] album in
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
                     DispatchQueue.main.async {
                         output.didLoadAlbum(album, forItem: item)
@@ -129,7 +132,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
         } else if let item = item as? ThingsItem {
             output.startAsyncOperation()
             
-            thingsService.getThingsAlbum(id: Int(id), success: { [weak self] album in
+            thingsService.getThingsAlbum(id: Int(id), status: .active, success: { [weak self] album in
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
                     DispatchQueue.main.async {
                         output.didLoadAlbum(album, forItem: item)
@@ -143,7 +146,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
         } else if let item = item as? PlacesItem {
             output.startAsyncOperation()
             
-            placesService.getPlacesAlbum(id: Int(id), success: { [weak self] album in
+            placesService.getPlacesAlbum(id: Int(id), status: .active, success: { [weak self] album in
                 if let output = self?.output as? FaceImageItemsInteractorOutput {
                     DispatchQueue.main.async {
                         output.didLoadAlbum(album, forItem: item)

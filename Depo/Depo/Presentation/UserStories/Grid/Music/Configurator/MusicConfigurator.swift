@@ -17,6 +17,7 @@ final class MusicConfigurator {
                    topBarConfig: GridListTopBarConfig?,
                    alertSheetConfig: AlertFilesActionsSheetInitialConfig?) {
         let router = BaseFilesGreedRouter()
+        router.view = viewController
         
         let presenter = MusicPresenter()
         presenter.sortedRule = .timeUpWithoutSection

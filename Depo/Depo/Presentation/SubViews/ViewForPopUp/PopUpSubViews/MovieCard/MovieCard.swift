@@ -57,6 +57,15 @@ final class MovieCard: BaseCardView {
         }
     }
     
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
+    }
+    
+    override func configurateView() {
+        super.configurateView()
+        ItemOperationManager.default.startUpdateView(view: self)
+    }
+    
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
         
@@ -95,7 +104,7 @@ final class MovieCard: BaseCardView {
     }
     
     @IBAction private func actionVideoViewButton(_ sender: UIButton) {
-        showPhotoVideoDetail(hideActions: true)
+        showPhotoVideoDetail()
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
@@ -103,7 +112,7 @@ final class MovieCard: BaseCardView {
         case .save:
             saveImage()
         case .display:
-            showPhotoVideoDetail(hideActions: false)
+            showPhotoVideoDetail()
         }
     }
     
@@ -126,13 +135,20 @@ final class MovieCard: BaseCardView {
         }
     }
     
-    private func showPhotoVideoDetail(hideActions: Bool) {
+    private func showPhotoVideoDetail() {
         debugLog("movie card open video")
         guard let item = item else {
             return
         }
         
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], hideActions: hideActions)
+        let status: ItemStatus
+        if item.status.isContained(in: [.hidden, .trashed]) {
+            status = item.status
+        } else {
+            status = .active
+        }
+
+        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], status: status)
         controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         let nController = NavigationController(rootViewController: controller)
         RouterVC().presentViewController(controller: nController)
@@ -152,4 +168,28 @@ final class MovieCard: BaseCardView {
         }
     }
     
+}
+
+extension MovieCard: ItemOperationManagerViewProtocol {
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        return object === self
+    }
+    
+    func didHideItems(_ items: [WrapData]) {
+        deleteCardIfNeeded(items: items)
+    }
+    
+    func didMoveToTrashItems(_ items: [Item]) {
+        deleteCardIfNeeded(items: items) 
+    }
+    
+    private func deleteCardIfNeeded(items: [WrapData]) {
+        guard let uuid = item?.uuid else {
+            return
+        }
+        
+        if items.first(where: { $0.uuid == uuid }) != nil {
+            CardsManager.default.stopOperationWithType(type: .movieCard, serverObject: cardObject)
+        }
+    }
 }

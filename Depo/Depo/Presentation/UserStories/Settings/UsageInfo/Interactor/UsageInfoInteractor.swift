@@ -32,6 +32,7 @@ extension UsageInfoInteractor: UsageInfoInteractorInput {
     }
     
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.UsageInfoScreen())
         analyticsManager.logScreen(screen: .usageInfo)
         analyticsManager.trackDimentionsEveryClickGA(screen: .usageInfo)
     }

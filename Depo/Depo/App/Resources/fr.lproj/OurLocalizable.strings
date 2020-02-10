@@ -5,6 +5,10 @@
 
 /*Suggested: "Location services are disabled in your device settings. To use the background sync feature of lifebox, you need to enable location services under "Settings - Privacy - Location Services" menu."*/
 "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Les services de localisation sont désactivés dans les paramètres de votre appareil. Pour utiliser la fonctionnalité de synchronisation en arrière-plan de lifebox, vous devez activer les services de localisation dans la rubrique ‘’Paramètres - Confidentialité - Services de Localisation’’";
+"Welcome1SubInfo" = "Sauvegardez vos souvenirs, vos contacts et vos fichiers en toute sécurité dans lifebox. Accédez à votre contenu partout et tout le temps. ";
+
+/*Suggested: "Location services are disabled in your device settings. To use the background sync feature of lifebox, you need to enable location services under "Settings - Privacy - Location Services" menu."*/
+"Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Les services de localisation sont désactivés dans les paramètres de votre appareil. Pour utiliser la fonctionnalité de synchronisation en arrière-plan de lifebox , vous devez activer les services de localisation dans la rubrique ‘’Paramètres - Confidentialité - Services de Localisation’’";
 
 /*Suggested: "This file will be removed only from the album. You can access this file from the Photos tab"*/
 "This file will be removed only from your album. You can access this file from Photos tab" = "Ce fichier sera uniquement supprimé de votre album. Vous pouvez accéder à ce fichier à partir de l'onglet Photos.";
@@ -16,6 +20,11 @@
 /*Fuzzy*/
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "La suppression de ce fichier est définitive.Une fois supprimé vous ne pourrez plus y accéder depuis Lifebox. Êtes-vous sûr de vouloir procéder à la suppression ?";
 "Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "La suppression de ces fichiers est définitive.Une fois supprimés vous ne pourrez plus y accéder depuis Lifebox.";
+"Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "La suppression de cet album ne supprimera pas les fichiers de lifebox. Vous pouvez accéder à ces fichiers depuis l'onglet Photos. Êtes-vous sûr de vouloir procéder à sa suppression ?";
+
+/*Suggested: "Deleting these files will remove them from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?"*/
+"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Le ou les fichiers sélectionnés seront mis dans la corbeille. Vous pourrez les récupérer en 30 jours. N'oubliez pas de vider d'abord la corbeille si vous devez faire de place pour la mémoire de votre lifebox,";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Le ou les fichiers sélectionnés seront mis dans la corbeille. Vous pourrez les récupérer en 30 jours. N'oubliez pas de vider d'abord la corbeille si vous devez faire de place pour la mémoire de votre lifebox,";
 "Purchase" = "Achat";
 "Packages" = "Offre de stockage";
 "Verification code is blocked.\nPlease request a new code" = "Le code de vérification est bloqué. Veuillez réinitialiser votre code.";
@@ -24,6 +33,10 @@
 "Please enter your promo code" = "Veuillez entrer le code d’activation de votre offre de stockage.";
 "This package activation code is invalid" = "Ce code d’activation pour l'offre de stockage est invalide.";
 "Enter your promo code" = "Entrer le code d’activation de votre offre de stockage.";
+"Your package is successfully defined" = "Votre offre a été activée avec succès.";
+"Please enter your promo code" = "Veuillez entrer le code d’activation de votre offre.";
+"This package activation code is invalid" = "Ce code d’activation d'offre est invalide.";
+"Enter your promo code" = "Entrer le code d’activation de votre offre.";
 "Lifebox campaign" = "Campagne de lifebox";
 "Success" = "Succès";
 "Apply" = "Appliquer";
@@ -40,6 +53,14 @@
 "Please repeate your new lifebox passcode" = "Veuillez saisir à nouveau votre nouveau mot de passe de lifebox.";
 "Please enter your lifebox passcode" = "Veuillez saisir votre mot de passe de lifebox.";
 "lifebox Passcode" = "Mot de passe de lifebox";
+"To enter passcode" = "Entrer le mot de passe lifebox.";
+"Set a Passcode" = "Définir un mot de passe lifebox.";
+"Passcodes don't match, please try again" = "Les mots de passe ne correspondent pas, veuillez essayer de nouveau.";
+"You successfully set your passcode" = "Votre mot de passe a été correctement créé.";
+"Passcode is changed successfully" = "Votre mot de passe a été correctement modifié.";
+"Please repeate your new lifebox passcode" = "Veuillez saisir à nouveau votre nouveau mot de passe lifebox.";
+"Please enter your lifebox passcode" = "Veuillez saisir votre mot de passe\n.";
+"lifebox Passcode" = "Mot de passe lifebox";
 "Change Passcode" = "Changer le mot de passe";
 "Passcode" = "Mot de passe";
 "The package activation code is not active" = "Le code d’activation de cette offre de stockage n’est pas actif.";
@@ -103,6 +124,9 @@ sent to your phone number %@"*/
 "You can open settings and cancel subscption." = "Vous pouvez depuis iTunes annuler votre souscription.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Pour annuler offre de stockage, veuillez nous envoyer un SMS au 2200 avec la mention ‘‘\"IPTAL LIFEBOX %@\"";
 "You can visit iTunes to cancel your subscription" = "Vous pouvez visiter iTunes pour annuler votre paquet";
+"You can open settings and cancel subscption." = "Vous pouvez annuler votre offre depuis iTunes.";
+"Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "Pour annuler votre offre, veuillez nous envoyer un SMS au 2200 avec la mention ‘‘\"IPTAL LIFEBOX %@\"";
+"You can visit iTunes to cancel your subscription" = "Rendez-vous sur iTunes pour annuler votre offre.";
 
 /*Suggested: "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send “STOP” to 2"*/
 "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, incroyable que vous faites ça! Lorsque vous décidez de la réactiver, nous serons là pour vous :)  Si vous insistez, envoyer ‘‘STOP’’ à 2";
@@ -110,6 +134,9 @@ sent to your phone number %@"*/
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Pour désactiver lifebox 50GB veuillez envoyer un SMS avec la mention 50VYKL, pour désactiver lifebox 500GB veuillez envoyer un SMS avec la mention 500VYKL au numéro 8080";
 "Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Les clients Platinium et lifecell peuvent envoyer LIFE, les autres clients peuvent envoyer LIFEBOX 50GB pour l'offre de stockage 50GB,  LIFEBOX 500GB pour l'offre de stockage lifebox 500GB et LIFEBOX 2.5TB pour l'offre de stockage lifebox 2.5 TB au 3030 pour activer leurs droits d’adhésion";
 "Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Prix spéciaux pour les souscripteurs lifecell! Envoyer un SMS avec la mention 50VKL pour activer lifebox 50GB pour 24,99UAH/30 jours, envoyer un SMS avec la mention 500VKL pour activer lifebox 500 GB pour 52,99UAH/30 jours, au numéro 8080";
+"To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "Pour désactiver LIFEBOX 50GB envoyez par SMS 50VYKL au 8080, pour désactiver LIFEBOX 500GB envoyez par SMS 500VYKL au 8080";
+"Platinum and lifecell customers can send LIFE, other customers can send LIFEBOX 50GB for lifebox 50GB package, LIFEBOX 500GB for lifebox 500GB package and LIFEBOX 2.5TB for lifebox 2.5TB package to 3030 to start their memberships" = "Pour activer vos droits, clients Platinium & lifecell envoyez LIFE au 3030, pour les autres, envoyez LIFEBOX 50GB pour l'offre 50GB,  LIFEBOX 500GB pour l'offre lifebox 500GB et LIFEBOX 2.5TB pour l'offre lifebox 2.5 TB au 3030.";
+"Special prices for lifecell subscribers! To activate lifebox 50GB for 24,99UAH/30 days send SMS with the text 50VKL, for lifebox 500GB for 52,99UAH/30days send SMS with the text 500VKL to the number 8080" = "Offres spéciales clients lifecell! Envoyez 50VKL par SMS au 8080 et profitez de 50GB pour 24,99UAH/30 jour, envoyez 500VKL pour 500 GB pour 52,99UAH/30 jours.";
 "%ld docs" = "%ld documents";
 "Quota info" = "Informations d'utilisation";
 "%@ of %@ has remained" = "%1$@ de %2$@ s’est maintenu";
@@ -133,6 +160,8 @@ sent to your phone number %@"*/
 /*Suggested: "here are %d duplicated photos on your device and lifebox. Clear some space by selecting the photos that you want to delete."*/
 "There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "%d photos reproduits sont disponibles à la fois dans votre appareil et dans votre lifebox. Libérer de l’espace en sélectionnant des photos que vous souhaitez supprimer.";
 "Download to Camera Roll" = "Télécharger dans la Galerie de l'appareil";
+"There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "%d photos sont disponibles à la fois dans votre appareil et dans lifebox. Libérer de l’espace en sélectionnant des photos que vous souhaitez supprimer.";
+"Download to Camera Roll" = "Télécharger dans Galerie";
 "Share Album" = "Partager l’Album";
 "Album Details" = "Détails de l’Album";
 
@@ -146,6 +175,8 @@ sent to your phone number %@"*/
 "More" = "Plus";
 "lifebox" = "Lifebox";
 "iCloud Drive" = "Lecteur iCloud";
+"lifebox" = "lifebox";
+"iCloud Drive" = "iCloud Drive";
 "Photos" = "Photos";
 "Choose From Library" = "Sélectionner à partir de la bibliothèque";
 "Take Photo" = "Utiliser l'appareil photo";
@@ -184,6 +215,7 @@ sent to your phone number %@"*/
 
 /*Suggested: "There are some duplicated items on your device and lifebox"*/
 "There are some duplicated items both in your device and lifebox" = "Certains éléments existent en double dans votre appareil et votre lifebox";
+"There are some duplicated items both in your device and lifebox" = "Il existe des doublons dans votre appareil et lifebox.";
 "Operation is complete" = "Fin de l’opération";
 "Download is complete" = "Fin de téléchargement";
 "Deleting is complete" = "Suppression terminée";
@@ -198,12 +230,17 @@ sent to your phone number %@"*/
 "DESTEK-LIFEBOX@TURKCELL.COM.TR" = "DESTEK-LIFEBOX@TURKCELL.COM.TR";
 "Send" = "Envoyer";
 "%@ about Lifebox" = "%@ à propos de Lifebox";
+"%@ about Lifebox" = "%@ à propos de lifebox";
 "Complaint" = "Réclamation";
 "Suggestion" = "Suggestion";
 "Feedback Form" = "Pour toutes suggestions ou réclamations, veuillez nous contacter:";
 "Thanks for leaving a comment!" = "Veuillez nous contacter";
 "Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Veuillez ne pas supprimer les informations ci-dessous. Ces éléments seront nécessaires afin de résoudre vorre problème. \n\nVersion d’Application: %@\nMsisdn/Numéro: %@\nPorteur: %@\nAppareil: %@\nSystème d'explotation de l'appareil: %@\nLangue: %@\nLangue de préférence: %@\nStatut du Réseau: %@\nEspace de stockage Total: %lld\nEspace de stockage uilisé: %lld\nOffres: %@";
 "Upload Photos" = "Télécharger des Photos";
+"Feedback Form" = "Pour toute suggestion ou réclamation, contactez-nous:";
+"Thanks for leaving a comment!" = "Contactez-nous";
+"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Veuillez ne pas supprimer les informations ci-dessous. Ces éléments seront nécessaires afin de résoudre votre problème. \n\nVersion d’Application: %@\nMsisdn/Numéro: %@\nPorteur: %@\nAppareil: %@\nSystème d'exploitation de l'appareil: %@\nLangue: %@\nL'état du réseau: %@\nOffres: %@\nEspace de stockage Total: %lld\nEspace de stockage utilisé: %lld\nNom: %@\nNom de famille: %@\ne-mail: %@\nMatière: %@";
+"Upload Photos" = "Télécharger des photos";
 "Add" = "Ajouter";
 "Albums" = "Albums";
 "Sorry, but play list name should not be empty" = "Désolé, le nom de la playlist ne doit pas être vide";
@@ -237,6 +274,8 @@ Is it "Use "this" to be the album cover?*/
 /*Suggested: "Upload from lifebox failed"*/
 "Fail while uploading from LifeBox" = "Le téléchargement depuis Lifebox a échoué";
 "Sorry, but photos not selected" = "Désolé, les photos n'ont pas été correctement sélectionnées";
+"Fail while uploading from LifeBox" = "Le téléchargement depuis lifebox a échoué";
+"Sorry, but photos not selected" = "Les photos n'ont pas été sélectionnées";
 "Upload from lifebox" = "Télécharger depuis lifebox";
 "Upload failed" = "Le téléchargement a échoué";
 "Upload was successful" = "Téléchargé avec succès";
@@ -278,6 +317,11 @@ Is it "Use "this" to be the album cover?*/
 /*Suggested: "You can backup your contacts to lifebox. You can easily manage your contact list from any device and from anywhere."*/
 "You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "Vous pouvez sauvegarder vos contacts sur lifebox. Vous pouvez facilement gérer votre liste de contacts à tous moments depuis n'importe quel  appareil";
 "Backed up %d Contacts" = "Vous avez %d contacts dans votre sauvegarde Lifebox.";
+"You never backed up your contacts" = "Vous n'avez pas encore sauvegardé vos contacts dans lifebox.";
+
+/*Suggested: "You can backup your contacts to lifebox. You can easily manage your contact list from any device and from anywhere."*/
+"You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere." = "Sauvegarder vos contacts dans lifebox. Vous pouvez gérer votre liste de contacts à tout moment depuis n'importe quel appareil.";
+"Backed up %d Contacts" = "Vous avez %d contacts sauvegardés dans lifebox.";
 "Removed" = "Supprimé";
 "Updated" = "Mis à jour";
 "New Contact" = "Nouveau Contact";
@@ -309,6 +353,9 @@ Is it "Use "this" to be the album cover?*/
 "I’d like hear about news and promotions about lifebox occasionally." = "J'aimerais recevoir des informations sur l'actualité de lifebox et être informées des offres promotionnelles disponibles.";
 "GSM Number" = "Numéro de Téléphone";
 "E-Mail" = "Adresse mail";
+"I’d like hear about news and promotions about lifebox occasionally." = "J'aimerais recevoir des informations sur l'actualité de lifebox et recevoir les offres promotionnelles disponibles.";
+"GSM Number" = "Numéro de téléphone";
+"E-Mail" = "Adresse email";
 "Name and Surname" = "Nom et Prénom";
 "Your Profile" = "Profil";
 "Import From Cropy" = "Importer depuis Cropy";
@@ -322,6 +369,8 @@ Is it "Use "this" to be the album cover?*/
 "Help & Support" = "Foire Aux Questions";
 "Lifebox Touch ID and Passcode" = "Lifebox Touch ID et mot de passe";
 "Usage Info and Packages" = "Détails d'informatons";
+"Lifebox Touch ID and Passcode" = "lifebox Touch ID et mot de passe";
+"Usage Info and Packages" = "Détails des usages";
 "Recently Deleted Files" = "Fichiers Récemment Supprimés";
 "Auto Sync" = "Synchronisation automatique";
 "Back-up my contacts" = "Sauvegarder Mes Contacts";
@@ -332,6 +381,11 @@ Is it "Use "this" to be the album cover?*/
 "You don’t have any documents on your Lifebox yet." = "Vous n’avez encore aucun documents dans votre lifebox";
 "Start adding your music" = "Commencez à ajouter votre musique";
 "You don’t have any music on your Lifebox yet." = "Vous n’avez encore aucune musique dans votre lifebox";
+"Back to Lifebox" = "Retour à lifebox ";
+"Start adding your documents" = "Commencer à ajouter vos documents";
+"You don’t have any documents on your Lifebox yet." = "Vous n’avez encore aucun documents dans lifebox.";
+"Start adding your music" = "Commencez à ajouter votre musique.";
+"You don’t have any music on your Lifebox yet." = "Vous n’avez pas encore de musique dans lifebox.";
 "info" = "Info";
 "Enable photo permissions in settings" = "Activer les autorisations des photos dans les paramètres";
 "Start adding your photos" = "Commencer à ajouter vos photos";
@@ -345,6 +399,14 @@ Is it "Use "this" to be the album cover?*/
 "Expand My Storage" = "Mettre à Niveau Mon Offre de Stockage";
 "You are using %85 of your disk space! It’s a great time to expand your storage." = "Vous utilisez %85 de votre quota de lifebox! C’est le moment de mettre à niveau votre stockage.";
 "Your storage is almost full!" = "Le stockage de votre appareil est presque plein!";
+"You don’t have anything on your photo roll." = "Vous n'avez encore aucune photo ou vidéo dans lifebox.";
+"View All Pictures" = "Voir toutes les photos";
+"View All My Stream" = "Voir mon flux";
+"%d Photos" = "%d Photos";
+"You’ve uploaded %@ two days ago!" = "Vous avez téléchargé %@ il y a deux jours!";
+"Expand My Storage" = "Mettre à niveau mon offre";
+"You are using %85 of your disk space! It’s a great time to expand your storage." = "Vous utilisez 85% de votre quota lifebox! C’est le moment de mettre à niveau votre espace.";
+"Your storage is almost full!" = "L'espace de votre appareil est presque plein!";
 "Change filter" = "Filtre";
 "Save this photo" = "Sauvegarder";
 "You can apply this filter and my more to your other picures as well" = "Vous pouvez également appliquer d'autres filtres pour vos photos";
@@ -360,6 +422,7 @@ Is it "Use "this" to be the album cover?*/
 "Access to Gallery is denied. Please change it from the settings menu of the device" = "L'accès à la galerie est refusé. Veuillez effectuer votre modification depuis le menu des paramètres de l'appareil.";
 "Caution!" = "Attention!";
 "You can start using your smart box with our suggestions. When you’re done you can swipe to dismiss the card -including this one too. Nothing is lost! You can access everything you see here through the app. " = "Vous pouvez accéder à tout ce qui concerne Lifebox depuis la page d'accueil. Commencez à utiliser votre lifebox avec nos suggestions. Vous pouvez balayer les cartes que vous n’aimez pas.";
+"You can start using your smart box with our suggestions. When you’re done you can swipe to dismiss the card -including this one too. Nothing is lost! You can access everything you see here through the app. " = "Vous pouvez accéder à tout lifebox depuis la page d'accueil. Commencez à l'utiliser avec nos suggestions. Vous pouvez changer ce que vous n'aimez pas.";
 "Welcome! Let’s get you started!" = "Bienvenue ! Commençons !";
 "Videos" = "Vidéos";
 "Folder" = "Dossier";
@@ -426,11 +489,14 @@ Is it "Use "this" to be the album cover?*/
 "Skip for now" = "Ignorer";
 "Let’s start using Lifebox" = "Commençons à utiliser lifebox";
 "Select the items to sync with mobile data." = "Sélectionnez les éléments à synchroniser avec les données mobiles";
+"Let’s start using Lifebox" = "Commençons à utiliser lifebox.";
+"Select the items to sync with mobile data." = "Sélectionnez les éléments à synchroniser avec les données mobiles.";
 "Mobile Data" = "Données Mobiles";
 "Wi-fi" = "Wi-Fi";
 
 /*Suggested: "lifebox can sync your photos and videos automatically. Would you like to enable the auto upload feature now?"*/
 "Lifebox can sync your files automatically. Would you like to have this feature right now?" = "Lifebox peut synchroniser automatiquement vos photos et vidéos. Souhaitez-vous activer la fonctionnalité de téléchargement automatique maintenant?";
+"Lifebox can sync your files automatically. Would you like to have this feature right now?" = "lifebox peut synchroniser automatiquement vos photos et vidéos. Souhaitez-vous activer la fonctionnalité de téléchargement automatique maintenant?";
 "You have to fill in a password" = "Vous devez renseigner votre mot de passe.";
 
 /*Suggested: "Fill in your e-mail or Phone Number"*/
@@ -440,6 +506,7 @@ Is it "Use "this" to be the album cover?*/
 "Remember my credentials" = "Se souvenir de mon mot de passe";
 "I can't login" = "J’ai oublié mon mot de passe";
 "Register to lifebox and get a 5 GB of storage for free!" = "Inscrivez-vous à lifebox et bénéfiicez de 5 Gigas de stockage offerts!";
+"Register to lifebox and get a 5 GB of storage for free!" = "Inscrivez-vous à lifebox bénéfiicez de 5 Gigas de stockage offerts!";
 "Login" = "Me connecter";
 "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>" = "<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>";
 "Accept  Terms" = "J'ai lu et accepté les conditions d'utilisation";
@@ -515,6 +582,9 @@ Note: English is correct. GSM may be confusing to the customer*/
 "%d Duplicated Contacts Deleted" = "%d Contact(s) en doublon supprimé(s) de la liste de contacts de votre appareil";
 "You have %d numbers on your contacts backup." = "Vous avez %d contacts dans votre lifebox";
 "This contact will be deleted from your contacts." = "Ce contact sera supprimé de vos contacts";
+"%d Duplicated Contacts Deleted" = "%d Contact(s) en doublon supprimé(s) de la liste de contacts de votre appareil.";
+"You have %d numbers on your contacts backup." = "Vous avez %d contacts dans lifebox.";
+"This contact will be deleted from your contacts." = "Ce contact sera supprimé de vos contacts.";
 "Upgrade" = "Mise à jour";
 "Creation date" = "Date de création";
 "Folder Info" = "Informations sur le dossier";
@@ -538,6 +608,10 @@ Note: English is correct. GSM may be confusing to the customer*/
 
 /*Suggested: "You don't have any files in your lifebox, yet. Start uploading your memories to lifebox!"*/
 "You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "Vous n'avez encore aucun fichier dans votre lifebox. Commencez à télécharger vos souvenirs sur lifebox!";
+"You are using %f of your disk space! It’s a great time to expand your storage." = "Vous utilisez %d%% de votre quota lifebox! Augmenter votre espace de stockage.";
+
+/*Suggested: "You don't have any files in your lifebox, yet. Start uploading your memories to lifebox!"*/
+"You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "Vous n'avez encore aucun fichier dans lifebox. Commencez à télécharger vos souvenirs !";
 "You are using %f of your device storage. It’s a great time to freeup space on your device." = "Vous utilisez %d%% de la capacité de votre appareil. C’est le moment de libérer de l’espace.";
 "Upload Files" = "Télécharger des Fichiers";
 "Free Up Space" = "Libérer de l’Espace";
@@ -556,6 +630,9 @@ Note: English is correct. GSM may be confusing to the customer*/
 "View Recent Activities" = "Voir les Activités Récentes";
 "View All Photos" = "Voir Toutes les Photos";
 "You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "L'espace de stockage de Lifebox est presque plein!                              \nJetons un coup d'œil aux options de stockage disponibles.";
+"View Recent Activities" = "Voir les activités récentes";
+"View All Photos" = "Voir toutes les photos";
+"You have reached your lifebox memory limit.\nLet’s have a look for upgrade options!" = "L'espace de stockage lifebox est presque plein !                              \nJetons un coup d'œil aux options de stockage disponibles.";
 "Error occurred while accessing your photos.\nPlease check your settings." = "Une erreur s'est produite lors de l'accès à vos photos.\nVeuiller vérifier vos paramètres.";
 "localFilesBeingProcessed" = "Traitement des fichiers locaux.";
 
@@ -565,6 +642,7 @@ Note: English is correct. GSM may be confusing to the customer*/
 /*Suggested: "Warning: You have already activated the passcode/touch id feature. In order to keep your files in lifebox safely with passcode/touch id features, we recommend not activating the autologin 3G/LTE feature."*/
 "TurkcellSecurityAutologinText" = "Avertissement: Vous avez déjà activé la fonction mot de passe / Touch ID. Nous vous recommandons de ne pas activer l’ouverture cession automatique avec la fonction 3G/LTE pour conserver vos fichiers dans lifebox en toute sécurité avec les fonctionnalités de mot de passe / Touch ID.";
 "PasscodeActivationWhileTurkcellActivated" = "L’ouverture automatique de session Lifebox avec 3G / LTE a été désactivée pour que vous puissiez utiliser les fonctions de code confidentiel et de Touch Id Lifebox en toute sécurité. Vous pouvez réactiver les paramètres de l’ouverture automatique de session à tout moment.";
+"PasscodeActivationWhileTurkcellActivated" = "L’ouverture automatique de session lifebox avec 3G / LTE a été désactivée pour que vous puissiez utiliser les fonctions de code confidentiel et de Touch Id lifebox en toute sécurité. Vous pouvez réactiver les paramètres d'ouverture automatique de session à tout moment.";
 
 /*Fuzzy*/
 "Error Handling Under Constraction" = "Traitement des Erreurs en Construction";
@@ -593,6 +671,7 @@ Note: English is correct. GSM may be confusing to the customer*/
 /*Turkcell?*/
 /*Fuzzy*/
 "Authentication with Turkcell Password is disabled for the account" = "Vous ne pouvez pas ouvrir la session de lifebox avec votre mot de passe Turkcell car vous avez désactivé l’ouverture de cession avec la fonction de mot de passe Turkcell. Veuillez essayer ouvrir la cession avec votre mot de passe de lifebox.";
+"Authentication with Turkcell Password is disabled for the account" = "Vous ne pouvez pas ouvrir la session lifebox avec votre mot de passe Turkcell car vous avez désactivé l’ouverture de cession avec la fonction de mot de passe Turkcell. Veuillez essayer d'ouvrir la cession avec votre mot de passe lifebox.";
 
 /*Suggested: "You don't have a lifebox account. Please signup before using the application"*/
 "You don't have any lifebox account. Please signup before using the application" = "Vous n'avez pas de compte lifebox. Veuillez créer un compte.";
@@ -642,6 +721,7 @@ English is correct. GSM may be confusing to the customer*/
 "Invalid purchase. AppStore does not verify purchase for the given parameters." = "Achat invalide. L'AppStore ne vérifie pas l'achat pour les paramètres donnés.";
 "A temporary error has occurred due to technical reasons." = "Une erreur temporaire est survenue pour des raisons techniques.";
 "Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Le compte associé à cet achat est déjà activé pour un autre utilisateur de lifebox. L'utilisation de comptes différents de lifebox avec la même ID Apple ou Google peut entraîner cette situation.";
+"Subscription related with this purchase is already activated for another lifebox user. Note that using different lifebox accounts with the same Apple or Google ID might result with this situation." = "Le compte associé à cet achat est déjà activé pour un autre utilisateur de lifebox. L'utilisation de comptes différents avec la même ID Apple ou Google peut entraîner cette situation.";
 
 /*Fuzzy*/
 "Shows that a response operation is done for the given receipt." = "Cela montre qu’une opération de réponse est effectuée pour le reçu donné.";
@@ -658,6 +738,11 @@ English is correct. GSM may be confusing to the customer*/
 
 /*Suggested: "You don’t have any stories on your lifebox yet."*/
 "You don’t have any stories  on your Lifebox yet." = "Vous n'avez encore aucune story sur votre lifebox.";
+"You don’t have any albums on your Lifebox yet." = "Vous n'avez encore aucun album dans lifebox.";
+"Start creating albums" = "Commencez à créer des albums";
+
+/*Suggested: "You don’t have any stories on your lifebox yet."*/
+"You don’t have any stories  on your Lifebox yet." = "Vous n'avez encore aucune story dans lifebox.";
 "Start creating stories" = "Commencez à créer des stories";
 "Help and Support" = "Aide";
 "Album is Empty" = "L'album est vide";
@@ -667,6 +752,10 @@ English is correct. GSM may be confusing to the customer*/
 
 /*Suggested: "You don’t have any favorited files on your lifebox yet."*/
 "You don’t have any favorited files on your Lifebox yet." = "Vous n'avez encore aucun fichier favori sur votre lifebox.";
+"You don’t have any files on your Lifebox yet." = "Vous n'avez encore aucun fichier dans lifebox.";
+
+/*Suggested: "You don’t have any favorited files on your lifebox yet."*/
+"You don’t have any favorited files on your Lifebox yet." = "Vous n'avez encore aucun fichier favori dans lifebox.";
 "Start adding your files" = "Commencez à ajouter des fichiers";
 "Suggestions" = "Suggestions";
 "Recent Searches" = "Recherches Récentes";
@@ -683,6 +772,15 @@ Comma added*/
 "Are these the same person?" = "S'agit-il de la même personne ?";
 "We couldn't find anybody on your Lifebox yet." = "Nous n’avons trouvé aucune personne dans votre lifebox.";
 "Grouping of your photos will take some time. Please wait and then check the albums." = "Le regroupement de vos photos prendra un certain temps. Veuillez patienter puis vérifiez les albums créés s'il vous plaît.";
+"Lifebox can sync your files automatically." = "lifebox peut synchroniser vos fichiers, photos et vidéos automatiquement.\nPour activer la synchronisation en arrière-plan de vos photos et vidéos, assurez-vous que votre autorisation de géolocalisation est réglée sur \"TOUJOURS\" dans le menu \"Paramètres du périphérique-lifebox-géolocalisation\".";
+"Get Started" = "Commencer";
+"I have read and accepted terms of use" = "J'ai lu et accepte les conditions d'utilisation";
+"Welcome to Lifebox!" = "Bienvenue dans lifebox !";
+"You need to confirm the User Agreement to continue." = "Vous devez accepter le contrat d’utilisation pour continuer.";
+"PhotosAndViedos" = "Photos et Vidéos";
+"Are these the same person?" = "S'agit-il de la même personne ?";
+"We couldn't find anybody on your Lifebox yet." = "Nous n’avons trouvé personne dans lifebox.";
+"Grouping of your photos will take some time. Please wait and then check the albums." = "Le regroupement de vos photos prendra un certain temps. Veuillez patienter avant de vérifier les albums créés.";
 "Never" = "Jamais";
 "Approve" = "Approuver";
 "infomationEmptyEmail" = "Avoir un e-mail associé à votre compte est l’un des moyens les plus simples et les plus fiables pour assurer la sécurité de votre compte. Veuillez ajouter une adresse e-mail.";
@@ -718,6 +816,7 @@ Full stop added*/
 /*Suggested: "Delete Duplicate"*/
 "Delete Duplicated" = "Supprimer les doublons";
 "Lifebox %@ and Passcode" = "Lifebox %@ et Mot de Passe";
+"Lifebox %@ and Passcode" = "lifebox %@ et mot de passe";
 
 /*Suggested: "We make it easier to manage your memories with homepage"*/
 /*Fuzzy*/
@@ -733,6 +832,9 @@ Full stop added*/
 "You have reached your lifebox memory limit" = "Vous avez atteint la capacité de stockage maximale de votre lifebox";
 "Error occurred while accessing your contacts.\nPlease check your settings." = "Une erreur s'est produite lors de l'accès à vos contacts.";
 "Manage Contacts" = "Gérer les Contacts de lifebox";
+"You have reached your lifebox memory limit" = "Vous avez atteint la capacité de stockage maximale de lifebox";
+"Error occurred while accessing your contacts.\nPlease check your settings." = "Une erreur s'est produite lors de l'accès à vos contacts.";
+"Manage Contacts" = "Gérer les contacts de lifebox ";
 "Import fearture is totally free of charge and does not affect your internet package" = "La fonctionnalité d'importation est totalement gratuite et n'est pas décomptée de votre quota internet (data)";
 "Your last backup was on %@" = "Votre dernière sauvegarde était le %@";
 "Contacts Sync" = "Synchronisation des Contacts";
@@ -745,6 +847,14 @@ Full stop added*/
 "LifeboxLargePopUpSkipButtonTitle" = "Passer";
 "Lifebox can sync your contacts automatically." = "Lifebox peut synchroniser vos contacts automatiquement.";
 "error_login" = "Vous devez ouvrir la session de %@ pour télécharger des fichiers";
+"LifeboxLargePopUpTitle100" = "Votre espace de stockage lifebox est plein.";
+"LifeboxLargePopUpTitle90" = "Vous utilisez 90% de la capacité de stockage de lifebox.";
+"LifeboxLargePopUpTitle80" = "Vous utilisez 80% de la capacité de stockage de lifebox.";
+"LifeboxLargePopUpSubTitle" = "Découvrez les options de capacité de stockage de lifebox.";
+"LifeboxLargePopUpExpandButtonTitle" = "Augmenter ma capacité de stockage.";
+"LifeboxLargePopUpSkipButtonTitle" = "Passer";
+"Lifebox can sync your contacts automatically." = "lifebox peut synchroniser vos contacts automatiquement.";
+"error_login" = "Vous devez ouvrir la session de %@ pour télécharger des fichiers.";
 "uploading" = "Téléchargement";
 "widgetBottomTitleLastSyncFormat" = "Dernier téléchargement : %@";
 "widgetBottomTitleNewerSyncronized" = "Jamais";
@@ -756,6 +866,7 @@ Full stop added*/
 
 /*Fuzzy*/
 "error_passcode_message" = "L'application de fichiers ne peut pas être utilisée avec un mot de passe. Veuillez ouvrir lifebox et désactiver le mot de passe pour continuer";
+"error_passcode_message" = "L'application de fichiers ne peut pas être utilisée avec un mot de passe. Veuillez ouvrir lifebox et désactiver le mot de passe pour continuer.";
 "error_passcode_title" = "Le code de verouillage du mot de passe est activé";
 "Successfully purchased" = "Acheté avec succès";
 "Cancel Analyzing" = "Annuler l’Analyse";
@@ -770,6 +881,8 @@ Full stop added*/
 "landingTitle0" = "Vivre, Collecter, Se souvenir";
 "landingSubTitle0" = "Conserver vos photos,vidéos, contacts et autres fichiers dans lifebox! Accéder et se souvenir à tout moment et en tout lieu";
 "landingTitle1" = "Auto-synchronisation";
+"landingSubTitle0" = "Conserver vos photos,vidéos, contacts et autres fichiers dans lifebox ! Accéder et se souvenir à tout moment et partout.";
+"landingTitle1" = "Auto-sync";
 "landingSubTitle1" = "Sauvegarder toutes vos photos et vidéos automatiquement et accédez-y de partout.";
 "landingTitle2" = "Reconnaissance du visage / image";
 "landingSubTitle2" = "Trouver facilement vos souvenirs avec des albums intelligents";
@@ -781,12 +894,14 @@ Full stop added*/
 "landingSubTitle3" = "Sauvegardez vos contacts, ne les perdez jamais";
 "landingTitle6" = "Réseaux sociaux";
 "landingSubTitle6" = "Transférer facillement toutes vos archives de réseaux sociaux vers lifebox";
+"landingSubTitle6" = "Transférer facillement toutes vos archives de réseaux sociaux vers lifebox ";
 
 /*Suggested: "Add Phone Number"*/
 "Add GSM Number" = "Ajouter un numéro de mobile";
 
 /*Suggested: "Videos larger than 4GB can not be uploaded to lifebox"*/
 "The videos larger than 4GB can not be uploaded to lifebox" = "Les vidéos de plus de 4GB ne peuvent pas être téléchargées sur lifebox";
+"The videos larger than 4GB can not be uploaded to lifebox" = "Les vidéos de plus de 4Go ne peuvent pas être téléchargées sur lifebox ";
 
 /*Suggested: "You don't have enough memory on your device"*/
 "You have not enough memory in your device" = "Vous n'avez pas assez d'espace de stockage sur votre appareil";
@@ -803,12 +918,16 @@ Full stop added*/
 "Up to 5000 contacts can be backed up." = "La sauvegarde de contacs a échoué car vous avez plus de contacts que la limite autorisée";
 "LifeboxSmallPopUpTitle" = "L'espace de stockage de votre Lifebox est presque atteint !";
 "LifeboxSmallPopUpSubTitle" = "Jetons un coup d’oeil sur les options d'augmentation de votre espace de stockage !";
+"Up to 5000 contacts can be backed up." = "La sauvegarde de contacts a échoué car vous avez plus de contacts que la limite autorisée";
+"LifeboxSmallPopUpTitle" = "L'espace de stockage de lifebox est presque atteint !";
+"LifeboxSmallPopUpSubTitle" = "Découvrez les options d'augmentation de votre espace de stockage !";
 "LifeboxSmallPopUpCheckBoxTex" = "Ne plus afficher";
 "LifeboxSmallPopUpFirstButtonText" = "OK";
 "LifeboxSmallPopUpSecondButtonText" = "MISE À NIVEAU";
 
 /*What does this mean?*/
 "has_remained_lifebox_usage" = "\"%@ de %@ est resté (seulement pour l'utilisation de lifebox)";
+"has_remained_lifebox_usage" = "\"%@ de %@ est resté (seulement pour l'utilisation de lifebox )";
 "Renewal Date: %@" = "Date de renouvellement: %@";
 "created" = "Créé";
 "uploaded" = "Téléchargé";
@@ -832,6 +951,17 @@ Full stop added*/
 /*Fuzzy*/
 "termsAndUseEtkCheckboxText" = "Conditions d'utilisation, etc. Contenu de la case à cocher";
 "offersCancelLife" = "Pour désactiver lifebox 25 GB veuillez envoyer un SMS avec la mention “Stop1”,  pour désactiver lifebox 100 GB veuillez envoyer un SMS avec la mention “Stop2”, pour désactiver lifebox 500 GB veuillez envoyer un SMS avec la mention “Stop3” au numéro 6767";
+"Your lifebox storage is almost full!" = "L'espace de stockage de lifebox est presque atteint !";
+"This edited photo will be saved as a new photo in your device gallery" = "Cette photo modifiée sera enregistrée comme une nouvelle photo dans la galerie de votre appareil.";
+"We couldn’t find any place on your Lifebox yet." = "Nous n'avons pas encore trouvé de place dans lifebox.";
+"*Average figure. Total number of documents depends on the size of each document." = "*Taille moyenne. Le nombre total de documents dépend de la taille de chaque document.";
+"We couldn’t find anything on your Lifebox yet." = "Nous n'avons encore rien trouvé dans lifebox.";
+"Expiration Date: %@" = "Date d’expiration: %@";
+"Failed to get albums" = "Impossible d'accéder aux albums";
+
+/*Fuzzy*/
+"termsAndUseEtkCheckboxText" = "Conditions d'utilisation, etc. Case à cocher";
+"offersCancelLife" = "Pour désactiver lifebox 25 Go envoyer “Stop1”,  pour désactiver lifebox 100 Go envoyer “Stop2”, pour désactiver lifebox 500 Go envoyer “Stop3” au 6767.";
 "Please enter a valid login." = "Connexion impossible. Veuillez vérifier vos informations d’identification et réessayer.";
 "Please enter the text below" = "Veuillez entrer la mention suivante";
 "facebook_photo_tags" = "Tags de Photo Facebook";
@@ -847,6 +977,8 @@ Full stop added*/
 "launch_campaign_card_title" = "Campagne Prague";
 "launch_campaign_card_message" = "Prague vous attend! Commencer à explorer Lifebox dès maintenant et faites partie des 10 couples chanceux";
 "%d same contacts" = "%d même contact(s)";
+"launch_campaign_card_message" = "Prague vous attend ! Commencez à explorer lifebox dès maintenant et faites partie des 10 couples chanceux";
+"%d same contacts" = "%d même(s) contact(s)";
 "Quick Scroll Preparation" = "Préparer vos photos et vidéos";
 
 /*PremiumView*/
@@ -882,6 +1014,8 @@ Please check I have understood the intended command here*/
 /*Suggested: "Become a Premium Member!"*/
 "Become Premium Member!" = "Devenir Membre de Premium";
 "leave_premium_membership" = "Quitter l’Adhésion de Premium";
+"Become Premium Member!" = "Devenir Membre Premium !";
+"leave_premium_membership" = "Quitter l’adhésion Premium";
 "Standard User" = "lifebox Standard";
 "Premium User" = "lifebox Premium";
 "lifebox Premium" = "lifebox Premium";
@@ -894,6 +1028,7 @@ Please check I have understood the intended command here*/
 
 /*Suggested: "Discover our Premium features and see how they improve your cloud storage experience!"*/
 "premium_banner_message" = "Découvrir maintenant les fonctionnalités Premium qui vous apportent une meilleure expérience de stockage virtuel !";
+"premium_banner_message" = "Découvrir nos fonctionnalités Premium, elles vous apporteront une meilleure expérience cloud !";
 "standard_banner_title" = "lifebox Premium";
 "premium_banner_title" = "Bienvenue sur lifebox Premium !";
 "back_up_short" = "Sauvegardez avec la qualité d'origine";
@@ -907,6 +1042,7 @@ Please check I have understood the intended command here*/
 
 /*Suggested: "Object Recognition helps you group the things you love"*/
 "object_recognition_short" = "Reconnaissance des objets pour se souvenir des choses que vous aimez";
+"object_recognition_short" = "Reconnaissance des objets pour vous souvenir des choses que vous aimez";
 "lorem_ipsum_non_turkcell" = "Veuillez ne pas traduire cela";
 "lorem_ipsum_turkcell" = "Veuillez ne pas traduire cela";
 
@@ -927,6 +1063,8 @@ Please check I have understood the intended command here*/
 /*Fuzzy*/
 "package_free_of_charge_cancel_text" = "Veuillez utiliser le menu \"Contactez nous\" pour toute question.";
 "package_lifecell_cancel_text" = "Pour désactiver lifebox 50GB veuillez envoyer un SMS avec la mention 50VYKL, pour désactiver lifebox 500GB veuillez envoyer un SMS avec la mention 500VYKL au numéro 8080.";
+"package_free_of_charge_cancel_text" = "Pour toute question, \"Contactez-nous\" .";
+"package_lifecell_cancel_text" = "Pour désactiver lifebox 50Go envoyer 50VYKL, pour désactiver lifebox 500Go envoyer  500VYKL au 8080.";
 
 /*Suggested: "Please use the Contact Us menu to inform us to process your request"*/
 "package_promo_cancel_text" = "Veuillez utiliser le menu \"Contactez nous\" pour toute question.";
@@ -938,6 +1076,11 @@ Please check I have understood the intended command here*/
 "package_paycell_all_access_cancel_text" = "Pour annuler votre forfait, veuillez vous rendre sur www.mylifebox.com";
 "package_paycell_slcm_cancel_text" = "Pour annuler votre forfait, veuillez vous rendre sur www.mylifebox.com";
 "package_slcm_paycell_cancel_text" = "Pour annuler votre forfait, veuillez vous rendre sur www.mylifebox.com";
+"package_moldcell_cancel_text" = "Humm, incroyable que vous fassiez ça ! Quand vous souhaiterez la réactiver, nous serons là pour vous :)  sinon envoyez 2 par SMS au 10010 pour 100Go de pack désactivation ou au 50030 pour 500Go";
+"package_life_cancel_text" = "Pour désactiver lifebox 25Go veuillez envoyer “Stop1”,  pour désactiver lifebox 100Go veuillez envoyer “Stop2\", pour désactiver lifebox 500Go veuillez envoyer “Stop3\" au 6767";
+"package_paycell_all_access_cancel_text" = "Pour annuler votre offre, veuillez vous rendre sur www.xxx.com";
+"package_paycell_slcm_cancel_text" = "Pour annuler votre offre, veuillez vous rendre sur www.xxx.com";
+"package_slcm_paycell_cancel_text" = "Pour annuler votre offre, veuillez vous rendre sur www.xxx.com";
 
 /*Suggested: "Please use the Contact Us menu to inform us about your request so we can process it"
 
@@ -951,6 +1094,11 @@ Please check I have understood the intended command here*/
 "feature_apple_cancel_text" = "Pour annuler votre offre, veuillez utiliser le menu iTunes & App Store depuis votre appareil";
 "feature_slcm_cancel_text" = "Pour annuler votre offre, veuillez envoyer un SMS à 2200 avec la mention: “IPTAL LIFEBOX PREMIUM”";
 "feature_google_cancel_text" = "Pour annuler votre offre, veuillez utiliser Google Play Store";
+"leave_premium_premium_description" = "Avec votre adhésion Premium, vous pouvez utiliser toutes les fonctionnalités avancées de lifebox.";
+"leave_premium_cancel_description" = "Vous ne pourrez plus bénéficier des privilèges Premium si vous annulez votre adhésion.";
+"feature_apple_cancel_text" = "Pour annuler votre offre, veuillez utiliser le menu iTunes & App Store depuis votre appareil.";
+"feature_slcm_cancel_text" = "Pour annuler votre offre, veuillez envoyer “IPTAL LIFEBOX PREMIUM” au 2200.";
+"feature_google_cancel_text" = "Pour annuler votre offre, veuillez utiliser Google Play Store.";
 
 /*Fuzzy*/
 "feature_free_of_charge_cancel_text" = "Veuillez utiliser le menu \"Contactez nous\" pour toute question";
@@ -987,6 +1135,13 @@ Please check I have understood the intended command here*/
 
 /*FaceImagePremiumFooterView*/
 "face_image_footer_view_message" = "Pour voir tous les% @ de votre galerie et pour débloquer de nombreuses autres fonctionnalités, devenez membre Premium!";
+"my_storage" = "Mon stockage";
+"see_details" = "Voir les détails";
+"face_image_description" = "Vous bénéficiez d'un compte standard, 100 photos de votre album seront traitées. 3 personnes, objets ou lieux seront reconnus automatiquement dans vos Smart albums.";
+"face_image_upgrade" = "Passez à lifebox Premium pour utiliser cette fonctionnalité sans aucune limitation.";
+
+/*FaceImagePremiumFooterView*/
+"face_image_footer_view_message" = "Pour voir tous les %@ de votre galerie et pour débloquer de nombreuses autres fonctionnalités, devenez membre Premium !";
 "face_image_face_recognition" = "Personnes";
 "face_image_place_recognition" = "Lieux";
 "face_image_thing_recognition" = "Objets";
@@ -1014,6 +1169,8 @@ Please check I have understood the intended command here*/
 Please check I have understood the intended command here*/
 "uploded_photos_high_quality" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium?";
 "NSFaceIDUsageDescription" = "Notre application est compatible avec Face ID afin d'améliorer le niveau  de sécurité de votre lifebox";
+"uploded_photos_high_quality" = "Souhaitez-vous devenir un membre Premium pour conserver vos souvenirs dans leur qualité d'origine et accéder à toutes les fonctionnalités Premium ?";
+"NSFaceIDUsageDescription" = "Notre application est compatible avec Face ID afin d'améliorer le niveau  de sécurité de votre lifebox.";
 
 /*AnalyzeHistoryController*/
 "InstaPick" = "PhotoPick";
@@ -1089,6 +1246,8 @@ Please check I have understood the intended command here*/
 "continue_without_connecting" = "Continuer sans connecter Photopick à Instagram";
 "connected_accounts" = "Comptes liés";
 "analyze_history_free_text" = "Accès illimité";
+"connected_accounts" = "Comptes connectés";
+"analyze_history_free_text" = "Accès illimité !";
 
 /*InstapickUpgradePopup*/
 "instapick_upgrade_popup_text" = "Vous devez mettre à jour votre application pour pouvoir acheter une offre PhotoPick";
@@ -1101,11 +1260,12 @@ Please check I have understood the intended command here*/
 "Facebook" = "Facebook";
 "Dropbox" = "Dropbox";
 "Instagram" = "Instagram";
-"connected_as_format" = "Compte lié : @%@";
-"instagram_remove_connection_warning_title" = "Vous êtes sur le point de supprimer votre compte Instagram de votre compte PhotoPick";
-"instagram_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer votre compte Instagram de votre compte PhotoPick ?";
+"connected_as_format" = "Compte connecté: @%@";
+"instagram_remove_connection_warning_title" = "Vous êtes sur le point de supprimer votre connexion Instagram.";
+"instagram_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer votre connexion Instagram ?";
 "instapick_selection_photos_selected" = "Photo sélectionnée (%d)";
 "instapick_selection_analyzes_left" = "Il ne vous reste que % d analyses";
+"instapick_selection_analyzes_left" = "Il ne vous reste que %d analyses";
 "loading" = "Téléchargement en cours…";
 "there_are_no_photos" = "Il n’y a aucune photo";
 "there_are_no_albums" = "Il n’y a aucun album";
@@ -1129,11 +1289,19 @@ Please check I have understood the intended command here*/
 "dropbox_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer votre lien Dropbox de votre compte lifebox?";
 "remove_connection" = "Supprimer le lien";
 "you_are_connected" = "Vos comptes ont été associés.";
+"work_will_introduced" = "lifebox est en maintenance. Veuillez réessayer ultérieurement.";
+"facebook_remove_connection_warning_title" = "Vous êtes sur le point de supprimer le lien Facebook de votre compte lifebox.";
+"dropbox_remove_connection_warning_title" = "Vous êtes sur le point de supprimer le lien Dropbox de votre compte lifebox.";
+"facebook_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer votre lien Facebook de votre compte lifebox ?";
+"dropbox_remove_connection_warning_message" = "Êtes-vous sûr de vouloir supprimer votre lien Dropbox de votre compte lifebox ?";
+"remove_connection" = "Supprimer la connexion";
+"you_are_connected" = "Vous êtes connecté";
 "insta_pick_picture_not_found" = "Aucune photo trouvée";
 "phone_updated_needs_login" = "Vous avez mis à jour votre numéro de téléphone avec succès. Veuillez-vous connecter avec votre nom d'utilisateur et votre mot de passe.";
 
 /*Suggested:"There is currently maintenance ongoing on lifebox, please try again later."*/
 "server_under_maintenance" = "Lifebox est en maintenance. Veuillez réessayer ultérieurement.";
+"server_under_maintenance" = "lifebox est en maintenance. Veuillez réessayer ultérieurement.";
 "unlimited_photopick_analysis" = "Analyse PhotoPick illimité";
 
 /*Fuzzy*/
@@ -1152,6 +1320,14 @@ Please check I have understood the intended command here*/
 "account_detail_middle_description" = "Vous ne pourrez plus bénéficier des fonctionnalités Standard + si vous résiliez votre abonnement.";
 "account_detail_standart_title" = "Vous utilisez lifebox avec un compte utilisateur standard.";
 "account_detail_standart_description" = "Avec Lifebox Standard, vous pouvez utiliser les fonctionnalités suivantes";
+"instapick_no_available_units_left" = "Plus d'analyse possible";
+"middle_user" = "lifebox Standard+";
+"lifebox_middle" = "lifebox Standard+";
+"lifebox_standart" = "lifebox Standard";
+"account_detail_middle_title" = "Vous pouvez utiliser toutes les fonctionnalités avancées de lifebox avec votre offre Standard +.";
+"account_detail_middle_description" = "Vous ne pourrez plus bénéficier des fonctionnalités Standard + si vous résiliez votre offre.";
+"account_detail_standart_title" = "Vous utilisez lifebox  avec un compte utilisateur Standard.";
+"account_detail_standart_description" = "Avec lifebox Standard, vous pouvez utiliser les fonctionnalités suivantes";
 
 /*AnalyzeHistoryController*/
 "instapick_see_details" = "Je veux devenir Premium";
@@ -1168,6 +1344,12 @@ Please check I have understood the intended command here*/
 "package_jamaica_cancel_text" = "Vous pouvez annuler ou gérer votre abonnement Digicel depuis l'application My Digicel, le service clientèle ou en magasin.";
 "feature_digicell_cancel_text" = "Étant donné que vous êtes un utilisateur de Digicel, vous pouvez continuer à utiliser les fonctionnalités Premium gratuitement.";
 "terms_and_use_etk_checkbox" = "J' aimerais recevoir des messages électroniques commerciaux afin de connaître les produits et services avantageux de Turkcell et des sociétés du groupe jusqu'à ce que je déclare le contraire en vertu de la loi n ° 6563 et d'autres législations pertinentes.";
+"leave_middle_membership" = "Mettre fin à l'offre Standard+";
+"leave_middle_turkcell" = "Pour annuler votre option, veuillez envoyer ANNULE LIFEBOX STANDARD+ au 2200";
+"package_FWI_cancel_text" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"package_jamaica_cancel_text" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"feature_digicell_cancel_text" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"terms_and_use_etk_checkbox" = "J'aimerais recevoir des messages commerciaux afin de connaître les produits et services avantageux de Turkcell et des sociétés du groupe jusqu'à ce que je déclare le contraire en vertu de la loi n ° 6563 et d'autres législations pertinentes.";
 "terms_and_use_etk_link_turkcell_and_group_companies" = "Turkcell et des sociétés du groupe";
 "terms_and_use_etk_link_commercial_email_messages" = "messages électroniques commerciaux";
 
@@ -1178,6 +1360,9 @@ Please check I have understood the intended command here*/
 "NSLocationAlwaysUsageDescription" = "Votre emplacement sera utilisé pour la synchronisation en arrière-plan et pour organiser et rechercher vos photos.";
 "NSPhotoLibraryAddUsageDescription" = "Pour afficher vos photos et vidéos dans l'application et les sauvegarder, lifebox a besoin de votre bibliothèque de photos.";
 "NSPhotoLibraryUsageDescription" = "Pour afficher vos photos et vidéos dans l'application et les sauvegarder, lifebox a besoin de votre bibliothèque de photos.";
+"NSLocationAlwaysUsageDescription" = "Votre géolocalisation sera utilisée pour la synchronisation en arrière-plan et pour organiser et rechercher vos photos.";
+"NSPhotoLibraryAddUsageDescription" = "Pour afficher vos photos et vidéos dans l'application et les sauvegarder, lifebox a besoin d'accéder à votre bibliothèque de photos.";
+"NSPhotoLibraryUsageDescription" = "Pour afficher vos photos et vidéos dans l'application et les sauvegarder, lifebox a besoin d'accéder à votre bibliothèque de photos.";
 
 /*Usage Info*/
 "package_space_details" = "\n%1$@ / %2$@ utilisés (uniquement pour l'espace de stockage lifebox)\n";
@@ -1239,6 +1424,18 @@ Please check I have understood the intended command here*/
 "please_enter_your_problem_shortly" = "Expliquez votre problème courtement s’il vous plaît";
 "explain_your_problem_shortly" = "Expliquer votre problème courtement";
 "please_enter_msisdn_or_email" = "Entrer votre numéro de téléphone ou email s’il vous plaît";
+"please_enter_your_name" = "Entrer votre Prénom";
+"enter_your_name" = "Entrer votre nom";
+"please_enter_your_surname" = "Entrer votre Nom";
+"enter_your_surname" = "Entrer votre prénom";
+"enter_your_email_address" = "Entrer votre adresse email";
+"subject" = "Sujet";
+"please_enter_your_subject" = "Ecrivez votre sujet";
+"please_choose_subject" = "Sélectionner un sujet s’il vous plaît";
+"your_problem" = "Votre problème";
+"please_enter_your_problem_shortly" = "Expliquez votre problème brièvement";
+"explain_your_problem_shortly" = "Expliquer votre problème brièvement";
+"please_enter_msisdn_or_email" = "Entrer votre numéro de téléphone ou email";
 "support_form_subject_1" = "Je ne peux pas me connecter avec mon email";
 "support_form_subject_2" = "Je ne peux pas me connecter avec mon numéro de téléphone";
 "support_form_subject_3" = "Je ne peux pas me connecter avec mon mot de passe";
@@ -1246,6 +1443,7 @@ Please check I have understood the intended command here*/
 "support_form_subject_5" = "Problème de mot de passe Turkcell";
 "support_form_subject_6" = "Problème de connexion automatique";
 "support_form_subject_7" = "Je n'arrive pas à télécharger l'application Lifebox";
+"support_form_subject_7" = "Je n'arrive pas à télécharger l'application lifebox ";
 "enter_your_old_password" = "Entrez votre ancien mot de passe";
 "enter_your_new_password" = "Entrez votre nouveau mot de passe";
 "enter_your_repeat_password" = "Ressaisissez votre nouveau mot de passe";
@@ -1255,12 +1453,14 @@ Please check I have understood the intended command here*/
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "Foire Aux Questions";
-"captcha_is_empty" = "Entrez les caractères affichés dans l'image s’il vous plaît";
+"captcha_is_empty" = "Entrer les caractères affichés dans l'image";
 "enter_your_password" = "Entrez votre mot de passe";
 "re_enter_your_password" = "Entrez de nouveau votre mot de passe";
 "signup_support_info" = "Si vous ne parvenez pas à vous inscrire, contactez-nous pour obtenir de l’aide";
 "missing_information" = "Informations Manquantes";
 "please_enter_your_missing_account_information" = "Entrez vos informations de compte manquantes s’il vous plaît :";
+"missing_information" = "Informations manquantes";
+"please_enter_your_missing_account_information" = "Entrer vos informations de compte manquantes  :";
 "login_email_or_phone_placeholder" = "Entrez votre email ou votre numéro de téléphone mobile";
 "login_password_placeholder" = "Entrez votre mot de passe";
 "login_email_or_phone_error" = "Il vous suffit de remplir votre email ou votre numéro de téléphone";
@@ -1288,6 +1488,9 @@ Please check I have understood the intended command here*/
 "etk_permission_title_label" = "Message électronique commercial";
 "etk_permissiom_description" = "J'aimerais recevoir des messages électroniques commerciaux afin de connaître les produits et services avantageux de Turkcell et des sociétés du groupe jusqu'à ce que je déclare le contraire en vertu de la loi n ° 6563 et d'autres législations pertinentes.";
 "NSCameraUsageDescription" = "Pour prendre des photos avec votre appareil photo et les sauvegarder sur lifebox, une autorisation d'accès de votre appareil photo est nécessaire.";
+"etk_permission_title_label" = "Email commercial";
+"etk_permissiom_description" = "J'aimerais recevoir des emails commerciaux afin de connaître les produits et services avantageux de Turkcell et des sociétés du groupe jusqu'à ce que je déclare le contraire en vertu de la loi n ° 6563 et d'autres législations pertinentes.";
+"NSCameraUsageDescription" = "Pour prendre des photos avec votre appareil photo et les sauvegarder sur lifebox , une autorisation d'accès de votre appareil photo est nécessaire.";
 "restore_purchases" = "Restaurer les achats.";
 "restore_purchases_info" = "Si vous souhaitez restaurer vos achats existants, cliquez sur le bouton.";
 "attributed_restore_word" = "Restaurer";
@@ -1315,6 +1518,8 @@ Please check I have understood the intended command here*/
 "NSContactsUsageDescription" = "lifebox doit pouvoir accéder à vos contacts et les télécharger sur des serveurs lifebox pour les sauvegarder et les gérer.";
 "import_from_spotify" = "Déplacer de Spotify";
 "import_from_spotify_btn" = "Déplacer de Spotify";
+"import_from_spotify" = "Importer de Spotify";
+"import_from_spotify_btn" = "Importer de Spotify";
 "import_from_spotify_title" = "Connectez-vous à Spotify";
 "Spotify" = "Spotify";
 "spotify_remove_connection_warning_title" = "Vous êtes sur le point de supprimer le lien Spotify.";
@@ -1340,6 +1545,9 @@ Please check I have understood the intended command here*/
 "login_settings_security_passcode_description" = "Vous pouvez recevoir votre mot de passe Turkcell en saisissant SIFRE et en envoyant un message à 2200. Si vous activez ce bouton, vous pouvez vous connecter à Lifebox à l'aide du mot de passe Turkcell.";
 "login_settings_security_autologin_description" = "Si vous activez ce bouton, vous pouvez vous connecter automatiquement à Lifebox lorsque vous êtes connecté à Internet avec 3G / LTE.";
 "login_settings_two_factor_auth_description" = "Si vous activez la validation d'identité à deux facteurs, nous vous demanderons de valider votre identité avant de vous connecter. Nous vous enverrons un code de sécurité sur votre numéro de téléphone ou votre adresse e-mail pour authentification. Cela vous permettra d'accéder à votre compte personnel avec une expérience de connexion plus sécurisée.";
+"login_settings_security_passcode_description" = "Vous pouvez recevoir votre mot de passe Turkcell en envoyant SIFRE au 2200. Si vous activez ce bouton, vous pouvez vous connecter à lifebox à l'aide du mot de passe Turkcell.";
+"login_settings_security_autologin_description" = "Si vous activez ce bouton, vous pouvez vous connecter automatiquement à lifebox lorsque vous êtes connecté à Internet avec la 3G / LTE.";
+"login_settings_two_factor_auth_description" = "Si vous activez la validation de l'authentification à deux facteurs, nous vous demanderons de valider votre identité avant de vous connecter. Nous vous enverrons un code de sécurité sur votre numéro de téléphone ou votre adresse email pour authentification. Cela vous permettra d'accéder à votre compte personnel avec une expérience de connexion plus sécurisée.";
 "two_fa_invalid_session_error_message" = "Session expirée pour une authentification à deux facteurs.";
 "two_fa_invalid_challenge_error_message" = "Session expirée pour une authentification à deux facteurs.";
 "two_fa_too_many_attempts_error_message" = "Vous vous êtes mal connecté 3 fois. Veuillez demander un nouveau code.";
@@ -1352,6 +1560,11 @@ Please check I have understood the intended command here*/
 "spotify_import_in_background" = "Déplacer en arrière-plan";
 "spotify_playlist_import_button" = "Déplacer la sélection";
 "spotify_playlist_navbar_title" = "Listes de lecture Spotify";
+"spotify_import_to" = "à lifebox";
+"spotify_import_description" = "Vous pouvez voir les playlists que vous avez importé ici : \\ n Tous les fichiers> Musique";
+"spotify_import_in_background" = "Importer en arrière-plan";
+"spotify_playlist_import_button" = "Import sélectionné ";
+"spotify_playlist_navbar_title" = "Playlists Spotify";
 "spotify_playlist_songs_count" = "%d chansons";
 "spotify_playlist_success_import" = "Les listes ont été déplacées avec succès!";
 "spotify_playlist_see_imported" = "Voir les listes déplacées";
@@ -1402,6 +1615,10 @@ Please check I have understood the intended command here*/
 "2_factor_auth" = "Authentification à deux facteurs";
 "extra_auth_new_device_reason" = "Vous vous connectez à Lifebox à partir d'un autre appareil.";
 "extra_auth_account_setting_reason" = "Vous avez activé l'authentification à deux facteurs dans votre compte.";
+"two_fa_too_many_requests_error_message" = "Trop de codes de vérification ont été demandés, veuillez réessayer ultérieurement.";
+"2_factor_auth" = "authentification à deux facteurs";
+"extra_auth_new_device_reason" = "Vous vous connectez à lifebox à partir d'un autre appareil.";
+"extra_auth_account_setting_reason" = "Vous avez activé l'authentification à deux facteurs de votre compte.";
 "extra_auth_account_navigation_title" = "Contrôle de sécurité";
 "extra_auth_account_describe_label" = "Nous vous enverrons un code de sécurité pour sécuriser votre compte et vous authentifier pour vous connecter en toute sécurité.";
 "extra_auth_account_choose_type" = "Envoyez le code de sécurité ici:";
@@ -1443,48 +1660,48 @@ Please check I have understood the intended command here*/
 "tbmatic_photos_no_photo_bold_text" = "A été supprimé :(";
 "tbmatic_photos_see_timeline" = "Accédez à vos photos";
 "tbmatic_photos_share" = "Partager";
-"digicel_quota_cancel_AI" = "digicel_quota_cancel_AI";
-"digicel_quota_cancel_AG" = "digicel_quota_cancel_AG";
-"digicel_quota_cancel_AW" = "digicel_quota_cancel_AW";
-"digicel_quota_cancel_BB" = "digicel_quota_cancel_BB";
-"digicel_quota_cancel_BM" = "digicel_quota_cancel_BM";
-"digicel_quota_cancel_BQ" = "digicel_quota_cancel_BQ";
-"digicel_quota_cancel_VG" = "digicel_quota_cancel_VG";
-"digicel_quota_cancel_KY" = "digicel_quota_cancel_KY";
-"digicel_quota_cancel_CW" = "digicel_quota_cancel_CW";
-"digicel_quota_cancel_DM" = "digicel_quota_cancel_DM";
-"digicel_quota_cancel_SV" = "digicel_quota_cancel_SV";
-"digicel_quota_cancel_GD" = "digicel_quota_cancel_GD";
-"digicel_quota_cancel_GY" = "digicel_quota_cancel_GY";
-"digicel_quota_cancel_HT" = "digicel_quota_cancel_HT";
-"digicel_quota_cancel_MS" = "digicel_quota_cancel_MS";
-"digicel_quota_cancel_KN" = "digicel_quota_cancel_KN";
-"digicel_quota_cancel_LC" = "digicel_quota_cancel_LC";
-"digicel_quota_cancel_VC" = "digicel_quota_cancel_VC";
-"digicel_quota_cancel_SR" = "digicel_quota_cancel_SR";
-"digicel_quota_cancel_TT" = "digicel_quota_cancel_TT";
-"digicel_quota_cancel_TC" = "digicel_quota_cancel_TC";
-"digicel_feature_cancel_AI" = "digicel_feature_cancel_AI";
-"digicel_feature_cancel_AG" = "digicel_feature_cancel_AG";
-"digicel_feature_cancel_AW" = "digicel_feature_cancel_AW";
-"digicel_feature_cancel_BB" = "digicel_feature_cancel_BB";
-"digicel_feature_cancel_BM" = "digicel_feature_cancel_BM";
-"digicel_feature_cancel_BQ" = "digicel_feature_cancel_BQ";
-"digicel_feature_cancel_VG" = "digicel_feature_cancel_VG";
-"digicel_feature_cancel_KY" = "digicel_feature_cancel_KY";
-"digicel_feature_cancel_CW" = "digicel_feature_cancel_CW";
-"digicel_feature_cancel_DM" = "digicel_feature_cancel_DM";
-"digicel_feature_cancel_SV" = "digicel_feature_cancel_SV";
-"digicel_feature_cancel_GD" = "digicel_feature_cancel_GD";
-"digicel_feature_cancel_GY" = "digicel_feature_cancel_GY";
-"digicel_feature_cancel_HT" = "digicel_feature_cancel_HT";
-"digicel_feature_cancel_MS" = "digicel_feature_cancel_MS";
-"digicel_feature_cancel_KN" = "digicel_feature_cancel_KN";
-"digicel_feature_cancel_LC" = "digicel_feature_cancel_LC";
-"digicel_feature_cancel_VC" = "digicel_feature_cancel_VC";
-"digicel_feature_cancel_SR" = "digicel_feature_cancel_SR";
-"digicel_feature_cancel_TT" = "digicel_feature_cancel_TT";
-"digicel_feature_cancel_TC" = "digicel_feature_cancel_TC";
+"digicel_quota_cancel_AI" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_AG" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_AW" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_BB" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_BM" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_BQ" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_VG" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_KY" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_CW" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_DM" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_SV" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_GD" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_GY" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_HT" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_MS" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_KN" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_LC" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_VC" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_SR" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_TT" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_quota_cancel_TC" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_AI" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_AG" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_AW" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_BB" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_BM" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_BQ" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_VG" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_KY" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_CW" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_DM" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_SV" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_GD" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_GY" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_HT" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_MS" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_KN" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_LC" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_VC" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_SR" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_TT" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
+"digicel_feature_cancel_TC" = "Annuler ou gérer votre offre lifebox dans My Digicel app";
 "support_form_subject_1_detailed_info_label" = "Je ne parviens pas à me connecter par e-mail";
 "support_form_subject_1_detailed_info_fulltext" = "<p> <strong> Si vous êtes de Turkcell: </ strong> </ p> <p> - Si vous ne parvenez pas à vous connecter par E-mail, vous pouvez accéder à votre compte en saisissant le mot de passe que vous avez utilisé pour vous inscrire avec votre numéro de téléphone. <br />- Si vous ne vous souvenez plus de votre mot de passe, vous pouvez vous connecter en obtenant le mot de passe Turkcell. <br/> - Si vous oubliez votre mot de passe Turkcell, vous pouvez le recevoir en écrivant SIFRE et envoyant à 2200 si vous êtes un client Turkcell. <br/> - Si vous pensez avoir saisi votre mot de passe correctement par E-mail et vous ne parvenez toujours pas vous connecter. - Vous pouvez actualiser votre mot de passe et essayer de vous reconnecter avec le processus \"J'ai oublié mon mot de passe\".<br/> - Si vous recevez un avertissement comme quoi votre E-mail / numéro de téléphone ou mot de passe est incorrect; Vous pouvez contrôler vos données de courrier électronique et de numéro de téléphone à partir de votre profil en accédant à votre compte à l'aide du mot de passe Turkcell que vous recevrez avec des données de courrier électronique ou de numéro de téléphone que vous pourrez confirmer. Vous pouvez changer votre email mais pas votre numéro de téléphone. Chaque numéro de téléphone reste associé à un seul compte. </p><p><strong>Si tu n'es pas de Turkcell:</strong></p><p>- Vous ne pouvez pas vous connecter avec le mot de passe Turkcell. <br/> - Après avoir vous connecté, vous pouvez modifier votre numéro de téléphone sur la page de profil. </p> <p> <strong> Si vous ne parvenez pas à trouver la solution: </ strong> </ p> <p> -Si un numéro de téléphone n'est pas associé au compte et que vous n'êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu. <br /> - En cas des transferts, le numéro de téléphone est retiré du compte associé et il faut attendre que un nouveau numéro de téléphone est identifié avec la première entrée.";
 "support_form_subject_2_detailed_info_label" = "Je ne parviens pas me connecter avec mon numéro de téléphone";
@@ -1499,6 +1716,9 @@ Please check I have understood the intended command here*/
 "support_form_subject_6_detailed_info_fulltext" = "<p><strong> Si vous ne parvenez pas à vous connecter à votre compte avec \"souvient moi\":</ strong> </ p> <p> - Depuis la démarche \"J'ai oublié mon mot de passe\", vous pouvez vous connecter en renouvelant votre mot de passe. <br/> - Lorsque vous transférez votre ligne, le numéro de téléphone sera retiré du compte associé et l'entrée de souvient-moi sera fermée. <br/> - Nous vous recommandons de vérifier vos paramètres de connexion. </p><p><strong> Si vous ne parvenez pas à trouver la solution:</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vous n'êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu.";
 "support_form_subject_7_detailed_info_label" = "Je n'arrive pas à télécharger l'application Lifebox";
 "support_form_subject_7_detailed_info_fulltext" = "<p> - Vous devez confirmer que votre téléphone est un modèle compatible avec l'application lifebox. <br/> - L'application Android 4.4 et versions ultérieures est prise en charge sur les téléphones / tablettes Android. <br/> - L'application iOS est prise en charge sur les iPhone / iPad sur iOS 9 et les versions ultérieures. <br /> Nous ne prenons pas en charge les téléphones basés sur Windows phone. <br/> - L'application Web est prise en charge par tous les principaux navigateurs (Chrome, Safari, Mozilla, etc.) et tous les systèmes d'exploitation (MacOS, Windows, Linux indépendant), à l'exception d'Internet Explorer. </p><p><strong> Si vous ne parvenez pas à trouver la solution:</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vous n'êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu.";
+"support_form_subject_6_detailed_info_fulltext" = "<p><strong> Si vous ne parvenez pas à vous connecter à votre compte avec \"se souvenir de moi\":</ strong> </ p> <p> - Depuis \"J'ai oublié mon mot de passe\", vous pouvez vous connecter en renouvelant votre mot de passe. <br/> - Lorsque vous transférez votre ligne, le numéro de téléphone sera retiré du compte associé et \"se souvenir de moi\" ne sera plus accessible. <br/> - Nous vous recommandons de vérifier vos paramètres de connexion. </p><p><strong> Si vous ne parvenez pas à trouver la solution :</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vousne vous êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu.";
+"support_form_subject_7_detailed_info_label" = "Je n'arrive pas à télécharger l'application lifebox";
+"support_form_subject_7_detailed_info_fulltext" = "<p> - Vous devez confirmer que votre téléphone est un modèle compatible avec l'application lifebox. <br/> - L'application Android 4.4 et versions ultérieures sont prises en charge sur les téléphones / tablettes Android. <br/> - L'application iOS est prise en charge sur les iPhone / iPad sur iOS 9 et les versions ultérieures. <br /> Nous ne prenons pas en charge les téléphones basés sur Windows phone. <br/> - L'application Web est prise en charge par tous les principaux navigateurs (Chrome, Safari, Mozilla, etc.) et tous les systèmes d'exploitation (MacOS, Windows, Linux indépendant), à l'exception d'Internet Explorer. </p><p><strong> Si vous ne parvenez pas à trouver la solution :</strong></p><p>- Si un numéro de téléphone n'est pas associé au compte et que vous ne vous êtes pas connecté depuis longtemps (au moins 3 mois), le compte a peut-être été suspendu.";
 "login_faq" = "FAQ";
 "signup_faq_info" = "Veuillez sélectionner un sujet pour obtenir de l'aide.";
 "login_faq_info" = "Veuillez sélectionner un sujet pour obtenir de l'aide.";
@@ -1512,6 +1732,8 @@ Please check I have understood the intended command here*/
 "tbmatic_home_card_title" = "Flânez dans le passé!";
 "tbmatic_home_card_subtitle" = "Découvrez les souvenirs que vous avez collectés dans votre lifebox!";
 "tbmatic_home_card_button_title" = "Voyons voir!";
+"tbmatic_home_card_subtitle" = "Découvrez les souvenirs que vous avez collectés dans votre lifebox !";
+"tbmatic_home_card_button_title" = "Voyons voir !";
 "tbmatic_home_card_year_ago" = "Il y a %d  d’année";
 "tbmatic_home_card_years_ago" = "Il y a %d  d’année";
 "tbmatic_home_card_this_year" = "Cette année";
@@ -1548,7 +1770,7 @@ Please check I have understood the intended command here*/
 "landing_billo_title_5" = "Stories automatiques";
 "landing_billo_subtitle_5" = "Rappelez-vous vos souvenirs avec des films et des collages créés automatiquement!";
 "landing_billo_title_6" = "Réseaux sociaux";
-"landing_billo_subtitle_6" = "Transférer facillement toutes vos archives de réseaux sociaux vers Billo!";
+"landing_billo_subtitle_6" = "Transférer facillement toutes vos archives de réseaux sociaux vers billo!";
 "landing_billo_title_7" = "Imprimer";
 "landing_billo_subtitle_7" = "Décorez votre espace de vie avec vos souvenirs!";
 
@@ -1647,6 +1869,92 @@ Please check I have understood the intended command here*/
 "hidden_bin_empty" = "";
 "hidden_bin_navbar_title" = "";
 "unhide_popup_text" = "";
+"move_to_trash_albums_message" = "Vous ne verrez pas cet album...";
+"move_to_trash_albums_success_message" = "Album supprimé avec succès.";
+"confirmation_popup_title_hide" = "Sélection masquée";
+"confirmation_popup_message_hide" = "Les fichiers sélectionnés seront cachés.";
+"confirmation_popup_message_hide_albums" = "Sélection des albums masquée";
+"confirmation_popup_title_hide_single_album" = "Album masqué";
+"confirmation_popup_message_hide_single_album" = "Vous ne verrez pas cet album...";
+"smash_screen_title" = "effet de Smash";
+"smash_popup_message" = "La photo éditée sera sauvegardée en tant que nouvelle photo dans la bibliothèque de votre appareil.";
+"Smash" = "Smash";
+"photos_hide_success_message" = "Elements masqués avec succès.";
+"Unhide" = "Afficher";
+"smart_album_hidden" = "Masqué";
+"hide_success_popup_message" = "Les éléments ont été masqués avec succès";
+"hide_success_popup_button_title" = "Eléments masqués";
+"hide_single_album_success_popup_message" = "Album masqué avec succès";
+"hide_albums_success_popup_message" = "Les albums sélectionnés ont été masqués avec succès.";
+"selected_items_limit_hide" = "Vous ne pouvez pas masqué plus de %d de fichiers.";
+"hide_single_photo_completion_alert_message" = "La photo sélectionnée ne sera disponible que dans l'album \"Caché\". Vous ne le verrez pas dans les listes de Lifebox ou les rappels. Vous pouvez le restaurer à tout moment. Voulez-vous continuer?";
+"people_album_warning_alert_title_not_premium_and_no_image_grouping" = "Vous n’avez pas encore d’album de contact!";
+"people_album_warning_alert_title_not_premium_and_image_grouping_on" = "Vous n'avez pas trouvé la personne que vous recherchez?";
+"people_album_warning_alert_title_premium_and_no_image_grouping" = "Vous n’avez pas encore d’album de contact!";
+"people_album_warning_message_not_premium_and_no_image_grouping" = "Voulez-vous que nous traitions automatiquement vos photos pour vous et les regroupiez dans les albums sous les nommes comme Personne, Objet et Lieu? Vous pouvez activer la fonction \" Visage / Groupement d’objet\" sous Paramètres et commencer à grouper tout de suite et consulter les abonnements Premium pour un droit de regroupement illimité.";
+"people_album_warning_message_not_premium_and_image_grouping_on" = "Voulez-vous que nous traitions automatiquement vos photos pour vous et les regroupiez dans les albums sous les nommes comme Personne, Objet et Lieu? Vous pouvez consulter les abonnements Premium pour un droit de regroupement illimité.";
+"people_album_warning_message_premium_and_no_image_grouping" = "Voulez-vous que nous traitions automatiquement vos photos pour vous et les regroupiez dans les albums sous les nommes comme Personne, Objet et Lieu? Activer la fonction \" Visage / Groupement d’objet\" sous Paramètres et commencer à les grouper tout de suite.";
+"people_album_warning_button_not_premium_and_no_image_grouping" = "Activer la fonction Visage/Groupement d’objet !";
+"people_album_warning_button_not_premium_and_image_grouping_on" = "Afficher les contacts existants";
+"people_album_warning_button_premium_and_no_image_grouping" = "F/I Activer";
+"hide_successed_alert_title" = "L'image a bien été masquée";
+"hide_successed_alert_with_people_album_title" = "L'image est maintenant masquée !";
+"hide_successed_alert_people_album_title" = "Cacher les photos de quelqu'un !";
+"hide_successed_alert_people_album_description" = "Vous pouvez cacher tous les souvenirs d'une personne en un seul clic ou les envoyer à la corbeille. Vous ne pouvez accéder qu'aux photos que vous avez cachées dans l’album \"Caché\".";
+"hide_successed_alert_do_not_show_this_message" = "Ne pas montrer ce message.";
+"hide_successed_alert_view_people_album" = "Voir l'album des personnes.";
+"smash_successed_alert_title" = "Enregistré !";
+"smash_successed_alert_second_title" = "Que souhaitez-vous faire ?";
+"smash_successed_alert_description" = "Vous pouvez partager la photo que vous avez arrangée avec vos amis. Vous pouvez également accéder à l'album \"Personnes\" pour cacher ou supprimer en un clic les personnes / souvenirs que vous ne souhaitez plus rencontrer dans les listes de lifebox.";
+"smash_successed_simple_alert_title" = "Sauvegardé !";
+"smash_successed_simple_alert_description" = "Vous pouvez partager la photo que vous avez arrangée avec vos amis. Vous pouvez également accéder à l'album \"Personnes\" pour cacher ou supprimer en un clic les personnes / souvenirs que vous ne souhaitez plus rencontrer dans les listes de lifebox.";
+
+/*carousel pager*/
+"carousel_view_first_page_title" = "Rassembler vos photos.";
+"carousel_view_first_page_text" = "Vous pouvez séléctionner un contact et ajouter un nouveau nom à l'album de contacts avec le bouton Ajouter un nom, ou vous pouvez fusionner les contacts dans le même album en choisissant l'un des noms existants.";
+"carousel_view_second_page_title" = "Rassembler vos photos.";
+"carousel_view_second_page_text" = "Maintenant les photos dans votre liste, il suffit d'aller dans l'album de la personne et de dire \"Cacher\" s'il y a des personnes que vous ne souhaitez plus voir apparaître dans votre liste de photos et suggestions de page d'accueil. Les personnes indésirables sont automatiquement ajoutées à l'album \"Caché\" en un seul clic. Vous pouvez annuler ce processus à tout moment.";
+"carousel_view_third_page_title" = "Supprimez les personnes que vous ne voulez pas!";
+"carousel_view_third_page_text" = "Vous pouvez jeter une personne et ses souvenirs sauvegardés à la corbeille en sélectionnant l'action \"Supprimer\" dans l'album de la personne si vous ne trouvez pas utile de les garder. Vous pouvez utiliser la fonction de restauration de la corbeille dans les 30 jours. Vous pouvez utiliser la fonction de restauration de la corbeille dans les 30 jours si vous le regrettez. L'action de masquage est juste la suppression si tu dis que je ne peux pas briser mes souvenirs pour toujours, mais ne venez pas devant moi.";
+"hidden_bin_album_slider_title" = "Mes albums cachés";
+"hidden_bin_album_slider_empty" = "Il n'y a pas d'album caché";
+"hidden_bin_empty" = "Il n'y a pas d'objet caché";
+"hidden_bin_navbar_title" = "Caché";
+"unhide_popup_text" = "Le ou les éléments sélectionnés seront remplacés dans leurs anciens classeurs et seront  affichés dans les listes de la lifebox. Voulez-vous continuer?";
 
 /*divorce card*/
 "divorce_card_title" = "";
+"divorce_card_title" = "XX Effect lorem ipsum ! Découvrez de nouvelles options !";
+"trash_bin_album_slider_title" = "Corbeille";
+"trash_bin_album_slider_empty" = "Aucun album supprimé pour l’instant dans la corbeille";
+"trash_bin_empty" = "Aucun élément supprimé pour l'instant dans la corbeille";
+"delete_confirmation_popup_title" = "Déplacer vers la corbeille";
+"delete_confirmation_popup_text" = "Le ou les éléments sélectionnés seront mis dans la corbeille. Vous pourrez les récupérer en 30 jours. N'oubliez pas de vider d'abord la corbeille si vous devez faire de place pour la mémoire de votre lifebox.";
+"restore_confirmation_popup_title" = "Restaurer";
+"restore_confirmation_popup_text" = "Le ou les éléments sélectionnés seront restaurés. Voulez-vous continuer?";
+"delete_from_hidden_bin_popup_success_title" = "Supprimer";
+"delete_from_hidden_bin_popup_success_text" = "Le ou les éléments sélectionnés seront mis dans la corbeille. Vous pourrez les récupérer en 30 jours. N'oubliez pas de vider d'abord la corbeille si vous devez faire de place pour la mémoire de votre lifebox,";
+"unhide_popup_success_title" = "Le ou les éléments sélectionnés ont été restaurés.";
+"delete_popup_text" = "Le ou les éléments sélectionnés seront mis dans la corbeille. Vous pourrez les récupérer en 30 jours. N'oubliez pas de vider d'abord la corbeille si vous devez faire de place pour la mémoire de votre lifebox.";
+"PackagesPolicyTextBillo" = "Les abonnements sont renouvelables mensuellement. \nLe paiement sera facturé sur le compte iTunes lors de la confirmation de l'achat.                                                            \nL'abonnement se renouvelle automatiquement sauf si le renouvellement automatique est désactivé au moins 24 heures avant la fin de la période en cours.\nEn cas de renouvellement, le compte sera débité dans les 24 heures précédant la fin de la période en cours. Les frais sont indiqués dans l'app.\nLes abonnements peuvent être gérés par l'utilisateur et le renouvellement automatique peut être désactivé en accédant aux \"Paramètres du Compte\" de l'utilisateur après l'achat.\nLa période d'essai gratuite inutilisée, sera perdue lorsque l'utilisateur prendra un abonnement payant.\nPolitique de Confidentialité: https://billostorage.com/policy \nTerms of Use:";
+"unhide_items_popup_text" = "Le ou les éléments sélectionnés seront remplacés dans leurs anciens classeurs et affichés dans les listes de lifebox. Voulez-vous continuer?";
+"unhide_albums_popup_text" = "Le ou les albums sélectionnés seront remplacés dans leurs anciens classeurs et affichés dans les listes de lifebox. Voulez-vous continuer?";
+"move_to_trash_hidden_albums_confirmation_popup_text" = "Le ou les albums sélectionnés seront mis dans la corbeille. Vous pourrez les récupérer en 30 jours. N'oubliez pas de vider d'abord la corbeille si vous devez faire de place pour la mémoire de votre lifebox,";
+"delete_items_confirmation_popup_text" = "Le ou les éléments sélectionnés seront complètement supprimés de la lifebox. Voulez-vous continuer?";
+"delete_albums_confirmation_popup_text" = "Le ou les albums et leur contenu sélectionnés seront complètement supprimés de la lifebox. Voulez-vous continuer?";
+"delete_folders_confirmation_popup_text" = "Le ou les fichiers et leur contenu sélectionnés seront complètement supprimés de la lifebox. Voulez-vous continuer?";
+"restore_items_confirmation_popup_text" = "Le ou les éléments sélectionnés seront restaurés. Voulez-vous continuer?";
+"restore_albums_confirmation_popup_text" = "Le ou les albums sélectionnés et leur contenu seront restaurés. Voulez-vous continuer?";
+"restore_folders_confirmation_popup_text" = "Le ou les fichiers et leur contenu sélectionnés et leur contenu seront restaurés. Voulez-vous continuer?";
+"move_to_trash_items_success_text" = "Le ou les éléments ont été envoyés à la corbeille.";
+"move_to_trash_albums_success_text" = "Le ou les albums et leur contenu ont été  envoyés à la corbeille.";
+"move_to_trash_folders_success_text" = "Le ou les fichiers ont été envoyés à la corbeille.";
+"unhide_items_success_text" = "Le ou les éléments ont été restaurés.";
+"unhide_albums_success_text" = "Le ou les albums ont été restaurés.";
+"unhide_folders_success_text" = "Le ou les fichiers ont été restaurés.";
+"delete_items_success_text" = "Le ou les éléments ont été supprimés de la lifebox.";
+"delete_albums_success_text" = "Le ou les albums et leur contenu sélectionnés ont été supprimés de la lifebox.";
+"delete_folders_success_text" = "Le ou les fichiers et leur contenu sélectionnés ont été supprimés de la lifebox.";
+"restore_items_success_text" = "Le ou les éléments ont été restaurés.";
+"restore_albums_success_text" = "Le ou les albums ont été restaurés.";
+"restore_folders_success_text" = "Le ou les fichiers ont été restaurés.";

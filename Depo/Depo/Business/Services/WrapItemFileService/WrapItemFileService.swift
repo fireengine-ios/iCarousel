@@ -27,7 +27,6 @@ protocol  WrapItemFileOperations {
     
     func share(sharedFiles: [BaseDataSourceItem], success: SuccessShared?, fail: FailResponse?)
     
-    
     // MARK: favourits
     
     func addToFavourite(files: [WrapData], success: FileOperationSucces?, fail: FailResponse?)
@@ -44,6 +43,8 @@ class WrapItemFileService: WrapItemFileOperations {
     
     let uploadService = UploadService.default
     
+    private let hiddenService = HiddenService()
+    
     
     func createsFolder(createFolder: CreatesFolder, success: FolderOperation?, fail: FailResponse?) {
         remoteFileService.createsFolder(createFolder: createFolder, success: success, fail: fail)
@@ -53,8 +54,8 @@ class WrapItemFileService: WrapItemFileOperations {
         
         let successOperation: FileOperationSucces = {
             MediaItemOperationsService.shared.deleteItems(deleteFiles, completion: {
-                success?()
                 ItemOperationManager.default.deleteItems(items: deleteFiles)
+                success?()
             })
         }
         
@@ -72,7 +73,29 @@ class WrapItemFileService: WrapItemFileOperations {
         remoteFileService.delete(deleteFiles: param,
                                  success: successOperation,
                                  fail: failOperation)
+    }
+    
+    func moveToTrash(files: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         
+        let successOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.deleteItems(files, completion: {
+                ItemOperationManager.default.didMoveToTrashItems(files)
+                success?()
+            })
+        }
+        
+        let failOperation: FailResponse = {  value in
+            fail?(value)
+        }
+        
+        let removeItems = remoteItemsUUID(files: files)
+        if removeItems.isEmpty {
+            successOperation()
+            return
+        }
+        
+        let files = MoveToTrashFiles(items: removeItems)
+        remoteFileService.moveToTrash(files: files, success: successOperation, fail: failOperation)
     }
     
     func deleteLocalFiles(deleteFiles: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
@@ -91,6 +114,48 @@ class WrapItemFileService: WrapItemFileOperations {
             
         } else {
             success?()
+        }
+    }
+    
+    func hide(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.hide(items, completion: {
+                ItemOperationManager.default.didHideItems(items)
+                success?()
+            })
+        }
+        
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            wrappedSuccessOperation()
+            return
+        }
+        
+        hiddenService.hideItems(remoteItems) { response in
+            switch response {
+            case .success(()):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func hide(albums: [AlbumItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.hide(albums, completion: {
+                ItemOperationManager.default.didHideAlbums(albums)
+                success?()
+            })
+        }
+        
+        hiddenService.hideAlbums(albums) { response in
+            switch response {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
         }
     }
     
@@ -297,7 +362,7 @@ class WrapItemFileService: WrapItemFileOperations {
                     itemToUpdate.status = item.status
                 }
             }
-            let isCompleted = items.contains(where: { $0.tmpDownloadUrl != nil || $0.status == .active })
+            let isCompleted = items.contains(where: { $0.tmpDownloadUrl != nil || $0.status.isTranscoded })
             /// old logic, now we consider its ok, neither if its active or tempo url online
             //!items.contains(where: { $0.status != .active})
             if isCompleted {
@@ -315,5 +380,318 @@ class WrapItemFileService: WrapItemFileOperations {
                 fail?(ErrorResponse.string(TextConstants.errorServer))
             }
         }, fail: fail)
+    }
+}
+
+//MARK: - Trash
+extension WrapItemFileService {
+    
+    //MARK: - Delete Items
+    
+    func delete(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.deleteItems(items, completion: {
+                ItemOperationManager.default.deleteItems(items: items)
+                success?()
+            })
+        }
+        
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            wrappedSuccessOperation()
+            return
+        }
+        
+        hiddenService.delete(items: remoteItems) { response in
+            switch response {
+            case .success(()):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    //MARK: - Smart Albums Trash
+    
+    @discardableResult
+    func moveToTrashPeople(items: [PeopleItem], success: FileOperationSucces?, fail: FailResponse?) -> URLSessionTask? {
+        debugLog("moveToTrashPeopleItems")
+
+        return hiddenService.moveToTrashPeople(items: items){ response in
+            switch response {
+            case .success(()):
+                ItemOperationManager.default.didMoveToTrashPeople(items: items)
+                success?()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    @discardableResult
+    func moveToTrashPlaces(items: [PlacesItem], success: FileOperationSucces?, fail: FailResponse?) -> URLSessionTask? {
+        debugLog("moveToTrashPlacesItems")
+        
+        return hiddenService.moveToTrashPlaces(items: items){ response in
+            switch response {
+            case .success(()):
+                ItemOperationManager.default.didMoveToTrashPlaces(items: items)
+                success?()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    @discardableResult
+    func moveToTrashThings(items: [ThingsItem], success: FileOperationSucces?, fail: FailResponse?) -> URLSessionTask? {
+        debugLog("moveToTrashThingsItems")
+        return hiddenService.moveToTrashThings(items: items) { response in
+            switch response {
+            case .success(()):
+                ItemOperationManager.default.didMoveToTrashThings(items: items)
+                success?()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+}
+
+
+//MARK: - Recover
+
+extension WrapItemFileService {
+    
+    //MARK: [WrapData]
+    func unhide(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.recover(items, completion: {
+                ItemOperationManager.default.didUnhideItems(items)
+                success?()
+            })
+        }
+        
+        recover(items: items, success: wrappedSuccessOperation, fail: fail)
+    }
+    
+    func putBack(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.recover(items, completion: {
+                ItemOperationManager.default.putBackFromTrashItems(items)
+                success?()
+            })
+        }
+        
+        recover(items: items, success: wrappedSuccessOperation, fail: fail)
+    }
+    
+    private func recover(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let remoteItems = items.filter { !$0.isLocalItem }
+        guard !remoteItems.isEmpty else {
+            success?()
+            return
+        }
+        
+        hiddenService.recoverItems(remoteItems) { response in
+            switch response {
+            case .success(()):
+                success?()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    //MARK: [AlbumItem]
+    func unhideAlbums(_ albums: [AlbumItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            ItemOperationManager.default.didUnhideAlbums(albums)
+            success?()
+        }
+        
+        recoverAlbums(albums, success: wrappedSuccessOperation, fail: fail)
+    }
+    
+    func putBackAlbums(_ albums: [AlbumItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            ItemOperationManager.default.putBackFromTrashAlbums(albums)
+            success?()
+        }
+        
+        recoverAlbums(albums, success: wrappedSuccessOperation, fail: fail)
+    }
+    
+    private func recoverAlbums(_ albums: [AlbumItem], success: FileOperationSucces?, fail: FailResponse?) {
+        guard !albums.isEmpty else {
+            success?()
+            return
+        }
+        
+        hiddenService.recoverAlbums(albums) { response in
+            switch response {
+            case .success(()):
+                success?()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+}
+
+
+//MARK: - FIR
+extension WrapItemFileService {
+    
+    //MARK: People
+    
+    func unhidePeople(items: [PeopleItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            ItemOperationManager.default.didUnhidePeople(items: items)
+            success?()
+        }
+        
+        hiddenService.unhidePeople(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func putBackPeople(items: [PeopleItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            ItemOperationManager.default.putBackFromTrashPeople(items: items)
+            success?()
+        }
+        
+        hiddenService.putBackPeople(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func deletePeople(items: [PeopleItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            ItemOperationManager.default.deleteItems(items: items)
+            success?()
+        }
+        
+        hiddenService.deletePeople(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    
+    //MARK: Places
+    
+    func unhidePlaces(items: [PlacesItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            ItemOperationManager.default.didUnhidePlaces(items: items)
+            success?()
+        }
+        
+        hiddenService.unhidePlaces(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func putBackPlaces(items: [PlacesItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            ItemOperationManager.default.putBackFromTrashPlaces(items: items)
+            success?()
+        }
+        
+        hiddenService.putBackPlaces(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func deletePlaces(items: [PlacesItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            ItemOperationManager.default.deleteItems(items: items)
+            success?()
+        }
+        
+        hiddenService.deletePlaces(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    //MARK: Things
+    
+    func unhideThings(items: [ThingsItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            ItemOperationManager.default.didUnhideThings(items: items)
+            success?()
+        }
+        
+        hiddenService.unhideThings(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func putBackThings(items: [ThingsItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            ItemOperationManager.default.putBackFromTrashThings(items: items)
+            success?()
+        }
+        
+        hiddenService.putBackThings(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func deleteThings(items: [ThingsItem], success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            ItemOperationManager.default.deleteItems(items: items)
+            success?()
+        }
+        
+        hiddenService.deleteThings(items: items) { result in
+            switch result {
+            case .success(_):
+                wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
     }
 }
