@@ -18,9 +18,9 @@
 @synthesize url = _url;
 @synthesize token = _token;
 
-#define CONTACT_SYNC_BASE_DEV_URL @"http://127.0.0.1:8002/sync/ttyapi/";
-#define CONTACT_SYNC_BASE_TEST_URL @"https://tcloudstb.turkcell.com.tr/ttyapi/";
-#define CONTACT_SYNC_BASE_PROD_URL @"https://adepo.turkcell.com.tr/ttyapi/";
+#define CONTACT_SYNC_BASE_DEV_URL @"http://contactsync.test.valven.com/ttyapi/";
+#define CONTACT_SYNC_BASE_TEST_URL @"https://contactsynctest.turkcell.com.tr/ttyapi/";
+#define CONTACT_SYNC_BASE_PROD_URL @"https://contactsync.turkcell.com.tr/ttyapi/";
 
 - (instancetype)init
 {
@@ -28,7 +28,7 @@
     if (self){
         _debug = YES;
         _dryRun = YES;
-        _environment = SYNCProductionEnvironment;
+        _environment = SYNCTestEnvironment;
         _syncInterval = SYNC_DEFAULT_INTERVAL;
         _delayInterval = SYNC_DEFAULT_DELAY;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -76,6 +76,13 @@
 - (SYNCPeriodic)getPeriodicBackup
 {
     return _periodicBackup;
+}
+
+-(void)setDEPO_URL:(NSString *)DEPO_URL {
+    _DEPO_URL = DEPO_URL;
+    NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+    [defaults setObject:[self endpointUrl] forKey:SYNC_KEY_DEPO_URL];
+    [defaults synchronize];
 }
 
 -(void)setUrl:(NSString *)url{

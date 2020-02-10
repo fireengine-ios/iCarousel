@@ -412,6 +412,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         updateThreeDotsButton()
     }
     
+    func didDeleteParent() {
+        router.back()
+    }
+    
+    func needToBack() {
+        router.back()
+    }
+    
     func updateCoverPhotoIfNeeded() { }
     
     func didChangeTopHeader(text: String) {
@@ -532,11 +540,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func setupNewBottomBarConfig() {
-        guard let barConfig = interactor.bottomBarConfig,
-            let array = dataSource.getSelectedItems() as? [Item] else {
-                return
+        guard let barConfig = interactor.bottomBarConfig else {
+            return
         }
-        bottomBarPresenter?.setupTabBarWith(items: array, originalConfig: barConfig)
+        
+        let selectedItems = dataSource.getSelectedItems()
+        bottomBarPresenter?.setupTabBarWith(items: selectedItems, originalConfig: barConfig)
     }
     
     func onMoreActions(ofItem: Item?, sender: Any) {
@@ -546,6 +555,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugLog("BaseFilesGreedPresenter onMoreActions")
 
         alertSheetModule?.showSpecifiedAlertSheet(with: item,
+                                                  status: view.status,
                                                   presentedBy: sender,
                                                   onSourceView: nil,
                                                   viewController: nil)
@@ -758,9 +768,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.setSelectionState(selectionState: false)
         dismissBottomBar(animated: true)
         view.stopSelection()
-        if type == .removeAlbum || type == .completelyDeleteAlbums {
-            dismissBottomBar(animated: true)
-        }
     }
     
     func operationFailed(withType type: ElementTypes) {
@@ -807,6 +814,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func getFolder() -> Item? {
         return interactor.getFolder()
+    }
+    
+    func getParent() -> BaseDataSourceItem? {
+        return interactor.getParent()
+    }
+    
+    func getStatus() -> ItemStatus {
+        return view.status
     }
     
     func getSortTypeString() -> String {

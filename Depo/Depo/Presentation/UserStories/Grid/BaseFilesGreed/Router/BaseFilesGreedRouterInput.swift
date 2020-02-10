@@ -21,4 +21,17 @@ protocol BaseFilesGreedRouterInput {
     func showUpload()
     
     func openNeededInstaPick(viewController: UIViewController)
+    
+    func back(to vc: UIViewController?)
+}
+
+extension BaseFilesGreedRouterInput {
+    
+    func back(to vc: UIViewController? = nil) {
+        if let controller = vc {
+            RouterVC().popToViewController(controller)
+        } else {
+            RouterVC().popViewController()
+        }
+    }
 }

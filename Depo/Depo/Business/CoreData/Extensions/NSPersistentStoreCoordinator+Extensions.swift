@@ -10,67 +10,42 @@ import CoreData
 
 extension NSPersistentStoreCoordinator {
     
-    /// NSPersistentStoreCoordinator error types
-    public enum CoordinatorError: Error {
-        /// .momd file not found
-        case modelFileNotFound
-        /// NSManagedObjectModel creation fail
-        case modelCreationError
-        /// Gettings document directory fail
-        case storePathNotFound
-    }
+    // MARK: - Destroy
     
-    /// Return NSPersistentStoreCoordinator
-    private convenience init(name: String, version: String) throws {
+    static func destroyStore(at storeURL: URL) {
         do {
-            let model = try NSPersistentStoreCoordinator.managedObjectModel(name: name, version: version)
-            self.init(managedObjectModel: model)
-        } catch {
-            debugLog("failed NSPersistentStoreCoordinator init: \(error.localizedDescription)")
-            throw CoordinatorError.modelCreationError
+            let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: NSManagedObjectModel())
+            try persistentStoreCoordinator.destroyPersistentStore(at: storeURL, ofType: NSSQLiteStoreType, options: nil)
+        } catch let error {
+            fatalLog("failed to destroy persistent store at \(storeURL), error: \(error)")
         }
     }
     
-    class func managedObjectModel(name: String, version: String) throws -> NSManagedObjectModel {
-        let modelBundle = Bundle.main
-        let omoURL = modelBundle.url(forResource: "\(name) \(version)", withExtension: "omo", subdirectory: "\(name).momd")
-        let momURL = modelBundle.url(forResource: "\(name) \(version)", withExtension: "mom", subdirectory: "\(name).momd")
-        guard var url = omoURL ?? momURL else {
-            debugLog("modelFileNotFound")
-            throw CoordinatorError.modelFileNotFound
-        }
-        /// Use unoptimized model version < iOS 11
-        if #available(iOS 11, *) {
-            //
-        } else if let momURL = momURL {
-            url = momURL
-        }
-        guard let model = NSManagedObjectModel(contentsOf: url) else {
-            debugLog("modelFile can not be opened")
-            fatalError("cannot open model at \(url)")
-        }
-        return model
-    }
+    // MARK: - Replace
     
-    /// Return NSPersistentStoreCoordinator with set coordinator
-    static func coordinator(modelName: String, persistentStoreName: String, version: String) throws -> NSPersistentStoreCoordinator? {
-        let coordinator = try NSPersistentStoreCoordinator(name: modelName, version: version)
-        
-        guard let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last else {
-            debugLog("failed urls(for: .documentDirectory")
-            throw CoordinatorError.storePathNotFound
-        }
-        
+    static func replaceStore(at targetURL: URL, withStoreAt sourceURL: URL) {
         do {
-            let url = documents.appendingPathComponent("\(persistentStoreName).sqlite")
-            let options = [NSMigratePersistentStoresAutomaticallyOption: true,
-                           NSInferMappingModelAutomaticallyOption: false]
-            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
-        } catch {
-            debugLog("failed addPersistentStore: \(error.localizedDescription)")
-            throw error
+            let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: NSManagedObjectModel())
+            try persistentStoreCoordinator.replacePersistentStore(at: targetURL, destinationOptions: nil, withPersistentStoreFrom: sourceURL, sourceOptions: nil, ofType: NSSQLiteStoreType)
+        } catch let error {
+            fatalLog("failed to replace persistent store at \(targetURL) with \(sourceURL), error: \(error)")
+        }
+    }
+    
+    // MARK: - Meta
+    
+    static func metadata(at storeURL: URL) -> [String : Any]? {
+        return try? NSPersistentStoreCoordinator.metadataForPersistentStore(ofType: NSSQLiteStoreType, at: storeURL, options: nil)
+    }
+    
+    // MARK: - Add
+    
+    func addPersistentStore(at storeURL: URL, options: [AnyHashable : Any]) -> NSPersistentStore {
+        do {
+            return try addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: options)
+        } catch let error {
+            fatalLog("failed to add persistent store to coordinator, error: \(error)")
         }
         
-        return coordinator
     }
 }

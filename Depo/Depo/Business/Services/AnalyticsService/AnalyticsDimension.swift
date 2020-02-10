@@ -35,6 +35,8 @@ struct AnalyticsDimension {
     
     let dailyDrawleft: Int?
     let totalDraw: Int?
+    
+    let itemsOperationCount: GADementionValues.ItemsOperationCount?
 
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
@@ -93,6 +95,9 @@ struct AnalyticsDimension {
         }
         if let totalDraw = totalDraw {
             dimesionDictionary[GAMetrics.totalDraw.text] = totalDraw
+        }
+        if let itemsOperation = itemsOperationCount {
+            dimesionDictionary[GADementionsFields.itemsCount(itemsOperation.operationType).text] = itemsOperation.count
         }
         
         return dimesionDictionary

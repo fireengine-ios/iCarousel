@@ -63,15 +63,22 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     }
     
     override func getSelectedItems() -> [BaseDataSourceItem] {
-        var resultArray = [BaseDataSourceItem]()
-        for array in tableDataMArray {
-            for object in array {
-                if (selectedItemsArray.contains(object)) {
-                    resultArray.append(object)
+        if isSelectionStateActive {
+            var resultArray = [BaseDataSourceItem]()
+            for array in tableDataMArray {
+                for object in array {
+                    if (selectedItemsArray.contains(object)) {
+                        resultArray.append(object)
+                    }
                 }
             }
+            return resultArray
         }
-        return resultArray
+        
+        if let parent = delegate?.getParent() {
+            return [parent]
+        }
+        return []
     }
     
     override func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
@@ -134,4 +141,19 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         }
     }
     
+    override func didHideAlbums(_ albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
+    
+    override func didUnhideAlbums(_ albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
+    
+    override func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
+    
+    override func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
 }

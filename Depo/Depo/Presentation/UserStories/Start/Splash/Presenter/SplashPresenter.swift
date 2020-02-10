@@ -18,12 +18,14 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     func viewIsReady() {
+        interactor.trackScreen()
+
         TurkcellUpdaterService().startUpdater(controller: self.view as? UIViewController) { [weak self] shouldProceed in
             guard shouldProceed else {
                 self?.showUpdateIsRequiredPopup()
                 return
             }
-            
+
             self?.showPasscodeIfNeed()
         }
     }
@@ -66,6 +68,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         }
         
         let navVC = NavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .overFullScreen
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             rootVC.present(navVC, animated: true, completion: nil)

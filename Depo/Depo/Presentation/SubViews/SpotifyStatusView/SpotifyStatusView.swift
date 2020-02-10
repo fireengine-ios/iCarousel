@@ -84,11 +84,9 @@ final class SpotifyStatusView: UIView, NibInit {
     private func processStatus() {
         if let status = status {
             switch status.jobStatus {
-            case .unowned, .failed:
-                subtitleLabel.text = ""
             case .pending, .running:
                 state = .inProgress
-            case .finished, .cancelled:
+            case .finished, .cancelled, .unowned, .failed:
                 if let date = status.lastModifiedDate {
                     state = .finished(date)
                 }

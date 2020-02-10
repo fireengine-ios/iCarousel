@@ -19,7 +19,7 @@ class StoriesInitializer: NSObject {
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.createAStory])
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .moveToTrash],
                                                style: .default, tintColor: nil)
         
         let presenter = AlbumsPresenter()

@@ -19,8 +19,8 @@ class IntroduceDataSource: NSObject, UIScrollViewDelegate {
     weak var delegate: IntroduceDataSourceEventsDelegate?
     
     func configurateScrollViewWithModels(models: [IntroduceModel]) {
-        let w = scrollView.frame.size.width
-        let h = scrollView.frame.size.height
+        let w = scrollView.frame.width
+        let h = scrollView.frame.height
         for view in scrollView.subviews {
             view.removeFromSuperview()
         }

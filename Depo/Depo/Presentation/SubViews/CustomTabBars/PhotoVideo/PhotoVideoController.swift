@@ -26,8 +26,24 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     var isPhoto = true
     
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreedCollectionDataSource)
+    
+    private lazy var progressQueue = DispatchQueue(label: DispatchQueueLabels.photoVideoUploadProgress, attributes: .concurrent)
+    private var uploadProgressValues = [String: Float]()
+    private var uploadProgress: [String: Float] {
+        get {
+            var result = [String: Float]()
+            progressQueue.sync { result = uploadProgressValues }
+            return result
+        }
+        
+        set {
+            progressQueue.async(flags: .barrier) { [weak self] in
+                self?.uploadProgressValues = newValue
+            }
+        }
+    }
+    
     private var uploadedObjectID = [String]()
-    private var uploadProgress = [String: Float]()
     
     private lazy var navBarManager = PhotoVideoNavBarManager(delegate: self)
     private lazy var collectionViewManager = PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
@@ -73,7 +89,9 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
+        self.trackPhotoVideoScreen(isPhoto: isPhoto)
+        
         bottomBarManager.editingTabBar?.view.layoutIfNeeded()
         collectionViewManager.setScrolliblePopUpView(isActive: true)
         scrollBarManager.startTimerToHideScrollBar()
@@ -213,13 +231,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func showDetail(at indexPath: IndexPath) {
-        // TODO: trackClickOnPhotoOrVideo(isPhoto: false)
         guard canShowDetail else {
             return
         }
         
         canShowDetail = false
-        trackClickOnPhotoOrVideo(isPhoto: true)
+        trackClickOnPhotoOrVideo(isPhoto: isPhoto)
 
         dataSource.getWrapedFetchedObjects { [weak self] items in
             self?.dataSource.getObject(at: indexPath) { [weak self] object in
@@ -233,7 +250,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 DispatchQueue.toMain {
                     self?.hideSpinner()
                     let router = RouterVC()
-                    let controller = router.filesDetailViewController(fileObject: currentObject, items: items)
+                    let controller = router.filesDetailViewController(fileObject: currentObject, items: items, status: .active)
                     let nController = NavigationController(rootViewController: controller)
                     router.presentViewController(controller: nController)
                     self?.canShowDetail = true
@@ -256,6 +273,12 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private func trackClickOnPhotoOrVideo(isPhoto: Bool) {
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .click, eventLabel: isPhoto ? .clickPhoto : .clickVideo)
+    }
+    
+    private func trackPhotoVideoScreen(isPhoto: Bool) {
+        AnalyticsService.sendNetmeraEvent(event: isPhoto ? NetmeraEvents.Screens.PhotosScreen() : NetmeraEvents.Screens.VideosScreen())
+        analyticsManager.logScreen(screen: isPhoto ? .photos : .videos)
+        analyticsManager.trackDimentionsEveryClickGA(screen: isPhoto ? .photos : .videos)
     }
     
     private func showSearchScreen() {
@@ -761,6 +784,22 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     }
     
     func deleteItems(items: [Item]) {
+        stopEditingMode()
+    }
+    
+    func didMoveToTrashItems(_ items: [Item]) {
+        stopEditingMode()
+    }
+    
+    func didHideItems(_ items: [WrapData]) {
+        stopEditingMode()
+    }
+    
+    func didHideAlbums(_ albums: [AlbumItem]) {
+        stopEditingMode()
+    }
+ 
+    func didUnhideItems(_ items: [WrapData]) {
         stopEditingMode()
     }
 }

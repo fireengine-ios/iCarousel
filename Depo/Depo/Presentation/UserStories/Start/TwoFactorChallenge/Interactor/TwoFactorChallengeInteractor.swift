@@ -94,11 +94,9 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
             DispatchQueue.main.async {
                 switch response {
                 case .success(let result):
-                    SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                        self?.proccessLoginHeaders(headers: result)
-                    }, fail: { [weak self] error in
-                        self?.output.verificationFailed(with: error.localizedDescription)
-                    })
+                    //TODO: NETMERA how do we log login here?
+                    self?.proccessLoginHeaders(headers: result)
+
                 case .failed(let error):
                     let errorText = error.localizedDescription
                     self?.output.verificationFailed(with: errorText)
@@ -137,12 +135,22 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     }
     
     private func verifyProcess() {
-        AccountService().updateBrandType()
-        self.output.verificationSucces()
-        
-        analyticsService.trackCustomGAEvent(eventCategory: .twoFactorAuthentication,
-                                            eventActions: challenge.challengeType.GAAction,
-                                            eventLabel: .confirmStatus(isSuccess: true))
+        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+            AccountService().updateBrandType()
+            CacheManager.shared.actualizeCache()
+            MenloworksAppEvents.onLogin()
+            
+            self.output.verificationSucces()
+            
+            self.analyticsService.trackCustomGAEvent(eventCategory: .twoFactorAuthentication,
+                                                     eventActions: self.challenge.challengeType.GAAction,
+                                                      eventLabel: .confirmStatus(isSuccess: true))
+        }, fail: { [weak self] error in
+            self?.output.verificationFailed(with: error.localizedDescription)
+        })
     }
     
     func updateUserLanguage() {

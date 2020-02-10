@@ -51,7 +51,7 @@ final class PlacesServiceResponse: ObjectRequestResponse {
     }
 }
 
-final class PlacesPageResponse: ObjectRequestResponse {
+final class PlacesPageResponse: ObjectRequestResponse, Map {
     var list: Array<PlacesItemResponse> = []
     
     override func mapping() {

@@ -69,7 +69,7 @@ def change_product_name_for_localize_string(path_to_file):
                 value = value.replace('lifebox', 'billo')
                 value = value.replace('Lifebox', 'Billo')
                 value = value.replace('LIFEBOX', 'BILLO')
-                line = ' = '.join([ key , '"'+value])
+                line = ' = '.join([ key, '"' + value ])
 
         new_data.append(line)
 

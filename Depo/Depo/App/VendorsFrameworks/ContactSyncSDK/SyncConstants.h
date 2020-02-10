@@ -26,23 +26,24 @@
 #endif
 #endif
 
-#define SYNC_VERSION @"2.0.1-020818"
+#define SYNC_VERSION @"4.0.3-040220"
 #define SYNC_USER_AGENT @"iOS ContactSync SDK"
 
 #define SYNC_HEADER_AUTH_TOKEN @"X-Auth-Token"
 #define SYNC_HEADER_CLIENT_VERSION @"X-Client-Version"
 #define SYNC_HEADER_MSISDN @"X-Msisdn"
 
-#define SYNC_DEVICE_ID @"DeviceId_v4"
+#define SYNC_DEVICE_ID @"DeviceId_210120"
 
-#define SYNC_KEY_LAST_SYNC_TIME @"ContactSyncLastTime_v4"
+#define SYNC_KEY_LAST_SYNC_TIME @"ContactSyncLastTime_210120"
 #define SYNC_KEY_LAST_PERIODIC_SYNC_TIME @"ContactPeriodicSyncLastTime_v4"
 #define SYNC_KEY_AUTOMATED @"ContactSyncAutomated"
 #define SYNC_KEY_CHECK_UPDATE @"ContactSyncUpdateKey"
-#define SYNC_KEY_CONTACT_STORE_UPDATED @"ContactSyncContactStoreUpdated"
-#define SYNC_KEY_CONTACT_STORE_DIRTY @"ContactSyncContactStoreDirty"
-#define SYNC_KEY_CONTACT_STORE_DELETED @"ContactSyncContactStoreDeleted"
+
 #define SYNC_KEY_PROGRESS_RESTORE @"ProgressRestore"
+
+#define SYNC_KEY_CURRENT_STEP @"CurrentStep030220"
+#define SYNC_KEY_CURRENT_CONTACT_COUNT @"CurrentContactCount"
 
 #define SYNC_KEY_DELAY @"ContactSyncDelay"
 
@@ -50,6 +51,7 @@
 #define SYNC_KEY_PERIODIC_TOKEN @"PeriodicBackupToken"
 #define SYNC_KEY_PERIODIC_URL @"PeriodicBackupUrl"
 
+#define SYNC_KEY_DEPO_URL @"DepoUrl"
 
 #define SYNC_DEFAULT_INTERVAL 30
 #define SYNC_DEFAULT_DELAY 0

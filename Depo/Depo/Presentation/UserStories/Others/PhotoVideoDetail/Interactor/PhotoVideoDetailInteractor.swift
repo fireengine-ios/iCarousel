@@ -7,17 +7,19 @@
 //
 
 class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
-
+    
     weak var output: PhotoVideoDetailInteractorOutput!
     
-    var array = [Item]()
+    private var array = [Item]()
     
     var albumUUID: String?
     
-    var selectedIndex = 0
+    var status: ItemStatus = .active
+    var viewType: DetailViewType = .details
     
-    var photoVideoBottomBarConfig: EditingBarConfig!
-    var documentsBottomBarConfig: EditingBarConfig!
+    private var selectedIndex: Int?
+    
+    var bottomBarConfig: EditingBarConfig!
     
     var moreMenuConfig = [ElementTypes]()
     
@@ -27,40 +29,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         return moreMenuConfig
     }
     
-    func onSelectItem(fileObject: Item, from items: [Item]) {
-        array.removeAll()
-        array.append(contentsOf: items)
-        
-        /// old logic
-        //selectedIndex = array.index(of: fileObject) ?? 0
-        
-        /// new logic
-        if fileObject.isLocalItem {
-            let localId = fileObject.getLocalID()
-            for (index, item) in items.enumerated() {
-                if localId == item.getLocalID() {
-                    selectedIndex = index
-                    break
-                }
-            }
-        } else {
-            for (index, item) in items.enumerated() {
-                guard let id = fileObject.id else {
-                    continue
-                }
-                if id == item.id {
-                    selectedIndex = index
-                    break
-                }
-            }
-        }
-    }
-    
-    func onViewIsReady() {
-        output.onShowSelectedItem(at: selectedIndex, from: array)
-    }
-    
-    var currentItemIndex: Int {
+    var currentItemIndex: Int? {
         get {
             return selectedIndex
         }
@@ -72,90 +41,63 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     var allItems: [Item] {
         return array
     }
+    
+    func onSelectItem(fileObject: Item, from items: [Item]) {
+        array.removeAll()
+        array.append(contentsOf: items)
+        
+        if fileObject.isLocalItem {
+            let localId = fileObject.getLocalID()
+            if let index = items.firstIndex(where: { $0.getLocalID() == localId }) {
+                selectedIndex = index
+            }
+        } else if let index = items.firstIndex(where: { $0.uuid == fileObject.uuid }) {
+            selectedIndex = index
+        }
+    }
+    
+    func onViewIsReady() {
+        guard let index = selectedIndex else {
+            return
+        }
+        
+        output.onShowSelectedItem(at: index, from: array)
+    }
 
     func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig {
         let selectedItem = array[selectedIndex]
-        switch selectedItem.fileType {
-        case .image, .video:
-            var elementsConfig = photoVideoBottomBarConfig.elementsConfig
-            if .video == selectedItem.fileType || selectedItem.isLocalItem {
-                if let editIndex = elementsConfig.index(of: .edit) {
-                    elementsConfig.remove(at: editIndex)
-                }
-                if let printIndex = elementsConfig.index(of: .print) {
-                    elementsConfig.remove(at: printIndex)
-                }
-                if !elementsConfig.contains(.info) {
-                    elementsConfig.append(.info)
-                }
-            }
-            
-            if .video == selectedItem.fileType && !selectedItem.isLocalItem {
-                if let deleteIndex = elementsConfig.index(of: .info) {
-                    elementsConfig.remove(at: deleteIndex)
-                }
-            }
-            
-            if !selectedItem.isLocalItem {
-                elementsConfig.insert(.edit, at: 2)
-                
-                if let syncIndex = elementsConfig.index(of: .sync) {
-                    elementsConfig[syncIndex] = .download
-                }
-                
-                if let infoIndex = elementsConfig.index(of: .info) {
-                    elementsConfig.remove(at: infoIndex)
-                }
-                if !elementsConfig.contains(.print) {
-                    elementsConfig.append(.print)
-                }
-                elementsConfig.append(.delete)
-                
-            } else if let syncIndex = elementsConfig.index(of: .download) {
-                elementsConfig[syncIndex] = .sync
-            }
-            
-            let langCode = Device.locale
-            if let deleteIndex = elementsConfig.index(of: .print),
-                langCode != "tr" {
-                elementsConfig.remove(at: deleteIndex)
-                
-            }
-            
-            return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
-        case .application:
-            return documentsBottomBarConfig
-        default:
-            return photoVideoBottomBarConfig
-        }
-        
+        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: viewType)
+        return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
     }
     
     func deleteSelectedItem(type: ElementTypes) {
-        let isRightSwipe = selectedIndex == array.count - 1
+        guard let index = selectedIndex else {
+            return
+        }
         
-        let removedObject = array[selectedIndex]
+        let isRightSwipe = index == array.count - 1
+        
+        let removedObject = array[index]
             
-        array.remove(at: selectedIndex)
-        
-        if (selectedIndex >= array.count) {
+        array.remove(at: index)
+
+        if index >= array.count {
             selectedIndex = array.count - 1
         }
         
-        if type == .delete {
-            ItemOperationManager.default.deleteItems(items: [removedObject])
-        }
-        if type == .removeFromAlbum || type == .removeFromFaceImageAlbum {
+        switch type {
+        case .hide, .unhide, .delete:
+            ///its already being called from different place, we dont need to call
+            break
+        case .removeFromAlbum, .removeFromFaceImageAlbum:
             ItemOperationManager.default.filesRomovedFromAlbum(items: [removedObject], albumUUID: albumUUID ?? "")
+        default:
+            break
         }
         
-        if array.isEmpty {
-            /// added asyncAfter 1 sec to wait PopUpController about success deleting
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { 
-                self.output.goBack()
-            }
-        } else {
-            output.updateItems(objects: array, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
+        if !array.isEmpty {
+            let nextIndex = index == array.count ? array.count - 1 : index
+            output.updateItems(objects: array, selectedIndex: nextIndex, isRightSwipe: isRightSwipe)
         }
     }
     

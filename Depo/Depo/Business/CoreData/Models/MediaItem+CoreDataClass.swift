@@ -41,7 +41,8 @@ public class MediaItem: NSManagedObject {
         urlToFileValue = wrapData.urlToFile?.absoluteString
         
         isFolder = wrapData.isFolder ?? false
-        isTranscoded = wrapData.status == .active
+        isTranscoded = wrapData.status.isTranscoded
+        status = wrapData.status.valueForCoreDataMapping()
         
         parent = wrapData.parent
         
@@ -185,7 +186,8 @@ public class MediaItem: NSManagedObject {
         })
         self.albums = NSOrderedSet(array: albums ?? [])
         
-        isTranscoded = item.status == .active
+        isTranscoded = item.status.isTranscoded
+        status = item.status.valueForCoreDataMapping()
         updateMissingDateRelations()
     }
     

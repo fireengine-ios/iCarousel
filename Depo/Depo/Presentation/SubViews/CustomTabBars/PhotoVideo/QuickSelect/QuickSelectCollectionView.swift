@@ -45,8 +45,8 @@ final class QuickSelectCollectionView: UICollectionView {
     
     // scroll speed
     private var currentScrollSpeed: CGFloat = 0.0
-    private let minScrollSpeed: CGFloat = 4.0
-    private let deltaScrollSpeed: CGFloat = UIScreen.main.bounds.height
+    private let minScrollSpeed: CGFloat = 1.0
+    private let deltaScrollSpeed: CGFloat = UIScreen.main.bounds.height / 10
     
     private let autoScrollStepTime =  1.0/60.0 // 60 FPS
     private let autoScrollStepsNumber = 8

@@ -20,10 +20,8 @@ func + <K, V>(left: Dictionary<K, V>, right: Dictionary<K, V>) -> Dictionary<K, 
 
 extension Dictionary {
     mutating func removeValueSafely(forKey key: Key) {
-        if keys.contains(key) {
+        if keys.contains(key), self[key] != nil {
             removeValue(forKey: key)
-        } else {
-            assertionFailure()
-        }
+        } 
     }
 }

@@ -195,8 +195,10 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     private func requesetAccess(completionHandler: @escaping ContactsPermissionCallback) {
         switch CNContactStore.authorizationStatus(for: .contacts) {
         case .authorized:
+            AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(true)
             completionHandler(true)
         case .denied:
+            AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(false)
             showSettingsAlert(completionHandler: completionHandler)
         case .restricted, .notDetermined:
             passcodeStorage.systemCallOnScreen = true
@@ -205,6 +207,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
                 guard let `self` = self else { return }
                 self.passcodeStorage.systemCallOnScreen = false
                 DispatchQueue.main.async {
+                    AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(granted)
                     if granted {
                         completionHandler(true)
                     } else {

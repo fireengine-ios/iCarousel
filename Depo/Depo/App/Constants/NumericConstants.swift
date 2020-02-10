@@ -87,6 +87,7 @@ struct NumericConstants {
     static let itemProviderSearchRequest: Int = 1000
     
     static let limitContactsForBackUp: Int = 5000
+    static let contactSyncBulk = 1000
     static let defaultCustomScrollIndicatorOffset: CGFloat = 50
     
     static let myStreamSliderThumbnailsCount: Int = 4

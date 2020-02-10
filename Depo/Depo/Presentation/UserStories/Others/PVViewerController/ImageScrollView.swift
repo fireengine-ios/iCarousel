@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol ImageScrollViewDelegate: class {
+    func imageViewFinishedLoading()
+}
+
 final class ImageScrollView: UIScrollView {
     
     private(set) var imageView = LoadingImageView()
+    weak var imageViewDelegate: ImageScrollViewDelegate?
     
     //set minimum image size to be able to display activity indicator that is attached to image
     private let minimumImageSize = CGSize(width: 40, height: 40)
@@ -129,6 +134,10 @@ final class ImageScrollView: UIScrollView {
 }
 
 extension ImageScrollView: LoadingImageViewDelegate {
+    func loadingFinished() {
+        imageViewDelegate?.imageViewFinishedLoading()
+    }
+    
     func onImageLoaded(image: UIImage?) {
         setupFrame(for: image)
         updateZoom()

@@ -67,6 +67,10 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     var showOnlySyncItemsCheckBox: CheckBoxView?
     private let showOnlySyncItemsCheckBoxHeight: CGFloat = 44
     
+    private var isRefreshAllowed = true
+    
+    var status: ItemStatus = .active
+    
     // MARK: Life cycle
     
     override func viewDidLoad() {
@@ -230,6 +234,9 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     @objc func loadData() {
+        guard isRefreshAllowed else {
+            return
+        }
         if !output.isSelectionState() {
             output.onReloadData()
             contentSlider?.reloadAllData()
@@ -242,6 +249,14 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         DispatchQueue.main.async {
             self.refresher.endRefreshing()
         }
+    }
+    
+    func disableRefresh() {
+        isRefreshAllowed = false
+    }
+    
+    func enableRefresh() {
+        isRefreshAllowed = true
     }
     
     func showCustomPopUpWithInformationAboutAccessToMediaLibrary() {

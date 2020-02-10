@@ -31,12 +31,29 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
     private var alertText = ""
     
     private let sumMarginsForFooter: CGFloat = 60
-
+    
+    private let sumWidthMarginsForHeader: CGFloat = 30
+    
+    private let sumHeightMarginsForHeader: CGFloat = 40
+    
+    override init(sortedRule: SortedRules = .timeDown) {
+        super.init(sortedRule: sortedRule)
+        ItemOperationManager.default.startUpdateView(view: self)
+    }
+    
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
+    }
+    
     override func viewIsReady(collectionView: UICollectionView) {
         if let faceImageType = faceImageType {
             dataSource = FaceImageItemsDataSource(faceImageType: faceImageType, delegate: self)
             if let dataSource = dataSource as? FaceImageItemsDataSource {
                 dataSource.heightTitleLabel = getHeightForTitleLabel()
+                if faceImageType == .people {
+                    dataSource.carouselViewHeight = getCarouselPagerMaxHeight()
+                    dataSource.sumHeightMarginsForHeader = sumHeightMarginsForHeader
+                }
             }
             
         }
@@ -107,7 +124,8 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
         
         forceLoadNextItems = filteredItems.isEmpty && !items.isEmpty
         
-        dataSource.isHeaderless = true
+        dataSource.isHeaderless = faceImageType != .people
+        
         updateThreeDotsButton()
         updateUgglaViewIfNeed()
         updateMyStreamSliderIfNeed()
@@ -252,6 +270,20 @@ final class FaceImageItemsPresenter: BaseFilesGreedPresenter {
             return 0
         }
         
+    }
+    
+    private func getCarouselPagerMaxHeight() -> CGFloat {
+        var maxHeight: CGFloat = 0
+        var other: CGFloat = 0
+        let maxCellWidth: CGFloat = UIScreen.main.bounds.width - sumWidthMarginsForHeader
+        
+        for model in CarouselPagerDataSource.getCarouselPageModels() {
+           other = model.text.height(for:maxCellWidth, font: UIFont.TurkcellSaturaDemFont(size: 14))
+                   + model.title.height(for: maxCellWidth , font: UIFont.TurkcellSaturaFont(size: 13))
+           maxHeight = max(maxHeight,other)
+        }
+        
+        return maxHeight
     }
 }
 
@@ -430,6 +462,34 @@ extension FaceImageItemsPresenter: FaceImageItemsDataSourceDelegate {
             } else {
                 router.showNoDetailsAlert(with: alertText)
             }
+        }
+    }
+}
+
+extension FaceImageItemsPresenter: ItemOperationManagerViewProtocol {
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        if let obj = object as? FaceImageItemsPresenter {
+            return obj.faceImageType == faceImageType && allItems == obj.allItems
+        } else {
+            return false
+        }
+    }
+    
+    func didUnhidePeople(items: [PeopleItem]) {
+        if faceImageType == .people {
+            reloadData()
+        }
+    }
+    
+    func didUnhidePlaces(items: [PlacesItem]) {
+        if faceImageType == .places {
+            reloadData()
+        }
+    }
+    
+    func didUnhideThings(items: [ThingsItem]) {
+        if faceImageType == .things {
+            reloadData()
         }
     }
 }

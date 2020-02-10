@@ -24,8 +24,9 @@ extension Alamofire.DataRequest {
         }
     }
     
-    func responseObject<T: DataMap>(_ handler: @escaping ResponseHandler<T>) {
-        responseData { response in
+    @discardableResult
+    func responseObject<T: DataMap>(_ handler: @escaping ResponseHandler<T>) -> Self {
+        return responseData { response in
             switch response.result {
             case .success(let data):
                 handler(ResponseParser.parse(data: data))
@@ -37,8 +38,9 @@ extension Alamofire.DataRequest {
         }
     }
     
-    func responseVoid(_ handler: @escaping ResponseHandler<Void>) {
-        responseString { response in
+    @discardableResult
+    func responseVoid(_ handler: @escaping ResponseHandler<Void>) -> Self {
+        return responseString { response in
             switch response.result {
             case .success(_):
                 handler(ResponseResult.success(()))
@@ -49,4 +51,5 @@ extension Alamofire.DataRequest {
             }
         }
     }
+    
 }

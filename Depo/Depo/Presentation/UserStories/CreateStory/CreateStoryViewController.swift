@@ -127,6 +127,7 @@ final class CreateStoryViewController: BaseViewController {
 
         updateStoryIfNeeded(story?.music)
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.CreateStoryNameScreen())
         let analyticsService = AnalyticsService()
         analyticsService.logScreen(screen: .createStoryDetails)
     }
