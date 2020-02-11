@@ -25,6 +25,8 @@ class SyncServiceManager {
         return queue
     }()
     
+    private lazy var lastOperation = operationQueue.operations.last
+    
     private let photoSyncService: ItemSyncService = PhotoSyncService()
     private let videoSyncService: ItemSyncService = VideoSyncService()
     private var settings = AutoSyncDataStorage().settings
@@ -130,6 +132,25 @@ class SyncServiceManager {
     
     
     // MARK: - Private
+    
+    func backgroundTaskSync(handler: @escaping BoolHandler) {
+        
+        guard coreDataStack.isReady else {
+            return
+        }
+        
+        dispatchQueue.async { [weak self] in
+            
+            guard let `self` = self else {
+                return
+            }
+            
+            self.start(photo: true, video: true, newItems: true)
+            self.lastOperation?.completionBlock = {
+                handler(!(self.lastOperation?.isCancelled ?? false))
+            }
+        }
+    }
     
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
         debugPrint("AUTOSYNC: checkReachabilityAndSettings")
