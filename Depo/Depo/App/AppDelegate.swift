@@ -212,29 +212,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         debugLog("AppDelegate applicationDidEnterBackground")
         
-//        BackgroundTaskService.shared.beginBackgroundTask()
-//
-//        firstResponder = application.firstResponder
-//        SDImageCache.shared().deleteOldFiles(completionBlock: nil)
-//        
-//        if tokenStorage.refreshToken != nil {
-//            LocationManager.shared.startUpdateLocationInBackground()
-//        }
-//        
-//        if !passcodeStorage.isEmpty {
-//            let topVC = UIApplication.topController()
-//            
-//            /// remove PasscodeEnterViewController if was on the screen
-//            if let tabBarVC = topVC as? TabBarViewController,
-//                let navVC = tabBarVC.activeNavigationController,
-//                navVC.topViewController is PasscodeEnterViewController {
-//                navVC.popViewController(animated: false)
-//                showPasscodeIfNeed()
-//            } else if passcodeStorage.systemCallOnScreen {
-//                passcodeStorage.systemCallOnScreen = false
-//                showPasscodeIfNeed()
-//            }
-//        }
+        BackgroundTaskService.shared.beginBackgroundTask()
+
+        firstResponder = application.firstResponder
+        SDImageCache.shared().deleteOldFiles(completionBlock: nil)
+        
+        if tokenStorage.refreshToken != nil {
+            LocationManager.shared.startUpdateLocationInBackground()
+        }
+        
+        if !passcodeStorage.isEmpty {
+            let topVC = UIApplication.topController()
+            
+            /// remove PasscodeEnterViewController if was on the screen
+            if let tabBarVC = topVC as? TabBarViewController,
+                let navVC = tabBarVC.activeNavigationController,
+                navVC.topViewController is PasscodeEnterViewController {
+                navVC.popViewController(animated: false)
+                showPasscodeIfNeed()
+            } else if passcodeStorage.systemCallOnScreen {
+                passcodeStorage.systemCallOnScreen = false
+                showPasscodeIfNeed()
+            }
+        }
         
         if #available(iOS 13.0, *) {
             backgroundSyncService.scheduleBackgroundSync()
@@ -242,20 +242,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-//        debugLog("AppDelegate applicationWillEnterForeground")
-//        if BackgroundTaskService.shared.appWasSuspended {
-//            CacheManager.shared.actualizeCache()
-//        }
-//        ContactSyncSDK.doPeriodicSync()
-//        MenloworksAppEvents.sendProfileName()
-//        
-//        // handle netmera push notifications
-//        if let object = Netmera.recentPushObject(),
-//            Device.operationSystemVersionLessThen(10),
-//            PushNotificationService.shared.assignNotificationActionBy(launchOptions: object.customDictionary)
-//        {
-//            PushNotificationService.shared.openActionScreen()
-//        }
+        debugLog("AppDelegate applicationWillEnterForeground")
+        if BackgroundTaskService.shared.appWasSuspended {
+            CacheManager.shared.actualizeCache()
+        }
+        ContactSyncSDK.doPeriodicSync()
+        MenloworksAppEvents.sendProfileName()
+        
+        // handle netmera push notifications
+        if let object = Netmera.recentPushObject(),
+            Device.operationSystemVersionLessThen(10),
+            PushNotificationService.shared.assignNotificationActionBy(launchOptions: object.customDictionary)
+        {
+            PushNotificationService.shared.openActionScreen()
+        }
     }
     
     func showPasscodeIfNeedInBackground() {
