@@ -153,6 +153,8 @@
 	<string>Need access to save your photo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Your photos will be backed up to lifedrive</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>billo needs to access your bluetooth permission in order to send you push messages in specific areas</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>TurkcellSaturaReg.ttf</string>
