@@ -91,10 +91,10 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     func analyze() {
-        output?.showProggress(progress: 0, count: 0, forOperation: .analyze)
+        output?.showProgress(progress: 0, count: 0, forOperation: .analyze)
         contactsSyncService.analyze(progressCallback: { [weak self] progressPercentage, count, type in
             DispatchQueue.main.async {
-                self?.output?.showProggress(progress: progressPercentage, count: count, forOperation: type)
+                self?.output?.showProgress(progress: progressPercentage, count: count, forOperation: type)
             }
         }, successCallback: { [weak self] response in
             debugLog("contactsSyncService.analyze successCallback")
@@ -121,7 +121,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
         // TODO: clear NumericConstants.limitContactsForBackUp
         contactsSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, opertionType in
             DispatchQueue.main.async {
-                self?.output?.showProggress(progress: progressPercentage, count: 0, forOperation: opertionType)
+                self?.output?.showProgress(progress: progressPercentage, count: 0, forOperation: opertionType)
             }
         }, finishCallback: { [weak self] result, opertionType in
             self?.trackNetmera(operationType: type, status: .success)

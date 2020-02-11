@@ -77,7 +77,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         asyncOperationFinished()
     }
     
-    func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
+    func showProgress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
         view.showProggress(progress: progress, count: count, forOperation: operation)
     }
     
