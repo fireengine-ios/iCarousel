@@ -998,8 +998,12 @@ extension MoreFilesActionsInteractor {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            self?.router.hideSpiner()
-            self?.showSuccessPopup(message: text)
+            RouterVC().hideSpiner()
+            if let self = self {
+                self.showSuccessPopup(message: text)
+            } else {
+                UIApplication.showSuccessAlert(message: text)
+            }
         }
     }
     

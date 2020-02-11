@@ -19,11 +19,13 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     func viewIsReady() {
         interactor.trackScreen()
+
         TurkcellUpdaterService().startUpdater(controller: self.view as? UIViewController) { [weak self] shouldProceed in
             guard shouldProceed else {
                 self?.showUpdateIsRequiredPopup()
                 return
             }
+
             self?.showPasscodeIfNeed()
         }
     }
