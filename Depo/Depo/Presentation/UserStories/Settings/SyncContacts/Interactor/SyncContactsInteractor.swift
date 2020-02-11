@@ -90,19 +90,24 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
         analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncGeneral)
     }
     
-    private func updateAccessToken(complition: @escaping VoidHandler) {
-        let auth: AuthorizationRepository = factory.resolve()
-        output?.asyncOperationStarted()
-        auth.refreshTokens { [weak self] _, accessToken, error  in
-            if let accessToken = accessToken {
-                let tokenStorage: TokenStorage = factory.resolve()
-                tokenStorage.accessToken = accessToken
-                self?.contactsSyncService.updateAccessToken()
-                complition()
-            } else {
-                self?.output?.showError(errorType: error?.isNetworkError == true ? .networkError : .failed)
+    func analyze() {
+        output?.showProggress(progress: 0, count: 0, forOperation: .analyze)
+        contactsSyncService.analyze(progressCallback: { [weak self] progressPercentage, count, type in
+            DispatchQueue.main.async {
+                self?.output?.showProggress(progress: progressPercentage, count: count, forOperation: type)
             }
-        }
+        }, successCallback: { [weak self] response in
+            debugLog("contactsSyncService.analyze successCallback")
+            DispatchQueue.main.async {
+                self?.output?.analyzeSuccess(response: response)
+            }
+        }, cancelCallback: nil,
+           errorCallback: { [weak self] errorType, type in
+            debugLog("contactsSyncService.analyze errorCallback")
+            DispatchQueue.main.async {
+                self?.output?.showError(errorType: errorType)
+            }
+        })
     }
     
     func performOperation(forType type: SYNCMode) {
@@ -144,16 +149,6 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
         })
     }
     
-    private func trackNetmera(operationType: SYNCMode, status: NetmeraEventValues.GeneralStatus) {
-        switch operationType {
-        case .backup:
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .backup, staus: status))
-        case .restore:
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .restore, staus: status))
-        }
-
-    }
-    
     func getUserStatus() {
         output?.asyncOperationStarted()
 
@@ -174,6 +169,20 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
         }
     }
     
+    func getStoredContactsCount() -> Int {
+        return contactService.getContactsCount() ?? 0
+    }
+    
+    private func trackNetmera(operationType: SYNCMode, status: NetmeraEventValues.GeneralStatus) {
+        switch operationType {
+        case .backup:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .backup, staus: status))
+        case .restore:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .restore, staus: status))
+        }
+
+    }
+    
     private func loadLastBackUp() {
         contactsSyncService.getBackUpStatus(completion: { [weak self] model in
             debugLog("loadLastBackUp completion")
@@ -186,24 +195,19 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
         })
     }
     
-    func analyze() {
-        output?.showProggress(progress: 0, count: 0, forOperation: .analyze)
-        contactsSyncService.analyze(progressCallback: { [weak self] progressPercentage, count, type in
-            DispatchQueue.main.async {
-                self?.output?.showProggress(progress: progressPercentage, count: count, forOperation: type)
+    private func updateAccessToken(complition: @escaping VoidHandler) {
+        let auth: AuthorizationRepository = factory.resolve()
+        output?.asyncOperationStarted()
+        auth.refreshTokens { [weak self] _, accessToken, error  in
+            if let accessToken = accessToken {
+                let tokenStorage: TokenStorage = factory.resolve()
+                tokenStorage.accessToken = accessToken
+                self?.contactsSyncService.updateAccessToken()
+                complition()
+            } else {
+                self?.output?.showError(errorType: error?.isNetworkError == true ? .networkError : .failed)
             }
-        }, successCallback: { [weak self] response in
-            debugLog("contactsSyncService.analyze successCallback")
-            DispatchQueue.main.async {
-                self?.output?.analyzeSuccess(response: response)
-            }
-        }, cancelCallback: nil,
-           errorCallback: { [weak self] errorType, type in
-            debugLog("contactsSyncService.analyze errorCallback")
-            DispatchQueue.main.async {
-                self?.output?.showError(errorType: errorType)
-            }
-        })
+        }
     }
     
     private func deleteDuplicated() {
@@ -213,6 +217,4 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
         analyticsService.trackDimentionsEveryClickGA(screen: .contacSyncDeleteDuplicates)
         contactsSyncService.deleteDuplicates()
     }
-    
-    
 }
