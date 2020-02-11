@@ -1729,12 +1729,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return
         }
         
-        //back if restore|delete items in trash bin folders
-        if delegate?.getStatus() == .trashed {
-            delegate?.needToBack()
-            return
-        }
-        
         dispatchQueue.async { [weak self] in
             guard let `self` = self, !items.isEmpty else {
                 return

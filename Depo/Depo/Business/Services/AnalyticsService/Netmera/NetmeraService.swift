@@ -110,9 +110,6 @@ final class NetmeraService {
     }
    
     static func startNetmera() {
-        #if LIFEDRIVE
-        return
-        #endif
         
         debugLog("Start Netmera")
         
@@ -129,6 +126,7 @@ final class NetmeraService {
         #endif
         
         //FIXME: REMOVE  "|| RELEASE" part
+        #if LIFEBOX
         #if APPSTORE
         Netmera.setAPIKey("3PJRHrXDiqbDyulzKSM_m59cpbYT9LezJOwQ9zsHAkjMSBUVQ92OWw")
         #elseif  RELEASE
@@ -136,6 +134,17 @@ final class NetmeraService {
         #elseif ENTERPRISE || DEBUG
         Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
         #endif
+        #endif
+        
+        
+        #if LIFEDRIVE
+        #if APPSTORE
+        Netmera.setAPIKey("LINA4LCdpz44QTLXQBpw_aczLfB3nyWqit1C9oeYa1nzrgct0J5WOQ")
+        #elseif ENTERPRISE || DEBUG
+        Netmera.setAPIKey("6l30TJ05YeluVSpiY3Al8xcpW3mTkldj6_KWcwS8iNrRTgBKe1166A")
+        #endif
+        #endif
+
         
         Netmera.setAppGroupName(SharedConstants.groupIdentifier)
     }
