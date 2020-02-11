@@ -122,13 +122,14 @@ final class UploadOperation: Operation {
                 guard let `self` = self else {
                     return
                 }
-                
+
                 let uploadParam = Upload(item: self.inputItem,
                                          destitantion: responseURL,
                                          uploadStategy: self.uploadStategy,
                                          uploadTo: self.uploadTo,
                                          rootFolder: self.folder,
-                                         isFavorite: self.isFavorites)
+                                         isFavorite: self.isFavorites,
+                                         uploadType: self.uploadType)
                 
                 self.clearingAction = { [weak self] in
                     self?.removeTemporaryFile(at: uploadParam.urlToLocalFile)
