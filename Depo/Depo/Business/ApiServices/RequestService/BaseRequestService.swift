@@ -29,6 +29,7 @@ protocol RequestParametrs {
 protocol UploadRequestParametrs: RequestParametrs {
     var urlToLocalFile: URL? { get }
     var fileData: Data? { get }
+    var uploadType: UploadType? { get }
 }
 
 protocol DownloadRequestParametrs: RequestParametrs {

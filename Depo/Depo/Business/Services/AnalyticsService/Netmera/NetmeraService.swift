@@ -125,7 +125,6 @@ final class NetmeraService {
         Netmera.setLogLevel(.debug)
         #endif
         
-        //FIXME: REMOVE  "|| RELEASE" part
         #if LIFEBOX
         #if APPSTORE
         Netmera.setAPIKey("3PJRHrXDiqbDyulzKSM_m59cpbYT9LezJOwQ9zsHAkjMSBUVQ92OWw")
