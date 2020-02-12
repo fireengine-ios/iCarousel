@@ -330,7 +330,7 @@ extension SyncServiceManager {
 extension SyncServiceManager: ItemSyncServiceDelegate {
     func didReceiveOutOfSpaceError() {
         stopSync()
-        if UIApplication.shared.applicationState == .background {
+        if ApplicationStateHelper.shared.isBackground {
             timeIntervalBetweenSyncsInBackground = NumericConstants.timeIntervalBetweenAutoSyncAfterOutOfSpaceError
         }
         showOutOfSpaceAlert()

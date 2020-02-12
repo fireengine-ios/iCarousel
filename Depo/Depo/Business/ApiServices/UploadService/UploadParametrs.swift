@@ -101,7 +101,7 @@ class Upload: UploadRequestParametrs {
         }
         
         let appopriateUploadType = (uploadType == .autoSync) ? "AUTO_SYNC" : "MANUAL"
-        let lifecycleState = (UIApplication.shared.applicationState == .background) ? "BG": "FG"
+        let lifecycleState = ApplicationStateHelper.shared.isBackground ? "BG": "FG"
         
         header = header + [
             HeaderConstant.connectionType        : ReachabilityService.shared.status,
