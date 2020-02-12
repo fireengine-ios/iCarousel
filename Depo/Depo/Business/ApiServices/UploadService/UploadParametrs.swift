@@ -33,11 +33,15 @@ class Upload: UploadRequestParametrs {
     
     private let isFavorite: Bool
     
-    private var uploadType: UploadType?
+    private var fileUploadType: UploadType?
     
 //    var contentLenght: String {
 //        return String(format: "%lu", item.fileSize)
 //    }
+    
+    var uploadType: UploadType? {
+        return fileUploadType
+    }
     
     var fileName: String {
         return item.name ?? "unknown"
@@ -69,7 +73,7 @@ class Upload: UploadRequestParametrs {
         self.uploadStrategy = uploadStategy
         self.uploadTo = uploadTo
         self.destitantionURL = destitantion
-        self.uploadType = uploadType
+        self.fileUploadType = uploadType
         self.isFavorite = isFavorite
 
         if item.isLocalItem {
