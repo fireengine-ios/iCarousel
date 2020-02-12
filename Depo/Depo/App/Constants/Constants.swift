@@ -1057,7 +1057,7 @@ struct TextConstants {
     static let fullQuotaSmallPopUpSecondButtonTitle = NSLocalizedString("LifeboxSmallPopUpSecondButtonText", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let lifeboxLargePopUpTitle100 = NSLocalizedString("LifeboxLargePopUpTitle100", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let LifeboxLargePopUpTitleBetween80And99 = NSLocalizedString("LifeboxLargePopUpTitleBetween80And99", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lifeboxLargePopUpTitleBetween80And99 = NSLocalizedString("LifeboxLargePopUpTitleBetween80And99", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let lifeboxLargePopUpSubTitle = NSLocalizedString("LifeboxLargePopUpSubTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let lifeboxLargePopUpExpandButtonTitle = NSLocalizedString("LifeboxLargePopUpExpandButtonTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let lifeboxLargePopUpSkipButtonTitle = NSLocalizedString("LifeboxLargePopUpSkipButtonTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

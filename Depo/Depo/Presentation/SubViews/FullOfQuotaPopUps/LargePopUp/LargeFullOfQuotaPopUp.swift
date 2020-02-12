@@ -176,7 +176,7 @@ extension LargeFullOfQuotaPopUp {
         switch type {
         case .LargeFullOfQuotaPopUpTypeBetween80And99(let usagePercentage):
             let percentage = (usagePercentage * 100).rounded(.toNearestOrAwayFromZero)
-            return String(format: TextConstants.LifeboxLargePopUpTitleBetween80And99, percentage)
+            return String(format: TextConstants.lifeboxLargePopUpTitleBetween80And99, percentage)
         case .LargeFullOfQuotaPopUpType100:
             return TextConstants.lifeboxLargePopUpTitle100
             
