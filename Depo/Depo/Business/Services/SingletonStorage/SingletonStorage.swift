@@ -84,12 +84,10 @@ class SingletonStorage {
             }
             
             switch value {
-            case "NON_OVER_QUOTA":
+            case .nonOverQuota:
                 storageVars.largeFullOfQuotaPopUpShowType100 = false
-            case "OVER_QUOTA_FREEMIUM", "OVER_QUOTA_PREMIUM" :
+            case .overQuotaFreemium, .overQuotaPremium :
                 storageVars.largeFullOfQuotaPopUpShowType100 = true
-            default:
-                assertionFailure("Unknown value: \(value)")
             }
             
             completion()
