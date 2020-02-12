@@ -416,9 +416,10 @@ class AuthenticationService: BaseRequestService {
     
     private func accountReadOnlyPopUpHandler(headers:[String: Any], completion: @escaping VoidHandler) {
         guard let accountStatus = headers[HeaderConstant.accountStatus] as? String,
-            accountStatus.uppercased() == ErrorResponseText.accountReadOnly else {
-            completion()
-            return
+            accountStatus.uppercased() == ErrorResponseText.accountReadOnly
+            else {
+                completion()
+                return
         }
         
         SingletonStorage.shared.getOverQuotaStatus {
