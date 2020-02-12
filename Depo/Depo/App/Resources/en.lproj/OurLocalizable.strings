@@ -1492,6 +1492,6 @@
 "restore_folders_success_text" = "Folder(s) restored successfully.";
 
 "full_quota_warning_popup_title" = "You have reached your lifebox memory limit.";
-"full_quota_warning_popup_description" = "You have reached your lifebox memory limit.";
+"full_quota_warning_popup_description" = "You can expand your storage or delete unnecessary items lorem ipsum dolor sit amet consecitur.";
 "expand_my_storage" = "Expand My Storage";
 "delete_files" = "Delete Files";
