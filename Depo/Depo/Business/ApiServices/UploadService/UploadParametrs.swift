@@ -33,15 +33,13 @@ class Upload: UploadRequestParametrs {
     
     private let isFavorite: Bool
     
-    private var fileUploadType: UploadType?
+//    private var fileUploadType: UploadType?
     
 //    var contentLenght: String {
 //        return String(format: "%lu", item.fileSize)
 //    }
     
-    var uploadType: UploadType? {
-        return fileUploadType
-    }
+    var uploadType: UploadType?
     
     var fileName: String {
         return item.name ?? "unknown"
@@ -68,12 +66,11 @@ class Upload: UploadRequestParametrs {
     init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) {
         
         self.item = item
-        //self.uploadType = uploadType
+        self.uploadType = uploadType
         self.rootFolder = rootFolder
         self.uploadStrategy = uploadStategy
         self.uploadTo = uploadTo
         self.destitantionURL = destitantion
-        self.fileUploadType = uploadType
         self.isFavorite = isFavorite
 
         if item.isLocalItem {
@@ -86,8 +83,6 @@ class Upload: UploadRequestParametrs {
     var requestParametrs: Any {
         return Data()
     }
-    
-   
     
     var header: RequestHeaderParametrs {
         var header = RequestHeaders.authification()
