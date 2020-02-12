@@ -132,7 +132,7 @@ enum ElementTypes {
                 result = [.select, .shareAlbum, .download, .removeAlbum, .albumDetails]  + ElementTypes.activeState
                 
             case .selectionMode:
-                result = [.createStory]
+                result = [.createStory, .addToFavorites, .removeFromFavorites]
                 if Device.isTurkishLocale {
                     result.append(.print)
                 }
