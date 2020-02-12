@@ -114,10 +114,8 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         close(isFinalStep: false) { [weak self] in
             self?.delegate?.onDeleteFilesTap()
             
-            guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
-                return
-            }
-            tabBarVC.showPhotoScreen()
+            let router = RouterVC()
+            router.tabBarController?.showPhotoScreen()
         }
     }
     
