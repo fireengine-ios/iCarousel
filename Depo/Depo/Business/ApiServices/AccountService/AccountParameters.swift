@@ -13,6 +13,7 @@ struct AccountPath {
     
     static let info = accountBase + "info"
     static let quota = accountBase + "quotaInfo"
+    static let overQuotaStatus = accountBase + "overQuotaStatus"
     static let usages = accountBase + "usages"
     static let provision = accountBase + "provision"
     static let profilePhoto = accountBase + "profilePhoto"
@@ -128,6 +129,22 @@ class LanguageListChange: BaseRequestParametrs {
 class QuotaInfo: BaseRequestParametrs {
     override var patch: URL {
         return URL(string: AccountPath.quota, relativeTo: super.patch)!
+    }
+}
+
+class OverQuotaStatus: BaseRequestParametrs {
+    let showPopUp: Bool?
+    
+    init(showPopUp: Bool? = true) {
+        self.showPopUp = showPopUp
+    }
+    
+    override var requestParametrs: Any {
+         return ["showPopup": showPopUp]
+    }
+    
+    override var patch: URL {
+        return URL(string: AccountPath.overQuotaStatus, relativeTo: super.patch)!
     }
 }
 

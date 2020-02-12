@@ -134,7 +134,7 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
         accountWarningService?.openEmptyEmail(successHandler: onSuccess)
     }
     
-    private func verifyProcess() {
+    private func verifyProcess(_ accountReadOnly: Bool = false) {
         SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
             guard let self = self else {
                 return
@@ -143,7 +143,14 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
             CacheManager.shared.actualizeCache()
             MenloworksAppEvents.onLogin()
             
-            self.output.verificationSucces()
+            if accountReadOnly {
+                SingletonStorage.shared.getOverQuotaStatus {
+                    self.output.verificationSucces()
+                }
+                
+            } else {
+                self.output.verificationSucces()
+            }
             
             self.analyticsService.trackCustomGAEvent(eventCategory: .twoFactorAuthentication,
                                                      eventActions: self.challenge.challengeType.GAAction,
@@ -207,6 +214,14 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
         return accountStatus.uppercased() == ErrorResponseText.accountDeleted
     }
     
+    private func hasAccountReadOnly(headers: [String: Any]) -> Bool {
+        guard let accountStatus = headers[HeaderConstant.accountStatus] as? String else {
+            return false
+        }
+        
+        return accountStatus.uppercased() == ErrorResponseText.accountReadOnly
+    }
+    
     private func proccessLoginHeaders(headers: [String: Any]) {
         var handler: VoidHandler?
         if let accountWarning = headers[HeaderConstant.accountWarning] as? String {
@@ -222,11 +237,15 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
             } else if self.hasAccountWarning(accountWarning: accountWarning) {
                 output.verificationFailed(with: accountWarning)
                 return
+            } else if self.hasAccountReadOnly(headers: headers) {
+                self.verifyProcess(true)
             }
         } else if self.hasAccountDeletedStatus(headers: headers) {
             handler = { [weak self] in
                 self?.verifyProcess()
             }
+        } else if self.hasAccountReadOnly(headers: headers) {
+                self.verifyProcess(true)
         }
         
         if let handler = handler {

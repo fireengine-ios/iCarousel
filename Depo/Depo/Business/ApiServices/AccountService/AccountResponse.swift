@@ -202,6 +202,21 @@ class QuotaInfoResponse: ObjectRequestResponse {
     }
 }
 
+class OverQuotaStatusResponse: ObjectRequestResponse {
+    private enum ResponseKey {
+        static let status = "status"
+        static let value = "value"
+    }
+    
+    var status: String?
+    var value: String?
+    
+    override func mapping() {
+        status = json?[ResponseKey.status].string
+        value = json?[ResponseKey.value].string
+    }
+}
+
 class LanguageListResponse: ObjectRequestResponse {
     override func mapping() {
     }

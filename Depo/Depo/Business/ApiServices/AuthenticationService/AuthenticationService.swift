@@ -321,18 +321,6 @@ class AuthenticationService: BaseRequestService {
                             self?.tokenStorage.refreshToken = refreshToken
                         }
                         
-                        /// must be after accessToken save logic
-                        if let accountWarning = headers[HeaderConstant.accountWarning] as? String,
-                            accountWarning == HeaderConstant.emptyMSISDN ||
-                            accountWarning == HeaderConstant.emptyEmail {
-                            sucess?(headers)
-                            return
-                        } else if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
-                            accountStatus.uppercased() == ErrorResponseText.accountDeleted {
-                            sucess?(headers)
-                            return
-                        }
-                        
                         if self?.tokenStorage.refreshToken == nil {
                             let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
                             fail?(ErrorResponse.error(error))
@@ -360,12 +348,15 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
                         
-                        SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                             CacheManager.shared.actualizeCache()
                             
                             SingletonStorage.shared.isTwoFactorAuthEnabled = false
                             
-                            sucess?(headers)
+                            self?.warningPopUpHandler(headers: headers, completion: {
+                                sucess?(headers)
+                            })
+                            
                             MenloworksAppEvents.onLogin()
                         }, fail: { error in
                             fail?(error)
@@ -394,9 +385,11 @@ class AuthenticationService: BaseRequestService {
                 let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
-                SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                     CacheManager.shared.actualizeCache()
-                    sucess?()
+                    self?.warningPopUpHandler(headers: headers, completion: {
+                        sucess?()
+                    })
                 }, fail: { error in
                     fail?(error)
                 })
@@ -407,6 +400,31 @@ class AuthenticationService: BaseRequestService {
         case .failure(let error):
             fail?(ErrorResponse.error(error))
         }
+    }
+    
+    private func warningPopUpHandler(headers:[String: Any], completion: @escaping VoidHandler) {
+        if let accountWarning = headers[HeaderConstant.accountWarning] as? String,
+            accountWarning == HeaderConstant.emptyMSISDN ||
+                accountWarning == HeaderConstant.emptyEmail {
+            completion()
+            return
+        } else if let accountStatus = (headers[HeaderConstant.accountStatus] as? String)?.uppercased() {
+            
+            switch accountStatus {
+            case ErrorResponseText.accountDeleted:
+                completion()
+            case ErrorResponseText.accountReadOnly:
+                SingletonStorage.shared.getOverQuotaStatus {
+                    completion()
+                }
+            default:
+                completion()
+            break
+            }
+            return
+            
+        }
+        
     }
     
     // MARK: - Authentication
