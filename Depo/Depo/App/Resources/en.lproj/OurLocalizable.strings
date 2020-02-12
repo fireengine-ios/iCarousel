@@ -1490,3 +1490,8 @@
 "restore_items_success_text" = "Item(s) restored successfully.";
 "restore_albums_success_text" = "Album(s) restored successfully.";
 "restore_folders_success_text" = "Folder(s) restored successfully.";
+
+"full_quota_warning_popup_title" = "You have reached your lifebox memory limit.";
+"full_quota_warning_popup_description" = "You have reached your lifebox memory limit.";
+"expand_my_storage" = "Expand My Storage";
+"delete_files" = "Delete Files";

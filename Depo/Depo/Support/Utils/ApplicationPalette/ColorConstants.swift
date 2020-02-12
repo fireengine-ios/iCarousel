@@ -156,6 +156,10 @@ extension UIColor {
     class var lrLightBrownishGrey: UIColor {
         return UIColor(red: 151 / 255.0, green: 151 / 255.0, blue: 151 / 255.0, alpha: 1.0)
     }
+    
+    class var lrPeach: UIColor {
+        return UIColor(red: 254.0 / 255.0, green: 171.0 / 255.0, blue: 143.0 / 255.0, alpha: 1.0)
+    }
 }
 
 // Text Font

@@ -1690,4 +1690,10 @@ struct TextConstants {
     static let restoreItemsSuccessText = NSLocalizedString("restore_items_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let restoreAlbumsSuccessText = NSLocalizedString("restore_albums_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let restoreFoldersSuccessText = NSLocalizedString("restore_folders_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //MARK: - FullQuotaWarningPopUp
+    static let fullQuotaWarningPopUpTitle = NSLocalizedString("full_quota_warning_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fullQuotaWarningPopUpDescription = NSLocalizedString("full_quota_warning_popup_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let expandMyStorage = NSLocalizedString("expand_my_storage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteFiles = NSLocalizedString("delete_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

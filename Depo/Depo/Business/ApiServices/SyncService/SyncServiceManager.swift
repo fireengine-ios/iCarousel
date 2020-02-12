@@ -344,21 +344,8 @@ extension SyncServiceManager: ItemSyncServiceDelegate {
 
 extension SyncServiceManager {
     fileprivate func showOutOfSpaceAlert() {
-        let controller = PopUpController.with(title: TextConstants.syncOutOfSpaceAlertTitle,
-                                              message: TextConstants.syncOutOfSpaceAlertText,
-                                              image: .none,
-                                              firstButtonTitle: TextConstants.syncOutOfSpaceAlertCancel,
-                                              secondButtonTitle: TextConstants.upgrade,
-                                              secondAction: { vc in
-                                                vc.close(completion: {
-                                                    let router = RouterVC()
-                                                    if router.navigationController?.presentedViewController != nil {
-                                                        router.pushOnPresentedView(viewController: router.packages)
-                                                    } else {
-                                                        router.pushViewController(viewController: router.packages)
-                                                    }
-                                                })
-        })
+        let controller = FullQuotaWarningPopUp()
+        
         DispatchQueue.toMain {
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
         }
