@@ -321,6 +321,18 @@ class AuthenticationService: BaseRequestService {
                             self?.tokenStorage.refreshToken = refreshToken
                         }
                         
+                        /// must be after accessToken save logic
+                        if let accountWarning = headers[HeaderConstant.accountWarning] as? String,
+                            accountWarning == HeaderConstant.emptyMSISDN ||
+                            accountWarning == HeaderConstant.emptyEmail {
+                            sucess?(headers)
+                            return
+                        } else if let accountStatus = headers[HeaderConstant.accountStatus] as? String,
+                            accountStatus.uppercased() == ErrorResponseText.accountDeleted {
+                            sucess?(headers)
+                            return
+                        }
+                        
                         if self?.tokenStorage.refreshToken == nil {
                             let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
                             fail?(ErrorResponse.error(error))
@@ -353,7 +365,7 @@ class AuthenticationService: BaseRequestService {
                             
                             SingletonStorage.shared.isTwoFactorAuthEnabled = false
                             
-                            self?.warningPopUpHandler(headers: headers, completion: {
+                            self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
                                 sucess?(headers)
                             })
                             
@@ -387,7 +399,7 @@ class AuthenticationService: BaseRequestService {
                 self.tokenStorage.refreshToken = refreshToken
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                     CacheManager.shared.actualizeCache()
-                    self?.warningPopUpHandler(headers: headers, completion: {
+                    self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
                         sucess?()
                     })
                 }, fail: { error in
@@ -402,29 +414,15 @@ class AuthenticationService: BaseRequestService {
         }
     }
     
-    private func warningPopUpHandler(headers:[String: Any], completion: @escaping VoidHandler) {
-        if let accountWarning = headers[HeaderConstant.accountWarning] as? String,
-            accountWarning == HeaderConstant.emptyMSISDN ||
-                accountWarning == HeaderConstant.emptyEmail {
+    private func accountReadOnlyPopUpHandler(headers:[String: Any], completion: @escaping VoidHandler) {
+        guard let accountStatus = headers[HeaderConstant.accountStatus] as? String, accountStatus.uppercased() == ErrorResponseText.accountReadOnly else {
             completion()
             return
-        } else if let accountStatus = (headers[HeaderConstant.accountStatus] as? String)?.uppercased() {
-            
-            switch accountStatus {
-            case ErrorResponseText.accountDeleted:
-                completion()
-            case ErrorResponseText.accountReadOnly:
-                SingletonStorage.shared.getOverQuotaStatus {
-                    completion()
-                }
-            default:
-                completion()
-            break
-            }
-            return
-            
         }
         
+        SingletonStorage.shared.getOverQuotaStatus {
+            completion()
+        }
     }
     
     // MARK: - Authentication
