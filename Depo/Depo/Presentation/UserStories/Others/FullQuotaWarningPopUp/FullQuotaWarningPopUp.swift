@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FullQuotaWarningPopUp: BasePopUpController {
+final class FullQuotaWarningPopUp: BasePopUpController {
 
     //MARK: IBOutlets
     @IBOutlet private weak var popUpView: UIView! {
@@ -73,6 +73,7 @@ class FullQuotaWarningPopUp: BasePopUpController {
         }
     }
     
+    //MARK: Init
     init() {
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overFullScreen
@@ -106,15 +107,8 @@ class FullQuotaWarningPopUp: BasePopUpController {
     
     @IBAction private func onDeleteFilesTap(_ sender: UIButton) {
         close {
-            let index = TabScreenIndex.photosScreenIndex.rawValue
             let router = RouterVC()
-            guard
-                let tabBarController = router.tabBarController,
-                let item = tabBarController.tabBar.items?[safe: index],
-                tabBarController.selectedIndex != index
-            else { return }
-            tabBarController.selectedIndex = index
-            tabBarController.tabBar.selectedItem = item
+            router.tabBarController?.showPhotoScreen()
         }
     }
 }
