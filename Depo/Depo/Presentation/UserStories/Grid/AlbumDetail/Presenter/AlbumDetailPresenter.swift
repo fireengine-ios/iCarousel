@@ -12,10 +12,6 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
-    func operationStarted(type: ElementTypes) {
-        
-    }
-    
     override func operationFinished(withType type: ElementTypes, response: Any?) {
         debugLog("AlbumDetailPresenter operationFinished")
 

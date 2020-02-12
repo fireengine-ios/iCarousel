@@ -47,6 +47,10 @@ final class ReachabilityService: ReachabilityProtocol {
         return self.reachability?.connection.description ?? Reachability.Connection.unavailable.description
     }
     
+    var connectionType: Reachability.Connection {
+        return self.reachability?.connection ?? .unavailable
+    }
+    
     let delegates = MulticastDelegate<ReachabilityServiceDelegate>()
     
     private var updatingApiStatus = false

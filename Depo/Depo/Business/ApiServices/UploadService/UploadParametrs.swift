@@ -37,6 +37,8 @@ class Upload: UploadRequestParametrs {
 //        return String(format: "%lu", item.fileSize)
 //    }
     
+    let uploadType: UploadType?
+    
     var fileName: String {
         return item.name ?? "unknown"
     }
@@ -59,15 +61,14 @@ class Upload: UploadRequestParametrs {
     
     let tmpUUId: String
     
-    init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool) {
+    init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) {
         
         self.item = item
-        //self.uploadType = uploadType
+        self.uploadType = uploadType
         self.rootFolder = rootFolder
         self.uploadStrategy = uploadStategy
         self.uploadTo = uploadTo
         self.destitantionURL = destitantion
-
         self.isFavorite = isFavorite
 
         if item.isLocalItem {
@@ -81,8 +82,6 @@ class Upload: UploadRequestParametrs {
         return Data()
     }
     
-   
-    
     var header: RequestHeaderParametrs {
         var header = RequestHeaders.authification()
         
@@ -94,7 +93,13 @@ class Upload: UploadRequestParametrs {
             assertionFailure(errorMessage)
         }
         
+        let appopriateUploadType = (uploadType == .autoSync) ? "AUTO_SYNC" : "MANUAL"
+        let lifecycleState = ApplicationStateHelper.shared.isBackground ? "BG": "FG"
+        
         header = header + [
+            HeaderConstant.connectionType        : ReachabilityService.shared.status,
+            HeaderConstant.uploadType            : appopriateUploadType,
+            HeaderConstant.applicationLifecycleState : lifecycleState,
             HeaderConstant.ContentType           : item.uploadContentType,
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
             HeaderConstant.objecMetaDevice       : UIDevice.current.identifierForVendor?.uuidString ?? "",

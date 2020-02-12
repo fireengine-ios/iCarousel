@@ -24,7 +24,7 @@ final class ThingsService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getThingsAlbum(id: Int, status: ItemStatus, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
+    func getThingsAlbum(id: Int, status: ItemStatus, success:@escaping AlbumOperationResponse, fail:@escaping FailResponse) {
         debugLog("ThingsService getThingsAlbumWithID")
         
         let param = ThingsAlbumParameters(id: id, status: status)

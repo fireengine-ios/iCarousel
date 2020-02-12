@@ -48,8 +48,8 @@ final class TrashBinRouter {
         router.pushViewController(viewController: controller)
     }
     
-    func openInfo(item: Item, delegate: FileInfoModuleOutput?) {
-        let controller = router.fileInfo(item: item, moduleOutput: delegate)
+    func openInfo(item: Item) {
+        let controller = router.fileInfo(item: item)
         router.pushViewController(viewController: controller)
     }
 }

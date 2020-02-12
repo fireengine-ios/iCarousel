@@ -324,7 +324,7 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
         guard let item = item else {
             return
         }
-        router.openInfo(item: item, delegate: self)
+        router.openInfo(item: item)
     }
 }
 
@@ -365,6 +365,13 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         return object === self
+    }
+    
+    func didRenameItem(_ item: BaseDataSourceItem) {
+        guard let item = item as? Item else {
+            return
+        }
+        dataSource.updateItem(item)
     }
     
     //MARK: Move to trash events
@@ -430,7 +437,6 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(items: [Item]) {
-        stopSelectionState()
         reloadAlbums()
         dataSource.remove(items: items) { [weak self] in
             self?.checkEmptyView()
@@ -438,8 +444,6 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(albums: [BaseDataSourceItem]) {
-        stopSelectionState()
-        
         if albums.isEmpty {
             return
         }
@@ -483,6 +487,7 @@ extension TrashBinViewController: MoreFilesActionsInteractorOutput {
     }
     
     func operationStarted(type: ElementTypes) {
+        stopSelectionState()
         startAsyncOperation()
     }
     
@@ -498,14 +503,5 @@ extension TrashBinViewController: MoreFilesActionsInteractorOutput {
         if let message = errorMessage {
             UIApplication.showErrorAlert(message: message)
         }
-    }
-}
-
-extension TrashBinViewController: FileInfoModuleOutput {
-    func didRenameItem(_ item: BaseDataSourceItem) {
-        guard let item = item as? Item else {
-            return
-        }
-        dataSource.updateItem(item)
     }
 }

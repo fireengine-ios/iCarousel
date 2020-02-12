@@ -55,6 +55,8 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func filesMoved(items: [Item], toFolder folderUUID: String)
     
+    func didRenameItem(_ item: BaseDataSourceItem)
+    
     func syncFinished()
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool
@@ -87,15 +89,21 @@ protocol ItemOperationManagerViewProtocol: class {
 }
 
 extension ItemOperationManagerViewProtocol {
-    func startUploadFile(file: WrapData) {}
+    func startUploadFile(file: WrapData) {
+        UIApplication.setIdleTimerDisabled(true)
+    }
     
-    func startUploadFilesToAlbum(files: [WrapData]) {}
+    func startUploadFilesToAlbum(files: [WrapData]) {
+        UIApplication.setIdleTimerDisabled(true)
+    }
     
     func setProgressForUploadingFile(file: WrapData, progress: Float) {}
     
     func finishedUploadFile(file: WrapData) {}
     
-    func cancelledUpload(file: WrapData) {}
+    func cancelledUpload(file: WrapData) {
+        UIApplication.setIdleTimerDisabled(true)
+    }
     
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {}
     
@@ -131,9 +139,15 @@ extension ItemOperationManagerViewProtocol {
     
     func filesMoved(items: [Item], toFolder folderUUID: String) {}
     
-    func syncFinished() {}
+    func didRenameItem(_ item: BaseDataSourceItem) {}
     
-    func finishUploadFiles() {}
+    func syncFinished() {
+        UIApplication.setIdleTimerDisabled(false)
+    }
+    
+    func finishUploadFiles() {
+        UIApplication.setIdleTimerDisabled(false)
+    }
     
     func didHideItems(_ items: [WrapData]) {}
     func didHideAlbums(_ albums: [AlbumItem]) {}
@@ -346,6 +360,12 @@ class ItemOperationManager: NSObject {
     func filesMoved(items: [Item], toFolder folderUUID: String) {
         DispatchQueue.main.async {
             self.views.invoke { $0.filesMoved(items: items, toFolder: folderUUID) }
+        }
+    }
+    
+    func didRenameItem(_ item: BaseDataSourceItem) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didRenameItem(item) }
         }
     }
     

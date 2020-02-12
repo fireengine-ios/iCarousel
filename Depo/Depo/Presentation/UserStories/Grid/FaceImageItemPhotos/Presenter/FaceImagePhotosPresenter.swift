@@ -50,18 +50,8 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         }
     }
     
-    override func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {
-        if let interactor = interactor as? FaceImagePhotosInteractor,
-            let id = item.id {
-            
-            if item is PeopleItem {
-                interactor.deletePhotosFromPeopleAlbum(items: items, id: id)
-            } else if item is ThingsItem {
-                interactor.deletePhotosFromThingsAlbum(items: items, id: id)
-            } else if item is PlacesItem {
-                interactor.deletePhotosFromPlacesAlbum(items: items, id: id)
-            }
-        }
+    override func getFIRParent() -> Item? {
+        return item
     }
     
     override func operationFinished(withType type: ElementTypes, response: Any?) {
@@ -240,12 +230,6 @@ extension FaceImagePhotosPresenter: FaceImagePhotosInteractorOutput {
     func didCountImage(_ count: Int) {
         if let view = view as? FaceImagePhotosViewInput {
             view.setCountImage("\(count) \(TextConstants.faceImagePhotos)")
-        }
-    }
-    
-    func didRemoveFromAlbum(completion: @escaping (() -> Void)) {
-        if let router = router as? FaceImagePhotosRouterInput {
-            router.showRemoveFromAlbum(completion: completion)
         }
     }
     

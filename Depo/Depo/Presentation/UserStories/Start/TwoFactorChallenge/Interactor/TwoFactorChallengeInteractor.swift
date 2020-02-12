@@ -96,7 +96,6 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
                 case .success(let result):
                     //TODO: NETMERA how do we log login here?
                     self?.proccessLoginHeaders(headers: result)
-
                 case .failed(let error):
                     let errorText = error.localizedDescription
                     self?.output.verificationFailed(with: errorText)
