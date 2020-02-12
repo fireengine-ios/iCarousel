@@ -36,6 +36,7 @@ final class MyStorageViewController: BaseViewController {
         didSet {
             packagesLabel.text = TextConstants.packagesIHave
             packagesLabel.textColor = ColorConstants.darkText
+            packagesLabel.adjustsFontSizeToFitWidth()
             packagesLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
         }
     }
