@@ -1059,11 +1059,11 @@ struct TextConstants {
     static let fullQuotaSmallPopUpSecondButtonTitle = NSLocalizedString("LifeboxSmallPopUpSecondButtonText", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let lifeboxLargePopUpTitle100 = NSLocalizedString("LifeboxLargePopUpTitle100", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let lifeboxLargePopUpTitle90 = NSLocalizedString("LifeboxLargePopUpTitle90", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let lifeboxLargePopUpTitle80 = NSLocalizedString("LifeboxLargePopUpTitle80", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lifeboxLargePopUpTitleBetween80And99 = NSLocalizedString("LifeboxLargePopUpTitleBetween80And99", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let lifeboxLargePopUpSubTitle = NSLocalizedString("LifeboxLargePopUpSubTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let lifeboxLargePopUpExpandButtonTitle = NSLocalizedString("LifeboxLargePopUpExpandButtonTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let lifeboxLargePopUpSkipButtonTitle = NSLocalizedString("LifeboxLargePopUpSkipButtonTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lifeboxLargePopUpDeleteFilesButtonTitle = NSLocalizedString("LifeboxLargePopUpDeleteFilesButtonTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "") 
     static let periodContactSyncFromSettingsTitle = NSLocalizedString("Lifebox can sync your contacts automatically.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorLogin = NSLocalizedString("error_login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploading = NSLocalizedString("uploading", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
