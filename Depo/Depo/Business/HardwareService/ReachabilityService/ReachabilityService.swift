@@ -51,6 +51,17 @@ final class ReachabilityService: ReachabilityProtocol {
         return self.reachability?.connection ?? .unavailable
     }
     
+    var uploadConnectionTypeName: String {
+        switch connectionType {
+        case .wifi:
+            return "WIFI"
+        case .cellular:
+            return "MOBILE_NETWORK"
+        default:
+            return ""
+        }
+    }
+    
     let delegates = MulticastDelegate<ReachabilityServiceDelegate>()
     
     private var updatingApiStatus = false

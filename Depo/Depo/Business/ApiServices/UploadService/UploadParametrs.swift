@@ -95,14 +95,7 @@ class Upload: UploadRequestParametrs {
         
         let appopriateUploadType = (uploadType == .autoSync) ? "AUTO_SYNC" : "MANUAL"
         let lifecycleState = ApplicationStateHelper.shared.isBackground ? "BG": "FG"
-        let connectionStatus: String
-        if ReachabilityService.shared.connectionType == .wifi {
-            connectionStatus = "WIFI"
-        } else if ReachabilityService.shared.connectionType == .cellular {
-            connectionStatus = "MOBILE_NETWORK"
-        } else {
-            connectionStatus = ""
-        }
+        let connectionStatus = ReachabilityService.shared.uploadConnectionTypeName
 
         header = header + [
             HeaderConstant.connectionType        : connectionStatus,
