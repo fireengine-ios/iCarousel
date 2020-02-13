@@ -97,7 +97,7 @@ class Upload: UploadRequestParametrs {
         let lifecycleState = ApplicationStateHelper.shared.isBackground ? "BG": "FG"
         let connectionStatus: String
         if ReachabilityService.shared.connectionType == .wifi {
-            connectionStatus = "connectionStatus"
+            connectionStatus = "WIFI"
         } else if ReachabilityService.shared.connectionType == .cellular {
             connectionStatus = "MOBILE_NETWORK"
         } else {
