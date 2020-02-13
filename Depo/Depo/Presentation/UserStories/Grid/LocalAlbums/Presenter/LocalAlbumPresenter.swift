@@ -24,7 +24,9 @@ class LocalAlbumPresenter: BaseFilesGreedPresenter {
         }
         
         saveItems = { [weak self] items in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             self.items = self.items.union(items)
         }
         
