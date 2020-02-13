@@ -165,6 +165,7 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
             
         } else if usagePercentage >= 1.0 && storageVars.largeFullOfQuotaPopUpShowType100 && !storageVars.largeFullOfQuotaPopUpCheckBox  {
             fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100
+            storageVars.largeFullOfQuotaPopUpShowType100 = false
         } else {
             fullOfQuotaPopUpType = nil
         }
