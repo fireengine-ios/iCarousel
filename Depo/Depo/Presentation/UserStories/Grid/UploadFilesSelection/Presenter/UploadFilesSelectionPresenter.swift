@@ -8,8 +8,8 @@
 
 class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelectionModuleInput, UploadFilesSelectionViewOutput {
 
-    var getOtherSelectedPhotos: (() -> (Set<BaseDataSourceItem>))?
-    var saveSelectedPhotos: ((Set<BaseDataSourceItem>) -> ())?
+    var getOtherSelectedPhotos: LocalAlbumPresenter.PassBaseDataSourceItemsHandler?
+    var saveSelectedPhotos: LocalAlbumPresenter.ReturnBaseDataSourceItemsHandler?
 
     init() {
         super.init(sortedRule: .timeDownWithoutSection)

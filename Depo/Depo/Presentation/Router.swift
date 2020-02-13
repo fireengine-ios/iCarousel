@@ -713,8 +713,8 @@ class RouterVC: NSObject {
     }
     
     func uploadPhotos(rootUUID: String,
-                      getItems: (() -> (Set<BaseDataSourceItem>))?,
-                      saveItems: ((Set<BaseDataSourceItem>) -> ())?) -> UIViewController {
+                      getItems: LocalAlbumPresenter.PassBaseDataSourceItemsHandler?,
+                      saveItems: LocalAlbumPresenter.ReturnBaseDataSourceItemsHandler?) -> UIViewController {
         let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController(rootUUID: rootUUID,
                                                                                                     getItems: getItems,
                                                                                                     saveItems: saveItems)

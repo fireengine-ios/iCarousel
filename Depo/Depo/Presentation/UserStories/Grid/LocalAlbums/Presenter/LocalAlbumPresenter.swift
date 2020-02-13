@@ -8,10 +8,13 @@
 
 class LocalAlbumPresenter: BaseFilesGreedPresenter {
     
+    typealias PassBaseDataSourceItemsHandler = () -> (Set<BaseDataSourceItem>)
+    typealias ReturnBaseDataSourceItemsHandler = (Set<BaseDataSourceItem>) -> ()
+
     private var items = Set<BaseDataSourceItem>()
     
-    var getItems: () -> (Set<BaseDataSourceItem>) = { return [] }
-    var saveItems: (Set<BaseDataSourceItem>) -> () = { _ in return }
+    var getItems: PassBaseDataSourceItemsHandler = { return [] }
+    var saveItems: ReturnBaseDataSourceItemsHandler = { _ in return }
 
     override func viewIsReady(collectionView: UICollectionView) {
         debugLog("LocalAlbumPresenter viewIsReady")
