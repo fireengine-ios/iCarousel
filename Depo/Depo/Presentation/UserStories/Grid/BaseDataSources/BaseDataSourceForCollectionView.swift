@@ -746,7 +746,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func registerCells() {
-        let registreList = [CollectionViewCellsIdsConstant.cellForImage,
+        let registerList = [CollectionViewCellsIdsConstant.cellForImage,
                             CollectionViewCellsIdsConstant.cellForStoryImage,
                             CollectionViewCellsIdsConstant.cellForVideo,
                             CollectionViewCellsIdsConstant.cellForAudio,
@@ -760,7 +760,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             CollectionViewCellsIdsConstant.cellForFaceImageAddName,
                             CollectionViewCellsIdsConstant.cellForInstapickPhoto]
         
-        registreList.forEach {
+        registerList.forEach {
             let listNib = UINib(nibName: $0, bundle: nil)
             collectionView?.register(listNib, forCellWithReuseIdentifier: $0)
         }
