@@ -2025,9 +2025,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        
-    }
+    func didMoveToTrashAlbums(_ albums: [AlbumItem]) { }
     
     private func needInsertItems(_ items: [Item]) {
         //Maybe need merge in the future
