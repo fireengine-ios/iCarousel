@@ -60,7 +60,7 @@ struct RouteRequests {
     
     static let baseContactsUrlShort: URL = {
         switch currentServerEnvironment {
-        case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/")!
+        case .test: return URL(string: "https://contactsynctest.turkcell.com.tr/")!
         case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/")!
         case .production: return URL(string: "https://contactsync.turkcell.com.tr/")!
         }
