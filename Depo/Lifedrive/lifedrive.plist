@@ -92,6 +92,8 @@
 	<true/>
 	<key>MenloPushServerURL</key>
 	<string>https://turkcell.menloworks.com</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
