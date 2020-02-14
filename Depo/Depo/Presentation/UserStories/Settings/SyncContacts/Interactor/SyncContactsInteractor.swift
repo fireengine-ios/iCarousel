@@ -21,6 +21,7 @@ enum SyncOperationErrors {
     case remoteServerError
     case networkError
     case internalError
+    case depoError
 }
 
 class SyncContactsInteractor: SyncContactsInteractorInput {

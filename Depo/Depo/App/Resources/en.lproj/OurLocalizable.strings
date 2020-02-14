@@ -690,6 +690,7 @@
 "month" = "Month";
 "no_details_message" = "We are processing your request. We will inform you when it is finished.";
 "please_try_again_later" = "Please try again later.";
+"dialog_contact_sync_vcf_file_upload_error" = "A problem occured during uploading vcf file to lifebox";
 "Back up with Original Quality" = "Back up in Original Quality";
 "Remove Duplicate Contacts from Your Directory" = "Remove Duplicate Contacts from Your Phone Directory";
 "Face Recognition to reach your loved one's memories" = "Face Recognition to reach your loved one's memories";

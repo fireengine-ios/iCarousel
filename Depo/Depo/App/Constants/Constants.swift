@@ -1163,6 +1163,7 @@ struct TextConstants {
     static let month = NSLocalizedString("month", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let noDetailsMessage = NSLocalizedString("no_details_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let serverErrorMessage = NSLocalizedString("please_try_again_later", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncDepoErrorMessage = NSLocalizedString("dialog_contact_sync_vcf_file_upload_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let backUpOriginalQuality = NSLocalizedString("Back up with Original Quality", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let removeDuplicateContacts = NSLocalizedString("Remove Duplicate Contacts from Your Directory", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
