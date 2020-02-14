@@ -68,6 +68,8 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
             view.showErrorAlert(message: TextConstants.errorManyContactsToBackUp)
         case .failed:
             view.showErrorAlert(message: TextConstants.serverErrorMessage)
+        case .depoError:
+            view.showErrorAlert(message: TextConstants.contactSyncDepoErrorMessage)
         default:
             // TODO: Error handling
             break
