@@ -144,6 +144,14 @@ final class UploadOperation: Operation {
                     return
                 }
                 
+                guard self.interruptedId != nil else {
+                    /// can't check resumable status because don't have any related interrupted id
+                    self.uploadContiniously(parameters: resumableParameters, success: success, fail: fail)
+                    
+                    self.defaults.interruptedResumableUploads[self.inputItem.getTrimmedLocalID()] = resumableParameters.tmpUUID
+                    return
+                }
+                
                 self.checkResumeStatus(parameters: resumableParameters) { [weak self] isFinished, bytesUploaded, error in
                     guard let self = self else {
                         fail(ErrorResponse.string(TextConstants.commonServiceError))
@@ -165,8 +173,6 @@ final class UploadOperation: Operation {
                         fail(ErrorResponse.string(TextConstants.commonServiceError))
                         return
                     }
-                    
-                    self.defaults.interruptedResumableUploads[self.inputItem.getTrimmedLocalID()] = resumableParameters.tmpUUID
                     
                     self.uploadContiniously(parameters: resumableParameters, chunk: nextChunk, success: success, fail: fail)
                 }
@@ -196,9 +202,13 @@ final class UploadOperation: Operation {
     }
     
     private func uploadContiniously(parameters: ResumableUpload, chunk: DataChunk? = nil, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
-        if let chunk = chunk {
-            parameters.update(chunk: chunk)
+        
+        guard let nextChunk = chunk != nil ? chunk : chunker?.nextChunk() else {
+            fail(ErrorResponse.string(TextConstants.commonServiceError))
+            return
         }
+        
+        parameters.update(chunk: nextChunk)
         
         requestObject = resumableUpload(uploadParam: parameters, handler: { [weak self] isFinished, bytesUploaded, error in
             guard let self = self else {
@@ -214,7 +224,7 @@ final class UploadOperation: Operation {
             if let error = error {
                 if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
                     self.retry { [weak self] in
-                        self?.uploadContiniously(parameters: parameters, chunk: chunk, success: success, fail: fail)
+                        self?.uploadContiniously(parameters: parameters, chunk: nextChunk, success: success, fail: fail)
                     }
                 } else {
                     fail(error)
@@ -222,14 +232,9 @@ final class UploadOperation: Operation {
                 return
             }
             
-            guard let nextChunk = self.chunker?.nextChunk() else {
-                fail(ErrorResponse.string(TextConstants.commonServiceError))
-                return
-            }
-            
             self.attemptsCount = 0
             self.showProgress(uploaded: nextChunk.range.upperBound)
-            self.uploadContiniously(parameters: parameters, chunk: nextChunk, success: success, fail: fail)
+            self.uploadContiniously(parameters: parameters, success: success, fail: fail)
         })
 
         ///If upload service can't create upload request task for some reason
