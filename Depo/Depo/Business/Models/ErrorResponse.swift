@@ -20,6 +20,7 @@ enum ErrorResponseText {
     static let serviceAnavailable = "503 Service Unavailable"
     static let resendCodeExceeded  = "EXCEEDED_RATE_LIMIT_FOR_SEND_CHALLENGE"
     static let accountDeleted = "DELETION_REQUESTED"
+    static let accountReadOnly = "READ_ONLY"
 }
 
 extension ErrorResponse {

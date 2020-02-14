@@ -202,6 +202,29 @@ class QuotaInfoResponse: ObjectRequestResponse {
     }
 }
 
+enum OverQuotaStatusValue: String {
+    case nonOverQuota = "NON_OVER_QUOTA"
+    case overQuotaFreemium = "OVER_QUOTA_FREEMIUM"
+    case overQuotaPremium = "OVER_QUOTA_PREMIUM"
+}
+
+final class OverQuotaStatusResponse: ObjectRequestResponse {
+    private enum ResponseKey {
+        static let status = "status"
+        static let value = "value"
+    }
+    
+    var status: String?
+    var value: OverQuotaStatusValue?
+    
+    override func mapping() {
+        status = json?[ResponseKey.status].string
+        if let valueString = json?[ResponseKey.value].string {
+            value = OverQuotaStatusValue(rawValue: valueString)
+        }
+    }
+}
+
 class LanguageListResponse: ObjectRequestResponse {
     override func mapping() {
     }

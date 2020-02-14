@@ -746,7 +746,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func registerCells() {
-        let registreList = [CollectionViewCellsIdsConstant.cellForImage,
+        let registerList = [CollectionViewCellsIdsConstant.cellForImage,
                             CollectionViewCellsIdsConstant.cellForStoryImage,
                             CollectionViewCellsIdsConstant.cellForVideo,
                             CollectionViewCellsIdsConstant.cellForAudio,
@@ -760,7 +760,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             CollectionViewCellsIdsConstant.cellForFaceImageAddName,
                             CollectionViewCellsIdsConstant.cellForInstapickPhoto]
         
-        registreList.forEach {
+        registerList.forEach {
             let listNib = UINib(nibName: $0, bundle: nil)
             collectionView?.register(listNib, forCellWithReuseIdentifier: $0)
         }
@@ -1729,12 +1729,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return
         }
         
-        //back if restore|delete items in trash bin folders
-        if delegate?.getStatus() == .trashed {
-            delegate?.needToBack()
-            return
-        }
-        
         dispatchQueue.async { [weak self] in
             guard let `self` = self, !items.isEmpty else {
                 return
@@ -2031,9 +2025,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        
-    }
+    func didMoveToTrashAlbums(_ albums: [AlbumItem]) { }
     
     private func needInsertItems(_ items: [Item]) {
         //Maybe need merge in the future

@@ -249,18 +249,30 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
     }
     
     func didMoveToTrashItems(_ items: [Item]) {
+        guard items.first?.status == .hidden else {
+            return
+        }
         backToOriginController()
     }
     
     func didMoveToTrashPeople(items: [PeopleItem]) {
+        guard items.first?.status == .hidden else {
+            return
+        }
         backToOriginController()
     }
     
     func didMoveToTrashThings(items: [ThingsItem]) {
+        guard items.first?.status == .hidden else {
+            return
+        }
         backToOriginController()
     }
     
     func didMoveToTrashPlaces(items: [PlacesItem]) {
+        guard items.first?.status == .hidden else {
+            return
+        }
         backToOriginController()
     }
     

@@ -146,7 +146,7 @@ final class UploadOperation: Operation {
                     return
             }
             
-            self.getUploadParameters(baseURL: baseURL, simple: true, success: { [weak self] parameters in
+            self.getUploadParameters(baseURL: baseURL, empty: true, success: { [weak self] parameters in
                 guard let self = self, let resumableParameters = parameters as? ResumableUpload else {
                     fail(ErrorResponse.string(TextConstants.commonServiceError))
                     return
@@ -290,7 +290,7 @@ final class UploadOperation: Operation {
                     fail(ErrorResponse.string(TextConstants.commonServiceError))
                     return
                 }
-                
+
                 self.clearingAction = { [weak self] in
                     self?.removeTemporaryFile(at: parameters.urlToLocalFile)
                 }
@@ -354,7 +354,7 @@ final class UploadOperation: Operation {
         }
     }
     
-    private func getUploadParameters(baseURL: URL, simple: Bool = false, success: @escaping UploadParametersResponse, fail: @escaping FailResponse) {
+    private func getUploadParameters(baseURL: URL, empty: Bool = false, success: @escaping UploadParametersResponse, fail: @escaping FailResponse) {
         dispatchQueue.async { [weak self] in
             guard let self = self else {
                 fail(ErrorResponse.string(TextConstants.errorUnknown))
@@ -365,20 +365,22 @@ final class UploadOperation: Operation {
             
             if self.isResumable {
                 parameters = ResumableUpload(item: self.inputItem,
-                                             simple: simple,
+                                             empty: empty,
                                              interruptedUploadId: self.interruptedId,
                                              destitantion: baseURL,
                                              uploadStategy: self.uploadStategy,
                                              uploadTo: self.uploadTo,
                                              rootFolder: self.folder,
-                                             isFavorite: self.isFavorites)
+                                             isFavorite: self.isFavorites,
+                                             uploadType: self.uploadType)
             } else {
                 parameters = SimpleUpload(item: self.inputItem,
                                           destitantion: baseURL,
                                           uploadStategy: self.uploadStategy,
                                           uploadTo: self.uploadTo,
                                           rootFolder: self.folder,
-                                          isFavorite: self.isFavorites)
+                                          isFavorite: self.isFavorites,
+                                          uploadType: self.uploadType)
             }
             
             

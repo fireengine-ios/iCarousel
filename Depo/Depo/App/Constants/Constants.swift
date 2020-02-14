@@ -953,6 +953,7 @@ struct TextConstants {
     
     static let packagesPolicyHeader = NSLocalizedString("PackagesPolicyHeader", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let packagesPolicyText = NSLocalizedString("PackagesPolicyText", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let packagesPolicyBilloText = NSLocalizedString("PackagesPolicyTextBillo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsOfUseLinkText = NSLocalizedString("TermsOfUseLinkText", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let feature = NSLocalizedString("Feature", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -1058,11 +1059,11 @@ struct TextConstants {
     static let fullQuotaSmallPopUpSecondButtonTitle = NSLocalizedString("LifeboxSmallPopUpSecondButtonText", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let lifeboxLargePopUpTitle100 = NSLocalizedString("LifeboxLargePopUpTitle100", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let lifeboxLargePopUpTitle90 = NSLocalizedString("LifeboxLargePopUpTitle90", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let lifeboxLargePopUpTitle80 = NSLocalizedString("LifeboxLargePopUpTitle80", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lifeboxLargePopUpTitleBetween80And99 = NSLocalizedString("LifeboxLargePopUpTitleBetween80And99", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let lifeboxLargePopUpSubTitle = NSLocalizedString("LifeboxLargePopUpSubTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let lifeboxLargePopUpExpandButtonTitle = NSLocalizedString("LifeboxLargePopUpExpandButtonTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let lifeboxLargePopUpSkipButtonTitle = NSLocalizedString("LifeboxLargePopUpSkipButtonTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let lifeboxLargePopUpDeleteFilesButtonTitle = NSLocalizedString("LifeboxLargePopUpDeleteFilesButtonTitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "") 
     static let periodContactSyncFromSettingsTitle = NSLocalizedString("Lifebox can sync your contacts automatically.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorLogin = NSLocalizedString("error_login", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploading = NSLocalizedString("uploading", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1640,12 +1641,21 @@ struct TextConstants {
     static let hiddenBinAlbumSliderEmpty = NSLocalizedString("hidden_bin_album_slider_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hiddenBinEmpty = NSLocalizedString("hidden_bin_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let hiddenBinNavBarTitle = NSLocalizedString("hidden_bin_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let unhidePopupText = NSLocalizedString("unhide_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let unhidePopupSuccessText = NSLocalizedString("unhide_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let deleteFromHiddenBinPopupSuccessTitle = NSLocalizedString("delete_from_hidden_bin_popup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteFromHiddenBinPopupSuccessText = NSLocalizedString("delete_from_hidden_bin_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let deleteConfirmationPopupText = NSLocalizedString("delete_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deletePopupSuccessText = NSLocalizedString("delete_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let restoreConfirmationPopupText = NSLocalizedString("restore_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restorePopupSuccessText = NSLocalizedString("restore_popup_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let unhideItemsPopupText = NSLocalizedString("unhide_items_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let unhideAlbumsPopupText = NSLocalizedString("unhide_albums_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deletePopupText = NSLocalizedString("delete_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let unhidePopupSuccessTitle = NSLocalizedString("unhide_popup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
-    static let deleteFromHiddenBinPopupSuccessTitle = NSLocalizedString("delete_from_hidden_bin_popup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let moveToTrashHiddenAlbumsConfirmationPopupText = NSLocalizedString("move_to_trash_hidden_albums_confirmation_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
@@ -1680,4 +1690,10 @@ struct TextConstants {
     static let restoreItemsSuccessText = NSLocalizedString("restore_items_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let restoreAlbumsSuccessText = NSLocalizedString("restore_albums_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let restoreFoldersSuccessText = NSLocalizedString("restore_folders_success_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //MARK: - FullQuotaWarningPopUp
+    static let fullQuotaWarningPopUpTitle = NSLocalizedString("full_quota_warning_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let fullQuotaWarningPopUpDescription = NSLocalizedString("full_quota_warning_popup_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let expandMyStorage = NSLocalizedString("expand_my_storage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteFiles = NSLocalizedString("delete_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

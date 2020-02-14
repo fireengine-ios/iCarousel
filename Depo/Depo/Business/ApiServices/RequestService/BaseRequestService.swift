@@ -32,6 +32,7 @@ protocol UploadRequestParametrs: RequestParametrs {
     var tmpUUID: String { get }
     var fileData: Data? { get }
     var fileName: String { get }
+    var uploadType: UploadType? { get }
 }
 
 protocol DownloadRequestParametrs: RequestParametrs {

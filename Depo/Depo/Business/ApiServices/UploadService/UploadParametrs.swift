@@ -22,20 +22,13 @@ class UploadBaseURL: BaseRequestParametrs {
 class SimpleUpload: UploadRequestParametrs {
     
     private let item: WrapData
-    
     private let uploadStrategy: MetaStrategy
-    
     private let uploadTo: MetaSpesialFolder
-    
-    let rootFolder: String
-    
     private let destitantionURL: URL
-    
     private let isFavorite: Bool
     
-//    var contentLenght: String {
-//        return String(format: "%lu", item.fileSize)
-//    }
+    let rootFolder: String
+    let uploadType: UploadType?
     
     var fileName: String {
         return item.name ?? "unknown"
@@ -59,15 +52,14 @@ class SimpleUpload: UploadRequestParametrs {
     
     let tmpUUID: String
     
-    init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool) {
+    init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) {
         
         self.item = item
-        //self.uploadType = uploadType
+        self.uploadType = uploadType
         self.rootFolder = rootFolder
         self.uploadStrategy = uploadStategy
         self.uploadTo = uploadTo
         self.destitantionURL = destitantion
-
         self.isFavorite = isFavorite
 
         if item.isLocalItem {
@@ -92,7 +84,14 @@ class SimpleUpload: UploadRequestParametrs {
             assertionFailure(errorMessage)
         }
         
+        let appopriateUploadType = (uploadType == .autoSync) ? "AUTO_SYNC" : "MANUAL"
+        let lifecycleState = ApplicationStateHelper.shared.isBackground ? "BG": "FG"
+        let connectionStatus = ReachabilityService.shared.uploadConnectionTypeName
+
         header = header + [
+            HeaderConstant.connectionType        : connectionStatus,
+            HeaderConstant.uploadType            : appopriateUploadType,
+            HeaderConstant.applicationLifecycleState : lifecycleState,
             HeaderConstant.ContentType           : item.uploadContentType,
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
             HeaderConstant.objecMetaDevice       : UIDevice.current.identifierForVendor?.uuidString ?? "",
@@ -121,16 +120,17 @@ class SimpleUpload: UploadRequestParametrs {
 }
 
 final class ResumableUpload: UploadRequestParametrs {
-
+    
     private let item: WrapData
     private let uploadStrategy: MetaStrategy
     private let uploadTo: MetaSpesialFolder
     private let destitantionURL: URL
     private let isFavorite: Bool
+    let uploadType: UploadType?
     
     private (set) var range = 0..<0
     private (set) var fileData: Data? = Data()
-    private var isSimple: Bool
+    private var isEmpty: Bool
     
     let rootFolder: String
     let tmpUUID: String
@@ -147,15 +147,16 @@ final class ResumableUpload: UploadRequestParametrs {
     }
 
     
-    init(item: WrapData, simple: Bool, interruptedUploadId: String?, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool) {
+    init(item: WrapData, empty: Bool, interruptedUploadId: String?, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) {
         
         self.item = item
         self.rootFolder = rootFolder
         self.uploadStrategy = uploadStategy
         self.uploadTo = uploadTo
         self.destitantionURL = destitantion
-        self.isSimple = simple
+        self.isEmpty = empty
         self.isFavorite = isFavorite
+        self.uploadType = uploadType
 
         if let previousUploadId = interruptedUploadId {
             self.tmpUUID = previousUploadId
@@ -166,7 +167,6 @@ final class ResumableUpload: UploadRequestParametrs {
                 self.tmpUUID = UUID().uuidString
             }
         }
-        
     }
     
     var requestParametrs: Any {
@@ -191,7 +191,7 @@ final class ResumableUpload: UploadRequestParametrs {
             HeaderConstant.ContentLength : "0"
         ]
         
-        guard !isSimple else {
+        guard !isEmpty else {
             return header
         }
         
@@ -227,7 +227,7 @@ final class ResumableUpload: UploadRequestParametrs {
     func update(chunk: DataChunk) {
         fileData = chunk.data
         range = chunk.range
-        isSimple = false
+        isEmpty = false
     }
 }
 

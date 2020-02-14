@@ -51,7 +51,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             if let index = items.firstIndex(where: { $0.getLocalID() == localId }) {
                 selectedIndex = index
             }
-        } else if let index = items.firstIndex(where: { $0.id != nil && $0.id == fileObject.id }) {
+        } else if let index = items.firstIndex(where: { $0.uuid == fileObject.uuid }) {
             selectedIndex = index
         }
         

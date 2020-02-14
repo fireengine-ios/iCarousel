@@ -32,15 +32,18 @@ final class StickerCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    private var gifURL: URL?
+    
     func setup(with object: SmashStickerResponse, type: AttachedEntityType) {
         previewImageView.image = nil
         previewImageView.sd_cancelCurrentImageLoad()
         previewImageView.sd_setImage(with: object.thumbnailPath, completed: nil)
         stickerType = type
+        type == .gif ? gifURL = object.path : nil
     }
     
-    func setupGif(image: UIImage) {
-        if stickerType == .gif {
+    func setupGif(image: UIImage, url: URL) {
+        if stickerType == .gif, gifURL == url {
             previewImageView.image = image
         }
     }

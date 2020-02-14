@@ -669,17 +669,9 @@ final class UploadService: BaseRequestService {
     /**
     Check if
     - parameter uploadParam: ResumableUpload.
-     If simple == true - just resumable upload status will be checked without any data uploading
+     If empty == true, just resumable upload status will be checked without any data uploading
      
     - parameter handler: ResumableUploadHandler.
-     
-     uploadedBytes == 0 means no bytes were uploaded
-     
-     uploadedBytes > 0 means upperBound of an uploaded range
-     
-     uploadedBytes == -1 means upload must be started from the beginning
-     
-     uploadedBytes == -2 means check resumable status again
      
     - returns: URLSessionTask
     */
@@ -846,7 +838,7 @@ extension UploadService {
     
     fileprivate func logEvent(_ message: String) {
         DispatchQueue.main.async {
-            if UIApplication.shared.applicationState == .background {
+            if ApplicationStateHelper.shared.isBackground {
                 debugLog("Upload Service Background sync \(message)")
             } else {
                 debugLog("Upload Service \(message)")
