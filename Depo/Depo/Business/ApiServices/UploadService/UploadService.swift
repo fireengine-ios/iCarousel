@@ -666,43 +666,86 @@ final class UploadService: BaseRequestService {
         return request
     }
     
+    /**
+    Check if
+    - parameter uploadParam: ResumableUpload.
+     If simple == true - just resumable upload status will be checked without any data uploading
+     
+    - parameter handler: ResumableUploadHandler.
+     
+     uploadedBytes == 0 means no bytes were uploaded
+     
+     uploadedBytes > 0 means upperBound of an uploaded range
+     
+     uploadedBytes == -1 means upload must be started from the beginning
+     
+     uploadedBytes == -2 means check resumable status again
+     
+    - returns: URLSessionTask
+    */
     func resumableUpload(uploadParam: ResumableUpload, handler: @escaping ResumableUploadHandler ) -> URLSessionTask? {
         logEvent("resumableUpload \(uploadParam.fileName)")
         
         let request = executeUploadRequest(param: uploadParam, response: { data, response, error in
-            if let httpResponse = response as? HTTPURLResponse {
-                switch httpResponse.statusCode {
-                case 200...299:
-                    handler(true, nil, nil)
-                    return
-                    
-                case 308:
-                    //should continue
-                    guard
-                        let headerValue = httpResponse.allHeaderFields["Range"] as? String,
-                        let upperValueString = headerValue.lastNonEmptyHalf(after: "-"),
-                        let upperValue = Int(upperValueString)
-                    else {
-                        handler(false, nil, nil)
-                        return
-                    }
-                    
-                    handler(false, upperValue + 1, nil)
-                    return
-                    
-                case 404:
-                    // can't find prevous upload
-                    handler(false, 0, nil)
-                    return
-                default:
-                    break
+            
+            let handleError = { (error: Error?) in
+                if let error = error {
+                    handler(nil, .error(error))
+                } else {
+                    handler(nil, .string("Error upload"))
                 }
-            } else if let error = error {
-                handler(false, nil, .error(error))
-                return
             }
             
-            handler(false, nil, .string("Error upload"))
+            guard let httpResponse = response as? HTTPURLResponse else {
+                handleError(error)
+                return
+            }
+
+            switch httpResponse.statusCode {
+            case 200...299:
+                handler(.completed, nil)
+                
+            case 308:
+                //should continue
+                guard
+                    let headerValue = httpResponse.allHeaderFields["Range"] as? String,
+                    let upperValueString = headerValue.lastNonEmptyHalf(after: "-"),
+                    let upperValue = Int(upperValueString)
+                else {
+                    handler(nil, nil)
+                    return
+                }
+                
+                handler(.uploaded(bytes: upperValue + 1), nil)
+                
+            case 400:
+                if let data = data {
+                    let json = JSON(data: data)
+                    let errorCode = json["error_code"].stringValue
+                    
+                    switch errorCode {
+                    case "RU_9":
+                        /// Provided first-byte-pos is not the continuation of the last-byte-pos of pre-uploaded part!
+                        handler(.discontinuityError, nil)
+                        
+                    case "RU_1":
+                        /// Invalid upload request! Initial upload must start from the beginning
+                        handler(.invalidUploadRequest, nil)
+                        
+                    default:
+                        handleError(error)
+                    }
+                } else {
+                    handleError(error)
+                }
+                
+            case 404:
+                // can't find prevous upload
+                handler(.didntStart, nil)
+                
+            default:
+                handleError(error)
+            }
         })
         
         return request

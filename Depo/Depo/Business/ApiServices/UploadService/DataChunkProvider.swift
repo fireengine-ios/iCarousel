@@ -51,6 +51,9 @@ final class DataChunkProvider {
         self.fileSize = fileSize
     }
     
+    deinit {
+        fileStream.close()
+    }
     
     func nextChunk(skipping: Int) -> DataChunk? {
         guard streamIsAvailable() else {

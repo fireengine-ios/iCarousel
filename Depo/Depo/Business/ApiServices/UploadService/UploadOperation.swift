@@ -9,9 +9,19 @@
 import Foundation
 
 
+
+enum ResumableUploadStatus {
+    case uploaded(bytes: Int)
+    case didntStart
+    case invalidUploadRequest
+    case discontinuityError
+    case completed
+}
+
+
 typealias UploadOperationSuccess = (_ uploadOperation: UploadOperation) -> Void
 typealias UploadOperationHandler = (_ uploadOperation: UploadOperation, _ value: ErrorResponse?) -> Void
-typealias ResumableUploadHandler = (_ completed: Bool, _  bytesUploaded: Int?, _ error: ErrorResponse?) -> Void
+typealias ResumableUploadHandler = (_ status: ResumableUploadStatus?, _ error: ErrorResponse?) -> Void
 
 final class UploadOperation: Operation {
     
@@ -31,8 +41,7 @@ final class UploadOperation: Operation {
     private let semaphore: DispatchSemaphore
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.uploadOperation)
     private var clearingAction: VoidHandler?
-    private let chunker: DataChunkProvider?
-    private let showCustomProgress: Bool
+    private var chunker: DataChunkProvider?
     private let defaults: StorageVars = factory.resolve()
     private let interruptedId: String?
     private let isResumable: Bool
@@ -51,14 +60,6 @@ final class UploadOperation: Operation {
         self.isFavorites = isFavorites
         self.isPhotoAlbum = isFromAlbum
         self.isResumable = item.fileSize > NumericConstants.resumableUploadBufferSize
-        
-        if isResumable, let localUrl = inputItem.urlToFile {
-            self.chunker = DataChunkProvider.createWithStream(url: localUrl)
-            self.showCustomProgress = true
-        } else {
-            self.chunker = nil
-            self.showCustomProgress = false
-        }
         
         let interruptedUUID = self.inputItem.getTrimmedLocalID()
         self.interruptedId = self.defaults.interruptedResumableUploads[interruptedUUID] as? String
@@ -97,7 +98,7 @@ final class UploadOperation: Operation {
         
         ItemOperationManager.default.startUploadFile(file: inputItem)
         
-        if !showCustomProgress {
+        if !isResumable {
             SingletonStorage.shared.progressDelegates.add(self)
         }
         
@@ -131,6 +132,13 @@ final class UploadOperation: Operation {
     //MARK: - Resumable
 
     private func attemptResumableUpload(success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
+        guard let localUrl = inputItem.urlToFile else {
+            fail(ErrorResponse.string(TextConstants.commonServiceError))
+            return
+        }
+        
+        self.chunker = DataChunkProvider.createWithStream(url: localUrl)
+        
         requestObject = baseUrl(success: { [weak self] baseurlResponse in
             guard let self = self,
                 let baseURL = baseurlResponse?.url else {
@@ -152,29 +160,38 @@ final class UploadOperation: Operation {
                     return
                 }
                 
-                self.checkResumeStatus(parameters: resumableParameters) { [weak self] isFinished, bytesUploaded, error in
+                self.checkResumeStatus(parameters: resumableParameters) { [weak self] status, error in
                     guard let self = self else {
                         fail(ErrorResponse.string(TextConstants.commonServiceError))
                         return
                     }
                     
-                    guard !isFinished else {
-                        self.finishUploading(parameters: resumableParameters, success: success, fail: fail)
-                        return
-                    }
-                      
-                    guard let bytesToSkip = bytesUploaded else {
+                    guard let status = status else {
                         let error = error ?? ErrorResponse.string(TextConstants.commonServiceError)
                         fail(error)
                         return
                     }
                     
-                    guard let nextChunk = self.chunker?.nextChunk(skipping: bytesToSkip) else {
-                        fail(ErrorResponse.string(TextConstants.commonServiceError))
-                        return
+                    switch status {
+                    case .completed:
+                        self.finishUploading(parameters: resumableParameters, success: success, fail: fail)
+                        
+                    case .didntStart:
+                        self.uploadContiniously(parameters: resumableParameters, success: success, fail: fail)
+                        
+                    case .uploaded(bytes: let bytesToSkip):
+                        guard let nextChunk = self.chunker?.nextChunk(skipping: bytesToSkip) else {
+                            fail(ErrorResponse.string(TextConstants.commonServiceError))
+                            return
+                        }
+                        
+                        self.uploadContiniously(parameters: resumableParameters, chunk: nextChunk, success: success, fail: fail)
+                        
+                    case .discontinuityError, .invalidUploadRequest:
+                        self.retry {
+                            self.attemptResumableUpload(success: success, fail: fail)
+                        }
                     }
-                    
-                    self.uploadContiniously(parameters: resumableParameters, chunk: nextChunk, success: success, fail: fail)
                 }
                 
             }, fail: fail)
@@ -183,9 +200,9 @@ final class UploadOperation: Operation {
     }
     
     private func checkResumeStatus(parameters: ResumableUpload, handler: @escaping ResumableUploadHandler) {
-        requestObject = resumableUpload(uploadParam: parameters, handler: { [weak self] isFinished, bytesUploaded, error in
+        requestObject = resumableUpload(uploadParam: parameters, handler: { [weak self] status, error in
             guard let self = self else {
-                handler(false, nil, ErrorResponse.string(TextConstants.commonServiceError))
+                handler(status, ErrorResponse.string(TextConstants.commonServiceError))
                 return
             }
             
@@ -197,7 +214,7 @@ final class UploadOperation: Operation {
             }
             
             self.attemptsCount = 0
-            handler(isFinished, bytesUploaded, error)
+            handler(status, error)
         })
     }
     
@@ -210,17 +227,18 @@ final class UploadOperation: Operation {
         
         parameters.update(chunk: nextChunk)
         
-        requestObject = resumableUpload(uploadParam: parameters, handler: { [weak self] isFinished, bytesUploaded, error in
+        requestObject = resumableUpload(uploadParam: parameters, handler: { [weak self] status, error in
             guard let self = self else {
                 fail(ErrorResponse.string(TextConstants.commonServiceError))
                 return
             }
             
-            guard !isFinished else {
-                self.finishUploading(parameters: parameters, success: success, fail: fail)
+            guard let status = status else {
+                let error = error ?? ErrorResponse.string(TextConstants.commonServiceError)
+                fail(error)
                 return
             }
-             
+            
             if let error = error {
                 if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
                     self.retry { [weak self] in
@@ -232,9 +250,23 @@ final class UploadOperation: Operation {
                 return
             }
             
-            self.attemptsCount = 0
-            self.showProgress(uploaded: nextChunk.range.upperBound)
-            self.uploadContiniously(parameters: parameters, success: success, fail: fail)
+            switch status {
+            case .completed:
+                self.finishUploading(parameters: parameters, success: success, fail: fail)
+                
+            case .didntStart:
+                fail(ErrorResponse.string(TextConstants.commonServiceError))
+                
+            case .uploaded(bytes: _):
+                self.attemptsCount = 0
+                self.showProgress(uploaded: nextChunk.range.upperBound)
+                self.uploadContiniously(parameters: parameters, success: success, fail: fail)
+                
+            case .discontinuityError, .invalidUploadRequest:
+                self.retry {
+                    self.attemptResumableUpload(success: success, fail: fail)
+                }
+            }
         })
 
         ///If upload service can't create upload request task for some reason
