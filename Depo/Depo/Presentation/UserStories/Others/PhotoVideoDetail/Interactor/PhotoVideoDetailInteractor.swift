@@ -103,7 +103,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     func trackVideoStart() {
         if
             let index = currentItemIndex,
-            let metadata = allItems[index].metaData {
+            let item = allItems[safe: index],
+            let metadata = item.metaData {
             analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: metadata.isVideoSlideshow ? .videoStartStroy : .videoStartVideo)
         } else {
             analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: .storyOrVideo)
