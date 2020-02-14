@@ -28,6 +28,7 @@ protocol StorageVars: class {
     var hiddenPhotoInPeopleAlbumPopUpCheckBox: Bool { get set }
     var smashPhotoPopUpCheckBox: Bool { get set }
     var smartAlbumWarningPopUpCheckBox: Bool { get set }
+    var interruptedResumableUploads: [String: Any] { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -170,5 +171,11 @@ final class UserDefaultsVars: StorageVars {
     var smartAlbumWarningPopUpCheckBox: Bool {
         get { return userDefaults.bool(forKey: smartAlbumWarningPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
         set { userDefaults.set(newValue, forKey: smartAlbumWarningPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let interruptedResumableUploadsKey = "interruptedResumableUploads"
+    var interruptedResumableUploads: [String : Any] {
+        get { return userDefaults.dictionary(forKey: interruptedResumableUploadsKey + SingletonStorage.shared.uniqueUserID) ?? [:] }
+        set { userDefaults.set(newValue, forKey: interruptedResumableUploadsKey + SingletonStorage.shared.uniqueUserID) }
     }
 }

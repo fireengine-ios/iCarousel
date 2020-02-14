@@ -11,7 +11,7 @@ import Foundation
 
 typealias UploadOperationSuccess = (_ uploadOperation: UploadOperation) -> Void
 typealias UploadOperationHandler = (_ uploadOperation: UploadOperation, _ value: ErrorResponse?) -> Void
-
+typealias ResumableUploadHandler = (_ completed: Bool, _  bytesUploaded: Int?, _ error: ErrorResponse?) -> Void
 
 final class UploadOperation: Operation {
     
@@ -31,6 +31,11 @@ final class UploadOperation: Operation {
     private let semaphore: DispatchSemaphore
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.uploadOperation)
     private var clearingAction: VoidHandler?
+    private let chunker: DataChunkProvider?
+    private let showCustomProgress: Bool
+    private let defaults: StorageVars = factory.resolve()
+    private let interruptedId: String?
+    private let isResumable: Bool
     
     
     //MARK: - Init
@@ -45,6 +50,18 @@ final class UploadOperation: Operation {
         self.semaphore = DispatchSemaphore(value: 0)
         self.isFavorites = isFavorites
         self.isPhotoAlbum = isFromAlbum
+        self.isResumable = item.fileSize > NumericConstants.resumableUploadBufferSize
+        
+        if isResumable, let localUrl = inputItem.urlToFile {
+            self.chunker = DataChunkProvider.createWithStream(url: localUrl)
+            self.showCustomProgress = true
+        } else {
+            self.chunker = nil
+            self.showCustomProgress = false
+        }
+        
+        let interruptedUUID = self.inputItem.getTrimmedLocalID()
+        self.interruptedId = self.defaults.interruptedResumableUploads[interruptedUUID] as? String
         
         super.init()
         
@@ -55,7 +72,7 @@ final class UploadOperation: Operation {
         switch uploadType {
         case .syncToUse:
             qualityOfService = .userInteractive
-        case .resumableUpload, .simpleUpload:
+        case .upload:
             qualityOfService = .userInitiated
         case .autoSync:
             qualityOfService = .background
@@ -75,11 +92,15 @@ final class UploadOperation: Operation {
     }
     
     override func main() {
+        
         BackgroundTaskService.shared.beginBackgroundTask()
         
         ItemOperationManager.default.startUploadFile(file: inputItem)
         
-        SingletonStorage.shared.progressDelegates.add(self)
+        if !showCustomProgress {
+            SingletonStorage.shared.progressDelegates.add(self)
+        }
+        
         attemptUpload()
         
         semaphore.wait()
@@ -98,11 +119,181 @@ final class UploadOperation: Operation {
         }
     }
     
+    private func retry(block: @escaping VoidHandler) {
+        let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
+        dispatchQueue.asyncAfter(deadline: delay, execute: {
+            self.attemptsCount += 1
+            block()
+        })
+    }
+    
+
+    //MARK: - Resumable
+
+    private func attemptResumableUpload(success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
+        requestObject = baseUrl(success: { [weak self] baseurlResponse in
+            guard let self = self,
+                let baseURL = baseurlResponse?.url else {
+                    fail(ErrorResponse.string(TextConstants.commonServiceError))
+                    return
+            }
+            
+            self.getUploadParameters(baseURL: baseURL, simple: true, success: { [weak self] parameters in
+                guard let self = self, let resumableParameters = parameters as? ResumableUpload else {
+                    fail(ErrorResponse.string(TextConstants.commonServiceError))
+                    return
+                }
+                
+                self.checkResumeStatus(parameters: resumableParameters) { [weak self] isFinished, bytesUploaded, error in
+                    guard let self = self else {
+                        fail(ErrorResponse.string(TextConstants.commonServiceError))
+                        return
+                    }
+                    
+                    guard !isFinished else {
+                        self.finishUploading(parameters: resumableParameters, success: success, fail: fail)
+                        return
+                    }
+                      
+                    guard let bytesToSkip = bytesUploaded else {
+                        let error = error ?? ErrorResponse.string(TextConstants.commonServiceError)
+                        fail(error)
+                        return
+                    }
+                    
+                    guard let nextChunk = self.chunker?.nextChunk(skipping: bytesToSkip) else {
+                        fail(ErrorResponse.string(TextConstants.commonServiceError))
+                        return
+                    }
+                    
+                    self.defaults.interruptedResumableUploads[self.inputItem.getTrimmedLocalID()] = resumableParameters.tmpUUID
+                    
+                    self.uploadContiniously(parameters: resumableParameters, chunk: nextChunk, success: success, fail: fail)
+                }
+                
+            }, fail: fail)
+            
+        }, fail: fail)
+    }
+    
+    private func checkResumeStatus(parameters: ResumableUpload, handler: @escaping ResumableUploadHandler) {
+        requestObject = resumableUpload(uploadParam: parameters, handler: { [weak self] isFinished, bytesUploaded, error in
+            guard let self = self else {
+                handler(false, nil, ErrorResponse.string(TextConstants.commonServiceError))
+                return
+            }
+            
+            if let error = error, !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                self.retry { [weak self] in
+                    self?.checkResumeStatus(parameters: parameters, handler: handler)
+                }
+                return
+            }
+            
+            self.attemptsCount = 0
+            handler(isFinished, bytesUploaded, error)
+        })
+    }
+    
+    private func uploadContiniously(parameters: ResumableUpload, chunk: DataChunk? = nil, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
+        if let chunk = chunk {
+            parameters.update(chunk: chunk)
+        }
+        
+        requestObject = resumableUpload(uploadParam: parameters, handler: { [weak self] isFinished, bytesUploaded, error in
+            guard let self = self else {
+                fail(ErrorResponse.string(TextConstants.commonServiceError))
+                return
+            }
+            
+            guard !isFinished else {
+                self.finishUploading(parameters: parameters, success: success, fail: fail)
+                return
+            }
+             
+            if let error = error {
+                if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                    self.retry { [weak self] in
+                        self?.uploadContiniously(parameters: parameters, chunk: chunk, success: success, fail: fail)
+                    }
+                } else {
+                    fail(error)
+                }
+                return
+            }
+            
+            guard let nextChunk = self.chunker?.nextChunk() else {
+                fail(ErrorResponse.string(TextConstants.commonServiceError))
+                return
+            }
+            
+            self.attemptsCount = 0
+            self.showProgress(uploaded: nextChunk.range.upperBound)
+            self.uploadContiniously(parameters: parameters, chunk: nextChunk, success: success, fail: fail)
+        })
+
+        ///If upload service can't create upload request task for some reason
+        if self.requestObject == nil {
+            fail(ErrorResponse.string(TextConstants.commonServiceError))
+        }
+    }
+
+    
+    //MARK: - Simple
+    private func attemptSimpleUpload(success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
+        requestObject = baseUrl(success: { [weak self] baseurlResponse in
+            guard let self = self,
+                let baseURL = baseurlResponse?.url else {
+                    fail(ErrorResponse.string(TextConstants.commonServiceError))
+                    return
+            }
+            
+            self.getUploadParameters(baseURL: baseURL, success: { [weak self] parameters in
+                guard let self = self else {
+                    fail(ErrorResponse.string(TextConstants.commonServiceError))
+                    return
+                }
+                
+                self.clearingAction = { [weak self] in
+                    self?.removeTemporaryFile(at: parameters.urlToLocalFile)
+                }
+                
+                self.requestObject = self.upload(uploadParam: parameters, success: { [weak self] in
+                    
+                    self?.finishUploading(parameters: parameters, success: success, fail: fail)
+                    
+                    }, fail: { [weak self] error in
+                        guard let self = self else {
+                            return
+                        }
+                        
+                        if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                            self.retry { [weak self] in
+                                self?.attemptSimpleUpload(success: success, fail: fail)
+                            }
+                        } else {
+                            fail(error)
+                        }
+                })
+                
+                ///If upload service can't create upload request task for some reason
+                if self.requestObject == nil {
+                    fail(ErrorResponse.string(TextConstants.commonServiceError))
+                }
+            }, fail: fail)
+        }, fail: fail)
+    }
+    
+    
+    //MARK: - General
     private func attemptUpload() {
         let customSucces: FileOperationSucces = { [weak self] in
             guard let self = self else {
                 return
             }
+            
+            let uuidToClear = self.inputItem.getTrimmedLocalID()
+            self.defaults.interruptedResumableUploads[uuidToClear] = nil
             
             self.handler?(self, nil)
             self.semaphore.signal()
@@ -119,170 +310,74 @@ final class UploadOperation: Operation {
             self.semaphore.signal()
         }
         
-        if uploadType.isContained(in: [.resumableUpload]) {
+        if isResumable {
             attemptResumableUpload(success: customSucces, fail: customFail)
         } else {
             attemptSimpleUpload(success: customSucces, fail: customFail)
         }
     }
     
-    private func attemptResumableUpload(success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
-        getUploadParameters(success: { [weak self] parameters in
+    private func getUploadParameters(baseURL: URL, simple: Bool = false, success: @escaping UploadParametersResponse, fail: @escaping FailResponse) {
+        dispatchQueue.async { [weak self] in
             guard let self = self else {
-                fail(ErrorResponse.string(TextConstants.commonServiceError))
+                fail(ErrorResponse.string(TextConstants.errorUnknown))
                 return
             }
             
-            self.clearingAction = { [weak self] in
-                self?.removeTemporaryFile(at: parameters.urlToLocalFile)
+            let parameters: UploadRequestParametrs
+            
+            if self.isResumable {
+                parameters = ResumableUpload(item: self.inputItem,
+                                             simple: simple,
+                                             interruptedUploadId: self.interruptedId,
+                                             destitantion: baseURL,
+                                             uploadStategy: self.uploadStategy,
+                                             uploadTo: self.uploadTo,
+                                             rootFolder: self.folder,
+                                             isFavorite: self.isFavorites)
+            } else {
+                parameters = SimpleUpload(item: self.inputItem,
+                                          destitantion: baseURL,
+                                          uploadStategy: self.uploadStategy,
+                                          uploadTo: self.uploadTo,
+                                          rootFolder: self.folder,
+                                          isFavorite: self.isFavorites)
             }
             
-            self.requestObject = self.upload(uploadParam: parameters, success: { [weak self] in
-                
-                let uploadNotifParam = UploadNotify(parentUUID: parameters.rootFolder,
-                                                    fileUUID: parameters.tmpUUID )
-                
-                //                    self?.inputItem.uuid = uploadParam.tmpUUId
-                self?.inputItem.syncStatus = .synced
-                self?.inputItem.setSyncStatusesAsSyncedForCurrentUser()
-                
-                self?.uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
-                    self?.dispatchQueue.async { [weak self] in
-                        guard let `self` = self else {
-                            return
-                        }
-                        
-                        if let response = baseurlResponse as? SearchItemResponse {
-                            self.outputItem = WrapData(remote: response)
-                            self.addPhotoToTheAlbum(with: parameters, response: response)
-                            self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
-                            self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
-                            self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
-                            
-                            //case for upload photo from camera
-                            if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
-                                self.outputItem?.metaData?.mediumUrl = preview
-                            }
-                            
-                            MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
-                        }
-                        
-                        success()
-                    }
-                }, fail: fail)
-                
-            }, fail: { [weak self] error in
-                guard let self = self else {
-                    return
-                }
-                
-                if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
-                    let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
-                    self.dispatchQueue.asyncAfter(deadline: delay, execute: {
-                        self.attemptsCount += 1
-                        self.attemptResumableUpload(success: success, fail: fail)
-                    })
-                } else {
-                    fail(error)
-                }
-            })
             
-            ///If upload service can't create upload request task for some reason
-            if self.requestObject == nil {
-                fail(ErrorResponse.string(TextConstants.commonServiceError))
-            }
-        }, fail: fail)
-    }
-
-    private func attemptSimpleUpload(success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
-        getUploadParameters(success: { [weak self] parameters in
-            guard let self = self else {
-                fail(ErrorResponse.string(TextConstants.commonServiceError))
-                return
-            }
-            
-            self.clearingAction = { [weak self] in
-                self?.removeTemporaryFile(at: parameters.urlToLocalFile)
-            }
-            
-            self.requestObject = self.upload(uploadParam: parameters, success: { [weak self] in
-                
-                let uploadNotifParam = UploadNotify(parentUUID: parameters.rootFolder,
-                                                    fileUUID: parameters.tmpUUID )
-                
-                //                    self?.inputItem.uuid = uploadParam.tmpUUId
-                self?.inputItem.syncStatus = .synced
-                self?.inputItem.setSyncStatusesAsSyncedForCurrentUser()
-                
-                self?.uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
-                    self?.dispatchQueue.async { [weak self] in
-                        guard let `self` = self else {
-                            return
-                        }
-                        
-                        if let response = baseurlResponse as? SearchItemResponse {
-                            self.outputItem = WrapData(remote: response)
-                            self.addPhotoToTheAlbum(with: parameters, response: response)
-                            self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
-                            self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
-                            self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
-                            
-                            //case for upload photo from camera
-                            if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
-                                self.outputItem?.metaData?.mediumUrl = preview
-                            }
-                            
-                            MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
-                        }
-                        
-                        success()
-                    }
-                }, fail: fail)
-                
-            }, fail: { [weak self] error in
-                guard let self = self else {
-                    return
-                }
-                
-                if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
-                    let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
-                    self.dispatchQueue.asyncAfter(deadline: delay, execute: {
-                        self.attemptsCount += 1
-                        self.attemptSimpleUpload(success: success, fail: fail)
-                    })
-                } else {
-                    fail(error)
-                }
-            })
-            
-            ///If upload service can't create upload request task for some reason
-            if self.requestObject == nil {
-                fail(ErrorResponse.string(TextConstants.commonServiceError))
-            }
-        }, fail: fail)
+            success(parameters)
+        }
     }
     
-    private func getUploadParameters(success: @escaping UploadParametersResponse, fail: @escaping FailResponse) {
-        requestObject = baseUrl(success: { [weak self] baseurlResponse in
-            guard let self = self,
-                let baseurlResponse = baseurlResponse,
-                let responseURL = baseurlResponse.url else {
-                    fail(ErrorResponse.string(TextConstants.commonServiceError))
-                    return
-            }
-            
-            self.dispatchQueue.async { [weak self] in
-                guard let `self` = self else {
+    private func finishUploading(parameters: UploadRequestParametrs, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
+        let uploadNotifParam = UploadNotify(parentUUID: parameters.rootFolder,
+                                            fileUUID: parameters.tmpUUID )
+        
+        inputItem.syncStatus = .synced
+        inputItem.setSyncStatusesAsSyncedForCurrentUser()
+        
+        uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
+            self?.dispatchQueue.async { [weak self] in
+                guard let self = self else {
                     return
                 }
                 
-                let uploadParam = SimpleUpload(item: self.inputItem,
-                                               destitantion: responseURL,
-                                               uploadStategy: self.uploadStategy,
-                                               uploadTo: self.uploadTo,
-                                               rootFolder: self.folder,
-                                               isFavorite: self.isFavorites)
-                success(uploadParam)
+                if let response = baseurlResponse as? SearchItemResponse {
+                    self.outputItem = WrapData(remote: response)
+                    self.addPhotoToTheAlbum(with: parameters, response: response)
+                    self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
+                    self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
+                    self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
+                    
+                    //case for upload photo from camera
+                    if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
+                        self.outputItem?.metaData?.mediumUrl = preview
+                    }
+                    
+                    MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
+                }
+                
+                success()
             }
         }, fail: fail)
     }
@@ -314,10 +409,27 @@ final class UploadOperation: Operation {
                                             fail: fail)
     }
     
+    private func resumableUpload(uploadParam: ResumableUpload, handler: @escaping ResumableUploadHandler) -> URLSessionTask? {
+        return UploadService.default.resumableUpload(uploadParam: uploadParam, handler: handler)
+    }
+    
+    
     private func uploadNotify(param: UploadNotify, success: @escaping SuccessResponse, fail: FailResponse?) {
         UploadService.default.uploadNotify(param: param,
                                            success: success,
                                            fail: fail)
+    }
+    
+    //Custom Progress
+    private func showProgress(uploaded: Int) {
+        guard isExecuting, let fileSize = chunker?.fileSize, let uploadType = uploadType else {
+            return
+        }
+        
+        let ratio = Float(uploaded) / Float (fileSize)
+        
+        CardsManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: inputItem)
+        ItemOperationManager.default.setProgressForUploadingFile(file: inputItem, progress: ratio)
     }
 }
 

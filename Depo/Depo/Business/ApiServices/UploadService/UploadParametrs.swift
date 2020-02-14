@@ -81,8 +81,6 @@ class SimpleUpload: UploadRequestParametrs {
         return Data()
     }
     
-   
-    
     var header: RequestHeaderParametrs {
         var header = RequestHeaders.authification()
         
@@ -122,41 +120,6 @@ class SimpleUpload: UploadRequestParametrs {
     }
 }
 
-final class ResumableUploadEmpty: RequestParametrs {
-    
-    let tmpUUID: String
-    let destitantionURL: URL
-    
-    let requestParametrs: Any = Data()
-    
-    var patch: URL {
-        return URL(string: destitantionURL.absoluteString
-            .appending("/")
-            .appending(tmpUUID)
-            .appending("?upload-type=resumable"))!
-    }
-    
-    var timeout: TimeInterval {
-        return 2000.0
-    }
-    
-    
-    var header: RequestHeaderParametrs {
-        let header = RequestHeaders.authification() + [HeaderConstant.ContentLength : "\(0)"]
-        return header
-    }
-    
-    init(item: WrapData, destitantionURL: URL) {
-        self.destitantionURL = destitantionURL
-        
-        if item.isLocalItem {
-            self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
-        } else {
-            self.tmpUUID = UUID().uuidString
-        }
-    }
-}
-
 final class ResumableUpload: UploadRequestParametrs {
 
     private let item: WrapData
@@ -164,13 +127,16 @@ final class ResumableUpload: UploadRequestParametrs {
     private let uploadTo: MetaSpesialFolder
     private let destitantionURL: URL
     private let isFavorite: Bool
-    private let range: Range<Int>
+    
+    private (set) var range = 0..<0
+    private (set) var fileData: Data? = Data()
+    private var isSimple: Bool
     
     let rootFolder: String
     let tmpUUID: String
     
     let urlToLocalFile: URL? = nil
-    private (set) var fileData: Data?
+    
 
     var fileName: String {
         return item.name ?? "unknown"
@@ -181,23 +147,26 @@ final class ResumableUpload: UploadRequestParametrs {
     }
 
     
-    init(item: WrapData, data: Data, range: Range<Int>, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool) {
+    init(item: WrapData, simple: Bool, interruptedUploadId: String?, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool) {
         
         self.item = item
-        self.fileData = data
-        self.range = range
         self.rootFolder = rootFolder
         self.uploadStrategy = uploadStategy
         self.uploadTo = uploadTo
         self.destitantionURL = destitantion
-
+        self.isSimple = simple
         self.isFavorite = isFavorite
 
-        if item.isLocalItem {
-            self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
+        if let previousUploadId = interruptedUploadId {
+            self.tmpUUID = previousUploadId
         } else {
-            self.tmpUUID = UUID().uuidString
+            if item.isLocalItem {
+                self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
+            } else {
+                self.tmpUUID = UUID().uuidString
+            }
         }
+        
     }
     
     var requestParametrs: Any {
@@ -207,6 +176,24 @@ final class ResumableUpload: UploadRequestParametrs {
     
     var header: RequestHeaderParametrs {
         var header = RequestHeaders.authification()
+        
+        header = header + [
+            HeaderConstant.ContentType : item.uploadContentType,
+            HeaderConstant.XMetaStrategy : uploadStrategy.rawValue,
+            HeaderConstant.objecMetaDevice : UIDevice.current.identifierForVendor?.uuidString ?? "",
+            HeaderConstant.XObjectMetaFileName : item.name ?? tmpUUID,
+            HeaderConstant.XObjectMetaFavorites : isFavorite ? "true" : "false",
+            HeaderConstant.XObjectMetaParentUuid : rootFolder,
+            HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
+            HeaderConstant.Expect : "100-continue",
+            HeaderConstant.XObjectMetaDeviceType : Device.deviceType,
+            HeaderConstant.XObjectMetaIosMetadataHash : item.asset?.localIdentifier ?? "",
+            HeaderConstant.ContentLength : "0"
+        ]
+        
+        guard !isSimple else {
+            return header
+        }
         
         guard item.fileSize != 0, fileData?.count != 0 else {
             let attributes = item.toDebugAnalyticsAttributes()
@@ -220,19 +207,8 @@ final class ResumableUpload: UploadRequestParametrs {
         let contentRangeValue = "bytes \(range.lowerBound)-\(range.upperBound - 1)/\(item.fileSize)"
         
         header = header + [
-            HeaderConstant.ContentType           : item.uploadContentType,
-            HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
-            HeaderConstant.objecMetaDevice       : UIDevice.current.identifierForVendor?.uuidString ?? "",
-//            HeaderConstant.XMetaRecentServerHash : "s",
-            HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUID,
-            HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
-            HeaderConstant.XObjectMetaParentUuid : rootFolder,
-            HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
-            HeaderConstant.Expect                : "100-continue",
-            HeaderConstant.XObjectMetaDeviceType : Device.deviceType,
-            HeaderConstant.XObjectMetaIosMetadataHash : item.asset?.localIdentifier ?? "",
-            HeaderConstant.ContentLength         : "\(item.fileSize)",
-            HeaderConstant.ContentRange          : contentRangeValue
+            HeaderConstant.ContentLength : "\(item.fileSize)",
+            HeaderConstant.ContentRange : contentRangeValue
         ]
         return header
     }
@@ -246,6 +222,12 @@ final class ResumableUpload: UploadRequestParametrs {
     
     var timeout: TimeInterval {
         return 2000.0
+    }
+    
+    func update(chunk: DataChunk) {
+        fileData = chunk.data
+        range = chunk.range
+        isSimple = false
     }
 }
 

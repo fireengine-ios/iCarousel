@@ -577,7 +577,7 @@ extension NetmeraEvents.Actions {
                 } else {
                     appopriateUploadType = .autosync
                 }
-            case .simpleUpload, .syncToUse, .resumableUpload:
+            case .upload, .syncToUse:
                 appopriateUploadType = .manual
             }
             
