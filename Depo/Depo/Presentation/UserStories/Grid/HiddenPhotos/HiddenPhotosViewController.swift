@@ -23,7 +23,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     
     private lazy var router = RouterVC()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    
+    private var photoVideoDetailModule: PhotoVideoDetailModuleInput?
     //MARK: - View lifecycle
     
     deinit {
@@ -209,6 +209,7 @@ extension HiddenPhotosViewController: HiddenPhotosSortingManagerDelegate {
 
 extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
     func didLoadPhoto(items: [Item]) {
+        photoVideoDetailModule?.appendItems(items, isLastPage: false)
         dataSource.append(items: items) { [weak self] in
             self?.checkEmptyView()
             self?.setMoreButton()
@@ -221,6 +222,7 @@ extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
     }
     
     func didFinishLoadAlbums() {
+        photoVideoDetailModule?.appendItems([], isLastPage: true)
         dataSource.finishLoadAlbums()
     }
     
@@ -287,9 +289,10 @@ extension HiddenPhotosViewController {
         let detailModule = router.filesDetailModule(fileObject: item,
                                                     items: items,
                                                     status: .hidden,
-                                                    canLoadMoreItems: false,
-                                                    moduleOutput: nil)
+                                                    canLoadMoreItems: true,
+                                                    moduleOutput: self)
 
+        photoVideoDetailModule = detailModule.moduleInput
         let nController = NavigationController(rootViewController: detailModule.controller)
         router.presentViewController(controller: nController)
     }
@@ -450,5 +453,13 @@ extension HiddenPhotosViewController: MoreFilesActionsInteractorOutput {
         if let message = errorMessage {
             UIApplication.showErrorAlert(message: message)
         }
+    }
+}
+
+//MARK: - PhotoVideoDetailModuleOutput
+
+extension HiddenPhotosViewController: PhotoVideoDetailModuleOutput {
+    func needLoadNextPage() {
+        dataLoader.loadNextPhotoPage()
     }
 }
