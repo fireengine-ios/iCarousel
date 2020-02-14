@@ -36,7 +36,6 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
             newValue.addArrangedSubview(emailView)
             newValue.addArrangedSubview(phoneView)
             newValue.addArrangedSubview(subjectView)
-            newValue.addArrangedSubview(descriptionView)
             newValue.addArrangedSubview(problemView)
         }
     }
@@ -121,15 +120,6 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
                            TextConstants.contactUsSubject11,
                            TextConstants.contactUsSubject12]
         // TODO: add new
-        return newValue
-    }()
-    
-    private let descriptionView: UILabel = {
-        let newValue = UILabel()
-        newValue.numberOfLines = 0
-        newValue.textColor = ColorConstants.textGrayColor
-        newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        newValue.text = TextConstants.supportFormProblemDescription
         return newValue
     }()
     
