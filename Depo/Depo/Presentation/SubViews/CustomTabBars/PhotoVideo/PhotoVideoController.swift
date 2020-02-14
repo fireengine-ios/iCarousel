@@ -250,8 +250,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 DispatchQueue.toMain {
                     self?.hideSpinner()
                     let router = RouterVC()
-                    let controller = router.filesDetailViewController(fileObject: currentObject, items: items, status: .active)
-                    let nController = NavigationController(rootViewController: controller)
+                    let detailModule = router.filesDetailModule(fileObject: currentObject,
+                                                                items: items,
+                                                                status: .active,
+                                                                canLoadMoreItems: false,
+                                                                moduleOutput: nil)
+
+                    let nController = NavigationController(rootViewController: detailModule.controller)
                     router.presentViewController(controller: nController)
                     self?.canShowDetail = true
                 }

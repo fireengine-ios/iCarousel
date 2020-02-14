@@ -248,14 +248,13 @@ extension TrashBinDataSource {
         updateVisibleCells()
     }
     
-    func getSameTypeItems(for item: Item) -> [Item] {
-        let items = allItems.flatMap { $0 }
-        if item.fileType.isDocument {
+    func getSameTypeItems(for fileType: FileType, from items: [Item]) -> [Item] {
+        if fileType.isDocument {
             return items.filter { $0.fileType.isDocument }
-        } else if item.fileType == .video || item.fileType == .image {
+        } else if fileType == .video || fileType == .image {
             return items.filter { $0.fileType == .video || $0.fileType == .image }
         }
-        return items.filter { $0.fileType == item.fileType }
+        return items.filter { $0.fileType == fileType }
     }
     
     private func updateVisibleCells() {

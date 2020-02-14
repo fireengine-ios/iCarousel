@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput {
+class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput, PhotoVideoDetailModuleOutput {
     
     lazy var player: MediaPlayer = factory.resolve()
     
@@ -33,6 +33,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
     
     weak var sliderModule: LBAlbumLikePreviewSliderModuleInput?
+    
+    weak var photoVideoDetailModule: PhotoVideoDetailModuleInput?
     
     var topBarConfig: GridListTopBarConfig?
     
@@ -240,6 +242,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 return
             }
             self.dataSource.appendCollectionView(items: [], pageNum: self.interactor.requestPageNum)
+            self.photoVideoDetailModule?.appendItems([], isLastPage: true)
         }
     }
     
@@ -256,7 +259,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             guard let `self` = self else {
                 return
             }
-           self.dataSource.appendCollectionView(items: items, pageNum: self.interactor.requestPageNum)
+            self.dataSource.appendCollectionView(items: items, pageNum: self.interactor.requestPageNum)
+            self.photoVideoDetailModule?.appendItems(items, isLastPage: self.dataSource.isPaginationDidEnd)
         }
     }
     
@@ -871,5 +875,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func getFIRParent() -> Item? {
         return nil
+    }
+
+    //PhotoVideoDetailModuleOutput
+    func needLoadNextPage() {
+        compoundAllFiltersAndNextItems()
     }
 }

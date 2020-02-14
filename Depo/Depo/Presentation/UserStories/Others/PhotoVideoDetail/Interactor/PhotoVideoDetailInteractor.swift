@@ -77,8 +77,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             return
         }
         
-        let isRightSwipe = index == array.count - 1
-        
         array.remove(at: index)
 
         if index >= array.count {
@@ -87,7 +85,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 
         if !array.isEmpty {
             let nextIndex = index == array.count ? array.count - 1 : index
-            output.updateItems(objects: array, selectedIndex: nextIndex, isRightSwipe: isRightSwipe)
+            output.updateItems(objects: array, selectedIndex: nextIndex)
         } else {
             output.onLastRemoved()
         }
@@ -107,5 +105,9 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
     func trackVideoStop() {
         analyticsService.stopTimelyTracking()
+    }
+    
+    func appendItems(_ items: [Item]) {
+        array.append(contentsOf: items)
     }
 }
