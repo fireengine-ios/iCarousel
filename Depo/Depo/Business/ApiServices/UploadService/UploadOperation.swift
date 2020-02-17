@@ -42,7 +42,7 @@ final class UploadOperation: Operation {
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.uploadOperation)
     private var clearingAction: VoidHandler?
     private var chunker: DataChunkProvider?
-    private let defaults: StorageVars = factory.resolve()
+    private let resumableInfoService: ResumableUploadInfoService = factory.resolve()
     private let interruptedId: String?
     private let isResumable: Bool
     
@@ -59,10 +59,11 @@ final class UploadOperation: Operation {
         self.semaphore = DispatchSemaphore(value: 0)
         self.isFavorites = isFavorites
         self.isPhotoAlbum = isFromAlbum
-        self.isResumable = item.fileSize > NumericConstants.resumableUploadBufferSize
         
-        let interruptedUUID = self.inputItem.getTrimmedLocalID()
-        self.interruptedId = self.defaults.interruptedResumableUploads[interruptedUUID] as? String
+        self.isResumable = resumableInfoService.isResumableUploadAllowed(with: item.fileSize.intValue)
+        
+        let trimmedLocalId = self.inputItem.getTrimmedLocalID()
+        self.interruptedId = resumableInfoService.getInterruptedId(for: trimmedLocalId)
         
         super.init()
         
@@ -156,7 +157,8 @@ final class UploadOperation: Operation {
                     /// can't check resumable status because don't have any related interrupted id
                     self.uploadContiniously(parameters: resumableParameters, success: success, fail: fail)
                     
-                    self.defaults.interruptedResumableUploads[self.inputItem.getTrimmedLocalID()] = resumableParameters.tmpUUID
+                    let trimmedId = self.inputItem.getTrimmedLocalID()
+                    self.resumableInfoService.save(interruptedId: resumableParameters.tmpUUID, for: trimmedId)
                     return
                 }
                 
@@ -329,8 +331,8 @@ final class UploadOperation: Operation {
                 return
             }
             
-            let uuidToClear = self.inputItem.getTrimmedLocalID()
-            self.defaults.interruptedResumableUploads[uuidToClear] = nil
+            let trimmedId = self.inputItem.getTrimmedLocalID()
+            self.resumableInfoService.removeInterruptedId(for: trimmedId)
             
             self.handler?(self, nil)
             self.semaphore.signal()

@@ -12,6 +12,11 @@ import Alamofire
 
 protocol ResumableUploadInfoService {
     func updateInfo(handler: @escaping VoidHandler)
+    func isResumableUploadAllowed(with fileSize: Int) -> Bool
+    
+    func getInterruptedId(for trimmedLocalId: String) -> String?
+    func save(interruptedId:String, for trimmedLocalId: String)
+    func removeInterruptedId(for trimmedLocalId: String)
 }
 
 
@@ -21,14 +26,7 @@ final class ResumableUploadInfoServiceImpl: ResumableUploadInfoService {
     
     private lazy var accountService = AccountService()
     
-    var isUploadEnabled: Bool {
-        return defaults.isResumableUploadEnabled ?? true
-    }
-    
-    var chunkSize: Int {
-        return defaults.resumableUploadChunkSize ?? NumericConstants.defaultResumableUploadChunkSize
-    }
-    
+
     func updateInfo(handler: @escaping VoidHandler) {
         debugLog("update resumable upload info")
         
@@ -48,5 +46,34 @@ final class ResumableUploadInfoServiceImpl: ResumableUploadInfoService {
             
             handler()
         }
+    }
+    
+    func isResumableUploadAllowed(with fileSize: Int) -> Bool {
+        return isUploadEnabled && fileSize > chunkSize
+    }
+}
+
+
+// MARK: - Defaults
+
+extension ResumableUploadInfoServiceImpl {
+    private var isUploadEnabled: Bool {
+        return defaults.isResumableUploadEnabled ?? true
+    }
+    
+    private var chunkSize: Int {
+        return defaults.resumableUploadChunkSize ?? NumericConstants.defaultResumableUploadChunkSize
+    }
+    
+    func getInterruptedId(for trimmedLocalId: String) -> String? {
+        return defaults.interruptedResumableUploads[trimmedLocalId] as? String
+    }
+    
+    func save(interruptedId:String, for trimmedLocalId: String) {
+        defaults.interruptedResumableUploads[trimmedLocalId] = interruptedId
+    }
+    
+    func removeInterruptedId(for trimmedLocalId: String) {
+        defaults.interruptedResumableUploads[trimmedLocalId] = nil
     }
 }

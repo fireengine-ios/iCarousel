@@ -14,7 +14,7 @@ typealias DataChunk = (data: Data, range: Range<Int>)
 
 final class DataChunkProvider {
     
-    static func createWithStream(url: URL) -> DataChunkProvider? {
+    static func createWithStream(url: URL, bufferCapacity: Int) -> DataChunkProvider? {
         let fileManager = FileManager.default
         
         let fileSize: Int
@@ -35,20 +35,21 @@ final class DataChunkProvider {
             return nil
         }
             
-        return DataChunkProvider(stream: fileStream, fileSize: fileSize)
+        return DataChunkProvider(stream: fileStream, fileSize: fileSize, bufferCapacity: bufferCapacity)
     }
     
     
-    private let bufferCapacity = NumericConstants.resumableUploadBufferSize
+    private let bufferCapacity: Int
     
     private let fileStream: InputStream
     private var lastRange = 0..<0
     private (set) var fileSize: Int
     
     
-    init(stream: InputStream, fileSize: Int) {
+    init(stream: InputStream, fileSize: Int, bufferCapacity: Int) {
         self.fileStream = stream
         self.fileSize = fileSize
+        self.bufferCapacity = bufferCapacity
     }
     
     deinit {
