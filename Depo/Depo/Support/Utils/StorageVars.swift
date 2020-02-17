@@ -30,8 +30,8 @@ protocol StorageVars: class {
     var hiddenPhotoInPeopleAlbumPopUpCheckBox: Bool { get set }
     var smashPhotoPopUpCheckBox: Bool { get set }
     var smartAlbumWarningPopUpCheckBox: Bool { get set }
-    var isResumableUploadEnabled: Bool { get set }
-    var resumableUploadChunkSize: Int { get set }
+    var isResumableUploadEnabled: Bool? { get set }
+    var resumableUploadChunkSize: Int? { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -190,14 +190,14 @@ final class UserDefaultsVars: StorageVars {
     }
     
     private let isResumableUploadEnabledKey = "isResumableUploadEnabled"
-    var isResumableUploadEnabled: Bool {
-        get { return userDefaults.bool(forKey: isResumableUploadEnabledKey + SingletonStorage.shared.uniqueUserID) }
+    var isResumableUploadEnabled: Bool? {
+        get { return userDefaults.value(forKey: isResumableUploadEnabledKey + SingletonStorage.shared.uniqueUserID) as? Bool }
         set { userDefaults.set(newValue, forKey: isResumableUploadEnabledKey + SingletonStorage.shared.uniqueUserID) }
     }
     
     private let resumableUploadChunkSizeKey = "resumableUploadChunkSize"
-    var resumableUploadChunkSize: Int {
-        get { return userDefaults.integer(forKey: resumableUploadChunkSizeKey + SingletonStorage.shared.uniqueUserID) }
+    var resumableUploadChunkSize: Int? {
+        get { return userDefaults.value(forKey: resumableUploadChunkSizeKey + SingletonStorage.shared.uniqueUserID) as? Int }
         set { userDefaults.set(newValue, forKey: resumableUploadChunkSizeKey + SingletonStorage.shared.uniqueUserID) }
     }
 }
