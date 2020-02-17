@@ -1172,7 +1172,7 @@ class RouterVC: NSObject {
         let controller = FullQuotaWarningPopUp()
         DispatchQueue.main.async {
             if let topController = self.defaultTopController, topController is AutoSyncViewController == false {
-                topController.present(controller, animated: true)
+                topController.present(controller, animated: false)
             }
         }
     }
