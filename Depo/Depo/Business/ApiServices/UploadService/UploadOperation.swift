@@ -138,7 +138,8 @@ final class UploadOperation: Operation {
             return
         }
         
-        self.chunker = DataChunkProvider.createWithStream(url: localUrl)
+        let bufferCapacity = resumableInfoService.chunkSize
+        self.chunker = DataChunkProvider.createWithStream(url: localUrl, bufferCapacity: bufferCapacity)
         
         requestObject = baseUrl(success: { [weak self] baseurlResponse in
             guard let self = self,

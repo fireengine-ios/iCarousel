@@ -17,6 +17,8 @@ protocol ResumableUploadInfoService {
     func getInterruptedId(for trimmedLocalId: String) -> String?
     func save(interruptedId:String, for trimmedLocalId: String)
     func removeInterruptedId(for trimmedLocalId: String)
+    
+    var chunkSize: Int { get }
 }
 
 
@@ -61,7 +63,7 @@ extension ResumableUploadInfoServiceImpl {
         return defaults.isResumableUploadEnabled ?? true
     }
     
-    private var chunkSize: Int {
+    var chunkSize: Int {
         return defaults.resumableUploadChunkSize ?? NumericConstants.defaultResumableUploadChunkSize
     }
     
