@@ -180,13 +180,15 @@ final class OverlayStickerViewController: ViewController {
             
             if libraryIsAvailable == true {
                 
-                let commonCompletionHandler: (_ remoteItem: WrapData?)->() = { [weak self] remoteItem in
+                let commonCompletionHandler: (WrapData?, Error?)->() = { [weak self] remoteItem, error in
                     DispatchQueue.main.async {
                         self?.hideSpinnerIncludeNavigationBar()
                         self?.close { [weak self] in
                             if let itemToShow = remoteItem {
                                 self?.showPhotoVideoPreview(item: itemToShow)
                                 self?.analyticsService.logScreen(screen: .smashPreview)
+                            }  else if error?.isOutOfSpaceError == true {
+                                self?.onOutOfSpaceError()
                             }
                         }
                     }
@@ -201,13 +203,15 @@ final class OverlayStickerViewController: ViewController {
                                 switch uploadResult {
                                 case .success(let remote):
                                     remote?.patchToPreview = localItem.patchToPreview
-                                    commonCompletionHandler(remote)
-                                case .failed(_):
-                                    commonCompletionHandler(nil)
+                                    commonCompletionHandler(remote, nil)
+                                    
+                                case .failed(let error):
+                                    commonCompletionHandler(nil, error)
                                 }
                             })
-                        case .failed(_):
-                            commonCompletionHandler(nil)
+                            
+                        case .failed(let error):
+                            commonCompletionHandler(nil, error)
                         }
                     })
                     
@@ -232,6 +236,10 @@ final class OverlayStickerViewController: ViewController {
         DispatchQueue.toMain {
             self.dismiss(animated: false, completion: completion)
         }
+    }
+    
+    private func onOutOfSpaceError() {
+        RouterVC().showFullQuotaPopUp()
     }
     
     private func setupImage() {
