@@ -69,6 +69,7 @@ struct NumericConstants {
     static let hundredMegabytes: UInt64 = 100 * 1024 * 1024
     static let copyVideoBufferSize = 4096 //old 1024 * 1024
     static let resumableUploadBufferSize = 128 * 1024
+    static let defaultResumableUploadChunkSize = 15728640 // 15MB
     
     static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     

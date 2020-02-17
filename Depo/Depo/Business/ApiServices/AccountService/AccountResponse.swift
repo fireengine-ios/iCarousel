@@ -439,6 +439,8 @@ final class FeaturesResponse: ObjectRequestResponse {
         static let autoVideoUploadV2 = "auto-video-upload-v2"
         static let tcellPaycellSubscription = "tcell-paycell-subscription"
         static let autoSyncDisabled = "auto-sync-disabled"
+        static let isResmableUploadEnabled = "resumable-upload-enabled"
+        static let resumableUploadChunkSize = "resumable-upload-chunk-size-in-bytes"
     }
     
     var isNonTcellPaycellSubscription: Bool?
@@ -449,6 +451,8 @@ final class FeaturesResponse: ObjectRequestResponse {
     var isAutoVideoUploadV2: Bool?
     var isTcellPaycellSubscription: Bool?
     var isAutoSyncDisabled: Bool?
+    var isResmableUploadEnabled: Bool?
+    var resumableUploadChunkSize: Int?
 
     override func mapping() {
         isNonTcellPaycellSubscription = json?[ResponseKey.nonTcellPaycellSubscription].bool
@@ -459,6 +463,8 @@ final class FeaturesResponse: ObjectRequestResponse {
         isAutoVideoUploadV2 = json?[ResponseKey.autoVideoUploadV2].bool
         isTcellPaycellSubscription = json?[ResponseKey.tcellPaycellSubscription].bool
         isAutoSyncDisabled = json?[ResponseKey.autoSyncDisabled].bool
+        isResmableUploadEnabled = json?[ResponseKey.isResmableUploadEnabled].bool
+        resumableUploadChunkSize = json?[ResponseKey.resumableUploadChunkSize].int
     }
     
 }
