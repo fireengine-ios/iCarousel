@@ -42,7 +42,7 @@ final class DataChunkProvider {
     private let bufferCapacity: Int
     
     private let fileStream: InputStream
-    private var lastRange = 0..<0
+    private (set) var lastRange = 0..<0
     private (set) var fileSize: Int
     
     

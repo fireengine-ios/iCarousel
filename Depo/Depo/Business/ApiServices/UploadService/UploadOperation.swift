@@ -470,10 +470,18 @@ extension UploadOperation: OperationProgressServiceDelegate {
         guard isExecuting else {
             return
         }
-
+        
+        let actualRatio: Float
+        if isResumable, let range = chunker?.lastRange {
+            let bytesUploaded = range.lowerBound + bytes
+            actualRatio = Float(bytesUploaded) / Float(inputItem.fileSize.intValue)
+        } else {
+            actualRatio = ratio
+        }
+        
         if requestObject?.currentRequest?.url == url, let uploadType = uploadType {
-            CardsManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: inputItem)
-            ItemOperationManager.default.setProgressForUploadingFile(file: inputItem, progress: ratio)
+            CardsManager.default.setProgress(ratio: actualRatio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: inputItem)
+            ItemOperationManager.default.setProgressForUploadingFile(file: inputItem, progress: actualRatio)
         }
     }
 }
