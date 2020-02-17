@@ -1167,4 +1167,13 @@ class RouterVC: NSObject {
     func trashBinController() -> TrashBinViewController {
         return TrashBinViewController.initFromNib()
     }
+    
+    func showFullQuotaPopUp() {
+        let controller = FullQuotaWarningPopUp()
+        DispatchQueue.main.async {
+            if let topController = self.defaultTopController, topController is AutoSyncViewController == false {
+                topController.present(controller, animated: false)
+            }
+        }
+    }
 }
