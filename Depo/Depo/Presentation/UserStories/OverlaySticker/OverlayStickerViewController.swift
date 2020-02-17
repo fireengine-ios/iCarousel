@@ -42,7 +42,12 @@ final class OverlayStickerViewController: ViewController {
     
     private var isFullScreen = false
     
-    var selectedImage: UIImage?
+    var selectedImage: UIImage? {
+        didSet {
+            setupImage()
+        }
+    }
+    
     var imageName: String?
     var smashCoordinator: SmashServiceProtocol?
 
@@ -51,7 +56,6 @@ final class OverlayStickerViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         selectStickerType(type: .gif)
-        setupImage()
         navigationController?.navigationBar.isHidden = true
         
         view.backgroundColor = .black
@@ -59,6 +63,7 @@ final class OverlayStickerViewController: ViewController {
         overlayingStickerImageView.stickersDelegate = self
         overlayStickerViewControllerDataSource.delegate = self
         overlayStickerViewControllerDataSource.setStateForSelectedType(type: .gif)
+        showSpinner()
 
         addTapGesture()
     }
@@ -247,7 +252,12 @@ final class OverlayStickerViewController: ViewController {
             assertionFailure()
             return
         }
+        
+        loadView()
+        view.backgroundColor = .black
+        selectStickerType(type: .gif)
         overlayingStickerImageView.image = selectedImage
+            
     }
     
     private func setupNavigationBar() {
