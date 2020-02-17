@@ -99,9 +99,7 @@ final class UploadOperation: Operation {
         
         ItemOperationManager.default.startUploadFile(file: inputItem)
         
-        if !isResumable {
-            SingletonStorage.shared.progressDelegates.add(self)
-        }
+        SingletonStorage.shared.progressDelegates.add(self)
         
         attemptUpload()
         
@@ -262,7 +260,7 @@ final class UploadOperation: Operation {
                 
             case .uploaded(bytes: _):
                 self.attemptsCount = 0
-                self.showProgress(uploaded: nextChunk.range.upperBound)
+//                self.showProgress(uploaded: nextChunk.range.upperBound)
                 self.uploadContiniously(parameters: parameters, success: success, fail: fail)
                 
             case .discontinuityError, .invalidUploadRequest:
@@ -461,18 +459,6 @@ final class UploadOperation: Operation {
                                            success: success,
                                            fail: fail)
     }
-    
-    //Custom Progress
-    private func showProgress(uploaded: Int) {
-        guard isExecuting, let fileSize = chunker?.fileSize, let uploadType = uploadType else {
-            return
-        }
-        
-        let ratio = Float(uploaded) / Float (fileSize)
-        
-        CardsManager.default.setProgress(ratio: ratio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: inputItem)
-        ItemOperationManager.default.setProgressForUploadingFile(file: inputItem, progress: ratio)
-    }
 }
 
 
@@ -480,7 +466,7 @@ final class UploadOperation: Operation {
 //MARK: - OperationProgressServiceDelegate
 
 extension UploadOperation: OperationProgressServiceDelegate {
-    func didSend(ratio: Float, for url: URL) {
+    func didSend(ratio: Float, bytes: Int, for url: URL) {
         guard isExecuting else {
             return
         }
