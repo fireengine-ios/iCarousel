@@ -260,7 +260,6 @@ final class UploadOperation: Operation {
                 
             case .uploaded(bytes: _):
                 self.attemptsCount = 0
-//                self.showProgress(uploaded: nextChunk.range.upperBound)
                 self.uploadContiniously(parameters: parameters, success: success, fail: fail)
                 
             case .discontinuityError, .invalidUploadRequest:
