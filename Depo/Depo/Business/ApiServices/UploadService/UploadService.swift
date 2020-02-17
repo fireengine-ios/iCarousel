@@ -132,10 +132,13 @@ final class UploadService: BaseRequestService {
                         
                         if errorResponse.isOutOfSpaceError {
                             self?.cancelSyncToUseOperations()
-                            self?.showOutOfSpaceAlert()
                             ///In order to update the progress bar of the items which are not synchronized
                             filteredItems.forEach { wrapData in
                                 ItemOperationManager.default.cancelledUpload(file: wrapData)
+                            }
+                            
+                            DispatchQueue.main.async {
+                                self?.showOutOfSpaceAlert()
                             }
                         }
                         
@@ -159,10 +162,13 @@ final class UploadService: BaseRequestService {
                         
                         if errorResponse.isOutOfSpaceError {
                             self?.cancelUploadOperations()
-                            self?.showOutOfSpaceAlert()
                             ///In order to update the progress bar of the items which are not synchronized
                             filteredItems.forEach { wrapData in
                                 ItemOperationManager.default.cancelledUpload(file: wrapData)
+                            }
+                            
+                            DispatchQueue.main.async {
+                                self?.showOutOfSpaceAlert()
                             }
                         }
                         
