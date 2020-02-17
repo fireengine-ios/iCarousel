@@ -117,6 +117,24 @@ extension Error {
         return false
     }
     
+    var isOutOfSpaceError: Bool {
+        if let error = self as? AFError {
+            return error.responseCode == 413
+        } else if let error = self as? ServerError {
+            return error.code == 413
+        } else if let error = self as? ServerValueError {
+            return error.code == 413
+        } else if let error = self as? ServerStatusError {
+            return error.code == 413
+        } else if let error = self as? ServerMessageError {
+            return error.code == 413
+        } else if let error = self as? ErrorResponse {
+            return error.isOutOfSpaceError
+        }
+        
+        return false
+    }
+    
     var isNetworkSpecialError: Bool {
         if isNetworkError {
             return true

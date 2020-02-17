@@ -11,9 +11,9 @@ import UIKit
 class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDataSourceDelegate {
     var output: AutoSyncViewOutput!
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var topConstraint: NSLayoutConstraint!
     
     @IBOutlet private weak var startButton: RoundedInsetsButton! {
         willSet {
