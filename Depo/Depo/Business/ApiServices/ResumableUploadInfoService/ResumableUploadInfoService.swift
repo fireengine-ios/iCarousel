@@ -24,7 +24,7 @@ protocol ResumableUploadInfoService {
 
 final class ResumableUploadInfoServiceImpl: ResumableUploadInfoService {
     private let session = SessionManager.customDefault
-    private let defaults: StorageVars = factory.resolve()
+    private let userDefaults: StorageVars = factory.resolve()
     
     private lazy var accountService = AccountService()
     
@@ -33,13 +33,13 @@ final class ResumableUploadInfoServiceImpl: ResumableUploadInfoService {
         debugLog("update resumable upload info")
         
         accountService.getFeatures { [weak self] result in
-            let currentUploadIsEnabled = self?.defaults.isResumableUploadEnabled
-            let currentChunkSize = self?.defaults.resumableUploadChunkSize
+            let currentUploadIsEnabled = self?.userDefaults.isResumableUploadEnabled
+            let currentChunkSize = self?.userDefaults.resumableUploadChunkSize
           
             switch result {
             case .success(let response):
-                self?.defaults.isResumableUploadEnabled = response.isResmableUploadEnabled ?? currentUploadIsEnabled
-                self?.defaults.resumableUploadChunkSize = response.resumableUploadChunkSize ?? currentChunkSize
+                self?.userDefaults.isResumableUploadEnabled = response.isResumableUploadEnabled ?? currentUploadIsEnabled
+                self?.userDefaults.resumableUploadChunkSize = response.resumableUploadChunkSize ?? currentChunkSize
                 
             case .failed(let error):
                 debugLog(error.description)
@@ -56,26 +56,26 @@ final class ResumableUploadInfoServiceImpl: ResumableUploadInfoService {
 }
 
 
-// MARK: - Defaults
+// MARK: - User Defaults
 
 extension ResumableUploadInfoServiceImpl {
     private var isUploadEnabled: Bool {
-        return defaults.isResumableUploadEnabled ?? true
+        return userDefaults.isResumableUploadEnabled ?? true
     }
     
     var chunkSize: Int {
-        return defaults.resumableUploadChunkSize ?? NumericConstants.defaultResumableUploadChunkSize
+        return userDefaults.resumableUploadChunkSize ?? NumericConstants.defaultResumableUploadChunkSize
     }
     
     func getInterruptedId(for trimmedLocalId: String) -> String? {
-        return defaults.interruptedResumableUploads[trimmedLocalId] as? String
+        return userDefaults.interruptedResumableUploads[trimmedLocalId] as? String
     }
     
     func save(interruptedId:String, for trimmedLocalId: String) {
-        defaults.interruptedResumableUploads[trimmedLocalId] = interruptedId
+        userDefaults.interruptedResumableUploads[trimmedLocalId] = interruptedId
     }
     
     func removeInterruptedId(for trimmedLocalId: String) {
-        defaults.interruptedResumableUploads[trimmedLocalId] = nil
+        userDefaults.interruptedResumableUploads[trimmedLocalId] = nil
     }
 }
