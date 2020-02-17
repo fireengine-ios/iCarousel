@@ -173,7 +173,6 @@ extension UIViewController {
 
         navBar?.barTintColor = .black
         navBar?.backgroundColor = .black
-        navBar?.isTranslucent = true
     }
     
     func navigationBarWithGradientStyle(isHidden: Bool = false, hideLogo: Bool = true) {
