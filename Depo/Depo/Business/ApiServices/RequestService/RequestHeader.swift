@@ -54,6 +54,10 @@ struct HeaderConstant {
     
     static let silentToken = "X-Silent-Token"
     static let accountStatus = "X-Account-Status"
+    
+    static let connectionType = "X-Object-Meta-Upload-Conn-Type"
+    static let uploadType = "X-Object-Meta-Upload-Sync-Type"
+    static let applicationLifecycleState = "X-Object-Meta-Upload-XG-Type"
 }
 
 class RequestHeaders {

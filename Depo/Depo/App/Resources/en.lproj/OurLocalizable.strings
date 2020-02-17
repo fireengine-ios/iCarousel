@@ -590,11 +590,11 @@
 "Contacts Sync" = "Contacts Sync";
 "Sort By" = "Sort by";
 "LifeboxLargePopUpTitle100" = "Your lifebox storage is full";
-"LifeboxLargePopUpTitle90" = "You are using 90% of lifebox storage";
-"LifeboxLargePopUpTitle80" = "You are using 80% of lifebox storage";
+"LifeboxLargePopUpTitleBetween80And99" = "%.0f%% of your storage is full!";
 "LifeboxLargePopUpSubTitle" = "Please take a look at the upgrading options to upgrade your storage.";
 "LifeboxLargePopUpExpandButtonTitle" = "Expand My Storage";
 "LifeboxLargePopUpSkipButtonTitle" = "Skip";
+"LifeboxLargePopUpDeleteFilesButtonTitle" = "Delete Files";
 "Lifebox can sync your contacts automatically." = "lifebox can sync your contacts automatically.";
 "error_login" = "You need to login to %@ to upload files";
 "uploading" = "Uploading";
@@ -690,6 +690,7 @@
 "month" = "Month";
 "no_details_message" = "We are processing your request. We will inform you when it is finished.";
 "please_try_again_later" = "Please try again later.";
+"dialog_contact_sync_vcf_file_upload_error" = "A problem occured during uploading vcf file to lifebox";
 "Back up with Original Quality" = "Back up in Original Quality";
 "Remove Duplicate Contacts from Your Directory" = "Remove Duplicate Contacts from Your Phone Directory";
 "Face Recognition to reach your loved one's memories" = "Face Recognition to reach your loved one's memories";
@@ -1490,3 +1491,8 @@
 "restore_items_success_text" = "Item(s) restored successfully.";
 "restore_albums_success_text" = "Album(s) restored successfully.";
 "restore_folders_success_text" = "Folder(s) restored successfully.";
+
+"full_quota_warning_popup_title" = "You have reached your lifebox memory limit.";
+"full_quota_warning_popup_description" = "You can expand your storage or delete unnecessary items lorem ipsum dolor sit amet consecitur.";
+"expand_my_storage" = "Expand My Storage";
+"delete_files" = "Delete Files";

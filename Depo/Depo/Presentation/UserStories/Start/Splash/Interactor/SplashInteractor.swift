@@ -130,8 +130,10 @@ class SplashInteractor: SplashInteractorInput {
                     CacheManager.shared.actualizeCache()
                     self?.isTryingToLogin = false
                     SingletonStorage.shared.isJustRegistered = false
-                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .rememberMe))
-                    self?.successLogin()
+                    SingletonStorage.shared.getOverQuotaStatus {
+                        self?.successLogin()
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .rememberMe))
+                    }
                 }, fail: { [weak self] error in
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .rememberMe))
                     /// we don't need logout here

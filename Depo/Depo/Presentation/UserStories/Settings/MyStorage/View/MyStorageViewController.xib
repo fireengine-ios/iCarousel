@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyStorageViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyStorageViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="hD8-yS-aMY" id="TsN-KP-odH"/>
                 <outlet property="dividerView" destination="6jS-xz-ZAo" id="rMI-YP-dbl"/>
@@ -27,16 +25,16 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRR-B7-lJ8">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPJ-cW-pMM">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0J-13-NtK" customClass="CircleProgressView" customModule="lifebox" customModuleProvider="target">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N0J-13-NtK" customClass="CircleProgressView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                     <rect key="frame" x="100" y="40" width="120" height="120"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kP-9q-f46">
@@ -79,9 +77,10 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aI9-w0-a5U">
-                                            <rect key="frame" x="47" y="0.0" width="46" height="27"/>
+                                            <rect key="frame" x="47" y="0.0" width="65" height="27"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="27" id="70E-NT-Wuk"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="m0j-l8-uLt"/>
                                             </constraints>
                                             <state key="normal" title="Button"/>
                                             <connections>
@@ -109,13 +108,13 @@
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="52.5" id="wPv-tt-4U9"/>
                                     </constraints>
                                 </view>
-                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="hD8-yS-aMY" customClass="ResizableCollectionView" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="314.5" width="320" height="181.5"/>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="hD8-yS-aMY" customClass="ResizableCollectionView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="314.5" width="320" height="201.5"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="350" id="lUN-hA-uMt"/>
                                     </constraints>
-                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cFs-qE-NEU" customClass="ColumnsCollectionLayout" customModule="lifebox" customModuleProvider="target">
+                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cFs-qE-NEU" customClass="ColumnsCollectionLayout" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                         <size key="itemSize" width="50" height="50"/>
                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>

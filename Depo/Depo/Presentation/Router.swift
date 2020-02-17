@@ -712,8 +712,12 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func uploadPhotos(rootUUID: String) -> UIViewController {
-        let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController(rootUUID: rootUUID)
+    func uploadPhotos(rootUUID: String,
+                      getItems: LocalAlbumPresenter.PassBaseDataSourceItemsHandler?,
+                      saveItems: LocalAlbumPresenter.ReturnBaseDataSourceItemsHandler?) -> UIViewController {
+        let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController(rootUUID: rootUUID,
+                                                                                                    getItems: getItems,
+                                                                                                    saveItems: saveItems)
         return controller
     }
     
@@ -1162,5 +1166,14 @@ class RouterVC: NSObject {
     
     func trashBinController() -> TrashBinViewController {
         return TrashBinViewController.initFromNib()
+    }
+    
+    func showFullQuotaPopUp() {
+        let controller = FullQuotaWarningPopUp()
+        DispatchQueue.main.async {
+            if let topController = self.defaultTopController, topController is AutoSyncViewController == false {
+                topController.present(controller, animated: true)
+            }
+        }
     }
 }

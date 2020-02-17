@@ -90,16 +90,16 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
     private func setupPermissionViewFromResult(_ result: [SettingsPermissionsResponse], type: PermissionType) {
         guard
             let permission = result.first(where: { $0.type == type }),
-            let isAllowed = permission.isAllowed,
-            isAllowed
+            permission.isAllowed == true
         else {
             return
         }
         
         let permissionView = viewForPermissionType(type)
         
-        let isPendingApproval = permission.isApprovalPending ?? false
-        permissionView.turnPermissionOn(isOn: isAllowed, isPendingApproval: isPendingApproval)
+        let isPendingApproval = (permission.isApprovalPending == true)
+        let isOn = (permission.isApproved == true)
+        permissionView.turnPermissionOn(isOn: isOn, isPendingApproval: isPendingApproval)
         
         stackView.addArrangedSubview(permissionView)
     }
