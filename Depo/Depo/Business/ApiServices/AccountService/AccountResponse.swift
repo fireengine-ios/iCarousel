@@ -463,8 +463,8 @@ final class FeaturesResponse: ObjectRequestResponse {
         isAutoVideoUploadV2 = json?[ResponseKey.autoVideoUploadV2].bool
         isTcellPaycellSubscription = json?[ResponseKey.tcellPaycellSubscription].bool
         isAutoSyncDisabled = json?[ResponseKey.autoSyncDisabled].bool
-        isResmableUploadEnabled = json?[ResponseKey.isResmableUploadEnabled].bool ?? true
-        resumableUploadChunkSize = json?[ResponseKey.resumableUploadChunkSize].int ?? NumericConstants.defaultResumableUploadChunkSize
+        isResmableUploadEnabled = json?[ResponseKey.isResmableUploadEnabled].bool
+        resumableUploadChunkSize = json?[ResponseKey.resumableUploadChunkSize].int
     }
     
 }
