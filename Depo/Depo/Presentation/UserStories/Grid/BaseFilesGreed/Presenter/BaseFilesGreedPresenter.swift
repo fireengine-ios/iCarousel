@@ -55,6 +55,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreed)
     
+    var backHandler: VoidHandler?
+    
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
         self.dataSource = BaseDataSourceForCollectionView(sortingRules: sortedRule)
@@ -413,11 +415,9 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func didDeleteParent() {
-        router.back()
-    }
-    
-    func needToBack() {
-        router.back()
+        backHandler = { [weak self] in
+            self?.router.back()
+        }
     }
     
     func updateCoverPhotoIfNeeded() { }
@@ -776,6 +776,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dismissBottomBar(animated: true)
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
+    }
+    
+    func successPopupClosed() {
+        backHandler?()
     }
     
     func selectModeSelected() {
