@@ -1580,6 +1580,9 @@ Please check I have understood the intended command here*/
 "change" = "Changez";
 "change_email" = "Changez votre e-mail";
 "verify_email_top_title" = "S'il vous plaît %2$@ que nous avons envoyé à l'adresse e-mail pour vérifier votre compte%1$@";
+"change" = "Modifier";
+"change_email" = "Modifier votre email";
+"verify_email_top_title" = "%1$@ que nous avons envoyé à l'adresse e-mail pour vérifier votre compte %2$@";
 "enter_the_security_code" = "Entrez le code de sécurité";
 "fields_are_not_matched" = "Les e-mails ne correspondent pas.";
 "your_email" = "Votre E-mail";
