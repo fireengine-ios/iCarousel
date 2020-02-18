@@ -44,7 +44,7 @@ final class OverlayStickerViewController: ViewController {
     
     var selectedImage: UIImage? {
         didSet {
-            setupImage()
+            setupEnvironment()
         }
     }
     
@@ -243,7 +243,7 @@ final class OverlayStickerViewController: ViewController {
         RouterVC().showFullQuotaPopUp()
     }
     
-    private func setupImage() {
+    private func setupEnvironment() {
         guard let selectedImage = selectedImage else {
             assertionFailure()
             return
