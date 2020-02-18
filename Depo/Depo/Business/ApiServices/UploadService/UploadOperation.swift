@@ -121,6 +121,7 @@ final class UploadOperation: Operation {
     
     private func retry(block: @escaping VoidHandler) {
         let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
+        debugLog("retrying in \(NumericConstants.secondsBeetweenUploadAttempts) second(s)")
         dispatchQueue.asyncAfter(deadline: delay, execute: {
             self.attemptsCount += 1
             block()
@@ -173,6 +174,8 @@ final class UploadOperation: Operation {
                         return
                     }
                     
+                    debugLog("resumable_upload: status is \(status)")
+                    
                     switch status {
                     case .completed:
                         self.finishUploading(parameters: resumableParameters, success: success, fail: fail)
@@ -181,6 +184,8 @@ final class UploadOperation: Operation {
                         self.uploadContiniously(parameters: resumableParameters, success: success, fail: fail)
                         
                     case .uploaded(bytes: let bytesToSkip):
+                        debugLog("resumable_upload: bytes to skip \(bytesToSkip)")
+                        
                         guard let nextChunk = self.chunker?.nextChunk(skipping: bytesToSkip) else {
                             fail(ErrorResponse.string(TextConstants.commonServiceError))
                             return
@@ -201,6 +206,7 @@ final class UploadOperation: Operation {
     }
     
     private func checkResumeStatus(parameters: ResumableUpload, handler: @escaping ResumableUploadHandler) {
+        debugLog("resumable_upload: checking status")
         requestObject = resumableUpload(uploadParam: parameters, handler: { [weak self] status, error in
             guard let self = self else {
                 handler(status, ErrorResponse.string(TextConstants.commonServiceError))
@@ -208,6 +214,7 @@ final class UploadOperation: Operation {
             }
             
             if let error = error, !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                
                 self.retry { [weak self] in
                     self?.checkResumeStatus(parameters: parameters, handler: handler)
                 }
@@ -222,11 +229,14 @@ final class UploadOperation: Operation {
     private func uploadContiniously(parameters: ResumableUpload, chunk: DataChunk? = nil, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
         
         guard let nextChunk = chunk != nil ? chunk : chunker?.nextChunk() else {
+            debugLog("resumable_upload: next chunk is unavailable")
             fail(ErrorResponse.string(TextConstants.commonServiceError))
             return
         }
         
         parameters.update(chunk: nextChunk)
+        
+        debugLog("resumable_upload: chunk range is \(nextChunk.range)")
         
         requestObject = resumableUpload(uploadParam: parameters, handler: { [weak self] status, error in
             guard let self = self else {
@@ -251,6 +261,8 @@ final class UploadOperation: Operation {
                 return
             }
             
+            debugLog("resumable_upload: status is \(status)")
+            
             switch status {
             case .completed:
                 self.finishUploading(parameters: parameters, success: success, fail: fail)
@@ -259,6 +271,8 @@ final class UploadOperation: Operation {
                 fail(ErrorResponse.string(TextConstants.commonServiceError))
                 
             case .uploaded(bytes: _):
+                debugLog("resumable_upload: shoud continue")
+                
                 self.attemptsCount = 0
                 self.uploadContiniously(parameters: parameters, success: success, fail: fail)
                 
@@ -296,6 +310,7 @@ final class UploadOperation: Operation {
                 }
                 
                 self.requestObject = self.upload(uploadParam: parameters, success: { [weak self] in
+                    debugLog("simple_upload: uploaded")
                     
                     self?.finishUploading(parameters: parameters, success: success, fail: fail)
                     
@@ -343,13 +358,17 @@ final class UploadOperation: Operation {
             
             let errorResponse = self.isCancelled ? ErrorResponse.string(TextConstants.canceledOperationTextError) : value
             
+            debugLog("_upload: error is \(errorResponse.description)")
+            
             self.handler?(self, errorResponse)
             self.semaphore.signal()
         }
         
         if isResumable {
+            debugLog("resumable_upload:")
             attemptResumableUpload(success: customSucces, fail: customFail)
         } else {
+            debugLog("simple_upload:")
             attemptSimpleUpload(success: customSucces, fail: customFail)
         }
     }
@@ -415,6 +434,8 @@ final class UploadOperation: Operation {
                     
                     MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
                 }
+                
+                debugLog("_upload: finished")
                 
                 success()
             }

@@ -643,7 +643,7 @@ final class UploadService: BaseRequestService {
     }
     
     func upload(uploadParam: UploadRequestParametrs, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask? {
-        logEvent("StartUpload \(uploadParam.fileName)")
+        debugLog("StartUpload \(uploadParam.fileName)")
         
         let request = executeUploadRequest(param: uploadParam, response: { data, response, error in
             
@@ -676,7 +676,7 @@ final class UploadService: BaseRequestService {
     - returns: URLSessionTask
     */
     func resumableUpload(uploadParam: ResumableUpload, handler: @escaping ResumableUploadHandler ) -> URLSessionTask? {
-        logEvent("resumableUpload \(uploadParam.fileName)")
+        debugLog("resumableUpload \(uploadParam.fileName)")
         
         let request = executeUploadRequest(param: uploadParam, response: { data, response, error in
             
@@ -714,7 +714,7 @@ final class UploadService: BaseRequestService {
                 if let data = data {
                     let json = JSON(data: data)
                     let errorCode = json["error_code"].stringValue
-                    
+                    debugLog("resumable_upload: error_code is \(errorCode)")
                     switch errorCode {
                     case "RU_9":
                         /// Provided first-byte-pos is not the continuation of the last-byte-pos of pre-uploaded part!
