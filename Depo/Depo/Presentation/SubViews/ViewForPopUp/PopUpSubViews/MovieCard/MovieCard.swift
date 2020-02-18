@@ -91,6 +91,8 @@ final class MovieCard: BaseCardView {
     }
     
     override func viewWillShow() {
+        debugLog("Movie Card - start load image")
+        videoPreviewImageView.filesDataSource.logLoadingErrors = true
         videoPreviewImageView.loadImage(with: item)
     }
     

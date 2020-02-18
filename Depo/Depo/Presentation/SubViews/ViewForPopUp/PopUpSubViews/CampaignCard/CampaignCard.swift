@@ -98,6 +98,8 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
         }
         
         detailUrl = campaignCardResponse.detailsUrl
+        debugLog("Campaign Card - start load image")
+        imageView.filesDataSource.logLoadingErrors = true
         imageView.loadImageData(with: campaignCardResponse.imageUrl)
     }
     

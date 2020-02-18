@@ -20,17 +20,20 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
     ///It is possible that when we use Alamofire Request and then directly cancel task it might cause bug for Alamofire.
     private var task: URLSessionTask?
     private let queue: DispatchQueue
+    private let logErrors: Bool
     
-    init(url: URL?, queue: DispatchQueue) {
+    init(url: URL?, queue: DispatchQueue, logErrors: Bool = false) {
         self.url = url
         self.queue = queue
+        self.logErrors = logErrors
         super.init()
     }
     
-    init(url: URL?, queue: DispatchQueue, completion: ImageDownloadOperationCallback?) {
+    init(url: URL?, queue: DispatchQueue, completion: ImageDownloadOperationCallback?, logErrors: Bool = false) {
         self.url = url
         self.queue = queue
         self.outputBlock = completion
+        self.logErrors = logErrors
         super.init()
     }
     
@@ -66,6 +69,10 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
                 guard !self.isCancelled else {
                     self.semaphore.signal()
                     return
+                }
+                
+                if self.logErrors, let error = dataResponse.error {
+                    debugLog("Load image error - \(error.description)")
                 }
                 
                 guard

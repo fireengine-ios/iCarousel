@@ -26,7 +26,7 @@ final class LoadingImageView: UIImageView {
     private let activity = UIActivityIndicatorView(activityIndicatorStyle: .white)
     private var url: URL?
     private var path: PathForItem?
-    private let filesDataSource = FilesDataSource()
+    let filesDataSource = FilesDataSource()
     
     private var cornerView: UIView?
     

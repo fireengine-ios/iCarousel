@@ -45,6 +45,12 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         return cachingManager
     }()
     
+    var logLoadingErrors = false {
+        didSet {
+            getImageServise.logLoadingErrors = logLoadingErrors
+        }
+    }
+    
     // MARK: PhotoDataSource
 
     func getSmalImage(path patch: PathForItem, completeImage: @escaping RemoteImage) {
