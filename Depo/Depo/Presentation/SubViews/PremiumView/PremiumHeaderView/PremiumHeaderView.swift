@@ -76,7 +76,7 @@ final class PremiumHeaderView: UIView {
         titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
         titleLabel.textColor = ColorConstants.darkText
         
-        subtitleLabel.font = UIFont.TurkcellSaturaMedFont(size: 20)
+        subtitleLabel.font = UIFont.TurkcellSaturaFont(size: 20)
         subtitleLabel.textColor = ColorConstants.darkText
 
         premiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
