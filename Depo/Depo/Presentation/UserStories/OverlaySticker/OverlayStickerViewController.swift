@@ -55,14 +55,10 @@ final class OverlayStickerViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectStickerType(type: .gif)
         navigationController?.navigationBar.isHidden = true
         
         view.backgroundColor = .black
         statusBarColor = .black
-        overlayingStickerImageView.stickersDelegate = self
-        overlayStickerViewControllerDataSource.delegate = self
-        overlayStickerViewControllerDataSource.setStateForSelectedType(type: .gif)
         showSpinner()
 
         addTapGesture()
@@ -255,9 +251,13 @@ final class OverlayStickerViewController: ViewController {
         
         loadView()
         view.backgroundColor = .black
+        
         selectStickerType(type: .gif)
+        
+        overlayingStickerImageView.stickersDelegate = self
+        overlayStickerViewControllerDataSource.delegate = self
+        overlayStickerViewControllerDataSource.loadNext()
         overlayingStickerImageView.image = selectedImage
-            
     }
     
     private func setupNavigationBar() {
