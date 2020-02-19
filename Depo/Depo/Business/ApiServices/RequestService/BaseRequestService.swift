@@ -28,7 +28,10 @@ protocol RequestParametrs {
 
 protocol UploadRequestParametrs: RequestParametrs {
     var urlToLocalFile: URL? { get }
+    var rootFolder: String { get }
+    var tmpUUID: String { get }
     var fileData: Data? { get }
+    var fileName: String { get }
     var uploadType: UploadType? { get }
 }
 
