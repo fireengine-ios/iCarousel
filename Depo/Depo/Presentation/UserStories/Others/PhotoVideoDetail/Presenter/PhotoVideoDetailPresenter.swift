@@ -11,6 +11,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     weak var view: PhotoVideoDetailViewInput!
     var interactor: PhotoVideoDetailInteractorInput!
     var router: PhotoVideoDetailRouterInput!
+    var moduleOutput: PhotoVideoDetailModuleOutput?
 
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
     var alertSheetModule: AlertFilesActionsSheetModuleInput?
@@ -18,6 +19,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     var alertSheetExcludeTypes = [ElementTypes]()
     
     var item: Item?
+    
+    var canLoadMoreItems = true
     
     func viewIsReady(view: UIView) {
         interactor.onViewIsReady()
@@ -155,6 +158,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         interactor.replaceUploaded(item)
     }
     
+    func willDisplayLastCell() {
+        if canLoadMoreItems {
+            moduleOutput?.needLoadNextPage()
+        }
+    }
     
     // MARK: presenter output
     
@@ -198,8 +206,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         view.hideView()
     }
     
-    func updateItems(objects: [Item], selectedIndex: Int, isRightSwipe: Bool) {
-        view.updateItems(objectsArray: objects, selectedIndex: selectedIndex, isRightSwipe: isRightSwipe)
+    func updateItems(objects: [Item], selectedIndex: Int) {
+        view.updateItems(objectsArray: objects, selectedIndex: selectedIndex)
     }
     
     func onLastRemoved() {
@@ -240,4 +248,28 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
+    
+    // ModuleInput
+    var itemsType: FileType? {
+        interactor.allItems.first?.fileType
+    }
+    
+    func appendItems(_ items: [Item], isLastPage: Bool) {
+        if isLastPage {
+            canLoadMoreItems = false
+        }
+        
+        if items.isEmpty {
+            if !isLastPage {
+                //autoload next page for filtered items
+                moduleOutput?.needLoadNextPage()
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.interactor.appendItems(items)
+                self.view.appendItems(items)
+            }
+        }
+    }
+    
 }

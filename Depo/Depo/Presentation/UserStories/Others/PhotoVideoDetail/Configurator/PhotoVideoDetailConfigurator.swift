@@ -11,21 +11,29 @@ import UIKit
 class PhotoVideoDetailModuleConfigurator {
 
     func configureModuleForViewInput<UIViewController>(viewInput: UIViewController,
+                                                       presenter: PhotoVideoDetailPresenter,
+                                                       moduleOutput: PhotoVideoDetailModuleOutput? = nil,
                                                        bottomBarConfig: EditingBarConfig,
                                                        selecetedItem: Item,
                                                        allItems: [Item],
-                                                       status: ItemStatus) {
+                                                       status: ItemStatus,
+                                                       canLoadMoreItems: Bool) {
         if let viewController = viewInput as? PhotoVideoDetailViewController {
             configure(viewController: viewController,
+                      presenter: presenter,
+                      moduleOutput: moduleOutput,
                       bottomBarConfig: bottomBarConfig,
                       alertSheetExcludeTypes: [.moveToTrash],
                       photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions,
                       selecetedItem: selecetedItem,
-                      allItems: allItems, status: status, viewType: .details)
+                      allItems: allItems, status: status, viewType: .details,
+                      canLoadMoreItems: canLoadMoreItems)
         }
     }
 
     func configureModuleFromAlbumForViewInput<UIViewController>(viewInput: UIViewController,
+                                                                presenter: PhotoVideoDetailPresenter,
+                                                                moduleOutput: PhotoVideoDetailModuleOutput? = nil,
                                                                 bottomBarConfig: EditingBarConfig,
                                                                 selecetedItem: Item,
                                                                 allItems: [Item],
@@ -36,34 +44,44 @@ class PhotoVideoDetailModuleConfigurator {
             let interactor = PhotoVideoDetailInteractor()
             interactor.albumUUID = albumUUID
             configure(viewController: viewController,
+                      presenter: presenter,
+                      moduleOutput: moduleOutput,
                       bottomBarConfig: bottomBarConfig,
                       interactor: interactor,
                       photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.moveToTrash],
                       selecetedItem: selecetedItem, allItems: allItems, albumItem: albumItem,
-                      status: status, viewType: .insideAlbum)
+                      status: status, viewType: .insideAlbum,
+                      canLoadMoreItems: true)
         }
     }
     
     func configureModuleFromFaceImageAlbumForViewInput<UIViewController>(viewInput: UIViewController,
-                                                                bottomBarConfig: EditingBarConfig,
-                                                                selecetedItem: Item,
-                                                                allItems: [Item],
-                                                                albumUUID: String,
-                                                                albumItem: Item? = nil,
-                                                                status: ItemStatus) {
+                                                                         presenter: PhotoVideoDetailPresenter,
+                                                                         moduleOutput: PhotoVideoDetailModuleOutput? = nil,
+                                                                         bottomBarConfig: EditingBarConfig,
+                                                                         selecetedItem: Item,
+                                                                         allItems: [Item],
+                                                                         albumUUID: String,
+                                                                         albumItem: Item? = nil,
+                                                                         status: ItemStatus) {
         if let viewController = viewInput as? PhotoVideoDetailViewController {
             let interactor = PhotoVideoDetailInteractor()
             interactor.albumUUID = albumUUID
             configure(viewController: viewController,
+                      presenter: presenter,
+                      moduleOutput: moduleOutput,
                       bottomBarConfig: bottomBarConfig,
                       interactor: interactor,
                       photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions + [.moveToTrash],
                       selecetedItem: selecetedItem, allItems: allItems, albumItem: albumItem,
-                      status: status, viewType: .insideFIRAlbum)
+                      status: status, viewType: .insideFIRAlbum,
+                      canLoadMoreItems: true)
         }
     }
     
     private func configure(viewController: PhotoVideoDetailViewController,
+                           presenter: PhotoVideoDetailPresenter,
+                           moduleOutput: PhotoVideoDetailModuleOutput? = nil,
                            bottomBarConfig: EditingBarConfig,
                            alertSheetConfig: AlertFilesActionsSheetInitialConfig? = nil,
                            alertSheetExcludeTypes: [ElementTypes] = [ElementTypes](),
@@ -73,13 +91,15 @@ class PhotoVideoDetailModuleConfigurator {
                            allItems: [Item],
                            albumItem: Item? = nil,
                            status: ItemStatus,
-                           viewType: DetailViewType) {
+                           viewType: DetailViewType,
+                           canLoadMoreItems: Bool) {
         let router = PhotoVideoDetailRouter()
 
-        let presenter = PhotoVideoDetailPresenter()
         presenter.view = viewController
         presenter.router = router
         presenter.alertSheetExcludeTypes = alertSheetExcludeTypes
+        presenter.moduleOutput = moduleOutput
+        presenter.canLoadMoreItems = canLoadMoreItems
         
         if status == .trashed {
             presenter.alertSheetExcludeTypes.append(.addToFavorites)

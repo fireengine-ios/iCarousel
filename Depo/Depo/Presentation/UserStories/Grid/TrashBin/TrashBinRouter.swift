@@ -23,7 +23,7 @@ final class TrashBinRouter {
         router.pushViewController(viewController: controller)
     }
     
-    func openSelected(item: Item, sameTypeItems: [Item]) {
+    func openSelected(item: Item, sameTypeItems: [Item], delegate: TrashBinViewController) {
         switch item.fileType {
         case .folder:
             let controller = router.filesFromFolder(folder: item, type: .Grid, sortType: .TimeNewOld, status: .trashed, moduleOutput: nil)
@@ -37,8 +37,14 @@ final class TrashBinRouter {
             router.presentViewController(controller: controller)
             
         default:
-            let controller = router.filesDetailViewController(fileObject: item, items: sameTypeItems, status: .trashed)
-            let nController = NavigationController(rootViewController: controller)
+            let detailModule = router.filesDetailModule(fileObject: item,
+                                                        items: sameTypeItems,
+                                                        status: .trashed,
+                                                        canLoadMoreItems: false,
+                                                        moduleOutput: delegate)
+            
+            delegate.photoVideoDetailModule = detailModule.moduleInput
+            let nController = NavigationController(rootViewController: detailModule.controller)
             router.presentViewController(controller: nController)
         }
     }

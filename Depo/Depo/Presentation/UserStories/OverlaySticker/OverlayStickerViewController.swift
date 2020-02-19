@@ -25,6 +25,7 @@ final class OverlayStickerViewController: ViewController {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private let stickerService = SmashServiceImpl()
     private lazy var overlayAnimationService = OverlayAnimationService()
+    private lazy var router = RouterVC()
     
     private lazy var applyButton: UIBarButtonItem = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
@@ -166,11 +167,14 @@ final class OverlayStickerViewController: ViewController {
     
     private func showPhotoVideoPreview(item: WrapData) {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SmashPreview())
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], status: item.status)
-        
-        controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = NavigationController(rootViewController: controller)
-        RouterVC().presentViewController(controller: nController)
+        let detailModule = router.filesDetailModule(fileObject: item,
+                                                    items: [item],
+                                                    status: item.status,
+                                                    canLoadMoreItems: false,
+                                                    moduleOutput: nil)
+
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        router.presentViewController(controller: nController)
         
         showCompletionPopUp()
     }

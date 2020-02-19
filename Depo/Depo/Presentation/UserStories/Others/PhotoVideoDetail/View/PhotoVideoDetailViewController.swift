@@ -324,9 +324,18 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         }
     }
     
-    func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool) {
+    func updateItems(objectsArray: [Item], selectedIndex: Int) {
         self.selectedIndex = selectedIndex
         updateAllItems(with: objectsArray, updateCollection: true)
+    }
+    
+    func appendItems(_ items: [Item]) {
+        let startIndex = objects.count
+        objects.append(contentsOf: items)
+        let endIndex = objects.count - 1
+        
+        let indexPaths = (startIndex...endIndex).map { IndexPath(item: $0, section: 0) }
+        collectionView.insertItems(at: indexPaths)
     }
     
     func onLastRemoved() {
@@ -391,6 +400,10 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         }
         cell.delegate = self
         cell.setObject(object: objects[indexPath.row])
+        
+        if indexPath.row == objects.count - 1 {
+            output.willDisplayLastCell()
+        }
     }
 }
 
