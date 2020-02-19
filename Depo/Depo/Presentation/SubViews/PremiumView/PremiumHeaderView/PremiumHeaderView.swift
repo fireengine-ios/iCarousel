@@ -84,7 +84,7 @@ final class PremiumHeaderView: UIView {
     
     private func getAttributeText(with text: String, price: String?) -> NSMutableAttributedString {
         let range = (text as NSString).range(of: price ?? "")
-        let attr: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont.TurkcellSaturaBolFont(size: 18),
+        let attr: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont.TurkcellSaturaFont(size: 18),
                                                         NSAttributedStringKey.foregroundColor: UIColor.lrTealish]
         
         let attributedString = NSMutableAttributedString(string: text)
