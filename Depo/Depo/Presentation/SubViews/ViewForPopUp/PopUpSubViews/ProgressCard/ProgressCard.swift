@@ -71,7 +71,7 @@ final class ProgressCard: BaseCardView, ProgressCardProtocol {
         if wrapItem != item {
             wrapItem = item
             debugLog("Progress Card - start load image")
-            iconImageViewForCurrentFile.filesDataSource.logLoadingErrors = true
+            iconImageViewForCurrentFile.setLogs(enabled: true)
             iconImageViewForCurrentFile.loadImage(with: item, smooth: true)
         }
     }

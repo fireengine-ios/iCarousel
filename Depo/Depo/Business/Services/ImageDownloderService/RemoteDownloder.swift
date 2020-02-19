@@ -15,7 +15,7 @@ class ImageDownloder {
     
     private var tokenList = [URL : SDWebImageOperation]()
     
-    var logLoadingErrors = false
+    var isErrorLogEnabled = false
     
     init() {
         downloder = SDWebImageManager.shared().imageDownloader!
@@ -59,9 +59,7 @@ class ImageDownloder {
     func getImageData(url: URL?, completeData:@escaping RemoteData) {
         
         guard let path = url else {
-            if logLoadingErrors {
-                debugLog("getImageData failed - invalid url")
-            }
+            logError(message: "getImageData failed - invalid url")
             
             DispatchQueue.main.async {
                 completeData(nil)
@@ -70,9 +68,7 @@ class ImageDownloder {
         }
         
         guard path.byTrimmingQuery?.absoluteString != nil else {
-            if logLoadingErrors {
-                debugLog("getImageData failed - invalid trimmed url")
-            }
+            logError(message: "getImageData failed - invalid trimmed url")
             
             DispatchQueue.main.async {
                 completeData(nil)
@@ -85,8 +81,8 @@ class ImageDownloder {
                 completeData(data)
             }
             
-            if self?.logLoadingErrors == true, let error = error {
-                debugLog("getImageData failed - \(error.description)")
+            if let error = error {
+                self?.logError(message: "getImageData failed - \(error.description)")
             }
         }
         
@@ -100,9 +96,7 @@ class ImageDownloder {
     
     func getImageDataByTrimming(url: URL?, completeImage:@escaping RemoteData) {
         guard let url = url else {
-            if logLoadingErrors {
-                debugLog("getImageDataByTrimming failed - invalid url")
-            }
+            logError(message: "getImageDataByTrimming failed - invalid url")
             
             DispatchQueue.main.async {
                 completeImage(nil)
@@ -111,9 +105,7 @@ class ImageDownloder {
         }
         
         guard let trimmedUrl = url.byTrimmingQuery else {
-            if logLoadingErrors {
-                debugLog("getImageDataByTrimming failed - invalid trimmed url")
-            }
+            logError(message: "getImageDataByTrimming failed - invalid trimmed url")
             
             DispatchQueue.main.async {
                 completeImage(nil)
@@ -130,7 +122,7 @@ class ImageDownloder {
             return
         }
         
-        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global(), logErrors: logLoadingErrors)
+        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global(), isErrorLogEnabled: isErrorLogEnabled)
         operation.outputBlock = { [weak self] _, data in
             guard let self = self else {
                 completeImage(nil)
@@ -157,9 +149,7 @@ class ImageDownloder {
     
     func getImageByTrimming(url: URL?, completeImage:@escaping RemoteImage) {
         guard let url = url else {
-            if logLoadingErrors {
-                debugLog("getImageByTrimming failed - invalid url")
-            }
+            logError(message: "getImageByTrimming failed - invalid url")
             
             DispatchQueue.main.async {
                 completeImage(nil)
@@ -168,9 +158,7 @@ class ImageDownloder {
         }
         
         guard let trimmedUrl = url.byTrimmingQuery else {
-            if logLoadingErrors {
-                debugLog("getImageByTrimming failed - invalid trimmed url")
-            }
+            logError(message: "getImageByTrimming failed - invalid trimmed url")
             
             DispatchQueue.main.async {
                 completeImage(nil)
@@ -187,7 +175,7 @@ class ImageDownloder {
             return
         }
         
-        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global(), logErrors: logLoadingErrors)
+        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global(), isErrorLogEnabled: isErrorLogEnabled)
         operation.outputBlock = { [weak self] image, _ in
             guard let self = self else {
                 completeImage(nil)
@@ -274,6 +262,14 @@ class ImageDownloder {
     private func cancel(operation: SDWebImageOperation, url: URL) {
         operation.cancel()
         tokenList[url] = nil
+    }
+}
+
+extension ImageDownloder {
+    private func logError(message: String) {
+        if isErrorLogEnabled {
+            debugLog(message)
+        }
     }
 }
 

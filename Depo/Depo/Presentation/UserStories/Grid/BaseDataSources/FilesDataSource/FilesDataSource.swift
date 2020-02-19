@@ -45,9 +45,9 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         return cachingManager
     }()
     
-    var logLoadingErrors = false {
+    var isErrorLogEnabled = false {
         didSet {
-            getImageServise.logLoadingErrors = logLoadingErrors
+            getImageServise.isErrorLogEnabled = isErrorLogEnabled
         }
     }
     

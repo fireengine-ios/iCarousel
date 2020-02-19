@@ -75,7 +75,7 @@ class AnimationCard: BaseCardView {
     
     override func viewWillShow() {
         debugLog("Animation Card - start load image")
-        photoImageView.filesDataSource.logLoadingErrors = true
+        photoImageView.setLogs(enabled: true)
         photoImageView.loadImageData(with: item?.tmpDownloadUrl)
     }
     

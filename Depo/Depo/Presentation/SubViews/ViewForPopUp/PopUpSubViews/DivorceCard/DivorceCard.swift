@@ -53,7 +53,7 @@ final class DivorceCard: BaseCardView {
             let videoPreviewImageUrl = cardObject?.details?["thumbnail"].url {
             
             debugLog("Divorce Card - start load image")
-            videoPreviewImageView.filesDataSource.logLoadingErrors = true
+            videoPreviewImageView.setLogs(enabled: true)
             videoPreviewImageView.loadImageData(with: videoPreviewImageUrl)
             self.videoUrl = videoUrl
             

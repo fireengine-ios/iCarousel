@@ -114,7 +114,7 @@ final class AlbumCard: BaseCardView {
             let item = WrapData(remote: searchItem)
             
             debugLog("Album Card - start load image")
-            previewImageView.filesDataSource.logLoadingErrors = true
+            previewImageView.setLogs(enabled: true)
             previewImageView.loadImage(with: item)
         }
     }
