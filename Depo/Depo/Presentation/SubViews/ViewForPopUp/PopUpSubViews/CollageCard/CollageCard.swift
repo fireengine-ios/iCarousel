@@ -142,13 +142,15 @@ final class CollageCard: BaseCardView {
     private func showPhotoVideoDetail() {
         guard let item = item else { return }
         
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
-                                                                                    selectedItem: item,
-                                                                                    allItems: [item],
-                                                                                    status: .active)
-        controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = NavigationController(rootViewController: controller)
-        RouterVC().presentViewController(controller: nController)
+        let router = RouterVC()
+        let detailModule = router.filesDetailModule(fileObject: item,
+                                                    items: [item],
+                                                    status: .active,
+                                                    canLoadMoreItems: false,
+                                                    moduleOutput: nil)
+
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        router.presentViewController(controller: nController)
     }
     
     override func spotlightHeight() -> CGFloat {

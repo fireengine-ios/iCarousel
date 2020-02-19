@@ -130,10 +130,13 @@ final class UploadService: BaseRequestService {
                         
                         if errorResponse.isOutOfSpaceError {
                             self?.cancelSyncToUseOperations()
-                            self?.showOutOfSpaceAlert()
                             ///In order to update the progress bar of the items which are not synchronized
                             filteredItems.forEach { wrapData in
                                 ItemOperationManager.default.cancelledUpload(file: wrapData)
+                            }
+                            
+                            DispatchQueue.main.async {
+                                self?.showOutOfSpaceAlert()
                             }
                         }
                         
@@ -157,10 +160,13 @@ final class UploadService: BaseRequestService {
                         
                         if errorResponse.isOutOfSpaceError {
                             self?.cancelUploadOperations()
-                            self?.showOutOfSpaceAlert()
                             ///In order to update the progress bar of the items which are not synchronized
                             filteredItems.forEach { wrapData in
                                 ItemOperationManager.default.cancelledUpload(file: wrapData)
+                            }
+                            
+                            DispatchQueue.main.async {
+                                self?.showOutOfSpaceAlert()
                             }
                         }
                         
@@ -761,27 +767,7 @@ final class UploadService: BaseRequestService {
 
 extension UploadService {
     fileprivate func showOutOfSpaceAlert() {
-        let router = RouterVC()
-        
-        DispatchQueue.main.async {
-            let controller = PopUpController.with(title: TextConstants.syncOutOfSpaceAlertTitle,
-                                                  message: TextConstants.syncOutOfSpaceAlertText,
-                                                  image: .none,
-                                                  firstButtonTitle: TextConstants.syncOutOfSpaceAlertCancel,
-                                                  secondButtonTitle: TextConstants.upgrade,
-                                                  firstAction: nil,
-                                                  secondAction: { vc in
-              vc.close(completion: {
-                  if router.navigationController?.presentedViewController != nil {
-                      router.pushOnPresentedView(viewController: router.packages)
-                  } else {
-                      router.pushViewController(viewController: router.packages)
-                  }
-              })
-            })
-        
-            router.tabBarVC?.present(controller, animated: false, completion: nil)
-        }
+        RouterVC().showFullQuotaPopUp()
     }
     
     fileprivate func filter(items: [WrapData]) -> [WrapData] {

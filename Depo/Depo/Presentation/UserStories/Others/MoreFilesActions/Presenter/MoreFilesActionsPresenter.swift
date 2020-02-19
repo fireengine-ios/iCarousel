@@ -52,11 +52,6 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     
     func showOutOfSpaceAlert(failedType type: ElementTypes) {
         operationFailed(with: type)
-        
-        let controller = FullQuotaWarningPopUp()
-        
-        DispatchQueue.toMain {
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
-        }
+        RouterVC().showFullQuotaPopUp()
     }
 }

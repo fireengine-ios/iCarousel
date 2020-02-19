@@ -28,4 +28,6 @@ protocol PhotoVideoDetailInteractorInput: class {
     func trackVideoStop()
     
     func replaceUploaded(_ item: WrapData)
+    
+    func appendItems(_ items: [Item])
 }

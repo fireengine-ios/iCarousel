@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput {
+class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput, PhotoVideoDetailModuleOutput {
     
     lazy var player: MediaPlayer = factory.resolve()
     
@@ -33,6 +33,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
     
     weak var sliderModule: LBAlbumLikePreviewSliderModuleInput?
+    
+    weak var photoVideoDetailModule: PhotoVideoDetailModuleInput?
     
     var topBarConfig: GridListTopBarConfig?
     
@@ -240,6 +242,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 return
             }
             self.dataSource.appendCollectionView(items: [], pageNum: self.interactor.requestPageNum)
+            self.photoVideoDetailModule?.appendItems([], isLastPage: true)
         }
     }
     
@@ -253,10 +256,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         updateThreeDotsButton()
 //        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
         dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
-           self.dataSource.appendCollectionView(items: items, pageNum: self.interactor.requestPageNum)
+            self.dataSource.appendCollectionView(items: items, pageNum: self.interactor.requestPageNum)
+            
+            if let fileType = self.photoVideoDetailModule?.itemsType,
+                let sameTypeFiles = self.getSameTypeItems(fileType: fileType, items: items) as? [Item] {
+                //add items of the same type only
+                self.photoVideoDetailModule?.appendItems(sameTypeFiles, isLastPage: self.dataSource.isPaginationDidEnd)
+            }
         }
     }
     
@@ -345,7 +354,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
         
         if item.fileType.isSupportedOpenType {
-            let sameTypeFiles = getSameTypeItems(item: item, items: data)
+            let sameTypeFiles = getSameTypeItems(fileType: item.fileType, items: data.flatMap { $0 })
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles,
                                   type: type, sortType: sortedType, moduleOutput: self)
         } else {
@@ -359,14 +368,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath) { }
     
-    private func getSameTypeItems(item: BaseDataSourceItem, items: [[BaseDataSourceItem]]) -> [BaseDataSourceItem] {
-        let allItems = items.flatMap { $0 }
-        if item.fileType.isDocument {
-            return allItems.filter { $0.fileType.isDocument }
-        } else if item.fileType == .video || item.fileType == .image {
-            return allItems.filter { ($0.fileType == .video) || ($0.fileType == .image) }
+    private func getSameTypeItems(fileType: FileType, items: [BaseDataSourceItem]) -> [BaseDataSourceItem] {
+        if fileType.isDocument {
+            return items.filter { $0.fileType.isDocument }
+        } else if fileType == .video || fileType == .image {
+            return items.filter { ($0.fileType == .video) || ($0.fileType == .image) }
         }
-        return allItems.filter { $0.fileType == item.fileType }
+        return items.filter { $0.fileType == fileType }
     }
     
     func getCellSizeForList() -> CGSize {
@@ -871,5 +879,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func getFIRParent() -> Item? {
         return nil
+    }
+
+    //PhotoVideoDetailModuleOutput
+    func needLoadNextPage() {
+        compoundAllFiltersAndNextItems()
     }
 }

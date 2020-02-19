@@ -344,11 +344,7 @@ extension SyncServiceManager: ItemSyncServiceDelegate {
 
 extension SyncServiceManager {
     fileprivate func showOutOfSpaceAlert() {
-        let controller = FullQuotaWarningPopUp()
-        
-        DispatchQueue.toMain {
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
-        }
+        RouterVC().showFullQuotaPopUp()
     }
 }
 
