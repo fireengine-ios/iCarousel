@@ -257,3 +257,9 @@ final class LoadingImageView: UIImageView {
     }
 
 }
+
+extension LoadingImageView {
+    func setLogs(enabled: Bool) {
+        filesDataSource.isErrorLogEnabled = enabled
+    }
+}
