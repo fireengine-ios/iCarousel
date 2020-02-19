@@ -1005,13 +1005,9 @@ extension MoreFilesActionsInteractor {
             text = localizations.folders
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            RouterVC().hideSpiner()
-            if let self = self {
-                self.showSuccessPopup(message: text)
-            } else {
-                UIApplication.showSuccessAlert(message: text)
-            }
+        DispatchQueue.main.async {
+            self.router.hideSpiner()
+            self.showSuccessPopup(message: text)
         }
     }
     

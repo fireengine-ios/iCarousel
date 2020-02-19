@@ -50,51 +50,63 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
     }
 
     func didUnhideItems(_ items: [WrapData]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
     }
     
     func didMoveToTrashItems(_ items: [Item]) {
         if view.status == .hidden {
-            backToOriginController()
+            setupBackHandler(toOriginal: true)
         } else {
             dataSource.deleteItems(items: items)
         }
     }
     
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        router.back()
+        setupBackHandler(toOriginal: false)
     }
     
     func putBackFromTrashItems(_ items: [Item]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
     }
     
     func putBackFromTrashPeople(items: [PeopleItem]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
     }
     
     func putBackFromTrashPlaces(items: [PlacesItem]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
     }
     
     func putBackFromTrashThings(items: [ThingsItem]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
     }
     
     func didHideAlbums(_ albums: [AlbumItem]) {
-        router.back()
+        if let album = (interactor as? AlbumDetailInteractor)?.album, album.uuid == albums.first?.uuid {
+            router.back()
+        }
     }
     
     func didUnhideAlbums(_ albums: [AlbumItem]) {
-        router.back()
+        setupBackHandler(toOriginal: false)
     }
     
     func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
-        router.back()
+        setupBackHandler(toOriginal: false)
     }
     
     func deleteItems(items: [Item]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
+    }
+    
+    private func setupBackHandler(toOriginal: Bool) {
+        backHandler = { [weak self] in
+            if toOriginal {
+                self?.backToOriginController()
+            } else {
+                self?.router.back()
+            }
+        }
     }
     
     private func backToOriginController() {
