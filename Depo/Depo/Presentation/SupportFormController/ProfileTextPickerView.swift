@@ -75,6 +75,23 @@ extension ProfileTextPickerView: UIPickerViewDelegate {
         return models[row]
     }
     
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let pickerLabel: UILabel
+        
+        if let label = view as? UILabel {
+            pickerLabel = label
+        } else {
+            pickerLabel = UILabel()
+            pickerLabel.adjustsFontSizeToFitWidth = true
+            pickerLabel.textAlignment = .center
+        }
+        
+        /// extra spaces for small screens, like 5s
+        pickerLabel.text = " \(models[row]) "
+        
+        return pickerLabel
+    }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         textField.text = models[row]
         didSelect?(row, models[row])

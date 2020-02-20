@@ -16,6 +16,13 @@ protocol InstagramAuthViewControllerDelegate: class {
     
 class InstagramAuthViewController: ViewController {
     
+    static func controller(fromSettings: Bool) -> InstagramAuthViewController {
+        let vc = InstagramAuthViewController()
+        vc.isFromSettings = fromSettings
+        
+        return vc
+    }
+    
     private lazy var webView = WKWebView(frame: .zero)
     
     private var clientID: String?
@@ -27,6 +34,8 @@ class InstagramAuthViewController: ViewController {
     
     private lazy var instagramService = InstagramService()
     private lazy var accountService = AccountService()
+    
+    private var isFromSettings = false
     
     weak var delegate: InstagramAuthViewControllerDelegate?
     
@@ -54,6 +63,7 @@ class InstagramAuthViewController: ViewController {
         var request = URLRequest(url: authPath!)
         request.httpShouldHandleCookies = false
         webView.load(request)
+        showSpinner()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,6 +72,7 @@ class InstagramAuthViewController: ViewController {
     }
     
     private func handleBackButton() {
+        hideSpinner()
         if isMovingFromParentViewController, !isLoginStarted, !isLoginCanceled {
             delegate?.instagramAuthCancel()
         }
@@ -79,8 +90,14 @@ class InstagramAuthViewController: ViewController {
                 switch response {
                 case .success(_):
                     DispatchQueue.toMain {
-                        self?.delegate?.instagramAuthSuccess()
-                        self?.navigationController?.popViewController(animated: true)
+                        guard let self = self else {
+                            return
+                        }
+                        
+                        self.delegate?.instagramAuthSuccess()
+                        if self.isFromSettings {
+                            self.navigationController?.popViewController(animated: true)
+                        }
                     }
                 case .failed(let error):
                     self?.hideSpinner()
@@ -112,7 +129,9 @@ class InstagramAuthViewController: ViewController {
 extension InstagramAuthViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        hideSpinner()
         if isLoginStarted {
+            isLoginStarted = false
             ///server returns 500 if checkInstagramLogin immediately
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
                 self.checkInstagramLogin()
@@ -124,6 +143,7 @@ extension InstagramAuthViewController: WKNavigationDelegate {
     
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        hideSpinner()
         delegate?.instagramAuthCancel()
     }
     
@@ -133,12 +153,31 @@ extension InstagramAuthViewController: WKNavigationDelegate {
             return
         }
         
-        if let index = currentUrl.range(of: "#access_token=")?.upperBound {
-            instagramAccessToken = String(currentUrl.suffix(from: index))
+        if let token = getValue(from: currentUrl, by: "code") {
+            self.instagramAccessToken = token
+            
             isLoginStarted = true
             removeCache()
         }
         
         decisionHandler(.allow)
+    }
+    
+    private func getValue(from url: String, by name: String) -> String? {
+        let urlQueryItems = getQueryItems(from: url)
+    
+        let queryItems = urlQueryItems?
+            .compactMap { getQueryItems(from: $0.value ?? "") }
+            .flatMap { $0 }
+    
+        return queryItems?.first(where: { $0.name == name })?.value
+    }
+    
+    private func getQueryItems(from url: String?) -> [URLQueryItem]? {
+        guard let url = url else {
+            return nil
+        }
+    
+        return URLComponents(string: url)?.queryItems
     }
 }

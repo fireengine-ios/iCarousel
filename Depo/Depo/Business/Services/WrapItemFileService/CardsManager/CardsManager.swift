@@ -13,7 +13,7 @@ enum OperationType: String {
     case sync                       = "Sync"
     case download                   = "Download"
     case prepareToAutoSync          = "prepareToAutoSync"
-    case prepareQuickScroll   = "prepareQuickScroll"
+    case prepareQuickScroll         = "prepareQuickScroll"
 //    case preparePhotosQuickScroll   = "preparePhotosQuickScroll"
 //    case prepareVideosQuickScroll   = "prepareVideosQuickScroll"
     case autoUploadIsOff            = "autoUploadIsOff"
@@ -34,10 +34,11 @@ enum OperationType: String {
     case animationCard              = "animation"
     
     case launchCampaign             = "launchCampaign"
-    
     case premium                    = "premium"
-    
     case instaPick                  = "instaPick"
+    case tbMatik                    = "TBMATIC"
+    case campaignCard               = "CAMPAIGN"
+    case divorce                    = "DIVORCE"
 }
 
 typealias BlockObject = VoidHandler
@@ -114,8 +115,8 @@ class CardsManager: NSObject {
     }
     
     // MARK: sending operation to registred subviews
-    func startOperatonsForCardsResponces(cardsResponces: [HomeCardResponse]) {
-        let sortedArray = cardsResponces.sorted { obj1, obj2 -> Bool in
+    func startOperatonsForCardsResponses(cardsResponses: [HomeCardResponse]) {
+        let sortedArray = cardsResponses.sorted { obj1, obj2 -> Bool in
             obj1.order < obj2.order
         }
         homeCardsObjects.removeAll()
@@ -127,13 +128,7 @@ class CardsManager: NSObject {
 //        homeCardsObjects.append(q)
         
         homeCardsObjects = homeCardsObjects.filter {
-            if let type = $0.getOperationType() {
-                ///LR-5518 need remove when gif format will work corectly for all application
-                ///filtration animation cards
-                if type == .animationCard {
-                    return false
-                }
-                
+            if let type = $0.getOperationType() {                
                 return !deletedCards.contains(type)
             }
             return false
@@ -196,19 +191,20 @@ class CardsManager: NSObject {
     }
     
     func setProgressForOperationWith(type: OperationType, object: WrapData?, allOperations: Int, completedOperations: Int) {
+        guard ReachabilityService.shared.isReachable else {
+            return
+        }
+        
         hidePopUpsByDepends(type: type)
         
         DispatchQueue.toMain {
             self.setProgressForOperation(operation: type, allOperations: allOperations, completedOperations: completedOperations)
             
             for notificationView in self.foloversArray {
-                
-                if let obj = object {
-                    notificationView.setProgressForOperationWith(type: type, object: obj, allOperations: allOperations, completedOperations: completedOperations)
-                } else {
-                    notificationView.setProgressForOperationWith(type: type, allOperations: allOperations, completedOperations: completedOperations)
-                }
-                
+                notificationView.setProgressForOperationWith(type: type,
+                                                             object: object,
+                                                             allOperations: allOperations,
+                                                             completedOperations: completedOperations)
             }
         }
     }
@@ -222,14 +218,17 @@ class CardsManager: NSObject {
     
     func updateAllProgressesInCardsForView(view: CardsManagerViewProtocol){
         for operation in progresForOperation.keys {
-            if let progress = progresForOperation[operation]{
+            if let progress = progresForOperation[operation] {
                 
                 if let object = progress.lastObject, let percent = progress.percentProgress {
                     view.setProgress(ratio: percent, for: operation, object: object)
                 }
                 
                 if let allOperation = progress.allOperations, let completedOperations = progress.completedOperations {
-                    view.setProgressForOperationWith(type: operation, allOperations: allOperation, completedOperations: completedOperations)
+                    view.setProgressForOperationWith(type: operation,
+                                                     object: nil,
+                                                     allOperations: allOperation,
+                                                     completedOperations: completedOperations)
                 }
             }
         }
@@ -259,9 +258,9 @@ class CardsManager: NSObject {
         }
     }
     
-    func manuallyDeleteCardsByType(type: OperationType, homeCardResponce: HomeCardResponse? = nil) {
+    func manuallyDeleteCardsByType(type: OperationType, homeCardResponse: HomeCardResponse? = nil) {
         var typeForInsert: OperationType? = nil
-        if let responce = homeCardResponce, !responce.actionable {
+        if let response = homeCardResponse, !response.actionable {
             typeForInsert = type
         }else if type == .freeAppSpaceLocalWarning || type == .freeAppSpace {
             typeForInsert = type
@@ -271,7 +270,7 @@ class CardsManager: NSObject {
             deletedCards.insert(type)
         }
         
-        stopOperationWithType(type: type, serverObject: homeCardResponce)
+        stopOperationWithType(type: type, serverObject: homeCardResponse)
     }
     
     func stopAllOperations() {
@@ -299,10 +298,12 @@ class CardsManager: NSObject {
             stopOperationWithType(type: .waitingForWiFi)
             stopOperationWithType(type: .autoUploadIsOff)
         case .waitingForWiFi:
+            stopOperationWithType(type: .sync)
             stopOperationWithType(type: .autoUploadIsOff)
             stopOperationWithType(type: .prepareToAutoSync)
         case .autoUploadIsOff:
             stopOperationWithType(type: .prepareToAutoSync)
+            stopOperationWithType(type: .waitingForWiFi)
             stopOperationWithType(type: .sync)
         default:
             break
@@ -344,9 +345,9 @@ class CardsManager: NSObject {
         return nil
     }
     
-    class func popUpViewForOperaion(type: OperationType) -> BaseView {
+    class func cardViewForOperaion(type: OperationType) -> BaseCardView {
         let serverObject = CardsManager.default.serverOperationFor(type: type)
-        let cardView: BaseView
+        let cardView: BaseCardView
         
         switch type {
         case .freeAppSpace:
@@ -358,7 +359,7 @@ class CardsManager: NSObject {
             popUp.configurateWithType(viewType: type)
             cardView = popUp
         case .download, .sync, .upload:
-            let popUp = ProgressPopUp.initFromNib()
+            let popUp = ProgressCard.initFromNib()
             popUp.configurateWithType(viewType: type)
             cardView = popUp
         case .prepareToAutoSync:
@@ -397,9 +398,18 @@ class CardsManager: NSObject {
             cardView = popUp
         case .instaPick:
             cardView = InstaPickCard.initFromNib()
+        case .tbMatik:
+            cardView = TBMatikCard.initFromNib()
+        case .campaignCard:
+            cardView = CampaignCard.initFromNib()
+        case .divorce:
+            cardView = DivorceCard.initFromNib()
         }
         
+        /// seems like duplicated logic "set(object:".
+        /// needs to drop before regression tests.
         cardView.set(object: serverObject)
+        
         return cardView
     }
     

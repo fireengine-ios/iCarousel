@@ -36,14 +36,17 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
 
     override func trackScreen() {
         if remoteItems is PeopleItemsService {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PeopleScreen())
             analyticsManager.logScreen(screen: .peopleFIR)
             analyticsManager.trackDimentionsEveryClickGA(screen: .peopleFIR)
             analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .recognition, eventLabel: .recognitionFace)
         } else if remoteItems is ThingsItemsService {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ThingsScreen())
             analyticsManager.logScreen(screen: .thingsFIR)
             analyticsManager.trackDimentionsEveryClickGA(screen: .thingsFIR)
             analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .recognition, eventLabel: .recognitionObject)
         } else if remoteItems is PlacesItemsService {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PlacesScreen())
             analyticsManager.logScreen(screen: .placesFIR)
             analyticsManager.trackDimentionsEveryClickGA(screen: .placesFIR)
             analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .recognition, eventLabel: .recognitionPlace)
@@ -109,51 +112,32 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
 extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
     
     func loadItem(_ item: BaseDataSourceItem) {
+        guard let item = item as? Item, item.fileType.isFaceImageType, let id = item.id else {
+            return
+        }
         
-        guard let item = item as? Item, let id = item.id else { return }
+        let successHandler: AlbumOperationResponse = { [weak self] album in
+            DispatchQueue.main.async {
+                if let output = self?.output as? FaceImageItemsInteractorOutput {
+                    output.didLoadAlbum(album, forItem: item)
+                }
+                
+                self?.output.asyncOperationSuccess()
+            }
+        }
         
-        if let item = item as? PeopleItem {
-            output.startAsyncOperation()
-            
-            peopleService.getPeopleAlbum(id: Int(id), success: { [weak self] album in
-                if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    DispatchQueue.main.async {
-                        output.didLoadAlbum(album, forItem: item)
-                    }
-                }
-                
-                self?.output.asyncOperationSuccess()
-                }, fail: { [weak self] fail in
-                    self?.output.asyncOperationFail(errorMessage: fail.description)
-            })
-        } else if let item = item as? ThingsItem {
-            output.startAsyncOperation()
-            
-            thingsService.getThingsAlbum(id: Int(id), success: { [weak self] album in
-                if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    DispatchQueue.main.async {
-                        output.didLoadAlbum(album, forItem: item)
-                    }
-                }
-                
-                self?.output.asyncOperationSuccess()
-                }, fail: { [weak self] fail in
-                    self?.output.asyncOperationFail(errorMessage: fail.description)
-            })
-        } else if let item = item as? PlacesItem {
-            output.startAsyncOperation()
-            
-            placesService.getPlacesAlbum(id: Int(id), success: { [weak self] album in
-                if let output = self?.output as? FaceImageItemsInteractorOutput {
-                    DispatchQueue.main.async {
-                        output.didLoadAlbum(album, forItem: item)
-                    }
-                }
-                
-                self?.output.asyncOperationSuccess()
-                }, fail: { [weak self] fail in
-                    self?.output.asyncOperationFail(errorMessage: fail.description)
-            })
+        let failHandler: FailResponse = { [weak self] error in
+            self?.output.asyncOperationFail(errorMessage: error.description)
+        }
+        
+        output.startAsyncOperation()
+        
+        if item is PeopleItem {
+            peopleService.getPeopleAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
+        } else if item is ThingsItem {
+            thingsService.getThingsAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
+        } else if item is PlacesItem {
+            placesService.getPlacesAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
         }
     }
     

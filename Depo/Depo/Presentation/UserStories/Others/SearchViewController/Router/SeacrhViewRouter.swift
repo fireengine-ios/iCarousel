@@ -22,14 +22,18 @@ class SeacrhViewRouter: SearchViewRouterInput {
         case .photoAlbum, .musicPlayList:
             return
         case .folder:
-            let controller = router.filesFromFolder(folder: wrapperedItem, type: .Grid, sortType: .TimeNewOld, moduleOutput: nil)
+            let controller = router.filesFromFolder(folder: wrapperedItem, type: .Grid, sortType: .TimeNewOld, status: .active, moduleOutput: nil)
             router.pushViewControllertoTableViewNavBar(viewController: controller)
         case .audio:
             let player: MediaPlayer = factory.resolve()
             player.play(list: wrapperedArray, startAt: wrapperedArray.index(of: wrapperedItem) ?? 0)
         default:
-            let controller = router.filesDetailViewController(fileObject: wrapperedItem, items: wrapperedArray)
-            let nController = NavigationController(rootViewController: controller)
+            let detailModule = router.filesDetailModule(fileObject: wrapperedItem,
+                                                        items: wrapperedArray,
+                                                        status: .active,
+                                                        canLoadMoreItems: false,
+                                                        moduleOutput: nil)
+            let nController = NavigationController(rootViewController: detailModule.controller)
             router.presentViewController(controller: nController)
         }
     }
@@ -42,7 +46,7 @@ class SeacrhViewRouter: SearchViewRouterInput {
         }
         
         let router = RouterVC()
-        let controller = router.createStory(items: items)
+        let controller = router.createStory(searchItems: items)
         router.pushViewController(viewController: controller)
     }
     
@@ -64,12 +68,12 @@ class SeacrhViewRouter: SearchViewRouterInput {
     }
     
     func openFaceImageItemPhotos(item: Item, album: AlbumItem) {
-        let controller = router.imageFacePhotosController(album: album, item: item, moduleOutput: nil, isSearchItem: true)
+        let controller = router.imageFacePhotosController(album: album, item: item, status: .active, moduleOutput: nil, isSearchItem: true)
         router.pushViewController(viewController: controller)
     }
     
     func openAlbum(item: AlbumItem) {
-        let controller = router.albumDetailController(album: item, type: .List, moduleOutput: nil)
+        let controller = router.albumDetailController(album: item, type: .List, status: .active, moduleOutput: nil)
         router.pushViewController(viewController: controller)
     }
 }

@@ -12,7 +12,7 @@ import SDWebImage
 
 
 final class ImageDownloadOperation: Operation, SDWebImageOperation {
-    typealias ImageDownloadOperationCallback = ((AnyObject?) -> Void)
+    typealias ImageDownloadOperationCallback = ((AnyObject?, Data?) -> Void)
     var outputBlock: ImageDownloadOperationCallback?
     
     private let semaphore = DispatchSemaphore(value: 0)
@@ -20,17 +20,20 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
     ///It is possible that when we use Alamofire Request and then directly cancel task it might cause bug for Alamofire.
     private var task: URLSessionTask?
     private let queue: DispatchQueue
+    private let isErrorLogEnabled: Bool
     
-    init(url: URL?, queue: DispatchQueue) {
+    init(url: URL?, queue: DispatchQueue, isErrorLogEnabled: Bool = false) {
         self.url = url
         self.queue = queue
+        self.isErrorLogEnabled = isErrorLogEnabled
         super.init()
     }
     
-    init(url: URL?, queue: DispatchQueue, completion: ImageDownloadOperationCallback?) {
+    init(url: URL?, queue: DispatchQueue, completion: ImageDownloadOperationCallback?, isErrorLogEnabled: Bool = false) {
         self.url = url
         self.queue = queue
         self.outputBlock = completion
+        self.isErrorLogEnabled = isErrorLogEnabled
         super.init()
     }
     
@@ -50,11 +53,12 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
         }
         
         guard let trimmedURL = url?.byTrimmingQuery else {
-            outputBlock?(nil)
+            outputBlock?(nil, nil)
             return
         }
         
-        var outputImage: UIImage? = nil
+        var outputImage: UIImage?
+        var outputData: Data?
         
         task = SessionManager.customDefault.request(trimmedURL)
             .customValidate()
@@ -67,12 +71,18 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
                     return
                 }
                 
-                guard let data = dataResponse.value, let image = UIImage(data: data) else {
+                self.logError(dataResponse.error)
+                
+                guard
+                    let data = dataResponse.value,
+                    let image = self.formattedImage(data: data)
+                else {
                     self.semaphore.signal()
                     return
                 }
                 
                 outputImage = image
+                outputData = data
                 self.semaphore.signal()
             })
             .task
@@ -83,8 +93,31 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
         
         defer {
             task?.cancel()
-            outputBlock?(outputImage)
+            outputBlock?(outputImage, outputData)
             semaphore.signal()
+        }
+    }
+    
+    private func formattedImage(data: Data?) -> UIImage? {
+        var image: UIImage?
+        if let data = data {
+            let format = ImageFormat.get(from: data)
+            switch format {
+            case .gif:
+                image = UIImage(gifData: data)
+            default:
+                image = UIImage(data: data)
+            }
+        }
+        
+        return image
+    }
+}
+
+extension ImageDownloadOperation {
+    private func logError(_ error: Error?) {
+        if self.isErrorLogEnabled, let error = error {
+            debugLog("Load image error - \(error.description)")
         }
     }
 }

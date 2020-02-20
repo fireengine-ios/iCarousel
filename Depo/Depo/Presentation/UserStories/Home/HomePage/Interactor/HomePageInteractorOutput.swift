@@ -12,15 +12,24 @@ protocol HomePageInteractorOutput: class {
         
     func stopRefresh()
     
-    func needPresentPopUp(popUpView: UIViewController)
+    func showPopupAboutPremiumIfNeeded()
     
-    func didShowPopupAboutPremium()
-    
-    func didObtainFailCardInfo(errorMessage: String, isNeedStopRefresh: Bool)
+    func didObtainError(with text: String, isNeedStopRefresh: Bool)
     
     func didObtainHomeCards(_ cards: [HomeCardResponse])
     
     func fillCollectionView(isReloadAll: Bool)
-        
+    
+    func didObtainQuotaInfo(usagePercentage: Float)
+    
+    func didObtainAccountInfo(accountInfo: AccountInfoResponse)
+    
+    func didObtainAccountInfoError(with text: String)
+
     func didObtainInstaPickStatus(status: InstapickAnalyzesCount)
+    
+    func showGiftBox()
+    
+    func hideGiftBox()
+    
 }

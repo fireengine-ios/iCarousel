@@ -6,13 +6,6 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-
-enum ContactsSyncServiceConstant {
-//    static let debugURL = "http://contactsync.test.valven.com/ttyapi/"
-//    static let prodURL =  "https://adepo.turkcell.com.tr/ttyapi/"
-    static let webProdURL =  "https://contactsync.turkcell.com.tr/ttyapi/"
-}
-
 typealias ContactsOperation = (ContactsResponse) -> Void
 
 class ContactsSyncService: BaseRequestService {
@@ -34,6 +27,7 @@ class ContactsSyncService: BaseRequestService {
         let typeString = type == .backup ? "Backup" : "Restore"
         debugLog("ContactsSyncService executeOperation \(typeString)")
         
+        SyncSettings.shared().bulk = NumericConstants.contactSyncBulk
         
         SyncSettings.shared().callback = { [weak self] response in
             self?.checkStatus(with: errorCallback, finishCallback: finishCallback)
@@ -106,16 +100,14 @@ class ContactsSyncService: BaseRequestService {
         case .RESULT_ERROR_PERMISSION_ADDRESS_BOOK:
             errorCallback?(.accessDenied, getCurrentOperationType())
         case .RESULT_ERROR_REMOTE_SERVER:
-            let requestService = APIReachabilityRequestService()
-            
-            requestService.sendPingRequest { [weak self] isReachable in
+            ReachabilityService.shared.forceCheckAPI { [weak self] isReachable in
                 guard let `self` = self else {
                     return
                 }
-                if isReachable == false {
-                    errorCallback?(.networkError, self.getCurrentOperationType())
-                } else {
+                if isReachable {
                     errorCallback?(.remoteServerError, self.getCurrentOperationType())
+                } else {
+                    errorCallback?(.networkError, self.getCurrentOperationType())
                 }
             }
         case .RESULT_ERROR_NETWORK:
@@ -124,6 +116,8 @@ class ContactsSyncService: BaseRequestService {
             errorCallback?(.internalError, getCurrentOperationType())
         case .RESULT_FAIL:
             errorCallback?(.failed, getCurrentOperationType())
+        case .RESULT_ERROR_DEPO:
+            errorCallback?(.depoError, getCurrentOperationType())
         default:
             break
         }
@@ -138,16 +132,16 @@ class ContactsSyncService: BaseRequestService {
         case .backup:
             return ContactSync.SyncResponse(responseType: .backup,
                                            totalNumberOfContacts: SyncStatus.shared().totalContactOnServer as! Int,
-                                           newContactsNumber: SyncStatus.shared().createdContactsSent.count,
-                                           duplicatesNumber: SyncStatus.shared().updatedContactsSent.count,
-                                           deletedNumber: SyncStatus.shared().deletedContactsOnServer.count,
+                                           newContactsNumber: SyncStatus.shared().createdOnServer,
+                                           duplicatesNumber: SyncStatus.shared().updatedOnServer,
+                                           deletedNumber: SyncStatus.shared().deletedOnServer,
                                            date: Date())
         case .restore:
             return ContactSync.SyncResponse(responseType: .restore,
                                            totalNumberOfContacts: SyncStatus.shared().totalContactOnClient as! Int,
-                                           newContactsNumber: SyncStatus.shared().createdContactsReceived.count,
-                                           duplicatesNumber: SyncStatus.shared().updatedContactsReceived.count,
-                                           deletedNumber: SyncStatus.shared().deletedContactsOnDevice.count,
+                                           newContactsNumber: SyncStatus.shared().createdOnServer,
+                                           duplicatesNumber: SyncStatus.shared().updatedOnServer,
+                                           deletedNumber: SyncStatus.shared().deletedOnServer,
                                            date: nil)
             
         }
@@ -304,8 +298,16 @@ class ContactsSyncService: BaseRequestService {
     
     private func setup() {
         updateAccessToken()
-        SyncSettings.shared().url = ContactsSyncServiceConstant.webProdURL
-        SyncSettings.shared().environment = .productionEnvironment//.developmentEnvironment
+        SyncSettings.shared().url = RouteRequests.baseContactsUrl.absoluteString
+        SyncSettings.shared().depo_URL = RouteRequests.baseShortUrlString
+        switch RouteRequests.currentServerEnvironment {
+        case .production:
+            SyncSettings.shared().environment = .productionEnvironment
+        case .preProduction:
+            SyncSettings.shared().environment = .developmentEnvironment
+        case .test:
+            SyncSettings.shared().environment = .testEnvironment
+        }
     }
     
 }

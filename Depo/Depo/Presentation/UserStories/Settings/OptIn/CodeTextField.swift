@@ -25,7 +25,7 @@ class CodeTextField: UITextField {
         bottomBorder.frame.size.width = layer.frame.width
     }
     
-    var inputTextLimit = NumericConstants.vereficationCharacterLimit
+    var inputTextLimit = NumericConstants.verificationCharacterLimit
     var underlineColor = UIColor.gray
     var underlineWidth: CGFloat = 1
     let fontKern = 20

@@ -46,7 +46,7 @@ final class CaptchaSignUpRequrementService {
     }
     
     public func getCaptchaRequrement(handler: @escaping ResponseBool) {
-        guard let requestURL = URL(string: RouteRequests.captchaRequred, relativeTo: RouteRequests.baseUrl) else {
+        guard let requestURL = URL(string: RouteRequests.captchaRequired, relativeTo: RouteRequests.baseUrl) else {
             handler(ResponseResult.failed(CustomErrors.unknown))
             return
         }
@@ -56,10 +56,7 @@ final class CaptchaSignUpRequrementService {
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    guard let captchaSignUp = CaptchaSignUpRequirementResponse(json: JSON(data: data)) else {
-                            handler(ResponseResult.failed(MappingError(data: data)))
-                            return
-                    }
+                    let captchaSignUp = CaptchaSignUpRequirementResponse(withJSON: JSON(data: data))
                     handler(ResponseResult.success(captchaSignUp.captchaRequired))
                 case .failure(let error):
                     
@@ -83,7 +80,7 @@ struct CaptchaSignUpRequrementParametr: RequestParametrs {
     var requestParametrs: Any = [String: Any]()
     
     var patch: URL {
-        let patch_: String = String(format: RouteRequests.captchaRequred)
+        let patch_: String = String(format: RouteRequests.captchaRequired)
         return URL(string: patch_, relativeTo: RouteRequests.baseUrl)!
     }
     
@@ -141,12 +138,12 @@ final class CaptchaResponse: ObjectRequestResponse {
     }
 }
 
-final class CaptchaSignUpRequrementResponse: ObjectRequestResponse {
-    
-    var data: Data?
-    var captchaRequred: Bool = false
+final class CaptchaSignUpRequirementResponse: ObjectRequestResponse {
 
-    private let captchaRequredJsonKey = "captchaRequired"
+    var data: Data?
+    var captchaRequired: Bool = false
+
+    private let captchaRequiredJsonKey = "captchaRequired"
     
     required init(json: Data?, headerResponse: HTTPURLResponse?) {
         self.data = json
@@ -154,7 +151,7 @@ final class CaptchaSignUpRequrementResponse: ObjectRequestResponse {
     }
     
     override func mapping() {
-        captchaRequred = json?[captchaRequredJsonKey].boolValue ?? false
+        captchaRequired = json?[captchaRequiredJsonKey].boolValue ?? false
     }
     
     required init(withJSON: JSON?) {
@@ -181,7 +178,7 @@ final class CaptchaService: BaseRequestService {
     }
     
     func getSignUpCaptchaRequrement(sucess: SuccessResponse?, fail: FailResponse?) {
-        let handler = BaseResponseHandler<CaptchaSignUpRequrementResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat: .DataFormat)
+        let handler = BaseResponseHandler<CaptchaSignUpRequirementResponse, ObjectRequestResponse>(success: sucess, fail: fail, expectedDataFormat: .DataFormat)
         executeGetRequest(param: CaptchaSignUpRequrementParametr(), handler: handler)
     }
     

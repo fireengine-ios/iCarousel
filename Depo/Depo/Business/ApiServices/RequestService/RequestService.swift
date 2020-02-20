@@ -189,7 +189,7 @@ class RequestService {
             else { return }
         
         SingletonStorage.shared.progressDelegates.invoke(invocation: { delegate in
-            delegate.didSend(ratio: Float(progress.fractionCompleted), for: url)
+            delegate.didSend(ratio: Float(progress.fractionCompleted), bytes: progress.completedUnitCount.intValue, for: url)
         })
     }
 }

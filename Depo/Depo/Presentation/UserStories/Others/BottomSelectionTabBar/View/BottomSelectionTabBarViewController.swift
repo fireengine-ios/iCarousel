@@ -44,7 +44,6 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
             editingBar.tintColor = ColorConstants.selectedBottomBarButtonColor
         }
         if let style = style, style != .default {
-            editingBar.barTintColor = UIColor.red
             editingBar.backgroundImage = UIImage()
         }
         editingBar.setupItems(withImageToTitleNames: items)
@@ -75,20 +74,21 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
         editingBar.selectedItem = nil
     }
     
-    private func chnageStatusForTabs(atIntdex indexes: [Int], enabled: Bool) {
-        indexes.forEach({
+    private func changeStatusForTabs(atIntdex indexes: [Int], enabled: Bool) {
+        indexes.forEach {
             guard let item = editingBar.items?[$0] else {
                 return
             }
+            
             item.isEnabled = enabled
-        })
+        }
     }
     
-    func disableItems(atIntdex indexes: [Int]) {
-        chnageStatusForTabs(atIntdex: indexes, enabled: false)
+    func disableItems(at indexes: [Int]) {
+        changeStatusForTabs(atIntdex: indexes, enabled: false)
     }
     
-    func enableIems(atIndex indexes: [Int]) {
-        chnageStatusForTabs(atIntdex: indexes, enabled: true)
+    func enableItems(at indexes: [Int]) {
+        changeStatusForTabs(atIntdex: indexes, enabled: true)
     }
 }

@@ -5,17 +5,17 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>lifedrive</string>
+	<string>billo_LifeTech</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconName</key>
-	<string>AppIconLifedrive</string>
+	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>billo</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -29,14 +29,14 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>db-422fptod5dlxrn8</string>
-				<string>akillidepo</string>
-				<string>fb531658366898592</string>
+				<string>db-mij832wzxlbyeiq</string>
+				<string>billo</string>
+				<string>fb408187279847927</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>22.5</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -49,19 +49,37 @@
 				<key>KitName</key>
 				<string>Crashlytics</string>
 			</dict>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Answers</string>
+			</dict>
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>531658366898592</string>
+	<string>408187279847927</string>
 	<key>FacebookDisplayName</key>
-	<string>lifebox</string>
+	<string>Billo</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>dbapi-2</string>
 		<string>dbapi-8-emm</string>
+		<string>fb408187279847927</string>
 		<string>fbapi</string>
 		<string>fb-messenger-api</string>
+		<string>fb-messenger-api20140430</string>
+		<string>fbapi20150629</string>
+		<string>fbapi20130214</string>
+		<string>fbapi20130410</string>
+		<string>fbapi20130702</string>
+		<string>fbapi20131010</string>
+		<string>fbapi20131219</string>
+		<string>fbapi20140410</string>
+		<string>fbapi20140116</string>
+		<string>fbapi20150313</string>
 		<string>fbauth2</string>
+		<string>fbauth</string>
 		<string>fbshareextension</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
@@ -74,6 +92,8 @@
 	<true/>
 	<key>MenloPushServerURL</key>
 	<string>https://turkcell.menloworks.com</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -122,7 +142,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string></string>
 	<key>NSContactsUsageDescription</key>
-	<string></string>
+	<string>To backup your contacts to lifebox</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string></string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -135,6 +155,8 @@
 	<string>Need access to save your photo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Your photos will be backed up to lifedrive</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>billo needs to access your bluetooth permission in order to send you push messages in specific areas</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>TurkcellSaturaReg.ttf</string>
@@ -175,6 +197,8 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>UTExportedTypeDeclarations</key>

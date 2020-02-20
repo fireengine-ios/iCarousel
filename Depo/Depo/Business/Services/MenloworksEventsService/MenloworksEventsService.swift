@@ -6,6 +6,8 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
+import XPush
+
 //FIXME: Menloworks should be added to the AnalyticsService
 class MenloworksEventsService {
 
@@ -17,7 +19,7 @@ class MenloworksEventsService {
     // MARK: - Event methods
     
     private func mergedHit(event: String) {
-        MPush.hitEvent(event)
+        XPush.hitEvent(event)
     }
     
     func onFirstLaunch() {
@@ -266,5 +268,9 @@ class MenloworksEventsService {
     
     func onBackgroundSync() {
         mergedHit(event: MenloworksEventsConstants.backgroundSync)
+    }
+    
+    func onPhotopickAnalyzeDone() {
+        mergedHit(event: MenloworksEventsConstants.photopickAnalyzeDone)
     }
 }

@@ -6,7 +6,14 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageInteractorOutput, BaseFilesGreedModuleOutput {
+final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageInteractorOutput, BaseFilesGreedModuleOutput {
+    
+    private enum DispatchGroupReason: CaseIterable {
+        case waitAccountInfoResponse        ///calls didObtainAccountInfo OR didObtainAccountInfoError
+        case waitAccountPermissionsResponse ///regardless response always calls fillCollectionView
+        case waitQuotaInfoResponse          ///regardless response always calls didObtainQuotaInfo
+        case waitTillViewDidAppear          ///calls viewIsReadyForPopUps
+    }
     
     weak var view: HomePageViewInput!
     var interactor: HomePageInteractorInput!
@@ -22,25 +29,40 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
     private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
     
     private var loadCollectionView = false
+    private var isShowPopupQuota = false
     private var isFirstAppear = true
     
-    private var isShowPopupQuota = false
-    private var isShowPopupAboutPremium = false
-
+    private var presentPopUpsGroup: DispatchGroup?
+    private var dispatchGroupReasons = [DispatchGroupReason]()
+    
     func viewIsReady() {
-        spotlightManager.delegate = self
-        interactor.trackScreen()
+        prepareDispatchGroup()
         
-        if !isFirstAppear {
-            view.startSpinner()
-            interactor.updateLocalUserDetail()
-        } else {
-            isFirstAppear = false
-        }
+        interactor.viewIsReady()
     }
     
-    func homePagePresented() {
-        interactor.homePagePresented()
+    func viewWillAppear() {
+        spotlightManager.delegate = self
+        
+        if isFirstAppear {
+            AnalyticsService.updateUser()
+        } else {
+            view.startSpinner()
+            interactor.updateLocalUserDetail()
+        }
+        
+        interactor.trackScreen()
+    }
+    
+    func viewIsReadyForPopUps() {
+        
+        if isFirstAppear {
+            isFirstAppear = false
+            
+            decreaseDispatchGroupValue(for: .waitTillViewDidAppear)
+        }
+        
+        HomePagePopUpsService.shared.continueAfterPushIfNeeded()
     }
     
     func showSettings() {
@@ -86,10 +108,6 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         }
     }
     
-    func needPresentPopUp(popUpView: UIViewController) {
-        view.needPresentPopUp(popUpView: popUpView)
-    }
-    
     func shownSpotlight(type: SpotlightType) {
         spotlightManager.shownSpotlight(type: type)
     }
@@ -102,25 +120,25 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         spotlightManager.requestShowSpotlight(for: types)
     }
     
-    func needCheckQuota() {
-        interactor.needCheckQuota()
-    }
-    
-    func didShowPopupAboutPremium() {
+    func showPopupAboutPremiumIfNeeded() {
         if AuthoritySingleton.shared.isShowPopupAboutPremiumAfterRegistration {
+            
             AuthoritySingleton.shared.setShowPopupAboutPremiumAfterRegistration(isShow: false)
             AuthoritySingleton.shared.setShowedPopupAboutPremiumAfterLogin(isShow: true)
+            
             router.showPopupForNewUser(with: TextConstants.homePagePopup,
                                        title: TextConstants.lifeboxPremium,
-                                       headerTitle: TextConstants.becomePremiumMember, completion: nil)
+                                       headerTitle: TextConstants.becomePremiumMember,
+                                       completion: nil)
         }
     }
     
-    func didObtainFailCardInfo(errorMessage: String, isNeedStopRefresh: Bool) {
+    func didObtainError(with text: String, isNeedStopRefresh: Bool) {
         if isNeedStopRefresh {
-            view.stopRefresh()
+            stopRefresh()
         }
-        router.showError(errorMessage: errorMessage)
+        
+        router.showError(errorMessage: text)
     }
     
     func didObtainHomeCards(_ cards: [HomeCardResponse]) {
@@ -131,27 +149,128 @@ class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePageIntera
         CardsManager.default.configureInstaPick(with: status)
     }
     
-    func fillCollectionView(isReloadAll: Bool) {
+    func didObtainQuotaInfo(usagePercentage: Float) {
+        let storageVars: StorageVars = factory.resolve()
+        let fullOfQuotaPopUpType: LargeFullOfQuotaPopUpType?
         
+        if usagePercentage < 0.8 {
+            fullOfQuotaPopUpType = nil
+            
+            ///if user's quota is below %80 percent , we change it to false to show next extend quota
+            storageVars.largeFullOfQuotaPopUpShownBetween80And99 = false
+            
+        } else if 0.8 <= usagePercentage && usagePercentage <= 0.99 && !storageVars.largeFullOfQuotaPopUpShownBetween80And99 {
+            fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpTypeBetween80And99(usagePercentage)
+            storageVars.largeFullOfQuotaPopUpShownBetween80And99 = true
+            
+        } else if usagePercentage >= 1.0 && storageVars.largeFullOfQuotaPopUpShowType100 && !storageVars.largeFullOfQuotaPopUpCheckBox  {
+            fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100
+            storageVars.largeFullOfQuotaPopUpShowType100 = false
+        } else {
+            fullOfQuotaPopUpType = nil
+        }
+        
+        if let type = fullOfQuotaPopUpType {
+            router.presentFullOfQuotaPopUp(with: type)
+        }
+        
+        
+        decreaseDispatchGroupValue(for: .waitQuotaInfoResponse)
+    }
+    
+    func giftButtonPressed() {
+        interactor.trackGiftTapped()
+        router.openCampaignDetails()
+    }
+    
+    func fillCollectionView(isReloadAll: Bool) {
         if !AuthoritySingleton.shared.isBannerShowedForPremium {
             CardsManager.default.startPremiumCard()
         }
+        
         AuthoritySingleton.shared.hideBannerForSecondLogin()
         
-        guard !cards.isEmpty else {
+        if cards.isEmpty {
+            if !isReloadAll {
+                stopRefresh()
+            }
             return
         }
         
         if isReloadAll {
-            CardsManager.default.startOperatonsForCardsResponces(cardsResponces: cards)
+            CardsManager.default.startOperatonsForCardsResponses(cardsResponses: cards)
         } else {
             //to hide spinner when refresh only premium card
-            view.stopRefresh()
+            stopRefresh()
+        }
+        
+        decreaseDispatchGroupValue(for: .waitAccountPermissionsResponse)
+    }
+    
+    func didObtainAccountInfo(accountInfo: AccountInfoResponse) {
+        verifyEmailIfNeeded(with: accountInfo)
+        credsCheckUpdateIfNeeded(with: accountInfo)
+        
+        decreaseDispatchGroupValue(for: .waitAccountInfoResponse)
+    }
+    
+    func didObtainAccountInfoError(with text: String) {
+        didObtainError(with: text, isNeedStopRefresh: false)
+    }
+    
+    func showGiftBox() {
+        view.showGiftBox()
+    }
+    
+    func hideGiftBox() {
+        view.hideGiftBox()
+    }
+    
+    private func prepareDispatchGroup() {
+        presentPopUpsGroup = DispatchGroup()
+        
+        dispatchGroupReasons = DispatchGroupReason.allCases
+        dispatchGroupReasons.forEach { _ in
+            presentPopUpsGroup?.enter()
+        }
+        
+        presentPopUpsGroup?.notify(queue: DispatchQueue.main) { [weak self] in
+            self?.presentPopUpsGroup = nil
+            self?.router.presentPopUps()
         }
     }
-
+    
+    private func decreaseDispatchGroupValue(for reason: DispatchGroupReason) {
+        guard let index = dispatchGroupReasons.firstIndex(of: reason) else {
+            return
+        }
+        
+        dispatchGroupReasons.remove(at: index)
+        presentPopUpsGroup?.leave()
+    }
+    
+    private func verifyEmailIfNeeded(with accountInfo: AccountInfoResponse) {
+        guard accountInfo.emailVerified == false else {
+            return
+        }
+        
+        router.presentEmailVerificationPopUp()
+    }
+    
+    private func credsCheckUpdateIfNeeded(with accountInfo: AccountInfoResponse) {
+        guard accountInfo.isUpdateInformationRequired == true else {
+            return
+        }
+        
+        let email = accountInfo.email ?? ""
+        let fullPhoneNumber = accountInfo.fullPhoneNumber
+        let message = "\(email)\n\(fullPhoneNumber)"
+        
+        router.presentCredsUpdateCkeckPopUp(message: message, userInfo: accountInfo)
+    }
 }
 
+//MARK: - SpotlightManagerDelegate
 extension HomePagePresenter: SpotlightManagerDelegate {
     
     func needShowSpotlight(type: SpotlightType) {

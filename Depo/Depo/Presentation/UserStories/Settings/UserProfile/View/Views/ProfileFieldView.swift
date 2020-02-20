@@ -95,15 +95,14 @@ class ProfileFieldView: UIView {
     }
 
     //MARK: init/deinit
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setup()
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         setup()
     }
     
@@ -166,12 +165,6 @@ class ProfileFieldView: UIView {
     func configure(with text: String?, delegate: UITextFieldDelegate) {
         textField.text = text
         textField.delegate = delegate
-    }
-    
-    func setupAsPassword() {
-        title = TextConstants.userProfilePassword
-        textField.text = "* * * * * * * * *"
-        textField.isUserInteractionEnabled = false
     }
     
     func setupAsTurkcellGSMIfNeeded() {
@@ -250,9 +243,8 @@ class ProfileFieldView: UIView {
     
     private func openFAQ() {
         let router = RouterVC()
-        if let controller = router.helpAndSupport {
-            router.pushViewController(viewController: controller)
-        }
+        let controller = router.helpAndSupport
+        router.pushViewController(viewController: controller)
     }
 }
 

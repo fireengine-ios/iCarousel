@@ -6,8 +6,7 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
-final class PermissionViewController: ViewController {
-    
+final class PermissionViewController: ViewController, ControlTabBarProtocol {
     private let accountService = AccountService()
     
     private lazy var stackView: UIStackView = {
@@ -27,6 +26,7 @@ final class PermissionViewController: ViewController {
         let permissionView = PermissionsView.initFromNib()
         permissionView.type = .etk
         permissionView.delegate = self
+        permissionView.textviewDelegate = self
         return permissionView
     }()
     
@@ -44,6 +44,13 @@ final class PermissionViewController: ViewController {
         setupLayout()
         
         checkPermissionState()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationBarWithGradientStyle()
+        hideTabBar()
     }
     
     private func setupScreen() {
@@ -68,38 +75,58 @@ final class PermissionViewController: ViewController {
                 return
             }
             
-            switch result {
-            case .success(let result):
-                self.setupPermissionViewFromResult(result, type: .etk)
-                self.setupPermissionViewFromResult(result, type: .globalPermission)
-            case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
+            DispatchQueue.main.async { [weak self] in
+                switch result {
+                case .success(let result):
+                    self?.setupPermissionViewFromResult(result, type: .etk)
+                    self?.setupPermissionViewFromResult(result, type: .globalPermission)
+                case .failed(let error):
+                    UIApplication.showErrorAlert(message: error.description)
+                }
             }
         }
     }
     
     private func setupPermissionViewFromResult(_ result: [SettingsPermissionsResponse], type: PermissionType) {
-        if let permission = result.first(where: { $0.type == type }),
-            permission.isAllowed == true,
-            let permissionView = viewForPermissionType(type) {
+        guard
+            let permission = result.first(where: { $0.type == type }),
+            permission.isAllowed == true
+        else {
+            return
+        }
+        
+        let permissionView = viewForPermissionType(type)
+        
+        let isPendingApproval = (permission.isApprovalPending == true)
+        let isOn = (permission.isApproved == true)
+        permissionView.turnPermissionOn(isOn: isOn, isPendingApproval: isPendingApproval)
+        
+        stackView.addArrangedSubview(permissionView)
+    }
+    
+    private func viewForPermissionType(_ type: PermissionType) -> (UIView & PermissionsViewProtocol) {
+        switch type {
+        case .etk:
+            return etkPermissionView
             
-            stackView.addArrangedSubview(permissionView)
-            permissionView.turnPermissionOn(isOn: permission.isApproved ?? false,
-                                            isPendingApproval: permission.isApprovalPending ?? false)
+        case .globalPermission:
+            return globalPermissionView
+            
         }
     }
     
-    private func viewForPermissionType(_ type: PermissionType) -> (UIView & PermissionsViewProtocol)? {
-        if type == .etk {
-            return etkPermissionView
-        } else if type == .globalPermission {
-            return globalPermissionView
-        } else {
-            return nil
-        }
+    private func openTurkcellAndGroupCompanies() {
+        let vc = WebViewController(urlString: RouteRequests.turkcellAndGroupCompanies)
+        RouterVC().pushViewController(viewController: vc)
+    }
+    
+    private func openCommercialEmailMessages() {
+        let vc = FullscreenTextController(text: TextConstants.commercialEmailMessages)
+        RouterVC().pushViewController(viewController: vc)
     }
 }
 
+//MARK: - PermissionViewDelegate
 extension PermissionViewController: PermissionViewDelegate {
     func permissionsView(_ permissionView: PermissionsView, didChangeValue isOn: Bool) {
         activityManager.start()
@@ -115,5 +142,24 @@ extension PermissionViewController: PermissionViewDelegate {
                 UIApplication.showErrorAlert(message: error.description)
             }
         }
+    }
+}
+
+//MARK: - PermissionViewTextViewDelegate
+extension PermissionViewController: PermissionViewTextViewDelegate {
+    func tappedOnURL(url: URL) -> Bool {
+        switch url.absoluteString {
+        case TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies:
+            DispatchQueue.toMain {
+                self.openTurkcellAndGroupCompanies()
+            }
+        case TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages:
+            DispatchQueue.toMain {
+                self.openCommercialEmailMessages()
+            }
+        default:
+            UIApplication.shared.openSafely(url)
+        }
+        return true
     }
 }

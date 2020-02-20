@@ -24,10 +24,10 @@ final class ThingsService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getThingsAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
+    func getThingsAlbum(id: Int, status: ItemStatus, success:@escaping AlbumOperationResponse, fail:@escaping FailResponse) {
         debugLog("ThingsService getThingsAlbumWithID")
         
-        let param = ThingsAlbumParameters(id: id)
+        let param = ThingsAlbumParameters(id: id, status: status)
         
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { response in
             if let response = response as? AlbumResponse, let album = response.list.first {
@@ -108,13 +108,20 @@ final class ThingsItem: Item {
 
 final class ThingsAlbumParameters: BaseRequestParametrs {
     private let id: Int
+    private let status: ItemStatus
     
-    init(id: Int) {
+    init(id: Int, status: ItemStatus) {
         self.id = id
+        self.status = status
     }
     
     override var patch: URL {
-        let searchWithParam = String(format: RouteRequests.thingsAlbum, id)
+        let searchWithParam: String
+        if status.isContained(in: [.hidden, .trashed]) {
+            searchWithParam = String(format: RouteRequests.thingsAlbumWithStatus, id, status.rawValue)
+        } else {
+            searchWithParam = String(format: RouteRequests.thingsAlbum, id)
+        }
         return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
 }

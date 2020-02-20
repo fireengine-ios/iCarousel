@@ -10,7 +10,15 @@ import Foundation
 
 struct RouteRequests {
     
-    private enum ServerEnvironment {
+    static let isBillo: Bool = {
+        #if LIFEDRIVE
+        return true
+        #else
+        return false
+        #endif
+    }()
+    
+    enum ServerEnvironment {
         case test
         case preProduction
         case production
@@ -18,7 +26,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    private static let currentServerEnvironment = ServerEnvironment.production
+    static var currentServerEnvironment = ServerEnvironment.production
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
@@ -26,6 +34,15 @@ struct RouteRequests {
         case .test: return "https://tcloudstb.turkcell.com.tr/"
         case .preProduction: return "https://adepotest.turkcell.com.tr/"
         case .production: return "https://adepo.turkcell.com.tr/"
+        }
+    }()
+    
+    
+    static let paycellShortUrlString: String = {
+        switch currentServerEnvironment {
+        case .test: return "https://tcloudstb.turkcell.com.tr/"
+        case .preProduction: return "https://adepotest.turkcell.com.tr/"
+        case .production: return "https://mylifebox.com/"
         }
     }()
     
@@ -39,11 +56,13 @@ struct RouteRequests {
         }
     }()
     
-    static let baseContactsUrl: URL = {
+    static let baseContactsUrl: URL = baseContactsUrlShort +/ "ttyapi/"
+    
+    static let baseContactsUrlShort: URL = {
         switch currentServerEnvironment {
-        case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/ttyapi/")!
-        case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/ttyapi/")!
-        case .production: return URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
+        case .test: return URL(string: "https://contactsynctest.turkcell.com.tr/")!
+        case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/")!
+        case .production: return URL(string: "https://contactsync.turkcell.com.tr/")!
         }
     }()
     
@@ -58,15 +77,10 @@ struct RouteRequests {
         }
     }()
     
-    static let privacyPolicy: String = {
-        switch currentServerEnvironment {
-        case .test: return "https://adepotest.turkcell.com.tr/policy/?lang="
-        case .preProduction: return "https://adepotest.turkcell.com.tr/policy/?lang="
-        case .production: return "https://mylifebox.com/policy/?lang="
-        }
-    }()
     
-    static let silentLogin: String =  RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
+    static let privacyPolicy = baseUrl +/ "privacyPolicy/get/\(Device.locale)"
+    
+    static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
     // MARK: Authentication
     
@@ -79,9 +93,12 @@ struct RouteRequests {
     static let resendVerificationSMS = "verify/sendVerificationSMS"
     
     static let forgotPassword = "account/forgotPassword"
-    static let mailVerefication = "verify/sendVerificationEmail"
+    static let mailVerification = "verify/sendVerificationEmail"
     static let mailUpdate = "account/email"
     
+    static let twoFactorAuthChallenge = baseUrl +/ "auth/2fa/challenge"
+    static let twoFactorAuthLogin = baseUrl +/ "auth/2fa/token"
+
     // MARK: EULA 
     static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
     static let eulaCheck   = "eula/check/%@"
@@ -108,8 +125,8 @@ struct RouteRequests {
     static let fbStop        = "migration/facebook/stop"
     
     // MARK: - Instagram
-    static let instagramConfig = "share/social/instagram/config"
-    static let instagramConnect =  baseUrl +/ "share/social/instagram/connect"
+    static let instagramConfig = "share/social/instagram/config/v2"
+    static let instagramConnect =  baseUrl +/ "share/social/instagram/connect/v2"
     static let instagramDisconnect =  baseUrl +/ "share/social/instagram/disconnect"
     static let instagramSyncStatus = "share/social/instagram/syncStatus"
     static let instagramCreateMigration = "share/social/instagram/migration/create"
@@ -119,7 +136,7 @@ struct RouteRequests {
     
     static let captcha = "captcha/%@/%@"
     
-    static let captchaRequred = "captcha/required"
+    static let captchaRequired = "captcha/required"
     
     // MARK: Search
     
@@ -133,31 +150,50 @@ struct RouteRequests {
     // MARK: Album
     
     static let albumList    = "album?contentType=%@&page=%@&size=%@&sortBy=%@&sortOrder=%@"
+    static let albumListWithStatus = baseUrl.absoluteString + albumList + "&status=%@"
     static let details      = "album/%@?page=%@&size=%@&sortBy=%@&sortOrder=%@"
+    static let albumHide = baseUrl +/ "album/hide"
+    static let albumRecover = baseUrl +/ "album/recover"
     
     // MARK: My Streams
     
+    // FIXME: pass paramaerts as request paramerts
     static let people = "person/"
     static let peopleThumbnails = "person/thumbnails"
     static let peoplePage = "person/page?pageSize=%d&pageNumber=%d"
+    static let peoplePageWithStatus = baseUrl.absoluteString + peoplePage + "&status=%@"
     static let peopleAlbum = "album?contentType=album/person&sortBy=createdDate&sortOrder=DESC&page=0&size=1&personInfoId=%d"
+    static let peopleAlbumWithStatus = baseUrl.absoluteString + peopleAlbum + "&status=%@"
     static let peopleAlbums = "person/relatedAlbums/%d"
     static let personVisibility = "person/visibility/"
     static let peopleSearch = "person/label/%@"
     static let peopleMerge = "person/%d"
     static let peopleChangeName = "person/label/%d"
     static let peopleDeletePhotos = "person/photo/delete/%d"
+    static let peopleRecovery = baseUrl.absoluteString + people + "recover"
+    static let peopleTrash = baseUrl.absoluteString + people + "trash"
+    static let peopleDelete = baseUrl.absoluteString + people + "delete"
 //    static let peopleDeletePhoto = "/person/photo/%d/%d"
     static let things = "object/"
     static let thingsThumbnails = "object/thumbnails"
     static let thingsPage = "object/page?pageSize=%d&pageNumber=%d"
+    static let thingsPageWithStatus = baseUrl.absoluteString + thingsPage + "&status=%@"
     static let thingsAlbum = "album?contentType=album/object&sortBy=createdDate&sortOrder=DESC&page=0&size=1&objectInfoId=%d"
+    static let thingsAlbumWithStatus = baseUrl.absoluteString + thingsAlbum + "&status=%@"
     static let thingsDeletePhotos = "object/photo/%d"
+    static let thingsRecovery = baseUrl.absoluteString + things + "recover"
+    static let thingsTrash = baseUrl.absoluteString + things + "trash"
+    static let thingsDelete = baseUrl.absoluteString + things + "delete"
 //    static let thingsDeletePhoto = "object/photo/%d/%d"
     static let places = "location/"
     static let placesThumbnails = "location/thumbnails"
     static let placesPage = "location/page?pageSize=%d&pageNumber=%d"
+    static let placesPageWithStatus = baseUrl.absoluteString + placesPage + "&status=%@"
     static let placesAlbum = "album?contentType=album/location&sortBy=createdDate&sortOrder=DESC&page=0&size=1&locationInfoId=%d"
+    static let placesAlbumWithStatus = baseUrl.absoluteString + placesAlbum + "&status=%@"
+    static let placesRecovery = baseUrl.absoluteString + places + "recover"
+    static let placesTrash = baseUrl.absoluteString + places + "trash"
+    static let placesDelete = baseUrl.absoluteString + places + "delete"
 //    static let placesDeletePhotos = "location/%d"
     
     //MARK : Share
@@ -166,8 +202,19 @@ struct RouteRequests {
     //MARK: Feedback
     static let feedbackEmail = baseUrl +/ "feedback/contact-mail"
     
-    //MARK : Faq 
-    static let faqContentUrl = "https://mylifebox.com/faq/?lang=%@"
+    //MARK : Faq
+    static var faqContentUrl: String {
+        switch currentServerEnvironment {
+        case .production: return isBillo ? "https://billostorage.com/faq/?lang=%@)" :
+                                           "https://mylifebox.com/faq/?lang=%@"
+            
+        case .preProduction: return isBillo ? "https://prp.mylifebox.com/faq/?lang=%@" :
+                                              "https://mylifebox.com/faq/?lang=%@"
+            
+        case .test: return isBillo ? "https://dev.mylifebox.com/faq/?lang=%@" :
+                                     "https://mylifebox.com/faq/?lang=%@"
+        }
+    }
 
     // MARK: - Contacts
     static let getContacts = "contact?sortField=firstname&sortOrder=ASC&maxResult=32&currentPage=%d"
@@ -180,13 +227,37 @@ struct RouteRequests {
     static let quickScrollGroupsList = "scroll/groups/list"
     static let quickScrollRangeList = "scroll/range/list"
     
+    // MARK: - Spotify
+    
+    enum Spotify {
+        static let spotifyApi = baseUrl +/ "migration/spotify"
+        static let connect = spotifyApi +/ "connect"
+        static let disconnect = spotifyApi +/ "disconnect"
+        static let start = spotifyApi +/ "start"
+        static let stop = spotifyApi +/ "stop"
+        static let authorizeUrl = spotifyApi +/ "authorizeUrl"
+        static let status = spotifyApi +/ "status"
+        static let playlists = spotifyApi +/ "playlist"
+        static let tracks = playlists +/ "track"
+        static let importedPlaylists = spotifyApi +/ "provider/playlist"
+        static let importedTracks = importedPlaylists +/ "track"
+    }
+    
+    // MARK: - Smash
+    
+    static let smashAnimation = baseUrl +/ "external/file/list"
+    // MARK: - Campaign
+    
+    static let campaignApi = baseUrl +/ "campaign"
+    static let campaignPhotopick = campaignApi +/ "photopick"
+    
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {
         #if LIFEBOX
-            let jsonName = "update_ios.json"
+            let jsonName = "download/update_ios.json"
         #elseif LIFEDRIVE
-            let jsonName = "update_lifedrive_ios.json"
+            let jsonName = "download/update_lifedrive_ios.json"
         #else
             let jsonName = "unknown"
             debugPrint("⚠️: unknown turkcell updater url")
@@ -214,12 +285,19 @@ struct RouteRequests {
         static let updatePassword = accountApi +/ "updatePassword"
         static let updateBirthday = accountApi +/ "birthday"
         static let getFaqUrl = accountApi +/ "faq"
+
+        static let getSecurityQuestion = baseUrl +/ "securityQuestion/%@"
+        static let updateSecurityQuestion = accountApi +/ "updateSecurityQuestion"
+        static let updateInfoFeedback = accountApi +/ "updateInfoFeedback"
+        static let updateAddress = accountApi +/ "address"
         
         enum Settings {
-            static let settingsApi = Account.accountApi +/ "setting" /// without "s" at the end
+            /// without "s" at the end
+            static let settingsApi = Account.accountApi +/ "setting" 
             
             static let accessInformation = baseUrl +/ "account/setting"
             static let facebookTaggingEnabled = settingsApi +/ "facebookTaggingEnabled"
+            static let autoSyncStatus = settingsApi +/ "autoSyncStatus"
         }
         
         enum Permissions {
@@ -242,6 +320,26 @@ struct RouteRequests {
         static let analyzeDetails = instapickApi +/ "getAnalyzeDetails"
         static let removeAnalyzes = instapickApi +/ "deleteAnalyze"
     }
+    
+    enum FileSystem {
+        static let fileList = "filesystem?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
+        static let trashedList = "filesystem/trashed?parentFolderUuid=%@&sortBy=%@&sortOrder=%@&page=%@&size=%@&folderOnly=%@"
+        static let hiddenList = baseUrl.absoluteString + "filesystem/hidden?sortBy=%@&sortOrder=%@&page=%@&size=%@&category=photos_and_videos"
+        
+        static let filesystemBase = "filesystem/"
+        
+        static let create = filesystemBase + "createFolder?parentFolderUuid=%@"
+        static let delete = filesystemBase + "delete"
+        static let rename = filesystemBase + "rename/%@"
+        static let move = filesystemBase + "move?targetFolderUuid=%@"
+        static let copy = filesystemBase + "copy?targetFolderUuid=%@"
+        static let details = filesystemBase + "details?minified=true"
+        static let detail = filesystemBase + "detail/%@"
+        static let metaData = filesystemBase + "metadata"
+        static let trash = filesystemBase + "trash"
+        static let hide = baseUrl +/ (filesystemBase + "hide")
+        static let recover = (baseUrl +/ filesystemBase) +/ "recover"
+    }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"
     
@@ -249,10 +347,18 @@ struct RouteRequests {
     
     static var globalPermissionsDetails: String {
         switch currentServerEnvironment {
-        case .production: return "https://mylifebox.com/portal/global_ops.html?lang=\(Device.locale)"
-        case .preProduction: return "https://adepotest.turkcell.com.tr/portal/global_ops.html?lang=\(Device.locale)"
-        case .test: return ""
-        }   
+        case .production: return isBillo ? "https://billostorage.com/global_ops.html ?lang=\(Device.locale)" :
+                                           "https://mylifebox.com/portal/global_ops.html?lang=\(Device.locale)"
+                                            
+        case .preProduction: return isBillo ? "https://prp.mylifebox.com/global_ops.html?lang=\(Device.locale)" :
+                                "https://adepotest.turkcell.com.tr/portal/global_ops.html?lang=\(Device.locale)"
+            
+        case .test: return isBillo ? "https://dev.mylifebox.com/global_ops.html?lang=\(Device.locale)" :  ""
+        }
     }
     
+    static let verifyEmail = baseUrl +/ "verify/emailAddress"
+    static let sendEmailVerificationCode = baseUrl +/ "verify/sendVerificationEmail"
+    
+    static let paycellWebUrl = paycellShortUrlString + "#!/settings/packages?cpcmOfferId=%d&redirect_uri=https://google.com"
 }

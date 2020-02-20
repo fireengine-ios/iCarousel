@@ -10,28 +10,19 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
     
     weak var albumDetailModuleOutput: AlbumDetailModuleOutput?
     
-    func operationStarted(type: ElementTypes) {
-        
-    }
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     override func operationFinished(withType type: ElementTypes, response: Any?) {
         debugLog("AlbumDetailPresenter operationFinished")
 
-        guard let router = self.router as? AlbumDetailRouter else { return }
         switch type {
         case .removeFromAlbum:
             debugLog("AlbumDetailPresenter operationFinished type == removeFromAlbum")
 
-            //onReloadData()
-        case .completelyDeleteAlbums:
-            debugLog("AlbumDetailPresenter operationFinished type == completelyDeleteAlbums")
-
-            router.back()
-            albumDetailModuleOutput?.onAlbumDeleted()
+            //onReloadData(
         case .removeAlbum:
             debugLog("AlbumDetailPresenter operationFinished type == removeAlbum")
 
-            router.back()
             albumDetailModuleOutput?.onAlbumRemoved()
         default:
             return
@@ -103,5 +94,17 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
         (rule == .sizeAZ || rule == .sizeZA) ? (dataSource.isHeaderless = true) : (dataSource.isHeaderless = false)
         
         reloadData()
+    }
+    
+    override func updateThreeDotsButton() {
+        view?.setThreeDotsMenu(active: true)
+    }
+    
+    override func didDelete(items: [BaseDataSourceItem]) {
+        super.didDelete(items: items)
+        
+        if let album = (interactor as? AlbumDetailInteractor)?.album, album.isTBMatik {
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.deletePhoto))
+        }
     }
 }

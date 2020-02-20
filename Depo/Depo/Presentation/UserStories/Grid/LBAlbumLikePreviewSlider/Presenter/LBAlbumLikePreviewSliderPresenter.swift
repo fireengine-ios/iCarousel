@@ -15,7 +15,7 @@ class LBAlbumLikePreviewSliderPresenter {
     weak var faceImagePhotosModuleOutput: FaceImagePhotosModuleOutput?
 
     weak var baseGreedPresenterModule: BaseFilesGreedModuleInput?
-    var dataSource: LBAlbumLikePreviewSliderDataSource = LBAlbumLikePreviewSliderDataSource()
+    private let dataSource = LBAlbumLikePreviewSliderDataSource()
     
 }
 
@@ -27,7 +27,12 @@ extension LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderViewOutput 
         dataSource.setupCollectionView(collectionView: collectionView)
         dataSource.delegate = self
         view.setupInitialState()
-        interactor.requestAllItems()
+        
+        if !interactor.currentItems.isEmpty {
+            dataSource.setCollectionView(items: interactor.currentItems)
+        } else {
+            interactor.requestAllItems()
+        }
     }
     
     func sliderTitlePressed() {
@@ -66,11 +71,6 @@ extension LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderDataSourceD
 // MARK: LBAlbumLikePreviewSliderModuleInput
 
 extension LBAlbumLikePreviewSliderPresenter: LBAlbumLikePreviewSliderModuleInput {
-    
-    func setup(withItems items: [SliderItem]) {
-        interactor.currentItems = items
-        dataSource.setCollectionView(items: items)
-    }
     
     func reloadAll() {
         interactor.requestAllItems()

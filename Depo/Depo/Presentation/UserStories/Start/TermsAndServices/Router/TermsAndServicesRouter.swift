@@ -18,8 +18,8 @@ class TermsAndServicesRouter: TermsAndServicesRouterInput {
         routerVC.setNavigationController(controller: routerVC.tabBarScreen)
     }
     
-    func goToPhoneVerefication(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
-        routerVC.pushViewController(viewController: routerVC.phoneVereficationScreen(withSignUpSuccessResponse: withSignUpSuccessResponse, userInfo: userInfo))
+    func goToPhoneVerification(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) {
+        routerVC.pushViewController(viewController: routerVC.phoneVerificationScreen(withSignUpSuccessResponse: withSignUpSuccessResponse, userInfo: userInfo))
     }
     
     func closeModule() {
@@ -43,6 +43,7 @@ class TermsAndServicesRouter: TermsAndServicesRouterInput {
     
     func goToGlobalDataPermissionDetails() {
         let vc = WebViewController(urlString: RouteRequests.globalPermissionsDetails)
+        vc.title = TextConstants.termsOfUseGlobalPermScreenTitle
         RouterVC().pushViewController(viewController: vc)
     }
 }

@@ -9,16 +9,25 @@
 import Foundation
 
 final class PremiumRouter {
+    
+    private let viewControllerForPresentOn: UIViewController?
     private let router = RouterVC()
-
     weak var delegate: PremiumPresenter?
+    
+    init(viewControllerForPresentOn: UIViewController?) {
+        self.viewControllerForPresentOn = viewControllerForPresentOn
+    }
 }
 
 // MARK: - PremiumRouterInput
 extension PremiumRouter: PremiumRouterInput {
 
     func goToBack() {
-        router.popViewController()
+        if  let controller = viewControllerForPresentOn as? InstaPickCampaignViewController {
+            controller.closeAfterBecomPremium()
+        } else {
+            router.popViewController()
+        }
     }
     
     func displayError(with errorMessage: String) {
@@ -29,16 +38,6 @@ extension PremiumRouter: PremiumRouterInput {
         let vc = DarkPopUpController.with(title: TextConstants.offersInfo,
                                           message: message,
                                           buttonTitle: TextConstants.ok)
-        router.presentViewController(controller: vc)
-    }
-    
-    func showActivateOfferAlert(with displayName: String, text: String, delegate: PremiumPresenter) {
-        self.delegate = delegate
-        let vc = DarkPopUpController.with(title: displayName, message: text, buttonTitle: TextConstants.purchase) { [weak self] vc in
-            vc.close(animation: {
-                self?.delegate?.buy()
-            })
-        }
         router.presentViewController(controller: vc)
     }
     
@@ -73,5 +72,23 @@ extension PremiumRouter: PremiumRouterInput {
     
     func showTermsOfUse() {
         router.pushViewController(viewController: router.termsOfUseScreen)
+    }
+    
+    func presentPaymentPopUp(paymentModel: PaymentModel?) {
+        let popup = PaymentPopUpController.controllerWith(paymentModel)
+        if let controller = viewControllerForPresentOn {
+            controller.present(popup, animated: true)
+        } else {
+            router.presentViewController(controller: popup)
+        }
+    }
+    
+    func closePaymentPopUpController(closeAction: @escaping VoidHandler) {
+        if let paymentPopUpController = router.defaultTopController as? PaymentPopUpController {
+            paymentPopUpController.close(completion: closeAction)
+        } else {
+            assertionFailure("there is no PaymentPopUpController. check requirements or logic")
+            UIApplication.topController()?.dismiss(animated: true, completion: closeAction)
+        }
     }
 }

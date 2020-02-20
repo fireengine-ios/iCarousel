@@ -10,19 +10,16 @@ import UIKit
 
 class OTPViewModuleConfigurator {
 
-    func configure(viewController: PhoneVereficationViewController, responce: SignUpSuccessResponse, userInfo: AccountInfoResponse, phoneNumber: String) {
+    func configure(viewController: PhoneVerificationViewController, response: SignUpSuccessResponse, userInfo: AccountInfoResponse, phoneNumber: String) {
 
-        let router = PhoneVereficationRouter()
+        let router = PhoneVerificationRouter()
 
         let presenter = OTPViewPresenter()
         presenter.view = viewController
         presenter.router = router
 
-        let interactor = OTPViewInteractor()
+        let interactor = OTPViewInteractor(userInfo: userInfo, phoneNumber: phoneNumber, response: response)
         interactor.output = presenter
-        interactor.responce = responce
-        interactor.userInfo = userInfo
-        interactor.phoneNumberString = phoneNumber
 
         presenter.interactor = interactor
         viewController.output = presenter

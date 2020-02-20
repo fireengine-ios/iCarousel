@@ -10,6 +10,8 @@ import UIKit
 
 class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     var tableDataMArray = [[BaseDataSourceItem]]()
     
     func configurateWithArray(array: [[BaseDataSourceItem]]) {
@@ -17,6 +19,11 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         tableDataMArray.append(contentsOf: array)
         collectionView?.reloadData()
 //        allItems.append(array.first! as [WrapData])
+    }
+    
+    override func dropData() {
+        super.dropData()
+        tableDataMArray.removeAll()
     }
     
     override internal func itemForIndexPath(indexPath: IndexPath) -> BaseDataSourceItem? {
@@ -56,15 +63,22 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
     }
     
     override func getSelectedItems() -> [BaseDataSourceItem] {
-        var resultArray = [BaseDataSourceItem]()
-        for array in tableDataMArray {
-            for object in array {
-                if (selectedItemsArray.contains(object)) {
-                    resultArray.append(object)
+        if isSelectionStateActive {
+            var resultArray = [BaseDataSourceItem]()
+            for array in tableDataMArray {
+                for object in array {
+                    if (selectedItemsArray.contains(object)) {
+                        resultArray.append(object)
+                    }
                 }
             }
+            return resultArray
         }
-        return resultArray
+        
+        if let parent = delegate?.getParent() {
+            return [parent]
+        }
+        return []
     }
     
     override func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
@@ -104,6 +118,9 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
             }
         }
         
+        if albums.first(where: { $0.isTBMatik }) != nil {
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.deleteAlbum))
+        }
     }
     
     override func updatedAlbumCoverPhoto(item: BaseDataSourceItem) {
@@ -124,4 +141,19 @@ class ArrayDataSourceForCollectionView: BaseDataSourceForCollectionView {
         }
     }
     
+    override func didHideAlbums(_ albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
+    
+    override func didUnhideAlbums(_ albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
+    
+    override func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
+    
+    override func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
 }

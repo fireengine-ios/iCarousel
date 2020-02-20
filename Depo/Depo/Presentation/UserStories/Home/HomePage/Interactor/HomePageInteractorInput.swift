@@ -12,13 +12,13 @@ protocol HomePageInteractorInput {
     
     var homeCardsLoaded: Bool { get }
     
-    func homePagePresented()
+    func viewIsReady()
     
     func needRefresh()
-    
-    func needCheckQuota()
-    
+        
     func trackScreen()
+    func trackGiftTapped()
 
     func updateLocalUserDetail()
+    
 }

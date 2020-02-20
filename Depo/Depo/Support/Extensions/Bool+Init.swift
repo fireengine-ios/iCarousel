@@ -21,4 +21,14 @@ extension Bool {
         //            return nil
         //        }
     }
+    
+    var reversed: Bool {
+        return !self
+    }
+}
+
+extension Optional where Wrapped == Bool {
+    var reversed: Bool {
+        return !(self ?? false)
+    }
 }

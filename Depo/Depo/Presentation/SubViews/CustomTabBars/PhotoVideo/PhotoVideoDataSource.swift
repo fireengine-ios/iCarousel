@@ -15,9 +15,9 @@ protocol PhotoVideoDataSourceDelegate: class {
     func convertFetchedObjectsInProgress()
 }
 
-// TODO: selectedIndexPaths NSFetchedResultsController changes
 final class PhotoVideoDataSource: NSObject {
     
+    private lazy var coreDataStack: CoreDataStack = factory.resolve()
     private var thresholdService = ThresholdBlockService(threshold: 0.1)
     
     private let mergeQueue = DispatchQueue(label: DispatchQueueLabels.photoVideoMergeQueue)
@@ -27,8 +27,6 @@ final class PhotoVideoDataSource: NSObject {
             delegate?.selectedModeDidChange(isSelectingMode)
         }
     }
-    
-    var selectedIndexPaths = Set<IndexPath>()
     
     private var lastWrapedObjects = SynchronizedArray<WrapData>()
     
@@ -54,6 +52,8 @@ final class PhotoVideoDataSource: NSObject {
     private var isConverting = false
     private var isMerging = false
     
+    private var tbMatikItem: Item?
+    
     private lazy var fetchedResultsController: NSFetchedResultsController<MediaItem> = {
         let fetchRequest: NSFetchRequest = MediaItem.fetchRequest()
         
@@ -69,7 +69,7 @@ final class PhotoVideoDataSource: NSObject {
 //        }
         
         //fetchRequest.relationshipKeyPathsForPrefetching = [#keyPath(PostDB.id)]
-        let context = CoreDataStack.default.mainContext
+        let context = coreDataStack.mainContext
         let frController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                       managedObjectContext: context,
                                                       sectionNameKeyPath: #keyPath(MediaItem.monthValue),
@@ -84,6 +84,26 @@ final class PhotoVideoDataSource: NSObject {
         self.delegate = delegate
     }
     
+    func scrollToItem(_ item: Item) {
+        if lastUpdateFetchedObjects == nil {
+            tbMatikItem = item
+        } else {
+            scroll(to: item)
+        }
+    }
+    
+    private func scroll(to item: Item) {
+        getIndexPathForObject(uuid: item.uuid) { [weak self] indexPath in
+            guard let self = self else {
+                return
+            }
+            
+            self.tbMatikItem = nil
+            if let indexPath = indexPath {
+                self.collectionView?.scrollToItem(at: indexPath, at: .centeredVertically, animated: false)
+            }
+        }
+    }
     
     func getFetchedOriginalObjects(mediaItemsCallback: @escaping MediaItemsCallBack) {
         fetchedResultsController.managedObjectContext.perform { [weak self] in
@@ -100,8 +120,8 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    func getSelectedObjects(wrapDataCallBack: @escaping WrapObjectsCallBack) {
-        getConvertedObjects(at: Array(selectedIndexPaths), wrapItemsCallback: wrapDataCallBack)
+    func getSelectedObjects(at indexPaths: [IndexPath], wrapDataCallBack: @escaping WrapObjectsCallBack) {
+        getConvertedObjects(at: Array(indexPaths), wrapItemsCallback: wrapDataCallBack)
     }
     
     private func getObject(at indexPath: IndexPath) -> MediaItem? {
@@ -169,6 +189,16 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
+    func getIndexPathForObject(uuid: String, indexCallBack: @escaping IndexPathCallback) {
+        fetchedResultsController.managedObjectContext.perform { [weak self] in
+            guard let findedObject = self?.lastUpdateFetchedObjects?.first(where: { $0.uuid == uuid }) else {
+                indexCallBack(nil)
+                return
+            }
+            indexCallBack(self?.indexPath(forObject: findedObject))
+        }
+    }
+    
     func performFetch() {
         try? fetchedResultsController.performFetch()
         //need for update year view on scrollBar
@@ -226,17 +256,18 @@ final class PhotoVideoDataSource: NSObject {
                         return
                     }
                     
-                    items.forEach({ mediaItem in
-                        autoreleasepool {
-                            self.lastWrapedObjects.append(WrapData(mediaItem: mediaItem))
-                        }
-                    })
+                    assert(self.lastWrapedObjects.isEmpty, "lastWrapedObjects must be empty")
+                    let wrappedItems = items.map { WrapData(mediaItem: $0) }
+                    self.lastWrapedObjects.modify { _ in
+                        return wrappedItems
+                    }
                     
                     self.isConverting = false
                     if !self.isMerging {
                         self.finishConverting(needSorting: true)
                     }
                 }
+
             }
         }
     }
@@ -248,28 +279,30 @@ final class PhotoVideoDataSource: NSObject {
                 return
             }
             
-            let ids = updatedIds + insertedIds
             guard !updatedIds.isEmpty || !insertedIds.isEmpty || !deletedIds.isEmpty else {
                 self.finishConverting(needSorting: false)
                 return
             }
             
-            deletedIds.forEach { id in
-                self.lastWrapedObjects.remove(where: { $0.coreDataObjectId == id })
-            }
-            
-            updatedIds.forEach { id in
-                self.lastWrapedObjects.remove(where: { $0.coreDataObjectId == id })
-            }
-            
-            MediaItemOperationsService.shared.mediaItemsByIDs(ids: ids) { [weak self] items in
+            let idsToLoad = updatedIds + insertedIds
+            MediaItemOperationsService.shared.mediaItemsByIDs(ids: idsToLoad) { [weak self] items in
                 guard let self = self else {
                     return
                 }
                 
-                for mediaItem in items {
-                    let wrappedObject = WrapData(mediaItem: mediaItem)
-                    self.lastWrapedObjects.append(wrappedObject)
+                let idsToRemove = deletedIds + updatedIds
+                let wrappedItems = items.map { WrapData(mediaItem: $0) }
+                self.lastWrapedObjects.modify { array in
+                    var array = array
+                    idsToRemove.forEach { id in
+                        array.removeAll(where: { $0.coreDataObjectId == id })
+                    }
+                    // seems like self.convertFetchedObjects() maybe performing simultaniously with this code
+                    // and exactly between removing and appending items, it may append its own elements
+                    // that is why we need to perform removeAll and append as an atomic operation
+                    array += wrappedItems
+                    
+                    return array
                 }
                 
                 self.isMerging = false
@@ -499,6 +532,10 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
         cellTopOffset = 0
         focusedIndexPath = nil
         
+        if tbMatikItem != nil {
+            return
+        }
+        
         if let indexPath = collectionView?.indexPathsForVisibleItems.sorted().first, indexPath != IndexPath(item: 0, section: 0) {
             #if DEBUG
             if !DispatchQueue.isMainQueue || !Thread.isMainThread {
@@ -523,6 +560,10 @@ extension PhotoVideoDataSource: NSFetchedResultsControllerDelegate {
                 self.convertFetchedObjects()
             } else {
                 self.mergeFetchedObjects(deletedIds: deletedIds, updatedIds: updatedIds, insertedIds: insertedIds)
+            }
+            
+            if let item = self.tbMatikItem {
+                self.scroll(to: item)
             }
         }
     }

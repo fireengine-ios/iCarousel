@@ -13,9 +13,8 @@ protocol SocialRemoveConnectionCell: class {
     func set(username: String?)
 }
 
-
 class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnectionCell {
-
+    
     private(set) var section: Section?
     
     @IBOutlet private weak var connectedAs: UILabel! {
@@ -30,13 +29,23 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         didSet {
             let attributes: [NSAttributedStringKey : Any] = [
                 .font               : UIFont.TurkcellSaturaBolFont(size: 16),
-                .foregroundColor    : UIColor.lrTealishTwo,
-                .underlineStyle     : NSUnderlineStyle.styleSingle.rawValue
+                .foregroundColor    : UIColor.lrTealishTwo
             ]
             
             let attributeString = NSMutableAttributedString(string: TextConstants.removeConnection,
                                                             attributes: attributes)
             removeConnectionButton.setAttributedTitle(attributeString, for: .normal)
+            
+            let lineView = UIView()
+            lineView.backgroundColor = removeConnectionButton.titleLabel?.textColor
+            lineView.translatesAutoresizingMaskIntoConstraints = false
+
+            removeConnectionButton.addSubview(lineView)
+            
+            lineView.leadingAnchor.constraint(equalTo: removeConnectionButton.leadingAnchor, constant: 1).activate()
+            lineView.trailingAnchor.constraint(equalTo: removeConnectionButton.trailingAnchor, constant: 1).activate()
+            lineView.heightAnchor.constraint(equalToConstant: 1).activate()
+            lineView.bottomAnchor.constraint(equalTo: removeConnectionButton.bottomAnchor, constant: -3.5).activate()
         }
     }
     
@@ -52,7 +61,6 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
             self.connectedAs.text = String(format: TextConstants.instagramConnectedAsFormat, username)
         }
     }
-    
     
     @IBAction func removeConnection(_ sender: Any) {
         let localizedTexts = warningTexts()
@@ -96,6 +104,9 @@ class SocialAccountRemoveConnectionCell: UITableViewCell, SocialRemoveConnection
         case .dropbox:
             return (TextConstants.dropboxRemoveConnectionWarning,
                     TextConstants.dropboxRemoveConnectionWarningMessage)
+        case .spotify:
+            return (TextConstants.spotifyRemoveConnectionWarning,
+                    TextConstants.spotifyRemoveConnectionWarningMessage)
         }
     }
 }

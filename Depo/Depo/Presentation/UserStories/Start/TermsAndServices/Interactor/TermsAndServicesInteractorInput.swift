@@ -12,6 +12,7 @@ protocol TermsAndServicesInteractorInput {
     
     var signUpSuccessResponse: SignUpSuccessResponse { get }
     var userInfo: RegistrationUserInfoModel { get }
+    var isLoggedIn: Bool { get }
     var cameFromLogin: Bool { get }
     var cameFromRegistration: Bool { get }
     var etkAuth: Bool?  { get set }

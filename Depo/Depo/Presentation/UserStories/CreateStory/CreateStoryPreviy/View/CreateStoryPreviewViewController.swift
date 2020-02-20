@@ -57,9 +57,7 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     }
     
     private func setupNavigation() {
-        hidenNavigationBarStyle()
-        statusBarColor = .black
-        setNavigationBackgroundColor(color: .black)
+        blackNavigationBarStyle()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(didEnterBackground),
@@ -100,8 +98,8 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
 
 // MARK: CreateStoryPreviewViewInput
 extension CreateStoryPreviewViewController: CreateStoryPreviewViewInput {
-    func startShowVideoFromResponce(responce: CreateStoryResponce) {
-        guard let urlString = responce.storyURLString else {
+    func startShowVideoFromResponse(response: CreateStoryResponse) {
+        guard let urlString = response.storyURLString else {
             return
         }
         previewURLString = urlString

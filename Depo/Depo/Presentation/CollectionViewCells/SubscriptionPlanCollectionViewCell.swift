@@ -70,6 +70,51 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
         freeButton.layer.cornerRadius = freeButton.bounds.height / 2
     }
     
+    func configure(with plan: PackageOffer, accountType: AccountType) {
+        
+        guard let packagePlan = plan.offers.first else {
+            assertionFailure()
+            return
+        }
+        
+        freeButton.isHidden = true
+        upgradeButton.isHidden = true
+        cancelButton.isHidden = true
+        storeLabel.isHidden = true
+        
+        switch packagePlan.type {
+        case .default:
+            upgradeButton.isHidden = false
+        case .free:
+            priceLabel.isHidden = true
+            freeButton.isHidden = false
+        case .current:
+            cancelButton.isHidden = false
+        }
+        
+        
+        planeNameLabel.text = String(format: TextConstants.availableHeadNameTitle, packagePlan.name)
+        priceLabel.text = packagePlan.priceString
+        
+        photosCountLabel.text = String(format: TextConstants.usageInfoPhotos, packagePlan.photosCount)
+        videosCountLabel.text = String(format: TextConstants.usageInfoVideos, packagePlan.videosCount)
+        songsCountLabel.text = String(format: TextConstants.usageInfoSongs, packagePlan.songsCount)
+        docsCountLabel.text = String(format: TextConstants.usageInfoDocs, packagePlan.docsCount)
+        
+        if let model = packagePlan.model as? SubscriptionPlanBaseResponse {
+            
+            if let storageSize = model.subscriptionPlanQuota?.bytesString {
+                planeNameLabel.text = storageSize
+            }
+
+            if let renewalDate = model.nextRenewalDate {
+                let date = dateString(from: renewalDate)
+                dateInfoLabel.text = String(format: TextConstants.renewalDate, date)
+            }
+        }
+        priceHeightConstraint.constant = 18
+    }
+    
     func configure(with plan: SubscriptionPlan, accountType: AccountType) {
         freeButton.isHidden = true
         upgradeButton.isHidden = true
@@ -104,6 +149,11 @@ class SubscriptionPlanCollectionViewCell: UICollectionViewCell {
             if let renewalDate = model.nextRenewalDate {
                 let date = dateString(from: renewalDate)
                 dateInfoLabel.text = String(format: TextConstants.renewalDate, date)
+            }
+            
+            if let expirationDate = model.subscriptionEndDate, model.subscriptionPlanType == .promo {
+                let date = dateString(from: expirationDate)
+                dateInfoLabel.text = String(format: TextConstants.subscriptionEndDate, date)
             }
         }
         priceHeightConstraint.constant = 18

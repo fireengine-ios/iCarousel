@@ -10,7 +10,7 @@ import Foundation
 
 protocol RegistrationInteractorInput {
     
-    var captchaRequred: Bool { get }
+    var captchaRequired: Bool { get }
     
     func validateUserInfo(email: String,
                           code: String,
@@ -25,4 +25,5 @@ protocol RegistrationInteractorInput {
     func signUpUser(_ userInfo: RegistrationUserInfoModel)
     
     func trackScreen()
+    func trackSupportSubjectEvent(type: SupportFormSubjectTypeProtocol)
 }

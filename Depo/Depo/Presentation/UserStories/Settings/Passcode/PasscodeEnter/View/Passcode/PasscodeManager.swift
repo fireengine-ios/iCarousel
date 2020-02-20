@@ -86,7 +86,7 @@ extension PasscodeManagerImp: PasscodeManager {
         
         userCancelledBiometrics = false
         successFinishBiometrics = false
-        
+
         biometricsManager.authenticate(reason: state.title) { status in
             DispatchQueue.main.async {
                 switch status {
@@ -99,7 +99,7 @@ extension PasscodeManagerImp: PasscodeManager {
                     self.finishBiometrics = true
                     self.successFinishBiometrics = true
                     
-                case .cancelledByUser:
+                case .cancelledByUser, .userFallback:
                     self.userCancelledBiometrics = true
                     self.finishBiometrics = true
             
@@ -120,7 +120,7 @@ extension PasscodeManagerImp: PasscodeManager {
     
     private func canShowBiometrics() -> Bool {
         #if MAIN_APP
-        if UIApplication.shared.applicationState != .active {
+        if ApplicationStateHelper.shared.safeApplicationState != .active {
             return false
         }
         #endif

@@ -19,7 +19,7 @@ struct AlbumJsonKey {
     static let audioCount = "audioCount"
     static let coverPhoto = "coverPhoto"
     static let readOnly = "readOnly"
-    
+    static let icon = "icon"
 }
 
 
@@ -35,6 +35,7 @@ final class AlbumServiceResponse: ObjectRequestResponse, Map {
     var audioCount: Int?
     var coverPhoto: SearchItemResponse?
     var readOnly: Bool?
+    var icon: String?
     
     override func mapping() {
         createdDate = json?[AlbumJsonKey.createdDate].date
@@ -47,10 +48,11 @@ final class AlbumServiceResponse: ObjectRequestResponse, Map {
         audioCount = json?[AlbumJsonKey.audioCount].int
         coverPhoto = SearchItemResponse(withJSON: json?[AlbumJsonKey.coverPhoto])
         readOnly = json?[AlbumJsonKey.readOnly].bool
+        icon = json?[AlbumJsonKey.icon].string
     }
 }
 
-class AlbumResponse: ObjectRequestResponse {
+final class AlbumResponse: ObjectRequestResponse, Map {
     
     var list: Array<AlbumServiceResponse> = []
     

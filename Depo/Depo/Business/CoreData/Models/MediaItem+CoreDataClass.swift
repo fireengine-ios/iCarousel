@@ -41,7 +41,8 @@ public class MediaItem: NSManagedObject {
         urlToFileValue = wrapData.urlToFile?.absoluteString
         
         isFolder = wrapData.isFolder ?? false
-        isTranscoded = wrapData.status == .active
+        isTranscoded = wrapData.status.isTranscoded
+        status = wrapData.status.valueForCoreDataMapping()
         
         parent = wrapData.parent
         
@@ -185,7 +186,8 @@ public class MediaItem: NSManagedObject {
         })
         self.albums = NSOrderedSet(array: albums ?? [])
         
-        isTranscoded = item.status == .active
+        isTranscoded = item.status.isTranscoded
+        status = item.status.valueForCoreDataMapping()
         updateMissingDateRelations()
     }
     
@@ -195,26 +197,25 @@ public class MediaItem: NSManagedObject {
             return
         }
         
-        if let relatedRemotes = relatedRemotes as? Set<MediaItem> {
+        if let relatedRemotes = relatedRemotes as? Set<MediaItem>, !relatedRemotes.isEmpty {
             hasMissingDateRemotes = relatedRemotes.filter { $0.monthValue == nil }.count == relatedRemotes.count
+        } else {
+            hasMissingDateRemotes = false
         }
     }
     
-    func regenerateSecondPartOfUUID() {
-        let firstPart: String
-        if let uuid = uuid {
-            if uuid.contains("~"){
-                firstPart = uuid.components(separatedBy: "~").first ?? trimmedLocalFileID ?? uuid
-            } else {
-                firstPart = trimmedLocalFileID ?? uuid
-            }
-        } else {
-            firstPart = trimmedLocalFileID ?? UUID().uuidString
+    func getFisrtUUIDPart() -> String? {
+        guard let uuid = uuid else {
+            assertionFailure()
+            return nil
         }
         
-        uuid = firstPart + "~" + UUID().uuidString
+        if uuid.contains("~") {
+            return uuid.components(separatedBy: "~").first ?? uuid
+        }
+        return uuid
     }
-    
+
     func regenerateTrimmedLocalFileID() {
         guard let localFileID = localFileID?.components(separatedBy: "/").first, localFileID != trimmedLocalFileID else {
             return
@@ -227,13 +228,23 @@ public class MediaItem: NSManagedObject {
         
         trimmedLocalFileID = localFileID
     }
+    
+    private func isThumbnailMissing() -> Bool {
+        return metadata?.smalURl == nil && metadata?.mediumUrl == nil
+    }
+    
+    func moveToMissingDatesIfNeeded() {
+        if isThumbnailMissing() {
+            sortingDate = nil
+        }
+    }
 }
 
 //MARK: - relations
 extension MediaItem {
 
     private func getRelatedPredicate(item: WrapData, local: Bool) -> NSPredicate {
-        return NSPredicate(format: "isLocalItemValue == %@ AND (trimmedLocalFileID == %@ OR md5Value == %@)", NSNumber(value: local), item.getTrimmedLocalID(), item.md5)
+        return NSPredicate(format: "isLocalItemValue == %@ AND (trimmedLocalFileID == %@ OR md5Value == %@ OR \(#keyPath(MediaItem.localFileID)) == %@)", NSNumber(value: local), item.getTrimmedLocalID(), item.md5, item.getLocalID())
     }
     
     func getRelatedLocals(for wrapItem: WrapData, context: NSManagedObjectContext)  -> [MediaItem] {

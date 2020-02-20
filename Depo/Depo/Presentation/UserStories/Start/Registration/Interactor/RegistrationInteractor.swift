@@ -14,18 +14,25 @@ class RegistrationInteractor: RegistrationInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var captchaService = CaptchaService()
     
-    var captchaRequred = false
-    private var  retriesCount = 0 {
+    var captchaRequired = false
+    private var retriesCount = 0 {
         didSet {
-            if retriesCount > 2 {
-                showSupportView()
+            if retriesCount == NumericConstants.showFAQViewAttempts {
+                output?.showFAQView()
+            } else if retriesCount >= NumericConstants.showSupportViewAttempts {
+                output?.showSupportView()
             }
         }
     }
     
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SignupScreen())
         analyticsService.logScreen(screen: .signUpScreen)
         analyticsService.trackDimentionsEveryClickGA(screen: .signUpScreen)
+    }
+    
+    func trackSupportSubjectEvent(type: SupportFormSubjectTypeProtocol) {
+        analyticsService.trackSupportEvent(screenType: .signup, subject: type, isSupportForm: false)
     }
     
     func validateUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?) {
@@ -36,7 +43,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
                                                               phone: phone,
                                                               password: password,
                                                               repassword: repassword,
-                                                              captchaAnswer: captchaRequred ? captchaAnswer : nil)
+                                                              captchaAnswer: captchaRequired ? captchaAnswer : nil)
         
         if validationResult.count == 0 {//== .allValid {
             
@@ -44,8 +51,8 @@ class RegistrationInteractor: RegistrationInteractorInput {
             signUpInfo = RegistrationUserInfoModel(mail: email,
                                                    phone: code + phone,
                                                    password: password,
-                                                   captchaID: captchaRequred ? captchaID : nil,
-                                                   captchaAnswer: captchaRequred ? captchaAnswer : nil)
+                                                   captchaID: captchaRequired ? captchaID : nil,
+                                                   captchaAnswer: captchaRequired ? captchaAnswer : nil)
             
             SingletonStorage.shared.signUpInfo = signUpInfo
             
@@ -61,26 +68,26 @@ class RegistrationInteractor: RegistrationInteractorInput {
         CaptchaSignUpRequrementService().getCaptchaRequrement { [weak self] response in
             switch response {
             case .success(let boolResult):
-                self?.captchaRequred = boolResult
-                self?.output.captchaRequred(requred: boolResult)
+                self?.captchaRequired = boolResult
+                self?.output.captchaRequired(required: boolResult)
             case .failed(let error):
                 if error.isServerUnderMaintenance {
-                    self?.output.captchaRequredFailed(with: error.description)
+                    self?.output.captchaRequiredFailed(with: error.description)
                 } else {
-                    self?.output.captchaRequredFailed()
+                    self?.output.captchaRequiredFailed()
                 }
             }
         }
         ///Implementation with old request bellow
 //        captchaService.getSignUpCaptchaRequrement(sucess: { [weak self] succesResponse in
-//            guard let succesResponse = succesResponse as? CaptchaSignUpRequrementResponse else {
-//                self?.output.captchaRequredFailed()
+//            guard let succesResponse = succesResponse as? CaptchaSignUpRequirementResponse else {
+//                self?.output.captchaRequiredFailed()
 //                return
 //            }
-//            self?.output.captchaRequred(requred: succesResponse.captchaRequred)
+//            self?.output.captchaRequired(required: succesResponse.captchaRequired)
 //
 //        }) { [weak self] errorResponse in
-//            self?.output.captchaRequredFailed()
+//            self?.output.captchaRequiredFailed()
 //        }
     }
     
@@ -89,54 +96,45 @@ class RegistrationInteractor: RegistrationInteractorInput {
         ///sentOtp = false as a task requirements (FE-1055)
         let signUpUser = SignUpUser(registrationUserInfo: userInfo, sentOtp: false)
         
-        authenticationService.signUp(user: signUpUser, sucess: { [weak self] response in
-            DispatchQueue.main.async {
-                guard let result = response as? SignUpSuccessResponse else {
-                    let error = CustomErrors.serverError("An error has occurred while register new user.")
-                    let errorResponse = ErrorResponse.error(error)
-                    self?.output.signUpFailed(errorResponce: errorResponse)
-                    return
-                }
-                
-                self?.retriesCount = 0
+        authenticationService.signUp(user: signUpUser) { [weak self] response in
+            guard let self = self else {
+                return
+            }
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SignUp(status: .success))
+            switch response {
+            case .success(let result):
+                self.retriesCount = 0
                 
                 SingletonStorage.shared.referenceToken = result.referenceToken
                 
-                self?.analyticsService.track(event: .signUp)
-                self?.analyticsService.trackSignupEvent()
+                self.analyticsService.track(event: .signUp)
+                self.analyticsService.trackSignupEvent()
                 
-                self?.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
-            }
-            }, fail: { [weak self] errorResponce in
-                self?.retriesCount += 1
+                SingletonStorage.shared.isJustRegistered = true
+                self.output.signUpSuccessed(signUpUserInfo: SingletonStorage.shared.signUpInfo, signUpResponse: result)
                 
-                DispatchQueue.main.async { [weak self] in
-                    switch errorResponce {
-                    case .error(let error):
-                        if let valueError = error as? ServerValueError,
-                            let signUpError = SignupResponseError(with: valueError) {
-                            
-                            self?.analyticsService.trackSignupEvent(error: signUpError)
-                            
-                            ///only with this error type captcha required error is processing
-                            if signUpError == .captchaRequired || signUpError == .incorrectCaptcha {
-                                self?.captchaRequred = true
-                                self?.output.captchaRequred(requred: true)
-                            }
-                        } else if let statusError = error as? ServerStatusError,
-                            let signUpError = SignupResponseError(with: statusError) {
-                            
-                            self?.analyticsService.trackSignupEvent(error: signUpError)
-                        }
-                        
-                    default:
-                        self?.analyticsService.trackSignupEvent(error: .serverError)
-                        
+            case .failure(let error):
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SignUp(status: .failure))
+                self.retriesCount += 1
+                
+                if let signUpError = error as? SignupResponseError {
+                    self.analyticsService.trackSignupEvent(error: signUpError)
+                    
+                    ///only with this error type captcha required error is processing
+                    if signUpError.isCaptchaError {
+                        self.captchaRequired = true
+                        self.output.captchaRequired(required: true)
                     }
-
-                    self?.output.signUpFailed(errorResponce: errorResponce)
+                } else {
+                    self.analyticsService.trackCustomGAEvent(eventCategory: .errors,
+                                                             eventActions: .serviceError,
+                                                             eventLabel: .serverError,
+                                                             eventValue: error.description)
                 }
-        })
+                
+                self.output.signUpFailed(errorResponse: error)
+            }
+        }
     }
     
     func showSupportView() {

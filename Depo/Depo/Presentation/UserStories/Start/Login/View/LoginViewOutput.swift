@@ -24,4 +24,8 @@ protocol LoginViewOutput {
     func startedEnteringPhoneNumber(withPlus: Bool)
     
     func openSupport()
+    
+    func openFaqSupport()
+    
+    func openSubjectDetails(type: SupportFormSubjectTypeProtocol)
 }

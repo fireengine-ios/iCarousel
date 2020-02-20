@@ -51,23 +51,22 @@ final class OptInController: ViewController, NibInit {
         }
     }
     
-    private lazy var activityManager = ActivityIndicatorManager()
     private var phone = ""
     private var attempts: Int = 0
     private let keyboard = Typist()
     private var currentSecurityCode = ""
-    private var inputTextLimit: Int = NumericConstants.vereficationCharacterLimit
+    private var inputTextLimit: Int = NumericConstants.verificationCharacterLimit
     private var isRemoveLetter: Bool = false
-
     
     weak var delegate: OptInControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.OTPDoubleOptInScreen())
         setupKeyboard()
         setupButtonsInitialState()
-        setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
+        setupTimer(withRemainingTime: NumericConstants.verificationTimerLimit)
         setupInitialState()
     }
     
@@ -88,11 +87,6 @@ final class OptInController: ViewController, NibInit {
     
     func dropTimer() {
         timerLabel.dropTimer()
-    }
-    
-    @IBAction func actionResendButton(_ sender: UIButton) {
-        attempts = 0
-        delegate?.optInResendPressed(self)
     }
     
     func verify(code: String) {
@@ -119,7 +113,7 @@ final class OptInController: ViewController, NibInit {
     func increaseNumberOfAttemps() -> Bool {
         attempts += 1
         
-        if attempts >= NumericConstants.maxVereficationAttempts {
+        if attempts >= NumericConstants.maxVerificationAttempts {
             attempts = 0
             endEnterCode()
             delegate?.optInReachedMaxAttempts(self)
@@ -140,6 +134,25 @@ final class OptInController: ViewController, NibInit {
     func hiddenError() {
         errorLabel.text = ""
         errorLabel.isHidden = true
+    }
+    
+    func setupPhoneLable(with number: String) {
+        let text = String(format: TextConstants.enterCodeToGetCodeOnPhone, number)
+        let range = (text as NSString).range(of: number)
+        let attr: [NSAttributedStringKey: Any] = [.font: UIFont.TurkcellSaturaMedFont(size: 15),
+                                                  .foregroundColor: ColorConstants.textGrayColor]
+        
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttributes(attr, range: range)
+        infoTitle.attributedText = attributedString
+    }
+    
+    func startLoading() {
+        showSpinner()
+    }
+    
+    func stopLoading() {
+        hideSpinner()
     }
     
     // MARK: - Utility methods
@@ -180,17 +193,6 @@ final class OptInController: ViewController, NibInit {
         resendCodeButton.isHidden = true
     }
     
-    func setupPhoneLable(with number: String) {
-        let text = String(format: TextConstants.enterCodeToGetCodeOnPhone, number)
-        let range = (text as NSString).range(of: number)
-        let attr: [NSAttributedStringKey: Any] = [.font: UIFont.TurkcellSaturaMedFont(size: 15),
-                                                  .foregroundColor: ColorConstants.textGrayColor]
-        
-        let attributedString = NSMutableAttributedString(string: text)
-        attributedString.addAttributes(attr, range: range)
-        infoTitle.attributedText = attributedString
-    }
-    
     private func setupKeyboard() {
         keyboard.on(event: .willShow) { [weak self] (options) in
             UIView.animate(withDuration: options.animationDuration) {
@@ -219,6 +221,10 @@ final class OptInController: ViewController, NibInit {
         if isRemoveLetter {
             let previosTag = sender.tag - 1
             if let nextResponder = codeTextFields[safe: previosTag] {
+                /// For autoFill one time password
+                if previosTag <= 0 {
+                    nextResponder.text = ""
+                }
                 nextResponder.becomeFirstResponder()
             }
         } else {
@@ -229,6 +235,11 @@ final class OptInController: ViewController, NibInit {
                 hideKeyboard()
             }
         }
+    }
+    
+    @IBAction func actionResendButton(_ sender: UIButton) {
+        attempts = 0
+        delegate?.optInResendPressed(self)
     }
     
 }
@@ -248,21 +259,15 @@ extension OptInController: SmartTimerLabelDelegate {
     }
 }
 
-// MARK: - ActivityIndicator
-extension OptInController: ActivityIndicator {
-    func startActivityIndicator() {
-        activityManager.start()
-    }
-    
-    func stopActivityIndicator() {
-        activityManager.stop()
-    }
-}
-
 // MARK: - UITextFieldDelegate
 extension OptInController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        /// For autoFill one time password
+        if firstSecurityCodeTextField == textField {
+            return
+        }
+        
         /// if the string is empty, then when deleting, the delegate method does not work
         textField.text = " "
     }

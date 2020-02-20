@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Netmera
 
 /// example of types in Info.plist
 //
@@ -37,7 +38,7 @@ final class ShareViewController: UIViewController, ShareController {
     
     private let shareConfigurator = ShareConfigurator()
     private lazy var shareWormholeListener = ShareWormholeListener()
-    private var sharedItems = [ShareData]()
+    private var sharedItems = [SharedItemSource]()
     private var currentUploadIndex = -1
     
     private lazy var uploadService = UploadQueueService()
@@ -45,6 +46,7 @@ final class ShareViewController: UIViewController, ShareController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        trackScreen()
         setupSharedItems()
         shareConfigurator.setup()
     }
@@ -54,6 +56,10 @@ final class ShareViewController: UIViewController, ShareController {
         setupPasscodeIfNeed()
     }
 
+    private func trackScreen() {
+        Netmera.send(NetmeraEvents.Screens.NativeSharefromGalleryScreen())
+    }
+    
     private func setupPasscodeIfNeed() {
         if shareConfigurator.isNeedToShowPasscode {
             shareWormholeListener.listenLogout { [weak self] in
@@ -75,7 +81,9 @@ final class ShareViewController: UIViewController, ShareController {
         let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
         
         let navVC = UINavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .overFullScreen
         self.navVC = navVC
+        
         vc.success = {
             navVC.dismiss(animated: true, completion: nil)
         }
@@ -102,13 +110,13 @@ final class ShareViewController: UIViewController, ShareController {
                 return
             }
             
-            self.uploadService.addShareData(self.sharedItems, progress: { [weak self] progress in
+            self.uploadService.addSharedItems(self.sharedItems, progress: { [weak self] progress in
                 DispatchQueue.main.async {
                     self?.uploadProgress.progress = Float(progress.fractionCompleted)
                 }
-            }, didStartUpload: { [weak self] shareData in
-                self?.updateCurrentUI(for: shareData)
-                self?.updateCurrentUploadInCollectionView(with: shareData)
+            }, didStartUpload: { [weak self] sharedItem in
+                self?.updateCurrentUI(for: sharedItem)
+                self?.updateCurrentUploadInCollectionView(with: sharedItem)
             }, complition: { [weak self] result in
                 DispatchQueue.main.async {
                     sender.isEnabled = true
@@ -132,8 +140,8 @@ final class ShareViewController: UIViewController, ShareController {
                 self.sharedItems = sharedItems
                 
                 DispatchQueue.main.async {
-                    if let shareData = sharedItems.first {
-                        self.updateCurrentUI(for: shareData)
+                    if let sharedItems = sharedItems.first {
+                        self.updateCurrentUI(for: sharedItems)
                     }
                     self.collectionView.reloadData()
                 }
@@ -141,30 +149,36 @@ final class ShareViewController: UIViewController, ShareController {
         }
     }
     
-    private func updateCurrentUI(for shareData: ShareData) {
-        DispatchQueue.global().async { [weak self] in
-            FilesExistManager.shared.waitFilePreparation(at: shareData.url) { [weak self] result in
-                guard let `self` = self else {
-                    return
-                }
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(_):
-                        self.currentPhotoImageView.setScreenScaledImage(shareData.image)
-                    case .failed(_):
-                        self.currentPhotoImageView.image = Images.noDocuments
+    private func updateCurrentUI(for sharedItem: SharedItemSource) {
+        switch sharedItem {
+        case .url(let item):
+            self.currentNameLabel.text = item.name
+            
+            DispatchQueue.global().async { [weak self] in
+                FilesExistManager.shared.waitFilePreparation(at: item.url) { [weak self] result in
+                    guard let `self` = self else {
+                        return
                     }
-                    self.currentPhotoImageView.backgroundColor = UIColor.white
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(_):
+                            self.currentPhotoImageView.setScreenScaledImage(item.image)
+                        case .failed(_):
+                            self.currentPhotoImageView.image = Images.noDocuments
+                        }
+                        self.currentPhotoImageView.backgroundColor = UIColor.white
+                    }
                 }
             }
-        }
-        DispatchQueue.main.async {
-            self.currentNameLabel.text = shareData.name
+            
+        case .data(let item):
+            self.currentPhotoImageView.image = item.image
+            self.currentNameLabel.text = item.name
         }
     }
     
-    private func updateCurrentUploadInCollectionView(with shareData: ShareData) {
-        guard let index = sharedItems.index(of: shareData) else {
+    private func updateCurrentUploadInCollectionView(with sharedItem: SharedItemSource) {
+        guard let index = sharedItems.index(of: sharedItem) else {
             return
         }
         

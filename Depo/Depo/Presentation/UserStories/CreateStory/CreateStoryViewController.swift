@@ -85,7 +85,7 @@ final class CreateStoryViewController: BaseViewController {
             newValue.layer.shadowOffset = .zero
             newValue.layer.shadowOpacity = 0.5
             newValue.layer.shadowRadius = 4
-            newValue.layer.shadowColor = UIColor.black.withAlphaComponent(0.5).cgColor
+            newValue.layer.shadowColor = ColorConstants.backgroundViewColor.cgColor
         }
     }
     
@@ -127,6 +127,7 @@ final class CreateStoryViewController: BaseViewController {
 
         updateStoryIfNeeded(story?.music)
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.CreateStoryNameScreen())
         let analyticsService = AnalyticsService()
         analyticsService.logScreen(screen: .createStoryDetails)
     }
@@ -272,7 +273,7 @@ extension CreateStoryViewController: ActivityIndicator {
                                                   musicId: parameter.musicId)
             
             startActivityIndicator()
-            createStoryService.getPreview(preview: storyPreview, success: { [weak self] responce in
+            createStoryService.getPreview(preview: storyPreview, success: { [weak self] response in
                 guard let `self` = self else {
                     return
                 }
@@ -280,7 +281,7 @@ extension CreateStoryViewController: ActivityIndicator {
                 self.stopActivityIndicator()
                 
                 DispatchQueue.main.async {
-                    self.openPreview(responce: responce)
+                    self.openPreview(response: response)
                 }
                 
                 }, fail: { error in
@@ -289,8 +290,16 @@ extension CreateStoryViewController: ActivityIndicator {
                             return
                         }
                         
+                        let errorText: String?
+                        
+                        if error.description == "VIDEO_SLIDESHOW_NAME_MISSING" {
+                            errorText = TextConstants.createStoryEmptyNameError
+                        } else {
+                            errorText = error.errorDescription
+                        }
+                        
                         self.stopActivityIndicator()
-                        self.showError(text: error.errorDescription)
+                        self.showError(text: errorText)
                     }
             })
         }
@@ -318,7 +327,7 @@ extension CreateStoryViewController {
         navigationController?.pushViewController(controller, animated: true)
     }
     
-    private func openPreview(responce: CreateStoryResponce) {
+    private func openPreview(response: CreateStoryResponse) {
         guard let story = story else {
             let error = CustomErrors.text("An error has occured while composing story data.")
             showError(text: error.localizedDescription)
@@ -326,7 +335,7 @@ extension CreateStoryViewController {
         }
         
         let router = RouterVC()
-        let controller = router.storyPreview(forStory: story, responce: responce)
+        let controller = router.storyPreview(forStory: story, response: response)
         
         self.navigationController?.pushViewController(controller, animated: true)
     }
@@ -342,6 +351,7 @@ extension CreateStoryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let element = selectedImages.remove(at: sourceIndexPath.row)
         selectedImages.insert(element, at: destinationIndexPath.row)
+        story?.storyPhotos = selectedImages
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

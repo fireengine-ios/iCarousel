@@ -20,9 +20,14 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
         output.prepaire(syncSettings: settings)
     }
     
-    func onSave(settings: AutoSyncSettings) {
+    func trackScreen(fromSettings: Bool) {
+        AnalyticsService.sendNetmeraEvent(event: fromSettings ? NetmeraEvents.Screens.FirstAutoSyncScreen() : NetmeraEvents.Screens.AutoSyncScreen())
+    }
+    
+    func onSave(settings: AutoSyncSettings, fromSettings: Bool) {
+        AnalyticsService.sendNetmeraEvent(event: fromSettings ? NetmeraEvents.Actions.Autosync(autosyncSettings: settings) : NetmeraEvents.Actions.FirstAutosync(autosyncSettings: settings))
         output.onSettingSaved()
-        dataStorage.save(autoSyncSettings: settings)
+        dataStorage.save(autoSyncSettings: settings , fromSettings: fromSettings)
         SyncServiceManager.shared.update(syncSettings: settings)
     }
     
@@ -39,10 +44,5 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
                 self?.output.onCheckPermissions(photoAccessGranted: photoAccessGranted, locationAccessGranted: locationAccessGranted)
             }
         }
-    }
-    
-    func trackScreen() {
-        analyticsManager.logScreen(screen: .autoSyncSettings)
-        analyticsManager.trackDimentionsEveryClickGA(screen: .autoSyncSettings)
     }
 }

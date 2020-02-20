@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput {
+class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFilesGreedViewOutput, BaseFilesGreedInteractorOutput, BaseDataSourceForCollectionViewDelegate, BaseFilesGreedModuleOutput, PhotoVideoDetailModuleOutput {
     
     lazy var player: MediaPlayer = factory.resolve()
     
@@ -34,6 +34,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     weak var sliderModule: LBAlbumLikePreviewSliderModuleInput?
     
+    weak var photoVideoDetailModule: PhotoVideoDetailModuleInput?
+    
     var topBarConfig: GridListTopBarConfig?
     
     var alertSheetModule: AlertFilesActionsSheetModuleInput?
@@ -54,6 +56,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     private let semaphore = DispatchSemaphore(value: 0)
     
     let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.baseFilesGreed)
+    
+    var backHandler: VoidHandler?
     
     init(sortedRule: SortedRules = .timeDown) {
         self.sortedRule = sortedRule
@@ -240,6 +244,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 return
             }
             self.dataSource.appendCollectionView(items: [], pageNum: self.interactor.requestPageNum)
+            self.photoVideoDetailModule?.appendItems([], isLastPage: true)
         }
     }
     
@@ -253,10 +258,16 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         updateThreeDotsButton()
 //        items.count < interactor.requestPageSize ? (dataSource.isPaginationDidEnd = true) : (dataSource.isPaginationDidEnd = false)
         dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
-           self.dataSource.appendCollectionView(items: items, pageNum: self.interactor.requestPageNum)
+            self.dataSource.appendCollectionView(items: items, pageNum: self.interactor.requestPageNum)
+            
+            if let fileType = self.photoVideoDetailModule?.itemsType,
+                let sameTypeFiles = self.getSameTypeItems(fileType: fileType, items: items) as? [Item] {
+                //add items of the same type only
+                self.photoVideoDetailModule?.appendItems(sameTypeFiles, isLastPage: self.dataSource.isPaginationDidEnd)
+            }
         }
     }
     
@@ -313,6 +324,11 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return dataSource.isSelectionStateActive
     }
     
+    func stopSelectionWhenDisappear() {
+        dataSource.setSelectionState(selectionState: false)
+        view.stopSelection()
+    }
+    
     @objc func updateThreeDots(_ sender: Any) {
         DispatchQueue.main.async {
             self.updateThreeDotsButton()
@@ -335,10 +351,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
             interactor.trackClickOnPhotoOrVideo(isPhoto: false)
         } else if item.fileType == .image {
             interactor.trackClickOnPhotoOrVideo(isPhoto: true)
+        } else {
+            interactor.trackItemsSelected(item: item)
         }
         
         if item.fileType.isSupportedOpenType {
-            let sameTypeFiles = getSameTypeItems(item: item, items: data)
+            let sameTypeFiles = getSameTypeItems(fileType: item.fileType, items: data.flatMap { $0 })
             router.onItemSelected(selectedItem: item, sameTypeItems: sameTypeFiles,
                                   type: type, sortType: sortedType, moduleOutput: self)
         } else {
@@ -352,14 +370,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath) { }
     
-    private func getSameTypeItems(item: BaseDataSourceItem, items: [[BaseDataSourceItem]]) -> [BaseDataSourceItem] {
-        let allItems = items.flatMap { $0 }
-        if item.fileType.isDocument {
-            return allItems.filter { $0.fileType.isDocument }
-        } else if item.fileType == .video || item.fileType == .image {
-            return allItems.filter { ($0.fileType == .video) || ($0.fileType == .image) }
+    private func getSameTypeItems(fileType: FileType, items: [BaseDataSourceItem]) -> [BaseDataSourceItem] {
+        if fileType.isDocument {
+            return items.filter { $0.fileType.isDocument }
+        } else if fileType == .video || fileType == .image {
+            return items.filter { ($0.fileType == .video) || ($0.fileType == .image) }
         }
-        return allItems.filter { $0.fileType == item.fileType }
+        return items.filter { $0.fileType == fileType }
     }
     
     func getCellSizeForList() -> CGSize {
@@ -403,6 +420,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func didDelete(items: [BaseDataSourceItem]) {
         updateNoFilesView()
         updateThreeDotsButton()
+    }
+    
+    func didDeleteParent() {
+        backHandler = { [weak self] in
+            self?.router.back()
+        }
     }
     
     func updateCoverPhotoIfNeeded() { }
@@ -525,11 +548,12 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func setupNewBottomBarConfig() {
-        guard let barConfig = interactor.bottomBarConfig,
-            let array = dataSource.getSelectedItems() as? [Item] else {
-                return
+        guard let barConfig = interactor.bottomBarConfig else {
+            return
         }
-        bottomBarPresenter?.setupTabBarWith(items: array, originalConfig: barConfig)
+        
+        let selectedItems = dataSource.getSelectedItems()
+        bottomBarPresenter?.setupTabBarWith(items: selectedItems, originalConfig: barConfig)
     }
     
     func onMoreActions(ofItem: Item?, sender: Any) {
@@ -539,6 +563,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         debugLog("BaseFilesGreedPresenter onMoreActions")
 
         alertSheetModule?.showSpecifiedAlertSheet(with: item,
+                                                  status: view.status,
                                                   presentedBy: sender,
                                                   onSourceView: nil,
                                                   viewController: nil)
@@ -617,8 +642,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func viewWillDisappear() {
         bottomBarPresenter?.dismiss(animated: true)
-        dataSource.setSelectionState(selectionState: false)
-        view.stopSelection()
+        stopSelectionWhenDisappear()
     }
     
     func viewWillAppear() {
@@ -752,9 +776,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dataSource.setSelectionState(selectionState: false)
         dismissBottomBar(animated: true)
         view.stopSelection()
-        if type == .removeAlbum || type == .completelyDeleteAlbums {
-            dismissBottomBar(animated: true)
-        }
     }
     
     func operationFailed(withType type: ElementTypes) {
@@ -763,6 +784,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         dismissBottomBar(animated: true)
         dataSource.setSelectionState(selectionState: false)
         view.stopSelection()
+    }
+    
+    func successPopupClosed() {
+        backHandler?()
     }
     
     func selectModeSelected() {
@@ -803,6 +828,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         return interactor.getFolder()
     }
     
+    func getParent() -> BaseDataSourceItem? {
+        return interactor.getParent()
+    }
+    
+    func getStatus() -> ItemStatus {
+        return view.status
+    }
+    
     func getSortTypeString() -> String {
         return self.sortedRule.descriptionForTitle
     }
@@ -810,8 +843,6 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     func moveBack() {
         router.showBack()
     }
-    
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) { }
     
     func sortType() -> MoreActionsConfig.ViewType {
         return type
@@ -849,4 +880,13 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     }
     
     func changeCover() { }
+    
+    func getFIRParent() -> Item? {
+        return nil
+    }
+
+    //PhotoVideoDetailModuleOutput
+    func needLoadNextPage() {
+        compoundAllFiltersAndNextItems()
+    }
 }

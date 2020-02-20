@@ -11,7 +11,7 @@ import UIKit
 
 class RouterVC: NSObject {
     
-    let splitContr = SplitIpadViewContoller()
+    var splitContr: SplitIpadViewContoller?
     
     var rootViewController: UIViewController? {
         guard let window = UIApplication.shared.keyWindow,
@@ -20,6 +20,10 @@ class RouterVC: NSObject {
                 return nil
         }
         return rootviewController
+    }
+    
+    var tabBarController: TabBarViewController? {
+        return rootViewController as? TabBarViewController
     }
     
     func getFloatingButtonsArray() -> [FloatingButtonsType] {
@@ -40,8 +44,10 @@ class RouterVC: NSObject {
     }
     
     func getParentUUID() -> String {
-        
-        if let viewController = navigationController?.viewControllers.last as? BaseViewController {
+        if let tabBarController = tabBarController, let viewController = tabBarController.customNavigationControllers[tabBarController.selectedIndex].viewControllers.last as? BaseViewController
+        {
+            return viewController.parentUUID
+        } else if let viewController = navigationController?.viewControllers.last as? BaseViewController {
             return viewController.parentUUID
         }
         
@@ -49,20 +55,36 @@ class RouterVC: NSObject {
     }
     
     func isRootViewControllerAlbumDetail() -> Bool {
-        return navigationController?.viewControllers.last is AlbumDetailViewController
+        if let tabBarController = tabBarController, let viewController = tabBarController.customNavigationControllers[tabBarController.selectedIndex].viewControllers.last as? BaseViewController
+        {
+            return viewController is AlbumDetailViewController
+        } else {
+            return navigationController?.viewControllers.last is AlbumDetailViewController
+        }
+    }
+    
+    func isTwoFactorAuthViewControllers() -> Bool {
+        
+        guard let currentViewController = navigationController?.viewControllers.last else {
+            return false
+        }
+        
+        return currentViewController is TwoFactorAuthenticationViewController ||
+               currentViewController is PhoneVerificationViewController
     }
     
     // MARK: Navigation controller
     
     var navigationController: UINavigationController? {
-        get {
-            if let navController = rootViewController as? UINavigationController {
-                return navController
+        if let navController = rootViewController as? UINavigationController {
+            return navController
+        } else if let tabBarController = tabBarController {
+            if let navVC = tabBarController.presentedViewController as? NavigationController {
+                return navVC
             } else {
-                if let n = rootViewController as? TabBarViewController {
-                    return n.activeNavigationController
-                }
+                return tabBarController.activeNavigationController
             }
+        } else {
             return nil
         }
     }
@@ -73,16 +95,20 @@ class RouterVC: NSObject {
             if let n = top as? TabBarViewController {
                 return n.activeNavigationController
             }
-            if let n = rootViewController as? TabBarViewController {
+            if let n = tabBarController {
                 return n.activeNavigationController
             }
         } else {
-            if let n = rootViewController as? TabBarViewController {
+            if let n = tabBarController {
                 return n.activeNavigationController
             }
         }
         
         return nil 
+    }
+    
+    var defaultTopController: UIViewController? {
+        return UIApplication.topController()
     }
     
     func createRootNavigationController(controller: UIViewController) -> UINavigationController {
@@ -131,7 +157,7 @@ class RouterVC: NSObject {
         navigationController?.pushViewController(viewController, animated: animated)
         viewController.navigationController?.isNavigationBarHidden = false
         
-        if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
+        if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
             tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
         }
     }
@@ -145,14 +171,31 @@ class RouterVC: NSObject {
         navigationController?.pushViewControllerAndRemoveCurrentOnCompletion(viewController)
         viewController.navigationController?.isNavigationBarHidden = false
         
-        if let tabBarViewController = rootViewController as? TabBarViewController, let baseView = viewController as? BaseViewController {
+        if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
             tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
         }
         
     }
     
+    func pushSeveralControllers(_ viewControllers: [UIViewController], animated: Bool = true) {
+        if let viewController = viewControllers.last as? BaseViewController, !viewController.needToShowTabBar {
+            let notificationName = NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar)
+            NotificationCenter.default.post(name: notificationName, object: nil)
+        }
+        
+        var viewControllersStack = navigationController?.viewControllers ?? []
+        viewControllersStack.append(contentsOf: viewControllers)
+
+        navigationController?.setViewControllers(viewControllersStack, animated: animated)
+        viewControllers.last?.navigationController?.setNavigationBarHidden(false, animated: false)
+
+        if let tabBarViewController = tabBarController, let baseView = viewControllers.last as? BaseViewController {
+            tabBarViewController.setBGColor(color: baseView.getBackgroundColor())
+        }
+    }
+    
     func setBackgroundColor(color: UIColor) {
-        if let tabBarViewController = rootViewController as? TabBarViewController {
+        if let tabBarViewController = tabBarController {
             tabBarViewController.setBGColor(color: color)
         }
     }
@@ -160,6 +203,17 @@ class RouterVC: NSObject {
     func pushViewControllerWithoutAnimation(viewController: UIViewController) {
         navigationController?.pushViewController(viewController, animated: false)
         viewController.navigationController?.isNavigationBarHidden = false
+    }
+    
+    func replaceTopViewControllerWithViewController(_ viewController: UIViewController, animated: Bool = true) {
+        var currentNavigationStack = navigationController?.viewControllers ?? []
+        
+        if currentNavigationStack.isEmpty {
+            pushViewController(viewController: viewController, animated: animated)
+        } else {
+            currentNavigationStack[currentNavigationStack.count - 1] = viewController
+            navigationController?.setViewControllers(currentNavigationStack, animated: true)
+        }
     }
     
     func popToRootViewController() {
@@ -170,8 +224,53 @@ class RouterVC: NSObject {
         navigationController?.popViewController(animated: true)
     }
     
-    func popToViewController(_ vc: UIViewController) {
-        navigationController?.popToViewController(vc, animated: true)
+    func popToViewController(_ vc: UIViewController) {//}, completion: VoidHandler? = nil) {
+        
+        func getNavigation(from navigation: UINavigationController?) -> UINavigationController? {
+            var navigationVC: UINavigationController?
+            
+            if let navVC = navigation, navVC.viewControllers.contains(vc) {
+                navigationVC = navVC
+                
+            } else if let presentingVC = navigation?.presentingViewController {
+                var navController: UINavigationController? = nil
+                
+                if let navVC = presentingVC as? UINavigationController {
+                    navController = getNavigation(from: navVC)
+                    
+                } else if let navVC = presentingVC.navigationController  {
+                    navController = getNavigation(from: navVC)
+                    
+                } else if let tabBar = presentingVC as? TabBarViewController {
+                    navController = getNavigation(from: tabBar.currentViewController?.navigationController)
+                    
+                } else {
+                    return navController
+                }
+                
+                if navController?.viewControllers.contains(vc) == true {
+                    navigationVC = navController
+                }
+            }
+            
+            return navigationVC
+        }
+        
+        if let navigation = getNavigation(from: navigationController) {
+            let pop = {
+                navigation.popToViewController(vc, animated: true)
+            }
+            
+            if let presentedVC = navigation.presentedViewController {
+                presentedVC.dismiss(animated: true) {
+                    pop()
+                }
+            } else {
+                pop()
+            }
+        } else {
+            assertionFailure("didn't found comfortable UINavigationController")
+        }
     }
     
     func popCreateStory() {
@@ -180,7 +279,8 @@ class RouterVC: NSObject {
             
             for (i, viewController) in viewControllers.enumerated() {
                 if viewController is CreateStorySelectionController
-                    || viewController is CreateStoryViewController {
+                    || viewController is CreateStoryViewController
+                    || viewController is CreateStoryPhotoSelectionController {
                     index = i
                     break
                 }
@@ -195,24 +295,49 @@ class RouterVC: NSObject {
         }
     }
     
+    func popTwoFactorAuth() {
+        guard let viewControllers = navigationController?.viewControllers else {
+            assertionFailure("nav bar is missing!")
+            return
+        }
+        
+        let index = (viewControllers.enumerated().first(where: { $0.element is TwoFactorAuthenticationViewController }))?.offset
+        
+        if let index = index {
+            let viewController = viewControllers[index - 1]
+            navigationController?.popToViewController(viewController, animated: true)
+        } else {
+            navigationController?.popToRootViewController(animated: true)
+        }
+    }
+    
     func getViewControllerForPresent() -> UIViewController? {
         if let nController = navigationController?.presentedViewController as? UINavigationController,
             let viewController = nController.viewControllers.first as? PhotoVideoDetailViewController {
             return viewController
         }
+        // for present actionSheet under modal controller
+        if let presentedController = navigationController?.viewControllers.last?.presentedViewController as? TBMatikPhotosViewController {
+            return presentedController
+        }
         return navigationController?.viewControllers.last
     }
-    
-    func presentViewController(controller: UIViewController, completion: VoidHandler? = nil) {
+        
+    func presentViewController(controller: UIViewController, animated: Bool = true, completion: VoidHandler? = nil) {
+        controller.checkModalPresentationStyle()
+        
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         if let lastViewController = getViewControllerForPresent() {
             if controller.popoverPresentationController?.sourceView == nil,
                 controller.popoverPresentationController?.barButtonItem == nil {
                 controller.popoverPresentationController?.sourceView = lastViewController.view
             }
-            lastViewController.present(controller, animated: true, completion: {
+            lastViewController.present(controller, animated: animated, completion: {
                 completion?()
             })
+        } else {
+            assertionFailure("top vc: \(String(describing: UIApplication.topController()))")
+            UIApplication.topController()?.present(controller, animated: animated, completion: completion)
         }
     }
         
@@ -294,12 +419,12 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func phoneVereficationScreen(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) -> UIViewController {
+    func phoneVerificationScreen(withSignUpSuccessResponse: SignUpSuccessResponse, userInfo: RegistrationUserInfoModel) -> UIViewController {
         
-        let inicializer = PhoneVereficationModuleInitializer()
-        let controller = PhoneVereficationViewController(nibName: "PhoneVereficationScreen",
+        let inicializer = PhoneVerificationModuleInitializer()
+        let controller = PhoneVerificationViewController(nibName: "PhoneVerificationScreen",
                                                          bundle: nil)
-        inicializer.phonevereficationViewController = controller
+        inicializer.phoneverificationViewController = controller
         inicializer.setupConfig(with: withSignUpSuccessResponse, userInfo: userInfo)
         return controller
     }
@@ -393,11 +518,11 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func segmentedMedia() -> SegmentedController {
+    func segmentedMedia() -> PhotoVideoSegmentedController {
         let photos = PhotoVideoController.initPhotoFromNib()
         let videos = PhotoVideoController.initVideoFromNib()
         
-        return SegmentedController.initWithControllers([photos, videos])
+        return PhotoVideoSegmentedController.initPhotoVideoSegmentedControllerWith([photos, videos]) 
     }
     
     
@@ -416,7 +541,7 @@ class RouterVC: NSObject {
     // MARK: Music
     
     var musics: UIViewController? {
-        let controller = BaseFilesGreedModuleInitializer.initializeMusicViewController(with: "BaseFilesGreedViewController")
+        let controller = MusicInitializer.initializeViewController(with: "BaseFilesGreedViewController")
         return controller
     }
     
@@ -446,18 +571,33 @@ class RouterVC: NSObject {
     
     var allFiles: UIViewController? {
         let storage = ViewSortStorage.shared
-        return allFiles(moduleOutput: storage,
-                        sortType: storage.allFilesSortType,
-                        viewType: storage.allFilesViewType)
+        let controller = allFiles(moduleOutput: storage,
+                                  sortType: storage.allFilesSortType,
+                                  viewType: storage.allFilesViewType)
+        controller.title = TextConstants.homeButtonAllFiles
+        
+        return controller
+    }
+    
+    var trashBin: UIViewController? {
+        let controller = trashBinController()
+        controller.segmentImage = .trashBin
+        return controller
     }
     
     var segmentedFiles: UIViewController? {
-        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles else {
+        guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
             assertionFailure()
             return SegmentedController()
         }
-        let controllers = [allFiles, documents, musics, favorites]
-        return SegmentedController.initWithControllers(controllers)
+        let controllers = [allFiles, documents, musics, favorites, trashBin]
+        return SegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
+    }
+    
+    // MARK: Music Player
+    
+    func musicPlayer(status: ItemStatus) -> UIViewController {
+        return VisualMusicPlayerModuleInitializer.initializeVisualMusicPlayerController(with: "VisualMusicPlayerViewController", status: status)
     }
     
     
@@ -485,11 +625,12 @@ class RouterVC: NSObject {
     
     // MARK: Folder
     
-    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
+    func filesFromFolder(folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
         let controller = BaseFilesGreedModuleInitializer.initializeFilesFromFolderViewController(with: "BaseFilesGreedViewController",
                                                                                                  folder: folder,
                                                                                                  type: type,
                                                                                                  sortType: sortType,
+                                                                                                 status: status,
                                                                                                  moduleOutput: moduleOutput,
                                                                                                  alertSheetExcludeTypes: alertSheetExcludeTypes)
 
@@ -507,8 +648,9 @@ class RouterVC: NSObject {
     
     // MARK: File info
     
-    var fileInfo: UIViewController? {
-        let viewController = FileInfoModuleInitializer.initializeViewController(with: "FileInfoViewController")
+    func fileInfo(item: BaseDataSourceItem) -> UIViewController {
+        let viewController = FileInfoModuleInitializer.initializeViewController(with: "FileInfoViewController",
+                                                                                item: item)
         return viewController
     }
     
@@ -556,10 +698,10 @@ class RouterVC: NSObject {
     
     // MARK: CreateStory preview
     
-    func storyPreview(forStory story: PhotoStory, responce: CreateStoryResponce) -> UIViewController {
+    func storyPreview(forStory story: PhotoStory, response: CreateStoryResponse) -> UIViewController {
         let controller = CreateStoryPreviewModuleInitializer.initializePreviewViewControllerForStory(with: "CreateStoryPreviewViewController",
                                                                                                    story: story,
-                                                                                                   responce: responce)
+                                                                                                   response: response)
         return controller
     }
     
@@ -570,20 +712,30 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func uploadPhotos(rootUUID: String) -> UIViewController {
-        let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController(rootUUID: rootUUID)
+    func uploadPhotos(rootUUID: String,
+                      getItems: LocalAlbumPresenter.PassBaseDataSourceItemsHandler?,
+                      saveItems: LocalAlbumPresenter.ReturnBaseDataSourceItemsHandler?) -> UIViewController {
+        let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController(rootUUID: rootUUID,
+                                                                                                    getItems: getItems,
+                                                                                                    saveItems: saveItems)
         return controller
     }
     
-    func uploadFromLifeBox(folderUUID: String, soorceUUID: String = "", sortRule: SortedRules = .timeUp) -> UIViewController {
+    func uploadFromLifeBox(
+        folderUUID: String,
+        soorceUUID: String = "",
+        sortRule: SortedRules = .timeUp,
+        type: MoreActionsConfig.ViewType = .Grid
+    ) -> UIViewController {
         if isRootViewControllerAlbumDetail() {
-            return UploadFromLifeBoxModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", albumUUID: folderUUID)
+            return UploadFromLifeBoxModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController",
+                                                                                          albumUUID: folderUUID)
         } else {
             return UploadFromLifeBoxModuleInitializer
                 .initializeFilesForFolderViewController(with: "BaseFilesGreedViewController",
                                                         destinationFolderUUID: folderUUID,
                                                         outputFolderUUID: soorceUUID,
-                                                        sortRule: sortRule)
+                                                        sortRule: sortRule, type: type)
         }
     }
     
@@ -610,36 +762,40 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func filesDetailViewController(fileObject: WrapData, items: [WrapData]) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
-                                                                                    selectedItem: fileObject,
-                                                                                    allItems: items)
-        let c = controller as! PhotoVideoDetailViewController
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return c
+    func filesDetailModule(fileObject: WrapData, items: [WrapData], status: ItemStatus, canLoadMoreItems: Bool, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
+        let module = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
+                                                                                moduleOutput: moduleOutput,
+                                                                                selectedItem: fileObject,
+                                                                                allItems: items,
+                                                                                status: status,
+                                                                                canLoadMoreItems: canLoadMoreItems)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return module
     }
     
-    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
-                                                                                         selectedItem: fileObject,
-                                                                                         allItems: items,
-                                                                                         albumUUID: albumUUID)
-        let c = controller as! PhotoVideoDetailViewController
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return c
+    func filesDetailAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
+        let module = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                                     moduleOutput: moduleOutput,
+                                                                                     selectedItem: fileObject,
+                                                                                     allItems: items,
+                                                                                     albumUUID: albumUUID,
+                                                                                     status: status)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return module
     }
     
-    func filesDetailFaceImageAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
-                                                                                         selectedItem: fileObject,
-                                                                                         allItems: items,
-                                                                                         albumUUID: albumUUID,
-                                                                                         albumItem: albumItem)
-        let c = controller as! PhotoVideoDetailViewController
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return c
+    func filesDetailFaceImageAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
+        let module = PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                                              moduleOutput: moduleOutput,
+                                                                                              selectedItem: fileObject,
+                                                                                              allItems: items,
+                                                                                              albumUUID: albumUUID,
+                                                                                              albumItem: albumItem,
+                                                                                              status: status)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return module
     }
-    
+
     // MARK: Albums list
     
     func albumsListController(moduleOutput: LBAlbumLikePreviewSliderModuleInput? = nil) -> BaseFilesGreedChildrenViewController {
@@ -656,8 +812,8 @@ class RouterVC: NSObject {
     
     // MARK: Album detail
     
-    func albumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
-        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, moduleOutput: moduleOutput)
+    func albumDetailController(album: AlbumItem, type: MoreActionsConfig.ViewType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?) -> AlbumDetailViewController {
+        let controller = AlbumDetailModuleInitializer.initializeAlbumDetailController(with: "BaseFilesGreedViewController", album: album, type: type, status: status, moduleOutput: moduleOutput)
         return controller
     }
     
@@ -697,10 +853,11 @@ class RouterVC: NSObject {
     
     // MARK: Face Image Recognition Photos
     
-    func imageFacePhotosController(album: AlbumItem, item: Item, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
+    func imageFacePhotosController(album: AlbumItem, item: Item, status: ItemStatus, moduleOutput: FaceImageItemsModuleOutput?, isSearchItem: Bool = false) -> BaseFilesGreedChildrenViewController {
         let controller = FaceImagePhotosInitializer.initializeController(with: "FaceImagePhotosViewController",
                                                                          album: album,
                                                                          item: item,
+                                                                         status: status,
                                                                          moduleOutput: moduleOutput,
                                                                          isSearchItem: isSearchItem)
         return controller as! BaseFilesGreedChildrenViewController
@@ -729,16 +886,20 @@ class RouterVC: NSObject {
         let leftController = settings
         let rightController = syncContacts
         
-        //let splitContr = SplitIpadViewContoller()
-        splitContr.configurateWithControllers(leftViewController: leftController as! SettingsViewController, controllers: [rightController])
+        splitContr = SplitIpadViewContoller()
+        splitContr?.configurateWithControllers(leftViewController: leftController as! SettingsViewController, controllers: [rightController])
         
-        let containerController = EmptyContainerNavVC.setupContainer(withSubVC: splitContr.getSplitVC())
+        guard let splitVC = splitContr?.getSplitVC() else {
+            return nil
+        }
+        
+        let containerController = EmptyContainerNavVC.setupContainer(withSubVC: splitVC)
         return containerController
     }
     
     // MARK: Help and support
     
-    var helpAndSupport: UIViewController? {
+    var helpAndSupport: UIViewController {
         let controller = HelpAndSupportModuleInitializer.initializeViewController(with: "HelpAndSupportViewController")
         return controller
     }
@@ -751,8 +912,8 @@ class RouterVC: NSObject {
     
     // MARK: Turkcell Security
     
-    var turkcellSecurity: UIViewController {
-        return TurkcellSecurityModuleInitializer.viewController
+    func turkcellSecurity(isTurkcell: Bool) -> UIViewController {
+        return LoginSettingsModuleInitializer.viewController(isTurkcell: isTurkcell)
     }
     
     // MARK: Auto Upload
@@ -800,24 +961,34 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var instagramAuth: UIViewController {
-        return InstagramAuthViewController()
+    func instagramAuth(fromSettings: Bool) -> UIViewController {
+        return InstagramAuthViewController.controller(fromSettings: fromSettings)
     }
     
     // MARK: OTP
     
-    func otpView(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse, phoneNumber: String) -> UIViewController {
-        let controller = OTPViewModuleInitializer.viewController(responce: responce, userInfo: userInfo, phoneNumber: phoneNumber)
+    func otpView(response: SignUpSuccessResponse, userInfo: AccountInfoResponse, phoneNumber: String) -> UIViewController {
+        let controller = OTPViewModuleInitializer.viewController(response: response, userInfo: userInfo, phoneNumber: phoneNumber)
         return controller
     }
     
     // MARK: feedback subView
     
     func showFeedbackSubView() {
-        let controller = FeedbackViewModuleInitializer.initializeViewController(with: "FeedbackViewController")
-        controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        UIApplication.topController()?.present(controller, animated: true, completion: nil)
+        SingletonStorage.shared.getAccountInfoForUser(success: { userInfo in
+            let controller = self.supportFormPrefilledController
+            controller.title = TextConstants.feedbackViewTitle
+            let config = SupportFormConfiguration(name: userInfo.name,
+                                                  surname: userInfo.surname,
+                                                  phone: userInfo.fullPhoneNumber,
+                                                  email: userInfo.email)
+            controller.config = config
+            self.pushViewController(viewController: controller)
+            
+        }, fail: { error in
+            UIApplication.showErrorAlert(message: error.description)
+        })
+
     }
     
     func vcForCurrentState() -> UIViewController? {
@@ -862,8 +1033,8 @@ class RouterVC: NSObject {
     
     // MARK: - Premium
     
-    func premium(title: String, headerTitle: String, module: FaceImageItemsModuleOutput? = nil) -> UIViewController{
-        let controller = PremiumModuleInitializer.initializePremiumController(with: "PremiumViewController", title: title, headerTitle: headerTitle, module: module)
+    func premium(title: String, headerTitle: String, module: FaceImageItemsModuleOutput? = nil, viewControllerForPresentOn: UIViewController? = nil) -> UIViewController{
+        let controller = PremiumModuleInitializer.initializePremiumController(with: "PremiumViewController", title: title, headerTitle: headerTitle, module: module, viewControllerForPresentOn: viewControllerForPresentOn)
         return controller
     }
     
@@ -894,15 +1065,116 @@ class RouterVC: NSObject {
         return controller
     }
     
-    var supportFormController: UIViewController {
-        return SupportFormController()
+    var supportFormPrefilledController: SupportFormPrefilledController {
+        return SupportFormPrefilledController()
     }
     
     func createStory(navTitle: String) -> UIViewController {
         return CreateStorySelectionController(title: navTitle, isFavouritePictures: isOnFavoritesView())
     }
     
+    func createStory(searchItems: [Item]) -> UIViewController {
+        return CreateStoryPhotoSelectionController(photos: searchItems)
+    }
+    
     func createStory(items: [Item]) -> UIViewController {
         return CreateStoryViewController(images: items)
+    }
+    
+    func twoFactorChallenge(otpParams: TwoFAChallengeParametersResponse, challenge: TwoFAChallengeModel) -> UIViewController {
+        return TwoFactorChallengeInitializer.viewController(otpParams: otpParams, challenge: challenge)
+    }
+    
+    var verifyEmailPopUp: VerifyEmailPopUp {
+        let controller = VerifyEmailPopUp()
+        
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        
+        return controller
+    }
+    
+    var changeEmailPopUp: ChangeEmailPopUp {
+        let controller = ChangeEmailPopUp()
+        
+        controller.modalTransitionStyle = .crossDissolve
+        controller.modalPresentationStyle = .overFullScreen
+        
+        return controller
+    }
+    
+    // MARK: - Spotify
+    
+    func spotifyPlaylistsController(delegate: SpotifyPlaylistsViewControllerDelegate?) -> UIViewController {
+        let controller = SpotifyPlaylistsViewController.initFromNib()
+        controller.delegate = delegate
+        return controller
+    }
+    
+    func spotifyTracksController(playlist: SpotifyPlaylist) -> UIViewController {
+        let controller = SpotifyPlaylistViewController.initFromNib()
+        controller.playlist = playlist
+        return controller
+    }
+    
+    func spotifyImportController(delegate: SpotifyImportControllerDelegate?) -> UIViewController {
+        let controller = SpotifyImportViewController.initFromNib()
+        controller.delegate = delegate
+        return controller
+    }
+    
+    func spotifyOverwritePopup(importAction: @escaping VoidHandler, dismissAction: VoidHandler? = nil) -> UIViewController {
+        return SpotifyOverwritePopup.with(action: importAction, dismissAction: dismissAction)
+    }
+    
+    func spotifyDeletePopup(deleteAction: @escaping VoidHandler, dismissAction: VoidHandler? = nil) -> UIViewController {
+        return SpotifyDeletePopup.with(action: deleteAction, dismissAction: dismissAction)
+    }
+    
+    func spotifyCancelImportPopup(cancelAction: @escaping VoidHandler, continueAction: VoidHandler? = nil) -> UIViewController {
+        return SpotifyCancelImportPopup.with(action: cancelAction, dismissAction: continueAction)
+    }
+
+    func spotifyAuthWebViewController(url: URL, delegate: SpotifyAuthViewControllerDelegate?) -> UIViewController {
+        let controller = SpotifyAuthViewController()
+        controller.loadWebView(with: url)
+        controller.delegate = delegate
+        return controller
+    }
+    
+    func spotifyImportedPlaylistsController() -> UIViewController {
+        return SpotifyImportedPlaylistsViewController.initFromNib()
+    }
+    
+    func spotifyImportedTracksController(playlist: SpotifyPlaylist, delegate: SpotifyImportedTracksViewControllerDelegate?) -> UIViewController {
+        let controller = SpotifyImportedTracksViewController.initFromNib()
+        controller.playlist = playlist
+        controller.delegate = delegate
+        return controller
+    }
+    
+    func tbmaticPhotosContoller(uuids: [String]) -> UIViewController {
+        return TBMatikPhotosViewController.with(uuids: uuids)
+    }
+    
+    func campaignDetailViewController() -> UIViewController {
+        return CampaignDetailViewController.initFromNib()
+    }
+
+    func hiddenPhotosViewController() -> UIViewController {
+        return HiddenPhotosViewController.initFromNib()
+    }
+    
+    func trashBinController() -> TrashBinViewController {
+        return TrashBinViewController.initFromNib()
+    }
+    
+    func showFullQuotaPopUp() {
+        let controller = FullQuotaWarningPopUp()
+        DispatchQueue.main.async {
+            if let topController = self.defaultTopController, topController is AutoSyncViewController == false {
+                topController.present(controller, animated: false)
+            }
+        }
     }
 }

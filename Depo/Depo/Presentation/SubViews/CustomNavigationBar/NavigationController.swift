@@ -50,6 +50,11 @@ class NavigationController: UINavigationController {
             }
         }
         
-        return super.popViewController(animated: true)
+        return super.popViewController(animated: animated)
+    }
+    
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        viewControllerToPresent.checkModalPresentationStyle()
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
 }

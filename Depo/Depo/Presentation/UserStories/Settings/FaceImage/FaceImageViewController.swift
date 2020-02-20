@@ -30,7 +30,7 @@ final class FaceImageViewController: ViewController, NibInit {
         navigationController?.navigationItem.title = TextConstants.backTitle
         
         activityManager.delegate = self
-        analyticsManager.trackScreen(self)        
+        trackScreen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +61,11 @@ final class FaceImageViewController: ViewController, NibInit {
     }
     // MARK: - functions
     
+    private func trackScreen() {
+        analyticsManager.trackScreen(self)
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.FaceImageGroupingScreen())
+    }
+    
     private func updateFacebookImportIfNeed() {
         if displayManager.configuration == .facebookImportOff {
             checkFacebookImportStatus()
@@ -82,8 +87,10 @@ final class FaceImageViewController: ViewController, NibInit {
         
         MenloworksTagsService.shared.faceImageRecognition(isOn: isAllowed)
         if isAllowed {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FaceImageGrouping(action: .on))
             MenloworksEventsService.shared.onFaceImageRecognitionOn()
         } else {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FaceImageGrouping(action: .off))
             MenloworksEventsService.shared.onFaceImageRecognitionOff()
         }
     }
@@ -227,8 +234,6 @@ final class FaceImageViewController: ViewController, NibInit {
                         self?.displayManager.applyConfiguration(.facebookTagsOff)
                         completion?()
                     }
-
-                    completion?()
                 case .failed(let error):
                     DispatchQueue.toMain {
                         /// revert state

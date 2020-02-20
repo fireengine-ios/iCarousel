@@ -58,6 +58,18 @@ extension PremiumViewController: PremiumViewInput {
                               isNeedPolicy: isNeedPolicy,
                               isTurkcell: output.accountType == .turkcell)
     }
+    
+    func showPaycellProcess(with cpcmOfferId: Int) {
+        let controller = PaycellViewController.create(with: cpcmOfferId) { result in
+            switch result {
+            case .success():
+                UIApplication.showSuccessAlert(message: TextConstants.successfullyPurchased)
+            case .failed(_):
+                UIApplication.showErrorAlert(message: TextConstants.errorUnknown)
+            }
+        }
+        RouterVC().pushViewController(viewController: controller)
+    }
 }
 
 // MARK: - ActivityIndicator

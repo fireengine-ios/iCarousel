@@ -13,6 +13,18 @@ enum UpdatePasswordErrors {
     case oldPasswordIsEmpty
     case repeatPasswordIsEmpty
     case captchaAnswerIsEmpty
+    
+    case uppercaseMissingInPassword
+    case lowercaseMissingInPassword
+    case numberMissingInPassword
+    case passwordIsEmpty
+    
+    case passwordInResentHistory(limit: Int)
+    case passwordLengthIsBelowLimit(limit: Int)
+    case passwordLengthExceeded(limit: Int)
+    case passwordSequentialCaharacters(limit: Int)
+    case passwordSameCaharacters(limit: Int)
+
 }
 extension UpdatePasswordErrors: LocalizedError {
     var errorDescription: String? {
@@ -38,6 +50,26 @@ extension UpdatePasswordErrors: LocalizedError {
             return TextConstants.repeatPasswordIsEmpty
         case .captchaAnswerIsEmpty:
             return TextConstants.thisTextIsEmpty
+            
+        case .uppercaseMissingInPassword:
+            return TextConstants.uppercaseMissInPassword
+        case .lowercaseMissingInPassword:
+            return TextConstants.lowercaseMissInPassword
+        case .numberMissingInPassword:
+            return TextConstants.numberMissInPassword
+        case .passwordIsEmpty:
+            return TextConstants.passwordFieldIsEmpty
+            
+        case .passwordInResentHistory(let recentHistoryLimit):
+            return String(format: TextConstants.passwordInResentHistory, recentHistoryLimit)
+        case .passwordLengthIsBelowLimit(let minimumCharacterLimit):
+            return String(format: TextConstants.passwordLengthIsBelowLimit, minimumCharacterLimit)
+        case .passwordLengthExceeded(let maximumCharacterLimit):
+            return String(format: TextConstants.passwordLengthExceeded, maximumCharacterLimit)
+        case .passwordSequentialCaharacters(let sequentialCharacterLimit):
+            return String(format: TextConstants.passwordSequentialCaharacters, sequentialCharacterLimit)
+        case .passwordSameCaharacters(let sameCharacterLimit):
+            return String(format: TextConstants.passwordSameCaharacters, sameCharacterLimit)
         }
     }
 }

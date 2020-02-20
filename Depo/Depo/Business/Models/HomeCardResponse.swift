@@ -57,6 +57,12 @@ final class HomeCardResponse : Equatable {
             return .launchCampaign
         case .instaPick:
             return .instaPick
+        case .tbMatik:
+            return .tbMatik
+        case .campaign:
+            return .campaignCard
+        case .divorce:
+            return .divorce
         }
     }
 }
@@ -71,7 +77,12 @@ extension HomeCardResponse: Map {
         }
         saved = json["saved"].boolValue
         actionable = json["actionable"].boolValue
-        details = json["details"]
+        
+        if type == .tbMatik {
+            details = json["fileList"]
+        } else {
+            details = json["details"]
+        }
     }
 }
 
@@ -91,4 +102,7 @@ enum HomeCardTypes: String {
     case animation = "ANIMATION"
     case launchCampaign = "LAUNCH_CAMPAIGN"
     case instaPick = "INSTAGRAM_LIKE"
+    case tbMatik = "TBMATIC"
+    case campaign = "CAMPAIGN"
+    case divorce = "DIVORCE"
 }

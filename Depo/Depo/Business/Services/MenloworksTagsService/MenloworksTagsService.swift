@@ -5,7 +5,7 @@
 //  Created by Raman Harhun on 2/23/18.
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
-
+import XPush
 class MenloworksTagsService {
     
     private let reachabilityService = ReachabilityService.shared
@@ -14,6 +14,9 @@ class MenloworksTagsService {
     static let shared = MenloworksTagsService()
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
+    
+    private lazy var campaignService = CampaignServiceImpl()
+    private lazy var instapickService: InstapickService = factory.resolve()
     
     // MARK: - Event methods
     
@@ -36,7 +39,7 @@ class MenloworksTagsService {
             var tag: MenloworksTag?
             
             ///must be in the main queue
-            let notInBackground = UIApplication.shared.applicationState == .active
+            let notInBackground = ApplicationStateHelper.shared.safeApplicationState == .active
             
             switch type {
             case .image:
@@ -130,6 +133,8 @@ class MenloworksTagsService {
             sendFacebookImportStatus()
             sendFIRStatus()
             sendSubscriptionsStatus()
+            sendPhotopickLeftAnalysisStatus(nil)
+            sendCampaignPhotopickStatus()
         }
         if let isEnabled = defaults?.object(forKey: "isEnabledKey") as? Bool {
             onTouchIDSettingsChanged(isEnabled)
@@ -413,7 +418,7 @@ class MenloworksTagsService {
     }
     
     func onAutosyncPhotosStatusOff() {
-        MPush.hitTag(MenloworksTags.NameConstants.autosyncPhotosStatus, withValue: MenloworksTags.ValueConstants.off)
+        XPush.hitTag(MenloworksTags.NameConstants.autosyncPhotosStatus, withValue: MenloworksTags.ValueConstants.off)
     }
     
     func onAutosyncPhotosStatusOn(isWifi: Bool) {
@@ -422,7 +427,7 @@ class MenloworksTagsService {
     }
     
     func onAutosyncVideosStatusOff() {
-        MPush.hitTag(MenloworksTags.NameConstants.autosyncVideosStatus, withValue: MenloworksTags.ValueConstants.off)
+        XPush.hitTag(MenloworksTags.NameConstants.autosyncVideosStatus, withValue: MenloworksTags.ValueConstants.off)
     }
     
     func onAutosyncVideosStatusOn(isWifi: Bool) {
@@ -475,13 +480,62 @@ class MenloworksTagsService {
         self.hitTag(tag)
     }
     
+    func sendPhotopickLeftAnalysisStatus(_ status: InstapickAnalyzesCount?) {
+        func trackStatus(_ status: InstapickAnalyzesCount) {
+            let tag = MenloworksTags.PhotopickLeftAnalysis(isFree: status.isFree, value: status.left)
+            hitTag(tag)
+        }
+        
+        if let status = status {
+            trackStatus(status)
+            return
+        }
+        
+        instapickService.getAnalyzesCount { response in
+            switch response {
+            case .success(let status):
+                trackStatus(status)
+            case .failed(let error):
+                debugLog("sendPhotopickLeftAnalysisStatus failed \(error.description)")
+            }
+        }
+    }
+    
+    func sendPhotopickAnalyzeStatus(isSuccess: Bool) {
+        hitTag(MenloworksTags.PhotopickAnalyzeResult(isSuccess: isSuccess))
+        hitTag(MenloworksTags.PhotopickAnalyze(isSuccess: isSuccess))
+    }
+    
+    func sendCampaignPhotopickStatus() {
+        // These tags will only be sent for Turkish users
+        guard SingletonStorage.shared.isUserFromTurkey else {
+            return
+        }
+        
+        campaignService.getPhotopickDetails { result in
+            switch result {
+            case .success(let status):
+                // These tags will only be sent between startDate and launchDate
+                if (status.startDate...status.launchDate).contains(Date()) {
+                    let dailyRemainingTag = MenloworksTags.PhotopickDailyDrawLeft(value: status.dailyRemaining)
+                    self.hitTag(dailyRemainingTag)
+                    
+                    let totalUsedTag = MenloworksTags.PhotopickTotalDraw(value: status.totalUsed)
+                    self.hitTag(totalUsedTag)
+                }
+            case .failure(let error):
+                debugLog("sendCampaignPhotopickStatus failed \(error.description)")
+            }
+        }
+    }
+    
     // MARK: - Accessory methods
     
     private func hitTag(_ tag: MenloworksTag) {
         if let value = tag.value {
-            MPush.hitTag(tag.name, withValue: value)
+            XPush.hitTag(tag.name, withValue: value)
         } else {
-            MPush.hitTag(tag.name)
+            XPush.hitTag(tag.name)
         }
     }
     
@@ -516,9 +570,9 @@ class MenloworksTagsService {
     
     private func sendSubscriptionsStatus() {
         SubscriptionsServiceIml().activeSubscriptions(success: { response in
-            guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else { return }
+            guard let subscriptionsResponse = response as? ActiveSubscriptionResponse else { return }
             
-            let list = subscriptionsResponce.list.sorted(by: { sub1, sub2 -> Bool in
+            let list = subscriptionsResponse.list.sorted(by: { sub1, sub2 -> Bool in
                 guard let sub1Quota = sub1.subscriptionPlanQuota,
                     let sub2Quota = sub2.subscriptionPlanQuota else {
                         return true
@@ -544,7 +598,7 @@ class MenloworksTagsService {
                     displayName = subscription.subscriptionPlanDisplayName ?? ""
                 }
                 
-                MPush.hitTag(packageName, withValue: displayName)
+                XPush.hitTag(packageName, withValue: displayName)
             }
         }) { _ in }
     }

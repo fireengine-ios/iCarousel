@@ -16,6 +16,7 @@ struct HeaderConstant {
     static let ApplicationJson = "application/json"
     
     static let ContentType = "Content-Type"
+    static let ContentRange = "Content-Range"
     static let ApplicationJsonUtf8 = "application/json; encoding=utf-8"
     
     
@@ -53,6 +54,11 @@ struct HeaderConstant {
     static let transId = "X-Trans-Id"
     
     static let silentToken = "X-Silent-Token"
+    static let accountStatus = "X-Account-Status"
+    
+    static let connectionType = "X-Object-Meta-Upload-Conn-Type"
+    static let uploadType = "X-Object-Meta-Upload-Sync-Type"
+    static let applicationLifecycleState = "X-Object-Meta-Upload-XG-Type"
 }
 
 class RequestHeaders {

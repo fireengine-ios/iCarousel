@@ -13,9 +13,18 @@ struct NumericConstants {
     
     static let maximumApiConnections = 10
     
-    static let vereficationCharacterLimit = 6
-    static let vereficationTimerLimit = 120//in seconds
-    static let maxVereficationAttempts = 3
+    static let verificationCharacterLimit = 6
+    static let verificationTimerLimit = 120//in seconds
+    static let maxVerificationAttempts = 3
+    
+    #if LIFEBOX
+    static let showFAQViewAttempts = 3
+    static let showSupportViewAttempts = 6
+    #elseif LIFEDRIVE
+    static let showFAQViewAttempts = 3000
+    static let showSupportViewAttempts = 6000
+    #endif
+    
     
     static let maxDetailsLoadingAttempts = 5
     static let detailsLoadingTimeAwait = UInt32(2)
@@ -39,7 +48,7 @@ struct NumericConstants {
     static let albumCellGreedWidth: CGFloat = 100
     static let storiesCellGreedHeight: CGFloat = 100
     
-    static let  heightTextAlbumCell: CGFloat = 21
+    static let heightTextAlbumCell: CGFloat = 32
     static let amountInsetForStoryAlbum: CGFloat = 10
     static let amountInsetForAlbum: CGFloat = 3
     
@@ -59,6 +68,7 @@ struct NumericConstants {
     static let fourGigabytes: UInt64 = 4 * 1024 * 1024 * 1024
     static let hundredMegabytes: UInt64 = 100 * 1024 * 1024
     static let copyVideoBufferSize = 4096 //old 1024 * 1024
+    static let defaultResumableUploadChunkSize = 15728640 // 15MB
     
     static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     
@@ -85,6 +95,7 @@ struct NumericConstants {
     static let itemProviderSearchRequest: Int = 1000
     
     static let limitContactsForBackUp: Int = 5000
+    static let contactSyncBulk = 1000
     static let defaultCustomScrollIndicatorOffset: CGFloat = 50
     
     static let myStreamSliderThumbnailsCount: Int = 4
@@ -155,10 +166,17 @@ struct NumericConstants {
     static let firstResponderBottomOffset: CGFloat = 50
     
     static let createStoryImagesCountLimit: Int = 20
+    
+    static let numberOfSelectedItemsBeforeLimits = 500
+    
+    static let spotifyStatusUpdateTimeInterval = 1.0
+    
+    static let langingPageCount = 7
+    
+    static let passwordRuleSetVersion = 1
 }
 
 struct RequestSizeConstant {
     static let faceImageItemsRequestSize = 100
     static let quickScrollRangeApiPageSize = Device.isIpad ? 128 : 32
-    
 }

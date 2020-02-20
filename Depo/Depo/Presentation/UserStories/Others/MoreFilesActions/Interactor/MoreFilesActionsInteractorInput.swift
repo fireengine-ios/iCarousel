@@ -8,17 +8,23 @@
 
 protocol MoreFilesActionsInteractorInput {
     
-    
     func share(item: [BaseDataSourceItem], sourceRect: CGRect?)
+    
     func shareViaLink(item: [BaseDataSourceItem], sourceRect: CGRect?)
     
     func info(item: [BaseDataSourceItem], isRenameMode: Bool)
     
     func edit(item: [BaseDataSourceItem], complition: VoidHandler?)
     
-    func delete(item: [BaseDataSourceItem])
+    func smash(item: [BaseDataSourceItem], completion: VoidHandler?)
     
-    func completelyDelete(albums: [BaseDataSourceItem])
+    func moveToTrash(item: [BaseDataSourceItem])
+    
+    func removeAlbums(items: [BaseDataSourceItem])
+    
+    func hide(items: [BaseDataSourceItem])
+    
+    func unhide(items: [BaseDataSourceItem])
     
     func move(item: [BaseDataSourceItem], toPath: String)
     
@@ -26,6 +32,7 @@ protocol MoreFilesActionsInteractorInput {
     
     func download(item: [BaseDataSourceItem])
     
+    func restore(items: [BaseDataSourceItem])
     
     // MARK: Actions Sheet
     
@@ -42,6 +49,8 @@ protocol MoreFilesActionsInteractorInput {
     func backUp(items: [BaseDataSourceItem])
     
     func removeFromAlbum(items: [BaseDataSourceItem])
+    
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem], item: Item)
     
     func photos(items: [BaseDataSourceItem])
     
@@ -68,6 +77,8 @@ protocol MoreFilesActionsInteractorInput {
     func albumDetails(items: [BaseDataSourceItem])
     
     func downloadToCmeraRoll(items: [BaseDataSourceItem])
+    
+    func delete(items: [BaseDataSourceItem])
     
     func deleteDeviceOriginal(items: [BaseDataSourceItem])
     

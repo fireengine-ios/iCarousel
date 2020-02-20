@@ -186,13 +186,17 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
             /// on main queue
             self?.showSuccessPopup()
             self?.hideSpinnerIncludeNavigationBar()
-        }, fail: { [weak self] errorResponse  in
-            if errorResponse.description.contains("Captcha required") {
-                self?.showLogoutPopup()
-                self?.hideSpinnerIncludeNavigationBar()
-            } else {
-                self?.showError(errorResponse)
-            }
+            }, fail: { [weak self] errorResponse  in
+                if errorResponse.description.contains("Captcha required") {
+                    self?.showLogoutPopup()
+                    self?.hideSpinnerIncludeNavigationBar()
+                } else {
+                    self?.showError(errorResponse)
+                }
+            }, twoFactorAuth: { twoFARequered in
+                
+            /// As a result of the meeting, the logic of showing the screen of two factorial authorization is added only with a direct login and is not used with other authorization methods.
+                assertionFailure()
         })
     }
     
@@ -234,12 +238,23 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         let errorText = error.localizedDescription
         
         switch error {
-        case .invalidCaptcha, .captchaAnswerIsEmpty:
+        case .invalidCaptcha,
+             .captchaAnswerIsEmpty:
             captchaView.showErrorAnimated(text: errorText)
             captchaView.captchaAnswerTextField.becomeFirstResponder()
             scrollToView(captchaView)
             
-        case .invalidNewPassword, .newPasswordIsEmpty:
+        case .invalidNewPassword,
+             .newPasswordIsEmpty,
+             .passwordInResentHistory,
+             .uppercaseMissingInPassword,
+             .lowercaseMissingInPassword,
+             .passwordIsEmpty,
+             .passwordLengthIsBelowLimit,
+             .passwordLengthExceeded,
+             .passwordSequentialCaharacters,
+             .passwordSameCaharacters,
+             .numberMissingInPassword:
             showErrorColorInNewPasswordView = true
             
             /// important check to show error only once
@@ -251,12 +266,14 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
             newPasswordView.passwordTextField.becomeFirstResponder()
             scrollToView(newPasswordView)
             
-        case .invalidOldPassword, .oldPasswordIsEmpty:
+        case .invalidOldPassword,
+             .oldPasswordIsEmpty:
             oldPasswordView.showTextAnimated(text: errorText)
             oldPasswordView.passwordTextField.becomeFirstResponder()
             scrollToView(oldPasswordView)
             
-        case .notMatchNewAndRepeatPassword, .repeatPasswordIsEmpty:
+        case .notMatchNewAndRepeatPassword,
+             .repeatPasswordIsEmpty:
             repeatPasswordView.showTextAnimated(text: errorText)
             repeatPasswordView.passwordTextField.becomeFirstResponder()
             scrollToView(repeatPasswordView)

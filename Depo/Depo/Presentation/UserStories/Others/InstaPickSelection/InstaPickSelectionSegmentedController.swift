@@ -41,8 +41,6 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
     private var segmentedViewControllers: [UIViewController] = []
     private var delegates = MulticastDelegate<InstaPickSelectionSegmentedControllerDelegate>()
     
-    private let instapickService: InstapickService = factory.resolve()
-    
     private lazy var albumsTabIndex: Int = {
         if let index = segmentedViewControllers.index(of: albumsVC) {
             return index
@@ -113,7 +111,14 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         trackScreen()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationBarWithGradientStyle()
+    }
+    
     private func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PhotoPickPhotoSelectionScreen())
         let analyticsService: AnalyticsService = factory.resolve()
         analyticsService.logScreen(screen: .photoPickPhotoSelection)
         analyticsService.trackDimentionsEveryClickGA(screen: .photoPickPhotoSelection)
@@ -169,27 +174,35 @@ final class InstaPickSelectionSegmentedController: UIViewController, ErrorPresen
         }
         
         dismiss(animated: true, completion: {
-            
-            let imagesUrls = self.selectedItems.flatMap({ $0.metadata?.mediumUrl })
-            let ids = self.selectedItems.flatMap({ $0.uuid })
-            
-            let topTexts = [TextConstants.instaPickAnalyzingText_0,
-                            TextConstants.instaPickAnalyzingText_1,
-                            TextConstants.instaPickAnalyzingText_2,
-                            TextConstants.instaPickAnalyzingText_3,
-                            TextConstants.instaPickAnalyzingText_4]
-            
-            let bottomText = TextConstants.instaPickAnalyzingBottomText
-            if let currentController = UIApplication.topController() {
-                let controller = InstaPickProgressPopup.createPopup(with: imagesUrls, topTexts: topTexts, bottomText: bottomText)
-                currentController.present(controller, animated: true, completion: nil)
-                
-                let instapickService: InstapickService = factory.resolve()
-                instapickService.startAnalyze(ids: ids, popupToDissmiss: controller)
-            }
+            self.presentInstaPickProgressPopUp()
         })
     }
     
+    private func presentInstaPickProgressPopUp() {
+        let imagesUrls = self.selectedItems.compactMap({ $0.metadata?.mediumUrl })
+        let ids = self.selectedItems.compactMap({ $0.uuid })
+        
+        let topTexts = [TextConstants.instaPickAnalyzingText_0,
+                        TextConstants.instaPickAnalyzingText_1,
+                        TextConstants.instaPickAnalyzingText_2,
+                        TextConstants.instaPickAnalyzingText_3,
+                        TextConstants.instaPickAnalyzingText_4]
+        
+        let bottomText = TextConstants.instaPickAnalyzingBottomText
+        if let currentController = UIApplication.topController() {
+            let controller = InstaPickProgressPopup.createPopup(with: imagesUrls, topTexts: topTexts, bottomText: bottomText)
+            
+            if let tabBarController = currentController as? TabBarViewController,
+               let controlerAfterDismissProgressPopUp = tabBarController.currentViewController as? InstaPickProgressPopupDelegate {
+                controller.delegate = controlerAfterDismissProgressPopUp
+                currentController.present(controller, animated: true, completion: nil)
+                controller.startAnalyze(ids: ids)
+            } else {
+                assertionFailure()
+            }
+        }
+    }
+
     @objc private func controllerDidChange(_ sender: UISegmentedControl) {
         selectController(at: sender.selectedSegmentIndex)
     }
@@ -296,23 +309,24 @@ extension InstaPickSelectionSegmentedController: InstapickAlbumSelectionDelegate
 // MARK: - Static
 extension InstaPickSelectionSegmentedController {
     static func controllerToPresent() -> UIViewController {
-        let vc = InstaPickSelectionSegmentedController()
-        let navVC = UINavigationController(rootViewController: vc)
+        return InstaPickSelectionSegmentedController()
         
-        let navigationTextColor = UIColor.white
-        let navigationBar = navVC.navigationBar
-        
-        let textAttributes: [NSAttributedString.Key: AnyHashable] = [
-            .foregroundColor: navigationTextColor,
-            .font: UIFont.TurkcellSaturaDemFont(size: 19)
-        ]
-        
-        navigationBar.titleTextAttributes = textAttributes
-        navigationBar.barTintColor = UIColor.lrTealish ///bar's background
-        navigationBar.barStyle = .black
-        navigationBar.isTranslucent = false
-        navigationBar.tintColor = navigationTextColor
-        
-        return navVC
+        //TODO: remove if Sprint 34 regression test is completed
+//        let navVC = NavigationController(rootViewController: vc)
+//
+//        let navigationTextColor = UIColor.white
+//        let navigationBar = navVC.navigationBar
+//
+//        let textAttributes: [NSAttributedString.Key: AnyHashable] = [
+//            .foregroundColor: navigationTextColor,
+//            .font: UIFont.TurkcellSaturaDemFont(size: 19)
+//        ]
+//
+//        navigationBar.titleTextAttributes = textAttributes
+//        navigationBar.barStyle = .black
+//        navigationBar.isTranslucent = false
+//        navigationBar.tintColor = navigationTextColor
+//
+//        return navVC
     }
 }

@@ -95,10 +95,10 @@ final class PeopleService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getPeopleAlbum(id: Int, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
+    func getPeopleAlbum(id: Int, status: ItemStatus, success: @escaping AlbumOperationResponse, fail:@escaping FailResponse) {
         debugLog("PeopleService getPeopleAlbumWithID")
         
-        let param = PeopleAlbumParameters(id: id)
+        let param = PeopleAlbumParameters(id: id, status: status)
         
         let handler = BaseResponseHandler<AlbumResponse, ObjectRequestResponse>(success: { response in
             if let response = response as? AlbumResponse, let album = response.list.first {
@@ -111,7 +111,7 @@ final class PeopleService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getAlbumsForPeopleItemWithID(_ id: Int, success: @escaping (_ albums: [AlbumServiceResponse]) -> Void, fail: @escaping FailResponse) {
+    func getAlbumsForPeopleItemWithID(_ id: Int, success: @escaping (_ albums: [AlbumServiceResponse]) -> Void, fail: @escaping FailResponse) -> URLSessionTask {
         debugLog("PeopleService getAlbumsForPeopleItemWithID")
         
         let param = PeopleAlbumsParameters(id: id)
@@ -124,7 +124,7 @@ final class PeopleService: BaseRequestService {
             }
         }, fail: fail)
         
-        executeGetRequest(param: param, handler: handler)
+        return executeGetRequest(param: param, handler: handler)
     }
     
     func searchPeople(text: String, success:@escaping SuccessResponse, fail:@escaping FailResponse) {
@@ -231,13 +231,20 @@ final class PeopleParameters: BaseRequestParametrs {
 
 final class PeopleAlbumParameters: BaseRequestParametrs {
     private let id: Int
+    private let status: ItemStatus
     
-    init(id: Int) {
+    init(id: Int, status: ItemStatus) {
         self.id = id
+        self.status = status
     }
     
     override var patch: URL {
-        let searchWithParam = String(format: RouteRequests.peopleAlbum, id)
+        let searchWithParam: String
+        if status.isContained(in: [.hidden, .trashed]) {
+            searchWithParam = String(format: RouteRequests.peopleAlbumWithStatus, id, status.rawValue)
+        } else {
+            searchWithParam = String(format: RouteRequests.peopleAlbum, id)
+        }
         return URL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
 }

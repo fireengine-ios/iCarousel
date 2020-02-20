@@ -10,7 +10,7 @@ import UIKit
 
  final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController {
 
-    private let albumsSliderHeight: CGFloat = 170
+    private let albumsSliderHeight: CGFloat = 140
     private let headerImageHeight: CGFloat = 190
     
     private var albumsSlider: LBAlbumLikePreviewSliderViewController?
@@ -20,13 +20,14 @@ import UIKit
     private var countPhotosLabel = UILabel()
     private var albumsHeightConstraint: NSLayoutConstraint?
     private var headerImageHeightConstraint: NSLayoutConstraint?
+    private var hideButton: UIButton!
     
     // MARK: - UIViewController lifecycle
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         updateHeaderPosition()
-        gradientHeaderLayer?.frame = headerView.bounds
+        gradientHeaderLayer?.frame = headerImage.bounds
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +62,13 @@ import UIKit
         }
     }
     
+    @objc func hideAlbum() {
+        if let output = output as? FaceImagePhotosViewOutput {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hide))
+            output.hideAlbum()
+        }
+    }
+    
     private func configureTitleNavigationBar() {
         if mainTitle.isEmpty {
             mainTitle = TextConstants.faceImageAddName
@@ -71,7 +79,7 @@ import UIKit
 
     // MARK: - Header View Methods
     
-    private func setupHeaderViewWith(peopleItem: PeopleItem?) {
+    private func setupHeaderView(with item: Item, status: ItemStatus?) {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.addSubview(headerView)
         headerView.bottomAnchor.constraint(equalTo: collectionView.topAnchor).isActive = true
@@ -98,8 +106,8 @@ import UIKit
         headerView.addSubview(countPhotosLabel)
         countPhotosLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         countPhotosLabel.bottomAnchor.constraint(equalTo: headerImage.bottomAnchor, constant: -16).isActive = true
-
-        if let peopleItem = peopleItem {
+        
+        if status == .active, let peopleItem = item as? PeopleItem {
             createAlbumsSliderWith(peopleItem: peopleItem)
             if let albumsView = albumsSlider?.view {
                 albumsView.translatesAutoresizingMaskIntoConstraints = false
@@ -108,11 +116,30 @@ import UIKit
                 albumsView.leftAnchor.constraint(equalTo: headerView.leftAnchor).isActive = true
                 albumsView.rightAnchor.constraint(equalTo: headerView.rightAnchor).isActive = true
                 albumsView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
-                albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: albumsSliderHeight)
+                //show slider after loading albums if needed
+                albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: 0)
                 albumsHeightConstraint?.isActive = true
             }
         } else {
             headerImage.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
+        }
+        
+        if status == .active {
+            let frame = CGRect(origin: .zero, size: CGSize(width: 35, height: 35))
+            hideButton = UIButton(frame: frame)
+            hideButton.layer.shadowColor = UIColor.black.cgColor
+            hideButton.layer.shadowOpacity = 0.5
+            hideButton.layer.shadowOffset = .zero
+            hideButton.layer.shadowRadius = 5
+            hideButton.layer.shadowPath = UIBezierPath(rect: frame).cgPath
+            hideButton.setImage(UIImage(named: "hiddenAlbum"), for: .normal)
+            headerView.addSubview(hideButton)
+            hideButton.translatesAutoresizingMaskIntoConstraints = false
+            headerImage.bottomAnchor.constraint(equalTo: hideButton.bottomAnchor, constant: 25).isActive = true
+            headerView.rightAnchor.constraint(equalTo: hideButton.rightAnchor, constant: 14).isActive = true
+            hideButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+            hideButton.widthAnchor.constraint(equalToConstant: 35).isActive = true
+            hideButton.addTarget(self, action: #selector(hideAlbum), for: .touchUpInside)
         }
     }
     
@@ -140,6 +167,11 @@ import UIKit
         if let albumHeight = albumsHeightConstraint?.constant,
             let headerImageHeight = headerImageHeightConstraint?.constant {
             collectionView.contentInset.top = albumHeight + headerImageHeight
+            
+            // correct display header image when loading smart albums after photos
+            if collectionView.contentOffset.y == -headerImageHeight {
+                collectionView.setContentOffset(CGPoint(x: 0, y: -collectionView.contentInset.top), animated: false)
+            }
         } else {
             collectionView.contentInset.top = headerImageHeight
         }
@@ -172,36 +204,21 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
     }
     
     func setHeaderImage(with path: PathForItem) {
-        headerImage.loadImageByPath(path_: path)
+        headerImage.loadImage(with: path)
     }
     
-    func setupHeader(forPeopleItem item: PeopleItem?) {
-        setupHeaderViewWith(peopleItem: item)
-    }
-    
-    func dismiss() {
-        navigationController?.popViewController(animated: true)
+    func setupHeader(with item: Item, status: ItemStatus?) {
+        setupHeaderView(with: item, status: status)
     }
     
     func hiddenSlider(isHidden: Bool) {
-        if let albumsView = albumsSlider?.view {
-            if isHidden {
-                albumsHeightConstraint?.isActive = false
-                albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: 0)
-                albumsView.isHidden = true
-            } else {
-                albumsHeightConstraint?.isActive = false
-                albumsHeightConstraint = albumsView.heightAnchor.constraint(equalToConstant: albumsSliderHeight)
-                headerImage.bottomAnchor.constraint(equalTo: albumsView.topAnchor).isActive = true
-                albumsView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
-                albumsView.isHidden = false
-            }
-            albumsHeightConstraint?.isActive = true
-
-            headerImage.layoutIfNeeded()
-
-            updateHeaderPosition()
+        guard let albumsView = albumsSlider?.view else {
+            return
         }
+
+        albumsHeightConstraint?.constant = isHidden ? 0 : albumsSliderHeight
+        albumsView.isHidden = isHidden
+        view.layoutIfNeeded()
     }
         
     func setCountImage(_ count: String) {

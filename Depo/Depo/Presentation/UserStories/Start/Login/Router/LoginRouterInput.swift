@@ -9,12 +9,6 @@
 import Foundation
 
 protocol LoginRouterInput {
-    
-    var optInController: OptInController? { get }
-    
-    var emptyPhoneController: TextEnterController? { get }
-    
-    func renewOptIn(with optIn: OptInController)
 
     func goToForgotPassword()
     
@@ -26,15 +20,25 @@ protocol LoginRouterInput {
     
     func goToRegistration()
 
-    func openEmptyEmail(successHandler: @escaping VoidHandler)
-    
-    func openTextEnter(buttonAction: @escaping TextEnterHandler)
-    
-    func openOptIn(phone: String)
-
     func showNeedSignUp(message: String, onClose: @escaping VoidHandler)
     
     func openSupport()
     
-    func dismissEmptyPhoneController(successHandler: VoidHandler?)
+    func openEmptyEmail(successHandler: @escaping VoidHandler)
+        
+    func goToTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
+    
+    func showPhoneVerifiedPopUp(_ onClose: VoidHandler?)
+    
+    func showAccountStatePopUp(image: PopUpImage,
+                               title: String,
+                               titleDesign: DesignText,
+                               message: String,
+                               messageDesign: DesignText,
+                               buttonTitle: String,
+                               buttonAction: @escaping VoidHandler)
+    
+    func goToFaqSupportPage()
+    
+    func goToSubjectDetailsPage(type: SupportFormSubjectTypeProtocol)
 }

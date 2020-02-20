@@ -50,6 +50,7 @@ class LoginPresenter: BasePresenter {
     
     private func openApp() {
         AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
+        AuthoritySingleton.shared.checkNewVersionApp()
         openAutoSyncIfNeeded()
     }
     
@@ -74,13 +75,6 @@ class LoginPresenter: BasePresenter {
         }
     }
     
-    private func stopOptInVC() {
-        let optInController = router.optInController
-        
-        optInController?.stopActivityIndicator()
-        optInController?.resignFirstResponder()
-    }
-    
     private func failLogin(message: String) {
         showMessageHideSpinner(text: message)
         
@@ -95,16 +89,41 @@ class LoginPresenter: BasePresenter {
     }
     
     private func openEmptyPhone() {
+        interactor.updateEmptyPhone(delegate: self)
+    }
+    
+    func loginDeletedAccount(deletedAccountHandler: @escaping VoidHandler) {
         completeAsyncOperationEnableScreen()
-        tokenStorage.isClearTokens = true
+
+        let image = UIImage(named: "Path")
+        let title = TextConstants.accountStatusTitle
         
-        let action: TextEnterHandler = { [weak self] enterText, vc in
-            self?.newPhone = enterText
-            self?.interactor.getTokenToUpdatePhone(for: enterText)
-            vc.startLoading()
-        }
+        let titleFullAttributes: [NSAttributedStringKey : Any] = [
+            .font : UIFont.TurkcellSaturaFont(size: 18),
+            .foregroundColor : UIColor.black,
+            .kern : 0
+        ]
         
-        router.openTextEnter(buttonAction: action)
+        let message = TextConstants.accountStatusMessage
+        
+        let messageParagraphStyle = NSMutableParagraphStyle()
+        messageParagraphStyle.paragraphSpacing = 8
+        messageParagraphStyle.alignment = .center
+        
+        let messageFullAttributes: [NSAttributedStringKey : Any] = [
+            .font : UIFont.TurkcellSaturaMedFont(size: 16),
+            .foregroundColor : ColorConstants.blueGrey,
+            .paragraphStyle : messageParagraphStyle,
+            .kern : 0
+        ]
+        
+        router.showAccountStatePopUp(image: .custom(image),
+                                     title: title,
+                                     titleDesign: .partly(parts: [title : titleFullAttributes]),
+                                     message: message,
+                                     messageDesign: .partly(parts: [message : messageFullAttributes]),
+                                     buttonTitle: TextConstants.ok,
+                                     buttonAction: deletedAccountHandler)
     }
 
 }
@@ -153,10 +172,27 @@ extension LoginPresenter: LoginViewOutput {
         isPresenting = true
         router.openSupport()
     }
+    
+    func openFaqSupport() {
+        isPresenting = true
+        router.goToFaqSupportPage()
+    }
+    
+    func openSubjectDetails(type: SupportFormSubjectTypeProtocol) {
+        interactor.trackSupportSubjectEvent(type: type)
+        isPresenting = true
+        router.goToSubjectDetailsPage(type: type)
+    }
 }
 
 //MARK: - LoginInteractorOutput
 extension LoginPresenter: LoginInteractorOutput {
+    
+    func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse) {
+        completeAsyncOperationEnableScreen()
+        isPresenting = true
+        router.goToTwoFactorAuthViewController(response: response)
+    }
     
     func succesLogin() {
         tokenStorage.isClearTokens = false
@@ -165,7 +201,6 @@ extension LoginPresenter: LoginInteractorOutput {
     }
 
     func processLoginError(_ loginError: LoginResponseError, errorText: String) {
-        
         switch loginError {
         case .block:
             failedBlockError()
@@ -184,7 +219,9 @@ extension LoginPresenter: LoginInteractorOutput {
             failLogin(message: TextConstants.loginScreenCredentialsError)
             
         case .incorrectCaptcha:
-            failLogin(message: TextConstants.invalidCaptcha)
+            completeAsyncOperationEnableScreen()
+            view.refreshCaptcha()
+            view.captchaFieldError(TextConstants.invalidCaptcha)
             
         case .networkError:
             failLogin(message: errorText)
@@ -196,6 +233,7 @@ extension LoginPresenter: LoginInteractorOutput {
             failLogin(message: TextConstants.errorConnectedToNetwork)
             
         case .emptyPhone:
+            completeAsyncOperationEnableScreen()
             openEmptyPhone()
             
         case .serverError:
@@ -280,68 +318,9 @@ extension LoginPresenter: LoginInteractorOutput {
         showMessageHideSpinner(text: TextConstants.hourBlockLoginError)
     }
     
-    func successed(tokenUpdatePhone: SignUpSuccessResponse) {
-        referenceToken = tokenUpdatePhone.referenceToken
-        let textEnterVC = router.emptyPhoneController
-
-        textEnterVC?.stopLoading()
-        textEnterVC?.close { [weak self] in
-            guard let `self` = self, let newPhone = self.newPhone else {
-                return
-            }
-            
-            self.isPresenting = true
-            
-            self.router.openOptIn(phone: newPhone)
-            self.router.optInController?.delegate = self
-        }
-    }
-    
-    func failedUpdatePhone(errorResponse: ErrorResponse) {
-        let textEnterVC = router.emptyPhoneController
-        textEnterVC?.stopLoading()
-        textEnterVC?.showErrorAlert(message: errorResponse.description)
-    }
-    
-    func successed(resendUpdatePhone: SignUpSuccessResponse) {
-        referenceToken = resendUpdatePhone.referenceToken
-        let optInController = router.optInController
-
-        optInController?.stopActivityIndicator()
-        optInController?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
-        optInController?.startEnterCode()
-        optInController?.hiddenError()
-        optInController?.hideResendButton()
-    }
-    
-    func failedResendUpdatePhone(errorResponse: ErrorResponse) {
-        router.optInController?.stopActivityIndicator()
-        router.optInController?.showError(errorResponse.description)
-    }
-    
-    func successedVerifyPhone() {
-        stopOptInVC()
-        
-        let popupVC = PopUpController.with(title: nil,
-                                           message: TextConstants.phoneUpdatedNeedsLogin,
-                                           image: .none,
-                                           buttonTitle: TextConstants.ok) { [weak self] vc in
-                                            vc.close {
-                                                self?.router.dismissEmptyPhoneController(successHandler: nil)
-                                            }
-        }
-        UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
-    }
-    
-    func failedVerifyPhone(errorString: String) {
-        let optInController = router.optInController
-        optInController?.stopActivityIndicator()
-        optInController?.clearCode()
-        optInController?.view.endEditing(true)
-        
-        if optInController?.increaseNumberOfAttemps() == false {
-            optInController?.startEnterCode()
-            optInController?.showError(TextConstants.promocodeInvalid)
+    func successedVerifyPhone() {        
+        router.showPhoneVerifiedPopUp { [weak self] in
+            self?.interactor.stopUpdatePhone()
         }
     }
     
@@ -354,67 +333,34 @@ extension LoginPresenter: LoginInteractorOutput {
         showMessageHideSpinner(text: error.description)
     }
     
-    func captchaRequred(requred: Bool) {
+    func captchaRequired(required: Bool) {
         asyncOperationSuccess()
 
-        if requred {
+        if required {
             captchaShowed = true
             view.showCaptcha()
         }
     }
     
-    func captchaRequredFailed() {
+    func captchaRequiredFailed() {
         asyncOperationSuccess()
     }
     
-    func captchaRequredFailed(with message: String) {
+    func captchaRequiredFailed(with message: String) {
         asyncOperationSuccess()
         view.showErrorMessage(with: message)
-    }
-    
-    func successedSilentLogin() {
-        stopOptInVC()
-        let optInController = router.optInController
-        if optInController != nil {
-            router.dismissEmptyPhoneController { [weak self] in
-                self?.succesLogin()
-            }
-        } else {
-            succesLogin()
-        }
     }
     
     func showSupportView() {
         view.showSupportView()
     }
-}
-
-// MARK: - OptInControllerDelegate
-extension LoginPresenter: OptInControllerDelegate {
-    func optInResendPressed(_ optInVC: OptInController) {
-        optInVC.startActivityIndicator()
-        self.router.renewOptIn(with: optInVC)
-        if let newPhone = newPhone {
-            interactor.getResendTokenToUpdatePhone(for: newPhone)
-        }
-    }
-
-    func optInReachedMaxAttempts(_ optInVC: OptInController) {
-        optInVC.showResendButton()
-        optInVC.dropTimer()
-        optInVC.showError(TextConstants.promocodeBlocked)
-    }
-
-    func optInNavigationTitle() -> String {
-        return TextConstants.confirmPhoneOptInNavigarionTitle
-    }
-
-    func optIn(_ optInVC: OptInController, didEnterCode code: String) {
-        optInVC.startActivityIndicator()
-        self.router.renewOptIn(with: optInVC)
-        interactor.verifyPhoneNumber(token: referenceToken ?? "", code: code)
+    
+    func showFAQView() {
+        view.showFAQView()
     }
 }
+
+// MARK: - CaptchaViewErrorDelegate
 
 extension LoginPresenter: CaptchaViewErrorDelegate {
     
@@ -422,4 +368,17 @@ extension LoginPresenter: CaptchaViewErrorDelegate {
         
         view.showErrorMessage(with: error.description)
     }
+}
+
+// MARK: - AccountWarningServiceDelegate
+
+extension LoginPresenter: AccountWarningServiceDelegate {
+    func successedSilentLogin() {
+        succesLogin()
+    }
+    
+    func needToRelogin() {
+        interactor.tryToRelogin()
+    }
+    
 }

@@ -31,6 +31,7 @@ class PackagesInteractor {
 extension PackagesInteractor: PackagesInteractorInput {
 
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PackagesScreen())
         analyticsService.logScreen(screen: .packages)
         analyticsService.trackDimentionsEveryClickGA(screen: .packages)
     }
@@ -40,11 +41,7 @@ extension PackagesInteractor: PackagesInteractorInput {
             switch result {
             case .success(let response):
                 DispatchQueue.toMain {
-                    if accountType == .turkcell {
-                        self?.output.successed(allOffers: response)
-                    } else {
-                        self?.getInfoForAppleProducts(offers: response)
-                    }
+                    self?.getInfoForAppleProducts(offers: response)
                 }
             case .failed(let error):
                 DispatchQueue.toMain {
@@ -86,6 +83,10 @@ extension PackagesInteractor: PackagesInteractorInput {
         }
     }
     
+    func refreshActivePurchasesState(_ isActivePurchases: Bool) {
+        iapManager.setActivePurchasesState(isActivePurchases)
+    }
+    
     func getToken(for offer: PackageModelResponse) {
         offersService.initOffer(offer: offer,
             success: { [weak self] response in
@@ -96,7 +97,8 @@ extension PackagesInteractor: PackagesInteractorInput {
                         self?.output.failedUsage(with: ErrorResponse.string("token nil"))
                     }
                     return
-                }            
+                }
+                
                 DispatchQueue.toMain {
                     self?.output.successed(tokenForOffer: token)
                 }
@@ -123,6 +125,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                     self?.analyticsService.trackProductPurchasedInnerGA(offer: offer, packageIndex: planIndex)
                     self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: false)
                     self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .success))
                 }
 
                 /// delay stay for server perform request (android logic)
@@ -130,7 +133,8 @@ extension PackagesInteractor: PackagesInteractorInput {
                     self?.output.successedVerifyOffer()
                 }
             }, fail: { [weak self] errorResponse in
-            self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
+                self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure))
                 DispatchQueue.main.async {
                     self?.output.failedVerifyOffer()
                 }
@@ -171,7 +175,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         })
     }
     
-    func getAccountType(with accountType: String, offers: [Any]) -> AccountType {
+    func getAccountType(with accountType: String, offers: [Any]) -> AccountType? {
         return packageService.getAccountType(for: accountType, offers: offers)
     }
     
@@ -193,16 +197,19 @@ extension PackagesInteractor: PackagesInteractorInput {
                 self?.analyticsService.trackProductInAppPurchaseGA(product: product, packageIndex: planIndex)
                 self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true)
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .success))
                 self?.validatePurchase(productId: identifier)
             case .canceled:
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("transaction canceled"))
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure))
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.string(TextConstants.cancelPurchase))
                 }
             case .error(let error):
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("\(error.description)"))
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure))
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.error(error))
                 }
@@ -307,7 +314,7 @@ extension PackagesInteractor: PackagesInteractorInput {
         
         iapManager.restorePurchases { [weak self] result in
             switch result {
-            case .success(let _):
+            case .success(_):
 //                let offers = productIds.map { OfferApple(productId: $0) } ///Backend dont need this for now
                 self?.validateRestorePurchase(offersApple: [])
 
@@ -337,8 +344,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func trackPackageClick(plan packages: SubscriptionPlan, planIndex: Int) {
-        analyticsService.trackPackageClick(package:
-            packages, packageIndex: planIndex)
+        analyticsService.trackPackageClick(package: packages, packageIndex: planIndex)
     }
     
     private func sendReciept() -> Bool {

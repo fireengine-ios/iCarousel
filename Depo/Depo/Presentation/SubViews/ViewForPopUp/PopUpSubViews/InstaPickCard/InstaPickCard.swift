@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class InstaPickCard: BaseView {
+final class InstaPickCard: BaseCardView {
     
     private enum InstaPick {
         enum CardType {
@@ -48,6 +48,22 @@ final class InstaPickCard: BaseView {
     private lazy var instapickRoutingService = InstaPickRoutingService()
     
     private var cardType: InstaPick.CardType?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupRecognizer()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupRecognizer()
+    }
+    
+    private func setupRecognizer() {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(onBottomButtonTap(_:)))
+        addGestureRecognizer(recognizer)
+    }
+    
     //override
     override func configurateView() {
         super.configurateView()

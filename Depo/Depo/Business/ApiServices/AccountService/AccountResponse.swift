@@ -7,12 +7,16 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 struct AccountJSONConstants {
     
     static let mobileUploadsSpecialFolderUuid = "mobileUploadsSpecialFolderUuid"
     static let isCropyTagAvailable = "isCropyTagAvailable"
     static let isFavouriteTagAvailable = "isFavouriteTagAvailable"
+    static let isUpdateInformationRequired = "isUpdateInformationRequired"
+    static let hasSecurityQuestionInfo = "hasSecurityQuestionInfo"
+    static let securityQuestionId = "securityQuestionId"
     static let cellografId = "cellografId"
     static let name = "name"
     static let surname = "surname"
@@ -36,8 +40,12 @@ struct AccountJSONConstants {
     static let objectCount = "objectCount"
     static let projectID = "projectId"
     
+    static let emailVerificationRemainingDays = "emailVerificationRemainingDays"
+    static let address = "address"
+    
     static let securitySettingsTurkcellPassword = "turkcellPasswordAuthEnabled"
     static let securitySettingsMobileNetwor = "mobileNetworkAuthEnabled"
+    static let twoFactorAuthEnabled = "twoFactorAuthEnabled"
 }
 
 class AccountInfoResponse: ObjectRequestResponse {
@@ -45,7 +53,10 @@ class AccountInfoResponse: ObjectRequestResponse {
     var mobileUploadsSpecialFolderUuid: String?
     var isCropyTagAvailable: Bool?
     var isFavouriteTagAvailable: Bool?
+    var isUpdateInformationRequired: Bool?
     var cellografId: String?
+    var hasSecurityQuestionInfo: Bool?
+    var securityQuestionId: Int?
     var name: String?
     var surname: String?
     var accountType: String?
@@ -59,6 +70,9 @@ class AccountInfoResponse: ObjectRequestResponse {
     var urlForPhoto: URL?
     var projectID: String?
     var gapId: String?
+    var address: String?
+    
+    var emailVerificationRemainingDays: Int?
     
     var fullPhoneNumber: String {
         if let code = countryCode, let number = phoneNumber {
@@ -67,11 +81,22 @@ class AccountInfoResponse: ObjectRequestResponse {
         return ""
     }
     
+    var isTurkcellUser: Bool {
+        return accountType == "TURKCELL"
+    }
+    
+    var isUserFromTurkey: Bool {
+        return countryCode == "90"
+    }
+    
     override func mapping() {
         mobileUploadsSpecialFolderUuid = json?[AccountJSONConstants.mobileUploadsSpecialFolderUuid].string
         isCropyTagAvailable = json?[AccountJSONConstants.isCropyTagAvailable].bool
         isFavouriteTagAvailable = json?[AccountJSONConstants.isFavouriteTagAvailable].bool
+        isUpdateInformationRequired = json?[AccountJSONConstants.isUpdateInformationRequired].bool
         cellografId = json?[AccountJSONConstants.cellografId].string
+        hasSecurityQuestionInfo = json?[AccountJSONConstants.hasSecurityQuestionInfo].bool
+        securityQuestionId = json?[AccountJSONConstants.securityQuestionId].int
         name = json?[AccountJSONConstants.name].string
         gapId = json?[AccountJSONConstants.gapID].string
         surname = json?[AccountJSONConstants.surname].string
@@ -85,18 +110,30 @@ class AccountInfoResponse: ObjectRequestResponse {
         emailVerified = json?[AccountJSONConstants.emailVerified].bool
         urlForPhoto = json?[AccountJSONConstants.url].url
         projectID = json?[AccountJSONConstants.projectID].string
+        emailVerificationRemainingDays = json?[AccountJSONConstants.emailVerificationRemainingDays].int
+        address = json?[AccountJSONConstants.address].string
     }
 }
 
 class SecuritySettingsInfoResponse: ObjectRequestResponse {
     var turkcellPasswordAuthEnabled: Bool?
     var mobileNetworkAuthEnabled: Bool?
+    var twoFactorAuthEnabled: Bool?
     
     override func mapping() {
         turkcellPasswordAuthEnabled = json?[AccountJSONConstants.securitySettingsTurkcellPassword].bool
         mobileNetworkAuthEnabled = json?[AccountJSONConstants.securitySettingsMobileNetwor].bool
+        twoFactorAuthEnabled = json?[AccountJSONConstants.twoFactorAuthEnabled].bool
     }
     
+}
+
+enum SettingsInfoPermissionsJsonKeys {
+    static let faceImage = "faceImageRecognitionAllowed"
+    static let faceImageStatus = "faceImageRecognitionAllowedStatus"
+    static let facebook = "facebookTaggingEnabled"
+    static let facebookStatus = "facebookTaggingEnabledStatus"
+    static let instapick = "instapickAllowed"
 }
 
 final class SettingsInfoPermissionsResponse: ObjectRequestResponse {
@@ -109,20 +146,12 @@ final class SettingsInfoPermissionsResponse: ObjectRequestResponse {
     
     private let jsonStatusOK = "OK"
     
-    private enum ResponseKeys {
-        static let faceImage = "faceImageRecognitionAllowed"
-        static let faceImageStatus = "faceImageRecognitionAllowedStatus"
-        static let facebook = "facebookTaggingEnabled"
-        static let facebookStatus = "facebookTaggingEnabledStatus"
-        static let instapick = "instapickAllowed"
-    }
-    
     override func mapping() {
-        isFaceImageAllowed = json?[ResponseKeys.faceImage].bool
-        isFaceImageRecognitionAllowedStatus = json?[ResponseKeys.faceImageStatus].string == jsonStatusOK ? true : false
-        isFacebookAllowed = json?[ResponseKeys.facebook].bool
-        isFacebookTaggingEnabledStatus = json?[ResponseKeys.facebookStatus].string == jsonStatusOK ? true : false
-        isInstapickAllowed = json?[ResponseKeys.instapick].bool
+        isFaceImageAllowed = json?[SettingsInfoPermissionsJsonKeys.faceImage].bool
+        isFaceImageRecognitionAllowedStatus = json?[SettingsInfoPermissionsJsonKeys.faceImageStatus].string == jsonStatusOK ? true : false
+        isFacebookAllowed = json?[SettingsInfoPermissionsJsonKeys.facebook].bool
+        isFacebookTaggingEnabledStatus = json?[SettingsInfoPermissionsJsonKeys.facebookStatus].string == jsonStatusOK ? true : false
+        isInstapickAllowed = json?[SettingsInfoPermissionsJsonKeys.instapick].bool
     }
 }
 
@@ -169,6 +198,29 @@ class QuotaInfoResponse: ObjectRequestResponse {
         exceeded = json?[AccountJSONConstants.quotaExceeded].bool
         if let buf3 = json?[AccountJSONConstants.objectCount].int64 {
             objectsCount = Int64(buf3)
+        }
+    }
+}
+
+enum OverQuotaStatusValue: String {
+    case nonOverQuota = "NON_OVER_QUOTA"
+    case overQuotaFreemium = "OVER_QUOTA_FREEMIUM"
+    case overQuotaPremium = "OVER_QUOTA_PREMIUM"
+}
+
+final class OverQuotaStatusResponse: ObjectRequestResponse {
+    private enum ResponseKey {
+        static let status = "status"
+        static let value = "value"
+    }
+    
+    var status: String?
+    var value: OverQuotaStatusValue?
+    
+    override func mapping() {
+        status = json?[ResponseKey.status].string
+        if let valueString = json?[ResponseKey.value].string {
+            value = OverQuotaStatusValue(rawValue: valueString)
         }
     }
 }
@@ -387,6 +439,8 @@ final class FeaturesResponse: ObjectRequestResponse {
         static let autoVideoUploadV2 = "auto-video-upload-v2"
         static let tcellPaycellSubscription = "tcell-paycell-subscription"
         static let autoSyncDisabled = "auto-sync-disabled"
+        static let isResumableUploadEnabled = "resumable-upload-enabled"
+        static let resumableUploadChunkSize = "resumable-upload-chunk-size-in-bytes"
     }
     
     var isNonTcellPaycellSubscription: Bool?
@@ -397,6 +451,8 @@ final class FeaturesResponse: ObjectRequestResponse {
     var isAutoVideoUploadV2: Bool?
     var isTcellPaycellSubscription: Bool?
     var isAutoSyncDisabled: Bool?
+    var isResumableUploadEnabled: Bool?
+    var resumableUploadChunkSize: Int?
 
     override func mapping() {
         isNonTcellPaycellSubscription = json?[ResponseKey.nonTcellPaycellSubscription].bool
@@ -407,8 +463,40 @@ final class FeaturesResponse: ObjectRequestResponse {
         isAutoVideoUploadV2 = json?[ResponseKey.autoVideoUploadV2].bool
         isTcellPaycellSubscription = json?[ResponseKey.tcellPaycellSubscription].bool
         isAutoSyncDisabled = json?[ResponseKey.autoSyncDisabled].bool
+        isResumableUploadEnabled = json?[ResponseKey.isResumableUploadEnabled].bool
+        resumableUploadChunkSize = json?[ResponseKey.resumableUploadChunkSize].int
     }
     
+}
+
+final class SecretQuestionsResponse {
+    
+    private enum ResponseKey {
+        static let id = "id"
+        static let text = "text"
+    }
+    
+    var id: Int
+    var text: String
+    
+    init(id: Int, text: String) {
+        self.id = id
+        self.text = text
+    }
+}
+
+extension SecretQuestionsResponse {
+    convenience init?(json: JSON) {
+        guard
+            let id = json[ResponseKey.id].int,
+            let text = json[ResponseKey.text].string
+        else {
+            assertionFailure()
+            return nil
+        }
+        
+        self.init(id: id, text: text)
+    }
 }
 
 final class FeedbackEmailResponse: ObjectRequestResponse {
@@ -424,6 +512,33 @@ final class FeedbackEmailResponse: ObjectRequestResponse {
     override func mapping() {
         status = json?[ResponseKey.status].string
         value = json?[ResponseKey.value].string
+    }
+}
+
+final class TwoFAChallengeParametersResponse: ObjectRequestResponse {
+    
+    enum ChallengeStatus: String {
+        case new = "SENT_NEW_CHALLENGE"
+        case existing = "USE_EXISTING_CHALLENGE"
+    }
+    
+    private enum ResponseKey {
+        static let status = "status"
+        static let remainingTimeInSeconds = "remainingTimeInSeconds"
+        static let expectedInputLength = "expectedInputLength"
+    }
+    
+    var status: ChallengeStatus?
+    var remainingTimeInSeconds: Int?
+    var expectedInputLength: Int?
+
+    override func mapping() {
+        remainingTimeInSeconds = json?[ResponseKey.remainingTimeInSeconds].int
+        expectedInputLength = json?[ResponseKey.expectedInputLength].int
+        
+        if let status = json?[ResponseKey.status].string?.uppercased() {
+            self.status = ChallengeStatus(rawValue: status)
+        }
     }
 }
 

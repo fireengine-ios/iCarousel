@@ -14,33 +14,62 @@ final class PushNotificationService {
     
     private lazy var router = RouterVC()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
-    
+    private lazy var storageVars: StorageVars = factory.resolve()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+
     private var notificationAction: PushNotificationAction?
-    private var notificationActionURLString: String?
+    private var notificationParameters: String?
     
     //MARK: -
     
     func assignNotificationActionBy(launchOptions: [AnyHashable: Any]?) -> Bool {
-        guard let actionString = launchOptions?["action"] as? String else {
+        let action = launchOptions?[PushNotificationParameter.action.rawValue] as? String ?? launchOptions?[PushNotificationParameter.pushType.rawValue] as? String
+        
+        guard let actionString = action else {
             return false
         }
-
-        notificationAction = PushNotificationAction(rawValue: actionString)
         
-        if notificationAction == .http {
-            notificationActionURLString = actionString
+        guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
+            assertionFailure("unowned push type")
+            debugLog("PushNotificationService received notification with unowned type \(String(describing: action))")
+            return false
         }
         
-        return notificationAction != nil
+        debugLog("PushNotificationService received notification with type \(actionString)")
+        parse(options: launchOptions, action: notificationAction)
+        return true
     }
     
-    func assignDeepLink(innerLink: String?) -> Bool {
+    func assignDeepLink(innerLink: String?, options: [AnyHashable: Any]?) -> Bool {
         guard let actionString = innerLink as String? else {
             return false
         }
+                
+        guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
+            assertionFailure("unowned push type")
+            debugLog("PushNotificationService received deepLink with unowned type \(String(describing: actionString))")
+            return false
+        }
         
-        notificationAction = PushNotificationAction(rawValue: actionString)
-        return notificationAction != nil
+        debugLog("PushNotificationService received deepLink with type \(actionString)")
+        parse(options: options, action: notificationAction)
+        return true
+    }
+    
+    private func parse(options: [AnyHashable: Any]?, action: PushNotificationAction) {
+        self.notificationAction = action
+        
+        switch notificationAction {
+        case .http?:
+            notificationParameters = action.rawValue
+        case .tbmatic?:
+            notificationParameters = options?[PushNotificationParameter.tbmaticUuids.rawValue] as? String
+        default:
+            break
+        }
+        
+        storageVars.deepLink = action.rawValue
+        storageVars.deepLinkParameters = options
     }
     
     func openActionScreen() {
@@ -48,10 +77,11 @@ final class PushNotificationService {
             return
         }
         
-        if tokenStorage.accessToken == nil {
+        let isLoggedIn = tokenStorage.accessToken != nil
+        if !isLoggedIn && !action.isContained(in: [.supportFormLogin, .supportFormSignup]) {
             action = .login
         }
-        
+                
         switch action {
         case .main, .home: openMain()
         case .syncSettings: openSyncSettings()
@@ -82,8 +112,10 @@ final class PushNotificationService {
         case .people: openPeople()
         case .things: openThings()
         case .places: openPlaces()
-        case .http: openURL(notificationActionURLString)
-        case .login: openLogin()
+        case .http: openURL(notificationParameters)
+        case .login:
+            openLogin()
+            clear()
         case .search: openSearch()
         case .freeUpSpace: break
         case .settings: openSettings()
@@ -92,8 +124,34 @@ final class PushNotificationService {
         case .photopickHistory: openPhotoPickHistory()
         case .myStorage: openMyStorage()
         case .becomePremium: openBecomePremium()
+        case .tbmatic: openTBMaticPhotos(notificationParameters)
+        case .securityQuestion: openSecurityQuestion()
+        case .permissions: openPermissions()
+        case .photopickCampaignDetail: openCampaignDetails()
+        case .supportFormSignup, .supportFormLogin:
+            if isLoggedIn {
+                openContactUs()
+            } else { 
+                openSupport(type: action == .supportFormSignup ? .signup : .login)
+            }
+        case .trashBin:
+            openTabBarItem(index: .documentsScreenIndex, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
+        case .hiddenBin: openHiddenBin()
         }
+        
+        
+        if router.tabBarController != nil {
+            clear()
+        }
+    }
+    
+    private func clear() {
+        // clear if user haven't access or need screen is showed
+        // no clean for cold application start - screen showing from home page
         notificationAction = nil
+        notificationParameters = nil
+        storageVars.deepLink = nil
+        storageVars.deepLinkParameters = nil
     }
     
     //MARK: -
@@ -112,18 +170,35 @@ final class PushNotificationService {
         }
     }
     
-    private func openTabBarItem(index: TabScreenIndex) {
+    private func openTabBarItem(index: TabScreenIndex, segmentIndex: Int? = nil) {
         guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
             return
         }
         
         if tabBarVC.selectedIndex != index.rawValue {
             switch index {
-            case .homePageScreenIndex, .contactsSyncScreenIndex, .documentsScreenIndex:
-                tabBarVC.tabBar.selectedItem = tabBarVC.tabBar.items?[index.rawValue]
+            case .homePageScreenIndex:
+                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
+                    assertionFailure("This index is non existent 😵")
+                    return
+                }
+                tabBarVC.tabBar.selectedItem = newSelectedItem
                 tabBarVC.selectedIndex = index.rawValue
+            case .contactsSyncScreenIndex, .documentsScreenIndex://because their index is more then two. And we have one offset for button selection but when we point to array index we need - 1 for those items where index > 2.
+                guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index.rawValue] else {
+                    assertionFailure("This index is non existent 😵")
+                    return
+                }
+                tabBarVC.tabBar.selectedItem = newSelectedItem
+                tabBarVC.selectedIndex = index.rawValue - 1
+            
+                if let segmentIndex = segmentIndex, let segmentedController = tabBarVC.currentViewController as? SegmentedController  {
+                    segmentedController.loadViewIfNeeded()
+                    segmentedController.switchSegment(to: segmentIndex)
+                }
+                
             case .photosScreenIndex:
-                tabBarVC.showPhotosScreen(self)
+                tabBarVC.showPhotoScreen()
             }
         }
     }
@@ -234,14 +309,14 @@ final class PushNotificationService {
     }
     
     private func openPasscode() {
-        let isTurkcell = SingletonStorage.shared.accountInfo?.accountType == "TURKCELL"
-        pushTo(router.passcodeSettings(isTurkcell: isTurkcell, inNeedOfMail: false))
+        let isTurkcellAccount = SingletonStorage.shared.accountInfo?.accountType == "TURKCELL"
+        pushTo(router.passcodeSettings(isTurkcell: isTurkcellAccount, inNeedOfMail: false))
     }
     
     private func openLoginSettings() {
-        if SingletonStorage.shared.accountInfo?.accountType == "TURKCELL" {
-            pushTo(router.turkcellSecurity)            
-        }
+        let isTurkcell = SingletonStorage.shared.accountInfo?.accountType == AccountType.turkcell.rawValue
+        let controller = router.turkcellSecurity(isTurkcell: isTurkcell)
+        pushTo(controller)
     }
     
     private func openFaceImageRecognition() {
@@ -305,5 +380,56 @@ final class PushNotificationService {
     
     private func openBecomePremium() {
         pushTo(router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
+    }
+    
+    private func openTBMaticPhotos(_ uuidsByString: String?) {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.notification))
+        
+        debugLog("PushNotificationService try to open TBMatic screen")
+        // handle list of uuids with two variants for separators "," and ", "
+        guard let uuids = uuidsByString?.replacingOccurrences(of: " ", with: "").components(separatedBy: ",") else {
+            assertionFailure()
+            debugLog("PushNotificationService uuids is empty")
+            return
+        }
+        
+        // check for cold start from push - present on home page
+        guard router.tabBarController != nil else {
+            return
+        }
+        
+        let controller = router.tbmaticPhotosContoller(uuids: uuids)
+        DispatchQueue.main.async {
+            self.router.presentViewController(controller: controller)
+        }
+    }
+    
+    private func openSecurityQuestion() {
+        debugLog("PushNotificationService try to open Security Question screen")
+
+        let controller = SetSecurityQuestionViewController.initFromNib()
+        pushTo(controller)
+    }
+    
+    private func openPermissions() {
+        debugLog("PushNotificationService try to open Permission screen")
+
+        let controller = router.permissions
+        pushTo(controller)
+    }
+    
+    private func openCampaignDetails() {
+        let controller = router.campaignDetailViewController()
+        pushTo(controller)
+    }
+    
+    private func openSupport(type: SupportFormScreenType) {
+        let controller = SupportFormController.with(screenType: type)
+        pushTo(controller)
+    }
+    
+    private func openHiddenBin() {
+        let controller = router.hiddenPhotosViewController()
+        pushTo(controller)
     }
 }

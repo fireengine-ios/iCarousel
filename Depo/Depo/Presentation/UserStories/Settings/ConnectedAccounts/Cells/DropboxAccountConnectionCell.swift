@@ -43,6 +43,7 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell 
         didSet {
             progress.font = UIFont.TurkcellSaturaRegFont(size: 14.0)
             progress.text = " "
+            progress.numberOfLines = 0
         }
     }
     
@@ -84,6 +85,7 @@ final class DropboxAccountConnectionCell: UITableViewCell, SocialConnectionCell 
     }
 
     @IBAction func importToDropbox(_ sender: Any) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .dropboxImport))
         presenter.startDropbox()
     }
     

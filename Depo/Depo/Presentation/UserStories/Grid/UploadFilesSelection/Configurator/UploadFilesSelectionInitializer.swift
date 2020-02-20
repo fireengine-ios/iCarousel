@@ -14,7 +14,7 @@ class UploadFilesSelectionModuleInitializer: NSObject {
         let viewController = UploadFilesSelectionViewController(nibName: nibName, bundle: nil)
         let configurator = BaseFilesGreedModuleConfigurator()
         
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
                                                style: .default, tintColor: nil)
         
         configurator.configure(viewController: viewController,
@@ -46,8 +46,9 @@ class UploadFilesSelectionModuleInitializer: NSObject {
         return viewController
     }
 
-    class func initializeUploadPhotosViewController(rootUUID: String = "") -> UIViewController {
-//
+    class func initializeUploadPhotosViewController(rootUUID: String,
+                                                    getItems: LocalAlbumPresenter.PassBaseDataSourceItemsHandler?,
+                                                    saveItems: LocalAlbumPresenter.ReturnBaseDataSourceItemsHandler?) -> UIViewController {
         let viewController = UploadFilesSelectionViewController(nibName: "BaseFilesGreedViewController", bundle: nil)
         let configurator = BaseFilesGreedModuleConfigurator()
         let service = LocalPhotoAndVideoService()
@@ -56,12 +57,15 @@ class UploadFilesSelectionModuleInitializer: NSObject {
 
         interactor.rootUIID = rootUUID
         
+        let presenter = UploadFilesSelectionPresenter()
+        presenter.getOtherSelectedPhotos = getItems
+        presenter.saveSelectedPhotos = saveItems
         
         configurator.configure(viewController: viewController,
-                               fileFilters: [.localStatus(.local)], //[.duplicates],//
+                               fileFilters: [.localStatus(.local)],
                                bottomBarConfig: nil,
                                router: router,
-                               presenter: UploadFilesSelectionPresenter(),
+                               presenter: presenter,
                                interactor: interactor,
                                alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [],
                                                                                      selectionModeTypes: []),

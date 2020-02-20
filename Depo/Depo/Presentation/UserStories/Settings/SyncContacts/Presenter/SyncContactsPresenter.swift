@@ -16,9 +16,9 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     var interactor: SyncContactsInteractorInput!
     var router: SyncContactsRouterInput!
 
-    var contactSyncResponse: ContactSync.SyncResponse?
-    var isBackUpAvailable: Bool { return contactSyncResponse != nil }
-    let reachability = ReachabilityService.shared
+    private var contactSyncResponse: ContactSync.SyncResponse?
+    private var isBackUpAvailable: Bool { return contactSyncResponse != nil }
+    private let reachability = ReachabilityService.shared
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
@@ -68,6 +68,8 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
             view.showErrorAlert(message: TextConstants.errorManyContactsToBackUp)
         case .failed:
             view.showErrorAlert(message: TextConstants.serverErrorMessage)
+        case .depoError:
+            view.showErrorAlert(message: TextConstants.contactSyncDepoErrorMessage)
         default:
             // TODO: Error handling
             break
@@ -77,13 +79,22 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         asyncOperationFinished()
     }
     
-    func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
+    func showProgress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
         view.showProggress(progress: progress, count: count, forOperation: operation)
     }
     
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
         contactSyncResponse = response
-        view.success(response: response, forOperation: operation)
+        setButtonsAvailability()
+        /// Delay is needed due to instant progress reset on completion
+        if view.isFullCircle {
+            DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {
+                self.view.success(response: response, forOperation: operation)
+            }
+        } else {
+            view.success(response: response, forOperation: operation)
+        }
+       
     }
     
     func analyzeSuccess(response: [ContactSync.AnalyzedContact]) {
@@ -114,6 +125,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     
     func showNoBackUp() {
         view.setStateWithoutBackUp()
+        setButtonsAvailability()
     }
     
     func asyncOperationStarted() {
@@ -151,6 +163,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
             view.setStateWithoutBackUp()
         }
         view.resetProgress()
+        setButtonsAvailability()
     }
     
     private func sendOperationToOutputs(_ operationType: SyncOperationType) {
@@ -187,8 +200,10 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     private func requesetAccess(completionHandler: @escaping ContactsPermissionCallback) {
         switch CNContactStore.authorizationStatus(for: .contacts) {
         case .authorized:
+            AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(true)
             completionHandler(true)
         case .denied:
+            AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(false)
             showSettingsAlert(completionHandler: completionHandler)
         case .restricted, .notDetermined:
             passcodeStorage.systemCallOnScreen = true
@@ -197,6 +212,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
                 guard let `self` = self else { return }
                 self.passcodeStorage.systemCallOnScreen = false
                 DispatchQueue.main.async {
+                    AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(granted)
                     if granted {
                         completionHandler(true)
                     } else {
@@ -221,6 +237,18 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
                                                 UIApplication.shared.openSettings()
                                               })
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
+    }
+    
+    private func setButtonsAvailability() {
+        let hasStoredContacts: Bool
+        if let contactResponse = contactSyncResponse {
+            hasStoredContacts = contactResponse.totalNumberOfContacts > 0
+        } else {
+            hasStoredContacts = false
+        }
+        
+        view.setButtonsAvailability(restore: hasStoredContacts,
+                                    backup: interactor.getStoredContactsCount() > 0)
     }
 }
 

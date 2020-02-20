@@ -11,18 +11,8 @@ import UIKit
 class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
     
     func addViewOnCell(controllersView: UIView) {
-        for view in self.contentView.subviews {
-            view.removeFromSuperview()
-        }
-        
-        if let baseView = controllersView as? BaseView {
+        if let baseView = controllersView as? BaseCardView {
             isSwipeEnable = baseView.canSwipe
-        }
-        
-        if let sublayers = contentView.layer.sublayers {
-            for sublayer in sublayers {
-                sublayer.removeFromSuperlayer()
-            }
         }
         
         controllersView.layer.cornerRadius = 5
@@ -47,6 +37,27 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        for view in self.contentView.subviews {
+            view.removeFromSuperview()
+        }
+        
+        if let sublayers = contentView.layer.sublayers {
+            for sublayer in sublayers {
+                sublayer.removeFromSuperlayer()
+            }
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.contentView.layer.sublayers?.forEach {
+            $0.frame = contentView.layer.frame
+        }
+    }
     
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
@@ -58,7 +69,7 @@ class CollectionViewCellForController: BaseCollectionViewCellWithSwipe {
     
     override func didEndDisplay() {
         super.didEndDisplay()
-        if let controllersView = self.contentView.subviews.first as? BaseView {
+        if let controllersView = self.contentView.subviews.first as? BaseCardView {
             controllersView.viewDidEndShow()
         }
     }

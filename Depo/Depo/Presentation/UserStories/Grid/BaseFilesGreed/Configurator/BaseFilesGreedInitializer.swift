@@ -21,10 +21,10 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)//PhotoVideoController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
-        viewController.scrollablePopUpView.addNotPermittedPopUpViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
+        viewController.scrollablePopUpView.addNotPermittedCardViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
         viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()//PhotoVideoFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .sync, .addToAlbum, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .sync, .addToAlbum, .moveToTrash],
                                                style: .default, tintColor: nil)
         
         let gridListTopBarConfig = GridListTopBarConfig(defaultGridListViewtype: .List,
@@ -60,10 +60,10 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeMusicViewController(with nibName: String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto])
+        viewController.floatingButtonsArray.append(contentsOf: [.importFromSpotify])
         viewController.scrollablePopUpView.isEnable = false
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .Grid,
@@ -88,8 +88,10 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto])
         viewController.scrollablePopUpView.isEnable = false
+        viewController.segmentImage = .documents
+        
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: .Grid,
@@ -116,7 +118,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: viewType,
@@ -137,7 +139,6 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.mainTitle = TextConstants.homeButtonAllFiles
         
         MenloworksAppEvents.onAllFilesOpen()
-        viewController.title = TextConstants.homeButtonAllFiles
         return viewController
     }
     
@@ -146,8 +147,10 @@ class BaseFilesGreedModuleInitializer: NSObject {
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .uploadFromLifeboxFavorites, .createAStory])
         viewController.isFavorites = true
+        viewController.segmentImage = .favorites
+        
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: viewType,
@@ -172,22 +175,28 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return viewController
     }
     
-    class func initializeFilesFromFolderViewController(with nibName: String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
+    class func initializeFilesFromFolderViewController(with nibName: String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .newFolder, .uploadFromLifebox])
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
         viewController.scrollablePopUpView.isEnable = true
+        viewController.status = status
+        
         let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .delete],
+        let elementsConfig = ElementTypes.filesInFolderElementsConfig(for: status, viewType: .bottomBar)
+        let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
                                                style: .default, tintColor: nil)
 
         let presenter: BaseFilesGreedPresenter = DocumentsGreedPresenter()
         if let alertSheetExcludeTypes = alertSheetExcludeTypes {
             presenter.alertSheetExcludeTypes = alertSheetExcludeTypes
         }
-        let interactor = BaseFilesGreedInteractor(remoteItems: FilesFromFolderService(requestSize: 999, rootFolder: folder.uuid))
+
+        let filesService = FilesFromFolderService(requestSize: 999, rootFolder: folder.uuid, status: status)
+        let interactor = BaseFilesGreedInteractor(remoteItems: filesService)
         interactor.folder = folder
+        interactor.parent = folder
         viewController.parentUUID = folder.uuid
         
         if let output = moduleOutput {
@@ -202,11 +211,15 @@ class BaseFilesGreedModuleInitializer: NSObject {
             showGridListButton: true
         )
         
+        let alertFilesActionsTypes = ElementTypes.filesInFolderElementsConfig(for: status, viewType: .actionSheet)
+        let selectionModeTypes = ElementTypes.filesInFolderElementsConfig(for: status, viewType: .selectionMode)
+        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: alertFilesActionsTypes,
+                                                                   selectionModeTypes: selectionModeTypes)
+        
         configurator.configure(viewController: viewController, fileFilters: [.rootFolder(folder.uuid), .localStatus(.nonLocal), .fileType(.folder)],
                                bottomBarConfig: bottomBarConfig, router: BaseFilesGreedRouter(),
                                presenter: presenter, interactor: interactor,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                               selectionModeTypes: [.rename]),
+                               alertSheetConfig: alertSheetConfig,
                                topBarConfig: gridListTopBarConfig)
         
         viewController.mainTitle = folder.name ?? ""

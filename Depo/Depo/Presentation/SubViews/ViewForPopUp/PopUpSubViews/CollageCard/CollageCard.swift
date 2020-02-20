@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-final class CollageCard: BaseView {
+final class CollageCard: BaseCardView {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
@@ -85,12 +85,14 @@ final class CollageCard: BaseView {
     }
     
     override func viewWillShow() {
-        photoImageView.loadImage(with: item, isOriginalImage: true)
+        debugLog("Collage Card - start load image")
+        photoImageView.setLogs(enabled: true)
+        photoImageView.loadImage(with: item)
     }
     
     override func viewDidEndShow() {
 //        photoImageView.image = nil
-        photoImageView.checkIsNeedCancelRequest()
+        photoImageView.cancelLoadRequest()
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {
@@ -142,10 +144,15 @@ final class CollageCard: BaseView {
     private func showPhotoVideoDetail() {
         guard let item = item else { return }
         
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
-        controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = NavigationController(rootViewController: controller)
-        RouterVC().presentViewController(controller: nController)
+        let router = RouterVC()
+        let detailModule = router.filesDetailModule(fileObject: item,
+                                                    items: [item],
+                                                    status: .active,
+                                                    canLoadMoreItems: false,
+                                                    moduleOutput: nil)
+
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        router.presentViewController(controller: nController)
     }
     
     override func spotlightHeight() -> CGFloat {

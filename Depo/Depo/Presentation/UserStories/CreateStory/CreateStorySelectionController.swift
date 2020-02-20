@@ -66,6 +66,7 @@ final class CreateStorySelectionController: BaseViewController, ControlTabBarPro
         
         containerView?.analyzeButton.addTarget(self, action: #selector(openStorySetup), for: .touchUpInside)
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.CreateStoryPhotoSelectionScreen())
         let analyticsService = AnalyticsService()
         analyticsService.logScreen(screen: .createStoryPhotosSelection)
     }
@@ -84,7 +85,7 @@ final class CreateStorySelectionController: BaseViewController, ControlTabBarPro
     
     private func addChildVC() {
         let dataSource: PhotoSelectionDataSourceProtocol = isFavouritePictures ? FavoritePhotosSelectionDataSource(pageSize: 100) : AllPhotosSelectionDataSource(pageSize: 100)
-    
+
         let childController = PhotoSelectionController(title: "",
                                                        selectingLimit: selectingLimit,
                                                        delegate: self,

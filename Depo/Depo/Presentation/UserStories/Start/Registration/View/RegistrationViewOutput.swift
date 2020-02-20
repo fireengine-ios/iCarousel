@@ -20,7 +20,11 @@ protocol RegistrationViewOutput {
     
     func collectedUserInfo(email: String, code: String, phone: String, password: String, repassword: String, captchaID: String?, captchaAnswer: String?)
     
-    func captchaRequred(requred: Bool)
+    func captchaRequired(required: Bool)
     
     func openSupport()
+    
+    func openFaqSupport()
+    
+    func openSubjectDetails(type: SupportFormSubjectTypeProtocol)
 }

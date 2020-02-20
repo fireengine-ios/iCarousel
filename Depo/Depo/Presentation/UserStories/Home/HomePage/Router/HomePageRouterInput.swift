@@ -25,5 +25,16 @@ protocol HomePageRouterInput {
     func showError(errorMessage: String)
     
     func showPopupForNewUser(with message: String, title: String, headerTitle: String, completion: VoidHandler?)
+    
+    func presentSmallFullOfQuotaPopUp()
 
+    func presentFullOfQuotaPopUp(with type: LargeFullOfQuotaPopUpType)
+        
+    func presentEmailVerificationPopUp()
+    
+    func presentCredsUpdateCkeckPopUp(message: String, userInfo: AccountInfoResponse?)
+    
+    func presentPopUps()
+    
+    func openCampaignDetails()
 }

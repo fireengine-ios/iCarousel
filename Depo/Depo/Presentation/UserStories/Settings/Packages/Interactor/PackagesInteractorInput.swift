@@ -17,7 +17,7 @@ protocol PackagesInteractorInput {
     func getAvailableOffers(with accountType: AccountType)
     func getAccountType()
     func convertToSubscriptionPlan(offers: [PackageModelResponse], accountType: AccountType) -> [SubscriptionPlan]
-    func getAccountType(with accountType: String, offers: [Any]) -> AccountType
+    func getAccountType(with accountType: String, offers: [Any]) -> AccountType?
     func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType) -> String
     
     func restorePurchases()
@@ -25,6 +25,8 @@ protocol PackagesInteractorInput {
     func trackPackageClick(plan: SubscriptionPlan, planIndex: Int)
     /// MAYBE WILL BE NEED
     //func getCurrentSubscription()
-
+    func getQuotaInfo()
+    
     func getUserAuthority()
+    func refreshActivePurchasesState(_ isActivePurchases: Bool)
 }

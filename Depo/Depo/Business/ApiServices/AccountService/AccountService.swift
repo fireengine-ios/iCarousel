@@ -17,9 +17,15 @@ protocol AccountServicePrl {
     func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
+    func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid)
+    func getSettingsInfoPermissions(handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void)
 }
 
 class AccountService: BaseRequestService, AccountServicePrl {
+    
+    private enum Keys {
+        static let serverValue = "value"
+    }
  
     func info(success: SuccessResponse?, fail:@escaping FailResponse) {
         debugLog("AccountService info")
@@ -35,6 +41,15 @@ class AccountService: BaseRequestService, AccountServicePrl {
         let param = QuotaInfo()
         let handler = BaseResponseHandler<QuotaInfoResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
+    }
+    
+    func overQuotaStatus(with showPopUp: Bool = true, success: SuccessResponse?, fail:@escaping FailResponse) {
+        debugLog("AccountService overQuotaStatus")
+        
+        let param = OverQuotaStatus(showPopUp: showPopUp)
+        let handler = BaseResponseHandler<OverQuotaStatusResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: param, handler: handler)
+        
     }
     
     func usage(success: SuccessResponse?, fail: @escaping FailResponse) {
@@ -187,7 +202,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
     
     // MARK: - User Security
     
-    func securitySettingsInfo(success: SuccessResponse?, fail: @escaping FailResponse) {
+    func securitySettingsInfo(success: SuccessResponse?, fail: FailResponse?) {
         debugLog("AccountService securitySettingsInfo")
 
         let parametres = SecuritySettingsInfoParametres()
@@ -195,12 +210,16 @@ class AccountService: BaseRequestService, AccountServicePrl {
         executeGetRequest(param: parametres, handler: handler)
     }
     
-    func securitySettingsChange(turkcellPasswordAuthEnabled: Bool? = nil, mobileNetworkAuthEnabled: Bool? = nil,
-                                success: SuccessResponse?, fail: FailResponse?) {
+    func securitySettingsChange(turkcellPasswordAuthEnabled: Bool,
+                                mobileNetworkAuthEnabled: Bool,
+                                twoFactorAuthEnabled: Bool,
+                                success: SuccessResponse?,
+                                fail: FailResponse?) {
         debugLog("AccountService securitySettingsChange")
         
-        let parametres = SecuritySettingsChangeInfoParametres(turkcellPasswordAuth: turkcellPasswordAuthEnabled ?? false,
-                                                              mobileNetworkAuth: mobileNetworkAuthEnabled ?? false)
+        let parametres = SecuritySettingsChangeInfoParametres(turkcellPasswordAuth: turkcellPasswordAuthEnabled,
+                                                              mobileNetworkAuth: mobileNetworkAuthEnabled,
+                                                              twoFactorAuth: twoFactorAuthEnabled)
         let handler = BaseResponseHandler<SecuritySettingsInfoResponse, SignUpFailResponse>(success: success, fail: fail)
         executePostRequest(param: parametres, handler: handler)
     }
@@ -288,7 +307,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
     func changeInstapickAllowed(isInstapickAllowed: Bool, handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void) {
         debugLog("AccountService changeInstapickAllowed")
         
-        let params: [String: Any] = ["instapickAllowed": isInstapickAllowed]
+        let params: [String: Any] = [SettingsInfoPermissionsJsonKeys.instapick: isInstapickAllowed]
         
         sessionManager
             .request(RouteRequests.Account.Settings.accessInformation,
@@ -310,8 +329,8 @@ class AccountService: BaseRequestService, AccountServicePrl {
     func changeFaceImageAndFacebookAllowed(isFaceImageAllowed: Bool, isFacebookAllowed: Bool, handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void) {
         debugLog("AccountService changeFaceImageAllowed")
         
-        let params: [String: Any] = ["faceImageRecognitionAllowed": isFaceImageAllowed,
-                                     "facebookTaggingEnabled": isFacebookAllowed]
+        let params: [String: Any] = [SettingsInfoPermissionsJsonKeys.faceImage: isFaceImageAllowed,
+                                     SettingsInfoPermissionsJsonKeys.facebook: isFacebookAllowed]
         
         sessionManager
             .request(RouteRequests.Account.Settings.accessInformation,
@@ -391,6 +410,106 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
+    func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid) {
+        debugLog("AccountService autoSyncStatus")
+        
+        let settings: AutoSyncSettings = syncSettings ?? AutoSyncDataStorage().settings
+        
+        let photoStatus : String = settings.isAutoSyncEnabled ? settings.photoSetting.option.rawValue : AutoSyncOption.never.rawValue
+        let videoStatus : String = settings.isAutoSyncEnabled ? settings.videoSetting.option.rawValue : AutoSyncOption.never.rawValue
+        
+        let params: Parameters  = [ "photoStatus" : photoStatus , "videoStatus" : videoStatus]
+        
+        sessionManager
+            .request(RouteRequests.Account.Settings.autoSyncStatus,
+                     method: .post,
+                     parameters: params,
+                     encoding: JSONEncoding.prettyPrinted
+        )
+            .customValidate()
+            .response { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let statusJSON = JSON(data: data)["status"].string {
+                    let errorText: String
+                    
+                    if statusJSON == "ACCOUNT_NOT_FOUND" {
+                        errorText = TextConstants.noAccountFound
+                    } else if statusJSON == "EMPTY_REQUEST" {
+                        errorText = "EMPTY_REQUEST" ///Should add localized text?
+                    } else {
+                        errorText = TextConstants.errorServer
+                    }
+                    
+                    let error = CustomErrors.text(errorText)
+                    handler(.failed(error))
+                } else {
+                    let error = CustomErrors.text(TextConstants.errorServer)
+                    handler(.failed(error))
+                }
+        }
+        
+    }
+    
+    func getListOfSecretQuestions(handler: @escaping (ResponseResult<[SecretQuestionsResponse]>) -> Void) {
+        let request = String(format: RouteRequests.Account.getSecurityQuestion.absoluteString, Device.supportedLocale)
+        
+        sessionManager
+            .request(request)
+            .customValidate()
+            .responseData(completionHandler: { response in
+
+                switch response.result {
+                    
+                case .success(let data):
+                    
+                    let questions = JSON(data)[Keys.serverValue].arrayValue.compactMap { SecretQuestionsResponse(json: $0)}
+                    handler(.success(questions))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+            })
+    }
+    
+    func updateSecurityQuestion(questionId: Int,
+                                securityQuestionAnswer: String,
+                                captchaId: String,
+                                captchaAnswer: String,
+                                handler: @escaping (ErrorResult<Void, SetSecretQuestionErrors>) -> Void) {
+        
+        let headers: HTTPHeaders = [HeaderConstant.CaptchaId: captchaId,
+                                    HeaderConstant.CaptchaAnswer: captchaAnswer]
+        let params: Parameters = ["securityQuestionId": questionId,
+                                  "securityQuestionAnswer": securityQuestionAnswer]
+        
+        sessionManager
+            .request(RouteRequests.Account.updateSecurityQuestion,
+                     method: .post,
+                     parameters: params,
+                     encoding: JSONEncoding.prettyPrinted,
+                     headers: headers)
+            .customValidate()
+            .response { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let status = JSON(data: data)["status"].string {
+                    
+                    let backendError: SetSecretQuestionErrors
+                    switch status {
+                    case "4001":
+                        backendError = .invalidCaptcha
+                    case "SEQURITY_QUESTION_ID_IS_INVALID":
+                        backendError = .invalidId
+                    case "SEQURITY_QUESTION_ANSWER_IS_INVALID":
+                        backendError = .invalidAnswer
+                    default:
+                        backendError = .unknown
+                    }
+                    handler(.failure(backendError))
+                }
+            }
+        }
+    
     /// repeat is key word of Swift
     func updatePassword(oldPassword: String,
                         newPassword: String,
@@ -403,7 +522,8 @@ class AccountService: BaseRequestService, AccountServicePrl {
         
         let params: Parameters = ["oldPassword": oldPassword,
                                   "password": newPassword,
-                                  "repeatPassword": repeatPassword]
+                                  "repeatPassword": repeatPassword,
+                                  "passwordRuleSetVersion": NumericConstants.passwordRuleSetVersion]
         
         let headers: HTTPHeaders = [HeaderConstant.CaptchaId: captchaId,
                                     HeaderConstant.CaptchaAnswer: captchaAnswer]
@@ -427,10 +547,7 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         return
                     }
                     
-                    guard
-                        let data = response.data,
-                        let value = JSON(data: data)["value"].string
-                    else {
+                    guard let data = response.data, let value = JSON(data: data)["value"].string else {
                         handler(.failure(.unknown))
                         return
                     }
@@ -453,26 +570,52 @@ class AccountService: BaseRequestService, AccountServicePrl {
                         handler(.failure(.special(error.description)))
                         return
                     }
-                    
-                    guard
-                        let data = response.data,
-                        let status = JSON(data: data)["status"].string
-                    else {
+                   
+                    guard let data = response.data else {
                         handler(.failure(.unknown))
                         return
                     }
                     
-                    let backendError: UpdatePasswordErrors
-                    switch status {
-                    case "4001":
-                        backendError = .invalidCaptcha
-                    case "INVALID_PASSWORD":
-                        backendError = .invalidNewPassword
-                    default:
-                        backendError = .unknown
-                    }
+                    let errorResponse = UpdatePasswordErrorResponse(json: JSON(data: data))
                     
-                    handler(.failure(backendError))
+                    
+                    if errorResponse.status == .invalidCaptcha {
+                        handler(.failure(.invalidCaptcha))
+                    } else if errorResponse.status == .invalidPassword {
+                        
+                        guard let reason = errorResponse.reason else {
+                            handler(.failure(.invalidNewPassword))
+                            return
+                        }
+                        
+                        let backendError: UpdatePasswordErrors
+                        
+                        switch reason {
+                        case .passwordIsEmpty:
+                            backendError = .passwordIsEmpty
+                        case .sequentialCharacters:
+                            backendError = .passwordSequentialCaharacters(limit: errorResponse.sequentialCharacterLimit)
+                        case .sameCharacters:
+                            backendError = .passwordSameCaharacters(limit: errorResponse.sameCharacterLimit)
+                        case .passwordLengthExceeded:
+                            backendError = .passwordLengthExceeded(limit: errorResponse.maximumCharacterLimit)
+                        case .passwordLengthIsBelowLimit:
+                            backendError = .passwordLengthIsBelowLimit(limit: errorResponse.minimumCharacterLimit)
+                        case .resentPassword:
+                            backendError = .passwordInResentHistory(limit: errorResponse.recentHistoryLimit)
+                        case .uppercaseMissing:
+                            backendError = .uppercaseMissingInPassword
+                        case .lowercaseMissing:
+                            backendError = .lowercaseMissingInPassword
+                        case .numberMissing:
+                            backendError = .numberMissingInPassword
+                        }
+                        
+                        handler(.failure(backendError))
+                        
+                    } else {
+                       handler(.failure(.unknown))
+                    }
                 }
         }
     }
@@ -483,11 +626,11 @@ class AccountService: BaseRequestService, AccountServicePrl {
 #if LIFEBOX
         params["brandType"] = "LIFEBOX"
 #elseif LIFEDRIVE
-        params["brandType"] = "LIFEDRIVE"
+        params["brandType"] = "BILLO"
 #endif
         
         sessionManager.request(RouteRequests.Account.Settings.settingsApi,
-                               method: .post,
+                               method: .patch,
                                parameters: params,
                                encoding: JSONEncoding.prettyPrinted,
                                headers: RequestHeaders.authification())
@@ -506,25 +649,30 @@ class AccountService: BaseRequestService, AccountServicePrl {
     func faqUrl(_ handler: @escaping (String) -> Void) {
         debugLog("AccountService faqUrl")
         
-        sessionManager
+        func defaultURLCallback() {
+            let defaultFaqUrl = String(format: RouteRequests.faqContentUrl, Device.supportedLocale)
+            handler(defaultFaqUrl)
+        }
+        
+        let tokenStorage: TokenStorage = factory.resolve()
+        guard tokenStorage.accessToken != nil else {
+            defaultURLCallback()
+            return
+        }
+        
+        SessionManager.customDefault
             .request(RouteRequests.Account.getFaqUrl)
             .customValidate()
             .responseJSON(queue: .global()) { response in
-                
-                func errorHandler() {
-                    let defaultFaqUrl = String(format: RouteRequests.faqContentUrl, Device.supportedLocale)
-                    handler(defaultFaqUrl)
-                }
-                
                 switch response.result {
                 case .success(let json):
                     if let json = json as? [String: String], let faqUrl = json["value"] {
                         handler(faqUrl)
                     } else {
-                        errorHandler()
+                        defaultURLCallback()
                     }
                 case .failure(_):
-                    errorHandler()
+                    defaultURLCallback()
                 }
         }
     }
@@ -544,5 +692,110 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     handler(.failed(error))
                 }
             })
+    }
+    
+    func verifyEmail(otpCode: String, handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.verifyEmail,
+                     method: .post,
+                     parameters: ["otp" : otpCode],
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .response(queue: .global(), completionHandler: { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let statusJSON = JSON(data: data)["status"].string {
+                    let errorText: String
+                    
+                    if statusJSON == "INVALID_OTP" {
+                        errorText = TextConstants.invalidOTP
+                        
+                    } else if statusJSON == "TOO_MANY_REQUESTS" {
+                        errorText = TextConstants.tooManyRequests
+                        
+                    } else if statusJSON == "EXPIRED_OTP" {
+                        errorText = TextConstants.expiredOTP
+                        
+                    } else if statusJSON == "REFERENCE_TOKEN_IS_EMPTY" {
+                        errorText = TextConstants.tokenIsMissing
+                        
+                    } else if statusJSON == "ACCOUNT_NOT_FOUND" {
+                        errorText = TextConstants.noAccountFound
+                        
+                    } else if statusJSON == "INVALID_EMAIL" {
+                        errorText = TextConstants.invalidEmail
+                        
+                    } else {
+                        errorText = TextConstants.errorServer
+                    }
+                    
+                    let error = CustomErrors.text(errorText)
+                    handler(.failed(error))
+                } else {
+                    let error = CustomErrors.text(TextConstants.errorServer)
+                    handler(.failed(error))
+                }
+            })
+    }
+    
+    func sendEmailVerificationCode(handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.sendEmailVerificationCode,
+                     method: .post,
+                     parameters: nil,
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .response(queue: .global(), completionHandler: { response in
+                if response.response?.statusCode == 200 {
+                    handler(.success(()))
+                } else if let data = response.data, let statusJSON = JSON(data: data)["status"].string {
+                    let errorText: String
+                    
+                    if statusJSON == "ACCOUNT_NOT_FOUND" {
+                        errorText = TextConstants.invalidOTP
+                        
+                    } else if statusJSON == "TOO_MANY_REQUESTS" {
+                        errorText = TextConstants.tooManyRequests
+                        
+                    } else {
+                        errorText = TextConstants.errorServer
+                    }
+                    
+                    let error = CustomErrors.text(errorText)
+                    handler(.failed(error))
+                } else {
+                    let error = CustomErrors.text(TextConstants.errorServer)
+                    handler(.failed(error))
+                }
+            })
+    }
+    
+    func updateAddress(with address: String, handler: @escaping ResponseVoid) {
+        sessionManager
+            .request(RouteRequests.Account.updateAddress,
+                 method: .post,
+                 parameters: ["address": address],
+                 encoding: JSONEncoding.prettyPrinted)
+        .customValidate()
+        .response(queue: .global(), completionHandler: { response in
+            if response.response?.statusCode == 200 {
+                handler(.success(()))
+            } else if let data = response.data, let status = JSON(data: data)["status"].string {
+                let errorText: String
+                
+                if status == "ACCOUNT_ADDRESS_LENGTH_IS_INVALID" {
+                    errorText = TextConstants.updateAddressError
+                } else {
+                    errorText = TextConstants.errorServer
+                }
+                
+                let error = CustomErrors.text(errorText)
+                handler(.failed(error))
+            } else {
+                let error = CustomErrors.text(TextConstants.errorServer)
+                handler(.failed(error))
+            }
+        })
+
     }
 }

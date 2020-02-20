@@ -1,6 +1,13 @@
 import UIKit
 
 final class SupportFormController: ViewController, KeyboardHandler {
+    
+    static func with(screenType: SupportFormScreenType) -> SupportFormController {
+        let controller = SupportFormController()
+        controller.screenType = screenType
+        return controller
+    }
+    
     @IBOutlet private weak var scrollView: UIScrollView! {
         willSet {
             newValue.delaysContentTouches = false
@@ -53,7 +60,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
         let newValue = ProfileTextEnterView()
         newValue.titleLabel.text = TextConstants.userProfileName
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourName
-        newValue.textField.placeholder = TextConstants.enterYourName
+        newValue.textField.quickDismissPlaceholder = TextConstants.enterYourName
         newValue.textField.autocorrectionType = .no
         return newValue
     }()
@@ -62,7 +69,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
         let newValue = ProfileTextEnterView()
         newValue.titleLabel.text = TextConstants.userProfileSurname
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourSurname
-        newValue.textField.placeholder = TextConstants.enterYourSurname
+        newValue.textField.quickDismissPlaceholder = TextConstants.enterYourSurname
         newValue.textField.autocorrectionType = .no
         return newValue
     }()
@@ -72,7 +79,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
         newValue.titleLabel.text = TextConstants.userProfileEmailSubTitle
         /// not set bcz of showEmptyCredentialsPopup
         //newValue.subtitleLabel.text
-        newValue.textField.placeholder = TextConstants.enterYourEmailAddress
+        newValue.textField.quickDismissPlaceholder = TextConstants.enterYourEmailAddress
         newValue.textField.keyboardType = .emailAddress
         newValue.textField.autocorrectionType = .no
         newValue.textField.autocapitalizationType = .none
@@ -85,14 +92,7 @@ final class SupportFormController: ViewController, KeyboardHandler {
         let newValue = ProfileTextPickerView()
         newValue.titleLabel.text = TextConstants.subject
         newValue.subtitleLabel.text = TextConstants.pleaseEnterYourSubject
-        newValue.textField.placeholder = TextConstants.pleaseChooseSubject
-        newValue.models = [TextConstants.supportFormSubject1,
-                           TextConstants.supportFormSubject2,
-                           TextConstants.supportFormSubject3,
-                           TextConstants.supportFormSubject4,
-                           TextConstants.supportFormSubject5,
-                           TextConstants.supportFormSubject6,
-                           TextConstants.supportFormSubject7]
+        newValue.textField.quickDismissPlaceholder = TextConstants.pleaseChooseSubject
         return newValue
     }()
     
@@ -103,6 +103,13 @@ final class SupportFormController: ViewController, KeyboardHandler {
         return newValue
     }()
     
+    private var subjects = [SupportFormSubjectTypeProtocol]()
+    private var screenType: SupportFormScreenType = .login
+    
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
+    // MARK: -
+    
     override var preferredNavigationBarStyle: NavigationBarStyle {
         return .clear
     }
@@ -110,6 +117,8 @@ final class SupportFormController: ViewController, KeyboardHandler {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        subjects = screenType.subjects
+        subjectView.models = subjects.map { $0.localizedSubject }
         navigationBarWithGradientStyle()
 
         addTapGestureToHideKeyboard()
@@ -198,11 +207,12 @@ final class SupportFormController: ViewController, KeyboardHandler {
                         Device.locale,
                         ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN")
             
+            let subjectWithAppName = TextConstants.NotLocalized.appNameMailSubject + subject
             let emailSubject: String
             if phoneNumber.isEmpty {
-                emailSubject = subject
+                emailSubject = subjectWithAppName
             } else {
-                emailSubject = "\(fullPhoneNumber) - \(subject)"
+                emailSubject = "\(fullPhoneNumber) - \(subjectWithAppName)"
             }
             
             Mail.shared().sendEmail(emailBody: emailBody,
@@ -264,7 +274,6 @@ final class SupportFormController: ViewController, KeyboardHandler {
             scrollToView(emailView)
             
         case .emptySubject:
-            subjectView.textField.becomeFirstResponder()
             scrollToView(subjectView)
             
         case .emptyProblem:
@@ -285,7 +294,14 @@ final class SupportFormController: ViewController, KeyboardHandler {
         let rect = scrollView.convert(view.frame, to: scrollView)
         scrollView.scrollRectToVisible(rect, animated: true)
     }
+    
+    private func trackSubjectSelection() {
+        let subject = subjects[subjectView.selectedIndex]
+        analyticsService.trackSupportEvent(screenType: screenType, subject: subject, isSupportForm: true)
+    }
 }
+
+// MARK: - UITextFieldDelegate
 
 extension SupportFormController: UITextFieldDelegate {
     
@@ -302,6 +318,7 @@ extension SupportFormController: UITextFieldDelegate {
             
         case subjectView.textField:
             subjectView.hideSubtitleAnimated()
+            trackSubjectSelection()
 
         case phoneView.numberTextField, phoneView.codeTextField:
             phoneView.hideSubtitleAnimated()
@@ -336,6 +353,7 @@ extension SupportFormController: UITextFieldDelegate {
         /// setup by responderOnNext:
         case subjectView.textField:
             problemView.textView.becomeFirstResponder()
+            trackSubjectSelection()
             
         default:
             assertionFailure()

@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-final class AlbumCard: BaseView {
+final class AlbumCard: BaseCardView {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
@@ -112,13 +112,16 @@ final class AlbumCard: BaseView {
         
         if let searchItem = album?.coverPhoto {
             let item = WrapData(remote: searchItem)
-            previewImageView.loadImage(with: item, isOriginalImage: true)
+            
+            debugLog("Album Card - start load image")
+            previewImageView.setLogs(enabled: true)
+            previewImageView.loadImage(with: item)
         }
     }
     
     override func viewDidEndShow() {
 //        previewImageView.image = nil
-        previewImageView.checkIsNeedCancelRequest()
+        previewImageView.cancelLoadRequest()
     }
     
     private func setupAlbumDescriptionWith(albumName: String, photosCount: Int) {
@@ -153,7 +156,7 @@ final class AlbumCard: BaseView {
     private func showAlbum() {
         guard let albumItem = albumItem else { return }
         let router = RouterVC()
-        let albumVC = router.albumDetailController(album: albumItem, type: .List, moduleOutput: nil)
+        let albumVC = router.albumDetailController(album: albumItem, type: .List, status: .active, moduleOutput: nil)
         router.pushViewController(viewController: albumVC)
     }
     

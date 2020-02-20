@@ -9,6 +9,7 @@
 struct DispatchQueueLabels {
     static let baseFilesGreed = "com.lifebox.baseFilesGreed"
     static let baseFilesGreedCollectionDataSource = "com.lifebox.BaseDataSourceForCollectionView"
+    static let photoVideoUploadProgress = "com.lifebox.photoVideoUploadProgress"
     static let myStreamAlbums = "GetMyStreamData"
     static let faceImageItemsUpdate = "UpdateFaceImageItems"
     static let instaPickItemsUpdate = "InstaPickItemsUpdate"
@@ -36,4 +37,6 @@ struct DispatchQueueLabels {
     static let filesDataSourceCacheQueue = "com.lifebox.filesDataSourceCache"
     static let blurServiceQueue = "com.lifebox.blurServiceQueue"
     static let photoVideoMergeQueue = "com.lifebox.photoVideoMergeQueue"
+    static let homePagePopUpsServiceQueue = "com.lifebox.homePagePopUpsServiceQueue"
+    static let homePageCardsUpdateQueue = "com.lifebox.homePageCardsUpdateQueue"
 }

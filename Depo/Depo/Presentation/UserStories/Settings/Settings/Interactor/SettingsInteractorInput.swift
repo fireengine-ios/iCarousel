@@ -9,18 +9,20 @@
 import Foundation
 
 protocol SettingsInteractorInput {
+    
+    var isPasscodeEmpty: Bool { get }
+    var isTurkcellUser: Bool { get }
+    var isEmptyMail: Bool { get }
+    
     func getCellsData()
     func onLogout()
     func uploadPhoto(withPhoto photo: Data)
     func checkConnectedToNetwork()
-
-    var isPasscodeEmpty: Bool { get }
-    var isTurkcellUser: Bool { get }
-    var isEmptyMail: Bool { get }
+    
     func updateUserInfo(mail: String)
     
     func trackScreen()
     func trackPhotoEdit()
     
-    func getUserStatus()
+    func getUserInfo()
 }

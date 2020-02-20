@@ -41,7 +41,7 @@ class SettingsRouter: SettingsRouterInput {
     }
 
     func goToHelpAndSupport() {
-        router.pushViewController(viewController: router.helpAndSupport!)
+        router.pushViewController(viewController: router.helpAndSupport)
     }
     
     func goToTermsAndPolicy() {
@@ -88,10 +88,10 @@ class SettingsRouter: SettingsRouterInput {
     
     func openPasscode(handler: @escaping VoidHandler) {
         let vc = PasscodeEnterViewController.with(flow: .validate, navigationTitle: TextConstants.passcodeLifebox)
-        
         vc.success = {
             handler()
         }
+        
         router.pushViewController(viewController: vc)
     }
     
@@ -99,8 +99,9 @@ class SettingsRouter: SettingsRouterInput {
         UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
     }
     
-    func goTurkcellSecurity() {
-        router.pushViewController(viewController: router.turkcellSecurity)
+    func goTurkcellSecurity(isTurkcell: Bool) {
+        let viewController = router.turkcellSecurity(isTurkcell: isTurkcell)
+        router.pushViewController(viewController: viewController)
     }
     
     func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?) {

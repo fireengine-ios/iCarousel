@@ -11,9 +11,10 @@ protocol HomePageViewInput: class, CurrentNavController {
     func stopRefresh()
     
     func startSpinner()
-    
-    func needPresentPopUp(popUpView: UIViewController)
-    
+        
     func needShowSpotlight(type: SpotlightType)
     
+    func showGiftBox()
+    
+    func hideGiftBox()
 }

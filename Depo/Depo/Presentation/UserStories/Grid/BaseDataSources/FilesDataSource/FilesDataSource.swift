@@ -45,6 +45,12 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         return cachingManager
     }()
     
+    var isErrorLogEnabled = false {
+        didSet {
+            getImageServise.isErrorLogEnabled = isErrorLogEnabled
+        }
+    }
+    
     // MARK: PhotoDataSource
 
     func getSmalImage(path patch: PathForItem, completeImage: @escaping RemoteImage) {
@@ -85,7 +91,7 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
             localManager.getPreviewImage(asset: local.asset, image: completeImage)
             return nil
         case let .remoteUrl(url):
-            getImageServise.getImage(patch: url, completeImage: completeImage)
+            getImageServise.getImageByTrimming(url: url, completeImage: completeImage)
             return url
         }
     }
@@ -111,6 +117,26 @@ class FilesDataSource: NSObject, PhotoDataSource, AsynImage {
         }
         
         return nil
+    }
+    
+    func getImageData(item: Item, completeData: @escaping RemoteData) -> URL? {
+        switch item.patchToPreview {
+            
+        case let .localMediaContent(local):
+            localManager.getImageData(asset: local.asset, data: completeData)
+            
+        case let .remoteUrl(url):
+            let loadUrl = item.metaData?.largeUrl != nil ? item.metaData!.largeUrl : url
+            getImageServise.getImageDataByTrimming(url: loadUrl, completeImage: completeData)
+            return loadUrl
+            
+        }
+        return nil
+    }
+    
+    func getImageData(for url: URL, completeData: @escaping RemoteData) -> URL? {
+        getImageServise.getImageDataByTrimming(url: url, completeImage: completeData)
+        return url
     }
     
     private let targetSize = CGSize(width: 300, height: 300)

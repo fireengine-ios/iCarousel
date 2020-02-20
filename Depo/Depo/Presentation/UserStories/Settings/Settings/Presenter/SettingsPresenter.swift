@@ -27,13 +27,13 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func viewWillBecomeActive() {
-        startAsyncOperation()
         interactor.getCellsData()
-        interactor.getUserStatus()
+        
+        startAsyncOperation()
+        interactor.getUserInfo()
     }
     
     func cellsDataForSettings(array: [[String]]) {
-        asyncOperationSuccess()
         view.showCellsData(array: array)
     }
     
@@ -101,10 +101,6 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToUsageInfo()
     }
     
-    func onUpdatUserInfo(userInfo: AccountInfoResponse) {
-        router.goToUserInfo(userInfo: userInfo, isTurkcellUser: interactor.isTurkcellUser)
-    }
-    
     func goToActivityTimeline() {
         router.goToActivityTimeline()
     }
@@ -118,15 +114,15 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func goToPasscodeSettings(needReplaceOfCurrentController: Bool) {
-        router.goToPasscodeSettings(isTurkcell: interactor.isTurkcellUser, inNeedOfMail: inNeedOfMailVerefication(), needReplaceOfCurrentController: needReplaceOfCurrentController)
+        router.goToPasscodeSettings(isTurkcell: isTurkCellUser, inNeedOfMail: inNeedOfMailVerification, needReplaceOfCurrentController: needReplaceOfCurrentController)
     }
     
-    func inNeedOfMailVerefication() -> Bool {
-        return interactor.isTurkcellUser && interactor.isEmptyMail
+    var inNeedOfMailVerification: Bool {
+        return isTurkCellUser && interactor.isEmptyMail
     }
     
     var inNeedOfMail: Bool {
-        return inNeedOfMailVerefication()
+        return inNeedOfMailVerification
     }
     
     var isTurkCellUser: Bool {
@@ -139,7 +135,7 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func goTurkcellSecurity() {
-        inNeedOfMailVerefication() ? router.showMailUpdatePopUp(delegate: self) : router.goTurkcellSecurity()
+        inNeedOfMailVerification ? router.showMailUpdatePopUp(delegate: self) : router.goTurkcellSecurity(isTurkcell: isTurkCellUser)
     }
     
     override func outputView() -> Waiting? {
@@ -204,7 +200,5 @@ extension SettingsPresenter: MailVerificationViewControllerDelegate {
         mailUpdated(mail: mail)
     }
     
-    func mailVerificationFailed() {
-        
-    }
+    func mailVerificationFailed() {}
 }

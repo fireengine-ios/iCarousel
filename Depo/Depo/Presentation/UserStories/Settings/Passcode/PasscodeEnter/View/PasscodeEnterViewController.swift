@@ -16,6 +16,8 @@ class PasscodeEnterViewController: ViewController, NibInit {
         let vc = PasscodeEnterViewController.initFromNib()
         vc.state = flow.startState
         vc.navigationTitle = navigationTitle
+        vc.modalPresentationStyle = .overFullScreen
+        
         return vc
     }
     
@@ -37,7 +39,19 @@ class PasscodeEnterViewController: ViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         passcodeManager.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        ///to show correct navBar we needs to call "make up" method inside class
+        #if MAIN_APP
+        navigationBarWithGradientStyle()
+        #endif
+        
         setTitle(withString: navigationTitle)
     }
 

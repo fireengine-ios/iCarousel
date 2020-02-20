@@ -8,89 +8,75 @@
 
 import UIKit
 
+enum DetailViewType {
+    case details
+    case insideAlbum
+    case insideFIRAlbum
+}
+
+typealias PhotoVideoDetailModule = (controller: PhotoVideoDetailViewController, moduleInput: PhotoVideoDetailModuleInput)
+
 class PhotoVideoDetailModuleInitializer: NSObject {
 
-    class func initializeViewController(with nibName: String, selectedItem: Item, allItems: [Item], hideActions: Bool = false) -> UIViewController {
-        var photoVideoBottomBarConfig = EditingBarConfig.init(elementsConfig: [], style: .blackOpaque, tintColor: nil)
+    class func initializeViewController(with nibName: String, moduleOutput: PhotoVideoDetailModuleOutput? = nil, selectedItem: Item, allItems: [Item], status: ItemStatus, canLoadMoreItems: Bool) -> PhotoVideoDetailModule {
+        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: .details)
         
-        if !selectedItem.isLocalItem {
-            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print],
-                                                         style: .blackOpaque, tintColor: nil)
-            
-            let langCode = Device.locale
-            if langCode != "tr", langCode != "en" {
-                photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download],
-                                                             style: .blackOpaque, tintColor: nil)
-            }
-        } else {
-            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .sync, .info],
-                                                         style: .blackOpaque, tintColor: nil)
-        }
+        let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
+                                               style: .blackOpaque, tintColor: nil)
         
-        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .delete],
-                                                        style: .blackOpaque, tintColor: nil)
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
         let configurator = PhotoVideoDetailModuleConfigurator()
+        let presenter = PhotoVideoDetailPresenter()
         configurator.configureModuleForViewInput(viewInput: viewController,
-                                                 photoVideoBottomBarConfig: photoVideoBottomBarConfig,
-                                                 documentsBottomBarConfig: documentsBottomBarConfig,
+                                                 presenter: presenter,
+                                                 moduleOutput: moduleOutput,
+                                                 bottomBarConfig: bottomBarConfig,
                                                  selecetedItem: selectedItem,
                                                  allItems: allItems,
-                                                 hideActions: hideActions)
-        return viewController
+                                                 status: status,
+                                                 canLoadMoreItems: canLoadMoreItems)
+        return (viewController, presenter)
     }
     
-    class func initializeAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, hideActions: Bool = false) -> UIViewController {
-        var photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .print, .removeFromAlbum],
-                                                         style: .blackOpaque, tintColor: nil)
+    class func initializeAlbumViewController(with nibName: String, moduleOutput: PhotoVideoDetailModuleOutput? = nil, selectedItem: Item, allItems: [Item], albumUUID: String, status: ItemStatus) -> PhotoVideoDetailModule {
+        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: .insideAlbum)
         
-        let langCode = Device.locale
-        if langCode != "tr", langCode != "en" {
-            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .removeFromAlbum],
-                                                         style: .blackOpaque, tintColor: nil)
-        }
-        
-        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .info, .move, .removeFromAlbum],
-                                                        style: .blackOpaque, tintColor: nil)
+        let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
+                                               style: .blackOpaque, tintColor: nil)
         
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
         let configurator = PhotoVideoDetailModuleConfigurator()
+        let presenter = PhotoVideoDetailPresenter()
         configurator.configureModuleFromAlbumForViewInput(viewInput: viewController,
-                                                          photoVideoBottomBarConfig: photoVideoBottomBarConfig,
-                                                          documentsBottomBarConfig: documentsBottomBarConfig,
+                                                          presenter: presenter,
+                                                          moduleOutput: moduleOutput,
+                                                          bottomBarConfig: bottomBarConfig,
                                                           selecetedItem: selectedItem,
                                                           allItems: allItems,
                                                           albumUUID: albumUUID,
-                                                          hideActions: hideActions)
+                                                          status: status)
         
-        return viewController
+        return (viewController, presenter)
     }
     
-    class func initializeFaceImageAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, albumItem: Item?, hideActions: Bool = false) -> UIViewController {
-        var photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .print, .edit, .removeFromFaceImageAlbum],
-                                                         style: .blackOpaque, tintColor: nil)
+    class func initializeFaceImageAlbumViewController(with nibName: String, moduleOutput: PhotoVideoDetailModuleOutput? = nil, selectedItem: Item, allItems: [Item], albumUUID: String, albumItem: Item?, status: ItemStatus) -> PhotoVideoDetailModule {
+        let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: .insideFIRAlbum)
         
-        let langCode = Device.locale
-        if langCode != "tr", langCode != "en" {
-            photoVideoBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .edit, .removeFromFaceImageAlbum],
-                                                             style: .blackOpaque, tintColor: nil)
-        }
-
-        let documentsBottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .info, .move, .removeFromFaceImageAlbum],
-                                                        style: .blackOpaque, tintColor: nil)
+        let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
+                                               style: .blackOpaque, tintColor: nil)
         
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
         let configurator = PhotoVideoDetailModuleConfigurator()
+        let presenter = PhotoVideoDetailPresenter()
         configurator.configureModuleFromFaceImageAlbumForViewInput(viewInput: viewController,
-                                                          photoVideoBottomBarConfig: photoVideoBottomBarConfig,
-                                                          documentsBottomBarConfig: documentsBottomBarConfig,
-                                                          selecetedItem: selectedItem,
-                                                          allItems: allItems,
-                                                          albumUUID: albumUUID,
-                                                          albumItem: albumItem,
-                                                          hideActions: hideActions)
-        
-        return viewController
+                                                                   presenter: presenter,
+                                                                   moduleOutput: moduleOutput,
+                                                                   bottomBarConfig: bottomBarConfig,
+                                                                   selecetedItem: selectedItem,
+                                                                   allItems: allItems,
+                                                                   albumUUID: albumUUID,
+                                                                   albumItem: albumItem,
+                                                                   status: status)
+        return (viewController, presenter)
     }
-
 }

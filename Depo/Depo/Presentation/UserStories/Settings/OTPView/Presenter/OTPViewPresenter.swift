@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class OTPViewPresenter: PhoneVereficationPresenter {
+class OTPViewPresenter: PhoneVerificationPresenter {
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     
     override func verificationSucces() {
@@ -17,7 +17,7 @@ class OTPViewPresenter: PhoneVereficationPresenter {
     override func verificationSilentSuccess() {
         successedVerification()
     }
-    
+
     private func successedVerification() {
         completeAsyncOperationEnableScreen()
         view.getNavigationController()?.popViewController(animated: true)

@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class LatestUpladsCard: BaseView {
+class LatestUpladsCard: BaseCardView {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subTitle: UILabel!
@@ -95,6 +95,12 @@ class LatestUpladsCard: BaseView {
                 }
             }
         }
+        
+        collectionView.reloadData()
+    }
+    
+    override func viewWillShow() {
+        super.viewWillShow()
         
         collectionView.reloadData()
     }

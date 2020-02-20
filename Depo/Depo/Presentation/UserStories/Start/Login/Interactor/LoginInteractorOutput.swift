@@ -11,7 +11,6 @@ import Foundation
 protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
     func succesLogin()
-    func successedSilentLogin()
     
     func processLoginError(_ loginError: LoginResponseError, errorText: String)
 
@@ -26,22 +25,18 @@ protocol LoginInteractorOutput: class, BaseAsyncOperationInteractorOutput {
     
     func userStillBlocked(user: String)
     func allAttemtsExhausted(user: String)
-
-    func successed(tokenUpdatePhone: SignUpSuccessResponse)
-    func failedUpdatePhone(errorResponse: ErrorResponse)
-    
-    func successed(resendUpdatePhone: SignUpSuccessResponse)
-    func failedResendUpdatePhone(errorResponse: ErrorResponse)
-    
-    func successedVerifyPhone()
-    func failedVerifyPhone(errorString: String)
     
     func updateUserLanguageSuccess()
     func updateUserLanguageFailed(error: Error)
     
-    func captchaRequred(requred: Bool)
-    func captchaRequredFailed()
-    func captchaRequredFailed(with message: String)
+    func captchaRequired(required: Bool)
+    func captchaRequiredFailed()
+    func captchaRequiredFailed(with message: String)
     
     func showSupportView()
+    func showFAQView()
+    func showTwoFactorAuthViewController(response: TwoFactorAuthErrorResponse)
+    
+    func successedVerifyPhone()
+    func loginDeletedAccount(deletedAccountHandler: @escaping VoidHandler)
 }

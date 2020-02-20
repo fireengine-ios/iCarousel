@@ -84,12 +84,10 @@ class BaseCollectionViewCellWithSwipe: UICollectionViewCell {
             self.isTouch = false
             if (needDeleteCell) {
                 for view in self.contentView.subviews {
-                    if let baseView = view as? BaseView {
+                    if let baseView = view as? BaseCardView {
                         baseView.viewDeletedBySwipe()
                     }
                 }
-                
-                self.cellDelegate?.onCellDeleted(cell: self)
             }
         }
     }

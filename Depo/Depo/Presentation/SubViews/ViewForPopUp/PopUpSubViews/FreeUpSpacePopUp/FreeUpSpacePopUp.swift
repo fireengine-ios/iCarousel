@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class FreeUpSpacePopUp: BaseView {
+final class FreeUpSpacePopUp: BaseCardView {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var bigTitleLabel: UILabel!
@@ -16,6 +16,21 @@ final class FreeUpSpacePopUp: BaseView {
     @IBOutlet weak var freeAppSpaceButton: CircleYellowButton!
     
     private var operation: OperationType?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupRecognizer()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupRecognizer()
+    }
+    
+    private func setupRecognizer() {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(onFreeAppSpaceButton))
+        addGestureRecognizer(recognizer)
+    }
     
     override func configurateView() {
         super.configurateView()
@@ -43,6 +58,7 @@ final class FreeUpSpacePopUp: BaseView {
     }
     
     @IBAction func onFreeAppSpaceButton() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .freeUpSpace))
         RouterVC().showFreeAppSpace()
     }
     

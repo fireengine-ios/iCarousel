@@ -6,6 +6,11 @@ protocol InstaPickServiceDelegate: class {
     func didFinishAnalysis(_ analyses: [InstapickAnalyze])
 }
 
+struct AnalyzeResult {
+    let analyzesCount: InstapickAnalyzesCount
+    let analysis: [InstapickAnalyze]
+}
+
 /// https://wiki.life.com.by/x/IjAWBQ
 protocol InstapickService: class {
     var delegates: MulticastDelegate<InstaPickServiceDelegate> { get }
@@ -16,7 +21,7 @@ protocol InstapickService: class {
     func removeAnalyzes(ids: [String], handler: @escaping (ResponseResult<Void>) -> Void)
     func getAnalyzeHistory(offset: Int, limit: Int, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
     func getAnalyzeDetails(id: String, handler: @escaping (ResponseResult<[InstapickAnalyze]>) -> Void)
-    func startAnalyze(ids: [String], popupToDissmiss: UIViewController)
+    func startAnalyze(ids: [String], completion: @escaping (ResponseResult<AnalyzeResult>) -> Void)
 }
 
 final class InstapickServiceImpl {
@@ -24,7 +29,7 @@ final class InstapickServiceImpl {
     private enum Keys {
         static let serverValue = "value"
     }
-
+    
     private let sessionManager: SessionManager
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     let delegates = MulticastDelegate<InstaPickServiceDelegate>()
@@ -74,8 +79,8 @@ extension InstapickServiceImpl: InstapickService {
                     }
                     
                     let results = jsonArray
-                        .flatMap { $0.string }
-                        .flatMap { URL(string: $0) }
+                        .compactMap { $0.string }
+                        .compactMap { URL(string: $0) }
                     
                     handler(.success(results))
                 case .failure(let error):
@@ -96,7 +101,7 @@ extension InstapickServiceImpl: InstapickService {
                 switch response.result {
                 case .success(let data):
                     let json = JSON(data: data)[Keys.serverValue]
-                    guard let results = json.array?.flatMap({ InstapickAnalyze(json: $0) }) else {
+                    guard let results = json.array?.compactMap({ InstapickAnalyze(json: $0) }) else {
                         let error = CustomErrors.serverError("\(RouteRequests.Instapick.analyze) not [InstapickAnalyze] in response")
                         assertionFailure(error.localizedDescription)
                         handler(.failed(error))
@@ -169,7 +174,7 @@ extension InstapickServiceImpl: InstapickService {
                 case .success(let data):
                     let json = JSON(data: data)[Keys.serverValue]
                 
-                    guard let results = json.array?.flatMap({ InstapickAnalyze(json: $0) }) else {
+                    guard let results = json.array?.compactMap({ InstapickAnalyze(json: $0) }) else {
                         let error = CustomErrors.serverError("\(RouteRequests.Instapick.analyze) not [InstapickAnalyze] in response")
                         assertionFailure(error.localizedDescription)
                         handler(.failed(error))
@@ -195,7 +200,7 @@ extension InstapickServiceImpl: InstapickService {
                 case .success(let data):
                     let json = JSON(data: data)[Keys.serverValue]
                 
-                    guard let results = json.array?.flatMap({ InstapickAnalyze(json: $0) }) else {
+                    guard let results = json.array?.compactMap({ InstapickAnalyze(json: $0) }) else {
                         let error = CustomErrors.serverError("\(RouteRequests.Instapick.analyzeHistory) not [InstapickAnalyze] in response")
                         assertionFailure(error.localizedDescription)
                         handler(.failed(error))
@@ -209,21 +214,9 @@ extension InstapickServiceImpl: InstapickService {
                 }
         }
     }
-    
+
     /// global logic
-    func startAnalyze(ids: [String], popupToDissmiss: UIViewController) {
-        
-        func showError(_ error: Error) {
-            let popupVC = PopUpController.with(title: TextConstants.errorAlert, message: error.description, image: .error, buttonTitle: TextConstants.ok) { vc in
-                vc.close {
-                    popupToDissmiss.dismiss(animated: true, completion: nil)
-                }
-            }
-            
-            DispatchQueue.toMain {
-                UIApplication.topController()?.present(popupVC, animated: false, completion: nil)
-            }
-        }
+    func startAnalyze(ids: [String], completion: @escaping (ResponseResult<AnalyzeResult>) -> ()) {
         
         let startAnalysisDate = Date()
         startAnalyzes(ids: ids) { [weak self] result in
@@ -236,51 +229,37 @@ extension InstapickServiceImpl: InstapickService {
                 self?.getAnalyzesCount { [weak self] result in
                     switch result {
                     case .success(let analyzesCount):
+                        self?.analyticsService.trackPhotopickAnalysis(eventLabel: eventLabel, dailyDrawleft: analyzesCount.left, totalDraw: analyzesCount.total)
+                        MenloworksTagsService.shared.sendPhotopickAnalyzeStatus(isSuccess: true)
+                        MenloworksEventsService.shared.onPhotopickAnalyzeDone()
+                        
+                        MenloworksTagsService.shared.sendPhotopickLeftAnalysisStatus(analyzesCount)
+                        MenloworksTagsService.shared.sendCampaignPhotopickStatus()
+                        
                         /// Popup time should be at least 5 seconds, even if the request returned success earlier
                         if Date().timeIntervalSince(startAnalysisDate) > NumericConstants.instapickTimeoutForAnalyzePhotos {
-                            self?.dismissPopup(popupToDissmiss: popupToDissmiss, analyzesCount: analyzesCount, analysis: analysis)
+                            let result = AnalyzeResult(analyzesCount: analyzesCount, analysis: analysis)
+                            completion(.success(result))
+
                         } else {
                             /// If the request came before 5 seconds, then add the remaining time
                             let missingTimeout = NumericConstants.instapickTimeoutForAnalyzePhotos - Date().timeIntervalSince(startAnalysisDate)
                             DispatchQueue.main.asyncAfter(deadline: .now() + missingTimeout) {
-                                self?.dismissPopup(popupToDissmiss: popupToDissmiss, analyzesCount: analyzesCount, analysis: analysis)
+                                let result = AnalyzeResult(analyzesCount: analyzesCount, analysis: analysis)
+                                completion(.success(result))
                             }
                         }
                     case .failed(let error):
-                        showError(error)
+                        completion(.failed(error))
                     }
                 }
                 
             case .failed(let error):
                 eventLabel = .failure
-                showError(error)
+                self?.analyticsService.trackPhotopickAnalysis(eventLabel: eventLabel, dailyDrawleft: nil, totalDraw: nil)
+                MenloworksTagsService.shared.sendPhotopickAnalyzeStatus(isSuccess: false)
+                completion(.failed(error))
             }
-            self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .photopickAnalysis, eventLabel: eventLabel)
         }
     }
-    
-    // MARK: - Utility methods
-    private func dismissPopup(popupToDissmiss: UIViewController, analyzesCount: InstapickAnalyzesCount, analysis: [InstapickAnalyze]) {
-        popupToDissmiss.dismiss(animated: true, completion: {
-            
-            if let currentController = UIApplication.topController() {
-                let router = RouterVC()
-                (router.getViewControllerForPresent() as? AnalyzeHistoryViewController)?.updateAnalyzeCount(with: analyzesCount)
-                let instapickDetailControlller = router.instaPickDetailViewController(models: analysis,
-                                                                                      analyzesCount: analyzesCount,                            isShowTabBar: self.isGridRelatedController(controller: router.getViewControllerForPresent()))
-                currentController.present(instapickDetailControlller, animated: true, completion: nil)
-            } else {
-                /// nothing to show
-                assertionFailure()
-            }
-        })
-    }
-    
-    private func isGridRelatedController(controller: UIViewController?) -> Bool {
-        guard let controller = controller else {
-            return false
-        }
-        return (controller is BaseFilesGreedViewController || controller is SegmentedController)
-    }
-    
 }

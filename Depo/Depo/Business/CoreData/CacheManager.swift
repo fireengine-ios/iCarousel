@@ -21,6 +21,8 @@ final class CacheManager {
     
     static let shared = CacheManager()
     
+    private lazy var coreDataStack: CoreDataStack = factory.resolve()
+    
     private static let pageSize: Int = 500
     private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
                                                          type: .imageAndVideo)
@@ -43,59 +45,78 @@ final class CacheManager {
         reachabilityService.delegates.remove(self)
     }
     
-    func actualizeCache(completion: VoidHandler?) {
+    func actualizeCache() {
+        guard coreDataStack.isReady else {
+            scheduleActualization()
+            return
+        }
+        
         isCacheActualized = false
         isProcessing = true
 
-        MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
-            guard let `self` = self else {
-                completion?()
-                return
-            }
-            if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
-                self.showPreparationCardAfterDelay()
-                self.startAppendingAllRemotes(completion: { [weak self] in
-                    guard let `self` = self,
-                        !self.processingRemoteItems else {
-                        return
-                    }
-                    self.userDefaultsVars.currentRemotesPage = 0
-                    self.startAppendingAllLocals(completion: { [weak self] in
-                        guard let `self` = self,
-                            !self.processingLocalItems else {
-                            completion?()
-                            return
-                        }
-                        //FIXME: need handling if we logouted and locals still in progress
-                        self.isProcessing = false
-                        self.isCacheActualized = true
-                        CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-                        self.delegates.invoke { $0.didCompleteCacheActualization() }
-                        completion?()
-                    })
-                })
-            } else {
-                guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessAppendingLocalFiles flag in MediaItemsOperationService insertFromGallery method
-                    completion?()
+        MediaItemOperationsService.shared.removeZeroBytesLocalItems { [weak self] _ in
+            MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
+                guard let `self` = self else {
                     return
                 }
-                self.showPreparationCardAfterDelay()
-                self.startAppendingAllLocals(completion: { [weak self] in
-                    self?.isProcessing = false
-                    self?.isCacheActualized = true
-                    CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-                    self?.delegates.invoke { $0.didCompleteCacheActualization() }
-                    completion?()
-                })
+                
+                if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
+                    self.showPreparationCardAfterDelay()
+                    self.startAppendingAllRemotes(completion: { [weak self] in
+                        guard let `self` = self,
+                            !self.processingRemoteItems else {
+                                return
+                        }
+                        self.userDefaultsVars.currentRemotesPage = 0
+                        self.startProcessingAllLocals(completion: { [weak self] in
+                            guard let `self` = self,
+                                !self.processingLocalItems else {
+                                    return
+                            }
+                            //FIXME: need handling if we logouted and locals still in progress
+                            self.isProcessing = false
+                            self.isCacheActualized = true
+                            self.updatePreparation(isBegun: false)
+                            self.delegates.invoke { $0.didCompleteCacheActualization() }
+                        })
+                    })
+                } else {
+                    guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessLocalFiles flag in MediaItemsOperationService processLocalGallery method
+                        return
+                    }
+                    self.showPreparationCardAfterDelay()
+                    self.startProcessingAllLocals(completion: { [weak self] in
+                        self?.isProcessing = false
+                        self?.isCacheActualized = true
+                        self?.updatePreparation(isBegun: false)
+                        self?.delegates.invoke { $0.didCompleteCacheActualization() }
+                    })
+                }
             }
         }
+    }
+    
+    private func updatePreparation(isBegun: Bool) {
+        if isBegun {
+            CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+        } else {
+            CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+        }
+        
+        DispatchQueue.main.async {
+            UIApplication.shared.isIdleTimerDisabled = isBegun
+        }
+    }
+    
+    private func scheduleActualization() {
+        coreDataStack.delegates.add(self)
     }
     
     private func showPreparationCardAfterDelay() {
         ///prevent blinking
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
             if self.isProcessing {
-                CardsManager.default.startOperationWith(type: .prepareQuickScroll)
+                self.updatePreparation(isBegun: true)
             }
         })
     }
@@ -178,13 +199,13 @@ final class CacheManager {
         internetConnectionBackCallback()
     }
     
-    private func startAppendingAllLocals(completion: @escaping VoidHandler) {
+    private func startProcessingAllLocals(completion: @escaping VoidHandler) {
         guard !self.processingLocalItems else {
             return
         }
         
         processingLocalItems = true
-        MediaItemOperationsService.shared.appendLocalMediaItems { [weak self] in
+        MediaItemOperationsService.shared.processLocalMediaItems { [weak self] in
             self?.processingLocalItems = false
             completion()
         }
@@ -227,5 +248,13 @@ extension CacheManager: ReachabilityServiceDelegate {
         if service.isReachable {
             internetConnectionIsBackCallback?()
         }
+    }
+}
+
+
+extension CacheManager: CoreDataStackDelegate {
+    func onCoreDataStackSetupCompleted() {
+        coreDataStack.delegates.remove(self)
+        actualizeCache()
     }
 }

@@ -32,9 +32,10 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     }
     
     @IBOutlet weak var operationButtonsStackView: UIStackView!
+    
+    @IBOutlet weak var backUpButton: AdjustsFontSizeInsetsRoundedDarkBlueButton!
+    @IBOutlet weak var restoreButton: AdjustsFontSizeInsetsRoundedDarkBlueButton!
     @IBOutlet weak var deleteDuplicatedButton: AdjustsFontSizeInsetsRoundedDarkBlueButton!
-    @IBOutlet weak var restoreButton: BlueButtonWithMediumWhiteText!
-    @IBOutlet weak var backUpButton: BlueButtonWithMediumWhiteText!
     
     @IBOutlet weak var backupDateLabel: UILabel!
     
@@ -47,6 +48,10 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     var output: SyncContactsViewOutput!
     
     var tabBarSetup = false
+    
+    var isFullCircle: Bool {
+        return gradientLoaderIndicator.circlePathLayer.strokeEnd >= 1
+    }
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -73,6 +78,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         duplicatedSubTitleLabel.textColor = ColorConstants.textGrayColor
         duplicatedSubTitleLabel.text = TextConstants.settingsBackupContactsViewDuplicatesText
         duplicatedSubTitleLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+        duplicatedSubTitleLabel.adjustsFontSizeToFitWidth()
         
         removedCountLabel.textColor = ColorConstants.textLightGrayColor
         removedCountLabel.font = UIFont.TurkcellSaturaBolFont(size: 25)
@@ -88,17 +94,9 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         
         backUpButton.setTitle(TextConstants.settingsBackUpButtonTitle, for: .normal)
         restoreButton.setTitle(TextConstants.settingsBackUpRestoreTitle, for: .normal)
-        cancelButton.setTitle(TextConstants.settingsBackUpCancelAnalyzingTitle, for: .normal)
         deleteDuplicatedButton.setTitle(TextConstants.settingsBackUpDeleteDuplicatedButton, for: .normal)
-        
-        backUpButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
-        restoreButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
-        deleteDuplicatedButton.titleLabel?.font = ApplicationPalette.mediumRoundButtonFont
-
-        deleteDuplicatedButton.insets = UIEdgeInsets(top: 0, left: 6.0, bottom: 0, right: 6.0)
-        
-        backUpButton.adjustsFontSizeToFitWidth()
-        restoreButton.adjustsFontSizeToFitWidth()
+        cancelButton.setTitle(TextConstants.settingsBackUpCancelAnalyzingTitle, for: .normal)
+      
         cancelButton.adjustsFontSizeToFitWidth()
         
         if tabBarSetup {
@@ -106,7 +104,6 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         }
         
         output.viewIsReady()
-        
         MenloworksAppEvents.onContactSyncPageOpen()
     }
     
@@ -141,6 +138,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     }
     
     @IBAction func onDeleteDuplicatedTapped(_ sender: Any) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .deleteDuplicate))
         output.startOperation(operationType: .analyze)
     }
     
@@ -148,17 +146,23 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     
     func setInitialState() {
         debugLog("SyncContactsViewController setInitialState")
-        viewForInformationAfterBackUp.setSubviewsHidden(true)
         cancelButton.isHidden = true
         operationButtonsStackView.isHidden = true
         manageContactsButton.isHidden = true
+        
+        //FE-2066 Contact Sync SDK Update - HIDE INFO VIEW
+        viewForInformationAfterBackUp.isHidden = true
+//        viewForInformationAfterBackUp.setSubviewsHidden(true)
     }
     
     func setStateWithoutBackUp() {
         debugLog("SyncContactsViewController setStateWithoutBackUp")
         titleLabel.text = TextConstants.settingsBackUpNeverDidIt
         backupDateLabel.text = TextConstants.settingsBackUpNewer
-        viewForInformationAfterBackUp.setSubviewsHidden(true)
+        
+        //FE-2066 Contact Sync SDK Update - HIDE INFO VIEW
+        //If need to show backup info - uncomment this line
+//        viewForInformationAfterBackUp.setSubviewsHidden(true)
         cancelButton.isHidden = true
         restoreButton.isHidden = true
         backUpButton.isHidden = false
@@ -172,7 +176,10 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         debugLog("SyncContactsViewController setStateWithBackUp")
         gradientLoaderIndicator.resetProgress()
         titleLabel.attributedText = titleLabelAttributedTextBeforeBackup
-        viewForInformationAfterBackUp.setSubviewsHidden(false)
+        
+        //FE-2066 Contact Sync SDK Update - HIDE INFO VIEW
+        //If need to show backup info - uncomment these lines
+//        viewForInformationAfterBackUp.setSubviewsHidden(false)
         cancelButton.isHidden = true
         restoreButton.isHidden = false
         backUpButton.isHidden = false
@@ -180,11 +187,13 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         operationButtonsStackView.isHidden = false
         backupDateLabel.isHidden = false
         manageContactsButton.isHidden = false
-        viewForInformationAfterBackUp.isHidden = false
+//        viewForInformationAfterBackUp.isHidden = false
     }
     
     func setOperationState(operationType: SyncOperationType) {
-        viewForInformationAfterBackUp.setSubviewsHidden(true)
+        //FE-2066 Contact Sync SDK Update - HIDE INFO VIEW
+        //If need to show backup info - uncomment this line
+//        viewForInformationAfterBackUp.setSubviewsHidden(true)
         operationButtonsStackView.isHidden = true
         backupDateLabel.isHidden = true
         manageContactsButton.isHidden = true
@@ -199,6 +208,11 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         default:
             cancelButton.isHidden = true
         }
+    }
+    
+    func setButtonsAvailability(restore: Bool, backup: Bool) {
+        restoreButton.isEnabled = restore
+        backUpButton.isEnabled = backup
     }
     
     func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType) {

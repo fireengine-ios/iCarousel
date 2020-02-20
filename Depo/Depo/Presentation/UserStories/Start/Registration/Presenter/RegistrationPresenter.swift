@@ -48,11 +48,21 @@ extension RegistrationPresenter: RegistrationViewOutput {
         isSupportFormPresenting = true
         router.openSupport()
     }
+    
+    func openFaqSupport() {
+        isSupportFormPresenting = true
+        router.goToFaqSupportPage()
+    }
+    
+    func openSubjectDetails(type: SupportFormSubjectTypeProtocol) {
+        interactor.trackSupportSubjectEvent(type: type)
+        isSupportFormPresenting = true
+        router.goToSubjectDetailsPage(type: type)
+    }
 }
 
 // MARK: - RegistrationInteractorOutput
 extension RegistrationPresenter: RegistrationInteractorOutput {
-    
     func userValid(_ userInfo: RegistrationUserInfoModel) {
         interactor.signUpUser(userInfo)
     }
@@ -73,11 +83,16 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
         }
     }
     
-    func signUpFailed(errorResponce: ErrorResponse) {
+    func signUpFailed(errorResponse: Error) {
         completeAsyncOperationEnableScreen()
-        view.showErrorTitle(withText: errorResponce.description)
         
-        if interactor.captchaRequred {
+        if (errorResponse as? SignupResponseError)?.isCaptchaError == true {
+            view.showCaptchaError(TextConstants.loginScreenInvalidCaptchaError)
+        } else {
+            view.showErrorTitle(withText: errorResponse.description)
+        }
+        
+        if interactor.captchaRequired {
             view.updateCaptcha()
         }
     }
@@ -90,24 +105,28 @@ extension RegistrationPresenter: RegistrationInteractorOutput {
                                 userInfo: signUpUserInfo)
     }
     
-    func captchaRequred(requred: Bool) {
-        if requred {
+    func captchaRequired(required: Bool) {
+        if required {
             view.setupCaptcha()
         }
         asyncOperationSuccess()
     }
     
-    func captchaRequredFailed() {
+    func captchaRequiredFailed() {
         asyncOperationSuccess()
     }
     
-    func captchaRequredFailed(with message: String) {
+    func captchaRequiredFailed(with message: String) {
         asyncOperationSuccess()
         view.showErrorTitle(withText: message)
     }
     
     func showSupportView() {
         view.showSupportView()
+    }
+    
+    func showFAQView() {
+        view.showFAQView()
     }
 }
 

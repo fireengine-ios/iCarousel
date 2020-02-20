@@ -37,16 +37,19 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         asyncOperationSuccess()
     }
     
-    func needSendOTP(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse) {
+    func needSendOTP(response: SignUpSuccessResponse, userInfo: AccountInfoResponse) {
         view.endSaving()
         view.setupEditState(false)
         if let navigationController = view.getNavigationController() {
-            router.needSendOTP(responce: responce, userInfo: userInfo, navigationController: navigationController, phoneNumber: getPhoneWithAddedCodeIfNeeded())
+            router.needSendOTP(response: response, userInfo: userInfo, navigationController: navigationController, phoneNumber: getPhoneWithAddedCodeIfNeeded())
         }
     }
     
     func showError(error: String) {
         view.endSaving()
+                
+        interactor.trackState(.save(isSuccess: false), errorType: GADementionValues.errorType(with: error))
+        
         UIApplication.showErrorAlert(message: error)
     }
     
@@ -59,14 +62,16 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
     
     func tapEditButton() {
         view.setupEditState(true)
+        interactor.trackState(.edit, errorType: nil)
     }
     
-    func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String) {
-        interactor.changeTo(name: name, surname: surname, email: email, number: number, birthday: birthday)
+    func tapReadyButton(name: String, surname: String, email: String, number: String, birthday: String, address: String) {
+        interactor.changeTo(name: name, surname: surname, email: email, number: number, birthday: birthday, address: address)
     }
     
     func dataWasUpdated() {
         view.setupEditState(false)
+        interactor.trackState(.save(isSuccess: true), errorType: nil)
     }
     
     func isTurkcellUser() -> Bool {
@@ -77,10 +82,24 @@ class UserProfilePresenter: BasePresenter, UserProfileModuleInput, UserProfileVi
         router.goToChangePassword()
     }
     
+    func tapChangeSecretQuestionButton() {
+        interactor.trackSetSequrityQuestion()
+        router.goToSetSecretQuestion(selectedQuestion: interactor.secretQuestionsResponse,
+                                     delegate: self)
+    }
+    
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
     
+}
+
+extension UserProfilePresenter: SetSecurityQuestionViewControllerDelegate {
+    func didCloseSetSecurityQuestionViewController(with selectedQuestion: SecretQuestionWithAnswer) {
+        interactor.updateUserInfo()
+        interactor.updateSecretQuestionsResponse(with: selectedQuestion)
+        view.securityQuestionWasSet()
+    }
 }

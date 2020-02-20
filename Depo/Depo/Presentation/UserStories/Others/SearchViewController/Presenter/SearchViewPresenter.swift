@@ -158,6 +158,14 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     // MARK: - BaseDataSourceForCollectionViewDelegate
     
+    func getParent() -> BaseDataSourceItem? {
+        return getFolder()
+    }
+    
+    func getStatus() -> ItemStatus {
+        return .active
+    }
+    
     func onItemSelected(item: BaseDataSourceItem) {
         // 
     }
@@ -270,6 +278,7 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         dataSource.moreActionItem = item
         
         alertSheetModule?.showSpecifiedAlertSheet(with: item,
+                                                  status: .active,
                                                   presentedBy: sender,
                                                   onSourceView: nil,
                                                   viewController: nil)
@@ -484,7 +493,6 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
     
     func changeCover() { }
     
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) { }
     func openInstaPick() { }
     
     func didDelete(items: [BaseDataSourceItem]) {

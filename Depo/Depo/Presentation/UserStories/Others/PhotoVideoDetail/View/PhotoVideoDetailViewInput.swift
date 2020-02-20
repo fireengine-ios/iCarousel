@@ -8,11 +8,17 @@
 
 protocol PhotoVideoDetailViewInput: class {
     
+    var status: ItemStatus { get set }
+    
     func setupInitialState()
     
     func onShowSelectedItem(at index: Int, from items: [Item])
     
-    func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool)
+    func updateItems(objectsArray: [Item], selectedIndex: Int)
+    
+    func appendItems(_ items: [Item])
+    
+    func onLastRemoved()
     
     func getNavigationController() -> UINavigationController?
     

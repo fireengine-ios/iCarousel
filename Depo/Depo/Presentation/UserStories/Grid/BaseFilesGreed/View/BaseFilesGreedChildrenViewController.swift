@@ -18,10 +18,12 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let _ = parent as? SegmentedController {
+        if parent is SegmentedController {
             homePageNavigationBarStyle()
+            
         } else {
             navigationBarWithGradientStyle()
+            
         }
         
         if mainTitle != "" {
@@ -37,6 +39,9 @@ class BaseFilesGreedChildrenViewController: BaseFilesGreedViewController {
         underNavBarBar?.setSorting(enabled: false)
         let navigationItem = (parent as? SegmentedController)?.navigationItem ?? self.navigationItem
         navigationItem.leftBarButtonItem = cancelSelectionButton
+        if status.isContained(in: [.hidden, .trashed]) {
+            navigationItem.rightBarButtonItem = nil
+        }
         navigationBarWithGradientStyle()
     }
     

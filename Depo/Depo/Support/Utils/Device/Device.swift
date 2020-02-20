@@ -52,6 +52,8 @@ class Device {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!
     }
     
+    static let isIOS13: Bool = ProcessInfo().operatingSystemVersion.majorVersion == 13
+    
     /// https://stackoverflow.com/questions/46192280/detect-if-the-device-is-iphone-x
     static var isIphoneX: Bool {
         return (UIDevice.current.userInterfaceIdiom == .phone) && (UIScreen.main.bounds.height >= 812)
@@ -175,6 +177,10 @@ class Device {
             return defaultLocale
         }
         return String(preferedLanguage[..<String.Index(encodedOffset: 2)])
+    }
+    
+    static var isTurkishLocale: Bool {
+        return locale == "tr"
     }
     
     static var supportedLocale: String {

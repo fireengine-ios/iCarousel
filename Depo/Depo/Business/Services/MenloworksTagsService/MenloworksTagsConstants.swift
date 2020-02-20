@@ -96,6 +96,13 @@ extension MenloworksTags {
         static let profileNameEmpty = "profile_name_empty"
         static let profileNameFull = "profile_name_full"
         static let profileName = "profile_name"
+        
+        static let photopickLeftAnalysis = "photopick_left_analysis"
+        static let photopickAnalyze = "photopick_analyze"
+        static let photopickAnalyzeSuccess = "photopick_analyze_success"
+        static let photopickAnalyzeFail = "photopick_analyze_fail"
+        static let photopickDailyDrawLeft = "daily_draw_left"
+        static let photopickTotalDraw = "total_draw"
     }
     
     class ValueConstants {
@@ -110,5 +117,8 @@ extension MenloworksTags {
         static let off = "off"
         static let granted = "granted"
         static let denied = "denied"
+        static let free = "FREE"
+        static let success = "Success"
+        static let fail = "Fail"
     }
 }

@@ -18,6 +18,7 @@ protocol LoginViewInput: class, Waiting {
     func captchaFieldError(_ error: String)
     
     func showSupportView()
+    func showFAQView()
     func showErrorMessage(with text: String)
     
     func hideErrorMessage()

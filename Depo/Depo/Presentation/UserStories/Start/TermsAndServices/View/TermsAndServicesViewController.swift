@@ -18,8 +18,8 @@ class TermsAndServicesViewController: ViewController {
     @IBOutlet private weak var contentView: UITextView! {
         willSet {
             newValue.text = ""
-            newValue.backgroundColor = ColorConstants.bottomViewGrayColor
-            newValue.layer.borderColor = ColorConstants.lightGrayColor.cgColor
+            newValue.backgroundColor = ColorConstants.lighterGray
+            newValue.layer.borderColor = ColorConstants.darkTintGray.cgColor
             newValue.layer.borderWidth = 1
             
             newValue.linkTextAttributes = [
@@ -54,9 +54,27 @@ class TermsAndServicesViewController: ViewController {
     }
     
     @IBOutlet private weak var topContraintIOS10: NSLayoutConstraint!
-    @IBOutlet private weak var topContraintIOS11: NSLayoutConstraint!
 
     @IBOutlet private weak var contenViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet private weak var privacyPolicyView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 6
+            newValue.backgroundColor =  UIColor.lrTealishTwo.withAlphaComponent(0.05)
+        }
+    }
+    
+    @IBOutlet weak var privacyPolicyTextView: IntrinsicTextView! {
+        willSet {
+            newValue.delegate = self
+            newValue.backgroundColor = .clear
+            newValue.linkTextAttributes = [
+                NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
+                NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
+                NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+            ]
+        }
+    }
     
     private let generalTermsCheckboxView = TermsCheckboxTextView.initFromNib()
     private var etkTermsCheckboxView: TermsCheckboxTextView?
@@ -79,14 +97,10 @@ class TermsAndServicesViewController: ViewController {
         }
 
         contenViewHeightConstraint.constant = Device.winSize.height * 0.5
-        if #available(iOS 11.0, *) {
-            topContraintIOS10.isActive = false
-        } else {
-            topContraintIOS11.isActive = false
-        }
         
         configureUI()
         setupIntroductionTextView()
+        setupPrivacyPolicyTextView()
         output.viewIsReady()
     }
     
@@ -130,10 +144,19 @@ class TermsAndServicesViewController: ViewController {
                                                attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
                                                             .foregroundColor: ColorConstants.darkText])
         
+        generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self)
+    }
+    
+    private func setupPrivacyPolicyTextView() {
+        
+        let header = NSMutableAttributedString(string: TextConstants.privacyPolicy,
+                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
+                                                            .foregroundColor: ColorConstants.darkText])
+        
         let rangeLink = header.mutableString.range(of: TextConstants.privacyPolicyCondition)
         header.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions], range: rangeLink)
         
-        generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self)
+        privacyPolicyTextView.attributedText = header
     }
     
     private func setupEtkText() {
@@ -198,7 +221,8 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
             
             let font = UIFont.TurkcellSaturaRegFont(size: 14)
             /// https://stackoverflow.com/a/27422343
-            let customFontEulaString = "<style>body{font-family: '\(font.familyName)'; font-size:\(font.pointSize);}</style>" + eula
+//            body{font-family: '\(font.familyName)'; because turkcell fonts currently are not recognizable as family of fonts - all text from htm will be shown as regular, no bold and etc.
+            let customFontEulaString = "<style>font-size:\(font.pointSize);}</style>" + eula
             
             guard let data = customFontEulaString.data(using: .utf8) else {
                 assertionFailure()
@@ -212,9 +236,10 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
                 let attributedString = try NSAttributedString(data: data, options:
                     [.documentType: NSAttributedString.DocumentType.html,
                      .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
-                
+                // https://www.oipapio.com/question-726375
                 DispatchQueue.main.async {
-                    self?.contentView.attributedText = attributedString
+                    self?.contentView.textStorage.append(attributedString)
+                    self?.contentView.dataDetectorTypes = [.phoneNumber, .address]
                 }
             } catch {
                 assertionFailure()
@@ -284,7 +309,13 @@ extension TermsAndServicesViewController: TermsCheckboxTextViewDelegate {
 // MARK: - UITextViewDelegate
 extension TermsAndServicesViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        UIApplication.shared.openSafely(URL)
-        return true
+
+        return tappedOnURL(url: URL)
+    }
+    
+    @available(iOS 10.0, *)
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+
+        return tappedOnURL(url: URL)
     }
 }

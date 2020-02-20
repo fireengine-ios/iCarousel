@@ -10,6 +10,7 @@
 #import "Contact.h"
 #import "GZIP.h"
 
+
 @implementation SyncAdapter
 
 + (void)getLastBackup:(void (^)(id, BOOL))callback
@@ -29,13 +30,15 @@
     [SyncAdapter request:[self buildURL:@"getUpdatedContacts"] params:dict headers:nil method:GET callback:callback];
 }
 
-+ (void)sendStats:(NSString*)key start:(NSInteger)start result:(NSInteger)result created:(NSInteger)created updated:(NSInteger)updated deleted:(NSInteger)deleted  status:(NSInteger)status errorCode:(NSString*)errorCode errorMsg:(NSString*)errorMsg {
-    [self sendStats:key start:start result:result created:created updated:updated deleted:deleted status:status errorCode:errorCode errorMsg:errorMsg operation:nil];
+
++ (void)sendStats:(NSString*)key start:(NSInteger)start result:(NSInteger)result created:(NSInteger)created updated:(NSInteger)updated deleted:(NSInteger)deleted  status:(NSInteger)status errorCode:(NSString*)errorCode errorMsg:(NSString*)errorMsg callback:(void (^)(id, BOOL))callback{
+    [self sendStats:key start:start result:result created:created updated:updated deleted:deleted status:status errorCode:errorCode errorMsg:errorMsg operation:nil callback:callback];
 }
 
-+ (void)sendStats:(NSString*)key start:(NSInteger)start result:(NSInteger)result created:(NSInteger)created updated:(NSInteger)updated deleted:(NSInteger)deleted  status:(NSInteger)status errorCode:(NSString*)errorCode errorMsg:(NSString*)errorMsg operation:(NSString*) operation
++ (void)sendStats:(NSString*)key start:(NSInteger)start result:(NSInteger)result created:(NSInteger)created updated:(NSInteger)updated deleted:(NSInteger)deleted  status:(NSInteger)status errorCode:(NSString*)errorCode errorMsg:(NSString*)errorMsg operation:(NSString*) operation callback:(void (^)(id, BOOL))callback
 {
     if (SYNC_IS_NULL(key)){
+        callback(nil, FALSE);
         return;
     }
     NSMutableDictionary *mutableData = [[NSMutableDictionary alloc] init];
@@ -54,32 +57,28 @@
         [mutableData setObject:operation forKey:@"operation"];
     }
 
-    [SyncAdapter request:[self buildURL:@"stats"] params:mutableData headers:nil method:POST callback:nil];
+    [SyncAdapter request:[self buildURL:@"stats"] params:mutableData headers:nil method:POST callback:callback];
 }
 
-+(void)restoreContactsWithTimestamp:(long long)timestamp deviceId:(NSString *)deviceId modifiedContactIDs:(NSArray *)modifiedContactIDs newContacts:(NSArray *)newContacts callback:(void (^)(id, BOOL))callback{
++(void)restoreContactsWithTimestamp:(long long)timestamp deviceId:(NSString *)deviceId callback:(void (^)(id, BOOL))callback{
     NSNumber *timestampNS = [NSNumber numberWithLongLong:timestamp];
-    
-    NSMutableArray *array = [NSMutableArray new];
-    for (Contact *c in newContacts){
-        [array addObject:[c toJSON:true]];
-    }
-
-    NSDictionary *restoreData = @{@"timestamp":timestampNS, @"deviceId":deviceId, @"modified":modifiedContactIDs, @"newContacts":array };
+    NSDictionary *restoreData = @{@"timestamp":timestampNS, @"deviceId":deviceId};
     [SyncAdapter request:[self buildURL:@"restore"] params:restoreData headers:nil method:POST callback:callback];
 }
 
-
-+ (void)backupContactsWithDeviceId:(NSString *)deviceId dirtyContacts:(NSArray*)dirtyContacts deletedContacts:(NSArray *)deletedContacts callback:(void (^)(id, BOOL))callback
++ (void)partialBackup:(NSString*)key deviceId:(NSString *)deviceId dirtyContacts:(NSArray*)dirtyContacts deletedContacts:(NSArray *)deletedContacts duplicates:(NSArray *)duplicates step:(NSNumber *)step totalStep:(NSNumber *)totalStep callback:(void (^)(id, BOOL))callback
 {
     NSMutableArray *array = [NSMutableArray new];
     for (Contact *c in dirtyContacts){
         [array addObject:[c toJSON:false]];
     }
-    NSDictionary *backupData = @{@"dirty":array, @"deleted":deletedContacts, @"deviceId":deviceId};
-    [SyncAdapter request:[self buildURL:@"backup"] params:backupData headers:nil method:POST callback:callback];
+    NSDictionary *backupData = @{@"dirty":array, @"deviceId":deviceId, @"step": step, @"totalStep": totalStep};
+    
+    if (SYNC_STRING_IS_NULL_OR_EMPTY(key)){
+        key = @"-1";
+    }
+    [SyncAdapter request:[self buildURL:[NSString stringWithFormat:@"v2/backup/%@",key]] params:backupData headers:nil method:POST callback:callback];
 }
-
 
 
 + (void)deleteContact:(NSNumber*)contactId callback:(void (^)(id, BOOL))callback

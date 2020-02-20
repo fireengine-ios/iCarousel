@@ -47,5 +47,20 @@ enum PushNotificationAction: String {
     case photopickHistory = "photopick_history"
     case myStorage = "my_storage"
     case becomePremium = "become_premium"
+    case tbmatic = "TBMatik"
+    case securityQuestion = "security_question"
+    case permissions = "permissions"
+    case photopickCampaignDetail = "photopick_campaign_detail"
+    case supportFormLogin = "support_form_login"
+    case supportFormSignup = "support_form_signup"
+    case trashBin = "trash_bin"
+    case hiddenBin = "hidden_bin"
+}
+
+enum PushNotificationParameter: String {
+    case action = "action"
+    case pushType = "push_type"
+    case tbmaticUuids = "tbt_file_list"
+    case netmeraParameters = "prms"
 }
 

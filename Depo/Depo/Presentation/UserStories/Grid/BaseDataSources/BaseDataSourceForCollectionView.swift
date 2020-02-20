@@ -24,6 +24,10 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     
     func getFolder() -> Item?
     
+    func getParent() -> BaseDataSourceItem?
+    
+    func getStatus() -> ItemStatus
+    
     func onLongPressInCell()
     
     func onChangeSelectedItemsCount(selectedItemsCount: Int)
@@ -43,6 +47,8 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     func updateCoverPhotoIfNeeded()
     
     func didDelete(items: [BaseDataSourceItem])
+    
+    func didDeleteParent()
     
     func onItemSelectedActiveState(item: BaseDataSourceItem)
     
@@ -74,6 +80,8 @@ extension BaseDataSourceForCollectionViewDelegate {
     func updateCoverPhotoIfNeeded() { }
     
     func didDelete(items: [BaseDataSourceItem]) { }
+    
+    func didDeleteParent() {}
     
     func didChangeTopHeader(text: String) { }
     
@@ -167,6 +175,8 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     private var currentTopSection: Int?
     
     private var assetFilesCacheManager = AssetFileCacheManager()
+    
+    private var isDeleteFromMoved = false
     
     
     init(sortingRules: SortedRules = .timeUp) {
@@ -732,7 +742,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func registerCells() {
-        let registreList = [CollectionViewCellsIdsConstant.cellForImage,
+        let registerList = [CollectionViewCellsIdsConstant.cellForImage,
                             CollectionViewCellsIdsConstant.cellForStoryImage,
                             CollectionViewCellsIdsConstant.cellForVideo,
                             CollectionViewCellsIdsConstant.cellForAudio,
@@ -746,7 +756,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                             CollectionViewCellsIdsConstant.cellForFaceImageAddName,
                             CollectionViewCellsIdsConstant.cellForInstapickPhoto]
         
-        registreList.forEach {
+        registerList.forEach {
             let listNib = UINib(nibName: $0, bundle: nil)
             collectionView?.register(listNib, forCellWithReuseIdentifier: $0)
         }
@@ -759,6 +769,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         collectionView?.register(headerNib,
                                 forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
                                 withReuseIdentifier: CollectionViewSuplementaryConstants.baseDataSourceForCollectionViewReuseID)
+        
+        let headerCarousel = UINib(nibName: CollectionViewSuplementaryConstants.collectionViewCarouselPagerHeader,
+                              bundle: nil)
+        collectionView?.register(headerCarousel,
+                                forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+                                withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewCarouselPagerHeader)
         
     }
     
@@ -917,7 +933,15 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func getSelectedItems() -> [BaseDataSourceItem] {
-        return selectedItemsArray.map{$0}
+        if isSelectionStateActive {
+            return selectedItemsArray.map{$0}
+        }
+        
+        if let parent = delegate?.getParent() {
+            return [parent]
+        }
+        
+        return []
     }
     
     
@@ -938,12 +962,16 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             let path = collectionView?.indexPath(for: cell),
             let object = itemForIndexPath(indexPath: path) {
             
-            if !isObjctSelected(object: object) {
-                onSelectObject(object: object)
-            }
-            
             if !isSelectionStateActive {
+                if !isObjctSelected(object: object) {
+                    onSelectObject(object: object)
+                }
+                
                 forwardDelegate.onLongPressInCell()
+                updateSelectionCount()
+            } else if !isObjctSelected(object: object) {
+                onSelectObject(object: object)
+                updateSelectionCount()
             }
         }
     }
@@ -980,8 +1008,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag),
                                     activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
         }
-        
-        updateSelectionCount()
     }
     
     func isHeaderSelected(section: Int) -> Bool {
@@ -1296,6 +1322,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         if (isSelectionStateActive) {
             onSelectObject(object: unwrapedObject)
+            updateSelectionCount()
             let cell = collectionView.cellForItem(at: indexPath)
             guard let cell_ = cell as? CollectionViewCellDataProtocol else {
                 return
@@ -1639,127 +1666,122 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func deleteItems(items: [Item]) {
-        dispatchQueue.async { [weak self] in
-                guard let `self` = self else {
-                    return
-                }
+    private func idsToRemove(for items: [Item]) -> [String] {
+        guard let unwrapedFilters = self.originalFilters, !self.showOnlyRemotes(filters: unwrapedFilters) else {
+            return items.map{
+                $0.getLocalID()
+            }
+        }
+            
+        var idsForRemove = [String]()
+        var serverObjects = [Item]()
+        
+        var allItemsIDs = self.allMediaItems.map {
+            $0.getTrimmedLocalID()
+        }
+        
+        for object in items {
+            if object.isLocalItem {
+                idsForRemove.append(object.getLocalID())
+            } else {
+                serverObjects.append(object)
+            }
+        }
+        
+        let localIDs = serverObjects.map {
+            $0.getTrimmedLocalID()
+        }
+            
+        let semaphore = DispatchSemaphore(value: 0)
 
-                guard !items.isEmpty else {
-                    return
-                }
-                        
-                var idsForRemove = [String]()
-                var objectsForReplaceDict = [String : Item]()
-                
-                if let unwrapedFilters = self.originalFilters,
-                    !self.showOnlyRemotes(filters: unwrapedFilters) {
-                    
-                    var serverObjects = [Item]()
-                    
-                    var allItemsIDs = [String]()
-                    for array in self.allItems {
-                        for object in array {
-                            allItemsIDs.append(object.getTrimmedLocalID())
-                        }
-                    }
-                    
-                    for object in items {
-                        if object.isLocalItem {
-                            idsForRemove.append(object.getLocalID())
-                        } else {
-                            serverObjects.append(object)
-                        }
-                    }
-                    
-                    
-                let localIDs = serverObjects.map {
-                    $0.getTrimmedLocalID()
-                }
-                    
-                let semaphore = DispatchSemaphore(value: 0)
-
-                MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: localIDs) { localObjectsForReplace in
-                    let foundedLocalID = localObjectsForReplace.map {
-                        $0.getTrimmedLocalID()
-                    }
-                    for object in serverObjects {
-                        let trimmedID = object.getTrimmedLocalID()
-                        if let index = foundedLocalID.index(of: trimmedID) {
-                            let objForReplace = localObjectsForReplace[index]
-                            if let index = allItemsIDs.index(of: trimmedID){
-                                allItemsIDs.remove(at: index)
-                                if allItemsIDs.contains(trimmedID) {
-                                    idsForRemove.append(object.uuid)
-                                } else {
-                                    objectsForReplaceDict[object.uuid] = objForReplace
-                                }
-                            }
-                        } else {
+        MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: localIDs) { localObjectsForReplace in
+            let foundedLocalID = localObjectsForReplace.map {
+                $0.getTrimmedLocalID()
+            }
+            for object in serverObjects {
+                let trimmedID = object.getTrimmedLocalID()
+                if foundedLocalID.contains(trimmedID) {
+                    if let index = allItemsIDs.index(of: trimmedID){
+                        allItemsIDs.remove(at: index)
+                        if allItemsIDs.contains(trimmedID) {
                             idsForRemove.append(object.uuid)
                         }
                     }
-                    semaphore.signal()
-                }  
-                semaphore.wait()
-            } else {
-                idsForRemove = items.map{
-                    $0.uuid
+                } else {
+                    idsForRemove.append(object.uuid)
                 }
             }
-            
-            self.emptyMetaItems = self.emptyMetaItems.filter { !idsForRemove.contains($0.uuid) }
+            semaphore.signal()
+        }
+        semaphore.wait()
+        
+        return idsForRemove
+    }
+    
+    func deleteItems(items: [Item]) {
+        //check delete parent Item (hide|delete|moveToTrash|restore)
+        if let firstItem = items.first, let parent = delegate?.getParent(), firstItem == parent {
+            delegate?.didDeleteParent()
+            return
+        }
+        
+        dispatchQueue.async { [weak self] in
+            guard let `self` = self, !items.isEmpty else {
+                return
+            }
+                    
+            let idsForRemove = self.idsToRemove(for: items)
+            let emptyMetaItems = self.emptyMetaItems.filter { !idsForRemove.contains($0.uuid) }
 
-            var newArray = [[WrapData]]()
-            
-            var recentlyUpdatedIndexes = [IndexPath]()
             var recentlyDeletedIndexes = [IndexPath]()
             var recentlyDeletedSections =  IndexSet()
-
-            for (index, array) in self.allItems.enumerated() {
+            var newArray = [[WrapData]]()
+            
+            for (section, array) in self.allItems.enumerated() {
                 var newSectionArray = [WrapData]()
-                for object in array {
-                    
-                    if let index = idsForRemove.index(of: object.getLocalID()) {
-                        self.allMediaItems.remove(object)
-                        idsForRemove.remove(at: index)
-                        recentlyDeletedIndexes.append(contentsOf: self.getIndexPathsForItems([object]))///FOR now like that, in future = it should be called after with whole array
+                for (item, object) in array.enumerated() {
+                    if idsForRemove.contains(object.getLocalID()) {
+                        recentlyDeletedIndexes.append(IndexPath(item: item, section: section))
                     } else {
                         newSectionArray.append(object)
                     }
                 }
                 
                 if newSectionArray.isEmpty {
-                    recentlyDeletedSections.insert(index)
+                    recentlyDeletedSections.insert(section)
                 } else {
                     newArray.append(newSectionArray)
                 }
             }
-
+            
             DispatchQueue.toMain {
                 CellImageManager.clear()
+                self.emptyMetaItems = emptyMetaItems
                 self.allItems = newArray
-                self.collectionView?.reloadData()
-//                    //change performBatchUpdates to the reladData() in case of crash
-//                                    self.collectionView?.performBatchUpdates({
-//                    //                    self.allItems = newArray
-//                    //                    self.collectionView?.reloadItems(at: recentlyUpdatedIndexes)
-//                    //                    self.collectionView?.deleteItems(at: recentlyDeletedIndexes)
-//                    //                    self.collectionView?.deleteSections(recentlyDeletedSections)
-//
-//                                    }, completion: { _ in
+                self.allMediaItems = newArray.flatMap { $0 }
+                
                 //update folder items count
                 if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
                     self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
                 }
                     
-                recentlyDeletedIndexes.removeAll()
-                recentlyDeletedSections.removeAll()
-                recentlyUpdatedIndexes.removeAll()
-                    
-                self.delegate?.didDelete(items: items)
+                if !self.isDeleteFromMoved {
+                    self.delegate?.didDelete(items: items)
+                } else {
+                    self.isDeleteFromMoved = false
+                }
                     
                 self.updateCoverPhoto()
+                
+                /// Controller will be closed and we don't need update
+                if self.allItems.isEmpty {
+                    self.collectionView?.reloadData()
+                } else {
+                    self.collectionView?.performBatchUpdates({
+                        self.collectionView?.deleteItems(at: recentlyDeletedIndexes)
+                        self.collectionView?.deleteSections(recentlyDeletedSections)
+                    }, completion: nil)
+                }
             }
         }
     }
@@ -1906,7 +1928,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         if let uuid = parentUUID, uuid == albumUUID{
             deleteItems(items: items)
         }
-        updateCoverPhoto()
     }
     
     func filesMoved(items: [Item], toFolder folderUUID: String) {
@@ -1925,6 +1946,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             deleteItems(items: items)
         } else if let unwrapedFilters = originalFilters,
             canShowFolderFilters(filters: unwrapedFilters) {
+            isDeleteFromMoved = true
             deleteItems(items: items)
         }
     }
@@ -1956,6 +1978,55 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             } else {
                 item.childCount = childCount - Int64(count)
             }
+        }
+    }
+    
+    func didHideItems(_ items: [WrapData]) {
+        deleteItems(items: items)
+    }
+    
+    func didHideAlbums(_ albums: [AlbumItem]) {
+        albumsDeleted(albums: albums)
+    }
+    
+    func didUnhideItems(_ items: [WrapData]) {
+        if delegate?.getStatus() == .hidden {
+            deleteItems(items: items)
+        } else {
+            needInsertItems(items)
+        }
+    }
+    
+    func didUnhideAlbums(_ albums: [AlbumItem]) {
+        
+    }
+    
+    func putBackFromTrashItems(_ items: [Item]) {
+        if delegate?.getStatus() == .trashed {
+            deleteItems(items: items)
+        } else {
+            needInsertItems(items)
+        }
+    }
+    
+    func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
+        
+    }
+    
+    func didMoveToTrashItems(_ items: [Item]) {
+        if delegate?.getStatus() == .trashed {
+            needInsertItems(items)
+        } else {
+            deleteItems(items: items)
+        }
+    }
+    
+    func didMoveToTrashAlbums(_ albums: [AlbumItem]) { }
+    
+    private func needInsertItems(_ items: [Item]) {
+        //Maybe need merge in the future
+        DispatchQueue.main.async {
+            self.delegate?.needReloadData()
         }
     }
 }

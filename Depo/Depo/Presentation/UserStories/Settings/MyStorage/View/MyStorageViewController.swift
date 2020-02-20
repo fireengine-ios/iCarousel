@@ -36,6 +36,7 @@ final class MyStorageViewController: BaseViewController {
         didSet {
             packagesLabel.text = TextConstants.packagesIHave
             packagesLabel.textColor = ColorConstants.darkText
+            packagesLabel.adjustsFontSizeToFitWidth()
             packagesLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
         }
     }
@@ -60,9 +61,17 @@ final class MyStorageViewController: BaseViewController {
             storageUsageProgressView.set(progress: 0, withAnimation: false)
         }
     }
+    
+    @IBOutlet private weak var restoreView: UIView!  {
+        willSet {
+            newValue.layer.masksToBounds = true
+        }
+    }
         
     @IBOutlet private weak var restorePurchasesButton: UIButton! {
         didSet {
+            restorePurchasesButton.isHidden = true
+            restorePurchasesButton.isEnabled = false
             restorePurchasesButton.titleEdgeInsets = UIEdgeInsets(top: 6, left: 11, bottom: 6, right: 11)
             restorePurchasesButton.setTitle(TextConstants.restorePurchasesButton, for: .normal)
             restorePurchasesButton.setTitleColor(.lrTealish, for: .normal)
@@ -78,6 +87,7 @@ final class MyStorageViewController: BaseViewController {
     
     @IBOutlet private weak var restoreDescriptionLabel: UILabel! {
         didSet {
+            restoreDescriptionLabel.isHidden = true
             restoreDescriptionLabel.attributedText = NSAttributedString.attributedText(text: TextConstants.restorePurchasesInfo, word: TextConstants.attributedRestoreWord, textFont: .TurkcellSaturaFont(size: 15), wordFont: .TurkcellSaturaDemFont(size: 15))
             restoreDescriptionLabel.numberOfLines = 0
         }
@@ -90,12 +100,6 @@ final class MyStorageViewController: BaseViewController {
         
         setup()
         output.viewDidLoad()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        output.viewDidAppear()
     }
     
     // MARK: - IBActions
@@ -134,6 +138,13 @@ extension MyStorageViewController: MyStorageViewInput {
     
     func reloadCollectionView() {
         collectionView.reloadData()
+    }
+    
+    func showRestoreButton() {
+        restorePurchasesButton.isEnabled = true
+        restorePurchasesButton.isHidden = false
+        restoreDescriptionLabel.isHidden = false
+        view.layoutIfNeeded()
     }
 }
 
@@ -177,6 +188,7 @@ extension MyStorageViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - SubscriptionPlanCellDelegate
 extension MyStorageViewController: SubscriptionPlanCellDelegate {
+    
     func didPressSubscriptionPlanButton(at indexPath: IndexPath) {
         guard let plan = output?.displayableOffers[indexPath.row] else { return }
         

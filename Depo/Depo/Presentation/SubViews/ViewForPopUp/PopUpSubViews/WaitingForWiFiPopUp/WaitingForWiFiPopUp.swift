@@ -8,22 +8,27 @@
 
 import UIKit
 
-final class WaitingForWiFiPopUp: BaseView {
+final class WaitingForWiFiPopUp: BaseCardView {
 
-    @IBOutlet weak var titleLabel: UILabel?
-    @IBOutlet weak var settingsButton: CircleYellowButton?
+    @IBOutlet private weak var titleLabel: UILabel?
+    @IBOutlet private weak var settingsButton: CircleYellowButton?
+    
+    private let spacing: CGFloat = 2.1
     
     override func configurateView() {
         super.configurateView()
         
+        canSwipe = false
         titleLabel?.text = TextConstants.waitingForWiFiPopUpTitle
         titleLabel?.font = UIFont.TurkcellSaturaRegFont(size: 18)
         titleLabel?.textColor = ColorConstants.textGrayColor
         
         settingsButton?.setTitle(TextConstants.waitingForWiFiPopUpSettingsButton, for: .normal)
+        settingsButton?.setImage(UIImage(named: "CogForButtons"), for: .normal)
+        settingsButton?.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, spacing)
     }
     
-    @IBAction func onSettingsButton() {
+    @IBAction private func onSettingsButton() {
         let router = RouterVC()
         router.pushViewController(viewController: router.autoUpload)
     }

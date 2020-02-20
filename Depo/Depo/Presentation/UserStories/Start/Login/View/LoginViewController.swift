@@ -88,7 +88,6 @@ final class LoginViewController: ViewController {
             newValue.textField.autocapitalizationType = .none
             newValue.textField.autocorrectionType = .no
             newValue.textField.quickDismissPlaceholder = TextConstants.loginEmailOrPhonePlaceholder
-            newValue.textField.adjustsFontSizeToFitWidth = true
             newValue.titleLabel.text = TextConstants.loginCellTitleEmail
         }
     }
@@ -110,26 +109,26 @@ final class LoginViewController: ViewController {
             newValue.isHidden = true
         }
     }
-    
-    @IBOutlet private weak var supportView: SupportBannerView! {
-        willSet {
-            newValue.isHidden = true
-            newValue.message = TextConstants.loginSupportInfo
-        }
-    }
-    
+
     @IBOutlet private weak var errorView: ErrorBannerView! {
         willSet {
             newValue.isHidden = true
         }
     }
     
+    @IBOutlet private weak var bannerView: SupportFormBannerView! {
+        willSet {
+            newValue.isHidden = true
+            newValue.delegate = self
+            newValue.screenType = .login
+        }
+    }
+    
     //MARK: Vars
     var output: LoginViewOutput!
-    
     private let keyboard = Typist.shared
     
-    //MARK: Life cycle
+    //MARK: - Life cycle
     override var preferredNavigationBarStyle: NavigationBarStyle {
         return .clear
     }
@@ -142,7 +141,7 @@ final class LoginViewController: ViewController {
         output.viewIsReady()
         
         #if DEBUG
-        loginEnterView.textField.text = "qwerty@my.com"// "test3@test.test"//"test2@test.test"//"testasdasdMail@notRealMail.yep"
+        loginEnterView.textField.text = "mavokij291@4tmail.com"//"qwerty@my.com"// "test3@test.test"//"test2@test.test"//"testasdasdMail@notRealMail.yep"
 
         passwordEnterView.textField.text = "qwerty"// "zxcvbn"//".FsddQ646"
         #endif
@@ -163,7 +162,8 @@ final class LoginViewController: ViewController {
         prepareForDisappear()
     }
     
-    //MARK: Utility methods
+    //MARK: - Utility methods
+    
     private func setup() {
         setupDelegates()
         configureKeyboard()
@@ -171,8 +171,6 @@ final class LoginViewController: ViewController {
     
     private func setupDelegates() {
         output.prepareCaptcha(captchaView)
-        
-        supportView.delegate = self
         
         loginEnterView.textField.delegate = self
         passwordEnterView.textField.delegate = self
@@ -203,16 +201,21 @@ final class LoginViewController: ViewController {
     
     private func setupNavBar() {
         navigationBarWithGradientStyle()
+        
         setNavigationTitle(title: TextConstants.loginTitle)
         backButtonForNavigationItem(title: TextConstants.backTitle)
+        setNavigationRightBarButton(title: TextConstants.loginFAQButton, target: self, action: #selector(handleFaqButtonTap))
     }
     
+    @objc private func handleFaqButtonTap() {
+        output.openFaqSupport()
+    }
+
     private func prepareForDisappear() {
-        ///rootViewControlller's navBar is hidden. But on push we shouldn't hide it
+        ///rootViewController's navBar is hidden. But on push we shouldn't hide it
         if !output.isPresenting {
             navigationController?.setNavigationBarHidden(true, animated: true)
         }
-        
         output.isPresenting = false
     }
     
@@ -240,7 +243,8 @@ final class LoginViewController: ViewController {
         view.endEditing(true)
     }
     
-    //MARK: IBActions
+    //MARK: - IBActions
+    
     @IBAction func onRememberMeTap(_ sender: UIButton) {
         sender.isSelected.toggle()
         
@@ -264,7 +268,6 @@ final class LoginViewController: ViewController {
     @IBAction func onForgotPasswordTap(_ sender: Any) {
         output.onForgotPasswordTap()
     }
-    
 }
 
 extension LoginViewController: UITextFieldDelegate {
@@ -388,16 +391,18 @@ extension LoginViewController: LoginViewInput {
         captchaView.hideErrorAnimated()
     }
     
-    //MARK: Alerts processing
+    //MARK: - Alerts processing
+    
     func showSupportView() {
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.supportView.isHidden = false
-            
-            self.view.layoutIfNeeded()
-        }
+        bannerView.type = .support
+    }
+    
+    func showFAQView() {
+        bannerView.type = .faq
         
-        let supportViewRect = self.view.convert(supportView.frame, to: self.view)
-        scrollView.scrollRectToVisible(supportViewRect, animated: true)
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.bannerView.isHidden = false
+        }
     }
     
     func showErrorMessage(with text: String) {
@@ -408,7 +413,7 @@ extension LoginViewController: LoginViewInput {
             self.view.layoutIfNeeded()
         }
         
-        let errorViewRect = self.view.convert(errorView.frame, to: self.view)
+        let errorViewRect = view.convert(errorView.frame, to: view)
         scrollView.scrollRectToVisible(errorViewRect, animated: true)        
     }
     
@@ -444,9 +449,22 @@ extension LoginViewController: LoginViewInput {
     }
 }
 
-// MARK: - SupportBannerViewDelegate
-extension LoginViewController: SupportBannerViewDelegate {
-    func openSupport() {
-        output?.openSupport()
+extension LoginViewController: SupportFormBannerViewDelegate {
+   func supportFormBannerViewDidClick(_ bannerView: SupportFormBannerView) {
+        if bannerView.type == .support {
+            output?.openSupport()
+        } else {
+            bannerView.shouldShowPicker = true
+            bannerView.becomeFirstResponder()
+        }
+    }
+    
+    func supportFormBannerView(_ bannerView: SupportFormBannerView, didSelect type: SupportFormSubjectTypeProtocol) {
+        output.openSubjectDetails(type: type)
+    }
+  
+    func supportFormBannerViewDidCancel(_ bannerView: SupportFormBannerView) {
+        bannerView.resignFirstResponder()
+        scrollView.setContentOffset(.zero, animated: true)
     }
 }

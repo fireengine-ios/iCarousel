@@ -9,16 +9,10 @@
 import Foundation
 
 protocol UserProfileInteractorOutput: class {
-    
     func configurateUserInfo(userInfo: AccountInfoResponse)
-        
     func startNetworkOperation()
-    
     func stopNetworkOperation()
-    
-    func needSendOTP(responce: SignUpSuccessResponse, userInfo: AccountInfoResponse)
-    
+    func needSendOTP(response: SignUpSuccessResponse, userInfo: AccountInfoResponse)
     func showError(error: String)
-    
     func dataWasUpdated()
 }

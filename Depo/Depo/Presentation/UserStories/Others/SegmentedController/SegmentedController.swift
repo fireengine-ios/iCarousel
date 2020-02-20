@@ -22,7 +22,7 @@ extension SegmentedChildController where Self: UIViewController {
     func setTitle(_ title: String) {
         parentVC?.navigationItem.title = title
     }
-
+    
     func setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
         parentVC?.navigationItem.leftBarButtonItems = nil
         parentVC?.navigationItem.setLeftBarButtonItems(items, animated: animated)
@@ -38,16 +38,22 @@ extension SegmentedChildController where Self: UIViewController {
 //    func segmentedControllerEndEditMode()
 //}
 
-final class SegmentedController: BaseViewController, NibInit {
+class SegmentedController: BaseViewController, NibInit {
     
-    static func initWithControllers(_ controllers: [UIViewController]) -> SegmentedController {
+    enum Alignment {
+        case center
+        case adjustToWidth
+    }
+    
+    static func initWithControllers(_ controllers: [UIViewController], alignment: Alignment) -> SegmentedController {
         let controller = SegmentedController.initFromNib()
-        controller.setup(with: controllers)
+        controller.setup(with: controllers, alignment: alignment)
         return controller
     }
     
     @IBOutlet private weak var containerView: UIView!
     
+    @IBOutlet private weak var segmentedControlContainer: UIView!
     @IBOutlet private weak var segmentedControl: UISegmentedControl! {
         willSet {
             newValue.tintColor = ColorConstants.darkBlueColor
@@ -56,7 +62,8 @@ final class SegmentedController: BaseViewController, NibInit {
         }
     }
     
-    private var viewControllers: [BaseViewController] = []
+    private(set) var viewControllers = [BaseViewController]()
+    private var alignment: Alignment = .center
     
     var currentController: UIViewController {
         return viewControllers[safe: segmentedControl.selectedSegmentIndex] ?? UIViewController()
@@ -76,10 +83,10 @@ final class SegmentedController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        homePageNavigationBarStyle()//without refactor
-//        navigationBarWithGradientStyle()
+
         needToShowTabBar = true
         setupSegmentedControl()
+        setupAlignment()
     }
     
     private func setupSegmentedControl() {
@@ -91,7 +98,11 @@ final class SegmentedController: BaseViewController, NibInit {
         }
         
         for (index, controller) in viewControllers.enumerated() {
-            segmentedControl.insertSegment(withTitle: controller.title, at: index, animated: false)
+            if let image = controller.segmentImage?.image {
+                segmentedControl.insertSegment(with: image, at: index, animated: false)
+            } else {
+                segmentedControl.insertSegment(withTitle: controller.title, at: index, animated: false)
+            }
         }
         
         /// selectedSegmentIndex == -1 after removeAllSegments
@@ -99,12 +110,31 @@ final class SegmentedController: BaseViewController, NibInit {
         setupSelectedController(viewControllers[segmentedControl.selectedSegmentIndex])
     }
     
-    private func setup(with controllers: [UIViewController]) {
+    func setup(with controllers: [UIViewController], alignment: Alignment) {
         guard !controllers.isEmpty, let controllers = controllers as? [BaseViewController] else {
             assertionFailure()
             return
         }
         viewControllers = controllers
+        self.alignment = alignment
+    }
+    
+    private func setupAlignment() {
+        switch alignment {
+        case .center:
+            segmentedControl.leadingAnchor.constraint(greaterThanOrEqualTo: segmentedControlContainer.leadingAnchor, constant: 16).activate()
+            segmentedControlContainer.trailingAnchor.constraint(greaterThanOrEqualTo: segmentedControl.trailingAnchor, constant: 16).activate()
+        case .adjustToWidth:
+            segmentedControl.leadingAnchor.constraint(equalTo: segmentedControlContainer.leadingAnchor, constant: 16).activate()
+            segmentedControlContainer.trailingAnchor.constraint(equalTo: segmentedControl.trailingAnchor, constant: 16).activate()
+        }
+    }
+    
+    func switchSegment(to index: Int) {
+        if segmentedControl.numberOfSegments > index, segmentedControl.selectedSegmentIndex != index {
+            segmentedControl.selectedSegmentIndex = index
+            segmentDidChange(segmentedControl)
+        }
     }
     
     @IBAction private func segmentDidChange(_ sender: UISegmentedControl) {
@@ -133,6 +163,7 @@ final class SegmentedController: BaseViewController, NibInit {
         childController.didMove(toParentViewController: self)
     }
 }
+
 
 //extension SegmentedController: PhotoVideoDataSourceDelegate {
 //    func selectedModeDidChange(_ selectingMode: Bool) {

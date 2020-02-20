@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class AnimationCard: BaseView {
+class AnimationCard: BaseCardView {
 
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
@@ -49,11 +49,7 @@ class AnimationCard: BaseView {
             }
         }
     }
-    
-    override func viewWillShow() {
-        photoImageView.showDownloadedGif()
-    }
-    
+        
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
         
@@ -75,7 +71,12 @@ class AnimationCard: BaseView {
         item.syncStatus = .synced
         item.isLocalItem = false
         self.item = item
-        photoImageView.loadGifImageFromURL(url: item.tmpDownloadUrl)
+    }
+    
+    override func viewWillShow() {
+        debugLog("Animation Card - start load image")
+        photoImageView.setLogs(enabled: true)
+        photoImageView.loadImageData(with: item?.tmpDownloadUrl)
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {
@@ -88,7 +89,7 @@ class AnimationCard: BaseView {
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
-        guard let image = photoImageView.image else { return }
+        guard let image = photoImageView.originalImage else { return }
         
         let vc = PVViewerController.initFromNib()
         vc.image = image
@@ -137,10 +138,15 @@ class AnimationCard: BaseView {
     private func showPhotoVideoDetail() {
         guard let item = item else { return }
         
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item])
-        controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = UINavigationController(rootViewController: controller)
-        RouterVC().presentViewController(controller: nController)
+        let router = RouterVC()
+        let detailModule = router.filesDetailModule(fileObject: item,
+                                                    items: [item],
+                                                    status: .active,
+                                                    canLoadMoreItems: false,
+                                                    moduleOutput: nil)
+
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        router.presentViewController(controller: nController)
     }
 
     override func spotlightHeight() -> CGFloat {

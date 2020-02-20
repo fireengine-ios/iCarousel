@@ -20,22 +20,21 @@ extension PasscodeSettingsRouter: PasscodeSettingsRouterInput {
     func changePasscode(isTurkCellUser: Bool) {
         let vc = PasscodeEnterViewController.with(flow: .setNew, navigationTitle: TextConstants.passcodeSetTitle)
         vc.isTurkCellUser = isTurkCellUser
-        let routerVC = RouterVC()
         vc.success = {
-            routerVC.navigationController?.popViewController(animated: true)
+            self.router.navigationController?.popViewController(animated: true)
         }
-        routerVC.pushViewController(viewController: vc)
+        
+        router.pushViewController(viewController: vc)
     }
     
     func setPasscode(isTurkCellUser: Bool, finishCallBack: (() -> Void)?) {
         let vc = PasscodeEnterViewController.with(flow: .create, navigationTitle: TextConstants.passcodeSetTitle)
         vc.isTurkCellUser = isTurkCellUser
-        let routerVC = RouterVC()
         vc.success = {
             finishCallBack?()
-            routerVC.navigationController?.popViewController(animated: true)
-
+            self.router.navigationController?.popViewController(animated: true)
         }
-        routerVC.pushViewController(viewController: vc)
+        
+        router.pushViewController(viewController: vc)
     }
 }

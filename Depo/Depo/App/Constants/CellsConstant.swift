@@ -12,7 +12,6 @@ struct CellsIdConstants {
     static let baseUserInputCellViewID = "BaseUserInputCellViewID"
     static let loginPhoneMailCellID = "LoginPhoneMailCellID"
     static let passwordCellID = "PasswordCellID"
-    static let gSMUserInputCellID = "GSMUserInputCellID"
     static let autoSyncSwitcherCellID = "AutoSyncSwitcherTableViewCell"
     static let autoSyncSettingsCellID = "AutoSyncSettingsTableViewCell"
     static let periodicContactSyncSettingsCellID = "PeriodicContactSyncSettingsTableViewCell"
@@ -26,8 +25,10 @@ struct CellsIdConstants {
     static let facebookAccountConnectionCell = "FacebookAccountConnectionCell"
     static let dropboxAccountConnectionCell = "DropboxAccountConnectionCell"
     static let instagramAccountConnectionCell = "InstagramAccountConnectionCell"
+    static let spotifyAccountConnectionCell = "SpotifyAccountConnectionCell"
     static let socialAccountRemoveConnectionCell = "SocialAccountRemoveConnectionCell"
     static let createStoryAudioItemCell = "CreateStoryAudioItemCell"
+    static let twoFactorAuthenticationCell = "TwoFactorAuthenticationCell"
 }
 
 struct CollectionViewCellsIdsConstant {
@@ -53,4 +54,5 @@ struct CollectionViewSuplementaryConstants {
     static let collectionViewHeaderWithText = "CollectionViewHeaderWithText"
     static let collectionViewSpinnerFooter = "CollectionViewSpinnerFooter"
     static let collectionViewPremiumFooter = "PremiumFooterCollectionReusableView"
+    static let collectionViewCarouselPagerHeader = "CarouselPagerReusableViewController"
 }

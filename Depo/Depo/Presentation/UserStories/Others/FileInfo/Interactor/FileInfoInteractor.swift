@@ -19,15 +19,12 @@ final class FileInfoInteractor {
 
 extension FileInfoInteractor: FileInfoInteractorInput {
     
-    func setObject(object: BaseDataSourceItem) {
-        item = object
-    }
-    
     func viewIsReady() {
-        if let item = item {
-            output.setObject(object: item)
-            AnalyticsService().logScreen(screen: .info(item.fileType))
+        guard let item = item else {
+            return
         }
+        output.setObject(object: item)
+        AnalyticsService().logScreen(screen: .info(item.fileType))
     }
     
     func onRename(newName: String) {
@@ -45,9 +42,11 @@ extension FileInfoInteractor: FileInfoInteractorInput {
             let renameFile = RenameFile(uuid: file.uuid, newName: newName)
             FileService().rename(rename: renameFile, success: { [weak self] in
                 DispatchQueue.main.async {
+                    self?.item?.name = newName
                     self?.output.updated()
-                    if let file = self?.item {
-                        file.name = newName
+                    
+                    if let item = self?.item {
+                        ItemOperationManager.default.didRenameItem(item)
                     }
                 }
                 }, fail: { [weak self] error in
@@ -61,10 +60,8 @@ extension FileInfoInteractor: FileInfoInteractorInput {
             let renameAlbum = RenameAlbum(albumUUID: album.uuid, newName: newName)
             PhotosAlbumService().renameAlbum(parameters: renameAlbum, success: { [weak self] in
                 DispatchQueue.main.async {
+                    self?.item?.name = newName
                     self?.output.updated()
-                    if let file = self?.item {
-                        file.name = newName
-                    }
                 }
                 }, fail: { [weak self] error in
                     DispatchQueue.main.async {

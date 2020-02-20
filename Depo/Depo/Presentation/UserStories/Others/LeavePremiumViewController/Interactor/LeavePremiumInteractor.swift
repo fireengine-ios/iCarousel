@@ -32,16 +32,16 @@ final class LeavePremiumInteractor {
 extension LeavePremiumInteractor: LeavePremiumInteractorInput {
     func getActiveSubscription() {
         subscriptionsService.activeSubscriptions(success: { [weak self] response in
-            guard let subscriptionsResponce = response as? ActiveSubscriptionResponse else {
+            guard let subscriptionsResponse = response as? ActiveSubscriptionResponse else {
                 let error = CustomErrors.serverError("An error occured while getting active subscription")
                 DispatchQueue.toMain {
                     self?.output.didErrorMessage(with: error.localizedDescription)
                 }
                 return
             }
-            SingletonStorage.shared.activeUserSubscription = subscriptionsResponce
+            SingletonStorage.shared.activeUserSubscription = subscriptionsResponse
             DispatchQueue.toMain {
-                self?.output.didLoadActiveSubscriptions(subscriptionsResponce.list)
+                self?.output.didLoadActiveSubscriptions(subscriptionsResponse.list)
             }
         }) { [weak self] error in
             DispatchQueue.toMain {
@@ -55,7 +55,7 @@ extension LeavePremiumInteractor: LeavePremiumInteractorInput {
     }
     
     func getAppleInfo(for offer: SubscriptionPlanBaseResponse) {
-        packageService.getInfoForAppleProducts(offers: [offer], success: { [weak self] in
+        packageService.getInfoForAppleProducts(offers: [offer], isActivePurchases: true, success: { [weak self] in
             DispatchQueue.toMain {
                 self?.output.didLoadInfoFromApple()
             }
@@ -66,7 +66,7 @@ extension LeavePremiumInteractor: LeavePremiumInteractorInput {
         })
     }
     
-    func getAccountType(with accountType: String, offers: [Any]) -> AccountType {
+    func getAccountType(with accountType: String, offers: [Any]) -> AccountType? {
         return packageService.getAccountType(for: accountType, offers: offers)
     }
     
@@ -78,6 +78,7 @@ extension LeavePremiumInteractor: LeavePremiumInteractorInput {
         case .middle:
             screenTypeGA = .standartPlusAccountDetails
         case .premium:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PremiumDetailsScreen())
             screenTypeGA = .premiumAccountDetails
         }
         analyticsService.logScreen(screen: screenTypeGA)

@@ -21,6 +21,7 @@ class SplashInteractor: SplashInteractorInput {
     
     private var isTryingToLogin = false
     private var isReachabilityStarted = false
+    private var isFirstLogin = false
     
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
@@ -37,6 +38,10 @@ class SplashInteractor: SplashInteractorInput {
         isReachabilityStarted = true
         
         reachabilityService.delegates.add(self)
+    }
+    
+    func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SplashPageScreen())
     }
     
     func startLoginInBackground() {
@@ -64,26 +69,35 @@ class SplashInteractor: SplashInteractorInput {
     
     private func loginInBackground() {
         setupReachabilityIfNeed()
-        
         if tokenStorage.accessToken == nil {
             if reachabilityService.isReachableViaWiFi {
                 isTryingToLogin = false
-                analyticsService.trackLoginEvent(error: .serverError)
                 failLogin()
 //                isTryingToLogin = false
-            } else {
+            ///Additional check "if this is LTE",
+            ///because our check for wifife or LTE looks like this:
+                ///"self.reachability?.connection == .cellular && apiReachability.connection == .reachable"
+            ///There is possability that we fall through to else, only because of no longer reachable internet.
+            ///So we check second time.
+            } else if reachabilityService.isReachableViaWWAN {
                 authenticationService.turkcellAuth(success: { [weak self] in
+                    AccountService().updateBrandType()
+                    
                     AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
                     self?.tokenStorage.isRememberMe = true
                     
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                         
+                        SingletonStorage.shared.isJustRegistered = false
+                        self?.isFirstLogin = true
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .turkcell))
                         self?.turkcellSuccessLogin()
                         self?.isTryingToLogin = false
                     }, fail: { [weak self] error in
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .turkcell))
                         self?.isTryingToLogin = false
                         let loginError = LoginResponseError(with: error)
-                        self?.analyticsService.trackLoginEvent(error: loginError)
+                        self?.analyticsService.trackLoginEvent(loginType: .turkcellGSM, error: loginError)
                         self?.output.asyncOperationSuccess()
                         if error.isServerUnderMaintenance {
                             self?.output.onFailGetAccountInfo(error: error)
@@ -92,8 +106,9 @@ class SplashInteractor: SplashInteractorInput {
                         }
                     })
                 }, fail: { [weak self] response in
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .turkcell))
                     let loginError = LoginResponseError(with: response)
-                    self?.analyticsService.trackLoginEvent(error: loginError)
+                    self?.analyticsService.trackLoginEvent(loginType: .turkcellGSM, error: loginError)
                     self?.output.asyncOperationSuccess()
                     if response.isServerUnderMaintenance {
                         self?.output.onFailGetAccountInfo(error: response)
@@ -102,15 +117,25 @@ class SplashInteractor: SplashInteractorInput {
                     }
                     self?.isTryingToLogin = false
                 })
+            } else {
+                output.asyncOperationSuccess()
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .rememberMe))
+                analyticsService.trackLoginEvent(loginType: .rememberLogin, error: .networkError)
+                failLogin()
             }
         } else {
             refreshAccessToken { [weak self] in
                 /// self can be nil due logout
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                    CacheManager.shared.actualizeCache(completion: nil)
+                    CacheManager.shared.actualizeCache()
                     self?.isTryingToLogin = false
-                    self?.successLogin()
-                }, fail: { error in
+                    SingletonStorage.shared.isJustRegistered = false
+                    SingletonStorage.shared.getOverQuotaStatus {
+                        self?.successLogin()
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .rememberMe))
+                    }
+                }, fail: { [weak self] error in
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .rememberMe))
                     /// we don't need logout here
                     /// only internet error
                     //self?.failLogin()
@@ -129,7 +154,7 @@ class SplashInteractor: SplashInteractorInput {
     
     func turkcellSuccessLogin() {
 
-        analyticsService.trackLoginEvent(loginType: GADementionValues.login.turkcellGSM)
+        analyticsService.trackLoginEvent(loginType: .turkcellGSM)
 //        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
 
         DispatchQueue.toMain {
@@ -138,7 +163,7 @@ class SplashInteractor: SplashInteractorInput {
     }
     
     func successLogin() {
-        analyticsService.trackLoginEvent(loginType: GADementionValues.login.rememberLogin)
+        analyticsService.trackLoginEvent(loginType: .rememberLogin)
 //        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success, eventValue: GADementionValues.login.turkcellGSM.text)
         DispatchQueue.toMain {
             self.output.onSuccessLogin()
@@ -157,16 +182,16 @@ class SplashInteractor: SplashInteractorInput {
     
     func checkEULA() {
         let eulaService = EulaService()
-        eulaService.eulaCheck(success: { [weak self] successResponce in
+        eulaService.eulaCheck(success: { [weak self] successResponse in
             DispatchQueue.toMain {
                 self?.output.onSuccessEULA()
             }
-        }) { [weak self] errorResponce in
+        }) { [weak self] errorResponse in
             DispatchQueue.toMain {
-                if case ErrorResponse.error(let error) = errorResponce, error.isNetworkError {
-                    UIApplication.showErrorAlert(message: errorResponce.description)
+                if case ErrorResponse.error(let error) = errorResponse, error.isNetworkError {
+                    UIApplication.showErrorAlert(message: errorResponse.description)
                 } else {
-                    self?.output.onFailEULA()
+                    self?.output.onFailEULA(isFirstLogin: self?.isFirstLogin == true)
                 }
             }
         }

@@ -19,23 +19,29 @@ class LoginInteractor: LoginInteractorInput {
     
     weak var output: LoginInteractorOutput?
     
-    private let authService = AuthenticationService()
-    
-    private lazy var tokenStorage: TokenStorage = factory.resolve()
-    private lazy var authenticationService = AuthenticationService()
-    private lazy var eulaService = EulaService()
-    private lazy var accountService = AccountService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
+    
+    private lazy var authenticationService = AuthenticationService()
+    private lazy var authService = AuthenticationService()
+    private lazy var contactsService = ContactService()
+    private lazy var accountService = AccountService()
+    private lazy var eulaService = EulaService()
+    
     private var periodicContactSyncDataStorage = PeriodicContactSyncDataStorage()
-    private let contactsService = ContactService()
     private let storageVars: StorageVars
+    
+    private var accountWarningService: AccountWarningService?
 
     private var rememberMe: Bool = true
     
     private var attempts: Int = 0
+    
     private var loginRetries = 0 {
         didSet {
-            if loginRetries > 2 {
+            if loginRetries == NumericConstants.showFAQViewAttempts {
+                output?.showFAQView()
+            } else if loginRetries >= NumericConstants.showSupportViewAttempts {
                 output?.showSupportView()
             }
         }
@@ -65,6 +71,53 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     //MARK: Utility Methods(private)
+    private func hasEmptyPhone(accountWarning: String) -> Bool {
+        return accountWarning == HeaderConstant.emptyMSISDN
+    }
+    
+    private func hasAccountDeletedStatus(headers: [String: Any]) -> Bool {
+        guard let accountStatus = headers[HeaderConstant.accountStatus] as? String else {
+            return false
+        }
+        
+        return accountStatus.uppercased() == ErrorResponseText.accountDeleted
+    }
+    
+    private func proccessLoginHeaders(headers: [String: Any], login: String, errorHandler: @escaping (LoginResponseError, String) -> Void) {
+        self.emptyEmailCheck(for: headers)
+        var handler: VoidHandler?
+        
+        if let accountWarning = headers[HeaderConstant.accountWarning] as? String {
+            /// If server returns accountWarning and accountDeletedStatus, popup is need to be shown
+            if hasEmptyPhone(accountWarning: accountWarning), hasAccountDeletedStatus(headers: headers) {
+                handler = {
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .email))
+                    errorHandler(.emptyPhone, HeaderConstant.emptyMSISDN)
+                }
+            } else if self.hasAccountDeletedStatus(headers: headers) {
+                handler = { [weak self] in
+                    self?.processLogin(login: login, headers: headers)
+                }
+            } else if self.hasEmptyPhone(accountWarning: accountWarning) {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .email))
+                errorHandler(.emptyPhone, HeaderConstant.emptyMSISDN)
+                return
+            }
+        } else if self.hasAccountDeletedStatus(headers: headers) {
+            handler = { [weak self] in
+                self?.processLogin(login: login, headers: headers)
+            }
+        }
+        
+        if let handler = handler {
+            self.output?.loginDeletedAccount(deletedAccountHandler: handler)
+            
+            self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .deleteAccount, eventLabel: .login)
+        } else {
+            self.processLogin(login: login, headers: headers)
+        }
+    }
+    
     private func authificate(login: String,
                              password: String,
                              atachedCaptcha: CaptchaParametrAnswer?,
@@ -99,9 +152,12 @@ class LoginInteractor: LoginInteractorInput {
             return
         }
         
+        let loginType: GADementionValues.login = Validator.isValid(phone: login) ? .gsm : .email
+        
         if !Validator.isValid(email: login) && !Validator.isValid(phone: login) {
-            analyticsService.trackLoginEvent(error: .incorrectUsernamePassword)
+            analyticsService.trackLoginEvent(loginType: loginType, error: .incorrectUsernamePassword)
             output?.fieldError(type: .loginIsNotValid)
+            loginRetries += 1
             return
         }
         
@@ -114,35 +170,22 @@ class LoginInteractor: LoginInteractorInput {
                                       attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] headers in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             
-            self.setContactSettingsForUser()
-            
-            self.emptyEmailCheck(for: headers)
-            
-            debugLog("login isRememberMe \(self.rememberMe)")
-            self.tokenStorage.isRememberMe = self.rememberMe
-            self.analyticsService.track(event: .login)
-            
-            if Validator.isValid(email: login) {
-                self.analyticsService.trackLoginEvent(loginType: .email)
-            } else {
-                self.analyticsService.trackLoginEvent(loginType: .gsm)
-            }
-            
-            self.loginRetries = 0
-            
-            self.accountService.updateBrandType()
-            
-            DispatchQueue.main.async {
-                self.output?.succesLogin()
-            }
+            self.proccessLoginHeaders(headers: headers, login: login, errorHandler: errorHandler)
             
         }, fail: { [weak self] errorResponse in
             let loginError = LoginResponseError(with: errorResponse)
-            self?.analyticsService.trackLoginEvent(error: loginError)
+            self?.analyticsService.trackLoginEvent(loginType: loginType, error: loginError)
+            
+            if Validator.isValid(email: login) {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .email))
+            } else if Validator.isValid(phone: login) {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .phone))
+            }
+            
             
             if !(loginError == .needCaptcha || loginError == .noInternetConnection) {
                 self?.loginRetries += 1
@@ -150,10 +193,43 @@ class LoginInteractor: LoginInteractorInput {
             
             if loginError == .incorrectUsernamePassword {
                 self?.attempts += 1
+                self?.loginRetries += 1
             }
             
             errorHandler(loginError, errorResponse.description)
+            
+        }, twoFactorAuth: { [weak self] response in
+            guard let self = self else {
+                return
+            }
+            
+            self.tokenStorage.isRememberMe = self.rememberMe
+            self.output?.showTwoFactorAuthViewController(response: response)
         })
+    }
+    
+    private func processLogin(login: String, headers: [String: Any]) {
+        self.setContactSettingsForUser()
+                
+        debugLog("login isRememberMe \(self.rememberMe)")
+        self.tokenStorage.isRememberMe = self.rememberMe
+        self.analyticsService.track(event: .login)
+        
+        if Validator.isValid(email: login) {
+            self.analyticsService.trackLoginEvent(loginType: .email)
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .email))
+        } else {
+            self.analyticsService.trackLoginEvent(loginType: .gsm)
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .phone))
+        }
+        
+        self.loginRetries = 0
+        
+        self.accountService.updateBrandType()
+        
+        DispatchQueue.main.async {
+            self.output?.succesLogin()
+        }
     }
     
     private func setContactSettingsForUser() {
@@ -198,7 +274,7 @@ class LoginInteractor: LoginInteractorInput {
                 self.accountService.updateBrandType()
                 
                 self.tokenStorage.isRememberMe = self.rememberMe
-                self.output?.successedSilentLogin()
+                self.output?.succesLogin()
             }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async { [weak self] in
@@ -207,7 +283,7 @@ class LoginInteractor: LoginInteractorInput {
         })
     }
     
-    private func tryToRelogin() {
+    func tryToRelogin() {
         guard let login = login, let password = password else {
             assertionFailure()
             return
@@ -218,7 +294,6 @@ class LoginInteractor: LoginInteractorInput {
                 guard let `self` = self else {
                     return
                 }
-                
                 self.output?.successedVerifyPhone()
             }
         }
@@ -235,8 +310,13 @@ class LoginInteractor: LoginInteractorInput {
     }
         
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.LoginScreen())
         analyticsService.logScreen(screen: .loginScreen)
         analyticsService.trackDimentionsEveryClickGA(screen: .loginScreen)
+    }
+    
+    func trackSupportSubjectEvent(type: SupportFormSubjectTypeProtocol) {
+        analyticsService.trackSupportEvent(screenType: .login, subject: type, isSupportForm: false)
     }
     
     func rememberMe(state: Bool) {
@@ -306,59 +386,6 @@ class LoginInteractor: LoginInteractorInput {
 //        dataStorage.blockDate = nil
     }
     
-    func getTokenToUpdatePhone(for phoneNumber: String) {
-        let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
-        accountService.updateUserPhone(parameters: parameters, success: { [weak self] responce in
-            guard let signUpResponce = responce as? SignUpSuccessResponse else {
-                return
-            }
-            DispatchQueue.main.async {
-                self?.output?.successed(tokenUpdatePhone: signUpResponce)
-            }
-        }, fail: { [weak self] error in
-            DispatchQueue.main.async {
-                self?.output?.failedUpdatePhone(errorResponse: error)
-            }
-        })
-    }
-    
-    func getResendTokenToUpdatePhone(for phoneNumber: String) {
-        let parameters = UserPhoneNumberParameters(phoneNumber: phoneNumber)
-        accountService.updateUserPhone(parameters: parameters, success: { [weak self] responce in
-            guard let signUpResponce = responce as? SignUpSuccessResponse else {
-                return
-            }
-            DispatchQueue.main.async {
-                self?.output?.successed(resendUpdatePhone: signUpResponce)
-            }
-            }, fail: { [weak self] error in
-                DispatchQueue.main.async {
-                    self?.output?.failedResendUpdatePhone(errorResponse: error)
-                }
-        })
-    }
-    
-    func verifyPhoneNumber(token: String, code: String) {
-        let parameters = VerifyPhoneNumberParameter(otp: code, referenceToken: token)
-        accountService.verifyPhoneNumber(parameters: parameters, success: { [weak self] baseResponse in
-            
-            if let response = baseResponse as? ObjectRequestResponse,
-                let silentToken = response.responseHeader?[HeaderConstant.silentToken] as? String {
-                
-                self?.silentLogin(token: silentToken)
-            } else {
-                DispatchQueue.main.async {
-                    self?.tryToRelogin()
-                }
-            }
-            
-        }) { [weak self] errorRespose in
-            DispatchQueue.main.async {
-                self?.output?.failedVerifyPhone(errorString: TextConstants.phoneVereficationNonValidCodeErrorText)
-            }
-        }
-    }
-    
     func updateUserLanguage() {
         authService.updateUserLanguage(Device.supportedLocale) { [weak self] result in
             DispatchQueue.main.async {
@@ -376,25 +403,34 @@ class LoginInteractor: LoginInteractorInput {
         CaptchaSignUpRequrementService().getCaptchaRequrement { [weak self] response in
             switch response {
             case .success(let boolResult):
-                self?.output?.captchaRequred(requred: boolResult)
+                self?.output?.captchaRequired(required: boolResult)
             case .failed(let error):
                 if error.isServerUnderMaintenance {
-                    self?.output?.captchaRequredFailed(with: error.description)
+                    self?.output?.captchaRequiredFailed(with: error.description)
                 } else {
-                    self?.output?.captchaRequredFailed()
+                    self?.output?.captchaRequiredFailed()
                 }
             }
         }
         ///Implementation with old request bellow
 //        captchaService.getSignUpCaptchaRequrement(sucess: { [weak self] succesResponse in
-//            guard let succesResponse = succesResponse as? CaptchaSignUpRequrementResponse else {
-//                self?.output?.captchaRequredFailed()
+//            guard let succesResponse = succesResponse as? CaptchaSignUpRequirementResponse else {
+//                self?.output?.captchaRequiredFailed()
 //                return
 //            }
-//            self?.output?.captchaRequred(requred: succesResponse.captchaRequred)
+//            self?.output?.captchaRequired(required: succesResponse.captchaRequired)
 //        }) { [weak self] errorResponse in
-//            self?.output?.captchaRequredFailed()
+//            self?.output?.captchaRequiredFailed()
 //        }
+    }
+    
+    func updateEmptyPhone(delegate: AccountWarningServiceDelegate) {
+        accountWarningService = AccountWarningService(delegate: delegate)
+        accountWarningService?.start()
+    }
+    
+    func stopUpdatePhone() {
+        accountWarningService?.stop()
     }
     
 }

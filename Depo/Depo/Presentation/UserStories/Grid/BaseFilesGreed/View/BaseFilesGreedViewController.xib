@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -107,13 +107,18 @@
                         <constraint firstItem="UTy-IA-Avr" firstAttribute="centerX" secondItem="ZI3-Dh-bXS" secondAttribute="centerX" id="gSt-4w-qVr"/>
                     </constraints>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Stl-Nh-W5a" userLabel="carouselContainer">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="acy-kT-cr5">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" id="J3A-WS-4mi"/>
-                    </constraints>
-                </view>
+                    <subviews>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Stl-Nh-W5a" userLabel="carouselContainer">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" id="J3A-WS-4mi"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -124,9 +129,10 @@
                 <constraint firstItem="ZI3-Dh-bXS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="KWm-Z2-COp"/>
                 <constraint firstItem="Umz-wA-WsK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KWu-1M-rJ8"/>
                 <constraint firstItem="e3K-s6-bzd" firstAttribute="trailing" secondItem="0Sm-wn-Msc" secondAttribute="trailing" id="OF6-lw-Hr7"/>
+                <constraint firstItem="acy-kT-cr5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Pc9-mh-5Fq"/>
                 <constraint firstItem="Umz-wA-WsK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="TwY-91-F59"/>
-                <constraint firstItem="0Sm-wn-Msc" firstAttribute="top" secondItem="Stl-Nh-W5a" secondAttribute="bottom" id="Tzl-Wf-Mm3"/>
                 <constraint firstAttribute="trailing" secondItem="Umz-wA-WsK" secondAttribute="trailing" id="X5G-x9-7Af"/>
+                <constraint firstAttribute="trailing" secondItem="acy-kT-cr5" secondAttribute="trailing" id="YJQ-NI-Crx"/>
                 <constraint firstItem="0Sm-wn-Msc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="YzH-h9-xQd">
                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                 </constraint>
@@ -136,10 +142,9 @@
                 <constraint firstItem="ZI3-Dh-bXS" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="1.07" id="ecm-g2-fmI"/>
                 <constraint firstAttribute="trailing" secondItem="ZI3-Dh-bXS" secondAttribute="trailing" constant="16" id="fRH-8S-qhb"/>
                 <constraint firstAttribute="trailing" secondItem="0lC-K4-1ac" secondAttribute="trailing" constant="16" id="hq9-pl-y0n"/>
-                <constraint firstItem="Stl-Nh-W5a" firstAttribute="top" secondItem="THw-xy-ykx" secondAttribute="top" id="iXp-3s-EIa"/>
-                <constraint firstAttribute="trailing" secondItem="Stl-Nh-W5a" secondAttribute="trailing" id="vnj-3r-PKk"/>
+                <constraint firstItem="0Sm-wn-Msc" firstAttribute="top" secondItem="acy-kT-cr5" secondAttribute="bottom" id="t0N-2A-ZnV"/>
                 <constraint firstItem="e3K-s6-bzd" firstAttribute="top" secondItem="0Sm-wn-Msc" secondAttribute="top" id="wQN-PB-XI0"/>
-                <constraint firstItem="Stl-Nh-W5a" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="y3K-Sk-r6D"/>
+                <constraint firstItem="acy-kT-cr5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="wsG-gx-aXa"/>
                 <constraint firstItem="0lC-K4-1ac" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="150" id="zaN-Ab-UGW"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

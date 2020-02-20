@@ -30,7 +30,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func startUsing() {
         if confirmAgreements, interactor.cameFromRegistration {
-            router.goToPhoneVerefication(withSignUpSuccessResponse: interactor.signUpSuccessResponse,
+            router.goToPhoneVerification(withSignUpSuccessResponse: interactor.signUpSuccessResponse,
                                          userInfo: interactor.userInfo)
         } else if confirmAgreements {
             interactor.applyEula()
@@ -39,9 +39,13 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         }
     }
     
+    /// not called for registration. search 'needToOpenAutoSync' in PhoneVerificationPresenter for it
     func eulaApplied() {
+        /// from login
         if interactor.cameFromLogin {
             router.goToAutoSync()
+            
+        /// from splash
         } else {
             router.goToHomePage()
         }

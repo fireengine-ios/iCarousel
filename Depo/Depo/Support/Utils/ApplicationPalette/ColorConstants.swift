@@ -28,6 +28,7 @@ struct ColorConstants {
     static let searchShadowColor = UIColor(red: 29 / 255, green: 29 / 255, blue: 29 / 255, alpha: 0.49)
     static let darkText = UIColor(red: 77 / 255, green: 77 / 255, blue: 77 / 255, alpha: 1)
     static let lightText = UIColor(red: 127 / 255, green: 127 / 255, blue: 127 / 255, alpha: 1)
+    static let placeholderGrayColor = UIColor(red: 127 / 255, green: 127 / 255, blue: 127 / 255, alpha: 0.5)
     static let activityTimelineDraws = UIColor(red: 6 / 255, green: 44 / 255, blue: 66 / 255, alpha: 1)
     static let lightPeach = UIColor(red: 255 / 255, green: 226 / 255, blue: 198 / 255, alpha: 1)
     static let yellowButtonColor = UIColor(red: 1, green: 199 / 255, blue: 77 / 255, alpha: 1)
@@ -39,6 +40,7 @@ struct ColorConstants {
     static let bottomViewGrayColor = UIColor(red: 248 / 255, green: 248 / 255, blue: 248 / 255, alpha: 1)
     static let blackForLanding = UIColor(red: 12 / 255, green: 6 / 255, blue: 42 / 255, alpha: 1)
     static let darkGrayTransperentColor = UIColor(red: 0 / 255, green: 0 / 255, blue: 0 / 255, alpha: 0.54)
+    static let lightGray = UIColor(red: 104.0 / 255.0, green: 108.0 / 255.0, blue: 128.0 / 255.0, alpha: 1.0)
     
     static let orangeGradientStart = UIColor(red: 255 / 255, green: 177 / 255, blue: 33 / 255, alpha: 1)
     static let orangeGradientEnd = UIColor(red: 255 / 255, green: 183 / 255, blue: 116 / 255, alpha: 1)
@@ -60,10 +62,41 @@ struct ColorConstants {
     static let alertBlueGradientStart = UIColor(red: 82 / 255, green: 120 / 255, blue:  243 / 255, alpha: 1.0)
     static let alertBlueGradientEnd = UIColor(red: 41 / 255, green: 201 / 255, blue: 236 / 255, alpha: 1.0)
     
+    static let alertOrangeAndBlueGradientStart = UIColor(red: 255 / 255, green: 168 / 255, blue:  16 / 255, alpha: 1.0)
+    static let alertOrangeAndBlueGradientEnd = UIColor(red: 67 / 255, green: 204 / 255, blue: 208 / 255, alpha: 1.0)
+    
+    static let subjectPickerBackgroundColor = UIColor(red: 208/255, green: 211/255, blue: 216/255, alpha: 1)
+    static let toolbarTintColor = UIColor(red: 249/255, green: 249/255, blue: 249/255, alpha: 1)
+    static let buttonTintColor = UIColor(red: 73/255, green: 206/255, blue: 205/255, alpha: 1)
+    static let closeIconButtonColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1)
+    
     static let cloudyBlue = UIColor(red: 197 / 255.0, green: 200.0 / 255.0, blue: 216 / 255.0, alpha: 1.0)
     static let blueGrey = UIColor(red: 139 / 255.0, green: 143 / 255.0, blue: 164 / 255.0, alpha: 1.0)
     static let coolGrey = UIColor(red: 179 / 255.0, green: 181 / 255.0, blue: 191 / 255.0, alpha: 1.0)
     static let choosenSelectedButtonColor = UIColor(red: 250/255, green: 155/255, blue: 77/255, alpha: 1)
+    static let lighterGray = UIColor(red: 240 / 255.0, green: 240 / 255.0, blue: 240 / 255.0, alpha: 1.0)
+    static let darkTintGray = UIColor(red: 225 / 255.0, green: 225 / 255.0, blue: 225 / 255.0, alpha: 1.0)
+    static let textDisabled = UIColor.black.withAlphaComponent(0.25)
+    
+    static let charcoalGrey = UIColor(red: 56 / 255.0, green: 59 / 255.0, blue: 65 / 255.0, alpha: 1.0)
+    static let marineTwo = UIColor(red: 6 / 255.0, green: 44 / 255.0, blue: 67 / 255.0, alpha: 1.0)
+    static let tealishThree = UIColor(red: 40 / 255.0, green: 169 / 255.0, blue: 173 / 255.0, alpha: 1.0)
+    
+    static let popUpBackground = UIColor(red: 0, green: 0, blue: 0, alpha: 0.33)
+    
+    static let tealBlue = UIColor(red: 0, green: 124 / 255.0, blue: 171 / 255.0, alpha: 1.0)
+    static let seaweed = UIColor(red: 30 / 255.0, green: 215 / 255.0, blue: 128 / 255.0, alpha: 1.0)
+    static let blueGreen = UIColor(red: 13 / 255.0, green: 164 / 255.0, blue: 152 / 255.0, alpha: 1.0)
+    
+    static let lightTeal = UIColor(red: 142 / 255.0, green: 221 / 255.0, blue: 221 / 255.0, alpha: 1.0)
+    static let apricotTwo = UIColor(red: 251 / 255.0, green: 188 / 255.0, blue: 104 / 255.0, alpha: 1.0)
+    static let rosePink = UIColor(red: 249 / 255.0, green: 140 / 255.0, blue: 148 / 255.0, alpha: 1.0)
+    static let backgroundViewColor = UIColor.black.withAlphaComponent(0.5)
+    
+    static let billoBlue = UIColor(red: 0, green: 174 / 255.0, blue: 233 / 255.0, alpha: 1.0)
+    static let billoDarkBlue = UIColor(red: 0, green: 153 / 255.0, blue: 219 / 255.0, alpha: 1.0)
+    static let billoGray = UIColor(red: 109 / 255.0, green: 109 / 255.0, blue: 109 / 255.0, alpha: 1.0)
+    static let stickerBorderColor = UIColor(red: 59 / 255.0, green: 80 / 255.0, blue: 90 / 255.0, alpha: 1)
 }
 
 extension UIColor {
@@ -122,6 +155,10 @@ extension UIColor {
     
     class var lrLightBrownishGrey: UIColor {
         return UIColor(red: 151 / 255.0, green: 151 / 255.0, blue: 151 / 255.0, alpha: 1.0)
+    }
+    
+    class var lrPeach: UIColor {
+        return UIColor(red: 254.0 / 255.0, green: 171.0 / 255.0, blue: 143.0 / 255.0, alpha: 1.0)
     }
 }
 

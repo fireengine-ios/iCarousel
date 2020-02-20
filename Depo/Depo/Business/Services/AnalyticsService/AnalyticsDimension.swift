@@ -30,6 +30,14 @@ struct AnalyticsDimension {
     let autoSyncState: String?
     let autoSyncStatus: String?
     
+    let isTwoFactorAuthEnabled: Bool?
+    let isSpotifyEnabled: Bool?
+    
+    let dailyDrawleft: Int?
+    let totalDraw: Int?
+    
+    let itemsOperationCount: GADementionValues.ItemsOperationCount?
+
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
         userPackagesNames.forEach {
@@ -75,6 +83,21 @@ struct AnalyticsDimension {
         }
         if let autoSyncStatus = autoSyncStatus {
             dimesionDictionary[GADementionsFields.autoSyncStatus.text] = autoSyncStatus
+        }
+        if let isTwoFactorAuthEnabled = isTwoFactorAuthEnabled {
+            dimesionDictionary[GADementionsFields.twoFactorAuth.text] = isTwoFactorAuthEnabled ? "True" : "False"
+        }
+        if let isSpotifyEnabled = isSpotifyEnabled {
+            dimesionDictionary[GADementionsFields.spotify.text] = (isSpotifyEnabled ? "Connect" : "Disconnect") + " - Spotify"
+        }
+        if let dailyDrawleft = dailyDrawleft {
+            dimesionDictionary[GADementionsFields.dailyDrawleft.text] = dailyDrawleft
+        }
+        if let totalDraw = totalDraw {
+            dimesionDictionary[GAMetrics.totalDraw.text] = totalDraw
+        }
+        if let itemsOperation = itemsOperationCount {
+            dimesionDictionary[GADementionsFields.itemsCount(itemsOperation.operationType).text] = itemsOperation.count
         }
         
         return dimesionDictionary

@@ -8,6 +8,7 @@
 
 import Foundation
 import Reachability
+import Alamofire
 
 protocol ReachabilityProtocol {
     
@@ -26,7 +27,7 @@ final class ReachabilityService: ReachabilityProtocol {
     
     static let shared = ReachabilityService()
     
-    private lazy var reachability = Reachability()
+    private lazy var reachability = try? Reachability()
     private lazy var apiReachability = APIReachabilityService()
     
     var isReachableViaWiFi: Bool {
@@ -39,11 +40,26 @@ final class ReachabilityService: ReachabilityProtocol {
     
     var isReachable: Bool {
         ///If you just .none, then compares not with the right enum
-        return self.reachability?.connection != Reachability.Connection.none && apiReachability.connection == .reachable
+        return self.reachability?.connection != Reachability.Connection.unavailable && apiReachability.connection == .reachable
     }
     
     var status: String {
-        return self.reachability?.connection.description ?? Reachability.Connection.none.description
+        return self.reachability?.connection.description ?? Reachability.Connection.unavailable.description
+    }
+    
+    var connectionType: Reachability.Connection {
+        return self.reachability?.connection ?? .unavailable
+    }
+    
+    var uploadConnectionTypeName: String {
+        switch connectionType {
+        case .wifi:
+            return "WIFI"
+        case .cellular:
+            return "MOBILE_NETWORK"
+        default:
+            return ""
+        }
     }
     
     let delegates = MulticastDelegate<ReachabilityServiceDelegate>()
@@ -67,9 +83,9 @@ final class ReachabilityService: ReachabilityProtocol {
                 return
             }
             if let connection = (notification.object as? Reachability)?.connection {
-                debugPrint("ReachabilityService: new connection status \(connection.description)")
+                debugLog("ReachabilityService: new connection status \(connection.description)")
             
-                if connection == .none {
+                if connection == .unavailable {
                     self.notifyDelegates()
                     return
                 }
@@ -80,7 +96,7 @@ final class ReachabilityService: ReachabilityProtocol {
             }
             
             self.updatingApiStatus = true
-            self.apiReachability.checkAPI { [weak self] in
+            self.apiReachability.checkAPI { [weak self] _ in
                 self?.updatingApiStatus = false
                 self?.notifyDelegates()
             }
@@ -88,10 +104,14 @@ final class ReachabilityService: ReachabilityProtocol {
         
         NotificationCenter.default.addObserver(forName: .apiReachabilityDidChange, object: nil, queue: .main) { [weak self] _ in
             if let connection = self?.apiReachability.connection {
-                debugPrint("ReachabilityService: new api connection status \(connection)")
+                debugLog("ReachabilityService: new api connection status \(connection)")
             }
             self?.notifyDelegates()
         }
+    }
+    
+    func forceCheckAPI(completion: @escaping BoolHandler) {
+        apiReachability.checkAPI(completion)
     }
     
     deinit {
@@ -113,15 +133,12 @@ private final class APIReachabilityService {
     enum Connection {
         case unreachable
         case reachable
-        case undefined
     }
     
     static let shared = APIReachabilityService()
     
-    private let requestService = APIReachabilityRequestService()
-    
     private var timer: Timer?
-    private (set) var connection: Connection = .undefined {
+    private (set) var connection: Connection = .reachable {
         didSet {
             if oldValue != connection {
                 notify()
@@ -159,37 +176,21 @@ private final class APIReachabilityService {
         checkAPI()
     }
     
-    func checkAPI(_ completion: VoidHandler? = nil) {
-        requestService.sendPingRequest { [weak self] isReachable in
-            guard let `self` = self else {
-                return
+    func checkAPI(_ completion: BoolHandler? = nil) {
+        SessionManager
+            .sessionWithoutAuth
+            .request(RouteRequests.baseUrl)
+            .responseVoid { [weak self] result in
+                let isReachable: Bool
+                switch result {
+                case .success():
+                    isReachable = true
+                case .failed(_):
+                    isReachable = false
+                }
+                self?.connection = isReachable ? .reachable : .unreachable
+                completion?(isReachable)
             }
-            
-            self.connection = isReachable ? .reachable : .unreachable
-            completion?()
-        }
     }
 
-}
-
-final class APIHostReachabilityRequestParameters: BaseRequestParametrs {
-    override var patch: URL {
-        return URL(string: "https://adepo.turkcell.com.tr/")!
-    }
-    
-    override var header: RequestHeaderParametrs {
-        return [:]
-    }
-}
-
-final class APIReachabilityRequestService: BaseRequestService {
-    func sendPingRequest(handler: @escaping APIReachabilityHandler) {
-        let parameters = APIHostReachabilityRequestParameters()
-        let responseHandler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _ in
-            handler(true)
-        }, fail: { _ in
-            handler(false)
-        })
-        executeHeadRequest(param: parameters, handler: responseHandler)
-    }
 }

@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-final class MovieCard: BaseView {
+final class MovieCard: BaseCardView {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         didSet {
@@ -57,6 +57,15 @@ final class MovieCard: BaseView {
         }
     }
     
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
+    }
+    
+    override func configurateView() {
+        super.configurateView()
+        ItemOperationManager.default.startUpdateView(view: self)
+    }
+    
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
         
@@ -79,7 +88,12 @@ final class MovieCard: BaseView {
         item.syncStatus = .synced
         item.isLocalItem = false
         self.item = item
-        videoPreviewImageView.loadImage(with: item, isOriginalImage: true)
+    }
+    
+    override func viewWillShow() {
+        debugLog("Movie Card - start load image")
+        videoPreviewImageView.setLogs(enabled: true)
+        videoPreviewImageView.loadImage(with: item)
     }
     
     @IBAction private func actionCloseButton(_ sender: UIButton) {
@@ -92,7 +106,7 @@ final class MovieCard: BaseView {
     }
     
     @IBAction private func actionVideoViewButton(_ sender: UIButton) {
-        showPhotoVideoDetail(hideActions: true)
+        showPhotoVideoDetail()
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
@@ -100,7 +114,7 @@ final class MovieCard: BaseView {
         case .save:
             saveImage()
         case .display:
-            showPhotoVideoDetail(hideActions: false)
+            showPhotoVideoDetail()
         }
     }
     
@@ -123,16 +137,28 @@ final class MovieCard: BaseView {
         }
     }
     
-    private func showPhotoVideoDetail(hideActions: Bool) {
+    private func showPhotoVideoDetail() {
         debugLog("movie card open video")
         guard let item = item else {
             return
         }
         
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], hideActions: hideActions)
-        controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = NavigationController(rootViewController: controller)
-        RouterVC().presentViewController(controller: nController)
+        let status: ItemStatus
+        if item.status.isContained(in: [.hidden, .trashed]) {
+            status = item.status
+        } else {
+            status = .active
+        }
+
+        let router = RouterVC()
+        let detailModule = router.filesDetailModule(fileObject: item,
+                                                    items: [item],
+                                                    status: status,
+                                                    canLoadMoreItems: false,
+                                                    moduleOutput: nil)
+
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        router.presentViewController(controller: nController)
     }
     
     override func spotlightHeight() -> CGFloat {
@@ -149,4 +175,28 @@ final class MovieCard: BaseView {
         }
     }
     
+}
+
+extension MovieCard: ItemOperationManagerViewProtocol {
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        return object === self
+    }
+    
+    func didHideItems(_ items: [WrapData]) {
+        deleteCardIfNeeded(items: items)
+    }
+    
+    func didMoveToTrashItems(_ items: [Item]) {
+        deleteCardIfNeeded(items: items) 
+    }
+    
+    private func deleteCardIfNeeded(items: [WrapData]) {
+        guard let uuid = item?.uuid else {
+            return
+        }
+        
+        if items.first(where: { $0.uuid == uuid }) != nil {
+            CardsManager.default.stopOperationWithType(type: .movieCard, serverObject: cardObject)
+        }
+    }
 }

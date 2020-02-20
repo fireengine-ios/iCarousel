@@ -19,6 +19,16 @@ final class PremiumInteractor {
 
 // MARK: PremiumInteractorInput
 extension PremiumInteractor: PremiumInteractorInput {
+    
+    func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.BecomePremiumScreen())
+    }
+    
+    func trackPackageClick(plan packages: SubscriptionPlan) {
+        ///there is may be only one package for becoming premium so packageIndex == 1
+        analyticsService.trackPackageClick(package: packages, packageIndex: 1)
+    }
+    
     func getAccountType() {
         accountService.info(
             success: { [weak self] response in
@@ -58,10 +68,10 @@ extension PremiumInteractor: PremiumInteractorInput {
         }
     }
     
-    func getInfoForAppleProducts(offer: PackageModelResponse) {
-        packageService.getInfoForAppleProducts(offers: [offer], success: { [weak self] in
+    func getInfoForAppleProducts(offers: [PackageModelResponse]) {
+        packageService.getInfoForAppleProducts(offers: offers, success: { [weak self] in
             DispatchQueue.toMain {
-                self?.output.successedGotAppleInfo()
+                self?.output.successedGotAppleInfo(offers: offers)
             }
             }, fail: { [weak self] error in
                 DispatchQueue.toMain {
@@ -76,6 +86,10 @@ extension PremiumInteractor: PremiumInteractorInput {
     
     func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType) -> String {
         return packageService.getPriceInfo(for: offer, accountType: accountType)
+    }
+    
+    func convertToSubscriptionPlan(offers: [PackageModelResponse], accountType: AccountType) -> [SubscriptionPlan]  {
+        return packageService.convertToSubscriptionPlan(offers: offers, accountType: accountType)
     }
     
     //MARK: apple purchase
@@ -95,16 +109,19 @@ extension PremiumInteractor: PremiumInteractorInput {
                 self?.analyticsService.trackProductInAppPurchaseGA(product: product, packageIndex: 0)
                 self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true)
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .success))
                 self?.validatePurchase(productId: identifier)
             case .canceled:
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("transaction canceled"))
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure))
                 DispatchQueue.main.async {
                     self?.output.failed(with: ErrorResponse.string(TextConstants.cancelPurchase).description)
                 }
             case .error(let error):
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("\(error.description)"))
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure))
                 DispatchQueue.main.async {
                     self?.output.failed(with: error.description)
                 }
@@ -249,10 +266,12 @@ extension PremiumInteractor: PremiumInteractorInput {
     func verifyOffer(_ offer: PackageModelResponse, token: String, otp: String) {
         offersService.verifyOffer(otp: otp, referenceToken: token,
                                   success: { [weak self] response in
-                                    /// delay stay for server perform request (android logic)
                                     
                                     self?.analyticsService.trackPurchase(offer: offer)
-                                    
+                                    ///there is may be only one package for becoming premium so packageIndex == 1
+                                    self?.analyticsService.trackProductPurchasedInnerGA(offer: offer, packageIndex: 1)
+
+                                    /// delay stay for server perform request (android logic)»
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                                         self?.output.successedVerifyOffer()
                                     }

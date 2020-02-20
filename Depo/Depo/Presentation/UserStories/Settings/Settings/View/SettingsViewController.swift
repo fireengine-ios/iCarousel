@@ -34,13 +34,11 @@ protocol SettingsDelegate: class {
 
 class SettingsViewController: BaseViewController, SettingsViewInput, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var leaveFeedbackButton: ButtonWithGrayCorner!
-    @IBOutlet weak var versionLabel: UILabel!
     
-    var tableDataArray: [[String]] = []
+    var tableDataArray = [[String]]()
     var output: SettingsViewOutput!
-    
-    var userInfoSubView = UserInfoSubViewModuleInitializer.initializeViewController(with: "UserInfoSubViewViewController") as! UserInfoSubViewViewController
+
+    private let userInfoSubView = UserInfoSubViewModuleInitializer.initializeViewController()
     
     weak var settingsDelegate: SettingsDelegate?
     
@@ -50,19 +48,8 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        leaveFeedbackButton.setTitle(TextConstants.settingsViewLeaveFeedback,
-                                     for: .normal)
-        
-        let nib = UINib.init(nibName: CellsIdConstants.settingTableViewCellID,
-                             bundle: nil)
-        
-        tableView.register(nib, forCellReuseIdentifier: CellsIdConstants.settingTableViewCellID)
-        
-        tableView.backgroundColor = UIColor.clear
-        
-        userInfoSubView.actionsDelegate = self
+        setupTableView()
         output.viewIsReady()
-        setupVersionLabel()
         
         MenloworksAppEvents.onPreferencesOpen()
     }
@@ -86,36 +73,46 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         navigationBarWithGradientStyle()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if tableView.tableHeaderView == nil {
+            setupTableViewSubview()
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
     // MARK: SettingsViewInput
     
-    func setupVersionLabel() {
-        versionLabel.textColor = ColorConstants.lightText
-        versionLabel.font = UIFont.TurkcellSaturaRegFont(size: 16)
+    private func setupTableView() {
+        tableView.register(nibCell: SettingsTableViewCell.self)
+        tableView.backgroundColor = .clear
+    }
+    
+    private func setupTableViewSubview() {
+        let header = userInfoSubView.view
+        userInfoSubView.actionsDelegate = self
+        tableView.tableHeaderView = header
+        header?.heightAnchor.constraint(equalToConstant: 201).activate()
         
-        if let version = UserDefaults.standard.string(forKey: AppConfigurator.SettingsBundleKeys.AppVersionKey),
-            let build = UserDefaults.standard.string(forKey: AppConfigurator.SettingsBundleKeys.BuildVersionKey) {
-            versionLabel.text = "\(version)_\(build)"
-        }
+        let footer = SettingFooterView.initFromNib()
+        footer.delegate = self
+        tableView.tableFooterView = footer
+        footer.heightAnchor.constraint(equalToConstant: 110).activate()
     }
     
     func showCellsData(array: [[String]]) {
         tableDataArray.removeAll()
         tableDataArray.append(contentsOf: array)
         tableView.reloadData()
-    }
-    
-    
-    // MARK: buttons action
-    
-    @IBAction func onLeaveFeedback() {
-        RouterVC().showFeedbackSubView()
     }
     
     // MARK: UITableView delegate
@@ -125,13 +122,10 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 201 : 14
+        return 14
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if (section == 0) {
-            return userInfoSubView.view
-        }
         return SettingHeaderView.viewFromNib()
     }
     
@@ -159,7 +153,7 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         
         let array = tableDataArray[indexPath.section]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdConstants.settingTableViewCellID, for: indexPath) as! SettingsTableViewCell
+        let cell = tableView.dequeue(reusable: SettingsTableViewCell.self, for: indexPath)
         cell.selectionStyle = .none
         cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
         return cell
@@ -234,8 +228,8 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
                     output.goToActivityTimeline()
                 }
             case 1: // usage info
-                if (settingsDelegate != nil) {
-                    settingsDelegate!.goToUsageInfo()
+                if let settingsDelegate = settingsDelegate {
+                    settingsDelegate.goToUsageInfo()
                 } else {
                     output.goToUsageInfo()
                 }
@@ -250,14 +244,14 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         case 3:
             switch indexPath.row {
             case 0:
-                if (settingsDelegate != nil) {
-                    settingsDelegate!.goToHelpAndSupport()
+                if let settingsDelegate = settingsDelegate {
+                    settingsDelegate.goToHelpAndSupport()
                 } else {
                     output.goToHelpAndSupport()
                 }
             case 1:
-                if (settingsDelegate != nil) {
-                    settingsDelegate!.goToTermsAndPolicy()
+                if let settingsDelegate = settingsDelegate {
+                    settingsDelegate.goToTermsAndPolicy()
                 } else {
                     output.goToTermsAndPolicy()
                 }
@@ -348,10 +342,6 @@ extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
         output.onChangeUserPhoto()
     }
     
-    func updateUserProfile(userInfo: AccountInfoResponse) {
-        output.onUpdatUserInfo(userInfo: userInfo)
-    }
-    
     func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?) {
         output.goToPackagesWith(quotaInfo: quotaInfo)
     }
@@ -386,5 +376,13 @@ extension SettingsViewController: UIImagePickerControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+//MARK: - SettingFooterViewDelegate
+
+extension SettingsViewController: SettingFooterViewDelegate {
+    func didTappedLeaveFeedback() {
+        RouterVC().showFeedbackSubView()
     }
 }

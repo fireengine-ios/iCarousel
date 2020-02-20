@@ -11,7 +11,7 @@ import Foundation
 final class PhotoVideoBottomBarManager {
     
     private let photoVideoBottomBarConfig = EditingBarConfig(
-        elementsConfig:  [.share, .download, .sync, .addToAlbum, .delete], 
+        elementsConfig:  [.share, .download, .sync, .hide, .moveToTrash],
         style: .blackOpaque, tintColor: nil)
     
     var editingTabBar: BottomSelectionTabBarViewController?

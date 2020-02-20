@@ -25,7 +25,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private var localPlayer: AVPlayer?
     private var playerController: FixedAVPlayerViewController?
     
-    var hideActions = false
+    var status: ItemStatus = .active
+    var hideTreeDotButton = false
     var editingTabBar: BottomSelectionTabBarViewController!
     private var needToScrollAfterRotation = true
     
@@ -62,24 +63,33 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
     }
     
-    private var selectedIndex = 0 {
+    private var selectedIndex: Int? {
         didSet {
-            guard !objects.isEmpty, selectedIndex < objects.count else {
-                return
-            }
             setupNavigationBar()
             setupTitle()
-            output.setSelectedItemIndex(selectedIndex: selectedIndex)
+            
+            if let index = selectedIndex {
+                output.setSelectedItemIndex(selectedIndex: index)
+            }
         }
     }
     
-    private(set) var objects = [Item]() {
-        didSet {
-            collectionView.reloadData()
-            collectionView.layoutIfNeeded()
+    private(set) var objects = [Item]()
+    
+    private var selectedItem: Item? {
+        if let index = selectedIndex {
+            return objects[safe: index]
         }
+        return nil
     }
-        
+    
+    private lazy var threeDotsBarButtonItem: UIBarButtonItem = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
+        button.setImage(UIImage(named: "more"), for: .normal)
+        button.addTarget(self, action: #selector(onRightBarButtonItem(sender:)), for: .touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }()
+    
     // MARK: Life cycle
     
     override func viewDidLoad() {
@@ -104,6 +114,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
+        
+        showSpinner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,8 +124,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
         ItemOperationManager.default.startUpdateView(view: self)
         
-        setupMoreButton()
-        
         onStopPlay()
         rootNavController(vizible: true)
         blackNavigationBarStyle()
@@ -121,10 +131,14 @@ final class PhotoVideoDetailViewController: BaseViewController {
         editingTabBar.view.backgroundColor = UIColor.black
         setupTitle()
         
-        if hideActions {
-            editingTabBar.view.isHidden = true
+        if hideTreeDotButton {
+            navigationItem.rightBarButtonItem?.customView?.isHidden = true
         }
         
+        // TODO: EditingBarConfig is not working
+        editingTabBar.editingBar.barStyle = .blackOpaque
+        editingTabBar.editingBar.clipsToBounds = true
+        //editingTabBar.editingBar.layer.borderWidth = 0
         
         statusBarColor = .black
     }
@@ -169,7 +183,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         OrientationManager.shared.lock(for: .portrait, rotateTo: .portrait)
         
         /// need to check for PopUpController to dismiss it automaticaly for last photo in PhotoVideoDetail
-        if let presentedViewController = presentedViewController as? PopUpController {
+        if let presentedViewController = presentedViewController as? BasePopUpController {
             presentedViewController.close { [weak self] in
                 self?.dismiss(animated: true)
             }
@@ -179,64 +193,61 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     private func scrollToSelectedIndex() {
-        guard !objects.isEmpty, selectedIndex < objects.count else {
+        setupNavigationBar()
+        setupTitle()
+
+        guard let index = selectedIndex else  {
             return
         }
-        let indexPath = IndexPath(item: selectedIndex, section: 0)
+        
+        let indexPath = IndexPath(item: index, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-        self.collectionView.isHidden = false
-    } 
+        collectionView.isHidden = false
+    }
     
-    /// FIXME: temp logic of deinit. ItemOperationManager holds "self" strong
     func customDeinit() {
         ItemOperationManager.default.stopUpdateView(view: self)
         NotificationCenter.default.removeObserver(self)
     }
     
     private func setupNavigationBar() {
-        if hideActions {
+        if navigationItem.rightBarButtonItem == nil && !hideTreeDotButton {
+            navigationItem.rightBarButtonItem = threeDotsBarButtonItem
+        }
+
+        if status == .hidden {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
+        } else if let selectedItem = selectedItem {
+            navigationItem.rightBarButtonItem?.customView?.isHidden = selectedItem.isLocalItem
         } else {
-            guard !objects.isEmpty, selectedIndex < objects.count else {
-                return
-            }
-            let item = objects[selectedIndex]
-            navigationItem.rightBarButtonItem?.customView?.isHidden = item.isLocalItem
-        }
-    }
-    
-    private func setupMoreButton() {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
-        button.setImage(#imageLiteral(resourceName: "more"), for: .normal)
-        button.addTarget(self, action: #selector(onRightBarButtonItem(sender:)), for: .touchUpInside)
-        let barButton = UIBarButtonItem(customView: button)
-        
-        navigationItem.rightBarButtonItem = barButton
-    }
-    
-    private func setupTitle() {
-        guard !objects.isEmpty, selectedIndex < objects.count else {
-            return
-        }
-        if let name = objects[selectedIndex].name {
-            setNavigationTitle(title: name)
-        }
-    }
-    
-    func onShowSelectedItem(at index: Int, from items: [Item]) {
-        objects = items
-        selectedIndex = index
-        
-        collectionView.reloadData()
-        collectionView.performBatchUpdates(nil) { [weak self] _ in
-            self?.scrollToSelectedIndex()
+            navigationItem.rightBarButtonItem?.customView?.isHidden = true
         }
     }
 
+    private func setupTitle() {
+        setNavigationTitle(title: selectedItem?.name ?? "")
+    }
+    
+    func onShowSelectedItem(at index: Int, from items: [Item]) {
+        //update collection on first launch or on change selectedItem
+        let needUpdate: Bool
+        if let selectedItem = selectedItem, selectedItem == items[safe: index] {
+            needUpdate = false
+        } else {
+            needUpdate = true
+        }
+        selectedIndex = index
+        updateAllItems(with: items, updateCollection: needUpdate)
+    }
+
     @objc func onRightBarButtonItem(sender: UIButton) {
+        guard let index = selectedIndex else {
+            return
+        }
+        
         let stackCountViews = navigationController?.viewControllers.count ?? 0
         let inAlbumState = stackCountViews > 1 && navigationController?.viewControllers[stackCountViews - 2] is AlbumDetailViewController
-        output.moreButtonPressed(sender: sender, inAlbumState: inAlbumState, object: objects[selectedIndex], selectedIndex: selectedIndex)
+        output.moreButtonPressed(sender: sender, inAlbumState: inAlbumState, object: objects[index], selectedIndex: index)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -254,6 +265,16 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @objc private func applicationDidEnterBackground(_ application: UIApplication) {
         localPlayer?.pause()
     }
+    
+    private func updateAllItems(with items: [Item], updateCollection: Bool) {
+        objects = items
+        
+        if updateCollection {
+            collectionView.reloadData()
+            scrollToSelectedIndex()
+            collectionView.layoutIfNeeded()
+        }
+    }
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
@@ -265,8 +286,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
             return
         }
         
-        let item = items[index]
-        if item.isLocalItem && item.fileType == .image {
+        if let item = items[safe: index], item.isLocalItem && item.fileType == .image {
             setThreeDotsMenu(active: false)
         } else {
             setThreeDotsMenu(active: true)
@@ -278,6 +298,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func play(item: AVPlayerItem) {
+        hideSpinnerIncludeNavigationBar()
+        
         MenloworksTagsService.shared.onVideoDisplayed()
         
         localPlayer?.replaceCurrentItem(with: item)
@@ -302,9 +324,23 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         }
     }
     
-    func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool) {
-        self.objects = objectsArray
+    func updateItems(objectsArray: [Item], selectedIndex: Int) {
         self.selectedIndex = selectedIndex
+        updateAllItems(with: objectsArray, updateCollection: true)
+    }
+    
+    func appendItems(_ items: [Item]) {
+        let startIndex = objects.count
+        objects.append(contentsOf: items)
+        let endIndex = objects.count - 1
+        
+        let indexPaths = (startIndex...endIndex).map { IndexPath(item: $0, section: 0) }
+        collectionView.insertItems(at: indexPaths)
+    }
+    
+    func onLastRemoved() {
+        selectedIndex = nil
+        updateAllItems(with: [], updateCollection: true)
     }
     
     func getNavigationController() -> UINavigationController? {
@@ -321,23 +357,26 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
     }
     
     func finishedUploadFile(file: WrapData) {
-        DispatchQueue.toMain { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            
+        DispatchQueue.main.async {
             self.replaceUploaded(file)
-            self.output.replaceUploaded(file)
-            self.output.updateBars()
-            self.setupNavigationBar()
         }
     }
     
     private func replaceUploaded(_ item: WrapData) {
-        if let indexToChange = objects.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) {
-            //need for display local image
-            item.patchToPreview = objects[indexToChange].patchToPreview
-            objects[indexToChange] = item
+        guard let indexToChange = objects.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) else {
+            return
+        }
+        
+        //need for display local image
+        item.patchToPreview = objects[indexToChange].patchToPreview
+        objects[indexToChange] = item
+        output.replaceUploaded(item)
+        
+        let visibleIndexes = collectionView.indexPathsForVisibleItems.map { $0.item }
+        // update bars only for visible item
+        if visibleIndexes.contains(indexToChange) {
+            output.updateBars()
+            setupNavigationBar()
         }
     }
 }
@@ -352,71 +391,99 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? PhotoVideoDetailCell else { return }
+        guard let cell = cell as? PhotoVideoDetailCell else {
+            return
+        }
+        
+        guard selectedIndex != nil else {
+            return
+        }
         cell.delegate = self
         cell.setObject(object: objects[indexPath.row])
+        
+        if indexPath.row == objects.count - 1 {
+            output.willDisplayLastCell()
+        }
     }
 }
 
 extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellHeight = collectionView.frame.height
+        let cellWidth = collectionView.frame.width
         ///https://github.com/wordpress-mobile/WordPress-iOS/issues/10354
         ///seems like this bug may occur on iOS 12+ when it returns negative value
-        return CGSize(width: max(collectionView.bounds.size.width, 0), height: max(collectionView.bounds.size.height, 0))
+        return CGSize(width: max(cellWidth, 0), height: max(cellHeight, 0))
     }
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
+    
+    func imageLoadingFinished() {
+       hideSpinner()
+    }
+    
     func tapOnCellForFullScreen() {
-        isFullScreen = !isFullScreen
+        isFullScreen.toggle()
     }
     
     func tapOnSelectedItem() {
-        let file = objects[selectedIndex]
+        guard let index = selectedIndex else {
+            return
+        }
         
+        showSpinnerIncludeNavigationBar()
+        let file = objects[index]
         if file.fileType == .video {
-            let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
-            guard let url = preUrl else {
+            self.prepareToPlayVideo(file: file)
+        }
+    }
+    
+    private func prepareToPlayVideo(file: Item) {
+        let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
+        guard let url = preUrl else {
+            return
+        }
+        player.pause()
+        playerController?.player = nil
+        playerController?.removeFromParentViewController()
+        playerController = nil
+        localPlayer?.pause()
+        localPlayer = nil
+        localPlayer = AVPlayer()
+        
+        switch file.patchToPreview {
+        case let .localMediaContent(local):
+            guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
                 return
             }
+            let option = PHVideoRequestOptions()
             
-            player.pause()
-            playerController?.player = nil
-            playerController?.removeFromParentViewController()
-            playerController = nil
-            localPlayer?.pause()
-            localPlayer = nil
-            localPlayer = AVPlayer()
-            
-            switch file.patchToPreview {
-            case let .localMediaContent(local):
-                guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
-                    return 
-                }
-                let option = PHVideoRequestOptions()
-                
-                output.startCreatingAVAsset()
-                debugLog("about to play local video item")
-                DispatchQueue.global(qos: .default).async { [weak self] in
-                    PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
-                        
-                        DispatchQueue.main.async {
-                            self?.output.stopCreatingAVAsset()
-                            guard let asset = asset else {
-                                return
-                            }
-                            let playerItem = AVPlayerItem(asset: asset)
-                            debugLog("playerItem created \(playerItem.asset.isPlayable)")
-                            self?.play(item: playerItem)
-                        }   
+            output.startCreatingAVAsset()
+            debugLog("about to play local video item")
+            DispatchQueue.global(qos: .default).async { [weak self] in
+                PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
+                    debugPrint("!!!! after local request")
+                    DispatchQueue.main.async {
+                        self?.output.stopCreatingAVAsset()
+                        guard let asset = asset else {
+                            return
+                        }
+                        let playerItem = AVPlayerItem(asset: asset)
+                        debugLog("playerItem created \(playerItem.asset.isPlayable)")
+                        self?.play(item: playerItem)
                     }
                 }
-                
-            case .remoteUrl(_):
-                debugLog("about to play remote video item")
+            }
+            
+        case .remoteUrl(_):
+            debugLog("about to play remote video item")
+            DispatchQueue.global(qos: .default).async { [weak self] in
                 let playerItem = AVPlayerItem(url: url)
                 debugLog("playerItem created \(playerItem.asset.isPlayable)")
-                play(item: playerItem)
+                DispatchQueue.main.async {
+                    self?.play(item: playerItem)
+                }
             }
         }
     }

@@ -18,9 +18,28 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     private lazy var autoSyncRoutingService = AutoSyncRoutingService()
     
     func viewIsReady() {
-        TurkcellUpdaterService().startUpdater(controller: self.view as? UIViewController) { [weak self] in
+        interactor.trackScreen()
+
+        TurkcellUpdaterService().startUpdater(controller: self.view as? UIViewController) { [weak self] shouldProceed in
+            guard shouldProceed else {
+                self?.showUpdateIsRequiredPopup()
+                return
+            }
+
             self?.showPasscodeIfNeed()
         }
+    }
+    
+    private func showUpdateIsRequiredPopup() {
+        let popup = PopUpController.with(title: TextConstants.turkcellUpdateRequiredTitle, message: TextConstants.turkcellUpdateRequiredMessage, image: .error, buttonTitle: TextConstants.ok) { popup in
+            debugLog("required app killing")
+            UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                exit(EXIT_SUCCESS)
+            })
+        }
+        UIApplication.topController()?.present(popup, animated: false, completion: nil)
+        return
     }
     
     private func showLandingPagesIfNeeded() {
@@ -49,7 +68,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         }
         
         let navVC = NavigationController(rootViewController: vc)
-        vc.navigationBarWithGradientStyleWithoutInsets()
+        navVC.modalPresentationStyle = .overFullScreen
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             rootVC.present(navVC, animated: true, completion: nil)
@@ -99,15 +118,15 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     func openLink() {
         debugLog("Open Link on Splash Presenter")
         if let deepLink = storageVars.deepLink {
-            if PushNotificationService.shared.assignDeepLink(innerLink: deepLink){
+            if PushNotificationService.shared.assignDeepLink(innerLink: deepLink, options: storageVars.deepLinkParameters) {
                 debugLog("Open Link after Router navigates to home")
                 PushNotificationService.shared.openActionScreen()
-                storageVars.deepLink = nil
             }
         }
     }
     
     private func openApp() {
+        AuthoritySingleton.shared.checkNewVersionApp()
         
         if turkcellLogin {
             if storageVars.autoSyncSet {
@@ -167,8 +186,8 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         }
     }
     
-    func onFailEULA() {
-        router.navigateToTermsAndService()
+    func onFailEULA(isFirstLogin: Bool) {
+        router.navigateToTermsAndService(isFirstLogin: isFirstLogin)
     }
     
     func onFailGetAccountInfo(error: Error) {

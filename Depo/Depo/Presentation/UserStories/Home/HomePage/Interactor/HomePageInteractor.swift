@@ -7,7 +7,7 @@
 //
 
 
-class HomePageInteractor: HomePageInteractorInput {
+final class HomePageInteractor: HomePageInteractorInput {
 
     private enum RefreshStatus {
         case reloadAll
@@ -17,28 +17,87 @@ class HomePageInteractor: HomePageInteractorInput {
     weak var output: HomePageInteractorOutput!
     
     private lazy var homeCardsService: HomeCardsService = HomeCardsServiceImp()
-    private(set) var homeCardsLoaded = false
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var instapickService: InstapickService = factory.resolve()
+    private lazy var accountService = AccountService()
+
+    private let smartAlbumsManager: SmartAlbumsManager = factory.resolve()
+    private let campaignService = CampaignServiceImpl()
+
     private var isShowPopupAboutPremium = true
+    private(set) var homeCardsLoaded = false
     
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
         self.output.fillCollectionView(isReloadAll: isReloadAll)
     }
 
-    func homePagePresented() {
+    func viewIsReady() {
         FreeAppSpace.session.checkFreeAppSpace()
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         
+        getQuotaInfo()
+        getAccountInfo()
+        getPremiumCardInfo(loadStatus: .reloadAll)
+        getAllCardsForHomePage()
+        getCampaignStatus()
+        
+        smartAlbumsManager.requestAllItems()
+    }
+    
+    func needRefresh() {
+        homeCardsLoaded = false
+        
+        getCampaignStatus()
         getPremiumCardInfo(loadStatus: .reloadAll)
         getAllCardsForHomePage()
     }
+
+    func updateLocalUserDetail() {
+        getPremiumCardInfo(loadStatus: .reloadSingle)
+        getInstaPickInfo()
+    }
     
+    //MARK: tracking
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.HomePageScreen())
         analyticsService.logScreen(screen: .homePage)
         analyticsService.trackDimentionsEveryClickGA(screen: .homePage)
+    }
+    
+    func trackGiftTapped() {
+        analyticsService.trackCustomGAEvent(eventCategory: .campaign, eventActions: .giftIcon, eventLabel: .empty)
+    }
+    
+    func trackQuota(quotaPercentage: Float) {
+        var quotaUsed: Int
+        
+        switch quotaPercentage {
+        case 0.8..<0.9:
+            quotaUsed = 80
+            
+        case 0.9..<0.95:
+            quotaUsed = 90
+            
+        case 0.95..<1:
+            quotaUsed = 95
+            
+        case 1...:
+            quotaUsed = 100
+            
+        default:
+            return
+        }
+        
+        analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                            eventActions: .quota,
+                                            eventLabel: .quotaUsed(quotaUsed))
+    }
+    
+    //MARK: autosync triggering
+    @objc private func checkAutoSync() {
+        SyncServiceManager.shared.updateImmediately()
     }
     
     private func setupAutoSyncTriggering() {
@@ -50,15 +109,37 @@ class HomePageInteractor: HomePageInteractorInput {
                                                object: nil)
     }
     
-    @objc private func checkAutoSync() {
-        SyncServiceManager.shared.updateImmediately()
+    //MARK: private requests
+    private func getCampaignStatus() {
+        campaignService.getPhotopickDetails { [weak self] result in
+            switch result {
+            case .success(let status):
+                if SingletonStorage.shared.isUserFromTurkey,
+                    (status.startDate...status.launchDate).contains(Date()) {
+                    DispatchQueue.toMain {
+                        self?.output.showGiftBox()
+                    }
+                }
+            case .failure(let errorResult):
+                if errorResult.isEmpty() {
+                    DispatchQueue.toMain {
+                        self?.output.hideGiftBox()
+                    }
+                }
+            }
+        }
     }
     
-    func needRefresh() {
-        homeCardsLoaded = false
-        
-        getPremiumCardInfo(loadStatus: .reloadAll)
-        getAllCardsForHomePage()
+    private func getAccountInfo() {
+        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] accountInfo in
+            DispatchQueue.toMain {
+                self?.output.didObtainAccountInfo(accountInfo: accountInfo)
+            }
+        }, fail: { [weak self] error in
+            DispatchQueue.toMain {
+                self?.output.didObtainAccountInfoError(with: error.description)
+            }
+        })
     }
     
     private func getAllCardsForHomePage() {
@@ -71,45 +152,43 @@ class HomePageInteractor: HomePageInteractorInput {
                     self?.fillCollectionView(isReloadAll: true)
                 case .failed(let error):
                     DispatchQueue.toMain {
-                        self?.output.didObtainFailCardInfo(errorMessage: error.description,
-                                                           isNeedStopRefresh: true)
+                        self?.output.didObtainError(with: error.description, isNeedStopRefresh: true)
                     }
                 }
             }
         }
     }
-
-    func updateLocalUserDetail() {
-        getPremiumCardInfo(loadStatus: .reloadSingle)
-        getInstaPickInfo()
-    }
-
+    
     private func getPremiumCardInfo(loadStatus: RefreshStatus) {
-        AccountService().permissions { [weak self] response in
+        accountService.permissions { [weak self] response in
             switch response {
             case .success(let result):
                 AuthoritySingleton.shared.refreshStatus(with: result)
 
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
-                    self?.fillCollectionView(isReloadAll: loadStatus == .reloadAll)
+                    DispatchQueue.main.async {
+                        self?.fillCollectionView(isReloadAll: loadStatus == .reloadAll)
+                    }
                 }, fail: { [weak self] error in
-                    self?.fillCollectionView(isReloadAll: true)
-                    
-                    DispatchQueue.toMain {
-                        self?.output.didObtainFailCardInfo(errorMessage: error.description,
+                    DispatchQueue.main.async {
+                        self?.fillCollectionView(isReloadAll: true)
+
+                        self?.output.didObtainError(with: error.description,
                                                            isNeedStopRefresh: loadStatus == .reloadSingle)
                     }
                 })
                 
                 if self?.isShowPopupAboutPremium == true {
-                    self?.output.didShowPopupAboutPremium()
+                    self?.output.showPopupAboutPremiumIfNeeded()
                     self?.isShowPopupAboutPremium = false
                 }
             case .failed(let error):
-                self?.fillCollectionView(isReloadAll: true)
-                
                 DispatchQueue.toMain {
-                    self?.output.didObtainFailCardInfo(errorMessage: error.description,
+                    if !error.isNetworkError {
+                        self?.fillCollectionView(isReloadAll: true)
+                    }
+                    
+                    self?.output.didObtainError(with: error.description,
                                                        isNeedStopRefresh: loadStatus == .reloadSingle)
                 }
             }
@@ -124,73 +203,36 @@ class HomePageInteractor: HomePageInteractorInput {
                 self.output.didObtainInstaPickStatus(status: response)
             case .failed(let error):
                 DispatchQueue.toMain {
-                    self.output.didObtainFailCardInfo(errorMessage: error.description,
-                                                      isNeedStopRefresh: true)
+                    self.output.didObtainError(with: error.description, isNeedStopRefresh: true)
                 }
             }
         }
     }
     
-    func needCheckQuota() {
-        showQuotaPopUpIfNeed()
-    }
-    
-    func showQuotaPopUpIfNeed() {
-        let storageVars: StorageVars = factory.resolve()
-        
-        let isFirstTime = !storageVars.homePageFirstTimeLogin
-        if isFirstTime {
-            storageVars.homePageFirstTimeLogin = true
-        }
-        AccountService().quotaInfo(success: { [weak self] response in
-            DispatchQueue.toMain {
-                if let qresponce = response as? QuotaInfoResponse {
-                    guard let quotaBytes = qresponce.bytes, let usedBytes = qresponce.bytesUsed else { return }
-                    let usagePercent = Float(usedBytes) / Float(quotaBytes)
-                    var viewForPresent: UIViewController? = nil
-                    self?.trackQuota(quotaPercentage: usagePercent)
-                    if isFirstTime {
-                        if 0.8 <= usagePercent && usagePercent < 0.9 {
-                            viewForPresent = LargeFullOfQuotaPopUp.popUp(type: .LargeFullOfQuotaPopUpType80)
-                        }
-                        else if 0.9 <= usagePercent && usagePercent < 1.0 {
-                            viewForPresent = LargeFullOfQuotaPopUp.popUp(type: .LargeFullOfQuotaPopUpType90)
-                        }
-                        else if usagePercent >= 1.0 {
-                            viewForPresent = LargeFullOfQuotaPopUp.popUp(type: .LargeFullOfQuotaPopUpType100)
-                        }
-                    } else if usagePercent >= 1.0{
-                        viewForPresent = SmallFullOfQuotaPopUp.popUp()
-                    }
-                    
-                    if let popUpView = viewForPresent {
-                        UIApplication.topController()?.present(popUpView, animated: true, completion: nil)
-//                        self?.output.needPresentPopUp(popUpView: popUpView)
-                    }
-                    
+    private func getQuotaInfo() {
+        accountService.quotaInfo(success: { [weak self] response in
+            DispatchQueue.main.async {
+                guard
+                    let qresponse = response as? QuotaInfoResponse,
+                    let quotaBytes = qresponse.bytes,
+                    let usedBytes = qresponse.bytesUsed
+                else {
+                    self?.output.didObtainQuotaInfo(usagePercentage: 0)
+                    assertionFailure("quota info is missing")
+                    return
                 }
+                
+                let usagePercent = Float(usedBytes) / Float(quotaBytes)
+                self?.trackQuota(quotaPercentage: usagePercent)
+                
+                self?.output.didObtainQuotaInfo(usagePercentage: usagePercent)
             }
             
-            }, fail: { error in
-                //error handling not need
-                
+        }, fail: { [weak self] error in
+            DispatchQueue.main.async {
+                self?.output.didObtainQuotaInfo(usagePercentage: 0)
+                self?.output.didObtainError(with: error.description, isNeedStopRefresh: false)
+            }
         })
     }
-
-    func trackQuota(quotaPercentage: Float) {
-        var quotaUsed: Int = 80
-        if 0.8 <= quotaPercentage && quotaPercentage < 0.9 {
-            quotaUsed = 80
-        } else if 0.9 <= quotaPercentage && quotaPercentage < 0.95 {
-            quotaUsed = 90
-        } else if 0.95 <= quotaPercentage && quotaPercentage < 1.0 {
-            quotaUsed = 95
-        } else if quotaPercentage >= 1.0 {
-            quotaUsed = 100
-        } else {
-            return
-        }
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .quota, eventLabel: .quotaUsed(quotaUsed))
-    }
-    
 }

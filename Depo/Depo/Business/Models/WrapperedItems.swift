@@ -15,6 +15,7 @@ typealias Item = WrapData
 typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Void
 typealias FileUploadOperationSucces = (_ item: WrapData) -> Void
 typealias RemoteImage = (_ image: UIImage?) -> Void
+typealias RemoteData = (_ image: Data?) -> Void
 typealias RemoteImageError = (_ error: Error?) -> Void
 
 class LocalMediaContent {
@@ -105,7 +106,7 @@ enum ApplicationType: String {
 //    }
 }
 
-enum FileType: Equatable {
+enum FileType: Hashable, Equatable {
     case unknown
     case image
     case video
@@ -503,6 +504,57 @@ enum SyncWrapperedStatus {
     }
 }
 
+
+enum ItemStatus: String {
+    case active = "ACTIVE"
+    case uploaded = "UPLOADED"
+    case transcoding = "TRANSCODING"
+    case transcodingFailed = "TRANSCODING_FAILED"
+    case trashed = "TRASHED"
+    case deleted = "DELETED"
+    case hidden = "HIDDEN"
+    case unknown = "UNKNOWN"
+    
+    init(string: String?) {
+        if let statusString = string, let status = ItemStatus(rawValue: statusString) {
+            self = status
+        } else {
+            self = .unknown
+        }
+    }
+    
+    init(value: Int16) {
+        switch value {
+        case 0: self = .active
+        case 1: self = .uploaded
+        case 2: self = .transcoding
+        case 3: self = .transcodingFailed
+        case 4: self = .trashed
+        case 5: self = .deleted
+        case 6: self = .hidden
+        default: self = .unknown
+        }
+    }
+    
+    func valueForCoreDataMapping() -> Int16 {
+        switch self {
+        case .active: return 0
+        case .uploaded: return 1
+        case .transcoding: return 2
+        case .transcodingFailed: return 3
+        case .trashed: return 4
+        case .deleted: return 5
+        case .hidden: return 6
+        case .unknown: return 7
+        }
+    }
+    
+    var isTranscoded: Bool {
+        return isContained(in: [.active, .hidden, .trashed])
+    }
+}
+
+
 protocol  Wrappered {
     
     var id: Int64? { get }
@@ -542,22 +594,6 @@ protocol  Wrappered {
 
 class WrapData: BaseDataSourceItem, Wrappered {
     
-    enum Status: String {
-        case active = "ACTIVE"
-        case uploaded = "UPLOADED"
-        case transcoding = "TRANSCODING"
-        case transcodingFailed = "TRANSCODING_FAILED"
-        case unknown = "UNKNOWN"
-        
-        init(string: String?) {
-            if let statusString = string, let status = Status(rawValue: statusString) {
-                self = status
-            } else {
-                self = .unknown
-            }
-        }
-    }
-    
     var coreDataObjectId: NSManagedObjectID?
     
     var id: Int64?
@@ -576,7 +612,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
 
     var metaData: BaseMetaData?
     
-    var status: Status
+    var status: ItemStatus
     
     var localFileUrl: URL?
     
@@ -801,7 +837,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         tmpDownloadUrl = remote.tempDownloadURL
         patchToPreview = .remoteUrl(URL(string: ""))
         fileSize = remote.bytes ?? 0
-        status = Status(string: remote.status)
+        status = ItemStatus(string: remote.status)
         
         super.init(uuid: remote.uuid)
         md5 = remote.itemHash ?? "not hash "
@@ -867,7 +903,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         let fileUUID = searchResponse[SearchJsonKey.uuid].string ?? ""
         fileSize = searchResponse[SearchJsonKey.bytes].int64 ?? 0
         patchToPreview = .remoteUrl(URL(string: ""))///????
-        status = Status(string:searchResponse[SearchJsonKey.status].string)
+        status = ItemStatus(string:searchResponse[SearchJsonKey.status].string)
         metaData = BaseMetaData(withJSON: searchResponse[SearchJsonKey.metadata])
         favorites = metaData?.favourite ?? false
         super.init(uuid: fileUUID)
@@ -934,7 +970,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
-    init(imageData: Data) {
+    init(imageData: Data, isLocal: Bool) {
         fileData = imageData
         fileSize = Int64(imageData.count)
         favorites = false
@@ -943,7 +979,23 @@ class WrapData: BaseDataSourceItem, Wrappered {
         tmpDownloadUrl = nil
 
         let creationDate = Date()
-        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: true)
+        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .image, syncStatus: .notSynced, isLocalItem: isLocal)
+        
+        if let fileName = name {
+            md5 = "\(fileName)\(fileSize)"
+        }
+    }
+   //TODO: Temporary logic
+    init(videoData: Data, isLocal: Bool) {
+        fileData = videoData
+        fileSize = Int64(videoData.count)
+        favorites = false
+        patchToPreview = .remoteUrl(nil)
+        status = .unknown
+        tmpDownloadUrl = nil
+
+        let creationDate = Date()
+        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .video, syncStatus: .notSynced, isLocalItem: isLocal)
         
         if let fileName = name {
             md5 = "\(fileName)\(fileSize)"
@@ -954,7 +1006,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         coreDataObjectId = mediaItem.objectID
         fileSize = mediaItem.fileSizeValue
         favorites = mediaItem.favoritesValue
-        status = mediaItem.isTranscoded ? .active : .unknown
+        status = ItemStatus(value: mediaItem.status)
         var url: URL? = nil
         if let url_ = mediaItem.urlToFileValue {
             url = URL(string: url_)
@@ -1028,7 +1080,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         metaData?.genre = mediaItem.metadata?.genre ?? []
         metaData?.height = Int(mediaItem.metadata?.height ?? 0)
         metaData?.title = mediaItem.metadata?.title
-
         
         if let largeUrl = mediaItem.metadata?.largeUrl {
             metaData?.largeUrl = URL(string: largeUrl)
@@ -1042,6 +1093,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
         if let videoUrl = mediaItem.metadata?.videoPreviewUrl {
             metaData?.videoPreviewURL = URL(string: videoUrl)
         }
+        if let isVideoSlideshow = mediaItem.metadata?.isVideoSlideshow {
+            metaData?.isVideoSlideshow = isVideoSlideshow
+        }
     }
     
     func copyFileData(from item: WrapData) {
@@ -1052,28 +1106,38 @@ class WrapData: BaseDataSourceItem, Wrappered {
         lastModifiDate = item.lastModifiDate
         md5 = item.md5
         tmpDownloadUrl = item.tmpDownloadUrl
+        status = item.status
         metaData?.copy(metaData: item.metaData)
     }
     
     class func getDuration(duration: Double?) -> String {
-        if let d = duration {
-            let s = CGFloat(d)
-            let seconds = Int(s) % 60
-            let minutes = Int(s) / 60
-            
-            if (minutes < 100) {
-                return String(format: "%02i:%02i", minutes, seconds)
-            } else {
-                return String(format: "%i:%02i", minutes, seconds)
-            }
+        guard let duration = duration else {
+            return ""
         }
-        return ""
+        
+        let rounded = round(duration)
+        
+        let seconds = Int(rounded) % 60
+        let minutes = Int(duration) / 60
+        
+        if minutes < 100 {
+            return String(format: "%02i:%02i", minutes, seconds)
+        } else {
+            return String(format: "%i:%02i", minutes, seconds)
+        }
     }
     
     func getTrimmedLocalID() -> String {
         if isLocalItem, let localID = asset?.localIdentifier {
             return  localID.components(separatedBy: "/").first ?? localID
         } else if uuid.contains("~"){
+            return uuid.components(separatedBy: "~").first ?? uuid
+        }
+        return uuid
+    }
+    
+    func getFisrtUUIDPart() -> String {
+        if uuid.contains("~") {
             return uuid.components(separatedBy: "~").first ?? uuid
         }
         return uuid
@@ -1122,6 +1186,7 @@ extension WrapData {
             metaDate == wrapData.metaDate &&
             lastModifiDate == wrapData.lastModifiDate &&
             tmpDownloadUrl?.byTrimmingQuery == wrapData.tmpDownloadUrl?.byTrimmingQuery &&
+            status == wrapData.status &&
             metaData == wrapData.metaData
     }
 

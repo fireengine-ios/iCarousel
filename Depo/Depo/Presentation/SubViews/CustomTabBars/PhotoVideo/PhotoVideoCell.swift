@@ -9,9 +9,6 @@
 import UIKit
 import SDWebImage
 
-protocol PhotoVideoCellDelegate: class {
-    func onLongPressBegan(at cell: PhotoVideoCell)
-}
 
 final class PhotoVideoCell: UICollectionViewCell {
 
@@ -61,7 +58,6 @@ final class PhotoVideoCell: UICollectionViewCell {
         }
     }
     
-    weak var delegate: PhotoVideoCellDelegate?
     private var cellId = ""
     var filesDataSource: FilesDataSource?
     private var cellImageManager: CellImageManager?
@@ -72,7 +68,6 @@ final class PhotoVideoCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupLongPressRecognizer()
         
         thumbnailImageView.contentMode = .scaleAspectFill
         backgroundColor = ColorConstants.fileGreedCellColor
@@ -80,53 +75,7 @@ final class PhotoVideoCell: UICollectionViewCell {
         isAccessibilityElement = true
         accessibilityTraits = UIAccessibilityTraitImage
     }
-    
-    private func setupLongPressRecognizer() {
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onLongPress))
-        longPressRecognizer.minimumPressDuration = BaseCollectionViewCell.durationOfSelection
-        longPressRecognizer.delaysTouchesBegan = true
-        addGestureRecognizer(longPressRecognizer)
-    }
-    
-//    func setup(with wraped: WrapData) {
-//
-//        accessibilityLabel = wraped.name
-//        favoriteImageView.isHidden = !wraped.favorites
-//
-//        if wraped.isLocalItem, wraped.fileSize < NumericConstants.fourGigabytes {
-//            cloudStatusImageView.image = UIImage(named: "objectNotInCloud")
-//        } else {
-//            cloudStatusImageView.image = nil
-//        }
-//
-//        switch wraped.fileType {
-//        case .video:
-//            videoDurationLabel.text = wraped.duration
-//            videoPlayIcon.isHidden = false
-//            videoDurationLabel.isHidden = false
-//        default:
-//            videoPlayIcon.isHidden = true
-//            videoDurationLabel.isHidden = true
-//        }
-//
-//        switch wraped.patchToPreview {
-//        case .localMediaContent(let local):
-//            cellId = local.asset.localIdentifier
-//
-//            filesDataSource?.getAssetThumbnail(asset: local.asset) { [weak self] image in
-//                DispatchQueue.toMain {
-//                    if self?.cellId == local.asset.localIdentifier, let image = image {
-//                        self?.setImage(image: image, shouldBeBlurred: false, animated: false)
-//                    }
-//                }
-//            }
-//
-//        case .remoteUrl(_):
-//            if let meta = wraped.metaData {
-//                setImage(smalUrl: meta.smalURl, mediumUrl: meta.mediumUrl)
-//            }
-//        }
-//    }
+
     
     func setup(with mediaItem: MediaItem) {
         checkmarkImageView.isHidden = true
@@ -241,24 +190,14 @@ final class PhotoVideoCell: UICollectionViewCell {
         thumbnailBlurVisualEffectView.isHidden = !shouldBeBlurred
         isBlurred = shouldBeBlurred
     }
-
-    @objc private func onLongPress(_ sender: UILongPressGestureRecognizer) {
-        if sender.state == .began {
-            
-            set(isSelected: true, isSelectionMode: true, animated: true)
-            if let delegate = delegate {
-                delegate.onLongPressBegan(at: self)
-            }
-        }
-    }
     
-    func set(isSelected: Bool, isSelectionMode: Bool, animated: Bool) {
+    func updateSelection(isSelectionMode: Bool, animated: Bool) {
         checkmarkImageView.isHidden = !isSelectionMode
         checkmarkImageView.image = UIImage(named: isSelected ? "selected" : "notSelected")
         
         let selection = isSelectionMode && isSelected
         if animated {
-            UIView.animate(withDuration: NumericConstants.animationDuration) { 
+            UIView.animate(withDuration: NumericConstants.animationDuration) {
                 self.selectionStateView.alpha = selection ? 1 : 0
             }
         } else {

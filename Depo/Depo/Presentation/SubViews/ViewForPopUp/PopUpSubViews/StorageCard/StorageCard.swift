@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StorageCard: BaseView {
+class StorageCard: BaseCardView {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTileLabel: UILabel!
@@ -127,10 +127,10 @@ class StorageCard: BaseView {
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
         
-        configurateByResponceObject()
+        configurateByResponseObject()
     }
     
-    func configurateByResponceObject() {
+    func configurateByResponseObject() {
         if operationType == .freeAppSpaceCloudWarning, let percent = cardObject?.details?["usage-percentage"].int {
             subTileLabel.text = String(format: TextConstants.homeStorageCardCloudSubTitle, percent)
         }

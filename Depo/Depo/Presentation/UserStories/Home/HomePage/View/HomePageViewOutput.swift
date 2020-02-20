@@ -7,10 +7,12 @@
 //
 
 protocol HomePageViewOutput {
-
+    
     func viewIsReady()
-       
-    func homePagePresented()
+    
+    func viewWillAppear()
+    
+    func viewIsReadyForPopUps()
     
     func showSettings()
     
@@ -32,5 +34,6 @@ protocol HomePageViewOutput {
     
     func requestShowSpotlight(for types: [SpotlightType])
     
-    func needCheckQuota()
+    func giftButtonPressed()
+    
 }

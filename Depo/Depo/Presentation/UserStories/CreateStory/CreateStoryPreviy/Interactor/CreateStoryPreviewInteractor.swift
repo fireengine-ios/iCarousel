@@ -9,7 +9,7 @@
 class CreateStoryPreviewInteractor {
     weak var output: CreateStoryPreviewInteractorOutput?
     var story: PhotoStory?
-    var responce: CreateStoryResponce?
+    var response: CreateStoryResponse?
     var isRequestStarted = false
     private let analyticsManager: AnalyticsService = factory.resolve()
     private lazy var createStoryService = CreateStoryService(transIdLogging: true)
@@ -19,10 +19,12 @@ class CreateStoryPreviewInteractor {
 extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
     
     func viewIsReady() {
-        guard let resp = responce else {
+        guard let resp = response else {
             return
         }
-        output?.startShowVideoFromResponce(responce: resp)
+        output?.startShowVideoFromResponse(response: resp)
+        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.CreateStoryPreviewScreen())
         analyticsManager.logScreen(screen: .createStoryPreview)
         analyticsManager.trackDimentionsEveryClickGA(screen: .createStoryPreview)
     }
@@ -44,12 +46,14 @@ extension CreateStoryPreviewInteractor: CreateStoryPreviewInteractorInput {
         
         createStoryService.createStory(createStory: parameter, success: { [weak self] in
             DispatchQueue.main.async {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.CreateStory(status: .success))
                 self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .story, eventLabel: .crateStory(.save))
                 self?.output?.storyCreated()
                 ItemOperationManager.default.newStoryCreated()
             }
             
         }, fail: {[weak self] error in
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.CreateStory(status: .failure))
             DispatchQueue.main.async {
                 self?.output?.storyCreatedWithError()
                 self?.isRequestStarted = false

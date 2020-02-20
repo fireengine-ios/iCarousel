@@ -142,7 +142,7 @@ final class ProfileTextViewEnterView: UIView {
     // MARK: placeholder
     
     private let placeHolderText = TextConstants.explainYourProblemShortly
-    private let placeHolderColor = UIColor.lightGray
+    private let placeHolderColor = ColorConstants.lightGrayColor
     private let textColor = UIColor.black
     
     /// https://stackoverflow.com/a/27652289/5893286

@@ -11,7 +11,7 @@ class PackagesPresenter {
     var interactor: PackagesInteractorInput!
     var router: PackagesRouterInput!
     
-    var availableOffers: [SubscriptionPlan] = []
+    var availableOffers: [PackageOffer] = []
     
     private var quotaInfo: QuotaInfoResponse?
 
@@ -23,7 +23,6 @@ class PackagesPresenter {
     private var offerIndex: Int = 0
     private var optInVC: OptInController?
     private var percentage: CGFloat = 0
-    private var storageUsage: UsageResponse?
     
     private func refreshPage() {
         availableOffers = []
@@ -46,6 +45,7 @@ class PackagesPresenter {
 
 // MARK: PackagesViewOutput
 extension PackagesPresenter: PackagesViewOutput {
+    
     func getAccountType() -> AccountType {
         return accountType
     }
@@ -58,6 +58,7 @@ extension PackagesPresenter: PackagesViewOutput {
         interactor.trackScreen()
         
         view?.startActivityIndicator()
+        interactor.getQuotaInfo()
         interactor.getAccountType()
         
         view?.startActivityIndicator()
@@ -66,27 +67,38 @@ extension PackagesPresenter: PackagesViewOutput {
     func viewWillAppear() {
         view?.startActivityIndicator()
         interactor.getUserAuthority()
+        interactor.refreshActivePurchasesState(false)
     }
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
-
+        router.closePaymentPopUpController(closeAction: { [weak self] in
+            self?.actionFor(plan: plan, planIndex: planIndex)
+        })
+    }
+    
+    private func actionFor(plan: SubscriptionPlan, planIndex: Int) {
         interactor.trackPackageClick(plan: plan, planIndex: planIndex)
+        
         guard let model = plan.model as? PackageModelResponse else {
             return
         }
+        
         switch model.type {
         case .SLCM?:
-            let title = String(format: TextConstants.turkcellPurchasePopupTitle, model.quota?.bytesString ?? "")
-
-            let price = interactor.getPriceInfo(for: model, accountType: accountType)
-            view?.showActivateOfferAlert(with: title, price: price, for: model, planIndex: planIndex)
+            buy(offer: model, planIndex: planIndex)
+            
         case .apple?:
             view?.startActivityIndicator()
             interactor.activate(offer: model, planIndex: planIndex)
+        case .paycellAllAccess?, .paycellSLCM?:
+            if let offerId = model.cpcmOfferId {
+                view?.showPaycellProcess(with: offerId)
+            }
+
         default:
             let error = CustomErrors.serverError("This is not buyable offer type")
             failed(with: error.localizedDescription)
-         }
+        }
     }
     
     func buy(offer: PackageModelResponse, planIndex: Int) {
@@ -123,7 +135,7 @@ extension PackagesPresenter: PackagesViewOutput {
 // MARK: - OptInControllerDelegate
 extension PackagesPresenter: OptInControllerDelegate {
     func optInResendPressed(_ optInVC: OptInController) {
-        optInVC.startActivityIndicator()
+        optInVC.startLoading()
         self.optInVC = optInVC
         if let offer = offerToBuy {
             interactor.getResendToken(for: offer)
@@ -141,7 +153,7 @@ extension PackagesPresenter: OptInControllerDelegate {
     }
     
     func optIn(_ optInVC: OptInController, didEnterCode code: String) {
-        optInVC.startActivityIndicator()
+        optInVC.startLoading()
         self.optInVC = optInVC
         interactor.verifyOffer(offerToBuy, planIndex: offerIndex, token: referenceToken, otp: code)
     }
@@ -149,7 +161,7 @@ extension PackagesPresenter: OptInControllerDelegate {
 
 // MARK: PackagesInteractorOutput
 extension PackagesPresenter: PackagesInteractorOutput {
-   
+  
     func setQuotaInfo(quotoInfo: QuotaInfoResponse) {
         self.quotaInfo = quotoInfo
         setMemoryPercentage()
@@ -161,7 +173,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successedVerifyOffer() {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.resignFirstResponder()
         
         DispatchQueue.toMain {
@@ -180,15 +192,15 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(tokenForResend: String) {
         referenceToken = tokenForResend
-        optInVC?.stopActivityIndicator()
-        optInVC?.setupTimer(withRemainingTime: NumericConstants.vereficationTimerLimit)
+        optInVC?.stopLoading()
+        optInVC?.setupTimer(withRemainingTime: NumericConstants.verificationTimerLimit)
         optInVC?.startEnterCode()
         optInVC?.hiddenError()
         optInVC?.hideResendButton()
     }
     
     func successed(accountTypeString: String) {
-        accountType = interactor.getAccountType(with: accountTypeString, offers: [])
+        accountType = interactor.getAccountType(with: accountTypeString, offers: []) ?? .all
         
         if accountType != .turkcell {
             view?.showInAppPolicy()
@@ -207,21 +219,23 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successed(allOffers: [PackageModelResponse]) {
-        accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)
+        /// show only non-feature offers
+        let allOffers = allOffers.filter { $0.featureType == nil }
         
+        accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)  ?? .all
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
-        availableOffers = offers.filter({
-            guard let model = $0.model as? PackageModelResponse, let type = model.type else { return false }
-            
-            ///show only offers with type slcm and apple(if apple sent offer info)
-            switch type {
-            case .SLCM: return true
-            case .apple: return IAPManager.shared.product(for: model.inAppPurchaseId ?? "") != nil
-            default: return false
-            }
-        })
+        availableOffers = filterPackagesByQuota(offers: offers)
+        
         view?.stopActivityIndicator()
         view?.reloadData()
+    }
+    
+    func filterPackagesByQuota(offers: [SubscriptionPlan]) -> [PackageOffer] {
+
+        return Dictionary(grouping: offers, by: { $0.quota })
+            .compactMap { dict in
+                    return PackageOffer(quotaNumber: dict.key, offers: dict.value)
+            }.sorted(by: { $0.quotaNumber < $1.quotaNumber })
     }
 
     func successedGotUserAuthority() {
@@ -234,7 +248,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func failedVerifyOffer() {
-        optInVC?.stopActivityIndicator()
+        optInVC?.stopLoading()
         optInVC?.clearCode()
         optInVC?.view.endEditing(true)
         
@@ -245,8 +259,12 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func failedUsage(with error: ErrorResponse) {
-        optInVC?.stopActivityIndicator()
-        optInVC?.showError(error.description)
+        if let optInVC = optInVC {
+            optInVC.stopLoading()
+            optInVC.showError(error.description)
+        } else {
+            failed(with: error.description)
+        }
     }
 
     func failed(with errorMessage: String) {
@@ -275,7 +293,10 @@ extension PackagesPresenter: PackageInfoViewDelegate {
     func onSeeDetailsTap(with type: ControlPackageType) {
         switch type {
         case .myStorage:
-            router.openMyStorage(storageUsage: storageUsage)
+            let usage = UsageResponse()
+            usage.usedBytes = quotaInfo?.bytesUsed
+            usage.quotaBytes = quotaInfo?.bytes
+            router.openMyStorage(storageUsage: usage)
         case .accountType(let accountType):
             router.openLeavePremium(type: accountType.leavePremiumType)
         case .myProfile:

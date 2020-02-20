@@ -34,6 +34,7 @@ class StoriesInteractor: BaseFilesGreedInteractor {
     }
     
     override func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.StoriesScreen())
         analyticsManager.logScreen(screen: .myStories)
         analyticsManager.trackDimentionsEveryClickGA(screen: .myStories)
     }

@@ -17,6 +17,7 @@ enum FloatingButtonsType {
     case createAlbum
     case uploadFromLifebox
     case uploadFromLifeboxFavorites
+    case importFromSpotify
 }
 
 enum TabScreenIndex: Int {
@@ -24,6 +25,14 @@ enum TabScreenIndex: Int {
     case photosScreenIndex = 1
     case contactsSyncScreenIndex = 3
     case documentsScreenIndex = 4
+}
+
+enum DocumentsScreenSegmentIndex: Int {
+    case allFiles = 0
+    case documents = 1
+    case music = 2
+    case favorites = 3
+    case trashBin = 4
 }
 
 final class TabBarViewController: ViewController, UITabBarDelegate {
@@ -66,13 +75,16 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     static let notificationUpdateThreeDots = "UpdateThreeDots"
     
     fileprivate var photoBtn: SubPlussButtonView!
+    fileprivate var importFromSpotifyBtn: SubPlussButtonView!
     fileprivate var uploadBtn: SubPlussButtonView!
     fileprivate var storyBtn: SubPlussButtonView!
     fileprivate var folderBtn: SubPlussButtonView!
     fileprivate var albumBtn: SubPlussButtonView!
     fileprivate var uploadFromLifebox: SubPlussButtonView!
     fileprivate var uploadFromLifeboxFavorites: SubPlussButtonView!
+    fileprivate var importFromSpotify: SubPlussButtonView!
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var spotifyRoutingService: SpotifyRoutingService = factory.resolve()
     
     //    let musicBar = MusicBar.initFromXib()
     lazy var player: MediaPlayer = factory.resolve()
@@ -136,7 +148,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         return result
     }
     
-    //MAKR: - View lifecycle
+    //MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,13 +164,16 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         selectedIndex = 0
         tabBar.selectedItem = tabBar.items?.first
         
-        
         changeVisibleStatus(hidden: true)
         setupObserving()
         
         player.delegates.add(self)
         
         plussButton.accessibilityLabel = TextConstants.accessibilityPlus
+        
+        #if LIFEDRIVE
+        plussButton.imageEdgeInsets = UIEdgeInsets(top: -15, left: -15, bottom: -15, right: -15)
+        #endif
     }
     
     override var childViewControllerForStatusBarStyle: UIViewController? {
@@ -209,7 +224,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                                                name: dropNotificationName,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showPhotosScreen),
+                                               selector: #selector(showPhotoScreen),
                                                name: NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen),
                                                object: nil)
         NotificationCenter.default.addObserver(self,
@@ -228,11 +243,23 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
     }
     
-    @objc func showPhotosScreen(_ sender: Any) {
+    func showAndScrollPhotosScreen(scrollTo item: Item? = nil) {
         tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
         selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
         lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
+        
+        if let item = item {
+            scrollPhotoPage(scrollTo: item)
+        }
     }
+    
+    @objc func showPhotoScreen() {
+        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]
+        selectedIndex = TabScreenIndex.photosScreenIndex.rawValue
+        lastPhotoVideoIndex = TabScreenIndex.photosScreenIndex.rawValue
+        openPhotoPage()
+    }
+    
     
     @objc func showVideosScreen(_ sender: Any) {
 //        tabBar.selectedItem = tabBar.items?[TabScreenIndex.photosScreenIndex.rawValue]// beacase they share same tab
@@ -241,6 +268,13 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     @objc func showMusicBar(_ sender: Any) {
+        if let segmentedController = customNavigationControllers[selectedIndex].viewControllers.first as? SegmentedController,
+            segmentedController.currentController is TrashBinViewController {
+            musicBar.status = .trashed
+        } else {
+            musicBar.status = .active
+        }
+
         musicBar.configurateFromPLayer()
         changeVisibleStatus(hidden: false)
         
@@ -252,6 +286,33 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         changeVisibleStatus(hidden: true)
         musicBarHeightConstraint.constant = 0
         mainContentView.layoutIfNeeded()
+    }
+    
+    private func scrollPhotoPage(scrollTo item: Item) {
+            if let photosController = openPhotoPage()?.currentController as? PhotoVideoController {
+                photosController.scrollToItem(item)
+            }
+    }
+    
+    @discardableResult
+    private func openPhotoPage() -> SegmentedController? {
+        
+        guard let segmentedController = activeNavigationController?.viewControllers.last as? SegmentedController else {
+            return nil
+        }
+        
+        segmentedController.loadViewIfNeeded()
+        
+        if (segmentedController.currentController as? PhotoVideoController)?.isPhoto == false {
+            // if photo page is not active
+            guard let index = segmentedController.viewControllers.firstIndex(where: { ($0 as? PhotoVideoController)?.isPhoto == true } ) else {
+                assertionFailure("Photo page not found")
+                return nil
+            }
+            segmentedController.switchSegment(to: index)
+        }
+        return segmentedController
+        
     }
     
     private func changeVisibleStatus(hidden: Bool) {
@@ -373,9 +434,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     fileprivate func changeViewState(state: Bool) {
         plussButton.isSelected = state
         
+        let rotationAngle: CGFloat = .pi / 4
+        
         UIView.animate(withDuration: NumericConstants.animationDuration) {
             if state {
-                self.plussButton.transform = CGAffineTransform(rotationAngle: .pi / 4)
+                self.plussButton.transform = CGAffineTransform(rotationAngle: rotationAngle)
             } else {
                 self.plussButton.transform = CGAffineTransform(rotationAngle: 0)
             }
@@ -459,6 +522,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         albumBtn = createSubButton(withText: TextConstants.createAlbum, imageName: "NewFolder", asLeft: false)
         albumBtn?.changeVisability(toHidden: true)
         
+        importFromSpotify = createSubButton(withText: TextConstants.importFromSpotifyBtn, imageName: "ImportFromSpotify", asLeft: true)
+        importFromSpotify.changeVisability(toHidden: true)
+        
         mainContentView.bringSubview(toFront: plussButton)
     }
     
@@ -470,7 +536,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             subButton.translatesAutoresizingMaskIntoConstraints = false
             
             subButton.bottomConstraint = NSLayoutConstraint(item: subButton, attribute: .bottom, relatedBy: .equal, toItem: mainContentView, attribute: .bottom, multiplier: 1, constant: 0)
-            subButton.bottomConstraintOrigialConstant = 0
+            subButton.bottomConstraintOriginalConstant = 0
             
             subButton.centerXConstraint = NSLayoutConstraint(item: subButton, attribute: .centerX, relatedBy: .equal, toItem: mainContentView, attribute: .centerX, multiplier: 1, constant: 0)
             subButton.centerXConstraintOriginalConstant = 0
@@ -509,6 +575,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 buttonsArray.append(uploadFromLifebox)
             case .uploadFromLifeboxFavorites:
                 buttonsArray.append(uploadFromLifeboxFavorites)
+            case .importFromSpotify:
+                buttonsArray.append(importFromSpotify)
             }
         }
         
@@ -528,6 +596,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         buttonsArray.append(uploadBtn)
         buttonsArray.append(uploadFromLifebox)
         buttonsArray.append(uploadFromLifeboxFavorites)
+        buttonsArray.append(importFromSpotify)
         return buttonsArray
     }
     
@@ -544,6 +613,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             obj0.centerXConstraint!.constant = 0
             obj0.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace
         }
+        
         if count == 2 {
             let obj0 = buttonsArray[0]
             let obj1 = buttonsArray[1]
@@ -554,6 +624,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             obj1.centerXConstraint!.constant = obj0.frame.size.width * 0.75
             obj1.bottomConstraint!.constant = -obj0.frame.size.height * 0.75 - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
         }
+        
         if count == 3 {
             let obj0 = buttonsArray[0]
             let obj1 = buttonsArray[1]
@@ -568,6 +639,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             obj2.centerXConstraint!.constant = obj0.frame.size.width
             obj2.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
         }
+        
         if count == 4 {
             let obj0 = buttonsArray[0]
             let obj1 = buttonsArray[1]
@@ -577,17 +649,16 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             obj0.centerXConstraint!.constant = -obj0.frame.size.width
             obj0.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
             
-            obj1.centerXConstraint!.constant = -obj0.frame.size.width * 0.5
+            obj1.centerXConstraint!.constant = -obj0.frame.size.width * 0.55
             obj1.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
             
-            obj2.centerXConstraint!.constant = obj0.frame.size.width * 0.5
+            obj2.centerXConstraint!.constant = obj0.frame.size.width * 0.55
             obj2.bottomConstraint!.constant = -obj3.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
             
             obj3.centerXConstraint!.constant = obj0.frame.size.width
             obj3.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
-            
-            
         }
+        
         changeButtonsAppearance(toHidden: false, withAnimation: true, forButtons: buttonsArray)
         //view.layoutIfNeeded()
     }
@@ -707,6 +778,8 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             action = .uploadFromApp
         case uploadFromLifeboxFavorites:
             action = .uploadFromAppFavorites
+        case importFromSpotify:
+            action = .importFromSpotify
         default:
             return
         }
@@ -735,11 +808,16 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         let url = URL(string: UUID().uuidString, relativeTo: RouteRequests.baseUrl)
         SDWebImageManager.shared().saveImage(toCache: image, for: url)
         
-        let wrapData = WrapData(imageData: data)
+        let wrapData = WrapData(imageData: data, isLocal: true)
+        /// usedUIImageJPEGRepresentation
+        if let wrapDataName = wrapData.name {
+            wrapData.name = wrapDataName + ".JPG"
+        }
+        
         wrapData.patchToPreview = PathForItem.remoteUrl(url)
         
         let isFromAlbum = RouterVC().isRootViewControllerAlbumDetail() 
-        UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: getFolderUUID() ?? "", isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: true, success: {
+        UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: getFolderUUID() ?? "", isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: true, success: {
         }, fail: { [weak self] error in
             DispatchQueue.main.async {
                 let vc = PopUpController.with(title: TextConstants.errorAlert,
@@ -807,6 +885,7 @@ extension TabBarViewController: TabBarActionHandler {
             router.pushViewController(viewController: controller)
 
         case .upload:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .uploadFromPlus))
             guard !checkReadOnlyPermission() else { return }
             
             let controller = router.uploadPhotos()
@@ -827,7 +906,10 @@ extension TabBarViewController: TabBarActionHandler {
             
             let controller: UIViewController
             if let currentVC = currentViewController as? BaseFilesGreedViewController {
-                controller = router.uploadFromLifeBox(folderUUID: parentFolder, soorceUUID: "", sortRule: currentVC.getCurrentSortRule())
+                controller = router.uploadFromLifeBox(folderUUID: parentFolder,
+                                                      soorceUUID: "",
+                                                      sortRule: currentVC.getCurrentSortRule(),
+                                                      type: .List)
             } else {
                 controller = router.uploadFromLifeBox(folderUUID: parentFolder)
             }
@@ -852,6 +934,10 @@ extension TabBarViewController: TabBarActionHandler {
             let navigationController = NavigationController(rootViewController: controller)
             navigationController.navigationBar.isHidden = false
             router.presentViewController(controller: navigationController)
+        case .importFromSpotify:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .spotifyImport))
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .importSpotify)
+            spotifyRoutingService.connectToSpotify(isSettingCell: false, completion: nil)
         }
     }
     

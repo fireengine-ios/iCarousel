@@ -22,11 +22,18 @@ final class PhotoVideoThreeDotMenuManager {
         self.delegate = delegate
     }
     
-    func showActions(for items: [WrapData], isSelectingMode: Bool, sender: Any?) {
+    func showActions(for items: [WrapData], isSelectingMode: Bool, isPhoto: Bool, sender: Any?) {
         if isSelectingMode {
-            actionsForImageItems(items) { [weak self] types in
-                self?.alert.show(with: types, for: items, presentedBy: sender, onSourceView: nil, viewController: nil)
+            if isPhoto {
+                actionsForImageItems(items) { [weak self] types in
+                    self?.alert.show(with: types, for: items, presentedBy: sender, onSourceView: nil, viewController: nil)
+                }
+            } else {
+                actionsForVideoItems(items) { [weak self] types in
+                    self?.alert.show(with: types, for: items, presentedBy: sender, onSourceView: nil, viewController: nil)
+                }
             }
+            
         } else {
             self.alert.show(with: [.select, .instaPick], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
         }
@@ -40,32 +47,67 @@ final class PhotoVideoThreeDotMenuManager {
         
         /// locals only
         if remoteItems.isEmpty {
-            actionTypes = [.createStory]
+            actionTypes = [.createStory, .addToAlbum]
             completion(actionTypes)
             
             /// local and remotes or remotes only
         } else {
-            actionTypes = [.createStory, .print, .deleteDeviceOriginal]
+            actionTypes = [.createStory]
             
             /// add .addToFavorites if need
-            let thereIsNoFavorite = remoteItems.first(where: { !$0.favorites }) != nil
-            if thereIsNoFavorite {
+            let hasUnfavorite = remoteItems.first(where: { !$0.favorites }) != nil
+            if hasUnfavorite {
                 actionTypes.append(.addToFavorites)
             }
             
             /// add .removeFromFavorites if need
-            let thereIsFavorite = remoteItems.first(where: { $0.favorites }) != nil
-            if thereIsFavorite {
+            let hasFavorite = remoteItems.first(where: { $0.favorites }) != nil
+            if hasFavorite {
                 actionTypes.append(.removeFromFavorites)
             }
             
+            actionTypes.append(contentsOf: [.addToAlbum, .print])
+            
             /// remove .deleteDeviceOriginal if need
             MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems) { duplicates in
-                if duplicates.isEmpty, let deleteDeviceOriginalIndex = actionTypes.index(of: .deleteDeviceOriginal) {
-                    actionTypes.remove(at: deleteDeviceOriginalIndex)
+                if !duplicates.isEmpty {
+                    actionTypes.append(.deleteDeviceOriginal)
                 }
                 completion(actionTypes)
             }
+        }
+    }
+    
+    private func actionsForVideoItems(_ items: [WrapData], completion: @escaping ([ElementTypes]) -> Void) {
+        
+        let remoteItems = items.filter { !$0.isLocalItem }
+        var actionTypes = [ElementTypes]()
+        
+        guard !remoteItems.isEmpty else {
+            completion(actionTypes)
+            return
+        }
+        
+        /// add .addToFavorites if need
+        let thereIsNoFavorite = remoteItems.first(where: { !$0.favorites }) != nil
+        if thereIsNoFavorite {
+            actionTypes.append(.addToFavorites)
+        }
+        
+        /// add .removeFromFavorites if need
+        let thereIsFavorite = remoteItems.first(where: { $0.favorites }) != nil
+        if thereIsFavorite {
+            actionTypes.append(.removeFromFavorites)
+        }
+        
+        actionTypes.append(.addToAlbum)
+        
+        /// remove .deleteDeviceOriginal if need
+        MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems) { duplicates in
+            if !duplicates.isEmpty {
+                actionTypes.append(.deleteDeviceOriginal)
+            }
+            completion(actionTypes)
         }
     }
     

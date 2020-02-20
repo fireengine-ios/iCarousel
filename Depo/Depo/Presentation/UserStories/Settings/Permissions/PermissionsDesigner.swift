@@ -19,12 +19,23 @@ final class PermissionsDesigner: NSObject {
         }
     }
     
-    @IBOutlet weak var descriptionLabel: UILabel! {
+    @IBOutlet weak var descriptionView: UITextView! {
         willSet {
-            newValue.textColor = UIColor.lrLightBrownishGrey
-            newValue.font = .TurkcellSaturaFont(size: 16)
             newValue.backgroundColor = .white
             newValue.isOpaque = true
+            
+            newValue.linkTextAttributes = [
+                NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
+                NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
+                NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+            ]
+            
+            /// to remove insets
+            /// https://stackoverflow.com/a/42333832/5893286
+            newValue.textContainer.lineFragmentPadding = 0
+            newValue.textContainerInset = .zero
+            
+            newValue.isEditable = false
         }
     }
     
@@ -38,3 +49,5 @@ final class PermissionsDesigner: NSObject {
         }
     }
 }
+
+
