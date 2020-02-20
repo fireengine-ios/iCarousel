@@ -48,8 +48,6 @@
 @property NSInteger initialContactCount;
 @property PartialInfo *partialInfo;
 
-@property (nonatomic, copy) void (^backupCallback)();
-
 + (SYNC_INSTANCETYPE) shared;
 
 
@@ -603,15 +601,16 @@ static bool syncing = false;
 // ######## BACKUP FUNCTIONS ########
 
 -(void) startPartialBackup{
-    [self setBackupCallbackHandler];
     [self fetchLocalContactsForBackup];
 }
 
--(void) setBackupCallbackHandler {
-    [SyncHelper shared].backupCallback = ^void() {
-        [self.partialInfo stepUp];
-        [self fetchLocalContactsForBackup];
-    };
+-(void) runNextPartBackup{
+    if ([SyncSettings shared].mode == SYNCBackup) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self.partialInfo stepUp];
+            [self fetchLocalContactsForBackup];
+        });
+    }
 }
 
 - (void)fetchLocalContactsForBackup
@@ -671,13 +670,12 @@ static bool syncing = false;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.updateId = [defaults objectForKey:SYNC_KEY_CHECK_UPDATE];
-    SYNC_Log(@"Progress Key : %@ %@",self.updateId,self.partialInfo)
+    SYNC_Log(@"Progress Key : %@",self.updateId);
+    [self.partialInfo print];
     
     if (!self.partialInfo.isFirstStep && !self.partialInfo.isLastStep && [contacts count]==0){
         SYNC_Log(@"Ignore this step %zd", self.partialInfo.currentStep);
-        if (self.backupCallback!=nil){
-            self.backupCallback();
-        }
+        [self runNextPartBackup];
         return;
     }
     
@@ -969,10 +967,12 @@ static bool syncing = false;
         if (result == SYNC_RESULT_ERROR_DEPO) {
             [SyncStatus shared].status = result;
             [self callStats:messages];
+            SYNC_Log(@"Depo failed");
             return;
         }
     } else {
         if (!self.partialInfo || [self.partialInfo isLastStep]){
+            SYNC_Log(@"Last step");
             syncing = false;
             [self.partialInfo erase];
         }
@@ -1005,16 +1005,21 @@ static bool syncing = false;
                                 errorCode: errorCode
           errorMsg:(result == SYNC_RESULT_SUCCESS ? nil : [[SyncStatus shared] resultTypeToString:result]) callback:^(id response, BOOL success) {
               if (success){
-                  BackupStats *stats = [[BackupStats alloc] initWithDictionary:response[@"data"]];
-                  [SyncStatus shared].deletedOnServer = stats.deletedOnServer;
-                  [SyncStatus shared].createdOnServer = stats.createdOnServer;
-                  [SyncStatus shared].updatedOnServer = stats.updatedOnServer;
-                  [SyncStatus shared].mergedOnServer = stats.mergedOnServer;
+                  SYNC_Log(@"Stats success");
+                  [self.partialInfo erase];
+                  if (!SYNC_IS_NULL(response[@"data"])) {
+                      BackupStats *stats = [[BackupStats alloc] initWithDictionary:response[@"data"]];
+                      [SyncStatus shared].deletedOnServer = stats.deletedOnServer;
+                      [SyncStatus shared].createdOnServer = stats.createdOnServer;
+                      [SyncStatus shared].updatedOnServer = stats.updatedOnServer;
+                      [SyncStatus shared].mergedOnServer = stats.mergedOnServer;
+                  }
                   
                   if ([self.partialInfo isLastStep]){
                       [self callStats:messages];
                   }
               } else {
+                  SYNC_Log(@"Stats failed");
                   [self callStats:messages];
               }
     }];
@@ -1032,9 +1037,7 @@ static bool syncing = false;
             [[SyncStatus shared] notifyProgress:[self partialInfo] step:SYNC_STEP_UPLOAD_LOG progress: 100];
             [[ContactUtil shared] releaseAddressBookRef];
         } else {
-            if (self.backupCallback){
-                self.backupCallback();
-            }
+            [self runNextPartBackup];
         }
     }
     
