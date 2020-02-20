@@ -70,7 +70,6 @@ final class BackgroundSynkService {
         // Fetch no earlier than 15 sec from now
         request.earliestBeginDate = Date(timeIntervalSinceNow: 15)
         request.requiresNetworkConnectivity = true
-        request.requiresExternalPower = true
         request.requiresExternalPower = false
         
         do {
@@ -88,7 +87,7 @@ final class BackgroundSynkService {
         // Fetch no earlier than 15 sec from now
         request.earliestBeginDate = Date(timeIntervalSinceNow: 15)
         request.requiresNetworkConnectivity = true
-        request.requiresExternalPower = true
+        request.requiresExternalPower = false
         
         do {
             try BGTaskScheduler.shared.submit(request)
