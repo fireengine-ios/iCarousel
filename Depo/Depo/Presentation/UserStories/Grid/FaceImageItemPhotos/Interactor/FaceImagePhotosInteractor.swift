@@ -14,8 +14,9 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
     private let peopleService = PeopleService()
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
-    private lazy var hideService: HideFuncServiceProtocol = HideSmashCoordinator()
     
+    private lazy var hideActionService: HideActionServiceProtocol = HideActionService()
+
     var album: AlbumItem?
     var status: ItemStatus = .active
     
@@ -115,7 +116,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
             return
         }
         
-        hideService.startHideAlbumsOperation(for: [album], output: output, success: { [weak self] in
+        hideActionService.startOperation(for: .albums([album]), output: output, success: {  [weak self] in
             self?.output.completeAsyncOperationEnableScreen()
         }, fail: { [weak self] errorResponse in
             self?.output.completeAsyncOperationEnableScreen(errorMessage: errorResponse.description)
