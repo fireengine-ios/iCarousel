@@ -136,12 +136,14 @@ class SyncServiceManager {
     func backgroundTaskSync(handler: @escaping BoolHandler) {
         
         guard coreDataStack.isReady else {
+            handler(false)
             return
         }
         
         dispatchQueue.async { [weak self] in
             
-            guard let `self` = self else {
+            guard let self = self else {
+                handler(false)
                 return
             }
             

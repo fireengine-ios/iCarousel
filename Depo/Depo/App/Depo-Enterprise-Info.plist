@@ -4,7 +4,8 @@
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>background_sync</string>
+		<string>background_refresh</string>
+		<string>background_processing</string>
 	</array>
 	<key>LSApplicationCategoryType</key>
 	<string></string>

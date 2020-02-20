@@ -237,7 +237,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if #available(iOS 13.0, *) {
-            backgroundSyncService.scheduleBackgroundSync()
+            backgroundSyncService.scheduleRefreshSync()
+            backgroundSyncService.scheduleProcessingSync()
         }
     }
     
