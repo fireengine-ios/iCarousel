@@ -54,7 +54,7 @@ final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
                     guard
                         $0.metadata?.takenDate != nil,
                         let name = $0.name,
-                        name.isPathExtensionGif()
+                        !name.isPathExtensionGif()
                     else {
                         return false
                     }
