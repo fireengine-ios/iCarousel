@@ -97,6 +97,7 @@
 "My Stream" = "Smart Albums";
 "You have free space for %d more items." = "%d items deleted from your device to free up storage on your device. As the last step, delete photos from Recently Deleted album from your device.";
 "Delete" = "Delete";
+"empty_trash_bin" = "Empty Trash Bin";
 "Some photos will also be deleted from an album." = "Some photos will also be deleted from an album.";
 "Allow lifebox to delete %d photos?" = "Allow lifebox to delete %d photos?";
 "There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "There are %d duplicated photos both on your device and lifebox. Clear some space by selecting the photos that you want to delete.";
@@ -1425,6 +1426,10 @@
 "trash_bin_album_slider_title" = "Trash Bin";
 "trash_bin_album_slider_empty" = "There is no deleted album yet.";
 "trash_bin_empty" = "There is no deleted item yet.";
+"confirm_dialog_header_empty_trashbin" = "Empty Trash Bin";
+"confirm_empty_trashbin" = "All of the items in trash bin will be permanently deleted and you will have no access to them. Are you sure to continue?";
+"confirm_empty_trashbin_button" = "Empty Trash Bin";
+"success_empty_trashbin" = "All of the items are permanently deleted";
 "delete_confirmation_popup_title" = "Delete permanently";
 "delete_confirmation_popup_text" = "Deleting these files will move them to Trash Bin. Are you sure you want to delete?";
 "restore_confirmation_popup_title" = "Restore";

@@ -83,4 +83,6 @@ protocol MoreFilesActionsInteractorInput {
     func deleteDeviceOriginal(items: [BaseDataSourceItem])
     
     func trackEvent(elementType: ElementTypes)
+    
+    func emptyTrashBin()
 }
