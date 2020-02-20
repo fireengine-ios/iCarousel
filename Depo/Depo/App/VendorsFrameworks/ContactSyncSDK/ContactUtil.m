@@ -48,7 +48,7 @@
 //    CFErrorRef error = nil;
     
     // Request authorization to Address Book
-    if (_addressBook != nil) {
+    if (_addressBook) {
         callback(YES);
         return;
     }
@@ -118,7 +118,7 @@
     SYNC_Log(@"%@", @"Get AddressBookRef");
     CFErrorRef error = nil;
     
-    if (_addressBook != nil){
+    if (_addressBook){
         return;
 //        CFRelease(_addressBook);
     }
@@ -633,8 +633,8 @@
     NSMutableArray *ret = [NSMutableArray new];
     
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( _addressBook );
-    CFIndex nPeople = ABAddressBookGetPersonCount( _addressBook );
-    
+    CFIndex nPeople = CFArrayGetCount(allPeople);
+
     for ( int i = 0; i < nPeople; i++ )
     {
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i);
@@ -656,11 +656,11 @@
     NSMutableArray *ret = [NSMutableArray new];
     
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( _addressBook );
-    CFIndex nPeople = ABAddressBookGetPersonCount( _addressBook );
+    CFIndex nPeople = CFArrayGetCount(allPeople);
 
     NSInteger index = (offset != -1 ? offset: 0);
 
-    SYNC_Log(@"bulkCount %zd offset %zd index %zd", bulkCount, offset, index)
+    SYNC_Log(@"bulkCount %zd offset %zd index %zd npeople %zd", bulkCount, offset, index, nPeople)
     for ( ; index < nPeople; index++ )
     {
         if (offset > -1 && bulkCount > 0 && index == (bulkCount + offset)){
@@ -702,8 +702,8 @@
         return;
     }
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( _addressBook );
-    CFIndex nPeople = ABAddressBookGetPersonCount( _addressBook );
-    
+    CFIndex nPeople = CFArrayGetCount(allPeople);
+
     for ( int i = 0; i < nPeople; i++ )
     {
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
