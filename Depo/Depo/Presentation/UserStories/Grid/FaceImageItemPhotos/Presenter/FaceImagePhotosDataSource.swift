@@ -8,33 +8,60 @@
 
 import UIKit
 
+protocol FaceImagePhotosDataSourceDelegate: BaseDataSourceForCollectionViewDelegate {
+    func didFinishFIRAlbum(operation: ElementTypes, album: Item)
+}
+
 final class FaceImagePhotosDataSource: BaseDataSourceForCollectionView {
     
     var album: AlbumItem?
     var item: Item?
     
+    private var firDelegate: FaceImagePhotosDataSourceDelegate? {
+        delegate as? FaceImagePhotosDataSourceDelegate
+    }
+    
     override func didHideAlbums(_ albums: [AlbumItem]) {
-        notifyHideItem()
-        delegate?.didDelete(items: albums)
+        notifyOperation(type: .hide, for: albums)
     }
 
     override func didUnhideAlbums(_ albums: [AlbumItem]) {
-        notifyUnhideItem()
-        delegate?.didDelete(items: albums)
+        notifyOperation(type: .unhide, for: albums)
     }
     
     override func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        notifyMoveToTrashItem()
-        delegate?.didDelete(items: albums)
+        notifyOperation(type: .moveToTrash, for: albums)
     }
     
     override func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
-        notifyRestoreItem()
-        delegate?.didDelete(items: albums)
+        notifyOperation(type: .restore, for: albums)
     }
 
     override func albumsDeleted(albums: [AlbumItem]) {
-        delegate?.didDelete(items: albums)
+        notifyOperation(type: .delete, for: albums)
+    }
+    
+    private func notifyOperation(type: ElementTypes, for albums: [AlbumItem]) {
+        guard let uuid = albums.first?.uuid, uuid == album?.uuid, let item = item else {
+            return
+        }
+        
+        switch type {
+        case .hide:
+            notifyHideItem()
+        case .unhide:
+            notifyUnhideItem()
+        case .moveToTrash:
+            notifyMoveToTrashItem()
+        case .restore:
+            notifyRestoreItem()
+        case .delete:
+            break
+        default:
+            return
+        }
+        
+        firDelegate?.didFinishFIRAlbum(operation: type, album: item)
     }
 
     private func notifyHideItem() {

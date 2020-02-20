@@ -57,9 +57,7 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     }
     
     private func setupNavigation() {
-        hidenNavigationBarStyle()
-        statusBarColor = .black
-        setNavigationBackgroundColor(color: .black)
+        blackNavigationBarStyle()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(didEnterBackground),

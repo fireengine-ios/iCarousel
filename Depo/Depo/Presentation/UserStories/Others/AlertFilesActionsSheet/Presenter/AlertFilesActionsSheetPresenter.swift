@@ -205,13 +205,17 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             
             if let remoteItems = items?.filter({ !$0.isLocalItem }) as? [Item], remoteItems.count > 0 {
                 if remoteItems.contains(where: { !$0.favorites }) {
-                    filteredActionTypes.append(.addToFavorites)
+                    if !filteredActionTypes.contains(.addToFavorites) {
+                        filteredActionTypes.append(.addToFavorites)
+                    }
                 } else if let addToFavoritesIndex = filteredActionTypes.index(of: .addToFavorites) {
                     filteredActionTypes.remove(at: addToFavoritesIndex)
                 }
                 
                 if remoteItems.contains(where: { $0.favorites }) {
-                    filteredActionTypes.append(.removeFromFavorites)
+                    if !filteredActionTypes.contains(.removeFromFavorites) {
+                        filteredActionTypes.append(.removeFromFavorites)
+                    }
                 } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
                     filteredActionTypes.remove(at: removeFromFavorites)
                 }

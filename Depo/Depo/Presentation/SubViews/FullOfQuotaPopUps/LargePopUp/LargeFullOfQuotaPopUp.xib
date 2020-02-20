@@ -7,13 +7,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LargeFullOfQuotaPopUp" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LargeFullOfQuotaPopUp" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
                 <outlet property="backgroundImageView" destination="0UO-3v-M7N" id="qG5-Cd-dqZ"/>
+                <outlet property="checkBoxLabel" destination="OiY-SP-uNa" id="PIZ-Yj-CSO"/>
+                <outlet property="closeButton" destination="eO0-IT-2fp" id="QBi-w6-6UA"/>
                 <outlet property="containerView" destination="UjI-IO-v9x" id="VXr-FO-qxN"/>
+                <outlet property="customCheckBox" destination="OWx-VQ-EMy" id="gGd-nE-brh"/>
+                <outlet property="deleteFilesButton" destination="hNa-DH-6mO" id="Yxn-kS-rHG"/>
+                <outlet property="doNotShowStackView" destination="WSw-dD-Avu" id="LBt-kV-LaA"/>
                 <outlet property="expandButton" destination="fhD-Qc-mob" id="Haq-Wb-j2Z"/>
                 <outlet property="gradientView" destination="gwP-lA-H0d" id="SeO-uH-q6t"/>
-                <outlet property="skipButton" destination="hNa-DH-6mO" id="2HC-CL-hSs"/>
                 <outlet property="subTitleLabel" destination="yw4-vK-fSk" id="Cx1-m8-lTk"/>
                 <outlet property="titleLabel" destination="ihW-uN-ZBI" id="UVF-SP-0xk"/>
                 <outlet property="view" destination="bhu-Rg-o8Y" id="os9-oD-TFm"/>
@@ -40,7 +44,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UjI-IO-v9x">
                                     <rect key="frame" x="16" y="41.5" width="288" height="485"/>
                                     <subviews>
-                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwP-lA-H0d" customClass="GradientOrangeView" customModule="lifebox" customModuleProvider="target">
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwP-lA-H0d" customClass="GradientOrangeView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="341"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0UO-3v-M7N">
@@ -49,12 +53,18 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUB-BS-OkE">
                                                     <rect key="frame" x="0.0" y="94" width="288" height="153"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CardIconLamp" translatesAutoresizingMaskIntoConstraints="NO" id="O7j-zA-Iyp">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CardIconLampWhite" translatesAutoresizingMaskIntoConstraints="NO" id="O7j-zA-Iyp">
                                                             <rect key="frame" x="105" y="0.0" width="78" height="72"/>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="78" id="XIs-UE-EEf"/>
                                                                 <constraint firstAttribute="height" constant="72" id="qex-64-WEA"/>
                                                             </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihW-uN-ZBI">
                                                             <rect key="frame" x="8" y="97" width="272" height="20.5"/>
@@ -82,9 +92,51 @@
                                                         <constraint firstAttribute="bottom" secondItem="yw4-vK-fSk" secondAttribute="bottom" id="hAL-CS-OVs"/>
                                                     </constraints>
                                                 </view>
+                                                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="WSw-dD-Avu">
+                                                    <rect key="frame" x="107" y="272" width="74" height="18"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OWx-VQ-EMy" customClass="CustomCheckBox" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="18" id="2FH-od-95L"/>
+                                                                <constraint firstAttribute="height" constant="18" id="8Qi-Hv-mxT"/>
+                                                                <constraint firstAttribute="height" constant="18" id="NXd-0y-fuv"/>
+                                                                <constraint firstAttribute="width" constant="18" id="TaI-QZ-pN4"/>
+                                                            </constraints>
+                                                            <state key="selected" image="checkMarkDarkBlueIcon"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="NO"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                            <variation key="default">
+                                                                <mask key="constraints">
+                                                                    <exclude reference="2FH-od-95L"/>
+                                                                    <exclude reference="NXd-0y-fuv"/>
+                                                                </mask>
+                                                            </variation>
+                                                            <variation key="heightClass=regular-widthClass=regular">
+                                                                <mask key="constraints">
+                                                                    <include reference="2FH-od-95L"/>
+                                                                    <exclude reference="8Qi-Hv-mxT"/>
+                                                                    <include reference="NXd-0y-fuv"/>
+                                                                    <exclude reference="TaI-QZ-pN4"/>
+                                                                </mask>
+                                                            </variation>
+                                                            <connections>
+                                                                <action selector="onCustomCheckBoxTap:" destination="-1" eventType="touchUpInside" id="Ey0-qO-975"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiY-SP-uNa">
+                                                            <rect key="frame" x="32" y="0.0" width="42" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.32505967881944442" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstItem="WSw-dD-Avu" firstAttribute="centerX" secondItem="gwP-lA-H0d" secondAttribute="centerX" id="0a9-4w-00U"/>
                                                 <constraint firstItem="0UO-3v-M7N" firstAttribute="leading" secondItem="gwP-lA-H0d" secondAttribute="leading" id="7zP-hm-Gf6"/>
                                                 <constraint firstItem="KUB-BS-OkE" firstAttribute="centerY" secondItem="gwP-lA-H0d" secondAttribute="centerY" id="8Hp-cj-O9o"/>
                                                 <constraint firstItem="0UO-3v-M7N" firstAttribute="top" secondItem="gwP-lA-H0d" secondAttribute="top" id="G79-yJ-mHY"/>
@@ -92,12 +144,13 @@
                                                 <constraint firstAttribute="bottom" secondItem="0UO-3v-M7N" secondAttribute="bottom" id="d1v-mW-08L"/>
                                                 <constraint firstItem="KUB-BS-OkE" firstAttribute="leading" secondItem="gwP-lA-H0d" secondAttribute="leading" id="dLO-21-hXf"/>
                                                 <constraint firstAttribute="trailing" secondItem="0UO-3v-M7N" secondAttribute="trailing" id="ipF-c4-B7g"/>
+                                                <constraint firstItem="WSw-dD-Avu" firstAttribute="top" secondItem="KUB-BS-OkE" secondAttribute="bottom" constant="25" id="tLY-L6-jOB"/>
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cmz-ke-uAQ">
                                             <rect key="frame" x="0.0" y="336" width="288" height="144"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhD-Qc-mob" customClass="BlueButtonWithWhiteText" customModule="lifebox" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhD-Qc-mob" customClass="BlueButtonWithWhiteText" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                                     <rect key="frame" x="38" y="30" width="212" height="54"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="54" id="QNk-vT-zJK"/>
@@ -133,7 +186,7 @@
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
-                                                        <action selector="onSkipButton" destination="-1" eventType="touchUpInside" id="0yi-7z-D9t"/>
+                                                        <action selector="onDeleteFilesButton" destination="-1" eventType="touchUpInside" id="c0B-ER-idw"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -150,10 +203,23 @@
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fhD-Qc-mob" secondAttribute="trailing" constant="10" id="uxL-Ea-JaA"/>
                                             </constraints>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eO0-IT-2fp">
+                                            <rect key="frame" x="255" y="0.0" width="33" height="33"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="33" id="ElE-0h-GL7"/>
+                                                <constraint firstAttribute="width" constant="33" id="KSN-ox-tKc"/>
+                                            </constraints>
+                                            <state key="normal" image="CloseCardIconWhite"/>
+                                            <connections>
+                                                <action selector="onCloseButton" destination="-1" eventType="touchUpInside" id="QJq-ea-x2Z"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstItem="eO0-IT-2fp" firstAttribute="top" secondItem="UjI-IO-v9x" secondAttribute="top" id="0w3-jx-X1O"/>
                                         <constraint firstAttribute="height" constant="607" id="7RN-Tx-nAc"/>
+                                        <constraint firstAttribute="trailing" secondItem="eO0-IT-2fp" secondAttribute="trailing" id="7de-zh-ee6"/>
                                         <constraint firstAttribute="trailing" secondItem="gwP-lA-H0d" secondAttribute="trailing" id="FsB-9X-EUW"/>
                                         <constraint firstAttribute="trailing" secondItem="Cmz-ke-uAQ" secondAttribute="trailing" id="Oqm-7X-nKt"/>
                                         <constraint firstAttribute="bottom" secondItem="Cmz-ke-uAQ" secondAttribute="bottom" constant="5" id="ToB-ep-NRa"/>
@@ -245,6 +311,8 @@
         </view>
     </objects>
     <resources>
-        <image name="CardIconLamp" width="65" height="60"/>
+        <image name="CardIconLampWhite" width="78" height="72"/>
+        <image name="CloseCardIconWhite" width="14" height="14"/>
+        <image name="checkMarkDarkBlueIcon" width="14" height="11"/>
     </resources>
 </document>

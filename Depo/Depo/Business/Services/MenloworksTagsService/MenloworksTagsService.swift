@@ -39,7 +39,7 @@ class MenloworksTagsService {
             var tag: MenloworksTag?
             
             ///must be in the main queue
-            let notInBackground = UIApplication.shared.applicationState == .active
+            let notInBackground = ApplicationStateHelper.shared.safeApplicationState == .active
             
             switch type {
             case .image:

@@ -74,13 +74,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
     }
     
-    private(set) var objects = [Item]() {
-        didSet {
-            collectionView.reloadData()
-            scrollToSelectedIndex()
-            collectionView.layoutIfNeeded()
-        }
-    }
+    private(set) var objects = [Item]()
     
     private var selectedItem: Item? {
         if let index = selectedIndex {
@@ -235,8 +229,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
+        //update collection on first launch or on change selectedItem
+        let needUpdate: Bool
+        if let selectedItem = selectedItem, selectedItem == items[safe: index] {
+            needUpdate = false
+        } else {
+            needUpdate = true
+        }
         selectedIndex = index
-        objects = items
+        updateAllItems(with: items, updateCollection: needUpdate)
     }
 
     @objc func onRightBarButtonItem(sender: UIButton) {
@@ -263,6 +264,16 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     @objc private func applicationDidEnterBackground(_ application: UIApplication) {
         localPlayer?.pause()
+    }
+    
+    private func updateAllItems(with items: [Item], updateCollection: Bool) {
+        objects = items
+        
+        if updateCollection {
+            collectionView.reloadData()
+            scrollToSelectedIndex()
+            collectionView.layoutIfNeeded()
+        }
     }
 }
 
@@ -313,14 +324,23 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         }
     }
     
-    func updateItems(objectsArray: [Item], selectedIndex: Int, isRightSwipe: Bool) {
+    func updateItems(objectsArray: [Item], selectedIndex: Int) {
         self.selectedIndex = selectedIndex
-        objects = objectsArray
+        updateAllItems(with: objectsArray, updateCollection: true)
+    }
+    
+    func appendItems(_ items: [Item]) {
+        let startIndex = objects.count
+        objects.append(contentsOf: items)
+        let endIndex = objects.count - 1
+        
+        let indexPaths = (startIndex...endIndex).map { IndexPath(item: $0, section: 0) }
+        collectionView.insertItems(at: indexPaths)
     }
     
     func onLastRemoved() {
         selectedIndex = nil
-        objects.removeAll()
+        updateAllItems(with: [], updateCollection: true)
     }
     
     func getNavigationController() -> UINavigationController? {
@@ -337,23 +357,26 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
     }
     
     func finishedUploadFile(file: WrapData) {
-        DispatchQueue.toMain { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            
+        DispatchQueue.main.async {
             self.replaceUploaded(file)
-            self.output.replaceUploaded(file)
-            self.output.updateBars()
-            self.setupNavigationBar()
         }
     }
     
     private func replaceUploaded(_ item: WrapData) {
-        if let indexToChange = objects.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) {
-            //need for display local image
-            item.patchToPreview = objects[indexToChange].patchToPreview
-            objects[indexToChange] = item
+        guard let indexToChange = objects.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) else {
+            return
+        }
+        
+        //need for display local image
+        item.patchToPreview = objects[indexToChange].patchToPreview
+        objects[indexToChange] = item
+        output.replaceUploaded(item)
+        
+        let visibleIndexes = collectionView.indexPathsForVisibleItems.map { $0.item }
+        // update bars only for visible item
+        if visibleIndexes.contains(indexToChange) {
+            output.updateBars()
+            setupNavigationBar()
         }
     }
 }
@@ -377,6 +400,10 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         }
         cell.delegate = self
         cell.setObject(object: objects[indexPath.row])
+        
+        if indexPath.row == objects.count - 1 {
+            output.willDisplayLastCell()
+        }
     }
 }
 

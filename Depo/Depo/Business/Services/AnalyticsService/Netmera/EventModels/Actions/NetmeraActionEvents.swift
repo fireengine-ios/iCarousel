@@ -572,12 +572,12 @@ extension NetmeraEvents.Actions {
             
             switch uploadType {
             case .autoSync:
-                if UIApplication.shared.applicationState == .background {
+                if ApplicationStateHelper.shared.isBackground {
                     appopriateUploadType = .background
                 } else {
                     appopriateUploadType = .autosync
                 }
-            case .fromHomePage, .syncToUse, .other:
+            case .upload, .syncToUse:
                 appopriateUploadType = .manual
             }
             

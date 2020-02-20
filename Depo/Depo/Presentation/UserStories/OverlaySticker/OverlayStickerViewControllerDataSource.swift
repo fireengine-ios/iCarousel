@@ -68,12 +68,7 @@ final class OverlayStickerViewControllerDataSource: NSObject {
         }
     }
     
-    override init() {
-        super.init()
-        loadNext()
-    }
-    
-    private func loadNext() {
+    func loadNext() {
         
         let selectedType: StickerType = selectedAttachmentType == .gif ? .gif : .image
         let selectedPage = currentState.page
@@ -133,7 +128,7 @@ final class OverlayStickerViewControllerDataSource: NSObject {
                 }
                 
                 DispatchQueue.toMain {
-                    cell.setupGif(image: image)
+                    cell.setupGif(image: image, url: url)
                 }
             }
         }
@@ -155,13 +150,13 @@ extension OverlayStickerViewControllerDataSource: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        guard let cell = cell as? StickerCollectionViewCell else {
+        guard let cell = cell as? StickerCollectionViewCell,
+              let object = currentState.source[safe: indexPath.row]
+        else {
             return
         }
 
-        let object = currentState.source[indexPath.row]
-        cell.setup(with: object, type: selectedAttachmentType)
-        
+        cell.setup(with: object, type: selectedAttachmentType)        
         if selectedAttachmentType == .gif {
             downloadGifForCell(cell: cell, url: object.path)
         }

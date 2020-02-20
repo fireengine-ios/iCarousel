@@ -712,8 +712,12 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func uploadPhotos(rootUUID: String) -> UIViewController {
-        let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController(rootUUID: rootUUID)
+    func uploadPhotos(rootUUID: String,
+                      getItems: LocalAlbumPresenter.PassBaseDataSourceItemsHandler?,
+                      saveItems: LocalAlbumPresenter.ReturnBaseDataSourceItemsHandler?) -> UIViewController {
+        let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController(rootUUID: rootUUID,
+                                                                                                    getItems: getItems,
+                                                                                                    saveItems: saveItems)
         return controller
     }
     
@@ -758,37 +762,38 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func filesDetailViewController(fileObject: WrapData, items: [WrapData], status: ItemStatus) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
-                                                                                    selectedItem: fileObject,
-                                                                                    allItems: items,
-                                                                                    status: status)
-        let c = controller as! PhotoVideoDetailViewController
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return c
+    func filesDetailModule(fileObject: WrapData, items: [WrapData], status: ItemStatus, canLoadMoreItems: Bool, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
+        let module = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
+                                                                                moduleOutput: moduleOutput,
+                                                                                selectedItem: fileObject,
+                                                                                allItems: items,
+                                                                                status: status,
+                                                                                canLoadMoreItems: canLoadMoreItems)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return module
     }
     
-    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, status: ItemStatus) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
-                                                                                         selectedItem: fileObject,
-                                                                                         allItems: items,
-                                                                                         albumUUID: albumUUID,
-                                                                                         status: status)
-        let c = controller as! PhotoVideoDetailViewController
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return c
+    func filesDetailAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
+        let module = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                                     moduleOutput: moduleOutput,
+                                                                                     selectedItem: fileObject,
+                                                                                     allItems: items,
+                                                                                     albumUUID: albumUUID,
+                                                                                     status: status)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return module
     }
     
-    func filesDetailFaceImageAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?, status: ItemStatus) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
-                                                                                         selectedItem: fileObject,
-                                                                                         allItems: items,
-                                                                                         albumUUID: albumUUID,
-                                                                                         albumItem: albumItem,
-                                                                                         status: status)
-        let c = controller as! PhotoVideoDetailViewController
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return c
+    func filesDetailFaceImageAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
+        let module = PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                                              moduleOutput: moduleOutput,
+                                                                                              selectedItem: fileObject,
+                                                                                              allItems: items,
+                                                                                              albumUUID: albumUUID,
+                                                                                              albumItem: albumItem,
+                                                                                              status: status)
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        return module
     }
 
     // MARK: Albums list
@@ -1162,5 +1167,14 @@ class RouterVC: NSObject {
     
     func trashBinController() -> TrashBinViewController {
         return TrashBinViewController.initFromNib()
+    }
+    
+    func showFullQuotaPopUp() {
+        let controller = FullQuotaWarningPopUp()
+        DispatchQueue.main.async {
+            if let topController = self.defaultTopController, topController is AutoSyncViewController == false {
+                topController.present(controller, animated: false)
+            }
+        }
     }
 }

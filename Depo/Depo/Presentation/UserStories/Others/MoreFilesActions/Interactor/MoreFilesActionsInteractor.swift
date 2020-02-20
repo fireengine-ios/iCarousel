@@ -259,24 +259,32 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func smash(item: [BaseDataSourceItem], completion: VoidHandler?) {
+        
         guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
             return
         }
+        
+        let controller = OverlayStickerViewController()
+        controller.smashCoordinator = self.smashService
+        let navVC = NavigationController(rootViewController: controller)
+        self.router.presentViewController(controller: navVC)
+        
         ImageDownloder().getImage(patch: url) { [weak self] image in
             guard let self = self, let image = image else {
-                UIApplication.showErrorAlert(message: TextConstants.errorServer)
+                if !ReachabilityService.shared.isReachable {
+                    controller.dismiss(animated: false) {
+                         UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+                    }
+                }
+        
                 completion?()
                 return
             }
             
-            let controller = OverlayStickerViewController()
             controller.selectedImage = image
             controller.imageName = item.name
-            controller.smashCoordinator = self.smashService
-            let navVC = NavigationController(rootViewController: controller)
-            
             completion?()
-            self.router.presentViewController(controller: navVC)
+            
             self.trackEvent(elementType: .smash)
         }
     }
@@ -997,9 +1005,9 @@ extension MoreFilesActionsInteractor {
             text = localizations.folders
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            self?.router.hideSpiner()
-            self?.showSuccessPopup(message: text)
+        DispatchQueue.main.async {
+            self.router.hideSpiner()
+            self.showSuccessPopup(message: text)
         }
     }
     

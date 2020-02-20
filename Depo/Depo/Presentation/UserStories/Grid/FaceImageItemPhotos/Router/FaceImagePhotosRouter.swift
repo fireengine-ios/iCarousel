@@ -19,13 +19,15 @@ final class FaceImagePhotosRouter: BaseFilesGreedRouter {
         guard let wrapperedArray = sameTypeItems as? [Item] else { return }
         
         let albumUUID = router.getParentUUID()
-        let controller = router.filesDetailFaceImageAlbumViewController(fileObject: wrappered,
-                                                                        items: wrapperedArray,
-                                                                        albumUUID: albumUUID,
-                                                                        albumItem: item,
-                                                                        status: view.status)
+        let detailModule = router.filesDetailFaceImageAlbumModule(fileObject: wrappered,
+                                                                  items: wrapperedArray,
+                                                                  albumUUID: albumUUID,
+                                                                  albumItem: item,
+                                                                  status: view.status,
+                                                                  moduleOutput: moduleOutput as? PhotoVideoDetailModuleOutput)
             
-        let nController = NavigationController(rootViewController: controller)
+        presenter.photoVideoDetailModule = detailModule.moduleInput
+        let nController = NavigationController(rootViewController: detailModule.controller)
         router.presentViewController(controller: nController)
     }
     

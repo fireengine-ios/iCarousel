@@ -259,7 +259,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func showPasscodeIfNeedInBackground() {
-        let state = UIApplication.shared.applicationState
+        let state = ApplicationStateHelper.shared.safeApplicationState
         if state == .background || state == .inactive {
             showPasscodeIfNeed()
         }
