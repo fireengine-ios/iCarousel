@@ -51,8 +51,13 @@ final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
                 var filteredItems = filteredItems
                 /// filter missing dates
                 filteredItems.append(contentsOf: items.filter {
-                        $0.metadata?.takenDate != nil &&
-                        !($0.name?.contains("gif") ?? true )
+                    guard $0.metadata?.takenDate != nil,
+                          let name = $0.name,
+                          name.isPathExtensionGif() else
+                    {
+                                return false
+                    }
+                        return true
                     })
                 
                 let isSomethingFiltered = (filteredItems.count != items.count)
