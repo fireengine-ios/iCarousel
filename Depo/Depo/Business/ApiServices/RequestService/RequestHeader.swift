@@ -16,6 +16,7 @@ struct HeaderConstant {
     static let ApplicationJson = "application/json"
     
     static let ContentType = "Content-Type"
+    static let ContentRange = "Content-Range"
     static let ApplicationJsonUtf8 = "application/json; encoding=utf-8"
     
     

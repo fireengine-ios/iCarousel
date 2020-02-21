@@ -68,12 +68,7 @@ final class OverlayStickerViewControllerDataSource: NSObject {
         }
     }
     
-    override init() {
-        super.init()
-        loadNext()
-    }
-    
-    private func loadNext() {
+    func loadNext() {
         
         let selectedType: StickerType = selectedAttachmentType == .gif ? .gif : .image
         let selectedPage = currentState.page

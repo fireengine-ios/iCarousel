@@ -186,7 +186,7 @@ BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET
 
     gym(
       # configuration: config, #"Adhoc", # Defaults to 'Release'
-      scheme: "Depo_LifeTech_PROD",
+      scheme: "Depo_LifeTech",
       silent: true, # Hide all information that's not necessary while building
       clean: false,
       output_directory: "./#{BUILD_FOLDER_NAME}",    # store the ipa in this folder
@@ -403,12 +403,12 @@ lane :my_gym_lifedrive do # |options|
 
   desc "fastlane-plugin-versioning required. also it needs more time that my class"
   lane :test_get_build_number do
-    build_number = get_build_number_from_plist(xcodeproj: "Depo.xcodeproj", scheme: "Depo_LifeTech_PROD")
+    build_number = get_build_number_from_plist(xcodeproj: "Depo.xcodeproj", scheme: "Depo_LifeTech")
     puts "version: #{build_number}"
 
-    increment_build_number_in_plist(build_number: build_number + "_preprod", scheme: "Depo_LifeTech_PROD")
+    increment_build_number_in_plist(build_number: build_number + "_preprod", scheme: "Depo_LifeTech")
 
-    build_number = get_build_number_from_plist(xcodeproj: "Depo.xcodeproj", scheme: "Depo_LifeTech_PROD")
+    build_number = get_build_number_from_plist(xcodeproj: "Depo.xcodeproj", scheme: "Depo_LifeTech")
     puts "new version: #{build_number}"
   end
 

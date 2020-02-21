@@ -23,7 +23,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     
     private lazy var router = RouterVC()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    
+    private var photoVideoDetailModule: PhotoVideoDetailModuleInput?
     //MARK: - View lifecycle
     
     deinit {
@@ -209,6 +209,7 @@ extension HiddenPhotosViewController: HiddenPhotosSortingManagerDelegate {
 
 extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
     func didLoadPhoto(items: [Item]) {
+        photoVideoDetailModule?.appendItems(items, isLastPage: false)
         dataSource.append(items: items) { [weak self] in
             self?.checkEmptyView()
             self?.setMoreButton()
@@ -221,6 +222,7 @@ extension HiddenPhotosViewController: HiddenPhotosDataLoaderDelegate {
     }
     
     func didFinishLoadAlbums() {
+        photoVideoDetailModule?.appendItems([], isLastPage: true)
         dataSource.finishLoadAlbums()
     }
     
@@ -283,9 +285,16 @@ extension HiddenPhotosViewController: HiddenPhotosThreeDotMenuManagerDelegate {
 extension HiddenPhotosViewController {
     private func showDetails(item: Item) {
         let items = dataSource.allItems.flatMap { $0 }
-        let controller = router.filesDetailViewController(fileObject: item, items: items, status: .hidden)
-        let navController = NavigationController(rootViewController: controller)
-        router.presentViewController(controller: navController)
+
+        let detailModule = router.filesDetailModule(fileObject: item,
+                                                    items: items,
+                                                    status: .hidden,
+                                                    canLoadMoreItems: true,
+                                                    moduleOutput: self)
+
+        photoVideoDetailModule = detailModule.moduleInput
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        router.presentViewController(controller: nController)
     }
     
     private func openSearch() {
@@ -444,5 +453,13 @@ extension HiddenPhotosViewController: MoreFilesActionsInteractorOutput {
         if let message = errorMessage {
             UIApplication.showErrorAlert(message: message)
         }
+    }
+}
+
+//MARK: - PhotoVideoDetailModuleOutput
+
+extension HiddenPhotosViewController: PhotoVideoDetailModuleOutput {
+    func needLoadNextPage() {
+        dataLoader.loadNextPhotoPage()
     }
 }

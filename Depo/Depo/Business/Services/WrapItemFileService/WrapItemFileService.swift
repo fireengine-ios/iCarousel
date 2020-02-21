@@ -177,7 +177,7 @@ class WrapItemFileService: WrapItemFileOperations {
         let localFiles = localWrapedData(files: items)
         
         uploadService.uploadFileList(items: localFiles,
-                                     uploadType: .fromHomePage,
+                                     uploadType: .upload,
                                      uploadStategy: .WithoutConflictControl,
                                      uploadTo: .MOBILE_UPLOAD,
                                      success: success,
@@ -188,7 +188,7 @@ class WrapItemFileService: WrapItemFileOperations {
         let localFiles = localWrapedData(files: items)
         
         uploadService.uploadFileList(items: localFiles,
-                                     uploadType: .fromHomePage,
+                                     uploadType: .upload,
                                      uploadStategy: .WithoutConflictControl,
                                      uploadTo: .MOBILE_UPLOAD,
                                      success: success,

@@ -25,6 +25,7 @@ final class OverlayStickerViewController: ViewController {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private let stickerService = SmashServiceImpl()
     private lazy var overlayAnimationService = OverlayAnimationService()
+    private lazy var router = RouterVC()
     
     private lazy var applyButton: UIBarButtonItem = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
@@ -42,7 +43,12 @@ final class OverlayStickerViewController: ViewController {
     
     private var isFullScreen = false
     
-    var selectedImage: UIImage?
+    var selectedImage: UIImage? {
+        didSet {
+            setupEnvironment()
+        }
+    }
+    
     var imageName: String?
     var smashCoordinator: SmashServiceProtocol?
 
@@ -50,15 +56,11 @@ final class OverlayStickerViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectStickerType(type: .gif)
-        setupImage()
         navigationController?.navigationBar.isHidden = true
         
         view.backgroundColor = .black
         statusBarColor = .black
-        overlayingStickerImageView.stickersDelegate = self
-        overlayStickerViewControllerDataSource.delegate = self
-        overlayStickerViewControllerDataSource.setStateForSelectedType(type: .gif)
+        showSpinner()
 
         addTapGesture()
     }
@@ -165,11 +167,14 @@ final class OverlayStickerViewController: ViewController {
     
     private func showPhotoVideoPreview(item: WrapData) {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SmashPreview())
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], status: item.status)
-        
-        controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = NavigationController(rootViewController: controller)
-        RouterVC().presentViewController(controller: nController)
+        let detailModule = router.filesDetailModule(fileObject: item,
+                                                    items: [item],
+                                                    status: item.status,
+                                                    canLoadMoreItems: false,
+                                                    moduleOutput: nil)
+
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        router.presentViewController(controller: nController)
         
         showCompletionPopUp()
     }
@@ -242,11 +247,20 @@ final class OverlayStickerViewController: ViewController {
         RouterVC().showFullQuotaPopUp()
     }
     
-    private func setupImage() {
+    private func setupEnvironment() {
         guard let selectedImage = selectedImage else {
             assertionFailure()
             return
         }
+        
+        loadView()
+        view.backgroundColor = .black
+        
+        selectStickerType(type: .gif)
+        
+        overlayingStickerImageView.stickersDelegate = self
+        overlayStickerViewControllerDataSource.delegate = self
+        overlayStickerViewControllerDataSource.loadNext()
         overlayingStickerImageView.image = selectedImage
     }
     

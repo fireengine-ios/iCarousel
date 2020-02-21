@@ -35,7 +35,7 @@ final class UploadService: BaseRequestService {
     
     
     private var allUploadOperationsCount: Int {
-        return uploadOperations.filter({ $0.uploadType == .fromHomePage && !$0.isCancelled }).count + finishedUploadOperationsCount
+        return uploadOperations.filter({ $0.uploadType.isContained(in: [.upload]) && !$0.isCancelled }).count + finishedUploadOperationsCount
     }
     private var finishedUploadOperationsCount = 0
     
@@ -75,9 +75,7 @@ final class UploadService: BaseRequestService {
         switch uploadType {
         case .autoSync:
             return .sync
-        case .syncToUse, .fromHomePage:
-            return .upload
-        case .other:
+        case .syncToUse, .upload:
             return .upload
         }
     }
@@ -195,7 +193,7 @@ final class UploadService: BaseRequestService {
     }
     
     private func hideUploadCardIfNeeded() {
-        if uploadOperations.filter({ $0.uploadType?.isContained(in: [.fromHomePage, .syncToUse]) ?? false }).count == 0 {
+        if uploadOperations.filter({ $0.uploadType?.isContained(in: [.upload, .syncToUse]) ?? false }).count == 0 {
             CardsManager.default.stopOperationWithType(type: .upload)
         }
     }
@@ -241,7 +239,7 @@ final class UploadService: BaseRequestService {
             // filter all items which md5's are not in the uploadOperations
             let itemsToUpload = items.filter { item -> Bool in
                 (self.uploadOperations.first(where: { operation -> Bool in
-                    if operation.inputItem.md5 == item.md5 && operation.uploadType?.isContained(in: [.autoSync, .fromHomePage]) ?? false {
+                    if operation.inputItem.md5 == item.md5 && operation.uploadType?.isContained(in: [.autoSync, .upload]) ?? false {
                         operation.cancel()
                         self.uploadOperations.removeIfExists(operation)
                         return false
@@ -264,7 +262,7 @@ final class UploadService: BaseRequestService {
             
             self.logSyncSettings(state: "StartSyncToUseFileList")
             
-            let operations: [UploadOperation] = itemsToUpload.flatMap {
+            let operations: [UploadOperation] = itemsToUpload.compactMap {
                 
                 let operation = UploadOperation(item: $0, uploadType: .syncToUse, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
                     self?.dispatchQueue.async { [weak self] in
@@ -363,8 +361,8 @@ final class UploadService: BaseRequestService {
             
             self.logSyncSettings(state: "StartUploadFileList")
             
-            let operations: [UploadOperation] = itemsToUpload.flatMap {
-                let operation = UploadOperation(item: $0, uploadType: .fromHomePage, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
+            let operations: [UploadOperation] = itemsToUpload.compactMap {
+                let operation = UploadOperation(item: $0, uploadType: .upload, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
                     self?.dispatchQueue.async { [weak self] in
                         guard let `self` = self else {
                             returnedOprations(nil)
@@ -372,7 +370,7 @@ final class UploadService: BaseRequestService {
                         }
                         
                         let checkIfFinished = {
-                            if self.uploadOperations.filter({ $0.uploadType == .fromHomePage }).isEmpty {
+                            if self.uploadOperations.filter({ $0.uploadType.isContained(in: [.upload]) }).isEmpty {
                                 self.trackUploadItemsFinished(items: itemsToUpload)
                                 success()
                                 ItemOperationManager.default.syncFinished()
@@ -423,7 +421,7 @@ final class UploadService: BaseRequestService {
             self.uploadQueue.addOperations(operations, waitUntilFinished: false)
             debugLog("UPLOADING upload: \(operations.count) have been added to the upload queue")
             print("UPLOADING upload: \(operations.count) have been added to the upload queue")
-            let oretiontoReturn = self.uploadOperations.filter({ $0.uploadType == .fromHomePage })
+        let oretiontoReturn = self.uploadOperations.filter({ $0.uploadType.isContained(in: [.upload]) })
             returnedOprations(oretiontoReturn)
 //        }
     }
@@ -459,7 +457,7 @@ final class UploadService: BaseRequestService {
             
             var successHandled = false
 
-            let operations: [UploadOperation] = itemsToSync.flatMap {
+            let operations: [UploadOperation] = itemsToSync.compactMap {
                 let operation = UploadOperation(item: $0, uploadType: .autoSync, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
                     self?.dispatchQueue.async { [weak self] in
                         guard let `self` = self else {
@@ -567,7 +565,7 @@ final class UploadService: BaseRequestService {
     }
     
     func cancelUploadOperations() {
-        var operationsToRemove = uploadOperations.filter({ $0.uploadType == .fromHomePage })
+        var operationsToRemove = uploadOperations.filter({ $0.uploadType.isContained(in: [.upload]) })
         
         cancelAndRemove(operations: operationsToRemove)
         
@@ -650,8 +648,8 @@ final class UploadService: BaseRequestService {
         finishedVideoSyncOperationsCount = 0
     }
     
-    func upload(uploadParam: Upload, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask? {
-        logEvent("StartUpload \(uploadParam.fileName)")
+    func upload(uploadParam: UploadRequestParametrs, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask? {
+        debugLog("StartUpload \(uploadParam.fileName)")
         
         let request = executeUploadRequest(param: uploadParam, response: { data, response, error in
             
@@ -669,6 +667,83 @@ final class UploadService: BaseRequestService {
             }
             
             fail?(.string("Error upload"))
+        })
+        
+        return request
+    }
+    
+    /**
+    Check if
+    - parameter uploadParam: ResumableUpload.
+     If empty == true, just resumable upload status will be checked without any data uploading
+     
+    - parameter handler: ResumableUploadHandler.
+     
+    - returns: URLSessionTask
+    */
+    func resumableUpload(uploadParam: ResumableUpload, handler: @escaping ResumableUploadHandler ) -> URLSessionTask? {
+        debugLog("resumableUpload \(uploadParam.fileName)")
+        
+        let request = executeUploadRequest(param: uploadParam, response: { data, response, error in
+            
+            let handleError = { (error: Error?) in
+                if let error = error {
+                    handler(nil, .error(error))
+                } else {
+                    handler(nil, .string("Error upload"))
+                }
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                handleError(error)
+                return
+            }
+
+            switch httpResponse.statusCode {
+            case 200...299:
+                handler(.completed, nil)
+                
+            case 308:
+                //should continue
+                guard
+                    let headerValue = httpResponse.allHeaderFields["Range"] as? String,
+                    let upperValueString = headerValue.lastNonEmptyHalf(after: "-"),
+                    let upperValue = Int(upperValueString)
+                else {
+                    handler(nil, nil)
+                    return
+                }
+                
+                handler(.uploaded(bytes: upperValue + 1), nil)
+                
+            case 400:
+                if let data = data {
+                    let json = JSON(data: data)
+                    let errorCode = json["error_code"].stringValue
+                    debugLog("resumable_upload: error_code is \(errorCode)")
+                    switch errorCode {
+                    case "RU_9":
+                        /// Provided first-byte-pos is not the continuation of the last-byte-pos of pre-uploaded part!
+                        handler(.discontinuityError, nil)
+                        
+                    case "RU_1":
+                        /// Invalid upload request! Initial upload must start from the beginning
+                        handler(.invalidUploadRequest, nil)
+                        
+                    default:
+                        handleError(error)
+                    }
+                } else {
+                    handleError(error)
+                }
+                
+            case 404:
+                // can't find prevous upload
+                handler(.didntStart, nil)
+                
+            default:
+                handleError(error)
+            }
         })
         
         return request
@@ -769,5 +844,18 @@ extension UploadService {
     
     @objc fileprivate func updateSyncSettings() {
         logSyncSettings(state: "Auto Sync setting changed")
+    }
+}
+
+
+private extension String {
+    func lastNonEmptyHalf(after separator: Character) -> String? {
+        guard
+            let substring = self.split(separator: separator, maxSplits: 2, omittingEmptySubsequences: true).last
+        else {
+            return nil
+        }
+        
+        return String(substring)
     }
 }
