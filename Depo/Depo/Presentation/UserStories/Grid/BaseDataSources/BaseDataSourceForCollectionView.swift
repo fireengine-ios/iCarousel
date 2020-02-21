@@ -65,8 +65,6 @@ protocol BaseDataSourceForCollectionViewDelegate: class {
     func newFolderCreated()
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath)
-    
-    func needToBack()
 }
 
 extension BaseDataSourceForCollectionViewDelegate {
@@ -96,8 +94,6 @@ extension BaseDataSourceForCollectionViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) { }
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath) {}
-    
-    func needToBack() { }
 }
 
 typealias PageItemsCallBack = ([WrapData])->Void

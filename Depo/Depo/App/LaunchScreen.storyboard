@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,31 +12,28 @@
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
-                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="ecH-D9-HgV">
-                                <rect key="frame" x="0.0" y="20" width="414" height="716"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImageLogo" translatesAutoresizingMaskIntoConstraints="NO" id="TOf-6H-Klj">
-                                <rect key="frame" x="143.66666666666666" y="390" width="126.66666666666666" height="16"/>
+                                <rect key="frame" x="142" y="333.66666666666669" width="130" height="129"/>
                             </imageView>
                         </subviews>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="TOf-6H-Klj" firstAttribute="width" secondItem="ecH-D9-HgV" secondAttribute="height" multiplier="65:368" id="0ik-01-dSs"/>
-                            <constraint firstItem="ecH-D9-HgV" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="0x8-gb-7DY"/>
+                            <constraint firstItem="ecH-D9-HgV" firstAttribute="leading" secondItem="KeP-Sm-Z8a" secondAttribute="leading" id="0x8-gb-7DY"/>
                             <constraint firstItem="TOf-6H-Klj" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="30" id="5jv-Re-DNz"/>
-                            <constraint firstItem="TOf-6H-Klj" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="M4c-d6-VRf"/>
-                            <constraint firstAttribute="trailing" secondItem="ecH-D9-HgV" secondAttribute="trailing" id="WIp-kq-C4c"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="ecH-D9-HgV" secondAttribute="bottom" id="XOy-SY-70G"/>
-                            <constraint firstItem="ecH-D9-HgV" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="pMy-Rz-W55"/>
+                            <constraint firstItem="TOf-6H-Klj" firstAttribute="centerX" secondItem="KeP-Sm-Z8a" secondAttribute="centerX" id="M4c-d6-VRf"/>
+                            <constraint firstItem="KeP-Sm-Z8a" firstAttribute="trailing" secondItem="ecH-D9-HgV" secondAttribute="trailing" id="WIp-kq-C4c"/>
+                            <constraint firstAttribute="bottom" secondItem="ecH-D9-HgV" secondAttribute="bottom" id="XOy-SY-70G"/>
+                            <constraint firstItem="ecH-D9-HgV" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="pMy-Rz-W55"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="KeP-Sm-Z8a"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -49,7 +45,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Background" width="127.33333587646484" height="227.33332824707031"/>
+        <image name="Background" width="375" height="667"/>
         <image name="LaunchImageLogo" width="130" height="129"/>
     </resources>
 </document>

@@ -7,7 +7,8 @@
 //
 
 import Foundation
-
+//FIXME: remove MBProgressHUD
+import MBProgressHUD
 
 
 enum ResumableUploadStatus {
@@ -154,6 +155,7 @@ final class UploadOperation: Operation {
                 }
                 
                 guard self.interruptedId != nil else {
+                    self.showToast(message: "Resumable upload")
                     /// can't check resumable status because don't have any related interrupted id
                     self.uploadContiniously(parameters: resumableParameters, success: success, fail: fail)
                     
@@ -175,6 +177,7 @@ final class UploadOperation: Operation {
                     }
                     
                     debugLog("resumable_upload: status is \(status)")
+                    self.showToast(message: "Resumable upload status is \(status)")
                     
                     switch status {
                     case .completed:
@@ -207,6 +210,7 @@ final class UploadOperation: Operation {
     
     private func checkResumeStatus(parameters: ResumableUpload, handler: @escaping ResumableUploadHandler) {
         debugLog("resumable_upload: checking status")
+        showToast(message: "Resumable status")
         requestObject = resumableUpload(uploadParam: parameters, handler: { [weak self] status, error in
             guard let self = self else {
                 handler(status, ErrorResponse.string(TextConstants.commonServiceError))
@@ -244,12 +248,6 @@ final class UploadOperation: Operation {
                 return
             }
             
-            guard let status = status else {
-                let error = error ?? ErrorResponse.string(TextConstants.commonServiceError)
-                fail(error)
-                return
-            }
-            
             if let error = error {
                 if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
                     self.retry { [weak self] in
@@ -261,7 +259,14 @@ final class UploadOperation: Operation {
                 return
             }
             
+            guard let status = status else {
+                let error = error ?? ErrorResponse.string(TextConstants.commonServiceError)
+                fail(error)
+                return
+            }
+            
             debugLog("resumable_upload: status is \(status)")
+            self.showToast(message: "\(status)")
             
             switch status {
             case .completed:
@@ -502,6 +507,24 @@ extension UploadOperation: OperationProgressServiceDelegate {
         if requestObject?.currentRequest?.url == url, let uploadType = uploadType {
             CardsManager.default.setProgress(ratio: actualRatio, operationType: UploadService.convertUploadType(uploadType: uploadType), object: inputItem)
             ItemOperationManager.default.setProgressForUploadingFile(file: inputItem, progress: actualRatio)
+        }
+    }
+    
+    //FIXME: remove showToast
+    private func showToast(message: String) {
+        DispatchQueue.toMain {
+            guard let window = UIApplication.shared.delegate?.window as? UIWindow else {
+                return
+            }
+            
+            let hud = MBProgressHUD.showAdded(to: window, animated: true)
+            
+            hud.label.text = message
+            hud.mode = .text
+            hud.removeFromSuperViewOnHide = true
+            hud.offset = CGPoint(x: 0, y: MBProgressMaxOffset)
+            
+            hud.hide(animated: true, afterDelay: 3.0)
         }
     }
 }

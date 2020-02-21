@@ -592,7 +592,9 @@
 "Sort By" = "Sort by";
 "LifeboxLargePopUpTitle100" = "Your lifebox storage is full";
 "LifeboxLargePopUpTitleBetween80And99" = "%.0f%% of your storage is full!";
-"LifeboxLargePopUpSubTitle" = "Please take a look at the upgrading options to upgrade your storage.";
+"LifeboxLargePopUpSubTitleBeetween80And99" = "lifeboxLargePopUpSubTitleBeetween80And99";
+"LifeboxLargePopUpSubTitle100Premium" = "lifeboxLargePopUpSubTitle100Premium";
+"LifeboxLargePopUpSubTitle100Freemium" = "lifeboxLargePopUpSubTitle100Freemium";
 "LifeboxLargePopUpExpandButtonTitle" = "Expand My Storage";
 "LifeboxLargePopUpSkipButtonTitle" = "Skip";
 "LifeboxLargePopUpDeleteFilesButtonTitle" = "Delete Files";

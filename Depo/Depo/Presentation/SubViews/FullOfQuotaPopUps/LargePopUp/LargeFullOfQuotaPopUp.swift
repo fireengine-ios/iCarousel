@@ -11,7 +11,7 @@ import UIKit
 //MARK: - LargeFullOfQuotaPopUpType
 enum LargeFullOfQuotaPopUpType{
     case LargeFullOfQuotaPopUpTypeBetween80And99(_ percentage: Float)
-    case LargeFullOfQuotaPopUpType100
+    case LargeFullOfQuotaPopUpType100(_ premium: Bool)
 }
 
 //MARK: - LargeFullOfQuotaPopUpDelegate
@@ -25,7 +25,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
     //MARK: Properties
     weak var delegate: LargeFullOfQuotaPopUpDelegate?
     
-    var viewType: LargeFullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100
+    var viewType: LargeFullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100(false)
     
     //MARK: IBOutlets
     @IBOutlet weak var gradientView: GradientOrangeView! {
@@ -56,7 +56,6 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         willSet {
             newValue.textColor = ColorConstants.whiteColor
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.text = TextConstants.lifeboxLargePopUpSubTitle
         }
     }
     
@@ -105,6 +104,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         contentView = containerView
         
         titleLabel.text = LargeFullOfQuotaPopUp.textForTitle(type: viewType)
+        subTitleLabel.text = LargeFullOfQuotaPopUp.textForSubtitle(type: viewType)
         setupBackgroundImageView()
         setupDoNotShowView()
     }
@@ -180,6 +180,16 @@ extension LargeFullOfQuotaPopUp {
         case .LargeFullOfQuotaPopUpType100:
             return TextConstants.lifeboxLargePopUpTitle100
             
+        }
+    }
+    
+    private static func textForSubtitle(type: LargeFullOfQuotaPopUpType) -> String {
+        switch type {
+        case .LargeFullOfQuotaPopUpTypeBetween80And99(_):
+            return TextConstants.lifeboxLargePopUpSubTitleBeetween80And99
+        case .LargeFullOfQuotaPopUpType100(let premium):
+            return premium ? TextConstants.lifeboxLargePopUpSubTitle100Premium:
+                             TextConstants.lifeboxLargePopUpSubTitle100Freemium
         }
     }
 }
