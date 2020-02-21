@@ -29,6 +29,7 @@ final class FaceImagePhotosConfigurator {
         presenter.needShowEmptyMetaItems = true
         presenter.item = item
         presenter.coverPhoto = album.preview
+        router.presenter = presenter
         
         let alertSheetModuleInitilizer = AlertFilesActionsSheetPresenterModuleInitialiser()
         let alertModulePresenter = alertSheetModuleInitilizer.createModule()
