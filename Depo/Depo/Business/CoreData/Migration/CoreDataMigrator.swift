@@ -58,6 +58,7 @@ final class CoreDataMigrator {
             currentURL = tempDirectoryURL
         }
         
+        printLog("db_migration: replace store at \(storeURL) with \(currentURL)")
         NSPersistentStoreCoordinator.replaceStore(at: storeURL, withStoreAt: currentURL)
         
         if currentURL != storeURL {
@@ -80,6 +81,8 @@ final class CoreDataMigrator {
         var sourceVersion = sourceVersion
         var migrationSteps = [CoreDataMigrationStep]()
 
+        printLog("db_migration: prepare steps from \(sourceVersion) to \(destinationVersion)")
+        
         while sourceVersion != destinationVersion, let nextVersion = sourceVersion.next {
             let migrationStep = CoreDataMigrationStep(sourceVersion: sourceVersion, destinationVersion: nextVersion)
             migrationSteps.append(migrationStep)
