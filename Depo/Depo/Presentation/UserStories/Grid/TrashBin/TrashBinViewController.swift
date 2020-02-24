@@ -497,7 +497,7 @@ extension TrashBinViewController: MoreFilesActionsInteractorOutput {
     
     func operationFailed(type: ElementTypes, message: String) {
         asyncOperationSuccess()
-        if type.isContained(in: ElementTypes.trashState) {
+        if type.isContained(in: [.restore, .delete, .emptyTrashBin]) {
             showMessage(errorMessage: message)
         }
     }
