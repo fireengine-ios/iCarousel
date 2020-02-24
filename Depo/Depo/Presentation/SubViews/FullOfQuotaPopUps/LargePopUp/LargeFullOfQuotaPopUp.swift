@@ -95,6 +95,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             newValue.adjustsFontSizeToFitWidth()
         }
     }
+    
     @IBOutlet private weak var skipButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.lifeboxLargePopUpSkipButtonTitle, for: .normal)
