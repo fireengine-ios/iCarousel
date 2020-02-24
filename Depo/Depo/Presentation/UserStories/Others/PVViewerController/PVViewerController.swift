@@ -29,6 +29,7 @@ final class PVViewerController: BaseViewController, NibInit {
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
+        extendedLayoutIncludesOpaqueBars = true
          
         navigationItem.leftBarButtonItem = BackButtonItem { [weak self] in
             self?.hideView()

@@ -52,6 +52,8 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        extendedLayoutIncludesOpaqueBars = true
+        
         setupNavigation()
         output.viewIsReady()
     }
