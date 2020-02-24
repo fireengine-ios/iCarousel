@@ -88,6 +88,8 @@ final class AppendLocalsOperation: Operation {
                         let wrapedItem = WrapData(info: element)
                         _ = MediaItem(wrapData: wrapedItem, context: self.context)
                         
+                        debugLog("local_appended: \(wrapedItem.name ?? "_EMPTY_")")
+                        
                         addedObjects.append(wrapedItem)
                     }
                 }
