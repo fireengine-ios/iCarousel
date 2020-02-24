@@ -84,6 +84,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let coreDataStack: CoreDataStack = factory.resolve()
         
+        if #available(iOS 13.0, *) {
+            debugLog("AppDelegate BT Registered")
+            backgroundSyncService.registerLaunchHandlers()
+        }
+        
         startCoreDataSafeServices(with: application, options: launchOptions)
         
         ///call debugLog only if the Crashlytics is already initialized
@@ -105,10 +110,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.rootViewController = router.vcForCurrentState()
                 self.window?.isHidden = false
             }
-        }
-        
-        if #available(iOS 13.0, *) {
-            backgroundSyncService.registerLaunchHandlers()
         }
         
         return true
@@ -212,6 +213,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         debugLog("AppDelegate applicationDidEnterBackground")
         
+        
+        if #available(iOS 13.0, *) {
+              debugLog("AppDelegate applicationDidEnterBackground BT schedule")
+              backgroundSyncService.scheduleRefreshSync()
+              backgroundSyncService.scheduleProcessingSync()
+          }
+        
         BackgroundTaskService.shared.beginBackgroundTask()
 
         firstResponder = application.firstResponder
@@ -235,11 +243,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 showPasscodeIfNeed()
             }
         }
-        
-        if #available(iOS 13.0, *) {
-            backgroundSyncService.scheduleRefreshSync()
-            backgroundSyncService.scheduleProcessingSync()
-        }
+    
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {

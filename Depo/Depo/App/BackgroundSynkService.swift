@@ -52,14 +52,16 @@ final class BackgroundSynkService {
         let request = BGProcessingTaskRequest(identifier: TaskIdentifiers.backgroundProcessing)
         
         // Fetch no earlier than 15 sec from now
-        request.earliestBeginDate = Date(timeIntervalSinceNow: 15)
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 60 * 5)
         request.requiresNetworkConnectivity = true
         request.requiresExternalPower = false
         
         do {
             try BGTaskScheduler.shared.submit(request)
+            debugLog("scheduleProcessingSync: OK")
         } catch {
             print("Could not schedule app refresh: \(error)")
+            debugLog("scheduleProcessingSync: Could not schedule app Processing: \(error)")
         }
     }
     
@@ -68,47 +70,53 @@ final class BackgroundSynkService {
         let request = BGProcessingTaskRequest(identifier: TaskIdentifiers.backgroundRefresh)
         
         // Fetch no earlier than 15 sec from now
-        request.earliestBeginDate = Date(timeIntervalSinceNow: 15)
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 60 * 5)
         request.requiresNetworkConnectivity = true
         request.requiresExternalPower = false
         
         do {
             try BGTaskScheduler.shared.submit(request)
+             debugLog("scheduleRefreshSync: OK")
         } catch {
+            debugLog("scheduleRefreshSync: Could not schedule app refresh: \(error)")
             print("Could not schedule app refresh: \(error)")
         }
     }
     
-        
-   private func handleProcessingSyncTask(task: BGProcessingTask) {
-        
-        let request = BGProcessingTaskRequest(identifier: TaskIdentifiers.backgroundProcessing)
-        
-        // Fetch no earlier than 15 sec from now
-        request.earliestBeginDate = Date(timeIntervalSinceNow: 15)
-        request.requiresNetworkConnectivity = true
-        request.requiresExternalPower = false
-        
-        do {
-            try BGTaskScheduler.shared.submit(request)
-        } catch {
-            print("Could not schedule app refresh: \(error)")
-        }
-        
-    }
-    
-    private func handleRefreshSyncTask(task: BGAppRefreshTask) {
-        scheduleRefreshSync()
+    private func handleProcessingSyncTask(task: BGProcessingTask) {
+        debugLog("handleProcessingSyncTask")
         
         guard LocalMediaStorage.default.photoLibraryIsAvailible(), storageVars.autoSyncSet else {
+            debugLog("handleProcessingSyncTask_LibraryAccess_or_AutoSync")
             return
         }
         
         SyncServiceManager.shared.backgroundTaskSync { isLast in
+            debugLog("handleProcessingSyncTask_task_completed")
             task.setTaskCompleted(success: isLast)
         }
         
         task.expirationHandler = {
+            debugLog("handleProcessingSyncTask_expirationHandler")
+            SyncServiceManager.shared.stopSync()
+        }
+    }
+    
+    private func handleRefreshSyncTask(task: BGAppRefreshTask) {
+        scheduleRefreshSync()
+        debugLog("handleRefreshSyncTask")
+        guard LocalMediaStorage.default.photoLibraryIsAvailible(), storageVars.autoSyncSet else {
+            debugLog("handleRefreshSyncTask_LibraryAccess_or_AutoSync")
+            return
+        }
+        
+        SyncServiceManager.shared.backgroundTaskSync { isLast in
+            debugLog("handleRefreshSyncTask_task_completed")
+            task.setTaskCompleted(success: isLast)
+        }
+        
+        task.expirationHandler = {
+            debugLog("handleRefreshSyncTask_expirationHandler")
             SyncServiceManager.shared.stopSync()
         }
     }
