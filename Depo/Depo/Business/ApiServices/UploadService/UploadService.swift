@@ -291,6 +291,7 @@ final class UploadService: BaseRequestService {
                             //                        checkIfFinished()
                             //                    } else {
                             //sync failed
+                            ItemOperationManager.default.failedUploadFile(file: finishedOperation.inputItem, error: error)
                             fail(error)
                             //                    }
                             return
@@ -390,6 +391,7 @@ final class UploadService: BaseRequestService {
                                 if let fileName = finishedOperation.inputItem.name {
                                     self.logEvent("FinishUpload \(fileName) FAIL: \(error.errorDescription ?? error.description)")
                                 }
+                                ItemOperationManager.default.failedUploadFile(file: finishedOperation.inputItem, error: error)
                                 fail(error)
                             }
                             return
@@ -487,6 +489,7 @@ final class UploadService: BaseRequestService {
                                 }
                                 self.uploadOperations.removeIfExists(finishedOperation)
                                 self.stopTracking()
+                                ItemOperationManager.default.failedUploadFile(file: finishedOperation.inputItem, error: error)
                                 fail(error)
                             }
                             return
