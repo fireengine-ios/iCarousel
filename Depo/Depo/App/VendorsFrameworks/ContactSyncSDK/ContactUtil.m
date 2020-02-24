@@ -16,6 +16,7 @@
 
 @property (strong) NSMutableArray* records;
 @property (strong) NSMutableArray* objectIds;
+@property BOOL addressBookCopyInProgress;
  
 @end
 
@@ -108,6 +109,18 @@
 }
 
 -(void)releaseAddressBookRef {
+    if (_addressBookCopyInProgress) {
+        SYNC_Log(@"%@", @"Addressbook copy in progress");
+        int counter = 0;
+        while (counter <= 10) {
+            SYNC_Log(@"%@", @"Waiting for release");
+            [NSThread sleepForTimeInterval:1.0f];
+            if (!_addressBookCopyInProgress) {
+                break;
+            }
+            counter += 1;
+        }
+    }
     if (_addressBook != nil){
         CFRelease(_addressBook);
         _addressBook = nil;
@@ -654,8 +667,12 @@
 {
     [self fetchAddressBookRef];
     NSMutableArray *ret = [NSMutableArray new];
-    
+    if (!_addressBook) {
+        return ret;
+    }
+    _addressBookCopyInProgress = true;
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( _addressBook );
+    _addressBookCopyInProgress = false;
     CFIndex nPeople = CFArrayGetCount(allPeople);
 
     NSInteger index = (offset != -1 ? offset: 0);
@@ -664,6 +681,9 @@
     for ( ; index < nPeople; index++ )
     {
         if (offset > -1 && bulkCount > 0 && index == (bulkCount + offset)){
+            break;
+        }
+        if (!_addressBook) {
             break;
         }
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, index );
