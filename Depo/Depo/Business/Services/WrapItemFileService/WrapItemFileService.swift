@@ -412,6 +412,27 @@ extension WrapItemFileService {
         }
     }
     
+    //MARK: - Delete All From Trash Bin
+    
+    func deletAllFromTrashBin(success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.deleteTrashedItems {
+                ItemOperationManager.default.didEmptyTrashBin()
+                success?()
+            }
+        }
+        
+        hiddenService.deleteAllFromTrashBin { response in
+            switch response {
+            case .success(_):
+                wrappedSuccessOperation()
+                success?()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
     //MARK: - Smart Albums Trash
     
     @discardableResult

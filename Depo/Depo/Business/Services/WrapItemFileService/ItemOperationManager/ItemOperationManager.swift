@@ -86,6 +86,8 @@ protocol ItemOperationManagerViewProtocol: class {
     func putBackFromTrashPeople(items: [PeopleItem])
     func putBackFromTrashPlaces(items: [PlacesItem])
     func putBackFromTrashThings(items: [ThingsItem])
+    
+    func didEmptyTrashBin()
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -172,6 +174,8 @@ extension ItemOperationManagerViewProtocol {
     func putBackFromTrashPeople(items: [PeopleItem]) {}
     func putBackFromTrashPlaces(items: [PlacesItem]) {}
     func putBackFromTrashThings(items: [ThingsItem]) {}
+    
+    func didEmptyTrashBin() {}
 }
 
 
@@ -504,6 +508,12 @@ class ItemOperationManager: NSObject {
     func putBackFromTrashThings(items: [ThingsItem]) {
         DispatchQueue.main.async {
             self.views.invoke { $0.putBackFromTrashThings(items: items) }
+        }
+    }
+    
+    func didEmptyTrashBin() {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didEmptyTrashBin() }
         }
     }
 }

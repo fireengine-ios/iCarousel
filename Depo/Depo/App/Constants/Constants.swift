@@ -744,6 +744,7 @@ struct TextConstants {
     static let actionSheetInfo = NSLocalizedString("Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetEdit = NSLocalizedString("Edit", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetDelete = NSLocalizedString("Delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSheetEmptyTrashBin = NSLocalizedString("empty_trash_bin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetMove = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetDownload = NSLocalizedString("Download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetHide = NSLocalizedString("Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1675,6 +1676,10 @@ struct TextConstants {
     static let trashBinAlbumSliderTitle = NSLocalizedString("trash_bin_album_slider_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let trashBinAlbumSliderEmpty = NSLocalizedString("trash_bin_album_slider_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let trashBinEmpty = NSLocalizedString("trash_bin_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteAllConfirmTitle = NSLocalizedString("confirm_dialog_header_empty_trashbin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteAllConfirmText = NSLocalizedString("confirm_empty_trashbin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteAllConfirmOkButton = NSLocalizedString("confirm_empty_trashbin_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteAllComplete = NSLocalizedString("success_empty_trashbin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let turkcellUpdateRequiredTitle = NSLocalizedString("turkcell_updater_update_required_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let turkcellUpdateRequiredMessage = NSLocalizedString("turkcell_updater_update_required_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
