@@ -101,7 +101,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
             automaticallyAdjustsScrollViewInsets = false
         }
         
-        extendedLayoutIncludesOpaqueBars = true
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         collectionView.register(nibCell: PhotoVideoDetailCell.self)
         collectionView.delegate = self
