@@ -373,7 +373,7 @@ final class OverlayStickerImageView: UIImageView {
             }
         }
         
-        return (gifsIDs: appliedGifsIds, stickersIDs: appliedGifsIds)
+        return (gifsIDs: appliedGifsIds, stickersIDs: appliedStickersIDs)
         
     }
 }
