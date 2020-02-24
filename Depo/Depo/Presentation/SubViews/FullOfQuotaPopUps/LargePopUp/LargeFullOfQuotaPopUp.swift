@@ -11,7 +11,7 @@ import UIKit
 //MARK: - LargeFullOfQuotaPopUpType
 enum LargeFullOfQuotaPopUpType{
     case LargeFullOfQuotaPopUpTypeBetween80And99(_ percentage: Float)
-    case LargeFullOfQuotaPopUpType100
+    case LargeFullOfQuotaPopUpType100(_ premium: Bool)
 }
 
 //MARK: - LargeFullOfQuotaPopUpDelegate
@@ -25,7 +25,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
     //MARK: Properties
     weak var delegate: LargeFullOfQuotaPopUpDelegate?
     
-    var viewType: LargeFullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100
+    var viewType: LargeFullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100(false)
     
     //MARK: IBOutlets
     @IBOutlet weak var gradientView: GradientOrangeView! {
@@ -56,7 +56,6 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         willSet {
             newValue.textColor = ColorConstants.whiteColor
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.text = TextConstants.lifeboxLargePopUpSubTitle
         }
     }
     
@@ -67,6 +66,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
         }
     }
+    
     @IBOutlet private weak var customCheckBox: CustomCheckBox! {
         willSet {
             newValue.layer.borderWidth = 1
@@ -82,6 +82,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             newValue.adjustsFontSizeToFitWidth()
         }
     }
+    
     @IBOutlet private weak var closeButton: UIButton! {
         willSet {
             newValue.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
@@ -96,6 +97,16 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             newValue.adjustsFontSizeToFitWidth()
         }
     }
+    
+    @IBOutlet private weak var skipButton: UIButton! {
+        willSet {
+            newValue.setTitle(TextConstants.lifeboxLargePopUpSkipButtonTitle, for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
+            newValue.setTitleColor(ColorConstants.grayTabBarButtonsColor, for: .normal)
+            newValue.adjustsFontSizeToFitWidth()
+        }
+    }
+     
     @IBOutlet private weak var backgroundImageView: UIImageView!
     
     //MARK: Life cycle
@@ -105,11 +116,16 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         contentView = containerView
         
         titleLabel.text = LargeFullOfQuotaPopUp.textForTitle(type: viewType)
+        subTitleLabel.text = LargeFullOfQuotaPopUp.textForSubtitle(type: viewType)
         setupBackgroundImageView()
-        setupDoNotShowView()
+        setupViewAsType()
     }
     
     //MARK: Actions
+    @IBAction func onSkipButton() {
+        close()
+    }
+    
     @IBAction func onDeleteFilesButton() {
         close(isFinalStep: false) { [weak self] in
             self?.delegate?.onDeleteFilesTap()
@@ -133,6 +149,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             router.pushViewController(viewController: viewController)
         }
     }
+    
     @IBOutlet private weak var doNotShowStackView: UIStackView!
     
     @IBAction private func onCustomCheckBoxTap(_ sender: UIButton) {
@@ -149,12 +166,19 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         backgroundImageView.image = UIImage(named: "FullOfQuotaImage")
         #endif
     }
-    private func setupDoNotShowView() {
+    
+    private func setupViewAsType() {
         switch viewType {
         case .LargeFullOfQuotaPopUpTypeBetween80And99(_):
             doNotShowStackView.isHidden = true
+            closeButton.isHidden = true
+            deleteFilesButton.isHidden = true
+            skipButton.isHidden = false
         case .LargeFullOfQuotaPopUpType100:
             doNotShowStackView.isHidden = false
+            closeButton.isHidden = false
+            deleteFilesButton.isHidden = false
+            skipButton.isHidden = true
         }
     }
 }
@@ -180,6 +204,16 @@ extension LargeFullOfQuotaPopUp {
         case .LargeFullOfQuotaPopUpType100:
             return TextConstants.lifeboxLargePopUpTitle100
             
+        }
+    }
+    
+    private static func textForSubtitle(type: LargeFullOfQuotaPopUpType) -> String {
+        switch type {
+        case .LargeFullOfQuotaPopUpTypeBetween80And99(_):
+            return TextConstants.lifeboxLargePopUpSubTitleBeetween80And99
+        case .LargeFullOfQuotaPopUpType100(let premium):
+            return premium ? TextConstants.lifeboxLargePopUpSubTitle100Premium:
+                             TextConstants.lifeboxLargePopUpSubTitle100Freemium
         }
     }
 }

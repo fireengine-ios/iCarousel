@@ -100,7 +100,7 @@ final class OverlayStickerViewController: ViewController {
             self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .smashConfirmPopUp, eventLabel: isConfirmed ? .ok : .cancel)
         
             let gifsToStickersIds = self.overlayingStickerImageView.getAttachmentGifStickersIDs()
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SmashSave(action: isConfirmed ? .save : .cancel, stickerId: gifsToStickersIds.gifsIDs, gifId: gifsToStickersIds.stickersIDs))
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SmashSave(action: isConfirmed ? .save : .cancel, stickerId: gifsToStickersIds.stickersIDs, gifId: gifsToStickersIds.gifsIDs))
             
             if isConfirmed {
                 
