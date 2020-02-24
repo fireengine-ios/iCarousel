@@ -94,6 +94,23 @@ class AccountService: BaseRequestService, AccountServicePrl {
                 }
         }
     }
+    
+    func newFeaturePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
+        debugLog("AccountService featurePacks v2")
+        
+        sessionManager
+            .request(RouteRequests.Account.Permissions.featurePacksV2)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let offersArray = PackageModelResponse.array(from: data)
+                    handler(.success(offersArray))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
 
     func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
         debugLog("AccountService featurePacks")

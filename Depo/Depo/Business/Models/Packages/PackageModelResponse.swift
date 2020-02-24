@@ -169,6 +169,9 @@ final class PackageModelResponse: Equatable {
         static let quota = "quota"
         static let status = "status"
         static let authorities = "authorities"
+        static let recommended = "recommended"
+        static let hasAttachedFeature = "hasAttachedFeature"
+        static let isFeaturePack = "isFeaturePack"
     }
     
     var name: String?
@@ -189,6 +192,19 @@ final class PackageModelResponse: Equatable {
     var quota: Int64?
     var status: PackageStatus?
     var authorities: [PackagePackAuthoritiesResponse]?
+    var recommended: Bool?
+    var hasAttachedFeature: Bool?
+    var isFeaturePack: Bool?
+    
+    var isStorageOnly: Bool {
+        guard let recommended = recommended,
+            let hasAttachedFeature = hasAttachedFeature,
+            let isFeaturePack = isFeaturePack else {
+            return false
+        }
+        
+        return !recommended && !hasAttachedFeature && !isFeaturePack
+    }
 }
 
 extension PackageModelResponse: Map {
@@ -209,6 +225,9 @@ extension PackageModelResponse: Map {
         inAppPurchaseId = json[ResponseKeys.inAppPurchaseId].string
         period = json[ResponseKeys.period].string
         quota = json[ResponseKeys.quota].int64
+        recommended = json[ResponseKeys.recommended].bool
+        hasAttachedFeature = json[ResponseKeys.hasAttachedFeature].bool
+        isFeaturePack = json[ResponseKeys.isFeaturePack].bool
         
         if let typeString = json[ResponseKeys.type].string {
             //helps recognize type of the pack by checking for nil one of those vars

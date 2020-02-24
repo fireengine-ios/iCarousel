@@ -303,6 +303,7 @@ struct RouteRequests {
         enum Permissions {
             static let authority = Account.accountApi +/ "authority"
             static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
+            static let featurePacksV2 = Account.accountApi +/ "feature-packs/v2/IOS"
             static let availableOffers = Account.accountApi +/ "available-offers/IOS"
             static let features = baseUrl +/ "features"
             
