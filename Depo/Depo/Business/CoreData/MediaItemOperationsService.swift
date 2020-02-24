@@ -222,6 +222,8 @@ final class MediaItemOperationsService {
                     //for locals
                     savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
                     
+                    debugLog("sync_status: local \(savedItem.nameValue ?? "") is synced")
+                    
                     if savedItem.objectSyncStatus != nil {
                         savedItem.objectSyncStatus = nil
                     }
@@ -242,6 +244,7 @@ final class MediaItemOperationsService {
                 if let newRemoteItem = newRemote {
                     //all relation will be setuped inside
                     _ = MediaItem(wrapData: newRemoteItem, context: context)
+                    debugLog("sync_status: remote \(newRemote?.name ?? "") is created")
                 }
 
                 self.coreDataStack.saveDataForContext(context: context, saveAndWait: false, savedCallBack: nil)
