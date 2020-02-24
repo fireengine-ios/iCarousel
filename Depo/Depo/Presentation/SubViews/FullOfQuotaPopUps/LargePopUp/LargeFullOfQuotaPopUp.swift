@@ -66,6 +66,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
         }
     }
+    
     @IBOutlet private weak var customCheckBox: CustomCheckBox! {
         willSet {
             newValue.layer.borderWidth = 1
@@ -81,6 +82,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             newValue.adjustsFontSizeToFitWidth()
         }
     }
+    
     @IBOutlet private weak var closeButton: UIButton! {
         willSet {
             newValue.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
@@ -95,6 +97,16 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             newValue.adjustsFontSizeToFitWidth()
         }
     }
+    
+    @IBOutlet private weak var skipButton: UIButton! {
+        willSet {
+            newValue.setTitle(TextConstants.lifeboxLargePopUpSkipButtonTitle, for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
+            newValue.setTitleColor(ColorConstants.grayTabBarButtonsColor, for: .normal)
+            newValue.adjustsFontSizeToFitWidth()
+        }
+    }
+     
     @IBOutlet private weak var backgroundImageView: UIImageView!
     
     //MARK: Life cycle
@@ -106,10 +118,14 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         titleLabel.text = LargeFullOfQuotaPopUp.textForTitle(type: viewType)
         subTitleLabel.text = LargeFullOfQuotaPopUp.textForSubtitle(type: viewType)
         setupBackgroundImageView()
-        setupDoNotShowView()
+        setupViewAsType()
     }
     
     //MARK: Actions
+    @IBAction func onSkipButton() {
+        close()
+    }
+    
     @IBAction func onDeleteFilesButton() {
         close(isFinalStep: false) { [weak self] in
             self?.delegate?.onDeleteFilesTap()
@@ -133,6 +149,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             router.pushViewController(viewController: viewController)
         }
     }
+    
     @IBOutlet private weak var doNotShowStackView: UIStackView!
     
     @IBAction private func onCustomCheckBoxTap(_ sender: UIButton) {
@@ -149,12 +166,19 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         backgroundImageView.image = UIImage(named: "FullOfQuotaImage")
         #endif
     }
-    private func setupDoNotShowView() {
+    
+    private func setupViewAsType() {
         switch viewType {
         case .LargeFullOfQuotaPopUpTypeBetween80And99(_):
             doNotShowStackView.isHidden = true
+            closeButton.isHidden = true
+            deleteFilesButton.isHidden = true
+            skipButton.isHidden = false
         case .LargeFullOfQuotaPopUpType100:
             doNotShowStackView.isHidden = false
+            closeButton.isHidden = false
+            deleteFilesButton.isHidden = false
+            skipButton.isHidden = true
         }
     }
 }
