@@ -18,6 +18,8 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func finishedUploadFile(file: WrapData)
     
+    func failedUploadFile(file: WrapData, error: Error?)
+    
     ///cancelled by user
     func cancelledUpload(file: WrapData)
     
@@ -102,6 +104,8 @@ extension ItemOperationManagerViewProtocol {
     func setProgressForUploadingFile(file: WrapData, progress: Float) {}
     
     func finishedUploadFile(file: WrapData) {}
+    
+    func failedUploadFile(file: WrapData, error: Error?) {}
     
     func cancelledUpload(file: WrapData) {
         UIApplication.setIdleTimerDisabled(true)
@@ -241,6 +245,13 @@ class ItemOperationManager: NSObject {
         //        }
         
         MenloworksAppEvents.onFileUploadedWithType(file.fileType, isAutosync: isAutoSync)
+        
+        currentUploadingObject = nil
+        currentUploadProgress = 0
+    }
+    
+    func failedUploadFile(file: WrapData, error: Error?) {
+        views.invoke { $0.failedUploadFile(file: file, error: error) }
         
         currentUploadingObject = nil
         currentUploadProgress = 0
