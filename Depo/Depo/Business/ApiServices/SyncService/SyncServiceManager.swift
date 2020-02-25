@@ -146,8 +146,8 @@ class SyncServiceManager {
                 handler(false)
                 return
             }
-            self.checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
             self.backgroundSyncHandler = handler
+            self.checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
         }
     }
     

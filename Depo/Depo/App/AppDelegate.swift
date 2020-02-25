@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     @available(iOS 13.0, *)
-    private lazy var backgroundSyncService = BackgroundSynkService.backgroundSynkService
+    private lazy var backgroundSyncService = BackgroundSynсService.backgroundSynсService
     
     var window: UIWindow?
     var watchdog: Watchdog?

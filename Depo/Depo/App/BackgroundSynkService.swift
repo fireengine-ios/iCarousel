@@ -10,12 +10,12 @@ import Foundation
 import BackgroundTasks
 
 @available(iOS 13.0, *)
-extension BackgroundSynkService {
-    static let backgroundSynkService = BackgroundSynkService()
+extension BackgroundSynсService {
+    static let backgroundSynсService = BackgroundSynсService()
 }
 
 @available(iOS 13.0, *)
-final class BackgroundSynkService {
+final class BackgroundSynсService {
     
     private enum TaskIdentifiers {
         static let backgroundProcessing = "background_processing"
@@ -26,10 +26,11 @@ final class BackgroundSynkService {
     private lazy var accountService: AccountServicePrl = AccountService()
     private lazy var storageVars: StorageVars = factory.resolve()
     
+    private static let schedulerQueue = DispatchQueue(label: DispatchQueueLabels.backgroundTaskSyncQueue)
     
     func registerLaunchHandlers() {
         
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: TaskIdentifiers.backgroundProcessing, using: DispatchQueue.global()) { task in
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: TaskIdentifiers.backgroundProcessing, using: BackgroundSynсService.schedulerQueue) { task in
             
             guard let task = task as? BGProcessingTask else {
                 return
@@ -37,7 +38,7 @@ final class BackgroundSynkService {
            self.handleProcessingSyncTask(task: task)
         }
         
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: TaskIdentifiers.backgroundRefresh, using: DispatchQueue.global()) { task in
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: TaskIdentifiers.backgroundRefresh, using: BackgroundSynсService.schedulerQueue) { task in
             
             guard let task = task as? BGAppRefreshTask else {
                 return
