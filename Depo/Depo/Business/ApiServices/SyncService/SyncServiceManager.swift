@@ -25,7 +25,7 @@ class SyncServiceManager {
         return queue
     }()
     
-    private lazy var lastOperation = operationQueue.operations.last
+    private var backgroundSyncHandler: BoolHandler?
     
     private let photoSyncService: ItemSyncService = PhotoSyncService()
     private let videoSyncService: ItemSyncService = VideoSyncService()
@@ -146,11 +146,8 @@ class SyncServiceManager {
                 handler(false)
                 return
             }
-            
-            self.start(photo: true, video: true, newItems: true)
-            self.lastOperation?.completionBlock = {
-                handler(!(self.lastOperation?.isCancelled ?? false))
-            }
+            self.checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+            self.backgroundSyncHandler = handler
         }
     }
     
@@ -340,6 +337,7 @@ extension SyncServiceManager {
         
         FreeAppSpace.session.checkFreeAppSpaceAfterAutoSync()
         
+        backgroundSyncHandler?(true)
         if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, CacheManager.shared.isCacheActualized {
             CardsManager.default.startOperationWith(type: .waitingForWiFi)
             return
