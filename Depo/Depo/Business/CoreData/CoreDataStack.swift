@@ -67,8 +67,6 @@ final class CoreDataStack_ios10: CoreDataStack {
         let container = NSPersistentContainer(name: CoreDataConfig.storeNameShort, managedObjectModel: model)
         container.persistentStoreDescriptions = [storeDescription]
         
-        container.viewContext.automaticallyMergesChangesFromParent = true
-        
         return container
     }()
     
@@ -94,7 +92,7 @@ final class CoreDataStack_ios10: CoreDataStack {
                 guard error == nil else {
                     fatalLog("unable to load store \(error!)")
                 }
-                
+                self?.container.viewContext.automaticallyMergesChangesFromParent = true
                 self?.isReady = true
                 self?.delegates.invoke(invocation: { $0.onCoreDataStackSetupCompleted() })
                 

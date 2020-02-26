@@ -41,7 +41,6 @@ class ItemSyncServiceImpl: ItemSyncService {
     var localItems: [WrapData] = []
     var lastSyncedMD5s: [String] = []
     var storageVars: StorageVars = factory.resolve()
-    var lastInterruptedItemsUUIDs = [String]()
     
     var photoVideoService: PhotoAndVideoService {
         let fieldValue: FieldValue = (fileType == .image) ? .image : .video
@@ -76,7 +75,6 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl stop")
         
         lastSyncedMD5s.removeAll()
-        lastInterruptedItemsUUIDs.removeAll()
         
         if status != .synced {
             status = .stoped
@@ -87,7 +85,6 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl waitForWiFi")
         
         lastSyncedMD5s.removeAll()
-        lastInterruptedItemsUUIDs.removeAll()
         
         status = .waitingForWifi
         
@@ -106,7 +103,6 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl fail")
         
         lastSyncedMD5s.removeAll()
-        lastInterruptedItemsUUIDs.removeAll()
         status = .failed
     }
     
@@ -122,7 +118,6 @@ class ItemSyncServiceImpl: ItemSyncService {
         status = .prepairing
         
         localItems.removeAll()
-        lastInterruptedItemsUUIDs = self.storageVars.interruptedSyncVideoQueueItems
         itemsSortedToUpload { [weak self] items in
             guard let `self` = self else {
                 return
@@ -131,7 +126,6 @@ class ItemSyncServiceImpl: ItemSyncService {
             if self.status == .prepairing {
                 self.localItems = items
                 self.lastSyncedMD5s = self.localItems.map { $0.md5 }
-                self.lastInterruptedItemsUUIDs.append(contentsOf: self.localItems.map { $0.getTrimmedLocalID() })
                 
                 guard !self.localItems.isEmpty else {
                     self.status = .synced

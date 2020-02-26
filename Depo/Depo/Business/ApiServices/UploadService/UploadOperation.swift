@@ -177,7 +177,7 @@ final class UploadOperation: Operation {
                     }
                     
                     debugLog("resumable_upload: status is \(status)")
-                    self.showToast(message: "Resumable upload status is \(status)")
+//                    self.showToast(message: "Resumable upload status is \(status)")
                     
                     switch status {
                     case .completed:
@@ -266,10 +266,10 @@ final class UploadOperation: Operation {
             }
             
             debugLog("resumable_upload: status is \(status)")
-            self.showToast(message: "\(status)")
             
             switch status {
             case .completed:
+                self.showToast(message: "Resumable upload completed")
                 self.finishUploading(parameters: parameters, success: success, fail: fail)
                 
             case .didntStart:
@@ -437,10 +437,10 @@ final class UploadOperation: Operation {
                         self.outputItem?.metaData?.mediumUrl = preview
                     }
                     
+                    debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
+                    
                     MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
                 }
-                
-                debugLog("_upload: finished")
                 
                 success()
             }
@@ -513,6 +513,7 @@ extension UploadOperation: OperationProgressServiceDelegate {
     //FIXME: remove showToast
     private func showToast(message: String) {
         DispatchQueue.toMain {
+            
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else {
                 return
             }
@@ -524,7 +525,7 @@ extension UploadOperation: OperationProgressServiceDelegate {
             hud.removeFromSuperViewOnHide = true
             hud.offset = CGPoint(x: 0, y: MBProgressMaxOffset)
             
-            hud.hide(animated: true, afterDelay: 3.0)
+            hud.hide(animated: true, afterDelay: 2.0)
         }
     }
 }

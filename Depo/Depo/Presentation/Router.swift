@@ -1172,9 +1172,16 @@ class RouterVC: NSObject {
     func showFullQuotaPopUp() {
         let controller = FullQuotaWarningPopUp()
         DispatchQueue.main.async {
-            if let topController = self.defaultTopController, topController is AutoSyncViewController == false {
+            if
+                let topController = self.defaultTopController,
+                topController is AutoSyncViewController == false,
+                topController is FullQuotaWarningPopUp == false {
                 topController.present(controller, animated: false)
             }
         }
+    }
+    
+    func mobilePaymentPermissionController() -> MobilePaymentPermissionViewController {
+        return MobilePaymentPermissionViewController.initFromNib()
     }
 }
