@@ -30,6 +30,7 @@ final class CoreDataMigrator {
     
     func migrateStoreIfNeeded(at storeURL: URL, toVersion version: CoreDataMigrationVersion) {
         if requiresMigration(at: storeURL, toVersion: version) {
+            printLog("db_migration: migration is required at \(storeURL) to \(version)")
             migrateStore(at: storeURL, toVersion: version)
         }
     }
@@ -46,6 +47,7 @@ final class CoreDataMigrator {
             
             do {
                 try manager.migrateStore(from: currentURL, sourceType: NSSQLiteStoreType, options: nil, with: migrationStep.mappingModel, toDestinationURL: tempDirectoryURL, destinationType: NSSQLiteStoreType, destinationOptions: nil)
+                printLog("db_migration: migrate store from \(currentURL) to \(tempDirectoryURL)")
             } catch let error {
                 fatalLog("failed attempting to migrate from \(migrationStep.sourceModel) to \(migrationStep.destinationModel), error: \(error)")
             }
@@ -58,6 +60,7 @@ final class CoreDataMigrator {
             currentURL = tempDirectoryURL
         }
         
+        printLog("db_migration: replace store at \(storeURL) with \(currentURL)")
         NSPersistentStoreCoordinator.replaceStore(at: storeURL, withStoreAt: currentURL)
         
         if currentURL != storeURL {
@@ -80,6 +83,8 @@ final class CoreDataMigrator {
         var sourceVersion = sourceVersion
         var migrationSteps = [CoreDataMigrationStep]()
 
+        printLog("db_migration: prepare steps from \(sourceVersion) to \(destinationVersion)")
+        
         while sourceVersion != destinationVersion, let nextVersion = sourceVersion.next {
             let migrationStep = CoreDataMigrationStep(sourceVersion: sourceVersion, destinationVersion: nextVersion)
             migrationSteps.append(migrationStep)
@@ -95,6 +100,8 @@ final class CoreDataMigrator {
         guard let metadata = NSPersistentStoreCoordinator.metadata(at: storeURL), let currentModel = NSManagedObjectModel.compatibleModelForStoreMetadata(metadata) else {
             return
         }
+        
+        printLog("db_migration: WALCheckpointing")
         
         do {
             let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: currentModel)

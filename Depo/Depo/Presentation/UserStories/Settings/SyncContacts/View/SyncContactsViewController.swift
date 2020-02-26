@@ -215,6 +215,11 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         }
     }
     
+    func setButtonsAvailability(restore: Bool, backup: Bool) {
+        restoreButton.isEnabled = restore
+        backUpButton.isEnabled = backup
+    }
+    
     func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
         gradientLoaderIndicator.progress = CGFloat(progress) / 100
         

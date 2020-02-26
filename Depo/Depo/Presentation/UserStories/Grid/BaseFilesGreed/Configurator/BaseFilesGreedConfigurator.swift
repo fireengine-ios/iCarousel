@@ -149,9 +149,8 @@ class BaseFilesGreedModuleConfigurator {
             
         }
         
-        if let uploadPresenter = presenter as? UploadFilesSelectionPresenter,
-            let uploadInteracotor = interactor as? UploadFilesSelectionInteractor {
-            uploadInteracotor.uploadOutput = uploadPresenter
+        if let uploadInteracotor = interactor as? UploadFilesSelectionInteractor {
+            uploadInteracotor.uploadOutput = presenter as? UploadFilesSelectionPresenter
         }
         
         interactor.originalFilters = fileFilters

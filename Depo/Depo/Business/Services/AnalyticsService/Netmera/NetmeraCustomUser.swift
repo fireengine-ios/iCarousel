@@ -23,6 +23,8 @@ final class NetmeraCustomUser: NetmeraUser {
     @objc var autoLogin = ""
     @objc var autosyncVideos = ""
     @objc var turkcellPassword = ""
+    @objc var buildNumber = ""
+    @objc var countryCode = ""
     
     convenience init(deviceStorage: Int, photopickLeftAnalysis: NetmeraEventValues.PhotopickUserAnalysisLeft,
                      lifeboxStorage: Int, faceImageGrouping: NetmeraEventValues.OnOffSettings,
@@ -30,7 +32,7 @@ final class NetmeraCustomUser: NetmeraUser {
                      autosync: NetmeraEventValues.OnOffSettings, emailVerification: NetmeraEventValues.OnOffSettings,
                      autosyncPhotos: NetmeraEventValues.AutoSyncState, autosyncVideos: NetmeraEventValues.AutoSyncState,
                      packages: [String], autoLogin: NetmeraEventValues.OnOffSettings,
-                     turkcellPassword: NetmeraEventValues.OnOffSettings) {
+                     turkcellPassword: NetmeraEventValues.OnOffSettings, buildNumber: String, countryCode: String) {
         self.init()
         self.deviceStorage = deviceStorage
         self.photopickLeftAnalysis = photopickLeftAnalysis.text
@@ -45,6 +47,9 @@ final class NetmeraCustomUser: NetmeraUser {
         self.packages = packages
         self.autoLogin = autoLogin.text
         self.turkcellPassword = turkcellPassword.text
+        self.buildNumber = buildNumber
+        self.countryCode = countryCode
+        
     }
     
     convenience init(deviceStorage: Int, photopickLeftAnalysis: String,
@@ -53,7 +58,8 @@ final class NetmeraCustomUser: NetmeraUser {
                      autosync: String, emailVerification: String,
                      autosyncPhotos: String, autosyncVideos: String,
                      packages: [String], autoLogin: String,
-                     turkcellPassword: String) {
+                     turkcellPassword: String, buildNumber: String,
+                     countryCode: String) {
         self.init()
         self.deviceStorage = deviceStorage
         self.photopickLeftAnalysis = photopickLeftAnalysis
@@ -68,6 +74,8 @@ final class NetmeraCustomUser: NetmeraUser {
         self.packages = packages
         self.autoLogin = autoLogin
         self.turkcellPassword = turkcellPassword
+        self.buildNumber = buildNumber
+        self.countryCode = countryCode
     }
 
     override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
@@ -85,6 +93,8 @@ final class NetmeraCustomUser: NetmeraUser {
             "pdg" : #keyPath(autoLogin),
             "pce" : #keyPath(autosyncVideos),
             "pdf" : #keyPath(turkcellPassword),
+            "pdi" : #keyPath(countryCode),
+            "pca" : #keyPath(buildNumber),
         ]
     }
 }

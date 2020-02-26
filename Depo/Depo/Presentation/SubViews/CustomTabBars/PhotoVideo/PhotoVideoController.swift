@@ -250,8 +250,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 DispatchQueue.toMain {
                     self?.hideSpinner()
                     let router = RouterVC()
-                    let controller = router.filesDetailViewController(fileObject: currentObject, items: items, status: .active)
-                    let nController = NavigationController(rootViewController: controller)
+                    let detailModule = router.filesDetailModule(fileObject: currentObject,
+                                                                items: items,
+                                                                status: .active,
+                                                                canLoadMoreItems: false,
+                                                                moduleOutput: nil)
+
+                    let nController = NavigationController(rootViewController: detailModule.controller)
                     router.presentViewController(controller: nController)
                     self?.canShowDetail = true
                 }
@@ -597,7 +602,6 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
         
     }
     func changeCover() {}
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {}
 }
 
 // MARK: - PhotoVideoNavBarManagerDelegate
@@ -723,6 +727,18 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
                     self.uploadedObjectID.remove(at: index)
                 }
             })
+        }
+    }
+    
+    func failedUploadFile(file: WrapData, error: Error?) {
+        let uuid = file.getTrimmedLocalID()
+        
+        uploadProgress.removeValueSafely(forKey: uuid)
+        
+        DispatchQueue.toMain {
+            self.getCellForFile(objectUUID: uuid) { cell in
+                cell?.cancelledUploadForObject()
+            }
         }
     }
     

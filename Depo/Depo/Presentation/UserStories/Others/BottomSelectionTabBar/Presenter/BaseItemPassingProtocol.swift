@@ -22,7 +22,7 @@ protocol BaseItemInputPassingProtocol: class {
     func printSelected()
     func changeCover()
     
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem])
+    func getFIRParent() -> Item?
     
     func openInstaPick()
     
@@ -31,7 +31,7 @@ protocol BaseItemInputPassingProtocol: class {
 
 protocol BaseItemOuputPassingProtocol: class {
     func dismiss(animated: Bool)
-    func show(animated: Bool, onView sourceView: UIView?)//
+    func show(animated: Bool, onView sourceView: UIView?)
 }
 
 
@@ -43,4 +43,8 @@ extension BaseItemInputPassingProtocol {
     }
     
     func successPopupClosed() {}
+    
+    func getFIRParent() -> Item? {
+        return nil
+    }
 }

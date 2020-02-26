@@ -48,8 +48,14 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
             router.presentViewController(controller: controller)
             
         default:
-            let controller = router.filesDetailViewController(fileObject: wrapperedItem, items: wrapperedArray, status: view.status)
-            let nController = NavigationController(rootViewController: controller)
+            let detailModule = router.filesDetailModule(fileObject: wrapperedItem,
+                                                        items: wrapperedArray,
+                                                        status: view.status,
+                                                        canLoadMoreItems: true,
+                                                        moduleOutput: moduleOutput as? PhotoVideoDetailModuleOutput)
+
+            presenter.photoVideoDetailModule = detailModule.moduleInput
+            let nController = NavigationController(rootViewController: detailModule.controller)
             router.presentViewController(controller: nController)
         }
     }
