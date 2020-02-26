@@ -29,7 +29,9 @@ final class MobilePaymentPermissionViewController: ViewController, NibInit {
 extension MobilePaymentPermissionViewController: MobilePaymentPermissionViewInput {
     
     func linkTapped() {
-        guard let urlstring = urlString else { return }
+        guard let urlstring = urlString else {
+            return
+        }
         let viewController = WebViewController(urlString: urlstring)
         RouterVC().pushViewController(viewController: viewController)
     }

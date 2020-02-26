@@ -99,7 +99,7 @@ final class MobilePaymentPermissionView: UIView {
         guard
             let object = Bundle.main.loadNibNamed(nibName, owner: nil, options: nil),
             let view = object.first as? MobilePaymentPermissionView
-            else {
+        else {
             return MobilePaymentPermissionView()
         }
         return view
