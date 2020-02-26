@@ -662,7 +662,7 @@ class DownLoadOperation: Operation {
 
 
 extension DownLoadOperation: OperationProgressServiceDelegate {
-    func didSend(ratio: Float, for url: URL) {
+    func didSend(ratio: Float, bytes: Int, for url: URL) {
         guard isExecuting else {
             return
         }

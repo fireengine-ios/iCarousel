@@ -50,6 +50,8 @@ protocol MoreFilesActionsInteractorInput {
     
     func removeFromAlbum(items: [BaseDataSourceItem])
     
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem], item: Item)
+    
     func photos(items: [BaseDataSourceItem])
     
     func iCloudDrive(items: [BaseDataSourceItem])
@@ -81,4 +83,6 @@ protocol MoreFilesActionsInteractorInput {
     func deleteDeviceOriginal(items: [BaseDataSourceItem])
     
     func trackEvent(elementType: ElementTypes)
+    
+    func emptyTrashBin()
 }

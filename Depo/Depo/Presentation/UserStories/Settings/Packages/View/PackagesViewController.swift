@@ -252,7 +252,7 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
                 return
             }
             
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackageChannelClick(channelType: paymentType))
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackageChannelClick(channelType: paymentType, packageName: subscriptionPlan.name))
             
             if let tag = MenloworksSubscriptionStorage(rawValue: subscriptionPlan.name) {
                 MenloworksAppEvents.onSubscriptionClicked(tag)

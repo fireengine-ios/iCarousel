@@ -7,5 +7,6 @@
 //
 
 protocol PhotoVideoDetailModuleInput: BaseItemInputPassingProtocol {
-
+    var itemsType: FileType? { get }
+    func appendItems(_ items: [Item], isLastPage: Bool)
 }

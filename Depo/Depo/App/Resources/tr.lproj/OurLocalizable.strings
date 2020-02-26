@@ -1352,6 +1352,20 @@
 "unhide_popup_text" = "Seçilen öğe(ler) eski klasörlerine geri taşınacak ve lifebox listelerinde görüntülenebilmeye başlayacak. Devam etmek istiyor musun?";
 
 /*divorce card*/
+"divorce_card_title" = "";
+"trash_bin_album_slider_title" = "";
+"trash_bin_album_slider_empty" = "";
+"trash_bin_empty" = "";
+"delete_confirmation_popup_title" = "";
+"delete_confirmation_popup_text" = "";
+"delete_popup_success_text" = "";
+"restore_confirmation_popup_title" = "";
+"restore_popup_success_text" = "";
+"delete_from_hidden_bin_popup_success_title" = "";
+"delete_from_hidden_bin_popup_success_text" = "";
+"unhide_popup_success_title" = "";
+"unhide_popup_success_text" = "";
+"delete_popup_text" = "";
 "divorce_card_title" = "Hafızalardan Silinecek Aşklar!";
 "trash_bin_album_slider_title" = "Çöp Kutusu";
 "trash_bin_album_slider_empty" = "Çöp Kutusunda Henüz Silinmiş Albüm Yok";

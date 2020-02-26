@@ -85,22 +85,16 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     
     func turnPermissionOn(isOn: Bool, isPendingApproval: Bool) {
         /// change switch status according to user actions
-        if isPendingApproval {
-            permissionSwitch.isOn = !isOn
-            permissionSwitch.isEnabled = false
-            inProgressLabel.isHidden = false
-        } else {
-            permissionSwitch.isOn = isOn
-            permissionSwitch.isEnabled = true
-            inProgressLabel.isHidden = true
-        }
+        
+        permissionSwitch.isOn = isOn
+        permissionSwitch.isEnabled = (isPendingApproval == false)
+        inProgressLabel.isHidden = (isPendingApproval == false)
     }
     
     func togglePermissionSwitch() {
-        permissionSwitch.isOn = !permissionSwitch.isOn
+        permissionSwitch.isOn.toggle()
     }
 }
-
 
 extension PermissionsView: UITextViewDelegate {
     

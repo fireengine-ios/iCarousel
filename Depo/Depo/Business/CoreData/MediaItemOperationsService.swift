@@ -222,6 +222,8 @@ final class MediaItemOperationsService {
                     //for locals
                     savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
                     
+                    debugLog("sync_status: local \(savedItem.nameValue ?? "") is synced")
+                    
                     if savedItem.objectSyncStatus != nil {
                         savedItem.objectSyncStatus = nil
                     }
@@ -242,6 +244,7 @@ final class MediaItemOperationsService {
                 if let newRemoteItem = newRemote {
                     //all relation will be setuped inside
                     _ = MediaItem(wrapData: newRemoteItem, context: context)
+                    debugLog("sync_status: remote \(newRemote?.name ?? "") is created")
                 }
 
                 self.coreDataStack.saveDataForContext(context: context, saveAndWait: false, savedCallBack: nil)
@@ -718,28 +721,13 @@ final class MediaItemOperationsService {
         }
         
         coreDataStack.performBackgroundTask { [weak self] context in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             
             let predicate = NSPredicate(format: "uuid in %@", items.map {$0.uuid} )
             self.executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { remoteItems in
-                let remoteItemsSet = NSSet(array: remoteItems)
-                
-                self.mediaItemByLocalID(trimmedLocalIDS: items.map {$0.getTrimmedLocalID()}, context: context, mediaItemsCallBack: { mediaItems in
-                    mediaItems.forEach {
-                        $0.removeFromRelatedRemotes(remoteItemsSet)
-                        $0.updateMissingDateRelations()
-                        
-                        if $0.relatedRemotes.count == 0 {
-                            $0.regenerateTrimmedLocalFileID()
-                        }
-                    }
-                    
-                    remoteItems.forEach { context.delete($0) }
-                    
-                    self.coreDataStack.saveDataForContext(context: context, saveAndWait: false, savedCallBack: completion)
-                })
+                self.deleteItemsWithRelated(remoteItems, context: context, completion: completion)
             })
         }
         
@@ -765,36 +753,47 @@ final class MediaItemOperationsService {
         #endif
         
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { remoteItems in
-            
             #if DEBUG
             let contextQueue2 = DispatchQueue.currentQueueLabelAsserted
             assert(contextQueue == contextQueue2, "\(contextQueue) != \(contextQueue2)")
             #endif
-                        
-            let remoteItemsSet = NSSet(array: remoteItems)
             
-            self.mediaItemByLocalID(trimmedLocalIDS: items.map { $0.getTrimmedLocalID() }, context: context, mediaItemsCallBack: { mediaItems in
-                
+            self.deleteItemsWithRelated(remoteItems, context: context) {
                 #if DEBUG
                 let contextQueue3 = DispatchQueue.currentQueueLabelAsserted
                 assert(contextQueue == contextQueue3, "\(contextQueue) != \(contextQueue3)")
                 #endif
-                
-                mediaItems.forEach {
-                    $0.removeFromRelatedRemotes(remoteItemsSet)
-                    $0.updateMissingDateRelations()
-                    
-                    if $0.relatedRemotes.count == 0 {
-                        $0.regenerateTrimmedLocalFileID()
-                    }
-                }
-                
-                remoteItems.forEach { context.delete($0) }
-                
-                self.coreDataStack.saveDataForContext(context: context, saveAndWait: false, savedCallBack: completion)
-            })
+            }
         })
         
+    }
+    
+    func deleteTrashedItems(completion: @escaping VoidHandler) {
+        coreDataStack.performBackgroundTask { context in
+            let predicate = NSPredicate(format: "status = %d", ItemStatus.trashed.valueForCoreDataMapping())
+            self.executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { trashedItems in
+                self.deleteItemsWithRelated(trashedItems, context: context, completion: completion)
+            })
+        }
+    }
+    
+    private func deleteItemsWithRelated(_ items: [MediaItem], context: NSManagedObjectContext, completion: @escaping VoidHandler) {
+        let itemsSet = NSSet(array: items)
+        
+        mediaItemByLocalID(trimmedLocalIDS: items.compactMap { $0.trimmedLocalFileID }, context: context, mediaItemsCallBack: { mediaItems in
+            mediaItems.forEach {
+                $0.removeFromRelatedRemotes(itemsSet)
+                $0.updateMissingDateRelations()
+                
+                if $0.relatedRemotes.count == 0 {
+                    $0.regenerateTrimmedLocalFileID()
+                }
+            }
+            
+            items.forEach { context.delete($0) }
+            
+            self.coreDataStack.saveDataForContext(context: context, saveAndWait: false, savedCallBack: completion)
+        })
     }
     
     private func batchDeleteRequest(for entityDescription: NSEntityDescription, predicate: NSPredicate?) -> NSBatchDeleteRequest {

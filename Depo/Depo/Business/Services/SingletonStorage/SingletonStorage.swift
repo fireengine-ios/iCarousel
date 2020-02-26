@@ -23,6 +23,8 @@ class SingletonStorage {
     var isTwoFactorAuthEnabled: Bool?
     var isSpotifyEnabled: Bool?
     
+    private let resumableUploadInfoService: ResumableUploadInfoService = factory.resolve()
+    
     private static let isEmailVerificationCodeSentKey = "isEmailVerificationCodeSentKeyFor\(SingletonStorage.shared.uniqueUserID)"
     var isEmailVerificationCodeSent: Bool {
         set { UserDefaults.standard.set(newValue, forKey: SingletonStorage.isEmailVerificationCodeSentKey) }
@@ -49,15 +51,18 @@ class SingletonStorage {
         if let info = accountInfo, !forceReload {
             success(info)
         } else {
-            AccountService().info(success: { accountInfoResponse in
+            AccountService().info(success: { [weak self] accountInfoResponse in
                 if let resp = accountInfoResponse as? AccountInfoResponse {
-                    self.accountInfo = resp
-                    ///remove user photo from cache on start application
-                    ImageDownloder().removeImageFromCache(url: resp.urlForPhoto, completion: {
-                        DispatchQueue.toMain {
-                            success(resp)
-                        }
-                    })
+                    self?.accountInfo = resp
+                    
+                    self?.resumableUploadInfoService.updateInfo {
+                        ///remove user photo from cache on start application
+                        ImageDownloder().removeImageFromCache(url: resp.urlForPhoto, completion: {
+                            DispatchQueue.toMain {
+                                success(resp)
+                            }
+                        })
+                    }
                 } else {
                     DispatchQueue.toMain {
                         fail(ErrorResponse.string(TextConstants.errorServer))
@@ -69,6 +74,37 @@ class SingletonStorage {
                 }
             })
         }
+    }
+    
+    func getOverQuotaStatus(completion: @escaping VoidHandler) {
+        let storageVars: StorageVars = factory.resolve()
+        
+        ///to send initial value as true
+        let showPopUp =  !storageVars.largeFullOfQuotaPopUpCheckBox
+        
+        AccountService().overQuotaStatus(with: showPopUp, success: { response in
+            guard let response = response as? OverQuotaStatusResponse, let value = response.value else {
+                completion()
+                return
+            }
+            
+            switch value {
+            case .nonOverQuota:
+                storageVars.largeFullOfQuotaPopUpShowType100 = false
+            case .overQuotaFreemium:
+                storageVars.largeFullOfQuotaPopUpShowType100 = true
+                storageVars.largeFullOfQuotaUserPremium = false
+            case .overQuotaPremium:
+                storageVars.largeFullOfQuotaPopUpShowType100 = true
+                storageVars.largeFullOfQuotaUserPremium = true
+            }
+            
+            completion()
+            
+            }, fail: { error in
+               assertionFailure("Тo data received for overQuotaStatus request \(error.localizedDescription) ")
+               completion()
+        })
     }
     
     var isTurkcellUser: Bool {

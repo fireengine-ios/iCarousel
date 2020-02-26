@@ -202,6 +202,29 @@ class QuotaInfoResponse: ObjectRequestResponse {
     }
 }
 
+enum OverQuotaStatusValue: String {
+    case nonOverQuota = "NON_OVER_QUOTA"
+    case overQuotaFreemium = "OVER_QUOTA_FREEMIUM"
+    case overQuotaPremium = "OVER_QUOTA_PREMIUM"
+}
+
+final class OverQuotaStatusResponse: ObjectRequestResponse {
+    private enum ResponseKey {
+        static let status = "status"
+        static let value = "value"
+    }
+    
+    var status: String?
+    var value: OverQuotaStatusValue?
+    
+    override func mapping() {
+        status = json?[ResponseKey.status].string
+        if let valueString = json?[ResponseKey.value].string {
+            value = OverQuotaStatusValue(rawValue: valueString)
+        }
+    }
+}
+
 class LanguageListResponse: ObjectRequestResponse {
     override func mapping() {
     }
@@ -416,6 +439,8 @@ final class FeaturesResponse: ObjectRequestResponse {
         static let autoVideoUploadV2 = "auto-video-upload-v2"
         static let tcellPaycellSubscription = "tcell-paycell-subscription"
         static let autoSyncDisabled = "auto-sync-disabled"
+        static let isResumableUploadEnabled = "resumable-upload-enabled"
+        static let resumableUploadChunkSize = "resumable-upload-chunk-size-in-bytes"
     }
     
     var isNonTcellPaycellSubscription: Bool?
@@ -426,6 +451,8 @@ final class FeaturesResponse: ObjectRequestResponse {
     var isAutoVideoUploadV2: Bool?
     var isTcellPaycellSubscription: Bool?
     var isAutoSyncDisabled: Bool?
+    var isResumableUploadEnabled: Bool?
+    var resumableUploadChunkSize: Int?
 
     override func mapping() {
         isNonTcellPaycellSubscription = json?[ResponseKey.nonTcellPaycellSubscription].bool
@@ -436,6 +463,8 @@ final class FeaturesResponse: ObjectRequestResponse {
         isAutoVideoUploadV2 = json?[ResponseKey.autoVideoUploadV2].bool
         isTcellPaycellSubscription = json?[ResponseKey.tcellPaycellSubscription].bool
         isAutoSyncDisabled = json?[ResponseKey.autoSyncDisabled].bool
+        isResumableUploadEnabled = json?[ResponseKey.isResumableUploadEnabled].bool
+        resumableUploadChunkSize = json?[ResponseKey.resumableUploadChunkSize].int
     }
     
 }

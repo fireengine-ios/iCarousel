@@ -15,5 +15,5 @@ protocol SelectNameViewInput: class {
 
     func setupInitialState()
     
-    func hideView()
+    func hideView(completion: VoidHandler?)
 }

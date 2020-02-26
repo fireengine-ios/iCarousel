@@ -259,24 +259,32 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func smash(item: [BaseDataSourceItem], completion: VoidHandler?) {
+        
         guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
             return
         }
+        
+        let controller = OverlayStickerViewController()
+        controller.smashCoordinator = self.smashService
+        let navVC = NavigationController(rootViewController: controller)
+        self.router.presentViewController(controller: navVC)
+        
         ImageDownloder().getImage(patch: url) { [weak self] image in
             guard let self = self, let image = image else {
-                UIApplication.showErrorAlert(message: TextConstants.errorServer)
+                if !ReachabilityService.shared.isReachable {
+                    controller.dismiss(animated: false) {
+                         UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+                    }
+                }
+        
                 completion?()
                 return
             }
             
-            let controller = OverlayStickerViewController()
             controller.selectedImage = image
             controller.imageName = item.name
-            controller.smashCoordinator = self.smashService
-            let navVC = NavigationController(rootViewController: controller)
-            
             completion?()
-            self.router.presentViewController(controller: navVC)
+            
             self.trackEvent(elementType: .smash)
         }
     }
@@ -375,7 +383,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let okHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .restore, label: .ok)
             vc.close { [weak self] in
-                self?.output?.operationStarted(type: .restore)
                 self?.putBackItems(remoteItems)
             }
         }
@@ -423,6 +430,51 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     self?.output?.operationFailed(type: .removeFromAlbum, message: errorRespone.description)
                 }
             })
+        }
+        
+        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
+                                              message: TextConstants.removeFromAlbum,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        
+        router.presentViewController(controller: controller)
+    }
+    
+    private func deletePhotosFromAlbum(items: [BaseDataSourceItem], item: Item) {
+        let okHandler: VoidHandler = { [weak self] in
+            guard let self = self, let items = items as? [Item], item.fileType.isFaceImageType, let id = item.id else {
+                return
+            }
+            
+            let album = self.router.getParentUUID()
+            
+            self.output?.operationStarted(type: .removeFromFaceImageAlbum)
+            
+            let successHandler: PhotosAlbumOperation = { [weak self] in
+                DispatchQueue.main.async {
+                    ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: album)
+                    self?.output?.operationFinished(type: .removeFromFaceImageAlbum)
+                }
+            }
+            
+            let failHandler: FailResponse = { [weak self] error in
+                self?.output?.operationFailed(type: .removeFromFaceImageAlbum, message: error.description)
+            }
+
+            switch item.fileType {
+            case .faceImage(.people):
+                self.peopleService.deletePhotosFromAlbum(id: id, photos: items, success: successHandler, fail: failHandler)
+            case .faceImage(.places):
+                self.placesService.deletePhotosFromAlbum(uuid: album, photos: items, success: successHandler, fail: failHandler)
+            case .faceImage(.things):
+                self.thingsService.deletePhotosFromAlbum(id: id, photos: items, success: successHandler, fail: failHandler)
+            default:
+                break
+            }
         }
         
         let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
@@ -624,6 +676,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         removeAlbumItems(items)
     }
     
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem], item: Item) {
+        deletePhotosFromAlbum(items: items, item: item)
+    }
+    
     func photos(items: [BaseDataSourceItem]) {
         
     }
@@ -766,6 +822,30 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         router.presentViewController(controller: popup, animated: false)
     }
     
+    func emptyTrashBin() {
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+//            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .cancel)
+            vc.close()
+        }
+        
+        let okHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.output?.operationStarted(type: .emptyTrashBin)
+            vc.close { [weak self] in
+                self?.deleteAllFromTrashBin()
+            }
+        }
+        
+        let popup = PopUpController.with(title: TextConstants.trashBinDeleteAllConfirmTitle,
+                                         message: TextConstants.trashBinDeleteAllConfirmText,
+                                         image: .delete,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.trashBinDeleteAllConfirmOkButton,
+                                         firstAction: cancelHandler,
+                                         secondAction: okHandler)
+        
+        router.presentViewController(controller: popup, animated: false)
+    }
+    
     private func removeAlbums(_ items: [BaseDataSourceItem]) {
         guard let albums = items as? [AlbumItem] else {
             return
@@ -775,6 +855,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             ItemOperationManager.default.didMoveToTrashAlbums(removedAlbums)
             self?.succesAction(elementType: .removeAlbum)()
         }, fail: failAction(elementType: .removeAlbum))
+    }
+    
+    private func deleteAllFromTrashBin() {
+        fileService.deletAllFromTrashBin(success: succesAction(elementType: .emptyTrashBin),
+                                         fail: failAction(elementType: .emptyTrashBin))
     }
     
     private func sync(items: [BaseDataSourceItem]?, action: @escaping VoidHandler, cancel: @escaping VoidHandler, fail: FailResponse?) {
@@ -949,13 +1034,9 @@ extension MoreFilesActionsInteractor {
             text = localizations.folders
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
-            RouterVC().hideSpiner()
-            if let self = self {
-                self.showSuccessPopup(message: text)
-            } else {
-                UIApplication.showSuccessAlert(message: text)
-            }
+        DispatchQueue.main.async {
+            self.router.hideSpiner()
+            self.showSuccessPopup(message: text)
         }
     }
     
@@ -1008,6 +1089,8 @@ extension MoreFilesActionsInteractor {
         switch elementType {
         case .download:
             text = TextConstants.popUpDownloadComplete
+        case .emptyTrashBin:
+            text = TextConstants.trashBinDeleteAllComplete
         default:
             return
         }
@@ -1159,6 +1242,7 @@ extension MoreFilesActionsInteractor {
         firOperation: @escaping DivorceItemsOperation)
     {
         output?.startAsyncOperationDisableScreen()
+        output?.operationStarted(type: type)
         
         var peopleItems = [PeopleItem]()
         var placesItems = [PlacesItem]()

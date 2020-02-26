@@ -360,12 +360,15 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
                         
-                        SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                             CacheManager.shared.actualizeCache()
                             
                             SingletonStorage.shared.isTwoFactorAuthEnabled = false
                             
-                            sucess?(headers)
+                            self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
+                                sucess?(headers)
+                            })
+                            
                             MenloworksAppEvents.onLogin()
                         }, fail: { error in
                             fail?(error)
@@ -394,9 +397,11 @@ class AuthenticationService: BaseRequestService {
                 let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
-                SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                     CacheManager.shared.actualizeCache()
-                    sucess?()
+                    self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
+                        sucess?()
+                    })
                 }, fail: { error in
                     fail?(error)
                 })
@@ -406,6 +411,20 @@ class AuthenticationService: BaseRequestService {
             }
         case .failure(let error):
             fail?(ErrorResponse.error(error))
+        }
+    }
+    
+    private func accountReadOnlyPopUpHandler(headers:[String: Any], completion: @escaping VoidHandler) {
+        guard
+            let accountStatus = headers[HeaderConstant.accountStatus] as? String,
+            accountStatus.uppercased() == ErrorResponseText.accountReadOnly
+        else {
+            completion()
+            return
+        }
+        
+        SingletonStorage.shared.getOverQuotaStatus {
+            completion()
         }
     }
     

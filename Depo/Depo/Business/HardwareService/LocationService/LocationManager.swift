@@ -130,7 +130,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             return
         }
         
-        if UIApplication.shared.applicationState == .background {
+        if ApplicationStateHelper.shared.isBackground {
             if BackgroundTaskService.shared.appWasSuspended {
                 CacheManager.shared.actualizeCache()
             }

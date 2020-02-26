@@ -11,6 +11,7 @@ enum ElementTypes {
     case info//one for alert one for tab
     case edit
     case delete
+    case emptyTrashBin
     case deleteDeviceOriginal
     case move
     case sync
@@ -132,7 +133,7 @@ enum ElementTypes {
                 result = [.select, .shareAlbum, .download, .removeAlbum, .albumDetails]  + ElementTypes.activeState
                 
             case .selectionMode:
-                result = [.createStory]
+                result = [.createStory, .addToFavorites, .removeFromFavorites]
                 if Device.isTurkishLocale {
                     result.append(.print)
                 }

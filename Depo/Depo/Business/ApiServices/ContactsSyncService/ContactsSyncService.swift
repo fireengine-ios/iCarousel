@@ -116,6 +116,8 @@ class ContactsSyncService: BaseRequestService {
             errorCallback?(.internalError, getCurrentOperationType())
         case .RESULT_FAIL:
             errorCallback?(.failed, getCurrentOperationType())
+        case .RESULT_ERROR_DEPO:
+            errorCallback?(.depoError, getCurrentOperationType())
         default:
             break
         }

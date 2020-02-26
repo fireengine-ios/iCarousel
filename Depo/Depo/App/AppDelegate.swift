@@ -53,6 +53,12 @@ func debugLog(_ string: String, functionName: StaticString = #function, fileName
     CLSLogv("%@", getVaList([string]))
 }
 
+func printLog(_ string: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+    print(string)
+    log.debug(string, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
+    CLSLogv("%@", getVaList([string]))
+}
+
 func fatalLog(_ string: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) -> Never {
     debugLog(string, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     fatalError(string)
@@ -248,7 +254,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func showPasscodeIfNeedInBackground() {
-        let state = UIApplication.shared.applicationState
+        let state = ApplicationStateHelper.shared.safeApplicationState
         if state == .background || state == .inactive {
             showPasscodeIfNeed()
         }

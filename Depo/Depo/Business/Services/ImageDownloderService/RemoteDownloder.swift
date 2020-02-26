@@ -15,6 +15,8 @@ class ImageDownloder {
     
     private var tokenList = [URL : SDWebImageOperation]()
     
+    var isErrorLogEnabled = false
+    
     init() {
         downloder = SDWebImageManager.shared().imageDownloader!
     }
@@ -56,16 +58,31 @@ class ImageDownloder {
     
     func getImageData(url: URL?, completeData:@escaping RemoteData) {
         
-        guard let path = url, path.byTrimmingQuery?.absoluteString != nil else {
+        guard let path = url else {
+            logError(message: "getImageData failed - invalid url")
+            
             DispatchQueue.main.async {
                 completeData(nil)
             }
             return
         }
         
-        let item = SDWebImageManager.shared().loadImage(with: path, options: [], progress: nil) { _,data,_,cacheType,_,imageUrl in
+        guard path.byTrimmingQuery?.absoluteString != nil else {
+            logError(message: "getImageData failed - invalid trimmed url")
+            
+            DispatchQueue.main.async {
+                completeData(nil)
+            }
+            return
+        }
+        
+        let item = SDWebImageManager.shared().loadImage(with: path, options: [], progress: nil) { [weak self] _,data, error ,cacheType,_,imageUrl in
             DispatchQueue.main.async {
                 completeData(data)
+            }
+            
+            if let error = error {
+                self?.logError(message: "getImageData failed - \(error.description)")
             }
         }
         
@@ -78,7 +95,18 @@ class ImageDownloder {
     }
     
     func getImageDataByTrimming(url: URL?, completeImage:@escaping RemoteData) {
-        guard let url = url, let trimmedUrl = url.byTrimmingQuery else {
+        guard let url = url else {
+            logError(message: "getImageDataByTrimming failed - invalid url")
+            
+            DispatchQueue.main.async {
+                completeImage(nil)
+            }
+            return
+        }
+        
+        guard let trimmedUrl = url.byTrimmingQuery else {
+            logError(message: "getImageDataByTrimming failed - invalid trimmed url")
+            
             DispatchQueue.main.async {
                 completeImage(nil)
             }
@@ -94,7 +122,7 @@ class ImageDownloder {
             return
         }
         
-        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global())
+        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global(), isErrorLogEnabled: isErrorLogEnabled)
         operation.outputBlock = { [weak self] _, data in
             guard let self = self else {
                 completeImage(nil)
@@ -120,7 +148,18 @@ class ImageDownloder {
     }
     
     func getImageByTrimming(url: URL?, completeImage:@escaping RemoteImage) {
-        guard let url = url, let trimmedUrl = url.byTrimmingQuery else {
+        guard let url = url else {
+            logError(message: "getImageByTrimming failed - invalid url")
+            
+            DispatchQueue.main.async {
+                completeImage(nil)
+            }
+            return
+        }
+        
+        guard let trimmedUrl = url.byTrimmingQuery else {
+            logError(message: "getImageByTrimming failed - invalid trimmed url")
+            
             DispatchQueue.main.async {
                 completeImage(nil)
             }
@@ -136,7 +175,7 @@ class ImageDownloder {
             return
         }
         
-        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global())
+        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global(), isErrorLogEnabled: isErrorLogEnabled)
         operation.outputBlock = { [weak self] image, _ in
             guard let self = self else {
                 completeImage(nil)
@@ -226,6 +265,14 @@ class ImageDownloder {
     }
 }
 
+extension ImageDownloder {
+    private func logError(message: String) {
+        if isErrorLogEnabled {
+            debugLog(message)
+        }
+    }
+}
+
 typealias FilesDownloaderResponse = (_ fileURLs: [URL], _ directoryURL: URL) -> Void
 typealias FilesDownloaderFail = (_ errorMessage: String) -> Void
 
@@ -285,5 +332,4 @@ class FilesDownloader {
             }
         }
     }
-    
 }

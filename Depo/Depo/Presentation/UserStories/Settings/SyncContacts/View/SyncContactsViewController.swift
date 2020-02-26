@@ -93,6 +93,11 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         backupDateLabel.text = ""
         
         backUpButton.setTitle(TextConstants.settingsBackUpButtonTitle, for: .normal)
+        //FIXME: find better solution (breaking mode doesnt help for now)
+        if Device.locale == "fr" {
+            backUpButton.titleLabel?.numberOfLines = 1
+        }
+        
         restoreButton.setTitle(TextConstants.settingsBackUpRestoreTitle, for: .normal)
         deleteDuplicatedButton.setTitle(TextConstants.settingsBackUpDeleteDuplicatedButton, for: .normal)
         cancelButton.setTitle(TextConstants.settingsBackUpCancelAnalyzingTitle, for: .normal)
@@ -208,6 +213,11 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         default:
             cancelButton.isHidden = true
         }
+    }
+    
+    func setButtonsAvailability(restore: Bool, backup: Bool) {
+        restoreButton.isEnabled = restore
+        backUpButton.isEnabled = backup
     }
     
     func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType) {

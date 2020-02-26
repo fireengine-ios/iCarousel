@@ -151,34 +151,30 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
     
     func didObtainQuotaInfo(usagePercentage: Float) {
         let storageVars: StorageVars = factory.resolve()
+        let fullOfQuotaPopUpType: LargeFullOfQuotaPopUpType?
         
-        let isFirstLogin = !storageVars.homePageFirstTimeLogin
-        if isFirstLogin {
-            storageVars.homePageFirstTimeLogin = true
+        if usagePercentage < 0.8 {
+            fullOfQuotaPopUpType = nil
+            
+            ///if user's quota is below %80 percent , we change it to false to show next extend quota
+            storageVars.largeFullOfQuotaPopUpShownBetween80And99 = false
+            
+        } else if 0.8 <= usagePercentage && usagePercentage <= 0.99 && !storageVars.largeFullOfQuotaPopUpShownBetween80And99 {
+            fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpTypeBetween80And99(usagePercentage)
+            storageVars.largeFullOfQuotaPopUpShownBetween80And99 = true
+            
+        } else if usagePercentage >= 1.0 && storageVars.largeFullOfQuotaPopUpShowType100 && !storageVars.largeFullOfQuotaPopUpCheckBox  {
+            let userPremium = storageVars.largeFullOfQuotaUserPremium;
+            fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100(userPremium)
+            storageVars.largeFullOfQuotaPopUpShowType100 = false
+        } else {
+            fullOfQuotaPopUpType = nil
         }
         
-        if isFirstLogin {
-            let fullOfQuotaPopUpType: LargeFullOfQuotaPopUpType?
-            
-            if 0.8 <= usagePercentage && usagePercentage < 0.9 {
-                fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType80
-                
-            } else if 0.9 <= usagePercentage && usagePercentage < 1.0 {
-                fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType90
-                
-            } else if usagePercentage >= 1.0 {
-                fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100
-                
-            } else {
-                fullOfQuotaPopUpType = nil
-            }
-            
-            if let type = fullOfQuotaPopUpType {
-                router.presentFullOfQuotaPopUp(with: type)
-            }
-        } else if usagePercentage >= 1.0 {
-            router.presentSmallFullOfQuotaPopUp()
+        if let type = fullOfQuotaPopUpType {
+            router.presentFullOfQuotaPopUp(with: type)
         }
+        
         
         decreaseDispatchGroupValue(for: .waitQuotaInfoResponse)
     }
