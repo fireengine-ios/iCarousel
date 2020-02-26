@@ -348,6 +348,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share))
                         self.interactor.share(item: currentItems, sourceRect: self.getSourceRect(sender: sender, controller: nil))
                     })
+                case .emptyTrashBin:
+                    action = UIAlertAction(title: TextConstants.actionSheetEmptyTrashBin, style: .default, handler: { _ in
+                        self.interactor.emptyTrashBin()
+                    })
                 //Photos and albumbs
                 case .photos:
                     action = UIAlertAction(title: TextConstants.actionSheetPhotos, style: .default, handler: { _ in

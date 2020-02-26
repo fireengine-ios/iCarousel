@@ -276,7 +276,7 @@ final class UploadOperation: Operation {
                 fail(ErrorResponse.string(TextConstants.commonServiceError))
                 
             case .uploaded(bytes: _):
-                debugLog("resumable_upload: shoud continue")
+                debugLog("resumable_upload: should continue")
                 
                 self.attemptsCount = 0
                 self.uploadContiniously(parameters: parameters, success: success, fail: fail)

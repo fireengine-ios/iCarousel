@@ -17,6 +17,7 @@ struct AnalyticsPackageProductObject {
     let itemVariant: String
     let index: String
     let quantity: String
+    let currency: String
     
     var productParametrs: [String: Any] {
         return [
@@ -27,7 +28,8 @@ struct AnalyticsPackageProductObject {
             AnalyticsParameterItemCategory : itemCategory,
             AnalyticsParameterItemVariant : itemVariant,
             AnalyticsParameterIndex : index,
-            AnalyticsParameterQuantity : quantity
+            AnalyticsParameterQuantity : quantity,
+            AnalyticsParameterCurrency : currency
         ]
     }
 }
