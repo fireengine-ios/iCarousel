@@ -24,7 +24,6 @@ protocol StorageVars: class {
     var isNewAppVersionFirstLaunchTurkcellLanding: Bool { get set }
     var deepLink: String? { get set }
     var deepLinkParameters: [AnyHashable: Any]? { get set }
-    var interruptedSyncVideoQueueItems: [String] { get set }
     var blockedUsers: [String : Date] { get set }
     var shownCampaignInstaPickWithDaysLeft: Date? { get set }
     var shownCampaignInstaPickWithoutDaysLeft: Date? { get set }
@@ -148,12 +147,6 @@ final class UserDefaultsVars: StorageVars {
     var deepLinkParameters: [AnyHashable: Any]? {
         get { return userDefaults.object(forKey: deepLinkParametersKey) as? [AnyHashable: Any]}
         set { userDefaults.set(newValue, forKey: deepLinkParametersKey)}
-    }
-    
-    private let interruptedSyncVideoQueueItemsKey = "interruptedSyncVideoQueueItemsKey"
-    var interruptedSyncVideoQueueItems: [String] {
-        get { return userDefaults.object(forKey: interruptedSyncVideoQueueItemsKey) as? [String] ?? []}
-        set { userDefaults.set(newValue, forKey: interruptedSyncVideoQueueItemsKey)}
     }
     
     var currentRemotesPage: Int {

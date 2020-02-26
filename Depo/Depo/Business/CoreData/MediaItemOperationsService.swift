@@ -222,17 +222,19 @@ final class MediaItemOperationsService {
                     //for locals
                     savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
                     
-                    debugLog("sync_status: local \(savedItem.nameValue ?? "") is synced")
-                    
                     if savedItem.objectSyncStatus != nil {
                         savedItem.objectSyncStatus = nil
                     }
                     
                     var array = [MediaItemsObjectSyncStatus]()
                     for userID in item.syncStatuses {
+                        //TODO: remove log
+                        debugLog("sync_status: synced for \(userID)")
+                        
                         array.append(MediaItemsObjectSyncStatus(userID: userID, context: context))
                     }
                     savedItem.objectSyncStatus = NSSet(array: array)
+                    
                     //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
                 })
                 
@@ -244,7 +246,10 @@ final class MediaItemOperationsService {
                 if let newRemoteItem = newRemote {
                     //all relation will be setuped inside
                     _ = MediaItem(wrapData: newRemoteItem, context: context)
+                    
+                    //TODO: remove log
                     debugLog("sync_status: remote \(newRemote?.name ?? "") is created")
+                    debugLog("sync_status: remote uuid is \(newRemote?.uuid ?? "")")
                 }
 
                 self.coreDataStack.saveDataForContext(context: context, saveAndWait: false, savedCallBack: nil)
