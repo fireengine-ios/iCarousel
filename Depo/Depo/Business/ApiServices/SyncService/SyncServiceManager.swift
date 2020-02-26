@@ -337,7 +337,6 @@ extension SyncServiceManager {
         
         FreeAppSpace.session.checkFreeAppSpaceAfterAutoSync()
         
-        backgroundSyncHandler?(true)
         if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, CacheManager.shared.isCacheActualized {
             CardsManager.default.startOperationWith(type: .waitingForWiFi)
             return
