@@ -158,12 +158,14 @@ final class SettingsInfoPermissionsResponse: ObjectRequestResponse {
 final class SettingsPermissionsResponse: ObjectRequestResponse {
 
     var type: PermissionType?
+    var eulaURL: String?
     var isAllowed: Bool?
     var isApproved: Bool?
     var isApprovalPending: Bool?
     
     private enum ResponseKeys {
         static let type = "type"
+        static let eulaURL = "eulaURL"
         static let isAllowed = "allowed"
         static let isApproved = "approved"
         static let isApprovalPending = "approvalPending"
@@ -175,6 +177,7 @@ final class SettingsPermissionsResponse: ObjectRequestResponse {
         }
         
         type = PermissionType(rawValue: typeString)
+        eulaURL = json?[ResponseKeys.eulaURL].string
         isAllowed = json?[ResponseKeys.isAllowed].bool
         isApproved = json?[ResponseKeys.isApproved].bool
         isApprovalPending = json?[ResponseKeys.isApprovalPending].bool

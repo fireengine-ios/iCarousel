@@ -1177,4 +1177,8 @@ class RouterVC: NSObject {
             }
         }
     }
+    
+    func mobilePaymentPermissionController() -> MobilePaymentPermissionViewController {
+        return MobilePaymentPermissionViewController.initFromNib()
+    }
 }
