@@ -55,7 +55,9 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     // MARK: - Actions
         
     private func setupTitleAndDescription(type: PermissionType?) {
-        guard let type = type else { return }
+        guard let type = type else {
+            return
+        }
         var descriptionText = NSMutableAttributedString()
         var title: String?
         switch type {
