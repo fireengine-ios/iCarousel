@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MobilePaymentPermissionView: UIView {
+final class MobilePaymentPermissionView: UIView, NibInit {
     
     //MARK: IBOutlets
     @IBOutlet private weak var mainStackView: UIStackView! {
@@ -93,17 +93,6 @@ final class MobilePaymentPermissionView: UIView {
     
     // MARK: - Properties
     weak var controller: MobilePaymentPermissionViewInput?
-    
-    static func instantiate() -> MobilePaymentPermissionView {
-        let nibName = String(describing: self)
-        guard
-            let object = Bundle.main.loadNibNamed(nibName, owner: nil, options: nil),
-            let view = object.first as? MobilePaymentPermissionView
-        else {
-            return MobilePaymentPermissionView()
-        }
-        return view
-    }
     
 }
 

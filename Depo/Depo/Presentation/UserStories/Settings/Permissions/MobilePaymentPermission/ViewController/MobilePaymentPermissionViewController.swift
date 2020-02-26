@@ -14,7 +14,7 @@ final class MobilePaymentPermissionViewController: ViewController, NibInit {
     var urlString: String?
     
     override func loadView() {
-        let mainView = MobilePaymentPermissionView.instantiate()
+        let mainView = MobilePaymentPermissionView.initFromNib()
         mainView.controller = self
         self.view = mainView
     }
