@@ -1031,14 +1031,14 @@
 "global_permission_header" = "Global Data Permission";
 "informative_description_label" = "Waiting for permission";
 "global_permission_screen_title" = "Global Data Permission";
-"mobile_payment_title" = "Mobile Payment";
-"mobile_payment_description" = "Mobil Ödeme ayarınızı lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh…";
-"mobile_payment_view_title" = "Turkcell Mobile Payment";
-"mobile_payment_view_description" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas varius tortor nibh, sit amet tempor nibh finibus et. Aenean eu enim justo. Vestibulum aliquam hendrerit molestie. Mauris malesuada nisi.";
-"mobile_payment_view_link_text" = "TÖHAŞ Çerçeve Ödeme Hizmetleri ve lorem ipsum dolor sit amet, onaylıyorum.";
-"mobile_payment_close_popup_title" = "Mobil Ödemeyi Kapat";
-"mobile_payment_close_popup_description" = "Mobil Ödeme ayarınızı kapatmak için lütfen lorem ipsum 532 532 consectetur adipiscing elit maecenas varius.";
-"mobile_payment_close_popup_description_bold_range" = "532 532";
+"mobile_payment_title" = "mobile_payment_title";
+"mobile_payment_description" = "mobile_payment_description";
+"mobile_payment_view_title" = "mobile_payment_view_title";
+"mobile_payment_view_description" = "mobile_payment_view_description";
+"mobile_payment_view_link_text" = "mobile_payment_view_link_text";
+"mobile_payment_close_popup_title" = "mobile_payment_close_popup_title";
+"mobile_payment_close_popup_description" = "mobile_payment_close_popup_description";
+"mobile_payment_close_popup_description_bold_range" = "mobile_payment_close_popup_description_bold_range";
 
 /*Settings page*/
 "Permissions" = "Permissions";
