@@ -16,31 +16,14 @@ final class VideoSyncService: ItemSyncServiceImpl {
     override init() {
         super.init()
         
-        ItemOperationManager.default.startUpdateView(view: self)
-        self.backgroundTaskService.expirationDelegates.add(self)
         self.fileType = .video
         self.getUnsyncedOperationQueue.maxConcurrentOperationCount = 1
     }
 
     override func itemsSortedToUpload(completion: @escaping WrapObjectsCallBack) {
         MediaItemOperationsService.shared.allLocalItemsForSync(video: true, image: false) { items in
-            ///reversed video sync interruption fix
-            //            let isMobileData = ReachabilityService.shared.isReachableViaWWAN
-            let fileSizeLimit = NumericConstants.fourGigabytes //isMobileData ? NumericConstants.hundredMegabytes : NumericConstants.fourGigabytes
-            
-            completion(items.filter { item in
-                guard item.fileSize < fileSizeLimit else {
-                    return false
-                }
-                
-                ///reversed video sync interruption fix
-                //                if isMobileData {
-                //                     return !self.lastInterruptedItemsUUIDs.contains(item.getTrimmedLocalID())
-                //                }
-                
-                ///is WIFI
-                return true
-            })
+            let fileSizeLimit = NumericConstants.fourGigabytes
+            completion(items.filter { $0.fileSize < fileSizeLimit })
         }
     }
     
@@ -76,31 +59,5 @@ final class VideoSyncService: ItemSyncServiceImpl {
         getUnsyncedOperationQueue.cancelAllOperations()
         photoVideoService.stopAllOperations()
         UploadService.default.cancelSyncOperations(photo: false, video: true)
-    }
-}
-
-
-extension VideoSyncService: BackgroundTaskServiceDelegate {
-    func backgroundTaskWillExpire() {
-        if status == .executing, ReachabilityService.shared.isReachableViaWWAN, !lastInterruptedItemsUUIDs.isEmpty {
-            storageVars.interruptedSyncVideoQueueItems = lastInterruptedItemsUUIDs
-            debugLog("Interrupted autosync queue:")
-            
-            MediaItemOperationsService.shared.allLocalItems(trimmedLocalIds: lastInterruptedItemsUUIDs) { [weak self] mediaItems in
-                mediaItems.forEach { debugLog($0.name ?? "") }
-                self?.stop()
-            }
-        }
-    }
-}
-
-
-extension VideoSyncService: ItemOperationManagerViewProtocol {
-    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
-        return object is VideoSyncService
-    }
-    
-    func finishedUploadFile(file: WrapData) {
-        lastInterruptedItemsUUIDs.remove(file.getTrimmedLocalID())
     }
 }
