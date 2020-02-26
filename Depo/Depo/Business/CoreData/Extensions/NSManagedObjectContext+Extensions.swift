@@ -26,6 +26,7 @@ extension NSManagedObjectContext {
         
         guard UIApplication.shared.isProtectedDataAvailable else {
             rollback()
+            debugLog("core_data_save: isProtectedDataAvailable == false")
             completion?(.rolledBack(ErrorResponse.string(TextConstants.NotLocalized.dataProtectedAndDeviceLocked)))
             return
         }
@@ -50,6 +51,7 @@ extension NSManagedObjectContext {
         
         guard UIApplication.shared.isProtectedDataAvailable else {
             rollback()
+            debugLog("core_data_save: isProtectedDataAvailable == false")
             completion?(.rolledBack(ErrorResponse.string(TextConstants.NotLocalized.dataProtectedAndDeviceLocked)))
             return
         }
@@ -75,6 +77,7 @@ extension NSManagedObjectContext {
         
         guard UIApplication.shared.isProtectedDataAvailable else {
             rollback()
+            debugLog("core_data_save: isProtectedDataAvailable == false")
             completion?(.rolledBack(ErrorResponse.string(TextConstants.NotLocalized.dataProtectedAndDeviceLocked)))
             return
         }

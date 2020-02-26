@@ -437,10 +437,10 @@ final class UploadOperation: Operation {
                         self.outputItem?.metaData?.mediumUrl = preview
                     }
                     
+                    debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
+                    
                     MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
                 }
-                
-                debugLog("_upload: finished")
                 
                 success()
             }
