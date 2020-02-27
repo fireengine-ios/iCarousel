@@ -50,7 +50,6 @@ final class OverlayStickerViewController: ViewController {
     }
     
     var imageName: String?
-//    var smashCoordinator: SmashServiceProtocol?
     var smashActionService: SmashActionServiceProtocol?
 
     private lazy var defaultName = UUID().uuidString

@@ -24,7 +24,7 @@ final class HideActionService: CommonDivorceActionService {
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var fileService = WrapItemFileService()
     
-    private var items: Items!
+    private var items: Items?
 
     private weak var output: BaseAsyncOperationInteractorOutput?
 
@@ -59,7 +59,8 @@ extension HideActionService {
             return .hideAlbumsCompleted
             
         default:
-            fatalError()
+            assertionFailure(items.debugDescription)
+            return .bottomBarHideCompleted
         }
     }
     
@@ -72,7 +73,8 @@ extension HideActionService {
             return albums.count
             
         default:
-            fatalError()
+            assertionFailure(items.debugDescription)
+            return 0
         }
     }
     
@@ -169,7 +171,8 @@ extension HideActionService {
 extension HideActionService {
     private func makeConfirmMessage() -> String {
         guard let operationItems = items else {
-            fatalError()
+            assertionFailure(items.debugDescription)
+            return ""
         }
         
         switch operationItems {

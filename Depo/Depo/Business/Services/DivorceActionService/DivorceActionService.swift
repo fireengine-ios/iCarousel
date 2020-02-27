@@ -58,15 +58,18 @@ class CommonDivorceActionService {
 extension CommonDivorceActionService: DivorceActionPopUpPresentProtocol {
     
     var state: HSCompletionPopUpsFactory.State {
-        fatalError()
+        assertionFailure()
+        return .actionSheetHideCompleted
     }
     
     var itemsCount: Int {
-        fatalError()
+        assertionFailure()
+        return 0
     }
     
     var confirmPopUp: BasePopUpController {
-        fatalError()
+        assertionFailure()
+        return BasePopUpController()
     }
     
     private var successPopUp: BasePopUpController {

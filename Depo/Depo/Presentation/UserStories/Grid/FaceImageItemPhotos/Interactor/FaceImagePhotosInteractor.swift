@@ -116,7 +116,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
             return
         }
         
-        hideActionService.startOperation(for: .albums([album]), output: output, success: {  [weak self] in
+        hideActionService.startOperation(for: .albums([album]), output: output, success: { [weak self] in
             self?.output.completeAsyncOperationEnableScreen()
         }, fail: { [weak self] errorResponse in
             self?.output.completeAsyncOperationEnableScreen(errorMessage: errorResponse.description)
