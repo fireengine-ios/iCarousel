@@ -13,7 +13,7 @@ class ImageDownloder {
     
     private let downloder: SDWebImageDownloader
     
-    private var tokenList = [URL : SDWebImageOperation]()
+    private var tokenList = SynchronizedDictionary<URL,SDWebImageOperation>()
     
     var isErrorLogEnabled = false
     
