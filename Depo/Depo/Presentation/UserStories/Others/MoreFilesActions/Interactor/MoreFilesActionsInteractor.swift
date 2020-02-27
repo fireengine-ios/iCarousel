@@ -19,12 +19,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private let peopleService = PeopleService()
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
-    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     private lazy var hiddenService = HiddenService()
-
-    private lazy var hideFunctionalityService: HideFuncServiceProtocol = HideSmashCoordinator()
-    private lazy var smashService: SmashServiceProtocol = HideSmashCoordinator()
-
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var hideActionService: HideActionServiceProtocol = HideActionService()
+    private lazy var smashActionService: SmashActionServiceProtocol = SmashActionService()
+    
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
     var sharingItems = [BaseDataSourceItem]()
@@ -259,13 +259,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func smash(item: [BaseDataSourceItem], completion: VoidHandler?) {
-        
         guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
             return
         }
         
         let controller = OverlayStickerViewController()
-        controller.smashCoordinator = self.smashService
+        controller.smashActionService = self.smashActionService
         let navVC = NavigationController(rootViewController: controller)
         self.router.presentViewController(controller: navVC)
         
@@ -306,13 +305,16 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         if let albumItems = items as? [AlbumItem] {
             hideAlbums(items: albumItems)
+            
         } else if let items = remoteItems as? [Item] {
-            hideFunctionalityService.startHideOperation(for: items,
-                                                        output: self.output,
-                                                        success: self.successItemsAction(elementType: .hide, relatedItems: items),
-                                                        fail: self.failItemsAction(elementType: .hide, relatedItems: items))
+            hideActionService.startOperation(for: .photos(items),
+                                             output: self.output,
+                                             success: self.successItemsAction(elementType: .hide, relatedItems: items),
+                                             fail: self.failItemsAction(elementType: .hide, relatedItems: items))
+            
         } else {
             assertionFailure("Unexpected type of items")
+            
         }
     }
     
@@ -327,11 +329,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             assertionFailure("Locals only must not be passed to hide them")
             return
         }
-           
-        hideFunctionalityService.startHideAlbumsOperation(for: remoteItems,
-                                                          output: self.output,
-                                                          success: self.successItemsAction(elementType: .hide, relatedItems: items),
-                                                          fail: self.failItemsAction(elementType: .hide, relatedItems: items))
+
+        hideActionService.startOperation(for: .albums(remoteItems),
+                                         output: self.output,
+                                         success: self.successItemsAction(elementType: .hide, relatedItems: items),
+                                         fail: self.failItemsAction(elementType: .hide, relatedItems: items))
     }
     
     func unhide(items: [BaseDataSourceItem]) {
