@@ -55,9 +55,9 @@
                                             </subviews>
                                         </stackView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nEK-hd-5j1" customClass="RoundedInsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
-                                            <rect key="frame" x="322" y="20" width="80" height="40"/>
+                                            <rect key="frame" x="317" y="20" width="85" height="40"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="QlM-Nq-xos"/>
+                                                <constraint firstAttribute="width" constant="85" id="QlM-Nq-xos"/>
                                                 <constraint firstAttribute="height" constant="40" id="f5h-I9-k7c"/>
                                             </constraints>
                                             <state key="normal" title="Button"/>
