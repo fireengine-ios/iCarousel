@@ -41,6 +41,7 @@ struct AnalyticsEcommerce {
     let tax: String
     let priceValue: String
     let shipping: String
+    let currency: String
     
     var ecommerceParametrs: [String: Any] {
         return [
@@ -49,7 +50,8 @@ struct AnalyticsEcommerce {
             AnalyticsParameterTransactionID : transactionID,
             AnalyticsParameterTax : tax,
             AnalyticsParameterValue : priceValue,
-            AnalyticsParameterShipping : shipping
+            AnalyticsParameterShipping : shipping,
+            AnalyticsParameterCurrency : currency
         ]
     }
 }
