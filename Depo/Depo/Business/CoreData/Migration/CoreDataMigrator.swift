@@ -106,7 +106,8 @@ final class CoreDataMigrator {
         do {
             let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: currentModel)
             
-            let options = [NSSQLitePragmasOption: ["journal_mode": "DELETE"]]
+            let options = [NSSQLitePragmasOption: ["journal_mode": "DELETE"],
+                           NSPersistentStoreFileProtectionKey: FileProtectionType.none] as [String : Any]
             let store = persistentStoreCoordinator.addPersistentStore(at: storeURL, options: options)
             try persistentStoreCoordinator.remove(store)
         } catch let error {
