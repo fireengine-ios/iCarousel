@@ -1470,3 +1470,12 @@
 "LifeboxLargePopUpSubTitleBeetween80And99" = "Let's have a look at upgrade options";
 "LifeboxLargePopUpSubTitle100Premium" = "Please take a look at the upgrading options to upgrade your storage.";
 "LifeboxLargePopUpSubTitle100Freemium" = "Please take a look at the upgrading options to upgrade your storage. Your content will be deleted soon.";
+
+"we_recommend" = "We recommend";
+"show_more" = "Show more";
+"show_less" = "Show less";
+"face_recognition_package_description" = "Face Recognition";
+"delete_dublicate_package_description" = "Delete Dublicate";
+"premium_user_package_description" = "Premium user";
+"bundle_package_addon_type" = "with +Premium";
+"storage_only_package_addon_type" = "Storage only";

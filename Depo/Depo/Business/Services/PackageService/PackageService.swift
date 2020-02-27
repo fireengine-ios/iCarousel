@@ -14,7 +14,15 @@ final class PackageService {
     private let iapManager = IAPManager.shared
     
     //MARK: Utility Methods(private)
-    private func subscriptionPlanWith(name: String, priceString: String, type: SubscriptionPlanType, model: Any, quota: Int64, price: Float) -> SubscriptionPlan {
+    private func subscriptionPlanWith(name: String,
+                                      priceString: String,
+                                      type: SubscriptionPlanType,
+                                      model: Any,
+                                      quota: Int64,
+                                      price: Float,
+                                      isRecommended: Bool,
+                                      features: [AuthorityType],
+                                      addonType: SubscriptionPlan.AddonType?) -> SubscriptionPlan {
         if name.contains("500") {
             return SubscriptionPlan(name: name,
                                     photosCount: 500_000,
@@ -25,7 +33,10 @@ final class PackageService {
                                     type: type,
                                     model: model,
                                     quota: quota,
-                                    price: price)
+                                    price: price,
+                                    isRecommended: isRecommended,
+                                    features: features,
+                                    addonType: addonType)
         } else if name.contains("50") {
             return SubscriptionPlan(name: name,
                                     photosCount: 50_000,
@@ -36,7 +47,10 @@ final class PackageService {
                                     type: type,
                                     model: model,
                                     quota: quota,
-                                    price: price)
+                                    price: price,
+                                    isRecommended: isRecommended,
+                                    features: features,
+                                    addonType: addonType)
         } else if name.contains("100") {
             return SubscriptionPlan(name: name,
                                     photosCount: 100_000,
@@ -47,7 +61,10 @@ final class PackageService {
                                     type: type,
                                     model: model,
                                     quota: quota,
-                                    price: price)
+                                    price: price,
+                                    isRecommended: isRecommended,
+                                    features: features,
+                                    addonType: addonType)
         } else if name.contains("2.5") || name.contains("2,5") {
             return SubscriptionPlan(name: name,
                                     photosCount: 2_560_000,
@@ -58,7 +75,10 @@ final class PackageService {
                                     type: type,
                                     model: model,
                                     quota: quota,
-                                    price: price)
+                                    price: price,
+                                    isRecommended: isRecommended,
+                                    features: features,
+                                    addonType: addonType)
         } else if name.contains("5") {
             return SubscriptionPlan(name: name,
                                     photosCount: 5_000,
@@ -69,7 +89,10 @@ final class PackageService {
                                     type: type,
                                     model: model,
                                     quota: quota,
-                                    price: price)
+                                    price: price,
+                                    isRecommended: isRecommended,
+                                    features: features,
+                                    addonType: addonType)
         } else if name.contains("10") {
             return SubscriptionPlan(name: name,
                                     photosCount: 10_000,
@@ -80,7 +103,10 @@ final class PackageService {
                                     type: type,
                                     model: model,
                                     quota: quota,
-                                    price: price)
+                                    price: price,
+                                    isRecommended: isRecommended,
+                                    features: features,
+                                    addonType: addonType)
         } else if name.contains("20") {
             return SubscriptionPlan(name: name,
                                     photosCount: 20_000,
@@ -91,7 +117,10 @@ final class PackageService {
                                     type: type,
                                     model: model,
                                     quota: quota,
-                                    price: price)
+                                    price: price,
+                                    isRecommended: isRecommended,
+                                    features: features,
+                                    addonType: addonType)
         } else {
             return SubscriptionPlan(name: name,
                                     photosCount: 0,
@@ -102,7 +131,10 @@ final class PackageService {
                                     type: type,
                                     model: model,
                                     quota: quota,
-                                    price: price)
+                                    price: price,
+                                    isRecommended: isRecommended,
+                                    features: features,
+                                    addonType: addonType)
         }
     }
     
@@ -311,14 +343,26 @@ final class PackageService {
     
     func convertToSubscriptionPlan(offers: [Any], accountType: AccountType) -> [SubscriptionPlan] {
         return offers.compactMap { offer in
-            
-            let priceString: String = getPriceInfo(for: offer, accountType: accountType)
-            let name = getOfferQuota(for: offer)?.bytesString ?? (getOfferDisplayName(for: offer) ?? "")
-            let price = getPriceInFloat(offer: offer)
-            var quota = getQuota(offer: offer)
-            
-            return subscriptionPlanWith(name: name, priceString: priceString, type: getOfferType(for: offer), model: offer, quota: quota, price: price)
+            return subscriptionPlanWith(name: getName(offer: offer),
+                                        priceString: getPriceInfo(for: offer, accountType: accountType),
+                                        type: getOfferType(for: offer),
+                                        model: offer,
+                                        quota: getQuota(offer: offer),
+                                        price: getPriceInFloat(offer: offer),
+                                        isRecommended: getRecommendationStatus(offer: offer),
+                                        features: getAvailableFeatures(offer: offer),
+                                        addonType: .make(with: offer))
         }
+    }
+    
+    private func getName(offer: Any) -> String {
+        let name: String
+        if let addonType = SubscriptionPlan.AddonType.make(with: offer), addonType == .featureOnly {
+            name = "Premium"
+        } else {
+            name = getOfferQuota(for: offer)?.bytesString ?? (getOfferDisplayName(for: offer) ?? "")
+        }
+        return "+" + name
     }
     
     private func getPriceInFloat(offer: Any) -> Float {
@@ -339,6 +383,26 @@ final class PackageService {
             return quota
         } else {
             return 0
+        }
+    }
+    
+    private func getRecommendationStatus(offer: Any) -> Bool {
+        if let packageModel = offer as? PackageModelResponse {
+            return packageModel.isRecommended == true
+        } else {
+            return false
+        }
+    }
+    
+    private func getAvailableFeatures(offer: Any) -> [AuthorityType] {
+        if let packageModel = offer as? PackageModelResponse,
+            packageModel.hasAttachedFeature == true,
+            let authorities = packageModel.authorities {
+            return authorities
+                .compactMap { $0.authorityType }
+                .filter { AuthorityType.typesInOffer.contains($0) }
+        } else {
+            return []
         }
     }
     
@@ -380,11 +444,19 @@ final class PackageService {
     
     private func isPremiumPurchase(for offer: Any) -> Bool {
         var isPremiumPurchase = false
-        if let offer = offer as? PackageModelResponse , let authorities = offer.authorities {
+        if let offer = offer as? PackageModelResponse, let authorities = offer.authorities {
             isPremiumPurchase = authorities.contains(where: { $0.authorityType == .premiumUser })
         } else if let offer = offer as? SKProduct {
             isPremiumPurchase = offer.isPremiumPurchase
         }
         return isPremiumPurchase
+    }
+    
+    private func isFeaturePlan(for offer: Any) -> Bool {
+        if let offer = offer as? PackageModelResponse {
+            return offer.isFeaturePack == true
+        } else {
+            return false
+        }
     }
 }
