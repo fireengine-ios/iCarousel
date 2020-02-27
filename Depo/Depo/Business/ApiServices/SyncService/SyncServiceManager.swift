@@ -151,7 +151,7 @@ class SyncServiceManager {
                 return
             }
             
-            CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
+            CardsManager.default.stopOperationWith(type: .autoUploadIsOff)
             
             let photoOption = self.settings.photoSetting.option
             let videoOption = self.settings.videoSetting.option
@@ -298,22 +298,22 @@ extension SyncServiceManager {
         if hasExecutingSync, self.reachabilityService.isReachable {
             WidgetService.shared.notifyWidgetAbout(status: .executing)
 
-            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
-            CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
+            CardsManager.default.stopOperationWith(type: .waitingForWiFi)
+            CardsManager.default.stopOperationWith(type: .prepareToAutoSync)
             return
         }
         
-        CardsManager.default.stopOperationWithType(type: .sync)
+        CardsManager.default.stopOperationWith(type: .sync)
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         if hasPrepairingSync {
 //            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
-            CardsManager.default.stopOperationWithType(type: .sync)
-            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
+            CardsManager.default.stopOperationWith(type: .sync)
+            CardsManager.default.stopOperationWith(type: .waitingForWiFi)
             return
         }
         
-        CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
+        CardsManager.default.stopOperationWith(type: .prepareToAutoSync)
         
         FreeAppSpace.session.checkFreeAppSpaceAfterAutoSync()
         

@@ -59,7 +59,7 @@ final class PremiumInfoCard: BaseCardView {
 
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .premium)
+        CardsManager.default.stopOperationWith(type: .premium)
     }
     
     override func layoutSubviews() {
