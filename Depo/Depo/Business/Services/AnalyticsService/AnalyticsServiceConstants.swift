@@ -691,6 +691,10 @@ enum GAEventAction {
     case hiddenBin
     case trashBin
     case saveHiddenSuccessPopup
+    case overQuotaFreemiumPopup
+    case overQuotaPremiumPopup
+    case quotaAlmostFullPopup
+    case quotaLimitFullPopup
     
     case fileOperation(GAOperationType)
     case fileOperationPopup(GAOperationType)
@@ -838,6 +842,14 @@ enum GAEventAction {
             return "Trash bin"
         case .saveHiddenSuccessPopup:
             return "Save Hidden Successfully Pop Up"
+        case .overQuotaFreemiumPopup:
+            return "Over Quota Freemium Pop up"
+        case .overQuotaPremiumPopup:
+            return "Over Quota Premium Pop up"
+        case .quotaAlmostFullPopup:
+            return "Quota Almost Full Pop up"
+        case .quotaLimitFullPopup:
+            return "Quota Limit Full Pop up"
         case .fileOperation(let operationType):
             return operationType.eventActionText
         case .fileOperationPopup(let operationType):
@@ -968,6 +980,26 @@ enum GAEventLabel {
                 return "App Store - " + quota
             case .creditCard(let quota):
                 return "Credit Card - " + quota
+            }
+        }
+    }
+    
+    enum OverQuotaType {
+        case expandMyStorage(_ checked: Bool = false)
+        case deleteFiles(_ checked: Bool = false)
+        case cancel(_ checked: Bool = false)
+        case skip
+        
+        var text: String {
+            switch self {
+            case .expandMyStorage(let checked):
+                return checked ? "Expand My Storage - Checked" : "Expand My Storage"
+            case .deleteFiles(let checked):
+                return checked ? "Delete Files - Checked" : "Delete Files"
+            case .cancel(let checked):
+                return checked ? "Cancel - Checked" : "Cancel"
+            case .skip:
+                return "Skip"
             }
         }
     }
@@ -1158,6 +1190,7 @@ enum GAEventLabel {
     case proceedWithExistingPeople    
     case divorceButtonVideo
     case fileTypeOperation(FileType)
+    case overQuota(_ event: OverQuotaType)
     
     var text: String {
         switch self {
@@ -1357,6 +1390,8 @@ enum GAEventLabel {
             return "Divorce Button Video"
         case .fileTypeOperation(let fileType):
             return fileType.text
+        case .overQuota(let type):
+            return type.text
         }
     }
     

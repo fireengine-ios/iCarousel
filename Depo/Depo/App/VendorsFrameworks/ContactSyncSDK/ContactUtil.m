@@ -16,6 +16,7 @@
 
 @property (strong) NSMutableArray* records;
 @property (strong) NSMutableArray* objectIds;
+@property BOOL addressBookCopyInProgress;
  
 @end
 
@@ -48,7 +49,7 @@
 //    CFErrorRef error = nil;
     
     // Request authorization to Address Book
-    if (_addressBook != nil) {
+    if (_addressBook) {
         callback(YES);
         return;
     }
@@ -108,6 +109,18 @@
 }
 
 -(void)releaseAddressBookRef {
+    if (_addressBookCopyInProgress) {
+        SYNC_Log(@"%@", @"Addressbook copy in progress");
+        int counter = 0;
+        while (counter <= 10) {
+            SYNC_Log(@"%@", @"Waiting for release");
+            [NSThread sleepForTimeInterval:1.0f];
+            if (!_addressBookCopyInProgress) {
+                break;
+            }
+            counter += 1;
+        }
+    }
     if (_addressBook != nil){
         CFRelease(_addressBook);
         _addressBook = nil;
@@ -118,7 +131,7 @@
     SYNC_Log(@"%@", @"Get AddressBookRef");
     CFErrorRef error = nil;
     
-    if (_addressBook != nil){
+    if (_addressBook){
         return;
 //        CFRelease(_addressBook);
     }
@@ -633,8 +646,8 @@
     NSMutableArray *ret = [NSMutableArray new];
     
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( _addressBook );
-    CFIndex nPeople = ABAddressBookGetPersonCount( _addressBook );
-    
+    CFIndex nPeople = CFArrayGetCount(allPeople);
+
     for ( int i = 0; i < nPeople; i++ )
     {
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i);
@@ -654,16 +667,23 @@
 {
     [self fetchAddressBookRef];
     NSMutableArray *ret = [NSMutableArray new];
-    
+    if (!_addressBook) {
+        return ret;
+    }
+    _addressBookCopyInProgress = true;
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( _addressBook );
-    CFIndex nPeople = ABAddressBookGetPersonCount( _addressBook );
+    _addressBookCopyInProgress = false;
+    CFIndex nPeople = CFArrayGetCount(allPeople);
 
     NSInteger index = (offset != -1 ? offset: 0);
 
-    SYNC_Log(@"bulkCount %zd offset %zd index %zd", bulkCount, offset, index)
+    SYNC_Log(@"bulkCount %zd offset %zd index %zd npeople %zd", bulkCount, offset, index, nPeople)
     for ( ; index < nPeople; index++ )
     {
         if (offset > -1 && bulkCount > 0 && index == (bulkCount + offset)){
+            break;
+        }
+        if (!_addressBook) {
             break;
         }
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, index );
@@ -702,8 +722,8 @@
         return;
     }
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( _addressBook );
-    CFIndex nPeople = ABAddressBookGetPersonCount( _addressBook );
-    
+    CFIndex nPeople = CFArrayGetCount(allPeople);
+
     for ( int i = 0; i < nPeople; i++ )
     {
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );

@@ -105,9 +105,10 @@ final class OverlayStickerViewController: ViewController {
                                                      eventLabel: isConfirmed ? .ok : .cancel)
             
             let gifsToStickersIds = self.overlayingStickerImageView.getAttachmentGifStickersIDs()
+            
             let event = NetmeraEvents.Actions.SmashSave(action: isConfirmed ? .save : .cancel,
-                                                        stickerId: gifsToStickersIds.gifsIDs,
-                                                        gifId: gifsToStickersIds.stickersIDs)
+                                                        stickerId: gifsToStickersIds.stickersIDs,
+                                                        gifId: gifsToStickersIds.gifsIDs)
             AnalyticsService.sendNetmeraEvent(event: event)
             
             if isConfirmed {

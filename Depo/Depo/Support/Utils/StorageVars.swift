@@ -18,6 +18,7 @@ protocol StorageVars: class {
     var largeFullOfQuotaPopUpCheckBox: Bool { get set }
     var largeFullOfQuotaPopUpShownBetween80And99: Bool { get set }
     var largeFullOfQuotaPopUpShowType100: Bool { get set }
+    var largeFullOfQuotaUserPremium: Bool { get set }
     var periodicContactSyncSet: Bool { get set }
     var usersWhoUsedApp: [String: Any] { get set }
     var isNewAppVersionFirstLaunchTurkcellLanding: Bool { get set }
@@ -128,6 +129,12 @@ final class UserDefaultsVars: StorageVars {
     var largeFullOfQuotaPopUpShowType100: Bool {
         get { return userDefaults.bool(forKey: largeFullOfQuotaPopUpShowType100Key + SingletonStorage.shared.uniqueUserID) }
         set { userDefaults.set(newValue, forKey: largeFullOfQuotaPopUpShowType100Key + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let largeFullOfQuotaUserPremiumKey = "largeFullOfQuotaUserPremium"
+    var largeFullOfQuotaUserPremium: Bool {
+        get { return userDefaults.bool(forKey: largeFullOfQuotaUserPremiumKey + SingletonStorage.shared.uniqueUserID) }
+        set { userDefaults.set(newValue, forKey: largeFullOfQuotaUserPremiumKey + SingletonStorage.shared.uniqueUserID) }
     }
     
     

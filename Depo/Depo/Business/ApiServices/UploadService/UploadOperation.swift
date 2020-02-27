@@ -248,12 +248,6 @@ final class UploadOperation: Operation {
                 return
             }
             
-            guard let status = status else {
-                let error = error ?? ErrorResponse.string(TextConstants.commonServiceError)
-                fail(error)
-                return
-            }
-            
             if let error = error {
                 if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
                     self.retry { [weak self] in
@@ -262,6 +256,12 @@ final class UploadOperation: Operation {
                 } else {
                     fail(error)
                 }
+                return
+            }
+            
+            guard let status = status else {
+                let error = error ?? ErrorResponse.string(TextConstants.commonServiceError)
+                fail(error)
                 return
             }
             
@@ -276,7 +276,7 @@ final class UploadOperation: Operation {
                 fail(ErrorResponse.string(TextConstants.commonServiceError))
                 
             case .uploaded(bytes: _):
-                debugLog("resumable_upload: shoud continue")
+                debugLog("resumable_upload: should continue")
                 
                 self.attemptsCount = 0
                 self.uploadContiniously(parameters: parameters, success: success, fail: fail)

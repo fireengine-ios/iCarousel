@@ -164,7 +164,8 @@ final class HomePagePresenter: HomePageModuleInput, HomePageViewOutput, HomePage
             storageVars.largeFullOfQuotaPopUpShownBetween80And99 = true
             
         } else if usagePercentage >= 1.0 && storageVars.largeFullOfQuotaPopUpShowType100 && !storageVars.largeFullOfQuotaPopUpCheckBox  {
-            fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100
+            let userPremium = storageVars.largeFullOfQuotaUserPremium;
+            fullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100(userPremium)
             storageVars.largeFullOfQuotaPopUpShowType100 = false
         } else {
             fullOfQuotaPopUpType = nil

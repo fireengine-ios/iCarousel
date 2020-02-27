@@ -18,6 +18,8 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func finishedUploadFile(file: WrapData)
     
+    func failedUploadFile(file: WrapData, error: Error?)
+    
     ///cancelled by user
     func cancelledUpload(file: WrapData)
     
@@ -86,6 +88,8 @@ protocol ItemOperationManagerViewProtocol: class {
     func putBackFromTrashPeople(items: [PeopleItem])
     func putBackFromTrashPlaces(items: [PlacesItem])
     func putBackFromTrashThings(items: [ThingsItem])
+    
+    func didEmptyTrashBin()
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -100,6 +104,8 @@ extension ItemOperationManagerViewProtocol {
     func setProgressForUploadingFile(file: WrapData, progress: Float) {}
     
     func finishedUploadFile(file: WrapData) {}
+    
+    func failedUploadFile(file: WrapData, error: Error?) {}
     
     func cancelledUpload(file: WrapData) {
         UIApplication.setIdleTimerDisabled(true)
@@ -172,6 +178,8 @@ extension ItemOperationManagerViewProtocol {
     func putBackFromTrashPeople(items: [PeopleItem]) {}
     func putBackFromTrashPlaces(items: [PlacesItem]) {}
     func putBackFromTrashThings(items: [ThingsItem]) {}
+    
+    func didEmptyTrashBin() {}
 }
 
 
@@ -237,6 +245,13 @@ class ItemOperationManager: NSObject {
         //        }
         
         MenloworksAppEvents.onFileUploadedWithType(file.fileType, isAutosync: isAutoSync)
+        
+        currentUploadingObject = nil
+        currentUploadProgress = 0
+    }
+    
+    func failedUploadFile(file: WrapData, error: Error?) {
+        views.invoke { $0.failedUploadFile(file: file, error: error) }
         
         currentUploadingObject = nil
         currentUploadProgress = 0
@@ -504,6 +519,12 @@ class ItemOperationManager: NSObject {
     func putBackFromTrashThings(items: [ThingsItem]) {
         DispatchQueue.main.async {
             self.views.invoke { $0.putBackFromTrashThings(items: items) }
+        }
+    }
+    
+    func didEmptyTrashBin() {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didEmptyTrashBin() }
         }
     }
 }
