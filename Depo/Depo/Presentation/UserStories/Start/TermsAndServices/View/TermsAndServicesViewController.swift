@@ -216,34 +216,30 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
         guard !eula.isEmpty else {
             return
         }
-        
-        DispatchQueue.global().async { [weak self] in
             
-            let font = UIFont.TurkcellSaturaRegFont(size: 14)
-            /// https://stackoverflow.com/a/27422343
+        let font = UIFont.TurkcellSaturaRegFont(size: 14)
+        /// https://stackoverflow.com/a/27422343
 //            body{font-family: '\(font.familyName)'; because turkcell fonts currently are not recognizable as family of fonts - all text from htm will be shown as regular, no bold and etc.
-            let customFontEulaString = "<style>font-size:\(font.pointSize);}</style>" + eula
+        let customFontEulaString = "<style>font-size:\(font.pointSize);}</style>" + eula
+        
+        guard let data = customFontEulaString.data(using: .utf8) else {
+            assertionFailure()
+            return
+        }
+        
+        /// https://stackoverflow.com/q/50969015/5893286
+        /// fixed black screen
+        /// and error "AttributedString called within transaction"
+        do {
+            let attributedString = try NSAttributedString(data: data, options:
+                [.documentType: NSAttributedString.DocumentType.html,
+                 .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+            // https://www.oipapio.com/question-726375
             
-            guard let data = customFontEulaString.data(using: .utf8) else {
-                assertionFailure()
-                return
-            }
-            
-            /// https://stackoverflow.com/q/50969015/5893286
-            /// fixed black screen
-            /// and error "AttributedString called within transaction"
-            do {
-                let attributedString = try NSAttributedString(data: data, options:
-                    [.documentType: NSAttributedString.DocumentType.html,
-                     .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
-                // https://www.oipapio.com/question-726375
-                DispatchQueue.main.async {
-                    self?.contentView.textStorage.append(attributedString)
-                    self?.contentView.dataDetectorTypes = [.phoneNumber, .address]
-                }
-            } catch {
-                assertionFailure()
-            }
+            contentView.textStorage.append(attributedString)
+            contentView.dataDetectorTypes = [.phoneNumber, .address]
+        } catch {
+            assertionFailure()
         }
     }
     
