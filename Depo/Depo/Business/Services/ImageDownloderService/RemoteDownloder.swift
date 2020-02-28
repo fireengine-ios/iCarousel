@@ -52,7 +52,7 @@ class ImageDownloder {
             return
         }
         
-        tokenList = tokenList + [path : downloadItem]
+        tokenList = tokenList + SynchronizedDictionary<URL,SDWebImageOperation>(dictionary: [path : downloadItem])
         
     }
     

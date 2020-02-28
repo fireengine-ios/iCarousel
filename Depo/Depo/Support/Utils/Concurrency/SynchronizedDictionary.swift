@@ -23,10 +23,16 @@ public final class SynchronizedDictionary<K,V> where K: Hashable {
 //    init<S>(uniqueKeysWithValues keysAndValues: S) where S : Sequence, S.Element == (Key, Value)
     
     init() {
+        iteratorIndex = dictionary.startIndex
+        lastCalledElement = dictionary.first
+        
     }
     
     init(dictionary: [K:V]) {
         self.dictionary = dictionary
+        
+        iteratorIndex = dictionary.startIndex
+        lastCalledElement = dictionary.first
     }
     
     public func test2222() {
@@ -54,15 +60,15 @@ public final class SynchronizedDictionary<K,V> where K: Hashable {
         return dictionary.values
     }
     
-//    static func + <K, V>(left: SynchronizedDictionary<K, V>, right: SynchronizedDictionary<K, V>) -> SynchronizedDictionary<K, V> {
-//
-//        var map = left
-//
-//        for (k, v) in right {
-//            map[k] = v
-//        }
-//        return map
-//    }
+    static func + <K, V>(left: SynchronizedDictionary<K, V>, right: SynchronizedDictionary<K, V>) -> SynchronizedDictionary<K, V> {
+
+        let map = left
+
+        for (k, v) in right {
+            map[k] = v
+        }
+        return map
+    }
     
     
 //    func updateValue(_ value: Value, forKey key: Key) -> Value? {
@@ -90,8 +96,44 @@ public final class SynchronizedDictionary<K,V> where K: Hashable {
 //    }
     
     
-    
+   private var lastCalledElement: Element?
+    private var iteratorIndex: Dictionary<K, V>.Index?
 }
+
+extension SynchronizedDictionary: Sequence, IteratorProtocol {
+    
+    
+//           if count == 0 {
+//               return nil
+//           } else {
+//               defer { count -= 1 }
+//               return count
+//           }
+    public func next() -> SynchronizedDictionary.Element? {
+        guard let iteratorIndex = iteratorIndex,
+            iteratorIndex < dictionary.endIndex else {
+            return nil
+        }
+        defer {
+            self.iteratorIndex = dictionary.index(after: iteratorIndex)
+            
+//            lastCalledElement =  dictionary.keys[]
+        }
+        
+        return dictionary[iteratorIndex]
+    }
+
+}
+
+//struct SynchronizedDictionaryIterator: IteratorProtocol {
+//    mutating func next() -> SynchronizedDictionaryIterator? {
+//        <#code#>
+//    }
+//
+//    typealias Element = SynchronizedDictionaryIterator//<K:V> where K : Hashable
+//
+//
+//}
 
 //extension SynchronizedDictionary: Sequence {
 //    /// Returns an iterator over the dictionary's key-value pairs.
@@ -113,25 +155,8 @@ public final class SynchronizedDictionary<K,V> where K: Hashable {
 //    ///   `(key: Key, value: Value)`.
 ////    @inlinable public func makeIterator() -> Dictionary<Key, Value>.Iterator
 //    func makeIterator() -> SynchronizedDictionary<K, V>.Iterator {
-//        
+//
 //    }
 //}
 
 //<K,V>
-extension SynchronizedDictionary: Sequence, IteratorProtocol {
-    
-    public func next() -> Element? {
-           <#code#>
-    }
-
-}
-
-//struct SynchronizedDictionaryIterator: IteratorProtocol {
-//    mutating func next() -> SynchronizedDictionaryIterator? {
-//        <#code#>
-//    }
-//
-//    typealias Element = SynchronizedDictionaryIterator//<K:V> where K : Hashable
-//
-//
-//}
