@@ -285,7 +285,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
-    // MARK: Mobile Payment Permission Popup Allowance Info Get Request
     func getPermissionAllowanceInfo(withType type: PermissionType, handler: @escaping (ResponseResult<SettingsPermissionsResponse>) -> Void) {
         let request = String(format: RouteRequests.Account.Permissions.permissionWithType, type.rawValue)
         
@@ -826,7 +825,6 @@ class AccountService: BaseRequestService, AccountServicePrl {
 
     }
     
-    // MARK: Mobile Payment Permission Popup Remind Me Later Post Request
     func updateMobilePaymentPermissionFeedback(handler: @escaping ResponseVoid) {
         let request = RouteRequests.Account.Permissions.mobilePaymentPermissionFeedback
         sessionManager

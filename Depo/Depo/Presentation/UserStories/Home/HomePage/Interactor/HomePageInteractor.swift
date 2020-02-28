@@ -236,7 +236,6 @@ final class HomePageInteractor: HomePageInteractorInput {
         })
     }
     
-    // MARK: Get Permision With Type
     func getPermissionAllowanceInfo(type: PermissionType) {
         accountService.getPermissionAllowanceInfo(withType: type, handler: { [weak self] response in
             switch response {
@@ -251,7 +250,6 @@ final class HomePageInteractor: HomePageInteractorInput {
         })
     }
     
-    // MARK: Post Mobile Payment Permission Feedback
     func updateMobilePaymentPermissionFeedback() {
         accountService.updateMobilePaymentPermissionFeedback() { response in
             switch response {
@@ -265,7 +263,6 @@ final class HomePageInteractor: HomePageInteractorInput {
         }
     }
     
-    // MARK: Change Mobile Payment Permission Allowance
     func changePermissionsAllowed(type: PermissionType, isApproved: Bool) {
         accountService.changePermissionsAllowed(type: type, isApproved: isApproved) { [weak self] response in
             switch response {
