@@ -235,4 +235,47 @@ final class HomePageInteractor: HomePageInteractorInput {
             }
         })
     }
+    
+    // MARK: Get Permision With Type
+    func getPermissionAllowanceInfo(type: PermissionType) {
+        accountService.getPermissionAllowanceInfo(withType: type, handler: { [weak self] response in
+            switch response {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self?.output.didObtainPermissionAllowance(response: response)
+                }
+            case .failed(_):
+                // do nothing
+                break
+            }
+        })
+    }
+    
+    // MARK: Post Mobile Payment Permission Feedback
+    func updateMobilePaymentPermissionFeedback() {
+        accountService.updateMobilePaymentPermissionFeedback() { response in
+            switch response {
+            case .success(_):
+                debugPrint("updateMobilePaymentPermissionFeedback: success")
+                return
+            case .failed(_):
+                debugPrint("updateMobilePaymentPermissionFeedback: fail")
+                return
+            }
+        }
+    }
+    
+    // MARK: Change Mobile Payment Permission Allowance
+    func changePermissionsAllowed(type: PermissionType, isApproved: Bool) {
+        accountService.changePermissionsAllowed(type: type, isApproved: isApproved) { [weak self] response in
+            switch response {
+            case .success(_):
+                debugPrint("changePermissionsAllowed: success")
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
+    }
+    
+    
 }

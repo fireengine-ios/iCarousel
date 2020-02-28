@@ -149,4 +149,60 @@ final class HomePageRouter: HomePageRouterInput {
         router.pushViewController(viewController: controller)
     }
     
+    // MARK: Present Mobile Payment Permission Popup Open Warning
+    func presentMobilePaymentPermissionPopUp(url: String, isFirstAppear: Bool) {
+        let popup = getPopUpController(url: url)
+        popUpsToPresent.append(popup)
+        isFirstAppear ? () : presentPopUps()
+    }
+    
+    // MARK: Get Pop Up Controller
+    private func getPopUpController(url: String) -> PopUpController {
+        let plainMessage = TextConstants.mobilePaymentOpenPopupDescriptionLabel
+        let range = (plainMessage as NSString).range(of: TextConstants.mobilePaymentOpenPopupDescriptionBoldRangeLabel)
+        let attributeMessage = NSMutableAttributedString(string: plainMessage)
+        let attribute = [NSAttributedString.Key.font : UIFont.TurkcellSaturaDemFont(size: 16), NSAttributedString.Key.strokeColor : ColorConstants.marineTwo]
+        attributeMessage.addAttributes(attribute, range: range)
+        let popup = PopUpController.with(title: TextConstants.mobilePaymentOpenPopupTitleLabel, attributedMessage: attributeMessage, image: .none, firstButtonTitle: TextConstants.mobilePaymentOpenPopupLaterButton, secondButtonTitle: TextConstants.mobilePaymentOpenPopupContinueButton, firstAction: getRemindMeLaterHandler(), secondAction: getContinueHandler(url: url))
+        return popup
+    }
+    
+    // MARK: Continue Button Handler
+    private func getContinueHandler(url: String) -> PopUpButtonHandler {
+        return { [weak self] vc in
+            self?.routeMobilePaymentPermissionVC(url: url)
+            vc.close()
+        }
+    }
+    
+    // MARK: Remind Me Later Button Handler -Post Update Mobile Payment Permission Feedback
+    private func getRemindMeLaterHandler() -> PopUpButtonHandler {
+        return { [weak self] vc in
+            self?.presenter.interactor.updateMobilePaymentPermissionFeedback()
+            vc.close()
+        }
+    }
+    
+    // MARK: Push MobilePaymentPermissionViewController
+    private func routeMobilePaymentPermissionVC(url: String) {
+        let router = RouterVC()
+        let viewController = router.mobilePaymentPermissionController()
+        viewController.urlString = url
+        viewController.delegate = self
+        router.pushViewController(viewController: viewController)
+    }
+}
+
+// MARK: Mobile Payment Permission Protocol Delegate
+extension HomePageRouter: MobilePaymentPermissionProtocol {
+    
+    func approveTapped() {
+        presenter.view.closePermissionPopUp()
+        presenter.interactor.changePermissionsAllowed(type: .mobilePayment, isApproved: true)
+    }
+    
+    func backTapped(url: String) {
+        presentMobilePaymentPermissionPopUp(url: url, isFirstAppear: false)
+    }
+    
 }

@@ -19,6 +19,7 @@ protocol AccountServicePrl {
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
     func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid)
     func getSettingsInfoPermissions(handler: @escaping (ResponseResult<SettingsInfoPermissionsResponse>) -> Void)
+    
 }
 
 class AccountService: BaseRequestService, AccountServicePrl {
@@ -279,6 +280,33 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     let results = jsonArray.compactMap { SettingsPermissionsResponse(withJSON: $0) }
                    
                     handler(.success(results))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
+    // MARK: Mobile Payment Permission Popup Allowance Info Get Request
+    func getPermissionAllowanceInfo(withType type: PermissionType, handler: @escaping (ResponseResult<SettingsPermissionsResponse>) -> Void) {
+        let request = String(format: RouteRequests.Account.Permissions.permissionWithType, type.rawValue)
+        
+        sessionManager
+            .request(request)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    guard
+                        let jsonArray = JSON(data: data).array,
+                        let json = jsonArray.first
+                    else {
+                        let error = CustomErrors.serverError("\(request) not array in response")
+                        assertionFailure(error.localizedDescription)
+                        handler(.failed(error))
+                        return
+                    }
+                    let result = SettingsPermissionsResponse(withJSON: json)
+                    handler(.success(result))
                 case .failure(let error):
                     handler(.failed(error))
                 }
@@ -798,4 +826,14 @@ class AccountService: BaseRequestService, AccountServicePrl {
         })
 
     }
+    
+    // MARK: Mobile Payment Permission Popup Remind Me Later Post Request
+    func updateMobilePaymentPermissionFeedback(handler: @escaping ResponseVoid) {
+        let request = RouteRequests.Account.Permissions.mobilePaymentPermissionFeedback
+        sessionManager
+            .request(request, method: .post)
+            .customValidate()
+            .responseVoid(handler)
+    }
+    
 }
