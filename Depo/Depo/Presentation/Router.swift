@@ -1175,7 +1175,8 @@ class RouterVC: NSObject {
             if
                 let topController = self.defaultTopController,
                 topController is AutoSyncViewController == false,
-                topController is FullQuotaWarningPopUp == false {
+                topController is FullQuotaWarningPopUp == false,
+                topController is LoginViewController == false {
                 topController.present(controller, animated: false)
             }
         }
