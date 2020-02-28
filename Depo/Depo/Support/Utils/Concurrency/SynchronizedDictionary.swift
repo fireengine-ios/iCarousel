@@ -15,6 +15,8 @@ import Foundation
 
 public final class SynchronizedDictionary<K,V> where K: Hashable {
     
+    public typealias Element = (key: K, value: V)
+    
     private let queue = DispatchQueue(label: DispatchQueueLabels.syncronizedArray, attributes: .concurrent)
     private var dictionary = [K:V]()
     
@@ -115,14 +117,21 @@ public final class SynchronizedDictionary<K,V> where K: Hashable {
 //    }
 //}
 
-
-
-struct SynchronizedDictionaryIterator: IteratorProtocol {
-    mutating func next() -> SynchronizedDictionaryIterator? {
-        <#code#>
+//<K,V>
+extension SynchronizedDictionary: Sequence, IteratorProtocol {
+    
+    public func next() -> Element? {
+           <#code#>
     }
 
-    typealias Element = SynchronizedDictionaryIterator//<K:V> where K : Hashable
-
-
 }
+
+//struct SynchronizedDictionaryIterator: IteratorProtocol {
+//    mutating func next() -> SynchronizedDictionaryIterator? {
+//        <#code#>
+//    }
+//
+//    typealias Element = SynchronizedDictionaryIterator//<K:V> where K : Hashable
+//
+//
+//}
