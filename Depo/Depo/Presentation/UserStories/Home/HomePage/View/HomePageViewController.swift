@@ -299,56 +299,56 @@ extension HomePageViewController: HomePageViewInput {
     // MARK: - HomePageViewInput Private Utility Methods
     
     private func cellCoordinates<T: BaseCardView>(cellType: T.Type, to: UIView, completion: @escaping (_ frame: CGRect) -> ()) {
-           for (row, popupView) in homePageDataSource.cards.enumerated() {
-               if type(of: popupView) == cellType {
-                   let indexPath = IndexPath(row: row, section: 0)
-                   let indexPathsVisibleCells = collectionView.indexPathsForVisibleItems.sorted { first, second -> Bool in
-                       return first < second
-                   }
-                   
-                   if indexPathsVisibleCells.contains(indexPath) {
-                       if indexPath == indexPathsVisibleCells.first {
-                           collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-                       } else {
-                           collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
-                       }
-                       
-                       var frame = popupView.convert(popupView.bounds, to: to)
-                       frame.origin.y = max(0, frame.origin.y)
-                       frame.size.height = popupView.spotlightHeight()
-                       completion(frame)
-                   } else {
-                       guard let layout = collectionView.collectionViewLayout as? HomeCollectionViewLayout else {
-                           completion(.zero)
-                           return
-                       }
-
-                       CATransaction.flush() //rendering what is already ready
-           
-                       let offset = layout.frameFor(indexPath: indexPath).origin.y
-                       
-                       let isLastCell = indexPath.row == homePageDataSource.cards.count - 1
-                       
-                       UIView.animate(withDuration: 0.1, animations: {
-                           if isLastCell {
-                               self.collectionView.scrollToBottom(animated: false)
-                           } else {
-                                self.collectionView.setContentOffset(CGPoint(x: 0, y: offset - 50), animated: false)
-                           }
-                       }, completion: { _ in
-                           var frame = popupView.convert(popupView.bounds, to: to)
-                           frame.origin.y = max(0, frame.origin.y)
-                           frame.size.height = popupView.spotlightHeight()
-                           completion(frame)
-
-                       })
-                   }
-                   return
-               }
-           }
-           
-           completion (.zero)
-       }
+        for (row, popupView) in homePageDataSource.cards.enumerated() {
+            if type(of: popupView) == cellType {
+                let indexPath = IndexPath(row: row, section: 0)
+                let indexPathsVisibleCells = collectionView.indexPathsForVisibleItems.sorted { first, second -> Bool in
+                    return first < second
+                }
+                
+                if indexPathsVisibleCells.contains(indexPath) {
+                    if indexPath == indexPathsVisibleCells.first {
+                        collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+                    } else {
+                        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+                    }
+                    
+                    var frame = popupView.convert(popupView.bounds, to: to)
+                    frame.origin.y = max(0, frame.origin.y)
+                    frame.size.height = popupView.spotlightHeight()
+                    completion(frame)
+                } else {
+                    guard let layout = collectionView.collectionViewLayout as? HomeCollectionViewLayout else {
+                        completion(.zero)
+                        return
+                    }
+                    
+                    CATransaction.flush() //rendering what is already ready
+                    
+                    let offset = layout.frameFor(indexPath: indexPath).origin.y
+                    
+                    let isLastCell = indexPath.row == homePageDataSource.cards.count - 1
+                    
+                    UIView.animate(withDuration: 0.1, animations: {
+                        if isLastCell {
+                            self.collectionView.scrollToBottom(animated: false)
+                        } else {
+                            self.collectionView.setContentOffset(CGPoint(x: 0, y: offset - 50), animated: false)
+                        }
+                    }, completion: { _ in
+                        var frame = popupView.convert(popupView.bounds, to: to)
+                        frame.origin.y = max(0, frame.origin.y)
+                        frame.size.height = popupView.spotlightHeight()
+                        completion(frame)
+                        
+                    })
+                }
+                return
+            }
+        }
+        
+        completion (.zero)
+    }
     
 }
 
