@@ -171,7 +171,6 @@ extension HomePagePresenter: HomePageInteractorOutput {
         view.hideGiftBox()
     }
     
-    // MARK: Payment Permission Popup Appear or Not
     func didObtainPermissionAllowance(response: SettingsPermissionsResponse) {
         decreaseDispatchGroupValue(for: .waitPermissionAllowanceResponse)
         guard let eulaURL = response.eulaURL else {
@@ -217,7 +216,6 @@ extension HomePagePresenter: HomePageInteractorOutput {
         router.presentCredsUpdateCkeckPopUp(message: message, userInfo: accountInfo)
     }
     
-    // MARK: Payment Permission Popup -if it is true, check perrmission allowance
     private func checkMobilePaymentPermission(with accountInfo: AccountInfoResponse) {
         guard accountInfo.isUpdateMobilePaymentPermissionRequired == true else {
             decreaseDispatchGroupValue(for: .waitPermissionAllowanceResponse)
@@ -226,7 +224,6 @@ extension HomePagePresenter: HomePageInteractorOutput {
         interactor.getPermissionAllowanceInfo(type: .mobilePayment)
     }
     
-    // MARK: Payment Permission Popup Appearance Conditions
     private func shouldPermissionPopupAppear(response: SettingsPermissionsResponse) -> Bool {
         guard
             let isAllowed = response.isAllowed,
