@@ -1039,6 +1039,11 @@
 "mobile_payment_close_popup_title" = "mobile_payment_close_popup_title";
 "mobile_payment_close_popup_description" = "mobile_payment_close_popup_description";
 "mobile_payment_close_popup_description_bold_range" = "mobile_payment_close_popup_description_bold_range";
+"mobile_payment_open_popup_title" = "mobile_payment_open_popup_title";
+"mobile_payment_open_popup_description" = "mobile_payment_open_popup_description";
+"mobile_payment_open_popup_description_bold_range" = "mobile_payment_open_popup_description_bold_range";
+"mobile_payment_open_popup_later_button" = "mobile_payment_open_popup_later_button";
+"mobile_payment_open_popup_continue_button" = "mobile_payment_open_popup_continue_button_text";
 
 /*Settings page*/
 "Permissions" = "Permissions";

@@ -37,4 +37,6 @@ protocol HomePageRouterInput {
     func presentPopUps()
     
     func openCampaignDetails()
+    
+    func presentMobilePaymentPermissionPopUp(url: String, isFirstAppear: Bool)
 }

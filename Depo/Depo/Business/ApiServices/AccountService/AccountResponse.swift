@@ -32,6 +32,7 @@ struct AccountJSONConstants {
     static let otp = "otp"
     static let referenceToken = "referenceToken"
     static let gapID = "gapId"
+    static let isUpdateMobilePaymentPermissionRequired = "isUpdateMobilePaymentPermissionRequired"
     
     static let quotaBytes = "quotaBytes"
     static let quotaExceeded = "quotaExceeded"
@@ -71,8 +72,8 @@ class AccountInfoResponse: ObjectRequestResponse {
     var projectID: String?
     var gapId: String?
     var address: String?
-    
     var emailVerificationRemainingDays: Int?
+    var isUpdateMobilePaymentPermissionRequired: Bool?
     
     var fullPhoneNumber: String {
         if let code = countryCode, let number = phoneNumber {
@@ -112,6 +113,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         projectID = json?[AccountJSONConstants.projectID].string
         emailVerificationRemainingDays = json?[AccountJSONConstants.emailVerificationRemainingDays].int
         address = json?[AccountJSONConstants.address].string
+        isUpdateMobilePaymentPermissionRequired = json?[AccountJSONConstants.isUpdateMobilePaymentPermissionRequired].bool
     }
 }
 
@@ -159,6 +161,7 @@ final class SettingsPermissionsResponse: ObjectRequestResponse {
 
     var type: PermissionType?
     var eulaURL: String?
+    var isEulaApproved: Bool?
     var isAllowed: Bool?
     var isApproved: Bool?
     var isApprovalPending: Bool?
@@ -166,6 +169,7 @@ final class SettingsPermissionsResponse: ObjectRequestResponse {
     private enum ResponseKeys {
         static let type = "type"
         static let eulaURL = "eulaURL"
+        static let isEulaApproved = "eulaApproved"
         static let isAllowed = "allowed"
         static let isApproved = "approved"
         static let isApprovalPending = "approvalPending"
@@ -178,6 +182,7 @@ final class SettingsPermissionsResponse: ObjectRequestResponse {
         
         type = PermissionType(rawValue: typeString)
         eulaURL = json?[ResponseKeys.eulaURL].string
+        isEulaApproved = json?[ResponseKeys.isEulaApproved].bool
         isAllowed = json?[ResponseKeys.isAllowed].bool
         isApproved = json?[ResponseKeys.isApproved].bool
         isApprovalPending = json?[ResponseKeys.isApprovalPending].bool
