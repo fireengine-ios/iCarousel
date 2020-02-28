@@ -220,7 +220,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
               backgroundSyncService.scheduleProcessingSync()
           }
         
-        BackgroundTaskService.shared.beginBackgroundTask()
+//        BackgroundTaskService.shared.beginBackgroundTask()
 
         firstResponder = application.firstResponder
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)

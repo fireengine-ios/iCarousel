@@ -149,6 +149,10 @@ class SyncServiceManager {
             self.backgroundSyncHandler = handler
             self.checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
         }
+        
+        if isSyncFinished {
+            handler(true)
+        }
     }
     
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
@@ -315,6 +319,7 @@ extension SyncServiceManager {
     }
     
     @objc private func onAutoSyncStatusDidChange() {
+        
         if hasExecutingSync, self.reachabilityService.isReachable {
             WidgetService.shared.notifyWidgetAbout(status: .executing)
 
@@ -331,6 +336,10 @@ extension SyncServiceManager {
             CardsManager.default.stopOperationWithType(type: .sync)
             CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             return
+        }
+        
+        if isSyncFinished {
+            backgroundSyncHandler?(true)
         }
         
         CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)

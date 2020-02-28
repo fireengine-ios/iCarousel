@@ -94,11 +94,13 @@ final class BackgroundSynсService {
         
         SyncServiceManager.shared.backgroundTaskSync { isLast in
             debugLog("handleProcessingSyncTask_task_completed")
+            print("handleProcessingSyncTask_task_completed")
             task.setTaskCompleted(success: isLast)
         }
         
         task.expirationHandler = {
             debugLog("handleProcessingSyncTask_expirationHandler")
+            print("expirationHandler")
             SyncServiceManager.shared.stopSync()
         }
     }
