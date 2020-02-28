@@ -320,6 +320,11 @@ class RouterVC: NSObject {
         if let presentedController = navigationController?.viewControllers.last?.presentedViewController as? TBMatikPhotosViewController {
             return presentedController
         }
+        
+        if let navBarController = navigationController?.viewControllers.last?.presentedViewController as? UINavigationController {
+            return navBarController.visibleViewController
+        }
+        
         return navigationController?.viewControllers.last
     }
         

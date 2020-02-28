@@ -192,18 +192,18 @@ final class PackageModelResponse: Equatable {
     var quota: Int64?
     var status: PackageStatus?
     var authorities: [PackagePackAuthoritiesResponse]?
-    var recommended: Bool?
+    var isRecommended: Bool?
     var hasAttachedFeature: Bool?
     var isFeaturePack: Bool?
     
     var isStorageOnly: Bool {
-        guard let recommended = recommended,
+        guard let isRecommended = isRecommended,
             let hasAttachedFeature = hasAttachedFeature,
             let isFeaturePack = isFeaturePack else {
             return false
         }
         
-        return !recommended && !hasAttachedFeature && !isFeaturePack
+        return !isRecommended && !hasAttachedFeature && !isFeaturePack
     }
 }
 
@@ -225,7 +225,7 @@ extension PackageModelResponse: Map {
         inAppPurchaseId = json[ResponseKeys.inAppPurchaseId].string
         period = json[ResponseKeys.period].string
         quota = json[ResponseKeys.quota].int64
-        recommended = json[ResponseKeys.recommended].bool
+        isRecommended = json[ResponseKeys.recommended].bool
         hasAttachedFeature = json[ResponseKeys.hasAttachedFeature].bool
         isFeaturePack = json[ResponseKeys.isFeaturePack].bool
         

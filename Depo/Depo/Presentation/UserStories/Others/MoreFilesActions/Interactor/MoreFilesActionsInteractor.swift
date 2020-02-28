@@ -19,12 +19,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private let peopleService = PeopleService()
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
-    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     private lazy var hiddenService = HiddenService()
-
-    private lazy var hideFunctionalityService: HideFuncServiceProtocol = HideSmashCoordinator()
-    private lazy var smashService: SmashServiceProtocol = HideSmashCoordinator()
-
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var hideActionService: HideActionServiceProtocol = HideActionService()
+    private lazy var smashActionService: SmashActionServiceProtocol = SmashActionService()
+    
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
     var sharingItems = [BaseDataSourceItem]()
@@ -259,13 +259,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func smash(item: [BaseDataSourceItem], completion: VoidHandler?) {
-        
         guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
             return
         }
         
         let controller = OverlayStickerViewController()
-        controller.smashCoordinator = self.smashService
+        controller.smashActionService = self.smashActionService
         let navVC = NavigationController(rootViewController: controller)
         self.router.presentViewController(controller: navVC)
         
@@ -306,13 +305,16 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         if let albumItems = items as? [AlbumItem] {
             hideAlbums(items: albumItems)
+            
         } else if let items = remoteItems as? [Item] {
-            hideFunctionalityService.startHideOperation(for: items,
-                                                        output: self.output,
-                                                        success: self.successItemsAction(elementType: .hide, relatedItems: items),
-                                                        fail: self.failItemsAction(elementType: .hide, relatedItems: items))
+            hideActionService.startOperation(for: .photos(items),
+                                             output: self.output,
+                                             success: self.successItemsAction(elementType: .hide, relatedItems: items),
+                                             fail: self.failItemsAction(elementType: .hide, relatedItems: items))
+            
         } else {
             assertionFailure("Unexpected type of items")
+            
         }
     }
     
@@ -327,11 +329,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             assertionFailure("Locals only must not be passed to hide them")
             return
         }
-           
-        hideFunctionalityService.startHideAlbumsOperation(for: remoteItems,
-                                                          output: self.output,
-                                                          success: self.successItemsAction(elementType: .hide, relatedItems: items),
-                                                          fail: self.failItemsAction(elementType: .hide, relatedItems: items))
+
+        hideActionService.startOperation(for: .albums(remoteItems),
+                                         output: self.output,
+                                         success: self.successItemsAction(elementType: .hide, relatedItems: items),
+                                         fail: self.failItemsAction(elementType: .hide, relatedItems: items))
     }
     
     func unhide(items: [BaseDataSourceItem]) {
@@ -822,6 +824,30 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         router.presentViewController(controller: popup, animated: false)
     }
     
+    func emptyTrashBin() {
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+//            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .cancel)
+            vc.close()
+        }
+        
+        let okHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.output?.operationStarted(type: .emptyTrashBin)
+            vc.close { [weak self] in
+                self?.deleteAllFromTrashBin()
+            }
+        }
+        
+        let popup = PopUpController.with(title: TextConstants.trashBinDeleteAllConfirmTitle,
+                                         message: TextConstants.trashBinDeleteAllConfirmText,
+                                         image: .delete,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.trashBinDeleteAllConfirmOkButton,
+                                         firstAction: cancelHandler,
+                                         secondAction: okHandler)
+        
+        router.presentViewController(controller: popup, animated: false)
+    }
+    
     private func removeAlbums(_ items: [BaseDataSourceItem]) {
         guard let albums = items as? [AlbumItem] else {
             return
@@ -831,6 +857,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             ItemOperationManager.default.didMoveToTrashAlbums(removedAlbums)
             self?.succesAction(elementType: .removeAlbum)()
         }, fail: failAction(elementType: .removeAlbum))
+    }
+    
+    private func deleteAllFromTrashBin() {
+        fileService.deletAllFromTrashBin(success: succesAction(elementType: .emptyTrashBin),
+                                         fail: failAction(elementType: .emptyTrashBin))
     }
     
     private func sync(items: [BaseDataSourceItem]?, action: @escaping VoidHandler, cancel: @escaping VoidHandler, fail: FailResponse?) {
@@ -1060,6 +1091,8 @@ extension MoreFilesActionsInteractor {
         switch elementType {
         case .download:
             text = TextConstants.popUpDownloadComplete
+        case .emptyTrashBin:
+            text = TextConstants.trashBinDeleteAllComplete
         default:
             return
         }

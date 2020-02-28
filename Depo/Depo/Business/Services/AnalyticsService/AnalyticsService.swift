@@ -16,7 +16,7 @@ protocol AnalyticsScreen {
     var analyticsScreen: AnalyticsAppScreens { get }
 }
 
-final class AnalyticsService {
+final class AnalyticsService: NSObject {
     
     private var innerTimer: Timer?
     

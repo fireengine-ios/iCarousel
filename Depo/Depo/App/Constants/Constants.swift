@@ -744,6 +744,7 @@ struct TextConstants {
     static let actionSheetInfo = NSLocalizedString("Info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetEdit = NSLocalizedString("Edit", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetDelete = NSLocalizedString("Delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSheetEmptyTrashBin = NSLocalizedString("empty_trash_bin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetMove = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetDownload = NSLocalizedString("Download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetHide = NSLocalizedString("Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1675,6 +1676,10 @@ struct TextConstants {
     static let trashBinAlbumSliderTitle = NSLocalizedString("trash_bin_album_slider_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let trashBinAlbumSliderEmpty = NSLocalizedString("trash_bin_album_slider_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let trashBinEmpty = NSLocalizedString("trash_bin_empty", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteAllConfirmTitle = NSLocalizedString("confirm_dialog_header_empty_trashbin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteAllConfirmText = NSLocalizedString("confirm_empty_trashbin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteAllConfirmOkButton = NSLocalizedString("confirm_empty_trashbin_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let trashBinDeleteAllComplete = NSLocalizedString("success_empty_trashbin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let turkcellUpdateRequiredTitle = NSLocalizedString("turkcell_updater_update_required_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let turkcellUpdateRequiredMessage = NSLocalizedString("turkcell_updater_update_required_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -1699,4 +1704,13 @@ struct TextConstants {
     static let fullQuotaWarningPopUpDescription = NSLocalizedString("full_quota_warning_popup_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let expandMyStorage = NSLocalizedString("expand_my_storage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteFiles = NSLocalizedString("delete_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let weRecommend = NSLocalizedString("we_recommend", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let showMore = NSLocalizedString("show_more", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let showLess = NSLocalizedString("show_less", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceRecognitionPackageDescription = NSLocalizedString("face_recognition_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteDublicatePackageDescription = NSLocalizedString("delete_dublicate_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let premiumUserPackageDescription = NSLocalizedString("premium_user_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let bundlePackageAddonType = NSLocalizedString("bundle_package_addon_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let storageOnlyPackageAddonType = NSLocalizedString("storage_only_package_addon_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

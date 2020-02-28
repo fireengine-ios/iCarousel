@@ -27,6 +27,9 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
     
     var viewType: LargeFullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100(false)
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private var doNotShowAgain: Bool = false
+    
     //MARK: IBOutlets
     @IBOutlet weak var gradientView: GradientOrangeView! {
         willSet {
@@ -124,6 +127,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
     //MARK: Actions
     @IBAction func onSkipButton() {
         close()
+        analyticsHandler(eventLabel: .overQuota(.skip))
     }
     
     @IBAction func onDeleteFilesButton() {
@@ -133,10 +137,12 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             let router = RouterVC()
             router.tabBarController?.showPhotoScreen()
         }
+        analyticsHandler(eventLabel: .overQuota(.deleteFiles(doNotShowAgain)))
     }
     
     @IBAction func onCloseButton() {
         close()
+        analyticsHandler(eventLabel: .overQuota(.cancel(doNotShowAgain)))
     }
     
     @IBAction func onExpandButton() {
@@ -148,6 +154,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             viewController.needToShowTabBar = false
             router.pushViewController(viewController: viewController)
         }
+        analyticsHandler(eventLabel: .overQuota(.expandMyStorage(doNotShowAgain)))
     }
     
     @IBOutlet private weak var doNotShowStackView: UIStackView!
@@ -155,8 +162,9 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
     @IBAction private func onCustomCheckBoxTap(_ sender: UIButton) {
         sender.isSelected.toggle()
         
+        doNotShowAgain = sender.isSelected
         let storageVars: StorageVars = factory.resolve()
-        storageVars.largeFullOfQuotaPopUpCheckBox = sender.isSelected
+        storageVars.largeFullOfQuotaPopUpCheckBox = doNotShowAgain
     }
     
     private func setupBackgroundImageView() {
@@ -169,7 +177,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
     
     private func setupViewAsType() {
         switch viewType {
-        case .LargeFullOfQuotaPopUpTypeBetween80And99(_):
+        case .LargeFullOfQuotaPopUpTypeBetween80And99:
             doNotShowStackView.isHidden = true
             closeButton.isHidden = true
             deleteFilesButton.isHidden = true
@@ -180,6 +188,19 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             deleteFilesButton.isHidden = false
             skipButton.isHidden = true
         }
+    }
+    
+    private func analyticsHandler(eventLabel: GAEventLabel) {
+        let eventAction: GAEventAction
+           
+        switch viewType {
+        case .LargeFullOfQuotaPopUpTypeBetween80And99:
+            eventAction = .quotaAlmostFullPopup
+        case .LargeFullOfQuotaPopUpType100(let premium):
+            eventAction = premium ? .overQuotaPremiumPopup: .overQuotaFreemiumPopup
+        }
+        
+        self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: eventAction, eventLabel: eventLabel)
     }
 }
 

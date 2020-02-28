@@ -338,6 +338,7 @@ struct RouteRequests {
         static let detail = filesystemBase + "detail/%@"
         static let metaData = filesystemBase + "metadata"
         static let trash = filesystemBase + "trash"
+        static let emptyTrash = baseUrl +/ "trash/empty"
         static let hide = baseUrl +/ (filesystemBase + "hide")
         static let recover = (baseUrl +/ filesystemBase) +/ "recover"
     }

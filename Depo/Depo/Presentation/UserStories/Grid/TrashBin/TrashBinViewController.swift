@@ -334,6 +334,10 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
         }
         router.openInfo(item: item)
     }
+    
+    func onThreeDotsManagerDeleteAll() {
+        interactor.emptyTrashBin()
+    }
 }
 
 //MARK: - Routing
@@ -444,6 +448,10 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
         remove(albums: albums)
     }
     
+    func didEmptyTrashBin() {
+        reloadData(needShowSpinner: true)
+    }
+    
     private func remove(items: [Item]) {
         reloadAlbums()
         dataSource.remove(items: items) { [weak self] in
@@ -489,7 +497,7 @@ extension TrashBinViewController: MoreFilesActionsInteractorOutput {
     
     func operationFailed(type: ElementTypes, message: String) {
         asyncOperationSuccess()
-        if type.isContained(in: ElementTypes.trashState) {
+        if type.isContained(in: [.restore, .delete, .emptyTrashBin]) {
             showMessage(errorMessage: message)
         }
     }
