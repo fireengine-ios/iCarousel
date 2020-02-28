@@ -14,7 +14,12 @@ final class PackagesViewController: BaseViewController {
     @IBOutlet weak private var descriptionLabel: UILabel!
     @IBOutlet weak private var cardsStackView: UIStackView!
 
-    @IBOutlet weak private var collectionView: ResizableCollectionView!
+    @IBOutlet weak private var collectionStackView: UIStackView! {
+        willSet {
+            newValue.spacing = 16
+        }
+    }
+    
     @IBOutlet weak private var promoView: PromoView!
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
     @IBOutlet weak private var scrollView: UIScrollView!
@@ -37,7 +42,6 @@ final class PackagesViewController: BaseViewController {
         super.viewDidLoad()
 
         setupDesign()
-        setupCollectionView()
 
         automaticallyAdjustsScrollViewInsets = false
         
@@ -58,10 +62,6 @@ final class PackagesViewController: BaseViewController {
         navigationBarWithGradientStyle()
         output.viewWillAppear()
     }
-    
-    private func setupCollectionView() {
-        collectionView.register(nibCell: SubscriptionPlanCollectionViewCell.self)
-    }
 
     private func setupDesign() {
         subtitleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
@@ -74,7 +74,7 @@ final class PackagesViewController: BaseViewController {
             attributes: [.foregroundColor: ColorConstants.textGrayColor,
                          .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)])
         
-        var policyText = RouteRequests.isBillo ? TextConstants.packagesPolicyBilloText : TextConstants.packagesPolicyText
+        let policyText = RouteRequests.isBillo ? TextConstants.packagesPolicyBilloText : TextConstants.packagesPolicyText
         
         let policyAttributedString = NSMutableAttributedString(
             string: "\n\n" + policyText,
@@ -118,7 +118,14 @@ final class PackagesViewController: BaseViewController {
 extension PackagesViewController: PackagesViewInput {
 
     func reloadData() {
-        collectionView.reloadData()
+        collectionStackView.arrangedSubviews.forEach { collectionStackView.removeArrangedSubview($0) }
+        for offer in output.availableOffers.enumerated() {
+            let view = SubscriptionOfferView.initFromNib()
+            view.configure(with: offer.element, delegate: self, index: offer.offset)
+            view.setNeedsLayout()
+            view.layoutIfNeeded()
+            collectionStackView.addArrangedSubview(view)
+        }
     }
     
     func successedPromocode() {
@@ -191,32 +198,15 @@ extension PackagesViewController: PackagesViewInput {
     }
 }
 
-// MARK: UICollectionViewDataSource
-extension PackagesViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return output.availableOffers.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeue(cell: SubscriptionPlanCollectionViewCell.self, for: indexPath)
-        cell.delegate = self
-        cell.indexPath = indexPath
-        cell.configure(with: output.availableOffers[indexPath.item], accountType: output.getAccountType())
-        return cell
-    }
-}
-
 // MARK: SubscriptionPlanCellDelegate
-extension PackagesViewController: SubscriptionPlanCellDelegate {
-    func didPressSubscriptionPlanButton(at indexPath: IndexPath) {
-        let plan = output.availableOffers[indexPath.row]
-        presentPaymentPopUp(plan: plan, planIndex: indexPath.row)
-        
+extension PackagesViewController: SubscriptionOfferViewDelegate {
+    
+    func didPressSubscriptionPlanButton(planIndex: Int) {
+        let plan = output.availableOffers[planIndex]
+        presentPaymentPopUp(plan: plan, planIndex: planIndex)
     }
     
     private func presentPaymentPopUp(plan: PackageOffer, planIndex: Int) {
-        
         guard let name = plan.offers.first?.name else {
             assertionFailure()
             return

@@ -169,6 +169,9 @@ final class PackageModelResponse: Equatable {
         static let quota = "quota"
         static let status = "status"
         static let authorities = "authorities"
+        static let recommended = "recommended"
+        static let hasAttachedFeature = "hasAttachedFeature"
+        static let isFeaturePack = "isFeaturePack"
     }
     
     var name: String?
@@ -189,6 +192,9 @@ final class PackageModelResponse: Equatable {
     var quota: Int64?
     var status: PackageStatus?
     var authorities: [PackagePackAuthoritiesResponse]?
+    var isRecommended: Bool?
+    var hasAttachedFeature: Bool?
+    var isFeaturePack: Bool?
 }
 
 extension PackageModelResponse: Map {
@@ -224,5 +230,9 @@ extension PackageModelResponse: Map {
         if let authoritiesList = authoritiesJsonArray?.flatMap({ PackagePackAuthoritiesResponse(withJSON: $0) }) {
             authorities = authoritiesList
         }
+        
+        isRecommended = json[ResponseKeys.recommended].bool
+        hasAttachedFeature = json[ResponseKeys.hasAttachedFeature].bool
+        isFeaturePack = json[ResponseKeys.isFeaturePack].bool
     }
 }
