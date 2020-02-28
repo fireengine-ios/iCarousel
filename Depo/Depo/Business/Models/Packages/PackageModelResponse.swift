@@ -195,6 +195,16 @@ final class PackageModelResponse: Equatable {
     var isRecommended: Bool?
     var hasAttachedFeature: Bool?
     var isFeaturePack: Bool?
+    
+    var isStorageOnly: Bool {
+        guard let isRecommended = isRecommended,
+            let hasAttachedFeature = hasAttachedFeature,
+            let isFeaturePack = isFeaturePack else {
+            return false
+        }
+        
+        return !isRecommended && !hasAttachedFeature && !isFeaturePack
+    }
 }
 
 extension PackageModelResponse: Map {
@@ -215,6 +225,9 @@ extension PackageModelResponse: Map {
         inAppPurchaseId = json[ResponseKeys.inAppPurchaseId].string
         period = json[ResponseKeys.period].string
         quota = json[ResponseKeys.quota].int64
+        isRecommended = json[ResponseKeys.recommended].bool
+        hasAttachedFeature = json[ResponseKeys.hasAttachedFeature].bool
+        isFeaturePack = json[ResponseKeys.isFeaturePack].bool
         
         if let typeString = json[ResponseKeys.type].string {
             //helps recognize type of the pack by checking for nil one of those vars
@@ -230,9 +243,5 @@ extension PackageModelResponse: Map {
         if let authoritiesList = authoritiesJsonArray?.flatMap({ PackagePackAuthoritiesResponse(withJSON: $0) }) {
             authorities = authoritiesList
         }
-        
-        isRecommended = json[ResponseKeys.recommended].bool
-        hasAttachedFeature = json[ResponseKeys.hasAttachedFeature].bool
-        isFeaturePack = json[ResponseKeys.isFeaturePack].bool
     }
 }
