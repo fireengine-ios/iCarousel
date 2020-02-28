@@ -164,7 +164,7 @@ final class UploadService: BaseRequestService {
                             filteredItems.forEach { wrapData in
                                 ItemOperationManager.default.cancelledUpload(file: wrapData)
                             }
-                            
+                            //FIXME: Bad practice to call popup from service directly, we have controllers that handle this error
                             DispatchQueue.main.async {
                                 self?.showOutOfSpaceAlert()
                             }
