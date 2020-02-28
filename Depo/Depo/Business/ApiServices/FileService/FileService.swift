@@ -429,7 +429,7 @@ class FileService: BaseRequestService {
             
             if self.allOperationsCount == self.completedOperationsCount {
                 self.trackDownloaded(lastQueueItems: items)
-                CardsManager.default.stopOperationWithType(type: .download)
+                CardsManager.default.stopOperationWith(type: .download)
             }
             
             if let error = self.error {

@@ -102,7 +102,7 @@ final class MovieCard: BaseCardView {
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .movieCard, serverObject: cardObject)
+        CardsManager.default.stopOperationWith(type: .movieCard, serverObject: cardObject)
     }
     
     @IBAction private func actionVideoViewButton(_ sender: UIButton) {
@@ -196,7 +196,7 @@ extension MovieCard: ItemOperationManagerViewProtocol {
         }
         
         if items.first(where: { $0.uuid == uuid }) != nil {
-            CardsManager.default.stopOperationWithType(type: .movieCard, serverObject: cardObject)
+            CardsManager.default.stopOperationWith(type: .movieCard, serverObject: cardObject)
         }
     }
 }
