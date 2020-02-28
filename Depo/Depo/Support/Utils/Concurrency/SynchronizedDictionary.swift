@@ -13,42 +13,53 @@ import Foundation
 //}
 
 
+func + <K, V>(left: SynchronizedDictionary<K, V>, right: SynchronizedDictionary<K, V>) -> SynchronizedDictionary<K, V> {
+    var map = left.dictionaryCopy
+    for (k, v) in right {
+        map[k] = v
+    }
+    return SynchronizedDictionary<K,V>(dictionary: map)
+}
+
+func + <K, V>(left: SynchronizedDictionary<K, V>, right: Dictionary<K, V>) -> SynchronizedDictionary<K, V> {
+    var map = left.dictionaryCopy
+    for (k, v) in right {
+        map[k] = v
+    }
+    return SynchronizedDictionary<K,V>(dictionary: map)
+}
+
 public final class SynchronizedDictionary<K,V> where K: Hashable {
     
     public typealias Element = (key: K, value: V)
     
     private let queue = DispatchQueue(label: DispatchQueueLabels.syncronizedArray, attributes: .concurrent)
-    private var dictionary = [K:V]()
+    /*private*/ var dictionary = [K:V]()
+    
+    private var iteratorIndex: Dictionary<K, V>.Index?
     
 //    init<S>(uniqueKeysWithValues keysAndValues: S) where S : Sequence, S.Element == (Key, Value)
     
     init() {
         iteratorIndex = dictionary.startIndex
-        lastCalledElement = dictionary.first
-        
     }
     
     init(dictionary: [K:V]) {
         self.dictionary = dictionary
         
         iteratorIndex = dictionary.startIndex
-        lastCalledElement = dictionary.first
     }
-    
-    public func test2222() {
-        debugPrint(dictionary)
-    }
-    
+
     subscript(key: K) -> V? {
         set {
-            queue.async(flags: .barrier) {
+//            queue.async(flags: .barrier) {
                 self.dictionary[key] = newValue
-            }
+//            }
         }
         get {
-            queue.sync {
+//            queue.sync {
                 return self.dictionary[key]
-            }
+//            }
         }
     }
     
@@ -60,16 +71,13 @@ public final class SynchronizedDictionary<K,V> where K: Hashable {
         return dictionary.values
     }
     
-    static func + <K, V>(left: SynchronizedDictionary<K, V>, right: SynchronizedDictionary<K, V>) -> SynchronizedDictionary<K, V> {
-
-        let map = left
-
-        for (k, v) in right {
-            map[k] = v
-        }
-        return map
+    func merge(with dictionary: Dictionary<K, V>) {
+        self.dictionary = self.dictionary + dictionary
     }
     
+    var dictionaryCopy: Dictionary<K,V> {
+        return dictionary
+    }
     
 //    func updateValue(_ value: Value, forKey key: Key) -> Value? {
 //
@@ -96,8 +104,8 @@ public final class SynchronizedDictionary<K,V> where K: Hashable {
 //    }
     
     
-   private var lastCalledElement: Element?
-    private var iteratorIndex: Dictionary<K, V>.Index?
+
+    
 }
 
 extension SynchronizedDictionary: Sequence, IteratorProtocol {

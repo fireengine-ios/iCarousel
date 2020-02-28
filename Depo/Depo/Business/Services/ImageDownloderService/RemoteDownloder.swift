@@ -52,8 +52,7 @@ class ImageDownloder {
             return
         }
         
-        tokenList = tokenList + SynchronizedDictionary<URL,SDWebImageOperation>(dictionary: [path : downloadItem])
-        
+        tokenList = tokenList + [path : downloadItem]
     }
     
     func getImageData(url: URL?, completeData:@escaping RemoteData) {

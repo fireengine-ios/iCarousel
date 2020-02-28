@@ -92,6 +92,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ///call debugLog only if the Crashlytics is already initialized
         debugLog("AppDelegate didFinishLaunchingWithOptions")
         
+        var regularDic1 = [String:String]()
+        regularDic1["reg1"] = "r1"
+        var regularDic2 = [String:String]()
+        regularDic2["reg2"] = "r2"
+        
+        var regularDicT1 = [String:String]()
+        regularDicT1["t1"] = "replcaed ha"
+        
+        let syncDic = SynchronizedDictionary<String,String>()
+        syncDic["t1"] = "t1"
+        
+        let reg1reg2 = regularDic1 + regularDic2
+        
+        let merged1 = syncDic + regularDic1
+        let merged2 = syncDic + SynchronizedDictionary<String,String>(dictionary: regularDic1)
+        let merge3 = syncDic + regularDicT1
+        debugPrint("!")
+        syncDic.merge(with: regularDic2)
+        syncDic.merge(with: regularDicT1)
+        
+        
         let router = RouterVC()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = InitializingViewController()
