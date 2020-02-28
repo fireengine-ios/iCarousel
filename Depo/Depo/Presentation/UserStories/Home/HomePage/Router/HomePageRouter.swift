@@ -149,14 +149,12 @@ final class HomePageRouter: HomePageRouterInput {
         router.pushViewController(viewController: controller)
     }
     
-    // MARK: Present Mobile Payment Permission Popup Open Warning
     func presentMobilePaymentPermissionPopUp(url: String, isFirstAppear: Bool) {
         let popup = getPopUpController(url: url)
         popUpsToPresent.append(popup)
         isFirstAppear ? () : presentPopUps()
     }
     
-    // MARK: Get Pop Up Controller
     private func getPopUpController(url: String) -> PopUpController {
         let plainMessage = TextConstants.mobilePaymentOpenPopupDescriptionLabel
         let range = (plainMessage as NSString).range(of: TextConstants.mobilePaymentOpenPopupDescriptionBoldRangeLabel)
@@ -167,7 +165,6 @@ final class HomePageRouter: HomePageRouterInput {
         return popup
     }
     
-    // MARK: Continue Button Handler
     private func getContinueHandler(url: String) -> PopUpButtonHandler {
         return { [weak self] vc in
             self?.routeMobilePaymentPermissionVC(url: url)
@@ -175,7 +172,6 @@ final class HomePageRouter: HomePageRouterInput {
         }
     }
     
-    // MARK: Remind Me Later Button Handler -Post Update Mobile Payment Permission Feedback
     private func getRemindMeLaterHandler() -> PopUpButtonHandler {
         return { [weak self] vc in
             self?.presenter.interactor.updateMobilePaymentPermissionFeedback()
@@ -183,7 +179,6 @@ final class HomePageRouter: HomePageRouterInput {
         }
     }
     
-    // MARK: Push MobilePaymentPermissionViewController
     private func routeMobilePaymentPermissionVC(url: String) {
         let router = RouterVC()
         let viewController = router.mobilePaymentPermissionController()
@@ -193,7 +188,7 @@ final class HomePageRouter: HomePageRouterInput {
     }
 }
 
-// MARK: Mobile Payment Permission Protocol Delegate
+// MARK: Mobile Payment Permission Delegate
 extension HomePageRouter: MobilePaymentPermissionProtocol {
     
     func approveTapped() {
