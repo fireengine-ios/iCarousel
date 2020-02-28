@@ -228,16 +228,13 @@ extension HomePagePresenter: HomePageInteractorOutput {
     
     // MARK: Payment Permission Popup Appearance Conditions
     private func shouldPermissionPopupAppear(response: SettingsPermissionsResponse) -> Bool {
-        // MARK: Appear Conditions
         guard
             let isAllowed = response.isAllowed,
             let isApproved = response.isApproved,
             let isEulaApproved = response.isApproved,
-            isAllowed, // If allowed parameter returns true
-            !isApproved || (isApproved && !isEulaApproved) // If approved parameter returns false OR approved parameter returns true and eulaApproved parameter return false
+            isAllowed,
+            !isApproved || (isApproved && !isEulaApproved)
         else {
-            // MARK: Not Appear Conditions
-            // If allowed parameter returns false, If approved parameter returns true and eulaApproved parameter return true
             return false
         }
         return true
