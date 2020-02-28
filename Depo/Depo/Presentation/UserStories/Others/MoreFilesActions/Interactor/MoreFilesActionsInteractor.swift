@@ -1178,10 +1178,11 @@ extension MoreFilesActionsInteractor {
             DispatchQueue.toMain {
                 if value.isOutOfSpaceError {
                     debugLog("failAction 1 isOutOfSpaceError")
-                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
-                        debugLog("failAction 2 showOutOfSpaceAlert")
-                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
-                    }
+                    //FIXME: currently UploadService handles this
+//                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
+//                        debugLog("failAction 2 showOutOfSpaceAlert")
+//                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
+//                    }
                 } else {
                     debugLog("failAction 3 \(value.description)")
                     self?.output?.operationFailed(type: elementType, message: value.description)
@@ -1197,10 +1198,11 @@ extension MoreFilesActionsInteractor {
             DispatchQueue.toMain {
                 if value.isOutOfSpaceError {
                     debugLog("failAction 1 isOutOfSpaceError")
-                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
-                        debugLog("failAction 2 showOutOfSpaceAlert")
-                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
-                    }
+                    //FIXME: currently UploadService handles this
+//                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
+//                        debugLog("failAction 2 showOutOfSpaceAlert")
+//                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
+//                    }
                 } else {
                     debugLog("failAction 3 \(value.description)")
                     self?.output?.operationFailed(type: elementType, message: value.description)
