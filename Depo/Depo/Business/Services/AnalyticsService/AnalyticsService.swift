@@ -303,7 +303,8 @@ extension AnalyticsService: AnalyticsGA {
                                            transactionID: "",
                                            tax: "0",
                                            priceValue: price,
-                                           shipping: "0")
+                                           shipping: "0",
+                                           currency: currency)
         
         prepareDimentionsParametrs(screen: nil,
                                    downloadsMetrics: nil,
@@ -334,7 +335,8 @@ extension AnalyticsService: AnalyticsGA {
                                            transactionID: "",
                                            tax: "0",
                                            priceValue: price,
-                                           shipping: "0")
+                                           shipping: "0",
+                                           currency: currency)
         
         prepareDimentionsParametrs(screen: nil,
                                    downloadsMetrics: nil,

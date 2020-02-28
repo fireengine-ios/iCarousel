@@ -194,7 +194,7 @@ final class UploadService: BaseRequestService {
     
     private func hideUploadCardIfNeeded() {
         if uploadOperations.filter({ $0.uploadType?.isContained(in: [.upload, .syncToUse]) ?? false }).count == 0 {
-            CardsManager.default.stopOperationWithType(type: .upload)
+            CardsManager.default.stopOperationWith(type: .upload)
         }
     }
     
@@ -553,8 +553,8 @@ final class UploadService: BaseRequestService {
         clearUploadCounters()
         clearSyncCounters()
         
-        CardsManager.default.stopOperationWithType(type: .upload)
-        CardsManager.default.stopOperationWithType(type: .sync)
+        CardsManager.default.stopOperationWith(type: .upload)
+        CardsManager.default.stopOperationWith(type: .sync)
         ItemOperationManager.default.syncFinished()
     }
     

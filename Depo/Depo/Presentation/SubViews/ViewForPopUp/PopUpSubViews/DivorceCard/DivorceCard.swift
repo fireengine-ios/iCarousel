@@ -62,7 +62,7 @@ final class DivorceCard: BaseCardView {
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .divorce)
+        CardsManager.default.stopOperationWith(type: .divorce)
     }
     
     //MARK: - Actions
