@@ -84,7 +84,7 @@ extension SynchronizedDictionary {
         }
     }
     
-    var value: Dictionary<K, V>.Values {
+    var values: Dictionary<K, V>.Values {
         queue.sync {
             return dictionary.values
         }
