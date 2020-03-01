@@ -36,7 +36,7 @@ public final class SynchronizedDictionary<K,V> where K: Hashable {
     private let queue = DispatchQueue(label: DispatchQueueLabels.syncronizedArray, attributes: .concurrent)
     private var dictionary = [K:V]()
 
-// in future it wiuld be better to use this init:
+// in future it would be better to use this init:
 // init<S>(uniqueKeysWithValues keysAndValues: S) where S : Sequence, S.Element == (Key, Value)
     
     init() {
