@@ -101,6 +101,10 @@ extension SynchronizedDictionary {
 extension SynchronizedDictionary: Sequence, IteratorProtocol {
     
     public func next() -> SynchronizedDictionary.Element? {
+        if iteratorIndex == nil {
+            iteratorIndex = dictionary.startIndex
+        }
+        
         guard let iteratorIndex = iteratorIndex,
             iteratorIndex < dictionary.endIndex else {
             return nil
