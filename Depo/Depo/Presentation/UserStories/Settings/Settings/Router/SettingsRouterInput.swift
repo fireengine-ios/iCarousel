@@ -30,7 +30,7 @@ protocol SettingsRouterInput {
     
     func goToUsageInfo()
     
-    func goToUserInfo(userInfo: AccountInfoResponse, isTurkcellUser: Bool)
+    func goToUserInfo(userInfo: AccountInfoResponse)
     
     func goToActivityTimeline()
     

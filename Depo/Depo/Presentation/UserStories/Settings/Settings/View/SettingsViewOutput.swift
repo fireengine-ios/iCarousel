@@ -51,6 +51,8 @@ protocol SettingsViewOutput {
     
     func goTurkcellSecurity()
     
+    func goToMyProfile(userInfo: AccountInfoResponse)
+    
     var isPasscodeEmpty: Bool { get }
     
     var isPremiumUser: Bool { get }

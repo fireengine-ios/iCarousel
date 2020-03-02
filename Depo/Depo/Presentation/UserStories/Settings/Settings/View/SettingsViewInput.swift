@@ -8,7 +8,7 @@
 
 protocol SettingsViewInput: class {
     func showCellsData(array: [[String]])
-    func showPhotoAlertSheet()
+    func showProfileAlertSheet(userInfo: AccountInfoResponse)
     func updatePhoto(image: UIImage)
     func profileInfoChanged()
     func profileWontChangeWith(error: Error)

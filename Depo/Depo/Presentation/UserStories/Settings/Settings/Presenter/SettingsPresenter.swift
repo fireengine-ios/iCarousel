@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput, SettingsInteractorOutput {
+class SettingsPresenter: BasePresenter {
     
     weak var view: SettingsViewInput!
     var interactor: SettingsInteractorInput!
@@ -22,6 +22,42 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         return AuthoritySingleton.shared.accountType.isPremium
     }
     
+    var inNeedOfMailVerification: Bool {
+        return isTurkCellUser && interactor.isEmptyMail
+    }
+    
+    var inNeedOfMail: Bool {
+        return inNeedOfMailVerification
+    }
+    
+    var isTurkCellUser: Bool {
+        return interactor.isTurkcellUser
+    }
+    
+    
+    
+    override func outputView() -> Waiting? {
+        return view as? Waiting
+    }
+    
+    func mailUpdated(mail: String) {
+        view.profileInfoChanged()
+        interactor.updateUserInfo(mail: mail)
+    }
+
+    
+    
+   
+    
+    
+    
+    
+    
+}
+
+// MARK: -SettingsViewOutput
+extension SettingsPresenter: SettingsViewOutput {
+    
     func viewIsReady() {
         interactor.trackScreen()
     }
@@ -31,10 +67,6 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         
         startAsyncOperation()
         interactor.getUserInfo()
-    }
-    
-    func cellsDataForSettings(array: [[String]]) {
-        view.showCellsData(array: array)
     }
     
     func onLogout() {
@@ -53,18 +85,6 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func asyncOperationStarted() {
-        startAsyncOperation()
-    }
-    
-    func asyncOperationStoped() {
-        asyncOperationSuccess()
-    }
-    
-    func goToOnboarding() {
-        router.goToOnboarding()
-    }
-    
     func goToContactSync() {
         router.goToContactSync()
     }
@@ -73,20 +93,16 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToConnectedAccounts()
     }
     
-    func goToPermissions() {
-        router.goToPermissions()
-    }
-    
     func goToAutoApload() {
         router.goToAutoApload()
     }
     
-    func goToPeriodicContactSync() {
-        router.goToPeriodicContactSync()
-    }
-    
     func goToFaceImage() {
         router.goToFaceImage()
+    }
+    
+    func goToPeriodicContactSync() {
+        router.goToPeriodicContactSync()
     }
     
     func goToHelpAndSupport() {
@@ -94,11 +110,35 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
     }
     
     func goToTermsAndPolicy() {
-        router.goToTermsAndPolicy() 
+        router.goToTermsAndPolicy()
     }
     
     func goToUsageInfo() {
         router.goToUsageInfo()
+    }
+    
+    func goToPermissions() {
+        router.goToPermissions()
+    }
+    
+    func onChangeUserPhoto() {
+        interactor.trackPhotoEdit()
+        guard let userInfo = interactor.userInfoResponse else {
+            return
+        }
+        view.showProfileAlertSheet(userInfo: userInfo)
+    }
+    
+    func onChooseFromPhotoLibriary(onViewController viewController: UIViewController) {
+        cameraService.showImagesPicker(onViewController: viewController)
+    }
+    
+    func onChooseFromPhotoCamera(onViewController viewController: UIViewController) {
+        cameraService.showCamera(onViewController: viewController)
+    }
+    
+    func photoCaptured(data: Data) {
+        interactor.uploadPhoto(withPhoto: data)
     }
     
     func goToActivityTimeline() {
@@ -117,51 +157,30 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.goToPasscodeSettings(isTurkcell: isTurkCellUser, inNeedOfMail: inNeedOfMailVerification, needReplaceOfCurrentController: needReplaceOfCurrentController)
     }
     
-    var inNeedOfMailVerification: Bool {
-        return isTurkCellUser && interactor.isEmptyMail
-    }
-    
-    var inNeedOfMail: Bool {
-        return inNeedOfMailVerification
-    }
-    
-    var isTurkCellUser: Bool {
-        return interactor.isTurkcellUser
-    }
-    
-    func mailUpdated(mail: String) {
-        view.profileInfoChanged()
-        interactor.updateUserInfo(mail: mail)
+    func openPasscode(handler: @escaping VoidHandler) {
+           router.openPasscode(handler: handler)
     }
     
     func goTurkcellSecurity() {
         inNeedOfMailVerification ? router.showMailUpdatePopUp(delegate: self) : router.goTurkcellSecurity(isTurkcell: isTurkCellUser)
     }
     
-    override func outputView() -> Waiting? {
-        return view as? Waiting
+    func goToMyProfile(userInfo: AccountInfoResponse) {
+        router.goToUserInfo(userInfo: userInfo)
     }
     
-    // MARK: View input / PHOTO releated
+}
+
+// MARK: -SettingsInteractorOutput
+extension SettingsPresenter: SettingsInteractorOutput {
     
-    func photoCaptured(data: Data) {
-        interactor.uploadPhoto(withPhoto: data)
+    func cellsDataForSettings(array: [[String]]) {
+        view.showCellsData(array: array)
     }
     
-    func onChangeUserPhoto() {
-        interactor.trackPhotoEdit()
-        view.showPhotoAlertSheet()
+    func goToOnboarding() {
+        router.goToOnboarding()
     }
-    
-    func onChooseFromPhotoLibriary(onViewController viewController: UIViewController) {
-        cameraService.showImagesPicker(onViewController: viewController)
-    }
-    
-    func onChooseFromPhotoCamera(onViewController viewController: UIViewController) {
-        cameraService.showCamera(onViewController: viewController)
-    }
-    
-    // MARK: - interactor output PhotoRelated
     
     func profilePhotoUploadSuccessed(image: UIImage?) {
         if let image = image {
@@ -175,6 +194,19 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         view.profileWontChangeWith(error: error)
     }
     
+    func connectToNetworkFailed() {
+        asyncOperationSuccess()
+        router.goToConnectedToNetworkFailed()
+    }
+    
+    func asyncOperationStarted() {
+        startAsyncOperation()
+    }
+    
+    func asyncOperationStoped() {
+        asyncOperationSuccess()
+    }
+    
     func didObtainUserStatus() {
         asyncOperationSuccess()
         view.updateStatusUser()
@@ -185,16 +217,13 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
         router.showError(errorMessage: errorMessage)
     }
     
-    func connectToNetworkFailed() {
-        asyncOperationSuccess()
-        router.goToConnectedToNetworkFailed()
-    }
     
-    func openPasscode(handler: @escaping VoidHandler) {
-        router.openPasscode(handler: handler)
-    }
 }
 
+// MARK: -SettingsModuleInput
+extension SettingsPresenter: SettingsModuleInput { }
+
+// MARK: -MailVerificationViewControllerDelegate
 extension SettingsPresenter: MailVerificationViewControllerDelegate {
     func mailVerified(mail: String) {
         mailUpdated(mail: mail)

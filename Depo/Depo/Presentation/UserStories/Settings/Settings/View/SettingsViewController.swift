@@ -32,7 +32,7 @@ protocol SettingsDelegate: class {
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needPopPasscodeEnterVC: Bool)
 }
 
-class SettingsViewController: BaseViewController, SettingsViewInput, UITableViewDelegate, UITableViewDataSource {
+class SettingsViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var tableDataArray = [[String]]()
@@ -90,8 +90,6 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
-    // MARK: SettingsViewInput
-    
     private func setupTableView() {
         tableView.register(nibCell: SettingsTableViewCell.self)
         tableView.backgroundColor = .clear
@@ -109,13 +107,10 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         footer.heightAnchor.constraint(equalToConstant: 110).activate()
     }
     
-    func showCellsData(array: [[String]]) {
-        tableDataArray.removeAll()
-        tableDataArray.append(contentsOf: array)
-        tableView.reloadData()
-    }
-    
-    // MARK: UITableView delegate
+}
+
+// MARK: - UITableViewDelegate & UITableViewDataSource
+extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return tableDataArray.count
@@ -265,6 +260,8 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         }
     }
     
+    // MARK: - UITableViewDelegate & UITableViewDataSource Private Utility Methods
+    
     private func showPasscodeOrPasscodeSettings() {
         if output.isPasscodeEmpty {
             if let settingsDelegate = settingsDelegate {
@@ -287,7 +284,66 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         }
     }
     
-    func showPhotoAlertSheet() {
+}
+
+// MARK: - SettingsViewInput
+extension SettingsViewController: SettingsViewInput {
+    
+    func showCellsData(array: [[String]]) {
+        tableDataArray.removeAll()
+        tableDataArray.append(contentsOf: array)
+        tableView.reloadData()
+    }
+    
+    func showProfileAlertSheet(userInfo: AccountInfoResponse) {
+        let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: nil)
+        
+        let profileDetailAction = UIAlertAction(title: TextConstants.actionSheetProfileDetails, style: .default, handler: { _ in
+            self.output.goToMyProfile(userInfo: userInfo)
+        })
+        
+        let editPhotoAction = UIAlertAction(title: TextConstants.actionSheetEditProfilePhoto, style: .default, handler: { _ in
+            self.showPhotoAlertSheet()
+        })
+        
+        let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        actionSheetVC.addActions(cancellAction, profileDetailAction, editPhotoAction)
+        actionSheetVC.popoverPresentationController?.sourceView = view
+        
+        let originPoint = CGPoint(x: Device.winSize.width / 2 - actionSheetVC.preferredContentSize.width / 2,
+                                  y: Device.winSize.height / 2 - actionSheetVC.preferredContentSize.height / 2)
+        
+        let sizePoint = actionSheetVC.preferredContentSize
+        actionSheetVC.popoverPresentationController?.sourceRect = CGRect(origin: originPoint, size: sizePoint)
+        actionSheetVC.popoverPresentationController?.permittedArrowDirections = .init(rawValue: 0) // means no arrow
+        
+        present(actionSheetVC, animated: true, completion: nil)
+    }
+    
+    func updatePhoto(image: UIImage) {
+        userInfoSubView.updatePhoto(image: image)
+    }
+    
+    func profileInfoChanged() {
+        userInfoSubView.reloadUserInfo()
+    }
+    
+    func profileWontChangeWith(error: Error) {
+        let vc = PopUpController.with(title: TextConstants.errorAlert,
+                                      message: error.description,
+                                      image: .error,
+                                      buttonTitle: TextConstants.ok)
+        present(vc, animated: true, completion: nil)
+        userInfoSubView.dismissLoadingSpinner()
+    }
+    
+    func updateStatusUser() {
+           tableView.reloadData()
+    }
+    
+    // MARK: - SettingsViewInput Private Utility Methods
+    
+    private func showPhotoAlertSheet() {
         let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: nil)
         
         let actionCamera = UIAlertAction(title: TextConstants.actionSheetTakeAPhoto, style: .default, handler: { _ in
@@ -313,26 +369,6 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         isFromPhotoPicker = true
     }
     
-    func profileInfoChanged() {
-        userInfoSubView.reloadUserInfo()
-    }
-    
-    func updatePhoto(image: UIImage) {
-        userInfoSubView.updatePhoto(image: image)
-    }
-    
-    func profileWontChangeWith(error: Error) {
-        let vc = PopUpController.with(title: TextConstants.errorAlert,
-                                      message: error.description,
-                                      image: .error,
-                                      buttonTitle: TextConstants.ok)
-        present(vc, animated: true, completion: nil)
-        userInfoSubView.dismissLoadingSpinner()
-    }
-    
-    func updateStatusUser() {
-        tableView.reloadData()
-    }
     
 }
 
@@ -380,7 +416,6 @@ extension SettingsViewController: UIImagePickerControllerDelegate {
 }
 
 //MARK: - SettingFooterViewDelegate
-
 extension SettingsViewController: SettingFooterViewDelegate {
     func didTappedLeaveFeedback() {
         RouterVC().showFeedbackSubView()

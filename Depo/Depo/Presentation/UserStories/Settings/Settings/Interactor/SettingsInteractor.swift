@@ -12,7 +12,6 @@ class SettingsInteractor: SettingsInteractorInput {
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
-    private var userInfoResponse: AccountInfoResponse?
     let authService = AuthenticationService()
     let accountSerivese = AccountService()
     
@@ -26,6 +25,8 @@ class SettingsInteractor: SettingsInteractorInput {
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
+    
+    var userInfoResponse: AccountInfoResponse?
     
     var isTurkcellUser: Bool {
         return (userInfoResponse?.accountType == "TURKCELL")
