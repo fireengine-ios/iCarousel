@@ -36,11 +36,8 @@ public final class SynchronizedDictionary<K,V> where K: Hashable {
     private let queue = DispatchQueue(label: DispatchQueueLabels.syncronizedArray, attributes: .concurrent)
     private var dictionary = [K:V]()
 
-// in future it would be better to use this init:
-// init<S>(uniqueKeysWithValues keysAndValues: S) where S : Sequence, S.Element == (Key, Value)
-    
     init() {
-        iteratorIndex = dictionary.startIndex
+        
     }
     
     init(dictionary: [K:V]) {
@@ -49,6 +46,12 @@ public final class SynchronizedDictionary<K,V> where K: Hashable {
         iteratorIndex = dictionary.startIndex
     }
 
+    init<S>(uniqueKeysWithValues keysAndValues: S) where S : Sequence, S.Element == (K, V) {
+        for (k, v) in keysAndValues {
+            dictionary[k] = v
+        }
+    }
+    
 }
 
 //MARK:- General
