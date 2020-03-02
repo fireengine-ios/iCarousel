@@ -207,7 +207,6 @@ extension SettingsPresenter: SettingsInteractorOutput {
         router.showError(errorMessage: errorMessage)
     }
     
-    
 }
 
 // MARK: -SettingsModuleInput
