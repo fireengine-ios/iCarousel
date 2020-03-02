@@ -169,7 +169,7 @@ class ContactsSyncService: BaseRequestService {
             if parsedContactsToDelete.count > 0 {
                 self.lastToDeleteContactsValue = parsedContactsToDelete.reduce(0) { $0 + $1.numberOfErrors }
             } else {
-               // To fix FE-2268, also SDK Vendors told that not to interfere analyze until user cancenAnalyze manually
+               // To fix FE-2268, also SDK Vendors told that not to interfere analyze until user cancelAnalyze manually
                // let savedAnalyzeStep = AnalyzeStatus.shared().analyzeStep
                // ContactSyncSDK.cancelAnalyze()
                // AnalyzeStatus.shared().analyzeStep = savedAnalyzeStep
