@@ -15,6 +15,7 @@ protocol AccountServicePrl {
     func info(success: SuccessResponse?, fail:@escaping FailResponse)
     func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
     func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
+    func newFeaturePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
     func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid)

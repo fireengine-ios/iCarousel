@@ -14,6 +14,11 @@ protocol SubscriptionOfferViewDelegate: class {
 
 final class SubscriptionOfferView: UIView, NibInit {
 
+    enum Style {
+        case full
+        case short
+    }
+    
     @IBOutlet private weak var borderView: UIView! {
         willSet {
             newValue.backgroundColor = ColorConstants.lightGrayColor
@@ -73,11 +78,18 @@ final class SubscriptionOfferView: UIView, NibInit {
     private weak var delegate: SubscriptionOfferViewDelegate?
     private var index: Int?
 
-    func configure(with plan: SubscriptionPlan, delegate: SubscriptionOfferViewDelegate, index: Int) {
+    func configure(with plan: SubscriptionPlan, delegate: SubscriptionOfferViewDelegate, index: Int, style: Style) {
         nameLabel.text = plan.name
         priceLabel.attributedText = makePrice(plan.priceString)
         typeLabel.attributedText = makePackageFeature(plan: plan)
-        featureView.configure(features: makeFeatures(plan: plan))
+        
+        switch style {
+        case .full:
+            featureView.configure(features: makeFeatures(plan: plan))
+        case .short:
+            featureView.configure(features: .storageOnly)
+        }
+        
         updateButton(isRecommended: plan.isRecommended)
         updateBorderView(isRecommended: plan.isRecommended)
         
@@ -90,7 +102,7 @@ final class SubscriptionOfferView: UIView, NibInit {
             return
         }
         
-        configure(with: plan, delegate: delegate, index: index)
+        configure(with: plan, delegate: delegate, index: index, style: .full)
     }
     
     private func makePrice(_ price: String) -> NSAttributedString {

@@ -1479,3 +1479,10 @@
 "premium_user_package_description" = "Premium user";
 "bundle_package_addon_type" = "with +Premium";
 "storage_only_package_addon_type" = "Storage only";
+
+"become_premium_navbar_title" = "We Recommend";
+"become_premium_header_title" = "We have a special offer for you!";
+"become_premium_header_subtitle" = "You can have Premium features lorem ipsum dolor sit amet consecitur";
+"become_premium_description" = "Orijinal kalitede saklama\nSınırsız Photopick Analiz\nSınırsız Face/Image Processing\nDelete Duplicate Contacts";
+"become_premium_or_text" = "Or,";
+"become_premium_see_all_packages" = "See All Packages";
