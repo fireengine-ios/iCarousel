@@ -34,8 +34,6 @@ class SettingsPresenter: BasePresenter {
         return interactor.isTurkcellUser
     }
     
-    
-    
     override func outputView() -> Waiting? {
         return view as? Waiting
     }
@@ -44,14 +42,6 @@ class SettingsPresenter: BasePresenter {
         view.profileInfoChanged()
         interactor.updateUserInfo(mail: mail)
     }
-
-    
-    
-   
-    
-    
-    
-    
     
 }
 
