@@ -10,7 +10,7 @@ import UIKit
 
 enum ControlPackageType {
     case myProfile
-    case myStorage
+    case myStorage(percentage: CGFloat)
     case premiumBanner
     
     case accountType(ControlPackageType.AccountType)
@@ -77,16 +77,16 @@ final class PackageInfoView: UIView, NibInit {
     }
 
     //MARK: Utility methods(public)
-    func configure(with type: ControlPackageType, percentage: CGFloat? = nil) {
+    func configure(with type: ControlPackageType) {
         viewType = type
 
         switch type {
         case .myProfile:
             titleLabel.text = TextConstants.myProfile
             detailLabel.isHidden = true
-        case .myStorage:
+        case .myStorage(percentage: let percentage):
             titleLabel.text = TextConstants.myStorage
-            if let percentage = percentage, percentage != 0 {
+            if percentage != 0 {
                 detailLabel.isHidden = false
                 detailLabel.text = String(format: TextConstants.usagePercentage, percentage.rounded(.toNearestOrAwayFromZero))
             } else {
