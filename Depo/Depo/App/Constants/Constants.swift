@@ -549,7 +549,19 @@ struct TextConstants {
     static let globalPermissionTitleLabel = NSLocalizedString("global_permission_title_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let globalPermissionDescriptionLabel = NSLocalizedString("global_permission_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let informativeDescription = NSLocalizedString("informative_description_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let mobilePaymentPermissionTitleLabel = NSLocalizedString("mobile_payment_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let mobilePaymentPermissionDescriptionLabel = NSLocalizedString("mobile_payment_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let mobilePaymentViewTitleLabel = NSLocalizedString("mobile_payment_view_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let mobilePaymentViewDescriptionLabel = NSLocalizedString("mobile_payment_view_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let mobilePaymentViewLinkLabel = NSLocalizedString("mobile_payment_view_link_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let mobilePaymentClosePopupTitleLabel = NSLocalizedString("mobile_payment_close_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let mobilePaymentClosePopupDescriptionLabel = NSLocalizedString("mobile_payment_close_popup_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+     static let mobilePaymentClosePopupDescriptionBoldRangeLabel = NSLocalizedString("mobile_payment_close_popup_description_bold_range", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let mobilePaymentOpenPopupTitleLabel = NSLocalizedString("mobile_payment_open_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let mobilePaymentOpenPopupDescriptionLabel = NSLocalizedString("mobile_payment_open_popup_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let mobilePaymentOpenPopupDescriptionBoldRangeLabel = NSLocalizedString("mobile_payment_open_popup_description_bold_range", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let mobilePaymentOpenPopupContinueButton = NSLocalizedString("mobile_payment_open_popup_continue_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+     static let mobilePaymentOpenPopupLaterButton = NSLocalizedString("mobile_payment_open_popup_later_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: settings User info view
     static let settingsUserInfoViewUpgradeButtonText = NSLocalizedString("UPGRADE", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

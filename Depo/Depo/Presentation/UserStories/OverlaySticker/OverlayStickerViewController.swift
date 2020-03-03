@@ -214,6 +214,7 @@ final class OverlayStickerViewController: ViewController {
                             self?.uploadItem(item: localItem, completion: { uploadResult in
                                 switch uploadResult {
                                 case .success(let remote):
+                                    self?.removeImage(at: result.url)
                                     remote?.patchToPreview = localItem.patchToPreview
                                     commonCompletionHandler(remote, nil)
                                     
@@ -429,6 +430,14 @@ extension OverlayStickerViewController {
             completion(.success(CreateOverlayStickersSuccessResult(url: path, type: .image)))
         } catch {
             completion(.failure(.unknown))
+        }
+    }
+    
+    private func removeImage(at url: URL) {
+        do {
+            try FileManager.default.removeItem(at: url)
+        } catch {
+            print(error.description)
         }
     }
 }

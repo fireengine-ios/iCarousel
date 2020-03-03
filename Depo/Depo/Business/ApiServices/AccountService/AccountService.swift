@@ -303,6 +303,32 @@ class AccountService: BaseRequestService, AccountServicePrl {
         }
     }
     
+    func getPermissionAllowanceInfo(withType type: PermissionType, handler: @escaping (ResponseResult<SettingsPermissionsResponse>) -> Void) {
+        let request = String(format: RouteRequests.Account.Permissions.permissionWithType, type.rawValue)
+        
+        sessionManager
+            .request(request)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    guard
+                        let jsonArray = JSON(data: data).array,
+                        let json = jsonArray.first
+                    else {
+                        let error = CustomErrors.serverError("\(request) not array in response")
+                        assertionFailure(error.localizedDescription)
+                        handler(.failed(error))
+                        return
+                    }
+                    let result = SettingsPermissionsResponse(withJSON: json)
+                    handler(.success(result))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
     func changePermissionsAllowed(type: PermissionType, isApproved: Bool, handler: @escaping (ResponseResult<Void>) -> Void) {
         debugLog("AccountService changePermissionsAllowed")
         
@@ -816,4 +842,13 @@ class AccountService: BaseRequestService, AccountServicePrl {
         })
 
     }
+    
+    func updateMobilePaymentPermissionFeedback(handler: @escaping ResponseVoid) {
+        let request = RouteRequests.Account.Permissions.mobilePaymentPermissionFeedback
+        sessionManager
+            .request(request, method: .post)
+            .customValidate()
+            .responseVoid(handler)
+    }
+    
 }

@@ -1031,6 +1031,19 @@
 "global_permission_header" = "Global Data Permission";
 "informative_description_label" = "Waiting for permission";
 "global_permission_screen_title" = "Global Data Permission";
+"mobile_payment_title" = "mobile_payment_title";
+"mobile_payment_description" = "mobile_payment_description";
+"mobile_payment_view_title" = "mobile_payment_view_title";
+"mobile_payment_view_description" = "mobile_payment_view_description";
+"mobile_payment_view_link_text" = "mobile_payment_view_link_text";
+"mobile_payment_close_popup_title" = "mobile_payment_close_popup_title";
+"mobile_payment_close_popup_description" = "mobile_payment_close_popup_description";
+"mobile_payment_close_popup_description_bold_range" = "mobile_payment_close_popup_description_bold_range";
+"mobile_payment_open_popup_title" = "mobile_payment_open_popup_title";
+"mobile_payment_open_popup_description" = "mobile_payment_open_popup_description";
+"mobile_payment_open_popup_description_bold_range" = "mobile_payment_open_popup_description_bold_range";
+"mobile_payment_open_popup_later_button" = "mobile_payment_open_popup_later_button";
+"mobile_payment_open_popup_continue_button" = "mobile_payment_open_popup_continue_button_text";
 
 /*Settings page*/
 "Permissions" = "Permissions";

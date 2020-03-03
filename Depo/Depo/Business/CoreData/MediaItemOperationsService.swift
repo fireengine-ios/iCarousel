@@ -222,17 +222,18 @@ final class MediaItemOperationsService {
                     //for locals
                     savedItem.syncStatusValue = item.syncStatus.valueForCoreDataMapping()
                     
-                    debugLog("sync_status: local \(savedItem.nameValue ?? "") is synced")
-                    
                     if savedItem.objectSyncStatus != nil {
                         savedItem.objectSyncStatus = nil
                     }
                     
                     var array = [MediaItemsObjectSyncStatus]()
                     for userID in item.syncStatuses {
+                        debugLog("sync_status: synced")
+                        
                         array.append(MediaItemsObjectSyncStatus(userID: userID, context: context))
                     }
                     savedItem.objectSyncStatus = NSSet(array: array)
+                    
                     //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
                 })
                 

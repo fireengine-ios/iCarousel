@@ -98,9 +98,9 @@ final class CacheManager {
     
     private func updatePreparation(isBegun: Bool) {
         if isBegun {
-            CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+            CardsManager.default.startOperationWith(type: .prepareQuickScroll)
         } else {
-            CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+            CardsManager.default.stopOperationWith(type: .prepareQuickScroll)
         }
         
         DispatchQueue.main.async {

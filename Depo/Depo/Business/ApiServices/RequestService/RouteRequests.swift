@@ -308,7 +308,9 @@ struct RouteRequests {
             static let features = baseUrl +/ "features"
             
             static let permissionsList = Account.accountApi +/ "permission/list"
+            static let permissionWithType = Account.accountApi.absoluteString + "/permission/list?permissionType=%@"
             static let permissionsUpdate = Account.accountApi +/ "permission/update"
+            static let mobilePaymentPermissionFeedback = Account.accountApi +/ "updateMobilePaymentPermissionFeedback"
         }
     }
     

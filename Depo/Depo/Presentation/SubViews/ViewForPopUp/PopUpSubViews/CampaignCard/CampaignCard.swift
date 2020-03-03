@@ -105,7 +105,7 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .campaignCard, serverObject: cardObject)
+        CardsManager.default.stopOperationWith(type: .campaignCard, serverObject: cardObject)
     }
     
     private func presentWebViewWithDetail(with url: URL?) {

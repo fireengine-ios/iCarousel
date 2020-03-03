@@ -244,8 +244,8 @@ extension FreeAppSpace: ItemOperationManagerViewProtocol {
             }
             
             if self.duplicatesArray.isEmpty {
-                CardsManager.default.stopOperationWithType(type: .freeAppSpace)
-                CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
+                CardsManager.default.stopOperationWith(type: .freeAppSpace)
+                CardsManager.default.stopOperationWith(type: .freeAppSpaceLocalWarning)
             }
         }
     }
