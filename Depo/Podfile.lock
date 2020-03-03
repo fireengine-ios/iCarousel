@@ -159,7 +159,7 @@ DEPENDENCIES:
   - YYImage
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Adjust
     - Alamofire
     - CircleProgressBar

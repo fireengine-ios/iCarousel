@@ -1121,6 +1121,8 @@
 "settings_userinfo_name_surname" = "settings_userinfo_name_surname";
 "settings_userinfo_email" = "settings_userinfo_email";
 "settings_userinfo_phone" = "settings_userinfo_phone";
+"settings_action_sheet_profile_details" = "settings_action_sheet_profile_details";
+"settings_action_sheet_edit_profile_photo" = "settings_action_sheet_edit_profile_photo";
 
 /*2FA Error Messages*/
 "two_fa_too_many_requests_error_message" = "Too many verification code requested, please try again later";

@@ -6,15 +6,14 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class SettingsInteractor: SettingsInteractorInput {
+final class SettingsInteractor: SettingsInteractorInput {
 
     weak var output: SettingsInteractorOutput!
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
-    private var userInfoResponse: AccountInfoResponse?
-    let authService = AuthenticationService()
-    let accountSerivese = AccountService()
+    private let authService = AuthenticationService()
+    private let accountService = AccountService()
     
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     private lazy var storageVars: StorageVars = factory.resolve()
@@ -26,6 +25,8 @@ class SettingsInteractor: SettingsInteractorInput {
     var isPasscodeEmpty: Bool {
         return passcodeStorage.isEmpty
     }
+    
+    private(set) var userInfoResponse: AccountInfoResponse?
     
     var isTurkcellUser: Bool {
         return (userInfoResponse?.accountType == "TURKCELL")
@@ -58,7 +59,7 @@ class SettingsInteractor: SettingsInteractorInput {
     }
     
     func uploadPhoto(withPhoto photo: Data) {
-        accountSerivese.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] response in
+        accountService.setProfilePhoto(param: UserPhoto(photo: photo), success: { [weak self] response in
             self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .photoEdit)
             ImageDownloder().removeImageFromCache(url: self?.userInfoResponse?.urlForPhoto, completion: {
                 self?.analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .profilePhoto, eventLabel: .profilePhotoUpload)
@@ -106,7 +107,7 @@ class SettingsInteractor: SettingsInteractorInput {
     }
     
     private func getUserStatus() {
-        accountSerivese.permissions { [weak self] response in
+        accountService.permissions { [weak self] response in
             switch response {
             case .success(let result):
                 AuthoritySingleton.shared.refreshStatus(with: result)
@@ -128,7 +129,7 @@ class SettingsInteractor: SettingsInteractorInput {
         }
         
         output.asyncOperationStarted()
-        accountSerivese.getPermissionsAllowanceInfo { [weak self] response in
+        accountService.getPermissionsAllowanceInfo { [weak self] response in
             DispatchQueue.main.async {
                 switch response {
                 case .success(let permissions):
@@ -137,7 +138,7 @@ class SettingsInteractor: SettingsInteractorInput {
                     self?.didRecieveDataForCells()
 
                 case .failed(let error):
-                    self?.didRecieveDataForCells()
+
                     self?.output.didFailToObtainUserStatus(errorMessage: error.localizedDescription)
                     
                 }
@@ -148,35 +149,9 @@ class SettingsInteractor: SettingsInteractorInput {
     }
     
     private func didRecieveDataForCells() {
-        ///accountCells
-        var accountCells = [TextConstants.settingsViewCellConnectedAccounts]
-        
-        if isNeedShowPermissions == true {
-            accountCells.append(TextConstants.settingsViewCellPermissions)
+        guard let isPermissionShown = isNeedShowPermissions else {
+            return
         }
-        
-        ///securityCells
-        let passcodeCellTitle = String(format: TextConstants.settingsViewCellPasscode, biometricsManager.biometricsTitle)
-        let securityCells = [TextConstants.settingsViewCellActivityTimline,
-                             TextConstants.settingsViewCellUsageInfo,
-                             passcodeCellTitle,
-                             TextConstants.settingsViewCellLoginSettings]
-        
-        let array = [
-            [TextConstants.settingsViewCellBeckup,
-             TextConstants.settingsViewCellAutoUpload,
-             TextConstants.settingsViewCellContactsSync,
-             TextConstants.settingsViewCellFaceAndImageGrouping],
-            
-            accountCells,
-            
-            securityCells,
-            
-            [TextConstants.settingsViewCellHelp,
-             TextConstants.settingsViewCellPrivacyAndTerms,
-             TextConstants.settingsViewCellLogout]
-        ]
-        
-        self.output.cellsDataForSettings(array: array)
+        output.cellsDataForSettings(isPermissionShown: isPermissionShown)
     }
 }
