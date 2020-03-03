@@ -140,7 +140,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         
         if plan.isRecommended {
             font = UIFont.TurkcellSaturaBolFont(size: 16)
-            textColor = UIColor.lrMango
+            textColor = ColorConstants.cardBorderOrange
         } else if plan.addonType == .storageOnly {
             font = UIFont.TurkcellSaturaFont(size: 16)
             textColor = ColorConstants.darkText
@@ -186,12 +186,12 @@ final class SubscriptionOfferView: UIView, NibInit {
     }
     
     private func updateButton(isRecommended: Bool) {
-        let color = isRecommended ? UIColor.lrMango : ColorConstants.marineTwo
+        let color = isRecommended ? ColorConstants.cardBorderOrange : ColorConstants.marineTwo
         purchaseButton.setBackgroundColor(color, for: UIControl().state)
     }
     
     private func updateBorderView(isRecommended: Bool) {
-        let color = isRecommended ? UIColor.lrMango : ColorConstants.lightGrayColor
+        let color = isRecommended ? ColorConstants.cardBorderOrange : ColorConstants.lightGrayColor
         recommendationLabel.isHidden = !isRecommended
         borderView.backgroundColor = color
     }

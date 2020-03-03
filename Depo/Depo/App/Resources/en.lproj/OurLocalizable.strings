@@ -1477,6 +1477,7 @@
 "face_recognition_package_description" = "Face Recognition";
 "delete_dublicate_package_description" = "Delete Dublicate";
 "premium_user_package_description" = "Premium user";
+"original_сopy_package_description" = "Original сopy";
 "bundle_package_addon_type" = "with +Premium";
 "storage_only_package_addon_type" = "Storage only";
 
