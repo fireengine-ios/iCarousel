@@ -87,7 +87,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         contactSyncResponse = response
         setButtonsAvailability()
         /// Delay is needed due to instant progress reset on completion
-        if view.isFullCircle {
+        if !view.isFullCircle {
             DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {
                 self.view.success(response: response, forOperation: operation)
             }

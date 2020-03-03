@@ -386,6 +386,7 @@ class ItemOperationManager: NSObject {
     
     func syncFinished() {
 //        DispatchQueue.main.async {
+        currentUploadingObject = nil
         views.invoke { $0.syncFinished() }
 //        }
     }
