@@ -45,7 +45,6 @@ final class BackgroundSynсService {
             }
             self.handleRefreshSyncTask(task: task)
         }
-
     }
     
     func scheduleProcessingSync() {
@@ -61,26 +60,22 @@ final class BackgroundSynсService {
             try BGTaskScheduler.shared.submit(request)
             debugLog("scheduleProcessingSync: OK")
         } catch {
-            print("Could not schedule app refresh: \(error)")
             debugLog("scheduleProcessingSync: Could not schedule app Processing: \(error)")
         }
     }
     
     func scheduleRefreshSync() {
         
-        let request = BGProcessingTaskRequest(identifier: TaskIdentifiers.backgroundRefresh)
+        let request = BGAppRefreshTaskRequest(identifier: TaskIdentifiers.backgroundRefresh)
         
         // Fetch no earlier than 15 sec from now
-        request.earliestBeginDate = Date(timeIntervalSinceNow: 60 * 5)
-        request.requiresNetworkConnectivity = true
-        request.requiresExternalPower = false
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 60 * 30)
         
         do {
             try BGTaskScheduler.shared.submit(request)
-             debugLog("scheduleRefreshSync: OK")
+            debugLog("scheduleRefreshSync: OK")
         } catch {
             debugLog("scheduleRefreshSync: Could not schedule app refresh: \(error)")
-            print("Could not schedule app refresh: \(error)")
         }
     }
     
@@ -100,7 +95,6 @@ final class BackgroundSynсService {
         
         task.expirationHandler = {
             debugLog("handleProcessingSyncTask_expirationHandler")
-            print("expirationHandler")
             SyncServiceManager.shared.stopSync()
         }
     }
@@ -116,11 +110,6 @@ final class BackgroundSynсService {
         SyncServiceManager.shared.backgroundTaskSync { isLast in
             debugLog("handleRefreshSyncTask_task_completed")
             task.setTaskCompleted(success: isLast)
-        }
-        
-        task.expirationHandler = {
-            debugLog("handleRefreshSyncTask_expirationHandler")
-            SyncServiceManager.shared.stopSync()
         }
     }
     
