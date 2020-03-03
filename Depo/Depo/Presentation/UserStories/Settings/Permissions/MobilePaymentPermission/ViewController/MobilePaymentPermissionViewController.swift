@@ -8,10 +8,12 @@
 
 import UIKit
 
-final class MobilePaymentPermissionViewController: ViewController, NibInit {
+final class MobilePaymentPermissionViewController: ViewController, NibInit, ControlTabBarProtocol {
     
     weak var delegate: MobilePaymentPermissionProtocol?
     var urlString: String?
+    
+    // MARK: Life Cycle
     
     override func loadView() {
         let mainView = MobilePaymentPermissionView.initFromNib()
@@ -21,6 +23,27 @@ final class MobilePaymentPermissionViewController: ViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigation()
+    }
+    
+    private func setupNavigation() {
+        hideTabBar()
+        navigationBarWithGradientStyle()
+        //backButtonForNavigationItem(title: TextConstants.backTitle)
+        let backButton = UIBarButtonItem(title: TextConstants.backTitle, target: self, selector: #selector(backTapped))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc private func backTapped() {
+        navigationController?.popViewController(animated: true)
+        guard let url = urlString else {
+            return
+        }
+        delegate?.backTapped(url: url)
     }
     
 }

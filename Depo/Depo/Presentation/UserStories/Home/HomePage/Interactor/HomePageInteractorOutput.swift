@@ -32,4 +32,5 @@ protocol HomePageInteractorOutput: class {
     
     func hideGiftBox()
     
+    func didObtainPermissionAllowance(response: SettingsPermissionsResponse)
 }

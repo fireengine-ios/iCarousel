@@ -8,6 +8,7 @@
 
 protocol MobilePaymentPermissionProtocol: class {
     func approveTapped()
+    func backTapped(url: String)
 }
 
 final class PermissionViewController: ViewController, ControlTabBarProtocol {
@@ -224,5 +225,7 @@ extension PermissionViewController: MobilePaymentPermissionProtocol {
         navigationController?.popViewController(animated: true)
         changePermissionsAllowed(permissionView: mobilePaymentPermissionView as! PermissionsView, type: .mobilePayment, isOn: true)
     }
+    
+    func backTapped(url: String) {}
     
 }
