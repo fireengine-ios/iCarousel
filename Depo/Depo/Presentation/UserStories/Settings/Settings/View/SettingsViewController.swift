@@ -45,66 +45,50 @@ final class SettingsViewController: BaseViewController {
     
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
-    enum SettingsCellType: Int {
-        case SectionOne
-        case SectionTwo
-        case SectionThree
-        case SectionFour
+    enum AllSectionTypes: Int {
+        case contactSync
+        case autoUpload
+        case periodicContactSync
+        case faceImage
+        case connectAccounts
+        case permissions
+        case myActivities
+        case usageInfo
+        case passcode
+        case security
+        case helpAndSupport
+        case termsAndPolicy
+        case logout
         
-        enum AllSectionTypes: Int {
-            case contactSync
-            case autoUpload
-            case periodicContactSync
-            case faceImage
-            case connectAccounts
-            case permissions
-            case myActivities
-            case usageInfo
-            case passcode
-            case security
-            case helpAndSupport
-            case termsAndPolicy
-            case logout
-            
-            var text: String {
-                switch self {
-                case .contactSync: return TextConstants.settingsViewCellBeckup
-                case .autoUpload: return TextConstants.settingsViewCellAutoUpload
-                case .periodicContactSync: return TextConstants.settingsViewCellContactsSync
-                case .faceImage: return TextConstants.settingsViewCellFaceAndImageGrouping
-                case .connectAccounts: return TextConstants.settingsViewCellConnectedAccounts
-                case .permissions: return TextConstants.settingsViewCellPermissions
-                case .myActivities: return TextConstants.settingsViewCellActivityTimline
-                case .usageInfo: return TextConstants.settingsViewCellUsageInfo
-                case .passcode: return TextConstants.settingsViewCellPasscode
-                case .security: return TextConstants.settingsViewCellLoginSettings
-                case .helpAndSupport: return TextConstants.settingsViewCellHelp
-                case .termsAndPolicy: return TextConstants.settingsViewCellPrivacyAndTerms
-                case .logout: return TextConstants.settingsViewCellLogout
-                }
-            }
-            
-            static let allSectionOneTypes = [contactSync, autoUpload, periodicContactSync, faceImage]
-            static let allSectionTwoTypes = [connectAccounts, permissions]
-            static let allSectionThreeTypes = [myActivities, usageInfo, passcode, security]
-            static let allSectionFourTypes = [helpAndSupport, termsAndPolicy, logout]
-        }
-        
-        var cellTypes: [AllSectionTypes] {
+        var text: String {
             switch self {
-            case .SectionOne:
-                return AllSectionTypes.allSectionOneTypes
-            case .SectionTwo:
-                return AllSectionTypes.allSectionTwoTypes
-            case .SectionThree:
-                return AllSectionTypes.allSectionThreeTypes
-            case .SectionFour:
-                return AllSectionTypes.allSectionFourTypes
+            case .contactSync: return TextConstants.settingsViewCellBeckup
+            case .autoUpload: return TextConstants.settingsViewCellAutoUpload
+            case .periodicContactSync: return TextConstants.settingsViewCellContactsSync
+            case .faceImage: return TextConstants.settingsViewCellFaceAndImageGrouping
+            case .connectAccounts: return TextConstants.settingsViewCellConnectedAccounts
+            case .permissions: return TextConstants.settingsViewCellPermissions
+            case .myActivities: return TextConstants.settingsViewCellActivityTimline
+            case .usageInfo: return TextConstants.settingsViewCellUsageInfo
+            case .passcode: return TextConstants.settingsViewCellPasscode
+            case .security: return TextConstants.settingsViewCellLoginSettings
+            case .helpAndSupport: return TextConstants.settingsViewCellHelp
+            case .termsAndPolicy: return TextConstants.settingsViewCellPrivacyAndTerms
+            case .logout: return TextConstants.settingsViewCellLogout
             }
         }
+        
+        static let allSectionOneTypes = [contactSync, autoUpload, periodicContactSync, faceImage]
+        static let allSectionTwoTypes = [connectAccounts, permissions]
+        static let allSectionThreeTypes = [myActivities, usageInfo, passcode, security]
+        static let allSectionFourTypes = [helpAndSupport, termsAndPolicy, logout]
     }
     
-    private var cellTypes: [[SettingsCellType.AllSectionTypes]] = []
+     private var cellTypes = [[AllSectionTypes]]() {
+           didSet {
+               tableView?.reloadData()
+           }
+       }
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -218,11 +202,12 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             splitViewController?.navigationController?.viewControllers.last?.navigationItem.rightBarButtonItem = nil
         }
         
-        let settingsSection = SettingsCellType(rawValue: indexPath.section)
-        guard let section = settingsSection else {
+        guard
+            let settingsSection = cellTypes[safe: indexPath.section],
+            let cellType = settingsSection[safe: indexPath.row]
+        else {
             return
         }
-        let cellType = section.cellTypes[indexPath.row]
         
         switch cellType {
         case .contactSync:
@@ -337,21 +322,20 @@ extension SettingsViewController: SettingsViewInput {
     
     func prepareCellsData(isPermissionShown: Bool) {
         cellTypes = []
-        var accountCells = [SettingsCellType.AllSectionTypes.connectAccounts]
+        var accountCells = [AllSectionTypes.connectAccounts]
         if isPermissionShown {
-            accountCells.append(SettingsCellType.AllSectionTypes.permissions)
+            accountCells.append(AllSectionTypes.permissions)
         }
         cellTypes = [
-            SettingsCellType.AllSectionTypes.allSectionOneTypes,
+            AllSectionTypes.allSectionOneTypes,
             accountCells,
-            SettingsCellType.AllSectionTypes.allSectionThreeTypes,
-            SettingsCellType.AllSectionTypes.allSectionFourTypes]
-        tableView.reloadData()
+            AllSectionTypes.allSectionThreeTypes,
+            AllSectionTypes.allSectionFourTypes]
     }
     
     func showProfileAlertSheet(userInfo: AccountInfoResponse, isProfileAlert: Bool) {
         let actionSheetVC = getProfileAlertSheet(userInfo: userInfo, isProfileAlert: isProfileAlert)
-        present(actionSheetVC, animated: true, completion: nil)
+        present(actionSheetVC, animated: true)
     }
     
     func updatePhoto(image: UIImage) {
