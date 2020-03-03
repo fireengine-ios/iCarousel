@@ -22,7 +22,7 @@ final class SettingsPresenter: BasePresenter {
         return AuthoritySingleton.shared.accountType.isPremium
     }
     
-    var isMailVereficationRequired: Bool {
+    private var isMailVereficationRequired: Bool {
         return isTurkCellUser && interactor.isEmptyMail
     }
     

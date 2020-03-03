@@ -342,22 +342,10 @@ extension SettingsViewController: SettingsViewInput {
             accountCells.append(SettingsCellType.AllSectionTypes.permissions)
         }
         cellTypes = [
-            [SettingsCellType.AllSectionTypes.contactSync,
-             SettingsCellType.AllSectionTypes.autoUpload,
-             SettingsCellType.AllSectionTypes.periodicContactSync,
-             SettingsCellType.AllSectionTypes.faceImage],
-            
+            SettingsCellType.AllSectionTypes.allSectionOneTypes,
             accountCells,
-            
-            [SettingsCellType.AllSectionTypes.myActivities,
-            SettingsCellType.AllSectionTypes.usageInfo,
-            SettingsCellType.AllSectionTypes.passcode,
-            SettingsCellType.AllSectionTypes.security],
-            
-            [SettingsCellType.AllSectionTypes.helpAndSupport,
-             SettingsCellType.AllSectionTypes.termsAndPolicy,
-             SettingsCellType.AllSectionTypes.logout]
-        ]
+            SettingsCellType.AllSectionTypes.allSectionThreeTypes,
+            SettingsCellType.AllSectionTypes.allSectionFourTypes]
         tableView.reloadData()
     }
     
