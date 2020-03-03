@@ -1713,6 +1713,14 @@ struct TextConstants {
     static let faceRecognitionPackageDescription = NSLocalizedString("face_recognition_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteDublicatePackageDescription = NSLocalizedString("delete_dublicate_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let premiumUserPackageDescription = NSLocalizedString("premium_user_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let originalCopyPackageDescription = NSLocalizedString("original_сopy_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let bundlePackageAddonType = NSLocalizedString("bundle_package_addon_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let storageOnlyPackageAddonType = NSLocalizedString("storage_only_package_addon_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let becomePremiumNavBarTitle = NSLocalizedString("become_premium_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumHeaderTitle = NSLocalizedString("become_premium_header_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumHeaderSubtitle = NSLocalizedString("become_premium_header_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumDescription = NSLocalizedString("become_premium_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumOrText = NSLocalizedString("become_premium_or_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumSeeAllPackages = NSLocalizedString("become_premium_see_all_packages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

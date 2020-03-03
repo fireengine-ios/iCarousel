@@ -9,6 +9,6 @@
 import Foundation
 
 protocol PremiumViewInput: class, ActivityIndicator {
-    func displayFeatureInfo(price: String?, description: String, isNeedPolicy: Bool)
     func showPaycellProcess(with cpcmOfferId: Int)
+    func displayOffers(_ package: PackageOffer)
 }

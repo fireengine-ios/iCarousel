@@ -50,7 +50,7 @@ extension PremiumInteractor: PremiumInteractorInput {
     }
     
     func getFeaturePacks() {
-        accountService.featurePacks { [weak self] result in
+        accountService.newFeaturePacks { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.toMain {
