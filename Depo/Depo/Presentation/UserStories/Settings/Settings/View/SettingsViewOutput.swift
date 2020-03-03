@@ -60,6 +60,6 @@ protocol SettingsViewOutput {
 //    func turkcellSecurityStatusNeeded(passcode: Bool, autoLogin: Bool)
 //    func turkcellSecurityChanged(passcode: Bool, autoLogin: Bool)
 //
-    var inNeedOfMail: Bool { get }
+    var isMailRequired: Bool { get }
     var isTurkCellUser: Bool { get }
 }

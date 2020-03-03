@@ -44,6 +44,69 @@ class SettingsViewController: BaseViewController {
     
     private var isFromPhotoPicker = false
     
+    private lazy var biometricsManager: BiometricsManager = factory.resolve()
+    
+    enum SettingsCellType: Int {
+        case SectionOne
+        case SectionTwo
+        case SectionThree
+        case SectionFour
+        
+        enum AllSectionTypes: Int {
+            case contactSync
+            case autoUpload
+            case periodicContactSync
+            case faceImage
+            case connectAccounts
+            case permissions
+            case myActivities
+            case usageInfo
+            case passcode
+            case security
+            case helpAndSupport
+            case termsAndPolicy
+            case logout
+            
+            var text: String {
+                switch self {
+                case .contactSync: return TextConstants.settingsViewCellBeckup
+                case .autoUpload: return TextConstants.settingsViewCellAutoUpload
+                case .periodicContactSync: return TextConstants.settingsViewCellContactsSync
+                case .faceImage: return TextConstants.settingsViewCellFaceAndImageGrouping
+                case .connectAccounts: return TextConstants.settingsViewCellConnectedAccounts
+                case .permissions: return TextConstants.settingsViewCellPermissions
+                case .myActivities: return TextConstants.settingsViewCellActivityTimline
+                case .usageInfo: return TextConstants.settingsViewCellUsageInfo
+                case .passcode: return TextConstants.settingsViewCellPasscode
+                case .security: return TextConstants.settingsViewCellLoginSettings
+                case .helpAndSupport: return TextConstants.settingsViewCellHelp
+                case .termsAndPolicy: return TextConstants.settingsViewCellPrivacyAndTerms
+                case .logout: return TextConstants.settingsViewCellLogout
+                }
+            }
+            
+            static let allSectionOneTypes = [contactSync, autoUpload, periodicContactSync, faceImage]
+            static let allSectionTwoTypes = [connectAccounts, permissions]
+            static let allSectionThreeTypes = [myActivities, usageInfo, passcode, security]
+            static let allSectionFourTypes = [helpAndSupport, termsAndPolicy, logout]
+        }
+        
+        var cellTypes: [AllSectionTypes] {
+            switch self {
+            case .SectionOne:
+                return AllSectionTypes.allSectionOneTypes
+            case .SectionTwo:
+                return AllSectionTypes.allSectionTwoTypes
+            case .SectionThree:
+                return AllSectionTypes.allSectionThreeTypes
+            case .SectionFour:
+                return AllSectionTypes.allSectionFourTypes
+            }
+        }
+    }
+    
+    var cellTypes: [[SettingsCellType.AllSectionTypes]] = []
+    
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,7 +176,7 @@ class SettingsViewController: BaseViewController {
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tableDataArray.count
+        return cellTypes.count
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -129,15 +192,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if (section == tableDataArray.count - 1) {
+        if section == cellTypes.count - 1 {
             return SettingHeaderView.viewFromNib()
         }
         return nil
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let array = tableDataArray[section]
-        return array.count
+        return cellTypes[section].count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -145,128 +207,113 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let array = tableDataArray[indexPath.section]
-        
-        let cell = tableView.dequeue(reusable: SettingsTableViewCell.self, for: indexPath)
-        cell.selectionStyle = .none
-        cell.setTextForLabel(titleText: array[indexPath.row], needShowSeparator: indexPath.row != array.count - 1)
+        let cell = configureSettingsTableViewCell(indexPath: indexPath)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.scrollRectToVisible(tableView.rectForRow(at: indexPath), animated: true)
-        if (!Device.isIpad) {
+        if !Device.isIpad {
             tableView.deselectRow(at: indexPath, animated: true)
         } else {
             splitViewController?.navigationController?.viewControllers.last?.navigationItem.rightBarButtonItem = nil
         }
         
-        switch indexPath.section {
-        case 0:
-            switch indexPath.row {
-            case 0: // back-ip contacts
-                if (settingsDelegate != nil) {
-                    settingsDelegate!.goToContactSync()
-                } else {
-                    output.goToContactSync()
-                }
-            case 1: // auto upload
-                if (settingsDelegate != nil) {
-                    settingsDelegate!.goToAutoUpload()
-                } else {
-                    output.goToAutoApload()
-                }
-            case 2: // periodic contact sync
-                if (settingsDelegate != nil) {
-                    settingsDelegate?.goToPeriodicContactSync()
-                } else {
-                    output.goToPeriodicContactSync()
-                }
-            case 3: // face image
-                if (settingsDelegate != nil) {
-                    settingsDelegate?.goToFaceImage()
-                } else {
-                    output.goToFaceImage()
-                }
-            default:
-                break
-            }
-            break
-        case 1:
-            switch indexPath.row {
-            case 0:
-                // import photos
-                MenloworksTagsService.shared.onSocialMediaPageClicked()
-                if let delegate = settingsDelegate {
-                    delegate.goToConnectedAccounts()
-                } else {
-                    output.goToConnectedAccounts()
-                }
-            case 1:
-                // permissions
-                if let delegate = settingsDelegate {
-                    delegate.goToPermissions()
-                } else {
-                    output.goToPermissions()
-                }
-            default:
-                break
-            }
-            break
-        case 2:
-            switch indexPath.row {
-            case 0: // my activity timeline
-                if (settingsDelegate != nil) {
-                    settingsDelegate!.goToActivityTimeline()
-                } else {
-                    output.goToActivityTimeline()
-                }
-            case 1: // usage info
-                if let settingsDelegate = settingsDelegate {
-                    settingsDelegate.goToUsageInfo()
-                } else {
-                    output.goToUsageInfo()
-                }
-            case 2: /// passcode
-                showPasscodeOrPasscodeSettings()
-            case 3:// Turkcell security
-                output.goTurkcellSecurity()
-            default:
-                break
-            }
-            break
-        case 3:
-            switch indexPath.row {
-            case 0:
-                if let settingsDelegate = settingsDelegate {
-                    settingsDelegate.goToHelpAndSupport()
-                } else {
-                    output.goToHelpAndSupport()
-                }
-            case 1:
-                if let settingsDelegate = settingsDelegate {
-                    settingsDelegate.goToTermsAndPolicy()
-                } else {
-                    output.goToTermsAndPolicy()
-                }
-            case 2:
-                output.onLogout()
-            default:
-                break
-            }
-        default:
-            break
+        let settingsSection = SettingsCellType(rawValue: indexPath.section)
+        guard let section = settingsSection else {
+            return
         }
+        let cellType = section.cellTypes[indexPath.row]
+        
+        switch cellType {
+        case .contactSync:
+            if settingsDelegate != nil {
+                settingsDelegate!.goToContactSync()
+            } else {
+                output.goToContactSync()
+            }
+        case .autoUpload:
+            if settingsDelegate != nil {
+                settingsDelegate!.goToAutoUpload()
+            } else {
+                output.goToAutoApload()
+            }
+        case .periodicContactSync:
+            if settingsDelegate != nil {
+                settingsDelegate?.goToPeriodicContactSync()
+            } else {
+                output.goToPeriodicContactSync()
+            }
+        case .faceImage:
+            if settingsDelegate != nil {
+                settingsDelegate?.goToFaceImage()
+            } else {
+                output.goToFaceImage()
+            }
+        case .connectAccounts:
+            MenloworksTagsService.shared.onSocialMediaPageClicked()
+            if let delegate = settingsDelegate {
+                delegate.goToConnectedAccounts()
+            } else {
+                output.goToConnectedAccounts()
+            }
+        case .permissions:
+            if let delegate = settingsDelegate {
+                delegate.goToPermissions()
+            } else {
+                output.goToPermissions()
+            }
+        case .myActivities:
+            if settingsDelegate != nil {
+                settingsDelegate!.goToActivityTimeline()
+            } else {
+                output.goToActivityTimeline()
+            }
+        case .usageInfo:
+            if let settingsDelegate = settingsDelegate {
+                settingsDelegate.goToUsageInfo()
+            } else {
+                output.goToUsageInfo()
+            }
+        case .passcode:
+            showPasscodeOrPasscodeSettings()
+        case .security:
+            output.goTurkcellSecurity()
+        case .helpAndSupport:
+            if let settingsDelegate = settingsDelegate {
+                settingsDelegate.goToHelpAndSupport()
+            } else {
+                output.goToHelpAndSupport()
+            }
+        case .termsAndPolicy:
+            if let settingsDelegate = settingsDelegate {
+                settingsDelegate.goToTermsAndPolicy()
+            } else {
+                output.goToTermsAndPolicy()
+            }
+        case .logout:
+            output.onLogout()
+        }
+        
     }
     
     // MARK: - UITableViewDelegate & UITableViewDataSource Private Utility Methods
+    
+    private func configureSettingsTableViewCell(indexPath: IndexPath) -> SettingsTableViewCell {
+        let cell = tableView.dequeue(reusable: SettingsTableViewCell.self, for: indexPath)
+        cell.selectionStyle = .none
+        let array = cellTypes[indexPath.section]
+        let cellType = array[indexPath.row]
+        let text = cellType == .passcode ? String(format: cellType.text, biometricsManager.biometricsTitle) : cellType.text
+        cell.setTextForLabel(titleText: text, needShowSeparator: indexPath.row != array.count - 1)
+        return cell
+    }
     
     private func showPasscodeOrPasscodeSettings() {
         if output.isPasscodeEmpty {
             if let settingsDelegate = settingsDelegate {
                 settingsDelegate.goToPasscodeSettings(isTurkcell: output.isTurkCellUser,
-                                                      inNeedOfMail: output.inNeedOfMail,
+                                                      inNeedOfMail: output.isMailRequired,
                                                       needPopPasscodeEnterVC: false)
             } else {
                 output.goToPasscodeSettings(needReplaceOfCurrentController: false)
@@ -275,7 +322,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             output.openPasscode(handler: { [weak self] in
                 if let settingsDelegate = self?.settingsDelegate {
                     settingsDelegate.goToPasscodeSettings(isTurkcell: self?.output.isTurkCellUser ?? false,
-                                                          inNeedOfMail: self?.output.inNeedOfMail ?? false,
+                                                          inNeedOfMail: self?.output.isMailRequired ?? false,
                                                           needPopPasscodeEnterVC: true)
                 } else {
                     self?.output.goToPasscodeSettings(needReplaceOfCurrentController: true)
@@ -289,34 +336,34 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - SettingsViewInput
 extension SettingsViewController: SettingsViewInput {
     
-    func showCellsData(array: [[String]]) {
-        tableDataArray.removeAll()
-        tableDataArray.append(contentsOf: array)
+    func prepareCellsData(isPermissionShown: Bool) {
+        cellTypes = []
+        var accountCells = [SettingsCellType.AllSectionTypes.connectAccounts]
+        if isPermissionShown {
+            accountCells.append(SettingsCellType.AllSectionTypes.permissions)
+        }
+        cellTypes = [
+            [SettingsCellType.AllSectionTypes.contactSync,
+             SettingsCellType.AllSectionTypes.autoUpload,
+             SettingsCellType.AllSectionTypes.periodicContactSync,
+             SettingsCellType.AllSectionTypes.faceImage],
+            
+            accountCells,
+            
+            [SettingsCellType.AllSectionTypes.myActivities,
+            SettingsCellType.AllSectionTypes.usageInfo,
+            SettingsCellType.AllSectionTypes.passcode,
+            SettingsCellType.AllSectionTypes.security],
+            
+            [SettingsCellType.AllSectionTypes.helpAndSupport,
+             SettingsCellType.AllSectionTypes.termsAndPolicy,
+             SettingsCellType.AllSectionTypes.logout]
+        ]
         tableView.reloadData()
     }
     
-    func showProfileAlertSheet(userInfo: AccountInfoResponse) {
-        let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: nil)
-        
-        let profileDetailAction = UIAlertAction(title: TextConstants.actionSheetProfileDetails, style: .default, handler: { _ in
-            self.output.goToMyProfile(userInfo: userInfo)
-        })
-        
-        let editPhotoAction = UIAlertAction(title: TextConstants.actionSheetEditProfilePhoto, style: .default, handler: { _ in
-            self.showPhotoAlertSheet()
-        })
-        
-        let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionSheetVC.addActions(cancellAction, profileDetailAction, editPhotoAction)
-        actionSheetVC.popoverPresentationController?.sourceView = view
-        
-        let originPoint = CGPoint(x: Device.winSize.width / 2 - actionSheetVC.preferredContentSize.width / 2,
-                                  y: Device.winSize.height / 2 - actionSheetVC.preferredContentSize.height / 2)
-        
-        let sizePoint = actionSheetVC.preferredContentSize
-        actionSheetVC.popoverPresentationController?.sourceRect = CGRect(origin: originPoint, size: sizePoint)
-        actionSheetVC.popoverPresentationController?.permittedArrowDirections = .init(rawValue: 0) // means no arrow
-        
+    func showProfileAlertSheet(userInfo: AccountInfoResponse, isProfileAlert: Bool) {
+        let actionSheetVC = getProfileAlertSheet(userInfo: userInfo, isProfileAlert: isProfileAlert)
         present(actionSheetVC, animated: true, completion: nil)
     }
     
@@ -343,19 +390,23 @@ extension SettingsViewController: SettingsViewInput {
     
     // MARK: - SettingsViewInput Private Utility Methods
     
-    private func showPhotoAlertSheet() {
+    private func getProfileAlertSheet(userInfo: AccountInfoResponse, isProfileAlert: Bool) -> UIAlertController {
         let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: nil)
+        var firstAlertAction: UIAlertAction?
+        var secondAlertAction: UIAlertAction?
         
-        let actionCamera = UIAlertAction(title: TextConstants.actionSheetTakeAPhoto, style: .default, handler: { _ in
-            self.output.onChooseFromPhotoCamera(onViewController: self)
-        })
-        
-        let actionLibriary = UIAlertAction(title: TextConstants.actionSheetChooseFromLib, style: .default, handler: { _ in
-            self.output.onChooseFromPhotoLibriary(onViewController: self)
-        })
+        switch isProfileAlert {
+        case true:
+            firstAlertAction = getProfileDetailAction(userInfo: userInfo)
+            secondAlertAction = getEditPhotoAction(userInfo: userInfo)
+        case false:
+            firstAlertAction = getCameraAction()
+            secondAlertAction = getLibraryAction()
+            isFromPhotoPicker = true
+        }
         
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionSheetVC.addActions(cancellAction, actionCamera, actionLibriary)
+        actionSheetVC.addActions(cancellAction, firstAlertAction ?? getCameraAction(), secondAlertAction ?? getLibraryAction())
         actionSheetVC.popoverPresentationController?.sourceView = view
         
         let originPoint = CGPoint(x: Device.winSize.width / 2 - actionSheetVC.preferredContentSize.width / 2,
@@ -365,11 +416,32 @@ extension SettingsViewController: SettingsViewInput {
         actionSheetVC.popoverPresentationController?.sourceRect = CGRect(origin: originPoint, size: sizePoint)
         actionSheetVC.popoverPresentationController?.permittedArrowDirections = .init(rawValue: 0) // means no arrow
         
-        present(actionSheetVC, animated: true, completion: nil)
-        isFromPhotoPicker = true
+        return actionSheetVC
     }
     
+    private func getCameraAction() -> UIAlertAction {
+        return UIAlertAction(title: TextConstants.actionSheetTakeAPhoto, style: .default, handler: { _ in
+            self.output.onChooseFromPhotoCamera(onViewController: self)
+        })
+    }
     
+    private func getLibraryAction() -> UIAlertAction {
+        return UIAlertAction(title: TextConstants.actionSheetChooseFromLib, style: .default, handler: { _ in
+            self.output.onChooseFromPhotoLibriary(onViewController: self)
+        })
+    }
+    
+    private func getProfileDetailAction(userInfo: AccountInfoResponse) -> UIAlertAction {
+        return UIAlertAction(title: TextConstants.actionSheetProfileDetails, style: .default, handler: { _ in
+            self.output.goToMyProfile(userInfo: userInfo)
+        })
+    }
+    
+    private func getEditPhotoAction(userInfo: AccountInfoResponse) -> UIAlertAction {
+        return UIAlertAction(title: TextConstants.actionSheetEditProfilePhoto, style: .default, handler: { _ in
+            self.showProfileAlertSheet(userInfo: userInfo, isProfileAlert: false)
+        })
+    }
 }
 
 // MARK: - UserInfoSubViewViewControllerActionsDelegate

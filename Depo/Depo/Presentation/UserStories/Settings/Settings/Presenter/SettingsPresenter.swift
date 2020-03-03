@@ -22,12 +22,12 @@ class SettingsPresenter: BasePresenter {
         return AuthoritySingleton.shared.accountType.isPremium
     }
     
-    var inNeedOfMailVerification: Bool {
+    var isMailVereficationRequired: Bool {
         return isTurkCellUser && interactor.isEmptyMail
     }
     
-    var inNeedOfMail: Bool {
-        return inNeedOfMailVerification
+    var isMailRequired: Bool {
+        return isMailVereficationRequired
     }
     
     var isTurkCellUser: Bool {
@@ -116,7 +116,7 @@ extension SettingsPresenter: SettingsViewOutput {
         guard let userInfo = interactor.userInfoResponse else {
             return
         }
-        view.showProfileAlertSheet(userInfo: userInfo)
+        view.showProfileAlertSheet(userInfo: userInfo, isProfileAlert: true)
     }
     
     func onChooseFromPhotoLibriary(onViewController viewController: UIViewController) {
@@ -144,7 +144,7 @@ extension SettingsPresenter: SettingsViewOutput {
     }
     
     func goToPasscodeSettings(needReplaceOfCurrentController: Bool) {
-        router.goToPasscodeSettings(isTurkcell: isTurkCellUser, inNeedOfMail: inNeedOfMailVerification, needReplaceOfCurrentController: needReplaceOfCurrentController)
+        router.goToPasscodeSettings(isTurkcell: isTurkCellUser, inNeedOfMail: isMailVereficationRequired, needReplaceOfCurrentController: needReplaceOfCurrentController)
     }
     
     func openPasscode(handler: @escaping VoidHandler) {
@@ -152,7 +152,7 @@ extension SettingsPresenter: SettingsViewOutput {
     }
     
     func goTurkcellSecurity() {
-        inNeedOfMailVerification ? router.showMailUpdatePopUp(delegate: self) : router.goTurkcellSecurity(isTurkcell: isTurkCellUser)
+        isMailVereficationRequired ? router.showMailUpdatePopUp(delegate: self) : router.goTurkcellSecurity(isTurkcell: isTurkCellUser)
     }
     
     func goToMyProfile(userInfo: AccountInfoResponse) {
@@ -164,8 +164,8 @@ extension SettingsPresenter: SettingsViewOutput {
 // MARK: -SettingsInteractorOutput
 extension SettingsPresenter: SettingsInteractorOutput {
     
-    func cellsDataForSettings(array: [[String]]) {
-        view.showCellsData(array: array)
+    func cellsDataForSettings(isPermissionShown: Bool) {
+        view.prepareCellsData(isPermissionShown: isPermissionShown)
     }
     
     func goToOnboarding() {

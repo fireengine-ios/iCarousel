@@ -149,35 +149,9 @@ class SettingsInteractor: SettingsInteractorInput {
     }
     
     private func didRecieveDataForCells() {
-        ///accountCells
-        var accountCells = [TextConstants.settingsViewCellConnectedAccounts]
-        
-        if isNeedShowPermissions == true {
-            accountCells.append(TextConstants.settingsViewCellPermissions)
+        guard let isPermissionShown = isNeedShowPermissions else {
+            return
         }
-        
-        ///securityCells
-        let passcodeCellTitle = String(format: TextConstants.settingsViewCellPasscode, biometricsManager.biometricsTitle)
-        let securityCells = [TextConstants.settingsViewCellActivityTimline,
-                             TextConstants.settingsViewCellUsageInfo,
-                             passcodeCellTitle,
-                             TextConstants.settingsViewCellLoginSettings]
-        
-        let array = [
-            [TextConstants.settingsViewCellBeckup,
-             TextConstants.settingsViewCellAutoUpload,
-             TextConstants.settingsViewCellContactsSync,
-             TextConstants.settingsViewCellFaceAndImageGrouping],
-            
-            accountCells,
-            
-            securityCells,
-            
-            [TextConstants.settingsViewCellHelp,
-             TextConstants.settingsViewCellPrivacyAndTerms,
-             TextConstants.settingsViewCellLogout]
-        ]
-        
-        self.output.cellsDataForSettings(array: array)
+        self.output.cellsDataForSettings(isPermissionShown: isPermissionShown)
     }
 }
