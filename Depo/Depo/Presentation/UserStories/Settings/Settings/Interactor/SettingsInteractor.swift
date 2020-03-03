@@ -152,6 +152,6 @@ final class SettingsInteractor: SettingsInteractorInput {
         guard let isPermissionShown = isNeedShowPermissions else {
             return
         }
-        self.output.cellsDataForSettings(isPermissionShown: isPermissionShown)
+        output.cellsDataForSettings(isPermissionShown: isPermissionShown)
     }
 }
