@@ -21,7 +21,7 @@ final class DataChunkProvider {
         do {
             fileSize = try fileManager.sizeOfInputFile(src: url)
         } catch {
-            assertionFailure(error.description)
+            assertionFailure("Can't get file size")
             return nil
         }
         

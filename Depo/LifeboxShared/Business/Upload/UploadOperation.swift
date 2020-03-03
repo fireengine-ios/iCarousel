@@ -18,6 +18,7 @@ final class UploadOperation: Operation {
     private let didStartUpload: VoidHandler?
     private let complition: ResponseVoid
     private var dataRequest: DataRequest?
+    private var chunker: DataChunkProvider?
     
     private let semaphore = DispatchSemaphore(value: 0)
     private let attemptWaitSeconds = 5
