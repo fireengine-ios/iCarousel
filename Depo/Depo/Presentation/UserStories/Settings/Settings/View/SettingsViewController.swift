@@ -190,8 +190,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = configureSettingsTableViewCell(indexPath: indexPath)
-        return cell
+        return getConfiguredCell(indexPath: indexPath)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -284,7 +283,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - UITableViewDelegate & UITableViewDataSource Private Utility Methods
     
-    private func configureSettingsTableViewCell(indexPath: IndexPath) -> SettingsTableViewCell {
+    private func getConfiguredCell(indexPath: IndexPath) -> SettingsTableViewCell {
         let cell = tableView.dequeue(reusable: SettingsTableViewCell.self, for: indexPath)
         cell.selectionStyle = .none
         let array = cellTypes[indexPath.section]
@@ -305,12 +304,15 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             }
         } else {
             output.openPasscode(handler: { [weak self] in
-                if let settingsDelegate = self?.settingsDelegate {
-                    settingsDelegate.goToPasscodeSettings(isTurkcell: self?.output.isTurkCellUser ?? false,
-                                                          inNeedOfMail: self?.output.isMailRequired ?? false,
+                guard let self = self else {
+                    return
+                }
+                if let settingsDelegate = self.settingsDelegate {
+                    settingsDelegate.goToPasscodeSettings(isTurkcell: self.output.isTurkCellUser,
+                                                          inNeedOfMail: self.output.isMailRequired,
                                                           needPopPasscodeEnterVC: true)
                 } else {
-                    self?.output.goToPasscodeSettings(needReplaceOfCurrentController: true)
+                    self.output.goToPasscodeSettings(needReplaceOfCurrentController: true)
                 }
             })
         }
