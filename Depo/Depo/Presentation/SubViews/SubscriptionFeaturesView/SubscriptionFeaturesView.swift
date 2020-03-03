@@ -138,8 +138,12 @@ final class SubscriptionFeaturesView: UIView {
             
         case .premiumUser:
             return TextConstants.premiumUserPackageDescription
+            
         case .middleUser:
             return ""
+            
+        case .originalCopy:
+            return TextConstants.originalCopyPackageDescription
         }
     }
     

@@ -79,7 +79,6 @@ final class PremiumPresenter {
         }
         
         view.stopActivityIndicator()
-        view.displayFeatureInfo(price: price, description: description, isNeedPolicy: accountType != .turkcell)
     }
     
     private func prepareForPurchase() {
@@ -183,7 +182,7 @@ final class PremiumPresenter {
 // MARK: - PremiumViewOutput
 extension PremiumPresenter: PremiumViewOutput {    
     
-    func onViewDidLoad(with premiumView: PremiumView) {
+    func onViewDidLoad(with premiumView: BecomePremiumView) {
         view.startActivityIndicator()
         premiumView.delegate = self
         interactor.getAccountType()
@@ -254,9 +253,13 @@ extension PremiumPresenter: PremiumInteractorOutput {
     }
     
     func successedGotAppleInfo(offers: [PackageModelResponse]) {
-        displayFeatureInfo()
         let offers = interactor.convertToSubscriptionPlan(offers: offers, accountType: accountType)
         availableOffer = PackageOffer(quotaNumber: 0, offers: offers)
+        
+        view.stopActivityIndicator()
+        if let offer = availableOffer {
+            view.displayOffers(offer)
+        }
     }
     
     //MARK: Fail
@@ -329,18 +332,14 @@ extension PremiumPresenter: OptInControllerDelegate {
     }
 }
 
-// MARK: - PremiumViewDelegate
-extension PremiumPresenter: PremiumViewDelegate {
-    
-    func onBecomePremiumTap() {
+//MARK: - BecomePremiumViewDelegate
+
+extension PremiumPresenter: BecomePremiumViewDelegate {
+    func didSelectSubscriptionPlan(_ plan: SubscriptionPlan) {
         prepareForPurchase()
     }
     
-    func openLink(with url: URL) {
-        router.openLink(with: url)
-    }
-    
-    func showTermsOfUse() {
-        router.showTermsOfUse()
+    func didTapSeeAllPackages() {
+        router.showAllPackages()
     }
 }

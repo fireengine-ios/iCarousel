@@ -15,4 +15,5 @@ enum AuthorityType: String {
     case deleteDublicate    = "AUTH_DELETE_DUPLICATE"
     case premiumUser        = "AUTH_PREMIUM_USER"
     case middleUser         = "AUTH_MID_USER"
+    case originalCopy       = "AUTH_ORIGINAL_COPY"
 }
