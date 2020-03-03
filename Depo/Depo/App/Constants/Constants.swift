@@ -449,8 +449,10 @@ struct TextConstants {
     static let settingsViewCellPrivacyAndTerms = NSLocalizedString("terms_and_privacy_policy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellLogout = NSLocalizedString("Logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellPermissions = NSLocalizedString("Permissions", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
     static let settingsViewLogoutCheckMessage = NSLocalizedString("Are you sure you want to exit the application?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsUserInfoNameSurname = NSLocalizedString("settings_userinfo_name_surname", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsUserInfoEmail = NSLocalizedString("settings_userinfo_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsUserInfoPhone = NSLocalizedString("settings_userinfo_phone", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     // MARK: FAQ
     
