@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="B1g-4V-BbR" customClass="MobilePaymentPermissionView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQF-ge-P27">
+                    <rect key="frame" x="40" y="397" width="334" height="102"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PHK-db-mh9">
+                            <rect key="frame" x="0.0" y="0.0" width="334" height="102"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6d-VW-WPm">
+                                    <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3X-bO-Fs8">
+                                    <rect key="frame" x="0.0" y="50" width="334" height="0.0"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="mRk-YV-7K5">
+                                    <rect key="frame" x="0.0" y="50" width="334" height="22"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="82X-oH-cn1">
+                                            <rect key="frame" x="0.0" y="0.0" width="334" height="22"/>
+                                            <state key="normal" image="checkbox"/>
+                                            <connections>
+                                                <action selector="checkAction:" destination="B1g-4V-BbR" eventType="touchUpInside" id="hL7-yF-ScE"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWk-ad-XIv">
+                                            <rect key="frame" x="334" y="0.0" width="0.0" height="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Sbn-hs-3nE">
+                                    <rect key="frame" x="0.0" y="72" width="334" height="30"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMa-ig-FnC" customClass="RoundedInsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="334" height="30"/>
+                                            <connections>
+                                                <action selector="approveAction:" destination="B1g-4V-BbR" eventType="touchUpInside" id="Egk-3F-ytD"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="PHK-db-mh9" secondAttribute="trailing" id="DTp-Ff-nqT"/>
+                        <constraint firstItem="PHK-db-mh9" firstAttribute="top" secondItem="gQF-ge-P27" secondAttribute="top" id="N55-od-UzF"/>
+                        <constraint firstItem="PHK-db-mh9" firstAttribute="leading" secondItem="gQF-ge-P27" secondAttribute="leading" id="q0M-xP-FCV"/>
+                        <constraint firstAttribute="bottom" secondItem="PHK-db-mh9" secondAttribute="bottom" id="rN7-LG-aSl"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="gQF-ge-P27" firstAttribute="centerX" secondItem="B1g-4V-BbR" secondAttribute="centerX" id="0n9-wg-Ppx"/>
+                <constraint firstItem="Xzo-bT-F9o" firstAttribute="trailing" secondItem="gQF-ge-P27" secondAttribute="trailing" constant="40" id="10M-qx-BqM"/>
+                <constraint firstItem="gQF-ge-P27" firstAttribute="centerY" secondItem="B1g-4V-BbR" secondAttribute="centerY" id="PfL-kJ-WK0"/>
+                <constraint firstItem="gQF-ge-P27" firstAttribute="leading" secondItem="Xzo-bT-F9o" secondAttribute="leading" constant="40" id="pXu-Aq-QMq"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Xzo-bT-F9o"/>
+            <connections>
+                <outlet property="approvalFieldStackView" destination="mRk-YV-7K5" id="IIv-xh-fQT"/>
+                <outlet property="approveButton" destination="cMa-ig-FnC" id="ZLA-99-he3"/>
+                <outlet property="approveCheckbox" destination="82X-oH-cn1" id="H9r-8G-7vX"/>
+                <outlet property="approveStackView" destination="Sbn-hs-3nE" id="36w-4r-cA8"/>
+                <outlet property="descriptionLabel" destination="i3X-bO-Fs8" id="KMg-Pl-udA"/>
+                <outlet property="linkLabel" destination="LWk-ad-XIv" id="GCz-Ph-PbF"/>
+                <outlet property="mainStackView" destination="PHK-db-mh9" id="Uyw-1f-73Z"/>
+                <outlet property="titleLabel" destination="d6d-VW-WPm" id="72x-4D-Yao"/>
+            </connections>
+            <point key="canvasLocation" x="136.80000000000001" y="152.47376311844079"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="checkbox" width="18" height="18"/>
+    </resources>
+</document>

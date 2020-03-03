@@ -133,8 +133,8 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             debugLog("contactsSyncService.executeOperation finishCallback: \(result)")
             DispatchQueue.main.async {
                 self?.output?.success(response: result, forOperation: opertionType)
-                CardsManager.default.stopOperationWithType(type: .contactBacupOld)
-                CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
+                CardsManager.default.stopOperationWith(type: .contactBacupOld)
+                CardsManager.default.stopOperationWith(type: .contactBacupEmpty)
             }
         }, errorCallback: { [weak self] errorType, opertionType in
             self?.trackNetmera(operationType: type, status: .failure)

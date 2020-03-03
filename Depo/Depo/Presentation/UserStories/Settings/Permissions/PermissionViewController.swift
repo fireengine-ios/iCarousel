@@ -6,6 +6,11 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
+protocol MobilePaymentPermissionProtocol: class {
+    func approveTapped()
+    func backTapped(url: String)
+}
+
 final class PermissionViewController: ViewController, ControlTabBarProtocol {
     private let accountService = AccountService()
     
@@ -37,18 +42,24 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
         return permissionView
     }()
     
+    private lazy var mobilePaymentPermissionView: UIView & PermissionsViewProtocol = {
+        let permissionView = PermissionsView.initFromNib()
+        permissionView.type = .mobilePayment
+        permissionView.delegate = self
+        return permissionView
+    }()
+    
+    //MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupScreen()
         setupLayout()
-        
         checkPermissionState()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         navigationBarWithGradientStyle()
         hideTabBar()
     }
@@ -80,6 +91,7 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
                 case .success(let result):
                     self?.setupPermissionViewFromResult(result, type: .etk)
                     self?.setupPermissionViewFromResult(result, type: .globalPermission)
+                    self?.setupPermissionViewFromResult(result, type: .mobilePayment)
                 case .failed(let error):
                     UIApplication.showErrorAlert(message: error.description)
                 }
@@ -100,7 +112,9 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
         let isPendingApproval = (permission.isApprovalPending == true)
         let isOn = (permission.isApproved == true)
         permissionView.turnPermissionOn(isOn: isOn, isPendingApproval: isPendingApproval)
-        
+        if type == .mobilePayment {
+            permissionView.urlString = permission.eulaURL
+        }
         stackView.addArrangedSubview(permissionView)
     }
     
@@ -108,32 +122,40 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
         switch type {
         case .etk:
             return etkPermissionView
-            
         case .globalPermission:
             return globalPermissionView
-            
+        case .mobilePayment:
+            return mobilePaymentPermissionView
         }
     }
     
-    private func openTurkcellAndGroupCompanies() {
-        let vc = WebViewController(urlString: RouteRequests.turkcellAndGroupCompanies)
-        RouterVC().pushViewController(viewController: vc)
-    }
-    
-    private func openCommercialEmailMessages() {
-        let vc = FullscreenTextController(text: TextConstants.commercialEmailMessages)
-        RouterVC().pushViewController(viewController: vc)
-    }
 }
 
 //MARK: - PermissionViewDelegate
 extension PermissionViewController: PermissionViewDelegate {
     func permissionsView(_ permissionView: PermissionsView, didChangeValue isOn: Bool) {
+        guard let type = permissionView.type else {
+            permissionView.togglePermissionSwitch()
+            return
+        }
+        switch type {
+        case .mobilePayment:
+            switch isOn {
+            case true:
+                showWarningPopUp()
+            case false:
+                let url = permissionView.urlString
+                routeMobilePaymentPermission(url: url)
+            }
+        default:
+            changePermissionsAllowed(permissionView: permissionView, type: type, isOn: isOn)
+        }
+    }
+    
+    private func changePermissionsAllowed(permissionView: PermissionsView, type: PermissionType, isOn: Bool) {
         activityManager.start()
-        
-        accountService.changePermissionsAllowed(type: permissionView.type, isApproved: isOn) { [weak self] response in
+        accountService.changePermissionsAllowed(type: type, isApproved: isOn) { [weak self] response in
             self?.activityManager.stop()
-            
             switch response {
             case .success(_):
                 self?.checkPermissionState()
@@ -142,6 +164,16 @@ extension PermissionViewController: PermissionViewDelegate {
                 UIApplication.showErrorAlert(message: error.description)
             }
         }
+    }
+    
+    private func showWarningPopUp() {
+        let plainMessage = TextConstants.mobilePaymentClosePopupDescriptionLabel
+        let range = (plainMessage as NSString).range(of: TextConstants.mobilePaymentClosePopupDescriptionBoldRangeLabel)
+        let attributeMessage = NSMutableAttributedString(string: plainMessage)
+        let attribute = [NSAttributedString.Key.font : UIFont.TurkcellSaturaDemFont(size: 16), NSAttributedString.Key.strokeColor : ColorConstants.marineTwo]
+        attributeMessage.addAttributes(attribute, range: range)
+        let popup = PopUpController.with(title: TextConstants.mobilePaymentClosePopupTitleLabel, attributedMessage: attributeMessage, image: .none, buttonTitle: TextConstants.ok)
+        UIApplication.topController()?.present(popup, animated: false, completion: nil)
     }
 }
 
@@ -162,4 +194,38 @@ extension PermissionViewController: PermissionViewTextViewDelegate {
         }
         return true
     }
+}
+
+//MARK: - Router
+extension PermissionViewController {
+    
+    private func openTurkcellAndGroupCompanies() {
+        let vc = WebViewController(urlString: RouteRequests.turkcellAndGroupCompanies)
+        RouterVC().pushViewController(viewController: vc)
+    }
+    
+    private func openCommercialEmailMessages() {
+        let vc = FullscreenTextController(text: TextConstants.commercialEmailMessages)
+        RouterVC().pushViewController(viewController: vc)
+    }
+    
+    private func routeMobilePaymentPermission(url: String?) {
+        let router = RouterVC()
+        let viewController = router.mobilePaymentPermissionController()
+        viewController.urlString = url
+        viewController.delegate = self
+        router.pushViewController(viewController: viewController)
+    }
+    
+}
+
+extension PermissionViewController: MobilePaymentPermissionProtocol {
+    
+    func approveTapped() {
+        navigationController?.popViewController(animated: true)
+        changePermissionsAllowed(permissionView: mobilePaymentPermissionView as! PermissionsView, type: .mobilePayment, isOn: true)
+    }
+    
+    func backTapped(url: String) {}
+    
 }
