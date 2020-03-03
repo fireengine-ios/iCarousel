@@ -32,10 +32,9 @@ protocol SettingsDelegate: class {
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needPopPasscodeEnterVC: Bool)
 }
 
-class SettingsViewController: BaseViewController {
-    @IBOutlet weak var tableView: UITableView!
+final class SettingsViewController: BaseViewController {
+    @IBOutlet private weak var tableView: UITableView!
     
-    var tableDataArray = [[String]]()
     var output: SettingsViewOutput!
 
     private let userInfoSubView = UserInfoSubViewModuleInitializer.initializeViewController()
@@ -105,7 +104,7 @@ class SettingsViewController: BaseViewController {
         }
     }
     
-    var cellTypes: [[SettingsCellType.AllSectionTypes]] = []
+    private var cellTypes: [[SettingsCellType.AllSectionTypes]] = []
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -192,10 +191,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if section == cellTypes.count - 1 {
-            return SettingHeaderView.viewFromNib()
+        guard section == cellTypes.count - 1 else {
+            return nil
         }
-        return nil
+        return SettingHeaderView.viewFromNib()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -380,7 +379,7 @@ extension SettingsViewController: SettingsViewInput {
                                       message: error.description,
                                       image: .error,
                                       buttonTitle: TextConstants.ok)
-        present(vc, animated: true, completion: nil)
+        present(vc, animated: true)
         userInfoSubView.dismissLoadingSpinner()
     }
     
@@ -392,21 +391,20 @@ extension SettingsViewController: SettingsViewInput {
     
     private func getProfileAlertSheet(userInfo: AccountInfoResponse, isProfileAlert: Bool) -> UIAlertController {
         let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: nil)
-        var firstAlertAction: UIAlertAction?
-        var secondAlertAction: UIAlertAction?
+        var firstAlertAction: UIAlertAction!
+        var secondAlertAction: UIAlertAction!
         
-        switch isProfileAlert {
-        case true:
+        if isProfileAlert {
             firstAlertAction = getProfileDetailAction(userInfo: userInfo)
             secondAlertAction = getEditPhotoAction(userInfo: userInfo)
-        case false:
+        } else {
             firstAlertAction = getCameraAction()
             secondAlertAction = getLibraryAction()
             isFromPhotoPicker = true
         }
         
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionSheetVC.addActions(cancellAction, firstAlertAction ?? getCameraAction(), secondAlertAction ?? getLibraryAction())
+        actionSheetVC.addActions(cancellAction, firstAlertAction, secondAlertAction)
         actionSheetVC.popoverPresentationController?.sourceView = view
         
         let originPoint = CGPoint(x: Device.winSize.width / 2 - actionSheetVC.preferredContentSize.width / 2,
@@ -414,7 +412,7 @@ extension SettingsViewController: SettingsViewInput {
         
         let sizePoint = actionSheetVC.preferredContentSize
         actionSheetVC.popoverPresentationController?.sourceRect = CGRect(origin: originPoint, size: sizePoint)
-        actionSheetVC.popoverPresentationController?.permittedArrowDirections = .init(rawValue: 0) // means no arrow
+        actionSheetVC.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
         
         return actionSheetVC
     }

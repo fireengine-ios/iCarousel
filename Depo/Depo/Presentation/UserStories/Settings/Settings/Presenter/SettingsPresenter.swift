@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class SettingsPresenter: BasePresenter {
+final class SettingsPresenter: BasePresenter {
     
     weak var view: SettingsViewInput!
     var interactor: SettingsInteractorInput!
