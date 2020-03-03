@@ -13,7 +13,19 @@ final class SubscriptionsPolicyView: UIView {
     private let policyHeaderSize: CGFloat = Device.isIpad ? 15 : 13
     private let policyTextSize: CGFloat = Device.isIpad ? 13 : 10
     
-    private var policyTextView: UITextView!
+    private lazy var policyTextView: UITextView = {
+        let textView = UITextView(frame: bounds)
+        
+        textView.clipsToBounds = true
+        textView.layer.cornerRadius = 5
+        textView.layer.borderColor = ColorConstants.textLightGrayColor.cgColor
+        textView.layer.borderWidth = 1
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        textView.backgroundColor = .clear
+        
+        return textView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,7 +38,6 @@ final class SubscriptionsPolicyView: UIView {
     }
     
     private func setupPolicy() {
-        policyTextView = UITextView(frame: bounds)
         addSubview(policyTextView)
         policyTextView.translatesAutoresizingMaskIntoConstraints = false
         policyTextView.pinToSuperviewEdges()
@@ -48,14 +59,7 @@ final class SubscriptionsPolicyView: UIView {
         attributedString.append(termsAttributedString)
         
         policyTextView.attributedText = attributedString
-        policyTextView.clipsToBounds = true
-        policyTextView.layer.cornerRadius = 5
-        policyTextView.layer.borderColor = ColorConstants.textLightGrayColor.cgColor
-        policyTextView.layer.borderWidth = 1
         policyTextView.delegate = self
-        policyTextView.isScrollEnabled = false
-        policyTextView.isEditable = false
-        policyTextView.backgroundColor = .clear
         
         layoutIfNeeded()
     }
@@ -64,7 +68,6 @@ final class SubscriptionsPolicyView: UIView {
 // MARK: - UITextViewDelegate
 extension SubscriptionsPolicyView: UITextViewDelegate {
     
-    @available(iOS 10.0, *)
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         if URL.absoluteString == TextConstants.NotLocalized.termsOfUseLink {
             let router = RouterVC()
