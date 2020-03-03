@@ -138,7 +138,7 @@ final class SettingsInteractor: SettingsInteractorInput {
                     self?.didRecieveDataForCells()
 
                 case .failed(let error):
-                    self?.didRecieveDataForCells()
+
                     self?.output.didFailToObtainUserStatus(errorMessage: error.localizedDescription)
                     
                 }

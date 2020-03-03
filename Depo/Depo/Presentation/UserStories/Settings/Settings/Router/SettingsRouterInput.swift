@@ -51,4 +51,7 @@ protocol SettingsRouterInput {
     func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?)
     
     func showError(errorMessage: String)
+    
+    func presentAlertSheet(alertController: UIAlertController)
+    
 }

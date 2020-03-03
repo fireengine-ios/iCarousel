@@ -84,11 +84,11 @@ final class SettingsViewController: BaseViewController {
         static let allSectionFourTypes = [helpAndSupport, termsAndPolicy, logout]
     }
     
-     private var cellTypes = [[AllSectionTypes]]() {
-           didSet {
-               tableView?.reloadData()
-           }
-       }
+    private var cellTypes = [[AllSectionTypes]]() {
+        didSet {
+            tableView?.reloadData()
+        }
+    }
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -206,31 +206,32 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             let settingsSection = cellTypes[safe: indexPath.section],
             let cellType = settingsSection[safe: indexPath.row]
         else {
+            assertionFailure()
             return
         }
         
         switch cellType {
         case .contactSync:
-            if settingsDelegate != nil {
-                settingsDelegate!.goToContactSync()
+            if let delegate = settingsDelegate {
+                delegate.goToContactSync()
             } else {
                 output.goToContactSync()
             }
         case .autoUpload:
-            if settingsDelegate != nil {
-                settingsDelegate!.goToAutoUpload()
+            if let delegate = settingsDelegate {
+                delegate.goToAutoUpload()
             } else {
                 output.goToAutoApload()
             }
         case .periodicContactSync:
-            if settingsDelegate != nil {
-                settingsDelegate?.goToPeriodicContactSync()
+            if let delegate = settingsDelegate {
+                delegate.goToPeriodicContactSync()
             } else {
                 output.goToPeriodicContactSync()
             }
         case .faceImage:
-            if settingsDelegate != nil {
-                settingsDelegate?.goToFaceImage()
+            if let delegate = settingsDelegate {
+                delegate.goToFaceImage()
             } else {
                 output.goToFaceImage()
             }
@@ -248,14 +249,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 output.goToPermissions()
             }
         case .myActivities:
-            if settingsDelegate != nil {
-                settingsDelegate!.goToActivityTimeline()
+            if let delegate = settingsDelegate {
+                delegate.goToActivityTimeline()
             } else {
                 output.goToActivityTimeline()
             }
         case .usageInfo:
-            if let settingsDelegate = settingsDelegate {
-                settingsDelegate.goToUsageInfo()
+            if let delegate = settingsDelegate {
+                delegate.goToUsageInfo()
             } else {
                 output.goToUsageInfo()
             }
@@ -264,14 +265,14 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         case .security:
             output.goTurkcellSecurity()
         case .helpAndSupport:
-            if let settingsDelegate = settingsDelegate {
-                settingsDelegate.goToHelpAndSupport()
+            if let delegate = settingsDelegate {
+                delegate.goToHelpAndSupport()
             } else {
                 output.goToHelpAndSupport()
             }
         case .termsAndPolicy:
-            if let settingsDelegate = settingsDelegate {
-                settingsDelegate.goToTermsAndPolicy()
+            if let delegate = settingsDelegate {
+                delegate.goToTermsAndPolicy()
             } else {
                 output.goToTermsAndPolicy()
             }
@@ -335,7 +336,7 @@ extension SettingsViewController: SettingsViewInput {
     
     func showProfileAlertSheet(userInfo: AccountInfoResponse, isProfileAlert: Bool) {
         let actionSheetVC = getProfileAlertSheet(userInfo: userInfo, isProfileAlert: isProfileAlert)
-        present(actionSheetVC, animated: true)
+        output.presentActionSheet(alertController: actionSheetVC)
     }
     
     func updatePhoto(image: UIImage) {
@@ -347,11 +348,7 @@ extension SettingsViewController: SettingsViewInput {
     }
     
     func profileWontChangeWith(error: Error) {
-        let vc = PopUpController.with(title: TextConstants.errorAlert,
-                                      message: error.description,
-                                      image: .error,
-                                      buttonTitle: TextConstants.ok)
-        present(vc, animated: true)
+        output.presentErrorMessage(errorMessage: error.description)
         userInfoSubView.dismissLoadingSpinner()
     }
     

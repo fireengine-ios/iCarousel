@@ -53,6 +53,10 @@ protocol SettingsViewOutput {
     
     func goToMyProfile(userInfo: AccountInfoResponse)
     
+    func presentErrorMessage(errorMessage: String)
+    
+    func presentActionSheet(alertController: UIAlertController)
+    
     var isPasscodeEmpty: Bool { get }
     
     var isPremiumUser: Bool { get }

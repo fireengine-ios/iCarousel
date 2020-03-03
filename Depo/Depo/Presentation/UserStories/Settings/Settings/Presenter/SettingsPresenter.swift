@@ -45,7 +45,7 @@ final class SettingsPresenter: BasePresenter {
     
 }
 
-// MARK: -SettingsViewOutput
+// MARK: - SettingsViewOutput
 extension SettingsPresenter: SettingsViewOutput {
     
     func viewIsReady() {
@@ -159,9 +159,17 @@ extension SettingsPresenter: SettingsViewOutput {
         router.goToUserInfo(userInfo: userInfo)
     }
     
+    func presentErrorMessage(errorMessage: String) {
+        router.showError(errorMessage: errorMessage)
+    }
+    
+    func presentActionSheet(alertController: UIAlertController) {
+        router.presentAlertSheet(alertController: alertController)
+    }
+    
 }
 
-// MARK: -SettingsInteractorOutput
+// MARK: - SettingsInteractorOutput
 extension SettingsPresenter: SettingsInteractorOutput {
     
     func cellsDataForSettings(isPermissionShown: Bool) {
@@ -209,10 +217,10 @@ extension SettingsPresenter: SettingsInteractorOutput {
     
 }
 
-// MARK: -SettingsModuleInput
+// MARK: - SettingsModuleInput
 extension SettingsPresenter: SettingsModuleInput { }
 
-// MARK: -MailVerificationViewControllerDelegate
+// MARK: - MailVerificationViewControllerDelegate
 extension SettingsPresenter: MailVerificationViewControllerDelegate {
     func mailVerified(mail: String) {
         mailUpdated(mail: mail)

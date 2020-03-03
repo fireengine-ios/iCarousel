@@ -115,4 +115,9 @@ class SettingsRouter: SettingsRouterInput {
     func showError(errorMessage: String) {
         UIApplication.showErrorAlert(message: errorMessage)
     }
+    
+    func presentAlertSheet(alertController: UIAlertController) {
+        router.presentViewController(controller: alertController)
+    }
+    
 }
