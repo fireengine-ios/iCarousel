@@ -131,8 +131,7 @@ extension CommonDivorceActionService: DivorceActionRoutingProtocol {
     }
 
     func openPremium() {
-        let controller = router.premium(title: TextConstants.lifeboxPremium,
-                                        headerTitle: TextConstants.becomePremiumMember)
+        let controller = router.premium()
         push(controller: controller)
     }
 

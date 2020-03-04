@@ -16,8 +16,7 @@ final class PremiumPresenter {
     
     weak var moduleOutput: FaceImageItemsModuleOutput?
     
-    var title: String
-    var headerTitle: String
+    private let source: BecomePremiumView.SourceType
     var authority: AuthorityType = .premiumUser
     var accountType: AccountType = .all
     
@@ -33,15 +32,14 @@ final class PremiumPresenter {
     
     private let paymentTypes: [FeaturePackageType] = [.SLCMFeature, .appleFeature, .paycellSLCMFeature, .allAccessPaycellFeature]
     
-    init(title: String, headerTitle: String, authority: AuthorityType?, module: FaceImageItemsModuleOutput?) {
-        self.title = title
-        self.headerTitle = headerTitle
+    init(authority: AuthorityType?, source: BecomePremiumView.SourceType, module: FaceImageItemsModuleOutput?) {
         if let authority = authority {
             self.authority = authority
         }
         if let module = module {
             moduleOutput = module
         }
+        self.source = source
     }
     
     //MARK: Utility Methods(public)
@@ -184,6 +182,7 @@ extension PremiumPresenter: PremiumViewOutput {
     
     func onViewDidLoad(with premiumView: BecomePremiumView) {
         view.startActivityIndicator()
+        premiumView.source = source
         premiumView.delegate = self
         interactor.getAccountType()
         interactor.trackScreen()

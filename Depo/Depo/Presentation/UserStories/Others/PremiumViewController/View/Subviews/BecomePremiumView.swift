@@ -15,6 +15,14 @@ protocol BecomePremiumViewDelegate: class {
 
 final class BecomePremiumView: UIView, NibInit {
 
+    enum SourceType {
+        case people
+        case places
+        case things
+        case contactSync
+        case `default`
+    }
+    
     @IBOutlet private weak var scrollView: UIScrollView! {
         willSet {
             newValue.backgroundColor = ColorConstants.lighterGray
@@ -30,7 +38,7 @@ final class BecomePremiumView: UIView, NibInit {
     
     @IBOutlet private weak var headerTitleLabel: UILabel! {
         willSet {
-            newValue.text = TextConstants.becomePremiumHeaderTitle
+            newValue.text = ""
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)
             newValue.textColor = ColorConstants.marineTwo
             newValue.textAlignment = .center
@@ -39,7 +47,7 @@ final class BecomePremiumView: UIView, NibInit {
     
     @IBOutlet private weak var headerSubtitleLabel: UILabel! {
         willSet {
-            newValue.text = TextConstants.becomePremiumHeaderSubtitle
+            newValue.text = ""
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 16)
             newValue.textColor = .lrLightBrownishGrey
             newValue.textAlignment = .center
@@ -92,6 +100,12 @@ final class BecomePremiumView: UIView, NibInit {
     
     private var plans = [SubscriptionPlan]()
     weak var delegate: BecomePremiumViewDelegate?
+    var source = SourceType.default {
+        didSet {
+            headerTitleLabel.text = source.title
+            headerSubtitleLabel.text = source.subtitle
+        }
+    }
     
     //MARK: - Setup
     
@@ -141,6 +155,8 @@ final class BecomePremiumView: UIView, NibInit {
     }
 }
 
+//MARK: - SubscriptionOfferViewDelegate
+
 extension BecomePremiumView: SubscriptionOfferViewDelegate {
     func didPressSubscriptionPlanButton(planIndex: Int) {
         guard let plan = plans[safe: planIndex] else {
@@ -148,5 +164,39 @@ extension BecomePremiumView: SubscriptionOfferViewDelegate {
         }
         
         delegate?.didSelectSubscriptionPlan(plan)
+    }
+}
+
+//MARK: - SourceType Strings
+
+extension BecomePremiumView.SourceType {
+    var title: String {
+        switch self {
+        case .people:
+            return TextConstants.becomePremiumHeaderPeopleTitle
+        case .places:
+            return TextConstants.becomePremiumHeaderPlacesTitle
+        case .things:
+            return TextConstants.becomePremiumHeaderThingsTitle
+        case .contactSync:
+            return TextConstants.becomePremiumHeaderContactSyncTitle
+        default:
+            return TextConstants.becomePremiumHeaderDefaultTitle
+        }
+    }
+    
+    var subtitle: String {
+        switch self {
+        case .people:
+            return TextConstants.becomePremiumHeaderPeopleSubtitle
+        case .places:
+            return TextConstants.becomePremiumHeaderPlacesSubtitle
+        case .things:
+            return TextConstants.becomePremiumHeaderThingsSubtitle
+            case .contactSync:
+            return TextConstants.becomePremiumHeaderContactSyncSubtitle
+        default:
+            return TextConstants.becomePremiumHeaderDefaultSubtitle
+        }
     }
 }
