@@ -33,6 +33,7 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     
     weak var delegate: PermissionViewDelegate?
     weak var textviewDelegate: PermissionViewTextViewDelegate?
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     var type: PermissionType? {
         didSet {
@@ -46,6 +47,7 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
     @IBAction func permissionSwitchTapped(_ sender: UISwitch) {
         switch type {
         case .mobilePayment:
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .openMobilePaymentPermission, eventLabel: .isOn(sender.isOn))
             sender.isOn = !sender.isOn
         default: break
         }

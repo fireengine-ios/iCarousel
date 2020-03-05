@@ -99,19 +99,16 @@ final class MobilePaymentPermissionView: UIView, NibInit {
 // MARK: Actions
 extension MobilePaymentPermissionView {
     
-    // MARK: Checkbox Tap Action
     @IBAction private func checkAction(_ sender: UIButton) {
         sender.isSelected.toggle()
         approveButton.isEnabled = sender.isSelected
         approveButton.alpha = sender.isSelected ? 1.0 : 0.5
     }
     
-    // MARK: Approve Button Tap Action
     @IBAction private func approveAction(_ sender: Any) {
         approveCheckbox.isSelected ? controller?.approveTapped() : ()
     }
     
-    // MARK: Link Label Tap Gesture
     @objc private func linkTapped() {
         controller?.linkTapped()
     }

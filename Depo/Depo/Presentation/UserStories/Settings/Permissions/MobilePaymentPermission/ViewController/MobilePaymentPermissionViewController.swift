@@ -12,6 +12,9 @@ final class MobilePaymentPermissionViewController: ViewController, NibInit, Cont
     
     weak var delegate: MobilePaymentPermissionProtocol?
     var urlString: String?
+    private var isChecked: Bool = false
+    
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     // MARK: Life Cycle
     
@@ -44,12 +47,17 @@ final class MobilePaymentPermissionViewController: ViewController, NibInit, Cont
             return
         }
         delegate?.backTapped(url: url)
+        trackGAEvent(eventLabel: .back(isChecked))
     }
     
 }
 
 // MARK: Mobile Payment Permission View Delegate
 extension MobilePaymentPermissionViewController: MobilePaymentPermissionViewInput {
+    
+    func checkBoxDidChange(isChecked: Bool) {
+        self.isChecked = isChecked
+    }
     
     func linkTapped() {
         guard let urlstring = urlString else {
@@ -61,6 +69,11 @@ extension MobilePaymentPermissionViewController: MobilePaymentPermissionViewInpu
     
     func approveTapped() {
         delegate?.approveTapped()
+        trackGAEvent(eventLabel: .confirm)
+    }
+    
+    private func trackGAEvent(eventLabel: GAEventLabel) {
+        self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .mobilePaymentExplanation, eventLabel: eventLabel)
     }
     
 }
