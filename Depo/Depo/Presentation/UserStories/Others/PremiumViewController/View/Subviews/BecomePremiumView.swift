@@ -14,7 +14,7 @@ protocol BecomePremiumViewDelegate: class {
 }
 
 final class BecomePremiumView: UIView, NibInit {
-
+    
     @IBOutlet private weak var scrollView: UIScrollView! {
         willSet {
             newValue.backgroundColor = ColorConstants.lighterGray
@@ -30,7 +30,7 @@ final class BecomePremiumView: UIView, NibInit {
     
     @IBOutlet private weak var headerTitleLabel: UILabel! {
         willSet {
-            newValue.text = TextConstants.becomePremiumHeaderTitle
+            newValue.text = ""
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 20)
             newValue.textColor = ColorConstants.marineTwo
             newValue.textAlignment = .center
@@ -39,7 +39,7 @@ final class BecomePremiumView: UIView, NibInit {
     
     @IBOutlet private weak var headerSubtitleLabel: UILabel! {
         willSet {
-            newValue.text = TextConstants.becomePremiumHeaderSubtitle
+            newValue.text = ""
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 16)
             newValue.textColor = .lrLightBrownishGrey
             newValue.textAlignment = .center
@@ -92,6 +92,12 @@ final class BecomePremiumView: UIView, NibInit {
     
     private var plans = [SubscriptionPlan]()
     weak var delegate: BecomePremiumViewDelegate?
+    var source = BecomePremiumViewSourceType.default {
+        didSet {
+            headerTitleLabel.text = source.title
+            headerSubtitleLabel.text = source.subtitle
+        }
+    }
     
     //MARK: - Setup
     
@@ -140,6 +146,8 @@ final class BecomePremiumView: UIView, NibInit {
         delegate?.didTapSeeAllPackages()
     }
 }
+
+//MARK: - SubscriptionOfferViewDelegate
 
 extension BecomePremiumView: SubscriptionOfferViewDelegate {
     func didPressSubscriptionPlanButton(planIndex: Int) {

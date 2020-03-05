@@ -215,7 +215,7 @@ extension InstaPickRoutingService {
     static func openPremium() {
         let router = RouterVC()
         
-        let controller = router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
+        let controller = router.premium()
         router.pushViewController(viewController: controller)
     }
 }

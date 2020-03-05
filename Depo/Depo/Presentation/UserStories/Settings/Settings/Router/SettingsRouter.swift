@@ -70,7 +70,7 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func goToPremium() {
-        router.pushViewController(viewController: router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
+        router.pushViewController(viewController: router.premium())
     }
     
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needReplaceOfCurrentController: Bool) {

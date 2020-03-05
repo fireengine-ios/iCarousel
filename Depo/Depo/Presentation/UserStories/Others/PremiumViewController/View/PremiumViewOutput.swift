@@ -10,8 +10,5 @@ import Foundation
 
 protocol PremiumViewOutput {
     func onViewDidLoad(with premiumView: BecomePremiumView)
-    
-    var title: String { get }
-    var headerTitle: String { get }
     var accountType: AccountType { get }
 }

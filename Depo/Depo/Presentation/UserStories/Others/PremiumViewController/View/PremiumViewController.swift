@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class PremiumViewController: BaseViewController {
+final class PremiumViewController: BaseViewController, NibInit {
     
     var output: PremiumViewOutput!
     private lazy var activityManager = ActivityIndicatorManager()
