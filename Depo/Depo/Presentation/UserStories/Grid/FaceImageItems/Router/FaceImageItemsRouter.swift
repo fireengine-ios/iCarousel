@@ -33,7 +33,7 @@ extension FaceImageItemsRouter: FaceImageItemsRouterInput {
         router.presentViewController(controller: alert)
     }
     
-    func openPremium(source: BecomePremiumView.SourceType, module: FaceImageItemsModuleOutput) {
+    func openPremium(source: BecomePremiumViewSourceType, module: FaceImageItemsModuleOutput) {
         let vc = router.premium(source: source, module: module)
         router.pushViewController(viewController: vc)
     }

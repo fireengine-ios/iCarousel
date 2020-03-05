@@ -10,7 +10,7 @@ import Foundation
 
 final class PremiumModuleInitializer: NSObject {
     
-    class func initializePremiumController(source: BecomePremiumView.SourceType, module: FaceImageItemsModuleOutput?, viewControllerForPresentOn: UIViewController?) -> UIViewController {
+    class func initializePremiumController(source: BecomePremiumViewSourceType, module: FaceImageItemsModuleOutput?, viewControllerForPresentOn: UIViewController?) -> UIViewController {
         let viewController = PremiumViewController.initFromNib()
         let configurator = PremiumModuleConfigurator()
         configurator.configure(viewController: viewController, source: source, module: module, viewControllerForPresentOn:viewControllerForPresentOn )

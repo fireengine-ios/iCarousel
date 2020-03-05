@@ -46,7 +46,7 @@ enum FaceImageType {
         }
     }
     
-    var premiumType: BecomePremiumView.SourceType {
+    var premiumType: BecomePremiumViewSourceType {
         switch self {
         case .people:
             return .people

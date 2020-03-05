@@ -12,7 +12,7 @@ final class PremiumModuleConfigurator {
     
     func configure(viewController: PremiumViewController,
                    authority: AuthorityType? = nil,
-                   source: BecomePremiumView.SourceType,
+                   source: BecomePremiumViewSourceType,
                    module: FaceImageItemsModuleOutput?,
                    viewControllerForPresentOn: UIViewController? = nil) {
         let router = PremiumRouter(viewControllerForPresentOn: viewControllerForPresentOn)

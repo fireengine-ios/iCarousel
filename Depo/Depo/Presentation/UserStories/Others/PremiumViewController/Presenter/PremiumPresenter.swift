@@ -16,7 +16,7 @@ final class PremiumPresenter {
     
     weak var moduleOutput: FaceImageItemsModuleOutput?
     
-    private let source: BecomePremiumView.SourceType
+    private let source: BecomePremiumViewSourceType
     var authority: AuthorityType = .premiumUser
     var accountType: AccountType = .all
     
@@ -32,7 +32,7 @@ final class PremiumPresenter {
     
     private let paymentTypes: [FeaturePackageType] = [.SLCMFeature, .appleFeature, .paycellSLCMFeature, .allAccessPaycellFeature]
     
-    init(authority: AuthorityType?, source: BecomePremiumView.SourceType, module: FaceImageItemsModuleOutput?) {
+    init(authority: AuthorityType?, source: BecomePremiumViewSourceType, module: FaceImageItemsModuleOutput?) {
         if let authority = authority {
             self.authority = authority
         }

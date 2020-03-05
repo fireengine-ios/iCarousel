@@ -1038,7 +1038,7 @@ class RouterVC: NSObject {
     
     // MARK: - Premium
     
-    func premium(source: BecomePremiumView.SourceType = .default, module: FaceImageItemsModuleOutput? = nil, viewControllerForPresentOn: UIViewController? = nil) -> UIViewController{
+    func premium(source: BecomePremiumViewSourceType = .default, module: FaceImageItemsModuleOutput? = nil, viewControllerForPresentOn: UIViewController? = nil) -> UIViewController{
         let controller = PremiumModuleInitializer.initializePremiumController(source: source, module: module, viewControllerForPresentOn: viewControllerForPresentOn)
         return controller
     }

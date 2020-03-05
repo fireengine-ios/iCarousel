@@ -14,14 +14,6 @@ protocol BecomePremiumViewDelegate: class {
 }
 
 final class BecomePremiumView: UIView, NibInit {
-
-    enum SourceType {
-        case people
-        case places
-        case things
-        case contactSync
-        case `default`
-    }
     
     @IBOutlet private weak var scrollView: UIScrollView! {
         willSet {
@@ -100,7 +92,7 @@ final class BecomePremiumView: UIView, NibInit {
     
     private var plans = [SubscriptionPlan]()
     weak var delegate: BecomePremiumViewDelegate?
-    var source = SourceType.default {
+    var source = BecomePremiumViewSourceType.default {
         didSet {
             headerTitleLabel.text = source.title
             headerSubtitleLabel.text = source.subtitle
@@ -164,39 +156,5 @@ extension BecomePremiumView: SubscriptionOfferViewDelegate {
         }
         
         delegate?.didSelectSubscriptionPlan(plan)
-    }
-}
-
-//MARK: - SourceType Strings
-
-extension BecomePremiumView.SourceType {
-    var title: String {
-        switch self {
-        case .people:
-            return TextConstants.becomePremiumHeaderPeopleTitle
-        case .places:
-            return TextConstants.becomePremiumHeaderPlacesTitle
-        case .things:
-            return TextConstants.becomePremiumHeaderThingsTitle
-        case .contactSync:
-            return TextConstants.becomePremiumHeaderContactSyncTitle
-        default:
-            return TextConstants.becomePremiumHeaderDefaultTitle
-        }
-    }
-    
-    var subtitle: String {
-        switch self {
-        case .people:
-            return TextConstants.becomePremiumHeaderPeopleSubtitle
-        case .places:
-            return TextConstants.becomePremiumHeaderPlacesSubtitle
-        case .things:
-            return TextConstants.becomePremiumHeaderThingsSubtitle
-            case .contactSync:
-            return TextConstants.becomePremiumHeaderContactSyncSubtitle
-        default:
-            return TextConstants.becomePremiumHeaderDefaultSubtitle
-        }
     }
 }
