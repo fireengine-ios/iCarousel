@@ -46,6 +46,7 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
         let permissionView = PermissionsView.initFromNib()
         permissionView.type = .mobilePayment
         permissionView.delegate = self
+        permissionView.textviewDelegate = self
         return permissionView
     }()
     
