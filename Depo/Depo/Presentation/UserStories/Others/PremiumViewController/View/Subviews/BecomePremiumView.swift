@@ -48,17 +48,12 @@ final class BecomePremiumView: UIView, NibInit {
         }
     }
     
-    @IBOutlet private weak var descriptionLabel: UILabel! {
-        willSet {
-            newValue.text = TextConstants.becomePremiumDescription
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)
-            newValue.textColor = ColorConstants.marineTwo
-            newValue.textAlignment = .center
-            newValue.numberOfLines = 0
-            newValue.lineBreakMode = .byWordWrapping
-            newValue.backgroundColor = ColorConstants.lighterGray
-        }
-    }
+    private lazy var descriptionStackView: UIStackView = {
+        let newValue = UIStackView()
+        newValue.axis = .vertical
+        newValue.spacing = 3
+        return newValue
+    }()
     
     private lazy var policyView = SubscriptionsPolicyView()
     
@@ -110,6 +105,9 @@ final class BecomePremiumView: UIView, NibInit {
         
         contentView.arrangedSubviews.forEach { contentView.removeArrangedSubview($0) }
         
+        let features = plans.flatMap { $0.features }.removingDuplicates()
+        addDescription(features)
+        
         for (index, plan) in plans.enumerated() {
             if index > 0 {
                 contentView.addArrangedSubview(orLabel)
@@ -138,6 +136,26 @@ final class BecomePremiumView: UIView, NibInit {
         
         contentView.addArrangedSubview(seeAllPackagesButton)
         contentView.addArrangedSubview(policyView)
+    }
+    
+    private func addDescription(_ features: [AuthorityType]) {
+        guard !features.isEmpty else {
+            return
+        }
+        
+        features.forEach { feature in
+            let label = UILabel()
+            label.text = feature.description
+            label.font = UIFont.TurkcellSaturaMedFont(size: 18)
+            label.textColor = ColorConstants.marineTwo
+            label.textAlignment = .center
+            label.numberOfLines = 0
+            label.lineBreakMode = .byWordWrapping
+            descriptionStackView.addArrangedSubview(label)
+        }
+        
+        descriptionStackView.widthAnchor.constraint(equalToConstant: 200).activate()
+        contentView.addArrangedSubview(descriptionStackView)
     }
     
     //MARK: - Actions
