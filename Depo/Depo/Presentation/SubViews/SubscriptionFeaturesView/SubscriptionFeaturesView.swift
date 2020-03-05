@@ -112,7 +112,7 @@ final class SubscriptionFeaturesView: UIView {
     private func addFeatures(_ features: [AuthorityType]) {
         for feature in features {
             let label = UILabel()
-            label.text = description(forFeature: feature)
+            label.text = feature.description
             label.font = UIFont.TurkcellSaturaFont(size: 16)
             label.textColor = ColorConstants.darkText
             label.textAlignment = .center
@@ -125,25 +125,6 @@ final class SubscriptionFeaturesView: UIView {
             .forEach {
                 stackView.removeArrangedSubview($0)
                 $0.removeFromSuperview()
-        }
-    }
-    
-    private func description(forFeature feature: AuthorityType) -> String {
-        switch feature {
-        case .faceRecognition:
-            return TextConstants.faceRecognitionPackageDescription
-            
-        case .deleteDublicate:
-            return TextConstants.deleteDublicatePackageDescription
-            
-        case .premiumUser:
-            return TextConstants.premiumUserPackageDescription
-            
-        case .middleUser:
-            return ""
-            
-        case .originalCopy:
-            return TextConstants.originalCopyPackageDescription
         }
     }
     
