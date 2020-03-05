@@ -12,33 +12,54 @@ import Foundation
 typealias DataChunk = (data: Data, range: Range<Int>)
 
 
-final class DataChunkProvider {
-    
-    static func createWithStream(url: URL, bufferCapacity: Int) -> DataChunkProvider? {
+final class DataChunkProviderFactory {
+    static func createWithSource(source: URL, bufferCapacity: Int) -> DataChunkProvider? {
         let fileManager = FileManager.default
-        
+
         let fileSize: Int
         do {
-            fileSize = try fileManager.sizeOfInputFile(src: url)
+            fileSize = try fileManager.sizeOfInputFile(src: source)
         } catch {
             assertionFailure("Can't get file size")
             return nil
         }
-        
+
         guard fileSize < NumericConstants.fourGigabytes else {
             assertionFailure(TextConstants.syncFourGbVideo)
             return nil
         }
-        
-        guard let fileStream = InputStream(url: url) else {
+
+        guard let fileStream = InputStream(url: source) else {
             assertionFailure("Can't create InputStream")
             return nil
         }
-            
-        return DataChunkProvider(stream: fileStream, fileSize: fileSize, bufferCapacity: bufferCapacity)
+
+        return DataChunkProviderStream(stream: fileStream, fileSize: fileSize, bufferCapacity: bufferCapacity)
     }
     
     
+    static func createWithSource(source: Data, bufferCapacity: Int) -> DataChunkProvider? {
+        guard source.count < NumericConstants.fourGigabytes else {
+            assertionFailure(TextConstants.syncFourGbVideo)
+            return nil
+        }
+        
+        return DataChunkProviderData(data: source, bufferCapacity: bufferCapacity)
+    }
+    
+    private init() {}
+}
+
+protocol DataChunkProvider {
+    var lastRange: Range<Int> { get }
+    var fileSize: Int { get }
+    
+    func nextChunk() -> DataChunk?
+    func nextChunk(skipping: Int) -> DataChunk?
+}
+
+
+private final class DataChunkProviderStream: DataChunkProvider {
     private let bufferCapacity: Int
     
     private let fileStream: InputStream
@@ -46,7 +67,7 @@ final class DataChunkProvider {
     private (set) var fileSize: Int
     
     
-    init(stream: InputStream, fileSize: Int, bufferCapacity: Int) {
+    fileprivate init(stream: InputStream, fileSize: Int, bufferCapacity: Int) {
         self.fileStream = stream
         self.fileSize = fileSize
         self.bufferCapacity = bufferCapacity
@@ -120,7 +141,6 @@ final class DataChunkProvider {
         lastRange = lastRange.upperBound..<(lastRange.upperBound + chunkSize)
         
         let data = Data(bytes: buffer, count: chunkSize)
-//        let data = Data(bytesNoCopy: buffer, count: chunkSize, deallocator: .none)
         
         return DataChunk(data, lastRange)
     }
@@ -142,6 +162,50 @@ final class DataChunkProvider {
         return result
     }
 }
+
+private final class DataChunkProviderData: DataChunkProvider {
+    private var data: Data
+    private let bufferCapacity: Int
+    
+    private (set) var lastRange = 0..<0
+    private (set) var fileSize: Int
+    
+
+    fileprivate init(data: Data, bufferCapacity: Int) {
+        self.data = data
+        self.fileSize = data.count
+        self.bufferCapacity = bufferCapacity
+    }
+
+    func nextChunk(skipping: Int) -> DataChunk? {
+        let bytesLeft = data.count - skipping
+        
+        guard bytesLeft > 0 else {
+            return nil
+        }
+        
+        data = data.suffix(bytesLeft)
+        lastRange = 0..<skipping
+        
+        return nextChunk()
+    }
+    
+    func nextChunk() -> DataChunk? {
+        guard data.count > 0 else {
+            return nil
+        }
+        
+        let chunkData = data.prefix(bufferCapacity)
+        let chunkSize = chunkData.count
+        let bytesLeft = data.count - chunkSize
+        
+        data = data.suffix(bytesLeft)
+        lastRange = lastRange.upperBound..<(lastRange.upperBound + chunkSize)
+        
+        return DataChunk(chunkData, lastRange)
+    }
+}
+
 
 extension FileManager {
     func sizeOfInputFile(src: URL) throws -> Int {
