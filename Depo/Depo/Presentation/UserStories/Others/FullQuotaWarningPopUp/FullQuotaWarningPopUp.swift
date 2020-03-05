@@ -8,9 +8,52 @@
 
 import UIKit
 
+enum FullQuotaWarningPopUpType {
+    case defaultType
+    case contactType
+    
+    var title: String {
+        switch self {
+        case .defaultType:
+            return TextConstants.fullQuotaWarningPopUpTitle
+        case .contactType:
+            return TextConstants.contactSyncDepoErrorTitle
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .defaultType:
+            return TextConstants.fullQuotaWarningPopUpDescription
+        case .contactType:
+            return TextConstants.contactSyncDepoErrorMessage
+        }
+    }
+    
+    var expandQuotaButton: String {
+        switch self {
+        case .defaultType:
+            return TextConstants.expandMyStorage
+        case .contactType:
+            return TextConstants.contactSyncDepoErrorUpButtonText
+        }
+    }
+    
+    var deleteFilesButton: String {
+        switch self {
+        case .defaultType:
+            return TextConstants.deleteFiles
+        case .contactType:
+            return TextConstants.contactSyncDepoErrorDownButtonText
+        }
+    }
+}
+
 final class FullQuotaWarningPopUp: BasePopUpController {
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
+    private var popUpType: FullQuotaWarningPopUpType = .defaultType
 
     //MARK: IBOutlets
     @IBOutlet private weak var popUpView: UIView! {
@@ -39,7 +82,7 @@ final class FullQuotaWarningPopUp: BasePopUpController {
     
     @IBOutlet private weak var titleLable: UILabel! {
         willSet {
-            newValue.text = TextConstants.fullQuotaWarningPopUpTitle
+            newValue.text = popUpType.title
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 20)
             newValue.textColor = UIColor.lrPeach
             newValue.textAlignment = .center
@@ -49,7 +92,7 @@ final class FullQuotaWarningPopUp: BasePopUpController {
     
     @IBOutlet private weak var descriptionLabel: UILabel! {
         willSet {
-            newValue.text = TextConstants.fullQuotaWarningPopUpDescription
+            newValue.text = popUpType.description
             newValue.textColor = ColorConstants.darkGrayTransperentColor
             newValue.font = UIFont.TurkcellSaturaFont(size: 16)
             newValue.textAlignment = .center
@@ -59,7 +102,7 @@ final class FullQuotaWarningPopUp: BasePopUpController {
     
     @IBOutlet private weak var expandQuotaButton: RoundedInsetsButton!  {
         willSet {
-            newValue.setTitle(TextConstants.expandMyStorage, for: .normal)
+            newValue.setTitle(popUpType.expandQuotaButton, for: .normal)
             newValue.setBackgroundColor(ColorConstants.darkBlueColor, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.setTitleColor(UIColor.white, for: .normal)
@@ -69,15 +112,16 @@ final class FullQuotaWarningPopUp: BasePopUpController {
     
     @IBOutlet private weak var deleteFilesButton: UIButton! {
         willSet {
-            newValue.setTitle(TextConstants.deleteFiles, for: .normal)
+            newValue.setTitle(popUpType.deleteFilesButton, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
             newValue.setTitleColor(ColorConstants.darkBlueColor, for: .normal)
         }
     }
     
     //MARK: Init
-    init() {
+    init(_ popUpType: FullQuotaWarningPopUpType = .defaultType) {
         super.init(nibName: nil, bundle: nil)
+        self.popUpType = popUpType
         modalPresentationStyle = .overFullScreen
         modalTransitionStyle = .crossDissolve
     }

@@ -1475,6 +1475,9 @@
 "LifeboxLargePopUpTitleBetween80And99" = "%.0f%% of your storage is full!";
 "LifeboxLargePopUpDeleteFilesButtonTitle" = "Delete Files";
 "dialog_contact_sync_vcf_file_upload_error" = "A problem occured during uploading vcf file to lifebox";
+"dialog_header_contact_sync_vcf_file_upload_error" = "dialog_header_contact_sync_vcf_file_upload_error";
+"dialog_contact_sync_vcf_error_upper_button" = "dialog_contact_sync_vcf_error_upper_button";
+"dialog_contact_sync_vcf_error_lower_button" = "dialog_contact_sync_vcf_error_lower_button";
 "privacy_policy_cell" = "Privacy Policy";
 "full_quota_warning_popup_title" = "You have reached your lifebox storage limit!";
 "full_quota_warning_popup_description" = "Since your lifebox storage is full, you cannot upload new contents. You can buy a new package or delete files.";

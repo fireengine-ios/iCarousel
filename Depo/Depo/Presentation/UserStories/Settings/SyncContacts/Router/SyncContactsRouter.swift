@@ -30,4 +30,9 @@ class SyncContactsRouter: SyncContactsRouterInput {
     func showError(errorMessage: String) {
         UIApplication.showErrorAlert(message: errorMessage)
     }
+    
+    func showFullQuotaPopUp() {
+        let popUpType: FullQuotaWarningPopUpType = .contactType
+        router.showFullQuotaPopUp(popUpType)
+    }
 }
