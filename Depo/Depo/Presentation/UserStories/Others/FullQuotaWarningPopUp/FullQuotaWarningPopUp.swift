@@ -47,6 +47,16 @@ enum FullQuotaWarningPopUpType {
             return TextConstants.contactSyncDepoErrorDownButtonText
         }
     }
+    
+    var eventAction: GAEventAction {
+        switch self {
+        case .standard:
+            return .quotaLimitFullPopup
+        case .contact:
+            return .quotaLimitFullContactRestore
+        }
+    }
+
 }
 
 final class FullQuotaWarningPopUp: BasePopUpController {
@@ -142,7 +152,7 @@ final class FullQuotaWarningPopUp: BasePopUpController {
     //MARK: Actions
     @IBAction private func onCloseTap(_ sender: UIButton) {
         close()
-        analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .quotaLimitFullPopup, eventLabel:  .overQuota(.cancel()))
+        analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: popUpType.eventAction, eventLabel:  .overQuota(.cancel()))
     }
     
     @IBAction private func onExpandQuotaTap(_ sender: UIButton) {
@@ -150,7 +160,7 @@ final class FullQuotaWarningPopUp: BasePopUpController {
             let router = RouterVC()
             router.pushViewController(viewController: router.packages)
         }
-        analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .quotaLimitFullPopup, eventLabel:  .overQuota(.expandMyStorage()))
+        analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: popUpType.eventAction, eventLabel:  .overQuota(.expandMyStorage()))
     }
     
     @IBAction private func onDeleteFilesTap(_ sender: UIButton) {
@@ -166,6 +176,6 @@ final class FullQuotaWarningPopUp: BasePopUpController {
                 router.tabBarController?.showPhotoScreen()
             }
         }
-        analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .quotaLimitFullPopup, eventLabel:  .overQuota(.deleteFiles()))
+        analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: popUpType.eventAction, eventLabel:  .overQuota(.deleteFiles()))
     }
 }
