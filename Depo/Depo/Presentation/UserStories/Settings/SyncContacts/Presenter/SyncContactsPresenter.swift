@@ -69,7 +69,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         case .failed:
             view.showErrorAlert(message: TextConstants.serverErrorMessage)
         case .depoError:
-            view.showErrorAlert(message: TextConstants.contactSyncDepoErrorMessage)
+            router.showFullQuotaPopUp()
         default:
             // TODO: Error handling
             break
