@@ -1184,6 +1184,9 @@ struct TextConstants {
     static let noDetailsMessage = NSLocalizedString("no_details_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let serverErrorMessage = NSLocalizedString("please_try_again_later", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncDepoErrorMessage = NSLocalizedString("dialog_contact_sync_vcf_file_upload_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncDepoErrorTitle = NSLocalizedString("dialog_header_contact_sync_vcf_file_upload_error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncDepoErrorUpButtonText = NSLocalizedString("dialog_contact_sync_vcf_error_upper_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncDepoErrorDownButtonText = NSLocalizedString("dialog_contact_sync_vcf_error_lower_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let backUpOriginalQuality = NSLocalizedString("Back up with Original Quality", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let removeDuplicateContacts = NSLocalizedString("Remove Duplicate Contacts from Your Directory", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
