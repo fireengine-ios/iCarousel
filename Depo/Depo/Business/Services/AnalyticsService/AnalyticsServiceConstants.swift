@@ -264,6 +264,10 @@ enum AnalyticsAppScreens {
     case trashBin
     case fileOperationConfirmPopup(GAOperationType)
     
+    case mobilePaymentPermission
+    case mobilePaymentExplanation
+    case eulaExplanation
+    
     var name: String {
         switch self {
         ///authorization
@@ -472,6 +476,12 @@ enum AnalyticsAppScreens {
             return "Trash Bin"
         case .fileOperationConfirmPopup(let operationType):
             return operationType.confirmPopupEventActionText
+        case .mobilePaymentPermission:
+            return "Mobile Payment Permission"
+        case .mobilePaymentExplanation:
+            return "Mobile Payment Explanation"
+        case .eulaExplanation:
+            return "Eula Explanation"
         }
     }
 }

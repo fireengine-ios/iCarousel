@@ -31,6 +31,7 @@ final class MobilePaymentPermissionViewController: ViewController, NibInit, Cont
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigation()
+        analyticsService.logScreen(screen: .mobilePaymentExplanation)
     }
     
     private func setupNavigation() {
@@ -47,7 +48,7 @@ final class MobilePaymentPermissionViewController: ViewController, NibInit, Cont
             return
         }
         delegate?.backTapped(url: url)
-        trackGAEvent(eventLabel: .back(isChecked))
+        trackGAEvent(eventLabel: .backWithCheck(isChecked))
     }
     
 }
@@ -65,6 +66,7 @@ extension MobilePaymentPermissionViewController: MobilePaymentPermissionViewInpu
         }
         let viewController = WebViewController(urlString: urlstring)
         RouterVC().pushViewController(viewController: viewController)
+        analyticsService.logScreen(screen: .eulaExplanation)
     }
     
     func approveTapped() {

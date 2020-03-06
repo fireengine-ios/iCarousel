@@ -195,6 +195,7 @@ final class HomePageRouter: HomePageRouterInput {
         viewController.urlString = url
         viewController.delegate = self
         router.pushViewController(viewController: viewController)
+        analyticsService.logScreen(screen: .mobilePaymentPermission)
     }
     
     private func trackGAEvent(eventLabel: GAEventLabel) {
