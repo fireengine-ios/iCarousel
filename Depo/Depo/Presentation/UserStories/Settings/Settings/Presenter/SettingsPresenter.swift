@@ -103,10 +103,6 @@ extension SettingsPresenter: SettingsViewOutput {
         router.goToTermsAndPolicy()
     }
     
-    func goToUsageInfo() {
-        router.goToUsageInfo()
-    }
-    
     func goToPermissions() {
         router.goToPermissions()
     }

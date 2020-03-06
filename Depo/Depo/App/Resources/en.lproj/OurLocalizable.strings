@@ -913,6 +913,7 @@
 "surname" = "Surname";
 "change password" = "Change Password";
 "left_space" = "%1$@ / %2$@";
+"storage_usage_information" = "Usage";
 
 /*Packages*/
 "packages_i_have" = "Packages I Have";
