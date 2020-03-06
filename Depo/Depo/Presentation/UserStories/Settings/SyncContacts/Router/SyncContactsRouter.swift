@@ -32,7 +32,7 @@ class SyncContactsRouter: SyncContactsRouterInput {
     }
     
     func showFullQuotaPopUp() {
-        let popUpType: FullQuotaWarningPopUpType = .contactType
+        let popUpType: FullQuotaWarningPopUpType = .contact
         router.showFullQuotaPopUp(popUpType)
     }
 }

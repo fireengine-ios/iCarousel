@@ -9,41 +9,41 @@
 import UIKit
 
 enum FullQuotaWarningPopUpType {
-    case defaultType
-    case contactType
+    case standard
+    case contact
     
     var title: String {
         switch self {
-        case .defaultType:
+        case .standard:
             return TextConstants.fullQuotaWarningPopUpTitle
-        case .contactType:
+        case .contact:
             return TextConstants.contactSyncDepoErrorTitle
         }
     }
     
     var description: String {
         switch self {
-        case .defaultType:
+        case .standard:
             return TextConstants.fullQuotaWarningPopUpDescription
-        case .contactType:
+        case .contact:
             return TextConstants.contactSyncDepoErrorMessage
         }
     }
     
     var expandQuotaButton: String {
         switch self {
-        case .defaultType:
+        case .standard:
             return TextConstants.expandMyStorage
-        case .contactType:
+        case .contact:
             return TextConstants.contactSyncDepoErrorUpButtonText
         }
     }
     
     var deleteFilesButton: String {
         switch self {
-        case .defaultType:
+        case .standard:
             return TextConstants.deleteFiles
-        case .contactType:
+        case .contact:
             return TextConstants.contactSyncDepoErrorDownButtonText
         }
     }
@@ -53,7 +53,7 @@ final class FullQuotaWarningPopUp: BasePopUpController {
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
-    private var popUpType: FullQuotaWarningPopUpType = .defaultType
+    private var popUpType: FullQuotaWarningPopUpType = .standard
 
     //MARK: IBOutlets
     @IBOutlet private weak var popUpView: UIView! {
@@ -119,7 +119,7 @@ final class FullQuotaWarningPopUp: BasePopUpController {
     }
     
     //MARK: Init
-    init(_ popUpType: FullQuotaWarningPopUpType = .defaultType) {
+    init(_ popUpType: FullQuotaWarningPopUpType = .standard) {
         super.init(nibName: nil, bundle: nil)
         self.popUpType = popUpType
         modalPresentationStyle = .overFullScreen
