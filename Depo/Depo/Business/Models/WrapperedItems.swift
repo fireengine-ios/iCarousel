@@ -671,6 +671,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return Date()
     }
     
+    var mediaItemID: Int?
+    
     @available(*, deprecated: 1.0, message: "Use convenience init(info: AssetInfo) instead")
     convenience init(asset: PHAsset) {
         let info = LocalMediaStorage.default.fullInfoAboutAsset(asset: asset)
