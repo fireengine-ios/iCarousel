@@ -82,6 +82,9 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
             descriptionText = NSMutableAttributedString(string: TextConstants.mobilePaymentPermissionDescriptionLabel,
                                                         attributes: [.font: UIFont.TurkcellSaturaFont(size: 16),
                                                                      .foregroundColor: UIColor.lrLightBrownishGrey])
+            
+            let rangeLink = descriptionText.mutableString.range(of: TextConstants.mobilePaymentPermissionLink)
+            descriptionText.addAttributes([.link: TextConstants.NotLocalized.mobilePaymentPermissionLink], range: rangeLink)
         }
         titleLabel.text = title ?? ""
         setup(attributedDescription: descriptionText, delegate: textviewDelegate)

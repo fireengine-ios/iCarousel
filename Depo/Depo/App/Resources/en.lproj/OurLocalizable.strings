@@ -1033,6 +1033,7 @@
 "global_permission_screen_title" = "Global Data Permission";
 "mobile_payment_title" = "mobile_payment_title";
 "mobile_payment_description" = "mobile_payment_description";
+"mobile_payment_link" = "mobile_payment_link";
 "mobile_payment_view_title" = "mobile_payment_view_title";
 "mobile_payment_view_description" = "mobile_payment_view_description";
 "mobile_payment_view_link_text" = "mobile_payment_view_link_text";
@@ -1044,6 +1045,8 @@
 "mobile_payment_open_popup_description_bold_range" = "mobile_payment_open_popup_description_bold_range";
 "mobile_payment_open_popup_later_button" = "mobile_payment_open_popup_later_button";
 "mobile_payment_open_popup_continue_button" = "mobile_payment_open_popup_continue_button_text";
+"mobile_payment_success_popup_title" = "mobile_payment_success_popup_title";
+"mobile_payment_success_popup_message" = "mobile_payment_success_popup_message";
 
 /*Settings page*/
 "Permissions" = "Permissions";
