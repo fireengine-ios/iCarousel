@@ -823,7 +823,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             
             UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: self?.getFolderUUID() ?? "", isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: true, success: {
             }, fail: { [weak self] error in
-                if error.isOutOfSpaceError {
+                guard !error.isOutOfSpaceError else {
                     //showing special popup for this error
                     return
                 }
@@ -835,9 +835,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
                                                   buttonTitle: TextConstants.ok)
                     self?.present(vc, animated: true, completion: nil)
                 }
-            }) { _ in
-                
-            }
+            }, returnedUploadOperation: { _ in })
         })
     }
     
