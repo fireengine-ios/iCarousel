@@ -11,6 +11,8 @@ final class HomePageRouter: HomePageRouterInput {
     private let router = RouterVC()
     weak var presenter: HomePagePresenter!
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     private let popUpService = HomePagePopUpsService.shared
     private var popUpsToPresent = [UIViewController]()
     
@@ -176,14 +178,22 @@ final class HomePageRouter: HomePageRouterInput {
     
     private func getContinueHandler(url: String) -> PopUpButtonHandler {
         return { [weak self] vc in
-            self?.routeMobilePaymentPermissionVC(url: url)
+            guard let self = self else {
+                return
+            }
+            self.trackGAEvent(eventLabel: .mobilePaymentAction(true))
+            self.routeMobilePaymentPermissionVC(url: url)
             vc.close()
         }
     }
     
     private func getRemindMeLaterHandler() -> PopUpButtonHandler {
         return { [weak self] vc in
-            self?.presenter.interactor.updateMobilePaymentPermissionFeedback()
+            guard let self = self else {
+                return
+            }
+            self.trackGAEvent(eventLabel: .mobilePaymentAction(false))
+            self.presenter.interactor.updateMobilePaymentPermissionFeedback()
             vc.close()
         }
     }
@@ -194,7 +204,13 @@ final class HomePageRouter: HomePageRouterInput {
         viewController.urlString = url
         viewController.delegate = self
         router.pushViewController(viewController: viewController)
+        analyticsService.logScreen(screen: .mobilePaymentPermission)
     }
+    
+    private func trackGAEvent(eventLabel: GAEventLabel) {
+        self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .mobilePaymentPermission, eventLabel: eventLabel)
+    }
+    
 }
 
 // MARK: Mobile Payment Permission Delegate

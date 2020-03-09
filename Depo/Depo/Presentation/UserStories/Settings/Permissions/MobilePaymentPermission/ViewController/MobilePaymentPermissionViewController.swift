@@ -12,6 +12,9 @@ final class MobilePaymentPermissionViewController: ViewController, NibInit, Cont
     
     weak var delegate: MobilePaymentPermissionProtocol?
     var urlString: String?
+    private var isChecked: Bool = false
+    
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     // MARK: Life Cycle
     
@@ -28,6 +31,7 @@ final class MobilePaymentPermissionViewController: ViewController, NibInit, Cont
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigation()
+        analyticsService.logScreen(screen: .mobilePaymentExplanation)
     }
     
     private func setupNavigation() {
@@ -43,6 +47,7 @@ final class MobilePaymentPermissionViewController: ViewController, NibInit, Cont
             return
         }
         delegate?.backTapped(url: url)
+        trackGAEvent(eventLabel: .backWithCheck(isChecked))
     }
     
 }
@@ -50,16 +55,26 @@ final class MobilePaymentPermissionViewController: ViewController, NibInit, Cont
 // MARK: Mobile Payment Permission View Delegate
 extension MobilePaymentPermissionViewController: MobilePaymentPermissionViewInput {
     
+    func checkBoxDidChange(isChecked: Bool) {
+        self.isChecked = isChecked
+    }
+    
     func linkTapped() {
         guard let urlstring = urlString else {
             return
         }
         let viewController = WebViewController(urlString: urlstring)
         RouterVC().pushViewController(viewController: viewController)
+        analyticsService.logScreen(screen: .eulaExplanation)
     }
     
     func approveTapped() {
         delegate?.approveTapped()
+        trackGAEvent(eventLabel: .confirm)
+    }
+    
+    private func trackGAEvent(eventLabel: GAEventLabel) {
+        self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .mobilePaymentExplanation, eventLabel: eventLabel)
     }
     
 }
