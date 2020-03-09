@@ -223,7 +223,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
             isFirstLaunch = false
         } else if contactsPermitted, contactsCount > 0{
             backUpButton.isEnabled = true
-        }  else {
+        } else {
             backUpButton.isEnabled = false
         }
         
