@@ -705,6 +705,7 @@ enum GAEventAction {
     case overQuotaPremiumPopup
     case quotaAlmostFullPopup
     case quotaLimitFullPopup
+    case quotaLimitFullContactRestore
     case mobilePaymentPermission
     case mobilePaymentExplanation
     case openMobilePaymentPermission
@@ -863,6 +864,8 @@ enum GAEventAction {
             return "Quota Almost Full Pop up"
         case .quotaLimitFullPopup:
             return "Quota Limit Full Pop up"
+        case .quotaLimitFullContactRestore:
+            return "Quota Limit Full Contact Restore"
         case .fileOperation(let operationType):
             return operationType.eventActionText
         case .fileOperationPopup(let operationType):

@@ -157,6 +157,15 @@ final class HomePageRouter: HomePageRouterInput {
         isFirstAppear ? () : presentPopUps()
     }
     
+    func presentSuccessMobilePaymentPopUp() {
+        let popUp = PopUpController.with(title: TextConstants.mobilePaymentSuccessPopupTitle,
+                                         message: TextConstants.mobilePaymentSuccessPopupMessage,
+                                         image: .success,
+                                         buttonTitle: TextConstants.ok)
+        popUpsToPresent.append(popUp)
+        presentPopUps()
+    }
+    
     private func getPopUpController(url: String) -> PopUpController {
         let plainMessage = TextConstants.mobilePaymentOpenPopupDescriptionLabel
         let range = (plainMessage as NSString).range(of: TextConstants.mobilePaymentOpenPopupDescriptionBoldRangeLabel)

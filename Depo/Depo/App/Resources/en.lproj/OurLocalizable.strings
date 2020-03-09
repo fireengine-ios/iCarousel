@@ -1033,6 +1033,7 @@
 "global_permission_screen_title" = "Global Data Permission";
 "mobile_payment_title" = "mobile_payment_title";
 "mobile_payment_description" = "mobile_payment_description";
+"mobile_payment_link" = "mobile_payment_link";
 "mobile_payment_view_title" = "mobile_payment_view_title";
 "mobile_payment_view_description" = "mobile_payment_view_description";
 "mobile_payment_view_link_text" = "mobile_payment_view_link_text";
@@ -1044,6 +1045,8 @@
 "mobile_payment_open_popup_description_bold_range" = "mobile_payment_open_popup_description_bold_range";
 "mobile_payment_open_popup_later_button" = "mobile_payment_open_popup_later_button";
 "mobile_payment_open_popup_continue_button" = "mobile_payment_open_popup_continue_button_text";
+"mobile_payment_success_popup_title" = "mobile_payment_success_popup_title";
+"mobile_payment_success_popup_message" = "mobile_payment_success_popup_message";
 
 /*Settings page*/
 "Permissions" = "Permissions";
@@ -1475,6 +1478,9 @@
 "LifeboxLargePopUpTitleBetween80And99" = "%.0f%% of your storage is full!";
 "LifeboxLargePopUpDeleteFilesButtonTitle" = "Delete Files";
 "dialog_contact_sync_vcf_file_upload_error" = "A problem occured during uploading vcf file to lifebox";
+"dialog_header_contact_sync_vcf_file_upload_error" = "dialog_header_contact_sync_vcf_file_upload_error";
+"dialog_contact_sync_vcf_error_upper_button" = "dialog_contact_sync_vcf_error_upper_button";
+"dialog_contact_sync_vcf_error_lower_button" = "dialog_contact_sync_vcf_error_lower_button";
 "privacy_policy_cell" = "Privacy Policy";
 "full_quota_warning_popup_title" = "You have reached your lifebox storage limit!";
 "full_quota_warning_popup_description" = "Since your lifebox storage is full, you cannot upload new contents. You can buy a new package or delete files.";

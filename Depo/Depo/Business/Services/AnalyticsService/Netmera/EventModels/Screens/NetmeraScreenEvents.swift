@@ -182,12 +182,6 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class ImportPhotosScreen: NetmeraScreenEventTemplate {
-        override var key: String {
-            return "qsq"
-        }
-    }
-    
     final class ContactsSyncScreen: NetmeraScreenEventTemplate {
         override var key: String {
             return "lil"

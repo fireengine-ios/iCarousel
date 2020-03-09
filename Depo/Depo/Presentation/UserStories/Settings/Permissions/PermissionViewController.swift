@@ -46,6 +46,7 @@ final class PermissionViewController: ViewController, ControlTabBarProtocol {
         let permissionView = PermissionsView.initFromNib()
         permissionView.type = .mobilePayment
         permissionView.delegate = self
+        permissionView.textviewDelegate = self
         return permissionView
     }()
     
@@ -189,6 +190,10 @@ extension PermissionViewController: PermissionViewTextViewDelegate {
             DispatchQueue.toMain {
                 self.openCommercialEmailMessages()
             }
+        case TextConstants.NotLocalized.mobilePaymentPermissionLink:
+            DispatchQueue.toMain {
+                self.openMobilePaymentAgreement()
+            }
         default:
             UIApplication.shared.openSafely(url)
         }
@@ -206,6 +211,14 @@ extension PermissionViewController {
     
     private func openCommercialEmailMessages() {
         let vc = FullscreenTextController(text: TextConstants.commercialEmailMessages)
+        RouterVC().pushViewController(viewController: vc)
+    }
+    
+    private func openMobilePaymentAgreement() {
+        guard let urlString = mobilePaymentPermissionView.urlString else {
+            return
+        }
+        let vc = WebViewController(urlString: urlString)
         RouterVC().pushViewController(viewController: vc)
     }
     
