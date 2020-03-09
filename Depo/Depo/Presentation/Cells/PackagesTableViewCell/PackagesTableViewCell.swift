@@ -35,13 +35,14 @@ class PackagesTableViewCell: UITableViewCell {
         case .myProfile:
             titleLabel.text = TextConstants.myProfile
             
-        case .accountType(let type):
-            titleLabel.text = TextConstants.accountType
+        case .myStorage(let type):
+            titleLabel.text = TextConstants.myStorage
             descriptionLabel.text = type?.text
             
         case .usage(percentage: let percentage):
             titleLabel.text = TextConstants.usage
-            let usage = String(format: TextConstants.usagePercentage, percentage.rounded(.toNearestOrAwayFromZero))
+            let percentageString = percentage.rounded(.toNearestOrAwayFromZero)
+            let usage = String(format: TextConstants.usagePercentage, percentageString)
             descriptionLabel.text = usage
         }
     }
