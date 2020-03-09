@@ -1169,8 +1169,8 @@ class RouterVC: NSObject {
         return TrashBinViewController.initFromNib()
     }
     
-    func showFullQuotaPopUp() {
-        let controller = FullQuotaWarningPopUp()
+    func showFullQuotaPopUp(_ popUpType: FullQuotaWarningPopUpType = .standard) {
+        let controller = FullQuotaWarningPopUp(popUpType)
         DispatchQueue.main.async {
             if
                 let topController = self.defaultTopController,

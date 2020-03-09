@@ -228,8 +228,7 @@ final class MediaItemOperationsService {
                     
                     var array = [MediaItemsObjectSyncStatus]()
                     for userID in item.syncStatuses {
-                        //TODO: remove log
-                        debugLog("sync_status: synced for \(userID)")
+                        debugLog("sync_status: synced")
                         
                         array.append(MediaItemsObjectSyncStatus(userID: userID, context: context))
                     }
@@ -246,10 +245,7 @@ final class MediaItemOperationsService {
                 if let newRemoteItem = newRemote {
                     //all relation will be setuped inside
                     _ = MediaItem(wrapData: newRemoteItem, context: context)
-                    
-                    //TODO: remove log
                     debugLog("sync_status: remote \(newRemote?.name ?? "") is created")
-                    debugLog("sync_status: remote uuid is \(newRemote?.uuid ?? "")")
                 }
 
                 self.coreDataStack.saveDataForContext(context: context, saveAndWait: false, savedCallBack: nil)

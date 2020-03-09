@@ -51,10 +51,6 @@ final class ResumableUploadInfoServiceImpl: ResumableUploadInfoService {
     }
     
     func isResumableUploadAllowed(with fileSize: Int) -> Bool {
-        // FIXME: remove guard
-        guard RouteRequests.currentServerEnvironment != .production else {
-            return false
-        }
         return isUploadEnabled && fileSize > chunkSize
     }
 }

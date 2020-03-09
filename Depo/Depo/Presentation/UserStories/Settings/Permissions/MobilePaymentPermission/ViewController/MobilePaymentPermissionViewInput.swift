@@ -9,6 +9,7 @@
 import UIKit
 
 protocol MobilePaymentPermissionViewInput: class {
+    func checkBoxDidChange(isChecked: Bool)
     func linkTapped()
     func approveTapped()
 }
