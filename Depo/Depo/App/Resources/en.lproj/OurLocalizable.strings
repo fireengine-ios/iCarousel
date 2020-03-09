@@ -991,6 +991,7 @@
 "enter_code_get_code_on_phone" = "Please enter 6-digit security code that we sent to this phone number: %@";
 "time_is_up_for_code" = "Time is up, please request a new code.";
 "resend_code" = "Resend Code";
+"ubsent_contacts" = "There is not any contact in your device";
 
 /*Text for turkcell users on MyProfile screen, placed above gsm enter row*/
 "frequently_asked_questions" = "FAQ";

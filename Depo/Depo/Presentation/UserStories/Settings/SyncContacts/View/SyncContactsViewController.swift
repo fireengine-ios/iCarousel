@@ -48,6 +48,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     var output: SyncContactsViewOutput!
     
     var tabBarSetup = false
+    private var isFirstLaunch = true
     
     var isFullCircle: Bool {
         return gradientLoaderIndicator.circlePathLayer.strokeEnd >= 1
@@ -215,9 +216,20 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         }
     }
     
-    func setButtonsAvailability(restore: Bool, backup: Bool) {
-        restoreButton.isEnabled = restore
-        backUpButton.isEnabled = backup
+    func setButtonsAvailability(contactsPermitted: Bool, contactsCount: Int, containContactsInCloud: Bool) {
+        
+        if isFirstLaunch && !contactsPermitted  {
+            backUpButton.isEnabled = true
+            isFirstLaunch = false
+        } else if contactsPermitted, contactsCount == 0 {
+            backUpButton.isEnabled = false
+        } else if contactsPermitted, contactsCount > 0{
+            backUpButton.isEnabled = true
+        }  else {
+            backUpButton.isEnabled = false
+        }
+        
+        restoreButton.isEnabled = containContactsInCloud
     }
     
     func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
