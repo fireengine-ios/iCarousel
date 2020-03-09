@@ -264,6 +264,10 @@ enum AnalyticsAppScreens {
     case trashBin
     case fileOperationConfirmPopup(GAOperationType)
     
+    case mobilePaymentPermission
+    case mobilePaymentExplanation
+    case eulaExplanation
+    
     var name: String {
         switch self {
         ///authorization
@@ -472,6 +476,12 @@ enum AnalyticsAppScreens {
             return "Trash Bin"
         case .fileOperationConfirmPopup(let operationType):
             return operationType.confirmPopupEventActionText
+        case .mobilePaymentPermission:
+            return "Mobile Payment Permission"
+        case .mobilePaymentExplanation:
+            return "Mobile Payment Explanation"
+        case .eulaExplanation:
+            return "Eula Explanation"
         }
     }
 }
@@ -696,6 +706,9 @@ enum GAEventAction {
     case quotaAlmostFullPopup
     case quotaLimitFullPopup
     case quotaLimitFullContactRestore
+    case mobilePaymentPermission
+    case mobilePaymentExplanation
+    case openMobilePaymentPermission
     
     case fileOperation(GAOperationType)
     case fileOperationPopup(GAOperationType)
@@ -857,6 +870,12 @@ enum GAEventAction {
             return operationType.eventActionText
         case .fileOperationPopup(let operationType):
             return operationType.popupEventActionText
+        case .mobilePaymentPermission:
+            return "Mobile Payment Permission"
+        case .mobilePaymentExplanation:
+            return "Mobile Payment Explanation"
+        case .openMobilePaymentPermission:
+            return "Open Mobile Payment Permission"
         }
     }
 }
@@ -1194,6 +1213,9 @@ enum GAEventLabel {
     case divorceButtonVideo
     case fileTypeOperation(FileType)
     case overQuota(_ event: OverQuotaType)
+    case mobilePaymentAction(_ isContinue: Bool)
+    case backWithCheck(_ isChecked: Bool)
+    case isOn(_ isOn: Bool)
     
     var text: String {
         switch self {
@@ -1395,6 +1417,12 @@ enum GAEventLabel {
             return fileType.text
         case .overQuota(let type):
             return type.text
+        case .mobilePaymentAction(let isContinue):
+            return isContinue ? "Continue" : "Remind Me Later"
+        case .backWithCheck(let isChecked):
+            return isChecked ? "Back - Checked" : "Back"
+        case .isOn(let isOn):
+            return isOn ? "On" : "Off"
         }
     }
     

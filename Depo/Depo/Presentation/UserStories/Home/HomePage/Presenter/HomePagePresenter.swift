@@ -180,6 +180,10 @@ extension HomePagePresenter: HomePageInteractorOutput {
         shouldPermissionPopupAppear(response: response) ? router.presentMobilePaymentPermissionPopUp(url: eulaURL, isFirstAppear: true) : ()
     }
     
+    func showSuccessMobilePaymentPopup() {
+        router.presentSuccessMobilePaymentPopUp()
+    }
+    
     // MARK: - HomePageInteractorOutput Private Utility Methods
     
     private func prepareDispatchGroup() {

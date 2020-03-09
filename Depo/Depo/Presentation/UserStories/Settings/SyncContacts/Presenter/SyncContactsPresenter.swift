@@ -10,7 +10,7 @@ import Contacts
 
 typealias ContactsPermissionCallback = (_ success: Bool) -> Void
 
-class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput {
+final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput {
     
     weak var view: SyncContactsViewInput!
     var interactor: SyncContactsInteractorInput!
@@ -19,6 +19,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     private var contactSyncResponse: ContactSync.SyncResponse?
     private var isBackUpAvailable: Bool { return contactSyncResponse != nil }
     private let reachability = ReachabilityService.shared
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
@@ -44,10 +45,11 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     func startOperation(operationType: SyncOperationType) {
         if operationType != .analyze {
             if operationType != .getBackUpStatus {
-                requesetAccess { success in
+                requesetAccess { [weak self] success in
                     if success {
-                        self.proccessOperation(operationType)
+                        self?.proccessOperation(operationType)
                     }
+                    self?.setButtonsAvailability()        
                 }
             } else {
                 proccessOperation(operationType)
@@ -247,8 +249,30 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
             hasStoredContacts = false
         }
         
-        view.setButtonsAvailability(restore: hasStoredContacts,
-                                    backup: interactor.getStoredContactsCount() > 0)
+        interactor.getContactsPermissionStatus { [weak self] isPermitted in
+            
+            guard let self = self else {
+                return
+            }
+            
+            if self.interactor.permissionStatusChanged(currentStatus: isPermitted) && isPermitted {
+                let contactsCount = self.interactor.getStoredContactsCount()
+                
+                if contactsCount == 0 {
+                    self.showEmptyContactsPopUp()
+                }
+                self.view.setButtonsAvailability(contactsPermitted: isPermitted, contactsCount: contactsCount, containContactsInCloud: hasStoredContacts)
+            } else {
+                self.view.setButtonsAvailability(contactsPermitted: isPermitted, contactsCount: self.interactor.getStoredContactsCount(), containContactsInCloud: hasStoredContacts)
+            }
+            
+            self.storageVars.isPhotoLibraryPermitted = isPermitted
+        }
+    }
+    
+    private func showEmptyContactsPopUp() {
+        let controller = PopUpController.with(title: nil, message: TextConstants.absentContactsForBuckup, image: .none, buttonTitle: TextConstants.ok)
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
 }
 
