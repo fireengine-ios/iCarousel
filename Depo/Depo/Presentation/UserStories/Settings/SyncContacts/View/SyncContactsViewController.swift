@@ -218,10 +218,10 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     
     func setButtonsAvailability(contactsPermitted: Bool, contactsCount: Int, containContactsInCloud: Bool) {
         
-        if isFirstLaunch && !contactsPermitted  {
+        if isFirstLaunch, !contactsPermitted {
             backUpButton.isEnabled = true
             isFirstLaunch = false
-        } else if contactsPermitted, contactsCount > 0{
+        } else if contactsPermitted, contactsCount > 0 {
             backUpButton.isEnabled = true
         } else {
             backUpButton.isEnabled = false
