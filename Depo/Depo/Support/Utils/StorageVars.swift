@@ -33,6 +33,7 @@ protocol StorageVars: class {
     var interruptedResumableUploads: [String: Any] { get set }
     var isResumableUploadEnabled: Bool? { get set }
     var resumableUploadChunkSize: Int? { get set }
+    var isPhotoLibraryPermitted: Bool { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -206,5 +207,11 @@ final class UserDefaultsVars: StorageVars {
     var resumableUploadChunkSize: Int? {
         get { return userDefaults.value(forKey: resumableUploadChunkSizeKey + SingletonStorage.shared.uniqueUserID) as? Int }
         set { userDefaults.set(newValue, forKey: resumableUploadChunkSizeKey + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let isPhotoLibraryPermittedKey = "isPhotoLibraryPermitted"
+    var isPhotoLibraryPermitted: Bool {
+        get { return userDefaults.bool(forKey: isPhotoLibraryPermittedKey) }
+        set { userDefaults.set(newValue, forKey: isPhotoLibraryPermittedKey) }
     }
 }
