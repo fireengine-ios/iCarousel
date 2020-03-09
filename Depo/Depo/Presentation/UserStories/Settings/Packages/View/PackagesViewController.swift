@@ -20,16 +20,17 @@ final class PackagesViewController: BaseViewController {
     @IBOutlet weak private var cardsTableView: UITableView! {
         willSet {
             newValue.delaysContentTouches = true
-            newValue.rowHeight = UITableViewAutomaticDimension
-            newValue.estimatedRowHeight = 51
+            newValue.rowHeight = 51
             let nib = UINib(nibName: String(describing: PackagesTableViewCell.self), bundle: nil)
             newValue.register(nib, forCellReuseIdentifier: String(describing: PackagesTableViewCell.self))
+            newValue.tableFooterView = UIView()
         }
     }
     
     @IBOutlet weak private var collectionStackView: UIStackView! {
         willSet {
             newValue.spacing = 16
+            newValue.backgroundColor = .clear
         }
     }
     
@@ -44,12 +45,17 @@ final class PackagesViewController: BaseViewController {
             newValue.textColor = ColorConstants.darkText
             newValue.text = TextConstants.packageSectionTitle
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            newValue.backgroundColor = .clear
         }
     }
     
     @IBOutlet weak private var cardsStackView: UIStackView!
     @IBOutlet weak private var promoView: PromoView!
-    @IBOutlet weak private var policyTextView: UITextView!
+    @IBOutlet weak private var policyTextView: UITextView! {
+        willSet {
+            newValue.backgroundColor = .clear
+        }
+    }
     
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
     
@@ -58,25 +64,21 @@ final class PackagesViewController: BaseViewController {
     private let policyHeaderSize: CGFloat = Device.isIpad ? 15 : 13
     private let policyTextSize: CGFloat = Device.isIpad ? 13 : 10
     
-    private var menuViewModels = [ControlPackageType]() {
-        didSet {
-            cardsTableView?.reloadData()
-        }
-    }
-
+    private var menuViewModels: [ControlPackageType] = [.myProfile, .usage(percentage: 0), .accountType(nil)]
+    
     // MARK: - View lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         automaticallyAdjustsScrollViewInsets = false
         setTitle(withString: TextConstants.accountDetails)
-
+        
         promoView.deleagte = self
         activityManager.delegate = self
         cardsTableView.delegate = self
         cardsTableView.dataSource = self
-        
+        self.view.backgroundColor = ColorConstants.fileGreedCellColor
         output.viewIsReady()
         
         MenloworksAppEvents.onPackagesOpen()
@@ -87,7 +89,7 @@ final class PackagesViewController: BaseViewController {
         navigationBarWithGradientStyle()
         output.viewWillAppear()
     }
-
+    
     private func setupPolicy() {
         let attributedString = NSMutableAttributedString(
             string: TextConstants.packagesPolicyHeader,
@@ -101,7 +103,7 @@ final class PackagesViewController: BaseViewController {
             attributes: [.foregroundColor: ColorConstants.textGrayColor,
                          .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
         attributedString.append(policyAttributedString)
-
+        
         let termsAttributedString = NSMutableAttributedString(
             string: TextConstants.termsOfUseLinkText,
             attributes: [.link: TextConstants.NotLocalized.termsOfUseLink,
@@ -115,7 +117,7 @@ final class PackagesViewController: BaseViewController {
         policyTextView.layer.borderWidth = 1
         view.layoutIfNeeded()
     }
-
+    
     func showRestoreButton() {
         //IF THE USER NON CELL USER
         let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "refresh_icon"), style: .plain, target: self, action: #selector(restorePurhases))
@@ -135,7 +137,7 @@ final class PackagesViewController: BaseViewController {
 
 // MARK: PackagesViewInput
 extension PackagesViewController: PackagesViewInput {
-
+    
     func reloadData() {
         collectionStackView.arrangedSubviews.forEach { collectionStackView.removeArrangedSubview($0) }
         for offer in output.availableOffers.enumerated() {
@@ -167,63 +169,41 @@ extension PackagesViewController: PackagesViewInput {
     func display(error: ErrorResponse) {
         UIApplication.showErrorAlert(message: error.description)
     }
-
+    
     func display(errorMessage: String) {
         UIApplication.showErrorAlert(message: errorMessage)
     }
-
-    func showPaycellProcess(with cpcmOfferId: Int) {
-        let controller = PaycellViewController.create(with: cpcmOfferId) { result in
-            switch result {
-            case .success():
-                UIApplication.showSuccessAlert(message: TextConstants.successfullyPurchased)
-            case .failed(_):
-                UIApplication.showErrorAlert(message: TextConstants.errorUnknown)
-            }
-        }
-        RouterVC().pushViewController(viewController: controller)
-    }
-
+    
     func setupStackView(with percentage: CGFloat) {
         menuViewModels.removeAll()
         for view in cardsStackView.arrangedSubviews {
             view.removeFromSuperview()
         }
         
-        ///premium banner if needed
-        let isPremiumUser = AuthoritySingleton.shared.accountType.isPremium
-        if !isPremiumUser {
-            addNewCard(type: .premiumBanner)
-        }
-        
         ///my profile card
         addNewCard(type: .myProfile)
-
+        
         ///my storage card
-        addNewCard(type: .myStorage(percentage: percentage))
+        addNewCard(type: .usage(percentage: percentage))
         
         ///account type card
         let isMiddleUser = AuthoritySingleton.shared.accountType.isMiddle
+        let isPremiumUser = AuthoritySingleton.shared.accountType.isPremium
         let type: ControlPackageType.AccountType = isPremiumUser ? .premium : (isMiddleUser ? .middle : .standard)
-
+        
         addNewCard(type: .accountType(type))
+        self.cardsTableView.reloadData()
     }
     
     private func addNewCard(type: ControlPackageType) {
         if Device.isIpad {
             let card = PackageInfoView.initFromNib()
             card.configure(with: type)
-
+            
             output.configureCard(card)
             cardsStackView.addArrangedSubview(card)
         } else {
-            switch type {
-            case .premiumBanner:
-                ///there is no premium banner in the design
-                break
-            case _:
-                menuViewModels.append(type)
-            }
+            menuViewModels.append(type)
         }
     }
 }
@@ -359,6 +339,7 @@ extension PackagesViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension PackagesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.selectionStyle = .none
         guard let item = menuViewModels[safe: indexPath.row] else {
             return
         }

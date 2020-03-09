@@ -10,10 +10,8 @@ import UIKit
 
 enum ControlPackageType {
     case myProfile
-    case myStorage(percentage: CGFloat)
-    case premiumBanner
-    
-    case accountType(ControlPackageType.AccountType)
+    case usage(percentage: CGFloat)
+    case accountType(ControlPackageType.AccountType?)
     
     enum AccountType {
         case standard
@@ -84,31 +82,18 @@ final class PackageInfoView: UIView, NibInit {
         case .myProfile:
             titleLabel.text = TextConstants.myProfile
             detailLabel.isHidden = true
-        case .myStorage(percentage: let percentage):
-            titleLabel.text = TextConstants.myStorage
+        case .usage(percentage: let percentage):
+            titleLabel.text = TextConstants.usage
             if percentage != 0 {
                 detailLabel.isHidden = false
                 detailLabel.text = String(format: TextConstants.usagePercentage, percentage.rounded(.toNearestOrAwayFromZero))
             } else {
                 detailLabel.isHidden = true
             }
-        case .premiumBanner:
-            let packagePremiumView = PackagePremiumView.initFromNib()
-            addSubview(packagePremiumView)
-            
-            packagePremiumView.translatesAutoresizingMaskIntoConstraints = false
-
-            packagePremiumView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            packagePremiumView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-            packagePremiumView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            packagePremiumView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-            
-            self.packagePremiumView = packagePremiumView
-            seeDetailsLabel.isHidden = true
         case .accountType(let accountType):
             titleLabel.text = TextConstants.accountType
             
-            detailLabel.text = accountType.text
+            detailLabel.text = accountType?.text
         }
     }
 

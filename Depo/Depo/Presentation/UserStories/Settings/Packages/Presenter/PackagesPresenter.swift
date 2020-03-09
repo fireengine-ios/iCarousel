@@ -92,7 +92,7 @@ extension PackagesPresenter: PackagesViewOutput {
             interactor.activate(offer: model, planIndex: planIndex)
         case .paycellAllAccess?, .paycellSLCM?:
             if let offerId = model.cpcmOfferId {
-                view?.showPaycellProcess(with: offerId)
+                router.showPaycellProcess(with: offerId)
             }
 
         default:
@@ -292,13 +292,14 @@ extension PackagesPresenter: PackageInfoViewDelegate {
 
     func onSeeDetailsTap(with type: ControlPackageType) {
         switch type {
-        case .myStorage:
-            let usage = UsageResponse()
-            usage.usedBytes = quotaInfo?.bytesUsed
-            usage.quotaBytes = quotaInfo?.bytes
-            router.openMyStorage(storageUsage: usage)
+        case .usage:
+            router.openUsage()
         case .accountType(let accountType):
-            router.openLeavePremium(type: accountType.leavePremiumType)
+            if let leavePremiumType = accountType?.leavePremiumType {
+                router.openLeavePremium(type: leavePremiumType)
+            } else {
+                assertionFailure()
+            }
         case .myProfile:
             guard let userInfo = SingletonStorage.shared.accountInfo else {
                 let error = CustomErrors.text("Unexpected found nil while getting user info. Refresh page may solve this problem.")
@@ -308,8 +309,6 @@ extension PackagesPresenter: PackageInfoViewDelegate {
             
             let isTurkcell = SingletonStorage.shared.isTurkcellUser
             router.openUserProfile(userInfo: userInfo, isTurkcellUser: isTurkcell)
-            break
-        case .premiumBanner:
             break
         }
     }
