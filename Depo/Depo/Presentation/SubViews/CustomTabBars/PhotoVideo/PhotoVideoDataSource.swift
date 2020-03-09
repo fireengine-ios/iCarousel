@@ -178,6 +178,21 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
+    func indexPath(of mediaItemID: NSManagedObjectID, indexCallBack: @escaping IndexPathCallback) {
+        let context = fetchedResultsController.managedObjectContext
+        context.perform { [weak self] in
+            guard
+                let self = self,
+                let obj = context.object(with: mediaItemID) as? MediaItem,
+                let objIndex = self.fetchedResultsController.indexPath(forObject: obj)
+            else {
+                    indexCallBack(nil)
+                    return
+            }
+            indexCallBack(objIndex)
+        }
+    }
+    
     func getIndexPathForLocalObject(itemTrimmedLocalID: String, indexCallBack: @escaping IndexPathCallback) {
         fetchedResultsController.managedObjectContext.perform { [weak self] in
             guard let findedObject = self?.lastUpdateFetchedObjects?.first(where: { $0.trimmedLocalFileID == itemTrimmedLocalID && $0.isLocalItemValue }) else {
