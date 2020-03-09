@@ -6,6 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import Contacts
+
 enum SyncOperationType {
     case backup
     case restore
@@ -24,7 +26,7 @@ enum SyncOperationErrors {
     case depoError
 }
 
-class SyncContactsInteractor: SyncContactsInteractorInput {
+final class SyncContactsInteractor: SyncContactsInteractorInput {
 
     weak var output: SyncContactsInteractorOutput?
     
@@ -32,6 +34,7 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private let contactService: ContactService = ContactService()
     private let accountService: AccountService = AccountService()
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     deinit {
         contactsSyncService.cancelAnalyze()
@@ -111,6 +114,19 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
         })
     }
     
+    func permissionStatusChanged(currentStatus: Bool) -> Bool {
+        return storageVars.isPhotoLibraryPermitted != currentStatus
+    }
+    
+    func getContactsPermissionStatus(completionHandler: @escaping ContactsPermissionCallback) {
+        switch CNContactStore.authorizationStatus(for: .contacts) {
+        case .notDetermined, .restricted, .denied:
+            completionHandler(false)
+        case .authorized:
+            completionHandler(true)
+        }
+    }
+    
     func performOperation(forType type: SYNCMode) {
         UIApplication.setIdleTimerDisabled(true)
 
@@ -181,7 +197,6 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
         case .restore:
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .restore, staus: status))
         }
-
     }
     
     private func loadLastBackUp() {

@@ -816,27 +816,26 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         
         wrapData.patchToPreview = PathForItem.remoteUrl(url)
         
-        let isFromAlbum = RouterVC().isRootViewControllerAlbumDetail() 
-        UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: getFolderUUID() ?? "", isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: true, success: {
-        }, fail: { [weak self] error in
-            if error.isOutOfSpaceError {
-                //showing special popup for this error
-                return
-            }
-            
-            DispatchQueue.main.async {
-                let vc = PopUpController.with(title: TextConstants.errorAlert,
-                                              message: error.description,
-                                              image: .error,
-                                              buttonTitle: TextConstants.ok)
-                self?.present(vc, animated: true, completion: nil)
-            }
-        }) { _ in
-            
-        }
+        let isFromAlbum = RouterVC().isRootViewControllerAlbumDetail()
         
-        picker.dismiss(animated: true, completion: {
-            self.statusBarHidden = false
+        picker.dismiss(animated: true, completion: { [weak self] in
+            self?.statusBarHidden = false
+            
+            UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: self?.getFolderUUID() ?? "", isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: true, success: {
+            }, fail: { [weak self] error in
+                guard !error.isOutOfSpaceError else {
+                    //showing special popup for this error
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    let vc = PopUpController.with(title: TextConstants.errorAlert,
+                                                  message: error.description,
+                                                  image: .error,
+                                                  buttonTitle: TextConstants.ok)
+                    self?.present(vc, animated: true, completion: nil)
+                }
+            }, returnedUploadOperation: { _ in })
         })
     }
     
