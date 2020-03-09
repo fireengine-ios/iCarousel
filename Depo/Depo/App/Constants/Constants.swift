@@ -1255,6 +1255,7 @@ struct TextConstants {
     //MARK: - PackageInfoView
     static let usage = NSLocalizedString("storage_usage_information", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let myStorage = NSLocalizedString("my_storage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let myPackages = NSLocalizedString("my_packages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let seeDetails = NSLocalizedString("see_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageGroupingDescription = NSLocalizedString("face_image_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageUpgrade = NSLocalizedString("face_image_upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

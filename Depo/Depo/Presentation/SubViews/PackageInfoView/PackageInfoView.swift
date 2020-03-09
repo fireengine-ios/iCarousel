@@ -91,7 +91,7 @@ final class PackageInfoView: UIView, NibInit {
                 detailLabel.isHidden = true
             }
         case .myStorage(let accountType):
-            titleLabel.text = TextConstants.myStorage
+            titleLabel.text = TextConstants.myPackages
             detailLabel.text = accountType?.text
         }
     }

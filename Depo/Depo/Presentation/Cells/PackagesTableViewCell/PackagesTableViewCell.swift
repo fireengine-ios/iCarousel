@@ -36,7 +36,7 @@ class PackagesTableViewCell: UITableViewCell {
             titleLabel.text = TextConstants.myProfile
             
         case .myStorage(let type):
-            titleLabel.text = TextConstants.myStorage
+            titleLabel.text = TextConstants.myPackages
             descriptionLabel.text = type?.text
             
         case .usage(percentage: let percentage):

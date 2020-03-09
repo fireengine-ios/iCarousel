@@ -756,6 +756,7 @@
 
 /*PackageInfoView*/
 "my_storage" = "My Storage";
+"my_packages" = "My Packages";
 "see_details" = "See Details";
 "face_image_description" = "Since you have a standard account, 100 of your photos will be processed. You will only see 3 people, objects and places in your smart albums.";
 "face_image_upgrade" = "Upgrade to lifebox Premium to use this feature without any limitation.";
