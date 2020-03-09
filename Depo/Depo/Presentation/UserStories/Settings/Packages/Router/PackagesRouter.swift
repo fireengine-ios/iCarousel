@@ -18,9 +18,9 @@ extension PackagesRouter: PackagesRouterInput {
         router.pushViewController(viewController: router.termsOfUseScreen)
     }
 
-    func openLeavePremium(type: LeavePremiumType) {
-        let vc = router.leavePremium(type: type)
-        router.pushViewController(viewController: vc)
+    func openMyStorage(usageStorage: UsageResponse?) {
+        let viewController = router.myStorage(usageStorage: usageStorage)
+        router.pushViewController(viewController: viewController)
     }
     
     func openUsage() {

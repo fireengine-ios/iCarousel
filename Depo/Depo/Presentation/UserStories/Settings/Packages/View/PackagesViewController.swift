@@ -64,7 +64,7 @@ final class PackagesViewController: BaseViewController {
     private let policyHeaderSize: CGFloat = Device.isIpad ? 15 : 13
     private let policyTextSize: CGFloat = Device.isIpad ? 13 : 10
     
-    private var menuViewModels: [ControlPackageType] = [.myProfile, .usage(percentage: 0), .accountType(nil)]
+    private var menuViewModels: [ControlPackageType] = [.myProfile, .usage(percentage: 0), .myStorage(nil)]
     
     // MARK: - View lifecycle
     
@@ -191,7 +191,7 @@ extension PackagesViewController: PackagesViewInput {
         let isPremiumUser = AuthoritySingleton.shared.accountType.isPremium
         let type: ControlPackageType.AccountType = isPremiumUser ? .premium : (isMiddleUser ? .middle : .standard)
         
-        addNewCard(type: .accountType(type))
+        addNewCard(type: .myStorage(type))
         self.cardsTableView.reloadData()
     }
     

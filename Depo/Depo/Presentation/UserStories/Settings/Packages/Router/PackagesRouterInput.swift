@@ -10,7 +10,7 @@ import Foundation
 
 protocol PackagesRouterInput {
     func openTermsOfUse()
-    func openLeavePremium(type: LeavePremiumType)
+    func openMyStorage(usageStorage: UsageResponse?)
     func openUsage()
     func openUserProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool)
     
