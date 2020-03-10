@@ -1100,6 +1100,39 @@ enum GAEventLabel {
         }
     }
     
+    enum ProfileChangeType {
+        case name
+        case surname
+        case email
+        case birthday
+        case address
+        case phone
+        case password
+        case securityQuestion
+        
+        var text: String {
+            switch self {
+            case .name:
+                return "Name"
+            case .surname:
+                return "Surname"
+            case .email:
+                return "E-Mail"
+            case .birthday:
+                return "Birthday"
+            case .address:
+                return "Address"
+            case .phone:
+                return "Phone"
+            case .password:
+                return "Password"
+            case .securityQuestion:
+                return "SecurityQuestion"
+            }
+        }
+        
+    }
+    
     case empty
     case custom(String)
     
@@ -1191,6 +1224,7 @@ enum GAEventLabel {
     case divorceButtonVideo
     case fileTypeOperation(FileType)
     case overQuota(_ event: OverQuotaType)
+    case back
     
     var text: String {
         switch self {
@@ -1392,6 +1426,8 @@ enum GAEventLabel {
             return fileType.text
         case .overQuota(let type):
             return type.text
+        case .back:
+            return "Back"
         }
     }
     
@@ -1442,6 +1478,7 @@ enum GADementionsFields {
     case spotify
     case dailyDrawleft
     case itemsCount(GAOperationType)
+    case editFields
     
     var text: String {
         switch self {
@@ -1493,6 +1530,8 @@ enum GADementionsFields {
             return "dailyDrawleft"
         case .itemsCount(let operationType):
             return operationType.itemsCountText
+        case .editFields:
+            return "editFields"
         }
     }
     
