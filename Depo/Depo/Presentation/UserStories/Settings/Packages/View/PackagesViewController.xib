@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -63,22 +63,15 @@
                                         </mask>
                                     </variation>
                                 </stackView>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="51" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MZ8-Y2-pSD" customClass="ResizableTableView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="153" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="51" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MZ8-Y2-pSD" customClass="ResizableTableView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" id="EmF-B8-Kil"/>
-                                        <constraint firstAttribute="height" constant="153" id="GLJ-Ui-5Ep"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="EmF-B8-Kil"/>
-                                            <exclude reference="GLJ-Ui-5Ep"/>
-                                        </mask>
-                                    </variation>
-                                    <variation key="heightClass=regular-widthClass=compact">
-                                        <mask key="constraints">
-                                            <include reference="GLJ-Ui-5Ep"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=regular">
@@ -183,7 +176,7 @@
                                     </connections>
                                 </textView>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="0Wh-5R-OYf" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" constant="16" id="0nU-Ai-raX"/>
                                 <constraint firstItem="X3N-5r-5TB" firstAttribute="top" secondItem="6fY-jA-khb" secondAttribute="bottom" constant="16" id="5Tx-pA-qhd"/>
