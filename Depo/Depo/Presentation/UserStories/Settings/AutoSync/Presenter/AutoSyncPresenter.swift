@@ -24,12 +24,12 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
 
     func viewIsReady() {
         startAsyncOperationDisableScreen()
-        interactor.prepareCellModels()
+        interactor.checkPermissions()
     }
     
-    func prepaire(syncSettings: AutoSyncSettings) {
+    func prepaire(syncSettings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
         completeAsyncOperationEnableScreen()
-        view.prepaire(syncSettings: syncSettings)
+        view.prepaire(syncSettings: syncSettings, albums: albums)
     }
     
     func change(settings: AutoSyncSettings) {
@@ -63,10 +63,10 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         /// location access is optional
         if !locationAccessGranted {
             view.showLocationPermissionPopup { [weak self] in
-                self?.view.checkPermissionsSuccessed()
+                self?.interactor.prepareCellModels()
             }
         } else {
-            view.checkPermissionsSuccessed()
+            interactor.prepareCellModels()
         }
     }
         

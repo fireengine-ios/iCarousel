@@ -262,7 +262,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 var albums = [AlbumItem]()
                 
                 let dispatchGroup = DispatchGroup()
-                
                 [album, smartAlbum].forEach { album in
                     album.enumerateObjects { object, index, stop in
                         dispatchGroup.enter()
@@ -304,6 +303,39 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                             return true
                         }
                     })
+                    completion(albums)
+                }
+            }
+        }
+    }
+    
+    func getLocalAlbums(completion: @escaping (_ albums: [PHAssetCollection]) -> Void) {
+        askPermissionForPhotoFramework(redirectToSettings: true) { accessGranted, _ in
+            guard accessGranted else {
+                completion([])
+                return
+            }
+            
+            DispatchQueue.global().async {
+                let fetchOptions = PHFetchOptions()
+                let album = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+                let smartAlbum = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
+                
+                var albums = [PHAssetCollection]()
+                
+                let dispatchGroup = DispatchGroup()
+                [album, smartAlbum].forEach { album in
+                    album.enumerateObjects { object, index, stop in
+                        dispatchGroup.enter()
+                        let assets = PHAsset.fetchAssets(in: object, options: fetchOptions)
+                        if assets.firstObject != nil {
+                            albums.append(object)
+                        }
+                        dispatchGroup.leave()
+                    }
+                }
+                
+                dispatchGroup.notify(queue: .main) {
                     completion(albums)
                 }
             }

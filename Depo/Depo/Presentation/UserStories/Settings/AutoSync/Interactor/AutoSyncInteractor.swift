@@ -15,9 +15,17 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     private lazy var locationManager = LocationManager.shared
     private let analyticsManager: AnalyticsService = factory.resolve()
     
+    private var albums = [AutoSyncAlbum]()
+    
     func prepareCellModels() {
-        let settings = dataStorage.settings
-        output.prepaire(syncSettings: settings)
+        getAlbums { [weak self] albums in
+            guard let self = self else {
+                return
+            }
+            
+            let settings = self.dataStorage.settings
+            self.output.prepaire(syncSettings: settings, albums: albums)
+        }
     }
     
     func trackScreen(fromSettings: Bool) {
@@ -43,6 +51,18 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
                 
                 self?.output.onCheckPermissions(photoAccessGranted: photoAccessGranted, locationAccessGranted: locationAccessGranted)
             }
+        }
+    }
+    
+    private func getAlbums(completion: @escaping (_ albums: [AutoSyncAlbum]) -> Void) {
+        if !albums.isEmpty {
+            completion(albums)
+            return
+        }
+        
+        localMediaStorage.getLocalAlbums { assets in
+            let albums = assets.map { AutoSyncAlbum(asset: $0) }
+            completion(albums)
         }
     }
 }
