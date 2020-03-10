@@ -165,6 +165,7 @@ final class UploadService {
         switch response.result {
         case .success(_):
             completion(.success(.completed))
+            
         case .failure(let error):
             guard let statusCode = response.response?.statusCode else {
                 completion(.failed(error))
@@ -237,6 +238,7 @@ final class UploadService {
                         self?.resumableUploadResponse(for: response, completion: completion)
                 }
                 dataRequestHandler?(dataRequest)
+                
             case .failed(let error):
                 completion(ResponseResult.failed(error))
             }
@@ -248,6 +250,7 @@ final class UploadService {
     func resumableUpload(interruptedId: String, data: Data, range: Range<Int>,
                          name: String, contentType: String, fileSize: Int64,
                          dataRequestHandler: DataRequestHandler?,
+                         progressHandler: @escaping Request.ProgressHandler,
                          completion: @escaping ResumableUploadHandler) {
         let dataRequest = getBaseUploadUrl { [weak self] result in
             switch result {
@@ -262,6 +265,7 @@ final class UploadService {
                 let dataRequest = self.sessionManager
                     .upload(data, to: uploadUrl, method: .put, headers: headers)
                     .customValidate()
+                    .uploadProgress(closure: progressHandler)
                     .responseString { [weak self] response in
                         self?.resumableUploadResponse(for: response, completion: completion)
                 }

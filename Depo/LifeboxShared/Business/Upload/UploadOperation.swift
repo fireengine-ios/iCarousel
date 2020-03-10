@@ -98,6 +98,11 @@ final class UploadOperation: Operation {
         }
         
         let preparationHandler: ResponseVoid = { [weak self] result  in
+            
+            if let info = self?.interruptedInfo {
+                self?.resumableUploadInfoService.save(interruptedId: info.interruptedId, for: info.identifier)
+            }
+            
             switch result {
             case .success(_):
                 if self?.isResumable == true {
@@ -113,7 +118,7 @@ final class UploadOperation: Operation {
         
         switch sharedItem {
         case .url(let item):
-            prepareFileForUpload(url: item.url, completion: preparationHandler)
+            prepareFileForUpload(url: item.url, name: item.name, completion: preparationHandler)
             
         case .data(let item):
             prepareDataForUpload(data: item.data, completion: preparationHandler)
@@ -140,11 +145,22 @@ final class UploadOperation: Operation {
         
         isResumable = resumableUploadInfoService.isResumableUploadAllowed(with: Int64(fileSize))
         
+        if isResumable {
+            let identifier = "\(fileSize)"
+            let interruptedId = resumableUploadInfoService.getInterruptedId(for: identifier) ?? UUID().uuidString
+            interruptedInfo = (identifier, interruptedId)
+        }
+        
         completion(.success(()))
     }
     
-    private func prepareFileForUpload(url: URL, completion: @escaping ResponseVoid) {
+    private func prepareFileForUpload(url: URL, name: String, completion: @escaping ResponseVoid) {
         FilesExistManager.shared.waitFilePreparation(at: url) { [weak self] result in
+            guard let self = self else {
+                completion(.failed(CustomErrors.text(TextConstants.commonServiceError)))
+                return
+            }
+            
             switch result {
             case .success(_):
                 guard
@@ -163,7 +179,13 @@ final class UploadOperation: Operation {
                     return
                 }
                 
-                self?.isResumable = resumableUploadInfoService.isResumableUploadAllowed(with: fileSize)
+                self.isResumable = resumableUploadInfoService.isResumableUploadAllowed(with: fileSize)
+                
+                if self.isResumable {
+                    let identifier = name + "\(fileSize)"
+                    let interruptedId = resumableUploadInfoService.getInterruptedId(for: identifier) ?? UUID().uuidString
+                    interruptedInfo = (identifier, interruptedId)
+                }
                 
                 completion(.success(()))
                 
@@ -199,9 +221,6 @@ final class UploadOperation: Operation {
     //MARK: - Resumable
     
     private func resumableUpload(dataRequestHandler: @escaping DataRequestHandler, completion: @escaping ResponseVoid) {
-        
-        prepareInterruptedInfo()
-        
         let bufferCapacity = resumableUploadInfoService.chunkSize
         
         switch sharedItem {
@@ -214,36 +233,12 @@ final class UploadOperation: Operation {
             attemptResumableUpload(item: item, dataRequestHandler: dataRequestHandler, completion: completion)
         }
     }
-    
-    private func prepareInterruptedInfo(newInterruptedId: String? = nil) {
-        switch sharedItem {
-        case .url(let item):
-            if let identifier = item.url.byTrimmingQuery?.path,
-                let interruptedId = newInterruptedId ?? resumableUploadInfoService.getInterruptedId(for: identifier) {
-                
-                interruptedInfo = (identifier, interruptedId)
-            }
-            
-        case .data(let item):
-            let identifier = item.name + "\(item.data.count)"
-            
-            if let interruptedId = newInterruptedId ?? resumableUploadInfoService.getInterruptedId(for: identifier) {
-                interruptedInfo = (identifier, interruptedId)
-            }
-        }
-        
-        if let info = interruptedInfo {
-            resumableUploadInfoService.save(interruptedId: info.interruptedId, for: info.identifier)
-        }
-    }
-    
 
     private func attemptResumableUpload(item: SharedItem, dataRequestHandler: @escaping DataRequestHandler, completion: @escaping ResponseVoid) {
         
         guard let interruptedId = interruptedInfo?.interruptedId else {
-            let newId = UUID().uuidString
-            prepareInterruptedInfo(newInterruptedId: newId)
-            uploadContiniously(item: item, interruptedId: newId, dataRequestHandler: dataRequestHandler, completion: completion)
+            //FIXME: currently interruptedId is always existed, create new interrupted id here
+//            uploadContiniously(item: item, interruptedId: newId, dataRequestHandler: dataRequestHandler, completion: completion)
             return
         }
         
@@ -281,7 +276,7 @@ final class UploadOperation: Operation {
             return
         }
         
-        uploadService.resumableUpload(interruptedId: interruptedId, data: nextChunk.data, range: nextChunk.range, name: item.name, contentType: item.contentType, fileSize: 0, dataRequestHandler: dataRequestHandler) { [weak self] result in
+        uploadService.resumableUpload(interruptedId: interruptedId, data: nextChunk.data, range: nextChunk.range, name: item.name, contentType: item.contentType, fileSize: 0, dataRequestHandler: dataRequestHandler, progressHandler: progressHandler) { [weak self] result in
             switch result {
             case .failed(let error):
                 completion(.failed(error))
