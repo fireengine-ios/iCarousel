@@ -170,7 +170,7 @@ final class PhotoVideoDataSource: NSObject {
     
     func getIndexPathForRemoteObject(itemUUID: String, indexCallBack: @escaping IndexPathCallback) {
         fetchedResultsController.managedObjectContext.perform { [weak self] in
-            guard let findedObject = self?.lastUpdateFetchedObjects?.first(where: { $0.trimmedLocalFileID == itemUUID }) else {
+            guard let findedObject = self?.fetchedResultsController.fetchedObjects?.first(where: { $0.uuid == itemUUID && !$0.isLocalItemValue }) else {
                 indexCallBack(nil)
                 return
             }
@@ -195,7 +195,8 @@ final class PhotoVideoDataSource: NSObject {
     
     func getIndexPathForLocalObject(itemTrimmedLocalID: String, indexCallBack: @escaping IndexPathCallback) {
         fetchedResultsController.managedObjectContext.perform { [weak self] in
-            guard let findedObject = self?.lastUpdateFetchedObjects?.first(where: { $0.trimmedLocalFileID == itemTrimmedLocalID && $0.isLocalItemValue }) else {
+            
+            guard let findedObject = self?.fetchedResultsController.fetchedObjects?.first(where: { $0.trimmedLocalFileID == itemTrimmedLocalID && $0.isLocalItemValue }) else {
                 indexCallBack(nil)
                 return
             }
