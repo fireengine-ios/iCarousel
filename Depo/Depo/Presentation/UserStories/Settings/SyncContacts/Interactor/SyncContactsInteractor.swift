@@ -34,7 +34,6 @@ final class SyncContactsInteractor: SyncContactsInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private let contactService: ContactService = ContactService()
     private let accountService: AccountService = AccountService()
-    private lazy var storageVars: StorageVars = factory.resolve()
     
     deinit {
         contactsSyncService.cancelAnalyze()
@@ -112,10 +111,6 @@ final class SyncContactsInteractor: SyncContactsInteractorInput {
                 self?.output?.showError(errorType: errorType)
             }
         })
-    }
-    
-    func permissionStatusChanged(currentStatus: Bool) -> Bool {
-        return storageVars.isPhotoLibraryPermitted != currentStatus
     }
     
     func getContactsPermissionStatus(completionHandler: @escaping ContactsPermissionCallback) {
