@@ -743,8 +743,9 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
 //            self.getCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) { [weak self] cell in
             self.getCellForFile(objectUUID: uuid) { [weak self] cell in
                 cell?.finishedUploadForObject()
-                self?.postFinishedUploadFileAction(cell: cell, trimmedID: trimmedLocalID)
-//                self?.postFinishedUploadFileAction(id: uuid)
+                
+//                self?.postFinishedUploadFileAction(cell: cell, trimmedID: trimmedLocalID)
+                self?.postFinishedUploadFileAction(id: uuid)
             }
             
             
