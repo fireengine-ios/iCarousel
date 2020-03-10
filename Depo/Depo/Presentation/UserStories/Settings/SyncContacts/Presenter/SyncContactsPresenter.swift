@@ -19,7 +19,6 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
     private var contactSyncResponse: ContactSync.SyncResponse?
     private var isBackUpAvailable: Bool { return contactSyncResponse != nil }
     private let reachability = ReachabilityService.shared
-    private lazy var storageVars: StorageVars = factory.resolve()
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
@@ -47,9 +46,20 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
             if operationType != .getBackUpStatus {
                 requesetAccess { [weak self] success in
                     if success {
-                        self?.proccessOperation(operationType)
+                        
+                        if operationType == .backup {
+                            
+                            let contactsCount = self?.interactor.getStoredContactsCount()
+                            
+                            if contactsCount == 0 {
+                                self?.showEmptyContactsPopUp()
+                            } else {
+                                self?.proccessOperation(operationType)
+                            }
+                            
+                            self?.setButtonsAvailability()
+                        }
                     }
-                    self?.setButtonsAvailability()        
                 }
             } else {
                 proccessOperation(operationType)
@@ -255,18 +265,11 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
                 return
             }
             
-            if self.interactor.permissionStatusChanged(currentStatus: isPermitted) && isPermitted {
-                let contactsCount = self.interactor.getStoredContactsCount()
-                
-                if contactsCount == 0 {
-                    self.showEmptyContactsPopUp()
-                }
-                self.view.setButtonsAvailability(contactsPermitted: isPermitted, contactsCount: contactsCount, containContactsInCloud: hasStoredContacts)
-            } else {
+            if isPermitted {
                 self.view.setButtonsAvailability(contactsPermitted: isPermitted, contactsCount: self.interactor.getStoredContactsCount(), containContactsInCloud: hasStoredContacts)
+            } else {
+                self.view.setButtonsAvailability(contactsPermitted: isPermitted, contactsCount: nil, containContactsInCloud: hasStoredContacts)
             }
-            
-            self.storageVars.isPhotoLibraryPermitted = isPermitted
         }
     }
     
