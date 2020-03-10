@@ -1122,6 +1122,39 @@ enum GAEventLabel {
         }
     }
     
+    enum ProfileChangeType {
+        case name
+        case surname
+        case email
+        case birthday
+        case address
+        case phone
+        case password
+        case securityQuestion
+        
+        var text: String {
+            switch self {
+            case .name:
+                return "Name"
+            case .surname:
+                return "Surname"
+            case .email:
+                return "E-Mail"
+            case .birthday:
+                return "Birthday"
+            case .address:
+                return "Address"
+            case .phone:
+                return "Phone"
+            case .password:
+                return "Password"
+            case .securityQuestion:
+                return "SecurityQuestion"
+            }
+        }
+        
+    }
+    
     case empty
     case custom(String)
     
@@ -1216,6 +1249,7 @@ enum GAEventLabel {
     case mobilePaymentAction(_ isContinue: Bool)
     case backWithCheck(_ isChecked: Bool)
     case isOn(_ isOn: Bool)
+    case back
     
     var text: String {
         switch self {
@@ -1423,6 +1457,8 @@ enum GAEventLabel {
             return isChecked ? "Back - Checked" : "Back"
         case .isOn(let isOn):
             return isOn ? "On" : "Off"
+        case .back:
+            return "Back"
         }
     }
     
@@ -1473,6 +1509,7 @@ enum GADementionsFields {
     case spotify
     case dailyDrawleft
     case itemsCount(GAOperationType)
+    case editFields
     
     var text: String {
         switch self {
@@ -1524,6 +1561,8 @@ enum GADementionsFields {
             return "dailyDrawleft"
         case .itemsCount(let operationType):
             return operationType.itemsCountText
+        case .editFields:
+            return "editFields"
         }
     }
     
