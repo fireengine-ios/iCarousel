@@ -177,7 +177,6 @@ final class UploadOperation: Operation {
                     }
                     
                     debugLog("resumable_upload: status is \(status)")
-//                    self.showToast(message: "Resumable upload status is \(status)")
                     
                     switch status {
                     case .completed:
@@ -510,8 +509,12 @@ extension UploadOperation: OperationProgressServiceDelegate {
         }
     }
     
-    //FIXME: remove showToast
+    
     private func showToast(message: String) {
+        #if APPSTORE
+            return
+        #endif
+        
         DispatchQueue.toMain {
             
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else {

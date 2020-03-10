@@ -23,14 +23,7 @@ extension NSManagedObjectContext {
             completion?(.hasNoChanges)
             return
         }
-        
-        guard UIApplication.shared.isProtectedDataAvailable else {
-            rollback()
-            debugLog("core_data_save: isProtectedDataAvailable == false")
-            completion?(.rolledBack(ErrorResponse.string(TextConstants.NotLocalized.dataProtectedAndDeviceLocked)))
-            return
-        }
-        
+
         /// weak ???
         perform { [weak self] in
             do {
@@ -46,13 +39,6 @@ extension NSManagedObjectContext {
     func saveSync(completion: CoreDataSaveStatusHandler? = nil) {
         guard hasChanges else {
             completion?(.hasNoChanges)
-            return
-        }
-        
-        guard UIApplication.shared.isProtectedDataAvailable else {
-            rollback()
-            debugLog("core_data_save: isProtectedDataAvailable == false")
-            completion?(.rolledBack(ErrorResponse.string(TextConstants.NotLocalized.dataProtectedAndDeviceLocked)))
             return
         }
         
@@ -72,13 +58,6 @@ extension NSManagedObjectContext {
     func save(async: Bool, completion: CoreDataSaveStatusHandler? = nil) {
         guard hasChanges else {
             completion?(.hasNoChanges)
-            return
-        }
-        
-        guard UIApplication.shared.isProtectedDataAvailable else {
-            rollback()
-            debugLog("core_data_save: isProtectedDataAvailable == false")
-            completion?(.rolledBack(ErrorResponse.string(TextConstants.NotLocalized.dataProtectedAndDeviceLocked)))
             return
         }
 

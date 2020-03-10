@@ -265,9 +265,12 @@ final class HomePageInteractor: HomePageInteractorInput {
     
     func changePermissionsAllowed(type: PermissionType, isApproved: Bool) {
         accountService.changePermissionsAllowed(type: type, isApproved: isApproved) { [weak self] response in
+            guard let self = self else {
+                return
+            }
             switch response {
             case .success(_):
-                debugPrint("changePermissionsAllowed: success")
+                self.output.showSuccessMobilePaymentPopup()
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
             }
