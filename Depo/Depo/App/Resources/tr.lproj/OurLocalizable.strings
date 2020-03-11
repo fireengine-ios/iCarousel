@@ -1019,7 +1019,7 @@
 "import_from_spotify_title" = "Spotify'a Bağlan";
 "Spotify" = "Spotify";
 "spotify_remove_connection_warning_title" = "Spotify bağlantını kaldırmak üzeresin.";
-"spotify_remove_connection_warning_message" = "Spotify bağlantını kaldırmak istediğine emin misin?";
+"spotify_remove_connection_warning_message" = "Spotify bağlantını kaldırmak istediğine emin misin?\n\n";
 "support_form_problem_description" = "Türkçe, İngilizce ve Arapça dilleri destekliyoruz. Lütfen yorumunu bu dillerden birinde bize ilet";
 "contact_us_subject_1" = "Rehber Sorunu";
 "contact_us_subject_2" = "Fotoğraf Sorunu";
@@ -1411,7 +1411,7 @@
 "mobile_payment_close_popup_description" = "Mobil Ödeme İznini kapatmak için 532 Müşteri Hizmetlerini arayabilirsin.";
 "mobile_payment_close_popup_description_bold_range" = "532";
 "mobile_payment_open_popup_title" = "Haftalık 2GB İnternet Hediye!";
-"mobile_payment_open_popup_description" = "Mobil Ödeme İznini aktifleştirerek Haftalık 2GB internet kazanabilirsin. Tek seferlik haftalık 2GB internetini kazanmak için Devam butonuna  tıklayarak mobil ödeme onayı verebilirsin.\n\nKampanya ile ilgili detaylara www.turkcell.com.tr adresinden ulaşabilirsin.";
+"mobile_payment_open_popup_description" = "Mobil Ödeme İznini aktifleştirerek Haftalık 2GB internet kazanabilirsin. Tek seferlik haftalık her yöne geçerli 2GB internetini kazanmak için Devam butonuna tıkla!\n\nKampanya ile ilgili detaylara www.turkcell.com.tr adresinden ulaşabilirsin.";
 "mobile_payment_open_popup_description_bold_range" = "";
 "mobile_payment_open_popup_later_button" = "Daha Sonra";
 "mobile_payment_open_popup_continue_button" = "Devam";

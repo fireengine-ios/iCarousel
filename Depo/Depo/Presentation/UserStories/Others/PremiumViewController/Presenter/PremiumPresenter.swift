@@ -129,10 +129,6 @@ final class PremiumPresenter {
     }
     
     private func didPressOn(plan: SubscriptionPlan) {
-        if let tag = MenloworksSubscriptionStorage(rawValue: plan.name) {
-            MenloworksAppEvents.onSubscriptionClicked(tag)
-        }
-        
         router.closePaymentPopUpController(closeAction: { [weak self] in
             self?.actionFor(plan: plan)
         })
@@ -244,7 +240,6 @@ extension PremiumPresenter: PremiumInteractorOutput {
     }
     
     func successedVerifyOffer() {
-        MenloworksTagsService.shared.sendPhotopickLeftAnalysisStatus(nil)
         optInVC?.stopLoading()
         optInVC?.resignFirstResponder()
         /// to wait popViewController animation
@@ -287,7 +282,6 @@ extension PremiumPresenter: PremiumInteractorOutput {
 
     //MARK: finish purchase
     func purchaseFinished() {
-        MenloworksTagsService.shared.sendPhotopickLeftAnalysisStatus(nil)
         view?.stopActivityIndicator()
         if let moduleOutput = moduleOutput {
             moduleOutput.didReloadData()

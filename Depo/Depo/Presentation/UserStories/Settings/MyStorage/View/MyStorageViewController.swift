@@ -190,12 +190,9 @@ extension MyStorageViewController: UICollectionViewDelegateFlowLayout {
 extension MyStorageViewController: SubscriptionPlanCellDelegate {
     
     func didPressSubscriptionPlanButton(at indexPath: IndexPath) {
-        guard let plan = output?.displayableOffers[indexPath.row] else { return }
-        
-        if let tag = MenloworksSubscriptionStorage(rawValue: plan.name) {
-            MenloworksAppEvents.onSubscriptionClicked(tag)
+        guard let plan = output?.displayableOffers[indexPath.row] else {
+            return
         }
-        
         output?.didPressOn(plan: plan, planIndex: indexPath.row)
     }
 }

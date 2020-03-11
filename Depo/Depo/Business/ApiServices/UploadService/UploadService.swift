@@ -729,7 +729,7 @@ final class UploadService: BaseRequestService {
                         /// Provided first-byte-pos is not the continuation of the last-byte-pos of pre-uploaded part!
                         handler(.discontinuityError, nil)
                         
-                    case "RU_1":
+                    case "RU_10":
                         /// Invalid upload request! Initial upload must start from the beginning
                         handler(.invalidUploadRequest, nil)
                         

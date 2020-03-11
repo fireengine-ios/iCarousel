@@ -12,7 +12,6 @@ import FBSDKCoreKit
 import SDWebImage
 import XCGLogger
 import Adjust
-import XPush
 import Netmera
 import UserNotifications
 
@@ -127,7 +126,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppConfigurator.applicationStarted(with: options)
         
         ContactSyncSDK.doPeriodicSync()
-        MenloworksAppEvents.onAppLaunch()
         
         passcodeStorage.systemCallOnScreen = false
         
@@ -144,16 +142,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func setupPushNotifications(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         // required setup order
-        // 1. XPush SDK setup
-        // 2. subscribe to notification delegate
-        // 3. Netmera SDK setup
-        
-        AppConfigurator.startXtremePush(with: launchOptions)
+        // 1. subscribe to notification delegate
+        // 2. Netmera SDK setup
         
         if #available(iOS 10, *) {
             let options: UNAuthorizationOptions = [.alert, .sound, .badge]
             UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
-                XPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
                 Netmera.requestPushNotificationAuthorization(forTypes: [.alert, .badge, .sound])
                 AnalyticsPermissionNetmeraEvent.sendNotificationPermissionNetmeraEvents()
                 ///call processLocalMediaItems either here or in the AppDelegate
@@ -170,7 +164,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UNUserNotificationCenter.current().delegate = self
             AnalyticsService.startNetmera()
         } else {
-            XPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
             AnalyticsService.startNetmera()
             Netmera.requestPushNotificationAuthorization(forTypes: [.alert, .badge, .sound])
         }
@@ -242,7 +235,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             CacheManager.shared.actualizeCache()
         }
         ContactSyncSDK.doPeriodicSync()
-        MenloworksAppEvents.sendProfileName()
         
         // handle netmera push notifications
         if let object = Netmera.recentPushObject(),
@@ -387,16 +379,12 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         debugLog("AppDelegate didRegisterForRemoteNotificationsWithDeviceToken")
-        MenloworksTagsService.shared.onNotificationPermissionChanged(true)
         AnalyticsPermissionNetmeraEvent.sendNotificationPermissionNetmeraEvents()
-        XPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         debugLog("AppDelegate didFailToRegisterForRemoteNotificationsWithError")
-        MenloworksTagsService.shared.onNotificationPermissionChanged(false)
         AnalyticsPermissionNetmeraEvent.sendNotificationPermissionNetmeraEvents()
-        XPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
@@ -406,7 +394,6 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         debugLog("AppDelegate didReceiveRemoteNotification")
-        XPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
         
         AppEvents.logPushNotificationOpen(userInfo)
         
@@ -420,8 +407,6 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         debugLog("AppDelegate didReceive")
-
-        XPush.applicationDidReceive(notification)
     }
     
     //MARK: Adjust
@@ -463,19 +448,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         } else {
             debugLog("userNotificationCenter Netmera push object is empty")
         }
-
-        XPush.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
     }
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound, .badge])
-    }
-    
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
-        if #available(iOS 12.0, *) {
-            XPush.userNotificationCenter(center, openSettingsFor: notification)
-        }
     }
 }

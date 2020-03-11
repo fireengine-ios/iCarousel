@@ -46,19 +46,16 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
             if operationType != .getBackUpStatus {
                 requesetAccess { [weak self] success in
                     if success {
-                        
                         if operationType == .backup {
-                            
-                            let contactsCount = self?.interactor.getStoredContactsCount()
-                            
-                            if contactsCount == 0 {
+                            if self?.interactor.getStoredContactsCount() == 0 {
                                 self?.showEmptyContactsPopUp()
                             } else {
                                 self?.proccessOperation(operationType)
                             }
-                            
-                            self?.setButtonsAvailability()
+                        } else {
+                            self?.proccessOperation(operationType)
                         }
+                         self?.setButtonsAvailability()
                     }
                 }
             } else {

@@ -55,7 +55,6 @@ extension ImportFromInstagramPresenter: ImportFromInstagramViewOutput {
     func stopInstagram() {
         view?.startActivityIndicator()
         view?.startActivityIndicator()
-        MenloworksTagsService.shared.instagramImport(isOn: false)
         interactor.setSync(status: false)
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .off, socialType: .instagram))
     }
@@ -97,7 +96,6 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
         view?.stopActivityIndicator()
         
         if isConnected {
-            MenloworksAppEvents.onInstagramConnected()
             view?.connectionStatusSuccess(isConnected, username: username)
         }
     }
