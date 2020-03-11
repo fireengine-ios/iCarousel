@@ -507,13 +507,9 @@ extension PhotoVideoController: UICollectionViewDelegate {
             
             cell.updateSelection(isSelectionMode: self.dataSource.isSelectingMode, animated: true)
             
-            if self.uploadedObjectID.index(of: trimmedLocalFileID) != nil {
+            if let uuid = object.uuid, self.uploadedObjectID.index(of: uuid) != nil {
                 cell.finishedUploadForObject()
             }
-            
-            //        else {
-            //            cell.resetCloudImage()
-            //        }
         }
     }
     
@@ -678,18 +674,6 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         guard file.isLocalItem else {
             return
         }
-        
-        //
-//        guard let dataBaseItemID = file.dataBaseItemID else {
-//            return
-//        }
-//
-//        dataSource.indexPath(of: dataBaseItemID) { [weak self] index in
-//            let id = dataBaseItemID.uriRepresentation().absoluteString//file.getTrimmedLocalID()
-//            self?.uploadProgress[id] = progress
-//            self?.getVisiblePhotoVideoCell(for: index)?.setProgressForObject(progress: progress, blurOn: true)
-//        }
-    
         let id = file.getTrimmedLocalID()
         self.uploadProgress[id] = progress
         self.getVisibleCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) { cell in
@@ -698,20 +682,6 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     }
     
     func startUploadFile(file: WrapData) {
-        debugPrint("!!!--- start uuid \(file.uuid) and mediaItemIDURL \(file.dataBaseItemID?.uriRepresentation().absoluteString)")
-        ///only WrapData that was initiated from MediaItem does contain database object ID
-//        guard let dataBaseItemID = file.dataBaseItemID else {
-//            return
-//        }
-//
-//        dataSource.indexPath(of: dataBaseItemID) { [weak self] index in
-//            let progress: Float = 0
-//            let id = dataBaseItemID.uriRepresentation().absoluteString//file.getTrimmedLocalID()
-//            self?.uploadProgress[id] = progress
-//            self?.getVisiblePhotoVideoCell(for: index)?.setProgressForObject(progress: progress, blurOn: true)
-//        }
-        
-        
         guard file.isLocalItem else {
             return
         }
@@ -725,63 +695,29 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     }
     
     func finishedUploadFile(file: WrapData) {
-        debugPrint("!!!--- finished uuid \(file.uuid) and mediaItemIDURL \(file.dataBaseItemID?.uriRepresentation().absoluteString)")
-//        guard let dataBaseItemID = file.dataBaseItemID else {
-//            return
-//        }
-//        let id = dataBaseItemID.uriRepresentation().absoluteString
-        
         let trimmedLocalID = file.getTrimmedLocalID()
-        let uuid = file.uuid
-        if uploadedObjectID.index(of: trimmedLocalID) == nil {
-            uploadedObjectID.append(trimmedLocalID)
-        }
         uploadProgress.removeValueSafely(forKey: trimmedLocalID)
-    
+        
+        let uuid = file.uuid
+        if uploadedObjectID.index(of: uuid) == nil {
+            uploadedObjectID.append(uuid)
+        }
+        
         DispatchQueue.toMain {
-            //original
-//            self.getCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) { [weak self] cell in
-            self.getCellForFile(objectUUID: uuid) { [weak self] cell in
-                cell?.finishedUploadForObject()
-                
-//                self?.postFinishedUploadFileAction(cell: cell, trimmedID: trimmedLocalID)
-                self?.postFinishedUploadFileAction(id: uuid)
+            self.getCellForTrimmedID(objectTrimmedLocalID: trimmedLocalID) { [weak self] cell in
+                self?.postFinishedUploadFileAction(file: file)
             }
-            
-            
-//              DB way
-//            self.dataSource.indexPath(of: dataBaseItemID) { [weak self] index in
-//
-//                self?.getVisiblePhotoVideoCell(for: index)?.finishedUploadForObject()
-//                self?.postFinishedUploadFileAction(id: uuid)
-//            }
             
         }
         
     }
     
-    private func postFinishedUploadFileAction(cell: PhotoVideoCell?, trimmedID: String) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
-        guard let self = self else {
-            return
-        }
-//            if object.isLocalItemValue {
-//                cell.showCloudImage()
-//            } else {
-                cell?.resetCloudImage()
-//            }
-            if let index = self.uploadedObjectID.index(of: trimmedID) {
-                self.uploadedObjectID.remove(at: index)
-            }
-        })
-    }
-    
-    private func postFinishedUploadFileAction(id: String) {
+    private func postFinishedUploadFileAction(file: WrapData) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: { [weak self] in
             guard let self = self else {
                 return
             }
-            self.dataSource.getIndexPathForRemoteObject(itemUUID: id) { [weak self] indexPath in
+            self.dataSource.getIndexPathForObject(uuid: file.uuid) { [weak self] indexPath in
                 guard let self = self else {
                     return
                 }
@@ -800,13 +736,12 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
                     })
                 }
             }
-            if let index = self.uploadedObjectID.index(of: id) {
+            if let index = self.uploadedObjectID.index(of: file.uuid) {
                 self.uploadedObjectID.remove(at: index)
             }
         })
 
     }
-    
     
     func failedUploadFile(file: WrapData, error: Error?) {
         let uuid = file.getTrimmedLocalID()
@@ -877,6 +812,16 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         }
     }
     
+    private func getCellForTrimmedID(objectTrimmedLocalID: String, completion: @escaping  (_ cell: PhotoVideoCell?)->Void) {
+        dataSource.indexPath(itemTrimmedLocalID: objectTrimmedLocalID) { [weak self] indexPath in
+            guard let path = indexPath else {
+                completion(nil)
+                return
+            }
+             completion(self?.collectionView?.cellForItem(at: path) as? PhotoVideoCell)
+        }
+    }
+
     private func getVisibleCellForLocalFile(objectTrimmedLocalID: String, completion: @escaping  (_ cell: PhotoVideoCell?)->Void) {
         getCellForLocalFile(objectTrimmedLocalID: objectTrimmedLocalID) { [weak self] cell in
             guard

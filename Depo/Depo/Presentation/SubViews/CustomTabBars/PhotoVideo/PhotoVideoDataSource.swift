@@ -180,7 +180,7 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    func indexPath(of mediaItemID: NSManagedObjectID, indexCallBack: @escaping IndexPathCallback) {
+    func indexPath(mediaItemID: NSManagedObjectID, indexCallBack: @escaping IndexPathCallback) {
         let context = fetchedResultsController.managedObjectContext
         context.perform { [weak self] in
             guard
@@ -192,6 +192,17 @@ final class PhotoVideoDataSource: NSObject {
                     return
             }
             indexCallBack(objIndex)
+        }
+    }
+    
+    func indexPath(itemTrimmedLocalID: String, indexCallBack: @escaping IndexPathCallback) {
+        fetchedResultsController.managedObjectContext.perform { [weak self] in
+            guard let findedObject = self?.lastUpdateFetchedObjects?.first(where: { $0.trimmedLocalFileID == itemTrimmedLocalID }) else {
+                indexCallBack(nil)
+                return
+            }
+            
+            indexCallBack(self?.indexPath(forObject: findedObject))
         }
     }
     
