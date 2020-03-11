@@ -1521,3 +1521,6 @@
 "become_premium_header_contact_sync_subtitle" = "become_premium_header_contact_sync_subtitle";
 "become_premium_or_text" = "Or,";
 "become_premium_see_all_packages" = "See All Packages";
+
+"contact_sync_confirm_premium_popup_title" = "Confirmation";
+"contact_sync_confirm_premium_popup_text" = "contact_sync_confirm_premium_popup_text";

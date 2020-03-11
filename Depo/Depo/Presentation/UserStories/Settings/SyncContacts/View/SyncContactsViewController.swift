@@ -301,5 +301,20 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         }
     }
     
+    func showPremiumPopup() {
+        let popup = PopUpController.with(title: TextConstants.contactSyncConfirmPremiumPopupTitle,
+                                         message: TextConstants.contactSyncConfirmPremiumPopupText,
+                                         image: .none,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstAction: { vc in
+                                            vc.close()
+                                         }, secondAction: { vc in
+                                            vc.close(isFinalStep: false) { [weak self] in
+                                                self?.output.openPremium()
+                                            }
+                                         })
+        present(popup, animated: true)
+    }
     
 }

@@ -18,4 +18,6 @@ protocol SyncContactsViewInput: class, ErrorPresenter {
     func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType)
     func resetProgress()
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType)
+    
+    func showPremiumPopup()
 }

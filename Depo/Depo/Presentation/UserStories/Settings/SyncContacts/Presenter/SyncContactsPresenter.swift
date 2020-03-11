@@ -125,6 +125,10 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
         }
     }
     
+    func openPremium() {
+        router.goToPremium()
+    }
+    
     func showNoBackUp() {
         view.setStateWithoutBackUp()
         setButtonsAvailability()
@@ -146,7 +150,7 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
                 }
             }
         } else {
-            router.goToPremium()
+            view.showPremiumPopup()
         }
     }
     
