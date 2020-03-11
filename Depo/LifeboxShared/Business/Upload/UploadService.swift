@@ -52,7 +52,7 @@ final class UploadService {
     func upload(url: URL,
                 name: String,
                 contentType: String,
-                progressHandler: @escaping Request.ProgressHandler,
+                progressHandler: @escaping ProgressHandler,
                 dataRequestHandler: DataRequestHandler?,
                 completion: @escaping ResponseVoid) {
         
@@ -86,7 +86,9 @@ final class UploadService {
                 let dataRequest = self.sessionManager
                     .upload(url, to: uploadUrl, method: .put, headers: headers)
                     .customValidate()
-                    .uploadProgress(closure: progressHandler)
+                    .uploadProgress { progress in
+                        progressHandler(progress.fractionCompleted, progress.completedUnitCount.intValue)
+                    }
                     .responseString { [weak self] response in
                         self?.commonUploadResponse(for: response, completion: completion)
                 }
@@ -101,7 +103,7 @@ final class UploadService {
     func upload(data: Data,
                 name: String,
                 contentType: String,
-                progressHandler: @escaping Request.ProgressHandler,
+                progressHandler: @escaping ProgressHandler,
                 dataRequestHandler: DataRequestHandler?,
                 completion: @escaping ResponseVoid)
     {
@@ -134,7 +136,9 @@ final class UploadService {
                 let dataRequest = self.sessionManager
                     .upload(data, to: uploadUrl, method: .put, headers: headers)
                     .customValidate()
-                    .uploadProgress(closure: progressHandler)
+                    .uploadProgress { progress in
+                        progressHandler(progress.fractionCompleted, progress.completedUnitCount.intValue)
+                    }
                     .responseString { [weak self] response in
                         self?.commonUploadResponse(for: response, completion: completion)
                 }
@@ -250,7 +254,7 @@ final class UploadService {
     func resumableUpload(interruptedId: String, data: Data, range: Range<Int>,
                          name: String, contentType: String, fileSize: Int64,
                          dataRequestHandler: DataRequestHandler?,
-                         progressHandler: @escaping Request.ProgressHandler,
+                         progressHandler: @escaping ProgressHandler,
                          completion: @escaping ResumableUploadHandler) {
         let dataRequest = getBaseUploadUrl { [weak self] result in
             switch result {
@@ -265,7 +269,9 @@ final class UploadService {
                 let dataRequest = self.sessionManager
                     .upload(data, to: uploadUrl, method: .put, headers: headers)
                     .customValidate()
-                    .uploadProgress(closure: progressHandler)
+                    .uploadProgress { progress in
+                        progressHandler(progress.fractionCompleted, progress.completedUnitCount.intValue)
+                    }
                     .responseString { [weak self] response in
                         self?.resumableUploadResponse(for: response, completion: completion)
                 }
