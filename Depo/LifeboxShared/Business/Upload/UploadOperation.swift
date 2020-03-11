@@ -9,14 +9,16 @@
 import Foundation
 import Alamofire
 
+typealias ProgressHandler = (_ ratio: Double, _ bytes: Int) -> Void
+
+
 final class UploadOperation: Operation {
-    
     typealias InterruptedInfo = (identifier: String, interruptedId: String)
     
     private lazy var uploadService = UploadService()
     
     private let sharedItem: SharedItemSource
-    private let progressHandler: Request.ProgressHandler
+    private let progressHandler: ProgressHandler
     private let didStartUpload: VoidHandler?
     private let complition: ResponseVoid
     private var dataRequest: DataRequest?
@@ -32,7 +34,7 @@ final class UploadOperation: Operation {
     private var attempts = 0
     
     init(sharedItem: SharedItemSource,
-         progressHandler: @escaping Request.ProgressHandler,
+         progressHandler: @escaping ProgressHandler,
          didStartUpload: VoidHandler?,
          complition: @escaping ResponseVoid) {
         self.sharedItem = sharedItem
@@ -221,20 +223,33 @@ final class UploadOperation: Operation {
     //MARK: - Resumable
     
     private func resumableUpload(dataRequestHandler: @escaping DataRequestHandler, completion: @escaping ResponseVoid) {
+        
+        let resumableProgressHandler: ProgressHandler = { ratio, bytes in
+            let actualRatio: Double
+            if let range = self.chunker?.lastRange, let fileSize = self.chunker?.fileSize {
+                let bytesUploaded = range.lowerBound + bytes
+                actualRatio = Double(bytesUploaded) / Double(fileSize)
+            } else {
+                actualRatio = ratio
+            }
+            
+            self.progressHandler(actualRatio, bytes)
+        }
+        
         let bufferCapacity = resumableUploadInfoService.chunkSize
         
         switch sharedItem {
         case .url(let item):
             chunker = DataChunkProviderFactory.createWithSource(source: item.url, bufferCapacity: bufferCapacity)
-            attemptResumableUpload(item: item, dataRequestHandler: dataRequestHandler, completion: completion)
+            attemptResumableUpload(item: item, progressHandler: resumableProgressHandler, dataRequestHandler: dataRequestHandler, completion: completion)
             
         case .data(let item):
             chunker = DataChunkProviderFactory.createWithSource(source: item.data, bufferCapacity: bufferCapacity)
-            attemptResumableUpload(item: item, dataRequestHandler: dataRequestHandler, completion: completion)
+            attemptResumableUpload(item: item, progressHandler: resumableProgressHandler, dataRequestHandler: dataRequestHandler, completion: completion)
         }
     }
 
-    private func attemptResumableUpload(item: SharedItem, dataRequestHandler: @escaping DataRequestHandler, completion: @escaping ResponseVoid) {
+    private func attemptResumableUpload(item: SharedItem, progressHandler: @escaping ProgressHandler, dataRequestHandler: @escaping DataRequestHandler, completion: @escaping ResponseVoid) {
         
         guard let interruptedId = interruptedInfo?.interruptedId else {
             //FIXME: currently interruptedId is always existed, create new interrupted id here
@@ -253,14 +268,14 @@ final class UploadOperation: Operation {
                     completion(.success(()))
                     
                 case .didntStart:
-                    self?.uploadContiniously(item: item, interruptedId: interruptedId, dataRequestHandler: dataRequestHandler, completion: completion)
+                    self?.uploadContiniously(item: item, interruptedId: interruptedId, progressHandler: progressHandler, dataRequestHandler: dataRequestHandler, completion: completion)
                     
                 case .uploaded(bytes: let bytes):
                     guard let nextChunk = self?.chunker?.nextChunk(skipping: bytes) else { completion(.failed(CustomErrors.text(TextConstants.commonServiceError)))
                         return
                     }
                     
-                    self?.uploadContiniously(item: item, interruptedId: interruptedId, chunk: nextChunk, dataRequestHandler: dataRequestHandler, completion: completion)
+                    self?.uploadContiniously(item: item, interruptedId: interruptedId, chunk: nextChunk, progressHandler: progressHandler, dataRequestHandler: dataRequestHandler, completion: completion)
                     
                 case .discontinuityError, .invalidUploadRequest:
                     self?.resumableUpload(dataRequestHandler: dataRequestHandler, completion: completion)
@@ -269,7 +284,7 @@ final class UploadOperation: Operation {
         }
     }
     
-    private func uploadContiniously(item: SharedItem, interruptedId: String, chunk: DataChunk? = nil, dataRequestHandler: @escaping DataRequestHandler, completion: @escaping ResponseVoid) {
+    private func uploadContiniously(item: SharedItem, interruptedId: String, chunk: DataChunk? = nil, progressHandler: @escaping ProgressHandler, dataRequestHandler: @escaping DataRequestHandler, completion: @escaping ResponseVoid) {
         
         guard
             let nextChunk = chunk != nil ? chunk : chunker?.nextChunk(),
@@ -294,7 +309,7 @@ final class UploadOperation: Operation {
                     
                 case .uploaded(bytes: _):
                     self?.attempts = 0
-                    self?.uploadContiniously(item: item, interruptedId: interruptedId, dataRequestHandler: dataRequestHandler, completion: completion)
+                    self?.uploadContiniously(item: item, interruptedId: interruptedId, progressHandler: progressHandler, dataRequestHandler: dataRequestHandler, completion: completion)
                     
                 case .discontinuityError, .invalidUploadRequest:
                     self?.resumableUpload(dataRequestHandler: dataRequestHandler, completion: completion)

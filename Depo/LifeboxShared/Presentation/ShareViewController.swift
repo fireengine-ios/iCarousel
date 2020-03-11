@@ -111,9 +111,9 @@ final class ShareViewController: UIViewController, ShareController {
                     return
                 }
                 
-                self.uploadService.addSharedItems(self.sharedItems, progress: { [weak self] progress in
+                self.uploadService.addSharedItems(self.sharedItems, progress: { [weak self] ratio, _ in
                     DispatchQueue.main.async {
-                        self?.uploadProgress.progress = Float(progress.fractionCompleted)
+                        self?.uploadProgress.progress = Float(ratio)
                     }
                     }, didStartUpload: { [weak self] sharedItem in
                         self?.updateCurrentUI(for: sharedItem)
