@@ -1039,7 +1039,7 @@
 "import_from_spotify_title" = "Connect Spotify";
 "Spotify" = "Spotify";
 "spotify_remove_connection_warning_title" = "You're about to remove your Spotify connection.";
-"spotify_remove_connection_warning_message" = "Are you sure you want to remove your Spotify connection?";
+"spotify_remove_connection_warning_message" = "Are you sure you want to remove your Spotify connection?\n\n";
 "support_form_problem_description" = "We support you in Turkish, English, Arabic languages, so please write your comment in one of these languages";
 "contact_us_subject_1" = "Contacts Problem";
 "contact_us_subject_2" = "Photos Problem";
