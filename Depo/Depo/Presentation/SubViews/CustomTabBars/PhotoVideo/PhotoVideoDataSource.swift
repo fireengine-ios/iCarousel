@@ -186,8 +186,8 @@ final class PhotoVideoDataSource: NSObject {
                 let obj = context.object(with: mediaItemID) as? MediaItem,
                 let objIndex = self.fetchedResultsController.indexPath(forObject: obj)
             else {
-                    indexCallBack(nil)
-                    return
+                indexCallBack(nil)
+                return
             }
             indexCallBack(objIndex)
         }
