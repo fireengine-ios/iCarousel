@@ -671,9 +671,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return Date()
     }
     
-    //FIXME: this one is used to ditect unique object in DB, in order to avoid this we need to check/rewrite our ItemOperationManager
-    var dataBaseItemID: NSManagedObjectID?
-    
     @available(*, deprecated: 1.0, message: "Use convenience init(info: AssetInfo) instead")
     convenience init(asset: PHAsset) {
         let info = LocalMediaStorage.default.fullInfoAboutAsset(asset: asset)
@@ -1042,7 +1039,6 @@ class WrapData: BaseDataSourceItem, Wrappered {
             patchToPreview = .remoteUrl(previewUrl)
         }
         
-        dataBaseItemID = mediaItem.objectID
         id = mediaItem.idValue
         super.init()
         parent = mediaItem.parent
