@@ -464,17 +464,6 @@ extension PhotoVideoController: UIScrollViewDelegate {
         return indexPath == lastIndexPath
     }
     
-    private func getVisiblePhotoVideoCell(for index: IndexPath?) -> PhotoVideoCell? {
-        guard
-            let index = index,
-            let photoVideoCell = collectionView.cellForItem(at: index) as? PhotoVideoCell,
-            collectionView.visibleCells.contains(photoVideoCell)
-        else {
-            return nil
-        }
-        return photoVideoCell
-    }
-    
 }
 
 // MARK: - UICollectionViewDelegate
