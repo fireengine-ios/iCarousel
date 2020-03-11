@@ -39,8 +39,11 @@ final class AutoSyncAlbumTableViewCell: AutoSyncTableViewCell {
         }
         
         titleLabel.text = model.album.name
-        checkBox.isSelected = model.album.isSelected
-        checkBox.isEnabled = model.isEnabled
+        checkBox.setup(isEnabled: model.isEnabled,
+                       isSelected: model.album.isSelected,
+                       isAllChecked: model.isAllChecked)
+        
+        leftOffset.constant = model.album.isMainAlbum ? 24 : 55
         
         contentView.alpha = model.isEnabled ? 1 : 0.5
     }
@@ -50,12 +53,18 @@ final class AutoSyncAlbumTableViewCell: AutoSyncTableViewCell {
     }
     
     private func toogle() {
-        guard checkBox.isEnabled, let model = model else {
+        guard let model = model, model.isEnabled else {
             return
         }
         
-        model.album.isSelected.toggle()
-        checkBox.isSelected = model.album.isSelected
+        if model.album.isMainAlbum {
+            model.isAllChecked.toggle()
+        } else {
+            model.album.isSelected.toggle()
+        }
+        checkBox.setup(isEnabled: model.isEnabled,
+                       isSelected: model.album.isSelected,
+                       isAllChecked: model.isAllChecked)
         delegate?.didChange(model: model)
     }
 }

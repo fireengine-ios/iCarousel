@@ -14,14 +14,17 @@ final class AutoSyncCheckBox: UIButton {
     private let uncheckedImage = UIImage(named: "checkBoxNotSelected")
     private let disabledImage = UIImage(named: "checkboxSelected")
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setup()
-    }
-    
-    private func setup() {
-        setImage(uncheckedImage, for: .normal)
-        setImage(checkedImage, for: .selected)
-        setImage(disabledImage, for: [.disabled, .selected])
+    func setup(isEnabled: Bool, isSelected: Bool, isAllChecked: Bool = true) {
+        let image: UIImage?
+        if isEnabled {
+            if isSelected {
+                image = isAllChecked ? checkedImage : disabledImage
+            } else {
+                image = uncheckedImage
+            }
+        } else {
+            image = isSelected ? disabledImage : uncheckedImage
+        }
+        setImage(image, for: .normal)
     }
 }

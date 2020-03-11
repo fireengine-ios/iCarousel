@@ -31,13 +31,42 @@ enum AutoSyncRowType {
     case header
     case settings
     case album
+    
+    func cellClass() -> AutoSyncTableViewCell.Type {
+        switch self {
+        case .switcher:
+            return AutoSyncSwitcherTableViewCell.self
+        case .settings:
+            return AutoSyncSettingsTableViewCell.self
+        case .header:
+            return AutoSyncHeaderTableViewCell.self
+        case .album:
+            return AutoSyncAlbumTableViewCell.self
+        }
+    }
+    
+    static let cellTypes: [AutoSyncTableViewCell.Type] = [AutoSyncSwitcherTableViewCell.self,
+                                                          AutoSyncSettingsTableViewCell.self,
+                                                          AutoSyncHeaderTableViewCell.self,
+                                                          AutoSyncAlbumTableViewCell.self]
 }
 
 final class AutoSyncAlbum {
     
+    static var mainAlbumName: String {
+        if #available(iOS 13, *) {
+            return "Recents"
+        } else {
+            return "Camera Roll"
+        }
+    }
+    
     let uuid: String
     let name: String
     var isSelected: Bool
+    var isMainAlbum: Bool {
+        return name == Self.mainAlbumName
+    }
     
     init(uuid: String, name: String, isSelected: Bool) {
         self.uuid = uuid
@@ -49,6 +78,12 @@ final class AutoSyncAlbum {
         uuid = asset.localIdentifier
         name = asset.localizedTitle ?? ""
         isSelected = true
+    }
+}
+
+extension AutoSyncAlbum: Equatable {
+    static func == (lhs: AutoSyncAlbum, rhs: AutoSyncAlbum) -> Bool {
+        return lhs.uuid == rhs.uuid
     }
 }
 
@@ -65,24 +100,6 @@ class AutoSyncModel: Equatable {
     
     static func == (lhs: AutoSyncModel, rhs: AutoSyncModel) -> Bool {
         return lhs.equalTo(rhs: rhs)
-    }
-    
-    static let cellTypes: [AutoSyncTableViewCell.Type] = [AutoSyncSwitcherTableViewCell.self,
-                                                          AutoSyncSettingsTableViewCell.self,
-                                                          AutoSyncHeaderTableViewCell.self,
-                                                          AutoSyncAlbumTableViewCell.self]
-
-    func cellClass() -> AutoSyncTableViewCell.Type {
-        switch type {
-        case .switcher:
-            return AutoSyncSwitcherTableViewCell.self
-        case .settings:
-            return AutoSyncSettingsTableViewCell.self
-        case .header:
-            return AutoSyncHeaderTableViewCell.self
-        case .album:
-            return AutoSyncAlbumTableViewCell.self
-        }
     }
 }
 
@@ -121,6 +138,7 @@ final class AutoSyncSettingModel: AutoSyncModel {
 
 final class AutoSyncAlbumModel: AutoSyncModel {
     var album: AutoSyncAlbum
+    var isAllChecked = true //only for main album - if all sub-albums checked
     var isEnabled = true
     
     init(album: AutoSyncAlbum) {

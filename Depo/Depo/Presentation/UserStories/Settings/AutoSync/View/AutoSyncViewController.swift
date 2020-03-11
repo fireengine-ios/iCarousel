@@ -171,11 +171,8 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
             MenloworksTagsService.shared.onAutosyncVideosStatusOff()
             
             MenloworksEventsService.shared.onFirstAutosyncOff()
-            storageVars.autoSyncSet = true
-            output.change(settings: settings)
         } else {
             MenloworksTagsService.shared.onAutosyncStatus(isOn: true)
-            output.checkPermissions()
             
             let photoOption = settings.photoSetting.option
             let videoOption = settings.videoSetting.option
@@ -202,6 +199,9 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
                 MenloworksTagsService.shared.onAutosyncVideosStatusOff()
             }
         }
+        
+        storageVars.autoSyncSet = true
+        output.change(settings: settings)
     }
     
     // MARK: AutoSyncViewInput

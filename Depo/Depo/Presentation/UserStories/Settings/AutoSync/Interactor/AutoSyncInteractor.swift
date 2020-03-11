@@ -59,9 +59,14 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
             completion(albums)
             return
         }
-        
+
         localMediaStorage.getLocalAlbums { assets in
-            let albums = assets.map { AutoSyncAlbum(asset: $0) }
+            var albums = assets.map { AutoSyncAlbum(asset: $0) }
+            if let mainAlbum = albums.first(where: { $0.name == AutoSyncAlbum.mainAlbumName }) {
+                albums.remove(mainAlbum)
+                albums.insert(mainAlbum, at: 0)
+            }
+            
             completion(albums)
         }
     }

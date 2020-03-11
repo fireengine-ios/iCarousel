@@ -20,8 +20,9 @@ final class AutoSyncDataSource: NSObject {
     
     private var models = [AutoSyncModel]()
     private var albumModels = [AutoSyncAlbumModel]()
-    
+    private(set) var selectedAlbums = [AutoSyncAlbum]()
     private(set) var autoSyncSetting = AutoSyncSettings()
+    
     var isFromSettings = false
     
     private let tableViewAnimationType = UITableView.RowAnimation.top
@@ -44,7 +45,7 @@ final class AutoSyncDataSource: NSObject {
         tableView.separatorStyle = .none
         tableView.allowsMultipleSelection = true
         
-        AutoSyncModel.cellTypes.forEach { tableView.register(nibCell: $0.self) }
+        AutoSyncRowType.cellTypes.forEach { tableView.register(nibCell: $0.self) }
         
         //need for correct hide animation bottom cells
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: Device.winSize.width, height: 150))
@@ -65,7 +66,15 @@ final class AutoSyncDataSource: NSObject {
         autoSyncSetting = settings
         enableAutoSync()
         
-        albumModels = albums.map { AutoSyncAlbumModel(album: $0) }
+        selectedAlbums = albums.filter { $0.isSelected }
+        albumModels = albums.map { album -> AutoSyncAlbumModel in
+            let model = AutoSyncAlbumModel(album: album)
+            if model.album.isMainAlbum {
+                model.isAllChecked = selectedAlbums.count == albums.count
+            }
+            return model
+        }
+        
     }
     
     func forceDisableAutoSync() {
@@ -88,7 +97,7 @@ extension AutoSyncDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = models[indexPath.row]
         
-        guard let cell = tableView.dequeue(reusable: model.cellClass().self, for: indexPath) as? AutoSyncTableViewCell else {
+        guard let cell = tableView.dequeue(reusable: model.type.cellClass().self, for: indexPath) as? AutoSyncTableViewCell else {
             assertionFailure()
             return UITableViewCell()
         }
@@ -112,10 +121,12 @@ extension AutoSyncDataSource: UITableViewDelegate {
     }
 }
 
-//MARK: -
+//MARK: - AutoSyncSettingsTableViewCellDelegate
 
 extension AutoSyncDataSource: AutoSyncSettingsTableViewCellDelegate {
     func didChange(setting: AutoSyncSetting) {
+        delegate?.didChangeSettingsOption(settings: setting)
+        
         let headerType: AutoSyncHeaderType
         switch setting.syncItemType {
         case .photo:
@@ -176,6 +187,17 @@ extension AutoSyncDataSource: AutoSyncCellDelegate {
                     hideAlbums()
                 }
             }
+        } else if let model = model as? AutoSyncAlbumModel {
+            if model.album.isMainAlbum {
+                updateAlbums(isSelected: model.isAllChecked)
+            } else {
+                if model.album.isSelected {
+                    selectedAlbums.append(model.album)
+                } else {
+                    selectedAlbums.remove(model.album)
+                }
+                updateMainAlbumCell()
+            }
         }
     }
 }
@@ -196,7 +218,7 @@ extension AutoSyncDataSource {
         updateTableView({
             tableView.insertRows(at: indexPaths, with: tableViewAnimationType)
         }, completion: { [weak self] in
-            self?.updateVisibleAlbumCells()
+            self?.updateAlbums(isSelected: nil)
         })
     }
     
@@ -215,7 +237,7 @@ extension AutoSyncDataSource {
         updateTableView({
             tableView.deleteRows(at: indexPaths, with: tableViewAnimationType)
         }, completion: { [weak self] in
-            self?.updateVisibleAlbumCells()
+            self?.updateAlbums(isSelected: nil)
         })
     }
     
@@ -289,13 +311,48 @@ extension AutoSyncDataSource {
         }, completion: nil)
     }
     
-    private func updateVisibleAlbumCells() {
-        models.forEach { ($0 as? AutoSyncAlbumModel)?.isEnabled = autoSyncSetting.isAutoSyncOptionEnabled }
-        albumModels.forEach { $0.isEnabled = autoSyncSetting.isAutoSyncOptionEnabled }
+    private func updateAlbums(isSelected: Bool?) {
+        albumModels.forEach { model in
+            model.isEnabled = autoSyncSetting.isAutoSyncOptionEnabled
+            if let isSelected = isSelected, !model.album.isMainAlbum {
+                model.album.isSelected = isSelected
+            }
+        }
         
+        models.forEach { model in
+            guard let model = model as? AutoSyncAlbumModel else {
+                return
+            }
+            
+            model.isEnabled = autoSyncSetting.isAutoSyncOptionEnabled
+            if let isSelected = isSelected, !model.album.isMainAlbum {
+                model.album.isSelected = isSelected
+            }
+        }
+        
+        if let isSelected = isSelected {
+            if isSelected {
+                selectedAlbums = albumModels.map { $0.album }
+            } else {
+                selectedAlbums = selectedAlbums.filter { $0.isMainAlbum }
+            }
+        }
+         
         if let indexPaths = tableView.indexPathsForVisibleRows {
             tableView.reloadRows(at: indexPaths, with: .none)
         }
+    }
+    
+    private func updateMainAlbumCell() {
+        guard let index = models.firstIndex(where: { ($0 as? AutoSyncAlbumModel)?.album.isMainAlbum == true }),
+              let model = models[index] as? AutoSyncAlbumModel
+        else {
+            return
+        }
+        
+        model.isAllChecked = selectedAlbums.count == albumModels.count
+        
+        tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
     }
 
     func updateTableView(_ updates: VoidHandler, completion: VoidHandler?) {
