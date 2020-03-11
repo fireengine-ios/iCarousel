@@ -116,8 +116,10 @@ final class ShareViewController: UIViewController, ShareController {
                         self?.uploadProgress.progress = Float(progress.fractionCompleted)
                     }
                     }, didStartUpload: { [weak self] sharedItem in
-                        self?.updateCurrentUI(for: sharedItem)
-                        self?.updateCurrentUploadInCollectionView(with: sharedItem)
+                        DispatchQueue.main.async {
+                            self?.updateCurrentUI(for: sharedItem)
+                            self?.updateCurrentUploadInCollectionView(with: sharedItem)
+                        }
                     }, complition: { [weak self] result in
                         DispatchQueue.main.async {
                             sender.isEnabled = true
