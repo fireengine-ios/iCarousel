@@ -78,7 +78,6 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
         view?.stopActivityIndicator()
         
         if isConnected {
-            MenloworksAppEvents.onFacebookConnected()
             view?.connectionStatusSuccess(isConnected)
         }
     }

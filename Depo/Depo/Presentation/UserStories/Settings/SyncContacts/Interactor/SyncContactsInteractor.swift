@@ -46,7 +46,6 @@ final class SyncContactsInteractor: SyncContactsInteractorInput {
             }
             switch operationType {
             case .backup:
-                MenloworksAppEvents.onContactUploaded()
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactBackUpScreen())
                 self.analyticsService.track(event: .contactBackup)
                 self.analyticsService.logScreen(screen: .contactSyncBackUp)
@@ -58,7 +57,6 @@ final class SyncContactsInteractor: SyncContactsInteractorInput {
                 self.contactsSyncService.cancelAnalyze()
                 self.performOperation(forType: .backup)
             case .restore:
-                MenloworksAppEvents.onContactDownloaded()
                 self.analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                                          eventActions: .phonebook,
                                                          eventLabel: .contact(.restore))

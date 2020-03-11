@@ -47,7 +47,6 @@ class SettingsPresenter: BasePresenter, SettingsModuleInput, SettingsViewOutput,
                                                 vc.close { [weak self] in
                                                     self?.startAsyncOperation()
                                                     self?.interactor.checkConnectedToNetwork()
-                                                    MenloworksTagsService.shared.onStartWithLogin(false)
                                                 }
         })
         UIApplication.topController()?.present(controller, animated: false, completion: nil)

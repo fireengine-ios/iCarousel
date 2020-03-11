@@ -116,7 +116,6 @@ class SyncServiceManager {
         let time = Date().timeIntervalSince1970
         if time - lastAutoSyncTime > timeIntervalBetweenSyncsInBackground {
             BackgroundTaskService.shared.beginBackgroundTask()
-            MenloworksEventsService.shared.onBackgroundSync()
             lastAutoSyncTime = time
             debugLog("Sync should start in background")
             checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)

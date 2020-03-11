@@ -111,7 +111,6 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         }
         
         output.viewIsReady()
-        MenloworksAppEvents.onContactSyncPageOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {

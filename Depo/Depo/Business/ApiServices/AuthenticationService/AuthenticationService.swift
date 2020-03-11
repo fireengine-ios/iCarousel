@@ -368,8 +368,6 @@ class AuthenticationService: BaseRequestService {
                             self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
                                 sucess?(headers)
                             })
-                            
-                            MenloworksAppEvents.onLogin()
                         }, fail: { error in
                             fail?(error)
                         })

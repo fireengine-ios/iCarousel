@@ -84,7 +84,6 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
         super.viewDidLoad()
         configurateView()
         output.viewIsReady()
-        MenloworksAppEvents.onTutorial()
     }
     
     func configurateView() {

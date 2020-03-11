@@ -668,28 +668,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         changeButtonsAppearance(toHidden: true, withAnimation: true, forButtons: buttonsArray)
     }
     
-    fileprivate func log(for index: TabScreenIndex) {
-        switch index {
-        case .photosScreenIndex:
-            MenloworksAppEvents.onPhotosAndVideosOpen()
-            let settings = AutoSyncDataStorage().settings
-            
-            if settings.isAutoSyncEnabled {
-                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))
-                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !(settings.videoSetting.option == .wifiOnly))
-            } else {
-                MenloworksTagsService.shared.onAutosyncVideosStatusOff()
-                MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
-            }
-        case .contactsSyncScreenIndex:
-            MenloworksAppEvents.onContactSyncPageOpen()
-        case .documentsScreenIndex:
-            MenloworksAppEvents.onDocumentsOpen()
-        default:
-            break
-        }
-    }
-    
     private func changeButtonsAppearance(toHidden hidden: Bool, withAnimation animate: Bool, forButtons buttons: [SubPlussButtonView]) {
         if buttons.count == 0 {
             return
@@ -748,9 +726,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 return
             }
             
-            if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
-                log(for: tabScreenIndex)
-            }
+//            if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
+//                log(for: tabScreenIndex)
+//            }
 
             selectedIndex = tabbarSelectedIndex
         }
