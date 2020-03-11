@@ -271,12 +271,15 @@ final class UploadOperation: Operation {
     
     private func uploadContiniously(item: SharedItem, interruptedId: String, chunk: DataChunk? = nil, dataRequestHandler: @escaping DataRequestHandler, completion: @escaping ResponseVoid) {
         
-        guard let nextChunk = chunk != nil ? chunk : chunker?.nextChunk() else {
+        guard
+            let nextChunk = chunk != nil ? chunk : chunker?.nextChunk(),
+            let fileSize = chunker?.fileSize
+        else {
             completion(.failed(CustomErrors.text(TextConstants.commonServiceError)))
             return
         }
         
-        uploadService.resumableUpload(interruptedId: interruptedId, data: nextChunk.data, range: nextChunk.range, name: item.name, contentType: item.contentType, fileSize: 0, dataRequestHandler: dataRequestHandler, progressHandler: progressHandler) { [weak self] result in
+        uploadService.resumableUpload(interruptedId: interruptedId, data: nextChunk.data, range: nextChunk.range, name: item.name, contentType: item.contentType, fileSize: Int64(fileSize), dataRequestHandler: dataRequestHandler, progressHandler: progressHandler) { [weak self] result in
             switch result {
             case .failed(let error):
                 completion(.failed(error))
