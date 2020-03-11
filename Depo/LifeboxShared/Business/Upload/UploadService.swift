@@ -196,7 +196,7 @@ final class UploadService {
                         /// Provided first-byte-pos is not the continuation of the last-byte-pos of pre-uploaded part!
                         completion(.success(.discontinuityError))
                         
-                    case "RU_1":
+                    case "RU_10":
                         /// Invalid upload request! Initial upload must start from the beginning
                         completion(.success(.invalidUploadRequest))
                         
@@ -229,7 +229,7 @@ final class UploadService {
                 }
                 
                 let headers = self.commonHeaders(name: name, contentType: contentType, fileSize: 0)
-                let uploadUrl = baseUploadUrl + "/" + interruptedId
+                let uploadUrl = baseUploadUrl + "/" + interruptedId + "?upload-type=resumable"
                 
                 let dataRequest = self.sessionManager
                     .upload(Data(), to: uploadUrl, method: .put, headers: headers)
@@ -240,7 +240,7 @@ final class UploadService {
                 dataRequestHandler?(dataRequest)
                 
             case .failed(let error):
-                completion(ResponseResult.failed(error))
+                completion(.failed(error))
             }
         }
         dataRequestHandler?(dataRequest)
@@ -260,7 +260,7 @@ final class UploadService {
                 }
                 
                 let headers = self.resumableUploadHeaders(name: name, contentType: contentType, fileSize: fileSize, range: range)
-                let uploadUrl = baseUploadUrl + "/" + interruptedId
+                let uploadUrl = baseUploadUrl + "/" + interruptedId + "?upload-type=resumable"
                 
                 let dataRequest = self.sessionManager
                     .upload(data, to: uploadUrl, method: .put, headers: headers)
