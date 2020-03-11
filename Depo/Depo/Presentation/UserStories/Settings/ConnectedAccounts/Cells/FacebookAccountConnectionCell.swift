@@ -153,9 +153,6 @@ extension FacebookAccountConnectionCell: ImportFromFBViewInput {
     }
     
     func importStartSuccess() {
-        MenloworksEventsService.shared.onFacebookTransfered()
-        MenloworksTagsService.shared.facebookImport(isOn: true)
-        
         isImportOn = true
     }
     

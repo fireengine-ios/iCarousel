@@ -140,7 +140,6 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
             }
             AccountService().updateBrandType()
             CacheManager.shared.actualizeCache()
-            MenloworksAppEvents.onLogin()
             
             if accountReadOnly {
                 SingletonStorage.shared.getOverQuotaStatus {

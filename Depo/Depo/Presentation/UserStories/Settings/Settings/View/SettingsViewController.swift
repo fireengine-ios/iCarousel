@@ -50,8 +50,6 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
         
         setupTableView()
         output.viewIsReady()
-        
-        MenloworksAppEvents.onPreferencesOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -202,7 +200,6 @@ class SettingsViewController: BaseViewController, SettingsViewInput, UITableView
             switch indexPath.row {
             case 0:
                 // import photos
-                MenloworksTagsService.shared.onSocialMediaPageClicked()
                 if let delegate = settingsDelegate {
                     delegate.goToConnectedAccounts()
                 } else {

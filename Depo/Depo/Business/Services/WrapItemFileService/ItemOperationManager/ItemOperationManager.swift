@@ -244,8 +244,6 @@ class ItemOperationManager: NSObject {
         views.invoke { $0.finishedUploadFile(file: file) }
         //        }
         
-        MenloworksAppEvents.onFileUploadedWithType(file.fileType, isAutosync: isAutoSync)
-        
         currentUploadingObject = nil
         currentUploadProgress = 0
     }
