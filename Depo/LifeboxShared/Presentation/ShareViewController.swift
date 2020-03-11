@@ -105,32 +105,34 @@ final class ShareViewController: UIViewController, ShareController {
         progressLabel.text = TextConstants.uploading
         
         sender.isEnabled = false
-        DispatchQueue.global().async { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            
-            self.uploadService.addSharedItems(self.sharedItems, progress: { [weak self] progress in
-                DispatchQueue.main.async {
-                    self?.uploadProgress.progress = Float(progress.fractionCompleted)
+        ResumableUploadInfoService.shared.updateInfo { [weak self] in
+            DispatchQueue.global().async {
+                guard let self = self else {
+                    return
                 }
-            }, didStartUpload: { [weak self] sharedItem in
-                self?.updateCurrentUI(for: sharedItem)
-                self?.updateCurrentUploadInCollectionView(with: sharedItem)
-            }, complition: { [weak self] result in
-                DispatchQueue.main.async {
-                    sender.isEnabled = true
-                    switch result {
-                    case .success(_):
-                        self?.animateDismiss()
-                    case .failed(let error):
-                        self?.progressLabel.text = error.parsedDescription
+                
+                self.uploadService.addSharedItems(self.sharedItems, progress: { [weak self] progress in
+                    DispatchQueue.main.async {
+                        self?.uploadProgress.progress = Float(progress.fractionCompleted)
                     }
-                    
-                    self?.currentUploadIndex = -1
-                    self?.collectionView.reloadData()
-                }
-            })
+                    }, didStartUpload: { [weak self] sharedItem in
+                        self?.updateCurrentUI(for: sharedItem)
+                        self?.updateCurrentUploadInCollectionView(with: sharedItem)
+                    }, complition: { [weak self] result in
+                        DispatchQueue.main.async {
+                            sender.isEnabled = true
+                            switch result {
+                            case .success(_):
+                                self?.animateDismiss()
+                            case .failed(let error):
+                                self?.progressLabel.text = error.parsedDescription
+                            }
+                            
+                            self?.currentUploadIndex = -1
+                            self?.collectionView.reloadData()
+                        }
+                })
+            }
         }
     }
     
