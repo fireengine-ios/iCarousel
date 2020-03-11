@@ -1755,4 +1755,7 @@ struct TextConstants {
     static let becomePremiumHeaderContactSyncSubtitle = NSLocalizedString("become_premium_header_contact_sync_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let becomePremiumOrText = NSLocalizedString("become_premium_or_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let becomePremiumSeeAllPackages = NSLocalizedString("become_premium_see_all_packages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let contactSyncConfirmPremiumPopupTitle = NSLocalizedString("contact_sync_confirm_premium_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncConfirmPremiumPopupText = NSLocalizedString("contact_sync_confirm_premium_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
