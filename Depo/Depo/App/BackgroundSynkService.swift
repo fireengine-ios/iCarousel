@@ -69,7 +69,7 @@ final class BackgroundSynсService {
         let request = BGAppRefreshTaskRequest(identifier: TaskIdentifiers.backgroundRefresh)
         
         // Fetch no earlier than 15 sec from now
-        request.earliestBeginDate = Date(timeIntervalSinceNow: 60 * 30)
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 60 * 5)
         
         do {
             try BGTaskScheduler.shared.submit(request)

@@ -149,10 +149,6 @@ class SyncServiceManager {
             self.backgroundSyncHandler = handler
             self.checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
         }
-        
-        if isSyncFinished {
-            handler(true)
-        }
     }
     
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
