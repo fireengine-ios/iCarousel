@@ -92,8 +92,6 @@ final class SettingsViewController: BaseViewController {
         
         setupTableView()
         output.viewIsReady()
-        
-        MenloworksAppEvents.onPreferencesOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -231,7 +229,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 output.goToFaceImage()
             }
         case .connectAccounts:
-            MenloworksTagsService.shared.onSocialMediaPageClicked()
             if let delegate = settingsDelegate {
                 delegate.goToConnectedAccounts()
             } else {

@@ -198,13 +198,10 @@ extension InstagramAccountConnectionCell: ImportFromInstagramViewInput {
     // MARK: Start
     
     func syncStartSuccess() {
-        MenloworksEventsService.shared.onInstagramTransfered()
-        MenloworksTagsService.shared.instagramImport(isOn: true)
         isImportOn = true
     }
     
     func syncStartFailure(errorMessage: String) {
-        MenloworksTagsService.shared.instagramImport(isOn: false)
         isImportOn = false
         if errorMessage != TextConstants.NotLocalized.instagramLoginCanceled {
             delegate?.showError(message: errorMessage)

@@ -168,7 +168,6 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successedPromocode() {
-        MenloworksAppEvents.onPromocodeActivated()
         view?.successedPromocode()
     }
     

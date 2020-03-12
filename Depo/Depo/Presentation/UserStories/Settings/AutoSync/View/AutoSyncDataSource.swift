@@ -142,7 +142,6 @@ extension AutoSyncDataSource: AutoSyncSwitcherTableViewCellDelegate {
                 autoSyncSettings?.isAutoSyncOptionEnabled = true
                 delegate?.enableAutoSync()
             } else {
-                MenloworksEventsService.shared.onAutosyncOff()
                 forceDisableAutoSync()
                 reloadTableView()
             }

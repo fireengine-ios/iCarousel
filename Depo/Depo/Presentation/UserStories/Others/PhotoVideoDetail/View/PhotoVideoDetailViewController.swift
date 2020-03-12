@@ -300,8 +300,6 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     func play(item: AVPlayerItem) {
         hideSpinnerIncludeNavigationBar()
         
-        MenloworksTagsService.shared.onVideoDisplayed()
-        
         localPlayer?.replaceCurrentItem(with: item)
         playerController = FixedAVPlayerViewController()
         playerController?.player = localPlayer

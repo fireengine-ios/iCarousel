@@ -29,11 +29,6 @@ final class VideoSyncService: ItemSyncServiceImpl {
     
     override func start(newItems: Bool) {
         super.start(newItems: newItems)
-        
-        // This tag triggering when user changes autosync preferences
-//        let isWiFi = ReachabilityService.shared.isReachableViaWiFi
-//        isWiFi ? MenloworksTagsService.shared.onAutosyncVideoViaWifi() : MenloworksTagsService.shared.onAutosyncVideoViaLte()
-        
     }
 
     override func stop() {

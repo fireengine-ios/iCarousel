@@ -52,7 +52,6 @@ final class SettingsInteractor: SettingsInteractorInput {
             
             self?.authService.logout { [weak self] in
                 self?.output.asyncOperationStoped()
-                MenloworksEventsService.shared.onLoggedOut()
                 self?.output.goToOnboarding()
             }
         })

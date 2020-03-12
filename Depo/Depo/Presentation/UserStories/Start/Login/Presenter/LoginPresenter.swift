@@ -196,7 +196,6 @@ extension LoginPresenter: LoginInteractorOutput {
     
     func succesLogin() {
         tokenStorage.isClearTokens = false
-        MenloworksTagsService.shared.onStartWithLogin(true)
         interactor.checkEULA()
     }
 

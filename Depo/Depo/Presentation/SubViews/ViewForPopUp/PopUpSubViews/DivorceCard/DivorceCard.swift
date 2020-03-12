@@ -41,6 +41,16 @@ final class DivorceCard: BaseCardView {
         
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let height = containerStackView.frame.size.height
+        if calculatedH != height {
+            calculatedH = height
+            layoutIfNeeded()
+        }
+    }
+    
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
         

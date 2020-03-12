@@ -34,7 +34,6 @@ final class SyncContactsInteractor: SyncContactsInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private let contactService: ContactService = ContactService()
     private let accountService: AccountService = AccountService()
-    private lazy var storageVars: StorageVars = factory.resolve()
     
     deinit {
         contactsSyncService.cancelAnalyze()
@@ -47,7 +46,6 @@ final class SyncContactsInteractor: SyncContactsInteractorInput {
             }
             switch operationType {
             case .backup:
-                MenloworksAppEvents.onContactUploaded()
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactBackUpScreen())
                 self.analyticsService.track(event: .contactBackup)
                 self.analyticsService.logScreen(screen: .contactSyncBackUp)
@@ -59,7 +57,6 @@ final class SyncContactsInteractor: SyncContactsInteractorInput {
                 self.contactsSyncService.cancelAnalyze()
                 self.performOperation(forType: .backup)
             case .restore:
-                MenloworksAppEvents.onContactDownloaded()
                 self.analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                                          eventActions: .phonebook,
                                                          eventLabel: .contact(.restore))
@@ -112,10 +109,6 @@ final class SyncContactsInteractor: SyncContactsInteractorInput {
                 self?.output?.showError(errorType: errorType)
             }
         })
-    }
-    
-    func permissionStatusChanged(currentStatus: Bool) -> Bool {
-        return storageVars.isPhotoLibraryPermitted != currentStatus
     }
     
     func getContactsPermissionStatus(completionHandler: @escaping ContactsPermissionCallback) {

@@ -55,7 +55,6 @@ extension ImportFromInstagramPresenter: ImportFromInstagramViewOutput {
     func stopInstagram() {
         view?.startActivityIndicator()
         view?.startActivityIndicator()
-        MenloworksTagsService.shared.instagramImport(isOn: false)
         interactor.setSync(status: false)
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .off, socialType: .instagram))
     }
@@ -84,6 +83,12 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
         view?.instaPickStatusSuccess(isOn)
     }
     
+    func instaPickStatusSuccess(status: Bool) {
+        //FIXME: find the leak
+        view?.stopActivityIndicator()
+        view?.instaPickStatusSuccess(status)
+    }
+    
     func instaPickFailure(errorMessage: String) {
         instaPickIsAwaiting = false
         UIApplication.showErrorAlert(message: errorMessage)
@@ -97,7 +102,6 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
         view?.stopActivityIndicator()
         
         if isConnected {
-            MenloworksAppEvents.onInstagramConnected()
             view?.connectionStatusSuccess(isConnected, username: username)
         }
     }
@@ -219,7 +223,7 @@ extension ImportFromInstagramPresenter: InstagramAuthViewControllerDelegate {
     
     func instagramAuthCancel() {
         if self.instaPickIsAwaiting {
-            self.instaPickSuccess(isOn: false)
+            self.instaPickStatusSuccess(status: false)
         } else if self.syncIsAwaiting {
             self.syncStatusSuccess(status: false)
         }

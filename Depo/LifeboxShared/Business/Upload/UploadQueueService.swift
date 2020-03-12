@@ -25,7 +25,7 @@ final class UploadQueueService {
     }
     
     func addSharedItems(_ sharedItems: [SharedItemSource],
-                      progress: @escaping Request.ProgressHandler,
+                      progress: @escaping ProgressHandler,
                       finishedUpload: SharedItemHandler? = nil,
                       didStartUpload: SharedItemHandler? = nil,
                       complition: @escaping ResponseVoid) {
@@ -42,7 +42,7 @@ final class UploadQueueService {
                 
                 switch result {
                 case .success(_):
-                    progress(Progress(totalUnitCount: 1))
+                    progress(1, 0)
                     
                 case .failed(let error):
                     self.error = error
