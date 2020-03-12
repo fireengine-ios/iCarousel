@@ -27,5 +27,6 @@ public class MediaItemsAlbum: NSManagedObject {
         self.localId = asset.localIdentifier
         self.name = asset.localizedTitle
         self.isLocal = true
+        self.isMainLocalAlbum = asset.assetCollectionSubtype == .smartAlbumUserLibrary
     }
 }

@@ -72,13 +72,18 @@ final class MediaItemsAlbumOperationService {
                 
                 if let callback = self.waitingLocalAlbumsCallBack {
                     self.getLocalAlbums(context: context, mediaItemAlbumsCallBack: callback)
-                    self.waitingLocalAlbumsCallBack = nil
                 }
             })
         }
     }
     
     func getAutoSyncAlbums(mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
+        if inProcessLocalAlbums {
+            waitingLocalAlbumsCallBack = mediaItemAlbumsCallBack
+            return
+        }
+        waitingLocalAlbumsCallBack = nil
+        
         let context = coreDataStack.newChildBackgroundContext
         getLocalAlbums(context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
     }
@@ -98,11 +103,6 @@ final class MediaItemsAlbumOperationService {
     }
     
     private func getLocalAlbums(context: NSManagedObjectContext, mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
-        if inProcessLocalAlbums {
-            waitingLocalAlbumsCallBack = mediaItemAlbumsCallBack
-            return
-        }
-        
         let predicate = NSPredicate(format: "\(#keyPath(MediaItemsAlbum.isLocal)) = true")
         executeRequest(predicate: predicate, context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
     }
@@ -112,16 +112,18 @@ final class MediaItemsAlbumOperationService {
             completion()
             return
         }
-                
-        notSaved(assets: assets, context: context) { [weak self] newAssets in
-            guard let self = self else {
-                return
+        
+        getLocalAlbums(context: context) { [weak self] mediaItemAlbums in
+            assets.forEach { asset in
+                if let album = mediaItemAlbums.first(where: { $0.localId == asset.localIdentifier }) {
+                    //update names for current locale
+                    album.name = asset.localizedTitle
+                } else {
+                    //create new local albums
+                    _ = MediaItemsAlbum(asset: asset, context: context)
+                }
             }
-            
-            newAssets.forEach { asset in
-                let _ = MediaItemsAlbum(asset: asset, context: context)
-            }
-            self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
     }
 

@@ -32,7 +32,7 @@ extension MediaItemsAlbum {
     @NSManaged public var isLocal: Bool
     @NSManaged public var localId: String?
     @NSManaged public var isEnabled: Bool
-
+    @NSManaged public var isMainLocalAlbum: Bool
 }
 
 // MARK: Generated accessors for items

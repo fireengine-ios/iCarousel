@@ -56,6 +56,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     
     func onCheckPermissions(photoAccessGranted: Bool, locationAccessGranted: Bool) {
         guard photoAccessGranted else {
+            completeAsyncOperationEnableScreen()
             view.disableAutoSync()
             view.checkPermissionsFailedWith(error: TextConstants.cameraAccessAlertText)
             return
@@ -76,6 +77,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
             isFirstCheckPermissions = false
             interactor.prepareCellModels()
         } else {
+            completeAsyncOperationEnableScreen()
             view.checkPermissionsSuccessed()
         }
     }

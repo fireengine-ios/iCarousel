@@ -53,37 +53,23 @@ enum AutoSyncRowType {
 
 final class AutoSyncAlbum {
     
-    static var mainAlbumName: String {
-        if #available(iOS 13, *) {
-            return "Recents"
-        } else {
-            return "Camera Roll"
-        }
-    }
-    
     let uuid: String
     let name: String
     var isSelected: Bool
-    var isMainAlbum: Bool {
-        return name == Self.mainAlbumName
-    }
-    
-    init(uuid: String, name: String, isSelected: Bool) {
-        self.uuid = uuid
-        self.name = name
-        self.isSelected = isSelected
-    }
+    let isMainAlbum: Bool
     
     init(asset: PHAssetCollection) {
         uuid = asset.localIdentifier
         name = asset.localizedTitle ?? ""
         isSelected = true
+        isMainAlbum = asset.assetCollectionSubtype == .smartAlbumUserLibrary
     }
     
     init(mediaItemAlbum: MediaItemsAlbum) {
         uuid = mediaItemAlbum.localId ?? ""
         name = mediaItemAlbum.name ?? ""
         isSelected = mediaItemAlbum.isEnabled
+        isMainAlbum = mediaItemAlbum.isMainLocalAlbum
     }
 }
 

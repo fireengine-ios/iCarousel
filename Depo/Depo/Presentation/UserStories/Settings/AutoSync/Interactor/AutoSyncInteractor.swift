@@ -58,7 +58,7 @@ final class AutoSyncInteractor: AutoSyncInteractorInput {
     private func getAlbums(completion: @escaping (_ albums: [AutoSyncAlbum]) -> Void) {
         albumsService.getAutoSyncAlbums { mediaItemAlbums in
             var albums = mediaItemAlbums.map { AutoSyncAlbum(mediaItemAlbum: $0) }
-            if let mainAlbum = albums.first(where: { $0.name == AutoSyncAlbum.mainAlbumName }) {
+            if let mainAlbum = albums.first(where: { $0.isMainAlbum }) {
                 albums.remove(mainAlbum)
                 albums.insert(mainAlbum, at: 0)
             }
