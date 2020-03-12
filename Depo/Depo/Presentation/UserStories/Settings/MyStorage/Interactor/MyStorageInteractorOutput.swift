@@ -7,9 +7,7 @@
 //
 
 protocol MyStorageInteractorOutput: class {
-    func successed(usage: UsageResponse)
     func successed(accountInfo: AccountInfoResponse)
-    
     func successed(allOffers: [SubscriptionPlanBaseResponse])
 
     func failed(with error: ErrorResponse)

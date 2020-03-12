@@ -12,6 +12,7 @@ enum ControlPackageType {
     case myProfile
     case usage(percentage: CGFloat)
     case myStorage(ControlPackageType.AccountType?)
+    case accountType(ControlPackageType.AccountType)
     
     enum AccountType {
         case standard
@@ -82,17 +83,24 @@ final class PackageInfoView: UIView, NibInit {
         case .myProfile:
             titleLabel.text = TextConstants.myProfile
             detailLabel.isHidden = true
+            
         case .usage(percentage: let percentage):
             titleLabel.text = TextConstants.usage
             if percentage != 0 {
                 detailLabel.isHidden = false
-                detailLabel.text = String(format: TextConstants.usagePercentage, percentage.rounded(.toNearestOrAwayFromZero))
+                detailLabel.text = String(format: TextConstants.usagePercentage,
+                                          percentage.rounded(.toNearestOrAwayFromZero))
             } else {
                 detailLabel.isHidden = true
             }
+
         case .myStorage(let accountType):
             titleLabel.text = TextConstants.myPackages
             detailLabel.text = accountType?.text
+
+        case .accountType(let type):
+            titleLabel.text = type.text
+            detailLabel.isHidden = true
         }
     }
 

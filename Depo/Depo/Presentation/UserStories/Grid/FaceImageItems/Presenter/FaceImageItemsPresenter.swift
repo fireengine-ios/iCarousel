@@ -354,17 +354,14 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     func didObtainFeaturePacks(_ packs: [PackageModelResponse]) {
         featureType = accountType == .all ? .appleFeature : .SLCMFeature
         var premiumFeature: PackageModelResponse? = nil
-        for feature in packs {
-            if feature.featureType == featureType {
+        for feature in packs where feature.type.isSameAs(featureType) {
+            if let authorities = feature.authorities,
+                let interactor = interactor as? FaceImageItemsInteractor,
+                authorities.contains(where: { return $0.authorityType == .faceRecognition }) {
                 
-                if let authorities = feature.authorities,
-                    let interactor = interactor as? FaceImageItemsInteractor,
-                    authorities.contains(where: { return $0.authorityType == .faceRecognition }) {
-                    
-                    premiumFeature = feature
-                    interactor.getPriceInfo(offer: feature, accountType: accountType)
-                    break
-                }
+                premiumFeature = feature
+                interactor.getPriceInfo(offer: feature, accountType: accountType)
+                break
             }
         }
         

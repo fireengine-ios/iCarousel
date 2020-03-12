@@ -19,9 +19,12 @@ final class MyStoragePresenter {
             switch accountType {
             case .ukranian:
                 router.showSubTurkcellOpenAlert(with: TextConstants.offersActivateUkranian)
+                
             case .cyprus:
                 router.showSubTurkcellOpenAlert(with: TextConstants.offersActivateCyprus)
-            case .moldovian, .turkcell, .life, .all, .albanian, .FWI, .jamaica: break
+                
+            case .moldovian, .turkcell, .life, .all, .albanian, .FWI, .jamaica:
+                break
             }
         }
     }
@@ -29,7 +32,7 @@ final class MyStoragePresenter {
     var title: String
     
     private var allOffers: [SubscriptionPlanBaseResponse] = []
-    var displayableOffers: [SubscriptionPlan] = []
+    private(set) var displayableOffers: [SubscriptionPlan] = []
 
     init(title: String) {
         self.title = title
@@ -39,26 +42,20 @@ final class MyStoragePresenter {
         allOffers = []
         displayableOffers = []
         
-        view?.startActivityIndicator()
+        startActivity()
         interactor.getAllOffers()
     }
     
     //MARK: - UtilityMethods
-    private func calculateProgress() {
-        let usedStorageSize = usage.usedBytes ?? 0
-        let fullStorageSize = usage.quotaBytes ?? 0
-        
-        view?.configureProgress(with: fullStorageSize, used: usedStorageSize)
-    }
-    
     private func displayOffers() {
-        displayableOffers = interactor.convertToASubscriptionList(activeSubscriptionList: allOffers, accountType: accountType)
+        displayableOffers = interactor.convertToASubscriptionList(activeSubscriptionList: allOffers,
+                                                                  accountType: accountType)
         if let index = displayableOffers.index(where: { $0.type == .free }) {
             displayableOffers.swapAt(0, index)
         }
         
-        view?.stopActivityIndicator()
-        view?.reloadCollectionView()
+        stopActivity()
+        view?.reloadPackages()
     }
 }
 
@@ -66,68 +63,51 @@ final class MyStoragePresenter {
 extension MyStoragePresenter: MyStorageViewOutput {
     
     func viewDidLoad() {
-        view?.startActivityIndicator()
-        calculateProgress()
         interactor.trackScreen()
+
+        startActivity()
         interactor.getAccountType()
-        interactor.getUsage()
     }
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
         interactor.trackPackageClick(plan: plan, planIndex: planIndex)
         
-        guard let model = plan.model as? SubscriptionPlanBaseResponse else {
+        guard let model = plan.model as? SubscriptionPlanBaseResponse, let modelType = model.subscriptionPlanType else {
             router?.showCancelOfferAlert(with: TextConstants.packageDefaultCancelText)
             return
         }
         
-        if let type = model.subscriptionPlanType {
-            switch type {
-            case .apple:
-                router?.showCancelOfferApple()
-                
-            case .SLCM:
-                let cancelText = String(format: type.cancelText, plan.getNameForSLCM())
-                router?.showCancelOfferAlert(with: cancelText)
-                
-            default:
-                let cancelText: String
-                if let key = model.subscriptionPlanLanguageKey {
-                    cancelText = TextConstants.digicelCancelText(for: key)
-                } else {
-                    /// maybe needs "cancelText = TextConstants.offersAllCancel"
-                    cancelText = String(format: type.cancelText, plan.name)
-                }
-                
-                router?.showCancelOfferAlert(with: cancelText)
-            }
-            
-        } else {
-            
+        modelType.cancellActions(slcm: { [weak self] type in
+            let cancelText = String(format: type.cancelText, plan.getNameForSLCM())
+            self?.router?.showCancelOfferAlert(with: cancelText)
+
+        }, apple: { [weak self] _ in
+            self?.router?.showCancelOfferApple()
+
+        }, other: { [weak self] type in
             let cancelText: String
             if let key = model.subscriptionPlanLanguageKey {
                 cancelText = TextConstants.digicelCancelText(for: key)
             } else {
-                cancelText = TextConstants.offersAllCancel
+                /// maybe needs "cancelText = TextConstants.offersAllCancel"
+                cancelText = String(format: type.cancelText, plan.name)
             }
-            
-            router?.showCancelOfferAlert(with: cancelText)
-        }
-        
+            self?.router?.showCancelOfferAlert(with: cancelText)
+
+        })
     }
     
     func restorePurchasesPressed() {
         interactor.restorePurchases()
     }
+    
+    func configureCard(_ card: PackageInfoView) {
+        card.delegate = self
+    }
 }
 
 //MARK: - MyStorageInteractorOutput
 extension MyStoragePresenter: MyStorageInteractorOutput {
-    
-    func successed(usage: UsageResponse) {
-        self.usage = usage
-        calculateProgress()
-    }
     
     func successed(accountInfo: AccountInfoResponse) {
         ///https://jira.turkcell.com.tr/browse/FE-1642
@@ -147,17 +127,18 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     
     func successed(allOffers: [SubscriptionPlanBaseResponse]) {
         self.allOffers = allOffers.filter {
-            /// show only non-feature offers
-            if $0.subscriptionPlanFeatureType != nil {
-                 return false
-            }
-            
             /// hide apple offers if apple server don't sent offer info
             if let appleId = $0.subscriptionPlanInAppPurchaseId, IAPManager.shared.product(for: appleId) == nil {
                 return false
             }
             
-            return true
+            /// show only non-feature offers
+            switch $0.subscriptionPlanType {
+            case .feature, .none:
+                return false
+            case .quota:
+                return true
+            }
         }
         
         accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers) ?? .all
@@ -165,17 +146,17 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     }
     
     func failed(with error: ErrorResponse) {
-        view?.stopActivityIndicator()
+        stopActivity()
         router?.display(error: error.description)
     }
     
     func failed(with error: String) {
-        view?.stopActivityIndicator()
+        stopActivity()
         router?.display(error: error)
     }
     
     func refreshPackages() {
-        view?.stopActivityIndicator()
+        stopActivity()
         refreshPage()
     }
     
@@ -185,5 +166,17 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
     
     func startActivity() {
         view?.startActivityIndicator()
+    }
+}
+
+extension MyStoragePresenter: PackageInfoViewDelegate {
+
+    func onSeeDetailsTap(with type: ControlPackageType) {
+        switch type {
+        case .usage, .myStorage, .myProfile:
+            assertionFailure()
+        case .accountType(let type):
+            router.openLeavePremium(type: type.leavePremiumType)
+        }
     }
 }

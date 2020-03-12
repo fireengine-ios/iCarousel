@@ -1472,6 +1472,7 @@
 "original_сopy_package_description" = "Original сopy";
 "bundle_package_addon_type" = "with +Premium";
 "storage_only_package_addon_type" = "Storage only";
+"feature_package_name" = "Premium";
 
 "bundle_package_addon_type" = "with +Premium";
 "storage_only_package_addon_type" = "Storage only";
@@ -1510,3 +1511,4 @@
 "mobile_payment_success_popup_title" = "You activated Turkcell Mobile Payment successfully.";
 "mobile_payment_success_popup_message" = "You can manage Turkcell Mobile Payment Permission under Settings-Permission menu.";
 "storage_usage_information" = "Usage";
+"my_packages_description" = "Mevcut aboneliklerini aşağıdaki alanda göremiyorsan, aboneliklerini yenilemek için butona basabilirsin.";

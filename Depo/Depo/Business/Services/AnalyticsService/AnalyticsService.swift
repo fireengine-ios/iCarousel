@@ -418,23 +418,20 @@ extension AnalyticsService: AnalyticsGA {
         var itemID = ""
         var currency: String
         
-        let featureType: FeaturePackageType?
-        let type: PackageType?
+        let type: PackageContentType
         
         let slcmID: String
         let appleID: String
 
-        if let offer = package.model as? PackageModelResponse {
-            featureType = offer.featureType
-            type = offer.type
+        if let offer = package.model as? PackageModelResponse, let offerType = offer.type {
+            type = offerType
             currency = offer.currency ?? ""
             
             slcmID = offer.slcmOfferId.map { "\($0)" } ?? ""
             appleID = offer.inAppPurchaseId ?? ""
             
-        } else if let offer = package.model as? SubscriptionPlanBaseResponse {
-            featureType = offer.subscriptionPlanFeatureType
-            type = offer.subscriptionPlanType
+        } else if let offer = package.model as? SubscriptionPlanBaseResponse, let offerType = offer.subscriptionPlanType {
+            type = offerType
             currency = offer.subscriptionPlanCurrency ?? ""
             
             slcmID = offer.subscriptionPlanSlcmOfferId ?? ""
@@ -443,25 +440,42 @@ extension AnalyticsService: AnalyticsGA {
             return
         }
         
-        if featureType == .SLCMFeature || type == .SLCM {
-            analyticasItemList = "Turkcell Package"
-            itemID = slcmID
-
-        } else if featureType == .appleFeature || type == .apple {
-            analyticasItemList = "In App Package"
-            itemID = appleID
-            
-        } else if [FeaturePackageType?]([.paycellSLCMFeature, .paycellAllAccessFeature]).contains(featureType) ||
-            [PackageType?]([.paycellSLCM, .paycellAllAccess]).contains(type) {
-            analyticasItemList = "Credit Card Package"
-            ///FE-1691 iOS: Google Analytics - Ecommerce - Product Click
-            ///Can asked leave creditCard Product Click without id
-            
+        switch type {
+        case .quota(let type):
+            switch type {
+            case .apple:
+                analyticasItemList = "In App Package"
+                itemID = appleID
+            case .SLCM:
+                analyticasItemList = "Turkcell Package"
+                itemID = slcmID
+            case .paycellSLCM, .paycellAllAccess:
+                analyticasItemList = "Credit Card Package"
+                ///FE-1691 iOS: Google Analytics - Ecommerce - Product Click
+                ///Can asked leave creditCard Product Click without id
+            case _:
+                break
+            }
+        case .feature(let type):
+            switch type {
+            case .appleFeature:
+                analyticasItemList = "In App Package"
+                itemID = appleID
+            case .SLCMFeature:
+                analyticasItemList = "Turkcell Package"
+                itemID = slcmID
+            case .paycellSLCMFeature, .paycellAllAccessFeature:
+                analyticasItemList = "Credit Card Package"
+                ///FE-1691 iOS: Google Analytics - Ecommerce - Product Click
+                ///Can asked leave creditCard Product Click without id
+            case _:
+                break
+            }
         }
         
         let product =  AnalyticsPackageProductObject(itemName: package.name,
                                                      itemID: itemID,
-                                                     price: package.priceString,
+                                                     price: package.price,
                                                      itemBrand: TextConstants.NotLocalized.appNameGA,
                                                      itemCategory: "Storage",
                                                      itemVariant: "",
