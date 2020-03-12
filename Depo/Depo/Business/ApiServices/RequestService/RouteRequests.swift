@@ -290,6 +290,7 @@ struct RouteRequests {
         static let updateSecurityQuestion = accountApi +/ "updateSecurityQuestion"
         static let updateInfoFeedback = accountApi +/ "updateInfoFeedback"
         static let updateAddress = accountApi +/ "address"
+        static let info = accountApi +/ "info"
         
         enum Settings {
             /// without "s" at the end

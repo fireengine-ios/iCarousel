@@ -21,7 +21,7 @@ final class SubscriptionOfferView: UIView, NibInit {
     
     @IBOutlet private weak var borderView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.lightGrayColor
+            newValue.backgroundColor = ColorConstants.darkTintGray
             newValue.layer.cornerRadius = 8
         }
     }
@@ -88,9 +88,11 @@ final class SubscriptionOfferView: UIView, NibInit {
             featureView.configure(features: makeFeatures(plan: plan))
         case .short:
             featureView.configure(features: .storageOnly)
+            let color = plan.isRecommended ? ColorConstants.whiteColor : ColorConstants.marineTwo
+            purchaseButton.setTitleColor(color, for: UIControl.State())
         }
         
-        updateButton(isRecommended: plan.isRecommended)
+        updateButton(isRecommended: plan.isRecommended, style: style)
         updateBorderView(isRecommended: plan.isRecommended)
         
         self.delegate = delegate
@@ -185,13 +187,22 @@ final class SubscriptionOfferView: UIView, NibInit {
         }
     }
     
-    private func updateButton(isRecommended: Bool) {
-        let color = isRecommended ? ColorConstants.cardBorderOrange : ColorConstants.marineTwo
+    private func updateButton(isRecommended: Bool, style: Style) {
+        let color: UIColor
+        switch style {
+        case .full:
+            color = isRecommended ? ColorConstants.cardBorderOrange : ColorConstants.marineTwo
+        case .short:
+            let borderColor = isRecommended ? ColorConstants.cardBorderOrange : ColorConstants.darkTintGray
+            purchaseButton.layer.borderColor = borderColor.cgColor
+            purchaseButton.layer.borderWidth = 2
+            color = isRecommended ? ColorConstants.cardBorderOrange : ColorConstants.whiteColor
+        }
         purchaseButton.setBackgroundColor(color, for: UIControl().state)
     }
     
     private func updateBorderView(isRecommended: Bool) {
-        let color = isRecommended ? ColorConstants.cardBorderOrange : ColorConstants.lightGrayColor
+        let color = isRecommended ? ColorConstants.cardBorderOrange : ColorConstants.darkTintGray
         recommendationLabel.isHidden = !isRecommended
         borderView.backgroundColor = color
     }

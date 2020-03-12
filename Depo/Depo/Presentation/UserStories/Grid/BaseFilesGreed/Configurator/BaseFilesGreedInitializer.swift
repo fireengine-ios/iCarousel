@@ -138,7 +138,6 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                alertSheetExcludeTypes: [.print])
         viewController.mainTitle = TextConstants.homeButtonAllFiles
         
-        MenloworksAppEvents.onAllFilesOpen()
         return viewController
     }
     
@@ -170,7 +169,6 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                 alertSheetExcludeTypes: [.print])
         viewController.mainTitle = TextConstants.homeButtonFavorites
         
-        MenloworksAppEvents.onFavoritesOpen()
         viewController.title = TextConstants.homeButtonFavorites
         return viewController
     }

@@ -92,7 +92,7 @@ extension PackagesPresenter: PackagesViewOutput {
             interactor.activate(offer: model, planIndex: planIndex)
         case .paycellAllAccess?, .paycellSLCM?:
             if let offerId = model.cpcmOfferId {
-                view?.showPaycellProcess(with: offerId)
+                router.showPaycellProcess(with: offerId)
             }
 
         default:
@@ -168,7 +168,6 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successedPromocode() {
-        MenloworksAppEvents.onPromocodeActivated()
         view?.successedPromocode()
     }
     
@@ -292,13 +291,13 @@ extension PackagesPresenter: PackageInfoViewDelegate {
 
     func onSeeDetailsTap(with type: ControlPackageType) {
         switch type {
+        case .usage:
+            router.openUsage()
         case .myStorage:
             let usage = UsageResponse()
             usage.usedBytes = quotaInfo?.bytesUsed
             usage.quotaBytes = quotaInfo?.bytes
-            router.openMyStorage(storageUsage: usage)
-        case .accountType(let accountType):
-            router.openLeavePremium(type: accountType.leavePremiumType)
+            router.openMyStorage(usageStorage: usage)
         case .myProfile:
             guard let userInfo = SingletonStorage.shared.accountInfo else {
                 let error = CustomErrors.text("Unexpected found nil while getting user info. Refresh page may solve this problem.")
@@ -308,8 +307,6 @@ extension PackagesPresenter: PackageInfoViewDelegate {
             
             let isTurkcell = SingletonStorage.shared.isTurkcellUser
             router.openUserProfile(userInfo: userInfo, isTurkcellUser: isTurkcell)
-            break
-        case .premiumBanner:
             break
         }
     }

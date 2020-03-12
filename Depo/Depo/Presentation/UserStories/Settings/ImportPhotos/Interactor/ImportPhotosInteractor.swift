@@ -125,7 +125,6 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
         fbService.requestStop(success: { [weak self] _ in
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .off, socialType: .facebook))
             DispatchQueue.main.async {
-                MenloworksTagsService.shared.facebookImport(isOn: false)
                 self?.output?.stopImportSuccess()
             }
         }) { [weak self] error in

@@ -10,7 +10,7 @@ import Contacts
 
 typealias ContactsPermissionCallback = (_ success: Bool) -> Void
 
-class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput {
+final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput {
     
     weak var view: SyncContactsViewInput!
     var interactor: SyncContactsInteractorInput!
@@ -44,9 +44,18 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     func startOperation(operationType: SyncOperationType) {
         if operationType != .analyze {
             if operationType != .getBackUpStatus {
-                requesetAccess { success in
+                requesetAccess { [weak self] success in
                     if success {
-                        self.proccessOperation(operationType)
+                        if operationType == .backup {
+                            if self?.interactor.getStoredContactsCount() == 0 {
+                                self?.showEmptyContactsPopUp()
+                            } else {
+                                self?.proccessOperation(operationType)
+                            }
+                        } else {
+                            self?.proccessOperation(operationType)
+                        }
+                         self?.setButtonsAvailability()
                     }
                 }
             } else {
@@ -69,7 +78,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         case .failed:
             view.showErrorAlert(message: TextConstants.serverErrorMessage)
         case .depoError:
-            view.showErrorAlert(message: TextConstants.contactSyncDepoErrorMessage)
+            router.showFullQuotaPopUp()
         default:
             // TODO: Error handling
             break
@@ -123,6 +132,10 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         }
     }
     
+    func openPremium() {
+        router.goToPremium()
+    }
+    
     func showNoBackUp() {
         view.setStateWithoutBackUp()
         setButtonsAvailability()
@@ -144,7 +157,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
                 }
             }
         } else {
-            router.goToPremium()
+            view.showPremiumPopup()
         }
     }
     
@@ -247,8 +260,23 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
             hasStoredContacts = false
         }
         
-        view.setButtonsAvailability(restore: hasStoredContacts,
-                                    backup: interactor.getStoredContactsCount() > 0)
+        interactor.getContactsPermissionStatus { [weak self] isPermitted in
+            
+            guard let self = self else {
+                return
+            }
+            
+            if isPermitted {
+                self.view.setButtonsAvailability(contactsPermitted: isPermitted, contactsCount: self.interactor.getStoredContactsCount(), containContactsInCloud: hasStoredContacts)
+            } else {
+                self.view.setButtonsAvailability(contactsPermitted: isPermitted, contactsCount: nil, containContactsInCloud: hasStoredContacts)
+            }
+        }
+    }
+    
+    private func showEmptyContactsPopUp() {
+        let controller = PopUpController.with(title: nil, message: TextConstants.absentContactsForBuckup, image: .none, buttonTitle: TextConstants.ok)
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
 }
 

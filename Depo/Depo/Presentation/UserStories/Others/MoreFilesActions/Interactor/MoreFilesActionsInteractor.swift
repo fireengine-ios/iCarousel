@@ -53,7 +53,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         if sharingItems.count <= NumericConstants.numberOfSelectedItemsBeforeLimits {
             let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
-                MenloworksAppEvents.onShareClicked()
                 self?.sync(items: self?.sharingItems, action: { [weak self] in
                     self?.shareSmallSize(sourceRect: sourceRect)
                     }, cancel: {}, fail: { errorResponse in
@@ -64,7 +63,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             controler.addAction(smallAction)
             
             let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
-                MenloworksAppEvents.onShareClicked()
                 self?.sync(items: self?.sharingItems, action: { [weak self] in
                     self?.shareOrignalSize(sourceRect: sourceRect)
                     }, cancel: {}, fail: { errorResponse in
@@ -75,7 +73,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
-            MenloworksAppEvents.onShareClicked()
             
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareViaLink(sourceRect: sourceRect)
@@ -140,8 +137,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         return
                     }
                     
-                    MenloworksEventsService.shared.onShareItem(with: fileType, toApp: activityTypeString.knownAppName())
-                    
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Share(method: shareType, channelType: activityTypeString.knownAppName()))
                     self?.analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                                               eventActions: .share,
@@ -185,7 +180,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let fileType = sharingItems.first?.fileType
         fileService.share(sharedFiles: sharingItems, success: { [weak self] url in
             DispatchQueue.main.async {
-                self?.output?.operationFinished(type: .share)
+                guard
+                    let self = self,
+                    let output = self.output
+                else {
+                    return
+                }
+                output.operationFinished(type: .share)
                 
                 let objectsToShare = [url]
                 let activityVC = UIActivityViewController(activityItems: objectsToShare,
@@ -198,18 +199,15 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     else {
                         return
                     }
-                    
+                    output.stopSelectionMode()
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Share(method: .link, channelType: activityTypeString.knownAppName()))
-                
-                    MenloworksEventsService.shared.onShareItem(with: fileType,
-                                                               toApp: activityTypeString.knownAppName())
                 }
                 if let tempoRect = sourceRect {//if ipad
                     activityVC.popoverPresentationController?.sourceRect = tempoRect
                 }
                 
                 debugLog("presentViewController activityVC")
-                self?.router.presentViewController(controller: activityVC)
+                self.router.presentViewController(controller: activityVC)
             }
             
         }, fail: failAction(elementType: .share))
@@ -977,7 +975,6 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
     
     private func save(image: UIImage) {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .success))
-        MenloworksTagsService.shared.editedPhotoSaved()
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
 }
@@ -1066,7 +1063,6 @@ extension MoreFilesActionsInteractor {
                 folders: TextConstants.deleteFoldersSuccessText
             )
             
-            MenloworksAppEvents.onFileDeleted()
         case .restore:
             triplet = SuccessLocalizationTriplet(
                 items: TextConstants.restoreItemsSuccessText,

@@ -22,9 +22,7 @@ protocol SettingsDelegate: class {
     func goToHelpAndSupport()
     
     func goToTermsAndPolicy() 
-    
-    func goToUsageInfo()
-    
+        
     func goToActivityTimeline()
     
     func goToPermissions()
@@ -53,7 +51,6 @@ final class SettingsViewController: BaseViewController {
         case connectAccounts
         case permissions
         case myActivities
-        case usageInfo
         case passcode
         case security
         case helpAndSupport
@@ -69,7 +66,6 @@ final class SettingsViewController: BaseViewController {
             case .connectAccounts: return TextConstants.settingsViewCellConnectedAccounts
             case .permissions: return TextConstants.settingsViewCellPermissions
             case .myActivities: return TextConstants.settingsViewCellActivityTimline
-            case .usageInfo: return TextConstants.settingsViewCellUsageInfo
             case .passcode: return TextConstants.settingsViewCellPasscode
             case .security: return TextConstants.settingsViewCellLoginSettings
             case .helpAndSupport: return TextConstants.settingsViewCellHelp
@@ -80,7 +76,7 @@ final class SettingsViewController: BaseViewController {
         
         static let allSectionOneTypes = [contactSync, autoUpload, periodicContactSync, faceImage]
         static let allSectionTwoTypes = [connectAccounts, permissions]
-        static let allSectionThreeTypes = [myActivities, usageInfo, passcode, security]
+        static let allSectionThreeTypes = [myActivities, passcode, security]
         static let allSectionFourTypes = [helpAndSupport, termsAndPolicy, logout]
     }
     
@@ -96,8 +92,6 @@ final class SettingsViewController: BaseViewController {
         
         setupTableView()
         output.viewIsReady()
-        
-        MenloworksAppEvents.onPreferencesOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -235,7 +229,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 output.goToFaceImage()
             }
         case .connectAccounts:
-            MenloworksTagsService.shared.onSocialMediaPageClicked()
             if let delegate = settingsDelegate {
                 delegate.goToConnectedAccounts()
             } else {
@@ -252,12 +245,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 delegate.goToActivityTimeline()
             } else {
                 output.goToActivityTimeline()
-            }
-        case .usageInfo:
-            if let delegate = settingsDelegate {
-                delegate.goToUsageInfo()
-            } else {
-                output.goToUsageInfo()
             }
         case .passcode:
             showPasscodeOrPasscodeSettings()

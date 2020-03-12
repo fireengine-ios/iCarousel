@@ -160,6 +160,7 @@ extension AnalyticsService: AnalyticsGA {
                                             dailyDrawleft: Int? = nil,
                                             totalDraw: Int? = nil,
                                             itemsOperationCount: GADementionValues.ItemsOperationCount? = nil,
+                                            editFields: String? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         
         let tokenStorage: TokenStorage = factory.resolve()
@@ -261,7 +262,8 @@ extension AnalyticsService: AnalyticsGA {
                 isSpotifyEnabled: isSpotifyEnabled,
                 dailyDrawleft: dailyDrawleft,
                 totalDraw: totalDraw,
-                itemsOperationCount: itemsOperationCount).productParametrs)
+                itemsOperationCount: itemsOperationCount,
+                editFields: editFields).productParametrs)
         }
     }
     
@@ -644,6 +646,16 @@ extension AnalyticsService: AnalyticsGA {
                                                   label: label)
             
             Analytics.logEvent(GACustomEventsType.event.key, parameters: popupParameters + dimentionParameters)
+        }
+    }
+    
+    func trackProfileUpdateGAEvent(editFields: String) {
+        prepareDimentionsParametrs(screen: nil, editFields: editFields) { dimentionParameters in
+            let parameters = self.parameters(category: .functions,
+                                             action: .myProfile,
+                                             label: .save(isSuccess: true))
+            
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parameters + dimentionParameters)
         }
     }
     

@@ -9,6 +9,7 @@
 import UIKit
 
 class SyncContactsViewController: BaseViewController, SyncContactsViewInput, ErrorPresenter {
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var viewForLogo: UIView!
     @IBOutlet weak var viewForInformationAfterBackUp: UIView!
@@ -48,6 +49,7 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     var output: SyncContactsViewOutput!
     
     var tabBarSetup = false
+    private var isFirstLaunch = true
     
     var isFullCircle: Bool {
         return gradientLoaderIndicator.circlePathLayer.strokeEnd >= 1
@@ -109,7 +111,6 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         }
         
         output.viewIsReady()
-        MenloworksAppEvents.onContactSyncPageOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -215,9 +216,18 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         }
     }
     
-    func setButtonsAvailability(restore: Bool, backup: Bool) {
-        restoreButton.isEnabled = restore
-        backUpButton.isEnabled = backup
+    func setButtonsAvailability(contactsPermitted: Bool, contactsCount: Int?, containContactsInCloud: Bool) {
+        
+        if isFirstLaunch {
+            backUpButton.isEnabled = true
+            isFirstLaunch = false
+        } else if let contactsCount = contactsCount, contactsCount == 0 {
+            backUpButton.isEnabled = false
+        } else {
+            backUpButton.isEnabled = true
+        }
+        
+        restoreButton.isEnabled = containContactsInCloud
     }
     
     func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
@@ -291,5 +301,20 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         }
     }
     
+    func showPremiumPopup() {
+        let popup = PopUpController.with(title: TextConstants.contactSyncConfirmPremiumPopupTitle,
+                                         message: TextConstants.contactSyncConfirmPremiumPopupText,
+                                         image: .none,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstAction: { vc in
+                                            vc.close()
+                                         }, secondAction: { vc in
+                                            vc.close(isFinalStep: false) { [weak self] in
+                                                self?.output.openPremium()
+                                            }
+                                         })
+        present(popup, animated: true)
+    }
     
 }

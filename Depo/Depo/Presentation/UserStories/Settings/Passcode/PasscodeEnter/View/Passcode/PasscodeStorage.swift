@@ -51,12 +51,6 @@ extension PasscodeStorageDefaults: PasscodeStorage {
     }
     
     func save(passcode: Passcode) {
-        #if MAIN_APP
-        if self.passcode.count == 0 && passcode.count > 0 {
-            MenloworksTagsService.shared.passcodeStatus(true)
-            MenloworksEventsService.shared.onPasscodeSet()
-        }
-        #endif
         self.passcode = passcode
     }
     

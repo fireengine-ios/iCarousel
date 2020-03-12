@@ -44,6 +44,10 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
         basePassingPresenter?.showAlert(with: TextConstants.errorSameDestinationFolder)
     }
     
+    func stopSelectionMode() {
+        basePassingPresenter?.stopModeSelected()
+    }
+    
     // MARK: - Base presenter
     
     override func outputView() -> Waiting? {

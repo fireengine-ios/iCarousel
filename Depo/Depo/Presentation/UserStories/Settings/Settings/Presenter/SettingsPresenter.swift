@@ -69,7 +69,6 @@ extension SettingsPresenter: SettingsViewOutput {
                                                 vc.close { [weak self] in
                                                     self?.startAsyncOperation()
                                                     self?.interactor.checkConnectedToNetwork()
-                                                    MenloworksTagsService.shared.onStartWithLogin(false)
                                                 }
         })
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
@@ -101,10 +100,6 @@ extension SettingsPresenter: SettingsViewOutput {
     
     func goToTermsAndPolicy() {
         router.goToTermsAndPolicy()
-    }
-    
-    func goToUsageInfo() {
-        router.goToUsageInfo()
     }
     
     func goToPermissions() {

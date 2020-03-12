@@ -85,13 +85,10 @@ final class FaceImageViewController: ViewController, NibInit {
     private func sendAnaliticsForFaceImageAllowed(isAllowed: Bool) {
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .faceRecognition, eventLabel: .faceRecognition(isAllowed))
         
-        MenloworksTagsService.shared.faceImageRecognition(isOn: isAllowed)
         if isAllowed {
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FaceImageGrouping(action: .on))
-            MenloworksEventsService.shared.onFaceImageRecognitionOn()
         } else {
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FaceImageGrouping(action: .off))
-            MenloworksEventsService.shared.onFaceImageRecognitionOff()
         }
     }
     

@@ -14,8 +14,10 @@ protocol MoreFilesActionsInteractorOutput: BaseAsyncOperationInteractorOutput {
     func dismiss(animated: Bool)
     func showOutOfSpaceAlert(failedType type: ElementTypes)
     func successPopupClosed()
+    func stopSelectionMode()
 }
 extension MoreFilesActionsInteractorOutput {
     func showOutOfSpaceAlert(failedType type: ElementTypes) {}
     func successPopupClosed() {}
+    func stopSelectionMode() {}
 }
