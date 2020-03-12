@@ -325,9 +325,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     album.enumerateObjects { object, index, stop in
                         dispatchGroup.enter()
                         let assets = PHAsset.fetchAssets(in: object, options: fetchOptions)
-//                        if assets.firstObject != nil {
+                        if assets.firstObject != nil {
                             albums.append(object)
-//                        }
+                        }
                         dispatchGroup.leave()
                     }
                 }
