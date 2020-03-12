@@ -185,7 +185,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let fileType = sharingItems.first?.fileType
         fileService.share(sharedFiles: sharingItems, success: { [weak self] url in
             DispatchQueue.main.async {
-                self?.output?.operationFinished(type: .share)
+                guard
+                    let self = self,
+                    let output = self.output
+                else {
+                    return
+                }
+                output.operationFinished(type: .share)
                 
                 let objectsToShare = [url]
                 let activityVC = UIActivityViewController(activityItems: objectsToShare,
@@ -198,7 +204,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     else {
                         return
                     }
-                    
+                    output.stopSelectionMode()
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Share(method: .link, channelType: activityTypeString.knownAppName()))
                 
                     MenloworksEventsService.shared.onShareItem(with: fileType,
@@ -209,7 +215,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 }
                 
                 debugLog("presentViewController activityVC")
-                self?.router.presentViewController(controller: activityVC)
+                self.router.presentViewController(controller: activityVC)
             }
             
         }, fail: failAction(elementType: .share))
