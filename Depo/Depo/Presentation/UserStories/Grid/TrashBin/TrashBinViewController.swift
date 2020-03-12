@@ -24,7 +24,7 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
-    var photoVideoDetailModule: PhotoVideoDetailModuleInput?
+    weak var photoVideoDetailModule: PhotoVideoDetailModuleInput? //no need for stong reference, since we need it till ViewController is alive
     
     //MARK: - View lifecycle
     
