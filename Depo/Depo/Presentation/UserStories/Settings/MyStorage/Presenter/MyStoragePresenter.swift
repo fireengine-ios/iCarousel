@@ -130,13 +130,7 @@ extension MyStoragePresenter: MyStorageInteractorOutput {
             /// hide apple offers if apple server don't sent offer info
             if let appleId = $0.subscriptionPlanInAppPurchaseId, IAPManager.shared.product(for: appleId) == nil {
                 return false
-            }
-            
-            /// show only non-feature offers
-            switch $0.subscriptionPlanType {
-            case .feature, .none:
-                return false
-            case .quota:
+            } else {
                 return true
             }
         }
