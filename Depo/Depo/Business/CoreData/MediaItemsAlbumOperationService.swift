@@ -123,6 +123,14 @@ final class MediaItemsAlbumOperationService {
                     _ = MediaItemsAlbum(asset: asset, context: context)
                 }
             }
+            
+            //delete unused albums (empty or deleted)
+            let localIdentifiers = assets.map { $0.localIdentifier }
+            mediaItemAlbums.forEach { album in
+                if let localId = album.localId, !localIdentifiers.contains(localId) {
+                    context.delete(album)
+                }
+            }
             self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
     }
