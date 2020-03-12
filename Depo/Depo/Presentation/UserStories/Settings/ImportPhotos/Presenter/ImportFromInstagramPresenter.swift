@@ -84,6 +84,7 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
     }
     
     func instaPickStatusSuccess(status: Bool) {
+        //FIXME: find the leak
         view?.stopActivityIndicator()
         view?.instaPickStatusSuccess(status)
     }
