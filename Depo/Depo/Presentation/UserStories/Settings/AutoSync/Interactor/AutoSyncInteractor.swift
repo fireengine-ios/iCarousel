@@ -14,8 +14,7 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     private let localMediaStorage = LocalMediaStorage.default
     private lazy var locationManager = LocationManager.shared
     private let analyticsManager: AnalyticsService = factory.resolve()
-    
-    private var albums = [AutoSyncAlbum]()
+    private let albumsService = MediaItemsAlbumOperationService.shared
     
     func prepareCellModels() {
         getAlbums { [weak self] albums in
@@ -55,18 +54,12 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     }
     
     private func getAlbums(completion: @escaping (_ albums: [AutoSyncAlbum]) -> Void) {
-        if !albums.isEmpty {
-            completion(albums)
-            return
-        }
-
-        localMediaStorage.getLocalAlbums { assets in
-            var albums = assets.map { AutoSyncAlbum(asset: $0) }
+        albumsService.getLocalAlbums { mediaItemAlbums in
+            var albums = mediaItemAlbums.map { AutoSyncAlbum(mediaItemAlbum: $0) }
             if let mainAlbum = albums.first(where: { $0.name == AutoSyncAlbum.mainAlbumName }) {
                 albums.remove(mainAlbum)
                 albums.insert(mainAlbum, at: 0)
             }
-            
             completion(albums)
         }
     }

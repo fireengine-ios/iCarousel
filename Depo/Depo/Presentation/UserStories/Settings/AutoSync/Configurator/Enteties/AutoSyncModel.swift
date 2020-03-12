@@ -79,6 +79,12 @@ final class AutoSyncAlbum {
         name = asset.localizedTitle ?? ""
         isSelected = true
     }
+    
+    init(mediaItemAlbum: MediaItemsAlbum) {
+        uuid = mediaItemAlbum.localId ?? ""
+        name = mediaItemAlbum.name ?? ""
+        isSelected = mediaItemAlbum.isEnabled
+    }
 }
 
 extension AutoSyncAlbum: Equatable {

@@ -68,29 +68,40 @@ final class CacheManager {
                                 return
                         }
                         self.userDefaultsVars.currentRemotesPage = 0
-                        self.startProcessingAllLocals(completion: { [weak self] in
-                            guard let `self` = self,
-                                !self.processingLocalItems else {
-                                    return
+                        self.startProccessingLocalAlbums { [weak self] in
+                            guard let self = self else {
+                                return
                             }
-                            //FIXME: need handling if we logouted and locals still in progress
-                            self.isProcessing = false
-                            self.isCacheActualized = true
-                            self.updatePreparation(isBegun: false)
-                            self.delegates.invoke { $0.didCompleteCacheActualization() }
-                        })
+                            
+                            self.startProcessingAllLocals(completion: { [weak self] in
+                                guard let `self` = self,
+                                    !self.processingLocalItems else {
+                                        return
+                                }
+                                //FIXME: need handling if we logouted and locals still in progress
+                                self.isProcessing = false
+                                self.isCacheActualized = true
+                                self.updatePreparation(isBegun: false)
+                                self.delegates.invoke { $0.didCompleteCacheActualization() }
+                            })
+                        }
                     })
                 } else {
                     guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessLocalFiles flag in MediaItemsOperationService processLocalGallery method
                         return
                     }
                     self.showPreparationCardAfterDelay()
-                    self.startProcessingAllLocals(completion: { [weak self] in
-                        self?.isProcessing = false
-                        self?.isCacheActualized = true
-                        self?.updatePreparation(isBegun: false)
-                        self?.delegates.invoke { $0.didCompleteCacheActualization() }
-                    })
+                    self.startProccessingLocalAlbums { [weak self] in
+                        guard let self = self else {
+                            return
+                        }
+                        self.startProcessingAllLocals(completion: { [weak self] in
+                            self?.isProcessing = false
+                            self?.isCacheActualized = true
+                            self?.updatePreparation(isBegun: false)
+                            self?.delegates.invoke { $0.didCompleteCacheActualization() }
+                        })
+                    }
                 }
             }
         }
@@ -197,6 +208,10 @@ final class CacheManager {
             return
         }
         internetConnectionBackCallback()
+    }
+    
+    private func startProccessingLocalAlbums(completion: @escaping VoidHandler) {
+        MediaItemsAlbumOperationService.shared.processLocalMediaItemAlbums(completion: completion)
     }
     
     private func startProcessingAllLocals(completion: @escaping VoidHandler) {

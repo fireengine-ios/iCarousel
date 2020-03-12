@@ -15,6 +15,7 @@ struct DispatchQueueLabels {
     static let instaPickItemsUpdate = "InstaPickItemsUpdate"
     static let getUserInfo = "GetUserInfo"
     static let mediaItemOperationsService = "com.lifebox.mediaItemOperationsService"
+    static let mediaItemAlbumsOperationsService = "com.lifebox.mediaItemAlbumsOperationsService"
     static let autosync = "com.lifebox.autosync"
     static let upload = "com.lifebox.upload"
     static let uploadOperation = "com.lifebox.upload_operation"
