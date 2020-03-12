@@ -24,6 +24,7 @@ final class PackagesViewController: BaseViewController {
             let nib = UINib(nibName: String(describing: PackagesTableViewCell.self), bundle: nil)
             newValue.register(nib, forCellReuseIdentifier: String(describing: PackagesTableViewCell.self))
             newValue.tableFooterView = UIView()
+            newValue.isScrollEnabled = false
         }
     }
     
