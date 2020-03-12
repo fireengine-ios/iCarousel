@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AutoSyncDataSourceDelegate: class {
-    func enableAutoSync()
+    func checkForEnableAutoSync()
     func didChangeSettingsOption(settings: AutoSyncSetting)
 }
 
@@ -64,24 +64,32 @@ final class AutoSyncDataSource: NSObject {
     
     func setupModels(with settings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
         autoSyncSetting = settings
-        enableAutoSync()
         
         selectedAlbums = albums.filter { $0.isSelected }
         albumModels = albums.map { album -> AutoSyncAlbumModel in
             let model = AutoSyncAlbumModel(album: album)
+            model.isEnabled = autoSyncSetting.isAutoSyncOptionEnabled
             if model.album.isMainAlbum {
                 model.isAllChecked = selectedAlbums.count == albums.count
             }
             return model
         }
         
+        if autoSyncSetting.isAutoSyncOptionEnabled {
+            enableAutoSync()
+        } else {
+            forceDisableAutoSync()
+        }
+    }
+    
+    func checkPermissionsSuccessed() {
+        enableAutoSync()
     }
     
     func forceDisableAutoSync() {
         autoSyncSetting.isAutoSyncOptionEnabled = false
         models = [AutoSyncHeaderModel(type: .autosync, setting: nil, isSelected: false),
                   AutoSyncHeaderModel(type: .albums, setting: nil, isSelected: false)]
-        albumModels.removeAll()
         tableView.reloadData()
     }
 }
@@ -164,7 +172,7 @@ extension AutoSyncDataSource: AutoSyncCellDelegate {
             switch model.headerType {
             case .autosync:
                 if model.isSelected {
-                    delegate?.enableAutoSync()
+                    delegate?.checkForEnableAutoSync()
                 } else {
                     disableAutoSync()
                 }

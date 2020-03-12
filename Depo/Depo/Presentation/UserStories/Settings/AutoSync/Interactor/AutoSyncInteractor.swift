@@ -6,8 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class AutoSyncInteractor: AutoSyncInteractorInput {
-
+final class AutoSyncInteractor: AutoSyncInteractorInput {
     weak var output: AutoSyncInteractorOutput!
 
     private var dataStorage = AutoSyncDataStorage()
@@ -23,7 +22,9 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
             }
             
             let settings = self.dataStorage.settings
-            self.output.prepaire(syncSettings: settings, albums: albums)
+            DispatchQueue.main.async {
+                self.output.prepaire(syncSettings: settings, albums: albums)
+            }
         }
     }
     
@@ -31,11 +32,12 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
         AnalyticsService.sendNetmeraEvent(event: fromSettings ? NetmeraEvents.Screens.FirstAutoSyncScreen() : NetmeraEvents.Screens.AutoSyncScreen())
     }
     
-    func onSave(settings: AutoSyncSettings, fromSettings: Bool) {
+    func onSave(settings: AutoSyncSettings, selectedAlbums: [AutoSyncAlbum], fromSettings: Bool) {
         AnalyticsService.sendNetmeraEvent(event: fromSettings ? NetmeraEvents.Actions.Autosync(autosyncSettings: settings) : NetmeraEvents.Actions.FirstAutosync(autosyncSettings: settings))
         output.onSettingSaved()
-        dataStorage.save(autoSyncSettings: settings , fromSettings: fromSettings)
+        dataStorage.save(autoSyncSettings: settings, fromSettings: fromSettings)
         SyncServiceManager.shared.update(syncSettings: settings)
+        albumsService.save(selectedAlbums: selectedAlbums)
     }
     
     func checkPermissions() {
@@ -54,7 +56,7 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
     }
     
     private func getAlbums(completion: @escaping (_ albums: [AutoSyncAlbum]) -> Void) {
-        albumsService.getLocalAlbums { mediaItemAlbums in
+        albumsService.getAutoSyncAlbums { mediaItemAlbums in
             var albums = mediaItemAlbums.map { AutoSyncAlbum(mediaItemAlbum: $0) }
             if let mainAlbum = albums.first(where: { $0.name == AutoSyncAlbum.mainAlbumName }) {
                 albums.remove(mainAlbum)

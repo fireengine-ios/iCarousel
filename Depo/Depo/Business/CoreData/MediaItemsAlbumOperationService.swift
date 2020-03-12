@@ -64,28 +64,50 @@ final class MediaItemsAlbumOperationService {
             let context = self.coreDataStack.newChildBackgroundContext
             
             self.saveLocalAlbums(assets: albums, context: context, completion: { [weak self] in
-                self?.inProcessLocalAlbums = false
+                guard let self = self else {
+                    return
+                }
                 
-                if let callback = self?.waitingLocalAlbumsCallBack {
-                    self?.getLocalAlbums(mediaItemAlbumsCallBack: callback)
-                    self?.waitingLocalAlbumsCallBack = nil
+                self.inProcessLocalAlbums = false
+                
+                if let callback = self.waitingLocalAlbumsCallBack {
+                    self.getLocalAlbums(context: context, mediaItemAlbumsCallBack: callback)
+                    self.waitingLocalAlbumsCallBack = nil
                 }
             })
         }
     }
     
-    func getLocalAlbums(mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
+    func getAutoSyncAlbums(mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
+        let context = coreDataStack.newChildBackgroundContext
+        getLocalAlbums(context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
+    }
+    
+    func save(selectedAlbums: [AutoSyncAlbum]) {
+        let localIdentifiers = selectedAlbums.map { $0.uuid }
+        let context = coreDataStack.newChildBackgroundContext
+        
+        getLocalAlbums(context: context) { [weak self] mediaItemAlbums in
+            mediaItemAlbums.forEach { album in
+                if let localId = album.localId {
+                    album.isEnabled = localIdentifiers.contains(localId)
+                }
+            }
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
+        }
+    }
+    
+    private func getLocalAlbums(context: NSManagedObjectContext, mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
         if inProcessLocalAlbums {
             waitingLocalAlbumsCallBack = mediaItemAlbumsCallBack
             return
         }
         
-        let context = coreDataStack.newChildBackgroundContext
-        let predicate = NSPredicate(format: "\(#keyPath(MediaItemsAlbum.isLocal)) == true")
+        let predicate = NSPredicate(format: "\(#keyPath(MediaItemsAlbum.isLocal)) = true")
         executeRequest(predicate: predicate, context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
     }
     
-    func saveLocalAlbums(assets: [PHAssetCollection], context: NSManagedObjectContext, completion: @escaping VoidHandler) {
+    private func saveLocalAlbums(assets: [PHAssetCollection], context: NSManagedObjectContext, completion: @escaping VoidHandler) {
         guard localMediaStorage.photoLibraryIsAvailible() else {
             completion()
             return
@@ -102,15 +124,15 @@ final class MediaItemsAlbumOperationService {
             self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
     }
-    
-    func notSaved(assets: [PHAssetCollection], context: NSManagedObjectContext, callback: @escaping PhotoAssetCollectionsCallback) {
+
+    private func notSaved(assets: [PHAssetCollection], context: NSManagedObjectContext, callback: @escaping PhotoAssetCollectionsCallback) {
         guard localMediaStorage.photoLibraryIsAvailible() else {
             callback([])
             return
         }
         
         let localIdentifiers = assets.map { $0.localIdentifier }
-        let predicate = NSPredicate(format: "\(#keyPath(MediaItemsAlbum.localId)) IN %@ AND \(#keyPath(MediaItemsAlbum.isLocal)) == true", localIdentifiers)
+        let predicate = NSPredicate(format: "\(#keyPath(MediaItemsAlbum.localId)) IN %@ AND \(#keyPath(MediaItemsAlbum.isLocal)) = true", localIdentifiers)
         executeRequest(predicate: predicate, context: context) { mediaItemsAlbums in
             let alredySavedIDs = mediaItemsAlbums.compactMap { $0.localId }
             let notSaved = assets.filter { !alredySavedIDs.contains($0.localIdentifier) }

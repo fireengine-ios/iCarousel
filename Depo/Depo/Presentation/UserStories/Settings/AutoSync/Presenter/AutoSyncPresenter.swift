@@ -20,7 +20,8 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     var interactor: AutoSyncInteractorInput!
     var router: AutoSyncRouterInput!
     
-    var fromSettings: Bool = false
+    var fromSettings = false
+    private var isFirstCheckPermissions = true
 
     func viewIsReady() {
         startAsyncOperationDisableScreen()
@@ -32,17 +33,17 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         view.prepaire(syncSettings: syncSettings, albums: albums)
     }
     
-    func change(settings: AutoSyncSettings) {
+    func change(settings: AutoSyncSettings, selectedAlbums: [AutoSyncAlbum]) {
         if !fromSettings {
             router.routNextVC()
-            save(settings: settings)
+            save(settings: settings, selectedAlbums: selectedAlbums)
         } else {
-            save(settings: settings)
+            save(settings: settings, selectedAlbums: selectedAlbums)
         }
     }
     
-    func save(settings: AutoSyncSettings) {
-        interactor.onSave(settings: settings, fromSettings: fromSettings)
+    func save(settings: AutoSyncSettings, selectedAlbums: [AutoSyncAlbum]) {
+        interactor.onSave(settings: settings, selectedAlbums: selectedAlbums, fromSettings: fromSettings)
     }
     
     func onSettingSaved() {
@@ -63,10 +64,19 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         /// location access is optional
         if !locationAccessGranted {
             view.showLocationPermissionPopup { [weak self] in
-                self?.interactor.prepareCellModels()
+                self?.checkPermissionsSuccessed()
             }
         } else {
+            checkPermissionsSuccessed()
+        }
+    }
+    
+    private func checkPermissionsSuccessed() {
+        if isFirstCheckPermissions {
+            isFirstCheckPermissions = false
             interactor.prepareCellModels()
+        } else {
+            view.checkPermissionsSuccessed()
         }
     }
         

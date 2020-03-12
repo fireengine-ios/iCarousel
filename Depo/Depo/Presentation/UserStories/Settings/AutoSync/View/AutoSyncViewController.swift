@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDataSourceDelegate {
+class AutoSyncViewController: BaseViewController {
     var output: AutoSyncViewOutput!
     
     @IBOutlet private weak var tableView: UITableView!
@@ -28,7 +28,6 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
     private lazy var dataSource = AutoSyncDataSource(tableView: tableView, delegate: self)
     
     var fromSettings: Bool = false
-    var isFirstTime = true
     private var onStartUsingButtonTapped = false
     
     private let analyticsManager: AnalyticsService = factory.resolve()//FIXME: Idealy we should send all events to presenter->Interactor and then track it(because tracker is a service) OR just rewrite this module to MVC
@@ -65,11 +64,10 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
         super.viewWillDisappear(animated)
         
         if fromSettings {
-            let settings = dataSource.autoSyncSetting
-            let photoOption = settings.photoSetting.option
-            let videoOption = settings.videoSetting.option
+            let photoOption = dataSource.autoSyncSetting.photoSetting.option
+            let videoOption = dataSource.autoSyncSetting.videoSetting.option
             
-            if settings.isAutoSyncEnabled {
+            if dataSource.autoSyncSetting.isAutoSyncEnabled {
                 MenloworksTagsService.shared.onAutosyncStatus(isOn: true)
                 
                 if photoOption == .wifiAndCellular {
@@ -109,7 +107,7 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
             }
             
             storageVars.autoSyncSet = true
-            output.save(settings: settings)
+            output.save(settings: dataSource.autoSyncSetting, selectedAlbums: dataSource.selectedAlbums)
         }
     }
     
@@ -159,9 +157,8 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
     
     @IBAction func onStartUsingButton() {
         onStartUsingButtonTapped = true
-        let settings = dataSource.autoSyncSetting
-        
-        if !settings.isAutoSyncEnabled {
+
+        if !dataSource.autoSyncSetting.isAutoSyncEnabled {
             MenloworksTagsService.shared.onAutosyncStatus(isOn: false)
             MenloworksTagsService.shared.onFirstAutosyncPhotoOff()
             MenloworksTagsService.shared.onFirstAutosyncVideoOff()
@@ -174,8 +171,8 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
         } else {
             MenloworksTagsService.shared.onAutosyncStatus(isOn: true)
             
-            let photoOption = settings.photoSetting.option
-            let videoOption = settings.videoSetting.option
+            let photoOption = dataSource.autoSyncSetting.photoSetting.option
+            let videoOption = dataSource.autoSyncSetting.videoSetting.option
             
             if photoOption == .wifiAndCellular {
                 MenloworksTagsService.shared.onFirstAutosyncPhotosViaLte()
@@ -201,10 +198,16 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
         }
         
         storageVars.autoSyncSet = true
-        output.change(settings: settings)
+        output.change(settings: dataSource.autoSyncSetting, selectedAlbums: dataSource.selectedAlbums)
     }
+
+}
+
+// MARK: - AutoSyncViewInput
+
+extension AutoSyncViewController: AutoSyncViewInput {
+
     
-    // MARK: AutoSyncViewInput
     func setupInitialState() {
     }
     
@@ -215,37 +218,13 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
     func disableAutoSync() {
         dataSource.forceDisableAutoSync()
         if !fromSettings {
-            output.save(settings: dataSource.autoSyncSetting)
+            output.save(settings: dataSource.autoSyncSetting, selectedAlbums: dataSource.selectedAlbums)
         }
     }
-    
-    // MARK: AutoSyncDataSourceDelegate
-    
-    func enableAutoSync() {
-        output.checkPermissions()
-    }
-    
-    func didChangeSettingsOption(settings: AutoSyncSetting) {
-        let eventAction: GAEventAction
-        if fromSettings {
-            eventAction = .settingsAutoSync
-        } else {
-            eventAction = .firstAutoSync
-        }
-        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: eventAction, eventLabel: GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: settings))
-    }
-    
+
     func checkPermissionsSuccessed() {
-        if onStartUsingButtonTapped {
-            onStartUsingButtonTapped = false
-            let settings = dataSource.autoSyncSetting
-            storageVars.autoSyncSet = true
-            output.change(settings: settings)
-        } else {
-            analyticsService.track(event: .turnOnAutosync)
-//            dataSource.reloadTableView()
-//            dataSource.addAutoSync()
-        }
+        analyticsService.track(event: .turnOnAutosync)
+        dataSource.checkPermissionsSuccessed()
     }
     
     func checkPermissionsFailedWith(error: String) {
@@ -288,3 +267,22 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
         }
     }
 }
+
+// MARK: - AutoSyncDataSourceDelegate
+
+extension AutoSyncViewController: AutoSyncDataSourceDelegate {
+    func checkForEnableAutoSync() {
+        output.checkPermissions()
+    }
+
+    func didChangeSettingsOption(settings: AutoSyncSetting) {
+        let eventAction: GAEventAction
+        if fromSettings {
+            eventAction = .settingsAutoSync
+        } else {
+            eventAction = .firstAutoSync
+        }
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: eventAction, eventLabel: GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: settings))
+    }
+}
+ 

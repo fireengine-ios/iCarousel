@@ -56,23 +56,19 @@ final class CacheManager {
 
         MediaItemOperationsService.shared.removeZeroBytesLocalItems { [weak self] _ in
             MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
-                guard let `self` = self else {
-                    return
-                }
+                self?.startProccessingLocalAlbums { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
                 
-                if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
-                    self.showPreparationCardAfterDelay()
-                    self.startAppendingAllRemotes(completion: { [weak self] in
-                        guard let `self` = self,
-                            !self.processingRemoteItems else {
-                                return
-                        }
-                        self.userDefaultsVars.currentRemotesPage = 0
-                        self.startProccessingLocalAlbums { [weak self] in
-                            guard let self = self else {
-                                return
+                    if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
+                        self.showPreparationCardAfterDelay()
+                        self.startAppendingAllRemotes(completion: { [weak self] in
+                            guard let `self` = self,
+                                !self.processingRemoteItems else {
+                                    return
                             }
-                            
+                            self.userDefaultsVars.currentRemotesPage = 0
                             self.startProcessingAllLocals(completion: { [weak self] in
                                 guard let `self` = self,
                                     !self.processingLocalItems else {
@@ -84,17 +80,12 @@ final class CacheManager {
                                 self.updatePreparation(isBegun: false)
                                 self.delegates.invoke { $0.didCompleteCacheActualization() }
                             })
-                        }
-                    })
-                } else {
-                    guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessLocalFiles flag in MediaItemsOperationService processLocalGallery method
-                        return
-                    }
-                    self.showPreparationCardAfterDelay()
-                    self.startProccessingLocalAlbums { [weak self] in
-                        guard let self = self else {
+                        })
+                    } else {
+                        guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessLocalFiles flag in MediaItemsOperationService processLocalGallery method
                             return
                         }
+                        self.showPreparationCardAfterDelay()
                         self.startProcessingAllLocals(completion: { [weak self] in
                             self?.isProcessing = false
                             self?.isCacheActualized = true
