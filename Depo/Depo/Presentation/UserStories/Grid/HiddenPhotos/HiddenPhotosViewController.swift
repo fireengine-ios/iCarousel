@@ -23,7 +23,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     
     private lazy var router = RouterVC()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private var photoVideoDetailModule: PhotoVideoDetailModuleInput?
+    private weak var photoVideoDetailModule: PhotoVideoDetailModuleInput? //since DetailsVC is VC, we no need storng reference to dead vc's presenter.
     //MARK: - View lifecycle
     
     deinit {
