@@ -8,60 +8,49 @@
 
 import UIKit
 
-protocol AutoSyncSwitcherTableViewCellDelegate: class {
-    func onValueChanged(model: AutoSyncModel)
-}
+final class AutoSyncSwitcherTableViewCell: AutoSyncTableViewCell {
 
-class AutoSyncSwitcherTableViewCell: UITableViewCell {
-    @IBOutlet weak var separatorView: UIView!
+    @IBOutlet private weak var titleLabel: UILabel! {
+        willSet {
+            newValue.textColor = .black
+            newValue.font = .TurkcellSaturaDemFont(size: 18)
+        }
+    }
     
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var subTitleLabel: UILabel!
+    @IBOutlet private weak var subTitleLabel: UILabel! {
+        willSet {
+            newValue.font = .TurkcellSaturaBolFont(size: 14)
+        }
+    }
+    
+    @IBOutlet private weak var iconImageView: UIImageView!
     @IBOutlet weak var switcher: CustomSwitch!
     
-    var model: AutoSyncModel?
+    private weak var delegate: AutoSyncCellDelegate?
+    private var model: AutoSyncHeaderModel?
     
-    weak var delegate: AutoSyncSwitcherTableViewCellDelegate?
+    //MARK: -
     
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        backgroundColor = .clear
+    func setup(with model: AutoSyncModel, delegate: AutoSyncCellDelegate?) {
+        self.delegate = delegate
+        self.model = model as? AutoSyncHeaderModel
         
-        titleLabel.font = .TurkcellSaturaDemFont(size: 18)
-        subTitleLabel.font = .TurkcellSaturaBolFont(size: 14)
+        guard let model = self.model else {
+            return
+        }
         
-        separatorView.isHidden = true
-        
-        setColors()
-    }
-    
-    func setup(with model: AutoSyncModel, setting: AutoSyncSetting) {
-        self.model = model
+        titleLabel.text = model.headerType.title
         switcher.isOn = model.isSelected
-        separatorView.isHidden = !model.isSelected
-        
-        titleLabel.text = model.titleString
-        subTitleLabel.text = model.subTitleString
-        switcher.isSelected = model.isSelected
     }
+
+    func didSelect() { }
     
-    // MARK: Private
-    
-    private func setColors() {
-        titleLabel.textColor = ColorConstants.textGrayColor
-        subTitleLabel.textColor = ColorConstants.textGrayColor
-        separatorView.backgroundColor = ColorConstants.textGrayColor
-    }
-    
-    @IBAction func onSwitcherValueChanged() {
+    @IBAction private func onSwitcherValueChanged() {
         guard let model = model else {
             return
         }
         
         model.isSelected = switcher.isOn
-        separatorView.isHidden = !switcher.isOn
-        delegate?.onValueChanged(model: model)
+        delegate?.didChange(model: model)
     }
-
 }

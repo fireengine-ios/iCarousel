@@ -9,7 +9,7 @@
 protocol AutoSyncViewInput: class {
 
     func setupInitialState()
-    func prepaire(syncSettings: AutoSyncSettings)
+    func prepaire(syncSettings: AutoSyncSettings, albums: [AutoSyncAlbum])
     func disableAutoSync()
     func checkPermissionsSuccessed()
     func checkPermissionsFailedWith(error: String)

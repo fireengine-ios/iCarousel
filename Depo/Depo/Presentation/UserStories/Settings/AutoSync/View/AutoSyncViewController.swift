@@ -8,12 +8,10 @@
 
 import UIKit
 
-class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDataSourceDelegate {
+class AutoSyncViewController: BaseViewController {
     var output: AutoSyncViewOutput!
     
-    @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var topConstraint: NSLayoutConstraint!
     
     @IBOutlet private weak var startButton: RoundedInsetsButton! {
         willSet {
@@ -27,14 +25,13 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
     
     private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var dataSource = AutoSyncDataSource(tableView: tableView, delegate: self)
     
     var fromSettings: Bool = false
-    var isFirstTime = true
     private var onStartUsingButtonTapped = false
     
     private let analyticsManager: AnalyticsService = factory.resolve()//FIXME: Idealy we should send all events to presenter->Interactor and then track it(because tracker is a service) OR just rewrite this module to MVC
     
-    let dataSource = AutoSyncDataSource()
 
     // MARK: - Life cycle
     
@@ -44,53 +41,22 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
             setNavigationTitle(title: TextConstants.autoSyncNavigationTitle)
         }
         
-        titleLabel.text =  TextConstants.autoSyncFromSettingsTitle
-        titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
-        titleLabel.textAlignment = .left
-        if Device.isIpad {
-            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 22)
-            titleLabel.textAlignment = .center
-        }
-        
-        titleLabel.textColor = ColorConstants.textGrayColor
-        
-        dataSource.setup(table: tableView)
-        dataSource.delegate = self
-        
-        setupTapHandler()
         analyticsService.logScreen(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
         analyticsService.trackDimentionsEveryClickGA(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
         output.viewIsReady()
     }
     
-    private func setupTapHandler() {
-        let tapHandler = UITapGestureRecognizer(target: self, action: #selector(handle(tap:)))
-        tapHandler.numberOfTapsRequired = 1
-        tapHandler.numberOfTouchesRequired = 1
-        view.addGestureRecognizer(tapHandler)
-    }
-    
-    @objc private func handle(tap: UITapGestureRecognizer) {
-        let location = tap.location(in: tableView)
-        if tableView.indexPathForRow(at: location) == nil {
-            dataSource.collapseSettings()
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.hidesBackButton = !fromSettings
-        startButton.isHidden = fromSettings
+
         dataSource.isFromSettings = fromSettings
-        
         
         if fromSettings {
             navigationBarWithGradientStyle()
+            startButton.isHidden = true
         } else {
+            navigationItem.hidesBackButton = true
             navigationController?.setNavigationBarHidden(true, animated: false)
-            
-            topConstraint.constant = 64
-            view.layoutIfNeeded()
         }
     }
     
@@ -98,10 +64,47 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
         super.viewWillDisappear(animated)
         
         if fromSettings {
-            let settings = dataSource.createAutoSyncSettings()
             storageVars.autoSyncSet = true
-            output.save(settings: settings)
+            output.save(settings: dataSource.autoSyncSetting, selectedAlbums: dataSource.selectedAlbums)
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if tableView.tableHeaderView == nil {
+            setupTableHeaderView()
+        }
+    }
+    
+    private func setupTableHeaderView() {
+        let view = UIView()
+        
+        let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.text = TextConstants.autoSyncFromSettingsTitle
+        titleLabel.textColor = ColorConstants.textGrayColor
+        titleLabel.lineBreakMode = .byWordWrapping
+        titleLabel.numberOfLines = 0
+        if Device.isIpad {
+            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 22)
+            titleLabel.textAlignment = .center
+        } else {
+            titleLabel.font = UIFont.TurkcellSaturaDemFont(size: 16)
+            titleLabel.textAlignment = .left
+        }
+        
+        view.addSubview(titleLabel)
+        titleLabel.pinToSuperviewEdges(offset: 20)
+
+        let size = view.sizeToFit(width: tableView.bounds.width)
+        view.frame.size = size
+    
+        tableView.tableHeaderView = view
+        
+        let back = UIView(frame: tableView.bounds)
+        back.backgroundColor = .white
+        tableView.backgroundView = back
     }
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -112,58 +115,35 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
     
     @IBAction func onStartUsingButton() {
         onStartUsingButtonTapped = true
-        let settings = dataSource.createAutoSyncSettings()
         
-        if !settings.isAutoSyncEnabled {
-            storageVars.autoSyncSet = true
-            output.change(settings: settings)
-        } else {
-            output.checkPermissions()
-        }
+        storageVars.autoSyncSet = true
+        output.change(settings: dataSource.autoSyncSetting, selectedAlbums: dataSource.selectedAlbums)
     }
+
+}
+
+// MARK: - AutoSyncViewInput
+
+extension AutoSyncViewController: AutoSyncViewInput {
+
     
-    // MARK: AutoSyncViewInput
     func setupInitialState() {
     }
     
-    func prepaire(syncSettings: AutoSyncSettings) {
-        dataSource.showCells(from: syncSettings)
+    func prepaire(syncSettings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
+        dataSource.setupModels(with: syncSettings, albums: albums)
     }
         
     func disableAutoSync() {
         dataSource.forceDisableAutoSync()
         if !fromSettings {
-            let settings = dataSource.createAutoSyncSettings()
-            output.save(settings: settings)
+            output.save(settings: dataSource.autoSyncSetting, selectedAlbums: dataSource.selectedAlbums)
         }
     }
-    
-    // MARK: AutoSyncDataSourceDelegate
-    
-    func enableAutoSync() {
-        output.checkPermissions()
-    }
-    
-    func didChangeSettingsOption(settings: AutoSyncSetting) {
-        let eventAction: GAEventAction
-        if fromSettings {
-            eventAction = .settingsAutoSync
-        } else {
-            eventAction = .firstAutoSync
-        }
-        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: eventAction, eventLabel: GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: settings))
-    }
-    
+
     func checkPermissionsSuccessed() {
-        if onStartUsingButtonTapped {
-            onStartUsingButtonTapped = false
-            let settings = dataSource.createAutoSyncSettings()
-            storageVars.autoSyncSet = true
-            output.change(settings: settings)
-        } else {
-            analyticsService.track(event: .turnOnAutosync)
-            dataSource.reloadTableView()
-        }
+        analyticsService.track(event: .turnOnAutosync)
+        dataSource.checkPermissionsSuccessed()
     }
     
     func checkPermissionsFailedWith(error: String) {
@@ -206,3 +186,22 @@ class AutoSyncViewController: BaseViewController, AutoSyncViewInput, AutoSyncDat
         }
     }
 }
+
+// MARK: - AutoSyncDataSourceDelegate
+
+extension AutoSyncViewController: AutoSyncDataSourceDelegate {
+    func checkForEnableAutoSync() {
+        output.checkPermissions()
+    }
+
+    func didChangeSettingsOption(settings: AutoSyncSetting) {
+        let eventAction: GAEventAction
+        if fromSettings {
+            eventAction = .settingsAutoSync
+        } else {
+            eventAction = .firstAutoSync
+        }
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: eventAction, eventLabel: GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: settings))
+    }
+}
+ 
