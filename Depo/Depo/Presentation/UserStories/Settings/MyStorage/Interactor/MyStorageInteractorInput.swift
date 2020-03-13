@@ -7,7 +7,6 @@
 //
 
 protocol MyStorageInteractorInput {
-    func getUsage()
     func getAccountType()
     func getAccountType(with accountType: String, offers: [Any]) -> AccountType?
     func getAllOffers()

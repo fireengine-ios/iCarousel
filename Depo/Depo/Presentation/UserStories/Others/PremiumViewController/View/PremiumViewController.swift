@@ -54,9 +54,8 @@ extension PremiumViewController: PremiumViewInput {
         RouterVC().pushViewController(viewController: controller)
     }
     
-    func displayOffers(_ package: PackageOffer) {
-        let plans = package.offers.sorted(by: { !$0.isRecommended && $1.isRecommended })
-        premiumView.configure(with: plans)
+    func displayOffers(_ packages: [PackageOffer]) {
+        premiumView.configure(with: packages)
         premiumView.isHidden = false
     }
 }

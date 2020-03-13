@@ -10,190 +10,146 @@ import UIKit
 
 final class MyStorageViewController: BaseViewController {
     
-    //MARK: vars
+    //MARK: Properties
     var output: MyStorageViewOutput!
     private lazy var activityManager = ActivityIndicatorManager()
     
     //MARK: IBOutlet
-    @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var collectionView: ResizableCollectionView!
+    @IBOutlet private weak var menuTableView: ResizableTableView! {
+        willSet {
+            newValue.rowHeight = 51
+            let nib = UINib(nibName: String(describing: PackagesTableViewCell.self), bundle: nil)
+            let identifier = String(describing: PackagesTableViewCell.self)
+            newValue.register(nib, forCellReuseIdentifier: identifier)
+            newValue.isScrollEnabled = false
+        }
+    }
     
-    @IBOutlet private weak var dividerView: UIView! {
-        didSet {
-            dividerView.backgroundColor = ColorConstants.photoCell
+    @IBOutlet private weak var descriptionLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.switcherGrayColor
+            newValue.font = UIFont.TurkcellSaturaFont(size: 16)
+            newValue.backgroundColor = .clear
+            newValue.numberOfLines = 0
+            newValue.text = TextConstants.myPackagesDescription
+        }
+    }
+    
+    @IBOutlet private weak var packagesStackView: UIStackView! {
+        willSet {
+            newValue.spacing = 16
         }
     }
 
-    @IBOutlet private weak var usageLabel: UILabel! {
-        didSet {
-            usageLabel.text = ""
-            usageLabel.textColor = UIColor.lrTealish
-            usageLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
-        }
-    }
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     @IBOutlet private weak var packagesLabel: UILabel! {
-        didSet {
-            packagesLabel.text = TextConstants.packagesIHave
-            packagesLabel.textColor = ColorConstants.darkText
-            packagesLabel.adjustsFontSizeToFitWidth()
-            packagesLabel.font = UIFont.TurkcellSaturaDemFont(size: 18)
-        }
-    }
-    
-    @IBOutlet private weak var percentageLabel: UILabel! {
-        didSet {
-            percentageLabel.text = String(format: TextConstants.usagePercentageTwoLines, 0)
-            percentageLabel.numberOfLines = 0
-            percentageLabel.textAlignment = .center
-            percentageLabel.textColor = UIColor.lrTealish
-            percentageLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
-        }
-    }
-    
-    @IBOutlet private weak var storageUsageProgressView: CircleProgressView! {
-        didSet {
-            storageUsageProgressView.backColor = UIColor.lrTealish.withAlphaComponent(0.25)
-            storageUsageProgressView.progressColor = UIColor.lrTealish
-            storageUsageProgressView.backWidth = 8
-            storageUsageProgressView.progressWidth = 8
-            storageUsageProgressView.layoutIfNeeded()
-            storageUsageProgressView.set(progress: 0, withAnimation: false)
-        }
-    }
-    
-    @IBOutlet private weak var restoreView: UIView!  {
         willSet {
-            newValue.layer.masksToBounds = true
+            newValue.adjustsFontSizeToFitWidth()
+            newValue.text = TextConstants.packagesIHave
+            newValue.textColor = ColorConstants.darkText
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
         }
     }
         
-    @IBOutlet private weak var restorePurchasesButton: UIButton! {
-        didSet {
-            restorePurchasesButton.isHidden = true
-            restorePurchasesButton.isEnabled = false
-            restorePurchasesButton.titleEdgeInsets = UIEdgeInsets(top: 6, left: 11, bottom: 6, right: 11)
-            restorePurchasesButton.setTitle(TextConstants.restorePurchasesButton, for: .normal)
-            restorePurchasesButton.setTitleColor(.lrTealish, for: .normal)
-            restorePurchasesButton.titleLabel?.font = .TurkcellSaturaDemFont(size: 14)
-            restorePurchasesButton.adjustsFontSizeToFitWidth()
-            restorePurchasesButton.backgroundColor = .clear
-            restorePurchasesButton.clipsToBounds = true
-            restorePurchasesButton.layer.cornerRadius = restorePurchasesButton.bounds.height * 0.5
-            restorePurchasesButton.layer.borderColor = UIColor.lrTealish.cgColor
-            restorePurchasesButton.layer.borderWidth = 2
+    @IBOutlet private weak var restorePurchasesButton: RoundedInsetsButton! {
+        willSet {
+            newValue.isHidden = true
+            newValue.isEnabled = false
+            newValue.clipsToBounds = true
+            newValue.adjustsFontSizeToFitWidth()
+            newValue.insets = UIEdgeInsets(topBottom: 8, rightLeft: 12)
+            newValue.setTitle(TextConstants.restorePurchasesButton, for: .normal)
+            newValue.setTitleColor(.lrBrownishGrey, for: .normal)
+            newValue.setBackgroundColor(.white, for: UIControl.State())
+            newValue.titleLabel?.font = .TurkcellSaturaBolFont(size: 16)
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = UIColor.lrTealishTwo.cgColor
         }
     }
     
-    @IBOutlet private weak var restoreDescriptionLabel: UILabel! {
-        didSet {
-            restoreDescriptionLabel.isHidden = true
-            restoreDescriptionLabel.attributedText = NSAttributedString.attributedText(text: TextConstants.restorePurchasesInfo, word: TextConstants.attributedRestoreWord, textFont: .TurkcellSaturaFont(size: 15), wordFont: .TurkcellSaturaDemFont(size: 15))
-            restoreDescriptionLabel.numberOfLines = 0
-        }
-    }
+    @IBOutlet weak var cardStackView: UIStackView!
     
-    // MARK: - View lifecycle
+    private var menuViewModels = [ControlPackageType]()
     
+    // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupStackView()
         setup()
         output.viewDidLoad()
     }
     
-    // MARK: - IBActions
-    
-    @IBAction private func restorePurhases() {
-        startActivityIndicator()
-        output.restorePurchasesPressed()
-    }
-    
-    // MARK: - UtilityMethods
-    
+    // MARK: Utility Methods (private)
     private func setup() {
         setTitle(withString: output.title)
-
-        setupCollectionView()
+        self.view.backgroundColor = ColorConstants.fileGreedCellColor
+        
+        menuTableView.delegate = self
+        menuTableView.dataSource = self
+        
         activityManager.delegate = self
         automaticallyAdjustsScrollViewInsets = false
     }
-    
-    private func setupCollectionView() {
-        collectionView.register(nibCell: SubscriptionPlanCollectionViewCell.self)
+        
+    @IBAction private func restorePurhases() {
+        startActivityIndicator()
+        output.restorePurchasesPressed()
     }
 }
 
 // MARK: - MyStorageViewInput
 extension MyStorageViewController: MyStorageViewInput {
-    func configureProgress(with full: Int64, used: Int64) {
-        let usage = CGFloat(used) / CGFloat(full)
-        
-        storageUsageProgressView.set(progress: usage, withAnimation: true)
-        
-        percentageLabel.text = String(format: TextConstants.usagePercentageTwoLines, (usage * 100).rounded(.toNearestOrAwayFromZero))
-        
-        usageLabel.text = String(format: TextConstants.packageApplePrice, used.bytesString, full.bytesString)
-    }
-    
-    func reloadCollectionView() {
-        collectionView.reloadData()
+    func reloadPackages() {
+        packagesStackView.arrangedSubviews.forEach { packagesStackView.removeArrangedSubview($0) }
+        for offer in output.displayableOffers.enumerated() {
+            let view = SubscriptionOfferView.initFromNib()
+            let packageOffer = PackageOffer(quotaNumber: .zero, offers: [offer.element])
+            view.configure(with: packageOffer, delegate: self, index: offer.offset)
+            view.setNeedsLayout()
+            view.layoutIfNeeded()
+            packagesStackView.addArrangedSubview(view)
+        }
     }
     
     func showRestoreButton() {
         restorePurchasesButton.isEnabled = true
         restorePurchasesButton.isHidden = false
-        restoreDescriptionLabel.isHidden = false
-        view.layoutIfNeeded()
-    }
-}
-
-//MARK: UICollectionViewDataSource
-extension MyStorageViewController: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return output.displayableOffers.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeue(cell: SubscriptionPlanCollectionViewCell.self, for: indexPath)
-        cell.delegate = self
-        cell.indexPath = indexPath
-        cell.configure(with: output.displayableOffers[indexPath.row], accountType: output.accountType)
-        return cell
+    func setupStackView() {
+        menuViewModels.removeAll()
+        for view in cardStackView.arrangedSubviews {
+            view.removeFromSuperview()
+        }
+        
+        let isMiddleUser = AuthoritySingleton.shared.accountType.isMiddle
+        let isPremiumUser = AuthoritySingleton.shared.accountType.isPremium
+        let type: ControlPackageType.AccountType = isPremiumUser ? .premium : (isMiddleUser ? .middle : .standard)
+        addNewCard(type: .accountType(type))
+        self.menuTableView.reloadData()
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    private func addNewCard(type: ControlPackageType) {
         if Device.isIpad {
-            ///https://github.com/wordpress-mobile/WordPress-iOS/issues/10354
-            ///seems like this bug may occur on iOS 12+ when it returns negative value
-            return CGSize(width: max(collectionView.frame.width / 2 - NumericConstants.iPadPackageSumInset, 0), height: NumericConstants.heightForPackageCell)
+            let card = PackageInfoView.initFromNib()
+            card.configure(with: type)
+            
+            output.configureCard(card)
+            cardStackView.addArrangedSubview(card)
         } else {
-            return CGSize(width: max(collectionView.frame.width / 2 - NumericConstants.packageSumInset, 0), height: NumericConstants.heightForPackageCell)
+            menuViewModels.append(type)
         }
     }
-    
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
-extension MyStorageViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return Device.isIpad ? 28 : 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return Device.isIpad ? 28 : 10
-    }
-}
-
-// MARK: - SubscriptionPlanCellDelegate
-extension MyStorageViewController: SubscriptionPlanCellDelegate {
-    
-    func didPressSubscriptionPlanButton(at indexPath: IndexPath) {
-        guard let plan = output?.displayableOffers[indexPath.row] else {
+// MARK: - SubscriptionOfferViewDelegate
+extension MyStorageViewController: SubscriptionOfferViewDelegate {
+    func didPressSubscriptionPlanButton(planIndex: Int) {
+        guard let plan = output?.displayableOffers[planIndex] else {
             return
         }
-        output?.didPressOn(plan: plan, planIndex: indexPath.row)
+        output?.didPressOn(plan: plan, planIndex: planIndex)
     }
 }
 
@@ -205,5 +161,29 @@ extension MyStorageViewController: ActivityIndicator {
 
     func stopActivityIndicator() {
         activityManager.stop()
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension MyStorageViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        tableView.dequeue(reusable: PackagesTableViewCell.self)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return menuViewModels.count
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension MyStorageViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.selectionStyle = .none
+        guard let item = menuViewModels[safe: indexPath.row] else {
+            return
+        }
+        
+        let cell = cell as? PackagesTableViewCell
+        cell?.configure(type: item)
     }
 }
