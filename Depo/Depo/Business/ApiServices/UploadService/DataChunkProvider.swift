@@ -20,11 +20,10 @@ final class DataChunkProviderFactory {
         do {
             fileSize = try fileManager.sizeOfInputFile(src: source)
         } catch let error {
-            let message = "chunker: can't get file size. \(error.description)"
             #if MAIN_APP
-            debugLog(message)
+            debugLog("chunker: can't get file size. \(error.description)")
             #endif
-            assertionFailure(message)
+            assertionFailure("chunker: can't get file size.")
             return nil
         }
         
