@@ -110,16 +110,6 @@ final class UploadOperation: Operation {
         SingletonStorage.shared.progressDelegates.remove(self)
     }
     
-    private func removeTemporaryFile(at localURL: URL?) {
-        if let localURL = localURL {
-            do {
-                try FileManager.default.removeItem(at: localURL)
-            } catch {
-                print(error.description)
-            }
-        }
-    }
-    
     private func retry(block: @escaping VoidHandler) {
         let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
         debugLog("retrying in \(NumericConstants.secondsBeetweenUploadAttempts) second(s)")
@@ -133,7 +123,10 @@ final class UploadOperation: Operation {
     //MARK: - Resumable
 
     private func attemptResumableUpload(success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
-        guard let localUrl = inputItem.urlToFile else {
+        guard
+            let asset = inputItem.asset,
+            let localUrl = LocalMediaStorage.default.getURL(asset: asset)
+        else {
             fail(ErrorResponse.string(TextConstants.commonServiceError))
             return
         }
@@ -152,6 +145,10 @@ final class UploadOperation: Operation {
                 guard let self = self, let resumableParameters = parameters as? ResumableUpload else {
                     fail(ErrorResponse.string(TextConstants.commonServiceError))
                     return
+                }
+                
+                self.clearingAction = { [weak self] in
+                    self?.removeTemporaryFile(at: localUrl)
                 }
                 
                 guard self.interruptedId != nil else {
@@ -444,6 +441,16 @@ final class UploadOperation: Operation {
                 success()
             }
         }, fail: fail)
+    }
+    
+    private func removeTemporaryFile(at localURL: URL?) {
+        if let localURL = localURL {
+            do {
+                try FileManager.default.removeItem(at: localURL)
+            } catch {
+                print(error.description)
+            }
+        }
     }
     
     private func addPhotoToTheAlbum(with parameters: UploadRequestParametrs, response: SearchItemResponse) {

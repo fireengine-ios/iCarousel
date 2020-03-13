@@ -19,10 +19,15 @@ final class DataChunkProviderFactory {
         let fileSize: Int
         do {
             fileSize = try fileManager.sizeOfInputFile(src: source)
-        } catch {
-            assertionFailure("Can't get file size")
+        } catch let error {
+            let message = "chunker: can't get file size. \(error.description)"
+            #if MAIN_APP
+            debugLog(message)
+            #endif
+            assertionFailure(message)
             return nil
         }
+        
 
         guard fileSize < NumericConstants.fourGigabytes else {
             assertionFailure(TextConstants.syncFourGbVideo)
@@ -30,7 +35,11 @@ final class DataChunkProviderFactory {
         }
 
         guard let fileStream = InputStream(url: source) else {
-            assertionFailure("Can't create InputStream")
+            let message = "chunker: Can't create InputStream"
+            #if MAIN_APP
+            debugLog(message)
+            #endif
+            assertionFailure(message)
             return nil
         }
 
@@ -117,10 +126,16 @@ private final class DataChunkProviderStream: DataChunkProvider {
     
     func nextChunk() -> DataChunk? {
         guard streamIsAvailable() else {
+            #if MAIN_APP
+            debugLog("chunker: streamIsAvailable == false")
+            #endif
             return nil
         }
 
         guard fileStream.hasBytesAvailable else {
+            #if MAIN_APP
+            debugLog("chunker: hasBytesAvailable == false")
+            #endif
             return nil
         }
         
@@ -133,7 +148,11 @@ private final class DataChunkProviderStream: DataChunkProvider {
         
         guard chunkSize > 0 else {
             if chunkSize < 0 {
-                assertionFailure("error while reading from stream")
+                let message = "chunker: error while reading from stream"
+                #if MAIN_APP
+                debugLog(message)
+                #endif
+                assertionFailure(message)
             }
             return nil
         }
