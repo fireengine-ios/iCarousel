@@ -658,6 +658,7 @@
 "Bad internet connection" = "Bad internet connection";
 "download_error_unsupported_extension" = "Downloading is not supported for this type of file";
 "Show only synced items" = "Show only synced items";
+"photo_video_auto_sync_settings" = "AutoSync Settings";
 "Your lifebox storage is almost full!" = "Your lifebox storage is almost full!";
 "This edited photo will be saved as a new photo in your device gallery" = "This edited photo will be saved as a new photo in your device gallery";
 "We couldn’t find any place on your Lifebox yet." = "We couldn’t find any places in your lifebox yet.";
