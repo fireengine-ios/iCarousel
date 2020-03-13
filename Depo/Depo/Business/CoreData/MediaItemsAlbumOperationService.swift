@@ -73,6 +73,7 @@ final class MediaItemsAlbumOperationService {
                 if let callback = self.waitingLocalAlbumsCallBack {
                     self.getLocalAlbums(context: context, mediaItemAlbumsCallBack: callback)
                 }
+                completion()
             })
         }
     }
