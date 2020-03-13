@@ -453,7 +453,7 @@ extension AnalyticsService: AnalyticsGA {
                 analyticasItemList = "Credit Card Package"
                 ///FE-1691 iOS: Google Analytics - Ecommerce - Product Click
                 ///Can asked leave creditCard Product Click without id
-            case _:
+            default:
                 break
             }
         case .feature(let type):
@@ -468,7 +468,7 @@ extension AnalyticsService: AnalyticsGA {
                 analyticasItemList = "Credit Card Package"
                 ///FE-1691 iOS: Google Analytics - Ecommerce - Product Click
                 ///Can asked leave creditCard Product Click without id
-            case _:
+            default:
                 break
             }
         }

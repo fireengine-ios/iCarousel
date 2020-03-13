@@ -147,7 +147,7 @@ enum PackageContentType: Equatable {
         case .quota(.paycellSLCM), .quota(.paycellAllAccess),
              .feature(.paycellSLCMFeature), .feature(.paycellAllAccessFeature):
             paycell()
-        case _:
+        default:
             notPaymentType()
         }
     }
@@ -161,7 +161,7 @@ enum PackageContentType: Equatable {
             slcm(self.type)
         case .feature(.appleFeature), .quota(.apple):
             apple(self.type)
-        case _:
+        default:
             other(self.type)
         }
     }

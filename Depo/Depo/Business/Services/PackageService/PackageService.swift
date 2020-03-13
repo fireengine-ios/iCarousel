@@ -409,7 +409,7 @@ final class PackageService {
                 store = "Google Play Stor"
             case .promo:
                 store = "Promo"
-            case _:
+            default:
                 store = ""
             }
         case .feature(let type):
@@ -420,7 +420,7 @@ final class PackageService {
                 store = "Google Play Stor"
             case .promoFeature:
                 store = "Promo"
-            case _:
+            default:
                 store = ""
             }
         }
