@@ -43,6 +43,54 @@ final class MediaItemsAlbumOperationService {
         }
     }
     
+    func getAutoSyncAlbums(mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
+        if inProcessLocalAlbums {
+            waitingLocalAlbumsCallBack = mediaItemAlbumsCallBack
+            return
+        }
+        waitingLocalAlbumsCallBack = nil
+        
+        let context = coreDataStack.newChildBackgroundContext
+        getLocalAlbums(context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
+    }
+    
+    func save(selectedAlbums: [AutoSyncAlbum]) {
+        let localIdentifiers = selectedAlbums.map { $0.uuid }
+        let context = coreDataStack.newChildBackgroundContext
+        
+        getLocalAlbums(context: context) { [weak self] mediaItemAlbums in
+            mediaItemAlbums.forEach { album in
+                if let localId = album.localId {
+                    album.isEnabled = localIdentifiers.contains(localId)
+                }
+            }
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
+        }
+    }
+}
+
+//MARK: - PhotoLibraryChangeObserver Events
+
+extension MediaItemsAlbumOperationService {
+    
+    func appendNewAlbums(_ assets: [PHAssetCollection], _ completion: @escaping VoidHandler) {
+        appendAlbumsToBase(assets: assets, completion: completion)
+    }
+    
+    func deleteAlbums(_ assets: [PHAssetCollection], _ completion: @escaping VoidHandler) {
+        deleteAlbumsFromBase(assets: assets, completion: completion)
+    }
+    
+    func changeAlbums(_ assets: [PHAssetCollection], _ completion: @escaping VoidHandler) {
+        updateAlbums(assets: assets, completion: completion)
+    }
+    
+}
+
+//MARK: - Private
+
+extension MediaItemsAlbumOperationService {
+    
     private func processLocalGallery(completion: @escaping VoidHandler) {
         debugLog("processLocalGallery")
         guard localMediaStorage.photoLibraryIsAvailible() else {
@@ -78,33 +126,14 @@ final class MediaItemsAlbumOperationService {
         }
     }
     
-    func getAutoSyncAlbums(mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
-        if inProcessLocalAlbums {
-            waitingLocalAlbumsCallBack = mediaItemAlbumsCallBack
-            return
+    private func getLocalAlbums(localIds: [String]? = nil, context: NSManagedObjectContext, mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
+        let predicate: NSPredicate
+        if let localIds = localIds {
+            predicate = NSPredicate(format: "\(#keyPath(MediaItemsAlbum.isLocal)) = true AND \(#keyPath(MediaItemsAlbum.localId)) IN %@", localIds)
+        } else {
+            predicate = NSPredicate(format: "\(#keyPath(MediaItemsAlbum.isLocal)) = true")
         }
-        waitingLocalAlbumsCallBack = nil
-        
-        let context = coreDataStack.newChildBackgroundContext
-        getLocalAlbums(context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
-    }
-    
-    func save(selectedAlbums: [AutoSyncAlbum]) {
-        let localIdentifiers = selectedAlbums.map { $0.uuid }
-        let context = coreDataStack.newChildBackgroundContext
-        
-        getLocalAlbums(context: context) { [weak self] mediaItemAlbums in
-            mediaItemAlbums.forEach { album in
-                if let localId = album.localId {
-                    album.isEnabled = localIdentifiers.contains(localId)
-                }
-            }
-            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
-        }
-    }
-    
-    private func getLocalAlbums(context: NSManagedObjectContext, mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
-        let predicate = NSPredicate(format: "\(#keyPath(MediaItemsAlbum.isLocal)) = true")
+
         executeRequest(predicate: predicate, context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
     }
     
@@ -148,6 +177,40 @@ final class MediaItemsAlbumOperationService {
             let alredySavedIDs = mediaItemsAlbums.compactMap { $0.localId }
             let notSaved = assets.filter { !alredySavedIDs.contains($0.localIdentifier) }
             callback(notSaved)
+        }
+    }
+    
+    private func appendAlbumsToBase(assets: [PHAssetCollection], completion: @escaping VoidHandler) {
+        let context = coreDataStack.newChildBackgroundContext
+        context.perform { [weak self] in
+            assets.forEach {
+                _ = MediaItemsAlbum(asset: $0, context: context)
+            }
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
+        }
+    }
+    
+    private func deleteAlbumsFromBase(assets: [PHAssetCollection], completion: @escaping VoidHandler) {
+        let context = coreDataStack.newChildBackgroundContext
+        let localIds = assets.map { $0.localIdentifier }
+        getLocalAlbums(localIds: localIds, context: context, mediaItemAlbumsCallBack: { [weak self] mediaItemAlbums in
+            //TODO: need to remove relationships
+            mediaItemAlbums.forEach { context.delete($0) }
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
+        })
+    }
+    
+    private func updateAlbums(assets: [PHAssetCollection], completion: @escaping VoidHandler) {
+        let context = coreDataStack.newChildBackgroundContext
+        let localIds = assets.map { $0.localIdentifier }
+        getLocalAlbums(localIds: localIds, context: context) { [weak self] mediaItemAlbums in
+            //TODO: maybe need to update relationships
+            assets.forEach { asset in
+                if let album = mediaItemAlbums.first(where: { $0.localId == asset.localIdentifier }) {
+                    album.name = asset.localizedTitle
+                }
+            }
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
     }
  

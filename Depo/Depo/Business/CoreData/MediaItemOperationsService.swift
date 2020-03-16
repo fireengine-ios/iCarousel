@@ -550,6 +550,10 @@ final class MediaItemOperationsService {
         deleteObjects(fromFetch: request, context: context, completion: completion)
     }
     
+    func update(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
+        //TODO: NEED TO IMPLEMENT
+        completion()
+    }
     
     private let localsAppendingQueue: OperationQueue = {
         let queue = OperationQueue()

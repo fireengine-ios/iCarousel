@@ -222,6 +222,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     var fetchResult: PHFetchResult<PHAsset>!
+    var fetchAlbumResult: PHFetchResult<PHAssetCollection>!
+    var fetchSmartAlbumResult: PHFetchResult<PHAssetCollection>!
+    
     func getAllImagesAndVideoAssets() -> [PHAsset] {
         assetsCache.dropAll()
         debugLog("LocalMediaStorage getAllImagesAndVideoAssets")
@@ -313,10 +316,13 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 return
             }
             
-            DispatchQueue.global().async {
+            DispatchQueue.global().async { [weak self] in
                 let fetchOptions = PHFetchOptions()
                 let album = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
                 let smartAlbum = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
+                
+                self?.fetchAlbumResult = album
+                self?.fetchSmartAlbumResult = smartAlbum
                 
                 var albums = [PHAssetCollection]()
                 
