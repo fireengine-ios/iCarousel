@@ -186,4 +186,11 @@ extension MyStorageViewController: UITableViewDelegate {
         let cell = cell as? PackagesTableViewCell
         cell?.configure(type: item)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let type = menuViewModels[safe: indexPath.row] else {
+            return
+        }
+        (output as? PackageInfoViewDelegate)?.onSeeDetailsTap(with: type)
+    }
 }
