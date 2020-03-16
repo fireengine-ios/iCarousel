@@ -126,7 +126,6 @@ final class UserInfoSubViewViewController: ViewController, NibInit {
         super.viewDidLayoutSubviews()
         
         avatarImageView.layer.cornerRadius = avatarImageView.bounds.height * 0.5
-        self.view.frame.size.height = 201
     }
     
 }
