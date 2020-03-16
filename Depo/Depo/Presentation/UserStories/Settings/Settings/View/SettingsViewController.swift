@@ -120,9 +120,7 @@ final class SettingsViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if tableView.tableHeaderView == nil {
-            setupTableViewSubview()
-        }
+        setupTableViewSubview()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -136,15 +134,20 @@ final class SettingsViewController: BaseViewController {
     }
     
     private func setupTableViewSubview() {
-        let header = userInfoSubView.view
-        userInfoSubView.actionsDelegate = self
-        tableView.tableHeaderView = header
-        header?.heightAnchor.constraint(equalToConstant: 201).activate()
-        
-        let footer = SettingFooterView.initFromNib()
-        footer.delegate = self
-        tableView.tableFooterView = footer
-        footer.heightAnchor.constraint(equalToConstant: 110).activate()
+        guard let headerView = tableView.tableHeaderView else {
+            let header = userInfoSubView.view
+            userInfoSubView.actionsDelegate = self
+            tableView.tableHeaderView = header
+            header?.heightAnchor.constraint(equalToConstant: 201).activate()
+            
+            let footer = SettingFooterView.initFromNib()
+            footer.delegate = self
+            tableView.tableFooterView = footer
+            footer.heightAnchor.constraint(equalToConstant: 110).activate()
+            return
+        }
+        headerView.frame.size.height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        tableView.tableHeaderView = headerView
     }
     
 }
