@@ -98,10 +98,14 @@ final class SubscriptionOfferView: UIView, NibInit {
     private weak var delegate: SubscriptionOfferViewDelegate?
     private var index: Int?
 
-    func configure(with plan: SubscriptionPlan, delegate: SubscriptionOfferViewDelegate, index: Int, style: Style) {
+    func configure(with plan: SubscriptionPlan,
+                   delegate: SubscriptionOfferViewDelegate,
+                   index: Int,
+                   style: Style,
+                   needHidePurchaseInfo: Bool = true) {
         nameLabel.text = plan.name
         priceLabel.attributedText = makePrice(plan.price)
-        
+        detailsStackView.isHidden = needHidePurchaseInfo
         if let attributedText = makePackageFeature(plan: plan) {
             typeLabel.attributedText = attributedText
         } else {
@@ -114,12 +118,15 @@ final class SubscriptionOfferView: UIView, NibInit {
         self.index = index
     }
     
-    func configure(with offer: PackageOffer, delegate: SubscriptionOfferViewDelegate, index: Int) {
+    func configure(with offer: PackageOffer,
+                   delegate: SubscriptionOfferViewDelegate,
+                   index: Int,
+                   needHidePurchaseInfo: Bool = true) {
         guard let plan = offer.offers.first else {
             return
         }
         
-        configure(with: plan, delegate: delegate, index: index, style: .full)
+        configure(with: plan, delegate: delegate, index: index, style: .full, needHidePurchaseInfo: needHidePurchaseInfo)
     }
     
     private func makePrice(_ price: String) -> NSAttributedString {

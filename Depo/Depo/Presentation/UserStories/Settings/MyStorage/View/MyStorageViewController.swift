@@ -105,7 +105,7 @@ extension MyStorageViewController: MyStorageViewInput {
         for offer in output.displayableOffers.enumerated() {
             let view = SubscriptionOfferView.initFromNib()
             let packageOffer = PackageOffer(quotaNumber: .zero, offers: [offer.element])
-            view.configure(with: packageOffer, delegate: self, index: offer.offset)
+            view.configure(with: packageOffer, delegate: self, index: offer.offset, needHidePurchaseInfo: false)
             view.setNeedsLayout()
             view.layoutIfNeeded()
             packagesStackView.addArrangedSubview(view)
