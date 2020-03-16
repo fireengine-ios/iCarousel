@@ -12,6 +12,8 @@ protocol AutoSyncInteractorOutput: class {
     
     func prepaire(syncSettings: AutoSyncSettings, albums: [AutoSyncAlbum])
     
+    func checkPhotoPermissionsFailed()
+    
     func onSettingSaved()
     
     func onCheckPermissions(photoAccessGranted: Bool, locationAccessGranted: Bool)
