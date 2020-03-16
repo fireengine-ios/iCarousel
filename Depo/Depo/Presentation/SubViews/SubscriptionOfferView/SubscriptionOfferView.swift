@@ -223,6 +223,10 @@ final class SubscriptionOfferView: UIView, NibInit {
         case .current:
             purchaseButton.setBackgroundColor(.white, for: UIControl.State())
             purchaseButton.setTitle(TextConstants.cancel, for: UIControl.State())
+            purchaseButton.setTitleColor(ColorConstants.marineTwo, for: UIControl.State())
+            purchaseButton.layer.borderColor = ColorConstants.marineTwo.cgColor
+            purchaseButton.layer.borderWidth = 1
+            
         case .default:
             let isRecommended = plan.isRecommended
             let color: UIColor
