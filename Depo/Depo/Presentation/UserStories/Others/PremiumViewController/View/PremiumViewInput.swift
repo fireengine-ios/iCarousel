@@ -10,5 +10,5 @@ import Foundation
 
 protocol PremiumViewInput: class, ActivityIndicator {
     func showPaycellProcess(with cpcmOfferId: Int)
-    func displayOffers(_ package: PackageOffer)
+    func displayOffers(_ packages: [PackageOffer])
 }

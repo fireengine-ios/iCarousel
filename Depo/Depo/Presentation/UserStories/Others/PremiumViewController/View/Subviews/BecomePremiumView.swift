@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BecomePremiumViewDelegate: class {
-    func didSelectSubscriptionPlan(_ plan: SubscriptionPlan)
+    func didSelectSubscriptionPlan(_ offer: PackageOffer)
     func didTapSeeAllPackages()
 }
 
@@ -85,7 +85,7 @@ final class BecomePremiumView: UIView, NibInit {
         return label
     }()
     
-    private var plans = [SubscriptionPlan]()
+    private var plans = [PackageOffer]()
     weak var delegate: BecomePremiumViewDelegate?
     var source = BecomePremiumViewSourceType.default {
         didSet {
@@ -96,7 +96,7 @@ final class BecomePremiumView: UIView, NibInit {
     
     //MARK: - Setup
     
-    func configure(with plans: [SubscriptionPlan]) {
+    func configure(with plans: [PackageOffer]) {
         guard !plans.isEmpty else {
             return
         }
@@ -105,10 +105,18 @@ final class BecomePremiumView: UIView, NibInit {
         
         contentView.arrangedSubviews.forEach { contentView.removeArrangedSubview($0) }
         
-        let features = plans.flatMap { $0.features }.removingDuplicates()
+        let features = plans
+            .flatMap { $0.offers }
+            .flatMap { $0.features }
+            .removingDuplicates()
+
         addDescription(features)
         
         for (index, plan) in plans.enumerated() {
+            guard let offer = plan.offers.first else {
+                return
+            }
+            
             if index > 0 {
                 contentView.addArrangedSubview(orLabel)
                 if #available(iOS 11.0, *) {
@@ -117,7 +125,7 @@ final class BecomePremiumView: UIView, NibInit {
             }
             
             let view = SubscriptionOfferView.initFromNib()
-            view.configure(with: plan, delegate: self, index: index, style: .short)
+            view.configure(with: offer, delegate: self, index: index, style: .short)
             view.backgroundColor = ColorConstants.lighterGray
             contentView.addArrangedSubview(view)
             
@@ -169,10 +177,10 @@ final class BecomePremiumView: UIView, NibInit {
 
 extension BecomePremiumView: SubscriptionOfferViewDelegate {
     func didPressSubscriptionPlanButton(planIndex: Int) {
-        guard let plan = plans[safe: planIndex] else {
+        guard let offer = plans[safe: planIndex] else {
             return
         }
         
-        delegate?.didSelectSubscriptionPlan(plan)
+        delegate?.didSelectSubscriptionPlan(offer)
     }
 }

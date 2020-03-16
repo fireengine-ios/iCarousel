@@ -40,11 +40,11 @@ extension PackagesInteractor: PackagesInteractorInput {
         accountService.availableOffers { [weak self] (result) in
             switch result {
             case .success(let response):
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.getInfoForAppleProducts(offers: response)
                 }
             case .failed(let error):
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.output.failed(with: error.description)
                 }
             }
@@ -167,11 +167,11 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
         packageService.getInfoForAppleProducts(offers: offers, success: { [weak self] in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.successed(allOffers: offers)
             }
         }, fail: { [weak self] error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.failed(with: error.description)
             }
         })
@@ -182,7 +182,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType) -> String {
-        return packageService.getPriceInfo(for: offer, accountType: accountType)
+        return packageService.getOfferPrice(for: offer, accountType: accountType)
     }
     
     func activate(offer: PackageModelResponse, planIndex: Int) {
@@ -330,18 +330,16 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     
     func getQuotaInfo() {
-        
         AccountService().quotaInfo(success: { [weak self] response in
-            
             guard let response = response as? QuotaInfoResponse else {
                 return
             }
             
             DispatchQueue.main.async {
-                self?.output.setQuotaInfo(quotoInfo: (response))
+                self?.output.setQuotaInfo(quotoInfo: response)
             }
-            }, fail: { [weak self] error in
-                assertionFailure("Тo data received for quotaInfo request \(error.localizedDescription) ")
+        }, fail: { error in
+            assertionFailure("Тo data received for quotaInfo request \(error.localizedDescription) ")
         })
     }
     

@@ -59,9 +59,9 @@ extension PackagesPresenter: PackagesViewOutput {
         
         view?.startActivityIndicator()
         interactor.getQuotaInfo()
-        interactor.getAccountType()
         
         view?.startActivityIndicator()
+        interactor.getAccountType()
     }
     
     func viewWillAppear() {
@@ -80,25 +80,26 @@ extension PackagesPresenter: PackagesViewOutput {
         interactor.trackPackageClick(plan: plan, planIndex: planIndex)
         
         guard let model = plan.model as? PackageModelResponse else {
+            assertionFailure()
             return
         }
         
-        switch model.type {
-        case .SLCM?:
-            buy(offer: model, planIndex: planIndex)
-            
-        case .apple?:
-            view?.startActivityIndicator()
-            interactor.activate(offer: model, planIndex: planIndex)
-        case .paycellAllAccess?, .paycellSLCM?:
-            if let offerId = model.cpcmOfferId {
-                router.showPaycellProcess(with: offerId)
+        model.type?.purchaseActions(slcm: { [weak self] in
+            self?.buy(offer: model, planIndex: planIndex)
+        }, apple: { [weak self] in
+            self?.view?.startActivityIndicator()
+            self?.interactor.activate(offer: model, planIndex: planIndex)
+        }, paycell: { [weak self] in
+            guard let offerId = model.cpcmOfferId else {
+                assertionFailure()
+                return
             }
-
-        default:
+            self?.router.showPaycellProcess(with: offerId)
+        }, notPaymentType: { [weak self] in
+            assertionFailure("should not be another purchase options")
             let error = CustomErrors.serverError("This is not buyable offer type")
-            failed(with: error.localizedDescription)
-        }
+            self?.failed(with: error.localizedDescription)
+        })
     }
     
     func buy(offer: PackageModelResponse, planIndex: Int) {
@@ -163,6 +164,8 @@ extension PackagesPresenter: OptInControllerDelegate {
 extension PackagesPresenter: PackagesInteractorOutput {
   
     func setQuotaInfo(quotoInfo: QuotaInfoResponse) {
+        view?.stopActivityIndicator()
+
         self.quotaInfo = quotoInfo
         setMemoryPercentage()
     }
@@ -209,8 +212,6 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func setMemoryPercentage() {
-        view?.stopActivityIndicator()
-
         if let used = quotaInfo?.bytesUsed, let total = quotaInfo?.bytes {
             percentage = 100 * CGFloat(used) / CGFloat(total)
             view?.setupStackView(with: percentage)
@@ -218,9 +219,6 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func successed(allOffers: [PackageModelResponse]) {
-        /// show only non-feature offers
-        let allOffers = allOffers.filter { $0.featureType == nil }
-        
         accountType = interactor.getAccountType(with: accountType.rawValue, offers: allOffers)  ?? .all
         let offers = interactor.convertToSubscriptionPlan(offers: allOffers, accountType: accountType)
         availableOffers = filterPackagesByQuota(offers: offers)
@@ -230,11 +228,9 @@ extension PackagesPresenter: PackagesInteractorOutput {
     }
     
     func filterPackagesByQuota(offers: [SubscriptionPlan]) -> [PackageOffer] {
-
         return Dictionary(grouping: offers, by: { $0.quota })
-            .compactMap { dict in
-                    return PackageOffer(quotaNumber: dict.key, offers: dict.value)
-            }.sorted(by: { $0.quotaNumber < $1.quotaNumber })
+            .compactMap { PackageOffer(quotaNumber: $0.key, offers: $0.value) }
+            .sorted(by: { $0.quotaNumber < $1.quotaNumber })
     }
 
     func successedGotUserAuthority() {
@@ -271,9 +267,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
         view?.display(errorMessage: errorMessage)
     }
     
-    func purchasesRestored(text: String) {
-        
-    }
+    func purchasesRestored(text: String) { }
     
     func refreshPackages() {
         view?.stopActivityIndicator()
@@ -308,6 +302,8 @@ extension PackagesPresenter: PackageInfoViewDelegate {
             let isTurkcell = SingletonStorage.shared.isTurkcellUser
             router.openUserProfile(userInfo: userInfo, isTurkcellUser: isTurkcell)
             break
+        case .accountType:
+            assertionFailure()
         }
     }
 }

@@ -20,29 +20,30 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     var interactor: AutoSyncInteractorInput!
     var router: AutoSyncRouterInput!
     
-    var fromSettings: Bool = false
+    var fromSettings = false
+    private var isFirstCheckPermissions = true
 
     func viewIsReady() {
         startAsyncOperationDisableScreen()
-        interactor.prepareCellModels()
+        interactor.checkPermissions()
     }
     
-    func prepaire(syncSettings: AutoSyncSettings) {
+    func prepaire(syncSettings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
         completeAsyncOperationEnableScreen()
-        view.prepaire(syncSettings: syncSettings)
+        view.prepaire(syncSettings: syncSettings, albums: albums)
     }
     
-    func change(settings: AutoSyncSettings) {
+    func change(settings: AutoSyncSettings, selectedAlbums: [AutoSyncAlbum]) {
         if !fromSettings {
             router.routNextVC()
-            save(settings: settings)
+            save(settings: settings, selectedAlbums: selectedAlbums)
         } else {
-            save(settings: settings)
+            save(settings: settings, selectedAlbums: selectedAlbums)
         }
     }
     
-    func save(settings: AutoSyncSettings) {
-        interactor.onSave(settings: settings, fromSettings: fromSettings)
+    func save(settings: AutoSyncSettings, selectedAlbums: [AutoSyncAlbum]) {
+        interactor.onSave(settings: settings, selectedAlbums: selectedAlbums, fromSettings: fromSettings)
     }
     
     func onSettingSaved() {
@@ -55,6 +56,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     
     func onCheckPermissions(photoAccessGranted: Bool, locationAccessGranted: Bool) {
         guard photoAccessGranted else {
+            completeAsyncOperationEnableScreen()
             view.disableAutoSync()
             view.checkPermissionsFailedWith(error: TextConstants.cameraAccessAlertText)
             return
@@ -63,9 +65,19 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         /// location access is optional
         if !locationAccessGranted {
             view.showLocationPermissionPopup { [weak self] in
-                self?.view.checkPermissionsSuccessed()
+                self?.checkPermissionsSuccessed()
             }
         } else {
+            checkPermissionsSuccessed()
+        }
+    }
+    
+    private func checkPermissionsSuccessed() {
+        if isFirstCheckPermissions {
+            isFirstCheckPermissions = false
+            interactor.prepareCellModels()
+        } else {
+            completeAsyncOperationEnableScreen()
             view.checkPermissionsSuccessed()
         }
     }

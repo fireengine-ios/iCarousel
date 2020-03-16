@@ -152,6 +152,7 @@ struct TextConstants {
     static let autoSyncCellPhotos = NSLocalizedString("Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncCellVideos = NSLocalizedString("Videos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncCellAutoSync = NSLocalizedString("Auto Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let autoSyncCellAlbums = NSLocalizedString("auto_sync_album_items", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncStartUsingLifebox = NSLocalizedString("Let’s start using Lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncskipForNowButton = NSLocalizedString("Skip for now", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncAlertTitle = NSLocalizedString("Skip setting Auto-Sync?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1741,6 +1742,7 @@ struct TextConstants {
     static let originalCopyPackageDescription = NSLocalizedString("original_сopy_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let bundlePackageAddonType = NSLocalizedString("bundle_package_addon_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let storageOnlyPackageAddonType = NSLocalizedString("storage_only_package_addon_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featurePackageName = NSLocalizedString("feature_package_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let becomePremiumNavBarTitle = NSLocalizedString("become_premium_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let becomePremiumHeaderDefaultTitle = NSLocalizedString("become_premium_header_default_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1758,4 +1760,6 @@ struct TextConstants {
     
     static let contactSyncConfirmPremiumPopupTitle = NSLocalizedString("contact_sync_confirm_premium_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncConfirmPremiumPopupText = NSLocalizedString("contact_sync_confirm_premium_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let myPackagesDescription = NSLocalizedString("my_packages_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

@@ -270,6 +270,7 @@
 "Usage Info and Packages" = "Usage Details";
 "Recently Deleted Files" = "Recently Deleted Files";
 "Auto Sync" = "Auto Sync";
+"auto_sync_album_items" = "Auto-Sync Items";
 "Back-up my contacts" = "Backup My Contacts";
 "Leave feedback" = "Contact Us";
 "Upload Photo" = "Upload Photo";
@@ -1391,7 +1392,7 @@
 "unhide_popup_text" = "Selected item(s) will be unhiden and moved back to previous folders. Are you sure to continue?";
 
 /*divorce card*/
-"divorce_card_title" = "Unchain Your Heart!";
+"divorce_card_title" = "Tip: You can add some fun to your memories with our new GiFs and Stickers and share them with your friends. Select a photo and start having FUN! Watch the video for the details.";
 "trash_bin_album_slider_title" = "Trash Bin";
 "trash_bin_album_slider_empty" = "There is no deleted album yet.";
 "trash_bin_empty" = "There is no deleted item yet.";
@@ -1472,6 +1473,7 @@
 "original_сopy_package_description" = "Original сopy";
 "bundle_package_addon_type" = "with +Premium";
 "storage_only_package_addon_type" = "Storage only";
+"feature_package_name" = "Premium";
 
 "bundle_package_addon_type" = "with +Premium";
 "storage_only_package_addon_type" = "Storage only";
@@ -1510,3 +1512,9 @@
 "mobile_payment_success_popup_title" = "You activated Turkcell Mobile Payment successfully.";
 "mobile_payment_success_popup_message" = "You can manage Turkcell Mobile Payment Permission under Settings-Permission menu.";
 "storage_usage_information" = "Usage";
+"auto_sync_album_items" = "Auto-Sync Items";
+"my_packages" = "My Packages";
+"feature_package_name" = "Premium";
+"contact_sync_confirm_premium_popup_title" = "Confirmation";
+"contact_sync_confirm_premium_popup_text" = "contact_sync_confirm_premium_popup_text";
+"my_packages_description" = "Mevcut aboneliklerini aşağıdaki alanda göremiyorsan, aboneliklerini yenilemek için butona basabilirsin.";
