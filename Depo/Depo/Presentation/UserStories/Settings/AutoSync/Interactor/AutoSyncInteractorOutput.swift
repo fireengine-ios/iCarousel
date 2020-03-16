@@ -14,8 +14,6 @@ protocol AutoSyncInteractorOutput: class {
     
     func checkPhotoPermissionsFailed()
     
-    func onSettingSaved()
-    
     func onCheckPermissions(photoAccessGranted: Bool, locationAccessGranted: Bool)
 
 }
