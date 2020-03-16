@@ -91,6 +91,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ///call debugLog only if the Crashlytics is already initialized
         debugLog("AppDelegate didFinishLaunchingWithOptions")
         
+        UIApplication.setIdleTimerDisabled(false)
+        
         let router = RouterVC()
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = InitializingViewController()
