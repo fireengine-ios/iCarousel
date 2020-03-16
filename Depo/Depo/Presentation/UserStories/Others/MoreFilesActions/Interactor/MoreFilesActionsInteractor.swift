@@ -282,11 +282,33 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func moveToTrash(item: [BaseDataSourceItem]) {
-        if let items = item as? [Item] {
-            moveToTrashItems(items: items.filter({ !$0.isLocalItem }))
-        } else if let albums = item as? [AlbumItem] {
-            moveToTrashAlbums(albums: albums)
-        }
+        divorceItems(type: .moveToTrash,
+                     items: item,
+                     itemsOperation: { [weak self] item, _, _ in
+                        self?.moveToTrashItems(items: item.filter({ !$0.isLocalItem }))
+            }, albumsOperation: { [weak self] item, _, _ in
+                self?.moveToTrashAlbums(albums: item)
+            }, firOperation: { [weak self] item, success, fail in
+                if let items = item as? [PeopleItem] {
+                    self?.analyticsService.trackFileOperationGAEvent(operationType: .trash,
+                                                                     itemsType: .people,
+                                                                     itemsCount: items.count)
+                    self?.fileService.moveToTrashPeople(items: items, success: success, fail:  fail)
+                    
+                } else if let items = item as? [ThingsItem] {
+                    self?.analyticsService.trackFileOperationGAEvent(operationType: .trash,
+                                                                     itemsType: .things,
+                                                                     itemsCount: items.count)
+                    self?.fileService.moveToTrashThings(items: items, success: success, fail: fail)
+                    
+                } else if let items = item as? [PlacesItem] {
+                    self?.analyticsService.trackFileOperationGAEvent(operationType: .trash,
+                                                                     itemsType: .places,
+                                                                     itemsCount: items.count)
+                    self?.fileService.moveToTrashPlaces(items: items, success: success, fail: fail)
+                    
+                }
+        })
     }
     
     func hide(items: [BaseDataSourceItem]) {
@@ -1372,8 +1394,6 @@ extension MoreFilesActionsInteractor {
             return
         }
         
-        router.showSpiner()
-        
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .cancel)
             vc.close()
@@ -1385,8 +1405,11 @@ extension MoreFilesActionsInteractor {
             self?.analyticsService.trackFileOperationGAEvent(operationType: .trash, items: items)
             self?.removeItemsFromPlayer(items: items)
             self?.fileService.moveToTrash(files: items,
-                                          success: self?.successItemsAction(elementType: .moveToTrash, itemsType: .items, relatedItems: items),
-                                          fail: self?.failItemsAction(elementType: .moveToTrash, relatedItems: items))
+                                          success: self?.successItemsAction(elementType: .moveToTrash,
+                                                                            itemsType: .items,
+                                                                            relatedItems: items),
+                                          fail: self?.failItemsAction(elementType: .moveToTrash,
+                                                                      relatedItems: items))
         }
         
         trackScreen(.fileOperationConfirmPopup(.trash))
@@ -1403,7 +1426,6 @@ extension MoreFilesActionsInteractor {
         })
         
         router.presentViewController(controller: controller)
-        router.hideSpiner()
     }
     
     private func moveToTrashAlbums(albums: [AlbumItem]) {
@@ -1413,7 +1435,6 @@ extension MoreFilesActionsInteractor {
             return
         }
         
-        router.showSpiner()
         albumService.loadAllItemsFrom(albums: moveToTrashAlbums) { [weak self] items in
             let okHandler: VoidHandler = { [weak self] in
                 self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .ok)
@@ -1452,7 +1473,6 @@ extension MoreFilesActionsInteractor {
             })
             
             DispatchQueue.main.async {
-                self?.router.hideSpiner()
                 self?.router.presentViewController(controller: controller)
             }
         }

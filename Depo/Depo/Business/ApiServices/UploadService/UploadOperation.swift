@@ -208,21 +208,23 @@ final class UploadOperation: Operation {
         debugLog("resumable_upload: checking status")
         showToast(message: "Resumable status")
         requestObject = resumableUpload(uploadParam: parameters, handler: { [weak self] status, error in
-            guard let self = self else {
-                handler(status, ErrorResponse.string(TextConstants.commonServiceError))
-                return
-            }
-            
-            if let error = error, !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
-                
-                self.retry { [weak self] in
-                    self?.checkResumeStatus(parameters: parameters, handler: handler)
+            self?.dispatchQueue.async {
+                guard let self = self else {
+                    handler(status, ErrorResponse.string(TextConstants.commonServiceError))
+                    return
                 }
-                return
+                
+                if let error = error, !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                    
+                    self.retry { [weak self] in
+                        self?.checkResumeStatus(parameters: parameters, handler: handler)
+                    }
+                    return
+                }
+                
+                self.attemptsCount = 0
+                handler(status, error)
             }
-            
-            self.attemptsCount = 0
-            handler(status, error)
         })
     }
     
@@ -239,47 +241,49 @@ final class UploadOperation: Operation {
         debugLog("resumable_upload: chunk range is \(nextChunk.range)")
         
         requestObject = resumableUpload(uploadParam: parameters, handler: { [weak self] status, error in
-            guard let self = self else {
-                fail(ErrorResponse.string(TextConstants.commonServiceError))
-                return
-            }
-            
-            if let error = error {
-                if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
-                    self.retry { [weak self] in
-                        self?.uploadContiniously(parameters: parameters, chunk: nextChunk, success: success, fail: fail)
-                    }
-                } else {
-                    fail(error)
+            self?.dispatchQueue.async {
+                guard let self = self else {
+                    fail(ErrorResponse.string(TextConstants.commonServiceError))
+                    return
                 }
-                return
-            }
-            
-            guard let status = status else {
-                let error = error ?? ErrorResponse.string(TextConstants.commonServiceError)
-                fail(error)
-                return
-            }
-            
-            debugLog("resumable_upload: status is \(status)")
-            
-            switch status {
-            case .completed:
-                self.showToast(message: "Resumable upload completed")
-                self.finishUploading(parameters: parameters, success: success, fail: fail)
                 
-            case .didntStart:
-                fail(ErrorResponse.string(TextConstants.commonServiceError))
+                if let error = error {
+                    if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                        self.retry { [weak self] in
+                            self?.uploadContiniously(parameters: parameters, chunk: nextChunk, success: success, fail: fail)
+                        }
+                    } else {
+                        fail(error)
+                    }
+                    return
+                }
                 
-            case .uploaded(bytes: _):
-                debugLog("resumable_upload: should continue")
+                guard let status = status else {
+                    let error = error ?? ErrorResponse.string(TextConstants.commonServiceError)
+                    fail(error)
+                    return
+                }
                 
-                self.attemptsCount = 0
-                self.uploadContiniously(parameters: parameters, success: success, fail: fail)
+                debugLog("resumable_upload: status is \(status)")
                 
-            case .discontinuityError, .invalidUploadRequest:
-                self.retry {
-                    self.attemptResumableUpload(success: success, fail: fail)
+                switch status {
+                case .completed:
+                    self.showToast(message: "Resumable upload completed")
+                    self.finishUploading(parameters: parameters, success: success, fail: fail)
+                    
+                case .didntStart:
+                    fail(ErrorResponse.string(TextConstants.commonServiceError))
+                    
+                case .uploaded(bytes: _):
+                    debugLog("resumable_upload: should continue")
+                    
+                    self.attemptsCount = 0
+                    self.uploadContiniously(parameters: parameters, success: success, fail: fail)
+                    
+                case .discontinuityError, .invalidUploadRequest:
+                    self.retry {
+                        self.attemptResumableUpload(success: success, fail: fail)
+                    }
                 }
             }
         })
@@ -518,24 +522,23 @@ extension UploadOperation: OperationProgressServiceDelegate {
     
     
     private func showToast(message: String) {
-        #if APPSTORE
-            return
-        #endif
-        
-        DispatchQueue.toMain {
-            
-            guard let window = UIApplication.shared.delegate?.window as? UIWindow else {
-                return
-            }
-            
-            let hud = MBProgressHUD.showAdded(to: window, animated: true)
-            
-            hud.label.text = message
-            hud.mode = .text
-            hud.removeFromSuperViewOnHide = true
-            hud.offset = CGPoint(x: 0, y: MBProgressMaxOffset)
-            
-            hud.hide(animated: true, afterDelay: 2.0)
-        }
+        return
+        /// uncomment for test purpose only
+//
+//        DispatchQueue.toMain {
+//
+//            guard let window = UIApplication.shared.delegate?.window as? UIWindow else {
+//                return
+//            }
+//
+//            let hud = MBProgressHUD.showAdded(to: window, animated: true)
+//
+//            hud.label.text = message
+//            hud.mode = .text
+//            hud.removeFromSuperViewOnHide = true
+//            hud.offset = CGPoint(x: 0, y: MBProgressMaxOffset)
+//
+//            hud.hide(animated: true, afterDelay: 2.0)
+//        }
     }
 }
