@@ -20,6 +20,7 @@ enum ErrorResponseText {
     static let serviceAnavailable = "503 Service Unavailable"
     static let resendCodeExceeded  = "EXCEEDED_RATE_LIMIT_FOR_SEND_CHALLENGE"
     static let accountDeleted = "DELETION_REQUESTED"
+    static let accountReadOnly = "READ_ONLY"
 }
 
 extension ErrorResponse {
@@ -32,10 +33,7 @@ extension ErrorResponse {
     var isOutOfSpaceError: Bool {
         if case ErrorResponse.httpCode(413) = self {
             return true
-        } else if case ErrorResponse.error(let error) = self,
-            let serverValueError = error as? ServerValueError,
-            serverValueError.code == 413 ///also value: "COPY"
-        {
+        } else if case ErrorResponse.error(let error) = self, error.isOutOfSpaceError {
             return true
         }
         return false
@@ -111,6 +109,24 @@ extension Error {
             return error.code == 503
         } else if let error = self as? ErrorResponse {
             return error.isServerUnderMaintenance
+        }
+        
+        return false
+    }
+    
+    var isOutOfSpaceError: Bool {
+        if let error = self as? AFError {
+            return error.responseCode == 413
+        } else if let error = self as? ServerError {
+            return error.code == 413
+        } else if let error = self as? ServerValueError {
+            return error.code == 413
+        } else if let error = self as? ServerStatusError {
+            return error.code == 413
+        } else if let error = self as? ServerMessageError {
+            return error.code == 413
+        } else if let error = self as? ErrorResponse {
+            return error.isOutOfSpaceError
         }
         
         return false

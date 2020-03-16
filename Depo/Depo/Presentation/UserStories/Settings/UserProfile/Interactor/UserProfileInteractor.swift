@@ -98,8 +98,6 @@ class UserProfileInteractor: UserProfileInteractorInput {
             AccountService().updateUserProfile(parameters: parameters,
                                                success: { [weak self] response in
                 let nameIsEmpty = name.isEmpty
-                MenloworksTagsService.shared.onProfileNameChanged(isEmpty: nameIsEmpty)
-                MenloworksEventsService.shared.profileName(isEmpty: nameIsEmpty)
                 self?.userInfo?.name = name
                 self?.userInfo?.surname = surname
                                                 self?.updateEmailIfNeed(email: email, number: number, birthday: birthday, address: address)
@@ -116,7 +114,6 @@ class UserProfileInteractor: UserProfileInteractorInput {
             let parameters = UserEmailParameters(userEmail: email)
             AccountService().updateUserEmail(parameters: parameters,
                                              success: { [weak self] response in
-                                                MenloworksEventsService.shared.onEmailChanged()
                 self?.userInfo?.email = email
                 self?.updatePhoneIfNeed(number: number, birthday: birthday, address: address)
             }, fail: { [weak self] error in

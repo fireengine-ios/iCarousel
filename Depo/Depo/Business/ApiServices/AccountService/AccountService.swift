@@ -43,6 +43,15 @@ class AccountService: BaseRequestService, AccountServicePrl {
         executeGetRequest(param: param, handler: handler)
     }
     
+    func overQuotaStatus(with showPopUp: Bool = true, success: SuccessResponse?, fail:@escaping FailResponse) {
+        debugLog("AccountService overQuotaStatus")
+        
+        let param = OverQuotaStatus(showPopUp: showPopUp)
+        let handler = BaseResponseHandler<OverQuotaStatusResponse, ObjectRequestResponse>(success: success, fail: fail)
+        executeGetRequest(param: param, handler: handler)
+        
+    }
+    
     func usage(success: SuccessResponse?, fail: @escaping FailResponse) {
         debugLog("AccountService usage")
 
@@ -270,6 +279,32 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     let results = jsonArray.compactMap { SettingsPermissionsResponse(withJSON: $0) }
                    
                     handler(.success(results))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
+    func getPermissionAllowanceInfo(withType type: PermissionType, handler: @escaping (ResponseResult<SettingsPermissionsResponse>) -> Void) {
+        let request = String(format: RouteRequests.Account.Permissions.permissionWithType, type.rawValue)
+        
+        sessionManager
+            .request(request)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    guard
+                        let jsonArray = JSON(data: data).array,
+                        let json = jsonArray.first
+                    else {
+                        let error = CustomErrors.serverError("\(request) not array in response")
+                        assertionFailure(error.localizedDescription)
+                        handler(.failed(error))
+                        return
+                    }
+                    let result = SettingsPermissionsResponse(withJSON: json)
+                    handler(.success(result))
                 case .failure(let error):
                     handler(.failed(error))
                 }
@@ -789,4 +824,13 @@ class AccountService: BaseRequestService, AccountServicePrl {
         })
 
     }
+    
+    func updateMobilePaymentPermissionFeedback(handler: @escaping ResponseVoid) {
+        let request = RouteRequests.Account.Permissions.mobilePaymentPermissionFeedback
+        sessionManager
+            .request(request, method: .post)
+            .customValidate()
+            .responseVoid(handler)
+    }
+    
 }

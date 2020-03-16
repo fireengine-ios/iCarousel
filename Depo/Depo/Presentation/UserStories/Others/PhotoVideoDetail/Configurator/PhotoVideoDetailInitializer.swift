@@ -14,9 +14,11 @@ enum DetailViewType {
     case insideFIRAlbum
 }
 
+typealias PhotoVideoDetailModule = (controller: PhotoVideoDetailViewController, moduleInput: PhotoVideoDetailModuleInput)
+
 class PhotoVideoDetailModuleInitializer: NSObject {
 
-    class func initializeViewController(with nibName: String, selectedItem: Item, allItems: [Item], status: ItemStatus) -> UIViewController {
+    class func initializeViewController(with nibName: String, moduleOutput: PhotoVideoDetailModuleOutput? = nil, selectedItem: Item, allItems: [Item], status: ItemStatus, canLoadMoreItems: Bool) -> PhotoVideoDetailModule {
         let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: .details)
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
@@ -24,15 +26,19 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
         let configurator = PhotoVideoDetailModuleConfigurator()
+        let presenter = PhotoVideoDetailPresenter()
         configurator.configureModuleForViewInput(viewInput: viewController,
+                                                 presenter: presenter,
+                                                 moduleOutput: moduleOutput,
                                                  bottomBarConfig: bottomBarConfig,
                                                  selecetedItem: selectedItem,
                                                  allItems: allItems,
-                                                 status: status)
-        return viewController
+                                                 status: status,
+                                                 canLoadMoreItems: canLoadMoreItems)
+        return (viewController, presenter)
     }
     
-    class func initializeAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, status: ItemStatus) -> UIViewController {
+    class func initializeAlbumViewController(with nibName: String, moduleOutput: PhotoVideoDetailModuleOutput? = nil, selectedItem: Item, allItems: [Item], albumUUID: String, status: ItemStatus) -> PhotoVideoDetailModule {
         let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: .insideAlbum)
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
@@ -40,17 +46,20 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
         let configurator = PhotoVideoDetailModuleConfigurator()
+        let presenter = PhotoVideoDetailPresenter()
         configurator.configureModuleFromAlbumForViewInput(viewInput: viewController,
+                                                          presenter: presenter,
+                                                          moduleOutput: moduleOutput,
                                                           bottomBarConfig: bottomBarConfig,
                                                           selecetedItem: selectedItem,
                                                           allItems: allItems,
                                                           albumUUID: albumUUID,
                                                           status: status)
         
-        return viewController
+        return (viewController, presenter)
     }
     
-    class func initializeFaceImageAlbumViewController(with nibName: String, selectedItem: Item, allItems: [Item], albumUUID: String, albumItem: Item?, status: ItemStatus) -> UIViewController {
+    class func initializeFaceImageAlbumViewController(with nibName: String, moduleOutput: PhotoVideoDetailModuleOutput? = nil, selectedItem: Item, allItems: [Item], albumUUID: String, albumItem: Item?, status: ItemStatus) -> PhotoVideoDetailModule {
         let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: .insideFIRAlbum)
         
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
@@ -58,14 +67,16 @@ class PhotoVideoDetailModuleInitializer: NSObject {
         
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
         let configurator = PhotoVideoDetailModuleConfigurator()
+        let presenter = PhotoVideoDetailPresenter()
         configurator.configureModuleFromFaceImageAlbumForViewInput(viewInput: viewController,
-                                                          bottomBarConfig: bottomBarConfig,
-                                                          selecetedItem: selectedItem,
-                                                          allItems: allItems,
-                                                          albumUUID: albumUUID,
-                                                          albumItem: albumItem,
-                                                          status: status)
-        
-        return viewController
+                                                                   presenter: presenter,
+                                                                   moduleOutput: moduleOutput,
+                                                                   bottomBarConfig: bottomBarConfig,
+                                                                   selecetedItem: selectedItem,
+                                                                   allItems: allItems,
+                                                                   albumUUID: albumUUID,
+                                                                   albumItem: albumItem,
+                                                                   status: status)
+        return (viewController, presenter)
     }
 }

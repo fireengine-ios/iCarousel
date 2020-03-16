@@ -57,6 +57,25 @@ class TermsAndServicesViewController: ViewController {
 
     @IBOutlet private weak var contenViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet private weak var privacyPolicyView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 6
+            newValue.backgroundColor =  UIColor.lrTealishTwo.withAlphaComponent(0.05)
+        }
+    }
+    
+    @IBOutlet weak var privacyPolicyTextView: IntrinsicTextView! {
+        willSet {
+            newValue.delegate = self
+            newValue.backgroundColor = .clear
+            newValue.linkTextAttributes = [
+                NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
+                NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
+                NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+            ]
+        }
+    }
+    
     private let generalTermsCheckboxView = TermsCheckboxTextView.initFromNib()
     private var etkTermsCheckboxView: TermsCheckboxTextView?
     private var globalDataPermissionTermsCheckboxView: TermsCheckboxTextView?
@@ -81,6 +100,7 @@ class TermsAndServicesViewController: ViewController {
         
         configureUI()
         setupIntroductionTextView()
+        setupPrivacyPolicyTextView()
         output.viewIsReady()
     }
     
@@ -124,10 +144,19 @@ class TermsAndServicesViewController: ViewController {
                                                attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
                                                             .foregroundColor: ColorConstants.darkText])
         
+        generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self)
+    }
+    
+    private func setupPrivacyPolicyTextView() {
+        
+        let header = NSMutableAttributedString(string: TextConstants.privacyPolicy,
+                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
+                                                            .foregroundColor: ColorConstants.darkText])
+        
         let rangeLink = header.mutableString.range(of: TextConstants.privacyPolicyCondition)
         header.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions], range: rangeLink)
         
-        generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self)
+        privacyPolicyTextView.attributedText = header
     }
     
     private func setupEtkText() {
@@ -187,34 +216,30 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
         guard !eula.isEmpty else {
             return
         }
-        
-        DispatchQueue.global().async { [weak self] in
             
-            let font = UIFont.TurkcellSaturaRegFont(size: 14)
-            /// https://stackoverflow.com/a/27422343
+        let font = UIFont.TurkcellSaturaRegFont(size: 14)
+        /// https://stackoverflow.com/a/27422343
 //            body{font-family: '\(font.familyName)'; because turkcell fonts currently are not recognizable as family of fonts - all text from htm will be shown as regular, no bold and etc.
-            let customFontEulaString = "<style>font-size:\(font.pointSize);}</style>" + eula
+        let customFontEulaString = "<style>font-size:\(font.pointSize);}</style>" + eula
+        
+        guard let data = customFontEulaString.data(using: .utf8) else {
+            assertionFailure()
+            return
+        }
+        
+        /// https://stackoverflow.com/q/50969015/5893286
+        /// fixed black screen
+        /// and error "AttributedString called within transaction"
+        do {
+            let attributedString = try NSAttributedString(data: data, options:
+                [.documentType: NSAttributedString.DocumentType.html,
+                 .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
+            // https://www.oipapio.com/question-726375
             
-            guard let data = customFontEulaString.data(using: .utf8) else {
-                assertionFailure()
-                return
-            }
-            
-            /// https://stackoverflow.com/q/50969015/5893286
-            /// fixed black screen
-            /// and error "AttributedString called within transaction"
-            do {
-                let attributedString = try NSAttributedString(data: data, options:
-                    [.documentType: NSAttributedString.DocumentType.html,
-                     .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
-                // https://www.oipapio.com/question-726375
-                DispatchQueue.main.async {
-                    self?.contentView.textStorage.append(attributedString)
-                    self?.contentView.dataDetectorTypes = [.phoneNumber, .address]
-                }
-            } catch {
-                assertionFailure()
-            }
+            contentView.textStorage.append(attributedString)
+            contentView.dataDetectorTypes = [.phoneNumber, .address]
+        } catch {
+            assertionFailure()
         }
     }
     
@@ -280,7 +305,13 @@ extension TermsAndServicesViewController: TermsCheckboxTextViewDelegate {
 // MARK: - UITextViewDelegate
 extension TermsAndServicesViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        UIApplication.shared.openSafely(URL)
-        return true
+
+        return tappedOnURL(url: URL)
+    }
+    
+    @available(iOS 10.0, *)
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+
+        return tappedOnURL(url: URL)
     }
 }

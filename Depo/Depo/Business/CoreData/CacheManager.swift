@@ -76,7 +76,7 @@ final class CacheManager {
                             //FIXME: need handling if we logouted and locals still in progress
                             self.isProcessing = false
                             self.isCacheActualized = true
-                            CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+                            self.updatePreparation(isBegun: false)
                             self.delegates.invoke { $0.didCompleteCacheActualization() }
                         })
                     })
@@ -88,11 +88,23 @@ final class CacheManager {
                     self.startProcessingAllLocals(completion: { [weak self] in
                         self?.isProcessing = false
                         self?.isCacheActualized = true
-                        CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+                        self?.updatePreparation(isBegun: false)
                         self?.delegates.invoke { $0.didCompleteCacheActualization() }
                     })
                 }
             }
+        }
+    }
+    
+    private func updatePreparation(isBegun: Bool) {
+        if isBegun {
+            CardsManager.default.startOperationWith(type: .prepareQuickScroll)
+        } else {
+            CardsManager.default.stopOperationWith(type: .prepareQuickScroll)
+        }
+        
+        DispatchQueue.main.async {
+            UIApplication.shared.isIdleTimerDisabled = isBegun
         }
     }
     
@@ -104,7 +116,7 @@ final class CacheManager {
         ///prevent blinking
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
             if self.isProcessing {
-                CardsManager.default.startOperationWith(type: .prepareQuickScroll)
+                self.updatePreparation(isBegun: true)
             }
         })
     }

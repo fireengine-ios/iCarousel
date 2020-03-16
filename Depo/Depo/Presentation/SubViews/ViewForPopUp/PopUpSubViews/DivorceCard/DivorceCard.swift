@@ -41,6 +41,16 @@ final class DivorceCard: BaseCardView {
         
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let height = containerStackView.frame.size.height
+        if calculatedH != height {
+            calculatedH = height
+            layoutIfNeeded()
+        }
+    }
+    
     override func set(object: HomeCardResponse?) {
         super.set(object: object)
         
@@ -52,6 +62,8 @@ final class DivorceCard: BaseCardView {
         if let videoUrl = cardObject?.details?["videoUrl"].url,
             let videoPreviewImageUrl = cardObject?.details?["thumbnail"].url {
             
+            debugLog("Divorce Card - start load image")
+            videoPreviewImageView.setLogs(enabled: true)
             videoPreviewImageView.loadImageData(with: videoPreviewImageUrl)
             self.videoUrl = videoUrl
             
@@ -60,7 +72,7 @@ final class DivorceCard: BaseCardView {
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .divorce)
+        CardsManager.default.stopOperationWith(type: .divorce)
     }
     
     //MARK: - Actions

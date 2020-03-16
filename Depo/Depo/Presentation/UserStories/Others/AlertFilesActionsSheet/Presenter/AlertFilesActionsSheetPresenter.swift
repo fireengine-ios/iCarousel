@@ -205,13 +205,17 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             
             if let remoteItems = items?.filter({ !$0.isLocalItem }) as? [Item], remoteItems.count > 0 {
                 if remoteItems.contains(where: { !$0.favorites }) {
-                    filteredActionTypes.append(.addToFavorites)
+                    if !filteredActionTypes.contains(.addToFavorites) {
+                        filteredActionTypes.append(.addToFavorites)
+                    }
                 } else if let addToFavoritesIndex = filteredActionTypes.index(of: .addToFavorites) {
                     filteredActionTypes.remove(at: addToFavoritesIndex)
                 }
                 
                 if remoteItems.contains(where: { $0.favorites }) {
-                    filteredActionTypes.append(.removeFromFavorites)
+                    if !filteredActionTypes.contains(.removeFromFavorites) {
+                        filteredActionTypes.append(.removeFromFavorites)
+                    }
                 } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
                     filteredActionTypes.remove(at: removeFromFavorites)
                 }
@@ -284,7 +288,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     })
                 case .download:
                     action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
-                        MenloworksAppEvents.onDownloadClicked()
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if currentItems.count <= allowedNumberLimit {
@@ -297,13 +300,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     })
                 case .moveToTrash:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default) { _ in
-                        //TODO: will be another task to implement analytics calls
-                        //                        MenloworksAppEvents.onDeleteClicked()
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if selectedItems.count <= allowedNumberLimit {
                             self.interactor.moveToTrash(item: currentItems)
-                            self.basePassingPresenter?.stopModeSelected()
                         } else {
                             let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                             UIApplication.showErrorAlert(message: text)
@@ -311,13 +311,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     }
                 case .hide:
                     action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
-                        //TODO: will be another task to implement analytics calls
-                        //                        MenloworksAppEvents.onDeleteClicked()
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hide))
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if currentItems.count <= allowedNumberLimit {
                             self.interactor.hide(items: currentItems)
-                            self.basePassingPresenter?.stopModeSelected()
                         } else {
                             let text = String(format: TextConstants.hideLimitAllert, allowedNumberLimit)
                             UIApplication.showErrorAlert(message: text)
@@ -342,9 +339,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     })
                 case .share:
                     action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
-                        MenloworksAppEvents.onShareClicked()
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share))
                         self.interactor.share(item: currentItems, sourceRect: self.getSourceRect(sender: sender, controller: nil))
+                    })
+                case .emptyTrashBin:
+                    action = UIAlertAction(title: TextConstants.actionSheetEmptyTrashBin, style: .default, handler: { _ in
+                        self.interactor.emptyTrashBin()
                     })
                 //Photos and albumbs
                 case .photos:
@@ -367,7 +367,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     })
                 case .shareAlbum:
                     action = UIAlertAction(title: TextConstants.actionSheetShare, style: .default, handler: { _ in
-                        MenloworksAppEvents.onShareClicked()
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .share))
                         self.interactor.shareAlbum(items: currentItems)
                     })
@@ -377,11 +376,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     })
                 case .removeFromAlbum:
                     action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
-                        MenloworksTagsService.shared.onRemoveFromAlbumClicked()
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                        MenloworksEventsService.shared.onRemoveFromAlbumClicked()
                         self.interactor.removeFromAlbum(items: currentItems)
-                        self.basePassingPresenter?.stopModeSelected()
                     })
                 case .backUp:
                     action = UIAlertAction(title: TextConstants.actionSheetBackUp, style: .default, handler: { _ in
@@ -429,8 +425,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     })
                 case .addToFavorites:
                     action = UIAlertAction(title: TextConstants.actionSheetAddToFavorites, style: .default, handler: { _ in
-                        MenloworksEventsService.shared.onAddToFavoritesClicked()
-                        MenloworksTagsService.shared.onFavoritesOpen()
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .addToFavorites))
                         self.basePassingPresenter?.stopModeSelected()
                         self.interactor.addToFavorites(items: currentItems)
@@ -461,7 +455,6 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     })
                 case .print:
                     action = UIAlertAction(title: TextConstants.tabBarPrintLabel, style: .default, handler: { _ in
-                        MenloworksAppEvents.onPrintClicked()
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .print))
                         self.basePassingPresenter?.printSelected()
                     })
@@ -471,12 +464,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     })
                 case .delete:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
-                        MenloworksAppEvents.onDeleteClicked()
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if currentItems.count <= allowedNumberLimit {
                             self.interactor.delete(items: currentItems)
-                            self.basePassingPresenter?.stopModeSelected()
                         } else {
                             let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                             UIApplication.showErrorAlert(message: text)
@@ -494,13 +485,11 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         })
                         
                         action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
-                            MenloworksAppEvents.onDeleteClicked()
                             self.didSelectDeleteDeviceOriginal(serverObjects: serverObjects)
                         })
                         
                     } else {
                         action = UIAlertAction(title: TextConstants.actionSheetDeleteDeviceOriginal, style: .default, handler: { _ in
-                            MenloworksAppEvents.onDeleteClicked()
                             self.interactor.deleteDeviceOriginal(items: currentItems)
                         })
                     }
@@ -515,8 +504,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 case .removeFromFaceImageAlbum:
                     action = UIAlertAction(title: TextConstants.actionSheetRemoveFromAlbum, style: .default, handler: { _ in
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                        self.basePassingPresenter?.stopModeSelected()
-                        self.basePassingPresenter?.deleteFromFaceImageAlbum(items: currentItems)
+                        if let item = self.basePassingPresenter?.getFIRParent() {
+                            self.interactor.deleteFromFaceImageAlbum(items: currentItems, item: item)
+                        }
                     })
                 case .instaPick:
                     action = UIAlertAction(title: TextConstants.newInstaPick, style: .default, handler: { _ in

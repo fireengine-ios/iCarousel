@@ -11,7 +11,6 @@ import SDWebImage
 import Alamofire
 import Adjust
 import KeychainSwift
-import XPush
 import Fabric
 import Crashlytics
 
@@ -134,74 +133,6 @@ final class AppConfigurator {
     struct SettingsBundleKeys {
         static let BuildVersionKey = "build_preference"
         static let AppVersionKey = "version_preference"
-    }
-    
-    
-    
-   
-    
-    static func startXtremePush(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        
-        debugLog("Start XPush")
-        
-        #if DEBUG
-        if !DispatchQueue.isMainQueue || !Thread.isMainThread {
-            assertionFailure("👉 CALL THIS FROM MAIN THREAD")
-        }
-        #endif
-        
-        #if LIFEBOX
-        XPush.setAppKey("TDttInhNx_m-Ee76K35tiRJ5FW-ysLHd")
-        #elseif LIFEDRIVE
-        XPush.setAppKey("kEB_ZdDGv8Jqs3DZY1uJhxYWKkwDLw8L")
-        #endif
-        XPush.setServerURL("https://api.xtremepush.com")
-        
-        
-        #if DEBUG
-        XPush.setSandboxModeEnabled(true)
-        XPush.setDebugModeEnabled(true)
-        XPush.setShouldShowDebugLogs(true)
-        #endif
-        
-        XPush.registerMessageResponseHandler({(_ response: XPMessageResponse) -> Void in
-            
-            let payload = response.message.payload
-            let payloadAction = payload["action"] as? String
-            
-            debugLog("Payload: \(payload)")
-            switch response.action.type {
-                
-            case .click:
-                debugLog("Menlo Notif Clicked")
-                
-                analyticsService.trackCustomGAEvent(eventCategory: .functions,
-                                                    eventActions: .notification,
-                                                    eventLabel: .notificationRead)
-                
-                if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction, options: response.message.data) {
-                    PushNotificationService.shared.openActionScreen()
-                }
-                
-            case .dismiss:
-                debugLog("Menlo Notif Dismissed")
-                
-            case .present:
-                debugLog("Menlo Notif in Foreground")
-                
-                analyticsService.trackCustomGAEvent(eventCategory: .functions,
-                                                    eventActions: .notification,
-                                                    eventLabel: .notificationRecieved)
-                
-                if PushNotificationService.shared.assignDeepLink(innerLink: payloadAction, options: response.message.data) {
-                    PushNotificationService.shared.openActionScreen()
-                }
-            }
-        })
-        
-        debugLog("AppConfigurator registerMenloworksForPushNotififcations")
-        XPush.applicationDidFinishLaunching(options: launchOptions)
-        debugLog("AppConfigurator startMenloworks")
     }
     
     private static func startUpdateLocation(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {

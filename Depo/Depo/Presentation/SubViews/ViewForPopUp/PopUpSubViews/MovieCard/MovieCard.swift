@@ -91,6 +91,8 @@ final class MovieCard: BaseCardView {
     }
     
     override func viewWillShow() {
+        debugLog("Movie Card - start load image")
+        videoPreviewImageView.setLogs(enabled: true)
         videoPreviewImageView.loadImage(with: item)
     }
     
@@ -100,7 +102,7 @@ final class MovieCard: BaseCardView {
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .movieCard, serverObject: cardObject)
+        CardsManager.default.stopOperationWith(type: .movieCard, serverObject: cardObject)
     }
     
     @IBAction private func actionVideoViewButton(_ sender: UIButton) {
@@ -148,10 +150,15 @@ final class MovieCard: BaseCardView {
             status = .active
         }
 
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], status: status)
-        controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = NavigationController(rootViewController: controller)
-        RouterVC().presentViewController(controller: nController)
+        let router = RouterVC()
+        let detailModule = router.filesDetailModule(fileObject: item,
+                                                    items: [item],
+                                                    status: status,
+                                                    canLoadMoreItems: false,
+                                                    moduleOutput: nil)
+
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        router.presentViewController(controller: nController)
     }
     
     override func spotlightHeight() -> CGFloat {
@@ -189,7 +196,7 @@ extension MovieCard: ItemOperationManagerViewProtocol {
         }
         
         if items.first(where: { $0.uuid == uuid }) != nil {
-            CardsManager.default.stopOperationWithType(type: .movieCard, serverObject: cardObject)
+            CardsManager.default.stopOperationWith(type: .movieCard, serverObject: cardObject)
         }
     }
 }

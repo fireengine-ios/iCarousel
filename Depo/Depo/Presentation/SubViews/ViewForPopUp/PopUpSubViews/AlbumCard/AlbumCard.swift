@@ -112,6 +112,9 @@ final class AlbumCard: BaseCardView {
         
         if let searchItem = album?.coverPhoto {
             let item = WrapData(remote: searchItem)
+            
+            debugLog("Album Card - start load image")
+            previewImageView.setLogs(enabled: true)
             previewImageView.loadImage(with: item)
         }
     }
@@ -143,7 +146,7 @@ final class AlbumCard: BaseCardView {
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .albumCard, serverObject: cardObject)
+        CardsManager.default.stopOperationWith(type: .albumCard, serverObject: cardObject)
     }
     
     @IBAction private func actionAlbumViewButton(_ sender: UIButton) {

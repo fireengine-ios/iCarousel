@@ -280,6 +280,9 @@ extension AnalyticsService: AnalyticsGA {
         var itemID = ""
         var price = ""
         
+        ///only turkcell offer may has missing currency
+        let currency = offer.currency ?? "TRY"
+        
         if let offerIDUnwraped = offer.slcmOfferId, let unwrapedPrice = offer.price {
             itemID = "\(offerIDUnwraped)"
             price = "\(unwrapedPrice)"
@@ -292,14 +295,16 @@ extension AnalyticsService: AnalyticsGA {
                                                     itemCategory: "Storage",
                                                     itemVariant: "",
                                                     index: "\(packageIndex)",
-                                                    quantity: "1")
+                                                    quantity: "1",
+                                                    currency: currency)
         
         let ecommerce = AnalyticsEcommerce(items: [product],
                                            itemList: analyticasItemList,
                                            transactionID: "",
                                            tax: "0",
                                            priceValue: price,
-                                           shipping: "0")
+                                           shipping: "0",
+                                           currency: currency)
         
         prepareDimentionsParametrs(screen: nil,
                                    downloadsMetrics: nil,
@@ -313,6 +318,7 @@ extension AnalyticsService: AnalyticsGA {
         let analyticasItemList = "In App Package"
         let itemID = product.productIdentifier
         let price = product.localizedPrice
+        let currency = product.priceLocale.currencyCode ?? ""
         
         let product =  AnalyticsPackageProductObject(itemName: product.localizedTitle,
                                                      itemID: itemID,
@@ -321,14 +327,16 @@ extension AnalyticsService: AnalyticsGA {
                                                      itemCategory: "Storage",
                                                      itemVariant: "",
                                                      index: "\(packageIndex)",
-                                                     quantity: "1")
+                                                     quantity: "1",
+                                                     currency: currency)
         
         let ecommerce = AnalyticsEcommerce(items: [product],
                                            itemList: analyticasItemList,
                                            transactionID: "",
                                            tax: "0",
                                            priceValue: price,
-                                           shipping: "0")
+                                           shipping: "0",
+                                           currency: currency)
         
         prepareDimentionsParametrs(screen: nil,
                                    downloadsMetrics: nil,
@@ -406,6 +414,7 @@ extension AnalyticsService: AnalyticsGA {
         
         var analyticasItemList = "İndirimdeki Paketler"
         var itemID = ""
+        var currency: String
         
         let featureType: FeaturePackageType?
         let type: PackageType?
@@ -416,6 +425,7 @@ extension AnalyticsService: AnalyticsGA {
         if let offer = package.model as? PackageModelResponse {
             featureType = offer.featureType
             type = offer.type
+            currency = offer.currency ?? ""
             
             slcmID = offer.slcmOfferId.map { "\($0)" } ?? ""
             appleID = offer.inAppPurchaseId ?? ""
@@ -423,6 +433,7 @@ extension AnalyticsService: AnalyticsGA {
         } else if let offer = package.model as? SubscriptionPlanBaseResponse {
             featureType = offer.subscriptionPlanFeatureType
             type = offer.subscriptionPlanType
+            currency = offer.subscriptionPlanCurrency ?? ""
             
             slcmID = offer.subscriptionPlanSlcmOfferId ?? ""
             appleID = offer.subscriptionPlanInAppPurchaseId ?? ""
@@ -453,7 +464,8 @@ extension AnalyticsService: AnalyticsGA {
                                                      itemCategory: "Storage",
                                                      itemVariant: "",
                                                      index: "\(packageIndex)",
-                                                     quantity: "1")
+                                                     quantity: "1",
+                                                     currency: currency)
         
         let ecommerce: [String : Any] = ["items" : [product.productParametrs],
                                          AnalyticsParameterItemList : analyticasItemList]

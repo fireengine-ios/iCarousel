@@ -429,7 +429,7 @@ class FileService: BaseRequestService {
             
             if self.allOperationsCount == self.completedOperationsCount {
                 self.trackDownloaded(lastQueueItems: items)
-                CardsManager.default.stopOperationWithType(type: .download)
+                CardsManager.default.stopOperationWith(type: .download)
             }
             
             if let error = self.error {
@@ -639,9 +639,6 @@ class DownLoadOperation: Operation {
         success?()
         semaphore.signal()
         if let item = param.item {
-            if let mimeType = (item.mimeType as NSString?), let type = mimeType.pathComponents.first?.capitalized {
-                MenloworksEventsService.shared.onDownloadItem(with: type, success: true)
-            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                 ItemOperationManager.default.finishedDowloadFile(file: item)
             })
@@ -650,19 +647,13 @@ class DownLoadOperation: Operation {
     
     func customFail(_ value: ErrorResponse) {
         fail?(value)
-        if let item = param.item,
-            let mimeType = (item.mimeType as NSString?),
-            let type = mimeType.pathComponents.first?.capitalized
-        {
-            MenloworksEventsService.shared.onDownloadItem(with: type, success: false)
-        }
         semaphore.signal()
     }
 }
 
 
 extension DownLoadOperation: OperationProgressServiceDelegate {
-    func didSend(ratio: Float, for url: URL) {
+    func didSend(ratio: Float, bytes: Int, for url: URL) {
         guard isExecuting else {
             return
         }

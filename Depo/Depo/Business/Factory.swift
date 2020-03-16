@@ -23,6 +23,8 @@ protocol Factory: SharedFactory {
     func resolve() -> SpotifyService
     func resolve() -> SpotifyRoutingService
     func resolve() -> SmartAlbumsManager
+    func resolve() -> PrivacyPolicyService
+    func resolve() -> ResumableUploadInfoService
     
     func resolve() -> CoreDataStack
 }
@@ -94,5 +96,15 @@ extension FactoryMain {
     private static let smartAlbumsManager = SmartAlbumsManagerImpl()
     func resolve() -> SmartAlbumsManager {
         return FactoryMain.smartAlbumsManager
+    }
+    
+    private static let privacyPolicyService = PrivacyPolicyServiceImp()
+    func resolve() -> PrivacyPolicyService {
+        return FactoryMain.privacyPolicyService
+    }
+    
+    private static let resumableUploadInfoService = ResumableUploadInfoServiceImpl()
+    func resolve() -> ResumableUploadInfoService {
+        return FactoryMain.resumableUploadInfoService
     }
 }

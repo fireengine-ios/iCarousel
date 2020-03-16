@@ -116,7 +116,6 @@ class SyncServiceManager {
         let time = Date().timeIntervalSince1970
         if time - lastAutoSyncTime > timeIntervalBetweenSyncsInBackground {
             BackgroundTaskService.shared.beginBackgroundTask()
-            MenloworksEventsService.shared.onBackgroundSync()
             lastAutoSyncTime = time
             debugLog("Sync should start in background")
             checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
@@ -151,7 +150,7 @@ class SyncServiceManager {
                 return
             }
             
-            CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
+            CardsManager.default.stopOperationWith(type: .autoUploadIsOff)
             
             let photoOption = self.settings.photoSetting.option
             let videoOption = self.settings.videoSetting.option
@@ -298,22 +297,22 @@ extension SyncServiceManager {
         if hasExecutingSync, self.reachabilityService.isReachable {
             WidgetService.shared.notifyWidgetAbout(status: .executing)
 
-            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
-            CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
+            CardsManager.default.stopOperationWith(type: .waitingForWiFi)
+            CardsManager.default.stopOperationWith(type: .prepareToAutoSync)
             return
         }
         
-        CardsManager.default.stopOperationWithType(type: .sync)
+        CardsManager.default.stopOperationWith(type: .sync)
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         
         if hasPrepairingSync {
 //            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
-            CardsManager.default.stopOperationWithType(type: .sync)
-            CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
+            CardsManager.default.stopOperationWith(type: .sync)
+            CardsManager.default.stopOperationWith(type: .waitingForWiFi)
             return
         }
         
-        CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)
+        CardsManager.default.stopOperationWith(type: .prepareToAutoSync)
         
         FreeAppSpace.session.checkFreeAppSpaceAfterAutoSync()
         
@@ -330,7 +329,7 @@ extension SyncServiceManager {
 extension SyncServiceManager: ItemSyncServiceDelegate {
     func didReceiveOutOfSpaceError() {
         stopSync()
-        if UIApplication.shared.applicationState == .background {
+        if ApplicationStateHelper.shared.isBackground {
             timeIntervalBetweenSyncsInBackground = NumericConstants.timeIntervalBetweenAutoSyncAfterOutOfSpaceError
         }
         showOutOfSpaceAlert()
@@ -344,24 +343,7 @@ extension SyncServiceManager: ItemSyncServiceDelegate {
 
 extension SyncServiceManager {
     fileprivate func showOutOfSpaceAlert() {
-        let controller = PopUpController.with(title: TextConstants.syncOutOfSpaceAlertTitle,
-                                              message: TextConstants.syncOutOfSpaceAlertText,
-                                              image: .none,
-                                              firstButtonTitle: TextConstants.syncOutOfSpaceAlertCancel,
-                                              secondButtonTitle: TextConstants.upgrade,
-                                              secondAction: { vc in
-                                                vc.close(completion: {
-                                                    let router = RouterVC()
-                                                    if router.navigationController?.presentedViewController != nil {
-                                                        router.pushOnPresentedView(viewController: router.packages)
-                                                    } else {
-                                                        router.pushViewController(viewController: router.packages)
-                                                    }
-                                                })
-        })
-        DispatchQueue.toMain {
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
-        }
+        RouterVC().showFullQuotaPopUp()
     }
 }
 

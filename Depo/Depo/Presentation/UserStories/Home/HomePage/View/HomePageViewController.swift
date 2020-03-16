@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class HomePageViewController: BaseViewController, HomePageViewInput, HomeCollectionViewDataSourceDelegate, SearchModuleOutput {
+final class HomePageViewController: BaseViewController {
 
     //MARK: IBOutlet
     @IBOutlet weak var contentView: UIView!
@@ -141,11 +141,74 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
         navigationItem.rightBarButtonItems = navBarConfigurator.rightItems
     }
     
-    func cancelSearch() { }
+    @objc func reloadData() {
+        showSpinner()
+        refreshControl.endRefreshing()
+        output.needRefresh()
+    }
     
-    func previewSearchResultsHide() { }
-        
-    //MARK: HomePageViewInput
+    //MARK: Utility Methods(private)
+    private func configurateRefreshControl() {
+        refreshControl.tintColor = ColorConstants.whiteColor
+        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+    }
+    
+    //in case if we push new controller
+    private func hideSpotlightIfNeeded() {
+        if let spotlight = presentedViewController as? SpotlightViewController {
+            spotlight.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+}
+
+// MARK: - HomeCollectionViewDataSourceDelegate
+extension HomePageViewController: HomeCollectionViewDataSourceDelegate {
+    
+    //MARK: HomeCollectionViewDataSourceDelegate
+    func onCellHasBeenRemovedWith(controller: UIViewController) { }
+    
+    func numberOfColumns() -> Int {
+        return Device.isIpad ? 2 : 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
+        return HomeViewTopView.getHeight()
+    }
+    
+    // MARK: UICollectionViewDelegate
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionElementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView", for: indexPath)
+            if let headerView = headerView as? HomeViewTopView {
+                headerView.actionsDelegate = self
+            }
+            topView = headerView
+            return headerView
+        default:
+            assert(false, "Unexpected element kind")
+            return UICollectionReusableView()
+        }
+    }
+    
+    func didReloadCollectionView(_ collectionView: UICollectionView) {
+        requestShowSpotlight()
+    }
+    
+    // MARK: - HomeCollectionViewDataSourceDelegate Private Utility Methods
+    
+    private func requestShowSpotlight() {
+        var cardTypes: [SpotlightType] = [.homePageIcon, .homePageGeneral]
+        cardTypes.append(contentsOf: homePageDataSource.cards.compactMap { SpotlightType(cardView: $0) })
+        output.requestShowSpotlight(for: cardTypes)
+    }
+}
+
+//MARK: - HomePageViewInput
+extension HomePageViewController: HomePageViewInput {
+    
     func stopRefresh() {
         hideSpinner()
     }
@@ -154,18 +217,8 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
         showSpinner()
     }
     
-    func showGiftBox() {
-        isGiftButtonEnabled = true
-        configureNavBarActions()
-    }
-    
-    func hideGiftBox() {
-        isGiftButtonEnabled = false
-        configureNavBarActions()
-    }
-    
     //MARK: Spotlight
-    func needShowSpotlight(type: SpotlightType) {        
+    func needShowSpotlight(type: SpotlightType) {
         guard let tabBarVC = UIApplication.topController() as? TabBarViewController else {
             return
         }
@@ -192,109 +245,21 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
         }
     }
     
-    //MARK: HomeCollectionViewDataSourceDelegate
-    func onCellHasBeenRemovedWith(controller: UIViewController) {
-        
+    func showGiftBox() {
+        isGiftButtonEnabled = true
+        configureNavBarActions()
     }
     
-    func numberOfColumns() -> Int {
-        return Device.isIpad ? 2 : 1
+    func hideGiftBox() {
+        isGiftButtonEnabled = false
+        configureNavBarActions()
     }
     
-    func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat {
-        return HomeViewTopView.getHeight()
+    func closePermissionPopUp() {
+        self.navigationController?.popViewController(animated: true)
     }
     
-    func didReloadCollectionView(_ collectionView: UICollectionView) {
-        requestShowSpotlight()
-    }
-    
-    // MARK: UICollectionViewDelegate
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionElementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomeViewTopView", for: indexPath)
-            if let headerView = headerView as? HomeViewTopView {
-                headerView.actionsDelegate = self
-            }
-            topView = headerView
-            return headerView
-        default:
-            assert(false, "Unexpected element kind")
-            return UICollectionReusableView()
-        }
-    }
-    
-    @objc func reloadData() {
-        showSpinner()
-        refreshControl.endRefreshing()
-        output.needRefresh()
-    }
-    
-    //MARK: Utility Methods(private)
-    private func configurateRefreshControl() {
-        refreshControl.tintColor = ColorConstants.whiteColor
-        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
-        collectionView.addSubview(refreshControl)
-    }
-    
-    private func requestShowSpotlight() {
-        var cardTypes: [SpotlightType] = [.homePageIcon, .homePageGeneral]
-        cardTypes.append(contentsOf: homePageDataSource.cards.compactMap { SpotlightType(cardView: $0) })
-        output.requestShowSpotlight(for: cardTypes)
-    }
-    
-    private func cellCoordinates<T: BaseCardView>(cellType: T.Type, to: UIView, completion: @escaping (_ frame: CGRect) -> ()) {
-        for (row, popupView) in homePageDataSource.cards.enumerated() {
-            if type(of: popupView) == cellType {
-                let indexPath = IndexPath(row: row, section: 0)
-                let indexPathsVisibleCells = collectionView.indexPathsForVisibleItems.sorted { first, second -> Bool in
-                    return first < second
-                }
-                
-                if indexPathsVisibleCells.contains(indexPath) {
-                    if indexPath == indexPathsVisibleCells.first {
-                        collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-                    } else {
-                        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
-                    }
-                    
-                    var frame = popupView.convert(popupView.bounds, to: to)
-                    frame.origin.y = max(0, frame.origin.y)
-                    frame.size.height = popupView.spotlightHeight()
-                    completion(frame)
-                } else {
-                    guard let layout = collectionView.collectionViewLayout as? HomeCollectionViewLayout else {
-                        completion(.zero)
-                        return
-                    }
-
-                    CATransaction.flush() //rendering what is already ready
-        
-                    let offset = layout.frameFor(indexPath: indexPath).origin.y
-                    
-                    let isLastCell = indexPath.row == homePageDataSource.cards.count - 1
-                    
-                    UIView.animate(withDuration: 0.1, animations: {
-                        if isLastCell {
-                            self.collectionView.scrollToBottom(animated: false)
-                        } else {
-                             self.collectionView.setContentOffset(CGPoint(x: 0, y: offset - 50), animated: false)
-                        }
-                    }, completion: { _ in
-                        var frame = popupView.convert(popupView.bounds, to: to)
-                        frame.origin.y = max(0, frame.origin.y)
-                        frame.size.height = popupView.spotlightHeight()
-                        completion(frame)
-
-                    })
-                }
-                return
-            }
-        }
-        
-        completion (.zero)
-    }
+    // MARK: - HomePageViewInput Private Utility Methods
     
     private func frameForSpotlight(type: SpotlightType, controller: TabBarViewController, completion: @escaping (_ frame: CGRect) -> ()) {
         var frame: CGRect = .zero
@@ -331,12 +296,60 @@ final class HomePageViewController: BaseViewController, HomePageViewInput, HomeC
         }
     }
     
-    //in case if we push new controller
-    private func hideSpotlightIfNeeded() {
-        if let spotlight = presentedViewController as? SpotlightViewController {
-            spotlight.dismiss(animated: true, completion: nil)
+    // MARK: - HomePageViewInput Private Utility Methods
+    
+    private func cellCoordinates<T: BaseCardView>(cellType: T.Type, to: UIView, completion: @escaping (_ frame: CGRect) -> ()) {
+        for (row, popupView) in homePageDataSource.cards.enumerated() {
+            if type(of: popupView) == cellType {
+                let indexPath = IndexPath(row: row, section: 0)
+                let indexPathsVisibleCells = collectionView.indexPathsForVisibleItems.sorted { first, second -> Bool in
+                    return first < second
+                }
+                
+                if indexPathsVisibleCells.contains(indexPath) {
+                    if indexPath == indexPathsVisibleCells.first {
+                        collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+                    } else {
+                        collectionView.scrollToItem(at: indexPath, at: .bottom, animated: false)
+                    }
+                    
+                    var frame = popupView.convert(popupView.bounds, to: to)
+                    frame.origin.y = max(0, frame.origin.y)
+                    frame.size.height = popupView.spotlightHeight()
+                    completion(frame)
+                } else {
+                    guard let layout = collectionView.collectionViewLayout as? HomeCollectionViewLayout else {
+                        completion(.zero)
+                        return
+                    }
+                    
+                    CATransaction.flush() //rendering what is already ready
+                    
+                    let offset = layout.frameFor(indexPath: indexPath).origin.y
+                    
+                    let isLastCell = indexPath.row == homePageDataSource.cards.count - 1
+                    
+                    UIView.animate(withDuration: 0.1, animations: {
+                        if isLastCell {
+                            self.collectionView.scrollToBottom(animated: false)
+                        } else {
+                            self.collectionView.setContentOffset(CGPoint(x: 0, y: offset - 50), animated: false)
+                        }
+                    }, completion: { _ in
+                        var frame = popupView.convert(popupView.bounds, to: to)
+                        frame.origin.y = max(0, frame.origin.y)
+                        frame.size.height = popupView.spotlightHeight()
+                        completion(frame)
+                        
+                    })
+                }
+                return
+            }
         }
+        
+        completion (.zero)
     }
+    
 }
 
 //MARK: - HomeViewTopViewActions
@@ -351,11 +364,19 @@ extension HomePageViewController: HomeViewTopViewActions {
     }
     
     func favoritesButtonGotPressed() {
-        MenloworksTagsService.shared.onFavoritesPageClicked()
         output.favoritesPressed()
     }
     
     func syncContactsButtonGotPressed() {
         output.onSyncContacts()
     }
+}
+
+// MARK: - SearchModuleOutput
+extension HomePageViewController: SearchModuleOutput {
+    
+    func cancelSearch() { }
+    
+    func previewSearchResultsHide() { }
+    
 }

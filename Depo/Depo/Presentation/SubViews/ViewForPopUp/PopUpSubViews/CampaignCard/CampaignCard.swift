@@ -98,12 +98,14 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
         }
         
         detailUrl = campaignCardResponse.detailsUrl
+        debugLog("Campaign Card - start load image")
+        imageView.setLogs(enabled: true)
         imageView.loadImageData(with: campaignCardResponse.imageUrl)
     }
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .campaignCard, serverObject: cardObject)
+        CardsManager.default.stopOperationWith(type: .campaignCard, serverObject: cardObject)
     }
     
     private func presentWebViewWithDetail(with url: URL?) {

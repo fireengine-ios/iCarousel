@@ -177,7 +177,7 @@ class WrapItemFileService: WrapItemFileOperations {
         let localFiles = localWrapedData(files: items)
         
         uploadService.uploadFileList(items: localFiles,
-                                     uploadType: .fromHomePage,
+                                     uploadType: .upload,
                                      uploadStategy: .WithoutConflictControl,
                                      uploadTo: .MOBILE_UPLOAD,
                                      success: success,
@@ -188,7 +188,7 @@ class WrapItemFileService: WrapItemFileOperations {
         let localFiles = localWrapedData(files: items)
         
         uploadService.uploadFileList(items: localFiles,
-                                     uploadType: .fromHomePage,
+                                     uploadType: .upload,
                                      uploadStategy: .WithoutConflictControl,
                                      uploadTo: .MOBILE_UPLOAD,
                                      success: success,
@@ -406,6 +406,27 @@ extension WrapItemFileService {
             switch response {
             case .success(()):
                 wrappedSuccessOperation()
+            case .failed(let error):
+                fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    //MARK: - Delete All From Trash Bin
+    
+    func deletAllFromTrashBin(success: FileOperationSucces?, fail: FailResponse?) {
+        let wrappedSuccessOperation: FileOperationSucces = {
+            MediaItemOperationsService.shared.deleteTrashedItems {
+                ItemOperationManager.default.didEmptyTrashBin()
+                success?()
+            }
+        }
+        
+        hiddenService.deleteAllFromTrashBin { response in
+            switch response {
+            case .success(_):
+                wrappedSuccessOperation()
+                success?()
             case .failed(let error):
                 fail?(ErrorResponse.error(error))
             }

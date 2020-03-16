@@ -56,11 +56,13 @@ struct RouteRequests {
         }
     }()
     
-    static let baseContactsUrl: URL = {
+    static let baseContactsUrl: URL = baseContactsUrlShort +/ "ttyapi/"
+    
+    static let baseContactsUrlShort: URL = {
         switch currentServerEnvironment {
-        case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/ttyapi/")!
-        case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/ttyapi/")!
-        case .production: return URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
+        case .test: return URL(string: "https://contactsynctest.turkcell.com.tr/")!
+        case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/")!
+        case .production: return URL(string: "https://contactsync.turkcell.com.tr/")!
         }
     }()
     
@@ -75,19 +77,8 @@ struct RouteRequests {
         }
     }()
     
-    static let privacyPolicy: String = {
-        switch currentServerEnvironment {
-        case .test: return isBillo ? "https://dev.mylifebox.com/policy/?lang=" :
-                                     "https://adepotest.turkcell.com.tr/policy/?lang="
-            
-        case .preProduction: return isBillo ? "https://prp.mylifebox.com/policy/?lang=" :
-                                              "https://adepotest.turkcell.com.tr/policy/?lang="
-            
-        case .production: return isBillo ? "https://billostorage.com/policy/?lang=" :
-                                           "https://mylifebox.com/policy/?lang="
-                                            
-        }
-    }()
+    
+    static let privacyPolicy = baseUrl +/ "privacyPolicy/get/\(Device.locale)"
     
     static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
@@ -299,6 +290,7 @@ struct RouteRequests {
         static let updateSecurityQuestion = accountApi +/ "updateSecurityQuestion"
         static let updateInfoFeedback = accountApi +/ "updateInfoFeedback"
         static let updateAddress = accountApi +/ "address"
+        static let info = accountApi +/ "info"
         
         enum Settings {
             /// without "s" at the end
@@ -316,7 +308,9 @@ struct RouteRequests {
             static let features = baseUrl +/ "features"
             
             static let permissionsList = Account.accountApi +/ "permission/list"
+            static let permissionWithType = Account.accountApi.absoluteString + "/permission/list?permissionType=%@"
             static let permissionsUpdate = Account.accountApi +/ "permission/update"
+            static let mobilePaymentPermissionFeedback = Account.accountApi +/ "updateMobilePaymentPermissionFeedback"
         }
     }
     
@@ -346,6 +340,7 @@ struct RouteRequests {
         static let detail = filesystemBase + "detail/%@"
         static let metaData = filesystemBase + "metadata"
         static let trash = filesystemBase + "trash"
+        static let emptyTrash = baseUrl +/ "trash/empty"
         static let hide = baseUrl +/ (filesystemBase + "hide")
         static let recover = (baseUrl +/ filesystemBase) +/ "recover"
     }

@@ -32,6 +32,7 @@ struct AccountJSONConstants {
     static let otp = "otp"
     static let referenceToken = "referenceToken"
     static let gapID = "gapId"
+    static let isUpdateMobilePaymentPermissionRequired = "isUpdateMobilePaymentPermissionRequired"
     
     static let quotaBytes = "quotaBytes"
     static let quotaExceeded = "quotaExceeded"
@@ -71,8 +72,8 @@ class AccountInfoResponse: ObjectRequestResponse {
     var projectID: String?
     var gapId: String?
     var address: String?
-    
     var emailVerificationRemainingDays: Int?
+    var isUpdateMobilePaymentPermissionRequired: Bool?
     
     var fullPhoneNumber: String {
         if let code = countryCode, let number = phoneNumber {
@@ -112,6 +113,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         projectID = json?[AccountJSONConstants.projectID].string
         emailVerificationRemainingDays = json?[AccountJSONConstants.emailVerificationRemainingDays].int
         address = json?[AccountJSONConstants.address].string
+        isUpdateMobilePaymentPermissionRequired = json?[AccountJSONConstants.isUpdateMobilePaymentPermissionRequired].bool
     }
 }
 
@@ -158,12 +160,16 @@ final class SettingsInfoPermissionsResponse: ObjectRequestResponse {
 final class SettingsPermissionsResponse: ObjectRequestResponse {
 
     var type: PermissionType?
+    var eulaURL: String?
+    var isEulaApproved: Bool?
     var isAllowed: Bool?
     var isApproved: Bool?
     var isApprovalPending: Bool?
     
     private enum ResponseKeys {
         static let type = "type"
+        static let eulaURL = "eulaURL"
+        static let isEulaApproved = "eulaApproved"
         static let isAllowed = "allowed"
         static let isApproved = "approved"
         static let isApprovalPending = "approvalPending"
@@ -175,6 +181,8 @@ final class SettingsPermissionsResponse: ObjectRequestResponse {
         }
         
         type = PermissionType(rawValue: typeString)
+        eulaURL = json?[ResponseKeys.eulaURL].string
+        isEulaApproved = json?[ResponseKeys.isEulaApproved].bool
         isAllowed = json?[ResponseKeys.isAllowed].bool
         isApproved = json?[ResponseKeys.isApproved].bool
         isApprovalPending = json?[ResponseKeys.isApprovalPending].bool
@@ -198,6 +206,29 @@ class QuotaInfoResponse: ObjectRequestResponse {
         exceeded = json?[AccountJSONConstants.quotaExceeded].bool
         if let buf3 = json?[AccountJSONConstants.objectCount].int64 {
             objectsCount = Int64(buf3)
+        }
+    }
+}
+
+enum OverQuotaStatusValue: String {
+    case nonOverQuota = "NON_OVER_QUOTA"
+    case overQuotaFreemium = "OVER_QUOTA_FREEMIUM"
+    case overQuotaPremium = "OVER_QUOTA_PREMIUM"
+}
+
+final class OverQuotaStatusResponse: ObjectRequestResponse {
+    private enum ResponseKey {
+        static let status = "status"
+        static let value = "value"
+    }
+    
+    var status: String?
+    var value: OverQuotaStatusValue?
+    
+    override func mapping() {
+        status = json?[ResponseKey.status].string
+        if let valueString = json?[ResponseKey.value].string {
+            value = OverQuotaStatusValue(rawValue: valueString)
         }
     }
 }
@@ -416,6 +447,8 @@ final class FeaturesResponse: ObjectRequestResponse {
         static let autoVideoUploadV2 = "auto-video-upload-v2"
         static let tcellPaycellSubscription = "tcell-paycell-subscription"
         static let autoSyncDisabled = "auto-sync-disabled"
+        static let isResumableUploadEnabled = "resumable-upload-enabled"
+        static let resumableUploadChunkSize = "resumable-upload-chunk-size-in-bytes"
     }
     
     var isNonTcellPaycellSubscription: Bool?
@@ -426,6 +459,8 @@ final class FeaturesResponse: ObjectRequestResponse {
     var isAutoVideoUploadV2: Bool?
     var isTcellPaycellSubscription: Bool?
     var isAutoSyncDisabled: Bool?
+    var isResumableUploadEnabled: Bool?
+    var resumableUploadChunkSize: Int?
 
     override func mapping() {
         isNonTcellPaycellSubscription = json?[ResponseKey.nonTcellPaycellSubscription].bool
@@ -436,6 +471,8 @@ final class FeaturesResponse: ObjectRequestResponse {
         isAutoVideoUploadV2 = json?[ResponseKey.autoVideoUploadV2].bool
         isTcellPaycellSubscription = json?[ResponseKey.tcellPaycellSubscription].bool
         isAutoSyncDisabled = json?[ResponseKey.autoSyncDisabled].bool
+        isResumableUploadEnabled = json?[ResponseKey.isResumableUploadEnabled].bool
+        resumableUploadChunkSize = json?[ResponseKey.resumableUploadChunkSize].int
     }
     
 }

@@ -360,20 +360,19 @@ final class OverlayStickerImageView: UIImageView {
     
     func getAttachmentGifStickersIDs() -> (gifsIDs: [String], stickersIDs: [String]) {
         
-        let items = attachments.map{ $0.item }
-        let keys = Set(items)
         var appliedGifsIds = [String]()
         var appliedStickersIDs = [String]()
         
-        keys.forEach { key in
-            if key.type == .gif {
-                appliedGifsIds.append("\(key.id)")
-            } else {
-                appliedStickersIDs.append("\(key.id)")
+        attachments.forEach({ attachment in
+            switch attachment.item.type {
+            case .gif:
+                appliedGifsIds.append("\(attachment.item.id)")
+            case .image:
+                appliedStickersIDs.append("\(attachment.item.id)")
             }
-        }
+        })
         
-        return (gifsIDs: appliedGifsIds, stickersIDs: appliedGifsIds)
+        return (gifsIDs: appliedGifsIds, stickersIDs: appliedStickersIDs)
         
     }
 }

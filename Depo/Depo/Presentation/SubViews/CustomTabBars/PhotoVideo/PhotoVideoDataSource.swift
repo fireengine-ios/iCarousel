@@ -170,7 +170,7 @@ final class PhotoVideoDataSource: NSObject {
     
     func getIndexPathForRemoteObject(itemUUID: String, indexCallBack: @escaping IndexPathCallback) {
         fetchedResultsController.managedObjectContext.perform { [weak self] in
-            guard let findedObject = self?.lastUpdateFetchedObjects?.first(where: { $0.trimmedLocalFileID == itemUUID }) else {
+            guard let findedObject = self?.fetchedResultsController.fetchedObjects?.first(where: { $0.uuid == itemUUID && !$0.isLocalItemValue }) else {
                 indexCallBack(nil)
                 return
             }
@@ -178,9 +178,36 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
+    func indexPath(mediaItemID: NSManagedObjectID, indexCallBack: @escaping IndexPathCallback) {
+        let context = fetchedResultsController.managedObjectContext
+        context.perform { [weak self] in
+            guard
+                let self = self,
+                let obj = context.object(with: mediaItemID) as? MediaItem,
+                let objIndex = self.fetchedResultsController.indexPath(forObject: obj)
+            else {
+                indexCallBack(nil)
+                return
+            }
+            indexCallBack(objIndex)
+        }
+    }
+    
+    func indexPath(itemTrimmedLocalID: String, indexCallBack: @escaping IndexPathCallback) {
+        fetchedResultsController.managedObjectContext.perform { [weak self] in
+            guard let findedObject = self?.lastUpdateFetchedObjects?.first(where: { $0.trimmedLocalFileID == itemTrimmedLocalID }) else {
+                indexCallBack(nil)
+                return
+            }
+            
+            indexCallBack(self?.indexPath(forObject: findedObject))
+        }
+    }
+    
     func getIndexPathForLocalObject(itemTrimmedLocalID: String, indexCallBack: @escaping IndexPathCallback) {
         fetchedResultsController.managedObjectContext.perform { [weak self] in
-            guard let findedObject = self?.lastUpdateFetchedObjects?.first(where: { $0.trimmedLocalFileID == itemTrimmedLocalID && $0.isLocalItemValue }) else {
+            
+            guard let findedObject = self?.fetchedResultsController.fetchedObjects?.first(where: { $0.trimmedLocalFileID == itemTrimmedLocalID && $0.isLocalItemValue }) else {
                 indexCallBack(nil)
                 return
             }

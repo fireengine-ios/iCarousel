@@ -38,20 +38,14 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
             switch settings.timeSetting.option {
             case .daily:
                 periodicBackUp = SYNCPeriodic.daily
-                MenloworksTagsService.shared.onPeriodicContactSync("daily")
             case .weekly:
                 periodicBackUp = SYNCPeriodic.every7
-                MenloworksTagsService.shared.onPeriodicContactSync("weekly")
             case .monthly:
                 periodicBackUp = SYNCPeriodic.every30
-                MenloworksTagsService.shared.onPeriodicContactSync("monthly")
             case .none:
                 periodicBackUp = SYNCPeriodic.none
-                MenloworksTagsService.shared.onPeriodicContactSync("off")
             }
-        } else {
-            MenloworksTagsService.shared.onPeriodicContactSync("off")
-        }
+        } 
         
         contactsService.setPeriodicForContactsSync(periodic: periodicBackUp)
     }
@@ -59,10 +53,12 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
     func checkPermission() {
         self.contactsService.askPermissionForContactsFramework(redirectToSettings: false, completion: { [weak self] isAccessGranted in
             AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(isAccessGranted)
-            if isAccessGranted {
-                self?.output.permissionSuccess()
-            } else {
-                self?.output.permissionFail()
+            DispatchQueue.main.async {
+                if isAccessGranted {
+                    self?.output.permissionSuccess()
+                } else {
+                    self?.output.permissionFail()
+                }
             }
         })
     }

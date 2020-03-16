@@ -68,7 +68,7 @@
 
 - (BOOL)isLastStep
 {
-    return self.currentStep == self.totalStep;
+    return self.currentStep >= self.totalStep;
 }
 
 -(void)stepUp {

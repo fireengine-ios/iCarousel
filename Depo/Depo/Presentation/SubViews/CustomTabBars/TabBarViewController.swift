@@ -668,28 +668,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         changeButtonsAppearance(toHidden: true, withAnimation: true, forButtons: buttonsArray)
     }
     
-    fileprivate func log(for index: TabScreenIndex) {
-        switch index {
-        case .photosScreenIndex:
-            MenloworksAppEvents.onPhotosAndVideosOpen()
-            let settings = AutoSyncDataStorage().settings
-            
-            if settings.isAutoSyncEnabled {
-                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))
-                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !(settings.videoSetting.option == .wifiOnly))
-            } else {
-                MenloworksTagsService.shared.onAutosyncVideosStatusOff()
-                MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
-            }
-        case .contactsSyncScreenIndex:
-            MenloworksAppEvents.onContactSyncPageOpen()
-        case .documentsScreenIndex:
-            MenloworksAppEvents.onDocumentsOpen()
-        default:
-            break
-        }
-    }
-    
     private func changeButtonsAppearance(toHidden hidden: Bool, withAnimation animate: Bool, forButtons buttons: [SubPlussButtonView]) {
         if buttons.count == 0 {
             return
@@ -748,9 +726,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 return
             }
             
-            if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
-                log(for: tabScreenIndex)
-            }
+//            if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
+//                log(for: tabScreenIndex)
+//            }
 
             selectedIndex = tabbarSelectedIndex
         }
@@ -816,22 +794,26 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         
         wrapData.patchToPreview = PathForItem.remoteUrl(url)
         
-        let isFromAlbum = RouterVC().isRootViewControllerAlbumDetail() 
-        UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: getFolderUUID() ?? "", isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: true, success: {
-        }, fail: { [weak self] error in
-            DispatchQueue.main.async {
-                let vc = PopUpController.with(title: TextConstants.errorAlert,
-                                              message: error.description,
-                                              image: .error,
-                                              buttonTitle: TextConstants.ok)
-                self?.present(vc, animated: true, completion: nil)
-            }
-        }) { _ in
-            
-        }
+        let isFromAlbum = RouterVC().isRootViewControllerAlbumDetail()
         
-        picker.dismiss(animated: true, completion: {
-            self.statusBarHidden = false
+        picker.dismiss(animated: true, completion: { [weak self] in
+            self?.statusBarHidden = false
+            
+            UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: self?.getFolderUUID() ?? "", isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: true, success: {
+            }, fail: { [weak self] error in
+                guard !error.isOutOfSpaceError else {
+                    //showing special popup for this error
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    let vc = PopUpController.with(title: TextConstants.errorAlert,
+                                                  message: error.description,
+                                                  image: .error,
+                                                  buttonTitle: TextConstants.ok)
+                    self?.present(vc, animated: true, completion: nil)
+                }
+            }, returnedUploadOperation: { _ in })
         })
     }
     

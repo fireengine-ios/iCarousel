@@ -14,20 +14,25 @@ protocol StorageVars: class {
     var autoSyncSet: Bool { get set }
     var autoSyncSettings: [String: Any]? { get set }
     var autoSyncSettingsMigrationCompleted: Bool { get set }
-    var homePageFirstTimeLogin: Bool { get set }
     var smallFullOfQuotaPopUpCheckBox: Bool { get set }
+    var largeFullOfQuotaPopUpCheckBox: Bool { get set }
+    var largeFullOfQuotaPopUpShownBetween80And99: Bool { get set }
+    var largeFullOfQuotaPopUpShowType100: Bool { get set }
+    var largeFullOfQuotaUserPremium: Bool { get set }
     var periodicContactSyncSet: Bool { get set }
     var usersWhoUsedApp: [String: Any] { get set }
     var isNewAppVersionFirstLaunchTurkcellLanding: Bool { get set }
     var deepLink: String? { get set }
     var deepLinkParameters: [AnyHashable: Any]? { get set }
-    var interruptedSyncVideoQueueItems: [String] { get set }
     var blockedUsers: [String : Date] { get set }
     var shownCampaignInstaPickWithDaysLeft: Date? { get set }
     var shownCampaignInstaPickWithoutDaysLeft: Date? { get set }
     var hiddenPhotoInPeopleAlbumPopUpCheckBox: Bool { get set }
     var smashPhotoPopUpCheckBox: Bool { get set }
     var smartAlbumWarningPopUpCheckBox: Bool { get set }
+    var interruptedResumableUploads: [String: Any] { get set }
+    var isResumableUploadEnabled: Bool? { get set }
+    var resumableUploadChunkSize: Int? { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -101,17 +106,36 @@ final class UserDefaultsVars: StorageVars {
         set { userDefaults.set(newValue, forKey: autoSyncSettingsMigrationCompletedKey) }
     }
     
-    private let homePageFirstTimeKey = "firstTimeKeyLargeQuotaPopUp"
-    var homePageFirstTimeLogin: Bool {
-        get { return userDefaults.bool(forKey: homePageFirstTimeKey + SingletonStorage.shared.uniqueUserID) }
-        set { userDefaults.set(newValue, forKey: homePageFirstTimeKey + SingletonStorage.shared.uniqueUserID) }
-    }
-    
     private let smallFullOfQuotaPopUpCheckBoxKey = "smallFullOfQuotaPopUpCheckBox"
     var smallFullOfQuotaPopUpCheckBox: Bool {
         get { return userDefaults.bool(forKey: smallFullOfQuotaPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
         set { userDefaults.set(newValue, forKey: smallFullOfQuotaPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
     }
+    
+    private let largeFullOfQuotaPopUpCheckBoxKey = "largeFullOfQuotaPopUpCheckBox"
+    var largeFullOfQuotaPopUpCheckBox: Bool {
+        get { return userDefaults.bool(forKey: largeFullOfQuotaPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
+        set { userDefaults.set(newValue, forKey: largeFullOfQuotaPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let largeFullOfQuotaPopUpShownBetween80And99Key = "largeFullOfQuotaPopUpShownBetween80And99"
+    var largeFullOfQuotaPopUpShownBetween80And99: Bool {
+        get { return userDefaults.bool(forKey: largeFullOfQuotaPopUpShownBetween80And99Key + SingletonStorage.shared.uniqueUserID) }
+        set { userDefaults.set(newValue, forKey: largeFullOfQuotaPopUpShownBetween80And99Key + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let largeFullOfQuotaPopUpShowType100Key = "largeFullOfQuotaPopUpShowType100"
+    var largeFullOfQuotaPopUpShowType100: Bool {
+        get { return userDefaults.bool(forKey: largeFullOfQuotaPopUpShowType100Key + SingletonStorage.shared.uniqueUserID) }
+        set { userDefaults.set(newValue, forKey: largeFullOfQuotaPopUpShowType100Key + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let largeFullOfQuotaUserPremiumKey = "largeFullOfQuotaUserPremium"
+    var largeFullOfQuotaUserPremium: Bool {
+        get { return userDefaults.bool(forKey: largeFullOfQuotaUserPremiumKey + SingletonStorage.shared.uniqueUserID) }
+        set { userDefaults.set(newValue, forKey: largeFullOfQuotaUserPremiumKey + SingletonStorage.shared.uniqueUserID) }
+    }
+    
     
     private let deepLinkKey = "deepLinkKey"
     var deepLink: String? {
@@ -123,12 +147,6 @@ final class UserDefaultsVars: StorageVars {
     var deepLinkParameters: [AnyHashable: Any]? {
         get { return userDefaults.object(forKey: deepLinkParametersKey) as? [AnyHashable: Any]}
         set { userDefaults.set(newValue, forKey: deepLinkParametersKey)}
-    }
-    
-    private let interruptedSyncVideoQueueItemsKey = "interruptedSyncVideoQueueItemsKey"
-    var interruptedSyncVideoQueueItems: [String] {
-        get { return userDefaults.object(forKey: interruptedSyncVideoQueueItemsKey) as? [String] ?? []}
-        set { userDefaults.set(newValue, forKey: interruptedSyncVideoQueueItemsKey)}
     }
     
     var currentRemotesPage: Int {
@@ -170,5 +188,23 @@ final class UserDefaultsVars: StorageVars {
     var smartAlbumWarningPopUpCheckBox: Bool {
         get { return userDefaults.bool(forKey: smartAlbumWarningPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
         set { userDefaults.set(newValue, forKey: smartAlbumWarningPopUpCheckBoxKey + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let interruptedResumableUploadsKey = "interruptedResumableUploads"
+    var interruptedResumableUploads: [String : Any] {
+        get { return userDefaults.dictionary(forKey: interruptedResumableUploadsKey + SingletonStorage.shared.uniqueUserID) ?? [:] }
+        set { userDefaults.set(newValue, forKey: interruptedResumableUploadsKey + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let isResumableUploadEnabledKey = "isResumableUploadEnabled"
+    var isResumableUploadEnabled: Bool? {
+        get { return userDefaults.value(forKey: isResumableUploadEnabledKey + SingletonStorage.shared.uniqueUserID) as? Bool }
+        set { userDefaults.set(newValue, forKey: isResumableUploadEnabledKey + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let resumableUploadChunkSizeKey = "resumableUploadChunkSize"
+    var resumableUploadChunkSize: Int? {
+        get { return userDefaults.value(forKey: resumableUploadChunkSizeKey + SingletonStorage.shared.uniqueUserID) as? Int }
+        set { userDefaults.set(newValue, forKey: resumableUploadChunkSizeKey + SingletonStorage.shared.uniqueUserID) }
     }
 }

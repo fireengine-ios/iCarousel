@@ -50,7 +50,6 @@ final class PackagesViewController: BaseViewController {
         
         output.viewIsReady()
         
-        MenloworksAppEvents.onPackagesOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -252,11 +251,7 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
                 return
             }
             
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackageChannelClick(channelType: paymentType))
-            
-            if let tag = MenloworksSubscriptionStorage(rawValue: subscriptionPlan.name) {
-                MenloworksAppEvents.onSubscriptionClicked(tag)
-            }
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackageChannelClick(channelType: paymentType, packageName: subscriptionPlan.name))
             
             let analyticsService: AnalyticsService = factory.resolve()
             

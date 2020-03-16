@@ -28,4 +28,6 @@ protocol PhotoVideoDetailViewOutput {
     
     func videoStarted()
     func videoStoped()
+    
+    func willDisplayLastCell()
 }

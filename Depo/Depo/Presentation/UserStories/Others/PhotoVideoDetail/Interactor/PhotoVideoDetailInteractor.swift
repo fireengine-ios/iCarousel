@@ -54,6 +54,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         } else if let index = items.firstIndex(where: { $0.uuid == fileObject.uuid }) {
             selectedIndex = index
         }
+        
+        
     }
     
     func onViewIsReady() {
@@ -75,37 +77,19 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             return
         }
         
-        let isRightSwipe = index == array.count - 1
-        
-        let removedObject = array[index]
-            
         array.remove(at: index)
 
         if index >= array.count {
             selectedIndex = array.count - 1
         }
-        
-        switch type {
-        case .hide, .unhide, .delete:
-            ///its already being called from different place, we dont need to call
-            break
-        case .removeFromAlbum, .removeFromFaceImageAlbum:
-            ItemOperationManager.default.filesRomovedFromAlbum(items: [removedObject], albumUUID: albumUUID ?? "")
-        default:
-            break
-        }
-        
+                
         if !array.isEmpty {
             let nextIndex = index == array.count ? array.count - 1 : index
-            output.updateItems(objects: array, selectedIndex: nextIndex, isRightSwipe: isRightSwipe)
+            output.updateItems(objects: array, selectedIndex: nextIndex)
+        } else {
+            output.onLastRemoved()
         }
     }
-    
-    func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64) { }
-    
-    func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64) { }
-    
-    func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], uuid: String) { }
     
     func replaceUploaded(_ item: WrapData) {
         if let indexToChange = array.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) {
@@ -115,11 +99,22 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     }
     
     func trackVideoStart() {
-        analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: .storyOrVideo)
+        if
+            let index = currentItemIndex,
+            let item = allItems[safe: index],
+            let metadata = item.metaData {
+            analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: metadata.isVideoSlideshow ? .videoStartStroy : .videoStartVideo)
+        } else {
+            analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: .storyOrVideo)
+        }
         analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .everyMinuteVideo)
     }
     
     func trackVideoStop() {
         analyticsService.stopTimelyTracking()
+    }
+    
+    func appendItems(_ items: [Item]) {
+        array.append(contentsOf: items)
     }
 }

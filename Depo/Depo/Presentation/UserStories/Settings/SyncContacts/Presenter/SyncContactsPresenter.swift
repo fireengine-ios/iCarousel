@@ -10,15 +10,15 @@ import Contacts
 
 typealias ContactsPermissionCallback = (_ success: Bool) -> Void
 
-class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput {
+final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContactsViewOutput, SyncContactsInteractorOutput {
     
     weak var view: SyncContactsViewInput!
     var interactor: SyncContactsInteractorInput!
     var router: SyncContactsRouterInput!
 
-    var contactSyncResponse: ContactSync.SyncResponse?
-    var isBackUpAvailable: Bool { return contactSyncResponse != nil }
-    let reachability = ReachabilityService.shared
+    private var contactSyncResponse: ContactSync.SyncResponse?
+    private var isBackUpAvailable: Bool { return contactSyncResponse != nil }
+    private let reachability = ReachabilityService.shared
     
     private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
     
@@ -44,9 +44,18 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     func startOperation(operationType: SyncOperationType) {
         if operationType != .analyze {
             if operationType != .getBackUpStatus {
-                requesetAccess { success in
+                requesetAccess { [weak self] success in
                     if success {
-                        self.proccessOperation(operationType)
+                        if operationType == .backup {
+                            if self?.interactor.getStoredContactsCount() == 0 {
+                                self?.showEmptyContactsPopUp()
+                            } else {
+                                self?.proccessOperation(operationType)
+                            }
+                        } else {
+                            self?.proccessOperation(operationType)
+                        }
+                         self?.setButtonsAvailability()
                     }
                 }
             } else {
@@ -68,6 +77,8 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
             view.showErrorAlert(message: TextConstants.errorManyContactsToBackUp)
         case .failed:
             view.showErrorAlert(message: TextConstants.serverErrorMessage)
+        case .depoError:
+            router.showFullQuotaPopUp()
         default:
             // TODO: Error handling
             break
@@ -77,14 +88,15 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
         asyncOperationFinished()
     }
     
-    func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
+    func showProgress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
         view.showProggress(progress: progress, count: count, forOperation: operation)
     }
     
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType) {
         contactSyncResponse = response
+        setButtonsAvailability()
         /// Delay is needed due to instant progress reset on completion
-        if view.isFullCircle {
+        if !view.isFullCircle {
             DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {
                 self.view.success(response: response, forOperation: operation)
             }
@@ -122,6 +134,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
     
     func showNoBackUp() {
         view.setStateWithoutBackUp()
+        setButtonsAvailability()
     }
     
     func asyncOperationStarted() {
@@ -159,6 +172,7 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
             view.setStateWithoutBackUp()
         }
         view.resetProgress()
+        setButtonsAvailability()
     }
     
     private func sendOperationToOutputs(_ operationType: SyncOperationType) {
@@ -231,6 +245,33 @@ class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncContact
                                                 vc.close { completionHandler(false) }
                                                 UIApplication.shared.openSettings()
                                               })
+        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+    }
+    
+    private func setButtonsAvailability() {
+        let hasStoredContacts: Bool
+        if let contactResponse = contactSyncResponse {
+            hasStoredContacts = contactResponse.totalNumberOfContacts > 0
+        } else {
+            hasStoredContacts = false
+        }
+        
+        interactor.getContactsPermissionStatus { [weak self] isPermitted in
+            
+            guard let self = self else {
+                return
+            }
+            
+            if isPermitted {
+                self.view.setButtonsAvailability(contactsPermitted: isPermitted, contactsCount: self.interactor.getStoredContactsCount(), containContactsInCloud: hasStoredContacts)
+            } else {
+                self.view.setButtonsAvailability(contactsPermitted: isPermitted, contactsCount: nil, containContactsInCloud: hasStoredContacts)
+            }
+        }
+    }
+    
+    private func showEmptyContactsPopUp() {
+        let controller = PopUpController.with(title: nil, message: TextConstants.absentContactsForBuckup, image: .none, buttonTitle: TextConstants.ok)
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
 }

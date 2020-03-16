@@ -24,6 +24,8 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
+    weak var photoVideoDetailModule: PhotoVideoDetailModuleInput? //no need for stong reference, since we need it till ViewController is alive
+    
     //MARK: - View lifecycle
     
     deinit {
@@ -191,8 +193,8 @@ extension TrashBinViewController: TrashBinDataSourceDelegate {
     }
     
     func didSelect(item: Item) {
-        let sameTypeItems = dataSource.getSameTypeItems(for: item)
-        router.openSelected(item: item, sameTypeItems: sameTypeItems)
+        let sameTypeItems = dataSource.getSameTypeItems(for: item.fileType, from: dataSource.allItems.flatMap { $0 })
+        router.openSelected(item: item, sameTypeItems: sameTypeItems, delegate: self)
     }
     
     func didSelect(album: BaseDataSourceItem) {
@@ -231,6 +233,11 @@ extension TrashBinViewController: TrashBinSortingManagerDelegate {
 
 extension TrashBinViewController: TrashBinInteractorDelegate {    
     func didLoad(items: [Item]) {
+        if let fileType = photoVideoDetailModule?.itemsType {
+            let sameTypeItems = dataSource.getSameTypeItems(for: fileType, from: items)
+            photoVideoDetailModule?.appendItems(sameTypeItems, isLastPage: false)
+        }
+
         dataSource.append(items: items) { [weak self] in
             self?.checkEmptyView()
             self?.updateMoreButton()
@@ -243,6 +250,7 @@ extension TrashBinViewController: TrashBinInteractorDelegate {
     }
     
     func didFinishLoadAlbums() {
+        photoVideoDetailModule?.appendItems([], isLastPage: true)
         dataSource.finishLoadAlbums()
     }
     
@@ -324,7 +332,11 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
         guard let item = item else {
             return
         }
-        router.openInfo(item: item, delegate: self)
+        router.openInfo(item: item)
+    }
+    
+    func onThreeDotsManagerDeleteAll() {
+        interactor.emptyTrashBin()
     }
 }
 
@@ -365,6 +377,13 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
         return object === self
+    }
+    
+    func didRenameItem(_ item: BaseDataSourceItem) {
+        guard let item = item as? Item else {
+            return
+        }
+        dataSource.updateItem(item)
     }
     
     //MARK: Move to trash events
@@ -429,8 +448,11 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
         remove(albums: albums)
     }
     
+    func didEmptyTrashBin() {
+        reloadData(needShowSpinner: true)
+    }
+    
     private func remove(items: [Item]) {
-        stopSelectionState()
         reloadAlbums()
         dataSource.remove(items: items) { [weak self] in
             self?.checkEmptyView()
@@ -438,8 +460,6 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
     }
     
     private func remove(albums: [BaseDataSourceItem]) {
-        stopSelectionState()
-        
         if albums.isEmpty {
             return
         }
@@ -477,12 +497,13 @@ extension TrashBinViewController: MoreFilesActionsInteractorOutput {
     
     func operationFailed(type: ElementTypes, message: String) {
         asyncOperationSuccess()
-        if type.isContained(in: ElementTypes.trashState) {
+        if type.isContained(in: [.restore, .delete, .emptyTrashBin]) {
             showMessage(errorMessage: message)
         }
     }
     
     func operationStarted(type: ElementTypes) {
+        stopSelectionState()
         startAsyncOperation()
     }
     
@@ -501,11 +522,11 @@ extension TrashBinViewController: MoreFilesActionsInteractorOutput {
     }
 }
 
-extension TrashBinViewController: FileInfoModuleOutput {
-    func didRenameItem(_ item: BaseDataSourceItem) {
-        guard let item = item as? Item else {
-            return
-        }
-        dataSource.updateItem(item)
+//MARK: - PhotoVideoDetailModuleOutput
+
+extension TrashBinViewController: PhotoVideoDetailModuleOutput {
+    func needLoadNextPage() {
+        debugPrint("needLoadNextPage")
+        interactor.loadNextItemsPage()
     }
 }

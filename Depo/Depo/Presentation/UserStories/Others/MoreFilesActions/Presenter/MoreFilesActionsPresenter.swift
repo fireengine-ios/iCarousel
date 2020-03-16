@@ -34,6 +34,7 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     }
     
     func operationStarted(type: ElementTypes) {
+        basePassingPresenter?.stopModeSelected()
         startAsyncOperationDisableScreen()
     }
     
@@ -51,25 +52,6 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     
     func showOutOfSpaceAlert(failedType type: ElementTypes) {
         operationFailed(with: type)
-        
-        let controller = PopUpController.with(title: TextConstants.syncOutOfSpaceAlertTitle,
-                                              message: TextConstants.syncOutOfSpaceAlertText,
-                                              image: .none,
-                                              firstButtonTitle: TextConstants.syncOutOfSpaceAlertCancel,
-                                              secondButtonTitle: TextConstants.upgrade,
-                                              secondAction: { vc in
-                                                vc.close(completion: {
-                                                    let router = RouterVC()
-                                                    if router.navigationController?.presentedViewController != nil {
-                                                        router.pushOnPresentedView(viewController: router.packages)
-                                                    } else {
-                                                        router.pushViewController(viewController: router.packages)
-                                                    }
-                                                })
-        })
-        
-        DispatchQueue.toMain {
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
-        }
+        RouterVC().showFullQuotaPopUp()
     }
 }

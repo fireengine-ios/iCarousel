@@ -58,9 +58,11 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
         case .selectPlayListName:
             router.hideScreen()
         case .selectFolderName:
-            view.hideView()
-            if let item = item {
-                router.moveToFolderPage(presenter: self, item: item, isSubFolder: isSubFolder)
+            view.hideView { [weak self] in
+                guard let self = self, let item = item else {
+                    return
+                }
+                self.router.moveToFolderPage(presenter: self, item: item, isSubFolder: isSubFolder)
             }
         default: 
             break
@@ -69,14 +71,16 @@ class SelectNamePresenter: BasePresenter, SelectNameModuleInput, SelectNameViewO
     
     func createAlbumOperationSuccess(item: AlbumItem?) {
         asyncOperationSuccess()
-        view.hideView()
-        
-        guard let item = item else { return }
-        
-        if selectNameModuleOutput != nil {
-            selectNameModuleOutput?.didCreateAlbum(item: item)
-        } else {
-            router.moveToAlbumPage(presenter: self, item: item)
+        view.hideView { [weak  self] in
+            guard let  self = self, let item = item else {
+                return
+            }
+            
+            if self.selectNameModuleOutput != nil {
+                self.selectNameModuleOutput?.didCreateAlbum(item: item)
+            } else {
+                self.router.moveToAlbumPage(presenter: self, item: item)
+            }
         }
     }
     

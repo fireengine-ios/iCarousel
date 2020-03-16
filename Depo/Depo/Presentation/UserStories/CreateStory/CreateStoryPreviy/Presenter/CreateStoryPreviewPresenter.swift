@@ -36,7 +36,6 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
     
     func storyCreated() {
         asyncOperationSuccess()
-        MenloworksAppEvents.onStoryCreated()
         
         let storyName = interactor.story?.storyName ?? ""
         let title = String(format: TextConstants.createStoryPopUpTitle, storyName)

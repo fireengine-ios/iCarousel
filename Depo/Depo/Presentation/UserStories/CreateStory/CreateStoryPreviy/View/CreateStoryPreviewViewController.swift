@@ -51,15 +51,17 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupNavigation()
         output.viewIsReady()
     }
     
+    override var preferredNavigationBarStyle: NavigationBarStyle {
+        return .black
+    }
+    
     private func setupNavigation() {
-        hidenNavigationBarStyle()
-        statusBarColor = .black
-        setNavigationBackgroundColor(color: .black)
+        blackNavigationBarStyle()
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(didEnterBackground),
