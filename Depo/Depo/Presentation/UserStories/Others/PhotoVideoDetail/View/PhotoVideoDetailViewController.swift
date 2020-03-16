@@ -307,6 +307,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         playerController?.delegate = RouterVC().rootViewController as? TabBarViewController
         debugLog("about to play video item with isEmptyController \(playerController == nil) and \(playerController?.player == nil)")
         present(playerController!, animated: true) { [weak self] in
+            UIApplication.setIdleTimerDisabled(true)
             self?.playerController?.player?.play()
             self?.output.videoStarted()
             if Device.operationSystemVersionLessThen(11) {
@@ -316,6 +317,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func onStopPlay() {
+        UIApplication.setIdleTimerDisabled(false)
         output.videoStoped()
         if Device.operationSystemVersionLessThen(11) {
             statusBarHidden = false
