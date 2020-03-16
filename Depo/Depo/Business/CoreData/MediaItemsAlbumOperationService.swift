@@ -104,8 +104,16 @@ final class MediaItemsAlbumOperationService {
     }
     
     private func getLocalAlbums(context: NSManagedObjectContext, mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
+        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItemsAlbum.isMainLocalAlbum), ascending: false)
+        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItemsAlbum.name), ascending: true)
+    
         let predicate = NSPredicate(format: "\(#keyPath(MediaItemsAlbum.isLocal)) = true")
-        executeRequest(predicate: predicate, context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
+        
+        let fetchRequest: NSFetchRequest = MediaItemsAlbum.fetchRequest()
+        fetchRequest.predicate = predicate
+        fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
+        
+        execute(request: fetchRequest, context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
     }
     
     private func saveLocalAlbums(assets: [PHAssetCollection], context: NSManagedObjectContext, completion: @escaping VoidHandler) {
