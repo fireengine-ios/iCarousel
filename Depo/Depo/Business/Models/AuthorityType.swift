@@ -9,7 +9,7 @@
 import Foundation
 
 enum AuthorityType: String {
-    static let typesInOffer: [AuthorityType] = [.faceRecognition, .deleteDublicate, .premiumUser]
+    static let typesInOffer: [AuthorityType] = [.faceRecognition, .deleteDublicate, .premiumUser, .originalCopy]
     
     case faceRecognition    = "AUTH_FACE_IMAGE_LOCATION"
     case deleteDublicate    = "AUTH_DELETE_DUPLICATE"
