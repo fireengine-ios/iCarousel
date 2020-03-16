@@ -24,6 +24,7 @@ final class PackagesViewController: BaseViewController {
             let nib = UINib(nibName: String(describing: PackagesTableViewCell.self), bundle: nil)
             newValue.register(nib, forCellReuseIdentifier: String(describing: PackagesTableViewCell.self))
             newValue.tableFooterView = UIView()
+            newValue.isScrollEnabled = false
         }
     }
     
@@ -175,23 +176,21 @@ extension PackagesViewController: PackagesViewInput {
     
     func setupStackView(with percentage: CGFloat) {
         menuViewModels.removeAll()
-        for view in cardsStackView.arrangedSubviews {
-            view.removeFromSuperview()
-        }
+        cardsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         ///my profile card
         addNewCard(type: .myProfile)
         
-        ///my storage card
+        ///my usage card
         addNewCard(type: .usage(percentage: percentage))
         
-        ///account type card
+        ///my storage card
         let isMiddleUser = AuthoritySingleton.shared.accountType.isMiddle
         let isPremiumUser = AuthoritySingleton.shared.accountType.isPremium
         let type: ControlPackageType.AccountType = isPremiumUser ? .premium : (isMiddleUser ? .middle : .standard)
-        
         addNewCard(type: .myStorage(type))
-        self.cardsTableView.reloadData()
+        
+        cardsTableView.reloadData()
     }
     
     private func addNewCard(type: ControlPackageType) {
@@ -225,7 +224,7 @@ extension PackagesViewController: SubscriptionOfferViewDelegate {
         
         let paymentMethods: [PaymentMethod] = plan.offers.compactMap { offer in
             if let model = offer.model as? PackageModelResponse {
-                return createPaymentMethod(model: model, priceString: offer.priceString, offer: plan, planIndex: planIndex)
+                return createPaymentMethod(model: model, priceString: offer.price, offer: plan, planIndex: planIndex)
             } else {
                 return nil
             }
@@ -238,15 +237,13 @@ extension PackagesViewController: SubscriptionOfferViewDelegate {
     }
     
     private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer, planIndex: Int) -> PaymentMethod? {
-        
-        guard let name = model.name, let packageType = model.type else {
+        guard let name = model.name, let type = model.type else {
             return nil
         }
         
-        let paymentType = packageType.paymentType
-        
+        let paymentType = type.paymentType
         return PaymentMethod(name: name, priceLabel: priceString, type: paymentType, action: { [weak self] in
-            guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, packageType: packageType) else {
+            guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, packageType: type) else {
                 assertionFailure()
                 return
             }
@@ -265,14 +262,8 @@ extension PackagesViewController: SubscriptionOfferViewDelegate {
         
     }
     
-    private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, packageType: PackageType ) -> SubscriptionPlan?  {
-        
-        return availableOffers.offers.first { plan -> Bool in
-            guard let model = plan.model as? PackageModelResponse else {
-                return false
-            }
-            return model.type == packageType
-        }
+    private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, packageType: PackageContentType) -> SubscriptionPlan?  {
+        return availableOffers.offers.first(where: { ($0.model as? PackageModelResponse)?.type == packageType })
     }
 }
 

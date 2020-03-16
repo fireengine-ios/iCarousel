@@ -73,19 +73,19 @@ extension PremiumInteractor: PremiumInteractorInput {
             DispatchQueue.toMain {
                 self?.output.successedGotAppleInfo(offers: offers)
             }
-            }, fail: { [weak self] error in
-                DispatchQueue.toMain {
-                    if error.isServerUnderMaintenance {
-                        self?.output.failed(with: error.description)
-                    } else {
-                        self?.output.switchToTextWithoutPrice(isError: true)
-                    }
+        }, fail: { [weak self] error in
+            DispatchQueue.toMain {
+                if error.isServerUnderMaintenance {
+                    self?.output.failed(with: error.description)
+                } else {
+                    self?.output.switchToTextWithoutPrice(isError: true)
                 }
+            }
         })
     }
     
     func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType) -> String {
-        return packageService.getPriceInfo(for: offer, accountType: accountType)
+        return packageService.getOfferPrice(for: offer, accountType: accountType)
     }
     
     func convertToSubscriptionPlan(offers: [PackageModelResponse], accountType: AccountType) -> [SubscriptionPlan]  {
@@ -218,25 +218,22 @@ extension PremiumInteractor: PremiumInteractorInput {
     
     //MARK: turkcell purchase
     func getToken(for offer: PackageModelResponse) {
-        offersService.initOffer(offer: offer,
-                                success: { [weak self] response in
-                                    guard let offerResponse = response as? InitOfferResponse,
-                                        let token = offerResponse.referenceToken
-                                        else {
-                                            let error = CustomErrors.serverError("An error occurred while getting token.")
-                                            DispatchQueue.toMain {
-                                                self?.output.failed(with: error.localizedDescription)
-                                            }
-                                            return
-                                    }
-                                    
-                                    DispatchQueue.toMain {
-                                        self?.output.successed(tokenForOffer: token)
-                                    }
-            }, fail: { [weak self] errorResponse in
-                DispatchQueue.toMain {
-                    self?.output.failed(with: errorResponse.description)
-                }
+        offersService.initOffer(offer: offer, success: { [weak self] response in
+            guard let offerResponse = response as? InitOfferResponse, let token = offerResponse.referenceToken else {
+                    let error = CustomErrors.serverError("An error occurred while getting token.")
+                    DispatchQueue.toMain {
+                        self?.output.failed(with: error.localizedDescription)
+                    }
+                    return
+            }
+            
+            DispatchQueue.toMain {
+                self?.output.successed(tokenForOffer: token)
+            }
+        }, fail: { [weak self] errorResponse in
+            DispatchQueue.toMain {
+                self?.output.failed(with: errorResponse.description)
+            }
         })
     }
     

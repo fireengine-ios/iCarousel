@@ -1352,7 +1352,7 @@
 "unhide_popup_text" = "Seçilen öğe(ler) eski klasörlerine geri taşınacak ve lifebox listelerinde görüntülenebilmeye başlayacak. Devam etmek istiyor musun?";
 
 /*divorce card*/
-"divorce_card_title" = "Hafızalardan Silinecek Aşklar!";
+"divorce_card_title" = "İpucu: Yeni GiF ve Stickerlar ile anılarını daha eğlenceli hale getirebilir ve arkadaşlarınla paylaşabilirsin. Hemen bir fotoğraf seç ve EĞLENmeye başla! Detaylar için videoyu izleyebilirsin.";
 "trash_bin_album_slider_title" = "Çöp Kutusu";
 "trash_bin_album_slider_empty" = "Çöp Kutusunda Henüz Silinmiş Albüm Yok";
 "trash_bin_empty" = "Çöp Kutusunda Henüz Silinmiş Öğe Yok";
@@ -1388,7 +1388,7 @@
 "restore_folders_success_text" = "Dosya(lar) ve içerikleri geri yüklendi.";
 "LifeboxLargePopUpTitleBetween80And99" = "Saklama alanın %1$d%% dolu!";
 "LifeboxLargePopUpDeleteFilesButtonTitle" = "İçeriklerimi sil";
-"dialog_contact_sync_vcf_file_upload_error" = "";
+"dialog_contact_sync_vcf_file_upload_error" = "Kişilerinizi geri yüklemeden önce, verilerinizi korumak için cihazınızdaki kişileri yedekleriz. Lifebox depolama alanınız dolu olduğundan, kişilerinizi yedeklemeye veya geri yüklemeye devam edemezsiniz. Depolama alanınızı genişletebilir veya lifebox'taki tüm dosyaları silebilirsiniz.";
 "privacy_policy_cell" = "Gizlilik Politikası";
 "full_quota_warning_popup_title" = "lifebox saklama alanı limitine ulaştın!";
 "full_quota_warning_popup_description" = "lifebox saklama alanın dolu olduğu için yeni içerik yükleyemiyorsun. Anılarını saklamaya devam etmek için paket satın alabilir veya mevcut içeriklerini silebilirsin.";
@@ -1451,3 +1451,9 @@
 "mobile_payment_success_popup_title" = "Turkcell Mobil Ödeme iznin başarılı bir şekilde aktifleştirilmiştir.";
 "mobile_payment_success_popup_message" = "Turkcell Mobil Ödeme iznini Ayarlar menüsündeki İzinler altından yönetebilirsin.";
 "storage_usage_information" = "";
+"auto_sync_album_items" = "";
+"my_packages" = "";
+"feature_package_name" = "";
+"contact_sync_confirm_premium_popup_title" = "";
+"contact_sync_confirm_premium_popup_text" = "";
+"my_packages_description" = "";

@@ -679,6 +679,83 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     // MARK: Copy Assets
     
+    func getURL(asset: PHAsset) -> URL? {
+        switch  asset.mediaType {
+        case .image:
+            return getURLImage(asset: asset)
+        
+        case .video:
+            return getURLVideo(asset: asset)
+        
+        default:
+            return nil
+        }
+    }
+    
+    private func getURLImage(asset: PHAsset) -> URL? {
+        debugLog("LocalMediaStorage copyImageAsset")
+        
+        var url: URL?
+        
+        guard let photoManager = photoManager else {
+            return nil
+        }
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        let operation = GetOriginalImageOperation(photoManager: photoManager,
+                                                  asset: asset) { data, string, orientation, dict in
+                                                    let file = UUID().uuidString
+                                                    let tmpURL = Device.tmpFolderUrl(withComponent: file)
+                                                    do {
+                                                        try data?.write(to: tmpURL)
+                                                    } catch {
+                                                        print(error.description)
+                                                        semaphore.signal()
+                                                    }
+                                                    url = tmpURL
+                                                    semaphore.signal()
+        }
+        getDetailQueue.addOperation(operation)
+        semaphore.wait()
+        
+        return url
+    }
+    
+    private func getURLVideo(asset: PHAsset) -> URL? {
+        debugLog("LocalMediaStorage getURLVideo")
+
+        var url: URL?
+        
+        guard
+            let resource = asset.resource,
+            let name = asset.originalFilename
+        else {
+            return nil
+        }
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        let options = PHAssetResourceRequestOptions()
+        options.isNetworkAccessAllowed = false
+        
+        let tmpUrl = Device.tmpFolderUrl(withComponent: name)
+        PHAssetResourceManager.default().writeData(for: resource, toFile: tmpUrl, options: options) { error in
+            guard let error = error else {
+                url = tmpUrl
+                semaphore.signal()
+                return
+            }
+            
+            debugLog(error.description)
+            semaphore.signal()
+        }
+        
+        semaphore.wait()
+        
+        return url
+    }
+    
     func copyAssetToDocument(asset: PHAsset) -> URL? {
         debugLog("LocalMediaStorage copyAssetToDocument")
         
