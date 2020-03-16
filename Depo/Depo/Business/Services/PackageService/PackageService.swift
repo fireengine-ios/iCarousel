@@ -335,7 +335,6 @@ final class PackageService {
     
     private func getOfferAvailableFeatures(offer: Any) -> [AuthorityType] {
         if let packageModel = offer as? PackageModelResponse,
-            packageModel.hasAttachedFeature == true,
             let authorities = packageModel.authorities {
             return authorities
                 .compactMap { $0.authorityType }
