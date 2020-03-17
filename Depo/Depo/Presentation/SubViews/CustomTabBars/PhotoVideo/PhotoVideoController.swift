@@ -733,24 +733,19 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     }
     
     func failedUploadFile(file: WrapData, error: Error?) {
-        let uuid = file.getTrimmedLocalID()
-        
-        uploadProgress.removeValueSafely(forKey: uuid)
-        
-        DispatchQueue.toMain {
-            self.getCellForFile(objectUUID: uuid) { cell in
-                cell?.cancelledUploadForObject()
-            }
-        }
+        cancellVisibleCellProgress(trimmedID: file.getTrimmedLocalID())
     }
     
     func cancelledUpload(file: WrapData) {
-        let uuid = file.getTrimmedLocalID()
+        cancellVisibleCellProgress(trimmedID: file.getTrimmedLocalID())
+    }
+    
+    private func cancellVisibleCellProgress(trimmedID: String) {
         
-        uploadProgress.removeValueSafely(forKey: uuid)
+        uploadProgress.removeValueSafely(forKey: trimmedID)
         
         DispatchQueue.toMain {
-            self.getCellForFile(objectUUID: uuid) { cell in
+            self.getVisibleCellForLocalFile(objectTrimmedLocalID: trimmedID) { cell in
                 cell?.cancelledUploadForObject()
             }
         }
