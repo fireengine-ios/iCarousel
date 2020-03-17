@@ -14,16 +14,21 @@ final class PhotoVideoPredicateManager {
     private var filtrationPredicate: NSPredicate?
     private var duplicationPredicate: NSPredicate?
     
+    private enum Keys {
+        static let fileTypeValue = #keyPath(MediaItem.fileTypeValue)
+        static let hasMissingDateRemotes = #keyPath(MediaItem.hasMissingDateRemotes)
+        static let isAvailable = #keyPath(MediaItem.isAvailable)
+        static let isLocalItemValue = #keyPath(MediaItem.isLocalItemValue)
+        static let relatedRemotes = #keyPath(MediaItem.relatedRemotes)
+        static let status = #keyPath(MediaItem.status)
+    }
+        
     private lazy var hiddenPredicate: NSPredicate = {
         let hiddenStatusValue = ItemStatus.hidden.valueForCoreDataMapping()
-        
-        let isLocalItemValue = #keyPath(MediaItem.isLocalItemValue)
-        let relatedRemotes = #keyPath(MediaItem.relatedRemotes)
-        let status = #keyPath(MediaItem.status)
-        
-        let remoteUnhidden = NSPredicate(format:"(\(isLocalItemValue) = false AND \(status) != %ui)", hiddenStatusValue)
-        let relatedRemotesAreEmpty = NSPredicate(format:"(\(isLocalItemValue) = true AND \(relatedRemotes).@count = 0)")
-        let relatedRemotesHasUnhidden = NSPredicate(format:"(\(isLocalItemValue) = true AND \(relatedRemotes).@count != 0 AND SUBQUERY(\(relatedRemotes), $x, $x.\(status) != %ui).@count != 0)")
+
+        let remoteUnhidden = NSPredicate(format:"(\(Keys.isLocalItemValue) = false AND \(Keys.status) != %ui)", hiddenStatusValue)
+        let relatedRemotesAreEmpty = NSPredicate(format:"(\(Keys.isLocalItemValue) = true AND \(Keys.relatedRemotes).@count = 0)")
+        let relatedRemotesHasUnhidden = NSPredicate(format:"(\(Keys.isLocalItemValue) = true AND \(Keys.relatedRemotes).@count != 0 AND SUBQUERY(\(Keys.relatedRemotes), $x, $x.\(Keys.status) != %ui).@count != 0)")
  
         return NSCompoundPredicate(orPredicateWithSubpredicates: [remoteUnhidden,
                                                                   relatedRemotesAreEmpty,
@@ -61,7 +66,7 @@ final class PhotoVideoPredicateManager {
             return
         }
         ///This Predicate based on assumption that all remotes were downloaded before all locals are
-        let duplicationPredicateTmp = NSPredicate(format: "(isLocalItemValue = true AND (hasMissingDateRemotes = true || relatedRemotes.@count = 0)) OR isLocalItemValue = false")
+        let duplicationPredicateTmp = NSPredicate(format: "(\(Keys.isLocalItemValue) = true AND (\(Keys.hasMissingDateRemotes) = true || \(Keys.relatedRemotes).@count = 0)) OR \(Keys.isLocalItemValue) = false")
         duplicationPredicate = duplicationPredicateTmp
         createdPredicateCallback(duplicationPredicateTmp)
     }
@@ -69,20 +74,15 @@ final class PhotoVideoPredicateManager {
     func getSyncPredicate(isPhotos: Bool) -> NSPredicate {
         let hiddenStatusValue = ItemStatus.hidden.valueForCoreDataMapping()
         
-        let isLocalItemValue = #keyPath(MediaItem.isLocalItemValue)
-        let status = #keyPath(MediaItem.status)
-        
-        let remoteUnhidden = NSPredicate(format:"(\(isLocalItemValue) = false AND \(status) != %ui)", hiddenStatusValue)
+        let remoteUnhidden = NSPredicate(format:"(\(Keys.isLocalItemValue) = false AND \(Keys.status) != %ui)", hiddenStatusValue)
         
         return NSCompoundPredicate(andPredicateWithSubpredicates: [getFiltrationPredicate(isPhotos: isPhotos), remoteUnhidden])
     }
     
     private func getFiltrationPredicate(isPhotos: Bool) -> NSPredicate {
         guard let unwrapedFiltrationPredicate = filtrationPredicate else {
-            let type = isPhotos ? FileType.image.valueForCoreDataMapping() :
-                FileType.video.valueForCoreDataMapping()
-            let predicateFormat = "fileTypeValue == \(type)"
-            return NSPredicate(format: predicateFormat)
+            let type: FileType = isPhotos ? .image : .video
+            return NSPredicate(format: "\(Keys.fileTypeValue) = \(type.valueForCoreDataMapping()) AND \(Keys.isAvailable) = true")
         }
         return unwrapedFiltrationPredicate
     }

@@ -129,7 +129,7 @@ extension MediaItemsAlbumOperationService {
     private func getLocalAlbums(localIds: [String]? = nil, context: NSManagedObjectContext, albumsCallBack: @escaping MediaItemLocalAlbumsCallBack) {
         
         let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItemsLocalAlbum.isMain), ascending: false)
-        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItemsLocalAlbum.name), ascending: true)
+        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItemsAlbum.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
         
         let fetchRequest: NSFetchRequest = MediaItemsLocalAlbum.fetchRequest()
         

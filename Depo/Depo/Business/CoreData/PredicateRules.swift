@@ -10,7 +10,18 @@ import Foundation
 import CoreData
 
 class PredicateRules {
-    
+
+    private enum Keys {
+        static let albumUUID = "\(#keyPath(MediaItem.albums)).\(#keyPath(MediaItemsAlbum.uuid))"
+        static let favoritesValue = #keyPath(MediaItem.favoritesValue)
+        static let fileTypeValue = #keyPath(MediaItem.fileTypeValue)
+        static let isLocalItemValue = #keyPath(MediaItem.isLocalItemValue)
+        static let nameValue = #keyPath(MediaItem.nameValue)
+        static let parent = #keyPath(MediaItem.parent)
+        static let syncStatusValue = #keyPath(MediaItem.syncStatusValue)
+        static let trimmedLocalFileID  = #keyPath(MediaItem.trimmedLocalFileID)
+    }
+        
 // MARK: By file type
     
     var music: NSPredicate {
@@ -39,7 +50,7 @@ class PredicateRules {
         let end = FileType.application(.ppt).valueForCoreDataMapping() + 1
         let list = [start, end]
         
-        return NSPredicate(format: "fileTypeValue BETWEEN %@ ", list)
+        return NSPredicate(format: "\(Keys.fileTypeValue) BETWEEN %@ ", list)
     }
     
     var all: NSPredicate {
@@ -52,21 +63,21 @@ class PredicateRules {
             !$0.isLocalItem
         }
         let list = serverObjects.map { $0.getTrimmedLocalID() }
-        let predicate = NSPredicate(format: "(isLocalItemValue == true) AND trimmedLocalFileID IN %@", list)
+        let predicate = NSPredicate(format: "\(Keys.isLocalItemValue) = true AND \(Keys.trimmedLocalFileID) IN %@", list)
         return predicate
     }
     
     // MARK: By favorite staus
     
     var favorite: NSPredicate {
-        return NSPredicate(format: "favoritesValue == true")
+        return NSPredicate(format: "\(Keys.favoritesValue) = true")
     }
     
     
     // MARK: By sync status
     
     private static func predicateFromFileType(type: MoreActionsConfig.MoreActionsFileType) -> NSPredicate? {
-        return NSPredicate(format: "fileTypeValue == %d", type.convertToFileType().valueForCoreDataMapping() )
+        return NSPredicate(format: "\(Keys.fileTypeValue) = %d", type.convertToFileType().valueForCoreDataMapping() )
     }
     
     private func predicateFromGeneralFilterType(type: GeneralFilesFiltrationType) -> NSPredicate? {
@@ -74,9 +85,9 @@ class PredicateRules {
         case .favoriteStatus(.all):
             return nil
         case .favoriteStatus(.favorites):
-            return NSPredicate(format: "favoritesValue == true")
+            return NSPredicate(format: "\(Keys.favoritesValue) = true")
         case .favoriteStatus(.notFavorites):
-            return NSPredicate(format: "favoritesValue == false")
+            return NSPredicate(format: "\(Keys.favoritesValue) = false")
         case .fileType(let specificType):
             switch specificType {
             case .allDocs:
@@ -87,16 +98,16 @@ class PredicateRules {
                 let predicates = allDocsTypes.flatMap { predicateFromGeneralFilterType(type: $0) }
                 return NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
             default:
-                return NSPredicate(format: "fileTypeValue == %d", specificType.valueForCoreDataMapping())
+                return NSPredicate(format: "\(Keys.fileTypeValue) = %d", specificType.valueForCoreDataMapping())
             }
         case .syncStatus(let syncFlag):
-            return NSPredicate(format: "syncStatusValue == %i", syncFlag.valueForCoreDataMapping())
+            return NSPredicate(format: "\(Keys.syncStatusValue) = %i", syncFlag.valueForCoreDataMapping())
         case .localStatus(let localFlag):
             switch localFlag {
             case .nonLocal:
-                return NSPredicate(format: "isLocalItemValue == false")
+                return NSPredicate(format: "\(Keys.isLocalItemValue) = false")
             case .local:
-                return NSPredicate(format: "isLocalItemValue == true")
+                return NSPredicate(format: "\(Keys.isLocalItemValue) = true")
             case .all:
                 return nil
             }
@@ -107,34 +118,32 @@ class PredicateRules {
 //            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND md5Value IN %@", list)
 //            return predicate
         case .rootFolder(let rootUUID):
-            let rootFolderPredicate = NSPredicate(format: "parent = %@", rootUUID)
+            let rootFolderPredicate = NSPredicate(format: "\(Keys.parent) = %@", rootUUID)
             return rootFolderPredicate
         case .rootAlbum(let albumUUID):
-            let rootAlbumPredicate = NSPredicate(format: "ANY albums.uuid == %@", albumUUID) //LR-2356
+            let rootAlbumPredicate = NSPredicate(format: "ANY \(Keys.albumUUID) = %@", albumUUID) //LR-2356
             return rootAlbumPredicate
         case .name(let text):
-            return NSPredicate(format: "nameValue CONTAINS[cd] %@", text)
+            return NSPredicate(format: "\(Keys.nameValue) CONTAINS[cd] %@", text)
         case .parentless:
-            let rootFolderPredicate = NSPredicate(format: "(parent == nil OR parent == %@)", "")
+            let rootFolderPredicate = NSPredicate(format: "\(Keys.parent) = nil OR \(Keys.parent) = %@", "")
             return rootFolderPredicate
         }
     }
     
     func predicate(filters: [GeneralFilesFiltrationType]? = nil) -> NSPredicate? {
-        var filtersPredicates: [NSPredicate]?
-        filtersPredicates = filters?.compactMap {
+        let filtersPredicates = filters?.compactMap {
             self.predicateFromGeneralFilterType(type: $0)
         }
         
-        if let list = filtersPredicates,
-            list.count > 0 {
-            let fil = NSCompoundPredicate(andPredicateWithSubpredicates: list)
-            let fetchTest = NSFetchRequest<MediaItem>(entityName: "MediaItem")
-            fetchTest.predicate = fil
-            return fil
+        guard let list = filtersPredicates, !list.isEmpty else {
+            return nil
         }
         
-        return nil
+        let fil = NSCompoundPredicate(andPredicateWithSubpredicates: list)
+        let fetchTest: NSFetchRequest = MediaItem.fetchRequest()
+        fetchTest.predicate = fil
+        return fil
     }
     
 }
