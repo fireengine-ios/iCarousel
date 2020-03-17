@@ -464,7 +464,7 @@ extension AnalyticsService: AnalyticsGA {
             case .SLCMFeature:
                 analyticasItemList = "Turkcell Package"
                 itemID = slcmID
-            case .paycellSLCMFeature, .paycellAllAccessFeature:
+            case .SLCMPaycellFeature, .allAccessPaycellFeature:
                 analyticasItemList = "Credit Card Package"
                 ///FE-1691 iOS: Google Analytics - Ecommerce - Product Click
                 ///Can asked leave creditCard Product Click without id

@@ -133,8 +133,15 @@ extension MediaItemsAlbumOperationService {
         } else {
             predicate = NSPredicate(format: "\(#keyPath(MediaItemsAlbum.isLocal)) = true")
         }
-
-        executeRequest(predicate: predicate, context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
+        
+        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItemsAlbum.isMainLocalAlbum), ascending: false)
+        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItemsAlbum.name), ascending: true)
+        
+        let fetchRequest: NSFetchRequest = MediaItemsAlbum.fetchRequest()
+        fetchRequest.predicate = predicate
+        fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
+        
+        execute(request: fetchRequest, context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
     }
     
     private func saveLocalAlbums(assets: [PHAssetCollection], context: NSManagedObjectContext, completion: @escaping VoidHandler) {
@@ -162,21 +169,6 @@ extension MediaItemsAlbumOperationService {
                 }
             }
             self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
-        }
-    }
-
-    private func notSaved(assets: [PHAssetCollection], context: NSManagedObjectContext, callback: @escaping PhotoAssetCollectionsCallback) {
-        guard localMediaStorage.photoLibraryIsAvailible() else {
-            callback([])
-            return
-        }
-        
-        let localIdentifiers = assets.map { $0.localIdentifier }
-        let predicate = NSPredicate(format: "\(#keyPath(MediaItemsAlbum.localId)) IN %@ AND \(#keyPath(MediaItemsAlbum.isLocal)) = true", localIdentifiers)
-        executeRequest(predicate: predicate, context: context) { mediaItemsAlbums in
-            let alredySavedIDs = mediaItemsAlbums.compactMap { $0.localId }
-            let notSaved = assets.filter { !alredySavedIDs.contains($0.localIdentifier) }
-            callback(notSaved)
         }
     }
     
@@ -213,15 +205,20 @@ extension MediaItemsAlbumOperationService {
             self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
     }
- 
-    func executeRequest(predicate: NSPredicate, limit: Int = 0, context: NSManagedObjectContext, mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
+}
+
+//MARK: - Common Request Methods
+
+extension MediaItemsAlbumOperationService {
+    
+    private func executeRequest(predicate: NSPredicate, limit: Int = 0, context: NSManagedObjectContext, mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
         let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
         request.fetchLimit = limit
         request.predicate = predicate
         execute(request: request, context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
     }
     
-    func execute(request: NSFetchRequest<MediaItemsAlbum>, context: NSManagedObjectContext, mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
+    private func execute(request: NSFetchRequest<MediaItemsAlbum>, context: NSManagedObjectContext, mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
         context.perform {
             var result: [MediaItemsAlbum] = []
             do {
@@ -234,5 +231,4 @@ extension MediaItemsAlbumOperationService {
             mediaItemAlbumsCallBack(result)
         }
     }
-    
 }

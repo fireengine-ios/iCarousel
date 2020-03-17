@@ -76,7 +76,7 @@ enum FeaturePackageType: String, PackageTypeProtocol {
             return .appStore
         case .SLCMFeature:
             return .slcm
-        case .SLCMPaycellFeature, .paycellAllAccessFeature:
+        case .SLCMPaycellFeature, .allAccessPaycellFeature:
             return .paycell
         default:
             assertionFailure()
@@ -145,7 +145,7 @@ enum PackageContentType: Equatable {
         case .feature(.appleFeature), .quota(.apple):
             apple()
         case .quota(.paycellSLCM), .quota(.paycellAllAccess),
-             .feature(.paycellSLCMFeature), .feature(.paycellAllAccessFeature):
+             .feature(.SLCMPaycellFeature), .feature(.allAccessPaycellFeature):
             paycell()
         default:
             notPaymentType()
@@ -169,7 +169,7 @@ enum PackageContentType: Equatable {
     private var payableTypes: [PackageTypeProtocol] {
         [
             FeaturePackageType.appleFeature, FeaturePackageType.SLCMFeature,
-            FeaturePackageType.paycellSLCMFeature, FeaturePackageType.paycellAllAccessFeature,
+            FeaturePackageType.SLCMPaycellFeature, FeaturePackageType.allAccessPaycellFeature,
             QuotaPackageType.apple, QuotaPackageType.SLCM,
             QuotaPackageType.paycellSLCM, QuotaPackageType.paycellAllAccess
         ]

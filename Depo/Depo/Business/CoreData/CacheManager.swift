@@ -54,26 +54,30 @@ final class CacheManager {
         isCacheActualized = false
         isProcessing = true
 
-        MediaItemOperationsService.shared.removeZeroBytesLocalItems { [weak self] _ in
-            MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
-                self?.startProccessingLocalAlbums { [weak self] in
+        self.startProccessingLocalAlbums { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            MediaItemOperationsService.shared.removeZeroBytesLocalItems { [weak self] _ in
+                MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
                     guard let self = self else {
                         return
                     }
-                
+                    
                     if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
                         self.showPreparationCardAfterDelay()
                         self.startAppendingAllRemotes(completion: { [weak self] in
-                            guard let `self` = self,
-                                !self.processingRemoteItems else {
-                                    return
+                            guard let self = self, !self.processingRemoteItems else {
+                                return
                             }
+                            
                             self.userDefaultsVars.currentRemotesPage = 0
                             self.startProcessingAllLocals(completion: { [weak self] in
-                                guard let `self` = self,
-                                    !self.processingLocalItems else {
+                                guard let self = self, !self.processingLocalItems else {
                                         return
                                 }
+                                
                                 //FIXME: need handling if we logouted and locals still in progress
                                 self.isProcessing = false
                                 self.isCacheActualized = true

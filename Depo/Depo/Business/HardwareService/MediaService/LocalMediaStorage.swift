@@ -317,7 +317,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             }
             
             DispatchQueue.global().async { [weak self] in
-                let fetchOptions = PHFetchOptions()
                 let album = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
                 let smartAlbum = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
                 
@@ -330,8 +329,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 [album, smartAlbum].forEach { album in
                     album.enumerateObjects { object, index, stop in
                         dispatchGroup.enter()
-                        let assets = PHAsset.fetchAssets(in: object, options: fetchOptions)
-                        if assets.firstObject != nil {
+                        if object.photosCount > 0 || object.videosCount > 0 {
                             albums.append(object)
                         }
                         dispatchGroup.leave()

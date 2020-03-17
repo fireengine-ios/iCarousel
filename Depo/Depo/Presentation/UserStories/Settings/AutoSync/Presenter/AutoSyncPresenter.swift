@@ -14,51 +14,60 @@
  texts from iOS
  https://wiki.life.com.by/display/LTFizy/004+Auto+Sync+iOS
  */
-class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput, AutoSyncInteractorOutput {
+class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput {
     
     weak var view: AutoSyncViewInput!
     var interactor: AutoSyncInteractorInput!
     var router: AutoSyncRouterInput!
     
     var fromSettings = false
-    private var isFirstCheckPermissions = true
 
     func viewIsReady() {
         startAsyncOperationDisableScreen()
-        interactor.checkPermissions()
-    }
-    
-    func prepaire(syncSettings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
-        completeAsyncOperationEnableScreen()
-        view.prepaire(syncSettings: syncSettings, albums: albums)
+        interactor.prepareCellModels()
     }
     
     func change(settings: AutoSyncSettings, selectedAlbums: [AutoSyncAlbum]) {
         if !fromSettings {
             router.routNextVC()
-            save(settings: settings, selectedAlbums: selectedAlbums)
-        } else {
-            save(settings: settings, selectedAlbums: selectedAlbums)
         }
+        save(settings: settings, selectedAlbums: selectedAlbums)
+        
     }
     
     func save(settings: AutoSyncSettings, selectedAlbums: [AutoSyncAlbum]) {
         interactor.onSave(settings: settings, selectedAlbums: selectedAlbums, fromSettings: fromSettings)
     }
     
-    func onSettingSaved() {
-        
-    }
-    
     func checkPermissions() {
         interactor.checkPermissions()
+    }
+        
+    //MARK : BasePresenter
+    
+    override func outputView() -> Waiting? {
+        return view as? Waiting
+    }
+    
+}
+
+//MARK: - AutoSyncInteractorOutput
+
+extension AutoSyncPresenter: AutoSyncInteractorOutput {
+    func prepaire(syncSettings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
+        completeAsyncOperationEnableScreen()
+        view.prepaire(syncSettings: syncSettings, albums: albums)
+    }
+    
+    func checkPhotoPermissionsFailed() {
+        completeAsyncOperationEnableScreen()
+        view.disableAutoSync()
+        view.checkPermissionsFailedWith(error: TextConstants.cameraAccessAlertText)
     }
     
     func onCheckPermissions(photoAccessGranted: Bool, locationAccessGranted: Bool) {
         guard photoAccessGranted else {
-            completeAsyncOperationEnableScreen()
-            view.disableAutoSync()
-            view.checkPermissionsFailedWith(error: TextConstants.cameraAccessAlertText)
+            checkPhotoPermissionsFailed()
             return
         }
         
@@ -73,19 +82,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
     }
     
     private func checkPermissionsSuccessed() {
-        if isFirstCheckPermissions {
-            isFirstCheckPermissions = false
-            interactor.prepareCellModels()
-        } else {
-            completeAsyncOperationEnableScreen()
-            view.checkPermissionsSuccessed()
-        }
+        completeAsyncOperationEnableScreen()
+        view.checkPermissionsSuccessed()
     }
-        
-    //MARK : BasePresenter
-    
-    override func outputView() -> Waiting? {
-        return view as? Waiting
-    }
-    
 }
