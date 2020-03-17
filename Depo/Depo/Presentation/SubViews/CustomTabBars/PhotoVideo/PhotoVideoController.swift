@@ -752,17 +752,16 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     }
     
     func syncFinished() {
-        let uuids = Array(uploadProgress.keys)
-        guard !uuids.isEmpty else {
+        let trimmedIDs = Array(uploadProgress.keys)
+        guard !trimmedIDs.isEmpty else {
             return
         }
         
         DispatchQueue.toMain {
-            let visibleCells = self.collectionView.visibleCells
-            uuids.forEach({ uuid in
-                self.getCellForFile(objectUUID: uuid) { cell in
-                    if let cell = cell, visibleCells.contains(cell) {
-                         cell.cancelledUploadForObject()
+            trimmedIDs.forEach({ trimmedID in
+                DispatchQueue.toMain {
+                    self.getVisibleCellForLocalFile(objectTrimmedLocalID: trimmedID) { cell in
+                        cell?.cancelledUploadForObject()
                     }
                 }
             })
