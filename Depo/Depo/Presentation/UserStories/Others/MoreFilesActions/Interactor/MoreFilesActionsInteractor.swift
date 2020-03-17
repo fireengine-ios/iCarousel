@@ -285,10 +285,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         divorceItems(type: .moveToTrash,
                      items: item,
                      itemsOperation: { [weak self] item, _, _ in
+                        self?.output?.completeAsyncOperationEnableScreen()
                         self?.moveToTrashItems(items: item.filter({ !$0.isLocalItem }))
             }, albumsOperation: { [weak self] item, _, _ in
+                self?.output?.completeAsyncOperationEnableScreen()
                 self?.moveToTrashAlbums(albums: item)
             }, firOperation: { [weak self] item, success, fail in
+                self?.output?.completeAsyncOperationEnableScreen()
                 if let items = item as? [PeopleItem] {
                     self?.analyticsService.trackFileOperationGAEvent(operationType: .trash,
                                                                      itemsType: .people,
