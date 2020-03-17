@@ -105,7 +105,7 @@ final class MediaItemsAlbumOperationService {
     
     private func getLocalAlbums(context: NSManagedObjectContext, mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
         let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItemsAlbum.isMainLocalAlbum), ascending: false)
-        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItemsAlbum.name), ascending: true)
+        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItemsAlbum.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
     
         let predicate = NSPredicate(format: "\(#keyPath(MediaItemsAlbum.isLocal)) = true")
         
