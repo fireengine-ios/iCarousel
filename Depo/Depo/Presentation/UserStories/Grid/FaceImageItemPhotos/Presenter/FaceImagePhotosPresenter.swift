@@ -62,11 +62,12 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         } else if type == .changeCoverPhoto {
             outputView()?.hideSpinner()
 
-            guard let view = view as? FaceImagePhotosViewController else {
-                return
+            if let view = view as? FaceImagePhotosViewInput {
+                view.reloadSlider()
             }
-            view.albumsSlider?.reloadAllData()
-            if let item = response as? Item {
+            if
+                let view = view as? FaceImagePhotosViewController,
+                let item = response as? Item {
                 view.setHeaderImage(with: item.patchToPreview)
             }
         }

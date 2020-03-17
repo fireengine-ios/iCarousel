@@ -13,7 +13,7 @@ import UIKit
     private let albumsSliderHeight: CGFloat = 140
     private let headerImageHeight: CGFloat = 190
     
-    var albumsSlider: LBAlbumLikePreviewSliderViewController?
+    private var albumsSlider: LBAlbumLikePreviewSliderViewController?
     private var headerView = UIView()
     private var headerImage = LoadingImageView()
     private var gradientHeaderLayer: CALayer?
@@ -223,6 +223,13 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
         
     func setCountImage(_ count: String) {
         countPhotosLabel.text = count
+    }
+    
+    func reloadSlider() {
+        guard let slider = albumsSlider else {
+            return
+        }
+        slider.reloadAllData()
     }
     
 }
