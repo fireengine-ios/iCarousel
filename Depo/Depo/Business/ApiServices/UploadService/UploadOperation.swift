@@ -113,7 +113,11 @@ final class UploadOperation: Operation {
     private func retry(block: @escaping VoidHandler) {
         let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
         debugLog("retrying in \(NumericConstants.secondsBeetweenUploadAttempts) second(s)")
-        dispatchQueue.asyncAfter(deadline: delay, execute: {
+        dispatchQueue.asyncAfter(deadline: delay, execute: { [weak self] in
+            guard let self = self, self.isExecuting else {
+                return
+            }
+            
             self.attemptsCount += 1
             block()
         })
