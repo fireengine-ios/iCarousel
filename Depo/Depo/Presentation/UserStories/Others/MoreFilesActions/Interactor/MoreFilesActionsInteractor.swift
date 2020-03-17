@@ -1471,8 +1471,8 @@ extension MoreFilesActionsInteractor {
                                                   secondAction: { vc in
                                                     vc.close(completion: okHandler)
             })
-            
             DispatchQueue.main.async {
+                self?.router.hideSpiner()
                 self?.router.presentViewController(controller: controller)
             }
         }
