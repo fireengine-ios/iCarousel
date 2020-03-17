@@ -13,7 +13,7 @@ import UIKit
     private let albumsSliderHeight: CGFloat = 140
     private let headerImageHeight: CGFloat = 190
     
-    private var albumsSlider: LBAlbumLikePreviewSliderViewController?
+    var albumsSlider: LBAlbumLikePreviewSliderViewController?
     private var headerView = UIView()
     private var headerImage = LoadingImageView()
     private var gradientHeaderLayer: CALayer?
