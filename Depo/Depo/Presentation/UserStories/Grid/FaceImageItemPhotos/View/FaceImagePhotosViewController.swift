@@ -225,4 +225,11 @@ extension FaceImagePhotosViewController: FaceImagePhotosViewInput {
         countPhotosLabel.text = count
     }
     
+    func reloadSlider() {
+        guard let slider = albumsSlider else {
+            return
+        }
+        slider.reloadAllData()
+    }
+    
 }
