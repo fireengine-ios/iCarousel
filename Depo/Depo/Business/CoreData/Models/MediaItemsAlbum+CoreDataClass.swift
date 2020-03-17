@@ -18,15 +18,4 @@ public class MediaItemsAlbum: NSManagedObject {
         
         self.uuid = uuid
     }
-    
-    convenience init(asset: PHAssetCollection, context: NSManagedObjectContext) {
-        let entityDescr = NSEntityDescription.entity(forEntityName: MediaItemsAlbum.Identifier,
-                                                     in: context)!
-        self.init(entity: entityDescr, insertInto: context)
-        
-        self.localId = asset.localIdentifier
-        self.name = asset.localizedTitle
-        self.isLocal = true
-        self.isMainLocalAlbum = asset.assetCollectionSubtype == .smartAlbumUserLibrary
-    }
 }

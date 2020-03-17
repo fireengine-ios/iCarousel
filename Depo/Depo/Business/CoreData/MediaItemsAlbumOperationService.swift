@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias MediaItemAlbumsCallBack = (_ mediaItemAlbums: [MediaItemsAlbum]) -> Void
+typealias MediaItemLocalAlbumsCallBack = (_ mediaItemAlbums: [MediaItemsLocalAlbum]) -> Void
 typealias PhotoAssetCollectionsCallback = (_ assets: [PHAssetCollection]) -> Void
 
 final class MediaItemsAlbumOperationService {
@@ -22,7 +22,7 @@ final class MediaItemsAlbumOperationService {
     
     let privateQueue = DispatchQueue(label: DispatchQueueLabels.mediaItemAlbumsOperationsService, attributes: .concurrent)
     
-    private var waitingLocalAlbumsCallBack: MediaItemAlbumsCallBack?
+    private var waitingLocalAlbumsCallBack: MediaItemLocalAlbumsCallBack?
     
     //MARK: -
     
@@ -43,15 +43,15 @@ final class MediaItemsAlbumOperationService {
         }
     }
     
-    func getAutoSyncAlbums(mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
+    func getAutoSyncAlbums(albumsCallBack: @escaping MediaItemLocalAlbumsCallBack) {
         if inProcessLocalAlbums {
-            waitingLocalAlbumsCallBack = mediaItemAlbumsCallBack
+            waitingLocalAlbumsCallBack = albumsCallBack
             return
         }
         waitingLocalAlbumsCallBack = nil
         
         let context = coreDataStack.newChildBackgroundContext
-        getLocalAlbums(context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
+        getLocalAlbums(context: context, albumsCallBack: albumsCallBack)
     }
     
     func save(selectedAlbums: [AutoSyncAlbum]) {
@@ -119,29 +119,27 @@ extension MediaItemsAlbumOperationService {
                 self.inProcessLocalAlbums = false
                 
                 if let callback = self.waitingLocalAlbumsCallBack {
-                    self.getLocalAlbums(context: context, mediaItemAlbumsCallBack: callback)
+                    self.getLocalAlbums(context: context, albumsCallBack: callback)
                 }
                 completion()
             })
         }
     }
     
-    private func getLocalAlbums(localIds: [String]? = nil, context: NSManagedObjectContext, mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
-        let predicate: NSPredicate
+    private func getLocalAlbums(localIds: [String]? = nil, context: NSManagedObjectContext, albumsCallBack: @escaping MediaItemLocalAlbumsCallBack) {
+        
+        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItemsLocalAlbum.isMain), ascending: false)
+        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItemsLocalAlbum.name), ascending: true)
+        
+        let fetchRequest: NSFetchRequest = MediaItemsLocalAlbum.fetchRequest()
+        
         if let localIds = localIds {
-            predicate = NSPredicate(format: "\(#keyPath(MediaItemsAlbum.isLocal)) = true AND \(#keyPath(MediaItemsAlbum.localId)) IN %@", localIds)
-        } else {
-            predicate = NSPredicate(format: "\(#keyPath(MediaItemsAlbum.isLocal)) = true")
+            fetchRequest.predicate = NSPredicate(format: "\(#keyPath(MediaItemsLocalAlbum.localId)) IN %@", localIds)
         }
         
-        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItemsAlbum.isMainLocalAlbum), ascending: false)
-        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItemsAlbum.name), ascending: true)
-        
-        let fetchRequest: NSFetchRequest = MediaItemsAlbum.fetchRequest()
-        fetchRequest.predicate = predicate
         fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
         
-        execute(request: fetchRequest, context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
+        execute(request: fetchRequest, context: context, albumsCallBack: albumsCallBack)
     }
     
     private func saveLocalAlbums(assets: [PHAssetCollection], context: NSManagedObjectContext, completion: @escaping VoidHandler) {
@@ -157,7 +155,7 @@ extension MediaItemsAlbumOperationService {
                     album.name = asset.localizedTitle
                 } else {
                     //create new local albums
-                    _ = MediaItemsAlbum(asset: asset, context: context)
+                    _ = MediaItemsLocalAlbum(asset: asset, context: context)
                 }
             }
             
@@ -176,7 +174,7 @@ extension MediaItemsAlbumOperationService {
         let context = coreDataStack.newChildBackgroundContext
         context.perform { [weak self] in
             assets.forEach {
-                _ = MediaItemsAlbum(asset: $0, context: context)
+                _ = MediaItemsLocalAlbum(asset: $0, context: context)
             }
             self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
@@ -185,7 +183,7 @@ extension MediaItemsAlbumOperationService {
     private func deleteAlbumsFromBase(assets: [PHAssetCollection], completion: @escaping VoidHandler) {
         let context = coreDataStack.newChildBackgroundContext
         let localIds = assets.map { $0.localIdentifier }
-        getLocalAlbums(localIds: localIds, context: context, mediaItemAlbumsCallBack: { [weak self] mediaItemAlbums in
+        getLocalAlbums(localIds: localIds, context: context, albumsCallBack: { [weak self] mediaItemAlbums in
             //TODO: need to remove relationships
             mediaItemAlbums.forEach { context.delete($0) }
             self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
@@ -211,16 +209,16 @@ extension MediaItemsAlbumOperationService {
 
 extension MediaItemsAlbumOperationService {
     
-    private func executeRequest(predicate: NSPredicate, limit: Int = 0, context: NSManagedObjectContext, mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
-        let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
+    private func executeRequest(predicate: NSPredicate, limit: Int = 0, context: NSManagedObjectContext, albumsCallBack: @escaping MediaItemLocalAlbumsCallBack) {
+        let request: NSFetchRequest = MediaItemsLocalAlbum.fetchRequest()
         request.fetchLimit = limit
         request.predicate = predicate
-        execute(request: request, context: context, mediaItemAlbumsCallBack: mediaItemAlbumsCallBack)
+        execute(request: request, context: context, albumsCallBack: albumsCallBack)
     }
     
-    private func execute(request: NSFetchRequest<MediaItemsAlbum>, context: NSManagedObjectContext, mediaItemAlbumsCallBack: @escaping MediaItemAlbumsCallBack) {
+    private func execute(request: NSFetchRequest<MediaItemsLocalAlbum>, context: NSManagedObjectContext, albumsCallBack: @escaping MediaItemLocalAlbumsCallBack) {
         context.perform {
-            var result: [MediaItemsAlbum] = []
+            var result: [MediaItemsLocalAlbum] = []
             do {
                 result = try context.fetch(request)
             } catch {
@@ -228,7 +226,7 @@ extension MediaItemsAlbumOperationService {
                 debugLog(errorMessage)
                 assertionFailure(errorMessage)
             }
-            mediaItemAlbumsCallBack(result)
+            albumsCallBack(result)
         }
     }
 }
