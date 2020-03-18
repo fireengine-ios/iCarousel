@@ -244,7 +244,7 @@ public class MediaItem: NSManagedObject {
 extension MediaItem {
 
     private func getRelatedPredicate(item: WrapData, local: Bool) -> NSPredicate {
-        return NSPredicate(format: "isLocalItemValue == %@ AND (trimmedLocalFileID == %@ OR md5Value == %@ OR \(#keyPath(MediaItem.localFileID)) == %@)", NSNumber(value: local), item.getTrimmedLocalID(), item.md5, item.getLocalID())
+        return NSPredicate(format: "\(PropertyNameKey.isLocalItemValue) = %@ AND (\(PropertyNameKey.trimmedLocalFileID) = %@ OR \(PropertyNameKey.md5Value) = %@ OR \(PropertyNameKey.localFileID) = %@)", NSNumber(value: local), item.getTrimmedLocalID(), item.md5, item.getLocalID())
     }
     
     func getRelatedLocals(for wrapItem: WrapData, context: NSManagedObjectContext)  -> [MediaItem] {

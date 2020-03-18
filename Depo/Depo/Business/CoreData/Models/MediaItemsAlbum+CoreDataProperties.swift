@@ -9,6 +9,21 @@
 import Foundation
 import CoreData
 
+extension MediaItemsAlbum {
+    enum PropertyNameKey {
+        static let audioCount = #keyPath(MediaItemsAlbum.audioCount)
+        static let creationDate = #keyPath(MediaItemsAlbum.creationDate)
+        static let fileType = #keyPath(MediaItemsAlbum.fileType)
+        static let imageCount = #keyPath(MediaItemsAlbum.imageCount)
+        static let lastModifiDate = #keyPath(MediaItemsAlbum.lastModifiDate)
+        static let name = #keyPath(MediaItemsAlbum.name)
+        static let readOnly = #keyPath(MediaItemsAlbum.readOnly)
+        static let uploadDateValue = #keyPath(MediaItemsAlbum.uploadDateValue)
+        static let uuid = #keyPath(MediaItemsAlbum.uuid)
+        static let videoCount = #keyPath(MediaItemsAlbum.videoCount)
+        static let items = #keyPath(MediaItemsAlbum.items)
+    }
+}
 
 extension MediaItemsAlbum {
     
