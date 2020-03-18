@@ -22,12 +22,12 @@ typealias PhotoLibraryAlbumItemsChanges = [PhotoLibraryChangeType: [PHAssetColle
 extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
     
     func photoLibraryDidChange(_ changeInstance: PHChange) {
-        processingAssetChanges(changeInstance)
-        processingAlbumsChanges(changeInstance)
-        processingSmartAlbumsChanges(changeInstance)
+        processAssetChanges(changeInstance)
+        processAlbumsChanges(changeInstance)
+        processSmartAlbumsChanges(changeInstance)
         
     }
-    private func processingAssetChanges(_ changeInstance: PHChange) {
+    private func processAssetChanges(_ changeInstance: PHChange) {
         guard fetchResult != nil, let changes = changeInstance.changeDetails(for: fetchResult) else {
             return
         }
@@ -88,7 +88,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         }
     }
     
-    private func processingAlbumsChanges(_ changeInstance: PHChange) {
+    private func processAlbumsChanges(_ changeInstance: PHChange) {
         guard fetchAlbumResult != nil, let changes = changeInstance.changeDetails(for: fetchAlbumResult) else {
             return
         }
@@ -96,10 +96,10 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         debugPrint("processingAlbumsChanges")
         fetchAlbumResult = changes.fetchResultAfterChanges
         
-        processingAlbums(changes)
+        processAlbums(changes)
     }
 
-    private func processingSmartAlbumsChanges(_ changeInstance: PHChange) {
+    private func processSmartAlbumsChanges(_ changeInstance: PHChange) {
         guard fetchSmartAlbumResult != nil, let changes = changeInstance.changeDetails(for: fetchSmartAlbumResult) else {
             return
         }
@@ -107,11 +107,11 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         debugPrint("processingSmartAlbumsChanges")
         fetchSmartAlbumResult = changes.fetchResultAfterChanges
         
-        processingAlbums(changes)
+        processAlbums(changes)
     }
 
     
-    private func processingAlbums(_ changes: PHFetchResultChangeDetails<PHAssetCollection>) {
+    private func processAlbums(_ changes: PHFetchResultChangeDetails<PHAssetCollection>) {
         guard changes.hasIncrementalChanges else {
             return
         }
