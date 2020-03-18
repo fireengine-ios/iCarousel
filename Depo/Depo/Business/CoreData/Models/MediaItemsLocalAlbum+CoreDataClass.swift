@@ -17,8 +17,25 @@ public class MediaItemsLocalAlbum: NSManagedObject {
                                                      in: context)!
         self.init(entity: entityDescr, insertInto: context)
         
-        self.localId = asset.localIdentifier
-        self.name = asset.localizedTitle
-        self.isMain = asset.assetCollectionSubtype == .smartAlbumUserLibrary
+        localId = asset.localIdentifier
+        name = asset.localizedTitle
+        isMain = asset.assetCollectionSubtype == .smartAlbumUserLibrary
+        
+        updateRealtedMediaItems(album: asset, context: context)
+    }
+}
+
+extension MediaItemsLocalAlbum {
+    private func updateRealtedMediaItems(album: PHAssetCollection, context: NSManagedObjectContext) {
+        let assetsIdentifiers = album.allAssets.compactMap { $0.localIdentifier }
+        
+        let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
+        request.predicate = NSPredicate(format: "(\(#keyPath(MediaItem.localFileID)) IN %@)", assetsIdentifiers)
+        
+        if let relatedMediaItems = try? context.fetch(request) {
+            relatedMediaItems.forEach {
+                addToItems($0)
+            }
+        }
     }
 }

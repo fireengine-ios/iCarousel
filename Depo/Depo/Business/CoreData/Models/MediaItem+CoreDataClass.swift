@@ -98,6 +98,7 @@ public class MediaItem: NSManagedObject {
             }
         }
         
+        updateRelatedLocalAlbums(context: context)
         
         //empty monthValue for missing dates section
 //        switch wrapData.patchToPreview {
@@ -270,6 +271,22 @@ extension MediaItem {
     private func updateRemoteRelated(localMediaItems: [MediaItem]) {
         localMediaItems.forEach {
             $0.addToRelatedRemotes(self)
+        }
+    }
+    
+    private func updateRelatedLocalAlbums(context: NSManagedObjectContext) {
+        guard isLocalItemValue, let localId = localFileID else {
+            return
+        }
+        
+        let localAlbumIds = LocalAlbumsCache.shared.albumIds(assetId: localId)
+        let request = NSFetchRequest<MediaItemsLocalAlbum>(entityName: MediaItemsLocalAlbum.Identifier)
+        request.predicate = NSPredicate(format: "(\(#keyPath(MediaItemsLocalAlbum.localId)) IN %@)", localAlbumIds)
+        
+        if let relatedAlbums = try? context.fetch(request) {
+            relatedAlbums.forEach {
+                $0.addToItems(self)
+            }
         }
     }
 }
