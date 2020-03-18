@@ -11,6 +11,42 @@ import CoreData
 
 
 extension MediaItem {
+    enum PropertyNameKey {
+        static let sortingDate = #keyPath(MediaItem.sortingDate)
+        static let creationDateValue = #keyPath(MediaItem.creationDateValue)
+        static let favoritesValue = #keyPath(MediaItem.favoritesValue)
+        static let fileSizeValue = #keyPath(MediaItem.fileSizeValue)
+        static let fileTypeValue = #keyPath(MediaItem.fileTypeValue)
+        static let idValue = #keyPath(MediaItem.idValue)
+        static let uuid = #keyPath(MediaItem.uuid)
+        static let isLocalItemValue = #keyPath(MediaItem.isLocalItemValue)
+        static let lastModifiDateValue = #keyPath(MediaItem.lastModifiDateValue)
+        static let trimmedLocalFileID = #keyPath(MediaItem.trimmedLocalFileID)
+        static let localFileID = #keyPath(MediaItem.localFileID)
+        static let md5Value = #keyPath(MediaItem.md5Value)
+        static let monthValue = #keyPath(MediaItem.monthValue)
+        static let nameValue = #keyPath(MediaItem.nameValue)
+        static let patchToPreviewValue = #keyPath(MediaItem.patchToPreviewValue)
+        static let parent = #keyPath(MediaItem.parent)
+        static let syncStatusValue = #keyPath(MediaItem.syncStatusValue)
+        static let urlToFileValue = #keyPath(MediaItem.urlToFileValue)
+        static let albums = #keyPath(MediaItem.albums)
+        static let metadata = #keyPath(MediaItem.metadata)
+        static let isFolder = #keyPath(MediaItem.isFolder)
+        static let objectSyncStatus = #keyPath(MediaItem.objectSyncStatus)
+        static let isFiltered = #keyPath(MediaItem.isFiltered)
+        static let isICloud = #keyPath(MediaItem.isICloud)
+        static let relatedLocal = #keyPath(MediaItem.relatedLocal)
+        static let relatedRemotes = #keyPath(MediaItem.relatedRemotes)
+        static let session = #keyPath(MediaItem.session)
+        static let isTranscoded = #keyPath(MediaItem.isTranscoded)
+        static let hasMissingDateRemotes = #keyPath(MediaItem.hasMissingDateRemotes)
+        static let status = #keyPath(MediaItem.status)
+        static let isAvailable = #keyPath(MediaItem.isAvailable)
+    }
+}
+
+extension MediaItem {
     
     @nonobjc public class func fetchRequest() -> NSFetchRequest<MediaItem> {
         return NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)

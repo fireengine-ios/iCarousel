@@ -128,13 +128,13 @@ extension MediaItemsAlbumOperationService {
     
     private func getLocalAlbums(localIds: [String]? = nil, context: NSManagedObjectContext, albumsCallBack: @escaping MediaItemLocalAlbumsCallBack) {
         
-        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItemsLocalAlbum.isMain), ascending: false)
-        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItemsAlbum.name), ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
+        let sortDescriptor1 = NSSortDescriptor(key: MediaItemsLocalAlbum.PropertyNameKey.isMain, ascending: false)
+        let sortDescriptor2 = NSSortDescriptor(key: MediaItemsAlbum.PropertyNameKey.name, ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)))
         
         let fetchRequest: NSFetchRequest = MediaItemsLocalAlbum.fetchRequest()
         
         if let localIds = localIds {
-            fetchRequest.predicate = NSPredicate(format: "\(#keyPath(MediaItemsLocalAlbum.localId)) IN %@", localIds)
+            fetchRequest.predicate = NSPredicate(format: "\(MediaItemsLocalAlbum.PropertyNameKey.localId) IN %@", localIds)
         }
         
         fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]

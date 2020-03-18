@@ -10,17 +10,6 @@ import Foundation
 import CoreData
 
 class PredicateRules {
-
-    private enum Keys {
-        static let albumUUID = "\(#keyPath(MediaItem.albums)).\(#keyPath(MediaItemsAlbum.uuid))"
-        static let favoritesValue = #keyPath(MediaItem.favoritesValue)
-        static let fileTypeValue = #keyPath(MediaItem.fileTypeValue)
-        static let isLocalItemValue = #keyPath(MediaItem.isLocalItemValue)
-        static let nameValue = #keyPath(MediaItem.nameValue)
-        static let parent = #keyPath(MediaItem.parent)
-        static let syncStatusValue = #keyPath(MediaItem.syncStatusValue)
-        static let trimmedLocalFileID  = #keyPath(MediaItem.trimmedLocalFileID)
-    }
         
 // MARK: By file type
     
@@ -50,7 +39,7 @@ class PredicateRules {
         let end = FileType.application(.ppt).valueForCoreDataMapping() + 1
         let list = [start, end]
         
-        return NSPredicate(format: "\(Keys.fileTypeValue) BETWEEN %@ ", list)
+        return NSPredicate(format: "\(MediaItem.PropertyNameKey.fileTypeValue) BETWEEN %@ ", list)
     }
     
     var all: NSPredicate {
@@ -63,21 +52,21 @@ class PredicateRules {
             !$0.isLocalItem
         }
         let list = serverObjects.map { $0.getTrimmedLocalID() }
-        let predicate = NSPredicate(format: "\(Keys.isLocalItemValue) = true AND \(Keys.trimmedLocalFileID) IN %@", list)
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.trimmedLocalFileID) IN %@", list)
         return predicate
     }
     
     // MARK: By favorite staus
     
     var favorite: NSPredicate {
-        return NSPredicate(format: "\(Keys.favoritesValue) = true")
+        return NSPredicate(format: "\(MediaItem.PropertyNameKey.favoritesValue) = true")
     }
     
     
     // MARK: By sync status
     
     private static func predicateFromFileType(type: MoreActionsConfig.MoreActionsFileType) -> NSPredicate? {
-        return NSPredicate(format: "\(Keys.fileTypeValue) = %d", type.convertToFileType().valueForCoreDataMapping() )
+        return NSPredicate(format: "\(MediaItem.PropertyNameKey.fileTypeValue) = %d", type.convertToFileType().valueForCoreDataMapping() )
     }
     
     private func predicateFromGeneralFilterType(type: GeneralFilesFiltrationType) -> NSPredicate? {
@@ -85,9 +74,9 @@ class PredicateRules {
         case .favoriteStatus(.all):
             return nil
         case .favoriteStatus(.favorites):
-            return NSPredicate(format: "\(Keys.favoritesValue) = true")
+            return NSPredicate(format: "\(MediaItem.PropertyNameKey.favoritesValue) = true")
         case .favoriteStatus(.notFavorites):
-            return NSPredicate(format: "\(Keys.favoritesValue) = false")
+            return NSPredicate(format: "\(MediaItem.PropertyNameKey.favoritesValue) = false")
         case .fileType(let specificType):
             switch specificType {
             case .allDocs:
@@ -98,16 +87,16 @@ class PredicateRules {
                 let predicates = allDocsTypes.flatMap { predicateFromGeneralFilterType(type: $0) }
                 return NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
             default:
-                return NSPredicate(format: "\(Keys.fileTypeValue) = %d", specificType.valueForCoreDataMapping())
+                return NSPredicate(format: "\(MediaItem.PropertyNameKey.fileTypeValue) = %d", specificType.valueForCoreDataMapping())
             }
         case .syncStatus(let syncFlag):
-            return NSPredicate(format: "\(Keys.syncStatusValue) = %i", syncFlag.valueForCoreDataMapping())
+            return NSPredicate(format: "\(MediaItem.PropertyNameKey.syncStatusValue) = %i", syncFlag.valueForCoreDataMapping())
         case .localStatus(let localFlag):
             switch localFlag {
             case .nonLocal:
-                return NSPredicate(format: "\(Keys.isLocalItemValue) = false")
+                return NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = false")
             case .local:
-                return NSPredicate(format: "\(Keys.isLocalItemValue) = true")
+                return NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true")
             case .all:
                 return nil
             }
@@ -118,15 +107,15 @@ class PredicateRules {
 //            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND md5Value IN %@", list)
 //            return predicate
         case .rootFolder(let rootUUID):
-            let rootFolderPredicate = NSPredicate(format: "\(Keys.parent) = %@", rootUUID)
+            let rootFolderPredicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.parent) = %@", rootUUID)
             return rootFolderPredicate
         case .rootAlbum(let albumUUID):
-            let rootAlbumPredicate = NSPredicate(format: "ANY \(Keys.albumUUID) = %@", albumUUID) //LR-2356
+            let rootAlbumPredicate = NSPredicate(format: "ANY \(MediaItem.PropertyNameKey.albums).\(MediaItemsAlbum.PropertyNameKey.uuid) = %@", albumUUID) //LR-2356
             return rootAlbumPredicate
         case .name(let text):
-            return NSPredicate(format: "\(Keys.nameValue) CONTAINS[cd] %@", text)
+            return NSPredicate(format: "\(MediaItem.PropertyNameKey.nameValue) CONTAINS[cd] %@", text)
         case .parentless:
-            let rootFolderPredicate = NSPredicate(format: "\(Keys.parent) = nil OR \(Keys.parent) = %@", "")
+            let rootFolderPredicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.parent) = nil OR \(MediaItem.PropertyNameKey.parent) = %@", "")
             return rootFolderPredicate
         }
     }

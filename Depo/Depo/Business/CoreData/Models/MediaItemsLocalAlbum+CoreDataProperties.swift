@@ -10,6 +10,18 @@
 import Foundation
 import CoreData
 
+extension MediaItemsLocalAlbum {
+    enum PropertyNameKey {
+        static let creationDate = #keyPath(MediaItemsLocalAlbum.creationDate)
+        static let fileType = #keyPath(MediaItemsLocalAlbum.fileType)
+        static let isEnabled = #keyPath(MediaItemsLocalAlbum.isEnabled)
+        static let isMain = #keyPath(MediaItemsLocalAlbum.isMain)
+        static let localId = #keyPath(MediaItemsLocalAlbum.localId)
+        static let name = #keyPath(MediaItemsLocalAlbum.name )
+        static let items = #keyPath(MediaItemsLocalAlbum.items)
+        static let relatedRemote = #keyPath(MediaItemsLocalAlbum.relatedRemote)
+    }
+}
 
 extension MediaItemsLocalAlbum {
     
