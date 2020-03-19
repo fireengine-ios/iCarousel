@@ -35,6 +35,7 @@ extension MediaItemsLocalAlbum {
         if let relatedMediaItems = try? context.fetch(request) {
             relatedMediaItems.forEach {
                 addToItems($0)
+                $0.isAvailable = true //by default for new Album
             }
         }
     }

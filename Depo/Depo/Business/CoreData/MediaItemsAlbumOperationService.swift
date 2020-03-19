@@ -115,6 +115,7 @@ final class MediaItemsAlbumOperationService {
                 items.forEach {
                     $0.removeFromLocalAlbums(album)
                 }
+                updatedItems.addObjects(from: items)
             } else if album.isEnabled {
                 items.forEach {
                     $0.isAvailable = true
