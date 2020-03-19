@@ -1397,7 +1397,7 @@
 "LifeboxLargePopUpSubTitleBeetween80And99" = "Paket yükseltme seçeneklerine göz at!";
 "LifeboxLargePopUpSubTitle100Premium" = "lifebox alanını doldurdun. Anılarını saklamaya devam etmek için yeni bir paket alabilir veya içeriklerini sahip olduğun alana sığacak şekilde azaltabilirsin.";
 "LifeboxLargePopUpSubTitle100Freemium" = "lifebox saklama alanını doldurdun. Yeni bir paket satın almazsan veya içeriklerini mevcut saklama alanına sığacak şekilde azaltmazsan, tüm içeriklerin silinecek.";
-"empty_trash_bin" = "Çop Kutusunu Temizle";
+"empty_trash_bin" = "Çöp Kutusunu Temizle";
 "confirm_dialog_header_empty_trashbin" = "Çöp Kutusunu Temizle";
 "confirm_empty_trashbin" = "Çöp kutusundaki tüm içeriklerin kalıcı olarak silinecek. Devam etmek istiyor musun?";
 "confirm_empty_trashbin_button" = "Çöp Kutusunu Temizle";
