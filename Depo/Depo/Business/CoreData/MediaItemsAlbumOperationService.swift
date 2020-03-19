@@ -128,15 +128,7 @@ final class MediaItemsAlbumOperationService {
             return
         }
         
-        for item in mediaItems {
-            autoreleasepool {
-                if let localAlbums = item.localAlbums?.array as? [MediaItemsLocalAlbum] {
-                    item.isAvailable = localAlbums.first(where: { $0.isEnabled }) != nil
-                } else {
-                    item.isAvailable = true
-                }
-            }
-        }
+        mediaItems.forEach { $0.updateAvalability() }
     }
 }
 

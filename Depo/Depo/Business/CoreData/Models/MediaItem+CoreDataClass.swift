@@ -239,6 +239,19 @@ public class MediaItem: NSManagedObject {
             sortingDate = nil
         }
     }
+    
+    func updateAvalability() {
+        if let localAlbums = localAlbums?.array as? [MediaItemsLocalAlbum] {
+            if localAlbums.isEmpty {
+                //case for main album
+                isAvailable = true
+            } else {
+                isAvailable = localAlbums.first(where: { $0.isEnabled }) != nil
+            }
+        } else {
+            isAvailable = false
+        }
+    }
 }
 
 //MARK: - relations

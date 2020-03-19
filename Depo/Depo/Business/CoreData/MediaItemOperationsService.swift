@@ -601,12 +601,14 @@ final class MediaItemOperationsService {
                 mediaItems.forEach { mediaItem in
                     if let localId = mediaItem.localFileID,
                         let albumAssetsIds = deletedRelationships[localId],
-                        let relatedAlbums = mediaItem.localAlbums?.array as? [MediaItemsLocalAlbum] {
+                        var relatedAlbums = mediaItem.localAlbums?.array as? [MediaItemsLocalAlbum] {
                         
                         let deletedAlbums = relatedAlbums.filter { albumAssetsIds.contains($0.localId ?? "") }
                         deletedAlbums.forEach {
                             mediaItem.removeFromLocalAlbums($0)
+                            relatedAlbums.remove($0)
                         }
+                        mediaItem.updateAvalability()
                     }
                 }
             }
@@ -628,6 +630,7 @@ final class MediaItemOperationsService {
                         mediaItemAlbums.forEach { album in
                             if let localId = album.localId, albumsIds.contains(localId) {
                                 album.addToItems(mediaItem)
+                                mediaItem.updateAvalability()
                             }
                         }
                     }
