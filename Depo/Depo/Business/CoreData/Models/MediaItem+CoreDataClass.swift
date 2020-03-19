@@ -281,7 +281,7 @@ extension MediaItem {
         
         let localAlbumIds = LocalAlbumsCache.shared.albumIds(assetId: localId)
         let request = NSFetchRequest<MediaItemsLocalAlbum>(entityName: MediaItemsLocalAlbum.Identifier)
-        request.predicate = NSPredicate(format: "(\(#keyPath(MediaItemsLocalAlbum.localId)) IN %@)", localAlbumIds)
+        request.predicate = NSPredicate(format: "\(MediaItemsLocalAlbum.PropertyNameKey.localId) IN %@ AND \(MediaItemsLocalAlbum.PropertyNameKey.isMain) = false", localAlbumIds)
         
         if let relatedAlbums = try? context.fetch(request) {
             relatedAlbums.forEach {

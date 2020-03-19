@@ -71,6 +71,7 @@ extension MediaItem {
     @NSManaged public var syncStatusValue: Int16
     @NSManaged public var urlToFileValue: String?
     @NSManaged public var albums: NSOrderedSet?
+    @NSManaged public var localAlbums: NSOrderedSet?
     @NSManaged public var metadata: MediaItemsMetaData?
     @NSManaged public var isFolder: Bool
     @NSManaged public var objectSyncStatus: NSSet?
@@ -167,4 +168,39 @@ extension MediaItem {
     @objc(removeRelatedRemotes:)
     @NSManaged public func removeFromRelatedRemotes(_ values: NSSet)
     
+}
+
+// MARK: Generated accessors for localAlbums
+extension MediaItem {
+
+    @objc(insertObject:inLocalAlbumsAtIndex:)
+    @NSManaged public func insertIntoLocalAlbums(_ value: MediaItemsLocalAlbum, at idx: Int)
+
+    @objc(removeObjectFromLocalAlbumsAtIndex:)
+    @NSManaged public func removeFromLocalAlbums(at idx: Int)
+
+    @objc(insertLocalAlbums:atIndexes:)
+    @NSManaged public func insertIntoLocalAlbums(_ values: [MediaItemsLocalAlbum], at indexes: NSIndexSet)
+
+    @objc(removeLocalAlbumsAtIndexes:)
+    @NSManaged public func removeFromLocalAlbums(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInLocalAlbumsAtIndex:withObject:)
+    @NSManaged public func replaceLocalAlbums(at idx: Int, with value: MediaItemsLocalAlbum)
+
+    @objc(replaceLocalAlbumsAtIndexes:withLocalAlbums:)
+    @NSManaged public func replaceLocalAlbums(at indexes: NSIndexSet, with values: [MediaItemsLocalAlbum])
+
+    @objc(addLocalAlbumsObject:)
+    @NSManaged public func addToLocalAlbums(_ value: MediaItemsLocalAlbum)
+
+    @objc(removeLocalAlbumsObject:)
+    @NSManaged public func removeFromLocalAlbums(_ value: MediaItemsLocalAlbum)
+
+    @objc(addLocalAlbums:)
+    @NSManaged public func addToLocalAlbums(_ values: NSOrderedSet)
+
+    @objc(removeLocalAlbums:)
+    @NSManaged public func removeFromLocalAlbums(_ values: NSOrderedSet)
+
 }

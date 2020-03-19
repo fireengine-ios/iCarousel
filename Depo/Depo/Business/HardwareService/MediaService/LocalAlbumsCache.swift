@@ -33,6 +33,20 @@ final class LocalAlbumsCache {
         }
     }
     
+    func remove(albumId: String, with assetIds: [String]) {
+        queue.async(flags: .barrier) {
+            assetIds.forEach {
+                self.storage[$0]?.remove(albumId)
+            }
+        }
+    }
+    
+    func remove(albumId: String, for assetId: String ) {
+        queue.sync {
+            self.storage[assetId]?.remove(albumId)
+        }
+    }
+    
     func albumIds(assetId: String) -> [String] {
         var result = [String]()
         queue.sync {

@@ -23,6 +23,8 @@ final class MediaItemOperationsService {
     static let shared = MediaItemOperationsService()
     
     private lazy var coreDataStack: CoreDataStack = factory.resolve()
+    private lazy var localAlbumsCache = LocalAlbumsCache.shared
+    private lazy var mediaAlbumsService = MediaItemsAlbumOperationService.shared
     
     let privateQueue = DispatchQueue(label: DispatchQueueLabels.mediaItemOperationsService, attributes: .concurrent)
     
@@ -292,6 +294,11 @@ final class MediaItemOperationsService {
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
     
+    func mediaItems(by localIds: [String], context: NSManagedObjectContext, mediaItemsCallBack: @escaping MediaItemsCallBack) {
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.localFileID) IN %@", localIds)
+        executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
+    }
+    
     func executeSortedRequest(predicate: NSPredicate, limit: Int = 0, context: NSManagedObjectContext, mediaItemsCallBack: @escaping MediaItemsCallBack) {
         let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
         request.fetchLimit = limit
@@ -550,9 +557,85 @@ final class MediaItemOperationsService {
         deleteObjects(fromFetch: request, context: context, completion: completion)
     }
     
-    func update(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
-        //TODO: NEED TO IMPLEMENT
-        completion()
+    func update(localMediaItems assets: [PHAsset], completion: @escaping VoidHandler) {
+        //update relationships between LocalAlbums and MediaItems
+        
+        //localMediaItemId: [albumLocalId]
+        var appendRelationships = [String: [String]]()
+        var deletedRelationships = [String: [String]]()
+        
+        assets.forEach { asset in
+            let albumIds = Set(localAlbumsCache.albumIds(assetId: asset.localIdentifier))
+            let albumAssets = asset.containingAlbums
+            let albumAssetsIds = Set(albumAssets.map { $0.localIdentifier })
+            
+            let appendAlbumsIds = albumAssetsIds.subtracting(albumIds)
+            if !appendAlbumsIds.isEmpty {
+                let assetsArray = Array(appendAlbumsIds)
+                appendRelationships[asset.localIdentifier] = assetsArray
+                
+                assetsArray.forEach {
+                    localAlbumsCache.append(albumId: $0, with: [asset.localIdentifier])
+                }
+            }
+            
+            let deletedAlbumsIds = albumIds.subtracting(albumAssetsIds)
+            if !deletedAlbumsIds.isEmpty {
+                let assetsArray = Array(deletedAlbumsIds)
+                deletedRelationships[asset.localIdentifier] = assetsArray
+
+                assetsArray.forEach {
+                    localAlbumsCache.remove(albumId: $0, for: asset.localIdentifier)
+                }
+            }
+        }
+        
+        let context = coreDataStack.newChildBackgroundContext
+        let localIds = assets.map { $0.localIdentifier }
+        mediaItems(by: localIds, context: context) { [weak self] mediaItems in
+            guard let self = self else {
+                return
+            }
+            
+            if !deletedRelationships.isEmpty {
+                mediaItems.forEach { mediaItem in
+                    if let localId = mediaItem.localFileID,
+                        let albumAssetsIds = deletedRelationships[localId],
+                        let relatedAlbums = mediaItem.localAlbums?.array as? [MediaItemsLocalAlbum] {
+                        
+                        let deletedAlbums = relatedAlbums.filter { albumAssetsIds.contains($0.localId ?? "") }
+                        deletedAlbums.forEach {
+                            mediaItem.removeFromLocalAlbums($0)
+                        }
+                    }
+                }
+            }
+
+            if appendRelationships.isEmpty {
+                self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
+                return
+            }
+            
+            let appendAssetsIds = appendRelationships.values.flatMap { $0 }
+            self.mediaAlbumsService.getLocalAlbums(localIds: appendAssetsIds, context: context) { [weak self] mediaItemAlbums in
+                guard let self = self else {
+                    return
+                }
+                
+                //add relationships
+                appendRelationships.forEach { mediaItemLocalId, albumsIds in
+                    if let mediaItem = mediaItems.first(where: { $0.localFileID == mediaItemLocalId }) {
+                        mediaItemAlbums.forEach { album in
+                            if let localId = album.localId, albumsIds.contains(localId) {
+                                album.addToItems(mediaItem)
+                            }
+                        }
+                    }
+                }
+                
+                self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
+            }
+        }
     }
     
     private let localsAppendingQueue: OperationQueue = {
