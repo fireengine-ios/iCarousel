@@ -94,7 +94,7 @@ class SimpleUpload: UploadRequestParametrs {
             HeaderConstant.applicationLifecycleState : lifecycleState,
             HeaderConstant.ContentType           : item.uploadContentType,
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
-            HeaderConstant.objecMetaDevice       : UIDevice.current.identifierForVendor?.uuidString ?? "",
+            HeaderConstant.objecMetaDevice       : Device.deviceId ?? "",
 //            HeaderConstant.XMetaRecentServerHash : "s",
             HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUID,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
@@ -180,7 +180,7 @@ final class ResumableUpload: UploadRequestParametrs {
         header = header + [
             HeaderConstant.ContentType : item.uploadContentType,
             HeaderConstant.XMetaStrategy : uploadStrategy.rawValue,
-            HeaderConstant.objecMetaDevice : UIDevice.current.identifierForVendor?.uuidString ?? "",
+            HeaderConstant.objecMetaDevice : Device.deviceId ?? "",
             HeaderConstant.XObjectMetaFileName : item.name ?? tmpUUID,
             HeaderConstant.XObjectMetaFavorites : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
