@@ -665,7 +665,7 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         }
         let id = file.getTrimmedLocalID()
         self.uploadProgress[id] = progress
-        self.getVisibleCellForLocalFile(objectTrimmedLocalID: file.getTrimmedLocalID()) { cell in
+        self.getCellInVisibleIndexRange(objectTrimmedLocalID: file.getTrimmedLocalID()) { cell in
             cell?.setProgressForObject(progress: progress, blurOn: true)
         }
     }
@@ -805,6 +805,20 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         }
     }
 
+    private func getCellInVisibleIndexRange(objectTrimmedLocalID: String, completion: @escaping  (_ cell: PhotoVideoCell?)->Void) {
+        dataSource.findLocalFileIdexForObjectInRange(itemTrimmedLocalID: objectTrimmedLocalID, idexes: collectionView.indexPathsForVisibleItems) { [weak self] index in
+            guard
+                let index = index,
+                let cell = self?.collectionView.cellForItem(at: index) as? PhotoVideoCell
+            else {
+                completion(nil)
+                return
+            }
+           completion(cell)
+        }
+
+    }
+    
     private func getVisibleCellForLocalFile(objectTrimmedLocalID: String, completion: @escaping  (_ cell: PhotoVideoCell?)->Void) {
         getCellForLocalFile(objectTrimmedLocalID: objectTrimmedLocalID) { [weak self] cell in
             guard
