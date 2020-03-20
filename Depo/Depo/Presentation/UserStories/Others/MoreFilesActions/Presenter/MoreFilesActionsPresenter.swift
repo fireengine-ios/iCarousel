@@ -28,6 +28,10 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
         basePassingPresenter?.successPopupClosed()
     }
     
+    func successPopupWillAppear() {
+        basePassingPresenter?.successPopupWillAppear()
+    }
+    
     private func operationFailed(with type: ElementTypes) {
         completeAsyncOperationEnableScreen()
         basePassingPresenter?.operationFailed(withType: type)
