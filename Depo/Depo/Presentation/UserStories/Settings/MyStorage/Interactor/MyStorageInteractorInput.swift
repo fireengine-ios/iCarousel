@@ -13,6 +13,7 @@ protocol MyStorageInteractorInput {
     
     func restorePurchases()
     func trackPackageClick(plan packages: SubscriptionPlan, planIndex: Int)
+    func trackNetmeraPackageCancelClick(type: String, packageName: String)
     func trackScreen()
     
     func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse],
