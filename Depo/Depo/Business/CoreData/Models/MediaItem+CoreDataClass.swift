@@ -99,6 +99,7 @@ public class MediaItem: NSManagedObject {
         }
         
         updateRelatedLocalAlbums(context: context)
+        updateAvalability()
         
         //empty monthValue for missing dates section
 //        switch wrapData.patchToPreview {
@@ -241,6 +242,11 @@ public class MediaItem: NSManagedObject {
     }
     
     func updateAvalability() {
+        guard isLocalItemValue else {
+            isAvailable = true
+            return
+        }
+        
         if let localAlbums = localAlbums?.array as? [MediaItemsLocalAlbum] {
             if localAlbums.isEmpty {
                 //case for main album

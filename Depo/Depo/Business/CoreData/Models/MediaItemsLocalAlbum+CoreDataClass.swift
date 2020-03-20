@@ -29,8 +29,8 @@ extension MediaItemsLocalAlbum {
     private func updateRealtedMediaItems(album: PHAssetCollection, context: NSManagedObjectContext) {
         let assetsIdentifiers = album.allAssets.compactMap { $0.localIdentifier }
         
-        let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
-        request.predicate = NSPredicate(format: "(\(#keyPath(MediaItem.localFileID)) IN %@)", assetsIdentifiers)
+        let request: NSFetchRequest = MediaItem.fetchRequest()
+        request.predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID)) IN %@", assetsIdentifiers)
         
         if let relatedMediaItems = try? context.fetch(request) {
             relatedMediaItems.forEach {

@@ -263,11 +263,18 @@ extension MediaItemsAlbumOperationService {
         let context = coreDataStack.newChildBackgroundContext
         let localIds = assets.map { $0.localIdentifier }
         getLocalAlbums(localIds: localIds, context: context) { [weak self] mediaItemAlbums in
+            var renamedAlbumsIds = [String]()
             assets.forEach { asset in
                 if let album = mediaItemAlbums.first(where: { $0.localId == asset.localIdentifier }) {
+                    if asset.assetCollectionType == .album, album.name != asset.localizedTitle {
+                        renamedAlbumsIds.append(album.localId)
+                    }
                     album.name = asset.localizedTitle
                 }
             }
+            
+            //TODO: Notify observers of renaming albums
+            
             self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
     }
