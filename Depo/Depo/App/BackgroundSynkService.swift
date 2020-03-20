@@ -52,7 +52,7 @@ final class BackgroundSynсService {
         let request = BGProcessingTaskRequest(identifier: TaskIdentifiers.backgroundProcessing)
         
         // Fetch no earlier than 15 sec from now
-        request.earliestBeginDate = Date(timeIntervalSinceNow: 60 * 5)
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 60 * 30)
         request.requiresNetworkConnectivity = true
         request.requiresExternalPower = false
         
@@ -89,7 +89,6 @@ final class BackgroundSynсService {
         
         SyncServiceManager.shared.backgroundTaskSync { isLast in
             debugLog("handleProcessingSyncTask_task_completed")
-            print("handleProcessingSyncTask_task_completed")
             task.setTaskCompleted(success: isLast)
         }
         
@@ -110,6 +109,10 @@ final class BackgroundSynсService {
         SyncServiceManager.shared.backgroundTaskSync { isLast in
             debugLog("handleRefreshSyncTask_task_completed")
             task.setTaskCompleted(success: isLast)
+        }
+        
+        task.expirationHandler = {
+            debugLog("handleRefreshSyncTaskk_expirationHandler")
         }
     }
     

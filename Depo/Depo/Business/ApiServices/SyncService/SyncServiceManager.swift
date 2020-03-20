@@ -136,6 +136,7 @@ class SyncServiceManager {
     func backgroundTaskSync(handler: @escaping BoolHandler) {
         
         guard coreDataStack.isReady else {
+            debugLog("backgroundTaskSync_coreDataStack.isReady")
             handler(false)
             return
         }
@@ -143,6 +144,7 @@ class SyncServiceManager {
         dispatchQueue.async { [weak self] in
             
             guard let self = self else {
+                debugLog("backgroundTaskSync_ dispatchQueue.async")
                 handler(false)
                 return
             }
@@ -332,10 +334,6 @@ extension SyncServiceManager {
             CardsManager.default.stopOperationWithType(type: .sync)
             CardsManager.default.stopOperationWithType(type: .waitingForWiFi)
             return
-        }
-        
-        if isSyncFinished {
-            backgroundSyncHandler?(true)
         }
         
         CardsManager.default.stopOperationWithType(type: .prepareToAutoSync)

@@ -215,10 +215,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         if #available(iOS 13.0, *) {
-              debugLog("AppDelegate applicationDidEnterBackground BT schedule")
-              backgroundSyncService.scheduleRefreshSync()
-              backgroundSyncService.scheduleProcessingSync()
-          }
+            debugLog("AppDelegate applicationDidEnterBackground BT schedule")
+            backgroundSyncService.scheduleRefreshSync()
+            backgroundSyncService.scheduleProcessingSync()
+        }
         
 //        BackgroundTaskService.shared.beginBackgroundTask()
 
@@ -248,9 +248,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillEnterForeground")
-        if BackgroundTaskService.shared.appWasSuspended {
-            CacheManager.shared.actualizeCache()
-        }
+//        if BackgroundTaskService.shared.appWasSuspended {
+//            CacheManager.shared.actualizeCache()
+//        }
         ContactSyncSDK.doPeriodicSync()
         MenloworksAppEvents.sendProfileName()
         
