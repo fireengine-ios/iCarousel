@@ -70,9 +70,13 @@ extension MyStoragePresenter: MyStorageViewOutput {
     }
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int) {
-        interactor.trackPackageClick(plan: plan, planIndex: planIndex)
+        let subscriptionModel = plan.model as? SubscriptionPlanBaseResponse
         
-        guard let model = plan.model as? SubscriptionPlanBaseResponse, let modelType = model.subscriptionPlanType else {
+        interactor.trackPackageClick(plan: plan, planIndex: planIndex)
+        interactor.trackNetmeraPackageCancelClick(type: subscriptionModel?.subscriptionPlanType?.type.rawValue ?? "",
+                                                  packageName: subscriptionModel?.subscriptionPlanDisplayName ?? "")
+        
+        guard let model = subscriptionModel, let modelType = model.subscriptionPlanType else {
             router?.showCancelOfferAlert(with: TextConstants.packageDefaultCancelText)
             return
         }

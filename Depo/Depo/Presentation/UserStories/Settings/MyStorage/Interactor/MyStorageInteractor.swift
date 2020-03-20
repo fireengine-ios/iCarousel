@@ -170,6 +170,10 @@ extension MyStorageInteractor: MyStorageInteractorInput {
         analyticsService.logScreen(screen: .myStorage)
     }
     
+    func trackNetmeraPackageCancelClick(type: String, packageName: String) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackageCancelClick(type: type, packageName: packageName))
+    }
+    
     //MARK: Converter
     func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse], accountType: AccountType) -> [SubscriptionPlan] {
         return packageService.convertToSubscriptionPlan(offers:activeSubscriptionList, accountType:accountType)
