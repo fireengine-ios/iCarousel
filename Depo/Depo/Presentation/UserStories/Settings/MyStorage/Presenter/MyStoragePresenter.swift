@@ -73,7 +73,8 @@ extension MyStoragePresenter: MyStorageViewOutput {
         let subscriptionModel = plan.model as? SubscriptionPlanBaseResponse
         
         interactor.trackPackageClick(plan: plan, planIndex: planIndex)
-        interactor.trackNetmeraPackageCancelClick(type: subscriptionModel?.subscriptionPlanType?.type.rawValue ?? "", packageName: subscriptionModel?.subscriptionPlanDisplayName ?? "")
+        interactor.trackNetmeraPackageCancelClick(type: subscriptionModel?.subscriptionPlanType?.type.rawValue ?? "",
+                                                  packageName: subscriptionModel?.subscriptionPlanDisplayName ?? "")
         
         guard let model = subscriptionModel, let modelType = model.subscriptionPlanType else {
             router?.showCancelOfferAlert(with: TextConstants.packageDefaultCancelText)
