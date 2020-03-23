@@ -1250,6 +1250,10 @@ enum GAEventLabel {
     case backWithCheck(_ isChecked: Bool)
     case isOn(_ isOn: Bool)
     case back
+    case spotify
+    case dropbox
+    case instagram
+    case facebook
     
     var text: String {
         switch self {
@@ -1459,6 +1463,14 @@ enum GAEventLabel {
             return isOn ? "On" : "Off"
         case .back:
             return "Back"
+        case .spotify:
+            return "Spotify"
+        case .dropbox:
+            return "Dropbox"
+        case .instagram:
+            return "Instagram"
+        case .facebook:
+            return "Facebook"
         }
     }
     
@@ -1506,10 +1518,12 @@ enum GADementionsFields {
     case autoSyncState
     case autoSyncStatus
     case twoFactorAuth
-    case spotify
+    case spotifyStatus
     case dailyDrawleft
     case itemsCount(GAOperationType)
     case editFields
+    case connectionStatus
+    case statusType
     
     var text: String {
         switch self {
@@ -1555,7 +1569,7 @@ enum GADementionsFields {
             return "SyncStatus"
         case .twoFactorAuth:
             return "twoFactorAuthentication"
-        case .spotify:
+        case .spotifyStatus:
             return "connectStatus"
         case .dailyDrawleft:
             return "dailyDrawleft"
@@ -1563,6 +1577,10 @@ enum GADementionsFields {
             return operationType.itemsCountText
         case .editFields:
             return "editFields"
+        case .connectionStatus:
+            return "connectionStatus"
+        case .statusType:
+            return "statusType"
         }
     }
     

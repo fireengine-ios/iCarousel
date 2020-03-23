@@ -161,6 +161,8 @@ extension AnalyticsService: AnalyticsGA {
                                             totalDraw: Int? = nil,
                                             itemsOperationCount: GADementionValues.ItemsOperationCount? = nil,
                                             editFields: String? = nil,
+                                            connectionStatus: Bool? = nil,
+                                            statusType: String? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         
         let tokenStorage: TokenStorage = factory.resolve()
@@ -200,7 +202,6 @@ extension AnalyticsService: AnalyticsGA {
         var autoSyncState: String?
         var autoSyncStatus: String?
         var isTwoFactorAuthEnabled: Bool?
-        var isSpotifyEnabled: Bool?
 
         if loginStatus {
             let autoSyncStorageSettings = AutoSyncDataStorage().settings
@@ -216,28 +217,6 @@ extension AnalyticsService: AnalyticsGA {
             autoSyncStatus = "\(photoSetting) | \(videoSetting)"
             
             isTwoFactorAuthEnabled = SingletonStorage.shared.isTwoFactorAuthEnabled
-
-            if let storedIsSpotifyEnabled = SingletonStorage.shared.isSpotifyEnabled {
-                isSpotifyEnabled = storedIsSpotifyEnabled
-
-            } else {
-                group.enter()
-                
-                let spotifyService: SpotifyService = factory.resolve()
-                spotifyService.getStatus { response in
-                    switch response {
-                    case .success(let status):
-                        isSpotifyEnabled = status.isConnected
-                        
-                        SingletonStorage.shared.isSpotifyEnabled = status.isConnected
-                        
-                        group.leave()
-                    case .failed(_):
-                        group.leave()
-                        
-                    }
-                }
-            }
         }
         
         
@@ -259,11 +238,12 @@ extension AnalyticsService: AnalyticsGA {
                 autoSyncState: autoSyncState,
                 autoSyncStatus: autoSyncStatus,
                 isTwoFactorAuthEnabled: isTwoFactorAuthEnabled,
-                isSpotifyEnabled: isSpotifyEnabled,
                 dailyDrawleft: dailyDrawleft,
                 totalDraw: totalDraw,
                 itemsOperationCount: itemsOperationCount,
-                editFields: editFields).productParametrs)
+                editFields: editFields,
+                connectionStatus: connectionStatus,
+                statusType: statusType).productParametrs)
         }
     }
     
@@ -669,6 +649,30 @@ extension AnalyticsService: AnalyticsGA {
                                              action: .myProfile,
                                              label: .save(isSuccess: true))
             
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parameters + dimentionParameters)
+        }
+    }
+    
+    func trackConnectedAccountsGAEvent(action: GAEventAction, label: GAEventLabel, dimension: GADementionsFields, status: Bool) {
+        typealias dimensionTypeAlias = (dimension: GADementionsFields, label: GAEventLabel)
+        let selectedAlias = dimensionTypeAlias(dimension: dimension, label: label)
+        var connectionStatus: Bool?
+        var statusType: String?
+        switch selectedAlias {
+        case (.connectionStatus, .spotify), (.connectionStatus, .dropbox), (.connectionStatus, .instagram), (.connectionStatus, .facebook):
+            connectionStatus = status
+        case (.statusType, .spotify), (.statusType, .dropbox):
+            statusType = status ? "Success" : "Fail"
+        case (.statusType, .instagram), (.statusType, .facebook):
+            statusType = status ? "On" : "Off"
+        default:
+            break
+        }
+        prepareDimentionsParametrs(screen: nil, connectionStatus: connectionStatus, statusType: statusType) { dimentionParameters in
+            let parameters = self.parameters(category: .functions,
+                                             action: action,
+                                             label: label)
+
             Analytics.logEvent(GACustomEventsType.event.key, parameters: parameters + dimentionParameters)
         }
     }

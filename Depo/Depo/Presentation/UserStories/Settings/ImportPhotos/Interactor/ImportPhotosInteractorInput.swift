@@ -20,7 +20,8 @@ protocol ImportFromFBInteractorInput {
     func requestToken(permissions: [String])
     func connect(withToken token: String)
     func requestSyncStatus()
-    func trackImportActivationFB()
+    func trackConnectionStatusFB(isConnected: Bool)
+    func trackImportStatusFB(isOn: Bool)
 }
 
 // MARK: - Dropbox
@@ -35,7 +36,8 @@ protocol ImportFromDropboxInteractorInput {
     func connect(withToken token: String)
     func requestStart()
     func requestStatusForCompletion()
-    func trackImportActivationDropBox()
+    func trackConnectionStatusDropBox(isConnected: Bool)
+    func trackImportStatusDropBox(isOn: Bool)
 }
 
 // MARK: - Instagram
@@ -45,5 +47,6 @@ protocol ImportFromInstagramInteractorInput {
     func disconnectAccount()
     func setInstaPick(status: Bool)
     func setSync(status: Bool)
-    func trackImportActivationInstagram()
+    func trackConnectionStatusInstagram(isConnected: Bool)
+    func trackImportStatusInstagram(isOn: Bool)
 }
