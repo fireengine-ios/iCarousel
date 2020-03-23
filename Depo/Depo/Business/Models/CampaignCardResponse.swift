@@ -34,7 +34,7 @@ final class CampaignCardResponse {
             static let launchDate = "launchDate"
         }
     
-    let detailsUrl: URL
+    let detailsUrl: String
     let imageUrl: URL
     let messageType: MessageType
     let title: String
@@ -49,7 +49,7 @@ final class CampaignCardResponse {
     let endDate: Date
     let launchDate: Date
 
-    init(detailsUrl: URL,
+    init(detailsUrl: String,
          imageUrl: URL,
          messageType: MessageType,
          title: String,
@@ -85,7 +85,7 @@ final class CampaignCardResponse {
         let dates = json[ResponseKey.dates]
         
         guard
-            let detailsUrl = json[ResponseKey.detailsUrl].url,
+            let detailsUrl = json[ResponseKey.detailsUrl].string,
             let imageUrl = json[ResponseKey.imageUrl].url,
             let messageType = MessageType(rawValue: content[ResponseKey.messageType].stringValue),
             
