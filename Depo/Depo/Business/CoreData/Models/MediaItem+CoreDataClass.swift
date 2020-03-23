@@ -248,11 +248,11 @@ public class MediaItem: NSManagedObject {
         }
         
         if let localAlbums = localAlbums?.array as? [MediaItemsLocalAlbum] {
-            if localAlbums.isEmpty {
+            if localAlbums.count == 1 {
                 //case for main album
                 isAvailable = true
             } else {
-                isAvailable = localAlbums.first(where: { $0.isEnabled }) != nil
+                isAvailable = localAlbums.first(where: { $0.isEnabled && !$0.isMain }) != nil
             }
         } else {
             isAvailable = false
@@ -300,7 +300,7 @@ extension MediaItem {
         
         let localAlbumIds = LocalAlbumsCache.shared.albumIds(assetId: localId)
         let request = NSFetchRequest<MediaItemsLocalAlbum>(entityName: MediaItemsLocalAlbum.Identifier)
-        request.predicate = NSPredicate(format: "\(MediaItemsLocalAlbum.PropertyNameKey.localId) IN %@ AND \(MediaItemsLocalAlbum.PropertyNameKey.isMain) = false", localAlbumIds)
+        request.predicate = NSPredicate(format: "\(MediaItemsLocalAlbum.PropertyNameKey.localId) IN %@", localAlbumIds)
         
         if let relatedAlbums = try? context.fetch(request) {
             relatedAlbums.forEach {
