@@ -329,9 +329,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 [albumsResult, smartAlbumsResult].forEach {
                     $0.enumerateObjects { album, _, _ in
                         if album.photosCount > 0 || album.videosCount > 0 {
-                            if album.assetCollectionSubtype != .smartAlbumUserLibrary {
-                                self?.localAlbumsCache.append(albumId: album.localIdentifier, with: album.allAssets.compactMap { $0.localIdentifier })
-                            }
+                            self?.localAlbumsCache.append(albumId: album.localIdentifier, with: album.allAssets.compactMap { $0.localIdentifier })
                             albumsWithItems.append(album)
                         }
                     }
