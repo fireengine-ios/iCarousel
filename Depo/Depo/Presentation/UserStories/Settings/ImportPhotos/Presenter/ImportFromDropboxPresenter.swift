@@ -73,6 +73,7 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
     }
     
     func disconnectionSuccess() {
+        interactor.trackConnectionStatusDropBox(isConnected: false)
         view?.stopActivityIndicator()
         view?.disconnectionSuccess()
     }
@@ -140,6 +141,7 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
     // MARK: login, Token
     
     func loginSuccess(token: String) {
+        interactor.trackConnectionStatusDropBox(isConnected: true)
         interactor.connect(withToken: token)
     }
     
@@ -172,13 +174,15 @@ extension ImportFromDropboxPresenter: ImportFromDropboxInteractorOutput {
         view?.stopActivityIndicator()
         view?.startDropboxStatus()
         interactor.requestStatusForCompletion()
+        interactor.trackImportStatusDropBox(isOn: true)
         analyticsService.track(event: .importDropbox)
-        interactor.trackImportActivationDropBox()
     }
     
     func startFailure(errorMessage: String) {
         importIsAwaiting = false
         view?.stopActivityIndicator()
         view?.failedDropboxStart(errorMessage: errorMessage)
+        interactor.trackImportStatusDropBox(isOn: false)
     }
+    
 }
