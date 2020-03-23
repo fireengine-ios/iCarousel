@@ -23,6 +23,8 @@ final class MediaItemOperationsService {
     static let shared = MediaItemOperationsService()
     
     private lazy var coreDataStack: CoreDataStack = factory.resolve()
+    private lazy var localAlbumsCache = LocalAlbumsCache.shared
+    private lazy var mediaAlbumsService = MediaItemsAlbumOperationService.shared
     
     let privateQueue = DispatchQueue(label: DispatchQueueLabels.mediaItemOperationsService, attributes: .concurrent)
     
@@ -76,7 +78,7 @@ final class MediaItemOperationsService {
             completion?(false)
             return
         }
-        let uuidsPredicate = NSPredicate(format: "\(#keyPath(MediaItem.uuid)) IN %@", uuids)
+        let uuidsPredicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.uuid) IN %@", uuids)
         let compoundedPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [remoteMediaItemsPredicate, uuidsPredicate])
         
         delete(type: MediaItem.self, predicate: compoundedPredicate, mergeChanges: false) { _ in
@@ -86,7 +88,7 @@ final class MediaItemOperationsService {
     
     private func delete(type: NSManagedObject.Type, predicate: NSPredicate?, mergeChanges: Bool, _ completion: BoolHandler?) {
         coreDataStack.performBackgroundTask { [weak self] context in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             
@@ -127,7 +129,7 @@ final class MediaItemOperationsService {
     
     func getLocalDuplicates(localItems: @escaping MediaItemsCallBack) {
         let context = coreDataStack.newChildBackgroundContext
-        let predicate = NSPredicate(format: "isLocalItemValue == true AND relatedRemotes.@count > 0")
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.relatedRemotes).@count > 0")
         
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: localItems)
     }
@@ -156,7 +158,7 @@ final class MediaItemOperationsService {
     func getLocalFilteredItem(remoteOriginalItem: Item, localFilteredPhotosCallBack: @escaping (Item?) -> Void) {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
-        fetchRequest.predicate = NSPredicate(format: "(md5Value = %@) AND (isFiltered == true)", remoteOriginalItem.md5, remoteOriginalItem.getTrimmedLocalID())
+        fetchRequest.predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.md5Value) = %@ AND \(MediaItem.PropertyNameKey.isFiltered) = true", remoteOriginalItem.md5, remoteOriginalItem.getTrimmedLocalID())
         
         let context = coreDataStack.newChildBackgroundContext
         context.perform {
@@ -215,7 +217,7 @@ final class MediaItemOperationsService {
             }
             
             
-            let predicateForLocalFile = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) == true AND (\(#keyPath(MediaItem.localFileID)) == %@ OR \(#keyPath(MediaItem.trimmedLocalFileID)) == %@)", item.getLocalID(), item.getTrimmedLocalID())
+            let predicateForLocalFile = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND (\(MediaItem.PropertyNameKey.localFileID) = %@ OR \(MediaItem.PropertyNameKey.trimmedLocalFileID) = %@)", item.getLocalID(), item.getTrimmedLocalID())
             
             self.executeRequest(predicate: predicateForLocalFile, context: context) { alreadySavedMediaItems in
                 alreadySavedMediaItems.forEach({ savedItem in
@@ -254,7 +256,7 @@ final class MediaItemOperationsService {
     }
     
     func updateRelationsAfterMerge(with uuid: String, localItem: MediaItem, context: NSManagedObjectContext, completion: @escaping VoidHandler) {
-        let predicateForRemoteFiles = NSPredicate(format: "uuid = %@ AND isLocalItemValue = false", uuid)
+        let predicateForRemoteFiles = NSPredicate(format: "\(MediaItem.PropertyNameKey.uuid) = %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = false", uuid)
         
         executeRequest(predicate: predicateForRemoteFiles, context: context) { alreadySavedRemoteItems in
             alreadySavedRemoteItems.forEach {
@@ -281,14 +283,19 @@ final class MediaItemOperationsService {
                             context: NSManagedObjectContext? = nil,
                             mediaItemsCallBack: @escaping MediaItemsCallBack) {
         let context = context ?? coreDataStack.newChildBackgroundContext
-        let predicate = NSPredicate(format: "trimmedLocalFileID IN %@ AND isLocalItemValue == true", trimmedLocalIDS)
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.trimmedLocalFileID) IN %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true", trimmedLocalIDS)
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
     
     func mediaItems(by localId: String,
                             context: NSManagedObjectContext,
                             mediaItemsCallBack: @escaping MediaItemsCallBack) {
-        let predicate = NSPredicate(format: "\(#keyPath(MediaItem.localFileID)) = %@ AND isLocalItemValue == true", localId)
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) = %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true", localId)
+        executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
+    }
+    
+    func mediaItems(by localIds: [String], context: NSManagedObjectContext, mediaItemsCallBack: @escaping MediaItemsCallBack) {
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.localFileID) IN %@", localIds)
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
     
@@ -296,9 +303,9 @@ final class MediaItemOperationsService {
         let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
         request.fetchLimit = limit
         request.predicate = predicate
-        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItem.monthValue), ascending: false)
-        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItem.sortingDate), ascending: false)
-        let sortDescriptor3 = NSSortDescriptor(key: #keyPath(MediaItem.idValue), ascending: false)
+        let sortDescriptor1 = NSSortDescriptor(key: MediaItem.PropertyNameKey.monthValue, ascending: false)
+        let sortDescriptor2 = NSSortDescriptor(key: MediaItem.PropertyNameKey.sortingDate, ascending: false)
+        let sortDescriptor3 = NSSortDescriptor(key: MediaItem.PropertyNameKey.idValue, ascending: false)
         request.sortDescriptors = [sortDescriptor1, sortDescriptor2, sortDescriptor3]
         execute(request: request, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
@@ -358,7 +365,7 @@ final class MediaItemOperationsService {
         let remoteIds = remoteItems.compactMap { $0.uuid }
         let context = coreDataStack.newChildBackgroundContext
         
-        let predicate = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) = false AND (\(#keyPath(MediaItem.uuid)) IN %@)", remoteIds)
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = false AND (\(MediaItem.PropertyNameKey.uuid) IN %@)", remoteIds)
         executeRequest(predicate: predicate, context: context) { mediaItems in
             for newItem in remoteItems {
                 if let existed = mediaItems.first(where: {$0.uuid == newItem.uuid}) {
@@ -381,7 +388,7 @@ final class MediaItemOperationsService {
             debugPrint("--- count of already saved in date range \(inDateRangeItems.count)")
             
             let inDateRangeItemIds = inDateRangeItems.compactMap { $0.idValue }
-            let inIdRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND (idValue IN %@) AND NOT (idValue IN %@)", fileType.valueForCoreDataMapping(), remoteIds, inDateRangeItemIds)
+            let inIdRangePredicate = NSPredicate(format:"\(MediaItem.PropertyNameKey.fileTypeValue) = %d AND \(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.idValue) IN %@ AND NOT \(MediaItem.PropertyNameKey.idValue) IN %@", fileType.valueForCoreDataMapping(), remoteIds, inDateRangeItemIds)
             
             self.executeRequest(predicate: inIdRangePredicate, context: context, mediaItemsCallBack: { inIdRangeItems in
                 debugPrint("--- count of already saved in id range \(inIdRangeItems.count)")
@@ -448,7 +455,7 @@ final class MediaItemOperationsService {
     }
     
     private func createInRangePredicate(fileType: FileType, topInfo: RangeAPIInfo, bottomInfo: RangeAPIInfo) -> NSCompoundPredicate {
-        let inDateRangePredicate = NSPredicate(format:"fileTypeValue = %d AND isLocalItemValue = false AND sortingDate != Nil AND (sortingDate <= %@ AND sortingDate >= %@)", fileType.valueForCoreDataMapping(), topInfo.date as NSDate, bottomInfo.date as NSDate)
+        let inDateRangePredicate = NSPredicate(format:"\(MediaItem.PropertyNameKey.fileTypeValue) = %d AND \(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.sortingDate) != Nil AND (\(MediaItem.PropertyNameKey.sortingDate) <= %@ AND \(MediaItem.PropertyNameKey.sortingDate) >= %@)", fileType.valueForCoreDataMapping(), topInfo.date as NSDate, bottomInfo.date as NSDate)
         
         let inIdRangePredicate: NSPredicate
         if topInfo.date != bottomInfo.date {
@@ -456,12 +463,12 @@ final class MediaItemOperationsService {
         } else {
             if let topId = topInfo.id {
                 if let bottomId = bottomInfo.id {
-                    inIdRangePredicate = NSPredicate(format:" (idValue <= %ld AND idValue >= %ld)", topId, bottomId)
+                    inIdRangePredicate = NSPredicate(format:"\(MediaItem.PropertyNameKey.idValue) <= %ld AND \(MediaItem.PropertyNameKey.idValue) >= %ld", topId, bottomId)
                 } else {
-                    inIdRangePredicate = NSPredicate(format:"idValue <= %ld", topId)
+                    inIdRangePredicate = NSPredicate(format:"\(MediaItem.PropertyNameKey.idValue) <= %ld", topId)
                 }
             } else if let bottomId = bottomInfo.id {
-                inIdRangePredicate = NSPredicate(format:"idValue >= %ld", bottomId)
+                inIdRangePredicate = NSPredicate(format:"\(MediaItem.PropertyNameKey.idValue) >= %ld", bottomId)
             } else {
                 inIdRangePredicate = NSPredicate(value: true)
             }
@@ -471,19 +478,19 @@ final class MediaItemOperationsService {
     }
     
     func getAllRemotesMediaItem(allRemotes: @escaping MediaItemsCallBack) {
-        let predicate = NSPredicate(format: "isLocalItemValue = false")
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = false")
         executeRequest(predicate: predicate, context: coreDataStack.newChildBackgroundContext, mediaItemsCallBack: allRemotes)
     }
     
     func getRemotesMediaItems(trimmedLocalIds: [String],
                               context: NSManagedObjectContext,
                               mediaItemsCallBack: @escaping MediaItemsCallBack) {
-        let predicate = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) = false AND \(#keyPath(MediaItem.trimmedLocalFileID)) IN %@", trimmedLocalIds)
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.trimmedLocalFileID) IN %@", trimmedLocalIds)
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }
     
     func isNoRemotesInDB(result: @escaping (_ noRemotes: Bool) -> Void) {
-        let predicate = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) = false")
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = false")
         let fetchRequest = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
         fetchRequest.fetchLimit = 1
         fetchRequest.predicate = predicate
@@ -543,13 +550,96 @@ final class MediaItemOperationsService {
     
     func removeZeroBytesLocalItems(completion: @escaping BoolHandler) {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: MediaItem.Identifier)
-        let predicate = NSPredicate(format: "\(#keyPath(MediaItem.isLocalItemValue)) == true AND \(#keyPath(MediaItem.fileSizeValue)) == 0")
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.fileSizeValue) = 0")
         request.predicate = predicate
         let context = coreDataStack.newChildBackgroundContext
         
         deleteObjects(fromFetch: request, context: context, completion: completion)
     }
     
+    func update(localMediaItems assets: [PHAsset], completion: @escaping VoidHandler) {
+        //update relationships between LocalAlbums and MediaItems
+        
+        //localMediaItemId: [albumLocalId]
+        var appendRelationships = [String: [String]]()
+        var deletedRelationships = [String: [String]]()
+        
+        assets.forEach { asset in
+            let albumIds = Set(localAlbumsCache.albumIds(assetId: asset.localIdentifier))
+            let albumAssets = asset.containingAlbums
+            let albumAssetsIds = Set(albumAssets.map { $0.localIdentifier })
+            
+            let appendAlbumsIds = albumAssetsIds.subtracting(albumIds)
+            if !appendAlbumsIds.isEmpty {
+                let assetsArray = Array(appendAlbumsIds)
+                appendRelationships[asset.localIdentifier] = assetsArray
+                
+                assetsArray.forEach {
+                    localAlbumsCache.append(albumId: $0, with: [asset.localIdentifier])
+                }
+            }
+            
+            let deletedAlbumsIds = albumIds.subtracting(albumAssetsIds)
+            if !deletedAlbumsIds.isEmpty {
+                let assetsArray = Array(deletedAlbumsIds)
+                deletedRelationships[asset.localIdentifier] = assetsArray
+
+                assetsArray.forEach {
+                    localAlbumsCache.remove(albumId: $0, for: asset.localIdentifier)
+                }
+            }
+        }
+        
+        let context = coreDataStack.newChildBackgroundContext
+        let localIds = assets.map { $0.localIdentifier }
+        mediaItems(by: localIds, context: context) { [weak self] mediaItems in
+            guard let self = self else {
+                return
+            }
+            
+            if !deletedRelationships.isEmpty {
+                mediaItems.forEach { mediaItem in
+                    if let localId = mediaItem.localFileID,
+                        let albumAssetsIds = deletedRelationships[localId],
+                        var relatedAlbums = mediaItem.localAlbums?.array as? [MediaItemsLocalAlbum] {
+                        
+                        let deletedAlbums = relatedAlbums.filter { albumAssetsIds.contains($0.localId ?? "") }
+                        deletedAlbums.forEach {
+                            mediaItem.removeFromLocalAlbums($0)
+                            relatedAlbums.remove($0)
+                        }
+                        mediaItem.updateAvalability()
+                    }
+                }
+            }
+
+            if appendRelationships.isEmpty {
+                self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
+                return
+            }
+            
+            let appendAssetsIds = appendRelationships.values.flatMap { $0 }
+            self.mediaAlbumsService.getLocalAlbums(localIds: appendAssetsIds, context: context) { [weak self] mediaItemAlbums in
+                guard let self = self else {
+                    return
+                }
+                
+                //add relationships
+                appendRelationships.forEach { mediaItemLocalId, albumsIds in
+                    if let mediaItem = mediaItems.first(where: { $0.localFileID == mediaItemLocalId }) {
+                        mediaItemAlbums.forEach { album in
+                            if let localId = album.localId, albumsIds.contains(localId) {
+                                album.addToItems(mediaItem)
+                                mediaItem.updateAvalability()
+                            }
+                        }
+                    }
+                }
+                
+                self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
+            }
+        }
+    }
     
     private let localsAppendingQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -627,7 +717,7 @@ final class MediaItemOperationsService {
         }
         
         let currentlyInLibriaryIDs = allList.map { $0.localIdentifier }
-        let predicate = NSPredicate(format: "localFileID IN %@", currentlyInLibriaryIDs)
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) IN %@", currentlyInLibriaryIDs)
         executeRequest(predicate: predicate, context: context) { alredySaved in
             let alredySavedIDs = alredySaved.compactMap { $0.localFileID }
             assetCallback(allList.filter { alredySavedIDs.contains( $0.localIdentifier ) })
@@ -657,7 +747,7 @@ final class MediaItemOperationsService {
         }
         
         let localIdentifiers = assets.map { $0.localIdentifier }
-        let predicate = NSPredicate(format: "NOT(localFileID IN %@) AND localFileID != Nil AND isLocalItemValue == true", localIdentifiers)
+        let predicate = NSPredicate(format: "NOT(\(MediaItem.PropertyNameKey.localFileID) IN %@) AND \(MediaItem.PropertyNameKey.localFileID) != Nil AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true", localIdentifiers)
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { mediaItems in
             let missingIDs = mediaItems.compactMap { $0.localFileID }
             callback(missingIDs)
@@ -671,7 +761,7 @@ final class MediaItemOperationsService {
         }
         
         let localIdentifiers = assets.map { $0.localIdentifier }
-        let predicate = NSPredicate(format: "localFileID IN %@ AND isLocalItemValue == true", localIdentifiers)
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) IN %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true", localIdentifiers)
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { mediaItems in
             let alredySavedIDs = mediaItems.compactMap { $0.localFileID }
             let notSaved = assets.filter { !alredySavedIDs.contains($0.localIdentifier) }
@@ -690,7 +780,7 @@ final class MediaItemOperationsService {
                 completion()
                 return
             }
-            let predicate = NSPredicate(format: "localFileID IN %@ AND isLocalItemValue == true", assetIdList)
+            let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) IN %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true", assetIdList)
             self.executeRequest(predicate: predicate, context: context) { mediaItems in
                
                 let deletedItems = mediaItems.map { WrapData(mediaItem: $0) }
@@ -726,7 +816,7 @@ final class MediaItemOperationsService {
                 return
             }
             
-            let predicate = NSPredicate(format: "uuid in %@", items.map {$0.uuid} )
+            let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.uuid) in %@", items.map {$0.uuid} )
             self.executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { remoteItems in
                 self.deleteItemsWithRelated(remoteItems, context: context, completion: completion)
             })
@@ -771,7 +861,7 @@ final class MediaItemOperationsService {
     
     func deleteTrashedItems(completion: @escaping VoidHandler) {
         coreDataStack.performBackgroundTask { context in
-            let predicate = NSPredicate(format: "status = %d", ItemStatus.trashed.valueForCoreDataMapping())
+            let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.status) = %d", ItemStatus.trashed.valueForCoreDataMapping())
             self.executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { trashedItems in
                 self.deleteItemsWithRelated(trashedItems, context: context, completion: completion)
             })
@@ -813,7 +903,7 @@ final class MediaItemOperationsService {
     
     func allLocalItems(localItems: @escaping WrapObjectsCallBack) {
         let context = coreDataStack.newChildBackgroundContext
-        let predicate = NSPredicate(format: "localFileID != nil")
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) != nil")
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { mediaItems in
             localItems(mediaItems.map { $0.wrapedObject })
         })
@@ -824,11 +914,10 @@ final class MediaItemOperationsService {
             localItemsCallback([])
             return
         }
-        let sortDescriptor = NSSortDescriptor(key: #keyPath(MediaItem.creationDateValue), ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: MediaItem.PropertyNameKey.creationDateValue, ascending: false)
         let context = coreDataStack.newChildBackgroundContext
        
-        let predicate = NSPredicate(format:
-        "(\(#keyPath(MediaItem.localFileID)) != nil) AND (\(#keyPath(MediaItem.localFileID)) IN %@) AND \(#keyPath(MediaItem.isLocalItemValue)) == true", assets.map { $0.localIdentifier })
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) != nil AND \(MediaItem.PropertyNameKey.localFileID) IN %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true", assets.map { $0.localIdentifier })
         
         let request = NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier)
         request.predicate = predicate
@@ -853,7 +942,7 @@ final class MediaItemOperationsService {
         }
         let context = coreDataStack.newChildBackgroundContext
         
-        let predicate = NSPredicate(format: "(localFileID != nil) AND (localFileID IN %@) AND isLocalItemValue == true", assets.map { $0.localIdentifier })
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) != nil AND \(MediaItem.PropertyNameKey.localFileID) IN %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true", assets.map { $0.localIdentifier })
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { mediaItems in
             /// sort items in the assets order
             var items = mediaItems
@@ -881,7 +970,7 @@ final class MediaItemOperationsService {
     
     func allLocalItems(trimmedLocalIds: [String], localItemsCallBack: @escaping WrapObjectsCallBack) {
         let context = coreDataStack.newChildBackgroundContext
-        let predicate = NSPredicate(format: "(trimmedLocalFileID != nil) AND (trimmedLocalFileID IN %@ AND isLocalItemValue == true)", trimmedLocalIds)
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.trimmedLocalFileID) != nil AND \(MediaItem.PropertyNameKey.trimmedLocalFileID) IN %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true", trimmedLocalIds)
         executeRequest(predicate: predicate, context: context) { mediaItems in
              localItemsCallBack(mediaItems.map{ $0.wrapedObject })
         }
@@ -919,7 +1008,7 @@ final class MediaItemOperationsService {
         }
         
         coreDataStack.performBackgroundTask { [weak self] context in
-            let predicate = NSPredicate(format: "(isLocalItemValue == true) AND (fileTypeValue IN %@) AND (localFileID IN %@) AND (SUBQUERY(objectSyncStatus, $x, $x.userID == %@).@count == 0 AND relatedRemotes.@count = 0)", filesTypesArray, currentlyInLibriaryLocalIDs, SingletonStorage.shared.uniqueUserID)
+            let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isAvailable) = true AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.fileTypeValue) IN %@ AND \(MediaItem.PropertyNameKey.localFileID) IN %@ AND (SUBQUERY(\(MediaItem.PropertyNameKey.objectSyncStatus), $x, $x.userID = %@).@count = 0 AND \(MediaItem.PropertyNameKey.relatedRemotes).@count = 0)", filesTypesArray, currentlyInLibriaryLocalIDs, SingletonStorage.shared.uniqueUserID)
             self?.executeRequest(predicate: predicate, context: context) { mediaItems in
                 completion(mediaItems)
             }
@@ -932,7 +1021,7 @@ final class MediaItemOperationsService {
                 return
             }
             
-            let predicate = NSPredicate(format: "localFileID != Nil AND NOT (localFileID IN %@) AND isLocalItemValue == true", actualPhotoLibItemsIDs)
+            let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) != Nil AND NOT (\(MediaItem.PropertyNameKey.localFileID) IN %@) AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true", actualPhotoLibItemsIDs)
             self.executeRequest(predicate: predicate, context: context) { mediaItems in
                 mediaItems.forEach {
                     context.delete($0)
@@ -953,7 +1042,7 @@ final class MediaItemOperationsService {
                 return
             }
             
-            let predicate = NSPredicate(format: "(isLocalItemValue == false) AND (uuid IN %@)", wrapData.compactMap { $0.uuid })
+            let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.uuid) IN %@", wrapData.compactMap { $0.uuid })
             
             self.executeRequest(predicate: predicate, context: context) { mediaItems in
                 let existedUUIDS = mediaItems.compactMap { $0.uuid }
@@ -972,10 +1061,7 @@ final class MediaItemOperationsService {
                 return
             }
             
-            let isLocalItemValue = #keyPath(MediaItem.isLocalItemValue)
-            let uuid = #keyPath(MediaItem.uuid)
-            
-            let predicate = NSPredicate(format: "\(isLocalItemValue) == false AND \(uuid) IN %@", items.compactMap { $0.uuid })
+            let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.uuid) IN %@", items.compactMap { $0.uuid })
             
             self.executeRequest(predicate: predicate, context: context) { [weak self] mediaItems in
                 guard let self = self else {
@@ -996,9 +1082,7 @@ final class MediaItemOperationsService {
                 return
             }
             
-            let albumUUID = #keyPath(MediaItemsAlbum.uuid)
-            
-            let predicate = NSPredicate(format: "\(albumUUID) IN %@", albums.compactMap { $0.uuid })
+            let predicate = NSPredicate(format: "\(MediaItemsAlbum.PropertyNameKey.uuid) IN %@", albums.compactMap { $0.uuid })
             let request = NSFetchRequest<MediaItemsAlbum>(entityName: MediaItemsAlbum.Identifier)
             request.predicate = predicate
             
@@ -1027,10 +1111,7 @@ final class MediaItemOperationsService {
                 return
             }
             
-            let isLocalItemValue = #keyPath(MediaItem.isLocalItemValue)
-            let uuid = #keyPath(MediaItem.uuid)
-            
-            let predicate = NSPredicate(format: "\(isLocalItemValue) == false AND \(uuid) IN %@", items.compactMap { $0.uuid })
+            let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.uuid) IN %@", items.compactMap { $0.uuid })
             
             self.executeRequest(predicate: predicate, context: context) { [weak self] mediaItems in
                 guard let self = self else {

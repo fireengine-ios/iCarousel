@@ -65,11 +65,11 @@ final class AutoSyncAlbum {
         isMainAlbum = asset.assetCollectionSubtype == .smartAlbumUserLibrary
     }
     
-    init(mediaItemAlbum: MediaItemsAlbum) {
+    init(mediaItemAlbum: MediaItemsLocalAlbum) {
         uuid = mediaItemAlbum.localId ?? ""
         name = mediaItemAlbum.name ?? ""
         isSelected = mediaItemAlbum.isEnabled
-        isMainAlbum = mediaItemAlbum.isMainLocalAlbum
+        isMainAlbum = mediaItemAlbum.isMain
     }
 }
 

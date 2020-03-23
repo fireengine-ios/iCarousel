@@ -57,9 +57,9 @@ final class PhotoVideoDataSource: NSObject {
     private lazy var fetchedResultsController: NSFetchedResultsController<MediaItem> = {
         let fetchRequest: NSFetchRequest = MediaItem.fetchRequest()
         
-        let sortDescriptor1 = NSSortDescriptor(key: #keyPath(MediaItem.monthValue), ascending: false)
-        let sortDescriptor2 = NSSortDescriptor(key: #keyPath(MediaItem.sortingDate), ascending: false)
-        let sortDescriptor3 = NSSortDescriptor(key: #keyPath(MediaItem.idValue), ascending: false)
+        let sortDescriptor1 = NSSortDescriptor(key: MediaItem.PropertyNameKey.monthValue, ascending: false)
+        let sortDescriptor2 = NSSortDescriptor(key: MediaItem.PropertyNameKey.sortingDate, ascending: false)
+        let sortDescriptor3 = NSSortDescriptor(key: MediaItem.PropertyNameKey.idValue, ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2, sortDescriptor3]
         
 //        if Device.isIpad {
@@ -72,7 +72,7 @@ final class PhotoVideoDataSource: NSObject {
         let context = coreDataStack.mainContext
         let frController = NSFetchedResultsController(fetchRequest: fetchRequest,
                                                       managedObjectContext: context,
-                                                      sectionNameKeyPath: #keyPath(MediaItem.monthValue),
+                                                      sectionNameKeyPath: MediaItem.PropertyNameKey.monthValue,
                                                       cacheName: nil)
         frController.delegate = self
         return frController
