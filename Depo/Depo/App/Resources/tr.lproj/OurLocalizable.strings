@@ -1221,7 +1221,7 @@
 "campaign_description_label_experienced_user" = "Bugünün çekiliş haklarını kazanmaya henüz başlamadın. Fotoğraflarını PhotoPick ile analiz et ve Samsung Galaxy Note 10 kazanmak için şansını artır. Toplam çekiliş hakkın:% d";
 "campaign_description_label_limit_reached" = "Günlük çekiliş haklarını tamamladın. Yarın tekrar PhotoPick yap, çekiliş hakkını artır. Toplam çekiliş hakkın: % d";
 "campaign_description_label_another" = "Fotoğraflarını PhotoPick ile analiz et, çekiliş hakkını artır ve Samsung Galaxy Note 10 kazanan 20 kişiden biri olma şansı yakala! Toplam çekiliş hakkın %d! ";
-"campaign_campaign_detail_button" = "Kampanya Detayları";
+"campaign_campaign_detail_button" = "Görmek için Tıkla";
 "analyze_photo_pic_detail_button" = "PhotoPick ile Analiz Et!";
 "campaign_detail_title" = "Kampanya Detayları";
 "campaign_detail_more_info_button" = "Detaylı bilgi için buraya tıkla";
@@ -1457,3 +1457,5 @@
 "contact_sync_confirm_premium_popup_title" = "";
 "contact_sync_confirm_premium_popup_text" = "";
 "my_packages_description" = "";
+"photo_video_auto_sync_settings" = "";
+"ubsent_contacts_in_lifebox" = "";
