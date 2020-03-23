@@ -1478,11 +1478,6 @@
 
 "bundle_package_addon_type" = "with +Premium";
 "storage_only_package_addon_type" = "Storage only";
-"settings_userinfo_name_surname" = "settings_userinfo_name_surname";
-"settings_userinfo_email" = "settings_userinfo_email";
-"settings_userinfo_phone" = "settings_userinfo_phone";
-"settings_action_sheet_profile_details" = "settings_action_sheet_profile_details";
-"settings_action_sheet_edit_profile_photo" = "settings_action_sheet_edit_profile_photo";
 "original_сopy_package_description" = "Original сopy";
 "become_premium_navbar_title" = "We Recommend";
 "become_premium_header_default_title" = "We have a special offer for you!";
