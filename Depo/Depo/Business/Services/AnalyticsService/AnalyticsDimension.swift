@@ -23,7 +23,7 @@ struct AnalyticsDimension {
     let countOfUploadMetric: Int?
     let countOfDownloadMetric: Int?
     let gsmOperatorType: String
-    let deviceId: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
+    let deviceId: String = Device.deviceId ?? ""
     let loginType: GADementionValues.login?
     let errorType: String?
     

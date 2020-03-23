@@ -14,7 +14,7 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
         super.viewIsReady(collectionView: collectionView)
         dataSource.canReselect = true
         dataSource.enableSelectionOnHeader = false
-        dataSource.setSelectionState(selectionState: false)
+        dataSource.setSelectionState(selectionState: true)
         dataSource.needShow3DotsInCell = false
         dataSource.canShow3DotsInCell = false
         let displaingType: BaseDataSourceDisplayingType = (type == .Grid) ? .greed : .list
@@ -25,7 +25,7 @@ class UploadFromLifeBoxAllFilesPresenter: DocumentsGreedPresenter, UploadFromLif
     }
     
     override func viewWillDisappear() {
-        
+        bottomBarPresenter?.dismiss(animated: true)
     }
     
     override func onMaxSelectionExeption() {
