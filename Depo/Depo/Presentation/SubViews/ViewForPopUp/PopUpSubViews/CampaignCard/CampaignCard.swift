@@ -55,7 +55,7 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
     @IBOutlet private weak var analyzeDetailButton: UIButton!
     @IBOutlet private weak var contentStackView: UIStackView!
     
-    private var detailUrl: URL?
+    private var detailUrl: String?
     private var userStatus: CampaignUserStatus?
     private lazy var router = RouterVC()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
@@ -108,13 +108,13 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
         CardsManager.default.stopOperationWith(type: .campaignCard, serverObject: cardObject)
     }
     
-    private func presentWebViewWithDetail(with url: URL?) {
+    private func presentWebViewWithDetail(with url: String?) {
         guard let url = url else {
             assertionFailure()
             return
         }
         hideTabBar()
-        let vc = WebViewController(urlString: url.absoluteString)
+        let vc = WebViewController(urlString: url)
         RouterVC().pushViewController(viewController: vc)
     }
     
