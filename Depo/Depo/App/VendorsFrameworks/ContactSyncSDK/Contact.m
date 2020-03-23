@@ -60,7 +60,9 @@
         if (sourceType == kABSourceTypeLocal || sourceType == kABSourceTypeCardDAV) {
             _defaultAccount = true;
         }
-        CFRelease(source);
+        if (source != NULL) {
+            CFRelease(source);
+        }
         
         SYNC_Log(@"Source: %d Last Modified Date : %@ %@ %@", sourceType, _objectId, _localUpdateDate, _localUpdateDate);
         

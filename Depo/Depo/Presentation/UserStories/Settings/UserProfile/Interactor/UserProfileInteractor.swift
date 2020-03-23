@@ -24,6 +24,8 @@ class UserProfileInteractor: UserProfileInteractorInput {
     
     var secretQuestionsResponse: SecretQuestionsResponse?
     
+    private var profileChanges: String?
+    
     func viewIsReady() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PhotoEditScreen())
         analyticsManager.logScreen(screen: .profileEdit)
@@ -63,6 +65,14 @@ class UserProfileInteractor: UserProfileInteractorInput {
                                             errorType: errorType)
     }
     
+    func trackProfileChanges() {
+        guard let changes = profileChanges else {
+            trackState(.save(isSuccess: true), errorType: nil)
+            return
+        }
+        analyticsManager.trackProfileUpdateGAEvent(editFields: changes)
+    }
+    
     func trackSetSequrityQuestion() {
         analyticsManager.trackCustomGAEvent(eventCategory: .securityQuestion,
                                             eventActions: .securityQuestionClick,
@@ -73,7 +83,8 @@ class UserProfileInteractor: UserProfileInteractorInput {
         return (phone != userInfo?.phoneNumber)
     }
     
-    func changeTo(name: String, surname: String, email: String, number: String, birthday: String, address: String) {
+    func changeTo(name: String, surname: String, email: String, number: String, birthday: String, address: String, changes: String) {
+        profileChanges = changes
         if !Validator.isValid(email: email) {
             output.showError(error: TextConstants.errorInvalidEmail)
 
@@ -98,8 +109,6 @@ class UserProfileInteractor: UserProfileInteractorInput {
             AccountService().updateUserProfile(parameters: parameters,
                                                success: { [weak self] response in
                 let nameIsEmpty = name.isEmpty
-                MenloworksTagsService.shared.onProfileNameChanged(isEmpty: nameIsEmpty)
-                MenloworksEventsService.shared.profileName(isEmpty: nameIsEmpty)
                 self?.userInfo?.name = name
                 self?.userInfo?.surname = surname
                                                 self?.updateEmailIfNeed(email: email, number: number, birthday: birthday, address: address)
@@ -116,7 +125,6 @@ class UserProfileInteractor: UserProfileInteractorInput {
             let parameters = UserEmailParameters(userEmail: email)
             AccountService().updateUserEmail(parameters: parameters,
                                              success: { [weak self] response in
-                                                MenloworksEventsService.shared.onEmailChanged()
                 self?.userInfo?.email = email
                 self?.updatePhoneIfNeed(number: number, birthday: birthday, address: address)
             }, fail: { [weak self] error in
@@ -134,6 +142,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
                                              success: { [weak self] response in
                                                 if let resp = response as? SignUpSuccessResponse {
                                                     self?.needSendOTP(response: resp)
+                                                    self?.updateBirthdayIfNeeded(birthday, address: address)
                                                 } else {
                                                     self?.fail(error: TextConstants.errorUnknown)
                                                 }
@@ -197,10 +206,13 @@ class UserProfileInteractor: UserProfileInteractorInput {
         ///need to refresh local info after change
         SingletonStorage.shared.getAccountInfoForUser(forceReload: true, success: { [weak self] response in
             DispatchQueue.main.async { [weak self] in
-                self?.output.dataWasUpdated()
-                self?.output.stopNetworkOperation()
+                guard let self = self else {
+                    return
+                }
+                self.output.dataWasUpdated()
+                self.output.stopNetworkOperation()
                 
-                self?.trackState(.save(isSuccess: true), errorType: nil)
+                self.trackProfileChanges()
             }
             
         }, fail: { [weak self] error in

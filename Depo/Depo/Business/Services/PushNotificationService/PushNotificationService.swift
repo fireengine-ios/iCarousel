@@ -379,7 +379,7 @@ final class PushNotificationService {
     }
     
     private func openBecomePremium() {
-        pushTo(router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
+        pushTo(router.premium())
     }
     
     private func openTBMaticPhotos(_ uuidsByString: String?) {

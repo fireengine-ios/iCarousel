@@ -85,18 +85,15 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     func onSuccessLogin() {
         interactor.checkEULA()
-        MenloworksAppEvents.onStartWithLogin(true)
     }
     
     func onSuccessLoginTurkcell() {
         turkcellLogin = true
         interactor.checkEULA()
-        MenloworksAppEvents.onStartWithLogin(true)
     }
     
     func onFailLogin() {
         showLandingPagesIfNeeded()
-        MenloworksAppEvents.onStartWithLogin(false)
     }
     
     func onNetworkFail() {

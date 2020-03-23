@@ -54,43 +54,49 @@ final class CacheManager {
         isCacheActualized = false
         isProcessing = true
 
-        MediaItemOperationsService.shared.removeZeroBytesLocalItems { [weak self] _ in
-            MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
-                guard let `self` = self else {
-                    return
-                }
-                
-                if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
-                    self.showPreparationCardAfterDelay()
-                    self.startAppendingAllRemotes(completion: { [weak self] in
-                        guard let `self` = self,
-                            !self.processingRemoteItems else {
-                                return
-                        }
-                        self.userDefaultsVars.currentRemotesPage = 0
-                        self.startProcessingAllLocals(completion: { [weak self] in
-                            guard let `self` = self,
-                                !self.processingLocalItems else {
-                                    return
-                            }
-                            //FIXME: need handling if we logouted and locals still in progress
-                            self.isProcessing = false
-                            self.isCacheActualized = true
-                            self.updatePreparation(isBegun: false)
-                            self.delegates.invoke { $0.didCompleteCacheActualization() }
-                        })
-                    })
-                } else {
-                    guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessLocalFiles flag in MediaItemsOperationService processLocalGallery method
+        self.startProccessingLocalAlbums { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            MediaItemOperationsService.shared.removeZeroBytesLocalItems { [weak self] _ in
+                MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
+                    guard let self = self else {
                         return
                     }
-                    self.showPreparationCardAfterDelay()
-                    self.startProcessingAllLocals(completion: { [weak self] in
-                        self?.isProcessing = false
-                        self?.isCacheActualized = true
-                        self?.updatePreparation(isBegun: false)
-                        self?.delegates.invoke { $0.didCompleteCacheActualization() }
-                    })
+                    
+                    if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
+                        self.showPreparationCardAfterDelay()
+                        self.startAppendingAllRemotes(completion: { [weak self] in
+                            guard let self = self, !self.processingRemoteItems else {
+                                return
+                            }
+                            
+                            self.userDefaultsVars.currentRemotesPage = 0
+                            self.startProcessingAllLocals(completion: { [weak self] in
+                                guard let self = self, !self.processingLocalItems else {
+                                        return
+                                }
+                                
+                                //FIXME: need handling if we logouted and locals still in progress
+                                self.isProcessing = false
+                                self.isCacheActualized = true
+                                self.updatePreparation(isBegun: false)
+                                self.delegates.invoke { $0.didCompleteCacheActualization() }
+                            })
+                        })
+                    } else {
+                        guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessLocalFiles flag in MediaItemsOperationService processLocalGallery method
+                            return
+                        }
+                        self.showPreparationCardAfterDelay()
+                        self.startProcessingAllLocals(completion: { [weak self] in
+                            self?.isProcessing = false
+                            self?.isCacheActualized = true
+                            self?.updatePreparation(isBegun: false)
+                            self?.delegates.invoke { $0.didCompleteCacheActualization() }
+                        })
+                    }
                 }
             }
         }
@@ -98,9 +104,9 @@ final class CacheManager {
     
     private func updatePreparation(isBegun: Bool) {
         if isBegun {
-            CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+            CardsManager.default.startOperationWith(type: .prepareQuickScroll)
         } else {
-            CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
+            CardsManager.default.stopOperationWith(type: .prepareQuickScroll)
         }
         
         DispatchQueue.main.async {
@@ -197,6 +203,10 @@ final class CacheManager {
             return
         }
         internetConnectionBackCallback()
+    }
+    
+    private func startProccessingLocalAlbums(completion: @escaping VoidHandler) {
+        MediaItemsAlbumOperationService.shared.processLocalMediaItemAlbums(completion: completion)
     }
     
     private func startProcessingAllLocals(completion: @escaping VoidHandler) {

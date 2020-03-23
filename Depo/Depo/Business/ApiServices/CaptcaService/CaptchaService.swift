@@ -45,13 +45,15 @@ final class CaptchaSignUpRequrementService {
         self.sessionManager = sessionManager
     }
     
-    public func getCaptchaRequrement(handler: @escaping ResponseBool) {
+    public func getCaptchaRequrement(isSignUp: Bool = false, handler: @escaping ResponseBool) {
         guard let requestURL = URL(string: RouteRequests.captchaRequired, relativeTo: RouteRequests.baseUrl) else {
             handler(ResponseResult.failed(CustomErrors.unknown))
             return
         }
+        let parameters = isSignUp ? ["channel" : "SIGN_UP"] : nil
         sessionManager
-            .request(requestURL)
+            .request(requestURL,
+                     parameters: parameters)
             .customValidate()
             .responseData { response in
                 switch response.result {

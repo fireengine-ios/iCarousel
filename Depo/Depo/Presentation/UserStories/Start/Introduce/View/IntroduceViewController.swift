@@ -28,7 +28,6 @@ class IntroduceViewController: ViewController, IntroduceViewInput, IntroduceData
         dataSource.delegate = self
         configurateView()
         output.viewIsReady()
-        MenloworksAppEvents.onTutorial()
     }
     
     func configurateView() {

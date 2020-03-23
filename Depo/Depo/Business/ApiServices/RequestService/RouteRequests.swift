@@ -290,6 +290,7 @@ struct RouteRequests {
         static let updateSecurityQuestion = accountApi +/ "updateSecurityQuestion"
         static let updateInfoFeedback = accountApi +/ "updateInfoFeedback"
         static let updateAddress = accountApi +/ "address"
+        static let info = accountApi +/ "info"
         
         enum Settings {
             /// without "s" at the end
@@ -303,11 +304,14 @@ struct RouteRequests {
         enum Permissions {
             static let authority = Account.accountApi +/ "authority"
             static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
+            static let featurePacksV2 = Account.accountApi +/ "feature-packs/v2/IOS"
             static let availableOffers = Account.accountApi +/ "available-offers/IOS"
             static let features = baseUrl +/ "features"
             
             static let permissionsList = Account.accountApi +/ "permission/list"
+            static let permissionWithType = Account.accountApi.absoluteString + "/permission/list?permissionType=%@"
             static let permissionsUpdate = Account.accountApi +/ "permission/update"
+            static let mobilePaymentPermissionFeedback = Account.accountApi +/ "updateMobilePaymentPermissionFeedback"
         }
     }
     
@@ -337,6 +341,7 @@ struct RouteRequests {
         static let detail = filesystemBase + "detail/%@"
         static let metaData = filesystemBase + "metadata"
         static let trash = filesystemBase + "trash"
+        static let emptyTrash = baseUrl +/ "trash/empty"
         static let hide = baseUrl +/ (filesystemBase + "hide")
         static let recover = (baseUrl +/ filesystemBase) +/ "recover"
     }

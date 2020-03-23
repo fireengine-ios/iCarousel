@@ -35,7 +35,7 @@ final class AutoUploadIsOffPopUp: BaseCardView {
     }
 
     func onCancel() {
-        CardsManager.default.stopOperationWithType(type: .autoUploadIsOff)
+        CardsManager.default.stopOperationWith(type: .autoUploadIsOff)
         PopUpService.shared.resetLoginCountForUploadOffPopUp()
     }
     

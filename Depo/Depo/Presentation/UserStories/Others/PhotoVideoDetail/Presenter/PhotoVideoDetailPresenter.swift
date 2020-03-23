@@ -11,7 +11,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     weak var view: PhotoVideoDetailViewInput!
     var interactor: PhotoVideoDetailInteractorInput!
     var router: PhotoVideoDetailRouterInput!
-    var moduleOutput: PhotoVideoDetailModuleOutput?
+    weak var moduleOutput: PhotoVideoDetailModuleOutput?
 
     weak var bottomBarPresenter: BottomSelectionTabBarModuleInput?
     var alertSheetModule: AlertFilesActionsSheetModuleInput?

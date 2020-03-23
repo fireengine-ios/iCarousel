@@ -6,6 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import Contacts
+
 enum SyncOperationType {
     case backup
     case restore
@@ -24,7 +26,7 @@ enum SyncOperationErrors {
     case depoError
 }
 
-class SyncContactsInteractor: SyncContactsInteractorInput {
+final class SyncContactsInteractor: SyncContactsInteractorInput {
 
     weak var output: SyncContactsInteractorOutput?
     
@@ -44,7 +46,6 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             }
             switch operationType {
             case .backup:
-                MenloworksAppEvents.onContactUploaded()
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactBackUpScreen())
                 self.analyticsService.track(event: .contactBackup)
                 self.analyticsService.logScreen(screen: .contactSyncBackUp)
@@ -56,7 +57,6 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
                 self.contactsSyncService.cancelAnalyze()
                 self.performOperation(forType: .backup)
             case .restore:
-                MenloworksAppEvents.onContactDownloaded()
                 self.analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                                          eventActions: .phonebook,
                                                          eventLabel: .contact(.restore))
@@ -111,6 +111,15 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
         })
     }
     
+    func getContactsPermissionStatus(completionHandler: @escaping ContactsPermissionCallback) {
+        switch CNContactStore.authorizationStatus(for: .contacts) {
+        case .notDetermined, .restricted, .denied:
+            completionHandler(false)
+        case .authorized:
+            completionHandler(true)
+        }
+    }
+    
     func performOperation(forType type: SYNCMode) {
         UIApplication.setIdleTimerDisabled(true)
 
@@ -133,8 +142,8 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
             debugLog("contactsSyncService.executeOperation finishCallback: \(result)")
             DispatchQueue.main.async {
                 self?.output?.success(response: result, forOperation: opertionType)
-                CardsManager.default.stopOperationWithType(type: .contactBacupOld)
-                CardsManager.default.stopOperationWithType(type: .contactBacupEmpty)
+                CardsManager.default.stopOperationWith(type: .contactBacupOld)
+                CardsManager.default.stopOperationWith(type: .contactBacupEmpty)
             }
         }, errorCallback: { [weak self] errorType, opertionType in
             self?.trackNetmera(operationType: type, status: .failure)
@@ -181,7 +190,6 @@ class SyncContactsInteractor: SyncContactsInteractorInput {
         case .restore:
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .restore, staus: status))
         }
-
     }
     
     private func loadLastBackUp() {

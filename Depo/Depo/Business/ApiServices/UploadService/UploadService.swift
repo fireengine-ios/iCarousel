@@ -164,7 +164,7 @@ final class UploadService: BaseRequestService {
                             filteredItems.forEach { wrapData in
                                 ItemOperationManager.default.cancelledUpload(file: wrapData)
                             }
-                            
+                            //FIXME: Bad practice to call popup from service directly, we have controllers that handle this error
                             DispatchQueue.main.async {
                                 self?.showOutOfSpaceAlert()
                             }
@@ -194,7 +194,7 @@ final class UploadService: BaseRequestService {
     
     private func hideUploadCardIfNeeded() {
         if uploadOperations.filter({ $0.uploadType?.isContained(in: [.upload, .syncToUse]) ?? false }).count == 0 {
-            CardsManager.default.stopOperationWithType(type: .upload)
+            CardsManager.default.stopOperationWith(type: .upload)
         }
     }
     
@@ -291,6 +291,7 @@ final class UploadService: BaseRequestService {
                             //                        checkIfFinished()
                             //                    } else {
                             //sync failed
+                            ItemOperationManager.default.failedUploadFile(file: finishedOperation.inputItem, error: error)
                             fail(error)
                             //                    }
                             return
@@ -390,6 +391,7 @@ final class UploadService: BaseRequestService {
                                 if let fileName = finishedOperation.inputItem.name {
                                     self.logEvent("FinishUpload \(fileName) FAIL: \(error.errorDescription ?? error.description)")
                                 }
+                                ItemOperationManager.default.failedUploadFile(file: finishedOperation.inputItem, error: error)
                                 fail(error)
                             }
                             return
@@ -487,6 +489,7 @@ final class UploadService: BaseRequestService {
                                 }
                                 self.uploadOperations.removeIfExists(finishedOperation)
                                 self.stopTracking()
+                                ItemOperationManager.default.failedUploadFile(file: finishedOperation.inputItem, error: error)
                                 fail(error)
                             }
                             return
@@ -550,8 +553,8 @@ final class UploadService: BaseRequestService {
         clearUploadCounters()
         clearSyncCounters()
         
-        CardsManager.default.stopOperationWithType(type: .upload)
-        CardsManager.default.stopOperationWithType(type: .sync)
+        CardsManager.default.stopOperationWith(type: .upload)
+        CardsManager.default.stopOperationWith(type: .sync)
         ItemOperationManager.default.syncFinished()
     }
     
@@ -726,7 +729,7 @@ final class UploadService: BaseRequestService {
                         /// Provided first-byte-pos is not the continuation of the last-byte-pos of pre-uploaded part!
                         handler(.discontinuityError, nil)
                         
-                    case "RU_1":
+                    case "RU_10":
                         /// Invalid upload request! Initial upload must start from the beginning
                         handler(.invalidUploadRequest, nil)
                         

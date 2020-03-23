@@ -270,6 +270,7 @@
 "Usage Info and Packages" = "Usage Details";
 "Recently Deleted Files" = "Recently Deleted Files";
 "Auto Sync" = "Auto Sync";
+"auto_sync_album_items" = "Auto-Sync Items";
 "Back-up my contacts" = "Backup My Contacts";
 "Leave feedback" = "Contact Us";
 "Upload Photo" = "Upload Photo";
@@ -587,7 +588,7 @@
 "Your last backup was on %@" = "Your last backup was on %@";
 "Contacts Sync" = "Contacts Sync";
 "Sort By" = "Sort by";
-"LifeboxLargePopUpTitle100" = "Your lifebox storage is full";
+"LifeboxLargePopUpTitle100" = "Your lifebox storage is full!";
 "LifeboxLargePopUpTitle90" = "You are using 90% of lifebox storage";
 "LifeboxLargePopUpTitle80" = "You are using 80% of lifebox storage";
 "LifeboxLargePopUpSubTitle" = "Please take a look at the upgrading options to upgrade your storage.";
@@ -657,6 +658,7 @@
 "Bad internet connection" = "Bad internet connection";
 "download_error_unsupported_extension" = "Downloading is not supported for this type of file";
 "Show only synced items" = "Show only synced items";
+"photo_video_auto_sync_settings" = "AutoSync Settings";
 "Your lifebox storage is almost full!" = "Your lifebox storage is almost full!";
 "This edited photo will be saved as a new photo in your device gallery" = "This edited photo will be saved as a new photo in your device gallery";
 "We couldn’t find any place on your Lifebox yet." = "We couldn’t find any places in your lifebox yet.";
@@ -755,6 +757,7 @@
 
 /*PackageInfoView*/
 "my_storage" = "My Storage";
+"my_packages" = "My Packages";
 "see_details" = "See Details";
 "face_image_description" = "Since you have a standard account, 100 of your photos will be processed. You will only see 3 people, objects and places in your smart albums.";
 "face_image_upgrade" = "Upgrade to lifebox Premium to use this feature without any limitation.";
@@ -912,6 +915,7 @@
 "surname" = "Surname";
 "change password" = "Change Password";
 "left_space" = "%1$@ / %2$@";
+"storage_usage_information" = "Usage";
 
 /*Packages*/
 "packages_i_have" = "Packages I Have";
@@ -999,9 +1003,9 @@
 "Temporary error occurred. Please try again later." = "Temporary error occurred. Please try again later.";
 "face_tags_description_premium" = "When you enable Face&Image Recognition feature, the photos you have uploaded will be grouped according to the faces and objects. If the location service option is turned on, the photos will also be grouped according to the location information. We will be able to create automated stories for you based on this grouping.";
 "terms_of_use" = "Terms of Use";
-"privacy_policy" = "Privacy Policy";
+"privacy_policy" = "For detailed information about your personal data that we collect through lifebox, please read our Privacy Policy";
 "face_tags_description_standart" = "When you enable Face&Image Recognition feature, the photos you have uploaded will be grouped according to the faces and objects. If the location service option is turned on, the photos will also be grouped according to the location information. We will be able to create automated stories for you based on this grouping.";
-"terms_and_use_introduction_checkbox" = "I have read and accepted Terms of Use.\nClick for Privacy Policy details.";
+"terms_and_use_introduction_checkbox" = "I have read and accepted Terms of Use.";
 "privacy_policy_condition" = "Privacy Policy";
 "photo_pick_description" = "If you enable the button and connect your Instagram account, we'll be able to provide a personalized, enhanced experience by performing custom analysis on each new PhotoPick analysis.";
 
@@ -1039,7 +1043,7 @@
 "import_from_spotify_title" = "Connect Spotify";
 "Spotify" = "Spotify";
 "spotify_remove_connection_warning_title" = "You're about to remove your Spotify connection.";
-"spotify_remove_connection_warning_message" = "Are you sure you want to remove your Spotify connection?";
+"spotify_remove_connection_warning_message" = "Are you sure you want to remove your Spotify connection?\n\n";
 "support_form_problem_description" = "We support you in Turkish, English, Arabic languages, so please write your comment in one of these languages";
 "contact_us_subject_1" = "Contacts Problem";
 "contact_us_subject_2" = "Photos Problem";
@@ -1059,7 +1063,7 @@
 "selected_items_limit_download" = "You cannot download more than %d files";
 "selected_items_limit_delete" = "You cannot delete more than %d files";
 "login_settings_security_passcode_description" = "You can receive your Turkcell Password by texting SIFRE to 2200 and if you enable this button, you can login to lifebox using this password.";
-"login_settings_security_autologin_description" = "If you enable this button, you can auto-login to lifebox while connected to internet with 3G/LTE.";
+"login_settings_security_autologin_description" = "If you enable this button, you can automatically login to lifebox while connected to internet with 3G/LTE.\nFor your security, this button is set to off for corporate gsm lines. If you want to activate it, please make sure to disable it before you change your gsm line.";
 "login_settings_two_factor_auth_description" = "If you enable Two-Factor Authentication, you will be asked to verify your identity before login. We will send a security code to your phone number or e-mail for verification. This will allow you to login your account more securely.";
 "two_fa_invalid_session_error_message" = "Session has expired, please request a new code";
 "two_fa_invalid_challenge_error_message" = "Session has expired, please request a new code";
@@ -1117,6 +1121,11 @@
 "spotify_cancel_import_continue_button" = "Continue Importing";
 "spotify_cancel_import_cancel_button" = "Cancel Importing";
 "account_verified" = "Thank you for verifying your account!";
+"settings_userinfo_name_surname" = "settings_userinfo_name_surname";
+"settings_userinfo_email" = "settings_userinfo_email";
+"settings_userinfo_phone" = "settings_userinfo_phone";
+"settings_action_sheet_profile_details" = "settings_action_sheet_profile_details";
+"settings_action_sheet_edit_profile_photo" = "settings_action_sheet_edit_profile_photo";
 
 /*2FA Error Messages*/
 "two_fa_too_many_requests_error_message" = "Too many verification code requested, please try again later";
@@ -1384,7 +1393,7 @@
 "unhide_popup_text" = "Selected item(s) will be unhiden and moved back to previous folders. Are you sure to continue?";
 
 /*divorce card*/
-"divorce_card_title" = "Unchain Your Heart!";
+"divorce_card_title" = "Tip: You can add some fun to your memories with our new GiFs and Stickers and share them with your friends. Select a photo and start having FUN! Watch the video for the details.";
 "trash_bin_album_slider_title" = "Trash Bin";
 "trash_bin_album_slider_empty" = "There is no deleted album yet.";
 "trash_bin_empty" = "There is no deleted item yet.";
@@ -1426,7 +1435,7 @@
 "restore_folders_success_text" = "Folder(s) restored successfully.";
 "LifeboxLargePopUpTitleBetween80And99" = "%.0f%% of your storage is full!";
 "LifeboxLargePopUpDeleteFilesButtonTitle" = "Delete Files";
-"dialog_contact_sync_vcf_file_upload_error" = "A problem occured during uploading vcf file to lifebox";
+"dialog_contact_sync_vcf_file_upload_error" = "Before restoring your contacts, we back up the contacts in your device to secure your data. Since your lifebox storage is full, you cannot proceed backing up nor restoring your contacts. You can expand your storage or delete any files in lifebox.";
 "privacy_policy_cell" = "Privacy Policy";
 "full_quota_warning_popup_title" = "You have reached your lifebox storage limit!";
 "full_quota_warning_popup_description" = "Since your lifebox storage is full, you cannot upload new contents. You can buy a new package or delete files.";
@@ -1435,3 +1444,79 @@
 "LifeboxLargePopUpSubTitleBeetween80And99" = "Let's have a look at upgrade options";
 "LifeboxLargePopUpSubTitle100Premium" = "Please take a look at the upgrading options to upgrade your storage.";
 "LifeboxLargePopUpSubTitle100Freemium" = "Please take a look at the upgrading options to upgrade your storage. Your content will be deleted soon.";
+
+"LifeboxLargePopUpSubTitle100Premium" = "You have exceeded your lifebox storage. You can buy a new package to continue storing your memories or reduce your content to fit your available storage.";
+"LifeboxLargePopUpSubTitle100Freemium" = "You have exceeded your lifebox storage. Unless you buy a new package or reduce your contents to fit in your available storage, all of your content will be deleted.";
+"empty_trash_bin" = "Empty Trash Bin";
+"confirm_dialog_header_empty_trashbin" = "Empty Trash Bin";
+"confirm_empty_trashbin" = "All of the items in trash bin will be permanently deleted and you will have no access to them. Are you sure to continue?";
+"confirm_empty_trashbin_button" = "Empty Trash Bin";
+"success_empty_trashbin" = "All of the items are permanently deleted";
+"mobile_payment_title" = "Mobile Payment";
+"mobile_payment_description" = "When you activate Turkcell Mobile Payment transactions, you can easily purchase digital products or services through your Turkcell line. You can access the contract details here: Payment Services and Electronic Money Agreement";
+"mobile_payment_view_title" = "Turkcell Mobile Payment";
+"mobile_payment_view_description" = "You can activate Mobile Payment Permission for your Turkcell line by approving the following item. Digital products that you purchase through Mobile Payment are charged to Turkcell bill.";
+"mobile_payment_view_link_text" = "I accept Payment Service and Electronic Money Agreement.";
+"mobile_payment_close_popup_title" = "Deactivate Mobile Payment Permission";
+"mobile_payment_close_popup_description" = "You can call 532 Customer Support to turn off your Mobile Payment Permission.";
+"mobile_payment_close_popup_description_bold_range" = "532";
+"mobile_payment_open_popup_title" = "Earn Weekly 2GB Internet!";
+"mobile_payment_open_popup_description" = "You can earn 2GB Internet by activating the Mobile Payment Permission. Click Continue and gain weekly 2GB internet that will be offered only once.\n\nYou can find more information about campaign at www.turkcell.com.tr";
+"mobile_payment_open_popup_description_bold_range" = "";
+"mobile_payment_open_popup_later_button" = "Later";
+"mobile_payment_open_popup_continue_button" = "Continue";
+"we_recommend" = "We recommend";
+"show_more" = "Show more";
+"show_less" = "Show less";
+"face_recognition_package_description" = "Face Recognition";
+"delete_dublicate_package_description" = "Delete Dublicate";
+"premium_user_package_description" = "Premium user";
+"original_сopy_package_description" = "Original сopy";
+"bundle_package_addon_type" = "with +Premium";
+"storage_only_package_addon_type" = "Storage only";
+"feature_package_name" = "Premium";
+
+"bundle_package_addon_type" = "with +Premium";
+"storage_only_package_addon_type" = "Storage only";
+"settings_userinfo_name_surname" = "settings_userinfo_name_surname";
+"settings_userinfo_email" = "settings_userinfo_email";
+"settings_userinfo_phone" = "settings_userinfo_phone";
+"settings_action_sheet_profile_details" = "settings_action_sheet_profile_details";
+"settings_action_sheet_edit_profile_photo" = "settings_action_sheet_edit_profile_photo";
+"original_сopy_package_description" = "Original сopy";
+"become_premium_navbar_title" = "We Recommend";
+"become_premium_header_default_title" = "We have a special offer for you!";
+"become_premium_header_default_subtitle" = "You can have Premium features lorem ipsum dolor sit amet consecitur";
+"become_premium_header_people_title" = "become_premium_header_people_title";
+"become_premium_header_people_subtitle" = "become_premium_header_people_subtitle";
+"become_premium_header_places_title" = "become_premium_header_places_title";
+"become_premium_header_places_subtitle" = "become_premium_header_places_subtitle";
+"become_premium_header_things_title" = "become_premium_header_things_title";
+"become_premium_header_things_subtitle" = "become_premium_header_things_subtitle";
+"become_premium_header_contact_sync_title" = "become_premium_header_contact_sync_title";
+"become_premium_header_contact_sync_subtitle" = "become_premium_header_contact_sync_subtitle";
+"become_premium_or_text" = "Or,";
+"become_premium_see_all_packages" = "See All Packages";
+
+"contact_sync_confirm_premium_popup_title" = "Confirmation";
+"contact_sync_confirm_premium_popup_text" = "contact_sync_confirm_premium_popup_text";
+"become_premium_header_contact_sync_title" = "We have a special offer for you!";
+"become_premium_header_contact_sync_subtitle" = "You can have Premium features lorem ipsum dolor sit amet consecitur";
+"become_premium_description" = "Orijinal kalitede saklama\nSınırsız Photopick Analiz\nSınırsız Face/Image Processing\nDelete Duplicate Contacts";
+"become_premium_or_text" = "Or,";
+"become_premium_see_all_packages" = "See All Packages";
+"dialog_header_contact_sync_vcf_file_upload_error" = "You have reached your lifebox storage limit!";
+"dialog_contact_sync_vcf_error_upper_button" = "Expand My Storage";
+"dialog_contact_sync_vcf_error_lower_button" = "Delete Files";
+"ubsent_contacts" = "There is no contact in your device";
+"ubsent_contacts_in_lifebox" = "There is not any contact in your Lifebox";
+"mobile_payment_link" = "Payment Services and Electronic Money Agreement";
+"mobile_payment_success_popup_title" = "You activated Turkcell Mobile Payment successfully.";
+"mobile_payment_success_popup_message" = "You can manage Turkcell Mobile Payment Permission under Settings-Permission menu.";
+"storage_usage_information" = "Usage";
+"auto_sync_album_items" = "Auto-Sync Items";
+"my_packages" = "My Packages";
+"feature_package_name" = "Premium";
+"contact_sync_confirm_premium_popup_title" = "Confirmation";
+"contact_sync_confirm_premium_popup_text" = "contact_sync_confirm_premium_popup_text";
+"my_packages_description" = "Mevcut aboneliklerini aşağıdaki alanda göremiyorsan, aboneliklerini yenilemek için butona basabilirsin.";

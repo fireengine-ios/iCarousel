@@ -23,7 +23,7 @@ struct AnalyticsDimension {
     let countOfUploadMetric: Int?
     let countOfDownloadMetric: Int?
     let gsmOperatorType: String
-    let deviceId: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
+    let deviceId: String = Device.deviceId ?? ""
     let loginType: GADementionValues.login?
     let errorType: String?
     
@@ -37,6 +37,8 @@ struct AnalyticsDimension {
     let totalDraw: Int?
     
     let itemsOperationCount: GADementionValues.ItemsOperationCount?
+    
+    let editFields: String?
 
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
@@ -98,6 +100,9 @@ struct AnalyticsDimension {
         }
         if let itemsOperation = itemsOperationCount {
             dimesionDictionary[GADementionsFields.itemsCount(itemsOperation.operationType).text] = itemsOperation.count
+        }
+        if let editFields = editFields {
+            dimesionDictionary[GADementionsFields.editFields.text] = editFields
         }
         
         return dimesionDictionary

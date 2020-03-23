@@ -23,11 +23,15 @@ class SyncContactsRouter: SyncContactsRouterInput {
     }
     
     func goToPremium() {
-        router.pushViewController(viewController: router.premium(title: TextConstants.duplicatedContacts, headerTitle: TextConstants.deleteDuplicatedContactsForPremiumTitle))
-        
+        router.pushViewController(viewController: router.premium(source: .contactSync))
     }
     
     func showError(errorMessage: String) {
         UIApplication.showErrorAlert(message: errorMessage)
+    }
+    
+    func showFullQuotaPopUp() {
+        let popUpType: FullQuotaWarningPopUpType = .contact
+        router.showFullQuotaPopUp(popUpType)
     }
 }

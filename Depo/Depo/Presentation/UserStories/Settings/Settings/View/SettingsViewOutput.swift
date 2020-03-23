@@ -27,9 +27,7 @@ protocol SettingsViewOutput {
     func goToHelpAndSupport()
     
     func goToTermsAndPolicy()
-    
-    func goToUsageInfo()
-    
+        
     func goToPermissions()
     //Photo related methods - below
     func onChangeUserPhoto()
@@ -51,6 +49,12 @@ protocol SettingsViewOutput {
     
     func goTurkcellSecurity()
     
+    func goToMyProfile(userInfo: AccountInfoResponse)
+    
+    func presentErrorMessage(errorMessage: String)
+    
+    func presentActionSheet(alertController: UIAlertController)
+    
     var isPasscodeEmpty: Bool { get }
     
     var isPremiumUser: Bool { get }
@@ -58,6 +62,6 @@ protocol SettingsViewOutput {
 //    func turkcellSecurityStatusNeeded(passcode: Bool, autoLogin: Bool)
 //    func turkcellSecurityChanged(passcode: Bool, autoLogin: Bool)
 //
-    var inNeedOfMail: Bool { get }
+    var isMailRequired: Bool { get }
     var isTurkCellUser: Bool { get }
 }

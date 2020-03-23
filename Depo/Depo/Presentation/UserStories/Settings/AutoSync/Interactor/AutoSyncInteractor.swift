@@ -6,29 +6,43 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-class AutoSyncInteractor: AutoSyncInteractorInput {
-
+final class AutoSyncInteractor: AutoSyncInteractorInput {
     weak var output: AutoSyncInteractorOutput!
 
     private var dataStorage = AutoSyncDataStorage()
     private let localMediaStorage = LocalMediaStorage.default
     private lazy var locationManager = LocationManager.shared
     private let analyticsManager: AnalyticsService = factory.resolve()
+    private let albumsService = MediaItemsAlbumOperationService.shared
     
     func prepareCellModels() {
-        let settings = dataStorage.settings
-        output.prepaire(syncSettings: settings)
+        localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] photoAccessGranted, _ in
+            if photoAccessGranted {
+                self?.getAlbums { [weak self] albums in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    let settings = self.dataStorage.settings
+                    DispatchQueue.main.async {
+                        self.output.prepaire(syncSettings: settings, albums: albums)
+                    }
+                }
+            } else {
+                self?.output.checkPhotoPermissionsFailed()
+            }
+        }
     }
     
     func trackScreen(fromSettings: Bool) {
         AnalyticsService.sendNetmeraEvent(event: fromSettings ? NetmeraEvents.Screens.FirstAutoSyncScreen() : NetmeraEvents.Screens.AutoSyncScreen())
     }
     
-    func onSave(settings: AutoSyncSettings, fromSettings: Bool) {
+    func onSave(settings: AutoSyncSettings, selectedAlbums: [AutoSyncAlbum], fromSettings: Bool) {
         AnalyticsService.sendNetmeraEvent(event: fromSettings ? NetmeraEvents.Actions.Autosync(autosyncSettings: settings) : NetmeraEvents.Actions.FirstAutosync(autosyncSettings: settings))
-        output.onSettingSaved()
-        dataStorage.save(autoSyncSettings: settings , fromSettings: fromSettings)
+        dataStorage.save(autoSyncSettings: settings, fromSettings: fromSettings)
         SyncServiceManager.shared.update(syncSettings: settings)
+        albumsService.save(selectedAlbums: selectedAlbums)
     }
     
     func checkPermissions() {
@@ -43,6 +57,13 @@ class AutoSyncInteractor: AutoSyncInteractorInput {
                 
                 self?.output.onCheckPermissions(photoAccessGranted: photoAccessGranted, locationAccessGranted: locationAccessGranted)
             }
+        }
+    }
+    
+    private func getAlbums(completion: @escaping (_ albums: [AutoSyncAlbum]) -> Void) {
+        albumsService.getAutoSyncAlbums { mediaItemAlbums in
+            let albums = mediaItemAlbums.map { AutoSyncAlbum(mediaItemAlbum: $0) }
+            completion(albums)
         }
     }
 }

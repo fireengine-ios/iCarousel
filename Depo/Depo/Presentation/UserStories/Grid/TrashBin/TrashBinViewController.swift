@@ -24,7 +24,7 @@ final class TrashBinViewController: BaseViewController, NibInit, SegmentedChildC
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
-    var photoVideoDetailModule: PhotoVideoDetailModuleInput?
+    weak var photoVideoDetailModule: PhotoVideoDetailModuleInput? //no need for stong reference, since we need it till ViewController is alive
     
     //MARK: - View lifecycle
     
@@ -334,6 +334,10 @@ extension TrashBinViewController: TrashBinThreeDotMenuManagerDelegate {
         }
         router.openInfo(item: item)
     }
+    
+    func onThreeDotsManagerDeleteAll() {
+        interactor.emptyTrashBin()
+    }
 }
 
 //MARK: - Routing
@@ -444,6 +448,10 @@ extension TrashBinViewController: ItemOperationManagerViewProtocol {
         remove(albums: albums)
     }
     
+    func didEmptyTrashBin() {
+        reloadData(needShowSpinner: true)
+    }
+    
     private func remove(items: [Item]) {
         reloadAlbums()
         dataSource.remove(items: items) { [weak self] in
@@ -489,7 +497,7 @@ extension TrashBinViewController: MoreFilesActionsInteractorOutput {
     
     func operationFailed(type: ElementTypes, message: String) {
         asyncOperationSuccess()
-        if type.isContained(in: ElementTypes.trashState) {
+        if type.isContained(in: [.restore, .delete, .emptyTrashBin]) {
             showMessage(errorMessage: message)
         }
     }

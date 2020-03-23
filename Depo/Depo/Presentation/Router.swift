@@ -320,6 +320,11 @@ class RouterVC: NSObject {
         if let presentedController = navigationController?.viewControllers.last?.presentedViewController as? TBMatikPhotosViewController {
             return presentedController
         }
+        
+        if let navBarController = navigationController?.viewControllers.last?.presentedViewController as? UINavigationController {
+            return navBarController.visibleViewController
+        }
+        
         return navigationController?.viewControllers.last
     }
         
@@ -1033,8 +1038,8 @@ class RouterVC: NSObject {
     
     // MARK: - Premium
     
-    func premium(title: String, headerTitle: String, module: FaceImageItemsModuleOutput? = nil, viewControllerForPresentOn: UIViewController? = nil) -> UIViewController{
-        let controller = PremiumModuleInitializer.initializePremiumController(with: "PremiumViewController", title: title, headerTitle: headerTitle, module: module, viewControllerForPresentOn: viewControllerForPresentOn)
+    func premium(source: BecomePremiumViewSourceType = .default, module: FaceImageItemsModuleOutput? = nil, viewControllerForPresentOn: UIViewController? = nil) -> UIViewController{
+        let controller = PremiumModuleInitializer.initializePremiumController(source: source, module: module, viewControllerForPresentOn: viewControllerForPresentOn)
         return controller
     }
     
@@ -1169,12 +1174,20 @@ class RouterVC: NSObject {
         return TrashBinViewController.initFromNib()
     }
     
-    func showFullQuotaPopUp() {
-        let controller = FullQuotaWarningPopUp()
+    func showFullQuotaPopUp(_ popUpType: FullQuotaWarningPopUpType = .standard) {
+        let controller = FullQuotaWarningPopUp(popUpType)
         DispatchQueue.main.async {
-            if let topController = self.defaultTopController, topController is AutoSyncViewController == false {
+            if
+                let topController = self.defaultTopController,
+                topController is AutoSyncViewController == false,
+                topController is FullQuotaWarningPopUp == false,
+                topController is LoginViewController == false {
                 topController.present(controller, animated: false)
             }
         }
+    }
+    
+    func mobilePaymentPermissionController() -> MobilePaymentPermissionViewController {
+        return MobilePaymentPermissionViewController.initFromNib()
     }
 }

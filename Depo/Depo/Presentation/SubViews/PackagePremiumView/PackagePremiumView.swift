@@ -53,7 +53,7 @@ final class PackagePremiumView: UIView, NibInit {
 
     @IBAction private func onBecomePremiumTap(_ sender: Any) {
         let router = RouterVC()
-        let vc = router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
+        let vc = router.premium()
         router.pushViewController(viewController: vc)
     }
 }

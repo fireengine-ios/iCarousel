@@ -35,6 +35,19 @@ extension PHAsset {
         return name
     }
     
+    var containingAlbums: [PHAssetCollection] {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return []
+        }
+        
+        var albums = [PHAssetCollection]()
+        let fetchResult = PHAssetCollection.fetchAssetCollectionsContaining(self, with: .album, options: nil)
+        fetchResult.enumerateObjects { album, _, _ in
+            albums.append(album)
+        }
+        return albums
+    }
+    
     /// MAYBE WILL BE NEEDed
 //    var uniformTypeIdentifier: String? {
 //        if #available(iOS 9.0, *) {

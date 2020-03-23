@@ -264,6 +264,10 @@ enum AnalyticsAppScreens {
     case trashBin
     case fileOperationConfirmPopup(GAOperationType)
     
+    case mobilePaymentPermission
+    case mobilePaymentExplanation
+    case eulaExplanation
+    
     var name: String {
         switch self {
         ///authorization
@@ -472,6 +476,12 @@ enum AnalyticsAppScreens {
             return "Trash Bin"
         case .fileOperationConfirmPopup(let operationType):
             return operationType.confirmPopupEventActionText
+        case .mobilePaymentPermission:
+            return "Mobile Payment Permission"
+        case .mobilePaymentExplanation:
+            return "Mobile Payment Explanation"
+        case .eulaExplanation:
+            return "Eula Explanation"
         }
     }
 }
@@ -691,6 +701,14 @@ enum GAEventAction {
     case hiddenBin
     case trashBin
     case saveHiddenSuccessPopup
+    case overQuotaFreemiumPopup
+    case overQuotaPremiumPopup
+    case quotaAlmostFullPopup
+    case quotaLimitFullPopup
+    case quotaLimitFullContactRestore
+    case mobilePaymentPermission
+    case mobilePaymentExplanation
+    case openMobilePaymentPermission
     
     case fileOperation(GAOperationType)
     case fileOperationPopup(GAOperationType)
@@ -838,10 +856,26 @@ enum GAEventAction {
             return "Trash bin"
         case .saveHiddenSuccessPopup:
             return "Save Hidden Successfully Pop Up"
+        case .overQuotaFreemiumPopup:
+            return "Over Quota Freemium Pop up"
+        case .overQuotaPremiumPopup:
+            return "Over Quota Premium Pop up"
+        case .quotaAlmostFullPopup:
+            return "Quota Almost Full Pop up"
+        case .quotaLimitFullPopup:
+            return "Quota Limit Full Pop up"
+        case .quotaLimitFullContactRestore:
+            return "Quota Limit Full Contact Restore"
         case .fileOperation(let operationType):
             return operationType.eventActionText
         case .fileOperationPopup(let operationType):
             return operationType.popupEventActionText
+        case .mobilePaymentPermission:
+            return "Mobile Payment Permission"
+        case .mobilePaymentExplanation:
+            return "Mobile Payment Explanation"
+        case .openMobilePaymentPermission:
+            return "Open Mobile Payment Permission"
         }
     }
 }
@@ -972,6 +1006,26 @@ enum GAEventLabel {
         }
     }
     
+    enum OverQuotaType {
+        case expandMyStorage(_ checked: Bool = false)
+        case deleteFiles(_ checked: Bool = false)
+        case cancel(_ checked: Bool = false)
+        case skip
+        
+        var text: String {
+            switch self {
+            case .expandMyStorage(let checked):
+                return checked ? "Expand My Storage - Checked" : "Expand My Storage"
+            case .deleteFiles(let checked):
+                return checked ? "Delete Files - Checked" : "Delete Files"
+            case .cancel(let checked):
+                return checked ? "Cancel - Checked" : "Cancel"
+            case .skip:
+                return "Skip"
+            }
+        }
+    }
+    
     enum TBMatikEvent {
         case notification
         case seeTimeline
@@ -1068,6 +1122,39 @@ enum GAEventLabel {
         }
     }
     
+    enum ProfileChangeType {
+        case name
+        case surname
+        case email
+        case birthday
+        case address
+        case phone
+        case password
+        case securityQuestion
+        
+        var text: String {
+            switch self {
+            case .name:
+                return "Name"
+            case .surname:
+                return "Surname"
+            case .email:
+                return "E-Mail"
+            case .birthday:
+                return "Birthday"
+            case .address:
+                return "Address"
+            case .phone:
+                return "Phone"
+            case .password:
+                return "Password"
+            case .securityQuestion:
+                return "SecurityQuestion"
+            }
+        }
+        
+    }
+    
     case empty
     case custom(String)
     
@@ -1158,6 +1245,11 @@ enum GAEventLabel {
     case proceedWithExistingPeople    
     case divorceButtonVideo
     case fileTypeOperation(FileType)
+    case overQuota(_ event: OverQuotaType)
+    case mobilePaymentAction(_ isContinue: Bool)
+    case backWithCheck(_ isChecked: Bool)
+    case isOn(_ isOn: Bool)
+    case back
     
     var text: String {
         switch self {
@@ -1357,6 +1449,16 @@ enum GAEventLabel {
             return "Divorce Button Video"
         case .fileTypeOperation(let fileType):
             return fileType.text
+        case .overQuota(let type):
+            return type.text
+        case .mobilePaymentAction(let isContinue):
+            return isContinue ? "Continue" : "Remind Me Later"
+        case .backWithCheck(let isChecked):
+            return isChecked ? "Back - Checked" : "Back"
+        case .isOn(let isOn):
+            return isOn ? "On" : "Off"
+        case .back:
+            return "Back"
         }
     }
     
@@ -1407,6 +1509,7 @@ enum GADementionsFields {
     case spotify
     case dailyDrawleft
     case itemsCount(GAOperationType)
+    case editFields
     
     var text: String {
         switch self {
@@ -1458,6 +1561,8 @@ enum GADementionsFields {
             return "dailyDrawleft"
         case .itemsCount(let operationType):
             return operationType.itemsCountText
+        case .editFields:
+            return "editFields"
         }
     }
     

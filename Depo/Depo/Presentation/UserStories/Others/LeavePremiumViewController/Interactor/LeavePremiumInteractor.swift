@@ -51,7 +51,7 @@ extension LeavePremiumInteractor: LeavePremiumInteractorInput {
     }
     
     func getPrice(for offer: SubscriptionPlanBaseResponse, accountType: AccountType) -> String {
-        return packageService.getPriceInfo(for: offer, accountType: accountType)
+        return packageService.getOfferPrice(for: offer, accountType: accountType)
     }
     
     func getAppleInfo(for offer: SubscriptionPlanBaseResponse) {

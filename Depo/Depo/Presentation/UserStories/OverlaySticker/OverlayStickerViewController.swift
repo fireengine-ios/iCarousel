@@ -50,7 +50,7 @@ final class OverlayStickerViewController: ViewController {
     }
     
     var imageName: String?
-    var smashCoordinator: SmashServiceProtocol?
+    var smashActionService: SmashActionServiceProtocol?
 
     private lazy var defaultName = UUID().uuidString
     
@@ -89,23 +89,30 @@ final class OverlayStickerViewController: ViewController {
             return
         }
 
-        smashCoordinator?.smashConfirmPopUp { [weak self] isConfirmed in
-            
+        smashActionService?.startOperation { [weak self] isConfirmed in
             guard let self = self else {
                 return
             }
             
+            let eventLable = self.overlayingStickerImageView.getAttachmentInfoForAnalytics()
             self.analyticsService.logScreen(screen: .smashConfirmPopUp)
-            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .smashSave, eventLabel: self.overlayingStickerImageView.getAttachmentInfoForAnalytics())
-            self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .smashConfirmPopUp, eventLabel: isConfirmed ? .ok : .cancel)
-        
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                     eventActions: .smashSave,
+                                                     eventLabel: eventLable)
+            self.analyticsService.trackCustomGAEvent(eventCategory: .popUp,
+                                                     eventActions: .smashConfirmPopUp,
+                                                     eventLabel: isConfirmed ? .ok : .cancel)
+            
             let gifsToStickersIds = self.overlayingStickerImageView.getAttachmentGifStickersIDs()
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SmashSave(action: isConfirmed ? .save : .cancel, stickerId: gifsToStickersIds.stickersIDs, gifId: gifsToStickersIds.gifsIDs))
+            
+            let event = NetmeraEvents.Actions.SmashSave(action: isConfirmed ? .save : .cancel,
+                                                        stickerId: gifsToStickersIds.stickersIDs,
+                                                        gifId: gifsToStickersIds.gifsIDs)
+            AnalyticsService.sendNetmeraEvent(event: event)
             
             if isConfirmed {
-                
                 self.showSpinnerIncludeNavigationBar()
-            
+                
                 guard let (originalImage, attachments) = self.overlayingStickerImageView.getCondition() else {
                     assertionFailure()
                     return
@@ -162,7 +169,7 @@ final class OverlayStickerViewController: ViewController {
 
     private func showCompletionPopUp() {
         analyticsService.logScreen(screen: .saveSmashSuccessfullyPopUp)
-        smashCoordinator?.smashSuccessed()
+        smashActionService?.smashSuccessed()
     }
     
     private func showPhotoVideoPreview(item: WrapData) {
@@ -207,6 +214,7 @@ final class OverlayStickerViewController: ViewController {
                             self?.uploadItem(item: localItem, completion: { uploadResult in
                                 switch uploadResult {
                                 case .success(let remote):
+                                    self?.removeImage(at: result.url)
                                     remote?.patchToPreview = localItem.patchToPreview
                                     commonCompletionHandler(remote, nil)
                                     
@@ -422,6 +430,14 @@ extension OverlayStickerViewController {
             completion(.success(CreateOverlayStickersSuccessResult(url: path, type: .image)))
         } catch {
             completion(.failure(.unknown))
+        }
+    }
+    
+    private func removeImage(at url: URL) {
+        do {
+            try FileManager.default.removeItem(at: url)
+        } catch {
+            print(error.description)
         }
     }
 }

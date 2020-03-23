@@ -15,6 +15,7 @@ protocol AccountServicePrl {
     func info(success: SuccessResponse?, fail:@escaping FailResponse)
     func permissions(handler: @escaping (ResponseResult<PermissionsResponse>) -> Void)
     func featurePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
+    func newFeaturePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func availableOffers(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void)
     func getFeatures(handler: @escaping (ResponseResult<FeaturesResponse>) -> Void)
     func autoSyncStatus(syncSettings : AutoSyncSettings? , handler: @escaping ResponseVoid)
@@ -83,6 +84,23 @@ class AccountService: BaseRequestService, AccountServicePrl {
         
         sessionManager
             .request(RouteRequests.Account.Permissions.featurePacks)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    let offersArray = PackageModelResponse.array(from: data)
+                    handler(.success(offersArray))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
+    func newFeaturePacks(handler: @escaping (ResponseResult<[PackageModelResponse]>) -> Void) {
+        debugLog("AccountService featurePacks v2")
+        
+        sessionManager
+            .request(RouteRequests.Account.Permissions.featurePacksV2)
             .customValidate()
             .responseData { response in
                 switch response.result {
@@ -279,6 +297,32 @@ class AccountService: BaseRequestService, AccountServicePrl {
                     let results = jsonArray.compactMap { SettingsPermissionsResponse(withJSON: $0) }
                    
                     handler(.success(results))
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+        }
+    }
+    
+    func getPermissionAllowanceInfo(withType type: PermissionType, handler: @escaping (ResponseResult<SettingsPermissionsResponse>) -> Void) {
+        let request = String(format: RouteRequests.Account.Permissions.permissionWithType, type.rawValue)
+        
+        sessionManager
+            .request(request)
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    guard
+                        let jsonArray = JSON(data: data).array,
+                        let json = jsonArray.first
+                    else {
+                        let error = CustomErrors.serverError("\(request) not array in response")
+                        assertionFailure(error.localizedDescription)
+                        handler(.failed(error))
+                        return
+                    }
+                    let result = SettingsPermissionsResponse(withJSON: json)
+                    handler(.success(result))
                 case .failure(let error):
                     handler(.failed(error))
                 }
@@ -798,4 +842,13 @@ class AccountService: BaseRequestService, AccountServicePrl {
         })
 
     }
+    
+    func updateMobilePaymentPermissionFeedback(handler: @escaping ResponseVoid) {
+        let request = RouteRequests.Account.Permissions.mobilePaymentPermissionFeedback
+        sessionManager
+            .request(request, method: .post)
+            .customValidate()
+            .responseVoid(handler)
+    }
+    
 }
