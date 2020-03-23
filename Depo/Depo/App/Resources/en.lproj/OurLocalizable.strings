@@ -1508,6 +1508,7 @@
 "dialog_contact_sync_vcf_error_upper_button" = "Expand My Storage";
 "dialog_contact_sync_vcf_error_lower_button" = "Delete Files";
 "ubsent_contacts" = "There is no contact in your device";
+"ubsent_contacts_in_lifebox" = "There is not any contact in your Lifebox";
 "mobile_payment_link" = "Payment Services and Electronic Money Agreement";
 "mobile_payment_success_popup_title" = "You activated Turkcell Mobile Payment successfully.";
 "mobile_payment_success_popup_message" = "You can manage Turkcell Mobile Payment Permission under Settings-Permission menu.";
