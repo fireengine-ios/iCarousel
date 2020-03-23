@@ -147,6 +147,7 @@ end
 
 target 'LifeDrive-widget' do
     pod 'MMWormhole', '~> 2.0.0'
+    pod 'KeychainSwift', '~> 11.0'
 end
 
 target 'LifeDriveNotificationService' do
@@ -175,6 +176,7 @@ end
 
 target 'LifeTech_LifeDrive-widget' do
     pod 'MMWormhole', '~> 2.0.0'
+    pod 'KeychainSwift', '~> 11.0'
 end
 
 target 'LifeTech_LifeDriveNotificationService' do
