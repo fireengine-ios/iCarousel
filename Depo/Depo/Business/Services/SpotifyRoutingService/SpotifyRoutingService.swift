@@ -39,13 +39,12 @@ final class SpotifyRoutingService: NSObject {
     
     func getSpotifyStatus(completion: ResponseHandler<SpotifyStatus>?) {
         spotifyService.getStatus { [weak self] result in
+            guard let self = self else {
+                return
+            }
             switch result {
             case .success(let status):
-                self?.analyticsService.trackDimentionsEveryClickGA(screen: .spotifyAuthentification)
-                self?.lastSpotifyStatus = status
-                
-                SingletonStorage.shared.isSpotifyEnabled = status.isConnected
-                
+                self.lastSpotifyStatus = status
                 completion?(.success(status))
             case .failed(let error):
                 completion?(.failed(error))
@@ -69,7 +68,6 @@ final class SpotifyRoutingService: NSObject {
             switch result {
             case .success(let status):
                 if status.isConnected {
-                    self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success)
                     self.showPlayListsForImport()
                 } else {
                     self.prepareAuthWebPage()
@@ -86,7 +84,6 @@ final class SpotifyRoutingService: NSObject {
         spotifyService.disconnect { [weak self] result in
             switch result {
             case .success(_):
-                self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: .success)
                 self?.getSpotifyStatus(completion: handler)
             case .failed(let error):
                 handler(.failed(error))
@@ -229,8 +226,6 @@ final class SpotifyRoutingService: NSObject {
             
             switch result {
             case .success(let status):
-                SingletonStorage.shared.isSpotifyEnabled = status.isConnected
-
                 switch status.jobStatus {
                 case .finished:
                     self.importInProgress = false
@@ -261,6 +256,7 @@ final class SpotifyRoutingService: NSObject {
     }
     
     private func importDidFailed(_ controller: UIViewController, error: Error) {
+        analyticsService.trackConnectedAccountsGAEvent(action: .importFrom, label: .spotify, dimension: .statusType, status: false)
         //TODO: Control correct work with real server error
         guard error.errorCode != 412 else {
             return
@@ -307,8 +303,11 @@ extension SpotifyRoutingService: SpotifyAuthViewControllerDelegate {
     
     func spotifyAuthSuccess(with code: String) {
         spotifyService.connect(code: code) { [weak self] result in
-            
-            self?.getSpotifyStatus { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            self.analyticsService.trackConnectedAccountsGAEvent(action: .connectedAccounts, label: .spotify, dimension: .connectionStatus, status: true)
+            self.getSpotifyStatus { [weak self] result in
                 guard let self = self else {
                     return
                 }
