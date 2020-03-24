@@ -51,7 +51,6 @@ final class MediaItemsAlbumOperationService {
             waitingLocalAlbumsCallBack = albumsCallBack
             return
         }
-        waitingLocalAlbumsCallBack = nil
         
         let context = coreDataStack.newChildBackgroundContext
         getLocalAlbums(context: context, albumsCallBack: albumsCallBack)
@@ -193,8 +192,11 @@ extension MediaItemsAlbumOperationService {
                 func callback() {
                     self.inProcessLocalAlbums = false
                     
-                    if let callback = self.waitingLocalAlbumsCallBack {
-                        self.getLocalAlbums(context: context, albumsCallBack: callback)
+                    if self.waitingLocalAlbumsCallBack != nil {
+                        self.getLocalAlbums(context: context) { [weak self] albums in
+                            self?.waitingLocalAlbumsCallBack?(albums)
+                            self?.waitingLocalAlbumsCallBack = nil
+                        }
                     }
                     completion()
                 }
@@ -227,10 +229,13 @@ extension MediaItemsAlbumOperationService {
             
             assets.forEach { asset in
                 if let album = mediaItemAlbums.first(where: { $0.localId == asset.localIdentifier }) {
-                    if asset.assetCollectionType == .album, album.name != asset.localizedTitle {
+                    if album.name != asset.localizedTitle {
                         album.name = asset.localizedTitle
-                        renamedAlbumsIds.append(asset.localIdentifier)
                         album.updateRelatedRemoteAlbums(context: context)
+                        
+                        if asset.assetCollectionType == .album {
+                            renamedAlbumsIds.append(asset.localIdentifier)
+                        }
                     }
                 } else {
                     //create new local albums

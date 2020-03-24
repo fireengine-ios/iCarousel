@@ -41,10 +41,19 @@ extension PHAsset {
         }
         
         var albums = [PHAssetCollection]()
-        let fetchResult = PHAssetCollection.fetchAssetCollectionsContaining(self, with: .album, options: nil)
-        fetchResult.enumerateObjects { album, _, _ in
-            albums.append(album)
+        
+        let smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
+        smartAlbums.enumerateObjects { collection, _ , _  in
+            if collection.allAssets.contains(self) {
+                albums.append(collection)
+            }
         }
+        
+        let userAlbumsFetch = PHAssetCollection.fetchAssetCollectionsContaining(self, with: .album, options: nil)
+        userAlbumsFetch.enumerateObjects { collection, _ , _ in
+            albums.append(collection)
+        }
+
         return albums
     }
     
