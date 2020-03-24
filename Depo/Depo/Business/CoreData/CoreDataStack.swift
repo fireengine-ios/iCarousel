@@ -54,6 +54,7 @@ final class CoreDataStack_ios10: CoreDataStack {
     private lazy var storeDescription: NSPersistentStoreDescription = {
         let description = NSPersistentStoreDescription(url: CoreDataConfig.storeUrl)
         description.type = NSSQLiteStoreType
+        description.setOption(FileProtectionType.none as NSObject, forKey: NSPersistentStoreFileProtectionKey)
         description.shouldMigrateStoreAutomatically = false
         description.shouldInferMappingModelAutomatically = false
         
@@ -67,18 +68,26 @@ final class CoreDataStack_ios10: CoreDataStack {
         let container = NSPersistentContainer(name: CoreDataConfig.storeNameShort, managedObjectModel: model)
         container.persistentStoreDescriptions = [storeDescription]
         
-        container.viewContext.automaticallyMergesChangesFromParent = true
-        
         return container
     }()
     
     var mainContext: NSManagedObjectContext {
+        if !isReady {
+            assertionFailure("do not call until isReady")
+            debugLog("core_data: isReady == false")
+        }
+        
         let context = container.viewContext
         
         return context
     }
     
     var newChildBackgroundContext: NSManagedObjectContext {
+        if !isReady {
+            assertionFailure("do not call until isReady")
+            debugLog("core_data: isReady == false")
+        }
+        
         /// don't set parent for newBackgroundContext(), it will crash
         /// with error "Context already has a coordinator; cannot replace"
         return container.newBackgroundContext()
@@ -95,6 +104,7 @@ final class CoreDataStack_ios10: CoreDataStack {
                     fatalLog("unable to load store \(error!)")
                 }
                 
+                self?.container.viewContext.automaticallyMergesChangesFromParent = true
                 self?.isReady = true
                 self?.delegates.invoke(invocation: { $0.onCoreDataStackSetupCompleted() })
                 
@@ -115,6 +125,10 @@ final class CoreDataStack_ios10: CoreDataStack {
     }
     
     func performBackgroundTask(_ block: @escaping (NSManagedObjectContext) -> Void) {
+        if !isReady {
+            assertionFailure("do not call until isReady")
+            debugLog("core_data: isReady == false")
+        }
         container.performBackgroundTask(block)
     }
 }

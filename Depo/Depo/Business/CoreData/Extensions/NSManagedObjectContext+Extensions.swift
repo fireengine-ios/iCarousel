@@ -23,7 +23,7 @@ extension NSManagedObjectContext {
             completion?(.hasNoChanges)
             return
         }
-        
+
         /// weak ???
         perform { [weak self] in
             do {

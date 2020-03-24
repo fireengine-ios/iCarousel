@@ -125,8 +125,14 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
         fbService.requestStop(success: { [weak self] _ in
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .off, socialType: .facebook))
             DispatchQueue.main.async {
-                MenloworksTagsService.shared.facebookImport(isOn: false)
-                self?.output?.stopImportSuccess()
+                guard
+                    let self = self,
+                    let output = self.output
+                else {
+                    return
+                }
+                self.trackImportStatusFB(isOn: false)
+                output.stopImportSuccess()
             }
         }) { [weak self] error in
             DispatchQueue.main.async {
@@ -184,8 +190,13 @@ class ImportFromFBInteractor: ImportFromFBInteractorInput {
             }
         }
     }
-
-    func trackImportActivationFB() {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .importFrom, eventLabel: .importFacebook)
+    
+    func trackConnectionStatusFB(isConnected: Bool) {
+        analyticsService.trackConnectedAccountsGAEvent(action: .connectedAccounts, label: .facebook, dimension: .connectionStatus, status: isConnected)
     }
+    
+    func trackImportStatusFB(isOn: Bool) {
+        analyticsService.trackConnectedAccountsGAEvent(action: .importFrom, label: .facebook, dimension: .statusType, status: isOn)
+    }
+    
 }

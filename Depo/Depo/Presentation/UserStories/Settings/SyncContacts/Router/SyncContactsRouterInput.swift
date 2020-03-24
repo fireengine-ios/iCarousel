@@ -14,4 +14,5 @@ protocol SyncContactsRouterInput {
     func goToDuplicatedContacts(with analyzeResponse: [ContactSync.AnalyzedContact], moduleOutput: DuplicatedContactsModuleOutput?)
     func goToPremium()
     func showError(errorMessage: String)
+    func showFullQuotaPopUp()
 }

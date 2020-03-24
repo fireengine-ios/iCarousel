@@ -14,6 +14,8 @@ protocol PremiumFooterCollectionReusableViewDelegate: class {
 
 final class PremiumFooterCollectionReusableView: UICollectionReusableView {
 
+    private let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
+    
     @IBOutlet private weak var premiumView: PremiumView!
     
     weak var delegate: PremiumFooterCollectionReusableViewDelegate?
@@ -25,9 +27,8 @@ final class PremiumFooterCollectionReusableView: UICollectionReusableView {
     }
     
     func configure(price: String?, description: String, type: FaceImageType, isSelectedAnimation: Bool? = false, isTurkcell: Bool) {
-        let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
-        let descriptionMessage = String(format: TextConstants.faceImageFooterViewMessage, type.footerDescription)
-        premiumView.configure(with: descriptionMessage,
+        let title = String(format: TextConstants.faceImageFooterViewMessage, type.footerDescription)
+        premiumView.configure(with: title,
                               price: price,
                               description: description,
                               types: PremiumListType.allTypes,
@@ -37,6 +38,17 @@ final class PremiumFooterCollectionReusableView: UICollectionReusableView {
                               isNeedPolicy: false,
                               isTurkcell: isTurkcell)
         if isSelectedAnimation == true {
+            addSelectedAmination()
+        }
+    }
+    
+    func configureWithoutDetails(type: FaceImageType, isSelectedAnimation: Bool) {
+        let title = String(format: TextConstants.faceImageFooterViewMessage, type.footerDescription)
+        premiumView.configure(with: title, price: "",
+                              description: "", types: [],
+                              titleEdgeInsets: titleEdgeInsets,
+                              isNeedPolicy: false, isTurkcell: false)
+        if isSelectedAnimation {
             addSelectedAmination()
         }
     }

@@ -173,7 +173,9 @@
     [SyncAdapter checkStatus:@"x" callback:^(id response, BOOL isSuccess) {
         if (isSuccess){
             SYNC_Log(@"Msisdn: %@", [[SyncSettings shared] msisdn]);
-            [self findNameDuplicateContacts];
+            if (!self.CANCELLED) {
+                [self findNameDuplicateContacts];
+            }
         } else {
             [self endOfAnalyzeCycleError:ANALYZE_RESULT_ERROR_NETWORK response:response];
         }
@@ -230,15 +232,18 @@
 }
 
 - (void)findNameDuplicateContacts{
-    if (self.CANCELLED){
-        return;
-    }
     self.nameMap = [NSMutableDictionary new];
     self.nameDuplicateMap = [NSMutableDictionary new];
 
     [self notifyProgress:ANALYZE_STEP_FIND_DUPLICATES progress:@(0)];
-
+    
+    if (self.CANCELLED){
+        return;
+    }
     NSMutableArray *contacts = [[ContactUtil shared] fetchLocalContacts];
+    if (self.CANCELLED){
+        return;
+    }
     self.initialContactCount = [contacts count];
 
     if (!SYNC_IS_NULL(contacts) && [contacts count]>0){
@@ -412,8 +417,8 @@
 
 - (void)endOfAnalyzeCycle:(AnalyzeResultType)result messages:(id)messages
 {
-    if (self.CANCELLED){
-        return;
+    if (result == CANCELLED) {
+        self.CANCELLED = true;
     }
     //Analyze is completed
     [[SyncHelper shared] setSyncing:NO];
@@ -421,8 +426,6 @@
     if ([SyncSettings shared].analyzeCompleteCallback != nil) {
         [self onComplete];
     }
-    NSInteger finalCount = [[ContactUtil shared] getContactCount];
-    SYNC_Log(@"Final Contact count => %ld", (long)finalCount);
 
     // consuming too much time. we need a better solution
 //    NSMutableArray *localContacts = [[ContactUtil shared] fetchLocalContacts];
@@ -436,6 +439,9 @@
     }
     
     if (result != CANCELLED){
+        NSInteger finalCount = [[ContactUtil shared] getContactCount];
+        SYNC_Log(@"Final Contact count => %ld", (long)finalCount);
+        
         NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970];
         NSString *intervalString = [NSString stringWithFormat:@"%f", timeStamp];
         NSString *key = [[NSString alloc] initWithFormat:@"%@-%@", intervalString, self.deviceId];

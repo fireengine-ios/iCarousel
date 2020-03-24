@@ -11,46 +11,77 @@ import UIKit
 final class PackagesViewController: BaseViewController {
     var output: PackagesViewOutput!
     
-    @IBOutlet weak private var descriptionLabel: UILabel!
-    @IBOutlet weak private var cardsStackView: UIStackView!
-
-    @IBOutlet weak private var collectionView: ResizableCollectionView!
-    @IBOutlet weak private var promoView: PromoView!
-    @IBOutlet var keyboardHideManager: KeyboardHideManager!
-    @IBOutlet weak private var scrollView: UIScrollView!
-    @IBOutlet weak private var policyTextView: UITextView!
-    
-    @IBOutlet private weak var subtitleLabel: UILabel! {
-        didSet {
-            subtitleLabel.text = TextConstants.packageSectionTitle
+    @IBOutlet weak private var descriptionLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.descriptionLabelText
         }
     }
+    
+    @IBOutlet weak private var cardsTableView: UITableView! {
+        willSet {
+            newValue.delaysContentTouches = true
+            newValue.rowHeight = 51
+            let nib = UINib(nibName: String(describing: PackagesTableViewCell.self), bundle: nil)
+            newValue.register(nib, forCellReuseIdentifier: String(describing: PackagesTableViewCell.self))
+            newValue.tableFooterView = UIView()
+            newValue.isScrollEnabled = false
+        }
+    }
+    
+    @IBOutlet weak private var collectionStackView: UIStackView! {
+        willSet {
+            newValue.spacing = 16
+            newValue.backgroundColor = .clear
+        }
+    }
+    
+    @IBOutlet weak private var scrollView: UIScrollView! {
+        willSet {
+            newValue.delaysContentTouches = false
+        }
+    }
+    
+    @IBOutlet private weak var subtitleLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.darkText
+            newValue.text = TextConstants.packageSectionTitle
+            newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
+            newValue.backgroundColor = .clear
+        }
+    }
+    
+    @IBOutlet weak private var cardsStackView: UIStackView!
+    @IBOutlet weak private var promoView: PromoView!
+    @IBOutlet weak private var policyTextView: UITextView! {
+        willSet {
+            newValue.backgroundColor = .clear
+        }
+    }
+    
+    @IBOutlet var keyboardHideManager: KeyboardHideManager!
     
     private lazy var activityManager = ActivityIndicatorManager()
     
     private let policyHeaderSize: CGFloat = Device.isIpad ? 15 : 13
     private let policyTextSize: CGFloat = Device.isIpad ? 13 : 10
     
+    private var menuViewModels: [ControlPackageType] = [.myProfile, .usage(percentage: 0), .myStorage(nil)]
+    
     // MARK: - View lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupDesign()
-        setupCollectionView()
-
-        automaticallyAdjustsScrollViewInsets = false
         
-        policyTextView.text = ""
+        automaticallyAdjustsScrollViewInsets = false
         setTitle(withString: TextConstants.accountDetails)
-        descriptionLabel.text = TextConstants.descriptionLabelText
-
+        
         promoView.deleagte = self
         activityManager.delegate = self
-        
+        cardsTableView.delegate = self
+        cardsTableView.dataSource = self
+        self.view.backgroundColor = ColorConstants.fileGreedCellColor
         output.viewIsReady()
         
-        MenloworksAppEvents.onPackagesOpen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,29 +90,20 @@ final class PackagesViewController: BaseViewController {
         output.viewWillAppear()
     }
     
-    private func setupCollectionView() {
-        collectionView.register(nibCell: SubscriptionPlanCollectionViewCell.self)
-    }
-
-    private func setupDesign() {
-        subtitleLabel.font = UIFont.TurkcellSaturaBolFont(size: 18)
-        subtitleLabel.textColor = ColorConstants.darkText
-    }
-
     private func setupPolicy() {
         let attributedString = NSMutableAttributedString(
             string: TextConstants.packagesPolicyHeader,
             attributes: [.foregroundColor: ColorConstants.textGrayColor,
                          .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)])
         
-        var policyText = RouteRequests.isBillo ? TextConstants.packagesPolicyBilloText : TextConstants.packagesPolicyText
+        let policyText = RouteRequests.isBillo ? TextConstants.packagesPolicyBilloText : TextConstants.packagesPolicyText
         
         let policyAttributedString = NSMutableAttributedString(
             string: "\n\n" + policyText,
             attributes: [.foregroundColor: ColorConstants.textGrayColor,
                          .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
         attributedString.append(policyAttributedString)
-
+        
         let termsAttributedString = NSMutableAttributedString(
             string: TextConstants.termsOfUseLinkText,
             attributes: [.link: TextConstants.NotLocalized.termsOfUseLink,
@@ -95,7 +117,7 @@ final class PackagesViewController: BaseViewController {
         policyTextView.layer.borderWidth = 1
         view.layoutIfNeeded()
     }
-
+    
     func showRestoreButton() {
         //IF THE USER NON CELL USER
         let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "refresh_icon"), style: .plain, target: self, action: #selector(restorePurhases))
@@ -111,14 +133,20 @@ final class PackagesViewController: BaseViewController {
         startActivityIndicator()
         output.restorePurchasesPressed()
     }
-    
 }
 
 // MARK: PackagesViewInput
 extension PackagesViewController: PackagesViewInput {
-
+    
     func reloadData() {
-        collectionView.reloadData()
+        collectionStackView.arrangedSubviews.forEach { collectionStackView.removeArrangedSubview($0) }
+        for offer in output.availableOffers.enumerated() {
+            let view = SubscriptionOfferView.initFromNib()
+            view.configure(with: offer.element, delegate: self, index: offer.offset)
+            view.setNeedsLayout()
+            view.layoutIfNeeded()
+            collectionStackView.addArrangedSubview(view)
+        }
     }
     
     func successedPromocode() {
@@ -141,82 +169,52 @@ extension PackagesViewController: PackagesViewInput {
     func display(error: ErrorResponse) {
         UIApplication.showErrorAlert(message: error.description)
     }
-
+    
     func display(errorMessage: String) {
         UIApplication.showErrorAlert(message: errorMessage)
     }
-
-    func showPaycellProcess(with cpcmOfferId: Int) {
-        let controller = PaycellViewController.create(with: cpcmOfferId) { result in
-            switch result {
-            case .success():
-                UIApplication.showSuccessAlert(message: TextConstants.successfullyPurchased)
-            case .failed(_):
-                UIApplication.showErrorAlert(message: TextConstants.errorUnknown)
-            }
-        }
-        RouterVC().pushViewController(viewController: controller)
-    }
-
+    
     func setupStackView(with percentage: CGFloat) {
-        for view in cardsStackView.arrangedSubviews {
-            view.removeFromSuperview()
-        }
-        
-        ///premium banner if needed
-        let isPremiumUser = AuthoritySingleton.shared.accountType.isPremium
-        if !isPremiumUser {
-            addNewCard(type: .premiumBanner)
-        }
+        menuViewModels.removeAll()
+        cardsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         ///my profile card
         addNewCard(type: .myProfile)
-
-        ///account type card
-        let isMiddleUser = AuthoritySingleton.shared.accountType.isMiddle
-        let type: ControlPackageType.AccountType = isPremiumUser ? .premium : (isMiddleUser ? .middle : .standard)
-
-        addNewCard(type: .accountType(type))
-
+        
+        ///my usage card
+        addNewCard(type: .usage(percentage: percentage))
+        
         ///my storage card
-        addNewCard(type: .myStorage, percentage: percentage)
+        let isMiddleUser = AuthoritySingleton.shared.accountType.isMiddle
+        let isPremiumUser = AuthoritySingleton.shared.accountType.isPremium
+        let type: ControlPackageType.AccountType = isPremiumUser ? .premium : (isMiddleUser ? .middle : .standard)
+        addNewCard(type: .myStorage(type))
+        
+        cardsTableView.reloadData()
     }
     
-    private func addNewCard(type: ControlPackageType, percentage: CGFloat? = nil) {
-        let card = PackageInfoView.initFromNib()
-        card.configure(with: type, percentage: percentage)
-
-        output.configureCard(card)
-        cardsStackView.addArrangedSubview(card)
-    }
-}
-
-// MARK: UICollectionViewDataSource
-extension PackagesViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return output.availableOffers.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeue(cell: SubscriptionPlanCollectionViewCell.self, for: indexPath)
-        cell.delegate = self
-        cell.indexPath = indexPath
-        cell.configure(with: output.availableOffers[indexPath.item], accountType: output.getAccountType())
-        return cell
+    private func addNewCard(type: ControlPackageType) {
+        if Device.isIpad {
+            let card = PackageInfoView.initFromNib()
+            card.configure(with: type)
+            
+            output.configureCard(card)
+            cardsStackView.addArrangedSubview(card)
+        } else {
+            menuViewModels.append(type)
+        }
     }
 }
 
 // MARK: SubscriptionPlanCellDelegate
-extension PackagesViewController: SubscriptionPlanCellDelegate {
-    func didPressSubscriptionPlanButton(at indexPath: IndexPath) {
-        let plan = output.availableOffers[indexPath.row]
-        presentPaymentPopUp(plan: plan, planIndex: indexPath.row)
-        
+extension PackagesViewController: SubscriptionOfferViewDelegate {
+    
+    func didPressSubscriptionPlanButton(planIndex: Int) {
+        let plan = output.availableOffers[planIndex]
+        presentPaymentPopUp(plan: plan, planIndex: planIndex)
     }
     
     private func presentPaymentPopUp(plan: PackageOffer, planIndex: Int) {
-        
         guard let name = plan.offers.first?.name else {
             assertionFailure()
             return
@@ -226,7 +224,7 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
         
         let paymentMethods: [PaymentMethod] = plan.offers.compactMap { offer in
             if let model = offer.model as? PackageModelResponse {
-                return createPaymentMethod(model: model, priceString: offer.priceString, offer: plan, planIndex: planIndex)
+                return createPaymentMethod(model: model, priceString: offer.price, offer: plan, planIndex: planIndex)
             } else {
                 return nil
             }
@@ -239,24 +237,18 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
     }
     
     private func createPaymentMethod(model: PackageModelResponse, priceString: String, offer: PackageOffer, planIndex: Int) -> PaymentMethod? {
-        
-        guard let name = model.name, let packageType = model.type else {
+        guard let name = model.name, let type = model.type else {
             return nil
         }
         
-        let paymentType = packageType.paymentType
-        
+        let paymentType = type.paymentType
         return PaymentMethod(name: name, priceLabel: priceString, type: paymentType, action: { [weak self] in
-            guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, packageType: packageType) else {
+            guard let subscriptionPlan = self?.getChoosenSubscriptionPlan(availableOffers: offer, packageType: type) else {
                 assertionFailure()
                 return
             }
             
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackageChannelClick(channelType: paymentType))
-            
-            if let tag = MenloworksSubscriptionStorage(rawValue: subscriptionPlan.name) {
-                MenloworksAppEvents.onSubscriptionClicked(tag)
-            }
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackageChannelClick(channelType: paymentType, packageName: subscriptionPlan.name))
             
             let analyticsService: AnalyticsService = factory.resolve()
             
@@ -266,19 +258,12 @@ extension PackagesViewController: SubscriptionPlanCellDelegate {
                                                 eventLabel: eventLabel)
             
             self?.output.didPressOn(plan: subscriptionPlan, planIndex: planIndex)
-         
         })
         
     }
     
-    private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, packageType: PackageType ) -> SubscriptionPlan?  {
-        
-        return availableOffers.offers.first { plan -> Bool in
-            guard let model = plan.model as? PackageModelResponse else {
-                return false
-            }
-            return model.type == packageType
-        }
+    private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, packageType: PackageContentType) -> SubscriptionPlan?  {
+        return availableOffers.offers.first(where: { ($0.model as? PackageModelResponse)?.type == packageType })
     }
 }
 
@@ -319,5 +304,42 @@ extension PackagesViewController: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         return UIApplication.shared.openURL(URL)
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension PackagesViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return menuViewModels.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        tableView.dequeue(reusable: PackagesTableViewCell.self)
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension PackagesViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.selectionStyle = .none
+        guard let item = menuViewModels[safe: indexPath.row] else {
+            return
+        }
+        
+        let cell = cell as? PackagesTableViewCell
+        cell?.configure(type: item)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let item = menuViewModels[safe: indexPath.row] else {
+            return
+        }
+        
+        let delegate = output as? PackageInfoViewDelegate
+        delegate?.onSeeDetailsTap(with: item)
     }
 }

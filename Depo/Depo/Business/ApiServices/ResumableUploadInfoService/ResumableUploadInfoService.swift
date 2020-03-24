@@ -51,10 +51,6 @@ final class ResumableUploadInfoServiceImpl: ResumableUploadInfoService {
     }
     
     func isResumableUploadAllowed(with fileSize: Int) -> Bool {
-        // FIXME: remove guard
-        guard RouteRequests.currentServerEnvironment != .production else {
-            return false
-        }
         return isUploadEnabled && fileSize > chunkSize
     }
 }
@@ -72,14 +68,18 @@ extension ResumableUploadInfoServiceImpl {
     }
     
     func getInterruptedId(for trimmedLocalId: String) -> String? {
-        return userDefaults.interruptedResumableUploads[trimmedLocalId] as? String
+        let interruptedId = userDefaults.interruptedResumableUploads[trimmedLocalId] as? String
+        debugLog("resumable_upload: get \(interruptedId ?? "_EMPTY_") as interruptedId for \(trimmedLocalId)")
+        return interruptedId
     }
     
-    func save(interruptedId:String, for trimmedLocalId: String) {
+    func save(interruptedId: String, for trimmedLocalId: String) {
+        debugLog("resumable_upload: saving \(interruptedId) as interruptedId for \(trimmedLocalId)")
         userDefaults.interruptedResumableUploads[trimmedLocalId] = interruptedId
     }
     
     func removeInterruptedId(for trimmedLocalId: String) {
+        debugLog("resumable_upload: removing interruptedId for \(trimmedLocalId)")
         userDefaults.interruptedResumableUploads[trimmedLocalId] = nil
     }
 }

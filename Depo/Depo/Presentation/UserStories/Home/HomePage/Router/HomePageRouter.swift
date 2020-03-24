@@ -11,6 +11,8 @@ final class HomePageRouter: HomePageRouterInput {
     private let router = RouterVC()
     weak var presenter: HomePagePresenter!
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     private let popUpService = HomePagePopUpsService.shared
     private var popUpsToPresent = [UIViewController]()
     
@@ -71,7 +73,7 @@ final class HomePageRouter: HomePageRouterInput {
     
     //MARK: Utility method
     private func moveToPremium(title: String, headerTitle: String, completion: VoidHandler?) {
-        let controller = router.premium(title: title, headerTitle: headerTitle)
+        let controller = router.premium()
         
         router.pushViewController(viewController: controller)
     }
@@ -147,6 +149,80 @@ final class HomePageRouter: HomePageRouterInput {
     func openCampaignDetails() {
         let controller = router.campaignDetailViewController()
         router.pushViewController(viewController: controller)
+    }
+    
+    func presentMobilePaymentPermissionPopUp(url: String, isFirstAppear: Bool) {
+        let popup = getPopUpController(url: url)
+        popUpsToPresent.append(popup)
+        isFirstAppear ? () : presentPopUps()
+    }
+    
+    func presentSuccessMobilePaymentPopUp() {
+        let popUp = PopUpController.with(title: TextConstants.mobilePaymentSuccessPopupTitle,
+                                         message: TextConstants.mobilePaymentSuccessPopupMessage,
+                                         image: .success,
+                                         buttonTitle: TextConstants.ok)
+        popUpsToPresent.append(popUp)
+        presentPopUps()
+    }
+    
+    private func getPopUpController(url: String) -> PopUpController {
+        let plainMessage = TextConstants.mobilePaymentOpenPopupDescriptionLabel
+        let range = (plainMessage as NSString).range(of: TextConstants.mobilePaymentOpenPopupDescriptionBoldRangeLabel)
+        let attributeMessage = NSMutableAttributedString(string: plainMessage)
+        let attribute = [NSAttributedString.Key.font : UIFont.TurkcellSaturaDemFont(size: 16), NSAttributedString.Key.strokeColor : ColorConstants.marineTwo]
+        attributeMessage.addAttributes(attribute, range: range)
+        let popup = PopUpController.with(title: TextConstants.mobilePaymentOpenPopupTitleLabel, attributedMessage: attributeMessage, image: .none, firstButtonTitle: TextConstants.mobilePaymentOpenPopupLaterButton, secondButtonTitle: TextConstants.mobilePaymentOpenPopupContinueButton, firstAction: getRemindMeLaterHandler(), secondAction: getContinueHandler(url: url))
+        return popup
+    }
+    
+    private func getContinueHandler(url: String) -> PopUpButtonHandler {
+        return { [weak self] vc in
+            guard let self = self else {
+                return
+            }
+            self.trackGAEvent(eventLabel: .mobilePaymentAction(true))
+            self.routeMobilePaymentPermissionVC(url: url)
+            vc.close()
+        }
+    }
+    
+    private func getRemindMeLaterHandler() -> PopUpButtonHandler {
+        return { [weak self] vc in
+            guard let self = self else {
+                return
+            }
+            self.trackGAEvent(eventLabel: .mobilePaymentAction(false))
+            self.presenter.interactor.updateMobilePaymentPermissionFeedback()
+            vc.close()
+        }
+    }
+    
+    private func routeMobilePaymentPermissionVC(url: String) {
+        let router = RouterVC()
+        let viewController = router.mobilePaymentPermissionController()
+        viewController.urlString = url
+        viewController.delegate = self
+        router.pushViewController(viewController: viewController)
+        analyticsService.logScreen(screen: .mobilePaymentPermission)
+    }
+    
+    private func trackGAEvent(eventLabel: GAEventLabel) {
+        self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .mobilePaymentPermission, eventLabel: eventLabel)
+    }
+    
+}
+
+// MARK: Mobile Payment Permission Delegate
+extension HomePageRouter: MobilePaymentPermissionProtocol {
+    
+    func approveTapped() {
+        presenter.view.closePermissionPopUp()
+        presenter.interactor.changePermissionsAllowed(type: .mobilePayment, isApproved: true)
+    }
+    
+    func backTapped(url: String) {
+        presentMobilePaymentPermissionPopUp(url: url, isFirstAppear: false)
     }
     
 }

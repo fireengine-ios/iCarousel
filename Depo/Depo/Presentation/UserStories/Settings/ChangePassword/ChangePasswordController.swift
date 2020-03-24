@@ -144,13 +144,17 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
                                           repeatPassword: repeatPassword,
                                           captchaId: captchaView.currentCaptchaUUID,
                                           captchaAnswer: captchaAnswer) { [weak self] result in
+                                            guard let self = self else {
+                                                return
+                                            }
                                             switch result {
                                             case .success(_):
-                                                self?.getAccountInfo()
+                                                self.getAccountInfo()
+                                                self.trackProfilePasswordChange()
                                             case .failure(let error):
-                                                self?.actionOnUpdateOnError(error)
-                                                self?.hideSpinnerIncludeNavigationBar()
-                                                self?.captchaView.updateCaptcha()
+                                                self.actionOnUpdateOnError(error)
+                                                self.hideSpinnerIncludeNavigationBar()
+                                                self.captchaView.updateCaptcha()
                                             }
             }
             
@@ -169,6 +173,10 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         }, fail: { [weak self] error in
             self?.showError(error)
         })
+    }
+    
+    private func trackProfilePasswordChange() {
+        analyticsService.trackProfileUpdateGAEvent(editFields: GAEventLabel.ProfileChangeType.password.text)
     }
     
     private func loginIfCan(with login: String) {

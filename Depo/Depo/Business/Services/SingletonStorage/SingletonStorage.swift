@@ -21,7 +21,6 @@ class SingletonStorage {
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
     
     var isTwoFactorAuthEnabled: Bool?
-    var isSpotifyEnabled: Bool?
     
     private let resumableUploadInfoService: ResumableUploadInfoService = factory.resolve()
     
@@ -91,8 +90,12 @@ class SingletonStorage {
             switch value {
             case .nonOverQuota:
                 storageVars.largeFullOfQuotaPopUpShowType100 = false
-            case .overQuotaFreemium, .overQuotaPremium :
+            case .overQuotaFreemium:
                 storageVars.largeFullOfQuotaPopUpShowType100 = true
+                storageVars.largeFullOfQuotaUserPremium = false
+            case .overQuotaPremium:
+                storageVars.largeFullOfQuotaPopUpShowType100 = true
+                storageVars.largeFullOfQuotaUserPremium = true
             }
             
             completion()

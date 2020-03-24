@@ -38,20 +38,14 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
             switch settings.timeSetting.option {
             case .daily:
                 periodicBackUp = SYNCPeriodic.daily
-                MenloworksTagsService.shared.onPeriodicContactSync("daily")
             case .weekly:
                 periodicBackUp = SYNCPeriodic.every7
-                MenloworksTagsService.shared.onPeriodicContactSync("weekly")
             case .monthly:
                 periodicBackUp = SYNCPeriodic.every30
-                MenloworksTagsService.shared.onPeriodicContactSync("monthly")
             case .none:
                 periodicBackUp = SYNCPeriodic.none
-                MenloworksTagsService.shared.onPeriodicContactSync("off")
             }
-        } else {
-            MenloworksTagsService.shared.onPeriodicContactSync("off")
-        }
+        } 
         
         contactsService.setPeriodicForContactsSync(periodic: periodicBackUp)
     }

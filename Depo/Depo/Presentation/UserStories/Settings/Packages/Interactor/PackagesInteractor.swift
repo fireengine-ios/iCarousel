@@ -40,11 +40,11 @@ extension PackagesInteractor: PackagesInteractorInput {
         accountService.availableOffers { [weak self] (result) in
             switch result {
             case .success(let response):
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.getInfoForAppleProducts(offers: response)
                 }
             case .failed(let error):
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     self?.output.failed(with: error.description)
                 }
             }
@@ -125,7 +125,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                     self?.analyticsService.trackProductPurchasedInnerGA(offer: offer, packageIndex: planIndex)
                     self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: false)
                     self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
-                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .success))
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .success, channelType: .slcm, packageName: offer.displayName ?? ""))
                 }
 
                 /// delay stay for server perform request (android logic)
@@ -134,7 +134,9 @@ extension PackagesInteractor: PackagesInteractorInput {
                 }
             }, fail: { [weak self] errorResponse in
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure))
+                if let offer = offer {
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure, channelType: .slcm, packageName: offer.displayName ?? ""))
+                }
                 DispatchQueue.main.async {
                     self?.output.failedVerifyOffer()
                 }
@@ -165,11 +167,11 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     private func getInfoForAppleProducts(offers: [PackageModelResponse]) {
         packageService.getInfoForAppleProducts(offers: offers, success: { [weak self] in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.successed(allOffers: offers)
             }
         }, fail: { [weak self] error in
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 self?.output.failed(with: error.description)
             }
         })
@@ -180,7 +182,7 @@ extension PackagesInteractor: PackagesInteractorInput {
     }
     
     func getPriceInfo(for offer: PackageModelResponse, accountType: AccountType) -> String {
-        return packageService.getPriceInfo(for: offer, accountType: accountType)
+        return packageService.getOfferPrice(for: offer, accountType: accountType)
     }
     
     func activate(offer: PackageModelResponse, planIndex: Int) {
@@ -197,19 +199,19 @@ extension PackagesInteractor: PackagesInteractorInput {
                 self?.analyticsService.trackProductInAppPurchaseGA(product: product, packageIndex: planIndex)
                 self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: true)
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .success))
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .success, channelType: .appStore, packageName: offer.displayName ?? ""))
                 self?.validatePurchase(productId: identifier)
             case .canceled:
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("transaction canceled"))
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure))
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure, channelType: .appStore, packageName: offer.displayName ?? ""))
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.string(TextConstants.cancelPurchase))
                 }
             case .error(let error):
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("\(error.description)"))
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure))
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure, channelType: .appStore, packageName: offer.displayName ?? ""))
                 DispatchQueue.main.async {
                     self?.output.failedUsage(with: ErrorResponse.error(error))
                 }
@@ -328,18 +330,16 @@ extension PackagesInteractor: PackagesInteractorInput {
     
     
     func getQuotaInfo() {
-        
         AccountService().quotaInfo(success: { [weak self] response in
-            
             guard let response = response as? QuotaInfoResponse else {
                 return
             }
             
             DispatchQueue.main.async {
-                self?.output.setQuotaInfo(quotoInfo: (response))
+                self?.output.setQuotaInfo(quotoInfo: response)
             }
-            }, fail: { [weak self] error in
-                assertionFailure("Тo data received for quotaInfo request \(error.localizedDescription) ")
+        }, fail: { error in
+            assertionFailure("Тo data received for quotaInfo request \(error.localizedDescription) ")
         })
     }
     

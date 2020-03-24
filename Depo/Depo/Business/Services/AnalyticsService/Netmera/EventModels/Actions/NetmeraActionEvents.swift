@@ -124,9 +124,11 @@ extension NetmeraEvents.Actions {
         private let kPackageChannelClickKey = "tvm"
         
         @objc var type = ""
+        @objc var packageName = ""
         
-        convenience init(channelType: PaymentType) {
+        convenience init(channelType: PaymentType, packageName: String) {
             self.init()
+            self.packageName = packageName
             switch channelType {
             case .appStore:
                 self.type = NetmeraEventValues.PackageChannelType.inAppStorePurchase.text
@@ -140,7 +142,8 @@ extension NetmeraEvents.Actions {
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
             return [
-                "ea": #keyPath(type)
+                "ea": #keyPath(type),
+                "eb" : #keyPath(packageName)
             ]
         }
         
@@ -367,6 +370,31 @@ extension NetmeraEvents.Actions {
         
         override var eventKey : String {
             return kPackageClickKey
+        }
+    }
+    
+    final class PackageCancelClick: NetmeraEvent {
+        
+        private let kPackageCancelClickKey = "iwj"
+        
+        @objc var packageName = ""
+        @objc var type = ""
+        
+        convenience init(type: String, packageName: String) {
+            self.init()
+            self.packageName = packageName
+            self.type = type
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "eb" : #keyPath(type),
+                "ea" : #keyPath(packageName)
+            ]
+        }
+        
+        override var eventKey : String {
+            return kPackageCancelClickKey
         }
     }
     
@@ -607,19 +635,32 @@ extension NetmeraEvents.Actions {
         private let kPackagePurchaseKey = "zfz"
         
         @objc var status = ""
+        @objc var type = ""
+        @objc var packageName = ""
         
-        convenience init(status: NetmeraEventValues.GeneralStatus) {
-            self.init(status: status.text)
+        convenience init(status: NetmeraEventValues.GeneralStatus, channelType: PaymentType, packageName: String) {
+            self.init(status: status.text, channelType: channelType, packageName: packageName)
         }
         
-        convenience init(status: String) {
+        convenience init(status: String, channelType: PaymentType, packageName: String) {
             self.init()
             self.status = status
+            self.packageName = packageName
+            switch channelType {
+            case .appStore:
+                self.type = NetmeraEventValues.PackageChannelType.inAppStorePurchase.text
+            case .paycell:
+                self.type = NetmeraEventValues.PackageChannelType.creditCard.text
+            case .slcm:
+                self.type = NetmeraEventValues.PackageChannelType.chargeToBill.text
+            }
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
             return [
                 "eb" : #keyPath(status),
+                "ea" : #keyPath(packageName),
+                "ee" : #keyPath(type),
             ]
         }
         

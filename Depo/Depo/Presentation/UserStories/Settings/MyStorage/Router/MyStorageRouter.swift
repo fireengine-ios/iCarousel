@@ -38,6 +38,11 @@ extension MyStorageRouter: MyStorageRouterInput {
         router.presentViewController(controller: vc)
     }
     
+    func openLeavePremium(type: LeavePremiumType) {
+        let vc = router.leavePremium(type: type)
+        router.pushViewController(viewController: vc)
+    }
+    
     func display(error: String) {
         UIApplication.showErrorAlert(message: error)
     }

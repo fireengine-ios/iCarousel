@@ -55,8 +55,7 @@ final class PremiumService {
     }
     
     private func moveToPremium() {
-        let controller = router.premium(title: TextConstants.lifeboxPremium,
-                                        headerTitle: TextConstants.becomePremiumMember)
+        let controller = router.premium()
         DispatchQueue.toMain { [weak self] in
             if let navController = self?.router.navigationController?.presentedViewController as? UINavigationController {
                 navController.pushViewController(controller, animated: true)

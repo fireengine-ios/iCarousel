@@ -36,27 +36,6 @@ final class MyStorageInteractor {
 
 //MARK: - MyStorageInteractorInput
 extension MyStorageInteractor: MyStorageInteractorInput {
-    
-    func getUsage() {
-        accountService.usage(
-            success: { [weak self] response in
-                guard let usage = response as? UsageResponse else {
-                    let error = CustomErrors.serverError("An error occured while getting storage usage")
-                    DispatchQueue.toMain {
-                        self?.output.failed(with: error.localizedDescription)
-                    }
-                    return
-                }
-                DispatchQueue.toMain {
-                    self?.output.successed(usage: usage)
-                }
-            }, fail: { [weak self] errorResponse in
-                DispatchQueue.toMain {
-                    self?.output.failed(with: errorResponse)
-                }
-        })
-    }
-    
     func getAccountType() {
         accountService.info(success: {  [weak self] (response) in
             guard let response = response as? AccountInfoResponse else {
@@ -189,6 +168,10 @@ extension MyStorageInteractor: MyStorageInteractorInput {
     
     func trackScreen() {
         analyticsService.logScreen(screen: .myStorage)
+    }
+    
+    func trackNetmeraPackageCancelClick(type: String, packageName: String) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackageCancelClick(type: type, packageName: packageName))
     }
     
     //MARK: Converter

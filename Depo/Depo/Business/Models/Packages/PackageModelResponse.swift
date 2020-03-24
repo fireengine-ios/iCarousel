@@ -9,7 +9,16 @@
 import Foundation
 import SwiftyJSON
 
-enum FeaturePackageType: String {
+protocol PackageTypeProtocol: CancelablePackageProtocol {
+    var rawValue: String { get }
+    var paymentType: PaymentType { get }
+}
+
+protocol CancelablePackageProtocol {
+    var cancelText: String { get }
+}
+
+enum FeaturePackageType: String, PackageTypeProtocol {
     case appleFeature               = "FEATURE_APPLE"
     case SLCMFeature                = "FEATURE_SLCM"
     case SLCMPaycellFeature         = "FEATURE_SLCM_PAYCELL"
@@ -67,7 +76,7 @@ enum FeaturePackageType: String {
             return .appStore
         case .SLCMFeature:
             return .slcm
-        case .SLCMPaycellFeature, .paycellAllAccessFeature:
+        case .SLCMPaycellFeature, .allAccessPaycellFeature:
             return .paycell
         default:
             assertionFailure()
@@ -76,7 +85,108 @@ enum FeaturePackageType: String {
     }
 }
 
-enum PackageType: String {
+enum PackageContentType: Equatable {
+    case feature(_ type: FeaturePackageType)
+    case quota(_ type: QuotaPackageType)
+    
+    init?(rawValue: String) {
+        if let feature = FeaturePackageType(rawValue: rawValue) {
+            self = .feature(feature)
+        } else if let quota = QuotaPackageType(rawValue: rawValue) {
+            self = .quota(quota)
+        } else {
+            return nil
+        }
+    }
+    
+    var type: PackageTypeProtocol {
+        switch self {
+        case .feature(let type):
+            return type
+        case .quota(let type):
+            return type
+        }
+    }
+    
+    var isPaymentType: Bool {
+        switch self {
+        case .quota(let type):
+            return payableTypes.contains(where: { type.rawValue == $0.rawValue })
+        case .feature(let type):
+            return payableTypes.contains(where: { type.rawValue == $0.rawValue })
+        }
+    }
+    
+    var paymentType: PaymentType {
+        switch self {
+        case .quota(let type):
+            return type.paymentType
+        case .feature(let type):
+            return type.paymentType
+        }
+    }
+    
+    func isSameAs(_ other: PackageTypeProtocol?) -> Bool {
+        if let other = other {
+            return self.type.rawValue == other.rawValue
+        } else {
+            return false
+        }
+    }
+    
+    func purchaseActions(
+        slcm: @escaping VoidHandler,
+        apple: @escaping VoidHandler,
+        paycell: @escaping VoidHandler,
+        notPaymentType: @escaping VoidHandler) {
+        switch self {
+        case .feature(.SLCMFeature), .quota(.SLCM):
+            slcm()
+        case .feature(.appleFeature), .quota(.apple):
+            apple()
+        case .quota(.paycellSLCM), .quota(.paycellAllAccess),
+             .feature(.SLCMPaycellFeature), .feature(.allAccessPaycellFeature):
+            paycell()
+        default:
+            notPaymentType()
+        }
+    }
+    
+    func cancellActions(
+        slcm: @escaping (CancelablePackageProtocol) -> Void,
+        apple: @escaping (CancelablePackageProtocol) -> Void,
+        other: @escaping (CancelablePackageProtocol) -> Void) {
+        switch self {
+        case .feature(.SLCMFeature), .quota(.SLCM):
+            slcm(self.type)
+        case .feature(.appleFeature), .quota(.apple):
+            apple(self.type)
+        default:
+            other(self.type)
+        }
+    }
+    
+    private var payableTypes: [PackageTypeProtocol] {
+        [
+            FeaturePackageType.appleFeature, FeaturePackageType.SLCMFeature,
+            FeaturePackageType.SLCMPaycellFeature, FeaturePackageType.allAccessPaycellFeature,
+            QuotaPackageType.apple, QuotaPackageType.SLCM,
+            QuotaPackageType.paycellSLCM, QuotaPackageType.paycellAllAccess
+        ]
+    }
+}
+
+extension Optional where Wrapped == PackageContentType {
+    func isSameAs(_ other: PackageTypeProtocol?) -> Bool {
+        if let self = self, let other = other {
+            return self.type.rawValue == other.rawValue
+        } else {
+            return false
+        }
+    }
+}
+
+enum QuotaPackageType: String, PackageTypeProtocol {
     case apple                      = "APPLE"
     case SLCM                       = "SLCM"
     case google                     = "GOOGLE"
@@ -169,6 +279,9 @@ final class PackageModelResponse: Equatable {
         static let quota = "quota"
         static let status = "status"
         static let authorities = "authorities"
+        static let recommended = "recommended"
+        static let hasAttachedFeature = "hasAttachedFeature"
+        static let isFeaturePack = "isFeaturePack"
     }
     
     var name: String?
@@ -184,11 +297,27 @@ final class PackageModelResponse: Equatable {
     var cpcmOfferId: Int?
     var inAppPurchaseId: String?
     var period: String?
-    var type: PackageType?
-    var featureType: FeaturePackageType?
+    var type: PackageContentType?
     var quota: Int64?
     var status: PackageStatus?
     var authorities: [PackagePackAuthoritiesResponse]?
+    var isRecommended: Bool?
+    var hasAttachedFeature: Bool?
+    var isFeaturePack: Bool?
+    
+    var isStorageOnly: Bool {
+        guard let isRecommended = isRecommended,
+            let hasAttachedFeature = hasAttachedFeature,
+            let isFeaturePack = isFeaturePack else {
+            return false
+        }
+        
+        return !isRecommended && !hasAttachedFeature && !isFeaturePack
+    }
+    
+    var isRecommendedPremium: Bool {
+        return isFeaturePack == false && hasAttachedFeature == true && isRecommended == true
+    }
 }
 
 extension PackageModelResponse: Map {
@@ -209,11 +338,12 @@ extension PackageModelResponse: Map {
         inAppPurchaseId = json[ResponseKeys.inAppPurchaseId].string
         period = json[ResponseKeys.period].string
         quota = json[ResponseKeys.quota].int64
+        isRecommended = json[ResponseKeys.recommended].bool
+        hasAttachedFeature = json[ResponseKeys.hasAttachedFeature].bool
+        isFeaturePack = json[ResponseKeys.isFeaturePack].bool
         
         if let typeString = json[ResponseKeys.type].string {
-            //helps recognize type of the pack by checking for nil one of those vars
-            type = PackageType(rawValue: typeString)
-            featureType = FeaturePackageType(rawValue: typeString)
+            type = PackageContentType(rawValue: typeString)
         }
         
         if let statusString = json[ResponseKeys.status].string {

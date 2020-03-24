@@ -121,7 +121,6 @@ PODS:
     - XCGLogger/Core (= 6.1.0)
   - XCGLogger/Core (6.1.0):
     - ObjcExceptionBridging
-  - Xtremepush-iOS-SDK (4.1.2)
   - XYPieChart (0.2)
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
@@ -154,12 +153,11 @@ DEPENDENCIES:
   - Typist (~> 1.1.0)
   - UIImage-Categories
   - XCGLogger (~> 6.0)
-  - Xtremepush-iOS-SDK
   - XYPieChart
   - YYImage
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Adjust
     - Alamofire
     - CircleProgressBar
@@ -199,7 +197,6 @@ SPEC REPOS:
     - Typist
     - UIImage-Categories
     - XCGLogger
-    - Xtremepush-iOS-SDK
     - XYPieChart
     - YYImage
 
@@ -253,10 +250,9 @@ SPEC CHECKSUMS:
   Typist: 31a3eb9d6b97ea28e0e247bb8b14ed23fe624170
   UIImage-Categories: a0593f6a7991c99016b9ecadfbd38b3717ff1a73
   XCGLogger: 7f7f43f15dfe3a305fa1342b7dc29af656289abd
-  Xtremepush-iOS-SDK: ea060cc63fec2797cdba0910b148481b10312fff
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: b58fb5e2eb970ee79b4d28672f2a21fbdcdf9a03
+PODFILE CHECKSUM: 553e6af2d3d1299e75b55a2b1bba11b1a51a3bea
 
 COCOAPODS: 1.9.1

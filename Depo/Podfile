@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
 inhibit_all_warnings!
 ENV['COCOAPODS_DISABLE_STATS'] = "true"
@@ -11,7 +11,6 @@ end
 
 def core_pods
   shared_pods
-  pod 'Xtremepush-iOS-SDK'
   pod 'Fabric'
   pod 'Crashlytics', '~>  3.14'
   pod 'FBSDKCoreKit'
@@ -78,6 +77,7 @@ end
 
 target 'LifeTech-autosync-widget' do
     pod 'MMWormhole', '~> 2.0.0'
+    pod 'KeychainSwift', '~> 11.0'
 end
 
 target "LifeTech-NotificationService" do
@@ -110,6 +110,7 @@ end
 
 target 'autosync-widget' do
     pod 'MMWormhole', '~> 2.0.0'
+    pod 'KeychainSwift', '~> 11.0'
 end
 
 target "LifeboxNotificationService" do
@@ -146,6 +147,7 @@ end
 
 target 'LifeDrive-widget' do
     pod 'MMWormhole', '~> 2.0.0'
+    pod 'KeychainSwift', '~> 11.0'
 end
 
 target 'LifeDriveNotificationService' do
@@ -174,6 +176,7 @@ end
 
 target 'LifeTech_LifeDrive-widget' do
     pod 'MMWormhole', '~> 2.0.0'
+    pod 'KeychainSwift', '~> 11.0'
 end
 
 target 'LifeTech_LifeDriveNotificationService' do
