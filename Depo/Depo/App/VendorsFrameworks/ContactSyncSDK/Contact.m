@@ -29,7 +29,7 @@
         CFTypeRef cLastName = ABRecordCopyValue(ref, kABPersonLastNameProperty);
         CFTypeRef cNickName = ABRecordCopyValue(ref, kABPersonNicknameProperty);
         CFTypeRef cCompany = ABRecordCopyValue(ref, kABPersonOrganizationProperty);
-        CFTypeRef cModifDate = ABRecordCopyValue(ref, kABPersonModificationDateProperty);
+//        CFTypeRef cModifDate = ABRecordCopyValue(ref, kABPersonModificationDateProperty);
         
         _objectId = [NSNumber numberWithInt:ABRecordGetRecordID(_recordRef)];
         
@@ -48,9 +48,11 @@
         if (cCompany!=NULL){
             _company=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cCompany)];
         }
-        if (cModifDate!=NULL){
-            _localUpdateDate = SYNC_DATE_AS_NUMBER((NSDate *) CFBridgingRelease(cModifDate));
-        }
+//        if (cModifDate!=NULL){
+//            cModifDate=nil;
+//            _localUpdateDate = SYNC_DATE_AS_NUMBER((NSDate *) CFBridgingRelease(cModifDate));
+//        }
+        _localUpdateDate = [NSNumber numberWithInt:0];
         
         ABRecordRef source = ABPersonCopySource(ref);
         CFNumberRef cSourceType = ABRecordCopyValue(source, kABSourceTypeProperty);
