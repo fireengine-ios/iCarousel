@@ -276,7 +276,7 @@ final class PackageService {
     private func getOfferType(for offer: Any) -> SubscriptionPlanType {
         var type: SubscriptionPlanType = .default
         if let offer = offer as? SubscriptionPlanBaseResponse {
-            type = offer.subscriptionPlanPrice ?? 0 == 0 ? .free : .current
+            type = (offer.subscriptionPlanPrice ?? 0) == 0 ? .free : .current
         }
         return type
     }
@@ -301,7 +301,8 @@ final class PackageService {
         } else {
             name = getOfferQuota(for: offer)?.bytesString ?? (getOfferDisplayName(for: offer) ?? "")
         }
-        return "+" + name
+        let prefix = (getOfferType(for: offer) == .default) ? "+" : ""
+        return prefix + name
     }
     
     private func getOfferAmount(offer: Any) -> Float {
@@ -336,6 +337,10 @@ final class PackageService {
     private func getOfferAvailableFeatures(offer: Any) -> [AuthorityType] {
         if let packageModel = offer as? PackageModelResponse,
             let authorities = packageModel.authorities {
+            return authorities
+                .compactMap { $0.authorityType }
+                .filter { AuthorityType.typesInOffer.contains($0) }
+        } else if let plan = offer as? SubscriptionPlanBaseResponse, let authorities = plan.subscriptionPlanAuthorities, authorities.isEmpty == false {
             return authorities
                 .compactMap { $0.authorityType }
                 .filter { AuthorityType.typesInOffer.contains($0) }
