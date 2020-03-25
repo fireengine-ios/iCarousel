@@ -340,7 +340,8 @@ final class PackageService {
             return authorities
                 .compactMap { $0.authorityType }
                 .filter { AuthorityType.typesInOffer.contains($0) }
-        } else if let plan = offer as? SubscriptionPlanBaseResponse, let authorities = plan.subscriptionPlanAuthorities, authorities.isEmpty == false {
+        } else if let plan = offer as? SubscriptionPlanBaseResponse,
+            let authorities = plan.subscriptionPlanAuthorities {
             return authorities
                 .compactMap { $0.authorityType }
                 .filter { AuthorityType.typesInOffer.contains($0) }
