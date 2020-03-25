@@ -12,6 +12,7 @@ final class NetmeraService {
  
     typealias NetmeraFieldCallback = (_ netmeraField: String) -> Void
     typealias NetmeraIntFieldCallback = (_ netmeraField: Int) -> Void
+    typealias NetmeraAccountInfoCallback = (_ accountInfo: AccountInfoResponse?) -> Void
     
     static func updateUser() {
         
@@ -63,11 +64,28 @@ final class NetmeraService {
             }
             
             group.enter()
-            var countryCode = ""
-            prepareCountryCode { preparedCountryCode in
-                countryCode = preparedCountryCode
+            var countryCode: String = "Null"
+            var userName: Int = 0
+            var userSurname: Int = 0
+            var email: Int = 0
+            var phoneNumber: Int = 0
+            var address: Int = 0
+            var birthday: Int = 0
+            prepareAccountInfo(preparedAccountInfo: { info in
+                guard let accountInfo = info else {
+                    group.leave()
+                    return
+                }
+                
+                countryCode = accountInfo.countryCode ?? "Null"
+                userName = (accountInfo.username ?? "").isEmpty ? 0 : 1
+                userSurname = (accountInfo.surname ?? "").isEmpty ? 0 : 1
+                email = (accountInfo.email ?? "").isEmpty ? 0 : 1
+                phoneNumber = (accountInfo.phoneNumber ?? "").isEmpty ? 0 : 1
+                address = (accountInfo.address ?? "").isEmpty ? 0 : 1
+                birthday = (accountInfo.dob ?? "").isEmpty ? 0 : 1
                 group.leave()
-            }
+            })
             
             
             let twoFactorNetmeraStatus = getTwoFactorStatus()
@@ -97,7 +115,13 @@ final class NetmeraService {
                                              autoLogin: autoLogin,
                                              turkcellPassword: turkcellPassword,
                                              buildNumber: buildNumber,
-                                             countryCode: countryCode)
+                                             countryCode: countryCode,
+                                             isUserName: userName,
+                                             isUserSurname: userSurname,
+                                             isEmail: email,
+                                             isPhoneNumber: phoneNumber,
+                                             isAddress: address,
+                                             isBirthDay: birthday)
                 
                 user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
                 DispatchQueue.toMain {
@@ -168,7 +192,8 @@ extension NetmeraService {
            let user = NetmeraCustomUser(deviceStorage: 0, photopickLeftAnalysis: "Null", lifeboxStorage: 0, faceImageGrouping: "Null", accountType: "Null",
                twoFactorAuthentication: "Null", autosync: "Null", emailVerification: "Null",
                autosyncPhotos: "Null", autosyncVideos: "Null", packages: ["Null"],
-               autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null")
+               autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null", isUserName: 0,
+               isUserSurname: 0, isEmail: 0, isPhoneNumber: 0, isAddress: 0, isBirthDay: 0)
            user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
            DispatchQueue.toMain {
                Netmera.update(user)
@@ -205,16 +230,16 @@ extension NetmeraService {
            })
        }
         
-    private static func prepareCountryCode(preparedCountryCode: @escaping NetmeraFieldCallback) {
+    private static func prepareAccountInfo(preparedAccountInfo: @escaping NetmeraAccountInfoCallback) {
         AccountService().info(
             success: { response in
-                guard let info = response as? AccountInfoResponse, let countryCode = info.countryCode else {
-                    preparedCountryCode("Null")
+                guard let info = response as? AccountInfoResponse else {
+                    preparedAccountInfo(nil)
                     return
                 }
-                preparedCountryCode(countryCode)
+                preparedAccountInfo(info)
         }, fail: { errorResponse in
-            preparedCountryCode("Null")
+            preparedAccountInfo(nil)
         })
     }
       
