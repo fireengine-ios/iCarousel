@@ -144,7 +144,7 @@ class TermsAndServicesViewController: ViewController {
                                                attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
                                                             .foregroundColor: ColorConstants.darkText])
         
-        generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self)
+        generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self, textViewDelegate: self)
     }
     
     private func setupPrivacyPolicyTextView() {
@@ -178,7 +178,7 @@ class TermsAndServicesViewController: ViewController {
         let rangeLink2 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkCommercialEmailMessages)
         descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink2)
 
-        etkChecboxView.setup(atributedTitleText: header, atributedText: descriptionText, delegate: self)
+        etkChecboxView.setup(atributedTitleText: header, atributedText: descriptionText, delegate: self, textViewDelegate: self)
     }
 
     func setupGlobalPermissionTextView() {
@@ -196,7 +196,7 @@ class TermsAndServicesViewController: ViewController {
         let rangeLink1 = descriptionText.mutableString.range(of: TextConstants.termsOfUseGlobalDataPermLinkSeeDetails)
         descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsOfUseGlobalDataPermLink1], range: rangeLink1)
         
-        globalPermissionsView.setup(atributedTitleText: header, atributedText: descriptionText, delegate: self)
+        globalPermissionsView.setup(atributedTitleText: header, atributedText: descriptionText, delegate: self, textViewDelegate: self)
     }
     
     // MARK: Buttons action
