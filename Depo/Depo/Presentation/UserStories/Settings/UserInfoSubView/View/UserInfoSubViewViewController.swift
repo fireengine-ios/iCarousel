@@ -181,7 +181,9 @@ extension UserInfoSubViewViewController: UserInfoSubViewViewInput {
         
         userNameLabel.text = getFullUserName(userInfo: userInfo)
         
-        if let email = userInfo.email {
+        if
+            let email = userInfo.email,
+            !email.isEmpty {
             userEmailLabel.text = email
             userEmailLabel.textColor = ColorConstants.switcherGrayColor
         } else {
@@ -189,7 +191,9 @@ extension UserInfoSubViewViewController: UserInfoSubViewViewInput {
             userEmailLabel.textColor = ColorConstants.profileLightGray
         }
         
-        if let phoneNumber = userInfo.phoneNumber {
+        if
+            let phoneNumber = userInfo.phoneNumber,
+            !phoneNumber.isEmpty {
             userPhoneNumber.text = phoneNumber
             userPhoneNumber.textColor = ColorConstants.switcherGrayColor
         } else {

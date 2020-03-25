@@ -189,6 +189,7 @@ extension SpotifyPlaylistsViewController: SpotifyRoutingServiceDelegate {
     
     func importDidComplete() {
         analyticsService.logScreen(screen: .spotifyImportResult)
+        analyticsService.trackConnectedAccountsGAEvent(action: .importFrom, label: .spotify, dimension: .statusType, status: true)
         importButton.setTitle(TextConstants.Spotify.Playlist.seeImported, for: .normal)
         importButton.isHidden = false
         
