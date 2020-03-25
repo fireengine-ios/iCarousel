@@ -21,12 +21,13 @@ public class MediaItemsLocalAlbum: NSManagedObject {
         name = asset.localizedTitle
         isMain = asset.assetCollectionSubtype == .smartAlbumUserLibrary
         
-        updateRealtedMediaItems(album: asset, context: context)
+        updateRelatedMediaItems(album: asset, context: context)
+        updateRelatedRemoteAlbums(context: context)
     }
 }
 
 extension MediaItemsLocalAlbum {
-    private func updateRealtedMediaItems(album: PHAssetCollection, context: NSManagedObjectContext) {
+    private func updateRelatedMediaItems(album: PHAssetCollection, context: NSManagedObjectContext) {
         let assetsIdentifiers = album.allAssets.compactMap { $0.localIdentifier }
         
         let request: NSFetchRequest = MediaItem.fetchRequest()
@@ -37,6 +38,19 @@ extension MediaItemsLocalAlbum {
                 addToItems($0)
                 $0.isAvailable = true //by default for new Album
             }
+        }
+    }
+    
+    func updateRelatedRemoteAlbums(context: NSManagedObjectContext) {
+        guard let name = name else {
+            return
+        }
+        
+        let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
+        request.predicate = NSPredicate(format: "\(MediaItemsAlbum.PropertyNameKey.name) = %@", name)
+        
+        if let relatedAlbums = try? context.fetch(request) {
+            relatedRemote = relatedAlbums.first
         }
     }
 }

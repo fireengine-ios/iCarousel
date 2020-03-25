@@ -44,6 +44,7 @@ extension MediaItemsAlbum {
     @NSManaged public var uuid: String?
     @NSManaged public var videoCount: Int64
     @NSManaged public var items: NSSet?
+    @NSManaged public var relatedLocal: MediaItemsLocalAlbum?
 }
 
 // MARK: Generated accessors for items
