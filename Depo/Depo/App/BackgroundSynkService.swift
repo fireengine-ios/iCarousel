@@ -27,6 +27,7 @@ final class BackgroundSynсService {
     private lazy var storageVars: StorageVars = factory.resolve()
     
     private static let schedulerQueue = DispatchQueue(label: DispatchQueueLabels.backgroundTaskSyncQueue)
+    private let syncServiceManager = SyncServiceManager.shared
     
     func registerLaunchHandlers() {
         
@@ -69,7 +70,7 @@ final class BackgroundSynсService {
         let request = BGAppRefreshTaskRequest(identifier: TaskIdentifiers.backgroundRefresh)
         
         // Fetch no earlier than 15 sec from now
-        request.earliestBeginDate = Date(timeIntervalSinceNow: 60 * 5)
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 20 * 5)
         
         do {
             try BGTaskScheduler.shared.submit(request)
@@ -106,7 +107,7 @@ final class BackgroundSynсService {
             return
         }
         
-        SyncServiceManager.shared.backgroundTaskSync { isLast in
+        syncServiceManager.backgroundTaskSync { isLast in
             debugLog("handleRefreshSyncTask_task_completed")
             task.setTaskCompleted(success: isLast)
         }

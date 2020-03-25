@@ -41,6 +41,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     var localItems: [WrapData] = []
     var lastSyncedMD5s: [String] = []
     var storageVars: StorageVars = factory.resolve()
+    private let uploadService = UploadService.default
     
     var photoVideoService: PhotoAndVideoService {
         let fieldValue: FieldValue = (fileType == .image) ? .image : .video
@@ -112,6 +113,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl sync")
 
         guard !status.isContained(in: [.executing, .prepairing]) else {
+            debugLog("ItemSyncServiceImpl isContained")
             return
         }
         
@@ -119,7 +121,9 @@ class ItemSyncServiceImpl: ItemSyncService {
         
         localItems.removeAll()
         itemsSortedToUpload { [weak self] items in
+            
             guard let `self` = self else {
+                debugLog("ItemSyncServiceImpl self")
                 return
             }
             
@@ -129,6 +133,7 @@ class ItemSyncServiceImpl: ItemSyncService {
                 
                 guard !self.localItems.isEmpty else {
                     self.status = .synced
+                    debugLog("ItemSyncServiceImpl self.status = .synced")
                     return
                 }
                 
@@ -142,10 +147,11 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl upload")
 
         guard !items.isEmpty, status != .stoped else {
+            debugLog("ItemSyncServiceImpl status != .stoped")
             return
         }
         
-        UploadService.default.uploadFileList(items: items,
+        uploadService.uploadFileList(items: items,
                                              uploadType: .autoSync,
                                              uploadStategy: .WithoutConflictControl,
                                              uploadTo: .MOBILE_UPLOAD,
@@ -155,7 +161,9 @@ class ItemSyncServiceImpl: ItemSyncService {
                                                     self?.status = .synced
                                                 }
         }, fail: { [weak self] error in
+            
             guard let `self` = self else {
+                debugLog("ItemSyncServiceImpl self == nil")
                 print("\(#function): self == nil")
                 return
             }
@@ -163,6 +171,8 @@ class ItemSyncServiceImpl: ItemSyncService {
             debugLog("ItemSyncServiceImpl upload UploadService uploadFileList fail")
             
             if error.description == TextConstants.canceledOperationTextError || error.description == TextConstants.networkConnectionLostTextError {
+                
+                debugLog("ItemSyncServiceImpl \(error.description)")
                 return
             }
             
@@ -178,6 +188,7 @@ class ItemSyncServiceImpl: ItemSyncService {
                 guard self?.status != .executing else {
                     /// status == .executing
                     /// means that uploading is already in progress and we've just appended new items
+                    debugLog("returnedUploadOperation rror.description")
                     return
                 }
                 

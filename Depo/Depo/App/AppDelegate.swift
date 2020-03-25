@@ -215,8 +215,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if #available(iOS 13.0, *) {
             debugLog("AppDelegate applicationDidEnterBackground BT schedule")
-            backgroundSyncService.scheduleRefreshSync()
             backgroundSyncService.scheduleProcessingSync()
+            backgroundSyncService.scheduleRefreshSync()
         }
         
 //        BackgroundTaskService.shared.beginBackgroundTask()

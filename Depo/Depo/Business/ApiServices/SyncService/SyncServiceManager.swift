@@ -133,23 +133,20 @@ class SyncServiceManager {
     // MARK: - Private
     
     func backgroundTaskSync(handler: @escaping BoolHandler) {
+        stopSync()
+
+        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
         
-        guard coreDataStack.isReady else {
-            debugLog("backgroundTaskSync_coreDataStack.isReady")
-            handler(false)
-            return
-        }
-        
-        dispatchQueue.async { [weak self] in
-            
-            guard let self = self else {
-                debugLog("backgroundTaskSync_ dispatchQueue.async")
-                handler(false)
-                return
-            }
-            self.backgroundSyncHandler = handler
-            self.checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
-        }
+//        dispatchQueue.async { [weak self] in
+//
+//            guard let self = self else {
+//                debugLog("backgroundTaskSync_ dispatchQueue.async")
+//                handler(false)
+//                return
+//            }
+//            self.backgroundSyncHandler = handler
+//
+//        }
     }
     
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {

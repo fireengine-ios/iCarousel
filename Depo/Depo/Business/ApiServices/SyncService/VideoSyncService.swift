@@ -11,6 +11,7 @@ import Foundation
 
 final class VideoSyncService: ItemSyncServiceImpl {
     private let backgroundTaskService = BackgroundTaskService.shared
+    private let mediaItemOperationsService =  MediaItemOperationsService.shared
     
     
     override init() {
@@ -21,8 +22,10 @@ final class VideoSyncService: ItemSyncServiceImpl {
     }
 
     override func itemsSortedToUpload(completion: @escaping WrapObjectsCallBack) {
-        MediaItemOperationsService.shared.allLocalItemsForSync(video: true, image: false) { items in
+        debugLog("ItemSyncServiceImpl itemsSortedToUpload")
+        mediaItemOperationsService.allLocalItemsForSync(video: true, image: false) { items in
             let fileSizeLimit = NumericConstants.fourGigabytes
+            debugLog("ItemSyncServiceImpl completion")
             completion(items.filter { $0.fileSize < fileSizeLimit })
         }
     }
