@@ -27,7 +27,7 @@ final class MediaItemsAlbumOperationService {
     
     private var waitingLocalAlbumsCallBack: MediaItemLocalAlbumsCallBack?
     
-    //MARK: -
+    //MARK: - Public
     
     func processLocalMediaItemAlbums(completion: @escaping VoidHandler) {
         guard !localMediaStorage.isWaitingForPhotoPermission else {
@@ -100,45 +100,22 @@ final class MediaItemsAlbumOperationService {
         execute(request: fetchRequest, context: context, albumsCallBack: albumsCallBack)
     }
     
-    private func getAllRemoteAlbums(completion: @escaping ResponseArrayHandler<AlbumItem>) {
-        albumService.allAlbums(sortBy: .albumName, sortOrder: .asc, success: { albums in
-            completion(.success(albums))
-        }, fail: {
-            completion(.failed(ErrorResponse.string("Failed get remote albums")))
-        })
-    }
-    
-    private func updateRelatedItems(for albums: [MediaItemsLocalAlbum]) {
-        let updatedItems = NSMutableSet()
+    func remoteAlbumRenamed(_ albumUuid: String) {
+        let context = coreDataStack.newChildBackgroundContext
+        let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
+        request.predicate = NSPredicate(format: "\(MediaItemsAlbum.PropertyNameKey.uuid) = %@", albumUuid)
         
-        albums.forEach { album in
-            guard let items = album.items?.array as? [MediaItem] else {
+        execute(request: request, context: context) { [weak self] remoteAlbums in
+            guard let self = self, let album = remoteAlbums.first else {
                 return
             }
             
-            if album.isDeleted {
-                let mediaItemsLocalIds = items.compactMap { $0.localFileID }
-                if let localId = album.localId {
-                    localAlbumsCache.remove(albumId: localId, with: mediaItemsLocalIds)
-                }
-                items.forEach {
-                    $0.removeFromLocalAlbums(album)
-                }
-                updatedItems.addObjects(from: items)
-            } else if album.isEnabled {
-                items.forEach {
-                    $0.isAvailable = true
-                }
-            } else {
-                updatedItems.addObjects(from: items)
-            }
+            album.updateRelatedLocalAlbum(context: context)
+            
+            //TODO: Notify observers
+            
+            self.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
         }
-        
-        guard let mediaItems = updatedItems.allObjects as? [MediaItem] else {
-            return
-        }
-        
-        mediaItems.forEach { $0.updateAvalability() }
     }
 }
 
@@ -349,7 +326,47 @@ extension MediaItemsAlbumOperationService {
             
             self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
+    }
+    
+    private func getAllRemoteAlbums(completion: @escaping ResponseArrayHandler<AlbumItem>) {
+        albumService.allAlbums(sortBy: .albumName, sortOrder: .asc, success: { albums in
+            completion(.success(albums))
+        }, fail: {
+            completion(.failed(ErrorResponse.string("Failed get remote albums")))
+        })
+    }
+    
+    private func updateRelatedItems(for albums: [MediaItemsLocalAlbum]) {
+        let updatedItems = NSMutableSet()
         
+        albums.forEach { album in
+            guard let items = album.items?.array as? [MediaItem] else {
+                return
+            }
+            
+            if album.isDeleted {
+                let mediaItemsLocalIds = items.compactMap { $0.localFileID }
+                if let localId = album.localId {
+                    localAlbumsCache.remove(albumId: localId, with: mediaItemsLocalIds)
+                }
+                items.forEach {
+                    $0.removeFromLocalAlbums(album)
+                }
+                updatedItems.addObjects(from: items)
+            } else if album.isEnabled {
+                items.forEach {
+                    $0.isAvailable = true
+                }
+            } else {
+                updatedItems.addObjects(from: items)
+            }
+        }
+        
+        guard let mediaItems = updatedItems.allObjects as? [MediaItem] else {
+            return
+        }
+        
+        mediaItems.forEach { $0.updateAvalability() }
     }
 }
 

@@ -26,6 +26,7 @@ public class MediaItemsAlbum: NSManagedObject {
 extension MediaItemsAlbum {
     func updateRelatedLocalAlbum(context: NSManagedObjectContext) {
         guard let name = name else {
+            relatedLocal = nil
             return
         }
         

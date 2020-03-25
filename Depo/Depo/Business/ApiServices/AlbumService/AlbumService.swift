@@ -312,6 +312,8 @@ class PhotosAlbumService: BaseRequestService {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             debugLog("PhotosAlbumService renameAlbum success")
 
+            MediaItemsAlbumOperationService.shared.remoteAlbumRenamed(parameters.albumUUID)
+            
             success?()
         }, fail: fail)
         executePutRequest(param: parameters, handler: handler)
