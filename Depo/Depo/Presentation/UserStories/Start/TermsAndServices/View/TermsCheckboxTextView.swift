@@ -69,8 +69,9 @@ final class TermsCheckboxTextView: UIView, NibInit {
         }
     }
   
-    func setup(atributedTitleText: NSMutableAttributedString?, atributedText: NSMutableAttributedString?, delegate: TermsCheckboxTextViewDelegate) {
+    func setup(atributedTitleText: NSMutableAttributedString?, atributedText: NSMutableAttributedString?, delegate: TermsCheckboxTextViewDelegate, textViewDelegate: UITextViewDelegate) {
         self.delegate = delegate
+        descriptionView.delegate = textViewDelegate
         if let atributedTitleText = atributedTitleText {
             titleView.attributedText = atributedTitleText
         }
