@@ -41,10 +41,35 @@ extension PHAsset {
         }
         
         var albums = [PHAssetCollection]()
+        
         let fetchResult = PHAssetCollection.fetchAssetCollectionsContaining(self, with: .album, options: nil)
-        fetchResult.enumerateObjects { album, _, _ in
-            albums.append(album)
+        fetchResult.enumerateObjects { collection, _ , _ in
+            albums.append(collection)
         }
+
+        return albums
+    }
+    
+    //Don't use for arrays because this method is very hard
+    var allContainingAlbums: [PHAssetCollection] {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return []
+        }
+        
+        var albums = [PHAssetCollection]()
+        
+        let smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
+        smartAlbums.enumerateObjects { collection, _ , _  in
+            if collection.allAssets.contains(self) {
+                albums.append(collection)
+            }
+        }
+        
+        let userAlbumsFetch = PHAssetCollection.fetchAssetCollectionsContaining(self, with: .album, options: nil)
+        userAlbumsFetch.enumerateObjects { collection, _ , _ in
+            albums.append(collection)
+        }
+
         return albums
     }
     

@@ -18,12 +18,15 @@ final class AppendLocalsOperation: Operation {
     private let coreDataStack: CoreDataStack = factory.resolve()
     private let context: NSManagedObjectContext
     private let mediaStorage = LocalMediaStorage.default
+    private let needCreateRelationships: Bool
+    private lazy var localAlbumsCache = LocalAlbumsCache.shared
     
     
-    init(assets: [PHAsset], completion: VoidHandler?) {
+    init(assets: [PHAsset], needCreateRelationships: Bool, completion: VoidHandler?) {
         context = coreDataStack.newChildBackgroundContext
         self.completionHandler = completion
         self.assets = assets
+        self.needCreateRelationships = needCreateRelationships
     }
     
     override func cancel() {
@@ -83,8 +86,30 @@ final class AppendLocalsOperation: Operation {
                 var addedObjects = [WrapData]()
                 let updatedCache = self.mediaStorage.assetsCache
                 let assetsInfo = info.filter { $0.isValid && updatedCache.assetBy(identifier: $0.asset.localIdentifier) != nil }
+                
+                let smartAssets = PHAssetCollection.smartAlbums.map { (album: $0, assets: $0.allAssets) }
+                
                 assetsInfo.forEach { element in
                     autoreleasepool {
+                        if self.needCreateRelationships {
+                            var albums = element.asset.containingAlbums
+                            let smartAlbums = smartAssets.filter { $0.assets.contains(element.asset) }.map { $0.album }
+                            
+                            albums.append(contentsOf: smartAlbums)
+                            albums.forEach {
+                                self.localAlbumsCache.append(albumId: $0.localIdentifier, with: [element.asset.localIdentifier])
+                            }
+                            
+                            //FE-2354 Logs for debug
+                            //TODO: Delete after debugging
+                            debugLog("asset name - \(element.asset.originalFilename ?? "")")
+                            let albumsString = albums.map { $0.localizedTitle ?? "" }.joined(separator: ",")
+                            debugLog("containing albums - \(albumsString)")
+                            
+                            debugPrint("asset name - \(element.asset.originalFilename ?? "")")
+                            debugPrint("containing albums - \(albumsString)")
+                        }
+                        
                         let wrapedItem = WrapData(info: element)
                         _ = MediaItem(wrapData: wrapedItem, context: self.context)
                         
