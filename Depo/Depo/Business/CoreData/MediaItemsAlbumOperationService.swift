@@ -46,6 +46,14 @@ final class MediaItemsAlbumOperationService {
         }
     }
     
+    func resetLocalAlbums() {
+        let context = coreDataStack.newChildBackgroundContext
+        getLocalAlbums(context: context) { [weak self] albums in
+            albums.forEach { $0.isEnabled = true }
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
+        }
+    }
+    
     func getAutoSyncAlbums(albumsCallBack: @escaping MediaItemLocalAlbumsCallBack) {
         if inProcessLocalAlbums {
             waitingLocalAlbumsCallBack = albumsCallBack
