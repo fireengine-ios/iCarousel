@@ -523,7 +523,9 @@ final class MediaItemOperationsService {
         }
     }
     
-    func append(localMediaItems: [PHAsset], completion: @escaping VoidHandler) {
+    func append(localMediaItems: [PHAsset], needCreateRelationships: Bool = false, completion: @escaping VoidHandler) {
+        //needCreateRelationships = true for adding from PHPhotoLibraryChangeObserver
+        
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             completion()
             return
@@ -536,7 +538,9 @@ final class MediaItemOperationsService {
             let assetCache = LocalMediaStorage.default.assetsCache
             assetCache.append(list: localMediaItems)
             
-            self.pushToLocalsAppendingQueue(assets: localMediaItems, completion: completion)
+            self.pushToLocalsAppendingQueue(assets: localMediaItems,
+                                            needCreateRelationships: needCreateRelationships,
+                                            completion: completion)
         }
     }
     
@@ -564,10 +568,14 @@ final class MediaItemOperationsService {
         var appendRelationships = [String: [String]]()
         var deletedRelationships = [String: [String]]()
         
+        let smartAssets = PHAssetCollection.smartAlbums.map { (album: $0, assets: $0.allAssets) }
+    
         assets.forEach { asset in
             let albumIds = Set(localAlbumsCache.albumIds(assetId: asset.localIdentifier))
             let albumAssets = asset.containingAlbums
-            let albumAssetsIds = Set(albumAssets.map { $0.localIdentifier })
+            var albumAssetsIds = Set(albumAssets.map { $0.localIdentifier })
+            let smartAlbumsIds = smartAssets.filter { $0.assets.contains(asset) }.map { $0.album.localIdentifier }
+            albumAssetsIds.formUnion(Set(smartAlbumsIds))
             
             let appendAlbumsIds = albumAssetsIds.subtracting(albumIds)
             if !appendAlbumsIds.isEmpty {
@@ -648,8 +656,8 @@ final class MediaItemOperationsService {
     }()
     
     
-    private func pushToLocalsAppendingQueue(assets: [PHAsset], completion: @escaping VoidHandler) {
-        let appendOperation = AppendLocalsOperation(assets: assets, completion: completion)
+    private func pushToLocalsAppendingQueue(assets: [PHAsset], needCreateRelationships: Bool = false, completion: @escaping VoidHandler) {
+        let appendOperation = AppendLocalsOperation(assets: assets, needCreateRelationships: needCreateRelationships, completion: completion)
         localsAppendingQueue.addOperation(appendOperation)
     }
     
