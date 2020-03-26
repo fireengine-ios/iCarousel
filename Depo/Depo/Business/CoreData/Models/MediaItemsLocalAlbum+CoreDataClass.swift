@@ -43,6 +43,7 @@ extension MediaItemsLocalAlbum {
     
     func updateRelatedRemoteAlbums(context: NSManagedObjectContext) {
         guard let name = name else {
+            relatedRemote = nil
             return
         }
         
