@@ -43,4 +43,17 @@ extension PHAssetCollection {
         }
         return assets
     }
+    
+    static var smartAlbums: [PHAssetCollection] {
+        guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+            return []
+        }
+        
+        var albums = [PHAssetCollection]()
+        let fetchRequest = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
+        fetchRequest.enumerateObjects { collection, _ , _  in
+            albums.append(collection)
+        }
+        return albums
+    }
 }

@@ -49,6 +49,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
                 
                 phChanges[.changed] = changes.changedObjects
                 debugLog("photoLibraryDidChange - changed \(changes.changedObjects.count) items")
+                debugPrint("photoLibraryDidChange - changed \(changes.changedObjects.count) items")
                 
                 MediaItemOperationsService.shared.update(localMediaItems: changes.changedObjects) {
                     notify()
@@ -63,6 +64,8 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
                 
                 phChanges[.removed] = changes.removedObjects
                 debugLog("photoLibraryDidChange - removed \(changes.removedObjects.count) items")
+                debugPrint("photoLibraryDidChange - removed \(changes.removedObjects.count) items")
+
                 UploadService.default.cancelOperations(with: changes.removedObjects)
                 
                 MediaItemOperationsService.shared.remove(localMediaItems: changes.removedObjects) {
@@ -78,8 +81,11 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
                 
                 phChanges[.added] = changes.insertedObjects
                 debugLog("photoLibraryDidChange - added \(changes.insertedObjects.count) items")
+                debugPrint("photoLibraryDidChange - added \(changes.insertedObjects.count) items")
                 
-                MediaItemOperationsService.shared.append(localMediaItems: changes.insertedObjects) {
+                LocalMediaStorage.default.isLoggingLocalOperations = true
+                MediaItemOperationsService.shared.append(localMediaItems: changes.insertedObjects, needCreateRelationships: true) {
+                    LocalMediaStorage.default.isLoggingLocalOperations = false
                     checkDeletedObjects()
                 }
             }
