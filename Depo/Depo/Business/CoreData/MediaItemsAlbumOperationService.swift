@@ -46,14 +46,6 @@ final class MediaItemsAlbumOperationService {
         }
     }
     
-    func resetLocalAlbums() {
-        let context = coreDataStack.newChildBackgroundContext
-        getLocalAlbums(context: context) { [weak self] albums in
-            albums.forEach { $0.isEnabled = true }
-            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
-        }
-    }
-    
     func getAutoSyncAlbums(albumsCallBack: @escaping MediaItemLocalAlbumsCallBack) {
         if inProcessLocalAlbums {
             waitingLocalAlbumsCallBack = albumsCallBack
@@ -91,7 +83,20 @@ final class MediaItemsAlbumOperationService {
             self.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
         }
     }
-    
+}
+
+//MARK: - Public Local Albums Actions
+
+extension MediaItemsAlbumOperationService {
+
+    func resetLocalAlbums() {
+        let context = coreDataStack.newChildBackgroundContext
+        getLocalAlbums(context: context) { [weak self] albums in
+            albums.forEach { $0.isEnabled = true }
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
+        }
+    }
+
     func getLocalAlbums(localIds: [String]? = nil, context: NSManagedObjectContext, albumsCallBack: @escaping MediaItemLocalAlbumsCallBack) {
         
         let sortDescriptor1 = NSSortDescriptor(key: MediaItemsLocalAlbum.PropertyNameKey.isMain, ascending: false)
@@ -107,6 +112,28 @@ final class MediaItemsAlbumOperationService {
         
         execute(request: fetchRequest, context: context, albumsCallBack: albumsCallBack)
     }
+}
+
+//MARK: - Public Remote Albums Actions
+
+extension MediaItemsAlbumOperationService {
+    
+    func createNewRemoteAlbum(_ albumItem: AlbumItem, completion: @escaping VoidHandler) {
+        let context = coreDataStack.newChildBackgroundContext
+        context.perform {
+            _ = MediaItemsAlbum(uuid: albumItem.uuid, name: albumItem.name, context: context)
+            self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
+        }
+    }
+    
+    func deleteRemoteAlbums(_ albumItems: [AlbumItem], completion: @escaping VoidHandler) {
+        let context = coreDataStack.newChildBackgroundContext
+        let uuids = albumItems.map { $0.uuid }
+        getRemoteAlbums(uuids: uuids, context: context) { [weak self] remoteAlbums in
+            remoteAlbums.forEach { context.delete($0) }
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
+        }
+    }
     
     func getLocalAlbumsToSync(for itemId: NSManagedObjectID, callback: @escaping MediaItemLocalAlbumsCallBack) {
         let context = coreDataStack.newChildBackgroundContext
@@ -120,10 +147,8 @@ final class MediaItemsAlbumOperationService {
     
     func remoteAlbumRenamed(_ albumUuid: String) {
         let context = coreDataStack.newChildBackgroundContext
-        let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
-        request.predicate = NSPredicate(format: "\(MediaItemsAlbum.PropertyNameKey.uuid) = %@", albumUuid)
         
-        execute(request: request, context: context) { [weak self] remoteAlbums in
+        getRemoteAlbums(uuids: [albumUuid], context: context) { [weak self] remoteAlbums in
             guard let self = self, let album = remoteAlbums.first else {
                 return
             }
@@ -400,7 +425,7 @@ extension MediaItemsAlbumOperationService {
     }
 }
 
-//MARK: - Common Request Methods
+//MARK: - Local Albums Request Methods
 
 extension MediaItemsAlbumOperationService {
     
@@ -423,6 +448,17 @@ extension MediaItemsAlbumOperationService {
             }
             albumsCallBack(result)
         }
+    }
+}
+
+//MARK: - Remote Albums Request Methods
+
+extension MediaItemsAlbumOperationService {
+    
+    private func getRemoteAlbums(uuids: [String], context: NSManagedObjectContext, albumsCallBack: @escaping MediaItemRemoteAlbumsCallBack) {
+        let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
+        request.predicate = NSPredicate(format: "\(MediaItemsAlbum.PropertyNameKey.uuid) IN %@", uuids)
+        execute(request: request, context: context, albumsCallBack: albumsCallBack)
     }
     
     private func execute(request: NSFetchRequest<MediaItemsAlbum>, context: NSManagedObjectContext, albumsCallBack: @escaping MediaItemRemoteAlbumsCallBack) {
