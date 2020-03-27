@@ -12,6 +12,11 @@ typealias MediaItemRemoteAlbumsCallBack = (_ mediaItemAlbums: [MediaItemsAlbum])
 typealias MediaItemLocalAlbumsCallBack = (_ mediaItemAlbums: [MediaItemsLocalAlbum]) -> Void
 typealias PhotoAssetCollectionsCallback = (_ assets: [PHAssetCollection]) -> Void
 
+private enum RelationshipsChangesType {
+    case append
+    case delete
+}
+
 final class MediaItemsAlbumOperationService {
 
     static let shared = MediaItemsAlbumOperationService()
@@ -20,6 +25,7 @@ final class MediaItemsAlbumOperationService {
     private lazy var localMediaStorage = LocalMediaStorage.default
     private lazy var localAlbumsCache = LocalAlbumsCache.shared
     private lazy var albumService = AlbumService(requestSize: 200)
+    private lazy var mediaItemsService = MediaItemOperationsService.shared
     
     var inProcessLocalAlbums = false
     
@@ -145,7 +151,7 @@ extension MediaItemsAlbumOperationService {
     }
 
     
-    func remoteAlbumRenamed(_ albumUuid: String) {
+    func remoteAlbumRenamed(_ albumUuid: String, completion: @escaping VoidHandler) {
         let context = coreDataStack.newChildBackgroundContext
         
         getRemoteAlbums(uuids: [albumUuid], context: context) { [weak self] remoteAlbums in
@@ -157,7 +163,7 @@ extension MediaItemsAlbumOperationService {
             
             //TODO: Notify observers
             
-            self.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
+            self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
     }
     
@@ -170,6 +176,34 @@ extension MediaItemsAlbumOperationService {
             self?.coreDataStack.saveDataForContext(context: context, savedCallBack: {
                 completion()
             })
+        }
+    }
+    
+    func addItemsToRemoteAlbum(itemsUuids: [String], albumUuid: String, completion: @escaping VoidHandler) {
+        changeRelationships(type: .append, itemsUuids: itemsUuids, albumUuid: albumUuid, completion: completion)
+    }
+    
+    func removeItemsFromRemoteAlbum(itemsUuids: [String], albumUuid: String, completion: @escaping VoidHandler) {
+        changeRelationships(type: .delete, itemsUuids: itemsUuids, albumUuid: albumUuid, completion: completion)
+    }
+    
+    private func changeRelationships(type: RelationshipsChangesType, itemsUuids: [String], albumUuid: String, completion: @escaping VoidHandler) {
+        let context = coreDataStack.newChildBackgroundContext
+        getRemoteAlbums(uuids: [albumUuid], context: context) { [weak self] remoteAlbums in
+            guard let self = self, let album = remoteAlbums.first(where: { $0.uuid == albumUuid }) else {
+                return
+            }
+            
+            self.mediaItemsService.mediaItems(by: itemsUuids, context: context) { [weak self] mediaItems in
+                switch type {
+                case .append:
+                    album.addToItems(NSSet(array: mediaItems))
+                case .delete:
+                    album.removeFromItems(NSSet(array: mediaItems))
+                }
+                
+                self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
+            }
         }
     }
 }

@@ -283,10 +283,14 @@ class PhotosAlbumService: BaseRequestService {
     func addPhotosToAlbum(parameters: AddPhotosToAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService addPhotosToAlbum")
 
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { [weak self] _  in
             debugLog("PhotosAlbumService addPhotosToAlbum success")
 
-            success?()
+            let itemsUuids = parameters.photos.map { $0.uuid }
+            self?.mediaAlbumService.addItemsToRemoteAlbum(itemsUuids: itemsUuids, albumUuid: parameters.albumUUID) {
+                success?()
+            }
+
         }, fail: fail)
         //executePostRequest(param: parameters, handler: handler)
         executePutRequest(param: parameters, handler: handler)
@@ -295,10 +299,14 @@ class PhotosAlbumService: BaseRequestService {
     func deletePhotosFromAlbum(parameters: DeletePhotosFromAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService deletePhotosFromAlbum")
 
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { [weak self] _  in
             debugLog("PhotosAlbumService deletePhotosFromAlbum success")
 
-            success?()
+            let itemsUuids = parameters.photos.map { $0.uuid }
+            self?.mediaAlbumService.removeItemsFromRemoteAlbum(itemsUuids: itemsUuids, albumUuid: parameters.albumUUID, completion: {
+                success?()
+            })
+
         }, fail: fail)
         executePutRequest(param: parameters, handler: handler)
     }
@@ -315,12 +323,13 @@ class PhotosAlbumService: BaseRequestService {
     func renameAlbum(parameters: RenameAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService renameAlbum")
 
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { [weak self] _  in
             debugLog("PhotosAlbumService renameAlbum success")
 
-            MediaItemsAlbumOperationService.shared.remoteAlbumRenamed(parameters.albumUUID)
+            self?.mediaAlbumService.remoteAlbumRenamed(parameters.albumUUID) {
+                success?()
+            }
             
-            success?()
         }, fail: fail)
         executePutRequest(param: parameters, handler: handler)
     }
