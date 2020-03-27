@@ -188,16 +188,19 @@ typealias PhotosByAlbumsOperation = (_ items: [AlbumItem: [Item]]) -> Void
 class PhotosAlbumService: BaseRequestService {
     
     private lazy var albumService = AlbumDetailService(requestSize: Device.isIpad ? 200 : 100)
+    private lazy var mediaAlbumService = MediaItemsAlbumOperationService.shared
     
     func createAlbum(createAlbum: CreatesAlbum, success: AlbumCreatedOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService createAlbum")
 
-        let handler = BaseResponseHandler<AlbumServiceResponse, ObjectRequestResponse>(success: { response in
+        let handler = BaseResponseHandler<AlbumServiceResponse, ObjectRequestResponse>(success: { [weak self] response in
             debugLog("PhotosAlbumService createAlbum success")
             
             if let albumResponse = response as? AlbumServiceResponse { 
                 let item = AlbumItem(remote: albumResponse)
-                success?(item)
+                self?.mediaAlbumService.createNewRemoteAlbum(item) {
+                    success?(item)
+                }
             } else {
                 success?(nil)
             }
@@ -232,9 +235,11 @@ class PhotosAlbumService: BaseRequestService {
             return
         }
         
-        let wrappedSuccess: PhotosAlbumDeleteOperation = { deletedAlbums in
-            success?(deletedAlbums)
-            ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
+        let wrappedSuccess: PhotosAlbumDeleteOperation = { [weak self] deletedAlbums in
+            self?.mediaAlbumService.deleteRemoteAlbums(deletedAlbums, completion: {
+                success?(deletedAlbums)
+                ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
+            })
         }
         
         loadAllItemsFrom(albums: deleteAlbums) { items in
