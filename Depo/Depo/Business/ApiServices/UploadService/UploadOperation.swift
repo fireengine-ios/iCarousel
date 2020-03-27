@@ -7,7 +7,6 @@
 //
 
 import Foundation
-//FIXME: remove MBProgressHUD
 import MBProgressHUD
 
 
@@ -27,6 +26,10 @@ typealias ResumableUploadHandler = (_ status: ResumableUploadStatus?, _ error: E
 final class UploadOperation: Operation {
     
     typealias UploadParametersResponse = (UploadRequestParametrs) -> Void
+    
+    private let mediaItemsService = MediaItemOperationsService.shared
+    private let mediaAlbumsService = MediaItemsAlbumOperationService.shared
+    private let remoteAlbumsService = PhotosAlbumService()
     
     let inputItem: WrapData
     private(set) var outputItem: WrapData?
@@ -369,13 +372,22 @@ final class UploadOperation: Operation {
             self.semaphore.signal()
         }
         
-        if isResumable {
-            debugLog("resumable_upload:")
-            attemptResumableUpload(success: customSucces, fail: customFail)
-        } else {
-            debugLog("simple_upload:")
-            attemptSimpleUpload(success: customSucces, fail: customFail)
+        createAlbumsIfNeeded { [weak self] in
+            guard let self = self else {
+                customFail(ErrorResponse.string(TextConstants.errorUnknown))
+                return
+            }
+            
+            if self.isResumable {
+                debugLog("resumable_upload:")
+                self.attemptResumableUpload(success: customSucces, fail: customFail)
+            } else {
+                debugLog("simple_upload:")
+                self.attemptSimpleUpload(success: customSucces, fail: customFail)
+            }
         }
+        
+        
     }
     
     private func getUploadParameters(baseURL: URL, empty: Bool = false, success: @escaping UploadParametersResponse, fail: @escaping FailResponse) {
@@ -425,24 +437,32 @@ final class UploadOperation: Operation {
                     return
                 }
                 
-                if let response = baseurlResponse as? SearchItemResponse {
-                    self.outputItem = WrapData(remote: response)
-                    self.addPhotoToTheAlbum(with: parameters, response: response)
-                    self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
-                    self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
-                    self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
-                    
-                    //case for upload photo from camera
-                    if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
-                        self.outputItem?.metaData?.mediumUrl = preview
-                    }
-                    
-                    debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
-                    
-                    MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
+                guard let response = baseurlResponse as? SearchItemResponse else {
+                    success()
+                    return
                 }
                 
-                success()
+                self.outputItem = WrapData(remote: response)
+                self.addPhotoToTheAlbum(with: parameters, response: response)
+                self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
+                self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
+                self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
+                
+                //case for upload photo from camera
+                if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
+                    self.outputItem?.metaData?.mediumUrl = preview
+                }
+                self.addToRemoteAlbums { [weak self] in
+                    guard let self = self else {
+                        fail(ErrorResponse.string(TextConstants.errorUnknown))
+                        return
+                    }
+                    
+                    self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
+                    
+                    success()
+                }
+                debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
             }
         }, fail: fail)
     }
@@ -458,11 +478,11 @@ final class UploadOperation: Operation {
     }
     
     private func addPhotoToTheAlbum(with parameters: UploadRequestParametrs, response: SearchItemResponse) {
-        if self.isPhotoAlbum {
+        if isPhotoAlbum {
             let item = Item(remote: response)
             let parameter = AddPhotosToAlbum(albumUUID: parameters.rootFolder, photos: [item])
             
-            PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
+            self.remoteAlbumsService.addPhotosToAlbum(parameters: parameter, success: {
                 ItemOperationManager.default.fileAddedToAlbum(item: item)
             }, fail: { error in
                 UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)
@@ -540,5 +560,60 @@ extension UploadOperation: OperationProgressServiceDelegate {
 //
 //            hud.hide(animated: true, afterDelay: 2.0)
 //        }
+    }
+}
+
+/// Albums Sync
+extension UploadOperation {
+    private func createAlbumsIfNeeded(completion: @escaping VoidHandler) {
+        guard !isPhotoAlbum, let coreDataId = inputItem.coreDataObjectId else {
+            completion()
+            return
+        }
+        
+        mediaAlbumsService.getLocalAlbumsToSync(for: coreDataId) { [weak self] localAlbums in
+            guard !localAlbums.isEmpty else {
+                completion()
+                return
+            }
+            
+            self?.remoteAlbumsService.createAlbums(names: localAlbums.compactMap { $0.name }, success: { [weak self] remoteAlbums in
+                self?.mediaAlbumsService.saveNewRemoteAlbums(albumItems: remoteAlbums, completion: {
+                    completion()
+                })
+            }, fail: { _ in
+                /// any album wasn't created
+                completion()
+            })
+        }
+    }
+    
+    private func addToRemoteAlbums(completion: @escaping VoidHandler) {
+        guard
+            !isPhotoAlbum,
+            let coreDataId = inputItem.coreDataObjectId,
+            let remote = outputItem
+        else {
+            completion()
+            return
+        }
+        
+        mediaItemsService.mediaItemsByIDs(ids: [coreDataId]) { [weak self] items in
+            guard
+                let self = self,
+                let item = items.first,
+                let localAlbums = item.localAlbums?.array as? Array<MediaItemsLocalAlbum>
+            else {
+                completion()
+                return
+            }
+            
+            let remoteAlbumsToAddInto = localAlbums
+                .filter { $0.isEnabled }
+                .compactMap { $0.relatedRemote?.uuid }
+                .filter { !item.albumsUUIDs.contains($0) }
+            
+            self.remoteAlbumsService.addItem(item: remote, to: remoteAlbumsToAddInto, completion: completion)
+        }
     }
 }

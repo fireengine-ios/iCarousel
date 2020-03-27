@@ -108,6 +108,16 @@ final class MediaItemsAlbumOperationService {
         execute(request: fetchRequest, context: context, albumsCallBack: albumsCallBack)
     }
     
+    func getLocalAlbumsToSync(for itemId: NSManagedObjectID, callback: @escaping MediaItemLocalAlbumsCallBack) {
+        let context = coreDataStack.newChildBackgroundContext
+        
+        let fetchRequest: NSFetchRequest = MediaItemsLocalAlbum.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "\(MediaItemsLocalAlbum.PropertyNameKey.isEnabled) = true AND \(MediaItemsLocalAlbum.PropertyNameKey.relatedRemote) = NULL AND %@ IN \(MediaItemsLocalAlbum.PropertyNameKey.items)", itemId)
+        
+        execute(request: fetchRequest, context: context, albumsCallBack: callback)
+    }
+
+    
     func remoteAlbumRenamed(_ albumUuid: String) {
         let context = coreDataStack.newChildBackgroundContext
         let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
@@ -123,6 +133,18 @@ final class MediaItemsAlbumOperationService {
             //TODO: Notify observers
             
             self.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
+        }
+    }
+    
+    func saveNewRemoteAlbums(albumItems: [AlbumItem], completion: @escaping VoidHandler) {
+        coreDataStack.performBackgroundTask { [weak self] context in
+            albumItems.forEach {
+               _ = MediaItemsAlbum(uuid: $0.uuid, name: $0.name, context: context)
+            }
+            
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: {
+                completion()
+            })
         }
     }
 }

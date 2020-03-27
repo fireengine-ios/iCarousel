@@ -179,6 +179,7 @@ class AlbumService: RemoteItemsService {
 }
 
 typealias AlbumCreatedOperation = (AlbumItem?) -> Void
+typealias AlbumsSuccess = ([AlbumItem]) -> Void
 typealias AlbumOperationResponse = (_ album: AlbumServiceResponse) -> Void
 typealias PhotosAlbumOperation = () -> Void
 typealias PhotosAlbumDeleteOperation = (_ deletedItems: [AlbumItem]) -> Void
@@ -396,5 +397,62 @@ class PhotosAlbumService: BaseRequestService {
             success?(moveToTrashAlbums)
         }, fail: fail)
         executeDeleteRequest(param: params, handler: handler)
+    }
+}
+
+/// For UploadOperation
+extension PhotosAlbumService {
+    /// call only if serverErrorMessage is enough or pass real errors
+    func createAlbums(names: [String], success: @escaping AlbumsSuccess, fail: @escaping FailResponse) {
+        var albums = [AlbumItem]()
+        
+        let group = DispatchGroup()
+        names.forEach {
+            group.enter()
+            
+            let params = CreatesAlbum(albumName: $0)
+            createAlbum(createAlbum: params, success: { item in
+                if let item = item {
+                    ItemOperationManager.default.newAlbumCreated()
+                    albums.append(item)
+                }
+                
+                group.leave()
+                
+            }, fail: { error in
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: DispatchQueue.global()) {
+            if !albums.isEmpty {
+                success(albums)
+            } else {
+                /// silence real errors
+                fail(.string(TextConstants.serverErrorMessage))
+            }
+        }
+    }
+    
+    func addItem(item: Item, to albums: [String], completion: @escaping VoidHandler) {
+        let group = DispatchGroup()
+        
+        albums.forEach {
+            group.enter()
+            let parameters = AddPhotosToAlbum(albumUUID: $0, photos: [item])
+            
+            addPhotosToAlbum(parameters: parameters, success: {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .success))
+                ItemOperationManager.default.filesAddedToAlbum()
+                group.leave()
+            }, fail: { _ in
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .failure))
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: DispatchQueue.global()) {
+            completion()
+        }
     }
 }
