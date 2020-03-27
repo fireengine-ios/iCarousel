@@ -22,6 +22,7 @@ final class MediaItemsAlbumOperationService {
     private lazy var albumService = AlbumService(requestSize: 200)
     
     var inProcessLocalAlbums = false
+    private var isAlbumsActualized = false
     
     let privateQueue = DispatchQueue(label: DispatchQueueLabels.mediaItemAlbumsOperationsService, attributes: .concurrent)
     
@@ -47,7 +48,7 @@ final class MediaItemsAlbumOperationService {
     }
     
     func getAutoSyncAlbums(albumsCallBack: @escaping MediaItemLocalAlbumsCallBack) {
-        if inProcessLocalAlbums {
+        if !isAlbumsActualized || inProcessLocalAlbums {
             waitingLocalAlbumsCallBack = albumsCallBack
             return
         }
@@ -176,6 +177,7 @@ extension MediaItemsAlbumOperationService {
         }
         
         inProcessLocalAlbums = true
+        isAlbumsActualized = false
         
         localMediaStorage.getLocalAlbums { [weak self] albums in
             guard let self = self else {
@@ -191,6 +193,7 @@ extension MediaItemsAlbumOperationService {
                 
                 func callback() {
                     self.inProcessLocalAlbums = false
+                    self.isAlbumsActualized = true
                     
                     if self.waitingLocalAlbumsCallBack != nil {
                         self.getLocalAlbums(context: context) { [weak self] albums in
