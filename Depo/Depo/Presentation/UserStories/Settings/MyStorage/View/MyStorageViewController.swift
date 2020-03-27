@@ -101,7 +101,7 @@ final class MyStorageViewController: BaseViewController {
 // MARK: - MyStorageViewInput
 extension MyStorageViewController: MyStorageViewInput {
     func reloadPackages() {
-        packagesStackView.arrangedSubviews.forEach { packagesStackView.removeArrangedSubview($0) }
+        packagesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         for offer in output.displayableOffers.enumerated() {
             let view = SubscriptionOfferView.initFromNib()
             let packageOffer = PackageOffer(quotaNumber: .zero, offers: [offer.element])
