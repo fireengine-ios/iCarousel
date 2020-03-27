@@ -53,7 +53,7 @@ final class BackgroundSynсService {
         let request = BGProcessingTaskRequest(identifier: TaskIdentifiers.backgroundProcessing)
         
         // Fetch no earlier than 15 sec from now
-        request.earliestBeginDate = Date(timeIntervalSinceNow: 60 * 30)
+        request.earliestBeginDate = Date(timeIntervalSinceNow: 20 * 5)
         request.requiresNetworkConnectivity = true
         request.requiresExternalPower = false
         
@@ -82,6 +82,7 @@ final class BackgroundSynсService {
     
     private func handleProcessingSyncTask(task: BGProcessingTask) {
         debugLog("handleProcessingSyncTask")
+        scheduleProcessingSync()
         
         guard LocalMediaStorage.default.photoLibraryIsAvailible(), storageVars.autoSyncSet else {
             debugLog("handleProcessingSyncTask_LibraryAccess_or_AutoSync")
@@ -91,11 +92,13 @@ final class BackgroundSynсService {
         SyncServiceManager.shared.backgroundTaskSync { isLast in
             debugLog("handleProcessingSyncTask_task_completed")
             task.setTaskCompleted(success: isLast)
+            self.scheduleProcessingSync()
         }
         
         task.expirationHandler = {
             debugLog("handleProcessingSyncTask_expirationHandler")
             SyncServiceManager.shared.stopSync()
+            self.scheduleProcessingSync()
         }
     }
     
@@ -109,10 +112,12 @@ final class BackgroundSynсService {
         
         syncServiceManager.backgroundTaskSync { isLast in
             debugLog("handleRefreshSyncTask_task_completed")
+            self.scheduleRefreshSync()
             task.setTaskCompleted(success: isLast)
         }
         
         task.expirationHandler = {
+            self.scheduleRefreshSync()
             debugLog("handleRefreshSyncTaskk_expirationHandler")
         }
     }

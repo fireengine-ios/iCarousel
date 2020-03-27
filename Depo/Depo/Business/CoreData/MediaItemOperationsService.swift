@@ -993,6 +993,7 @@ final class MediaItemOperationsService {
     }
     
     func allLocalItemsForSync(video: Bool, image: Bool, completion: @escaping WrapObjectsCallBack) {
+        debugLog("allLocalItemsForSync")
         getUnsyncedMediaItems(video: video, image: image, completion: { items in
             let wrappedItems = items
                 .filter { $0.fileSizeValue < NumericConstants.fourGigabytes }

@@ -22,10 +22,10 @@ final class VideoSyncService: ItemSyncServiceImpl {
     }
 
     override func itemsSortedToUpload(completion: @escaping WrapObjectsCallBack) {
-        debugLog("ItemSyncServiceImpl itemsSortedToUpload")
+        debugLog("VideoSyncService itemsSortedToUpload")
         mediaItemOperationsService.allLocalItemsForSync(video: true, image: false) { items in
             let fileSizeLimit = NumericConstants.fourGigabytes
-            debugLog("ItemSyncServiceImpl completion")
+            debugLog("VideoSyncService itemsSortedToUpload completion")
             completion(items.filter { $0.fileSize < fileSizeLimit })
         }
     }

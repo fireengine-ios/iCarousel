@@ -133,9 +133,9 @@ class SyncServiceManager {
     // MARK: - Private
     
     func backgroundTaskSync(handler: @escaping BoolHandler) {
-        stopSync()
-
+//        stop(photo: true, video: true)
         checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+        self.backgroundSyncHandler = handler
         
 //        dispatchQueue.async { [weak self] in
 //
@@ -335,6 +335,10 @@ extension SyncServiceManager {
         CardsManager.default.stopOperationWith(type: .prepareToAutoSync)
         
         FreeAppSpace.session.checkFreeAppSpaceAfterAutoSync()
+        
+        if isSyncFinished {
+            backgroundSyncHandler?(true)
+        }
         
         if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, CacheManager.shared.isCacheActualized {
             CardsManager.default.startOperationWith(type: .waitingForWiFi)
