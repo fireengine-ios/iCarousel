@@ -315,9 +315,7 @@ extension MediaItemsAlbumOperationService {
                         album.name = asset.localizedTitle
                         album.updateRelatedRemoteAlbums(context: context)
                         
-                        if asset.assetCollectionType == .album {
-                            renamedAlbumsIds.append(asset.localIdentifier)
-                        }
+                        renamedAlbumsIds.append(asset.localIdentifier)
                     }
                 } else {
                     //create new local albums
@@ -379,7 +377,7 @@ extension MediaItemsAlbumOperationService {
             var renamedAlbumsIds = [String]()
             assets.forEach { asset in
                 if let album = mediaItemAlbums.first(where: { $0.localId == asset.localIdentifier }) {
-                    if asset.assetCollectionType == .album, album.name != asset.localizedTitle {
+                    if album.name != asset.localizedTitle {
                         album.name = asset.localizedTitle
                         renamedAlbumsIds.append(album.localId)
                         album.updateRelatedRemoteAlbums(context: context)
