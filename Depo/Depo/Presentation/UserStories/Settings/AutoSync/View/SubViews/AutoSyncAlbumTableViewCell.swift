@@ -63,26 +63,9 @@ final class AutoSyncAlbumTableViewCell: AutoSyncTableViewCell {
             model.album.isSelected.toggle()
         }
         
-        log(model: model)
-        
         checkBox.setup(isEnabled: model.isEnabled,
                        isSelected: model.album.isSelected,
                        isAllChecked: model.isAllChecked)
         delegate?.didChange(model: model)
-    }
-}
-
-//TODO: FE-2354 Delete after debugging
-extension AutoSyncAlbumTableViewCell {
-    private func log(model: AutoSyncAlbumModel) {
-        if model.album.isMainAlbum {
-            let value = model.isAllChecked ? "ON" : "OFF"
-            debugLog("AutoSync all albums set \(value)")
-            debugPrint("AutoSync all albums set \(value)")
-        } else {
-            let value = model.album.isSelected ? "ON" : "OFF"
-            debugLog("AutoSync album \(model.album.name) set \(value)")
-            debugPrint("AutoSync album \(model.album.name) set \(value)")
-        }
     }
 }

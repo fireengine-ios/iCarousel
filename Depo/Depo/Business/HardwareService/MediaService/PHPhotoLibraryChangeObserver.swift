@@ -83,9 +83,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
                 debugLog("photoLibraryDidChange - added \(changes.insertedObjects.count) items")
                 debugPrint("photoLibraryDidChange - added \(changes.insertedObjects.count) items")
                 
-                LocalMediaStorage.default.isLoggingLocalOperations = true
                 MediaItemOperationsService.shared.append(localMediaItems: changes.insertedObjects, needCreateRelationships: true) {
-                    LocalMediaStorage.default.isLoggingLocalOperations = false
                     checkDeletedObjects()
                 }
             }

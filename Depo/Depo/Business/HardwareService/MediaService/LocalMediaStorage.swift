@@ -108,9 +108,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     var assetsCache = AssetsCache()
     private(set) var localAlbumsCache = LocalAlbumsCache.shared
     
-    //TODO: FE-2354 Delete after debugging
-    var isLoggingLocalOperations = false
-    
     private override init() {
         queue.maxConcurrentOperationCount = 1
         
@@ -331,7 +328,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 
                 [albumsResult, smartAlbumsResult].forEach {
                     $0.enumerateObjects { album, _, _ in
-                        if album.photosCount > 0 || album.videosCount > 0 {
+                        if album.assetCollectionType == .smartAlbum || album.photosCount > 0 || album.videosCount > 0 {
                             self?.localAlbumsCache.append(albumId: album.localIdentifier, with: album.allAssets.map { $0.localIdentifier })
                             albumsWithItems.append(album)
                         }
@@ -1106,9 +1103,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             self.dispatchQueue.async {
                 let failCompletion = {
                     print("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
-                    if self.isLoggingLocalOperations {
-                        debugLog("IMAGE_LOCAL_ITEM: \(asset.originalFilename ?? "") is in iCloud")
-                    }
                     assetInfo.isValid = false
                     semaphore.signal()
                     return
