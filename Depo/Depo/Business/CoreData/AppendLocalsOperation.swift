@@ -85,11 +85,24 @@ final class AppendLocalsOperation: Operation {
                 
                 var addedObjects = [WrapData]()
                 let updatedCache = self.mediaStorage.assetsCache
-                let assetsInfo = info.filter { $0.isValid && updatedCache.assetBy(identifier: $0.asset.localIdentifier) != nil }
+                
+                var validAssetsInfo = [AssetInfo]()
+                var invalidAssetsInfo = [AssetInfo]()
+                info.forEach { assetInfo in
+                    if assetInfo.isValid && updatedCache.assetBy(identifier: assetInfo.asset.localIdentifier) != nil {
+                        validAssetsInfo.append(assetInfo)
+                    } else {
+                        invalidAssetsInfo.append(assetInfo)
+                    }
+                }
+                
+                invalidAssetsInfo.forEach {
+                    self.localAlbumsCache.remove(assetId: $0.asset.localIdentifier)
+                }
                 
                 let smartAssets = PHAssetCollection.smartAlbums.map { (album: $0, assets: $0.allAssets) }
                 
-                assetsInfo.forEach { element in
+                validAssetsInfo.forEach { element in
                     autoreleasepool {
                         if self.needCreateRelationships {
                             var albums = element.asset.containingAlbums
@@ -99,15 +112,6 @@ final class AppendLocalsOperation: Operation {
                             albums.forEach {
                                 self.localAlbumsCache.append(albumId: $0.localIdentifier, with: [element.asset.localIdentifier])
                             }
-                            
-                            //FE-2354 Logs for debug
-                            //TODO: Delete after debugging
-                            debugLog("asset name - \(element.asset.originalFilename ?? "")")
-                            let albumsString = albums.map { $0.localizedTitle ?? "" }.joined(separator: ",")
-                            debugLog("containing albums - \(albumsString)")
-                            
-                            debugPrint("asset name - \(element.asset.originalFilename ?? "")")
-                            debugPrint("containing albums - \(albumsString)")
                         }
                         
                         let wrapedItem = WrapData(info: element)
