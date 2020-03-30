@@ -21,6 +21,7 @@ enum LoginResponseError: Error {
     case unauthorized
     case noInternetConnection
     case emptyPhone
+    case emptyCaptcha
     
     init(with errorResponse: ErrorResponse) {
         if errorResponse.description.contains("LDAP account is locked") {
@@ -52,6 +53,8 @@ enum LoginResponseError: Error {
         }
         else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 401 {
             self = .unauthorized
+        } else if errorResponse.description.contains(ErrorResponseText.captchaIsEmpty) {
+            self = .emptyCaptcha
         }
         else {
             self = .serverError
@@ -78,6 +81,8 @@ enum LoginResponseError: Error {
             return GADementionValues.loginError.unauthorized.text
         case .serverError:
             return GADementionValues.loginError.serverError.text
+        case .emptyCaptcha:
+            return GADementionValues.loginError.captchaIsEmpty.text
         }
     }
 }
