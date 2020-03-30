@@ -18,7 +18,7 @@ final class AutoSyncInteractor: AutoSyncInteractorInput {
     func prepareCellModels() {
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] photoAccessGranted, _ in
             if photoAccessGranted {
-                self?.getAlbums { [weak self] albums in
+                self?.albumsService.getAutoSyncAlbums { [weak self] albums in
                     guard let self = self else {
                         return
                     }
@@ -57,13 +57,6 @@ final class AutoSyncInteractor: AutoSyncInteractorInput {
                 
                 self?.output.onCheckPermissions(photoAccessGranted: photoAccessGranted, locationAccessGranted: locationAccessGranted)
             }
-        }
-    }
-    
-    private func getAlbums(completion: @escaping (_ albums: [AutoSyncAlbum]) -> Void) {
-        albumsService.getAutoSyncAlbums { mediaItemAlbums in
-            let albums = mediaItemAlbums.map { AutoSyncAlbum(mediaItemAlbum: $0) }
-            completion(albums)
         }
     }
 }
