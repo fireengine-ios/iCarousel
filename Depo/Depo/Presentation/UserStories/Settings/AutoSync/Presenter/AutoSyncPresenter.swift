@@ -27,16 +27,16 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput 
         interactor.prepareCellModels()
     }
     
-    func change(settings: AutoSyncSettings, selectedAlbums: [AutoSyncAlbum]) {
+    func change(settings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
         if !fromSettings {
             router.routNextVC()
         }
-        save(settings: settings, selectedAlbums: selectedAlbums)
+        save(settings: settings, albums: albums)
         
     }
     
-    func save(settings: AutoSyncSettings, selectedAlbums: [AutoSyncAlbum]) {
-        interactor.onSave(settings: settings, selectedAlbums: selectedAlbums, fromSettings: fromSettings)
+    func save(settings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
+        interactor.onSave(settings: settings, albums: albums, fromSettings: fromSettings)
     }
     
     func checkPermissions() {
