@@ -84,6 +84,14 @@ final class MediaItemsAlbumOperationService {
         }
     }
     
+    func resetLocalAlbums() {
+        let context = coreDataStack.newChildBackgroundContext
+        getLocalAlbums(context: context) { [weak self] albums in
+            albums.forEach { $0.isEnabled = true }
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
+        }
+    }
+    
     func getLocalAlbums(localIds: [String]? = nil, context: NSManagedObjectContext, albumsCallBack: @escaping MediaItemLocalAlbumsCallBack) {
         let fetchRequest: NSFetchRequest = MediaItemsLocalAlbum.fetchRequest()
         
