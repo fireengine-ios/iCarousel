@@ -235,8 +235,15 @@ extension LoginPresenter: LoginInteractorOutput {
             completeAsyncOperationEnableScreen()
             openEmptyPhone()
             
+        case .emptyCaptcha:
+            view.captchaFieldError(TextConstants.captchaIsEmpty)
+            
         case .serverError:
             failLogin(message: TextConstants.loginScreenServerError)
+            
+        case .emptyEmail:
+            completeAsyncOperationEnableScreen()
+            openEmptyEmail()
         }
         
     }

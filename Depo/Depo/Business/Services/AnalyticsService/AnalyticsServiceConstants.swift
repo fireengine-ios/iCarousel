@@ -1645,6 +1645,7 @@ enum GADementionValues {
         case networkError
         case serverError
         case unauthorized
+        case captchaIsEmpty
         
         var text: String {
             switch self {
@@ -1666,6 +1667,8 @@ enum GADementionValues {
                 return "SERVER_ERROR"
             case .unauthorized:
                 return "UNAUTHORIZED"
+            case .captchaIsEmpty:
+                return "EMPTY_CAPTCHA"
             }
         }
     }

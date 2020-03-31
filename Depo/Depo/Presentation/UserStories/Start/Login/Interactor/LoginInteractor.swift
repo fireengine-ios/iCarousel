@@ -133,7 +133,10 @@ class LoginInteractor: LoginInteractorInput {
             output?.fieldError(type: .passwordIsEmpty)
         }
         
+        let loginType: GADementionValues.login = Validator.isValid(phone: login) ? .gsm : .email
+        
         if let captchaAnswer = atachedCaptcha?.answer, captchaAnswer.isEmpty {
+            self.analyticsService.trackLoginEvent(loginType: loginType, error: LoginResponseError(with: ErrorResponse.string(ErrorResponseText.captchaIsEmpty)))
             output?.fieldError(type: .captchaIsEmpty)
         }
         
@@ -151,8 +154,6 @@ class LoginInteractor: LoginInteractorInput {
             loginRetries += 1
             return
         }
-        
-        let loginType: GADementionValues.login = Validator.isValid(phone: login) ? .gsm : .email
         
         if !Validator.isValid(email: login) && !Validator.isValid(phone: login) {
             analyticsService.trackLoginEvent(loginType: loginType, error: .incorrectUsernamePassword)
