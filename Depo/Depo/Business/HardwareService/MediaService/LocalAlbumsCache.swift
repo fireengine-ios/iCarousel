@@ -60,4 +60,10 @@ final class LocalAlbumsCache {
         }
         return result
     }
+    
+    func clear() {
+        queue.async(flags: .barrier) {
+            self.storage.removeAll()
+        }
+    }
 }
