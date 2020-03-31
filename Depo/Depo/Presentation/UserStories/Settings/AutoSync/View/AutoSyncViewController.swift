@@ -65,7 +65,7 @@ class AutoSyncViewController: BaseViewController {
         
         if fromSettings {
             storageVars.autoSyncSet = true
-            output.save(settings: dataSource.autoSyncSetting, selectedAlbums: dataSource.selectedAlbums)
+            output.save(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
         }
     }
     
@@ -117,7 +117,7 @@ class AutoSyncViewController: BaseViewController {
         onStartUsingButtonTapped = true
         
         storageVars.autoSyncSet = true
-        output.change(settings: dataSource.autoSyncSetting, selectedAlbums: dataSource.selectedAlbums)
+        output.change(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
     }
 
 }
@@ -137,7 +137,7 @@ extension AutoSyncViewController: AutoSyncViewInput {
     func disableAutoSync() {
         dataSource.forceDisableAutoSync()
         if !fromSettings {
-            output.save(settings: dataSource.autoSyncSetting, selectedAlbums: dataSource.selectedAlbums)
+            output.save(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
         }
     }
 

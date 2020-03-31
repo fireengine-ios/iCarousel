@@ -64,11 +64,11 @@ final class MediaItemsAlbumOperationService {
         getAutoSyncAlbums(context: context, albumsCallBack: albumsCallBack)
     }
     
-    func save(selectedAlbums: [AutoSyncAlbum]) {
-        let localIdentifiers = selectedAlbums.map { $0.uuid }
+    func saveAutoSyncAlbums(_ albums: [AutoSyncAlbum]) {
+        let localIdentifiers = albums.map { $0.uuid }
         let context = coreDataStack.newChildBackgroundContext
         
-        getLocalAlbums(context: context) { [weak self] mediaItemAlbums in
+        getLocalAlbums(localIds: localIdentifiers, context: context) {  [weak self] mediaItemAlbums in
             guard let self = self else {
                 return
             }

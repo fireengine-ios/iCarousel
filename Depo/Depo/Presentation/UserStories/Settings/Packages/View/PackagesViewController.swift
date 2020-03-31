@@ -139,7 +139,7 @@ final class PackagesViewController: BaseViewController {
 extension PackagesViewController: PackagesViewInput {
     
     func reloadData() {
-        collectionStackView.arrangedSubviews.forEach { collectionStackView.removeArrangedSubview($0) }
+        collectionStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         for offer in output.availableOffers.enumerated() {
             let view = SubscriptionOfferView.initFromNib()
             view.configure(with: offer.element, delegate: self, index: offer.offset)
