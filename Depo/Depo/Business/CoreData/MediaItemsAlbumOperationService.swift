@@ -75,13 +75,11 @@ final class MediaItemsAlbumOperationService {
             
             var changedAlbums = [MediaItemsLocalAlbum]()
             
-            mediaItemAlbums.forEach { album in
-                if let localId = album.localId {
-                    let newValue = localIdentifiers.contains(localId)
-                    if newValue != album.isEnabled {
-                        album.isEnabled = newValue
-                        changedAlbums.append(album)
-                    }
+            albums.forEach { album in
+                if let mediaAlbum = mediaItemAlbums.first(where: { $0.localId == album.uuid }),
+                    mediaAlbum.isEnabled != album.isSelected {
+                    mediaAlbum.isEnabled = album.isSelected
+                    changedAlbums.append(mediaAlbum)
                 }
             }
             
