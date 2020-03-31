@@ -240,6 +240,10 @@ extension LoginPresenter: LoginInteractorOutput {
             
         case .serverError:
             failLogin(message: TextConstants.loginScreenServerError)
+            
+        case .emptyEmail:
+            completeAsyncOperationEnableScreen()
+            openEmptyEmail()
         }
         
     }

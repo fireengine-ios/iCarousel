@@ -22,6 +22,7 @@ enum LoginResponseError: Error {
     case noInternetConnection
     case emptyPhone
     case emptyCaptcha
+    case emptyEmail
     
     init(with errorResponse: ErrorResponse) {
         if errorResponse.description.contains("LDAP account is locked") {
@@ -33,16 +34,19 @@ enum LoginResponseError: Error {
         else if errorResponse.description.contains("Captcha required") {
             self = .needCaptcha
         }
-        else if errorResponse.description.contains("Authentication with Turkcell Password is disabled for the account") {
+        else if errorResponse.description.contains("Authentication with Turkcell Password is disabled for the account") ||
+            errorResponse.description.contains("TURKCELL_PASSWORD_DISABLED") {
             self = .authenticationDisabledForAccount
         }
         else if errorResponse.description.contains("Sign up required") {
             self = .needSignUp
         }
-        else if errorResponse.description.contains("Authentication failure") || errorResponse.description.contains("LDAP system failure") {
+        else if errorResponse.description.contains("Authentication failure") ||
+            errorResponse.description.contains("LDAP system failure") {
             self = .incorrectUsernamePassword
         }
-        else if errorResponse.description.contains("Invalid captcha") {
+        else if errorResponse.description.contains("Invalid captcha") ||
+            errorResponse.description.contains("Unexpected char") {
             self = .incorrectCaptcha
         }
         else if errorResponse.description.contains("Internet") {
@@ -51,10 +55,16 @@ enum LoginResponseError: Error {
         else if errorResponse.description.contains(HeaderConstant.emptyMSISDN) {
             self = .emptyPhone
         }
+        else if errorResponse.description.contains(HeaderConstant.emptyEmail) {
+            self = .emptyEmail
+        }
         else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 401 {
             self = .unauthorized
         } else if errorResponse.description.contains(ErrorResponseText.captchaIsEmpty) {
             self = .emptyCaptcha
+        }
+        else if case ErrorResponse.error(let error) = errorResponse, let statusError = error as? ServerStatusError, statusError.code == 10 {
+            self = .block
         }
         else {
             self = .serverError
@@ -71,7 +81,7 @@ enum LoginResponseError: Error {
             return GADementionValues.loginError.turkcellPasswordDisabled.text
         case .needSignUp:
             return GADementionValues.loginError.signupRequired.text
-        case .incorrectUsernamePassword, .emptyPhone:
+        case .incorrectUsernamePassword, .emptyPhone, .emptyEmail:
             return GADementionValues.loginError.incorrectUsernamePassword.text
         case .incorrectCaptcha:
             return GADementionValues.loginError.incorrectCaptcha.text
