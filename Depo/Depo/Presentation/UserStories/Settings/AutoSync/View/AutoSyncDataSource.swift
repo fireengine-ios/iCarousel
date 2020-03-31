@@ -20,8 +20,12 @@ final class AutoSyncDataSource: NSObject {
     
     private var models = [AutoSyncModel]()
     private var albumModels = [AutoSyncAlbumModel]()
-    private(set) var selectedAlbums = [AutoSyncAlbum]()
+    private var selectedAlbums = [AutoSyncAlbum]()
     private(set) var autoSyncSetting = AutoSyncSettings()
+    
+    var autoSyncAlbums: [AutoSyncAlbum] {
+        return models.compactMap { ($0 as? AutoSyncAlbumModel)?.album }
+    }
     
     var isFromSettings = false
     
