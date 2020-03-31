@@ -38,11 +38,11 @@ final class AutoSyncInteractor: AutoSyncInteractorInput {
         AnalyticsService.sendNetmeraEvent(event: fromSettings ? NetmeraEvents.Screens.FirstAutoSyncScreen() : NetmeraEvents.Screens.AutoSyncScreen())
     }
     
-    func onSave(settings: AutoSyncSettings, selectedAlbums: [AutoSyncAlbum], fromSettings: Bool) {
+    func onSave(settings: AutoSyncSettings, albums: [AutoSyncAlbum], fromSettings: Bool) {
         AnalyticsService.sendNetmeraEvent(event: fromSettings ? NetmeraEvents.Actions.Autosync(autosyncSettings: settings) : NetmeraEvents.Actions.FirstAutosync(autosyncSettings: settings))
         dataStorage.save(autoSyncSettings: settings, fromSettings: fromSettings)
         SyncServiceManager.shared.update(syncSettings: settings)
-        albumsService.save(selectedAlbums: selectedAlbums)
+        albumsService.saveAutoSyncAlbums(albums)
     }
     
     func checkPermissions() {

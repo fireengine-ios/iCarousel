@@ -55,17 +55,14 @@ final class MediaItemsAlbumOperationService {
         }
         
         let context = coreDataStack.newChildBackgroundContext
-        getAutoSyncAlbums(context: context) { mediaItemAlbums in
-            let albums = mediaItemAlbums.map { AutoSyncAlbum(mediaItemAlbum: $0) }
-            albumsCallBack(albums)
-        }
+        getAutoSyncAlbums(context: context, albumsCallBack: albumsCallBack)
     }
     
-    func save(selectedAlbums: [AutoSyncAlbum]) {
-        let localIdentifiers = selectedAlbums.map { $0.uuid }
+    func saveAutoSyncAlbums(_ albums: [AutoSyncAlbum]) {
+        let localIdentifiers = albums.map { $0.uuid }
         let context = coreDataStack.newChildBackgroundContext
         
-        getAutoSyncAlbums(context: context) { [weak self] mediaItemAlbums in
+        getLocalAlbums(localIds: localIdentifiers, context: context) {  [weak self] mediaItemAlbums in
             guard let self = self else {
                 return
             }
@@ -99,7 +96,7 @@ final class MediaItemsAlbumOperationService {
         execute(request: fetchRequest, context: context, albumsCallBack: albumsCallBack)
     }
     
-    private func getAutoSyncAlbums(context: NSManagedObjectContext, albumsCallBack: @escaping MediaItemLocalAlbumsCallBack) {
+    private func getAutoSyncAlbums(context: NSManagedObjectContext, albumsCallBack: @escaping AutoSyncAlbumsCallBack) {
         let fetchRequest: NSFetchRequest = MediaItemsLocalAlbum.fetchRequest()
         
         let sortDescriptor1 = NSSortDescriptor(key: MediaItemsLocalAlbum.PropertyNameKey.isMain, ascending: false)
@@ -110,7 +107,10 @@ final class MediaItemsAlbumOperationService {
             fetchRequest.predicate = NSPredicate(format: "\(MediaItemsLocalAlbum.PropertyNameKey.items).@count > 0")
         }
         
-        execute(request: fetchRequest, context: context, albumsCallBack: albumsCallBack)
+        execute(request: fetchRequest, context: context) { mediaItemAlbums in
+            let albums = mediaItemAlbums.map { AutoSyncAlbum(mediaItemAlbum: $0) }
+            albumsCallBack(albums)
+        }
     }
     
     private func getAllRemoteAlbums(completion: @escaping ResponseArrayHandler<AlbumItem>) {
@@ -208,8 +208,7 @@ extension MediaItemsAlbumOperationService {
                     self.isAlbumsActualized = true
                     
                     if self.waitingLocalAlbumsCallBack != nil {
-                        self.getAutoSyncAlbums(context: context) { [weak self] mediaItemAlbums in
-                            let albums = mediaItemAlbums.map { AutoSyncAlbum(mediaItemAlbum: $0) }
+                        self.getAutoSyncAlbums(context: context) { [weak self] albums in
                             self?.waitingLocalAlbumsCallBack?(albums)
                             self?.waitingLocalAlbumsCallBack = nil
                         }
