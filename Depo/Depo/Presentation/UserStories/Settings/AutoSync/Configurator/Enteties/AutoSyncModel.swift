@@ -167,10 +167,14 @@ enum AutoSyncHeaderType: Int {
     }
     
     func subtitle(setting: AutoSyncSetting? = nil) -> String {
-        guard let setting = setting else {
+        switch self {
+        case .photo, .video:
+            return setting?.option.localizedText ?? ""
+        case .albums:
+            return TextConstants.autoSyncCellAlbumsDescription
+        default:
             return ""
         }
-        return setting.option.localizedText
     }
     
 }
