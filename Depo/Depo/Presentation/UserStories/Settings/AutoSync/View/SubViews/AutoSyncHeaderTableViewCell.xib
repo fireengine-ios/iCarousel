@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,10 +16,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="AutoSyncHeaderTableViewCell" customModule="LifeTech_lifedrive" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vNu-jG-QJr" userLabel="separator">
@@ -30,42 +30,66 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DHF-Pq-yGH"/>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjC-Gv-rOm" userLabel="Title Label">
-                        <rect key="frame" x="21" y="0.0" width="31" height="44"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="44" id="OMB-E4-tIJ"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Select" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gUC-Ix-fdq" userLabel="Option Label">
-                        <rect key="frame" x="60" y="13" width="216" height="18"/>
-                        <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="I9V-oc-mqR">
-                        <rect key="frame" x="288" y="18" width="13" height="8"/>
-                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="C33-Ac-Jn7">
+                        <rect key="frame" x="20" y="0.0" width="280" height="72"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7HM-Vn-sml">
+                                <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjC-Gv-rOm" userLabel="Title Label">
+                                        <rect key="frame" x="0.0" y="0.0" width="31" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="OMB-E4-tIJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Select" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gUC-Ix-fdq" userLabel="Option Label">
+                                        <rect key="frame" x="39" y="13" width="216" height="18"/>
+                                        <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="I9V-oc-mqR">
+                                        <rect key="frame" x="267" y="18" width="13" height="8"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="gUC-Ix-fdq" firstAttribute="centerY" secondItem="7HM-Vn-sml" secondAttribute="centerY" id="0Hv-F1-p3R"/>
+                                    <constraint firstItem="I9V-oc-mqR" firstAttribute="centerY" secondItem="7HM-Vn-sml" secondAttribute="centerY" id="2nq-rp-wIu"/>
+                                    <constraint firstAttribute="bottom" secondItem="hjC-Gv-rOm" secondAttribute="bottom" id="KBF-JJ-dwt"/>
+                                    <constraint firstAttribute="trailing" secondItem="I9V-oc-mqR" secondAttribute="trailing" id="RCR-Z6-yt3"/>
+                                    <constraint firstItem="I9V-oc-mqR" firstAttribute="leading" secondItem="gUC-Ix-fdq" secondAttribute="trailing" constant="12" id="YQm-bh-8nK"/>
+                                    <constraint firstItem="hjC-Gv-rOm" firstAttribute="leading" secondItem="7HM-Vn-sml" secondAttribute="leading" id="dvQ-1u-Rzk"/>
+                                    <constraint firstItem="gUC-Ix-fdq" firstAttribute="leading" secondItem="hjC-Gv-rOm" secondAttribute="trailing" constant="8" id="jlZ-RR-yIS"/>
+                                    <constraint firstItem="hjC-Gv-rOm" firstAttribute="top" secondItem="7HM-Vn-sml" secondAttribute="top" id="wvW-RZ-yYZ"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1t-cv-Zis">
+                                <rect key="frame" x="0.0" y="48" width="280" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="I9V-oc-mqR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="0bn-yk-hDW"/>
                     <constraint firstItem="vNu-jG-QJr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="11R-xr-Mxj"/>
-                    <constraint firstItem="hjC-Gv-rOm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="31W-f2-jJv"/>
                     <constraint firstAttribute="trailing" secondItem="vNu-jG-QJr" secondAttribute="trailing" constant="16" id="Dbx-VX-xOY"/>
-                    <constraint firstItem="I9V-oc-mqR" firstAttribute="leading" secondItem="gUC-Ix-fdq" secondAttribute="trailing" constant="12" id="EEh-Cj-3PF"/>
                     <constraint firstItem="vNu-jG-QJr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="LQ2-lX-6fC"/>
-                    <constraint firstItem="gUC-Ix-fdq" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Zun-PX-C0p"/>
-                    <constraint firstAttribute="trailing" secondItem="I9V-oc-mqR" secondAttribute="trailing" constant="19" id="aWw-7Y-TuB"/>
-                    <constraint firstItem="hjC-Gv-rOm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="21" id="eoN-G8-rX9"/>
-                    <constraint firstAttribute="bottom" secondItem="hjC-Gv-rOm" secondAttribute="bottom" id="lFP-mX-FpO"/>
-                    <constraint firstItem="gUC-Ix-fdq" firstAttribute="leading" secondItem="hjC-Gv-rOm" secondAttribute="trailing" constant="8" id="qw1-w0-Mu5"/>
+                    <constraint firstItem="C33-Ac-Jn7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="QIT-iS-Vfk"/>
+                    <constraint firstAttribute="bottom" secondItem="C33-Ac-Jn7" secondAttribute="bottom" constant="8" id="VPO-rF-CYs"/>
+                    <constraint firstAttribute="trailing" secondItem="C33-Ac-Jn7" secondAttribute="trailing" constant="20" id="kEq-ss-Hr2"/>
+                    <constraint firstItem="C33-Ac-Jn7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="oHE-zV-r9X"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="descriptionLabel" destination="g1t-cv-Zis" id="F33-1R-Jfz"/>
                 <outlet property="dropDownArrow" destination="I9V-oc-mqR" id="YPN-lh-KBt"/>
                 <outlet property="optionLabel" destination="gUC-Ix-fdq" id="B50-HP-Jad"/>
                 <outlet property="separatorView" destination="vNu-jG-QJr" id="kN3-RM-1s7"/>
