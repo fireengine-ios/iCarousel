@@ -179,6 +179,7 @@ class AlbumService: RemoteItemsService {
 }
 
 typealias AlbumCreatedOperation = (AlbumItem?) -> Void
+typealias AlbumsSuccess = ([AlbumItem]) -> Void
 typealias AlbumOperationResponse = (_ album: AlbumServiceResponse) -> Void
 typealias PhotosAlbumOperation = () -> Void
 typealias PhotosAlbumDeleteOperation = (_ deletedItems: [AlbumItem]) -> Void
@@ -188,16 +189,19 @@ typealias PhotosByAlbumsOperation = (_ items: [AlbumItem: [Item]]) -> Void
 class PhotosAlbumService: BaseRequestService {
     
     private lazy var albumService = AlbumDetailService(requestSize: Device.isIpad ? 200 : 100)
+    private lazy var mediaAlbumService = MediaItemsAlbumOperationService.shared
     
     func createAlbum(createAlbum: CreatesAlbum, success: AlbumCreatedOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService createAlbum")
 
-        let handler = BaseResponseHandler<AlbumServiceResponse, ObjectRequestResponse>(success: { response in
+        let handler = BaseResponseHandler<AlbumServiceResponse, ObjectRequestResponse>(success: { [weak self] response in
             debugLog("PhotosAlbumService createAlbum success")
             
             if let albumResponse = response as? AlbumServiceResponse { 
                 let item = AlbumItem(remote: albumResponse)
-                success?(item)
+                self?.mediaAlbumService.createNewRemoteAlbum(item) {
+                    success?(item)
+                }
             } else {
                 success?(nil)
             }
@@ -232,9 +236,11 @@ class PhotosAlbumService: BaseRequestService {
             return
         }
         
-        let wrappedSuccess: PhotosAlbumDeleteOperation = { deletedAlbums in
-            success?(deletedAlbums)
-            ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
+        let wrappedSuccess: PhotosAlbumDeleteOperation = { [weak self] deletedAlbums in
+            self?.mediaAlbumService.deleteRemoteAlbums(deletedAlbums, completion: {
+                success?(deletedAlbums)
+                ItemOperationManager.default.albumsDeleted(albums: deletedAlbums)
+            })
         }
         
         loadAllItemsFrom(albums: deleteAlbums) { items in
@@ -277,10 +283,14 @@ class PhotosAlbumService: BaseRequestService {
     func addPhotosToAlbum(parameters: AddPhotosToAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService addPhotosToAlbum")
 
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { [weak self] _  in
             debugLog("PhotosAlbumService addPhotosToAlbum success")
 
-            success?()
+            let itemsUuids = parameters.photos.map { $0.uuid }
+            self?.mediaAlbumService.addItemsToRemoteAlbum(itemsUuids: itemsUuids, albumUuid: parameters.albumUUID) {
+                success?()
+            }
+
         }, fail: fail)
         //executePostRequest(param: parameters, handler: handler)
         executePutRequest(param: parameters, handler: handler)
@@ -289,10 +299,14 @@ class PhotosAlbumService: BaseRequestService {
     func deletePhotosFromAlbum(parameters: DeletePhotosFromAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService deletePhotosFromAlbum")
 
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { [weak self] _  in
             debugLog("PhotosAlbumService deletePhotosFromAlbum success")
 
-            success?()
+            let itemsUuids = parameters.photos.map { $0.uuid }
+            self?.mediaAlbumService.removeItemsFromRemoteAlbum(itemsUuids: itemsUuids, albumUuid: parameters.albumUUID, completion: {
+                success?()
+            })
+
         }, fail: fail)
         executePutRequest(param: parameters, handler: handler)
     }
@@ -309,10 +323,13 @@ class PhotosAlbumService: BaseRequestService {
     func renameAlbum(parameters: RenameAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService renameAlbum")
 
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { [weak self] _  in
             debugLog("PhotosAlbumService renameAlbum success")
 
-            success?()
+            self?.mediaAlbumService.remoteAlbumRenamed(parameters.albumUUID) {
+                success?()
+            }
+            
         }, fail: fail)
         executePutRequest(param: parameters, handler: handler)
     }
@@ -394,5 +411,62 @@ class PhotosAlbumService: BaseRequestService {
             success?(moveToTrashAlbums)
         }, fail: fail)
         executeDeleteRequest(param: params, handler: handler)
+    }
+}
+
+/// For UploadOperation
+extension PhotosAlbumService {
+    /// call only if serverErrorMessage is enough or pass real errors
+    func createAlbums(names: [String], success: @escaping AlbumsSuccess, fail: @escaping FailResponse) {
+        var albums = [AlbumItem]()
+        
+        let group = DispatchGroup()
+        names.forEach {
+            group.enter()
+            
+            let params = CreatesAlbum(albumName: $0)
+            createAlbum(createAlbum: params, success: { item in
+                if let item = item {
+                    ItemOperationManager.default.newAlbumCreated()
+                    albums.append(item)
+                }
+                
+                group.leave()
+                
+            }, fail: { error in
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: DispatchQueue.global()) {
+            if !albums.isEmpty {
+                success(albums)
+            } else {
+                /// silence real errors
+                fail(.string(TextConstants.serverErrorMessage))
+            }
+        }
+    }
+    
+    func addItem(item: Item, to albums: [String], completion: @escaping VoidHandler) {
+        let group = DispatchGroup()
+        
+        albums.forEach {
+            group.enter()
+            let parameters = AddPhotosToAlbum(albumUUID: $0, photos: [item])
+            
+            addPhotosToAlbum(parameters: parameters, success: {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .success))
+                ItemOperationManager.default.filesAddedToAlbum()
+                group.leave()
+            }, fail: { _ in
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .failure))
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: DispatchQueue.global()) {
+            completion()
+        }
     }
 }

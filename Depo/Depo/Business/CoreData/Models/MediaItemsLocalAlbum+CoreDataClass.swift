@@ -31,7 +31,7 @@ extension MediaItemsLocalAlbum {
         let assetsIdentifiers = album.allAssets.compactMap { $0.localIdentifier }
         
         let request: NSFetchRequest = MediaItem.fetchRequest()
-        request.predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) IN %@", assetsIdentifiers)
+        request.predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.localFileID) IN %@", assetsIdentifiers)
         
         if let relatedMediaItems = try? context.fetch(request) {
             relatedMediaItems.forEach {

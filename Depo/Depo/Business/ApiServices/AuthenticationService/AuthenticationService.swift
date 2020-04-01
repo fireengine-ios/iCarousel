@@ -455,7 +455,6 @@ class AuthenticationService: BaseRequestService {
             
             CardsManager.default.stopAllOperations()
             CardsManager.default.clear()
-            
             LocalAlbumsCache.shared.clear()
             MediaItemsAlbumOperationService.shared.resetLocalAlbums()
             

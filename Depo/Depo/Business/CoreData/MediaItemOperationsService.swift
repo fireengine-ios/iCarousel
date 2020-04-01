@@ -1015,6 +1015,7 @@ final class MediaItemOperationsService {
             filesTypesArray.append(FileType.image.valueForCoreDataMapping())
         }
         
+        
         coreDataStack.performBackgroundTask { [weak self] context in
             let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isAvailable) = true AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.fileTypeValue) IN %@ AND \(MediaItem.PropertyNameKey.localFileID) IN %@ AND (SUBQUERY(\(MediaItem.PropertyNameKey.objectSyncStatus), $x, $x.userID = %@).@count = 0 AND \(MediaItem.PropertyNameKey.relatedRemotes).@count = 0)", filesTypesArray, currentlyInLibriaryLocalIDs, SingletonStorage.shared.uniqueUserID)
             self?.executeRequest(predicate: predicate, context: context) { mediaItems in
