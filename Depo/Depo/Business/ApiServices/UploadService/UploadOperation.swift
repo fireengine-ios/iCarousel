@@ -452,7 +452,7 @@ final class UploadOperation: Operation {
                 if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
                     self.outputItem?.metaData?.mediumUrl = preview
                 }
-                self.addToRemoteAlbums { [weak self] in
+                self.addToRemoteAlbumsIfNeeded { [weak self] in
                     guard let self = self else {
                         fail(ErrorResponse.string(TextConstants.errorUnknown))
                         return
@@ -566,7 +566,11 @@ extension UploadOperation: OperationProgressServiceDelegate {
 /// Albums Sync
 extension UploadOperation {
     private func createAlbumsIfNeeded(completion: @escaping VoidHandler) {
-        guard !isPhotoAlbum, let coreDataId = inputItem.coreDataObjectId else {
+        guard
+            uploadType == .autoSync,
+            !isPhotoAlbum,
+            let coreDataId = inputItem.coreDataObjectId
+        else {
             completion()
             return
         }
@@ -588,8 +592,9 @@ extension UploadOperation {
         }
     }
     
-    private func addToRemoteAlbums(completion: @escaping VoidHandler) {
+    private func addToRemoteAlbumsIfNeeded(completion: @escaping VoidHandler) {
         guard
+            uploadType == .autoSync,
             !isPhotoAlbum,
             let coreDataId = inputItem.coreDataObjectId,
             let remote = outputItem
