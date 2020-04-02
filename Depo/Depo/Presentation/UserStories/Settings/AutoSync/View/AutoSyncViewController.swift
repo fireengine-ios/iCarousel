@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AutoSyncViewController: BaseViewController {
+final class AutoSyncViewController: BaseViewController, NibInit {
     var output: AutoSyncViewOutput!
     
     @IBOutlet private weak var tableView: UITableView!

@@ -24,7 +24,7 @@ final class AutoSyncDataSource: NSObject {
     private(set) var autoSyncSetting = AutoSyncSettings()
     
     var autoSyncAlbums: [AutoSyncAlbum] {
-        return models.compactMap { ($0 as? AutoSyncAlbumModel)?.album }
+        return albumModels.map { $0.album }
     }
     
     var isFromSettings = false
