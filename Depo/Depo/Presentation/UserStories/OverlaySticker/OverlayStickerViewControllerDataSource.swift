@@ -48,7 +48,7 @@ final class OverlayStickerViewControllerDataSource: NSObject {
 
                 stickersCollectionView.layoutIfNeeded()
                 DispatchQueue.main.async {
-                    self.stickersCollectionView.contentOffset = self.gifState.collectionViewOffset
+                    self.stickersCollectionView?.contentOffset = self.gifState.collectionViewOffset
                 }
             case .image:
 

@@ -11,7 +11,7 @@ import Foundation
 protocol UserProfileInteractorInput {
     var statusTurkcellUser: Bool { get }
     func viewIsReady()
-    func changeTo(name: String, surname: String, email: String, number: String, birthday: String, address: String)
+    func changeTo(name: String, surname: String, email: String, number: String, birthday: String, address: String, changes: String)
     func updateUserInfo()
     func trackState(_ editState: GAEventLabel, errorType: GADementionValues.errorType?)
     func trackSetSequrityQuestion()

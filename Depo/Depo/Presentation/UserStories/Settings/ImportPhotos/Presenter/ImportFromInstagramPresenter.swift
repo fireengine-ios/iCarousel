@@ -48,7 +48,6 @@ extension ImportFromInstagramPresenter: ImportFromInstagramViewOutput {
         
         syncIsAwaiting = true
         interactor.setSync(status: true)
-        interactor.trackImportActivationInstagram()
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .on, socialType: .instagram))
     }
     
@@ -113,6 +112,7 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
     }
     
     func disconnectionSuccess() {
+        interactor.trackConnectionStatusInstagram(isConnected: false)
         view?.stopActivityIndicator()
         view?.disconnectionSuccess()
     }
@@ -158,6 +158,7 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
         
         view?.stopActivityIndicator()
         view?.syncStartSuccess()
+        interactor.trackImportStatusInstagram(isOn: true)
         analyticsService.track(event: .importInstagram)
     }
     
@@ -183,6 +184,7 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
     // MARK: stopSync
     
     func stopSyncSuccess() {
+        interactor.trackImportStatusInstagram(isOn: false)
         view?.stopActivityIndicator()
         view?.syncStopSuccess()
     }
@@ -209,6 +211,7 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
 extension ImportFromInstagramPresenter: InstagramAuthViewControllerDelegate {
     
     func instagramAuthSuccess() {
+        interactor.trackConnectionStatusInstagram(isConnected: true)
         view?.startActivityIndicator()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { /// + 1 for backend bug
             if self.instaPickIsAwaiting {

@@ -152,6 +152,8 @@ struct TextConstants {
     static let autoSyncCellPhotos = NSLocalizedString("Photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncCellVideos = NSLocalizedString("Videos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncCellAutoSync = NSLocalizedString("Auto Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let autoSyncCellAlbums = NSLocalizedString("auto_sync_album_items", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let autoSyncCellAlbumsDescription = NSLocalizedString("auto_sync_albums_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncStartUsingLifebox = NSLocalizedString("Let’s start using Lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncskipForNowButton = NSLocalizedString("Skip for now", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncAlertTitle = NSLocalizedString("Skip setting Auto-Sync?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -190,6 +192,7 @@ struct TextConstants {
     static let timeIsUpForCode = NSLocalizedString("time_is_up_for_code", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let resendCode = NSLocalizedString("resend_code", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let absentContactsForBuckup = NSLocalizedString("ubsent_contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let absentContactsInLifebox = NSLocalizedString("ubsent_contacts_in_lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let errorAlert = NSLocalizedString("Error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlerTitleBackupAlreadyExist = NSLocalizedString("Overwrite backup?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -414,6 +417,7 @@ struct TextConstants {
     static let photosVideosViewHaveNoPermissionsAllertText = NSLocalizedString("Enable photo permissions in settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photosVideosViewMissingDatesHeaderText = NSLocalizedString("Missing Dates", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let showOnlySyncedItemsText = NSLocalizedString("Show only synced items", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photosVideosAutoSyncSettings = NSLocalizedString("photo_video_auto_sync_settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: AudioView
     static let audioViewNoAudioTitleText = NSLocalizedString("You don’t have any music on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -451,8 +455,10 @@ struct TextConstants {
     static let settingsViewCellPrivacyAndTerms = NSLocalizedString("terms_and_privacy_policy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellLogout = NSLocalizedString("Logout", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsViewCellPermissions = NSLocalizedString("Permissions", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
     static let settingsViewLogoutCheckMessage = NSLocalizedString("Are you sure you want to exit the application?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsUserInfoNameSurname = NSLocalizedString("settings_userinfo_name_surname", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsUserInfoEmail = NSLocalizedString("settings_userinfo_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let settingsUserInfoPhone = NSLocalizedString("settings_userinfo_phone", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     // MARK: FAQ
     
@@ -783,6 +789,8 @@ struct TextConstants {
     static let actionSheetBackUp = NSLocalizedString("Back Up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetRemoveFromAlbum = NSLocalizedString("Remove from album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let actionSheetProfileDetails = NSLocalizedString("settings_action_sheet_profile_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSheetEditProfilePhoto = NSLocalizedString("settings_action_sheet_edit_profile_photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetTakeAPhoto = NSLocalizedString("Take Photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetChooseFromLib = NSLocalizedString("Choose From Library", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetChangeCover = NSLocalizedString("Change cover photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1258,7 +1266,9 @@ struct TextConstants {
     static let featureDefaultCancelText = NSLocalizedString("feature_default_cancel_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //MARK: - PackageInfoView
+    static let usage = NSLocalizedString("storage_usage_information", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let myStorage = NSLocalizedString("my_storage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let myPackages = NSLocalizedString("my_packages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let seeDetails = NSLocalizedString("see_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageGroupingDescription = NSLocalizedString("face_image_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageUpgrade = NSLocalizedString("face_image_upgrade", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1725,4 +1735,34 @@ struct TextConstants {
     static let fullQuotaWarningPopUpDescription = NSLocalizedString("full_quota_warning_popup_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let expandMyStorage = NSLocalizedString("expand_my_storage", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteFiles = NSLocalizedString("delete_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let weRecommend = NSLocalizedString("we_recommend", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let showMore = NSLocalizedString("show_more", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let showLess = NSLocalizedString("show_less", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceRecognitionPackageDescription = NSLocalizedString("face_recognition_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteDublicatePackageDescription = NSLocalizedString("delete_dublicate_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let premiumUserPackageDescription = NSLocalizedString("premium_user_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let originalCopyPackageDescription = NSLocalizedString("original_сopy_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let bundlePackageAddonType = NSLocalizedString("bundle_package_addon_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let storageOnlyPackageAddonType = NSLocalizedString("storage_only_package_addon_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featurePackageName = NSLocalizedString("feature_package_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let becomePremiumNavBarTitle = NSLocalizedString("become_premium_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumHeaderDefaultTitle = NSLocalizedString("become_premium_header_default_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumHeaderDefaultSubtitle = NSLocalizedString("become_premium_header_default_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumHeaderPeopleTitle = NSLocalizedString("become_premium_header_people_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumHeaderPeopleSubtitle = NSLocalizedString("become_premium_header_people_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumHeaderPlacesTitle = NSLocalizedString("become_premium_header_places_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumHeaderPlacesSubtitle = NSLocalizedString("become_premium_header_places_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumHeaderThingsTitle = NSLocalizedString("become_premium_header_things_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumHeaderThingsSubtitle = NSLocalizedString("become_premium_header_things_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumHeaderContactSyncTitle = NSLocalizedString("become_premium_header_contact_sync_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumHeaderContactSyncSubtitle = NSLocalizedString("become_premium_header_contact_sync_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumOrText = NSLocalizedString("become_premium_or_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let becomePremiumSeeAllPackages = NSLocalizedString("become_premium_see_all_packages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let contactSyncConfirmPremiumPopupTitle = NSLocalizedString("contact_sync_confirm_premium_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncConfirmPremiumPopupText = NSLocalizedString("contact_sync_confirm_premium_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let myPackagesDescription = NSLocalizedString("my_packages_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

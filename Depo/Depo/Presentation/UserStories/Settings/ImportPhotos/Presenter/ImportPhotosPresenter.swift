@@ -79,6 +79,7 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
         
         if isConnected {
             view?.connectionStatusSuccess(isConnected)
+            interactor.trackConnectionStatusFB(isConnected: true)
         }
     }
     
@@ -91,6 +92,7 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
     func disconnectionSuccess() {
         view?.stopActivityIndicator()
         view?.disconnectionSuccess()
+        interactor.trackConnectionStatusFB(isConnected: false)
     }
     
     func disconnectionFailure(errorMessage: String) {
@@ -124,7 +126,7 @@ extension ImportFromFBPresenter: ImportFromFBInteractorOutput {
         
         importIsAwaiting = false
         
-        interactor.trackImportActivationFB()
+        interactor.trackImportStatusFB(isOn: true)
         analyticsService.track(event: .importFacebook)
         view?.importStartSuccess()
     }

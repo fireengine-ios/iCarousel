@@ -66,12 +66,6 @@ public class MediaItem: NSManagedObject {
         let metaData = MediaItemsMetaData(metadata: wrapData.metaData,
                                           context: context)
         self.metadata = metaData
-        
-        //LR-2356
-        let albums = wrapData.albums?.map({ albumUuid -> MediaItemsAlbum in
-            MediaItemsAlbum(uuid: albumUuid, context: context)
-        })
-        self.albums = NSOrderedSet(array: albums ?? [])
 
         syncStatusValue = wrapData.syncStatus.valueForCoreDataMapping()
         
@@ -98,6 +92,11 @@ public class MediaItem: NSManagedObject {
             }
         }
         
+        updateRelatedLocalAlbums(context: context)
+        if let albums = wrapData.albums {
+            updateRelatedRemoteAlbums(newUuids: albums, context: context)
+        }
+        updateAvalability()
         
         //empty monthValue for missing dates section
 //        switch wrapData.patchToPreview {
@@ -180,15 +179,15 @@ public class MediaItem: NSManagedObject {
                 context.delete(savedAlbum)
             }
         }
-        //
-        let albums = item.albums?.map({ albumUuid -> MediaItemsAlbum in
-            MediaItemsAlbum(uuid: albumUuid, context: context)
-        })
-        self.albums = NSOrderedSet(array: albums ?? [])
-        
+
         isTranscoded = item.status.isTranscoded
         status = item.status.valueForCoreDataMapping()
         updateMissingDateRelations()
+         
+        let oldAlbums = albums?.array as? [MediaItemsAlbum] ?? []
+        let oldUuids = oldAlbums.compactMap { $0.uuid }
+        let newUuids = item.albums ?? []
+        updateRelatedRemoteAlbums(oldUuids: oldUuids, newUuids: newUuids, context: context)
     }
     
     func updateMissingDateRelations() {
@@ -238,13 +237,31 @@ public class MediaItem: NSManagedObject {
             sortingDate = nil
         }
     }
+    
+    func updateAvalability() {
+        guard isLocalItemValue else {
+            isAvailable = true
+            return
+        }
+        
+        if let localAlbums = localAlbums?.array as? [MediaItemsLocalAlbum] {
+            if localAlbums.count == 1 {
+                //case for main album
+                isAvailable = true
+            } else {
+                isAvailable = localAlbums.first(where: { $0.isEnabled && !$0.isMain }) != nil
+            }
+        } else {
+            isAvailable = false
+        }
+    }
 }
 
 //MARK: - relations
 extension MediaItem {
 
     private func getRelatedPredicate(item: WrapData, local: Bool) -> NSPredicate {
-        return NSPredicate(format: "isLocalItemValue == %@ AND (trimmedLocalFileID == %@ OR md5Value == %@ OR \(#keyPath(MediaItem.localFileID)) == %@)", NSNumber(value: local), item.getTrimmedLocalID(), item.md5, item.getLocalID())
+        return NSPredicate(format: "\(PropertyNameKey.isLocalItemValue) = %@ AND (\(PropertyNameKey.trimmedLocalFileID) = %@ OR \(PropertyNameKey.md5Value) = %@ OR \(PropertyNameKey.localFileID) = %@)", NSNumber(value: local), item.getTrimmedLocalID(), item.md5, item.getLocalID())
     }
     
     func getRelatedLocals(for wrapItem: WrapData, context: NSManagedObjectContext)  -> [MediaItem] {
@@ -270,6 +287,51 @@ extension MediaItem {
     private func updateRemoteRelated(localMediaItems: [MediaItem]) {
         localMediaItems.forEach {
             $0.addToRelatedRemotes(self)
+        }
+    }
+    
+    private func updateRelatedLocalAlbums(context: NSManagedObjectContext) {
+        guard isLocalItemValue, let localId = localFileID else {
+            return
+        }
+        
+        let localAlbumIds = LocalAlbumsCache.shared.albumIds(assetId: localId)
+        let request: NSFetchRequest = MediaItemsLocalAlbum.fetchRequest()
+        request.predicate = NSPredicate(format: "\(MediaItemsLocalAlbum.PropertyNameKey.localId) IN %@", localAlbumIds)
+        
+        if let relatedAlbums = try? context.fetch(request) {
+            relatedAlbums.forEach {
+                $0.addToItems(self)
+            }
+        }
+    }
+    
+    private func updateRelatedRemoteAlbums(oldUuids: [String] = [], newUuids: [String], context: NSManagedObjectContext) {
+        guard !isLocalItemValue else {
+            return
+        }
+        
+        let oldAlbumsUuids = Set(oldUuids)
+        let newAlbumsUuids = Set(newUuids)
+        
+        let appendUuids = newAlbumsUuids.subtracting(oldAlbumsUuids)
+        let deletedUuids = oldAlbumsUuids.subtracting(newAlbumsUuids)
+        
+        let uuids = oldAlbumsUuids.union(newAlbumsUuids)
+
+        let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
+        request.predicate = NSPredicate(format: "\(MediaItemsAlbum.PropertyNameKey.uuid) IN %@", uuids)
+    
+        if let relatedAlbums = try? context.fetch(request) {
+            relatedAlbums.forEach { album in
+                if let albumUuid = album.uuid {
+                    if appendUuids.contains(albumUuid) {
+                        album.addToItems(self)
+                    } else if deletedUuids.contains(albumUuid) {
+                        album.removeFromItems(self)
+                    }
+                }
+            }
         }
     }
 }

@@ -28,6 +28,10 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
         basePassingPresenter?.successPopupClosed()
     }
     
+    func successPopupWillAppear() {
+        basePassingPresenter?.successPopupWillAppear()
+    }
+    
     private func operationFailed(with type: ElementTypes) {
         completeAsyncOperationEnableScreen()
         basePassingPresenter?.operationFailed(withType: type)
@@ -42,6 +46,10 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     
     func showWrongFolderPopup() {
         basePassingPresenter?.showAlert(with: TextConstants.errorSameDestinationFolder)
+    }
+    
+    func stopSelectionMode() {
+        basePassingPresenter?.stopModeSelected()
     }
     
     // MARK: - Base presenter

@@ -54,6 +54,8 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
         static let subscriptionPlanPeriod = "period"
         static let subscriptionPlaninAppPurchaseId = "inAppPurchaseId"
         static let subscriptionPlanLanguageKey = "languageKey"
+        static let subscriptionPlanHasAttachedFeatureKey = "hasAttachedFeature"
+        static let subscriptionPlanIsFeaturePackKey = "isFeaturePack"
     }
     
     var createdDate: NSNumber?
@@ -77,15 +79,16 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
     var subscriptionPlanRole: String?
     var subscriptionPlanStatus: PackageModelResponse.PackageStatus?
     var subscriptionPlanAuthorities: [PackagePackAuthoritiesResponse]?
-    var subscriptionPlanType: PackageType?
-    var subscriptionPlanFeatureType: FeaturePackageType?
+    var subscriptionPlanType: PackageContentType?
     var subscriptionPlanSlcmOfferId: String?
     var subscriptionPlanCometOfferId: String?
     var subscriptionPlanQuota: Int64?
     var subscriptionPlanPeriod: String?
     var subscriptionPlanInAppPurchaseId: String?
     var subscriptionPlanLanguageKey: String?
-    
+    var subscriptionPlanHasAttachedFeature: Bool?
+    var subscriptionPlanIsFeaturePack: Bool?
+
     override func mapping() {
         createdDate = json?[SubscriptionConstants.createdDate].number
         lastModifiedDate = json?[SubscriptionConstants.lastModifiedDate].number
@@ -112,18 +115,25 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
             subscriptionPlanStatus = PackageModelResponse.PackageStatus(rawValue: status)
         }
         if let authorities = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanAuthorities]?.array {
-            subscriptionPlanAuthorities = authorities.flatMap({ PackagePackAuthoritiesResponse(withJSON: $0) })
+            subscriptionPlanAuthorities = authorities.compactMap { PackagePackAuthoritiesResponse(withJSON: $0) }
         }
-        if let type = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanType]?.string {
+        
+        //TODO: check logic again
+        if let type = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanType]?.string,
+            let packageType = PackageContentType(rawValue: type) {
+            
             if type.uppercased().contains("DIGICELL"), let role = subscriptionPlanRole {
-                if role.uppercased().contains(AccountType.FWI.rawValue) && type == PackageType.FWI.rawValue {
-                    subscriptionPlanType = .FWI
-                } else if role.uppercased().contains(AccountType.jamaica.rawValue) && type == PackageType.jamaica.rawValue {
-                    subscriptionPlanType = .jamaica
+                if role.uppercased().contains(AccountType.FWI.rawValue),
+                    packageType.isSameAs(QuotaPackageType.FWI) {
+                    
+                    subscriptionPlanType = packageType
+                } else if role.uppercased().contains(AccountType.jamaica.rawValue),
+                    packageType.isSameAs(QuotaPackageType.jamaica) {
+                    
+                    subscriptionPlanType = packageType
                 }
             } else {
-                subscriptionPlanType = PackageType(rawValue: type)
-                subscriptionPlanFeatureType = FeaturePackageType(rawValue: type)
+                subscriptionPlanType = packageType
             }
         }
         subscriptionPlanSlcmOfferId = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanSlcmOfferId]?.string
@@ -132,6 +142,8 @@ class SubscriptionPlanBaseResponse: ObjectRequestResponse {
         subscriptionPlanPeriod = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanPeriod]?.string
         subscriptionPlanInAppPurchaseId = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlaninAppPurchaseId]?.string
         subscriptionPlanLanguageKey = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanLanguageKey]?.string
+        subscriptionPlanHasAttachedFeature = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanHasAttachedFeatureKey]?.bool
+        subscriptionPlanIsFeaturePack = tempoSubscriptionPlan?[SubscriptionConstants.subscriptionPlanIsFeaturePackKey]?.bool
     }
 }
 

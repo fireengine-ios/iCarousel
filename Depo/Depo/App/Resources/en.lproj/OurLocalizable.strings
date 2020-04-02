@@ -270,6 +270,8 @@
 "Usage Info and Packages" = "Usage Details";
 "Recently Deleted Files" = "Recently Deleted Files";
 "Auto Sync" = "Auto Sync";
+"auto_sync_album_items" = "Auto-Sync Items";
+"auto_sync_albums_description" = "";
 "Back-up my contacts" = "Backup My Contacts";
 "Leave feedback" = "Contact Us";
 "Upload Photo" = "Upload Photo";
@@ -657,6 +659,7 @@
 "Bad internet connection" = "Bad internet connection";
 "download_error_unsupported_extension" = "Downloading is not supported for this type of file";
 "Show only synced items" = "Show only synced items";
+"photo_video_auto_sync_settings" = "AutoSync Settings";
 "Your lifebox storage is almost full!" = "Your lifebox storage is almost full!";
 "This edited photo will be saved as a new photo in your device gallery" = "This edited photo will be saved as a new photo in your device gallery";
 "We couldn’t find any place on your Lifebox yet." = "We couldn’t find any places in your lifebox yet.";
@@ -755,6 +758,7 @@
 
 /*PackageInfoView*/
 "my_storage" = "My Storage";
+"my_packages" = "My Packages";
 "see_details" = "See Details";
 "face_image_description" = "Since you have a standard account, 100 of your photos will be processed. You will only see 3 people, objects and places in your smart albums.";
 "face_image_upgrade" = "Upgrade to lifebox Premium to use this feature without any limitation.";
@@ -912,6 +916,7 @@
 "surname" = "Surname";
 "change password" = "Change Password";
 "left_space" = "%1$@ / %2$@";
+"storage_usage_information" = "Usage";
 
 /*Packages*/
 "packages_i_have" = "Packages I Have";
@@ -1117,6 +1122,11 @@
 "spotify_cancel_import_continue_button" = "Continue Importing";
 "spotify_cancel_import_cancel_button" = "Cancel Importing";
 "account_verified" = "Thank you for verifying your account!";
+"settings_userinfo_name_surname" = "settings_userinfo_name_surname";
+"settings_userinfo_email" = "settings_userinfo_email";
+"settings_userinfo_phone" = "settings_userinfo_phone";
+"settings_action_sheet_profile_details" = "settings_action_sheet_profile_details";
+"settings_action_sheet_edit_profile_photo" = "settings_action_sheet_edit_profile_photo";
 
 /*2FA Error Messages*/
 "two_fa_too_many_requests_error_message" = "Too many verification code requested, please try again later";
@@ -1433,6 +1443,9 @@
 "expand_my_storage" = "Expand My Storage";
 "delete_files" = "Delete Files";
 "LifeboxLargePopUpSubTitleBeetween80And99" = "Let's have a look at upgrade options";
+"LifeboxLargePopUpSubTitle100Premium" = "Please take a look at the upgrading options to upgrade your storage.";
+"LifeboxLargePopUpSubTitle100Freemium" = "Please take a look at the upgrading options to upgrade your storage. Your content will be deleted soon.";
+
 "LifeboxLargePopUpSubTitle100Premium" = "You have exceeded your lifebox storage. You can buy a new package to continue storing your memories or reduce your content to fit your available storage.";
 "LifeboxLargePopUpSubTitle100Freemium" = "You have exceeded your lifebox storage. Unless you buy a new package or reduce your contents to fit in your available storage, all of your content will be deleted.";
 "empty_trash_bin" = "Empty Trash Bin";
@@ -1459,13 +1472,13 @@
 "face_recognition_package_description" = "Face Recognition";
 "delete_dublicate_package_description" = "Delete Dublicate";
 "premium_user_package_description" = "Premium user";
+"original_сopy_package_description" = "Original сopy";
 "bundle_package_addon_type" = "with +Premium";
 "storage_only_package_addon_type" = "Storage only";
-"settings_userinfo_name_surname" = "settings_userinfo_name_surname";
-"settings_userinfo_email" = "settings_userinfo_email";
-"settings_userinfo_phone" = "settings_userinfo_phone";
-"settings_action_sheet_profile_details" = "settings_action_sheet_profile_details";
-"settings_action_sheet_edit_profile_photo" = "settings_action_sheet_edit_profile_photo";
+"feature_package_name" = "Premium";
+
+"bundle_package_addon_type" = "with +Premium";
+"storage_only_package_addon_type" = "Storage only";
 "original_сopy_package_description" = "Original сopy";
 "become_premium_navbar_title" = "We Recommend";
 "become_premium_header_default_title" = "We have a special offer for you!";
@@ -1476,6 +1489,13 @@
 "become_premium_header_places_subtitle" = "become_premium_header_places_subtitle";
 "become_premium_header_things_title" = "become_premium_header_things_title";
 "become_premium_header_things_subtitle" = "become_premium_header_things_subtitle";
+"become_premium_header_contact_sync_title" = "become_premium_header_contact_sync_title";
+"become_premium_header_contact_sync_subtitle" = "become_premium_header_contact_sync_subtitle";
+"become_premium_or_text" = "Or,";
+"become_premium_see_all_packages" = "See All Packages";
+
+"contact_sync_confirm_premium_popup_title" = "Confirmation";
+"contact_sync_confirm_premium_popup_text" = "contact_sync_confirm_premium_popup_text";
 "become_premium_header_contact_sync_title" = "We have a special offer for you!";
 "become_premium_header_contact_sync_subtitle" = "You can have Premium features lorem ipsum dolor sit amet consecitur";
 "become_premium_description" = "Orijinal kalitede saklama\nSınırsız Photopick Analiz\nSınırsız Face/Image Processing\nDelete Duplicate Contacts";
@@ -1485,6 +1505,7 @@
 "dialog_contact_sync_vcf_error_upper_button" = "Expand My Storage";
 "dialog_contact_sync_vcf_error_lower_button" = "Delete Files";
 "ubsent_contacts" = "There is no contact in your device";
+"ubsent_contacts_in_lifebox" = "There is not any contact in your Lifebox";
 "mobile_payment_link" = "Payment Services and Electronic Money Agreement";
 "mobile_payment_success_popup_title" = "You activated Turkcell Mobile Payment successfully.";
 "mobile_payment_success_popup_message" = "You can manage Turkcell Mobile Payment Permission under Settings-Permission menu.";

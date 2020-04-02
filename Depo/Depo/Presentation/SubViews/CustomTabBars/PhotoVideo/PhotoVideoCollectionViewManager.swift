@@ -11,6 +11,7 @@ import UIKit
 protocol PhotoVideoCollectionViewManagerDelegate: class {
     func refreshData(refresher: UIRefreshControl)
     func showOnlySyncItemsCheckBoxDidChangeValue(_ value: Bool)
+    func openAutoSyncSettings()
 }
 
 final class PhotoVideoCollectionViewManager {
@@ -30,7 +31,7 @@ final class PhotoVideoCollectionViewManager {
     }()
     
     let scrolliblePopUpView = CardsContainerView()
-    private let showOnlySyncItemsCheckBox = CheckBoxView.initFromXib()
+    private let showOnlySyncItemsCheckBox = CheckBoxView.initFromNib()
     
     private weak var collectionView: UICollectionView!
     private weak var delegate: PhotoVideoCollectionViewManagerDelegate?
@@ -230,5 +231,9 @@ extension PhotoVideoCollectionViewManager: CardsContainerViewDelegate {
 extension PhotoVideoCollectionViewManager: CheckBoxViewDelegate {
     func checkBoxViewDidChangeValue(_ value: Bool) {
         delegate?.showOnlySyncItemsCheckBoxDidChangeValue(value)
+    }
+    
+    func openAutoSyncSettings() {
+        delegate?.openAutoSyncSettings()
     }
 }

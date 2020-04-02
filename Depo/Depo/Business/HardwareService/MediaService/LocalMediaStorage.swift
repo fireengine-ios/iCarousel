@@ -106,6 +106,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     private (set) var isWaitingForPhotoPermission = false
     
     var assetsCache = AssetsCache()
+    private(set) var localAlbumsCache = LocalAlbumsCache.shared
     
     private override init() {
         queue.maxConcurrentOperationCount = 1
@@ -222,6 +223,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     var fetchResult: PHFetchResult<PHAsset>!
+    var fetchAlbumResult: PHFetchResult<PHAssetCollection>!
+    var fetchSmartAlbumResult: PHFetchResult<PHAssetCollection>!
+    
     func getAllImagesAndVideoAssets() -> [PHAsset] {
         assetsCache.dropAll()
         debugLog("LocalMediaStorage getAllImagesAndVideoAssets")
@@ -259,7 +263,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 var albums = [AlbumItem]()
                 
                 let dispatchGroup = DispatchGroup()
-                
                 [album, smartAlbum].forEach { album in
                     album.enumerateObjects { object, index, stop in
                         dispatchGroup.enter()
@@ -303,6 +306,36 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     })
                     completion(albums)
                 }
+            }
+        }
+    }
+    
+    func getLocalAlbums(completion: @escaping (_ albums: [PHAssetCollection]) -> Void) {
+        askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] accessGranted, _ in
+            guard let self = self, accessGranted else {
+                completion([])
+                return
+            }
+            
+            self.dispatchQueue.async { [weak self] in
+                let albumsResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+                let smartAlbumsResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
+                
+                self?.fetchAlbumResult = albumsResult
+                self?.fetchSmartAlbumResult = smartAlbumsResult
+                
+                var albumsWithItems = [PHAssetCollection]()
+                
+                [albumsResult, smartAlbumsResult].forEach {
+                    $0.enumerateObjects { album, _, _ in
+                        if album.assetCollectionType == .smartAlbum || album.photosCount > 0 || album.videosCount > 0 {
+                            self?.localAlbumsCache.append(albumId: album.localIdentifier, with: album.allAssets.map { $0.localIdentifier })
+                            albumsWithItems.append(album)
+                        }
+                    }
+                }
+                
+                completion(albumsWithItems)
             }
         }
     }

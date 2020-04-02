@@ -202,7 +202,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
     
     func getPriceInfo(offer: PackageModelResponse, accountType: AccountType) {
         if let output = output as? FaceImageItemsInteractorOutput, accountType == .turkcell {
-            let price = packageService.getPriceInfo(for: offer, accountType: accountType)
+            let price = packageService.getOfferPrice(for: offer, accountType: accountType)
             DispatchQueue.main.async {
                 output.didObtainFeaturePrice(price)
             }
@@ -211,7 +211,7 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
         
         packageService.getInfoForAppleProducts(offers: [offer], success: { [weak self] in
             if let output = self?.output as? FaceImageItemsInteractorOutput {
-                let price = self?.packageService.getPriceInfo(for: offer, accountType: accountType)
+                let price = self?.packageService.getOfferPrice(for: offer, accountType: accountType)
                 DispatchQueue.main.async {
                     if let price = price {
                         output.didObtainFeaturePrice(price)

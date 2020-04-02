@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import KeychainSwift
 
 class Device {
     
@@ -152,19 +152,17 @@ class Device {
     }
     
     static var deviceInfo: [String: Any] {
-        
         var result: [String: Any] = [:]
-        let device = UIDevice.current
         
-        if let uuid = device.identifierForVendor?.uuidString {
+        if let uuid = Device.deviceId {
             result["uuid"] = uuid
         }
-        
+
         if let appVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
             result["appVersion"] = appVersion
         }
         
-        result["name"] = device.name
+        result["name"] = UIDevice.current.name
         result["deviceType"] = Device.deviceType
         result["language"] = Locale.current.languageCode ?? ""
         result["osVersion"] = Device.systemVersion
@@ -209,5 +207,18 @@ class Device {
         return UUID
         
     }()
-    
+        
+    static var deviceId: String? {
+        get {
+            let keychain = KeychainSwift()
+            if let deviceId = keychain.get(Keys.deviceUUID) {
+                return deviceId
+            } else if let uuid = UIDevice.current.identifierForVendor?.uuidString {
+                keychain.set(uuid, forKey: Keys.deviceUUID, withAccess: .accessibleAfterFirstUnlock)
+                return uuid
+            } else {
+                return nil
+            }
+        }
+    }
 }

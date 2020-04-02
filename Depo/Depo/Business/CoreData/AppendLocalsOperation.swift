@@ -18,12 +18,15 @@ final class AppendLocalsOperation: Operation {
     private let coreDataStack: CoreDataStack = factory.resolve()
     private let context: NSManagedObjectContext
     private let mediaStorage = LocalMediaStorage.default
+    private let needCreateRelationships: Bool
+    private lazy var localAlbumsCache = LocalAlbumsCache.shared
     
     
-    init(assets: [PHAsset], completion: VoidHandler?) {
+    init(assets: [PHAsset], needCreateRelationships: Bool, completion: VoidHandler?) {
         context = coreDataStack.newChildBackgroundContext
         self.completionHandler = completion
         self.assets = assets
+        self.needCreateRelationships = needCreateRelationships
     }
     
     override func cancel() {
@@ -82,9 +85,35 @@ final class AppendLocalsOperation: Operation {
                 
                 var addedObjects = [WrapData]()
                 let updatedCache = self.mediaStorage.assetsCache
-                let assetsInfo = info.filter { $0.isValid && updatedCache.assetBy(identifier: $0.asset.localIdentifier) != nil }
-                assetsInfo.forEach { element in
+                
+                var validAssetsInfo = [AssetInfo]()
+                var invalidAssetsInfo = [AssetInfo]()
+                info.forEach { assetInfo in
+                    if assetInfo.isValid && updatedCache.assetBy(identifier: assetInfo.asset.localIdentifier) != nil {
+                        validAssetsInfo.append(assetInfo)
+                    } else {
+                        invalidAssetsInfo.append(assetInfo)
+                    }
+                }
+                
+                invalidAssetsInfo.forEach {
+                    self.localAlbumsCache.remove(assetId: $0.asset.localIdentifier)
+                }
+                
+                let smartAssets = PHAssetCollection.smartAlbums.map { (album: $0, assets: $0.allAssets) }
+                
+                validAssetsInfo.forEach { element in
                     autoreleasepool {
+                        if self.needCreateRelationships {
+                            var albums = element.asset.containingAlbums
+                            let smartAlbums = smartAssets.filter { $0.assets.contains(element.asset) }.map { $0.album }
+                            
+                            albums.append(contentsOf: smartAlbums)
+                            albums.forEach {
+                                self.localAlbumsCache.append(albumId: $0.localIdentifier, with: [element.asset.localIdentifier])
+                            }
+                        }
+                        
                         let wrapedItem = WrapData(info: element)
                         _ = MediaItem(wrapData: wrapedItem, context: self.context)
                         

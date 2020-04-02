@@ -62,6 +62,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private lazy var filesDataSource = FilesDataSource()
     
+    private lazy var router = RouterVC()
+    
     private var canShowDetail = true
     
     // MARK: - life cycle
@@ -240,25 +242,28 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
 
         dataSource.getWrapedFetchedObjects { [weak self] items in
             self?.dataSource.getObject(at: indexPath) { [weak self] object in
+                guard let self = self else {
+                    return
+                }
+                
                 guard let currentMediaItem = object,
                 let currentObject = items.first(where: {$0.uuid == currentMediaItem.uuid}) else {
-                    self?.canShowDetail = true
-                    self?.hideSpinner()
+                    self.canShowDetail = true
+                    self.hideSpinner()
                     return
                 }
                 
                 DispatchQueue.toMain {
-                    self?.hideSpinner()
-                    let router = RouterVC()
-                    let detailModule = router.filesDetailModule(fileObject: currentObject,
+                    self.hideSpinner()
+                    let detailModule = self.router.filesDetailModule(fileObject: currentObject,
                                                                 items: items,
                                                                 status: .active,
                                                                 canLoadMoreItems: false,
                                                                 moduleOutput: nil)
 
                     let nController = NavigationController(rootViewController: detailModule.controller)
-                    router.presentViewController(controller: nController)
-                    self?.canShowDetail = true
+                    self.router.presentViewController(controller: nController)
+                    self.canShowDetail = true
                 }
             }
         }
@@ -287,7 +292,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func showSearchScreen() {
-        let router = RouterVC()
         let controller = router.searchView(navigationController: navigationController)
         router.pushViewController(viewController: controller)
     }
@@ -554,12 +558,14 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
     func openInstaPick() {
         showSpinner()
         instaPickRoutingService.getViewController(isCheckAnalyzesCount: true, success: { [weak self] vc in
-            self?.hideSpinner()
+            guard let self = self else {
+                return
+            }
+            
+            self.hideSpinner()
             if vc is InstapickPopUpController || vc is InstaPickSelectionSegmentedController {
-                //FIXME: add router
-                let router = RouterVC()
-                let navController = router.createRootNavigationControllerWithModalStyle(controller: vc)
-                router.presentViewController(controller: navController)
+                let navController = self.router.createRootNavigationControllerWithModalStyle(controller: vc)
+                self.router.presentViewController(controller: navController)
             }
         }) { [weak self] error in
             self?.showAlert(with: error.description)
@@ -594,9 +600,8 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
             let syncPhotos = selectedObjects.filter { !$0.isLocalItem && $0.fileType == .image }
             
             if let itemsToPrint = syncPhotos as? [Item], !itemsToPrint.isEmpty {
-                let router = RouterVC()
                 let vc = PrintInitializer.viewController(data: itemsToPrint)
-                router.pushOnPresentedView(viewController: vc)
+                self.router.pushOnPresentedView(viewController: vc)
             }
             self.stopEditingMode()
         }
@@ -641,6 +646,10 @@ extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
                 self?.fetchAndReload()
             }
         })
+    }
+    
+    func openAutoSyncSettings() {
+        router.pushViewController(viewController: router.autoUpload)
     }
 }
 

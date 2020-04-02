@@ -97,7 +97,12 @@ struct ColorConstants {
     static let billoDarkBlue = UIColor(red: 0, green: 153 / 255.0, blue: 219 / 255.0, alpha: 1.0)
     static let billoGray = UIColor(red: 109 / 255.0, green: 109 / 255.0, blue: 109 / 255.0, alpha: 1.0)
     static let stickerBorderColor = UIColor(red: 59 / 255.0, green: 80 / 255.0, blue: 90 / 255.0, alpha: 1)
+
+    static let profileLightGray = UIColor(red: 186 / 255.0, green: 186 / 255.0, blue: 186 / 255.0, alpha: 1)
+    static let cardBorderOrange = UIColor(red: 231 / 255.0, green: 133 / 255.0, blue: 36 / 255.0, alpha: 1)
+
     static let linkBlack = UIColor(red: 51 / 255.0, green: 51 / 255.0, blue: 51 / 255.0, alpha: 1)
+
 }
 
 extension UIColor {

@@ -568,7 +568,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
     }
     
     override func operationStarted(type: ElementTypes) {
-        basePassingPresenter?.stopModeSelected()
         startAsyncOperationDisableScreen()
     }
     

@@ -7,13 +7,13 @@
 //
 
 protocol MyStorageInteractorInput {
-    func getUsage()
     func getAccountType()
     func getAccountType(with accountType: String, offers: [Any]) -> AccountType?
     func getAllOffers()
     
     func restorePurchases()
     func trackPackageClick(plan packages: SubscriptionPlan, planIndex: Int)
+    func trackNetmeraPackageCancelClick(type: String, packageName: String)
     func trackScreen()
     
     func convertToASubscriptionList(activeSubscriptionList: [SubscriptionPlanBaseResponse],
