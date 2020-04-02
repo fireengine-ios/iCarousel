@@ -483,12 +483,7 @@ class RouterVC: NSObject {
     // MARK: SynchronyseSettings
     
     var synchronyseScreen: UIViewController {
-        
-        let inicializer = AutoSyncModuleInitializer()
-        let controller = AutoSyncViewController(nibName: "AutoSyncViewController", bundle: nil)
-        inicializer.autosyncViewController = controller
-        inicializer.setupVC()
-        return controller
+        return AutoSyncModuleInitializer.initializeViewController()
     }
     
     
@@ -918,8 +913,7 @@ class RouterVC: NSObject {
     // MARK: Auto Upload
     
     var autoUpload: UIViewController {
-        let controller = AutoSyncModuleInitializer.initializeViewController(with: "AutoSyncViewController", fromSettings: true)
-        return controller
+        return AutoSyncModuleInitializer.initializeViewController(fromSettings: true)
     }
     
     // MARK: Change Password
