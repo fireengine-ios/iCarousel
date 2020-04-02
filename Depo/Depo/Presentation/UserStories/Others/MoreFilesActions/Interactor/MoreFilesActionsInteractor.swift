@@ -19,12 +19,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private let peopleService = PeopleService()
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
-    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     private lazy var hiddenService = HiddenService()
-
-    private lazy var hideFunctionalityService: HideFuncServiceProtocol = HideSmashCoordinator()
-    private lazy var smashService: SmashServiceProtocol = HideSmashCoordinator()
-
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var hideActionService: HideActionServiceProtocol = HideActionService()
+    private lazy var smashActionService: SmashActionServiceProtocol = SmashActionService()
+    
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
     var sharingItems = [BaseDataSourceItem]()
@@ -180,7 +180,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let fileType = sharingItems.first?.fileType
         fileService.share(sharedFiles: sharingItems, success: { [weak self] url in
             DispatchQueue.main.async {
-                self?.output?.operationFinished(type: .share)
+                guard
+                    let self = self,
+                    let output = self.output
+                else {
+                    return
+                }
+                output.operationFinished(type: .share)
                 
                 let objectsToShare = [url]
                 let activityVC = UIActivityViewController(activityItems: objectsToShare,
@@ -193,7 +199,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     else {
                         return
                     }
-                    
+                    output.stopSelectionMode()
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Share(method: .link, channelType: activityTypeString.knownAppName()))
                 }
                 if let tempoRect = sourceRect {//if ipad
@@ -201,7 +207,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 }
                 
                 debugLog("presentViewController activityVC")
-                self?.router.presentViewController(controller: activityVC)
+                self.router.presentViewController(controller: activityVC)
             }
             
         }, fail: failAction(elementType: .share))
@@ -251,13 +257,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func smash(item: [BaseDataSourceItem], completion: VoidHandler?) {
-        
         guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
             return
         }
         
         let controller = OverlayStickerViewController()
-        controller.smashCoordinator = self.smashService
+        controller.smashActionService = self.smashActionService
         let navVC = NavigationController(rootViewController: controller)
         self.router.presentViewController(controller: navVC)
         
@@ -292,7 +297,25 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 self?.moveToTrashAlbums(albums: item)
             }, firOperation: { [weak self] item, success, fail in
                 self?.output?.completeAsyncOperationEnableScreen()
-                self?.moveToTrashFir(items: item, success: success, fail: fail)
+                if let items = item as? [PeopleItem] {
+                    self?.analyticsService.trackFileOperationGAEvent(operationType: .trash,
+                                                                     itemsType: .people,
+                                                                     itemsCount: items.count)
+                    self?.fileService.moveToTrashPeople(items: items, success: success, fail:  fail)
+                    
+                } else if let items = item as? [ThingsItem] {
+                    self?.analyticsService.trackFileOperationGAEvent(operationType: .trash,
+                                                                     itemsType: .things,
+                                                                     itemsCount: items.count)
+                    self?.fileService.moveToTrashThings(items: items, success: success, fail: fail)
+                    
+                } else if let items = item as? [PlacesItem] {
+                    self?.analyticsService.trackFileOperationGAEvent(operationType: .trash,
+                                                                     itemsType: .places,
+                                                                     itemsCount: items.count)
+                    self?.fileService.moveToTrashPlaces(items: items, success: success, fail: fail)
+                    
+                }
         })
     }
     
@@ -305,13 +328,16 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         if let albumItems = items as? [AlbumItem] {
             hideAlbums(items: albumItems)
+            
         } else if let items = remoteItems as? [Item] {
-            hideFunctionalityService.startHideOperation(for: items,
-                                                        output: self.output,
-                                                        success: self.successItemsAction(elementType: .hide, relatedItems: items),
-                                                        fail: self.failItemsAction(elementType: .hide, relatedItems: items))
+            hideActionService.startOperation(for: .photos(items),
+                                             output: self.output,
+                                             success: self.successItemsAction(elementType: .hide, relatedItems: items),
+                                             fail: self.failItemsAction(elementType: .hide, relatedItems: items))
+            
         } else {
             assertionFailure("Unexpected type of items")
+            
         }
     }
     
@@ -326,11 +352,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             assertionFailure("Locals only must not be passed to hide them")
             return
         }
-           
-        hideFunctionalityService.startHideAlbumsOperation(for: remoteItems,
-                                                          output: self.output,
-                                                          success: self.successItemsAction(elementType: .hide, relatedItems: items),
-                                                          fail: self.failItemsAction(elementType: .hide, relatedItems: items))
+
+        hideActionService.startOperation(for: .albums(remoteItems),
+                                         output: self.output,
+                                         success: self.successItemsAction(elementType: .hide, relatedItems: items),
+                                         fail: self.failItemsAction(elementType: .hide, relatedItems: items))
     }
     
     func unhide(items: [BaseDataSourceItem]) {
@@ -1104,6 +1130,7 @@ extension MoreFilesActionsInteractor {
                                                 self?.output?.successPopupClosed()
                                             }
                                         }
+        self.output?.successPopupWillAppear()
         router.presentViewController(controller: popup)
     }
     

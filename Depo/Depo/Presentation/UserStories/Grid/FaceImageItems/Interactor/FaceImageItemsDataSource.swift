@@ -39,7 +39,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
             return super.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
         } else {
             let premiumView = collectionView.dequeue(supplementaryView: PremiumFooterCollectionReusableView.self, kind: kind, for: indexPath)
-            premiumView.configure(price: price, description: detailMessage, type: faceImageType, isTurkcell: accountType == .turkcell)
+            premiumView.configureWithoutDetails(type: faceImageType, isSelectedAnimation: true)
             premiumView.delegate = self
             return premiumView
         }
@@ -84,7 +84,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
     // MARK: Utility methods
     func didAnimationForPremiumButton(with indexPath: IndexPath) {
         if let footerView = collectionView?.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionFooter, withReuseIdentifier: CollectionViewSuplementaryConstants.collectionViewPremiumFooter, for: indexPath) as? PremiumFooterCollectionReusableView {
-            footerView.configure(price: price, description: detailMessage, type: faceImageType, isSelectedAnimation: true, isTurkcell: accountType == .turkcell)
+            footerView.configureWithoutDetails(type: faceImageType, isSelectedAnimation: true)
             footerView.delegate = self
         }
     }

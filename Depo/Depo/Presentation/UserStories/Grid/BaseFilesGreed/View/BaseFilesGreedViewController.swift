@@ -574,4 +574,6 @@ extension BaseFilesGreedViewController: CheckBoxViewDelegate {
     func checkBoxViewDidChangeValue(_ value: Bool) {
         output.showOnlySyncedItems(value)
     }
+    
+    func openAutoSyncSettings() { }
 }

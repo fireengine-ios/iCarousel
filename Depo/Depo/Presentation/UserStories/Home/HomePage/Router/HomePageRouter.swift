@@ -73,7 +73,7 @@ final class HomePageRouter: HomePageRouterInput {
     
     //MARK: Utility method
     private func moveToPremium(title: String, headerTitle: String, completion: VoidHandler?) {
-        let controller = router.premium(title: title, headerTitle: headerTitle)
+        let controller = router.premium()
         
         router.pushViewController(viewController: controller)
     }

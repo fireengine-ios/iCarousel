@@ -1122,6 +1122,39 @@ enum GAEventLabel {
         }
     }
     
+    enum ProfileChangeType {
+        case name
+        case surname
+        case email
+        case birthday
+        case address
+        case phone
+        case password
+        case securityQuestion
+        
+        var text: String {
+            switch self {
+            case .name:
+                return "Name"
+            case .surname:
+                return "Surname"
+            case .email:
+                return "E-Mail"
+            case .birthday:
+                return "Birthday"
+            case .address:
+                return "Address"
+            case .phone:
+                return "Phone"
+            case .password:
+                return "Password"
+            case .securityQuestion:
+                return "SecurityQuestion"
+            }
+        }
+        
+    }
+    
     case empty
     case custom(String)
     
@@ -1216,6 +1249,11 @@ enum GAEventLabel {
     case mobilePaymentAction(_ isContinue: Bool)
     case backWithCheck(_ isChecked: Bool)
     case isOn(_ isOn: Bool)
+    case back
+    case spotify
+    case dropbox
+    case instagram
+    case facebook
     
     var text: String {
         switch self {
@@ -1423,6 +1461,16 @@ enum GAEventLabel {
             return isChecked ? "Back - Checked" : "Back"
         case .isOn(let isOn):
             return isOn ? "On" : "Off"
+        case .back:
+            return "Back"
+        case .spotify:
+            return "Spotify"
+        case .dropbox:
+            return "Dropbox"
+        case .instagram:
+            return "Instagram"
+        case .facebook:
+            return "Facebook"
         }
     }
     
@@ -1470,9 +1518,12 @@ enum GADementionsFields {
     case autoSyncState
     case autoSyncStatus
     case twoFactorAuth
-    case spotify
+    case spotifyStatus
     case dailyDrawleft
     case itemsCount(GAOperationType)
+    case editFields
+    case connectionStatus
+    case statusType
     
     var text: String {
         switch self {
@@ -1518,12 +1569,18 @@ enum GADementionsFields {
             return "SyncStatus"
         case .twoFactorAuth:
             return "twoFactorAuthentication"
-        case .spotify:
+        case .spotifyStatus:
             return "connectStatus"
         case .dailyDrawleft:
             return "dailyDrawleft"
         case .itemsCount(let operationType):
             return operationType.itemsCountText
+        case .editFields:
+            return "editFields"
+        case .connectionStatus:
+            return "connectionStatus"
+        case .statusType:
+            return "statusType"
         }
     }
     
@@ -1588,6 +1645,7 @@ enum GADementionValues {
         case networkError
         case serverError
         case unauthorized
+        case captchaIsEmpty
         
         var text: String {
             switch self {
@@ -1609,6 +1667,8 @@ enum GADementionValues {
                 return "SERVER_ERROR"
             case .unauthorized:
                 return "UNAUTHORIZED"
+            case .captchaIsEmpty:
+                return "EMPTY_CAPTCHA"
             }
         }
     }

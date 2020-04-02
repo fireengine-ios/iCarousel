@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="AutoSyncAlbumTableViewCell" customModule="LifeTech_lifedrive" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="left" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qpp-QE-eph" customClass="AutoSyncCheckBox" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                        <rect key="frame" x="24" y="11.5" width="21" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Qpp-QE-eph" secondAttribute="height" multiplier="1:1" id="0tC-AZ-gAw"/>
+                            <constraint firstAttribute="height" constant="21" id="fUZ-Gl-Kfp"/>
+                        </constraints>
+                        <state key="normal" image="checkBoxNotSelected"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bj-vv-7cF">
+                        <rect key="frame" x="53" y="0.0" width="259" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="Eni-bd-Nel"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="9bj-vv-7cF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="1gT-pE-LFS"/>
+                    <constraint firstItem="Qpp-QE-eph" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="8RW-dx-Q7x"/>
+                    <constraint firstItem="Qpp-QE-eph" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="H82-SV-k0B"/>
+                    <constraint firstItem="9bj-vv-7cF" firstAttribute="leading" secondItem="Qpp-QE-eph" secondAttribute="trailing" constant="8" id="eUw-Tg-8i2"/>
+                    <constraint firstAttribute="bottom" secondItem="9bj-vv-7cF" secondAttribute="bottom" id="l1I-U7-l51"/>
+                    <constraint firstAttribute="trailing" secondItem="9bj-vv-7cF" secondAttribute="trailing" constant="8" id="zHC-zQ-HQT"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="checkBox" destination="Qpp-QE-eph" id="xgh-GE-co4"/>
+                <outlet property="leftOffset" destination="H82-SV-k0B" id="JjU-c6-KBS"/>
+                <outlet property="titleLabel" destination="9bj-vv-7cF" id="BPu-8Y-bZg"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="127.90178571428571"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="checkBoxNotSelected" width="26" height="26"/>
+    </resources>
+</document>

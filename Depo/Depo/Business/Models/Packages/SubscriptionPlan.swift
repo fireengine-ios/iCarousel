@@ -8,29 +8,70 @@
 
 import Foundation
 
-class SubscriptionPlan {
+final class SubscriptionPlan {
+    enum AddonType {
+        case bundle
+        case storageOnly
+        case featureOnly
+        
+        static func make(model: Any) -> AddonType? {
+            let isFeaturePack: Bool
+            let hasAttachedFeature: Bool
+            
+            if let package = model as? PackageModelResponse {
+                isFeaturePack = package.isFeaturePack ?? false
+                hasAttachedFeature = package.hasAttachedFeature ?? false
+            } else if let plan = model as? SubscriptionPlanBaseResponse {
+                isFeaturePack = plan.subscriptionPlanIsFeaturePack ?? false
+                hasAttachedFeature = plan.subscriptionPlanHasAttachedFeature ?? false
+            } else {
+                return nil
+            }
+            
+            if isFeaturePack {
+                return .featureOnly
+            } else if hasAttachedFeature == false {
+                return .storageOnly
+            } else {
+                return .bundle
+            }
+        }
+    }
+    
     let name: String
-    let photosCount: Int
-    let videosCount: Int
-    let songsCount: Int
-    let docsCount: Int
-    let priceString: String
+    let price: String
     let type: SubscriptionPlanType
     let model: Any
     let quota: Int64
-    let price: Float
+    let amount: Float
+    let isRecommended: Bool
+    let features: [AuthorityType]
+    let addonType: AddonType?
+    let date: String
+    let store: String
 
-    init(name: String, photosCount: Int, videosCount: Int, songsCount: Int, docsCount: Int, priceString: String, type: SubscriptionPlanType, model: Any, quota: Int64, price: Float) {
+    init(name: String,
+         price: String,
+         type: SubscriptionPlanType,
+         model: Any,
+         quota: Int64,
+         amount: Float,
+         isRecommended: Bool,
+         features: [AuthorityType],
+         addonType: AddonType?,
+         date: String,
+         store: String) {
         self.name = name
-        self.photosCount = photosCount
-        self.videosCount = videosCount
-        self.songsCount = songsCount
-        self.docsCount = docsCount
-        self.priceString = priceString
+        self.price = price
         self.type = type
         self.model = model
         self.quota = quota
-        self.price = price
+        self.amount = amount
+        self.isRecommended = isRecommended
+        self.features = features
+        self.addonType = addonType
+        self.date = date
+        self.store = store
     }
     
     ///FE-990 2.5TB SLCM (Turkcell) quota package cancel text
