@@ -284,10 +284,14 @@ class PhotosAlbumService: BaseRequestService {
         debugLog("PhotosAlbumService addPhotosToAlbum")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { [weak self] _  in
+            guard let self = self else {
+                success?()
+                return
+            }
             debugLog("PhotosAlbumService addPhotosToAlbum success")
 
             let itemsUuids = parameters.photos.map { $0.uuid }
-            self?.mediaAlbumService.addItemsToRemoteAlbum(itemsUuids: itemsUuids, albumUuid: parameters.albumUUID) {
+            self.mediaAlbumService.addItemsToRemoteAlbum(itemsUuids: itemsUuids, albumUuid: parameters.albumUUID) {
                 success?()
             }
 

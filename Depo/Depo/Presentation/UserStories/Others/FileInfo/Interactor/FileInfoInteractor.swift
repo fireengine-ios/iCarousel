@@ -11,7 +11,7 @@ final class FileInfoInteractor {
     weak var output: FileInfoInteractorOutput!
     
     var item: BaseDataSourceItem?
-    private lazy var albumService = PhotosAlbumService()
+    private let albumService = PhotosAlbumService()
 
 }
 
@@ -58,7 +58,7 @@ extension FileInfoInteractor: FileInfoInteractorInput {
         
         if let album = item as? AlbumItem {
             let renameAlbum = RenameAlbum(albumUUID: album.uuid, newName: newName)
-            PhotosAlbumService().renameAlbum(parameters: renameAlbum, success: { [weak self] in
+            albumService.renameAlbum(parameters: renameAlbum, success: { [weak self] in
                 DispatchQueue.main.async {
                     self?.item?.name = newName
                     self?.output.updated()
