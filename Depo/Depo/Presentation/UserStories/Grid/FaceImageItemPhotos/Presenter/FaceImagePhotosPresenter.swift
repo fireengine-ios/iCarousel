@@ -361,6 +361,9 @@ extension FaceImagePhotosPresenter: FaceImagePhotosDataSourceDelegate {
         default:
             break 
         }
-        
+    }
+    
+    func didFinishAlbumOperation() {
+        reloadData()
     }
 }
