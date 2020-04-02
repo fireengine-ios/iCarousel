@@ -22,6 +22,7 @@ extension MediaItemsAlbum {
         static let uuid = #keyPath(MediaItemsAlbum.uuid)
         static let videoCount = #keyPath(MediaItemsAlbum.videoCount)
         static let items = #keyPath(MediaItemsAlbum.items)
+        static let relatedLocal = #keyPath(MediaItemsAlbum.relatedLocal)
     }
 }
 

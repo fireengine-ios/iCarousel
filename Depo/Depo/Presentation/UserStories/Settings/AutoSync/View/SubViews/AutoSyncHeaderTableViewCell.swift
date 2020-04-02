@@ -26,6 +26,16 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
         }
     }
     
+    @IBOutlet private weak var descriptionLabel: UILabel! {
+        willSet {
+            newValue.text = ""
+            newValue.textColor = ColorConstants.textGrayColor
+            newValue.font = UIFont.TurkcellSaturaFont(size: 15)
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
+        }
+    }
+    
     @IBOutlet private weak var dropDownArrow: UIImageView!
     @IBOutlet private weak var separatorView: UIView! {
         willSet {
@@ -53,7 +63,7 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
         }
         
         titleLabel.text = model.headerType.title
-        optionLabel.text = model.headerType.subtitle(setting: model.setting)
+        setupSubtitle()
         setupArrow(isSelected: model.isSelected, animated: false)
     }
     
@@ -67,12 +77,29 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
         }
     }
     
+    private func setupSubtitle() {
+        guard let model = model else {
+            return
+        }
+        
+        let subtitle = model.headerType.subtitle(setting: model.setting)
+        switch model.headerType {
+        case .albums:
+            optionLabel.text = ""
+            descriptionLabel.text = model.isSelected ? subtitle : ""
+        default:
+            optionLabel.text = subtitle
+            descriptionLabel.text = ""
+        }
+    }
+    
     private func toggle() {
         guard let model = model else {
             return
         }
         
         model.isSelected.toggle()
+        setupSubtitle()
         setupArrow(isSelected: model.isSelected, animated: true)
 
         delegate?.didChange(model: model)
