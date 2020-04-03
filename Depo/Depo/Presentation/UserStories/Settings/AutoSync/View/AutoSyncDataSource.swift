@@ -221,6 +221,10 @@ extension AutoSyncDataSource {
     private func enableAutoSync() {
         autoSyncSetting.isAutoSyncOptionEnabled = true
         
+        guard models.first(where: { ($0 as? AutoSyncHeaderModel)?.headerType == .photo }) == nil else {
+            return
+        }
+        
         let settingModels = [AutoSyncHeaderModel(type: .photo, setting: autoSyncSetting.photoSetting, isSelected: false),
                              AutoSyncHeaderModel(type: .video, setting: autoSyncSetting.videoSetting, isSelected: false)]
         
@@ -236,6 +240,10 @@ extension AutoSyncDataSource {
     
     private func disableAutoSync() {
         autoSyncSetting.isAutoSyncOptionEnabled = false
+        
+        guard models.first(where: { ($0 as? AutoSyncHeaderModel)?.headerType == .photo }) != nil else {
+            return
+        }
         
         guard let index = models.firstIndex(where: { ($0 as? AutoSyncHeaderModel)?.headerType == .albums }) else {
             return
