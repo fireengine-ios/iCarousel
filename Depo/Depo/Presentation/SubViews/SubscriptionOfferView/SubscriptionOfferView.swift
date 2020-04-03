@@ -150,9 +150,12 @@ final class SubscriptionOfferView: UIView, NibInit {
         attributedString.addAttributes(currencyAttributes, range: fullRange)
         
         let words = price.components(separatedBy: " ")
-        if let price = words[safe: 0] {
-            let priceRange = attributedString.mutableString.range(of: price)
+        if let priceWord = words[safe: 0] {
+            let priceRange = attributedString.mutableString.range(of: priceWord)
             attributedString.addAttributes(priceAttributes, range: priceRange)
+            if fullRange.length > priceRange.length {
+                attributedString.mutableString.replaceCharacters(in: NSRange(location: priceRange.length, length: 1), with: "\n")
+            }
         }
         
         return attributedString
@@ -166,18 +169,18 @@ final class SubscriptionOfferView: UIView, NibInit {
         let font: UIFont
         
         if plan.isRecommended {
-            font = UIFont.TurkcellSaturaBolFont(size: 16)
+            font = UIFont.TurkcellSaturaBolFont(size: 14)
             textColor = ColorConstants.cardBorderOrange
         } else if plan.addonType == .storageOnly {
-            font = UIFont.TurkcellSaturaFont(size: 16)
+            font = UIFont.TurkcellSaturaFont(size: 14)
             textColor = ColorConstants.darkText
         } else {
-            font = UIFont.TurkcellSaturaBolFont(size: 16)
-            textColor = ColorConstants.marineTwo
+            font = UIFont.TurkcellSaturaBolFont(size: 14)
+            textColor = ColorConstants.cardBorderOrange
         }
         
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
+        paragraphStyle.alignment = .left
         return NSAttributedString(string: text, attributes: [
             .font: font,
             .foregroundColor: textColor,
@@ -196,7 +199,9 @@ final class SubscriptionOfferView: UIView, NibInit {
         case .storageOnly:
             return TextConstants.storageOnlyPackageAddonType
         case .featureOnly:
-            return nil
+            return TextConstants.featuresOnlyAddonType
+        case .middleOnly:
+            return TextConstants.middleFeaturesOnlyAddonType
         }
     }
     
@@ -207,7 +212,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         } else if features.isEmpty {
             return .storageOnly
         } else {
-            return .features(features)
+            return plan.addonType == SubscriptionPlan.AddonType.middleOnly ? .middleFeatures : .premiumFeatures(features)
         }
     }
     
@@ -232,14 +237,14 @@ final class SubscriptionOfferView: UIView, NibInit {
             let color: UIColor
             switch style {
             case .full:
-                color = isRecommended ? ColorConstants.cardBorderOrange : ColorConstants.marineTwo
+                color = ColorConstants.marineTwo
             case .short:
                 let titleColor = plan.isRecommended ? ColorConstants.whiteColor : ColorConstants.marineTwo
                 purchaseButton.setTitleColor(titleColor, for: UIControl.State())
                 let borderColor = isRecommended ? ColorConstants.cardBorderOrange : ColorConstants.darkTintGray
                 purchaseButton.layer.borderColor = borderColor.cgColor
                 purchaseButton.layer.borderWidth = 2
-                color = isRecommended ? ColorConstants.cardBorderOrange : ColorConstants.whiteColor
+                color = isRecommended ? ColorConstants.marineTwo : ColorConstants.whiteColor
             }
             purchaseButton.setBackgroundColor(color, for: UIControl().state)
     
@@ -264,7 +269,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         case .full:
             featureView.configure(features: features)
         case .short:
-            featureView.configure(features: .storageOnly)
+            featureView.configure(features: .premiumOnly)
         }
     }
     

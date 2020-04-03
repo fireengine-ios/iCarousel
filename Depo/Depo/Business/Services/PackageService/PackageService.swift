@@ -298,10 +298,12 @@ final class PackageService {
         let addonType = SubscriptionPlan.AddonType.make(model: offer)
         if addonType == .featureOnly {
             name = TextConstants.featurePackageName
+        } else if addonType == .middleOnly {
+            name = TextConstants.middleFeaturePackageName
         } else {
             name = getOfferQuota(for: offer)?.bytesString ?? (getOfferDisplayName(for: offer) ?? "")
         }
-        let prefix = (getOfferType(for: offer) == .default) ? "+" : ""
+        let prefix = ((getOfferType(for: offer) == .default) && (addonType != .featureOnly)) ? "+" : ""
         return prefix + name
     }
     
