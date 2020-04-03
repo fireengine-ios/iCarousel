@@ -54,12 +54,7 @@ final class AlbumCellView: UIView {
         
         layoutIfNeeded()
         
-        if album.isTBMatik {
-            setupGradientBorder()
-        } else {
-            imageGradientBorderLayer?.removeFromSuperlayer()
-            imageGradientBorderLayer = nil
-        }
+        setGradient(isEnabled: album.isTBMatik)
     }
     
     func setSelection(isSelectionActive: Bool, isSelected: Bool) {
@@ -75,17 +70,26 @@ final class AlbumCellView: UIView {
     
     // MARK: Gradient Image Border
     
+    private func setGradient(isEnabled: Bool) {
+        if isEnabled {
+            setupGradientBorder()
+        } else {
+            imageGradientBorderLayer?.removeFromSuperlayer()
+            imageGradientBorderLayer = nil
+        }
+    }
+    
     private func setupGradientBorder() {
         guard imageGradientBorderLayer == nil else {
             return
         }
         
-        let imageGradientBorderLayer = CAGradientLayer()
-        imageGradientBorderLayer.frame = imageBorderView.bounds
+        let gradientBorderLayer = CAGradientLayer()
+        gradientBorderLayer.frame = imageBorderView.bounds
         let colors = [ColorConstants.lightTeal, ColorConstants.apricotTwo, ColorConstants.rosePink]
-        imageGradientBorderLayer.colors = colors.map { return $0.cgColor }
-        imageGradientBorderLayer.startPoint = .zero
-        imageGradientBorderLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        gradientBorderLayer.colors = colors.map { return $0.cgColor }
+        gradientBorderLayer.startPoint = .zero
+        gradientBorderLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
         
         let mask = CAShapeLayer()
         mask.path = UIBezierPath(roundedRect: imageBorderView.bounds, cornerRadius: 0).cgPath
@@ -93,9 +97,11 @@ final class AlbumCellView: UIView {
         mask.strokeColor = UIColor.white.cgColor
         mask.lineWidth = 5
         
-        imageGradientBorderLayer.mask = mask
+        gradientBorderLayer.mask = mask
+        
+        imageGradientBorderLayer = gradientBorderLayer
 
-        imageBorderView.layer.addSublayer(imageGradientBorderLayer)
+        imageBorderView.layer.addSublayer(gradientBorderLayer)
     }
 }
 
