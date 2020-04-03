@@ -390,22 +390,13 @@ final class UploadOperation: Operation {
             self.semaphore.signal()
         }
         
-        createAlbumsIfNeeded { [weak self] in
-            guard let self = self else {
-                customFail(ErrorResponse.string(TextConstants.errorUnknown))
-                return
-            }
-            
-            if self.isResumable {
-                debugLog("resumable_upload:")
-                self.attemptResumableUpload(success: customSucces, fail: customFail)
-            } else {
-                debugLog("simple_upload:")
-                self.attemptSimpleUpload(success: customSucces, fail: customFail)
-            }
+        if isResumable {
+            debugLog("resumable_upload:")
+            attemptResumableUpload(success: customSucces, fail: customFail)
+        } else {
+            debugLog("simple_upload:")
+            attemptSimpleUpload(success: customSucces, fail: customFail)
         }
-        
-        
     }
     
     private func getUploadParameters(baseURL: URL, empty: Bool = false, success: @escaping UploadParametersResponse, fail: @escaping FailResponse) {
@@ -470,15 +461,19 @@ final class UploadOperation: Operation {
                 if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
                     self.outputItem?.metaData?.mediumUrl = preview
                 }
-                self.addToRemoteAlbumsIfNeeded { [weak self] in
-                    guard let self = self else {
-                        fail(ErrorResponse.string(TextConstants.errorUnknown))
-                        return
+                
+                self.createAlbumsIfNeeded { [weak self] in
+                    self?.addToRemoteAlbumsIfNeeded { [weak self] in
+                        guard let self = self else {
+                            debugLog("_upload: can't call updateLocalItemSyncStatus")
+                            fail(ErrorResponse.string(TextConstants.errorUnknown))
+                            return
+                        }
+                        
+                        self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
+                        
+                        success()
                     }
-                    
-                    self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
-                    
-                    success()
                 }
                 debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
             }

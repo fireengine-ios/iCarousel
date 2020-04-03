@@ -563,6 +563,7 @@ final class MediaItemOperationsService {
     
     func update(localMediaItems assets: [PHAsset], completion: @escaping VoidHandler) {
         //update relationships between LocalAlbums and MediaItems
+        let context = coreDataStack.newChildBackgroundContext
         
         //localMediaItemId: [albumLocalId]
         var appendRelationships = [String: [String]]()
@@ -579,6 +580,7 @@ final class MediaItemOperationsService {
             
             let appendAlbumsIds = albumAssetsIds.subtracting(albumIds)
             if !appendAlbumsIds.isEmpty {
+                mediaAlbumsService.createLocalAlbumsIfNeeded(localIds: Array(appendAlbumsIds), context: context)
                 let assetsArray = Array(appendAlbumsIds)
                 appendRelationships[asset.localIdentifier] = assetsArray
                 
@@ -598,26 +600,21 @@ final class MediaItemOperationsService {
             }
         }
         
-        let context = coreDataStack.newChildBackgroundContext
         let localIds = assets.map { $0.localIdentifier }
         mediaItems(by: localIds, context: context) { [weak self] mediaItems in
             guard let self = self else {
                 return
             }
             
-            if !deletedRelationships.isEmpty {
-                mediaItems.forEach { mediaItem in
-                    if let localId = mediaItem.localFileID,
-                        let albumAssetsIds = deletedRelationships[localId],
-                        var relatedAlbums = mediaItem.localAlbums?.array as? [MediaItemsLocalAlbum] {
-                        
-                        let deletedAlbums = relatedAlbums.filter { albumAssetsIds.contains($0.localId ?? "") }
-                        deletedAlbums.forEach {
-                            mediaItem.removeFromLocalAlbums($0)
-                            relatedAlbums.remove($0)
-                        }
-                        mediaItem.updateAvalability()
+            deletedRelationships.forEach { assetId, albumsIds in
+                if let mediaItem = mediaItems.first(where: { $0.localFileID == assetId }),
+                    let relatedAlbums = mediaItem.localAlbums?.array as? [MediaItemsLocalAlbum] {
+                    let detetedAlbums = relatedAlbums.filter { albumsIds.contains($0.localId ?? "") }
+                    detetedAlbums.forEach {
+                        mediaItem.removeFromLocalAlbums($0)
+                        $0.updateHasItems()
                     }
+                    mediaItem.updateAvalability()
                 }
             }
 
@@ -639,6 +636,7 @@ final class MediaItemOperationsService {
                             if let localId = album.localId, albumsIds.contains(localId) {
                                 album.addToItems(mediaItem)
                                 mediaItem.updateAvalability()
+                                album.updateHasItems()
                             }
                         }
                     }
@@ -800,7 +798,12 @@ final class MediaItemOperationsService {
                 
                 LocalMediaStorage.default.assetsCache.remove(identifiers: assetIdList)
                 ItemOperationManager.default.deleteItems(items: deletedItems)
-                mediaItems.forEach { context.delete($0) }
+                mediaItems.forEach { mediaItem in
+                    context.delete(mediaItem)
+                    if let localAlbums = mediaItem.localAlbums?.array as? [MediaItemsLocalAlbum] {
+                        localAlbums.forEach { $0.updateHasItems() }
+                    }
+                }
                 
                 self.coreDataStack.saveDataForContext(context: context, savedCallBack: { [weak self] in
                     ///Appearantly after recovery local ID may change, so temporary soloution is to check all files all over. and in the future chenge DataBase behavior heavily

@@ -113,6 +113,30 @@ extension MediaItemsAlbumOperationService {
         execute(request: fetchRequest, context: context, albumsCallBack: albumsCallBack)
     }
     
+    func createLocalAlbumsIfNeeded(localIds: [String], context: NSManagedObjectContext) {
+        privateQueue.sync { [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            let semaphore = DispatchSemaphore(value: 0)
+            self.getLocalAlbums(localIds: localIds, context: context) { mediaItemAlbums in
+                let mediaItemAlbumsIds = Set(mediaItemAlbums.compactMap { $0.localId })
+                let newAlbumIds = Set(localIds).subtracting(mediaItemAlbumsIds)
+
+                if !newAlbumIds.isEmpty {
+                    let fetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: Array(newAlbumIds), options: nil)
+                    fetchResult.enumerateObjects { asset, _, _ in
+                        let hasItems = asset.photosCount > 0 || asset.videosCount > 0
+                        _ = MediaItemsLocalAlbum(asset: asset, hasItems: hasItems, context: context)
+                    }
+                }
+                semaphore.signal()
+            }
+            semaphore.wait()
+        }
+    }
+    
     private func getAutoSyncAlbums(context: NSManagedObjectContext, albumsCallBack: @escaping AutoSyncAlbumsCallBack) {
         let fetchRequest: NSFetchRequest = MediaItemsLocalAlbum.fetchRequest()
         
@@ -122,6 +146,8 @@ extension MediaItemsAlbumOperationService {
         fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
         if CacheManager.shared.isCacheActualized {
             fetchRequest.predicate = NSPredicate(format: "\(MediaItemsLocalAlbum.PropertyNameKey.items).@count > 0")
+        } else {
+            fetchRequest.predicate = NSPredicate(format: "\(MediaItemsLocalAlbum.PropertyNameKey.hasItems) = true")
         }
         
         execute(request: fetchRequest, context: context) { mediaItemAlbums in
@@ -255,14 +281,14 @@ extension MediaItemsAlbumOperationService {
         inProcessLocalAlbums = true
         isAlbumsActualized = false
         
-        localMediaStorage.getLocalAlbums { [weak self] albums in
+        localMediaStorage.getLocalAlbums { [weak self] response in
             guard let self = self else {
                 return
             }
           
             let context = self.coreDataStack.newChildBackgroundContext
             
-            self.saveLocalAlbums(assets: albums, context: context, completion: { [weak self] in
+            self.saveLocalAlbums(assetsResponse: response, context: context, completion: { [weak self] in
                 guard let self = self else {
                     return
                 }
@@ -293,7 +319,7 @@ extension MediaItemsAlbumOperationService {
         }
     }
     
-    private func saveLocalAlbums(assets: [PHAssetCollection], context: NSManagedObjectContext, completion: @escaping VoidHandler) {
+    private func saveLocalAlbums(assetsResponse: LocalAssetsResponse, context: NSManagedObjectContext, completion: @escaping VoidHandler) {
         guard localMediaStorage.photoLibraryIsAvailible() else {
             completion()
             return
@@ -307,7 +333,7 @@ extension MediaItemsAlbumOperationService {
             //TODO: Notify observers of renaming albums
             var renamedAlbumsIds = [String]()
             
-            assets.forEach { asset in
+            assetsResponse.forEach { asset, hasItems in
                 if let album = mediaItemAlbums.first(where: { $0.localId == asset.localIdentifier }) {
                     if album.name != asset.localizedTitle {
                         album.name = asset.localizedTitle
@@ -315,15 +341,16 @@ extension MediaItemsAlbumOperationService {
                         
                         renamedAlbumsIds.append(asset.localIdentifier)
                     }
+                    album.hasItems = hasItems
                 } else {
                     //create new local albums
-                    _ = MediaItemsLocalAlbum(asset: asset, context: context)
+                    _ = MediaItemsLocalAlbum(asset: asset, hasItems: hasItems, context: context)
                 }
             }
             
             //delete albums
 
-            let localIdentifiers = assets.map { $0.localIdentifier }
+            let localIdentifiers = assetsResponse.map { $0.asset.localIdentifier }
             let deletedAlbums = mediaItemAlbums.filter { album -> Bool in
                 if let localId = album.localId, localIdentifiers.contains(localId) {
                     return false
@@ -344,7 +371,8 @@ extension MediaItemsAlbumOperationService {
         let context = coreDataStack.newChildBackgroundContext
         context.perform { [weak self] in
             assets.forEach {
-                _ = MediaItemsLocalAlbum(asset: $0, context: context)
+                let hasItems = $0.photosCount > 0 || $0.videosCount > 0
+                _ = MediaItemsLocalAlbum(asset: $0, hasItems: hasItems, context: context)
             }
             self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }

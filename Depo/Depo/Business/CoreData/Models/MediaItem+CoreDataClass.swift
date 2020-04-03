@@ -302,6 +302,7 @@ extension MediaItem {
         if let relatedAlbums = try? context.fetch(request) {
             relatedAlbums.forEach {
                 $0.addToItems(self)
+                $0.updateHasItems()
             }
         }
     }
