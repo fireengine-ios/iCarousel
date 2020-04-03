@@ -24,7 +24,6 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     }
     
     private lazy var storageVars: StorageVars = factory.resolve()
-    private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var dataSource = AutoSyncDataSource(tableView: tableView, delegate: self)
     
     var fromSettings: Bool = false
@@ -41,8 +40,8 @@ final class AutoSyncViewController: BaseViewController, NibInit {
             setNavigationTitle(title: TextConstants.autoSyncNavigationTitle)
         }
         
-        analyticsService.logScreen(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
-        analyticsService.trackDimentionsEveryClickGA(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
+        analyticsManager.logScreen(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
+        analyticsManager.trackDimentionsEveryClickGA(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
         output.viewIsReady()
     }
     
@@ -142,7 +141,7 @@ extension AutoSyncViewController: AutoSyncViewInput {
     }
 
     func checkPermissionsSuccessed() {
-        analyticsService.track(event: .turnOnAutosync)
+        analyticsManager.track(event: .turnOnAutosync)
         dataSource.checkPermissionsSuccessed()
     }
     
