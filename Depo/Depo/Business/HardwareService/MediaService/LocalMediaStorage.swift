@@ -18,6 +18,8 @@ typealias FileDataSorceData = (_ image: Data?) -> Void
 
 typealias AssetsList = (_ assets: [PHAsset] ) -> Void
 
+typealias LocalAssetsResponse = [(asset: PHAssetCollection, hasItems: Bool)]
+
 struct AssetInfo {
     var asset: PHAsset
     var isValid = true
@@ -310,7 +312,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
     }
     
-    func getLocalAlbums(completion: @escaping (_ albums: [PHAssetCollection]) -> Void) {
+    func getLocalAlbums(completion: @escaping (_ response: LocalAssetsResponse) -> Void) {
         askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] accessGranted, _ in
             guard let self = self, accessGranted else {
                 completion([])
@@ -324,18 +326,21 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 self?.fetchAlbumResult = albumsResult
                 self?.fetchSmartAlbumResult = smartAlbumsResult
                 
-                var albumsWithItems = [PHAssetCollection]()
+                var response = LocalAssetsResponse()
                 
                 [albumsResult, smartAlbumsResult].forEach {
                     $0.enumerateObjects { album, _, _ in
-                        if album.assetCollectionType == .smartAlbum || album.photosCount > 0 || album.videosCount > 0 {
+                        let hasItems = album.photosCount > 0 || album.videosCount > 0
+                        if hasItems {
                             self?.localAlbumsCache.append(albumId: album.localIdentifier, with: album.allAssets.map { $0.localIdentifier })
-                            albumsWithItems.append(album)
+                        }
+                        if hasItems || album.assetCollectionType == .smartAlbum {
+                            response.append((album, hasItems))
                         }
                     }
                 }
                 
-                completion(albumsWithItems)
+                completion(response)
             }
         }
     }
