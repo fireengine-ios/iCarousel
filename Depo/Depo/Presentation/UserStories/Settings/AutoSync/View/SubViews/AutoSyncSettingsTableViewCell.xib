@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -175,9 +175,9 @@
                 <outlet property="optionsStackView" destination="1MI-yf-IMK" id="4Tt-IV-ngo"/>
                 <outletCollection property="optionsViews" destination="VRc-qb-Pue" collectionClass="NSMutableArray" id="RP0-zY-yjY"/>
                 <outletCollection property="optionSeparators" destination="gR9-Hd-zOq" collectionClass="NSMutableArray" id="pFh-O5-s99"/>
-                <outletCollection property="optionsViews" destination="aDh-XY-ZsJ" collectionClass="NSMutableArray" id="XKI-JJ-Oqo"/>
-                <outletCollection property="optionsViews" destination="61z-Jn-NEA" collectionClass="NSMutableArray" id="gC0-hG-sxf"/>
                 <outletCollection property="optionSeparators" destination="btd-CZ-dx4" collectionClass="NSMutableArray" id="5SR-do-nfb"/>
+                <outletCollection property="optionsViews" destination="61z-Jn-NEA" collectionClass="NSMutableArray" id="Mnp-kd-4oQ"/>
+                <outletCollection property="optionsViews" destination="aDh-XY-ZsJ" collectionClass="NSMutableArray" id="Imf-rH-eUN"/>
             </connections>
             <point key="canvasLocation" x="77.599999999999994" y="15.292353823088456"/>
         </tableViewCell>

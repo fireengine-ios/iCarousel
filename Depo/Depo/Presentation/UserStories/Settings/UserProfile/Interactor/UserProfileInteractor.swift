@@ -27,7 +27,7 @@ class UserProfileInteractor: UserProfileInteractorInput {
     private var profileChanges: String?
     
     func viewIsReady() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PhotoEditScreen())
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ProfileEditScreen())
         analyticsManager.logScreen(screen: .profileEdit)
         analyticsManager.trackDimentionsEveryClickGA(screen: .profileEdit)
         
