@@ -66,7 +66,6 @@ final class SubscriptionOfferView: UIView, NibInit {
     
     @IBOutlet private weak var purchaseButton: RoundedInsetsButton! {
         willSet {
-            newValue.setTitle(TextConstants.upgrade, for: UIControl.State())
             newValue.setTitleColor(.white, for: UIControl.State())
             newValue.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
@@ -149,13 +148,10 @@ final class SubscriptionOfferView: UIView, NibInit {
         let fullRange = attributedString.mutableString.range(of: price)
         attributedString.addAttributes(currencyAttributes, range: fullRange)
         
-        let words = price.components(separatedBy: " ")
+        let words = price.components(separatedBy: "\n")
         if let priceWord = words[safe: 0] {
             let priceRange = attributedString.mutableString.range(of: priceWord)
             attributedString.addAttributes(priceAttributes, range: priceRange)
-            if fullRange.length > priceRange.length {
-                attributedString.mutableString.replaceCharacters(in: NSRange(location: priceRange.length, length: 1), with: "\n")
-            }
         }
         
         return attributedString
@@ -179,12 +175,9 @@ final class SubscriptionOfferView: UIView, NibInit {
             textColor = ColorConstants.cardBorderOrange
         }
         
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .left
         return NSAttributedString(string: text, attributes: [
             .font: font,
             .foregroundColor: textColor,
-            .paragraphStyle: paragraphStyle
         ])
     }
     
@@ -238,13 +231,15 @@ final class SubscriptionOfferView: UIView, NibInit {
             switch style {
             case .full:
                 color = ColorConstants.marineTwo
+                purchaseButton.setTitle(TextConstants.purchase, for: UIControl.State())
             case .short:
                 let titleColor = plan.isRecommended ? ColorConstants.whiteColor : ColorConstants.marineTwo
                 purchaseButton.setTitleColor(titleColor, for: UIControl.State())
-                let borderColor = isRecommended ? ColorConstants.cardBorderOrange : ColorConstants.darkTintGray
+                let borderColor = isRecommended ? ColorConstants.marineTwo : ColorConstants.darkTintGray
                 purchaseButton.layer.borderColor = borderColor.cgColor
                 purchaseButton.layer.borderWidth = 2
                 color = isRecommended ? ColorConstants.marineTwo : ColorConstants.whiteColor
+                purchaseButton.setTitle(TextConstants.upgrade, for: UIControl.State())
             }
             purchaseButton.setBackgroundColor(color, for: UIControl().state)
     

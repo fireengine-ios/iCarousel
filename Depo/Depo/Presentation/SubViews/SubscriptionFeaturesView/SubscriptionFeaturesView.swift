@@ -62,7 +62,7 @@ final class SubscriptionFeaturesView: UIView {
     
     func configure(features: Features) {
         self.features = features
-        prepateInitialState()
+        prepareInitialState()
     }
     
     private func addSubviews() {
@@ -91,7 +91,7 @@ final class SubscriptionFeaturesView: UIView {
         dividerLineView.trailingAnchor.constraint(equalTo: self.showButton.trailingAnchor).activate()
     }
     
-    private func prepateInitialState() {
+    private func prepareInitialState() {
         switch features {
         case .premiumFeatures, .middleFeatures, .storageOnly:
             break
@@ -102,7 +102,7 @@ final class SubscriptionFeaturesView: UIView {
         case .recommended(features: let features):
             removeCollapseButton(offsetFromBottom: -8)
             addFeatures([TextConstants.featureStandardFeatures])
-            addFeatures(features)
+            addFeatures(features.map({ $0.description }), isPremium: true)
         }
     }
     
@@ -110,17 +110,6 @@ final class SubscriptionFeaturesView: UIView {
         showButton.removeFromSuperview()
         dividerLineView.removeFromSuperview()
         stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: constant).activate()
-    }
-    
-    private func addFeatures(_ features: [AuthorityType]) {
-        for feature in features {
-            let label = UILabel()
-            label.text = feature.description
-            label.font = UIFont.TurkcellSaturaBolFont(size: 16)
-            label.textColor = ColorConstants.cardBorderOrange
-            label.textAlignment = .center
-            stackView.addArrangedSubview(label)
-        }
     }
     
     private func addFeatures(_ stringFeatures: [String], isPremium: Bool = true) {
@@ -153,7 +142,7 @@ final class SubscriptionFeaturesView: UIView {
                 
             case .premiumFeatures(let features):
                 addFeatures([TextConstants.featureStandardFeatures])
-                addFeatures(features)
+                addFeatures(features.map({ $0.description }), isPremium: true)
             case .middleFeatures:
                 let redactedFeatures = [TextConstants.featureHighQualityPicture,
                                         TextConstants.featureImageRecognition,

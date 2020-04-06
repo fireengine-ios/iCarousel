@@ -43,16 +43,7 @@ final class SubscriptionPlan {
         
         static private func getMiddleAuthority(authorities: [PackagePackAuthoritiesResponse]?) -> Bool? {
             guard let authorities = authorities else { return false }
-            var isMiddleUser: Bool?
-            authorities
-                .compactMap { $0.authorityType }
-                .forEach {
-                    switch $0 {
-                    case AuthorityType.middleUser: isMiddleUser = true
-                    default: break
-                    }
-            }
-            return isMiddleUser
+            return authorities.compactMap({ $0.authorityType }).contains(.middleUser)
         }
     }
     
