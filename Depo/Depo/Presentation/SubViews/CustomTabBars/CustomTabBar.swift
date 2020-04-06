@@ -39,9 +39,9 @@ enum TabBarItem: CaseIterable {
         case .plus:
             return UIImage(named: "")
         case .contacts:
-            return UIImage(named: "outlineMusic")
+            return UIImage(named: "outlineContacts")
         case .allFiles:
-            return UIImage(named: "outlineDoc")
+            return UIImage(named: "outlineDocs")
         }
     }
     
