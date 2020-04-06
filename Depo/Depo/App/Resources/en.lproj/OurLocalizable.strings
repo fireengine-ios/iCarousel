@@ -192,7 +192,11 @@
 "Need to select folder" = "Need to select folder";
 "Back" = "Back";
 "Fail while uploading from LifeBox" = "Upload from lifebox failed";
-
+"tabbar_item_home_label" = "Home";
+"tabbar_item_gallery_label" = "Gallery";
+"tabbar_item_contacts_label" = "Contacts";
+"tabbar_item_all_files_label" = "All Files";
+ 
 /*I don't understand*/
 "Sorry, but photos not selected" = "Photos are not selected";
 "Upload from lifebox" = "Upload from lifebox";
@@ -1468,16 +1472,25 @@
 "mobile_payment_open_popup_continue_button" = "Continue";
 "we_recommend" = "We recommend";
 "show_more" = "Show more";
+"see_features" = "See features";
 "show_less" = "Show less";
 "face_recognition_package_description" = "Face Recognition";
 "delete_dublicate_package_description" = "Delete Dublicate";
-"premium_user_package_description" = "Premium user";
+"premium_user_package_description" = "Unlimited Photopick";
+"middle_user_package_description" = "15 Photopick";
 "original_сopy_package_description" = "Original сopy";
-"bundle_package_addon_type" = "with +Premium";
+"bundle_package_addon_type" = "Storage + Premium";
 "storage_only_package_addon_type" = "Storage only";
+"features_only_package_addon_type" = "Premium Features";
+"features_middle_only_package_addon_type" = "Standard+ Features";
 "feature_package_name" = "Premium";
+"middle_feature_package_name" = "Standard+";
+"feature_high_quality_picture" = "High quality picture";
+"feature_image_recognition" = "No Face/Image recognition";
+"feature_photopick" = "3 Photopick";
+"feature_delete_duplicate_contacts" = "Delete 5 duplicate contacts";
+"feature_standard_features" = "Standard Features";
 
-"bundle_package_addon_type" = "with +Premium";
 "storage_only_package_addon_type" = "Storage only";
 "original_сopy_package_description" = "Original сopy";
 "become_premium_navbar_title" = "We Recommend";
@@ -1512,7 +1525,6 @@
 "storage_usage_information" = "Usage";
 "auto_sync_album_items" = "Auto-Sync Items";
 "my_packages" = "My Packages";
-"feature_package_name" = "Premium";
 "contact_sync_confirm_premium_popup_title" = "Confirmation";
 "contact_sync_confirm_premium_popup_text" = "contact_sync_confirm_premium_popup_text";
 "my_packages_description" = "Mevcut aboneliklerini aşağıdaki alanda göremiyorsan, aboneliklerini yenilemek için butona basabilirsin.";

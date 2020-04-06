@@ -308,6 +308,12 @@ extension NetmeraEvents.Screens {
         }
     }
     
+    final class LiveCollectRememberScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "mms"
+        }
+    }
+    
     final class PhotoEditScreen: NetmeraScreenEventTemplate {
         override var key: String {
             return "wiu"

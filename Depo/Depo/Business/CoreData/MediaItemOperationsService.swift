@@ -580,7 +580,6 @@ final class MediaItemOperationsService {
             
             let appendAlbumsIds = albumAssetsIds.subtracting(albumIds)
             if !appendAlbumsIds.isEmpty {
-                mediaAlbumsService.createLocalAlbumsIfNeeded(localIds: Array(appendAlbumsIds), context: context)
                 let assetsArray = Array(appendAlbumsIds)
                 appendRelationships[asset.localIdentifier] = assetsArray
                 
