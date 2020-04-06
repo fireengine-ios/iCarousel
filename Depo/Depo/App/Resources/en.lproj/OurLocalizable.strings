@@ -192,7 +192,11 @@
 "Need to select folder" = "Need to select folder";
 "Back" = "Back";
 "Fail while uploading from LifeBox" = "Upload from lifebox failed";
-
+"tabbar_item_home_label" = "Home";
+"tabbar_item_gallery_label" = "Gallery";
+"tabbar_item_contacts_label" = "Contacts";
+"tabbar_item_all_files_label" = "All Files";
+ 
 /*I don't understand*/
 "Sorry, but photos not selected" = "Photos are not selected";
 "Upload from lifebox" = "Upload from lifebox";

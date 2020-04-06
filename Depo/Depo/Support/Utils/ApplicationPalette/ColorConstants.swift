@@ -25,7 +25,7 @@ struct ColorConstants {
     static let fileGreedCellColor = UIColor(red: 247 / 255, green: 247 / 255, blue: 247 / 255, alpha: 1)
     static let darkBlueColor = UIColor(red: 5 / 255, green: 45 / 255, blue: 67 / 255, alpha: 1)
     static let searchBarColor = UIColor(red: 3 / 255, green: 3 / 255, blue: 3 / 255, alpha: 0.09)
-    static let searchShadowColor = UIColor(red: 29 / 255, green: 29 / 255, blue: 29 / 255, alpha: 0.49)
+    static let searchShadowColor = UIColor(red: 29 / 255, green: 29 / 255, blue: 29 / 255, alpha: 1)
     static let darkText = UIColor(red: 77 / 255, green: 77 / 255, blue: 77 / 255, alpha: 1)
     static let lightText = UIColor(red: 127 / 255, green: 127 / 255, blue: 127 / 255, alpha: 1)
     static let placeholderGrayColor = UIColor(red: 127 / 255, green: 127 / 255, blue: 127 / 255, alpha: 0.5)

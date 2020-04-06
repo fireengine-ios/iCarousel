@@ -659,6 +659,11 @@ struct TextConstants {
     static let selectFolderTitle = NSLocalizedString("Choose a destination folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - TabBar tab lables
+    static let tabBarItemHomeLabel = NSLocalizedString("tabbar_item_home_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemGalleryLabel = NSLocalizedString("tabbar_item_gallery_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemContactsLabel = NSLocalizedString("tabbar_item_contacts_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemAllFilesLabel = NSLocalizedString("tabbar_item_all_files_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let music = NSLocalizedString("Music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let documents = NSLocalizedString("Documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarDeleteLabel = NSLocalizedString("Delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
