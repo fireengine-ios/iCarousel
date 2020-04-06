@@ -39,8 +39,9 @@ class SubPlussButtonView: UIView {
     }
     
     func setupLabel(withText text: String) {
-        self.adjustedLabel.text = text
-        self.adjustedLabel.textColor = ColorConstants.grayTabBarButtonsColor
+        adjustedLabel.text = text
+        adjustedLabel.textColor = .white
+        adjustedLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
         
         button.accessibilityLabel = text
         button.accessibilityTraits = UIAccessibilityTraitButton

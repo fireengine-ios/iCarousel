@@ -659,6 +659,11 @@ struct TextConstants {
     static let selectFolderTitle = NSLocalizedString("Choose a destination folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - TabBar tab lables
+    static let tabBarItemHomeLabel = NSLocalizedString("tabbar_item_home_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemGalleryLabel = NSLocalizedString("tabbar_item_gallery_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemContactsLabel = NSLocalizedString("tabbar_item_contacts_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let tabBarItemAllFilesLabel = NSLocalizedString("tabbar_item_all_files_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let music = NSLocalizedString("Music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let documents = NSLocalizedString("Documents", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let tabBarDeleteLabel = NSLocalizedString("Delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1738,14 +1743,24 @@ struct TextConstants {
     
     static let weRecommend = NSLocalizedString("we_recommend", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let showMore = NSLocalizedString("show_more", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let seeFeatures = NSLocalizedString("see_features", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let showLess = NSLocalizedString("show_less", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceRecognitionPackageDescription = NSLocalizedString("face_recognition_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteDublicatePackageDescription = NSLocalizedString("delete_dublicate_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let premiumUserPackageDescription = NSLocalizedString("premium_user_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let middleUserPackageDescription = NSLocalizedString("middle_user_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let originalCopyPackageDescription = NSLocalizedString("original_сopy_package_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let bundlePackageAddonType = NSLocalizedString("bundle_package_addon_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featuresOnlyAddonType = NSLocalizedString("features_only_package_addon_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let middleFeaturesOnlyAddonType = NSLocalizedString("features_middle_only_package_addon_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureHighQualityPicture = NSLocalizedString("feature_high_quality_picture", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureImageRecognition = NSLocalizedString("feature_image_recognition", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featurePhotopick = NSLocalizedString("feature_photopick", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureDeleteDuplicationContacts = NSLocalizedString("feature_delete_duplicate_contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureStandardFeatures = NSLocalizedString("feature_standard_features", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let storageOnlyPackageAddonType = NSLocalizedString("storage_only_package_addon_type", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let featurePackageName = NSLocalizedString("feature_package_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let middleFeaturePackageName = NSLocalizedString("middle_feature_package_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let becomePremiumNavBarTitle = NSLocalizedString("become_premium_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let becomePremiumHeaderDefaultTitle = NSLocalizedString("become_premium_header_default_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

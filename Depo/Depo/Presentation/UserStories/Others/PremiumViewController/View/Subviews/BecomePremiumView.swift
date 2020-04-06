@@ -24,7 +24,7 @@ final class BecomePremiumView: UIView, NibInit {
     @IBOutlet private weak var contentView: UIStackView! {
         willSet {
             newValue.alignment = .center
-            newValue.spacing = 24
+            newValue.spacing = 12
         }
     }
     
@@ -47,6 +47,8 @@ final class BecomePremiumView: UIView, NibInit {
             newValue.lineBreakMode = .byWordWrapping
         }
     }
+    
+    @IBOutlet weak var headerStackView: UIStackView!
     
     private lazy var descriptionStackView: UIStackView = {
         let newValue = UIStackView()
@@ -155,7 +157,7 @@ final class BecomePremiumView: UIView, NibInit {
             let label = UILabel()
             label.text = feature.description
             label.font = UIFont.TurkcellSaturaMedFont(size: 18)
-            label.textColor = ColorConstants.marineTwo
+            label.textColor = ColorConstants.cardBorderOrange
             label.textAlignment = .center
             label.numberOfLines = 0
             label.lineBreakMode = .byWordWrapping
@@ -163,7 +165,7 @@ final class BecomePremiumView: UIView, NibInit {
         }
         
         descriptionStackView.widthAnchor.constraint(equalToConstant: 200).activate()
-        contentView.addArrangedSubview(descriptionStackView)
+        headerStackView.addArrangedSubview(descriptionStackView)
     }
     
     //MARK: - Actions

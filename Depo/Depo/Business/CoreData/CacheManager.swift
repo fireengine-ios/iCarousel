@@ -46,6 +46,7 @@ final class CacheManager {
     }
     
     func actualizeCache() {
+        debugLog("CacheManager actualizeCache")
         guard coreDataStack.isReady else {
             scheduleActualization()
             return

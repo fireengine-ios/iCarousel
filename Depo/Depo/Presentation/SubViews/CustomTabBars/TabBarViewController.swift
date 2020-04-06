@@ -190,13 +190,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     private func setupTabBarItems() {
-        let items = [("outlineHome", "", TextConstants.accessibilityHome),
-                     ("outlinePhotosVideos", "", TextConstants.accessibilityPhotosVideos),
-                     ("", "", ""),
-                     ("outlineContacts", "", TextConstants.periodicContactsSync),
-                     ("outlineDocs", "", TextConstants.homeButtonAllFiles)]
-        
-        tabBar.setupItems(withImageToTitleNames: items)
+        tabBar.setupItems()
     }
     
     private func setupObserving() {
@@ -457,8 +451,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     private func setupCurtainView() {
         curtainView.layer.masksToBounds = true
         
-        curtainView.backgroundColor = ColorConstants.whiteColor
-        curtainView.alpha = 0.88
+        curtainView.backgroundColor = ColorConstants.searchShadowColor.withAlphaComponent(0.85)
         showCurtainView(show: false)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(TabBarViewController.closeCurtainView))
@@ -479,9 +472,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         }
         
         if show {
-            curtainView.frame = currentViewController.view.bounds
-            currentViewController.view.addSubview(curtainView)
-            currentViewController.view.bringSubview(toFront: curtainView)
+            let container = currentViewController.navigationController ?? currentViewController
+            curtainView.frame = container.view.bounds
+            container.view.addSubview(curtainView)
+            container.view.bringSubview(toFront: curtainView)
         } else {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationUpdateThreeDots), object: nil)
             curtainView.removeFromSuperview()

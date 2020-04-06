@@ -61,9 +61,12 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
             }
         } else if type == .changeCoverPhoto {
             outputView()?.hideSpinner()
-
-            if let view = view as? FaceImagePhotosViewController, let item = response as? Item {
-                view.setHeaderImage(with: item.patchToPreview)
+            
+            if let view = view as? FaceImagePhotosViewController {
+                view.reloadSlider()
+                if let item = response as? Item {
+                    view.setHeaderImage(with: item.patchToPreview)
+                }
             }
         }
     }
@@ -358,6 +361,9 @@ extension FaceImagePhotosPresenter: FaceImagePhotosDataSourceDelegate {
         default:
             break 
         }
-        
+    }
+    
+    func didFinishAlbumOperation() {
+        reloadData()
     }
 }

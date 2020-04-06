@@ -20,4 +20,9 @@ class IntroduceInteractor: IntroduceInteractorInput {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.WelcomePage(pageNum: pageNum))
         analyticsManager.logScreen(screen: .welcomePage(pageNum))
     }
+    
+    func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.LiveCollectRememberScreen())
+        analyticsManager.logScreen(screen: .liveCollectRemember)
+    }
 }
