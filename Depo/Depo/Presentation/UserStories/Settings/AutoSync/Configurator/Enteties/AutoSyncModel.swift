@@ -140,7 +140,7 @@ final class AutoSyncAlbumModel: AutoSyncModel {
     
     override func equalTo(rhs: AutoSyncModel) -> Bool {
         if let rhs = rhs as? AutoSyncAlbumModel {
-            return album.name == rhs.album.name
+            return album.uuid == rhs.album.uuid
         }
         return super.equalTo(rhs: rhs)
     }
