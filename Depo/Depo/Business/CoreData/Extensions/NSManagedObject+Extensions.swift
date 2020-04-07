@@ -37,10 +37,6 @@ extension NSManagedObject {
     }
     
     class func entityDescription(context: NSManagedObjectContext) -> NSEntityDescription {
-        if #available(iOS 10.0, *) {
-            return self.entity()
-        } else {
-            return NSEntityDescription.entity(forEntityName: String(describing: self), in: context)!
-        }
+        return self.entity()
     }
 }
