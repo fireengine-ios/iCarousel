@@ -162,15 +162,13 @@ extension MediaItemsAlbumOperationService {
 extension MediaItemsAlbumOperationService {
     
     func createRemoteAlbums(albums: [AlbumItem], completion: @escaping VoidHandler) {
-        let group = DispatchGroup()
-        albums.forEach {
-            group.enter()
-            createNewRemoteAlbum($0) {
-                group.leave()
+        let context = coreDataStack.newChildBackgroundContext
+        context.perform { [weak self] in
+            albums.forEach { album in
+                _ = MediaItemsAlbum(uuid: album.uuid, name: album.name, context: context)
             }
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
-        
-        group.notify(queue: privateQueue, execute: completion)
     }
     
     func createNewRemoteAlbum(_ albumItem: AlbumItem, completion: @escaping VoidHandler) {
