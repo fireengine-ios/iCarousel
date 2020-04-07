@@ -39,8 +39,6 @@ extension CoreDataStack {
     }
 }
 
-
-@available(iOS 10, *)
 final class CoreDataStack_ios10: CoreDataStack {
     
     static let shared: CoreDataStack = CoreDataStack_ios10()
