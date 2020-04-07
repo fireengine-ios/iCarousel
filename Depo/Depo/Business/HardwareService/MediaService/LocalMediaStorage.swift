@@ -180,26 +180,17 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func askPermissionForPhotoFramework(redirectToSettings: Bool, completion: @escaping PhotoLibraryGranted) {
-        isWaitingForPhotoPermission = true
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
         case .authorized:
             photoLibrary.register(self)
-            if (Device.operationSystemVersionLessThen(10)) {
-                PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
-                    let isAuthorized = authStatus == .authorized
-                    self?.isWaitingForPhotoPermission = false
-                    completion(isAuthorized, authStatus)
-                })
-            } else {
-                isWaitingForPhotoPermission = false
-                completion(true, status)
-            }
+            completion(true, status)
             AnalyticsPermissionNetmeraEvent.sendPhotoPermissionNetmeraEvents(true)
         case .notDetermined, .restricted:
+            isWaitingForPhotoPermission = true
             passcodeStorage.systemCallOnScreen = true
             PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
-                guard let `self` = self else {
+                guard let self = self else {
                     return
                 }
                 
@@ -213,7 +204,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 completion(isAuthorized, authStatus)
             })
         case .denied:
-            isWaitingForPhotoPermission = false
             completion(false, status)
             if redirectToSettings {
                 DispatchQueue.main.async {

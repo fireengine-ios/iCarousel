@@ -290,7 +290,6 @@ extension PackagesViewController: PromoViewDelegate {
 // MARK: - UITextViewDelegate
 extension PackagesViewController: UITextViewDelegate {
     
-    @available(iOS 10.0, *)
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         if URL.absoluteString == TextConstants.NotLocalized.termsOfUseLink {
             DispatchQueue.toMain {
