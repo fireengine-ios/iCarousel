@@ -537,8 +537,11 @@ extension WrapItemFileService {
     
     func putBackAlbums(_ albums: [AlbumItem], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
-            ItemOperationManager.default.putBackFromTrashAlbums(albums)
-            success?()
+            MediaItemsAlbumOperationService.shared.createRemoteAlbums(albums: albums) {
+                ItemOperationManager.default.putBackFromTrashAlbums(albums)
+                success?()
+            }
+            
         }
         
         recoverAlbums(albums, success: wrappedSuccessOperation, fail: fail)
