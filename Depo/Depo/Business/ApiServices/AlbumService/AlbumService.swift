@@ -334,7 +334,7 @@ class PhotosAlbumService: BaseRequestService {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { [weak self] _  in
             debugLog("PhotosAlbumService renameAlbum success")
 
-            self?.mediaAlbumService.remoteAlbumRenamed(parameters.albumUUID) {
+            self?.mediaAlbumService.remoteAlbumRenamed(parameters.albumUUID, newName: parameters.newName) {
                 success?()
             }
             

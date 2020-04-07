@@ -200,14 +200,14 @@ extension MediaItemsAlbumOperationService {
     }
 
     
-    func remoteAlbumRenamed(_ albumUuid: String, completion: @escaping VoidHandler) {
+    func remoteAlbumRenamed(_ albumUuid: String, newName: String, completion: @escaping VoidHandler) {
         let context = coreDataStack.newChildBackgroundContext
         
         getRemoteAlbums(uuids: [albumUuid], context: context) { [weak self] remoteAlbums in
             guard let self = self, let album = remoteAlbums.first else {
                 return
             }
-            
+            album.name = newName
             album.updateRelatedLocalAlbum(context: context)
             
             //TODO: Notify observers
