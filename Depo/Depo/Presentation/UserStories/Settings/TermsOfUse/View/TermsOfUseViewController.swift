@@ -23,9 +23,7 @@ final class TermsOfUseViewController: BaseViewController {
         
         let webConfig = WKWebViewConfiguration()
         webConfig.userContentController = contentController
-        if #available(iOS 10.0, *) {
-            webConfig.dataDetectorTypes = [.phoneNumber, .link]
-        }
+        webConfig.dataDetectorTypes = [.phoneNumber, .link]
         
         let web = WKWebView(frame: .zero, configuration: webConfig)
         

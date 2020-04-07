@@ -456,13 +456,13 @@ class AuthenticationService: BaseRequestService {
             CardsManager.default.stopAllOperations()
             CardsManager.default.clear()
             LocalAlbumsCache.shared.clear()
-            MediaItemsAlbumOperationService.shared.resetLocalAlbums()
             
             self.player.stop()
             
             self.storageVars.currentUserID = nil
             
             CacheManager.shared.logout {
+                MediaItemsAlbumOperationService.shared.resetLocalAlbums()
                 WormholePoster().didLogout()
                 success?()
             }
