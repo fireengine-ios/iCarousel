@@ -9,8 +9,6 @@
 import Foundation
 
 protocol LeavePremiumInteractorOutput: class {
-    func didLoadActiveSubscriptions(_ offers: [SubscriptionPlanBaseResponse])
-    func didLoadInfoFromApple()
     
     func didErrorMessage(with text: String)
 }
