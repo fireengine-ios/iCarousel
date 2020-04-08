@@ -223,6 +223,11 @@ class SyncServiceManager {
         }
     }
     
+    private func restart() {
+        stop(photo: true, video: true)
+        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+    }
+    
     private var isSubscribeForNotifications = false
 }
 
@@ -299,7 +304,7 @@ extension SyncServiceManager {
     }
     
     @objc private func onLocalAlbumStatusDidChange() {
-        checkReachabilityAndSettings(reachabilityChanged: false, newItems: true)
+        restart()
     }
     
     @objc private func onAutoSyncStatusDidChange() {
