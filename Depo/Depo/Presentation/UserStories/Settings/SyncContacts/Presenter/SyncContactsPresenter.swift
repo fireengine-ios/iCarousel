@@ -101,13 +101,12 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
         contactSyncResponse = response
         /// Delay is needed due to instant progress reset on completion
         if !view.isFullCircle {
-            DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {
-                self.view.success(response: response, forOperation: operation)
+            DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) { [weak self] in
+                self?.view.success(response: response, forOperation: operation)
             }
         } else {
             view.success(response: response, forOperation: operation)
         }
-       
     }
     
     func analyzeSuccess(response: [ContactSync.AnalyzedContact]) {
