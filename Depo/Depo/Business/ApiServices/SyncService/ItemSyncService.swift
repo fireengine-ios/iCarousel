@@ -195,18 +195,13 @@ class ItemSyncServiceImpl: ItemSyncService {
                 return
             }
             
-            ///cancel invalid operations
-            let validItemsMd5 = items.map { $0.md5 }
-            let itemsToStop = self.lastSyncedMD5s.filter { !validItemsMd5.contains($0) }
-            UploadService.default.cancelOperations(md5s: itemsToStop)
-            
             let newUnsyncedLocalItems = items.filter({ !self.lastSyncedMD5s.contains($0.md5) })
-            
-            self.lastSyncedMD5s = validItemsMd5
             
             guard !newUnsyncedLocalItems.isEmpty else {
                 return
             }
+            
+            self.lastSyncedMD5s.append(contentsOf: newUnsyncedLocalItems.map { $0.md5 })
             
             self.upload(items: newUnsyncedLocalItems)
         }
