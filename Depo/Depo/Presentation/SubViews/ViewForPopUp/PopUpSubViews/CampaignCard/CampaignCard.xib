@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -14,7 +14,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB" customClass="CampaignCard" customModule="lifebox" customModuleProvider="target">
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB" customClass="CampaignCard" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="657" height="420"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -61,21 +61,35 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tsa-hG-kok" customClass="LoadingImageView" customModule="lifebox" customModuleProvider="target">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tsa-hG-kok" customClass="LoadingImageView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                     <rect key="frame" x="16" y="37.5" width="625" height="278"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="Tsa-hG-kok" secondAttribute="height" multiplier="9:4" id="oaA-b4-MVN"/>
                                     </constraints>
                                 </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yBV-40-WML">
+                                    <rect key="frame" x="16" y="38" width="625" height="278"/>
+                                    <state key="normal" image="PlayVideoCardIcon"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="exclusiveTap" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="playVideo:" destination="iN0-l3-epB" eventType="touchUpInside" id="Aoi-l2-FGL"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
                                 <constraint firstItem="dkX-6n-aTJ" firstAttribute="top" secondItem="qvW-z1-DFu" secondAttribute="top" constant="7" id="EK2-G5-CJu"/>
                                 <constraint firstItem="Tsa-hG-kok" firstAttribute="leading" secondItem="qvW-z1-DFu" secondAttribute="leading" constant="16" id="NTo-hU-bUJ"/>
+                                <constraint firstItem="yBV-40-WML" firstAttribute="bottom" secondItem="Tsa-hG-kok" secondAttribute="bottom" id="Oom-If-VIQ"/>
                                 <constraint firstAttribute="trailing" secondItem="Tsa-hG-kok" secondAttribute="trailing" constant="16" id="POi-7Y-xhR"/>
+                                <constraint firstItem="yBV-40-WML" firstAttribute="top" secondItem="Tsa-hG-kok" secondAttribute="top" id="VWX-2n-61m"/>
                                 <constraint firstAttribute="bottom" secondItem="Tsa-hG-kok" secondAttribute="bottom" constant="10" id="Wef-m5-w1H"/>
+                                <constraint firstItem="yBV-40-WML" firstAttribute="trailing" secondItem="Tsa-hG-kok" secondAttribute="trailing" id="XJe-pS-Q7q"/>
                                 <constraint firstItem="dkX-6n-aTJ" firstAttribute="leading" secondItem="qvW-z1-DFu" secondAttribute="leading" constant="16" id="ZKM-Gn-Ooh"/>
                                 <constraint firstAttribute="trailing" secondItem="dkX-6n-aTJ" secondAttribute="trailing" id="w6l-iv-vwu"/>
+                                <constraint firstItem="yBV-40-WML" firstAttribute="leading" secondItem="Tsa-hG-kok" secondAttribute="leading" id="yMa-bs-97X"/>
                                 <constraint firstItem="Tsa-hG-kok" firstAttribute="top" secondItem="dkX-6n-aTJ" secondAttribute="bottom" constant="10" id="zow-oy-op3"/>
                             </constraints>
                         </view>
@@ -138,15 +152,17 @@
                 <outlet property="contentStackView" destination="WBy-NV-x0u" id="Oq5-52-Pbg"/>
                 <outlet property="descriptionLabel" destination="dkX-6n-aTJ" id="LfW-zB-52J"/>
                 <outlet property="imageView" destination="Tsa-hG-kok" id="Wyy-xs-EvK"/>
+                <outlet property="playVideoButton" destination="yBV-40-WML" id="JLa-yT-0oW"/>
                 <outlet property="titleLabel" destination="yuD-Ix-VNf" id="tVh-VJ-BPz"/>
             </connections>
             <point key="canvasLocation" x="271.73913043478262" y="-123.88392857142857"/>
         </view>
-        <customObject id="1sK-iv-LjP" customClass="CampaignCardDesigner" customModule="lifebox" customModuleProvider="target">
+        <customObject id="1sK-iv-LjP" customClass="CampaignCardDesigner" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
                 <outlet property="analyzeDetailButton" destination="lTj-Pw-sq4" id="8uQ-w5-fLU"/>
                 <outlet property="campaignDetailButton" destination="uqY-lp-Hif" id="xVN-UI-cil"/>
                 <outlet property="descriptionLabel" destination="dkX-6n-aTJ" id="6ES-o7-AjJ"/>
+                <outlet property="playVideoButton" destination="yBV-40-WML" id="flb-mj-oMZ"/>
                 <outlet property="separatorView" destination="NvM-su-MYh" id="hvB-2L-fBg"/>
                 <outlet property="titleLabel" destination="yuD-Ix-VNf" id="gkD-0X-kga"/>
             </connections>
@@ -154,5 +170,6 @@
     </objects>
     <resources>
         <image name="CloseCardIcon" width="14" height="14"/>
+        <image name="PlayVideoCardIcon" width="30" height="30"/>
     </resources>
 </document>

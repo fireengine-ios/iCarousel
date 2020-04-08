@@ -1002,6 +1002,18 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
+    init(videoURL: URL) {
+        patchToPreview = .remoteUrl(videoURL)
+        
+        fileSize = 0
+        favorites = false
+        status = .unknown
+        tmpDownloadUrl = nil
+        
+        let creationDate = Date()
+        super.init(uuid: nil, name: UUID().uuidString, creationDate: creationDate, lastModifiDate: creationDate, fileType: .video, syncStatus: .notSynced, isLocalItem: false)
+    }
+    
     init(mediaItem: MediaItem, asset: PHAsset? = nil) {
         coreDataObjectId = mediaItem.objectID
         fileSize = mediaItem.fileSizeValue
