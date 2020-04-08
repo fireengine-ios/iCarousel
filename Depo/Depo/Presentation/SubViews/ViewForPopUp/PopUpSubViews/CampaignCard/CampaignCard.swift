@@ -172,7 +172,7 @@ extension CampaignCard {
     }
     
     @IBAction private func playVideo(_ sender: Any) {
-        openVideoDetailPage()
+        openVideoController()
     }
 }
 
@@ -201,15 +201,17 @@ extension CampaignCard {
         router.pushViewController(viewController: controller)
     }
     
-    private func openVideoDetailPage() {
+    private func openVideoController() {
         guard let videoUrl = videoUrl else {
             return
         }
-       
-        let video = WrapData(videoURL: videoUrl)
-        let detailModule = router.filesDetailModule(fileObject: video, items: [video], status: .active, canLoadMoreItems: false, moduleOutput: nil)
-        let nController = NavigationController(rootViewController: detailModule.controller)
-        router.presentViewController(controller: nController)
+        
+        let player = AVPlayer(url: videoUrl)
+        let playerController = FixedAVPlayerViewController()
+        playerController.player = player
+        router.presentViewController(controller: playerController) {
+            player.play()
+        }
     }
 }
 
