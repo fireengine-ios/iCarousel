@@ -30,41 +30,6 @@ final class LeavePremiumInteractor {
 
 // MARK: LeavePremiumInteractorInput
 extension LeavePremiumInteractor: LeavePremiumInteractorInput {
-    func getActiveSubscription() {
-        subscriptionsService.activeSubscriptions(success: { [weak self] response in
-            guard let subscriptionsResponse = response as? ActiveSubscriptionResponse else {
-                let error = CustomErrors.serverError("An error occured while getting active subscription")
-                DispatchQueue.toMain {
-                    self?.output.didErrorMessage(with: error.localizedDescription)
-                }
-                return
-            }
-            SingletonStorage.shared.activeUserSubscription = subscriptionsResponse
-            DispatchQueue.toMain {
-                self?.output.didLoadActiveSubscriptions(subscriptionsResponse.list)
-            }
-        }) { [weak self] error in
-            DispatchQueue.toMain {
-                self?.output.didErrorMessage(with: error.description)
-            }
-        }
-    }
-    
-    func getPrice(for offer: SubscriptionPlanBaseResponse, accountType: AccountType) -> String {
-        return packageService.getOfferPrice(for: offer, accountType: accountType)
-    }
-    
-    func getAppleInfo(for offer: SubscriptionPlanBaseResponse) {
-        packageService.getInfoForAppleProducts(offers: [offer], isActivePurchases: true, success: { [weak self] in
-            DispatchQueue.toMain {
-                self?.output.didLoadInfoFromApple()
-            }
-        }, fail: { [weak self] error in
-            DispatchQueue.toMain {
-                self?.output.didErrorMessage(with: error.description)
-            }
-        })
-    }
     
     func getAccountType(with accountType: String, offers: [Any]) -> AccountType? {
         return packageService.getAccountType(for: accountType, offers: offers)

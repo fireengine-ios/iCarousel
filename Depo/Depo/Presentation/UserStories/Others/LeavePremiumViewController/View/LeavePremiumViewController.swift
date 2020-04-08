@@ -36,7 +36,7 @@ final class LeavePremiumViewController: BaseViewController {
     private func setup() {
         setTitle(withString: output.title)
         
-        leavePremiumView.configure(with: "", type: output.controllerType, hideButton: true)
+        leavePremiumView.configure(with: output.controllerType, hideButton: true)
     }
     
 }
@@ -44,6 +44,6 @@ final class LeavePremiumViewController: BaseViewController {
 // MARK: - LeavePremiumViewInput
 extension LeavePremiumViewController: LeavePremiumViewInput {
     func display(price: String, hideLeaveButton: Bool) {
-        leavePremiumView.configure(with: price, type: output.controllerType, hideButton: hideLeaveButton)
+        leavePremiumView.configure(with: output.controllerType, hideButton: hideLeaveButton)
     }
 }

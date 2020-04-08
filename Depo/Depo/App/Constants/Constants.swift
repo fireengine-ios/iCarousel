@@ -1780,4 +1780,8 @@ struct TextConstants {
     static let contactSyncConfirmPremiumPopupText = NSLocalizedString("contact_sync_confirm_premium_popup_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let myPackagesDescription = NSLocalizedString("my_packages_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let featureStorageOnlyAdditional1 = NSLocalizedString("feature_storage_only_additional_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let featureStorageOnlyAdditional2 = NSLocalizedString("feature_storage_only_additional_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
 }

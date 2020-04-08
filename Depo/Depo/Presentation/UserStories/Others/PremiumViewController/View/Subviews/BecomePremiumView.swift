@@ -15,9 +15,10 @@ protocol BecomePremiumViewDelegate: class {
 
 final class BecomePremiumView: UIView, NibInit {
     
-    @IBOutlet private weak var scrollView: UIScrollView! {
+    @IBOutlet private weak var scrollView: ControlContainableScrollView! {
         willSet {
             newValue.backgroundColor = ColorConstants.lighterGray
+            newValue.delaysContentTouches = false
         }
     }
     
@@ -110,9 +111,10 @@ final class BecomePremiumView: UIView, NibInit {
         let features = plans
             .flatMap { $0.offers }
             .flatMap { $0.features }
+            .map { "+" + $0.description }
             .removingDuplicates()
 
-        addDescription(features)
+        addDescription([TextConstants.featureStandardFeatures] + features)
         
         for (index, plan) in plans.enumerated() {
             guard let offer = plan.offers.first else {
@@ -148,14 +150,14 @@ final class BecomePremiumView: UIView, NibInit {
         contentView.addArrangedSubview(policyView)
     }
     
-    private func addDescription(_ features: [AuthorityType]) {
+    private func addDescription(_ features: [String]) {
         guard !features.isEmpty else {
             return
         }
         
         features.forEach { feature in
             let label = UILabel()
-            label.text = feature.description
+            label.text = feature
             label.font = UIFont.TurkcellSaturaMedFont(size: 18)
             label.textColor = ColorConstants.cardBorderOrange
             label.textAlignment = .center
