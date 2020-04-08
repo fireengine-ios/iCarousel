@@ -8,9 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="TurkcellSaturaDem.ttf">
-            <string>TurkcellSaturaDem</string>
-        </array>
         <array key="TurkcellSaturaReg.ttf">
             <string>TurkcellSaturaReg</string>
         </array>
@@ -21,7 +18,6 @@
                 <outlet property="cardsStackView" destination="FWc-7v-dob" id="uZx-Xq-Fd6"/>
                 <outlet property="cardsTableView" destination="MZ8-Y2-pSD" id="rL4-H3-xiK"/>
                 <outlet property="collectionStackView" destination="6fY-jA-khb" id="3TE-2E-gNh"/>
-                <outlet property="descriptionLabel" destination="X3N-5r-5TB" id="Dv5-tS-hAH"/>
                 <outlet property="keyboardHideManager" destination="2I8-Re-xUl" id="aFr-EU-UJX"/>
                 <outlet property="policyTextView" destination="0Wh-5R-OYf" id="P0u-hw-Qtj"/>
                 <outlet property="promoView" destination="5bp-6o-N2u" id="9NB-9L-Bts"/>
@@ -35,7 +31,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRR-B7-lJ8">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TRR-B7-lJ8" customClass="ControlContainableScrollView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPJ-cW-pMM">
@@ -89,12 +85,6 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="355" placeholderIntrinsicHeight="263" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6fY-jA-khb">
                                     <rect key="frame" x="10" y="212" width="355" height="263"/>
                                 </stackView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*Average figure. Total number of documents depends on the size of each document." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3N-5r-5TB">
-                                    <rect key="frame" x="20" y="491" width="335" height="28"/>
-                                    <fontDescription key="fontDescription" name="TurkcellSaturaDem" family="TurkcellSaturaDem" pointSize="14"/>
-                                    <color key="textColor" red="0.019607843140000001" green="0.1764705882" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5bp-6o-N2u" customClass="PromoView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                     <rect key="frame" x="20" y="574" width="347" height="0.0"/>
                                     <subviews>
@@ -179,15 +169,12 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="0Wh-5R-OYf" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" constant="16" id="0nU-Ai-raX"/>
-                                <constraint firstItem="X3N-5r-5TB" firstAttribute="top" secondItem="6fY-jA-khb" secondAttribute="bottom" constant="16" id="5Tx-pA-qhd"/>
+                                <constraint firstItem="5bp-6o-N2u" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6fY-jA-khb" secondAttribute="bottom" constant="10" id="2qG-ge-HVu"/>
                                 <constraint firstAttribute="trailing" secondItem="6fY-jA-khb" secondAttribute="trailing" constant="10" id="5hv-nB-Vih"/>
-                                <constraint firstItem="X3N-5r-5TB" firstAttribute="leading" secondItem="LS1-hD-FRu" secondAttribute="leading" id="AP6-n3-j8T"/>
                                 <constraint firstAttribute="trailing" secondItem="FWc-7v-dob" secondAttribute="trailing" priority="750" constant="14" id="Ayq-Jq-A7Y"/>
                                 <constraint firstItem="5bp-6o-N2u" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" constant="20" id="CL9-3w-NZH"/>
-                                <constraint firstAttribute="trailing" secondItem="X3N-5r-5TB" secondAttribute="trailing" constant="20" id="Cme-Qp-9Ej"/>
                                 <constraint firstItem="0Wh-5R-OYf" firstAttribute="top" secondItem="5bp-6o-N2u" secondAttribute="bottom" constant="8" id="Cnr-df-Zlf"/>
                                 <constraint firstItem="LS1-hD-FRu" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" priority="750" constant="20" id="Fq7-7d-gMA"/>
-                                <constraint firstItem="5bp-6o-N2u" firstAttribute="top" relation="greaterThanOrEqual" secondItem="X3N-5r-5TB" secondAttribute="bottom" constant="30" id="Nbk-tA-oZu"/>
                                 <constraint firstItem="FWc-7v-dob" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" constant="14" id="OAj-no-AHU"/>
                                 <constraint firstAttribute="bottom" secondItem="0Wh-5R-OYf" secondAttribute="bottom" constant="8" id="R9e-fb-iXi"/>
                                 <constraint firstAttribute="trailing" secondItem="0Wh-5R-OYf" secondAttribute="trailing" constant="16" id="RQQ-kd-i6H"/>
@@ -195,7 +182,6 @@
                                 <constraint firstAttribute="trailing" secondItem="MZ8-Y2-pSD" secondAttribute="trailing" id="Sz5-Wr-ChO"/>
                                 <constraint firstItem="LS1-hD-FRu" firstAttribute="top" secondItem="MZ8-Y2-pSD" secondAttribute="bottom" constant="24" id="Td2-Tf-jb9"/>
                                 <constraint firstItem="MZ8-Y2-pSD" firstAttribute="top" secondItem="cPJ-cW-pMM" secondAttribute="top" id="UZS-jM-JnB"/>
-                                <constraint firstItem="X3N-5r-5TB" firstAttribute="leading" secondItem="cPJ-cW-pMM" secondAttribute="leading" priority="750" constant="20" id="Zem-ab-Y1d"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LS1-hD-FRu" secondAttribute="trailing" constant="16" id="c3i-c4-dw0">
                                     <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                 </constraint>
@@ -223,7 +209,6 @@
                                     <exclude reference="cNE-oB-vqh"/>
                                     <exclude reference="jAw-PG-o9m"/>
                                     <exclude reference="daP-9m-OD6"/>
-                                    <exclude reference="AP6-n3-j8T"/>
                                 </mask>
                             </variation>
                             <variation key="heightClass=regular-widthClass=compact">
@@ -241,7 +226,6 @@
                                     <include reference="jAw-PG-o9m"/>
                                     <include reference="daP-9m-OD6"/>
                                     <exclude reference="fMk-C1-o6V"/>
-                                    <include reference="AP6-n3-j8T"/>
                                 </mask>
                             </variation>
                         </view>

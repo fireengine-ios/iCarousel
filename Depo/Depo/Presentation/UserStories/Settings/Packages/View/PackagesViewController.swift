@@ -11,12 +11,6 @@ import UIKit
 final class PackagesViewController: BaseViewController {
     var output: PackagesViewOutput!
     
-    @IBOutlet weak private var descriptionLabel: UILabel! {
-        willSet {
-            newValue.text = TextConstants.descriptionLabelText
-        }
-    }
-    
     @IBOutlet weak private var cardsTableView: UITableView! {
         willSet {
             newValue.delaysContentTouches = true
@@ -35,7 +29,7 @@ final class PackagesViewController: BaseViewController {
         }
     }
     
-    @IBOutlet weak private var scrollView: UIScrollView! {
+    @IBOutlet weak private var scrollView: ControlContainableScrollView! {
         willSet {
             newValue.delaysContentTouches = false
         }
