@@ -86,7 +86,11 @@ final class MediaItemsAlbumOperationService {
             //update isAvailable for related MediaItems
             self.updateRelatedItems(for: changedAlbums)
             
-            self.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
+            self.coreDataStack.saveDataForContext(context: context, savedCallBack: {
+                if !changedAlbums.isEmpty {
+                    NotificationCenter.default.post(name: .localAlbumStatusDidChange, object: nil)
+                }
+            })
         }
     }
 }

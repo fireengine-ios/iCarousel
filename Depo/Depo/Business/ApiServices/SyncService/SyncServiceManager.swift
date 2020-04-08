@@ -252,6 +252,11 @@ extension SyncServiceManager {
                                        selector: #selector(onLocalFilesHaveBeenLoaded),
                                        name: .allLocalMediaItemsHaveBeenLoaded,
                                        object: nil)
+        
+        notificationCenter.addObserver(self,
+                                       selector: #selector(onLocalAlbumStatusDidChange),
+                                       name: .localAlbumStatusDidChange,
+                                       object: nil)
     }
     
     @objc private func onPhotoLibraryDidChange(notification: Notification) {
@@ -291,6 +296,10 @@ extension SyncServiceManager {
     
     @objc private func onLocalFilesHaveBeenLoaded() {
         self.checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+    }
+    
+    @objc private func onLocalAlbumStatusDidChange() {
+        checkReachabilityAndSettings(reachabilityChanged: false, newItems: true)
     }
     
     @objc private func onAutoSyncStatusDidChange() {
