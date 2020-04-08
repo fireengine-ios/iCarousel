@@ -53,11 +53,10 @@ final class PackageService {
         let fullPrice: String
         if let iapProductId = getAppleIds(for: [offer]).first, let product = iapManager.product(for: iapProductId), !product.isFree {
             
-            let price = product.localizedPrice
-            let newPrice = price + "\n"
+            let price = product.localizedPrice.replacingOccurrences(of: " ", with: "\n")
             if #available(iOS 11.2, *) {
                 guard let subscriptionPeriod = product.subscriptionPeriod else {
-                    fullPrice = String(format: TextConstants.packageApplePrice, newPrice, TextConstants.packagePeriodMonth)
+                    fullPrice = String(format: TextConstants.packageApplePrice, price, TextConstants.packagePeriodMonth)
                     return fullPrice
                 }
                 let period: String
@@ -71,12 +70,12 @@ final class PackageService {
                 case .year:
                     period = TextConstants.packagePeriodYear
                 }
-                fullPrice = String(format: TextConstants.packageApplePrice, newPrice, period)
+                fullPrice = String(format: TextConstants.packageApplePrice, price, period)
             } else {
                 if let period = getOfferPeriod(for: offer) {
-                    fullPrice = String(format: TextConstants.packageApplePrice, newPrice, period)
+                    fullPrice = String(format: TextConstants.packageApplePrice, price, period)
                 } else {
-                    fullPrice = newPrice
+                    fullPrice = price
                 }
             }
         } else {

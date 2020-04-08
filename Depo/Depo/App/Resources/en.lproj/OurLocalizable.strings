@@ -1530,3 +1530,6 @@
 "my_packages_description" = "Mevcut aboneliklerini aşağıdaki alanda göremiyorsan, aboneliklerini yenilemek için butona basabilirsin.";
 "photo_video_auto_sync_settings" = "AutoSync Settings";
 "ubsent_contacts_in_lifebox" = "There is not any contact in your Lifebox";
+
+"feature_storage_only_additional_1" = "feature_storage_only_additional_1";
+"feature_storage_only_additional_2" = "feature_storage_only_additional_2";
