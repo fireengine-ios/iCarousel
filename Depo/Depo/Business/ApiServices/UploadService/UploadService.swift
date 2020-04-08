@@ -610,6 +610,21 @@ final class UploadService: BaseRequestService {
         }
     }
     
+    func cancelOperations(md5s: [String]) {
+        guard !md5s.isEmpty else {
+            return
+        }
+        
+        var operationsToRemove = uploadOperations.filter {
+            !$0.isCancelled && md5s.contains($0.inputItem.md5)
+        }
+        
+        cancelAndRemove(operations: operationsToRemove)
+        
+        print("AUTOSYNC: removed \(operationsToRemove.count) operations")
+        operationsToRemove.removeAll()
+    }
+    
     func cancelOperations(with assets: [PHAsset]?) {
         guard let assets = assets else {
             return

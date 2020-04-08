@@ -276,7 +276,11 @@ class PhotosAlbumService: BaseRequestService {
         
         let fileService = WrapItemFileService()
         fileService.moveToTrash(files: albumItems, success: { [weak self] in
-            self?.moveToTrashAlbums(albums, success: success, fail: fail)
+            self?.moveToTrashAlbums(albums, success: { removedAlbums in
+                MediaItemsAlbumOperationService.shared.deleteRemoteAlbums(removedAlbums, completion: {
+                    success?(removedAlbums)
+                })
+            }, fail: fail)
         }, fail: fail)
     }
     
@@ -330,7 +334,7 @@ class PhotosAlbumService: BaseRequestService {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { [weak self] _  in
             debugLog("PhotosAlbumService renameAlbum success")
 
-            self?.mediaAlbumService.remoteAlbumRenamed(parameters.albumUUID) {
+            self?.mediaAlbumService.remoteAlbumRenamed(parameters.albumUUID, newName: parameters.newName) {
                 success?()
             }
             

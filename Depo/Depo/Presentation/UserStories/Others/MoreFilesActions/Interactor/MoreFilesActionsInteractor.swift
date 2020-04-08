@@ -877,8 +877,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         albumService.delete(albums: albums, success: { [weak self] removedAlbums in
-            ItemOperationManager.default.didMoveToTrashAlbums(removedAlbums)
-            self?.succesAction(elementType: .removeAlbum)()
+            MediaItemsAlbumOperationService.shared.deleteRemoteAlbums(removedAlbums, completion: {
+                ItemOperationManager.default.didMoveToTrashAlbums(removedAlbums)
+                self?.succesAction(elementType: .removeAlbum)()
+            })
+            
         }, fail: failAction(elementType: .removeAlbum))
     }
     

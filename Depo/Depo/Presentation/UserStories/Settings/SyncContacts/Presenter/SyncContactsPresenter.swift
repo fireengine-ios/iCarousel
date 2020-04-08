@@ -154,8 +154,14 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
     
     func didObtainUserStatus(isPremiumUser: Bool) {
         if isPremiumUser {
-            requesetAccess { success in
-                if success {
+            requesetAccess { [weak self] success in
+                guard success, let self = self else {
+                    return
+                }
+                
+                if self.interactor.getStoredContactsCount() == 0 {
+                    self.showEmptyContactsPopUp()
+                } else {
                     self.proccessOperation(.analyze)
                 }
             }

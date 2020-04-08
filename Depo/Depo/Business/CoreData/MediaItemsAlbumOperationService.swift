@@ -86,7 +86,11 @@ final class MediaItemsAlbumOperationService {
             //update isAvailable for related MediaItems
             self.updateRelatedItems(for: changedAlbums)
             
-            self.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
+            self.coreDataStack.saveDataForContext(context: context, savedCallBack: {
+                if !changedAlbums.isEmpty {
+                    NotificationCenter.default.post(name: .localAlbumStatusDidChange, object: nil)
+                }
+            })
         }
     }
 }
@@ -161,6 +165,16 @@ extension MediaItemsAlbumOperationService {
 
 extension MediaItemsAlbumOperationService {
     
+    func createRemoteAlbums(albums: [AlbumItem], completion: @escaping VoidHandler) {
+        let context = coreDataStack.newChildBackgroundContext
+        context.perform { [weak self] in
+            albums.forEach { album in
+                _ = MediaItemsAlbum(uuid: album.uuid, name: album.name, context: context)
+            }
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
+        }
+    }
+    
     func createNewRemoteAlbum(_ albumItem: AlbumItem, completion: @escaping VoidHandler) {
         let context = coreDataStack.newChildBackgroundContext
         context.perform {
@@ -188,14 +202,14 @@ extension MediaItemsAlbumOperationService {
     }
 
     
-    func remoteAlbumRenamed(_ albumUuid: String, completion: @escaping VoidHandler) {
+    func remoteAlbumRenamed(_ albumUuid: String, newName: String, completion: @escaping VoidHandler) {
         let context = coreDataStack.newChildBackgroundContext
         
         getRemoteAlbums(uuids: [albumUuid], context: context) { [weak self] remoteAlbums in
             guard let self = self, let album = remoteAlbums.first else {
                 return
             }
-            
+            album.name = newName
             album.updateRelatedLocalAlbum(context: context)
             
             //TODO: Notify observers
