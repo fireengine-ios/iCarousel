@@ -164,12 +164,9 @@ final class SubscriptionOfferView: UIView, NibInit {
         let textColor: UIColor
         let font: UIFont
         
-        if plan.isRecommended {
-            font = UIFont.TurkcellSaturaBolFont(size: 14)
-            textColor = ColorConstants.cardBorderOrange
-        } else if plan.addonType == .storageOnly {
+        if plan.addonType == .storageOnly {
             font = UIFont.TurkcellSaturaFont(size: 14)
-            textColor = ColorConstants.darkText
+            textColor = ColorConstants.marineTwo
         } else {
             font = UIFont.TurkcellSaturaBolFont(size: 14)
             textColor = ColorConstants.cardBorderOrange
@@ -205,7 +202,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         } else if features.isEmpty {
             return .storageOnly
         } else {
-            return plan.addonType == SubscriptionPlan.AddonType.middleOnly ? .middleFeatures : .premiumFeatures(features)
+            return plan.addonType == .middleOnly ? .middleFeatures : .features(features)
         }
     }
     
