@@ -28,8 +28,12 @@ final class BackgroundRefreshOperation: Operation {
             return
         }
         debugLog("BG! about to backgroundTaskSync")
-        SyncServiceManager.shared.backgroundTaskSync { [weak self] _ in
-            debugLog("BG! backgroundTaskSync callback")
+        SyncServiceManager.shared.backgroundTaskSync { [weak self] successful in
+            debugLog("BG! backgroundTaskSync callback \(successful)")
+            if !successful {
+                debugLog("BG! self cancellation")
+                self?.cancel()
+            }
             guard let self = self else {
                 debugLog("BG! task cancelled")
                 return

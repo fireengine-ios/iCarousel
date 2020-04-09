@@ -135,6 +135,7 @@ class SyncServiceManager {
     func backgroundTaskSync(handler: @escaping BoolHandler) {
 //        stop(photo: true, video: true)
         self.backgroundSyncHandler = handler
+        debugLog("BG! backgroundTaskSync handlesr setuped")
         checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
         
         
@@ -154,6 +155,8 @@ class SyncServiceManager {
         debugPrint("AUTOSYNC: checkReachabilityAndSettings")
         
         guard coreDataStack.isReady else {
+            debugLog("BG! coreData is not ready")
+            backgroundSyncHandler?(false)
             return
         }
         
@@ -161,10 +164,12 @@ class SyncServiceManager {
             guard let `self` = self else {
                 return
             }
-            
+            debugLog("BG! reachability start")
             self.timeIntervalBetweenSyncsInBackground = NumericConstants.timeIntervalBetweenAutoSyncInBackground
             
             guard self.settings.isAutoSyncEnabled else {
+                debugLog("BG! autosync disabled")
+                self.backgroundSyncHandler?(false)
                 self.stopSync()
                 CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
                 return
@@ -191,11 +196,12 @@ class SyncServiceManager {
                 
                 self.stop(photo: shoudStopPhotoSync, video: shouldStopVideoSync)
                 self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
+                debugLog("BG! is rachable and AS going to start")
                 self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
             } else {
                 let photoServiceWaitingForWiFi = photoOption != .never
                 let videoServiceWaitingForWiFi = videoOption != .never
-
+                debugLog("BG! waiting for wifi")
                 self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
             }
         }

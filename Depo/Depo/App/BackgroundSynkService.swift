@@ -81,6 +81,7 @@ final class BackgroundSynсService {
             //
             
             scheduleProcessingSync()
+            
         } else if task.identifier == TaskIdentifiers.backgroundRefresh {
             let appRefreshOperation = BackgroundRefreshOperation()
             queue.addOperation(appRefreshOperation)
