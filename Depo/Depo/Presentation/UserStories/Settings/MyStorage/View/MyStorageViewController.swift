@@ -41,7 +41,11 @@ final class MyStorageViewController: BaseViewController {
         }
     }
 
-    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollView: ControlContainableScrollView! {
+        willSet {
+            newValue.delaysContentTouches = false
+        }
+    }
     
     @IBOutlet private weak var packagesLabel: UILabel! {
         willSet {

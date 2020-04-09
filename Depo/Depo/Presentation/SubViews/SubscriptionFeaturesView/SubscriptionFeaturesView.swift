@@ -13,7 +13,7 @@ final class SubscriptionFeaturesView: UIView {
     enum Features {
         case storageOnly
         case recommended(features: [AuthorityType])
-        case premiumFeatures(_ features: [AuthorityType])
+        case features(_ features: [AuthorityType])
         case middleFeatures
         case premiumOnly
     }
@@ -46,7 +46,7 @@ final class SubscriptionFeaturesView: UIView {
         return  newValue
     }()
     
-    private var features: Features = .premiumFeatures([])
+    private var features: Features = .features([])
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -93,7 +93,7 @@ final class SubscriptionFeaturesView: UIView {
     
     private func prepareInitialState() {
         switch features {
-        case .premiumFeatures, .middleFeatures, .storageOnly:
+        case .features, .middleFeatures, .storageOnly:
             break
             
         case .premiumOnly:
@@ -102,7 +102,7 @@ final class SubscriptionFeaturesView: UIView {
         case .recommended(features: let features):
             removeCollapseButton(offsetFromBottom: -8)
             addFeatures([TextConstants.featureStandardFeatures])
-            addFeatures(features.map({ $0.description }), isPremium: true)
+            addFeatures(features.map({ "+" + $0.description }), isPremium: true)
         }
     }
     
@@ -140,9 +140,9 @@ final class SubscriptionFeaturesView: UIView {
                 ///expanded by default
                 break
                 
-            case .premiumFeatures(let features):
+            case .features(let features):
                 addFeatures([TextConstants.featureStandardFeatures])
-                addFeatures(features.map({ $0.description }), isPremium: true)
+                addFeatures(features.map({ "+" + $0.description }), isPremium: true)
             case .middleFeatures:
                 let redactedFeatures = [TextConstants.featureHighQualityPicture,
                                         TextConstants.featureImageRecognition,
@@ -153,7 +153,9 @@ final class SubscriptionFeaturesView: UIView {
                 let redactedFeatures = [TextConstants.featureHighQualityPicture,
                                         TextConstants.featureImageRecognition,
                                         TextConstants.featurePhotopick,
-                                        TextConstants.featureDeleteDuplicationContacts]
+                                        TextConstants.featureDeleteDuplicationContacts,
+                                        TextConstants.featureStorageOnlyAdditional1,
+                                        TextConstants.featureStorageOnlyAdditional2]
                 addFeatures(redactedFeatures, isPremium: false)
             }
         } else {

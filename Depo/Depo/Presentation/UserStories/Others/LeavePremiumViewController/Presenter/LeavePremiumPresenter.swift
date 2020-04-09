@@ -166,44 +166,12 @@ extension LeavePremiumPresenter: LeavePremiumViewOutput {
         premiumView.delegate = self
         
         interactor.trackScreen(screenType: controllerType)
-        if controllerType != .standard {
-            view?.startActivityIndicator()
-            interactor.getActiveSubscription()
-        }
     }
     
 }
 
 // MARK: - LeavePremiumInteractorOtuput
 extension LeavePremiumPresenter: LeavePremiumInteractorOutput {
-    func didLoadActiveSubscriptions(_ offers: [SubscriptionPlanBaseResponse]) {
-        let authorityType: AuthorityType = controllerType == .premium ? .premiumUser : .middleUser
-        feature = offers.first(where: { offer in
-            return offer.subscriptionPlanAuthorities?.contains(where: { $0.authorityType == authorityType }) ?? false
-        })
-        
-        guard let feature = feature, let type = feature.subscriptionPlanType else {
-            let error = CustomErrors.text("An error occurred while getting feature type from offer.")
-            didErrorMessage(with: error.localizedDescription)
-            return
-        }
-        
-        if type.isSameAs(FeaturePackageType.appleFeature), type.isSameAs(QuotaPackageType.apple) {
-            interactor.getAppleInfo(for: feature)
-        } else {
-            price = interactor.getPrice(for: feature, accountType: accountType)
-        }
-    }
-    
-    func didLoadInfoFromApple() {
-        guard let offer = feature else {
-            let error = CustomErrors.serverError("An error occurred while getting offer.")
-            didErrorMessage(with: error.localizedDescription)
-            return
-        }
-        price = interactor.getPrice(for: offer, accountType: accountType)
-    }
-    
     func didErrorMessage(with text: String) {
         view?.stopActivityIndicator()
         router.showError(with: text)
