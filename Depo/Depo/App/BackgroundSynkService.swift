@@ -58,7 +58,10 @@ final class BackgroundSynсService {
     }
     
     func handleBGtask(_ task: BGTask) {
-        
+        guard CoreDataStack.shared.isReady else {
+            task.setTaskCompleted(success: false)
+            return
+        }
         debugLog("BG! handleTask \(task.identifier)")
 
         guard

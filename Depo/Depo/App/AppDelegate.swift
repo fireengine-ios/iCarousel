@@ -99,21 +99,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = InitializingViewController()
         self.window?.makeKeyAndVisible()
         
+        if #available(iOS 13.0, *) {
+            debugLog("AppDelegate BT Registered")
+            self.backgroundSyncService.registerLaunchHandlers()
+            
+        }
         coreDataStack.setup { [weak self] in
             guard let self = self else {
                 return
             }
-            //we register tasks after migration/setup is done
-            if #available(iOS 13.0, *) {
-                debugLog("AppDelegate BT Registered")
-                self.backgroundSyncService.registerLaunchHandlers()
-            }
+            
             
             DispatchQueue.main.async {
                 AppConfigurator.logoutIfNeed()
                 
                 self.window?.rootViewController = router.vcForCurrentState()
                 self.window?.isHidden = false
+                
             }
         }
         
