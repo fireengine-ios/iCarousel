@@ -337,6 +337,44 @@ extension MediaItemsAlbumOperationService {
         }
     }
     
+    func actualizeRemoteAlbums(completion: @escaping BoolHandler) {
+        guard isAlbumsActualized, !inProcessLocalAlbums else {
+            completion(false)
+            return
+        }
+        
+        isAlbumsActualized = false
+        
+        coreDataStack.performBackgroundTask { [weak self] context in
+            guard let self = self else {
+                completion(false)
+                return
+            }
+            
+            let callback = { [weak self] in
+                self?.isAlbumsActualized = true
+                
+                if self?.waitingLocalAlbumsCallBack != nil {
+                    self?.getAutoSyncAlbums(context: context) { albums in
+                        self?.waitingLocalAlbumsCallBack?(albums)
+                        self?.waitingLocalAlbumsCallBack = nil
+                    }
+                }
+                completion(true)
+            }
+            
+            self.getAllRemoteAlbums { response in
+                switch response {
+                case .success(let remoteAlbums):
+                    self.updateRemoteAlbums(remoteAlbums, context: context, completion: callback)
+                case .failed(let error):
+                    debugPrint(error.description)
+                    completion(false)
+                }
+            }
+        }
+    }
+    
     private func saveLocalAlbums(assetsResponse: LocalAssetsResponse, context: NSManagedObjectContext, completion: @escaping VoidHandler) {
         guard localMediaStorage.photoLibraryIsAvailible() else {
             completion()
