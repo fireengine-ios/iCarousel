@@ -30,6 +30,10 @@ extension MediaItemsAlbum {
             return
         }
         
+        if relatedLocal?.name != name {
+            relatedLocal = nil
+        }
+        
         let request: NSFetchRequest = MediaItemsLocalAlbum.fetchRequest()
         request.predicate = NSPredicate(format: "\(MediaItemsLocalAlbum.PropertyNameKey.name) = %@", name)
         
