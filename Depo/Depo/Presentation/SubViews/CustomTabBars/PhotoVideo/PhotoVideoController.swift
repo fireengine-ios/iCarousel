@@ -778,8 +778,10 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         }
     }
     
-    func filesAddedToAlbum() {
-        stopEditingMode()
+    func filesAddedToAlbum(isAutoSyncOperation: Bool) {
+        if !isAutoSyncOperation {
+            stopEditingMode()
+        }
     }
     
     private func getCellForFile(objectUUID: String, completion: @escaping (_ cell: PhotoVideoCell?) -> Void)

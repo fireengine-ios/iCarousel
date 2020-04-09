@@ -622,7 +622,7 @@ extension UploadOperation {
                 .compactMap { $0.relatedRemote?.uuid }
                 .filter { !item.albumsUUIDs.contains($0) }
             
-            self.remoteAlbumsService.addItem(item: remote, to: remoteAlbumsToAddInto, completion: completion)
+            self.remoteAlbumsService.addItem(item: remote, to: remoteAlbumsToAddInto, isAutoSync: true, completion: completion)
         }
     }
 }

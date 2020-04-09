@@ -456,7 +456,7 @@ extension PhotosAlbumService {
         }
     }
     
-    func addItem(item: Item, to albums: [String], completion: @escaping VoidHandler) {
+    func addItem(item: Item, to albums: [String], isAutoSync: Bool, completion: @escaping VoidHandler) {
         let group = DispatchGroup()
         
         albums.forEach {
@@ -465,7 +465,7 @@ extension PhotosAlbumService {
             
             addPhotosToAlbum(parameters: parameters, success: {
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .success))
-                ItemOperationManager.default.filesAddedToAlbum()
+                ItemOperationManager.default.filesAddedToAlbum(isAutoSyncOperation: isAutoSync)
                 group.leave()
             }, fail: { _ in
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .failure))
