@@ -203,11 +203,7 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func successed(accountTypeString: String) {
         accountType = interactor.getAccountType(with: accountTypeString, offers: []) ?? .all
-        
-        if accountType != .turkcell {
-            view?.showInAppPolicy()
-        }
-        
+        view?.showInAppPolicy()
         interactor.getAvailableOffers(with: accountType)
     }
     
