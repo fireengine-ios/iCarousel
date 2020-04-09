@@ -23,16 +23,19 @@ final class BackgroundRefreshOperation: Operation {
         
     override func main() {
         guard !isCancelled else {
+            debugLog("BG! task cancelled")
 //            completionBlock?()
             return
         }
-     
+        debugLog("BG! about to backgroundTaskSync")
         SyncServiceManager.shared.backgroundTaskSync { [weak self] _ in
+            debugLog("BG! backgroundTaskSync callback")
             guard let self = self else {
-                
+                debugLog("BG! task cancelled")
                 return
             }
             guard !self.isCancelled else {
+                debugLog("BG! task cancelled")
                 self.semaphore.signal()
                 return
             }
