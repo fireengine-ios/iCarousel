@@ -26,7 +26,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
                         }
                         out.uploadOperationSuccess()
                     }
-                    ItemOperationManager.default.filesAddedToAlbum()
+                    ItemOperationManager.default.filesAddedToAlbum(isAutoSyncOperation: false)
                 }
             }, fail: { [weak self] error in
                 DispatchQueue.main.async {

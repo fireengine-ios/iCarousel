@@ -49,7 +49,7 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func fileAddedToAlbum(item: WrapData, error: Bool)
     
-    func filesAddedToAlbum()
+    func filesAddedToAlbum(isAutoSyncOperation: Bool)
     
     func filesUpload(count: Int, toFolder folderUUID: String)
     
@@ -137,7 +137,7 @@ extension ItemOperationManagerViewProtocol {
     
     func fileAddedToAlbum(item: WrapData, error: Bool) {}
     
-    func filesAddedToAlbum() {}
+    func filesAddedToAlbum(isAutoSyncOperation: Bool) {}
     
     func filesUpload(count: Int, toFolder folderUUID: String) {}
     
@@ -346,9 +346,9 @@ class ItemOperationManager: NSObject {
         }
     }
     
-    func filesAddedToAlbum() {
+    func filesAddedToAlbum(isAutoSyncOperation: Bool) {
         DispatchQueue.main.async {
-            self.views.invoke { $0.filesAddedToAlbum() }
+            self.views.invoke { $0.filesAddedToAlbum(isAutoSyncOperation: isAutoSyncOperation) }
         }
     }
     
