@@ -50,6 +50,7 @@ extension SettingsPresenter: SettingsViewOutput {
     
     func viewIsReady() {
         interactor.trackScreen()
+        view.prepareCellsData(isPermissionShown: false)
     }
     
     func viewWillBecomeActive() {
