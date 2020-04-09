@@ -86,7 +86,11 @@ final class MediaItemsAlbumOperationService {
             //update isAvailable for related MediaItems
             self.updateRelatedItems(for: changedAlbums)
             
-            self.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
+            self.coreDataStack.saveDataForContext(context: context, savedCallBack: {
+                if !changedAlbums.isEmpty {
+                    NotificationCenter.default.post(name: .localAlbumStatusDidChange, object: nil)
+                }
+            })
         }
     }
 }
@@ -237,7 +241,11 @@ extension MediaItemsAlbumOperationService {
     private func changeRelationships(type: RelationshipsChangesType, itemsUuids: [String], albumUuid: String, completion: @escaping VoidHandler) {
         let context = coreDataStack.newChildBackgroundContext
         getRemoteAlbums(uuids: [albumUuid], context: context) { [weak self] remoteAlbums in
-            guard let self = self, let album = remoteAlbums.first(where: { $0.uuid == albumUuid }) else {
+            guard
+                let self = self,
+                let album = remoteAlbums.first(where: { $0.uuid == albumUuid })
+            else {
+                completion()
                 return
             }
             

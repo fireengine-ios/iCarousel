@@ -461,19 +461,10 @@ final class UploadOperation: Operation {
                 if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
                     self.outputItem?.metaData?.mediumUrl = preview
                 }
+                self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
                 
                 self.createAlbumsIfNeeded { [weak self] in
-                    self?.addToRemoteAlbumsIfNeeded { [weak self] in
-                        guard let self = self else {
-                            debugLog("_upload: can't call updateLocalItemSyncStatus")
-                            fail(ErrorResponse.string(TextConstants.errorUnknown))
-                            return
-                        }
-                        
-                        self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
-                        
-                        success()
-                    }
+                    self?.addToRemoteAlbumsIfNeeded(completion: success)
                 }
                 debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
             }
@@ -631,7 +622,7 @@ extension UploadOperation {
                 .compactMap { $0.relatedRemote?.uuid }
                 .filter { !item.albumsUUIDs.contains($0) }
             
-            self.remoteAlbumsService.addItem(item: remote, to: remoteAlbumsToAddInto, completion: completion)
+            self.remoteAlbumsService.addItem(item: remote, to: remoteAlbumsToAddInto, isAutoSync: true, completion: completion)
         }
     }
 }

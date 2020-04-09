@@ -204,23 +204,25 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    func findLocalFileIdexForObjectInRange(itemTrimmedLocalID: String, idexes: [IndexPath], indexCallBack: @escaping IndexPathCallback) {
+    func findLocalFileIndexForObjectInVisibleRange(itemTrimmedLocalID: String, indexCallBack: @escaping IndexPathCallback) {
 
         fetchedResultsController.managedObjectContext.perform { [weak self] in
-            var acceptableIndex: IndexPath?
-            idexes.forEach {
-                if let object = self?.fetchedResultsController.object(at: $0),
+            guard let indexPaths = self?.collectionView?.indexPathsForVisibleItems else {
+                indexCallBack(nil)
+                return
+            }
+
+            let acceptableIndex = indexPaths.first { indexPath -> Bool in
+                if let object = self?.getObject(at: indexPath),
                     object.isLocalItemValue,
                     object.trimmedLocalFileID == itemTrimmedLocalID {
-                    acceptableIndex = $0
-                    return
+                    return true
                 }
+                return false
             }
             indexCallBack(acceptableIndex)
-            
         }
     }
-
     
     func getIndexPathForLocalObject(itemTrimmedLocalID: String, indexCallBack: @escaping IndexPathCallback) {
         fetchedResultsController.managedObjectContext.perform { [weak self] in

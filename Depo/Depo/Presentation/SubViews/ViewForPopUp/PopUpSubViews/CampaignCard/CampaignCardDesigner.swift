@@ -36,7 +36,7 @@ final class CampaignCardDesigner: NSObject {
         willSet {
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
             newValue.setTitleColor(ColorConstants.blueColor, for: .normal)
-            newValue.setTitle(TextConstants.campaignDetailButtonTitle, for: .normal)
+            newValue.setTitle("", for: .normal)
         }
     }
     
@@ -45,6 +45,12 @@ final class CampaignCardDesigner: NSObject {
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
             newValue.setTitleColor(ColorConstants.blueColor, for: .normal)
             newValue.setTitle(TextConstants.analyzePhotoPickButtonTitle, for: .normal)
+        }
+    }
+    
+    @IBOutlet private weak var playVideoButton: UIButton! {
+        willSet {
+            newValue.isHidden = true
         }
     }
 }

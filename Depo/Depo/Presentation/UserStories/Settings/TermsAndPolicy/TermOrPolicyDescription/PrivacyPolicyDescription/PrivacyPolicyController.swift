@@ -18,9 +18,7 @@ final class PrivacyPolicyController: UIViewController {
       
         let webConfig = WKWebViewConfiguration()
         webConfig.userContentController = contentController
-        if #available(iOS 10.0, *) {
-            webConfig.dataDetectorTypes = [.phoneNumber, .link]
-        }
+        webConfig.dataDetectorTypes = [.phoneNumber, .link]
         
         let webView = WKWebView(frame: .zero, configuration: webConfig)
         webView.isOpaque = false

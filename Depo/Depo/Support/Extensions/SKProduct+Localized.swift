@@ -12,7 +12,7 @@ extension SKProduct {
     var localizedPrice: String {
         let numberFormatter = NumberFormatter()
         numberFormatter.formatterBehavior = .behavior10_4
-        numberFormatter.numberStyle = .currency
+        numberFormatter.positiveFormat = "#.## ¤¤"
         numberFormatter.locale = priceLocale
         return numberFormatter.string(from: price) ?? ""
     }
