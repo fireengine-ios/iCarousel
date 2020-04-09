@@ -31,21 +31,83 @@ final class BackgroundSynсService {
     
     func registerLaunchHandlers() {
         
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: TaskIdentifiers.backgroundProcessing, using: BackgroundSynсService.schedulerQueue) { task in
+        registerTask(identifier: TaskIdentifiers.backgroundProcessing, queue: BackgroundSynсService.schedulerQueue)
+        registerTask(identifier: TaskIdentifiers.backgroundRefresh, queue: BackgroundSynсService.schedulerQueue)
+//        BGTaskScheduler.shared.register(forTaskWithIdentifier: TaskIdentifiers.backgroundProcessing, using: BackgroundSynсService.schedulerQueue) { task in
             
-            guard let task = task as? BGProcessingTask else {
-                return
-            }
-           self.handleProcessingSyncTask(task: task)
+//            guard let task = task as? BGProcessingTask else {
+//                return
+//            }
+//           self.handleProcessingSyncTask(task: task)
+//        }
+//
+//        BGTaskScheduler.shared.register(forTaskWithIdentifier: TaskIdentifiers.backgroundRefresh, using: BackgroundSynсService.schedulerQueue) { task in
+//
+//
+//            guard let task = task as? BGAppRefreshTask else {
+//                return
+//            }
+//            self.handleRefreshSyncTask(task: task)
+//        }
+    }
+    
+    private func registerTask(identifier: String, queue: DispatchQueue) {
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: identifier, using: queue) { [weak self] task in
+            self?.handleBGtask(task)
+        }
+    }
+    
+    func handleBGtask(_ task: BGTask) {
+        
+        debugLog("BG! handleTask \(task.identifier)")
+
+        guard
+            LocalMediaStorage.default.photoLibraryIsAvailible(),
+            storageVars.autoSyncSet
+        else {
+            debugLog("BG! DECLINED Photo \(LocalMediaStorage.default.photoLibraryIsAvailible()) and autosync \(storageVars.autoSyncSet) is disabled for \(task.identifier)")
+            return
         }
         
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: TaskIdentifiers.backgroundRefresh, using: BackgroundSynсService.schedulerQueue) { task in
+        
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        
+        if task.identifier == TaskIdentifiers.backgroundProcessing {
+//actualize cash first then AS
+            //
+            let appRefreshOperation = BackgroundRefreshOperation()
+            queue.addOperation(appRefreshOperation)
+            //
             
-            guard let task = task as? BGAppRefreshTask else {
-                return
-            }
-            self.handleRefreshSyncTask(task: task)
+            scheduleProcessingSync()
+        } else if task.identifier == TaskIdentifiers.backgroundRefresh {
+            let appRefreshOperation = BackgroundRefreshOperation()
+            queue.addOperation(appRefreshOperation)
+            scheduleRefreshSync()
+        } else {
+            debugLog("BG! not recognizable task")
+            return
         }
+        
+        
+//        let queue = OperationQueue()
+//        queue.maxConcurrentOperationCount = 1
+//        let appRefreshOperation = AppRefreshOperation()
+//        queue.addOperation(appRefreshOperation)
+//
+        task.expirationHandler = {
+            debugLog("BG! task expired \(task.identifier)")
+            queue.cancelAllOperations()
+        }
+
+        let lastOperation = queue.operations.last
+        lastOperation?.completionBlock = {
+            task.setTaskCompleted(success: !(lastOperation?.isCancelled ?? false))
+        }
+//
+//        scheduleAppRefresh()
+        
     }
     
     func scheduleProcessingSync() {
@@ -59,9 +121,9 @@ final class BackgroundSynсService {
         
         do {
             try BGTaskScheduler.shared.submit(request)
-            debugLog("scheduleProcessingSync: OK")
+            debugLog("BG! scheduleProcessingSync: OK")
         } catch {
-            debugLog("scheduleProcessingSync: Could not schedule app Processing: \(error)")
+            debugLog("BG! scheduleProcessingSync: Could not schedule app Processing: \(error)")
         }
     }
     
@@ -74,9 +136,9 @@ final class BackgroundSynсService {
         
         do {
             try BGTaskScheduler.shared.submit(request)
-            debugLog("scheduleRefreshSync: OK")
+            debugLog("BG! scheduleRefreshSync: OK")
         } catch {
-            debugLog("scheduleRefreshSync: Could not schedule app refresh: \(error)")
+            debugLog("BG! scheduleRefreshSync: Could not schedule app refresh: \(error)")
         }
     }
     

@@ -89,11 +89,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let coreDataStack: CoreDataStack = factory.resolve()
         
-        if #available(iOS 13.0, *) {
-            debugLog("AppDelegate BT Registered")
-            backgroundSyncService.registerLaunchHandlers()
-        }
-        
         startCoreDataSafeServices(with: application, options: launchOptions)
         
         ///call debugLog only if the Crashlytics is already initialized
@@ -107,6 +102,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         coreDataStack.setup { [weak self] in
             guard let self = self else {
                 return
+            }
+            //we register tasks after migration/setup is done
+            if #available(iOS 13.0, *) {
+                debugLog("AppDelegate BT Registered")
+                self.backgroundSyncService.registerLaunchHandlers()
             }
             
             DispatchQueue.main.async {

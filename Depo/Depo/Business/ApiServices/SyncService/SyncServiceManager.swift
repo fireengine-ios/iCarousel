@@ -134,8 +134,9 @@ class SyncServiceManager {
     
     func backgroundTaskSync(handler: @escaping BoolHandler) {
 //        stop(photo: true, video: true)
-        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
         self.backgroundSyncHandler = handler
+        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+        
         
 //        dispatchQueue.async { [weak self] in
 //
