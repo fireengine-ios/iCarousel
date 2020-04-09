@@ -213,11 +213,11 @@ extension NetmeraService {
        }
        
        private static func prepareLifeBoxUsage(preparedUserField: @escaping NetmeraIntFieldCallback) {
-           AccountService().usage(
+           AccountService().quotaInfo(
                success: { response in
-                   guard let usage = response as? UsageResponse,
-                       let quotaBytes = usage.quotaBytes, quotaBytes != 0,
-                       let usedBytes = usage.usedBytes else {
+                   guard let quota = response as? QuotaInfoResponse,
+                       let quotaBytes = quota.bytes, quotaBytes != 0,
+                       let usedBytes = quota.bytesUsed else {
                            preparedUserField(0)
                            return
                    }
