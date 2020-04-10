@@ -64,8 +64,6 @@ final class BackgroundSynсService {
         
         if task.identifier == TaskIdentifiers.backgroundProcessing {
             ///Currently they both use same task
-            //TODO:actualize cash first then AS
-            //
             let appRefreshOperation = BackgroundRefreshOperation()
             queue.addOperation(appRefreshOperation)
             scheduleProcessingSync()
