@@ -41,7 +41,7 @@ final class BackgroundSynсService {
     }
     
     func handleBGtask(_ task: BGTask) {
-        
+        //TODO: add check that its actualy in background
         debugLog("BG! handleTask \(task.identifier)")
         
         guard
