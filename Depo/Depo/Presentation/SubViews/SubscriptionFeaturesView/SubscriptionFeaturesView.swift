@@ -102,7 +102,7 @@ final class SubscriptionFeaturesView: UIView {
         case .recommended(features: let features):
             removeCollapseButton(offsetFromBottom: -8)
             addFeatures([TextConstants.featureStandardFeatures])
-            addFeatures(features.map({ "+" + $0.description }), isPremium: true)
+            addFeatures(features.map({ $0.description }), isPremium: true)
         }
     }
     
@@ -142,7 +142,7 @@ final class SubscriptionFeaturesView: UIView {
                 
             case .features(let features):
                 addFeatures([TextConstants.featureStandardFeatures])
-                addFeatures(features.map({ "+" + $0.description }), isPremium: true)
+                addFeatures(features.map({ $0.description }), isPremium: true)
             case .middleFeatures:
                 let redactedFeatures = [TextConstants.featureHighQualityPicture,
                                         TextConstants.featureImageRecognition,
