@@ -48,6 +48,10 @@ extension MediaItemsLocalAlbum {
             return
         }
         
+        if relatedRemote?.name != name {
+            relatedRemote = nil
+        }
+        
         let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
         request.predicate = NSPredicate(format: "\(MediaItemsAlbum.PropertyNameKey.name) = %@", name)
         
