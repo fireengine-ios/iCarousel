@@ -1021,6 +1021,9 @@ struct TextConstants {
     static let cancelButtonTitle = NSLocalizedString("package_cancel_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let packageSectionTitle = NSLocalizedString("package_section_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let availableHeadNameTitle = NSLocalizedString("available_head_name_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let offerStorePromo = NSLocalizedString("offer_store_promo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let offerStoreAppleStore = NSLocalizedString("offer_store_apple_store", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let offerStoreGoogleStore = NSLocalizedString("offer_store_google_store", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let packagePeriodDay = NSLocalizedString("package_period_day", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let packagePeriodWeek = NSLocalizedString("package_period_week", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
