@@ -11,20 +11,11 @@ import Foundation
 final class BackgroundRefreshOperation: Operation {
     
     private let semaphore = DispatchSemaphore(value: 0)
-//    override func cancel() {
-//            super.cancel()
-//
-//            DispatchQueue.main.async {
-//                self.task?.cancel()
-//                self.task = nil
-//            }
-//    //        semaphore.signal()
-//        }
-        
+
     override func main() {
         guard !isCancelled else {
-            debugLog("BG! task cancelled")
-//            completionBlock?()
+            debugLog("BG! task cancelled at the beggining")
+            completionBlock?() //force call, since we didnt recieve callback
             return
         }
         debugLog("BG! about to backgroundTaskSync")
@@ -39,15 +30,15 @@ final class BackgroundRefreshOperation: Operation {
                 return
             }
             guard !self.isCancelled else {
-                debugLog("BG! task cancelled")
+                debugLog("BG! task cancelled also completion")
                 self.semaphore.signal()
+                self.completionBlock?() //force call, since we didnt recieve callback
                 return
             }
             
             self.semaphore.signal()
         }
-        
-//        semaphore.signal()
+
         semaphore.wait()
         
     }

@@ -196,7 +196,7 @@ class SyncServiceManager {
                 
                 self.stop(photo: shoudStopPhotoSync, video: shouldStopVideoSync)
                 self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
-                debugLog("BG! is rachable and AS going to start")
+                debugLog("BG! is reachable and AS going to start")
                 self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
             } else {
                 let photoServiceWaitingForWiFi = photoOption != .never

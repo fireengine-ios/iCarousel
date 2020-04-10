@@ -30,25 +30,8 @@ final class BackgroundSynсService {
     private let syncServiceManager = SyncServiceManager.shared
     
     func registerLaunchHandlers() {
-        
         registerTask(identifier: TaskIdentifiers.backgroundProcessing, queue: BackgroundSynсService.schedulerQueue)
         registerTask(identifier: TaskIdentifiers.backgroundRefresh, queue: BackgroundSynсService.schedulerQueue)
-//        BGTaskScheduler.shared.register(forTaskWithIdentifier: TaskIdentifiers.backgroundProcessing, using: BackgroundSynсService.schedulerQueue) { task in
-            
-//            guard let task = task as? BGProcessingTask else {
-//                return
-//            }
-//           self.handleProcessingSyncTask(task: task)
-//        }
-//
-//        BGTaskScheduler.shared.register(forTaskWithIdentifier: TaskIdentifiers.backgroundRefresh, using: BackgroundSynсService.schedulerQueue) { task in
-//
-//
-//            guard let task = task as? BGAppRefreshTask else {
-//                return
-//            }
-//            self.handleRefreshSyncTask(task: task)
-//        }
     }
     
     private func registerTask(identifier: String, queue: DispatchQueue) {
@@ -58,12 +41,9 @@ final class BackgroundSynсService {
     }
     
     func handleBGtask(_ task: BGTask) {
-//        guard CoreDataStack.shared.isReady else {
-//            task.setTaskCompleted(success: false)
-//            return
-//        }
+        
         debugLog("BG! handleTask \(task.identifier)")
-
+        
         guard
             LocalMediaStorage.default.photoLibraryIsAvailible(),
             storageVars.autoSyncSet
@@ -77,42 +57,35 @@ final class BackgroundSynсService {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         
-        if task.identifier == TaskIdentifiers.backgroundProcessing {
-//actualize cash first then AS
-            //
-            let appRefreshOperation = BackgroundRefreshOperation()
-            queue.addOperation(appRefreshOperation)
-            //
-            
-            scheduleProcessingSync()
-            
-        } else if task.identifier == TaskIdentifiers.backgroundRefresh {
-            let appRefreshOperation = BackgroundRefreshOperation()
-            queue.addOperation(appRefreshOperation)
-            scheduleRefreshSync()
-        } else {
-            debugLog("BG! not recognizable task")
-            return
-        }
-        
-        
-//        let queue = OperationQueue()
-//        queue.maxConcurrentOperationCount = 1
-//        let appRefreshOperation = AppRefreshOperation()
-//        queue.addOperation(appRefreshOperation)
-//
         task.expirationHandler = {
             debugLog("BG! task expired \(task.identifier)")
             queue.cancelAllOperations()
         }
+        
+        if task.identifier == TaskIdentifiers.backgroundProcessing {
+            ///Currently they both use same task
+            //TODO:actualize cash first then AS
+            //
+            let appRefreshOperation = BackgroundRefreshOperation()
+            queue.addOperation(appRefreshOperation)
+            scheduleProcessingSync()
 
+        } else if task.identifier == TaskIdentifiers.backgroundRefresh {
+            
+            let appRefreshOperation = BackgroundRefreshOperation()
+            queue.addOperation(appRefreshOperation)
+            scheduleRefreshSync()
+            
+        } else {
+            debugLog("BG! Error: task not recognised")
+            return
+        }
+        
         let lastOperation = queue.operations.last
         lastOperation?.completionBlock = {
             debugLog("BG! task complited \(task.identifier)")
             task.setTaskCompleted(success: !(lastOperation?.isCancelled ?? false))
         }
-//
-//        scheduleAppRefresh()
         
     }
     
@@ -145,48 +118,6 @@ final class BackgroundSynсService {
             debugLog("BG! scheduleRefreshSync: OK")
         } catch {
             debugLog("BG! scheduleRefreshSync: Could not schedule app refresh: \(error)")
-        }
-    }
-    
-    private func handleProcessingSyncTask(task: BGProcessingTask) {
-        debugLog("handleProcessingSyncTask")
-        scheduleProcessingSync()
-        
-        guard LocalMediaStorage.default.photoLibraryIsAvailible(), storageVars.autoSyncSet else {
-            debugLog("handleProcessingSyncTask_LibraryAccess_or_AutoSync")
-            return
-        }
-        
-        SyncServiceManager.shared.backgroundTaskSync { isLast in
-            debugLog("handleProcessingSyncTask_task_completed")
-            task.setTaskCompleted(success: isLast)
-            self.scheduleProcessingSync()
-        }
-        
-        task.expirationHandler = {
-            debugLog("handleProcessingSyncTask_expirationHandler")
-            SyncServiceManager.shared.stopSync()
-            self.scheduleProcessingSync()
-        }
-    }
-    
-    private func handleRefreshSyncTask(task: BGAppRefreshTask) {
-        scheduleRefreshSync()
-        debugLog("handleRefreshSyncTask")
-        guard LocalMediaStorage.default.photoLibraryIsAvailible(), storageVars.autoSyncSet else {
-            debugLog("handleRefreshSyncTask_LibraryAccess_or_AutoSync")
-            return
-        }
-        
-        syncServiceManager.backgroundTaskSync { isLast in
-            debugLog("handleRefreshSyncTask_task_completed")
-            self.scheduleRefreshSync()
-            task.setTaskCompleted(success: isLast)
-        }
-        
-        task.expirationHandler = {
-            self.scheduleRefreshSync()
-            debugLog("handleRefreshSyncTaskk_expirationHandler")
         }
     }
     
