@@ -111,7 +111,7 @@ final class BecomePremiumView: UIView, NibInit {
         let features = plans
             .flatMap { $0.offers }
             .flatMap { $0.features }
-            .map { "+" + $0.description }
+            .map { $0.description }
             .removingDuplicates()
 
         addDescription([TextConstants.featureStandardFeatures] + features)
