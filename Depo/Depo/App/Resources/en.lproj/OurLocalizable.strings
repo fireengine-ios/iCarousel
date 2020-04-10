@@ -776,6 +776,9 @@
 "no_for_upgrade" = "No, I'm OK";
 "uploded_photos_high_quality" = "Would you like to be a Premium member to store your memories in original quality and get access to all the premium features?";
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
+"offer_store_promo" = "Promo";
+"offer_store_apple_store" = "Apple Store";
+"offer_store_google_store" = "Google Store";
 
 /*AnalyzeHistoryController*/
 "InstaPick" = "PhotoPick";
