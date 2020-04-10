@@ -69,6 +69,7 @@ final class BackgroundSynсService {
             storageVars.autoSyncSet
         else {
             debugLog("BG! DECLINED Photo \(LocalMediaStorage.default.photoLibraryIsAvailible()) and autosync \(storageVars.autoSyncSet) is disabled for \(task.identifier)")
+            task.setTaskCompleted(success: false)
             return
         }
         
