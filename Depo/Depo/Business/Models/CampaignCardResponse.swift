@@ -96,11 +96,6 @@ final class CampaignCardResponse {
             let detailsUrl = json[ResponseKey.detailsUrl].string,
             let imageUrl = json[ResponseKey.imageUrl].url,
             let messageType = MessageType(rawValue: content[ResponseKey.messageType].stringValue),
-            
-            let totalUsed = usage[ResponseKey.totalUsed].int,
-            let maxDailyLimit = usage[ResponseKey.maxDailyLimit].int,
-            let dailyUsed = usage[ResponseKey.dailyUsed].int,
-            let dailyRemaining = usage[ResponseKey.dailyRemaining].int,
            
             let startDate = dates[ResponseKey.startDate].date,
             let endDate = dates[ResponseKey.endDate].date,
@@ -108,7 +103,17 @@ final class CampaignCardResponse {
         else {
             return nil
         }
-
+        
+        let totalUsed = usage[ResponseKey.totalUsed].int
+        let maxDailyLimit = usage[ResponseKey.maxDailyLimit].int
+        let dailyUsed = usage[ResponseKey.dailyUsed].int
+        let dailyRemaining = usage[ResponseKey.dailyRemaining].int
+    
+        //for messageType == .client usage fields are required
+        if messageType == .client && (totalUsed == nil || maxDailyLimit == nil || dailyUsed == nil || dailyRemaining == nil) {
+            return nil
+        }
+        
         let title = content[ResponseKey.title].string ?? ""
         let message = content[ResponseKey.message].string ?? ""
         let detailsText = content[ResponseKey.detailsText].string ?? ""
@@ -121,10 +126,10 @@ final class CampaignCardResponse {
                   title: title,
                   message: message,
                   detailsText: detailsText,
-                  totalUsed: totalUsed,
-                  dailyUsed: dailyUsed,
-                  maxDailyLimit: maxDailyLimit,
-                  dailyRemaining: dailyRemaining,
+                  totalUsed: totalUsed ?? 0,
+                  dailyUsed: dailyUsed ?? 0,
+                  maxDailyLimit: maxDailyLimit ?? 0,
+                  dailyRemaining: dailyRemaining ?? 0,
                   startDate: startDate,
                   endDate: endDate,
                   launchDate: launchDate)

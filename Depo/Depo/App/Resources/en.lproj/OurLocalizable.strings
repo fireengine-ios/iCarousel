@@ -1,4 +1,4 @@
-"Welcome1Info" = "Live, Collect, Remember";
+"Welcome1Info" = "Live. Collect. Remember.";
 "Welcome1SubInfo" = "Collect your photos, videos, contacts and other files at lifebox! Access and remember whenever and wherever you are.";
 "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Location services are disabled in your device settings. To use the background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu.";
 "This file will be removed only from your album. You can access this file from Photos tab" = "This file will be removed only from your album. You can access this file from the Photos tab.";
@@ -72,9 +72,9 @@
 "Buy" = "Purchase";
 "Cancel" = "Cancel";
 "Info" = "Info";
-"You can open settings and cancel subscption." = "You can visit iTunes to cancel your package.";
+"You can open settings and cancel subscption." = "To cancel your package, please use iTunes & App Store menu in your device.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "To cancel your package, please send an SMS to 2200 with this text: \"IPTAL LIFEBOX %@\"";
-"You can visit iTunes to cancel your subscription" = "You can visit iTunes to cancel your package";
+"You can visit iTunes to cancel your subscription" = "To cancel your package, please use iTunes & App Store menu in your device.";
 "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, sent “STOP” to 2" = "Hm, can’t believe you are doing this! When you decide to reactivate it, we’ll be here for you :) If you insist, send 2 through SMS to 10010 for 100 GB pack deactivation and 50030 for 500 GB";
 "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships" = "Platinum and lifecell customers can send LIFE CANCEL, other customers can send LIFEBOX CANCEL to 3030 to cancel their memberships";
 "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080" = "To deactivate lifebox 50GB please send SMS with the text 50VYKL, for lifebox 500GB please send SMS with the text 500VYKL to the number 8080.";
@@ -192,11 +192,7 @@
 "Need to select folder" = "Need to select folder";
 "Back" = "Back";
 "Fail while uploading from LifeBox" = "Upload from lifebox failed";
-"tabbar_item_home_label" = "Home";
-"tabbar_item_gallery_label" = "Gallery";
-"tabbar_item_contacts_label" = "Contacts";
-"tabbar_item_all_files_label" = "All Files";
- 
+
 /*I don't understand*/
 "Sorry, but photos not selected" = "Photos are not selected";
 "Upload from lifebox" = "Upload from lifebox";
@@ -274,8 +270,6 @@
 "Usage Info and Packages" = "Usage Details";
 "Recently Deleted Files" = "Recently Deleted Files";
 "Auto Sync" = "Auto Sync";
-"auto_sync_album_items" = "Auto-Sync Items";
-"auto_sync_albums_description" = "Harry begins his first year at Hogwarts School of Witchcraft and Wizardry and learns about magic. During the year, Harry and his friends Ron Weasley and Hermione Granger become entangled in the mystery of the Philosopher's Stone which is being kept within the school.";
 "Back-up my contacts" = "Backup My Contacts";
 "Leave feedback" = "Contact Us";
 "Upload Photo" = "Upload Photo";
@@ -391,7 +385,7 @@
 "Please enter your password" = "Please enter your password";
 "Please enter a valid GSM number." = "Please enter a valid phone number.";
 "Please enter a valid email address." = "Please enter a valid e-mail address.";
-"You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications";
+"You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "You are finalizing the process with %@ e-mail address. Don’t forget to verify it with the verification code we sent to your email. We will be using this e-mail for password operations and notifications.";
 
 /*???*/
 "E-mail Usage Information" = "E-mail Usage Information";
@@ -622,19 +616,19 @@
 "%d%% Analyzed…" = "%d%% Analyzed…";
 "START USING" = "Get Started";
 "landingTitle0" = "Live, Collect, Remember";
-"landingSubTitle0" = "Collect your photos, videos, contacts and other files at lifebox! Access and remember whenever and wherever you are.";
+"landingSubTitle0" = "Backup your photos, videos, contacts and other files at lifebox and keep them forever";
 "landingTitle1" = "Auto-sync";
-"landingSubTitle1" = "Back up all your photos and videos automatically and access them from everywhere.";
+"landingSubTitle1" = "Sync your photos and videos automatically and access them wherever you are";
 "landingTitle2" = "Face/image recognition";
 "landingSubTitle2" = "Find your memories easily with smart albums";
 "landingTitle5" = "Automatic stories";
-"landingSubTitle5" = "Remember your memories with automatically created movies, collages and animations.";
+"landingSubTitle5" = "Relieve your memories with stories, collages and animations automatically created just for you";
 "landingTitle4" = "Free up space";
 "landingSubTitle4" = "Free up space from your device for new memories in just a tap";
 "landingTitle3" = "Contact-sync";
 "landingSubTitle3" = "Back up your contacts, never lose them";
 "landingTitle6" = "Social media";
-"landingSubTitle6" = "Transfer all your social meadia archives easily to lifebox";
+"landingSubTitle6" = "Easily transfer your social media archives to lifebox";
 "Add GSM Number" = "Add Phone Number";
 "The videos larger than 4GB can not be uploaded to lifebox" = "Videos larger than 4GB can not be uploaded to lifebox";
 "You have not enough memory in your device" = "You don't have enough memory on your device";
@@ -663,7 +657,6 @@
 "Bad internet connection" = "Bad internet connection";
 "download_error_unsupported_extension" = "Downloading is not supported for this type of file";
 "Show only synced items" = "Show only synced items";
-"photo_video_auto_sync_settings" = "AutoSync Settings";
 "Your lifebox storage is almost full!" = "Your lifebox storage is almost full!";
 "This edited photo will be saved as a new photo in your device gallery" = "This edited photo will be saved as a new photo in your device gallery";
 "We couldn’t find any place on your Lifebox yet." = "We couldn’t find any places in your lifebox yet.";
@@ -762,7 +755,6 @@
 
 /*PackageInfoView*/
 "my_storage" = "My Storage";
-"my_packages" = "My Packages";
 "see_details" = "See Details";
 "face_image_description" = "Since you have a standard account, 100 of your photos will be processed. You will only see 3 people, objects and places in your smart albums.";
 "face_image_upgrade" = "Upgrade to lifebox Premium to use this feature without any limitation.";
@@ -920,7 +912,6 @@
 "surname" = "Surname";
 "change password" = "Change Password";
 "left_space" = "%1$@ / %2$@";
-"storage_usage_information" = "Usage";
 
 /*Packages*/
 "packages_i_have" = "Packages I Have";
@@ -1126,11 +1117,6 @@
 "spotify_cancel_import_continue_button" = "Continue Importing";
 "spotify_cancel_import_cancel_button" = "Cancel Importing";
 "account_verified" = "Thank you for verifying your account!";
-"settings_userinfo_name_surname" = "settings_userinfo_name_surname";
-"settings_userinfo_email" = "settings_userinfo_email";
-"settings_userinfo_phone" = "settings_userinfo_phone";
-"settings_action_sheet_profile_details" = "settings_action_sheet_profile_details";
-"settings_action_sheet_edit_profile_photo" = "settings_action_sheet_edit_profile_photo";
 
 /*2FA Error Messages*/
 "two_fa_too_many_requests_error_message" = "Too many verification code requested, please try again later";
@@ -1447,9 +1433,6 @@
 "expand_my_storage" = "Expand My Storage";
 "delete_files" = "Delete Files";
 "LifeboxLargePopUpSubTitleBeetween80And99" = "Let's have a look at upgrade options";
-"LifeboxLargePopUpSubTitle100Premium" = "Please take a look at the upgrading options to upgrade your storage.";
-"LifeboxLargePopUpSubTitle100Freemium" = "Please take a look at the upgrading options to upgrade your storage. Your content will be deleted soon.";
-
 "LifeboxLargePopUpSubTitle100Premium" = "You have exceeded your lifebox storage. You can buy a new package to continue storing your memories or reduce your content to fit your available storage.";
 "LifeboxLargePopUpSubTitle100Freemium" = "You have exceeded your lifebox storage. Unless you buy a new package or reduce your contents to fit in your available storage, all of your content will be deleted.";
 "empty_trash_bin" = "Empty Trash Bin";
@@ -1470,66 +1453,64 @@
 "mobile_payment_open_popup_description_bold_range" = "";
 "mobile_payment_open_popup_later_button" = "Later";
 "mobile_payment_open_popup_continue_button" = "Continue";
-"we_recommend" = "We recommend";
-"show_more" = "Show more";
-"see_features" = "See features";
+"we_recommend" = "Recommended for You";
+"show_more" = "Show features";
 "show_less" = "Show less";
-"face_recognition_package_description" = "Face Recognition";
-"delete_dublicate_package_description" = "Delete Dublicate";
-"premium_user_package_description" = "Unlimited Photopick";
-"middle_user_package_description" = "15 Photopick";
-"original_сopy_package_description" = "Original сopy";
+"face_recognition_package_description" = "+ Unlimited Face&Image&Location Recognition";
+"delete_dublicate_package_description" = "+ Remove Duplicate Contacts from your Phone";
+"premium_user_package_description" = "+ Unlimited PhotoPick Analysis";
 "bundle_package_addon_type" = "Storage + Premium";
 "storage_only_package_addon_type" = "Storage only";
-"features_only_package_addon_type" = "Premium Features";
-"features_middle_only_package_addon_type" = "Standard+ Features";
-"feature_package_name" = "Premium";
-"middle_feature_package_name" = "Standard+";
-"feature_high_quality_picture" = "High quality picture";
-"feature_image_recognition" = "No Face/Image recognition";
-"feature_photopick" = "3 Photopick";
-"feature_delete_duplicate_contacts" = "Delete 5 duplicate contacts";
-"feature_standard_features" = "Standard Features";
-
-"storage_only_package_addon_type" = "Storage only";
-"original_сopy_package_description" = "Original сopy";
-"become_premium_navbar_title" = "We Recommend";
+"settings_userinfo_name_surname" = "Name Surname";
+"settings_userinfo_email" = "E-Mail";
+"settings_userinfo_phone" = "Phone Number";
+"settings_action_sheet_profile_details" = "Profile details";
+"settings_action_sheet_edit_profile_photo" = "Edit profile photo";
+"original_сopy_package_description" = "+ Back Up in Original Quality";
+"become_premium_navbar_title" = "Recommended for You";
 "become_premium_header_default_title" = "We have a special offer for you!";
-"become_premium_header_default_subtitle" = "You can have Premium features lorem ipsum dolor sit amet consecitur";
-"become_premium_header_people_title" = "become_premium_header_people_title";
-"become_premium_header_people_subtitle" = "become_premium_header_people_subtitle";
-"become_premium_header_places_title" = "become_premium_header_places_title";
-"become_premium_header_places_subtitle" = "become_premium_header_places_subtitle";
-"become_premium_header_things_title" = "become_premium_header_things_title";
-"become_premium_header_things_subtitle" = "become_premium_header_things_subtitle";
-"become_premium_header_contact_sync_title" = "become_premium_header_contact_sync_title";
-"become_premium_header_contact_sync_subtitle" = "become_premium_header_contact_sync_subtitle";
-"become_premium_or_text" = "Or,";
-"become_premium_see_all_packages" = "See All Packages";
-
-"contact_sync_confirm_premium_popup_title" = "Confirmation";
-"contact_sync_confirm_premium_popup_text" = "contact_sync_confirm_premium_popup_text";
+"become_premium_header_default_subtitle" = "Would you like to backup your memories in the original quality? Maybe you need some help with organizing your photos pile and contacts? Become a Premium member and let lifebox ease your life. Check out the Premium features and special offers below.";
+"become_premium_header_people_title" = "We have a special offer for you!";
+"become_premium_header_people_subtitle" = "Would you like to backup your memories in the original quality? Maybe you need some help with organizing your photos pile and contacts? Become a Premium member and let lifebox ease your life. Check out the Premium features and special offers below.";
+"become_premium_header_places_title" = "We have a special offer for you!";
+"become_premium_header_places_subtitle" = "Would you like to backup your memories in the original quality? Maybe you need some help with organizing your photos pile and contacts? Become a Premium member and let lifebox ease your life. Check out the Premium features and special offers below.";
+"become_premium_header_things_title" = "We have a special offer for you!";
+"become_premium_header_things_subtitle" = "Would you like to backup your memories in the original quality? Maybe you need some help with organizing your photos pile and contacts? Become a Premium member and let lifebox ease your life. Check out the Premium features and special offers below.";
 "become_premium_header_contact_sync_title" = "We have a special offer for you!";
-"become_premium_header_contact_sync_subtitle" = "You can have Premium features lorem ipsum dolor sit amet consecitur";
-"become_premium_description" = "Orijinal kalitede saklama\nSınırsız Photopick Analiz\nSınırsız Face/Image Processing\nDelete Duplicate Contacts";
-"become_premium_or_text" = "Or,";
-"become_premium_see_all_packages" = "See All Packages";
+"become_premium_header_contact_sync_subtitle" = "Would you like to backup your memories in the original quality? Maybe you need some help with organizing your photos pile and contacts? Become a Premium member and let lifebox ease your life. Check out the Premium features and special offers below.";
+"become_premium_description" = "Back Up in Original Quality\nUnlimited Face&Image&Location Recognition\nRemove Duplicate Contacts from your PhoneBook\nUnlimited PhotoPick Analysis (Get more likes on Instagram)";
+"become_premium_or_text" = "OR purchase extra 250GB storage and get Premium features for FREE!";
+"become_premium_see_all_packages" = "Compare All Plans";
 "dialog_header_contact_sync_vcf_file_upload_error" = "You have reached your lifebox storage limit!";
 "dialog_contact_sync_vcf_error_upper_button" = "Expand My Storage";
 "dialog_contact_sync_vcf_error_lower_button" = "Delete Files";
 "ubsent_contacts" = "There is no contact in your device";
-"ubsent_contacts_in_lifebox" = "There is not any contact in your Lifebox";
 "mobile_payment_link" = "Payment Services and Electronic Money Agreement";
 "mobile_payment_success_popup_title" = "You activated Turkcell Mobile Payment successfully.";
 "mobile_payment_success_popup_message" = "You can manage Turkcell Mobile Payment Permission under Settings-Permission menu.";
 "storage_usage_information" = "Usage";
-"auto_sync_album_items" = "Auto-Sync Items";
+"auto_sync_album_items" = "Auto-Sync";
 "my_packages" = "My Packages";
+"feature_package_name" = "Premium";
 "contact_sync_confirm_premium_popup_title" = "Confirmation";
-"contact_sync_confirm_premium_popup_text" = "contact_sync_confirm_premium_popup_text";
-"my_packages_description" = "Mevcut aboneliklerini aşağıdaki alanda göremiyorsan, aboneliklerini yenilemek için butona basabilirsin.";
-"photo_video_auto_sync_settings" = "AutoSync Settings";
-"ubsent_contacts_in_lifebox" = "There is not any contact in your Lifebox";
-
-"feature_storage_only_additional_1" = "feature_storage_only_additional_1";
-"feature_storage_only_additional_2" = "feature_storage_only_additional_2";
+"contact_sync_confirm_premium_popup_text" = "To delete your duplicate contacts in your device easily and unlock many more features, become a Premium member.";
+"my_packages_description" = "If you want to restore your existing purchases, click on <b>Restore Purchases</b> button.";
+"photo_video_auto_sync_settings" = "Auto-Sync Settings";
+"ubsent_contacts_in_lifebox" = "There is no any contact in your lifebox";
+"auto_sync_albums_description" = "You can choose which albums to sync automatically.";
+"tabbar_item_home_label" = "Home";
+"tabbar_item_gallery_label" = "Gallery";
+"tabbar_item_contacts_label" = "Contacts";
+"tabbar_item_all_files_label" = "All Files";
+"see_features" = "Show features";
+"middle_user_package_description" = "+ 15 PhotoPick Analysis (Get more likes on Instagram)";
+"features_only_package_addon_type" = "Premium Features";
+"features_middle_only_package_addon_type" = "Standard+ Features";
+"middle_feature_package_name" = "Standard+";
+"feature_high_quality_picture" = "Back Up in High Quality";
+"feature_image_recognition" = "Auto-Sync";
+"feature_photopick" = "Contact Backup";
+"feature_delete_duplicate_contacts" = "Easy and Secure Sharing";
+"feature_standard_features" = "Standard Features";
+"feature_storage_only_additional_1" = "Free Up Space";
+"feature_storage_only_additional_2" = "Automatic Stories and Memory Reminders";
