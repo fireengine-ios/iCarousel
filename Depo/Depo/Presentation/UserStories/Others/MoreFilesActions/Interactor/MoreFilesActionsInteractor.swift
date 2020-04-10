@@ -877,8 +877,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         
         albumService.delete(albums: albums, success: { [weak self] removedAlbums in
-            ItemOperationManager.default.didMoveToTrashAlbums(removedAlbums)
-            self?.succesAction(elementType: .removeAlbum)()
+            MediaItemsAlbumOperationService.shared.deleteRemoteAlbums(removedAlbums, completion: {
+                ItemOperationManager.default.didMoveToTrashAlbums(removedAlbums)
+                self?.succesAction(elementType: .removeAlbum)()
+            })
+            
         }, fail: failAction(elementType: .removeAlbum))
     }
     
@@ -1483,10 +1486,58 @@ extension MoreFilesActionsInteractor {
                                                   secondAction: { vc in
                                                     vc.close(completion: okHandler)
             })
-            
             DispatchQueue.main.async {
+                self?.router.hideSpiner()
                 self?.router.presentViewController(controller: controller)
             }
+        }
+    }
+    
+    private func moveToTrashFir(items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
+        guard !items.isEmpty else {
+            self.output?.operationFailed(type: .moveToTrash, message: TextConstants.removeReadOnlyAlbumError)
+            return
+        }
+        
+        let okHandler: VoidHandler = { [weak self] in
+            if let items = items as? [PeopleItem] {
+                self?.analyticsService.trackFileOperationGAEvent(operationType: .trash,
+                                                                 itemsType: .people,
+                                                                 itemsCount: items.count)
+                self?.fileService.moveToTrashPeople(items: items, success: success, fail:  fail)
+                
+            } else if let items = items as? [ThingsItem] {
+                self?.analyticsService.trackFileOperationGAEvent(operationType: .trash,
+                                                                 itemsType: .things,
+                                                                 itemsCount: items.count)
+                self?.fileService.moveToTrashThings(items: items, success: success, fail: fail)
+                
+            } else if let items = items as? [PlacesItem] {
+                self?.analyticsService.trackFileOperationGAEvent(operationType: .trash,
+                                                                 itemsType: .places,
+                                                                 itemsCount: items.count)
+                self?.fileService.moveToTrashPlaces(items: items, success: success, fail: fail)
+            }
+        }
+        
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .cancel)
+            vc.close()
+        }
+        
+        let isHiddenAlbums = (items.first?.status == .hidden)
+        let message = isHiddenAlbums ? TextConstants.moveToTrashHiddenAlbumsConfirmationPopupText : TextConstants.deleteAlbums
+        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
+                                              message: message,
+                                              image: .delete,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              firstAction: cancelHandler,
+                                              secondAction: { vc in
+                                                vc.close(completion: okHandler)
+        })
+        DispatchQueue.main.async {
+            self.router.presentViewController(controller: controller)
         }
     }
 }

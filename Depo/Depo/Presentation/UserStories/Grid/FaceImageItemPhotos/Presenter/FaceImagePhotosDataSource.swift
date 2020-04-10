@@ -10,6 +10,7 @@ import UIKit
 
 protocol FaceImagePhotosDataSourceDelegate: BaseDataSourceForCollectionViewDelegate {
     func didFinishFIRAlbum(operation: ElementTypes, album: Item)
+    func didFinishAlbumOperation()
 }
 
 final class FaceImagePhotosDataSource: BaseDataSourceForCollectionView {
@@ -43,6 +44,7 @@ final class FaceImagePhotosDataSource: BaseDataSourceForCollectionView {
     
     private func notifyOperation(type: ElementTypes, for albums: [AlbumItem]) {
         guard let uuid = albums.first?.uuid, uuid == album?.uuid, let item = item else {
+            firDelegate?.didFinishAlbumOperation()
             return
         }
         

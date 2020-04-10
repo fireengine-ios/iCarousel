@@ -114,7 +114,6 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
 
 extension PermissionsView: UITextViewDelegate {
     
-    @available(iOS 10.0, *)
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         return textviewDelegate?.tappedOnURL(url: URL) ?? true
     }

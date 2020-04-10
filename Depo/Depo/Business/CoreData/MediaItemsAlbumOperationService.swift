@@ -86,7 +86,11 @@ final class MediaItemsAlbumOperationService {
             //update isAvailable for related MediaItems
             self.updateRelatedItems(for: changedAlbums)
             
-            self.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
+            self.coreDataStack.saveDataForContext(context: context, savedCallBack: {
+                if !changedAlbums.isEmpty {
+                    NotificationCenter.default.post(name: .localAlbumStatusDidChange, object: nil)
+                }
+            })
         }
     }
 }
@@ -113,6 +117,30 @@ extension MediaItemsAlbumOperationService {
         execute(request: fetchRequest, context: context, albumsCallBack: albumsCallBack)
     }
     
+    func createLocalAlbumsIfNeeded(localIds: [String], context: NSManagedObjectContext) {
+        privateQueue.sync { [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            let semaphore = DispatchSemaphore(value: 0)
+            self.getLocalAlbums(localIds: localIds, context: context) { mediaItemAlbums in
+                let mediaItemAlbumsIds = Set(mediaItemAlbums.compactMap { $0.localId })
+                let newAlbumIds = Set(localIds).subtracting(mediaItemAlbumsIds)
+
+                if !newAlbumIds.isEmpty {
+                    let fetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: Array(newAlbumIds), options: nil)
+                    fetchResult.enumerateObjects { asset, _, _ in
+                        let hasItems = asset.photosCount > 0 || asset.videosCount > 0
+                        _ = MediaItemsLocalAlbum(asset: asset, hasItems: hasItems, context: context)
+                    }
+                }
+                semaphore.signal()
+            }
+            semaphore.wait()
+        }
+    }
+    
     private func getAutoSyncAlbums(context: NSManagedObjectContext, albumsCallBack: @escaping AutoSyncAlbumsCallBack) {
         let fetchRequest: NSFetchRequest = MediaItemsLocalAlbum.fetchRequest()
         
@@ -122,6 +150,8 @@ extension MediaItemsAlbumOperationService {
         fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
         if CacheManager.shared.isCacheActualized {
             fetchRequest.predicate = NSPredicate(format: "\(MediaItemsLocalAlbum.PropertyNameKey.items).@count > 0")
+        } else {
+            fetchRequest.predicate = NSPredicate(format: "\(MediaItemsLocalAlbum.PropertyNameKey.hasItems) = true")
         }
         
         execute(request: fetchRequest, context: context) { mediaItemAlbums in
@@ -134,6 +164,16 @@ extension MediaItemsAlbumOperationService {
 //MARK: - Public Remote Albums Actions
 
 extension MediaItemsAlbumOperationService {
+    
+    func createRemoteAlbums(albums: [AlbumItem], completion: @escaping VoidHandler) {
+        let context = coreDataStack.newChildBackgroundContext
+        context.perform { [weak self] in
+            albums.forEach { album in
+                _ = MediaItemsAlbum(uuid: album.uuid, name: album.name, context: context)
+            }
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
+        }
+    }
     
     func createNewRemoteAlbum(_ albumItem: AlbumItem, completion: @escaping VoidHandler) {
         let context = coreDataStack.newChildBackgroundContext
@@ -162,14 +202,14 @@ extension MediaItemsAlbumOperationService {
     }
 
     
-    func remoteAlbumRenamed(_ albumUuid: String, completion: @escaping VoidHandler) {
+    func remoteAlbumRenamed(_ albumUuid: String, newName: String, completion: @escaping VoidHandler) {
         let context = coreDataStack.newChildBackgroundContext
         
         getRemoteAlbums(uuids: [albumUuid], context: context) { [weak self] remoteAlbums in
             guard let self = self, let album = remoteAlbums.first else {
                 return
             }
-            
+            album.name = newName
             album.updateRelatedLocalAlbum(context: context)
             
             //TODO: Notify observers
@@ -177,19 +217,7 @@ extension MediaItemsAlbumOperationService {
             self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
     }
-    
-    func saveNewRemoteAlbums(albumItems: [AlbumItem], completion: @escaping VoidHandler) {
-        coreDataStack.performBackgroundTask { [weak self] context in
-            albumItems.forEach {
-               _ = MediaItemsAlbum(uuid: $0.uuid, name: $0.name, context: context)
-            }
-            
-            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: {
-                completion()
-            })
-        }
-    }
-    
+
     func addItemsToRemoteAlbum(itemsUuids: [String], albumUuid: String, completion: @escaping VoidHandler) {
         changeRelationships(type: .append, itemsUuids: itemsUuids, albumUuid: albumUuid, completion: completion)
     }
@@ -201,7 +229,11 @@ extension MediaItemsAlbumOperationService {
     private func changeRelationships(type: RelationshipsChangesType, itemsUuids: [String], albumUuid: String, completion: @escaping VoidHandler) {
         let context = coreDataStack.newChildBackgroundContext
         getRemoteAlbums(uuids: [albumUuid], context: context) { [weak self] remoteAlbums in
-            guard let self = self, let album = remoteAlbums.first(where: { $0.uuid == albumUuid }) else {
+            guard
+                let self = self,
+                let album = remoteAlbums.first(where: { $0.uuid == albumUuid })
+            else {
+                completion()
                 return
             }
             
@@ -255,14 +287,14 @@ extension MediaItemsAlbumOperationService {
         inProcessLocalAlbums = true
         isAlbumsActualized = false
         
-        localMediaStorage.getLocalAlbums { [weak self] albums in
+        localMediaStorage.getLocalAlbums { [weak self] response in
             guard let self = self else {
                 return
             }
           
             let context = self.coreDataStack.newChildBackgroundContext
             
-            self.saveLocalAlbums(assets: albums, context: context, completion: { [weak self] in
+            self.saveLocalAlbums(assetsResponse: response, context: context, completion: { [weak self] in
                 guard let self = self else {
                     return
                 }
@@ -293,7 +325,45 @@ extension MediaItemsAlbumOperationService {
         }
     }
     
-    private func saveLocalAlbums(assets: [PHAssetCollection], context: NSManagedObjectContext, completion: @escaping VoidHandler) {
+    func actualizeRemoteAlbums(completion: @escaping BoolHandler) {
+        guard isAlbumsActualized, !inProcessLocalAlbums else {
+            completion(false)
+            return
+        }
+        
+        isAlbumsActualized = false
+        
+        coreDataStack.performBackgroundTask { [weak self] context in
+            guard let self = self else {
+                completion(false)
+                return
+            }
+            
+            let callback = { [weak self] in
+                self?.isAlbumsActualized = true
+                
+                if self?.waitingLocalAlbumsCallBack != nil {
+                    self?.getAutoSyncAlbums(context: context) { albums in
+                        self?.waitingLocalAlbumsCallBack?(albums)
+                        self?.waitingLocalAlbumsCallBack = nil
+                    }
+                }
+                completion(true)
+            }
+            
+            self.getAllRemoteAlbums { response in
+                switch response {
+                case .success(let remoteAlbums):
+                    self.updateRemoteAlbums(remoteAlbums, context: context, completion: callback)
+                case .failed(let error):
+                    debugPrint(error.description)
+                    completion(false)
+                }
+            }
+        }
+    }
+    
+    private func saveLocalAlbums(assetsResponse: LocalAssetsResponse, context: NSManagedObjectContext, completion: @escaping VoidHandler) {
         guard localMediaStorage.photoLibraryIsAvailible() else {
             completion()
             return
@@ -307,7 +377,7 @@ extension MediaItemsAlbumOperationService {
             //TODO: Notify observers of renaming albums
             var renamedAlbumsIds = [String]()
             
-            assets.forEach { asset in
+            assetsResponse.forEach { asset, hasItems in
                 if let album = mediaItemAlbums.first(where: { $0.localId == asset.localIdentifier }) {
                     if album.name != asset.localizedTitle {
                         album.name = asset.localizedTitle
@@ -315,15 +385,16 @@ extension MediaItemsAlbumOperationService {
                         
                         renamedAlbumsIds.append(asset.localIdentifier)
                     }
+                    album.hasItems = hasItems
                 } else {
                     //create new local albums
-                    _ = MediaItemsLocalAlbum(asset: asset, context: context)
+                    _ = MediaItemsLocalAlbum(asset: asset, hasItems: hasItems, context: context)
                 }
             }
             
             //delete albums
 
-            let localIdentifiers = assets.map { $0.localIdentifier }
+            let localIdentifiers = assetsResponse.map { $0.asset.localIdentifier }
             let deletedAlbums = mediaItemAlbums.filter { album -> Bool in
                 if let localId = album.localId, localIdentifiers.contains(localId) {
                     return false
@@ -344,7 +415,8 @@ extension MediaItemsAlbumOperationService {
         let context = coreDataStack.newChildBackgroundContext
         context.perform { [weak self] in
             assets.forEach {
-                _ = MediaItemsLocalAlbum(asset: $0, context: context)
+                let hasItems = $0.photosCount > 0 || $0.videosCount > 0
+                _ = MediaItemsLocalAlbum(asset: $0, hasItems: hasItems, context: context)
             }
             self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }

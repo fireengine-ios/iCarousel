@@ -12,7 +12,7 @@ import CoreData
 
 
 public class MediaItemsLocalAlbum: NSManagedObject {
-    convenience init(asset: PHAssetCollection, context: NSManagedObjectContext) {
+    convenience init(asset: PHAssetCollection, hasItems: Bool, context: NSManagedObjectContext) {
         let entityDescr = NSEntityDescription.entity(forEntityName: MediaItemsLocalAlbum.Identifier,
                                                      in: context)!
         self.init(entity: entityDescr, insertInto: context)
@@ -20,6 +20,7 @@ public class MediaItemsLocalAlbum: NSManagedObject {
         localId = asset.localIdentifier
         name = asset.localizedTitle
         isMain = asset.assetCollectionSubtype == .smartAlbumUserLibrary
+        self.hasItems = hasItems
         
         updateRelatedMediaItems(album: asset, context: context)
         updateRelatedRemoteAlbums(context: context)
@@ -47,11 +48,24 @@ extension MediaItemsLocalAlbum {
             return
         }
         
+        if relatedRemote?.name != name {
+            relatedRemote = nil
+        }
+        
         let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
         request.predicate = NSPredicate(format: "\(MediaItemsAlbum.PropertyNameKey.name) = %@", name)
         
         if let relatedAlbums = try? context.fetch(request) {
             relatedRemote = relatedAlbums.first
         }
+    }
+    
+    func updateHasItems() {
+        guard let items = items else {
+            hasItems = false
+            return
+        }
+        
+        hasItems = items.count > 0
     }
 }

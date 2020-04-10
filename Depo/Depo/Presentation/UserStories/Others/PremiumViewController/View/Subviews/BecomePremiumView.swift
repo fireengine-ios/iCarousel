@@ -15,16 +15,17 @@ protocol BecomePremiumViewDelegate: class {
 
 final class BecomePremiumView: UIView, NibInit {
     
-    @IBOutlet private weak var scrollView: UIScrollView! {
+    @IBOutlet private weak var scrollView: ControlContainableScrollView! {
         willSet {
             newValue.backgroundColor = ColorConstants.lighterGray
+            newValue.delaysContentTouches = false
         }
     }
     
     @IBOutlet private weak var contentView: UIStackView! {
         willSet {
             newValue.alignment = .center
-            newValue.spacing = 24
+            newValue.spacing = 12
         }
     }
     
@@ -47,6 +48,8 @@ final class BecomePremiumView: UIView, NibInit {
             newValue.lineBreakMode = .byWordWrapping
         }
     }
+    
+    @IBOutlet weak var headerStackView: UIStackView!
     
     private lazy var descriptionStackView: UIStackView = {
         let newValue = UIStackView()
@@ -108,9 +111,10 @@ final class BecomePremiumView: UIView, NibInit {
         let features = plans
             .flatMap { $0.offers }
             .flatMap { $0.features }
+            .map { "+" + $0.description }
             .removingDuplicates()
 
-        addDescription(features)
+        addDescription([TextConstants.featureStandardFeatures] + features)
         
         for (index, plan) in plans.enumerated() {
             guard let offer = plan.offers.first else {
@@ -146,16 +150,16 @@ final class BecomePremiumView: UIView, NibInit {
         contentView.addArrangedSubview(policyView)
     }
     
-    private func addDescription(_ features: [AuthorityType]) {
+    private func addDescription(_ features: [String]) {
         guard !features.isEmpty else {
             return
         }
         
         features.forEach { feature in
             let label = UILabel()
-            label.text = feature.description
+            label.text = feature
             label.font = UIFont.TurkcellSaturaMedFont(size: 18)
-            label.textColor = ColorConstants.marineTwo
+            label.textColor = ColorConstants.cardBorderOrange
             label.textAlignment = .center
             label.numberOfLines = 0
             label.lineBreakMode = .byWordWrapping
@@ -163,7 +167,7 @@ final class BecomePremiumView: UIView, NibInit {
         }
         
         descriptionStackView.widthAnchor.constraint(equalToConstant: 200).activate()
-        contentView.addArrangedSubview(descriptionStackView)
+        headerStackView.addArrangedSubview(descriptionStackView)
     }
     
     //MARK: - Actions

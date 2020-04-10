@@ -11,30 +11,39 @@ import Foundation
 final class SubscriptionPlan {
     enum AddonType {
         case bundle
+        case middleOnly
         case storageOnly
         case featureOnly
         
         static func make(model: Any) -> AddonType? {
             let isFeaturePack: Bool
             let hasAttachedFeature: Bool
+            var isMiddleUser: Bool?
             
             if let package = model as? PackageModelResponse {
                 isFeaturePack = package.isFeaturePack ?? false
                 hasAttachedFeature = package.hasAttachedFeature ?? false
+                isMiddleUser = getMiddleAuthority(authorities: package.authorities)
             } else if let plan = model as? SubscriptionPlanBaseResponse {
                 isFeaturePack = plan.subscriptionPlanIsFeaturePack ?? false
                 hasAttachedFeature = plan.subscriptionPlanHasAttachedFeature ?? false
+                isMiddleUser = getMiddleAuthority(authorities: plan.subscriptionPlanAuthorities)
             } else {
                 return nil
             }
             
             if isFeaturePack {
-                return .featureOnly
+                return isMiddleUser == true ? .middleOnly : .featureOnly
             } else if hasAttachedFeature == false {
                 return .storageOnly
             } else {
                 return .bundle
             }
+        }
+        
+        static private func getMiddleAuthority(authorities: [PackagePackAuthoritiesResponse]?) -> Bool? {
+            guard let authorities = authorities else { return false }
+            return authorities.compactMap({ $0.authorityType }).contains(.middleUser)
         }
     }
     

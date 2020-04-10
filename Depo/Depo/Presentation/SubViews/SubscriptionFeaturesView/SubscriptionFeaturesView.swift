@@ -14,6 +14,8 @@ final class SubscriptionFeaturesView: UIView {
         case storageOnly
         case recommended(features: [AuthorityType])
         case features(_ features: [AuthorityType])
+        case middleFeatures
+        case premiumOnly
     }
     
     private lazy var stackView: UIStackView = {
@@ -26,10 +28,10 @@ final class SubscriptionFeaturesView: UIView {
     private lazy var showButton: UIButton = {
         let newValue = UIButton()
         newValue.setTitle(TextConstants.showMore, for: .normal)
-        newValue.setTitleColor(UIColor.lrTealishTwo, for: .normal)
+        newValue.setTitleColor(ColorConstants.textGrayColor, for: .normal)
         
         newValue.setTitle(TextConstants.showLess, for: .selected)
-        newValue.setTitleColor(ColorConstants.coolGrey, for: .selected)
+        newValue.setTitleColor(ColorConstants.textGrayColor, for: .selected)
         
         newValue.addTarget(self, action: #selector(onCollapseTap), for: .touchUpInside)
         
@@ -60,7 +62,7 @@ final class SubscriptionFeaturesView: UIView {
     
     func configure(features: Features) {
         self.features = features
-        prepateInitialState()
+        prepareInitialState()
     }
     
     private func addSubviews() {
@@ -89,17 +91,18 @@ final class SubscriptionFeaturesView: UIView {
         dividerLineView.trailingAnchor.constraint(equalTo: self.showButton.trailingAnchor).activate()
     }
     
-    private func prepateInitialState() {
+    private func prepareInitialState() {
         switch features {
-        case .storageOnly:
-            removeCollapseButton(offsetFromBottom: 0)
-
-        case .features:
+        case .features, .middleFeatures, .storageOnly:
             break
+            
+        case .premiumOnly:
+            removeCollapseButton(offsetFromBottom: 0)
             
         case .recommended(features: let features):
             removeCollapseButton(offsetFromBottom: -8)
-            addFeatures(features)
+            addFeatures([TextConstants.featureStandardFeatures])
+            addFeatures(features.map({ "+" + $0.description }), isPremium: true)
         }
     }
     
@@ -109,12 +112,12 @@ final class SubscriptionFeaturesView: UIView {
         stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: constant).activate()
     }
     
-    private func addFeatures(_ features: [AuthorityType]) {
-        for feature in features {
+    private func addFeatures(_ stringFeatures: [String], isPremium: Bool = true) {
+        for feature in stringFeatures {
             let label = UILabel()
-            label.text = feature.description
-            label.font = UIFont.TurkcellSaturaFont(size: 16)
-            label.textColor = ColorConstants.darkText
+            label.text = feature
+            label.font = isPremium ? UIFont.TurkcellSaturaBolFont(size: 16) : UIFont.TurkcellSaturaFont(size: 16)
+            label.textColor = isPremium ? ColorConstants.cardBorderOrange : ColorConstants.darkText
             label.textAlignment = .center
             stackView.addArrangedSubview(label)
         }
@@ -133,12 +136,27 @@ final class SubscriptionFeaturesView: UIView {
         
         if sender.isSelected {
             switch features {
-            case .recommended, .storageOnly:
+            case .recommended, .premiumOnly:
                 ///expanded by default
                 break
                 
             case .features(let features):
-                addFeatures(features)
+                addFeatures([TextConstants.featureStandardFeatures])
+                addFeatures(features.map({ "+" + $0.description }), isPremium: true)
+            case .middleFeatures:
+                let redactedFeatures = [TextConstants.featureHighQualityPicture,
+                                        TextConstants.featureImageRecognition,
+                                        TextConstants.middleUserPackageDescription,
+                                        TextConstants.featureDeleteDuplicationContacts]
+                addFeatures(redactedFeatures, isPremium: false)
+            case .storageOnly:
+                let redactedFeatures = [TextConstants.featureHighQualityPicture,
+                                        TextConstants.featureImageRecognition,
+                                        TextConstants.featurePhotopick,
+                                        TextConstants.featureDeleteDuplicationContacts,
+                                        TextConstants.featureStorageOnlyAdditional1,
+                                        TextConstants.featureStorageOnlyAdditional2]
+                addFeatures(redactedFeatures, isPremium: false)
             }
         } else {
             hideFeatures()

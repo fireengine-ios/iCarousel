@@ -14,6 +14,7 @@ extension MediaItemsLocalAlbum {
     enum PropertyNameKey {
         static let creationDate = #keyPath(MediaItemsLocalAlbum.creationDate)
         static let fileType = #keyPath(MediaItemsLocalAlbum.fileType)
+        static let hasItems = #keyPath(MediaItemsLocalAlbum.hasItems)
         static let isEnabled = #keyPath(MediaItemsLocalAlbum.isEnabled)
         static let isMain = #keyPath(MediaItemsLocalAlbum.isMain)
         static let localId = #keyPath(MediaItemsLocalAlbum.localId)
@@ -39,6 +40,7 @@ extension MediaItemsLocalAlbum {
     @NSManaged public var name: String?
     @NSManaged public var items: NSOrderedSet?
     @NSManaged public var relatedRemote: MediaItemsAlbum?
+    @NSManaged public var hasItems: Bool
 
 }
 

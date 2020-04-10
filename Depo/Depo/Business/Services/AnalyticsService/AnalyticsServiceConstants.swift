@@ -156,6 +156,7 @@ enum AnalyticsAppScreens {
     case signUpOTP
     case doubleOTP
     case autosyncSettingsFirst
+    case liveCollectRemember
     ///Main Screens
     case homePage
     case photos
@@ -277,6 +278,8 @@ enum AnalyticsAppScreens {
             return "Login"
         case .signUpScreen:
             return "Signup"
+        case .liveCollectRemember:
+            return "Live Collect Remember"
         case .forgotPassword:
             return "Forget Password"
         case .termsAndServices:

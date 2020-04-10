@@ -19,10 +19,12 @@ final class CampaignCardResponse {
         private enum ResponseKey {
             static let detailsUrl = "detailsUrl"
             static let imageUrl = "imageUrl"
+            static let videoUrl = "videoUrl"
             static let content = "content"
             static let messageType = "messageType"
             static let title = "title"
             static let message = "message"
+            static let detailsText = "detailsText"
             static let usage = "usage"
             static let totalUsed = "totalUsed"
             static let maxDailyLimit = "maxDailyLimit"
@@ -34,11 +36,13 @@ final class CampaignCardResponse {
             static let launchDate = "launchDate"
         }
     
-    let detailsUrl: URL
+    let detailsUrl: String
     let imageUrl: URL
+    let videoUrl: URL?
     let messageType: MessageType
     let title: String
     let message: String
+    let detailsText: String
     
     let totalUsed: Int
     let maxDailyLimit: Int
@@ -49,11 +53,13 @@ final class CampaignCardResponse {
     let endDate: Date
     let launchDate: Date
 
-    init(detailsUrl: URL,
+    init(detailsUrl: String,
          imageUrl: URL,
+         videoUrl: URL?,
          messageType: MessageType,
          title: String,
          message: String,
+         detailsText: String,
          totalUsed: Int,
          dailyUsed: Int,
          maxDailyLimit: Int,
@@ -64,9 +70,11 @@ final class CampaignCardResponse {
         
         self.detailsUrl = detailsUrl
         self.imageUrl = imageUrl
+        self.videoUrl = videoUrl
         self.messageType = messageType
         self.title = title
         self.message = message
+        self.detailsText = detailsText
         
         self.totalUsed = totalUsed
         self.maxDailyLimit = maxDailyLimit
@@ -85,7 +93,7 @@ final class CampaignCardResponse {
         let dates = json[ResponseKey.dates]
         
         guard
-            let detailsUrl = json[ResponseKey.detailsUrl].url,
+            let detailsUrl = json[ResponseKey.detailsUrl].string,
             let imageUrl = json[ResponseKey.imageUrl].url,
             let messageType = MessageType(rawValue: content[ResponseKey.messageType].stringValue),
             
@@ -103,8 +111,23 @@ final class CampaignCardResponse {
 
         let title = content[ResponseKey.title].string ?? ""
         let message = content[ResponseKey.message].string ?? ""
+        let detailsText = content[ResponseKey.detailsText].string ?? ""
+        let videoUrl = json[ResponseKey.videoUrl].url
         
-        self.init(detailsUrl: detailsUrl, imageUrl: imageUrl, messageType: messageType, title: title, message: message, totalUsed: totalUsed, dailyUsed: dailyUsed, maxDailyLimit: maxDailyLimit, dailyRemaining: dailyRemaining, startDate: startDate, endDate: endDate, launchDate: launchDate)
+        self.init(detailsUrl: detailsUrl,
+                  imageUrl: imageUrl,
+                  videoUrl: videoUrl,
+                  messageType: messageType,
+                  title: title,
+                  message: message,
+                  detailsText: detailsText,
+                  totalUsed: totalUsed,
+                  dailyUsed: dailyUsed,
+                  maxDailyLimit: maxDailyLimit,
+                  dailyRemaining: dailyRemaining,
+                  startDate: startDate,
+                  endDate: endDate,
+                  launchDate: launchDate)
     }
 }
 

@@ -383,7 +383,7 @@ class EditinglBar: CustomTabBar {
         }
     }
     
-    override func setupItems(withImageToTitleNames names: [ImageNameToTitleTupple]) {
+    func setupItems(withImageToTitleNames names: [ImageNameToTitleTupple]) {
         let items = names.map { item -> CustomTabBarItem in
             var image = UIImage(named: item.imageName)
             

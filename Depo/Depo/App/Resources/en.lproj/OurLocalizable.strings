@@ -3,8 +3,8 @@
 "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Location services are disabled in your device settings. To use the background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu.";
 "This file will be removed only from your album. You can access this file from Photos tab" = "This file will be removed only from your album. You can access this file from the Photos tab.";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Deleting this album will not remove the files from lifebox. You can access these files from the Photos tab. Are you sure you want to delete?";
-"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "The selected album will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space.";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "The selected files will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space.";
+"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "The selected album will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space. Trash bin is located in All Files Menu.";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "The selected files will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space. Trash bin is located in All Files Menu.";
 "Purchase" = "Purchase";
 "Packages" = "Packages";
 "Verification code is blocked.\nPlease request a new code" = "Verification code is blocked. Please request a new code.";
@@ -97,7 +97,7 @@
 "Delete" = "Delete";
 "Some photos will also be deleted from an album." = "Some photos will also be deleted from an album.";
 "Allow lifebox to delete %d photos?" = "Allow lifebox to delete %d photos?";
-"There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "There are %d duplicated photos both on your device and lifebox. Clear some space by selecting the photos that you want to delete.";
+"There are %d duplicated photos both in your device and lifebox. Clear some space by selecting the photos that you want to delete." = "There are %d duplicated photos both on your device and lifebox. Clear some space by selecting the photos that you want to delete from your device.";
 "Download to Camera Roll" = "Download to Device Gallery";
 "Share Album" = "Share Album";
 "Album Details" = "Album Details";
@@ -192,7 +192,11 @@
 "Need to select folder" = "Need to select folder";
 "Back" = "Back";
 "Fail while uploading from LifeBox" = "Upload from lifebox failed";
-
+"tabbar_item_home_label" = "Home";
+"tabbar_item_gallery_label" = "Gallery";
+"tabbar_item_contacts_label" = "Contacts";
+"tabbar_item_all_files_label" = "All Files";
+ 
 /*I don't understand*/
 "Sorry, but photos not selected" = "Photos are not selected";
 "Upload from lifebox" = "Upload from lifebox";
@@ -271,7 +275,7 @@
 "Recently Deleted Files" = "Recently Deleted Files";
 "Auto Sync" = "Auto Sync";
 "auto_sync_album_items" = "Auto-Sync Items";
-"auto_sync_albums_description" = "";
+"auto_sync_albums_description" = "Harry begins his first year at Hogwarts School of Witchcraft and Wizardry and learns about magic. During the year, Harry and his friends Ron Weasley and Hermione Granger become entangled in the mystery of the Philosopher's Stone which is being kept within the school.";
 "Back-up my contacts" = "Backup My Contacts";
 "Leave feedback" = "Contact Us";
 "Upload Photo" = "Upload Photo";
@@ -1251,7 +1255,7 @@
 "campaign_description_label_experienced_user" = "You have not started today. Analyze your photos with PhotoPick and get more chance. Your total draw: %d";
 "campaign_description_label_limit_reached" = "You have already completed daily draw for today. Keep analyzing tomorrow! Your total draw: %d";
 "campaign_description_label_another" = "Your total draw is %d! Analyze your photos with PhotoPick and increase your chance to be one of the 20 winners for Samsung Galaxy Note 10!";
-"campaign_campaign_detail_button" = "Campaign Details";
+"campaign_campaign_detail_button" = "Click to See";
 "analyze_photo_pic_detail_button" = "Analyze with PhotoPick";
 "campaign_detail_title" = "Campaign Details";
 "campaign_detail_more_info_button" = "For more information please click here";
@@ -1326,7 +1330,7 @@
 "profile_detail_address_placeholder" = "Please enter your address information";
 "profile_detail_error_contact_call_center" = "Contact call-center to change your number";
 "temporary_error" = "Temporary error occurred, please try again";
-"move_to_trash_albums_message" = "The selected album(s) will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space.";
+"move_to_trash_albums_message" = "The selected album(s) will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space. Trash bin is located in All Files Menu.";
 "move_to_trash_albums_success_message" = "Album(s) sent to trash bin successfully.";
 "confirmation_popup_title_hide" = "Hide";
 "confirmation_popup_message_hide" = "Selected item(s) will only be available in \"Hidden\" Album. You can restore them any time. Are you sure to continue?";
@@ -1391,7 +1395,7 @@
 "hidden_bin_album_slider_empty" = "There is no hidden album yet.";
 "hidden_bin_empty" = "There is no hidden item yet.";
 "hidden_bin_navbar_title" = "Hidden";
-"unhide_popup_text" = "Selected item(s) will be unhiden and moved back to previous folders. Are you sure to continue?";
+"unhide_popup_text" = "Selected item(s) will be unhidden and moved back to previous folders. Are you sure to continue?";
 
 /*divorce card*/
 "divorce_card_title" = "Tip: You can add some fun to your memories with our new GiFs and Stickers and share them with your friends. Select a photo and start having FUN! Watch the video for the details.";
@@ -1403,31 +1407,31 @@
 "delete_confirmation_popup_title" = "Delete";
 
 /*Is this permanently delete or delete>move to trash bin action?*/
-"delete_confirmation_popup_text" = "The selected item(s) will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space.";
+"delete_confirmation_popup_text" = "The selected item(s) will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space. Trash bin is located in All Files Menu.";
 "restore_confirmation_popup_title" = "Restore";
 "restore_confirmation_popup_text" = "Selected item(s) will be restored. Are you sure to continue?";
 "delete_from_hidden_bin_popup_success_title" = "Delete";
 
 /*are we sure it's permanently delete? or is it just delete for moving items to trash bin?*/
-"delete_from_hidden_bin_popup_success_text" = "The selected files will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space.";
-"unhide_popup_success_title" = "Item(s) unhiden successfully.";
-"delete_popup_text" = "The selected file(s) will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space.";
+"delete_from_hidden_bin_popup_success_text" = "The selected files will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space. Trash bin is located in All Files Menu.";
+"unhide_popup_success_title" = "Item(s) unhidden successfully.";
+"delete_popup_text" = "The selected file(s) will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space. Trash bin is located in All Files Menu.";
 "PackagesPolicyTextBillo" = "Subsriptions are renewed on a monthly basis\nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Policy: https://billostorage.com/policy\nTerms of Use:";
 "unhide_items_popup_text" = "Selected item(s) will be unhidden and moved back to previous folders.";
 "unhide_albums_popup_text" = "Selected album(s) will be unhidden and moved back to previous folders.";
-"move_to_trash_hidden_albums_confirmation_popup_text" = "The selected album(s) will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space.";
+"move_to_trash_hidden_albums_confirmation_popup_text" = "The selected album(s) will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space. Trash bin is located in All Files Menu.";
 "delete_items_confirmation_popup_text" = "Selected item(s) will be permanently deleted and you will have no access to them. Are you sure to continue?";
 "delete_albums_confirmation_popup_text" = "Selected album(s) will be permanently deleted and you will have no access to them. Are you sure to continue?";
 "delete_folders_confirmation_popup_text" = "Selected folder(s) will be permanently deleted and you will have no access to them. Are you sure to continue?";
 "restore_items_confirmation_popup_text" = "Selected item(s) will be restored. Are you sure to continue?";
 "restore_albums_confirmation_popup_text" = "Selected album(s) will be restored. Are you sure to continue?";
 "restore_folders_confirmation_popup_text" = "Selected folder(s) will be restored. Are you sure to continue?";
-"move_to_trash_items_success_text" = "Item(s) sent to trash bin successfully.";
-"move_to_trash_albums_success_text" = "Album(s) sent to trash bin successfully.";
-"move_to_trash_folders_success_text" = "Folder(s) sent to trash bin successfully.";
-"unhide_items_success_text" = "Item(s) unhiden successfully.";
-"unhide_albums_success_text" = "Album(s) unhiden successfully.";
-"unhide_folders_success_text" = "Folder(s) unhiden successfully.";
+"move_to_trash_items_success_text" = "Item(s) sent to trash bin successfully. Trash bin is located in All Files Menu.";
+"move_to_trash_albums_success_text" = "Album(s) sent to trash bin successfully. Trash bin is located in All Files Menu.";
+"move_to_trash_folders_success_text" = "Folder(s) sent to trash bin successfully. Trash bin is located in All Files Menu.";
+"unhide_items_success_text" = "Item(s) unhidden successfully.";
+"unhide_albums_success_text" = "Album(s) unhidden successfully.";
+"unhide_folders_success_text" = "Folder(s) unhidden successfully.";
 "delete_items_success_text" = "Item(s) deleted permanently.";
 "delete_albums_success_text" = "Album(s) deleted permanently.";
 "delete_folders_success_text" = "Folder(s) deleted permanently.";
@@ -1457,7 +1461,7 @@
 "mobile_payment_description" = "When you activate Turkcell Mobile Payment transactions, you can easily purchase digital products or services through your Turkcell line. You can access the contract details here: Payment Services and Electronic Money Agreement";
 "mobile_payment_view_title" = "Turkcell Mobile Payment";
 "mobile_payment_view_description" = "You can activate Mobile Payment Permission for your Turkcell line by approving the following item. Digital products that you purchase through Mobile Payment are charged to Turkcell bill.";
-"mobile_payment_view_link_text" = "I accept Payment Service and Electronic Money Agreement.";
+"mobile_payment_view_link_text" = "I accept Payment Services and Electronic Money Agreement.";
 "mobile_payment_close_popup_title" = "Deactivate Mobile Payment Permission";
 "mobile_payment_close_popup_description" = "You can call 532 Customer Support to turn off your Mobile Payment Permission.";
 "mobile_payment_close_popup_description_bold_range" = "532";
@@ -1468,16 +1472,25 @@
 "mobile_payment_open_popup_continue_button" = "Continue";
 "we_recommend" = "We recommend";
 "show_more" = "Show more";
+"see_features" = "See features";
 "show_less" = "Show less";
 "face_recognition_package_description" = "Face Recognition";
 "delete_dublicate_package_description" = "Delete Dublicate";
-"premium_user_package_description" = "Premium user";
+"premium_user_package_description" = "Unlimited Photopick";
+"middle_user_package_description" = "15 Photopick";
 "original_сopy_package_description" = "Original сopy";
-"bundle_package_addon_type" = "with +Premium";
+"bundle_package_addon_type" = "Storage + Premium";
 "storage_only_package_addon_type" = "Storage only";
+"features_only_package_addon_type" = "Premium Features";
+"features_middle_only_package_addon_type" = "Standard+ Features";
 "feature_package_name" = "Premium";
+"middle_feature_package_name" = "Standard+";
+"feature_high_quality_picture" = "High quality picture";
+"feature_image_recognition" = "No Face/Image recognition";
+"feature_photopick" = "3 Photopick";
+"feature_delete_duplicate_contacts" = "Delete 5 duplicate contacts";
+"feature_standard_features" = "Standard Features";
 
-"bundle_package_addon_type" = "with +Premium";
 "storage_only_package_addon_type" = "Storage only";
 "original_сopy_package_description" = "Original сopy";
 "become_premium_navbar_title" = "We Recommend";
@@ -1512,7 +1525,11 @@
 "storage_usage_information" = "Usage";
 "auto_sync_album_items" = "Auto-Sync Items";
 "my_packages" = "My Packages";
-"feature_package_name" = "Premium";
 "contact_sync_confirm_premium_popup_title" = "Confirmation";
 "contact_sync_confirm_premium_popup_text" = "contact_sync_confirm_premium_popup_text";
 "my_packages_description" = "Mevcut aboneliklerini aşağıdaki alanda göremiyorsan, aboneliklerini yenilemek için butona basabilirsin.";
+"photo_video_auto_sync_settings" = "AutoSync Settings";
+"ubsent_contacts_in_lifebox" = "There is not any contact in your Lifebox";
+
+"feature_storage_only_additional_1" = "feature_storage_only_additional_1";
+"feature_storage_only_additional_2" = "feature_storage_only_additional_2";

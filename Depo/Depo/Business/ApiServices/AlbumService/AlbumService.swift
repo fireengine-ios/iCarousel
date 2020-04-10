@@ -276,7 +276,11 @@ class PhotosAlbumService: BaseRequestService {
         
         let fileService = WrapItemFileService()
         fileService.moveToTrash(files: albumItems, success: { [weak self] in
-            self?.moveToTrashAlbums(albums, success: success, fail: fail)
+            self?.moveToTrashAlbums(albums, success: { removedAlbums in
+                MediaItemsAlbumOperationService.shared.deleteRemoteAlbums(removedAlbums, completion: {
+                    success?(removedAlbums)
+                })
+            }, fail: fail)
         }, fail: fail)
     }
     
@@ -284,10 +288,14 @@ class PhotosAlbumService: BaseRequestService {
         debugLog("PhotosAlbumService addPhotosToAlbum")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { [weak self] _  in
+            guard let self = self else {
+                success?()
+                return
+            }
             debugLog("PhotosAlbumService addPhotosToAlbum success")
 
             let itemsUuids = parameters.photos.map { $0.uuid }
-            self?.mediaAlbumService.addItemsToRemoteAlbum(itemsUuids: itemsUuids, albumUuid: parameters.albumUUID) {
+            self.mediaAlbumService.addItemsToRemoteAlbum(itemsUuids: itemsUuids, albumUuid: parameters.albumUUID) {
                 success?()
             }
 
@@ -326,7 +334,7 @@ class PhotosAlbumService: BaseRequestService {
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { [weak self] _  in
             debugLog("PhotosAlbumService renameAlbum success")
 
-            self?.mediaAlbumService.remoteAlbumRenamed(parameters.albumUUID) {
+            self?.mediaAlbumService.remoteAlbumRenamed(parameters.albumUUID, newName: parameters.newName) {
                 success?()
             }
             
@@ -448,7 +456,7 @@ extension PhotosAlbumService {
         }
     }
     
-    func addItem(item: Item, to albums: [String], completion: @escaping VoidHandler) {
+    func addItem(item: Item, to albums: [String], isAutoSync: Bool, completion: @escaping VoidHandler) {
         let group = DispatchGroup()
         
         albums.forEach {
@@ -457,7 +465,7 @@ extension PhotosAlbumService {
             
             addPhotosToAlbum(parameters: parameters, success: {
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .success))
-                ItemOperationManager.default.filesAddedToAlbum()
+                ItemOperationManager.default.filesAddedToAlbum(isAutoSyncOperation: isAutoSync)
                 group.leave()
             }, fail: { _ in
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .failure))

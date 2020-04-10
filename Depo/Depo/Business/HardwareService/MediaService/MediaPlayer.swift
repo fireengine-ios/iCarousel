@@ -85,10 +85,7 @@ final class MediaPlayer: NSObject {
         self.player = nil
         self.player = player
         player.volume = 1
-        
-        if #available(iOS 10.0, *) {
-            player.automaticallyWaitsToMinimizeStalling = false
-        }
+        player.automaticallyWaitsToMinimizeStalling = false
         
         //player.appliesMediaSelectionCriteriaAutomatically = false
         setupPlayerTimeObserver()
@@ -360,11 +357,8 @@ final class MediaPlayer: NSObject {
         if isPlaying {
             return
         }
-        if #available(iOS 10.0, *) {
-            player.playImmediately(atRate: 1)
-        } else {
-            player.play()
-        }
+        player.playImmediately(atRate: 1)
+        
         DispatchQueue.main.async {
             self.delegates.invoke { $0.didStartMediaPlayer(self) }
         }
