@@ -217,19 +217,7 @@ extension MediaItemsAlbumOperationService {
             self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
     }
-    
-    func saveNewRemoteAlbums(albumItems: [AlbumItem], completion: @escaping VoidHandler) {
-        coreDataStack.performBackgroundTask { [weak self] context in
-            albumItems.forEach {
-               _ = MediaItemsAlbum(uuid: $0.uuid, name: $0.name, context: context)
-            }
-            
-            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: {
-                completion()
-            })
-        }
-    }
-    
+
     func addItemsToRemoteAlbum(itemsUuids: [String], albumUuid: String, completion: @escaping VoidHandler) {
         changeRelationships(type: .append, itemsUuids: itemsUuids, albumUuid: albumUuid, completion: completion)
     }

@@ -585,10 +585,8 @@ extension UploadOperation {
                 return
             }
             
-            self?.remoteAlbumsService.createAlbums(names: localAlbums.compactMap { $0.name }, success: { [weak self] remoteAlbums in
-                self?.mediaAlbumsService.saveNewRemoteAlbums(albumItems: remoteAlbums, completion: {
-                    completion()
-                })
+            self?.remoteAlbumsService.createAlbums(names: localAlbums.compactMap { $0.name }, success: { _ in
+                completion()
             }, fail: { _ in
                 /// any album wasn't created
                 completion()
