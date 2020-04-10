@@ -121,7 +121,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         
         localItems.removeAll()
         itemsSortedToUpload { [weak self] items in
-            
+
             guard let `self` = self else {
                 debugLog("ItemSyncServiceImpl self")
                 return
@@ -137,7 +137,15 @@ class ItemSyncServiceImpl: ItemSyncService {
                     return
                 }
                 
-                self.upload(items: self.localItems)
+                MediaItemsAlbumOperationService.shared.actualizeRemoteAlbums { [weak self] success in
+                    debugLog("Remote Albums are actualized: \(success)")
+                    
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    self.upload(items: self.localItems)
+                }
             }
         }
         
