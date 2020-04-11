@@ -58,7 +58,6 @@ final class BackgroundSynсService {
             return
         }
         
-        
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         
@@ -71,14 +70,9 @@ final class BackgroundSynсService {
             ///Currently they both use same task
             let appRefreshOperation = BackgroundRefreshOperation()
             queue.addOperation(appRefreshOperation)
-            scheduleProcessingSync()
-
         } else if task.identifier == TaskIdentifiers.backgroundRefresh {
-            
             let appRefreshOperation = BackgroundRefreshOperation()
             queue.addOperation(appRefreshOperation)
-            scheduleRefreshSync()
-            
         } else {
             debugLog("BG! ERROR: task not recognised")
             return
@@ -89,6 +83,8 @@ final class BackgroundSynсService {
             debugLog("BG! task complited \(task.identifier)")
             task.setTaskCompleted(success: !(lastOperation?.isCancelled ?? false))
         }
+        
+        scheduleTask(taskIdentifier: task.identifier)
         
     }
     
