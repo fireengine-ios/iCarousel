@@ -46,10 +46,15 @@ final class BackgroundSynсService {
         
         guard
             LocalMediaStorage.default.photoLibraryIsAvailible(),
-            storageVars.autoSyncSet
+            storageVars.autoSyncSet,
+            ApplicationStateHelper.shared.isBackground
         else {
-            debugLog("BG! DECLINED Photo \(LocalMediaStorage.default.photoLibraryIsAvailible()) and autosync \(storageVars.autoSyncSet) is disabled for \(task.identifier)")
+            debugLog("BG! DECLINED: Photo \(LocalMediaStorage.default.photoLibraryIsAvailible()) and autosync \(storageVars.autoSyncSet) is disabled and isBackground \(ApplicationStateHelper.shared.isBackground) for \(task.identifier)")
+            
+            scheduleTask(taskIdentifier: task.identifier)
+            
             task.setTaskCompleted(success: false)
+            
             return
         }
         
@@ -75,7 +80,7 @@ final class BackgroundSynсService {
             scheduleRefreshSync()
             
         } else {
-            debugLog("BG! Error: task not recognised")
+            debugLog("BG! ERROR: task not recognised")
             return
         }
         
@@ -87,36 +92,44 @@ final class BackgroundSynсService {
         
     }
     
-    func scheduleProcessingSync() {
+    private func scheduleTask(taskIdentifier: String) {
+        let request: BGTaskRequest
         
-        let request = BGProcessingTaskRequest(identifier: TaskIdentifiers.backgroundProcessing)
+        if taskIdentifier == TaskIdentifiers.backgroundProcessing {
+            
+            request = BGProcessingTaskRequest(identifier: TaskIdentifiers.backgroundProcessing)
+            if let processingTask = request as? BGProcessingTaskRequest {
+                processingTask.requiresNetworkConnectivity = true
+                processingTask.requiresExternalPower = false
+            }
+            
+        } else if taskIdentifier == TaskIdentifiers.backgroundRefresh {
+            
+            request = BGAppRefreshTaskRequest(identifier: TaskIdentifiers.backgroundRefresh)
+            
+        } else {
+            debugLog("BG! ERROR: trying to schedule unknown ID task")
+            return
+        }
         
         // Fetch no earlier than 15 sec from now
         request.earliestBeginDate = Date(timeIntervalSinceNow: 20 * 5)
-        request.requiresNetworkConnectivity = true
-        request.requiresExternalPower = false
         
         do {
             try BGTaskScheduler.shared.submit(request)
-            debugLog("BG! scheduleProcessingSync: OK")
+            debugLog("BG! task scheduled \(taskIdentifier)")
         } catch {
-            debugLog("BG! scheduleProcessingSync: Could not schedule app Processing: \(error)")
+            debugLog("BG! ERROR task \(taskIdentifier) schedule failed \(error)")
         }
+        
+    }
+    
+    func scheduleProcessingSync() {
+        scheduleTask(taskIdentifier: TaskIdentifiers.backgroundProcessing)
     }
     
     func scheduleRefreshSync() {
-        
-        let request = BGAppRefreshTaskRequest(identifier: TaskIdentifiers.backgroundRefresh)
-        
-        // Fetch no earlier than 15 sec from now
-        request.earliestBeginDate = Date(timeIntervalSinceNow: 20 * 5)
-        
-        do {
-            try BGTaskScheduler.shared.submit(request)
-            debugLog("BG! scheduleRefreshSync: OK")
-        } catch {
-            debugLog("BG! scheduleRefreshSync: Could not schedule app refresh: \(error)")
-        }
+        scheduleTask(taskIdentifier: TaskIdentifiers.backgroundRefresh)
     }
     
 }
