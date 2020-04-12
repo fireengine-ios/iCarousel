@@ -48,6 +48,7 @@ final class CacheManager {
     func actualizeCache() {
         debugLog("CacheManager actualizeCache")
         guard coreDataStack.isReady else {
+            debugLog("CacheManager coreData nor ready")
             scheduleActualization()
             return
         }
@@ -56,12 +57,15 @@ final class CacheManager {
         isProcessing = true
 
         self.startProccessingLocalAlbums { [weak self] in
+            debugLog("CacheManager startProccessingLocalAlbums")
             guard let self = self else {
                 return
             }
             
             MediaItemOperationsService.shared.removeZeroBytesLocalItems { [weak self] _ in
+                debugLog("CacheManager zero bytes items removed")
                 MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
+                    debugLog("CacheManager isNoRemotes \(isNoRemotes)")
                     guard let self = self else {
                         return
                     }
@@ -69,6 +73,7 @@ final class CacheManager {
                     if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
                         self.showPreparationCardAfterDelay()
                         self.startAppendingAllRemotes(completion: { [weak self] in
+                            debugLog("CacheManager no remotes, appended all remotes")
                             guard let self = self, !self.processingRemoteItems else {
                                 return
                             }
@@ -78,7 +83,7 @@ final class CacheManager {
                                 guard let self = self, !self.processingLocalItems else {
                                         return
                                 }
-                                
+                                debugLog("CacheManager no remotes, all locals processed")
                                 //FIXME: need handling if we logouted and locals still in progress
                                 self.isProcessing = false
                                 self.isCacheActualized = true
@@ -88,10 +93,12 @@ final class CacheManager {
                         })
                     } else {
                         guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessLocalFiles flag in MediaItemsOperationService processLocalGallery method
+                            debugLog("CacheManager there are remotes, but locals already being processed")
                             return
                         }
                         self.showPreparationCardAfterDelay()
                         self.startProcessingAllLocals(completion: { [weak self] in
+                            debugLog("CacheManager there are remotes, all local processed")
                             self?.isProcessing = false
                             self?.isCacheActualized = true
                             self?.updatePreparation(isBegun: false)
@@ -265,6 +272,7 @@ extension CacheManager: ReachabilityServiceDelegate {
 
 extension CacheManager: CoreDataStackDelegate {
     func onCoreDataStackSetupCompleted() {
+        debugLog("CacheManager scheduled actulasation start")
         coreDataStack.delegates.remove(self)
         actualizeCache()
     }

@@ -20,6 +20,7 @@ final class BackgroundRefreshOperation: Operation {
         }
         
         debugLog("BG! starting to actualize cache")
+        
         actualizeCache()
         debugLog("BG! finished actualizing cache")
         
@@ -51,15 +52,51 @@ final class BackgroundRefreshOperation: Operation {
     
     private func actualizeCache() {
         CacheManager.shared.delegates.add(self)
-        CacheManager.shared.actualizeCache()
+        if !CacheManager.shared.isProcessing {
+            CacheManager.shared.actualizeCache()
+        }
         semaphore.wait()
     }
+    
+    ///For now we need to check only last one
+    private func rangeApiUpdate() {
+        debugLog("BG! range API update")
+        var quickScrollService = QuickScrollService()
+        
+        let rangeApiTopInfo = RangeAPIInfo(date: Date.distantFuture, id: nil)
+        let rangeApiBottomInfo = RangeAPIInfo(date: Date.distantPast, id: nil)
+        
+        quickScrollService.requestListOfDateRange(startDate: rangeApiTopInfo.date, endDate: rangeApiBottomInfo.date, startID: rangeApiTopInfo.id, endID: rangeApiBottomInfo.id, category: .photosAndVideos, pageSize: 1) { response in
+            
+            switch response {
+            case .success(let itemsList):
+                debugLog("BG! range API list recieved")
+                guard let item = itemsList.files.first else {
+                    debugLog("BG! ERROR range API list no items")
+                    self.semaphore.signal()
+                    return
+                }
+                MediaItemOperationsService.shared.updateRemoteItems(remoteItems: itemsList.files, fileType: item.fileType, topInfo: rangeApiTopInfo, bottomInfo: rangeApiBottomInfo, completion: {
+                    debugPrint("BG! appended and updated")
+                    self.semaphore.signal()
+                })
+                
+            case .failed(let error):
+                debugLog("BG! range API list failed \(error.description)")
+                self.semaphore.signal()
+                break
+            }
+            
+        }
+        
+    }
+    
 }
 
 extension BackgroundRefreshOperation: CacheManagerDelegate {
     func didCompleteCacheActualization() {
         CacheManager.shared.delegates.remove(self)
         debugLog("BG! finished actualziing delegate cache")
-        self.semaphore.signal()
+        rangeApiUpdate()
     }
 }

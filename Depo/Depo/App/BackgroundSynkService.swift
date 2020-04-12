@@ -80,7 +80,7 @@ final class BackgroundSynсService {
         
         let lastOperation = queue.operations.last
         lastOperation?.completionBlock = {
-            debugLog("BG! task complited \(task.identifier)")
+            debugLog("BG! task complited \(task.identifier) was cannceled ? \(lastOperation?.isCancelled ?? false)")
             task.setTaskCompleted(success: !(lastOperation?.isCancelled ?? false))
         }
         
