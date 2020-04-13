@@ -465,6 +465,7 @@ class AuthenticationService: BaseRequestService {
             
             CacheManager.shared.logout {
                 debugLog("logout success")
+                MediaItemsAlbumOperationService.shared.resetLocalAlbums(completion: nil)
                 WormholePoster().didLogout()
                 success?()
             }
