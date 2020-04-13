@@ -24,6 +24,7 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     @IBOutlet private weak var stickersCollectionView: UICollectionView!
     
     private let downloader = ImageDownloder()
+    private let optimizingGifService = OptimizingGifService()
     
     private let paginationPageSize = 20
     private var isPaginating = false
@@ -121,9 +122,9 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     
     private func downloadGifForCell(cell: StickerCollectionViewCell, url: URL) {
     
-        downloader.getImageData(url: url) { data in
+        downloader.getImageData(url: url) { [weak self] data in
             DispatchQueue.global().async {
-                guard let imageData = data, let image = OptimizingGifService().optimizeImage(data: imageData, optimizeFor: .cell) else {
+                guard let imageData = data, let image = self?.optimizingGifService.optimizeImage(data: imageData, optimizeFor: .cell) else {
                     return
                 }
                 

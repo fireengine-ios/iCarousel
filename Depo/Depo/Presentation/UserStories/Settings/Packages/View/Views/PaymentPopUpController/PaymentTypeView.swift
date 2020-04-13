@@ -9,7 +9,7 @@ final class PaymentTypeView: UIView, NibInit {
                 return
             }
             titleLabel.text = paymentMethod.type.title
-            subtitleLabel.text = paymentMethod.priceLabel
+            subtitleLabel.text = paymentMethod.priceLabel.replacingOccurrences(of: "\n", with: " ")
             iconImageView.image = paymentMethod.type.image
         }
     }
