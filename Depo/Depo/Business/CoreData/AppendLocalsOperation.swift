@@ -52,6 +52,8 @@ final class AppendLocalsOperation: Operation {
                 return
             }
             
+            debugLog("appending \(notSaved.count) local items")
+            
             self.saveLocalMediaItemsPaged(items: notSaved, completion: { [weak self] in
                 guard let self = self else {
                     return
@@ -78,6 +80,7 @@ final class AppendLocalsOperation: Operation {
             }
             
             self.context.perform { [weak self] in
+            debugLog("page has \(info.count) local items")
                 guard let self = self, !self.isCancelled else {
                     completion()
                     return
@@ -102,6 +105,8 @@ final class AppendLocalsOperation: Operation {
                 
                 let smartAssets = PHAssetCollection.smartAlbums.map { (album: $0, assets: $0.allAssets) }
                 
+                debugLog("page has \(validAssetsInfo.count) valid local items")
+                
                 validAssetsInfo.forEach { element in
                     autoreleasepool {
                         if self.needCreateRelationships {
@@ -123,6 +128,9 @@ final class AppendLocalsOperation: Operation {
                     }
                 }
                 self.coreDataStack.saveDataForContext(context: self.context, saveAndWait: true, savedCallBack: { [weak self] in
+                    
+                    debugLog("page is saved")
+                    
                     ItemOperationManager.default.addedLocalFiles(items: addedObjects)
                     
                     guard let self = self, !self.isCancelled else {

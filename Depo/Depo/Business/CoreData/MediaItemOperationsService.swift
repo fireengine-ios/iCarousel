@@ -512,6 +512,7 @@ final class MediaItemOperationsService {
         localMediaStorage.askPermissionForPhotoFramework(redirectToSettings: false) { [weak self] _, status in
             switch status {
             case .denied:
+                debugLog("will delete all local media items")
                 MediaItemOperationsService.shared.deleteLocalFiles(completion: { _ in
                     completion?()
                 })
@@ -706,7 +707,7 @@ final class MediaItemOperationsService {
                         print("iCloud: updated iCloud in \(Date().timeIntervalSince(start)) secs")
                         context.perform {
                             let invalidItems = info.filter { !$0.isValid }.map { $0.asset.localIdentifier }
-                            print("iCloud: removing \(invalidItems.count) items")
+                            printLog("iCloud: removing \(invalidItems.count) items")
                             self.removeLocalMediaItems(with: invalidItems, completion: {})
                         }
                     })
