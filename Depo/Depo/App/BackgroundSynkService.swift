@@ -10,12 +10,12 @@ import Foundation
 import BackgroundTasks
 
 @available(iOS 13.0, *)
-extension BackgroundSynсService {
-    static let backgroundSynсService = BackgroundSynсService()
+extension BackgroundSynkService {
+    static let shared = BackgroundSynkService()
 }
 
 @available(iOS 13.0, *)
-final class BackgroundSynсService {
+final class BackgroundSynkService {
     
     private enum TaskIdentifiers {
         static let backgroundProcessing = "background_processing"
@@ -30,8 +30,8 @@ final class BackgroundSynсService {
     private let syncServiceManager = SyncServiceManager.shared
     
     func registerLaunchHandlers() {
-        registerTask(identifier: TaskIdentifiers.backgroundProcessing, queue: BackgroundSynсService.schedulerQueue)
-        registerTask(identifier: TaskIdentifiers.backgroundRefresh, queue: BackgroundSynсService.schedulerQueue)
+        registerTask(identifier: TaskIdentifiers.backgroundProcessing, queue: BackgroundSynkService.schedulerQueue)
+        registerTask(identifier: TaskIdentifiers.backgroundRefresh, queue: BackgroundSynkService.schedulerQueue)
     }
     
     private func registerTask(identifier: String, queue: DispatchQueue) {
@@ -41,7 +41,6 @@ final class BackgroundSynсService {
     }
     
     func handleBGtask(_ task: BGTask) {
-        //TODO: add check that its actualy in background
         debugLog("BG! handleTask \(task.identifier) isBG \(ApplicationStateHelper.shared.isBackground)")
         
         guard

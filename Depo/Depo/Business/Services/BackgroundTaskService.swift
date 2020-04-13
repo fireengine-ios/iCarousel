@@ -25,7 +25,10 @@ final class BackgroundTaskService {
     func beginBackgroundTask() {
         appWasSuspended = false
         
-        guard backgroundTaskId == UIBackgroundTaskInvalid else {
+        guard
+            backgroundTaskId == UIBackgroundTaskInvalid,
+            Device.operationSystemVersionLessThen(13)
+        else {
             return
         }
         

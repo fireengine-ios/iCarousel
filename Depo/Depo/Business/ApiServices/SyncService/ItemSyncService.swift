@@ -122,7 +122,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         localItems.removeAll()
         itemsSortedToUpload { [weak self] items in
 
-            guard let `self` = self else {
+            guard let self = self else {
                 debugLog("ItemSyncServiceImpl self")
                 return
             }
@@ -170,7 +170,7 @@ class ItemSyncServiceImpl: ItemSyncService {
                                                 }
         }, fail: { [weak self] error in
             
-            guard let `self` = self else {
+            guard let self = self else {
                 debugLog("ItemSyncServiceImpl self == nil")
                 print("\(#function): self == nil")
                 return
@@ -196,7 +196,7 @@ class ItemSyncServiceImpl: ItemSyncService {
                 guard self?.status != .executing else {
                     /// status == .executing
                     /// means that uploading is already in progress and we've just appended new items
-                    debugLog("returnedUploadOperation rror.description")
+                    debugLog("returnedUploadOperation already executing")
                     return
                 }
                 
@@ -210,7 +210,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     private func appendNewUnsyncedItems() {
         itemsSortedToUpload { [weak self] items in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             

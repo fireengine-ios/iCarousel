@@ -80,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     @available(iOS 13.0, *)
-    private lazy var backgroundSyncService = BackgroundSynсService.backgroundSynсService
+    private lazy var backgroundSyncService = BackgroundSynkService.shared
     
     var window: UIWindow?
     var watchdog: Watchdog?
@@ -197,7 +197,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             backgroundSyncService.scheduleRefreshSync()
         }
         
-//        BackgroundTaskService.shared.beginBackgroundTask()
+        BackgroundTaskService.shared.beginBackgroundTask()
 
         firstResponder = application.firstResponder
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)
