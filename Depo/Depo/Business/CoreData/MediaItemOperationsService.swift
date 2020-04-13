@@ -723,7 +723,7 @@ final class MediaItemOperationsService {
         }
         
         let currentlyInLibriaryIDs = allList.map { $0.localIdentifier }
-        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) IN %@", currentlyInLibriaryIDs)
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) IN %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true", currentlyInLibriaryIDs)
         executeRequest(predicate: predicate, context: context) { alredySaved in
             let alredySavedIDs = alredySaved.compactMap { $0.localFileID }
             assetCallback(allList.filter { alredySavedIDs.contains( $0.localIdentifier ) })
@@ -760,7 +760,7 @@ final class MediaItemOperationsService {
         })
     }
 
-    func notSaved(assets: [PHAsset], context: NSManagedObjectContext, callback: @escaping PhotoAssetsCallback) {
+    func notSaved(assets: [PHAsset], callback: @escaping PhotoAssetsCallback) {
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             callback([])
             return
@@ -768,11 +768,14 @@ final class MediaItemOperationsService {
         
         let localIdentifiers = assets.map { $0.localIdentifier }
         let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) IN %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true", localIdentifiers)
-        executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { mediaItems in
-            let alredySavedIDs = mediaItems.compactMap { $0.localFileID }
-            let notSaved = assets.filter { !alredySavedIDs.contains($0.localIdentifier) }
-            callback(notSaved)
-        })
+        coreDataStack.performBackgroundTask { [weak self] context in
+            self?.executeRequest(predicate: predicate, context: context, mediaItemsCallBack: { mediaItems in
+                debugLog("db has \(mediaItems.count) saved local items")
+                let alredySavedIDs = mediaItems.compactMap { $0.localFileID }
+                let notSaved = assets.filter { !alredySavedIDs.contains($0.localIdentifier) }
+                callback(notSaved)
+            })
+        }
     }
     
     
