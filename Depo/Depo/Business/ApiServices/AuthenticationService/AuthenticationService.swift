@@ -464,7 +464,6 @@ class AuthenticationService: BaseRequestService {
             self.storageVars.currentUserID = nil
             
             CacheManager.shared.logout {
-                MediaItemsAlbumOperationService.shared.resetLocalAlbums()
                 debugLog("logout success")
                 WormholePoster().didLogout()
                 success?()
