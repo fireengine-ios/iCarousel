@@ -258,9 +258,7 @@ final class CacheManager {
     func logout(completion: VoidHandler?) {
         delegates.removeAll()
         stopRemotesActualizeCache()
-        dropAllRemotes {
-            MediaItemsAlbumOperationService.shared.resetLocalAlbums(completion: completion)
-        }
+        dropAllRemotes(completion: completion)
     }
     
     //TODO: move method of QS DB update here.
