@@ -10,6 +10,11 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.turkcell.lifedrive.ent</string>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>background_refresh</string>
+		<string>background_processing</string>
+	</array>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

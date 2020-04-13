@@ -6,6 +6,11 @@
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>billo_LifeTech</string>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>background_refresh</string>
+		<string>background_processing</string>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconName</key>
