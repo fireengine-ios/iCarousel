@@ -46,12 +46,15 @@ final class CacheManager {
     }
     
     func actualizeCache() {
-        debugLog("CacheManager actualizeCache")
+        debugLog("calling actualizeCache")
+        
         guard coreDataStack.isReady else {
             debugLog("CacheManager coreData nor ready")
             scheduleActualization()
             return
         }
+        
+        debugLog("starting actualizeCache")
         
         isCacheActualized = false
         isProcessing = true
@@ -61,6 +64,8 @@ final class CacheManager {
             guard let self = self else {
                 return
             }
+            
+            debugLog("actualizeCache albums are processed")
             
             MediaItemOperationsService.shared.removeZeroBytesLocalItems { [weak self] _ in
                 debugLog("CacheManager zero bytes items removed")
@@ -81,12 +86,13 @@ final class CacheManager {
                             self.userDefaultsVars.currentRemotesPage = 0
                             self.startProcessingAllLocals(completion: { [weak self] in
                                 guard let self = self, !self.processingLocalItems else {
-                                        return
+                                    return
                                 }
                                 debugLog("CacheManager no remotes, all locals processed")
                                 //FIXME: need handling if we logouted and locals still in progress
                                 self.isProcessing = false
                                 self.isCacheActualized = true
+                                debugLog("cache is actualized")
                                 self.updatePreparation(isBegun: false)
                                 self.delegates.invoke { $0.didCompleteCacheActualization() }
                             })
@@ -101,6 +107,7 @@ final class CacheManager {
                             debugLog("CacheManager there are remotes, all local processed")
                             self?.isProcessing = false
                             self?.isCacheActualized = true
+                            debugLog("cache is actualized")
                             self?.updatePreparation(isBegun: false)
                             self?.delegates.invoke { $0.didCompleteCacheActualization() }
                         })
@@ -141,6 +148,8 @@ final class CacheManager {
             guard !self.processingRemoteItems else {
                 return
             }
+        
+            debugLog("actualizeCache processing remote items")
         
             self.processingRemoteItems = true
             self.addNextRemoteItemsPage { [weak self] in
@@ -221,6 +230,7 @@ final class CacheManager {
         guard !self.processingLocalItems else {
             return
         }
+        debugLog("actualizeCache processing local items")
         
         processingLocalItems = true
         MediaItemOperationsService.shared.processLocalMediaItems { [weak self] in
@@ -241,11 +251,13 @@ final class CacheManager {
     }
     
     func dropAllRemotes(completion: VoidHandler?) {
+        debugLog("dropAllRemotes")
         
         userDefaultsVars.currentRemotesPage = 0
         processingRemoteItems = false
         isCacheActualized = false
         MediaItemOperationsService.shared.deleteRemoteEntities { _ in
+            debugLog("dropAllRemotes success")
             completion?()
         }
     }
@@ -253,7 +265,9 @@ final class CacheManager {
     func logout(completion: VoidHandler?) {
         delegates.removeAll()
         stopRemotesActualizeCache()
-        dropAllRemotes(completion: completion)
+        dropAllRemotes {
+            MediaItemsAlbumOperationService.shared.resetLocalAlbums(completion: completion)
+        }
     }
     
     //TODO: move method of QS DB update here.

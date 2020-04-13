@@ -152,13 +152,13 @@ class SyncServiceManager {
     }
     
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
-        debugPrint("AUTOSYNC: checkReachabilityAndSettings")
-        
         guard coreDataStack.isReady else {
-            debugLog("BG! coreData is not ready")
+            printLog("AUTOSYNC: coreDataStack isn't ready")
             backgroundSyncHandler?(false)
             return
         }
+        
+        printLog("AUTOSYNC: checkReachabilityAndSettings")
         
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
