@@ -117,7 +117,7 @@ final class OptimizingGifService {
                 index = 1
             }
         }
-        print("times: \(times)")
+
         return images
     }
     
