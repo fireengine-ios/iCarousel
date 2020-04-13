@@ -42,7 +42,7 @@ final class BackgroundSynсService {
     
     func handleBGtask(_ task: BGTask) {
         //TODO: add check that its actualy in background
-        debugLog("BG! handleTask \(task.identifier)")
+        debugLog("BG! handleTask \(task.identifier) isBG \(ApplicationStateHelper.shared.isBackground)")
         
         guard
             LocalMediaStorage.default.photoLibraryIsAvailible(),

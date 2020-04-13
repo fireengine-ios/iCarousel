@@ -206,7 +206,7 @@ final class MediaItemOperationsService {
     // MARK: - MediaItemOperations
     
     //TODO: check the usefullness of it/or need of refactor
-    func updateLocalItemSyncStatus(item: Item, newRemote: WrapData? = nil) {
+    func updateLocalItemSyncStatus(item: Item, newRemote: WrapData? = nil, completion: VoidHandler? = nil) {
         coreDataStack.performBackgroundTask { [weak self] context in
             #if DEBUG
             let contextQueue = DispatchQueue.currentQueueLabelAsserted
@@ -250,7 +250,7 @@ final class MediaItemOperationsService {
                     debugLog("sync_status: remote \(newRemote?.name ?? "") is created")
                 }
 
-                self.coreDataStack.saveDataForContext(context: context, saveAndWait: false, savedCallBack: nil)
+                self.coreDataStack.saveDataForContext(context: context, saveAndWait: false, savedCallBack: completion)
             }
         }
     }

@@ -49,7 +49,7 @@ final class UploadOperation: Operation {
     private let resumableInfoService: ResumableUploadInfoService = factory.resolve()
     private let interruptedId: String?
     private let isResumable: Bool
-    
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     //MARK: - Init
     
@@ -440,6 +440,8 @@ final class UploadOperation: Operation {
         inputItem.syncStatus = .synced
         inputItem.setSyncStatusesAsSyncedForCurrentUser()
         
+        storageVars.lastUnsavedFileUUID = parameters.tmpUUID
+        
         uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
             self?.dispatchQueue.async { [weak self] in
                 guard let self = self else {
@@ -461,7 +463,10 @@ final class UploadOperation: Operation {
                 if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
                     self.outputItem?.metaData?.mediumUrl = preview
                 }
-                self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
+                self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
+                    debugLog("BG! TEST: last unsaved uuid \(self?.storageVars.lastUnsavedFileUUID ?? "self is no longer allocated")")
+                    self?.storageVars.lastUnsavedFileUUID = nil
+                }
                 
                 self.createAlbumsIfNeeded { [weak self] in
                     self?.addToRemoteAlbumsIfNeeded(completion: success)

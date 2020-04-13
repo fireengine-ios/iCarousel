@@ -33,6 +33,7 @@ protocol StorageVars: class {
     var interruptedResumableUploads: [String: Any] { get set }
     var isResumableUploadEnabled: Bool? { get set }
     var resumableUploadChunkSize: Int? { get set }
+    var lastUnsavedFileUUID: String? { get set }
 }
 
 final class UserDefaultsVars: StorageVars {
@@ -194,6 +195,12 @@ final class UserDefaultsVars: StorageVars {
     var interruptedResumableUploads: [String : Any] {
         get { return userDefaults.dictionary(forKey: interruptedResumableUploadsKey + SingletonStorage.shared.uniqueUserID) ?? [:] }
         set { userDefaults.set(newValue, forKey: interruptedResumableUploadsKey + SingletonStorage.shared.uniqueUserID) }
+    }
+    
+    private let lastUnsavedFileUUIDKey = "lastUnsavedFileUUID"
+    var lastUnsavedFileUUID: String? {
+        get { return userDefaults.object(forKey: lastUnsavedFileUUIDKey) as? String}
+        set { userDefaults.set(newValue, forKey: lastUnsavedFileUUIDKey)}
     }
     
     private let isResumableUploadEnabledKey = "isResumableUploadEnabled"
