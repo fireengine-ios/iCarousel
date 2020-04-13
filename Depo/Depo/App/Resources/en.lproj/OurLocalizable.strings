@@ -617,7 +617,7 @@
 "START USING" = "Get Started";
 "landingTitle0" = "Live, Collect, Remember";
 "landingSubTitle0" = "Backup your photos, videos, contacts and other files at lifebox and keep them forever";
-"landingTitle1" = "Auto-sync";
+"landingTitle1" = "Auto-Sync";
 "landingSubTitle1" = "Sync your photos and videos automatically and access them wherever you are";
 "landingTitle2" = "Face/image recognition";
 "landingSubTitle2" = "Find your memories easily with smart albums";
@@ -776,9 +776,6 @@
 "no_for_upgrade" = "No, I'm OK";
 "uploded_photos_high_quality" = "Would you like to be a Premium member to store your memories in original quality and get access to all the premium features?";
 "NSFaceIDUsageDescription" = "This app was designed to use Face ID to increase your safety";
-"offer_store_promo" = "Promo";
-"offer_store_apple_store" = "Apple Store";
-"offer_store_google_store" = "Google Store";
 
 /*AnalyzeHistoryController*/
 "InstaPick" = "PhotoPick";
@@ -1482,7 +1479,7 @@
 "become_premium_header_contact_sync_title" = "We have a special offer for you!";
 "become_premium_header_contact_sync_subtitle" = "Would you like to backup your memories in the original quality? Maybe you need some help with organizing your photos pile and contacts? Become a Premium member and let lifebox ease your life. Check out the Premium features and special offers below.";
 "become_premium_description" = "Back Up in Original Quality\nUnlimited Face&Image&Location Recognition\nRemove Duplicate Contacts from your PhoneBook\nUnlimited PhotoPick Analysis (Get more likes on Instagram)";
-"become_premium_or_text" = "OR purchase extra 250GB storage and get Premium features for FREE!";
+"become_premium_or_text" = "OR purchase extra storage and get Premium features for FREE!";
 "become_premium_see_all_packages" = "Compare All Plans";
 "dialog_header_contact_sync_vcf_file_upload_error" = "You have reached your lifebox storage limit!";
 "dialog_contact_sync_vcf_error_upper_button" = "Expand My Storage";
@@ -1517,3 +1514,6 @@
 "feature_standard_features" = "Standard Features";
 "feature_storage_only_additional_1" = "Free Up Space";
 "feature_storage_only_additional_2" = "Automatic Stories and Memory Reminders";
+"offer_store_promo" = "Promo";
+"offer_store_apple_store" = "Apple Store";
+"offer_store_google_store" = "Google Play Store";

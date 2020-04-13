@@ -1441,7 +1441,7 @@
 "become_premium_header_contact_sync_title" = "Sana özel bir teklifimiz var!";
 "become_premium_header_contact_sync_subtitle" = "Anılarını orjinal kalitede yedeklemer ister misin? Belki de fotoğraflarını ve rehberini organize etmek için yardıma ihtiyacın var. Premium abone ol, lifebox hayatını kolaylaştırsın. Premium özellikleri ve sana özel tekliflerimizi incele.";
 "become_premium_description" = "Orjinal Kalitede Saklama\nSınırsız Yüz&Nesne&Yer Tanıma\nTelefondaki Tekrarlayan Kontakları Silme\nSınırsız PhotoPick Analiz";
-"become_premium_or_text" = "VEYA ek 250GB saklama alanı ile Premium üyeliğe <b>ÜCRETSİZ</b> sahip ol!";
+"become_premium_or_text" = "VEYA ek saklama alanı alarak Premium üyeliğe <b>ÜCRETSİZ</b> sahip ol!";
 "become_premium_see_all_packages" = "Tüm Abonelikleri İncele";
 "dialog_header_contact_sync_vcf_file_upload_error" = "lifebox saklama alanı limitine ulaştın!";
 "dialog_contact_sync_vcf_error_upper_button" = "Saklama Alanımı Yükselt";
@@ -1465,7 +1465,7 @@
 "tabbar_item_contacts_label" = "Rehber";
 "tabbar_item_all_files_label" = "Tüm Dosyalar";
 "see_features" = "Özellikleri Göster";
-"middle_user_package_description" = "15 PhotoPick Analizi (Instagram'da daha çok beğeni garanti)";
+"middle_user_package_description" = "15 PhotoPick Analizi";
 "features_only_package_addon_type" = "Premium Özellikler";
 "features_middle_only_package_addon_type" = "Standart+ Özellikler";
 "middle_feature_package_name" = "Standart+";
@@ -1476,3 +1476,6 @@
 "feature_standard_features" = "Standart Özellikler";
 "feature_storage_only_additional_1" = "Telefonda Kolaylıkla Yer Açma";
 "feature_storage_only_additional_2" = "Otomatik Hikayeler ve Anımsatıcılar";
+"offer_store_promo" = "Promo";
+"offer_store_apple_store" = "Apple Store";
+"offer_store_google_store" = "Google Play Store";
