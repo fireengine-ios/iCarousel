@@ -99,11 +99,11 @@ final class MediaItemsAlbumOperationService {
 
 extension MediaItemsAlbumOperationService {
 
-    func resetLocalAlbums() {
+    func resetLocalAlbums(completion: VoidHandler?) {
         let context = coreDataStack.newChildBackgroundContext
         getLocalAlbums(context: context) { [weak self] albums in
             albums.forEach { $0.isEnabled = true }
-            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: nil)
+            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
     }
 
