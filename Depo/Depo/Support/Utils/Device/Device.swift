@@ -75,6 +75,10 @@ class Device {
         return ProcessInfo().operatingSystemVersion.majorVersion < version
     }
     
+    static func operationSystemVersionMoreOrEqual(_ version: Int) -> Bool {
+        return ProcessInfo().operatingSystemVersion.majorVersion >= version
+    }
+    
     static func getFreeDiskSpaceInBytes() -> Int64 {
         if #available(iOS 11.0, *) {
             return getFreeDiskSpaceInBytesIOS11()

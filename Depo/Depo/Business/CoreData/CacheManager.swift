@@ -85,16 +85,20 @@ final class CacheManager {
                             
                             self.userDefaultsVars.currentRemotesPage = 0
                             self.startProcessingAllLocals(completion: { [weak self] in
-                                guard let self = self, !self.processingLocalItems else {
-                                    return
+                                self?.actualizeUnsavedFileSyncStatus() { [weak self] in
+                                    guard let self = self, !self.processingLocalItems else {
+                                        return
+                                    }
+                                    debugLog("CacheManager no remotes, all locals processed")
+                                    //FIXME: need handling if we logouted and locals still in progress
+                                    
+                                    
+                                    self.isProcessing = false
+                                    self.isCacheActualized = true
+                                    debugLog("cache is actualized")
+                                    self.updatePreparation(isBegun: false)
+                                    self.delegates.invoke { $0.didCompleteCacheActualization() }
                                 }
-                                debugLog("CacheManager no remotes, all locals processed")
-                                //FIXME: need handling if we logouted and locals still in progress
-                                self.isProcessing = false
-                                self.isCacheActualized = true
-                                debugLog("cache is actualized")
-                                self.updatePreparation(isBegun: false)
-                                self.delegates.invoke { $0.didCompleteCacheActualization() }
                             })
                         })
                     } else {
@@ -104,12 +108,14 @@ final class CacheManager {
                         }
                         self.showPreparationCardAfterDelay()
                         self.startProcessingAllLocals(completion: { [weak self] in
-                            debugLog("CacheManager there are remotes, all local processed")
-                            self?.isProcessing = false
-                            self?.isCacheActualized = true
-                            debugLog("cache is actualized")
-                            self?.updatePreparation(isBegun: false)
-                            self?.delegates.invoke { $0.didCompleteCacheActualization() }
+                            self?.actualizeUnsavedFileSyncStatus() { [weak self] in
+                                debugLog("CacheManager there are remotes, all local processed")
+                                self?.isProcessing = false
+                                self?.isCacheActualized = true
+                                debugLog("cache is actualized")
+                                self?.updatePreparation(isBegun: false)
+                                self?.delegates.invoke { $0.didCompleteCacheActualization() }
+                            }
                         })
                     }
                 }
@@ -270,6 +276,54 @@ final class CacheManager {
     
     //TODO: move method of QS DB update here.
 
+}
+
+//MARK: - Sync Status Actualization
+extension CacheManager {
+    ///Since we backgeound tasks can expire before we save latest changes to DB
+    ///In order to prevent duplication of unsaved file, we call it on each actualization
+    private func actualizeUnsavedFileSyncStatus(completion: @escaping VoidHandler) {
+        debugLog("CacheManager checkLatestUnsavedFile")
+        guard let latestUnsavedUUID = userDefaultsVars.lastUnsavedFileUUID else {
+            debugLog("CacheManager no unsaved items found")
+            completion()
+            return
+        }
+        
+        let remoteFileService = FileService.shared
+        remoteFileService.details(uuids: [latestUnsavedUUID], success: { [weak self] items in
+            guard let remoteItem = items.first else {
+                debugLog("CacheManager no item with this UUID \(items.count)")
+                completion()
+                return
+            }
+            debugLog("CacheManager TEST: got detail info for last UNSAVED to DB \(remoteItem.uuid) AND name \(remoteItem.name)")
+            
+            let trimmedLocalID = remoteItem.getTrimmedLocalID()
+            
+            MediaItemOperationsService.shared.mediaItemByLocalID(trimmedLocalIDS: [trimmedLocalID]) { [weak self] localItems in
+                guard let firstLocal = localItems.first else {
+                    debugLog("CacheManager ERROR: Failed to find related locals with this  ID")
+                    completion()
+                    return
+                }
+                debugLog("CacheManager found related local to unsaved remote")
+                
+                let localWrapData = WrapData(mediaItem: firstLocal)
+                localWrapData.syncStatus = .synced
+                localWrapData.setSyncStatusesAsSyncedForCurrentUser()
+                
+                MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: localWrapData, newRemote: remoteItem) { [weak self] in
+                    debugLog("CacheManager TEST: SYNC stasus updated last unsaved UPDATED uuid \(self?.userDefaultsVars.lastUnsavedFileUUID) AND name \(remoteItem.name)")
+                    self?.userDefaultsVars.lastUnsavedFileUUID = nil
+                    completion()
+                }
+            }
+            }, fail: { error in
+                debugLog("CacheManager ERROR: faild to get item details \(error.description)")
+                completion()
+        })
+    }
 }
 
 //MARK: - ReachabilityServiceDelegate
