@@ -876,12 +876,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        albumService.delete(albums: albums, success: { [weak self] removedAlbums in
-            MediaItemsAlbumOperationService.shared.deleteRemoteAlbums(removedAlbums, completion: {
-                ItemOperationManager.default.didMoveToTrashAlbums(removedAlbums)
-                self?.succesAction(elementType: .removeAlbum)()
-            })
-            
+        albumService.moveToTrash(albums: albums, albumItems: [], success: { _ in
+            ItemOperationManager.default.didMoveToTrashAlbums(albums)
+            self.succesAction(elementType: .removeAlbum)()
         }, fail: failAction(elementType: .removeAlbum))
     }
     
@@ -1117,6 +1114,8 @@ extension MoreFilesActionsInteractor {
             text = TextConstants.popUpDownloadComplete
         case .emptyTrashBin:
             text = TextConstants.trashBinDeleteAllComplete
+        case .removeAlbum:
+            text = TextConstants.removeAlbumsSuccess
         default:
             return
         }
