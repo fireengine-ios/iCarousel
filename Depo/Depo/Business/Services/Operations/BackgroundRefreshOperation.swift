@@ -107,7 +107,7 @@ final class BackgroundRefreshOperation: Operation {
                 self?.semaphore.signal()
                 return
             }
-            
+            debugLog("BG! got detail info for last UNSAVED to DB \(remoteItem.uuid) AND name \(remoteItem.name)")
             
             let trimmedLocalID = remoteItem.getTrimmedLocalID()
             
@@ -117,9 +117,14 @@ final class BackgroundRefreshOperation: Operation {
                     self?.semaphore.signal()
                     return
                 }
+                debugLog("BG! found related local to unsaved remote")
+                
                 let localWrapData = WrapData(mediaItem: firstLocal)
+                localWrapData.syncStatus = .synced
+                localWrapData.setSyncStatusesAsSyncedForCurrentUser()
+                
                 MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: localWrapData, newRemote: remoteItem) { [weak self] in
-                    debugLog("BG! TEST: last unsaved uuid \(self?.storageVars.lastUnsavedFileUUID ?? "self is no longer allocated")")
+                    debugLog("BG! TEST: SYNC stasus updated last unsaved UPDATED uuid \(self?.storageVars.lastUnsavedFileUUID) AND name \(remoteItem.name)")
                     self?.storageVars.lastUnsavedFileUUID = nil
                     self?.semaphore.signal()
                 }
