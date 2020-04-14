@@ -45,6 +45,10 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
     
     private weak var delegate: AutoSyncCellDelegate?
     private var model: AutoSyncHeaderModel?
+    
+    var isExpanded: Bool {
+        model?.isSelected ?? false
+    }
 
     //MARK: -
     

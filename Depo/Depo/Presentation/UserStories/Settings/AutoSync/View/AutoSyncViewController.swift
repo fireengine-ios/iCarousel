@@ -100,10 +100,6 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         view.frame.size = size
     
         tableView.tableHeaderView = view
-        
-        let back = UIView(frame: tableView.bounds)
-        back.backgroundColor = .white
-        tableView.backgroundView = back
     }
     
     override var preferredNavigationBarStyle: NavigationBarStyle {

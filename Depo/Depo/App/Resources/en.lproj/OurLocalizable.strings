@@ -1440,6 +1440,7 @@
 "confirm_empty_trashbin" = "All of the items in trash bin will be permanently deleted and you will have no access to them. Are you sure to continue?";
 "confirm_empty_trashbin_button" = "Empty Trash Bin";
 "success_empty_trashbin" = "All of the items are permanently deleted";
+"remove_albums_success_message" = "The album has been removed.";
 "mobile_payment_title" = "Mobile Payment";
 "mobile_payment_description" = "When you activate Turkcell Mobile Payment transactions, you can easily purchase digital products or services through your Turkcell line. You can access the contract details here: Payment Services and Electronic Money Agreement";
 "mobile_payment_view_title" = "Turkcell Mobile Payment";
