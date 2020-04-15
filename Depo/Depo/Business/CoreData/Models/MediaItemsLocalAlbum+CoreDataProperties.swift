@@ -20,7 +20,6 @@ extension MediaItemsLocalAlbum {
         static let localId = #keyPath(MediaItemsLocalAlbum.localId)
         static let name = #keyPath(MediaItemsLocalAlbum.name )
         static let items = #keyPath(MediaItemsLocalAlbum.items)
-        static let relatedRemote = #keyPath(MediaItemsLocalAlbum.relatedRemote)
     }
 }
 
@@ -39,7 +38,6 @@ extension MediaItemsLocalAlbum {
     @NSManaged public var localId: String?
     @NSManaged public var name: String?
     @NSManaged public var items: NSOrderedSet?
-    @NSManaged public var relatedRemote: MediaItemsAlbum?
     @NSManaged public var hasItems: Bool
 
 }
