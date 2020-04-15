@@ -545,23 +545,6 @@ class RouterVC: NSObject {
         return controller
     }
     
-    
-    private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
-    private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
-    
-    private(set) var favoritesViewType = MoreActionsConfig.ViewType.Grid
-    private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
-    
-    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
-        if fieldType == .all {
-            self.allFilesViewType = type
-            self.allFilesSortType = sortedType
-        } else if fieldType == .favorite {
-            self.favoritesViewType = type
-            self.favoritesSortType = sortedType
-        }
-    }
-    
     var favorites: UIViewController? {
         let storage = ViewSortStorage.shared
         return favorites(moduleOutput: storage,

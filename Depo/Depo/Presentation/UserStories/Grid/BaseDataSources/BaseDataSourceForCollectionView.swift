@@ -573,7 +573,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     let lastItem = allItems.last?.last {
                     switch currentSortType {
                     case .timeUp, .timeDown:
-                        addByDate(lastItem: lastItem, newItem: item, isMetaDate: false)
+                        addByDate(lastItem: lastItem, newItem: item, sortField: .createdDate)
+                    case .lastModifiedTimeUp, .lastModifiedTimeDown:
+                        addByDate(lastItem: lastItem, newItem: item, sortField: .lastModifiedDate)
+                    case .metaDataTimeUp, .metaDataTimeDown:
+                        addByDate(lastItem: lastItem, newItem: item, sortField: .metadate)
                     case .lettersAZ, .lettersZA, .albumlettersAZ, .albumlettersZA:
                         addByName(lastItem: lastItem, newItem: item)
                     case .sizeAZ, .sizeZA:
@@ -581,8 +585,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                     case .timeUpWithoutSection, .timeDownWithoutSection:
                         allItems.append(contentsOf: [breakingArray])
                         return
-                    case .metaDataTimeUp, .metaDataTimeDown:
-                        addByDate(lastItem: lastItem, newItem: item, isMetaDate: true)
                     }
                 } else {
                     allItems.append([item])
@@ -634,12 +636,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         return items.last
     }
     
-    func addByDate(lastItem: WrapData, newItem: WrapData, isMetaDate: Bool) {
-        let lastItemCreatedDate =  isMetaDate ? lastItem.metaDate : lastItem.creationDate!
-        let newItemCreationDate = isMetaDate ? newItem.metaDate : newItem.creationDate!
+    func addByDate(lastItem: WrapData, newItem: WrapData, sortField: DateSortField) {
+        guard let lastItemSortDate = sortField.sortDate(item: lastItem),
+            let newItemSortDate = sortField.sortDate(item: newItem) else {
+            return
+        }
         
-        if lastItemCreatedDate.getYear() == newItemCreationDate.getYear(),
-            lastItemCreatedDate.getMonth() == newItemCreationDate.getMonth(),
+        if lastItemSortDate.getYear() == newItemSortDate.getYear(),
+            lastItemSortDate.getMonth() == newItemSortDate.getMonth(),
             !allItems.isEmpty {
             
             allItems[allItems.count - 1].append(newItem)
@@ -677,15 +681,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             return headerText
         }
         
+        var sortDate: Date? = nil
+        
         switch currentSortType {
         case .timeUp, .timeUpWithoutSection, .timeDown, .timeDownWithoutSection:
-            if let date = item.creationDate {
-                if shortForm {
-                    headerText = date.getDateInTextForScrollBar()
-                } else {
-                    headerText = date.getDateInTextForCollectionViewHeader()
-                }
-            }
+            sortDate = item.creationDate
+        case .lastModifiedTimeUp, .lastModifiedTimeDown:
+            sortDate = item.lastModifiDate
         case .lettersAZ, .albumlettersAZ, .lettersZA, .albumlettersZA:
             if let character = item.name?.first {
                 headerText = String(describing: character).uppercased()
@@ -693,22 +695,19 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         case .sizeAZ, .sizeZA:
             headerText = ""
         case .metaDataTimeUp, .metaDataTimeDown:
-            if let date = item.metaData?.takenDate {
-                if shortForm {
-                    headerText = date.getDateInTextForScrollBar()
-                } else {
-                    headerText = date.getDateInTextForCollectionViewHeader()
-                }
+            if let takenDate = item.metaData?.takenDate {
+                sortDate = takenDate
             } else if needShowEmptyMetaItems && !emptyMetaItems.isEmpty && item.isLocalItem == false {
                 headerText = TextConstants.photosVideosViewMissingDatesHeaderText
-            } else if let date = item.creationDate {
-                if shortForm {
-                    headerText = date.getDateInTextForScrollBar()
-                } else {
-                    headerText = date.getDateInTextForCollectionViewHeader()
-                }
+            } else {
+                sortDate = item.creationDate
             }
         }
+        
+        if let sortDate = sortDate {
+            headerText = shortForm ? sortDate.getDateInTextForScrollBar() : sortDate.getDateInTextForCollectionViewHeader()
+        }
+        
         return headerText
     }
     
