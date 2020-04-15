@@ -160,9 +160,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     UIApplication.showErrorAlert(message: message)
                 }
             case .smash:
-                RouterVC().getViewControllerForPresent()?.showSpinner()
+                let controller = RouterVC().getViewControllerForPresent()
+                controller?.showSpinner()
                 self.interactor.smash(item: selectedItems) {
-                    RouterVC().getViewControllerForPresent()?.hideSpinner()
+                    controller?.hideSpinner()
                 }
                 self.basePassingPresenter?.stopModeSelected()
             case .moveToTrash:

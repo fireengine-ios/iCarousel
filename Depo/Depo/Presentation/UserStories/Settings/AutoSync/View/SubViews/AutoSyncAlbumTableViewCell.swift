@@ -48,11 +48,9 @@ final class AutoSyncAlbumTableViewCell: AutoSyncTableViewCell {
         contentView.alpha = model.isEnabled ? 1 : 0.5
     }
     
-    func didSelect() {
-        toogle()
-    }
+    func didSelect() { }
     
-    private func toogle() {
+    @IBAction private func toogle() {
         guard let model = model, model.isEnabled else {
             return
         }

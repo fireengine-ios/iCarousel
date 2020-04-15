@@ -411,22 +411,22 @@ final class PackageService {
         case .quota(let type):
             switch type {
             case .apple:
-                store = "Apple Store"
+                store = TextConstants.offerStoreAppleStore
             case .google:
-                store = "Google Play Stor"
+                store = TextConstants.offerStoreGoogleStore
             case .promo:
-                store = "Promo"
+                store = TextConstants.offerStorePromo
             default:
                 store = ""
             }
         case .feature(let type):
             switch type {
             case .appleFeature:
-                store = "Apple Store"
+                store = TextConstants.offerStoreAppleStore
             case .googleFeature:
-                store = "Google Play Stor"
+                store = TextConstants.offerStoreGoogleStore
             case .promoFeature:
-                store = "Promo"
+                store = TextConstants.offerStorePromo
             default:
                 store = ""
             }

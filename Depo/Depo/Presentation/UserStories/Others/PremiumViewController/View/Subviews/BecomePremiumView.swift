@@ -54,6 +54,9 @@ final class BecomePremiumView: UIView, NibInit {
     private lazy var descriptionStackView: UIStackView = {
         let newValue = UIStackView()
         newValue.axis = .vertical
+        newValue.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        newValue.isLayoutMarginsRelativeArrangement = true
+        newValue.alignment = .center
         newValue.spacing = 3
         return newValue
     }()
@@ -85,6 +88,8 @@ final class BecomePremiumView: UIView, NibInit {
         label.text = TextConstants.becomePremiumOrText
         label.font = UIFont.TurkcellSaturaMedFont(size: 16)
         label.textColor = .lrBrownishGrey
+        label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
     
@@ -166,7 +171,6 @@ final class BecomePremiumView: UIView, NibInit {
             descriptionStackView.addArrangedSubview(label)
         }
         
-        descriptionStackView.widthAnchor.constraint(equalToConstant: 200).activate()
         headerStackView.addArrangedSubview(descriptionStackView)
     }
     
