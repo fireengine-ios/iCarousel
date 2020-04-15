@@ -161,95 +161,6 @@ extension MediaItemsAlbumOperationService {
     }
 }
 
-//MARK: - Public Remote Albums Actions
-
-extension MediaItemsAlbumOperationService {
-    
-    func createRemoteAlbums(albums: [AlbumItem], completion: @escaping VoidHandler) {
-        let context = coreDataStack.newChildBackgroundContext
-        context.perform { [weak self] in
-            albums.forEach { album in
-                _ = MediaItemsAlbum(uuid: album.uuid, name: album.name, context: context)
-            }
-            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
-        }
-    }
-    
-    func createNewRemoteAlbum(_ albumItem: AlbumItem, completion: @escaping VoidHandler) {
-        let context = coreDataStack.newChildBackgroundContext
-        context.perform {
-            _ = MediaItemsAlbum(uuid: albumItem.uuid, name: albumItem.name, context: context)
-            self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
-        }
-    }
-    
-    func deleteRemoteAlbums(_ albumItems: [AlbumItem], completion: @escaping VoidHandler) {
-        let context = coreDataStack.newChildBackgroundContext
-        let uuids = albumItems.map { $0.uuid }
-        getRemoteAlbums(uuids: uuids, context: context) { [weak self] remoteAlbums in
-            remoteAlbums.forEach { context.delete($0) }
-            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
-        }
-    }
-    
-    func getLocalAlbumsToSync(for itemId: NSManagedObjectID, callback: @escaping MediaItemLocalAlbumsCallBack) {
-        let context = coreDataStack.newChildBackgroundContext
-        
-        let fetchRequest: NSFetchRequest = MediaItemsLocalAlbum.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "\(MediaItemsLocalAlbum.PropertyNameKey.isEnabled) = true AND \(MediaItemsLocalAlbum.PropertyNameKey.relatedRemote) = NULL AND %@ IN \(MediaItemsLocalAlbum.PropertyNameKey.items)", itemId)
-        
-        execute(request: fetchRequest, context: context, albumsCallBack: callback)
-    }
-
-    
-    func remoteAlbumRenamed(_ albumUuid: String, newName: String, completion: @escaping VoidHandler) {
-        let context = coreDataStack.newChildBackgroundContext
-        
-        getRemoteAlbums(uuids: [albumUuid], context: context) { [weak self] remoteAlbums in
-            guard let self = self, let album = remoteAlbums.first else {
-                return
-            }
-            album.name = newName
-            album.updateRelatedLocalAlbum(context: context)
-            
-            //TODO: Notify observers
-            
-            self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
-        }
-    }
-
-    func addItemsToRemoteAlbum(itemsUuids: [String], albumUuid: String, completion: @escaping VoidHandler) {
-        changeRelationships(type: .append, itemsUuids: itemsUuids, albumUuid: albumUuid, completion: completion)
-    }
-    
-    func removeItemsFromRemoteAlbum(itemsUuids: [String], albumUuid: String, completion: @escaping VoidHandler) {
-        changeRelationships(type: .delete, itemsUuids: itemsUuids, albumUuid: albumUuid, completion: completion)
-    }
-    
-    private func changeRelationships(type: RelationshipsChangesType, itemsUuids: [String], albumUuid: String, completion: @escaping VoidHandler) {
-        let context = coreDataStack.newChildBackgroundContext
-        getRemoteAlbums(uuids: [albumUuid], context: context) { [weak self] remoteAlbums in
-            guard
-                let self = self,
-                let album = remoteAlbums.first(where: { $0.uuid == albumUuid })
-            else {
-                completion()
-                return
-            }
-            
-            self.mediaItemsService.mediaItems(by: itemsUuids, context: context) { [weak self] mediaItems in
-                switch type {
-                case .append:
-                    album.addToItems(NSSet(array: mediaItems))
-                case .delete:
-                    album.removeFromItems(NSSet(array: mediaItems))
-                }
-                
-                self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
-            }
-        }
-    }
-}
 
 //MARK: - PhotoLibraryChangeObserver Events
 
@@ -299,69 +210,20 @@ extension MediaItemsAlbumOperationService {
                     return
                 }
                 
-                func callback() {
-                    self.inProcessLocalAlbums = false
-                    self.isAlbumsActualized = true
-                    
-                    if self.waitingLocalAlbumsCallBack != nil {
-                        self.getAutoSyncAlbums(context: context) { [weak self] albums in
-                            self?.waitingLocalAlbumsCallBack?(albums)
-                            self?.waitingLocalAlbumsCallBack = nil
-                        }
-                    }
-                    completion()
-                }
-
-                self.getAllRemoteAlbums { response in
-                    switch response {
-                    case .success(let remoteAlbums):
-                        self.updateRemoteAlbums(remoteAlbums, context: context, completion: callback)
-                    case .failed(let error):
-                        debugPrint(error.description)
-                        callback()
-                    }
-                }
-            })
-        }
-    }
-    
-    func actualizeRemoteAlbums(completion: @escaping BoolHandler) {
-        guard isAlbumsActualized, !inProcessLocalAlbums else {
-            completion(false)
-            return
-        }
-        
-        isAlbumsActualized = false
-        
-        coreDataStack.performBackgroundTask { [weak self] context in
-            guard let self = self else {
-                completion(false)
-                return
-            }
-            
-            let callback = { [weak self] in
-                self?.isAlbumsActualized = true
+                self.inProcessLocalAlbums = false
+                self.isAlbumsActualized = true
                 
-                if self?.waitingLocalAlbumsCallBack != nil {
-                    self?.getAutoSyncAlbums(context: context) { albums in
+                if self.waitingLocalAlbumsCallBack != nil {
+                    self.getAutoSyncAlbums(context: context) { [weak self] albums in
                         self?.waitingLocalAlbumsCallBack?(albums)
                         self?.waitingLocalAlbumsCallBack = nil
                     }
                 }
-                completion(true)
-            }
-            
-            self.getAllRemoteAlbums { response in
-                switch response {
-                case .success(let remoteAlbums):
-                    self.updateRemoteAlbums(remoteAlbums, context: context, completion: callback)
-                case .failed(let error):
-                    debugPrint(error.description)
-                    completion(false)
-                }
-            }
+                completion()
+            })
         }
     }
+    
     
     private func saveLocalAlbums(assetsResponse: LocalAssetsResponse, context: NSManagedObjectContext, completion: @escaping VoidHandler) {
         guard localMediaStorage.photoLibraryIsAvailible() else {
@@ -381,7 +243,6 @@ extension MediaItemsAlbumOperationService {
                 if let album = mediaItemAlbums.first(where: { $0.localId == asset.localIdentifier }) {
                     if album.name != asset.localizedTitle {
                         album.name = asset.localizedTitle
-                        album.updateRelatedRemoteAlbums(context: context)
                         
                         renamedAlbumsIds.append(asset.localIdentifier)
                     }
@@ -450,49 +311,11 @@ extension MediaItemsAlbumOperationService {
                     if album.name != asset.localizedTitle {
                         album.name = asset.localizedTitle
                         renamedAlbumsIds.append(album.localId)
-                        album.updateRelatedRemoteAlbums(context: context)
                     }
                 }
             }
             
             //TODO: Notify observers of renaming albums
-            
-            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
-        }
-    }
-    
-    private func updateRemoteAlbums(_ albums: [AlbumItem], context: NSManagedObjectContext, completion: @escaping VoidHandler) {
-        let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
-        
-        execute(request: request, context: context) { [weak self] mediaItemAlbums in
-            let uuids = Set(albums.map { $0.uuid })
-            let mediaUuids = Set(mediaItemAlbums.compactMap { $0.uuid })
-            
-            let appendAlbumsUuids = Array(uuids.subtracting(mediaUuids))
-            let deletedAlbumsUuids = mediaUuids.subtracting(uuids)
-            
-            var renamedAlbumsUuid = [String]()
-
-            let deletedAlbums = mediaItemAlbums.filter { deletedAlbumsUuids.contains($0.uuid ?? "") }
-            deletedAlbums.forEach {
-                context.delete($0)
-            }
-            
-            albums.forEach { remoteAlbum in
-                if appendAlbumsUuids.contains(remoteAlbum.uuid) {
-                    //create new album
-                    _ = MediaItemsAlbum(uuid: remoteAlbum.uuid, name: remoteAlbum.name, context: context)
-                } else if let album = mediaItemAlbums.first(where: { $0.uuid == remoteAlbum.uuid }) {
-                    //update album
-                    if album.name != remoteAlbum.name {
-                        renamedAlbumsUuid.append(remoteAlbum.uuid)
-                        album.name = remoteAlbum.name
-                        album.updateRelatedLocalAlbum(context: context)
-                    }
-                }
-            }
-            
-            //TODO: Processing renamedAlbumsUuid
             
             self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
@@ -554,31 +377,6 @@ extension MediaItemsAlbumOperationService {
     private func execute(request: NSFetchRequest<MediaItemsLocalAlbum>, context: NSManagedObjectContext, albumsCallBack: @escaping MediaItemLocalAlbumsCallBack) {
         context.perform {
             var result: [MediaItemsLocalAlbum] = []
-            do {
-                result = try context.fetch(request)
-            } catch {
-                let errorMessage = "context.fetch failed with: \(error.localizedDescription)"
-                debugLog(errorMessage)
-                assertionFailure(errorMessage)
-            }
-            albumsCallBack(result)
-        }
-    }
-}
-
-//MARK: - Remote Albums Request Methods
-
-extension MediaItemsAlbumOperationService {
-    
-    private func getRemoteAlbums(uuids: [String], context: NSManagedObjectContext, albumsCallBack: @escaping MediaItemRemoteAlbumsCallBack) {
-        let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
-        request.predicate = NSPredicate(format: "\(MediaItemsAlbum.PropertyNameKey.uuid) IN %@", uuids)
-        execute(request: request, context: context, albumsCallBack: albumsCallBack)
-    }
-    
-    private func execute(request: NSFetchRequest<MediaItemsAlbum>, context: NSManagedObjectContext, albumsCallBack: @escaping MediaItemRemoteAlbumsCallBack) {
-        context.perform {
-            var result: [MediaItemsAlbum] = []
             do {
                 result = try context.fetch(request)
             } catch {

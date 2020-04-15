@@ -93,9 +93,6 @@ public class MediaItem: NSManagedObject {
         }
         
         updateRelatedLocalAlbums(context: context)
-        if let albums = wrapData.albums {
-            updateRelatedRemoteAlbums(newUuids: albums, context: context)
-        }
         updateAvalability()
         
         //empty monthValue for missing dates section
@@ -183,11 +180,6 @@ public class MediaItem: NSManagedObject {
         isTranscoded = item.status.isTranscoded
         status = item.status.valueForCoreDataMapping()
         updateMissingDateRelations()
-         
-        let oldAlbums = albums?.array as? [MediaItemsAlbum] ?? []
-        let oldUuids = oldAlbums.compactMap { $0.uuid }
-        let newUuids = item.albums ?? []
-        updateRelatedRemoteAlbums(oldUuids: oldUuids, newUuids: newUuids, context: context)
     }
     
     func updateMissingDateRelations() {
@@ -303,35 +295,6 @@ extension MediaItem {
             relatedAlbums.forEach {
                 $0.addToItems(self)
                 $0.updateHasItems()
-            }
-        }
-    }
-    
-    private func updateRelatedRemoteAlbums(oldUuids: [String] = [], newUuids: [String], context: NSManagedObjectContext) {
-        guard !isLocalItemValue else {
-            return
-        }
-        
-        let oldAlbumsUuids = Set(oldUuids)
-        let newAlbumsUuids = Set(newUuids)
-        
-        let appendUuids = newAlbumsUuids.subtracting(oldAlbumsUuids)
-        let deletedUuids = oldAlbumsUuids.subtracting(newAlbumsUuids)
-        
-        let uuids = oldAlbumsUuids.union(newAlbumsUuids)
-
-        let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
-        request.predicate = NSPredicate(format: "\(MediaItemsAlbum.PropertyNameKey.uuid) IN %@", uuids)
-    
-        if let relatedAlbums = try? context.fetch(request) {
-            relatedAlbums.forEach { album in
-                if let albumUuid = album.uuid {
-                    if appendUuids.contains(albumUuid) {
-                        album.addToItems(self)
-                    } else if deletedUuids.contains(albumUuid) {
-                        album.removeFromItems(self)
-                    }
-                }
             }
         }
     }
