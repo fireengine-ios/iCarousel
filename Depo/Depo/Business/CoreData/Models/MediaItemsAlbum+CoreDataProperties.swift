@@ -22,7 +22,6 @@ extension MediaItemsAlbum {
         static let uuid = #keyPath(MediaItemsAlbum.uuid)
         static let videoCount = #keyPath(MediaItemsAlbum.videoCount)
         static let items = #keyPath(MediaItemsAlbum.items)
-        static let relatedLocal = #keyPath(MediaItemsAlbum.relatedLocal)
     }
 }
 
@@ -45,7 +44,6 @@ extension MediaItemsAlbum {
     @NSManaged public var uuid: String?
     @NSManaged public var videoCount: Int64
     @NSManaged public var items: NSSet?
-    @NSManaged public var relatedLocal: MediaItemsLocalAlbum?
 }
 
 // MARK: Generated accessors for items
