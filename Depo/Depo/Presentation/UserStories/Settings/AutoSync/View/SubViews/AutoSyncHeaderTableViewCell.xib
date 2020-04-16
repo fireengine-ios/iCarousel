@@ -22,16 +22,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vNu-jG-QJr" userLabel="separator">
-                        <rect key="frame" x="16" y="0.0" width="288" height="1"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="ded-ad-e90"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="DHF-Pq-yGH"/>
-                    </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="C33-Ac-Jn7">
-                        <rect key="frame" x="20" y="0.0" width="280" height="72"/>
+                        <rect key="frame" x="20" y="0.0" width="280" height="76"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7HM-Vn-sml">
                                 <rect key="frame" x="0.0" y="0.0" width="280" height="44"/>
@@ -69,20 +61,28 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g1t-cv-Zis">
-                                <rect key="frame" x="0.0" y="48" width="280" height="24"/>
+                                <rect key="frame" x="0.0" y="48" width="280" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                     </stackView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vNu-jG-QJr" userLabel="separator">
+                        <rect key="frame" x="16" y="0.0" width="288" height="1"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="ded-ad-e90"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="DHF-Pq-yGH"/>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="vNu-jG-QJr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="11R-xr-Mxj"/>
                     <constraint firstAttribute="trailing" secondItem="vNu-jG-QJr" secondAttribute="trailing" constant="16" id="Dbx-VX-xOY"/>
                     <constraint firstItem="vNu-jG-QJr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="LQ2-lX-6fC"/>
                     <constraint firstItem="C33-Ac-Jn7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="QIT-iS-Vfk"/>
-                    <constraint firstAttribute="bottom" secondItem="C33-Ac-Jn7" secondAttribute="bottom" constant="8" id="VPO-rF-CYs"/>
+                    <constraint firstAttribute="bottom" secondItem="C33-Ac-Jn7" secondAttribute="bottom" constant="4" id="VPO-rF-CYs"/>
                     <constraint firstAttribute="trailing" secondItem="C33-Ac-Jn7" secondAttribute="trailing" constant="20" id="kEq-ss-Hr2"/>
                     <constraint firstItem="C33-Ac-Jn7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="oHE-zV-r9X"/>
                 </constraints>

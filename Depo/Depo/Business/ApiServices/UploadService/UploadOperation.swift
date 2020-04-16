@@ -468,10 +468,9 @@ final class UploadOperation: Operation {
                     self?.storageVars.lastUnsavedFileUUID = nil
                 }
                 
-                self.createAlbumsIfNeeded { [weak self] in
-                    self?.addToRemoteAlbumsIfNeeded(completion: success)
-                }
                 debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
+                
+                success()
             }
         }, fail: fail)
     }
@@ -569,63 +568,5 @@ extension UploadOperation: OperationProgressServiceDelegate {
 //
 //            hud.hide(animated: true, afterDelay: 2.0)
 //        }
-    }
-}
-
-/// Albums Sync
-extension UploadOperation {
-    private func createAlbumsIfNeeded(completion: @escaping VoidHandler) {
-        guard
-            uploadType == .autoSync,
-            !isPhotoAlbum,
-            let coreDataId = inputItem.coreDataObjectId
-        else {
-            completion()
-            return
-        }
-        
-        mediaAlbumsService.getLocalAlbumsToSync(for: coreDataId) { [weak self] localAlbums in
-            guard !localAlbums.isEmpty else {
-                completion()
-                return
-            }
-            
-            self?.remoteAlbumsService.createAlbums(names: localAlbums.compactMap { $0.name }, success: { _ in
-                completion()
-            }, fail: { _ in
-                /// any album wasn't created
-                completion()
-            })
-        }
-    }
-    
-    private func addToRemoteAlbumsIfNeeded(completion: @escaping VoidHandler) {
-        guard
-            uploadType == .autoSync,
-            !isPhotoAlbum,
-            let coreDataId = inputItem.coreDataObjectId,
-            let remote = outputItem
-        else {
-            completion()
-            return
-        }
-        
-        mediaItemsService.mediaItemsByIDs(ids: [coreDataId]) { [weak self] items in
-            guard
-                let self = self,
-                let item = items.first,
-                let localAlbums = item.localAlbums?.array as? Array<MediaItemsLocalAlbum>
-            else {
-                completion()
-                return
-            }
-            
-            let remoteAlbumsToAddInto = localAlbums
-                .filter { $0.isEnabled }
-                .compactMap { $0.relatedRemote?.uuid }
-                .filter { !item.albumsUUIDs.contains($0) }
-            
-            self.remoteAlbumsService.addItem(item: remote, to: remoteAlbumsToAddInto, isAutoSync: true, completion: completion)
-        }
     }
 }

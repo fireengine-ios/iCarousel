@@ -137,15 +137,7 @@ class ItemSyncServiceImpl: ItemSyncService {
                     return
                 }
                 
-                MediaItemsAlbumOperationService.shared.actualizeRemoteAlbums { [weak self] success in
-                    debugLog("Remote Albums are actualized: \(success)")
-                    
-                    guard let self = self else {
-                        return
-                    }
-                    
-                    self.upload(items: self.localItems)
-                }
+                self.upload(items: self.localItems)
             }
         }
         

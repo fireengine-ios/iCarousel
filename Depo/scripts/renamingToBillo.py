@@ -66,7 +66,7 @@ def change_product_name_for_localize_string(path_to_file):
             key, value = line.split(' = "')
             
             if key not in exception_list:
-                value = value.replace('lifebox', 'billo')
+                value = value.replace('lifebox', 'Billo')
                 value = value.replace('Lifebox', 'Billo')
                 value = value.replace('LIFEBOX', 'BILLO')
                 line = ' = '.join([ key, '"' + value ])
