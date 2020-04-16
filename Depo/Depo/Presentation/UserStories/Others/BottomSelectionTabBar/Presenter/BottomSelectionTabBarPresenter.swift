@@ -90,8 +90,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         let hasLocal = items.contains(where: { $0.isLocalItem == true })
         let hasRemote = items.contains(where: { $0.isLocalItem != true })
-        let hasReadOnlyFolders = items.first(where: { ($0 as? WrapData)?.isReadOnlyFolder == false}) == nil
-        
+
         if hasRemote {
             view.enableItems(at: [moveToTrashIndex, downloadIndex, hideIndex].compactMap { $0 })
         }
@@ -99,6 +98,12 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         if hasLocal {
             view.enableItems(at: [syncIndex].compactMap { $0 })
         }
+        
+        guard items.allSatisfy({ $0 is WrapData }) else {
+            return
+        }
+        
+        let hasReadOnlyFolders = items.first(where: { ($0 as? WrapData)?.isReadOnlyFolder == false}) == nil
         
         if hasReadOnlyFolders {
             view.disableItems(at: [moveToTrashIndex].compactMap { $0 })
