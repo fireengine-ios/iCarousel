@@ -291,7 +291,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                      items: item,
                      itemsOperation: { [weak self] item, _, _ in
                         self?.output?.completeAsyncOperationEnableScreen()
-                        self?.moveToTrashItems(items: item.filter({ !$0.isLocalItem }))
+                        self?.moveToTrashItems(items: item.filter { !$0.isLocalItem && !$0.isReadOnlyFolder } )
             }, albumsOperation: { [weak self] item, _, _ in
                 self?.output?.completeAsyncOperationEnableScreen()
                 self?.moveToTrashAlbums(albums: item)

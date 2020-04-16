@@ -43,7 +43,7 @@ struct SearchJsonKey {
     static let fileList = "file-list"
     
     // metadata
-    
+    static let specialFolderMeta = "X-Object-Meta-Special-Folder"
     static let ThumbnailLarge = "Thumbnail-Large"
     static let ThumbnailSmall = "Thumbnail-Small"
     static let Thumbnail_Medium = "Thumbnail-Medium"
@@ -82,6 +82,7 @@ struct SearchJsonKey {
 final class BaseMetaData: ObjectRequestResponse, NSCoding {
     
     var favourite: Bool?
+    var specialFolderMeta: String?
     
     // photo and video
     var height: Int = 0
@@ -121,6 +122,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
     
     override func mapping() {
         favourite = json?[SearchJsonKey.favourite].boolFromString ?? false
+        specialFolderMeta = json?[SearchJsonKey.specialFolderMeta].string
 
         height = json?[SearchJsonKey.ImageHeight].int ?? 0
         width = json?[SearchJsonKey.ImageWidth].int ?? 0
@@ -168,6 +170,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         duration = aDecoder.decodeObject(forKey:SearchJsonKey.Duration) as? Double ?? Double(0.0)
         genre = aDecoder.decodeObject(forKey:SearchJsonKey.Genre) as? [String] ?? []
         isVideoSlideshow = aDecoder.decodeObject(forKey: SearchJsonKey.VideoSlideshow) as? Bool ?? false
+        specialFolderMeta = aDecoder.decodeObject(forKey: SearchJsonKey.specialFolderMeta) as? String
 //        videoHLSPreview = aDecoder.decodeObject(forKey:SearchJsonKey.VideoHLSPreview) as? URL
     }
     
@@ -187,6 +190,7 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         aCoder.encode(duration, forKey: SearchJsonKey.Duration)
         aCoder.encode(genre, forKey: SearchJsonKey.Genre)
         aCoder.encode(isVideoSlideshow, forKey: SearchJsonKey.VideoSlideshow)
+        aCoder.encode(specialFolderMeta, forKey: SearchJsonKey.specialFolderMeta)
 //        aCoder.encode(videoHLSPreview, forKey: SearchJsonKey.VideoHLSPreview)
     }
 }

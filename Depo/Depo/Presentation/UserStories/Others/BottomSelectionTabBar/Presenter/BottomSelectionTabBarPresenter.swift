@@ -90,6 +90,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         let hasLocal = items.contains(where: { $0.isLocalItem == true })
         let hasRemote = items.contains(where: { $0.isLocalItem != true })
+        let hasReadOnlyFolders = items.first(where: { ($0 as? WrapData)?.isReadOnlyFolder == false}) == nil
         
         if hasRemote {
             view.enableItems(at: [moveToTrashIndex, downloadIndex, hideIndex].compactMap { $0 })
@@ -97,6 +98,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         if hasLocal {
             view.enableItems(at: [syncIndex].compactMap { $0 })
+        }
+        
+        if hasReadOnlyFolders {
+            view.disableItems(at: [moveToTrashIndex].compactMap { $0 })
         }
     }
     
@@ -353,9 +358,9 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
         
         var filteredTypes = types
         let langCode = Device.locale
-        if langCode != "tr" {
-            filteredTypes = types.filter({ $0 != .print })
-        }
+//        if langCode != "tr" {
+//            filteredTypes = types.filter({ $0 != .print }) //FE-2439 - Removing Print Option for Turkish (TR) language
+//        }
         
         basePassingPresenter?.getSelectedItems { [weak self] selectedItems in
             guard let self = self else {
