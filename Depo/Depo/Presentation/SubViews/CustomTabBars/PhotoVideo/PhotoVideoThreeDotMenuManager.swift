@@ -66,7 +66,8 @@ final class PhotoVideoThreeDotMenuManager {
                 actionTypes.append(.removeFromFavorites)
             }
             
-            actionTypes.append(contentsOf: [.addToAlbum, .print])
+            ///FE-2455 Removing Print Option - Print option is displayed
+            actionTypes.append(contentsOf: [.addToAlbum/*, .print*/])
             
             /// remove .deleteDeviceOriginal if need
             MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems) { duplicates in
