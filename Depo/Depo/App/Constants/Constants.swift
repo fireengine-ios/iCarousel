@@ -145,6 +145,7 @@ struct TextConstants {
     static let loginCellEmailPlaceholder = NSLocalizedString( "You have to fill in your mail or GSM Number", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginCellPasswordPlaceholder = NSLocalizedString("You have to fill in a password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginFAQButton = NSLocalizedString("login_faq", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let signUpPasswordRulesLabel = NSLocalizedString("sign_up_password_rules", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let autoSyncNavigationTitle = NSLocalizedString("Auto Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncFromSettingsTitle = NSLocalizedString("Lifebox can sync your files automatically.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

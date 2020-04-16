@@ -111,6 +111,7 @@ final class RegistrationViewController: ViewController {
         let newValue = ProfilePasswordEnterView()
         newValue.textField.enablesReturnKeyAutomatically = true
         newValue.textField.quickDismissPlaceholder = TextConstants.enterYourNewPassword
+        newValue.addPasswordRulesLabel()
         
         newValue.titleLabel.text = TextConstants.registrationCellTitlePassword
         

@@ -1221,6 +1221,7 @@
 "support_form_subject_7_detailed_info_label" = "I can't download the Lifebox app.";
 "support_form_subject_7_detailed_info_fulltext" = "<p>- Please make sure that your phone is a model that supports the lifebox application.<br /> - The Android app 4.4 and above is supported on Android phones/tablets.<br/> - The iOS app 9 and above is supported on iPhone/iPad devices with iOS. <br /> - We don't have support for Windows phone-based phones.<br /> - The Web application is supported on all other top browsers (Chrome, Safari, Mozilla, etc.) except Internet Explorer and on all operating systems (macOS, Windows, Linux independent).</p><p><strong>If you have not reached a solution: </strong> </p><p>- If a phone number is not connected to the account and you have not accessed the app for a long time(at least 3 months), the account may be suspended.";
 "login_faq" = "FAQ";
+"sign_up_password_rules" = "Password must be minimum 6 and maximum 16 character, contain at least one number and capital letter, include nonconsecutive letters.";
 "signup_faq_info" = "Please select a topic if you need help.";
 "login_faq_info" = "Please select a topic if you need help.";
 "too_many_invalid_attempt" = "Too many requests are made, please try again later";
