@@ -18,32 +18,6 @@ public class MediaItemsAlbum: NSManagedObject {
         
         self.uuid = uuid
         self.name = name
-        
-        updateRelatedLocalAlbum(context: context)
     }
 }
 
-extension MediaItemsAlbum {
-    func updateRelatedLocalAlbum(context: NSManagedObjectContext) {
-        guard let name = name else {
-            relatedLocal = nil
-            return
-        }
-        
-        if relatedLocal?.name != name {
-            relatedLocal = nil
-        }
-        
-        let request: NSFetchRequest = MediaItemsLocalAlbum.fetchRequest()
-        request.predicate = NSPredicate(format: "\(MediaItemsLocalAlbum.PropertyNameKey.name) = %@", name)
-        
-        if let localAlbums = try? context.fetch(request) {
-            localAlbums.forEach {
-                if $0.relatedRemote == nil {
-                    relatedLocal = $0
-                }
-            }
-        }
-    }
-
-}
