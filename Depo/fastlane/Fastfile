@@ -193,7 +193,7 @@ lane :my_gym_lifedrive do # |options|
         app: firebaseKey,
         groups: FIREBASE_QA_GROUPS,
         # testers: TESTERS_LIST
-        release_notes: "FE-2431 spike build lifebox",
+        # release_notes: "",
         ipa_path: filePath
     )
   end
