@@ -251,9 +251,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         
         var filteredTypes = types
         let langCode = Device.locale
-        if langCode != "tr" {
-            filteredTypes = types.filter({ $0 != .print })
-        }
+//        if langCode != "tr" {
+//            filteredTypes = types.filter({ $0 != .print }) //FE-2439 - Removing Print Option for Turkish (TR) language
+//        }
         basePassingPresenter?.getSelectedItems { [weak self] selectedItems in
             //FIXME: this part can actualy be wraped into background thread
             guard let self = self else {
