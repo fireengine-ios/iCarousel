@@ -18,6 +18,7 @@ enum SortType: CustomStringConvertible {
     case date
     case imageDate
     case albumName
+    case lastModifiedDate
     
     var description: String {
         switch self {
@@ -28,6 +29,7 @@ enum SortType: CustomStringConvertible {
         case .album     : return "album"
         case .date      : return "createdDate"
         case .imageDate : return "metadata.Image-DateTime"
+        case .lastModifiedDate: return "lastModifiedDate"
         }
     }
 }

@@ -17,6 +17,10 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
     }
     
+    static var allFilesSortTypes: [MoreActionsConfig.SortRullesType] {
+        return [.AlphaBetricAZ, .AlphaBetricZA, .lastModifiedTimeNewOld, .lastModifiedTimeOldNew, .Largest, .Smallest]
+    }
+    
     class func initializePhotoVideosViewController(with nibName: String, screenFilterType: MoreActionsConfig.MoreActionsFileType) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)//PhotoVideoController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
@@ -122,7 +126,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: viewType,
-            availableSortTypes: baseSortTypes,
+            availableSortTypes: allFilesSortTypes,
             defaultSortType: sortType,
             availableFilter: false,
             showGridListButton: true
@@ -153,7 +157,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
                                                style: .default, tintColor: nil)
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: viewType,
-            availableSortTypes: baseSortTypes,
+            availableSortTypes: allFilesSortTypes,
             defaultSortType: sortType,
             availableFilter: false,
             showGridListButton: true
@@ -186,7 +190,10 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let bottomBarConfig = EditingBarConfig(elementsConfig: elementsConfig,
                                                style: .default, tintColor: nil)
 
-        let presenter: BaseFilesGreedPresenter = DocumentsGreedPresenter()
+        let sortedRule: SortedRules = status == .active ? .lastModifiedTimeDown : .timeDown
+        let presenter = DocumentsGreedPresenter(sortedRule: sortedRule)
+        presenter.sortedType = sortType
+        
         if let alertSheetExcludeTypes = alertSheetExcludeTypes {
             presenter.alertSheetExcludeTypes = alertSheetExcludeTypes
         }
@@ -201,9 +208,10 @@ class BaseFilesGreedModuleInitializer: NSObject {
             presenter.moduleOutput = output
         }
         
+        let sortTypes = status == .active ? allFilesSortTypes : baseSortTypes
         let gridListTopBarConfig = GridListTopBarConfig(
             defaultGridListViewtype: type,
-            availableSortTypes: baseSortTypes,
+            availableSortTypes: sortTypes,
             defaultSortType: sortType,
             availableFilter: false,
             showGridListButton: true

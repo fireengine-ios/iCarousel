@@ -369,9 +369,9 @@ final class PageCompounder {
     fileprivate func sortByCurrentType(items: [WrapData], sortType: SortedRules) -> [WrapData] {
         var tempoArray = items
         switch sortType {
-        case .timeUp, .timeUpWithoutSection:
+        case .timeUp, .timeUpWithoutSection, .lastModifiedTimeUp:
             tempoArray.sort{$0.creationDate! > $1.creationDate!}
-        case .timeDown, .timeDownWithoutSection:
+        case .timeDown, .timeDownWithoutSection, .lastModifiedTimeDown:
             tempoArray.sort{$0.creationDate! < $1.creationDate!}
         case .lettersAZ, .albumlettersAZ:
             tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
@@ -405,9 +405,9 @@ final class PageCompounder {
             return NSSortDescriptor(key: "fileSizeValue", ascending: false)
         case .sizeZA:
             return NSSortDescriptor(key: "fileSizeValue", ascending: true)
-        case .metaDataTimeUp, .timeUp, .timeUpWithoutSection:
+        case .metaDataTimeUp, .timeUp, .timeUpWithoutSection, .lastModifiedTimeUp:
             return NSSortDescriptor(key: "creationDateValue", ascending: false)
-        case .metaDataTimeDown, .timeDown, .timeDownWithoutSection:
+        case .metaDataTimeDown, .timeDown, .timeDownWithoutSection, .lastModifiedTimeDown:
             return NSSortDescriptor(key: "creationDateValue", ascending: true)
         }
     }
@@ -418,10 +418,10 @@ extension PageCompounder: PageSortingPredicates {
     
     func getSortingPredicateMidPage(sortType: SortedRules, firstItem: Item,  lastItem: Item) -> NSPredicate {
         switch sortType {
-        case .timeUp, .timeUpWithoutSection:
+        case .timeUp, .timeUpWithoutSection, .lastModifiedTimeUp:
             return NSPredicate(format: "creationDateValue >= %@ AND creationDateValue <= %@",
                                (lastItem.creationDate ?? Date()) as NSDate, (firstItem.creationDate ?? Date()) as NSDate)
-        case .timeDown, .timeDownWithoutSection:
+        case .timeDown, .timeDownWithoutSection, .lastModifiedTimeDown:
             return NSPredicate(format: "creationDateValue <= %@ AND creationDateValue >= %@", (lastItem.creationDate ?? Date()) as NSDate, (firstItem.creationDate ?? Date()) as NSDate)
         case .lettersAZ, .albumlettersAZ:
             return NSPredicate(format: "nameValue >= %@ AND nameValue <= %@",
@@ -446,9 +446,9 @@ extension PageCompounder: PageSortingPredicates {
     
     func getSortingPredicateLastPage(sortType: SortedRules, firstItem: Item) -> NSPredicate {
         switch sortType {
-        case .timeUp, .timeUpWithoutSection:
+        case .timeUp, .timeUpWithoutSection, .lastModifiedTimeUp:
             return NSPredicate(format: "creationDateValue <= %@", (firstItem.creationDate ?? Date()) as NSDate)
-        case .timeDown, .timeDownWithoutSection:
+        case .timeDown, .timeDownWithoutSection, .lastModifiedTimeDown:
             return NSPredicate(format: "creationDateValue >= %@", (firstItem.creationDate ?? Date()) as NSDate)
         case .lettersAZ, .albumlettersAZ:
             return NSPredicate(format: "nameValue <= %@", firstItem.name ?? "")
@@ -467,9 +467,9 @@ extension PageCompounder: PageSortingPredicates {
     
     func getSortingPredicateFirstPage(sortType: SortedRules, lastItem: Item) -> NSPredicate {
         switch sortType {
-        case .timeUp, .timeUpWithoutSection:
+        case .timeUp, .timeUpWithoutSection, .lastModifiedTimeUp:
             return NSPredicate(format: "creationDateValue >= %@", (lastItem.creationDate ?? Date()) as NSDate)
-        case .timeDown, .timeDownWithoutSection:
+        case .timeDown, .timeDownWithoutSection, .lastModifiedTimeDown:
             return NSPredicate(format: "creationDateValue <= %@", (lastItem.creationDate ?? Date()) as NSDate)
         case .lettersAZ, .albumlettersAZ:
             return NSPredicate(format: "nameValue >= %@", lastItem.name ?? "")

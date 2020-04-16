@@ -12,27 +12,27 @@ final class ViewSortStorage {
     static let shared = ViewSortStorage()
     
     private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
-    private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+    private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.lastModifiedTimeNewOld
     
     private(set) var favoritesViewType = MoreActionsConfig.ViewType.Grid
-    private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+    private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.lastModifiedTimeNewOld
     
     func resetToDefault() {
-        allFilesViewType = MoreActionsConfig.ViewType.Grid
-        allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
-        favoritesViewType = MoreActionsConfig.ViewType.Grid
-        favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
+        allFilesViewType = .Grid
+        allFilesSortType = .lastModifiedTimeNewOld
+        favoritesViewType = .Grid
+        favoritesSortType = .lastModifiedTimeNewOld
     }
 }
 
 extension ViewSortStorage: BaseFilesGreedModuleOutput {
     func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
         if fieldType == .all {
-            self.allFilesViewType = type
-            self.allFilesSortType = sortedType
+            allFilesViewType = type
+            allFilesSortType = sortedType
         } else if fieldType == .favorite {
-            self.favoritesViewType = type
-            self.favoritesSortType = sortedType
+            favoritesViewType = type
+            favoritesSortType = sortedType
         }
     }
 }

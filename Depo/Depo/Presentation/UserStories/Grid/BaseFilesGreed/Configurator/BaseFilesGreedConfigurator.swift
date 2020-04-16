@@ -31,6 +31,9 @@ class BaseFilesGreedModuleConfigurator {
             presenter?.needShowScrollIndicator = true
             presenter?.needShowEmptyMetaItems = true
             presenter?.ifNeedReloadData = false
+        } else if remoteServices is AllFilesService || remoteServices is FavouritesService {
+            presenter = DocumentsGreedPresenter(sortedRule: .lastModifiedTimeDown)
+            presenter?.sortedType = .lastModifiedTimeNewOld
         } else {
             presenter = DocumentsGreedPresenter()
             presenter?.sortedRule = .timeUpWithoutSection

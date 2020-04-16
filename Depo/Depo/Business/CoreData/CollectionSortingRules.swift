@@ -23,13 +23,13 @@ class CollectionSortingRules {
         case .lettersZA:
             rule = CollectionSortingRules.sortByFileName(ascending: false)
             
-        case .timeUp:
+        case .timeUp, .lastModifiedTimeUp:
             rule = CollectionSortingRules.sortByCreateDate(ascending: false, section: true)
             
         case .timeUpWithoutSection:
             rule = CollectionSortingRules.sortByCreateDate(ascending: false, section: false)
             
-        case .timeDown:
+        case .timeDown, .lastModifiedTimeDown:
             rule = CollectionSortingRules.sortByCreateDate(ascending: true, section: true)
             
         case .timeDownWithoutSection:
