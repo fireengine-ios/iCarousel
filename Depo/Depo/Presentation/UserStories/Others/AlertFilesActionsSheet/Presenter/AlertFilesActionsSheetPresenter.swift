@@ -108,7 +108,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             var types: [ElementTypes] = [.info, .share, .move]
             
             types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-            types.append(.moveToTrash)
+            if !item.isReadOnlyFolder {
+                types.append(.moveToTrash)
+            }
             
             if item.fileType == .image || item.fileType == .video {
                 types.append(.download)
@@ -218,6 +220,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     }
                 } else if let removeFromFavorites = filteredActionTypes.index(of: .removeFromFavorites) {
                     filteredActionTypes.remove(at: removeFromFavorites)
+                }
+                
+                if remoteItems.first(where: { !$0.isReadOnlyFolder }) == nil {
+                    filteredActionTypes.remove(.moveToTrash)
                 }
                 
                 if let index = filteredActionTypes.index(of: .deleteDeviceOriginal) {
