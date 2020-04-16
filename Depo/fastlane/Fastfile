@@ -123,7 +123,6 @@ BUILD_FOLDER_NAME = "builds"
 
   desc "Create ipa"
   lane :my_gym do # |options|
-
     gym(
       # configuration: config, #"Adhoc", # Defaults to 'Release'
       scheme: SCHEME_LIFEBOX,
@@ -172,6 +171,7 @@ lane :my_gym_lifedrive do # |options|
 
   FIREBASE_KEY_LIFEBOX = "1:805163098188:ios:80d4ad2ac5355c36b394e9"
   FIREBASE_KEY_LIFEDRIVE = "1:805163098188:ios:ac7a91b24941c456b394e9"
+  FIREBASE_QA_GROUPS = "qa-lifetech, qa-turkcell"
 
   TESTERS_LIST = "lifetechqa@icloud.com,
                   lifetechqa2@gmail.com,
@@ -191,9 +191,10 @@ lane :my_gym_lifedrive do # |options|
 
     firebase_app_distribution(
         app: firebaseKey,
-        testers: "fireenginelb@gmail.com",#TESTERS_LIST
+        groups: FIREBASE_QA_GROUPS,
+        # testers: TESTERS_LIST
         release_notes: "FE-2431 spike build lifebox",
-        firebase_cli_path: filePath
+        ipa_path: filePath
     )
   end
 
