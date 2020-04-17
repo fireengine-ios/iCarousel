@@ -1403,7 +1403,7 @@
 "confirm_empty_trashbin_button" = "Çöp Kutusunu Temizle";
 "success_empty_trashbin" = "Çöp kutusundaki tüm içeriklerin kalıcı olarak silindi.";
 "mobile_payment_title" = "Mobil Ödeme";
-"mobile_payment_description" = "Turkcell Mobil Ödeme iznini aktifleştirerek, Turkcell hattın üzerinden kolayca dijital ürün veya servis satın alabilirsin. Sözleşme detaylarına buradan ulaşabilirsin: Çerçeve Ödeme Hizmetleri ve Elektronik Para Sözleşmesi";
+"mobile_payment_description" = "Mobil Ödeme iznini aktifleştirerek, Turkcell hattın üzerinden kolayca dijital ürün veya servis satın alabilirsin. Sözleşme detaylarına buradan ulaşabilirsin: Çerçeve Ödeme Hizmetleri ve Elektronik Para Sözleşmesi";
 "mobile_payment_view_title" = "Turkcell Mobil Ödeme";
 "mobile_payment_view_description" = "Aşağıdaki maddeyi onaylayarak hattının mobil ödeme iznini aktifleştirebilirsin. Mobil Ödeme onayıyla satın aldığın dijital ürünler, Turkcell faturan aracılığı ile tahsil edilir.";
 "mobile_payment_view_link_text" = "Çerçeve Ödeme Hizmetleri ve Elektronik Para Sözleşmesi'ni kabul ediyorum.";
@@ -1428,7 +1428,7 @@
 "settings_userinfo_phone" = "Telefon Numarası";
 "settings_action_sheet_profile_details" = "Profil detayları";
 "settings_action_sheet_edit_profile_photo" = "Profil fotoğrafını güncelle";
-"original_сopy_package_description" = "Orjinal Kalitede Saklama";
+"original_сopy_package_description" = "+ Orjinal Kalitede Saklama";
 "become_premium_navbar_title" = "Sana Özel Teklifimiz!";
 "become_premium_header_default_title" = "Sana özel bir teklifimiz var!";
 "become_premium_header_default_subtitle" = "Anılarını orjinal kalitede yedeklemer ister misin? Belki de fotoğraflarını ve rehberini organize etmek için yardıma ihtiyacın var. Premium abone ol, lifebox hayatını kolaylaştırsın. Premium özellikleri ve sana özel tekliflerimizi incele.";
@@ -1441,7 +1441,7 @@
 "become_premium_header_contact_sync_title" = "Sana özel bir teklifimiz var!";
 "become_premium_header_contact_sync_subtitle" = "Anılarını orjinal kalitede yedeklemer ister misin? Belki de fotoğraflarını ve rehberini organize etmek için yardıma ihtiyacın var. Premium abone ol, lifebox hayatını kolaylaştırsın. Premium özellikleri ve sana özel tekliflerimizi incele.";
 "become_premium_description" = "Orjinal Kalitede Saklama\nSınırsız Yüz&Nesne&Yer Tanıma\nTelefondaki Tekrarlayan Kontakları Silme\nSınırsız PhotoPick Analiz";
-"become_premium_or_text" = "VEYA ek saklama alanı alarak Premium üyeliğe <b>ÜCRETSİZ</b> sahip ol!";
+"become_premium_or_text" = "VEYA ek saklama alanı alarak Premium üyeliğe ÜCRETSİZ sahip ol!";
 "become_premium_see_all_packages" = "Tüm Abonelikleri İncele";
 "dialog_header_contact_sync_vcf_file_upload_error" = "lifebox saklama alanı limitine ulaştın!";
 "dialog_contact_sync_vcf_error_upper_button" = "Saklama Alanımı Yükselt";
@@ -1451,12 +1451,12 @@
 "mobile_payment_success_popup_title" = "Turkcell Mobil Ödeme iznin başarılı bir şekilde aktifleştirilmiştir.";
 "mobile_payment_success_popup_message" = "Turkcell Mobil Ödeme iznini Ayarlar menüsündeki İzinler altından yönetebilirsin.";
 "storage_usage_information" = "Kullanım Bilgileri";
-"auto_sync_album_items" = "Otomatik Yedekleme";
+"auto_sync_album_items" = "Otomatik Yedeklenecek Albüm Seçimi";
 "my_packages" = "Paketlerim";
 "feature_package_name" = "Premium";
 "contact_sync_confirm_premium_popup_title" = "Onay";
 "contact_sync_confirm_premium_popup_text" = "Telefon rehberindeki tekrarlayan kontakları kolayca silmek ve diğer avantajlı Premium özelliklerden faydalanmak için Premium hesabı incele!";
-"my_packages_description" = "Mevcut aboneliklerini aşağıda göremiyorsan, <b>Aboneliklerimi Yenile</b> ile geri yükleyebilirsin.";
+"my_packages_description" = "Mevcut aboneliklerini aşağıda göremiyorsan, Aboneliklerimi Yenile ile geri yükleyebilirsin.";
 "photo_video_auto_sync_settings" = "Otomatik Yedekleme";
 "ubsent_contacts_in_lifebox" = "lifebox içinde kayıtlı kontak bulunmuyor.";
 "auto_sync_albums_description" = "Otomatik yedeklenmesini istediğin albümlerini seçebilirsin.";
@@ -1465,7 +1465,7 @@
 "tabbar_item_contacts_label" = "Rehber";
 "tabbar_item_all_files_label" = "Tüm Dosyalar";
 "see_features" = "Özellikleri Göster";
-"middle_user_package_description" = "15 PhotoPick Analizi";
+"middle_user_package_description" = "+ 15 PhotoPick Analizi";
 "features_only_package_addon_type" = "Premium Özellikler";
 "features_middle_only_package_addon_type" = "Standart+ Özellikler";
 "middle_feature_package_name" = "Standart+";
