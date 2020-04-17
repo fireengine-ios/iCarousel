@@ -116,10 +116,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.rootViewController = router.vcForCurrentState()
                 self.window?.isHidden = false
                 
-                if !CacheManager.shared.isProcessing, Device.operationSystemVersionMoreOrEqual(13) {
-                    CacheManager.shared.actualizeCache()
-                }
-                
             }
         }
         
