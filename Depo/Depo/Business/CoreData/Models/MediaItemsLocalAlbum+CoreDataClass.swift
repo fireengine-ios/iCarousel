@@ -23,7 +23,6 @@ public class MediaItemsLocalAlbum: NSManagedObject {
         self.hasItems = hasItems
         
         updateRelatedMediaItems(album: asset, context: context)
-        updateRelatedRemoteAlbums(context: context)
     }
 }
 
@@ -39,24 +38,6 @@ extension MediaItemsLocalAlbum {
                 addToItems($0)
                 $0.isAvailable = true //by default for new Album
             }
-        }
-    }
-    
-    func updateRelatedRemoteAlbums(context: NSManagedObjectContext) {
-        guard let name = name else {
-            relatedRemote = nil
-            return
-        }
-        
-        if relatedRemote?.name != name {
-            relatedRemote = nil
-        }
-        
-        let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
-        request.predicate = NSPredicate(format: "\(MediaItemsAlbum.PropertyNameKey.name) = %@", name)
-        
-        if let relatedAlbums = try? context.fetch(request) {
-            relatedRemote = relatedAlbums.first
         }
     }
     
