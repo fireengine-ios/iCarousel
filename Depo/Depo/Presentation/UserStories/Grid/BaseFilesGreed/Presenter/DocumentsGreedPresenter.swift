@@ -36,11 +36,4 @@ class DocumentsGreedPresenter: BaseFilesGreedPresenter {
         return CGSize(width: cellWidth, height: cellWidth)
     }
     
-    override func operationFinished(withType type: ElementTypes, response: Any?) {
-        let reloadTytpes: [ElementTypes] = [ .move]
-        if reloadTytpes.contains(type) {
-            //onReloadData()
-        }
-    }
-    
 }

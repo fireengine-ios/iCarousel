@@ -104,6 +104,7 @@ GEM
       xcodeproj (>= 1.6.0, < 2.0.0)
       xcpretty (~> 0.3.0)
       xcpretty-travis-formatter (>= 0.0.3)
+    fastlane-plugin-firebase_app_distribution (0.1.4)
     fastlane-plugin-poeditor_export (0.3.0)
     fastlane-plugin-versioning (0.3.4)
     fourflusher (2.0.1)
@@ -207,10 +208,11 @@ PLATFORMS
 DEPENDENCIES
   cocoapods
   fastlane
+  fastlane-plugin-firebase_app_distribution
   fastlane-plugin-poeditor_export
   fastlane-plugin-versioning
   synx
   xcode-install
 
 BUNDLED WITH
-   1.16.1
+   1.16.3

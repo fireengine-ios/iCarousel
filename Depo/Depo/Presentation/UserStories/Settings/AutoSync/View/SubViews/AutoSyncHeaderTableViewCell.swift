@@ -90,7 +90,7 @@ final class AutoSyncHeaderTableViewCell: AutoSyncTableViewCell {
         switch model.headerType {
         case .albums:
             optionLabel.text = ""
-            descriptionLabel.text = model.isSelected ? subtitle : ""
+            descriptionLabel.text = subtitle
         default:
             optionLabel.text = subtitle
             descriptionLabel.text = ""

@@ -1221,6 +1221,7 @@
 "support_form_subject_7_detailed_info_label" = "I can't download the Lifebox app.";
 "support_form_subject_7_detailed_info_fulltext" = "<p>- Please make sure that your phone is a model that supports the lifebox application.<br /> - The Android app 4.4 and above is supported on Android phones/tablets.<br/> - The iOS app 9 and above is supported on iPhone/iPad devices with iOS. <br /> - We don't have support for Windows phone-based phones.<br /> - The Web application is supported on all other top browsers (Chrome, Safari, Mozilla, etc.) except Internet Explorer and on all operating systems (macOS, Windows, Linux independent).</p><p><strong>If you have not reached a solution: </strong> </p><p>- If a phone number is not connected to the account and you have not accessed the app for a long time(at least 3 months), the account may be suspended.";
 "login_faq" = "FAQ";
+"sign_up_password_rules" = "Password must be minimum 6 and maximum 16 character, contain at least one number and capital letter, include nonconsecutive letters.";
 "signup_faq_info" = "Please select a topic if you need help.";
 "login_faq_info" = "Please select a topic if you need help.";
 "too_many_invalid_attempt" = "Too many requests are made, please try again later";
@@ -1269,7 +1270,7 @@
 "landing_billo_title_5" = "Automatic Stories";
 "landing_billo_subtitle_5" = "Live your memories with our automated stories we created for you";
 "landing_billo_title_6" = "Social Media";
-"landing_billo_subtitle_6" = "Transfer all your social media archives easily to billo";
+"landing_billo_subtitle_6" = "Transfer all your social media archives easily to Billo";
 "landing_billo_title_7" = "Photo Print";
 "landing_billo_subtitle_7" = "Decorate your living space with your memories";
 
@@ -1440,7 +1441,6 @@
 "confirm_empty_trashbin" = "All of the items in trash bin will be permanently deleted and you will have no access to them. Are you sure to continue?";
 "confirm_empty_trashbin_button" = "Empty Trash Bin";
 "success_empty_trashbin" = "All of the items are permanently deleted";
-"remove_albums_success_message" = "The album has been removed.";
 "mobile_payment_title" = "Mobile Payment";
 "mobile_payment_description" = "When you activate Turkcell Mobile Payment transactions, you can easily purchase digital products or services through your Turkcell line. You can access the contract details here: Payment Services and Electronic Money Agreement";
 "mobile_payment_view_title" = "Turkcell Mobile Payment";
@@ -1457,7 +1457,7 @@
 "we_recommend" = "Recommended for You";
 "show_more" = "Show features";
 "show_less" = "Show less";
-"face_recognition_package_description" = "+ Unlimited Face&Image&Location Recognition";
+"face_recognition_package_description" = "+ Unlimited Face&Image Recognition";
 "delete_dublicate_package_description" = "+ Remove Duplicate Contacts from your Phone";
 "premium_user_package_description" = "+ Unlimited PhotoPick Analysis";
 "bundle_package_addon_type" = "Storage + Premium";
@@ -1479,7 +1479,7 @@
 "become_premium_header_things_subtitle" = "Would you like to backup your memories in the original quality? Maybe you need some help with organizing your photos pile and contacts? Become a Premium member and let lifebox ease your life. Check out the Premium features and special offers below.";
 "become_premium_header_contact_sync_title" = "We have a special offer for you!";
 "become_premium_header_contact_sync_subtitle" = "Would you like to backup your memories in the original quality? Maybe you need some help with organizing your photos pile and contacts? Become a Premium member and let lifebox ease your life. Check out the Premium features and special offers below.";
-"become_premium_description" = "Back Up in Original Quality\nUnlimited Face&Image&Location Recognition\nRemove Duplicate Contacts from your PhoneBook\nUnlimited PhotoPick Analysis (Get more likes on Instagram)";
+"become_premium_description" = "Back Up in Original Quality\nUnlimited Face&Image Recognition\nRemove Duplicate Contacts from your PhoneBook\nUnlimited PhotoPick Analysis";
 "become_premium_or_text" = "OR purchase extra storage and get Premium features for FREE!";
 "become_premium_see_all_packages" = "Compare All Plans";
 "dialog_header_contact_sync_vcf_file_upload_error" = "You have reached your lifebox storage limit!";
@@ -1490,12 +1490,12 @@
 "mobile_payment_success_popup_title" = "You activated Turkcell Mobile Payment successfully.";
 "mobile_payment_success_popup_message" = "You can manage Turkcell Mobile Payment Permission under Settings-Permission menu.";
 "storage_usage_information" = "Usage";
-"auto_sync_album_items" = "Auto-Sync";
+"auto_sync_album_items" = "Album Selection for Auto-Sync";
 "my_packages" = "My Packages";
 "feature_package_name" = "Premium";
 "contact_sync_confirm_premium_popup_title" = "Confirmation";
 "contact_sync_confirm_premium_popup_text" = "To delete your duplicate contacts in your device easily and unlock many more features, become a Premium member.";
-"my_packages_description" = "If you want to restore your existing purchases, click on <b>Restore Purchases</b> button.";
+"my_packages_description" = "If you want to restore your existing purchases, click on Restore Purchases button.";
 "photo_video_auto_sync_settings" = "Auto-Sync Settings";
 "ubsent_contacts_in_lifebox" = "There is no any contact in your lifebox";
 "auto_sync_albums_description" = "You can choose which albums to sync automatically.";

@@ -15,56 +15,11 @@ Install _fastlane_ using
 or alternatively using `brew cask install fastlane`
 
 # Available Actions
-### beta_jenkins
-```
-fastlane beta_jenkins
-```
-
-### beta_jenkins_preprod
-```
-fastlane beta_jenkins_preprod
-```
-
-### beta_diawi
-```
-fastlane beta_diawi
-```
-
-### beta_diawi_preprod
-```
-fastlane beta_diawi_preprod
-```
-
-### beta_diawi_prod
-```
-fastlane beta_diawi_prod
-```
-
-### build_prod_and_preprod
-```
-fastlane build_prod_and_preprod
-```
-
-### beta_fabric
-```
-fastlane beta_fabric
-```
-
-### beta_fabric_preprod
-```
-fastlane beta_fabric_preprod
-```
-
 ### my_scan
 ```
 fastlane my_scan
 ```
 run tests
-### beta_fabric_lifedrive
-```
-fastlane beta_fabric_lifedrive
-```
-
 ### my_gym
 ```
 fastlane my_gym
@@ -75,16 +30,16 @@ Create ipa
 fastlane my_gym_lifedrive
 ```
 
-### diawi
+### firebase_lifetech_lifebox
 ```
-fastlane diawi
+fastlane firebase_lifetech_lifebox
 ```
-
-### fabric
+LifeTech Lifebox build distribution via Firebase
+### firebase_lifetech_lifedrive
 ```
-fastlane fabric
+fastlane firebase_lifetech_lifedrive
 ```
-Distribute build via Fabric
+LifeTech Lifedrive build distribution via Firebase
 ### slack_post
 ```
 fastlane slack_post
@@ -138,11 +93,6 @@ fastlane-plugin-versioning required. also it needs more time that my class
 ### test_get_build_number_my
 ```
 fastlane test_get_build_number_my
-```
-
-### beta
-```
-fastlane beta
 ```
 
 
