@@ -1484,7 +1484,7 @@
 "mobile_payment_success_popup_title" = "Leja e Pagesës Celulare Turkcell është aktivizuar me sukses.";
 "mobile_payment_success_popup_message" = "Ju mund të menaxhoni lejen tuaj të Pagesës Celulare Turkcell në sektorin Lejet në menunë Cilësimet.";
 "storage_usage_information" = "Informacionet e përdorimit";
-"auto_sync_album_items" = "Zgjedhja e albumeve për sinkronizim automatik";
+"auto_sync_album_items" = "Përzgjedhja e albumeve";
 "my_packages" = "Paketat e mia";
 "feature_package_name" = "Premium";
 "contact_sync_confirm_premium_popup_title" = "Aprovim";

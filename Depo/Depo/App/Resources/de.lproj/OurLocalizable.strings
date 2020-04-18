@@ -1441,7 +1441,7 @@
 "mobile_payment_success_popup_title" = "Turkcell mobile Zahlungsberechtigung wurde erfolgreich aktiviert.";
 "mobile_payment_success_popup_message" = "Du kannst Deine Turkcell Mobile Zahlungs-Berechtigung unter Berechtigungen im Menü Einstellungen verwalten.";
 "storage_usage_information" = "Benutzerinformationen";
-"auto_sync_album_items" = "Albumauswahl für die automatische Synchronisierung";
+"auto_sync_album_items" = "Albumauswahl";
 "my_packages" = "Meine Pakete";
 "feature_package_name" = "Premium";
 "contact_sync_confirm_premium_popup_title" = "Bestätigung";

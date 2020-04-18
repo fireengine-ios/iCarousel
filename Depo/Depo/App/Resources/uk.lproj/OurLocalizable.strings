@@ -628,7 +628,7 @@
 "marked as favourite" = "позначено як улюблений";
 "Bad internet connection" = "Погане інтернет-з'єднання";
 "download_error_unsupported_extension" = "Завантаження не підтримується для цього типу файлу";
-"Show only synced items" = "Показати лише синхронізовані елементи";
+"Show only synced items" = "Тільки синхронізовані";
 "Your lifebox storage is almost full!" = "Ви досягли межі пам'яті lifebox.";
 "This edited photo will be saved as a new photo in your device gallery" = "Відредаговані фото будуть збережені як нові на вашому пристрої у галереї";
 "We couldn’t find any place on your Lifebox yet." = "Ми не знайшли жодного місця на вашому Lifebox.";
@@ -1443,7 +1443,7 @@
 "mobile_payment_success_popup_title" = "Дозвіл на оплату Мобільних Платежів Turkcell успішно активовано.";
 "mobile_payment_success_popup_message" = "Ви можете керувати своїм дозволом на оплату Мобільних Платежів Turkcell у розділі Дозволи в меню Налаштування.";
 "storage_usage_information" = "Інформація про використання";
-"auto_sync_album_items" = "Автоматичне резервне копіювання";
+"auto_sync_album_items" = "Вибір альбому";
 "my_packages" = "Мої пакети";
 "feature_package_name" = "Преміум (Premium)";
 "contact_sync_confirm_premium_popup_title" = "твердження";
