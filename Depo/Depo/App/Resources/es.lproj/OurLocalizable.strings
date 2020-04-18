@@ -1483,7 +1483,7 @@
 "mobile_payment_success_popup_title" = "Se ha activado con éxito tu permiso de Pago Móvil Turkcell.";
 "mobile_payment_success_popup_message" = "Puedes manejar el permiso de Pago Móvil Turkcell por debajo de los Permisos en el menú de Configuración.";
 "storage_usage_information" = "Datos de Uso";
-"auto_sync_album_items" = "Copia de seguridad automática";
+"auto_sync_album_items" = "Selección de álbum";
 "my_packages" = "Mis Paquetes";
 "feature_package_name" = "Premium";
 "contact_sync_confirm_premium_popup_title" = "Aprobación";
