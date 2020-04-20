@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         
         if #available(iOS 13.0, *) {
-            debugLog("AppDelegate BT Registered")
+            debugLog("BG! Registeration")
             self.backgroundSyncService.registerLaunchHandlers()
             
         }
@@ -192,7 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         if #available(iOS 13.0, *) {
-            debugLog("AppDelegate applicationDidEnterBackground BT schedule")
+            debugLog("BG! AppDelegate applicationDidEnterBackground")
             backgroundSyncService.scheduleProcessingSync()
             backgroundSyncService.scheduleRefreshSync()
         }
