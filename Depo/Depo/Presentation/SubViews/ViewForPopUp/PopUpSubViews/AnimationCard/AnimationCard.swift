@@ -129,7 +129,11 @@ class AnimationCard: BaseCardView {
                 case .success(_):
                     self?.cardType = .display
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
+                    if error.isOutOfSpaceError {
+                        RouterVC().showFullQuotaPopUp()
+                    } else {
+                        UIApplication.showErrorAlert(message: error.description)
+                    }
                 }
             }
         }
