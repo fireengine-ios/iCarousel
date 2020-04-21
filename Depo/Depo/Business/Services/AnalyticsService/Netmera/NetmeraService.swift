@@ -149,27 +149,31 @@ final class NetmeraService {
         Netmera.setLogLevel(.debug)
         #endif
         
-        #if LIFEBOX
-        #if APPSTORE
-        Netmera.setAPIKey("3PJRHrXDiqbDyulzKSM_m59cpbYT9LezJOwQ9zsHAkjMSBUVQ92OWw")
-        #elseif  RELEASE
-        Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1PwON_uN9F4h_7_vf0s3AwgwwqNTCnPZ_Bg")
-        #elseif ENTERPRISE || DEBUG
-        Netmera.setAPIKey("3PJRHrXDiqa-pwWScAq1P9AgrOteDDLvwaHjgjAt-Ohb1OnTxfy_8Q")
-        #endif
-        #endif
-        
-        
-        #if LIFEDRIVE
-        #if APPSTORE
-        Netmera.setAPIKey("LINA4LCdpz44QTLXQBpw_aczLfB3nyWqit1C9oeYa1nzrgct0J5WOQ")
-        #elseif ENTERPRISE || DEBUG
-        Netmera.setAPIKey("6l30TJ05YeluVSpiY3Al8xcpW3mTkldj6_KWcwS8iNrRTgBKe1166A")
-        #endif
-        #endif
-
+        Netmera.setAPIKey(getApiKey())
         
         Netmera.setAppGroupName(SharedConstants.groupIdentifier)
+    }
+    
+    private static func getApiKey() -> String {
+        #if LIFEBOX
+            switch RouteRequests.currentServerEnvironment {
+            case .production:
+                return "3PJRHrXDiqbDyulzKSM_m59cpbYT9LezJOwQ9zsHAkjMSBUVQ92OWw"
+            case .preProduction, .test:
+                return "3PJRHrXDiqa-pwWScAq1PwON_uN9F4h_7_vf0s3AwgwwqNTCnPZ_Bg"
+            }
+        #endif
+        
+        #if LIFEDRIVE
+            switch RouteRequests.currentServerEnvironment {
+            case .production:
+                return "LINA4LCdpz44QTLXQBpw_aczLfB3nyWqit1C9oeYa1nzrgct0J5WOQ"
+            case .preProduction, .test:
+                return "6l30TJ05YeluVSpiY3Al8xcpW3mTkldj6_KWcwS8iNrRTgBKe1166A"
+            }
+        #endif
+        
+        return ""
     }
     
     static func sendEvent(event: NetmeraEvent) {
