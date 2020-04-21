@@ -133,6 +133,8 @@ extension MediaItemsAlbumOperationService {
                     self.appendAlbumsToBase(assets: assets) {
                         semaphore.signal()
                     }
+                } else {
+                    semaphore.signal()
                 }
             }
             semaphore.wait()
@@ -163,10 +165,6 @@ extension MediaItemsAlbumOperationService {
 //MARK: - PhotoLibraryChangeObserver Events
 
 extension MediaItemsAlbumOperationService {
-    
-    func appendNewAlbums(_ assets: [PHAssetCollection], _ completion: @escaping VoidHandler) {
-        appendAlbumsToBase(assets: assets, completion: completion)
-    }
     
     func deleteAlbums(_ assets: [PHAssetCollection], _ completion: @escaping VoidHandler) {
         deleteAlbumsFromBase(assets: assets, completion: completion)
@@ -271,32 +269,24 @@ extension MediaItemsAlbumOperationService {
     }
     
     private func appendAlbumsToBase(assets: [PHAssetCollection], completion: @escaping VoidHandler) {
-        privateQueue.sync { [weak self] in
-            let semaphore = DispatchSemaphore(value: 0)
-            
-            let context = coreDataStack.newChildBackgroundContext
-            context.perform { [weak self] in
-                let assetIds = assets.map { $0.localIdentifier }
-                self?.getLocalAlbums(localIds: assetIds, context: context) { [weak self] localAlbums in
-                    guard let self = self else {
-                        return
-                    }
-                    
-                    let existsAssetIds = localAlbums.compactMap { $0.localId }
-                    let notSavedAssets = assets.filter { !$0.localIdentifier.isContained(in: existsAssetIds) }
-                    
-                    notSavedAssets.forEach {
-                        let hasItems = $0.photosCount > 0 || $0.videosCount > 0
-                        _ = MediaItemsLocalAlbum(asset: $0, hasItems: hasItems, context: context)
-                    }
-                    
-                    self.coreDataStack.saveDataForContext(context: context) {
-                        semaphore.signal()
-                    }
+        let context = coreDataStack.newChildBackgroundContext
+        context.perform { [weak self] in
+            let assetIds = assets.map { $0.localIdentifier }
+            self?.getLocalAlbums(localIds: assetIds, context: context) { [weak self] localAlbums in
+                guard let self = self else {
+                    return
                 }
+                
+                let existsAssetIds = localAlbums.compactMap { $0.localId }
+                let notSavedAssets = assets.filter { !$0.localIdentifier.isContained(in: existsAssetIds) }
+                
+                notSavedAssets.forEach {
+                    let hasItems = $0.photosCount > 0 || $0.videosCount > 0
+                    _ = MediaItemsLocalAlbum(asset: $0, hasItems: hasItems, context: context)
+                }
+                
+                self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
             }
-            semaphore.wait()
-            completion()
         }
     }
     
