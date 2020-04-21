@@ -14,16 +14,12 @@ final class AutoSyncCheckBox: UIButton {
     private let uncheckedImage = UIImage(named: "checkBoxNotSelected")
     private let disabledImage = UIImage(named: "checkboxSelected")
     
-    func setup(isEnabled: Bool, isSelected: Bool, isAllChecked: Bool = true) {
+    func setup(isSelected: Bool, isAllChecked: Bool = true) {
         let image: UIImage?
-        if isEnabled {
-            if isSelected {
-                image = isAllChecked ? checkedImage : disabledImage
-            } else {
-                image = uncheckedImage
-            }
+        if isSelected {
+            image = isAllChecked ? checkedImage : disabledImage
         } else {
-            image = isSelected ? disabledImage : uncheckedImage
+            image = uncheckedImage
         }
         setImage(image, for: .normal)
     }
