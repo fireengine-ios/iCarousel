@@ -161,9 +161,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
                 phChanges[.added] = changes.insertedObjects
                 printLog("photoLibraryDidChange - added \(changes.insertedObjects.count) albums")
                 
-                MediaItemsAlbumOperationService.shared.appendNewAlbums(changes.insertedObjects) {
-                    checkDeletedObjects()
-                }
+                //Creation albums when handle update assets event
             }
             
             checkInsertedObjects()
