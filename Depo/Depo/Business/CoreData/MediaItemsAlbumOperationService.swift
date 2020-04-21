@@ -271,7 +271,7 @@ extension MediaItemsAlbumOperationService {
     }
     
     private func appendAlbumsToBase(assets: [PHAssetCollection], completion: @escaping VoidHandler) {
-        privateQueue.sync {
+        privateQueue.sync { [weak self] in
             let semaphore = DispatchSemaphore(value: 0)
             
             let context = coreDataStack.newChildBackgroundContext
