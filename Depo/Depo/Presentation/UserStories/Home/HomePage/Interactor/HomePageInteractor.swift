@@ -16,7 +16,7 @@ final class HomePageInteractor: HomePageInteractorInput {
     
     weak var output: HomePageInteractorOutput!
     
-    private lazy var homeCardsService: HomeCardsService = HomeCardsServiceImp()
+    private lazy var homeCardsService: HomeCardsService = factory.resolve()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var instapickService: InstapickService = factory.resolve()
     private lazy var accountService = AccountService()
@@ -33,6 +33,7 @@ final class HomePageInteractor: HomePageInteractorInput {
     }
 
     func viewIsReady() {
+        homeCardsService.delegate = self
         FreeAppSpace.session.checkFreeAppSpace()
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
@@ -278,4 +279,11 @@ final class HomePageInteractor: HomePageInteractorInput {
     }
     
     
+}
+
+
+extension HomePageInteractor: HomeCardsServiceImpDelegte {
+    func needUpdateHomeScreen() {
+        needRefresh()
+    }
 }

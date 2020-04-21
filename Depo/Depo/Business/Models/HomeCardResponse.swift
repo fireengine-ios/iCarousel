@@ -19,6 +19,7 @@ final class HomeCardResponse : Equatable {
     var saved: Bool = false
     var actionable: Bool = false
     var details: JSON?
+    var fileList: [JSON]?
     var order = 0
     
     func getOperationType() -> OperationType? {
@@ -63,6 +64,8 @@ final class HomeCardResponse : Equatable {
             return .campaignCard
         case .divorce:
             return .divorce
+        case .thingsDocument:
+            return .documents
         }
     }
 }
@@ -82,6 +85,10 @@ extension HomeCardResponse: Map {
             details = json["fileList"]
         } else {
             details = json["details"]
+        }
+        
+        if type == .thingsDocument {
+            fileList = json["fileList"].array
         }
     }
 }
@@ -105,4 +112,5 @@ enum HomeCardTypes: String {
     case tbMatik = "TBMATIC"
     case campaign = "CAMPAIGN"
     case divorce = "DIVORCE"
+    case thingsDocument = "THINGS_DOCUMENT"
 }

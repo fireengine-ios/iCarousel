@@ -95,7 +95,7 @@ final class FileProviderExtension: NSFileProviderExtension {
             }
             
             let placecholderDirectoryUrl = placeholderURL.deletingLastPathComponent()
-            var fcError: NSErrorPointer
+            var fcError: NSErrorPointer = NSErrorPointer(nilLiteral: ())
             
             fileCoordinator.coordinate(writingItemAt: placecholderDirectoryUrl, options: .forMerging, error: fcError) { newURL in
                 
