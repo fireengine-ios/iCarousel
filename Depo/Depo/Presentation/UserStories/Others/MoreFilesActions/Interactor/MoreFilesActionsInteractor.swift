@@ -297,25 +297,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 self?.moveToTrashAlbums(albums: item)
             }, firOperation: { [weak self] item, success, fail in
                 self?.output?.completeAsyncOperationEnableScreen()
-                if let items = item as? [PeopleItem] {
-                    self?.analyticsService.trackFileOperationGAEvent(operationType: .trash,
-                                                                     itemsType: .people,
-                                                                     itemsCount: items.count)
-                    self?.fileService.moveToTrashPeople(items: items, success: success, fail:  fail)
-                    
-                } else if let items = item as? [ThingsItem] {
-                    self?.analyticsService.trackFileOperationGAEvent(operationType: .trash,
-                                                                     itemsType: .things,
-                                                                     itemsCount: items.count)
-                    self?.fileService.moveToTrashThings(items: items, success: success, fail: fail)
-                    
-                } else if let items = item as? [PlacesItem] {
-                    self?.analyticsService.trackFileOperationGAEvent(operationType: .trash,
-                                                                     itemsType: .places,
-                                                                     itemsCount: items.count)
-                    self?.fileService.moveToTrashPlaces(items: items, success: success, fail: fail)
-                    
-                }
+                self?.moveToTrashFir(items: item, success: success, fail: fail)
         })
     }
     

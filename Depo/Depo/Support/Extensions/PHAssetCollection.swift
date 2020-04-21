@@ -56,4 +56,13 @@ extension PHAssetCollection {
         }
         return albums
     }
+    
+    static func getAssets(for localIdentifiers: [String]) -> [PHAssetCollection] {
+        var assets = [PHAssetCollection]()
+        let fetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: localIdentifiers, options: nil)
+        fetchResult.enumerateObjects { asset, _, _ in
+            assets.append(asset)
+        }
+        return assets
+    }
 }

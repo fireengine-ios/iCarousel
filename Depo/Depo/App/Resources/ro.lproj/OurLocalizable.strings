@@ -1441,7 +1441,7 @@
 "mobile_payment_success_popup_title" = "Permisiunea Plată  Mobilă Turkcell a fost activat cu succes.";
 "mobile_payment_success_popup_message" = "Puteți gestiona permisiunea dvs. Plată Mobilă Turkcell din meniul Setări Permisiuni.";
 "storage_usage_information" = "Informații de Utilizare";
-"auto_sync_album_items" = "Backup Automat";
+"auto_sync_album_items" = "Selectarea albumului";
 "my_packages" = "Pachetele mele";
 "feature_package_name" = "Premium";
 "contact_sync_confirm_premium_popup_title" = "Confirmare";
