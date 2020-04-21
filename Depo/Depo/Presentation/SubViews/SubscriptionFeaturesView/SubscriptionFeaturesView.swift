@@ -119,6 +119,7 @@ final class SubscriptionFeaturesView: UIView {
             label.font = isPremium ? UIFont.TurkcellSaturaBolFont(size: 16) : UIFont.TurkcellSaturaFont(size: 16)
             label.textColor = isPremium ? ColorConstants.cardBorderOrange : ColorConstants.darkText
             label.textAlignment = .center
+            label.numberOfLines = 0
             stackView.addArrangedSubview(label)
         }
     }
