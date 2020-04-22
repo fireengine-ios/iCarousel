@@ -93,15 +93,13 @@ final class BackgroundSynkService {
         if taskIdentifier == TaskIdentifiers.backgroundProcessing {
             
             request = BGProcessingTaskRequest(identifier: TaskIdentifiers.backgroundProcessing)
+            
             if let processingTask = request as? BGProcessingTaskRequest {
                 processingTask.requiresNetworkConnectivity = true
                 processingTask.requiresExternalPower = false
             }
-            
         } else if taskIdentifier == TaskIdentifiers.backgroundRefresh {
-            
             request = BGAppRefreshTaskRequest(identifier: TaskIdentifiers.backgroundRefresh)
-            
         } else {
             debugLog("BG! ERROR: trying to schedule unknown ID task")
             return
