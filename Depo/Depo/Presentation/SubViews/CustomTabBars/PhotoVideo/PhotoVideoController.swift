@@ -132,6 +132,14 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         collectionViewManager.setScrolliblePopUpView(isActive: false)
     }
 
+    override func didMove(toParentViewController parent: UIViewController?) {
+        super.didMove(toParentViewController: parent)
+        
+        //FE-1373 reset top content offset when user switch segment if needed
+        if collectionView.contentOffset.y < -collectionView.contentInset.top {
+            collectionView.contentOffset.y = -collectionView.contentInset.top
+        }
+    }
     
     // MARK: - setup
     
