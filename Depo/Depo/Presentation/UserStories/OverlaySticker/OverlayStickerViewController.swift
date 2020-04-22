@@ -60,7 +60,6 @@ final class OverlayStickerViewController: ViewController {
         
         view.backgroundColor = .black
         statusBarColor = .black
-        showSpinner()
 
         addTapGesture()
     }
