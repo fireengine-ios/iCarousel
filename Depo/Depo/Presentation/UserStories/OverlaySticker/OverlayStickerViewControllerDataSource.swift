@@ -36,7 +36,7 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     }
     
     private let stickerService: SmashService = SmashServiceImpl()
-    
+    private let gifOptimizationQueue = DispatchQueue(label: DispatchQueueLabels.gifOptimizationQueue, qos: .utility)
     weak var delegate: OverlayStickerViewControllerDataSourceDelegate?
     
     private let operationQueue: OperationQueue = {
@@ -106,7 +106,7 @@ final class OverlayStickerViewControllerDataSource: NSObject {
                         self.imageState.source.append(contentsOf: stickers)
                     }
                     
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         self.stickersCollectionView.reloadData()
                     }
                     
@@ -131,12 +131,12 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     private func downloadGifForCell(cell: StickerCollectionViewCell, url: URL) {
     
         downloader.getImageData(url: url) { [weak self] data in
-            DispatchQueue.global().async {
+            self?.gifOptimizationQueue.async {
                 guard let imageData = data, let image = self?.optimizingGifService.optimizeImage(data: imageData, optimizeFor: .cell) else {
                     return
                 }
                 
-                DispatchQueue.toMain {
+                DispatchQueue.main.async {
                     cell.setupGif(image: image, url: url)
                 }
             }
