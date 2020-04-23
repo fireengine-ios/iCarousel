@@ -1455,7 +1455,7 @@
 "mobile_payment_success_popup_title" = "Ваше разрешение Мобильного Платежа Turkcell успешно активировано.";
 "mobile_payment_success_popup_message" = "Вы можете управлять своим разрешением Мобильного Платежа Turkcell в разделе Разрешения в меню Настройки.";
 "storage_usage_information" = "Информация об Использовании";
-"auto_sync_album_items" = "Выбор Альбома Для Автоматического Резервного Копирования";
+"auto_sync_album_items" = "Выбор альбома";
 "my_packages" = "Мои Пакеты";
 "feature_package_name" = "Premium";
 "contact_sync_confirm_premium_popup_title" = "Подтверждение";

@@ -45,6 +45,7 @@ final class MovieCard: BaseCardView {
     @IBOutlet private weak var videoPreviewImageView: LoadingImageView!
     
     private var item: WrapData?
+    private let routerVC = RouterVC()
     
     private var cardType = CardActionType.save {
         didSet {
@@ -131,7 +132,11 @@ final class MovieCard: BaseCardView {
                 case .success(_):
                     self?.cardType = .display
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
+                    if error.isOutOfSpaceError {
+                        self?.routerVC.showFullQuotaPopUp()
+                    } else {
+                        UIApplication.showErrorAlert(message: error.description)
+                    }
                 }
             }
         }
@@ -150,15 +155,14 @@ final class MovieCard: BaseCardView {
             status = .active
         }
 
-        let router = RouterVC()
-        let detailModule = router.filesDetailModule(fileObject: item,
-                                                    items: [item],
-                                                    status: status,
-                                                    canLoadMoreItems: false,
-                                                    moduleOutput: nil)
+        let detailModule = routerVC.filesDetailModule(fileObject: item,
+                                                      items: [item],
+                                                      status: status,
+                                                      canLoadMoreItems: false,
+                                                      moduleOutput: nil)
 
         let nController = NavigationController(rootViewController: detailModule.controller)
-        router.presentViewController(controller: nController)
+        routerVC.presentViewController(controller: nController)
     }
     
     override func spotlightHeight() -> CGFloat {

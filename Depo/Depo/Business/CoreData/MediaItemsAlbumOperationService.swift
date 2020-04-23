@@ -31,7 +31,7 @@ final class MediaItemsAlbumOperationService {
     var inProcessLocalAlbums = false
     private var isAlbumsActualized = false
     
-    let privateQueue = DispatchQueue(label: DispatchQueueLabels.mediaItemAlbumsOperationsService, attributes: .concurrent)
+    private let privateQueue = DispatchQueue(label: DispatchQueueLabels.mediaItemAlbumsOperationsService, attributes: .concurrent)
     
     private var waitingLocalAlbumsCallBack: AutoSyncAlbumsCallBack?
     
@@ -129,13 +129,13 @@ extension MediaItemsAlbumOperationService {
                 let newAlbumIds = Set(localIds).subtracting(mediaItemAlbumsIds)
 
                 if !newAlbumIds.isEmpty {
-                    let fetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: Array(newAlbumIds), options: nil)
-                    fetchResult.enumerateObjects { asset, _, _ in
-                        let hasItems = asset.photosCount > 0 || asset.videosCount > 0
-                        _ = MediaItemsLocalAlbum(asset: asset, hasItems: hasItems, context: context)
+                    let assets = PHAssetCollection.getAssets(for: Array(newAlbumIds))
+                    self.appendAlbumsToBase(assets: assets) {
+                        semaphore.signal()
                     }
+                } else {
+                    semaphore.signal()
                 }
-                semaphore.signal()
             }
             semaphore.wait()
         }
@@ -165,10 +165,6 @@ extension MediaItemsAlbumOperationService {
 //MARK: - PhotoLibraryChangeObserver Events
 
 extension MediaItemsAlbumOperationService {
-    
-    func appendNewAlbums(_ assets: [PHAssetCollection], _ completion: @escaping VoidHandler) {
-        appendAlbumsToBase(assets: assets, completion: completion)
-    }
     
     func deleteAlbums(_ assets: [PHAssetCollection], _ completion: @escaping VoidHandler) {
         deleteAlbumsFromBase(assets: assets, completion: completion)
@@ -275,11 +271,22 @@ extension MediaItemsAlbumOperationService {
     private func appendAlbumsToBase(assets: [PHAssetCollection], completion: @escaping VoidHandler) {
         let context = coreDataStack.newChildBackgroundContext
         context.perform { [weak self] in
-            assets.forEach {
-                let hasItems = $0.photosCount > 0 || $0.videosCount > 0
-                _ = MediaItemsLocalAlbum(asset: $0, hasItems: hasItems, context: context)
+            let assetIds = assets.map { $0.localIdentifier }
+            self?.getLocalAlbums(localIds: assetIds, context: context) { [weak self] localAlbums in
+                guard let self = self else {
+                    return
+                }
+                
+                let existsAssetIds = localAlbums.compactMap { $0.localId }
+                let notSavedAssets = assets.filter { !$0.localIdentifier.isContained(in: existsAssetIds) }
+                
+                notSavedAssets.forEach {
+                    let hasItems = $0.photosCount > 0 || $0.videosCount > 0
+                    _ = MediaItemsLocalAlbum(asset: $0, hasItems: hasItems, context: context)
+                }
+                
+                self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
             }
-            self?.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
         }
     }
     

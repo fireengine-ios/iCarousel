@@ -38,6 +38,7 @@ final class CollageCard: BaseCardView {
     @IBOutlet private weak var photoImageView: LoadingImageView!
     
     private var item: WrapData?
+    private let routerVC = RouterVC()
     
     private var cardType = CardActionType.save {
         didSet {
@@ -110,7 +111,7 @@ final class CollageCard: BaseCardView {
         let vc = PVViewerController.initFromNib()
         vc.image = image
         let nController = NavigationController(rootViewController: vc)
-        RouterVC().presentViewController(controller: nController)
+        routerVC.presentViewController(controller: nController)
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
@@ -135,7 +136,11 @@ final class CollageCard: BaseCardView {
                 case .success(_):
                     self?.cardType = .display
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
+                    if error.isOutOfSpaceError {
+                        self?.routerVC.showFullQuotaPopUp()
+                    } else {
+                        UIApplication.showErrorAlert(message: error.description)
+                    }
                 }
             }
         }
@@ -144,15 +149,14 @@ final class CollageCard: BaseCardView {
     private func showPhotoVideoDetail() {
         guard let item = item else { return }
         
-        let router = RouterVC()
-        let detailModule = router.filesDetailModule(fileObject: item,
-                                                    items: [item],
-                                                    status: .active,
-                                                    canLoadMoreItems: false,
-                                                    moduleOutput: nil)
+        let detailModule = routerVC.filesDetailModule(fileObject: item,
+                                                      items: [item],
+                                                      status: .active,
+                                                      canLoadMoreItems: false,
+                                                      moduleOutput: nil)
 
         let nController = NavigationController(rootViewController: detailModule.controller)
-        router.presentViewController(controller: nController)
+        routerVC.presentViewController(controller: nController)
     }
     
     override func spotlightHeight() -> CGFloat {

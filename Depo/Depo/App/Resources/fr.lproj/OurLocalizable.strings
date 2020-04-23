@@ -819,7 +819,7 @@ Full stop added*/
 "marked as favourite" = "Marqué comme favori";
 "Bad internet connection" = "La connexion internet est de mauvaise qualité";
 "download_error_unsupported_extension" = "Impossible de télécharger ce type de fichier";
-"Show only synced items" = "Afficher uniquement les éléments synchronisés";
+"Show only synced items" = "Afficher que les éléments synchronisés";
 "Your lifebox storage is almost full!" = "L'espace de stockage de lifebox est presque atteint !";
 "This edited photo will be saved as a new photo in your device gallery" = "Cette photo modifiée sera enregistrée comme une nouvelle photo dans la galerie de votre appareil.";
 "We couldn’t find any place on your Lifebox yet." = "Nous n'avons pas encore trouvé de place dans lifebox.";
@@ -1747,7 +1747,7 @@ Please check I have understood the intended command here*/
 "mobile_payment_success_popup_title" = "Votre autorisation de Paiement Mobile Turkcell a été activée avec succès.";
 "mobile_payment_success_popup_message" = "Vous pouvez gérer votre autorisation de Paiement Mobile Turkcell sous Autorisations dans le menu Paramètres.";
 "storage_usage_information" = "Informations d'utilisation";
-"auto_sync_album_items" = "Sauvegarde Automatique";
+"auto_sync_album_items" = "Sélection d'album";
 "my_packages" = "Mes Paquets";
 "feature_package_name" = "Premium";
 "contact_sync_confirm_premium_popup_title" = "Confirmation";
@@ -1758,7 +1758,7 @@ Please check I have understood the intended command here*/
 "auto_sync_albums_description" = "Vous pouvez sélectionner vos albums que vous souhaitez sauvegarder automatiquement.";
 "tabbar_item_home_label" = "Page d'accueil";
 "tabbar_item_gallery_label" = "Galerie";
-"tabbar_item_contacts_label" = "Répertoire téléphonique";
+"tabbar_item_contacts_label" = "Contacts";
 "tabbar_item_all_files_label" = "Tous les dossiers";
 "see_features" = "Afficher les Fonctionnalités";
 "middle_user_package_description" = "+ 15 Analyse PhotoPick";
