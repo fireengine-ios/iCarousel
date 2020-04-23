@@ -7,8 +7,6 @@
 		<string>background_refresh</string>
 		<string>background_processing</string>
 	</array>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -66,6 +64,10 @@
 	<string>531658366898592</string>
 	<key>FacebookDisplayName</key>
 	<string>lifebox</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>spotify</string>
@@ -103,8 +105,6 @@
 	<true/>
 	<key>MenloPushServerURL</key>
 	<string>https://turkcell.menloworks.com</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -186,6 +186,7 @@
 		<string>audio</string>
 		<string>fetch</string>
 		<string>location</string>
+		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
@@ -208,6 +209,8 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 	<key>UTExportedTypeDeclarations</key>
@@ -232,7 +235,5 @@
 			</dict>
 		</dict>
 	</array>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 </dict>
 </plist>
