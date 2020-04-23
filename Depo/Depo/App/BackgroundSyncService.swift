@@ -10,12 +10,12 @@ import Foundation
 import BackgroundTasks
 
 @available(iOS 13.0, *)
-extension BackgroundSynkService {
-    static let shared = BackgroundSynkService()
+extension BackgroundSyncService {
+    static let shared = BackgroundSyncService()
 }
 
 @available(iOS 13.0, *)
-final class BackgroundSynkService {
+final class BackgroundSyncService {
     
     private enum TaskIdentifiers {
         static let backgroundProcessing = "background_processing"
@@ -37,8 +37,8 @@ final class BackgroundSynkService {
     
     
     func registerLaunchHandlers() {
-        registerTask(identifier: TaskIdentifiers.backgroundProcessing, queue: BackgroundSynkService.schedulerQueue)
-        registerTask(identifier: TaskIdentifiers.backgroundRefresh, queue: BackgroundSynkService.schedulerQueue)
+        registerTask(identifier: TaskIdentifiers.backgroundProcessing, queue: BackgroundSyncService.schedulerQueue)
+        registerTask(identifier: TaskIdentifiers.backgroundRefresh, queue: BackgroundSyncService.schedulerQueue)
     }
     
     private func registerTask(identifier: String, queue: DispatchQueue) {

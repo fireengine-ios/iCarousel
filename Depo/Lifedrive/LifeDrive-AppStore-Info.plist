@@ -2,15 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
-	<key>CFBundleDisplayName</key>
-	<string>billo</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
 		<string>background_refresh</string>
 		<string>background_processing</string>
 	</array>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>billo</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
@@ -64,6 +64,8 @@
 	<string>408187279847927</string>
 	<key>FacebookDisplayName</key>
 	<string>Billo</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -100,8 +102,6 @@
 	<false/>
 	<key>MenloPushServerURL</key>
 	<string>https://turkcell.menloworks.com</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -133,6 +133,8 @@
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>To save lifebox photos to your device</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>billo needs to access your bluetooth permission in order to send you push messages in specific areas</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>To offer campaigns specific to you</string>
 	<key>NSCameraUsageDescription</key>
@@ -151,8 +153,6 @@
 	<string>To save lifebox photos to your device</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Your photos will be backed up to lifebox</string>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>billo needs to access your bluetooth permission in order to send you push messages in specific areas</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>TurkcellSaturaReg.ttf</string>
@@ -169,6 +169,7 @@
 		<string>audio</string>
 		<string>fetch</string>
 		<string>location</string>
+		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
