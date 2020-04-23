@@ -48,6 +48,7 @@ final class SnackbarManager {
 
         contentView.setup(message: message, actionTitle: action?.localizedTitle.uppercased(), axis: axis, action: actionHandler)
         currentSnackbar = TTGSnackbar(customContentView: contentView, duration: duration)
+        currentSnackbar?.animationType = .fadeInFadeOut
         currentSnackbar?.backgroundColor = ColorConstants.snackbarGray
         currentSnackbar?.shouldActivateLeftAndRightMarginOnCustomContentView = true
         currentSnackbar?.shouldDismissOnSwipe = true
