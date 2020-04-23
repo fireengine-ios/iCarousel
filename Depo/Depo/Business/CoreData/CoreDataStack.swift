@@ -96,18 +96,54 @@ final class CoreDataStack_ios10: CoreDataStack {
     
     
     func setup(completion: @escaping VoidHandler) {
+        
+        let successHandler = { [weak self] in
+            self?.container.viewContext.automaticallyMergesChangesFromParent = true
+            self?.isReady = true
+            self?.delegates.invoke(invocation: { $0.onCoreDataStackSetupCompleted() })
+            
+            completion()
+        }
+        
+        let loadingHandler = { [weak self] in
+            self?.container.viewContext.automaticallyMergesChangesFromParent = true
+            
+            do {
+                try self?.container.viewContext.save()
+            } catch let error {
+                debugLog("unable to fetch with error: \(error)")
+                self?.recreateStore(completion: successHandler)
+            }
+            
+            successHandler()
+        }
+        
         migrateIfNeeded { [weak self] in
             self?.container.loadPersistentStores { description, error in
                 guard error == nil else {
-                    fatalLog("unable to load store \(error!)")
+                    debugLog("unable to load stores (first try) \(error!)")
+                    self?.recreateStore(completion: loadingHandler)
+                    return
                 }
                 
-                self?.container.viewContext.automaticallyMergesChangesFromParent = true
-                self?.isReady = true
-                self?.delegates.invoke(invocation: { $0.onCoreDataStackSetupCompleted() })
+                loadingHandler()
+            }
+        }
+    }
+    
+    private func recreateStore(completion: @escaping VoidHandler) {
+        do {
+            try container.persistentStoreCoordinator.destroyPersistentStore(at: CoreDataConfig.storeUrl, ofType: NSSQLiteStoreType, options: nil)
+            
+            container.loadPersistentStores { description, error in
+                guard error == nil else {
+                    fatalLog("unable to load store (second try) \(error!)")
+                }
                 
                 completion()
             }
+        } catch let error {
+            fatalLog("unable to destroy store \(error)")
         }
     }
     
