@@ -23,7 +23,7 @@ struct AnalyticsDimension {
     let countOfUploadMetric: Int?
     let countOfDownloadMetric: Int?
     let gsmOperatorType: String
-    let deviceId: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
+    let deviceId: String = Device.deviceId ?? ""
     let loginType: GADementionValues.login?
     let errorType: String?
     
@@ -31,13 +31,17 @@ struct AnalyticsDimension {
     let autoSyncStatus: String?
     
     let isTwoFactorAuthEnabled: Bool?
-    let isSpotifyEnabled: Bool?
     
     let dailyDrawleft: Int?
     let totalDraw: Int?
     
     let itemsOperationCount: GADementionValues.ItemsOperationCount?
-
+    
+    let editFields: String?
+    
+    let connectionStatus: Bool?
+    let statusType: String?
+    
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
         userPackagesNames.forEach {
@@ -87,9 +91,6 @@ struct AnalyticsDimension {
         if let isTwoFactorAuthEnabled = isTwoFactorAuthEnabled {
             dimesionDictionary[GADementionsFields.twoFactorAuth.text] = isTwoFactorAuthEnabled ? "True" : "False"
         }
-        if let isSpotifyEnabled = isSpotifyEnabled {
-            dimesionDictionary[GADementionsFields.spotify.text] = (isSpotifyEnabled ? "Connect" : "Disconnect") + " - Spotify"
-        }
         if let dailyDrawleft = dailyDrawleft {
             dimesionDictionary[GADementionsFields.dailyDrawleft.text] = dailyDrawleft
         }
@@ -98,6 +99,15 @@ struct AnalyticsDimension {
         }
         if let itemsOperation = itemsOperationCount {
             dimesionDictionary[GADementionsFields.itemsCount(itemsOperation.operationType).text] = itemsOperation.count
+        }
+        if let editFields = editFields {
+            dimesionDictionary[GADementionsFields.editFields.text] = editFields
+        }
+        if let connectionStatus = connectionStatus {
+            dimesionDictionary[GADementionsFields.connectionStatus.text] = connectionStatus ? "Connected" : "Disconnected"
+        }
+        if let statusType = statusType {
+            dimesionDictionary[GADementionsFields.statusType.text] = statusType
         }
         
         return dimesionDictionary

@@ -115,6 +115,7 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                                                    target: self,
                                                    selector: #selector(onReadyButtonAction))
     
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     private var name: String?
     private var surname: String?
     private var email: String?
@@ -123,7 +124,6 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
     private var birthday: String?
     private var address: String?
     private var isTurkcellUser = false
-    
     private var isShortPhoneNumber = false
     
     override func viewDidLoad() {
@@ -149,6 +149,14 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
         super.viewWillAppear(animated)
 
         navigationBarWithGradientStyle()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if self.isMovingFromParentViewController {
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .myProfile, eventLabel: .back)
+        }
     }
     
     func setupEditState(_ isEdit: Bool) {
@@ -247,13 +255,17 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                 buttonTitle: TextConstants.ok,
                 action: { [weak self] vc in
                     vc.close { [weak self] in
-                        self?.output.tapReadyButton(name: name,
+                        guard let self = self else {
+                            return
+                        }
+                        self.output.tapReadyButton(name: name,
                                                     surname: surname,
                                                     email: email,
                                                     number: sendingPhoneNumber,
                                                     birthday: birthday,
-                                                    address: address)
-                        self?.readyButton.fixEnabledState()
+                                                    address: address,
+                                                    changes: self.getChanges())
+                        self.readyButton.fixEnabledState()
                     }
                 })
             
@@ -265,7 +277,8 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                                   email: email,
                                   number: sendingPhoneNumber,
                                   birthday: birthday,
-                                  address: address)
+                                  address: address,
+                                  changes: getChanges())
         }
     }
     
@@ -276,6 +289,18 @@ final class UserProfileViewController: ViewController, KeyboardHandler {
                                                     .foregroundColor: UIColor.lrTealish,
                                                     .underlineStyle: NSUnderlineStyle.styleSingle.rawValue])
         button.setAttributedTitle(attributedString, for: .normal)
+    }
+    
+    private func getChanges() -> String {
+        var changes: [String] = []
+        let type = GAEventLabel.ProfileChangeType.self
+        name != nameView.textField.text ? changes.append(type.name.text) : ()
+        surname != surnameView.textField.text ? changes.append(type.surname.text) : ()
+        email != emailView.textField.text ? changes.append(type.email.text) : ()
+        phoneNumber != phoneView.numberTextField.text ? changes.append(type.phone.text) : ()
+        birthday != birthdayDetailView.editableText ? changes.append(type.birthday.text) : ()
+        address != addressView.textField.text ? changes.append(type.address.text) : ()
+        return changes.joined(separator: "|")
     }
     
 }

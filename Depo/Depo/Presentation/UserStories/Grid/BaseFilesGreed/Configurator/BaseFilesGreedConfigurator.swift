@@ -63,7 +63,7 @@ class BaseFilesGreedModuleConfigurator {
             sliderPresenter.baseGreedPresenterModule = presenter
         }
         if visibleSyncItemsCheckBox {
-            viewController.showOnlySyncItemsCheckBox = CheckBoxView.initFromXib()
+            viewController.showOnlySyncItemsCheckBox = CheckBoxView.initFromNib()
         }
         if let underNavBarBarConfig = topBarConfig {
             presenter?.topBarConfig = underNavBarBarConfig

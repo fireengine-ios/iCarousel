@@ -54,8 +54,10 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
     @IBOutlet private weak var campaignDetailButton: UIButton!
     @IBOutlet private weak var analyzeDetailButton: UIButton!
     @IBOutlet private weak var contentStackView: UIStackView!
+    @IBOutlet private weak var playVideoButton: UIButton!
     
     private var detailUrl: String?
+    private var videoUrl: URL?
     private var userStatus: CampaignUserStatus?
     private lazy var router = RouterVC()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
@@ -90,17 +92,27 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
             analyzeDetailButton.isHidden = true
             titleLabel.text = campaignCardResponse.title
             descriptionLabel.text = campaignCardResponse.message
+            campaignDetailButton.setTitle(campaignCardResponse.detailsText, for: .normal)
         case .client:
             userStatus = CampaignUserStatus(response: campaignCardResponse)
             titleLabel.text = TextConstants.campaignCardTitle
             setDescriptionLabelForClientMode(dailyLimit: campaignCardResponse.maxDailyLimit,
                                              totalUsed: campaignCardResponse.totalUsed)
+            campaignDetailButton.setTitle(TextConstants.campaignDetailButtonTitle, for: .normal)
         }
         
         detailUrl = campaignCardResponse.detailsUrl
+
         debugLog("Campaign Card - start load image")
         imageView.setLogs(enabled: true)
         imageView.loadImageData(with: campaignCardResponse.imageUrl)
+        
+        //TODO: uncomment when BE wil be ready
+//        if let videoUrl = campaignCardResponse.videoUrl {
+//            imageView.image = videoUrl.videoPreview
+//            self.videoUrl = videoUrl
+//            playVideoButton.isHidden = false
+//        }
     }
     
     override func deleteCard() {
@@ -133,7 +145,12 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
             assertionFailure()
         }
     }
+}
     
+//MARK: - Actions
+
+extension CampaignCard {
+        
     @IBAction private func closeButton(_ sender: Any) {
         deleteCard()
     }
@@ -154,6 +171,14 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
         }
     }
     
+    @IBAction private func playVideo(_ sender: Any) {
+        openVideoController()
+    }
+}
+
+//MARK: - Routing
+
+extension CampaignCard {
     private func openCampaignDetailsPage() {
         if let eventLabel = userStatus?.gaEventLabel {
             analyticsService.trackCustomGAEvent(eventCategory: .campaign,
@@ -174,6 +199,19 @@ final class CampaignCard: BaseCardView, ControlTabBarProtocol {
         
         let controller = router.analyzesHistoryController()
         router.pushViewController(viewController: controller)
+    }
+    
+    private func openVideoController() {
+        guard let videoUrl = videoUrl else {
+            return
+        }
+        
+        let player = AVPlayer(url: videoUrl)
+        let playerController = FixedAVPlayerViewController()
+        playerController.player = player
+        router.presentViewController(controller: playerController) {
+            player.play()
+        }
     }
 }
 

@@ -235,6 +235,7 @@ final class SetSecurityQuestionViewController: UIViewController, KeyboardHandler
                                                     self.analyticsService.trackCustomGAEvent(eventCategory: .securityQuestion,
                                                                                              eventActions: .saveSecurityQuestion(questionIndex + 1),
                                                                                              eventLabel: .success)
+                                                    self.analyticsService.trackProfileUpdateGAEvent(editFields: GAEventLabel.ProfileChangeType.securityQuestion.text)
                                                 case .failure(let error):
                                                     self.handleServerErrors(error)
                                                     self.analyticsService.trackCustomGAEvent(eventCategory: .securityQuestion,

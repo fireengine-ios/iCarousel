@@ -91,4 +91,8 @@ extension PremiumRouter: PremiumRouterInput {
             UIApplication.topController()?.dismiss(animated: true, completion: closeAction)
         }
     }
+    
+    func showAllPackages() {
+        router.pushViewController(viewController: router.packages)
+    }
 }

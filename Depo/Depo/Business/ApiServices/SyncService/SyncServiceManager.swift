@@ -131,11 +131,12 @@ class SyncServiceManager {
     // MARK: - Private
     
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
-        debugPrint("AUTOSYNC: checkReachabilityAndSettings")
-        
         guard coreDataStack.isReady else {
+            printLog("AUTOSYNC: coreDataStack isn't ready")
             return
         }
+        
+        printLog("AUTOSYNC: checkReachabilityAndSettings")
         
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
@@ -223,6 +224,11 @@ class SyncServiceManager {
         }
     }
     
+    private func restart() {
+        stop(photo: true, video: true)
+        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+    }
+    
     private var isSubscribeForNotifications = false
 }
 
@@ -251,6 +257,11 @@ extension SyncServiceManager {
         notificationCenter.addObserver(self,
                                        selector: #selector(onLocalFilesHaveBeenLoaded),
                                        name: .allLocalMediaItemsHaveBeenLoaded,
+                                       object: nil)
+        
+        notificationCenter.addObserver(self,
+                                       selector: #selector(onLocalAlbumStatusDidChange),
+                                       name: .localAlbumStatusDidChange,
                                        object: nil)
     }
     
@@ -291,6 +302,10 @@ extension SyncServiceManager {
     
     @objc private func onLocalFilesHaveBeenLoaded() {
         self.checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+    }
+    
+    @objc private func onLocalAlbumStatusDidChange() {
+        restart()
     }
     
     @objc private func onAutoSyncStatusDidChange() {

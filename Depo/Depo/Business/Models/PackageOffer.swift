@@ -19,7 +19,7 @@ class PackageOffer {
     
     private class func sortOffersByPrice(offers: [SubscriptionPlan]) -> [SubscriptionPlan] {
         return offers.sorted { (first, second) -> Bool in
-            return first.price.isLess(than: second.price)
+            return first.amount.isLess(than: second.amount)
         }
     }
 }

@@ -157,16 +157,15 @@ final class HSCompletionPopUp: BasePopUpController {
     private let photosCount: Int
     private let mode: Mode
 
-    private weak var delegate: HideFuncRoutingProtocol?
+    private weak var delegate: DivorceActionStateProtocol?
 
     private lazy var storageVars: StorageVars = factory.resolve()
     private lazy var router = RouterVC()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
 
-
     //MARK: Init
 
-    init(mode: Mode, photosCount: Int, delegate: HideFuncRoutingProtocol) {
+    init(mode: Mode, photosCount: Int, delegate: DivorceActionStateProtocol) {
         self.photosCount = photosCount
         self.delegate = delegate
         self.mode = mode
@@ -279,14 +278,14 @@ final class HSCompletionPopUp: BasePopUpController {
     @IBAction private func onOpenPeopleAlbumTap(_ sender: Any) {
         trackOpenPeopleAlbumEvent(isCanceled: false)
         close(isFinalStep: false) {
-            self.delegate?.openPeopleAlbumIfPossible()
+            self.delegate?.onOpenPeopleAlbum()
         }
     }
 
     @IBAction private func onCloseTap(_ sender: Any) {
         trackOpenPeopleAlbumEvent(isCanceled: true)
         close(isFinalStep: false) { [weak self] in
-            self?.delegate?.popUPClosed()
+            self?.delegate?.onPopUpClosed()
         }
     }
 
@@ -334,6 +333,5 @@ extension HSCompletionPopUp {
         case .smash:
             storageVars.smashPhotoPopUpCheckBox = isHidden
         }
-
     }
 }

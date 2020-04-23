@@ -18,14 +18,17 @@ extension PackagesRouter: PackagesRouterInput {
         router.pushViewController(viewController: router.termsOfUseScreen)
     }
 
-    func openLeavePremium(type: LeavePremiumType) {
-        let vc = router.leavePremium(type: type)
-        router.pushViewController(viewController: vc)
+    func openMyStorage(usageStorage: UsageResponse?) {
+        let viewController = router.myStorage(usageStorage: usageStorage)
+        router.pushViewController(viewController: viewController)
     }
     
-    func openMyStorage(storageUsage: UsageResponse?) {
-        let viewController = router.myStorage(usageStorage: storageUsage)
-        router.pushViewController(viewController: viewController)
+    func openUsage() {
+        guard let userInfo = router.usageInfo else {
+            assertionFailure()
+            return
+        }
+        router.pushViewController(viewController: userInfo)
     }
     
     func openUserProfile(userInfo: AccountInfoResponse, isTurkcellUser: Bool) {
@@ -59,5 +62,17 @@ extension PackagesRouter: PackagesRouterInput {
             assertionFailure("there is no PaymentPopUpController. check requirements or logic")
             UIApplication.topController()?.dismiss(animated: true, completion: closeAction)
         }
+    }
+    
+    func showPaycellProcess(with cpcmOfferId: Int) {
+        let controller = PaycellViewController.create(with: cpcmOfferId) { result in
+            switch result {
+            case .success():
+                UIApplication.showSuccessAlert(message: TextConstants.successfullyPurchased)
+            case .failed(_):
+                UIApplication.showErrorAlert(message: TextConstants.errorUnknown)
+            }
+        }
+        router.pushViewController(viewController: controller)
     }
 }

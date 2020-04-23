@@ -14,60 +14,33 @@
  texts from iOS
  https://wiki.life.com.by/display/LTFizy/004+Auto+Sync+iOS
  */
-class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput, AutoSyncInteractorOutput {
+class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput {
     
     weak var view: AutoSyncViewInput!
     var interactor: AutoSyncInteractorInput!
     var router: AutoSyncRouterInput!
     
-    var fromSettings: Bool = false
+    var fromSettings = false
 
     func viewIsReady() {
         startAsyncOperationDisableScreen()
         interactor.prepareCellModels()
     }
     
-    func prepaire(syncSettings: AutoSyncSettings) {
-        completeAsyncOperationEnableScreen()
-        view.prepaire(syncSettings: syncSettings)
-    }
-    
-    func change(settings: AutoSyncSettings) {
+    func change(settings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
         if !fromSettings {
             router.routNextVC()
-            save(settings: settings)
-        } else {
-            save(settings: settings)
         }
-    }
-    
-    func save(settings: AutoSyncSettings) {
-        interactor.onSave(settings: settings, fromSettings: fromSettings)
-    }
-    
-    func onSettingSaved() {
+        save(settings: settings, albums: albums)
         
+    }
+    
+    func save(settings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
+        interactor.onSave(settings: settings, albums: albums, fromSettings: fromSettings)
     }
     
     func checkPermissions() {
         interactor.checkPermissions()
-    }
-    
-    func onCheckPermissions(photoAccessGranted: Bool, locationAccessGranted: Bool) {
-        guard photoAccessGranted else {
-            view.disableAutoSync()
-            view.checkPermissionsFailedWith(error: TextConstants.cameraAccessAlertText)
-            return
-        }
-        
-        /// location access is optional
-        if !locationAccessGranted {
-            view.showLocationPermissionPopup { [weak self] in
-                self?.view.checkPermissionsSuccessed()
-            }
-        } else {
-            view.checkPermissionsSuccessed()
-        }
     }
         
     //MARK : BasePresenter
@@ -76,4 +49,40 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput,
         return view as? Waiting
     }
     
+}
+
+//MARK: - AutoSyncInteractorOutput
+
+extension AutoSyncPresenter: AutoSyncInteractorOutput {
+    func prepaire(syncSettings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
+        completeAsyncOperationEnableScreen()
+        view.prepaire(syncSettings: syncSettings, albums: albums)
+    }
+    
+    func checkPhotoPermissionsFailed() {
+        completeAsyncOperationEnableScreen()
+        view.disableAutoSync()
+        view.checkPermissionsFailedWith(error: TextConstants.cameraAccessAlertText)
+    }
+    
+    func onCheckPermissions(photoAccessGranted: Bool, locationAccessGranted: Bool) {
+        guard photoAccessGranted else {
+            checkPhotoPermissionsFailed()
+            return
+        }
+        
+        /// location access is optional
+        if !locationAccessGranted {
+            view.showLocationPermissionPopup { [weak self] in
+                self?.checkPermissionsSuccessed()
+            }
+        } else {
+            checkPermissionsSuccessed()
+        }
+    }
+    
+    private func checkPermissionsSuccessed() {
+        completeAsyncOperationEnableScreen()
+        view.checkPermissionsSuccessed()
+    }
 }

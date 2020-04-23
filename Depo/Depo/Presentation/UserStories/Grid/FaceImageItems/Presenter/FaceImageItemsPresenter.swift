@@ -354,17 +354,14 @@ extension FaceImageItemsPresenter: FaceImageItemsInteractorOutput {
     func didObtainFeaturePacks(_ packs: [PackageModelResponse]) {
         featureType = accountType == .all ? .appleFeature : .SLCMFeature
         var premiumFeature: PackageModelResponse? = nil
-        for feature in packs {
-            if feature.featureType == featureType {
+        for feature in packs where feature.type.isSameAs(featureType) {
+            if let authorities = feature.authorities,
+                let interactor = interactor as? FaceImageItemsInteractor,
+                authorities.contains(where: { return $0.authorityType == .faceRecognition }) {
                 
-                if let authorities = feature.authorities,
-                    let interactor = interactor as? FaceImageItemsInteractor,
-                    authorities.contains(where: { return $0.authorityType == .faceRecognition }) {
-                    
-                    premiumFeature = feature
-                    interactor.getPriceInfo(offer: feature, accountType: accountType)
-                    break
-                }
+                premiumFeature = feature
+                interactor.getPriceInfo(offer: feature, accountType: accountType)
+                break
             }
         }
         
@@ -454,14 +451,15 @@ extension FaceImageItemsPresenter: FaceImageItemsModuleOutput {
 extension FaceImageItemsPresenter: FaceImageItemsDataSourceDelegate {
     
     func onBecomePremiumTap() {
-        if let router = router as? FaceImageItemsRouter, let dataSource = dataSource as? FaceImageItemsDataSource {
-            if let price = dataSource.price, !price.isEmpty {
-                router.openPremium(title: TextConstants.lifeboxPremium,
-                                   headerTitle: TextConstants.becomePremiumMember,
-                                   module: self)
-            } else {
-                router.showNoDetailsAlert(with: alertText)
-            }
+        guard let router = router as? FaceImageItemsRouter, let dataSource = dataSource as? FaceImageItemsDataSource else {
+            return
+        }
+
+        if let price = dataSource.price, !price.isEmpty {
+            let source = faceImageType?.premiumType ?? .default
+            router.openPremium(source: source, module: self)
+        } else {
+            router.showNoDetailsAlert(with: alertText)
         }
     }
 }

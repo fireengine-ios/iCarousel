@@ -65,7 +65,7 @@ class RegistrationInteractor: RegistrationInteractorInput {
     }
     
     func checkCaptchaRequerement() {
-        CaptchaSignUpRequrementService().getCaptchaRequrement { [weak self] response in
+        CaptchaSignUpRequrementService().getCaptchaRequrement(isSignUp: true) { [weak self] response in
             switch response {
             case .success(let boolResult):
                 self?.captchaRequired = boolResult

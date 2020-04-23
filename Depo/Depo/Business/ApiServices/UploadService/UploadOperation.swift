@@ -7,7 +7,6 @@
 //
 
 import Foundation
-//FIXME: remove MBProgressHUD
 import MBProgressHUD
 
 
@@ -27,6 +26,10 @@ typealias ResumableUploadHandler = (_ status: ResumableUploadStatus?, _ error: E
 final class UploadOperation: Operation {
     
     typealias UploadParametersResponse = (UploadRequestParametrs) -> Void
+    
+    private let mediaItemsService = MediaItemOperationsService.shared
+    private let mediaAlbumsService = MediaItemsAlbumOperationService.shared
+    private let remoteAlbumsService = PhotosAlbumService()
     
     let inputItem: WrapData
     private(set) var outputItem: WrapData?
@@ -443,22 +446,24 @@ final class UploadOperation: Operation {
                     return
                 }
                 
-                if let response = baseurlResponse as? SearchItemResponse {
-                    self.outputItem = WrapData(remote: response)
-                    self.addPhotoToTheAlbum(with: parameters, response: response)
-                    self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
-                    self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
-                    self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
-                    
-                    //case for upload photo from camera
-                    if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
-                        self.outputItem?.metaData?.mediumUrl = preview
-                    }
-                    
-                    debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
-                    
-                    MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
+                guard let response = baseurlResponse as? SearchItemResponse else {
+                    success()
+                    return
                 }
+                
+                self.outputItem = WrapData(remote: response)
+                self.addPhotoToTheAlbum(with: parameters, response: response)
+                self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
+                self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
+                self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
+                
+                //case for upload photo from camera
+                if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
+                    self.outputItem?.metaData?.mediumUrl = preview
+                }
+                self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
+                
+                debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
                 
                 success()
             }
@@ -476,11 +481,11 @@ final class UploadOperation: Operation {
     }
     
     private func addPhotoToTheAlbum(with parameters: UploadRequestParametrs, response: SearchItemResponse) {
-        if self.isPhotoAlbum {
+        if isPhotoAlbum {
             let item = Item(remote: response)
             let parameter = AddPhotosToAlbum(albumUUID: parameters.rootFolder, photos: [item])
             
-            PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
+            self.remoteAlbumsService.addPhotosToAlbum(parameters: parameter, success: {
                 ItemOperationManager.default.fileAddedToAlbum(item: item)
             }, fail: { error in
                 UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)

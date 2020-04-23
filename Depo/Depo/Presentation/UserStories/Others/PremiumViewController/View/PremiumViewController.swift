@@ -8,17 +8,28 @@
 
 import UIKit
 
-final class PremiumViewController: BaseViewController {
+final class PremiumViewController: BaseViewController, NibInit {
     
     var output: PremiumViewOutput!
     private lazy var activityManager = ActivityIndicatorManager()
 
-    @IBOutlet private weak var premiumView: PremiumView!
+    private lazy var premiumView: BecomePremiumView = {
+        let premiumView = BecomePremiumView.initFromNib()
+        view.addSubview(premiumView)
+        premiumView.translatesAutoresizingMaskIntoConstraints = false
+        premiumView.pinToSuperviewEdges()
+        premiumView.isHidden = true
+        return premiumView
+    }()
+    
+    //MARK: - View lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
 
+        activityManager.delegate = self
+        setTitle(withString: TextConstants.becomePremiumNavBarTitle)
+        
         output.onViewDidLoad(with: premiumView)
     }
     
@@ -27,38 +38,10 @@ final class PremiumViewController: BaseViewController {
         
         navigationBarWithGradientStyle()
     }
-    
-    // MARK: Utility methods
-    private func setup() {
-        activityManager.delegate = self
-        setTitle(withString: output.title)
-        
-        let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
-        //used "" instead of price until retrieving correct price from server
-        let description = String(format: TextConstants.useFollowingPremiumMembership, "")
-        premiumView.configure(with: output.headerTitle,
-                              price: "",
-                              description: description,
-                              types: PremiumListType.allTypes,
-                              titleEdgeInsets: titleEdgeInsets,
-                              isNeedPolicy: false,
-                              isTurkcell: output.accountType == .turkcell)
-    }
 }
 
 // MARK: - PremiumViewInput
 extension PremiumViewController: PremiumViewInput {
-    func displayFeatureInfo(price: String?, description: String, isNeedPolicy: Bool) {
-        let titleEdgeInsets = UIEdgeInsetsMake(13, 18, 13, 18)
-        premiumView.configure(with: output.headerTitle,
-                              price: price,
-                              description: description,
-                              types: PremiumListType.allTypes,
-                              titleEdgeInsets: titleEdgeInsets,
-                              isNeedPolicy: isNeedPolicy,
-                              isTurkcell: output.accountType == .turkcell)
-    }
-    
     func showPaycellProcess(with cpcmOfferId: Int) {
         let controller = PaycellViewController.create(with: cpcmOfferId) { result in
             switch result {
@@ -69,6 +52,11 @@ extension PremiumViewController: PremiumViewInput {
             }
         }
         RouterVC().pushViewController(viewController: controller)
+    }
+    
+    func displayOffers(_ packages: [PackageOffer]) {
+        premiumView.configure(with: packages)
+        premiumView.isHidden = false
     }
 }
 

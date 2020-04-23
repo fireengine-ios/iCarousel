@@ -79,7 +79,7 @@ final class FaceImageViewController: ViewController, NibInit {
     
     private func goToPremium() {
         let router = RouterVC()
-        router.pushViewController(viewController: router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
+        router.pushViewController(viewController: router.premium())
     }
     
     private func sendAnaliticsForFaceImageAllowed(isAllowed: Bool) {

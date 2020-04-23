@@ -429,8 +429,10 @@ class AuthenticationService: BaseRequestService {
     // MARK: - Authentication
 
     func logout(async: Bool = true, success: SuccessLogout?) {
+        debugLog("calling logout \(async ? "async" : "sync")")
+        
         func logout() {
-            debugLog("AuthenticationService logout")
+            debugLog("starting logout")
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
@@ -455,12 +457,15 @@ class AuthenticationService: BaseRequestService {
             
             CardsManager.default.stopAllOperations()
             CardsManager.default.clear()
+            LocalAlbumsCache.shared.clear()
             
             self.player.stop()
             
             self.storageVars.currentUserID = nil
             
             CacheManager.shared.logout {
+                debugLog("logout success")
+                MediaItemsAlbumOperationService.shared.resetLocalAlbums(completion: nil)
                 WormholePoster().didLogout()
                 success?()
             }

@@ -119,7 +119,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         
         localItems.removeAll()
         itemsSortedToUpload { [weak self] items in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             

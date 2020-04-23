@@ -21,7 +21,6 @@ class SingletonStorage {
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
     
     var isTwoFactorAuthEnabled: Bool?
-    var isSpotifyEnabled: Bool?
     
     private let resumableUploadInfoService: ResumableUploadInfoService = factory.resolve()
     

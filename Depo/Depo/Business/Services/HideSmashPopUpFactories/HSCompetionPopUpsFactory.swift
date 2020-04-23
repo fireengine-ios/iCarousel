@@ -11,7 +11,7 @@ import Foundation
 //HS - Hide and Smash
 final class HSCompletionPopUpsFactory {
 
-    enum State {
+    @objc enum State: Int {
         case bottomBarHideCompleted
         case actionSheetHideCompleted
         case hideAlbumsCompleted
@@ -20,11 +20,11 @@ final class HSCompletionPopUpsFactory {
 
     private var storageVars: StorageVars = factory.resolve()
 
-    func getPopUp(for state: State, itemsCount: Int, delegate: HideFuncRoutingProtocol) ->  BasePopUpController {
+    func getPopUp(for state: State, itemsCount: Int, delegate: DivorceActionStateProtocol) ->  BasePopUpController {
         return makePopUp(for: state, itemsCount: itemsCount, delegate: delegate)
     }
 
-    private func makePopUp(for state: State, itemsCount: Int, delegate: HideFuncRoutingProtocol) -> BasePopUpController {
+    private func makePopUp(for state: State, itemsCount: Int, delegate: DivorceActionStateProtocol) -> BasePopUpController {
         switch state {
         case .bottomBarHideCompleted:
             return HSCompletionPopUp(mode: .showBottomCloseButton, photosCount: itemsCount, delegate: delegate)

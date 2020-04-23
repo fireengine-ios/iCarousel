@@ -18,6 +18,8 @@ typealias FileDataSorceData = (_ image: Data?) -> Void
 
 typealias AssetsList = (_ assets: [PHAsset] ) -> Void
 
+typealias LocalAssetsResponse = [(asset: PHAssetCollection, hasItems: Bool)]
+
 struct AssetInfo {
     var asset: PHAsset
     var isValid = true
@@ -106,6 +108,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     private (set) var isWaitingForPhotoPermission = false
     
     var assetsCache = AssetsCache()
+    private(set) var localAlbumsCache = LocalAlbumsCache.shared
     
     private override init() {
         queue.maxConcurrentOperationCount = 1
@@ -177,26 +180,17 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func askPermissionForPhotoFramework(redirectToSettings: Bool, completion: @escaping PhotoLibraryGranted) {
-        isWaitingForPhotoPermission = true
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
         case .authorized:
             photoLibrary.register(self)
-            if (Device.operationSystemVersionLessThen(10)) {
-                PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
-                    let isAuthorized = authStatus == .authorized
-                    self?.isWaitingForPhotoPermission = false
-                    completion(isAuthorized, authStatus)
-                })
-            } else {
-                isWaitingForPhotoPermission = false
-                completion(true, status)
-            }
+            completion(true, status)
             AnalyticsPermissionNetmeraEvent.sendPhotoPermissionNetmeraEvents(true)
         case .notDetermined, .restricted:
+            isWaitingForPhotoPermission = true
             passcodeStorage.systemCallOnScreen = true
             PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
-                guard let `self` = self else {
+                guard let self = self else {
                     return
                 }
                 
@@ -210,7 +204,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 completion(isAuthorized, authStatus)
             })
         case .denied:
-            isWaitingForPhotoPermission = false
             completion(false, status)
             if redirectToSettings {
                 DispatchQueue.main.async {
@@ -222,6 +215,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     var fetchResult: PHFetchResult<PHAsset>!
+    var fetchAlbumResult: PHFetchResult<PHAssetCollection>!
+    var fetchSmartAlbumResult: PHFetchResult<PHAssetCollection>!
+    
     func getAllImagesAndVideoAssets() -> [PHAsset] {
         assetsCache.dropAll()
         debugLog("LocalMediaStorage getAllImagesAndVideoAssets")
@@ -259,7 +255,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 var albums = [AlbumItem]()
                 
                 let dispatchGroup = DispatchGroup()
-                
                 [album, smartAlbum].forEach { album in
                     album.enumerateObjects { object, index, stop in
                         dispatchGroup.enter()
@@ -303,6 +298,39 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     })
                     completion(albums)
                 }
+            }
+        }
+    }
+    
+    func getLocalAlbums(completion: @escaping (_ response: LocalAssetsResponse) -> Void) {
+        askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] accessGranted, _ in
+            guard let self = self, accessGranted else {
+                completion([])
+                return
+            }
+            
+            self.dispatchQueue.async { [weak self] in
+                let albumsResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
+                let smartAlbumsResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .any, options: nil)
+                
+                self?.fetchAlbumResult = albumsResult
+                self?.fetchSmartAlbumResult = smartAlbumsResult
+                
+                var response = LocalAssetsResponse()
+                
+                [albumsResult, smartAlbumsResult].forEach {
+                    $0.enumerateObjects { album, _, _ in
+                        let hasItems = album.photosCount > 0 || album.videosCount > 0
+                        if hasItems {
+                            self?.localAlbumsCache.append(albumId: album.localIdentifier, with: album.allAssets.map { $0.localIdentifier })
+                        }
+                        if hasItems || album.assetCollectionType == .smartAlbum {
+                            response.append((album, hasItems))
+                        }
+                    }
+                }
+                
+                completion(response)
             }
         }
     }

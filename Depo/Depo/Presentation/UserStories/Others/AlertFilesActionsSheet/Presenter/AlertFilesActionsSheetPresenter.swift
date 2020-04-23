@@ -108,7 +108,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             var types: [ElementTypes] = [.info, .share, .move]
             
             types.append(item.favorites ? .removeFromFavorites : .addToFavorites)
-            types.append(.moveToTrash)
+            if !item.isReadOnlyFolder {
+                types.append(.moveToTrash)
+            }
             
             if item.fileType == .image || item.fileType == .video {
                 types.append(.download)
@@ -220,6 +222,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     filteredActionTypes.remove(at: removeFromFavorites)
                 }
                 
+                if remoteItems.first(where: { !$0.isReadOnlyFolder }) == nil {
+                    filteredActionTypes.remove(.moveToTrash)
+                }
+                
                 if let index = filteredActionTypes.index(of: .deleteDeviceOriginal) {
                     MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: remoteItems, duplicatesCallBack: { [weak self] items in
                         let localDuplicates = items
@@ -251,9 +257,9 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         
         var filteredTypes = types
         let langCode = Device.locale
-        if langCode != "tr" {
-            filteredTypes = types.filter({ $0 != .print })
-        }
+//        if langCode != "tr" {
+//            filteredTypes = types.filter({ $0 != .print }) //FE-2439 - Removing Print Option for Turkish (TR) language
+//        }
         basePassingPresenter?.getSelectedItems { [weak self] selectedItems in
             //FIXME: this part can actualy be wraped into background thread
             guard let self = self else {

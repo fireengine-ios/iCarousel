@@ -12,7 +12,7 @@ final class ShareCustomizator: NSObject {
     
     @IBOutlet private weak var mainView: UIView! {
         didSet {
-            mainView.backgroundColor = ColorConstants.searchShadowColor
+            mainView.backgroundColor = ColorConstants.searchShadowColor.withAlphaComponent(0.49)
         }
     }
     

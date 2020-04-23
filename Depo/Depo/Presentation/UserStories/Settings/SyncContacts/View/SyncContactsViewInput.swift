@@ -13,9 +13,10 @@ protocol SyncContactsViewInput: class, ErrorPresenter {
     func setStateWithoutBackUp()
     func setStateWithBackUp()
     func setOperationState(operationType: SyncOperationType)
-    func setButtonsAvailability(contactsPermitted: Bool, contactsCount: Int?, containContactsInCloud: Bool)
     
     func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType)
     func resetProgress()
     func success(response: ContactSync.SyncResponse, forOperation operation: SyncOperationType)
+    
+    func showPremiumPopup()
 }

@@ -1903,7 +1903,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
-    func filesAddedToAlbum() {
+    func filesAddedToAlbum(isAutoSyncOperation: Bool) {
         if let unwrapedFilters = originalFilters,
             isAlbumDetail(filters: unwrapedFilters) {
             delegate?.needReloadData()

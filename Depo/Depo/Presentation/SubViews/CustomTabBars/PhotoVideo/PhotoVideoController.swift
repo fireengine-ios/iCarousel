@@ -62,6 +62,8 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private lazy var filesDataSource = FilesDataSource()
     
+    private lazy var router = RouterVC()
+    
     private var canShowDetail = true
     
     // MARK: - life cycle
@@ -240,25 +242,28 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
 
         dataSource.getWrapedFetchedObjects { [weak self] items in
             self?.dataSource.getObject(at: indexPath) { [weak self] object in
+                guard let self = self else {
+                    return
+                }
+                
                 guard let currentMediaItem = object,
                 let currentObject = items.first(where: {$0.uuid == currentMediaItem.uuid}) else {
-                    self?.canShowDetail = true
-                    self?.hideSpinner()
+                    self.canShowDetail = true
+                    self.hideSpinner()
                     return
                 }
                 
                 DispatchQueue.toMain {
-                    self?.hideSpinner()
-                    let router = RouterVC()
-                    let detailModule = router.filesDetailModule(fileObject: currentObject,
+                    self.hideSpinner()
+                    let detailModule = self.router.filesDetailModule(fileObject: currentObject,
                                                                 items: items,
                                                                 status: .active,
                                                                 canLoadMoreItems: false,
                                                                 moduleOutput: nil)
 
                     let nController = NavigationController(rootViewController: detailModule.controller)
-                    router.presentViewController(controller: nController)
-                    self?.canShowDetail = true
+                    self.router.presentViewController(controller: nController)
+                    self.canShowDetail = true
                 }
             }
         }
@@ -287,7 +292,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     }
     
     private func showSearchScreen() {
-        let router = RouterVC()
         let controller = router.searchView(navigationController: navigationController)
         router.pushViewController(viewController: controller)
     }
@@ -554,12 +558,14 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
     func openInstaPick() {
         showSpinner()
         instaPickRoutingService.getViewController(isCheckAnalyzesCount: true, success: { [weak self] vc in
-            self?.hideSpinner()
+            guard let self = self else {
+                return
+            }
+            
+            self.hideSpinner()
             if vc is InstapickPopUpController || vc is InstaPickSelectionSegmentedController {
-                //FIXME: add router
-                let router = RouterVC()
-                let navController = router.createRootNavigationControllerWithModalStyle(controller: vc)
-                router.presentViewController(controller: navController)
+                let navController = self.router.createRootNavigationControllerWithModalStyle(controller: vc)
+                self.router.presentViewController(controller: navController)
             }
         }) { [weak self] error in
             self?.showAlert(with: error.description)
@@ -594,9 +600,8 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
             let syncPhotos = selectedObjects.filter { !$0.isLocalItem && $0.fileType == .image }
             
             if let itemsToPrint = syncPhotos as? [Item], !itemsToPrint.isEmpty {
-                let router = RouterVC()
                 let vc = PrintInitializer.viewController(data: itemsToPrint)
-                router.pushOnPresentedView(viewController: vc)
+                self.router.pushOnPresentedView(viewController: vc)
             }
             self.stopEditingMode()
         }
@@ -642,6 +647,10 @@ extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
             }
         })
     }
+    
+    func openAutoSyncSettings() {
+        router.pushViewController(viewController: router.autoUpload)
+    }
 }
 
 //extension PhotoVideoController: SegmentedControllerDelegate {
@@ -663,9 +672,9 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         guard file.isLocalItem else {
             return
         }
-        let id = file.getTrimmedLocalID()
-        self.uploadProgress[id] = progress
-        self.getCellInVisibleIndexRange(objectTrimmedLocalID: file.getTrimmedLocalID()) { cell in
+        let localId = file.getTrimmedLocalID()
+        self.uploadProgress[localId] = progress
+        self.getCellInVisibleIndexRange(objectTrimmedLocalID: localId) { cell in
             cell?.setProgressForObject(progress: progress, blurOn: true)
         }
     }
@@ -769,8 +778,10 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         }
     }
     
-    func filesAddedToAlbum() {
-        stopEditingMode()
+    func filesAddedToAlbum(isAutoSyncOperation: Bool) {
+        if !isAutoSyncOperation {
+            stopEditingMode()
+        }
     }
     
     private func getCellForFile(objectUUID: String, completion: @escaping (_ cell: PhotoVideoCell?) -> Void)
@@ -806,7 +817,7 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
     }
 
     private func getCellInVisibleIndexRange(objectTrimmedLocalID: String, completion: @escaping  (_ cell: PhotoVideoCell?)->Void) {
-        dataSource.findLocalFileIdexForObjectInRange(itemTrimmedLocalID: objectTrimmedLocalID, idexes: collectionView.indexPathsForVisibleItems) { [weak self] index in
+        dataSource.findLocalFileIndexForObjectInVisibleRange(itemTrimmedLocalID: objectTrimmedLocalID) { [weak self] index in
             guard
                 let index = index,
                 let cell = self?.collectionView.cellForItem(at: index) as? PhotoVideoCell

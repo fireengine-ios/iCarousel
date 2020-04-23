@@ -45,6 +45,17 @@ enum FaceImageType {
             return .things
         }
     }
+    
+    var premiumType: BecomePremiumViewSourceType {
+        switch self {
+        case .people:
+            return .people
+        case .places:
+            return .places
+        case .things:
+            return .things
+        }
+    }
 }
 
 final class FaceImageService: BaseRequestService {

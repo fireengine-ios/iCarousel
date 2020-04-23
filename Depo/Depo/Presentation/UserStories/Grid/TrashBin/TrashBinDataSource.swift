@@ -165,8 +165,9 @@ extension TrashBinDataSource {
                 return
             }
             
+            var reloadIndexPath: IndexPath? = nil
             if let parentUUID = items.first(where: { $0.parent != nil })?.parent {
-                self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
+                reloadIndexPath = self.updateItems(count: items.count, forFolder: parentUUID, increment: false)
             }
 
             let deleteResult = self.delete(items: items)
@@ -187,7 +188,10 @@ extension TrashBinDataSource {
                         if !deleteResult.sections.isEmpty {
                             self.collectionView.deleteSections(deleteResult.sections)
                         }
-                    }, completion: {_ in
+                    }, completion: { [weak self] _ in
+                        if let reloadIndexPath = reloadIndexPath {
+                            self?.collectionView.reloadItems(at: [reloadIndexPath])
+                        }
                         completion()
                     })
                 }
@@ -429,11 +433,11 @@ extension TrashBinDataSource {
         return (indexPath, section)
     }
     
-    private func updateItems(count: Int, forFolder folderUUID: String, increment: Bool) {
+    private func updateItems(count: Int, forFolder folderUUID: String, increment: Bool) -> IndexPath? {
         guard let indexPath = indexPath(for: folderUUID),
             let item = item(for: indexPath),
             let childCount = item.childCount else {
-            return
+            return nil
         }
     
         if increment {
@@ -442,11 +446,7 @@ extension TrashBinDataSource {
             item.childCount = childCount - Int64(count)
         }
         
-        DispatchQueue.main.async {
-            self.collectionView.performBatchUpdates({
-                self.collectionView.reloadItems(at: [indexPath])
-            }, completion: nil)
-        }
+        return indexPath
     }
 }
 

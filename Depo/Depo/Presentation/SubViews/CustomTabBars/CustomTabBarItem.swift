@@ -21,11 +21,13 @@ class CustomTabBarItem: UITabBarItem {
     }
 
     func setupTitle() {
-        var font = UIFont.TurkcellSaturaMedFont(size: 11)
+        let font: UIFont
         let langCode = Device.locale
         ///change of font for tabbar localisation issue
         if langCode == "uk" || langCode == "ru" {
             font = UIFont.TurkcellSaturaMedFont(size: 10)
+        } else {
+            font = UIFont.TurkcellSaturaDemFont(size: 12)
         }
         
         setTitleTextAttributes([.font: font], for: .normal)

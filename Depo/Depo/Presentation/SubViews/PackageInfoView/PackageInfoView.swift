@@ -10,9 +10,8 @@ import UIKit
 
 enum ControlPackageType {
     case myProfile
-    case myStorage
-    case premiumBanner
-    
+    case usage(percentage: CGFloat)
+    case myStorage(ControlPackageType.AccountType?)
     case accountType(ControlPackageType.AccountType)
     
     enum AccountType {
@@ -77,38 +76,31 @@ final class PackageInfoView: UIView, NibInit {
     }
 
     //MARK: Utility methods(public)
-    func configure(with type: ControlPackageType, percentage: CGFloat? = nil) {
+    func configure(with type: ControlPackageType) {
         viewType = type
 
         switch type {
         case .myProfile:
             titleLabel.text = TextConstants.myProfile
             detailLabel.isHidden = true
-        case .myStorage:
-            titleLabel.text = TextConstants.myStorage
-            if let percentage = percentage, percentage != 0 {
+            
+        case .usage(percentage: let percentage):
+            titleLabel.text = TextConstants.usage
+            if percentage != 0 {
                 detailLabel.isHidden = false
-                detailLabel.text = String(format: TextConstants.usagePercentage, percentage.rounded(.toNearestOrAwayFromZero))
+                detailLabel.text = String(format: TextConstants.usagePercentage,
+                                          percentage.rounded(.toNearestOrAwayFromZero))
             } else {
                 detailLabel.isHidden = true
             }
-        case .premiumBanner:
-            let packagePremiumView = PackagePremiumView.initFromNib()
-            addSubview(packagePremiumView)
-            
-            packagePremiumView.translatesAutoresizingMaskIntoConstraints = false
 
-            packagePremiumView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            packagePremiumView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-            packagePremiumView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            packagePremiumView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-            
-            self.packagePremiumView = packagePremiumView
-            seeDetailsLabel.isHidden = true
-        case .accountType(let accountType):
-            titleLabel.text = TextConstants.accountType
-            
-            detailLabel.text = accountType.text
+        case .myStorage(let accountType):
+            titleLabel.text = TextConstants.myPackages
+            detailLabel.text = accountType?.text
+
+        case .accountType(let type):
+            titleLabel.text = type.text
+            detailLabel.isHidden = true
         }
     }
 

@@ -11,14 +11,13 @@ import Foundation
 final class PremiumModuleConfigurator {
     
     func configure(viewController: PremiumViewController,
-                   title: String,
-                   headerTitle: String,
                    authority: AuthorityType? = nil,
+                   source: BecomePremiumViewSourceType,
                    module: FaceImageItemsModuleOutput?,
                    viewControllerForPresentOn: UIViewController? = nil) {
         let router = PremiumRouter(viewControllerForPresentOn: viewControllerForPresentOn)
         
-        let presenter = PremiumPresenter(title: title, headerTitle: headerTitle, authority: authority, module: module)
+        let presenter = PremiumPresenter(authority: authority, source: source, module: module)
         presenter.view = viewController
         presenter.router = router
         

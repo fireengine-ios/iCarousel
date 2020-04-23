@@ -11,5 +11,7 @@ protocol MyStorageRouterInput {
     func showCancelOfferApple()
     func showSubTurkcellOpenAlert(with text: String)
     
+    func openLeavePremium(type: LeavePremiumType)
+    
     func display(error: String)
 }

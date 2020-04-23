@@ -49,7 +49,6 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
     var output: SyncContactsViewOutput!
     
     var tabBarSetup = false
-    private var isFirstLaunch = true
     
     var isFullCircle: Bool {
         return gradientLoaderIndicator.circlePathLayer.strokeEnd >= 1
@@ -216,20 +215,6 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         }
     }
     
-    func setButtonsAvailability(contactsPermitted: Bool, contactsCount: Int?, containContactsInCloud: Bool) {
-        
-        if isFirstLaunch {
-            backUpButton.isEnabled = true
-            isFirstLaunch = false
-        } else if let contactsCount = contactsCount, contactsCount == 0 {
-            backUpButton.isEnabled = false
-        } else {
-            backUpButton.isEnabled = true
-        }
-        
-        restoreButton.isEnabled = containContactsInCloud
-    }
-    
     func showProggress(progress: Int, count: Int, forOperation operation: SyncOperationType) {
         gradientLoaderIndicator.progress = CGFloat(progress) / 100
         
@@ -301,5 +286,20 @@ class SyncContactsViewController: BaseViewController, SyncContactsViewInput, Err
         }
     }
     
+    func showPremiumPopup() {
+        let popup = PopUpController.with(title: TextConstants.contactSyncConfirmPremiumPopupTitle,
+                                         message: TextConstants.contactSyncConfirmPremiumPopupText,
+                                         image: .none,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstAction: { vc in
+                                            vc.close()
+                                         }, secondAction: { vc in
+                                            vc.close(isFinalStep: false) { [weak self] in
+                                                self?.output.openPremium()
+                                            }
+                                         })
+        present(popup, animated: true)
+    }
     
 }

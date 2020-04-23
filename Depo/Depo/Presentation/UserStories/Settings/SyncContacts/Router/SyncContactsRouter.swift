@@ -23,8 +23,7 @@ class SyncContactsRouter: SyncContactsRouterInput {
     }
     
     func goToPremium() {
-        router.pushViewController(viewController: router.premium(title: TextConstants.duplicatedContacts, headerTitle: TextConstants.deleteDuplicatedContactsForPremiumTitle))
-        
+        router.pushViewController(viewController: router.premium(source: .contactSync))
     }
     
     func showError(errorMessage: String) {

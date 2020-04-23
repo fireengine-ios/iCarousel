@@ -309,7 +309,6 @@ extension TermsAndServicesViewController: UITextViewDelegate {
         return tappedOnURL(url: URL)
     }
     
-    @available(iOS 10.0, *)
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
 
         return tappedOnURL(url: URL)

@@ -320,6 +320,11 @@ class RouterVC: NSObject {
         if let presentedController = navigationController?.viewControllers.last?.presentedViewController as? TBMatikPhotosViewController {
             return presentedController
         }
+        
+        if let navBarController = navigationController?.viewControllers.last?.presentedViewController as? UINavigationController {
+            return navBarController.visibleViewController
+        }
+        
         return navigationController?.viewControllers.last
     }
         
@@ -478,12 +483,7 @@ class RouterVC: NSObject {
     // MARK: SynchronyseSettings
     
     var synchronyseScreen: UIViewController {
-        
-        let inicializer = AutoSyncModuleInitializer()
-        let controller = AutoSyncViewController(nibName: "AutoSyncViewController", bundle: nil)
-        inicializer.autosyncViewController = controller
-        inicializer.setupVC()
-        return controller
+        return AutoSyncModuleInitializer.initializeViewController()
     }
     
     
@@ -763,37 +763,31 @@ class RouterVC: NSObject {
     }
     
     func filesDetailModule(fileObject: WrapData, items: [WrapData], status: ItemStatus, canLoadMoreItems: Bool, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
-        let module = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
-                                                                                moduleOutput: moduleOutput,
-                                                                                selectedItem: fileObject,
-                                                                                allItems: items,
-                                                                                status: status,
-                                                                                canLoadMoreItems: canLoadMoreItems)
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return module
+        return PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
+                                                                          moduleOutput: moduleOutput,
+                                                                          selectedItem: fileObject,
+                                                                          allItems: items,
+                                                                          status: status,
+                                                                          canLoadMoreItems: canLoadMoreItems)
     }
     
     func filesDetailAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
-        let module = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
-                                                                                     moduleOutput: moduleOutput,
-                                                                                     selectedItem: fileObject,
-                                                                                     allItems: items,
-                                                                                     albumUUID: albumUUID,
-                                                                                     status: status)
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return module
+        return PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                               moduleOutput: moduleOutput,
+                                                                               selectedItem: fileObject,
+                                                                               allItems: items,
+                                                                               albumUUID: albumUUID,
+                                                                               status: status)
     }
     
     func filesDetailFaceImageAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
-        let module = PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
-                                                                                              moduleOutput: moduleOutput,
-                                                                                              selectedItem: fileObject,
-                                                                                              allItems: items,
-                                                                                              albumUUID: albumUUID,
-                                                                                              albumItem: albumItem,
-                                                                                              status: status)
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return module
+        return PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                                        moduleOutput: moduleOutput,
+                                                                                        selectedItem: fileObject,
+                                                                                        allItems: items,
+                                                                                        albumUUID: albumUUID,
+                                                                                        albumItem: albumItem,
+                                                                                        status: status)
     }
 
     // MARK: Albums list
@@ -919,8 +913,7 @@ class RouterVC: NSObject {
     // MARK: Auto Upload
     
     var autoUpload: UIViewController {
-        let controller = AutoSyncModuleInitializer.initializeViewController(with: "AutoSyncViewController", fromSettings: true)
-        return controller
+        return AutoSyncModuleInitializer.initializeViewController(fromSettings: true)
     }
     
     // MARK: Change Password
@@ -1033,8 +1026,8 @@ class RouterVC: NSObject {
     
     // MARK: - Premium
     
-    func premium(title: String, headerTitle: String, module: FaceImageItemsModuleOutput? = nil, viewControllerForPresentOn: UIViewController? = nil) -> UIViewController{
-        let controller = PremiumModuleInitializer.initializePremiumController(with: "PremiumViewController", title: title, headerTitle: headerTitle, module: module, viewControllerForPresentOn: viewControllerForPresentOn)
+    func premium(source: BecomePremiumViewSourceType = .default, module: FaceImageItemsModuleOutput? = nil, viewControllerForPresentOn: UIViewController? = nil) -> UIViewController{
+        let controller = PremiumModuleInitializer.initializePremiumController(source: source, module: module, viewControllerForPresentOn: viewControllerForPresentOn)
         return controller
     }
     

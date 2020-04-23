@@ -21,6 +21,7 @@ enum ErrorResponseText {
     static let resendCodeExceeded  = "EXCEEDED_RATE_LIMIT_FOR_SEND_CHALLENGE"
     static let accountDeleted = "DELETION_REQUESTED"
     static let accountReadOnly = "READ_ONLY"
+    static let captchaIsEmpty = "CAPTCHA_FIELD_IS_EMPTY"
 }
 
 extension ErrorResponse {

@@ -790,6 +790,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         backHandler?()
     }
     
+    func successPopupWillAppear() {
+        backHandler?()
+    }
+    
     func selectModeSelected() {
         debugLog("BaseFilesGreedPresenter selectModeSelected")
 

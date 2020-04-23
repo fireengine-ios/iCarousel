@@ -8,7 +8,7 @@
 
 protocol AutoSyncViewOutput {
     func viewIsReady()
-    func change(settings: AutoSyncSettings)
-    func save(settings: AutoSyncSettings)
+    func change(settings: AutoSyncSettings, albums: [AutoSyncAlbum])
+    func save(settings: AutoSyncSettings, albums: [AutoSyncAlbum])
     func checkPermissions()
 }

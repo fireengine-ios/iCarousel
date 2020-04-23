@@ -272,7 +272,12 @@ extension ImportFromInstagramInteractor: ImportFromInstagramInteractorInput {
         })
     }
     
-    func trackImportActivationInstagram() {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .importFrom, eventLabel: .importInstagram)
+    func trackImportStatusInstagram(isOn: Bool) {
+        analyticsService.trackConnectedAccountsGAEvent(action: .importFrom, label: .instagram, dimension: .statusType, status: isOn)
     }
+    
+    func trackConnectionStatusInstagram(isConnected: Bool) {
+        analyticsService.trackConnectedAccountsGAEvent(action: .connectedAccounts, label: .instagram, dimension: .connectionStatus, status: isConnected)
+    }
+    
 }

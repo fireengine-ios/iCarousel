@@ -48,12 +48,8 @@ class SettingsRouter: SettingsRouterInput {
         router.pushViewController(viewController: router.termsAndPolicy!)
     }
     
-    func goToUsageInfo() {
-        router.pushViewController(viewController: router.usageInfo!)
-    }
-    
-    func goToUserInfo(userInfo: AccountInfoResponse, isTurkcellUser: Bool) {
-        router.pushViewController(viewController: router.userProfile(userInfo: userInfo, isTurkcellUser: isTurkcellUser))
+    func goToUserInfo(userInfo: AccountInfoResponse) {
+        router.pushViewController(viewController: router.userProfile(userInfo: userInfo))
     }
     
     func goToActivityTimeline() {
@@ -70,7 +66,7 @@ class SettingsRouter: SettingsRouterInput {
     }
     
     func goToPremium() {
-        router.pushViewController(viewController: router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
+        router.pushViewController(viewController: router.premium())
     }
     
     func goToPasscodeSettings(isTurkcell: Bool, inNeedOfMail: Bool, needReplaceOfCurrentController: Bool) {
@@ -115,4 +111,9 @@ class SettingsRouter: SettingsRouterInput {
     func showError(errorMessage: String) {
         UIApplication.showErrorAlert(message: errorMessage)
     }
+    
+    func presentAlertSheet(alertController: UIAlertController) {
+        router.presentViewController(controller: alertController)
+    }
+    
 }

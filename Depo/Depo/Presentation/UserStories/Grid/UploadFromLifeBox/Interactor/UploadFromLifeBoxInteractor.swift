@@ -8,6 +8,7 @@
 
 class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxInteractorInput {
     
+    private let albumService = PhotosAlbumService()
     private var getNextPageRetryCounter = 0
     private var numberOfRetries = 3
     var rootFolderUUID: String = ""
@@ -16,7 +17,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
         let router = RouterVC()
         if router.isRootViewControllerAlbumDetail() {
             let parameter = AddPhotosToAlbum(albumUUID: rootFolderUUID, photos: items)
-            PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: { [weak self] in
+            albumService.addPhotosToAlbum(parameters: parameter, success: { [weak self] in
                 DispatchQueue.main.async {
                     if let `self` = self {
                         self.output.asyncOperationSuccess()
@@ -25,7 +26,7 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
                         }
                         out.uploadOperationSuccess()
                     }
-                    ItemOperationManager.default.filesAddedToAlbum()
+                    ItemOperationManager.default.filesAddedToAlbum(isAutoSyncOperation: false)
                 }
             }, fail: { [weak self] error in
                 DispatchQueue.main.async {
