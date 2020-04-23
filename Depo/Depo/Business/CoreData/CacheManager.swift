@@ -39,6 +39,8 @@ final class CacheManager {
     
     private var internetConnectionIsBackCallback: VoidHandler?
     
+    private let concurrentQueue = DispatchQueue(label: DispatchQueueLabels.cacheManagerQueue, attributes: .concurrent)
+    
     //MARK: -
     
     deinit {
@@ -77,6 +79,10 @@ final class CacheManager {
                     
                     if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
                         self.showPreparationCardAfterDelay()
+                        
+                        let dispatchGroup = DispatchGroup()
+                        
+                        dispatchGroup.enter()
                         self.startAppendingAllRemotes(completion: { [weak self] in
                             debugLog("CacheManager no remotes, appended all remotes")
                             guard let self = self, !self.processingRemoteItems else {
@@ -84,23 +90,31 @@ final class CacheManager {
                             }
                             
                             self.userDefaultsVars.currentRemotesPage = 0
-                            self.startProcessingAllLocals(completion: { [weak self] in
-                                self?.actualizeUnsavedFileSyncStatus() { [weak self] in
-                                    guard let self = self, !self.processingLocalItems else {
-                                        return
-                                    }
-                                    debugLog("CacheManager no remotes, all locals processed")
-                                    //FIXME: need handling if we logouted and locals still in progress
-                                    
-                                    
-                                    self.isProcessing = false
-                                    self.isCacheActualized = true
-                                    debugLog("cache is actualized")
-                                    self.updatePreparation(isBegun: false)
-                                    self.delegates.invoke { $0.didCompleteCacheActualization() }
-                                }
-                            })
+                            dispatchGroup.leave()
                         })
+                        
+                        dispatchGroup.enter()
+                        self.startProcessingAllLocals(completion: {
+                            debugLog("CacheManager no remotes, appended all locals")
+                            dispatchGroup.leave()
+                        })
+                        
+                        dispatchGroup.notify(queue: self.concurrentQueue) { [weak self] in
+                            self?.actualizeUnsavedFileSyncStatus() { [weak self] in
+                                guard let self = self, !self.processingLocalItems else {
+                                    return
+                                }
+                                debugLog("CacheManager no remotes, all locals processed")
+                                //FIXME: need handling if we logouted and locals still in progress
+                                
+                                
+                                self.isProcessing = false
+                                self.isCacheActualized = true
+                                debugLog("cache is actualized")
+                                self.updatePreparation(isBegun: false)
+                                self.delegates.invoke { $0.didCompleteCacheActualization() }
+                            }
+                        }
                     } else {
                         guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessLocalFiles flag in MediaItemsOperationService processLocalGallery method
                             debugLog("CacheManager there are remotes, but locals already being processed")
