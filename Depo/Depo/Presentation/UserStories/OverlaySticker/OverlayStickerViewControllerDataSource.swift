@@ -39,6 +39,11 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     
     weak var delegate: OverlayStickerViewControllerDataSourceDelegate?
     
+    private let operationQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+        return operationQueue
+    }()
+    
     private var selectedAttachmentType: AttachedEntityType = .gif {
         didSet {
             switch selectedAttachmentType {
@@ -46,11 +51,9 @@ final class OverlayStickerViewControllerDataSource: NSObject {
 
                 imageState.collectionViewOffset = stickersCollectionView.contentOffset
                 stickersCollectionView.reloadData()
-
+                stickersCollectionView?.contentOffset = gifState.collectionViewOffset
                 stickersCollectionView.layoutIfNeeded()
-                DispatchQueue.main.async {
-                    self.stickersCollectionView?.contentOffset = self.gifState.collectionViewOffset
-                }
+                
             case .image:
 
                 gifState.collectionViewOffset = stickersCollectionView.contentOffset
@@ -60,10 +63,8 @@ final class OverlayStickerViewControllerDataSource: NSObject {
                     
                 } else {
                     stickersCollectionView.reloadData()
+                    stickersCollectionView.contentOffset = imageState.collectionViewOffset
                     stickersCollectionView.layoutIfNeeded()
-                    DispatchQueue.main.async {
-                        self.stickersCollectionView.contentOffset = self.imageState.collectionViewOffset
-                    }
                 }
             }
         }
@@ -71,43 +72,50 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     
     func loadNext() {
         
-        let selectedType: StickerType = selectedAttachmentType == .gif ? .gif : .image
-        let selectedPage = currentState.page
-        
-        stickerService.getStickers(type: selectedType, page: selectedPage, size: paginationPageSize){ [weak self] result in
+        operationQueue.addOperation {  [weak self] in
             
             guard let self = self else {
                 return
             }
             
-            switch result {
-                
-            case .success(let successResult):
-                let stickers = successResult.stickers
-                let type = successResult.type
-                
-                let isPaginatingFinished = (stickers.count < self.paginationPageSize)
-                
-                switch type {
-                case .gif:
-                    self.gifState.page += 1
-                    self.gifState.isPaginatingFinished = isPaginatingFinished
-                    self.gifState.source.append(contentsOf: stickers)
-                case .image:
-                    self.imageState.page += 1
-                    self.imageState.isPaginatingFinished = isPaginatingFinished
-                    self.imageState.source.append(contentsOf: stickers)
-                }
-                
-                DispatchQueue.toMain {
-                    self.stickersCollectionView.reloadData()
-                }
-                
-            case .failed(_):
-                break
-            }
+            let selectedType: StickerType = self.selectedAttachmentType == .gif ? .gif : .image
+            let selectedPage = self.currentState.page
             
-            self.isPaginating = false
+            self.stickerService.getStickers(type: selectedType, page: selectedPage, size: self.paginationPageSize){ [weak self] result in
+                
+                guard let self = self else {
+                    return
+                }
+                
+                switch result {
+                    
+                case .success(let successResult):
+                    let stickers = successResult.stickers
+                    let type = successResult.type
+                    
+                    let isPaginatingFinished = (stickers.count < self.paginationPageSize)
+                    
+                    switch type {
+                    case .gif:
+                        self.gifState.page += 1
+                        self.gifState.isPaginatingFinished = isPaginatingFinished
+                        self.gifState.source.append(contentsOf: stickers)
+                    case .image:
+                        self.imageState.page += 1
+                        self.imageState.isPaginatingFinished = isPaginatingFinished
+                        self.imageState.source.append(contentsOf: stickers)
+                    }
+                    
+                    DispatchQueue.toMain {
+                        self.stickersCollectionView.reloadData()
+                    }
+                    
+                case .failed(_):
+                    break
+                }
+                
+                self.isPaginating = false
+            }
         }
     }
         
