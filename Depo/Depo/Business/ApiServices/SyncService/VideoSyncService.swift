@@ -10,9 +10,6 @@ import Foundation
 
 
 final class VideoSyncService: ItemSyncServiceImpl {
-    private let backgroundTaskService = BackgroundTaskService.shared
-    private let mediaItemOperationsService =  MediaItemOperationsService.shared
-    
     
     override init() {
         super.init()

@@ -29,6 +29,13 @@ final class BackgroundSynkService {
     private static let schedulerQueue = DispatchQueue(label: DispatchQueueLabels.backgroundTaskSyncQueue)
     private let syncServiceManager = SyncServiceManager.shared
     
+    private let operationQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
+    
+    
     func registerLaunchHandlers() {
         registerTask(identifier: TaskIdentifiers.backgroundProcessing, queue: BackgroundSynkService.schedulerQueue)
         registerTask(identifier: TaskIdentifiers.backgroundRefresh, queue: BackgroundSynkService.schedulerQueue)
@@ -57,30 +64,29 @@ final class BackgroundSynkService {
             return
         }
         
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 1
-        
-        task.expirationHandler = {
-            debugLog("BG! task expired \(task.identifier)")
-            queue.cancelAllOperations()
-        }
+        let backgroundOperation: BackgroundSyncOperation
         
         if task.identifier == TaskIdentifiers.backgroundProcessing {
             ///Currently they both use same task
-            let appRefreshOperation = BackgroundRefreshOperation()
-            queue.addOperation(appRefreshOperation)
+            backgroundOperation = BackgroundSyncOperation()
+            operationQueue.cancelAllOperations()
         } else if task.identifier == TaskIdentifiers.backgroundRefresh {
-            let appRefreshOperation = BackgroundRefreshOperation()
-            queue.addOperation(appRefreshOperation)
+            backgroundOperation = BackgroundSyncOperation()
         } else {
             debugLog("BG! ERROR: task not recognised")
             return
         }
         
-        let lastOperation = queue.operations.last
-        lastOperation?.completionBlock = {
-            debugLog("BG! task complited \(task.identifier) was cannceled ? \(lastOperation?.isCancelled ?? false)")
-            task.setTaskCompleted(success: !(lastOperation?.isCancelled ?? false))
+        operationQueue.addOperation(backgroundOperation)
+        
+        task.expirationHandler = {
+            debugLog("BG! task expired \(task.identifier)")
+            backgroundOperation.cancel()
+        }
+        
+        backgroundOperation.completionBlock = {
+            debugLog("BG! task complited \(task.identifier) was cannceled ? \(backgroundOperation.isCancelled)")
+            task.setTaskCompleted(success: !backgroundOperation.isCancelled)
         }
         
         scheduleTask(taskIdentifier: task.identifier)

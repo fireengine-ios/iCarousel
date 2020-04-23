@@ -11,9 +11,6 @@ import Foundation
 
 final class PhotoSyncService: ItemSyncServiceImpl {
     
-   private let mediaItemOperationsService = MediaItemOperationsService.shared
-    
-    
     override init() {
         super.init()
         

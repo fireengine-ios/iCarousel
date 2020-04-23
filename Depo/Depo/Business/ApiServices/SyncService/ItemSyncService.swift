@@ -28,6 +28,8 @@ protocol ItemSyncServiceDelegate: class {
 
 class ItemSyncServiceImpl: ItemSyncService {
     
+    let mediaItemOperationsService = MediaItemOperationsService.shared
+    
     var fileType: FileType = .unknown
     var status: AutoSyncStatus = .undetermined {
         didSet {
@@ -123,7 +125,6 @@ class ItemSyncServiceImpl: ItemSyncService {
         itemsSortedToUpload { [weak self] items in
 
             guard let self = self else {
-                debugLog("ItemSyncServiceImpl self")
                 return
             }
             
@@ -133,7 +134,6 @@ class ItemSyncServiceImpl: ItemSyncService {
                 
                 guard !self.localItems.isEmpty else {
                     self.status = .synced
-                    debugLog("ItemSyncServiceImpl self.status = .synced")
                     return
                 }
                 

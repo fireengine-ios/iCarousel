@@ -133,22 +133,9 @@ class SyncServiceManager {
     // MARK: - Private
     
     func backgroundTaskSync(handler: @escaping BoolHandler) {
-//        stop(photo: true, video: true)
         self.backgroundSyncHandler = handler
-        debugLog("BG! backgroundTaskSync handlesr setuped")
+        debugLog("AUTOSYNC: backgroundTaskSync handlesr setuped")
         checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
-        
-        
-//        dispatchQueue.async { [weak self] in
-//
-//            guard let self = self else {
-//                debugLog("backgroundTaskSync_ dispatchQueue.async")
-//                handler(false)
-//                return
-//            }
-//            self.backgroundSyncHandler = handler
-//
-//        }
     }
     
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
@@ -158,17 +145,15 @@ class SyncServiceManager {
             return
         }
         
-        printLog("AUTOSYNC: checkReachabilityAndSettings")
-        
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 return
             }
-            debugLog("BG! reachability start")
+            debugLog("AUTOSYNC: reachability start")
             self.timeIntervalBetweenSyncsInBackground = NumericConstants.timeIntervalBetweenAutoSyncInBackground
             
             guard self.settings.isAutoSyncEnabled else {
-                debugLog("BG! autosync disabled")
+                debugLog("AUTOSYNC: autosync disabled")
                 self.backgroundSyncHandler?(false)
                 self.stopSync()
                 CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
@@ -196,12 +181,12 @@ class SyncServiceManager {
                 
                 self.stop(photo: shoudStopPhotoSync, video: shouldStopVideoSync)
                 self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
-                debugLog("BG! is reachable and AS going to start")
+                debugLog("AUTOSYNC: is reachable and AS going to start")
                 self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
             } else {
                 let photoServiceWaitingForWiFi = photoOption != .never
                 let videoServiceWaitingForWiFi = videoOption != .never
-                debugLog("BG! waiting for wifi")
+                debugLog("AUTOSYNC: waiting for wifi")
                 self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
             }
         }

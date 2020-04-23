@@ -49,7 +49,7 @@ final class CacheManager {
         debugLog("calling actualizeCache")
         
         guard coreDataStack.isReady else {
-            debugLog("CacheManager coreData nor ready")
+            debugLog("CacheManager coreData not ready")
             scheduleActualization()
             return
         }
@@ -283,6 +283,7 @@ extension CacheManager {
     ///Since we backgeound tasks can expire before we save latest changes to DB
     ///In order to prevent duplication of unsaved file, we call it on each actualization
     private func actualizeUnsavedFileSyncStatus(completion: @escaping VoidHandler) {
+        //TODO: during actualisation task, think about the best way to call it for regular launch
         debugLog("CacheManager checkLatestUnsavedFile")
         guard let latestUnsavedUUID = userDefaultsVars.lastUnsavedFileUUID else {
             debugLog("CacheManager no unsaved items found")
@@ -338,7 +339,7 @@ extension CacheManager: ReachabilityServiceDelegate {
 
 extension CacheManager: CoreDataStackDelegate {
     func onCoreDataStackSetupCompleted() {
-        debugLog("CacheManager scheduled actulasation start")
+        debugLog("CacheManager scheduled actualization start")
         coreDataStack.delegates.remove(self)
         actualizeCache()
     }

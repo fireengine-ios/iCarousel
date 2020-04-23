@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class BackgroundRefreshOperation: Operation {
+final class BackgroundSyncOperation: Operation {
     
     private let semaphore = DispatchSemaphore(value: 0)
 
@@ -24,16 +24,22 @@ final class BackgroundRefreshOperation: Operation {
         actualizeCache()
         debugLog("BG! finished actualizing cache")
         
+        guard !isCancelled else {
+            debugLog("BG! task cancelled after actualizeCache")
+            completionBlock?() //force call, since we didnt recieve callback
+            return
+        }
+        
         debugLog("BG! about to backgroundTaskSync")
         SyncServiceManager.shared.backgroundTaskSync { [weak self] successful in
             debugLog("BG! backgroundTaskSync callback \(successful)")
-            if !successful {
-                debugLog("BG! self cancellation")
-                self?.cancel()
-            }
             guard let self = self else {
                 debugLog("BG! task cancelled")
                 return
+            }
+            if !successful {
+                debugLog("BG! self cancellation")
+                self.cancel()
             }
             guard !self.isCancelled else {
                 debugLog("BG! task cancelled also completion")
@@ -58,7 +64,7 @@ final class BackgroundRefreshOperation: Operation {
     }
 }
 
-extension BackgroundRefreshOperation: CacheManagerDelegate {
+extension BackgroundSyncOperation: CacheManagerDelegate {
     func didCompleteCacheActualization() {
         CacheManager.shared.delegates.remove(self)
         debugLog("BG! finished actualziing delegate cache")

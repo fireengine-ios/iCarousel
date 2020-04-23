@@ -464,7 +464,6 @@ final class UploadOperation: Operation {
                     self.outputItem?.metaData?.mediumUrl = preview
                 }
                 self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
-                    debugLog("BG! TEST: last unsaved uuid \(self?.storageVars.lastUnsavedFileUUID ?? "self is no longer allocated")")
                     self?.storageVars.lastUnsavedFileUUID = nil
                 }
                 
