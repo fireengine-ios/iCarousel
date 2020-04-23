@@ -115,6 +115,7 @@ PODS:
     - Alamofire (~> 4.8.2)
   - SwiftyGif (4.1.0)
   - SwiftyJSON (3.1.4)
+  - TTGSnackbar (1.10.2)
   - Typist (1.1.0)
   - UIImage-Categories (1.0.0)
   - XCGLogger (6.1.0):
@@ -150,6 +151,7 @@ DEPENDENCIES:
   - SwiftyDropbox
   - SwiftyGif (= 4.1.0)
   - SwiftyJSON (~> 3)
+  - TTGSnackbar
   - Typist (~> 1.1.0)
   - UIImage-Categories
   - XCGLogger (~> 6.0)
@@ -194,6 +196,7 @@ SPEC REPOS:
     - SwiftyDropbox
     - SwiftyGif
     - SwiftyJSON
+    - TTGSnackbar
     - Typist
     - UIImage-Categories
     - XCGLogger
@@ -247,12 +250,13 @@ SPEC CHECKSUMS:
   SwiftyDropbox: 7ca4961e0340c62c8d6d1ece91d67badfe4c0380
   SwiftyGif: d36c6dfb52e2ca1e48fe349d225f50ec4123ec85
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  TTGSnackbar: fc26ad27ae180f4045b03ba19defdc57238e9215
   Typist: 31a3eb9d6b97ea28e0e247bb8b14ed23fe624170
   UIImage-Categories: a0593f6a7991c99016b9ecadfbd38b3717ff1a73
   XCGLogger: 7f7f43f15dfe3a305fa1342b7dc29af656289abd
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 553e6af2d3d1299e75b55a2b1bba11b1a51a3bea
+PODFILE CHECKSUM: 411e78eb2ceb4e1907eb2daecf5778c209d22263
 
 COCOAPODS: 1.9.1
