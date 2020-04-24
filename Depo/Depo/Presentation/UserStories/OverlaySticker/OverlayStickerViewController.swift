@@ -61,12 +61,12 @@ final class OverlayStickerViewController: ViewController {
         view.backgroundColor = .black
         statusBarColor = .black
 
-        addTapGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
+        addTapGesture()
     }
     
     @IBAction private func gifButtonTapped(_ sender: Any) {
