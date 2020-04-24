@@ -66,7 +66,6 @@ final class OverlayStickerViewController: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
-        addTapGesture()
     }
     
     @IBAction private func gifButtonTapped(_ sender: Any) {
@@ -269,6 +268,7 @@ final class OverlayStickerViewController: ViewController {
         overlayStickerViewControllerDataSource.delegate = self
         overlayStickerViewControllerDataSource.loadNext()
         overlayingStickerImageView.image = selectedImage
+        addTapGesture()
     }
     
     private func setupNavigationBar() {
