@@ -271,13 +271,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                     item.imageCount = itemsCount
                                 }
                                 
-                                let fetchOptions = PHFetchOptions()
-                                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-                                fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
-                                
-                                if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject,
-                                    let info = self?.compactInfoAboutAsset(asset: asset), info.isValid {
-                                    
+                                if let asset = self?.firstValidAsset(for: object) {
                                     item.preview = WrapData(asset: asset)
                                     albums.append(item)
                                 }
@@ -300,6 +294,25 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }
             }
         }
+    }
+    
+    private func firstValidAsset(for collection: PHAssetCollection) -> PHAsset? {
+        var result: PHAsset? = nil
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        fetchOptions.predicate = NSPredicate(format: "mediaType IN %@", [PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue])
+        
+        let assets = PHAsset.fetchAssets(in: collection, options: fetchOptions)
+        assets.enumerateObjects { asset, _, stop in
+            let info = self.compactInfoAboutAsset(asset: asset)
+            if info.isValid {
+                result = asset
+                stop.pointee = true
+            }
+        }
+        
+        return result
     }
     
     func getLocalAlbums(completion: @escaping (_ response: LocalAssetsResponse) -> Void) {
