@@ -333,6 +333,7 @@ extension SettingsViewController: SettingsViewInput {
     
     func updatePhoto(image: UIImage) {
         userInfoSubView.updatePhoto(image: image)
+        userInfoSubView.dismissLoadingSpinner()
     }
     
     func profileInfoChanged() {

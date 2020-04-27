@@ -49,7 +49,7 @@ final class UploadOperation: Operation {
     private let resumableInfoService: ResumableUploadInfoService = factory.resolve()
     private let interruptedId: String?
     private let isResumable: Bool
-    
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     //MARK: - Init
     
@@ -440,6 +440,8 @@ final class UploadOperation: Operation {
         inputItem.syncStatus = .synced
         inputItem.setSyncStatusesAsSyncedForCurrentUser()
         
+        storageVars.lastUnsavedFileUUID = parameters.tmpUUID
+        
         uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
             self?.dispatchQueue.async { [weak self] in
                 guard let self = self else {
@@ -461,7 +463,9 @@ final class UploadOperation: Operation {
                 if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
                     self.outputItem?.metaData?.mediumUrl = preview
                 }
-                self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
+                self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
+                    self?.storageVars.lastUnsavedFileUUID = nil
+                }
                 
                 debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
                 
