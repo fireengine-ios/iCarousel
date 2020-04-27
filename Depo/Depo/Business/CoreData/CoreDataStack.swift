@@ -133,7 +133,10 @@ final class CoreDataStack_ios10: CoreDataStack {
     
     private func recreateStore(completion: @escaping VoidHandler) {
         do {
-            try container.persistentStoreCoordinator.destroyPersistentStore(at: CoreDataConfig.storeUrl, ofType: NSSQLiteStoreType, options: nil)
+            let options = [NSSQLitePragmasOption: ["journal_mode": "DELETE"],
+            NSPersistentStoreFileProtectionKey: FileProtectionType.none] as [String : Any]
+            
+            try container.persistentStoreCoordinator.destroyPersistentStore(at: CoreDataConfig.storeUrl, ofType: NSSQLiteStoreType, options: options)
             
             container.loadPersistentStores { description, error in
                 guard error == nil else {

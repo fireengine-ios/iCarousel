@@ -96,7 +96,7 @@ final class CoreDataMigrator {
     }
     
     // MARK: - WAL
-    func forceWALCheckpointingForStore(at storeURL: URL) {
+    private func forceWALCheckpointingForStore(at storeURL: URL) {
         guard
             let metadata = try? NSPersistentStoreCoordinator.metadata(at: storeURL),
             let currentModel = NSManagedObjectModel.compatibleModelForStoreMetadata(metadata)
