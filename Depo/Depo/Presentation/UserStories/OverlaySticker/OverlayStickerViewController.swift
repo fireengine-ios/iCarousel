@@ -61,7 +61,6 @@ final class OverlayStickerViewController: ViewController {
         view.backgroundColor = .black
         statusBarColor = .black
 
-        addTapGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -269,6 +268,7 @@ final class OverlayStickerViewController: ViewController {
         overlayStickerViewControllerDataSource.delegate = self
         overlayStickerViewControllerDataSource.loadNext()
         overlayingStickerImageView.image = selectedImage
+        addTapGesture()
     }
     
     private func setupNavigationBar() {

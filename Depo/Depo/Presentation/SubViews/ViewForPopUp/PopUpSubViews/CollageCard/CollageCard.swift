@@ -106,12 +106,7 @@ final class CollageCard: BaseCardView {
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
-        guard let image = photoImageView.image else { return }
-        
-        let vc = PVViewerController.initFromNib()
-        vc.image = image
-        let nController = NavigationController(rootViewController: vc)
-        routerVC.presentViewController(controller: nController)
+        showPhotoVideoDetail()
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
