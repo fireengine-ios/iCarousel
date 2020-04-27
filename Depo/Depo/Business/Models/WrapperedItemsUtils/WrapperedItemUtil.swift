@@ -26,8 +26,8 @@ class WrapperedItemUtil: NSObject {
         case .folder:
             imageName = "fileIconFolder"
             
-        case .photoAlbum: // TODO: Add icon
-            imageName = "fileIconUnknown"
+        case .photoAlbum, .faceImageAlbum(_): // TODO: Add icon
+            imageName = "fileIconPhoto"
             
         case .musicPlayList: // TODO: Add icon
             imageName = "fileIconUnknown"
@@ -83,10 +83,10 @@ class WrapperedItemUtil: NSObject {
             imageName = "fileBigIconFolder"
             
         case .photoAlbum: // TODO: Add icon
-            imageName = "fileIconUnknown"
+            imageName = "fileBigIconUnknown"
             
         case .musicPlayList: // TODO: Add icon
-            imageName = "fileIconUnknown"
+            imageName = "fileBigIconUnknown"
         case let .application(applicationType):
             switch applicationType {
             case .rar:
@@ -102,7 +102,7 @@ class WrapperedItemUtil: NSObject {
                 imageName = "fileBigIconTxt"
                 break
             case .html:
-                imageName = "fileIconUnknown"
+                imageName = "fileBigIconUnknown"
                 break
             case .xls:
                 imageName = "fileBigIconXls"
@@ -118,7 +118,7 @@ class WrapperedItemUtil: NSObject {
             }
             
         default:
-            imageName = "fileIconUnknown"
+            imageName = "fileBigIconUnknown"
             break
         }
         return UIImage(named: imageName)
@@ -139,8 +139,8 @@ class WrapperedItemUtil: NSObject {
         case .folder:
             imageName = "fileIconSmallFolderNotSelected"
         
-        case .photoAlbum: // TODO: Add icon
-            imageName = "fileIconUnknown"
+        case .photoAlbum, .faceImageAlbum(_): // TODO: Add icon
+            imageName = "fileIconSmallPhotoNotSelected"
             
         case .musicPlayList: // TODO: Add icon
             imageName = "fileIconUnknown"
