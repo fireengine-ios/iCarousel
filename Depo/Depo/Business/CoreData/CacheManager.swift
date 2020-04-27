@@ -31,6 +31,9 @@ final class CacheManager {
     private(set) var processingRemoteItems = false
     private(set) var processingLocalItems = false
     private(set) var isProcessing = false
+    
+    private(set) var isPhotosActualized = false
+    private(set) var isVideosActualized = false
     private(set) var isCacheActualized = false
     
     let delegates = MulticastDelegate<CacheManagerDelegate>()
@@ -135,6 +138,17 @@ final class CacheManager {
                 }
             }
         }
+    }
+    
+    
+    ///on login
+    func atualizeRemotes() {
+        
+    }
+    
+    ///on every launch
+    func actualizeLocals() {
+        
     }
     
     private func updatePreparation(isBegun: Bool) {
