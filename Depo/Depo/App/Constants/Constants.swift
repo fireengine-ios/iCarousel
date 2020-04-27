@@ -1789,4 +1789,7 @@ struct TextConstants {
     static let featureStorageOnlyAdditional1 = NSLocalizedString("feature_storage_only_additional_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let featureStorageOnlyAdditional2 = NSLocalizedString("feature_storage_only_additional_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
+    static let snackbarOk = NSLocalizedString("snackbar_ok", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarRetry = NSLocalizedString("snackbar_retry", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarUndo = NSLocalizedString("snackbar_undo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
