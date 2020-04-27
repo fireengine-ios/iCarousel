@@ -24,7 +24,7 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
         interactor.deleteContact(contact)
     }
     
-    func didScrollToEnd() {
+    func needLoadNextPage() {
         interactor.continueLoading()
     }
     
@@ -43,9 +43,10 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
     }
     
     func didLoadContacts(_ contacts: [RemoteContact]) {
-        let sortedContacts = sortContacts(contacts)
+        let sortedContacts = contacts.sorted(by: { $0.name.uppercased() < $1.name.uppercased() })
+        let groupedContacts = groupContacts(sortedContacts)
         DispatchQueue.main.async {
-            self.view.showContacts(sortedContacts)
+            self.view.showContacts(groupedContacts)
         }
     }
     
@@ -53,21 +54,21 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
         moduleOutput?.didDeleteContact()
     }
     
-    private func sortContacts(_ contacts: [RemoteContact]) -> [ManageContacts.Group] {
-        var sortedContacts = [ManageContacts.Group]()
+    private func groupContacts(_ contacts: [RemoteContact]) -> [ManageContacts.Group] {
+        var groupedContacts = [ManageContacts.Group]()
         
         for contact in contacts {
             let firstLetter = contact.name.uppercased().first
-            if let lastGroup = sortedContacts.last, lastGroup.name == firstLetter {
-                sortedContacts[sortedContacts.count - 1].contacts.append(contact)
+            if let lastGroup = groupedContacts.last, lastGroup.name == firstLetter {
+                groupedContacts[groupedContacts.count - 1].contacts.append(contact)
             } else {
                 guard let groupName = firstLetter else { continue }
                 let group = ManageContacts.Group(name: groupName, contacts: [contact])
-                sortedContacts.append(group)
+                groupedContacts.append(group)
             }
         }
         
-        return sortedContacts
+        return groupedContacts
     }
     
     func asyncOperationStarted() {
