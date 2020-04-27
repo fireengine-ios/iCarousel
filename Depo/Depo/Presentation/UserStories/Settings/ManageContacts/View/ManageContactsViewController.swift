@@ -106,13 +106,13 @@ extension ManageContactsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let isLastSection = Bool((numberOfSections(in: tableView) - 1) == indexPath.section)
+        let isLastSection = (numberOfSections(in: tableView) - 1) == indexPath.section
         guard isLastSection else {
             return
         }
         
         let countRow: Int = self.tableView(tableView, numberOfRowsInSection: indexPath.section)
-        let isLastCell = Bool((countRow - 1) == indexPath.row)
+        let isLastCell = indexPath.row == countRow - 1
         if isLastCell {
             output.needLoadNextPage()
         }
