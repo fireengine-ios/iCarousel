@@ -110,6 +110,7 @@ final class CoreDataStack_ios10: CoreDataStack {
             
             do {
                 try self?.container.viewContext.save()
+                try self?.container.viewContext.fetch(MediaItem.fetchRequest())
             } catch let error {
                 debugLog("unable to fetch with error: \(error)")
                 self?.recreateStore(completion: successHandler)
