@@ -21,6 +21,7 @@ final class DocumentsAlbumCard: BaseCardView, ControlTabBarProtocol {
     private lazy var hideActionService: HideActionServiceProtocol = HideActionService()
     private lazy var albumService = PhotosAlbumService()
     private lazy var router = RouterVC()
+    private var thingsItem: ThingsItem?
     private var albumItem: AlbumItem?
     
     override func layoutSubviews() {
@@ -44,7 +45,8 @@ final class DocumentsAlbumCard: BaseCardView, ControlTabBarProtocol {
             return
         }
         
-        albumItem = AlbumItem(uuid: model.albumUuid, name: model.name, creationDate: model.creationDate, lastModifiDate: nil, fileType: .photoAlbum, syncStatus: .notSynced, isLocalItem: false)
+        thingsItem =  ThingsItem(response: model.thingsItem)
+        albumItem = AlbumItem(uuid: model.albumUuid, name: thingsItem?.name, creationDate: model.creationDate, lastModifiDate: nil, fileType: .photoAlbum, syncStatus: .notSynced, isLocalItem: false)
         setupCardView(documentsAlbumResponse: model, fileList: fileList)
     }
     
@@ -57,7 +59,6 @@ final class DocumentsAlbumCard: BaseCardView, ControlTabBarProtocol {
         
         descriptionLabel.text = String(format: TextConstants.documentsAlbumCardDescriptionLabel, documentsAlbumResponse.size)
         uppendImages(fileList: fileList, numberOfItems: documentsAlbumResponse.size)
-        
     }
     
     private func uppendImages(fileList: [WrapData], numberOfItems: Int) {
@@ -88,7 +89,7 @@ final class DocumentsAlbumCard: BaseCardView, ControlTabBarProtocol {
         imagesStackView.addArrangedSubview(countView)
     }
     
-    private func openAlbum(album: AlbumItem) {
+    private func openAlbum() {
         
         guard let uuid = albumItem?.uuid else {
             return
@@ -100,14 +101,20 @@ final class DocumentsAlbumCard: BaseCardView, ControlTabBarProtocol {
             
             switch albumResponse {
             case .success(let data):
-                guard let item = AlbumItem(remote: data).preview else {
+                
+                guard let thingsItem = self?.thingsItem else {
                     assertionFailure()
                     return
                 }
                 
-                let controller = self?.router.imageFacePhotosController(album: AlbumItem(remote: data), item: item, status: .active, moduleOutput: self)
-   
-                self?.router.pushViewController(viewController: controller!)
+                guard let controller = self?.router.imageFacePhotosController(album: AlbumItem(remote: data), item: thingsItem, status: .active, moduleOutput: nil) as? FaceImagePhotosViewController else {
+                    assertionFailure()
+                    return
+                }
+                
+                controller.delegate = self
+                
+                self?.router.pushViewController(viewController: controller)
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.localizedDescription)
             }
@@ -115,9 +122,7 @@ final class DocumentsAlbumCard: BaseCardView, ControlTabBarProtocol {
     }
     
     @IBAction private func closeButtonTapped(_ sender: UIButton) {
-//        deleteCard()
-        
-        homeCardsService.delegate?.needUpdateHomeScreen()
+        deleteCard()
     }
     
     @IBAction private func hideDocumentsButton(_ sender: UIButton) {
@@ -132,24 +137,15 @@ final class DocumentsAlbumCard: BaseCardView, ControlTabBarProtocol {
     }
     
     @IBAction private func viewDocumentsAlbum(_ sender: UIButton) {
-        guard let albumItem = albumItem else {
-            assertionFailure()
-            return
-        }
         viewDocumentButton.isEnabled = false
-        openAlbum(album: albumItem)
+        openAlbum()
     }
 }
 
 
-extension DocumentsAlbumCard: FaceImageItemsModuleOutput {
-    func didChangeName(item: WrapData) { }
-    
-    func didReloadData() {
-        print("Reload data")
-    }
-    
-    func delete(item: Item) {
-        print("Item")
+extension DocumentsAlbumCard: FaceImagePhotosViewControllerDelegate {
+    func viewWillDisappear() {
+        homeCardsService.delegate?.needUpdateHomeScreen()
     }
 }
+

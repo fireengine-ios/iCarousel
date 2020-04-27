@@ -784,6 +784,7 @@ struct TextConstants {
     static let actionSheetMove = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetDownload = NSLocalizedString("Download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetHide = NSLocalizedString("Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSheetHideSingleAlbum = NSLocalizedString("hide_album_action_shit", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetUnhide = NSLocalizedString("Unhide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetRestore = NSLocalizedString("restore_confirmation_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
