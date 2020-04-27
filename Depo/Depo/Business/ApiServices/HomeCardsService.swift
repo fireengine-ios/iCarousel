@@ -10,17 +10,25 @@ import Foundation
 import Alamofire
 
 protocol HomeCardsService {
+    var delegate: HomeCardsServiceImpDelegte? {get set}
+    
     func all(handler: @escaping (ResponseResult<[HomeCardResponse]>) -> Void)
     func save(with id: Int, handler: @escaping ResponseVoid)
     func delete(with id: Int, handler: @escaping ResponseVoid)
 }
 
 final class HomeCardsServiceImp {
+    
+    var delegate: HomeCardsServiceImpDelegte?
     let sessionManager: SessionManager
     
     init(sessionManager: SessionManager = SessionManager.customDefault) {
         self.sessionManager = sessionManager
     }
+}
+
+protocol HomeCardsServiceImpDelegte {
+    func needUpdateHomeScreen()
 }
 
 extension HomeCardsServiceImp: HomeCardsService {

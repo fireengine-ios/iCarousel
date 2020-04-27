@@ -386,6 +386,12 @@ struct TextConstants {
     static let campaignTopViewDescriptionZeroRemaining = NSLocalizedString("campaign_vc_top_description_zero", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let campaignTopViewDescriptionRemainin = NSLocalizedString("campaign_vc_top_description_non_zero", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    // MARK: Home Documents Album card
+    
+    static let documentsAlbumCardTitleLabel = NSLocalizedString("documents_album_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let documentsAlbumCardDescriptionLabel = NSLocalizedString("documents_album_card_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let documentsAlbumCardHideButton = NSLocalizedString("documents_album_card_hide_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let documentsAlbumCardViewButton = NSLocalizedString("documents_album_card_view_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Home Latest Uploads card
     static let homeLatestUploadsCardTitle = NSLocalizedString("Latest Uploads", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -778,6 +784,7 @@ struct TextConstants {
     static let actionSheetMove = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetDownload = NSLocalizedString("Download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetHide = NSLocalizedString("Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSheetHideSingleAlbum = NSLocalizedString("hide_album_action_sheet", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetUnhide = NSLocalizedString("Unhide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetRestore = NSLocalizedString("restore_confirmation_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     

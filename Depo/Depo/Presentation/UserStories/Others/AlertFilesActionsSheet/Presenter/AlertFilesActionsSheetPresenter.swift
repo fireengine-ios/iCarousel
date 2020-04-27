@@ -316,7 +316,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         }
                     }
                 case .hide:
-                    action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
+                    action = UIAlertAction(title: TextConstants.actionSheetHideSingleAlbum, style: .default, handler: { _ in
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hide))
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if currentItems.count <= allowedNumberLimit {
