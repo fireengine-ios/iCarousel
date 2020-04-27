@@ -1527,3 +1527,4 @@
 "snackbar_ok" = "OK";
 "snackbar_retry" = "Retry";
 "snackbar_undo" = "Undo";
+"remove_albums_success_message" = "Album(s) removed successfully";
