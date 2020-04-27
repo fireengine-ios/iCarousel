@@ -1471,3 +1471,4 @@
 "offer_store_promo" = "Promo";
 "offer_store_apple_store" = "Apple Store";
 "offer_store_google_store" = "Google Play Store";
+"remove_albums_success_message" = "альбом видалено";

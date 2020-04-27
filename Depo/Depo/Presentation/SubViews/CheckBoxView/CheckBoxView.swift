@@ -19,8 +19,8 @@ final class CheckBoxView: UIView, NibInit {
         willSet {
             newValue.text = TextConstants.showOnlySyncedItemsText
             newValue.textColor = ColorConstants.lightText
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 14)
-            newValue.numberOfLines = 0
+            newValue.font = UIFont.TurkcellSaturaRegFont(size: Device.isIphoneSmall ? 12 : 14)
+            newValue.numberOfLines = 2
             newValue.lineBreakMode = .byWordWrapping
         }
     }
@@ -29,7 +29,9 @@ final class CheckBoxView: UIView, NibInit {
         willSet {
             newValue.tintColor = .lrTealishTwo
             newValue.setTitle(TextConstants.photosVideosAutoSyncSettings, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 13)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: Device.isIphoneSmall ? 11 : 13)
+            newValue.titleLabel?.numberOfLines = 2
+            newValue.titleLabel?.lineBreakMode = .byWordWrapping
         }
     }
     
