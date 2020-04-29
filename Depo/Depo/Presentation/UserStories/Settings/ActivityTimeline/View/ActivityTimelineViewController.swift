@@ -57,7 +57,7 @@ class ActivityTimelineViewController: BaseViewController {
     }
     
     private func reloadData() {
-        if isLoadingMore {
+        guard !isLoadingMore else {
             return
         }
         isLoadingMore = true
@@ -65,7 +65,7 @@ class ActivityTimelineViewController: BaseViewController {
     }
     
     private func loadMoreData() {
-        if isLoadingMore {
+        guard !isLoadingMore else {
             return
         }
         isLoadingMore = true
