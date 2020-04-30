@@ -615,7 +615,7 @@
 "Up to 5000 contacts can be backed up." = "Ошибка резервного копирования контактов, так как у вас больше контактов, чем поддерживаемых верхних пределов.";
 "LifeboxSmallPopUpTitle" = "Хранилище lifebox практически заполнено!";
 "LifeboxSmallPopUpSubTitle" = "Посмотрите возможные варианты обновления аккаунта lifebox.";
-"LifeboxSmallPopUpCheckBoxTex" = "Больше не показывать";
+"LifeboxSmallPopUpCheckBoxTex" = "Больше не показывать!";
 "LifeboxSmallPopUpFirstButtonText" = "ОК";
 "LifeboxSmallPopUpSecondButtonText" = "Улучшить";
 "has_remained_lifebox_usage" = "%@ из %@ осталось (только для lifebox)";
@@ -1334,8 +1334,8 @@
 "hide_successed_alert_with_people_album_title" = "Фотография(ии) выбранного человека были скрыты.";
 "hide_successed_alert_people_album_title" = "Скрыть нежелательных людей и связанные с ними воспоминания!";
 "hide_successed_alert_people_album_description" = "Вы можете скрыть все воспоминания, связанные с человеком, одним щелчком мыши или отправить их в корзину. Вы можете получить доступ к скрытым фотографиям только в альбоме \"Скрытый\".";
-"hide_successed_alert_do_not_show_this_message" = "Больше не показывать это сообщение!";
-"hide_successed_alert_view_people_album" = "Просмотреть альбом Люди";
+"hide_successed_alert_do_not_show_this_message" = "Больше не показывать!";
+"hide_successed_alert_view_people_album" = "Альбом Люди";
 "smash_successed_alert_title" = "Успешно сохранено в галерее вашего устройства и загружено на lifebox!";
 "smash_successed_alert_second_title" = "Что бы вы хотели сделать дальше?";
 "smash_successed_alert_description" = "Теперь вы можете поделиться отредактированной фотографией со своими друзьями. Также вы можете избавиться от нежелательных воспоминаний в ленте lifebox, скрыв или удалив одним щелчком мыши, перейти в альбом «Люди».";
@@ -1419,7 +1419,7 @@
 "mobile_payment_open_popup_description_bold_range" = "";
 "mobile_payment_open_popup_later_button" = "Позже";
 "mobile_payment_open_popup_continue_button" = "Продолжить";
-"we_recommend" = "Наше Специальное Предложение!";
+"we_recommend" = "Специальное Предложение!";
 "show_more" = "Показать Функции";
 "show_less" = "Закрыть";
 "face_recognition_package_description" = "+ Неограниченное Распознавание Лиц&Объектов& Местоположения";
@@ -1433,16 +1433,16 @@
 "settings_action_sheet_profile_details" = "Детали профиля";
 "settings_action_sheet_edit_profile_photo" = "Обновить фотографию профиля";
 "original_сopy_package_description" = "+ Хранение в Оригинальном Качестве";
-"become_premium_navbar_title" = "Наше Специальное Предложение!";
-"become_premium_header_default_title" = "У нас есть специальное предложение для вас!";
+"become_premium_navbar_title" = "Специальное Предложение!";
+"become_premium_header_default_title" = "Специальное предложение для вас!";
 "become_premium_header_default_subtitle" = "Хотите сохранить ваши воспоминания в оригинальном качестве? Может быть, вам нужна помощь в организации ваших фотографий и контактов? Станьте Premium -участником и позвольте lifebox облегчить вашу жизнь. Проверьте наши Premium функции и специальные предложения для вас.";
-"become_premium_header_people_title" = "У нас есть специальное предложение для вас!";
+"become_premium_header_people_title" = "Специальное предложение для вас!";
 "become_premium_header_people_subtitle" = "Хотите сохранить ваши воспоминания в оригинальном качестве? Может быть, вам нужна помощь в организации ваших фотографий и контактов? Станьте Premium -участником и позвольте lifebox облегчить вашу жизнь. Проверьте наши Premium функции и специальные предложения для вас.";
-"become_premium_header_places_title" = "У нас есть специальное предложение для вас!";
+"become_premium_header_places_title" = "Специальное предложение для вас!";
 "become_premium_header_places_subtitle" = "Хотите сохранить ваши воспоминания в оригинальном качестве? Может быть, вам нужна помощь в организации ваших фотографий и контактов? Станьте Premium -участником и позвольте lifebox облегчить вашу жизнь. Проверьте наши Premium функции и специальные предложения для вас.";
-"become_premium_header_things_title" = "У нас есть специальное предложение для вас!";
+"become_premium_header_things_title" = "Специальное предложение для вас!";
 "become_premium_header_things_subtitle" = "Хотите сохранить ваши воспоминания в оригинальном качестве? Может быть, вам нужна помощь в организации ваших фотографий и контактов? Станьте Premium -участником и позвольте lifebox облегчить вашу жизнь. Проверьте наши Premium функции и специальные предложения для вас.";
-"become_premium_header_contact_sync_title" = "У нас есть специальное предложение для вас!";
+"become_premium_header_contact_sync_title" = "Специальное предложение для вас!";
 "become_premium_header_contact_sync_subtitle" = "Хотите сохранить ваши воспоминания в оригинальном качестве? Может быть, вам нужна помощь в организации ваших фотографий и контактов? Станьте Premium -участником и позвольте lifebox облегчить вашу жизнь. Проверьте наши Premium функции и специальные предложения для вас.";
 "become_premium_description" = "Хранение в Оригинальном Качестве\nНеограниченное Распознавание Лиц&Объектов& Местоположения\nУдаление Повторяющихся Контактов в Телефонном Справочнике\nНеограниченный Анализ Photopick";
 "become_premium_or_text" = "ИЛИ приобретите дополнительное хранилище и получите Premium -функции БЕСПЛАТНО!";
@@ -1483,3 +1483,4 @@
 "offer_store_promo" = "Promo";
 "offer_store_apple_store" = "Apple Store";
 "offer_store_google_store" = "Google Play Store";
+"remove_albums_success_message" = "альбом(ы) удален";
