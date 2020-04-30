@@ -34,6 +34,10 @@ final class CacheManager {
     
     private(set) var isPhotosActualized = false
     private(set) var isVideosActualized = false
+    var isCacheActualizedTest: Bool {
+        return isPhotosActualized && isVideosActualized
+    }
+    
     private(set) var isCacheActualized = false
     
     let delegates = MulticastDelegate<CacheManagerDelegate>()
@@ -142,14 +146,47 @@ final class CacheManager {
     
     
     ///on login
-    func atualizeRemotes() {
+    func atualizeRemotes(completion: @escaping VoidHandler) {
         
     }
     
     ///on every launch
-    func actualizeLocals() {
+    func actualizeLocals(completion: @escaping VoidHandler) {
+        self.startProccessingLocalAlbums { [weak self] in
+            debugLog("CacheManager startProccessingLocalAlbums")
+            guard let self = self else {
+                return
+            }
+            
+            debugLog("actualizeCache albums are processed")
+            
+            MediaItemOperationsService.shared.removeZeroBytesLocalItems { [weak self] _ in
+                self?.startProcessingAllLocals(completion: {
+                    self?.actualizeUnsavedFileSyncStatus() { [weak self] in
+                        self?.actualizeUnsavedFileSyncStatus() { [weak self] in
+                            debugLog("CacheManager appended all locals")
+//                            debugLog("CacheManager there are remotes, all local processed")
+//                            self?.isProcessing = false
+//                            self?.isCacheActualized = true
+//                            debugLog("cache is actualized")
+//                            self?.updatePreparation(isBegun: false)
+//                            self?.delegates.invoke { $0.didCompleteCacheActualization() }
+                            completion()
+                            
+                        }
+                    }
+                })
+                
+            }
+        }
+    }
+    
+    func actualizeCache(locals: Bool, remotes: Bool) {
         
     }
+    
+//    func
+    
     
     private func updatePreparation(isBegun: Bool) {
         if isBegun {
