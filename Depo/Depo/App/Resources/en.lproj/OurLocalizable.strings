@@ -1528,3 +1528,15 @@
 "snackbar_retry" = "Retry";
 "snackbar_undo" = "Undo";
 "remove_albums_success_message" = "Album(s) removed successfully";
+
+"added_to_favorites_message" = "Added to favourites";
+"removed_from_favorites" = "Removed from favorites";
+"added_to_album" = "Successfully added";
+"downloaded_files" = "%d file(s) were downloaded successfully";
+"edit_saved" = "Saved";
+"files_moved" = "File(s) moved";
+"success_remove_passcode" = "You successfully remove your passcode";
+"added_to_favorites_from_lifebox" = "Successfully added";
+"edit_security_question_success" = "You successfully edit security question";
+"set_security_question_success" = "You successfully set security question";
+"instapick_hastags_copied" = "Copied";

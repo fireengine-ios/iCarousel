@@ -21,8 +21,7 @@ final class SnackbarView: UIView, NibInit {
             newValue.text = ""
             newValue.font = .TurkcellSaturaMedFont(size: 16)
             newValue.textColor = .white
-            newValue.numberOfLines = 0
-            newValue.lineBreakMode = .byWordWrapping
+            newValue.lineBreakMode = .byTruncatingTail
         }
     }
 
@@ -46,7 +45,8 @@ final class SnackbarView: UIView, NibInit {
         backgroundColor = ColorConstants.snackbarGray
     }
     
-    func setup(message: String, actionTitle: String?, axis: NSLayoutConstraint.Axis, action: VoidHandler?) {
+    func setup(type: SnackbarType, message: String, actionTitle: String?, axis: NSLayoutConstraint.Axis, action: VoidHandler?) {
+        titleLabel.numberOfLines = type.numberOfLinesLimit
         titleLabel.text = message
         
         guard actionTitle != nil else {

@@ -175,7 +175,7 @@ extension HideActionService {
     
     private func onSuccess() {
         success?()
-        showSuccessPopUp()
+//        showSuccessPopUp()
     }
 }
 

@@ -236,6 +236,121 @@ enum ElementTypes {
 
         return result
     }
+    
+    func snackbarSuccessMessage(relatedItems: [BaseDataSourceItem] = [], divorseItems: DivorseItems? = nil) -> String? {
+        if let divorseItems = divorseItems {
+            return divorseSuccessMessage(divorseItems: divorseItems)
+        }
+        
+        switch self {
+        case .addToAlbum:
+            return TextConstants.snackbarMessageAddedToAlbum
+        case .addToFavorites:
+            return TextConstants.snackbarMessageAddedToFavorites
+        case .download:
+            let format = TextConstants.snackbarMessageDownloadedFilesFormat
+            return String(format: format, relatedItems.count)
+        case .edit:
+            return TextConstants.snackbarMessageEditSaved
+        case .emptyTrashBin:
+            return TextConstants.trashBinDeleteAllComplete
+        case .move:
+            return TextConstants.snackbarMessageFilesMoved
+        case .removeAlbum:
+            return TextConstants.removeAlbumsSuccess
+        case .removeFromFavorites:
+            return TextConstants.snackbarMessageRemovedFromFavorites
+        default:
+            return nil
+        }
+    }
+    
+    func alertSuccessMessage(divorseItems: DivorseItems? = nil) -> String? {
+        if let divorseItems = divorseItems {
+            return divorseSuccessMessage(divorseItems: divorseItems)
+        }
+        
+        switch self {
+        case .download:
+            return TextConstants.popUpDownloadComplete
+        case .emptyTrashBin:
+            return TextConstants.trashBinDeleteAllComplete
+        case .removeAlbum:
+            return TextConstants.removeAlbumsSuccess
+        default:
+            return nil
+        }
+    }
+    
+    private typealias SuccessLocalizationTriplet = (items: String, albums: String, folders: String)
+    
+    private func localizationTriplet() -> SuccessLocalizationTriplet {
+        let triplet: SuccessLocalizationTriplet
+        switch self {
+        case .moveToTrash:
+            triplet = SuccessLocalizationTriplet(
+                items: TextConstants.moveToTrashItemsSuccessText,
+                albums: TextConstants.moveToTrashAlbumsSuccessText,
+                folders: TextConstants.moveToTrashFoldersSuccessText
+            )
+            
+        case .unhide:
+            triplet = SuccessLocalizationTriplet(
+                items: TextConstants.unhideItemsSuccessText,
+                albums: TextConstants.unhideAlbumsSuccessText,
+                folders: TextConstants.unhideFoldersSuccessText
+            )
+            
+        case .delete:
+            triplet = SuccessLocalizationTriplet(
+                items: TextConstants.deleteItemsSuccessText,
+                albums: TextConstants.deleteAlbumsSuccessText,
+                folders: TextConstants.deleteFoldersSuccessText
+            )
+            
+        case .restore:
+            triplet = SuccessLocalizationTriplet(
+                items: TextConstants.restoreItemsSuccessText,
+                albums: TextConstants.restoreAlbumsSuccessText,
+                folders: TextConstants.restoreFoldersSuccessText
+            )
+        
+        case .hide:
+            triplet = SuccessLocalizationTriplet(
+                items: TextConstants.hideSuccessPopupMessage,
+                albums: TextConstants.hideAlbumsSuccessPopupMessage,
+                folders: ""
+            )
+            
+        default:
+            triplet = SuccessLocalizationTriplet(
+                items: "",
+                albums: "",
+                folders: ""
+            )
+            assertionFailure("unknown ElementType")
+        }
+        
+        return triplet
+    }
+    
+    func divorseSuccessMessage(divorseItems: DivorseItems) -> String {
+        let localizations = localizationTriplet()
+
+        let text: String
+        switch divorseItems {
+        case .items:
+            text = localizations.items
+            
+        case .albums:
+            text = localizations.albums
+            
+        case .folders:
+            text = localizations.folders
+        }
+        
+        return text
+    }
 }
 
 typealias AnimationBlock = () -> Void

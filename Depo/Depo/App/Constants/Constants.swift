@@ -526,6 +526,8 @@ struct TextConstants {
     static let userProfileNoSecretQuestion =  NSLocalizedString("no_security_question", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileSecretQuestionInvalidId =  NSLocalizedString("sequrity_question_id_is_invalid", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileSecretQuestionInvalidAnswer =  NSLocalizedString("sequrity_question_answer_is_invalid", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileEditSecretQuestionSuccess =  NSLocalizedString("edit_security_question_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let userProfileSetSecretQuestionSuccess =  NSLocalizedString("set_security_question_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let userProfileSelectQuestion =  NSLocalizedString("select_question", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileSecretQuestionAnswer =  NSLocalizedString("secret_answer", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1799,4 +1801,13 @@ struct TextConstants {
     static let snackbarOk = NSLocalizedString("snackbar_ok", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarRetry = NSLocalizedString("snackbar_retry", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarUndo = NSLocalizedString("snackbar_undo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let snackbarMessageAddedToFavorites = NSLocalizedString("added_to_favorites_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarMessageRemovedFromFavorites = NSLocalizedString("removed_from_favorites", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarMessageAddedToAlbum = NSLocalizedString("added_to_album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarMessageDownloadedFilesFormat = NSLocalizedString("downloaded_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarMessageEditSaved = NSLocalizedString("edit_saved", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarMessageFilesMoved = NSLocalizedString("files_moved", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarMessageResetPasscodeSuccess = NSLocalizedString("success_remove_passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarMessageAddedToFavoritesFromLifeBox = NSLocalizedString("added_to_favorites_from_lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

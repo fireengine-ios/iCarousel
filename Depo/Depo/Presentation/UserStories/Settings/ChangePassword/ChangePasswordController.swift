@@ -54,6 +54,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     
     private lazy var accountService = AccountService()
     private lazy var authenticationService = AuthenticationService()
+    private lazy var router = RouterVC()
     private var showErrorColorInNewPasswordView = false
     
     // MARK: - View methods
@@ -220,20 +221,12 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
                                                 AppConfigurator.logout()
                                             }
         })
-        RouterVC().presentViewController(controller: popupVC)
+        router.presentViewController(controller: popupVC)
     }
     
     private func showSuccessPopup() {
-        let popupVC = PopUpController.with(title: TextConstants.passwordChangedSuccessfully,
-                                           message: nil,
-                                           image: .success,
-                                           buttonTitle: TextConstants.ok,
-                                           action: { vc in
-                                            vc.close  {
-                                                RouterVC().popViewController()
-                                            }
-        })
-        RouterVC().presentViewController(controller: popupVC)
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.passwordChangedSuccessfully)
+        router.popViewController()
     }
     
     private func showError(_ errorResponse: Error) {
