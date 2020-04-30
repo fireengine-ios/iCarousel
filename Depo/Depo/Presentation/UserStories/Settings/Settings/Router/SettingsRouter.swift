@@ -16,10 +16,6 @@ class SettingsRouter: SettingsRouterInput {
         router.setNavigationController(controller: router.onboardingScreen)
     }
     
-    func goToContactSync() {
-        router.pushViewController(viewController: router.syncContacts)
-    }
-    
     func goToConnectedAccounts() {
         router.pushViewController(viewController: router.connectedAccounts!)
     }
