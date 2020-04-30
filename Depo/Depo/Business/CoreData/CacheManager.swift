@@ -146,8 +146,55 @@ final class CacheManager {
     
     
     ///on login
+    ///and only if we have token
     func atualizeRemotes(completion: @escaping VoidHandler) {
-        
+        MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
+            guard let self = self else {
+                return
+            }
+            if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
+                self.showPreparationCardAfterDelay()
+                
+                let dispatchGroup = DispatchGroup()
+                
+                dispatchGroup.enter()
+                self.startAppendingAllRemotes(completion: { [weak self] in
+                    debugLog("CacheManager no remotes, appended all remotes")
+                    guard let self = self, !self.processingRemoteItems else {
+                        return
+                    }
+                    
+                    self.userDefaultsVars.currentRemotesPage = 0
+                    dispatchGroup.leave()
+                })
+                
+                dispatchGroup.enter()
+                self.startProcessingAllLocals(completion: {
+                    debugLog("CacheManager no remotes, appended all locals")
+                    dispatchGroup.leave()
+                })
+                
+                dispatchGroup.notify(queue: self.concurrentQueue) { [weak self] in
+                    self?.actualizeUnsavedFileSyncStatus() { [weak self] in
+                        guard let self = self, !self.processingLocalItems else {
+                            return
+                        }
+                        debugLog("CacheManager no remotes, all locals processed")
+                        //FIXME: need handling if we logouted and locals still in progress
+                        
+                        
+                        self.isProcessing = false
+                        self.isCacheActualized = true
+                        debugLog("cache is actualized")
+                        self.updatePreparation(isBegun: false)
+                        self.delegates.invoke { $0.didCompleteCacheActualization() }
+                    }
+                }
+            } else { ///get first page?
+                
+            }
+            
+        }
     }
     
     ///on every launch
