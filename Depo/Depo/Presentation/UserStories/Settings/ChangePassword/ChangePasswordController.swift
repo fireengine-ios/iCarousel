@@ -41,6 +41,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         view.titleLabel.text = TextConstants.newPassword
         view.passwordTextField.placeholder = TextConstants.enterYourNewPassword
         view.passwordTextField.returnKeyType = .next
+        view.isNeedToShowRules = true
         return view
     }()
     
@@ -310,26 +311,21 @@ extension ChangePasswordController: UITextFieldDelegate {
     
     private func updateNewPasswordView() {
         if showErrorColorInNewPasswordView {
-            newPasswordView.underlineLabel.textColor = ColorConstants.textOrange
+            newPasswordView.errorLabel.textColor = ColorConstants.textOrange
             /// we need to show error with color just once
             showErrorColorInNewPasswordView = false
-            
-        /// can be "else" only. added check for optimization without additional flags
-        } else if newPasswordView.underlineLabel.textColor != UIColor.lrTealish {
-            newPasswordView.underlineLabel.textColor = UIColor.lrTealish
-            newPasswordView.underlineLabel.text = TextConstants.errorInvalidPassword
         }
-        newPasswordView.showUnderlineAnimated()
+        newPasswordView.showErrorLabelAnimated()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
         case newPasswordView.passwordTextField:
-            newPasswordView.hideUnderlineAnimated()
+            newPasswordView.hideErrorLabelAnimated()
         case oldPasswordView.passwordTextField:
-            oldPasswordView.hideUnderlineAnimated()
+            oldPasswordView.hideErrorLabelAnimated()
         case repeatPasswordView.passwordTextField:
-            repeatPasswordView.hideUnderlineAnimated()
+            repeatPasswordView.hideErrorLabelAnimated()
         case captchaView.captchaAnswerTextField:
             captchaView.hideErrorAnimated()
         default:
