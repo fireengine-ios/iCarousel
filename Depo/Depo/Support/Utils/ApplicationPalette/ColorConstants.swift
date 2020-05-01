@@ -102,6 +102,8 @@ struct ColorConstants {
     static let cardBorderOrange = UIColor(red: 231 / 255.0, green: 133 / 255.0, blue: 36 / 255.0, alpha: 1)
 
     static let linkBlack = UIColor(red: 51 / 255.0, green: 51 / 255.0, blue: 51 / 255.0, alpha: 1)
+    
+    static let snackbarGray = UIColor(white: 65/255, alpha: 1)
 
 }
 

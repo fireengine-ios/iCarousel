@@ -424,6 +424,7 @@
 "Things" = "Things";
 "Places" = "Places";
 "Musics" = "Musics";
+"hide_album_action_sheet" = "Hide Album";
 "Your Uploads" = "Your Uploads";
 "Create a story" = "Create a story";
 "Please Choose 20 files at most" = "Please choose maximum 20 photos";
@@ -1290,6 +1291,10 @@
 "campaign_vc_top_description_zero" = "You have just completed total daily draw. You can try tomorrow again and increase your chance of becoming one of the 20 winners for Samsung Galaxy Note 10!";
 "campaign_vc_top_title_non_zero" = "KEEP GOING!";
 "campaign_vc_top_description_non_zero" = "Congrats! You have completed %d PhotoPick for today. Keep analyzing your photos with PhotoPick and increase your chance of becoming one of the 20 winners for the Samsung Galaxy Note 10!";
+"documents_album_card_title" = "Do you want to hide document objects?";
+"documents_album_card_description" = "%d items including screenshots and documents, are grouped in Documents Album. Clean up your gallery by hiding this album. You can access these photos from Hidden album anytime.";
+"documents_album_card_hide_button" = "Hide Documents Album";
+"documents_album_card_view_button" = "View Documents Album";
 "create_story_empty_name_error" = "Story name can not be empty";
 "photopick_history_campaign_contest_total_draw" = "Total Draw";
 "photopick_history_campaign_contest_remaining_draw" = "Daily Draw Left";
@@ -1518,3 +1523,8 @@
 "offer_store_promo" = "Promo";
 "offer_store_apple_store" = "Apple Store";
 "offer_store_google_store" = "Google Play Store";
+
+"snackbar_ok" = "OK";
+"snackbar_retry" = "Retry";
+"snackbar_undo" = "Undo";
+"remove_albums_success_message" = "Album(s) removed successfully";

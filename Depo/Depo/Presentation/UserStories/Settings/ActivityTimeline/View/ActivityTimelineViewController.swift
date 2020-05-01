@@ -23,8 +23,8 @@ class ActivityTimelineViewController: BaseViewController {
         setupTableView()
         setupPullToRefresh()
         
-        isLoadingMore = true
         output.viewIsReady()
+        reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,7 +42,7 @@ class ActivityTimelineViewController: BaseViewController {
     
     private func setupPullToRefresh() {
         refreshControl = tableView.addRefreshControl { [weak self] _ in
-            self?.output.updateForPullToRefresh()
+            self?.reloadData()
         }
     }
     
@@ -56,8 +56,16 @@ class ActivityTimelineViewController: BaseViewController {
         return activity
     }
     
+    private func reloadData() {
+        guard !isLoadingMore else {
+            return
+        }
+        isLoadingMore = true
+        output.updateForPullToRefresh()
+    }
+    
     private func loadMoreData() {
-        if isLoadingMore {
+        guard !isLoadingMore else {
             return
         }
         isLoadingMore = true
@@ -75,6 +83,7 @@ extension ActivityTimelineViewController: ActivityTimelineViewInput {
     func displayTimelineActivities(with array: [ActivityTimelineServiceResponse]) {
         sectionBuilder.setup(with: array)
         endFooterRefreshing()
+        refreshControl?.endRefreshing()
         tableView.reloadData()
     }
     
@@ -96,6 +105,7 @@ extension ActivityTimelineViewController: ActivityTimelineViewInput {
     }
     
     func endInfinityScrollWithNoMoreData() {
+        endFooterRefreshing()
         tableView.tableFooterView = nil
     }
 }
@@ -123,22 +133,16 @@ extension ActivityTimelineViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return sectionBuilder.heightForHeaderInSection
     }
-}
-
-// MARK: - UIScrollViewDelegate
-extension ActivityTimelineViewController: UIScrollViewDelegate {
-    
-    /// Infinite Scrolling
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if deltaOffset(for: scrollView) <= 0 {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let isLastSection = (numberOfSections(in: tableView) - 1) == indexPath.section
+        guard isLastSection else {
+            return
+        }
+        
+        let countRow: Int = self.tableView(tableView, numberOfRowsInSection: indexPath.section)
+        let isLastCell = indexPath.row == countRow - 1
+        if isLastCell {
             loadMoreData()
         }
-    }
-    
-    private func deltaOffset(for scrollView: UIScrollView) -> CGFloat {
-        let currentOffset = scrollView.contentOffset.y
-        let maximumOffset = scrollView.contentSize.height - scrollView.frame.height
-        let infinity = tableView.tableFooterView?.bounds.height ?? 0
-        return maximumOffset - currentOffset - infinity
     }
 }

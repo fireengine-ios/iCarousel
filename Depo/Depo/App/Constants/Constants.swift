@@ -20,7 +20,7 @@ struct TextConstants {
         static let termsAndUseEtkLinkCommercialEmailMessages = "terms_and_use_etk_link_2"
         static let mobilePaymentPermissionLink = "mobilePaymentPermissionLink";
         static let FAQ = "frequently_asked_questions"
-        static let feedbackEmail = "destek-lifebox@turkcell.com.tr"
+        static let feedbackEmail = "info@mylifebox.com"
         static let termsOfUseGlobalDataPermLink1 = "global_data_permission_link"
         static let wrongVideoData = "Wrong video data"
         static let wrongImageData = "Wrong image data"
@@ -386,6 +386,12 @@ struct TextConstants {
     static let campaignTopViewDescriptionZeroRemaining = NSLocalizedString("campaign_vc_top_description_zero", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let campaignTopViewDescriptionRemainin = NSLocalizedString("campaign_vc_top_description_non_zero", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    // MARK: Home Documents Album card
+    
+    static let documentsAlbumCardTitleLabel = NSLocalizedString("documents_album_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let documentsAlbumCardDescriptionLabel = NSLocalizedString("documents_album_card_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let documentsAlbumCardHideButton = NSLocalizedString("documents_album_card_hide_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let documentsAlbumCardViewButton = NSLocalizedString("documents_album_card_view_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Home Latest Uploads card
     static let homeLatestUploadsCardTitle = NSLocalizedString("Latest Uploads", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -778,6 +784,7 @@ struct TextConstants {
     static let actionSheetMove = NSLocalizedString("Move", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetDownload = NSLocalizedString("Download", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetHide = NSLocalizedString("Hide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSheetHideSingleAlbum = NSLocalizedString("hide_album_action_sheet", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetUnhide = NSLocalizedString("Unhide", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetRestore = NSLocalizedString("restore_confirmation_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -1789,4 +1796,7 @@ struct TextConstants {
     static let featureStorageOnlyAdditional1 = NSLocalizedString("feature_storage_only_additional_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let featureStorageOnlyAdditional2 = NSLocalizedString("feature_storage_only_additional_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
+    static let snackbarOk = NSLocalizedString("snackbar_ok", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarRetry = NSLocalizedString("snackbar_retry", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarUndo = NSLocalizedString("snackbar_undo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
