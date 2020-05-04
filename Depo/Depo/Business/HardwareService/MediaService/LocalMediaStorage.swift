@@ -18,6 +18,8 @@ typealias FileDataSorceData = (_ image: Data?) -> Void
 
 typealias AssetsList = (_ assets: [PHAsset] ) -> Void
 
+typealias LocalAssetsResponse = [(asset: PHAssetCollection, hasItems: Bool)]
+
 struct AssetInfo {
     var asset: PHAsset
     var isValid = true
@@ -55,7 +57,7 @@ protocol LocalMediaStorageProtocol {
     
     func getBigImageFromFile(asset: PHAsset, image: @escaping FileDataSorceImg)
     
-    func getAllImagesAndVideoAssets() -> [PHAsset]
+    func updateAllImagesAndVideoAssets() -> [PHAsset]
     
     func removeAssets(deleteAsset: [PHAsset], success: FileOperation?, fail: FailResponse?)
     
@@ -178,26 +180,17 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func askPermissionForPhotoFramework(redirectToSettings: Bool, completion: @escaping PhotoLibraryGranted) {
-        isWaitingForPhotoPermission = true
         let status = PHPhotoLibrary.authorizationStatus()
         switch status {
         case .authorized:
             photoLibrary.register(self)
-            if (Device.operationSystemVersionLessThen(10)) {
-                PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
-                    let isAuthorized = authStatus == .authorized
-                    self?.isWaitingForPhotoPermission = false
-                    completion(isAuthorized, authStatus)
-                })
-            } else {
-                isWaitingForPhotoPermission = false
-                completion(true, status)
-            }
+            completion(true, status)
             AnalyticsPermissionNetmeraEvent.sendPhotoPermissionNetmeraEvents(true)
         case .notDetermined, .restricted:
+            isWaitingForPhotoPermission = true
             passcodeStorage.systemCallOnScreen = true
             PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
-                guard let `self` = self else {
+                guard let self = self else {
                     return
                 }
                 
@@ -211,7 +204,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 completion(isAuthorized, authStatus)
             })
         case .denied:
-            isWaitingForPhotoPermission = false
             completion(false, status)
             if redirectToSettings {
                 DispatchQueue.main.async {
@@ -226,9 +218,23 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     var fetchAlbumResult: PHFetchResult<PHAssetCollection>!
     var fetchSmartAlbumResult: PHFetchResult<PHAssetCollection>!
     
-    func getAllImagesAndVideoAssets() -> [PHAsset] {
-        assetsCache.dropAll()
-        debugLog("LocalMediaStorage getAllImagesAndVideoAssets")
+    func updateAllImagesAndVideoAssets() -> [PHAsset] {
+        debugLog("LocalMediaStorage updateAllImagesAndVideoAssets")
+
+        let mediaContent = fetchAllImagesAndVideoAssets()
+        
+        guard !mediaContent.isEmpty else {
+            assetsCache.dropAll()
+            return []
+        }
+        
+        assetsCache.replaceAll(with: mediaContent)
+        
+        return mediaContent
+    }
+    
+    private func fetchAllImagesAndVideoAssets() -> [PHAsset] {
+        debugLog("LocalMediaStorage fetchAllImagesAndVideoAssets")
 
         guard photoLibraryIsAvailible() else {
             return []
@@ -244,7 +250,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             mediaContent.append(avalibleAset)
         })
         
-        assetsCache.append(list: mediaContent)
         return mediaContent
     }
     
@@ -279,13 +284,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                     item.imageCount = itemsCount
                                 }
                                 
-                                let fetchOptions = PHFetchOptions()
-                                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-                                fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
-                                
-                                if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject,
-                                    let info = self?.compactInfoAboutAsset(asset: asset), info.isValid {
-                                    
+                                if let asset = self?.firstValidAsset(for: object) {
                                     item.preview = WrapData(asset: asset)
                                     albums.append(item)
                                 }
@@ -310,7 +309,26 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
     }
     
-    func getLocalAlbums(completion: @escaping (_ albums: [PHAssetCollection]) -> Void) {
+    private func firstValidAsset(for collection: PHAssetCollection) -> PHAsset? {
+        var result: PHAsset? = nil
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        fetchOptions.predicate = NSPredicate(format: "mediaType IN %@", [PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue])
+        
+        let assets = PHAsset.fetchAssets(in: collection, options: fetchOptions)
+        assets.enumerateObjects { asset, _, stop in
+            let info = self.compactInfoAboutAsset(asset: asset)
+            if info.isValid {
+                result = asset
+                stop.pointee = true
+            }
+        }
+        
+        return result
+    }
+    
+    func getLocalAlbums(completion: @escaping (_ response: LocalAssetsResponse) -> Void) {
         askPermissionForPhotoFramework(redirectToSettings: true) { [weak self] accessGranted, _ in
             guard let self = self, accessGranted else {
                 completion([])
@@ -324,18 +342,21 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 self?.fetchAlbumResult = albumsResult
                 self?.fetchSmartAlbumResult = smartAlbumsResult
                 
-                var albumsWithItems = [PHAssetCollection]()
+                var response = LocalAssetsResponse()
                 
                 [albumsResult, smartAlbumsResult].forEach {
                     $0.enumerateObjects { album, _, _ in
-                        if album.assetCollectionType == .smartAlbum || album.photosCount > 0 || album.videosCount > 0 {
+                        let hasItems = album.photosCount > 0 || album.videosCount > 0
+                        if hasItems {
                             self?.localAlbumsCache.append(albumId: album.localIdentifier, with: album.allAssets.map { $0.localIdentifier })
-                            albumsWithItems.append(album)
+                        }
+                        if hasItems || album.assetCollectionType == .smartAlbum {
+                            response.append((album, hasItems))
                         }
                     }
                 }
                 
-                completion(albumsWithItems)
+                completion(response)
             }
         }
     }
@@ -680,29 +701,28 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     // MARK: Copy Assets
     
-    func getURL(asset: PHAsset) -> URL? {
+    typealias AssetURLCompletion = ResponseHandler<URL>
+    
+    func getUrlOfCoppiedData(asset: PHAsset, completion: @escaping AssetURLCompletion) {
         switch  asset.mediaType {
         case .image:
-            return getURLImage(asset: asset)
+            getURLImage(asset: asset, completion: completion)
         
         case .video:
-            return getURLVideo(asset: asset)
+            getURLVideo(asset: asset, completion: completion)
         
         default:
-            return nil
+            completion(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
         }
     }
     
-    private func getURLImage(asset: PHAsset) -> URL? {
+    private func getURLImage(asset: PHAsset, completion: @escaping AssetURLCompletion) {
         debugLog("LocalMediaStorage copyImageAsset")
         
-        var url: URL?
-        
         guard let photoManager = photoManager else {
-            return nil
+            completion(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
+            return
         }
-        
-        let semaphore = DispatchSemaphore(value: 0)
         
         let operation = GetOriginalImageOperation(photoManager: photoManager,
                                                   asset: asset) { data, string, orientation, dict in
@@ -710,32 +730,24 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                                     let tmpURL = Device.tmpFolderUrl(withComponent: file)
                                                     do {
                                                         try data?.write(to: tmpURL)
-                                                    } catch {
-                                                        print(error.description)
-                                                        semaphore.signal()
+                                                    } catch let error {
+                                                        completion(.failed(ErrorResponse.error(error)))
                                                     }
-                                                    url = tmpURL
-                                                    semaphore.signal()
+                                                    completion(.success(tmpURL))
         }
         getDetailQueue.addOperation(operation)
-        semaphore.wait()
-        
-        return url
     }
     
-    private func getURLVideo(asset: PHAsset) -> URL? {
+    private func getURLVideo(asset: PHAsset, completion: @escaping AssetURLCompletion) {
         debugLog("LocalMediaStorage getURLVideo")
-
-        var url: URL?
         
         guard
             let resource = asset.resource,
             let name = asset.originalFilename
         else {
-            return nil
+            completion(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
+            return
         }
-        
-        let semaphore = DispatchSemaphore(value: 0)
         
         let options = PHAssetResourceRequestOptions()
         options.isNetworkAccessAllowed = false
@@ -743,18 +755,13 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let tmpUrl = Device.tmpFolderUrl(withComponent: name)
         PHAssetResourceManager.default().writeData(for: resource, toFile: tmpUrl, options: options) { error in
             guard let error = error else {
-                url = tmpUrl
-                semaphore.signal()
+                completion(.success(tmpUrl))
                 return
             }
             
             debugLog(error.description)
-            semaphore.signal()
+            completion(.failed(ErrorResponse.error(error)))
         }
-        
-        semaphore.wait()
-        
-        return url
     }
     
     func copyAssetToDocument(asset: PHAsset) -> URL? {

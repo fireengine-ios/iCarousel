@@ -98,9 +98,7 @@ final class PhotoVideoCollectionViewManager {
         collectionView.allowsMultipleSelection = true
         collectionView.register(nibCell: PhotoVideoCell.self)
         collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionElementKindSectionHeader)
-        if #available(iOS 10.0, *) {
-            collectionView.isPrefetchingEnabled = false
-        }
+        collectionView.isPrefetchingEnabled = false
         //        collectionView.alwaysBounceVertical = true
         //        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
     }

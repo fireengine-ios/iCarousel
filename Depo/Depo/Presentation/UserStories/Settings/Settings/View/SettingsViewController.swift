@@ -9,8 +9,6 @@
 import UIKit
 
 protocol SettingsDelegate: class {
-    func goToContactSync()
-    
     func goToConnectedAccounts()
     
     func goToAutoUpload()
@@ -44,7 +42,6 @@ final class SettingsViewController: BaseViewController {
     private lazy var biometricsManager: BiometricsManager = factory.resolve()
     
     enum AllSectionTypes: Int {
-        case contactSync
         case autoUpload
         case periodicContactSync
         case faceImage
@@ -59,7 +56,6 @@ final class SettingsViewController: BaseViewController {
         
         var text: String {
             switch self {
-            case .contactSync: return TextConstants.settingsViewCellBeckup
             case .autoUpload: return TextConstants.settingsViewCellAutoUpload
             case .periodicContactSync: return TextConstants.settingsViewCellContactsSync
             case .faceImage: return TextConstants.settingsViewCellFaceAndImageGrouping
@@ -74,7 +70,7 @@ final class SettingsViewController: BaseViewController {
             }
         }
         
-        static let allSectionOneTypes = [contactSync, autoUpload, periodicContactSync, faceImage]
+        static let allSectionOneTypes = [autoUpload, periodicContactSync, faceImage]
         static let allSectionTwoTypes = [connectAccounts, permissions]
         static let allSectionThreeTypes = [myActivities, passcode, security]
         static let allSectionFourTypes = [helpAndSupport, termsAndPolicy, logout]
@@ -207,12 +203,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         switch cellType {
-        case .contactSync:
-            if let delegate = settingsDelegate {
-                delegate.goToContactSync()
-            } else {
-                output.goToContactSync()
-            }
         case .autoUpload:
             if let delegate = settingsDelegate {
                 delegate.goToAutoUpload()
@@ -333,6 +323,7 @@ extension SettingsViewController: SettingsViewInput {
     
     func updatePhoto(image: UIImage) {
         userInfoSubView.updatePhoto(image: image)
+        userInfoSubView.dismissLoadingSpinner()
     }
     
     func profileInfoChanged() {

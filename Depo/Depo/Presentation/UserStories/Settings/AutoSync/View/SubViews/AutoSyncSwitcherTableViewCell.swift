@@ -35,6 +35,9 @@ final class AutoSyncSwitcherTableViewCell: AutoSyncTableViewCell {
         self.delegate = delegate
         self.model = model as? AutoSyncHeaderModel
         
+        //need for fix animation show|hide settings
+        layer.zPosition = 1
+        
         guard let model = self.model else {
             return
         }

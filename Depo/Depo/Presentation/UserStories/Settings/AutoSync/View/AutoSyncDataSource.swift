@@ -24,7 +24,7 @@ final class AutoSyncDataSource: NSObject {
     private(set) var autoSyncSetting = AutoSyncSettings()
     
     var autoSyncAlbums: [AutoSyncAlbum] {
-        return models.compactMap { ($0 as? AutoSyncAlbumModel)?.album }
+        return albumModels.map { $0.album }
     }
     
     var isFromSettings = false
@@ -57,7 +57,17 @@ final class AutoSyncDataSource: NSObject {
         let line = UIView(frame: CGRect(x: 16, y: 0, width: Device.winSize.width - 32, height: 1))
         line.backgroundColor = ColorConstants.profileGrayColor
         footer.addSubview(line)
+        footer.isUserInteractionEnabled = false
         tableView.tableFooterView = footer
+        
+        let back = UIView(frame: tableView.bounds)
+        back.backgroundColor = .white
+        tableView.backgroundView = back
+        
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(collapseCells))
+        recognizer.numberOfTapsRequired = 1
+        recognizer.numberOfTouchesRequired = 1
+        back.addGestureRecognizer(recognizer)
     }
     
     private func setupDefaultState() {
@@ -221,6 +231,10 @@ extension AutoSyncDataSource {
     private func enableAutoSync() {
         autoSyncSetting.isAutoSyncOptionEnabled = true
         
+        guard models.first(where: { ($0 as? AutoSyncHeaderModel)?.headerType == .photo }) == nil else {
+            return
+        }
+        
         let settingModels = [AutoSyncHeaderModel(type: .photo, setting: autoSyncSetting.photoSetting, isSelected: false),
                              AutoSyncHeaderModel(type: .video, setting: autoSyncSetting.videoSetting, isSelected: false)]
         
@@ -236,6 +250,10 @@ extension AutoSyncDataSource {
     
     private func disableAutoSync() {
         autoSyncSetting.isAutoSyncOptionEnabled = false
+        
+        guard models.first(where: { ($0 as? AutoSyncHeaderModel)?.headerType == .photo }) != nil else {
+            return
+        }
         
         guard let index = models.firstIndex(where: { ($0 as? AutoSyncHeaderModel)?.headerType == .albums }) else {
             return
@@ -367,7 +385,7 @@ extension AutoSyncDataSource {
         tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
     }
 
-    func updateTableView(_ updates: VoidHandler, completion: VoidHandler?) {
+    private func updateTableView(_ updates: VoidHandler, completion: VoidHandler?) {
         if #available(iOS 11.0, *) {
             tableView.performBatchUpdates({
                 updates()
@@ -380,6 +398,36 @@ extension AutoSyncDataSource {
             tableView.endUpdates()
             completion?()
         }
+    }
+    
+    @objc private func collapseCells(tap: UITapGestureRecognizer) {
+        let location = tap.location(in: tableView)
+        guard tableView.indexPathForRow(at: location) == nil else {
+            return
+        }
+    
+        //hide albums at first tap
+        //if albums is collapsed we need to hide photo and video settings
+        
+        if let albumsHeaderCell = cellForHeader(type: .albums), albumsHeaderCell.isExpanded {
+            albumsHeaderCell.didSelect()
+        } else {
+            if let photoHeaderCell = cellForHeader(type: .photo), photoHeaderCell.isExpanded {
+                photoHeaderCell.didSelect()
+            }
+            if let videoHeaderCell = cellForHeader(type: .video), videoHeaderCell.isExpanded {
+                videoHeaderCell.didSelect()
+            }
+        }
+    }
+    
+    private func cellForHeader(type: AutoSyncHeaderType) -> AutoSyncHeaderTableViewCell? {
+        guard let index = models.firstIndex(where: { ($0 as? AutoSyncHeaderModel)?.headerType == type }),
+            let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? AutoSyncHeaderTableViewCell else {
+            return nil
+        }
+        
+        return cell
     }
 }
 

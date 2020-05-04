@@ -12,7 +12,7 @@ import CoreData
 
 
 public class MediaItemsLocalAlbum: NSManagedObject {
-    convenience init(asset: PHAssetCollection, context: NSManagedObjectContext) {
+    convenience init(asset: PHAssetCollection, hasItems: Bool, context: NSManagedObjectContext) {
         let entityDescr = NSEntityDescription.entity(forEntityName: MediaItemsLocalAlbum.Identifier,
                                                      in: context)!
         self.init(entity: entityDescr, insertInto: context)
@@ -20,9 +20,9 @@ public class MediaItemsLocalAlbum: NSManagedObject {
         localId = asset.localIdentifier
         name = asset.localizedTitle
         isMain = asset.assetCollectionSubtype == .smartAlbumUserLibrary
+        self.hasItems = hasItems
         
         updateRelatedMediaItems(album: asset, context: context)
-        updateRelatedRemoteAlbums(context: context)
     }
 }
 
@@ -31,7 +31,7 @@ extension MediaItemsLocalAlbum {
         let assetsIdentifiers = album.allAssets.compactMap { $0.localIdentifier }
         
         let request: NSFetchRequest = MediaItem.fetchRequest()
-        request.predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) IN %@", assetsIdentifiers)
+        request.predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.localFileID) IN %@", assetsIdentifiers)
         
         if let relatedMediaItems = try? context.fetch(request) {
             relatedMediaItems.forEach {
@@ -41,17 +41,12 @@ extension MediaItemsLocalAlbum {
         }
     }
     
-    func updateRelatedRemoteAlbums(context: NSManagedObjectContext) {
-        guard let name = name else {
-            relatedRemote = nil
+    func updateHasItems() {
+        guard let items = items else {
+            hasItems = false
             return
         }
         
-        let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
-        request.predicate = NSPredicate(format: "\(MediaItemsAlbum.PropertyNameKey.name) = %@", name)
-        
-        if let relatedAlbums = try? context.fetch(request) {
-            relatedRemote = relatedAlbums.first
-        }
+        hasItems = items.count > 0
     }
 }

@@ -50,6 +50,7 @@ extension SettingsPresenter: SettingsViewOutput {
     
     func viewIsReady() {
         interactor.trackScreen()
+        view.prepareCellsData(isPermissionShown: false)
     }
     
     func viewWillBecomeActive() {
@@ -72,10 +73,6 @@ extension SettingsPresenter: SettingsViewOutput {
                                                 }
         })
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
-    }
-    
-    func goToContactSync() {
-        router.goToContactSync()
     }
     
     func goToConnectedAccounts() {

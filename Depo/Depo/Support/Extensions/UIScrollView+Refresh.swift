@@ -45,14 +45,7 @@ extension UIScrollView {
             refresher.tintColor = color
         }
         
-        if #available(iOS 10.0, *) {
-            refreshControl = refresher
-        } else {
-            insertSubview(refresher, at: 0)
-            /// http://stackoverflow.com/questions/15233147/header-displaced-in-tableview-with-uirefreshcontrol
-            /// http://stackoverflow.com/questions/12497940/uirefreshcontrol-without-uitableviewcontroller
-            /// or self.addChildViewController(self.tableViewController)
-        }
+        refreshControl = refresher
         
         return refresher
     }

@@ -307,6 +307,8 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
     @IBAction private func onCopyToClipboardTap(_ sender: Any) {
         let clipboardString = dataSource.hashtags.joined()
         UIPasteboard.general.string = clipboardString
+        
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.snackbarMessageHashTagsCopied)
     }
     
     @IBAction private func onShareTap(_ sender: Any) {

@@ -444,7 +444,9 @@ extension HiddenPhotosViewController: MoreFilesActionsInteractorOutput {
     func showWrongFolderPopup() { }
     func dismiss(animated: Bool) { }
     func startAsyncOperationDisableScreen() { }
-    func completeAsyncOperationEnableScreen() { }
+    func completeAsyncOperationEnableScreen() {
+        asyncOperationSuccess()
+    }
     func startCancelableAsync(cancel: @escaping VoidHandler) { }
     func completeAsyncOperationEnableScreen(errorMessage: String?) { }
     func startCancelableAsync(with text: String, cancel: @escaping VoidHandler) { }

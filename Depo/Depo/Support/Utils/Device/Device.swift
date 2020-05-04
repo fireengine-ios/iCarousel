@@ -59,6 +59,10 @@ class Device {
         return (UIDevice.current.userInterfaceIdiom == .phone) && (UIScreen.main.bounds.height >= 812)
     }
     
+    static var isIphoneSmall: Bool {
+        return !isIpad && UIScreen.main.bounds.width == 320
+    }
+    
     static var isIpad: Bool {
         return UI_USER_INTERFACE_IDIOM() == .pad
     }
@@ -73,6 +77,10 @@ class Device {
     
     static func operationSystemVersionLessThen(_ version: Int) -> Bool {
         return ProcessInfo().operatingSystemVersion.majorVersion < version
+    }
+    
+    static func operationSystemVersionMoreOrEqual(_ version: Int) -> Bool {
+        return ProcessInfo().operatingSystemVersion.majorVersion >= version
     }
     
     static func getFreeDiskSpaceInBytes() -> Int64 {

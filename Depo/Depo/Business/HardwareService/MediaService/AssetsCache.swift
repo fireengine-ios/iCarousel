@@ -113,4 +113,13 @@ class AssetsCache {
             storage.removeAll()
         }
     }
+    
+    func replaceAll(with list: [PHAsset]) {
+        dispatchQueue.sync {
+            storage.removeAll()
+            list.forEach {
+                storage[$0.localIdentifier] = $0
+            }
+        }
+    }
 }

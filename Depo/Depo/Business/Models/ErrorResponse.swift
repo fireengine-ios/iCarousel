@@ -54,7 +54,14 @@ extension ErrorResponse {
 
 extension ErrorResponse: CustomStringConvertible {
     var description: String {
-        if isServerUnderMaintenance {
+        if isNetworkError {
+            switch urlErrorCode {
+            case .notConnectedToInternet, .networkConnectionLost:
+                return TextConstants.errorConnectedToNetwork
+            default:
+                return TextConstants.errorBadConnection
+            }
+        } else if isServerUnderMaintenance {
             return TextConstants.errorServerUnderMaintenance
         }
         
@@ -92,6 +99,18 @@ extension ErrorResponse: LocalizedError {
             return error.isUnknownError
         }
         return false
+    }
+    
+    var localizedDescription: String {
+        guard let errorDescription = errorDescription else {
+            return TextConstants.temporaryErrorOccurredTryAgainLater
+        }
+
+        if errorDescription.contains("\(errorCode)") == true {
+            return TextConstants.temporaryErrorOccurredTryAgainLater
+        } else {
+            return errorDescription
+        }
     }
 }
 
@@ -156,6 +175,33 @@ extension Error {
         }
         
         return localizedDescription
+    }
+    
+    var localizedDescription: String {
+        let description = NSError(domain: _domain, code: _code, userInfo: _userInfo as? [String : Any]).localizedDescription
+        if let errorResponse = self as? ErrorResponse {
+            return errorResponse.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let customError = self as? CustomErrors {
+            return customError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let singupError = self as? SignupResponseError {
+            return singupError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let loginError = self as? LoginResponseError {
+            return loginError.dimensionValue
+        } else if let serverStatusError = self as? ServerStatusError {
+            return serverStatusError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let passwordError = self as? UpdatePasswordErrors {
+            return passwordError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let serverError = self as? ServerError {
+            return serverError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let serverValueError = self as? ServerValueError {
+            return serverValueError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let serverMessageError = self as? ServerMessageError {
+            return serverMessageError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if description.contains("\(_code)") {
+            return TextConstants.temporaryErrorOccurredTryAgainLater
+        } else {
+            return description
+        }
     }
     
 }

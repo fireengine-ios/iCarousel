@@ -137,9 +137,7 @@ final class SettingsInteractor: SettingsInteractorInput {
                     self?.didRecieveDataForCells()
 
                 case .failed(let error):
-
-                    self?.output.didFailToObtainUserStatus(errorMessage: error.localizedDescription)
-                    
+                    debugPrint("get Permissions error \(error.localizedDescription)")
                 }
                 
                 self?.output.asyncOperationStoped()

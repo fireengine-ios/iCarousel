@@ -18,7 +18,6 @@ final class LeavePremiumView: UIView {
 
     @IBOutlet private weak var leavePremiumHeaderView: LeavePremiumHeaderView!
     @IBOutlet weak var leavePremiumButton: InsetsButton!
-    @IBOutlet private weak var priceLabel: UILabel!
     @IBOutlet var premiumListViews: [PremiumListView]!
     
     @IBOutlet private var view: UIView!
@@ -36,9 +35,7 @@ final class LeavePremiumView: UIView {
     }
     
     // MARK: Utility methods(Public)
-    func configure(with price: String, type: LeavePremiumType, hideButton: Bool = false) {
-        priceLabel.text = price
-        
+    func configure(with type: LeavePremiumType, hideButton: Bool = false) {
         leavePremiumButton.isHidden = hideButton
         leavePremiumButton.setTitle(type.buttonTitle, for: .normal)
 
@@ -73,9 +70,6 @@ final class LeavePremiumView: UIView {
         leavePremiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
         leavePremiumButton.layer.masksToBounds = true
         leavePremiumButton.layer.cornerRadius = 15
-        
-        priceLabel.textColor = UIColor.lrTealish
-        priceLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
     }
     
     // MARK: Actions

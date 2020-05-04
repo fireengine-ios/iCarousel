@@ -124,7 +124,6 @@ extension PremiumView: PremiumHeaderViewDelegate {
 // MARK: - UITextViewDelegate
 extension PremiumView: UITextViewDelegate {
     
-    @available(iOS 10.0, *)
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         if URL.absoluteString == TextConstants.NotLocalized.termsOfUseLink {
             DispatchQueue.toMain {

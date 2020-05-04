@@ -14,6 +14,8 @@ class PackagesTableViewCell: UITableViewCell {
         willSet {
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
             newValue.textColor = UIColor.lrBrownishGrey
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     
@@ -23,6 +25,7 @@ class PackagesTableViewCell: UITableViewCell {
             newValue.textColor = UIColor.lrLightBrownishGrey
             newValue.textAlignment = .right
             newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     

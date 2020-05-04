@@ -12,8 +12,6 @@ protocol SettingsRouterInput {
     
     func goToOnboarding()
     
-    func goToContactSync()
-    
     func goToConnectedAccounts()
     
     func goToPermissions()

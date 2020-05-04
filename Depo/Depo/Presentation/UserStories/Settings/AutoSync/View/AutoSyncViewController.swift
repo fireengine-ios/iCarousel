@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AutoSyncViewController: BaseViewController {
+final class AutoSyncViewController: BaseViewController, NibInit {
     var output: AutoSyncViewOutput!
     
     @IBOutlet private weak var tableView: UITableView!
@@ -24,7 +24,6 @@ class AutoSyncViewController: BaseViewController {
     }
     
     private lazy var storageVars: StorageVars = factory.resolve()
-    private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var dataSource = AutoSyncDataSource(tableView: tableView, delegate: self)
     
     var fromSettings: Bool = false
@@ -41,8 +40,8 @@ class AutoSyncViewController: BaseViewController {
             setNavigationTitle(title: TextConstants.autoSyncNavigationTitle)
         }
         
-        analyticsService.logScreen(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
-        analyticsService.trackDimentionsEveryClickGA(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
+        analyticsManager.logScreen(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
+        analyticsManager.trackDimentionsEveryClickGA(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
         output.viewIsReady()
     }
     
@@ -101,10 +100,6 @@ class AutoSyncViewController: BaseViewController {
         view.frame.size = size
     
         tableView.tableHeaderView = view
-        
-        let back = UIView(frame: tableView.bounds)
-        back.backgroundColor = .white
-        tableView.backgroundView = back
     }
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -142,7 +137,7 @@ extension AutoSyncViewController: AutoSyncViewInput {
     }
 
     func checkPermissionsSuccessed() {
-        analyticsService.track(event: .turnOnAutosync)
+        analyticsManager.track(event: .turnOnAutosync)
         dataSource.checkPermissionsSuccessed()
     }
     

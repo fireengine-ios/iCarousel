@@ -101,13 +101,12 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
         contactSyncResponse = response
         /// Delay is needed due to instant progress reset on completion
         if !view.isFullCircle {
-            DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {
-                self.view.success(response: response, forOperation: operation)
+            DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) { [weak self] in
+                self?.view.success(response: response, forOperation: operation)
             }
         } else {
             view.success(response: response, forOperation: operation)
         }
-       
     }
     
     func analyzeSuccess(response: [ContactSync.AnalyzedContact]) {
@@ -154,8 +153,14 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
     
     func didObtainUserStatus(isPremiumUser: Bool) {
         if isPremiumUser {
-            requesetAccess { success in
-                if success {
+            requesetAccess { [weak self] success in
+                guard success, let self = self else {
+                    return
+                }
+                
+                if self.interactor.getStoredContactsCount() == 0 {
+                    self.showEmptyContactsPopUp()
+                } else {
                     self.proccessOperation(.analyze)
                 }
             }
@@ -255,13 +260,11 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
     }
     
     private func showEmptyContactsPopUp() {
-        let controller = PopUpController.with(title: nil, message: TextConstants.absentContactsForBuckup, image: .none, buttonTitle: TextConstants.ok)
-        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        SnackbarManager.shared.show(type: .critical, message: TextConstants.absentContactsForBackup, action: .ok)
     }
     
     private func showEmtyContactsInLifebox() {
-        let controller = PopUpController.with(title: nil, message: TextConstants.absentContactsInLifebox, image: .none, buttonTitle: TextConstants.ok)
-        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        SnackbarManager.shared.show(type: .critical, message: TextConstants.absentContactsInLifebox, action: .ok)
     }
 }
 

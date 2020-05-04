@@ -24,6 +24,7 @@ final class AnalyticsService: NSObject {
     
     func start() {
         setupAdjust()
+        addAdjustSessionParameters()
         configureFireBase()
     }
     
@@ -47,6 +48,14 @@ final class AnalyticsService: NSObject {
         let adjustConfig = ADJConfig(appToken: "lonks83r2gow", environment: environment)
         #endif
         Adjust.appDidLaunch(adjustConfig)
+    }
+    
+    private func addAdjustSessionParameters() {
+        #if LIFEBOX
+        Adjust.addSessionPartnerParameter("service", value: "Lifebox")
+        #else
+        Adjust.addSessionPartnerParameter("service", value: "LifeDrive")
+        #endif
     }
     
     private func configureFireBase() {

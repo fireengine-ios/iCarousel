@@ -29,7 +29,9 @@ final class AutoSyncInteractor: AutoSyncInteractorInput {
                     }
                 }
             } else {
-                self?.output.checkPhotoPermissionsFailed()
+                DispatchQueue.main.async {
+                    self?.output.checkPhotoPermissionsFailed()
+                }
             }
         }
     }

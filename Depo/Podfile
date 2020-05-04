@@ -40,6 +40,7 @@ def core_pods
 
   pod 'ReachabilitySwift'
   pod 'MBProgressHUD', '~> 1.1.0'
+  pod 'TTGSnackbar'
 
   #logger
   pod 'XCGLogger', '~> 6.0'
@@ -187,17 +188,24 @@ end
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         if ['XCGLogger', 'SwiftyJSON'].include? "#{target}"
-            print "Setting #{target}'s SWIFT_VERSION to 4.0\n"
+          print "Setting #{target}'s SWIFT_VERSION to 4.0\n"
+          target.build_configurations.each do |config|
+              config.build_settings['SWIFT_VERSION'] = '4.0'
+          end
+          else
+          if ['TTGSnackbar'].include? "#{target}"
+            print "Setting #{target}'s SWIFT_VERSION to 5.0\n"
             target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '4.0'
+                config.build_settings['SWIFT_VERSION'] = '5.0'
             end
             else
-            target.build_configurations.each do |config|
-                config.build_settings.delete('SWIFT_VERSION')
-            end
+              target.build_configurations.each do |config|
+                  config.build_settings.delete('SWIFT_VERSION')
+              end
+          end
         end
     end
-
+    
     print "Setting the default SWIFT_VERSION to 4.0\n"
     installer.pods_project.build_configurations.each do |config|
         config.build_settings['SWIFT_VERSION'] = '4.0'

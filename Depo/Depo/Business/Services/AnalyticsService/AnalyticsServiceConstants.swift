@@ -156,6 +156,7 @@ enum AnalyticsAppScreens {
     case signUpOTP
     case doubleOTP
     case autosyncSettingsFirst
+    case liveCollectRemember
     ///Main Screens
     case homePage
     case photos
@@ -277,6 +278,8 @@ enum AnalyticsAppScreens {
             return "Login"
         case .signUpScreen:
             return "Signup"
+        case .liveCollectRemember:
+            return "Live Collect Remember"
         case .forgotPassword:
             return "Forget Password"
         case .termsAndServices:
@@ -1295,9 +1298,9 @@ enum GAEventLabel {
                 return "smallest-first"
             case .sizeZA:
                 return "largest-first"
-            case .timeUp, .metaDataTimeUp, .timeUpWithoutSection:
+            case .timeUp, .metaDataTimeUp, .timeUpWithoutSection, .lastModifiedTimeUp:
                 return "newest-first"
-            case .timeDown, .metaDataTimeDown, .timeDownWithoutSection:
+            case .timeDown, .metaDataTimeDown, .timeDownWithoutSection, .lastModifiedTimeDown:
                 return "oldest-first"
             }
         case .search(let searchText): ///searched word

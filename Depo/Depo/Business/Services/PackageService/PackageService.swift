@@ -53,7 +53,7 @@ final class PackageService {
         let fullPrice: String
         if let iapProductId = getAppleIds(for: [offer]).first, let product = iapManager.product(for: iapProductId), !product.isFree {
             
-            let price = product.localizedPrice
+            let price = product.localizedPrice.replacingOccurrences(of: " ", with: "\n")
             if #available(iOS 11.2, *) {
                 guard let subscriptionPeriod = product.subscriptionPeriod else {
                     fullPrice = String(format: TextConstants.packageApplePrice, price, TextConstants.packagePeriodMonth)
@@ -81,7 +81,7 @@ final class PackageService {
         } else {
             if let price = getOfferPrice(for: offer) {
                 let currency = getOfferCurrency(for: offer) ?? getOfferCurrency(for: accountType)
-                let priceString = String(price) + " " + currency
+                let priceString = String(price) + "\n" + currency
                 if let period = getOfferPeriod(for: offer) {
                     fullPrice = String(format: TextConstants.packageApplePrice, priceString, period)
                 } else {
@@ -298,10 +298,12 @@ final class PackageService {
         let addonType = SubscriptionPlan.AddonType.make(model: offer)
         if addonType == .featureOnly {
             name = TextConstants.featurePackageName
+        } else if addonType == .middleOnly {
+            name = TextConstants.middleFeaturePackageName
         } else {
             name = getOfferQuota(for: offer)?.bytesString ?? (getOfferDisplayName(for: offer) ?? "")
         }
-        let prefix = (getOfferType(for: offer) == .default) ? "+" : ""
+        let prefix = ((getOfferType(for: offer) == .default) && (addonType != .featureOnly)) ? "+" : ""
         return prefix + name
     }
     
@@ -409,22 +411,22 @@ final class PackageService {
         case .quota(let type):
             switch type {
             case .apple:
-                store = "Apple Store"
+                store = TextConstants.offerStoreAppleStore
             case .google:
-                store = "Google Play Stor"
+                store = TextConstants.offerStoreGoogleStore
             case .promo:
-                store = "Promo"
+                store = TextConstants.offerStorePromo
             default:
                 store = ""
             }
         case .feature(let type):
             switch type {
             case .appleFeature:
-                store = "Apple Store"
+                store = TextConstants.offerStoreAppleStore
             case .googleFeature:
-                store = "Google Play Stor"
+                store = TextConstants.offerStoreGoogleStore
             case .promoFeature:
-                store = "Promo"
+                store = TextConstants.offerStorePromo
             default:
                 store = ""
             }

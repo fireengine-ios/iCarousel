@@ -93,9 +93,6 @@ public class MediaItem: NSManagedObject {
         }
         
         updateRelatedLocalAlbums(context: context)
-        if let albums = wrapData.albums {
-            updateRelatedRemoteAlbums(uuids: albums, context: context)
-        }
         updateAvalability()
         
         //empty monthValue for missing dates section
@@ -183,9 +180,6 @@ public class MediaItem: NSManagedObject {
         isTranscoded = item.status.isTranscoded
         status = item.status.valueForCoreDataMapping()
         updateMissingDateRelations()
-        if let albums = item.albums {
-            updateRelatedRemoteAlbums(uuids: albums, context: context)
-        }
     }
     
     func updateMissingDateRelations() {
@@ -300,21 +294,7 @@ extension MediaItem {
         if let relatedAlbums = try? context.fetch(request) {
             relatedAlbums.forEach {
                 $0.addToItems(self)
-            }
-        }
-    }
-    
-    private func updateRelatedRemoteAlbums(uuids: [String], context: NSManagedObjectContext) {
-        guard !isLocalItemValue else {
-            return
-        }
-        
-        let request: NSFetchRequest = MediaItemsAlbum.fetchRequest()
-        request.predicate = NSPredicate(format: "\(MediaItemsAlbum.PropertyNameKey.uuid) IN %@", uuids)
-    
-        if let relatedAlbums = try? context.fetch(request) {
-            relatedAlbums.forEach {
-                $0.addToItems(self)
+                $0.updateHasItems()
             }
         }
     }

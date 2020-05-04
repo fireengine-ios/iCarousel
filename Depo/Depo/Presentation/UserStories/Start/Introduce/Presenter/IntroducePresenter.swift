@@ -13,6 +13,7 @@ class IntroducePresenter: IntroduceModuleInput, IntroduceViewOutput, IntroduceIn
     var router: IntroduceRouterInput!
 
     func viewIsReady() {
+        interactor.trackScreen()
         interactor.PrepareModels()
         PushNotificationService.shared.openActionScreen()
     }

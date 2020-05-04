@@ -212,6 +212,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     func onLastRemoved() {
         view.onLastRemoved()
+        goBack()
     }
     
     func selectModeSelected() {

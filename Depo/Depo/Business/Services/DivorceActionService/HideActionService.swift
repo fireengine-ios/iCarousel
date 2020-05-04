@@ -97,7 +97,19 @@ extension HideActionService {
         analytics.logScreen(screen: .fileOperationConfirmPopup(.hide))
         analytics.trackDimentionsEveryClickGA(screen: .fileOperationConfirmPopup(.hide))
         
-        return PopUpController.with(title: TextConstants.hideItemsWarningTitle,
+        var title: String {
+            switch self.items {
+            case .albums(_):
+                return TextConstants.hideSingleAlbumWarnigTitle
+            case .photos(_):
+                return TextConstants.hideItemsWarningTitle
+            default:
+                assertionFailure()
+                return TextConstants.hideItemsWarningTitle
+            }
+        }
+        
+        return PopUpController.with(title: title,
                                     message: makeConfirmMessage(),
                                     image: .hide,
                                     firstButtonTitle: TextConstants.cancel,
@@ -163,7 +175,6 @@ extension HideActionService {
     
     private func onSuccess() {
         success?()
-        showSuccessPopUp()
     }
 }
 

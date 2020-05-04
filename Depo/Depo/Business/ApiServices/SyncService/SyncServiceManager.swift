@@ -25,6 +25,8 @@ class SyncServiceManager {
         return queue
     }()
     
+    private var backgroundSyncHandler: BoolHandler?
+    
     private let photoSyncService: ItemSyncService = PhotoSyncService()
     private let videoSyncService: ItemSyncService = VideoSyncService()
     private var settings = AutoSyncDataStorage().settings
@@ -130,10 +132,16 @@ class SyncServiceManager {
     
     // MARK: - Private
     
+    func backgroundTaskSync(handler: @escaping BoolHandler) {
+        self.backgroundSyncHandler = handler
+        debugLog("AUTOSYNC: backgroundTaskSync handlesr setuped")
+        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+    }
+    
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
-        debugPrint("AUTOSYNC: checkReachabilityAndSettings")
-        
         guard coreDataStack.isReady else {
+            printLog("AUTOSYNC: coreDataStack isn't ready")
+            backgroundSyncHandler?(false)
             return
         }
         
@@ -141,10 +149,12 @@ class SyncServiceManager {
             guard let `self` = self else {
                 return
             }
-            
+            debugLog("AUTOSYNC: reachability start")
             self.timeIntervalBetweenSyncsInBackground = NumericConstants.timeIntervalBetweenAutoSyncInBackground
             
             guard self.settings.isAutoSyncEnabled else {
+                debugLog("AUTOSYNC: autosync disabled")
+                self.backgroundSyncHandler?(false)
                 self.stopSync()
                 CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
                 return
@@ -171,11 +181,12 @@ class SyncServiceManager {
                 
                 self.stop(photo: shoudStopPhotoSync, video: shouldStopVideoSync)
                 self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
+                debugLog("AUTOSYNC: is reachable and AS going to start")
                 self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
             } else {
                 let photoServiceWaitingForWiFi = photoOption != .never
                 let videoServiceWaitingForWiFi = videoOption != .never
-
+                debugLog("AUTOSYNC: waiting for wifi")
                 self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
             }
         }
@@ -223,6 +234,11 @@ class SyncServiceManager {
         }
     }
     
+    private func restart() {
+        stop(photo: true, video: true)
+        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+    }
+    
     private var isSubscribeForNotifications = false
 }
 
@@ -251,6 +267,11 @@ extension SyncServiceManager {
         notificationCenter.addObserver(self,
                                        selector: #selector(onLocalFilesHaveBeenLoaded),
                                        name: .allLocalMediaItemsHaveBeenLoaded,
+                                       object: nil)
+        
+        notificationCenter.addObserver(self,
+                                       selector: #selector(onLocalAlbumStatusDidChange),
+                                       name: .localAlbumStatusDidChange,
                                        object: nil)
     }
     
@@ -293,7 +314,12 @@ extension SyncServiceManager {
         self.checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
     }
     
+    @objc private func onLocalAlbumStatusDidChange() {
+        restart()
+    }
+    
     @objc private func onAutoSyncStatusDidChange() {
+        
         if hasExecutingSync, self.reachabilityService.isReachable {
             WidgetService.shared.notifyWidgetAbout(status: .executing)
 
@@ -315,6 +341,10 @@ extension SyncServiceManager {
         CardsManager.default.stopOperationWith(type: .prepareToAutoSync)
         
         FreeAppSpace.session.checkFreeAppSpaceAfterAutoSync()
+        
+        if isSyncFinished {
+            backgroundSyncHandler?(true)
+        }
         
         if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, CacheManager.shared.isCacheActualized {
             CardsManager.default.startOperationWith(type: .waitingForWiFi)

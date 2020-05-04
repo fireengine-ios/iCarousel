@@ -43,6 +43,7 @@ extension MediaItem {
         static let hasMissingDateRemotes = #keyPath(MediaItem.hasMissingDateRemotes)
         static let status = #keyPath(MediaItem.status)
         static let isAvailable = #keyPath(MediaItem.isAvailable)
+        static let localAlbums = #keyPath(MediaItem.localAlbums)
     }
 }
 

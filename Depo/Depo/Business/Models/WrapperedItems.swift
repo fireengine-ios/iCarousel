@@ -659,6 +659,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
     }
     
     var isFolder: Bool?
+    var isReadOnlyFolder: Bool {
+        return isFolder == true && metaData?.specialFolderMeta != nil
+    }
     
     var childCount: Int64?
     

@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="ipad9_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LeavePremiumView" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LeavePremiumView" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
                 <outlet property="leavePremiumButton" destination="EyK-S1-Rmt" id="R00-T2-XnV"/>
                 <outlet property="leavePremiumHeaderView" destination="YlA-UQ-7Pw" id="rvf-hg-Ahi"/>
-                <outlet property="priceLabel" destination="drr-lF-p0S" id="M4G-aA-rcj"/>
                 <outlet property="view" destination="iN0-l3-epB" id="U8C-hN-cof"/>
                 <outletCollection property="premiumListViews" destination="1Vj-r9-8Mc" collectionClass="NSMutableArray" id="kEy-e7-JHM"/>
                 <outletCollection property="premiumListViews" destination="uQC-iy-KTd" collectionClass="NSMutableArray" id="mnt-0x-NfN"/>
@@ -31,56 +28,50 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XSv-5u-yBk">
-                    <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                     <subviews>
                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="647" translatesAutoresizingMaskIntoConstraints="NO" id="q6c-LM-wKc">
-                            <rect key="frame" x="0.0" y="0.0" width="768" height="1483.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="768" height="1443"/>
                             <subviews>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="353" translatesAutoresizingMaskIntoConstraints="NO" id="YlA-UQ-7Pw" customClass="LeavePremiumHeaderView" customModule="lifebox" customModuleProvider="target">
+                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="353" translatesAutoresizingMaskIntoConstraints="NO" id="YlA-UQ-7Pw" customClass="LeavePremiumHeaderView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="768" height="353"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="375" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ZIN-J6-zfJ">
                                     <rect key="frame" x="0.0" y="377" width="614.5" height="986"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Vj-r9-8Mc" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Vj-r9-8Mc" customClass="PremiumListView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="614.5" height="128"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uQC-iy-KTd" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uQC-iy-KTd" customClass="PremiumListView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="143" width="614.5" height="128"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fyk-vs-IOr" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fyk-vs-IOr" customClass="PremiumListView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="286" width="614.5" height="128"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pst-sQ-N5Y" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pst-sQ-N5Y" customClass="PremiumListView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="429" width="614.5" height="128"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6d-lu-WjY" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s6d-lu-WjY" customClass="PremiumListView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="572" width="614.5" height="128"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LIL-zU-Bgu" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LIL-zU-Bgu" customClass="PremiumListView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="715" width="614.5" height="128"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2o5-Ne-jtb" customClass="PremiumListView" customModule="lifebox" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2o5-Ne-jtb" customClass="PremiumListView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="858" width="614.5" height="128"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                     </subviews>
                                 </stackView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drr-lF-p0S">
-                                    <rect key="frame" x="363" y="1383" width="42" height="20.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyK-S1-Rmt" customClass="InsetsButton" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="361" y="1423.5" width="46" height="30"/>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyK-S1-Rmt" customClass="InsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                    <rect key="frame" x="361" y="1383" width="46" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="Nmk-P3-g71"/>
                                     </constraints>
@@ -100,14 +91,12 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="EyK-S1-Rmt" firstAttribute="top" secondItem="drr-lF-p0S" secondAttribute="bottom" constant="20" id="59H-kq-vZS"/>
-                                <constraint firstItem="drr-lF-p0S" firstAttribute="centerX" secondItem="q6c-LM-wKc" secondAttribute="centerX" id="Bt7-d9-ECf"/>
+                                <constraint firstItem="EyK-S1-Rmt" firstAttribute="top" secondItem="ZIN-J6-zfJ" secondAttribute="bottom" constant="20" id="4cv-Sc-580"/>
                                 <constraint firstItem="ZIN-J6-zfJ" firstAttribute="width" secondItem="q6c-LM-wKc" secondAttribute="width" multiplier="0.8" id="EnL-gE-HWe"/>
                                 <constraint firstItem="EyK-S1-Rmt" firstAttribute="centerX" secondItem="q6c-LM-wKc" secondAttribute="centerX" id="H6K-mg-Tmf"/>
                                 <constraint firstItem="YlA-UQ-7Pw" firstAttribute="leading" secondItem="q6c-LM-wKc" secondAttribute="leading" id="Ins-fk-CVo"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="EyK-S1-Rmt" secondAttribute="bottom" constant="30" id="JlR-MZ-T0X"/>
                                 <constraint firstItem="ZIN-J6-zfJ" firstAttribute="top" secondItem="YlA-UQ-7Pw" secondAttribute="bottom" constant="24" id="ZLN-Fe-OiK"/>
-                                <constraint firstItem="drr-lF-p0S" firstAttribute="top" secondItem="ZIN-J6-zfJ" secondAttribute="bottom" constant="20" id="bCA-8n-q7v"/>
                                 <constraint firstItem="YlA-UQ-7Pw" firstAttribute="top" secondItem="q6c-LM-wKc" secondAttribute="top" id="ckl-hg-Nbu"/>
                                 <constraint firstItem="ZIN-J6-zfJ" firstAttribute="leading" secondItem="q6c-LM-wKc" secondAttribute="leading" id="hWk-JZ-IiR"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZIN-J6-zfJ" secondAttribute="trailing" id="i7O-Ng-zHp"/>

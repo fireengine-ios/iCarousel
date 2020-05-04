@@ -64,6 +64,7 @@ extension RegistrationPresenter: RegistrationViewOutput {
 // MARK: - RegistrationInteractorOutput
 extension RegistrationPresenter: RegistrationInteractorOutput {
     func userValid(_ userInfo: RegistrationUserInfoModel) {
+        startAsyncOperationDisableScreen()
         interactor.signUpUser(userInfo)
     }
     

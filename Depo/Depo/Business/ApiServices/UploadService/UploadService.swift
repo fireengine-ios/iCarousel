@@ -67,6 +67,7 @@ final class UploadService: BaseRequestService {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        print("Deinited UploadService")
     }
     
     
@@ -81,6 +82,7 @@ final class UploadService: BaseRequestService {
     }
     
     func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, isFromCamera: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedUploadOperation: @escaping ([UploadOperation]?) -> Void) {
+        debugLog("UploadService uploadFileList")
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 returnedUploadOperation(nil)
@@ -606,6 +608,21 @@ final class UploadService: BaseRequestService {
             
             self.showSyncCardProgress()
         }
+    }
+    
+    func cancelOperations(md5s: [String]) {
+        guard !md5s.isEmpty else {
+            return
+        }
+        
+        var operationsToRemove = uploadOperations.filter {
+            !$0.isCancelled && md5s.contains($0.inputItem.md5)
+        }
+        
+        cancelAndRemove(operations: operationsToRemove)
+        
+        print("AUTOSYNC: removed \(operationsToRemove.count) operations")
+        operationsToRemove.removeAll()
     }
     
     func cancelOperations(with assets: [PHAsset]?) {

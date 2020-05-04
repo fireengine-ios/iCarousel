@@ -7,7 +7,6 @@
 //
 
 import Foundation
-//FIXME: remove MBProgressHUD
 import MBProgressHUD
 
 
@@ -28,6 +27,10 @@ final class UploadOperation: Operation {
     
     typealias UploadParametersResponse = (UploadRequestParametrs) -> Void
     
+    private let mediaItemsService = MediaItemOperationsService.shared
+    private let mediaAlbumsService = MediaItemsAlbumOperationService.shared
+    private let remoteAlbumsService = PhotosAlbumService()
+    
     let inputItem: WrapData
     private(set) var outputItem: WrapData?
     var uploadType: UploadType?
@@ -46,7 +49,7 @@ final class UploadOperation: Operation {
     private let resumableInfoService: ResumableUploadInfoService = factory.resolve()
     private let interruptedId: String?
     private let isResumable: Bool
-    
+    private lazy var storageVars: StorageVars = factory.resolve()
     
     //MARK: - Init
     
@@ -113,7 +116,11 @@ final class UploadOperation: Operation {
     private func retry(block: @escaping VoidHandler) {
         let delay: DispatchTime = .now() + .seconds(NumericConstants.secondsBeetweenUploadAttempts)
         debugLog("retrying in \(NumericConstants.secondsBeetweenUploadAttempts) second(s)")
-        dispatchQueue.asyncAfter(deadline: delay, execute: {
+        dispatchQueue.asyncAfter(deadline: delay, execute: { [weak self] in
+            guard let self = self, self.isExecuting else {
+                return
+            }
+            
             self.attemptsCount += 1
             block()
         })
@@ -124,84 +131,98 @@ final class UploadOperation: Operation {
 
     private func attemptResumableUpload(success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
         guard
-            let asset = inputItem.asset,
-            let localUrl = LocalMediaStorage.default.getURL(asset: asset)
+            self.isExecuting,
+            let asset = self.inputItem.asset
         else {
             fail(ErrorResponse.string(TextConstants.commonServiceError))
             return
         }
         
-        let bufferCapacity = resumableInfoService.chunkSize
-        self.chunker = DataChunkProviderFactory.createWithSource(source: localUrl, bufferCapacity: bufferCapacity)
-        
-        requestObject = baseUrl(success: { [weak self] baseurlResponse in
-            guard let self = self,
-                let baseURL = baseurlResponse?.url else {
-                    fail(ErrorResponse.string(TextConstants.commonServiceError))
-                    return
-            }
-            
-            self.getUploadParameters(baseURL: baseURL, empty: true, success: { [weak self] parameters in
-                guard let self = self, let resumableParameters = parameters as? ResumableUpload else {
+        LocalMediaStorage.default.getUrlOfCoppiedData(asset: asset) { [weak self] result in
+            self?.dispatchQueue.async {
+                guard let self = self, self.isExecuting else {
                     fail(ErrorResponse.string(TextConstants.commonServiceError))
                     return
                 }
                 
-                self.clearingAction = { [weak self] in
-                    self?.removeTemporaryFile(at: localUrl)
-                }
-                
-                guard self.interruptedId != nil else {
-                    self.showToast(message: "Resumable upload")
-                    /// can't check resumable status because don't have any related interrupted id
-                    self.uploadContiniously(parameters: resumableParameters, success: success, fail: fail)
+                switch result {
+                case .success(let localUrl):
+                    let bufferCapacity = self.resumableInfoService.chunkSize
+                    self.chunker = DataChunkProviderFactory.createWithSource(source: localUrl, bufferCapacity: bufferCapacity)
                     
-                    let trimmedId = self.inputItem.getTrimmedLocalID()
-                    self.resumableInfoService.save(interruptedId: resumableParameters.tmpUUID, for: trimmedId)
-                    return
-                }
-                
-                self.checkResumeStatus(parameters: resumableParameters) { [weak self] status, error in
-                    guard let self = self else {
-                        fail(ErrorResponse.string(TextConstants.commonServiceError))
-                        return
-                    }
-                    
-                    guard let status = status else {
-                        let error = error ?? ErrorResponse.string(TextConstants.commonServiceError)
-                        fail(error)
-                        return
-                    }
-                    
-                    debugLog("resumable_upload: status is \(status)")
-                    
-                    switch status {
-                    case .completed:
-                        self.finishUploading(parameters: resumableParameters, success: success, fail: fail)
-                        
-                    case .didntStart:
-                        self.uploadContiniously(parameters: resumableParameters, success: success, fail: fail)
-                        
-                    case .uploaded(bytes: let bytesToSkip):
-                        debugLog("resumable_upload: bytes to skip \(bytesToSkip)")
-                        
-                        guard let nextChunk = self.chunker?.nextChunk(skipping: bytesToSkip) else {
+                    self.requestObject = self.baseUrl(success: { [weak self] baseurlResponse in
+                        guard let self = self, let baseURL = baseurlResponse?.url else {
                             fail(ErrorResponse.string(TextConstants.commonServiceError))
                             return
                         }
                         
-                        self.uploadContiniously(parameters: resumableParameters, chunk: nextChunk, success: success, fail: fail)
+                        self.getUploadParameters(baseURL: baseURL, empty: true, success: { [weak self] parameters in
+                            guard let self = self, let resumableParameters = parameters as? ResumableUpload else {
+                                fail(ErrorResponse.string(TextConstants.commonServiceError))
+                                return
+                            }
+                            
+                            self.clearingAction = { [weak self] in
+                                self?.removeTemporaryFile(at: localUrl)
+                            }
+                            
+                            guard self.interruptedId != nil else {
+                                self.showToast(message: "Resumable upload")
+                                /// can't check resumable status because don't have any related interrupted id
+                                self.uploadContiniously(parameters: resumableParameters, success: success, fail: fail)
+                                
+                                let trimmedId = self.inputItem.getTrimmedLocalID()
+                                self.resumableInfoService.save(interruptedId: resumableParameters.tmpUUID, for: trimmedId)
+                                return
+                            }
+                            
+                            self.checkResumeStatus(parameters: resumableParameters) { [weak self] status, error in
+                                guard let self = self else {
+                                    fail(ErrorResponse.string(TextConstants.commonServiceError))
+                                    return
+                                }
+                                
+                                guard let status = status else {
+                                    let error = error ?? ErrorResponse.string(TextConstants.commonServiceError)
+                                    fail(error)
+                                    return
+                                }
+                                
+                                debugLog("resumable_upload: status is \(status)")
+                                
+                                switch status {
+                                case .completed:
+                                    self.finishUploading(parameters: resumableParameters, success: success, fail: fail)
+                                    
+                                case .didntStart:
+                                    self.uploadContiniously(parameters: resumableParameters, success: success, fail: fail)
+                                    
+                                case .uploaded(bytes: let bytesToSkip):
+                                    debugLog("resumable_upload: bytes to skip \(bytesToSkip)")
+                                    
+                                    guard let nextChunk = self.chunker?.nextChunk(skipping: bytesToSkip) else {
+                                        fail(ErrorResponse.string(TextConstants.commonServiceError))
+                                        return
+                                    }
+                                    
+                                    self.uploadContiniously(parameters: resumableParameters, chunk: nextChunk, success: success, fail: fail)
+                                    
+                                case .discontinuityError, .invalidUploadRequest:
+                                    self.retry {
+                                        self.attemptResumableUpload(success: success, fail: fail)
+                                    }
+                                }
+                            }
+                            
+                            }, fail: fail)
                         
-                    case .discontinuityError, .invalidUploadRequest:
-                        self.retry {
-                            self.attemptResumableUpload(success: success, fail: fail)
-                        }
-                    }
+                        }, fail: fail)
+                    
+                case .failed(let error):
+                    fail(.error(error))
                 }
-                
-            }, fail: fail)
-            
-        }, fail: fail)
+            }
+        }
     }
     
     private func checkResumeStatus(parameters: ResumableUpload, handler: @escaping ResumableUploadHandler) {
@@ -419,28 +440,34 @@ final class UploadOperation: Operation {
         inputItem.syncStatus = .synced
         inputItem.setSyncStatusesAsSyncedForCurrentUser()
         
+        storageVars.lastUnsavedFileUUID = parameters.tmpUUID
+        
         uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
             self?.dispatchQueue.async { [weak self] in
                 guard let self = self else {
                     return
                 }
                 
-                if let response = baseurlResponse as? SearchItemResponse {
-                    self.outputItem = WrapData(remote: response)
-                    self.addPhotoToTheAlbum(with: parameters, response: response)
-                    self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
-                    self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
-                    self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
-                    
-                    //case for upload photo from camera
-                    if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
-                        self.outputItem?.metaData?.mediumUrl = preview
-                    }
-                    
-                    debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
-                    
-                    MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem)
+                guard let response = baseurlResponse as? SearchItemResponse else {
+                    success()
+                    return
                 }
+                
+                self.outputItem = WrapData(remote: response)
+                self.addPhotoToTheAlbum(with: parameters, response: response)
+                self.outputItem?.tmpDownloadUrl = response.tempDownloadURL
+                self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
+                self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
+                
+                //case for upload photo from camera
+                if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
+                    self.outputItem?.metaData?.mediumUrl = preview
+                }
+                self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
+                    self?.storageVars.lastUnsavedFileUUID = nil
+                }
+                
+                debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
                 
                 success()
             }
@@ -458,11 +485,11 @@ final class UploadOperation: Operation {
     }
     
     private func addPhotoToTheAlbum(with parameters: UploadRequestParametrs, response: SearchItemResponse) {
-        if self.isPhotoAlbum {
+        if isPhotoAlbum {
             let item = Item(remote: response)
             let parameter = AddPhotosToAlbum(albumUUID: parameters.rootFolder, photos: [item])
             
-            PhotosAlbumService().addPhotosToAlbum(parameters: parameter, success: {
+            self.remoteAlbumsService.addPhotosToAlbum(parameters: parameter, success: {
                 ItemOperationManager.default.fileAddedToAlbum(item: item)
             }, fail: { error in
                 UIApplication.showErrorAlert(message: TextConstants.failWhileAddingToAlbum)

@@ -53,10 +53,12 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
     func checkPermission() {
         self.contactsService.askPermissionForContactsFramework(redirectToSettings: false, completion: { [weak self] isAccessGranted in
             AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(isAccessGranted)
-            if isAccessGranted {
-                self?.output.permissionSuccess()
-            } else {
-                self?.output.permissionFail()
+            DispatchQueue.main.async {
+                if isAccessGranted {
+                    self?.output.permissionSuccess()
+                } else {
+                    self?.output.permissionFail()
+                }
             }
         })
     }
