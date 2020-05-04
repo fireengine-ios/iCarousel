@@ -34,7 +34,9 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         
         fetchResult = changes.fetchResultAfterChanges
 
-        if changes.hasIncrementalChanges {
+        if changes.hasIncrementalChanges, changes.insertedIndexes != nil || changes.removedIndexes != nil || changes.changedIndexes != nil {
+            
+            let previosFetch = changes.fetchResultBeforeChanges
             var phChanges = PhotoLibraryItemsChanges()
             
             func notify() {
@@ -42,45 +44,52 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
             }
             
             func checkChangedObjects() {
-                guard !changes.changedObjects.isEmpty else {
+                guard let changedIndexes = changes.changedIndexes else {
                     notify()
                     return
                 }
                 
-                phChanges[.changed] = changes.changedObjects
-                printLog("photoLibraryDidChange - changed \(changes.changedObjects.count) items")
+                let changedAssets = previosFetch.objects(at: changedIndexes)
                 
-                MediaItemOperationsService.shared.update(localMediaItems: changes.changedObjects) {
+                phChanges[.changed] = changedAssets
+                printLog("photoLibraryDidChange - changed \(changedAssets.count) items")
+                
+                MediaItemOperationsService.shared.update(localMediaItems: changedAssets) {
                     notify()
                 }
             }
             
             func checkDeletedObjects() {
-                guard !changes.removedObjects.isEmpty else {
+                guard let removedIndexes = changes.removedIndexes else {
                     checkChangedObjects()
                     return
                 }
                 
-                phChanges[.removed] = changes.removedObjects
-                printLog("photoLibraryDidChange - removed \(changes.removedObjects.count) items")
-
-                UploadService.default.cancelOperations(with: changes.removedObjects)
+                let removedAssets = previosFetch.objects(at: removedIndexes)
                 
-                MediaItemOperationsService.shared.remove(localMediaItems: changes.removedObjects) {
+                phChanges[.removed] = removedAssets
+                printLog("photoLibraryDidChange - removed \(removedAssets.count) items")
+
+                UploadService.default.cancelOperations(with: removedAssets)
+                
+                MediaItemOperationsService.shared.remove(localMediaItems: removedAssets) {
                     checkChangedObjects()
                 }
             }
             
             func checkInsertedObjects() {
-                guard !changes.insertedObjects.isEmpty else {
+                guard let insertedIndexes = changes.insertedIndexes else {
                     checkDeletedObjects()
                     return
                 }
                 
-                phChanges[.added] = changes.insertedObjects
-                printLog("photoLibraryDidChange - added \(changes.insertedObjects.count) items")
+                let insertedAssets = fetchResult.objects(at: insertedIndexes)
                 
-                MediaItemOperationsService.shared.append(localMediaItems: changes.insertedObjects, needCreateRelationships: true) {
+                phChanges[.added] = insertedAssets
+                
+                printLog("photoLibraryDidChange - added \(insertedAssets.count) items")
+                
+                MediaItemOperationsService.shared.append(localMediaItems: insertedAssets, needCreateRelationships: true) {
                     checkDeletedObjects()
                 }
             }
