@@ -284,6 +284,6 @@ final class HomePageInteractor: HomePageInteractorInput {
 
 extension HomePageInteractor: HomeCardsServiceImpDelegte {
     func needUpdateHomeScreen() {
-        needRefresh()
+        getAllCardsForHomePage()
     }
 }

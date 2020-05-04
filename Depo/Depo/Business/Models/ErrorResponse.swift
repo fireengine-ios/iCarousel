@@ -183,6 +183,20 @@ extension Error {
             return errorResponse.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
         } else if let customError = self as? CustomErrors {
             return customError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let singupError = self as? SignupResponseError {
+            return singupError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let loginError = self as? LoginResponseError {
+            return loginError.dimensionValue
+        } else if let serverStatusError = self as? ServerStatusError {
+            return serverStatusError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let passwordError = self as? UpdatePasswordErrors {
+            return passwordError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let serverError = self as? ServerError {
+            return serverError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let serverValueError = self as? ServerValueError {
+            return serverValueError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let serverMessageError = self as? ServerMessageError {
+            return serverMessageError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
         } else if description.contains("\(_code)") {
             return TextConstants.temporaryErrorOccurredTryAgainLater
         } else {
