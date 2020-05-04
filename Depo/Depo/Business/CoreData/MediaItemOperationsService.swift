@@ -675,7 +675,7 @@ final class MediaItemOperationsService {
         inProcessLocalFiles = true
         
         let localMediaStorage = LocalMediaStorage.default
-        let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
+        let assetsList = localMediaStorage.updateAllImagesAndVideoAssets()
         
         updateICloudStatus(for: assetsList)
         
@@ -811,7 +811,7 @@ final class MediaItemOperationsService {
                 
                 self.coreDataStack.saveDataForContext(context: context, savedCallBack: { [weak self] in
                     ///Appearantly after recovery local ID may change, so temporary soloution is to check all files all over. and in the future chenge DataBase behavior heavily
-                    let assetsList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
+                    let assetsList = LocalMediaStorage.default.updateAllImagesAndVideoAssets()
                     
                     self?.checkLocalFilesExistence(actualPhotoLibItemsIDs: assetsList.map{$0.localIdentifier}, complition: completion)
                 })
@@ -1011,7 +1011,7 @@ final class MediaItemOperationsService {
     }
     
     private func getUnsyncedMediaItems(video: Bool, image: Bool, completion: @escaping MediaItemsCallBack) {
-        let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
+        let assetList = LocalMediaStorage.default.updateAllImagesAndVideoAssets()
         let currentlyInLibriaryLocalIDs = assetList.map { $0.localIdentifier }
         
         var filesTypesArray = [Int16]()

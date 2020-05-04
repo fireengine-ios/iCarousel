@@ -57,7 +57,7 @@ protocol LocalMediaStorageProtocol {
     
     func getBigImageFromFile(asset: PHAsset, image: @escaping FileDataSorceImg)
     
-    func getAllImagesAndVideoAssets() -> [PHAsset]
+    func updateAllImagesAndVideoAssets() -> [PHAsset]
     
     func removeAssets(deleteAsset: [PHAsset], success: FileOperation?, fail: FailResponse?)
     
@@ -218,9 +218,23 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     var fetchAlbumResult: PHFetchResult<PHAssetCollection>!
     var fetchSmartAlbumResult: PHFetchResult<PHAssetCollection>!
     
-    func getAllImagesAndVideoAssets() -> [PHAsset] {
-        assetsCache.dropAll()
-        debugLog("LocalMediaStorage getAllImagesAndVideoAssets")
+    func updateAllImagesAndVideoAssets() -> [PHAsset] {
+        debugLog("LocalMediaStorage updateAllImagesAndVideoAssets")
+
+        let mediaContent = fetchAllImagesAndVideoAssets()
+        
+        guard !mediaContent.isEmpty else {
+            assetsCache.dropAll()
+            return []
+        }
+        
+        assetsCache.replaceAll(with: mediaContent)
+        
+        return mediaContent
+    }
+    
+    private func fetchAllImagesAndVideoAssets() -> [PHAsset] {
+        debugLog("LocalMediaStorage fetchAllImagesAndVideoAssets")
 
         guard photoLibraryIsAvailible() else {
             return []
@@ -236,7 +250,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             mediaContent.append(avalibleAset)
         })
         
-        assetsCache.append(list: mediaContent)
         return mediaContent
     }
     
