@@ -316,7 +316,15 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         }
                     }
                 case .hide:
-                    action = UIAlertAction(title: TextConstants.actionSheetHideSingleAlbum, style: .default, handler: { _ in
+                    
+                    var title: String
+                    if currentItems.first?.fileType == .faceImageAlbum(.things) {
+                        title = TextConstants.actionSheetHideSingleAlbum
+                    } else {
+                        title = TextConstants.actionSheetHide
+                    }
+                    
+                    action = UIAlertAction(title: title, style: .default, handler: { _ in
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hide))
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if currentItems.count <= allowedNumberLimit {
