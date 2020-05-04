@@ -45,12 +45,7 @@ class ViewController: UIViewController {
     
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
         viewControllerToPresent.checkModalPresentationStyle()
-        super.present(viewControllerToPresent, animated: flag) {
-            if !(viewControllerToPresent is UIAlertController) {
-                SnackbarManager.shared.bringToFrontCurrentSnackbar()
-            }
-            completion?()
-        }
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
     
     override func viewDidLoad() {

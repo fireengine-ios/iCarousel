@@ -99,19 +99,7 @@ final class SnackbarManager {
     init() {
         setupObserving()
     }
-    
-    private func setupObserving() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(hideTabBar),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar),
-                                               object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showTabBar),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar),
-                                               object: nil)
-    }
-    
+
     func show(elementType: ElementTypes, relatedItems: [BaseDataSourceItem] = [], itemsType: DivorseItems? = nil, handler: VoidHandler? = nil) {
         guard let type = SnackbarType(operationType: elementType),
             let message = elementType.snackbarSuccessMessage(relatedItems: relatedItems, divorseItems: itemsType) else {
@@ -152,9 +140,27 @@ final class SnackbarManager {
         snackbar.shouldActivateLeftAndRightMarginOnCustomContentView = true
         snackbar.leftMargin = 16
         snackbar.rightMargin = 16
+        snackbar.layer.zPosition = 1000 //need for display over the presented controllers
         return snackbar
     }
+}
+
+//MARK: - Tabbar observing
+
+private extension SnackbarManager {
     
+    private func setupObserving() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(hideTabBar),
+                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationHideTabBar),
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showTabBar),
+                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationShowTabBar),
+                                               object: nil)
+    }
+
     @objc private func showTabBar() {
         updateBottomMargin(isHiddenTabbar: false, animated: true)
     }
@@ -182,13 +188,5 @@ final class SnackbarManager {
                 snackbar.bottomMargin = bottomMargin
             }
         }
-    }
-    
-    func bringToFrontCurrentSnackbar() {
-        guard let snackbar = currentSnackbar else {
-            return
-        }
-        
-        snackbar.superview?.bringSubview(toFront: snackbar)
     }
 }

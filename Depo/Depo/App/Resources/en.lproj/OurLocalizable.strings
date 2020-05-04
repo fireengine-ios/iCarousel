@@ -796,6 +796,7 @@
 "analyze_confirm_delete_text" = "Selected items will be deleted from analysis history.";
 "analyze_confirm_delete_yes" = "Yes";
 "analyze_confirm_delete_no" = "No";
+"analyze_history_delete_success" = "%d item(s) successfully deleted";
 
 /*InstaPick three dots*/
 "new_insta_pick" = "New PhotoPick";
@@ -1019,7 +1020,7 @@
 "create_story_press_and_hold_description" = "%@ on the image to rearrange the order of your story.";
 "create_story_name_title" = "Story Name";
 "create_story_pop_up_title" = "You created a story! \n %@";
-"create_story_pop_up_message" = "We're preparing your story. Once it is finished, you can find it under \n%@";
+"create_story_pop_up_message" = "You created a story! (We are preparing your story. Once it finished, you can access it from Videos Album)";
 "create_story_path_to_story" = "Photos & Videos > My Stories";
 "You can not share empty album" = "You can not share empty album";
 "etk_permission_description" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
@@ -1539,4 +1540,7 @@
 "added_to_favorites_from_lifebox" = "Successfully added";
 "edit_security_question_success" = "You successfully edit security question";
 "set_security_question_success" = "You successfully set security question";
-"instapick_hastags_copied" = "Copied";
+"import_from_instagram_started" = "Import from Instagram started";
+"import_from_facebook_started" = "Import from Facebook started";
+"instapick_hashtags_copied" = "Copied";
+"create_story_selection_limit" = "Please Choose %d files at most";

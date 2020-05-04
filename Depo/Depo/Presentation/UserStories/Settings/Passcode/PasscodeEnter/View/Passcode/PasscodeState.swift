@@ -98,7 +98,11 @@ class ConfirmNewPasscodeState: PasscodeState {
     func finish(with passcode: Passcode, manager: PasscodeManager) {
         if self.passcode == passcode {
             manager.storage.save(passcode: passcode)
+            
+            #if MAIN_APP
             SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.passcodeChanged)
+            #endif
+            
             manager.delegate?.passcodeLockDidSucceed(manager)
             
         } else {
@@ -117,9 +121,9 @@ class ConfirmCreateingNewPasscodeState: ConfirmNewPasscodeState {
     override func finish(with passcode: Passcode, manager: PasscodeManager) {
         if self.passcode == passcode {
             manager.storage.save(passcode: passcode)
-            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.passcodeSet)
-            
+
             #if MAIN_APP
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.passcodeSet)
             analyticsService.track(event: .setPasscode)
             #endif
             

@@ -199,6 +199,7 @@ extension InstagramAccountConnectionCell: ImportFromInstagramViewInput {
     
     func syncStartSuccess() {
         isImportOn = true
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.snackbarMessageImportFromInstagramStarted)
     }
     
     func syncStartFailure(errorMessage: String) {
