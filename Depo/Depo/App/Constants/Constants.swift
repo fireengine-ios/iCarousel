@@ -1800,8 +1800,8 @@ struct TextConstants {
     static let featureStorageOnlyAdditional2 = NSLocalizedString("feature_storage_only_additional_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     static let snackbarOk = NSLocalizedString("snackbar_ok", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let snackbarRetry = NSLocalizedString("snackbar_retry", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let snackbarUndo = NSLocalizedString("snackbar_undo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarTrashBin = NSLocalizedString("snackbar_trash_bin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarHiddenBin = NSLocalizedString("snackbar_hidden_bin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let snackbarMessageAddedToFavorites = NSLocalizedString("added_to_favorites_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageRemovedFromFavorites = NSLocalizedString("removed_from_favorites", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
