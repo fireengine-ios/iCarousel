@@ -977,6 +977,7 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
     }
     
     private func save(image: UIImage) {
+        showSnackbar(elementType: .edit, relatedItems: [])
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .success))
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }

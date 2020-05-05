@@ -1526,8 +1526,8 @@
 "offer_store_google_store" = "Google Play Store";
 
 "snackbar_ok" = "OK";
-"snackbar_retry" = "Retry";
-"snackbar_undo" = "Undo";
+"snackbar_trash_bin" = "snackbar_trash_bin";
+"snackbar_hidden_bin" = "snackbar_hidden_bin";
 "remove_albums_success_message" = "Album(s) removed successfully";
 
 "added_to_favorites_message" = "Added to favourites";
