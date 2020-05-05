@@ -742,11 +742,11 @@ final class UploadService: BaseRequestService {
                     let errorCode = json["error_code"].stringValue
                     debugLog("resumable_upload: error_code is \(errorCode)")
                     switch errorCode {
-                    case "RU_9":
+                    case "RU_9", "RU_2":
                         /// Provided first-byte-pos is not the continuation of the last-byte-pos of pre-uploaded part!
                         handler(.discontinuityError, nil)
                         
-                    case "RU_10":
+                    case "RU_10", "RU_1":
                         /// Invalid upload request! Initial upload must start from the beginning
                         handler(.invalidUploadRequest, nil)
                         

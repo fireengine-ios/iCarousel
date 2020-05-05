@@ -9,18 +9,30 @@
 import Foundation
 
 
+protocol LogoutDBCleanerDelegate {
+    func didClean()
+}
+
 protocol LogoutDBCleaner {
+    static var shared: LogoutDBCleaner { get }
+    
     var mustClean: Bool { get }
+    var delegates: MulticastDelegate<LogoutDBCleanerDelegate> { get }
     
     func clean(completion: @escaping BoolHandler)
 }
 
 final class LogoutDBCleanerImpl: LogoutDBCleaner {
+    static let shared: LogoutDBCleaner = LogoutDBCleanerImpl()
+    
+    let delegates = MulticastDelegate<LogoutDBCleanerDelegate>()
     
     private (set) var mustClean = false
     
     private let coreDataStack: CoreDataStack = factory.resolve()
     
+    
+    private init() { }
     
     func clean(completion: @escaping BoolHandler) {
         mustClean = true
