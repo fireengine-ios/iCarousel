@@ -91,6 +91,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         startCoreDataSafeServices(with: application, options: launchOptions)
         
+        APILogger.shared.startLogging()
+        
         ///call debugLog only if the Crashlytics is already initialized
         debugLog("AppDelegate didFinishLaunchingWithOptions")
         
