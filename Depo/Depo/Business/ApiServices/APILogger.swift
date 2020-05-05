@@ -15,8 +15,11 @@ final class APILogger {
     
     private let queue = DispatchQueue(label: "\(APILogger.self) Queue")
     
+    private lazy var userDefaults: StorageVars = factory.resolve()
+    
     private var startDates = [URLSessionTask: Date]()
     
+    // set true for logging to console
     private let isDebugLog = false
     
     deinit {
@@ -50,13 +53,18 @@ final class APILogger {
                 let task = userInfo[Notification.Key.Task] as? URLSessionTask,
                 let request = task.originalRequest,
                 let httpMethod = request.httpMethod,
-                let requestURL = request.url
+                let requestURL = request.url,
+                requestURL != RouteRequests.baseUrl // ReachabilityService.checkAPI
                 else {
                     return
             }
             
             self.startDates[task] = Date()
             self.log(string: "--> \(httpMethod) \(requestURL.absoluteString)")
+            
+            if requestURL.absoluteString.contains("upload-type=resumable") {
+                self.logResumableUpload(headers: request.allHTTPHeaderFields)
+            }
         }
     }
     
@@ -66,7 +74,8 @@ final class APILogger {
                 let userInfo = notification.userInfo,
                 let task = userInfo[Notification.Key.Task] as? URLSessionTask,
                 let request = task.originalRequest,
-                let requestURL = request.url
+                let requestURL = request.url,
+                requestURL != RouteRequests.baseUrl // ReachabilityService.checkAPI
                 else {
                     return
             }
@@ -110,6 +119,8 @@ final class APILogger {
         }
     }
     
+    //MARK: - Logging
+    
     private func log(statusCode: Int?, url: URL, elapsedTime: TimeInterval, dataLength: Int?, transId: String?) {
         var string = "<-- "
         if let statusCode = statusCode {
@@ -132,8 +143,31 @@ final class APILogger {
     }
     
     private func log(body: String) {
+        guard !body.isEmpty else {
+            return
+        }
         log(string: "BODY:")
         log(string: body)
+    }
+    
+    private func logResumableUpload(headers: HTTPHeaders?) {
+        guard let headers = headers,
+            let fileName = headers[HeaderConstant.XObjectMetaFileName],
+            let length = headers[HeaderConstant.ContentLength],
+            let range = headers[HeaderConstant.ContentRange]
+            else {
+                assertionFailure()
+            return
+        }
+        
+        log(string: "[Resumable upload]")
+        log(string: "Filename: \(fileName)")
+        log(string: "\(HeaderConstant.ContentRange): \(range)")
+        log(string: "\(HeaderConstant.ContentLength): \(length)")
+        
+        if let chunkSize = userDefaults.resumableUploadChunkSize {
+            log(string: "Current Chunk Size: \(chunkSize)")
+        }
     }
     
     private func log(string: String) {
