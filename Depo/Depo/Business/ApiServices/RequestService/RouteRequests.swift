@@ -352,7 +352,7 @@ struct RouteRequests {
     
     static var globalPermissionsDetails: String {
         switch currentServerEnvironment {
-        case .production: return isBillo ? "https://mybilloapp.com/global_ops.html ?lang=\(Device.locale)" :
+        case .production: return isBillo ? "https://mybilloapp.com/global_ops.html?lang=\(Device.locale)" :
                                            "https://mylifebox.com/portal/global_ops.html?lang=\(Device.locale)"
                                             
         case .preProduction: return isBillo ? "https://prp.mylifebox.com/global_ops.html?lang=\(Device.locale)" :
