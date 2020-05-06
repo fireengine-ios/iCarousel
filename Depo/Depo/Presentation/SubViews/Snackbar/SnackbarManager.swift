@@ -131,7 +131,7 @@ final class SnackbarManager {
         let contentView = currentSnackbar?.customContentView as? SnackbarView
         contentView?.setup(type: type,
                            message: message,
-                           actionTitle: action?.localizedTitle.uppercased(),
+                           actionTitle: action?.localizedTitle,
                            axis: axis,
                            action: actionHandler)
         
