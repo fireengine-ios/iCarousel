@@ -179,9 +179,7 @@ final class PeopleService: BaseRequestService {
         
         let parameters = DeletePhotosFromPeopleAlbum(id: id, photos: photos)
         
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { response  in
-            debugLog("PeopleService deletePhotosFromAlbum success")
-            
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             success?()
         }, fail: fail)
         executePostRequest(param: parameters, handler: handler)
@@ -190,7 +188,7 @@ final class PeopleService: BaseRequestService {
 }
 
 final class PeopleItemsService: RemoteItemsService {
-    private let service = PeopleService(transIdLogging: true)
+    private let service = PeopleService()
     
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .image)
@@ -208,13 +206,9 @@ final class PeopleItemsService: RemoteItemsService {
             success?(response.list.map({ PeopleItem(response: $0) }))
             self?.currentPage += 1
             
-            self?.service.debugLogTransIdIfNeeded(headers: response.response?.allHeaderFields, method: "getPeople")
-            
-        }, fail: { [weak self] error in
+        }, fail: { error in
             error.showInternetErrorGlobal()
             fail?()
-            
-            self?.service.debugLogTransIdIfNeeded(errorResponse: error, method: "getPeople")
         })
     }
     

@@ -53,8 +53,6 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
         remoteItems.reloadItems(sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] items in
             self?.getNextPageRetryCounter = 0
             DispatchQueue.main.async {
-                debugLog("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems success")
-                
                 var isArrayPresenter = false
                 if let presenter = self?.output as? BaseFilesGreedPresenter {
                     isArrayPresenter = presenter.isArrayDataSource()
@@ -73,7 +71,6 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                 }
             }
             }, fail: { [weak self] in
-                debugLog("BaseFilesGreedInteractor reloadItems RemoteItemsService reloadItems fail")
                 guard let `self` = self, let output = self.output else {
                     return
                 }
@@ -109,8 +106,6 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                               success: { [weak self] items in
                 self?.getNextPageRetryCounter = 0
                 DispatchQueue.main.async {
-                    debugLog("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems success")
-
                     self?.isUpdating = false
                     guard let output = self?.output else { return }
                     if items.count == 0 {
@@ -120,7 +115,6 @@ class BaseFilesGreedInteractor: BaseFilesGreedInteractorInput {
                     }
                 }
             }, fail: { [weak self] in
-                debugLog("BaseFilesGreedInteractor nextItems RemoteItemsService reloadItems fail")
                 guard let `self` = self, let output = self.output else {
                     return
                 }

@@ -43,8 +43,7 @@ class ManageContactsPresenter: BasePresenter, ManageContactsModuleInput, ManageC
     }
     
     func didLoadContacts(_ contacts: [RemoteContact]) {
-        let sortedContacts = contacts.sorted(by: { $0.name.uppercased() < $1.name.uppercased() })
-        let groupedContacts = groupContacts(sortedContacts)
+        let groupedContacts = groupContacts(contacts)
         DispatchQueue.main.async {
             self.view.showContacts(groupedContacts)
         }
