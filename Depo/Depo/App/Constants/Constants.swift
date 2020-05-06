@@ -1808,6 +1808,7 @@ struct TextConstants {
     static let snackbarMessageAddedToAlbum = NSLocalizedString("added_to_album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageDownloadedFilesFormat = NSLocalizedString("downloaded_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageEditSaved = NSLocalizedString("edit_saved", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarMessageRemovedFromAlbum = NSLocalizedString("removed_from_album_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageFilesMoved = NSLocalizedString("files_moved", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageResetPasscodeSuccess = NSLocalizedString("success_remove_passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageAddedToFavoritesFromLifeBox = NSLocalizedString("added_to_favorites_from_lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

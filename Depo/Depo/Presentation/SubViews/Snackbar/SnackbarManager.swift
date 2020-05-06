@@ -81,6 +81,7 @@ enum SnackbarType {
              .emptyTrashBin,
              .move,
              .removeAlbum,
+             .removeFromAlbum,
              .removeFromFavorites,
              .restore,
              .unhide:
