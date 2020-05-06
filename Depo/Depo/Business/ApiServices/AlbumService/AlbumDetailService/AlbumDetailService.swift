@@ -31,19 +31,14 @@ class AlbumDetailService: RemoteItemsService {
                 fail?()
                 return
             }
-            debugLog("AlbumDetailService nextItems SearchService searchContentAlbum success")
 
-            let list = resultResponse.list.flatMap { WrapData(remote: $0) }
+            let list = resultResponse.list.compactMap { WrapData(remote: $0) }
             self.currentPage = self.currentPage + 1
             success?(list)
-            
-            self.remote.debugLogTransIdIfNeeded(headers: resultResponse.response?.allHeaderFields, method: "searchContentAlbum")
-        }, fail: { [weak self] error in
-            debugLog("AlbumDetailService nextItems SearchService searchContentAlbum fail")
+
+        }, fail: { error in
             error.showInternetErrorGlobal()
             fail?()
-            
-            self?.remote.debugLogTransIdIfNeeded(errorResponse: error, method: "searchContentAlbum")
         })
     }
     
@@ -54,24 +49,18 @@ class AlbumDetailService: RemoteItemsService {
         requestSize = 1
         
         let serchParam = AlbumDetalParameters (albumUuid: albumUUID, sortBy: sortBy, sortOrder: sortOrder, page: currentPage, size: requestSize)
-        remote.searchContentAlbum(param: serchParam, success: { [weak self] response in
+        remote.searchContentAlbum(param: serchParam, success: { response in
             guard let resultResponse = response as? AlbumDetailResponse else {
                 fail()
                 return
             }
-            debugLog("AlbumDetailService albumCoverPhoto success")
 
             if let photo = resultResponse.coverPhoto {
                 success(WrapData(remote: photo))
             }
-            
-            self?.remote.debugLogTransIdIfNeeded(headers: resultResponse.response?.allHeaderFields, method: "albumCoverPhoto")
-        }, fail: { [weak self] error in
-            debugLog("AlbumDetailService albumCoverPhoto fail")
+        }, fail: { error in
             error.showInternetErrorGlobal()
             fail()
-            
-            self?.remote.debugLogTransIdIfNeeded(errorResponse: error, method: "albumCoverPhoto")
         })
     }
 }

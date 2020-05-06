@@ -74,8 +74,6 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
         remoteItems.reloadUnhiddenItems(sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] items in
             self?.getNextPageRetryCounter = 0
             DispatchQueue.main.async {
-                debugLog("UploadFromLifeBoxInteractor reloadItems RemoteItemsService reloadItems success")
-                
                 var isArrayPresenter = false
                 if let presenter = self?.output as? BaseFilesGreedPresenter {
                     isArrayPresenter = presenter.isArrayDataSource()
@@ -94,7 +92,6 @@ class UploadFromLifeBoxInteractor: BaseFilesGreedInteractor, UploadFromLifeBoxIn
                 }
             }
             }, fail: { [weak self] in
-                debugLog("UploadFromLifeBoxInteractor reloadItems RemoteItemsService reloadItems fail")
                 guard let `self` = self, let output = self.output else {
                     return
                 }

@@ -83,22 +83,16 @@ typealias  SuccessShared = (_ url: String) -> Void
 
 class SharedService: BaseRequestService {
     
-    
     func share(param: SharedServiceParam, success: SuccessShared?, fail: FailResponse?) {
         debugLog("SharedService share")
         
         let handler = BaseResponseHandler<SharedServiceResponse, ObjectRequestResponse>(success: { tmp  in
             if let url = (tmp as? SharedServiceResponse)?.url {
-                debugLog("SharedService share success")
-
                 success?(url)
             } else {
-                debugLog("SharedService share fail(Not url from server)")
-
                 fail?(.string("Not url from server"))
             }
         }, fail: fail)
         executePostRequest(param: param, handler: handler)
-        
     }
 }
