@@ -12,14 +12,31 @@ import AVFoundation
 import Photos
 
 final class PhotoVideoDetailViewController: BaseViewController {
+    
+    private enum CardState {
+        case expanded
+        case collapsed
+    }
+    
     var output: PhotoVideoDetailViewOutput!
     
     @IBOutlet private weak var collectionView: UICollectionView!
-    
     @IBOutlet private weak var viewForBottomBar: UIView!
-    
     @IBOutlet private weak var bottomBlackView: UIView!
     
+    // Bottom detail view
+    private var bottomDetailView: UIView?
+    private let cardHeight:CGFloat = 600
+    
+    private var isCardPresented = false
+    private var nextState:CardState {
+        return isCardPresented ? .collapsed : .expanded
+    }
+    
+    private var runningAnimations = [UIViewPropertyAnimator]()
+    private var animationProgressWhenInterrupted: CGFloat = 0
+    
+
     private lazy var player: MediaPlayer = factory.resolve()
     
     private var localPlayer: AVPlayer?
@@ -141,6 +158,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         //editingTabBar.editingBar.layer.borderWidth = 0
         
         statusBarColor = .black
+        addBottomDetailsView()
+        addTrackSwipeUpView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -275,6 +294,116 @@ final class PhotoVideoDetailViewController: BaseViewController {
             collectionView.layoutIfNeeded()
         }
     }
+}
+
+
+// MARK: Bottom detail view implemantation
+
+extension PhotoVideoDetailViewController: PassThroughViewDelegate {
+    
+    func handlePan(recognizer: UIPanGestureRecognizer) {
+    
+        switch recognizer.state {
+        case .began:
+            startInteractiveTransition(state: nextState, duration: 0.9)
+        case .changed:
+
+            let translation = recognizer.translation(in: self.bottomDetailView)
+            var fractionComplete = translation.y / cardHeight
+            fractionComplete = isCardPresented ? fractionComplete : -fractionComplete
+            updateInteractiveTransition(fractionCompleted: fractionComplete)
+        case .ended:
+            continueInteractiveTransition()
+        default:
+            break
+        }
+    }
+    
+    
+    private func addTrackSwipeUpView() {
+        guard let topViewController = RouterVC().getViewControllerForPresent() else {
+            assertionFailure()
+            return
+        }
+        let view = PassThroughView(frame: topViewController.view.bounds)
+        view.delegate = self
+        topViewController.view.addSubview(view)
+    }
+    
+    private func addBottomDetailsView() {
+        
+        guard let topViewController = RouterVC().getViewControllerForPresent() else {
+            assertionFailure()
+            return
+        }
+        
+        bottomDetailView = UIView(frame: CGRect(x: view.bounds.minX, y: view.bounds.maxY, width: view.bounds.width, height: cardHeight))
+        bottomDetailView?.clipsToBounds = true
+        bottomDetailView?.backgroundColor = .yellow
+        
+        guard let detailView = bottomDetailView else {
+            assertionFailure()
+            return
+        }
+        topViewController.view.addSubview(detailView)
+    }
+    
+   private func updateInteractiveTransition(fractionCompleted:CGFloat) {
+        for animator in runningAnimations {
+            animator.fractionComplete = fractionCompleted + animationProgressWhenInterrupted
+        }
+    }
+    
+    private func continueInteractiveTransition (){
+        for animator in runningAnimations {
+            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
+        }
+    }
+    
+    private func startInteractiveTransition(state:CardState, duration:TimeInterval) {
+        if runningAnimations.isEmpty {
+            animateTransitionIfNeeded(state: state, duration: duration)
+        }
+        for animator in runningAnimations {
+            animator.pauseAnimation()
+            animationProgressWhenInterrupted = animator.fractionComplete
+        }
+    }
+    
+    private func animateTransitionIfNeeded (state:CardState, duration:TimeInterval) {
+       
+        if runningAnimations.isEmpty {
+            let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
+                switch state {
+                case .expanded:
+                    self.bottomDetailView?.frame.origin.y = self.view.frame.height - self.cardHeight
+                case .collapsed:
+                    self.bottomDetailView?.frame.origin.y = self.view.frame.height
+                }
+            }
+            
+            frameAnimator.addCompletion { _ in
+                self.isCardPresented = !self.isCardPresented
+                self.runningAnimations.removeAll()
+            }
+            
+            frameAnimator.startAnimation()
+            runningAnimations.append(frameAnimator)
+            
+            let cornerRadiusAnimator = UIViewPropertyAnimator(duration: duration, curve: .linear) {
+                switch state {
+                case .expanded:
+                    self.bottomDetailView?.layer.cornerRadius = 12
+                case .collapsed:
+                    self.bottomDetailView?.layer.cornerRadius = 0
+                }
+            }
+            
+            cornerRadiusAnimator.startAnimation()
+            runningAnimations.append(cornerRadiusAnimator)
+        }
+    }
+
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
@@ -519,4 +648,50 @@ extension TabBarViewController: AVPlayerViewControllerDelegate {
             completionHandler(true)
         }
     }
+}
+
+protocol PassThroughViewDelegate: class {
+    func handlePan(recognizer:UIPanGestureRecognizer)
+}
+
+final class PassThroughView: UIView {
+    
+    weak var delegate: PassThroughViewDelegate?
+        
+    private lazy var panGestureRecognizer: UIPanGestureRecognizer = {
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler))
+        return gesture
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = .clear
+        addGestureRecognizers()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        addGestureRecognizers()
+    }
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let hitView = super.hitTest(point, with: event)
+        if hitView == self {
+            return nil
+        }
+        return hitView
+    }
+    
+    @objc func panGestureRecognizerHandler(_ gestureRecognizer: UIPanGestureRecognizer) {
+        delegate?.handlePan(recognizer: gestureRecognizer)
+    }
+    
+    private func addGestureRecognizers() {
+        guard let window = UIApplication.shared.delegate?.window as? UIWindow  else {
+            assertionFailure()
+            return
+        }
+        window.addGestureRecognizer(panGestureRecognizer)
+    }
+    
 }
