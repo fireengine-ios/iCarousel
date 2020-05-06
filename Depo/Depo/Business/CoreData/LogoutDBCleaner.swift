@@ -8,41 +8,47 @@
 
 import Foundation
 
-
-protocol LogoutDBCleanerDelegate {
-    func didClean()
-}
-
 protocol LogoutDBCleaner {
-    static var shared: LogoutDBCleaner { get }
-    
     var mustClean: Bool { get }
-    var delegates: MulticastDelegate<LogoutDBCleanerDelegate> { get }
+    var completionHandler: VoidHandler { get }
     
-    func clean(completion: @escaping BoolHandler)
+    func start()
 }
 
 final class LogoutDBCleanerImpl: LogoutDBCleaner {
-    static let shared: LogoutDBCleaner = LogoutDBCleanerImpl()
-    
-    let delegates = MulticastDelegate<LogoutDBCleanerDelegate>()
     
     private (set) var mustClean = false
+    private (set) var completionHandler: VoidHandler
     
     private let coreDataStack: CoreDataStack = factory.resolve()
     
     
-    private init() { }
+    init(completion: @escaping VoidHandler) {
+        completionHandler = completion
+    }
     
-    func clean(completion: @escaping BoolHandler) {
+    func set(completion: @escaping VoidHandler) {
+        completionHandler = completion
+    }
+    
+    func start() {
+        guard !mustClean else {
+            return
+        }
+        
         mustClean = true
         
+        clean()
+    }
+    
+    private func clean() {
         guard coreDataStack.isReady else {
             coreDataStack.delegates.add(self)
             debugLog("DB cannot be cleaned. Waiting for CoreData to be ready.")
-            completion(false)
             return
         }
+        
+        coreDataStack.delegates.remove(self)
         
         MediaItemOperationsService.shared.deleteRemoteEntities { _ in
             debugLog("Remote entities are deleted from DB")
@@ -52,16 +58,13 @@ final class LogoutDBCleanerImpl: LogoutDBCleaner {
                 debugLog("DB has been cleaned")
                 
                 guard let self = self else {
-                    completion(true)
                     return
                 }
                 
                 self.mustClean = false
-                
-                completion(true)
+                self.completionHandler()
             })
         }
-        
     }
 }
 
@@ -71,8 +74,6 @@ extension LogoutDBCleanerImpl: CoreDataStackDelegate {
             return
         }
         
-        clean { _ in
-            //
-        }
+        clean()
     }
 }
