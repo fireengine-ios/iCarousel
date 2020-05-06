@@ -1533,6 +1533,7 @@
 "added_to_album" = "Successfully added to album";
 "downloaded_files" = "%d file(s) were downloaded successfully";
 "edit_saved" = "Saved";
+"removed_from_album_success" = "Item(s) removed successfully";
 "files_moved" = "File(s) moved";
 "success_remove_passcode" = "Passcode removed successfully";
 "added_to_favorites_from_lifebox" = "Successfully added";

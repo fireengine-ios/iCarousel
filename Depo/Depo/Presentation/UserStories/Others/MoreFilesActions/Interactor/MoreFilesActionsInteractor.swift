@@ -436,6 +436,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.albumService.deletePhotosFromAlbum(parameters: parameters, success: { [weak self] in
                 ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: album)
                 DispatchQueue.main.async {
+                    self?.showSnackbar(elementType: .removeFromAlbum, relatedItems: [])
                     self?.output?.operationFinished(type: .removeFromAlbum)
                 }
             }, fail: { [weak self] errorRespone in
