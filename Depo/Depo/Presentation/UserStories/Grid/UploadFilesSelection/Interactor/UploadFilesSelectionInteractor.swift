@@ -114,14 +114,12 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         uploadOutput?.addToUploadStarted()
         
         UploadService.default.uploadFileList(items: uploadItems, uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
-            debugLog("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList success")
 
             DispatchQueue.main.async {
                 self?.uploadOutput?.addToUploadSuccessed()
             }
         }, fail: { [weak self] errorResponse in
-            debugLog("UploadFilesSelectionInteractor addToUploadOnDemandItems UploadService uploadFileList fail")
-            DispatchQueue.main.async {
+             DispatchQueue.main.async {
                 self?.uploadOutput?.addToUploadFailedWith(errorMessage: errorResponse.description)
             }
         }, returnedUploadOperation: {_ in})
