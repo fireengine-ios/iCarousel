@@ -37,6 +37,7 @@ final class FreeAppSpace: NSObject {
     
     deinit {
         cacheManager.delegates.remove(self)
+        ItemOperationManager.default.stopUpdateView(view: self)
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -146,7 +147,9 @@ final class FreeAppSpace: NSObject {
         
         isSearchRunning = true
         
-        ItemOperationManager.default.startUpdateView(view: self)
+        DispatchQueue.main.async {
+            ItemOperationManager.default.startUpdateView(view: self)
+        }
 
         duplicatesArray.removeAll()
         
