@@ -10,11 +10,7 @@ import UIKit
 
 final class SnackbarView: UIView, NibInit {
     
-    @IBOutlet private weak var contentView: UIStackView! {
-        willSet {
-            newValue.spacing = 8
-        }
-    }
+    @IBOutlet private weak var contentView: UIStackView!
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
@@ -70,10 +66,11 @@ final class SnackbarView: UIView, NibInit {
             container.translatesAutoresizingMaskIntoConstraints = false
             
             container.addSubview(actionButton)
-            container.leadingAnchor.constraint(greaterThanOrEqualTo: actionButton.leadingAnchor).activate()
+            container.leadingAnchor.constraint(lessThanOrEqualTo: actionButton.leadingAnchor).activate()
             container.trailingAnchor.constraint(equalTo: actionButton.trailingAnchor).activate()
             container.topAnchor.constraint(equalTo: actionButton.topAnchor).activate()
             container.bottomAnchor.constraint(equalTo: actionButton.bottomAnchor).activate()
+            container.heightAnchor.constraint(equalToConstant: 20).activate()
             
             contentView.addArrangedSubview(container)
         }

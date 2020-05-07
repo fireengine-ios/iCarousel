@@ -11,17 +11,17 @@ import TTGSnackbar
 
 enum SnackbarAction {
     case ok
-    case retry
-    case undo
+    case trashBin
+    case hiddenBin
     
     var localizedTitle: String {
         switch self {
         case .ok:
             return TextConstants.snackbarOk
-        case .retry:
-            return TextConstants.snackbarRetry
-        case .undo:
-            return TextConstants.snackbarUndo
+        case .trashBin:
+            return TextConstants.snackbarTrashBin
+        case .hiddenBin:
+            return TextConstants.snackbarHiddenBin
         }
     }
 }
@@ -49,18 +49,25 @@ enum SnackbarType {
         case .critical:
             return .forever
         case .action:
-            return .forever
+            return .middle
         }
     }
     
-    var action: SnackbarAction? {
+    func action(operationType: ElementTypes) -> SnackbarAction? {
         switch self {
         case .nonCritical:
             return nil
         case .critical:
             return .ok
         case .action:
-            return .ok
+            switch operationType {
+            case .hide:
+                return .hiddenBin
+            case .moveToTrash:
+                return .trashBin
+            default:
+                return .ok
+            }
         }
     }
     
@@ -74,6 +81,7 @@ enum SnackbarType {
              .emptyTrashBin,
              .move,
              .removeAlbum,
+             .removeFromAlbum,
              .removeFromFavorites,
              .restore,
              .unhide:
@@ -107,7 +115,7 @@ final class SnackbarManager {
             return
         }
         
-        show(type: type, message: message, action: type.action, axis: .vertical, handler: handler)
+        show(type: type, message: message, action: type.action(operationType: elementType), axis: .vertical, handler: handler)
     }
     
     func show(type: SnackbarType, message: String, action: SnackbarAction? = nil, axis: NSLayoutConstraint.Axis = .vertical, handler: VoidHandler? = nil) {
@@ -124,7 +132,7 @@ final class SnackbarManager {
         let contentView = currentSnackbar?.customContentView as? SnackbarView
         contentView?.setup(type: type,
                            message: message,
-                           actionTitle: action?.localizedTitle.uppercased(),
+                           actionTitle: action?.localizedTitle,
                            axis: axis,
                            action: actionHandler)
         

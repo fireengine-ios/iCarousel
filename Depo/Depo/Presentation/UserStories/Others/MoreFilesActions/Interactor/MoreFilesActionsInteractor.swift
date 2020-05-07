@@ -436,6 +436,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.albumService.deletePhotosFromAlbum(parameters: parameters, success: { [weak self] in
                 ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: album)
                 DispatchQueue.main.async {
+                    self?.showSnackbar(elementType: .removeFromAlbum, relatedItems: [])
                     self?.output?.operationFinished(type: .removeFromAlbum)
                 }
             }, fail: { [weak self] errorRespone in
@@ -977,6 +978,7 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
     }
     
     private func save(image: UIImage) {
+        showSnackbar(elementType: .edit, relatedItems: [])
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .success))
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
@@ -1001,6 +1003,12 @@ extension MoreFilesActionsInteractor {
             DispatchQueue.main.async {
                 self.output?.operationFinished(type: elementType)
                 self.router.hideSpiner()
+                
+                // handle hide popups in HideActionService
+                guard elementType != .hide else {
+                    return
+                }
+                
                 if SnackbarType(operationType: elementType) != nil {
                     self.showSnackbar(elementType: elementType, itemsType: itemsType, relatedItems: relatedItems)
                 } else if let message = elementType.alertSuccessMessage(divorseItems: itemsType) {
@@ -1028,9 +1036,6 @@ extension MoreFilesActionsInteractor {
         SnackbarManager.shared.show(elementType: elementType, relatedItems: relatedItems, itemsType: itemsType) {
             let router = RouterVC()
             switch elementType {
-            case .hide:
-                let hiddenBin = router.hiddenPhotosViewController()
-                router.pushViewController(viewController: hiddenBin)
             case .moveToTrash:
                 router.openTrashBin()
             default:

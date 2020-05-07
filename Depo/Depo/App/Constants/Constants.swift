@@ -1800,14 +1800,15 @@ struct TextConstants {
     static let featureStorageOnlyAdditional2 = NSLocalizedString("feature_storage_only_additional_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     static let snackbarOk = NSLocalizedString("snackbar_ok", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let snackbarRetry = NSLocalizedString("snackbar_retry", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let snackbarUndo = NSLocalizedString("snackbar_undo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarTrashBin = NSLocalizedString("snackbar_trash_bin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarHiddenBin = NSLocalizedString("snackbar_hidden_bin", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let snackbarMessageAddedToFavorites = NSLocalizedString("added_to_favorites_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageRemovedFromFavorites = NSLocalizedString("removed_from_favorites", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageAddedToAlbum = NSLocalizedString("added_to_album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageDownloadedFilesFormat = NSLocalizedString("downloaded_files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageEditSaved = NSLocalizedString("edit_saved", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let snackbarMessageRemovedFromAlbum = NSLocalizedString("removed_from_album_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageFilesMoved = NSLocalizedString("files_moved", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageResetPasscodeSuccess = NSLocalizedString("success_remove_passcode", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageAddedToFavoritesFromLifeBox = NSLocalizedString("added_to_favorites_from_lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

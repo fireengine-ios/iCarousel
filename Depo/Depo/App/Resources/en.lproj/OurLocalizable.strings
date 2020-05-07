@@ -391,7 +391,7 @@
 "E-mail Usage Information" = "E-mail Usage Information";
 "Password fields do not match." = "Passwords do not match";
 "Please check the e-mail address." = "Please check the e-mail address.";
-"Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "Please choose a password with nonconsecutive letters and numbers, between 6 and 16 characters.";
+"Please set a password including nonconsecutive letters and numbers, minimum 6 maximum 16 characters." = "This password does not comply with the password rules below.";
 "Please check the GSM number" = "Please check your Phone number";
 "Login denied. Please check your credentials." = "Login denied. Please check your credentials.";
 "Request failed \n Please try again" = "Request failed \n Please try again";
@@ -424,7 +424,6 @@
 "Things" = "Things";
 "Places" = "Places";
 "Musics" = "Musics";
-"hide_album_action_sheet" = "Hide Album";
 "Your Uploads" = "Your Uploads";
 "Create a story" = "Create a story";
 "Please Choose 20 files at most" = "Please choose maximum 20 photos";
@@ -796,7 +795,6 @@
 "analyze_confirm_delete_text" = "Selected items will be deleted from analysis history.";
 "analyze_confirm_delete_yes" = "Yes";
 "analyze_confirm_delete_no" = "No";
-"analyze_history_delete_success" = "%d item(s) successfully deleted";
 
 /*InstaPick three dots*/
 "new_insta_pick" = "New PhotoPick";
@@ -1020,7 +1018,7 @@
 "create_story_press_and_hold_description" = "%@ on the image to rearrange the order of your story.";
 "create_story_name_title" = "Story Name";
 "create_story_pop_up_title" = "You created a story! \n %@";
-"create_story_pop_up_message" = "You created a story! (We are preparing your story. Once it finished, you can access it from Videos Album)";
+"create_story_pop_up_message" = "We're preparing your story. Once it is finished, you can find it under \n%@";
 "create_story_path_to_story" = "Photos & Videos > My Stories";
 "You can not share empty album" = "You can not share empty album";
 "etk_permission_description" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
@@ -1223,7 +1221,6 @@
 "support_form_subject_7_detailed_info_label" = "I can't download the Lifebox app.";
 "support_form_subject_7_detailed_info_fulltext" = "<p>- Please make sure that your phone is a model that supports the lifebox application.<br /> - The Android app 4.4 and above is supported on Android phones/tablets.<br/> - The iOS app 9 and above is supported on iPhone/iPad devices with iOS. <br /> - We don't have support for Windows phone-based phones.<br /> - The Web application is supported on all other top browsers (Chrome, Safari, Mozilla, etc.) except Internet Explorer and on all operating systems (macOS, Windows, Linux independent).</p><p><strong>If you have not reached a solution: </strong> </p><p>- If a phone number is not connected to the account and you have not accessed the app for a long time(at least 3 months), the account may be suspended.";
 "login_faq" = "FAQ";
-"sign_up_password_rules" = "Password must be minimum 6 and maximum 16 character, contain at least one number and capital letter, include nonconsecutive letters.";
 "signup_faq_info" = "Please select a topic if you need help.";
 "login_faq_info" = "Please select a topic if you need help.";
 "too_many_invalid_attempt" = "Too many requests are made, please try again later";
@@ -1292,10 +1289,6 @@
 "campaign_vc_top_description_zero" = "You have just completed total daily draw. You can try tomorrow again and increase your chance of becoming one of the 20 winners for Samsung Galaxy Note 10!";
 "campaign_vc_top_title_non_zero" = "KEEP GOING!";
 "campaign_vc_top_description_non_zero" = "Congrats! You have completed %d PhotoPick for today. Keep analyzing your photos with PhotoPick and increase your chance of becoming one of the 20 winners for the Samsung Galaxy Note 10!";
-"documents_album_card_title" = "Do you want to hide document objects?";
-"documents_album_card_description" = "%d items including screenshots and documents, are grouped in Documents Album. Clean up your gallery by hiding this album. You can access these photos from Hidden album anytime.";
-"documents_album_card_hide_button" = "Hide Documents Album";
-"documents_album_card_view_button" = "View Documents Album";
 "create_story_empty_name_error" = "Story name can not be empty";
 "photopick_history_campaign_contest_total_draw" = "Total Draw";
 "photopick_history_campaign_contest_remaining_draw" = "Daily Draw Left";
@@ -1524,23 +1517,29 @@
 "offer_store_promo" = "Promo";
 "offer_store_apple_store" = "Apple Store";
 "offer_store_google_store" = "Google Play Store";
-
-"snackbar_ok" = "OK";
-"snackbar_retry" = "Retry";
-"snackbar_undo" = "Undo";
 "remove_albums_success_message" = "Album(s) removed successfully";
-
+"hide_album_action_sheet" = "Hide Album";
+"sign_up_password_rules" = "Password must be minimum 6 and maximum 16 character, contain at least one number and capital letter, include nonconsecutive letters.";
+"documents_album_card_title" = "Do you want to hide document objects?";
+"documents_album_card_description" = "%d items including screenshots and documents, are grouped in Documents Album. Clean up your gallery by hiding this album. You can access these photos from Hidden album anytime.";
+"documents_album_card_hide_button" = "Hide Documents Album";
+"documents_album_card_view_button" = "View Documents Album";
+"snackbar_ok" = "OK";
+"snackbar_trash_bin" = "Trash Bin";
+"snackbar_hidden_bin" = "Hidden Bin";
+"analyze_history_delete_success" = "%d item(s) deleted";
 "added_to_favorites_message" = "Added to favourites";
 "removed_from_favorites" = "Removed from favorites";
-"added_to_album" = "Successfully added";
-"downloaded_files" = "%d file(s) were downloaded successfully";
+"added_to_album" = "Added to album";
+"downloaded_files" = "%d file(s) downloaded";
 "edit_saved" = "Saved";
+"removed_from_album_success" = "Item(s) removed successfully";
 "files_moved" = "File(s) moved";
-"success_remove_passcode" = "You successfully remove your passcode";
-"added_to_favorites_from_lifebox" = "Successfully added";
-"edit_security_question_success" = "You successfully edit security question";
-"set_security_question_success" = "You successfully set security question";
+"success_remove_passcode" = "Passcode removed";
+"added_to_favorites_from_lifebox" = "Added to favorites";
+"edit_security_question_success" = "Security question edited";
+"set_security_question_success" = "Security question set";
 "import_from_instagram_started" = "Import from Instagram started";
 "import_from_facebook_started" = "Import from Facebook started";
-"instapick_hashtags_copied" = "Copied";
-"create_story_selection_limit" = "Please Choose %d files at most";
+"instapick_hashtags_copied" = "Hashtags copied";
+"create_story_selection_limit" = "Please choose maximum %d photos";

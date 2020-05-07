@@ -277,13 +277,24 @@ final class HomePageInteractor: HomePageInteractorInput {
             }
         }
     }
-    
-    
 }
 
-
 extension HomePageInteractor: HomeCardsServiceImpDelegte {
+ 
+    func albumHiddenSuccessfully(_ successfully: Bool) {
+        let message = successfully ? TextConstants.hideSingleAlbumSuccessPopupMessage : TextConstants.temporaryErrorOccurredTryAgainLater
+        output.showSnackBarWith(message: message)
+    }
+        
     func needUpdateHomeScreen() {
         getAllCardsForHomePage()
+    }
+    
+    func showSpinner() {
+        output.showSpinner()
+    }
+    
+    func hideSpinner() {
+        output.hideSpinner()
     }
 }

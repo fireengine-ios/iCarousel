@@ -11,7 +11,7 @@ import SwiftyJSON
 
 final class UploadService: BaseRequestService {
     
-    static let `default` = UploadService(transIdLogging: true)
+    static let `default` = UploadService()
     
     static let notificatioUploadServiceDidUpload = "notificatioUploadServiceDidUpload"
     
@@ -56,11 +56,11 @@ final class UploadService: BaseRequestService {
     }
     
     
-    override init(transIdLogging: Bool = false) {
+    override init() {
         uploadQueue.maxConcurrentOperationCount = 1
         uploadQueue.qualityOfService = .userInteractive
         
-        super.init(transIdLogging: transIdLogging)
+        super.init()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateSyncSettings), name: .autoSyncStatusDidChange, object: nil)
     }

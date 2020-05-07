@@ -175,6 +175,26 @@ extension HideActionService {
     
     private func onSuccess() {
         success?()
+        
+        if needShowPopup() {
+            showSuccessPopUp()
+        } else if let items = items {
+            
+            let handler: VoidHandler = {
+                let router = RouterVC()
+                router.navigationController?.dismiss(animated: true, completion: {
+                    let controller = router.hiddenPhotosViewController()
+                    router.pushViewController(viewController: controller)
+                })
+            }
+            
+            switch items {
+            case .photos(let photos):
+                SnackbarManager.shared.show(elementType: .hide, relatedItems: photos, itemsType: .items, handler: handler)
+            case .albums(let albums):
+                SnackbarManager.shared.show(elementType: .hide, relatedItems: albums, itemsType: .albums, handler: handler)
+            }
+        }
     }
 }
 

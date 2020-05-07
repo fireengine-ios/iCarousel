@@ -88,6 +88,19 @@ extension CommonDivorceActionService: DivorceActionPopUpPresentProtocol {
     func showSuccessPopUp() {
         presentPopUp(controller: successPopUp)
     }
+    
+    func needShowPopup() -> Bool {
+        switch state {
+        case .actionSheetHideCompleted:
+            return !completionPopUpFactory.isDoNotShowAgainButtonPressed(for: state)
+            
+        case .bottomBarHideCompleted, .hideAlbumsCompleted:
+            return false
+            
+        case .smashCompleted:
+            return true
+        }
+    }
 }
 
 //MARK: - DivorceActionStateProtocol

@@ -23,6 +23,8 @@ final class SubscriptionsPolicyView: UIView {
         textView.isScrollEnabled = false
         textView.isEditable = false
         textView.backgroundColor = .clear
+        textView.delegate = self
+        textView.dataDetectorTypes = [.link]
         
         return textView
     }()
@@ -42,25 +44,30 @@ final class SubscriptionsPolicyView: UIView {
         policyTextView.translatesAutoresizingMaskIntoConstraints = false
         policyTextView.pinToSuperviewEdges()
         
-        let attributedString = NSMutableAttributedString(string: TextConstants.packagesPolicyHeader,
-                                                         attributes: [.foregroundColor: ColorConstants.textGrayColor,
-                                                                      .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)])
+        let attributedString = NSMutableAttributedString(
+            string: TextConstants.packagesPolicyHeader,
+            attributes: [ .foregroundColor: ColorConstants.textGrayColor,
+                          .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)]
+        )
         
-        let policyText = RouteRequests.isBillo ? TextConstants.packagesPolicyBilloText : TextConstants.packagesPolicyText
-        
-        let policyAttributedString = NSMutableAttributedString(string: "\n\n" + policyText,
-                                                               attributes: [.foregroundColor: ColorConstants.textGrayColor,
-                                                                            .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
+        let policyText = RouteRequests.isBillo
+            ? TextConstants.packagesPolicyBilloText
+            : TextConstants.packagesPolicyText
+        let policyAttributedString = NSMutableAttributedString(
+            string: "\n\n" + policyText,
+            attributes: [.foregroundColor: ColorConstants.textGrayColor,
+                         .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)]
+        )
         attributedString.append(policyAttributedString)
 
-        let termsAttributedString = NSMutableAttributedString(string: TextConstants.termsOfUseLinkText,
-                                                              attributes: [.link: TextConstants.NotLocalized.termsOfUseLink,
-                                                                           .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
+        let termsAttributedString = NSMutableAttributedString(
+            string: TextConstants.termsOfUseLinkText,
+            attributes: [.link: TextConstants.NotLocalized.termsOfUseLink,
+                         .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)]
+        )
         attributedString.append(termsAttributedString)
         
         policyTextView.attributedText = attributedString
-        policyTextView.delegate = self
-        
         layoutIfNeeded()
     }
 }

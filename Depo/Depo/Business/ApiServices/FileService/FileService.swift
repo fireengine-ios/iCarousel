@@ -262,7 +262,7 @@ class FileService: BaseRequestService {
     var completedOperationsCount : Int = 0
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
-    init() {
+    override init() {
         super.init()
         downloadOperation.maxConcurrentOperationCount = 1
     }
@@ -271,8 +271,6 @@ class FileService: BaseRequestService {
         debugLog("FileService moveFiles: \(moveFiles.items.joined(separator: ", "))")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            debugLog("FileService move success")
-
             success?()
         }, fail: fail)
         executePostRequest(param: moveFiles, handler: handler)
@@ -282,8 +280,6 @@ class FileService: BaseRequestService {
         debugLog("FileService copyFiles: \(copyparam.items.joined(separator: ", "))")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            debugLog("FileService copy success")
-
             success?()
         }, fail: fail)
         executePostRequest(param: copyparam, handler: handler)
@@ -293,9 +289,7 @@ class FileService: BaseRequestService {
         debugLog("FileService deleteFiles: \(deleteFiles.items.joined(separator: ", "))")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            debugLog("FileService delete success")
-
-            success?()
+             success?()
         }, fail: fail)
         executeDeleteRequest(param: deleteFiles, handler: handler)
     }
@@ -304,9 +298,7 @@ class FileService: BaseRequestService {
         debugLog("FileService deleteFiles: \(files.items.joined(separator: ", "))")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            debugLog("FileService delete success")
-
-            success?()
+             success?()
         }, fail: fail)
         executeDeleteRequest(param: files, handler: handler)
     }
@@ -314,9 +306,7 @@ class FileService: BaseRequestService {
     func createsFolder(createFolder: CreatesFolder, success: FolderOperation?, fail: FailResponse?) {
         debugLog("FileService createFolder \(createFolder.folderName)")
         
-        let handler = BaseResponseHandler<CreateFolderResponse, ObjectRequestResponse>(success: { [weak self] response  in
-            debugLog("FileService createFolder success")
-            self?.debugLogTransIdIfNeeded(headers: (response as? ObjectRequestResponse)?.response?.allHeaderFields, method: "createFolder")
+        let handler = BaseResponseHandler<CreateFolderResponse, ObjectRequestResponse>(success: { response  in
             let item = (response as? CreateFolderResponse)?.folder
             success?(item)
             ///used to be: success?()
@@ -327,9 +317,7 @@ class FileService: BaseRequestService {
     func rename(rename: RenameFile, success: FileOperation?, fail: FailResponse?) {
         debugLog("FileService rename \(rename.newName)")
         
-        let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { y  in
-            debugLog("FileService rename success")
-
+        let handler = BaseResponseHandler<SearchResponse, ObjectRequestResponse>(success: { _ in
             success?()
         }, fail: fail)
         executePostRequest(param: rename, handler: handler)
