@@ -139,7 +139,7 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
                 return
             }
             AccountService().updateBrandType()
-            CacheManager.shared.actualizeRemotes()
+            CacheManager.shared.actualizeCache()
             
             if accountReadOnly {
                 SingletonStorage.shared.getOverQuotaStatus {
