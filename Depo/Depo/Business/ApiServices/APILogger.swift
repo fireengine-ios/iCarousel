@@ -88,9 +88,9 @@ final class APILogger {
             }
          
             let data = userInfo[Notification.Key.ResponseData] as? Data
-            let transId = request.allHTTPHeaderFields?[HeaderConstant.transId]
-        
+            
             if let response = task.response as? HTTPURLResponse {
+                let transId = response.allHeaderFields[HeaderConstant.transId] as? String
                 self.log(statusCode: response.statusCode,
                          url: requestURL,
                          elapsedTime: elapsedTime,
@@ -112,7 +112,7 @@ final class APILogger {
                          url: requestURL,
                          elapsedTime: elapsedTime,
                          dataLength: data?.count,
-                         transId: transId)
+                         transId: nil)
                 
                 self.log(body: error.localizedDescription)
             }
@@ -137,7 +137,7 @@ final class APILogger {
         }
     
         if let transId = transId {
-            string += " \(HeaderConstant.transId) \(transId)"
+            string += " \(HeaderConstant.transId): \(transId)"
         }
         log(string: string)
     }
