@@ -361,6 +361,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let okHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .unhide, label: .ok)
+            self?.output?.operationStarted(type: .unhide)
             vc.close { [weak self] in
                 self?.unhideItems(remoteItems)
             }
@@ -395,6 +396,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
 
         let okHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .restore, label: .ok)
+            self?.output?.operationStarted(type: .restore)
             vc.close { [weak self] in
                 self?.putBackItems(remoteItems)
             }
@@ -784,6 +786,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let okHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .ok)
+            self?.output?.operationStarted(type: .delete)
             vc.close { [weak self] in
                 self?.deleteItems(items)
             }
@@ -1178,7 +1181,6 @@ extension MoreFilesActionsInteractor {
         firOperation: @escaping DivorceItemsOperation)
     {
         output?.startAsyncOperationDisableScreen()
-        output?.operationStarted(type: type)
         
         var peopleItems = [PeopleItem]()
         var placesItems = [PlacesItem]()
