@@ -9,25 +9,23 @@
 import Foundation
 
 protocol LogoutDBCleaner {
-    var completionHandler: VoidHandler { get }
-    
+    func onCompletion(completion: VoidHandler?) -> LogoutDBCleaner
     func start()
 }
 
 final class LogoutDBCleanerImpl: LogoutDBCleaner {
     
-    private (set) var completionHandler: VoidHandler
-    
     private var mustClean = false
+    private var completionHandler: VoidHandler?
+    
     private let coreDataStack: CoreDataStack = factory.resolve()
     
     
-    init(completion: @escaping VoidHandler) {
-        completionHandler = completion
-    }
+    init() {}
     
-    func set(completion: @escaping VoidHandler) {
+    func onCompletion(completion: VoidHandler?) -> LogoutDBCleaner {
         completionHandler = completion
+        return self
     }
     
     func start() {
@@ -59,7 +57,7 @@ final class LogoutDBCleanerImpl: LogoutDBCleaner {
             MediaItemsAlbumOperationService.shared.resetLocalAlbums(completion: nil)
             
             self.mustClean = false
-            self.completionHandler()
+            self.completionHandler?()
         }
     }
 }
