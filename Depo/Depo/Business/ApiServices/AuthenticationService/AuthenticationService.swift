@@ -361,7 +361,7 @@ class AuthenticationService: BaseRequestService {
                         }
                         
                         SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                            CacheManager.shared.actualizeRemotes()
+                            CacheManager.shared.actualizeCache()
                             
                             SingletonStorage.shared.isTwoFactorAuthEnabled = false
                             
@@ -396,7 +396,7 @@ class AuthenticationService: BaseRequestService {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                    CacheManager.shared.actualizeRemotes()
+                    CacheManager.shared.actualizeCache()
                     self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
                         sucess?()
                     })
