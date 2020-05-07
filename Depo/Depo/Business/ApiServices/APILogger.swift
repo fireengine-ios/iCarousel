@@ -22,6 +22,8 @@ final class APILogger {
     // set true for logging to console
     private let isDebugLog = false
     
+    private let excludedKeys = ["otpcode", "token"]
+    
     deinit {
         stopLogging()
     }
@@ -102,8 +104,9 @@ final class APILogger {
                         self.log(string: "The network connection was lost")
                     }
                 } else if let data = data {
-                    let jsonString = JSON(data: data).stringValue
-                    self.log(body: jsonString)
+                    let json = JSON(data: data)
+                    let string = try? self.filteredRawString(from: json) ?? ""
+                    self.log(body: string ?? "")
                 } else if let error = task.error {
                     self.log(body: error.localizedDescription)
                 }
@@ -177,6 +180,69 @@ final class APILogger {
             debugLog(string)
         }
     }
+    
+    private func filteredRawString(from json: JSON, maxObjectDepth: Int = 10) throws -> String? {
+        switch json.type {
+        case .dictionary:
+            do {
+                guard let dict = json.object as? [String: Any?] else {
+                    return nil
+                }
+                let body = try dict.keys.compactMap { key throws -> String? in
+                    let isExcludedKey = excludedKeys.first(where: { key.lowercased().contains($0) }) != nil
+                    guard !isExcludedKey else {
+                        return nil
+                    }
+                    
+                    guard let value = dict[key] else {
+                        return "\"\(key)\": null"
+                    }
+                    guard let unwrappedValue = value else {
+                        return "\"\(key)\": null"
+                    }
+
+                    let nestedValue = JSON(unwrappedValue)
+                    guard let nestedString = try filteredRawString(from: nestedValue, maxObjectDepth: maxObjectDepth - 1) else {
+                        throw NSError(domain: ErrorDomain, code: ErrorInvalidJSON, userInfo: [NSLocalizedDescriptionKey: "Could not serialize nested JSON"])
+                    }
+                    if nestedValue.type == .string {
+                        return "\"\(key)\": \"\(nestedString.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "\"", with: "\\\""))\""
+                    } else {
+                        return "\"\(key)\": \(nestedString)"
+                    }
+                }
+
+                return "{\(body.joined(separator: ","))}"
+            } catch _ {
+                return nil
+            }
+        case .array:
+            do {
+                guard let array = json.object as? [Any?] else {
+                    return nil
+                }
+                let body = try array.map { value throws -> String in
+                    guard let unwrappedValue = value else {
+                        return "nil"
+                    }
+
+                    let nestedValue = JSON(unwrappedValue)
+                    guard let nestedString = try filteredRawString(from: nestedValue, maxObjectDepth: maxObjectDepth - 1) else {
+                        throw NSError(domain: ErrorDomain, code: ErrorInvalidJSON, userInfo: [NSLocalizedDescriptionKey: "Could not serialize nested JSON"])
+                    }
+                    if nestedValue.type == .string {
+                        return "\"\(nestedString.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "\"", with: "\\\""))\""
+                    } else {
+                        return nestedString
+                    }
+                }
+
+                return "[\(body.joined(separator: ","))]"
+            } catch _ {
+                return nil
+            }
+        default:
+            return json.rawString()
+        }
+    }
 }
-
-
