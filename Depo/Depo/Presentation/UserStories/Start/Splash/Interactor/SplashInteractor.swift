@@ -91,7 +91,7 @@ class SplashInteractor: SplashInteractorInput {
                         SingletonStorage.shared.isJustRegistered = false
                         self?.isFirstLogin = true
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .turkcell))
-                        CacheManager.shared.actualizeRemotes()
+                        CacheManager.shared.actualizeCache()
                         self?.turkcellSuccessLogin()
                         self?.isTryingToLogin = false
                     }, fail: { [weak self] error in
@@ -128,7 +128,7 @@ class SplashInteractor: SplashInteractorInput {
             refreshAccessToken { [weak self] in
                 /// self can be nil due logout
                 SingletonStorage.shared.getAccountInfoForUser(success: { _ in
-                    CacheManager.shared.actualizeRemotes()
+                    CacheManager.shared.actualizeCache()
                     self?.isTryingToLogin = false
                     SingletonStorage.shared.isJustRegistered = false
                     SingletonStorage.shared.getOverQuotaStatus {

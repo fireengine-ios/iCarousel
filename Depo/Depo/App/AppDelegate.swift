@@ -111,7 +111,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return
             }
             
-            CacheManager.shared.actualizeLocals()
             
             DispatchQueue.main.async {
                 AppConfigurator.logoutIfNeed()
@@ -229,7 +228,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillEnterForeground")
         if BackgroundTaskService.shared.appWasSuspended {
-            CacheManager.shared.actualizeLocals()
+            CacheManager.shared.actualizeCache()
         }
         ContactSyncSDK.doPeriodicSync()
     }
