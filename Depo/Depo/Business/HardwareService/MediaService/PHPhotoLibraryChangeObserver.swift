@@ -28,7 +28,13 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         
     }
     private func processAssetChanges(_ changeInstance: PHChange) {
-        guard fetchResult != nil, let changes = changeInstance.changeDetails(for: fetchResult) else {
+        guard fetchResult != nil else {
+            printLog("photoLibraryDidChange - fetchResult is nil")
+            return
+        }
+        
+        guard let changes = changeInstance.changeDetails(for: fetchResult) else {
+            printLog("photoLibraryDidChange - no changes")
             return
         }
         
@@ -36,7 +42,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
 
         if changes.hasIncrementalChanges, changes.insertedIndexes != nil || changes.removedIndexes != nil || changes.changedIndexes != nil {
             
-            let previosFetch = changes.fetchResultBeforeChanges
+            let previousFetch = changes.fetchResultBeforeChanges
             var phChanges = PhotoLibraryItemsChanges()
             
             func notify() {
@@ -49,10 +55,10 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
                     return
                 }
                 
-                let changedAssets = previosFetch.objects(at: changedIndexes)
+                let changedAssets = previousFetch.objects(at: changedIndexes)
                 
                 phChanges[.changed] = changedAssets
-                printLog("photoLibraryDidChange - changed \(changedAssets.count) items")
+                printLog("photoLibraryDidChange - changed \(changedAssets.count) assets")
                 
                 MediaItemOperationsService.shared.update(localMediaItems: changedAssets) {
                     notify()
@@ -65,10 +71,10 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
                     return
                 }
                 
-                let removedAssets = previosFetch.objects(at: removedIndexes)
+                let removedAssets = previousFetch.objects(at: removedIndexes)
                 
                 phChanges[.removed] = removedAssets
-                printLog("photoLibraryDidChange - removed \(removedAssets.count) items")
+                printLog("photoLibraryDidChange - removed \(removedAssets.count) assets")
 
                 UploadService.default.cancelOperations(with: removedAssets)
                 
@@ -87,7 +93,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
                 
                 phChanges[.added] = insertedAssets
                 
-                printLog("photoLibraryDidChange - added \(insertedAssets.count) items")
+                printLog("photoLibraryDidChange - added \(insertedAssets.count) assets")
                 
                 MediaItemOperationsService.shared.append(localMediaItems: insertedAssets, needCreateRelationships: true) {
                     checkDeletedObjects()
