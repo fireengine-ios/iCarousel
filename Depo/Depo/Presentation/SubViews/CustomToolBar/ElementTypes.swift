@@ -258,6 +258,8 @@ enum ElementTypes {
             return TextConstants.snackbarMessageFilesMoved
         case .removeAlbum:
             return TextConstants.removeAlbumsSuccess
+        case .removeFromAlbum:
+            return TextConstants.snackbarMessageRemovedFromAlbum
         case .removeFromFavorites:
             return TextConstants.snackbarMessageRemovedFromFavorites
         default:
