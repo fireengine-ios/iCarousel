@@ -42,5 +42,6 @@ struct DispatchQueueLabels {
     static let homePageCardsUpdateQueue = "com.lifebox.homePageCardsUpdateQueue"
     static let backgroundTaskSyncQueue = "com.lifebox.backgroundTaskSyncQueue"
     static let localAlbumsCacheQueue = "com.lifebox.localAlbumsCacheQueue"
+    static let cacheManagerQueue = "com.lifebox.cacheManagerQueue"
     static let gifOptimizationQueue = "com.lifebox.gifOptimizationQueue"
 }

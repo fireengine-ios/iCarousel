@@ -318,7 +318,11 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 case .hide:
                     
                     var title: String
-                    if currentItems.first?.fileType == .faceImageAlbum(.things) {
+                    
+                    if currentItems.first?.fileType == .faceImageAlbum(.things) ||
+                        currentItems.first?.fileType == .faceImageAlbum(.people) ||
+                        currentItems.first?.fileType == .faceImageAlbum(.places) ||
+                        currentItems.first?.fileType == .photoAlbum {
                         title = TextConstants.actionSheetHideSingleAlbum
                     } else {
                         title = TextConstants.actionSheetHide
