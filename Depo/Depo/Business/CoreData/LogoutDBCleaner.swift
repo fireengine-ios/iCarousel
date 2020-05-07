@@ -9,7 +9,6 @@
 import Foundation
 
 protocol LogoutDBCleaner {
-    var mustClean: Bool { get }
     var completionHandler: VoidHandler { get }
     
     func start()
@@ -17,9 +16,9 @@ protocol LogoutDBCleaner {
 
 final class LogoutDBCleanerImpl: LogoutDBCleaner {
     
-    private (set) var mustClean = false
     private (set) var completionHandler: VoidHandler
     
+    private var mustClean = false
     private let coreDataStack: CoreDataStack = factory.resolve()
     
     
@@ -50,20 +49,17 @@ final class LogoutDBCleanerImpl: LogoutDBCleaner {
         
         coreDataStack.delegates.remove(self)
         
-        MediaItemOperationsService.shared.deleteRemoteEntities { _ in
+        MediaItemOperationsService.shared.deleteRemoteEntities { [weak self] _ in
             debugLog("Remote entities are deleted from DB")
             
-            MediaItemsAlbumOperationService.shared.resetLocalAlbums(completion: { [weak self] in
-                debugLog("Local albums has been reset")
-                debugLog("DB has been cleaned")
-                
-                guard let self = self else {
-                    return
-                }
-                
-                self.mustClean = false
-                self.completionHandler()
-            })
+            guard let self = self else {
+                return
+            }
+            
+            MediaItemsAlbumOperationService.shared.resetLocalAlbums(completion: nil)
+            
+            self.mustClean = false
+            self.completionHandler()
         }
     }
 }
