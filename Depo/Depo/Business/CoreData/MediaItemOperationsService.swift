@@ -1011,7 +1011,7 @@ final class MediaItemOperationsService {
     }
     
     private func getUnsyncedMediaItems(video: Bool, image: Bool, completion: @escaping MediaItemsCallBack) {
-        let assetList = LocalMediaStorage.default.updateAllImagesAndVideoAssets()
+        let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
         let currentlyInLibriaryLocalIDs = assetList.map { $0.localIdentifier }
         
         var filesTypesArray = [Int16]()
