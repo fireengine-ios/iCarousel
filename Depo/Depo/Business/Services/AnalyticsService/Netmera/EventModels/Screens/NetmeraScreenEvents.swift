@@ -440,6 +440,12 @@ extension NetmeraEvents.Screens {
             return "hbh"
         }
     }
+    
+    final class VerifyEmailPopUp: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "ncs"
+        }
+    }
 }
 
 
