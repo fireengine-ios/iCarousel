@@ -27,14 +27,12 @@ final class BackgroundSyncService {
     private lazy var storageVars: StorageVars = factory.resolve()
     
     private static let schedulerQueue = DispatchQueue(label: DispatchQueueLabels.backgroundTaskSyncQueue)
-    private let syncServiceManager = SyncServiceManager.shared
     
     private let operationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         return queue
     }()
-    
     
     func registerLaunchHandlers() {
         registerTask(identifier: TaskIdentifiers.backgroundProcessing, queue: BackgroundSyncService.schedulerQueue)
@@ -49,7 +47,7 @@ final class BackgroundSyncService {
     
     func handleBGtask(_ task: BGTask) {
         debugLog("BG! handleTask \(task.identifier) isBG \(ApplicationStateHelper.shared.isBackground)")
-        
+        sendNetmeraEvent(type: task.identifier)
         guard
             LocalMediaStorage.default.photoLibraryIsAvailible(),
             storageVars.autoSyncSet,
@@ -131,4 +129,8 @@ final class BackgroundSyncService {
         scheduleTask(taskIdentifier: TaskIdentifiers.backgroundRefresh)
     }
     
+    private func sendNetmeraEvent(type: String) {
+        let event = NetmeraEvents.Actions.BackgroundSync(syncType: .backgroundTask(type: type))
+        AnalyticsService.sendNetmeraEvent(event: event)
+    }
 }

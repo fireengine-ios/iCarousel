@@ -26,6 +26,12 @@ protocol BaseAsyncOperationInteractorOutput: class {
     func asyncOperationSuccess()
     
     func asyncOperationFail(errorMessage: String?)
+    
+    func confirmationPopUpCancelTapped()
+}
+
+extension BaseAsyncOperationInteractorOutput {
+    func confirmationPopUpCancelTapped() {}
 }
 
 class BasePresenter: BaseAsyncOperationInteractorOutput {

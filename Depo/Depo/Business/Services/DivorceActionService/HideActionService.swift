@@ -81,6 +81,7 @@ extension HideActionService {
     override var confirmPopUp: BasePopUpController {
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analytics.trackFileOperationPopupGAEvent(operationType: .hide, label: .cancel)
+            self?.output?.confirmationPopUpCancelTapped()
             vc.close()
         }
         

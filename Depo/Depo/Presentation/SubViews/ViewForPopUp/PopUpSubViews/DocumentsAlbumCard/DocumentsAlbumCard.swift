@@ -150,7 +150,7 @@ final class DocumentsAlbumCard: BaseCardView, ControlTabBarProtocol {
             return
         }
         homeCardsService.delegate?.showSpinner()
-        hideActionService.startOperation(for: .albums([albumItem]), output: nil, success: { [weak self] in
+        hideActionService.startOperation(for: .albums([albumItem]), output: self, success: { [weak self] in
             self?.homeCardsService.delegate?.needUpdateHomeScreen()
             self?.homeCardsService.delegate?.albumHiddenSuccessfully(true)
             }, fail: {[weak self ] _ in
@@ -176,3 +176,18 @@ extension DocumentsAlbumCard: FaceImagePhotosViewControllerDelegate {
     }
 }
 
+extension DocumentsAlbumCard: BaseAsyncOperationInteractorOutput {
+    func outputView() -> Waiting? { return nil }
+    func startAsyncOperation() {}
+    func startAsyncOperationDisableScreen() {}
+    func startCancelableAsync(cancel: @escaping VoidHandler) {}
+    func startCancelableAsync(with text: String, cancel: @escaping VoidHandler) {}
+    func completeAsyncOperationEnableScreen(errorMessage: String?) {}
+    func completeAsyncOperationEnableScreen() {}
+    func asyncOperationSuccess() {}
+    func asyncOperationFail(errorMessage: String?) {}
+    
+    func confirmationPopUpCancelTapped() {
+        homeCardsService.delegate?.hideSpinner()
+    }
+}
