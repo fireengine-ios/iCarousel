@@ -78,7 +78,8 @@ final class APILogger {
                 let request = task.originalRequest,
                 let httpMethod = request.httpMethod,
                 let requestURL = request.url,
-                self.canLogRequest(requestURL, httpMethod: httpMethod)
+                self.canLogRequest(requestURL, httpMethod: httpMethod),
+                task.state == .canceling && httpMethod == "GET"
                 else {
                     return
             }
@@ -164,8 +165,7 @@ final class APILogger {
         guard !body.isEmpty else {
             return
         }
-        log(string: "BODY:")
-        log(string: body)
+        log(string: "BODY: \(body)")
     }
     
     private func logResumableUpload(headers: HTTPHeaders?) {
