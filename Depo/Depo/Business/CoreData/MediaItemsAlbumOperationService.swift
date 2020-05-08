@@ -194,6 +194,9 @@ extension MediaItemsAlbumOperationService {
         inProcessLocalAlbums = true
         isAlbumsActualized = false
         
+        /// so fetchResult != nil in PHObserver
+        localMediaStorage.updateAllImagesAndVideoAssets()
+        
         localMediaStorage.getLocalAlbums { [weak self] response in
             guard let self = self else {
                 return

@@ -1051,4 +1051,41 @@ extension NetmeraEvents.Actions {
         }
     }
     
+    
+    final class BackgroundSync: NetmeraEvent {
+        
+        enum BackgroundSyncType {
+            
+            case locationChange
+            case backgroundTask(type: String)
+            
+            var description: String {
+                switch self {
+                case .locationChange:
+                    return "LocationChange"
+                case .backgroundTask(type: let type):
+                    return "BackgroundTask(\(type))"
+                }
+            }
+        }
+        
+        private let kBackgroundSyncKey = "goa"
+        @objc var syncType = ""
+        
+        convenience init(syncType: BackgroundSyncType) {
+            self.init()
+            self.syncType = syncType.description
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ea" : #keyPath(syncType),
+            ]
+        }
+        
+        override var eventKey : String {
+            return kBackgroundSyncKey
+        }
+    }
+    
 }
