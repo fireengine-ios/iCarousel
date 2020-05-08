@@ -114,7 +114,7 @@ class SyncServiceManager {
     
     func updateInBackground() {
         debugLog("SyncServiceManager updateInBackground")
-        
+        sendNetmeraEvent()
         let time = Date().timeIntervalSince1970
         if time - lastAutoSyncTime > timeIntervalBetweenSyncsInBackground {
             BackgroundTaskService.shared.beginBackgroundTask()
@@ -240,6 +240,11 @@ class SyncServiceManager {
     }
     
     private var isSubscribeForNotifications = false
+    
+    private func sendNetmeraEvent() {
+        let event = NetmeraEvents.Actions.BackgroundSync(syncType: .locationChange)
+        AnalyticsService.sendNetmeraEvent(event: event)
+    }
 }
 
 
