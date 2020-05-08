@@ -20,7 +20,7 @@ final class APILogger {
     private var startDates = [URLSessionTask: Date]()
     
     // set true for logging to console
-    private let isDebugLog = false
+    private let isDebugLog = true
     
     private let excludedKeys = ["otpcode", "token"]
     
@@ -56,7 +56,7 @@ final class APILogger {
                 let request = task.originalRequest,
                 let httpMethod = request.httpMethod,
                 let requestURL = request.url,
-                requestURL != RouteRequests.baseUrl // ReachabilityService.checkAPI
+                self.canLogRequest(requestURL, httpMethod: httpMethod)
                 else {
                     return
             }
@@ -76,8 +76,9 @@ final class APILogger {
                 let userInfo = notification.userInfo,
                 let task = userInfo[Notification.Key.Task] as? URLSessionTask,
                 let request = task.originalRequest,
+                let httpMethod = request.httpMethod,
                 let requestURL = request.url,
-                requestURL != RouteRequests.baseUrl // ReachabilityService.checkAPI
+                self.canLogRequest(requestURL, httpMethod: httpMethod)
                 else {
                     return
             }
@@ -120,6 +121,20 @@ final class APILogger {
                 self.log(body: error.localizedDescription)
             }
         }
+    }
+    
+    private func canLogRequest(_ url: URL, httpMethod: String) -> Bool {
+        // ReachabilityService.checkAPI
+        if url == RouteRequests.baseUrl {
+            return false
+        }
+        
+        // Download images for display in cells|views
+        if httpMethod == "GET", url.absoluteString.uppercased().contains("CONTAINER_EXTENDED") {
+            return false
+        }
+        
+        return true
     }
     
     //MARK: - Logging
