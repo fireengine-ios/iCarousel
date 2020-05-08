@@ -465,11 +465,11 @@ final class UploadOperation: Operation {
                 }
                 self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
                     self?.storageVars.lastUnsavedFileUUID = nil
+                    debugLog("_upload: sync status is updated for \(self?.inputItem.name ?? "") ")
+                    success()
                 }
                 
                 debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
-                
-                success()
             }
         }, fail: fail)
     }
