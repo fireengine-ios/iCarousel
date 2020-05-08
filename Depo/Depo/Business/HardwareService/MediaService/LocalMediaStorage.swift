@@ -219,6 +219,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     var fetchAlbumResult: PHFetchResult<PHAssetCollection>!
     var fetchSmartAlbumResult: PHFetchResult<PHAssetCollection>!
     
+    @discardableResult
     func updateAllImagesAndVideoAssets() -> [PHAsset] {
         debugLog("LocalMediaStorage updateAllImagesAndVideoAssets")
 
