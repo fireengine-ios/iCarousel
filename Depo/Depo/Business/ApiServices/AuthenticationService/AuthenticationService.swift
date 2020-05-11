@@ -259,13 +259,20 @@ struct ResendVerificationSMS: RequestParametrs {
     let processPersonalData: Bool
     let etkAuth: Bool
     let globalPermAuth: Bool
+    let kvkkAuth: Bool?
     
     var requestParametrs: Any {
-        return [LbRequestkeys.referenceToken : refreshToken,
-                LbRequestkeys.eulaId : eulaId,
-                LbRequestkeys.processPersonalData : processPersonalData,
-                LbRequestkeys.etkAuth : etkAuth,
-                LbRequestkeys.globalPermAuth: globalPermAuth]
+        var parameters: [String : Any] = [LbRequestkeys.referenceToken : refreshToken,
+                                          LbRequestkeys.eulaId : eulaId,
+                                          LbRequestkeys.processPersonalData : processPersonalData,
+                                          LbRequestkeys.etkAuth : etkAuth,
+                                          LbRequestkeys.globalPermAuth: globalPermAuth]
+        
+        if let kvkkAuth = kvkkAuth {
+            parameters[LbRequestkeys.kvkkAuth] = kvkkAuth
+        }
+        
+        return parameters
     }
     
     var patch: URL {
