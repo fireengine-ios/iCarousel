@@ -183,10 +183,15 @@ extension HideActionService {
             
             let handler: VoidHandler = {
                 let router = RouterVC()
-                router.navigationController?.dismiss(animated: true, completion: {
+                if router.navigationController?.topViewController is PhotoVideoDetailViewController {
+                    router.navigationController?.dismiss(animated: true, completion: {
+                        let controller = router.hiddenPhotosViewController()
+                        router.pushViewController(viewController: controller)
+                    })
+                } else {
                     let controller = router.hiddenPhotosViewController()
                     router.pushViewController(viewController: controller)
-                })
+                }
             }
             
             switch items {
