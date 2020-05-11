@@ -81,6 +81,7 @@ class SignUpSuccessResponse: ObjectRequestResponse {
     
     /// not from server
     var etkAuth: Bool?
+    var kvkkAuth: Bool?
     var globalPermAuth: Bool?
     var eulaId: Int?
     
