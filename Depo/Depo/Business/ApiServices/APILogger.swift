@@ -79,7 +79,7 @@ final class APILogger {
                 let httpMethod = request.httpMethod,
                 let requestURL = request.url,
                 self.canLogRequest(requestURL, httpMethod: httpMethod),
-                task.state == .canceling && httpMethod == "GET"
+                !(task.state == .canceling && httpMethod == "GET")
                 else {
                     return
             }
