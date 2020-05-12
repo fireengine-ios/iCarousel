@@ -335,6 +335,8 @@ final class UploadOperation: Operation {
                     self?.removeTemporaryFile(at: parameters.urlToLocalFile)
                 }
                 
+                self.storageVars.lastUnsavedFileUUID = parameters.tmpUUID
+                
                 self.requestObject = self.upload(uploadParam: parameters, success: { [weak self] in
                     debugLog("simple_upload: uploaded")
                     
@@ -439,8 +441,6 @@ final class UploadOperation: Operation {
         
         inputItem.syncStatus = .synced
         inputItem.setSyncStatusesAsSyncedForCurrentUser()
-        
-        storageVars.lastUnsavedFileUUID = parameters.tmpUUID
         
         uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
             self?.dispatchQueue.async { [weak self] in
