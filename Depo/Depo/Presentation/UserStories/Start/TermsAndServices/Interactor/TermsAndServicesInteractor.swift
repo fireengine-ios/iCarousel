@@ -159,7 +159,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                     /// if we show etk default value must be false (user didn't check etk)
                     if isShowEtk {
                         self.etkAuth = false
-                        self.kvkkAuth = true
+                        self.kvkkAuth = false
                     } else {
                         self.kvkkAuth = nil
                     }
