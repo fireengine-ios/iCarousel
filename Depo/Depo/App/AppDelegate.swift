@@ -197,10 +197,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             debugLog("BG! AppDelegate applicationDidEnterBackground")
             backgroundSyncService.scheduleProcessingSync()
             backgroundSyncService.scheduleRefreshSync()
-        } else {
-            debugLog("BG! AppDelegate applicationDidEnterBackground pre ios 13 implementation")
-            BackgroundTaskService.shared.beginBackgroundTask()
         }
+        
+        BackgroundTaskService.shared.beginBackgroundTask()
 
         firstResponder = application.firstResponder
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)

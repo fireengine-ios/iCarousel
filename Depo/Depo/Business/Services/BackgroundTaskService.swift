@@ -26,10 +26,9 @@ final class BackgroundTaskService {
         appWasSuspended = false
         
         guard
-            backgroundTaskId == UIBackgroundTaskInvalid,
-            Device.operationSystemVersionLessThen(13)
+            backgroundTaskId == UIBackgroundTaskInvalid
         else {
-            debugLog("beginBackgroundTask iOS more then or equal to 13")
+            debugLog("iOS more then or equal to 13 - beginBackgroundTask will not start")
             return
         }
         
