@@ -273,4 +273,30 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         }
     }
     
+    func onRename(newName: String) {
+        startAsyncOperation()
+        interactor.onRename(newName: newName)
+    }
+    
+    func updated() {
+        asyncOperationSuccess()
+    }
+    
+    func cancelSave(use name: String) {
+        asyncOperationSuccess()
+        view.show(name: name)
+    }
+    
+    func failedUpdate(error: Error) {
+        asyncOperationSuccess()
+        view.showErrorAlert(message: error.description)
+    }
+    
+    func validateName(newName: String) {
+        interactor.onValidateName(newName: newName)
+    }
+    
+    func didValidateNameSuccess(name: String) {
+        view.showValidateNameSuccess(name: name)
+    }
 }

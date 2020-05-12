@@ -30,4 +30,6 @@ protocol PhotoVideoDetailViewOutput {
     func videoStoped()
     
     func willDisplayLastCell()
+    func onRename(newName: String)
+    func validateName(newName: String)
 }

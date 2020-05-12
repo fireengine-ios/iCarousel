@@ -1528,3 +1528,4 @@
 "snackbar_retry" = "Retry";
 "snackbar_undo" = "Undo";
 "remove_albums_success_message" = "Album(s) removed successfully";
+"file_info_people" = "Enable face and image recognition to see people in photos.";

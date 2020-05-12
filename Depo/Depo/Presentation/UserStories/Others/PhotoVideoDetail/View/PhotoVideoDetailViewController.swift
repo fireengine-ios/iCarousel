@@ -16,6 +16,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private enum CardState {
         case expanded
         case collapsed
+        case full
     }
     
     var output: PhotoVideoDetailViewOutput!
@@ -23,13 +24,17 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var viewForBottomBar: UIView!
     @IBOutlet private weak var bottomBlackView: UIView!
+    @IBOutlet private weak var collapseDetailView: UIView!
     
     // Bottom detail view
-    private var bottomDetailView: UIView?
-    private let cardHeight:CGFloat = 600
+    private var bottomDetailView: PhotoInfoViewController?
+    private let cardHeight: CGFloat = UIScreen.main.bounds.height * 0.7
     
+    private var gestureBeginLocation: CGPoint = .zero
+    private var dragViewBeginLocation: CGPoint = .zero
     private var isCardPresented = false
-    private var nextState:CardState {
+    private var viewState: CardState = .collapsed
+    private var nextState: CardState {
         return isCardPresented ? .collapsed : .expanded
     }
     
@@ -131,7 +136,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
-        
+        collapseViewSetup()
         showSpinner()
     }
     
@@ -211,9 +216,17 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
     }
     
+    private func collapseViewSetup() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(closeDetailView))
+        collapseDetailView.addGestureRecognizer(tap)
+        collapseDetailView.isHidden = true
+        collapseDetailView.layer.cornerRadius = 15
+    }
+        
     private func scrollToSelectedIndex() {
         setupNavigationBar()
         setupTitle()
+        closeDetailView()
 
         guard let index = selectedIndex else  {
             return
@@ -245,6 +258,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
 
     private func setupTitle() {
         setNavigationTitle(title: selectedItem?.name ?? "")
+        guard let selectedItem = selectedItem else { return }
+        bottomDetailView?.setObject(object: selectedItem)
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
@@ -285,6 +300,17 @@ final class PhotoVideoDetailViewController: BaseViewController {
         localPlayer?.pause()
     }
     
+    @objc private func closeDetailView() {
+        viewState = .collapsed
+        UIView.animate(withDuration: 1, delay: 0,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0.9,
+                       options: [.curveEaseInOut, .allowUserInteraction],
+                       animations: {
+                        self.positionForView(velocityY: 0)
+        }, completion: nil)
+    }
+    
     private func updateAllItems(with items: [Item], updateCollection: Bool) {
         objects = items
         
@@ -305,20 +331,72 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
     
         switch recognizer.state {
         case .began:
-            startInteractiveTransition(state: nextState, duration: 0.9)
+            isFullScreen = true
+            collapseDetailView.isHidden = false
+            gestureBeginLocation = recognizer.location(in: self.view)
+            dragViewBeginLocation = self.bottomDetailView?.frame.origin ?? .zero
         case .changed:
-
-            let translation = recognizer.translation(in: self.bottomDetailView)
-            var fractionComplete = translation.y / cardHeight
-            fractionComplete = isCardPresented ? fractionComplete : -fractionComplete
-            updateInteractiveTransition(fractionCompleted: fractionComplete)
+            let newLocation = dragViewBeginLocation.y + (recognizer.location(in: self.view).y - gestureBeginLocation.y)
+            bottomDetailView?.frame.origin.y = newLocation >= 0 ? newLocation : 0
+            if bottomDetailView?.frame.origin.y ?? .zero > self.view.frame.height {
+                bottomDetailView?.isHidden = true
+                recognizer.state = .ended
+            }
+            self.collectionView.cellForItem(at: IndexPath(row: selectedIndex ?? 0, section: 0))
+            
         case .ended:
-            continueInteractiveTransition()
+            UIView.animate(withDuration: 1, delay: 0,
+                           usingSpringWithDamping: 0.8,
+                           initialSpringVelocity: 0.9,
+                           options: [.curveEaseOut, .allowUserInteraction],
+                           animations: {
+                            self.positionForView(velocityY: recognizer.velocity(in: self.bottomDetailView).y)
+            }, completion: nil)
         default:
             break
         }
     }
     
+    func positionForView(velocityY: CGFloat) {
+        if velocityY > 50,
+            bottomDetailView?.frame.origin.y ?? .zero > self.view.frame.height - self.cardHeight {
+            self.bottomDetailView?.frame.origin.y = self.view.frame.height
+            self.viewState = .collapsed
+            isFullScreen = false
+            collapseDetailView.isHidden = true
+            
+        } else if velocityY < -50,
+            bottomDetailView?.frame.origin.y ?? .zero > self.view.frame.height - self.cardHeight,
+            viewState != .expanded {
+            self.bottomDetailView?.frame.origin.y = self.view.frame.height - self.cardHeight
+            self.viewState = .expanded
+            collapseDetailView.isHidden = false
+            
+        } else if self.bottomDetailView?.frame.origin.y ?? .zero < self.view.frame.height - self.cardHeight {
+            self.viewState = .full
+            collapseDetailView.isHidden = false
+            
+        } else if self.bottomDetailView?.frame.origin.y ?? .zero > self.view.frame.height {
+            self.bottomDetailView?.frame.origin.y = self.view.frame.height
+            self.viewState = .collapsed
+            isFullScreen = false
+            collapseDetailView.isHidden = true
+            
+        } else {
+            switch self.viewState {
+            case .collapsed:
+                self.bottomDetailView?.frame.origin.y = self.view.frame.height
+                isFullScreen = false
+                collapseDetailView.isHidden = true
+            case .expanded:
+                self.bottomDetailView?.frame.origin.y = self.view.frame.height - self.cardHeight
+                collapseDetailView.isHidden = false
+            case .full:
+                collapseDetailView.isHidden = false
+                break
+            }
+        }
+    }
     
     private func addTrackSwipeUpView() {
         guard let topViewController = RouterVC().getViewControllerForPresent() else {
@@ -337,9 +415,9 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
             return
         }
         
-        bottomDetailView = UIView(frame: CGRect(x: view.bounds.minX, y: view.bounds.maxY, width: view.bounds.width, height: cardHeight))
+        bottomDetailView = PhotoInfoViewController(frame: CGRect(x: view.bounds.minX, y: view.bounds.maxY, width: view.bounds.width, height: view.bounds.height))
         bottomDetailView?.clipsToBounds = true
-        bottomDetailView?.backgroundColor = .yellow
+        bottomDetailView?.output = self
         
         guard let detailView = bottomDetailView else {
             assertionFailure()
@@ -347,66 +425,17 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         }
         topViewController.view.addSubview(detailView)
     }
-    
-   private func updateInteractiveTransition(fractionCompleted:CGFloat) {
-        for animator in runningAnimations {
-            animator.fractionComplete = fractionCompleted + animationProgressWhenInterrupted
-        }
-    }
-    
-    private func continueInteractiveTransition (){
-        for animator in runningAnimations {
-            animator.continueAnimation(withTimingParameters: nil, durationFactor: 0)
-        }
-    }
-    
-    private func startInteractiveTransition(state:CardState, duration:TimeInterval) {
-        if runningAnimations.isEmpty {
-            animateTransitionIfNeeded(state: state, duration: duration)
-        }
-        for animator in runningAnimations {
-            animator.pauseAnimation()
-            animationProgressWhenInterrupted = animator.fractionComplete
-        }
-    }
-    
-    private func animateTransitionIfNeeded (state:CardState, duration:TimeInterval) {
-       
-        if runningAnimations.isEmpty {
-            let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
-                switch state {
-                case .expanded:
-                    self.bottomDetailView?.frame.origin.y = self.view.frame.height - self.cardHeight
-                case .collapsed:
-                    self.bottomDetailView?.frame.origin.y = self.view.frame.height
-                }
-            }
-            
-            frameAnimator.addCompletion { _ in
-                self.isCardPresented = !self.isCardPresented
-                self.runningAnimations.removeAll()
-            }
-            
-            frameAnimator.startAnimation()
-            runningAnimations.append(frameAnimator)
-            
-            let cornerRadiusAnimator = UIViewPropertyAnimator(duration: duration, curve: .linear) {
-                switch state {
-                case .expanded:
-                    self.bottomDetailView?.layer.cornerRadius = 12
-                case .collapsed:
-                    self.bottomDetailView?.layer.cornerRadius = 0
-                }
-            }
-            
-            cornerRadiusAnimator.startAnimation()
-            runningAnimations.append(cornerRadiusAnimator)
-        }
-    }
-
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
+    func showValidateNameSuccess(name: String) {
+        setNavigationTitle(title: name)
+        bottomDetailView?.showValidateNameSuccess()
+    }
+    
+    func show(name: String) {
+        bottomDetailView?.show(name: name)
+    }
     
     func setupInitialState() { }
     
@@ -635,6 +664,16 @@ extension PhotoVideoDetailViewController: UIScrollViewDelegate {
             currentPage = objects.count - 1
         }
         selectedIndex = currentPage
+    }
+}
+
+extension PhotoVideoDetailViewController: PhotoInfoViewControllerOutput {
+    func onRename(newName: String) {
+        output.onRename(newName: newName)
+    }
+    
+    func validateName(newName: String) {
+        output.validateName(newName: newName)
     }
 }
 

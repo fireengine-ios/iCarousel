@@ -19,4 +19,12 @@ protocol PhotoVideoDetailInteractorOutput: class {
     func onLastRemoved()
     
     func startAsyncOperation()
+    
+    func cancelSave(use name: String)
+    
+    func updated()
+    
+    func failedUpdate(error: Error)
+    
+    func didValidateNameSuccess(name: String)
 }

@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoVideoDetailViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoVideoDetailViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
                 <outlet property="bottomBlackView" destination="XFi-qo-p1Z" id="n2g-5n-Pae"/>
+                <outlet property="collapseDetailView" destination="WpF-wx-hyC" id="0vv-Ca-o1f"/>
                 <outlet property="collectionView" destination="ZzB-kC-yvt" id="Ggb-ac-yeQ"/>
                 <outlet property="view" destination="iN0-l3-epB" id="kbZ-Zd-ek1"/>
                 <outlet property="viewForBottomBar" destination="EkB-f5-2OH" id="vOp-R9-AI9"/>
@@ -23,7 +22,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZzB-kC-yvt" customClass="PreventCollectionView" customModule="lifebox" customModuleProvider="target">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZzB-kC-yvt" customClass="PreventCollectionView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="zTm-wi-nWa">
@@ -45,6 +44,23 @@
                     <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WpF-wx-hyC">
+                    <rect key="frame" x="15" y="15" width="30" height="30"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="z6w-pj-Y6s">
+                            <rect key="frame" x="8" y="8" width="14" height="14"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="z6w-pj-Y6s" firstAttribute="top" secondItem="WpF-wx-hyC" secondAttribute="top" constant="8" id="2aI-i4-yJW"/>
+                        <constraint firstAttribute="trailing" secondItem="z6w-pj-Y6s" secondAttribute="trailing" constant="8" id="3t0-gw-eqT"/>
+                        <constraint firstAttribute="bottom" secondItem="z6w-pj-Y6s" secondAttribute="bottom" constant="8" id="4Iq-jh-bFG"/>
+                        <constraint firstAttribute="width" constant="30" id="Db7-xr-gnK"/>
+                        <constraint firstAttribute="height" constant="30" id="Z0K-uM-K1M"/>
+                        <constraint firstItem="z6w-pj-Y6s" firstAttribute="leading" secondItem="WpF-wx-hyC" secondAttribute="leading" constant="8" id="wJ0-2Y-ntl"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -56,7 +72,9 @@
                 <constraint firstItem="hTs-d8-e25" firstAttribute="bottom" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="NfP-1l-2sH"/>
                 <constraint firstItem="XFi-qo-p1Z" firstAttribute="top" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="Owt-Hz-Qzd"/>
                 <constraint firstItem="XFi-qo-p1Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PdC-Bv-kNa"/>
+                <constraint firstItem="WpF-wx-hyC" firstAttribute="top" secondItem="hTs-d8-e25" secondAttribute="top" constant="15" id="TB8-ZS-bdv"/>
                 <constraint firstAttribute="trailing" secondItem="XFi-qo-p1Z" secondAttribute="trailing" id="b47-g1-8Ia"/>
+                <constraint firstItem="WpF-wx-hyC" firstAttribute="leading" secondItem="hTs-d8-e25" secondAttribute="leading" constant="15" id="gnl-yB-YR9"/>
                 <constraint firstAttribute="bottom" secondItem="XFi-qo-p1Z" secondAttribute="bottom" id="ugz-9B-4IC"/>
                 <constraint firstItem="EkB-f5-2OH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vGC-fV-ORB"/>
             </constraints>
@@ -64,4 +82,7 @@
             <point key="canvasLocation" x="32.5" y="63.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="back_icon.png" width="16" height="16"/>
+    </resources>
 </document>

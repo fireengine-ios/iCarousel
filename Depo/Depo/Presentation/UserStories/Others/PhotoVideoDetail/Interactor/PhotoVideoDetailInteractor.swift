@@ -117,4 +117,48 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     func appendItems(_ items: [Item]) {
         array.append(contentsOf: items)
     }
+    
+    func onRename(newName: String) {
+        guard let index = currentItemIndex,
+            let item = allItems[safe: index] else {
+                return
+        }
+        
+        guard !newName.isEmpty else {
+            if let name = item.name {
+                output.cancelSave(use: name)
+            } else {
+                output.updated()
+            }
+            
+            return
+        }
+        
+            let renameFile = RenameFile(uuid: item.uuid, newName: newName)
+            FileService().rename(rename: renameFile, success: { [weak self] in
+                DispatchQueue.main.async {
+                    item.name = newName
+                    self?.output.updated()
+                    ItemOperationManager.default.didRenameItem(item)
+                }
+                }, fail: { [weak self] error in
+                    DispatchQueue.main.async {
+                        self?.output.failedUpdate(error: error)
+                    }
+            })
+    }
+    
+    func onValidateName(newName: String) {
+        guard let index = currentItemIndex,
+            let item = allItems[safe: index] else {
+                return
+        }
+        if newName.isEmpty {
+            if let name = item.name {
+                output.cancelSave(use: name)
+            }
+        } else {
+            output.didValidateNameSuccess(name: newName)
+        }
+    }
 }
