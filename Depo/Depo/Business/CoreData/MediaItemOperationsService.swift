@@ -322,6 +322,12 @@ final class MediaItemOperationsService {
             var result: [MediaItem] = []
             do {
                 result = try context.fetch(request)
+            } catch let error as NSError {
+                let errorMessage = "context.fetch failed with: \(error.localizedDescription)"
+                debugLog(errorMessage)
+                debugLog(error.domain)
+                debugLog(error.localizedFailureReason ?? "")
+                assertionFailure(errorMessage)
             } catch {
                 let errorMessage = "context.fetch failed with: \(error.localizedDescription)"
                 debugLog(errorMessage)
