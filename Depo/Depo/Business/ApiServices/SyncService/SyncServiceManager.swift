@@ -145,6 +145,10 @@ class SyncServiceManager {
             return
         }
         
+        if !CacheManager.shared.isCacheActualized {
+            CacheManager.shared.delegates.add(self)
+        }
+        
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 return
@@ -392,3 +396,10 @@ extension SyncServiceManager: ReachabilityServiceDelegate {
     }
 }
 
+
+extension SyncServiceManager: CacheManagerDelegate {
+    func didCompleteCacheActualization() {
+        CacheManager.shared.delegates.remove(self)
+        updateImmediately()
+    }
+}
