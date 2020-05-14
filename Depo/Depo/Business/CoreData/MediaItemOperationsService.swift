@@ -322,6 +322,12 @@ final class MediaItemOperationsService {
             var result: [MediaItem] = []
             do {
                 result = try context.fetch(request)
+            } catch let error as NSError {
+                let errorMessage = "context.fetch failed with: \(error.localizedDescription)"
+                debugLog(errorMessage)
+                debugLog(error.domain)
+                debugLog(error.localizedFailureReason ?? "")
+                assertionFailure(errorMessage)
             } catch {
                 let errorMessage = "context.fetch failed with: \(error.localizedDescription)"
                 debugLog(errorMessage)
@@ -992,6 +998,7 @@ final class MediaItemOperationsService {
     }
     
     func hasLocalItemsForSync(video: Bool, image: Bool, completion: @escaping  (_ has: Bool) -> Void) {
+        debugLog("hasLocalItemsForSync")
         getUnsyncedMediaItems(video: video, image: image, completion: { items in
             let wrappedItems = items.map { $0.wrapedObject }
             completion(!AppMigrator.migrateSyncStatus(for: wrappedItems).isEmpty)
@@ -1000,6 +1007,7 @@ final class MediaItemOperationsService {
     }
     
     func allLocalItemsForSync(video: Bool, image: Bool, completion: @escaping WrapObjectsCallBack) {
+        debugLog("allLocalItemsForSync")
         getUnsyncedMediaItems(video: video, image: image, completion: { items in
             let wrappedItems = items
                 .filter { $0.fileSizeValue < NumericConstants.fourGigabytes }
@@ -1011,6 +1019,7 @@ final class MediaItemOperationsService {
     }
     
     private func getUnsyncedMediaItems(video: Bool, image: Bool, completion: @escaping MediaItemsCallBack) {
+        debugLog("getUnsyncedMediaItems")
         let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
         let currentlyInLibriaryLocalIDs = assetList.map { $0.localIdentifier }
         

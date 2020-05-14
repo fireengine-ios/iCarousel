@@ -266,13 +266,10 @@ extension HomePagePresenter: HomePageViewOutput {
     func viewWillAppear() {
         spotlightManager.delegate = self
         
-        if isFirstAppear {
-            AnalyticsService.updateUser()
-        } else {
+        if !isFirstAppear {
             view.startSpinner()
             interactor.updateLocalUserDetail()
         }
-        
         interactor.trackScreen()
     }
     

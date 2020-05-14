@@ -23,6 +23,7 @@ final class APILogger {
     private let isDebugLog = false
     
     private let excludedKeys = ["otpcode", "token"]
+    private let excludedValues = ["temp_url_sig"]
     
     deinit {
         stopLogging()
@@ -130,6 +131,11 @@ final class APILogger {
             return false
         }
         
+        let isContainsExcludedValue = excludedValues.first(where: { url.absoluteString.lowercased().contains($0) }) != nil
+        if isContainsExcludedValue {
+            return false
+        }
+        
         // Download images for display in cells|views
         if httpMethod == "GET", url.absoluteString.uppercased().contains("CONTAINER_EXTENDED") {
             return false
@@ -221,6 +227,10 @@ final class APILogger {
                         throw NSError(domain: ErrorDomain, code: ErrorInvalidJSON, userInfo: [NSLocalizedDescriptionKey: "Could not serialize nested JSON"])
                     }
                     if nestedValue.type == .string {
+                        let isContainsExcludedValue = excludedValues.first(where: { nestedString.lowercased().contains($0) }) != nil
+                        guard !isContainsExcludedValue else {
+                            return nil
+                        }
                         return "\"\(key)\": \"\(nestedString.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "\"", with: "\\\""))\""
                     } else {
                         return "\"\(key)\": \(nestedString)"
