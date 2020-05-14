@@ -57,6 +57,28 @@ extension NetmeraEvents.Actions {
         }
     }
     
+    final class SignUpError: NetmeraEvent {
+        
+        private let kCreateStoryKey = "errorType"
+        
+        @objc var errorType = ""
+        
+        convenience init(errorType: String) {
+            self.init()
+            self.errorType = errorType
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ea" : #keyPath(errorType),
+            ]
+        }
+        
+        override var eventKey : String {
+            return kCreateStoryKey
+        }
+    }
+    
     final class Import: NetmeraEvent {
         
         private let kImportKey = "qfv"
