@@ -285,14 +285,10 @@ class CardsManager: NSObject {
         case .sync:
             stopOperationWith(type: .prepareToAutoSync)
             stopOperationWith(type: .waitingForWiFi)
-            stopOperationWith(type: .freeAppSpaceLocalWarning)
-            stopOperationWith(type: .freeAppSpace)
             stopOperationWith(type: .autoUploadIsOff)
         case .upload:
 //            stopOperationWithType(type: .prepareToAutoSync)
             stopOperationWith(type: .waitingForWiFi)
-            stopOperationWith(type: .freeAppSpaceLocalWarning)
-            stopOperationWith(type: .freeAppSpace)
         case .freeAppSpace:
             stopOperationWith(type: .emptyStorage)
         case .prepareToAutoSync:

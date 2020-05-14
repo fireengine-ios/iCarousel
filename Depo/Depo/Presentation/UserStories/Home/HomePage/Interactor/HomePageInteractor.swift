@@ -34,7 +34,8 @@ final class HomePageInteractor: HomePageInteractorInput {
 
     func viewIsReady() {
         homeCardsService.delegate = self
-        FreeAppSpace.session.checkFreeAppSpace()
+        FreeAppSpace.session.showFreeUpSpaceCard()
+        FreeAppSpace.session.checkFreeUpSpace()
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         

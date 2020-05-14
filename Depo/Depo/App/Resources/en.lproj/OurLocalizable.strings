@@ -144,6 +144,9 @@
 "Free up space" = "Free up space";
 "Your device memory is almost full" = "Your device memory is almost full";
 "There are some duplicated items both in your device and lifebox" = "There are some duplicated items both on your device and lifebox";
+"free_up_space_alert_title" = "Free Up Space";
+"free_up_space_no_duplicates" = "You have no duplicate photos/videos";
+"free_up_space_in_progress" = "Your duplicate file list is not ready yet, please try later";
 
 /*which operation??*/
 "Operation is complete" = "Operation completed";
