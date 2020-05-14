@@ -10,6 +10,12 @@ import UIKit
 
 final class FreeAppSpace: NSObject {
     
+    enum State {
+        case initial
+        case processing
+        case finished
+    }
+    
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private let cacheManager = CacheManager.shared
 //    FIXME: currently we had floating problem when we saw items from previos account and also cache manger delegate currently is setuping on lazy var. So temporal solution is to use Seesion Singleton that we set to nil on logout.
@@ -26,12 +32,19 @@ final class FreeAppSpace: NSObject {
         }
     }
     
-    private var isSearchRunning = false
+    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.freeAppSpace, attributes: .concurrent)
+    
+    private(set) var state = State.initial
     private var needSearchAgain = false
     
     private var duplicatesArray = SynchronizedArray<WrapData>()
+    var duplicateObjects: [WrapData] {
+        duplicatesArray.getArray()
+    }
     
-    private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.freeAppSpace, attributes: .concurrent)
+    var isEmptyDuplicates: Bool {
+        duplicatesArray.isEmpty
+    }
     
     //MARK: -
     
@@ -41,21 +54,9 @@ final class FreeAppSpace: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func getDuplicatesObjects() -> [WrapData] {
-        return duplicatesArray.getArray()
-    }
+    // MARK: - Public methods
     
-    func getDuplicatesItems(_ localItemsCallback: @escaping WrapObjectsCallBack) {
-        ///For now changed to get info from DB every time we enter FreeUP screen
-        //TODO: optimize this class
-            MediaItemOperationsService.shared.getLocalDuplicates { localItems in
-                localItemsCallback(localItems.map { WrapData(mediaItem: $0)}.sorted(by: {
-                    $0.metaDate > $1.metaDate
-                }) )
-            }
-    }
-    
-    func checkFreeAppSpace() {
+    func checkFreeUpSpace() {
         guard cacheManager.isCacheActualized else {
             return
         }
@@ -65,31 +66,98 @@ final class FreeAppSpace: NSObject {
    
     func clear() {
         duplicatesArray.removeAll()
-        isSearchRunning = false
+        state = .initial
     }
     
     func handleLogout() {
         FreeAppSpace.instance = nil
     }
     
-    func checkFreeAppSpaceAfterAutoSync() {
+    func checkFreeUpSpaceAfterAutoSync() {
         dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
-            if self.isSearchRunning {
+
+            if self.state == .processing {
                 self.needSearchAgain = true
                 return
             }
             
             if self.duplicatesArray.isEmpty {
-                self.checkFreeAppSpace()
+                self.checkFreeUpSpace()
             } else {
-                self.showFreeAppSpaceCard()
+                self.updateFreeUpSpaceCard()
             }
         }
     }
     
+    func showFreeUpSpaceCard() {
+        CardsManager.default.startOperationWith(type: .freeAppSpace)
+    }
+
+    func updateFreeUpSpaceCard() {
+        if !isEmptyDuplicates, Device.getFreeDiskSpaceInPercent < NumericConstants.freeAppSpaceLimit {
+            CardsManager.default.stopOperationWith(type: .freeAppSpace)
+            CardsManager.default.startOperationWith(type: .freeAppSpaceLocalWarning)
+        } else {
+            CardsManager.default.stopOperationWith(type: .freeAppSpaceLocalWarning)
+            CardsManager.default.startOperationWith(type: .freeAppSpace)
+        }
+    }
+    
+    // MARK: - Private methods
+
+    private func startSearchDuplicates(finished: @escaping VoidHandler) {
+        if state == .processing {
+            needSearchAgain = true
+            return
+        }
+        
+        state = .processing
+        
+        DispatchQueue.main.async {
+            ItemOperationManager.default.startUpdateView(view: self)
+        }
+
+        duplicatesArray.removeAll()
+        
+        getDuplicatesItems { [weak self] items in
+            guard let self = self else {
+                return
+            }
+            
+            self.duplicatesArray.append(items)
+            if self.duplicatesArray.isEmpty {
+                debugPrint("have no duplicates")
+            } else {
+                debugPrint("duplicates count = ", self.duplicatesArray.count)
+            }
+            self.state = .finished
+            finished()
+        }
+    }
+    
+    private func onDatabasePrepareComplete() {
+        dispatchQueue.async { [weak self] in
+            self?.startSearchDuplicates(finished: { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                if self.needSearchAgain {
+                    self.needSearchAgain = false
+                    self.checkFreeUpSpace()
+                    return
+                }
+                
+                self.sortDuplicatesArray()
+                
+                self.updateFreeUpSpaceCard()
+            })
+        }
+    }
+
     private func sortDuplicatesArray() {
         ///sort itself, or remove all and appen new elements
         duplicatesArray.sortItself(by: { obj1, obj2 -> Bool in
@@ -100,72 +168,14 @@ final class FreeAppSpace: NSObject {
         })
     }
     
-    private func showFreeAppSpaceCard() {
-        if !duplicatesArray.isEmpty {
-            let freeSpace = Device.getFreeDiskSpaceInPercent
-            if freeSpace < NumericConstants.freeAppSpaceLimit {
-                CardsManager.default.startOperationWith(type: .freeAppSpaceLocalWarning, allOperations: nil, completedOperations: nil)
-            } else {
-                CardsManager.default.startOperationWith(type: .freeAppSpace, allOperations: nil, completedOperations: nil)
+    fileprivate func getDuplicatesItems(_ localItemsCallback: @escaping WrapObjectsCallBack) {
+        ///For now changed to get info from DB every time we enter FreeUP screen
+        //TODO: optimize this class
+            MediaItemOperationsService.shared.getLocalDuplicates { localItems in
+                localItemsCallback(localItems.map { WrapData(mediaItem: $0)}.sorted(by: {
+                    $0.metaDate > $1.metaDate
+                }) )
             }
-        } else {
-            print("have no duplicates")
-        }
-    }
-    
-     private func onDatabasePrepareComplete() {
-        dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
-                return
-            }
-            
-            self.startSearchDuplicates(finished: { [weak self] in
-                guard let `self` = self else {
-                    return
-                }
-                
-                self.isSearchRunning = false
-                
-                if self.needSearchAgain {
-                    self.needSearchAgain = false
-                    self.checkFreeAppSpace()
-                    return
-                }
-                
-                self.sortDuplicatesArray()
-                
-                self.showFreeAppSpaceCard()
-            })
-        }
-    }
-    
-    func startSearchDuplicates(finished: @escaping VoidHandler) {
-        if isSearchRunning {
-            needSearchAgain = true
-            return
-        }
-        
-        isSearchRunning = true
-        
-        DispatchQueue.main.async {
-            ItemOperationManager.default.startUpdateView(view: self)
-        }
-
-        duplicatesArray.removeAll()
-        
-        getDuplicatesItems { [weak self] items in
-            guard let `self` = self else {
-                return
-            }
-            
-            self.duplicatesArray.append(items)
-            if self.duplicatesArray.isEmpty {
-                debugPrint("have no duplicates")
-            } else {
-                debugPrint("duplicates count = ", self.duplicatesArray.count)
-            }
-            finished()
-        }
     }
 }
 
@@ -182,7 +192,7 @@ extension FreeAppSpace: ItemOperationManagerViewProtocol {
             
             print("uploaded object with uuid - ", duplicate.uuid)
             
-            if self.isSearchRunning {
+            if self.state == .processing {
                 self.needSearchAgain = true
                 return
             }
@@ -193,8 +203,8 @@ extension FreeAppSpace: ItemOperationManagerViewProtocol {
             
             self.sortDuplicatesArray()
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.showFreeAppSpaceCard()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                self?.updateFreeUpSpaceCard()
             }
         }
     }
@@ -205,8 +215,8 @@ extension FreeAppSpace: ItemOperationManagerViewProtocol {
         }
 
         MediaItemOperationsService.shared.getLocalDuplicates(remoteItems: [file]) { [weak self] items in
-            self?.dispatchQueue.async {
-                guard let `self` = self else {
+            self?.dispatchQueue.async { [weak self] in
+                guard let self = self else {
                     return
                 }
                 
@@ -217,7 +227,7 @@ extension FreeAppSpace: ItemOperationManagerViewProtocol {
                 })
 
                 self.sortDuplicatesArray()
-                self.checkFreeAppSpaceAfterAutoSync()
+                self.checkFreeUpSpaceAfterAutoSync()
             }
         }
     }
@@ -228,7 +238,7 @@ extension FreeAppSpace: ItemOperationManagerViewProtocol {
     
     func deleteItems(items: [Item]) {
         dispatchQueue.async { [weak self] in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             
@@ -236,9 +246,7 @@ extension FreeAppSpace: ItemOperationManagerViewProtocol {
             let localItems = items.filter {$0.isLocalItem}
 
             if !localItems.isEmpty {
-                localItems.forEach { item in
-                    self.duplicatesArray.removeIfExists(item)
-                }
+                localItems.forEach { self.duplicatesArray.removeIfExists($0) }
             }
 
             if !remoteItems.isEmpty {
@@ -246,23 +254,26 @@ extension FreeAppSpace: ItemOperationManagerViewProtocol {
                 self.duplicatesArray.remove(where: { uuids.contains($0.getTrimmedLocalID()) }, completion: nil)
             }
             
-            if self.duplicatesArray.isEmpty {
-                CardsManager.default.stopOperationWith(type: .freeAppSpace)
-                CardsManager.default.stopOperationWith(type: .freeAppSpaceLocalWarning)
-            }
+            self.updateFreeUpSpaceCard()
         }
     }
     
     func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
-        if let compairedView = object as? FreeAppSpace {
-            return compairedView == self
-        }
-        return false
+        return object === self
     }
-    
 }
 
-class FreeAppService: RemoteItemsService {
+// MARK: - CacheManagerDelegate
+
+extension FreeAppSpace: CacheManagerDelegate {
+    func didCompleteCacheActualization() {
+        onDatabasePrepareComplete()
+    }
+}
+
+// MARK: - FreeAppService
+
+final class FreeAppService: RemoteItemsService {
 
     /// server request don't have pagination
     /// but we need this logic for the same logic
@@ -290,11 +301,5 @@ class FreeAppService: RemoteItemsService {
 
     func clear() {
         isGotAll = false
-    }
-}
-
-extension FreeAppSpace: CacheManagerDelegate {
-    func didCompleteCacheActualization() {
-        onDatabasePrepareComplete()
     }
 }

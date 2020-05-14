@@ -349,7 +349,7 @@ extension SyncServiceManager {
         
         CardsManager.default.stopOperationWith(type: .prepareToAutoSync)
         
-        FreeAppSpace.session.checkFreeAppSpaceAfterAutoSync()
+        FreeAppSpace.session.checkFreeUpSpaceAfterAutoSync()
         
         if isSyncFinished {
             backgroundSyncHandler?(true)
