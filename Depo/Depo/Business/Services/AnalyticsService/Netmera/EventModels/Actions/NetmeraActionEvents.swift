@@ -59,7 +59,7 @@ extension NetmeraEvents.Actions {
     
     final class SignUpError: NetmeraEvent {
         
-        private let kCreateStoryKey = "errorType"
+        private let kSignUpErrorKey = "errorType"
         
         @objc var errorType = ""
         
@@ -75,7 +75,7 @@ extension NetmeraEvents.Actions {
         }
         
         override var eventKey : String {
-            return kCreateStoryKey
+            return kSignUpErrorKey
         }
     }
     
