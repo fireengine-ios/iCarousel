@@ -332,9 +332,11 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         switch recognizer.state {
         case .began:
             isFullScreen = true
+            
             collapseDetailView.isHidden = false
             gestureBeginLocation = recognizer.location(in: self.view)
             dragViewBeginLocation = self.bottomDetailView?.frame.origin ?? .zero
+            
         case .changed:
             let newLocation = dragViewBeginLocation.y + (recognizer.location(in: self.view).y - gestureBeginLocation.y)
             bottomDetailView?.frame.origin.y = newLocation >= 0 ? newLocation : 0
@@ -342,7 +344,6 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
                 bottomDetailView?.isHidden = true
                 recognizer.state = .ended
             }
-            self.collectionView.cellForItem(at: IndexPath(row: selectedIndex ?? 0, section: 0))
             
         case .ended:
             UIView.animate(withDuration: 1, delay: 0,
@@ -352,6 +353,31 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
                            animations: {
                             self.positionForView(velocityY: recognizer.velocity(in: self.bottomDetailView).y)
             }, completion: nil)
+        default:
+            break
+        }
+    }
+    
+    func handleSwipe(recognizer: UISwipeGestureRecognizer) {
+        switch recognizer.state {
+        case .began:
+            return
+            
+        case .changed:
+            return
+            
+        case .ended:
+            switch recognizer.direction {
+            case .left:
+                return
+            case .right:
+                return
+            default:
+                //not allowed
+                break
+            }
+           return
+            
         default:
             break
         }
@@ -691,6 +717,7 @@ extension TabBarViewController: AVPlayerViewControllerDelegate {
 
 protocol PassThroughViewDelegate: class {
     func handlePan(recognizer:UIPanGestureRecognizer)
+    func handleSwipe(recognizer:UISwipeGestureRecognizer)
 }
 
 final class PassThroughView: UIView {
@@ -699,6 +726,14 @@ final class PassThroughView: UIView {
         
     private lazy var panGestureRecognizer: UIPanGestureRecognizer = {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler))
+        return gesture
+    }()
+    
+    private lazy var swipeGestureRecognizer: UISwipeGestureRecognizer = {
+        let gesture = UISwipeGestureRecognizer(target: self, action:
+            #selector(swipeGestureRecognizerHandler))
+        gesture.delegate = self
+        gesture.direction = [.left, .right]
         return gesture
     }()
     
@@ -725,12 +760,23 @@ final class PassThroughView: UIView {
         delegate?.handlePan(recognizer: gestureRecognizer)
     }
     
+    @objc func swipeGestureRecognizerHandler(_ gestureRecognizer: UISwipeGestureRecognizer) {
+        delegate?.handleSwipe(recognizer: gestureRecognizer)
+    }
+    
     private func addGestureRecognizers() {
         guard let window = UIApplication.shared.delegate?.window as? UIWindow  else {
             assertionFailure()
             return
         }
         window.addGestureRecognizer(panGestureRecognizer)
+        window.addGestureRecognizer(swipeGestureRecognizer)
     }
     
+}
+
+extension PassThroughView: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return gestureRecognizer  == panGestureRecognizer
+    }
 }
