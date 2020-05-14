@@ -26,6 +26,7 @@ final class HomePageInteractor: HomePageInteractorInput {
 
     private var isShowPopupAboutPremium = true
     private(set) var homeCardsLoaded = false
+    private var isFirstAuthorityRequest = true
     
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
@@ -165,6 +166,11 @@ final class HomePageInteractor: HomePageInteractorInput {
             switch response {
             case .success(let result):
                 AuthoritySingleton.shared.refreshStatus(with: result)
+                
+                if self?.isFirstAuthorityRequest == true {
+                    AnalyticsService.updateUser()
+                    self?.isFirstAuthorityRequest = false
+                }
 
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
                     DispatchQueue.main.async {
