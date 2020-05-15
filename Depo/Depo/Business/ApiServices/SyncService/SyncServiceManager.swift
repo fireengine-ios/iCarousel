@@ -76,9 +76,11 @@ class SyncServiceManager {
     init() {
         photoSyncService.delegate = self
         videoSyncService.delegate = self
+        CacheManager.shared.delegates.add(self)
     }
     
     deinit {
+        CacheManager.shared.delegates.remove(self)
         reachabilityService.delegates.remove(self)
         NotificationCenter.default.removeObserver(self)
     }
@@ -143,10 +145,6 @@ class SyncServiceManager {
             printLog("AUTOSYNC: coreDataStack isn't ready")
             backgroundSyncHandler?(false)
             return
-        }
-        
-        if !CacheManager.shared.isCacheActualized {
-            CacheManager.shared.delegates.add(self)
         }
         
         dispatchQueue.async { [weak self] in
@@ -399,7 +397,6 @@ extension SyncServiceManager: ReachabilityServiceDelegate {
 
 extension SyncServiceManager: CacheManagerDelegate {
     func didCompleteCacheActualization() {
-        CacheManager.shared.delegates.remove(self)
         updateImmediately()
     }
 }
