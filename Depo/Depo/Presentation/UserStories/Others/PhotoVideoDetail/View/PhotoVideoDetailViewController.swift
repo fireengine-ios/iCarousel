@@ -358,40 +358,42 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         }
     }
     
-    private func scrollRight() {
-        if let index = selectedIndex, index > 0 {
-            selectedIndex = index - 1
-            onItemSelected(at: index - 1, from: objects)
+    func handleSwipe(recognizer: UISwipeGestureRecognizer) {
+        switch (recognizer.state, recognizer.direction) {
+        case (.ended, .left):
+            scrollLeft()
+        case (.ended, .right):
+            scrollRight()
+        default:
+            return
         }
+    }
+    
+    private func scrollRight() {
+        guard let index = selectedIndex else {
+            return
+        }
+        let newIndex = index - 1
+        scroll(to: newIndex)
     }
     
     private func scrollLeft() {
-        if let index = selectedIndex, index < objects.count - 1 {
-            selectedIndex = index + 1
-            onItemSelected(at: index + 1, from: objects)
-        }
-    }
-    
-    func handleSwipe(recognizer: UISwipeGestureRecognizer) {
-        switch recognizer.state {
-            
-        case .ended:
-            switch recognizer.direction {
-            case .left:
-                print("left")
-                scrollRight()
-            case .right:
-                print("right")
-                scrollLeft()
-            default:
-                print("def")
-                return
-            }
-        default:
+        guard let index = selectedIndex else {
             return
-            
+        }
+        let newIndex = index + 1
+        scroll(to: newIndex)
+    }
+
+    private func scroll(to index: Int) {
+        guard 0..<objects.count ~= index else {
+            return
         }
         
+        selectedIndex = index
+        let newContentOffsetX = collectionView.bounds.size.width * CGFloat(index)
+        let newContentOffset = CGPoint(x: newContentOffsetX, y: collectionView.contentOffset.y)
+        collectionView.setContentOffset(newContentOffset, animated: true)
     }
     
     func positionForView(velocityY: CGFloat) {
