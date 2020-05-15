@@ -358,29 +358,40 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         }
     }
     
+    private func scrollRight() {
+        if let index = selectedIndex, index > 0 {
+            selectedIndex = index - 1
+            onItemSelected(at: index - 1, from: objects)
+        }
+    }
+    
+    private func scrollLeft() {
+        if let index = selectedIndex, index < objects.count - 1 {
+            selectedIndex = index + 1
+            onItemSelected(at: index + 1, from: objects)
+        }
+    }
+    
     func handleSwipe(recognizer: UISwipeGestureRecognizer) {
         switch recognizer.state {
-        case .began:
-            return
-            
-        case .changed:
-            return
             
         case .ended:
             switch recognizer.direction {
             case .left:
-                return
+                print("left")
+                scrollRight()
             case .right:
-                return
+                print("right")
+                scrollLeft()
             default:
-                //not allowed
-                break
+                print("def")
+                return
             }
-           return
-            
         default:
-            break
+            return
+            
         }
+        
     }
     
     func positionForView(velocityY: CGFloat) {
@@ -726,14 +737,23 @@ final class PassThroughView: UIView {
         
     private lazy var panGestureRecognizer: UIPanGestureRecognizer = {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler))
+        gesture.delegate = self
         return gesture
     }()
     
-    private lazy var swipeGestureRecognizer: UISwipeGestureRecognizer = {
+    private lazy var swipeGestureRecognizerRight: UISwipeGestureRecognizer = {
         let gesture = UISwipeGestureRecognizer(target: self, action:
             #selector(swipeGestureRecognizerHandler))
         gesture.delegate = self
-        gesture.direction = [.left, .right]
+        gesture.direction = .right
+        return gesture
+    }()
+    
+    private lazy var swipeGestureRecognizerLeft: UISwipeGestureRecognizer = {
+        let gesture = UISwipeGestureRecognizer(target: self, action:
+            #selector(swipeGestureRecognizerHandler))
+        gesture.delegate = self
+        gesture.direction = .left
         return gesture
     }()
     
@@ -770,13 +790,15 @@ final class PassThroughView: UIView {
             return
         }
         window.addGestureRecognizer(panGestureRecognizer)
-        window.addGestureRecognizer(swipeGestureRecognizer)
+        window.addGestureRecognizer(swipeGestureRecognizerRight)
+        window.addGestureRecognizer(swipeGestureRecognizerLeft)
     }
     
 }
 
 extension PassThroughView: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return gestureRecognizer  == panGestureRecognizer
+        /// handle right-left swipes first
+        return otherGestureRecognizer is UISwipeGestureRecognizer && gestureRecognizer is UIPanGestureRecognizer
     }
 }
