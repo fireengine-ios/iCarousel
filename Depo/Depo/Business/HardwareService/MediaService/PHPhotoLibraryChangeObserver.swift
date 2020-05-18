@@ -40,68 +40,69 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         
         fetchResult = changes.fetchResultAfterChanges
 
-        if changes.hasIncrementalChanges, changes.insertedIndexes != nil || changes.removedIndexes != nil || changes.changedIndexes != nil {
-            
-            let previousFetch = changes.fetchResultBeforeChanges
-            var phChanges = PhotoLibraryItemsChanges()
-            
-            func notify() {
-                NotificationCenter.default.post(name: .notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
-            }
-            
-            func checkChangedObjects() {
-                guard let changedIndexes = changes.changedIndexes else {
-                    notify()
-                    return
-                }
-                
-                let changedAssets = previousFetch.objects(at: changedIndexes)
-                
-                phChanges[.changed] = changedAssets
-                printLog("photoLibraryDidChange - changed \(changedAssets.count) assets")
-                
-                MediaItemOperationsService.shared.update(localMediaItems: changedAssets) {
-                    notify()
-                }
-            }
-            
-            func checkDeletedObjects() {
-                guard let removedIndexes = changes.removedIndexes else {
-                    checkChangedObjects()
-                    return
-                }
-                
-                let removedAssets = previousFetch.objects(at: removedIndexes)
-                
-                phChanges[.removed] = removedAssets
-                printLog("photoLibraryDidChange - removed \(removedAssets.count) assets")
-
-                UploadService.default.cancelOperations(with: removedAssets)
-                
-                MediaItemOperationsService.shared.remove(localMediaItems: removedAssets) {
-                    checkChangedObjects()
-                }
-            }
-            
-            func checkInsertedObjects() {
-                guard let insertedIndexes = changes.insertedIndexes else {
-                    checkDeletedObjects()
-                    return
-                }
-                
-                let insertedAssets = fetchResult.objects(at: insertedIndexes)
-                
-                phChanges[.added] = insertedAssets
-                
-                printLog("photoLibraryDidChange - added \(insertedAssets.count) assets")
-                
-                MediaItemOperationsService.shared.append(localMediaItems: insertedAssets, needCreateRelationships: true) {
-                    checkDeletedObjects()
-                }
-            }
-            
-            checkInsertedObjects()
+        guard changes.hasIncrementalChanges else {
+            printLog("photoLibraryDidChange - no incremental changes")
+            return
         }
+            
+        var phChanges = PhotoLibraryItemsChanges()
+        
+        func notify() {
+            NotificationCenter.default.post(name: .notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
+        }
+        
+        func checkChangedObjects() {
+            let changedAssets = changes.changedObjects
+            
+            guard !changedAssets.isEmpty else {
+                notify()
+                return
+            }
+            
+            phChanges[.changed] = changedAssets
+            printLog("photoLibraryDidChange - changed \(changedAssets.count) assets")
+            
+            MediaItemOperationsService.shared.update(localMediaItems: changedAssets) {
+                notify()
+            }
+        }
+        
+        func checkDeletedObjects() {
+            let removedAssets = changes.removedObjects
+            
+            guard !removedAssets.isEmpty else {
+                checkChangedObjects()
+                return
+            }
+            
+            phChanges[.removed] = removedAssets
+            printLog("photoLibraryDidChange - removed \(removedAssets.count) assets")
+            
+            UploadService.default.cancelOperations(with: removedAssets)
+            
+            MediaItemOperationsService.shared.remove(localMediaItems: removedAssets) {
+                checkChangedObjects()
+            }
+        }
+        
+        func checkInsertedObjects() {
+            let insertedAssets = changes.insertedObjects
+            
+            guard !insertedAssets.isEmpty else {
+                checkDeletedObjects()
+                return
+            }
+            
+            phChanges[.added] = insertedAssets
+            
+            printLog("photoLibraryDidChange - added \(insertedAssets.count) assets")
+            
+            MediaItemOperationsService.shared.append(localMediaItems: insertedAssets, needCreateRelationships: true) {
+                checkDeletedObjects()
+            }
+        }
+        
+        checkInsertedObjects()
     }
     
     private func processAlbumsChanges(_ changeInstance: PHChange) {
@@ -132,54 +133,58 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
             return
         }
         
-        if changes.hasIncrementalChanges {
-            var phChanges = PhotoLibraryAlbumItemsChanges()
-            
-            func notify() {
-                NotificationCenter.default.post(name: .notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
-            }
-            
-            func checkChangedObjects() {
-                guard !changes.changedObjects.isEmpty else {
-                    notify()
-                    return
-                }
-                
-                phChanges[.changed] = changes.changedObjects
-                printLog("photoLibraryDidChange - changed \(changes.changedObjects.count) albums")
-                
-                MediaItemsAlbumOperationService.shared.changeAlbums(changes.changedObjects) {
-                    notify()
-                }
-            }
-            
-            func checkDeletedObjects() {
-                guard !changes.removedObjects.isEmpty else {
-                    checkChangedObjects()
-                    return
-                }
-                
-                phChanges[.removed] = changes.removedObjects
-                printLog("photoLibraryDidChange - removed \(changes.removedObjects.count) albums")
-                
-                MediaItemsAlbumOperationService.shared.deleteAlbums(changes.removedObjects) {
-                    checkChangedObjects()
-                }
-            }
-            
-            func checkInsertedObjects() {
-                guard !changes.insertedObjects.isEmpty else {
-                    checkDeletedObjects()
-                    return
-                }
-                
-                phChanges[.added] = changes.insertedObjects
-                printLog("photoLibraryDidChange - added \(changes.insertedObjects.count) albums")
-                
-                //Creation albums when handle update assets event
-            }
-            
-            checkInsertedObjects()
+        var phChanges = PhotoLibraryAlbumItemsChanges()
+        
+        func notify() {
+            NotificationCenter.default.post(name: .notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
         }
+        
+        func checkChangedObjects() {
+            let changedAlbums = changes.changedObjects
+            
+            guard !changedAlbums.isEmpty else {
+                notify()
+                return
+            }
+            
+            phChanges[.changed] = changedAlbums
+            printLog("photoLibraryDidChange - changed \(changedAlbums.count) albums")
+            
+            MediaItemsAlbumOperationService.shared.changeAlbums(changedAlbums) {
+                notify()
+            }
+        }
+        
+        func checkDeletedObjects() {
+            let removedAlbums = changes.removedObjects
+            
+            guard !removedAlbums.isEmpty else {
+                checkChangedObjects()
+                return
+            }
+            
+            phChanges[.removed] = removedAlbums
+            printLog("photoLibraryDidChange - removed \(removedAlbums.count) albums")
+            
+            MediaItemsAlbumOperationService.shared.deleteAlbums(removedAlbums) {
+                checkChangedObjects()
+            }
+        }
+        
+        func checkInsertedObjects() {
+            let insertedAlbums = changes.insertedObjects
+            
+            guard !insertedAlbums.isEmpty else {
+                checkDeletedObjects()
+                return
+            }
+            
+            phChanges[.added] = insertedAlbums
+            printLog("photoLibraryDidChange - added \(insertedAlbums.count) albums")
+            
+            //Creation albums when handle update assets event
+        }
+        
+        checkInsertedObjects()
     }
 }
