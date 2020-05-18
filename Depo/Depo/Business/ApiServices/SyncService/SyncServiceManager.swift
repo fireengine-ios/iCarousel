@@ -77,6 +77,7 @@ class SyncServiceManager {
         photoSyncService.delegate = self
         videoSyncService.delegate = self
         CacheManager.shared.delegates.add(self)
+        BackgroundTaskService.shared.expirationDelegates.add(self)
     }
     
     deinit {
@@ -398,5 +399,11 @@ extension SyncServiceManager: ReachabilityServiceDelegate {
 extension SyncServiceManager: CacheManagerDelegate {
     func didCompleteCacheActualization() {
         updateImmediately()
+    }
+}
+
+extension SyncServiceManager: BackgroundTaskServiceDelegate {
+    func backgroundTaskWillExpire() {
+        stopSync()
     }
 }
