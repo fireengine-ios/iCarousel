@@ -14,11 +14,11 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="104"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ud-bH-bVv">
-                    <rect key="frame" x="16" y="16" width="382" height="72"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8ud-bH-bVv">
+                    <rect key="frame" x="16" y="8" width="382" height="88"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="999" text="Title label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8A-hs-l3W">
-                            <rect key="frame" x="0.0" y="0.0" width="382" height="72"/>
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="88"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -28,9 +28,9 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="8ud-bH-bVv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="3bG-Sk-M5D"/>
+                <constraint firstItem="8ud-bH-bVv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="3bG-Sk-M5D"/>
                 <constraint firstItem="8ud-bH-bVv" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="70I-vr-sYJ"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="8ud-bH-bVv" secondAttribute="bottom" constant="16" id="P5P-xw-6bi"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="8ud-bH-bVv" secondAttribute="bottom" constant="8" id="P5P-xw-6bi"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8ud-bH-bVv" secondAttribute="trailing" constant="16" id="be0-up-kca"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

@@ -54,7 +54,7 @@ final class HSCompletionPopUpsFactory {
         }
     }
 
-    private func isDoNotShowAgainButtonPressed(for state: State) -> Bool {
+    func isDoNotShowAgainButtonPressed(for state: State) -> Bool {
         let isDoNotShowAgainButtonPressed: Bool
         
         switch state {

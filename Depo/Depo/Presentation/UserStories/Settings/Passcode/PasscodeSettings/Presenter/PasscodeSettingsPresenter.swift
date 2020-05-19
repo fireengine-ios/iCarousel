@@ -38,6 +38,7 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     }
     
     func turnOffPasscode() {
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.snackbarMessageResetPasscodeSuccess)
         interactor.clearPasscode()
         view?.setup(state: .set, animated: true)
     }

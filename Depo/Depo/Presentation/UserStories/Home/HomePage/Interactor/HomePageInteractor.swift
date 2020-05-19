@@ -26,6 +26,7 @@ final class HomePageInteractor: HomePageInteractorInput {
 
     private var isShowPopupAboutPremium = true
     private(set) var homeCardsLoaded = false
+    private var isFirstAuthorityRequest = true
     
     private func fillCollectionView(isReloadAll: Bool) {
         self.homeCardsLoaded = true
@@ -34,7 +35,8 @@ final class HomePageInteractor: HomePageInteractorInput {
 
     func viewIsReady() {
         homeCardsService.delegate = self
-        FreeAppSpace.session.checkFreeAppSpace()
+        FreeAppSpace.session.showFreeUpSpaceCard()
+        FreeAppSpace.session.checkFreeUpSpace()
         setupAutoSyncTriggering()
         PushNotificationService.shared.openActionScreen()
         
@@ -165,6 +167,11 @@ final class HomePageInteractor: HomePageInteractorInput {
             switch response {
             case .success(let result):
                 AuthoritySingleton.shared.refreshStatus(with: result)
+                
+                if self?.isFirstAuthorityRequest == true {
+                    AnalyticsService.updateUser()
+                    self?.isFirstAuthorityRequest = false
+                }
 
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] response in
                     DispatchQueue.main.async {
@@ -277,13 +284,24 @@ final class HomePageInteractor: HomePageInteractorInput {
             }
         }
     }
-    
-    
 }
 
-
 extension HomePageInteractor: HomeCardsServiceImpDelegte {
+ 
+    func albumHiddenSuccessfully(_ successfully: Bool) {
+        let message = successfully ? TextConstants.hideSingleAlbumSuccessPopupMessage : TextConstants.temporaryErrorOccurredTryAgainLater
+        output.showSnackBarWith(message: message)
+    }
+        
     func needUpdateHomeScreen() {
         getAllCardsForHomePage()
+    }
+    
+    func showSpinner() {
+        output.showSpinner()
+    }
+    
+    func hideSpinner() {
+        output.hideSpinner()
     }
 }

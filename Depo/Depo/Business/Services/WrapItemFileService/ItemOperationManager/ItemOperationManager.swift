@@ -199,9 +199,9 @@ class ItemOperationManager: NSObject {
     func startUpdateView(view: ItemOperationManagerViewProtocol) {
         views.add(view)
         
-        if currentUploadingObject != nil {
-            view.startUploadFile(file: currentUploadingObject!)
-            view.setProgressForUploadingFile(file: currentUploadingObject!, progress: currentUploadProgress)
+        if let object = currentUploadingObject {
+            view.startUploadFile(file: object)
+            view.setProgressForUploadingFile(file: object, progress: currentUploadProgress)
         }
     }
     

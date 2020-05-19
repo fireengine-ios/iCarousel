@@ -101,17 +101,6 @@ extension ErrorResponse: LocalizedError {
         return false
     }
     
-    var localizedDescription: String {
-        guard let errorDescription = errorDescription else {
-            return TextConstants.temporaryErrorOccurredTryAgainLater
-        }
-
-        if errorDescription.contains("\(errorCode)") == true {
-            return TextConstants.temporaryErrorOccurredTryAgainLater
-        } else {
-            return errorDescription
-        }
-    }
 }
 
 extension Error {
@@ -189,6 +178,16 @@ extension Error {
             return loginError.dimensionValue
         } else if let serverStatusError = self as? ServerStatusError {
             return serverStatusError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let passwordError = self as? UpdatePasswordErrors {
+            return passwordError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let serverError = self as? ServerError {
+            return serverError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let serverValueError = self as? ServerValueError {
+            return serverValueError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let serverMessageError = self as? ServerMessageError {
+            return serverMessageError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
+        } else if let setSecretQuestionError = self as? SetSecretQuestionErrors {
+            return setSecretQuestionError.errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
         } else if description.contains("\(_code)") {
             return TextConstants.temporaryErrorOccurredTryAgainLater
         } else {

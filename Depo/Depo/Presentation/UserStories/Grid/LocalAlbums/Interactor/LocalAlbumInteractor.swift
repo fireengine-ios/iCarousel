@@ -13,8 +13,6 @@ class LocalAlbumInteractor: BaseFilesGreedInteractor {
     override func getAllItems(sortBy: SortedRules) {
         debugLog("LocalAlbumInteractor getAllItems")
         localStorage.getAllAlbums { [weak self] albums in
-            debugLog("LocalAlbumInteractor getAllItems success")
-
             DispatchQueue.main.async {
                 self?.output.getContentWithSuccess(array: [albums])
             }            

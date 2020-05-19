@@ -149,9 +149,13 @@ final class NetmeraService {
         Netmera.setLogLevel(.debug)
         #endif
         
-        Netmera.setAPIKey(getApiKey())
+        updateAPIKey()
         
         Netmera.setAppGroupName(SharedConstants.groupIdentifier)
+    }
+    
+    static func updateAPIKey() {
+        Netmera.setAPIKey(getApiKey())
     }
     
     private static func getApiKey() -> String {
@@ -160,7 +164,7 @@ final class NetmeraService {
             case .production:
                 return "3PJRHrXDiqbDyulzKSM_m59cpbYT9LezJOwQ9zsHAkjMSBUVQ92OWw"
             case .preProduction, .test:
-                return "3PJRHrXDiqa-pwWScAq1PwON_uN9F4h_7_vf0s3AwgwwqNTCnPZ_Bg"
+                return "3PJRHrXDiqa-pwWScAq1P0zUMUefELashtuA8DKjAJninSbeaRHk7A"
             }
         #endif
         

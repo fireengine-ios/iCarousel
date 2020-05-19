@@ -68,6 +68,10 @@ class UploadFromLifeBoxPhotosPresenter: BaseFilesGreedPresenter, UploadFromLifeB
             return
         }
         uploadView.hideView()
+        
+        if interactor is UploadFromLifeBoxFavoritesInteractor {
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.snackbarMessageAddedToFavoritesFromLifeBox)
+        }
     }
     
     func asyncOperationFail(errorResponse: ErrorResponse) {

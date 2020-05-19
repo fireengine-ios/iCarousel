@@ -76,9 +76,12 @@ class SyncServiceManager {
     init() {
         photoSyncService.delegate = self
         videoSyncService.delegate = self
+        CacheManager.shared.delegates.add(self)
+        BackgroundTaskService.shared.expirationDelegates.add(self)
     }
     
     deinit {
+        CacheManager.shared.delegates.remove(self)
         reachabilityService.delegates.remove(self)
         NotificationCenter.default.removeObserver(self)
     }
@@ -114,7 +117,7 @@ class SyncServiceManager {
     
     func updateInBackground() {
         debugLog("SyncServiceManager updateInBackground")
-        
+        sendNetmeraEvent()
         let time = Date().timeIntervalSince1970
         if time - lastAutoSyncTime > timeIntervalBetweenSyncsInBackground {
             BackgroundTaskService.shared.beginBackgroundTask()
@@ -240,6 +243,11 @@ class SyncServiceManager {
     }
     
     private var isSubscribeForNotifications = false
+    
+    private func sendNetmeraEvent() {
+        let event = NetmeraEvents.Actions.BackgroundSync(syncType: .locationChange)
+        AnalyticsService.sendNetmeraEvent(event: event)
+    }
 }
 
 
@@ -340,7 +348,7 @@ extension SyncServiceManager {
         
         CardsManager.default.stopOperationWith(type: .prepareToAutoSync)
         
-        FreeAppSpace.session.checkFreeAppSpaceAfterAutoSync()
+        FreeAppSpace.session.checkFreeUpSpaceAfterAutoSync()
         
         if isSyncFinished {
             backgroundSyncHandler?(true)
@@ -387,3 +395,15 @@ extension SyncServiceManager: ReachabilityServiceDelegate {
     }
 }
 
+
+extension SyncServiceManager: CacheManagerDelegate {
+    func didCompleteCacheActualization() {
+        updateImmediately()
+    }
+}
+
+extension SyncServiceManager: BackgroundTaskServiceDelegate {
+    func backgroundTaskWillExpire() {
+        stopSync()
+    }
+}

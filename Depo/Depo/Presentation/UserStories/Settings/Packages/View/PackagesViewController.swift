@@ -45,15 +45,12 @@ final class PackagesViewController: BaseViewController {
     
     @IBOutlet weak private var cardsStackView: UIStackView!
     @IBOutlet weak private var promoView: PromoView!
-    @IBOutlet weak private var policyTextView: UITextView! {
-        willSet {
-            newValue.backgroundColor = .clear
-        }
-    }
+    @IBOutlet weak private var policyStackView: UIStackView!
     
     @IBOutlet var keyboardHideManager: KeyboardHideManager!
     
     private lazy var activityManager = ActivityIndicatorManager()
+    private lazy var policyView = SubscriptionsPolicyView()
     
     private let policyHeaderSize: CGFloat = Device.isIpad ? 15 : 13
     private let policyTextSize: CGFloat = Device.isIpad ? 13 : 10
@@ -83,34 +80,6 @@ final class PackagesViewController: BaseViewController {
         output.viewWillAppear()
     }
     
-    private func setupPolicy() {
-        let attributedString = NSMutableAttributedString(
-            string: TextConstants.packagesPolicyHeader,
-            attributes: [.foregroundColor: ColorConstants.textGrayColor,
-                         .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)])
-        
-        let policyText = RouteRequests.isBillo ? TextConstants.packagesPolicyBilloText : TextConstants.packagesPolicyText
-        
-        let policyAttributedString = NSMutableAttributedString(
-            string: "\n\n" + policyText,
-            attributes: [.foregroundColor: ColorConstants.textGrayColor,
-                         .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
-        attributedString.append(policyAttributedString)
-        
-        let termsAttributedString = NSMutableAttributedString(
-            string: TextConstants.termsOfUseLinkText,
-            attributes: [.link: TextConstants.NotLocalized.termsOfUseLink,
-                         .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
-        attributedString.append(termsAttributedString)
-        
-        policyTextView.attributedText = attributedString
-        policyTextView.clipsToBounds = true
-        policyTextView.layer.cornerRadius = 5
-        policyTextView.layer.borderColor = ColorConstants.textLightGrayColor.cgColor
-        policyTextView.layer.borderWidth = 1
-        view.layoutIfNeeded()
-    }
-    
     func showRestoreButton() {
         //IF THE USER NON CELL USER
         let moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "refresh_icon"), style: .plain, target: self, action: #selector(restorePurhases))
@@ -119,7 +88,7 @@ final class PackagesViewController: BaseViewController {
     }
     
     func showInAppPolicy() {
-        setupPolicy()
+        policyStackView.addArrangedSubview(policyView)
     }
     
     @objc private func restorePurhases() {

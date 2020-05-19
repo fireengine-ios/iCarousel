@@ -29,6 +29,9 @@ final class HomeCardsServiceImp {
 
 protocol HomeCardsServiceImpDelegte {
     func needUpdateHomeScreen()
+    func albumHiddenSuccessfully(_ successfully: Bool)
+    func showSpinner()
+    func hideSpinner()
 }
 
 extension HomeCardsServiceImp: HomeCardsService {

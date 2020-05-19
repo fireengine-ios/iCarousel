@@ -335,6 +335,8 @@ final class UploadOperation: Operation {
                     self?.removeTemporaryFile(at: parameters.urlToLocalFile)
                 }
                 
+                self.storageVars.lastUnsavedFileUUID = parameters.tmpUUID
+                
                 self.requestObject = self.upload(uploadParam: parameters, success: { [weak self] in
                     debugLog("simple_upload: uploaded")
                     
@@ -440,8 +442,6 @@ final class UploadOperation: Operation {
         inputItem.syncStatus = .synced
         inputItem.setSyncStatusesAsSyncedForCurrentUser()
         
-        storageVars.lastUnsavedFileUUID = parameters.tmpUUID
-        
         uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
             self?.dispatchQueue.async { [weak self] in
                 guard let self = self else {
@@ -465,11 +465,11 @@ final class UploadOperation: Operation {
                 }
                 self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
                     self?.storageVars.lastUnsavedFileUUID = nil
+                    debugLog("_upload: sync status is updated for \(self?.inputItem.name ?? "") ")
+                    success()
                 }
                 
                 debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")
-                
-                success()
             }
         }, fail: fail)
     }

@@ -44,6 +44,7 @@ final class SettingsBundleHelper: NSObject {
     private func setCurrentRouteEnvironment() {
         let newEnvironment = getPreferredEnvironment()
         RouteRequests.currentServerEnvironment = newEnvironment
+        AnalyticsService.updateNetmeraAPIKey()
     }
     
     func getPreferredEnvironment() -> RouteRequests.ServerEnvironment {
