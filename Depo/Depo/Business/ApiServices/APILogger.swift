@@ -23,7 +23,7 @@ final class APILogger {
     private let isDebugLog = false
     
     private let excludedKeys = ["otpcode", "token"]
-    private let excludedValues = ["temp_url_sig"]
+    private let excludedValues = ["temp_url_sig", "token", "password", "code"]
     
     deinit {
         stopLogging()
@@ -56,7 +56,7 @@ final class APILogger {
                 let task = userInfo[Notification.Key.Task] as? URLSessionTask,
                 let request = task.originalRequest,
                 let httpMethod = request.httpMethod,
-                let requestURL = request.url,
+                let requestURL = self.filteredUrlString(request.url),
                 self.canLogRequest(requestURL, httpMethod: httpMethod)
                 else {
                     return
@@ -78,7 +78,7 @@ final class APILogger {
                 let task = userInfo[Notification.Key.Task] as? URLSessionTask,
                 let request = task.originalRequest,
                 let httpMethod = request.httpMethod,
-                let requestURL = request.url,
+                let requestURL = self.filteredUrlString(request.url),
                 self.canLogRequest(requestURL, httpMethod: httpMethod),
                 !(task.state == .canceling && httpMethod == "GET")
                 else {
@@ -102,7 +102,11 @@ final class APILogger {
                          dataLength: data?.count,
                          transId: transId)
                 
-                if 200...299 ~= response.statusCode {
+                //https://jira.turkcell.com.tr/browse/FE-2558
+                //don't need log body if status code 403
+                if response.statusCode == 403 {
+                    return
+                } else if 200...299 ~= response.statusCode {
                     if let error = task.error as? URLError, error.code == .networkConnectionLost {
                         self.log(string: "The network connection was lost")
                     }
@@ -128,11 +132,6 @@ final class APILogger {
     private func canLogRequest(_ url: URL, httpMethod: String) -> Bool {
         // ReachabilityService.checkAPI
         if url == RouteRequests.baseUrl {
-            return false
-        }
-        
-        let isContainsExcludedValue = excludedValues.first(where: { url.absoluteString.lowercased().contains($0) }) != nil
-        if isContainsExcludedValue {
             return false
         }
         
@@ -268,6 +267,24 @@ final class APILogger {
             }
         default:
             return json.rawString()
+        }
+    }
+    
+    private func filteredUrlString(_ url: URL?) -> URL? {
+        guard let url = url else {
+            return nil
+        }
+
+        let components = url.absoluteString.split(separator: "?")
+        guard components.count == 2, let query = components.last else {
+            return url
+        }
+
+        let isQueryContainsExcludedValues = excludedValues.first(where: { query.lowercased().contains($0) }) != nil        
+        if isQueryContainsExcludedValues {
+            return url.byTrimmingQuery
+        } else {
+            return url
         }
     }
 }
