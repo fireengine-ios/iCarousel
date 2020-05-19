@@ -322,6 +322,12 @@ final class MediaItemOperationsService {
             var result: [MediaItem] = []
             do {
                 result = try context.fetch(request)
+            } catch let error as NSError {
+                let errorMessage = "context.fetch failed with: \(error.localizedDescription)"
+                debugLog(errorMessage)
+                debugLog(error.domain)
+                debugLog(error.localizedFailureReason ?? "")
+                assertionFailure(errorMessage)
             } catch {
                 let errorMessage = "context.fetch failed with: \(error.localizedDescription)"
                 debugLog(errorMessage)
@@ -675,7 +681,7 @@ final class MediaItemOperationsService {
         inProcessLocalFiles = true
         
         let localMediaStorage = LocalMediaStorage.default
-        let assetsList = localMediaStorage.getAllImagesAndVideoAssets()
+        let assetsList = localMediaStorage.updateAllImagesAndVideoAssets()
         
         updateICloudStatus(for: assetsList)
         
@@ -811,7 +817,7 @@ final class MediaItemOperationsService {
                 
                 self.coreDataStack.saveDataForContext(context: context, savedCallBack: { [weak self] in
                     ///Appearantly after recovery local ID may change, so temporary soloution is to check all files all over. and in the future chenge DataBase behavior heavily
-                    let assetsList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
+                    let assetsList = LocalMediaStorage.default.updateAllImagesAndVideoAssets()
                     
                     self?.checkLocalFilesExistence(actualPhotoLibItemsIDs: assetsList.map{$0.localIdentifier}, complition: completion)
                 })
@@ -992,6 +998,7 @@ final class MediaItemOperationsService {
     }
     
     func hasLocalItemsForSync(video: Bool, image: Bool, completion: @escaping  (_ has: Bool) -> Void) {
+        debugLog("hasLocalItemsForSync")
         getUnsyncedMediaItems(video: video, image: image, completion: { items in
             let wrappedItems = items.map { $0.wrapedObject }
             completion(!AppMigrator.migrateSyncStatus(for: wrappedItems).isEmpty)
@@ -1000,6 +1007,7 @@ final class MediaItemOperationsService {
     }
     
     func allLocalItemsForSync(video: Bool, image: Bool, completion: @escaping WrapObjectsCallBack) {
+        debugLog("allLocalItemsForSync")
         getUnsyncedMediaItems(video: video, image: image, completion: { items in
             let wrappedItems = items
                 .filter { $0.fileSizeValue < NumericConstants.fourGigabytes }
@@ -1011,6 +1019,7 @@ final class MediaItemOperationsService {
     }
     
     private func getUnsyncedMediaItems(video: Bool, image: Bool, completion: @escaping MediaItemsCallBack) {
+        debugLog("getUnsyncedMediaItems")
         let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
         let currentlyInLibriaryLocalIDs = assetList.map { $0.localIdentifier }
         

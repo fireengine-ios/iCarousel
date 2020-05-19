@@ -1121,7 +1121,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         let rounded = round(duration)
         
         let seconds = Int(rounded) % 60
-        let minutes = Int(duration) / 60
+        let minutes = Int(rounded) / 60
         
         if minutes < 100 {
             return String(format: "%02i:%02i", minutes, seconds)

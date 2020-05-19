@@ -15,6 +15,11 @@ final class DocumentsAlbumCard: BaseCardView, ControlTabBarProtocol {
     @IBOutlet private weak var descriptionLabel: UILabel!
     @IBOutlet private weak var viewDocumentButton: UIButton!
     
+    private lazy var tapGestureRocognizer: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+        return gesture
+    }()
+    
     private let imagesInStackView: CGFloat = 4
     private var viewAlreadySet = false
     
@@ -23,6 +28,20 @@ final class DocumentsAlbumCard: BaseCardView, ControlTabBarProtocol {
     private lazy var router = RouterVC()
     private var thingsItem: ThingsItem?
     private var albumItem: AlbumItem?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addTapGestureRecognizer()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        addTapGestureRecognizer()
+    }
+    
+    private func addTapGestureRecognizer() {
+       addGestureRecognizer(tapGestureRocognizer)
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -130,18 +149,26 @@ final class DocumentsAlbumCard: BaseCardView, ControlTabBarProtocol {
             assertionFailure()
             return
         }
-        
-        hideActionService.startOperation(for: .albums([albumItem]), output: nil, success: {
-            self.homeCardsService.delegate?.needUpdateHomeScreen()
-        }, fail: {_ in})
+        homeCardsService.delegate?.showSpinner()
+        hideActionService.startOperation(for: .albums([albumItem]), output: self, success: { [weak self] in
+            self?.homeCardsService.delegate?.needUpdateHomeScreen()
+            self?.homeCardsService.delegate?.albumHiddenSuccessfully(true)
+            }, fail: {[weak self ] _ in
+                self?.homeCardsService.delegate?.albumHiddenSuccessfully(false)
+                self?.homeCardsService.delegate?.hideSpinner()
+        })
     }
     
     @IBAction private func viewDocumentsAlbum(_ sender: UIButton) {
         viewDocumentButton.isEnabled = false
         openAlbum()
     }
+    
+    @objc private func handleTapGesture(_ recognizer: UITapGestureRecognizer) {
+        viewDocumentButton.isEnabled = false
+        openAlbum()
+    }
 }
-
 
 extension DocumentsAlbumCard: FaceImagePhotosViewControllerDelegate {
     func viewWillDisappear() {
@@ -149,3 +176,18 @@ extension DocumentsAlbumCard: FaceImagePhotosViewControllerDelegate {
     }
 }
 
+extension DocumentsAlbumCard: BaseAsyncOperationInteractorOutput {
+    func outputView() -> Waiting? { return nil }
+    func startAsyncOperation() {}
+    func startAsyncOperationDisableScreen() {}
+    func startCancelableAsync(cancel: @escaping VoidHandler) {}
+    func startCancelableAsync(with text: String, cancel: @escaping VoidHandler) {}
+    func completeAsyncOperationEnableScreen(errorMessage: String?) {}
+    func completeAsyncOperationEnableScreen() {}
+    func asyncOperationSuccess() {}
+    func asyncOperationFail(errorMessage: String?) {}
+    
+    func confirmationPopUpCancelTapped() {
+        homeCardsService.delegate?.hideSpinner()
+    }
+}

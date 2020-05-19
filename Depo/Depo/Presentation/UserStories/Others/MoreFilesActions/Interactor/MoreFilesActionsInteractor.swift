@@ -6,13 +6,19 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
+enum DivorseItems {
+    case items
+    case albums
+    case folders
+}
+
 class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     weak var output: MoreFilesActionsInteractorOutput?
     
     lazy var player: MediaPlayer = factory.resolve()
     
-    private let router = RouterVC()
+    let router = RouterVC()
     
     private var fileService = WrapItemFileService()
     private let albumService = PhotosAlbumService()
@@ -314,7 +320,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         } else if let items = remoteItems as? [Item] {
             hideActionService.startOperation(for: .photos(items),
                                              output: self.output,
-                                             success: self.successItemsAction(elementType: .hide, relatedItems: items),
+                                             success: self.successAction(elementType: .hide, itemsType: .items, relatedItems: items),
                                              fail: self.failItemsAction(elementType: .hide, relatedItems: items))
             
         } else {
@@ -337,7 +343,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
 
         hideActionService.startOperation(for: .albums(remoteItems),
                                          output: self.output,
-                                         success: self.successItemsAction(elementType: .hide, relatedItems: items),
+                                         success: self.successAction(elementType: .hide, itemsType: .albums, relatedItems: items),
                                          fail: self.failItemsAction(elementType: .hide, relatedItems: items))
     }
     
@@ -355,6 +361,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let okHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .unhide, label: .ok)
+            self?.output?.operationStarted(type: .unhide)
             vc.close { [weak self] in
                 self?.unhideItems(remoteItems)
             }
@@ -389,6 +396,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
 
         let okHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .restore, label: .ok)
+            self?.output?.operationStarted(type: .restore)
             vc.close { [weak self] in
                 self?.putBackItems(remoteItems)
             }
@@ -430,6 +438,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.albumService.deletePhotosFromAlbum(parameters: parameters, success: { [weak self] in
                 ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: album)
                 DispatchQueue.main.async {
+                    self?.showSnackbar(elementType: .removeFromAlbum, relatedItems: [])
                     self?.output?.operationFinished(type: .removeFromAlbum)
                 }
             }, fail: { [weak self] errorRespone in
@@ -516,7 +525,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             self?.output?.operationStarted(type: .move)
             self?.fileService.move(items: item, toPath: folder,
                                    success: { [weak self] in
-                                    self?.succesAction(elementType: .move)()
+                                    self?.successAction(elementType: .move)()
                                     //because we have animation of dismiss for this stack of view controllers we have some troubles with reloading data in root collection view
                                     //data will be updated after 0.3 seconds (time of aimation)
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
@@ -526,7 +535,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 }, fail: self?.failAction(elementType: .move))
             
             }, cancel: { [weak self] in
-                self?.succesAction(elementType: ElementTypes.move)()
+                self?.successAction(elementType: .move)()
         })
     }
     
@@ -538,10 +547,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         folderSelector.selectFolder(select: { [weak self] folder in
             self?.fileService.move(items: item, toPath: folder,
-                                   success: self?.succesAction(elementType: .copy),
+                                   success: self?.successAction(elementType: .copy),
                                    fail: self?.failAction(elementType: .copy))
             }, cancel: { [weak self] in
-                self?.succesAction(elementType: ElementTypes.move)()
+                self?.successAction(elementType: ElementTypes.move)()
         })
     }
     
@@ -571,7 +580,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             fileService.cancellableUpload(items: [firstItem], toPath: "",
                                           success: { [weak self] in
                                             hideHUD()
-                                            self?.succesAction(elementType: .sync)()
+                                            self?.successAction(elementType: .sync)()
                                         }, fail: { [weak self] response in
                                             hideHUD()
                                             let handler = self?.failAction(elementType: .sync)
@@ -587,7 +596,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                         })
         } else {
             fileService.upload(items: items, toPath: "",
-                               success: succesAction(elementType: .sync),
+                               success: successAction(elementType: .sync),
                                fail: failAction(elementType: .sync))
         }
     }
@@ -609,16 +618,17 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 downloadFaceImageAlbum(item: item)
             } else {
                 fileService.download(items: item, toPath: "",
-                                     success: succesAction(elementType: .download),
+                                     success: successAction(elementType: .download, relatedItems: item),
                                      fail: failAction(elementType: .download))
             }
         } else if let albums = item as? [AlbumItem] {
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Download(type: .album, count: albums.count))
             output?.startAsyncOperationDisableScreen()
-            albumService.loadItemsBy(albums: albums, success: {[weak self] itemsByAlbums in
+            albumService.loadItemsBy(albums: albums, success: { [weak self] itemsByAlbums in
+                let allItems = itemsByAlbums.flatMap { $1.filter { !$0.isLocalItem }}
                 self?.output?.completeAsyncOperationEnableScreen()
                 self?.fileService.download(itemsByAlbums: itemsByAlbums,
-                                           success: self?.succesAction(elementType: .download),
+                                           success: self?.successAction(elementType: .download, relatedItems: allItems),
                                            fail: self?.failAction(elementType: .download))
             })
         }
@@ -645,7 +655,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func addToFavorites(items: [BaseDataSourceItem]) {
         guard let items = items.filter({ !$0.isLocalItem }) as? [WrapData], items.count > 0 else { return }
         fileService.addToFavourite(files: items,
-                                   success: succesAction(elementType: .addToFavorites),
+                                   success: successAction(elementType: .addToFavorites),
                                    fail: failAction(elementType: .addToFavorites))
     }
     
@@ -655,7 +665,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
         output?.operationStarted(type: .removeFromFavorites)
         fileService.removeFromFavourite(files: items,
-                                        success: succesAction(elementType: .removeFromFavorites),
+                                        success: successAction(elementType: .removeFromFavorites),
                                         fail: failAction(elementType: .removeFromFavorites))
     }
     
@@ -776,6 +786,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let okHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .delete, label: .ok)
+            self?.output?.operationStarted(type: .delete)
             vc.close { [weak self] in
                 self?.deleteItems(items)
             }
@@ -807,7 +818,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         guard let wrapedItems = items as? [WrapData] else {
             return
         }
-        fileService.deleteLocalFiles(deleteFiles: wrapedItems, success: succesAction(elementType: .deleteDeviceOriginal),
+        fileService.deleteLocalFiles(deleteFiles: wrapedItems, success: successAction(elementType: .deleteDeviceOriginal),
                                      fail: failAction(elementType: .deleteDeviceOriginal))
     }
     
@@ -860,12 +871,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         albumService.moveToTrash(albums: albums, albumItems: [], success: { _ in
             ItemOperationManager.default.didMoveToTrashAlbums(albums)
-            self.succesAction(elementType: .removeAlbum)()
+            self.successAction(elementType: .removeAlbum)()
         }, fail: failAction(elementType: .removeAlbum))
     }
     
     private func deleteAllFromTrashBin() {
-        fileService.deletAllFromTrashBin(success: succesAction(elementType: .emptyTrashBin),
+        fileService.deletAllFromTrashBin(success: successAction(elementType: .emptyTrashBin),
                                          fail: failAction(elementType: .emptyTrashBin))
     }
     
@@ -910,44 +921,33 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     private func downloadFaceImageAlbum(item: Item) {
-        if item.fileType == .faceImage(.people),
-            let id = item.id {
-            peopleService.getPeopleAlbum(id: Int(id), status: .active, success: { [weak self] album in
-                let albumItem = AlbumItem(remote: album)
-                self?.albumService.loadItemsBy(albums: [albumItem], success: {[weak self] itemsByAlbums in
-                    self?.fileService.download(itemsByAlbums: itemsByAlbums,
-                                               success: self?.succesAction(elementType: .download),
-                                               fail: self?.failAction(elementType: .download))
-                })
-                }, fail: { fail in
-                    UIApplication.showErrorAlert(message: fail.description)
+        let successHandler: AlbumOperationResponse = { [weak self] album in
+            let albumItem = AlbumItem(remote: album)
+            self?.albumService.loadItemsBy(albums: [albumItem], success: { [weak self] itemsByAlbums in
+                let allItems = itemsByAlbums.flatMap { $1.filter { !$0.isLocalItem }}
+                self?.fileService.download(itemsByAlbums: itemsByAlbums,
+                                           success: self?.successAction(elementType: .download, relatedItems: allItems),
+                                           fail: self?.failAction(elementType: .download))
             })
-        } else if item.fileType == .faceImageAlbum(.things),
-            let id = item.id {
-            thingsService.getThingsAlbum(id: Int(id), status: .active, success: { [weak self] album in
-                let albumItem = AlbumItem(remote: album)
-                
-                self?.albumService.loadItemsBy(albums: [albumItem], success: {[weak self] itemsByAlbums in
-                    self?.fileService.download(itemsByAlbums: itemsByAlbums,
-                                               success: self?.succesAction(elementType: .download),
-                                               fail: self?.failAction(elementType: .download))
-                })
-                }, fail: { fail in
-                    UIApplication.showErrorAlert(message: fail.description)
-            })
-        } else if item.fileType == .faceImage(.places),
-            let id = item.id {
-            placesService.getPlacesAlbum(id: Int(id), status: .active, success: { [ weak self] album in
-                let albumItem = AlbumItem(remote: album)
-                
-                self?.albumService.loadItemsBy(albums: [albumItem], success: {[weak self] itemsByAlbums in
-                    self?.fileService.download(itemsByAlbums: itemsByAlbums,
-                                               success: self?.succesAction(elementType: .download),
-                                               fail: self?.failAction(elementType: .download))
-                })
-                }, fail: { fail in
-                    UIApplication.showErrorAlert(message: fail.description)
-            })
+        }
+        
+        let failHandler: FailResponse = { error in
+            UIApplication.showErrorAlert(message: error.description)
+        }
+        
+        guard let id = item.id else {
+            assertionFailure()
+            return
+        }
+        
+        if item.fileType == .faceImage(.people) {
+            peopleService.getPeopleAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
+            
+        } else if item.fileType == .faceImageAlbum(.things) {
+            thingsService.getThingsAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
+            
+        } else if item.fileType == .faceImage(.places) {
+            placesService.getPlacesAlbum(id: Int(truncatingIfNeeded: id), status: .active, success: successHandler, fail: failHandler)
         }
     }
     
@@ -981,6 +981,7 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
     }
     
     private func save(image: UIImage) {
+        showSnackbar(elementType: .edit, relatedItems: [])
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .success))
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
@@ -990,121 +991,38 @@ extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
 
 extension MoreFilesActionsInteractor {
     
-    private typealias SuccessLocalizationTriplet = (items: String, albums: String, folders: String)
-
-    enum DivorseItems {
-        case items
-        case albums
-        case folders
-    }
-    
-   func succesAction(elementType: ElementTypes) -> FileOperation {
+    func successAction(elementType: ElementTypes, itemsType: DivorseItems? = nil, relatedItems: [BaseDataSourceItem] = []) -> FileOperation {
         let success: FileOperation = { [weak self] in
-            self?.trackSuccessEvent(elementType: elementType)
-            DispatchQueue.main.async {
-                self?.output?.operationFinished(type: elementType)
-                self?.showSuccessPopup(for: elementType)
+            guard let self = self else {
+                return
             }
-        }
-        return success
-    }
-    
-    func successItemsAction(elementType: ElementTypes, itemsType: DivorseItems? = nil,  relatedItems: [BaseDataSourceItem]) -> FileOperation {
-        let success: FileOperation = { [weak self] in
-            self?.trackSuccessEvent(elementType: elementType)
-            self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .success, items: relatedItems)
+
+            self.trackSuccessEvent(elementType: elementType)
+            
+            if itemsType != nil {
+                self.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .success, items: relatedItems)
+            }
+            
             DispatchQueue.main.async {
-                self?.output?.operationFinished(type: elementType)
-                if let itemsType = itemsType {
-                    self?.showDivorseSuccessPopup(for: elementType, divorseItems: itemsType)
-                } else {
-                    self?.showSuccessPopup(for: elementType)
+                self.output?.operationFinished(type: elementType)
+                self.router.hideSpiner()
+                
+                // handle hide popups in HideActionService
+                guard elementType != .hide else {
+                    return
+                }
+                
+                self.output?.successPopupWillAppear()
+                if SnackbarType(operationType: elementType) != nil {
+                    self.showSnackbar(elementType: elementType, itemsType: itemsType, relatedItems: relatedItems)
+                } else if let message = elementType.alertSuccessMessage(divorseItems: itemsType) {
+                    self.showSuccessPopup(message: message)
                 }
             }
         }
         return success
     }
-    
-    private func showDivorseSuccessPopup(for type: ElementTypes, divorseItems: DivorseItems) {
-        let localizations = localizationTriplet(for: type)
 
-        let text: String
-        switch divorseItems {
-        case .items:
-            text = localizations.items
-            
-        case .albums:
-            text = localizations.albums
-            
-        case .folders:
-            text = localizations.folders
-        }
-        
-        DispatchQueue.main.async {
-            self.router.hideSpiner()
-            self.showSuccessPopup(message: text)
-        }
-    }
-    
-    private func localizationTriplet(for type: ElementTypes) -> SuccessLocalizationTriplet {
-        let triplet: SuccessLocalizationTriplet
-        switch type {
-        case .moveToTrash:
-            triplet = SuccessLocalizationTriplet(
-                items: TextConstants.moveToTrashItemsSuccessText,
-                albums: TextConstants.moveToTrashAlbumsSuccessText,
-                folders: TextConstants.moveToTrashFoldersSuccessText
-            )
-            
-        case .unhide:
-            triplet = SuccessLocalizationTriplet(
-                items: TextConstants.unhideItemsSuccessText,
-                albums: TextConstants.unhideAlbumsSuccessText,
-                folders: TextConstants.unhideFoldersSuccessText
-            )
-            
-        case .delete:
-            triplet = SuccessLocalizationTriplet(
-                items: TextConstants.deleteItemsSuccessText,
-                albums: TextConstants.deleteAlbumsSuccessText,
-                folders: TextConstants.deleteFoldersSuccessText
-            )
-            
-        case .restore:
-            triplet = SuccessLocalizationTriplet(
-                items: TextConstants.restoreItemsSuccessText,
-                albums: TextConstants.restoreAlbumsSuccessText,
-                folders: TextConstants.restoreFoldersSuccessText
-            )
-            
-        default:
-            triplet = SuccessLocalizationTriplet(
-                items: "",
-                albums: "",
-                folders: ""
-            )
-            assertionFailure("unknown ElementType")
-        }
-        
-        return triplet
-    }
-    
-    private func showSuccessPopup(for elementType: ElementTypes) {
-        let text: String
-        switch elementType {
-        case .download:
-            text = TextConstants.popUpDownloadComplete
-        case .emptyTrashBin:
-            text = TextConstants.trashBinDeleteAllComplete
-        case .removeAlbum:
-            text = TextConstants.removeAlbumsSuccess
-        default:
-            return
-        }
-        
-        showSuccessPopup(message: text)
-    }
-    
     private func showSuccessPopup(message: String) {
         let popup = PopUpController.with(title: TextConstants.success,
                                          message: message,
@@ -1114,8 +1032,19 @@ extension MoreFilesActionsInteractor {
                                                 self?.output?.successPopupClosed()
                                             }
                                         }
-        self.output?.successPopupWillAppear()
         router.presentViewController(controller: popup)
+    }
+    
+    private func showSnackbar(elementType: ElementTypes, itemsType: DivorseItems? = nil, relatedItems: [BaseDataSourceItem]) {
+        SnackbarManager.shared.show(elementType: elementType, relatedItems: relatedItems, itemsType: itemsType) {
+            let router = RouterVC()
+            switch elementType {
+            case .moveToTrash:
+                router.openTrashBin()
+            default:
+                return
+            }
+        }
     }
     
     private func trackSuccessEvent(elementType: ElementTypes) {
@@ -1252,7 +1181,6 @@ extension MoreFilesActionsInteractor {
         firOperation: @escaping DivorceItemsOperation)
     {
         output?.startAsyncOperationDisableScreen()
-        output?.operationStarted(type: type)
         
         var peopleItems = [PeopleItem]()
         var placesItems = [PlacesItem]()
@@ -1329,7 +1257,7 @@ extension MoreFilesActionsInteractor {
                     itemsType = .items
                 }
                 
-                self?.successItemsAction(elementType: type, itemsType: itemsType, relatedItems: items)()
+                self?.successAction(elementType: type, itemsType: itemsType, relatedItems: items)()
             }
         }
     }
@@ -1401,9 +1329,9 @@ extension MoreFilesActionsInteractor {
             self?.analyticsService.trackFileOperationGAEvent(operationType: .trash, items: items)
             self?.removeItemsFromPlayer(items: items)
             self?.fileService.moveToTrash(files: items,
-                                          success: self?.successItemsAction(elementType: .moveToTrash,
-                                                                            itemsType: .items,
-                                                                            relatedItems: items),
+                                          success: self?.successAction(elementType: .moveToTrash,
+                                                                       itemsType: .items,
+                                                                       relatedItems: items),
                                           fail: self?.failItemsAction(elementType: .moveToTrash,
                                                                       relatedItems: items))
         }
@@ -1441,7 +1369,7 @@ extension MoreFilesActionsInteractor {
                         self?.trackNetmeraSuccessEvent(elementType: .moveToTrash, successStatus: .success, items: deletedAlbums)
                         self?.output?.operationFinished(type: .moveToTrash)
                         ItemOperationManager.default.didMoveToTrashAlbums(moveToTrashAlbums)
-                        self?.successItemsAction(elementType: .moveToTrash, itemsType: .albums, relatedItems: moveToTrashAlbums)()
+                        self?.successAction(elementType: .moveToTrash, itemsType: .albums, relatedItems: moveToTrashAlbums)()
                     }
                 }, fail: { [weak self] errorRespone in
                     DispatchQueue.main.async {

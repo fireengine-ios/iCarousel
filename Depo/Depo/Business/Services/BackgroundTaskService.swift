@@ -26,10 +26,8 @@ final class BackgroundTaskService {
         appWasSuspended = false
         
         guard
-            backgroundTaskId == UIBackgroundTaskInvalid,
-            Device.operationSystemVersionLessThen(13)
+            backgroundTaskId == UIBackgroundTaskInvalid
         else {
-            debugLog("beginBackgroundTask iOS more then or equal to 13")
             return
         }
         
@@ -38,6 +36,7 @@ final class BackgroundTaskService {
             self?.expirationDelegates.invoke(invocation: { delegate in
                 delegate.backgroundTaskWillExpire()
             })
+            debugLog("App is suspended")
             self?.endBackgroundTask()
         })
 

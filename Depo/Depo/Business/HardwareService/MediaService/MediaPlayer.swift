@@ -99,7 +99,7 @@ final class MediaPlayer: NSObject {
         playerTimeObserver = player.addPeriodicTimeObserver(forInterval: interval, queue: .main) {
             [weak self] time in
             
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             let currentTime = Float(CMTimeGetSeconds(self.player.currentTime()))
@@ -109,10 +109,10 @@ final class MediaPlayer: NSObject {
                 return
             }
         
-            DispatchQueue.main.async {
+            if !self.isSeekInProgress {
                 self.delegates.invoke { $0.mediaPlayer(self, changedCurrentTime: newTime) }
+                self.updateNowPlayingInfoCenter(with: newTime)
             }
-            self.updateNowPlayingInfoCenter(with: newTime)
         }
     }
     
@@ -349,6 +349,8 @@ final class MediaPlayer: NSObject {
         return Float(CMTimeGetSeconds(player.currentTime()))
     }
     
+    private var isSeekInProgress = false
+    
     var delegates = MulticastDelegate<MediaPlayerDelegate>()
     
     // MARK: - Actions
@@ -440,7 +442,11 @@ final class MediaPlayer: NSObject {
     
     func seek(to time: Float) {
         let showingTime = CMTimeMake(Int64(time) * 1000, 1000)
-        player.seek(to: showingTime)
+        isSeekInProgress = true
+        
+        player.seek(to: showingTime, completionHandler: { [weak self] _ in
+            self?.isSeekInProgress = false
+        })
     }
     
     func resetTime() {

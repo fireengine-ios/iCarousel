@@ -156,7 +156,6 @@ class ItemSyncServiceImpl: ItemSyncService {
                                              uploadStategy: .WithoutConflictControl,
                                              uploadTo: .MOBILE_UPLOAD,
                                              success: { [weak self] in
-                                                debugLog("ItemSyncServiceImpl upload UploadService uploadFileList success")
                                                 if self?.status == .executing {
                                                     self?.status = .synced
                                                 }
@@ -168,10 +167,7 @@ class ItemSyncServiceImpl: ItemSyncService {
                 return
             }
             
-            debugLog("ItemSyncServiceImpl upload UploadService uploadFileList fail")
-            
             if error.description == TextConstants.canceledOperationTextError || error.description == TextConstants.networkConnectionLostTextError {
-                
                 debugLog("ItemSyncServiceImpl \(error.description)")
                 return
             }

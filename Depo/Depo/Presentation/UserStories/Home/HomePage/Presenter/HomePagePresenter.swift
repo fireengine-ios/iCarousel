@@ -65,6 +65,18 @@ extension HomePagePresenter: BaseFilesGreedModuleOutput {
 // MARK: - HomePageInteractorOutput
 extension HomePagePresenter: HomePageInteractorOutput {
     
+    func showSnackBarWith(message: String) {
+        view.showSnackBarWithMessage(message: message)
+    }
+
+    func showSpinner() {
+        view.startSpinner()
+    }
+    
+    func hideSpinner() {
+        view.stopRefresh()
+    }
+    
     func stopRefresh() {
         view.stopRefresh()
     }
@@ -143,7 +155,6 @@ extension HomePagePresenter: HomePageInteractorOutput {
         if let type = fullOfQuotaPopUpType {
             router.presentFullOfQuotaPopUp(with: type)
         }
-        
         
         decreaseDispatchGroupValue(for: .waitQuotaInfoResponse)
     }
@@ -255,13 +266,10 @@ extension HomePagePresenter: HomePageViewOutput {
     func viewWillAppear() {
         spotlightManager.delegate = self
         
-        if isFirstAppear {
-            AnalyticsService.updateUser()
-        } else {
+        if !isFirstAppear {
             view.startSpinner()
             interactor.updateLocalUserDetail()
         }
-        
         interactor.trackScreen()
     }
     

@@ -20,10 +20,7 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
             return
         }
         
-        remote.allItems(albumUUID: albumObject.uuid,
-                        sortBy: sortBy, sortOrder: sortOrder, success: { albums in
-                            debugLog("AlbumDetailInteractor allItems AlbumDetailService allItems success")
-
+        remote.allItems(albumUUID: albumObject.uuid, sortBy: sortBy, sortOrder: sortOrder, success: { albums in
 //            self?.items(items: albums)
             }, fail: {
                 debugLog("AlbumDetailInteractor allItems AlbumDetailService allItems fail")
@@ -57,24 +54,19 @@ class AlbumDetailInteractor: BaseFilesGreedInteractor {
             debugPrint("NOT AlbumDetailService")
             return
         }
-        albumService.nextItems(albumUUID: unwrapedAlbumUUID, sortBy: sortBy, sortOrder: sortOrder,
-                               success: { [weak self] items in
-                                debugLog("AlbumDetailInteractor nextItems AlbumDetailService nextItems success")
-                                
-                                self?.isUpdating = false
-                                
-                                DispatchQueue.main.async {
-                                    if items.count == 0 {
-                                        self?.output.getContentWithSuccessEnd()
-                                    } else {
-                                        self?.output.getContentWithSuccess(items: items)
-                                    }
-                                }
-            }, fail: { [weak self] in
-                debugLog("AlbumDetailInteractor nextItems AlbumDetailService nextItems fail")
-                self?.isUpdating = false
-
-                self?.output.asyncOperationFail(errorMessage: nil)
+        albumService.nextItems(albumUUID: unwrapedAlbumUUID, sortBy: sortBy, sortOrder: sortOrder, success: { [weak self] items in
+            self?.isUpdating = false
+            
+            DispatchQueue.main.async {
+                if items.isEmpty {
+                    self?.output.getContentWithSuccessEnd()
+                } else {
+                    self?.output.getContentWithSuccess(items: items)
+                }
+            }
+        }, fail: { [weak self] in
+            self?.isUpdating = false
+            self?.output.asyncOperationFail(errorMessage: nil)
         })
     }
     

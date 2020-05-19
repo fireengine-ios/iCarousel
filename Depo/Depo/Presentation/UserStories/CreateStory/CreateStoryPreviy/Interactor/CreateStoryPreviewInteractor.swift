@@ -12,7 +12,7 @@ class CreateStoryPreviewInteractor {
     var response: CreateStoryResponse?
     var isRequestStarted = false
     private let analyticsManager: AnalyticsService = factory.resolve()
-    private lazy var createStoryService = CreateStoryService(transIdLogging: true)
+    private lazy var createStoryService = CreateStoryService()
 }
 
 // MARK: CreateStoryPreviewInteractorInput

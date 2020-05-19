@@ -58,6 +58,7 @@ protocol LocalMediaStorageProtocol {
     func getBigImageFromFile(asset: PHAsset, image: @escaping FileDataSorceImg)
     
     func getAllImagesAndVideoAssets() -> [PHAsset]
+    func updateAllImagesAndVideoAssets() -> [PHAsset]
     
     func removeAssets(deleteAsset: [PHAsset], success: FileOperation?, fail: FailResponse?)
     
@@ -218,9 +219,44 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     var fetchAlbumResult: PHFetchResult<PHAssetCollection>!
     var fetchSmartAlbumResult: PHFetchResult<PHAssetCollection>!
     
+    @discardableResult
+    func updateAllImagesAndVideoAssets() -> [PHAsset] {
+        debugLog("LocalMediaStorage updateAllImagesAndVideoAssets")
+
+        let mediaContent = fetchAllImagesAndVideoAssets()
+        
+        guard !mediaContent.isEmpty else {
+            assetsCache.dropAll()
+            return []
+        }
+        
+        assetsCache.replaceAll(with: mediaContent)
+        
+        return mediaContent
+    }
+    
     func getAllImagesAndVideoAssets() -> [PHAsset] {
-        assetsCache.dropAll()
         debugLog("LocalMediaStorage getAllImagesAndVideoAssets")
+
+        guard photoLibraryIsAvailible() else {
+            return []
+        }
+        
+        let options = PHFetchOptions()
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        let result = PHAsset.fetchAssets(with: options)
+        
+        var mediaContent = [PHAsset]()
+        
+        result.enumerateObjects { avalibleAset, _, _ in
+            mediaContent.append(avalibleAset)
+        }
+        
+        return mediaContent
+    }
+    
+    private func fetchAllImagesAndVideoAssets() -> [PHAsset] {
+        debugLog("LocalMediaStorage fetchAllImagesAndVideoAssets")
 
         guard photoLibraryIsAvailible() else {
             return []
@@ -232,11 +268,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         var mediaContent = [PHAsset]()
         
-        fetchResult.enumerateObjects({ avalibleAset, index, a in
+        fetchResult.enumerateObjects { avalibleAset, _, _ in
             mediaContent.append(avalibleAset)
-        })
+        }
         
-        assetsCache.append(list: mediaContent)
         return mediaContent
     }
     

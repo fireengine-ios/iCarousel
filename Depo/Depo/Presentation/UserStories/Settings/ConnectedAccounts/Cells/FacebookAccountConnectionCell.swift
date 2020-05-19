@@ -154,6 +154,7 @@ extension FacebookAccountConnectionCell: ImportFromFBViewInput {
     
     func importStartSuccess() {
         isImportOn = true
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.snackbarMessageImportFromFBStarted)
     }
     
     func importStartFailure(errorMessage: String) {

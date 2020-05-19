@@ -119,6 +119,7 @@ final class VerifyEmailPopUp: BasePopUpController {
         setup()
         
         analyticsService.logScreen(screen: .verifyEmailPopUp)
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.VerifyEmailPopUp())
     }
     
     //MARK: Utility methods
