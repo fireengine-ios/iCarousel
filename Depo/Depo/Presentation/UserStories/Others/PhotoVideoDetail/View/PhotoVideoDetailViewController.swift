@@ -332,9 +332,11 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         switch recognizer.state {
         case .began:
             isFullScreen = true
+            
             collapseDetailView.isHidden = false
             gestureBeginLocation = recognizer.location(in: self.view)
             dragViewBeginLocation = self.bottomDetailView?.frame.origin ?? .zero
+            
         case .changed:
             let newLocation = dragViewBeginLocation.y + (recognizer.location(in: self.view).y - gestureBeginLocation.y)
             bottomDetailView?.frame.origin.y = newLocation >= 0 ? newLocation : 0
@@ -342,7 +344,6 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
                 bottomDetailView?.isHidden = true
                 recognizer.state = .ended
             }
-            self.collectionView.cellForItem(at: IndexPath(row: selectedIndex ?? 0, section: 0))
             
         case .ended:
             UIView.animate(withDuration: 1, delay: 0,
@@ -355,6 +356,44 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         default:
             break
         }
+    }
+    
+    func handleSwipe(recognizer: UISwipeGestureRecognizer) {
+        switch (recognizer.state, recognizer.direction) {
+        case (.ended, .left):
+            scrollLeft()
+        case (.ended, .right):
+            scrollRight()
+        default:
+            return
+        }
+    }
+    
+    private func scrollRight() {
+        guard let index = selectedIndex else {
+            return
+        }
+        let newIndex = index - 1
+        scroll(to: newIndex)
+    }
+    
+    private func scrollLeft() {
+        guard let index = selectedIndex else {
+            return
+        }
+        let newIndex = index + 1
+        scroll(to: newIndex)
+    }
+
+    private func scroll(to index: Int) {
+        guard 0..<objects.count ~= index else {
+            return
+        }
+        
+        selectedIndex = index
+        let newContentOffsetX = collectionView.bounds.size.width * CGFloat(index)
+        let newContentOffset = CGPoint(x: newContentOffsetX, y: collectionView.contentOffset.y)
+        collectionView.setContentOffset(newContentOffset, animated: true)
     }
     
     func positionForView(velocityY: CGFloat) {
@@ -691,6 +730,7 @@ extension TabBarViewController: AVPlayerViewControllerDelegate {
 
 protocol PassThroughViewDelegate: class {
     func handlePan(recognizer:UIPanGestureRecognizer)
+    func handleSwipe(recognizer:UISwipeGestureRecognizer)
 }
 
 final class PassThroughView: UIView {
@@ -699,6 +739,23 @@ final class PassThroughView: UIView {
         
     private lazy var panGestureRecognizer: UIPanGestureRecognizer = {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler))
+        gesture.delegate = self
+        return gesture
+    }()
+    
+    private lazy var swipeGestureRecognizerRight: UISwipeGestureRecognizer = {
+        let gesture = UISwipeGestureRecognizer(target: self, action:
+            #selector(swipeGestureRecognizerHandler))
+        gesture.delegate = self
+        gesture.direction = .right
+        return gesture
+    }()
+    
+    private lazy var swipeGestureRecognizerLeft: UISwipeGestureRecognizer = {
+        let gesture = UISwipeGestureRecognizer(target: self, action:
+            #selector(swipeGestureRecognizerHandler))
+        gesture.delegate = self
+        gesture.direction = .left
         return gesture
     }()
     
@@ -725,12 +782,25 @@ final class PassThroughView: UIView {
         delegate?.handlePan(recognizer: gestureRecognizer)
     }
     
+    @objc func swipeGestureRecognizerHandler(_ gestureRecognizer: UISwipeGestureRecognizer) {
+        delegate?.handleSwipe(recognizer: gestureRecognizer)
+    }
+    
     private func addGestureRecognizers() {
         guard let window = UIApplication.shared.delegate?.window as? UIWindow  else {
             assertionFailure()
             return
         }
         window.addGestureRecognizer(panGestureRecognizer)
+        window.addGestureRecognizer(swipeGestureRecognizerRight)
+        window.addGestureRecognizer(swipeGestureRecognizerLeft)
     }
     
+}
+
+extension PassThroughView: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        /// handle right-left swipes first
+        return otherGestureRecognizer is UISwipeGestureRecognizer && gestureRecognizer is UIPanGestureRecognizer
+    }
 }
