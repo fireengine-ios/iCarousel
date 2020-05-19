@@ -34,4 +34,16 @@ protocol PhotoVideoDetailInteractorInput: class {
     func onRename(newName: String)
     
     func onValidateName(newName: String)
+    
+    func getPersonsOnPhoto(uuid: String)
+    
+    func checkPeopleEnable()
+    
+    func changeFaceImageAndFacebookAllowed(isFaceImageAllowed: Bool,
+                                           isFacebookAllowed: Bool,
+                                           completion: VoidHandler?)
+    
+    func getPeopleAlbum(with item: Item, id: Int64)
+    
+    func getAuthority()
 }

@@ -13,4 +13,11 @@ protocol PhotoVideoDetailRouterInput {
     func onInfo(object: Item)
     
     func goBack(navigationConroller: UINavigationController?)
+    
+    func showPopup(completion: @escaping () -> ())
+    
+    func goToPremium()
+    
+    func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem)
+    
 }

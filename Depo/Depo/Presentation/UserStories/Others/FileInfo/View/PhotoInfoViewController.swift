@@ -11,18 +11,21 @@ import UIKit
 protocol PhotoInfoViewControllerOutput {
     func onRename(newName: String)
     func validateName(newName: String)
+    func onEnable()
+    func onPremium()
+    func onPeopleTapped(item: PeopleOnPhotoItemResponse)
 }
 
 class PhotoInfoViewController: UIView {
     @IBOutlet var view: UIView!
     
-    @IBOutlet weak var backgroundView: UIView! {
+    @IBOutlet private weak var backgroundView: UIView! {
         willSet {
             newValue.layer.cornerRadius = 7
         }
     }
     
-    @IBOutlet weak var fileNameTitleLabel: UILabel! {
+    @IBOutlet private weak var fileNameTitleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.fileInfoFileNameTitle
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 14)
@@ -30,8 +33,8 @@ class PhotoInfoViewController: UIView {
         }
     }
     
-    @IBOutlet weak var fileNameStackView: UIStackView!
-    @IBOutlet weak var fileNameField: UITextField! {
+    @IBOutlet private weak var fileNameStackView: UIStackView!
+    @IBOutlet private weak var fileNameField: UITextField! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
             newValue.textColor = ColorConstants.closeIconButtonColor
@@ -64,9 +67,9 @@ class PhotoInfoViewController: UIView {
         }
     }
     
-    @IBOutlet weak var durationStackView: UIStackView!
+    @IBOutlet private weak var durationStackView: UIStackView!
     
-    @IBOutlet weak var durationTitleLabel: UILabel! {
+    @IBOutlet private weak var durationTitleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.fileInfoDurationTitle
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
@@ -74,7 +77,7 @@ class PhotoInfoViewController: UIView {
         }
     }
     
-    @IBOutlet weak var durationLabel: UILabel! {
+    @IBOutlet private weak var durationLabel: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
             newValue.textColor = ColorConstants.closeIconButtonColor
@@ -145,9 +148,61 @@ class PhotoInfoViewController: UIView {
     
     @IBOutlet private weak var peopleCollectionView: UICollectionView!
     
+    @IBOutlet private weak var premiumStackView: UIStackView!
+    
+    
+    @IBOutlet private weak var premiumTextLabel: UILabel! {
+        willSet {
+            newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
+            newValue.textColor = ColorConstants.closeIconButtonColor
+        }
+    }
+    
+    @IBOutlet private weak var premiumButton: GradientPremiumButton! {
+        willSet {
+            newValue.titleEdgeInsets = UIEdgeInsetsMake(6, 14, 6, 14)
+            newValue.setTitle(TextConstants.becomePremium, for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 15)
+        }
+    }
+    
     private var fileExtension: String?
     private var oldName: String?
     private var isEditing = true
+    private lazy var dataSource = PhotoVideoDetailDataSource(collectionView: peopleCollectionView, delegate: self)
+    
+    private var testPeople1: PeopleOnPhotoItemResponse {
+        let newPeople = PeopleOnPhotoItemResponse()
+        newPeople.name = "Thrall"
+        newPeople.personInfoId = 111111
+        newPeople.thumbnailURL = URL(string: "https://sun9-28.userapi.com/c858216/v858216686/1f64d6/4qFYPnRZU18.jpg")
+        return newPeople
+    }
+    
+    private var testPeople2: PeopleOnPhotoItemResponse {
+        let newPeople = PeopleOnPhotoItemResponse()
+        newPeople.name = "SmartGuyWC3"
+        newPeople.personInfoId = 111111
+        newPeople.thumbnailURL = URL(string: "https://sun9-38.userapi.com/c855536/v855536393/23a622/V0nYJx2V-Xw.jpg")
+        return newPeople
+    }
+    
+    private var testPeople3: PeopleOnPhotoItemResponse {
+        let newPeople = PeopleOnPhotoItemResponse()
+        newPeople.name = "Tomezzz"
+        newPeople.personInfoId = 111111
+        newPeople.thumbnailURL = URL(string: "https://sun9-22.userapi.com/c830108/v830108047/1d6216/NBqkUCCBpHk.jpg")
+        return newPeople
+    }
+    
+    private var testPeople4: PeopleOnPhotoItemResponse {
+        let newPeople = PeopleOnPhotoItemResponse()
+        newPeople.name = "Red Neck"
+        newPeople.personInfoId = 111111
+        newPeople.thumbnailURL = URL(string: "https://sun9-40.userapi.com/c857132/v857132546/19295a/HaaYIwB5q9E.jpg")
+        return newPeople
+    }
+    
     var output: PhotoInfoViewControllerOutput!
         
     // MARK: Life cycle
@@ -188,6 +243,9 @@ class PhotoInfoViewController: UIView {
     
     private func setup() {
         fileNameField.delegate = self
+        peopleCollectionView.dataSource = dataSource
+        peopleCollectionView.register(nibCell: PeopleSliderCell.self)
+        peopleCollectionView.isScrollEnabled = false
         fileNameField.isUserInteractionEnabled = false
         let editGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onEdit(tapGestureRecognizer:)))
         editIconImageView.isUserInteractionEnabled = true
@@ -255,6 +313,15 @@ class PhotoInfoViewController: UIView {
         changeEditStatus()
         fileNameField.isUserInteractionEnabled = false
     }
+    
+    @IBAction func onEnableTapped(_ sender: Any) {
+        output.onEnable()
+    }
+    
+    @IBAction func onPremiumTapped(_ sender: Any) {
+        output.onPremium()
+    }
+    
 }
 
 extension PhotoInfoViewController: FileInfoViewInput {
@@ -383,6 +450,30 @@ extension PhotoInfoViewController: FileInfoViewInput {
         subviews.forEach { $0.isHidden = false }
     }
     
+    func updatePeople(items: [PeopleOnPhotoItemResponse]) {
+        print(">>>>\n", items)
+        peopleCollectionView.isHidden = items.isEmpty
+        premiumTextLabel.text = items.isEmpty
+            ? TextConstants.noPeopleBecomePremiumText
+            : TextConstants.allPeopleBecomePremiumText
+        dataSource.appendItems(items)
+        setHiddenPeopleLabel()
+    }
+    
+    func setHiddenPeoplePlaceholder(isHidden: Bool) {
+        enableStackView.isHidden = isHidden
+        peopleCollectionView.isHidden = !isHidden
+    }
+    
+    func setHiddenPremiumStackView(isHidden: Bool) {
+        premiumStackView.isHidden = isHidden
+        setHiddenPeopleLabel()
+    }
+    
+    func setHiddenPeopleLabel() {
+        let isHidden = premiumStackView.isHidden == true && peopleCollectionView.isHidden == true
+        peopleTitleLabel.isHidden = isHidden
+    }
 }
 
 // MARK: UITextFieldDelegate
@@ -412,3 +503,26 @@ extension PhotoInfoViewController: UITextFieldDelegate {
     
 }
 
+extension PhotoInfoViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let height: CGFloat = section > 0 ? 50 : 0
+        return CGSize(width: collectionView.bounds.width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: PeopleSliderCell.height)
+    }
+}
+
+extension PhotoInfoViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(">>>>", indexPath)
+    }
+}
+
+extension PhotoInfoViewController: PhotoVideoDetailDataSourceDelegate {
+    func didSelectPeople(item: PeopleOnPhotoItemResponse) {
+        output.onPeopleTapped(item: item)
+    }
+}

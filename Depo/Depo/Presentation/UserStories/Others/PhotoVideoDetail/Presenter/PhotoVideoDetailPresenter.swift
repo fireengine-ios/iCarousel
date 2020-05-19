@@ -89,6 +89,9 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: selectedIndex)
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
         interactor.currentItemIndex = selectedIndex
+        if let uuid = selectedItems.first?.uuid {
+            interactor.getPersonsOnPhoto(uuid: uuid)
+        }
     }
     
     func updateBars() {
@@ -298,5 +301,50 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     func didValidateNameSuccess(name: String) {
         view.showValidateNameSuccess(name: name)
+    }
+    
+    func updatePeople(items: [PeopleOnPhotoItemResponse]) {
+        view.updatePeople(items: items)
+    }
+    
+    func setHiddenPeoplePlaceholder(isHidden: Bool) {
+        view.setHiddenPeoplePlaceholder(isHidden: isHidden)
+    }
+    
+    func checkPeopleEnable() {
+        interactor.checkPeopleEnable()
+        interactor.getAuthority()
+    }
+    
+    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item) {
+        let albumItem = AlbumItem(remote: album)
+        router.openFaceImageItemPhotosWith(item, album: albumItem)
+    }
+    
+    func onEnable() {
+        router.showPopup {
+            self.interactor.changeFaceImageAndFacebookAllowed(isFaceImageAllowed: true,
+                                                              isFacebookAllowed: true,
+                                                              completion: nil)
+        }
+    }
+    
+    func onPremium() {
+        router.goToPremium()
+    }
+    
+    func onPeopleTapped(item: PeopleOnPhotoItemResponse) {
+        guard
+            let mediaItem = self.item,
+            let id = item.personInfoId
+        else {
+            return
+        }
+        
+        interactor.getPeopleAlbum(with: mediaItem, id: id)
+    }
+    
+    func hasPermissionFaceRecognition(_ bool: Bool) {
+        view.setHiddenPremiumStackView(isHidden: bool)
     }
 }

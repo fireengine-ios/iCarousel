@@ -27,4 +27,12 @@ protocol PhotoVideoDetailInteractorOutput: class {
     func failedUpdate(error: Error)
     
     func didValidateNameSuccess(name: String)
+    
+    func updatePeople(items: [PeopleOnPhotoItemResponse])
+    
+    func setHiddenPeoplePlaceholder(isHidden: Bool)
+    
+    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item)
+    
+    func hasPermissionFaceRecognition(_ bool: Bool)
 }

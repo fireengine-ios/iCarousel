@@ -137,6 +137,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
         collapseViewSetup()
+        addBottomDetailsView()
+        addTrackSwipeUpView()
         showSpinner()
     }
     
@@ -163,8 +165,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         //editingTabBar.editingBar.layer.borderWidth = 0
         
         statusBarColor = .black
-        addBottomDetailsView()
-        addTrackSwipeUpView()
+        output.checkPeopleEnable()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -543,6 +544,18 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     func getNavigationController() -> UINavigationController? {
         return navigationController
     }
+    
+    func updatePeople(items: [PeopleOnPhotoItemResponse]) {
+        bottomDetailView?.updatePeople(items: items)
+    }
+    
+    func setHiddenPeoplePlaceholder(isHidden: Bool) {
+        bottomDetailView?.setHiddenPeoplePlaceholder(isHidden: isHidden)
+    }
+    
+    func setHiddenPremiumStackView(isHidden: Bool) {
+        bottomDetailView?.setHiddenPremiumStackView(isHidden: isHidden)
+    }
 }
 
 extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
@@ -713,6 +726,19 @@ extension PhotoVideoDetailViewController: PhotoInfoViewControllerOutput {
     
     func validateName(newName: String) {
         output.validateName(newName: newName)
+    }
+    
+    func onEnable() {
+        output.onEnable()
+    }
+    
+    func onPremium() {
+        output.onPremium()
+    }
+    
+    func onPeopleTapped(item: PeopleOnPhotoItemResponse) {
+        closeDetailView()
+        output.onPeopleTapped(item: item)
     }
 }
 

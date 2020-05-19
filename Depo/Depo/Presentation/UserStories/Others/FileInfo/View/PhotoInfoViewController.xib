@@ -28,6 +28,9 @@
                 <outlet property="fileSizeTitleLabel" destination="ErC-7t-dmO" id="1w9-QK-TSl"/>
                 <outlet property="peopleCollectionView" destination="XGQ-57-yav" id="0eE-vk-mVG"/>
                 <outlet property="peopleTitleLabel" destination="k4x-ud-NF0" id="byQ-dZ-wRp"/>
+                <outlet property="premiumButton" destination="jNm-bk-5oX" id="Wvk-5V-5tO"/>
+                <outlet property="premiumStackView" destination="Ndh-L6-gxh" id="OGj-lN-UM2"/>
+                <outlet property="premiumTextLabel" destination="gxh-jg-bO1" id="o7L-AY-E7x"/>
                 <outlet property="takenDateLabel" destination="sRm-Wn-o0C" id="nEg-35-ihS"/>
                 <outlet property="takenDateStackView" destination="WlH-PJ-kfi" id="dHh-6g-Urr"/>
                 <outlet property="takenDateTitleLabel" destination="WRl-5t-df6" id="S1c-Ko-MPp"/>
@@ -61,7 +64,7 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="752" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="lOt-sR-o8f">
-                                            <rect key="frame" x="20" y="30" width="374" height="401.5"/>
+                                            <rect key="frame" x="20" y="30" width="374" height="555"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Xkd-p0-X9E">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="52.5"/>
@@ -198,7 +201,7 @@
                                                     <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6ph-Of-RdC">
-                                                    <rect key="frame" x="0.0" y="261" width="374" height="140.5"/>
+                                                    <rect key="frame" x="0.0" y="261" width="374" height="220.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4x-ud-NF0">
                                                             <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -225,6 +228,9 @@
                                                                                 <constraint firstAttribute="height" constant="30" id="Stl-jM-sn2"/>
                                                                             </constraints>
                                                                             <state key="normal" title="Button"/>
+                                                                            <connections>
+                                                                                <action selector="onEnableTapped:" destination="-1" eventType="touchUpInside" id="Olv-7S-Slc"/>
+                                                                            </connections>
                                                                         </button>
                                                                     </subviews>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -237,10 +243,10 @@
                                                             </subviews>
                                                         </stackView>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="XGQ-57-yav">
-                                                            <rect key="frame" x="0.0" y="90.5" width="374" height="50"/>
+                                                            <rect key="frame" x="0.0" y="90.5" width="374" height="130"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="50" id="2Bn-ix-P3n"/>
+                                                                <constraint firstAttribute="height" priority="250" constant="130" id="2Bn-ix-P3n"/>
                                                             </constraints>
                                                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BVK-Gk-yEY">
                                                                 <size key="itemSize" width="50" height="50"/>
@@ -251,6 +257,39 @@
                                                         </collectionView>
                                                     </subviews>
                                                 </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ndh-L6-gxh">
+                                                    <rect key="frame" x="0.0" y="496.5" width="374" height="58.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxh-jg-bO1">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ta7-sX-n30">
+                                                            <rect key="frame" x="0.0" y="30.5" width="374" height="28"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jNm-bk-5oX" customClass="GradientPremiumButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="168" height="28"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="28" id="aiH-i3-ecj"/>
+                                                                        <constraint firstAttribute="width" constant="168" id="cOL-q1-DZQ"/>
+                                                                    </constraints>
+                                                                    <state key="normal" title="Button"/>
+                                                                    <connections>
+                                                                        <action selector="onPremiumTapped:" destination="-1" eventType="touchUpInside" id="kKz-5y-MGP"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <constraints>
+                                                                <constraint firstItem="jNm-bk-5oX" firstAttribute="leading" secondItem="ta7-sX-n30" secondAttribute="leading" id="f2r-0q-rwQ"/>
+                                                                <constraint firstItem="jNm-bk-5oX" firstAttribute="top" secondItem="ta7-sX-n30" secondAttribute="top" id="j5i-rK-GJb"/>
+                                                                <constraint firstAttribute="height" constant="28" id="kg6-qc-qlm"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="mln-os-35C" firstAttribute="height" secondItem="0Ql-Od-da7" secondAttribute="height" id="2tg-vB-b3u"/>
@@ -258,7 +297,7 @@
                                             </constraints>
                                         </stackView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J1X-Yn-1g6">
-                                            <rect key="frame" x="0.0" y="431.5" width="414" height="386.5"/>
+                                            <rect key="frame" x="0.0" y="585" width="414" height="233"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" id="TtL-yU-TLa"/>

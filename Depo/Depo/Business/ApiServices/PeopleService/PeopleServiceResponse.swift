@@ -44,6 +44,25 @@ final class PeopleItemResponse: ObjectRequestResponse {
     }
 }
 
+struct PeopleOnPhotoJsonKey {
+    static let personInfoId = "personInfoId"
+    static let name = "name"
+    static let thumbnailURL = "thumbnailURL"
+}
+
+final class PeopleOnPhotoItemResponse: ObjectRequestResponse {
+
+    var personInfoId: Int64?
+    var name: String?
+    var thumbnailURL: URL?
+
+    override func mapping() {
+        personInfoId = json?[PeopleOnPhotoJsonKey.personInfoId].int64
+        name = json?[PeopleJsonKey.name].string
+        thumbnailURL = json?[PeopleJsonKey.thumbnail].url
+    }
+}
+
 final class PeopleServiceResponse: ObjectRequestResponse {
     
     var list: Array<PeopleItemResponse> = []
@@ -76,4 +95,15 @@ final class FaceImageThumbnailsResponse: ObjectRequestResponse {
         }
     }
 
+}
+
+final class PeopleThumbnailsResponse: ObjectRequestResponse, Map {
+    
+    var list: [PeopleOnPhotoItemResponse] = []
+    
+    override func mapping() {
+        if let result = json?.array?.compactMap({ PeopleOnPhotoItemResponse(withJSON: $0) }) {
+            list = result
+        }
+    }
 }

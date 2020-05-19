@@ -23,7 +23,12 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
     var moreMenuConfig = [ElementTypes]()
     
+    private let peopleService = PeopleService()
+    
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var accountServicePrl: AccountServicePrl = AccountService()
+    private lazy var accountService = AccountService()
+    private let authorityStorage = AuthoritySingleton.shared
     
     var setupedMoreMenuConfig: [ElementTypes] {
         return moreMenuConfig
@@ -159,6 +164,114 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             }
         } else {
             output.didValidateNameSuccess(name: newName)
+        }
+    }
+    
+    func checkPeopleEnable() {
+        getFaceImageGroupingStatus(success: { [weak self] (settings) in
+            if settings.isFaceImageAllowed == true {
+                self?.output.setHiddenPeoplePlaceholder(isHidden: true)
+            } else {
+                self?.output.setHiddenPeoplePlaceholder(isHidden: false)
+            }
+        }) { [weak self] (errorResponse) in
+            self?.output.failedUpdate(error: errorResponse)
+            self?.output.setHiddenPeoplePlaceholder(isHidden: false)
+        }
+    }
+    
+    func requestPersonsForPhoto(uuid: String) {
+        let emptyItems = [PeopleOnPhotoItemResponse]()
+        getFaceImageGroupingStatus(success: { [weak self] (settings) in
+            if settings.isFaceImageAllowed == true {
+                self?.getPersonsOnPhoto(uuid: uuid)
+            } else {
+                self?.output.updatePeople(items: emptyItems)
+            }
+        }) { [weak self] (errorResponse) in
+            self?.output.failedUpdate(error: errorResponse)
+            self?.output.updatePeople(items: emptyItems)
+        }
+    }
+    
+    func getFaceImageGroupingStatus(success: @escaping (SettingsInfoPermissionsResponse) -> (),
+                                    fail: @escaping (Error) -> ()) {
+        accountServicePrl.getSettingsInfoPermissions { response in
+            switch response {
+            case .success(let result):
+                let result: SettingsInfoPermissionsResponse = result
+                success(result)
+            case .failed(let error):
+                fail(error)
+            }
+        }
+    }
+    
+    func getPersonsOnPhoto(uuid: String) {
+        peopleService.getPeopleForMedia(with: uuid, success: { [weak self] peopleThumbnails in
+            DispatchQueue.main.async {
+                self?.output.updatePeople(items: peopleThumbnails)
+            }
+        }) { [weak self] (errorResponse) in
+            DispatchQueue.main.async {
+                self?.output.failedUpdate(error: errorResponse)
+                let emptyItems = [PeopleOnPhotoItemResponse]()
+                self?.output.updatePeople(items: emptyItems)
+            }
+        }
+    }
+    
+    func changeFaceImageAndFacebookAllowed(isFaceImageAllowed: Bool,
+                                           isFacebookAllowed: Bool,
+                                           completion: VoidHandler? = nil) {
+        accountService.changeFaceImageAndFacebookAllowed(isFaceImageAllowed: isFaceImageAllowed,
+                                                         isFacebookAllowed: isFacebookAllowed) { [weak self] response in
+            DispatchQueue.toMain {
+                switch response {
+                case .success(let result):
+                    NotificationCenter.default.post(name: .changeFaceImageStatus, object: self)
+                    
+                    if result.isFaceImageAllowed == true {
+                        self?.output.setHiddenPeoplePlaceholder(isHidden: true)
+                    }
+                    
+                case .failed(let error):
+                    UIApplication.showErrorAlert(message: error.description)
+                    
+                }
+                completion?()
+            }
+        }
+    }
+    
+    func getPeopleAlbum(with item: Item, id: Int64) {
+        guard item.fileType.isFaceImageType else {
+            return
+        }
+        let successHandler: AlbumOperationResponse = { [weak self] album in
+            DispatchQueue.main.async {
+                self?.output.didLoadAlbum(album, forItem: item)
+            }
+        }
+        
+        let failHandler: FailResponse = { error in
+            UIApplication.showErrorAlert(message: error.description)
+        }
+        
+        peopleService.getPeopleAlbum(id: Int(truncatingIfNeeded: id),
+                                     status: item.status,
+                                     success: successHandler,
+                                     fail: failHandler)
+    }
+    
+    func getAuthority() {
+        accountService.permissions { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.output.hasPermissionFaceRecognition(response.hasPermissionFor(.faceRecognition))
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
         }
     }
 }
