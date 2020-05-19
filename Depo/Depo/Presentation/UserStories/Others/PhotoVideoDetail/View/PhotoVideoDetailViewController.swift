@@ -13,7 +13,7 @@ import Photos
 
 final class PhotoVideoDetailViewController: BaseViewController {
     
-    private enum CardState {
+    enum CardState {
         case expanded
         case collapsed
         case full
@@ -24,16 +24,21 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var viewForBottomBar: UIView!
     @IBOutlet private weak var bottomBlackView: UIView!
-    @IBOutlet private weak var collapseDetailView: UIView!
+    @IBOutlet weak var collapseDetailView: UIView!
     
+    @IBOutlet private weak var swipeUpContainerView: UIView!
     // Bottom detail view
-    private var bottomDetailView: PhotoInfoViewController?
+    var bottomDetailView: PhotoInfoViewController?
     private let cardHeight: CGFloat = UIScreen.main.bounds.height * 0.7
+    
+    private lazy var ImageMaxY = {
+        return UIScreen.main.bounds.height - getImageMaxY()
+    }()
     
     private var gestureBeginLocation: CGPoint = .zero
     private var dragViewBeginLocation: CGPoint = .zero
     private var isCardPresented = false
-    private var viewState: CardState = .collapsed
+    var viewState: CardState = .collapsed
     private var nextState: CardState {
         return isCardPresented ? .collapsed : .expanded
     }
@@ -337,7 +342,16 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
             dragViewBeginLocation = self.bottomDetailView?.frame.origin ?? .zero
         case .changed:
             let newLocation = dragViewBeginLocation.y + (recognizer.location(in: self.view).y - gestureBeginLocation.y)
+            
+            if newLocation <= self.view.frame.height - self.cardHeight {
+                bottomDetailView?.frame.origin.y = self.view.frame.height - self.cardHeight
+                return
+            }
+            
             bottomDetailView?.frame.origin.y = newLocation >= 0 ? newLocation : 0
+            swipeUpContainerView.frame.origin.y = -(swipeUpContainerView.frame.height - (bottomDetailView?.frame.origin.y)! - ImageMaxY)
+
+    
             if bottomDetailView?.frame.origin.y ?? .zero > self.view.frame.height {
                 bottomDetailView?.isHidden = true
                 recognizer.state = .ended
@@ -357,19 +371,33 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         }
     }
     
+    private func getImageMaxY() -> CGFloat {
+        guard let cell = collectionView.cellForItem(at: IndexPath(row: selectedIndex ?? 0, section: 0)) as? PhotoVideoDetailCell else {
+            assertionFailure()
+            return .zero
+        }
+        
+        return cell.imageViewMaxY()
+    }
+    
     func positionForView(velocityY: CGFloat) {
+        
         if velocityY > 50,
             bottomDetailView?.frame.origin.y ?? .zero > self.view.frame.height - self.cardHeight {
-            self.bottomDetailView?.frame.origin.y = self.view.frame.height
-            self.viewState = .collapsed
+            
+            bottomDetailView?.frame.origin.y = self.view.frame.height
+            swipeUpContainerView.frame.origin.y = self.view.frame.minY
+            viewState = .collapsed
             isFullScreen = false
             collapseDetailView.isHidden = true
-            
         } else if velocityY < -50,
             bottomDetailView?.frame.origin.y ?? .zero > self.view.frame.height - self.cardHeight,
             viewState != .expanded {
-            self.bottomDetailView?.frame.origin.y = self.view.frame.height - self.cardHeight
-            self.viewState = .expanded
+        
+            bottomDetailView?.frame.origin.y = self.view.frame.height - self.cardHeight
+            swipeUpContainerView.frame.origin.y = -(cardHeight - ImageMaxY)
+            
+            viewState = .expanded
             collapseDetailView.isHidden = false
             
         } else if self.bottomDetailView?.frame.origin.y ?? .zero < self.view.frame.height - self.cardHeight {
@@ -385,13 +413,15 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         } else {
             switch self.viewState {
             case .collapsed:
-                self.bottomDetailView?.frame.origin.y = self.view.frame.height
+                bottomDetailView?.frame.origin.y = self.view.frame.height
+                swipeUpContainerView.frame.origin.y = self.view.frame.minY
                 isFullScreen = false
                 collapseDetailView.isHidden = true
             case .expanded:
                 self.bottomDetailView?.frame.origin.y = self.view.frame.height - self.cardHeight
                 collapseDetailView.isHidden = false
             case .full:
+                self.bottomDetailView?.frame.origin.y = self.view.frame.height - self.cardHeight
                 collapseDetailView.isHidden = false
                 break
             }
@@ -714,10 +744,27 @@ final class PassThroughView: UIView {
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        
         let hitView = super.hitTest(point, with: event)
+        
+        if let parentViewController = hitView?.findViewController() as? PhotoVideoDetailViewController,
+            let bottomDetailView = parentViewController.bottomDetailView {
+            if parentViewController.viewState != .collapsed {
+                
+                let pointInSuperview = self.convert(point, to: parentViewController.view)
+                
+                if parentViewController.collapseDetailView.frame.contains(pointInSuperview) || bottomDetailView.frame.contains(pointInSuperview) {
+                    return nil
+                } else {
+                    return hitView
+                }
+            }
+        }
+        
         if hitView == self {
             return nil
         }
+        
         return hitView
     }
     
@@ -733,4 +780,17 @@ final class PassThroughView: UIView {
         window.addGestureRecognizer(panGestureRecognizer)
     }
     
+}
+
+
+extension UIView {
+    func findViewController() -> UIViewController? {
+        if let nextResponder = self.next as? UIViewController {
+            return nextResponder
+        } else if let nextResponder = self.next as? UIView {
+            return nextResponder.findViewController()
+        } else {
+            return nil
+        }
+    }
 }
