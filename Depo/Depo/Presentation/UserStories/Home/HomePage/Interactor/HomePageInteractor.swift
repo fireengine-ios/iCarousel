@@ -108,7 +108,7 @@ final class HomePageInteractor: HomePageInteractorInput {
         SyncServiceManager.shared.updateImmediately()
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(checkAutoSync),
-                                               name: .UIApplicationWillEnterForeground,
+                                               name: .UIApplicationDidBecomeActive,
                                                object: nil)
     }
     

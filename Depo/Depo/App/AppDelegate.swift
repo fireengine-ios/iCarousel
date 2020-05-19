@@ -227,6 +227,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillEnterForeground")
         if BackgroundTaskService.shared.appWasSuspended {
+            debugLog("App was suspended")
             CacheManager.shared.actualizeCache()
         }
         ContactSyncSDK.doPeriodicSync()
