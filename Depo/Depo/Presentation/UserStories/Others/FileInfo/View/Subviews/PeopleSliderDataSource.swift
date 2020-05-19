@@ -10,8 +10,6 @@ import Foundation
 
 protocol PeopleSliderDataSourceDelegate: class {
     func didSelect(item: PeopleOnPhotoItemResponse)
-    func needLoadNextPage()
-    func onStartSelection()
 }
 
 final class PeopleSliderDataSource: NSObject {
@@ -53,10 +51,7 @@ final class PeopleSliderDataSource: NSObject {
     //MARK: - Shared methods
 
     func appendItems(_ newItems: [PeopleOnPhotoItemResponse]) {
-        if newItems.isEmpty {
-            if !isPaginationDidEnd {
-                delegate?.needLoadNextPage()
-            }
+        guard !newItems.isEmpty else {
             return
         }
 
@@ -80,9 +75,7 @@ final class PeopleSliderDataSource: NSObject {
             
             collectionView.performBatchUpdates({
                 collectionView.insertItems(at: indexPaths)
-            }, completion: { [weak self] _ in
-                self?.checkLoadNextPage(for: self?.collectionView.indexPathsForVisibleItems.sorted().last)
-            })
+            }, completion: nil)
         }
     }
     
@@ -114,18 +107,6 @@ extension PeopleSliderDataSource: UICollectionViewDataSource {
         }
         
         cell.setup(with: item)
-        checkLoadNextPage(for: indexPath)
-    }
-    
-    private func checkLoadNextPage(for indexPath: IndexPath?) {
-        guard !isPaginationDidEnd, let indexPath = indexPath else {
-            return
-        }
-        
-        let countRow = self.collectionView(collectionView, numberOfItemsInSection: 0)
-        if indexPath.row == countRow - 1 {
-            delegate?.needLoadNextPage()
-        }
     }
 }
 

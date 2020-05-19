@@ -10,8 +10,6 @@ import UIKit
 
 protocol PeopleSliderCellDelegate: class {
     func didSelect(item: PeopleOnPhotoItemResponse)
-    func needLoadNextPeoplePage()
-    func onStartSelection()
 }
 
 final class PeopleSliderCell: UICollectionViewCell {
@@ -49,20 +47,7 @@ final class PeopleSliderCell: UICollectionViewCell {
 }
 
 extension PeopleSliderCell: PeopleSliderDataSourceDelegate {
-    func didChangeSelectionCount(_ count: Int) {
-        
-    }
-    
-    
     func didSelect(item: PeopleOnPhotoItemResponse) {
         delegate?.didSelect(item: item)
-    }
-    
-    func needLoadNextPage() {
-        delegate?.needLoadNextPeoplePage()
-    }
-    
-    func onStartSelection() {
-        delegate?.onStartSelection()
     }
 }

@@ -508,6 +508,7 @@ struct TextConstants {
     static let faceImageWaitAlbum = NSLocalizedString("Grouping of your photos will take some time. Please wait and then check the albums.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageEnable =  NSLocalizedString("face_image_enable", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageEnableMessageText =  NSLocalizedString("face_image_enable_message_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImageEnableSnackText =  NSLocalizedString("face_image_enable_snack_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     // MARK: userProfile
     static let userProfileTitle = NSLocalizedString("Your Profile", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

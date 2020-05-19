@@ -171,38 +171,6 @@ class PhotoInfoViewController: UIView {
     private var isEditing = true
     private lazy var dataSource = PhotoVideoDetailDataSource(collectionView: peopleCollectionView, delegate: self)
     
-    private var testPeople1: PeopleOnPhotoItemResponse {
-        let newPeople = PeopleOnPhotoItemResponse()
-        newPeople.name = "Thrall"
-        newPeople.personInfoId = 111111
-        newPeople.thumbnailURL = URL(string: "https://sun9-28.userapi.com/c858216/v858216686/1f64d6/4qFYPnRZU18.jpg")
-        return newPeople
-    }
-    
-    private var testPeople2: PeopleOnPhotoItemResponse {
-        let newPeople = PeopleOnPhotoItemResponse()
-        newPeople.name = "SmartGuyWC3"
-        newPeople.personInfoId = 111111
-        newPeople.thumbnailURL = URL(string: "https://sun9-38.userapi.com/c855536/v855536393/23a622/V0nYJx2V-Xw.jpg")
-        return newPeople
-    }
-    
-    private var testPeople3: PeopleOnPhotoItemResponse {
-        let newPeople = PeopleOnPhotoItemResponse()
-        newPeople.name = "Tomezzz"
-        newPeople.personInfoId = 111111
-        newPeople.thumbnailURL = URL(string: "https://sun9-22.userapi.com/c830108/v830108047/1d6216/NBqkUCCBpHk.jpg")
-        return newPeople
-    }
-    
-    private var testPeople4: PeopleOnPhotoItemResponse {
-        let newPeople = PeopleOnPhotoItemResponse()
-        newPeople.name = "Red Neck"
-        newPeople.personInfoId = 111111
-        newPeople.thumbnailURL = URL(string: "https://sun9-40.userapi.com/c857132/v857132546/19295a/HaaYIwB5q9E.jpg")
-        return newPeople
-    }
-    
     var output: PhotoInfoViewControllerOutput!
         
     // MARK: Life cycle
@@ -517,7 +485,6 @@ extension PhotoInfoViewController: UICollectionViewDelegateFlowLayout {
 
 extension PhotoInfoViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(">>>>", indexPath)
     }
 }
 

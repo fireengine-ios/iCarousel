@@ -326,6 +326,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             self.interactor.changeFaceImageAndFacebookAllowed(isFaceImageAllowed: true,
                                                               isFacebookAllowed: true,
                                                               completion: nil)
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.faceImageEnableSnackText, action: .ok)
         }
     }
     
