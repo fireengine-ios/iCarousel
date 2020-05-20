@@ -356,7 +356,7 @@ final class FileInfoView: UIView {
         resetTitleNames()
         hideInfoDateLabels()
         dataSource.reset()
-        peopleTitleLabel.isHidden = true
+        peopleTitleLabel.isHidden = false
         durationStackView.isHidden = true
     }
     
