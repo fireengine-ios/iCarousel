@@ -333,6 +333,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
 extension PhotoVideoDetailViewController: PassThroughViewDelegate {
     
     func handlePan(recognizer: UIPanGestureRecognizer) {
+        
+        guard let bottomDetailView = bottomDetailView else {
+            assertionFailure()
+            return
+        }
     
         switch recognizer.state {
         case .began:
@@ -345,17 +350,17 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         case .changed:
             let newLocation = dragViewBeginLocation.y + (recognizer.location(in: self.view).y - gestureBeginLocation.y)
             
-            if newLocation <= self.view.frame.height - self.cardHeight {
-                bottomDetailView?.frame.origin.y = self.view.frame.height - self.cardHeight
+            if newLocation <= view.frame.height - cardHeight {
+                bottomDetailView.frame.origin.y = view.frame.height - cardHeight
                 return
             }
             
-            bottomDetailView?.frame.origin.y = newLocation >= 0 ? newLocation : 0
-            collectionView.frame.origin.y = -(collectionView.frame.height - (bottomDetailView?.frame.origin.y)! - ImageMaxY)
+            bottomDetailView.frame.origin.y = newLocation >= 0 ? newLocation : 0
+            collectionView.frame.origin.y = -(collectionView.frame.height - bottomDetailView.frame.origin.y - ImageMaxY)
 
     
-            if bottomDetailView?.frame.origin.y ?? .zero > self.view.frame.height {
-                bottomDetailView?.isHidden = true
+            if bottomDetailView.frame.origin.y > view.frame.height {
+                bottomDetailView.isHidden = true
                 recognizer.state = .ended
             }
             
@@ -414,59 +419,65 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         }
         
         let cell = collectionView.visibleCells.first as? PhotoVideoDetailCell
-        let offsetY = cell?.frame.minY
+        let offsetY = -(cell?.frame.minY ?? 0 + ImageMaxY)
         
         selectedIndex = index
         let newContentOffsetX = collectionView.bounds.size.width * CGFloat(index)
-        let newContentOffset = CGPoint(x: newContentOffsetX, y: offsetY ?? collectionView.contentOffset.y)
+        let newContentOffset = CGPoint(x: newContentOffsetX, y: offsetY)
 
         collectionView.setContentOffset(newContentOffset, animated: true)
-        
+        collectionView.frame.origin.y = -(collectionView.frame.height - (bottomDetailView?.frame.origin.y)! - ImageMaxY)
     }
     
     func positionForView(velocityY: CGFloat) {
         
+        guard let bottomDetailView = bottomDetailView else {
+            assertionFailure()
+            return
+        }
+        
         if velocityY > 50,
-            bottomDetailView?.frame.origin.y ?? .zero > self.view.frame.height - self.cardHeight {
+            bottomDetailView.frame.origin.y > self.view.frame.height - self.cardHeight {
             
-            bottomDetailView?.frame.origin.y = self.view.frame.height
+            bottomDetailView.frame.origin.y = self.view.frame.height
             collectionView.frame.origin.y = self.view.frame.minY
             viewState = .collapsed
             isFullScreen = false
             collapseDetailView.isHidden = true
         } else if velocityY < -50,
-            bottomDetailView?.frame.origin.y ?? .zero > self.view.frame.height - self.cardHeight,
+            bottomDetailView.frame.origin.y > self.view.frame.height - cardHeight,
             viewState != .expanded {
         
-            bottomDetailView?.frame.origin.y = self.view.frame.height - self.cardHeight
-            collectionView.frame.origin.y = -(cardHeight - ImageMaxY)
+            bottomDetailView.frame.origin.y = self.view.frame.height - cardHeight
+            collectionView.frame.origin.y = -(collectionView.frame.height - bottomDetailView.frame.origin.y - ImageMaxY)
             
             viewState = .expanded
             collapseDetailView.isHidden = false
             
-        } else if self.bottomDetailView?.frame.origin.y ?? .zero < self.view.frame.height - self.cardHeight {
-            self.viewState = .full
+        } else if bottomDetailView.frame.origin.y < self.view.frame.height - cardHeight {
+            viewState = .full
             collapseDetailView.isHidden = false
             
-        } else if self.bottomDetailView?.frame.origin.y ?? .zero > self.view.frame.height {
-            self.bottomDetailView?.frame.origin.y = self.view.frame.height
-            self.viewState = .collapsed
+        } else if bottomDetailView.frame.origin.y > self.view.frame.height {
+            bottomDetailView.frame.origin.y = self.view.frame.height
+            viewState = .collapsed
             isFullScreen = false
             collapseDetailView.isHidden = true
             
         } else {
             switch self.viewState {
             case .collapsed:
-                bottomDetailView?.frame.origin.y = self.view.frame.height
+                bottomDetailView.frame.origin.y = self.view.frame.height
                 collectionView.frame.origin.y = self.view.frame.minY
                 isFullScreen = false
                 collapseDetailView.isHidden = true
             case .expanded:
-                self.bottomDetailView?.frame.origin.y = self.view.frame.height - self.cardHeight
-                collectionView.frame.origin.y = -(cardHeight - ImageMaxY)
+                self.bottomDetailView?.frame.origin.y = self.view.frame.height - cardHeight
+                collectionView.frame.origin.y = -(collectionView.frame.height - bottomDetailView.frame.origin.y - ImageMaxY)
                 collapseDetailView.isHidden = false
             case .full:
-                self.bottomDetailView?.frame.origin.y = self.view.frame.height - self.cardHeight
+                self.bottomDetailView?.frame.origin.y = self.view.frame.height - cardHeight
+                collectionView.frame.origin.y = -(collectionView.frame.height - bottomDetailView.frame.origin.y - ImageMaxY)
                 collapseDetailView.isHidden = false
                 break
             }
