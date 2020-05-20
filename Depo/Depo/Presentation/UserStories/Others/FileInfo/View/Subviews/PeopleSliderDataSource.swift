@@ -46,7 +46,7 @@ final class PeopleSliderDataSource: NSObject {
     
     //MARK: - Shared methods
 
-    func refillCollection(with items: [PeopleOnPhotoItemResponse]) {
+    func reloadCollection(with items: [PeopleOnPhotoItemResponse]) {
         self.items = items
         collectionView?.reloadData()
     }

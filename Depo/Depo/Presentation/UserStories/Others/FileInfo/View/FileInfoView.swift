@@ -306,7 +306,7 @@ final class FileInfoView: UIView {
         premiumTextLabel.text = items.isEmpty
             ? TextConstants.noPeopleBecomePremiumText
             : TextConstants.allPeopleBecomePremiumText
-        dataSource.refillCollection(with: items)
+        dataSource.reloadCollection(with: items)
         setHiddenPeopleLabel()
     }
     

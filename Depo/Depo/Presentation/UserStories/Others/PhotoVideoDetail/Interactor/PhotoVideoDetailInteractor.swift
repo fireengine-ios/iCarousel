@@ -26,7 +26,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     private let peopleService = PeopleService()
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private lazy var accountServicePrl: AccountServicePrl = AccountService()
     private lazy var accountService = AccountService()
     private let authorityStorage = AuthoritySingleton.shared
     
@@ -185,7 +184,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     }
     
     func getFIRStatus(success: @escaping (SettingsInfoPermissionsResponse) -> (), fail: @escaping (Error) -> ()) {
-        accountServicePrl.getSettingsInfoPermissions { response in
+        accountService.getSettingsInfoPermissions { response in
             switch response {
             case .success(let result):
                 success(result)
