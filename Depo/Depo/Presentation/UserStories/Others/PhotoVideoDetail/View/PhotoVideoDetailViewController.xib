@@ -42,7 +42,7 @@
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="ZzB-kC-yvt" secondAttribute="trailing" id="9IQ-Yx-cOx"/>
                         <constraint firstItem="ZzB-kC-yvt" firstAttribute="leading" secondItem="W8L-hg-9Ki" secondAttribute="leading" id="IoM-cZ-4Pj"/>
