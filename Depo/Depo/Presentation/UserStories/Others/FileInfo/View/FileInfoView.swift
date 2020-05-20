@@ -130,6 +130,9 @@ final class FileInfoView: UIView {
     }
     
     // people
+    
+    @IBOutlet private weak var peopleStackView: UIStackView!
+    
     @IBOutlet private weak var peopleTitleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.myStreamPeopleTitle
@@ -239,6 +242,11 @@ final class FileInfoView: UIView {
                 setupEditableState(for: object)
             }
             
+            if obj.fileType == .video {
+                peopleStackView.isHidden = true
+                premiumStackView.isHidden = true
+            }
+            
             if let creationDate = obj.creationDate, !object.isLocalItem {
                 uploadDateLabel.text = creationDate.getDateInFormat(format: "dd MMMM yyyy")
                 uploadDateStackView.isHidden = false
@@ -313,6 +321,7 @@ final class FileInfoView: UIView {
     func setHiddenPeoplePlaceholder(isHidden: Bool) {
         enableFIRStackView.isHidden = isHidden
         peopleCollectionView.isHidden = !isHidden
+        premiumStackView.isHidden = !isHidden
     }
     
     func setHiddenPremiumStackView(isHidden: Bool) {
@@ -358,6 +367,8 @@ final class FileInfoView: UIView {
         dataSource.reset()
         peopleTitleLabel.isHidden = false
         durationStackView.isHidden = true
+        peopleStackView.isHidden = false
+        premiumStackView.isHidden = true
     }
     
     private func resetTitleNames() {
