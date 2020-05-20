@@ -14,7 +14,7 @@ protocol PhotoVideoDetailRouterInput {
     
     func goBack(navigationConroller: UINavigationController?)
     
-    func showPopup(completion: @escaping () -> ())
+    func showConfirmationPopup(completion: @escaping () -> ())
     
     func goToPremium()
     

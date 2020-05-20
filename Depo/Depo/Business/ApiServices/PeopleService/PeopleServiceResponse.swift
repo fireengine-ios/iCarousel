@@ -58,8 +58,8 @@ final class PeopleOnPhotoItemResponse: ObjectRequestResponse {
 
     override func mapping() {
         personInfoId = json?[PeopleOnPhotoJsonKey.personInfoId].int64
-        name = json?[PeopleJsonKey.name].string
-        thumbnailURL = json?[PeopleJsonKey.thumbnail].url
+        name = json?[PeopleOnPhotoJsonKey.name].string
+        thumbnailURL = json?[PeopleOnPhotoJsonKey.thumbnailURL].url
     }
 }
 

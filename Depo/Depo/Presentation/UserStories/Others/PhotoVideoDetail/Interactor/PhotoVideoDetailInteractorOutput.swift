@@ -30,9 +30,7 @@ protocol PhotoVideoDetailInteractorOutput: class {
     
     func updatePeople(items: [PeopleOnPhotoItemResponse])
     
-    func setHiddenPeoplePlaceholder(isHidden: Bool)
-    
     func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item)
     
-    func hasPermissionFaceRecognition(_ bool: Bool)
+    func didLoadFaceRecognitionPermissionStatus(_ isPermitted: Bool)
 }

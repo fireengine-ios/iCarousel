@@ -19,7 +19,7 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
         navigationConroller?.dismiss(animated: true, completion: nil)
     }
     
-    func showPopup(completion: @escaping () -> ()) {
+    func showConfirmationPopup(completion: @escaping () -> ()) {
         let okHandler: PopUpButtonHandler = { vc in
             vc.close()
             completion()

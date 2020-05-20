@@ -37,13 +37,11 @@ protocol PhotoVideoDetailInteractorInput: class {
     
     func getPersonsOnPhoto(uuid: String)
     
-    func checkPeopleEnable()
-    
-    func changeFaceImageAndFacebookAllowed(isFaceImageAllowed: Bool,
-                                           isFacebookAllowed: Bool,
-                                           completion: VoidHandler?)
-    
     func getPeopleAlbum(with item: Item, id: Int64)
+
+    func enableFIR(completion: VoidHandler?)
+    
+    func getFIRStatus(success: @escaping (SettingsInfoPermissionsResponse) -> (), fail: @escaping (Error) -> ())
     
     func getAuthority()
 }

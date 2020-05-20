@@ -9,7 +9,7 @@
 import UIKit
 
 final class PeopleCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet private var thumbnailsContainer: UIView! {
         willSet {
             newValue.backgroundColor = .white
@@ -25,16 +25,11 @@ final class PeopleCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.text = " "
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 14)
             newValue.textColor = ColorConstants.darkText
-            newValue.numberOfLines = 0
             newValue.lineBreakMode = .byWordWrapping
+            newValue.numberOfLines = 0
         }
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
     }
     
     override func prepareForReuse() {
@@ -44,22 +39,11 @@ final class PeopleCollectionViewCell: UICollectionViewCell {
     
     func setup(with item: PeopleOnPhotoItemResponse) {
         titleLabel.text = item.name
-        
-        if let thumbnailURL = item.thumbnailURL {
-            DispatchQueue.global().async {
-              if let data = try? Data(contentsOf: thumbnailURL)
-              {
-                DispatchQueue.main.async {
-                    self.thumbnail.image = UIImage(data: data)
-                }
-              }
-           }
-        }
+        thumbnail.loadImageData(with: item.thumbnailURL, animated: true)
     }
     
     func cancelImageLoading() {
         thumbnail.cancelLoadRequest()
         thumbnail.image = nil
     }
-    
 }

@@ -22,6 +22,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     var canLoadMoreItems = true
     
+    private var isFaceImageAllowed = false
+    
     func viewIsReady(view: UIView) {
         interactor.onViewIsReady()
         bottomBarPresenter?.show(animated: false, onView: view)
@@ -83,15 +85,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         
         view.onItemSelected(at: selectedIndex, from: interactor.allItems)
         
-        let selectedItems = [interactor.allItems[selectedIndex]]
-        let allSelectedItemsTypes = selectedItems.map { $0.fileType }
+        let selectedItem = interactor.allItems[selectedIndex]
+        let allSelectedItemsTypes = [selectedItem.fileType]
         
         let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: selectedIndex)
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
         interactor.currentItemIndex = selectedIndex
-        if let uuid = selectedItems.first?.uuid {
-            interactor.getPersonsOnPhoto(uuid: uuid)
-        }
     }
     
     func updateBars() {
@@ -276,11 +275,6 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         }
     }
     
-    func onRename(newName: String) {
-        startAsyncOperation()
-        interactor.onRename(newName: newName)
-    }
-    
     func updated() {
         asyncOperationSuccess()
     }
@@ -295,25 +289,25 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         view.showErrorAlert(message: error.description)
     }
     
-    func validateName(newName: String) {
-        interactor.onValidateName(newName: newName)
-    }
-    
     func didValidateNameSuccess(name: String) {
         view.showValidateNameSuccess(name: name)
+        interactor.onRename(newName: name)
     }
     
     func updatePeople(items: [PeopleOnPhotoItemResponse]) {
+        asyncOperationSuccess()
         view.updatePeople(items: items)
     }
     
-    func setHiddenPeoplePlaceholder(isHidden: Bool) {
-        view.setHiddenPeoplePlaceholder(isHidden: isHidden)
-    }
-    
-    func checkPeopleEnable() {
-        interactor.checkPeopleEnable()
-        interactor.getAuthority()
+    func getFIRStatus() {
+        interactor.getFIRStatus(success: { [weak self] settings in
+            self?.isFaceImageAllowed = settings.isFaceImageAllowed == true
+            self?.view.setHiddenPeoplePlaceholder(isHidden: self?.isFaceImageAllowed == true)
+            self?.interactor.getAuthority()
+            self?.getPersonsForSelectedPhoto()
+        }, fail: { [weak self] error in
+            self?.failedUpdate(error: error)
+        })
     }
     
     func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item) {
@@ -321,31 +315,57 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         router.openFaceImageItemPhotosWith(item, album: albumItem)
     }
     
-    func onEnable() {
-        router.showPopup {
-            self.interactor.changeFaceImageAndFacebookAllowed(isFaceImageAllowed: true,
-                                                              isFacebookAllowed: true,
-                                                              completion: nil)
-            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.faceImageEnableSnackText, action: .ok)
+    func didLoadFaceRecognitionPermissionStatus(_ isPermitted: Bool) {
+        view.setHiddenPremiumStackView(isHidden: isPermitted)
+    }
+    
+    func configureFileInfo(_ view: FileInfoView) {
+        view.output = self
+    }
+    
+    func getPersonsForSelectedPhoto() {
+        guard isFaceImageAllowed, let index = interactor.currentItemIndex, let uuid = interactor.allItems[safe: index]?.uuid else {
+            return
+        }
+        interactor.getPersonsOnPhoto(uuid: uuid)
+    }
+}
+
+extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
+    func onRename(newName: String) {
+        startAsyncOperation()
+        interactor.onValidateName(newName: newName)
+    }
+    
+    func onEnableFaceRecognitionDidTap() {
+        router.showConfirmationPopup { [weak self] in
+            self?.interactor.enableFIR() { [weak self] in
+                SnackbarManager.shared.show(
+                    type: .nonCritical,
+                    message: TextConstants.faceImageEnableSnackText,
+                    action: .ok
+                )
+                self?.isFaceImageAllowed = true
+                self?.view.setHiddenPeoplePlaceholder(isHidden: true)
+                self?.interactor.getAuthority()
+                self?.getPersonsForSelectedPhoto()
+            }
         }
     }
     
-    func onPremium() {
+    func onBecomePremiumDidTap() {
         router.goToPremium()
     }
     
-    func onPeopleTapped(item: PeopleOnPhotoItemResponse) {
+    func onPeopleAlbumDidTap(_ album: PeopleOnPhotoItemResponse) {
         guard
-            let mediaItem = self.item,
-            let id = item.personInfoId
+            let index = interactor.currentItemIndex,
+            let mediaItem = interactor.allItems[safe: index],
+            let id = album.personInfoId
         else {
             return
         }
-        
+        view.closeDetailViewIfNeeded()
         interactor.getPeopleAlbum(with: mediaItem, id: id)
-    }
-    
-    func hasPermissionFaceRecognition(_ bool: Bool) {
-        view.setHiddenPremiumStackView(isHidden: bool)
     }
 }

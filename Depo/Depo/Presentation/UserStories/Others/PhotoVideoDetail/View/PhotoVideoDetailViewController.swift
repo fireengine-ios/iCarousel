@@ -27,7 +27,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @IBOutlet private weak var collapseDetailView: UIView!
     
     // Bottom detail view
-    private var bottomDetailView: PhotoInfoViewController?
+    private var bottomDetailView: FileInfoView?
+    private var passThroughView: PassThroughView?
+    
     private let cardHeight: CGFloat = UIScreen.main.bounds.height * 0.7
     
     private var gestureBeginLocation: CGPoint = .zero
@@ -93,16 +95,17 @@ final class PhotoVideoDetailViewController: BaseViewController {
             if let index = selectedIndex {
                 output.setSelectedItemIndex(selectedIndex: index)
             }
+            updateFileInfo()
         }
     }
     
     private(set) var objects = [Item]()
     
     private var selectedItem: Item? {
-        if let index = selectedIndex {
-            return objects[safe: index]
+        guard let index = selectedIndex else {
+            return nil
         }
-        return nil
+        return objects[safe: index]
     }
     
     private lazy var threeDotsBarButtonItem: UIBarButtonItem = {
@@ -116,7 +119,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        addBottomDetailsView()
+
         if #available(iOS 11.0, *) {
             collectionView.contentInsetAdjustmentBehavior = .never
         } else {
@@ -137,7 +141,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
         collapseViewSetup()
-        addBottomDetailsView()
         addTrackSwipeUpView()
         showSpinner()
     }
@@ -165,13 +168,17 @@ final class PhotoVideoDetailViewController: BaseViewController {
         //editingTabBar.editingBar.layer.borderWidth = 0
         
         statusBarColor = .black
-        output.checkPeopleEnable()
+        output.getFIRStatus()
+
+        let isFullScreen = self.isFullScreen
+        self.isFullScreen = isFullScreen
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
         output.viewIsReady(view: viewForBottomBar)
+        passThroughView?.enableGestures()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -183,6 +190,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         statusBarColor = .clear
         
         output.viewWillDisappear()
+        passThroughView?.disableGestures()
     }
     
     override func viewDidLayoutSubviews() {
@@ -259,8 +267,12 @@ final class PhotoVideoDetailViewController: BaseViewController {
 
     private func setupTitle() {
         setNavigationTitle(title: selectedItem?.name ?? "")
+    }
+    
+    private func updateFileInfo() {
         guard let selectedItem = selectedItem else { return }
-        bottomDetailView?.setObject(object: selectedItem)
+        bottomDetailView?.setObject(selectedItem)
+        output.getPersonsForSelectedPhoto()
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
@@ -329,23 +341,20 @@ final class PhotoVideoDetailViewController: BaseViewController {
 extension PhotoVideoDetailViewController: PassThroughViewDelegate {
     
     func handlePan(recognizer: UIPanGestureRecognizer) {
-    
         switch recognizer.state {
         case .began:
             isFullScreen = true
-            
             collapseDetailView.isHidden = false
             gestureBeginLocation = recognizer.location(in: self.view)
-            dragViewBeginLocation = self.bottomDetailView?.frame.origin ?? .zero
-            
+            dragViewBeginLocation = bottomDetailView?.frame.origin ?? .zero
+            dragViewBeginLocation.y == view.frame.height ? updateFileInfo() : ()
         case .changed:
-            let newLocation = dragViewBeginLocation.y + (recognizer.location(in: self.view).y - gestureBeginLocation.y)
-            bottomDetailView?.frame.origin.y = newLocation >= 0 ? newLocation : 0
-            if bottomDetailView?.frame.origin.y ?? .zero > self.view.frame.height {
+            let newLocationY = dragViewBeginLocation.y + (recognizer.location(in: view).y - gestureBeginLocation.y)
+            bottomDetailView?.frame.origin.y = max(.zero, newLocationY)
+            if newLocationY > self.view.frame.height {
                 bottomDetailView?.isHidden = true
                 recognizer.state = .ended
             }
-            
         case .ended:
             UIView.animate(withDuration: 1, delay: 0,
                            usingSpringWithDamping: 0.8,
@@ -397,14 +406,13 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         collectionView.setContentOffset(newContentOffset, animated: true)
     }
     
-    func positionForView(velocityY: CGFloat) {
+    private func positionForView(velocityY: CGFloat) {
         if velocityY > 50,
             bottomDetailView?.frame.origin.y ?? .zero > self.view.frame.height - self.cardHeight {
             self.bottomDetailView?.frame.origin.y = self.view.frame.height
             self.viewState = .collapsed
             isFullScreen = false
             collapseDetailView.isHidden = true
-            
         } else if velocityY < -50,
             bottomDetailView?.frame.origin.y ?? .zero > self.view.frame.height - self.cardHeight,
             viewState != .expanded {
@@ -446,24 +454,19 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         let view = PassThroughView(frame: topViewController.view.bounds)
         view.delegate = self
         topViewController.view.addSubview(view)
+        passThroughView = view
     }
     
     private func addBottomDetailsView() {
-        
         guard let topViewController = RouterVC().getViewControllerForPresent() else {
             assertionFailure()
             return
         }
         
-        bottomDetailView = PhotoInfoViewController(frame: CGRect(x: view.bounds.minX, y: view.bounds.maxY, width: view.bounds.width, height: view.bounds.height))
-        bottomDetailView?.clipsToBounds = true
-        bottomDetailView?.output = self
-        
-        guard let detailView = bottomDetailView else {
-            assertionFailure()
-            return
-        }
-        topViewController.view.addSubview(detailView)
+        let fileInfoView = FileInfoView(frame: CGRect(x: .zero, y: view.bounds.maxY, width: view.bounds.width, height: view.bounds.height))
+        output.configureFileInfo(fileInfoView)
+        topViewController.view.addSubview(fileInfoView)
+        bottomDetailView = fileInfoView
     }
 }
 
@@ -546,7 +549,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func updatePeople(items: [PeopleOnPhotoItemResponse]) {
-        bottomDetailView?.updatePeople(items: items)
+        bottomDetailView?.refillCollection(with: items)
     }
     
     func setHiddenPeoplePlaceholder(isHidden: Bool) {
@@ -555,6 +558,10 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     
     func setHiddenPremiumStackView(isHidden: Bool) {
         bottomDetailView?.setHiddenPremiumStackView(isHidden: isHidden)
+    }
+    
+    func closeDetailViewIfNeeded() {
+        closeDetailView()
     }
 }
 
@@ -719,29 +726,6 @@ extension PhotoVideoDetailViewController: UIScrollViewDelegate {
     }
 }
 
-extension PhotoVideoDetailViewController: PhotoInfoViewControllerOutput {
-    func onRename(newName: String) {
-        output.onRename(newName: newName)
-    }
-    
-    func validateName(newName: String) {
-        output.validateName(newName: newName)
-    }
-    
-    func onEnable() {
-        output.onEnable()
-    }
-    
-    func onPremium() {
-        output.onPremium()
-    }
-    
-    func onPeopleTapped(item: PeopleOnPhotoItemResponse) {
-        closeDetailView()
-        output.onPeopleTapped(item: item)
-    }
-}
-
 ///extension of different class( Need to expand picture-in-picture everywhere)
 extension TabBarViewController: AVPlayerViewControllerDelegate {
 
@@ -804,11 +788,23 @@ final class PassThroughView: UIView {
         return hitView
     }
     
-    @objc func panGestureRecognizerHandler(_ gestureRecognizer: UIPanGestureRecognizer) {
+    func enableGestures() {
+        swipeGestureRecognizerRight.isEnabled = true
+        swipeGestureRecognizerLeft.isEnabled = true
+        panGestureRecognizer.isEnabled = true
+    }
+    
+    func disableGestures() {
+        swipeGestureRecognizerRight.isEnabled = false
+        swipeGestureRecognizerLeft.isEnabled = false
+        panGestureRecognizer.isEnabled = false
+    }
+    
+    @objc private func panGestureRecognizerHandler(_ gestureRecognizer: UIPanGestureRecognizer) {
         delegate?.handlePan(recognizer: gestureRecognizer)
     }
     
-    @objc func swipeGestureRecognizerHandler(_ gestureRecognizer: UISwipeGestureRecognizer) {
+    @objc private func swipeGestureRecognizerHandler(_ gestureRecognizer: UISwipeGestureRecognizer) {
         delegate?.handleSwipe(recognizer: gestureRecognizer)
     }
     

@@ -167,87 +167,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
     }
     
-    func checkPeopleEnable() {
-        getFaceImageGroupingStatus(success: { [weak self] (settings) in
-            if settings.isFaceImageAllowed == true {
-                self?.output.setHiddenPeoplePlaceholder(isHidden: true)
-            } else {
-                self?.output.setHiddenPeoplePlaceholder(isHidden: false)
-            }
-        }) { [weak self] (errorResponse) in
-            self?.output.failedUpdate(error: errorResponse)
-            self?.output.setHiddenPeoplePlaceholder(isHidden: false)
-        }
-    }
-    
-    func requestPersonsForPhoto(uuid: String) {
-        let emptyItems = [PeopleOnPhotoItemResponse]()
-        getFaceImageGroupingStatus(success: { [weak self] (settings) in
-            if settings.isFaceImageAllowed == true {
-                self?.getPersonsOnPhoto(uuid: uuid)
-            } else {
-                self?.output.updatePeople(items: emptyItems)
-            }
-        }) { [weak self] (errorResponse) in
-            self?.output.failedUpdate(error: errorResponse)
-            self?.output.updatePeople(items: emptyItems)
-        }
-    }
-    
-    func getFaceImageGroupingStatus(success: @escaping (SettingsInfoPermissionsResponse) -> (),
-                                    fail: @escaping (Error) -> ()) {
-        accountServicePrl.getSettingsInfoPermissions { response in
-            switch response {
-            case .success(let result):
-                let result: SettingsInfoPermissionsResponse = result
-                success(result)
-            case .failed(let error):
-                fail(error)
-            }
-        }
-    }
-    
-    func getPersonsOnPhoto(uuid: String) {
-        peopleService.getPeopleForMedia(with: uuid, success: { [weak self] peopleThumbnails in
-            DispatchQueue.main.async {
-                self?.output.updatePeople(items: peopleThumbnails)
-            }
-        }) { [weak self] (errorResponse) in
-            DispatchQueue.main.async {
-                self?.output.failedUpdate(error: errorResponse)
-                let emptyItems = [PeopleOnPhotoItemResponse]()
-                self?.output.updatePeople(items: emptyItems)
-            }
-        }
-    }
-    
-    func changeFaceImageAndFacebookAllowed(isFaceImageAllowed: Bool,
-                                           isFacebookAllowed: Bool,
-                                           completion: VoidHandler? = nil) {
-        accountService.changeFaceImageAndFacebookAllowed(isFaceImageAllowed: isFaceImageAllowed,
-                                                         isFacebookAllowed: isFacebookAllowed) { [weak self] response in
-            DispatchQueue.toMain {
-                switch response {
-                case .success(let result):
-                    NotificationCenter.default.post(name: .changeFaceImageStatus, object: self)
-                    
-                    if result.isFaceImageAllowed == true {
-                        self?.output.setHiddenPeoplePlaceholder(isHidden: true)
-                    }
-                    
-                case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
-                    
-                }
-                completion?()
-            }
-        }
-    }
-    
     func getPeopleAlbum(with item: Item, id: Int64) {
-        guard item.fileType.isFaceImageType else {
-            return
-        }
         let successHandler: AlbumOperationResponse = { [weak self] album in
             DispatchQueue.main.async {
                 self?.output.didLoadAlbum(album, forItem: item)
@@ -264,13 +184,59 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                                      fail: failHandler)
     }
     
+    func getFIRStatus(success: @escaping (SettingsInfoPermissionsResponse) -> (), fail: @escaping (Error) -> ()) {
+        accountServicePrl.getSettingsInfoPermissions { response in
+            switch response {
+            case .success(let result):
+                success(result)
+            case .failed(let error):
+                fail(error)
+            }
+        }
+    }
+    
+    func enableFIR(completion: VoidHandler?) {
+        accountService.changeFaceImageAndFacebookAllowed(isFaceImageAllowed: true,
+                                                         isFacebookAllowed: true) { [weak self] response in
+            DispatchQueue.toMain {
+                switch response {
+                case .success(let result):
+                    NotificationCenter.default.post(name: .changeFaceImageStatus, object: self)
+                    if result.isFaceImageAllowed == true {
+                        DispatchQueue.main.async {
+                            completion?()
+                        }
+                    }
+                case .failed(let error):
+                    UIApplication.showErrorAlert(message: error.description)
+                    
+                }
+            }
+        }
+    }
+    
     func getAuthority() {
         accountService.permissions { [weak self] result in
             switch result {
             case .success(let response):
-                self?.output.hasPermissionFaceRecognition(response.hasPermissionFor(.faceRecognition))
+                DispatchQueue.main.async {
+                    self?.output.didLoadFaceRecognitionPermissionStatus(response.hasPermissionFor(.faceRecognition))
+                }
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
+            }
+        }
+    }
+    
+    func getPersonsOnPhoto(uuid: String) {
+        peopleService.getPeopleForMedia(with: uuid, success: { [weak self] peopleThumbnails in
+            DispatchQueue.main.async {
+                self?.output.updatePeople(items: peopleThumbnails)
+            }
+        }) { [weak self] (errorResponse) in
+            DispatchQueue.main.async {
+                self?.output.failedUpdate(error: errorResponse)
+                self?.output.updatePeople(items: [])
             }
         }
     }

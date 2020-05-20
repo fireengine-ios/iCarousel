@@ -30,10 +30,9 @@ protocol PhotoVideoDetailViewOutput {
     func videoStoped()
     
     func willDisplayLastCell()
-    func onRename(newName: String)
-    func validateName(newName: String)
-    func checkPeopleEnable()
-    func onEnable()
-    func onPremium()
-    func onPeopleTapped(item: PeopleOnPhotoItemResponse)
+    
+    func getFIRStatus()
+
+    func configureFileInfo(_ view: FileInfoView)
+    func getPersonsForSelectedPhoto()
 }

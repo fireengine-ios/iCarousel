@@ -165,7 +165,7 @@ extension FileInfoViewController: FileInfoViewInput {
         navigationController?.popViewController(animated: true)
     }
     
-    func setObject(object: BaseDataSourceItem) {
+    func setObject(_ object: BaseDataSourceItem) {
         
         fileName.text = object.name
         
