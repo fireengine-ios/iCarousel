@@ -229,6 +229,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if BackgroundTaskService.shared.appWasSuspended {
             debugLog("App was suspended")
             CacheManager.shared.actualizeCache()
+        } else if tokenStorage.refreshToken != nil {
+            SyncServiceManager.shared.update()
         }
         ContactSyncSDK.doPeriodicSync()
     }
