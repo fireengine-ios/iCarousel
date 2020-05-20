@@ -99,6 +99,10 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
         setupBackHandler(toOriginal: true)
     }
     
+    func albumsDeleted(albums: [AlbumItem]) {
+        setupBackHandler(toOriginal: false)
+    }
+    
     private func setupBackHandler(toOriginal: Bool) {
         backHandler = { [weak self] in
             if toOriginal {

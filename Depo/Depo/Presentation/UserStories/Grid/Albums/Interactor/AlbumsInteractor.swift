@@ -30,15 +30,11 @@ class AlbumsInteractor: BaseFilesGreedInteractor {
         }
         remote.allAlbums(sortBy: sortBy.sortingRules, sortOrder: sortBy.sortOder, success: { [weak self]  albumbs in
             DispatchQueue.main.async {
-                debugLog("AlbumsInteractor getAllItems AlbumService allAlbums success")
-
                 var array = [[BaseDataSourceItem]]()
                 array.append(albumbs)
                 self?.output.getContentWithSuccess(array: array)
             }
         }, fail: { [weak self] in
-            debugLog("AlbumsInteractor getAllItems AlbumService allAlbums fail")
-
             DispatchQueue.main.async {
                 self?.output.asyncOperationFail(errorMessage: TextConstants.errorErrorToGetAlbums)
             }

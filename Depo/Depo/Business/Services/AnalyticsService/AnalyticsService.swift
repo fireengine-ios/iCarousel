@@ -710,9 +710,10 @@ extension AnalyticsService: AnalyticsGA {
 
 //MARK: - Netmera
 protocol NetmeraProtocol {
-   static func updateUser()
-   static func startNetmera()
-   static func sendNetmeraEvent(event: NetmeraEvent)
+    static func updateUser()
+    static func startNetmera()
+    static func updateNetmeraAPIKey()
+    static func sendNetmeraEvent(event: NetmeraEvent)
 }
 
 extension AnalyticsService: NetmeraProtocol {
@@ -722,6 +723,10 @@ extension AnalyticsService: NetmeraProtocol {
     
     static func startNetmera() {
         NetmeraService.startNetmera()
+    }
+    
+    static func updateNetmeraAPIKey() {
+        NetmeraService.updateAPIKey()
     }
     
     static func sendNetmeraEvent(event: NetmeraEvent) {

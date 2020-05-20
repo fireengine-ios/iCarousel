@@ -57,6 +57,28 @@ extension NetmeraEvents.Actions {
         }
     }
     
+    final class SignUpError: NetmeraEvent {
+        
+        private let kSignUpErrorKey = "errorType"
+        
+        @objc var errorType = ""
+        
+        convenience init(errorType: String) {
+            self.init()
+            self.errorType = errorType
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ea" : #keyPath(errorType),
+            ]
+        }
+        
+        override var eventKey : String {
+            return kSignUpErrorKey
+        }
+    }
+    
     final class Import: NetmeraEvent {
         
         private let kImportKey = "qfv"
@@ -1048,6 +1070,43 @@ extension NetmeraEvents.Actions {
         }
         override var eventKey : String {
             return kHideKey
+        }
+    }
+    
+    
+    final class BackgroundSync: NetmeraEvent {
+        
+        enum BackgroundSyncType {
+            
+            case locationChange
+            case backgroundTask(type: String)
+            
+            var description: String {
+                switch self {
+                case .locationChange:
+                    return "LocationChange"
+                case .backgroundTask(type: let type):
+                    return "BackgroundTask(\(type))"
+                }
+            }
+        }
+        
+        private let kBackgroundSyncKey = "goa"
+        @objc var syncType = ""
+        
+        convenience init(syncType: BackgroundSyncType) {
+            self.init()
+            self.syncType = syncType.description
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ea" : #keyPath(syncType),
+            ]
+        }
+        
+        override var eventKey : String {
+            return kBackgroundSyncKey
         }
     }
     

@@ -81,6 +81,7 @@ extension HideActionService {
     override var confirmPopUp: BasePopUpController {
         let cancelHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analytics.trackFileOperationPopupGAEvent(operationType: .hide, label: .cancel)
+            self?.output?.confirmationPopUpCancelTapped()
             vc.close()
         }
         
@@ -175,7 +176,31 @@ extension HideActionService {
     
     private func onSuccess() {
         success?()
-        showSuccessPopUp()
+        
+        if needShowPopup() {
+            showSuccessPopUp()
+        } else if let items = items {
+            
+            let handler: VoidHandler = {
+                let router = RouterVC()
+                if router.navigationController?.topViewController is PhotoVideoDetailViewController {
+                    router.navigationController?.dismiss(animated: true, completion: {
+                        let controller = router.hiddenPhotosViewController()
+                        router.pushViewController(viewController: controller)
+                    })
+                } else {
+                    let controller = router.hiddenPhotosViewController()
+                    router.pushViewController(viewController: controller)
+                }
+            }
+            
+            switch items {
+            case .photos(let photos):
+                SnackbarManager.shared.show(elementType: .hide, relatedItems: photos, itemsType: .items, handler: handler)
+            case .albums(let albums):
+                SnackbarManager.shared.show(elementType: .hide, relatedItems: albums, itemsType: .albums, handler: handler)
+            }
+        }
     }
 }
 

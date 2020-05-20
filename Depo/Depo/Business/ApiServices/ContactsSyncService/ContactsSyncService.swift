@@ -10,8 +10,8 @@ typealias ContactsOperation = (ContactsResponse) -> Void
 
 class ContactsSyncService: BaseRequestService {
     
-    override init(transIdLogging: Bool = false) {
-        super.init(transIdLogging: transIdLogging)
+    override init() {
+        super.init()
         setup()
     }
     

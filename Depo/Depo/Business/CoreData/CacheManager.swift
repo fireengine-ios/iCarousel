@@ -22,6 +22,7 @@ final class CacheManager {
     static let shared = CacheManager()
     
     private lazy var coreDataStack: CoreDataStack = factory.resolve()
+    private lazy var logoutCleaner: LogoutDBCleaner = factory.resolve()
     
     private static let pageSize: Int = 500
     private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
@@ -262,10 +263,10 @@ final class CacheManager {
         userDefaultsVars.currentRemotesPage = 0
         processingRemoteItems = false
         isCacheActualized = false
-        MediaItemOperationsService.shared.deleteRemoteEntities { _ in
-            debugLog("dropAllRemotes success")
-            completion?()
-        }
+        
+        logoutCleaner
+            .onCompletion(completion: completion)
+            .start()
     }
     
     func logout(completion: VoidHandler?) {

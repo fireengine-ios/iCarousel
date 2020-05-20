@@ -438,6 +438,7 @@ class AuthenticationService: BaseRequestService {
             self.tokenStorage.clearTokens()
             self.cancellAllRequests()
             
+            ItemOperationManager.default.clear()
             CellImageManager.clear()
             FreeAppSpace.session.clear()//with session singleton for Free app this one is pointless
             FreeAppSpace.session.handleLogout()
@@ -450,7 +451,6 @@ class AuthenticationService: BaseRequestService {
             SingletonStorage.shared.accountInfo = nil
             SingletonStorage.shared.isJustRegistered = nil
             SyncSettings.shared().periodicBackup = SYNCPeriodic.none
-            ItemOperationManager.default.clear()
 //            ItemsRepository.sharedSession.dropCache()
             ViewSortStorage.shared.resetToDefault()
             AuthoritySingleton.shared.setLoginAlready(isLoginAlready: false)
@@ -465,7 +465,6 @@ class AuthenticationService: BaseRequestService {
             
             CacheManager.shared.logout {
                 debugLog("logout success")
-                MediaItemsAlbumOperationService.shared.resetLocalAlbums(completion: nil)
                 WormholePoster().didLogout()
                 success?()
             }

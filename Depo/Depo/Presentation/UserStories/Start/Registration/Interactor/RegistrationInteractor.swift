@@ -118,7 +118,9 @@ class RegistrationInteractor: RegistrationInteractorInput {
                 self.retriesCount += 1
                 
                 if let signUpError = error as? SignupResponseError {
+
                     self.analyticsService.trackSignupEvent(error: signUpError)
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SignUpError(errorType: signUpError.dimensionValue))
                     
                     ///only with this error type captcha required error is processing
                     if signUpError.isCaptchaError {
