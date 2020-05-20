@@ -29,4 +29,12 @@ protocol PhotoVideoDetailViewInput: class, ActivityIndicator, ErrorPresenter {
     func show(name: String)
     
     func showValidateNameSuccess(name: String)
+    
+    func updatePeople(items: [PeopleOnPhotoItemResponse])
+    
+    func setHiddenPeoplePlaceholder(isHidden: Bool)
+    
+    func setHiddenPremiumStackView(isHidden: Bool)
+    
+    func closeDetailViewIfNeeded()
 }

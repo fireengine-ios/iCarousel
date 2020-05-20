@@ -48,7 +48,7 @@ extension FileInfoPresenter: FileInfoInteractorOutput {
             view.startActivityIndicator()
             interactor.getAlbum(for: object)
         } else {
-            view.setObject(object: object)
+            view.setObject(object)
         }
     }
     
@@ -60,7 +60,7 @@ extension FileInfoPresenter: FileInfoInteractorOutput {
     func albumForUuidSuccessed(album: AlbumServiceResponse) {
         let albumItem = AlbumItem(remote: album)
         view.showViews()
-        view.setObject(object: albumItem)
+        view.setObject(albumItem)
         view.stopActivityIndicator()
     }
     

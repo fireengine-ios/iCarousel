@@ -22,6 +22,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     
     var canLoadMoreItems = true
     
+    private var isFaceImageAllowed = false
+    
     func viewIsReady(view: UIView) {
         interactor.onViewIsReady()
         bottomBarPresenter?.show(animated: false, onView: view)
@@ -83,8 +85,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         
         view.onItemSelected(at: selectedIndex, from: interactor.allItems)
         
-        let selectedItems = [interactor.allItems[selectedIndex]]
-        let allSelectedItemsTypes = selectedItems.map { $0.fileType }
+        let selectedItem = interactor.allItems[selectedIndex]
+        let allSelectedItemsTypes = [selectedItem.fileType]
         
         let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: selectedIndex)
         bottomBarPresenter?.setupTabBarWith(config: barConfig)
@@ -273,11 +275,6 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         }
     }
     
-    func onRename(newName: String) {
-        startAsyncOperation()
-        interactor.onRename(newName: newName)
-    }
-    
     func updated() {
         asyncOperationSuccess()
     }
@@ -292,11 +289,83 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         view.showErrorAlert(message: error.description)
     }
     
-    func validateName(newName: String) {
+    func didValidateNameSuccess(name: String) {
+        view.showValidateNameSuccess(name: name)
+        interactor.onRename(newName: name)
+    }
+    
+    func updatePeople(items: [PeopleOnPhotoItemResponse]) {
+        asyncOperationSuccess()
+        view.updatePeople(items: items)
+    }
+    
+    func getFIRStatus() {
+        interactor.getFIRStatus(success: { [weak self] settings in
+            self?.isFaceImageAllowed = settings.isFaceImageAllowed == true
+            self?.view.setHiddenPeoplePlaceholder(isHidden: self?.isFaceImageAllowed == true)
+            self?.interactor.getAuthority()
+            self?.getPersonsForSelectedPhoto()
+        }, fail: { [weak self] error in
+            self?.failedUpdate(error: error)
+        })
+    }
+    
+    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item) {
+        let albumItem = AlbumItem(remote: album)
+        router.openFaceImageItemPhotosWith(item, album: albumItem)
+    }
+    
+    func didLoadFaceRecognitionPermissionStatus(_ isPermitted: Bool) {
+        view.setHiddenPremiumStackView(isHidden: isPermitted)
+    }
+    
+    func configureFileInfo(_ view: FileInfoView) {
+        view.output = self
+    }
+    
+    func getPersonsForSelectedPhoto() {
+        guard isFaceImageAllowed, let index = interactor.currentItemIndex, let uuid = interactor.allItems[safe: index]?.uuid else {
+            return
+        }
+        interactor.getPersonsOnPhoto(uuid: uuid)
+    }
+}
+
+extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
+    func onRename(newName: String) {
+        startAsyncOperation()
         interactor.onValidateName(newName: newName)
     }
     
-    func didValidateNameSuccess(name: String) {
-        view.showValidateNameSuccess(name: name)
+    func onEnableFaceRecognitionDidTap() {
+        router.showConfirmationPopup { [weak self] in
+            self?.interactor.enableFIR() { [weak self] in
+                SnackbarManager.shared.show(
+                    type: .nonCritical,
+                    message: TextConstants.faceImageEnableSnackText,
+                    action: .ok
+                )
+                self?.isFaceImageAllowed = true
+                self?.view.setHiddenPeoplePlaceholder(isHidden: true)
+                self?.interactor.getAuthority()
+                self?.getPersonsForSelectedPhoto()
+            }
+        }
+    }
+    
+    func onBecomePremiumDidTap() {
+        router.goToPremium()
+    }
+    
+    func onPeopleAlbumDidTap(_ album: PeopleOnPhotoItemResponse) {
+        guard
+            let index = interactor.currentItemIndex,
+            let mediaItem = interactor.allItems[safe: index],
+            let id = album.personInfoId
+        else {
+            return
+        }
+        view.closeDetailViewIfNeeded()
+        interactor.getPeopleAlbum(with: mediaItem, id: id)
     }
 }
