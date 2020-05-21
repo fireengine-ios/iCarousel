@@ -1819,4 +1819,8 @@ struct TextConstants {
     static let snackbarMessageImportFromFBStarted = NSLocalizedString("import_from_facebook_started", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageHashTagsCopied = NSLocalizedString("instapick_hashtags_copied", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageCreateStoryLimit = NSLocalizedString("create_story_selection_limit", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let contactSyncBackupTitle = NSLocalizedString("contact_phase2_backup_contacts_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncBackupMessage = NSLocalizedString("contact_phase2_backup_contacts_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncBackupButton = NSLocalizedString("contact_phase2_backup_contacts_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
