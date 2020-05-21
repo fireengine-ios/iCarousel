@@ -28,12 +28,24 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     @IBOutlet private weak var swipeUpContainerView: UIView!
     // Bottom detail view
-    var bottomDetailView: PhotoInfoViewController?
+    var bottomDetailView: PhotoInfoViewController? {
+        willSet {
+            newValue?.alpha = 0
+        }
+    }
     private let cardHeight: CGFloat = UIScreen.main.bounds.height * 0.7
     
-    private lazy var ImageMaxY = {
+    private lazy var imageMaxY = {
         return UIScreen.main.bounds.height - getImageMaxY()
     }()
+    
+    private var detailViewIsHidden = true {
+        didSet {
+            if detailViewIsHidden == oldValue {
+                detailView(isHidden: detailViewIsHidden)
+            }
+        }
+    }
     
     private var gestureBeginLocation: CGPoint = .zero
     private var dragViewBeginLocation: CGPoint = .zero
@@ -306,13 +318,17 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     @objc private func closeDetailView() {
+        
         viewState = .collapsed
         UIView.animate(withDuration: 1, delay: 0,
                        usingSpringWithDamping: 0.8,
                        initialSpringVelocity: 0.9,
                        options: [.curveEaseInOut, .allowUserInteraction],
                        animations: {
-                        self.positionForView(velocityY: 0)
+                        self.collectionView.frame.origin.y = .zero
+                        self.bottomDetailView?.frame.origin.y = self.view.frame.height
+                        self.collapseDetailView.isHidden = true
+                        self.isFullScreen = false
         }, completion: nil)
     }
     
@@ -342,27 +358,14 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         switch recognizer.state {
         case .began:
             isFullScreen = true
-            
-            collapseDetailView.isHidden = false
-            gestureBeginLocation = recognizer.location(in: self.view)
-            dragViewBeginLocation = self.bottomDetailView?.frame.origin ?? .zero
-            
+            gestureBeginLocation = recognizer.location(in: view)
+            dragViewBeginLocation = collectionView?.frame.origin ?? .zero
         case .changed:
-            let newLocation = dragViewBeginLocation.y + (recognizer.location(in: self.view).y - gestureBeginLocation.y)
             
-            if newLocation <= view.frame.height - cardHeight {
-                bottomDetailView.frame.origin.y = view.frame.height - cardHeight
-                return
-            }
-            
-            bottomDetailView.frame.origin.y = newLocation >= 0 ? newLocation : 0
-            collectionView.frame.origin.y = -(collectionView.frame.height - bottomDetailView.frame.origin.y - ImageMaxY)
-
-    
-            if bottomDetailView.frame.origin.y > view.frame.height {
-                bottomDetailView.isHidden = true
-                recognizer.state = .ended
-            }
+            let newLocation = dragViewBeginLocation.y + (recognizer.location(in: view).y - gestureBeginLocation.y)
+            collectionView.frame.origin.y = newLocation
+            bottomDetailView.frame.origin.y = collectionView.frame.maxY - imageMaxY
+            detailViewIsHidden = (bottomDetailView.frame.minY >= view.frame.height * 0.75)
             
         case .ended:
             UIView.animate(withDuration: 1, delay: 0,
@@ -371,9 +374,88 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
                            options: [.curveEaseOut, .allowUserInteraction],
                            animations: {
                             self.positionForView(velocityY: recognizer.velocity(in: self.bottomDetailView).y)
-            }, completion: nil)
+            }, completion: { _ in
+                
+                switch self.viewState {
+                case .expanded:
+                    self.detailViewIsHidden = false
+                case .collapsed:
+                    self.detailViewIsHidden = true
+                case .full:
+                    self.detailViewIsHidden = false
+                }
+            })
         default:
             break
+        }
+    }
+    
+    func positionForView(velocityY: CGFloat) {
+        
+        guard let bottomDetailView = bottomDetailView else {
+            assertionFailure()
+            return
+        }
+        
+        if velocityY > 50,
+            bottomDetailView.frame.origin.y > self.view.frame.height - cardHeight {
+            viewState = .collapsed
+            collectionView.frame.origin.y = .zero
+            bottomDetailView.frame.origin.y = view.frame.height
+            isFullScreen = false
+            collapseDetailView.isHidden = true
+            detailViewIsHidden = true
+        } else if velocityY < -50,
+            bottomDetailView.frame.origin.y > view.frame.height - cardHeight, viewState != .expanded {
+            viewState = .expanded
+            collectionView.frame.origin.y = view.frame.minY - (cardHeight - imageMaxY)
+            bottomDetailView.frame.origin.y = collectionView.frame.maxY - imageMaxY
+            collapseDetailView.isHidden = false
+
+        } else if bottomDetailView.frame.origin.y < view.frame.height - cardHeight {
+            viewState = .full
+            
+            collectionView.frame.origin.y = -(view.frame.height - imageMaxY)
+            bottomDetailView.frame.origin.y = view.frame.minY
+            collapseDetailView.isHidden = false
+            
+        } else if bottomDetailView.frame.origin.y > view.frame.height {
+            viewState = .collapsed
+            bottomDetailView.frame.origin.y = view.frame.height
+            collectionView.frame.origin.y = view.frame.minY
+            
+            isFullScreen = false
+            collapseDetailView.isHidden = true
+            
+        } else {
+            switch self.viewState {
+            case .collapsed:
+  
+                collectionView.frame.origin.y = .zero
+                bottomDetailView.frame.origin.y = view.frame.height
+                isFullScreen = false
+                collapseDetailView.isHidden = true
+                detailViewIsHidden = true
+            case .expanded:
+
+                collectionView.frame.origin.y = view.frame.minY - (cardHeight - imageMaxY)
+                bottomDetailView.frame.origin.y = view.frame.height - cardHeight
+                collapseDetailView.isHidden = false
+                detailViewIsHidden = false
+            case .full:
+
+                bottomDetailView.frame.origin.y = view.frame.height - cardHeight
+                collectionView.frame.origin.y = bottomDetailView.frame.minY - collectionView.frame.height + imageMaxY
+                detailViewIsHidden = false
+                collapseDetailView.isHidden = false
+            }
+        }
+    }
+
+    
+    private func detailView(isHidden: Bool) {
+        UIView.animate(withDuration: 0.8) {
+            self.bottomDetailView?.alpha = isHidden ? 0 : 1
         }
     }
     
@@ -384,8 +466,7 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         }
         return cell.imageViewMaxY()
     }
-    
-    
+        
     func handleSwipe(recognizer: UISwipeGestureRecognizer) {
         switch (recognizer.state, recognizer.direction) {
         case (.ended, .left):
@@ -419,70 +500,19 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         }
         
         let cell = collectionView.visibleCells.first as? PhotoVideoDetailCell
-        let offsetY = -(cell?.frame.minY ?? 0 + ImageMaxY)
+        let offsetY = -(cell?.frame.minY ?? 0 + imageMaxY)
         
         selectedIndex = index
         let newContentOffsetX = collectionView.bounds.size.width * CGFloat(index)
         let newContentOffset = CGPoint(x: newContentOffsetX, y: offsetY)
 
         collectionView.setContentOffset(newContentOffset, animated: true)
-        collectionView.frame.origin.y = -(collectionView.frame.height - (bottomDetailView?.frame.origin.y)! - ImageMaxY)
+        collectionView.frame.origin.y = view.frame.minY - (cardHeight - imageMaxY)
+        
+        
+        view.layoutIfNeeded()
     }
     
-    func positionForView(velocityY: CGFloat) {
-        
-        guard let bottomDetailView = bottomDetailView else {
-            assertionFailure()
-            return
-        }
-        
-        if velocityY > 50,
-            bottomDetailView.frame.origin.y > self.view.frame.height - self.cardHeight {
-            
-            bottomDetailView.frame.origin.y = self.view.frame.height
-            collectionView.frame.origin.y = self.view.frame.minY
-            viewState = .collapsed
-            isFullScreen = false
-            collapseDetailView.isHidden = true
-        } else if velocityY < -50,
-            bottomDetailView.frame.origin.y > self.view.frame.height - cardHeight,
-            viewState != .expanded {
-        
-            bottomDetailView.frame.origin.y = self.view.frame.height - cardHeight
-            collectionView.frame.origin.y = -(collectionView.frame.height - bottomDetailView.frame.origin.y - ImageMaxY)
-            
-            viewState = .expanded
-            collapseDetailView.isHidden = false
-            
-        } else if bottomDetailView.frame.origin.y < self.view.frame.height - cardHeight {
-            viewState = .full
-            collapseDetailView.isHidden = false
-            
-        } else if bottomDetailView.frame.origin.y > self.view.frame.height {
-            bottomDetailView.frame.origin.y = self.view.frame.height
-            viewState = .collapsed
-            isFullScreen = false
-            collapseDetailView.isHidden = true
-            
-        } else {
-            switch self.viewState {
-            case .collapsed:
-                bottomDetailView.frame.origin.y = self.view.frame.height
-                collectionView.frame.origin.y = self.view.frame.minY
-                isFullScreen = false
-                collapseDetailView.isHidden = true
-            case .expanded:
-                self.bottomDetailView?.frame.origin.y = self.view.frame.height - cardHeight
-                collectionView.frame.origin.y = -(collectionView.frame.height - bottomDetailView.frame.origin.y - ImageMaxY)
-                collapseDetailView.isHidden = false
-            case .full:
-                self.bottomDetailView?.frame.origin.y = self.view.frame.height - cardHeight
-                collectionView.frame.origin.y = -(collectionView.frame.height - bottomDetailView.frame.origin.y - ImageMaxY)
-                collapseDetailView.isHidden = false
-                break
-            }
-        }
-    }
     
     private func addTrackSwipeUpView() {
         guard let topViewController = RouterVC().getViewControllerForPresent() else {
@@ -818,10 +848,10 @@ final class PassThroughView: UIView {
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        
+    
         let hitView = super.hitTest(point, with: event)
         
-        if let parentViewController = hitView?.findViewController() as? PhotoVideoDetailViewController,
+        if let parentViewController = hitView?.findParenViewController() as? PhotoVideoDetailViewController,
             let bottomDetailView = parentViewController.bottomDetailView {
             if parentViewController.viewState != .collapsed {
                 
@@ -843,7 +873,9 @@ final class PassThroughView: UIView {
     }
     
     @objc func panGestureRecognizerHandler(_ gestureRecognizer: UIPanGestureRecognizer) {
-        delegate?.handlePan(recognizer: gestureRecognizer)
+        if !UIDevice.current.orientation.isLandscape {
+               delegate?.handlePan(recognizer: gestureRecognizer)
+        }
     }
     
     @objc func swipeGestureRecognizerHandler(_ gestureRecognizer: UISwipeGestureRecognizer) {
@@ -862,24 +894,13 @@ final class PassThroughView: UIView {
     
 }
     
-    extension PassThroughView: UIGestureRecognizerDelegate {
-        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-            /// handle right-left swipes first
-            return otherGestureRecognizer is UISwipeGestureRecognizer && gestureRecognizer is UIPanGestureRecognizer
-        }
-    }
-
-
-extension UIView {
-    func findViewController() -> UIViewController? {
-        if let nextResponder = self.next as? UIViewController {
-            return nextResponder
-        } else if let nextResponder = self.next as? UIView {
-            return nextResponder.findViewController()
-        } else {
-            return nil
-        }
+extension PassThroughView: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        /// handle right-left swipes first
+        return otherGestureRecognizer is UISwipeGestureRecognizer && gestureRecognizer is UIPanGestureRecognizer
     }
 }
-    
+
+
+ 
 
