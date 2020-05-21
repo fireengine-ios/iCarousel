@@ -99,17 +99,10 @@ final class HomePageInteractor: HomePageInteractorInput {
     }
     
     //MARK: autosync triggering
-    @objc private func checkAutoSync() {
-        SyncServiceManager.shared.updateImmediately()
-    }
     
     private func setupAutoSyncTriggering() {
         SyncServiceManager.shared.setupAutosync()
-        SyncServiceManager.shared.updateImmediately()
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(checkAutoSync),
-                                               name: .UIApplicationWillEnterForeground,
-                                               object: nil)
+        SyncServiceManager.shared.update()
     }
     
     //MARK: private requests
