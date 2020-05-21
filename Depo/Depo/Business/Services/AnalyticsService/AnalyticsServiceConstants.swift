@@ -1527,6 +1527,7 @@ enum GADementionsFields {
     case editFields
     case connectionStatus
     case statusType
+    case usagePercentage
     
     var text: String {
         switch self {
@@ -1584,6 +1585,8 @@ enum GADementionsFields {
             return "connectionStatus"
         case .statusType:
             return "statusType"
+        case .usagePercentage:
+            return "used_percentage_value"
         }
     }
     
