@@ -137,15 +137,11 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     }
     
     @objc func onSave() {
-        if var text = fileName.text,
-            let fileExtension = fileExtension {
-            if fileExtension.count > 0,
-                text.count > 0 {
-                text = "\((text as NSString).deletingPathExtension).\(fileExtension)"
-            }
-            
-            output.onRename(newName: text)
-        }
+        guard
+            let text = fileName.text?.nonEmptyString,
+            let fileExtension = fileExtension?.nonEmptyString
+        else { return }
+        output.onRename(newName: text.makeFileName(with: fileExtension))
     }
     
 }
@@ -255,12 +251,11 @@ extension FileInfoViewController: FileInfoViewInput {
     func showValidateNameSuccess() {
         fileName.resignFirstResponder()
         
-        if let text = fileName.text,
-            text.count > 0,
-            let fileExtension = fileExtension,
-            fileExtension.count > 0 {
-            fileName.text = "\((text as NSString).deletingPathExtension).\(fileExtension)"
-        }
+        guard
+            let text = fileName.text?.nonEmptyString,
+            let fileExtension = fileExtension?.nonEmptyString
+        else { return }
+        fileName.text = text.makeFileName(with: fileExtension)
     }
     
     func hideViews() {

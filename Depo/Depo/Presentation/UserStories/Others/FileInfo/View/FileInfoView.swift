@@ -15,7 +15,7 @@ protocol PhotoInfoViewControllerOutput {
     func onPeopleAlbumDidTap(_ album: PeopleOnPhotoItemResponse)
 }
 
-final class FileInfoView: UIView {
+final class FileInfoView: UIView, FromNib {
     
     // MARK: Public Properties
 
@@ -185,100 +185,35 @@ final class FileInfoView: UIView {
     // MARK: Private Properties
     
     private var fileExtension: String?
-    
+    private let formatter = ByteCountFormatter()
     private lazy var dataSource = PeopleSliderDataSource(collectionView: peopleCollectionView, delegate: self)
     
     // MARK: Life cycle
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setup()
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        loadFromNib()
+        setupFromNib()
         setup()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        loadFromNib()
+        setupFromNib()
         setup()
     }
     
     // MARK: Public Methods
-    
-    func startRenaming() {
-        if fileNameTextField == nil {
-            _ = self
-        }
-        fileNameTextField.becomeFirstResponder()
-    }
     
     func setObject(_ object: BaseDataSourceItem) {
         resetUI()
         fileNameTextField.text = object.name
         
         if let obj = object as? WrapData {
-            
-            if obj.fileType.typeWithDuration {
-                durationLabel.text = obj.duration
-                durationStackView.isHidden = false
-            }
-            
-            let formatter = ByteCountFormatter()
-            formatter.countStyle = .binary
-            fileSizeLabel.text = formatter.string(fromByteCount: obj.fileSize)
-            
-            if obj.fileType == .folder {
-                fileNameTitleLabel.text = TextConstants.fileInfoFolderNameTitle
-                fileInfoLabel.text = TextConstants.fileInfoFolderInfoTitle
-                fileSizeTitleLabel.text = TextConstants.fileInfoAlbumSizeTitle
-                fileSizeLabel.text = String(obj.childCount ?? 0)
-                uploadDateTitleLabel.text = TextConstants.fileInfoCreationDateTitle
-            } else {
-                fileSizeTitleLabel.text = TextConstants.fileInfoFileSizeTitle
-                setupEditableState(for: object)
-            }
-            
-            if obj.fileType == .video {
-                peopleStackView.isHidden = true
-                premiumStackView.isHidden = true
-            }
-            
-            if let creationDate = obj.creationDate, !object.isLocalItem {
-                uploadDateLabel.text = creationDate.getDateInFormat(format: "dd MMMM yyyy")
-                uploadDateStackView.isHidden = false
-                
-                if !obj.isLocalItem, let takenDate = obj.metaData?.takenDate, creationDate != takenDate {
-                    takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
-                    takenDateStackView.isHidden = false
-                }
-            }
-            return
+            setWith(wrapData: obj)
         }
         
         if let album = object as? AlbumItem {
-            uploadDateTitleLabel.text = TextConstants.fileInfoCreationDateTitle
-
-            fileSizeTitleLabel.text = TextConstants.fileInfoAlbumSizeTitle
-            fileNameTitleLabel.text = TextConstants.fileInfoAlbumNameTitle
-            fileInfoLabel.text = TextConstants.fileInfoAlbumInfoTitle
-
-            var count = 0
-            count += album.audioCount ?? 0
-            count += album.imageCount ?? 0
-            count += album.videoCount ?? 0
-            fileSizeLabel.text = String(count)
-            
-            if album.readOnly == true {
-                fileNameTextField.isEnabled = false
-            }
-            
-            if album.fileType.isFaceImageAlbum {
-                setupEditableState(for: object)
-            }
+            setWith(albumItem: album)
         }
         
         if let createdDate = object.creationDate {
@@ -300,16 +235,14 @@ final class FileInfoView: UIView {
     
     func showValidateNameSuccess() {
         fileNameTextField.resignFirstResponder()
-        
-        if let text = fileNameTextField.text,
-            text.count > 0,
-            let fileExtension = fileExtension,
-            fileExtension.count > 0 {
-            fileNameTextField.text = "\((text as NSString).deletingPathExtension).\(fileExtension)"
-        }
+        guard
+            let text = fileNameTextField.text?.nonEmptyString,
+            let fileExtension = fileExtension?.nonEmptyString
+        else { return }
+        fileNameTextField.text = text.makeFileName(with: fileExtension)
     }
     
-    func refillCollection(with items: [PeopleOnPhotoItemResponse]) {
+    func reloadCollection(with items: [PeopleOnPhotoItemResponse]) {
         peopleCollectionView.isHidden = items.isEmpty
         premiumTextLabel.text = items.isEmpty
             ? TextConstants.noPeopleBecomePremiumText
@@ -327,6 +260,64 @@ final class FileInfoView: UIView {
     func setHiddenPremiumStackView(isHidden: Bool) {
         premiumStackView.isHidden = isHidden
         setHiddenPeopleLabel()
+    }
+    
+    func setWith(wrapData: WrapData) {
+        if wrapData.fileType.typeWithDuration {
+            durationLabel.text = wrapData.duration
+            durationStackView.isHidden = false
+        }
+                    
+        formatter.countStyle = .binary
+        fileSizeLabel.text = formatter.string(fromByteCount: wrapData.fileSize)
+        
+        if wrapData.fileType == .folder {
+            fileNameTitleLabel.text = TextConstants.fileInfoFolderNameTitle
+            fileInfoLabel.text = TextConstants.fileInfoFolderInfoTitle
+            fileSizeTitleLabel.text = TextConstants.fileInfoAlbumSizeTitle
+            fileSizeLabel.text = String(wrapData.childCount ?? 0)
+            uploadDateTitleLabel.text = TextConstants.fileInfoCreationDateTitle
+        } else {
+            fileSizeTitleLabel.text = TextConstants.fileInfoFileSizeTitle
+            setupEditableState(for: wrapData)
+        }
+        
+        if wrapData.fileType == .video {
+            peopleStackView.isHidden = true
+            premiumStackView.isHidden = true
+        }
+        
+        if let creationDate = wrapData.creationDate, !wrapData.isLocalItem {
+            uploadDateLabel.text = creationDate.getDateInFormat(format: "dd MMMM yyyy")
+            uploadDateStackView.isHidden = false
+            
+            if !wrapData.isLocalItem, let takenDate = wrapData.metaData?.takenDate, creationDate != takenDate {
+                takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
+                takenDateStackView.isHidden = false
+            }
+        }
+    }
+        
+    func setWith(albumItem: AlbumItem) {
+        uploadDateTitleLabel.text = TextConstants.fileInfoCreationDateTitle
+        
+        fileSizeTitleLabel.text = TextConstants.fileInfoAlbumSizeTitle
+        fileNameTitleLabel.text = TextConstants.fileInfoAlbumNameTitle
+        fileInfoLabel.text = TextConstants.fileInfoAlbumInfoTitle
+        
+        var count = 0
+        count += albumItem.audioCount ?? 0
+        count += albumItem.imageCount ?? 0
+        count += albumItem.videoCount ?? 0
+        fileSizeLabel.text = String(count)
+        
+        if albumItem.readOnly == true {
+            fileNameTextField.isEnabled = false
+        }
+        
+        if albumItem.fileType.isFaceImageAlbum {
+            setupEditableState(for: albumItem)
+        }
     }
     
     // MARK: Private Methods
@@ -365,7 +356,7 @@ final class FileInfoView: UIView {
         resetTitleNames()
         hideInfoDateLabels()
         dataSource.reset()
-        peopleTitleLabel.isHidden = false
+        peopleTitleLabel.isHidden = true
         durationStackView.isHidden = true
         peopleStackView.isHidden = false
         premiumStackView.isHidden = true
@@ -395,21 +386,17 @@ final class FileInfoView: UIView {
     @IBAction private func onSaveNameDidTap() {
         changeEditStatus(false)
         fileNameTextField.isUserInteractionEnabled = false
-        if var text = fileNameTextField.text,
-            let fileExtension = fileExtension {
-            if fileExtension.count > 0,
-                text.count > 0 {
-                text = "\((text as NSString).deletingPathExtension).\(fileExtension)"
-            }
-
-            output.onRename(newName: text)
-        }
+        guard
+            let text = fileNameTextField.text?.nonEmptyString,
+            let fileExtension = fileExtension?.nonEmptyString
+        else { return }
+        output.onRename(newName: text.makeFileName(with: fileExtension))
     }
     
     @IBAction private func onEditNameDidTap() {
         changeEditStatus(true)
         fileNameTextField.isUserInteractionEnabled = true
-        startRenaming()
+        fileNameTextField.becomeFirstResponder()
     }
     
     @IBAction private func onCancelRenamingDidTap() {
