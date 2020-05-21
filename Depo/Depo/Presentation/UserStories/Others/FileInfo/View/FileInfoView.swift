@@ -238,7 +238,9 @@ final class FileInfoView: UIView, FromNib {
         guard
             let text = fileNameTextField.text?.nonEmptyString,
             let fileExtension = fileExtension?.nonEmptyString
-        else { return }
+        else {
+            return
+        }
         fileNameTextField.text = text.makeFileName(with: fileExtension)
     }
     
@@ -321,16 +323,6 @@ final class FileInfoView: UIView, FromNib {
     }
     
     // MARK: Private Methods
-
-    private func loadFromNib() {
-        let nibNamed = String(describing: FileInfoView.self)
-        Bundle(for: FileInfoView.self).loadNibNamed(nibNamed, owner: self, options: nil)
-        guard let view = view else { return }
-        view.frame = bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.translatesAutoresizingMaskIntoConstraints = true
-        addSubview(view)
-    }
     
     private func setup() {
         layer.masksToBounds = true

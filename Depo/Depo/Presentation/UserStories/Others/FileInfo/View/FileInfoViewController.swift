@@ -140,7 +140,9 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
         guard
             let text = fileName.text?.nonEmptyString,
             let fileExtension = fileExtension?.nonEmptyString
-        else { return }
+        else {
+            return
+        }
         output.onRename(newName: text.makeFileName(with: fileExtension))
     }
     
@@ -254,7 +256,9 @@ extension FileInfoViewController: FileInfoViewInput {
         guard
             let text = fileName.text?.nonEmptyString,
             let fileExtension = fileExtension?.nonEmptyString
-        else { return }
+        else {
+            return
+        }
         fileName.text = text.makeFileName(with: fileExtension)
     }
     
