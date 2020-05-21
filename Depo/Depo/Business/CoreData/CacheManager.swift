@@ -98,6 +98,7 @@ final class CacheManager {
                                     self.isCacheActualized = true
                                     debugLog("cache is actualized")
                                     self.updatePreparation(isBegun: false)
+                                    SyncServiceManager.shared.updateImmediately()
                                     self.delegates.invoke { $0.didCompleteCacheActualization() }
                                 }
                             })
@@ -115,6 +116,7 @@ final class CacheManager {
                                 self?.isCacheActualized = true
                                 debugLog("cache is actualized")
                                 self?.updatePreparation(isBegun: false)
+                                SyncServiceManager.shared.updateImmediately()
                                 self?.delegates.invoke { $0.didCompleteCacheActualization() }
                             }
                         })

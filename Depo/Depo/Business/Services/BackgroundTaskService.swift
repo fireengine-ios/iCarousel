@@ -32,10 +32,11 @@ final class BackgroundTaskService {
         }
         
         self.backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: UUID().uuidString, expirationHandler: { [weak self] in
-            self?.appWasSuspended = true
+            debugLog("App will be suspended")
             self?.expirationDelegates.invoke(invocation: { delegate in
                 delegate.backgroundTaskWillExpire()
             })
+            self?.appWasSuspended = true
             debugLog("App is suspended")
             self?.endBackgroundTask()
         })
