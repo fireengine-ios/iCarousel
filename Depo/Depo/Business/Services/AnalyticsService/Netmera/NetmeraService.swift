@@ -9,7 +9,7 @@
 import Netmera
 
 final class NetmeraService {
- 
+    
     typealias NetmeraFieldCallback = (_ netmeraField: String) -> Void
     typealias NetmeraIntFieldCallback = (_ netmeraField: Int) -> Void
     typealias NetmeraAccountInfoCallback = (_ accountInfo: AccountInfoResponse?) -> Void
@@ -32,14 +32,14 @@ final class NetmeraService {
                 nemeraAnalysisLeft = analysisLeftText
                 group.leave()
             }
-
+            
             var lifeboxStorage: Int = 0
             group.enter()
             prepareLifeBoxUsage { usage in
                 lifeboxStorage = usage
                 group.leave()
             }
-
+            
             var firGrouping = ""
             group.enter()
             prepareFIRGrouping { firField in
@@ -96,7 +96,7 @@ final class NetmeraService {
             let netmeraAutoSyncStatusVideo = photoVideoAutosyncStatus.video
             let verifiedEmailStatus = getVerifiedEmailStatus()
             let buildNumber = getBuildNumber()
-       
+            
             
             
             
@@ -132,7 +132,7 @@ final class NetmeraService {
             logEmptyUser()
         }
     }
-   
+    
     static func startNetmera() {
         
         debugLog("Start Netmera")
@@ -160,21 +160,21 @@ final class NetmeraService {
     
     private static func getApiKey() -> String {
         #if LIFEBOX
-            switch RouteRequests.currentServerEnvironment {
-            case .production:
-                return "3PJRHrXDiqbDyulzKSM_m59cpbYT9LezJOwQ9zsHAkjMSBUVQ92OWw"
-            case .preProduction, .test:
-                return "3PJRHrXDiqa-pwWScAq1P0zUMUefELashtuA8DKjAJninSbeaRHk7A"
-            }
+        switch RouteRequests.currentServerEnvironment {
+        case .production:
+            return "3PJRHrXDiqbDyulzKSM_m59cpbYT9LezJOwQ9zsHAkjMSBUVQ92OWw"
+        case .preProduction, .test:
+            return "3PJRHrXDiqa-pwWScAq1P0zUMUefELashtuA8DKjAJninSbeaRHk7A"
+        }
         #endif
         
         #if LIFEDRIVE
-            switch RouteRequests.currentServerEnvironment {
-            case .production:
-                return "LINA4LCdpz44QTLXQBpw_aczLfB3nyWqit1C9oeYa1nzrgct0J5WOQ"
-            case .preProduction, .test:
-                return "6l30TJ05YeluVSpiY3Al8xcpW3mTkldj6_KWcwS8iNrRTgBKe1166A"
-            }
+        switch RouteRequests.currentServerEnvironment {
+        case .production:
+            return "LINA4LCdpz44QTLXQBpw_aczLfB3nyWqit1C9oeYa1nzrgct0J5WOQ"
+        case .preProduction, .test:
+            return "6l30TJ05YeluVSpiY3Al8xcpW3mTkldj6_KWcwS8iNrRTgBKe1166A"
+        }
         #endif
         
         return ""
@@ -195,49 +195,37 @@ final class NetmeraService {
 
 //MARK: - User Field Preparetion
 extension NetmeraService {
-       //TODO: this method shall be removed, because in the improvment we should call user after we logged in.
-       private static func logEmptyUser() {
-           let user = NetmeraCustomUser(deviceStorage: 0, photopickLeftAnalysis: "Null", lifeboxStorage: 0, faceImageGrouping: "Null", accountType: "Null",
-               twoFactorAuthentication: "Null", autosync: "Null", emailVerification: "Null",
-               autosyncPhotos: "Null", autosyncVideos: "Null", packages: ["Null"],
-               autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null", isUserName: 0,
-               isUserSurname: 0, isEmail: 0, isPhoneNumber: 0, isAddress: 0, isBirthDay: 0)
-           user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
-           DispatchQueue.toMain {
-               Netmera.update(user)
-           }
-       }
-       
-       private static func prepareUserAnalysisCount(preparedUserField: @escaping NetmeraFieldCallback) {
-           let instapickService: InstapickService = factory.resolve()
-           instapickService.getAnalyzesCount { analyzeResult in
-               switch analyzeResult {
-               case .success(let analysisCount):
-                   preparedUserField(analysisCount.isFree ? NetmeraEventValues.PhotopickUserAnalysisLeft.premium.text : NetmeraEventValues.PhotopickUserAnalysisLeft.regular(analysisLeft: analysisCount.left).text)
-               case .failed(_):
-                   preparedUserField("Null")
-               }
-           }
-       }
-       
-       private static func prepareLifeBoxUsage(preparedUserField: @escaping NetmeraIntFieldCallback) {
-           AccountService().quotaInfo(
-               success: { response in
-                   guard let quota = response as? QuotaInfoResponse,
-                       let quotaBytes = quota.bytes, quotaBytes != 0,
-                       let usedBytes = quota.bytesUsed else {
-                           preparedUserField(0)
-                           return
-                   }
-                   
-                   let usagePercentage = CGFloat(usedBytes) / CGFloat(quotaBytes)
-                   preparedUserField(Int(usagePercentage * 100))
-                   
-               }, fail: { errorResponse in
-                   preparedUserField(0)
-           })
-       }
-        
+    //TODO: this method shall be removed, because in the improvment we should call user after we logged in.
+    private static func logEmptyUser() {
+        let user = NetmeraCustomUser(deviceStorage: 0, photopickLeftAnalysis: "Null", lifeboxStorage: 0, faceImageGrouping: "Null", accountType: "Null",
+                                     twoFactorAuthentication: "Null", autosync: "Null", emailVerification: "Null",
+                                     autosyncPhotos: "Null", autosyncVideos: "Null", packages: ["Null"],
+                                     autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null", isUserName: 0,
+                                     isUserSurname: 0, isEmail: 0, isPhoneNumber: 0, isAddress: 0, isBirthDay: 0)
+        user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
+        DispatchQueue.toMain {
+            Netmera.update(user)
+        }
+    }
+    
+    private static func prepareUserAnalysisCount(preparedUserField: @escaping NetmeraFieldCallback) {
+        let instapickService: InstapickService = factory.resolve()
+        instapickService.getAnalyzesCount { analyzeResult in
+            switch analyzeResult {
+            case .success(let analysisCount):
+                preparedUserField(analysisCount.isFree ? NetmeraEventValues.PhotopickUserAnalysisLeft.premium.text : NetmeraEventValues.PhotopickUserAnalysisLeft.regular(analysisLeft: analysisCount.left).text)
+            case .failed(_):
+                preparedUserField("Null")
+            }
+        }
+    }
+    
+    private static func prepareLifeBoxUsage(preparedUserField: @escaping NetmeraIntFieldCallback) {
+        SingletonStorage.shared.getLifeboxUsagePersentage { percentage in
+            preparedUserField(percentage ?? 0)
+        }
+    }
+    
     private static func prepareAccountInfo(preparedAccountInfo: @escaping NetmeraAccountInfoCallback) {
         AccountService().info(
             success: { response in
@@ -250,7 +238,7 @@ extension NetmeraService {
             preparedAccountInfo(nil)
         })
     }
-      
+    
     private static func prepareFIRGrouping(preparedUserField: @escaping NetmeraFieldCallback) {
         SingletonStorage.shared.getFaceImageSettingsStatus(success: { isEnabled in
             preparedUserField(isEnabled ? NetmeraEventValues.OnOffSettings.on.text : NetmeraEventValues.OnOffSettings.off.text)
@@ -300,7 +288,7 @@ extension NetmeraService {
     
     private static func getTwoFactorStatus() -> String {
         let isTwoFactorAuthEnabled = SingletonStorage.shared.isTwoFactorAuthEnabled ?? false
-       return isTwoFactorAuthEnabled ? NetmeraEventValues.OnOffSettings.on.text : NetmeraEventValues.OnOffSettings.off.text
+        return isTwoFactorAuthEnabled ? NetmeraEventValues.OnOffSettings.on.text : NetmeraEventValues.OnOffSettings.off.text
     }
     
     private static func getAutoSyncStatus() -> String {
@@ -325,7 +313,7 @@ extension NetmeraService {
         
         return (netmeraAutoSyncStatusPhoto, netmeraAutoSyncStatusVideo)
     }
-
+    
     private static func getVerifiedEmailStatus() -> String {
         if let isMailVerified = SingletonStorage.shared.accountInfo?.emailVerified  {
             return isMailVerified ? NetmeraEventValues.EmailVerification.verified.text : NetmeraEventValues.EmailVerification.notVerified.text
@@ -337,6 +325,6 @@ extension NetmeraService {
     private static func getBuildNumber() -> String {
         return (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "Null"
     }
-
+    
 }
 
