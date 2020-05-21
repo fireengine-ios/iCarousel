@@ -76,14 +76,14 @@ class SyncServiceManager {
     init() {
         photoSyncService.delegate = self
         videoSyncService.delegate = self
-        CacheManager.shared.delegates.add(self)
         BackgroundTaskService.shared.expirationDelegates.add(self)
+        debugLog("SyncServiceManager initialized")
     }
     
     deinit {
-        CacheManager.shared.delegates.remove(self)
         reachabilityService.delegates.remove(self)
         NotificationCenter.default.removeObserver(self)
+        debugLog("SyncServiceManager deinitialized")
     }
     
     
@@ -106,13 +106,20 @@ class SyncServiceManager {
         lastAutoSyncTime = Date().timeIntervalSince1970
     }
     
-    func updateImmediately() {
-        debugLog("SyncServiceManager updateImmediately")
+    func update() {
+        debugLog("SyncServiceManager update")
         
         lastAutoSyncTime = Date().timeIntervalSince1970
         if !hasExecutingSync, !hasPrepairingSync {
             checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
         }
+    }
+    
+    func updateImmediately() {
+        debugLog("SyncServiceManager updateImmediately")
+        
+        lastAutoSyncTime = Date().timeIntervalSince1970
+        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
     }
     
     func updateInBackground() {
@@ -127,7 +134,15 @@ class SyncServiceManager {
         }
     }
     
+    func backgroundTaskSync(handler: @escaping BoolHandler) {
+        self.backgroundSyncHandler = handler
+        debugLog("AUTOSYNC: backgroundTaskSync handlesr setuped")
+        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+    }
+    
     func stopSync() {
+        debugLog("SyncServiceManager stopSync")
+        
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         stop(photo: true, video: true)
     }
@@ -135,11 +150,6 @@ class SyncServiceManager {
     
     // MARK: - Private
     
-    func backgroundTaskSync(handler: @escaping BoolHandler) {
-        self.backgroundSyncHandler = handler
-        debugLog("AUTOSYNC: backgroundTaskSync handlesr setuped")
-        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
-    }
     
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
         guard coreDataStack.isReady else {
@@ -395,12 +405,6 @@ extension SyncServiceManager: ReachabilityServiceDelegate {
     }
 }
 
-
-extension SyncServiceManager: CacheManagerDelegate {
-    func didCompleteCacheActualization() {
-        updateImmediately()
-    }
-}
 
 extension SyncServiceManager: BackgroundTaskServiceDelegate {
     func backgroundTaskWillExpire() {
