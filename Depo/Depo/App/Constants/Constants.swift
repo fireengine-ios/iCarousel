@@ -1823,4 +1823,8 @@ struct TextConstants {
     static let contactSyncBackupTitle = NSLocalizedString("contact_phase2_backup_contacts_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncBackupMessage = NSLocalizedString("contact_phase2_backup_contacts_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncBackupButton = NSLocalizedString("contact_phase2_backup_contacts_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncSmallCardShowBackupMessage = NSLocalizedString("contact_phase2_small_card_backup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncSmallCardShowBackupButton = NSLocalizedString("contact_phase2_small_card_backup_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncSmallCardDeleteDuplicatesMessage = NSLocalizedString("contact_phase2_small_card_duplicates_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncSmallCardDeleteDuplicatesButton = NSLocalizedString("contact_phase2_small_card_duplicates_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

@@ -1549,3 +1549,7 @@
 "contact_phase2_backup_contacts_title" = "Back up contacts";
 "contact_phase2_backup_contacts_message" = "You can backup your contacts to lifebox.\nBy doing that you can easly access your contact list from any device and anywhere.";
 "contact_phase2_backup_contacts_button" = "Back up Now";
+"contact_phase2_small_card_backup_message" = "Your last backup was on %@.";
+"contact_phase2_small_card_backup_button" = "See Backup";
+"contact_phase2_small_card_duplicates_message" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
+"contact_phase2_small_card_duplicates_button" = "Delete Duplicates on iPhone";

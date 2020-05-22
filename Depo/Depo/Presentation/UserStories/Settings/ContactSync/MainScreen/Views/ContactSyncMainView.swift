@@ -22,7 +22,7 @@ final class ContactSyncMainView: UIView, NibInit {
     func update() {
         DispatchQueue.main.async {
             for _ in 0..<6 {
-                let card = PackageInfoView.initFromNib()
+                let card = ContactSyncSmallCardView.initFromNib()
                 self.cardsStack.addArrangedSubview(card)
             }
         }

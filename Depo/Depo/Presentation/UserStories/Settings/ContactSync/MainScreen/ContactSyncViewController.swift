@@ -18,16 +18,12 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     
     private lazy var noBackupView: ContactSyncNoBackupView = {
         let view = ContactSyncNoBackupView.initFromNib()
-        view.frame = self.view.bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.delegate = self
         return view
     }()
     
     private lazy var mainView: ContactSyncMainView = {
         let view = ContactSyncMainView.initFromNib()
-        view.frame = self.view.bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 //        view.delegate = self
         return view
     }()
@@ -61,11 +57,12 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     
     private func setupContentView() {
         showSpinner()
-        getBackups { [weak self] _ in
+        getBackups { [weak self] hasBackup in
             guard let self = self else {
                 return
             }
             self.hideSpinner()
+            self.foobar = hasBackup
             self.showRelatedView()
         }
     }
@@ -83,7 +80,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     private func getBackups(completion: @escaping BoolHandler) {
         //TODO: make real
         DispatchQueue.toBackground {
-            completion(self.foobar)
+            completion(false)
         }
     }
     
@@ -104,7 +101,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
 extension ContactSyncViewController: ContactSyncNoBackupViewDelegate {
     func didTouchBackupButton() {
         //TODO: Open BackUp screen
-        foobar = !foobar
+        foobar = true
         showRelatedView()
     }
 }
@@ -121,9 +118,11 @@ private class ContentViewAnimator {
         }
         
         DispatchQueue.main.async {
+            newView.frame = contentView.bounds
+            
             if let oldView = currentView {
                 let duration = animated ? 0.25 : 0.0
-                UIView.transition(from: oldView, to: newView, duration: duration, options: [.curveEaseInOut], completion: nil)
+                UIView.transition(from: oldView, to: newView, duration: duration, options: [.curveLinear], completion: nil)
             } else {
                 contentView.addSubview(newView)
             }

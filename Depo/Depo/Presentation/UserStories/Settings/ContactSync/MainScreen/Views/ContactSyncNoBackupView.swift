@@ -24,6 +24,7 @@ final class ContactSyncNoBackupView: UIView, NibInit {
             newValue.textColor = ColorConstants.darkBlueColor
             newValue.textAlignment = .center
             newValue.text = TextConstants.contactSyncBackupTitle
+            newValue.adjustsFontSizeToFitWidth()
         }
     }
     @IBOutlet private weak var message: UILabel! {
@@ -33,6 +34,7 @@ final class ContactSyncNoBackupView: UIView, NibInit {
             newValue.numberOfLines = 0
             newValue.textAlignment = .center
             newValue.text = TextConstants.contactSyncBackupMessage
+            newValue.adjustsFontSizeToFitWidth()
         }
     }
     
