@@ -147,6 +147,21 @@ final class PeopleService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
+    func getPeopleForMedia(with uuid: String, success:@escaping (_ peopleThumbnails: [PeopleOnPhotoItemResponse]) -> Void, fail:@escaping FailResponse) {
+        debugLog("PeopleService getPeopleForMedia")
+        
+        let param = PeopleOnPhotoParameters(uuid: uuid)
+        
+        let handler = BaseResponseHandler<PeopleThumbnailsResponse, ObjectRequestResponse>(success: { response in
+            if let response = response as? PeopleThumbnailsResponse {
+                success(response.list)
+            } else {
+                fail(ErrorResponse.failResponse(response))
+            }
+        }, fail: fail)
+        executeGetRequest(param: param, handler: handler)
+    }
+    
     func changePeopleVisibility(peoples: [PeopleItem], success:@escaping SuccessResponse, fail:@escaping FailResponse) {
         debugLog("PeopleService changePeopleVisibility")
         
@@ -316,6 +331,19 @@ final class PeopleSearchParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.peopleSearch, text)
+        return URL.encodingURL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
+    }
+}
+
+final class PeopleOnPhotoParameters: BaseRequestParametrs {
+    private let uuid: String
+    
+    init(uuid: String) {
+        self.uuid = uuid
+    }
+    
+    override var patch: URL {
+        let searchWithParam = String(format: RouteRequests.peoplePhotoWithMedia, uuid)
         return URL.encodingURL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
 }

@@ -716,6 +716,8 @@
 "object_recognition_short" = "Object Recognition to remember with things you love";
 "lorem_ipsum_non_turkcell" = "Please do not translate this";
 "lorem_ipsum_turkcell" = "Please do not translate this";
+"all_people_become_premium_text" = "To see all people become a Premium member!";
+"no_people_become_premium_text" = "None of the faces were identified. To see faces and unlock more features become Premium!";
 
 /*Package*/
 "package_period_day" = "day";
@@ -767,6 +769,9 @@
 "face_image_face_recognition" = "People";
 "face_image_place_recognition" = "Places";
 "face_image_thing_recognition" = "Things";
+"face_image_enable" = "Enable Face Image Grouping";
+"face_image_enable_message_text" = "When you enable Face&Image Recognition feature, the photos you have uploaded will be grouped according to the faces and objects.";
+"face_image_enable_snack_text" = "Face Image Grouping Enabled! Grouping of your photos will take some time. Please check later.";
 
 /*PackageViewController*/
 "package_cancel_button" = "Cancel your subscription";

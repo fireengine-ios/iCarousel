@@ -506,7 +506,10 @@ struct TextConstants {
     static let faceImageThingsNoPhotos = NSLocalizedString("We couldn’t find anything on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageNoPhotosButton = NSLocalizedString("Start adding your photos", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let faceImageWaitAlbum = NSLocalizedString("Grouping of your photos will take some time. Please wait and then check the albums.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let faceImageEnable =  NSLocalizedString("face_image_enable", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImageEnableMessageText =  NSLocalizedString("face_image_enable_message_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let faceImageEnableSnackText =  NSLocalizedString("face_image_enable_snack_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
     // MARK: userProfile
     static let userProfileTitle = NSLocalizedString("Your Profile", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let userProfileNameAndSurNameSubTitle = NSLocalizedString("Name and Surname", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1250,6 +1253,8 @@ struct TextConstants {
     static let standardBannerMessage = NSLocalizedString("standard_banner_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let premiumBannerTitle = NSLocalizedString("premium_banner_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let standardBannerTitle = NSLocalizedString("standard_banner_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let allPeopleBecomePremiumText = NSLocalizedString("all_people_become_premium_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let noPeopleBecomePremiumText = NSLocalizedString("no_people_become_premium_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     static let backUpShort = NSLocalizedString("back_up_short", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let removeDuplicateShort = NSLocalizedString("remove_duplicate_short", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
