@@ -204,7 +204,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         setNavigationBackgroundColor(color: UIColor.clear)
         
-        
         visibleNavigationBarStyle()
         statusBarColor = .clear
         
@@ -524,7 +523,6 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
 
         collectionView.setContentOffset(newContentOffset, animated: true)
         collectionView.frame.origin.y = view.frame.minY - (cardHeight - imageMaxY)
-        
         
         view.layoutIfNeeded()
     }
