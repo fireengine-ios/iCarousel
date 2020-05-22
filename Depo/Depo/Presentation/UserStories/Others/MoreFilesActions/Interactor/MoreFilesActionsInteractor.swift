@@ -226,7 +226,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        router.pushOnPresentedView(viewController: infoController)
+        if let topViewController = RouterVC().getViewControllerForPresent() as? PhotoVideoDetailViewController, !UIDevice.current.orientation.isLandscape {            
+            topViewController.showDetailFromThreeDots()
+        } else {
+            router.pushOnPresentedView(viewController: infoController)
+        }
+    
         if isRenameMode {
             infoController.startRenaming()
         }
