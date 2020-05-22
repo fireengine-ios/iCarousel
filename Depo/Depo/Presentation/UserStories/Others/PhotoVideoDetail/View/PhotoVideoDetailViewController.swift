@@ -45,7 +45,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     private var detailViewIsHidden = true {
         didSet {
-            if detailViewIsHidden == oldValue {
+            if detailViewIsHidden != oldValue {
                 detailView(isHidden: detailViewIsHidden)
             }
         }
@@ -343,7 +343,26 @@ final class PhotoVideoDetailViewController: BaseViewController {
                         self.bottomDetailView?.frame.origin.y = self.view.frame.height
                         self.collapseDetailView.isHidden = true
                         self.isFullScreen = false
+                        self.detailViewIsHidden = true
         }, completion: nil)
+    }
+    
+    func showDetailFromThreeDots() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.isFullScreen = true
+        }) { _ in
+            UIView.animate(withDuration: 0.5, delay: 0.3,
+                           usingSpringWithDamping: 0.8,
+                           initialSpringVelocity: 0.9,
+                           options: [.curveEaseInOut, .allowUserInteraction],
+                           animations: {
+                            self.viewState = .expanded
+                            self.collectionView.frame.origin.y = self.view.frame.minY - (self.cardHeight - self.imageMaxY)
+                            self.bottomDetailView?.frame.origin.y = self.collectionView.frame.maxY - self.imageMaxY
+                            self.collapseDetailView.isHidden = false
+                            self.detailViewIsHidden = false
+            }, completion: nil)
+        }
     }
     
     private func updateAllItems(with items: [Item], updateCollection: Bool) {
@@ -469,7 +488,7 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
 
     
     private func detailView(isHidden: Bool) {
-        UIView.animate(withDuration: 0.8) {
+        UIView.animate(withDuration: 0.2) {
             self.bottomDetailView?.alpha = isHidden ? 0 : 1
         }
     }

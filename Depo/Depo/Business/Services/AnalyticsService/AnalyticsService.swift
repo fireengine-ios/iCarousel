@@ -205,17 +205,6 @@ extension AnalyticsService: AnalyticsGA {
             group.leave()
         })
         
-        group.enter()
-        var usagePercentage: Int?
-        SingletonStorage.shared.getLifeboxUsagePersentage { percentage in
-            guard let percentage = percentage else {
-                group.leave()
-                return
-            }
-            usagePercentage = percentage
-            group.leave()
-        }
-        
 ///        For all of the events (not only newly added autosync events but also all GA events that we send in current client), we will also send below dimensions each time. For the events that we send before login, there is no need to send.
 ///        AutoSync --> True/False
 ///        SyncStatus --> Photos - Never / Photos - Wifi / Photos - Wifi&LTE / Videos - Never / Videos - Wifi / Videos - Wifi&LTE
@@ -223,7 +212,19 @@ extension AnalyticsService: AnalyticsGA {
         var autoSyncStatus: String?
         var isTwoFactorAuthEnabled: Bool?
 
+        var usagePercentage: Int?
+        
         if loginStatus {
+            group.enter()
+            SingletonStorage.shared.getLifeboxUsagePersentage { percentage in
+                   guard let percentage = percentage else {
+                       group.leave()
+                       return
+                   }
+                   usagePercentage = percentage
+                   group.leave()
+               }
+            
             let autoSyncStorageSettings = AutoSyncDataStorage().settings
             
             let confirmedAutoSyncSettingsState = autoSyncStorageSettings.isAutoSyncEnabled && autoSyncStorageSettings.isAutosyncSettingsApplied
