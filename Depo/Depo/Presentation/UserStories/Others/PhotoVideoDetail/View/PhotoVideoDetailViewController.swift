@@ -159,13 +159,13 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
         collapseViewSetup()
-        addTrackSwipeUpView()
         showSpinner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addBottomDetailsView()
+        addTrackSwipeUpView()
         OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
         ItemOperationManager.default.startUpdateView(view: self)
         
@@ -547,8 +547,7 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
     }
     
     private func addTrackSwipeUpView() {
-        guard let topViewController = RouterVC().getViewControllerForPresent() else {
-            assertionFailure()
+        guard let topViewController = RouterVC().getViewControllerForPresent(), passThroughView == nil else {
             return
         }
         let view = PassThroughView(frame: topViewController.view.bounds)
@@ -558,8 +557,7 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
     }
     
     private func addBottomDetailsView() {
-        guard let topViewController = RouterVC().getViewControllerForPresent() else {
-            assertionFailure()
+        guard let topViewController = RouterVC().getViewControllerForPresent(), bottomDetailView == nil else {
             return
         }
         
