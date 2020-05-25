@@ -365,7 +365,6 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
         else {
             return
         }
-        view.closeDetailViewIfNeeded()
         interactor.getPeopleAlbum(with: mediaItem, id: id)
     }
 }

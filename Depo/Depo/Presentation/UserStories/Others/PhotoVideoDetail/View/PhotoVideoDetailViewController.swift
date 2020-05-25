@@ -35,8 +35,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
     }
     private var passThroughView: PassThroughView?
-    
-
     private let cardHeight: CGFloat = UIScreen.main.bounds.height * 0.7
     
     private lazy var imageMaxY = {
