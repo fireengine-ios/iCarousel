@@ -370,9 +370,9 @@ final class FileInfoView: UIView, FromNib {
     
     private func setHiddenPeopleLabel() {
         peopleTitleLabel.isHidden =
-            premiumStackView.isHidden == true
-            && peopleCollectionView.isHidden == true
-            && enableFIRStackView.isHidden == true
+            premiumStackView.isHidden
+            && peopleCollectionView.isHidden
+            && enableFIRStackView.isHidden
     }
     
     // MARK: Actions
