@@ -58,10 +58,7 @@ final class PassThroughView: UIView {
         if let parentViewController = hitView?.findParenViewController() as? PhotoVideoDetailViewController,
             let bottomDetailView = parentViewController.bottomDetailView {
             if parentViewController.viewState != .collapsed {
-                
-                let pointInSuperview = self.convert(point, to: parentViewController.view)
-                
-                if parentViewController.collapseDetailView.frame.contains(pointInSuperview) || bottomDetailView.frame.contains(pointInSuperview) {
+                if parentViewController.collapseDetailView.frame.contains(point) || bottomDetailView.frame.contains(point) {
                     return nil
                 } else {
                     return hitView
