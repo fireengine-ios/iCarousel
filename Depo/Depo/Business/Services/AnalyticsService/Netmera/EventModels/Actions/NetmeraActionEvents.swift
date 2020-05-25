@@ -1110,4 +1110,147 @@ extension NetmeraEvents.Actions {
         }
     }
     
+    final class AddToFavorites: NetmeraEvent {
+        private let key = "mzf"
+        @objc var status = ""
+        
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
+            self.init()
+            self.status = status.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(status),
+            ]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class RemoveFromAlbum: NetmeraEvent {
+        private let key = "wts"
+        @objc var status = ""
+        
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
+            self.init()
+            self.status = status.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(status),
+            ]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class PlusButton: NetmeraEvent {
+        private let key = "xoy"
+        @objc var action = ""
+        
+        convenience init(action: NetmeraEventValues.PlusButtonAction) {
+            self.init()
+            self.action = action.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(action),
+            ]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class Search: NetmeraEvent {
+        private let key = "rki"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[:]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class VideoDisplayed: NetmeraEvent {
+        private let key = "zcd"
+       
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[:]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class TouchidSet: NetmeraEvent {
+        private let key = "lit"
+        @objc var action = ""
+        
+        convenience init(action: NetmeraEventValues.OnOffSettings) {
+            self.init()
+            self.action = action.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(action),
+            ]
+        }
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class passcodeSet: NetmeraEvent {
+        private let key = "nrx"
+        @objc var action = ""
+        
+        convenience init(action: NetmeraEventValues.OnOffSettings) {
+            self.init()
+            self.action = action.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(action),
+            ]
+        }
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class PeriodicContactSync: NetmeraEvent {
+        private let key = "dak"
+        @objc var action = ""
+        @objc var type = ""
+        
+        convenience init(action: NetmeraEventValues.OnOffSettings, type: NetmeraEventValues.PeriodicContactSyncType) {
+            self.init()
+            self.action = action.text
+            self.type = type.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(action),
+                "eb" : #keyPath(type),
+            ]
+        }
+        override var eventKey : String {
+            return key
+        }
+    }
 }
