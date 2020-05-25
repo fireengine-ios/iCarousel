@@ -343,7 +343,7 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
                 SnackbarManager.shared.show(
                     type: .nonCritical,
                     message: TextConstants.faceImageEnableSnackText,
-                    action: .ok
+                    action: .none
                 )
                 self?.isFaceImageAllowed = true
                 self?.view.setHiddenPeoplePlaceholder(isHidden: true)
