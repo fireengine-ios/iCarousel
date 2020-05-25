@@ -343,8 +343,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
                         self.bottomDetailView?.frame.origin.y = self.view.frame.height
                         self.collapseDetailView.isHidden = true
                         self.isFullScreen = false
-                        self.detailViewIsHidden = true
-        }, completion: nil)
+                        
+        }, completion: { _ in
+            self.detailViewIsHidden = self.needHideDetailView()
+        })
     }
     
     func showDetailFromThreeDots() {
@@ -393,13 +395,13 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
             isFullScreen = true
             gestureBeginLocation = recognizer.location(in: view)
             dragViewBeginLocation = collectionView?.frame.origin ?? .zero
-            dragViewBeginLocation.y == view.frame.height ? updateFileInfo() : ()
+            updateFileInfo()
         case .changed:
             
             let newLocation = dragViewBeginLocation.y + (recognizer.location(in: view).y - gestureBeginLocation.y)
             collectionView.frame.origin.y = newLocation
             bottomDetailView.frame.origin.y = collectionView.frame.maxY - imageMaxY
-            detailViewIsHidden = (bottomDetailView.frame.minY >= view.frame.height * 0.75)
+            detailViewIsHidden = needHideDetailView()
     
         case .ended:
             UIView.animate(withDuration: 1, delay: 0,
@@ -438,7 +440,7 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
             bottomDetailView.frame.origin.y = view.frame.height
             isFullScreen = false
             collapseDetailView.isHidden = true
-            detailViewIsHidden = true
+            detailViewIsHidden = needHideDetailView()
         } else if velocityY < -50,
             bottomDetailView.frame.origin.y > view.frame.height - cardHeight, viewState != .expanded {
             viewState = .expanded
@@ -469,24 +471,23 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
                 bottomDetailView.frame.origin.y = view.frame.height
                 isFullScreen = false
                 collapseDetailView.isHidden = true
-                detailViewIsHidden = true
+                detailViewIsHidden = needHideDetailView()
             case .expanded:
 
                 collectionView.frame.origin.y = view.frame.minY - (cardHeight - imageMaxY)
                 bottomDetailView.frame.origin.y = view.frame.height - cardHeight
                 collapseDetailView.isHidden = false
-                detailViewIsHidden = false
+                detailViewIsHidden = needHideDetailView()
             case .full:
 
                 bottomDetailView.frame.origin.y = view.frame.height - cardHeight
                 collectionView.frame.origin.y = bottomDetailView.frame.minY - collectionView.frame.height + imageMaxY
-                detailViewIsHidden = false
+                detailViewIsHidden = needHideDetailView()
                 collapseDetailView.isHidden = false
             }
         }
     }
 
-    
     private func detailView(isHidden: Bool) {
         UIView.animate(withDuration: 0.2) {
             self.bottomDetailView?.alpha = isHidden ? 0 : 1
@@ -566,6 +567,14 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         output.configureFileInfo(fileInfoView)
         topViewController.view.addSubview(fileInfoView)
         bottomDetailView = fileInfoView
+    }
+    
+    private func needHideDetailView() -> Bool {
+        guard let bottomDetailView = bottomDetailView else {
+            assertionFailure()
+            return false
+        }
+        return bottomDetailView.frame.minY >= view.frame.height * 0.75
     }
 }
 
