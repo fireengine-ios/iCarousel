@@ -42,7 +42,7 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
                 periodicBackUp = SYNCPeriodic.every7
             case .monthly:
                 periodicBackUp = SYNCPeriodic.every30
-            case .none:
+            case .off:
                 periodicBackUp = SYNCPeriodic.none
             }
         } 

@@ -27,7 +27,7 @@ final class ContactSyncBigCardView: UIView, NibInit {
     
     @IBOutlet private weak var numberOfContacts: UILabel! {
         willSet {
-            newValue.text = "20"
+            newValue.text = "0"
             newValue.font = .TurkcellSaturaDemFont(size: 60.0)
             newValue.textColor =  .white
             newValue.numberOfLines = 1
@@ -134,6 +134,18 @@ final class ContactSyncBigCardView: UIView, NibInit {
     func onAutoBackup(handler: SenderHandler?) -> ContactSyncBigCardView {
         actionHandlerAutoBackup = handler
         return self
+    }
+    
+    func set(numberOfContacts: Int) {
+        DispatchQueue.toMain {
+            self.numberOfContacts.text = "\(numberOfContacts)"
+        }
+    }
+    
+    func set(periodicSyncOption: PeriodicContactsSyncOption) {
+        DispatchQueue.toMain {
+            self.autoBackupText.text = String(format: TextConstants.contactSyncBigCardAutobackupFormat, periodicSyncOption.localizedText)
+        }
     }
     
     

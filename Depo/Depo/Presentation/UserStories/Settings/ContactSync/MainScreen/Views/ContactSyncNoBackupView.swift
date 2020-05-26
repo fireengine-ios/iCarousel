@@ -8,14 +8,10 @@
 
 import UIKit
 
-protocol ContactSyncNoBackupViewDelegate: class {
-    func didTouchBackupButton()
-}
-
 
 final class ContactSyncNoBackupView: UIView, NibInit {
     
-    weak var delegate: ContactSyncNoBackupViewDelegate?
+    weak var delegate: ContactsBackupActionProviderProtocol?
     
 
     @IBOutlet private weak var title: UILabel! {
@@ -49,9 +45,11 @@ final class ContactSyncNoBackupView: UIView, NibInit {
     }
     
     
+    //MARK: - IB Actions
+    
     @IBAction private func backUp(_ sender: Any) {
         if let delegate = delegate {
-            delegate.didTouchBackupButton()
+            delegate.backUp()
         }
     }
 }

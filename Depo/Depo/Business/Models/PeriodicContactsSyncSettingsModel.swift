@@ -19,15 +19,15 @@ extension PeriodicContactsSyncSetting: Equatable {
 }
 
 enum PeriodicContactsSyncOption {
-    case none
+    case off
     case daily
     case weekly
     case monthly
     
     var localizedText: String {
         switch self {
-        case .none:
-            return ""
+        case .off:
+            return TextConstants.autoSyncSettingsOptionOff
         case .daily:
             return TextConstants.autoSyncSettingsOptionDaily
         case .weekly:
@@ -130,7 +130,7 @@ final class PeriodicContactsSyncSettings {
                 periodicBackUp = .every7
             case .monthly:
                 periodicBackUp = .every30
-            case .none:
+            case .off:
                 periodicBackUp = .none
             }
         } else {

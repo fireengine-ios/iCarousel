@@ -9,10 +9,10 @@
 import UIKit
 
 
-protocol ContactSyncMainViewDelegate: class {
+protocol ContactSyncMainViewDelegate: ContactsBackupActionProviderProtocol {
     func showBackups()
     func deleteDuplicates()
-    func backUp()
+    func changePeriodicSync(to option: PeriodicContactsSyncOption)
 }
 
 
@@ -30,16 +30,33 @@ final class ContactSyncMainView: UIView, NibInit {
             newValue.spacing = 24.0
         }
     }
+
+    
+    private lazy var bigInfoCard: ContactSyncBigCardView = {
+        let bigBackupCard = ContactSyncBigCardView.initFromNib()
+        
+        bigBackupCard.onBackup { [weak self] in
+            self?.delegate?.backUp()
+        }
+        .onSeeBackup { [weak self] in
+            self?.delegate?.showBackups()
+        }
+        .onAutoBackup { [weak self] sender in
+            self?.showAutoBackupOptions(sender: sender)
+        }
+        
+        return bigBackupCard
+    }()
+    
     
     private lazy var autobackupActionSheet: UIAlertController = {
         
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        //TODO: realt types
-        let options = ["Off", "Weekly", "Monthly"]
+        let options: [PeriodicContactsSyncOption] = [.off, .weekly, .monthly]
         
         options.forEach { type in
-            let action = UIAlertAction(title: type, style: .default, handler: { [weak self] _ in
+            let action = UIAlertAction(title: type.localizedText, style: .default, handler: { [weak self] _ in
                 self?.changeAutoBackup(to: type)
             })
             actionSheetVC.addAction(action)
@@ -66,29 +83,17 @@ final class ContactSyncMainView: UIView, NibInit {
     
     //MARK:- Public
     
-    func update() {
-        //
+    func update(with model: ContactSync.SyncResponse, periodicSyncOption: PeriodicContactsSyncOption) {
+        bigInfoCard.set(numberOfContacts: model.totalNumberOfContacts)
+        bigInfoCard.set(periodicSyncOption: periodicSyncOption)
     }
     
     
     //MARK:- Private
     
     private func setup() {
-        DispatchQueue.main.async {
-            let bigBackupCard = ContactSyncBigCardView.initFromNib()
-            
-            bigBackupCard.onBackup { [weak self] in
-                self?.delegate?.backUp()
-            }
-            .onSeeBackup { [weak self] in
-                self?.delegate?.showBackups()
-            }
-            .onAutoBackup { [weak self] sender in
-                self?.showAutoBackupOptions(sender: sender)
-            }
-            
-            self.cardsStack.addArrangedSubview(bigBackupCard)
-            
+        DispatchQueue.toMain {
+            self.cardsStack.addArrangedSubview(self.bigInfoCard)
             
             let showBackupCard = ContactSyncSmallCardView.initFromNib()
             showBackupCard.setup(with: .showBackup, action: { [weak self] in
@@ -120,8 +125,9 @@ final class ContactSyncMainView: UIView, NibInit {
         controller.present(autobackupActionSheet, animated: true)
     }
     
-    private func changeAutoBackup(to: String) {
-        
+    private func changeAutoBackup(to option: PeriodicContactsSyncOption) {
+        bigInfoCard.set(periodicSyncOption: option)
+        delegate?.changePeriodicSync(to: option)
     }
     
 }

@@ -17,9 +17,6 @@ enum ContactSyncSmallCardType {
 
 final class ContactSyncSmallCardView: UIView, NibInit {
     
-    private var actionHandler: VoidHandler?
-    
-    
     @IBOutlet private weak var icon: UIImageView! {
         willSet {
             newValue.contentMode = .scaleAspectFit
@@ -48,7 +45,12 @@ final class ContactSyncSmallCardView: UIView, NibInit {
             newValue.setTitleColor(.lrTealishTwo, for: .normal)
         }
     }
+
     
+    private var actionHandler: VoidHandler?
+    
+    
+    //MARK:- Override
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -62,21 +64,8 @@ final class ContactSyncSmallCardView: UIView, NibInit {
         setupShadow()
     }
     
-    private func setupShadow() {
-        layer.cornerRadius = NumericConstants.contactSyncSmallCardCornerRadius
-
-        clipsToBounds = false
-
-        layer.shadowColor = UIColor.lightGray.cgColor
-        layer.shadowOpacity = NumericConstants.contactSyncSmallCardShadowOpacity
-        layer.shadowOffset = CGSize.zero
-        layer.shadowRadius = NumericConstants.contactSyncSmallCardShadowRadius
-        layer.shadowPath = UIBezierPath(rect: CGRect(x: 0,
-                                                     y: 0,
-                                                     width: layer.frame.size.width,
-                                                     height: layer.frame.size.height)).cgPath
-    }
     
+    //MARK:- Public
     
     func setup(with type: ContactSyncSmallCardType, action: VoidHandler?) {
         actionHandler = action
@@ -94,6 +83,26 @@ final class ContactSyncSmallCardView: UIView, NibInit {
         }
     }
     
+   
+    //MARK:- Private
+    
+    private func setupShadow() {
+        layer.cornerRadius = NumericConstants.contactSyncSmallCardCornerRadius
+        
+        clipsToBounds = false
+        
+        layer.shadowColor = UIColor.lightGray.cgColor
+        layer.shadowOpacity = NumericConstants.contactSyncSmallCardShadowOpacity
+        layer.shadowOffset = CGSize.zero
+        layer.shadowRadius = NumericConstants.contactSyncSmallCardShadowRadius
+        layer.shadowPath = UIBezierPath(rect: CGRect(x: 0,
+                                                     y: 0,
+                                                     width: layer.frame.size.width,
+                                                     height: layer.frame.size.height)).cgPath
+    }
+    
+    
+    //MARK: - IB Actions
     
     @IBAction private func handleAction(_ sender: Any) {
         actionHandler?()
