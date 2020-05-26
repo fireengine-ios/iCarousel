@@ -1154,6 +1154,29 @@ extension NetmeraEvents.Actions {
         private let key = "xoy"
         @objc var action = ""
         
+        convenience init?(action: TabBarViewController.Action) {
+            let netmeraPussButtonAction: NetmeraEventValues.PlusButtonAction
+            switch action {
+            case .takePhoto:
+                netmeraPussButtonAction = .useCamera
+            case .createFolder:
+                netmeraPussButtonAction = .newFolder
+            case .createStory:
+                netmeraPussButtonAction = .createStory
+            case .upload:
+                netmeraPussButtonAction = .upload
+            case .createAlbum:
+                netmeraPussButtonAction = .createAlbum
+            case .uploadFromApp:
+                netmeraPussButtonAction = .uploadFromLifebox
+            case .importFromSpotify:
+                netmeraPussButtonAction = .importFromSpotify
+            default:
+                return nil
+            }
+            self.init(action: netmeraPussButtonAction)
+        }
+        
         convenience init(action: NetmeraEventValues.PlusButtonAction) {
             self.init()
             self.action = action.text
@@ -1194,53 +1217,15 @@ extension NetmeraEvents.Actions {
         }
     }
     
-    final class TouchidSet: NetmeraEvent {
-        private let key = "lit"
-        @objc var action = ""
-        
-        convenience init(action: NetmeraEventValues.OnOffSettings) {
-            self.init()
-            self.action = action.text
-        }
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return[
-                "ea" : #keyPath(action),
-            ]
-        }
-        override var eventKey : String {
-            return key
-        }
-    }
-    
-    final class passcodeSet: NetmeraEvent {
-        private let key = "nrx"
-        @objc var action = ""
-        
-        convenience init(action: NetmeraEventValues.OnOffSettings) {
-            self.init()
-            self.action = action.text
-        }
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return[
-                "ea" : #keyPath(action),
-            ]
-        }
-        override var eventKey : String {
-            return key
-        }
-    }
-    
     final class PeriodicContactSync: NetmeraEvent {
         private let key = "dak"
         @objc var action = ""
         @objc var type = ""
         
-        convenience init(action: NetmeraEventValues.OnOffSettings, type: NetmeraEventValues.PeriodicContactSyncType) {
+        convenience init(action: NetmeraEventValues.OnOffSettings, type: NetmeraEventValues.PeriodicContactSyncType?) {
             self.init()
             self.action = action.text
-            self.type = type.text
+            self.type = type?.text ?? ""
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
