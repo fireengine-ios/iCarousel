@@ -303,8 +303,10 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         interactor.getFIRStatus(success: { [weak self] settings in
             self?.isFaceImageAllowed = settings.isFaceImageAllowed == true
             self?.view.setHiddenPeoplePlaceholder(isHidden: self?.isFaceImageAllowed == true)
-            self?.interactor.getAuthority()
-            self?.getPersonsForSelectedPhoto()
+            if settings.isFaceImageAllowed == true {
+                self?.interactor.getAuthority()
+                self?.getPersonsForSelectedPhoto()
+            }
         }, fail: { [weak self] error in
             self?.failedUpdate(error: error)
         })
@@ -343,7 +345,7 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
                 SnackbarManager.shared.show(
                     type: .nonCritical,
                     message: TextConstants.faceImageEnableSnackText,
-                    action: .ok
+                    action: .none
                 )
                 self?.isFaceImageAllowed = true
                 self?.view.setHiddenPeoplePlaceholder(isHidden: true)
@@ -359,13 +361,17 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
     
     func onPeopleAlbumDidTap(_ album: PeopleOnPhotoItemResponse) {
         guard
-            let index = interactor.currentItemIndex,
-            let mediaItem = interactor.allItems[safe: index],
+            let thumbnail = album.thumbnailURL,
             let id = album.personInfoId
         else {
             return
         }
-        view.closeDetailViewIfNeeded()
-        interactor.getPeopleAlbum(with: mediaItem, id: id)
+        
+        let peopleItemResponse = PeopleItemResponse()
+        peopleItemResponse.id = id
+        peopleItemResponse.name = album.name ?? ""
+        peopleItemResponse.thumbnail = thumbnail
+        let peopleItem = PeopleItem(response: peopleItemResponse)
+        interactor.getPeopleAlbum(with: peopleItem, id: id)
     }
 }

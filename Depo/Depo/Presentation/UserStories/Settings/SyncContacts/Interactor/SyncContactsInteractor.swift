@@ -111,15 +111,6 @@ final class SyncContactsInteractor: SyncContactsInteractorInput {
         })
     }
     
-    func getContactsPermissionStatus(completionHandler: @escaping ContactsPermissionCallback) {
-        switch CNContactStore.authorizationStatus(for: .contacts) {
-        case .notDetermined, .restricted, .denied:
-            completionHandler(false)
-        case .authorized:
-            completionHandler(true)
-        }
-    }
-    
     func performOperation(forType type: SYNCMode) {
         UIApplication.setIdleTimerDisabled(true)
 
@@ -186,9 +177,9 @@ final class SyncContactsInteractor: SyncContactsInteractorInput {
     private func trackNetmera(operationType: SYNCMode, status: NetmeraEventValues.GeneralStatus) {
         switch operationType {
         case .backup:
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .backup, staus: status))
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .backup, status: status))
         case .restore:
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .restore, staus: status))
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .restore, status: status))
         }
     }
     
@@ -220,7 +211,7 @@ final class SyncContactsInteractor: SyncContactsInteractorInput {
     }
     
     private func deleteDuplicated() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, staus: .success))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, status: .success))
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteDuplicateScreen())
         analyticsService.logScreen(screen: .contacSyncDeleteDuplicates)
         analyticsService.trackDimentionsEveryClickGA(screen: .contacSyncDeleteDuplicates)

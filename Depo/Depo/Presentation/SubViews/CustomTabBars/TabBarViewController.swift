@@ -408,11 +408,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     func setupCustomNavControllers() {
         let router = RouterVC()
-        guard let syncContactsVC = router.syncContacts as? SyncContactsViewController else {
+        guard let syncContactsVC = router.syncContacts as? ContactSyncViewController else {
             assertionFailure()
             return
         }
-        syncContactsVC.tabBarSetup = true
+        syncContactsVC.setTabBar(isVisible: true)
         
         let list = [router.homePageScreen,
                     router.segmentedMedia(),
@@ -757,6 +757,10 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         }
         
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(action))
+        
+        if let netmeraEvent = NetmeraEvents.Actions.PlusButton(action: action) {
+            AnalyticsService.sendNetmeraEvent(event: netmeraEvent)
+        }
         
         if let externalActionHandler = externalActionHandler, externalActionHandler.canHandleTabBarAction(action) {
             externalActionHandler.handleAction(action)

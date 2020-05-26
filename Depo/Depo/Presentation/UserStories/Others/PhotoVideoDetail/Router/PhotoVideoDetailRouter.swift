@@ -32,10 +32,10 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
         let vc = PopUpController.with(title: TextConstants.faceImageEnable,
                                       message: TextConstants.faceImageEnableMessageText,
                                       image: .none,
-                                      firstButtonTitle: TextConstants.ok,
-                                      secondButtonTitle: TextConstants.cancel,
-                                      firstAction: okHandler,
-                                      secondAction: cancelHandler)
+                                      firstButtonTitle: TextConstants.cancel,
+                                      secondButtonTitle: TextConstants.ok,
+                                      firstAction: cancelHandler,
+                                      secondAction: okHandler)
         DispatchQueue.toMain {
             UIApplication.topController()?.present(vc, animated: false, completion: nil)
         }

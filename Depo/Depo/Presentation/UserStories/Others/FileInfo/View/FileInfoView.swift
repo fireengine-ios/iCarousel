@@ -322,6 +322,10 @@ final class FileInfoView: UIView, FromNib {
         }
     }
     
+    func hideKeyboard() {
+        fileNameTextField.resignFirstResponder()
+    }
+    
     // MARK: Private Methods
     
     private func setup() {
@@ -348,10 +352,8 @@ final class FileInfoView: UIView, FromNib {
         resetTitleNames()
         hideInfoDateLabels()
         dataSource.reset()
-        peopleTitleLabel.isHidden = true
         durationStackView.isHidden = true
-        peopleStackView.isHidden = false
-        premiumStackView.isHidden = true
+        peopleCollectionView.isHidden = true
     }
     
     private func resetTitleNames() {
@@ -370,7 +372,10 @@ final class FileInfoView: UIView, FromNib {
     }
     
     private func setHiddenPeopleLabel() {
-        peopleTitleLabel.isHidden = premiumStackView.isHidden == true && peopleCollectionView.isHidden
+        peopleTitleLabel.isHidden =
+            premiumStackView.isHidden
+            && peopleCollectionView.isHidden
+            && enableFIRStackView.isHidden
     }
     
     // MARK: Actions

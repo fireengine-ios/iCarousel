@@ -614,6 +614,7 @@ struct TextConstants {
     static let autoSyncSettingsOptionNever = NSLocalizedString("Never", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncSettingsOptionWiFi = NSLocalizedString("Wi-Fi", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncSettingsOptionWiFiAndCellular = NSLocalizedString("Wi-Fi and Cellular", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let autoSyncSettingsOptionOff = NSLocalizedString("Off", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncSettingsOptionDaily = NSLocalizedString("Daily", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncSettingsOptionWeekly = NSLocalizedString("Weekly", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncSettingsOptionMonthly = NSLocalizedString("Monthly", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1835,4 +1836,17 @@ struct TextConstants {
     static let snackbarMessageImportFromFBStarted = NSLocalizedString("import_from_facebook_started", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageHashTagsCopied = NSLocalizedString("instapick_hashtags_copied", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let snackbarMessageCreateStoryLimit = NSLocalizedString("create_story_selection_limit", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let contactSyncBackupTitle = NSLocalizedString("contact_phase2_backup_contacts_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncBackupMessage = NSLocalizedString("contact_phase2_backup_contacts_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncBackupButton = NSLocalizedString("contact_phase2_backup_contacts_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncSmallCardShowBackupMessage = NSLocalizedString("contact_phase2_small_card_backup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncSmallCardShowBackupButton = NSLocalizedString("contact_phase2_small_card_backup_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncSmallCardDeleteDuplicatesMessage = NSLocalizedString("contact_phase2_small_card_duplicates_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncSmallCardDeleteDuplicatesButton = NSLocalizedString("contact_phase2_small_card_duplicates_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncBigCardBackupMessage = NSLocalizedString("contact_phase2_big_card_backup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncBigCardContacts = NSLocalizedString("contact_phase2_big_card_contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncBigCardSeeContactsButton = NSLocalizedString("contact_phase2_big_card_see_contacts_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncBigCardAutobackupFormat = NSLocalizedString("contact_phase2_big_card_autobackup_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
 }

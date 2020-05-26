@@ -37,7 +37,7 @@ protocol PhotoVideoDetailInteractorInput: class {
     
     func getPersonsOnPhoto(uuid: String)
     
-    func getPeopleAlbum(with item: Item, id: Int64)
+    func getPeopleAlbum(with item: PeopleItem, id: Int64)
 
     func enableFIR(completion: VoidHandler?)
     

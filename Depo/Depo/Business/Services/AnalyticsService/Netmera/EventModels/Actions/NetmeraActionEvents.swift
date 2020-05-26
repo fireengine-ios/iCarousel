@@ -825,8 +825,8 @@ extension NetmeraEvents.Actions {
         @objc var action = ""
         @objc var status = ""
         
-        convenience init(actionType: NetmeraEventValues.ContactBackupType, staus: NetmeraEventValues.GeneralStatus) {
-            self.init(action: actionType.text, status: staus.text)
+        convenience init(actionType: NetmeraEventValues.ContactBackupType, status: NetmeraEventValues.GeneralStatus) {
+            self.init(action: actionType.text, status: status.text)
         }
         
         convenience init(action: String, status: String) {
@@ -1110,4 +1110,132 @@ extension NetmeraEvents.Actions {
         }
     }
     
+    final class AddToFavorites: NetmeraEvent {
+        private let key = "mzf"
+        @objc var status = ""
+        
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
+            self.init()
+            self.status = status.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(status),
+            ]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class RemoveFromAlbum: NetmeraEvent {
+        private let key = "wts"
+        @objc var status = ""
+        
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
+            self.init()
+            self.status = status.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(status),
+            ]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class PlusButton: NetmeraEvent {
+        private let key = "xoy"
+        @objc var action = ""
+        
+        convenience init?(action: TabBarViewController.Action) {
+            let netmeraPussButtonAction: NetmeraEventValues.PlusButtonAction
+            switch action {
+            case .takePhoto:
+                netmeraPussButtonAction = .useCamera
+            case .createFolder:
+                netmeraPussButtonAction = .newFolder
+            case .createStory:
+                netmeraPussButtonAction = .createStory
+            case .upload:
+                netmeraPussButtonAction = .upload
+            case .createAlbum:
+                netmeraPussButtonAction = .createAlbum
+            case .uploadFromApp:
+                netmeraPussButtonAction = .uploadFromLifebox
+            case .importFromSpotify:
+                netmeraPussButtonAction = .importFromSpotify
+            default:
+                return nil
+            }
+            self.init(action: netmeraPussButtonAction)
+        }
+        
+        convenience init(action: NetmeraEventValues.PlusButtonAction) {
+            self.init()
+            self.action = action.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(action),
+            ]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class Search: NetmeraEvent {
+        private let key = "rki"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[:]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class VideoDisplayed: NetmeraEvent {
+        private let key = "zcd"
+       
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[:]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class PeriodicContactSync: NetmeraEvent {
+        private let key = "dak"
+        @objc var action = ""
+        @objc var type = ""
+        
+        convenience init(action: NetmeraEventValues.OnOffSettings, type: NetmeraEventValues.PeriodicContactSyncType?) {
+            self.init()
+            self.action = action.text
+            self.type = type?.text ?? ""
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(action),
+                "eb" : #keyPath(type),
+            ]
+        }
+        override var eventKey : String {
+            return key
+        }
+    }
 }

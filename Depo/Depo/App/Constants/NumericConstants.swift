@@ -174,6 +174,10 @@ struct NumericConstants {
     static let langingPageCount = 7
     
     static let passwordRuleSetVersion = 1
+    
+    static let contactSyncSmallCardCornerRadius: CGFloat = 4.0
+    static let contactSyncSmallCardShadowOpacity: Float = 0.5
+    static let contactSyncSmallCardShadowRadius: CGFloat = 3
 }
 
 struct RequestSizeConstant {

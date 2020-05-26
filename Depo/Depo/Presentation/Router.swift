@@ -437,8 +437,7 @@ class RouterVC: NSObject {
     // MARK: SyncContacts
     
     var syncContacts: UIViewController {
-        let viewController = SyncContactsModuleInitializer.initializeViewController(with: "SyncContactsViewController")
-        return viewController
+        return ContactSyncViewController.initFromNib()
     }
     
     // MARK: PeriodicContacsSync
