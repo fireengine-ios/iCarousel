@@ -173,6 +173,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         editingTabBar?.view.layoutIfNeeded()
         editingTabBar.view.backgroundColor = UIColor.black
         setupTitle()
+        updateFileInfo()
+        output.getFIRStatus()
         
         if hideTreeDotButton {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
@@ -184,7 +186,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         //editingTabBar.editingBar.layer.borderWidth = 0
         
         statusBarColor = .black
-        output.getFIRStatus()
 
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
@@ -251,6 +252,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private func scrollToSelectedIndex() {
         setupNavigationBar()
         setupTitle()
+        updateFileInfo()
         closeDetailView()
 
         guard let index = selectedIndex else  {
@@ -394,7 +396,6 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
             isFullScreen = true
             gestureBeginLocation = recognizer.location(in: view)
             dragViewBeginLocation = collectionView?.frame.origin ?? .zero
-            updateFileInfo()
         case .changed:
             
             let newLocation = dragViewBeginLocation.y + (recognizer.location(in: view).y - gestureBeginLocation.y)
