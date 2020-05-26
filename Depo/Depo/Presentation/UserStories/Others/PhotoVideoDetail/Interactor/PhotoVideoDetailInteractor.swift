@@ -166,7 +166,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
     }
     
-    func getPeopleAlbum(with item: Item, id: Int64) {
+    func getPeopleAlbum(with item: PeopleItem, id: Int64) {
         let successHandler: AlbumOperationResponse = { [weak self] album in
             DispatchQueue.main.async {
                 self?.output.didLoadAlbum(album, forItem: item)
