@@ -233,7 +233,6 @@ struct TextConstants {
     
     static let backUpMyContacts = NSLocalizedString("Back Up My Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let manageContacts = NSLocalizedString("Manage Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let duplicatedContacts = NSLocalizedString("Duplicated Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: - Authification Cells
     static let showPassword = NSLocalizedString("Show", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -598,8 +597,6 @@ struct TextConstants {
     static let settingsRestoredText = NSLocalizedString("Restored %d Contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpingText = NSLocalizedString("%d%% Backed up…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsDeletingText = NSLocalizedString("%d Duplicated Contacts Deleted", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsDeleteDuplicatedAlertTitle = NSLocalizedString("Are you sure you want to delete?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsDeleteDuplicatedAlertText = NSLocalizedString("This duplicated contacts will be deleted from your contacts.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsRestoringText = NSLocalizedString("%d%% Restored…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsAnalyzingText = NSLocalizedString("%d%% Analyzed…", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpNeverDidIt = NSLocalizedString("You can backup your contacts to lifebox. By\ndoing that you can easly access your contact\nlist from any device and anywhere.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -612,10 +609,6 @@ struct TextConstants {
     static let settingsBackUpCancelAnalyzingTitle = NSLocalizedString("Cancel Analyzing", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpDeleteDuplicatedButton = NSLocalizedString("Delete Duplicated", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsBackUpDeleteContactButton = NSLocalizedString("Delete", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBackUpNumberOfDuplicated = NSLocalizedString("%d same contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBackUpTotalNumberOfDuplicatedContacts = NSLocalizedString("There are %d duplicated contacts.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBackUpKeepButton = NSLocalizedString("Keep", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let settingsBackUpDeleteAllButton = NSLocalizedString("Delete all", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let settingsContactsPermissionDeniedMessage = NSLocalizedString("You need to enable access to Contacts to continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncSettingsSelect = NSLocalizedString("Select", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncSettingsOptionNever = NSLocalizedString("Never", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -625,6 +618,20 @@ struct TextConstants {
     static let autoSyncSettingsOptionWeekly = NSLocalizedString("Weekly", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncSettingsOptionMonthly = NSLocalizedString("Monthly", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let isPeriodicContactsSyncEnabledKey = NSLocalizedString("isPeriodicContactsSyncEnabledKey", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let deleteDuplicatesTitle = NSLocalizedString("delete_duplicates_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteDuplicatesTopLabel = NSLocalizedString("delete_duplicates_top_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteDuplicatesDeleteAll = NSLocalizedString("delete_duplicates_delete_all", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteDuplicatesCount = NSLocalizedString("delete_duplicates_count", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let deleteDuplicatesConfirmTitle = NSLocalizedString("delete_duplicates_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteDuplicatesConfirmMessage = NSLocalizedString("delete_duplicates_confirm_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let deleteDuplicatesSuccessTitle = NSLocalizedString("delete_duplicates_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteDuplicatesSuccessMessage = NSLocalizedString("delete_duplicates_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteDuplicatesBackUpTitle = NSLocalizedString("delete_duplicates_back_up_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteDuplicatesBackUpMessage = NSLocalizedString("delete_duplicates_back_up_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteDuplicatesBackUpButton = NSLocalizedString("delete_duplicates_back_up_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Create story Name
     static let createStorySelectAudioButton = NSLocalizedString("Continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
