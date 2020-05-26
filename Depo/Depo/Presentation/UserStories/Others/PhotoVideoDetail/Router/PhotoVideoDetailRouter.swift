@@ -7,6 +7,7 @@
 //
 
 class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
+    let router = RouterVC()
 
     func onInfo(object: Item) {
         let router = RouterVC()
@@ -18,4 +19,34 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
         navigationConroller?.dismiss(animated: true, completion: nil)
     }
     
+    func showConfirmationPopup(completion: @escaping () -> ()) {
+        let okHandler: PopUpButtonHandler = { vc in
+            vc.close()
+            completion()
+        }
+        
+        let cancelHandler: PopUpButtonHandler = { vc in
+            vc.close()
+        }
+        
+        let vc = PopUpController.with(title: TextConstants.faceImageEnable,
+                                      message: TextConstants.faceImageEnableMessageText,
+                                      image: .none,
+                                      firstButtonTitle: TextConstants.cancel,
+                                      secondButtonTitle: TextConstants.ok,
+                                      firstAction: cancelHandler,
+                                      secondAction: okHandler)
+        DispatchQueue.toMain {
+            UIApplication.topController()?.present(vc, animated: false, completion: nil)
+        }
+    }
+    
+    func goToPremium() {
+        router.pushViewController(viewController: router.premium())
+    }
+    
+    func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem) {
+        let vc = router.imageFacePhotosController(album: album, item: item, status: .active, moduleOutput: nil)
+        router.pushViewController(viewController: vc)
+    }
 }

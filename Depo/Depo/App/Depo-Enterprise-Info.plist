@@ -4,8 +4,8 @@
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>background_refresh</string>
 		<string>background_processing</string>
+		<string>background_refresh</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
@@ -22,7 +22,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>20.374</string>
+	<string>20.425</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -39,7 +39,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2.55</string>
+	<string>2.57</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -66,8 +66,6 @@
 	<string>lifebox</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>spotify</string>

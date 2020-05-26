@@ -30,4 +30,9 @@ protocol PhotoVideoDetailViewOutput {
     func videoStoped()
     
     func willDisplayLastCell()
+    
+    func getFIRStatus()
+
+    func configureFileInfo(_ view: FileInfoView)
+    func getPersonsForSelectedPhoto()
 }

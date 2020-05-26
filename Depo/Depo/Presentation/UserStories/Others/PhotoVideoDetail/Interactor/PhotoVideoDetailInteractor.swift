@@ -23,7 +23,11 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
     var moreMenuConfig = [ElementTypes]()
     
+    private let peopleService = PeopleService()
+    
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var accountService = AccountService()
+    private let authorityStorage = AuthoritySingleton.shared
     
     var setupedMoreMenuConfig: [ElementTypes] {
         return moreMenuConfig
@@ -116,5 +120,123 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
     func appendItems(_ items: [Item]) {
         array.append(contentsOf: items)
+    }
+    
+    func onRename(newName: String) {
+        guard let index = currentItemIndex,
+            let item = allItems[safe: index] else {
+                return
+        }
+        
+        guard !newName.isEmpty else {
+            if let name = item.name {
+                output.cancelSave(use: name)
+            } else {
+                output.updated()
+            }
+            
+            return
+        }
+        
+            let renameFile = RenameFile(uuid: item.uuid, newName: newName)
+            FileService().rename(rename: renameFile, success: { [weak self] in
+                DispatchQueue.main.async {
+                    item.name = newName
+                    self?.output.updated()
+                    ItemOperationManager.default.didRenameItem(item)
+                }
+                }, fail: { [weak self] error in
+                    DispatchQueue.main.async {
+                        self?.output.failedUpdate(error: error)
+                    }
+            })
+    }
+    
+    func onValidateName(newName: String) {
+        guard let index = currentItemIndex,
+            let item = allItems[safe: index] else {
+                return
+        }
+        if newName.isEmpty {
+            if let name = item.name {
+                output.cancelSave(use: name)
+            }
+        } else {
+            output.didValidateNameSuccess(name: newName)
+        }
+    }
+    
+    func getPeopleAlbum(with item: PeopleItem, id: Int64) {
+        let successHandler: AlbumOperationResponse = { [weak self] album in
+            DispatchQueue.main.async {
+                self?.output.didLoadAlbum(album, forItem: item)
+            }
+        }
+        
+        let failHandler: FailResponse = { error in
+            UIApplication.showErrorAlert(message: error.description)
+        }
+        
+        peopleService.getPeopleAlbum(id: Int(truncatingIfNeeded: id),
+                                     status: item.status,
+                                     success: successHandler,
+                                     fail: failHandler)
+    }
+    
+    func getFIRStatus(success: @escaping (SettingsInfoPermissionsResponse) -> (), fail: @escaping (Error) -> ()) {
+        accountService.getSettingsInfoPermissions { response in
+            switch response {
+            case .success(let result):
+                success(result)
+            case .failed(let error):
+                fail(error)
+            }
+        }
+    }
+    
+    func enableFIR(completion: VoidHandler?) {
+        accountService.changeFaceImageAndFacebookAllowed(isFaceImageAllowed: true,
+                                                         isFacebookAllowed: true) { [weak self] response in
+            DispatchQueue.toMain {
+                switch response {
+                case .success(let result):
+                    NotificationCenter.default.post(name: .changeFaceImageStatus, object: self)
+                    if result.isFaceImageAllowed == true {
+                        DispatchQueue.main.async {
+                            completion?()
+                        }
+                    }
+                case .failed(let error):
+                    UIApplication.showErrorAlert(message: error.description)
+                    
+                }
+            }
+        }
+    }
+    
+    func getAuthority() {
+        accountService.permissions { [weak self] result in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self?.output.didLoadFaceRecognitionPermissionStatus(response.hasPermissionFor(.faceRecognition))
+                }
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
+    }
+    
+    func getPersonsOnPhoto(uuid: String) {
+        peopleService.getPeopleForMedia(with: uuid, success: { [weak self] peopleThumbnails in
+            DispatchQueue.main.async {
+                self?.output.updatePeople(items: peopleThumbnails)
+            }
+        }) { [weak self] (errorResponse) in
+            DispatchQueue.main.async {
+                self?.output.failedUpdate(error: errorResponse)
+                self?.output.updatePeople(items: [])
+            }
+        }
     }
 }

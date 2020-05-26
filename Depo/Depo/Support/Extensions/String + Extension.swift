@@ -50,11 +50,15 @@ extension String {
         }
         return ""
     }
+    
+    var nonEmptyString: String? {
+        self.isEmpty ? nil : self
+    }
 }
 
 extension Optional where Wrapped == String {
     var hasCharacters: Bool {
-        return !(self?.isEmpty ?? true)
+        return self?.isEmpty == false
     }
 }
 
@@ -73,4 +77,11 @@ extension String {
         return getPathExtension()?.lowercased() == "gif"
     }
     
+    var fileName: String {
+        (self as NSString).deletingPathExtension
+    }
+    
+    func makeFileName(with fileExtension: String) -> String {
+        [fileName, fileExtension].joined(separator: ".")
+    }
 }

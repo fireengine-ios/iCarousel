@@ -212,7 +212,19 @@ extension AnalyticsService: AnalyticsGA {
         var autoSyncStatus: String?
         var isTwoFactorAuthEnabled: Bool?
 
+        var usagePercentage: Int?
+        
         if loginStatus {
+            group.enter()
+            SingletonStorage.shared.getLifeboxUsagePersentage { percentage in
+                   guard let percentage = percentage else {
+                       group.leave()
+                       return
+                   }
+                   usagePercentage = percentage
+                   group.leave()
+               }
+            
             let autoSyncStorageSettings = AutoSyncDataStorage().settings
             
             let confirmedAutoSyncSettingsState = autoSyncStorageSettings.isAutoSyncEnabled && autoSyncStorageSettings.isAutosyncSettingsApplied
@@ -252,7 +264,8 @@ extension AnalyticsService: AnalyticsGA {
                 itemsOperationCount: itemsOperationCount,
                 editFields: editFields,
                 connectionStatus: connectionStatus,
-                statusType: statusType).productParametrs)
+                statusType: statusType,
+                usagePercentage: usagePercentage).productParametrs)
         }
     }
     

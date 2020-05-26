@@ -30,4 +30,18 @@ protocol PhotoVideoDetailInteractorInput: class {
     func replaceUploaded(_ item: WrapData)
     
     func appendItems(_ items: [Item])
+    
+    func onRename(newName: String)
+    
+    func onValidateName(newName: String)
+    
+    func getPersonsOnPhoto(uuid: String)
+    
+    func getPeopleAlbum(with item: PeopleItem, id: Int64)
+
+    func enableFIR(completion: VoidHandler?)
+    
+    func getFIRStatus(success: @escaping (SettingsInfoPermissionsResponse) -> (), fail: @escaping (Error) -> ())
+    
+    func getAuthority()
 }
