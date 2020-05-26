@@ -390,6 +390,7 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
         
         switch recognizer.state {
         case .began:
+            bottomDetailView.hideKeyboard()
             isFullScreen = true
             gestureBeginLocation = recognizer.location(in: view)
             dragViewBeginLocation = collectionView?.frame.origin ?? .zero

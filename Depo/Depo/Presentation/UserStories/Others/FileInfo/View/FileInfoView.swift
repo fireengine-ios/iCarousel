@@ -322,6 +322,10 @@ final class FileInfoView: UIView, FromNib {
         }
     }
     
+    func hideKeyboard() {
+        fileNameTextField.resignFirstResponder()
+    }
+    
     // MARK: Private Methods
     
     private func setup() {
