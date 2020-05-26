@@ -60,6 +60,11 @@ final class BiometricsManagerImp: BiometricsManager {
     var isEnabled: Bool {
         get { return defaults?.bool(forKey: BiometricsManagerImp.isEnabledKey) ?? false}
         set {
+            #if MAIN_APP
+            if newValue {
+                NetmeraExtensionsService.sendEvent(event: TouchidSet(isEnabled: newValue))
+            }
+            #endif
             defaults?.set(newValue, forKey: BiometricsManagerImp.isEnabledKey)
         }
     }

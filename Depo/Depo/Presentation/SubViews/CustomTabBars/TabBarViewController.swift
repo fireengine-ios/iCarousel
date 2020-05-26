@@ -758,6 +758,10 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(action))
         
+        if let netmeraEvent = NetmeraEvents.Actions.PlusButton(action: action) {
+            AnalyticsService.sendNetmeraEvent(event: netmeraEvent)
+        }
+        
         if let externalActionHandler = externalActionHandler, externalActionHandler.canHandleTabBarAction(action) {
             externalActionHandler.handleAction(action)
         } else {
