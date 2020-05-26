@@ -326,7 +326,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             hideActionService.startOperation(for: .photos(items),
                                              output: self.output,
                                              success: self.successAction(elementType: .hide, itemsType: .items, relatedItems: items),
-                                             fail: self.failItemsAction(elementType: .hide, relatedItems: items))
+                                             fail: self.failAction(elementType: .hide, relatedItems: items))
             
         } else {
             assertionFailure("Unexpected type of items")
@@ -349,7 +349,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         hideActionService.startOperation(for: .albums(remoteItems),
                                          output: self.output,
                                          success: self.successAction(elementType: .hide, itemsType: .albums, relatedItems: items),
-                                         fail: self.failItemsAction(elementType: .hide, relatedItems: items))
+                                         fail: self.failAction(elementType: .hide, relatedItems: items))
     }
     
     func unhide(items: [BaseDataSourceItem]) {
@@ -1002,7 +1002,7 @@ extension MoreFilesActionsInteractor {
                 return
             }
 
-            self.trackSuccessEvent(elementType: elementType)
+            self.trackGASuccessEvent(elementType: elementType)
             
             if itemsType != nil {
                 self.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .success, items: relatedItems)
@@ -1052,7 +1052,7 @@ extension MoreFilesActionsInteractor {
         }
     }
     
-    private func trackSuccessEvent(elementType: ElementTypes) {
+    private func trackGASuccessEvent(elementType: ElementTypes) {
         switch elementType {
         case .addToFavorites:
             analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .favoriteLike(.favorite))
@@ -1110,31 +1110,16 @@ extension MoreFilesActionsInteractor {
                 }
                 AnalyticsService.sendNetmeraEvent(event: event)
             }
+        case .addToFavorites:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToFavorites(status: successStatus))
+        case .removeFromAlbum:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.RemoveFromAlbum(status: successStatus))
         default:
             break
         }
     }
     
-    func failAction(elementType: ElementTypes) -> FailResponse {
-        let failResponse: FailResponse  = { [weak self] value in
-            DispatchQueue.toMain {
-                if value.isOutOfSpaceError {
-                    debugLog("failAction 1 isOutOfSpaceError")
-                    //FIXME: currently UploadService handles this
-//                    if self?.router.getViewControllerForPresent() is PhotoVideoDetailViewController {
-//                        debugLog("failAction 2 showOutOfSpaceAlert")
-//                        self?.output?.showOutOfSpaceAlert(failedType: elementType)
-//                    }
-                } else {
-                    debugLog("failAction 3 \(value.description)")
-                    self?.output?.operationFailed(type: elementType, message: value.description)
-                }
-            }
-        }
-        return failResponse
-    }
-    
-    func failItemsAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem]) -> FailResponse {
+    func failAction(elementType: ElementTypes, relatedItems: [BaseDataSourceItem] = []) -> FailResponse {
         let failResponse: FailResponse  = { [weak self] value in
             self?.trackNetmeraSuccessEvent(elementType: elementType, successStatus: .failure, items: relatedItems)
             DispatchQueue.toMain {
@@ -1249,7 +1234,7 @@ extension MoreFilesActionsInteractor {
             self?.output?.completeAsyncOperationEnableScreen()
             if let error = error {
                 let errorResponse = ErrorResponse.error(error)
-                self?.failItemsAction(elementType: type, relatedItems: items)(errorResponse)
+                self?.failAction(elementType: type, relatedItems: items)(errorResponse)
             } else {
                 let itemsType: DivorseItems
                 if self?.isAlbums(items) == true {
@@ -1337,7 +1322,7 @@ extension MoreFilesActionsInteractor {
                                           success: self?.successAction(elementType: .moveToTrash,
                                                                        itemsType: .items,
                                                                        relatedItems: items),
-                                          fail: self?.failItemsAction(elementType: .moveToTrash,
+                                          fail: self?.failAction(elementType: .moveToTrash,
                                                                       relatedItems: items))
         }
         

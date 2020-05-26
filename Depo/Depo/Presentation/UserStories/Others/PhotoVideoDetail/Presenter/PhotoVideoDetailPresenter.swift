@@ -361,12 +361,17 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
     
     func onPeopleAlbumDidTap(_ album: PeopleOnPhotoItemResponse) {
         guard
-            let index = interactor.currentItemIndex,
-            let mediaItem = interactor.allItems[safe: index],
+            let thumbnail = album.thumbnailURL,
             let id = album.personInfoId
         else {
             return
         }
-        interactor.getPeopleAlbum(with: mediaItem, id: id)
+        
+        let peopleItemResponse = PeopleItemResponse()
+        peopleItemResponse.id = id
+        peopleItemResponse.name = album.name ?? ""
+        peopleItemResponse.thumbnail = thumbnail
+        let peopleItem = PeopleItem(response: peopleItemResponse)
+        interactor.getPeopleAlbum(with: peopleItem, id: id)
     }
 }
