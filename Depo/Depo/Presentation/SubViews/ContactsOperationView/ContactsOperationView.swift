@@ -13,6 +13,7 @@ enum ContactsOperationType {
     case backUp
     case deleteBackUp
     case deleteDuplicates
+    case restore
     
     func title(result: ContactsOperationResult) -> String {
         if result == .failed {
@@ -26,6 +27,8 @@ enum ContactsOperationType {
             return "Delete Successfully"
         case .deleteDuplicates:
             return TextConstants.deleteDuplicatesSuccessTitle
+        case .restore:
+            return "Restore Successfully"
         }
     }
     
@@ -41,6 +44,8 @@ enum ContactsOperationType {
             return "You delete duplicated contacts from your phone and lorem ipsum lorem ipsum."
         case .deleteDuplicates:
             return TextConstants.deleteDuplicatesSuccessMessage
+        case .restore:
+            return "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna."
         }
     }
 }

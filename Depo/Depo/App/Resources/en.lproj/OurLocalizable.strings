@@ -474,6 +474,9 @@
 "delete_duplicates_back_up_message" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 "delete_duplicates_back_up_button" = "Back up Now";
 
+"back_up_contacts_confirm_title" = " Backup Contacts?";
+"back_up_contacts_confirm_message" = "You have already a backup. Do you want to overwrite the existing one?";
+
 /*free up spce card or storage full card? which one?*/
 "You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your lifebox quota! It’s a great time to upgrade your storage.";
 "You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "You don't have any files in your lifebox, yet. Start uploading your memories on lifebox!";

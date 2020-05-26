@@ -633,6 +633,9 @@ struct TextConstants {
     static let deleteDuplicatesBackUpMessage = NSLocalizedString("delete_duplicates_back_up_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteDuplicatesBackUpButton = NSLocalizedString("delete_duplicates_back_up_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let backUpContactsConfirmTitle = NSLocalizedString("back_up_contacts_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let backUpContactsConfirmMessage = NSLocalizedString("back_up_contacts_confirm_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     // MARK: Create story Name
     static let createStorySelectAudioButton = NSLocalizedString("Continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     

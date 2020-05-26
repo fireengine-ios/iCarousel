@@ -35,7 +35,7 @@
                                 <constraint firstAttribute="height" constant="1" id="CaO-W5-uuM"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1kx-de-s0O" customClass="BlueButtonWithMediumWhiteText" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1kx-de-s0O" customClass="NavyButtonWithWhiteText" customModule="LifeTech_lifedrive" customModuleProvider="target">
                             <rect key="frame" x="107" y="12" width="200" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="200" id="TKc-75-fsQ"/>

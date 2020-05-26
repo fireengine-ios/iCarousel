@@ -21,7 +21,7 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     @IBOutlet private weak var tableView: UITableView!
     
     @IBOutlet private weak var bottomView: UIView!
-    @IBOutlet private weak var deleteAllButton: BlueButtonWithMediumWhiteText! {
+    @IBOutlet private weak var deleteAllButton: NavyButtonWithWhiteText! {
         willSet {
             newValue.setTitle(TextConstants.deleteDuplicatesDeleteAll, for: .normal)
         }
@@ -89,16 +89,7 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     // MARK: - Actions
     
     @IBAction private func onDeleteAllTapped(_ sender: Any) {
-        let vc = PopUpController.with(title: TextConstants.deleteDuplicatesConfirmTitle,
-                                      message: TextConstants.deleteDuplicatesConfirmMessage,
-                                      image: .delete,
-                                      firstButtonTitle: TextConstants.cancel,
-                                      secondButtonTitle: TextConstants.ok,
-                                      secondAction: { [weak self] vc in
-                                        vc.close()
-                                        self?.deleteDuplicates()
-                                    })
-        present(vc, animated: false)
+        showDeletePopup()
     }
     
     private func deleteDuplicates() {
@@ -118,8 +109,7 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         resultView?.add(card: backUpCard)
         
         backUpCard.backUpHandler = { [weak self] in
-            self?.delegate?.startBackUp()
-            self?.navigationController?.popViewController(animated: true)
+            self?.showBackUpPop()
         }
     }
     
@@ -140,6 +130,34 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     private func deleteResultView() {
         resultView?.removeFromSuperview()
         resultView = nil
+    }
+    
+    private func showDeletePopup() {
+        let vc = PopUpController.with(title: TextConstants.deleteDuplicatesConfirmTitle,
+                                      message: TextConstants.deleteDuplicatesConfirmMessage,
+                                      image: .question,
+                                      firstButtonTitle: TextConstants.cancel,
+                                      secondButtonTitle: TextConstants.ok,
+                                      secondAction: { [weak self] vc in
+                                        vc.close()
+                                        self?.deleteDuplicates()
+                                    })
+        present(vc, animated: false)
+    }
+    
+    private func showBackUpPop() {
+        let vc = PopUpController.with(title: TextConstants.backUpContactsConfirmTitle,
+                                      message: TextConstants.backUpContactsConfirmMessage,
+                                      image: .question,
+                                      firstButtonTitle: TextConstants.cancel,
+                                      secondButtonTitle: TextConstants.ok,
+                                      secondAction: { [weak self] vc in
+                                        self?.delegate?.startBackUp()
+                                        vc.close(isFinalStep: false) {
+                                            self?.navigationController?.popViewController(animated: true)
+                                        }
+                                    })
+        present(vc, animated: false)
     }
 }
 

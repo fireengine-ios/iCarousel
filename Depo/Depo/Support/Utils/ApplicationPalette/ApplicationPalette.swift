@@ -41,4 +41,9 @@ class ApplicationPalette {
         }
         return UIFont.TurkcellSaturaBolFont(size: fontSize)
     }
+    
+    static var mediumDemiRoundButtonFont: UIFont? {
+        var fontSize: CGFloat = Device.isIpad ? 22 : 16.0
+        return UIFont.TurkcellSaturaDemFont(size: fontSize)
+    }
 }
