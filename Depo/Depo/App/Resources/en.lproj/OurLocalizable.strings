@@ -1546,6 +1546,7 @@
 "import_from_facebook_started" = "Import from Facebook started";
 "instapick_hashtags_copied" = "Hashtags copied";
 "create_story_selection_limit" = "Please choose maximum %d photos";
+
 "contact_phase2_backup_contacts_title" = "Back up contacts";
 "contact_phase2_backup_contacts_message" = "You can backup your contacts to lifebox.\nBy doing that you can easly access your contact list from any device and anywhere.";
 "contact_phase2_backup_contacts_button" = "Back up Now";
@@ -1553,3 +1554,9 @@
 "contact_phase2_small_card_backup_button" = "See Backup";
 "contact_phase2_small_card_duplicates_message" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit";
 "contact_phase2_small_card_duplicates_button" = "Delete Duplicates on iPhone";
+
+"contact_phase2_big_card_backup_message" = "Back up your contacts in your lifebox safely!";
+"contact_phase2_big_card_contacts" = "contacts";
+"contact_phase2_big_card_see_contacts_button" = "See Contacts";
+"contact_phase2_big_card_autobackup_format" = "Auto Backup: %@";
+

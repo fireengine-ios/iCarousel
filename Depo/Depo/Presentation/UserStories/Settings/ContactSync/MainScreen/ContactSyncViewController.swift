@@ -24,7 +24,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     
     private lazy var mainView: ContactSyncMainView = {
         let view = ContactSyncMainView.initFromNib()
-//        view.delegate = self
+        view.delegate = self
         return view
     }()
     
@@ -106,9 +106,29 @@ extension ContactSyncViewController: ContactSyncNoBackupViewDelegate {
     }
 }
 
+extension ContactSyncViewController: ContactSyncMainViewDelegate {
+    func backUp() {
+        //TODO: Open back up action screen
+        foobar = false
+        showRelatedView()
+    }
+    
+    func showBackups() {
+        //TODO: Open backups screen
+        foobar = false
+        showRelatedView()
+    }
+    
+    func deleteDuplicates() {
+        //TODO: Open delete duplicates screen
+        foobar = false
+        showRelatedView()
+    }
+}
 
 
-private class ContentViewAnimator {
+
+private final class ContentViewAnimator {
     
     func showTransition(to newView: UIView, on contentView: UIView, animated: Bool) {
         let currentView = contentView.subviews.first
