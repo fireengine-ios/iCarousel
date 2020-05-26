@@ -349,8 +349,7 @@ final class FileInfoView: UIView, FromNib {
         hideInfoDateLabels()
         dataSource.reset()
         durationStackView.isHidden = true
-        peopleStackView.isHidden = false
-        premiumStackView.isHidden = true
+        peopleCollectionView.isHidden = true
     }
     
     private func resetTitleNames() {

@@ -303,8 +303,10 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         interactor.getFIRStatus(success: { [weak self] settings in
             self?.isFaceImageAllowed = settings.isFaceImageAllowed == true
             self?.view.setHiddenPeoplePlaceholder(isHidden: self?.isFaceImageAllowed == true)
-            self?.interactor.getAuthority()
-            self?.getPersonsForSelectedPhoto()
+            if settings.isFaceImageAllowed == true {
+                self?.interactor.getAuthority()
+                self?.getPersonsForSelectedPhoto()
+            }
         }, fail: { [weak self] error in
             self?.failedUpdate(error: error)
         })
