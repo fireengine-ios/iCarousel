@@ -152,7 +152,7 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
     }
     
     func didObtainUserStatus(isPremiumUser: Bool) {
-        if !isPremiumUser {
+        if isPremiumUser {
             requesetAccess { [weak self] success in
                 guard success, let self = self else {
                     return
