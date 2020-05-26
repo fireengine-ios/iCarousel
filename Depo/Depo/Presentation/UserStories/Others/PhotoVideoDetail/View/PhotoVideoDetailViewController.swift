@@ -607,6 +607,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     func play(item: AVPlayerItem) {
         hideSpinnerIncludeNavigationBar()
         
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.VideoDisplayed())
+        
         localPlayer?.replaceCurrentItem(with: item)
         playerController = FixedAVPlayerViewController()
         playerController?.player = localPlayer
