@@ -469,7 +469,7 @@
 "contact_phase2_delete_duplicates_confirm_title" = "Delete Duplicates?";
 "contact_phase2_delete_duplicates_confirm_message" = "Your duplicated contacts will be deleted from your phone. Are you sure you want to delete?";
 "contact_phase2_delete_duplicates_success_title" = "Delete Successfully";
-"contact_phase2_delete_duplicates_success_message" = "You delete duplicated contacts from your phone and lorem ipsum lorem ipsum.";contact_phase2_
+"contact_phase2_delete_duplicates_success_message" = "You delete duplicated contacts from your phone and lorem ipsum lorem ipsum.";
 "contact_phase2_delete_duplicates_back_up_title" = "Back up Contacts ";
 "contact_phase2_delete_duplicates_back_up_message" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 "contact_phase2_delete_duplicates_back_up_button" = "Back up Now";
