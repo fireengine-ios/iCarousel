@@ -324,7 +324,12 @@ final class FileInfoView: UIView, FromNib {
     }
     
     func hideKeyboard() {
-        fileNameTextField.resignFirstResponder()
+        changeEditStatus(false)
+        fileNameTextField.isUserInteractionEnabled = false
+        if let name = oldName, !name.isEmpty {
+            fileNameTextField.text = oldName
+        }
+        showValidateNameSuccess()
     }
     
     // MARK: Private Methods

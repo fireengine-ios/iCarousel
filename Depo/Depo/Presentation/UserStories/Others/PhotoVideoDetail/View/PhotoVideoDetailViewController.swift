@@ -162,12 +162,12 @@ final class PhotoVideoDetailViewController: BaseViewController {
         showSpinner()
         updateFileInfo()
         output.getFIRStatus()
-        addBottomDetailsView()
-        addTrackSwipeUpView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        addBottomDetailsView()
+        addTrackSwipeUpView()
         OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
         ItemOperationManager.default.startUpdateView(view: self)
         
