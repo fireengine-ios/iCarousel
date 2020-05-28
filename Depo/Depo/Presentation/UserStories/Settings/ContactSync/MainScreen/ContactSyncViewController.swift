@@ -33,6 +33,12 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         return view
     }()
     
+    private lazy var progressView: ContactSyncProgressView = {
+        let view = ContactSyncProgressView.initFromNib()
+//        view.delegate = self
+        return view
+    }()
+    
     
     private let syncService = ContactsSyncService()
     private let periodicSyncHelper = PeriodicSync()
@@ -65,8 +71,8 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         super.viewWillAppear(animated)
         
         setupNavBar()
-        setupContentView()
         
+        showSpinner()
         contactSyncHelper.prepare()
     }
     
@@ -86,17 +92,6 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         } else {
             navigationBarWithGradientStyle()
             setTitle(withString: TextConstants.backUpMyContacts)
-        }
-    }
-    
-    private func setupContentView() {
-//        showSpinner()
-        getBackupStatus { [weak self] in
-//            guard let self = self else {
-//                return
-//            }
-//            self.hideSpinner()
-//            self.showRelatedView()
         }
     }
     
@@ -154,11 +149,13 @@ extension ContactSyncViewController: ContactSyncMainViewDelegate {
     
     func showBackups() {
         //TODO: Open backups screen
+        showSpinner()
         showRelatedView()
     }
     
     func deleteDuplicates() {
         //TODO: Open delete duplicates screen
+        showSpinner()
         showRelatedView()
     }
     
@@ -170,14 +167,19 @@ extension ContactSyncViewController: ContactSyncMainViewDelegate {
 
 extension ContactSyncViewController: ContactSyncHelperDelegate {
     func didBackup() {
+        hideSpinner()
+        syncModel = contactSyncHelper.syncResponse
         showRelatedView()
     }
     
     func didAnalyze() {
+        hideSpinner()
+        syncModel = contactSyncHelper.syncResponse
         showRelatedView()
     }
    
     func didUpdateBackupStatus() {
+        hideSpinner()
         syncModel = contactSyncHelper.syncResponse
         showRelatedView()
     }
