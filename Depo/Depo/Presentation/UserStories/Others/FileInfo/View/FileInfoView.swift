@@ -257,7 +257,6 @@ final class FileInfoView: UIView, FromNib {
     func setHiddenPeoplePlaceholder(isHidden: Bool) {
         enableFIRStackView.isHidden = isHidden
         peopleCollectionView.isHidden = !isHidden
-        premiumStackView.isHidden = !isHidden
     }
     
     func setHiddenPremiumStackView(isHidden: Bool) {
