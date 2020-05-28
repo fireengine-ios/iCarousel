@@ -10,10 +10,6 @@ import UIKit
 
 protocol DeleteDuplicatesDelegate: class {
     func startBackUp()
-    func deleteDuplicatesClosed()
-    func deleteDuplicatesStarted()
-    func deleteDuplicatesSuccess()
-    func deleteDuplicatesFailed()
 }
 
 final class DeleteDuplicatesViewController: BaseViewController, NibInit {
@@ -26,6 +22,10 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
             newValue.setTitle(TextConstants.deleteDuplicatesDeleteAll, for: .normal)
         }
     }
+    
+    private let contactsSyncService = ContactsSyncService()
+    private let localContactsService = ContactService()
+    private let accountService = AccountService()
     
     private var contacts = [ContactSync.AnalyzedContact]()
     private weak var delegate: DeleteDuplicatesDelegate?
@@ -58,7 +58,10 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        delegate?.deleteDuplicatesClosed()
+        
+        if contactsSyncService.getCurrentOperationType() != .backup {
+            contactsSyncService.cancelAnalyze()
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -93,16 +96,12 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     }
     
     private func deleteDuplicates() {
-//        showSpinner()
-        
-        delegate?.deleteDuplicatesStarted()
-        //TODO: Start Delete in service
-        deleteDuplicatesSuccess()
+        showSpinner()
+        startDeleteDuplicates()
     }
     
     private func deleteDuplicatesSuccess() {
-        delegate?.deleteDuplicatesSuccess()
-        
+        hideSpinner()
         showResultView(result: .success)
         
         let backUpCard = BackUpContactsCard.initFromNib()
@@ -113,8 +112,8 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         }
     }
     
-    private func deleteDuplicatesFailed() {
-        delegate?.deleteDuplicatesFailed()
+    private func deleteDuplicatesFailed(error: SyncOperationErrors) {
+        hideSpinner()
         showResultView(result: .failed)
     }
     
@@ -173,5 +172,76 @@ extension DeleteDuplicatesViewController: UITableViewDataSource {
         cell.configure(with: contacts[indexPath.row])
         
         return cell
+    }
+}
+
+private extension DeleteDuplicatesViewController {
+    
+    func startDeleteDuplicates() {
+        userHasPermissionFor(type: .deleteDublicate) { [weak self] hasPermission in
+            guard hasPermission else {
+//                TODO: view.showPremiumPopup()
+                return
+            }
+            
+            self?.requestAccess { [weak self] success in
+                guard success, let self = self else {
+                    return
+                }
+                
+                self.continueDeleteDuplicates()
+            }
+        }
+    }
+    
+    func continueDeleteDuplicates() {
+        contactsSyncService.analyze(progressCallback: { [weak self] progress, count, type in
+            if type == .deleteDuplicated, progress == 0 {
+                self?.deleteDuplicatesSuccess()
+            }
+        }, successCallback: nil,
+           cancelCallback: nil,
+        errorCallback: { [weak self] error, type in
+            if type == .deleteDuplicated {
+                self?.deleteDuplicatesFailed(error: error)
+            }
+        })
+        contactsSyncService.deleteDuplicates()
+    }
+    
+    func userHasPermissionFor(type: AuthorityType, completion: @escaping BoolHandler) {
+        accountService.permissions { response in
+            switch response {
+            case .success(let result):
+                AuthoritySingleton.shared.refreshStatus(with: result)
+                completion(result.hasPermissionFor(type))
+                
+            case .failed(let error):
+                completion(false)
+                //TODO: handle error
+//                    self?.output?.didObtainFailUserStatus(errorMessage: error.description)
+            }
+        }
+    }
+    
+    func requestAccess(completionHandler: @escaping ContactsPermissionCallback) {
+        localContactsService.askPermissionForContactsFramework(redirectToSettings: true) { isGranted in
+            AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(isGranted)
+            completionHandler(isGranted)
+        }
+    }
+    
+    func updateAccessToken(complition: @escaping VoidHandler) {
+        let auth: AuthorizationRepository = factory.resolve()
+        auth.refreshTokens { [weak self] _, accessToken, error  in
+            if let accessToken = accessToken {
+                let tokenStorage: TokenStorage = factory.resolve()
+                tokenStorage.accessToken = accessToken
+                self?.contactsSyncService.updateAccessToken()
+                complition()
+            } else {
+//                self?.output?.showError(errorType: error?.isNetworkError == true ? .networkError : .failed)
+            }
+        }
     }
 }

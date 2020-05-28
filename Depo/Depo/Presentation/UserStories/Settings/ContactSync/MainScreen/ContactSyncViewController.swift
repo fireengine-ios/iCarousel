@@ -44,6 +44,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     
     private var syncModel: ContactSync.SyncResponse?
     
+    private lazy var router = RouterVC()
     
     //MARK:- Override
     
@@ -158,8 +159,8 @@ extension ContactSyncViewController: ContactSyncMainViewDelegate {
     }
     
     func deleteDuplicates() {
-        //TODO: Open delete duplicates screen
-        showRelatedView()
+        showSpinner()
+        contactSyncHelper.analyze()
     }
     
     func changePeriodicSync(to option: PeriodicContactsSyncOption) {
@@ -173,8 +174,16 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
         showRelatedView()
     }
     
-    func didAnalyze() {
-        showRelatedView()
+    func didAnalyze(contacts: [ContactSync.AnalyzedContact]) {
+        hideSpinner()
+        
+        if !contacts.isEmpty {
+            //TODO: alert or snackbar
+            contactSyncHelper.cancelAnalyze()
+        } else {
+            let controller = router.deleteContactDuplicates(analyzeResponse: contacts, delegate: self)
+            router.pushViewController(viewController: controller)
+        }
     }
    
     func didUpdateBackupStatus() {
@@ -183,6 +192,12 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
     }
 }
 
+extension ContactSyncViewController: DeleteDuplicatesDelegate {
+
+    func startBackUp() {
+        contactSyncHelper.backup()
+    }
+}
 
 //MARK: - Private classes - helpers
 
@@ -324,7 +339,7 @@ private final class Analytics {
 
 protocol ContactSyncHelperDelegate: class {
     func didUpdateBackupStatus()
-    func didAnalyze()
+    func didAnalyze(contacts: [ContactSync.AnalyzedContact])
     func didBackup()
 }
 
@@ -450,7 +465,7 @@ private class ContactSyncHelper {
     
     private func start(operationType: SyncOperationType) {
         updateAccessToken { [weak self] in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             switch operationType {
@@ -480,7 +495,7 @@ private class ContactSyncHelper {
                 
                 case .analyze:
                     self.contactSyncService.cancelAnalyze()
-                    self.analyze()
+                    self.checkAnalyze()
                 
                 default: break
 //                case .deleteDuplicated:
@@ -503,6 +518,10 @@ private class ContactSyncHelper {
     }
     
     func analyze() {
+        startOperation(operationType: .analyze)
+    }
+    
+    private func checkAnalyze() {
 //        output?.showProgress(progress: 0, count: 0, forOperation: .analyze)
         contactSyncService.analyze(progressCallback: { [weak self] progressPercentage, count, type in
 //            DispatchQueue.main.async {
@@ -511,7 +530,7 @@ private class ContactSyncHelper {
         }, successCallback: { [weak self] response in
             debugLog("contactsSyncService.analyze successCallback")
             
-            self?.delegate?.didAnalyze()
+            self?.delegate?.didAnalyze(contacts: response)
 //            DispatchQueue.main.async {
 //                self?.output?.analyzeSuccess(response: response)
 //            }
@@ -522,6 +541,10 @@ private class ContactSyncHelper {
 //                self?.output?.showError(errorType: errorType)
 //            }
         })
+    }
+    
+    func cancelAnalyze() {
+        startOperation(operationType: .cancel)
     }
     
     private func deleteDuplicated() {
