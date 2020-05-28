@@ -8,6 +8,37 @@
 
 typealias ContactsOperation = (ContactsResponse) -> Void
 
+enum SyncOperationType {
+    case backup
+    case restore
+    case analyze
+    case deleteDuplicated
+    case getBackUpStatus
+    case cancel
+}
+
+enum SyncOperationErrors: Error {
+    case accessDenied
+    case failed
+    case remoteServerError
+    case networkError
+    case internalError
+    case depoError
+    
+    var description: String {
+        switch self {
+        case .networkError:
+            return TextConstants.errorConnectedToNetwork
+        case .remoteServerError:
+            return TextConstants.errorManyContactsToBackUp
+        case .failed:
+            return TextConstants.serverErrorMessage
+        default:
+            return ""
+        }
+    }
+}
+
 class ContactsSyncService: BaseRequestService {
     
     override init() {
