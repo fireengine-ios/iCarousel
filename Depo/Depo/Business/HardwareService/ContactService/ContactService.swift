@@ -40,7 +40,7 @@ final class ContactService {
             completion(true)
             
         case .denied:
-            completion( false)
+            completion(false)
             
         case .restricted, .notDetermined:
             passcodeStorage.systemCallOnScreen = true
