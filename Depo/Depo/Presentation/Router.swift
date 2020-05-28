@@ -452,11 +452,8 @@ class RouterVC: NSObject {
         return viewController
     }
     
-    func duplicatedContacts(analyzeResponse: [ContactSync.AnalyzedContact], moduleOutput: DuplicatedContactsModuleOutput?) -> UIViewController {
-        let viewController = DuplicatedContactsModuleInitializer.initializeViewController(with: "DuplicatedContactsViewController",
-                                                                                          analyzeResponse: analyzeResponse,
-                                                                                          moduleOutput: moduleOutput)
-        return viewController
+    func deleteContactDuplicates(analyzeResponse: [ContactSync.AnalyzedContact], delegate: DeleteDuplicatesDelegate?) -> UIViewController {
+        return DeleteDuplicatesViewController.with(contacts: analyzeResponse, delegate: delegate)
     }
     
     // MARK: Terms

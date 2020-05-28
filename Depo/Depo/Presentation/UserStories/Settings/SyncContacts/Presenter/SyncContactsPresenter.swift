@@ -111,7 +111,7 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
     
     func analyzeSuccess(response: [ContactSync.AnalyzedContact]) {
         if !response.isEmpty {
-            router.goToDuplicatedContacts(with: response, moduleOutput: self)
+            router.goToDuplicatedContacts(with: response, delegate: nil)
         } else {
             let controller = PopUpController.with(title: nil,
                                                   message: TextConstants.errorAlertTextNoDuplicatedContacts,
@@ -268,19 +268,19 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
     }
 }
 
-extension SyncContactsPresenter: DuplicatedContactsModuleOutput {
-    func backFromDuplicatedContacts() {
-        updateContactsStatus()
-    }
-    
-    func cancelDeletingDuplicatedContacts() {
-        //interactor.startOperation(operationType: .cancel)
-    }
-    
-    func deleteDuplicatedContacts() {
-        interactor.startOperation(operationType: .deleteDuplicated)
-    }
-}
+//extension SyncContactsPresenter: DuplicatedContactsModuleOutput {
+//    func backFromDuplicatedContacts() {
+//        updateContactsStatus()
+//    }
+//    
+//    func cancelDeletingDuplicatedContacts() {
+//        //interactor.startOperation(operationType: .cancel)
+//    }
+//    
+//    func deleteDuplicatedContacts() {
+//        interactor.startOperation(operationType: .deleteDuplicated)
+//    }
+//}
 
 extension SyncContactsPresenter: ManageContactsModuleOutput {
     func didDeleteContact() {

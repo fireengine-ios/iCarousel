@@ -435,7 +435,6 @@
 "You need to enable access to Contacts to continue" = "You need to enable access to Contacts to continue";
 "Cancel BackUp" = "Cancel BackUp";
 "Clear BackUp" = "Clear BackUp";
-"There are %d duplicated contacts." = "There are %d duplicated contacts in device's contact list.";
 "Are you sure you want to delete?" = "Are you sure you want to delete?";
 "This duplicated contacts will be deleted from your contacts." = "These duplicated contacts will be removed from the contact list on your device.";
 "%%%d Restored…" = "%%%d Restored…";
@@ -462,6 +461,21 @@
 "Backup" = "Backup";
 "Last update:" = "Last update:";
 "Your storage is empty!" = "Your storage is empty!";
+
+"contact_phase2_delete_duplicates_title" = "Delete Duplicates";
+"contact_phase2_delete_duplicates_top_label" = "%d possible duplicates to review on phone";
+"contact_phase2_delete_duplicates_delete_all" = "Delete All";
+"contact_phase2_delete_duplicates_count" = "%d duplicates";
+"contact_phase2_delete_duplicates_confirm_title" = "Delete Duplicates?";
+"contact_phase2_delete_duplicates_confirm_message" = "Your duplicated contacts will be deleted from your phone. Are you sure you want to delete?";
+"contact_phase2_delete_duplicates_success_title" = "Delete Successfully";
+"contact_phase2_delete_duplicates_success_message" = "You delete duplicated contacts from your phone and lorem ipsum lorem ipsum.";
+"contact_phase2_delete_duplicates_back_up_title" = "Back up Contacts ";
+"contact_phase2_delete_duplicates_back_up_message" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+"contact_phase2_delete_duplicates_back_up_button" = "Back up Now";
+
+"contact_phase2_back_up_contacts_confirm_title" = " Backup Contacts?";
+"contact_phase2_back_up_contacts_confirm_message" = "You have already a backup. Do you want to overwrite the existing one?";
 
 /*free up spce card or storage full card? which one?*/
 "You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your lifebox quota! It’s a great time to upgrade your storage.";
@@ -612,7 +626,6 @@
 "Cancel Analyzing" = "Cancel Analyzing";
 "Delete all" = "Delete All";
 "Keep" = "Keep";
-"Duplicated Contacts" = "Duplicated Contacts";
 "Free" = "Free";
 "%d%% Backed up…" = "%d%% Backed up…";
 "%d%% Restored…" = "%d%% Restored…";
