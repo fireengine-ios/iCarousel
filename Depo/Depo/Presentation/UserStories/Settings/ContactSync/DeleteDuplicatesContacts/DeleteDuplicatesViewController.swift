@@ -58,6 +58,9 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         setTitle(withString: TextConstants.deleteDuplicatesTitle)
         
         setupTableView()
+        
+        analyticsService.logScreen(screen: .contacSyncDeleteDuplicates)
+        analyticsService.trackDimentionsEveryClickGA(screen: .contacSyncDeleteDuplicates)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -110,6 +113,8 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     }
     
     private func deleteDuplicatesSuccess() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, status: .success))
+        
         hideSpinner()
         showResultView(result: .success)
         
@@ -119,6 +124,11 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         backUpCard.backUpHandler = { [weak self] in
             self?.showBackUpPopup()
         }
+    }
+    
+    private func deleteDuplicatesFailure() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, status: .failure))
+        handleError(.deleteDuplicatesFailed)
     }
     
     private func showResultView(result: ContactsOperationResult) {
@@ -239,10 +249,7 @@ private extension DeleteDuplicatesViewController {
                                             eventActions: .phonebook,
                                             eventLabel: .contact(.deleteDuplicates))
         
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, status: .success))
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteDuplicateScreen())
-        analyticsService.logScreen(screen: .contacSyncDeleteDuplicates)
-        analyticsService.trackDimentionsEveryClickGA(screen: .contacSyncDeleteDuplicates)
         
         contactsSyncService.analyze(progressCallback: { [weak self] progress, count, type in
             if type == .deleteDuplicated, progress == 0 {
@@ -252,7 +259,7 @@ private extension DeleteDuplicatesViewController {
            cancelCallback: nil,
         errorCallback: { [weak self] _, type in
             if type == .deleteDuplicated {
-                self?.handleError(.deleteDuplicatesFailed)
+                self?.deleteDuplicatesFailure()
             }
         })
         contactsSyncService.deleteDuplicates()

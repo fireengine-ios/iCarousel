@@ -122,6 +122,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
 
 extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
     func backUp() {
+        analyticsHelper.trackBackupScreen()
         show(view: progressView, animated: true)
         contactSyncHelper.backup()
     }
@@ -336,15 +337,15 @@ private final class Analytics {
         analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncGeneral)
     }
     
+    func trackBackupScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactsSyncScreen())
+        analyticsService.logScreen(screen: .contactSyncBackUp)
+        analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackUp)
+    }
+    
     func trackOperation(type: SyncOperationType) {
         switch type {
             case .backup:
-                //TODO: to related view
-//                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactBackUpScreen())
-//                analyticsService.logScreen(screen: .contactSyncBackUp)
-//                analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackUp)
-                
-                
                 analyticsService.track(event: .contactBackup)
                 analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                                     eventActions: .phonebook,
@@ -354,27 +355,8 @@ private final class Analytics {
                                                     eventActions: .phonebook,
                                                     eventLabel: .contact(.restore))
             
-            case .deleteDuplicated:
-                analyticsService.trackCustomGAEvent(eventCategory: .functions,
-                                                    eventActions: .phonebook,
-                                                    eventLabel: .contact(.deleteDuplicates))
             default: break
         }
-    }
-    
-    func trackOperation(type: SYNCMode) {
-        if type == .backup {
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactsSyncScreen())
-            analyticsService.logScreen(screen: .contactSyncBackUp)
-            analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackUp)
-        }
-    }
-    
-    func trackDeleteDuplicates() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, status: .success))
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteDuplicateScreen())
-        analyticsService.logScreen(screen: .contacSyncDeleteDuplicates)
-        analyticsService.trackDimentionsEveryClickGA(screen: .contacSyncDeleteDuplicates)
     }
     
     func trackOperationSuccess(type: SYNCMode) {
@@ -543,14 +525,6 @@ private class ContactSyncHelper {
             }
             switch operationType {
                 case .backup:
-                    //                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactBackUpScreen())
-                    //                self.analyticsService.track(event: .contactBackup)
-                    //                self.analyticsService.logScreen(screen: .contactSyncBackUp)
-                    //                self.analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackUp)
-                    //                self.analyticsService.trackCustomGAEvent(eventCategory: .functions,
-                    //                                                         eventActions: .phonebook,
-                    //                                                         eventLabel: .contact(.backup))
-                    
                     self.contactSyncService.cancelAnalyze()
                     self.performOperation(forType: .backup)
                 
@@ -602,9 +576,7 @@ private class ContactSyncHelper {
     
     private func performOperation(forType type: SYNCMode) {
         UIApplication.setIdleTimerDisabled(true)
-        
-        //            analyticsHelper.trackOperation(type: type)
-        
+
         // TODO: clear NumericConstants.limitContactsForBackUp
         contactSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, opertionType in
             self?.delegate?.progress(progress: progressPercentage, for: type)
