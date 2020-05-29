@@ -12,6 +12,12 @@ protocol DeleteDuplicatesDelegate: class {
     func startBackUp()
 }
 
+private enum DeleteDuplicatesError {
+    case notPremiumUser
+    case deleteDuplicatesFailed
+    case syncError(Error)
+}
+
 final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     
     @IBOutlet private weak var tableView: UITableView!
@@ -26,10 +32,13 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     private let contactsSyncService = ContactsSyncService()
     private let localContactsService = ContactService()
     private let accountService = AccountService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private var contacts = [ContactSync.AnalyzedContact]()
     private weak var delegate: DeleteDuplicatesDelegate?
     private var resultView: ContactsOperationView?
+    
+    private lazy var router = RouterVC()
     
     // MARK: -
     
@@ -108,13 +117,8 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         resultView?.add(card: backUpCard)
         
         backUpCard.backUpHandler = { [weak self] in
-            self?.showBackUpPop()
+            self?.showBackUpPopup()
         }
-    }
-    
-    private func deleteDuplicatesFailed(error: SyncOperationErrors) {
-        hideSpinner()
-        showResultView(result: .failed)
     }
     
     private func showResultView(result: ContactsOperationResult) {
@@ -131,6 +135,21 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         resultView = nil
     }
     
+    private func handleError(_ error: DeleteDuplicatesError) {
+        hideSpinner()
+        
+        switch error {
+        case .notPremiumUser:
+            break
+            
+        case .deleteDuplicatesFailed:
+            showResultView(result: .failed)
+            
+        case .syncError(let error):
+            UIApplication.showErrorAlert(message: error.description)
+        }
+    }
+    
     private func showDeletePopup() {
         let vc = PopUpController.with(title: TextConstants.deleteDuplicatesConfirmTitle,
                                       message: TextConstants.deleteDuplicatesConfirmMessage,
@@ -144,7 +163,7 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         present(vc, animated: false)
     }
     
-    private func showBackUpPop() {
+    private func showBackUpPopup() {
         let vc = PopUpController.with(title: TextConstants.backUpContactsConfirmTitle,
                                       message: TextConstants.backUpContactsConfirmMessage,
                                       image: .question,
@@ -157,6 +176,27 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
                                         }
                                     })
         present(vc, animated: false)
+    }
+    
+    private func showPremiumPopup() {
+        let popup = PopUpController.with(title: TextConstants.contactSyncConfirmPremiumPopupTitle,
+                                         message: TextConstants.contactSyncConfirmPremiumPopupText,
+                                         image: .none,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstAction: { vc in
+                                            vc.close()
+                                         }, secondAction: { vc in
+                                            vc.close(isFinalStep: false) { [weak self] in
+                                                guard let self = self else {
+                                                    return
+                                                }
+                                                
+                                                let controller = self.router.premium(source: .contactSync)
+                                                self.router.pushViewController(viewController: controller)
+                                            }
+                                         })
+        present(popup, animated: true)
     }
 }
 
@@ -180,7 +220,7 @@ private extension DeleteDuplicatesViewController {
     func startDeleteDuplicates() {
         userHasPermissionFor(type: .deleteDublicate) { [weak self] hasPermission in
             guard hasPermission else {
-//                TODO: view.showPremiumPopup()
+                self?.handleError(.notPremiumUser)
                 return
             }
             
@@ -195,22 +235,31 @@ private extension DeleteDuplicatesViewController {
     }
     
     func continueDeleteDuplicates() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                            eventActions: .phonebook,
+                                            eventLabel: .contact(.deleteDuplicates))
+        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, status: .success))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteDuplicateScreen())
+        analyticsService.logScreen(screen: .contacSyncDeleteDuplicates)
+        analyticsService.trackDimentionsEveryClickGA(screen: .contacSyncDeleteDuplicates)
+        
         contactsSyncService.analyze(progressCallback: { [weak self] progress, count, type in
             if type == .deleteDuplicated, progress == 0 {
                 self?.deleteDuplicatesSuccess()
             }
         }, successCallback: nil,
            cancelCallback: nil,
-        errorCallback: { [weak self] error, type in
+        errorCallback: { [weak self] _, type in
             if type == .deleteDuplicated {
-                self?.deleteDuplicatesFailed(error: error)
+                self?.handleError(.deleteDuplicatesFailed)
             }
         })
         contactsSyncService.deleteDuplicates()
     }
     
     func userHasPermissionFor(type: AuthorityType, completion: @escaping BoolHandler) {
-        accountService.permissions { response in
+        accountService.permissions { [weak self] response in
             switch response {
             case .success(let result):
                 AuthoritySingleton.shared.refreshStatus(with: result)
@@ -218,8 +267,7 @@ private extension DeleteDuplicatesViewController {
                 
             case .failed(let error):
                 completion(false)
-                //TODO: handle error
-//                    self?.output?.didObtainFailUserStatus(errorMessage: error.description)
+                self?.handleError(.syncError(error))
             }
         }
     }
@@ -239,8 +287,10 @@ private extension DeleteDuplicatesViewController {
                 tokenStorage.accessToken = accessToken
                 self?.contactsSyncService.updateAccessToken()
                 complition()
+            } else if error?.isNetworkError == true {
+                self?.handleError(.syncError(SyncOperationErrors.networkError))
             } else {
-//                self?.output?.showError(errorType: error?.isNetworkError == true ? .networkError : .failed)
+                self?.handleError(.syncError(SyncOperationErrors.failed))
             }
         }
     }

@@ -122,6 +122,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
 
 extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
     func backUp() {
+        show(view: progressView, animated: true)
         contactSyncHelper.backup()
     }
 }
@@ -174,8 +175,8 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
     func didAnalyze(contacts: [ContactSync.AnalyzedContact]) {
         hideSpinner()
         
-        if !contacts.isEmpty {
-            //TODO: alert or snackbar
+        if contacts.isEmpty {
+            noDuplicatesPopup()
             contactSyncHelper.cancelAnalyze()
         } else {
             let controller = router.deleteContactDuplicates(analyzeResponse: contacts, delegate: self)
@@ -187,7 +188,24 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
         hideSpinner()
         showRelatedView()
     }
+    
+    func didFailed(error: ContactSyncHelperError) {
+        DispatchQueue.main.async {
+            self.hideSpinner()
+            self.handleError(error)
+        }
+    }
+    
+    func progress(progress: Int, for operationType: SYNCMode) {
+        if operationType == .backup {
+             progressView.update(progress: progress)
+        }
+    }
+
 }
+
+
+//MARK: - DeleteDuplicatesDelegate
 
 extension ContactSyncViewController: DeleteDuplicatesDelegate {
 
@@ -195,6 +213,63 @@ extension ContactSyncViewController: DeleteDuplicatesDelegate {
         contactSyncHelper.backup()
     }
 }
+
+//MARK: - Popups
+
+extension ContactSyncViewController {
+    
+    private func handleError(_ error: ContactSyncHelperError) {
+        switch error {
+        case .notPremiumUser:
+            showPremiumPopup()
+        case .noBackUp:
+            showRelatedView()
+        case .emptyStoredContacts:
+            showEmptyContactsPopup()
+        case .emptyLifeboxContacts:
+            showEmptyLifeboxContactsPopup()
+        case .syncError(let error):
+            UIApplication.showErrorAlert(message: error.description)
+        }
+    }
+    
+    private func showPremiumPopup() {
+        let popup = PopUpController.with(title: TextConstants.contactSyncConfirmPremiumPopupTitle,
+                                         message: TextConstants.contactSyncConfirmPremiumPopupText,
+                                         image: .none,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstAction: { vc in
+                                            vc.close()
+                                         }, secondAction: { vc in
+                                            vc.close(isFinalStep: false) { [weak self] in
+                                                guard let self = self else {
+                                                    return
+                                                }
+                                                
+                                                let controller = self.router.premium(source: .contactSync)
+                                                self.router.pushViewController(viewController: controller)
+                                            }
+                                         })
+        present(popup, animated: true)
+    }
+    
+    private func noDuplicatesPopup() {
+        let controller = PopUpController.with(title: nil,
+                                              message: TextConstants.errorAlertTextNoDuplicatedContacts,
+                                              image: .none, buttonTitle: TextConstants.ok)
+        present(controller, animated: false)
+    }
+    
+    private func showEmptyContactsPopup() {
+        SnackbarManager.shared.show(type: .critical, message: TextConstants.absentContactsForBackup, action: .ok)
+    }
+    
+    private func showEmptyLifeboxContactsPopup() {
+        SnackbarManager.shared.show(type: .critical, message: TextConstants.absentContactsInLifebox, action: .ok)
+    }
+}
+
 
 //MARK: - Private classes - helpers
 
@@ -340,7 +415,18 @@ protocol ContactSyncHelperDelegate: class {
     func didBackup()
     func didRestore()
     func didCancelAnalyze()
+    func didFailed(error: ContactSyncHelperError)
+    func progress(progress: Int, for operationType: SYNCMode)
 }
+
+enum ContactSyncHelperError {
+    case notPremiumUser
+    case emptyStoredContacts
+    case emptyLifeboxContacts
+    case noBackUp
+    case syncError(Error)
+}
+
 
 private class ContactSyncHelper {
     
@@ -385,7 +471,7 @@ private class ContactSyncHelper {
     func analyze() {
         userHasPermissionFor(type: .deleteDublicate) { [weak self] hasPermission in
             guard hasPermission else {
-                //                    TODO: view.showPremiumPopup()
+                self?.delegate?.didFailed(error: .notPremiumUser)
                 return
             }
             
@@ -395,7 +481,7 @@ private class ContactSyncHelper {
                 }
                 
                 if self.getStoredContactsCount() == 0 {
-                    //                        TODO: self.showEmptyContactsPopUp()
+                    self.delegate?.didFailed(error: .emptyStoredContacts)
                 } else {
                     self.proccessOperation(.analyze)
                 }
@@ -418,14 +504,14 @@ private class ContactSyncHelper {
             switch operationType {
                 case .backup:
                     if self?.getStoredContactsCount() == 0 {
-                        //TODO: self?.showEmptyContactsPopUp()
+                        self?.delegate?.didFailed(error: .emptyStoredContacts)
                     } else {
                         self?.proccessOperation(operationType)
                     }
                 
                 case .restore:
                     if self?.syncResponse?.totalNumberOfContacts == 0  {
-                        //TODO: self?.showEmtyContactsInLifebox()
+                        self?.delegate?.didFailed(error: .emptyLifeboxContacts)
                     } else {
                         self?.proccessOperation(operationType)
                     }
@@ -487,8 +573,7 @@ private class ContactSyncHelper {
     
     private func checkAnalyze() {
         contactSyncService.analyze(progressCallback: { [weak self] progressPercentage, count, type in
-            //TODO: show progress?
-            print("analyze progress: \(progressPercentage)")
+//            self?.delegate?.progress(progress: progressPercentage, for: .analyze)
             
         }, successCallback: { [weak self] response in
             debugLog("contactsSyncService.analyze successCallback")
@@ -498,7 +583,7 @@ private class ContactSyncHelper {
         }, cancelCallback: nil,
            errorCallback: { [weak self] errorType, type in
             debugLog("contactsSyncService.analyze errorCallback")
-            //TODO: error
+            self?.delegate?.didFailed(error: .syncError(errorType))
         })
     }
     
@@ -522,9 +607,8 @@ private class ContactSyncHelper {
         
         // TODO: clear NumericConstants.limitContactsForBackUp
         contactSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, opertionType in
-            //            DispatchQueue.main.async {
-            //                self?.output?.showProgress(progress: progressPercentage, count: 0, forOperation: opertionType)
-            //            }
+            self?.delegate?.progress(progress: progressPercentage, for: type)
+            
             }, finishCallback: { [weak self] result, operationType in
                 self?.analyticsHelper.trackOperationSuccess(type: type)
                 
@@ -570,7 +654,8 @@ private class ContactSyncHelper {
     private func updateAccessToken(complition: @escaping VoidHandler) {
         auth.refreshTokens { [weak self] _, accessToken, error  in
             guard let accessToken = accessToken else {
-                //TODO: show error
+                let syncError: SyncOperationErrors = error?.isNetworkError == true ? .networkError : .failed
+                self?.delegate?.didFailed(error: .syncError(syncError))
                 return
             }
             

@@ -31,7 +31,7 @@ final class ContactSyncProgressView: UIView, NibInit {
         }
     }
     
-    func update(progress: Float) {
+    func update(progress: Int) {
         loader.progress = CGFloat(progress)
     }
 }

@@ -8,24 +8,6 @@
 
 import Contacts
 
-enum SyncOperationType {
-    case backup
-    case restore
-    case analyze
-    case deleteDuplicated
-    case getBackUpStatus
-    case cancel
-}
-
-enum SyncOperationErrors {
-    case accessDenied
-    case failed
-    case remoteServerError
-    case networkError
-    case internalError
-    case depoError
-}
-
 final class SyncContactsInteractor: SyncContactsInteractorInput {
 
     weak var output: SyncContactsInteractorOutput?
