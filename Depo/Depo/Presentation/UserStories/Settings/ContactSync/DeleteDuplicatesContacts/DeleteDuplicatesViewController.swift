@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol DeleteDuplicatesDelegate: class {
-    func startBackUp()
-}
-
 private enum DeleteDuplicatesError {
     case notPremiumUser
     case deleteDuplicatesFailed
@@ -35,14 +31,14 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private var contacts = [ContactSync.AnalyzedContact]()
-    private weak var delegate: DeleteDuplicatesDelegate?
+    private weak var delegate: ContactsBackupActionProviderProtocol?
     private var resultView: ContactsOperationView?
     
     private lazy var router = RouterVC()
     
     // MARK: -
     
-    static func with(contacts: [ContactSync.AnalyzedContact], delegate: DeleteDuplicatesDelegate?) -> DeleteDuplicatesViewController {
+    static func with(contacts: [ContactSync.AnalyzedContact], delegate: ContactsBackupActionProviderProtocol?) -> DeleteDuplicatesViewController {
         let controller = DeleteDuplicatesViewController.initFromNib()
         controller.contacts = contacts
         controller.delegate = delegate
@@ -180,7 +176,7 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
                                       firstButtonTitle: TextConstants.cancel,
                                       secondButtonTitle: TextConstants.ok,
                                       secondAction: { [weak self] vc in
-                                        self?.delegate?.startBackUp()
+                                        self?.delegate?.backUp(isConfirmed: true)
                                         vc.close(isFinalStep: false) {
                                             self?.navigationController?.popViewController(animated: true)
                                         }

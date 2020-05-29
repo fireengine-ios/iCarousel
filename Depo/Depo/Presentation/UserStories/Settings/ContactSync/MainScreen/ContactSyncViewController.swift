@@ -11,7 +11,7 @@ import Contacts
 
 
 protocol ContactsBackupActionProviderProtocol: class {
-    func backUp()
+    func backUp(isConfirmed: Bool)
 }
 
 
@@ -121,7 +121,15 @@ final class ContactSyncViewController: BaseViewController, NibInit {
 //MARK:- protocols extensions
 
 extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
-    func backUp() {
+    func backUp(isConfirmed: Bool) {
+        if isConfirmed {
+            startBackUp()
+        } else {
+            showBackUpConfirmPopup()
+        }
+    }
+    
+    private func startBackUp() {
         analyticsHelper.trackBackupScreen()
         show(view: progressView, animated: true)
         contactSyncHelper.backup()
@@ -205,16 +213,6 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
 
 }
 
-
-//MARK: - DeleteDuplicatesDelegate
-
-extension ContactSyncViewController: DeleteDuplicatesDelegate {
-
-    func startBackUp() {
-        contactSyncHelper.backup()
-    }
-}
-
 //MARK: - Popups
 
 extension ContactSyncViewController {
@@ -268,6 +266,19 @@ extension ContactSyncViewController {
     
     private func showEmptyLifeboxContactsPopup() {
         SnackbarManager.shared.show(type: .critical, message: TextConstants.absentContactsInLifebox, action: .ok)
+    }
+    
+    private func showBackUpConfirmPopup() {
+        let vc = PopUpController.with(title: TextConstants.backUpContactsConfirmTitle,
+                                      message: TextConstants.backUpContactsConfirmMessage,
+                                      image: .question,
+                                      firstButtonTitle: TextConstants.cancel,
+                                      secondButtonTitle: TextConstants.ok,
+                                      secondAction: { [weak self] vc in
+                                        vc.close()
+                                        self?.startBackUp()
+                                    })
+        present(vc, animated: false)
     }
 }
 
