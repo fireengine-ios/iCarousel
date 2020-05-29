@@ -477,6 +477,18 @@
 "contact_phase2_back_up_contacts_confirm_title" = " Backup Contacts?";
 "contact_phase2_back_up_contacts_confirm_message" = "You have already a backup. Do you want to overwrite the existing one?";
 
+"contact_phase2_contact_list_navbar_title" = "Contact List";
+"contact_phase2_contact_list_title" = "Contact List";
+"contact_phase2_contact_list_info" = "You have %d contacts on this list which back up on %@.";
+"contact_phase2_contact_list_restore" = "Restore";
+"contact_phase2_contact_list_delete_all" = "Delete All";
+
+"contact_phase2_restore_contacts_confirm_title" = "Restore Backup?";
+"contact_phase2_restore_contacts_confirm_message" = "Your phone contact list will be change according to this backup?  Are you sure you want to restore?";
+
+"contact_phase2_delete_contacts_confirm_title" = "Delete Contacts?";
+"contact_phase2_delete_contacts_confirm_message" = "These contacts will be deleted from your lifebox. Are you sure you want to delete?";
+
 /*free up spce card or storage full card? which one?*/
 "You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your lifebox quota! It’s a great time to upgrade your storage.";
 "You seem to have no uploaded files. Start uploading your memories on Lifebox!" = "You don't have any files in your lifebox, yet. Start uploading your memories on lifebox!";
