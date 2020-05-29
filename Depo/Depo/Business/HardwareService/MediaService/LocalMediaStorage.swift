@@ -774,7 +774,12 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let options = PHAssetResourceRequestOptions()
         options.isNetworkAccessAllowed = false
         
+        
+        
         let tmpUrl = Device.tmpFolderUrl(withComponent: name)
+        
+        try? FileManager.default.removeItem(at: tmpUrl)
+        
         PHAssetResourceManager.default().writeData(for: resource, toFile: tmpUrl, options: options) { error in
             guard let error = error else {
                 completion(.success(tmpUrl))
