@@ -45,7 +45,7 @@ class IntroduceViewController: ViewController, IntroduceViewInput, IntroduceData
         haveAccountLabel.textColor = .white
         
         
-        haveAccountButton.setTitle(TextConstants.loginTitle, for: .normal)
+        haveAccountButton.setTitle(TextConstants.introViewGoToLoginButtonText, for: .normal)
         haveAccountButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
         haveAccountButton.backgroundColor = .white
         haveAccountButton.setTitleColor(ColorConstants.marineTwo, for: .normal)
