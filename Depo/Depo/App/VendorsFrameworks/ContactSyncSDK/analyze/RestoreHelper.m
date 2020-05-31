@@ -140,9 +140,6 @@
     NSMutableArray *contacts = [[ContactUtil shared] fetchContacts];
     if ([contacts count] > 0) {
         for(Contact *c in contacts) {
-            [[ContactUtil shared] fetchNumbers:c];
-            [[ContactUtil shared] fetchEmails:c];
-            [[ContactUtil shared] fetchAddresses:c];
             
             if (!SYNC_STRING_IS_NULL_OR_EMPTY(c.generateDisplayName)) {
                 NSMutableArray *cs = [resultMap objectForKey:c.nameForCompare];

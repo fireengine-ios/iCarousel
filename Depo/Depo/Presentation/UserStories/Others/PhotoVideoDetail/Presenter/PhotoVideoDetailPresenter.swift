@@ -306,6 +306,8 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             if settings.isFaceImageAllowed == true {
                 self?.interactor.getAuthority()
                 self?.getPersonsForSelectedPhoto()
+            } else {
+                self?.view.setHiddenPremiumStackView(isHidden: true)
             }
         }, fail: { [weak self] error in
             self?.failedUpdate(error: error)

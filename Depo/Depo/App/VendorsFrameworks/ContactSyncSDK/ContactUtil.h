@@ -35,9 +35,12 @@
 - (NSInteger)getContactCount;
 - (Contact*)findContactById:(NSNumber*)objectId;
 - (NSNumber*)localUpdateDate:(NSNumber*)objectId;
-- (void)fetchNumbers:(Contact*)contact;
-- (void)fetchEmails:(Contact*)contact;
-- (void)fetchAddresses:(Contact*)contact;
+- (void)fetchNumbers:(Contact*)contact __attribute__((deprecated));
+- (void)fetchEmails:(Contact*)contact __attribute__((deprecated));
+- (void)fetchAddresses:(Contact*)contact __attribute__((deprecated));
+- (void)fetchNumbers:(Contact*)contact ref:(ABRecordRef)ref;
+- (void)fetchEmails:(Contact*)contact ref:(ABRecordRef)ref;
+- (void)fetchAddresses:(Contact*)contact ref:(ABRecordRef)ref;
 - (Contact*)mergeContacts:(NSMutableArray<Contact *>*)contacts masterContact:(Contact*)masterContact;
 -(NSArray *)getContactIds:(NSArray*)list;
 - (NSString*)getCards:(PartialInfo*)partialInfo;

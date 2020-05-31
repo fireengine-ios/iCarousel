@@ -112,7 +112,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
             if let index = selectedIndex {
                 output.setSelectedItemIndex(selectedIndex: index)
             }
-            updateFileInfo()
+            if oldValue != selectedIndex {
+                updateFileInfo()
+            }
         }
     }
     
@@ -158,6 +160,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
         collapseViewSetup()
         showSpinner()
+        updateFileInfo()
+        output.getFIRStatus()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -173,8 +177,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         editingTabBar?.view.layoutIfNeeded()
         editingTabBar.view.backgroundColor = UIColor.black
         setupTitle()
-        updateFileInfo()
-        output.getFIRStatus()
         
         if hideTreeDotButton {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
@@ -332,7 +334,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     @objc private func closeDetailView() {
-        
+        bottomDetailView?.hideKeyboard()
         viewState = .collapsed
         UIView.animate(withDuration: 1, delay: 0,
                        usingSpringWithDamping: 0.8,
