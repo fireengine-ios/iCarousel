@@ -696,11 +696,11 @@ Comma added*/
 "PackagesPolicyHeader" = "Abonnement auto-renouvelable pour l'achat in-app:";
 
 /*Suggested: "Subsriptions are renewed on a monthly basis
-Payment will be charged to iTunes Account at confirmation of purchase 
-Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period 
-Account will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. 
-Subscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase. 
-Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable 
+Payment will be charged to iTunes Account at confirmation of purchase
+Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period
+Account will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen.
+Subscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase.
+Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable
 Privacy Policy: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik
 Terms of Use:"
 
@@ -1660,7 +1660,7 @@ Please check I have understood the intended command here*/
 "delete_from_hidden_bin_popup_success_text" = "Les fichiers sélectionnés seront mis à la poubelle. Vous pouvez les restaurer dans un délai de 30 jours. Veuillez vider votre poubelle en cas de besoin pour libérer de l'espace.";
 "unhide_popup_success_title" = "Point(s) non caché(s) avec succès.";
 "delete_popup_text" = "Le(s) fichier(s) sélectionné(s) sera (seront) mis à la poubelle. Vous pouvez les restaurer dans un délai de 30 jours. Veuillez vider votre poubelle en cas de besoin pour libérer de l'espace.";
-"PackagesPolicyTextBillo" = "Les abonnements sont renouvelés chaque mois\nLe paiement sera débité du compte iTunes au moment de la confirmation de l'achat \nL'abonnement se renouvelle automatiquement, sauf si le renouvellement automatique est désactivé au moins 24 heures avant la fin de la période en cours \nLe compte sera débité pour le renouvellement dans les 24 heures précédant la fin de la période en cours. Les frais sont indiqués tels qu'ils figurent sur l'écran d'achat de l'application. \nLes offres peuvent être gérés par l'utilisateur et le renouvellement automatique peut être désactivé en allant dans les paramètres du compte de l'utilisateur après l'achat \nToute partie non utilisée d'une période d'essai gratuite, si elle est offerte, sera perdue lorsque l'utilisateur achètera un abonnement à cette publication, le cas échéant \nPolitique de confidentialité : https://mybilloapp.com/policy\nConditions d'utilisation:";
+"PackagesPolicyTextBillo" = "Les abonnements sont renouvelés chaque mois\nLe paiement sera débité du compte iTunes au moment de la confirmation de l'achat \nL'abonnement se renouvelle automatiquement, sauf si le renouvellement automatique est désactivé au moins 24 heures avant la fin de la période en cours \nLe compte sera débité pour le renouvellement dans les 24 heures précédant la fin de la période en cours. Les frais sont indiqués tels qu'ils figurent sur l'écran d'achat de l'application. \nLes offres peuvent être gérés par l'utilisateur et le renouvellement automatique peut être désactivé en allant dans les paramètres du compte de l'utilisateur après l'achat \nToute partie non utilisée d'une période d'essai gratuite, si elle est offerte, sera perdue lorsque l'utilisateur achètera un abonnement à cette publication, le cas échéant \nPolitique de confidentialité : https://billostorage.com/policy\nConditions d'utilisation:";
 "unhide_items_popup_text" = "Le(s) élément(s) sélectionné(s) ne sera (seront) pas caché(s) et sera (seront) déplacé(s) vers les dossiers précédents.";
 "unhide_albums_popup_text" = "Le ou les albums sélectionnés ne seront pas cachés et seront replacés dans les dossiers précédents.";
 "move_to_trash_hidden_albums_confirmation_popup_text" = "Le ou les albums sélectionnés seront mis à la poubelle. Vous pouvez les restaurer dans un délai de 30 jours. Veuillez vider votre poubelle en cas de besoin pour libérer de l'espace.";
@@ -1776,3 +1776,31 @@ Please check I have understood the intended command here*/
 "offer_store_apple_store" = "Apple Store";
 "offer_store_google_store" = "Google Play Store";
 "remove_albums_success_message" = "Album(s) supprimé(s)";
+"hide_album_action_sheet" = "";
+"sign_up_password_rules" = "";
+"documents_album_card_title" = "";
+"documents_album_card_description" = "";
+"documents_album_card_hide_button" = "";
+"documents_album_card_view_button" = "";
+"snackbar_ok" = "";
+"snackbar_trash_bin" = "";
+"snackbar_hidden_bin" = "";
+"analyze_history_delete_success" = "";
+"added_to_favorites_message" = "";
+"removed_from_favorites" = "";
+"added_to_album" = "";
+"downloaded_files" = "";
+"edit_saved" = "";
+"files_moved" = "";
+"success_remove_passcode" = "";
+"added_to_favorites_from_lifebox" = "";
+"edit_security_question_success" = "";
+"set_security_question_success" = "";
+"import_from_instagram_started" = "";
+"import_from_facebook_started" = "";
+"instapick_hashtags_copied" = "";
+"create_story_selection_limit" = "";
+"etk_html" = "<p><b> COMMERCIAL ELECTRONIC MESSAGE AND DATA CONSENT</b></p>\n\n<p>I hereby consent to allow Lifecell Bulut Çözümleri A.Ş., Turkcell İletişim Hizmetleri A.Ş. and <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz\">Group Companies</a> to process my personal data and share them with the parties listed in the Permission Policy and send me commercial electronic messages in line with the “Permission Policy” <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">available here</a> unless requested otherwise by me as per Law No. 6563 and other applicable regulations for the purposes of informing me on discounts, deals and special offers, which are in accordance with my needs and preferences regarding the products and services of these companies. I acknowledge that I can revoke my consent for processing/sharing of my personal data or receiving commercial electronic mails and detailed information on the scope and revocation of such consent are available within the scope of the <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">\"Permission Policy\"</a>.   </p> \n";
+"free_up_space_alert_title" = "";
+"free_up_space_no_duplicates" = "";
+"free_up_space_in_progress" = "";
