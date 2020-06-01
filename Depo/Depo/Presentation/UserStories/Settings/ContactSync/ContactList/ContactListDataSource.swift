@@ -10,6 +10,7 @@ import Foundation
 
 protocol ContactListDataSourceDelegate: class {
     func needLoadNextItemsPage()
+    func didSelectContact(_ contact: RemoteContact)
 }
 
 private typealias InsertItemResult = (indexPath: IndexPath?, section: Int?)
@@ -38,7 +39,6 @@ final class ContactListDataSource: NSObject {
         tableView.delegate = self
         tableView.register(nibCell: ContactListCell.self)
         tableView.separatorStyle = .none
-        tableView.allowsSelection = false
         tableView.sectionHeaderHeight = 48
         tableView.rowHeight = 52
     }
@@ -214,5 +214,15 @@ extension ContactListDataSource: UITableViewDelegate {
         if isLastCell {
             delegate?.needLoadNextItemsPage()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        guard let contact = item(for: indexPath) else {
+            return
+        }
+        
+        delegate?.didSelectContact(contact)
     }
 }

@@ -22,6 +22,7 @@ final class ContactListViewController: BaseViewController, NibInit {
     private lazy var dataSource = ContactListDataSource(tableView: tableView, delegate: self)
     private lazy var contactsSyncService = ContactSyncApiService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var router = RouterVC()
     
     private var backUpInfo: ContactSync.SyncResponse?
     
@@ -49,7 +50,7 @@ final class ContactListViewController: BaseViewController, NibInit {
 
         setupNavigationBar()
         setupRefreshControl()
-        loadContacts()
+        reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -269,6 +270,11 @@ private extension ContactListViewController {
 extension ContactListViewController: ContactListDataSourceDelegate {
     func needLoadNextItemsPage() {
         loadContacts()
+    }
+    
+    func didSelectContact(_ contact: RemoteContact) {
+        let controller = router.contactDetail(with: contact)
+        router.pushViewController(viewController: controller)
     }
 }
 
