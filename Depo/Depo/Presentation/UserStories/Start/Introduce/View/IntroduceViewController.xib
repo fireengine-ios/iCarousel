@@ -44,13 +44,13 @@
                                     <variation key="widthClass=regular" image="Logo-Ipad"/>
                                 </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXL-QX-kgV">
-                                    <rect key="frame" x="0.0" y="113" width="320" height="250"/>
+                                    <rect key="frame" x="0.0" y="113" width="320" height="250.5"/>
                                     <subviews>
                                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2P-V1-ajw">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="250.5"/>
                                         </scrollView>
                                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="uNr-bn-y2s">
-                                            <rect key="frame" x="8" y="205" width="304" height="37"/>
+                                            <rect key="frame" x="8" y="205.5" width="304" height="37"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="37" id="FPr-6s-iL3"/>
                                             </constraints>
@@ -83,16 +83,17 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcF-fe-XaY">
-                                    <rect key="frame" x="139" y="463" width="42" height="21"/>
+                                    <rect key="frame" x="139" y="463.5" width="42" height="20.5"/>
                                     <constraints>
                                         <constraint firstAttribute="width" priority="250" constant="100" id="92Z-NV-OTJ"/>
+                                        <constraint firstAttribute="height" priority="250" constant="15" id="S0o-O1-af3"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N29-gd-nz6" customClass="RoundedInsetsButton" customModule="TC_Depo_LifeTech_Bundle" customModuleProvider="target">
-                                    <rect key="frame" x="30" y="393" width="260" height="46"/>
+                                    <rect key="frame" x="30" y="393.5" width="260" height="46"/>
                                     <constraints>
                                         <constraint firstAttribute="width" priority="750" constant="260" id="0QQ-jr-zZ0">
                                             <variation key="widthClass=regular" constant="348"/>

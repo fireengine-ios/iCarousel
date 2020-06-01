@@ -389,7 +389,6 @@
 "Please enter a valid GSM number." = "Please enter a valid phone number.";
 "Please enter a valid email address." = "Please enter a valid e-mail address.";
 "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "You are finalizing the process with %@ e-mail address. Don’t forget to verify it with the verification code we sent to your email. We will be using this e-mail for password operations and notifications.";
-"already_have_account_title" = "Already have an account?";
 
 /*???*/
 "E-mail Usage Information" = "E-mail Usage Information";

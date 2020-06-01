@@ -334,7 +334,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     @objc private func closeDetailView() {
-        
+        bottomDetailView?.hideKeyboard()
         viewState = .collapsed
         UIView.animate(withDuration: 1, delay: 0,
                        usingSpringWithDamping: 0.8,
