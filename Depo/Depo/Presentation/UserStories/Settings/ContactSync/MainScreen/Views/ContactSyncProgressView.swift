@@ -25,13 +25,19 @@ final class ContactSyncProgressView: UIView, NibInit {
             newValue.textColor = ColorConstants.lighterGray
         }
     }
-    @IBOutlet private weak var loader: GradientLoadingIndicator! {
+    @IBOutlet private weak var loader: CircleLoaderView! {
         willSet {
             newValue.resetProgress()
+            newValue.set(lineColor: ColorConstants.navy)
+            newValue.set(lineBackgroundColor: ColorConstants.lighterGray)
         }
     }
     
+    func reset() {
+        loader.resetProgress()
+    }
+    
     func update(progress: Int) {
-        loader.progress = CGFloat(progress)
+        loader.set(progressRatio: Float(progress) / 100)
     }
 }
