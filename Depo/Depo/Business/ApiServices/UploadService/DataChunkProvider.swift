@@ -41,7 +41,10 @@ final class DataChunkProviderFactory {
             assertionFailure(message)
             return nil
         }
-
+        
+        #if MAIN_APP
+        debugLog("resumable_upload: stream chunk provider")
+        #endif
         return DataChunkProviderStream(stream: fileStream, fileSize: fileSize, bufferCapacity: bufferCapacity)
     }
     
@@ -51,7 +54,9 @@ final class DataChunkProviderFactory {
             assertionFailure(TextConstants.syncFourGbVideo)
             return nil
         }
-        
+        #if MAIN_APP
+        debugLog("resumable_upload: data chunk provider")
+        #endif
         return DataChunkProviderData(data: source, bufferCapacity: bufferCapacity)
     }
     
@@ -64,6 +69,14 @@ protocol DataChunkProvider {
     
     func nextChunk() -> DataChunk?
     func nextChunk(skipping: Int) -> DataChunk?
+}
+
+extension DataChunkProvider {
+    func mainAppDebugLog(message: String) {
+        #if MAIN_APP
+        debugLog(message)
+        #endif
+    }
 }
 
 
@@ -87,10 +100,12 @@ private final class DataChunkProviderStream: DataChunkProvider {
     
     func nextChunk(skipping: Int) -> DataChunk? {
         guard streamIsAvailable() else {
+            mainAppDebugLog(message: "Stream is unavailable")
             return nil
         }
 
         guard fileStream.hasBytesAvailable else {
+            mainAppDebugLog(message: "No bytes unavailable")
             return nil
         }
         
@@ -125,16 +140,12 @@ private final class DataChunkProviderStream: DataChunkProvider {
     
     func nextChunk() -> DataChunk? {
         guard streamIsAvailable() else {
-            #if MAIN_APP
-            debugLog("chunker: streamIsAvailable == false")
-            #endif
+            mainAppDebugLog(message: "chunker: streamIsAvailable == false")
             return nil
         }
 
         guard fileStream.hasBytesAvailable else {
-            #if MAIN_APP
-            debugLog("chunker: hasBytesAvailable == false")
-            #endif
+            mainAppDebugLog(message: "chunker: hasBytesAvailable == false")
             return nil
         }
         
@@ -148,9 +159,7 @@ private final class DataChunkProviderStream: DataChunkProvider {
         guard chunkSize > 0 else {
             if chunkSize < 0 {
                 let message = "chunker: error while reading from stream"
-                #if MAIN_APP
-                debugLog(message)
-                #endif
+                mainAppDebugLog(message: message)
                 assertionFailure(message)
             }
             return nil
