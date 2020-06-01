@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ContactListHeaderDelegate: class {
-    func startSearch(query: String?)
+    func search(query: String?)
     func cancelSearch()
 }
 
@@ -102,13 +102,18 @@ final class ContactListHeader: UIView, NibInit {
 //MARK: - UISearchBarDelegate
 
 extension ContactListHeader: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        delegate?.search(query: searchText)
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        delegate?.startSearch(query: searchBar.text)
         searchBar.resignFirstResponder()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         delegate?.cancelSearch()
+        searchBar.text = ""
         searchBar.resignFirstResponder()
     }
     

@@ -488,6 +488,7 @@
 
 "contact_phase2_delete_contacts_confirm_title" = "Delete Contacts?";
 "contact_phase2_delete_contacts_confirm_message" = "These contacts will be deleted from your lifebox. Are you sure you want to delete?";
+"contact_phase2_delete_all_contacts_success_message" = "You delete all contacts on your list. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
 /*free up spce card or storage full card? which one?*/
 "You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your lifebox quota! It’s a great time to upgrade your storage.";

@@ -44,9 +44,7 @@ final class ContactListCell: UITableViewCell {
     
     func configure(with contact: RemoteContact) {
         nameLabel.text = contact.name
-//        phoneLabel.text = contact.
-    
-        let letters = contact.name.split(separator: " ").prefix(2).compactMap { $0.first?.uppercased() }
-        letterLabel.text = letters.joined()
+        phoneLabel.text = contact.phone
+        letterLabel.text = contact.initials
     }
 }

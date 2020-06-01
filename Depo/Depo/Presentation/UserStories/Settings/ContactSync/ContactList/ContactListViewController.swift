@@ -20,7 +20,7 @@ final class ContactListViewController: BaseViewController, NibInit {
     }
     
     private lazy var dataSource = ContactListDataSource(tableView: tableView, delegate: self)
-    private lazy var contactsSyncService = ContactsSyncService()
+    private lazy var contactsSyncService = ContactSyncApiService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     private var backUpInfo: ContactSync.SyncResponse?
@@ -39,6 +39,10 @@ final class ContactListViewController: BaseViewController, NibInit {
     }
     
     //MARK: - View lifecycle
+    
+    deinit {
+        currentTask?.cancel()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,35 +131,32 @@ private extension ContactListViewController {
             tableView.tableFooterView = indicator
         }
         
-        let successHandler: ContactsOperation = { [weak self] response in
-            guard let self = self else {
-                return
-            }
-            
-            self.numberOfPages = response.numberOfPages
-            self.currentPage += 1
-            self.dataSource.append(newContacts: response.contacts) { [weak self] in
-                self?.hideSpinner()
-            }
-            self.isLoadingData = false
-            self.tableView.tableFooterView = nil
-        }
-        
-        let failureHandler: FailResponse = { [weak self] error in
+        let handler: ContactSyncResponseHandler = { [weak self] result in
             guard let self = self else {
                 return
             }
             
             self.isLoadingData = false
-            self.hideSpinner()
             self.tableView.tableFooterView = nil
-            UIApplication.showErrorAlert(message: error.description)
+            
+            switch result {
+            case .success(let response):
+                self.numberOfPages = response.numberOfPages
+               self.currentPage += 1
+               self.dataSource.append(newContacts: response.contacts) { [weak self] in
+                   self?.hideSpinner()
+               }
+            
+            case .failed(let error):
+                self.hideSpinner()
+                UIApplication.showErrorAlert(message: error.description)
+            }
         }
         
         if let query = lastQuery {
-            contactsSyncService.searchRemoteContacts(with: query, page: currentPage, success: successHandler, fail: failureHandler)
+            currentTask = contactsSyncService.searchContacts(query: query, page: currentPage, handler: handler)
         } else {
-            contactsSyncService.getContacts(with: currentPage, success: successHandler, fail: failureHandler)
+            currentTask = contactsSyncService.getContacts(page: currentPage, handler: handler)
         }
     }
     
@@ -164,7 +165,23 @@ private extension ContactListViewController {
     }
     
     func startDeleteAll() {
-        //TODO:
+        showSpinner()
+        
+        currentTask = contactsSyncService.deleteAllContacts { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            self.hideSpinner()
+            
+            switch result {
+            case .success(_):
+                self.navigationItem.rightBarButtonItem = nil
+                self.showDeleteResultView()
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
     }
 }
 
@@ -172,7 +189,7 @@ private extension ContactListViewController {
 
 private extension ContactListViewController {
     
-    private func showMoreActionSheet() {
+    func showMoreActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let restoreAction = UIAlertAction(title: TextConstants.contactListRestore, style: .default) { [weak self] _ in
             self?.showRestorePopup()
@@ -190,7 +207,7 @@ private extension ContactListViewController {
         present(actionSheet, animated: true)
     }
     
-    private func showRestorePopup() {
+    func showRestorePopup() {
         let vc = PopUpController.with(title: TextConstants.restoreContactsConfirmTitle,
                                       message: TextConstants.restoreContactsConfirmMessage,
                                       image: .question,
@@ -203,7 +220,7 @@ private extension ContactListViewController {
         present(vc, animated: false)
     }
     
-    private func showDeleteAllPopup() {
+    func showDeleteAllPopup() {
         let vc = PopUpController.with(title: TextConstants.deleteContactsConfirmTitle,
                                       message: TextConstants.deleteContactsConfirmMessage,
                                       image: .question,
@@ -214,6 +231,36 @@ private extension ContactListViewController {
                                         self?.startDeleteAll()
                                     })
         present(vc, animated: false)
+    }
+    
+    func showBackUpPopup() {
+        let vc = PopUpController.with(title: TextConstants.backUpContactsConfirmTitle,
+                                      message: TextConstants.backUpContactsConfirmMessage,
+                                      image: .question,
+                                      firstButtonTitle: TextConstants.cancel,
+                                      secondButtonTitle: TextConstants.ok,
+                                      secondAction: { [weak self] vc in
+                                        //TODO: need start backup
+//                                        self?.delegate?.backUp(isConfirmed: true)
+                                        vc.close(isFinalStep: false) {
+                                            self?.navigationController?.popViewController(animated: true)
+                                        }
+                                    })
+        present(vc, animated: false)
+    }
+    
+    func showDeleteResultView() {
+        let resultView = ContactsOperationView.with(type: .deleteAllContacts, result: .success)
+        resultView.frame = view.bounds
+        resultView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        view.addSubview(resultView)
+        
+        let backUpCard = BackUpContactsCard.initFromNib()
+        resultView.add(card: backUpCard)
+        
+        backUpCard.backUpHandler = { [weak self] in
+            self?.showBackUpPopup()
+        }
     }
 }
 
@@ -228,7 +275,7 @@ extension ContactListViewController: ContactListDataSourceDelegate {
 //MARK: - ContactListHeaderDelegate
 
 extension ContactListViewController: ContactListHeaderDelegate {
-    func startSearch(query: String?) {
+    func search(query: String?) {
         lastQuery = query
         reloadData()
     }

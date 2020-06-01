@@ -241,6 +241,7 @@ class ContactsSyncService: BaseRequestService {
         }
     }
     
+    //TODO: Need delete API requests
     @discardableResult
     func searchRemoteContacts(with query: String, page: Int, success: ContactsOperation?, fail: FailResponse?) -> URLSessionTask {
         debugLog("ContactsSyncService searchRemoteContacts")
