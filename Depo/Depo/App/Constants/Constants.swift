@@ -656,6 +656,7 @@ struct TextConstants {
     static let contactDetailSectionAddress = NSLocalizedString("contact_phase2_contact_detail_section_address", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactDetailSectionBirthday = NSLocalizedString("contact_phase2_contact_detail_section_birthday", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactDetailSectionNotes = NSLocalizedString("contact_phase2_contact_detail_section_notes", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactDetailNoInfo = NSLocalizedString("contact_phase2_contact_detail_no_info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: Create story Name
     static let createStorySelectAudioButton = NSLocalizedString("Continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

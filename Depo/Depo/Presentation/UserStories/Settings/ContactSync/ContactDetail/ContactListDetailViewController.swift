@@ -58,6 +58,7 @@ final class ContactListDetailViewController: BaseViewController, NibInit {
     
     private func setupTableView() {
         tableView.register(nibCell: ContactDetailCell.self)
+        tableView.register(nibCell: ContactDetailNoInfoCell.self)
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
     }
@@ -103,10 +104,17 @@ final class ContactListDetailViewController: BaseViewController, NibInit {
 extension ContactListDetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if cellsInfo.isEmpty {
+            return 1
+        }
         return cellsInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if cellsInfo.isEmpty {
+            return tableView.dequeue(reusable: ContactDetailNoInfoCell.self, for: indexPath)
+        }
+        
         let cell = tableView.dequeue(reusable: ContactDetailCell.self, for: indexPath)
         cell.configure(with: cellsInfo[indexPath.row])
         return cell
