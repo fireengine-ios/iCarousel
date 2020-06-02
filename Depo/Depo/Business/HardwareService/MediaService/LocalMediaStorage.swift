@@ -775,6 +775,12 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         options.isNetworkAccessAllowed = false
         
         let tmpUrl = Device.tmpFolderUrl(withComponent: name)
+        
+        if FileManager.default.fileExists(atPath: tmpUrl.relativePath) {
+            debugLog("resumable_upload: cleaning tmp at \(tmpUrl.relativePath)")
+            try? FileManager.default.removeItem(at: tmpUrl)
+        }
+        
         PHAssetResourceManager.default().writeData(for: resource, toFile: tmpUrl, options: options) { error in
             guard let error = error else {
                 completion(.success(tmpUrl))
