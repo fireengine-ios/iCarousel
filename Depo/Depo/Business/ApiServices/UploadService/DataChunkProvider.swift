@@ -114,7 +114,8 @@ private final class DataChunkProviderStream: DataChunkProvider {
         }
         
         if skipping > 0 {
-             skip(bytesToSkip: skipping)
+            skip(bytesToSkip: skipping)
+            mainAppDebugLog(message: "chunker: skipped \(skipping) bytes")
         }
         
         return nextChunk()
