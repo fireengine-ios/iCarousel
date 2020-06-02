@@ -1848,5 +1848,6 @@ struct TextConstants {
     static let contactSyncBigCardContacts = NSLocalizedString("contact_phase2_big_card_contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncBigCardSeeContactsButton = NSLocalizedString("contact_phase2_big_card_see_contacts_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncBigCardAutobackupFormat = NSLocalizedString("contact_phase2_big_card_autobackup_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let contactSyncBackupProgressTitle = NSLocalizedString("contact_phase2_backup_progress_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncBackupProgressMessage = NSLocalizedString("contact_phase2_backup_progress_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

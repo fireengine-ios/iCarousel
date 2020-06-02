@@ -34,8 +34,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     }()
     
     private lazy var progressView: ContactSyncProgressView = {
-        let view = ContactSyncProgressView.initFromNib()
-//        view.delegate = self
+        let view = ContactSyncProgressView.setup(title: TextConstants.contactSyncBackupProgressTitle, message: TextConstants.contactSyncBackupProgressMessage)
         return view
     }()
     

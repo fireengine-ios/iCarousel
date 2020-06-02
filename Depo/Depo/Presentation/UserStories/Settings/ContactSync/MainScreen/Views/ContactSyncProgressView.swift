@@ -10,6 +10,14 @@ import UIKit
 
 final class ContactSyncProgressView: UIView, NibInit {
     
+    static func setup(title: String, message: String) -> ContactSyncProgressView {
+        let view = ContactSyncProgressView.initFromNib()
+        view.title.text = title
+        view.message.text = message
+        
+        return view
+    }
+    
     @IBOutlet private weak var title: UILabel! {
         willSet {
             newValue.textAlignment = .center
@@ -21,8 +29,10 @@ final class ContactSyncProgressView: UIView, NibInit {
     @IBOutlet private weak var message: UILabel! {
         willSet {
             newValue.textAlignment = .center
+            newValue.numberOfLines = 0
             newValue.font = .TurkcellSaturaFont(size: 16.0)
-            newValue.textColor = ColorConstants.lighterGray
+            newValue.textColor = ColorConstants.lightGray
+            newValue.adjustsFontSizeToFitWidth()
         }
     }
     @IBOutlet private weak var loader: CircleLoaderView! {
@@ -38,6 +48,6 @@ final class ContactSyncProgressView: UIView, NibInit {
     }
     
     func update(progress: Int) {
-        loader.set(progressRatio: Float(progress) / 100)
+        loader.set(progress: progress)
     }
 }
