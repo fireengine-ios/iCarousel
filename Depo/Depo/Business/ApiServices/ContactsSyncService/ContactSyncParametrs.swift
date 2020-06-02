@@ -39,9 +39,9 @@ class SearchContacts: BaseRequestParametrs {
 }
 
 class DeleteContacts: BaseRequestParametrs {
-    let contactIDs: [String]
+    let contactIDs: [Int]
     
-    init(contactIDs: [String]) {
+    init(contactIDs: [Int]) {
         self.contactIDs = contactIDs
         super.init()
     }

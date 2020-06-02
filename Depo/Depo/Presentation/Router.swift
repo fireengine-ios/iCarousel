@@ -456,6 +456,14 @@ class RouterVC: NSObject {
         return DeleteDuplicatesViewController.with(contacts: analyzeResponse, delegate: delegate)
     }
     
+    func contactList(backUpInfo: ContactSync.SyncResponse) -> UIViewController {
+        return ContactListViewController.with(backUpInfo: backUpInfo)
+    }
+    
+    func contactDetail(with contact: RemoteContact) -> UIViewController {
+        return ContactListDetailViewController.with(contact: contact)
+    }
+    
     // MARK: Terms
     
     func termsAndServicesScreen(login: Bool, delegate: RegistrationViewDelegate? = nil, phoneNumber: String?, signUpResponse: SignUpSuccessResponse? = nil, userInfo: RegistrationUserInfoModel? = nil) -> UIViewController {

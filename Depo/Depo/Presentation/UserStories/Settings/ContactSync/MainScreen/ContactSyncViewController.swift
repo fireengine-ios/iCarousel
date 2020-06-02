@@ -148,9 +148,12 @@ extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
 extension ContactSyncViewController: ContactSyncMainViewDelegate {
     
     func showBackups() {
-        //TODO: Open backups screen
-        showSpinner()
-        showRelatedView()
+        guard let info = contactSyncHelper.syncResponse else {
+            return
+        }
+        
+        let contactList = router.contactList(backUpInfo: info)
+        router.pushViewController(viewController: contactList)
     }
     
     func deleteDuplicates() {
