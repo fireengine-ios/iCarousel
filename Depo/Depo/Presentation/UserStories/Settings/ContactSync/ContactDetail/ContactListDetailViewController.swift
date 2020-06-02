@@ -89,10 +89,10 @@ final class ContactListDetailViewController: BaseViewController, NibInit {
 //            cellsInfo.append(birthDateInfo)
 //        }
         
-        if !contact.notes.isEmpty {
-            let notesInfo = ContactDetailInfo(category: .notes, values: [contact.notes])
-            cellsInfo.append(notesInfo)
-        }
+//        if !contact.notes.isEmpty {
+//            let notesInfo = ContactDetailInfo(category: .notes, values: [contact.notes])
+//            cellsInfo.append(notesInfo)
+//        }
         
         tableView.reloadData()
     }
