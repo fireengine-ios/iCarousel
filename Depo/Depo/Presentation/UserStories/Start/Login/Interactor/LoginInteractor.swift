@@ -339,7 +339,8 @@ class LoginInteractor: LoginInteractorInput {
         let telephonyService = CoreTelephonyService()
         var phoneCode = telephonyService.callingCountryCode()
         
-        if phoneCode == "" || UIDevice.current.modelName == "iPad Pro 12.9 Inch 2. Generation" || UIDevice.current.modelName == "iPad Pro 10.5 Inch" || UIDevice.current.modelName == "iPad Pro 9.7 Inch"{
+        let names = ["iPad Pro 12.9 Inch 2. Generation", "iPad Pro 10.5 Inch", "iPad Pro 9.7 Inch"]
+        if phoneCode == "" || names.contains(UIDevice.current.modelName) {
             phoneCode = telephonyService.countryCodeByLang()
         }
         

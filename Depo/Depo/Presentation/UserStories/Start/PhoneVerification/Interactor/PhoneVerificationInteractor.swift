@@ -56,8 +56,9 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
         let verificationProperties = ResendVerificationSMS(refreshToken: dataStorage.signUpResponse.referenceToken ?? "",
                                                           eulaId: dataStorage.signUpResponse.eulaId ?? 0,
                                                           processPersonalData: true,
-                                                          etkAuth: dataStorage.signUpResponse.etkAuth ?? false,
-                                                          globalPermAuth: dataStorage.signUpResponse.globalPermAuth ?? false)
+                                                          etkAuth: dataStorage.signUpResponse.etkAuth,
+                                                          globalPermAuth: dataStorage.signUpResponse.globalPermAuth ?? false,
+                                                          kvkkAuth: dataStorage.signUpResponse.kvkkAuth)
         attempts = 0
         authenticationService.resendVerificationSMS(resendVerification: verificationProperties,
                                                     sucess: { [weak self] response in
