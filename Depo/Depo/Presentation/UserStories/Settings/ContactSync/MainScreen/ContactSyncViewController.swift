@@ -484,7 +484,7 @@ private class ContactSyncHelper {
     
     func analyze() {
         userHasPermissionFor(type: .deleteDublicate) { [weak self] hasPermission in
-            guard !hasPermission else {
+            guard hasPermission else {
                 self?.delegate?.didFailed(error: .notPremiumUser)
                 return
             }
