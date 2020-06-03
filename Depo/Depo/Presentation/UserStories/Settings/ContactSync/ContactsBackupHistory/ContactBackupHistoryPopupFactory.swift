@@ -13,13 +13,38 @@ enum ContactBackupHistoryPopupFactory {
     case delete
     case restore
     
-    func createPopup(okHandler: @escaping PopUpButtonHandler) -> (UIViewController) {
+    private var title: String {
         switch self {
         case .delete:
-            return PopUpController.with(title: TextConstants.contactBackupHistoryDeletePopUpTitle, message: TextConstants.contactBackupHistoryDeletePopUpMessage, image: .delete, firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.ok, secondAction: okHandler)
+            return TextConstants.contactBackupHistoryDeletePopUpTitle
         case .restore:
-            return PopUpController.with(title: TextConstants.contactBackupHistoryRestorePopUpTitle, message: TextConstants.contactBackupHistoryRestorePopUpMessage, image: .restore, firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.ok, secondAction: okHandler)
+            return TextConstants.contactBackupHistoryRestorePopUpTitle
         }
+    }
+    
+    private var message: String {
+        switch self {
+        case .delete:
+            return TextConstants.contactBackupHistoryDeletePopUpMessage
+        case .restore:
+            return TextConstants.contactBackupHistoryRestorePopUpMessage
+        }
+    }
+    
+    private var image: PopUpImage {
+        switch self {
+        case .delete, .restore:
+            return .question
+        }
+    }
+    
+    func createPopup(okHandler: @escaping PopUpButtonHandler) -> (UIViewController) {
+        return PopUpController.with(title: title,
+                                    message: message,
+                                    image: image,
+                                    firstButtonTitle: TextConstants.cancel,
+                                    secondButtonTitle: TextConstants.ok,
+                                    secondAction: okHandler)
     }
 }
 

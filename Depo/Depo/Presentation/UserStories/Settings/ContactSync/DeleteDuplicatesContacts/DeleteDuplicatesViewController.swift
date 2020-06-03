@@ -100,7 +100,7 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     // MARK: - Actions
     
     @IBAction private func onDeleteAllTapped(_ sender: Any) {
-        showDeletePopup()
+        showPopup(type: .deleteDuplicates)
     }
     
     private func deleteDuplicates() {
@@ -118,7 +118,7 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         resultView?.add(card: backUpCard)
         
         backUpCard.backUpHandler = { [weak self] in
-            self?.showBackUpPopup()
+            self?.showPopup(type: .backup)
         }
     }
     
@@ -156,53 +156,30 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         }
     }
     
-    private func showDeletePopup() {
-        let vc = PopUpController.with(title: TextConstants.deleteDuplicatesConfirmTitle,
-                                      message: TextConstants.deleteDuplicatesConfirmMessage,
-                                      image: .question,
-                                      firstButtonTitle: TextConstants.cancel,
-                                      secondButtonTitle: TextConstants.ok,
-                                      secondAction: { [weak self] vc in
-                                        vc.close()
-                                        self?.deleteDuplicates()
-                                    })
-        present(vc, animated: false)
-    }
-    
-    private func showBackUpPopup() {
-        let vc = PopUpController.with(title: TextConstants.backUpContactsConfirmTitle,
-                                      message: TextConstants.backUpContactsConfirmMessage,
-                                      image: .question,
-                                      firstButtonTitle: TextConstants.cancel,
-                                      secondButtonTitle: TextConstants.ok,
-                                      secondAction: { [weak self] vc in
-                                        self?.delegate?.backUp(isConfirmed: true)
-                                        
-                                        vc.close(isFinalStep: false) {
-                                            self?.navigationController?.popViewController(animated: true)
-                                        }
-                                    })
-        present(vc, animated: false)
-    }
-    
-    private func showPremiumPopup() {
-        let popup = PopUpController.with(title: TextConstants.contactSyncConfirmPremiumPopupTitle,
-                                         message: TextConstants.contactSyncConfirmPremiumPopupText,
-                                         image: .none,
-                                         firstButtonTitle: TextConstants.cancel,
-                                         secondButtonTitle: TextConstants.ok,
-                                         firstAction: { vc in
-                                            vc.close()
-                                         }, secondAction: { vc in
-                                            vc.close(isFinalStep: false) { [weak self] in
-                                                guard let self = self else {
-                                                    return
-                                                }
-                                                
-                                                let controller = self.router.premium(source: .contactSync)
-                                                self.router.pushViewController(viewController: controller)
-                                            }
-                                         })
+    private func showPopup(type: ContactSyncPopupType) {
+        let handler: VoidHandler = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            switch type {
+            case .backup:
+                self.delegate?.backUp(isConfirmed: true)
+                self.navigationController?.popViewController(animated: true)
+            case .deleteDuplicates:
+                self.deleteDuplicates()
+            case .premium:
+                let controller = self.router.premium(source: .contactSync)
+                self.router.pushViewController(viewController: controller)
+            default:
+                break
+            }
+        }
+
+        let popup = ContactSyncPopupFactory.createPopup(type: type) { vc in
+            vc.close(isFinalStep: false, completion: handler)
+        }
+        
         present(popup, animated: true)
     }
 }
