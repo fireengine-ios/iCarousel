@@ -202,6 +202,7 @@ struct TextConstants {
     static let contactBackupHistoryDeletePopUpTitle = NSLocalizedString("contact_phase2_delete_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactBackupHistoryRestorePopUpMessage = NSLocalizedString("contact_phase2_restore_popup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactBackupHistoryDeletePopUpMessage = NSLocalizedString("contact_phase2_delete_popup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactBackupHistoryCellTitle = NSLocalizedString("contact_phase2_history_cell_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlert = NSLocalizedString("Error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlerTitleBackupAlreadyExist = NSLocalizedString("Overwrite backup?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlertTextNoDuplicatedContacts = NSLocalizedString("You have no duplicated contacts!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

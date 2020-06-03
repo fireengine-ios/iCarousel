@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias ContactBuckupItem = String
+typealias ContactBuckupItem = ContactSync.SyncResponse
 
 protocol ContuctBackupHistoryDataManagerProtocol: class {
     func appendItemsForPresent(items: [ContactBuckupItem])
@@ -68,6 +68,17 @@ final class ContuctBackupHistoryDataManager: NSObject, ContuctBackupHistoryDataM
             }
         }
     }
+    
+    private func prepareInfoForCellPresenting(for item: ContactBuckupItem) -> (title: String, description: String) {
+        guard let date = item.date else {
+            assertionFailure()
+            return (title: TextConstants.contactBackupHistoryCellTitle, description: "")
+        }
+        
+        let title = "\(TextConstants.contactBackupHistoryCellTitle)_\(String(describing: date.getDateInFormat(format: "dd-MM-yyyy_HH-mm-ss")))"
+        let description = "\(item.totalNumberOfContacts) \(TextConstants.contactBackupHistoryCellTitle) |  \(String(describing: date.getDateInFormat(format: "dd MMM yyyy")))"
+        return (title: title, description: description)
+    }
 }
 
 extension ContuctBackupHistoryDataManager: UITableViewDataSource {
@@ -89,8 +100,8 @@ extension ContuctBackupHistoryDataManager: UITableViewDelegate {
             assertionFailure()
             return
         }
-        let item = contactBackups[indexPath.row]
-        cell.setupCell(title: item, detail: item)
+        let cellInfo = prepareInfoForCellPresenting(for: contactBackups[indexPath.row])
+        cell.setupCell(title: cellInfo.title, detail: cellInfo.description)
         cell.delegate = self
         manageSelectionStateForCell(cell, indexPath: indexPath, isWillDisplayFunc: true)
     }
