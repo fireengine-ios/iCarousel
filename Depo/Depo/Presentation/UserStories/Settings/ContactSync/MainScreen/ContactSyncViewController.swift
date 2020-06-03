@@ -603,6 +603,22 @@ private class ContactSyncHelper {
             }, errorCallback: { [weak self] errorType, opertionType in
                 self?.analyticsHelper.trackOperationFailure(type: type)
                 
+                switch errorType {
+                case .remoteServerError:
+                    break //fullscreen
+                case .networkError:
+                    SnackbarManager.shared.show(type: .action, message: "asd")
+                case .internalError
+                    break //fullscreen
+                case .accessDenied:
+                    break //show popup with settings link
+                case .depoError:
+                    break
+//                    Currently, we handle this error during restore operation. Please continue to use same flow. Please replace the popup with this:
+//                    https://zpl.io/bAJM65e, https://zpl.io/VQXwp7P
+                default:
+                    break
+                }
                 debugLog("contactsSyncService.executeOperation errorCallback: \(errorType)")
                 
                 UIApplication.setIdleTimerDisabled(false)
