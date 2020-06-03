@@ -40,42 +40,23 @@ extension NetmeraEvents.Actions {
         private let kSignupKey = "ylx"
         
         @objc var status = ""
+        @objc var errorType = ""
         
-        convenience init(status: NetmeraEventValues.GeneralStatus) {
+        convenience init(status: NetmeraEventValues.GeneralStatus, errorType: String? = nil) {
             self.init()
             self.status = status.text
+            self.errorType = errorType ?? ""
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
             return [
                 "ea" : #keyPath(status),
+                "eb" : #keyPath(errorType),
             ]
         }
         
         override var eventKey : String {
             return kSignupKey
-        }
-    }
-    
-    final class SignUpError: NetmeraEvent {
-        
-        private let kSignUpErrorKey = "errorType"
-        
-        @objc var errorType = ""
-        
-        convenience init(errorType: String) {
-            self.init()
-            self.errorType = errorType
-        }
-        
-        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
-            return [
-                "ea" : #keyPath(errorType),
-            ]
-        }
-        
-        override var eventKey : String {
-            return kSignUpErrorKey
         }
     }
     
