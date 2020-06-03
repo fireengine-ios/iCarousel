@@ -33,8 +33,14 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         return view
     }()
     
-    private lazy var progressView: ContactSyncProgressView = {
+    private lazy var backupProgressView: ContactSyncProgressView = {
         let view = ContactSyncProgressView.setup(title: TextConstants.contactSyncBackupProgressTitle, message: TextConstants.contactSyncBackupProgressMessage)
+        return view
+    }()
+    
+    private lazy var analyzeProgressView: ContactSyncAnalyzeProgressView = {
+        let view = ContactSyncAnalyzeProgressView.initFromNib()
+        view.delegate = self
         return view
     }()
     
@@ -119,6 +125,12 @@ final class ContactSyncViewController: BaseViewController, NibInit {
 
 //MARK:- protocols extensions
 
+extension ContactSyncViewController: ContactSyncAnalyzeProgressViewDelegate {
+    func cancelAnalyze() {
+        contactSyncHelper.cancelAnalyze()
+    }
+}
+
 extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
     func backUp(isConfirmed: Bool) {
         if isConfirmed {
@@ -129,6 +141,9 @@ extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
     }
     
     private func startBackUp() {
+        analyzeProgressView.reset()
+        backupProgressView.reset()
+        
         showSpinner()
         contactSyncHelper.backup { [weak self] in
             guard let self = self else {
@@ -137,9 +152,6 @@ extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
             
             self.analyticsHelper.trackBackupScreen()
             self.hideSpinner()
-            
-            self.progressView.reset()
-            self.show(view: self.progressView, animated: true)
         }
     }
 }
@@ -157,6 +169,8 @@ extension ContactSyncViewController: ContactSyncMainViewDelegate {
     
     func deleteDuplicates() {
         showSpinner()
+        
+        analyzeProgressView.reset()
         contactSyncHelper.analyze()
     }
     
@@ -216,12 +230,18 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
         }
     }
     
-    func progress(progress: Int, for operationType: SYNCMode) {
-        if operationType == .backup {
-             progressView.update(progress: progress)
+    func progress(progress: Int, for operationType: SyncOperationType) {
+        switch operationType {
+            case .backup:
+                show(view: backupProgressView, animated: true)
+                backupProgressView.update(progress: progress)
+            case .analyze:
+                show(view: analyzeProgressView, animated: true)
+                analyzeProgressView.update(progress: progress)
+            default:
+                showRelatedView()
         }
     }
-
 }
 
 //MARK: - Popups
@@ -286,7 +306,7 @@ extension ContactSyncViewController {
 
 //MARK: - Private classes - helpers
 
-private final class ContentViewAnimator {
+final class ContentViewAnimator {
     
     func showTransition(to newView: UIView, on contentView: UIView, animated: Bool) {
         let currentView = contentView.subviews.first
@@ -410,7 +430,7 @@ protocol ContactSyncHelperDelegate: class {
     func didRestore()
     func didCancelAnalyze()
     func didFailed(error: ContactSyncHelperError)
-    func progress(progress: Int, for operationType: SYNCMode)
+    func progress(progress: Int, for operationType: SyncOperationType)
 }
 
 enum ContactSyncHelperError {
@@ -492,6 +512,7 @@ private class ContactSyncHelper {
     private func startOperation(operationType: SyncOperationType, onStart: @escaping VoidHandler) {
         requestAccess { [weak self] success in
             guard success else {
+                //TODO: show access popup
                 return
             }
             
@@ -562,7 +583,7 @@ private class ContactSyncHelper {
     
     private func checkAnalyze() {
         contactSyncService.analyze(progressCallback: { [weak self] progressPercentage, count, type in
-//            self?.delegate?.progress(progress: progressPercentage, for: .analyze)
+            self?.delegate?.progress(progress: progressPercentage, for: .analyze)
             
         }, successCallback: { [weak self] response in
             debugLog("contactsSyncService.analyze successCallback")
@@ -594,7 +615,7 @@ private class ContactSyncHelper {
 
         // TODO: clear NumericConstants.limitContactsForBackUp
         contactSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, opertionType in
-            self?.delegate?.progress(progress: progressPercentage, for: type)
+            self?.delegate?.progress(progress: progressPercentage, for: (type == .backup ? .backup : .restore))
             
             }, finishCallback: { [weak self] result, operationType in
                 self?.analyticsHelper.trackOperationSuccess(type: type)

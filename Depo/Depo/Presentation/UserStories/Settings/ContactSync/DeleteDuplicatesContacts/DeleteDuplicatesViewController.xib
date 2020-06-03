@@ -8,9 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DuplicatedContactsViewControllerV2" customModule="LifeTech_lifedrive" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeleteDuplicatesViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
                 <outlet property="bottomView" destination="kh1-Pa-u5N" id="Mdd-PK-ezX"/>
+                <outlet property="contentView" destination="5ln-QI-Fxa" id="tRj-hm-iLN"/>
                 <outlet property="deleteAllButton" destination="1kx-de-s0O" id="Xaf-iI-pzc"/>
                 <outlet property="tableView" destination="CCF-W1-1nN" id="uK5-MI-R2U"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="DMh-Gq-APn"/>
@@ -57,13 +58,21 @@
                         <constraint firstItem="1kx-de-s0O" firstAttribute="centerX" secondItem="kh1-Pa-u5N" secondAttribute="centerX" id="whI-aZ-yM0"/>
                     </constraints>
                 </view>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ln-QI-Fxa">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="kh1-Pa-u5N" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="24P-Zw-s6n"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="kh1-Pa-u5N" secondAttribute="bottom" id="9gq-Y2-XMY"/>
+                <constraint firstItem="5ln-QI-Fxa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Aoc-H7-Zbs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kh1-Pa-u5N" secondAttribute="trailing" id="PF6-pY-qie"/>
                 <constraint firstItem="CCF-W1-1nN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="W1I-sc-fDY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="5ln-QI-Fxa" secondAttribute="bottom" id="Zhs-Pq-RNc"/>
+                <constraint firstItem="5ln-QI-Fxa" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="bFl-8g-S0i"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5ln-QI-Fxa" secondAttribute="trailing" id="h2P-pr-TMa"/>
                 <constraint firstItem="CCF-W1-1nN" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="jhg-fU-wb1"/>
                 <constraint firstItem="kh1-Pa-u5N" firstAttribute="top" secondItem="CCF-W1-1nN" secondAttribute="bottom" id="sIM-Yv-EhI"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="CCF-W1-1nN" secondAttribute="trailing" id="yIX-Lk-VEo"/>
