@@ -184,6 +184,7 @@ final class FileInfoView: UIView, FromNib {
     
     // MARK: Private Properties
     
+    private var oldName: String?
     private var fileExtension: String?
     private let formatter = ByteCountFormatter()
     private lazy var dataSource = PeopleSliderDataSource(collectionView: peopleCollectionView, delegate: self)
@@ -256,7 +257,6 @@ final class FileInfoView: UIView, FromNib {
     func setHiddenPeoplePlaceholder(isHidden: Bool) {
         enableFIRStackView.isHidden = isHidden
         peopleCollectionView.isHidden = !isHidden
-        premiumStackView.isHidden = !isHidden
     }
     
     func setHiddenPremiumStackView(isHidden: Bool) {
@@ -323,7 +323,12 @@ final class FileInfoView: UIView, FromNib {
     }
     
     func hideKeyboard() {
-        fileNameTextField.resignFirstResponder()
+        changeEditStatus(false)
+        fileNameTextField.isUserInteractionEnabled = false
+        if let name = oldName, !name.isEmpty {
+            fileNameTextField.text = oldName
+        }
+        showValidateNameSuccess()
     }
     
     // MARK: Private Methods
@@ -342,10 +347,9 @@ final class FileInfoView: UIView, FromNib {
     }
     
     private func setupEditableState(for item: BaseDataSourceItem) {
-        if item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum {
-            fileNameTextField.isEnabled = false
-            editNameButton.isHidden = true
-        }
+        let isHidden = item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum
+            fileNameTextField.isEnabled = !isHidden
+            editNameButton.isHidden = isHidden
     }
     
     private func resetUI() {
@@ -394,12 +398,14 @@ final class FileInfoView: UIView, FromNib {
         changeEditStatus(true)
         fileNameTextField.isUserInteractionEnabled = true
         fileNameTextField.becomeFirstResponder()
+        oldName = fileNameTextField.text
     }
     
     @IBAction private func onCancelRenamingDidTap() {
         changeEditStatus(false)
-        showValidateNameSuccess()
         fileNameTextField.isUserInteractionEnabled = false
+        fileNameTextField.text = oldName
+        showValidateNameSuccess()
     }
     
     @IBAction private func onEnableTapped(_ sender: Any) {
