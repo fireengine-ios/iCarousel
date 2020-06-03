@@ -13,8 +13,18 @@ extension UISearchBar {
         /// firstSubview doesn't work because of UITextFieldClearButton
         /// https://stackoverflow.com/a/54533194
         
-        if let cancelButton = value(forKey: "cancelButton") as? UIButton {
-            cancelButton.isEnabled = true
+        cancelButton?.isEnabled = true
+    }
+    
+    var textField: UITextField? {
+        if #available(iOS 13.0, *) {
+            return searchTextField
+        } else {
+            return value(forKey: "searchField") as? UITextField
         }
+    }
+    
+    var cancelButton: UIButton? {
+        return value(forKey: "cancelButton") as? UIButton
     }
 }

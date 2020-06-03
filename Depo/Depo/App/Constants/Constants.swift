@@ -637,6 +637,27 @@ struct TextConstants {
     static let backUpContactsConfirmTitle = NSLocalizedString("contact_phase2_back_up_contacts_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let backUpContactsConfirmMessage = NSLocalizedString("contact_phase2_back_up_contacts_confirm_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let contactListNavBarTitle = NSLocalizedString("contact_phase2_contact_list_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactListTitle = NSLocalizedString("contact_phase2_contact_list_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactListInfo = NSLocalizedString("contact_phase2_contact_list_info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactListRestore = NSLocalizedString("contact_phase2_contact_list_restore", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactListDeleteAll = NSLocalizedString("contact_phase2_contact_list_delete_all", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let restoreContactsConfirmTitle = NSLocalizedString("contact_phase2_restore_contacts_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreContactsConfirmMessage = NSLocalizedString("contact_phase2_restore_contacts_confirm_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let deleteContactsConfirmTitle = NSLocalizedString("contact_phase2_delete_contacts_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteContactsConfirmMessage = NSLocalizedString("contact_phase2_delete_contacts_confirm_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteAllContactsSuccessMessage = NSLocalizedString("contact_phase2_delete_all_contacts_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let contactDetailNavBarTitle = NSLocalizedString("contact_phase2_contact_detail_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactDetailSectionPhone = NSLocalizedString("contact_phase2_contact_detail_section_phone", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactDetailSectionEmail = NSLocalizedString("contact_phase2_contact_detail_section_email", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactDetailSectionAddress = NSLocalizedString("contact_phase2_contact_detail_section_address", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactDetailSectionBirthday = NSLocalizedString("contact_phase2_contact_detail_section_birthday", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactDetailSectionNotes = NSLocalizedString("contact_phase2_contact_detail_section_notes", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactDetailNoInfo = NSLocalizedString("contact_phase2_contact_detail_no_info", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     // MARK: Create story Name
     static let createStorySelectAudioButton = NSLocalizedString("Continue", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
