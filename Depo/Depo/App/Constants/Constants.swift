@@ -1871,4 +1871,6 @@ struct TextConstants {
     static let contactSyncBigCardAutobackupFormat = NSLocalizedString("contact_phase2_big_card_autobackup_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncBackupProgressTitle = NSLocalizedString("contact_phase2_backup_progress_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncBackupProgressMessage = NSLocalizedString("contact_phase2_backup_progress_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncCancelAnalyzeButton = NSLocalizedString("contact_phase2_cancel_analyze_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncAnalyzeProgressMessage = NSLocalizedString("contact_phase2_analyze_progress_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

@@ -1604,3 +1604,6 @@
 "contact_phase2_backup_progress_title" = "Back up Contacts";
 "contact_phase2_backup_progress_message" = "You can backup your contacts to lifebox.\nBy doing that you can easly access your contact list from any device and anywhere.";
 
+"contact_phase2_cancel_analyze_button" = "Cancel Analyze";
+"contact_phase2_analyze_progress_message" = "Please wait while analyzing";
+
