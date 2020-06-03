@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactListViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
+            <connections>
+                <outlet property="bottomView" destination="PE4-Ew-Mp5" id="g1b-ok-uTC"/>
+                <outlet property="restoreButton" destination="NxV-AQ-9f4" id="iid-bt-nXd"/>
+                <outlet property="tableView" destination="v2c-MB-Beq" id="MQx-EI-JZm"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v2c-MB-Beq">
+                    <rect key="frame" x="0.0" y="44" width="414" height="762"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PE4-Ew-Mp5">
+                    <rect key="frame" x="0.0" y="806" width="414" height="56"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OKR-tO-rPs">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                            <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="kUx-dv-qvC"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxV-AQ-9f4" customClass="NavyButtonWithWhiteText" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                            <rect key="frame" x="107" y="12" width="200" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="ifs-Qj-Spn"/>
+                                <constraint firstAttribute="height" constant="32" id="kQF-Rp-vP6"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="restore:" destination="-1" eventType="touchUpInside" id="8Li-Zn-HJi"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="OKR-tO-rPs" secondAttribute="trailing" id="Ivi-w2-Yg3"/>
+                        <constraint firstItem="OKR-tO-rPs" firstAttribute="leading" secondItem="PE4-Ew-Mp5" secondAttribute="leading" id="Wdf-5v-JOh"/>
+                        <constraint firstItem="NxV-AQ-9f4" firstAttribute="centerX" secondItem="PE4-Ew-Mp5" secondAttribute="centerX" id="elv-4U-rXi"/>
+                        <constraint firstAttribute="height" constant="56" id="l5K-FZ-22P"/>
+                        <constraint firstItem="NxV-AQ-9f4" firstAttribute="centerY" secondItem="PE4-Ew-Mp5" secondAttribute="centerY" id="oje-QR-dtC"/>
+                        <constraint firstItem="OKR-tO-rPs" firstAttribute="top" secondItem="PE4-Ew-Mp5" secondAttribute="top" id="zyA-dd-Cf7"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="PE4-Ew-Mp5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="HtY-dC-951"/>
+                <constraint firstItem="PE4-Ew-Mp5" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="NHM-rV-d9T"/>
+                <constraint firstItem="v2c-MB-Beq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="S72-Kk-czN"/>
+                <constraint firstItem="PE4-Ew-Mp5" firstAttribute="top" secondItem="v2c-MB-Beq" secondAttribute="bottom" id="dOM-o2-pQL"/>
+                <constraint firstItem="PE4-Ew-Mp5" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="nRw-YY-jdz"/>
+                <constraint firstItem="v2c-MB-Beq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="qLt-h3-P14"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="v2c-MB-Beq" secondAttribute="trailing" id="swe-Sv-UVd"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="137.68115942028987" y="132.58928571428572"/>
+        </view>
+    </objects>
+</document>

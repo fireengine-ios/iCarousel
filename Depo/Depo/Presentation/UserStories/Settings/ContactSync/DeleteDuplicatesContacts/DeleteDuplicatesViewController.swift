@@ -177,6 +177,7 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
                                       secondButtonTitle: TextConstants.ok,
                                       secondAction: { [weak self] vc in
                                         self?.delegate?.backUp(isConfirmed: true)
+                                        
                                         vc.close(isFinalStep: false) {
                                             self?.navigationController?.popViewController(animated: true)
                                         }

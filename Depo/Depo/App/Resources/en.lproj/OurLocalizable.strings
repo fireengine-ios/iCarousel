@@ -389,6 +389,7 @@
 "Please enter a valid GSM number." = "Please enter a valid phone number.";
 "Please enter a valid email address." = "Please enter a valid e-mail address.";
 "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "You are finalizing the process with %@ e-mail address. Don’t forget to verify it with the verification code we sent to your email. We will be using this e-mail for password operations and notifications.";
+"already_have_account_title" = "Already have an account?";
 
 /*???*/
 "E-mail Usage Information" = "E-mail Usage Information";
@@ -476,6 +477,27 @@
 
 "contact_phase2_back_up_contacts_confirm_title" = " Backup Contacts?";
 "contact_phase2_back_up_contacts_confirm_message" = "You have already a backup. Do you want to overwrite the existing one?";
+
+"contact_phase2_contact_list_navbar_title" = "Contact List";
+"contact_phase2_contact_list_title" = "Contact List";
+"contact_phase2_contact_list_info" = "You have %d contacts on this list which back up on %@.";
+"contact_phase2_contact_list_restore" = "Restore";
+"contact_phase2_contact_list_delete_all" = "Delete All";
+
+"contact_phase2_restore_contacts_confirm_title" = "Restore Backup?";
+"contact_phase2_restore_contacts_confirm_message" = "Your phone contact list will be change according to this backup?  Are you sure you want to restore?";
+
+"contact_phase2_delete_contacts_confirm_title" = "Delete Contacts?";
+"contact_phase2_delete_contacts_confirm_message" = "These contacts will be deleted from your lifebox. Are you sure you want to delete?";
+"contact_phase2_delete_all_contacts_success_message" = "You delete all contacts on your list. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
+"contact_phase2_contact_detail_navbar_title" = "Contact Detail";
+"contact_phase2_contact_detail_section_phone" = "Phone";
+"contact_phase2_contact_detail_section_email" = "Email";
+"contact_phase2_contact_detail_section_address" = "Address";
+"contact_phase2_contact_detail_section_birthday" = "Birthday";
+"contact_phase2_contact_detail_section_notes" = "Notes";
+"contact_phase2_contact_detail_no_info" = "No contact information";
 
 /*free up spce card or storage full card? which one?*/
 "You are using %f of your disk space! It’s a great time to expand your storage." = "You are using %d%% of your lifebox quota! It’s a great time to upgrade your storage.";
@@ -1519,6 +1541,13 @@
 "my_packages_description" = "If you want to restore your existing purchases, click on Restore Purchases button.";
 "photo_video_auto_sync_settings" = "Auto-Sync Settings";
 "ubsent_contacts_in_lifebox" = "There is no any contact in your lifebox";
+"contact_phase2_history_header" = "Your latest backup";
+"contact_phase2_restore_button" = "Restore Backup";
+"contact_phase2_delete_button" = "Delete Backup";
+"contact_phase2_restore_popup_title" = "Restore Backup?";
+"contact_phase2_delete_popup_title" = "Delete Backup?";
+"contact_phase2_restore_popup_message" = "Your phone contact list will be change according to this backup?  Are you sure you want to restore?";
+"contact_phase2_delete_popup_message" = "This backup will be deleted from your lifebox. Are you sure you want to delete?";
 "auto_sync_albums_description" = "You can choose which albums to sync automatically.";
 "tabbar_item_home_label" = "Home";
 "tabbar_item_gallery_label" = "Gallery";
@@ -1579,4 +1608,7 @@
 "contact_phase2_big_card_contacts" = "contacts";
 "contact_phase2_big_card_see_contacts_button" = "See Contacts";
 "contact_phase2_big_card_autobackup_format" = "Auto Backup: %@";
+
+"contact_phase2_backup_progress_title" = "Back up Contacts";
+"contact_phase2_backup_progress_message" = "You can backup your contacts to lifebox.\nBy doing that you can easly access your contact list from any device and anywhere.";
 

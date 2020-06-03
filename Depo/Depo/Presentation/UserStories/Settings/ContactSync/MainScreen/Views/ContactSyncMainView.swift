@@ -53,7 +53,7 @@ final class ContactSyncMainView: UIView, NibInit {
         
         let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let options: [PeriodicContactsSyncOption] = [.off, .weekly, .monthly]
+        let options: [PeriodicContactsSyncOption] = [.off, .daily, .weekly, .monthly]
         
         options.forEach { type in
             let action = UIAlertAction(title: type.localizedText, style: .default, handler: { [weak self] _ in

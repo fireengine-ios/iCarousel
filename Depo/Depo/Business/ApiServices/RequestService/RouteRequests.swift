@@ -222,6 +222,12 @@ struct RouteRequests {
     static let searchContacts = "search?sortField=firstname&sortOrder=ASC&maxResult=16&query=%@&currentPage=%d"
     static let deleteContacts = "contact"
     
+    enum ContactSync {
+        static let contactAPI = baseContactsUrlShort +/ "ttyapi"
+        static let contact = contactAPI +/ "contact"
+        static let search = contactAPI +/ "search"
+    }
+    
     // MARK: - Quick Scroll
 
     static let quickScrollGroups = "scroll/groups"

@@ -241,7 +241,9 @@ class ContactsSyncService: BaseRequestService {
         }
     }
     
-    func searchRemoteContacts(with query: String, page: Int, success: ContactsOperation?, fail: FailResponse?) {
+    //TODO: Need delete API requests
+    @discardableResult
+    func searchRemoteContacts(with query: String, page: Int, success: ContactsOperation?, fail: FailResponse?) -> URLSessionTask {
         debugLog("ContactsSyncService searchRemoteContacts")
         
         let handler = BaseResponseHandler<ContactsResponse, ObjectRequestResponse>(success: { response  in
@@ -250,7 +252,7 @@ class ContactsSyncService: BaseRequestService {
             }
             success?(response)
         }, fail: fail)
-        executeGetRequest(param: SearchContacts(query: query, page: page), handler: handler)
+        return executeGetRequest(param: SearchContacts(query: query, page: page), handler: handler)
     }
     
     func deleteRemoteContacts(_ contacts: [RemoteContact], success: SuccessResponse?, fail: FailResponse?) {
@@ -261,7 +263,8 @@ class ContactsSyncService: BaseRequestService {
         executeDeleteRequest(param: param, handler: handler)
     }
     
-    func getContacts(with page: Int, success: ContactsOperation?, fail: FailResponse?) {
+    @discardableResult
+    func getContacts(with page: Int, success: ContactsOperation?, fail: FailResponse?) -> URLSessionTask {
         debugLog("ContactsSyncService getContacts")
         
         let handler = BaseResponseHandler<ContactsResponse, ObjectRequestResponse>(success: { response  in
@@ -271,7 +274,7 @@ class ContactsSyncService: BaseRequestService {
             success?(response)
         },
             fail: fail)
-        executeGetRequest(param: GetContacts(page: page), handler: handler)
+        return executeGetRequest(param: GetContacts(page: page), handler: handler)
     }
     
     static private func parseContactsToMerge(_ contactsToMerge: [String: Int]) -> [ContactSync.AnalyzedContact] {

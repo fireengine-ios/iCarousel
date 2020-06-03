@@ -34,8 +34,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     }()
     
     private lazy var progressView: ContactSyncProgressView = {
-        let view = ContactSyncProgressView.initFromNib()
-//        view.delegate = self
+        let view = ContactSyncProgressView.setup(title: TextConstants.contactSyncBackupProgressTitle, message: TextConstants.contactSyncBackupProgressMessage)
         return view
     }()
     
@@ -130,18 +129,30 @@ extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
     }
     
     private func startBackUp() {
-        analyticsHelper.trackBackupScreen()
-        show(view: progressView, animated: true)
-        contactSyncHelper.backup()
+        showSpinner()
+        contactSyncHelper.backup { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            self.analyticsHelper.trackBackupScreen()
+            self.hideSpinner()
+            
+            self.progressView.reset()
+            self.show(view: self.progressView, animated: true)
+        }
     }
 }
 
 extension ContactSyncViewController: ContactSyncMainViewDelegate {
     
     func showBackups() {
-        //TODO: Open backups screen
-        showSpinner()
-        showRelatedView()
+        guard let info = contactSyncHelper.syncResponse else {
+            return
+        }
+        
+        let contactList = router.contactList(backUpInfo: info)
+        router.pushViewController(viewController: contactList)
     }
     
     func deleteDuplicates() {
@@ -457,8 +468,8 @@ private class ContactSyncHelper {
         proccessOperation(.getBackUpStatus)
     }
     
-    func backup() {
-        startOperation(operationType: .backup)
+    func backup(onStart: @escaping VoidHandler) {
+        startOperation(operationType: .backup, onStart: onStart)
     }
     
     func analyze() {
@@ -488,7 +499,7 @@ private class ContactSyncHelper {
     
     //MARK: - Private
     
-    private func startOperation(operationType: SyncOperationType) {
+    private func startOperation(operationType: SyncOperationType, onStart: @escaping VoidHandler) {
         requestAccess { [weak self] success in
             guard success else {
                 return
@@ -499,6 +510,7 @@ private class ContactSyncHelper {
                     if self?.getStoredContactsCount() == 0 {
                         self?.delegate?.didFailed(error: .emptyStoredContacts)
                     } else {
+                        onStart()
                         self?.proccessOperation(operationType)
                     }
                 
@@ -506,10 +518,12 @@ private class ContactSyncHelper {
                     if self?.syncResponse?.totalNumberOfContacts == 0  {
                         self?.delegate?.didFailed(error: .emptyLifeboxContacts)
                     } else {
+                        onStart()
                         self?.proccessOperation(operationType)
                     }
                 
                 default:
+                    onStart()
                     self?.proccessOperation(operationType)
             }
         }

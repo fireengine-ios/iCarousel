@@ -26,7 +26,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="caY-rM-izq" customClass="GradientLoadingIndicator" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="caY-rM-izq" customClass="CircleLoaderView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                     <rect key="frame" x="64" y="126" width="247" height="247"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
@@ -50,7 +50,7 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="loader" destination="caY-rM-izq" id="hI2-RT-KF9"/>
+                <outlet property="loader" destination="caY-rM-izq" id="rli-Ya-una"/>
                 <outlet property="message" destination="LEg-6m-3ae" id="D9o-Dl-GGz"/>
                 <outlet property="title" destination="TOX-Qb-DYt" id="vpK-1B-KDk"/>
             </connections>
