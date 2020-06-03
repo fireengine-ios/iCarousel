@@ -84,6 +84,7 @@ final class CircleLoaderView: UIView {
         let bigFont = UIFont.TurkcellSaturaMedFont(size: 60.0)
         let smallFont = UIFont.TurkcellSaturaMedFont(size: 20.0)
         
+        /// percent sign is aligned to top
         let offset = bigFont.capHeight - smallFont.capHeight
         
         let attributes: [NSAttributedString.Key: Any] = [
