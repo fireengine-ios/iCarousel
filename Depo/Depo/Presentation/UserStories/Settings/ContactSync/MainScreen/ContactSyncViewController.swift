@@ -129,7 +129,7 @@ extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
         if isConfirmed {
             startBackUp()
         } else {
-            showBackUpConfirmPopup()
+            showPopup(type: .backup)
         }
     }
     
@@ -244,7 +244,7 @@ extension ContactSyncViewController {
     private func handleError(_ error: ContactSyncHelperError) {
         switch error {
         case .notPremiumUser:
-            showPremiumPopup()
+            showPopup(type: .premium)
         case .noBackUp:
             showRelatedView()
         case .emptyStoredContacts:
@@ -256,24 +256,27 @@ extension ContactSyncViewController {
         }
     }
     
-    private func showPremiumPopup() {
-        let popup = PopUpController.with(title: TextConstants.contactSyncConfirmPremiumPopupTitle,
-                                         message: TextConstants.contactSyncConfirmPremiumPopupText,
-                                         image: .none,
-                                         firstButtonTitle: TextConstants.cancel,
-                                         secondButtonTitle: TextConstants.ok,
-                                         firstAction: { vc in
-                                            vc.close()
-                                         }, secondAction: { vc in
-                                            vc.close(isFinalStep: false) { [weak self] in
-                                                guard let self = self else {
-                                                    return
-                                                }
-                                                
-                                                let controller = self.router.premium(source: .contactSync)
-                                                self.router.pushViewController(viewController: controller)
-                                            }
-                                         })
+    private func showPopup(type: ContactSyncPopupType) {
+        let handler: VoidHandler = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            switch type {
+            case .backup:
+                self.startBackUp()
+            case .premium:
+                let controller = self.router.premium(source: .contactSync)
+                self.router.pushViewController(viewController: controller)
+            default:
+                break
+            }
+        }
+
+        let popup = ContactSyncPopupFactory.createPopup(type: type) { vc in
+            vc.close(isFinalStep: false, completion: handler)
+        }
+        
         present(popup, animated: true)
     }
     
@@ -291,25 +294,12 @@ extension ContactSyncViewController {
     private func showEmptyLifeboxContactsPopup() {
         SnackbarManager.shared.show(type: .critical, message: TextConstants.absentContactsInLifebox, action: .ok)
     }
-    
-    private func showBackUpConfirmPopup() {
-        let vc = PopUpController.with(title: TextConstants.backUpContactsConfirmTitle,
-                                      message: TextConstants.backUpContactsConfirmMessage,
-                                      image: .question,
-                                      firstButtonTitle: TextConstants.cancel,
-                                      secondButtonTitle: TextConstants.ok,
-                                      secondAction: { [weak self] vc in
-                                        vc.close()
-                                        self?.startBackUp()
-                                    })
-        present(vc, animated: false)
-    }
 }
 
 
 //MARK: - Private classes - helpers
 
-private final class ContentViewAnimator {
+final class ContentViewAnimator {
     
     func showTransition(to newView: UIView, on contentView: UIView, animated: Bool) {
         let currentView = contentView.subviews.first

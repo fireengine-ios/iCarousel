@@ -97,7 +97,7 @@ final class ContactListViewController: BaseViewController, NibInit {
 private extension ContactListViewController {
     
     @IBAction func restore(_ sender: UIButton) {
-        showRestorePopup()
+        showPopup(type: .restoreContacts)
     }
     
     @objc func onMore() {
@@ -161,11 +161,17 @@ private extension ContactListViewController {
         }
     }
     
-    func startRestore() {
+    func backUp() {
+        //TODO: need start backup
+        //self?.delegate?.backUp(isConfirmed: true)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func restore() {
         //TODO: 
     }
     
-    func startDeleteAll() {
+    func deleteAll() {
         showSpinner()
         
         currentTask = contactsSyncService.deleteAllContacts { [weak self] result in
@@ -193,12 +199,12 @@ private extension ContactListViewController {
     func showMoreActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let restoreAction = UIAlertAction(title: TextConstants.contactListRestore, style: .default) { [weak self] _ in
-            self?.showRestorePopup()
+            self?.showPopup(type: .restoreContacts)
         }
         actionSheet.addAction(restoreAction)
         
         let deleteAllAction = UIAlertAction(title: TextConstants.contactListDeleteAll, style: .default) { [weak self] _ in
-            self?.showDeleteAllPopup()
+            self?.showPopup(type: .deleteAllContacts)
         }
         actionSheet.addAction(deleteAllAction)
         
@@ -208,46 +214,29 @@ private extension ContactListViewController {
         present(actionSheet, animated: true)
     }
     
-    func showRestorePopup() {
-        let vc = PopUpController.with(title: TextConstants.restoreContactsConfirmTitle,
-                                      message: TextConstants.restoreContactsConfirmMessage,
-                                      image: .question,
-                                      firstButtonTitle: TextConstants.cancel,
-                                      secondButtonTitle: TextConstants.ok,
-                                      secondAction: { [weak self] vc in
-                                        vc.close()
-                                        self?.startRestore()
-                                    })
-        present(vc, animated: false)
-    }
-    
-    func showDeleteAllPopup() {
-        let vc = PopUpController.with(title: TextConstants.deleteContactsConfirmTitle,
-                                      message: TextConstants.deleteContactsConfirmMessage,
-                                      image: .question,
-                                      firstButtonTitle: TextConstants.cancel,
-                                      secondButtonTitle: TextConstants.ok,
-                                      secondAction: { [weak self] vc in
-                                        vc.close()
-                                        self?.startDeleteAll()
-                                    })
-        present(vc, animated: false)
-    }
-    
-    func showBackUpPopup() {
-        let vc = PopUpController.with(title: TextConstants.backUpContactsConfirmTitle,
-                                      message: TextConstants.backUpContactsConfirmMessage,
-                                      image: .question,
-                                      firstButtonTitle: TextConstants.cancel,
-                                      secondButtonTitle: TextConstants.ok,
-                                      secondAction: { [weak self] vc in
-                                        //TODO: need start backup
-//                                        self?.delegate?.backUp(isConfirmed: true)
-                                        vc.close(isFinalStep: false) {
-                                            self?.navigationController?.popViewController(animated: true)
-                                        }
-                                    })
-        present(vc, animated: false)
+    func showPopup(type: ContactSyncPopupType) {
+        let handler: VoidHandler = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            switch type {
+            case .backup:
+                self.backUp()
+            case .deleteAllContacts:
+                self.deleteAll()
+            case .restoreContacts:
+                self.restore()
+            default:
+                break
+            }
+        }
+
+        let popup = ContactSyncPopupFactory.createPopup(type: type) { vc in
+            vc.close(isFinalStep: false, completion: handler)
+        }
+        
+        present(popup, animated: true)
     }
     
     func showDeleteResultView() {
@@ -260,7 +249,7 @@ private extension ContactListViewController {
         resultView.add(card: backUpCard)
         
         backUpCard.backUpHandler = { [weak self] in
-            self?.showBackUpPopup()
+            self?.showPopup(type: .backup)
         }
     }
 }

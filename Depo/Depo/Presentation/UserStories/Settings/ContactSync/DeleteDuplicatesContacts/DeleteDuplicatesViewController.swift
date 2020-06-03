@@ -10,6 +10,7 @@ import UIKit
 
 private enum DeleteDuplicatesError {
     case notPremiumUser
+    case accessDenied
     case deleteDuplicatesFailed
     case syncError(Error)
 }
@@ -17,6 +18,7 @@ private enum DeleteDuplicatesError {
 final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var contentView: UIView!
     
     @IBOutlet private weak var bottomView: UIView!
     @IBOutlet private weak var deleteAllButton: NavyButtonWithWhiteText! {
@@ -25,10 +27,17 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         }
     }
     
+    private lazy var progressView: ContactSyncProgressView = {
+        let view = ContactSyncProgressView.setup(title: TextConstants.deleteDuplicatesProgressTitle,
+                                                 message: TextConstants.deleteDuplicatesProgressMessage)
+        return view
+    }()
+    
     private let contactsSyncService = ContactsSyncService()
     private let localContactsService = ContactService()
     private let accountService = AccountService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var animator = ContentViewAnimator()
     
     private var contacts = [ContactSync.AnalyzedContact]()
     private weak var delegate: ContactsBackupActionProviderProtocol?
@@ -75,7 +84,7 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if tableView.tableHeaderView == nil {
+        if let tableView = tableView, tableView.tableHeaderView == nil {
             setupHeader()
         }
     }
@@ -100,7 +109,7 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     // MARK: - Actions
     
     @IBAction private func onDeleteAllTapped(_ sender: Any) {
-        showDeletePopup()
+        showPopup(type: .deleteDuplicates)
     }
     
     private func deleteDuplicates() {
@@ -108,17 +117,21 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         startDeleteDuplicates()
     }
     
+    private func showDeleteProgress(_ progress: Int) {
+        progressView.update(progress: progress)
+    }
+    
     private func deleteDuplicatesSuccess() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, status: .success))
         
-        hideSpinner()
+        progressView.removeFromSuperview()
         showResultView(result: .success)
         
         let backUpCard = BackUpContactsCard.initFromNib()
         resultView?.add(card: backUpCard)
         
         backUpCard.backUpHandler = { [weak self] in
-            self?.showBackUpPopup()
+            self?.showPopup(type: .backup)
         }
     }
     
@@ -131,9 +144,7 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         deleteResultView()
         
         resultView = ContactsOperationView.with(type: .deleteDuplicates, result: result)
-        resultView?.frame = view.bounds
-        resultView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        view.addSubview(resultView!)
+        show(view: resultView!, animated: true)
     }
     
     private func deleteResultView() {
@@ -141,11 +152,22 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         resultView = nil
     }
     
+    private func show(view: UIView, animated: Bool) {
+        contentView.isUserInteractionEnabled = true
+        animator.showTransition(to: view, on: contentView, animated: animated)
+    }
+    
     private func handleError(_ error: DeleteDuplicatesError) {
         hideSpinner()
+        progressView.removeFromSuperview()
         
         switch error {
         case .notPremiumUser:
+            //TODO: show warning
+            break
+            
+        case .accessDenied:
+            //TODO: show warning
             break
             
         case .deleteDuplicatesFailed:
@@ -156,53 +178,30 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         }
     }
     
-    private func showDeletePopup() {
-        let vc = PopUpController.with(title: TextConstants.deleteDuplicatesConfirmTitle,
-                                      message: TextConstants.deleteDuplicatesConfirmMessage,
-                                      image: .question,
-                                      firstButtonTitle: TextConstants.cancel,
-                                      secondButtonTitle: TextConstants.ok,
-                                      secondAction: { [weak self] vc in
-                                        vc.close()
-                                        self?.deleteDuplicates()
-                                    })
-        present(vc, animated: false)
-    }
-    
-    private func showBackUpPopup() {
-        let vc = PopUpController.with(title: TextConstants.backUpContactsConfirmTitle,
-                                      message: TextConstants.backUpContactsConfirmMessage,
-                                      image: .question,
-                                      firstButtonTitle: TextConstants.cancel,
-                                      secondButtonTitle: TextConstants.ok,
-                                      secondAction: { [weak self] vc in
-                                        self?.delegate?.backUp(isConfirmed: true)
-                                        
-                                        vc.close(isFinalStep: false) {
-                                            self?.navigationController?.popViewController(animated: true)
-                                        }
-                                    })
-        present(vc, animated: false)
-    }
-    
-    private func showPremiumPopup() {
-        let popup = PopUpController.with(title: TextConstants.contactSyncConfirmPremiumPopupTitle,
-                                         message: TextConstants.contactSyncConfirmPremiumPopupText,
-                                         image: .none,
-                                         firstButtonTitle: TextConstants.cancel,
-                                         secondButtonTitle: TextConstants.ok,
-                                         firstAction: { vc in
-                                            vc.close()
-                                         }, secondAction: { vc in
-                                            vc.close(isFinalStep: false) { [weak self] in
-                                                guard let self = self else {
-                                                    return
-                                                }
-                                                
-                                                let controller = self.router.premium(source: .contactSync)
-                                                self.router.pushViewController(viewController: controller)
-                                            }
-                                         })
+    private func showPopup(type: ContactSyncPopupType) {
+        let handler: VoidHandler = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            switch type {
+            case .backup:
+                self.delegate?.backUp(isConfirmed: true)
+                self.navigationController?.popViewController(animated: true)
+            case .deleteDuplicates:
+                self.deleteDuplicates()
+            case .premium:
+                let controller = self.router.premium(source: .contactSync)
+                self.router.pushViewController(viewController: controller)
+            default:
+                break
+            }
+        }
+
+        let popup = ContactSyncPopupFactory.createPopup(type: type) { vc in
+            vc.close(isFinalStep: false, completion: handler)
+        }
+        
         present(popup, animated: true)
     }
 }
@@ -225,6 +224,9 @@ extension DeleteDuplicatesViewController: UITableViewDataSource {
 private extension DeleteDuplicatesViewController {
     
     func startDeleteDuplicates() {
+        progressView.reset()
+        show(view: progressView, animated: true)
+        
         userHasPermissionFor(type: .deleteDublicate) { [weak self] hasPermission in
             guard hasPermission else {
                 self?.handleError(.notPremiumUser)
@@ -232,10 +234,16 @@ private extension DeleteDuplicatesViewController {
             }
             
             self?.requestAccess { [weak self] success in
-                guard success, let self = self else {
+                guard let self = self else {
+                    return
+                }
+
+                guard success else {
+                    self.handleError(.accessDenied)
                     return
                 }
                 
+                self.hideSpinner()
                 self.continueDeleteDuplicates()
             }
         }
@@ -249,9 +257,16 @@ private extension DeleteDuplicatesViewController {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteDuplicateScreen())
         
         contactsSyncService.analyze(progressCallback: { [weak self] progress, count, type in
-            if type == .deleteDuplicated, progress == 0 {
-                self?.deleteDuplicatesSuccess()
+            guard let self = self, type == .deleteDuplicated else {
+                return
             }
+            
+            if progress == 0 {
+                self.deleteDuplicatesSuccess()
+            } else {
+                self.showDeleteProgress(progress)
+            }
+            
         }, successCallback: nil,
            cancelCallback: nil,
         errorCallback: { [weak self] _, type in

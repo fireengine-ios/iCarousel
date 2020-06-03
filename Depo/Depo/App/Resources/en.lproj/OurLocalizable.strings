@@ -389,6 +389,7 @@
 "Please enter a valid GSM number." = "Please enter a valid phone number.";
 "Please enter a valid email address." = "Please enter a valid e-mail address.";
 "You are finalizing the process with %@ e-mail address. We will be using this e-mail for password operations and site notifications" = "You are finalizing the process with %@ e-mail address. Don’t forget to verify it with the verification code we sent to your email. We will be using this e-mail for password operations and notifications.";
+"already_have_account_title" = "Already have an account?";
 
 /*???*/
 "E-mail Usage Information" = "E-mail Usage Information";
@@ -473,6 +474,8 @@
 "contact_phase2_delete_duplicates_back_up_title" = "Back up Contacts ";
 "contact_phase2_delete_duplicates_back_up_message" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 "contact_phase2_delete_duplicates_back_up_button" = "Back up Now";
+"contact_phase2_delete_duplicates_progress_title" = "Delete Duplicates on Phone";
+"contact_phase2_delete_duplicates_progress_message" = "Your duplicated contacts will be deleted from your phone!";
 
 "contact_phase2_back_up_contacts_confirm_title" = " Backup Contacts?";
 "contact_phase2_back_up_contacts_confirm_message" = "You have already a backup. Do you want to overwrite the existing one?";
@@ -1607,3 +1610,11 @@
 "contact_phase2_cancel_analyze_button" = "Cancel Analyze";
 "contact_phase2_analyze_progress_message" = "Please wait while analyzing";
 
+"contact_phase2_history_header" = "Your latest backup";
+"contact_phase2_restore_button" = "Restore Backup";
+"contact_phase2_delete_button" = "Delete Backup";
+"contact_phase2_restore_popup_title" = "Restore Backup?";
+"contact_phase2_delete_popup_title" = "Delete Backup?";
+"contact_phase2_restore_popup_message" = "Your phone contact list will be change according to this backup?  Are you sure you want to restore?";
+"contact_phase2_delete_popup_message" = "This backup will be deleted from your lifebox. Are you sure you want to delete?";
+"contact_phase2_history_cell_title" = "Contacts";

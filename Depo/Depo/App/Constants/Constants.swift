@@ -146,6 +146,7 @@ struct TextConstants {
     static let loginCellPasswordPlaceholder = NSLocalizedString("You have to fill in a password", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let loginFAQButton = NSLocalizedString("login_faq", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let signUpPasswordRulesLabel = NSLocalizedString("sign_up_password_rules", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let alreadyHaveAccountTitle = NSLocalizedString("already_have_account_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let autoSyncNavigationTitle = NSLocalizedString("Auto Sync", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncFromSettingsTitle = NSLocalizedString("Lifebox can sync your files automatically.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -194,7 +195,14 @@ struct TextConstants {
     static let resendCode = NSLocalizedString("resend_code", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let absentContactsForBackup = NSLocalizedString("ubsent_contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let absentContactsInLifebox = NSLocalizedString("ubsent_contacts_in_lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let contactBackupHistoryHeader = NSLocalizedString("contact_phase2_history_header", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactBackupHistoryRestoreButton = NSLocalizedString("contact_phase2_restore_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactBackupHistoryDeleteButton = NSLocalizedString("contact_phase2_delete_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactBackupHistoryRestorePopUpTitle = NSLocalizedString("contact_phase2_restore_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactBackupHistoryDeletePopUpTitle = NSLocalizedString("contact_phase2_delete_popup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactBackupHistoryRestorePopUpMessage = NSLocalizedString("contact_phase2_restore_popup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactBackupHistoryDeletePopUpMessage = NSLocalizedString("contact_phase2_delete_popup_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactBackupHistoryCellTitle = NSLocalizedString("contact_phase2_history_cell_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlert = NSLocalizedString("Error", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlerTitleBackupAlreadyExist = NSLocalizedString("Overwrite backup?", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let errorAlertTextNoDuplicatedContacts = NSLocalizedString("You have no duplicated contacts!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -633,6 +641,9 @@ struct TextConstants {
     static let deleteDuplicatesBackUpTitle = NSLocalizedString("contact_phase2_delete_duplicates_back_up_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteDuplicatesBackUpMessage = NSLocalizedString("contact_phase2_delete_duplicates_back_up_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteDuplicatesBackUpButton = NSLocalizedString("contact_phase2_delete_duplicates_back_up_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let deleteDuplicatesProgressTitle = NSLocalizedString("contact_phase2_delete_duplicates_progress_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteDuplicatesProgressMessage = NSLocalizedString("contact_phase2_delete_duplicates_progress_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let backUpContactsConfirmTitle = NSLocalizedString("contact_phase2_back_up_contacts_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let backUpContactsConfirmMessage = NSLocalizedString("contact_phase2_back_up_contacts_confirm_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
