@@ -176,8 +176,7 @@ final class APILogger {
     private func logResumableUpload(headers: HTTPHeaders?) {
         guard let headers = headers,
             let fileName = headers[HeaderConstant.XObjectMetaFileName],
-            let length = headers[HeaderConstant.ContentLength],
-            let range = headers[HeaderConstant.ContentRange]
+            let length = headers[HeaderConstant.ContentLength]
             else {
                 assertionFailure()
             return
@@ -185,7 +184,9 @@ final class APILogger {
         
         log(string: "[Resumable upload]")
         log(string: "Filename: \(fileName)")
-        log(string: "\(HeaderConstant.ContentRange): \(range)")
+        if let range = headers[HeaderConstant.ContentRange] {
+            log(string: "\(HeaderConstant.ContentRange): \(range)")
+        }
         log(string: "\(HeaderConstant.ContentLength): \(length)")
         
         if let chunkSize = userDefaults.resumableUploadChunkSize {

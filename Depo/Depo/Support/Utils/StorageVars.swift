@@ -21,7 +21,7 @@ protocol StorageVars: class {
     var largeFullOfQuotaUserPremium: Bool { get set }
     var periodicContactSyncSet: Bool { get set }
     var usersWhoUsedApp: [String: Any] { get set }
-    var isNewAppVersionFirstLaunchTurkcellLanding: Bool { get set }
+    var isShownLanding: Bool { get set }
     var deepLink: String? { get set }
     var deepLinkParameters: [AnyHashable: Any]? { get set }
     var blockedUsers: [String : Date] { get set }
@@ -46,14 +46,38 @@ final class UserDefaultsVars: StorageVars {
         set { userDefaults.set(newValue, forKey: isAppFirstLaunchKey) }
     }
     
-    ///Do not change key
-    private let isNewAppVersionFirstLaunchKey = "isNewAppVersionFirstLaunch%@"
-    var isNewAppVersionFirstLaunchTurkcellLanding: Bool {
+    //By default, landing showing once
+    //If you want to force display it you need set number of version only
+    private let forceShowLandingVersion = "20000"
+    private let shownLandingVersionKey = "showedLandingVersionKey"
+    private var shownLandingVersion: String? {
         get {
-            return userDefaults.object(forKey: String(format: isNewAppVersionFirstLaunchKey, getAppVersion())) as? Bool ?? true
+            userDefaults.object(forKey: shownLandingVersionKey) as? String
         }
         set {
-            userDefaults.set(newValue, forKey: String(format: isNewAppVersionFirstLaunchKey, getAppVersion()))
+            userDefaults.set(getAppVersion(), forKey: shownLandingVersionKey)
+        }
+    }
+    
+    var isShownLanding: Bool {
+        get {
+            guard let previousVersion = shownLandingVersion else {
+                return false
+            }
+            
+            let currentVersion = getAppVersion()
+            if currentVersion == previousVersion {
+                return true
+            }
+            
+            return currentVersion.compare(forceShowLandingVersion, options: .numeric) == .orderedAscending
+        }
+        set {
+            if newValue {
+                userDefaults.set(getAppVersion(), forKey: shownLandingVersionKey)
+            } else {
+                userDefaults.removeObject(forKey: shownLandingVersionKey)
+            }
         }
     }
     
