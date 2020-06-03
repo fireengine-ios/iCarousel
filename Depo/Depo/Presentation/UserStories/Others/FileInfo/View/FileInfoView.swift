@@ -186,6 +186,7 @@ final class FileInfoView: UIView, FromNib {
     
     private var oldName: String?
     private var fileExtension: String?
+    private var isEditable: Bool?
     private let formatter = ByteCountFormatter()
     private lazy var dataSource = PeopleSliderDataSource(collectionView: peopleCollectionView, delegate: self)
     
@@ -327,8 +328,10 @@ final class FileInfoView: UIView, FromNib {
         fileNameTextField.isUserInteractionEnabled = false
         if let name = oldName, !name.isEmpty {
             fileNameTextField.text = oldName
+            oldName = nil
         }
         showValidateNameSuccess()
+        changeEditButtonsVisibility(isHidden: isEditable == false)
     }
     
     // MARK: Private Methods
@@ -346,10 +349,16 @@ final class FileInfoView: UIView, FromNib {
         cancelRenamingButton.isHidden = !isEditing
     }
     
+    private func changeEditButtonsVisibility(isHidden: Bool) {
+        fileNameTextField.isEnabled = !isHidden
+        editNameButton.isHidden = isHidden
+    }
+    
     private func setupEditableState(for item: BaseDataSourceItem) {
-        let isHidden = item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum
-            fileNameTextField.isEnabled = !isHidden
-            editNameButton.isHidden = isHidden
+        let isHidden = (item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum) && item.syncStatus != .synced
+        isEditable = !isHidden
+        changeEditStatus(false)
+        changeEditButtonsVisibility(isHidden: isHidden)
     }
     
     private func resetUI() {
