@@ -474,6 +474,8 @@
 "contact_phase2_delete_duplicates_back_up_title" = "Back up Contacts ";
 "contact_phase2_delete_duplicates_back_up_message" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 "contact_phase2_delete_duplicates_back_up_button" = "Back up Now";
+"contact_phase2_delete_duplicates_progress_title" = "Delete Duplicates on Phone";
+"contact_phase2_delete_duplicates_progress_message" = "Your duplicated contacts will be deleted from your phone!";
 
 "contact_phase2_back_up_contacts_confirm_title" = " Backup Contacts?";
 "contact_phase2_back_up_contacts_confirm_message" = "You have already a backup. Do you want to overwrite the existing one?";

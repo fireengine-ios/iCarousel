@@ -218,7 +218,9 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
     
     func progress(progress: Int, for operationType: SYNCMode) {
         if operationType == .backup {
-             progressView.update(progress: progress)
+            DispatchQueue.main.async {
+                self.progressView.update(progress: progress)
+            }
         }
     }
 
@@ -286,7 +288,7 @@ extension ContactSyncViewController {
 
 //MARK: - Private classes - helpers
 
-private final class ContentViewAnimator {
+final class ContentViewAnimator {
     
     func showTransition(to newView: UIView, on contentView: UIView, animated: Bool) {
         let currentView = contentView.subviews.first
