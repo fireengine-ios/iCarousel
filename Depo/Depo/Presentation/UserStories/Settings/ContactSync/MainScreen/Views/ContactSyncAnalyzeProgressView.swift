@@ -30,7 +30,7 @@ final class ContactSyncAnalyzeProgressView: UIView, NibInit {
     @IBOutlet private weak var progressLine: LineProgressView! {
         willSet {
             newValue.resetProgress()
-            newValue.set(lineBackgroundColor: ColorConstants.lightGray)
+            newValue.set(lineBackgroundColor: ColorConstants.lighterGray)
             newValue.set(lineColor: ColorConstants.navy)
         }
     }
@@ -41,6 +41,8 @@ final class ContactSyncAnalyzeProgressView: UIView, NibInit {
             newValue.insets = UIEdgeInsets(topBottom: 2.0, rightLeft: 48.0)
             newValue.backgroundColor = ColorConstants.whiteColor
             newValue.setTitleColor(ColorConstants.navy, for: .normal)
+            newValue.layer.borderColor = ColorConstants.navy.cgColor
+            newValue.layer.borderWidth = 1.0
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 16)
             newValue.setTitle(TextConstants.contactSyncCancelAnalyzeButton, for: .normal)
         }

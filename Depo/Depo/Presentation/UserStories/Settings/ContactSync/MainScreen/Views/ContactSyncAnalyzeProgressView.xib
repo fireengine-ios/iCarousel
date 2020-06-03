@@ -34,7 +34,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bvi-nV-cn8" customClass="RoundedInsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
-                    <rect key="frame" x="164.5" y="621" width="46" height="30"/>
+                    <rect key="frame" x="164.5" y="605" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                     <connections>
                         <action selector="didTouchCancelAnalyze:" destination="iN0-l3-epB" eventType="touchUpInside" id="jem-6O-PA6"/>
@@ -44,7 +44,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="EoH-oW-SRU" secondAttribute="trailing" constant="16" id="BQA-8t-cVg"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Bvi-nV-cn8" secondAttribute="bottom" constant="16" id="BTG-Nz-07p"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Bvi-nV-cn8" secondAttribute="bottom" constant="32" id="BTG-Nz-07p"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pE8-pe-8Pp" secondAttribute="trailing" constant="16" id="BkI-9w-taO"/>
                 <constraint firstItem="EoH-oW-SRU" firstAttribute="top" secondItem="pE8-pe-8Pp" secondAttribute="bottom" constant="20" id="DnA-jK-HCt"/>
                 <constraint firstItem="pE8-pe-8Pp" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="IsC-wD-pXf"/>
