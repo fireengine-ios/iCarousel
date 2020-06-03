@@ -11,6 +11,7 @@ import UIKit
 
 protocol ContactSyncMainViewDelegate: ContactsBackupActionProviderProtocol {
     func showBackups()
+    func showContacts()
     func deleteDuplicates()
     func changePeriodicSync(to option: PeriodicContactsSyncOption)
 }
@@ -36,10 +37,10 @@ final class ContactSyncMainView: UIView, NibInit {
         let bigBackupCard = ContactSyncBigCardView.initFromNib()
         
         bigBackupCard.onBackup { [weak self] in
-            self?.delegate?.backUp(isConfirmed: false)
+            self?.delegate?.backUp()
         }
-        .onSeeBackup { [weak self] in
-            self?.delegate?.showBackups()
+        .onSeeContacts { [weak self] in
+            self?.delegate?.showContacts()
         }
         .onAutoBackup { [weak self] sender in
             self?.showAutoBackupOptions(sender: sender)

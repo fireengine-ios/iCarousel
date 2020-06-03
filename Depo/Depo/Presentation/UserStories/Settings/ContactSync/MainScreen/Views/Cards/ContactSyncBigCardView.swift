@@ -95,7 +95,7 @@ final class ContactSyncBigCardView: UIView, NibInit {
     //MARK: Buttons action handlers
     
     private var actionHandlerBackup: VoidHandler?
-    private var actionHandlerSeeBackup: VoidHandler?
+    private var actionHandlerSeeContacts: VoidHandler?
     private var actionHandlerAutoBackup: SenderHandler?
     
     
@@ -125,8 +125,8 @@ final class ContactSyncBigCardView: UIView, NibInit {
     }
     
     @discardableResult
-    func onSeeBackup(handler: VoidHandler?) -> ContactSyncBigCardView {
-        actionHandlerSeeBackup = handler
+    func onSeeContacts(handler: VoidHandler?) -> ContactSyncBigCardView {
+        actionHandlerSeeContacts = handler
         return self
     }
     
@@ -177,8 +177,8 @@ final class ContactSyncBigCardView: UIView, NibInit {
         actionHandlerBackup?()
     }
     
-    @IBAction func didTouchSeeBackup(_ sender: Any) {
-        actionHandlerSeeBackup?()
+    @IBAction func didTouchSeeContacts(_ sender: Any) {
+        actionHandlerSeeContacts?()
     }
     
 }

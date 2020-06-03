@@ -488,6 +488,8 @@
 
 "contact_phase2_restore_contacts_confirm_title" = "Restore Backup?";
 "contact_phase2_restore_contacts_confirm_message" = "Your phone contact list will be change according to this backup?  Are you sure you want to restore?";
+"contact_phase2_restore_contacts_progress_title" = "Restore Backup";
+"contact_phase2_restore_contacts_progress_message" = "Your phone contacts will be change according to contact list on your Lifebox!";
 
 "contact_phase2_delete_contacts_confirm_title" = "Delete Contacts?";
 "contact_phase2_delete_contacts_confirm_message" = "These contacts will be deleted from your lifebox. Are you sure you want to delete?";

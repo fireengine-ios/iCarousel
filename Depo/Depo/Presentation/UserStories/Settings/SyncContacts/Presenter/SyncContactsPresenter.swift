@@ -111,7 +111,7 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
     
     func analyzeSuccess(response: [ContactSync.AnalyzedContact]) {
         if !response.isEmpty {
-            router.goToDuplicatedContacts(with: response, delegate: nil)
+            router.goToDuplicatedContacts(with: response)
         } else {
             let controller = PopUpController.with(title: nil,
                                                   message: TextConstants.errorAlertTextNoDuplicatedContacts,

@@ -656,6 +656,8 @@ struct TextConstants {
     
     static let restoreContactsConfirmTitle = NSLocalizedString("contact_phase2_restore_contacts_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let restoreContactsConfirmMessage = NSLocalizedString("contact_phase2_restore_contacts_confirm_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreContactsRestoreTitle = NSLocalizedString("contact_phase2_restore_contacts_progress_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreContactsRestoreMessage = NSLocalizedString("contact_phase2_restore_contacts_progress_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let deleteContactsConfirmTitle = NSLocalizedString("contact_phase2_delete_contacts_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteContactsConfirmMessage = NSLocalizedString("contact_phase2_delete_contacts_confirm_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
