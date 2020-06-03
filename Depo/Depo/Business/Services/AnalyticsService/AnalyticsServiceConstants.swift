@@ -1586,7 +1586,7 @@ enum GADementionsFields {
         case .statusType:
             return "statusType"
         case .usagePercentage:
-            return "used_percentage_value"
+            return "quotaStatus"
         }
     }
     
