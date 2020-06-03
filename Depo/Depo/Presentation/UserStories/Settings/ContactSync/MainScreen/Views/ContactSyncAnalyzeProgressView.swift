@@ -8,7 +8,15 @@
 
 import UIKit
 
+protocol ContactSyncAnalyzeProgressViewDelegate: class {
+    func cancelAnalyze()
+}
+
+
 final class ContactSyncAnalyzeProgressView: UIView, NibInit {
+    
+    weak var delegate: ContactSyncAnalyzeProgressViewDelegate?
+    
     
     @IBOutlet private weak var percentage: UILabel! {
         willSet {
@@ -92,7 +100,7 @@ final class ContactSyncAnalyzeProgressView: UIView, NibInit {
     //MARK: - Private
     
     @IBAction private func didTouchCancelAnalyze(_ sender: Any) {
-        //
+        delegate?.cancelAnalyze()
     }
     
     private func set(percentageValue: Int) {

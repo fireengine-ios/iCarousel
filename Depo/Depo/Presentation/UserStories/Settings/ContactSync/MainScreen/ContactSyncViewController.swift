@@ -40,6 +40,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     
     private lazy var analyzeProgressView: ContactSyncAnalyzeProgressView = {
         let view = ContactSyncAnalyzeProgressView.initFromNib()
+        view.delegate = self
         return view
     }()
     
@@ -123,6 +124,12 @@ final class ContactSyncViewController: BaseViewController, NibInit {
 
 
 //MARK:- protocols extensions
+
+extension ContactSyncViewController: ContactSyncAnalyzeProgressViewDelegate {
+    func cancelAnalyze() {
+        contactSyncHelper.cancelAnalyze()
+    }
+}
 
 extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
     func backUp(isConfirmed: Bool) {
