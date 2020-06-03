@@ -17,14 +17,16 @@ final class ContactsBackupHistoryController: ViewController {
     override func loadView() {
         view = contactHistoryView
         contactHistoryView.delegate = self
-        dataManager = ContuctBackupHistoryDataManager(tableView: contactHistoryView.tableView,
-                                                      delegate: self)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //TODO: Here example how to add 
-        dataManager?.appendItemsForPresent(items: ["Hello", "Hello1"])
+    init(with backup: ContactBuckupItem) {
+        super.init(nibName: nil, bundle: nil)
+        dataManager = ContuctBackupHistoryDataManager(tableView: contactHistoryView.tableView, delegate: self)
+        dataManager?.appendItemsForPresent(items: [backup])
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
 }
 
@@ -39,7 +41,6 @@ extension ContactsBackupHistoryController: ContactsBackupHistoryViewDelegate {
     func restoreBackupTapped() {
         let popup = ContactBackupHistoryPopupFactory.restore.createPopup { _ in
             //TODO: Logic for restore
-            print("Ok tapped")
         }
         router.presentViewController(controller: popup)
     }
@@ -47,7 +48,6 @@ extension ContactsBackupHistoryController: ContactsBackupHistoryViewDelegate {
     func deleteBackupTapped() {
         let popup = ContactBackupHistoryPopupFactory.delete.createPopup { _ in
             ///TODO: Logic for delete
-            print("Ok tapped")
         }
         router.presentViewController(controller: popup)
     }

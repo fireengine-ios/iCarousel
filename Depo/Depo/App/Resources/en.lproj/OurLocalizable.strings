@@ -1541,13 +1541,6 @@
 "my_packages_description" = "If you want to restore your existing purchases, click on Restore Purchases button.";
 "photo_video_auto_sync_settings" = "Auto-Sync Settings";
 "ubsent_contacts_in_lifebox" = "There is no any contact in your lifebox";
-"contact_phase2_history_header" = "Your latest backup";
-"contact_phase2_restore_button" = "Restore Backup";
-"contact_phase2_delete_button" = "Delete Backup";
-"contact_phase2_restore_popup_title" = "Restore Backup?";
-"contact_phase2_delete_popup_title" = "Delete Backup?";
-"contact_phase2_restore_popup_message" = "Your phone contact list will be change according to this backup?  Are you sure you want to restore?";
-"contact_phase2_delete_popup_message" = "This backup will be deleted from your lifebox. Are you sure you want to delete?";
 "auto_sync_albums_description" = "You can choose which albums to sync automatically.";
 "tabbar_item_home_label" = "Home";
 "tabbar_item_gallery_label" = "Gallery";
@@ -1612,3 +1605,11 @@
 "contact_phase2_backup_progress_title" = "Back up Contacts";
 "contact_phase2_backup_progress_message" = "You can backup your contacts to lifebox.\nBy doing that you can easly access your contact list from any device and anywhere.";
 
+"contact_phase2_history_header" = "Your latest backup";
+"contact_phase2_restore_button" = "Restore Backup";
+"contact_phase2_delete_button" = "Delete Backup";
+"contact_phase2_restore_popup_title" = "Restore Backup?";
+"contact_phase2_delete_popup_title" = "Delete Backup?";
+"contact_phase2_restore_popup_message" = "Your phone contact list will be change according to this backup?  Are you sure you want to restore?";
+"contact_phase2_delete_popup_message" = "This backup will be deleted from your lifebox. Are you sure you want to delete?";
+"contact_phase2_history_cell_title" = "Contacts";

@@ -7,7 +7,7 @@
 //
 
 struct ContactSync {
-    struct SyncResponse {
+    struct SyncResponse: Equatable {
         let responseType: SyncOperationType
         var totalNumberOfContacts: Int
         let newContactsNumber: Int
