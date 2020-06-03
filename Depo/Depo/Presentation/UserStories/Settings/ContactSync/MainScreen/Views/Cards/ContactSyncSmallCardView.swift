@@ -10,7 +10,7 @@ import UIKit
 
 
 enum ContactSyncSmallCardType {
-    case showBackup
+    case showBackup(date: Date)
     case deleteDuplicates
 }
 
@@ -46,6 +46,22 @@ final class ContactSyncSmallCardView: UIView, NibInit {
         }
     }
 
+    private let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMMM yyyy"
+        dateFormatter.locale = Locale.current
+        return dateFormatter
+    }()
+    
+    private let attributedLastBackupMessage: NSAttributedString = {
+        let attributesStatic: [NSAttributedStringKey : Any] = [
+            .font: UIFont.TurkcellSaturaMedFont(size: 16.0),
+            .foregroundColor: ColorConstants.charcoalGrey
+        ]
+        let attributedStatic = NSAttributedString(string: TextConstants.contactSyncSmallCardShowBackupMessage, attributes: attributesStatic)
+        
+        return attributedStatic
+    }()
     
     private var actionHandler: VoidHandler?
     
@@ -71,15 +87,26 @@ final class ContactSyncSmallCardView: UIView, NibInit {
         actionHandler = action
         
         switch type {
-            case .showBackup:
+            case .showBackup(_):
                 icon.image = UIImage(named: "contact_sync_stage_2_card_backup")
-                message.text = TextConstants.contactSyncSmallCardShowBackupMessage
+                message.text = " "
                 actionButton.setTitle(TextConstants.contactSyncSmallCardShowBackupButton, for: .normal)
             
             case .deleteDuplicates:
                 icon.image = UIImage(named: "contact_sync_stage_2_card_duplicates")
                 message.text = TextConstants.contactSyncSmallCardDeleteDuplicatesMessage
                 actionButton.setTitle(TextConstants.contactSyncSmallCardDeleteDuplicatesButton, for: .normal)
+        }
+    }
+    
+    func update(type: ContactSyncSmallCardType) {
+        switch type {
+            case .showBackup(let date):
+                let attributed = attributedString(dateString: dateFormatter.string(from: date))
+                message.attributedText = attributed
+                
+            default:
+                break
         }
     }
     
@@ -101,6 +128,20 @@ final class ContactSyncSmallCardView: UIView, NibInit {
                                                      height: layer.frame.size.height)).cgPath
     }
     
+    
+    
+    
+    private func attributedString(dateString: String) -> NSMutableAttributedString{
+        let attributesDate: [NSAttributedStringKey : Any] = [
+            .font: UIFont.TurkcellSaturaBolFont(size: 16.0),
+            .foregroundColor: ColorConstants.charcoalGrey
+        ]
+        let attributedDate = NSMutableAttributedString(string: dateString + ".", attributes: attributesDate)
+        
+        attributedDate.insert(attributedLastBackupMessage, at: 0)
+        
+        return attributedDate
+    }
     
     //MARK: - IB Actions
     
