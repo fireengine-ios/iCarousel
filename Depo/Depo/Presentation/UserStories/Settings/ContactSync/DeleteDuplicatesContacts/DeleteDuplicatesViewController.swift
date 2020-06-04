@@ -22,13 +22,13 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     
     private lazy var deleteProgressView = ContactSyncProgressView.setup(type: .deleteDuplicates)
     private lazy var backupProgressView = ContactSyncProgressView.setup(type: .backup)
+    private var resultView: ContactsOperationView?
     
     private let contactSyncHelper = ContactSyncHelper.shared
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var animator = ContentViewAnimator()
     
     private var contacts = [ContactSync.AnalyzedContact]()
-    private var resultView: ContactsOperationView?
     
     private lazy var router = RouterVC()
     
@@ -98,15 +98,20 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         showPopup(type: .deleteDuplicates)
     }
     
-    private func showResultView(type: ContactsOperationType, result: ContactsOperationResult, count: Int = 0) {
-        resultView = ContactsOperationView.with(type: type, result: result, count: count)
-        
-        if type == .deleteDuplicates && result == .success {
-            let backUpCard = BackUpContactsCard.initFromNib()
-            resultView?.add(card: backUpCard)
-            
-            backUpCard.backUpHandler = { [weak self] in
-                self?.showPopup(type: .backup)
+    private func showResultView(type: ContactsOperationType, result: ContactsOperationResult) {
+        resultView = ContactsOperationView.with(type: type, result: result)
+                
+        if result == .success {
+            switch type {
+            case .deleteDuplicates:
+                let backUpCard = BackUpContactsCard.initFromNib()
+                resultView?.add(card: backUpCard)
+                
+                backUpCard.backUpHandler = { [weak self] in
+                    self?.showPopup(type: .backup)
+                }
+            default:
+                break
             }
         }
         
@@ -166,10 +171,10 @@ extension DeleteDuplicatesViewController: UITableViewDataSource {
 
 extension DeleteDuplicatesViewController: ContactSyncHelperDelegate {
     
-    func didBackup(newContactsCount: Int) {
+    func didBackup(result: ContactSync.SyncResponse) {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .backup, status: .success))
         
-        showResultView(type: .backUp, result: .success, count: newContactsCount)
+        showResultView(type: .backUp(result), result: .success)
     }
     
     func didDeleteDuplicates() {
@@ -225,7 +230,7 @@ extension DeleteDuplicatesViewController: ContactSyncControllerProtocol {
         case .syncError(_):
             switch operationType {
             case .backup:
-                showResultView(type: .backUp, result: .failed)
+                showResultView(type: .backUp(nil), result: .failed)
             case .deleteDuplicated:
                 showResultView(type: .deleteDuplicates, result: .failed)
             default:

@@ -236,8 +236,8 @@ private extension ContactListViewController {
         present(actionSheet, animated: true)
     }
     
-    func showResultView(type: ContactsOperationType, result: ContactsOperationResult, count: Int = 0) {
-        resultView = ContactsOperationView.with(type: type, result: result, count: count)
+    func showResultView(type: ContactsOperationType, result: ContactsOperationResult) {
+        resultView = ContactsOperationView.with(type: type, result: result)
         
         if result == .success {
             switch type {
@@ -339,8 +339,8 @@ extension ContactListViewController: ContactSyncHelperDelegate {
         showResultView(type: .restore, result: .success)
     }
     
-    func didBackup(newContactsCount: Int) {
-        showResultView(type: .backUp, result: .success, count: newContactsCount)
+    func didBackup(result: ContactSync.SyncResponse) {
+        showResultView(type: .backUp(result), result: .success)
     }
     
     func progress(progress: Int, for operationType: SyncOperationType) {

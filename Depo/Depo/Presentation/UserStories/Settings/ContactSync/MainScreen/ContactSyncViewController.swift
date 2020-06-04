@@ -204,14 +204,14 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
         }
     }
     
-    func didBackup(newContactsCount: Int) {
+    func didBackup(result: ContactSync.SyncResponse) {
         hideSpinner()
         updateBackupStatus()
         
         DispatchQueue.main.async {
             self.showRelatedView()
             
-            let controller = self.router.contactSyncSuccessController(syncResult: self.syncModel, periodicSync: self.periodicSyncHelper)
+            let controller = self.router.contactSyncSuccessController(syncResult: result, periodicSync: self.periodicSyncHelper)
             self.router.pushViewController(viewController: controller)
             
             CardsManager.default.stopOperationWith(type: .contactBacupOld)

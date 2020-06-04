@@ -14,7 +14,7 @@ class ContactSyncOperationResultController: BaseViewController, NibInit {
     static func create(with type: ContactsOperationResult, syncResult: ContactSync.SyncResponse?, periodicSync: PeriodicSync) -> ContactSyncOperationResultController {
         let controller = ContactSyncOperationResultController.initFromNib()
         controller.periodicSyncHelper = periodicSync
-        controller.numberOfContacts = syncResult?.totalNumberOfContacts ?? 0
+        controller.syncResult = syncResult
         controller.type = type
         return controller
     }
@@ -24,10 +24,10 @@ class ContactSyncOperationResultController: BaseViewController, NibInit {
     
     private var periodicSyncHelper: PeriodicSync!
     private var type: ContactsOperationResult!
-    private var numberOfContacts = 0
+    private var syncResult: ContactSync.SyncResponse?
     
     private lazy var successView: UIView = {
-        let view = ContactsOperationView.with(type: .backUp, result: .success, count: numberOfContacts)
+        let view = ContactsOperationView.with(type: .backUp(syncResult), result: .success)
         if periodicSyncHelper.settings.timeSetting.option == .off {
             view.add(card: scheduleCard)
         }
@@ -48,7 +48,7 @@ class ContactSyncOperationResultController: BaseViewController, NibInit {
     
     
     private lazy var failView: UIView = {
-        return ContactsOperationView.with(type: .backUp, result: .failed, count: numberOfContacts)
+        return ContactsOperationView.with(type: .backUp(nil), result: .failed)
     }()
     
     private lazy var autobackupActionSheet: UIAlertController = {
