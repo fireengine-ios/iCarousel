@@ -206,7 +206,7 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
     
     func didBackup() {
         hideSpinner()
-        showRelatedView()
+        updateBackupStatus()
         
         DispatchQueue.main.async {
             CardsManager.default.stopOperationWith(type: .contactBacupOld)
