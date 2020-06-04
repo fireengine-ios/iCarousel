@@ -20,7 +20,7 @@ enum ContactSyncProgressType {
         case .deleteDuplicates:
             return TextConstants.deleteDuplicatesProgressTitle
         case .restore:
-            return TextConstants.restoreContactsRestoreTitle
+            return TextConstants.restoreContactsProgressTitle
         }
     }
     
@@ -31,7 +31,7 @@ enum ContactSyncProgressType {
         case .deleteDuplicates:
             return TextConstants.deleteDuplicatesProgressMessage
         case .restore:
-            return TextConstants.restoreContactsRestoreMessage
+            return TextConstants.restoreContactsProgressMessage
         }
     }
 }

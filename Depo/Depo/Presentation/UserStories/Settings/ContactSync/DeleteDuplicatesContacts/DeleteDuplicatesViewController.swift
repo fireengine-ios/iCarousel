@@ -98,8 +98,8 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         showPopup(type: .deleteDuplicates)
     }
     
-    private func showResultView(type: ContactsOperationType, result: ContactsOperationResult) {
-        resultView = ContactsOperationView.with(type: type, result: result)
+    private func showResultView(type: ContactsOperationType, result: ContactsOperationResult, count: Int = 0) {
+        resultView = ContactsOperationView.with(type: type, result: result, count: count)
         
         if type == .deleteDuplicates && result == .success {
             let backUpCard = BackUpContactsCard.initFromNib()
@@ -166,10 +166,10 @@ extension DeleteDuplicatesViewController: UITableViewDataSource {
 
 extension DeleteDuplicatesViewController: ContactSyncHelperDelegate {
     
-    func didBackup() {
+    func didBackup(newContactsCount: Int) {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .backup, status: .success))
         
-        showResultView(type: .backUp, result: .success)
+        showResultView(type: .backUp, result: .success, count: newContactsCount)
     }
     
     func didDeleteDuplicates() {

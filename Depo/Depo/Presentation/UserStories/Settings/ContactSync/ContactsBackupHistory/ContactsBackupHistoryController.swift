@@ -90,8 +90,8 @@ final class ContactsBackupHistoryController: ViewController {
         animator.showTransition(to: view, on: self.view, animated: true)
     }
     
-    private func showResultView(type: ContactsOperationType, result: ContactsOperationResult) {
-        resultView = ContactsOperationView.with(type: type, result: result)
+    private func showResultView(type: ContactsOperationType, result: ContactsOperationResult, count: Int = 0) {
+        resultView = ContactsOperationView.with(type: type, result: result, count: count)
         
         if result == .success {
             switch type {
@@ -137,8 +137,8 @@ extension ContactsBackupHistoryController: ContactSyncHelperDelegate {
         showResultView(type: .restore, result: .success)
     }
     
-    func didBackup() {
-        showResultView(type: .backUp, result: .success)
+    func didBackup(newContactsCount: Int) {
+        showResultView(type: .backUp, result: .success, count: newContactsCount)
     }
     
     func progress(progress: Int, for operationType: SyncOperationType) {
