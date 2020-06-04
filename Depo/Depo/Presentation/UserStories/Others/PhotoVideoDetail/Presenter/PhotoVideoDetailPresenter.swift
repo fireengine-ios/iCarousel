@@ -376,4 +376,8 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
         let peopleItem = PeopleItem(response: peopleItemResponse)
         interactor.getPeopleAlbum(with: peopleItem, id: id)
     }
+    
+    func tapGesture(recognizer: UITapGestureRecognizer) {
+        view.closeDetailViewIfNeeded()
+    }
 }

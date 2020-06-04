@@ -410,6 +410,7 @@ struct TextConstants {
     
     // MARK: Popup
     static let ok = NSLocalizedString("OK", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let downloadDocumentErrorPopup = NSLocalizedString("download_document_error_popup", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: All files
     static let allFilesViewNoFilesTitleText = NSLocalizedString("You don’t have any files on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

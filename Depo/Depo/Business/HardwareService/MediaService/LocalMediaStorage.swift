@@ -562,7 +562,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileUrl)
                     assetPlaceholder = request?.placeholderForCreatedAsset
                 default:
-                    handler(.failed(ErrorResponse.string("Only for photo & Video")))
+                    handler(.failed(ErrorResponse.string(TextConstants.downloadDocumentErrorPopup)))
             }
             
         }, completionHandler: { [weak self] status, error in

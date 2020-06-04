@@ -13,6 +13,7 @@ protocol PhotoInfoViewControllerOutput {
     func onEnableFaceRecognitionDidTap()
     func onBecomePremiumDidTap()
     func onPeopleAlbumDidTap(_ album: PeopleOnPhotoItemResponse)
+    func tapGesture(recognizer: UITapGestureRecognizer)
 }
 
 final class FileInfoView: UIView, FromNib {
@@ -30,6 +31,11 @@ final class FileInfoView: UIView, FromNib {
             newValue.layer.cornerRadius = 7
         }
     }
+    
+    private lazy var tapGestureRecognizer: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizerHandler))
+        return gesture
+    }()
     
     // file name
     @IBOutlet private weak var fileNameTitleLabel: UILabel! {
@@ -341,6 +347,7 @@ final class FileInfoView: UIView, FromNib {
         fileNameTextField.delegate = self
         fileNameTextField.isUserInteractionEnabled = false
         changeEditStatus(false)
+        addGestureRecognizer(tapGestureRecognizer)
     }
     
     private func changeEditStatus(_ isEditing: Bool) {
@@ -389,6 +396,10 @@ final class FileInfoView: UIView, FromNib {
             premiumStackView.isHidden
             && peopleCollectionView.isHidden
             && enableFIRStackView.isHidden
+    }
+    
+    @objc private func tapGestureRecognizerHandler(_ gestureRecognizer: UITapGestureRecognizer) {
+        output?.tapGesture(recognizer: gestureRecognizer)
     }
     
     // MARK: Actions
