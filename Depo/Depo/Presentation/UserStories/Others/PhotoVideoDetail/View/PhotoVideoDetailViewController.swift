@@ -210,6 +210,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         output.viewWillDisappear()
         passThroughView?.disableGestures()
+        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
     override func viewDidLayoutSubviews() {
