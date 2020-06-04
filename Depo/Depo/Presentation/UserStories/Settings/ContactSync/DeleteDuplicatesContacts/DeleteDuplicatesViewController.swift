@@ -8,13 +8,6 @@
 
 import UIKit
 
-private enum DeleteDuplicatesError {
-    case notPremiumUser
-    case accessDenied
-    case deleteDuplicatesFailed
-    case syncError(Error)
-}
-
 final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     
     @IBOutlet private weak var tableView: UITableView!
@@ -27,30 +20,23 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         }
     }
     
-    private lazy var progressView: ContactSyncProgressView = {
-        let view = ContactSyncProgressView.setup(title: TextConstants.deleteDuplicatesProgressTitle,
-                                                 message: TextConstants.deleteDuplicatesProgressMessage)
-        return view
-    }()
+    private lazy var deleteProgressView = ContactSyncProgressView.setup(type: .deleteDuplicates)
+    private lazy var backupProgressView = ContactSyncProgressView.setup(type: .backup)
     
-    private let contactsSyncService = ContactsSyncService()
-    private let localContactsService = ContactService()
-    private let accountService = AccountService()
+    private let contactSyncHelper = ContactSyncHelper.shared
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var animator = ContentViewAnimator()
     
     private var contacts = [ContactSync.AnalyzedContact]()
-    private weak var delegate: ContactsBackupActionProviderProtocol?
     private var resultView: ContactsOperationView?
     
     private lazy var router = RouterVC()
     
     // MARK: -
     
-    static func with(contacts: [ContactSync.AnalyzedContact], delegate: ContactsBackupActionProviderProtocol?) -> DeleteDuplicatesViewController {
+    static func with(contacts: [ContactSync.AnalyzedContact]) -> DeleteDuplicatesViewController {
         let controller = DeleteDuplicatesViewController.initFromNib()
         controller.contacts = contacts
-        controller.delegate = delegate
         return controller
     }
     
@@ -58,6 +44,8 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        contactSyncHelper.delegate = self
         
         backButtonForNavigationItem(title: TextConstants.backTitle)
         setTitle(withString: TextConstants.deleteDuplicatesTitle)
@@ -76,9 +64,7 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if contactsSyncService.getCurrentOperationType() != .backup {
-            contactsSyncService.cancelAnalyze()
-        }
+        contactSyncHelper.cancelAnalyze()
     }
     
     override func viewDidLayoutSubviews() {
@@ -112,44 +98,19 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         showPopup(type: .deleteDuplicates)
     }
     
-    private func deleteDuplicates() {
-        showSpinner()
-        startDeleteDuplicates()
-    }
-    
-    private func showDeleteProgress(_ progress: Int) {
-        progressView.update(progress: progress)
-    }
-    
-    private func deleteDuplicatesSuccess() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, status: .success))
+    private func showResultView(type: ContactsOperationType, result: ContactsOperationResult, count: Int = 0) {
+        resultView = ContactsOperationView.with(type: type, result: result, count: count)
         
-        progressView.removeFromSuperview()
-        showResultView(result: .success)
-        
-        let backUpCard = BackUpContactsCard.initFromNib()
-        resultView?.add(card: backUpCard)
-        
-        backUpCard.backUpHandler = { [weak self] in
-            self?.showPopup(type: .backup)
+        if type == .deleteDuplicates && result == .success {
+            let backUpCard = BackUpContactsCard.initFromNib()
+            resultView?.add(card: backUpCard)
+            
+            backUpCard.backUpHandler = { [weak self] in
+                self?.showPopup(type: .backup)
+            }
         }
-    }
-    
-    private func deleteDuplicatesFailure() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, status: .failure))
-        handleError(.deleteDuplicatesFailed)
-    }
-    
-    private func showResultView(result: ContactsOperationResult) {
-        deleteResultView()
         
-        resultView = ContactsOperationView.with(type: .deleteDuplicates, result: result)
         show(view: resultView!, animated: true)
-    }
-    
-    private func deleteResultView() {
-        resultView?.removeFromSuperview()
-        resultView = nil
     }
     
     private func show(view: UIView, animated: Bool) {
@@ -157,52 +118,32 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
         animator.showTransition(to: view, on: contentView, animated: animated)
     }
     
-    private func handleError(_ error: DeleteDuplicatesError) {
-        hideSpinner()
-        progressView.removeFromSuperview()
+    private func backup() {
+        backupProgressView.reset()
         
-        switch error {
-        case .notPremiumUser:
-            //TODO: show warning
-            break
-            
-        case .accessDenied:
-            //TODO: show warning
-            break
-            
-        case .deleteDuplicatesFailed:
-            showResultView(result: .failed)
-            
-        case .syncError(let error):
-            UIApplication.showErrorAlert(message: error.description)
-        }
-    }
-    
-    private func showPopup(type: ContactSyncPopupType) {
-        let handler: VoidHandler = { [weak self] in
+        showSpinner()
+        contactSyncHelper.backup { [weak self] in
             guard let self = self else {
                 return
             }
             
-            switch type {
-            case .backup:
-                self.delegate?.backUp(isConfirmed: true)
-                self.navigationController?.popViewController(animated: true)
-            case .deleteDuplicates:
-                self.deleteDuplicates()
-            case .premium:
-                let controller = self.router.premium(source: .contactSync)
-                self.router.pushViewController(viewController: controller)
-            default:
-                break
-            }
+//            self.analyticsHelper.trackBackupScreen()
+            self.hideSpinner()
         }
+    }
 
-        let popup = ContactSyncPopupFactory.createPopup(type: type) { vc in
-            vc.close(isFinalStep: false, completion: handler)
-        }
+    private func deleteDuplicates() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                            eventActions: .phonebook,
+                                            eventLabel: .contact(.deleteDuplicates))
+
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteDuplicateScreen())
         
-        present(popup, animated: true)
+        deleteProgressView.reset()
+        showSpinner()
+        contactSyncHelper.deleteDuplicates { [weak self] in
+            self?.hideSpinner()
+        }
     }
 }
 
@@ -221,96 +162,78 @@ extension DeleteDuplicatesViewController: UITableViewDataSource {
     }
 }
 
-private extension DeleteDuplicatesViewController {
-    
-    func startDeleteDuplicates() {
-        progressView.reset()
-        show(view: progressView, animated: true)
-        
-        userHasPermissionFor(type: .deleteDublicate) { [weak self] hasPermission in
-            guard hasPermission else {
-                self?.handleError(.notPremiumUser)
-                return
-            }
-            
-            self?.requestAccess { [weak self] success in
-                guard let self = self else {
-                    return
-                }
+//MARK: - ContactSyncHelperDelegate
 
-                guard success else {
-                    self.handleError(.accessDenied)
-                    return
-                }
-                
-                self.hideSpinner()
-                self.continueDeleteDuplicates()
-            }
-        }
+extension DeleteDuplicatesViewController: ContactSyncHelperDelegate {
+    
+    func didBackup(newContactsCount: Int) {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .backup, status: .success))
+        
+        showResultView(type: .backUp, result: .success, count: newContactsCount)
     }
     
-    func continueDeleteDuplicates() {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions,
-                                            eventActions: .phonebook,
-                                            eventLabel: .contact(.deleteDuplicates))
+    func didDeleteDuplicates() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, status: .success))
         
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteDuplicateScreen())
-        
-        contactsSyncService.analyze(progressCallback: { [weak self] progress, count, type in
-            guard let self = self, type == .deleteDuplicated else {
+        showResultView(type: .deleteDuplicates, result: .success)
+    }
+    
+    func progress(progress: Int, for operationType: SyncOperationType) {
+        switch operationType {
+        case .backup:
+            show(view: backupProgressView, animated: true)
+            backupProgressView.update(progress: progress)
+        case .deleteDuplicated:
+            show(view: deleteProgressView, animated: true)
+            deleteProgressView.update(progress: progress)
+        default:
+            break
+        }
+    }
+}
+
+extension DeleteDuplicatesViewController: ContactSyncControllerProtocol {
+    
+    func showPopup(type: ContactSyncPopupType) {
+        let handler: VoidHandler = { [weak self] in
+            guard let self = self else {
                 return
             }
             
-            if progress == 0 {
-                self.deleteDuplicatesSuccess()
-            } else {
-                self.showDeleteProgress(progress)
+            switch type {
+            case .backup:
+                self.backup()
+            case .deleteDuplicates:
+                self.deleteDuplicates()
+            case .premium:
+                let controller = self.router.premium(source: .contactSync)
+                self.router.pushViewController(viewController: controller)
+            default:
+                break
+            }
+        }
+
+        let popup = ContactSyncPopupFactory.createPopup(type: type) { vc in
+            vc.close(isFinalStep: false, completion: handler)
+        }
+        
+        present(popup, animated: true)
+    }
+    
+    func handle(error: ContactSyncHelperError, operationType: SyncOperationType) {
+        switch error {
+        case .syncError(_):
+            switch operationType {
+            case .backup:
+                showResultView(type: .backUp, result: .failed)
+            case .deleteDuplicated:
+                showResultView(type: .deleteDuplicates, result: .failed)
+            default:
+                break
             }
             
-        }, successCallback: nil,
-           cancelCallback: nil,
-        errorCallback: { [weak self] _, type in
-            if type == .deleteDuplicated {
-                self?.deleteDuplicatesFailure()
-            }
-        })
-        contactsSyncService.deleteDuplicates()
-    }
-    
-    func userHasPermissionFor(type: AuthorityType, completion: @escaping BoolHandler) {
-        accountService.permissions { [weak self] response in
-            switch response {
-            case .success(let result):
-                AuthoritySingleton.shared.refreshStatus(with: result)
-                completion(result.hasPermissionFor(type))
-                
-            case .failed(let error):
-                completion(false)
-                self?.handleError(.syncError(error))
-            }
-        }
-    }
-    
-    func requestAccess(completionHandler: @escaping ContactsPermissionCallback) {
-        localContactsService.askPermissionForContactsFramework(redirectToSettings: true) { isGranted in
-            AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(isGranted)
-            completionHandler(isGranted)
-        }
-    }
-    
-    func updateAccessToken(complition: @escaping VoidHandler) {
-        let auth: AuthorizationRepository = factory.resolve()
-        auth.refreshTokens { [weak self] _, accessToken, error  in
-            if let accessToken = accessToken {
-                let tokenStorage: TokenStorage = factory.resolve()
-                tokenStorage.accessToken = accessToken
-                self?.contactsSyncService.updateAccessToken()
-                complition()
-            } else if error?.isNetworkError == true {
-                self?.handleError(.syncError(SyncOperationErrors.networkError))
-            } else {
-                self?.handleError(.syncError(SyncOperationErrors.failed))
-            }
+        default:
+            break
         }
     }
 }

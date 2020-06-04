@@ -10,7 +10,7 @@ import UIKit
 
 //TODO: Need configure states and localize strings
 enum ContactsOperationType {
-    case backUp(contacts: Int)
+    case backUp
     case deleteBackUp
     case deleteDuplicates
     case deleteAllContacts
@@ -22,33 +22,31 @@ enum ContactsOperationType {
         }
         
         switch self {
-        case .backUp(_):
-            return TextConstants.contactSyncBackupSuccessTitle
-        case .deleteBackUp:
-            return "Delete Successfully"
-        case .deleteDuplicates, .deleteAllContacts:
+        case .backUp:
+            return TextConstants.contactBackupSuccessTitle
+        case .deleteBackUp, .deleteDuplicates, .deleteAllContacts:
             return TextConstants.deleteDuplicatesSuccessTitle
         case .restore:
-            return "Restore Successfully"
+            return TextConstants.restoreContactsSuccessTitle
         }
     }
     
-    func message(result: ContactsOperationResult) -> String {
+    func message(result: ContactsOperationResult, count: Int) -> String {
         if result == .failed {
             return "An unknown error was encountered. Please try again later."
         }
         
         switch self {
-        case .backUp(let contacts):
-            return String(format: TextConstants.contactSyncBackupSuccessMessage, contacts)
+        case .backUp:
+            return String(format: TextConstants.contactBackupSuccessMessage, count)
         case .deleteBackUp:
-            return "You delete duplicated contacts from your phone and lorem ipsum lorem ipsum."
+            return TextConstants.deleteBackupSuccessMessage
         case .deleteDuplicates:
             return TextConstants.deleteDuplicatesSuccessMessage
         case .deleteAllContacts:
             return TextConstants.deleteAllContactsSuccessMessage
         case .restore:
-            return "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna."
+            return TextConstants.restoreContactsSuccessMessage
         }
     }
 }
@@ -103,10 +101,10 @@ final class ContactsOperationView: UIView, NibInit {
         }
     }
 
-    static func with(type: ContactsOperationType, result: ContactsOperationResult) -> ContactsOperationView {
+    static func with(type: ContactsOperationType, result: ContactsOperationResult, count: Int) -> ContactsOperationView {
         let view = ContactsOperationView.initFromNib()
         view.titleLabel.text = type.title(result: result)
-        view.messageLabel.text = type.message(result: result)
+        view.messageLabel.text = type.message(result: result, count: count)
         view.imageView.image = result.image
         return view
     }

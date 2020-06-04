@@ -49,7 +49,7 @@ final class ContactSyncNoBackupView: UIView, NibInit {
     
     @IBAction private func backUp(_ sender: Any) {
         if let delegate = delegate {
-            delegate.backUp(isConfirmed: true)
+            delegate.backUp()
         }
     }
 }

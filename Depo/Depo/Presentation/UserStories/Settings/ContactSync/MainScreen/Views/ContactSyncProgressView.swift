@@ -8,13 +8,40 @@
 
 import UIKit
 
+enum ContactSyncProgressType {
+    case backup
+    case deleteDuplicates
+    case restore
+    
+    var title: String {
+        switch self {
+        case .backup:
+            return TextConstants.contactSyncBackupProgressTitle
+        case .deleteDuplicates:
+            return TextConstants.deleteDuplicatesProgressTitle
+        case .restore:
+            return TextConstants.restoreContactsProgressTitle
+        }
+    }
+    
+    var message: String {
+        switch self {
+        case .backup:
+            return TextConstants.contactSyncBackupProgressMessage
+        case .deleteDuplicates:
+            return TextConstants.deleteDuplicatesProgressMessage
+        case .restore:
+            return TextConstants.restoreContactsProgressMessage
+        }
+    }
+}
+
 final class ContactSyncProgressView: UIView, NibInit {
     
-    static func setup(title: String, message: String) -> ContactSyncProgressView {
+    static func setup(type: ContactSyncProgressType) -> ContactSyncProgressView {
         let view = ContactSyncProgressView.initFromNib()
-        view.title.text = title
-        view.message.text = message
-        
+        view.title.text = type.title
+        view.message.text = type.message
         return view
     }
     

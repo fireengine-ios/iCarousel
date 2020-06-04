@@ -11,7 +11,7 @@ import Foundation
 protocol SyncContactsRouterInput {
     func goToConnectedToNetworkFailed()
     func goToManageContacts(moduleOutput: ManageContactsModuleOutput?)
-    func goToDuplicatedContacts(with analyzeResponse: [ContactSync.AnalyzedContact], delegate: ContactsBackupActionProviderProtocol?)
+    func goToDuplicatedContacts(with analyzeResponse: [ContactSync.AnalyzedContact])
     func goToPremium()
     func showError(errorMessage: String)
     func showFullQuotaPopUp()

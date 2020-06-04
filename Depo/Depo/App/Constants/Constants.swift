@@ -655,10 +655,15 @@ struct TextConstants {
     
     static let restoreContactsConfirmTitle = NSLocalizedString("contact_phase2_restore_contacts_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let restoreContactsConfirmMessage = NSLocalizedString("contact_phase2_restore_contacts_confirm_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreContactsProgressTitle = NSLocalizedString("contact_phase2_restore_contacts_progress_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreContactsProgressMessage = NSLocalizedString("contact_phase2_restore_contacts_progress_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreContactsSuccessTitle = NSLocalizedString("contact_phase2_restore_contacts_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreContactsSuccessMessage = NSLocalizedString("contact_phase2_restore_contacts_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let deleteContactsConfirmTitle = NSLocalizedString("contact_phase2_delete_contacts_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteContactsConfirmMessage = NSLocalizedString("contact_phase2_delete_contacts_confirm_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteAllContactsSuccessMessage = NSLocalizedString("contact_phase2_delete_all_contacts_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteBackupSuccessMessage = NSLocalizedString("contact_phase2_delete_backup_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let contactDetailNavBarTitle = NSLocalizedString("contact_phase2_contact_detail_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactDetailSectionPhone = NSLocalizedString("contact_phase2_contact_detail_section_phone", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1883,8 +1888,8 @@ struct TextConstants {
     static let contactSyncBackupProgressMessage = NSLocalizedString("contact_phase2_backup_progress_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncCancelAnalyzeButton = NSLocalizedString("contact_phase2_cancel_analyze_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncAnalyzeProgressMessage = NSLocalizedString("contact_phase2_analyze_progress_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactSyncBackupSuccessTitle = NSLocalizedString("contact_phase2_delete_backup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let contactSyncBackupSuccessMessage = NSLocalizedString("contact_phase2_delete_backup_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncBackupSuccessCardTitle = NSLocalizedString("contact_phase2_delete_backup_success_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncBackupSuccessCardMessage = NSLocalizedString("contact_phase2_delete_backup_success_card_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactBackupSuccessTitle = NSLocalizedString("contact_phase2_contact_backup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactBackupSuccessMessage = NSLocalizedString("contact_phase2_contact_backup_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

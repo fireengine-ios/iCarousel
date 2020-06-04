@@ -456,8 +456,8 @@ class RouterVC: NSObject {
         return viewController
     }
     
-    func deleteContactDuplicates(analyzeResponse: [ContactSync.AnalyzedContact], delegate: ContactsBackupActionProviderProtocol?) -> UIViewController {
-        return DeleteDuplicatesViewController.with(contacts: analyzeResponse, delegate: delegate)
+    func deleteContactDuplicates(analyzeResponse: [ContactSync.AnalyzedContact]) -> UIViewController {
+        return DeleteDuplicatesViewController.with(contacts: analyzeResponse)
     }
     
     func contactList(backUpInfo: ContactSync.SyncResponse) -> UIViewController {
@@ -466,6 +466,10 @@ class RouterVC: NSObject {
     
     func contactDetail(with contact: RemoteContact) -> UIViewController {
         return ContactListDetailViewController.with(contact: contact)
+    }
+    
+    func backupHistory(backUpInfo: ContactSync.SyncResponse) -> UIViewController {
+        return ContactsBackupHistoryController(with: backUpInfo)
     }
     
     // MARK: Terms

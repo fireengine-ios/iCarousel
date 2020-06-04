@@ -19,10 +19,16 @@ final class ContactListViewController: BaseViewController, NibInit {
         }
     }
     
+    private lazy var backupProgressView = ContactSyncProgressView.setup(type: .backup)
+    private lazy var restoreProgressView = ContactSyncProgressView.setup(type: .restore)
+    private var resultView: ContactsOperationView?
+    
     private lazy var dataSource = ContactListDataSource(tableView: tableView, delegate: self)
     private lazy var contactsSyncService = ContactSyncApiService()
+    private let contactSyncHelper = ContactSyncHelper.shared
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var router = RouterVC()
+    private let animator = ContentViewAnimator()
     
     private var backUpInfo: ContactSync.SyncResponse?
     
@@ -56,6 +62,8 @@ final class ContactListViewController: BaseViewController, NibInit {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationBarWithGradientStyle()
+        
+        contactSyncHelper.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -161,17 +169,32 @@ private extension ContactListViewController {
         }
     }
     
-    func backUp() {
-        //TODO: need start backup
-        //self?.delegate?.backUp(isConfirmed: true)
-        navigationController?.popViewController(animated: true)
+    func backup() {
+        backupProgressView.reset()
+        
+        showSpinner()
+        contactSyncHelper.backup { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+//            self.analyticsHelper.trackBackupScreen()
+            self.hideSpinner()
+        }
     }
     
     func restore() {
-        //TODO: 
+        navigationItem.rightBarButtonItem = nil
+        showSpinner()
+        
+        restoreProgressView.reset()
+        contactSyncHelper.restore { [weak self] in
+            self?.hideSpinner()
+        }
     }
     
     func deleteAll() {
+        navigationItem.rightBarButtonItem = nil
         showSpinner()
         
         currentTask = contactsSyncService.deleteAllContacts { [weak self] result in
@@ -183,8 +206,7 @@ private extension ContactListViewController {
             
             switch result {
             case .success(_):
-                self.navigationItem.rightBarButtonItem = nil
-                self.showDeleteResultView()
+                self.showResultView(type: .deleteAllContacts, result: .success)
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
             }
@@ -214,43 +236,28 @@ private extension ContactListViewController {
         present(actionSheet, animated: true)
     }
     
-    func showPopup(type: ContactSyncPopupType) {
-        let handler: VoidHandler = { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
+    func showResultView(type: ContactsOperationType, result: ContactsOperationResult, count: Int = 0) {
+        resultView = ContactsOperationView.with(type: type, result: result, count: count)
+        
+        if result == .success {
             switch type {
-            case .backup:
-                self.backUp()
             case .deleteAllContacts:
-                self.deleteAll()
-            case .restoreContacts:
-                self.restore()
+                let backUpCard = BackUpContactsCard.initFromNib()
+                resultView?.add(card: backUpCard)
+                
+                backUpCard.backUpHandler = { [weak self] in
+                    self?.showPopup(type: .backup)
+                }
             default:
                 break
             }
         }
-
-        let popup = ContactSyncPopupFactory.createPopup(type: type) { vc in
-            vc.close(isFinalStep: false, completion: handler)
-        }
         
-        present(popup, animated: true)
+        show(view: resultView!, animated: true)
     }
     
-    func showDeleteResultView() {
-        let resultView = ContactsOperationView.with(type: .deleteAllContacts, result: .success)
-        resultView.frame = view.bounds
-        resultView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        view.addSubview(resultView)
-        
-        let backUpCard = BackUpContactsCard.initFromNib()
-        resultView.add(card: backUpCard)
-        
-        backUpCard.backUpHandler = { [weak self] in
-            self?.showPopup(type: .backup)
-        }
+    func show(view: UIView, animated: Bool) {
+        animator.showTransition(to: view, on: self.view, animated: true)
     }
 }
 
@@ -278,5 +285,74 @@ extension ContactListViewController: ContactListHeaderDelegate {
     func cancelSearch() {
         lastQuery = nil
         reloadData()
+    }
+}
+
+//MARK: - ContactSyncControllerProtocol
+
+extension ContactListViewController: ContactSyncControllerProtocol {
+    func showPopup(type: ContactSyncPopupType) {
+        let handler: VoidHandler = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            switch type {
+            case .backup:
+                self.backup()
+            case .deleteAllContacts:
+                self.deleteAll()
+            case .restoreContacts:
+                self.restore()
+            default:
+                break
+            }
+        }
+
+        let popup = ContactSyncPopupFactory.createPopup(type: type) { vc in
+            vc.close(isFinalStep: false, completion: handler)
+        }
+        
+        router.presentViewController(controller: popup)
+    }
+    
+    func handle(error: ContactSyncHelperError, operationType: SyncOperationType) {
+        switch error {
+        case .syncError(_):
+            switch operationType {
+            case .restore:
+                showResultView(type: .restore, result: .failed)
+            default:
+                break
+            }
+            
+        default:
+            break
+        }
+    }
+}
+
+//MARK: - ContactSyncHelperDelegate
+
+extension ContactListViewController: ContactSyncHelperDelegate {
+    func didRestore() {
+        showResultView(type: .restore, result: .success)
+    }
+    
+    func didBackup(newContactsCount: Int) {
+        showResultView(type: .backUp, result: .success, count: newContactsCount)
+    }
+    
+    func progress(progress: Int, for operationType: SyncOperationType) {
+        switch operationType {
+        case .backup:
+            show(view: backupProgressView, animated: true)
+            backupProgressView.update(progress: progress)
+        case .restore:
+            show(view: restoreProgressView, animated: true)
+            restoreProgressView.update(progress: progress)
+        default:
+            break
+        }
     }
 }

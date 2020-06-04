@@ -17,8 +17,8 @@ class SyncContactsRouter: SyncContactsRouterInput {
         router.pushViewController(viewController: router.manageContacts(moduleOutput: moduleOutput))
     }
     
-    func goToDuplicatedContacts(with analyzeResponse: [ContactSync.AnalyzedContact], delegate: ContactsBackupActionProviderProtocol?) {
-        let viewController = router.deleteContactDuplicates(analyzeResponse: analyzeResponse, delegate: nil)
+    func goToDuplicatedContacts(with analyzeResponse: [ContactSync.AnalyzedContact]) {
+        let viewController = router.deleteContactDuplicates(analyzeResponse: analyzeResponse)
         router.pushViewController(viewController: viewController)
     }
     

@@ -11,9 +11,13 @@ import Contacts
 
 
 protocol ContactsBackupActionProviderProtocol: class {
-    func backUp(isConfirmed: Bool)
+    func backUp()
 }
 
+protocol ContactSyncControllerProtocol: ViewController {
+    func showPopup(type: ContactSyncPopupType)
+    func handle(error: ContactSyncHelperError, operationType: SyncOperationType)
+}
 
 final class ContactSyncViewController: BaseViewController, NibInit {
     
@@ -33,10 +37,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         return view
     }()
     
-    private lazy var backupProgressView: ContactSyncProgressView = {
-        let view = ContactSyncProgressView.setup(title: TextConstants.contactSyncBackupProgressTitle, message: TextConstants.contactSyncBackupProgressMessage)
-        return view
-    }()
+    private lazy var backupProgressView = ContactSyncProgressView.setup(type: .backup)
     
     private lazy var analyzeProgressView: ContactSyncAnalyzeProgressView = {
         let view = ContactSyncAnalyzeProgressView.initFromNib()
@@ -49,9 +50,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     private let periodicSyncHelper = PeriodicSync()
     private var animator = ContentViewAnimator()
     private let analyticsHelper = Analytics()
-    private lazy var contactSyncHelper: ContactSyncHelper = {
-        return ContactSyncHelper(delegate: self)
-    }()
+    private let contactSyncHelper = ContactSyncHelper.shared
     
     private var syncModel: ContactSync.SyncResponse? {
         return contactSyncHelper.syncResponse
@@ -79,6 +78,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         super.viewWillAppear(animated)
         
         setupNavBar()
+        contactSyncHelper.delegate = self
         updateBackupStatus()
     }
     
@@ -132,12 +132,8 @@ extension ContactSyncViewController: ContactSyncAnalyzeProgressViewDelegate {
 }
 
 extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
-    func backUp(isConfirmed: Bool) {
-        if isConfirmed {
-            startBackUp()
-        } else {
-            showPopup(type: .backup)
-        }
+    func backUp() {
+        showPopup(type: .backup)
     }
     
     private func startBackUp() {
@@ -158,7 +154,7 @@ extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
 
 extension ContactSyncViewController: ContactSyncMainViewDelegate {
     
-    func showBackups() {
+    func showContacts() {
         guard let info = contactSyncHelper.syncResponse else {
             return
         }
@@ -167,11 +163,22 @@ extension ContactSyncViewController: ContactSyncMainViewDelegate {
         router.pushViewController(viewController: contactList)
     }
     
+    func showBackups() {
+        guard let info = contactSyncHelper.syncResponse else {
+            return
+        }
+        
+        let backupList = router.backupHistory(backUpInfo: info)
+        router.pushViewController(viewController: backupList)
+    }
+    
     func deleteDuplicates() {
         showSpinner()
         
         analyzeProgressView.reset()
-        contactSyncHelper.analyze()
+        contactSyncHelper.analyze { [weak self] in
+            self?.hideSpinner()
+        }
     }
     
     func changePeriodicSync(to option: PeriodicContactsSyncOption) {
@@ -181,6 +188,7 @@ extension ContactSyncViewController: ContactSyncMainViewDelegate {
 
 
 extension ContactSyncViewController: ContactSyncHelperDelegate {
+
     func didCancelAnalyze() {
         hideSpinner()
         showRelatedView()
@@ -196,9 +204,10 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
         }
     }
     
-    func didBackup() {
+    func didBackup(newContactsCount: Int) {
         hideSpinner()
-    
+        updateBackupStatus()
+        
         DispatchQueue.main.async {
             self.showRelatedView()
             
@@ -217,21 +226,16 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
             noDuplicatesPopup()
             contactSyncHelper.cancelAnalyze()
         } else {
-            let controller = router.deleteContactDuplicates(analyzeResponse: contacts, delegate: self)
+            let controller = router.deleteContactDuplicates(analyzeResponse: contacts)
             router.pushViewController(viewController: controller)
         }
     }
+    
+    func didDeleteDuplicates() { }
    
     func didUpdateBackupStatus() {
         hideSpinner()
         showRelatedView()
-    }
-    
-    func didFailed(error: ContactSyncHelperError) {
-        DispatchQueue.main.async {
-            self.hideSpinner()
-            self.handleError(error)
-        }
     }
     
     func progress(progress: Int, for operationType: SyncOperationType) {
@@ -248,26 +252,23 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
     }
 }
 
-//MARK: - Popups
+//MARK: - ContactSyncControllerProtocol
 
-extension ContactSyncViewController {
+extension ContactSyncViewController: ContactSyncControllerProtocol {
     
-    private func handleError(_ error: ContactSyncHelperError) {
+    func handle(error: ContactSyncHelperError, operationType: SyncOperationType) {
         switch error {
-        case .notPremiumUser:
-            showPopup(type: .premium)
         case .noBackUp:
             showRelatedView()
-        case .emptyStoredContacts:
-            showEmptyContactsPopup()
-        case .emptyLifeboxContacts:
-            showEmptyLifeboxContactsPopup()
-        case .syncError(let error):
-            UIApplication.showErrorAlert(message: error.description)
+        case .syncError(_):
+            //TODO: show result view with error message
+            break
+        default:
+            break
         }
     }
     
-    private func showPopup(type: ContactSyncPopupType) {
+    func showPopup(type: ContactSyncPopupType) {
         let handler: VoidHandler = { [weak self] in
             guard let self = self else {
                 return
@@ -296,14 +297,6 @@ extension ContactSyncViewController {
                                               message: TextConstants.errorAlertTextNoDuplicatedContacts,
                                               image: .none, buttonTitle: TextConstants.ok)
         present(controller, animated: false)
-    }
-    
-    private func showEmptyContactsPopup() {
-        SnackbarManager.shared.show(type: .critical, message: TextConstants.absentContactsForBackup, action: .ok)
-    }
-    
-    private func showEmptyLifeboxContactsPopup() {
-        SnackbarManager.shared.show(type: .critical, message: TextConstants.absentContactsInLifebox, action: .ok)
     }
 }
 
@@ -421,259 +414,6 @@ private final class Analytics {
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .restore, status: status))
             
             default: break
-        }
-    }
-    
-}
-
-
-protocol ContactSyncHelperDelegate: class {
-    func didUpdateBackupStatus()
-    func didAnalyze(contacts: [ContactSync.AnalyzedContact])
-    func didBackup()
-    func didRestore()
-    func didCancelAnalyze()
-    func didFailed(error: ContactSyncHelperError)
-    func progress(progress: Int, for operationType: SyncOperationType)
-}
-
-enum ContactSyncHelperError {
-    case notPremiumUser
-    case emptyStoredContacts
-    case emptyLifeboxContacts
-    case noBackUp
-    case syncError(Error)
-}
-
-
-private class ContactSyncHelper {
-    
-    private weak var delegate: ContactSyncHelperDelegate?
-    
-    private let localContactsService = ContactService()
-    private let contactSyncService = ContactsSyncService()
-    private let analyticsHelper = Analytics()
-    private let accountService = AccountService()
-    private let reachability = ReachabilityService.shared
-    private let auth: AuthorizationRepository = factory.resolve()
-    let tokenStorage: TokenStorage = factory.resolve()
-    
-    private (set) var syncResponse: ContactSync.SyncResponse?
-    
-    
-    required init(delegate: ContactSyncHelperDelegate) {
-        self.delegate = delegate
-    }
-    
-    
-    //MARK: - Public
-    
-    func prepare() {
-        //TODO: check logic, maybe just cancel and call .getBackUpStatus
-        guard !ContactSyncSDK.isRunning() else {
-            if AnalyzeStatus.shared().analyzeStep == AnalyzeStep.ANALYZE_STEP_INITAL {
-                performOperation(forType: SyncSettings.shared().mode)
-            } else if AnalyzeStatus.shared().analyzeStep != AnalyzeStep.ANALYZE_STEP_PROCESS_DUPLICATES {
-                proccessOperation(.getBackUpStatus)
-            }
-            return
-        }
-        
-        proccessOperation(.getBackUpStatus)
-    }
-    
-    func backup(onStart: @escaping VoidHandler) {
-        startOperation(operationType: .backup, onStart: onStart)
-    }
-    
-    func analyze() {
-        userHasPermissionFor(type: .deleteDublicate) { [weak self] hasPermission in
-            guard hasPermission else {
-                self?.delegate?.didFailed(error: .notPremiumUser)
-                return
-            }
-            
-            self?.requestAccess { [weak self] success in
-                guard success, let self = self else {
-                    return
-                }
-                
-                if self.getStoredContactsCount() == 0 {
-                    self.delegate?.didFailed(error: .emptyStoredContacts)
-                } else {
-                    self.proccessOperation(.analyze)
-                }
-            }
-        }
-    }
-    
-    func cancelAnalyze() {
-        start(operationType: .cancel)
-    }
-    
-    //MARK: - Private
-    
-    private func startOperation(operationType: SyncOperationType, onStart: @escaping VoidHandler) {
-        requestAccess { [weak self] success in
-            guard success else {
-                //TODO: show access popup
-                return
-            }
-            
-            switch operationType {
-                case .backup:
-                    if self?.getStoredContactsCount() == 0 {
-                        self?.delegate?.didFailed(error: .emptyStoredContacts)
-                    } else {
-                        onStart()
-                        self?.proccessOperation(operationType)
-                    }
-                
-                case .restore:
-                    if self?.syncResponse?.totalNumberOfContacts == 0  {
-                        self?.delegate?.didFailed(error: .emptyLifeboxContacts)
-                    } else {
-                        onStart()
-                        self?.proccessOperation(operationType)
-                    }
-                
-                default:
-                    onStart()
-                    self?.proccessOperation(operationType)
-            }
-        }
-    }
-    
-    private func getStoredContactsCount() -> Int {
-        return localContactsService.getContactsCount() ?? 0
-    }
-    
-    private func proccessOperation(_ operationType: SyncOperationType) {
-        if !reachability.isReachable && operationType.isContained(in: [.backup, .restore, .analyze]) {
-//            TODO: router.goToConnectedToNetworkFailed()
-            return
-        }
-        
-        //TODO: show view related to operationType
-        start(operationType: operationType)
-    }
-    
-    private func start(operationType: SyncOperationType) {
-        updateAccessToken { [weak self] in
-            guard let self = self else {
-                return
-            }
-            switch operationType {
-                case .backup:
-                    self.contactSyncService.cancelAnalyze()
-                    self.performOperation(forType: .backup)
-                
-                case .cancel:
-                    self.contactSyncService.cancelAnalyze()
-                    self.delegate?.didCancelAnalyze()
-                
-                case .getBackUpStatus:
-                    self.loadLastBackUp()
-                
-                case .analyze:
-                    self.contactSyncService.cancelAnalyze()
-                    self.checkAnalyze()
-                
-                default:
-                    assertionFailure("operation is not allowed")
-            }
-        }
-    }
-    
-    private func checkAnalyze() {
-        contactSyncService.analyze(progressCallback: { [weak self] progressPercentage, count, type in
-            self?.delegate?.progress(progress: progressPercentage, for: .analyze)
-            
-        }, successCallback: { [weak self] response in
-            debugLog("contactsSyncService.analyze successCallback")
-            
-            self?.delegate?.didAnalyze(contacts: response)
-            
-        }, cancelCallback: nil,
-           errorCallback: { [weak self] errorType, type in
-            debugLog("contactsSyncService.analyze errorCallback")
-            self?.delegate?.didFailed(error: .syncError(errorType))
-        })
-    }
-    
-    private func loadLastBackUp() {
-           contactSyncService.getBackUpStatus(completion: { [weak self] model in
-               debugLog("loadLastBackUp completion")
-               self?.syncResponse = model
-               self?.delegate?.didUpdateBackupStatus()
-               
-           }, fail: { [weak self] in
-               debugLog("loadLastBackUp fail")
-               self?.syncResponse = nil
-               self?.delegate?.didUpdateBackupStatus()
-           })
-       }
-    
-    private func performOperation(forType type: SYNCMode) {
-        UIApplication.setIdleTimerDisabled(true)
-
-        // TODO: clear NumericConstants.limitContactsForBackUp
-        contactSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, opertionType in
-            self?.delegate?.progress(progress: progressPercentage, for: (type == .backup ? .backup : .restore))
-            
-            }, finishCallback: { [weak self] result, operationType in
-                self?.analyticsHelper.trackOperationSuccess(type: type)
-                
-                UIApplication.setIdleTimerDisabled(false)
-                debugLog("contactsSyncService.executeOperation finishCallback: \(result)")
-                
-                (type == .backup) ? self?.delegate?.didBackup() :  self?.delegate?.didRestore()
-                
-            }, errorCallback: { [weak self] errorType, opertionType in
-                self?.analyticsHelper.trackOperationFailure(type: type)
-                
-                debugLog("contactsSyncService.executeOperation errorCallback: \(errorType)")
-                
-                UIApplication.setIdleTimerDisabled(false)
-                //TODO: show error
-        })
-    }
-    
-    
-    //MARK:- Tokens + Contacts Access + Persmissions
-    
-    private func userHasPermissionFor(type: AuthorityType, completion: @escaping BoolHandler) {
-        accountService.permissions { response in
-            switch response {
-                case .success(let result):
-                    AuthoritySingleton.shared.refreshStatus(with: result)
-                    completion(result.hasPermissionFor(type))
-                
-                case .failed(let error):
-                    completion(false)
-                //TODO: handle error
-            }
-        }
-    }
-    
-    private func requestAccess(completionHandler: @escaping ContactsPermissionCallback) {
-        localContactsService.askPermissionForContactsFramework(redirectToSettings: true) { isGranted in
-            AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(isGranted)
-            completionHandler(isGranted)
-        }
-    }
-    
-    private func updateAccessToken(complition: @escaping VoidHandler) {
-        auth.refreshTokens { [weak self] _, accessToken, error  in
-            guard let accessToken = accessToken else {
-                let syncError: SyncOperationErrors = error?.isNetworkError == true ? .networkError : .failed
-                self?.delegate?.didFailed(error: .syncError(syncError))
-                return
-            }
-            
-            self?.tokenStorage.accessToken = accessToken
-            self?.contactSyncService.updateAccessToken()
-            complition()
         }
     }
 }

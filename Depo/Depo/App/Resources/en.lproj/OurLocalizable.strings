@@ -488,10 +488,15 @@
 
 "contact_phase2_restore_contacts_confirm_title" = "Restore Backup?";
 "contact_phase2_restore_contacts_confirm_message" = "Your phone contact list will be change according to this backup?  Are you sure you want to restore?";
+"contact_phase2_restore_contacts_progress_title" = "Restore Backup";
+"contact_phase2_restore_contacts_progress_message" = "Your phone contacts will be change according to contact list on your Lifebox!";
+"contact_phase2_restore_contacts_success_title" = "Restore Successfully";
+"contact_phase2_restore_contacts_success_message" = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.";
 
 "contact_phase2_delete_contacts_confirm_title" = "Delete Contacts?";
 "contact_phase2_delete_contacts_confirm_message" = "These contacts will be deleted from your lifebox. Are you sure you want to delete?";
 "contact_phase2_delete_all_contacts_success_message" = "You delete all contacts on your list. Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+"contact_phase2_delete_backup_success_message" = "You delete your last backup.  Your contact list updated according to your previous backup.";
 
 "contact_phase2_contact_detail_navbar_title" = "Contact Detail";
 "contact_phase2_contact_detail_section_phone" = "Phone";
@@ -1618,7 +1623,8 @@
 "contact_phase2_restore_popup_message" = "Your phone contact list will be change according to this backup?  Are you sure you want to restore?";
 "contact_phase2_delete_popup_message" = "This backup will be deleted from your lifebox. Are you sure you want to delete?";
 "contact_phase2_history_cell_title" = "Contacts";
-"contact_phase2_delete_backup_success_title" = "Back up Successfully";
-"contact_phase2_delete_backup_success_message" = "You have new %d contacts and no possible duplicates to review in your lifebox.";
 "contact_phase2_delete_backup_success_card_title" = "Auto Contact Backup";
 "contact_phase2_delete_backup_success_card_message" = "Your auto contact backup is off! Enable now and lifebox can sync your contacts automatically.";
+
+"contact_phase2_contact_backup_success_title" = "Back up Successfully";
+"contact_phase2_contact_backup_success_message" = "You have new %d contacts and no possible duplicates to review in your lifebox.";
