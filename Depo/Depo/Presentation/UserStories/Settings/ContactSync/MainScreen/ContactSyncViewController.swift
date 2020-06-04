@@ -204,7 +204,7 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
         }
     }
     
-    func didBackup() {
+    func didBackup(newContactsCount: Int) {
         hideSpinner()
         updateBackupStatus()
         

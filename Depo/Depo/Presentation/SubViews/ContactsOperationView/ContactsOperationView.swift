@@ -23,32 +23,30 @@ enum ContactsOperationType {
         
         switch self {
         case .backUp:
-            return "Back up Successfully"
-        case .deleteBackUp:
-            return "Delete Successfully"
-        case .deleteDuplicates, .deleteAllContacts:
+            return TextConstants.contactBackupSuccessTitle
+        case .deleteBackUp, .deleteDuplicates, .deleteAllContacts:
             return TextConstants.deleteDuplicatesSuccessTitle
         case .restore:
-            return "Restore Successfully"
+            return TextConstants.restoreContactsSuccessTitle
         }
     }
     
-    func message(result: ContactsOperationResult) -> String {
+    func message(result: ContactsOperationResult, count: Int) -> String {
         if result == .failed {
             return "An unknown error was encountered. Please try again later."
         }
         
         switch self {
         case .backUp:
-            return "You have new 420 contacts and no possible duplicates to review in your lifebox."
+            return String(format: TextConstants.contactBackupSuccessMessage, count)
         case .deleteBackUp:
-            return "You delete duplicated contacts from your phone and lorem ipsum lorem ipsum."
+            return TextConstants.deleteBackupSuccessMessage
         case .deleteDuplicates:
             return TextConstants.deleteDuplicatesSuccessMessage
         case .deleteAllContacts:
             return TextConstants.deleteAllContactsSuccessMessage
         case .restore:
-            return "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna."
+            return TextConstants.restoreContactsSuccessMessage
         }
     }
 }
@@ -96,10 +94,10 @@ final class ContactsOperationView: UIView, NibInit {
     }
     @IBOutlet private weak var cardsStackView: UIStackView!
 
-    static func with(type: ContactsOperationType, result: ContactsOperationResult) -> ContactsOperationView {
+    static func with(type: ContactsOperationType, result: ContactsOperationResult, count: Int) -> ContactsOperationView {
         let view = ContactsOperationView.initFromNib()
         view.titleLabel.text = type.title(result: result)
-        view.messageLabel.text = type.message(result: result)
+        view.messageLabel.text = type.message(result: result, count: count)
         view.imageView.image = result.image
         return view
     }
