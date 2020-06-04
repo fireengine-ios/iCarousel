@@ -87,7 +87,7 @@ final class ContactSyncHelper {
     
     func deleteDuplicates(onStart: @escaping VoidHandler) {
         userHasPermissionFor(type: .deleteDublicate) { [weak self] hasPermission in
-            guard !hasPermission else {
+            guard hasPermission else {
                 self?.delegate?.didFailed(operationType: .deleteDuplicated, error: .notPremiumUser)
                 return
             }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ContactsBackupHistoryController: ViewController {
+final class ContactsBackupHistoryController: BaseViewController {
 
     private let contactHistoryView = ContactsBackupHistoryView.initFromNib()
     private lazy var backupProgressView = ContactSyncProgressView.setup(type: .backup)
@@ -34,6 +34,13 @@ final class ContactsBackupHistoryController: ViewController {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setNavigationTitle(title: TextConstants.contactBackupHistoryNavbarTitle)
+        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
     override func viewWillAppear(_ animated: Bool) {

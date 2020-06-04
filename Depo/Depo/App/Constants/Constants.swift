@@ -195,6 +195,7 @@ struct TextConstants {
     static let resendCode = NSLocalizedString("resend_code", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let absentContactsForBackup = NSLocalizedString("ubsent_contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let absentContactsInLifebox = NSLocalizedString("ubsent_contacts_in_lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactBackupHistoryNavbarTitle = NSLocalizedString("contact_phase2_history_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactBackupHistoryHeader = NSLocalizedString("contact_phase2_history_header", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactBackupHistoryRestoreButton = NSLocalizedString("contact_phase2_restore_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactBackupHistoryDeleteButton = NSLocalizedString("contact_phase2_delete_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

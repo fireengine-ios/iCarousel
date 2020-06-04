@@ -1615,6 +1615,7 @@
 "contact_phase2_cancel_analyze_button" = "Cancel Analyze";
 "contact_phase2_analyze_progress_message" = "Please wait while analyzing";
 
+"contact_phase2_history_navbar_title" = "Backups";
 "contact_phase2_history_header" = "Your latest backup";
 "contact_phase2_restore_button" = "Restore Backup";
 "contact_phase2_delete_button" = "Delete Backup";
