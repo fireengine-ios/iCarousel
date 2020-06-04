@@ -1618,3 +1618,7 @@
 "contact_phase2_restore_popup_message" = "Your phone contact list will be change according to this backup?  Are you sure you want to restore?";
 "contact_phase2_delete_popup_message" = "This backup will be deleted from your lifebox. Are you sure you want to delete?";
 "contact_phase2_history_cell_title" = "Contacts";
+"contact_phase2_delete_backup_success_title" = "Back up Successfully";
+"contact_phase2_delete_backup_success_message" = "You have new %d contacts and no possible duplicates to review in your lifebox.";
+"contact_phase2_delete_backup_success_card_title" = "Auto Contact Backup";
+"contact_phase2_delete_backup_success_card_message" = "Your auto contact backup is off! Enable now and lifebox can sync your contacts automatically.";

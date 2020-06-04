@@ -38,6 +38,7 @@
             <constraints>
                 <constraint firstItem="TOX-Qb-DYt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="0bt-4W-EUs"/>
                 <constraint firstItem="caY-rM-izq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="11Y-40-Fk3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="caY-rM-izq" secondAttribute="bottom" constant="64" id="30d-BL-mxL"/>
                 <constraint firstItem="TOX-Qb-DYt" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4DY-wc-iE4"/>
                 <constraint firstItem="LEg-6m-3ae" firstAttribute="top" secondItem="TOX-Qb-DYt" secondAttribute="bottom" constant="20" id="CNY-uU-TFl"/>
                 <constraint firstItem="LEg-6m-3ae" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="32" id="FnU-gx-DJ3"/>

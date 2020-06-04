@@ -626,7 +626,6 @@ struct TextConstants {
     static let autoSyncSettingsOptionDaily = NSLocalizedString("Daily", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncSettingsOptionWeekly = NSLocalizedString("Weekly", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncSettingsOptionMonthly = NSLocalizedString("Monthly", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let isPeriodicContactsSyncEnabledKey = NSLocalizedString("isPeriodicContactsSyncEnabledKey", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let deleteDuplicatesTitle = NSLocalizedString("contact_phase2_delete_duplicates_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteDuplicatesTopLabel = NSLocalizedString("contact_phase2_delete_duplicates_top_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1884,4 +1883,8 @@ struct TextConstants {
     static let contactSyncBackupProgressMessage = NSLocalizedString("contact_phase2_backup_progress_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncCancelAnalyzeButton = NSLocalizedString("contact_phase2_cancel_analyze_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncAnalyzeProgressMessage = NSLocalizedString("contact_phase2_analyze_progress_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncBackupSuccessTitle = NSLocalizedString("contact_phase2_delete_backup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncBackupSuccessMessage = NSLocalizedString("contact_phase2_delete_backup_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncBackupSuccessCardTitle = NSLocalizedString("contact_phase2_delete_backup_success_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncBackupSuccessCardMessage = NSLocalizedString("contact_phase2_delete_backup_success_card_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

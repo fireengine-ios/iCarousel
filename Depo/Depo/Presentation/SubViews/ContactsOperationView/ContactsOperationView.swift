@@ -10,7 +10,7 @@ import UIKit
 
 //TODO: Need configure states and localize strings
 enum ContactsOperationType {
-    case backUp
+    case backUp(contacts: Int)
     case deleteBackUp
     case deleteDuplicates
     case deleteAllContacts
@@ -22,8 +22,8 @@ enum ContactsOperationType {
         }
         
         switch self {
-        case .backUp:
-            return "Back up Successfully"
+        case .backUp(_):
+            return TextConstants.contactSyncBackupSuccessTitle
         case .deleteBackUp:
             return "Delete Successfully"
         case .deleteDuplicates, .deleteAllContacts:
@@ -39,8 +39,8 @@ enum ContactsOperationType {
         }
         
         switch self {
-        case .backUp:
-            return "You have new 420 contacts and no possible duplicates to review in your lifebox."
+        case .backUp(let contacts):
+            return String(format: TextConstants.contactSyncBackupSuccessMessage, contacts)
         case .deleteBackUp:
             return "You delete duplicated contacts from your phone and lorem ipsum lorem ipsum."
         case .deleteDuplicates:
@@ -94,7 +94,14 @@ final class ContactsOperationView: UIView, NibInit {
             newValue.lineBreakMode = .byWordWrapping
         }
     }
-    @IBOutlet private weak var cardsStackView: UIStackView!
+    @IBOutlet private weak var cardsStackView: UIStackView!{
+        willSet {
+            newValue.axis = .vertical
+            newValue.alignment = .fill
+            newValue.distribution = .fill
+            newValue.spacing = 24.0
+        }
+    }
 
     static func with(type: ContactsOperationType, result: ContactsOperationResult) -> ContactsOperationView {
         let view = ContactsOperationView.initFromNib()

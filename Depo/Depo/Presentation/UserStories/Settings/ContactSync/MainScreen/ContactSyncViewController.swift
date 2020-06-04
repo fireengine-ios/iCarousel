@@ -198,9 +198,13 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
     
     func didBackup() {
         hideSpinner()
-        showRelatedView()
-        
+    
         DispatchQueue.main.async {
+            self.showRelatedView()
+            
+            let controller = self.router.contactSyncSuccessController(syncResult: self.syncModel, periodicSync: self.periodicSyncHelper)
+            self.router.pushViewController(viewController: controller)
+            
             CardsManager.default.stopOperationWith(type: .contactBacupOld)
             CardsManager.default.stopOperationWith(type: .contactBacupEmpty)
         }
@@ -328,7 +332,7 @@ final class ContentViewAnimator {
     }
 }
 
-private final class PeriodicSync {
+final class PeriodicSync {
     
     private let contactsService = ContactService()
     private let dataStorage = PeriodicContactSyncDataStorage()
