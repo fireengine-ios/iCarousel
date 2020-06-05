@@ -1627,5 +1627,6 @@
 "contact_phase2_delete_backup_success_card_title" = "Auto Contact Backup";
 "contact_phase2_delete_backup_success_card_message" = "Your auto contact backup is off! Enable now and lifebox can sync your contacts automatically.";
 
+"contact_phase2_contact_backup_success_navbar_title" = "Back up";
 "contact_phase2_contact_backup_success_title" = "Back up Successfully";
 "contact_phase2_contact_backup_success_message" = "You have new %d contacts and no possible duplicates to review in your lifebox.";

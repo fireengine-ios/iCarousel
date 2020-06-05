@@ -26,53 +26,8 @@ class ContactSyncOperationResultController: BaseViewController, NibInit {
     private var type: ContactsOperationResult!
     private var syncResult: ContactSync.SyncResponse?
     
-    private lazy var successView: UIView = {
-        let view = ContactsOperationView.with(type: .backUp(syncResult), result: .success)
-        if periodicSyncHelper.settings.timeSetting.option == .off {
-            view.add(card: scheduleCard)
-        }
-        
-        return view
-    }()
-    
-    private lazy var scheduleCard: ContactSyncScheduleCard = {
-        let card = ContactSyncScheduleCard.initFromNib()
-            .onAction { [weak self] sender in
-                self?.showAutoBackupOptions(sender: sender)
-        }
-        
-        card.set(periodicSyncOption: periodicSyncHelper.settings.timeSetting.option)
-        
-        return card
-    }()
-    
-    
-    private lazy var failView: UIView = {
-        return ContactsOperationView.with(type: .backUp(nil), result: .failed)
-    }()
-    
-    private lazy var autobackupActionSheet: UIAlertController = {
-        
-        let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let options: [PeriodicContactsSyncOption] = [.off, .daily, .weekly, .monthly]
-        
-        options.forEach { type in
-            let action = UIAlertAction(title: type.localizedText, style: .default, handler: { [weak self] _ in
-                self?.changeAutoBackup(to: type)
-            })
-            actionSheetVC.addAction(action)
-        }
-        
-        let cancelAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel)
-        actionSheetVC.addAction(cancelAction)
-        
-        actionSheetVC.view.tintColor = UIColor.black
-        actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up
-        
-        return actionSheetVC
-    }()
-     
+    private lazy var successView = BackupContactsOperationView.with(type: .backUp(syncResult), result: .success)
+    private lazy var failView = ContactsOperationView.with(type: .backUp(nil), result: .failed)
     
     //MARK: - Override
     
@@ -92,8 +47,7 @@ class ContactSyncOperationResultController: BaseViewController, NibInit {
     
     private func setupNavBar() {
         navigationBarWithGradientStyle()
-        //TODO: set title
-        setTitle(withString: "")
+        setTitle(withString: TextConstants.contactBackupSuccessNavbarTitle)
     }
     
     private func showRelatedView() {
@@ -108,26 +62,5 @@ class ContactSyncOperationResultController: BaseViewController, NibInit {
             default:
                 break
         }
-    }
-    
-    private func showAutoBackupOptions(sender: Any) {
-        guard let controller = RouterVC().getViewControllerForPresent() else {
-            return
-        }
-        
-        autobackupActionSheet.popoverPresentationController?.sourceView = view
-        
-        if let button = sender as? UIButton {
-            let buttonRect = button.convert(button.bounds, to: view)
-            let rect = CGRect(x: buttonRect.midX, y: buttonRect.minY - 10, width: 10, height: 50)
-            autobackupActionSheet.popoverPresentationController?.sourceRect = rect
-        }
-        
-        controller.present(autobackupActionSheet, animated: true)
-    }
-    
-    private func changeAutoBackup(to option: PeriodicContactsSyncOption) {
-        scheduleCard.set(periodicSyncOption: option)
-        periodicSyncHelper.save(option: option)
     }
 }
