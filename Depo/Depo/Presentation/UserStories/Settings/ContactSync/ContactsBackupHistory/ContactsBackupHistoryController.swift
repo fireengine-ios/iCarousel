@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ContactsBackupHistoryController: ViewController {
+final class ContactsBackupHistoryController: BaseViewController {
 
     private let contactHistoryView = ContactsBackupHistoryView.initFromNib()
     private lazy var backupProgressView = ContactSyncProgressView.setup(type: .backup)
@@ -34,6 +34,13 @@ final class ContactsBackupHistoryController: ViewController {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setNavigationTitle(title: TextConstants.contactBackupHistoryNavbarTitle)
+        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,7 +99,7 @@ final class ContactsBackupHistoryController: ViewController {
     
     private func showResultView(type: ContactsOperationType, result: ContactsOperationResult) {
         resultView = ContactsOperationView.with(type: type, result: result)
-        
+
         if result == .success {
             switch type {
             case .deleteBackUp:
@@ -137,8 +144,8 @@ extension ContactsBackupHistoryController: ContactSyncHelperDelegate {
         showResultView(type: .restore, result: .success)
     }
     
-    func didBackup() {
-        showResultView(type: .backUp, result: .success)
+    func didBackup(result: ContactSync.SyncResponse) {
+        showResultView(type: .backUp(result), result: .success)
     }
     
     func progress(progress: Int, for operationType: SyncOperationType) {

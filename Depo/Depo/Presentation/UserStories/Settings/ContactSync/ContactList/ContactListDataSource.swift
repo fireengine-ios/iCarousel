@@ -41,6 +41,7 @@ final class ContactListDataSource: NSObject {
         tableView.separatorStyle = .none
         tableView.sectionHeaderHeight = 48
         tableView.rowHeight = 52
+        tableView.sectionIndexColor = ColorConstants.duplicatesGray
     }
 
     func reset() {

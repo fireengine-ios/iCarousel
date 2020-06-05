@@ -49,6 +49,21 @@ final class ContactSyncMainView: UIView, NibInit {
         return bigBackupCard
     }()
     
+    private lazy var showBackupCard: ContactSyncSmallCardView = {
+        let card = ContactSyncSmallCardView.initFromNib()
+        card.setup(with: .showBackup(date: Date()), action: { [weak self] in
+            self?.delegate?.showBackups()
+        })
+        return card
+    }()
+    
+    private lazy var deleteDuplicatesCard: ContactSyncSmallCardView = {
+        let card = ContactSyncSmallCardView.initFromNib()
+        card.setup(with: .deleteDuplicates, action: { [weak self] in
+            self?.delegate?.deleteDuplicates()
+        })
+        return card
+    }()
     
     private lazy var autobackupActionSheet: UIAlertController = {
         
@@ -87,6 +102,10 @@ final class ContactSyncMainView: UIView, NibInit {
     func update(with model: ContactSync.SyncResponse, periodicSyncOption: PeriodicContactsSyncOption) {
         bigInfoCard.set(numberOfContacts: model.totalNumberOfContacts)
         bigInfoCard.set(periodicSyncOption: periodicSyncOption)
+        
+        if let date = model.date {
+            showBackupCard.update(type: .showBackup(date: date))
+        }
     }
     
     
@@ -95,18 +114,8 @@ final class ContactSyncMainView: UIView, NibInit {
     private func setup() {
         DispatchQueue.toMain {
             self.cardsStack.addArrangedSubview(self.bigInfoCard)
-            
-            let showBackupCard = ContactSyncSmallCardView.initFromNib()
-            showBackupCard.setup(with: .showBackup, action: { [weak self] in
-                self?.delegate?.showBackups()
-            })
-            self.cardsStack.addArrangedSubview(showBackupCard)
-            
-            let deleteDuplicatesCard = ContactSyncSmallCardView.initFromNib()
-            deleteDuplicatesCard.setup(with: .deleteDuplicates, action: { [weak self] in
-                self?.delegate?.deleteDuplicates()
-            })
-            self.cardsStack.addArrangedSubview(deleteDuplicatesCard)
+            self.cardsStack.addArrangedSubview(self.showBackupCard)
+            self.cardsStack.addArrangedSubview(self.deleteDuplicatesCard)
         }
     }
     

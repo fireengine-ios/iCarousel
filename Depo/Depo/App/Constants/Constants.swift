@@ -195,6 +195,7 @@ struct TextConstants {
     static let resendCode = NSLocalizedString("resend_code", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let absentContactsForBackup = NSLocalizedString("ubsent_contacts", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let absentContactsInLifebox = NSLocalizedString("ubsent_contacts_in_lifebox", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactBackupHistoryNavbarTitle = NSLocalizedString("contact_phase2_history_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactBackupHistoryHeader = NSLocalizedString("contact_phase2_history_header", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactBackupHistoryRestoreButton = NSLocalizedString("contact_phase2_restore_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactBackupHistoryDeleteButton = NSLocalizedString("contact_phase2_delete_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -626,7 +627,6 @@ struct TextConstants {
     static let autoSyncSettingsOptionDaily = NSLocalizedString("Daily", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncSettingsOptionWeekly = NSLocalizedString("Weekly", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let autoSyncSettingsOptionMonthly = NSLocalizedString("Monthly", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let isPeriodicContactsSyncEnabledKey = NSLocalizedString("isPeriodicContactsSyncEnabledKey", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let deleteDuplicatesTitle = NSLocalizedString("contact_phase2_delete_duplicates_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteDuplicatesTopLabel = NSLocalizedString("contact_phase2_delete_duplicates_top_label", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -656,12 +656,15 @@ struct TextConstants {
     
     static let restoreContactsConfirmTitle = NSLocalizedString("contact_phase2_restore_contacts_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let restoreContactsConfirmMessage = NSLocalizedString("contact_phase2_restore_contacts_confirm_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let restoreContactsRestoreTitle = NSLocalizedString("contact_phase2_restore_contacts_progress_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let restoreContactsRestoreMessage = NSLocalizedString("contact_phase2_restore_contacts_progress_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreContactsProgressTitle = NSLocalizedString("contact_phase2_restore_contacts_progress_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreContactsProgressMessage = NSLocalizedString("contact_phase2_restore_contacts_progress_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreContactsSuccessTitle = NSLocalizedString("contact_phase2_restore_contacts_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let restoreContactsSuccessMessage = NSLocalizedString("contact_phase2_restore_contacts_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let deleteContactsConfirmTitle = NSLocalizedString("contact_phase2_delete_contacts_confirm_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteContactsConfirmMessage = NSLocalizedString("contact_phase2_delete_contacts_confirm_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let deleteAllContactsSuccessMessage = NSLocalizedString("contact_phase2_delete_all_contacts_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let deleteBackupSuccessMessage = NSLocalizedString("contact_phase2_delete_backup_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let contactDetailNavBarTitle = NSLocalizedString("contact_phase2_contact_detail_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactDetailSectionPhone = NSLocalizedString("contact_phase2_contact_detail_section_phone", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1893,4 +1896,8 @@ struct TextConstants {
     static let contactSyncErrorRemoteServer4000 = NSLocalizedString("contact_phase2_error_RemoteServer4000", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncErrorNetwork = NSLocalizedString("contact_phase2_error_network", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let contactSyncBackupSuccessCardTitle = NSLocalizedString("contact_phase2_delete_backup_success_card_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncBackupSuccessCardMessage = NSLocalizedString("contact_phase2_delete_backup_success_card_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactBackupSuccessTitle = NSLocalizedString("contact_phase2_contact_backup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactBackupSuccessMessage = NSLocalizedString("contact_phase2_contact_backup_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

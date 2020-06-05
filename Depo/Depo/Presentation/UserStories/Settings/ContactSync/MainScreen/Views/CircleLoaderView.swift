@@ -112,6 +112,12 @@ final class CircleLoaderView: UIView {
         setup()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        updateLayers()
+    }
+    
     
     //MARK:- Public
     
@@ -158,6 +164,11 @@ final class CircleLoaderView: UIView {
         
         self.percentageText.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0.0).activate()
         self.percentageText.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0.0).activate()
+    }
+    
+    private func updateLayers() {
+        backCircleLayer.path = circlePath
+        progressLayer.path = circlePath
     }
     
     

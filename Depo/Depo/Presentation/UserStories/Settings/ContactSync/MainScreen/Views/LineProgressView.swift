@@ -64,6 +64,12 @@ class LineProgressView: UIView {
         setup()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        updateLayers()
+    }
+    
     
     //MARK:- Public
     
@@ -104,5 +110,10 @@ class LineProgressView: UIView {
     private func setup() {
         self.layer.addSublayer(self.backLayer)
         self.layer.addSublayer(self.progressLayer)
+    }
+    
+    private func updateLayers() {
+        backLayer.path = linePath
+        progressLayer.path = linePath
     }
 }

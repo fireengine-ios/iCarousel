@@ -11,7 +11,7 @@ import Foundation
 protocol ContactSyncHelperDelegate: class {
     func didUpdateBackupStatus()
     func didAnalyze(contacts: [ContactSync.AnalyzedContact])
-    func didBackup()
+    func didBackup(result: ContactSync.SyncResponse)
     func didRestore()
     func didDeleteDuplicates()
     func didCancelAnalyze()
@@ -22,7 +22,7 @@ protocol ContactSyncHelperDelegate: class {
 extension ContactSyncHelperDelegate {
     func didUpdateBackupStatus() {}
     func didAnalyze(contacts: [ContactSync.AnalyzedContact]) {}
-    func didBackup() {}
+    func didBackup(result: ContactSync.SyncResponse) {}
     func didRestore() {}
     func didDeleteDuplicates() {}
     func didCancelAnalyze() {}
@@ -87,7 +87,7 @@ final class ContactSyncHelper {
     
     func deleteDuplicates(onStart: @escaping VoidHandler) {
         userHasPermissionFor(type: .deleteDublicate) { [weak self] hasPermission in
-            guard !hasPermission else {
+            guard hasPermission else {
                 self?.delegate?.didFailed(operationType: .deleteDuplicated, error: .notPremiumUser)
                 return
             }
@@ -236,7 +236,7 @@ final class ContactSyncHelper {
                 UIApplication.setIdleTimerDisabled(false)
                 debugLog("contactsSyncService.executeOperation finishCallback: \(result)")
                 
-                (type == .backup) ? self?.delegate?.didBackup() :  self?.delegate?.didRestore()
+                (type == .backup) ? self?.delegate?.didBackup(result: result) :  self?.delegate?.didRestore()
                 
             }, errorCallback: { [weak self] errorType, opertionType in
                 self?.analyticsHelper.trackOperationFailure(type: type)

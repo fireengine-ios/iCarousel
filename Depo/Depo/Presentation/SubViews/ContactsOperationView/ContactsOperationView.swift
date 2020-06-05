@@ -10,7 +10,7 @@ import UIKit
 
 //TODO: Need configure states and localize strings
 enum ContactsOperationType {
-    case backUp
+    case backUp(ContactSync.SyncResponse?)
     case deleteBackUp
     case deleteDuplicates
     case deleteAllContacts
@@ -22,14 +22,12 @@ enum ContactsOperationType {
         }
         
         switch self {
-        case .backUp:
-            return "Back up Successfully"
-        case .deleteBackUp:
-            return "Delete Successfully"
-        case .deleteDuplicates, .deleteAllContacts:
+        case .backUp(_):
+            return TextConstants.contactBackupSuccessTitle
+        case .deleteBackUp, .deleteDuplicates, .deleteAllContacts:
             return TextConstants.deleteDuplicatesSuccessTitle
         case .restore:
-            return "Restore Successfully"
+            return TextConstants.restoreContactsSuccessTitle
         }
     }
     
@@ -39,16 +37,17 @@ enum ContactsOperationType {
         }
         
         switch self {
-        case .backUp:
-            return "You have new 420 contacts and no possible duplicates to review in your lifebox."
+        case .backUp(let result):
+            let numberOfContacts = result?.totalNumberOfContacts ?? 0
+            return String(format: TextConstants.contactBackupSuccessMessage, numberOfContacts)
         case .deleteBackUp:
-            return "You delete duplicated contacts from your phone and lorem ipsum lorem ipsum."
+            return TextConstants.deleteBackupSuccessMessage
         case .deleteDuplicates:
             return TextConstants.deleteDuplicatesSuccessMessage
         case .deleteAllContacts:
             return TextConstants.deleteAllContactsSuccessMessage
         case .restore:
-            return "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna."
+            return TextConstants.restoreContactsSuccessMessage
         }
     }
 }
@@ -94,7 +93,14 @@ final class ContactsOperationView: UIView, NibInit {
             newValue.lineBreakMode = .byWordWrapping
         }
     }
-    @IBOutlet private weak var cardsStackView: UIStackView!
+    @IBOutlet private weak var cardsStackView: UIStackView!{
+        willSet {
+            newValue.axis = .vertical
+            newValue.alignment = .fill
+            newValue.distribution = .fill
+            newValue.spacing = 24.0
+        }
+    }
 
     static func with(type: ContactsOperationType, result: ContactsOperationResult) -> ContactsOperationView {
         let view = ContactsOperationView.initFromNib()

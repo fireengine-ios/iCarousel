@@ -110,12 +110,14 @@ class ContactsSyncService: BaseRequestService {
                     return
             }
             
+            let timeIntervalSince1970: TimeInterval = time / 1000
+            let date = Date(timeIntervalSince1970: timeIntervalSince1970)
             let syncModel = ContactSync.SyncResponse(responseType: .getBackUpStatus,
                                                     totalNumberOfContacts: contactsAmount,
                                                     newContactsNumber: createdContactsAmount,
                                                     duplicatesNumber: updatedContactsAmount,
                                                     deletedNumber: deletedContactsAmount,
-                                                    date: Date(timeIntervalSince1970: time / 1000))
+                                                    date: date)
             completion(syncModel)
         }
     }
