@@ -20,7 +20,7 @@ enum SyncOperationType {
 enum SyncOperationErrors: Error {
     case accessDenied
     case failed
-    case remoteServerError
+    case remoteServerError(Int?)
     case networkError
     case internalError
     case depoError
@@ -29,8 +29,19 @@ enum SyncOperationErrors: Error {
         switch self {
         case .networkError:
             return TextConstants.errorConnectedToNetwork
-        case .remoteServerError:
-            return TextConstants.errorManyContactsToBackUp
+        case .remoteServerError(let code):
+            switch code {
+            case 1101:
+                return TextConstants.contactSyncErrorRemoteServer1101
+            case 2000:
+                return TextConstants.contactSyncErrorRemoteServer2000
+            case 3000:
+                return TextConstants.contactSyncErrorRemoteServer3000
+            case 4000:
+                return TextConstants.contactSyncErrorRemoteServer4000
+            default:
+                return TextConstants.errorManyContactsToBackUp
+            }
         case .failed:
             return TextConstants.serverErrorMessage
         default:
@@ -61,7 +72,7 @@ class ContactsSyncService: BaseRequestService {
         SyncSettings.shared().bulk = NumericConstants.contactSyncBulk
         
         SyncSettings.shared().callback = { [weak self] response in
-            self?.checkStatus(with: errorCallback, finishCallback: finishCallback)
+            self?.checkStatus(with: response as? [[String : Any]], errorCallback: errorCallback, finishCallback: finishCallback)
         }
         
         SyncSettings.shared().progressCallback = { [weak self] in
@@ -118,15 +129,15 @@ class ContactsSyncService: BaseRequestService {
         }
     }
     
-    func checkStatus(with errorCallback: ErrorCallback?, finishCallback: FinishCallback?) {
+    func checkStatus(with response: [[String: Any]]?, errorCallback: ErrorCallback?, finishCallback: FinishCallback?) {
         if SyncStatus.shared().status == .RESULT_SUCCESS {
             constractSuccessResponse(finishCallback: finishCallback)
         } else {
-            constractErrorCallBack(errorCallback: errorCallback)
+            constractErrorCallBack(response: response, errorCallback: errorCallback)
         }
     }
     
-    func constractErrorCallBack(errorCallback: ErrorCallback?) {
+    func constractErrorCallBack(response: [[String: Any]]?, errorCallback: ErrorCallback?) {
         switch SyncStatus.shared().status {
         case .RESULT_ERROR_PERMISSION_ADDRESS_BOOK:
             errorCallback?(.accessDenied, getCurrentOperationType())
@@ -136,7 +147,13 @@ class ContactsSyncService: BaseRequestService {
                     return
                 }
                 if isReachable {
-                    errorCallback?(.remoteServerError, self.getCurrentOperationType())
+                    var code: Int?
+                    if let response = response,
+                    !response.isEmpty, let unwrapedCode =
+                        response[0][""] as? Int {//TODO:check real response
+                         code = unwrapedCode
+                    }
+                    errorCallback?(.remoteServerError(code), self.getCurrentOperationType())
                 } else {
                     errorCallback?(.networkError, self.getCurrentOperationType())
                 }

@@ -1886,4 +1886,11 @@ struct TextConstants {
     static let contactSyncBackupProgressMessage = NSLocalizedString("contact_phase2_backup_progress_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncCancelAnalyzeButton = NSLocalizedString("contact_phase2_cancel_analyze_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncAnalyzeProgressMessage = NSLocalizedString("contact_phase2_analyze_progress_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let contactSyncErrorRemoteServer1101 = NSLocalizedString("contact_phase2_error_RemoteServer1101", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncErrorRemoteServer2000 = NSLocalizedString("contact_phase2_error_RemoteServer2000", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncErrorRemoteServer3000 = NSLocalizedString("contact_phase2_error_RemoteServer3000", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncErrorRemoteServer4000 = NSLocalizedString("contact_phase2_error_RemoteServer4000", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncErrorNetwork = NSLocalizedString("contact_phase2_error_network", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
 }

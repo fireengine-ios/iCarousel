@@ -1620,3 +1620,8 @@
 "contact_phase2_restore_popup_message" = "Your phone contact list will be change according to this backup?  Are you sure you want to restore?";
 "contact_phase2_delete_popup_message" = "This backup will be deleted from your lifebox. Are you sure you want to delete?";
 "contact_phase2_history_cell_title" = "Contacts";
+"contact_phase2_error_RemoteServer1101" = "contact_phase2_error_RemoteServer1101";
+"contact_phase2_error_RemoteServer2000" = "contact_phase2_error_RemoteServer2000";
+"contact_phase2_error_RemoteServer3000" = "contact_phase2_error_RemoteServer3000";
+"contact_phase2_error_RemoteServer4000" = "contact_phase2_error_RemoteServer4000";
+"contact_phase2_error_network" = "contact_phase2_error_network";

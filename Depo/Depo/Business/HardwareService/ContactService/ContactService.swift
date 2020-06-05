@@ -59,7 +59,7 @@ final class ContactService {
         }
     }
     
-    private func showSettingsAlert(completionHandler: @escaping ContactsPermissionCallback) {
+    private func showSettingsAlert(completionHandler: @escaping ContactsLibraryGranted) {
         let controller = PopUpController.with(title: nil,
                                               message: TextConstants.settingsContactsPermissionDeniedMessage,
                                               image: .none,
