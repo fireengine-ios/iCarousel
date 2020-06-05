@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -50,8 +50,11 @@
                         <constraint firstAttribute="trailing" secondItem="dL1-vQ-6NQ" secondAttribute="trailing" constant="16" id="jlQ-Sc-YeL"/>
                     </constraints>
                 </view>
-                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3pW-MH-215">
-                    <rect key="frame" x="16" y="218" width="382" height="420"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3pW-MH-215">
+                    <rect key="frame" x="16" y="258" width="382" height="0.0"/>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="100" id="U3h-6R-Qy0"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -60,7 +63,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="3pW-MH-215" secondAttribute="bottom" id="bmW-aW-bsd"/>
                 <constraint firstItem="3pW-MH-215" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="caJ-Ud-Fw4"/>
                 <constraint firstItem="kqs-1C-dR3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="dez-YK-G9F"/>
-                <constraint firstItem="3pW-MH-215" firstAttribute="top" secondItem="kqs-1C-dR3" secondAttribute="bottom" constant="20" id="eW7-VH-JAj"/>
+                <constraint firstItem="3pW-MH-215" firstAttribute="top" secondItem="kqs-1C-dR3" secondAttribute="bottom" constant="40" id="eW7-VH-JAj"/>
                 <constraint firstItem="kqs-1C-dR3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fin-w5-BAf"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="3pW-MH-215" secondAttribute="trailing" constant="16" id="h5M-LF-grm"/>
             </constraints>

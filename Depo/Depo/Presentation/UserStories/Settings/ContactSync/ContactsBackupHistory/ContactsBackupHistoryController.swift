@@ -13,7 +13,7 @@ final class ContactsBackupHistoryController: BaseViewController {
     private let contactHistoryView = ContactsBackupHistoryView.initFromNib()
     private lazy var backupProgressView = ContactSyncProgressView.setup(type: .backup)
     private lazy var restoreProgressView = ContactSyncProgressView.setup(type: .restore)
-    private var resultView: ContactsOperationView?
+    private var resultView: UIView?
     
     private var dataManager: ContuctBackupHistoryDataManagerProtocol?
     private let router = RouterVC()
@@ -98,22 +98,29 @@ final class ContactsBackupHistoryController: BaseViewController {
     }
     
     private func showResultView(type: ContactsOperationType, result: ContactsOperationResult) {
-        resultView = ContactsOperationView.with(type: type, result: result)
-
-        if result == .success {
-            switch type {
-            case .deleteBackUp:
-                let backUpCard = BackUpContactsCard.initFromNib()
-                resultView?.add(card: backUpCard)
-                
-                backUpCard.backUpHandler = { [weak self] in
-                    self?.showPopup(type: .backup)
+        switch type {
+        case .backUp(_):
+            resultView = BackupContactsOperationView.with(type: type, result: result)
+        default:
+            let resultView = ContactsOperationView.with(type: type, result: result)
+            
+            if result == .success {
+                switch type {
+                case .deleteBackUp:
+                    let backUpCard = BackUpContactsCard.initFromNib()
+                    resultView.add(card: backUpCard)
+                    
+                    backUpCard.backUpHandler = { [weak self] in
+                        self?.showPopup(type: .backup)
+                    }
+                default:
+                    break
                 }
-            default:
-                break
             }
+            
+            self.resultView = resultView
         }
-        
+
         show(view: resultView!, animated: true)
     }
 }

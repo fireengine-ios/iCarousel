@@ -114,3 +114,83 @@ final class ContactsOperationView: UIView, NibInit {
         cardsStackView.addArrangedSubview(card)
     }
 }
+
+final class BackupContactsOperationView: UIView {
+    
+    static func with(type: ContactsOperationType, result: ContactsOperationResult) -> BackupContactsOperationView {
+        let view = BackupContactsOperationView()
+        view.contentView = ContactsOperationView.with(type: type, result: result)
+        view.addSubview(view.contentView)
+        view.setupCards()
+        return view
+    }
+    
+    private var contentView: ContactsOperationView!
+    
+    private lazy var scheduleCard: ContactSyncScheduleCard = {
+        let card = ContactSyncScheduleCard.initFromNib()
+            .onAction { [weak self] sender in
+                self?.showAutoBackupOptions(sender: sender)
+        }
+        
+        card.set(periodicSyncOption: periodicSyncHelper.settings.timeSetting.option)
+        
+        return card
+    }()
+    
+    private let periodicSyncHelper = PeriodicSync()
+    
+    private lazy var autobackupActionSheet: UIAlertController = {
+        
+        let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let options: [PeriodicContactsSyncOption] = [.off, .daily, .weekly, .monthly]
+        
+        options.forEach { type in
+            let action = UIAlertAction(title: type.localizedText, style: .default, handler: { [weak self] _ in
+                self?.changeAutoBackup(to: type)
+            })
+            actionSheetVC.addAction(action)
+        }
+        
+        let cancelAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel)
+        actionSheetVC.addAction(cancelAction)
+        
+        actionSheetVC.view.tintColor = UIColor.black
+        actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up
+        
+        return actionSheetVC
+    }()
+    
+    private func showAutoBackupOptions(sender: Any) {
+        guard let controller = RouterVC().getViewControllerForPresent() else {
+            return
+        }
+        
+        autobackupActionSheet.popoverPresentationController?.sourceView = self
+        
+        if let button = sender as? UIButton {
+            let buttonRect = button.convert(button.bounds, to: self)
+            let rect = CGRect(x: buttonRect.midX, y: buttonRect.minY - 10, width: 10, height: 50)
+            autobackupActionSheet.popoverPresentationController?.sourceRect = rect
+        }
+        
+        controller.present(autobackupActionSheet, animated: true)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = bounds
+    }
+    
+    private func changeAutoBackup(to option: PeriodicContactsSyncOption) {
+        scheduleCard.set(periodicSyncOption: option)
+        periodicSyncHelper.save(option: option)
+    }
+    
+    func setupCards() {
+        if periodicSyncHelper.settings.timeSetting.option == .off {
+            contentView.add(card: scheduleCard)
+        }
+    }
+}

@@ -15,7 +15,7 @@ enum ContactSyncSmallCardType {
 }
 
 
-final class ContactSyncSmallCardView: UIView, NibInit {
+final class ContactSyncSmallCardView: ContactSyncBaseCardView, NibInit {
     
     @IBOutlet private weak var icon: UIImageView! {
         willSet {
@@ -63,23 +63,7 @@ final class ContactSyncSmallCardView: UIView, NibInit {
         return attributedStatic
     }()
     
-    private var actionHandler: VoidHandler?
-    
-    
-    //MARK:- Override
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        setupShadow()
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        setupShadow()
-    }
-    
+    private var actionHandler: VoidHandler?    
     
     //MARK:- Public
     
@@ -112,24 +96,6 @@ final class ContactSyncSmallCardView: UIView, NibInit {
     
    
     //MARK:- Private
-    
-    private func setupShadow() {
-        layer.cornerRadius = NumericConstants.contactSyncSmallCardCornerRadius
-        
-        clipsToBounds = false
-        
-        layer.shadowColor = UIColor.lightGray.cgColor
-        layer.shadowOpacity = NumericConstants.contactSyncSmallCardShadowOpacity
-        layer.shadowOffset = CGSize.zero
-        layer.shadowRadius = NumericConstants.contactSyncSmallCardShadowRadius
-        layer.shadowPath = UIBezierPath(rect: CGRect(x: 0,
-                                                     y: 0,
-                                                     width: layer.frame.size.width,
-                                                     height: layer.frame.size.height)).cgPath
-    }
-    
-    
-    
     
     private func attributedString(dateString: String) -> NSMutableAttributedString{
         let attributesDate: [NSAttributedStringKey : Any] = [

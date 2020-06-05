@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContactSyncScheduleCard: UIView, NibInit {
+class ContactSyncScheduleCard: ContactSyncBaseCardView, NibInit {
     @IBOutlet private weak var title: UILabel! {
         willSet {
             newValue.text = TextConstants.contactSyncBackupSuccessCardTitle
@@ -51,21 +51,6 @@ class ContactSyncScheduleCard: UIView, NibInit {
     
     private var actionHandler: SenderHandler?
     
-    
-    //MARK:- Override
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        setupShadow()
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        setupShadow()
-    }
-    
     //MARK:- Public
     
     func set(periodicSyncOption: PeriodicContactsSyncOption) {
@@ -79,25 +64,6 @@ class ContactSyncScheduleCard: UIView, NibInit {
         actionHandler = handler
         return self
     }
-    
-    
-    //MARK: - Private
-    
-    private func setupShadow() {
-        layer.cornerRadius = NumericConstants.contactSyncSmallCardCornerRadius
-
-        clipsToBounds = false
-
-        layer.shadowColor = UIColor.lightGray.cgColor
-        layer.shadowOpacity = NumericConstants.contactSyncSmallCardShadowOpacity
-        layer.shadowOffset = CGSize.zero
-        layer.shadowRadius = NumericConstants.contactSyncSmallCardShadowRadius
-        layer.shadowPath = UIBezierPath(rect: CGRect(x: 0,
-                                                     y: 0,
-                                                     width: layer.frame.size.width,
-                                                     height: layer.frame.size.height)).cgPath
-    }
-    
     
     //MARK: - IB Actions
     

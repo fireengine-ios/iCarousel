@@ -22,7 +22,7 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     
     private lazy var deleteProgressView = ContactSyncProgressView.setup(type: .deleteDuplicates)
     private lazy var backupProgressView = ContactSyncProgressView.setup(type: .backup)
-    private var resultView: ContactsOperationView?
+    private var resultView: UIView?
     
     private let contactSyncHelper = ContactSyncHelper.shared
     private lazy var analyticsService: AnalyticsService = factory.resolve()
@@ -99,20 +99,27 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     }
     
     private func showResultView(type: ContactsOperationType, result: ContactsOperationResult) {
-        resultView = ContactsOperationView.with(type: type, result: result)
-                
-        if result == .success {
-            switch type {
-            case .deleteDuplicates:
-                let backUpCard = BackUpContactsCard.initFromNib()
-                resultView?.add(card: backUpCard)
-                
-                backUpCard.backUpHandler = { [weak self] in
-                    self?.showPopup(type: .backup)
+        switch type {
+        case .backUp(_):
+            resultView = BackupContactsOperationView.with(type: type, result: result)
+        default:
+            let resultView = ContactsOperationView.with(type: type, result: result)
+            
+            if result == .success {
+                switch type {
+                case .deleteDuplicates:
+                    let backUpCard = BackUpContactsCard.initFromNib()
+                    resultView.add(card: backUpCard)
+                    
+                    backUpCard.backUpHandler = { [weak self] in
+                        self?.showPopup(type: .backup)
+                    }
+                default:
+                    break
                 }
-            default:
-                break
             }
+            
+            self.resultView = resultView
         }
         
         show(view: resultView!, animated: true)
