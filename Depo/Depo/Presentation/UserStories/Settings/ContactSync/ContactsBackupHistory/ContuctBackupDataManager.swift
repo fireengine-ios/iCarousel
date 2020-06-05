@@ -19,6 +19,8 @@ protocol ContuctBackupHistoryDataManagerDelegate: class {
     func showDetailsForBuckupItem(item: ContactBuckupItem)
 }
 
+//TODO: Change logic/ uncomment when new logic (with cell selection mode) will be implemented
+
 final class ContuctBackupHistoryDataManager: NSObject, ContuctBackupHistoryDataManagerProtocol {
     
     private var tableView: UITableView
@@ -34,16 +36,22 @@ final class ContuctBackupHistoryDataManager: NSObject, ContuctBackupHistoryDataM
         self.delegate = delegate
     }
     
-    private var contactBackups = [ContactBuckupItem]() {
+//    private var contactBackups = [ContactBuckupItem]() {
+//        didSet {
+//            tableView.reloadData()
+//        }
+//    }
+    
+    private var selectedItems = [ContactBuckupItem]() {
         didSet {
+            // remove did set
             tableView.reloadData()
         }
     }
     
-    private var selectedItems = [ContactBuckupItem]()
-    
     func appendItemsForPresent(items: [ContactBuckupItem]) {
-        contactBackups.append(contentsOf: items)
+      //contactBackups.append(contentsOf: items)
+        selectedItems.append(contentsOf: items)
     }
     
     func getSelectedItems() -> [ContactBuckupItem] {
@@ -51,7 +59,7 @@ final class ContuctBackupHistoryDataManager: NSObject, ContuctBackupHistoryDataM
     }
     
     private func manageSelectionStateForCell(_ cell: ContactsBackupCellProtocol, indexPath: IndexPath, isWillDisplayFunc: Bool) {
-        let item = contactBackups[indexPath.row]
+        let item = selectedItems[indexPath.row] //contactBackups[indexPath.row]
         if selectedItems.contains(item) {
             if isWillDisplayFunc {
                 cell.manageSelectionState(isCellSelected: true)
@@ -83,8 +91,8 @@ final class ContuctBackupHistoryDataManager: NSObject, ContuctBackupHistoryDataM
 
 extension ContuctBackupHistoryDataManager: UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        contactBackups.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {   //contactBackups.count
+        selectedItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,33 +107,29 @@ extension ContuctBackupHistoryDataManager: UITableViewDelegate {
         guard var cell = cell as? ContactsBackupCellProtocol else {
             assertionFailure()
             return
-        }
-        let cellInfo = prepareInfoForCellPresenting(for: contactBackups[indexPath.row])
+        }                                              //contactBackups[indexPath.row]
+        let cellInfo = prepareInfoForCellPresenting(for: selectedItems[indexPath.row])
         cell.setupCell(title: cellInfo.title, detail: cellInfo.description)
         cell.delegate = self
         manageSelectionStateForCell(cell, indexPath: indexPath, isWillDisplayFunc: true)
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+                  //contactBackups[indexPath.row]
+         let item = selectedItems[indexPath.row]
+         delegate?.showDetailsForBuckupItem(item: item)
+     }
 }
 
 extension ContuctBackupHistoryDataManager: ContactsBackupCellDelegate {
     
     func selectCellButtonTapped(for cell: UITableViewCell & ContactsBackupCellProtocol) {
-        guard let indexPath = tableView.indexPath(for: cell) else {
-            assertionFailure()
-            return
-        }
-        manageSelectionStateForCell(cell, indexPath: indexPath, isWillDisplayFunc: false)
-    }
-    
-    func arrowButtonTapped(for cell: UITableViewCell & ContactsBackupCellProtocol) {
-        
-        guard let indexPath = tableView.indexPath(for: cell) else {
-            assertionFailure()
-            return
-        }
-        
-        let item = contactBackups[indexPath.row]
-        delegate?.showDetailsForBuckupItem(item: item)
+//        guard let indexPath = tableView.indexPath(for: cell) else {
+//            assertionFailure()
+//            return
+//        }
+
+//        manageSelectionStateForCell(cell, indexPath: indexPath, isWillDisplayFunc: false)
     }
 }
 

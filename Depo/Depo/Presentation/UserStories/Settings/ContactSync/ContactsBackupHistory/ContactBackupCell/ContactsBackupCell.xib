@@ -44,42 +44,36 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="428 Contacts | 20 March 2020 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhW-zf-pUA">
-                        <rect key="frame" x="83" y="45" width="238" height="13"/>
+                        <rect key="frame" x="83" y="45" width="133.5" height="13"/>
                         <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contacts_20-03-2020_" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bV-WP-cEd">
-                        <rect key="frame" x="83" y="24" width="238" height="17"/>
+                        <rect key="frame" x="83" y="24" width="146" height="17"/>
                         <fontDescription key="fontDescription" name="TurkcellSaturaMed" family="TurkcellSaturaMed" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ogh-Bu-oLo" customClass="ExtendedTapAreaButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_create_story" translatesAutoresizingMaskIntoConstraints="NO" id="q2I-pl-suV">
                         <rect key="frame" x="337" y="32" width="16" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="16" id="1Ry-jl-HHF"/>
-                            <constraint firstAttribute="height" constant="24" id="307-nm-FN9"/>
+                            <constraint firstAttribute="width" constant="16" id="5s0-92-FUN"/>
+                            <constraint firstAttribute="height" constant="24" id="Aup-bj-FIq"/>
                         </constraints>
-                        <state key="normal" image="arrow_create_story"/>
-                        <connections>
-                            <action selector="arrorButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yYe-Vo-5vE"/>
-                        </connections>
-                    </button>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="dhW-zf-pUA" firstAttribute="top" secondItem="1bV-WP-cEd" secondAttribute="bottom" constant="4" id="0I3-CZ-eGw"/>
                     <constraint firstItem="0d8-mc-QtO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Aaj-IT-qGQ"/>
                     <constraint firstItem="rns-CU-grg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="GHz-fB-DMO"/>
-                    <constraint firstItem="Ogh-Bu-oLo" firstAttribute="centerY" secondItem="rns-CU-grg" secondAttribute="centerY" id="HRd-HD-ZfP"/>
                     <constraint firstItem="1bV-WP-cEd" firstAttribute="top" secondItem="rns-CU-grg" secondAttribute="top" id="KTH-Ow-NrA"/>
                     <constraint firstItem="dhW-zf-pUA" firstAttribute="leading" secondItem="rns-CU-grg" secondAttribute="trailing" constant="16" id="LNr-bc-FyW"/>
-                    <constraint firstItem="Ogh-Bu-oLo" firstAttribute="leading" secondItem="1bV-WP-cEd" secondAttribute="trailing" constant="16" id="M0H-uS-Zeo"/>
+                    <constraint firstItem="q2I-pl-suV" firstAttribute="centerY" secondItem="rns-CU-grg" secondAttribute="centerY" id="QWy-vL-tgY"/>
                     <constraint firstItem="1bV-WP-cEd" firstAttribute="leading" secondItem="rns-CU-grg" secondAttribute="trailing" constant="16" id="QcW-rh-Hua"/>
                     <constraint firstItem="0d8-mc-QtO" firstAttribute="centerY" secondItem="rns-CU-grg" secondAttribute="centerY" id="WKc-MI-sOM"/>
-                    <constraint firstItem="Ogh-Bu-oLo" firstAttribute="leading" secondItem="dhW-zf-pUA" secondAttribute="trailing" constant="16" id="oPC-z9-Jmm"/>
+                    <constraint firstAttribute="trailing" secondItem="q2I-pl-suV" secondAttribute="trailing" constant="14" id="eRI-Hs-Q8S"/>
                     <constraint firstAttribute="bottom" secondItem="dhW-zf-pUA" secondAttribute="bottom" constant="12" id="q5x-jR-SFn"/>
-                    <constraint firstAttribute="trailing" secondItem="Ogh-Bu-oLo" secondAttribute="trailing" constant="14" id="r6R-b6-nIT"/>
                     <constraint firstItem="rns-CU-grg" firstAttribute="leading" secondItem="0d8-mc-QtO" secondAttribute="trailing" constant="8" id="u9P-Iy-Mfr"/>
                 </constraints>
             </tableViewCellContentView>

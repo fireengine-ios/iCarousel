@@ -17,7 +17,6 @@ protocol ContactsBackupCellProtocol {
 
 protocol ContactsBackupCellDelegate {
     func selectCellButtonTapped(for cell: UITableViewCell & ContactsBackupCellProtocol)
-    func arrowButtonTapped(for cell: UITableViewCell & ContactsBackupCellProtocol)
 }
 
 final class ContactsBackupCell: UITableViewCell, ContactsBackupCellProtocol {
@@ -27,6 +26,11 @@ final class ContactsBackupCell: UITableViewCell, ContactsBackupCellProtocol {
     @IBOutlet private weak var detailLabel: UILabel!
     
     var delegate: ContactsBackupCellDelegate?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        selectionStyle = .none
+    }
     
     func setupCell(title: String, detail: String) {
         titleLabel.text = title
@@ -40,9 +44,5 @@ final class ContactsBackupCell: UITableViewCell, ContactsBackupCellProtocol {
     
     @IBAction private func selectButtonTapped(_ sender: UIButton) {
         delegate?.selectCellButtonTapped(for: self)
-    }
-    
-    @IBAction private func arrorButtonTapped(_ sender: UIButton) {
-        delegate?.arrowButtonTapped(for: self)
     }
 }
