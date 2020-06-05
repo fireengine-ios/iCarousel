@@ -9,10 +9,10 @@
 import UIKit
 
 protocol PassThroughViewDelegate: class {
-    func handlePan(recognizer:UIPanGestureRecognizer)
-    func handleSwipe(recognizer:UISwipeGestureRecognizer)
+    func handlePan(recognizer: UIPanGestureRecognizer)
+    func handleSwipe(recognizer: UISwipeGestureRecognizer)
+    func tapGesture(recognizer: UITapGestureRecognizer)
 }
-
 
 final class PassThroughView: UIView {
     
@@ -40,6 +40,11 @@ final class PassThroughView: UIView {
         return gesture
     }()
     
+    private lazy var tapGestureRecognizer: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizerHandler))
+        return gesture
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .clear
@@ -57,7 +62,7 @@ final class PassThroughView: UIView {
         
         if let parentViewController = hitView?.findParenViewController() as? PhotoVideoDetailViewController,
             let bottomDetailView = parentViewController.bottomDetailView {
-            if parentViewController.viewState != .collapsed {
+            if parentViewController.getBottomDetailViewState() != .collapsed {
                 if parentViewController.collapseDetailView.frame.contains(point) || bottomDetailView.frame.contains(point) {
                     return nil
                 } else {
@@ -83,16 +88,22 @@ final class PassThroughView: UIView {
         swipeGestureRecognizerRight.isEnabled = true
         swipeGestureRecognizerLeft.isEnabled = true
         panGestureRecognizer.isEnabled = true
+        tapGestureRecognizer.isEnabled = true
     }
     
     func disableGestures() {
         swipeGestureRecognizerRight.isEnabled = false
         swipeGestureRecognizerLeft.isEnabled = false
         panGestureRecognizer.isEnabled = false
+        tapGestureRecognizer.isEnabled = false
     }
     
     @objc private func swipeGestureRecognizerHandler(_ gestureRecognizer: UISwipeGestureRecognizer) {
         delegate?.handleSwipe(recognizer: gestureRecognizer)
+    }
+    
+    @objc private func tapGestureRecognizerHandler(_ gestureRecognizer: UITapGestureRecognizer) {
+        delegate?.tapGesture(recognizer: gestureRecognizer)
     }
     
     private func addGestureRecognizers() {
@@ -103,6 +114,7 @@ final class PassThroughView: UIView {
         window.addGestureRecognizer(panGestureRecognizer)
         window.addGestureRecognizer(swipeGestureRecognizerRight)
         window.addGestureRecognizer(swipeGestureRecognizerLeft)
+        addGestureRecognizer(tapGestureRecognizer)
     }
     
 }

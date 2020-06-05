@@ -72,6 +72,7 @@
 "Buy" = "Purchase";
 "Cancel" = "Cancel";
 "Info" = "Info";
+"download_document_error_popup" = "Only for photo & Video";
 "You can open settings and cancel subscption." = "To cancel your package, please use iTunes & App Store menu in your device.";
 "Please text \"Iptal LIFEBOX %@\" to 2222 to cancel your subscription" = "To cancel your package, please send an SMS to 2200 with this text: \"IPTAL LIFEBOX %@\"";
 "You can visit iTunes to cancel your subscription" = "To cancel your package, please use iTunes & App Store menu in your device.";

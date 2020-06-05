@@ -13,12 +13,6 @@ import Photos
 
 final class PhotoVideoDetailViewController: BaseViewController {
     
-    enum CardState {
-        case expanded
-        case collapsed
-        case full
-    }
-    
     var output: PhotoVideoDetailViewOutput!
     
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -28,38 +22,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     @IBOutlet private weak var swipeUpContainerView: UIView!
     // Bottom detail view
+    
+    private var bottomDetailViewManager: BottomDetailViewAnimationManagerProtocol?
 
-    var bottomDetailView: FileInfoView? {
-        willSet {
-            newValue?.alpha = 0
-        }
-    }
+    var bottomDetailView: FileInfoView?
     private var passThroughView: PassThroughView?
-    private let cardHeight: CGFloat = UIScreen.main.bounds.height * 0.7
-    
-    private lazy var imageMaxY = {
-        return UIScreen.main.bounds.height - getImageMaxY()
-    }()
-    
-    private var detailViewIsHidden = true {
-        didSet {
-            if detailViewIsHidden != oldValue {
-                detailView(isHidden: detailViewIsHidden)
-            }
-        }
-    }
-    
-    private var gestureBeginLocation: CGPoint = .zero
-    private var dragViewBeginLocation: CGPoint = .zero
-    private var isCardPresented = false
-    var viewState: CardState = .collapsed
-    private var nextState: CardState {
-        return isCardPresented ? .collapsed : .expanded
-    }
-    
-    private var runningAnimations = [UIViewPropertyAnimator]()
-    private var animationProgressWhenInterrupted: CGFloat = 0
-    
 
     private lazy var player: MediaPlayer = factory.resolve()
     
@@ -158,7 +125,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
-        collapseViewSetup()
         showSpinner()
         updateFileInfo()
         output.getFIRStatus()
@@ -191,6 +157,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
 
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
+        setupBottomDetailViewManager()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -243,13 +210,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }  else {
             dismiss(animated: true)
         }
-    }
-    
-    private func collapseViewSetup() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(closeDetailView))
-        collapseDetailView.addGestureRecognizer(tap)
-        collapseDetailView.isHidden = true
-        collapseDetailView.layer.cornerRadius = 15
     }
         
     private func scrollToSelectedIndex() {
@@ -333,42 +293,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         localPlayer?.pause()
     }
     
-    @objc private func closeDetailView() {
-        bottomDetailView?.hideKeyboard()
-        viewState = .collapsed
-        UIView.animate(withDuration: 1, delay: 0,
-                       usingSpringWithDamping: 0.8,
-                       initialSpringVelocity: 0.9,
-                       options: [.curveEaseInOut, .allowUserInteraction],
-                       animations: {
-                        self.collectionView.frame.origin.y = .zero
-                        self.bottomDetailView?.frame.origin.y = self.view.frame.height
-                        self.collapseDetailView.isHidden = true
-                        self.isFullScreen = false
-                        
-        }, completion: { _ in
-            self.detailViewIsHidden = self.needHideDetailView()
-        })
-    }
-    
-    func showDetailFromThreeDots() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.isFullScreen = true
-        }) { _ in
-            UIView.animate(withDuration: 0.5, delay: 0.3,
-                           usingSpringWithDamping: 0.8,
-                           initialSpringVelocity: 0.9,
-                           options: [.curveEaseInOut, .allowUserInteraction],
-                           animations: {
-                            self.viewState = .expanded
-                            self.collectionView.frame.origin.y = self.view.frame.minY - (self.cardHeight - self.imageMaxY)
-                            self.bottomDetailView?.frame.origin.y = self.collectionView.frame.maxY - self.imageMaxY
-                            self.collapseDetailView.isHidden = false
-                            self.detailViewIsHidden = false
-            }, completion: nil)
-        }
-    }
-    
     private func updateAllItems(with items: [Item], updateCollection: Bool) {
         objects = items
         
@@ -378,175 +302,57 @@ final class PhotoVideoDetailViewController: BaseViewController {
             collectionView.layoutIfNeeded()
         }
     }
+    
+    private func setupBottomDetailViewManager() {
+        guard
+            let managedView = bottomDetailView,
+            let passThroughView = passThroughView,
+            let collectionView = collectionView,
+            let collapsedView = collapseDetailView,
+            let parentView = view
+        else {
+            assertionFailure()
+            return
+        }
+        bottomDetailViewManager = BottomDetailViewAnimationManager(managedView: managedView, passThrowView: passThroughView, collectionView: collectionView, collapseView: collapsedView, parentView: parentView, delegate: self)
+    }
+    
+    func getBottomDetailViewState() -> CardState {
+        guard let bottomDetailViewManager = bottomDetailViewManager else {
+            assertionFailure()
+            return .collapsed
+        }
+        return bottomDetailViewManager.getCurrenState()
+    }
+    
+    func showDetailFromThreeDots() {
+        bottomDetailViewManager?.showDetailFromThreeDots()
+    }
 }
 
 
 // MARK: Bottom detail view implemantation
 
-extension PhotoVideoDetailViewController: PassThroughViewDelegate {
+extension PhotoVideoDetailViewController: BottomDetailViewAnimationManagerDelegate {
     
-    func handlePan(recognizer: UIPanGestureRecognizer) {
-        
-        guard let bottomDetailView = bottomDetailView else {
-            assertionFailure()
-            return
-        }
-        
-        switch recognizer.state {
-        case .began:
-            bottomDetailView.hideKeyboard()
-            isFullScreen = true
-            gestureBeginLocation = recognizer.location(in: view)
-            dragViewBeginLocation = collectionView?.frame.origin ?? .zero
-        case .changed:
-            
-            let newLocation = dragViewBeginLocation.y + (recognizer.location(in: view).y - gestureBeginLocation.y)
-            collectionView.frame.origin.y = newLocation
-            bottomDetailView.frame.origin.y = collectionView.frame.maxY - imageMaxY
-            detailViewIsHidden = needHideDetailView()
-    
-        case .ended:
-            UIView.animate(withDuration: 1, delay: 0,
-                           usingSpringWithDamping: 0.8,
-                           initialSpringVelocity: 0.9,
-                           options: [.curveEaseOut, .allowUserInteraction],
-                           animations: {
-                            self.positionForView(velocityY: recognizer.velocity(in: self.bottomDetailView).y)
-            }, completion: { _ in
-                
-                switch self.viewState {
-                case .expanded:
-                    self.detailViewIsHidden = false
-                case .collapsed:
-                    self.detailViewIsHidden = true
-                case .full:
-                    self.detailViewIsHidden = false
-                }
-            })
-        default:
-            break
-        }
+    func getSelectedIindex() -> Int {
+        return selectedIndex ?? 0
     }
     
-    func positionForView(velocityY: CGFloat) {
-        
-        guard let bottomDetailView = bottomDetailView else {
-            assertionFailure()
-            return
-        }
-        
-        if velocityY > 50,
-            bottomDetailView.frame.origin.y > self.view.frame.height - cardHeight {
-            viewState = .collapsed
-            collectionView.frame.origin.y = .zero
-            bottomDetailView.frame.origin.y = view.frame.height
-            isFullScreen = false
-            collapseDetailView.isHidden = true
-            detailViewIsHidden = needHideDetailView()
-        } else if velocityY < -50,
-            bottomDetailView.frame.origin.y > view.frame.height - cardHeight, viewState != .expanded {
-            viewState = .expanded
-            collectionView.frame.origin.y = view.frame.minY - (cardHeight - imageMaxY)
-            bottomDetailView.frame.origin.y = collectionView.frame.maxY - imageMaxY
-            collapseDetailView.isHidden = false
-
-        } else if bottomDetailView.frame.origin.y < view.frame.height - cardHeight {
-            viewState = .full
-            
-            collectionView.frame.origin.y = -(view.frame.height - imageMaxY)
-            bottomDetailView.frame.origin.y = view.frame.minY
-            collapseDetailView.isHidden = false
-            
-        } else if bottomDetailView.frame.origin.y > view.frame.height {
-            viewState = .collapsed
-            bottomDetailView.frame.origin.y = view.frame.height
-            collectionView.frame.origin.y = view.frame.minY
-            
-            isFullScreen = false
-            collapseDetailView.isHidden = true
-            
-        } else {
-            switch self.viewState {
-            case .collapsed:
-  
-                collectionView.frame.origin.y = .zero
-                bottomDetailView.frame.origin.y = view.frame.height
-                isFullScreen = false
-                collapseDetailView.isHidden = true
-                detailViewIsHidden = needHideDetailView()
-            case .expanded:
-
-                collectionView.frame.origin.y = view.frame.minY - (cardHeight - imageMaxY)
-                bottomDetailView.frame.origin.y = view.frame.height - cardHeight
-                collapseDetailView.isHidden = false
-                detailViewIsHidden = needHideDetailView()
-            case .full:
-
-                bottomDetailView.frame.origin.y = view.frame.height - cardHeight
-                collectionView.frame.origin.y = bottomDetailView.frame.minY - collectionView.frame.height + imageMaxY
-                detailViewIsHidden = needHideDetailView()
-                collapseDetailView.isHidden = false
-            }
-        }
-    }
-
-    private func detailView(isHidden: Bool) {
-        UIView.animate(withDuration: 0.2) {
-            self.bottomDetailView?.alpha = isHidden ? 0 : 1
-        }
+    func getObjectsCount() -> Int {
+        return objects.count
     }
     
-    private func getImageMaxY() -> CGFloat {
-        guard let cell = collectionView.cellForItem(at: IndexPath(row: selectedIndex ?? 0, section: 0)) as? PhotoVideoDetailCell else {
-            assertionFailure()
-            return .zero
-        }
-        return cell.imageViewMaxY()
-    }
-        
-    func handleSwipe(recognizer: UISwipeGestureRecognizer) {
-        switch (recognizer.state, recognizer.direction) {
-        case (.ended, .left):
-            scrollLeft()
-        case (.ended, .right):
-            scrollRight()
-        default:
-            return
-        }
+    func getIsFullScreenState() -> Bool {
+        return isFullScreen
     }
     
-    private func scrollRight() {
-        guard let index = selectedIndex else {
-            return
-        }
-        let newIndex = index - 1
-        scroll(to: newIndex)
+    func setIsFullScreenState(_ isFullScreen: Bool) {
+        self.isFullScreen = isFullScreen
     }
     
-    private func scrollLeft() {
-        guard let index = selectedIndex else {
-            return
-        }
-        let newIndex = index + 1
-        scroll(to: newIndex)
-    }
-
-    private func scroll(to index: Int) {
-        guard 0..<objects.count ~= index else {
-            return
-        }
-        
-        let cell = collectionView.visibleCells.first as? PhotoVideoDetailCell
-        let offsetY = -(cell?.frame.minY ?? 0 + imageMaxY)
-        
-        selectedIndex = index
-        let newContentOffsetX = collectionView.bounds.size.width * CGFloat(index)
-        let newContentOffset = CGPoint(x: newContentOffsetX, y: offsetY)
-
-        collectionView.setContentOffset(newContentOffset, animated: true)
-        collectionView.frame.origin.y = view.frame.minY - (cardHeight - imageMaxY)
-        
-        view.layoutIfNeeded()
+    func setSelectedIndex(_ selectedIndex: Int) {
+        self.selectedIndex = selectedIndex
     }
     
     private func addTrackSwipeUpView() {
@@ -554,7 +360,6 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
             return
         }
         let view = PassThroughView(frame: topViewController.view.bounds)
-        view.delegate = self
         topViewController.view.addSubview(view)
         passThroughView = view
     }
@@ -564,19 +369,10 @@ extension PhotoVideoDetailViewController: PassThroughViewDelegate {
             return
         }
         
-        let fileInfoView = FileInfoView(frame: view.bounds)
-        
+        let fileInfoView = FileInfoView(frame: CGRect(origin: CGPoint(x: .zero, y: view.frame.height), size: view.frame.size))
         output.configureFileInfo(fileInfoView)
         topViewController.view.addSubview(fileInfoView)
         bottomDetailView = fileInfoView
-    }
-    
-    private func needHideDetailView() -> Bool {
-        guard let bottomDetailView = bottomDetailView else {
-            assertionFailure()
-            return false
-        }
-        return bottomDetailView.frame.minY >= view.frame.height * 0.75
     }
 }
 
@@ -673,7 +469,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func closeDetailViewIfNeeded() {
-        closeDetailView()
+        bottomDetailViewManager?.closeDetailView()
     }
 }
 
