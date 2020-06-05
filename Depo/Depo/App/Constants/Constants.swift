@@ -1894,4 +1894,13 @@ struct TextConstants {
     static let contactBackupSuccessNavbarTitle = NSLocalizedString("contact_phase2_contact_backup_success_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactBackupSuccessTitle = NSLocalizedString("contact_phase2_contact_backup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactBackupSuccessMessage = NSLocalizedString("contact_phase2_contact_backup_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let warningPopupContactPermissionsTitle = NSLocalizedString("contact_phase2_warning_popup_contact_permissions_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let warningPopupContactPermissionsMessage = NSLocalizedString("contact_phase2_warning_popup_contact_permissions_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let warningPopupContactPermissionsStorageButton = NSLocalizedString("contact_phase2_warning_popup_contact_permissions_storage_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let warningPopupContactPermissionsDeleteButton = NSLocalizedString("contact_phase2_warning_popup_contact_permissions_delete_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let warningPopupStorageLimitTitle = NSLocalizedString("contact_phase2_warning_popup_storage_limit_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let warningPopupStorageLimitMessage = NSLocalizedString("contact_phase2_warning_popup_storage_limit_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let warningPopupStorageLimitSettingsButton = NSLocalizedString("contact_phase2_warning_popup_storage_limit_settings_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

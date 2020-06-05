@@ -334,8 +334,7 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
         case .notPremiumUser:
             showPopup(type: .premium)
         case .accessDenied:
-            //TODO: add warning popup
-            break
+            showWarningPopup(type: .contactPermissionDenied)
         case .emptyStoredContacts:
             showEmptyContactsPopup()
         case .emptyLifeboxContacts:
@@ -343,6 +342,11 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
         default:
             handle(error: error, operationType: operationType)
         }
+    }
+    
+    func showWarningPopup(type: WarningPopupType) {
+        let popup = ContactSyncPopupFactory.createWarningPopup(type: type, handler: {})
+        RouterVC().presentViewController(controller: popup, animated: false)
     }
     
     private func showEmptyContactsPopup() {

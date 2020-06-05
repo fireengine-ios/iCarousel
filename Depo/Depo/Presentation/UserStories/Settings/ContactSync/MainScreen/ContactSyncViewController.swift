@@ -11,7 +11,7 @@ import Contacts
 
 
 protocol ContactsBackupActionProviderProtocol: class {
-    func backUp()
+    func backUp(isConfirmed: Bool)
 }
 
 protocol ContactSyncControllerProtocol: ViewController {
@@ -132,8 +132,12 @@ extension ContactSyncViewController: ContactSyncAnalyzeProgressViewDelegate {
 }
 
 extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
-    func backUp() {
-        showPopup(type: .backup)
+    func backUp(isConfirmed: Bool) {
+        if isConfirmed {
+            startBackUp()
+        } else {
+            showPopup(type: .backup)
+        }
     }
     
     private func startBackUp() {
