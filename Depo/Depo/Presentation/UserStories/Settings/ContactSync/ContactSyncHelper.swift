@@ -243,23 +243,6 @@ final class ContactSyncHelper {
                 
                 debugLog("contactsSyncService.executeOperation errorCallback: \(errorType)")
                 
-                switch errorType {
-                case .remoteServerError:
-                break //fullscreen
-                case .networkError:
-                    SnackbarManager.shared.show(type: .action, message: TextConstants.contactSyncErrorNetwork)
-                case .internalError:
-                break //fullscreen
-                case .accessDenied:
-                break //show popup with settings link
-                case .depoError:
-                    break
-                    //                    Currently, we handle this error during restore operation. Please continue to use same flow. Please replace the popup with this:
-                //                    https://zpl.io/bAJM65e, https://zpl.io/VQXwp7P
-                default:
-                    break
-                }
-                
                 UIApplication.setIdleTimerDisabled(false)
                 self?.delegate?.didFailed(operationType: opertionType, error: .syncError(errorType))
         })

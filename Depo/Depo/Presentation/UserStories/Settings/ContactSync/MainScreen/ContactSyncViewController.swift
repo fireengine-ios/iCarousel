@@ -260,12 +260,38 @@ extension ContactSyncViewController: ContactSyncControllerProtocol {
         switch error {
         case .noBackUp:
             showRelatedView()
-        case .syncError(_):
-            //TODO: show result view with error message
-            break
+        case .syncError(let error):
+            guard let syncError = error as? SyncOperationErrors else {
+                //TODO: show result view with error message
+                assertionFailure("This should be Sync operation")
+                return
+            }
+          handleSyncError(syncError: syncError)
+            
         default:
             break
         }
+    }
+    
+    private func handleSyncError(syncError: SyncOperationErrors) {
+        
+                switch syncError {
+                case .remoteServerError(let code):
+                break //fullscreen
+                case .networkError:
+                    SnackbarManager.shared.show(type: .action, message: TextConstants.contactSyncErrorNetwork)
+                case .internalError:
+                break //fullscreen
+                case .accessDenied:
+                break //show popup with settings link
+                case .depoError:
+                    break
+                    //                    Currently, we handle this error during restore operation. Please continue to use same flow. Please replace the popup with this:
+                //                    https://zpl.io/bAJM65e, https://zpl.io/VQXwp7P
+                default:
+                    break
+                }
+
     }
     
     func showPopup(type: ContactSyncPopupType) {
