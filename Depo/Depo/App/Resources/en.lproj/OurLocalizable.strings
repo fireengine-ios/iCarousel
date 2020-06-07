@@ -1632,5 +1632,15 @@
 "contact_phase2_delete_backup_success_card_title" = "Auto Contact Backup";
 "contact_phase2_delete_backup_success_card_message" = "Your auto contact backup is off! Enable now and lifebox can sync your contacts automatically.";
 
+"contact_phase2_contact_backup_success_navbar_title" = "Back up";
 "contact_phase2_contact_backup_success_title" = "Back up Successfully";
 "contact_phase2_contact_backup_success_message" = "You have new %d contacts and no possible duplicates to review in your lifebox.";
+
+"contact_phase2_warning_popup_contact_permissions_title" = "You have reached your lifebox storage limit";
+"contact_phase2_warning_popup_contact_permissions_message" = "Your storage is full, so you cannot restore your contacts. You can expand your storage or delete any files in Lifebox.";
+"contact_phase2_warning_popup_contact_permissions_storage_button" = "Expand My Storage";
+"contact_phase2_warning_popup_contact_permissions_delete_button" = "Delete Files";
+
+"contact_phase2_warning_popup_storage_limit_title" = "Permission Denied";
+"contact_phase2_warning_popup_storage_limit_message" = "You don’t give the permission to backup your contacts from your phone.";
+"contact_phase2_warning_popup_storage_limit_settings_button" = "Settings";

@@ -11,7 +11,7 @@ import UIKit
 typealias SenderHandler = (Any) -> ()
 
 
-final class ContactSyncBigCardView: UIView, NibInit {
+final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     
     //MARK: Top View
     
@@ -105,16 +105,7 @@ final class ContactSyncBigCardView: UIView, NibInit {
         super.awakeFromNib()
         
         backgroundColor = .lrTealishTwo
-        
-        setupShadow()
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        setupShadow()
-    }
-    
     
     //MARK: - Public
     
@@ -147,25 +138,6 @@ final class ContactSyncBigCardView: UIView, NibInit {
             self.autoBackupText.text = String(format: TextConstants.contactSyncBigCardAutobackupFormat, periodicSyncOption.localizedText)
         }
     }
-    
-    
-    //MARK: - Private
-    
-    private func setupShadow() {
-        layer.cornerRadius = NumericConstants.contactSyncSmallCardCornerRadius
-
-        clipsToBounds = false
-
-        layer.shadowColor = UIColor.lightGray.cgColor
-        layer.shadowOpacity = NumericConstants.contactSyncSmallCardShadowOpacity
-        layer.shadowOffset = CGSize.zero
-        layer.shadowRadius = NumericConstants.contactSyncSmallCardShadowRadius
-        layer.shadowPath = UIBezierPath(rect: CGRect(x: 0,
-                                                     y: 0,
-                                                     width: layer.frame.size.width,
-                                                     height: layer.frame.size.height)).cgPath
-    }
-    
     
     //MARK: - IB Actions
     

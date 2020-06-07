@@ -65,10 +65,6 @@ enum ContactSyncPopupType {
     }
 }
 
-enum ContactSyncWarningType {
-    case lifeboxStorageLimit
-    case permissionDenied
-}
 
 final class ContactSyncPopupFactory {
     
@@ -81,8 +77,7 @@ final class ContactSyncPopupFactory {
                                     secondAction: handler)
     }
     
-    //TODO: Need to implement
-    static func createWarningPopup(type: ContactSyncWarningType) {
-        
+    static func createWarningPopup(type: WarningPopupType, handler: @escaping VoidHandler) -> UIViewController {
+        return WarningPopupController.popup(type: type, closeHandler: handler)
     }
 }

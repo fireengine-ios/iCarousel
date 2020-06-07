@@ -8,18 +8,8 @@
 
 import UIKit
 
-final class BackUpContactsCard: UIView, NibInit {
-    
-    @IBOutlet private weak var contentView: UIView! {
-        willSet {
-            newValue.layer.cornerRadius = 4
-            newValue.layer.shadowOffset = .zero
-            newValue.layer.shadowOpacity = 0.2
-            newValue.layer.shadowRadius = 4
-            newValue.layer.shadowColor = UIColor.black.cgColor
-        }
-    }
-    
+final class BackUpContactsCard: ContactSyncBaseCardView, NibInit {
+        
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.deleteDuplicatesBackUpTitle

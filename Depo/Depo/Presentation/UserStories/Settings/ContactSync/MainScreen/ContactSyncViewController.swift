@@ -11,7 +11,7 @@ import Contacts
 
 
 protocol ContactsBackupActionProviderProtocol: class {
-    func backUp()
+    func backUp(isConfirmed: Bool)
 }
 
 protocol ContactSyncControllerProtocol: ViewController {
@@ -132,8 +132,12 @@ extension ContactSyncViewController: ContactSyncAnalyzeProgressViewDelegate {
 }
 
 extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
-    func backUp() {
-        showPopup(type: .backup)
+    func backUp(isConfirmed: Bool) {
+        if isConfirmed {
+            startBackUp()
+        } else {
+            showPopup(type: .backup)
+        }
     }
     
     private func startBackUp() {
@@ -283,7 +287,7 @@ extension ContactSyncViewController: ContactSyncControllerProtocol {
                 case .internalError:
                 break //fullscreen
                 case .accessDenied:
-                break //show popup with settings link
+                    showWarningPopup(type: .contactPermissionDenied)
                 case .depoError:
                     break
                     //                    Currently, we handle this error during restore operation. Please continue to use same flow. Please replace the popup with this:

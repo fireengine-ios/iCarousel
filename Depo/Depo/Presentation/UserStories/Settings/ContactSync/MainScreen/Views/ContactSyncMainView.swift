@@ -37,7 +37,7 @@ final class ContactSyncMainView: UIView, NibInit {
         let bigBackupCard = ContactSyncBigCardView.initFromNib()
         
         bigBackupCard.onBackup { [weak self] in
-            self?.delegate?.backUp()
+            self?.delegate?.backUp(isConfirmed: false)
         }
         .onSeeContacts { [weak self] in
             self?.delegate?.showContacts()
