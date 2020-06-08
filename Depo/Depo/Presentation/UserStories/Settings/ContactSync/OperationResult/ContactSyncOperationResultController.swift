@@ -31,15 +31,15 @@ class ContactSyncOperationResultController: BaseViewController, NibInit {
     
     //MARK: - Override
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         setupNavBar()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         showRelatedView()
     }
     
@@ -55,10 +55,14 @@ class ContactSyncOperationResultController: BaseViewController, NibInit {
         switch type {
             case .success:
                 successView.frame = contentView.bounds
-                contentView.addSubview(successView)
+                if successView.superview == nil {
+                    contentView.addSubview(successView)
+                }
             case .failed:
                 failView.frame = contentView.bounds
-                contentView.addSubview(failView)
+                if failView.superview == nil {
+                    contentView.addSubview(failView)
+                }
             default:
                 break
         }
