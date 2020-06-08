@@ -22,9 +22,18 @@ enum FullQuotaWarningPopUpType {
         switch self {
         case .standard:
             return TextConstants.fullQuotaWarningPopUpTitle
+        case .contact:
+            return TextConstants.contactSyncDepoErrorTitle
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .standard:
+            return TextConstants.fullQuotaWarningPopUpDescription
         case .contact(let operationType):
             guard let operationType = operationType else {
-                return TextConstants.contactSyncDepoErrorTitle
+                return TextConstants.contactSyncDepoErrorMessage
             }
             
             switch operationType {
@@ -33,15 +42,6 @@ enum FullQuotaWarningPopUpType {
             case .backup:
                 return TextConstants.contactSyncErrorQuotaBackup
             }
-        }
-    }
-    
-    var description: String {
-        switch self {
-        case .standard:
-            return TextConstants.fullQuotaWarningPopUpDescription
-        case .contact:
-            return TextConstants.contactSyncDepoErrorMessage
         }
     }
     
