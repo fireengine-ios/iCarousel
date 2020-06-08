@@ -9,15 +9,30 @@
 import UIKit
 
 enum FullQuotaWarningPopUpType {
+    
+    enum ContactsOperationType {
+        case backup
+        case restore
+    }
+    
     case standard
-    case contact
+    case contact(ContactsOperationType?)
     
     var title: String {
         switch self {
         case .standard:
             return TextConstants.fullQuotaWarningPopUpTitle
-        case .contact:
-            return TextConstants.contactSyncDepoErrorTitle
+        case .contact(let operationType):
+            guard let operationType = operationType else {
+                return TextConstants.contactSyncDepoErrorTitle
+            }
+            
+            switch operationType {
+            case .restore:
+                return TextConstants.contactSyncErrorQuotaRestore
+            case .backup:
+                return TextConstants.contactSyncErrorQuotaBackup
+            }
         }
     }
     

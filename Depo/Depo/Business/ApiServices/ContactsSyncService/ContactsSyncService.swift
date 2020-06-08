@@ -15,6 +15,31 @@ enum SyncOperationType {
     case deleteDuplicated
     case getBackUpStatus
     case cancel
+    
+    func transformToContactOperationSyncType(contactSyncResponse: ContactSync.SyncResponse? = nil) -> ContactsOperationType? {
+        switch self {
+        case .backup:
+            return .backUp(contactSyncResponse)
+        case .restore:
+            return .restore
+        case .analyze, .getBackUpStatus, .cancel:
+            return nil
+        case .deleteDuplicated:
+            return .deleteDuplicates
+        }
+    }
+    
+    func transformToContactSyncQuotaTypeOperation() -> FullQuotaWarningPopUpType.ContactsOperationType? {
+        switch self {
+        case .backup:
+            return .backup
+        case .restore:
+            return .restore
+        case .analyze, .getBackUpStatus, .cancel, .deleteDuplicated:
+            return nil
+        }
+    }
+    
 }
 
 enum SyncOperationErrors: Error {
