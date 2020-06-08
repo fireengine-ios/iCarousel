@@ -31,7 +31,7 @@ final class ContactListHeader: UIView, NibInit {
         }
     }
     
-    @IBOutlet private weak var searchBar: UISearchBar!  {
+    @IBOutlet weak var searchBar: UISearchBar!  {
         willSet {
             newValue.backgroundColor = ColorConstants.toolbarTintColor
             newValue.tintColor = ColorConstants.darkBlueColor
@@ -109,19 +109,17 @@ extension ContactListHeader: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        searchBar.enableCancelButton()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         delegate?.cancelSearch()
+        searchBar.showsCancelButton = false
         searchBar.text = ""
         searchBar.resignFirstResponder()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
     }
 }
