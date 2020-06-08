@@ -82,6 +82,10 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         updateBackupStatus()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        showRelatedView()
+    }
     
     //MARK: - Public
     
