@@ -53,7 +53,7 @@ final class WarningPopupController: BasePopUpController, NibInit {
     
     static func popup(type: WarningPopupType, closeHandler: @escaping VoidHandler) -> UIViewController {
         let popup = WarningPopupController.initFromNib()
-        popup.loadView()
+        popup.loadViewIfNeeded()
         popup.setup(type: type)
         popup.dismissCompletion = closeHandler
         popup.modalTransitionStyle = .crossDissolve
@@ -125,7 +125,7 @@ final class WarningPopupController: BasePopUpController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let recognizer = UIGestureRecognizer(target: self, action: #selector(closeOnTap))
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(closeOnTap))
         view.addGestureRecognizer(recognizer)
     }
     
