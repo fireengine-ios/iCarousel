@@ -330,6 +330,7 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
     }
     
     private func handleError(operationType: SyncOperationType, error: ContactSyncHelperError) {
+        
         switch error {
         case .notPremiumUser:
             showPopup(type: .premium)
@@ -339,9 +340,71 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
             showEmptyContactsPopup()
         case .emptyLifeboxContacts:
             showEmptyLifeboxContactsPopup()
+        case .syncError(let error):
+            guard let syncError = error as? SyncOperationErrors else {
+                debugLog("ContactSync error not expected type SyncOperationErrors ")
+                assertionFailure("This should be Sync operation")
+                return
+            }
+            handleSyncError(syncError: syncError, operationType: operationType)
         default:
             handle(error: error, operationType: operationType)
         }
+    }
+    
+    private func handleSyncError(syncError: SyncOperationErrors, operationType: SyncOperationType) {
+        
+        switch syncError {
+            
+        case .remoteServerError(let code):
+            handleRemoteServerSyncOperation(syncError: syncError, operationType: operationType, code: code)
+            
+        case .networkError:
+            SnackbarManager.shared.show(type: .action, message: TextConstants.contactSyncErrorNetwork)
+            
+        case .accessDenied:
+            showWarningPopup(type: .contactPermissionDenied)
+            
+        case .depoError:
+            self.present(FullQuotaWarningPopUp(.contact(operationType.transformToContactSyncQuotaTypeOperation())), animated: false)
+            
+        case .internalError, .failed:
+            let errorTitle = operationType.transformToContactOperationSyncType()?.title(result: .failed) ?? TextConstants.errorUnknown
+            let errorView = ContactsOperationView.with(title: errorTitle, message: TextConstants.contactSyncErrorIternal, operationResult: .failed)
+            
+            ContentViewAnimator().showTransition(to: errorView, on: self.view, animated: true)
+            
+        }
+    }
+    
+    private func handleRemoteServerSyncOperation(syncError: SyncOperationErrors, operationType: SyncOperationType, code: Int?) {
+        guard let convertedOperationType = operationType.transformToContactOperationSyncType() else {
+            assertionFailure("Unsupported type, please add additional implementaion or resolve the error")
+            debugLog("ContactSync handle error on main screen: - unknown type of operation")
+            return
+        }
+        let animator = ContentViewAnimator()
+        guard let code = code else {
+            animator.showTransition(to: ContactsOperationView.with(type: convertedOperationType, result: .failed), on: self.view, animated: true)
+            return
+        }
+        let message: String
+        switch code {
+        case 1101:
+            message = TextConstants.contactSyncErrorRemoteServer1101
+        case 2000:
+            message = TextConstants.contactSyncErrorRemoteServer2000
+        case 3000:
+            message = TextConstants.contactSyncErrorRemoteServer3000
+        case 4000:
+            message = TextConstants.contactSyncErrorRemoteServer4000
+        default:
+            message = TextConstants.contactSyncErrorRemoteServer3000 ///3000 is default state
+        }
+        
+        let errorView = ContactsOperationView.with(title: convertedOperationType.title(result: .failed), message: message, operationResult: .failed)
+        animator.showTransition(to: errorView, on: self.view, animated: true)
+        
     }
     
     func showWarningPopup(type: WarningPopupType) {
