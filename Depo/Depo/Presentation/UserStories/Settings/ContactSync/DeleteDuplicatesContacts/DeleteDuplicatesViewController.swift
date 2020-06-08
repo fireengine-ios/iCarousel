@@ -14,9 +14,12 @@ final class DeleteDuplicatesViewController: BaseViewController, NibInit {
     @IBOutlet private weak var contentView: UIView!
     
     @IBOutlet private weak var bottomView: UIView!
-    @IBOutlet private weak var deleteAllButton: NavyButtonWithWhiteText! {
+    @IBOutlet private weak var deleteAllButton: RoundedButton! {
         willSet {
             newValue.setTitle(TextConstants.deleteDuplicatesDeleteAll, for: .normal)
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.backgroundColor = ColorConstants.navy
+            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
         }
     }
     

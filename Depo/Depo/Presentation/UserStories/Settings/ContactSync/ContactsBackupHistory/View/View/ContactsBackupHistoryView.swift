@@ -29,17 +29,21 @@ final class ContactsBackupHistoryView: UIView, NibInit {
     
     @IBOutlet private weak var restoreBackupButton: RoundedButton! {
         willSet {
-            newValue.backgroundColor = ColorConstants.marineTwo
             newValue.setTitle(TextConstants.contactBackupHistoryRestoreButton, for: .normal)
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.backgroundColor = ColorConstants.navy
+            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
         }
     }
     
     @IBOutlet private weak var deleteBuckupButton: RoundedButton! {
         willSet {
-            newValue.tintColor = ColorConstants.marineTwo
-            newValue.layer.borderColor = ColorConstants.marineTwo.cgColor
+            newValue.layer.borderColor = ColorConstants.navy.cgColor
             newValue.layer.borderWidth = 1.0
             newValue.setTitle(TextConstants.contactBackupHistoryDeleteButton, for: .normal)
+            newValue.setTitleColor(ColorConstants.navy, for: .normal)
+            newValue.backgroundColor = .white
+            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
         }
     }
     

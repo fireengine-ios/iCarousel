@@ -13,9 +13,12 @@ final class ContactListViewController: BaseViewController, NibInit {
     @IBOutlet private weak var tableView: UITableView!
     
     @IBOutlet private weak var bottomView: UIView!
-    @IBOutlet private weak var restoreButton: NavyButtonWithWhiteText! {
+    @IBOutlet private weak var restoreButton: RoundedButton! {
         willSet {
             newValue.setTitle(TextConstants.contactListRestore, for: .normal)
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.backgroundColor = ColorConstants.navy
+            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
         }
     }
     

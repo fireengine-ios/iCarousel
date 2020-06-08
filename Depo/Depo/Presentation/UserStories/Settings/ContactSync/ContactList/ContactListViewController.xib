@@ -35,7 +35,7 @@
                                 <constraint firstAttribute="height" constant="1" id="kUx-dv-qvC"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxV-AQ-9f4" customClass="NavyButtonWithWhiteText" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxV-AQ-9f4" customClass="RoundedButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
                             <rect key="frame" x="107" y="12" width="200" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="200" id="ifs-Qj-Spn"/>
