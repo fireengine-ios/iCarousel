@@ -13,15 +13,21 @@ final class ContactListViewController: BaseViewController, NibInit {
     @IBOutlet private weak var tableView: UITableView!
     
     @IBOutlet private weak var bottomView: UIView!
-    @IBOutlet private weak var restoreButton: NavyButtonWithWhiteText! {
+    @IBOutlet private weak var restoreButton: RoundedButton! {
         willSet {
             newValue.setTitle(TextConstants.contactListRestore, for: .normal)
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.backgroundColor = ColorConstants.navy
+            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
         }
     }
     
     private lazy var backupProgressView = ContactSyncProgressView.setup(type: .backup)
     private lazy var restoreProgressView = ContactSyncProgressView.setup(type: .restore)
     private var resultView: UIView?
+    private var searchBar: UISearchBar? {
+        (tableView.tableHeaderView as? ContactListHeader)?.searchBar
+    }
     
     private lazy var dataSource = ContactListDataSource(tableView: tableView, delegate: self)
     private lazy var contactsSyncService = ContactSyncApiService()
@@ -64,6 +70,20 @@ final class ContactListViewController: BaseViewController, NibInit {
         navigationBarWithGradientStyle()
         
         contactSyncHelper.delegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if searchBar?.text?.isEmpty == false {
+            searchBar?.becomeFirstResponder()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        searchBar?.resignFirstResponder()
     }
     
     override func viewDidLayoutSubviews() {
@@ -233,6 +253,8 @@ private extension ContactListViewController {
         let cancelAction = UIAlertAction(title: TextConstants.cancel, style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)
         
+        actionSheet.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+
         present(actionSheet, animated: true)
     }
     

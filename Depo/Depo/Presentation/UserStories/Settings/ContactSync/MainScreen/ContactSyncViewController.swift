@@ -82,6 +82,10 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         updateBackupStatus()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        showRelatedView()
+    }
     
     //MARK: - Public
     
@@ -297,10 +301,7 @@ extension ContactSyncViewController: ContactSyncControllerProtocol {
     }
     
     private func noDuplicatesPopup() {
-        let controller = PopUpController.with(title: nil,
-                                              message: TextConstants.errorAlertTextNoDuplicatedContacts,
-                                              image: .none, buttonTitle: TextConstants.ok)
-        present(controller, animated: false)
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.errorAlertTextNoDuplicatedContacts)
     }
 }
 
