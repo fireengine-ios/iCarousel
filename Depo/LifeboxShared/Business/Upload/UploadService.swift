@@ -196,11 +196,11 @@ final class UploadService {
                     let errorCode = json["error_code"].stringValue
                     
                     switch errorCode {
-                    case "RU_9":
+                    case "RU_2":
                         /// Provided first-byte-pos is not the continuation of the last-byte-pos of pre-uploaded part!
                         completion(.success(.discontinuityError))
                         
-                    case "RU_10":
+                    case "RU_1":
                         /// Invalid upload request! Initial upload must start from the beginning
                         completion(.success(.invalidUploadRequest))
                         
