@@ -190,7 +190,7 @@ final class APILogger {
         log(string: "\(HeaderConstant.ContentLength): \(length)")
         
         if let chunkSize = userDefaults.resumableUploadChunkSize {
-            log(string: "Current Chunk Size: \(chunkSize)")
+            log(string: "General Chunk Size: \(chunkSize)")
         }
     }
     

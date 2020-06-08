@@ -110,6 +110,7 @@ private final class DataChunkProviderStream: DataChunkProvider {
         }
         
         guard skipping < fileSize else {
+            mainAppDebugLog(message: "skip\(skipping) bytes is impossible for filesize \(fileSize)")
             return nil
         }
         
@@ -158,6 +159,7 @@ private final class DataChunkProviderStream: DataChunkProvider {
         let chunkSize = fileStream.read(buffer, maxLength: bufferCapacity)
         
         guard chunkSize > 0 else {
+            mainAppDebugLog(message: "chunkSize <= 0")
             if chunkSize < 0 {
                 let message = "chunker: error while reading from stream"
                 mainAppDebugLog(message: message)
