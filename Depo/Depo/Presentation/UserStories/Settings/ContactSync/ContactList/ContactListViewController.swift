@@ -250,6 +250,8 @@ private extension ContactListViewController {
         let cancelAction = UIAlertAction(title: TextConstants.cancel, style: .cancel, handler: nil)
         actionSheet.addAction(cancelAction)
         
+        actionSheet.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+
         present(actionSheet, animated: true)
     }
     
