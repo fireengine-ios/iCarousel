@@ -413,6 +413,7 @@ final class UploadOperation: Operation {
             if self.isResumable {
                 parameters = ResumableUpload(item: self.inputItem,
                                              empty: empty,
+                                             fileSize: self.chunker?.fileSize,
                                              interruptedUploadId: self.interruptedId,
                                              destitantion: baseURL,
                                              uploadStategy: self.uploadStategy,
@@ -534,9 +535,9 @@ extension UploadOperation: OperationProgressServiceDelegate {
         }
         
         let actualRatio: Float
-        if isResumable, let range = chunker?.lastRange {
-            let bytesUploaded = range.lowerBound + bytes
-            actualRatio = Float(bytesUploaded) / Float(inputItem.fileSize.intValue)
+        if isResumable, let chunker = chunker {
+            let bytesUploaded = chunker.lastRange.lowerBound + bytes
+            actualRatio = Float(bytesUploaded) / Float(chunker.fileSize)
         } else {
             actualRatio = ratio
         }
