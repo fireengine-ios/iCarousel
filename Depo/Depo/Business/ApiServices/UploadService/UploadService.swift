@@ -492,7 +492,10 @@ final class UploadService: BaseRequestService {
                                 self.uploadOperations.removeIfExists(finishedOperation)
                                 self.stopTracking()
                                 ItemOperationManager.default.failedUploadFile(file: finishedOperation.inputItem, error: error)
+                                self.showSyncCardProgress()
+                                
                                 fail(error)
+                                checkIfFinished()
                             }
                             return
                         }
