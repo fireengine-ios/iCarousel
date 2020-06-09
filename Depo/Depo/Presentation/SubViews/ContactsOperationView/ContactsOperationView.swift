@@ -110,6 +110,14 @@ final class ContactsOperationView: UIView, NibInit {
         return view
     }
 
+    static func with(title: String, message: String, operationResult: ContactsOperationResult) -> ContactsOperationView {
+        let view = ContactsOperationView.initFromNib()
+        view.titleLabel.text = title
+        view.messageLabel.text = message
+        view.imageView.image = operationResult.image
+        return view
+    }
+    
     func add(card: UIView) {
         cardsStackView.addArrangedSubview(card)
     }

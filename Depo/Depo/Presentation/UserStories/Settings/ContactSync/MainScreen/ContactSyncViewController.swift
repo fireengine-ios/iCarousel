@@ -268,9 +268,6 @@ extension ContactSyncViewController: ContactSyncControllerProtocol {
         switch error {
         case .noBackUp:
             showRelatedView()
-        case .syncError(_):
-            //TODO: show result view with error message
-            break
         default:
             break
         }
