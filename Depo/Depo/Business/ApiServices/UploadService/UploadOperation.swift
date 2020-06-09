@@ -130,17 +130,19 @@ final class UploadOperation: Operation {
     //MARK: - Resumable
 
     private func attemptResumableUpload(success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
-        guard
-            self.isExecuting,
-            let asset = self.inputItem.asset
-        else {
+        guard !isCancelled else {
             fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
+            return
+        }
+        
+        guard let asset = self.inputItem.asset else {
+            fail(ErrorResponse.string(TextConstants.commonServiceError))
             return
         }
         
         LocalMediaStorage.default.getUrlOfCoppiedData(asset: asset) { [weak self] result in
             self?.dispatchQueue.async {
-                guard let self = self, self.isExecuting else {
+                guard let self = self, !self.isCancelled else {
                     fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
                     return
                 }
@@ -151,14 +153,24 @@ final class UploadOperation: Operation {
                     self.chunker = DataChunkProviderFactory.createWithSource(source: localUrl, bufferCapacity: bufferCapacity)
                     
                     self.requestObject = self.baseUrl(success: { [weak self] baseurlResponse in
-                        guard let self = self, let baseURL = baseurlResponse?.url else {
+                        guard let self = self, !self.isCancelled else {
                             fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
                             return
                         }
                         
+                        guard let baseURL = baseurlResponse?.url else {
+                            fail(ErrorResponse.string(TextConstants.commonServiceError))
+                            return
+                        }
+                        
                         self.getUploadParameters(baseURL: baseURL, empty: true, success: { [weak self] parameters in
-                            guard let self = self, let resumableParameters = parameters as? ResumableUpload else {
+                            guard let self = self, !self.isCancelled else {
                                 fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
+                                return
+                            }
+                            
+                            guard let resumableParameters = parameters as? ResumableUpload else {
+                                fail(ErrorResponse.string(TextConstants.commonServiceError))
                                 return
                             }
                             
@@ -177,7 +189,7 @@ final class UploadOperation: Operation {
                             }
                             
                             self.checkResumeStatus(parameters: resumableParameters) { [weak self] status, error in
-                                guard let self = self else {
+                                guard let self = self, !self.isCancelled else {
                                     fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
                                     return
                                 }
@@ -201,7 +213,7 @@ final class UploadOperation: Operation {
                                     debugLog("resumable_upload: bytes to skip \(bytesToSkip)")
                                     
                                     guard let nextChunk = self.chunker?.nextChunk(skipping: bytesToSkip) else {
-                                        fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
+                                        fail(ErrorResponse.string(TextConstants.commonServiceError))
                                         return
                                     }
                                     
@@ -230,13 +242,12 @@ final class UploadOperation: Operation {
         showToast(message: "Resumable status")
         requestObject = resumableUpload(uploadParam: parameters, handler: { [weak self] status, error in
             self?.dispatchQueue.async {
-                guard let self = self else {
-                    handler(status, ErrorResponse.string(TextConstants.commonServiceError))
+                guard let self = self, !self.isCancelled else {
+                    handler(status, ErrorResponse.string(TextConstants.canceledOperationTextError))
                     return
                 }
                 
-                if let error = error, !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
-                    
+                if let error = error, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
                     self.retry { [weak self] in
                         self?.checkResumeStatus(parameters: parameters, handler: handler)
                     }
@@ -253,7 +264,7 @@ final class UploadOperation: Operation {
         
         guard let nextChunk = chunk != nil ? chunk : chunker?.nextChunk() else {
             debugLog("resumable_upload: next chunk is unavailable")
-            fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
+            fail(ErrorResponse.string(TextConstants.commonServiceError))
             return
         }
         
@@ -263,13 +274,13 @@ final class UploadOperation: Operation {
         
         requestObject = resumableUpload(uploadParam: parameters, handler: { [weak self] status, error in
             self?.dispatchQueue.async {
-                guard let self = self else {
+                guard let self = self, !self.isCancelled else {
                     fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
                     return
                 }
                 
                 if let error = error {
-                    if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                    if error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
                         self.retry { [weak self] in
                             self?.uploadContiniously(parameters: parameters, chunk: nextChunk, success: success, fail: fail)
                         }
@@ -293,7 +304,7 @@ final class UploadOperation: Operation {
                     self.finishUploading(parameters: parameters, success: success, fail: fail)
                     
                 case .didntStart:
-                    fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
+                    fail(ErrorResponse.string(TextConstants.commonServiceError))
                     
                 case .uploaded(bytes: _):
                     debugLog("resumable_upload: should continue")
@@ -311,7 +322,7 @@ final class UploadOperation: Operation {
 
         ///If upload service can't create upload request task for some reason
         if self.requestObject == nil {
-            fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
+            fail(ErrorResponse.string(TextConstants.commonServiceError))
         }
     }
 
@@ -319,15 +330,19 @@ final class UploadOperation: Operation {
     //MARK: - Simple
     private func attemptSimpleUpload(success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
         requestObject = baseUrl(success: { [weak self] baseurlResponse in
-            guard let self = self,
-                let baseURL = baseurlResponse?.url else {
-                    fail(ErrorResponse.string(TextConstants.commonServiceError))
-                    return
+            guard let self = self, !self.isCancelled else {
+                fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
+                return
+            }
+            
+            guard let baseURL = baseurlResponse?.url else {
+                fail(ErrorResponse.string(TextConstants.commonServiceError))
+                return
             }
             
             self.getUploadParameters(baseURL: baseURL, success: { [weak self] parameters in
-                guard let self = self else {
-                    fail(ErrorResponse.string(TextConstants.commonServiceError))
+                guard let self = self, !self.isCancelled else {
+                    fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
                     return
                 }
 
@@ -343,11 +358,12 @@ final class UploadOperation: Operation {
                     self?.finishUploading(parameters: parameters, success: success, fail: fail)
                     
                     }, fail: { [weak self] error in
-                        guard let self = self else {
+                       guard let self = self, !self.isCancelled else {
+                            fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
                             return
                         }
                         
-                        if !self.isCancelled, error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
+                        if error.isNetworkError, self.attemptsCount < NumericConstants.maxNumberOfUploadAttempts {
                             self.retry { [weak self] in
                                 self?.attemptSimpleUpload(success: success, fail: fail)
                             }
