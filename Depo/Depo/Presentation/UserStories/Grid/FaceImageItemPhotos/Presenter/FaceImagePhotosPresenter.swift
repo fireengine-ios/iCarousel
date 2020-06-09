@@ -361,8 +361,10 @@ extension FaceImagePhotosPresenter: FaceImagePhotosDataSourceDelegate {
         switch operation {
         case .unhide, .moveToTrash, .delete, .restore:
             removePreviewController()
+            setupBackHandler(toOriginal: false)
         case .hide:
             removePreviewController()
+            router.back()
         default:
             break 
         }
