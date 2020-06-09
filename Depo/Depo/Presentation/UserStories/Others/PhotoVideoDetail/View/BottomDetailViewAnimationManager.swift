@@ -139,10 +139,9 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
         case .began:
             
             managedView.hideKeyboard()
-            delegate.setIsFullScreenState(true)
             gestureBeginLocation = recognizer.location(in: view)
             dragViewBeginLocation = collectionView.frame.origin
-            delegate.setIsFullScreenState(true)
+            isFullScreen = true
         case .changed:
             
             let newLocation = dragViewBeginLocation.y + (recognizer.location(in: view).y - gestureBeginLocation.y)
@@ -194,7 +193,7 @@ extension BottomDetailViewAnimationManager {
     @objc func closeDetailView() {
         managedView.hideKeyboard()
         viewState = .collapsed
-        delegate.setIsFullScreenState(false)
+        isFullScreen = false
         
         UIView.animate(withDuration: 0.5, animations: {
                         self.collectionView.frame.origin.y = .zero
@@ -210,7 +209,7 @@ extension BottomDetailViewAnimationManager {
         
         managedView.hideKeyboard()
         viewState = .collapsed
-        delegate.setIsFullScreenState(false)
+        isFullScreen = false
         
         UIView.animate(withDuration: 0.1, animations: {
             self.collectionView.frame.origin.y = .zero
@@ -230,7 +229,7 @@ extension BottomDetailViewAnimationManager {
         collectionView.frame.origin.y = yPositionForBottomView - collectionViewCellMaxY + imageMaxY
         collapseView.isHidden = false
         setupDetailViewAlpha(isHidden: false)
-        delegate.setIsFullScreenState(true)
+        isFullScreen = true
     }
     
     private func setFullState() {
@@ -240,12 +239,12 @@ extension BottomDetailViewAnimationManager {
         collectionView.frame.origin.y = -collectionViewCellMaxY + imageMaxY
         collapseView.isHidden = false
         setupDetailViewAlpha(isHidden: false)
-        delegate.setIsFullScreenState(true)
+        isFullScreen = true
     }
     
     func showDetailFromThreeDots() {
         UIView.animate(withDuration: 0.3, animations: {
-            self.delegate.setIsFullScreenState(true)
+            self.isFullScreen = true
         }) { _ in
             UIView.animate(withDuration: 0.5, delay: 0.3,
                            usingSpringWithDamping: 0.8,
