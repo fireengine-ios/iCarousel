@@ -347,6 +347,11 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
         
         return destination
     }
+    
+    private func removePreviewController() {
+        let navVC = (view as? UIViewController)?.navigationController
+        navVC?.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension FaceImagePhotosPresenter: FaceImagePhotosDataSourceDelegate {
@@ -355,9 +360,9 @@ extension FaceImagePhotosPresenter: FaceImagePhotosDataSourceDelegate {
         
         switch operation {
         case .unhide, .moveToTrash, .delete, .restore:
-            setupBackHandler(toOriginal: false)
+            removePreviewController()
         case .hide:
-            router.back()
+            removePreviewController()
         default:
             break 
         }
