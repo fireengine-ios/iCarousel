@@ -12,6 +12,18 @@ enum CardState {
     case expanded
     case collapsed
     case full
+    
+    var isFull: Bool {
+        return self == .full
+    }
+    
+    var isCollapsed: Bool {
+        return self == .collapsed
+    }
+    
+    var isExpanded: Bool {
+        return self == .expanded
+    }
 }
 
 protocol BottomDetailViewAnimationManagerDelegate {
@@ -49,6 +61,9 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
     private var selectedIndex: Int {
         get {
             delegate.getSelectedIindex()
+        }
+        set {
+            delegate.setSelectedIndex(newValue)
         }
     }
     
@@ -127,6 +142,7 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
             delegate.setIsFullScreenState(true)
             gestureBeginLocation = recognizer.location(in: view)
             dragViewBeginLocation = collectionView.frame.origin
+            delegate.setIsFullScreenState(true)
         case .changed:
             
             let newLocation = dragViewBeginLocation.y + (recognizer.location(in: view).y - gestureBeginLocation.y)
@@ -148,9 +164,11 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
         let detailViewExpandedPositionY = view.frame.height - cardHeight
         let expandedRange = ((UIScreen.main.bounds.height * 0.15)...(UIScreen.main.bounds.height * 0.45))
     
-        if velocityY > 50 {
+        if velocityY > 50, viewState.isFull {
+            setExpandedState()
+        } else if velocityY > 50 {
             setCollapseState()
-        } else if velocityY < -50, managedView.frame.origin.y > detailViewExpandedPositionY, viewState != .expanded {
+        } else if velocityY < -50, managedView.frame.origin.y > detailViewExpandedPositionY, !viewState.isExpanded  {
             setExpandedState()
         } else if managedView.frame.origin.y < detailViewExpandedPositionY {
             setFullState()
@@ -176,11 +194,12 @@ extension BottomDetailViewAnimationManager {
     @objc func closeDetailView() {
         managedView.hideKeyboard()
         viewState = .collapsed
+        delegate.setIsFullScreenState(false)
+        
         UIView.animate(withDuration: 0.5, animations: {
                         self.collectionView.frame.origin.y = .zero
                         self.managedView.frame.origin.y = self.view.frame.height * 0.75
                         self.collapseView.isHidden = true
-                        self.delegate.setIsFullScreenState(false)
         }, completion: { _ in
             self.setupDetailViewAlpha(isHidden: true)
             self.managedView.frame.origin.y = self.view.frame.height
@@ -191,12 +210,12 @@ extension BottomDetailViewAnimationManager {
         
         managedView.hideKeyboard()
         viewState = .collapsed
+        delegate.setIsFullScreenState(false)
         
         UIView.animate(withDuration: 0.1, animations: {
             self.collectionView.frame.origin.y = .zero
             self.managedView.frame.origin.y = self.view.frame.height * 0.75
             self.collapseView.isHidden = true
-            self.delegate.setIsFullScreenState(false)
         }) { _ in
             self.setupDetailViewAlpha(isHidden: true)
             self.managedView.frame.origin.y = self.view.frame.height
@@ -207,10 +226,11 @@ extension BottomDetailViewAnimationManager {
         let yPositionForBottomView = view.frame.height - cardHeight
         let collectionViewCellMaxY = getCellMaxY()
         viewState = .expanded
-        collectionView.frame.origin.y = yPositionForBottomView - collectionViewCellMaxY + imageMaxY
         managedView.frame.origin.y = yPositionForBottomView
+        collectionView.frame.origin.y = yPositionForBottomView - collectionViewCellMaxY + imageMaxY
         collapseView.isHidden = false
         setupDetailViewAlpha(isHidden: false)
+        delegate.setIsFullScreenState(true)
     }
     
     private func setFullState() {
@@ -220,6 +240,7 @@ extension BottomDetailViewAnimationManager {
         collectionView.frame.origin.y = -collectionViewCellMaxY + imageMaxY
         collapseView.isHidden = false
         setupDetailViewAlpha(isHidden: false)
+        delegate.setIsFullScreenState(true)
     }
     
     func showDetailFromThreeDots() {
@@ -273,10 +294,8 @@ extension BottomDetailViewAnimationManager {
         let cell = collectionView.visibleCells.first as? PhotoVideoDetailCell
         cell?.delegate = self
         let offsetY = collectionView.contentOffset.y
-            //-(cell?.frame.minY ?? 0 + imageMaxY)
-
-        delegate.setSelectedIndex(index)
-
+        selectedIndex = index
+        
         let newContentOffsetX = collectionView.bounds.size.width * CGFloat(index)
         let newContentOffset = CGPoint(x: newContentOffsetX, y: offsetY)
         collectionView.setContentOffset(newContentOffset, animated: true)

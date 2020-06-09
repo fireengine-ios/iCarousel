@@ -132,8 +132,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        addBottomDetailsView()
+        
         addTrackSwipeUpView()
+        addBottomDetailsView()
+        
         OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
         ItemOperationManager.default.startUpdateView(view: self)
         
@@ -157,7 +159,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
 
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
-        setupBottomDetailViewManager()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -373,6 +374,7 @@ extension PhotoVideoDetailViewController: BottomDetailViewAnimationManagerDelega
         output.configureFileInfo(fileInfoView)
         topViewController.view.addSubview(fileInfoView)
         bottomDetailView = fileInfoView
+        setupBottomDetailViewManager()
     }
 }
 
