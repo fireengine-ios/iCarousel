@@ -384,7 +384,7 @@ extension SyncServiceManager: ItemSyncServiceDelegate {
     }
     
     func didReceiveError() {
-        stopSync()
+        debugLog("didReceiveError")
     }
 }
 
