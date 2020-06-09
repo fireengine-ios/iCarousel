@@ -346,6 +346,7 @@ final class FileInfoView: UIView, FromNib {
         layer.masksToBounds = true
         fileNameTextField.delegate = self
         fileNameTextField.isUserInteractionEnabled = false
+        tapGestureRecognizer.delegate = self
         changeEditStatus(false)
         addGestureRecognizer(tapGestureRecognizer)
     }
@@ -412,6 +413,7 @@ final class FileInfoView: UIView, FromNib {
             let fileExtension = fileExtension?.nonEmptyString
         else { return }
         output.onRename(newName: text.makeFileName(with: fileExtension))
+        oldName = nil
     }
     
     @IBAction private func onEditNameDidTap() {
@@ -467,5 +469,16 @@ extension FileInfoView: UITextFieldDelegate {
 extension FileInfoView: PeopleSliderDataSourceDelegate {
     func didSelect(item: PeopleOnPhotoItemResponse) {
         output.onPeopleAlbumDidTap(item)
+    }
+}
+
+extension FileInfoView: UIGestureRecognizerDelegate {
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let gestureView = gestureRecognizer.view {
+            let tapLocation = gestureRecognizer.location(in: gestureView)
+            let subview = hitTest(tapLocation, with: nil)
+            return subview == peopleCollectionView
+        }
+        return true
     }
 }
