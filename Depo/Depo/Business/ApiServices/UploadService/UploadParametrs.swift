@@ -126,6 +126,8 @@ final class ResumableUpload: UploadRequestParametrs {
     private let uploadTo: MetaSpesialFolder
     private let destitantionURL: URL
     private let isFavorite: Bool
+    private var fileSize: Int?
+    
     let uploadType: UploadType?
     
     private (set) var range = 0..<0
@@ -147,7 +149,7 @@ final class ResumableUpload: UploadRequestParametrs {
     }
 
     
-    init(item: WrapData, empty: Bool, interruptedUploadId: String?, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) {
+    init(item: WrapData, empty: Bool, fileSize: Int?, interruptedUploadId: String?, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) {
         
         self.item = item
         self.rootFolder = rootFolder
@@ -157,6 +159,7 @@ final class ResumableUpload: UploadRequestParametrs {
         self.isEmpty = empty
         self.isFavorite = isFavorite
         self.uploadType = uploadType
+        self.fileSize = fileSize
 
         if let previousUploadId = interruptedUploadId {
             self.tmpUUID = previousUploadId
@@ -195,7 +198,7 @@ final class ResumableUpload: UploadRequestParametrs {
             return header
         }
         
-        guard item.fileSize != 0, fileData?.count != 0 else {
+        guard let fileSize = fileSize, fileSize != 0, fileData?.count != 0 else {
             let attributes = item.toDebugAnalyticsAttributes()
             DebugAnalyticsService.log(event: .zeroContentLength, attributes: attributes)
             let errorMessage = "File size is 0. Check Answers event."
@@ -204,10 +207,10 @@ final class ResumableUpload: UploadRequestParametrs {
             return [:]
         }
         
-        let contentRangeValue = "bytes \(range.lowerBound)-\(range.upperBound - 1)/\(item.fileSize)"
+        let contentRangeValue = "bytes \(range.lowerBound)-\(range.upperBound - 1)/\(fileSize)"
         
         header = header + [
-            HeaderConstant.ContentLength : "\(item.fileSize)",
+            HeaderConstant.ContentLength : "\(fileSize)",
             HeaderConstant.ContentRange : contentRangeValue
         ]
         return header

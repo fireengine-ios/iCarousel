@@ -67,7 +67,7 @@
                                         <constraint firstAttribute="trailing" secondItem="j2P-V1-ajw" secondAttribute="trailing" id="tnr-AZ-94Y"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STK-bc-GEv" customClass="RoundedInsetsButton" customModule="TC_Depo_LifeTech_Bundle" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STK-bc-GEv" customClass="RoundedInsetsButton" customModule="TC_Depo_LifeTech_Bundle" customModuleProvider="target">
                                     <rect key="frame" x="65" y="494" width="190" height="46"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="46" id="GPS-RI-Ueo">
@@ -92,7 +92,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N29-gd-nz6" customClass="RoundedInsetsButton" customModule="TC_Depo_LifeTech_Bundle" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N29-gd-nz6" customClass="RoundedInsetsButton" customModule="TC_Depo_LifeTech_Bundle" customModuleProvider="target">
                                     <rect key="frame" x="30" y="393.5" width="260" height="46"/>
                                     <constraints>
                                         <constraint firstAttribute="width" priority="750" constant="260" id="0QQ-jr-zZ0">

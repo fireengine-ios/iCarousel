@@ -178,7 +178,8 @@ class ItemSyncServiceImpl: ItemSyncService {
                 self.delegate?.didReceiveError()
             }
             
-            self.fail()
+            /// do not stop whole autosync if one error is received
+//            self.fail()
             
             }, returnedUploadOperation: { [weak self] operations in
                 guard self?.status != .executing else {
