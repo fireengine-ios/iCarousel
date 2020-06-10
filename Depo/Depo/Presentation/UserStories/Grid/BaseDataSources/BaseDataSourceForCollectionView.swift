@@ -1998,6 +1998,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         albumsDeleted(albums: albums)
     }
     
+    func didHidePeople(items: [PeopleItem]) {
+        if delegate?.getStatus() == .active {
+            delegate?.needReloadData()
+        }
+    }
+    
     func didUnhideItems(_ items: [WrapData]) {
         if delegate?.getStatus() == .hidden {
             deleteItems(items: items)
