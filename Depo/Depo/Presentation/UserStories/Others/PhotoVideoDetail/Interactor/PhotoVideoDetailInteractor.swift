@@ -173,8 +173,10 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             }
         }
         
-        let failHandler: FailResponse = { error in
-            UIApplication.showErrorAlert(message: error.description)
+        let failHandler: FailResponse = { [weak self] error in
+            DispatchQueue.main.async {
+                self?.output.didFailedLoadAlbum(error: error)
+            }
         }
         
         peopleService.getPeopleAlbum(id: Int(truncatingIfNeeded: id),

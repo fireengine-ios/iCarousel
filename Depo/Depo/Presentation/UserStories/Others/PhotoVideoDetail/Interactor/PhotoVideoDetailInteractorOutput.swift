@@ -32,5 +32,7 @@ protocol PhotoVideoDetailInteractorOutput: class {
     
     func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item)
     
+    func didFailedLoadAlbum(error: Error)
+    
     func didLoadFaceRecognitionPermissionStatus(_ isPermitted: Bool)
 }
