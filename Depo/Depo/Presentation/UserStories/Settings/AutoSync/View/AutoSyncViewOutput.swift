@@ -11,4 +11,5 @@ protocol AutoSyncViewOutput {
     func change(settings: AutoSyncSettings, albums: [AutoSyncAlbum])
     func save(settings: AutoSyncSettings, albums: [AutoSyncAlbum])
     func checkPermissions()
+    func didChangeSettingsOption(settings: AutoSyncSetting)
 }
