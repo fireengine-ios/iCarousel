@@ -256,7 +256,7 @@ lane :my_gym_lifedrive do # |options|
   lane :poeditor_download do
     for language in ["en", "uk", "tr", "ru", "ro", "es", "de", "ar", "sq", "fr"]
       poeditor_export(
-        api_token: "be344da1ca0b150bafc6a74019ecaa12",
+        api_token: "b91af56559195b57ea5e1bddb49d3e54",
         project_id: "113239",
         export_format: "apple_strings",
         language: language,
