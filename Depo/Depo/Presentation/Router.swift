@@ -111,6 +111,13 @@ class RouterVC: NSObject {
         return UIApplication.topController()
     }
     
+    var topNavigationController: UINavigationController? {
+        if let navigationController = defaultTopController?.navigationController {
+            return navigationController
+        }
+        return navigationController
+    }
+    
     func createRootNavigationController(controller: UIViewController) -> UINavigationController {
         
         let navController = NavigationController(rootViewController: controller)
@@ -133,10 +140,10 @@ class RouterVC: NSObject {
 //        window.makeKeyAndVisible()
     }
     
-    func pushViewControllertoTableViewNavBar(viewController: UIViewController) {
+    func pushViewControllertoTableViewNavBar(viewController: UIViewController, animated: Bool = true) {
         if let tabBarVc = tabBarVC {
             
-            tabBarVc.pushViewController(viewController, animated: true)
+            tabBarVc.pushViewController(viewController, animated: animated)
             return
         }
     }
@@ -154,7 +161,12 @@ class RouterVC: NSObject {
             NotificationCenter.default.post(name: notificationName, object: nil)
         }
         
-        navigationController?.pushViewController(viewController, animated: animated)
+        if let navController = topNavigationController {
+            navController.pushViewController(viewController, animated: animated)
+        } else {
+            pushViewControllertoTableViewNavBar(viewController: viewController, animated: animated)
+        }
+    
         viewController.navigationController?.isNavigationBarHidden = false
         
         if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
@@ -312,7 +324,7 @@ class RouterVC: NSObject {
     }
     
     func getViewControllerForPresent() -> UIViewController? {
-        if let nController = navigationController?.presentedViewController as? UINavigationController,
+        if let nController = topNavigationController?.presentedViewController as? UINavigationController,
             let viewController = nController.viewControllers.first as? PhotoVideoDetailViewController {
             return viewController
         }
