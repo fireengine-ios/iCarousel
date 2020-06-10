@@ -97,7 +97,7 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
     }
     
     override func updateThreeDotsButton() {
-        view?.setThreeDotsMenu(active: !dataSource.allObjectIsEmpty())
+        view?.setThreeDotsMenu(active: true)
     }
     
     override func didDelete(items: [BaseDataSourceItem]) {

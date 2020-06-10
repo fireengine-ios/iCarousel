@@ -28,9 +28,6 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     
     var fromSettings: Bool = false
     private var onStartUsingButtonTapped = false
-    
-    private let analyticsManager: AnalyticsService = factory.resolve()//FIXME: Idealy we should send all events to presenter->Interactor and then track it(because tracker is a service) OR just rewrite this module to MVC
-    
 
     // MARK: - Life cycle
     
@@ -40,8 +37,6 @@ final class AutoSyncViewController: BaseViewController, NibInit {
             setNavigationTitle(title: TextConstants.autoSyncNavigationTitle)
         }
         
-        analyticsManager.logScreen(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
-        analyticsManager.trackDimentionsEveryClickGA(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
         output.viewIsReady()
     }
     
@@ -137,7 +132,6 @@ extension AutoSyncViewController: AutoSyncViewInput {
     }
 
     func checkPermissionsSuccessed() {
-        analyticsManager.track(event: .turnOnAutosync)
         dataSource.checkPermissionsSuccessed()
     }
     
@@ -190,13 +184,7 @@ extension AutoSyncViewController: AutoSyncDataSourceDelegate {
     }
 
     func didChangeSettingsOption(settings: AutoSyncSetting) {
-        let eventAction: GAEventAction
-        if fromSettings {
-            eventAction = .settingsAutoSync
-        } else {
-            eventAction = .firstAutoSync
-        }
-        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: eventAction, eventLabel: GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: settings))
+        output.didChangeSettingsOption(settings: settings)
     }
 }
  

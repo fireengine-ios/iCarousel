@@ -315,8 +315,14 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item) {
+        asyncOperationSuccess()
         let albumItem = AlbumItem(remote: album)
         router.openFaceImageItemPhotosWith(item, album: albumItem)
+    }
+    
+    func didFailedLoadAlbum(error: Error) {
+        asyncOperationSuccess()
+        view.showErrorAlert(message: error.description)
     }
     
     func didLoadFaceRecognitionPermissionStatus(_ isPermitted: Bool) {
@@ -362,17 +368,16 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
     }
     
     func onPeopleAlbumDidTap(_ album: PeopleOnPhotoItemResponse) {
-        guard
-            let thumbnail = album.thumbnailURL,
-            let id = album.personInfoId
-        else {
+        guard let id = album.personInfoId else {
             return
         }
+        
+        startAsyncOperation()
         
         let peopleItemResponse = PeopleItemResponse()
         peopleItemResponse.id = id
         peopleItemResponse.name = album.name ?? ""
-        peopleItemResponse.thumbnail = thumbnail
+        peopleItemResponse.thumbnail = album.thumbnailURL
         let peopleItem = PeopleItem(response: peopleItemResponse)
         interactor.getPeopleAlbum(with: peopleItem, id: id)
     }
