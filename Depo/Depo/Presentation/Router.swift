@@ -437,8 +437,11 @@ class RouterVC: NSObject {
     // MARK: SyncContacts
     
     var syncContacts: UIViewController {
-        let viewController = SyncContactsModuleInitializer.initializeViewController(with: "SyncContactsViewController")
-        return viewController
+        return ContactSyncViewController.initFromNib()
+    }
+    
+    func contactSyncSuccessController(syncResult: ContactSync.SyncResponse?, periodicSync: PeriodicSync) -> UIViewController {
+        return ContactSyncOperationResultController.create(with: .success, syncResult: syncResult, periodicSync: periodicSync)
     }
     
     // MARK: PeriodicContacsSync
@@ -453,11 +456,20 @@ class RouterVC: NSObject {
         return viewController
     }
     
-    func duplicatedContacts(analyzeResponse: [ContactSync.AnalyzedContact], moduleOutput: DuplicatedContactsModuleOutput?) -> UIViewController {
-        let viewController = DuplicatedContactsModuleInitializer.initializeViewController(with: "DuplicatedContactsViewController",
-                                                                                          analyzeResponse: analyzeResponse,
-                                                                                          moduleOutput: moduleOutput)
-        return viewController
+    func deleteContactDuplicates(analyzeResponse: [ContactSync.AnalyzedContact]) -> UIViewController {
+        return DeleteDuplicatesViewController.with(contacts: analyzeResponse)
+    }
+    
+    func contactList(backUpInfo: ContactSync.SyncResponse) -> UIViewController {
+        return ContactListViewController.with(backUpInfo: backUpInfo)
+    }
+    
+    func contactDetail(with contact: RemoteContact) -> UIViewController {
+        return ContactListDetailViewController.with(contact: contact)
+    }
+    
+    func backupHistory(backUpInfo: ContactSync.SyncResponse) -> UIViewController {
+        return ContactsBackupHistoryController(with: backUpInfo)
     }
     
     // MARK: Terms
