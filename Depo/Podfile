@@ -6,13 +6,13 @@ ENV['COCOAPODS_DISABLE_STATS'] = "true"
 def shared_pods
   pod 'Alamofire', '~> 4.8.1'
   pod 'SwiftyJSON', '~>3'
-  pod 'KeychainSwift', '~> 11.0'
+  pod 'KeychainSwift'
 end
 
 def core_pods
   shared_pods
   pod 'Fabric'
-  pod 'Crashlytics', '~>  3.14'
+  pod 'Crashlytics'
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
@@ -27,7 +27,7 @@ def core_pods
   #pod 'ActiveLabel'
 
   #Keyboard
-  pod 'Typist', '~> 1.1.0'
+  pod 'Typist'
 
   pod 'SwiftyDropbox'
 
@@ -43,7 +43,7 @@ def core_pods
   pod 'TTGSnackbar'
 
   #logger
-  pod 'XCGLogger', '~> 6.0'
+  pod 'XCGLogger'
 
   #widget
   pod 'MMWormhole', '~> 2.0.0'
@@ -54,11 +54,11 @@ def core_pods
 #  pod 'MetalPetal', '~> 1.0'
 #  pod 'GPUImage'
 
-  pod 'SwiftyGif', '4.1.0'
+  pod 'SwiftyGif'
 end
 
 target 'Depo_LifeTech' do
-	core_pods
+  core_pods
 end
 
 target 'LifeTech-LifeboxShared' do
@@ -79,7 +79,7 @@ end
 
 target 'LifeTech-autosync-widget' do
     pod 'MMWormhole', '~> 2.0.0'
-    pod 'KeychainSwift', '~> 11.0'
+    pod 'KeychainSwift'
 end
 
 target "LifeTech-NotificationService" do
@@ -88,11 +88,11 @@ target "LifeTech-NotificationService" do
 end
 
 target 'TC_Depo_LifeTech' do
-	core_pods
+  core_pods
 end
 
 target 'TC_Depo_LifeTech_Bundle' do
-	core_pods
+  core_pods
 end
 
 target 'LifeboxShared' do
@@ -113,7 +113,7 @@ end
 
 target 'autosync-widget' do
     pod 'MMWormhole', '~> 2.0.0'
-    pod 'KeychainSwift', '~> 11.0'
+    pod 'KeychainSwift'
 end
 
 target "LifeboxNotificationService" do
@@ -122,15 +122,15 @@ target "LifeboxNotificationService" do
 end
 
 target 'LifeboxUnitTests' do
-	core_pods
+  core_pods
 end
 
 target 'lifedrive' do
-	core_pods
+  core_pods
 end
 
 target 'lifedrive_Bundle' do
-	core_pods
+  core_pods
 end
 
 target 'LifeDriveShared' do
@@ -151,7 +151,7 @@ end
 
 target 'LifeDrive-widget' do
     pod 'MMWormhole', '~> 2.0.0'
-    pod 'KeychainSwift', '~> 11.0'
+    pod 'KeychainSwift'
 end
 
 target 'LifeDriveNotificationService' do
@@ -160,7 +160,7 @@ target 'LifeDriveNotificationService' do
 end
 
 target 'LifeTech_lifedrive' do
-	core_pods
+  core_pods
 end
 
 target 'LifeTech_LifeDriveShared' do
@@ -181,7 +181,7 @@ end
 
 target 'LifeTech_LifeDrive-widget' do
     pod 'MMWormhole', '~> 2.0.0'
-    pod 'KeychainSwift', '~> 11.0'
+    pod 'KeychainSwift'
 end
 
 target 'LifeTech_LifeDriveNotificationService' do
@@ -191,7 +191,7 @@ end
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|
-        if ['XCGLogger', 'SwiftyJSON'].include? "#{target}"
+        if ['SwiftyJSON'].include? "#{target}"
           print "Setting #{target}'s SWIFT_VERSION to 4.0\n"
           target.build_configurations.each do |config|
               config.build_settings['SWIFT_VERSION'] = '4.0'
@@ -210,9 +210,9 @@ post_install do |installer|
         end
     end
     
-    print "Setting the default SWIFT_VERSION to 4.0\n"
+    print "Setting the default SWIFT_VERSION to 5.0\n"
     installer.pods_project.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '4.0'
+        config.build_settings['SWIFT_VERSION'] = '5.0'
         config.build_settings['ENABLE_BITCODE'] = 'YES'
     end
 

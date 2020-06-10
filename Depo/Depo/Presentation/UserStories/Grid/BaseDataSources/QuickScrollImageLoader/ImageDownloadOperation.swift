@@ -104,7 +104,7 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
             let format = ImageFormat.get(from: data)
             switch format {
             case .gif:
-                image = UIImage(gifData: data)
+                image = try? UIImage(gifData: data)
             default:
                 image = UIImage(data: data)
             }
