@@ -38,6 +38,17 @@ final class AutoSyncInteractor: AutoSyncInteractorInput {
     
     func trackScreen(fromSettings: Bool) {
         AnalyticsService.sendNetmeraEvent(event: fromSettings ? NetmeraEvents.Screens.FirstAutoSyncScreen() : NetmeraEvents.Screens.AutoSyncScreen())
+        analyticsManager.logScreen(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
+        analyticsManager.trackDimentionsEveryClickGA(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
+    }
+    
+    func trackTurnOnAutosync() {
+        analyticsManager.track(event: .turnOnAutosync)
+    }
+    
+    func trackSettings(_ settings: AutoSyncSetting, fromSettings: Bool) {
+        let eventAction: GAEventAction = fromSettings ? .settingsAutoSync : .firstAutoSync
+        analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: eventAction, eventLabel: GAEventLabel.getAutoSyncSettingEvent(autoSyncSettings: settings))
     }
     
     func onSave(settings: AutoSyncSettings, albums: [AutoSyncAlbum], fromSettings: Bool) {
