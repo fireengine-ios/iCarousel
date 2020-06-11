@@ -221,7 +221,8 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
             self.showRelatedView()
             
             let controller = self.router.contactSyncSuccessController(syncResult: result, periodicSync: self.periodicSyncHelper)
-            self.router.pushViewController(viewController: controller)
+            
+            self.navigationController?.pushViewController(controller, animated: true)
             
             CardsManager.default.stopOperationWith(type: .contactBacupOld)
             CardsManager.default.stopOperationWith(type: .contactBacupEmpty)
