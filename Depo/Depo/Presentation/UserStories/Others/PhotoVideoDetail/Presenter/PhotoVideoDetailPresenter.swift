@@ -332,12 +332,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func configureFileInfo(_ view: FileInfoView) {
         view.output = self
     }
-    
-    func getPersonsForSelectedPhoto() {
+    func getPersonsForSelectedPhoto(completion: VoidHandler? = nil) {
         guard isFaceImageAllowed, let index = interactor.currentItemIndex, let uuid = interactor.allItems[safe: index]?.uuid else {
             return
         }
-        interactor.getPersonsOnPhoto(uuid: uuid)
+        interactor.getPersonsOnPhoto(uuid: uuid, completion: completion)
     }
 }
 
