@@ -252,8 +252,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     private func updateFileInfo() {
         guard let selectedItem = selectedItem else { return }
-        bottomDetailView?.setObject(selectedItem)
-        output.getPersonsForSelectedPhoto()
+        bottomDetailView?.setObject(selectedItem) {
+            self.output.getPersonsForSelectedPhoto(completion: nil)
+        }
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {

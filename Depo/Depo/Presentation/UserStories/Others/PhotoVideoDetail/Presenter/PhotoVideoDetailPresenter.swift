@@ -304,8 +304,9 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             self?.isFaceImageAllowed = settings.isFaceImageAllowed == true
             self?.view.setHiddenPeoplePlaceholder(isHidden: self?.isFaceImageAllowed == true)
             if settings.isFaceImageAllowed == true {
-                self?.interactor.getAuthority()
-                self?.getPersonsForSelectedPhoto()
+                self?.getPersonsForSelectedPhoto() {
+                    self?.interactor.getAuthority()
+                }
             } else {
                 self?.view.setHiddenPremiumStackView(isHidden: true)
             }
@@ -332,12 +333,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func configureFileInfo(_ view: FileInfoView) {
         view.output = self
     }
-    
-    func getPersonsForSelectedPhoto() {
+    func getPersonsForSelectedPhoto(completion: VoidHandler? = nil) {
         guard isFaceImageAllowed, let index = interactor.currentItemIndex, let uuid = interactor.allItems[safe: index]?.uuid else {
             return
         }
-        interactor.getPersonsOnPhoto(uuid: uuid)
+        interactor.getPersonsOnPhoto(uuid: uuid, completion: completion)
     }
 }
 
@@ -357,8 +357,9 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
                 )
                 self?.isFaceImageAllowed = true
                 self?.view.setHiddenPeoplePlaceholder(isHidden: true)
-                self?.interactor.getAuthority()
-                self?.getPersonsForSelectedPhoto()
+                self?.getPersonsForSelectedPhoto() {
+                    self?.interactor.getAuthority()
+                }
             }
         }
     }

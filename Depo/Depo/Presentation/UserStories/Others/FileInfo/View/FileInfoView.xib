@@ -64,7 +64,7 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="249" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="752" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="lOt-sR-o8f">
-                                            <rect key="frame" x="20" y="30" width="374" height="558"/>
+                                            <rect key="frame" x="20" y="30" width="374" height="484.5"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Xkd-p0-X9E">
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="55.5"/>
@@ -267,17 +267,17 @@
                                                         </collectionView>
                                                     </subviews>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ndh-L6-gxh">
-                                                    <rect key="frame" x="0.0" y="499.5" width="374" height="58.5"/>
+                                                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ndh-L6-gxh">
+                                                    <rect key="frame" x="0.0" y="484.5" width="374" height="38"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxh-jg-bO1">
-                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxh-jg-bO1">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ta7-sX-n30">
-                                                            <rect key="frame" x="0.0" y="30.5" width="374" height="28"/>
+                                                            <rect key="frame" x="0.0" y="10" width="374" height="28"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jNm-bk-5oX" customClass="GradientPremiumButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="168" height="28"/>
@@ -307,7 +307,7 @@
                                             </constraints>
                                         </stackView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J1X-Yn-1g6">
-                                            <rect key="frame" x="0.0" y="588" width="414" height="230"/>
+                                            <rect key="frame" x="0.0" y="514.5" width="414" height="303.5"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" id="TtL-yU-TLa"/>
