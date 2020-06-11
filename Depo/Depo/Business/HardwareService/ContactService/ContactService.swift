@@ -72,7 +72,10 @@ final class ContactService {
                                                 vc.close { completionHandler(false) }
                                                 UIApplication.shared.openSettings()
         })
-        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        
+        DispatchQueue.toMain {
+            RouterVC().presentViewController(controller: controller, animated: false)
+        }
     }
     
     func setPeriodicForContactsSync(periodic: SYNCPeriodic) {
