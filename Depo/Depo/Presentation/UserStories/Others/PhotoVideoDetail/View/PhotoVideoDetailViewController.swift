@@ -217,6 +217,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         setupNavigationBar()
         setupTitle()
         updateFileInfo()
+        output.getFIRStatus()
 
         guard let index = selectedIndex else  {
             return
