@@ -124,10 +124,20 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     override func didDelete(items: [BaseDataSourceItem]) {
         if dataSource.allObjectIsEmpty() {
             faceImageItemsModuleOutput?.delete(item: item)
-            setupBackHandler(toOriginal: true)
+            
+            if (dataSource as? FaceImagePhotosDataSource)?.isRemoveFromAlbum == true {
+                setupBackHandler(toOriginal: false)
+                backHandler?()
+            } else {
+                setupBackHandler(toOriginal: true)
+            }
         } else if let interactor = interactor as? FaceImagePhotosInteractorInput {
             interactor.loadItem(item)
         }
+    }
+    
+    override func showBottomBar(animated: Bool, onView: UIView?) {
+        bottomBarPresenter?.show(animated: true, onView: (view as? FaceImagePhotosViewInput)?.contentView)
     }
 }
 

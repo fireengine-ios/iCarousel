@@ -317,7 +317,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item) {
         asyncOperationSuccess()
         let albumItem = AlbumItem(remote: album)
-        router.openFaceImageItemPhotosWith(item, album: albumItem)
+        router.openFaceImageItemPhotosWith(item, album: albumItem, moduleOutput: view.bottomDetailViewManager?.managedView)
     }
     
     func didFailedLoadAlbum(error: Error) {

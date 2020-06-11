@@ -482,3 +482,20 @@ extension FileInfoView: UIGestureRecognizerDelegate {
         return true
     }
 }
+
+extension FileInfoView: FaceImageItemsModuleOutput {
+    
+    func didChangeName(item: WrapData) {}
+    
+    func didReloadData() {}
+    
+    func delete(item: Item) {
+        guard let peopleItem = item as? PeopleItem,
+            let index = dataSource.items.firstIndex(where: { $0.personInfoId == peopleItem.id }) else {
+            return
+        }
+            
+        dataSource.deleteItem(at: index)
+        reloadCollection(with: dataSource.items)
+    }
+}
