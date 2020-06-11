@@ -316,7 +316,19 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         }
                     }
                 case .hide:
-                    action = UIAlertAction(title: TextConstants.actionSheetHide, style: .default, handler: { _ in
+                    
+                    var title: String
+                    
+                    if currentItems.first?.fileType == .faceImageAlbum(.things) ||
+                        currentItems.first?.fileType == .faceImageAlbum(.people) ||
+                        currentItems.first?.fileType == .faceImageAlbum(.places) ||
+                        currentItems.first?.fileType == .photoAlbum {
+                        title = TextConstants.actionSheetHideSingleAlbum
+                    } else {
+                        title = TextConstants.actionSheetHide
+                    }
+                    
+                    action = UIAlertAction(title: title, style: .default, handler: { _ in
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .hide))
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if currentItems.count <= allowedNumberLimit {

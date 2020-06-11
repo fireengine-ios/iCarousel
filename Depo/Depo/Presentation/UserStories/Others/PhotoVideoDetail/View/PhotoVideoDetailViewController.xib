@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoVideoDetailViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoVideoDetailViewController" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
                 <outlet property="bottomBlackView" destination="XFi-qo-p1Z" id="n2g-5n-Pae"/>
+                <outlet property="collapseDetailView" destination="WpF-wx-hyC" id="0vv-Ca-o1f"/>
                 <outlet property="collectionView" destination="ZzB-kC-yvt" id="Ggb-ac-yeQ"/>
+                <outlet property="swipeUpContainerView" destination="W8L-hg-9Ki" id="utr-Qe-8xW"/>
                 <outlet property="view" destination="iN0-l3-epB" id="kbZ-Zd-ek1"/>
                 <outlet property="viewForBottomBar" destination="EkB-f5-2OH" id="vOp-R9-AI9"/>
             </connections>
@@ -23,17 +23,37 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZzB-kC-yvt" customClass="PreventCollectionView" customModule="lifebox" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W8L-hg-9Ki">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="zTm-wi-nWa">
-                        <size key="itemSize" width="161" height="137"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                    <cells/>
-                </collectionView>
+                    <subviews>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZzB-kC-yvt" customClass="PreventCollectionView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="zTm-wi-nWa">
+                                <size key="itemSize" width="161" height="137"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <cells/>
+                        </collectionView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFi-qo-p1Z">
+                            <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="ZzB-kC-yvt" secondAttribute="trailing" id="9IQ-Yx-cOx"/>
+                        <constraint firstItem="ZzB-kC-yvt" firstAttribute="leading" secondItem="W8L-hg-9Ki" secondAttribute="leading" id="IoM-cZ-4Pj"/>
+                        <constraint firstAttribute="bottom" secondItem="ZzB-kC-yvt" secondAttribute="bottom" id="Jch-3f-64W"/>
+                        <constraint firstItem="XFi-qo-p1Z" firstAttribute="top" secondItem="ZzB-kC-yvt" secondAttribute="bottom" id="Uoy-LN-LQB"/>
+                        <constraint firstItem="XFi-qo-p1Z" firstAttribute="leading" secondItem="W8L-hg-9Ki" secondAttribute="leading" id="WtZ-PH-AU5"/>
+                        <constraint firstItem="ZzB-kC-yvt" firstAttribute="top" secondItem="W8L-hg-9Ki" secondAttribute="top" id="ouU-5A-Ugf"/>
+                        <constraint firstAttribute="bottom" secondItem="XFi-qo-p1Z" secondAttribute="bottom" id="tSJ-oL-Nxi"/>
+                        <constraint firstAttribute="trailing" secondItem="XFi-qo-p1Z" secondAttribute="trailing" id="uQA-AF-G1K"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EkB-f5-2OH">
                     <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -41,27 +61,41 @@
                         <constraint firstAttribute="height" constant="44" id="DHo-1v-JvR"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFi-qo-p1Z">
-                    <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WpF-wx-hyC">
+                    <rect key="frame" x="15" y="15" width="30" height="30"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="z6w-pj-Y6s">
+                            <rect key="frame" x="8" y="8" width="14" height="14"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="z6w-pj-Y6s" firstAttribute="top" secondItem="WpF-wx-hyC" secondAttribute="top" constant="8" id="2aI-i4-yJW"/>
+                        <constraint firstAttribute="trailing" secondItem="z6w-pj-Y6s" secondAttribute="trailing" constant="8" id="3t0-gw-eqT"/>
+                        <constraint firstAttribute="bottom" secondItem="z6w-pj-Y6s" secondAttribute="bottom" constant="8" id="4Iq-jh-bFG"/>
+                        <constraint firstAttribute="width" constant="30" id="Db7-xr-gnK"/>
+                        <constraint firstAttribute="height" constant="30" id="Z0K-uM-K1M"/>
+                        <constraint firstItem="z6w-pj-Y6s" firstAttribute="leading" secondItem="WpF-wx-hyC" secondAttribute="leading" constant="8" id="wJ0-2Y-ntl"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="ZzB-kC-yvt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0Oi-mw-S6T"/>
-                <constraint firstAttribute="trailing" secondItem="ZzB-kC-yvt" secondAttribute="trailing" id="3ng-rw-A6D"/>
-                <constraint firstAttribute="bottom" secondItem="ZzB-kC-yvt" secondAttribute="bottom" id="66o-Uz-bgS"/>
                 <constraint firstAttribute="trailing" secondItem="EkB-f5-2OH" secondAttribute="trailing" id="6NC-Rh-Ca5"/>
-                <constraint firstItem="ZzB-kC-yvt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Eg9-Gp-OCq"/>
                 <constraint firstItem="hTs-d8-e25" firstAttribute="bottom" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="NfP-1l-2sH"/>
-                <constraint firstItem="XFi-qo-p1Z" firstAttribute="top" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="Owt-Hz-Qzd"/>
-                <constraint firstItem="XFi-qo-p1Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="PdC-Bv-kNa"/>
-                <constraint firstAttribute="trailing" secondItem="XFi-qo-p1Z" secondAttribute="trailing" id="b47-g1-8Ia"/>
-                <constraint firstAttribute="bottom" secondItem="XFi-qo-p1Z" secondAttribute="bottom" id="ugz-9B-4IC"/>
+                <constraint firstItem="W8L-hg-9Ki" firstAttribute="top" secondItem="hTs-d8-e25" secondAttribute="top" id="T96-8x-22r"/>
+                <constraint firstItem="WpF-wx-hyC" firstAttribute="top" secondItem="hTs-d8-e25" secondAttribute="top" constant="15" id="TB8-ZS-bdv"/>
+                <constraint firstItem="W8L-hg-9Ki" firstAttribute="trailing" secondItem="EkB-f5-2OH" secondAttribute="trailing" id="XCq-UU-yaw"/>
+                <constraint firstItem="W8L-hg-9Ki" firstAttribute="bottom" secondItem="EkB-f5-2OH" secondAttribute="bottom" id="fDW-8e-SDZ"/>
+                <constraint firstItem="WpF-wx-hyC" firstAttribute="leading" secondItem="hTs-d8-e25" secondAttribute="leading" constant="15" id="gnl-yB-YR9"/>
                 <constraint firstItem="EkB-f5-2OH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vGC-fV-ORB"/>
+                <constraint firstItem="W8L-hg-9Ki" firstAttribute="leading" secondItem="EkB-f5-2OH" secondAttribute="leading" id="zU2-XF-l9j"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="hTs-d8-e25"/>
-            <point key="canvasLocation" x="32.5" y="63.5"/>
+            <point key="canvasLocation" x="31.199999999999999" y="63.418290854572717"/>
         </view>
     </objects>
+    <resources>
+        <image name="back_icon.png" width="16" height="16"/>
+    </resources>
 </document>

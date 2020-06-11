@@ -27,6 +27,8 @@ protocol Factory: SharedFactory {
     func resolve() -> ResumableUploadInfoService
     
     func resolve() -> CoreDataStack
+    
+    func resolve() -> LogoutDBCleaner
 }
 
 final class FactoryMain: FactoryBase, Factory {
@@ -106,5 +108,10 @@ extension FactoryMain {
     private static let resumableUploadInfoService = ResumableUploadInfoServiceImpl()
     func resolve() -> ResumableUploadInfoService {
         return FactoryMain.resumableUploadInfoService
+    }
+    
+    private static let logoutDBCleaner = LogoutDBCleanerImpl()
+    func resolve() -> LogoutDBCleaner {
+        return FactoryMain.logoutDBCleaner
     }
 }

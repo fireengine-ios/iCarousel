@@ -40,6 +40,10 @@ final class ImageScrollView: UIScrollView {
         setup()
     }
     
+    func getImageViewMaxY() -> CGFloat {
+        return imageView.frame.maxY
+    }
+    
     private func setup() {
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false

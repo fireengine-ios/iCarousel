@@ -19,4 +19,20 @@ protocol PhotoVideoDetailInteractorOutput: class {
     func onLastRemoved()
     
     func startAsyncOperation()
+    
+    func cancelSave(use name: String)
+    
+    func updated()
+    
+    func failedUpdate(error: Error)
+    
+    func didValidateNameSuccess(name: String)
+    
+    func updatePeople(items: [PeopleOnPhotoItemResponse])
+    
+    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item)
+    
+    func didFailedLoadAlbum(error: Error)
+    
+    func didLoadFaceRecognitionPermissionStatus(_ isPermitted: Bool)
 }

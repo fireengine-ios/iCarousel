@@ -1,0 +1,463 @@
+require './Helpers/version_manager'
+## same
+# require_relative 'Helpers/version_manager'
+
+## to get list of all actions
+#fastlane actions
+
+## to get list of parameters of action
+#fastlane action ANY-ACTION
+# example: fastlane action match
+
+## To install plugins:
+# fastlane install_plugins
+## To update plugins:
+# fastlane update_plugins
+
+
+# USERNAME = ''
+BUNDLE_ID = 'by.come.life.Lifebox'
+APP_NAME = 'lifebox-LIFE'
+# SCHEME = "Depo_LifeTech"
+PROJECT = "Depo.xcodeproj"
+TARGET = "Depo_LifeTech"
+BUILD_FOLDER_NAME = "builds"
+
+# TEAM_ID = ""
+# DEV_NAME = "" #mayby need Team Name
+
+# TYPES = ["development", "appstore", "adhoc"]
+# CONFIGS = ["debug", "release", "adhoc"]
+# SCHEMES = ["PROD", "PREPROD", "TEST"]
+
+BUILD_NUMBER = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET)
+
+## If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+## This is the minimum version number required.
+# fastlane_version "2.19.1"
+
+# default_platform :ios
+
+# platform :ios do
+
+  error do |lane, exception|
+    switch_to_prod
+  end
+
+  #--------------- beta uploads ---------------
+
+	lane :beta_jenkins do
+		begin
+		  xcode_select "/Applications/Xcode.app"
+      setup_jenkins
+      bundle_install
+      cocoapods
+      update_fastlane_plugins()
+      poeditor_download
+      my_gym
+      fabric
+      slack_post
+		rescue => exception
+			on_error(exception)
+		end
+	end
+
+	lane :beta_jenkins_preprod do
+		begin
+		  xcode_select "/Applications/Xcode.app"
+      setup_jenkins
+      bundle_install
+      cocoapods
+      update_fastlane_plugins()
+      poeditor_download
+
+      switch_to_preprod
+
+      my_gym
+      fabric
+      slack_post
+
+      switch_to_prod
+		rescue => exception
+			on_error(exception)
+		end
+	end
+
+  def update_fastlane_plugins
+    sh("fastlane update_plugins")
+  end
+
+	lane :beta_diawi do
+		setup_jenkins
+		my_gym
+		diawi
+	end
+	
+	lane :beta_diawi_preprod do
+    #only for preprod builds
+    #switch to branch manually and then run the lane
+    
+    git_pull
+    create_new_branch
+    increment_version
+    switch_to_preprod
+		beta_diawi
+		switch_to_prod
+    git_commit(path: "./Depo/App/Depo_LifeTech-Info.plist", message: "Version up")
+    push_to_git_remote(local_branch: "version_up")
+	end
+  
+  lane :beta_diawi_prod do
+    #only for prod builds
+    #switch to branch manually and then run the lane
+    
+    git_pull
+    create_new_branch
+    increment_version
+    switch_to_prod
+    beta_diawi
+    git_commit(path: "./Depo/App/Depo_LifeTech-Info.plist", message: "Version up")
+    push_to_git_remote(local_branch: "version_up")
+  end
+  
+  lane :build_prod_and_preprod do
+    #create two prod and preprod builds at a time
+    #switch to branch manually and then run the lane
+    
+     git_pull
+     create_new_branch
+     increment_version
+     switch_to_preprod
+ 		 beta_diawi
+ 	   switch_to_prod
+     beta_diawi
+     git_commit(path: "./Depo/App/Depo_LifeTech-Info.plist", message: "Version up")
+     push_to_git_remote(local_branch: "version_up")
+  end
+
+	lane :beta_fabric do
+		my_gym
+		fabric
+		slack_post
+		notify_about_completion
+	end
+
+  lane :beta_fabric_preprod do
+    switch_to_preprod
+
+    my_gym
+    fabric
+    slack_post
+    notify_about_completion
+
+    switch_to_prod
+  end
+
+  desc "run tests"
+  lane :my_scan do
+    scan(
+      scheme: "LifeboxUnitTests",
+      code_coverage: true,
+      devices: ["iPhone 8 Plus (11.4)"],
+      test_without_building: true
+    )
+  end
+
+	lane :beta_fabric_lifedrive do
+		my_gym_lifedrive
+		fabric
+		notify_about_completion
+	end
+
+  desc "LifeTech Lifebox build distribution via Firebase"
+  lane :firebase_lifetech_lifebox do
+    my_gym
+
+    firebase_app_distribution(
+        app: "1:805163098188:ios:80d4ad2ac5355c36b394e9",
+        testers: "fireenginelb@gmail.com",
+        release_notes: "FE-2431 spike build lifebox",
+        firebase_cli_path: "./#{BUILD_FOLDER_NAME}"
+    )
+
+    slack_post
+    notify_about_completion
+  end
+
+  desc "LifeTech Lifedrive build distribution via Firebase"
+  lane :firebase_lifetech_lifedrive do
+    my_gym_lifedrive
+
+    firebase_app_distribution(
+        app: "1:805163098188:ios:ac7a91b24941c456b394e9",
+        testers: "fireenginelb@gmail.com",
+        release_notes: "FE-2431 spike build lifedrive",
+        firebase_cli_path: "./#{BUILD_FOLDER_NAME}"
+    )
+    
+    slack_post
+    notify_about_completion
+  end
+
+  #--------------- build ipa ---------------
+
+  desc "Create ipa"
+  lane :my_gym do # |options|
+  	
+    # scheme = options[:scheme]
+
+    # if !SCHEMES.include?(scheme)
+    #   # raise("scheme can be PROD, PREPROD or TEST")
+    #   UI.user_error!("scheme can be PROD, PREPROD or TEST")
+    #   # exit
+    # end
+
+    gym(
+      # configuration: config, #"Adhoc", # Defaults to 'Release'
+      scheme: "Depo_LifeTech",
+      silent: true, # Hide all information that's not necessary while building
+      clean: false,
+      output_directory: "./#{BUILD_FOLDER_NAME}",    # store the ipa in this folder
+      output_name: "#{APP_NAME}.ipa",
+      # suppress_xcode_output: true,
+      #output_directory: "path/to/dir", # Destination directory. Defaults to current directory.
+      #output_name: "my-app.ipa",       # specify the name of the .ipa file to generate (including file extension)
+      export_options: {
+      	method: "ad-hoc"
+        # ,
+        # provisioningProfiles: { 
+        #   "#{BUNDLE_ID}" => "ADHOC_LifeboxForTurkcell"
+        # }
+      }
+
+    )
+  end
+
+lane :my_gym_lifedrive do # |options|
+  	
+    # scheme = options[:scheme]
+
+    # if !SCHEMES.include?(scheme)
+    #   # raise("scheme can be PROD, PREPROD or TEST")
+    #   UI.user_error!("scheme can be PROD, PREPROD or TEST")
+    #   # exit
+    # end
+
+    gym(
+      # configuration: config, #"Adhoc", # Defaults to 'Release'
+      scheme: "LifeTech_lifedrive",
+      silent: true, # Hide all information that's not necessary while building
+      clean: false,
+      output_directory: "./#{BUILD_FOLDER_NAME}",    # store the ipa in this folder
+      output_name: "#{APP_NAME}.ipa",
+      # suppress_xcode_output: true,
+      #output_directory: "path/to/dir", # Destination directory. Defaults to current directory.
+      #output_name: "my-app.ipa",       # specify the name of the .ipa file to generate (including file extension)
+      export_options: {
+      	method: "ad-hoc"
+        # ,
+        # provisioningProfiles: { 
+        #   "#{BUNDLE_ID}" => "LifeDrive_adhoc"
+        # }
+      }
+
+    )
+  end
+
+  #--------------- distribute ---------------
+
+  # https://dashboard.diawi.com/docs/apis/upload
+  lane :diawi do
+  	# ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
+    # time = Time.new
+    diawiToken = 'rvA4lMxATOqmygUZmMgM7n5vchCnDkb5TJuZnVSibZ'
+    filePath = "#{File.expand_path("..", Dir.pwd)}/#{BUILD_FOLDER_NAME}/#{APP_NAME}.ipa" # cd .. &&
+    sh(
+    	"curl -X POST https://upload.diawi.com/"\
+    	" -F \"token=#{diawiToken}\""\
+    	" -F \"file=@#{filePath}\""\
+    	" -F \"find_by_udid=0\""\
+    	" -F \"wall_of_apps=0\""\
+    	" -F \"callback_emails=Aleksandr.Pestriakov@life.com.by\""
+    )
+  end
+
+  desc "Distribute build via Fabric"
+  lane :fabric do
+  	# ipa_path = lane_context[SharedValues::IPA_OUTPUT_PATH]
+  	filePath = "#{File.expand_path("..", Dir.pwd)}/#{BUILD_FOLDER_NAME}/#{APP_NAME}.ipa"
+
+  	crashlytics(
+  		api_token: "74412d8a38e9c5b44ca9993298b0ec4cba26289b",
+  		build_secret: "23466683fd868f8140731ca083851a229b69fe7c806515ab6cc300e32cd5f388",
+  		ipa_path: filePath,
+  		emails: ["lifetechqa@icloud.com",
+  			"lifetechqa2@gmail.com",
+  			"lifetechqa4@icloud.com",
+  			"lifetechqa5@icloud.com",
+  			"lifetechqa6@icloud.com", 
+  			"6257515test@gmail.com",
+  			"buse.kaya@consultant.turkcell.com.tr",
+  			"can.kucukakdag@turkcell.com.tr"]
+  	)
+  end
+
+
+  #--------------- notify ---------------
+
+  desc "Post message to the #lifebox-ios-firengine slack channel"
+  lane :slack_post do
+  	version = get_build_number_from_plist(xcodeproj: PROJECT, target: TARGET)
+  	slack(
+  		message: "Build #{version} successfully released!",
+  		success: true,
+  		slack_url: "https://hooks.slack.com/services/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", #lifebox-ios-builds
+      # slack_url: "https://hooks.slack.com/services/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", #lifebox-ios-firengine
+      payload: { 
+      	"Build Date" => Time.new.to_s
+      },
+      default_payloads: []
+    )
+  end
+
+  lane :notify_about_completion do
+  	version = get_build_number_from_plist(xcodeproj: PROJECT, target: TARGET)
+  	notification(subtitle: "Build distribution is finished", message: "#{version}")
+  end
+
+  def on_error(exception)
+  	UI.user_error!("Build failed with exception : #{exception}")
+  	slack(
+  		message: "Build failed with exception : #{exception}",
+  		success: false,
+  		slack_url: "https://hooks.slack.com/services/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",
+  		payload: { 
+  			"Build Date" => Time.new.to_s
+  		},
+  		default_payloads: []
+  	)
+  end
+
+  #--------------- helpers ---------------
+
+  lane :poeditor_download do
+    for language in ["en", "uk", "tr", "ru", "ro", "es", "de", "ar", "sq", "fr"]
+      poeditor_export(
+        api_token: "be344da1ca0b150bafc6a74019ecaa12",
+        project_id: "113239",
+        export_format: "apple_strings",
+        language: language,
+        output_path: "./Depo/App/Resources/#{language}.lproj/OurLocalizable.strings"
+      )
+    end
+  end
+
+  lane :fix_build_number do
+    buildNum = BUILD_NUMBER
+    preprodSuffix = "_preprod"
+    
+    while buildNum.include?(preprodSuffix) do
+      buildNum = buildNum.chomp(preprodSuffix)
+    end
+    
+    set_build_number(build: buildNum)
+  end
+  
+  lane :switch_to_preprod do
+    fix_build_number
+    
+    set_build_number(build: BUILD_NUMBER + "_preprod")
+    
+    replace_text_in_file(
+      file_path: "#{ENV['PWD']}/Depo/Business/ApiServices/RequestService/RouteRequests.swift",
+      old_text: "private static let currentServerEnvironment = ServerEnvironment.production",
+      new_text: "private static let currentServerEnvironment = ServerEnvironment.preProduction"
+    )
+  end
+
+  lane :switch_to_prod do
+    fix_build_number
+    
+    set_build_number(build: BUILD_NUMBER)
+    
+    replace_text_in_file(
+      file_path: "#{ENV['PWD']}/Depo/Business/ApiServices/RequestService/RouteRequests.swift",
+      old_text: "private static let currentServerEnvironment = ServerEnvironment.preProduction",
+      new_text: "private static let currentServerEnvironment = ServerEnvironment.production"
+    )
+  end
+
+  def replace_text_in_file(params)
+    file_path = params[:file_path]
+    old_text = params[:old_text]
+    new_text = params[:new_text]
+
+    text = File.read(file_path)
+    new_contents = text.gsub(/#{old_text}/, new_text)
+    File.write(file_path, new_contents)
+    # To write changes to the file, use:
+    # File.open(file_name, "w") { |file| file.puts new_contents }
+  end 
+  
+  lane :create_new_branch do |params|
+    branchName = params[:name] ? params[:name] : "version_up"
+    
+    sh("git", "branch", branchName)
+    sh("git", "checkout", branchName)
+  end
+  
+  lane :increment_version do 
+    version = BUILD_NUMBER
+    versionComps = version.split(".")
+    lastPartIndex = versionComps.count - 1
+    increasedVersion = versionComps[lastPartIndex].to_i + 1
+    versionComps[lastPartIndex] = increasedVersion.to_s
+    finalVersion = versionComps.join(".")
+    
+    puts "old version: #{version}"
+    puts "new version: #{finalVersion}"
+    
+    set_build_number(build: finalVersion)
+  end
+  
+  lane :set_build_number do |params|
+    buildNumber = params[:build]
+    
+    VersionManager.set_build_number(xcodeproj: ".", target: TARGET, new_number: buildNumber)
+    BUILD_NUMBER = buildNumber
+  end
+ 
+#--------------------- build_number functions ---------------------
+
+  desc "fastlane-plugin-versioning required. also it needs more time that my class"
+  lane :test_get_build_number do
+    build_number = get_build_number_from_plist(xcodeproj: "Depo.xcodeproj", scheme: "Depo_LifeTech")
+    puts "version: #{build_number}"
+
+    increment_build_number_in_plist(build_number: build_number + "_preprod", scheme: "Depo_LifeTech")
+
+    build_number = get_build_number_from_plist(xcodeproj: "Depo.xcodeproj", scheme: "Depo_LifeTech")
+    puts "new version: #{build_number}"
+  end
+
+  lane :test_get_build_number_my do
+    build_number = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET)
+    puts "version: #{build_number}"
+
+    set_build_number(build: build_number + "_preprod")
+
+    build_number = Fastlane::VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET)
+    puts "new version: #{build_number}"
+  end
+
+  lane :beta do
+    # upload to Testflight
+    upload_to_testflight(
+      ipa: "lifebox.ipa",
+      skip_waiting_for_build_processing: true
+    )
+  end
+  
+# end

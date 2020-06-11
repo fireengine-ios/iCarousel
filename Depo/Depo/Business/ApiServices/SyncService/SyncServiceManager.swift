@@ -25,6 +25,8 @@ class SyncServiceManager {
         return queue
     }()
     
+    private var backgroundSyncHandler: BoolHandler?
+    
     private let photoSyncService: ItemSyncService = PhotoSyncService()
     private let videoSyncService: ItemSyncService = VideoSyncService()
     private var settings = AutoSyncDataStorage().settings
@@ -74,11 +76,14 @@ class SyncServiceManager {
     init() {
         photoSyncService.delegate = self
         videoSyncService.delegate = self
+        BackgroundTaskService.shared.expirationDelegates.add(self)
+        debugLog("SyncServiceManager initialized")
     }
     
     deinit {
         reachabilityService.delegates.remove(self)
         NotificationCenter.default.removeObserver(self)
+        debugLog("SyncServiceManager deinitialized")
     }
     
     
@@ -101,8 +106,8 @@ class SyncServiceManager {
         lastAutoSyncTime = Date().timeIntervalSince1970
     }
     
-    func updateImmediately() {
-        debugLog("SyncServiceManager updateImmediately")
+    func update() {
+        debugLog("SyncServiceManager update")
         
         lastAutoSyncTime = Date().timeIntervalSince1970
         if !hasExecutingSync, !hasPrepairingSync {
@@ -110,9 +115,16 @@ class SyncServiceManager {
         }
     }
     
+    func updateImmediately() {
+        debugLog("SyncServiceManager updateImmediately")
+        
+        lastAutoSyncTime = Date().timeIntervalSince1970
+        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+    }
+    
     func updateInBackground() {
         debugLog("SyncServiceManager updateInBackground")
-        
+        sendNetmeraEvent()
         let time = Date().timeIntervalSince1970
         if time - lastAutoSyncTime > timeIntervalBetweenSyncsInBackground {
             BackgroundTaskService.shared.beginBackgroundTask()
@@ -122,7 +134,15 @@ class SyncServiceManager {
         }
     }
     
+    func backgroundTaskSync(handler: @escaping BoolHandler) {
+        self.backgroundSyncHandler = handler
+        debugLog("AUTOSYNC: backgroundTaskSync handlesr setuped")
+        checkReachabilityAndSettings(reachabilityChanged: false, newItems: false)
+    }
+    
     func stopSync() {
+        debugLog("SyncServiceManager stopSync")
+        
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
         stop(photo: true, video: true)
     }
@@ -130,22 +150,24 @@ class SyncServiceManager {
     
     // MARK: - Private
     
+    
     private func checkReachabilityAndSettings(reachabilityChanged: Bool, newItems: Bool) {
         guard coreDataStack.isReady else {
             printLog("AUTOSYNC: coreDataStack isn't ready")
+            backgroundSyncHandler?(false)
             return
         }
-        
-        printLog("AUTOSYNC: checkReachabilityAndSettings")
         
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 return
             }
-            
+            debugLog("AUTOSYNC: reachability start")
             self.timeIntervalBetweenSyncsInBackground = NumericConstants.timeIntervalBetweenAutoSyncInBackground
             
             guard self.settings.isAutoSyncEnabled else {
+                debugLog("AUTOSYNC: autosync disabled")
+                self.backgroundSyncHandler?(false)
                 self.stopSync()
                 CardsManager.default.startOperationWith(type: .autoUploadIsOff, allOperations: nil, completedOperations: nil)
                 return
@@ -172,11 +194,12 @@ class SyncServiceManager {
                 
                 self.stop(photo: shoudStopPhotoSync, video: shouldStopVideoSync)
                 self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
+                debugLog("AUTOSYNC: is reachable and AS going to start")
                 self.start(photo: photoEnabled, video: videoEnabled, newItems: newItems)
             } else {
                 let photoServiceWaitingForWiFi = photoOption != .never
                 let videoServiceWaitingForWiFi = videoOption != .never
-
+                debugLog("AUTOSYNC: waiting for wifi")
                 self.waitForWifi(photo: photoServiceWaitingForWiFi, video: videoServiceWaitingForWiFi)
             }
         }
@@ -230,6 +253,11 @@ class SyncServiceManager {
     }
     
     private var isSubscribeForNotifications = false
+    
+    private func sendNetmeraEvent() {
+        let event = NetmeraEvents.Actions.BackgroundSync(syncType: .locationChange)
+        AnalyticsService.sendNetmeraEvent(event: event)
+    }
 }
 
 
@@ -309,6 +337,7 @@ extension SyncServiceManager {
     }
     
     @objc private func onAutoSyncStatusDidChange() {
+        
         if hasExecutingSync, self.reachabilityService.isReachable {
             WidgetService.shared.notifyWidgetAbout(status: .executing)
 
@@ -329,7 +358,11 @@ extension SyncServiceManager {
         
         CardsManager.default.stopOperationWith(type: .prepareToAutoSync)
         
-        FreeAppSpace.session.checkFreeAppSpaceAfterAutoSync()
+        FreeAppSpace.session.checkFreeUpSpaceAfterAutoSync()
+        
+        if isSyncFinished {
+            backgroundSyncHandler?(true)
+        }
         
         if settings.isAutoSyncEnabled, hasWaitingForWiFiSync, CacheManager.shared.isCacheActualized {
             CardsManager.default.startOperationWith(type: .waitingForWiFi)
@@ -351,7 +384,7 @@ extension SyncServiceManager: ItemSyncServiceDelegate {
     }
     
     func didReceiveError() {
-        stopSync()
+        debugLog("didReceiveError")
     }
 }
 
@@ -372,3 +405,9 @@ extension SyncServiceManager: ReachabilityServiceDelegate {
     }
 }
 
+
+extension SyncServiceManager: BackgroundTaskServiceDelegate {
+    func backgroundTaskWillExpire() {
+        stopSync()
+    }
+}

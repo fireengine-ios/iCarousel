@@ -51,10 +51,16 @@ extension PasscodeStorageDefaults: PasscodeStorage {
     }
     
     func save(passcode: Passcode) {
+        #if MAIN_APP
+        NetmeraExtensionsService.sendEvent(event: PasscodeSet(isEnabled: self.passcode.count == 0 && passcode.count > 0))
+        #endif
         self.passcode = passcode
     }
     
     func clearPasscode() {
+        #if MAIN_APP
+        NetmeraExtensionsService.sendEvent(event: PasscodeSet(isEnabled: false))
+        #endif
         passcode = ""
     }
 }

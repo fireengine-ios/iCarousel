@@ -23,6 +23,7 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput 
     var fromSettings = false
 
     func viewIsReady() {
+        interactor.trackScreen(fromSettings: fromSettings)
         startAsyncOperationDisableScreen()
         interactor.prepareCellModels()
     }
@@ -32,7 +33,6 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput 
             router.routNextVC()
         }
         save(settings: settings, albums: albums)
-        
     }
     
     func save(settings: AutoSyncSettings, albums: [AutoSyncAlbum]) {
@@ -41,6 +41,10 @@ class AutoSyncPresenter: BasePresenter, AutoSyncModuleInput, AutoSyncViewOutput 
     
     func checkPermissions() {
         interactor.checkPermissions()
+    }
+    
+    func didChangeSettingsOption(settings: AutoSyncSetting) {
+        interactor.trackSettings(settings, fromSettings: fromSettings)
     }
         
     //MARK : BasePresenter
@@ -82,6 +86,7 @@ extension AutoSyncPresenter: AutoSyncInteractorOutput {
     }
     
     private func checkPermissionsSuccessed() {
+        interactor.trackTurnOnAutosync()
         completeAsyncOperationEnableScreen()
         view.checkPermissionsSuccessed()
     }

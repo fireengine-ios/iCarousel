@@ -93,8 +93,7 @@ final class FaceImageViewController: ViewController, NibInit {
     }
     
     private func showFaceImageWaitAlert() {
-        let popUp = PopUpController.with(title: nil, message: TextConstants.faceImageWaitAlbum, image: .none, buttonTitle: TextConstants.ok)
-        RouterVC().presentViewController(controller: popUp)
+        SnackbarManager.shared.show(type: .critical, message: TextConstants.faceImageWaitAlbum, action: .ok)
     }
     
     // MARK: - face image

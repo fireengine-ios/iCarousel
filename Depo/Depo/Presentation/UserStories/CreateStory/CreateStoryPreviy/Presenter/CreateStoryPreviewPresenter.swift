@@ -37,40 +37,9 @@ extension CreateStoryPreviewPresenter: CreateStoryPreviewViewOutput {
     func storyCreated() {
         asyncOperationSuccess()
         
-        let storyName = interactor.story?.storyName ?? ""
-        let title = String(format: TextConstants.createStoryPopUpTitle, storyName)
-        let titleFullAttributes: [NSAttributedStringKey : Any] = [
-            .font : UIFont.TurkcellSaturaFont(size: 18),
-            .foregroundColor : UIColor.black,
-            .kern : 0
-        ]
-        
-        let storyNameAttributes: [NSAttributedStringKey : Any] = [.font: UIFont.TurkcellSaturaBolFont(size: 18)]
-        
-        let path = TextConstants.createStoryPathToStory
-        let message = String(format: TextConstants.createStoryPopUpMessage, path)
-        
-        let messageParagraphStyle = NSMutableParagraphStyle()
-        messageParagraphStyle.paragraphSpacing = 8
-        messageParagraphStyle.alignment = .center
-        let messageFullAttributes: [NSAttributedStringKey : Any] = [
-            .font : UIFont.TurkcellSaturaMedFont(size: 16),
-            .foregroundColor : ColorConstants.blueGrey,
-            .paragraphStyle : messageParagraphStyle,
-            .kern : 0
-        ]
-        
-        let messagePathAttributes: [NSAttributedStringKey : Any] = [.font: UIFont.TurkcellSaturaBolFont(size: 16)]
-        
-        router.presentFinishPopUp(image: .custom(UIImage(named: "Path")),
-                                  title: title,
-                                  storyName: storyName,
-                                  titleDesign: .partly(parts: [title : titleFullAttributes, storyName : storyNameAttributes]),
-                                  message: message,
-                                  messageDesign: .partly(parts: [message : messageFullAttributes, path : messagePathAttributes]),
-                                  buttonTitle: TextConstants.ok) { [weak self] in
-                                    self?.prepareToDismiss()
-                                    self?.router.goToMain()
+        SnackbarManager.shared.show(type: .critical, message: TextConstants.createStoryPopUpMessage, action: .ok) { [weak self] in
+            self?.prepareToDismiss()
+            self?.router.goToMain()
         }
     }
     

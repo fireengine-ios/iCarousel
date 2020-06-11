@@ -75,10 +75,6 @@ extension SettingsPresenter: SettingsViewOutput {
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     
-    func goToContactSync() {
-        router.goToContactSync()
-    }
-    
     func goToConnectedAccounts() {
         router.goToConnectedAccounts()
     }

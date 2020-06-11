@@ -13,9 +13,7 @@ protocol SettingsInteractorOutput: class {
     func cellsDataForSettings(isPermissionShown: Bool)
     
     func goToOnboarding()
-    
-    func goToContactSync()
-    
+        
     func profilePhotoUploadSuccessed(image: UIImage?)
     func profilePhotoUploadFailed(error: Error)
     

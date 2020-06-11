@@ -42,6 +42,8 @@ struct AnalyticsDimension {
     let connectionStatus: Bool?
     let statusType: String?
     
+    let usagePercentage: Int?
+    
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
         userPackagesNames.forEach {
@@ -109,7 +111,9 @@ struct AnalyticsDimension {
         if let statusType = statusType {
             dimesionDictionary[GADementionsFields.statusType.text] = statusType
         }
-        
+        if let usagePercentage = usagePercentage {
+            dimesionDictionary[GADementionsFields.usagePercentage.text] = usagePercentage
+        }
         return dimesionDictionary
     }
 }

@@ -8,7 +8,7 @@
 
 protocol FileInfoViewInput: class, ActivityIndicator, ErrorPresenter {
     func startRenaming()
-    func setObject(object: BaseDataSourceItem)
+    func setObject(_ object: BaseDataSourceItem)
     func goBack()
     func hideViews()
     func showViews()

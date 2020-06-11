@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias UsagePercenatageCallback = (Int?) -> Void
+
 class SingletonStorage {
     
     static let shared = SingletonStorage()
@@ -18,6 +20,8 @@ class SingletonStorage {
     var signUpInfo: RegistrationUserInfoModel?
     var activeUserSubscription: ActiveSubscriptionResponse?
     var referenceToken: String?
+    var quotaInfoResponse: QuotaInfoResponse?
+    var quotaUsage: Int?
     var progressDelegates = MulticastDelegate<OperationProgressServiceDelegate>()
     
     var isTwoFactorAuthEnabled: Bool?
@@ -44,6 +48,13 @@ class SingletonStorage {
         ///
         /// such sentence is needed fo avoid code sending after sign up with fresh app installing and immediately code sending
         return (isNewAppVersion || !isEmailVerificationCodeSent) && !isUserJustRegistered
+    }
+    
+    func logoutClear() {
+        accountInfo = nil
+        isJustRegistered = nil
+        quotaInfoResponse = nil
+        quotaUsage = nil
     }
     
     func getAccountInfoForUser(forceReload: Bool = false, success:@escaping (AccountInfoResponse) -> Void, fail: @escaping FailResponse ) {
@@ -103,6 +114,42 @@ class SingletonStorage {
             }, fail: { error in
                assertionFailure("Тo data received for overQuotaStatus request \(error.localizedDescription) ")
                completion()
+        })
+    }
+    
+    func getLifeboxUsagePersentage(usagePercentageCallback: @escaping UsagePercenatageCallback) {
+        guard quotaUsage == nil else {
+            usagePercentageCallback(quotaUsage)
+            return
+        }
+        
+        prepareLifeBoxUsage { [weak self] percentage in
+            guard let persentage = percentage else {
+                usagePercentageCallback(nil)
+                return
+            }
+            self?.quotaUsage = persentage
+            usagePercentageCallback(percentage)
+        }
+        
+    }
+    
+    private func prepareLifeBoxUsage(preparedUserField: @escaping UsagePercenatageCallback) {
+        AccountService().quotaInfo(
+            success: { [weak self] response in
+                guard let quota = response as? QuotaInfoResponse,
+                    let quotaBytes = quota.bytes, quotaBytes != 0,
+                    let usedBytes = quota.bytesUsed else {
+                        preparedUserField(0)
+                        return
+                }
+                self?.quotaInfoResponse = quota
+                let usagePercentage = CGFloat(usedBytes) / CGFloat(quotaBytes)
+                preparedUserField(Int(usagePercentage * 100))
+                
+        }, fail: { [weak self] errorResponse in
+            self?.quotaInfoResponse = nil
+            preparedUserField(nil)
         })
     }
     

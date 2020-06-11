@@ -16,6 +16,10 @@ final class FreeUpSpacePopUp: BaseCardView {
     @IBOutlet weak var freeAppSpaceButton: CircleYellowButton!
     
     private var operation: OperationType?
+    private lazy var freeUpSpace = FreeAppSpace.session
+    private lazy var router = RouterVC()
+    
+    //MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,6 +34,16 @@ final class FreeUpSpacePopUp: BaseCardView {
     private func setupRecognizer() {
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(onFreeAppSpaceButton))
         addGestureRecognizer(recognizer)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let bottomSpace : CGFloat = 7.0
+        let h = freeAppSpaceButton.frame.origin.y + freeAppSpaceButton.frame.size.height + bottomSpace
+        if calculatedH != h {
+            calculatedH = h
+            layoutIfNeeded()
+        }
     }
     
     override func configurateView() {
@@ -48,20 +62,11 @@ final class FreeUpSpacePopUp: BaseCardView {
         onCancelButton()
     }
     
-    @IBAction func onCancelButton() {
-        deleteCard()
-    }
-    
     override func deleteCard() {
         super.deleteCard()
         CardsManager.default.manuallyDeleteCardsByType(type: operation ?? .freeAppSpace)
     }
-    
-    @IBAction func onFreeAppSpaceButton() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .freeUpSpace))
-        RouterVC().showFreeAppSpace()
-    }
-    
+
     func configurateWithType(viewType: OperationType) {
         operation = viewType
         
@@ -76,14 +81,34 @@ final class FreeUpSpacePopUp: BaseCardView {
         }
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let bottomSpace : CGFloat = 7.0
-        let h = freeAppSpaceButton.frame.origin.y + freeAppSpaceButton.frame.size.height + bottomSpace
-        if calculatedH != h {
-            calculatedH = h
-            layoutIfNeeded()
+    // MARK: - Actions
+    
+    @IBAction func onCancelButton() {
+        deleteCard()
+    }
+    
+    @IBAction func onFreeAppSpaceButton() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .freeUpSpace))
+        
+        switch freeUpSpace.state {
+        case .initial, .processing:
+            showPopup(message: TextConstants.freeUpSpaceInProgress)
+        case .finished:
+            if freeUpSpace.isEmptyDuplicates {
+                showPopup(message: TextConstants.freeUpSpaceNoDuplicates)
+            } else {
+                router.showFreeAppSpace()
+            }
         }
     }
     
+    private func showPopup(message: String) {
+        let vc = PopUpController.with(title: TextConstants.freeUpSpaceAlertTitle,
+                                      message: message,
+                                      image: .custom(UIImage(named: "popup_info")),
+                                      buttonTitle: TextConstants.ok)
+        DispatchQueue.main.async {
+            self.router.defaultTopController?.present(vc, animated: false)
+        }
+    }
 }

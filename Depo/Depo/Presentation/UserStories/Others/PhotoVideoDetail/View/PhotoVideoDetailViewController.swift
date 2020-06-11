@@ -12,14 +12,22 @@ import AVFoundation
 import Photos
 
 final class PhotoVideoDetailViewController: BaseViewController {
+    
     var output: PhotoVideoDetailViewOutput!
     
     @IBOutlet private weak var collectionView: UICollectionView!
-    
     @IBOutlet private weak var viewForBottomBar: UIView!
-    
     @IBOutlet private weak var bottomBlackView: UIView!
+    @IBOutlet weak var collapseDetailView: UIView!
     
+    @IBOutlet private weak var swipeUpContainerView: UIView!
+    // Bottom detail view
+    
+    private(set) var bottomDetailViewManager: BottomDetailViewAnimationManagerProtocol?
+
+    var bottomDetailView: FileInfoView?
+    private var passThroughView: PassThroughView?
+
     private lazy var player: MediaPlayer = factory.resolve()
     
     private var localPlayer: AVPlayer?
@@ -71,16 +79,19 @@ final class PhotoVideoDetailViewController: BaseViewController {
             if let index = selectedIndex {
                 output.setSelectedItemIndex(selectedIndex: index)
             }
+            if oldValue != selectedIndex {
+                updateFileInfo()
+            }
         }
     }
     
     private(set) var objects = [Item]()
     
     private var selectedItem: Item? {
-        if let index = selectedIndex {
-            return objects[safe: index]
+        guard let index = selectedIndex else {
+            return nil
         }
-        return nil
+        return objects[safe: index]
     }
     
     private lazy var threeDotsBarButtonItem: UIBarButtonItem = {
@@ -94,7 +105,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if #available(iOS 11.0, *) {
             collectionView.contentInsetAdjustmentBehavior = .never
         } else {
@@ -114,12 +125,16 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
-        
         showSpinner()
+        updateFileInfo()
+        output.getFIRStatus()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        addTrackSwipeUpView()
+        addBottomDetailsView()
         
         OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
         ItemOperationManager.default.startUpdateView(view: self)
@@ -141,12 +156,16 @@ final class PhotoVideoDetailViewController: BaseViewController {
         //editingTabBar.editingBar.layer.borderWidth = 0
         
         statusBarColor = .black
+
+        let isFullScreen = self.isFullScreen
+        self.isFullScreen = isFullScreen
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
         output.viewIsReady(view: viewForBottomBar)
+        passThroughView?.enableGestures()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -158,6 +177,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         statusBarColor = .clear
         
         output.viewWillDisappear()
+        passThroughView?.disableGestures()
+        backButtonForNavigationItem(title: TextConstants.backTitle)
     }
     
     override func viewDidLayoutSubviews() {
@@ -191,10 +212,12 @@ final class PhotoVideoDetailViewController: BaseViewController {
             dismiss(animated: true)
         }
     }
-    
+        
     private func scrollToSelectedIndex() {
         setupNavigationBar()
         setupTitle()
+        updateFileInfo()
+        output.getFIRStatus()
 
         guard let index = selectedIndex else  {
             return
@@ -226,6 +249,13 @@ final class PhotoVideoDetailViewController: BaseViewController {
 
     private func setupTitle() {
         setNavigationTitle(title: selectedItem?.name ?? "")
+    }
+    
+    private func updateFileInfo() {
+        guard let selectedItem = selectedItem else { return }
+        bottomDetailView?.setObject(selectedItem) {
+            self.output.getPersonsForSelectedPhoto(completion: nil)
+        }
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
@@ -275,9 +305,90 @@ final class PhotoVideoDetailViewController: BaseViewController {
             collectionView.layoutIfNeeded()
         }
     }
+    
+    private func setupBottomDetailViewManager() {
+        guard
+            let managedView = bottomDetailView,
+            let passThroughView = passThroughView,
+            let collectionView = collectionView,
+            let collapsedView = collapseDetailView,
+            let parentView = view
+        else {
+            assertionFailure()
+            return
+        }
+        bottomDetailViewManager = BottomDetailViewAnimationManager(managedView: managedView, passThrowView: passThroughView, collectionView: collectionView, collapseView: collapsedView, parentView: parentView, delegate: self)
+    }
+    
+    func getBottomDetailViewState() -> CardState {
+        guard let bottomDetailViewManager = bottomDetailViewManager else {
+            assertionFailure()
+            return .collapsed
+        }
+        return bottomDetailViewManager.getCurrenState()
+    }
+    
+    func showDetailFromThreeDots() {
+        bottomDetailViewManager?.showDetailFromThreeDots()
+    }
+}
+
+
+// MARK: Bottom detail view implemantation
+
+extension PhotoVideoDetailViewController: BottomDetailViewAnimationManagerDelegate {
+    
+    func getSelectedIindex() -> Int {
+        return selectedIndex ?? 0
+    }
+    
+    func getObjectsCount() -> Int {
+        return objects.count
+    }
+    
+    func getIsFullScreenState() -> Bool {
+        return isFullScreen
+    }
+    
+    func setIsFullScreenState(_ isFullScreen: Bool) {
+        self.isFullScreen = isFullScreen
+    }
+    
+    func setSelectedIndex(_ selectedIndex: Int) {
+        self.selectedIndex = selectedIndex
+    }
+    
+    private func addTrackSwipeUpView() {
+        guard let topViewController = RouterVC().getViewControllerForPresent(), passThroughView == nil else {
+            return
+        }
+        let view = PassThroughView(frame: topViewController.view.bounds)
+        topViewController.view.addSubview(view)
+        passThroughView = view
+    }
+    
+    private func addBottomDetailsView() {
+        guard let topViewController = RouterVC().getViewControllerForPresent(), bottomDetailView == nil else {
+            return
+        }
+        
+        let fileInfoView = FileInfoView(frame: CGRect(origin: CGPoint(x: .zero, y: view.frame.height), size: view.frame.size))
+        output.configureFileInfo(fileInfoView)
+        topViewController.view.addSubview(fileInfoView)
+        bottomDetailView = fileInfoView
+        setupBottomDetailViewManager()
+    }
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
+    func showValidateNameSuccess(name: String) {
+        setNavigationTitle(title: name)
+        bottomDetailView?.showValidateNameSuccess()
+    }
+    
+    func show(name: String) {
+        bottomDetailView?.show(name: name)
+    }
     
     func setupInitialState() { }
     
@@ -299,6 +410,8 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     
     func play(item: AVPlayerItem) {
         hideSpinnerIncludeNavigationBar()
+        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.VideoDisplayed())
         
         localPlayer?.replaceCurrentItem(with: item)
         playerController = FixedAVPlayerViewController()
@@ -345,6 +458,22 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     
     func getNavigationController() -> UINavigationController? {
         return navigationController
+    }
+    
+    func updatePeople(items: [PeopleOnPhotoItemResponse]) {
+        bottomDetailView?.reloadCollection(with: items)
+    }
+    
+    func setHiddenPeoplePlaceholder(isHidden: Bool) {
+        bottomDetailView?.setHiddenPeoplePlaceholder(isHidden: isHidden)
+    }
+    
+    func setHiddenPremiumStackView(isHidden: Bool) {
+        bottomDetailView?.setHiddenPremiumStackView(isHidden: isHidden)
+    }
+    
+    func closeDetailViewIfNeeded() {
+        bottomDetailViewManager?.closeDetailView()
     }
 }
 
@@ -520,3 +649,4 @@ extension TabBarViewController: AVPlayerViewControllerDelegate {
         }
     }
 }
+

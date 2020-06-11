@@ -311,8 +311,6 @@
             Contact *masterContact = contacts[0];
             NSInteger masterContactDeviceCount = 0;
             for (Contact *contact in contacts) {
-                [[ContactUtil shared] fetchEmails:contact];
-                [[ContactUtil shared] fetchNumbers:contact];
                 if ([contact.devices count] > masterContactDeviceCount) {
                     masterContact = contact;
                     masterContactDeviceCount = [contact.devices count];
@@ -648,10 +646,6 @@ static bool syncing = false;
                 SYNC_Log(@"Contact : %@", [contact objectId]);
                 if (![_localContactIds containsObject:[contact objectId]]) {
                     [_localContactIds addObject:[contact objectId]];
-                    
-                    [[ContactUtil shared] fetchNumbers:contact];
-                    [[ContactUtil shared] fetchEmails:contact];
-                    [[ContactUtil shared] fetchAddresses:contact];
                     [_allContacts addObject:contact];
                 }
             } else {
