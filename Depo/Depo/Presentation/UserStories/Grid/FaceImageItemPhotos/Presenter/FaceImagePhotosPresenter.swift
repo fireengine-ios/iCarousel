@@ -110,6 +110,9 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     }
     
     override func updateThreeDotsButton() {
+        guard view != nil else {
+            return
+        }
         view.setThreeDotsMenu(active: true)
     }
     
