@@ -58,6 +58,7 @@ protocol LocalMediaStorageProtocol {
     func getBigImageFromFile(asset: PHAsset, image: @escaping FileDataSorceImg)
     
     func getAllImagesAndVideoAssets() -> [PHAsset]
+    func updateAllImagesAndVideoAssets() -> [PHAsset]
     
     func removeAssets(deleteAsset: [PHAsset], success: FileOperation?, fail: FailResponse?)
     
@@ -218,9 +219,44 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     var fetchAlbumResult: PHFetchResult<PHAssetCollection>!
     var fetchSmartAlbumResult: PHFetchResult<PHAssetCollection>!
     
+    @discardableResult
+    func updateAllImagesAndVideoAssets() -> [PHAsset] {
+        debugLog("LocalMediaStorage updateAllImagesAndVideoAssets")
+
+        let mediaContent = fetchAllImagesAndVideoAssets()
+        
+        guard !mediaContent.isEmpty else {
+            assetsCache.dropAll()
+            return []
+        }
+        
+        assetsCache.replaceAll(with: mediaContent)
+        
+        return mediaContent
+    }
+    
     func getAllImagesAndVideoAssets() -> [PHAsset] {
-        assetsCache.dropAll()
         debugLog("LocalMediaStorage getAllImagesAndVideoAssets")
+
+        guard photoLibraryIsAvailible() else {
+            return []
+        }
+        
+        let options = PHFetchOptions()
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        let result = PHAsset.fetchAssets(with: options)
+        
+        var mediaContent = [PHAsset]()
+        
+        result.enumerateObjects { avalibleAset, _, _ in
+            mediaContent.append(avalibleAset)
+        }
+        
+        return mediaContent
+    }
+    
+    private func fetchAllImagesAndVideoAssets() -> [PHAsset] {
+        debugLog("LocalMediaStorage fetchAllImagesAndVideoAssets")
 
         guard photoLibraryIsAvailible() else {
             return []
@@ -232,11 +268,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         var mediaContent = [PHAsset]()
         
-        fetchResult.enumerateObjects({ avalibleAset, index, a in
+        fetchResult.enumerateObjects { avalibleAset, _, _ in
             mediaContent.append(avalibleAset)
-        })
+        }
         
-        assetsCache.append(list: mediaContent)
         return mediaContent
     }
     
@@ -271,13 +306,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                     item.imageCount = itemsCount
                                 }
                                 
-                                let fetchOptions = PHFetchOptions()
-                                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-                                fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
-                                
-                                if let asset = PHAsset.fetchAssets(in: object, options: fetchOptions).firstObject,
-                                    let info = self?.compactInfoAboutAsset(asset: asset), info.isValid {
-                                    
+                                if let asset = self?.firstValidAsset(for: object) {
                                     item.preview = WrapData(asset: asset)
                                     albums.append(item)
                                 }
@@ -300,6 +329,25 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }
             }
         }
+    }
+    
+    private func firstValidAsset(for collection: PHAssetCollection) -> PHAsset? {
+        var result: PHAsset? = nil
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        fetchOptions.predicate = NSPredicate(format: "mediaType IN %@", [PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue])
+        
+        let assets = PHAsset.fetchAssets(in: collection, options: fetchOptions)
+        assets.enumerateObjects { asset, _, stop in
+            let info = self.compactInfoAboutAsset(asset: asset)
+            if info.isValid {
+                result = asset
+                stop.pointee = true
+            }
+        }
+        
+        return result
     }
     
     func getLocalAlbums(completion: @escaping (_ response: LocalAssetsResponse) -> Void) {
@@ -514,7 +562,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileUrl)
                     assetPlaceholder = request?.placeholderForCreatedAsset
                 default:
-                    handler(.failed(ErrorResponse.string("Only for photo & Video")))
+                    handler(.failed(ErrorResponse.string(TextConstants.downloadDocumentErrorPopup)))
             }
             
         }, completionHandler: { [weak self] status, error in
@@ -727,6 +775,12 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         options.isNetworkAccessAllowed = false
         
         let tmpUrl = Device.tmpFolderUrl(withComponent: name)
+        
+        if FileManager.default.fileExists(atPath: tmpUrl.relativePath) {
+            debugLog("resumable_upload: cleaning tmp at \(tmpUrl.relativePath)")
+            try? FileManager.default.removeItem(at: tmpUrl)
+        }
+        
         PHAssetResourceManager.default().writeData(for: resource, toFile: tmpUrl, options: options) { error in
             guard let error = error else {
                 completion(.success(tmpUrl))

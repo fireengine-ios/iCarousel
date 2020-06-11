@@ -8,8 +8,14 @@
 
 import UIKit
 
- final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController {
+protocol FaceImagePhotosViewControllerDelegate {
+    func viewWillDisappear()
+}
 
+final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController {
+    
+    @IBOutlet private(set) weak var contentView: UIView!
+    
     private let albumsSliderHeight: CGFloat = 140
     private let headerImageHeight: CGFloat = 190
     
@@ -21,6 +27,8 @@ import UIKit
     private var albumsHeightConstraint: NSLayoutConstraint?
     private var headerImageHeightConstraint: NSLayoutConstraint?
     private var hideButton: UIButton!
+    
+    var delegate: FaceImagePhotosViewControllerDelegate?
     
     // MARK: - UIViewController lifecycle
     
@@ -34,6 +42,11 @@ import UIKit
         super.viewWillAppear(animated)
 
         configureTitleNavigationBar()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        delegate?.viewWillDisappear()
     }
     
     // MARK: - BaseFilesGreedViewController

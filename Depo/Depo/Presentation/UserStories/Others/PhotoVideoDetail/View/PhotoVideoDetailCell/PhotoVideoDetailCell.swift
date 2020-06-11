@@ -84,6 +84,10 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         reset()
     }
     
+    func imageViewMaxY() -> CGFloat {
+        return imageScrollView.getImageViewMaxY()
+    }
+    
     private func reset() {
         currentItemId = ""
         isNeedToUpdateWebView = true

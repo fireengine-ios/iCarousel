@@ -79,14 +79,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    @available(iOS 13.0, *)
+    private lazy var backgroundSyncService = BackgroundSyncService.shared
     
     var window: UIWindow?
     var watchdog: Watchdog?
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let coreDataStack: CoreDataStack = factory.resolve()
         
         startCoreDataSafeServices(with: application, options: launchOptions)
+        
+        APILogger.shared.startLogging()
         
         ///call debugLog only if the Crashlytics is already initialized
         debugLog("AppDelegate didFinishLaunchingWithOptions")
@@ -96,16 +101,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = InitializingViewController()
         self.window?.makeKeyAndVisible()
         
+        if #available(iOS 13.0, *) {
+            debugLog("BG! Registeration")
+            self.backgroundSyncService.registerLaunchHandlers()
+            
+        }
         coreDataStack.setup { [weak self] in
             guard let self = self else {
                 return
             }
+            
             
             DispatchQueue.main.async {
                 AppConfigurator.logoutIfNeed()
                 
                 self.window?.rootViewController = router.vcForCurrentState()
                 self.window?.isHidden = false
+                
             }
         }
         
@@ -180,6 +192,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         debugLog("AppDelegate applicationDidEnterBackground")
         
+        
+        if #available(iOS 13.0, *) {
+            debugLog("BG! AppDelegate applicationDidEnterBackground")
+            backgroundSyncService.scheduleProcessingSync()
+            backgroundSyncService.scheduleRefreshSync()
+        }
+        
         BackgroundTaskService.shared.beginBackgroundTask()
 
         firstResponder = application.firstResponder
@@ -208,7 +227,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillEnterForeground")
         if BackgroundTaskService.shared.appWasSuspended {
+            debugLog("App was suspended")
             CacheManager.shared.actualizeCache()
+        } else if tokenStorage.refreshToken != nil {
+            SyncServiceManager.shared.update()
         }
         ContactSyncSDK.doPeriodicSync()
     }

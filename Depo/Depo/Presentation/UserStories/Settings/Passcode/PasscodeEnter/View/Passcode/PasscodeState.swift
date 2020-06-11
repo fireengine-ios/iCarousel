@@ -98,10 +98,12 @@ class ConfirmNewPasscodeState: PasscodeState {
     func finish(with passcode: Passcode, manager: PasscodeManager) {
         if self.passcode == passcode {
             manager.storage.save(passcode: passcode)
-            manager.view.passcodeOutput.animateError(with: TextConstants.passcodeChanged)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6 ) {
-                manager.delegate?.passcodeLockDidSucceed(manager)
-            }
+            
+            #if MAIN_APP
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.passcodeChanged)
+            #endif
+            
+            manager.delegate?.passcodeLockDidSucceed(manager)
             
         } else {
             manager.changeState(to: OldPasscodeState())
@@ -119,15 +121,13 @@ class ConfirmCreateingNewPasscodeState: ConfirmNewPasscodeState {
     override func finish(with passcode: Passcode, manager: PasscodeManager) {
         if self.passcode == passcode {
             manager.storage.save(passcode: passcode)
-            manager.view.passcodeOutput.animateError(with: TextConstants.passcodeSet)
-            
+
             #if MAIN_APP
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.passcodeSet)
             analyticsService.track(event: .setPasscode)
             #endif
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6 ) {
-                manager.delegate?.passcodeLockDidSucceed(manager)
-            }
+            manager.delegate?.passcodeLockDidSucceed(manager)
             
         } else {
             manager.changeState(to: CreatePasscodeState())

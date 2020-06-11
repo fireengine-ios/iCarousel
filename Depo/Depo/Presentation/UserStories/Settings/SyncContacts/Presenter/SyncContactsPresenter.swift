@@ -260,13 +260,11 @@ final class SyncContactsPresenter: BasePresenter, SyncContactsModuleInput, SyncC
     }
     
     private func showEmptyContactsPopUp() {
-        let controller = PopUpController.with(title: nil, message: TextConstants.absentContactsForBuckup, image: .none, buttonTitle: TextConstants.ok)
-        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        SnackbarManager.shared.show(type: .critical, message: TextConstants.absentContactsForBackup, action: .ok)
     }
     
     private func showEmtyContactsInLifebox() {
-        let controller = PopUpController.with(title: nil, message: TextConstants.absentContactsInLifebox, image: .none, buttonTitle: TextConstants.ok)
-        UIApplication.topController()?.present(controller, animated: false, completion: nil)
+        SnackbarManager.shared.show(type: .critical, message: TextConstants.absentContactsInLifebox, action: .ok)
     }
 }
 

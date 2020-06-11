@@ -75,12 +75,10 @@ final class AlbumsSliderDataSource: NSObject {
             
             let startIndex = items.count
             let endIndex = startIndex + insertItems.count - 1
-           
-            items.append(contentsOf: insertItems)
-           
             let indexPaths = (startIndex...endIndex).map { IndexPath(item: $0, section: 0) }
             
             collectionView.performBatchUpdates({
+                items.append(contentsOf: insertItems)
                 collectionView.insertItems(at: indexPaths)
             }, completion: { [weak self] _ in
                 self?.checkLoadNextPage(for: self?.collectionView.indexPathsForVisibleItems.sorted().last)

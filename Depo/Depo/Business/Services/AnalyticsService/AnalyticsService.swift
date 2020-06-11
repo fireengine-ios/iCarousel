@@ -212,7 +212,19 @@ extension AnalyticsService: AnalyticsGA {
         var autoSyncStatus: String?
         var isTwoFactorAuthEnabled: Bool?
 
+        var usagePercentage: Int?
+        
         if loginStatus {
+            group.enter()
+            SingletonStorage.shared.getLifeboxUsagePersentage { percentage in
+                   guard let percentage = percentage else {
+                       group.leave()
+                       return
+                   }
+                   usagePercentage = percentage
+                   group.leave()
+               }
+            
             let autoSyncStorageSettings = AutoSyncDataStorage().settings
             
             let confirmedAutoSyncSettingsState = autoSyncStorageSettings.isAutoSyncEnabled && autoSyncStorageSettings.isAutosyncSettingsApplied
@@ -252,7 +264,8 @@ extension AnalyticsService: AnalyticsGA {
                 itemsOperationCount: itemsOperationCount,
                 editFields: editFields,
                 connectionStatus: connectionStatus,
-                statusType: statusType).productParametrs)
+                statusType: statusType,
+                usagePercentage: usagePercentage).productParametrs)
         }
     }
     
@@ -710,9 +723,10 @@ extension AnalyticsService: AnalyticsGA {
 
 //MARK: - Netmera
 protocol NetmeraProtocol {
-   static func updateUser()
-   static func startNetmera()
-   static func sendNetmeraEvent(event: NetmeraEvent)
+    static func updateUser()
+    static func startNetmera()
+    static func updateNetmeraAPIKey()
+    static func sendNetmeraEvent(event: NetmeraEvent)
 }
 
 extension AnalyticsService: NetmeraProtocol {
@@ -722,6 +736,10 @@ extension AnalyticsService: NetmeraProtocol {
     
     static func startNetmera() {
         NetmeraService.startNetmera()
+    }
+    
+    static func updateNetmeraAPIKey() {
+        NetmeraService.updateAPIKey()
     }
     
     static func sendNetmeraEvent(event: NetmeraEvent) {

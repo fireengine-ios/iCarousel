@@ -104,6 +104,19 @@ extension ManageContactsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return String(contactGroups[section].name)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let isLastSection = (numberOfSections(in: tableView) - 1) == indexPath.section
+        guard isLastSection else {
+            return
+        }
+        
+        let countRow: Int = self.tableView(tableView, numberOfRowsInSection: indexPath.section)
+        let isLastCell = indexPath.row == countRow - 1
+        if isLastCell {
+            output.needLoadNextPage()
+        }
+    }
 }
 
 extension ManageContactsViewController: UITableViewDelegate {
@@ -147,20 +160,5 @@ extension ManageContactsViewController: UISearchBarDelegate {
 extension ManageContactsViewController: ManageContactTableViewCellDelegate {
     func cell(_ cell: ManageContactTableViewCell, deleteContact: RemoteContact) {
         output.onDeleteContact(deleteContact)
-    }
-}
-
-extension ManageContactsViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if deltaOffset(for: scrollView) <= 0 {
-            output.didScrollToEnd()
-        }
-    }
-    
-    private func deltaOffset(for scrollView: UIScrollView) -> CGFloat {
-        let currentOffset = scrollView.contentOffset.y
-        let maximumOffset = scrollView.contentSize.height - scrollView.frame.height
-        let infinity = tableView.tableFooterView?.bounds.height ?? 0
-        return maximumOffset - currentOffset - infinity
     }
 }

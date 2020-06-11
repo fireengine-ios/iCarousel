@@ -25,15 +25,19 @@ final class BackgroundTaskService {
     func beginBackgroundTask() {
         appWasSuspended = false
         
-        guard backgroundTaskId == UIBackgroundTaskInvalid else {
+        guard
+            backgroundTaskId == UIBackgroundTaskInvalid
+        else {
             return
         }
         
         self.backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: UUID().uuidString, expirationHandler: { [weak self] in
-            self?.appWasSuspended = true
+            debugLog("App will be suspended")
             self?.expirationDelegates.invoke(invocation: { delegate in
                 delegate.backgroundTaskWillExpire()
             })
+            self?.appWasSuspended = true
+            debugLog("App is suspended")
             self?.endBackgroundTask()
         })
 

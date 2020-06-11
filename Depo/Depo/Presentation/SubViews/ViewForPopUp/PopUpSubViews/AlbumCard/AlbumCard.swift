@@ -46,6 +46,7 @@ final class AlbumCard: BaseCardView {
 
     private var album: AlbumServiceResponse?
     private var albumItem: AlbumItem?
+    private var routerVC = RouterVC()
     
     /// MAYBE WILL BE NEED
     ///private var albumPhotos: [WrapData]?
@@ -155,9 +156,8 @@ final class AlbumCard: BaseCardView {
     
     private func showAlbum() {
         guard let albumItem = albumItem else { return }
-        let router = RouterVC()
-        let albumVC = router.albumDetailController(album: albumItem, type: .List, status: .active, moduleOutput: nil)
-        router.pushViewController(viewController: albumVC)
+        let albumVC = routerVC.albumDetailController(album: albumItem, type: .List, status: .active, moduleOutput: nil)
+        routerVC.pushViewController(viewController: albumVC)
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
@@ -182,7 +182,11 @@ final class AlbumCard: BaseCardView {
                 case .success(_):
                     self?.cardType = .display
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
+                    if error.isOutOfSpaceError {
+                        self?.routerVC.showFullQuotaPopUp()
+                    } else {
+                        UIApplication.showErrorAlert(message: error.description)
+                    }
                 }
             }
         }

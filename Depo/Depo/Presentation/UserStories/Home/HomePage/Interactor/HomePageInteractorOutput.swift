@@ -35,4 +35,10 @@ protocol HomePageInteractorOutput: class {
     func didObtainPermissionAllowance(response: SettingsPermissionsResponse)
     
     func showSuccessMobilePaymentPopup()
+    
+    func showSpinner()
+    
+    func hideSpinner()
+    
+    func showSnackBarWith(message: String)
 }

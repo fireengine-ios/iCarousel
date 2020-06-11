@@ -16,7 +16,7 @@ class AssetsCache {
     private var storage: [String: PHAsset] = [:]
     
     private var sortedStorage: [PHAsset] {
-        return storage.values.sorted{
+        return storage.values.sorted {
             guard let creationDate1 = $0.creationDate,
                 let creationDate2 = $1.creationDate else {
                     return false
@@ -65,37 +65,37 @@ class AssetsCache {
     }
     
     func append(asset:PHAsset) {
-        dispatchQueue.sync {
-            storage[asset.localIdentifier] = asset
+        dispatchQueue.async(flags: .barrier) {
+            self.storage[asset.localIdentifier] = asset
         }
     }
     
     func append(list: [PHAsset]) {
-        dispatchQueue.sync {
+        dispatchQueue.async(flags: .barrier) {
             list.forEach {
-                storage[$0.localIdentifier] = $0
+                self.storage[$0.localIdentifier] = $0
             }
         }
     }
     
     func remove(list: [PHAsset]) {
-        dispatchQueue.sync {
+        dispatchQueue.async(flags: .barrier) {
             list.forEach {
-                storage.removeValue(forKey: $0.localIdentifier)
+                self.storage.removeValue(forKey: $0.localIdentifier)
             }
         }
     }
     
     func remove(identifier: String) {
-        dispatchQueue.sync {
-            _ = storage.removeValue(forKey: identifier)
+        dispatchQueue.async(flags: .barrier) {
+            _ = self.storage.removeValue(forKey: identifier)
         }
     }
     
     func remove(identifiers: [String]) {
-        dispatchQueue.sync {
+        dispatchQueue.async(flags: .barrier) {
             identifiers.forEach {
-                storage.removeValue(forKey: $0)
+                self.storage.removeValue(forKey: $0)
             }
         }
     }
@@ -109,8 +109,17 @@ class AssetsCache {
     }
     
     func dropAll() {
-        dispatchQueue.sync {
-            storage.removeAll()
+        dispatchQueue.async(flags: .barrier) {
+            self.storage.removeAll()
+        }
+    }
+    
+    func replaceAll(with list: [PHAsset]) {
+        dispatchQueue.async(flags: .barrier) {
+            self.storage.removeAll()
+            list.forEach {
+                self.storage[$0.localIdentifier] = $0
+            }
         }
     }
 }

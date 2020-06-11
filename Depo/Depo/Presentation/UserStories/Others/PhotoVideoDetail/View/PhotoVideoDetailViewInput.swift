@@ -6,9 +6,11 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-protocol PhotoVideoDetailViewInput: class {
+protocol PhotoVideoDetailViewInput: class, ActivityIndicator, ErrorPresenter {
     
     var status: ItemStatus { get set }
+    
+    var bottomDetailViewManager: BottomDetailViewAnimationManagerProtocol? { get }
     
     func setupInitialState()
     
@@ -25,4 +27,16 @@ protocol PhotoVideoDetailViewInput: class {
     func onItemSelected(at index: Int, from items: [Item])
     
     func hideView()
+    
+    func show(name: String)
+    
+    func showValidateNameSuccess(name: String)
+    
+    func updatePeople(items: [PeopleOnPhotoItemResponse])
+    
+    func setHiddenPeoplePlaceholder(isHidden: Bool)
+    
+    func setHiddenPremiumStackView(isHidden: Bool)
+    
+    func closeDetailViewIfNeeded()
 }

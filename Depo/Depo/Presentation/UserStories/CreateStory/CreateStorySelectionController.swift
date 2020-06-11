@@ -108,7 +108,10 @@ final class CreateStorySelectionController: BaseViewController, ControlTabBarPro
         
         setTitle(withString: navigationTitle)
         
-        containerView?.analyzesLeftLabel.isHidden = (selectionState != .ended)
+        if selectionState == .ended {
+            let message = String(format: TextConstants.snackbarMessageCreateStoryLimit, selectingLimit)
+            SnackbarManager.shared.show(type: .critical, message: message, action: .ok)
+        }
         
         selectionDelegate?.selectionStateDidChange(selectionState)
     }

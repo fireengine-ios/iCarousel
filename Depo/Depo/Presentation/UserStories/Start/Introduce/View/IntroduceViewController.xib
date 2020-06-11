@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroduceViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IntroduceViewController" customModule="TC_Depo_LifeTech_Bundle" customModuleProvider="target">
             <connections>
                 <outlet property="haveAccountButton" destination="STK-bc-GEv" id="2a3-aN-a84"/>
+                <outlet property="haveAccountLabel" destination="KcF-fe-XaY" id="Pvp-Vf-gs2"/>
                 <outlet property="pageControll" destination="uNr-bn-y2s" id="05I-E2-oyP"/>
                 <outlet property="scrollView" destination="j2P-V1-ajw" id="wNv-9A-dow"/>
                 <outlet property="startUsingLifeBoxButton" destination="N29-gd-nz6" id="Kyb-EB-sNU"/>
@@ -24,7 +25,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="VPC-FC-6z7">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 </imageView>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecz-N0-mMq">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ecz-N0-mMq">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cyp-QM-iGJ">
@@ -43,13 +44,13 @@
                                     <variation key="widthClass=regular" image="Logo-Ipad"/>
                                 </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hXL-QX-kgV">
-                                    <rect key="frame" x="0.0" y="113" width="320" height="280"/>
+                                    <rect key="frame" x="0.0" y="113" width="320" height="250.5"/>
                                     <subviews>
                                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2P-V1-ajw">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="280"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="250.5"/>
                                         </scrollView>
                                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="uNr-bn-y2s">
-                                            <rect key="frame" x="8" y="235" width="304" height="37"/>
+                                            <rect key="frame" x="8" y="205.5" width="304" height="37"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="37" id="FPr-6s-iL3"/>
                                             </constraints>
@@ -66,13 +67,13 @@
                                         <constraint firstAttribute="trailing" secondItem="j2P-V1-ajw" secondAttribute="trailing" id="tnr-AZ-94Y"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STK-bc-GEv" customClass="ButtonWithCorner" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="71" y="511" width="178" height="29"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STK-bc-GEv" customClass="RoundedInsetsButton" customModule="TC_Depo_LifeTech_Bundle" customModuleProvider="target">
+                                    <rect key="frame" x="65" y="494" width="190" height="46"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="29" id="GPS-RI-Ueo">
+                                        <constraint firstAttribute="height" constant="46" id="GPS-RI-Ueo">
                                             <variation key="widthClass=regular" constant="44"/>
                                         </constraint>
-                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="178" id="Vyz-va-tIh">
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="190" id="Vyz-va-tIh">
                                             <variation key="widthClass=regular" constant="275"/>
                                         </constraint>
                                     </constraints>
@@ -81,13 +82,23 @@
                                         <action selector="onHaveAccountButton" destination="-1" eventType="touchUpInside" id="zQD-23-R0A"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N29-gd-nz6" customClass="WhiteButtonWithRoundedCorner" customModule="lifebox" customModuleProvider="target">
-                                    <rect key="frame" x="30" y="423" width="260" height="60"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KcF-fe-XaY">
+                                    <rect key="frame" x="139" y="463.5" width="42" height="20.5"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" priority="750" constant="303" id="0QQ-jr-zZ0">
+                                        <constraint firstAttribute="width" priority="250" constant="100" id="92Z-NV-OTJ"/>
+                                        <constraint firstAttribute="height" priority="250" constant="15" id="S0o-O1-af3"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N29-gd-nz6" customClass="RoundedInsetsButton" customModule="TC_Depo_LifeTech_Bundle" customModuleProvider="target">
+                                    <rect key="frame" x="30" y="393.5" width="260" height="46"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" priority="750" constant="260" id="0QQ-jr-zZ0">
                                             <variation key="widthClass=regular" constant="348"/>
                                         </constraint>
-                                        <constraint firstAttribute="height" constant="60" id="s5i-Oo-O1V">
+                                        <constraint firstAttribute="height" constant="46" id="s5i-Oo-O1V">
                                             <variation key="widthClass=regular" constant="74"/>
                                         </constraint>
                                     </constraints>
@@ -104,7 +115,10 @@
                                 <constraint firstItem="N29-gd-nz6" firstAttribute="centerX" secondItem="cyp-QM-iGJ" secondAttribute="centerX" id="5oe-QE-yMj"/>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="568" id="6Sm-iI-WFL"/>
                                 <constraint firstItem="N29-gd-nz6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cyp-QM-iGJ" secondAttribute="leading" constant="30" id="Brm-gA-1se"/>
-                                <constraint firstItem="STK-bc-GEv" firstAttribute="top" secondItem="N29-gd-nz6" secondAttribute="bottom" constant="28" id="IVa-RJ-vyM"/>
+                                <constraint firstItem="KcF-fe-XaY" firstAttribute="centerX" secondItem="cyp-QM-iGJ" secondAttribute="centerX" id="Dxa-f9-3Lj"/>
+                                <constraint firstItem="KcF-fe-XaY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hXL-QX-kgV" secondAttribute="leading" constant="10" id="E7M-SC-sWD"/>
+                                <constraint firstItem="STK-bc-GEv" firstAttribute="top" secondItem="KcF-fe-XaY" secondAttribute="bottom" constant="10" id="EvA-Gs-Jqw"/>
+                                <constraint firstItem="KcF-fe-XaY" firstAttribute="top" secondItem="N29-gd-nz6" secondAttribute="bottom" constant="24" id="IVa-RJ-vyM"/>
                                 <constraint firstAttribute="bottom" secondItem="STK-bc-GEv" secondAttribute="bottom" constant="28" id="Kgd-Kt-98t"/>
                                 <constraint firstItem="hXL-QX-kgV" firstAttribute="leading" secondItem="cyp-QM-iGJ" secondAttribute="leading" id="e2A-f5-XmD"/>
                                 <constraint firstItem="LEY-g9-CGx" firstAttribute="centerX" secondItem="cyp-QM-iGJ" secondAttribute="centerX" id="eC5-IO-pk6"/>
