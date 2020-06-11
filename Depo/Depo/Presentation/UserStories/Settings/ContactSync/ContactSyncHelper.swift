@@ -265,7 +265,7 @@ final class ContactSyncHelper {
     }
     
     private func requestAccess(completionHandler: @escaping ContactsLibraryGranted) {
-        localContactsService.askPermissionForContactsFramework(redirectToSettings: true) { isGranted in
+        localContactsService.askPermissionForContactsFramework(redirectToSettings: false) { isGranted in
             AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(isGranted)
             completionHandler(isGranted)
         }
