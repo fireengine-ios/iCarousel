@@ -491,7 +491,8 @@ extension FileInfoView: FaceImageItemsModuleOutput {
     
     func delete(item: Item) {
         guard let peopleItem = item as? PeopleItem,
-            let index = dataSource.items.firstIndex(where: { $0.personInfoId == peopleItem.id }) else {
+            let index = dataSource.items.firstIndex(where: { $0.personInfoId == peopleItem.id })
+        else {
             return
         }
             
