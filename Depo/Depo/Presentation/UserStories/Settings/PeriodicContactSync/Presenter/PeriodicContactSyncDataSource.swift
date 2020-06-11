@@ -85,6 +85,8 @@ extension PeriodicContactSyncDataSource: PeriodicContactSyncSettingsTableViewCel
     func onValueChanged(cell: PeriodicContactSyncSettingsTableViewCell) {
         if cell.switcher.isOn {
             periodContactsSyncSettings?.isPeriodicContactsSyncOptionEnabled = true
+            periodContactsSyncSettings?.timeSetting.option = .daily
+            updateCells()
         } else {
             forceDisableAutoSync()
             reloadTableView()
