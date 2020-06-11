@@ -5,45 +5,45 @@ ENV['COCOAPODS_DISABLE_STATS'] = "true"
 
 def shared_pods
   pod 'Alamofire', '~> 4.8.1'
-  pod 'SwiftyJSON', '~>3'
-  pod 'KeychainSwift'
+  pod 'SwiftyJSON', '~> 3'
+  pod 'KeychainSwift', '~> 19'
 end
 
 def core_pods
   shared_pods
-  pod 'Fabric'
-  pod 'Crashlytics'
-  pod 'FBSDKCoreKit'
-  pod 'FBSDKLoginKit'
-  pod 'FBSDKShareKit'
-  pod 'Netmera'
+  pod 'Fabric', '~> 1.10'
+  pod 'Crashlytics', '3.14.0'
+  pod 'FBSDKCoreKit', '~> 7'
+  pod 'FBSDKLoginKit', '~> 7'
+  pod 'FBSDKShareKit', '~> 7'
+  pod 'Netmera', '~> 3'
 
-  pod 'SDWebImage' , '~> 4'
-  pod 'YYImage'
-  pod 'GoogleConversionTracking'
-  pod 'Firebase/Core'
-  pod 'GoogleTagManager'
-  pod 'Adjust'
+  pod 'SDWebImage', '~> 4'
+  pod 'YYImage', '~> 1'
+  pod 'GoogleConversionTracking', '~> 3'
+  pod 'Firebase/Core', '~> 6'
+  pod 'GoogleTagManager', '~> 7'
+  pod 'Adjust', '~> 4'
   #pod 'ActiveLabel'
 
   #Keyboard
-  pod 'Typist'
+  pod 'Typist', '~> 1'
 
-  pod 'SwiftyDropbox'
+  pod 'SwiftyDropbox', '~> 5'
 
 
   pod 'SimpleExif', :git => 'https://github.com/bonyadmitr/SimpleExif.git'
-  pod 'XYPieChart'
+  pod 'XYPieChart', '~> 0.2'
   pod 'CircleProgressBar', '~> 0.32'
-  pod 'UIImage-Categories'
-  pod 'iCarousel'
+  pod 'UIImage-Categories', '~> 1'
+  pod 'iCarousel', '~> 1'
 
   pod 'ReachabilitySwift'
   pod 'MBProgressHUD', '~> 1.1.0'
-  pod 'TTGSnackbar'
+  pod 'TTGSnackbar', '~> 1'
 
   #logger
-  pod 'XCGLogger'
+  pod 'XCGLogger', '~> 7'
 
   #widget
   pod 'MMWormhole', '~> 2.0.0'
@@ -54,7 +54,33 @@ def core_pods
 #  pod 'MetalPetal', '~> 1.0'
 #  pod 'GPUImage'
 
-  pod 'SwiftyGif'
+  pod 'SwiftyGif', '~> 5'
+end
+
+def sharing_pods
+  shared_pods
+  pod 'Netmera', '~> 3'
+  pod 'MMWormhole', '~> 2.0.0'
+end
+
+def file_provider_pods
+  shared_pods
+  pod 'Netmera', '~> 3'
+  pod 'MMWormhole', '~> 2.0.0'
+end
+
+def file_provider_ui_pods
+  shared_pods
+end
+
+def autosync_widget_pods
+  pod 'MMWormhole', '~> 2.0.0'
+  pod 'KeychainSwift', '~> 19'
+end
+
+def notification_pods
+  pod 'Netmera', '~> 3'
+  pod 'iCarousel', '~> 1'
 end
 
 target 'Depo_LifeTech' do
@@ -62,29 +88,23 @@ target 'Depo_LifeTech' do
 end
 
 target 'LifeTech-LifeboxShared' do
-    shared_pods
-    pod 'Netmera'
-    pod 'MMWormhole', '~> 2.0.0'
+  sharing_pods
 end
 
 target 'LifeTech-LifeboxFileProvider' do
-    shared_pods
-    pod 'Netmera'
-    pod 'MMWormhole', '~> 2.0.0'
+  file_provider_pods
 end
 
 target 'LifeTech-LifeboxFileProviderUI' do
-    shared_pods
+  file_provider_ui_pods
 end
 
 target 'LifeTech-autosync-widget' do
-    pod 'MMWormhole', '~> 2.0.0'
-    pod 'KeychainSwift'
+  autosync_widget_pods
 end
 
 target "LifeTech-NotificationService" do
-  pod 'Netmera'
-  pod 'iCarousel'
+  notification_pods
 end
 
 target 'TC_Depo_LifeTech' do
@@ -96,29 +116,23 @@ target 'TC_Depo_LifeTech_Bundle' do
 end
 
 target 'LifeboxShared' do
-    shared_pods
-    pod 'Netmera'
-    pod 'MMWormhole', '~> 2.0.0'
+  sharing_pods
 end
 
 target 'LifeboxFileProvider' do
-    pod 'Netmera'
-    shared_pods
-    pod 'MMWormhole', '~> 2.0.0'
+  file_provider_pods
 end
 
 target 'LifeboxFileProviderUI' do
-    shared_pods
+  file_provider_ui_pods
 end
 
 target 'autosync-widget' do
-    pod 'MMWormhole', '~> 2.0.0'
-    pod 'KeychainSwift'
+  autosync_widget_pods
 end
 
 target "LifeboxNotificationService" do
-  pod 'Netmera'
-  pod 'iCarousel'
+  notification_pods
 end
 
 target 'LifeboxUnitTests' do
@@ -134,29 +148,23 @@ target 'lifedrive_Bundle' do
 end
 
 target 'LifeDriveShared' do
-    shared_pods
-    pod 'Netmera'
-    pod 'MMWormhole', '~> 2.0.0'
+  sharing_pods
 end
 
 target 'LifeDriveFileProvider' do
-    pod 'Netmera'
-    shared_pods
-    pod 'MMWormhole', '~> 2.0.0'
+  file_provider_pods
 end
 
 target 'LifeDriveProviderUI' do
-    shared_pods
+  file_provider_ui_pods
 end
 
 target 'LifeDrive-widget' do
-    pod 'MMWormhole', '~> 2.0.0'
-    pod 'KeychainSwift'
+  autosync_widget_pods
 end
 
 target 'LifeDriveNotificationService' do
-  pod 'Netmera'
-  pod 'iCarousel'
+  notification_pods
 end
 
 target 'LifeTech_lifedrive' do
@@ -164,29 +172,23 @@ target 'LifeTech_lifedrive' do
 end
 
 target 'LifeTech_LifeDriveShared' do
-    shared_pods
-    pod 'Netmera'
-    pod 'MMWormhole', '~> 2.0.0'
+  sharing_pods
 end
 
 target 'LifeTech_LifeDriveFileProvider' do
-    pod 'Netmera'
-    shared_pods
-    pod 'MMWormhole', '~> 2.0.0'
+  file_provider_pods
 end
 
 target 'LifeTech_LifeDriveProviderUI' do
-    shared_pods
+  file_provider_ui_pods
 end
 
 target 'LifeTech_LifeDrive-widget' do
-    pod 'MMWormhole', '~> 2.0.0'
-    pod 'KeychainSwift'
+  autosync_widget_pods
 end
 
 target 'LifeTech_LifeDriveNotificationService' do
-  pod 'Netmera'
-  pod 'iCarousel'
+  notification_pods
 end
 
 post_install do |installer|

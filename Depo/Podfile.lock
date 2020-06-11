@@ -131,35 +131,35 @@ PODS:
   - YYImage/Core (1.0.4)
 
 DEPENDENCIES:
-  - Adjust
+  - Adjust (~> 4)
   - Alamofire (~> 4.8.1)
   - CircleProgressBar (~> 0.32)
-  - Crashlytics
-  - Fabric
-  - FBSDKCoreKit
-  - FBSDKLoginKit
-  - FBSDKShareKit
-  - Firebase/Core
-  - GoogleConversionTracking
-  - GoogleTagManager
-  - iCarousel
-  - KeychainSwift
+  - Crashlytics (= 3.14.0)
+  - Fabric (~> 1.10)
+  - FBSDKCoreKit (~> 7)
+  - FBSDKLoginKit (~> 7)
+  - FBSDKShareKit (~> 7)
+  - Firebase/Core (~> 6)
+  - GoogleConversionTracking (~> 3)
+  - GoogleTagManager (~> 7)
+  - iCarousel (~> 1)
+  - KeychainSwift (~> 19)
   - MBProgressHUD (~> 1.1.0)
   - MMWormhole (~> 2.0.0)
-  - Netmera
+  - Netmera (~> 3)
   - ReachabilitySwift
   - SDWebImage (~> 4)
   - SimpleExif (from `https://github.com/bonyadmitr/SimpleExif.git`)
   - SQLite.swift (= 0.11.4)
-  - SwiftyDropbox
-  - SwiftyGif
+  - SwiftyDropbox (~> 5)
+  - SwiftyGif (~> 5)
   - SwiftyJSON (~> 3)
-  - TTGSnackbar
-  - Typist
-  - UIImage-Categories
-  - XCGLogger
-  - XYPieChart
-  - YYImage
+  - TTGSnackbar (~> 1)
+  - Typist (~> 1)
+  - UIImage-Categories (~> 1)
+  - XCGLogger (~> 7)
+  - XYPieChart (~> 0.2)
+  - YYImage (~> 1)
 
 SPEC REPOS:
   trunk:
@@ -262,6 +262,6 @@ SPEC CHECKSUMS:
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 122565b292a7bb738f298f33b405bae73cef0eca
+PODFILE CHECKSUM: f799487b25f97eb1fbdbbbc3f6728d61845ae89b
 
 COCOAPODS: 1.9.3
