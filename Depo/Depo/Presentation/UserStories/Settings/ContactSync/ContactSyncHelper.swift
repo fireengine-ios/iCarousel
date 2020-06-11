@@ -57,7 +57,7 @@ final class ContactSyncHelper {
     
     //MARK: - Public
     
-    func prepare() {
+    func prepare() -> Bool {
         //TODO: check logic, maybe just cancel and call .getBackUpStatus
         guard !ContactSyncSDK.isRunning() else {
             if AnalyzeStatus.shared().analyzeStep == AnalyzeStep.ANALYZE_STEP_INITAL {
@@ -65,10 +65,11 @@ final class ContactSyncHelper {
             } else if AnalyzeStatus.shared().analyzeStep != AnalyzeStep.ANALYZE_STEP_PROCESS_DUPLICATES {
                 proccessOperation(.getBackUpStatus)
             }
-            return
+            return false
         }
         
         proccessOperation(.getBackUpStatus)
+        return true
     }
     
     func backup(onStart: @escaping VoidHandler) {

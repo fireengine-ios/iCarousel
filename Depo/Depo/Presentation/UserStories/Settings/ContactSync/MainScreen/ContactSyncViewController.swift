@@ -106,8 +106,9 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     }
     
     private func updateBackupStatus() {
-        showSpinner()
-        contactSyncHelper.prepare()
+        if contactSyncHelper.prepare() {
+            showSpinner()
+        }
     }
     
     private func showRelatedView() {
