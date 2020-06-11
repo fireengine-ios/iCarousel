@@ -37,7 +37,7 @@ final class AutoSyncInteractor: AutoSyncInteractorInput {
     }
     
     func trackScreen(fromSettings: Bool) {
-        AnalyticsService.sendNetmeraEvent(event: fromSettings ? NetmeraEvents.Screens.FirstAutoSyncScreen() : NetmeraEvents.Screens.AutoSyncScreen())
+        AnalyticsService.sendNetmeraEvent(event: fromSettings ? NetmeraEvents.Screens.AutoSyncScreen() : NetmeraEvents.Screens.FirstAutoSyncScreen())
         analyticsManager.logScreen(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
         analyticsManager.trackDimentionsEveryClickGA(screen: fromSettings ? .autoSyncSettings : .autosyncSettingsFirst)
     }
