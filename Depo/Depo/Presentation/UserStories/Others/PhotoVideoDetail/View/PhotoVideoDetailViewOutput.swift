@@ -34,5 +34,5 @@ protocol PhotoVideoDetailViewOutput {
     func getFIRStatus()
 
     func configureFileInfo(_ view: FileInfoView)
-    func getPersonsForSelectedPhoto()
+    func getPersonsForSelectedPhoto(completion: VoidHandler?)
 }

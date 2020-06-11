@@ -44,19 +44,20 @@ class RouterVC: NSObject {
     }
     
     func getParentUUID() -> String {
-        if let tabBarController = tabBarController, let viewController = tabBarController.customNavigationControllers[tabBarController.selectedIndex].viewControllers.last as? BaseViewController
-        {
+        if let viewController = topNavigationController?.viewControllers.last as? BaseViewController {
             return viewController.parentUUID
-        } else if let viewController = navigationController?.viewControllers.last as? BaseViewController {
+        } else if let tabBarController = tabBarController,
+            let viewControllers = tabBarController.customNavigationControllers[safe: tabBarController.selectedIndex]?.viewControllers,
+            let viewController = viewControllers.last as? BaseViewController {
             return viewController.parentUUID
         }
-        
         return ""
     }
     
     func isRootViewControllerAlbumDetail() -> Bool {
-        if let tabBarController = tabBarController, let viewController = tabBarController.customNavigationControllers[tabBarController.selectedIndex].viewControllers.last as? BaseViewController
-        {
+        if let tabBarController = tabBarController,
+            let viewControllers = tabBarController.customNavigationControllers[safe: tabBarController.selectedIndex]?.viewControllers,
+            let viewController = viewControllers.last as? BaseViewController {
             return viewController is AlbumDetailViewController
         } else {
             return navigationController?.viewControllers.last is AlbumDetailViewController
@@ -111,6 +112,13 @@ class RouterVC: NSObject {
         return UIApplication.topController()
     }
     
+    var topNavigationController: UINavigationController? {
+        if let navigationController = defaultTopController?.navigationController {
+            return navigationController
+        }
+        return navigationController
+    }
+    
     func createRootNavigationController(controller: UIViewController) -> UINavigationController {
         
         let navController = NavigationController(rootViewController: controller)
@@ -133,10 +141,10 @@ class RouterVC: NSObject {
 //        window.makeKeyAndVisible()
     }
     
-    func pushViewControllertoTableViewNavBar(viewController: UIViewController) {
+    func pushViewControllertoTableViewNavBar(viewController: UIViewController, animated: Bool = true) {
         if let tabBarVc = tabBarVC {
             
-            tabBarVc.pushViewController(viewController, animated: true)
+            tabBarVc.pushViewController(viewController, animated: animated)
             return
         }
     }
@@ -154,7 +162,12 @@ class RouterVC: NSObject {
             NotificationCenter.default.post(name: notificationName, object: nil)
         }
         
-        navigationController?.pushViewController(viewController, animated: animated)
+        if let navController = topNavigationController {
+            navController.pushViewController(viewController, animated: animated)
+        } else {
+            pushViewControllertoTableViewNavBar(viewController: viewController, animated: animated)
+        }
+    
         viewController.navigationController?.isNavigationBarHidden = false
         
         if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
@@ -312,7 +325,7 @@ class RouterVC: NSObject {
     }
     
     func getViewControllerForPresent() -> UIViewController? {
-        if let nController = navigationController?.presentedViewController as? UINavigationController,
+        if let nController = topNavigationController?.presentedViewController as? UINavigationController,
             let viewController = nController.viewControllers.first as? PhotoVideoDetailViewController {
             return viewController
         }

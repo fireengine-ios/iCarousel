@@ -51,6 +51,10 @@ final class PeopleSliderDataSource: NSObject {
         collectionView?.reloadData()
     }
     
+    func deleteItem(at index: Int) {
+        items.remove(at: index)
+    }
+    
     func reset() {
         items.removeAll()
         collectionView?.reloadData()

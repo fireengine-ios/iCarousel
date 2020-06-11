@@ -82,6 +82,7 @@ enum SnackbarType {
              .move,
              .removeAlbum,
              .removeFromAlbum,
+             .removeFromFaceImageAlbum,
              .removeFromFavorites,
              .restore,
              .unhide:

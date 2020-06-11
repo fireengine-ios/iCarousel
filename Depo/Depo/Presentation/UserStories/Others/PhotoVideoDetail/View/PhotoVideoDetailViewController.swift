@@ -23,7 +23,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @IBOutlet private weak var swipeUpContainerView: UIView!
     // Bottom detail view
     
-    private var bottomDetailViewManager: BottomDetailViewAnimationManagerProtocol?
+    private(set) var bottomDetailViewManager: BottomDetailViewAnimationManagerProtocol?
 
     var bottomDetailView: FileInfoView?
     private var passThroughView: PassThroughView?
@@ -252,8 +252,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     private func updateFileInfo() {
         guard let selectedItem = selectedItem else { return }
-        bottomDetailView?.setObject(selectedItem)
-        output.getPersonsForSelectedPhoto()
+        bottomDetailView?.setObject(selectedItem) {
+            self.output.getPersonsForSelectedPhoto(completion: nil)
+        }
     }
     
     func onShowSelectedItem(at index: Int, from items: [Item]) {
