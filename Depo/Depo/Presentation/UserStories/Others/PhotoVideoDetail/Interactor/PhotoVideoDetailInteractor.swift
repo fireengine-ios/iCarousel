@@ -233,17 +233,13 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         peopleService.getPeopleForMedia(with: uuid, success: { [weak self] peopleThumbnails in
             DispatchQueue.main.async {
                 self?.output.updatePeople(items: peopleThumbnails)
-                if let completion = completion {
-                    completion()
-                }
+                    completion?()
             }
         }) { [weak self] (errorResponse) in
             DispatchQueue.main.async {
                 self?.output.failedUpdate(error: errorResponse)
                 self?.output.updatePeople(items: [])
-                if let completion = completion {
-                    completion()
-                }
+                    completion?()
             }
         }
     }

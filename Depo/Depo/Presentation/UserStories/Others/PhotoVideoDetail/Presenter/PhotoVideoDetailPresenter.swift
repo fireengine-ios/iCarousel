@@ -304,8 +304,9 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             self?.isFaceImageAllowed = settings.isFaceImageAllowed == true
             self?.view.setHiddenPeoplePlaceholder(isHidden: self?.isFaceImageAllowed == true)
             if settings.isFaceImageAllowed == true {
-                self?.interactor.getAuthority()
-                self?.getPersonsForSelectedPhoto()
+                self?.getPersonsForSelectedPhoto() {
+                    self?.interactor.getAuthority()
+                }
             } else {
                 self?.view.setHiddenPremiumStackView(isHidden: true)
             }
@@ -356,8 +357,9 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
                 )
                 self?.isFaceImageAllowed = true
                 self?.view.setHiddenPeoplePlaceholder(isHidden: true)
-                self?.interactor.getAuthority()
-                self?.getPersonsForSelectedPhoto()
+                self?.getPersonsForSelectedPhoto() {
+                    self?.interactor.getAuthority()
+                }
             }
         }
     }
