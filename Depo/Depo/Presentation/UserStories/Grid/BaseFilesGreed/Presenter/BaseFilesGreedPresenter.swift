@@ -539,12 +539,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         } else {
             debugLog("BaseFilesGreedPresenter onChangeSelectedItemsCount selectedItemsCount != 0")
 
-            bottomBarPresenter?.show(animated: true, onView: nil)
+            showBottomBar(animated: true, onView: nil)
         }
-        
         
         view.setThreeDotsMenu(active: canShow3DotsButton())
         self.view.selectedItemsCountChange(with: selectedItemsCount)
+    }
+    
+    func showBottomBar(animated: Bool, onView: UIView?) {
+        bottomBarPresenter?.show(animated: true, onView: onView)
     }
     
     func setupNewBottomBarConfig() {

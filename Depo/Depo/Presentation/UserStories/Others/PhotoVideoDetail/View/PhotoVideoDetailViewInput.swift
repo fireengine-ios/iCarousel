@@ -10,6 +10,8 @@ protocol PhotoVideoDetailViewInput: class, ActivityIndicator, ErrorPresenter {
     
     var status: ItemStatus { get set }
     
+    var bottomDetailViewManager: BottomDetailViewAnimationManagerProtocol? { get }
+    
     func setupInitialState()
     
     func onShowSelectedItem(at index: Int, from items: [Item])

@@ -36,6 +36,7 @@ protocol BottomDetailViewAnimationManagerDelegate {
 }
 
 protocol BottomDetailViewAnimationManagerProtocol {
+    var managedView: FileInfoView { get }
     func closeDetailView()
     func getCurrenState() -> CardState
     func showDetailFromThreeDots()
@@ -43,7 +44,7 @@ protocol BottomDetailViewAnimationManagerProtocol {
 
 final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerProtocol {
     
-    private let managedView: FileInfoView
+    private(set) var managedView: FileInfoView
     private let collectionView: UICollectionView
     private let passThrowView: PassThroughView
     private let view: UIView

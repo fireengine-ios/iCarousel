@@ -23,7 +23,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @IBOutlet private weak var swipeUpContainerView: UIView!
     // Bottom detail view
     
-    private var bottomDetailViewManager: BottomDetailViewAnimationManagerProtocol?
+    private(set) var bottomDetailViewManager: BottomDetailViewAnimationManagerProtocol?
 
     var bottomDetailView: FileInfoView?
     private var passThroughView: PassThroughView?

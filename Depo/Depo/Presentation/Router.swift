@@ -44,19 +44,20 @@ class RouterVC: NSObject {
     }
     
     func getParentUUID() -> String {
-        if let tabBarController = tabBarController, let viewController = tabBarController.customNavigationControllers[tabBarController.selectedIndex].viewControllers.last as? BaseViewController
-        {
+        if let viewController = topNavigationController?.viewControllers.last as? BaseViewController {
             return viewController.parentUUID
-        } else if let viewController = navigationController?.viewControllers.last as? BaseViewController {
+        } else if let tabBarController = tabBarController,
+            let viewControllers = tabBarController.customNavigationControllers[safe: tabBarController.selectedIndex]?.viewControllers,
+            let viewController = viewControllers.last as? BaseViewController {
             return viewController.parentUUID
         }
-        
         return ""
     }
     
     func isRootViewControllerAlbumDetail() -> Bool {
-        if let tabBarController = tabBarController, let viewController = tabBarController.customNavigationControllers[tabBarController.selectedIndex].viewControllers.last as? BaseViewController
-        {
+        if let tabBarController = tabBarController,
+            let viewControllers = tabBarController.customNavigationControllers[safe: tabBarController.selectedIndex]?.viewControllers,
+            let viewController = viewControllers.last as? BaseViewController {
             return viewController is AlbumDetailViewController
         } else {
             return navigationController?.viewControllers.last is AlbumDetailViewController

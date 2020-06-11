@@ -14,6 +14,8 @@ protocol FaceImagePhotosViewControllerDelegate {
 
 final class FaceImagePhotosViewController: BaseFilesGreedChildrenViewController {
     
+    @IBOutlet private(set) weak var contentView: UIView!
+    
     private let albumsSliderHeight: CGFloat = 140
     private let headerImageHeight: CGFloat = 190
     
