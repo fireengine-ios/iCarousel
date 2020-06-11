@@ -229,15 +229,17 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         }
     }
     
-    func getPersonsOnPhoto(uuid: String) {
+    func getPersonsOnPhoto(uuid: String, completion: VoidHandler? = nil) {
         peopleService.getPeopleForMedia(with: uuid, success: { [weak self] peopleThumbnails in
             DispatchQueue.main.async {
                 self?.output.updatePeople(items: peopleThumbnails)
+                    completion?()
             }
         }) { [weak self] (errorResponse) in
             DispatchQueue.main.async {
                 self?.output.failedUpdate(error: errorResponse)
                 self?.output.updatePeople(items: [])
+                    completion?()
             }
         }
     }

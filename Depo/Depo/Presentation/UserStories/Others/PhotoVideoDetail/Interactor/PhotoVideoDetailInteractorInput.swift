@@ -35,7 +35,7 @@ protocol PhotoVideoDetailInteractorInput: class {
     
     func onValidateName(newName: String)
     
-    func getPersonsOnPhoto(uuid: String)
+    func getPersonsOnPhoto(uuid: String, completion: VoidHandler?)
     
     func getPeopleAlbum(with item: PeopleItem, id: Int64)
 

@@ -18,6 +18,6 @@ protocol PhotoVideoDetailRouterInput {
     
     func goToPremium()
     
-    func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem)
+    func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem, moduleOutput: FaceImageItemsModuleOutput?)
     
 }

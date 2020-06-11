@@ -194,6 +194,7 @@ final class FileInfoView: UIView, FromNib {
     private var fileExtension: String?
     private var isEditable: Bool?
     private let formatter = ByteCountFormatter()
+    private var fileType: FileType = .application(.unknown)
     private lazy var dataSource = PeopleSliderDataSource(collectionView: peopleCollectionView, delegate: self)
     
     // MARK: Life cycle
@@ -212,9 +213,10 @@ final class FileInfoView: UIView, FromNib {
     
     // MARK: Public Methods
     
-    func setObject(_ object: BaseDataSourceItem) {
+    func setObject(_ object: BaseDataSourceItem, completion: VoidHandler?) {
         resetUI()
         fileNameTextField.text = object.name
+        fileType = object.fileType
         
         if let obj = object as? WrapData {
             setWith(wrapData: obj)
@@ -230,6 +232,7 @@ final class FileInfoView: UIView, FromNib {
         }
         
         layoutIfNeeded()
+        completion?()
     }
     
     func show(name: String) {
@@ -267,6 +270,7 @@ final class FileInfoView: UIView, FromNib {
     }
     
     func setHiddenPremiumStackView(isHidden: Bool) {
+        let isHidden = fileType == .image ? isHidden : true
         premiumStackView.isHidden = isHidden
         setHiddenPeopleLabel()
     }
@@ -480,5 +484,23 @@ extension FileInfoView: UIGestureRecognizerDelegate {
             return subview == peopleCollectionView
         }
         return true
+    }
+}
+
+extension FileInfoView: FaceImageItemsModuleOutput {
+    
+    func didChangeName(item: WrapData) {}
+    
+    func didReloadData() {}
+    
+    func delete(item: Item) {
+        guard let peopleItem = item as? PeopleItem,
+            let index = dataSource.items.firstIndex(where: { $0.personInfoId == peopleItem.id })
+        else {
+            return
+        }
+            
+        dataSource.deleteItem(at: index)
+        reloadCollection(with: dataSource.items)
     }
 }

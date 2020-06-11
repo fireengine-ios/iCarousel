@@ -478,6 +478,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             let successHandler: PhotosAlbumOperation = { [weak self] in
                 DispatchQueue.main.async {
                     ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: album)
+                    self?.showSnackbar(elementType: .removeFromFaceImageAlbum, relatedItems: [])
                     self?.output?.operationFinished(type: .removeFromFaceImageAlbum)
                 }
             }
