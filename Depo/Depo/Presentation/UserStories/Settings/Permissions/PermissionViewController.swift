@@ -195,7 +195,7 @@ extension PermissionViewController: PermissionViewTextViewDelegate {
                 self.openMobilePaymentAgreement()
             }
         default:
-            UIApplication.shared.openSafely(url)
+            return false
         }
         return true
     }

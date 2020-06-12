@@ -296,7 +296,7 @@ extension TermsAndServicesViewController: TermsCheckboxTextViewDelegate {
                 self.output.openGlobalDataPermissionDetails()
             }
         default:
-            UIApplication.shared.openSafely(url)
+            return false
         }
         return true
     }
@@ -304,13 +304,11 @@ extension TermsAndServicesViewController: TermsCheckboxTextViewDelegate {
 
 // MARK: - UITextViewDelegate
 extension TermsAndServicesViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-
-        return tappedOnURL(url: URL)
-    }
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-
-        return tappedOnURL(url: URL)
+        if tappedOnURL(url: URL) {
+            return false
+        }
+        return defaultHandle(url: URL, interaction: interaction)
     }
 }

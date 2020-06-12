@@ -257,14 +257,9 @@ extension PackagesViewController: UITextViewDelegate {
             DispatchQueue.toMain {
                 self.output.openTermsOfUseScreen()
             }
-            return true
+            return false
         }
-        UIApplication.shared.open(URL, options: [:], completionHandler: nil)
-        return true
-    }
-    
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        return UIApplication.shared.openURL(URL)
+        return defaultHandle(url: URL, interaction: interaction)
     }
 }
 
