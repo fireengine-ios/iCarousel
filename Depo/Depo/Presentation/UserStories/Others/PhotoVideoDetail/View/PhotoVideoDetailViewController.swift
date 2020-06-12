@@ -179,6 +179,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         output.viewWillDisappear()
         passThroughView?.disableGestures()
         backButtonForNavigationItem(title: TextConstants.backTitle)
+        passThroughView?.removeFromSuperview()
     }
     
     override func viewDidLayoutSubviews() {
@@ -359,11 +360,10 @@ extension PhotoVideoDetailViewController: BottomDetailViewAnimationManagerDelega
     }
     
     private func addTrackSwipeUpView() {
-        guard let topViewController = RouterVC().getViewControllerForPresent(), passThroughView == nil else {
-            return
-        }
-        let view = PassThroughView(frame: topViewController.view.bounds)
-        topViewController.view.addSubview(view)
+        
+        let window = UIApplication.shared.keyWindow
+        let view = PassThroughView(frame: UIScreen.main.bounds)
+        window?.addSubview(view)
         passThroughView = view
     }
     

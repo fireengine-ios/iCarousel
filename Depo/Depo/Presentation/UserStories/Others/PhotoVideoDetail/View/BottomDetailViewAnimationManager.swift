@@ -86,7 +86,7 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
         collapseViewSetup()
     }
     
-    private lazy var imageMaxY = {
+    private lazy var imageMaxY: CGFloat = {
         return UIScreen.main.bounds.height - getCellMaxY()
     }()
     
@@ -115,7 +115,6 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
     
     private func getCellMaxY() -> CGFloat {
         guard let cell = collectionView.cellForItem(at: IndexPath(row: selectedIndex, section: 0)) as? PhotoVideoDetailCell else {
-            assertionFailure()
             return .zero
         }
         return cell.frame.maxY
@@ -150,12 +149,24 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
             managedView.frame.origin.y = collectionView.frame.maxY - imageMaxY
             detailViewIsHidden = needHideDetailView()
         case .ended:
-            
+            dissableTouchUntillFinish(isDisabled: true)
             UIView.animate(withDuration: 0.3, animations: {
                 self.positionForView(velocityY: recognizer.velocity(in: self.managedView).y)
-            }, completion: nil)
+            }, completion: { _ in
+                self.dissableTouchUntillFinish(isDisabled: false)
+            })
         default:
             break
+        }
+    }
+    
+    private func dissableTouchUntillFinish(isDisabled: Bool) {
+        if isDisabled {
+            passThrowView.isUserInteractionEnabled = false
+            passThrowView.disableGestures()
+        } else {
+            passThrowView.isUserInteractionEnabled = true
+            passThrowView.enableGestures()
         }
     }
     
@@ -223,14 +234,15 @@ extension BottomDetailViewAnimationManager {
     }
     
     private func setExpandedState() {
+        view.layoutIfNeeded()
+        isFullScreen = true
+        collapseView.isHidden = false
+        setupDetailViewAlpha(isHidden: false)
         let yPositionForBottomView = view.frame.height - cardHeight
         let collectionViewCellMaxY = getCellMaxY()
         viewState = .expanded
         managedView.frame.origin.y = yPositionForBottomView
         collectionView.frame.origin.y = yPositionForBottomView - collectionViewCellMaxY + imageMaxY
-        collapseView.isHidden = false
-        setupDetailViewAlpha(isHidden: false)
-        isFullScreen = true
     }
     
     private func setFullState() {
