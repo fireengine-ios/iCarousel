@@ -62,6 +62,7 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
         debugLog("AlbumsPresenter sortedPushed")
         
         sortedRule = rule
+        dataSource.currentSortType = rule
         interactor.getAllItems(sortBy: rule)
         view.changeSortingRepresentation(sortType: rule)
     }
@@ -80,32 +81,17 @@ class AlbumsPresenter: BaseFilesGreedPresenter {
     }
     
     override func sortedPushedTopBar(with rule: MoreActionsConfig.SortRullesType) {
-        
         var sortRule: SortedRules
+
         switch rule {
         case .AlphaBetricAZ:
-            sortRule = .albumlettersAZ
-        case .AlphaBetricZA:
             sortRule = .albumlettersZA
-        case .LettersAZ:
-            sortRule = .lettersAZ
-        case .LettersZA:
-            sortRule = .lettersZA
-        case .TimeNewOld:
-            sortRule = .timeUp
-        case .TimeOldNew:
-            sortRule = .timeDown
-        case .Largest:
-            sortRule = .sizeAZ
-        case .Smallest:
-            sortRule = .sizeZA
-        case .metaDataTimeNewOld:
-            sortRule = .metaDataTimeUp
-        case .metaDataTimeOldNew:
-            sortRule = .metaDataTimeDown
+        case .AlphaBetricZA:
+            sortRule = .albumlettersAZ
         default:
-            sortRule = .timeUp
+            sortRule = rule.sortedRulesConveted
         }
+
         sortedPushed(with: sortRule)
     }
     
