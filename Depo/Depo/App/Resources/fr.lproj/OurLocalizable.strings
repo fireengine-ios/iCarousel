@@ -1777,7 +1777,7 @@ Please check I have understood the intended command here*/
 "offer_store_google_store" = "Google Play Store";
 "remove_albums_success_message" = "Album(s) supprimé(s)";
 "hide_album_action_sheet" = "Masquer l'album";
-"sign_up_password_rules" = "Le mot de passe doit comprendre au moins 6 et au plus 16 caractères, doit contenir au moins un chiffre et une lettre majuscule, des lettres non consécutives.";
+"sign_up_password_rules" = "Le mot de passe doit être compris entre 6 et 16 caractères, contenir au moins 1 chiffre et 1 lettre capitale et ne pas inclure des lettres consécutives.";
 "documents_album_card_title" = "Voulez-vous masquer ces dossiers?";
 "documents_album_card_description" = "%d éléments, y compris les captures d'écran et les documents, sont regroupés dans l'Album de Documents. Vous pouvez modifier votre galerie en masquant cet album. Vous pouvez accéder à ces photos à tout moment à partir de l'album masqué.";
 "documents_album_card_hide_button" = "Masquer l'album de documents";

@@ -1513,7 +1513,7 @@
 "offer_store_google_store" = "Google Play Store";
 "remove_albums_success_message" = "álbum(s) eliminado";
 "hide_album_action_sheet" = "Ocultar el álbum";
-"sign_up_password_rules" = "Tu contraseña debe tener menos de 6 caracteres ni más de 16 caracteres, debe contener al menos un número y una letra mayúscula, y debe contener letras no consecutivas.";
+"sign_up_password_rules" = "La contraseña debe tener entre 6 a 16 caracteres, además debe incluir al menos un número, una letra mayúscula y no debe contener letras idénticas consecutivas.";
 "documents_album_card_title" = "¿Desearías ocultar estos archivos?";
 "documents_album_card_description" = "%d elementos incluidas las imágenes de pantalla y documentos, se ha agrupado en el Álbum de Documentos. Puedes ordenar tu galería al ocultar este álbum. Puedes acceder en cualquier momento que desee a estas fotos a través del Álbum Oculto.";
 "documents_album_card_hide_button" = "Ocultar el Álbum de Documento";
