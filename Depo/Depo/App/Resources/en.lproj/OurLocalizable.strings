@@ -3,8 +3,8 @@
 "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Location services are disabled in your device settings. To use the background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu.";
 "This file will be removed only from your album. You can access this file from Photos tab" = "This file will be removed only from your album. You can access this file from the Photos tab.";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Deleting this album will not remove the files from lifebox. You can access these files from the Photos tab. Are you sure you want to delete?";
-"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "The selected album will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space.";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "The selected files will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space.";
+"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "The selected album will be removed to trash bin. You can restore them in 90 days. Please empty your trash bin in case of need for freeing up space.";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "The selected files will be removed to trash bin. You can restore them in 90 days. Please empty your trash bin in case of need for freeing up space.";
 "Purchase" = "Purchase";
 "Packages" = "Packages";
 "Verification code is blocked.\nPlease request a new code" = "Verification code is blocked. Please request a new code.";
@@ -981,7 +981,7 @@
 "re_enter_your_password" = "Re-enter your password";
 "signup_support_info" = "If you are having difficulty signing up, contact us for support.";
 "missing_information" = "Missing Information";
-"please_enter_your_missing_account_information" = "Please enter your missing account information:";
+"please_enter_your_missing_account_information" = "Adding your email address to lifebox is the most reliable way to keep your account for a lifetime. Please add your email address to continue reaching your lifebox memories even if your phone number or carrier changes.";
 "login_email_or_phone_placeholder" = "Enter your e-mail or phone number";
 "login_password_placeholder" = "Enter your password";
 "login_email_or_phone_error" = "You have to fill in your e-mail or phone";
@@ -1316,7 +1316,7 @@
 "profile_detail_address_placeholder" = "Please enter your address information";
 "profile_detail_error_contact_call_center" = "Contact call-center to change your number";
 "temporary_error" = "Temporary error occurred, please try again";
-"move_to_trash_albums_message" = "The selected album(s) will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space.";
+"move_to_trash_albums_message" = "The selected album(s) will be removed to trash bin. You can restore them in 90 days. Please empty your trash bin in case of need for freeing up space.";
 "move_to_trash_albums_success_message" = "Album(s) sent to trash bin successfully.";
 "confirmation_popup_title_hide" = "Hide";
 "confirmation_popup_message_hide" = "Selected item(s) will only be available in \"Hidden\" Album. You can restore them any time. Are you sure to continue?";
@@ -1376,7 +1376,7 @@
 "carousel_view_second_page_title" = "Hide Unwanted People!";
 "carousel_view_second_page_text" = "Do you have some unwanted people or memories? All you need to do is select that person and click the “Hide” button. All of the memories will be moved to the “Hidden” album and you will no longer see these photos in the Photos tab or on homepage cards. You may restore them at any time.";
 "carousel_view_third_page_title" = "Delete Unwanted People!";
-"carousel_view_third_page_text" = "Some people or memories are not worth saving. Free up your space by selecting the person’s album and clicking “Delete”. If you change your mind, you can restore them from trash bin within 30 days of deleting. You can also use the “Hide” button if you are not ready to delete.";
+"carousel_view_third_page_text" = "Some people or memories are not worth saving. Free up your space by selecting the person’s album and clicking “Delete”. If you change your mind, you can restore them from trash bin within 90 days of deleting. You can also use the “Hide” button if you are not ready to delete.";
 "hidden_bin_album_slider_title" = "My Hidden Albums";
 "hidden_bin_album_slider_empty" = "There is no hidden album yet.";
 "hidden_bin_empty" = "There is no hidden item yet.";
@@ -1393,19 +1393,19 @@
 "delete_confirmation_popup_title" = "Delete";
 
 /*Is this permanently delete or delete>move to trash bin action?*/
-"delete_confirmation_popup_text" = "The selected item(s) will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space.";
+"delete_confirmation_popup_text" = "The selected item(s) will be removed to trash bin. You can restore them in 90 days. Please empty your trash bin in case of need for freeing up space.";
 "restore_confirmation_popup_title" = "Restore";
 "restore_confirmation_popup_text" = "Selected item(s) will be restored. Are you sure to continue?";
 "delete_from_hidden_bin_popup_success_title" = "Delete";
 
 /*are we sure it's permanently delete? or is it just delete for moving items to trash bin?*/
-"delete_from_hidden_bin_popup_success_text" = "The selected files will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space.";
+"delete_from_hidden_bin_popup_success_text" = "The selected files will be removed to trash bin. You can restore them in 90 days. Please empty your trash bin in case of need for freeing up space.";
 "unhide_popup_success_title" = "Item(s) unhidden successfully.";
-"delete_popup_text" = "The selected file(s) will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space.";
+"delete_popup_text" = "The selected file(s) will be removed to trash bin. You can restore them in 90 days. Please empty your trash bin in case of need for freeing up space.";
 "PackagesPolicyTextBillo" = "Subsriptions are renewed on a monthly basis\nPayment will be charged to iTunes Account at confirmation of purchase \nSubscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period \nAccount will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. \nSubscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase \nAny unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable \nPrivacy Policy: https://billostorage.com/policy\nTerms of Use:";
 "unhide_items_popup_text" = "Selected item(s) will be unhidden and moved back to previous folders.";
 "unhide_albums_popup_text" = "Selected album(s) will be unhidden and moved back to previous folders.";
-"move_to_trash_hidden_albums_confirmation_popup_text" = "The selected album(s) will be removed to trash bin. You can restore them in 30 days. Please empty your trash bin in case of need for freeing up space.";
+"move_to_trash_hidden_albums_confirmation_popup_text" = "The selected album(s) will be removed to trash bin. You can restore them in 90 days. Please empty your trash bin in case of need for freeing up space.";
 "delete_items_confirmation_popup_text" = "Selected item(s) will be permanently deleted and you will have no access to them. Are you sure to continue?";
 "delete_albums_confirmation_popup_text" = "Selected album(s) will be permanently deleted and you will have no access to them. Are you sure to continue?";
 "delete_folders_confirmation_popup_text" = "Selected folder(s) will be permanently deleted and you will have no access to them. Are you sure to continue?";
@@ -1536,8 +1536,6 @@
 "files_moved" = "File(s) moved";
 "success_remove_passcode" = "Passcode removed";
 "added_to_favorites_from_lifebox" = "Added to favorites";
-"edit_security_question_success" = "Security question edited";
-"set_security_question_success" = "Security question set";
 "edit_security_question_success" = "Security question edited.";
 "set_security_question_success" = "Security question set.";
 "import_from_instagram_started" = "Import from Instagram started";
@@ -1546,8 +1544,6 @@
 "create_story_selection_limit" = "Please choose maximum %d photos";
 "etk_html" = "<p><b> COMMERCIAL ELECTRONIC MESSAGE AND DATA CONSENT</b></p>\n\n<p>I hereby consent to allow Lifecell Bulut Çözümleri A.Ş., Turkcell İletişim Hizmetleri A.Ş. and <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz\">Group Companies</a> to process my personal data and share them with the parties listed in the Permission Policy and send me commercial electronic messages in line with the “Permission Policy” <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">available here</a> unless requested otherwise by me as per Law No. 6563 and other applicable regulations for the purposes of informing me on discounts, deals and special offers, which are in accordance with my needs and preferences regarding the products and services of these companies. I acknowledge that I can revoke my consent for processing/sharing of my personal data or receiving commercial electronic mails and detailed information on the scope and revocation of such consent are available within the scope of the <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">\"Permission Policy\"</a>.   </p> \n";
 "free_up_space_alert_title" = "Free Up Space";
-"free_up_space_no_duplicates" = "You have no duplicate photos/videos";
-"free_up_space_in_progress" = "Your duplicate file list is not ready yet, please try again later";
 "free_up_space_no_duplicates" = "You have no duplicate photos/videos.";
 "free_up_space_in_progress" = "Your duplicate file list is not ready yet, please try again later.";
 "all_people_become_premium_text" = "To see all people, become a Premium member!";
