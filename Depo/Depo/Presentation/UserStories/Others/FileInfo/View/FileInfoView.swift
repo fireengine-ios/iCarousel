@@ -195,6 +195,7 @@ final class FileInfoView: UIView, FromNib {
     private var isEditable: Bool?
     private let formatter = ByteCountFormatter()
     private var fileType: FileType = .application(.unknown)
+    private var status: ItemStatus = .unknown
     private lazy var dataSource = PeopleSliderDataSource(collectionView: peopleCollectionView, delegate: self)
     
     // MARK: Life cycle
@@ -219,6 +220,7 @@ final class FileInfoView: UIView, FromNib {
         fileType = object.fileType
         
         if let obj = object as? WrapData {
+            status = obj.status
             setWith(wrapData: obj)
         }
         
@@ -257,7 +259,12 @@ final class FileInfoView: UIView, FromNib {
     
     func reloadCollection(with items: [PeopleOnPhotoItemResponse]) {
         let isHidden = peopleCollectionView.isHidden
-        peopleCollectionView.isHidden = items.isEmpty
+        switch status {
+        case .deleted, .trashed, .hidden:
+            peopleCollectionView.isHidden = true
+        default:
+            peopleCollectionView.isHidden = items.isEmpty
+        }
         premiumTextLabel.text = items.isEmpty
             ? TextConstants.noPeopleBecomePremiumText
             : TextConstants.allPeopleBecomePremiumText
@@ -272,8 +279,14 @@ final class FileInfoView: UIView, FromNib {
     }
     
     func setHiddenPremiumStackView(isHidden: Bool) {
-        let isHidden = fileType == .image ? isHidden : true
-        premiumStackView.isHidden = isHidden
+        var isPremiumHidden: Bool
+        switch status {
+        case .deleted, .trashed, .hidden:
+            isPremiumHidden = true
+        default:
+            isPremiumHidden = fileType == .image ? isHidden : true
+        }
+        premiumStackView.isHidden = isPremiumHidden
         setHiddenPeopleLabel()
     }
     
