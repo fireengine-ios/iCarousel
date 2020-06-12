@@ -83,7 +83,7 @@ final class ContuctBackupHistoryDataManager: NSObject, ContuctBackupHistoryDataM
             return (title: TextConstants.contactBackupHistoryCellTitle, description: "")
         }
         
-        let title = "\(TextConstants.contactBackupHistoryCellTitle)_\(String(describing: date.getDateInFormat(format: "dd-MM-yyyy_HH-mm-ss")))"
+        let title = TextConstants.contactBackupHistoryCellContactList
         let description = "\(item.totalNumberOfContacts) \(TextConstants.contactBackupHistoryCellTitle) |  \(String(describing: date.getDateInFormat(format: "dd MMM yyyy")))"
         return (title: title, description: description)
     }
