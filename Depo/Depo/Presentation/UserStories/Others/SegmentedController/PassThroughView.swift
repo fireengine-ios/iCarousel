@@ -59,11 +59,12 @@ final class PassThroughView: UIView {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
     
         let hitView = super.hitTest(point, with: event)
-        
-        if let parentViewController = hitView?.findParenViewController() as? PhotoVideoDetailViewController,
+
+        if let parentViewController = RouterVC().navigationController?.topViewController as? PhotoVideoDetailViewController,
             let bottomDetailView = parentViewController.bottomDetailView {
             if parentViewController.getBottomDetailViewState() != .collapsed {
-                if parentViewController.collapseDetailView.frame.contains(point) || bottomDetailView.frame.contains(point) {
+                if parentViewController.collapseDetailView.frame.contains(point) || bottomDetailView.frame.contains(point)
+                    {
                     return nil
                 } else {
                     return hitView
@@ -78,12 +79,6 @@ final class PassThroughView: UIView {
         return hitView
     }
     
-    @objc func panGestureRecognizerHandler(_ gestureRecognizer: UIPanGestureRecognizer) {
-        if !UIDevice.current.orientation.isLandscape {
-               delegate?.handlePan(recognizer: gestureRecognizer)
-        }
-    }
-    
     func enableGestures() {
         swipeGestureRecognizerRight.isEnabled = true
         swipeGestureRecognizerLeft.isEnabled = true
@@ -96,6 +91,12 @@ final class PassThroughView: UIView {
         swipeGestureRecognizerLeft.isEnabled = false
         panGestureRecognizer.isEnabled = false
         tapGestureRecognizer.isEnabled = false
+    }
+    
+    @objc func panGestureRecognizerHandler(_ gestureRecognizer: UIPanGestureRecognizer) {
+        if !UIDevice.current.orientation.isLandscape {
+               delegate?.handlePan(recognizer: gestureRecognizer)
+        }
     }
     
     @objc private func swipeGestureRecognizerHandler(_ gestureRecognizer: UISwipeGestureRecognizer) {

@@ -256,12 +256,14 @@ final class FileInfoView: UIView, FromNib {
     }
     
     func reloadCollection(with items: [PeopleOnPhotoItemResponse]) {
+        let isHidden = peopleCollectionView.isHidden
         peopleCollectionView.isHidden = items.isEmpty
         premiumTextLabel.text = items.isEmpty
             ? TextConstants.noPeopleBecomePremiumText
             : TextConstants.allPeopleBecomePremiumText
         dataSource.reloadCollection(with: items)
         setHiddenPeopleLabel()
+        isHidden != items.isEmpty ? layoutIfNeeded() : ()
     }
     
     func setHiddenPeoplePlaceholder(isHidden: Bool) {
