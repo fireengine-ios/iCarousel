@@ -60,11 +60,9 @@ final class PassThroughView: UIView {
     
         let hitView = super.hitTest(point, with: event)
 
-        if let parentViewController = RouterVC().navigationController?.topViewController as? PhotoVideoDetailViewController,
-            let bottomDetailView = parentViewController.bottomDetailView {
+        if let parentViewController = getTopViewController(), let bottomDetailView = parentViewController.bottomDetailView {
             if parentViewController.getBottomDetailViewState() != .collapsed {
-                if parentViewController.collapseDetailView.frame.contains(point) || bottomDetailView.frame.contains(point)
-                    {
+                if parentViewController.collapseDetailView.frame.contains(point) || bottomDetailView.frame.contains(point) {
                     return nil
                 } else {
                     return hitView
@@ -75,10 +73,20 @@ final class PassThroughView: UIView {
         if hitView == self {
             return nil
         }
-        
+
         return hitView
     }
     
+    private func getTopViewController() -> PhotoVideoDetailViewController? {
+        let router = RouterVC()
+        if let topController = router.topNavigationController?.topViewController as? PhotoVideoDetailViewController{
+            return topController
+        }  else if let topController = router.navigationController?.topViewController as? PhotoVideoDetailViewController {
+            return topController
+        }
+        return nil
+    }
+        
     func enableGestures() {
         swipeGestureRecognizerRight.isEnabled = true
         swipeGestureRecognizerLeft.isEnabled = true
