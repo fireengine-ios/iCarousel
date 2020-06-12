@@ -37,15 +37,21 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
         if settings.isPeriodicContactsSyncOptionEnabled {
             switch settings.timeSetting.option {
             case .daily:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .on, type: .daily))
                 periodicBackUp = SYNCPeriodic.daily
             case .weekly:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .on, type: .weekly))
                 periodicBackUp = SYNCPeriodic.every7
             case .monthly:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .on, type: .monthly))
                 periodicBackUp = SYNCPeriodic.every30
             case .none:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .off, type: nil))
                 periodicBackUp = SYNCPeriodic.none
             }
-        } 
+        } else {
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .off, type: nil))
+        }
         
         contactsService.setPeriodicForContactsSync(periodic: periodicBackUp)
     }

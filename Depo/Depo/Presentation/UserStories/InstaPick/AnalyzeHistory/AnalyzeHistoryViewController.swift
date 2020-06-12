@@ -388,7 +388,8 @@ final class AnalyzeHistoryViewController: BaseViewController, NibInit {
                 DispatchQueue.main.async {
                     self.dataSource.deleteSelectedItems(completion: {
                         self.stopSelection()
-                        UIApplication.showSuccessAlert(message: TextConstants.popUpDeleteComplete)
+                        let message = String(format: TextConstants.analyzeHistoryDeleteSuccessFormat, ids.count)
+                        SnackbarManager.shared.show(type: .nonCritical, message: message)
                     })
                 }
             case .failed(let error):

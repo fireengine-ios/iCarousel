@@ -527,4 +527,50 @@ enum NetmeraEventValues {
         }
     }
     
+    enum PlusButtonAction {
+        case useCamera
+        case upload
+        case createStory
+        case newFolder
+        case createAlbum
+        case uploadFromLifebox
+        case importFromSpotify
+        
+        var text: String {
+            switch self {
+            case .useCamera:
+                return "Use Camera"
+            case .upload:
+                return "Upload"
+            case .createStory:
+                return "Create Story"
+            case .newFolder:
+                return "New Folder"
+            case .createAlbum:
+                return "Create Album"
+            case .uploadFromLifebox:
+                return "Upload from Lifebox"
+            case .importFromSpotify:
+                return "Import From Spotify"
+            }
+        }
+    }
+    
+    enum PeriodicContactSyncType {
+        case daily
+        case weekly
+        case monthly
+        
+        var text: String {
+            switch self {
+            case .daily:
+                return "Daily"
+            case .weekly:
+                return "Weekly"
+            case .monthly:
+                return "Monthly"
+            }
+        }
+    }
+    
 }

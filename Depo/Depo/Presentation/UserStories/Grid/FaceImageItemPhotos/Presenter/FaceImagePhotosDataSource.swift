@@ -17,9 +17,15 @@ final class FaceImagePhotosDataSource: BaseDataSourceForCollectionView {
     
     var album: AlbumItem?
     var item: Item?
+    var isRemoveFromAlbum = false
     
     private var firDelegate: FaceImagePhotosDataSourceDelegate? {
         delegate as? FaceImagePhotosDataSourceDelegate
+    }
+    
+    override func filesRomovedFromAlbum(items: [Item], albumUUID: String) {
+        isRemoveFromAlbum = true
+        super.filesRomovedFromAlbum(items: items, albumUUID: albumUUID)
     }
     
     override func didHideAlbums(_ albums: [AlbumItem]) {

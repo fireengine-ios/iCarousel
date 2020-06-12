@@ -25,7 +25,6 @@ extension ActivityTimelinePresenter: ActivityTimelineViewOutput {
     func viewIsReady() {
         interactor.trackScreen()
         startAsyncOperation()
-        updateForPullToRefresh()
     }
     func updateForPullToRefresh() {
         interactor.refreshTimelineActivities()

@@ -26,7 +26,7 @@ class SmartAlbumsManagerImpl: SmartAlbumsManager {
     
     private lazy var reloadQueue = DispatchQueue(label: DispatchQueueLabels.myStreamAlbums)
     private let dataStorage = SmartAlbumsDataStorage()
-    private let faceImageService = FaceImageService(transIdLogging: true)
+    private let faceImageService = FaceImageService()
     private let instaPickService: InstapickService = factory.resolve()
     
     var currentItems: [SliderItem] {
@@ -207,10 +207,6 @@ class SmartAlbumsManagerImpl: SmartAlbumsManager {
     private func getThumbnails(forType type: FaceImageType, group: DispatchGroup) {
         group.enter()
         faceImageService.getThumbnails(param: FaceImageThumbnailsParameters(withType: type), success: { [weak self] response in
-            debugLog("FaceImageService \(type.description) Thumbnails success")
-            
-            self?.faceImageService.debugLogTransIdIfNeeded(headers: (response as? ObjectRequestResponse)?.response?.allHeaderFields, method: "getThumbnails")
-            
             let item: SliderItem
             if let thumbnails = (response as? FaceImageThumbnailsResponse)?.list {
                 item = SliderItem(withThumbnails: thumbnails.map { URL(string: $0) }, type: type.myStreamType)
@@ -222,8 +218,6 @@ class SmartAlbumsManagerImpl: SmartAlbumsManager {
             group.leave()
             
         }, fail: { [weak self] error in
-            debugLog("FaceImageService \(type.description) Thumbnails fail")
-            self?.faceImageService.debugLogTransIdIfNeeded(errorResponse: error, method: "getThumbnails")
             self?.operationFailed()
             group.leave()
         })

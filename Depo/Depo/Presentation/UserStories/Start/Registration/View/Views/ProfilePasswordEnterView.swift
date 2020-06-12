@@ -26,6 +26,15 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
         return newValue
     }()
     
+    private let passwordRulesLabel: UILabel = {
+        let label = UILabel()
+        label.text = TextConstants.signUpPasswordRulesLabel
+        label.font = UIFont.TurkcellSaturaFont(size: 14)
+        label.textColor = ColorConstants.lightText
+        label.numberOfLines = 0
+        return label
+    }()
+    
     override func initialSetup() {
         super.initialSetup()
         
@@ -57,6 +66,16 @@ final class ProfilePasswordEnterView: ProfileTextEnterView {
         stackView.addArrangedSubview(topStackView)
         stackView.addArrangedSubview(subtitleLabel)
         stackView.addArrangedSubview(textField)
+    }
+    
+    func addPasswordRulesLabel() {
+        
+        guard let index = stackView.arrangedSubviews.firstIndex(of: textField) else {
+            assertionFailure()
+            return
+        }
+        
+        stackView.insertArrangedSubview(passwordRulesLabel, at: index)
     }
     
     @objc private func changeVisibilityState() {

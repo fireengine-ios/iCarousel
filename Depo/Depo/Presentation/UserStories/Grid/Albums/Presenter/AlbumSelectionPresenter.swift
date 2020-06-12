@@ -33,6 +33,7 @@ class AlbumSelectionPresenter: AlbumsPresenter {
     }
     
     func photoAddedToAlbum() {
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.snackbarMessageAddedToAlbum)
         if let view_ = view as? UIViewController {
             view_.navigationController?.popViewController(animated: true)
         }

@@ -14,8 +14,6 @@ protocol SettingsViewOutput {
     
     func onLogout()
     
-    func goToContactSync()
-    
     func goToConnectedAccounts()
 
     func goToAutoApload()

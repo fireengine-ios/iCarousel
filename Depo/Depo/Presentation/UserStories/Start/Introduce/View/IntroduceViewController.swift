@@ -14,10 +14,11 @@ class IntroduceViewController: ViewController, IntroduceViewInput, IntroduceData
     var output: IntroduceViewOutput!
     var dataSource = IntroduceDataSource()
     
-    @IBOutlet weak var startUsingLifeBoxButton: WhiteButtonWithRoundedCorner!
-    @IBOutlet weak var haveAccountButton: ButtonWithCorner!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var pageControll: UIPageControl!
+    @IBOutlet private weak var startUsingLifeBoxButton: RoundedInsetsButton!
+    @IBOutlet private weak var haveAccountButton: RoundedInsetsButton!
+    @IBOutlet private weak var haveAccountLabel: UILabel!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var pageControll: UIPageControl!
 
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -33,7 +34,24 @@ class IntroduceViewController: ViewController, IntroduceViewInput, IntroduceData
     func configurateView() {
         hidenNavigationBarStyle()
         startUsingLifeBoxButton.setTitle(TextConstants.itroViewGoToRegisterButtonText, for: .normal)
+        startUsingLifeBoxButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
+        startUsingLifeBoxButton.backgroundColor = ColorConstants.marineTwo
+        startUsingLifeBoxButton.setTitleColor(.white, for: .normal)
+        startUsingLifeBoxButton.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
+        startUsingLifeBoxButton.adjustsFontSizeToFitWidth()
+        
+        haveAccountLabel.text = TextConstants.alreadyHaveAccountTitle
+        haveAccountLabel.font = UIFont.TurkcellSaturaDemFont(size: 15)
+        haveAccountLabel.textColor = .white
+        
+        
         haveAccountButton.setTitle(TextConstants.introViewGoToLoginButtonText, for: .normal)
+        haveAccountButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
+        haveAccountButton.backgroundColor = .white
+        haveAccountButton.setTitleColor(ColorConstants.marineTwo, for: .normal)
+        haveAccountButton.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
+        haveAccountButton.adjustsFontSizeToFitWidth()
+        
         backButtonForNavigationItem(title: TextConstants.backTitle)
     }
 

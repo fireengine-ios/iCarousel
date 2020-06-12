@@ -28,4 +28,16 @@ extension CustomErrors: LocalizedError {
             #endif
         }
     }
+    
+    var localizedDescription: String {
+        guard let errorDescription = errorDescription else {
+            return TextConstants.temporaryErrorOccurredTryAgainLater
+        }
+
+        if errorDescription.contains("\(errorCode)") == true {
+            return TextConstants.temporaryErrorOccurredTryAgainLater
+        } else {
+            return errorDescription
+        }
+    }
 }

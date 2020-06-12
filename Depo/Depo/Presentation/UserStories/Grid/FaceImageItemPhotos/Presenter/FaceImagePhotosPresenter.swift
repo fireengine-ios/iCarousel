@@ -110,6 +110,9 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     }
     
     override func updateThreeDotsButton() {
+        guard view != nil else {
+            return
+        }
         view.setThreeDotsMenu(active: true)
     }
     
@@ -124,10 +127,20 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     override func didDelete(items: [BaseDataSourceItem]) {
         if dataSource.allObjectIsEmpty() {
             faceImageItemsModuleOutput?.delete(item: item)
-            setupBackHandler(toOriginal: true)
+            
+            if (dataSource as? FaceImagePhotosDataSource)?.isRemoveFromAlbum == true {
+                setupBackHandler(toOriginal: false)
+                backHandler?()
+            } else {
+                setupBackHandler(toOriginal: true)
+            }
         } else if let interactor = interactor as? FaceImagePhotosInteractorInput {
             interactor.loadItem(item)
         }
+    }
+    
+    override func showBottomBar(animated: Bool, onView: UIView?) {
+        bottomBarPresenter?.show(animated: true, onView: (view as? FaceImagePhotosViewInput)?.contentView)
     }
 }
 
@@ -347,6 +360,11 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
         
         return destination
     }
+    
+    private func removePreviewController() {
+        let navVC = (view as? UIViewController)?.navigationController
+        navVC?.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension FaceImagePhotosPresenter: FaceImagePhotosDataSourceDelegate {
@@ -355,8 +373,10 @@ extension FaceImagePhotosPresenter: FaceImagePhotosDataSourceDelegate {
         
         switch operation {
         case .unhide, .moveToTrash, .delete, .restore:
+            removePreviewController()
             setupBackHandler(toOriginal: false)
         case .hide:
+            removePreviewController()
             router.back()
         default:
             break 

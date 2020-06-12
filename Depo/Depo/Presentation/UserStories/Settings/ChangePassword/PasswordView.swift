@@ -4,6 +4,13 @@ final class PasswordView: UIView, NibInit {
     
     private let openedEyeImage = UIImage(named: "ic_eye_show")
     private let closedEyeImage = UIImage(named: "ic_eye_hide")
+    var isNeedToShowRules = false {
+        willSet {
+            if newValue {
+                rulesLabel.text = TextConstants.signUpPasswordRulesLabel
+            }
+        }
+    }
 
     @IBOutlet private weak var showPasswordButton: UIButton! {
         willSet {
@@ -26,13 +33,22 @@ final class PasswordView: UIView, NibInit {
         }
     }
     
-    @IBOutlet weak var underlineLabel: UILabel! {
+    @IBOutlet weak var errorLabel: UILabel! {
         willSet {
             newValue.textColor = ColorConstants.textOrange
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 15)
             newValue.isHidden = true
             newValue.backgroundColor = .white
             newValue.isOpaque = true
+            newValue.numberOfLines = 0
+        }
+    }
+    
+    @IBOutlet private weak var rulesLabel: UILabel! {
+        willSet {
+            newValue.font = UIFont.TurkcellSaturaFont(size: 14)
+            newValue.textColor = ColorConstants.lightText
+            newValue.numberOfLines = 0
         }
     }
     
@@ -67,6 +83,7 @@ final class PasswordView: UIView, NibInit {
     private func configureButton() {
         showPasswordButton.setImage(openedEyeImage, for: .normal)
         showPasswordButton.setImage(closedEyeImage, for: .selected)
+        errorLabel.text = ""
     }
     
     override func awakeFromNib() {
@@ -75,30 +92,32 @@ final class PasswordView: UIView, NibInit {
         configureButton()
     }
     
-    func showUnderlineAnimated() {
-        guard underlineLabel.isHidden else {
+    func showErrorLabelAnimated() {
+        guard errorLabel.isHidden else {
             return
         }
         UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.underlineLabel.isHidden = false
+            self.errorLabel.isHidden = false
             /// https://stackoverflow.com/a/46412621/5893286
             self.layoutIfNeeded()
         }
     }
     
-    func hideUnderlineAnimated() {
-        guard !underlineLabel.isHidden else {
+    func hideErrorLabelAnimated() {
+        guard !errorLabel.isHidden else {
             return
         }
+        layoutIfNeeded()
+        errorLabel.text = ""
         UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.underlineLabel.isHidden = true
+            self.errorLabel.isHidden = true
             /// https://stackoverflow.com/a/46412621/5893286
             self.layoutIfNeeded()
         }
     }
     
     func showTextAnimated(text: String) {
-        underlineLabel.text = text
-        showUnderlineAnimated()
+        errorLabel.text = text
+        showErrorLabelAnimated()
     }
 }

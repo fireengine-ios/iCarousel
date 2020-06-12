@@ -1298,9 +1298,9 @@ enum GAEventLabel {
                 return "smallest-first"
             case .sizeZA:
                 return "largest-first"
-            case .timeUp, .metaDataTimeUp, .timeUpWithoutSection:
+            case .timeUp, .metaDataTimeUp, .timeUpWithoutSection, .lastModifiedTimeUp:
                 return "newest-first"
-            case .timeDown, .metaDataTimeDown, .timeDownWithoutSection:
+            case .timeDown, .metaDataTimeDown, .timeDownWithoutSection, .lastModifiedTimeDown:
                 return "oldest-first"
             }
         case .search(let searchText): ///searched word
@@ -1527,6 +1527,7 @@ enum GADementionsFields {
     case editFields
     case connectionStatus
     case statusType
+    case usagePercentage
     
     var text: String {
         switch self {
@@ -1584,6 +1585,8 @@ enum GADementionsFields {
             return "connectionStatus"
         case .statusType:
             return "statusType"
+        case .usagePercentage:
+            return "quotaStatus"
         }
     }
     

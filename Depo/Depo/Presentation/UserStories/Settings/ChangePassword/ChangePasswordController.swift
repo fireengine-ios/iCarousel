@@ -41,6 +41,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
         view.titleLabel.text = TextConstants.newPassword
         view.passwordTextField.placeholder = TextConstants.enterYourNewPassword
         view.passwordTextField.returnKeyType = .next
+        view.isNeedToShowRules = true
         return view
     }()
     
@@ -54,6 +55,7 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
     
     private lazy var accountService = AccountService()
     private lazy var authenticationService = AuthenticationService()
+    private lazy var router = RouterVC()
     private var showErrorColorInNewPasswordView = false
     
     // MARK: - View methods
@@ -220,20 +222,12 @@ final class ChangePasswordController: UIViewController, KeyboardHandler, NibInit
                                                 AppConfigurator.logout()
                                             }
         })
-        RouterVC().presentViewController(controller: popupVC)
+        router.presentViewController(controller: popupVC)
     }
     
     private func showSuccessPopup() {
-        let popupVC = PopUpController.with(title: TextConstants.passwordChangedSuccessfully,
-                                           message: nil,
-                                           image: .success,
-                                           buttonTitle: TextConstants.ok,
-                                           action: { vc in
-                                            vc.close  {
-                                                RouterVC().popViewController()
-                                            }
-        })
-        RouterVC().presentViewController(controller: popupVC)
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.passwordChangedSuccessfully)
+        router.popViewController()
     }
     
     private func showError(_ errorResponse: Error) {
@@ -310,26 +304,21 @@ extension ChangePasswordController: UITextFieldDelegate {
     
     private func updateNewPasswordView() {
         if showErrorColorInNewPasswordView {
-            newPasswordView.underlineLabel.textColor = ColorConstants.textOrange
+            newPasswordView.errorLabel.textColor = ColorConstants.textOrange
             /// we need to show error with color just once
             showErrorColorInNewPasswordView = false
-            
-        /// can be "else" only. added check for optimization without additional flags
-        } else if newPasswordView.underlineLabel.textColor != UIColor.lrTealish {
-            newPasswordView.underlineLabel.textColor = UIColor.lrTealish
-            newPasswordView.underlineLabel.text = TextConstants.errorInvalidPassword
         }
-        newPasswordView.showUnderlineAnimated()
+        newPasswordView.showErrorLabelAnimated()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         switch textField {
         case newPasswordView.passwordTextField:
-            newPasswordView.hideUnderlineAnimated()
+            newPasswordView.hideErrorLabelAnimated()
         case oldPasswordView.passwordTextField:
-            oldPasswordView.hideUnderlineAnimated()
+            oldPasswordView.hideErrorLabelAnimated()
         case repeatPasswordView.passwordTextField:
-            repeatPasswordView.hideUnderlineAnimated()
+            repeatPasswordView.hideErrorLabelAnimated()
         case captchaView.captchaAnswerTextField:
             captchaView.hideErrorAnimated()
         default:

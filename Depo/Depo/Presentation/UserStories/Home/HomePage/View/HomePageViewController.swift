@@ -209,6 +209,10 @@ extension HomePageViewController: HomeCollectionViewDataSourceDelegate {
 //MARK: - HomePageViewInput
 extension HomePageViewController: HomePageViewInput {
     
+    func showSnackBarWithMessage(message: String) {
+        SnackbarManager.shared.show(type: .action, message: message)
+    }
+    
     func stopRefresh() {
         hideSpinner()
     }
