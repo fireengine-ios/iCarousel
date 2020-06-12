@@ -159,6 +159,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
 
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
+        bottomDetailViewManager?.updatePassThroughViewDelegate(passThroughView: passThroughView)
     }
     
     override func viewDidAppear(_ animated: Bool) {

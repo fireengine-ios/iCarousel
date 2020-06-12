@@ -615,7 +615,7 @@
 "%d%% Restored…" = "%d%% Restored…";
 "%d%% Analyzed…" = "%d%% Analyzed…";
 "START USING" = "Get Started";
-"landingTitle0" = "Live. Collect, Remember";
+"landingTitle0" = "Live. Collect. Remember";
 "landingSubTitle0" = "Backup your photos, videos, contacts and other files at lifebox and keep them forever";
 "landingTitle1" = "Auto-Sync";
 "landingSubTitle1" = "Sync your photos and videos automatically and access them wherever you are";
@@ -1529,7 +1529,7 @@
 "offer_store_google_store" = "Google Play Store";
 "remove_albums_success_message" = "Album(s) removed successfully";
 "hide_album_action_sheet" = "Hide Album";
-"sign_up_password_rules" = "Password must be minimum 6 and maximum 16 character, contain at least one number and capital letter, include nonconsecutive letters.";
+"sign_up_password_rules" = "Password must be between 6-16 characters, contain at least one number and capital letter, and include non-consecutive letters.";
 "documents_album_card_title" = "Do you want to hide document objects?";
 "documents_album_card_description" = "%d items including screenshots and documents are grouped in Documents Album. Clean up your gallery by hiding this album. You can access these photos from Hidden Album anytime.";
 "documents_album_card_hide_button" = "Hide Documents Album";

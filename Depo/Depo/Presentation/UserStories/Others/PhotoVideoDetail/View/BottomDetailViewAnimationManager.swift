@@ -40,6 +40,7 @@ protocol BottomDetailViewAnimationManagerProtocol {
     func closeDetailView()
     func getCurrenState() -> CardState
     func showDetailFromThreeDots()
+    func updatePassThroughViewDelegate(passThroughView: PassThroughView?)
 }
 
 final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerProtocol {
@@ -96,6 +97,10 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
                 setupDetailViewAlpha(isHidden: detailViewIsHidden)
             }
         }
+    }
+    
+    func updatePassThroughViewDelegate(passThroughView: PassThroughView?) {
+        passThroughView?.delegate = self
     }
     
     private func collapseViewSetup() {
