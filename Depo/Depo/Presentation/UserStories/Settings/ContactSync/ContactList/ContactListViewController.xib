@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="bottomView" destination="PE4-Ew-Mp5" id="g1b-ok-uTC"/>
                 <outlet property="restoreButton" destination="NxV-AQ-9f4" id="iid-bt-nXd"/>
+                <outlet property="shadowView" destination="TJW-wc-Egz" id="Dsl-VW-dMV"/>
                 <outlet property="tableView" destination="v2c-MB-Beq" id="MQx-EI-JZm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,6 +26,13 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="762"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </tableView>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJW-wc-Egz">
+                    <rect key="frame" x="0.0" y="784" width="414" height="22"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="uEB-43-F8T"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PE4-Ew-Mp5">
                     <rect key="frame" x="0.0" y="806" width="414" height="56"/>
                     <subviews>
@@ -64,9 +72,12 @@
                 <constraint firstItem="PE4-Ew-Mp5" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="NHM-rV-d9T"/>
                 <constraint firstItem="v2c-MB-Beq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="S72-Kk-czN"/>
                 <constraint firstItem="PE4-Ew-Mp5" firstAttribute="top" secondItem="v2c-MB-Beq" secondAttribute="bottom" id="dOM-o2-pQL"/>
+                <constraint firstItem="TJW-wc-Egz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="e8m-ed-2FL"/>
                 <constraint firstItem="PE4-Ew-Mp5" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="nRw-YY-jdz"/>
                 <constraint firstItem="v2c-MB-Beq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="qLt-h3-P14"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="v2c-MB-Beq" secondAttribute="trailing" id="swe-Sv-UVd"/>
+                <constraint firstItem="PE4-Ew-Mp5" firstAttribute="top" secondItem="TJW-wc-Egz" secondAttribute="bottom" id="yQw-iR-4AK"/>
+                <constraint firstItem="TJW-wc-Egz" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="zCD-tO-dc9"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="132.58928571428572"/>

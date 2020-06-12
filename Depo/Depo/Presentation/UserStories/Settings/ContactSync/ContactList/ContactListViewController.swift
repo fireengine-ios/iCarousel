@@ -12,6 +12,15 @@ final class ContactListViewController: BaseViewController, NibInit {
 
     @IBOutlet private weak var tableView: UITableView!
     
+    @IBOutlet private weak var shadowView: UIView! {
+        willSet {
+            let gradientView = TransparentGradientView(style: .vertical, mainColor: ColorConstants.lighterGray)
+            gradientView.frame = newValue.bounds
+            newValue.addSubview(gradientView)
+            newValue.sendSubview(toBack: gradientView)
+            gradientView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        }
+    }
     @IBOutlet private weak var bottomView: UIView!
     @IBOutlet private weak var restoreButton: RoundedButton! {
         willSet {
