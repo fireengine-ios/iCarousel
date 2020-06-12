@@ -70,6 +70,12 @@ final class SubscriptionsPolicyView: UIView {
         policyTextView.attributedText = attributedString
         layoutIfNeeded()
     }
+    
+    private func openTermsOfUseScreen() {
+        let router = RouterVC()
+        let controller = router.termsOfUseScreen
+        router.pushViewController(viewController: controller)
+    }
 }
 
 // MARK: - UITextViewDelegate
@@ -77,17 +83,9 @@ extension SubscriptionsPolicyView: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         if URL.absoluteString == TextConstants.NotLocalized.termsOfUseLink {
-            let router = RouterVC()
-            let controller = router.termsOfUseScreen
-            router.pushViewController(viewController: controller)
-            return true
+            openTermsOfUseScreen()
+            return false
         }
-        UIApplication.shared.openSafely(URL)
-        return true
-    }
-    
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        UIApplication.shared.openSafely(URL)
-        return UIApplication.shared.canOpenURL(URL)
+        return defaultHandle(url: URL, interaction: interaction)
     }
 }
