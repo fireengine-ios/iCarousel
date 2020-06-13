@@ -36,15 +36,24 @@ struct EULAApprove: RequestParametrs {
     
     let id: Int
     let etkAuth: Bool?
+    let kvkkAuth: Bool?
     let globalPermAuth: Bool?
     
     var requestParametrs: Any {
         var params: [String: Any] = [LbRequestkeys.eulaId: id]
-        if let etkAuth = etkAuth,
-            let globalPermAuth = globalPermAuth {
+        
+        if let etkAuth = etkAuth {
             params[LbRequestkeys.etkAuth] = etkAuth
+        }
+        
+        if let globalPermAuth = globalPermAuth {
             params[LbRequestkeys.globalPermAuth] = globalPermAuth
         }
+        
+        if let kvkkAuth = kvkkAuth {
+            params[LbRequestkeys.kvkkAuth] = kvkkAuth
+        }
+        
         return params
     }
     
@@ -68,10 +77,10 @@ class EulaService: BaseRequestService {
         executeGetRequest(param: eula, handler: handler)
     }
 
-    func eulaApprove(eulaId: Int, etkAuth: Bool?, globalPermAuth: Bool?, success: SuccessResponse?, fail: FailResponse? ) {
+    func eulaApprove(eulaId: Int, etkAuth: Bool?, kvkkAuth: Bool?, globalPermAuth: Bool?, success: SuccessResponse?, fail: FailResponse? ) {
         debugLog("EulaService eulaApprove")
         
-        let eula = EULAApprove(id: eulaId, etkAuth: etkAuth, globalPermAuth: globalPermAuth)
+        let eula = EULAApprove(id: eulaId, etkAuth: etkAuth, kvkkAuth: kvkkAuth, globalPermAuth: globalPermAuth)
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: success, fail: fail)
         executePostRequest(param: eula, handler: handler)

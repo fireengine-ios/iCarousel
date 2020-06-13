@@ -103,7 +103,7 @@ struct RouteRequests {
     static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
-    static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
+    static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth/v2"
     static let eulaGetGlobalPermAuth = baseUrl +/ "eula/getGlobalPermAuth"
     
     //MARK: Social Connections
@@ -206,7 +206,7 @@ struct RouteRequests {
     //MARK : Faq
     static var faqContentUrl: String {
         switch currentServerEnvironment {
-        case .production: return isBillo ? "https://billostorage.com/faq/?lang=%@)" :
+        case .production: return isBillo ? "https://mybilloapp.com/faq/?lang=%@)" :
                                            "https://mylifebox.com/faq/?lang=%@"
             
         case .preProduction: return isBillo ? "https://prp.mylifebox.com/faq/?lang=%@" :
@@ -359,7 +359,7 @@ struct RouteRequests {
     
     static var globalPermissionsDetails: String {
         switch currentServerEnvironment {
-        case .production: return isBillo ? "https://billostorage.com/global_ops.html ?lang=\(Device.locale)" :
+        case .production: return isBillo ? "https://mybilloapp.com/global_ops.html?lang=\(Device.locale)" :
                                            "https://mylifebox.com/portal/global_ops.html?lang=\(Device.locale)"
                                             
         case .preProduction: return isBillo ? "https://prp.mylifebox.com/global_ops.html?lang=\(Device.locale)" :

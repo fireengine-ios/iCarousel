@@ -61,6 +61,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func confirmEtk(_ etk: Bool) {
         interactor.etkAuth = etk
+        interactor.kvkkAuth = etk
     }
     
     func confirmGlobalPerm(_ globalPerm: Bool) {
