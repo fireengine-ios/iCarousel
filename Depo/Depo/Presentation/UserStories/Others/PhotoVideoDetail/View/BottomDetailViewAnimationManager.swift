@@ -251,6 +251,7 @@ extension BottomDetailViewAnimationManager {
     }
     
     private func setFullState() {
+        view.layoutIfNeeded()
         let collectionViewCellMaxY = getCellMaxY()
         viewState = .full
         managedView.frame.origin.y = .zero
@@ -261,6 +262,7 @@ extension BottomDetailViewAnimationManager {
     }
     
     func showDetailFromThreeDots() {
+        view.layoutIfNeeded()
         UIView.animate(withDuration: 0.3, animations: {
             self.isFullScreen = true
         }) { _ in

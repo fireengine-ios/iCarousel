@@ -1400,6 +1400,7 @@ extension MoreFilesActionsInteractor {
         }
         
         let okHandler: VoidHandler = { [weak self] in
+            self?.output?.operationStarted(type: .moveToTrash)
             if let items = items as? [PeopleItem] {
                 self?.analyticsService.trackFileOperationGAEvent(operationType: .trash,
                                                                  itemsType: .people,
