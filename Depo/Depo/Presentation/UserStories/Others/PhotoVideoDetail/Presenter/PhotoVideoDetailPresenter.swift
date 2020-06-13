@@ -299,14 +299,13 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         view.updatePeople(items: items)
     }
     
-    func getFIRStatus() {
+    func getFIRStatus(completion: VoidHandler? = nil) {
         interactor.getFIRStatus(success: { [weak self] settings in
             self?.isFaceImageAllowed = settings.isFaceImageAllowed == true
             self?.view.setHiddenPeoplePlaceholder(isHidden: self?.isFaceImageAllowed == true)
             if settings.isFaceImageAllowed == true {
-                self?.getPersonsForSelectedPhoto() {
                     self?.interactor.getAuthority()
-                }
+                    completion?()
             } else {
                 self?.view.setHiddenPremiumStackView(isHidden: true)
             }

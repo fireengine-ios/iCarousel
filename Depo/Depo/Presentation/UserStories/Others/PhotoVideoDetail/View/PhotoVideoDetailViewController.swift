@@ -126,8 +126,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
         showSpinner()
-        updateFileInfo()
-        output.getFIRStatus()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -218,8 +216,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private func scrollToSelectedIndex() {
         setupNavigationBar()
         setupTitle()
-        updateFileInfo()
-        output.getFIRStatus()
+        output.getFIRStatus { [weak self] in
+            self?.updateFileInfo()
+        }
 
         guard let index = selectedIndex else  {
             return
