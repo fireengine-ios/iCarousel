@@ -724,6 +724,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 if let selectIndex = actionTypes.index(of: .select) {
                     actionTypes.remove(at: selectIndex)
                 }
+                
+                if let shareAlbumIndex = actionTypes.index(of: .shareAlbum) {
+                    actionTypes.remove(at: shareAlbumIndex)
+                }
             }
             
             alertSheetModule?.showAlertSheet(with: actionTypes,
