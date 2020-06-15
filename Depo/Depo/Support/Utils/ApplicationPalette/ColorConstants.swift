@@ -104,7 +104,10 @@ struct ColorConstants {
     static let linkBlack = UIColor(red: 51 / 255.0, green: 51 / 255.0, blue: 51 / 255.0, alpha: 1)
     
     static let snackbarGray = UIColor(white: 65/255, alpha: 1)
+    
+    static let duplicatesGray = UIColor(white: 86/255, alpha: 1)
 
+    static let navy = UIColor(red: 4 / 255.0, green: 37 / 255.0, blue: 56 / 255.0, alpha: 1)
 }
 
 extension UIColor {

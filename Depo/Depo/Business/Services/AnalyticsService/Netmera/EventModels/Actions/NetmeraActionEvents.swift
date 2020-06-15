@@ -806,8 +806,8 @@ extension NetmeraEvents.Actions {
         @objc var action = ""
         @objc var status = ""
         
-        convenience init(actionType: NetmeraEventValues.ContactBackupType, staus: NetmeraEventValues.GeneralStatus) {
-            self.init(action: actionType.text, status: staus.text)
+        convenience init(actionType: NetmeraEventValues.ContactBackupType, status: NetmeraEventValues.GeneralStatus) {
+            self.init(action: actionType.text, status: status.text)
         }
         
         convenience init(action: String, status: String) {

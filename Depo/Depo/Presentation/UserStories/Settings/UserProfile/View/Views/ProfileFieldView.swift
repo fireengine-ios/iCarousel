@@ -249,13 +249,12 @@ class ProfileFieldView: UIView {
 }
 
 extension ProfileFieldView: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        
+
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         if URL.absoluteString == TextConstants.NotLocalized.FAQ {
             openFAQ()
+            return false
         }
-        
-        return true
+        return defaultHandle(url: URL, interaction: interaction)
     }
-    
 }

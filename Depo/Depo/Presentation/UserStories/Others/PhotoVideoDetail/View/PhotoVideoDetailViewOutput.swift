@@ -31,7 +31,7 @@ protocol PhotoVideoDetailViewOutput {
     
     func willDisplayLastCell()
     
-    func getFIRStatus()
+    func getFIRStatus(completion: VoidHandler?)
 
     func configureFileInfo(_ view: FileInfoView)
     func getPersonsForSelectedPhoto(completion: VoidHandler?)

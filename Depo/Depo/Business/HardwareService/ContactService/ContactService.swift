@@ -12,6 +12,9 @@ import Contacts
 typealias ContactsLibraryGranted = (_ granted: Bool) -> Void
 
 final class ContactService {
+    
+    private let passcodeStorage: PasscodeStorage = factory.resolve()
+    
 
     func getContactsCount() -> Int? {
         let contactStore = CNContactStore()
@@ -35,16 +38,43 @@ final class ContactService {
         switch CNContactStore.authorizationStatus(for: .contacts) {
         case .authorized:
             completion(true)
+            
         case .denied:
-            completion( false)
+            completion(false)
+            
         case .restricted, .notDetermined:
-            store.requestAccess(for: .contacts) { granted, error in
+            passcodeStorage.systemCallOnScreen = true
+            
+            store.requestAccess(for: .contacts) { [weak self] granted, error in
+                self?.passcodeStorage.systemCallOnScreen = false
+                
                 if granted {
                     completion(true)
+                } else if redirectToSettings {
+                    self?.showSettingsAlert(completionHandler: completion)
                 } else {
                     completion(false)
                 }
             }
+        }
+    }
+    
+    private func showSettingsAlert(completionHandler: @escaping ContactsLibraryGranted) {
+        let controller = PopUpController.with(title: nil,
+                                              message: TextConstants.settingsContactsPermissionDeniedMessage,
+                                              image: .none,
+                                              firstButtonTitle: TextConstants.cancel,
+                                              secondButtonTitle: TextConstants.ok,
+                                              firstAction: { vc in
+                                                vc.close { completionHandler(false) }
+        },
+                                              secondAction: { vc in
+                                                vc.close { completionHandler(false) }
+                                                UIApplication.shared.openSettings()
+        })
+        
+        DispatchQueue.toMain {
+            RouterVC().presentViewController(controller: controller, animated: false)
         }
     }
     
