@@ -26,7 +26,7 @@ class AlbumItem: BaseDataSourceItem {
         return icon == "TBMatik"
     }
     
-    init (remote: AlbumServiceResponse, previewIconSize: PreviewIconSize = .medium) {
+    init (remote: AlbumServiceResponse, previewIconSize: PreviewSize = .medium) {
 
         imageCount = remote.imageCount
         videoCount = remote.videoCount
