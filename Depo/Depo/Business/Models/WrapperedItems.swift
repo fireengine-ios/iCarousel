@@ -834,7 +834,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
-    init (remote: SearchItemResponse, previewIconSize: PreviewIconSize = .medium) {
+    init (remote: SearchItemResponse, previewIconSize: PreviewIconSize = .large) {
         metaData = remote.metadata
         favorites = remote.metadata?.favourite ?? false
         tmpDownloadUrl = remote.tempDownloadURL
