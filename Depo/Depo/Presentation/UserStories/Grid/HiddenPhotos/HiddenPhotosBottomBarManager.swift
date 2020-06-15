@@ -35,6 +35,7 @@ protocol HiddenPhotosBottomBarManagerDelegate: class {
 
 final class HiddenPhotosBottomBarManager {
 
+    private let contentView: UIView
     private let bottomBarConfig = EditingBarConfig(elementsConfig: ElementTypes.hiddenState,
                                                    style: .blackOpaque,
                                                    tintColor: nil)
@@ -44,7 +45,8 @@ final class HiddenPhotosBottomBarManager {
     
     private weak var delegate: HiddenPhotosBottomBarManagerDelegate?
     
-    init(delegate: HiddenPhotosBottomBarManagerDelegate) {
+    init(contentView: UIView, delegate: HiddenPhotosBottomBarManagerDelegate) {
+        self.contentView = contentView
         self.delegate = delegate
     }
     
@@ -56,7 +58,7 @@ final class HiddenPhotosBottomBarManager {
     }
     
     func show() {
-        bottomBarPresenter.show(animated: true, onView: nil)
+        bottomBarPresenter.show(animated: true, onView: contentView)
     }
     
     func hide() {
