@@ -235,7 +235,7 @@ class PhotosAlbumService: BaseRequestService {
     }
     
     func moveToTrash(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
-        debugLog("PhotosAlbumService completelyDelete")
+        debugLog("PhotosAlbumService completelyMoveToTrash")
         
         let moveToTrashAlbums = albums.filter { $0.readOnly != true || $0.fileType.isFaceImageAlbum }
         guard !moveToTrashAlbums.isEmpty else {
@@ -243,22 +243,22 @@ class PhotosAlbumService: BaseRequestService {
             return
         }
         
-        loadAllItemsFrom(albums: moveToTrashAlbums) { items in
-            let fileService = WrapItemFileService()
-            fileService.moveToTrash(files: items, success: { [weak self] in
-                self?.moveToTrashAlbums(moveToTrashAlbums, success: success, fail: fail)
-            }, fail: fail)
+        loadAllItemsFrom(albums: moveToTrashAlbums) { [weak self] items in
+            self?.moveToTrash(albums: albums, albumItems: items, success: success, fail: fail)
         }
     }
     
     func moveToTrash(albums: [AlbumItem], albumItems: [Item], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
-        debugLog("PhotosAlbumService completelyDelete")
+        debugLog("PhotosAlbumService completelyMoveToTrash")
+
+        let wrappedSuccess: PhotosAlbumDeleteOperation = { deletedAlbums in
+            success?(deletedAlbums)
+            ItemOperationManager.default.didMoveToTrashAlbums(deletedAlbums)
+        }
         
         let fileService = WrapItemFileService()
         fileService.moveToTrash(files: albumItems, success: { [weak self] in
-            self?.moveToTrashAlbums(albums, success: { removedAlbums in
-                success?(removedAlbums)
-            }, fail: fail)
+            self?.moveToTrashAlbums(albums, success: wrappedSuccess, fail: fail)
         }, fail: fail)
     }
     

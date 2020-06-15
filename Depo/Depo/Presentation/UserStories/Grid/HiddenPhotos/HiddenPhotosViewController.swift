@@ -10,6 +10,7 @@ import UIKit
 
 final class HiddenPhotosViewController: BaseViewController, NibInit {
 
+    @IBOutlet private weak var contentView: UIView!
     @IBOutlet private weak var sortPanelContainer: UIView!
     @IBOutlet private weak var collectionView: UICollectionView!
     private let emptyView = EmptyView.view(with: .hiddenBin)
@@ -17,7 +18,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     private lazy var dataSource = HiddenPhotosDataSource(collectionView: collectionView, delegate: self)
     private lazy var sortingManager = HiddenPhotosSortingManager(delegate: self)
     private lazy var dataLoader = HiddenPhotosDataLoader(delegate: self)
-    private lazy var bottomBarManager = HiddenPhotosBottomBarManager(delegate: self)
+    private lazy var bottomBarManager = HiddenPhotosBottomBarManager(contentView: contentView, delegate: self)
     private lazy var navbarManager = HiddenPhotosNavbarManager(delegate: self)
     private lazy var threeDotsManager = HiddenPhotosThreeDotMenuManager(delegate: self)
     
@@ -125,7 +126,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     private func moveToTrashSelectedItems() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
         let selectedItems = dataSource.allSelectedItems.albums + dataSource.allSelectedItems.photos
-        dataLoader.moveToTrash(item: selectedItems)
+        dataLoader.moveToTrash(items: selectedItems)
     }
 }
 

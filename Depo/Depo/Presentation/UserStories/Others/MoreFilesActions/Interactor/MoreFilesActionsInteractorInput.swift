@@ -18,7 +18,7 @@ protocol MoreFilesActionsInteractorInput {
     
     func smash(item: [BaseDataSourceItem], completion: VoidHandler?)
     
-    func moveToTrash(item: [BaseDataSourceItem])
+    func moveToTrash(items: [BaseDataSourceItem])
     
     func removeAlbums(items: [BaseDataSourceItem])
     
