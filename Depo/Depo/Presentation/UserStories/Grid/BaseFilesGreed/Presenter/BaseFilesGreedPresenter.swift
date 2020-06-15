@@ -489,8 +489,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     private func startEditing() {
         let selectedItemsCount = dataSource.selectedItemsArray.count
         view.startSelection(with: selectedItemsCount)
-        view.setThreeDotsMenu(active: canShow3DotsButton())
         dataSource.setSelectionState(selectionState: true)
+        view.setThreeDotsMenu(active: canShow3DotsButton())
     }
     
     
