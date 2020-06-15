@@ -55,8 +55,8 @@ class BottomSelectionMusicTabBarInteractor: BottomSelectionTabBarInteractor {
 
     }
     
-    override func moveToTrash(item: [BaseDataSourceItem]) {
-        if let items = item as? [Item] {
+    override func moveToTrash(items: [BaseDataSourceItem]) {
+        if let items = items as? [Item] {
             let okHandler: VoidHandler = { [weak self] in
                 self?.output?.operationStarted(type: .moveToTrash)
                 self?.player.remove(listItems: items)

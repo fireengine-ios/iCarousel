@@ -180,7 +180,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
-                    self.interactor.moveToTrash(item: selectedItems)
+                    self.interactor.moveToTrash(items: selectedItems)
                 } else {
                     let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
@@ -260,7 +260,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 self.router.showPrint(items: selectedItems)
             case .removeAlbum:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
-                self.interactor.moveToTrash(item: selectedItems)
+                self.interactor.removeAlbums(items: selectedItems)
             default:
                 break
             }
