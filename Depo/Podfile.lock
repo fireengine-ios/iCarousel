@@ -162,7 +162,7 @@ DEPENDENCIES:
   - YYImage (~> 1)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Adjust
     - Alamofire
     - CircleProgressBar
@@ -262,6 +262,6 @@ SPEC CHECKSUMS:
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: f799487b25f97eb1fbdbbbc3f6728d61845ae89b
+PODFILE CHECKSUM: a6df38b91afc294b3e37fa6b2780631492f6eb50
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.9.3
