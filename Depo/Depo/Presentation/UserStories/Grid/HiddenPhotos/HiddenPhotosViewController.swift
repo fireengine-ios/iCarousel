@@ -126,7 +126,7 @@ final class HiddenPhotosViewController: BaseViewController, NibInit {
     private func moveToTrashSelectedItems() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
         let selectedItems = dataSource.allSelectedItems.albums + dataSource.allSelectedItems.photos
-        dataLoader.moveToTrash(item: selectedItems)
+        dataLoader.moveToTrash(items: selectedItems)
     }
 }
 
