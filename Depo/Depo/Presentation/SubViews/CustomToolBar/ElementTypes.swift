@@ -117,6 +117,9 @@ enum ElementTypes {
         switch status {
         case .hidden:
             result = ElementTypes.hiddenState
+            if viewType != .bottomBar {
+                result.insert(.select, at: 0)
+            }
             
         case .trashed:
             result = ElementTypes.trashState
