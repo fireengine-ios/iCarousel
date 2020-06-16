@@ -39,7 +39,7 @@ protocol BottomDetailViewAnimationManagerProtocol {
     var managedView: FileInfoView { get }
     func closeDetailView()
     func getCurrenState() -> CardState
-    func showDetailFromThreeDots()
+    func showDetailView()
     func updatePassThroughViewDelegate(passThroughView: PassThroughView?)
 }
 
@@ -158,6 +158,14 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
             UIView.animate(withDuration: 0.3, animations: {
                 self.positionForView(velocityY: recognizer.velocity(in: self.managedView).y)
             }, completion: { _ in
+                switch self.viewState {
+                case .collapsed:
+                    self.setCollapseState()
+                case .expanded:
+                    self.setExpandedState()
+                case .full:
+                    self.setFullState()
+                }
                 self.dissableTouchUntillFinish(isDisabled: false)
             })
         default:
@@ -261,7 +269,7 @@ extension BottomDetailViewAnimationManager {
         isFullScreen = true
     }
     
-    func showDetailFromThreeDots() {
+    func showDetailView() {
         view.layoutIfNeeded()
         UIView.animate(withDuration: 0.3, animations: {
             self.isFullScreen = true

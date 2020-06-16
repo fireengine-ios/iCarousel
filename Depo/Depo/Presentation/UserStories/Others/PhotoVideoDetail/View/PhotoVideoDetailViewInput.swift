@@ -39,4 +39,6 @@ protocol PhotoVideoDetailViewInput: class, ActivityIndicator, ErrorPresenter {
     func setHiddenPremiumStackView(isHidden: Bool)
     
     func closeDetailViewIfNeeded()
+    
+    func showBottomDetailView()
 }

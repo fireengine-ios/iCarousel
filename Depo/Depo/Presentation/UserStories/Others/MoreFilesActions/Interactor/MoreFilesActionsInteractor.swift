@@ -226,8 +226,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        if let topViewController = RouterVC().getViewControllerForPresent() as? PhotoVideoDetailViewController, !UIDevice.current.orientation.isLandscape {            
-            topViewController.showDetailFromThreeDots()
+        if let topViewController = RouterVC().getViewControllerForPresent() as? PhotoVideoDetailViewInput, !UIDevice.current.orientation.isLandscape {
+            topViewController.showBottomDetailView()
         } else {
             router.pushOnPresentedView(viewController: infoController)
         }
