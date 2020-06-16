@@ -329,8 +329,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         return bottomDetailViewManager.getCurrenState()
     }
     
-    func showDetailFromThreeDots() {
-        bottomDetailViewManager?.showDetailFromThreeDots()
+    func showBottomDetailView() {
+        bottomDetailViewManager?.showDetailView()
     }
 }
 
