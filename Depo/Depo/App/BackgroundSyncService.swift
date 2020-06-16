@@ -35,14 +35,19 @@ final class BackgroundSyncService {
     }()
     
     func registerLaunchHandlers() {
+        debugLog("BG! task registration cancell all requests")
+        BGTaskScheduler.shared.cancelAllTaskRequests()
+        debugLog("BG! register processing task")
         registerTask(identifier: TaskIdentifiers.backgroundProcessing, queue: BackgroundSyncService.schedulerQueue)
+        debugLog("BG! register resfresh task")
         registerTask(identifier: TaskIdentifiers.backgroundRefresh, queue: BackgroundSyncService.schedulerQueue)
     }
     
     private func registerTask(identifier: String, queue: DispatchQueue) {
-        BGTaskScheduler.shared.register(forTaskWithIdentifier: identifier, using: queue) { [weak self] task in
+        let isRegistered = BGTaskScheduler.shared.register(forTaskWithIdentifier: identifier, using: queue) { [weak self] task in
             self?.handleBGtask(task)
         }
+        debugLog("BG! is task \(identifier) registered \(isRegistered)")
     }
     
     func handleBGtask(_ task: BGTask) {
@@ -92,6 +97,7 @@ final class BackgroundSyncService {
     }
     
     private func scheduleTask(taskIdentifier: String) {
+        debugLog("BG! scheduleTask \(taskIdentifier)")
         let request: BGTaskRequest
         
         if taskIdentifier == TaskIdentifiers.backgroundProcessing {
@@ -111,6 +117,10 @@ final class BackgroundSyncService {
         
         // Fetch no earlier than 15 sec from now
         request.earliestBeginDate = Date(timeIntervalSinceNow: 20 * 5)
+        debugLog("BG! scheduleTask \(taskIdentifier) request created")
+        
+//        BGTaskScheduler.shared.cancel(taskRequestWithIdentifier: taskIdentifier)
+//        debugLog("BG! cancell previous task \(taskIdentifier)")
         
         do {
             try BGTaskScheduler.shared.submit(request)
