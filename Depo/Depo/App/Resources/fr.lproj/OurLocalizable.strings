@@ -1780,8 +1780,8 @@ Please check I have understood the intended command here*/
 "sign_up_password_rules" = "Le mot de passe doit être compris entre 6 et 16 caractères, contenir au moins 1 chiffre et 1 lettre capitale et ne pas inclure des lettres consécutives.";
 "documents_album_card_title" = "Voulez-vous masquer ces dossiers?";
 "documents_album_card_description" = "%d éléments, y compris les captures d'écran et les documents, sont regroupés dans l'Album de Documents. Vous pouvez modifier votre galerie en masquant cet album. Vous pouvez accéder à ces photos à tout moment à partir de l'album masqué.";
-"documents_album_card_hide_button" = "Masquer l'album de documents";
-"documents_album_card_view_button" = "Afficher l'album de documents";
+"documents_album_card_hide_button" = "Masquer l'album";
+"documents_album_card_view_button" = "Voir l'album";
 "snackbar_ok" = "D'accord";
 "snackbar_trash_bin" = "Éléments supprimés";
 "snackbar_hidden_bin" = "Album masqué";
@@ -1896,3 +1896,4 @@ Please check I have understood the intended command here*/
 "contact_phase2_error_quota_restore" = "";
 "contact_phase2_error_quota_backup" = "";
 "download_document_error_popup" = "Vous ne pouvez télécharger que des photos, des vidéos ou des albums.";
+"contact_phase2_history_cell_Contact_List" = "";
