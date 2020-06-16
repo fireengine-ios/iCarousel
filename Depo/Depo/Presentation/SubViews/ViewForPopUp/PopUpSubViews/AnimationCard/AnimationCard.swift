@@ -89,10 +89,11 @@ class AnimationCard: BaseCardView {
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
-        guard let image = photoImageView.originalImage else { return }
+        guard let item = item else {
+            return
+        }
         
-        let vc = PVViewerController.initFromNib()
-        vc.image = image
+        let vc = PVViewerController.with(item: item)
         let nController = UINavigationController(rootViewController: vc)
         RouterVC().presentViewController(controller: nController)
     }
