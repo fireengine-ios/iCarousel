@@ -106,7 +106,7 @@ final class CollageCard: BaseCardView {
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
-        showPhotoVideoDetail()
+        showPreview()
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
@@ -152,6 +152,16 @@ final class CollageCard: BaseCardView {
 
         let nController = NavigationController(rootViewController: detailModule.controller)
         routerVC.presentViewController(controller: nController)
+    }
+    
+    private func showPreview() {
+        guard let item = item else {
+            return
+        }
+        
+        let controller = PVViewerController.with(item: item)
+        let navController = NavigationController(rootViewController: controller)
+        routerVC.presentViewController(controller: navController)
     }
     
     override func spotlightHeight() -> CGFloat {

@@ -1611,8 +1611,8 @@
 "sign_up_password_rules" = "Fjalëkalimi duhet të jetë së paku 6 dhe më së shumti 16 karaktere, të paktën një numër, një shkronjë e madhë  dhe shkronja jo të njëpasnjëshme  duhet të përmbajë.";
 "documents_album_card_title" = "Dëshiron t'i fshehësh këto dosje (skedarë)?";
 "documents_album_card_description" = "Artikujt %d përfshirë ekranet dhe dokumentet  janë grupuar në Albumin e Dokumenteve. \nMund të redaktosh (rregullosh)  galerinë tënde duke fshehur këtë album. Mund t'i qasesh këtyre fotove në çdo kohë nga Albumi Sekret.\n";
-"documents_album_card_hide_button" = "Fshihe Albumin e Dokumenteve.";
-"documents_album_card_view_button" = "Shfaqe Albumin e Dokumenteve.";
+"documents_album_card_hide_button" = "Fshih Albumin";
+"documents_album_card_view_button" = "Shiko Albumin";
 "snackbar_ok" = "Në rregull.";
 "snackbar_trash_bin" = "Kutia e plehrave";
 "snackbar_hidden_bin" = "Albumi Sekret";
@@ -1727,3 +1727,4 @@
 "contact_phase2_error_quota_restore" = "";
 "contact_phase2_error_quota_backup" = "";
 "download_document_error_popup" = "Vetëm mund të shkarkosh  fotografi, video ose albume.";
+"contact_phase2_history_cell_Contact_List" = "";

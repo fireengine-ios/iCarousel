@@ -141,7 +141,7 @@
 "Wi-Fi" = "Wi-Fi";
 "Free up space" = "Liberar espacio";
 "Your device memory is almost full" = "La memoria de su dispositivo está casi llena";
-"There are some duplicated items both in your device and lifebox" = "Hay algunos elementos duplicados tanto en su dispositivo como en su lifebox";
+"There are some duplicated items both in your device and lifebox" = "Verifiquemos los elementos duplicados tanto en su dispositivo como en su lifebox!";
 "Operation is complete" = "La operación se ha completado";
 "Download is complete" = "La descarga se ha completado";
 "Deleting is complete" = "La eliminación se ha completado";
@@ -1558,8 +1558,8 @@
 "sign_up_password_rules" = "La contraseña debe tener entre 6 a 16 caracteres, además debe incluir al menos un número, una letra mayúscula y no debe contener letras idénticas consecutivas.";
 "documents_album_card_title" = "¿Desearías ocultar estos archivos?";
 "documents_album_card_description" = "%d elementos incluidas las imágenes de pantalla y documentos, se ha agrupado en el Álbum de Documentos. Puedes ordenar tu galería al ocultar este álbum. Puedes acceder en cualquier momento que desee a estas fotos a través del Álbum Oculto.";
-"documents_album_card_hide_button" = "Ocultar el Álbum de Documento";
-"documents_album_card_view_button" = "Visualizar el Álbum de Documento";
+"documents_album_card_hide_button" = "Ocultar álbum";
+"documents_album_card_view_button" = "Ver álbum";
 "snackbar_ok" = "Ok.";
 "snackbar_trash_bin" = "Papelera";
 "snackbar_hidden_bin" = "Álbum Oculto";
@@ -1674,3 +1674,4 @@
 "contact_phase2_error_quota_restore" = "";
 "contact_phase2_error_quota_backup" = "";
 "download_document_error_popup" = "Sólo puedes descargar fotos, video o álbum.";
+"contact_phase2_history_cell_Contact_List" = "";

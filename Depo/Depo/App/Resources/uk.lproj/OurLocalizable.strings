@@ -1476,8 +1476,8 @@
 "sign_up_password_rules" = "Пароль повинен містити щонайменше 6 та максимум 16 символів, принаймні одне число та великі літери повинні містити непослідовні букви.";
 "documents_album_card_title" = "Чи хочете ви сховати ці файли?";
 "documents_album_card_description" = "Елементи %d, включаючи скріншоти та документи, групуються в альбомі документів. Ви можете редагувати свою галерею, сховавши цей альбом. Ви можете отримати доступ до цих фотографій у будь-який час із схованого альбому.";
-"documents_album_card_hide_button" = "Сховати альбом документа";
-"documents_album_card_view_button" = "Розглянути альбом документа";
+"documents_album_card_hide_button" = "Сховати альбом";
+"documents_album_card_view_button" = "Переглянути альбом";
 "snackbar_ok" = "Добре.";
 "snackbar_trash_bin" = "Кошик для сміття";
 "snackbar_hidden_bin" = "Прихований альбом";
@@ -1592,3 +1592,4 @@
 "contact_phase2_error_quota_restore" = "";
 "contact_phase2_error_quota_backup" = "";
 "download_document_error_popup" = "Ви можете завантажувати тільки фотографії, відео чи альбоми.";
+"contact_phase2_history_cell_Contact_List" = "";

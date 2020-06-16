@@ -108,7 +108,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func onInfo(object: Item) {
-        router.onInfo(object: object)
+        if !UIDevice.current.orientation.isLandscape {
+            view.showBottomDetailView()
+        } else {
+            router.onInfo(object: object)
+        }
     }
     
     func viewWillDisappear() {
