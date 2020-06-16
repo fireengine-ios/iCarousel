@@ -1470,12 +1470,12 @@
 "offer_store_apple_store" = "Apple Store";
 "offer_store_google_store" = "Google Play Store";
 "remove_albums_success_message" = "Albumul(ele) eliminate";
-"hide_album_action_sheet" = "Ascunde Albumul ";
+"hide_album_action_sheet" = "Ascunde Albumul";
 "sign_up_password_rules" = "Parola trebuie să fie formată din minimum 6 și maximum 16 caractere, trebuie să conțină cel puțin un număr și o literă mare şi litere non-consecutive.";
 "documents_album_card_title" = "Doriți să ascundeți aceste fișiere?";
 "documents_album_card_description" = "Elementele %d, inclusiv capturile de ecran și documentele, sunt grupate în albumul Documente. Poți edita galeria ta ascunzând acest album. Poți  accesa aceste fotografii oricând din albumul ascuns.";
-"documents_album_card_hide_button" = "Ascunde Albumul De Documente";
-"documents_album_card_view_button" = "Vizualizează Albumul de Documente";
+"documents_album_card_hide_button" = "Ascundeți Albumul";
+"documents_album_card_view_button" = "Vizualizați Albumul";
 "snackbar_ok" = "Ok";
 "snackbar_trash_bin" = "Coșul de Gunoi";
 "snackbar_hidden_bin" = "Album Ascuns";
@@ -1590,3 +1590,4 @@
 "contact_phase2_error_quota_restore" = "";
 "contact_phase2_error_quota_backup" = "";
 "download_document_error_popup" = "Poţi descărca numai fotografii, videoclipuri sau albume.";
+"contact_phase2_history_cell_Contact_List" = "";

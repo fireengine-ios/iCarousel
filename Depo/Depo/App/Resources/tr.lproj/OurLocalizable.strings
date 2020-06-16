@@ -137,7 +137,7 @@
 "Wi-Fi" = "Wi-Fi";
 "Free up space" = "Yer aç";
 "Your device memory is almost full" = "Cihazının hafızası dolmak üzere!";
-"There are some duplicated items both in your device and lifebox" = "Hem cihazında, hem de lifebox’ında yer alan öğelerin var. Cihazında olanları silerek yeni anılarına yer aç!";
+"There are some duplicated items both in your device and lifebox" = "Hem cihazında hem lifebox’ında olan öğelere göz at!";
 "Operation is complete" = "İşlem tamamlandı";
 "Download is complete" = "İndirme tamamlandı";
 "Deleting is complete" = "Silme işlemi tamamlandı.";
@@ -1484,8 +1484,8 @@
 "sign_up_password_rules" = "Şifre en az 6, en fazla 16 karakterden oluşmalı, en az bir rakam ve büyük harf, ardışık olmayan harfler içermelidir.";
 "documents_album_card_title" = "Bu dosyaları gizlemek ister misin?";
 "documents_album_card_description" = "Ekran görüntüleri ve belgeler dahil %d öğe, Dokümanlar Albümünde gruplandırıldı. Bu albümü gizleyerek galerini düzenleyebilirsin. Bu fotoğraflara Gizli Albüm'den istediğin zaman erişebilirsin.";
-"documents_album_card_hide_button" = "Doküman Albümünü Gizle";
-"documents_album_card_view_button" = "Doküman Albümünü Görüntüle";
+"documents_album_card_hide_button" = "Albümü Gizle";
+"documents_album_card_view_button" = "Albümü Görüntüle";
 "snackbar_ok" = "Tamam.";
 "snackbar_trash_bin" = "Çöp Kutusu";
 "snackbar_hidden_bin" = "Gizli Albüm";
@@ -1600,3 +1600,4 @@
 "contact_phase2_error_quota_restore" = "";
 "contact_phase2_error_quota_backup" = "";
 "download_document_error_popup" = "Yalnızca fotoğraf, video veya albüm indirebilirsin.";
+"contact_phase2_history_cell_Contact_List" = "";

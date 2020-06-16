@@ -143,7 +143,7 @@
 "Wi-Fi" = "Wi-Fi";
 "Free up space" = "Free up space";
 "Your device memory is almost full" = "Your device memory is almost full";
-"There are some duplicated items both in your device and lifebox" = "There are some duplicated items both on your device and lifebox";
+"There are some duplicated items both in your device and lifebox" = "Let's check duplicated items both on your device and lifebox!";
 
 /*which operation??*/
 "Operation is complete" = "Operation completed";
@@ -1299,17 +1299,17 @@
 "AccessibilityGiftButton" = "Gift Box Button";
 "landing_start_button" = "GET STARTED";
 "landing_billo_title_0" = "Storage Made Simple";
-"landing_billo_subtitle_0" = "Store memories and\nkeep them forever";
-"landing_billo_title_1" = "Auto Sync";
+"landing_billo_subtitle_0" = "Store your memories and\nkeep them forever";
+"landing_billo_title_1" = "Auto-Sync";
 "landing_billo_subtitle_1" = "Sync your photos and videos automatically and access them wherever you are";
-"landing_billo_title_2" = "Face / Image";
-"landing_billo_subtitle_2" = "You can easily find your memories with smart albums. Search by person object or place";
+"landing_billo_title_2" = "Face & Image Recognition";
+"landing_billo_subtitle_2" = "Find your memories easily with smart albums\nSearch by person, object or place";
 "landing_billo_title_3" = "Contact Sync";
 "landing_billo_subtitle_3" = "Back up your contacts, never lose them";
-"landing_billo_title_4" = "Free-Up Space";
-"landing_billo_subtitle_4" = "Free up space on your phone for new memories";
+"landing_billo_title_4" = "Free Up Space";
+"landing_billo_subtitle_4" = "Free up space from your device for new memories";
 "landing_billo_title_5" = "Automatic Stories";
-"landing_billo_subtitle_5" = "Live your memories with our automated stories we created for you";
+"landing_billo_subtitle_5" = "Relive your memories with stories, collages and animations automatically created just for you";
 "landing_billo_title_6" = "Social Media";
 "landing_billo_subtitle_6" = "Easily transfer your social media archives to Billo";
 "landing_billo_title_7" = "Photo Print";
@@ -1564,8 +1564,8 @@
 "sign_up_password_rules" = "Password must be between 6-16 characters, contain at least one number and capital letter, and include non-consecutive letters.";
 "documents_album_card_title" = "Do you want to hide document objects?";
 "documents_album_card_description" = "%d items including screenshots and documents are grouped in Documents Album. Clean up your gallery by hiding this album. You can access these photos from Hidden Album anytime.";
-"documents_album_card_hide_button" = "Hide Documents Album";
-"documents_album_card_view_button" = "View Documents Album";
+"documents_album_card_hide_button" = "Hide Album";
+"documents_album_card_view_button" = "View Album";
 "snackbar_ok" = "OK";
 "snackbar_trash_bin" = "Trash Bin";
 "snackbar_hidden_bin" = "Hidden Bin";
@@ -1696,3 +1696,4 @@
 "contact_phase2_error_quota_restore" = "contact_phase2_error_quota_restore";
 "contact_phase2_error_quota_backup" = "contact_phase2_error_quota_backup";
 "download_document_error_popup" = "You can only download photo, video or album";
+"contact_phase2_history_cell_Contact_List" = "Contact List";

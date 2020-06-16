@@ -1486,8 +1486,8 @@
 "sign_up_password_rules" = "يجب أن يتكون الرقم السري من 6 أحرف على الأقل و16حرف على الأكثر ,ويجب أن يشتمل على رقم و حرف كبير على الأقل وعلى أحرف غير متتالية.";
 "documents_album_card_title" = "هل ترغب في إخفاء هذه الملفات؟";
 "documents_album_card_description" = "تم تجميع العناصر %d في ألبوم المستندات بما في ذلك صور الشاشة والوثائق.ويمكنك تنظيم المعرض الخاص بك بإخفاء هذا الألبوم.ويمكنك الوصول لهذه الصور من الألبوم المخفي في الوقت الذي ترغب فيه.";
-"documents_album_card_hide_button" = "قم بإخفاء ألبوم المستندات";
-"documents_album_card_view_button" = "اعرض ألبوم المستندات";
+"documents_album_card_hide_button" = "إخفاء الألبوم";
+"documents_album_card_view_button" = "عرض الألبوم";
 "snackbar_ok" = "حسنا.";
 "snackbar_trash_bin" = "صندوق المهملات";
 "snackbar_hidden_bin" = "ألبوم مخفي";
@@ -1602,3 +1602,4 @@
 "contact_phase2_error_quota_restore" = "";
 "contact_phase2_error_quota_backup" = "";
 "download_document_error_popup" = "يمكنك تنزيل الصور والفيديو أوالألبوم فقط.";
+"contact_phase2_history_cell_Contact_List" = "";

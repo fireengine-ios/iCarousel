@@ -1474,8 +1474,8 @@
 "sign_up_password_rules" = "Das Passwort muss mindestens 6 und höchstens 16 Zeichen lang sein, mindestens eine Zahl und einen Großbuchstaben und keine aufeinanderfolgenden Buchstaben enthalten.";
 "documents_album_card_title" = "Möchten Sie diese Dateien ausblenden?";
 "documents_album_card_description" = "%d-Elemente, einschließlich Screenshots und Dokumente, sind im Dokumentalbum gruppiert. Sie können Ihre Galerie bearbeiten, indem Sie dieses Album ausblenden. Sie können jederzeit über das verschlüsselte Album auf diese Fotos zugreifen.";
-"documents_album_card_hide_button" = "Dokumentalbum ausblenden";
-"documents_album_card_view_button" = "Dokumentalbum anzeigen";
+"documents_album_card_hide_button" = "Album Ausblenden";
+"documents_album_card_view_button" = "Album Anzeigen";
 "snackbar_ok" = "OK";
 "snackbar_trash_bin" = "Mülleimer";
 "snackbar_hidden_bin" = "Verstecktes Album";
@@ -1590,3 +1590,4 @@
 "contact_phase2_error_quota_restore" = "";
 "contact_phase2_error_quota_backup" = "";
 "download_document_error_popup" = "Sie können nur Fotos, Videos oder Alben herunterladen.";
+"contact_phase2_history_cell_Contact_List" = "";
