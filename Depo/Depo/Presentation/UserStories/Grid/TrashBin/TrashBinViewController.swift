@@ -507,6 +507,10 @@ extension TrashBinViewController: MoreFilesActionsInteractorOutput {
         startAsyncOperation()
     }
     
+    func operationCancelled(type: ElementTypes) {
+        asyncOperationSuccess()
+    }
+    
     func showWrongFolderPopup() { }
     func dismiss(animated: Bool) { }
     func startAsyncOperationDisableScreen() { }

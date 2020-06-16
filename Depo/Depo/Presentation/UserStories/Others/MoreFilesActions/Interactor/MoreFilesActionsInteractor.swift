@@ -566,7 +566,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 }, fail: self?.failAction(elementType: .move))
             
             }, cancel: { [weak self] in
-                self?.successAction(elementType: .move)()
+                self?.output?.operationCancelled(type: .move)
         })
     }
     
@@ -577,11 +577,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let folderSelector = selectFolderController()
         
         folderSelector.selectFolder(select: { [weak self] folder in
+            self?.output?.operationStarted(type: .copy)
             self?.fileService.move(items: item, toPath: folder,
                                    success: self?.successAction(elementType: .copy),
                                    fail: self?.failAction(elementType: .copy))
             }, cancel: { [weak self] in
-                self?.successAction(elementType: ElementTypes.move)()
+                self?.output?.operationCancelled(type: .copy)
         })
     }
     
