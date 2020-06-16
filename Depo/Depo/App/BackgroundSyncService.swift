@@ -103,7 +103,7 @@ final class BackgroundSyncService {
         if taskIdentifier == TaskIdentifiers.backgroundProcessing {
             
             request = BGProcessingTaskRequest(identifier: TaskIdentifiers.backgroundProcessing)
-            debugLog("BG! scheduleTask \(taskIdentifier)")
+            
             if let processingTask = request as? BGProcessingTaskRequest {
                 processingTask.requiresNetworkConnectivity = true
                 processingTask.requiresExternalPower = false
