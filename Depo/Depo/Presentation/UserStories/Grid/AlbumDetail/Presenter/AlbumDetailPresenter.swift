@@ -22,8 +22,11 @@ class AlbumDetailPresenter: BaseFilesGreedPresenter {
             //onReloadData(
         case .removeAlbum:
             debugLog("AlbumDetailPresenter operationFinished type == removeAlbum")
-
-            albumDetailModuleOutput?.onAlbumRemoved()
+            if let albumDetailModuleOutput = albumDetailModuleOutput {
+                albumDetailModuleOutput.onAlbumRemoved()
+            } else {
+                router.back()
+            }
         default:
             return
         }
