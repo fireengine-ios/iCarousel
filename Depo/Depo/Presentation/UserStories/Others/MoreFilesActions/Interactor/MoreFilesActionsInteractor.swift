@@ -1350,9 +1350,14 @@ extension MoreFilesActionsInteractor {
     }
     
     private func moveToTrashSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
-        analyticsService.trackFileOperationGAEvent(operationType: .trash, items: items)
-        fileService.moveToTrash(files: items, success: { [weak self] in
-            self?.removeItemsFromPlayer(items: items)
+        let moveToTrashItems = items.filter { !$0.isLocalItem && !$0.isReadOnlyFolder }
+        guard !moveToTrashItems.isEmpty else {
+            return
+        }
+        
+        analyticsService.trackFileOperationGAEvent(operationType: .trash, items: moveToTrashItems)
+        fileService.moveToTrash(files: moveToTrashItems, success: { [weak self] in
+            self?.removeItemsFromPlayer(items: moveToTrashItems)
             success()
         }, fail: fail)
     }
