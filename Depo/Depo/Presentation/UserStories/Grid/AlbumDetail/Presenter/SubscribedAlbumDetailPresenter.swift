@@ -50,35 +50,35 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
     }
 
     func didUnhideItems(_ items: [WrapData]) {
-        setupBackHandler(toOriginal: true)
+        setupBackHandler(toOriginal: true, operation: .unhide)
     }
     
     func didMoveToTrashItems(_ items: [Item]) {
         if view.status == .hidden {
-            setupBackHandler(toOriginal: true)
+            setupBackHandler(toOriginal: true, operation: .moveToTrash)
         } else {
             dataSource.deleteItems(items: items)
         }
     }
     
     func didMoveToTrashAlbums(_ albums: [AlbumItem]) {
-        setupBackHandler(toOriginal: false)
+        setupBackHandler(toOriginal: false, operation: .moveToTrash)
     }
     
     func putBackFromTrashItems(_ items: [Item]) {
-        setupBackHandler(toOriginal: true)
+        setupBackHandler(toOriginal: true, operation: .restore)
     }
     
     func putBackFromTrashPeople(items: [PeopleItem]) {
-        setupBackHandler(toOriginal: true)
+        setupBackHandler(toOriginal: true, operation: .restore)
     }
     
     func putBackFromTrashPlaces(items: [PlacesItem]) {
-        setupBackHandler(toOriginal: true)
+        setupBackHandler(toOriginal: true, operation: .restore)
     }
     
     func putBackFromTrashThings(items: [ThingsItem]) {
-        setupBackHandler(toOriginal: true)
+        setupBackHandler(toOriginal: true, operation: .restore)
     }
     
     func didHideAlbums(_ albums: [AlbumItem]) {
@@ -88,28 +88,33 @@ extension SubscribedAlbumDetailPresenter: ItemOperationManagerViewProtocol {
     }
     
     func didUnhideAlbums(_ albums: [AlbumItem]) {
-        setupBackHandler(toOriginal: false)
+        setupBackHandler(toOriginal: false, operation: .unhide)
     }
     
     func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
-        setupBackHandler(toOriginal: false)
+        setupBackHandler(toOriginal: false, operation: .restore)
     }
     
     func deleteItems(items: [Item]) {
-        setupBackHandler(toOriginal: true)
+        setupBackHandler(toOriginal: true, operation: .delete)
     }
     
     func albumsDeleted(albums: [AlbumItem]) {
-        setupBackHandler(toOriginal: false)
+        setupBackHandler(toOriginal: false, operation: .delete)
     }
     
-    private func setupBackHandler(toOriginal: Bool) {
+    private func setupBackHandler(toOriginal: Bool, operation: ElementTypes) {
         backHandler = { [weak self] in
             if toOriginal {
                 self?.backToOriginController()
             } else {
                 self?.router.back()
             }
+        }
+        
+        //We need to start backHandler if we showing snackbar
+        if SnackbarType(operationType: operation) != nil {
+            backHandler?()
         }
     }
     
