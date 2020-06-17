@@ -128,7 +128,7 @@ extension CommonDivorceActionService: DivorceActionStateProtocol {
         trackFaceImageGroupingStates()
         
         if faceImageGrouping?.isFaceImageAllowed == true {
-            openPremium()
+            openPeopleAlbum()
         } else {
             openFaceImageGrouping()
         }
