@@ -62,6 +62,9 @@ final class AppConfigurator {
             storageVars.isAppFirstLaunch = false
             KeychainCleaner().clear()
             /// call migrate after Keychain clear
+            if #available(iOS 13.0, *) {
+                BackgroundSyncService.shared.cancelAllTasks()
+            }
             AppMigrator.migrateAll()
         }
     }
