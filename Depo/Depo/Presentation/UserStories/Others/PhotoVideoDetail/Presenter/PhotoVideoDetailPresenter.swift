@@ -312,6 +312,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
                     completion?()
             } else {
                 self?.view.setHiddenPremiumStackView(isHidden: true)
+                completion?()
             }
         }, fail: { [weak self] error in
             self?.failedUpdate(error: error)
