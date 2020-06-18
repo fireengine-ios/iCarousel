@@ -44,7 +44,9 @@ class RouterVC: NSObject {
     }
     
     func getParentUUID() -> String {
-        if let viewController = topNavigationController?.viewControllers.last as? BaseViewController {
+        //TODO: get rid of getParentUUID
+        if topNavigationController?.viewControllers.first is PhotoVideoDetailViewController,
+           let viewController = topNavigationController?.viewControllers.last as? BaseViewController {
             return viewController.parentUUID
         } else if let tabBarController = tabBarController,
             let viewControllers = tabBarController.customNavigationControllers[safe: tabBarController.selectedIndex]?.viewControllers,
