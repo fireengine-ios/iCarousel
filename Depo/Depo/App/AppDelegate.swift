@@ -228,6 +228,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         debugLog("AppDelegate applicationWillEnterForeground")
         if BackgroundTaskService.shared.appWasSuspended {
             debugLog("App was suspended")
+            CacheManager.shared.stopRemotesActualizeCache()
             CacheManager.shared.actualizeCache()
         } else if tokenStorage.refreshToken != nil {
             SyncServiceManager.shared.update()
