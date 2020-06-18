@@ -35,7 +35,7 @@ final class SpotifyImportedPlaylistsViewController: BaseViewController, NibInit 
     private let pageSize = 20
     private var isLoadingNextPage = false
     
-    private var sortedRule: SortedRules = .timeUp {
+    private var sortedRule: SortedRules = .timeDown {
         didSet {
             dataSource.sortedRule = sortedRule
             reloadData()
