@@ -506,6 +506,7 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
         if visibleIndexes.contains(indexToChange) {
             output.updateBars()
             setupNavigationBar()
+            updateFileInfo()
         }
     }
 }
