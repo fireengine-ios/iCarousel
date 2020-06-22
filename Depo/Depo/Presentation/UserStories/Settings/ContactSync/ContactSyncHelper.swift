@@ -145,11 +145,10 @@ final class ContactSyncHelper {
     
     private func proccessOperation(_ operationType: SyncOperationType) {
         if !reachability.isReachable && operationType.isContained(in: [.backup, .restore, .analyze]) {
-//            TODO: router.goToConnectedToNetworkFailed()
+            delegate?.didFailed(operationType: .deleteDuplicated, error: .syncError(SyncOperationErrors.networkError))
             return
         }
         
-        //TODO: show view related to operationType
         start(operationType: operationType)
     }
     
@@ -259,8 +258,12 @@ final class ContactSyncHelper {
                     completion(result.hasPermissionFor(type))
                 
                 case .failed(let error):
+                    if let code = (error as? URLError)?.code, code.isContained(in: [.networkConnectionLost, .notConnectedToInternet]) {
+                        self.delegate?.didFailed(operationType: .deleteDuplicated, error: .syncError(SyncOperationErrors.networkError))
+                        return
+                    }
+
                     completion(false)
-                //TODO: handle error
             }
         }
     }
