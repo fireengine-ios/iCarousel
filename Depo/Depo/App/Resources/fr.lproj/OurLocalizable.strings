@@ -13,8 +13,8 @@
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "La suppression de cet album ne supprimera pas les fichiers de lifebox. Vous pouvez accéder à ces fichiers depuis l'onglet Photos. Êtes-vous sûr de vouloir procéder à sa suppression ?";
 
 /*Suggested: "Deleting these files will remove them from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?"*/
-"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Le ou les fichiers sélectionnés seront mis dans la poubelle. Vous pourrez les récupérer en 30 jours. N'oubliez pas de vider d'abord la corbeille si vous devez faire de place pour la mémoire de votre lifebox,";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Le ou les fichiers sélectionnés seront mis dans la poubelle. Vous pourrez les récupérer en 30 jours. N'oubliez pas de vider d'abord la poubelle si vous devez faire de place pour la mémoire de votre lifebox,";
+"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Le ou les fichiers sélectionnés seront mis dans la poubelle. Vous pourrez les récupérer en 90 jours. N'oubliez pas de vider d'abord la corbeille si vous devez faire de place pour la mémoire de votre lifebox,";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Le ou les fichiers sélectionnés seront mis dans la poubelle. Vous pourrez les récupérer en 90 jours. N'oubliez pas de vider d'abord la poubelle si vous devez faire de place pour la mémoire de votre lifebox,";
 "Purchase" = "Achat";
 "Packages" = "Offres";
 "Verification code is blocked.\nPlease request a new code" = "Le code de vérification est bloqué. Veuillez réinitialiser votre code.";
@@ -182,7 +182,7 @@ sent to your phone number %@"*/
 "Your device memory is almost full" = "L'espace de stockage de votre appareil est presque plein";
 
 /*Suggested: "There are some duplicated items on your device and lifebox"*/
-"There are some duplicated items both in your device and lifebox" = "Il existe des doublons dans votre appareil et lifebox.";
+"There are some duplicated items both in your device and lifebox" = "Vérifions les éléments en double sur votre appareil et sur votre lifebox!";
 "Operation is complete" = "Fin de l’opération";
 "Download is complete" = "Fin du téléchargement";
 "Deleting is complete" = "Suppression terminée";
@@ -696,11 +696,11 @@ Comma added*/
 "PackagesPolicyHeader" = "Abonnement auto-renouvelable pour l'achat in-app:";
 
 /*Suggested: "Subsriptions are renewed on a monthly basis
-Payment will be charged to iTunes Account at confirmation of purchase
-Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period
-Account will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen.
-Subscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase.
-Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable
+Payment will be charged to iTunes Account at confirmation of purchase 
+Subscription automatically renews unless auto-renew is turned off at least 24-hours before the end of the current period 
+Account will be charged for renewal within 24-hours prior to the end of the current period. The fees are reflected as they are shown on the in-app purchase screen. 
+Subscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase. 
+Any unused portion of a free trial period, if offered, will be forfeited when the user purchases a subscription to that publication, where applicable 
 Privacy Policy: https://m.turkcell.com.tr/tr/gizlilik-ve-guvenlik
 Terms of Use:"
 
@@ -1594,7 +1594,7 @@ Please check I have understood the intended command here*/
 "profile_detail_address_placeholder" = "Veuillez entrer votre adresse";
 "profile_detail_error_contact_call_center" = "Veuillez contacter le centre d'appels pour changer votre numéro";
 "temporary_error" = "Une erreur temporaire s'est produite, veuillez réessayer";
-"move_to_trash_albums_message" = "Le ou les album(s) sélectionnés seront mis à la poubelle. Vous pouvez les restaurer dans un délai de 30 jours. Veuillez vider votre poubellesi besoin pour libérer de l'espace.";
+"move_to_trash_albums_message" = "Le ou les album(s) sélectionnés seront mis à la poubelle. Vous pouvez les restaurer dans un délai de 90 jours. Veuillez vider votre poubellesi besoin pour libérer de l'espace.";
 "move_to_trash_albums_success_message" = "Album(s) envoyé(s) à la poubelle avec succès.";
 "confirmation_popup_title_hide" = "Sélection masquée";
 "confirmation_popup_message_hide" = "Les articles sélectionnés ne seront disponibles que dans l'album \"Masqué\". Vous pouvez les restaurer à tout moment. Êtes-vous sûr de continuer ?";
@@ -1640,7 +1640,7 @@ Please check I have understood the intended command here*/
 "carousel_view_second_page_title" = "Masquez les personnes indésirables !";
 "carousel_view_second_page_text" = "Vous avez des personnes ou des souvenirs indésirables ? Il vous suffit de sélectionner cette personne et de cliquer sur le bouton \"Masquer\". Tous les souvenirs seront déplacés vers l'album \"Masqué\" et vous ne trouverez plus ces photos dans les Photos ou la page d'accueil. Vous pouvez les restaurer à tout moment.";
 "carousel_view_third_page_title" = "Supprimez les personnes indésirables !";
-"carousel_view_third_page_text" = "Certaines personnes ou certains souvenirs ne valent pas la peine d'être conservés. Libérez votre espace et votre vie en sélectionnant l'album de la personne et en cliquant sur le bouton \"Supprimer\". En cas de regret, vous disposez de 30 jours pour les restaurer. Si vous n'êtes pas prêt à effacer, gardez à l'esprit que vous avez également l'option \"Masquer\".";
+"carousel_view_third_page_text" = "Certaines personnes ou certains souvenirs ne valent pas la peine d'être conservés. Libérez votre espace et votre vie en sélectionnant l'album de la personne et en cliquant sur le bouton \"Supprimer\". En cas de regret, vous disposez de 90 jours pour les restaurer. Si vous n'êtes pas prêt à effacer, gardez à l'esprit que vous avez également l'option \"Masquer\".";
 "hidden_bin_album_slider_title" = "Mes albums masqués";
 "hidden_bin_album_slider_empty" = "Il n'y a pas d'album masqué pour l'instant.";
 "hidden_bin_empty" = "Il n'y a pas d'objet masqué pour l'instant.";
@@ -1653,17 +1653,17 @@ Please check I have understood the intended command here*/
 "trash_bin_album_slider_empty" = "Il n'y a pas encore d'album supprimé.";
 "trash_bin_empty" = "Il n'y a pas encore de point supprimé.";
 "delete_confirmation_popup_title" = "Supprimer";
-"delete_confirmation_popup_text" = "Le(s) article(s) sélectionné(s) sera (seront) mis à la poubelle. Vous pouvez les restaurer dans un délai de 30 jours. Veuillez vider votre poubelle en cas de besoin pour libérer de l'espace.";
+"delete_confirmation_popup_text" = "Le(s) article(s) sélectionné(s) sera (seront) mis à la poubelle. Vous pouvez les restaurer dans un délai de 90 jours. Veuillez vider votre poubelle en cas de besoin pour libérer de l'espace.";
 "restore_confirmation_popup_title" = "Restaurer";
 "restore_confirmation_popup_text" = "Le ou les éléments sélectionnés seront restaurés. Êtes-vous sûr de continuer ?";
 "delete_from_hidden_bin_popup_success_title" = "Supprimer";
-"delete_from_hidden_bin_popup_success_text" = "Les fichiers sélectionnés seront mis à la poubelle. Vous pouvez les restaurer dans un délai de 30 jours. Veuillez vider votre poubelle en cas de besoin pour libérer de l'espace.";
+"delete_from_hidden_bin_popup_success_text" = "Les fichiers sélectionnés seront mis à la poubelle. Vous pouvez les restaurer dans un délai de 90 jours. Veuillez vider votre poubelle en cas de besoin pour libérer de l'espace.";
 "unhide_popup_success_title" = "Point(s) non caché(s) avec succès.";
-"delete_popup_text" = "Le(s) fichier(s) sélectionné(s) sera (seront) mis à la poubelle. Vous pouvez les restaurer dans un délai de 30 jours. Veuillez vider votre poubelle en cas de besoin pour libérer de l'espace.";
+"delete_popup_text" = "Le(s) fichier(s) sélectionné(s) sera (seront) mis à la poubelle. Vous pouvez les restaurer dans un délai de 90 jours. Veuillez vider votre poubelle en cas de besoin pour libérer de l'espace.";
 "PackagesPolicyTextBillo" = "Les abonnements sont renouvelés chaque mois\nLe paiement sera débité du compte iTunes au moment de la confirmation de l'achat \nL'abonnement se renouvelle automatiquement, sauf si le renouvellement automatique est désactivé au moins 24 heures avant la fin de la période en cours \nLe compte sera débité pour le renouvellement dans les 24 heures précédant la fin de la période en cours. Les frais sont indiqués tels qu'ils figurent sur l'écran d'achat de l'application. \nLes offres peuvent être gérés par l'utilisateur et le renouvellement automatique peut être désactivé en allant dans les paramètres du compte de l'utilisateur après l'achat \nToute partie non utilisée d'une période d'essai gratuite, si elle est offerte, sera perdue lorsque l'utilisateur achètera un abonnement à cette publication, le cas échéant \nPolitique de confidentialité : https://billostorage.com/policy\nConditions d'utilisation:";
 "unhide_items_popup_text" = "Le(s) élément(s) sélectionné(s) ne sera (seront) pas caché(s) et sera (seront) déplacé(s) vers les dossiers précédents.";
 "unhide_albums_popup_text" = "Le ou les albums sélectionnés ne seront pas cachés et seront replacés dans les dossiers précédents.";
-"move_to_trash_hidden_albums_confirmation_popup_text" = "Le ou les albums sélectionnés seront mis à la poubelle. Vous pouvez les restaurer dans un délai de 30 jours. Veuillez vider votre poubelle en cas de besoin pour libérer de l'espace.";
+"move_to_trash_hidden_albums_confirmation_popup_text" = "Le ou les albums sélectionnés seront mis à la poubelle. Vous pouvez les restaurer dans un délai de 90 jours. Veuillez vider votre poubelle en cas de besoin pour libérer de l'espace.";
 "delete_items_confirmation_popup_text" = "Le ou les éléments sélectionnés seront définitivement supprimés et vous n'y aurez pas accès. Êtes-vous sûr de continuer ?";
 "delete_albums_confirmation_popup_text" = "Le ou les albums sélectionnés seront définitivement supprimés et vous n'y aurez pas accès. Êtes-vous sûr de continuer ?";
 "delete_folders_confirmation_popup_text" = "Le ou les dossiers sélectionnés seront définitivement supprimés et vous n'y aurez pas accès. Êtes-vous sûr de continuer ?";
@@ -1776,40 +1776,12 @@ Please check I have understood the intended command here*/
 "offer_store_apple_store" = "Apple Store";
 "offer_store_google_store" = "Google Play Store";
 "remove_albums_success_message" = "Album(s) supprimé(s)";
-"hide_album_action_sheet" = "";
-"sign_up_password_rules" = "";
-"documents_album_card_title" = "";
-"documents_album_card_description" = "";
-"documents_album_card_hide_button" = "";
-"documents_album_card_view_button" = "";
-"snackbar_ok" = "";
-"snackbar_trash_bin" = "";
-"snackbar_hidden_bin" = "";
-"analyze_history_delete_success" = "";
-"added_to_favorites_message" = "";
-"removed_from_favorites" = "";
-"added_to_album" = "";
-"downloaded_files" = "";
-"edit_saved" = "";
-"files_moved" = "";
-"success_remove_passcode" = "";
-"added_to_favorites_from_lifebox" = "";
-"edit_security_question_success" = "";
-"set_security_question_success" = "";
-"import_from_instagram_started" = "";
-"import_from_facebook_started" = "";
-"instapick_hashtags_copied" = "";
-"create_story_selection_limit" = "";
-"etk_html" = "<p><b> COMMERCIAL ELECTRONIC MESSAGE AND DATA CONSENT</b></p>\n\n<p>I hereby consent to allow Lifecell Bulut Çözümleri A.Ş., Turkcell İletişim Hizmetleri A.Ş. and <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/genel-bakis/istiraklerimiz\">Group Companies</a> to process my personal data and share them with the parties listed in the Permission Policy and send me commercial electronic messages in line with the “Permission Policy” <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">available here</a> unless requested otherwise by me as per Law No. 6563 and other applicable regulations for the purposes of informing me on discounts, deals and special offers, which are in accordance with my needs and preferences regarding the products and services of these companies. I acknowledge that I can revoke my consent for processing/sharing of my personal data or receiving commercial electronic mails and detailed information on the scope and revocation of such consent are available within the scope of the <a href=\"https://www.turkcell.com.tr/tr/hakkimizda/duyurular/veribilgi-isleme-izni\">\"Permission Policy\"</a>.   </p> \n";
-"free_up_space_alert_title" = "";
-"free_up_space_no_duplicates" = "";
-"free_up_space_in_progress" = "";
 "hide_album_action_sheet" = "Masquer l'album";
-"sign_up_password_rules" = "Le mot de passe doit comprendre au moins 6 et au plus 16 caractères, doit contenir au moins un chiffre et une lettre majuscule, des lettres non consécutives.";
+"sign_up_password_rules" = "Le mot de passe doit être compris entre 6 et 16 caractères, contenir au moins 1 chiffre et 1 lettre capitale et ne pas inclure des lettres consécutives.";
 "documents_album_card_title" = "Voulez-vous masquer ces dossiers?";
 "documents_album_card_description" = "%d éléments, y compris les captures d'écran et les documents, sont regroupés dans l'Album de Documents. Vous pouvez modifier votre galerie en masquant cet album. Vous pouvez accéder à ces photos à tout moment à partir de l'album masqué.";
-"documents_album_card_hide_button" = "Masquer l'album de documents";
-"documents_album_card_view_button" = "Afficher l'album de documents";
+"documents_album_card_hide_button" = "Masquer l'album";
+"documents_album_card_view_button" = "Voir l'album";
 "snackbar_ok" = "D'accord";
 "snackbar_trash_bin" = "Éléments supprimés";
 "snackbar_hidden_bin" = "Album masqué";
@@ -1924,3 +1896,4 @@ Please check I have understood the intended command here*/
 "contact_phase2_error_quota_restore" = "";
 "contact_phase2_error_quota_backup" = "";
 "download_document_error_popup" = "Vous ne pouvez télécharger que des photos, des vidéos ou des albums.";
+"contact_phase2_history_cell_Contact_List" = "";

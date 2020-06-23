@@ -47,7 +47,7 @@ final class CacheManager {
     }
     
     func actualizeCache() {
-        debugLog("calling actualizeCache")
+        debugLog("CacheManager calling actualizeCache")
         
         guard coreDataStack.isReady else {
             debugLog("CacheManager coreData not ready")
@@ -55,7 +55,12 @@ final class CacheManager {
             return
         }
         
-        debugLog("starting actualizeCache")
+        guard !isProcessing else {
+            debugLog("CacheManager Still processing remotes...")
+            return
+        }
+        
+        debugLog("CacheManager starting actualizeCache")
         
         isCacheActualized = false
         isProcessing = true
@@ -66,7 +71,7 @@ final class CacheManager {
                 return
             }
             
-            debugLog("actualizeCache albums are processed")
+            debugLog("CacheManager albums are processed")
             
             MediaItemOperationsService.shared.removeZeroBytesLocalItems { [weak self] _ in
                 debugLog("CacheManager zero bytes items removed")
@@ -96,7 +101,7 @@ final class CacheManager {
                                     
                                     self.isProcessing = false
                                     self.isCacheActualized = true
-                                    debugLog("cache is actualized")
+                                    debugLog("CacheManager cache is actualized")
                                     self.updatePreparation(isBegun: false)
                                     SyncServiceManager.shared.updateImmediately()
                                     self.delegates.invoke { $0.didCompleteCacheActualization() }
@@ -111,13 +116,16 @@ final class CacheManager {
                         self.showPreparationCardAfterDelay()
                         self.startProcessingAllLocals(completion: { [weak self] in
                             self?.actualizeUnsavedFileSyncStatus() { [weak self] in
+                                guard let self = self, !self.processingRemoteItems else {
+                                    return
+                                }
                                 debugLog("CacheManager there are remotes, all local processed")
-                                self?.isProcessing = false
-                                self?.isCacheActualized = true
-                                debugLog("cache is actualized")
-                                self?.updatePreparation(isBegun: false)
+                                self.isProcessing = false
+                                self.isCacheActualized = true
+                                debugLog("CacheManager cache is actualized")
+                                self.updatePreparation(isBegun: false)
                                 SyncServiceManager.shared.updateImmediately()
-                                self?.delegates.invoke { $0.didCompleteCacheActualization() }
+                                self.delegates.invoke { $0.didCompleteCacheActualization() }
                             }
                         })
                     }
@@ -172,7 +180,16 @@ final class CacheManager {
             guard let self = self else {
                 return
             }
+            
             guard self.processingRemoteItems else {
+                debugLog("actualizeCache: not processing")
+                return
+            }
+            
+            guard !remoteItems.isEmpty else {
+                debugLog("actualizeCache: got empty page")
+                self.photoVideoService.currentPage = 0
+                completion()
                 return
             }
             
@@ -182,14 +199,12 @@ final class CacheManager {
                     return
                 }
                 
-                if remoteItems.count < CacheManager.pageSize {
-                    self.photoVideoService.currentPage = 0
-                    completion()///means all files are downloaded
-                } else {
-                    //FIXME: When BackEnd would fix duplication problem we should remove else part
-                    self.userDefaultsVars.currentRemotesPage = self.photoVideoService.currentPage
-                    self.addNextRemoteItemsPage(completion: completion)
-                }
+                //FIXME: When BackEnd would fix duplication problem we should remove else part
+                let page = self.photoVideoService.currentPage
+                self.userDefaultsVars.currentRemotesPage = page
+                debugLog("actualizeCache: save current page \(page)")
+                
+                self.addNextRemoteItemsPage(completion: completion)
             }
             //FIXME: When BackEnd would fix duplication problem we should uncomment this
 //            if remoteItems.count >= CacheManager.pageSize {
@@ -249,12 +264,17 @@ final class CacheManager {
     }
     
     func stopRemotesActualizeCache() {
-        processingRemoteItems = false
-//        processingLocalItems = false//still need to test what would ahppen in parallel downlaod
-//        isProcessing = false
+        debugLog("CacheManager stop remotes actualization")
+        
+        if processingRemoteItems {
+            processingRemoteItems = false
+            //        processingLocalItems = false//still need to test what would ahppen in parallel downlaod
+            isProcessing = false
+            photoVideoService.stopAllOperations() //Dont know if it actualy affects opration by cancell all
+            ///unsubscribe
+        }
+        
         isCacheActualized = false
-        photoVideoService.stopAllOperations() //Dont know if it actualy affects opration by cancell all
-        ///unsubscribe
         reachabilityService.delegates.remove(self)
         internetConnectionIsBackCallback = nil
     }

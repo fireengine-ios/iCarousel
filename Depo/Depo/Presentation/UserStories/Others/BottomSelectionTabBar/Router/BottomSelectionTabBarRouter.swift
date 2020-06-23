@@ -7,15 +7,19 @@
 //
 
 class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
+    
+    private lazy var router = RouterVC()
 
     func onInfo(object: Item) {
-        let router = RouterVC()
-        let fileInfo = router.fileInfo(item: object)
-        router.pushOnPresentedView(viewController: fileInfo)
+        if let topViewController = RouterVC().getViewControllerForPresent() as? PhotoVideoDetailViewController, !UIDevice.current.orientation.isLandscape {
+            topViewController.showBottomDetailView()
+        } else {
+            let fileInfo = router.fileInfo(item: object)
+            router.pushOnPresentedView(viewController: fileInfo)
+        }
     }
     
     func addToAlbum(items: [BaseDataSourceItem]) {
-        let router = RouterVC()
         let controller = router.addPhotosToAlbum(photos: items)
         router.pushOnPresentedView(viewController: controller)
     }
@@ -24,7 +28,7 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
         guard let wrapperedArray = items as? [Item] else {
             return
         }
-        let router = RouterVC()
+
         let imagesOnly = wrapperedArray.filter { $0.fileType == .image }
         let vc = PrintInitializer.viewController(data: imagesOnly)
         router.pushOnPresentedView(viewController: vc)
@@ -37,7 +41,6 @@ class BottomSelectionTabBarRouter: BottomSelectionTabBarRouterInput {
     func showDeleteMusic(_ completion: @escaping VoidHandler) { }
     
     func showErrorShareEmptyAlbums() {
-        let router = RouterVC()
         let popUp = PopUpController.with(title: TextConstants.errorAlert,
                                          message: TextConstants.shareEmptyAlbumError,
                                          image: .error,

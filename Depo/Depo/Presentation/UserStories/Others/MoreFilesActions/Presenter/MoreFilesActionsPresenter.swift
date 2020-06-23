@@ -42,6 +42,10 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
         startAsyncOperationDisableScreen()
     }
     
+    func operationCancelled(type: ElementTypes) {
+        completeAsyncOperationEnableScreen()
+    }
+    
     func dismiss(animated: Bool) {} /// overriding
     
     func showWrongFolderPopup() {

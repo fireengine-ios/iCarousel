@@ -134,7 +134,7 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
             } else {
                 setupBackHandler(toOriginal: true)
             }
-        } else if let interactor = interactor as? FaceImagePhotosInteractorInput {
+        } else if let interactor = interactor as? FaceImagePhotosInteractorInput, backHandler == nil {
             interactor.loadItem(item)
         }
     }

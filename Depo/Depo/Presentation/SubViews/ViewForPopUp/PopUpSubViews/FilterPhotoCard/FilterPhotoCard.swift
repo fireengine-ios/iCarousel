@@ -14,6 +14,7 @@ final class FilterPhotoCard: BaseCardView {
     private lazy var imageManager = ImageManager()
     private lazy var filesDataSource = FilesDataSource()
     private var originalItem: WrapData?
+    private lazy var router = RouterVC()
     
     @IBOutlet private weak var headerLabel: UILabel! {
         didSet {
@@ -152,12 +153,12 @@ final class FilterPhotoCard: BaseCardView {
     }
     
     private func displayNotSavedPhoto() {
-        
-        guard let image = photoImageView.image else { return }
-        let vc = PVViewerController.initFromNib()
-        vc.image = image
+        guard let item = originalItem else {
+            return
+        }
+        let vc = PVViewerController.with(item: item)
         let nController = NavigationController(rootViewController: vc)
-        RouterVC().presentViewController(controller: nController)
+        router.presentViewController(controller: nController)
     }
 
     

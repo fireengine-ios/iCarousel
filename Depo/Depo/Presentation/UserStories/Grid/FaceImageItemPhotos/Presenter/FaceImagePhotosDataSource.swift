@@ -48,6 +48,8 @@ final class FaceImagePhotosDataSource: BaseDataSourceForCollectionView {
         notifyOperation(type: .delete, for: albums)
     }
     
+    override func didHidePeople(items: [PeopleItem]) { }
+    
     private func notifyOperation(type: ElementTypes, for albums: [AlbumItem]) {
         guard let uuid = albums.first?.uuid, uuid == album?.uuid, let item = item else {
             firDelegate?.didFinishAlbumOperation()
