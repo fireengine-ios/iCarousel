@@ -45,8 +45,6 @@ final class DeleteDuplicatesCell: UITableViewCell {
     func configure(with contact: ContactSync.AnalyzedContact) {
         nameLabel.text = contact.name
         duplicatesLabel.text = String(format: TextConstants.deleteDuplicatesCount, contact.numberOfErrors)
-        
-        let letters = contact.name.split(separator: " ").compactMap { $0.first?.uppercased() }
-        letterLabel.text = letters.joined()
+        letterLabel.text = contact.name.first?.uppercased() ?? ""
     }
 }

@@ -88,12 +88,16 @@ final class ContactSyncAnalyzeProgressView: UIView, NibInit {
     
     func reset() {
         progressLine.resetProgress()
-        set(percentageValue: 0)
+        DispatchQueue.main.async {
+            self.set(percentageValue: 0)
+        }
     }
     
     func update(progress: Int) {
         progressLine.set(progress: progress)
-        set(percentageValue: progress)
+        DispatchQueue.main.async {
+            self.set(percentageValue: progress)
+        }
     }
     
     
