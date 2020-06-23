@@ -112,6 +112,10 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     }
     
     private func showRelatedView() {
+        guard !contactSyncHelper.isRunning else {
+            return
+        }
+        
         guard let model = syncModel, model.totalNumberOfContacts != 0 else {
             self.show(view: self.noBackupView, animated: true)
             return
