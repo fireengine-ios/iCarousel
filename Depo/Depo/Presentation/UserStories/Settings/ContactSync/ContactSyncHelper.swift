@@ -57,6 +57,10 @@ final class ContactSyncHelper {
     
     //MARK: - Public
     
+    var isRunning: Bool {
+        return ContactSyncSDK.isRunning()
+    }
+    
     func prepare() -> Bool {
         //TODO: check logic, maybe just cancel and call .getBackUpStatus
         guard !ContactSyncSDK.isRunning() else {
