@@ -15,6 +15,7 @@ protocol ContactsBackupActionProviderProtocol: class {
 }
 
 protocol ContactSyncControllerProtocol: ViewController {
+    func isMain() -> Bool
     func showPopup(type: ContactSyncPopupType)
     func handle(error: ContactSyncHelperError, operationType: SyncOperationType)
 }
@@ -269,6 +270,10 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
 //MARK: - ContactSyncControllerProtocol
 
 extension ContactSyncViewController: ContactSyncControllerProtocol {
+    
+    func isMain() -> Bool {
+        return true
+    }
     
     func handle(error: ContactSyncHelperError, operationType: SyncOperationType) {
         switch error {

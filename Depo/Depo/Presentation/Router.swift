@@ -459,6 +459,10 @@ class RouterVC: NSObject {
         return ContactSyncOperationResultController.create(with: .success, syncResult: syncResult, periodicSync: periodicSync)
     }
     
+    func contactSyncFailController(with view: ContactsOperationView) -> UIViewController {
+        return ContactSyncOperationResultController.createFailed(with: view)
+    }
+    
     // MARK: PeriodicContacsSync
     
     var periodicContactsSync: UIViewController {

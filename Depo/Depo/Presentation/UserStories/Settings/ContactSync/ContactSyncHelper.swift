@@ -330,6 +330,10 @@ private final class Analytics {
 
 extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
     
+    func isMain() -> Bool {
+        return false
+    }
+    
     func didFailed(operationType: SyncOperationType, error: ContactSyncHelperError) {
         DispatchQueue.main.async {
             self.hideSpinner()
@@ -379,9 +383,7 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
         case .internalError, .failed:
             let errorTitle = operationType.transformToContactOperationSyncType()?.title(result: .failed) ?? TextConstants.errorUnknown
             let errorView = ContactsOperationView.with(title: errorTitle, message: TextConstants.contactSyncErrorIternal, operationResult: .failed)
-            
-            ContentViewAnimator().showTransition(to: errorView, on: self.view, animated: true)
-            
+            show(errorView: errorView)
         }
     }
     
@@ -391,9 +393,9 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
             debugLog("ContactSync handle error on main screen: - unknown type of operation")
             return
         }
-        let animator = ContentViewAnimator()
+
         guard let code = code else {
-            animator.showTransition(to: ContactsOperationView.with(type: convertedOperationType, result: .failed), on: self.view, animated: true)
+            show(errorView: ContactsOperationView.with(type: convertedOperationType, result: .failed))
             return
         }
         let message: String
@@ -411,8 +413,17 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
         }
         
         let errorView = ContactsOperationView.with(title: convertedOperationType.title(result: .failed), message: message, operationResult: .failed)
-        animator.showTransition(to: errorView, on: self.view, animated: true)
-        
+        show(errorView: errorView)
+    }
+    
+    private func show(errorView: ContactsOperationView) {
+        if isMain() {
+            let router = RouterVC()
+            let controller = router.contactSyncFailController(with: errorView)
+            router.pushViewController(viewController: controller)
+        } else {
+            ContentViewAnimator().showTransition(to: errorView, on: self.view, animated: true)
+        }
     }
     
     func showWarningPopup(type: WarningPopupType) {
