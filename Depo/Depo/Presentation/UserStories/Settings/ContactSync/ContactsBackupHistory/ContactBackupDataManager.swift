@@ -1,5 +1,5 @@
 //
-//  ContuctBackupDataProvider.swift
+//  ContactBackupDataProvider.swift
 //  Depo
 //
 //  Created by Maxim Soldatov on 6/1/20.
@@ -10,24 +10,24 @@ import UIKit
 
 typealias ContactBuckupItem = ContactSync.SyncResponse
 
-protocol ContuctBackupHistoryDataManagerProtocol: class {
+protocol ContactBackupHistoryDataManagerProtocol: class {
     func appendItemsForPresent(items: [ContactBuckupItem])
     func getSelectedItems() -> [ContactBuckupItem]
 }
 
-protocol ContuctBackupHistoryDataManagerDelegate: class {
+protocol ContactBackupHistoryDataManagerDelegate: class {
     func showDetailsForBuckupItem(item: ContactBuckupItem)
 }
 
 //TODO: Change logic/ uncomment when new logic (with cell selection mode) will be implemented
 
-final class ContuctBackupHistoryDataManager: NSObject, ContuctBackupHistoryDataManagerProtocol {
+final class ContactBackupHistoryDataManager: NSObject, ContactBackupHistoryDataManagerProtocol {
     
     private var tableView: UITableView
     
-    weak var delegate: ContuctBackupHistoryDataManagerDelegate?
+    weak var delegate: ContactBackupHistoryDataManagerDelegate?
     
-    init(tableView: UITableView, delegate: ContuctBackupHistoryDataManagerDelegate) {
+    init(tableView: UITableView, delegate: ContactBackupHistoryDataManagerDelegate) {
         self.tableView = tableView
         self.tableView.register(nibCell: ContactsBackupCell.self)
         super.init()
@@ -89,7 +89,7 @@ final class ContuctBackupHistoryDataManager: NSObject, ContuctBackupHistoryDataM
     }
 }
 
-extension ContuctBackupHistoryDataManager: UITableViewDataSource {
+extension ContactBackupHistoryDataManager: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {   //contactBackups.count
         selectedItems.count
@@ -100,7 +100,7 @@ extension ContuctBackupHistoryDataManager: UITableViewDataSource {
     }
 }
 
-extension ContuctBackupHistoryDataManager: UITableViewDelegate {
+extension ContactBackupHistoryDataManager: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
@@ -121,7 +121,7 @@ extension ContuctBackupHistoryDataManager: UITableViewDelegate {
      }
 }
 
-extension ContuctBackupHistoryDataManager: ContactsBackupCellDelegate {
+extension ContactBackupHistoryDataManager: ContactsBackupCellDelegate {
     
     func selectCellButtonTapped(for cell: UITableViewCell & ContactsBackupCellProtocol) {
 //        guard let indexPath = tableView.indexPath(for: cell) else {

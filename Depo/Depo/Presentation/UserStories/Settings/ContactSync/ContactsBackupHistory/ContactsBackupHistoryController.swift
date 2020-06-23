@@ -15,7 +15,7 @@ final class ContactsBackupHistoryController: BaseViewController {
     private lazy var restoreProgressView = ContactSyncProgressView.setup(type: .restore)
     private var resultView: UIView?
     
-    private var dataManager: ContuctBackupHistoryDataManagerProtocol?
+    private var dataManager: ContactBackupHistoryDataManagerProtocol?
     private let router = RouterVC()
     private let animator = ContentViewAnimator()
     private let contactSyncHelper = ContactSyncHelper.shared
@@ -28,7 +28,7 @@ final class ContactsBackupHistoryController: BaseViewController {
     
     init(with backup: ContactBuckupItem) {
         super.init(nibName: nil, bundle: nil)
-        dataManager = ContuctBackupHistoryDataManager(tableView: contactHistoryView.tableView, delegate: self)
+        dataManager = ContactBackupHistoryDataManager(tableView: contactHistoryView.tableView, delegate: self)
         dataManager?.appendItemsForPresent(items: [backup])
     }
     
@@ -125,7 +125,7 @@ final class ContactsBackupHistoryController: BaseViewController {
     }
 }
 
-extension ContactsBackupHistoryController: ContuctBackupHistoryDataManagerDelegate {
+extension ContactsBackupHistoryController: ContactBackupHistoryDataManagerDelegate {
     func showDetailsForBuckupItem(item: ContactBuckupItem) {
         let controller = router.contactList(backUpInfo: item)
         router.pushViewController(viewController: controller)

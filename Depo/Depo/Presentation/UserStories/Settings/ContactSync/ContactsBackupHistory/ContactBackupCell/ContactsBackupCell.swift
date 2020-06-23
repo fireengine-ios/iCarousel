@@ -15,7 +15,7 @@ protocol ContactsBackupCellProtocol {
     func manageSelectionState(isCellSelected: Bool)
 }
 
-protocol ContactsBackupCellDelegate {
+protocol ContactsBackupCellDelegate: class {
     func selectCellButtonTapped(for cell: UITableViewCell & ContactsBackupCellProtocol)
 }
 
@@ -25,7 +25,7 @@ final class ContactsBackupCell: UITableViewCell, ContactsBackupCellProtocol {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var detailLabel: UILabel!
     
-    var delegate: ContactsBackupCellDelegate?
+    weak var delegate: ContactsBackupCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
