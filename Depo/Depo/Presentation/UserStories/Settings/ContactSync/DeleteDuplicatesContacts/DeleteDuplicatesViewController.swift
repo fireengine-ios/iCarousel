@@ -200,7 +200,10 @@ extension DeleteDuplicatesViewController: ContactSyncHelperDelegate {
     func didDeleteDuplicates() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, status: .success))
         
-        showResultView(type: .deleteDuplicates, result: .success)
+        //delete contacts is very fast, a delay is needed so that progress can be seen
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            self?.showResultView(type: .deleteDuplicates, result: .success)
+        }
     }
     
     func progress(progress: Int, for operationType: SyncOperationType) {
