@@ -402,9 +402,7 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
         case .internalError, .failed:
             let errorTitle = operationType.transformToContactOperationSyncType()?.title(result: .failed) ?? TextConstants.errorUnknown
             let errorView = ContactsOperationView.with(title: errorTitle, message: TextConstants.contactSyncErrorIternal, operationResult: .failed)
-            
-            ContentViewAnimator().showTransition(to: errorView, on: self.view, animated: true)
-            
+            showErrorView(view: errorView)
         }
     }
     
@@ -414,9 +412,9 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
             debugLog("ContactSync handle error on main screen: - unknown type of operation")
             return
         }
-        let animator = ContentViewAnimator()
+
         guard let code = code else {
-            animator.showTransition(to: ContactsOperationView.with(type: convertedOperationType, result: .failed), on: self.view, animated: true)
+            showErrorView(view: ContactsOperationView.with(type: convertedOperationType, result: .failed))
             return
         }
         let message: String
@@ -434,8 +432,11 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
         }
         
         let errorView = ContactsOperationView.with(title: convertedOperationType.title(result: .failed), message: message, operationResult: .failed)
-        animator.showTransition(to: errorView, on: self.view, animated: true)
-        
+        showErrorView(view: errorView)
+    }
+    
+    func showErrorView(view: ContactsOperationView) {
+        ContentViewAnimator().showTransition(to: view, on: self.view, animated: true)
     }
     
     func showWarningPopup(type: WarningPopupType) {

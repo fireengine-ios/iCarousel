@@ -1916,4 +1916,8 @@ struct TextConstants {
     static let warningPopupStorageLimitTitle = NSLocalizedString("contact_phase2_warning_popup_storage_limit_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let warningPopupStorageLimitMessage = NSLocalizedString("contact_phase2_warning_popup_storage_limit_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let warningPopupStorageLimitSettingsButton = NSLocalizedString("contact_phase2_warning_popup_storage_limit_settings_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let contactSyncErrorRestoreTitle = NSLocalizedString("contact_phase2_error_restore_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncErrorBackupTitle = NSLocalizedString("contact_phase2_error_backup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncErrorDeleteTitle = NSLocalizedString("contact_phase2_error_delete_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

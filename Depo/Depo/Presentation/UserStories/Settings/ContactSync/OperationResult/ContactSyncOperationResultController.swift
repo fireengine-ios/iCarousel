@@ -19,6 +19,13 @@ class ContactSyncOperationResultController: BaseViewController, NibInit {
         return controller
     }
     
+    static func createFailed(with view: ContactsOperationView) -> ContactSyncOperationResultController {
+        let controller = ContactSyncOperationResultController.initFromNib()
+        controller.failView = view
+        controller.type = .failed
+        return controller
+    }
+    
 
     @IBOutlet private weak var contentView: UIView!
     
