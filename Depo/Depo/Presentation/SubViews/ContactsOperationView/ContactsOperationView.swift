@@ -18,7 +18,14 @@ enum ContactsOperationType {
     
     func title(result: ContactsOperationResult) -> String {
         if result == .failed {
-            return "Unknown Error"
+            switch self {
+            case .backUp(_):
+                return TextConstants.contactSyncErrorBackupTitle
+            case .deleteBackUp, .deleteDuplicates, .deleteAllContacts:
+                return TextConstants.contactSyncErrorDeleteTitle
+            case .restore:
+                return TextConstants.contactSyncErrorRestoreTitle
+            }
         }
         
         switch self {
