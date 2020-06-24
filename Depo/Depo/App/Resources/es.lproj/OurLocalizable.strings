@@ -1032,7 +1032,7 @@
 "create_story_press_and_hold_description" = "Presione %@ en la imagen para reorganizar el orden de su imagen.";
 "create_story_name_title" = "Nombre de la historia";
 "create_story_pop_up_title" = "¡Ha creado una historia! %@";
-"create_story_pop_up_message" = "Estamos preparando su historia. Cuando se complete, puede encontrarlo en %@";
+"create_story_pop_up_message" = "Estamos preparando tu historia. Una vez que haya terminado, puede acceder desde el álbum Mis historias.";
 "create_story_path_to_story" = "Las Fotos & Videos >Mis historias";
 "You can not share empty album" = "No puede compartir un álbum vacío";
 "etk_permission_description" = "De acuerdo con la ley de número 6563 sobre los Productos Ventajoso y Servicios de las Compañías en Grupo y con la Legislación Relacionada, otorgo permiso para recibir mensajes comerciales de correo electrónico para ser informado a menos que yo solicite lo contrario y a menos que se solicite lo contrario.";

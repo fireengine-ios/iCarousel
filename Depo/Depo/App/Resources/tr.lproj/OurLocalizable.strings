@@ -998,7 +998,7 @@
 "create_story_press_and_hold_description" = "%@ fotoğrafların sırasını değiştirebilirsin.";
 "create_story_name_title" = "Hikaye İsmi";
 "create_story_pop_up_title" = "Hikayeni oluşturdun!\n%@";
-"create_story_pop_up_message" = "Hikayeni hazırlıyoruz. Hazır olduğunda %@ altında bulabilirsin.";
+"create_story_pop_up_message" = "Hikayeni hazırlıyoruz. Hazır olduğunda Hikayeler albümünde bulabilirsin.";
 "create_story_path_to_story" = "Fotoğraflar & Videolar > Hikayeler";
 "You can not share empty album" = "Boş bir albümü paylaşamazsın";
 "etk_permission_description" = "Turkcell ve Grup Şirketleri’nin avantajlı ürün ve hizmetlerden haberdar olmak için 6563 sayılı Kanun ve diğer ilgili mevzuat uyarınca aksi tarafımca belirtilene kadar ticari elektronik ileti almak istiyorum.";

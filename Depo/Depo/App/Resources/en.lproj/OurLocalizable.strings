@@ -1018,7 +1018,7 @@
 "create_story_press_and_hold_description" = "%@ on the image to rearrange the order of your story.";
 "create_story_name_title" = "Story Name";
 "create_story_pop_up_title" = "You created a story! \n %@";
-"create_story_pop_up_message" = "You created a story. (We are preparing your story. Once it finished, you can access it from Videos Album)";
+"create_story_pop_up_message" = "We are preparing your story. Once it is finished, you can access it from My Stories Album.";
 "create_story_path_to_story" = "Photos & Videos > My Stories";
 "You can not share empty album" = "You can not share empty album";
 "etk_permission_description" = "I hereby give my consent to receive commercial e-mail messages in order to be informed about advantageous products and services of Turkcell and its Group Companies unless and until I request otherwise pursuant to the Law No. 6563 and other applicable legislation.";
