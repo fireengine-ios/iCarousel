@@ -1296,7 +1296,7 @@ Please check I have understood the intended command here*/
 "create_story_press_and_hold_description" = "%@ sur l'image pour réorganiser l'ordre de votre story.";
 "create_story_name_title" = "Nom de la story";
 "create_story_pop_up_title" = "Vous avez créé une story !\n %@";
-"create_story_pop_up_message" = "Nous préparons votre story. Une fois terminée, vous pourrez la trouver sous\n%@";
+"create_story_pop_up_message" = "Nous préparons votre story. Une fois terminée, vous pourrez la trouver dans Mes stories.";
 "create_story_path_to_story" = "Photos et Vidéos> Mes Stories";
 "You can not share empty album" = "Vous ne pouvez pas partager un album vide";
 "etk_permission_description" = "Je consens par la présente à recevoir des emails commerciaux afin d’être informé des produits et services avantageux de Turkcell et d'autres sociétés du groupe, à moins que et jusqu’à ce que je n’exige d’autre chose, conformément à la loi n ° 6563 et aux autres lois applicables.";
