@@ -170,20 +170,19 @@ class ContactsSyncService: BaseRequestService {
             errorCallback?(.accessDenied, getCurrentOperationType())
         case .RESULT_ERROR_REMOTE_SERVER:
             ReachabilityService.shared.forceCheckAPI { [weak self] isReachable in
-                guard let `self` = self else {
+                guard let self = self else {
                     return
                 }
-                if isReachable {
-                    var code: Int?
-                    if let response = response,
-                    !response.isEmpty, let unwrapedCode =
-                        response[0][""] as? Int {//TODO:check real response
-                         code = unwrapedCode
-                    }
-                    errorCallback?(.remoteServerError(code), self.getCurrentOperationType())
-                } else {
+                
+                guard isReachable,
+                    let unwrappedCode = response?.first?["code"] as? String,
+                    let code = Int(unwrappedCode)
+                else {
                     errorCallback?(.networkError, self.getCurrentOperationType())
+                    return
                 }
+                
+                errorCallback?(.remoteServerError(code), self.getCurrentOperationType())
             }
         case .RESULT_ERROR_NETWORK:
             errorCallback?(.networkError, getCurrentOperationType())
