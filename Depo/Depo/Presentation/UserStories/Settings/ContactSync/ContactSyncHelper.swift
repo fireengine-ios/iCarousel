@@ -330,10 +330,6 @@ private final class Analytics {
 
 extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
     
-    func isMain() -> Bool {
-        return false
-    }
-    
     func didFailed(operationType: SyncOperationType, error: ContactSyncHelperError) {
         DispatchQueue.main.async {
             self.hideSpinner()
@@ -383,7 +379,7 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
         case .internalError, .failed:
             let errorTitle = operationType.transformToContactOperationSyncType()?.title(result: .failed) ?? TextConstants.errorUnknown
             let errorView = ContactsOperationView.with(title: errorTitle, message: TextConstants.contactSyncErrorIternal, operationResult: .failed)
-            show(errorView: errorView)
+            showErrorView(view: errorView)
         }
     }
     
@@ -395,7 +391,7 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
         }
 
         guard let code = code else {
-            show(errorView: ContactsOperationView.with(type: convertedOperationType, result: .failed))
+            showErrorView(view: ContactsOperationView.with(type: convertedOperationType, result: .failed))
             return
         }
         let message: String
@@ -413,17 +409,11 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
         }
         
         let errorView = ContactsOperationView.with(title: convertedOperationType.title(result: .failed), message: message, operationResult: .failed)
-        show(errorView: errorView)
+        showErrorView(view: errorView)
     }
     
-    private func show(errorView: ContactsOperationView) {
-        if isMain() {
-            let router = RouterVC()
-            let controller = router.contactSyncFailController(with: errorView)
-            router.pushViewController(viewController: controller)
-        } else {
-            ContentViewAnimator().showTransition(to: errorView, on: self.view, animated: true)
-        }
+    func showErrorView(view: ContactsOperationView) {
+        ContentViewAnimator().showTransition(to: view, on: self.view, animated: true)
     }
     
     func showWarningPopup(type: WarningPopupType) {

@@ -15,7 +15,7 @@ protocol ContactsBackupActionProviderProtocol: class {
 }
 
 protocol ContactSyncControllerProtocol: ViewController {
-    func isMain() -> Bool
+    func showErrorView(view: ContactsOperationView)
     func showPopup(type: ContactSyncPopupType)
     func handle(error: ContactSyncHelperError, operationType: SyncOperationType)
 }
@@ -271,10 +271,6 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
 
 extension ContactSyncViewController: ContactSyncControllerProtocol {
     
-    func isMain() -> Bool {
-        return true
-    }
-    
     func handle(error: ContactSyncHelperError, operationType: SyncOperationType) {
         switch error {
         case .noBackUp:
@@ -310,6 +306,12 @@ extension ContactSyncViewController: ContactSyncControllerProtocol {
     
     private func noDuplicatesPopup() {
         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.errorAlertTextNoDuplicatedContacts)
+    }
+    
+    func showErrorView(view: ContactsOperationView) {
+        let router = RouterVC()
+        let controller = router.contactSyncFailController(with: errorView)
+        router.pushViewController(viewController: controller)
     }
 }
 
