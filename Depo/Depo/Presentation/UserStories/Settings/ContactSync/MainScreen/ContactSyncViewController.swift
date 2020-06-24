@@ -310,7 +310,7 @@ extension ContactSyncViewController: ContactSyncControllerProtocol {
     
     func showErrorView(view: ContactsOperationView) {
         let router = RouterVC()
-        let controller = router.contactSyncFailController(with: errorView)
+        let controller = router.contactSyncFailController(with: view)
         router.pushViewController(viewController: controller)
     }
 }
