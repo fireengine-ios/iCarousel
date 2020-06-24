@@ -100,6 +100,10 @@
                 NSString *responseBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 if (!SYNC_STRING_IS_NULL_OR_EMPTY(responseBody)) {
                     responseObject = [NSJSONSerialization JSONObjectWithData: [responseBody dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &error];
+                    
+                    if (![NSJSONSerialization isValidJSONObject:responseObject]) {
+                        responseObject = @{@"error": responseBody};
+                    }
                 }
             }
             

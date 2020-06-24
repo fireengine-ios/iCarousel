@@ -26,7 +26,7 @@
 #endif
 #endif
 
-#define SYNC_VERSION @"4.2-190620"
+#define SYNC_VERSION @"4.2.1-240620"
 #define SYNC_USER_AGENT @"iOS ContactSync SDK"
 
 #define SYNC_HEADER_AUTH_TOKEN @"X-Auth-Token"

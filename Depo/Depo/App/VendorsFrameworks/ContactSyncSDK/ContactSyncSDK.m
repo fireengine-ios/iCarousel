@@ -1020,7 +1020,7 @@ static bool syncing = false;
                       [SyncStatus shared].mergedOnServer = stats.mergedOnServer;
                   }
                   
-                  if ([self.partialInfo isLastStep]){
+                  if ([self.partialInfo isLastStep] || !SYNC_IS_NULL(messages) || !syncing){
                       [self callStats:messages];
                   }
               } else {
