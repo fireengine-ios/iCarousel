@@ -111,7 +111,7 @@ final class CoreDataStack_ios10: CoreDataStack {
             self?.container.viewContext.perform {
                 do {
                     try self?.container.viewContext.save()
-                    try self?.container.viewContext.fetch(MediaItem.fetchRequest())
+                    try self?.container.viewContext.fetch(NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier))
                 } catch let error {
                     debugLog("unable to fetch with error: \(error)")
                     self?.recreateStore(completion: successHandler)
