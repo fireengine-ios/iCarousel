@@ -864,6 +864,7 @@ struct TextConstants {
     
     static let actionSheetProfileDetails = NSLocalizedString("settings_action_sheet_profile_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetEditProfilePhoto = NSLocalizedString("settings_action_sheet_edit_profile_photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSheetAccountDetails = NSLocalizedString("settings_action_sheet_account_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetTakeAPhoto = NSLocalizedString("Take Photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetChooseFromLib = NSLocalizedString("Choose From Library", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetChangeCover = NSLocalizedString("Change cover photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1082,7 +1083,6 @@ struct TextConstants {
     static let syncZeroBytes = NSLocalizedString("Can't upload. File size is 0.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let syncNotEnoughMemory = NSLocalizedString("You have not enough memory in your device", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    static let cancelPurchase = NSLocalizedString("The purchase was canceled", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let inProgressPurchase = NSLocalizedString("The purchase in progress", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let renewalDate = NSLocalizedString("Renewal Date: %@", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
