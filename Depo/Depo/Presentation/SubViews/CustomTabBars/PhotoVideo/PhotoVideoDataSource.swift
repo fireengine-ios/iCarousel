@@ -259,16 +259,18 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    func changeSourceFilter(syncOnly: Bool, isPhotos: Bool, newPredicateSetupedCallback: @escaping VoidHandler) {
+    func changeSourceFilter(type: GalleryViewType, isPhotos: Bool, newPredicateSetupedCallback: @escaping VoidHandler) {
         lastWrapedObjects.removeAll()
-        if syncOnly {
-            fetchedResultsController.fetchRequest.predicate = predicateManager.getSyncPredicate(isPhotos: isPhotos)
-            newPredicateSetupedCallback()
-        } else {
+        
+        switch type {
+        case .all:
             predicateManager.getMainCompoundedPredicate(isPhotos: isPhotos) { [weak self] compundedPredicate in
                 self?.fetchedResultsController.fetchRequest.predicate = compundedPredicate
                 newPredicateSetupedCallback()
             }
+        case .synced, .unsynced:
+            fetchedResultsController.fetchRequest.predicate = predicateManager.getSyncPredicate(isSynced: type == .synced, isPhotos: isPhotos)
+            newPredicateSetupedCallback()
         }
     }
     

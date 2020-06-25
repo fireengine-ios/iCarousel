@@ -648,16 +648,41 @@ extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
         refresher.endRefreshing()
     }
     
-    func showOnlySyncItemsCheckBoxDidChangeValue(_ value: Bool) {
-        dataSource.changeSourceFilter(syncOnly: value, isPhotos: isPhoto, newPredicateSetupedCallback: { [weak self] in
+    func openAutoSyncSettings() {
+        router.pushViewController(viewController: router.autoUpload)
+    }
+
+    func openViewTypeMenu(sender: UIButton) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let actions = GalleryViewType.createAlertActions { [weak self] type in
+            self?.changeViewType(to: type)
+        }
+        actions.forEach { actionSheet.addAction($0) }
+    
+        let cancelAction = UIAlertAction(title: TextConstants.cancel, style: .cancel)
+        actionSheet.addAction(cancelAction)
+        
+        let rect = sender.convert(sender.bounds, to: self.view)
+        actionSheet.popoverPresentationController?.sourceRect = rect
+        actionSheet.popoverPresentationController?.sourceView = self.view
+        actionSheet.popoverPresentationController?.permittedArrowDirections = .up
+
+        present(actionSheet, animated: true)
+    }
+    
+    private func changeViewType(to type: GalleryViewType) {
+        guard collectionViewManager.viewType != type else {
+            return
+        }
+        
+        collectionViewManager.viewType = type
+        
+        dataSource.changeSourceFilter(type: type, isPhotos: isPhoto) { [weak self] in
             DispatchQueue.main.async {
                 self?.fetchAndReload()
             }
-        })
-    }
-    
-    func openAutoSyncSettings() {
-        router.pushViewController(viewController: router.autoUpload)
+        }
     }
 }
 
