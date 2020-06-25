@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 protocol UserInfoSubViewViewControllerActionsDelegate: class {
-    func changePhotoPressed()
+    func changePhotoPressed(quotaInfo: QuotaInfoResponse?)
     func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?)
     func premiumButtonPressed()
 }
@@ -162,7 +162,7 @@ extension UserInfoSubViewViewController {
     }
     
     @IBAction private func onUpdateUserPhoto() {
-        actionsDelegate?.changePhotoPressed()
+        actionsDelegate?.changePhotoPressed(quotaInfo: output.quotaInfo)
     }
     
     @IBAction private func onBecomePremiumTap(_ sender: Any) {
