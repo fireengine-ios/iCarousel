@@ -1700,3 +1700,10 @@
 "contact_phase2_error_backup_title" = "contact_phase2_error_backup";
 "contact_phase2_error_restore_title" = "contact_phase2_error_restore";
 "contact_phase2_error_delete_title" = "contact_phase2_error_delete_title";
+
+"gallery_filter_all" = "Show: All";
+"gallery_filter_synced" = "Show: Only synced";
+"gallery_filter_unsynced" = "Show: Only unsynced";
+"gallery_filter_action_sheet_all" = "All";
+"gallery_filter_action_sheet_synced" = "Only synced";
+"gallery_filter_action_sheet_unsynced" = "Only unsynced";

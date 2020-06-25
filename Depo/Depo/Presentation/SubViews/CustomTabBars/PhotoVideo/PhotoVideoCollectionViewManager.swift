@@ -10,8 +10,8 @@ import UIKit
 
 protocol PhotoVideoCollectionViewManagerDelegate: class {
     func refreshData(refresher: UIRefreshControl)
-    func showOnlySyncItemsCheckBoxDidChangeValue(_ value: Bool)
     func openAutoSyncSettings()
+    func openViewTypeMenu(sender: UIButton)
 }
 
 final class PhotoVideoCollectionViewManager {
@@ -41,6 +41,10 @@ final class PhotoVideoCollectionViewManager {
         return collectionView.indexPathsForSelectedItems ?? []
     }
     
+    var viewType: GalleryViewType {
+        get { showOnlySyncItemsCheckBox.type }
+        set { showOnlySyncItemsCheckBox.type = newValue }
+    }
     
     init(collectionView: UICollectionView, delegate: PhotoVideoCollectionViewManagerDelegate) {
         self.collectionView = collectionView
@@ -225,8 +229,9 @@ extension PhotoVideoCollectionViewManager: CardsContainerViewDelegate {
 
 // MARK: - CheckBoxViewDelegate checkBox.delegate
 extension PhotoVideoCollectionViewManager: CheckBoxViewDelegate {
-    func checkBoxViewDidChangeValue(_ value: Bool) {
-        delegate?.showOnlySyncItemsCheckBoxDidChangeValue(value)
+    
+    func openViewTypeMenu(sender: UIButton) {
+        delegate?.openViewTypeMenu(sender: sender)
     }
     
     func openAutoSyncSettings() {

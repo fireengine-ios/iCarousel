@@ -1920,4 +1920,11 @@ struct TextConstants {
     static let contactSyncErrorRestoreTitle = NSLocalizedString("contact_phase2_error_restore_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncErrorBackupTitle = NSLocalizedString("contact_phase2_error_backup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncErrorDeleteTitle = NSLocalizedString("contact_phase2_error_delete_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let galleryFilterAll = NSLocalizedString("gallery_filter_all", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galleryFilterSynced = NSLocalizedString("gallery_filter_synced", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galleryFilterUnsynced = NSLocalizedString("gallery_filter_unsynced", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galleryFilterActionSheetAll = NSLocalizedString("gallery_filter_action_sheet_all", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galleryFilterActionSheetSynced  = NSLocalizedString("gallery_filter_action_sheet_synced", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galleryFilterActionSheetUnsynced = NSLocalizedString("gallery_filter_action_sheet_unsynced", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
