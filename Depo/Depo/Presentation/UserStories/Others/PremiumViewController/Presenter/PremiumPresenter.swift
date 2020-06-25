@@ -277,6 +277,10 @@ extension PremiumPresenter: PremiumInteractorOutput {
         }
         router.goToBack()
     }
+    
+    func purchaseCancelled() {
+        view?.stopActivityIndicator()
+    }
 }
 
 // MARK: - OptInControllerDelegate

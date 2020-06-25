@@ -25,4 +25,5 @@ protocol PremiumInteractorOutput: class {
     func failedVerifyOffer()
 
     func purchaseFinished()
+    func purchaseCancelled()
 }
