@@ -59,6 +59,7 @@ struct HeaderConstant {
     static let connectionType = "X-Object-Meta-Upload-Conn-Type"
     static let uploadType = "X-Object-Meta-Upload-Sync-Type"
     static let applicationLifecycleState = "X-Object-Meta-Upload-XG-Type"
+    static let deviceUuid = "X-Device-Uuid"
 }
 
 class RequestHeaders {
@@ -68,6 +69,10 @@ class RequestHeaders {
     static func captchaHeader(id: String, answer: String) -> RequestHeaderParametrs {
         return [ HeaderConstant.CaptchaId     : id,
                  HeaderConstant.CaptchaAnswer : answer]
+    }
+    
+    static func deviceUuidHeader() -> RequestHeaderParametrs {
+        return [HeaderConstant.deviceUuid : UIDevice.current.identifierForVendor!.uuidString]
     }
     
     static func base() -> RequestHeaderParametrs {
