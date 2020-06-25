@@ -137,7 +137,7 @@ final class PhotoVideoCollectionViewManager {
     private func setupSlider() {
         let sliderController = contentSlider
         
-        let height = scrolliblePopUpView.frame.height + BaseFilesGreedViewController.sliderH + showOnlySyncItemsCheckBoxHeight
+        let height = scrolliblePopUpView.frame.height + BaseFilesGreedViewController.sliderH 
         
         let subView = UIView(frame: CGRect(x: 0, y: -height, width: collectionView.frame.width, height: BaseFilesGreedViewController.sliderH))
         subView.addSubview(sliderController.view)
@@ -154,10 +154,8 @@ final class PhotoVideoCollectionViewManager {
         subView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        let relatedView = showOnlySyncItemsCheckBox
-        
         var constraintsArray = [NSLayoutConstraint]()
-        constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .top, relatedBy: .equal, toItem: relatedView, attribute: .bottom, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .top, relatedBy: .equal, toItem: scrolliblePopUpView, attribute: .bottom, multiplier: 1, constant: 0))
         constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
         constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
         constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: BaseFilesGreedViewController.sliderH))
@@ -182,7 +180,7 @@ final class PhotoVideoCollectionViewManager {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         var constraintsArray = [NSLayoutConstraint]()
-        constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .top, relatedBy: .equal, toItem: scrolliblePopUpView, attribute: .bottom, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .bottom, multiplier: 1, constant: 0))
         constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
         constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
         constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: showOnlySyncItemsCheckBoxHeight))
