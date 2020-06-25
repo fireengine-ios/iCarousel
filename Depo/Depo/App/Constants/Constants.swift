@@ -864,6 +864,7 @@ struct TextConstants {
     
     static let actionSheetProfileDetails = NSLocalizedString("settings_action_sheet_profile_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetEditProfilePhoto = NSLocalizedString("settings_action_sheet_edit_profile_photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let actionSheetAccountDetails = NSLocalizedString("settings_action_sheet_account_details", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetTakeAPhoto = NSLocalizedString("Take Photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetChooseFromLib = NSLocalizedString("Choose From Library", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let actionSheetChangeCover = NSLocalizedString("Change cover photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

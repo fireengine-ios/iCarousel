@@ -316,8 +316,8 @@ extension SettingsViewController: SettingsViewInput {
             AllSectionTypes.allSectionFourTypes]
     }
     
-    func showProfileAlertSheet(userInfo: AccountInfoResponse, isProfileAlert: Bool) {
-        let actionSheetVC = getProfileAlertSheet(userInfo: userInfo, isProfileAlert: isProfileAlert)
+    func showProfileAlertSheet(userInfo: AccountInfoResponse, quotaInfo: QuotaInfoResponse?, isProfileAlert: Bool) {
+        let actionSheetVC = getProfileAlertSheet(userInfo: userInfo, quotaInfo: quotaInfo, isProfileAlert: isProfileAlert)
         output.presentActionSheet(alertController: actionSheetVC)
     }
     
@@ -341,22 +341,22 @@ extension SettingsViewController: SettingsViewInput {
     
     // MARK: - SettingsViewInput Private Utility Methods
     
-    private func getProfileAlertSheet(userInfo: AccountInfoResponse, isProfileAlert: Bool) -> UIAlertController {
-        let cancellAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: nil)
-        var firstAlertAction: UIAlertAction!
-        var secondAlertAction: UIAlertAction!
+    private func getProfileAlertSheet(userInfo: AccountInfoResponse, quotaInfo: QuotaInfoResponse?, isProfileAlert: Bool) -> UIAlertController {
+        let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: TextConstants.actionSheetCancel, style: .cancel, handler: nil)
         
         if isProfileAlert {
-            firstAlertAction = getProfileDetailAction(userInfo: userInfo)
-            secondAlertAction = getEditPhotoAction(userInfo: userInfo)
+            actionSheetVC.addActions(cancelAction,
+                                     getProfileDetailAction(userInfo: userInfo),
+                                     getEditPhotoAction(userInfo: userInfo),
+                                     getAccoutDetails(quotaInfo: quotaInfo))
         } else {
-            firstAlertAction = getCameraAction()
-            secondAlertAction = getLibraryAction()
             isFromPhotoPicker = true
+            actionSheetVC.addActions(cancelAction,
+                                     getCameraAction(),
+                                     getLibraryAction())
         }
-        
-        let actionSheetVC = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        actionSheetVC.addActions(cancellAction, firstAlertAction, secondAlertAction)
+
         actionSheetVC.popoverPresentationController?.sourceView = view
         
         let originPoint = CGPoint(x: Device.winSize.width / 2 - actionSheetVC.preferredContentSize.width / 2,
@@ -389,15 +389,21 @@ extension SettingsViewController: SettingsViewInput {
     
     private func getEditPhotoAction(userInfo: AccountInfoResponse) -> UIAlertAction {
         return UIAlertAction(title: TextConstants.actionSheetEditProfilePhoto, style: .default, handler: { _ in
-            self.showProfileAlertSheet(userInfo: userInfo, isProfileAlert: false)
+            self.showProfileAlertSheet(userInfo: userInfo, quotaInfo: nil, isProfileAlert: false)
+        })
+    }
+    
+    private func getAccoutDetails(quotaInfo: QuotaInfoResponse?) -> UIAlertAction {
+        return UIAlertAction(title: TextConstants.actionSheetAccountDetails, style: .default, handler: { _ in
+            self.output.goToPackagesWith(quotaInfo: quotaInfo)
         })
     }
 }
 
 // MARK: - UserInfoSubViewViewControllerActionsDelegate
 extension SettingsViewController: UserInfoSubViewViewControllerActionsDelegate {
-    func changePhotoPressed() {
-        output.onChangeUserPhoto()
+    func changePhotoPressed(quotaInfo: QuotaInfoResponse?) {
+        output.onChangeUserPhoto(quotaInfo: quotaInfo)
     }
     
     func upgradeButtonPressed(quotaInfo: QuotaInfoResponse?) {
