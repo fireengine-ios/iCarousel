@@ -27,6 +27,8 @@ protocol PackagesInteractorOutput: class {
     func failedPromocode(with errorString: String)
 
     func purchasesRestored(text: String)
+    func purchaseCancelled()
+    
     func refreshPackages()
     
     func setQuotaInfo(quotoInfo: QuotaInfoResponse)

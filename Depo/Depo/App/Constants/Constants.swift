@@ -1083,7 +1083,6 @@ struct TextConstants {
     static let syncZeroBytes = NSLocalizedString("Can't upload. File size is 0.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let syncNotEnoughMemory = NSLocalizedString("You have not enough memory in your device", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
-    static let cancelPurchase = NSLocalizedString("The purchase was canceled", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let inProgressPurchase = NSLocalizedString("The purchase in progress", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let renewalDate = NSLocalizedString("Renewal Date: %@", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
