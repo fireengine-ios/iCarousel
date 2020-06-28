@@ -150,6 +150,13 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
                 self.output.verificationSucces()
             }
             
+            let loginType: GADementionValues.login
+            if self.challenge.challengeType == .email {
+                loginType = .email
+            } else {
+                loginType = .gsm
+            }
+            self.analyticsService.trackLoginEvent(loginType: loginType, error: nil)
             self.analyticsService.trackCustomGAEvent(eventCategory: .twoFactorAuthentication,
                                                      eventActions: self.challenge.challengeType.GAAction,
                                                       eventLabel: .confirmStatus(isSuccess: true))
