@@ -63,7 +63,7 @@ final class ContactSyncHelper {
     
     private(set) var currentOperation: SyncOperationType?
     var currentOperationProgress: Int? {
-        return SyncStatus.shared().progress.intValue
+        return SyncStatus.shared().progress?.intValue
     }
     
     //MARK: - Public
