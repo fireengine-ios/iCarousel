@@ -49,6 +49,8 @@ final class InstaPickCampaignViewControllerDesigner: NSObject {
         willSet {
             newValue.font = UIFont.TurkcellSaturaBolFont(size: 18)
             newValue.textColor = ColorConstants.darkText
+            newValue.numberOfLines = 2
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     
