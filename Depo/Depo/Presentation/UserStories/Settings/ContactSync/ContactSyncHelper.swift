@@ -397,12 +397,14 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
             showWarningPopup(type: .contactPermissionDenied)
             
         case .depoError:
-            self.present(FullQuotaWarningPopUp(.contact(operationType.transformToContactSyncQuotaTypeOperation())), animated: false)
+            let warningPopUp = ContactSyncPopupFactory.createWarningPopup(type: .lifeboxStorageLimit) { }
+            self.present(warningPopUp, animated: false)
             
         case .internalError, .failed:
             let errorTitle = operationType.transformToContactOperationSyncType()?.title(result: .failed) ?? TextConstants.errorUnknown
             let errorView = ContactsOperationView.with(title: errorTitle, message: TextConstants.contactSyncErrorIternal, operationResult: .failed)
             showErrorView(view: errorView)
+            
         }
     }
     
