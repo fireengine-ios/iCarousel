@@ -6,7 +6,7 @@
 "This file will be removed only from your album. You can access this file from Photos tab" = "Este archivo se eliminará solamente su álbum. Puede acceder a este archivo desde la pestaña Fotos";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Al eliminar este este álbum no eliminará los archivos de Lifebox. Puede acceder a estos archivos desde la pestaña Fotos. ¿Está seguro que quiere borrarlo?";
 "Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Al eliminar este archivo, se eliminarán de Lifebox también. No podrá acceder a ellos una vez eliminados. ¿Está seguro que quiere borrarlo?";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "La carpeta/ las carpetas seleccionadas se moverán a la papelera. Podrás restaurar los contenidos dentro de 30 días. Si hace falta liberar la memoria de tu lifebox primero asegurarte de vaciar la papelera.";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "La carpeta/ las carpetas seleccionadas se moverán a la papelera. Podrás restaurar los contenidos dentro de 90 días. Si hace falta liberar la memoria de tu lifebox primero asegurarte de vaciar la papelera.";
 "Purchase" = "Comprar";
 "Packages" = "Paquetes";
 "Verification code is blocked.\nPlease request a new code" = "El código de verificación está bloqueado. Por favor, solicite un nuevo código.";
@@ -141,7 +141,7 @@
 "Wi-Fi" = "Wi-Fi";
 "Free up space" = "Liberar espacio";
 "Your device memory is almost full" = "La memoria de su dispositivo está casi llena";
-"There are some duplicated items both in your device and lifebox" = "Hay algunos elementos duplicados tanto en su dispositivo como en su lifebox";
+"There are some duplicated items both in your device and lifebox" = "Verifiquemos los elementos duplicados tanto en tu dispositivo como en tu lifebox!";
 "Operation is complete" = "La operación se ha completado";
 "Download is complete" = "La descarga se ha completado";
 "Deleting is complete" = "La eliminación se ha completado";
@@ -632,7 +632,6 @@
 "Add GSM Number" = "Agregar el número gsm";
 "The videos larger than 4GB can not be uploaded to lifebox" = "Los videos de más de 4 GB no pueden cargarse en lifebox";
 "You have not enough memory in your device" = "No tienes suficiente memoria en tu dispositivo";
-"The purchase was canceled" = "La compra fue cancelada";
 "The purchase in progress" = "La compra está en progreso";
 "You have no duplicated contacts!" = "No tienes contactos duplicados";
 "Daily" = "Diario";
@@ -1032,7 +1031,7 @@
 "create_story_press_and_hold_description" = "Presione %@ en la imagen para reorganizar el orden de su imagen.";
 "create_story_name_title" = "Nombre de la historia";
 "create_story_pop_up_title" = "¡Ha creado una historia! %@";
-"create_story_pop_up_message" = "Estamos preparando su historia. Cuando se complete, puede encontrarlo en %@";
+"create_story_pop_up_message" = "Estamos preparando tu historia. Una vez que haya terminado, puede acceder desde el álbum Mis historias.";
 "create_story_path_to_story" = "Las Fotos & Videos >Mis historias";
 "You can not share empty album" = "No puede compartir un álbum vacío";
 "etk_permission_description" = "De acuerdo con la ley de número 6563 sobre los Productos Ventajoso y Servicios de las Compañías en Grupo y con la Legislación Relacionada, otorgo permiso para recibir mensajes comerciales de correo electrónico para ser informado a menos que yo solicite lo contrario y a menos que se solicite lo contrario.";
@@ -1330,7 +1329,7 @@
 "profile_detail_address_placeholder" = "Por favor insertar los datos de dirección";
 "profile_detail_error_contact_call_center" = "Por favor ponerse en contacto con la Atención al Cliente para cambiar tu número de contacto";
 "temporary_error" = "Se ha ocurrido un error, por favor volver a intentarlo";
-"move_to_trash_albums_message" = "El/los elemento(s) seleccionado(s) se moverá a la papelera. Podrás restaurar los contenidos dentro de 30 días. Si hace falta liberar la memoria de tu lifebox primero asegurarte de vaciar la papelera.";
+"move_to_trash_albums_message" = "El/los elemento(s) seleccionado(s) se moverá a la papelera. Podrás restaurar los contenidos dentro de 90 días. Si hace falta liberar la memoria de tu lifebox primero asegurarte de vaciar la papelera.";
 "move_to_trash_albums_success_message" = "Álbum(s)  y sus contenidos se enviaron a la papelera de reciclaje.";
 "confirmation_popup_title_hide" = "Ocultar";
 "confirmation_popup_message_hide" = "Elemento(s) seleccionado(s) se ocultarán y solo se accederán por medio del álbum de \"Oculto\". Puedes restaurar los ocultados cuando desees. Quieres continuar ?";
@@ -1376,7 +1375,7 @@
 "carousel_view_second_page_title" = "Ocultar los Contactos no Deseados !";
 "carousel_view_second_page_text" = "Si hay contactos que ya no deseas que aparezcan en tu lista de fotos y sugerencias de página de inicio, simplemente ingresar en el álbum de contactos y decir \"Ocultar\". Los contactos no deseados se llevan automáticamente al álbum \"Oculto “con un sólo clic. Puedes restaurarlo cuando quieras.";
 "carousel_view_third_page_title" = "Eliminar los contactos no deseados !";
-"carousel_view_third_page_text" = "Si no crees que valga la pena mantener una persona y sus recuerdos, puedes tirarlos a la papelera de inmediato seleccionando la acción \"Eliminar\" en el álbum de contacto. Puedes utilizar la función de restauración dentro de los 30 días de la papelera por sí arrepientas. Si dices que no puedes dejar por siempre tus recuerdos y también quieres que no aparezcan cada momento, entonces puedes ver la acción de oculta justo encima de la eliminación.";
+"carousel_view_third_page_text" = "Si no crees que valga la pena mantener una persona y sus recuerdos, puedes tirarlos a la papelera de inmediato seleccionando la acción \"Eliminar\" en el álbum de contacto. Puedes utilizar la función de restauración dentro de los 90 días de la papelera por sí arrepientas. Si dices que no puedes dejar por siempre tus recuerdos y también quieres que no aparezcan cada momento, entonces puedes ver la acción de oculta justo encima de la eliminación.";
 "hidden_bin_album_slider_title" = "Ocultado";
 "hidden_bin_album_slider_empty" = "Todavía no tienes un álbum de contacto, objeto, lugar etc. ocultado. Puedes ocultar sólo en una vez seleccionando cualquier álbum.";
 "hidden_bin_empty" = "Todavía no tienes una foto ocultada. Simplemente seleccionar una foto y \"dices\"  Ocultar.";
@@ -1389,17 +1388,17 @@
 "trash_bin_album_slider_empty" = "Todavía no hay un álbum eliminado en la papelera.";
 "trash_bin_empty" = "Todavía no hay un elemento eliminado en la papelera";
 "delete_confirmation_popup_title" = "Mover a la papelera";
-"delete_confirmation_popup_text" = "El/Los elementos seleccionados se moverá a la papelera. Podrás restaurar los contenidos dentro de 30 días. Si hace falta liberar la memoria  primero asegurarte de vaciar la papelera.";
+"delete_confirmation_popup_text" = "El/Los elementos seleccionados se moverá a la papelera. Podrás restaurar los contenidos dentro de 90 días. Si hace falta liberar la memoria  primero asegurarte de vaciar la papelera.";
 "restore_confirmation_popup_title" = "Restaurar";
 "restore_confirmation_popup_text" = "El/Los elementos seleccionados se restaurarán. Desea Continuar ?";
 "delete_from_hidden_bin_popup_success_title" = "Eliminar";
-"delete_from_hidden_bin_popup_success_text" = "La(s) carpetas seleccionadas se moverán a la papelera. Podrás restaurar los contenidos dentro de 30 días. Si hace falta liberar la memoria  primero asegurarte de vaciar la papelera.";
+"delete_from_hidden_bin_popup_success_text" = "La(s) carpetas seleccionadas se moverán a la papelera. Podrás restaurar los contenidos dentro de 90 días. Si hace falta liberar la memoria  primero asegurarte de vaciar la papelera.";
 "unhide_popup_success_title" = "El/Los elemento(s) se han restaurado.";
-"delete_popup_text" = "La/Las carpetas seleccionadas se moverán a la papelera. Podrás restaurar los contenidos dentro de 30 días. Si hace falta liberar la memoria primero asegurarte de vaciar la papelera.";
+"delete_popup_text" = "La/Las carpetas seleccionadas se moverán a la papelera. Podrás restaurar los contenidos dentro de 90 días. Si hace falta liberar la memoria primero asegurarte de vaciar la papelera.";
 "PackagesPolicyTextBillo" = "Las suscripciones se renuevan mensualmente. El pago se cargará a la cuenta de iTunes en la confirmación de compra. La suscripción se renueva automáticamente a menos que se deshabilite la opción de la renovación automática al menos 24 horas antes del final del período actual.\nLa cuenta se cobrará por la renovación dentro de las 24 horas anteriores al final del período actual. Las tarifas se reflejan tal como se muestran en la pantalla de compra en la aplicación.\nLas suscripciones pueden ser administradas por el usuario y la renovación automática se puede desactivar yendo a la configuración de la cuenta del usuario después de la compra.\nCualquier porción no utilizada de un período de prueba gratuito, si se ofrece, se perderá cuando el usuario compre una suscripción a esa publicación, cuando corresponda en la Política de Privacidad: https://billostorage.com/policy\nTérminos de Uso:";
 "unhide_items_popup_text" = "El/los elemento(s) se moverán a las carpetas antiguas y se podrá ver en las listas de lifebox. Deseas continuar?";
 "unhide_albums_popup_text" = "El/Los álbumes seleccionados se moverán a las carpetas antiguas y se podrán ver en las listas. Desea continuar?";
-"move_to_trash_hidden_albums_confirmation_popup_text" = "El/Los elementos seleccionadas se moverá a la papelera. Podrás restaurar los contenidos dentro de 30 días. Si hace falta liberar la memoria primero asegurarte de vaciar la papelera.";
+"move_to_trash_hidden_albums_confirmation_popup_text" = "El/Los elementos seleccionadas se moverá a la papelera. Podrás restaurar los contenidos dentro de 90 días. Si hace falta liberar la memoria primero asegurarte de vaciar la papelera.";
 "delete_items_confirmation_popup_text" = "El/ los elemento/s seleccionados se removerán por completo. Desea Continuar?";
 "delete_albums_confirmation_popup_text" = "El/ los álbumes/es y sus contenidos seleccionados se removerán por completo. Desea Continuar?";
 "delete_folders_confirmation_popup_text" = "El/ los archivo/s y sus contenidos seleccionados se removerán por completo. Desea Continuar?";
@@ -1513,11 +1512,11 @@
 "offer_store_google_store" = "Google Play Store";
 "remove_albums_success_message" = "álbum(s) eliminado";
 "hide_album_action_sheet" = "Ocultar el álbum";
-"sign_up_password_rules" = "Tu contraseña debe tener menos de 6 caracteres ni más de 16 caracteres, debe contener al menos un número y una letra mayúscula, y debe contener letras no consecutivas.";
+"sign_up_password_rules" = "La contraseña debe tener entre 6 a 16 caracteres, además debe incluir al menos un número, una letra mayúscula y no debe contener letras idénticas consecutivas.";
 "documents_album_card_title" = "¿Desearías ocultar estos archivos?";
 "documents_album_card_description" = "%d elementos incluidas las imágenes de pantalla y documentos, se ha agrupado en el Álbum de Documentos. Puedes ordenar tu galería al ocultar este álbum. Puedes acceder en cualquier momento que desee a estas fotos a través del Álbum Oculto.";
-"documents_album_card_hide_button" = "Ocultar el Álbum de Documento";
-"documents_album_card_view_button" = "Visualizar el Álbum de Documento";
+"documents_album_card_hide_button" = "Ocultar álbum";
+"documents_album_card_view_button" = "Ver álbum";
 "snackbar_ok" = "Ok.";
 "snackbar_trash_bin" = "Papelera";
 "snackbar_hidden_bin" = "Álbum Oculto";
@@ -1632,3 +1631,4 @@
 "contact_phase2_error_quota_restore" = "";
 "contact_phase2_error_quota_backup" = "";
 "download_document_error_popup" = "Sólo puedes descargar fotos, video o álbum.";
+"contact_phase2_history_cell_Contact_List" = "";

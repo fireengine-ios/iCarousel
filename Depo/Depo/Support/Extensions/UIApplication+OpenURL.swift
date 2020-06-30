@@ -10,11 +10,13 @@ import Foundation
 
 
 extension UIApplication {
-    func openSafely(_ url: URL?, options: [String: Any] = [:], completion: ((Bool) -> Void)? = nil) {
+    @discardableResult
+    func openSafely(_ url: URL?, options: [String: Any] = [:], completion: ((Bool) -> Void)? = nil) -> Bool {
         guard let url = url, self.canOpenURL(url) else {
-            return
+            return false
         }
         
         UIApplication.shared.open(url, options: options, completionHandler: completion)
+        return true
     }
 }

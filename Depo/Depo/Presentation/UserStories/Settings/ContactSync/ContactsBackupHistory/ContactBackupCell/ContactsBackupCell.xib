@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="TurkcellSaturaMed.ttf">
+            <string>TurkcellSaturaMed</string>
+        </array>
+        <array key="Turkcell_Satura_Regular.ttf">
+            <string>TurkcellSatura</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="KGk-i7-Jjw" customClass="ContactsBackupCell" customModule="LifeTech_lifedrive" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="367" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="367" height="70"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0d8-mc-QtO" customClass="ExtendedTapAreaButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                        <rect key="frame" x="16" y="38" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="hMI-T9-WUB"/>
+                            <constraint firstAttribute="width" constant="12" id="nWK-ji-ok3"/>
+                        </constraints>
+                        <state key="normal" image="notSelected"/>
+                        <connections>
+                            <action selector="selectButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wiK-TI-eCy"/>
+                        </connections>
+                    </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contacts_buckup_cell" translatesAutoresizingMaskIntoConstraints="NO" id="rns-CU-grg">
+                        <rect key="frame" x="36" y="24" width="31" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="31" id="dMm-p7-rv7"/>
+                            <constraint firstAttribute="height" constant="40" id="kZC-IU-Bxb"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="428 Contacts | 20 March 2020 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhW-zf-pUA">
+                        <rect key="frame" x="83" y="45" width="133.5" height="13"/>
+                        <fontDescription key="fontDescription" name="TurkcellSatura" family="Turkcell Satura" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contacts_20-03-2020_" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1bV-WP-cEd">
+                        <rect key="frame" x="83" y="24" width="146" height="17"/>
+                        <fontDescription key="fontDescription" name="TurkcellSaturaMed" family="TurkcellSaturaMed" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_create_story" translatesAutoresizingMaskIntoConstraints="NO" id="q2I-pl-suV">
+                        <rect key="frame" x="337" y="32" width="16" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="5s0-92-FUN"/>
+                            <constraint firstAttribute="height" constant="24" id="Aup-bj-FIq"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="dhW-zf-pUA" firstAttribute="top" secondItem="1bV-WP-cEd" secondAttribute="bottom" constant="4" id="0I3-CZ-eGw"/>
+                    <constraint firstItem="0d8-mc-QtO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Aaj-IT-qGQ"/>
+                    <constraint firstItem="rns-CU-grg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="GHz-fB-DMO"/>
+                    <constraint firstItem="1bV-WP-cEd" firstAttribute="top" secondItem="rns-CU-grg" secondAttribute="top" id="KTH-Ow-NrA"/>
+                    <constraint firstItem="dhW-zf-pUA" firstAttribute="leading" secondItem="rns-CU-grg" secondAttribute="trailing" constant="16" id="LNr-bc-FyW"/>
+                    <constraint firstItem="q2I-pl-suV" firstAttribute="centerY" secondItem="rns-CU-grg" secondAttribute="centerY" id="QWy-vL-tgY"/>
+                    <constraint firstItem="1bV-WP-cEd" firstAttribute="leading" secondItem="rns-CU-grg" secondAttribute="trailing" constant="16" id="QcW-rh-Hua"/>
+                    <constraint firstItem="0d8-mc-QtO" firstAttribute="centerY" secondItem="rns-CU-grg" secondAttribute="centerY" id="WKc-MI-sOM"/>
+                    <constraint firstAttribute="trailing" secondItem="q2I-pl-suV" secondAttribute="trailing" constant="14" id="eRI-Hs-Q8S"/>
+                    <constraint firstAttribute="bottom" secondItem="dhW-zf-pUA" secondAttribute="bottom" constant="12" id="q5x-jR-SFn"/>
+                    <constraint firstItem="rns-CU-grg" firstAttribute="leading" secondItem="0d8-mc-QtO" secondAttribute="trailing" constant="8" id="u9P-Iy-Mfr"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="detailLabel" destination="dhW-zf-pUA" id="2Q6-8z-VG9"/>
+                <outlet property="selectButton" destination="0d8-mc-QtO" id="nEQ-ws-JuT"/>
+                <outlet property="titleLabel" destination="1bV-WP-cEd" id="ZLL-de-Tb6"/>
+            </connections>
+            <point key="canvasLocation" x="170.28985507246378" y="90.401785714285708"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="arrow_create_story" width="24" height="24"/>
+        <image name="contacts_buckup_cell" width="31" height="40"/>
+        <image name="notSelected" width="24" height="24"/>
+    </resources>
+</document>

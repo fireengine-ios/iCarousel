@@ -47,7 +47,7 @@ enum PathForItem: Equatable {
 }
 
 
-enum PreviewIconSize {
+enum PreviewSize {
     case little
     case medium
     case large
@@ -834,7 +834,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
     }
     
-    init (remote: SearchItemResponse, previewIconSize: PreviewIconSize = .medium) {
+    init (remote: SearchItemResponse, previewSize: PreviewSize = .large) {
         metaData = remote.metadata
         favorites = remote.metadata?.favourite ?? false
         tmpDownloadUrl = remote.tempDownloadURL
@@ -869,7 +869,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         case .image, .audio, .video:
             duration = WrapData.getDuration(duration: remote.metadata?.duration)
             durationValue = remote.metadata?.duration
-            switch previewIconSize {
+            switch previewSize {
             case .little : url = remote.metadata?.smalURl
             case .medium : url = remote.metadata?.mediumUrl
             case .large  : url = remote.metadata?.largeUrl
@@ -936,13 +936,13 @@ class WrapData: BaseDataSourceItem, Wrappered {
         setSyncStatusesAsSyncedForCurrentUser()
         
         var url: URL?
-        let previewIconSize: PreviewIconSize = .medium///
+        let previewSize: PreviewSize = .medium///
         
         switch fileType {
         case .image, .audio, .video:
             duration = WrapData.getDuration(duration: metaData?.duration)
             durationValue = metaData?.duration
-            switch previewIconSize {
+            switch previewSize {
             case .little : url = metaData?.smalURl
             case .medium : url = metaData?.mediumUrl
             case .large  : url = metaData?.largeUrl

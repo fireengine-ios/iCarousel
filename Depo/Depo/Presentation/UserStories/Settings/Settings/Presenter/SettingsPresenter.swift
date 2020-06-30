@@ -103,12 +103,12 @@ extension SettingsPresenter: SettingsViewOutput {
         router.goToPermissions()
     }
     
-    func onChangeUserPhoto() {
+    func onChangeUserPhoto(quotaInfo: QuotaInfoResponse?) {
         interactor.trackPhotoEdit()
         guard let userInfo = interactor.userInfoResponse else {
             return
         }
-        view.showProfileAlertSheet(userInfo: userInfo, isProfileAlert: true)
+        view.showProfileAlertSheet(userInfo: userInfo, quotaInfo: quotaInfo, isProfileAlert: true)
     }
     
     func onChooseFromPhotoLibriary(onViewController viewController: UIViewController) {

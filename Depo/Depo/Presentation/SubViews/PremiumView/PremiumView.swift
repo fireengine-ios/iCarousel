@@ -129,14 +129,14 @@ extension PremiumView: UITextViewDelegate {
             DispatchQueue.toMain {
                 self.delegate?.showTermsOfUse()
             }
-        } else {
-            delegate?.openLink(with: URL)
+            return false
         }
-        return true
-    }
-    
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        
+        if interaction == .presentActions {
+            return true
+        }
+        
         delegate?.openLink(with: URL)
-        return true
+        return UIApplication.shared.canOpenURL(URL)
     }
 }

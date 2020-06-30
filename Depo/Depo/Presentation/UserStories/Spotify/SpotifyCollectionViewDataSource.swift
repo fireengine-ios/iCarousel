@@ -22,6 +22,11 @@ final class SpotifyCollectionViewDataSource<T: SpotifyObject>: NSObject, UIColle
     
     private let collectionView: UICollectionView
     private weak var delegate: SpotifyCollectionDataSourceDelegate?
+    private var dateFormatter: DateFormatter {
+        let newValue = DateFormatter()
+        newValue.dateFormat = "LLLL yyyy"
+        return newValue
+    }
     
     private(set) var allItems = [T]()
     private var groups = [SpotifyObjectGroup]()
@@ -301,9 +306,25 @@ extension SpotifyCollectionViewDataSource {
         
         switch sortedRule.sortOder {
         case .asc:
-            groups = dict.sorted { $0.0 < $1.0 }
+            groups = dict.sorted {
+                if
+                    let leftDate = dateFormatter.date(from: $0.0),
+                    let rightDate = dateFormatter.date(from: $1.0) {
+                    return leftDate < rightDate
+                } else {
+                    return $0.0 < $1.0
+                }
+            }
         case .desc:
-            groups = dict.sorted { $0.0 > $1.0 }
+            groups = dict.sorted {
+                if
+                    let leftDate = dateFormatter.date(from: $0.0),
+                    let rightDate = dateFormatter.date(from: $1.0) {
+                    return leftDate > rightDate
+                } else {
+                    return $0.0 > $1.0
+                }
+            }
         }
     }
     

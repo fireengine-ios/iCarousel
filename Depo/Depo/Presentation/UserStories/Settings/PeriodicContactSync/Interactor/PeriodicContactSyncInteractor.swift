@@ -45,7 +45,7 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
             case .monthly:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .on, type: .monthly))
                 periodicBackUp = SYNCPeriodic.every30
-            case .none:
+            case .off:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .off, type: nil))
                 periodicBackUp = SYNCPeriodic.none
             }

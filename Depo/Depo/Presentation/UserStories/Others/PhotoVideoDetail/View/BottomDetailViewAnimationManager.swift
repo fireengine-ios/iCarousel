@@ -39,7 +39,8 @@ protocol BottomDetailViewAnimationManagerProtocol {
     var managedView: FileInfoView { get }
     func closeDetailView()
     func getCurrenState() -> CardState
-    func showDetailFromThreeDots()
+    func showDetailView()
+    func updatePassThroughViewDelegate(passThroughView: PassThroughView?)
 }
 
 final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerProtocol {
@@ -86,7 +87,7 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
         collapseViewSetup()
     }
     
-    private lazy var imageMaxY = {
+    private lazy var imageMaxY: CGFloat = {
         return UIScreen.main.bounds.height - getCellMaxY()
     }()
     
@@ -96,6 +97,10 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
                 setupDetailViewAlpha(isHidden: detailViewIsHidden)
             }
         }
+    }
+    
+    func updatePassThroughViewDelegate(passThroughView: PassThroughView?) {
+        passThroughView?.delegate = self
     }
     
     private func collapseViewSetup() {
@@ -115,7 +120,6 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
     
     private func getCellMaxY() -> CGFloat {
         guard let cell = collectionView.cellForItem(at: IndexPath(row: selectedIndex, section: 0)) as? PhotoVideoDetailCell else {
-            assertionFailure()
             return .zero
         }
         return cell.frame.maxY
@@ -150,12 +154,32 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
             managedView.frame.origin.y = collectionView.frame.maxY - imageMaxY
             detailViewIsHidden = needHideDetailView()
         case .ended:
-            
+            dissableTouchUntillFinish(isDisabled: true)
             UIView.animate(withDuration: 0.3, animations: {
                 self.positionForView(velocityY: recognizer.velocity(in: self.managedView).y)
-            }, completion: nil)
+            }, completion: { _ in
+                switch self.viewState {
+                case .collapsed:
+                    self.setCollapseState()
+                case .expanded:
+                    self.setExpandedState()
+                case .full:
+                    self.setFullState()
+                }
+                self.dissableTouchUntillFinish(isDisabled: false)
+            })
         default:
             break
+        }
+    }
+    
+    private func dissableTouchUntillFinish(isDisabled: Bool) {
+        if isDisabled {
+            passThrowView.isUserInteractionEnabled = false
+            passThrowView.disableGestures()
+        } else {
+            passThrowView.isUserInteractionEnabled = true
+            passThrowView.enableGestures()
         }
     }
     
@@ -223,17 +247,19 @@ extension BottomDetailViewAnimationManager {
     }
     
     private func setExpandedState() {
+        view.layoutIfNeeded()
+        isFullScreen = true
+        collapseView.isHidden = false
+        setupDetailViewAlpha(isHidden: false)
         let yPositionForBottomView = view.frame.height - cardHeight
         let collectionViewCellMaxY = getCellMaxY()
         viewState = .expanded
         managedView.frame.origin.y = yPositionForBottomView
         collectionView.frame.origin.y = yPositionForBottomView - collectionViewCellMaxY + imageMaxY
-        collapseView.isHidden = false
-        setupDetailViewAlpha(isHidden: false)
-        isFullScreen = true
     }
     
     private func setFullState() {
+        view.layoutIfNeeded()
         let collectionViewCellMaxY = getCellMaxY()
         viewState = .full
         managedView.frame.origin.y = .zero
@@ -243,7 +269,8 @@ extension BottomDetailViewAnimationManager {
         isFullScreen = true
     }
     
-    func showDetailFromThreeDots() {
+    func showDetailView() {
+        view.layoutIfNeeded()
         UIView.animate(withDuration: 0.3, animations: {
             self.isFullScreen = true
         }) { _ in

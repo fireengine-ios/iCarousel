@@ -180,7 +180,14 @@ final class ResumableUpload: UploadRequestParametrs {
     var header: RequestHeaderParametrs {
         var header = RequestHeaders.authification()
         
+        let currentUploadType = (uploadType == .autoSync) ? "AUTO_SYNC" : "MANUAL"
+        let lifecycleState = ApplicationStateHelper.shared.isBackground ? "BG": "FG"
+        let connectionType = ReachabilityService.shared.uploadConnectionTypeName
+        
         header = header + [
+            HeaderConstant.connectionType : connectionType,
+            HeaderConstant.uploadType : currentUploadType,
+            HeaderConstant.applicationLifecycleState : lifecycleState,
             HeaderConstant.ContentType : item.uploadContentType,
             HeaderConstant.XMetaStrategy : uploadStrategy.rawValue,
             HeaderConstant.objecMetaDevice : Device.deviceId ?? "",

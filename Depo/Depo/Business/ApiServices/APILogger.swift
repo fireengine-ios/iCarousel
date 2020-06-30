@@ -136,7 +136,8 @@ final class APILogger {
         }
         
         // Download images for display in cells|views
-        if httpMethod == "GET", url.absoluteString.uppercased().contains("CONTAINER_EXTENDED") {
+        // CONTAINER_EXTENDED and CONTAINER_MAIN
+        if httpMethod == "GET", url.absoluteString.uppercased().contains("CONTAINER_") {
             return false
         }
         

@@ -108,15 +108,17 @@ final class CoreDataStack_ios10: CoreDataStack {
         let loadingHandler = { [weak self] in
             self?.container.viewContext.automaticallyMergesChangesFromParent = true
             
-            do {
-                try self?.container.viewContext.save()
-                try self?.container.viewContext.fetch(MediaItem.fetchRequest())
-            } catch let error {
-                debugLog("unable to fetch with error: \(error)")
-                self?.recreateStore(completion: successHandler)
+            self?.container.viewContext.perform {
+                do {
+                    try self?.container.viewContext.save()
+                    try self?.container.viewContext.fetch(NSFetchRequest<MediaItem>(entityName: MediaItem.Identifier))
+                } catch let error {
+                    debugLog("unable to fetch with error: \(error)")
+                    self?.recreateStore(completion: successHandler)
+                }
+                
+                successHandler()
             }
-            
-            successHandler()
         }
         
         migrateIfNeeded { [weak self] in

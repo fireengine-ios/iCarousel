@@ -10,9 +10,24 @@ import UIKit
 
 final class PVViewerController: BaseViewController, NibInit {
     
+    static func with(item: Item) -> PVViewerController {
+        let controller = PVViewerController.initFromNib()
+        controller.item = item
+        return controller
+    }
+    
+    static func with(image: UIImage) -> UIViewController {
+        let controller = PVViewerController.initFromNib()
+        controller.image = image
+        return controller
+    }
+    
     @IBOutlet private weak var imageScrollView: ImageScrollView!
     
-    var image = UIImage()
+    private var image: UIImage?
+    private var item: Item?
+    
+    //MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +37,7 @@ final class PVViewerController: BaseViewController, NibInit {
         view.backgroundColor = UIColor.black
         view.addGestureRecognizer(fullscreenTapGesture)
         
-        imageScrollView.imageView.originalImage = image
+        setupImageView()
         
         if #available(iOS 11.0, *) {
             imageScrollView.contentInsetAdjustmentBehavior = .never
@@ -43,6 +58,7 @@ final class PVViewerController: BaseViewController, NibInit {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         imageScrollView.updateZoom()
+        imageScrollView.adjustFrameToCenter()
     }
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
@@ -79,5 +95,13 @@ final class PVViewerController: BaseViewController, NibInit {
         super.viewWillTransition(to: size, with: coordinator)
         
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
+    }
+    
+    private func setupImageView() {
+        if let image = image {
+            imageScrollView.imageView.originalImage = image
+        } else if let item = item {
+            imageScrollView.imageView.loadImageIncludingGif(with: item)
+        }
     }
 }

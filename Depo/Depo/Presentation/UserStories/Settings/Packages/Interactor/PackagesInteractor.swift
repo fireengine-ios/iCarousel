@@ -206,7 +206,7 @@ extension PackagesInteractor: PackagesInteractorInput {
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure, channelType: .appStore, packageName: offer.displayName ?? ""))
                 DispatchQueue.main.async {
-                    self?.output.failedUsage(with: ErrorResponse.string(TextConstants.cancelPurchase))
+                    self?.output.purchaseCancelled()
                 }
             case .error(let error):
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .errors, eventActions: .paymentErrors, eventLabel: .paymentError("\(error.description)"))

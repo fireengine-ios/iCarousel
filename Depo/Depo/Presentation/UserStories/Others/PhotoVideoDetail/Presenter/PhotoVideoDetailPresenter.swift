@@ -108,7 +108,11 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     }
     
     func onInfo(object: Item) {
-        router.onInfo(object: object)
+        if !UIDevice.current.orientation.isLandscape {
+            view.showBottomDetailView()
+        } else {
+            router.onInfo(object: object)
+        }
     }
     
     func viewWillDisappear() {
@@ -189,7 +193,6 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         default:
             break
         }
-        
     }
     
     func operationFailed(withType type: ElementTypes) {
@@ -198,7 +201,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         debugPrint("failed")
     }
     
-    func successPopupClosed() {
+    func successPopupWillAppear() {
         if interactor.allItems.isEmpty {
             goBack()
         }
@@ -299,16 +302,16 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         view.updatePeople(items: items)
     }
     
-    func getFIRStatus() {
+    func getFIRStatus(completion: VoidHandler? = nil) {
         interactor.getFIRStatus(success: { [weak self] settings in
             self?.isFaceImageAllowed = settings.isFaceImageAllowed == true
             self?.view.setHiddenPeoplePlaceholder(isHidden: self?.isFaceImageAllowed == true)
             if settings.isFaceImageAllowed == true {
-                self?.getPersonsForSelectedPhoto() {
                     self?.interactor.getAuthority()
-                }
+                    completion?()
             } else {
                 self?.view.setHiddenPremiumStackView(isHidden: true)
+                completion?()
             }
         }, fail: { [weak self] error in
             self?.failedUpdate(error: error)

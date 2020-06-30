@@ -3,8 +3,8 @@
 "Location services are disabled in your device settings. To use background sync feature of lifebox, you need to enable location services under \"Settings - Privacy - Location Services\" menu." = "Standortdienste sind in Ihren Geräteeinstellungen deaktiviert. Um die Hintergrundsynchronisierungsfunktion der Lifebox nutzen zu können, müssen Sie die Standortdienste unter \"Einstellungen - Datenschutz - Standortdienste\" aktivieren.";
 "This file will be removed only from your album. You can access this file from Photos tab" = "Diese Datei wird nur aus Ihrem Album entfernt. Sie können auf diese Datei über die Registerkarte Fotos zugreifen";
 "Deleting this album will not remove the files from lifebox. You can access these files from Photos tab. Are you sure you want to delete?" = "Durch das Löschen dieses Albums werden die Dateien aus der Lifebox nicht gelöscht. Sie können auf diese Dateien über die Registerkarte Fotos zugreifen. Sind Sie sicher, dass Sie löschen möchten?";
-"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Die ausgewählte/-n Datei/-en wird/werden in den Papierkorb verschoben. Du kannst diese innerhalb von 30 Tagen wieder vom Papierkorb zurückholen. Vergiss nicht, den Papierkorb zuerst zu leeren, wenn Du Speicherplatz für Deine Lifebox freigeben willst. ";
-"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Die ausgewählte/-n Datei/-en wird/werden in den Papierkorb verschoben. Du kannst diese innerhalb von 30 Tagen wieder vom Papierkorb zurückholen. Vergiss nicht, den Papierkorb zuerst zu leeren, wenn Du Speicherplatz für Deine Lifebox freigeben willst. ";
+"Deleting this album will remove the files from lifebox. You won't be able to access them once deleted. Are you sure you want to delete?" = "Die ausgewählte/-n Datei/-en wird/werden in den Papierkorb verschoben. Du kannst diese innerhalb von 90 Tagen wieder vom Papierkorb zurückholen. Vergiss nicht, den Papierkorb zuerst zu leeren, wenn Du Speicherplatz für Deine Lifebox freigeben willst. ";
+"Deleting these files will remove them from cloud. You won't be able to access them once deleted" = "Die ausgewählte/-n Datei/-en wird/werden in den Papierkorb verschoben. Du kannst diese innerhalb von 90 Tagen wieder vom Papierkorb zurückholen. Vergiss nicht, den Papierkorb zuerst zu leeren, wenn Du Speicherplatz für Deine Lifebox freigeben willst. ";
 "Purchase" = "Kauf";
 "Packages" = "Pakete";
 "Verification code is blocked.\nPlease request a new code" = "Der Bestätigungscode ist blockiert. Bitte fordern Sie einen neuen Code an.";
@@ -604,7 +604,6 @@
 "Add GSM Number" = "Addiere GSM-Nummer";
 "The videos larger than 4GB can not be uploaded to lifebox" = "Videos, die größer als 4 GB sind, können nicht auf die Lifebox hochgeladen werden";
 "You have not enough memory in your device" = "Sie haben nicht genügend Speicher auf Ihrem Gerät";
-"The purchase was canceled" = "Der Kauf wurde storniert";
 "The purchase in progress" = "Der Kauf ist im Gange";
 "You have no duplicated contacts!" = "Sie haben keine doppelten Kontakte";
 "Daily" = "Täglich";
@@ -990,7 +989,7 @@
 "create_story_press_and_hold_description" = "Drücken Sie auf %@ auf der Ansicht, um die Reihenfolge Ihres Bildes erneut zu ordnen.";
 "create_story_name_title" = "Name der Story";
 "create_story_pop_up_title" = "Erstellen Sie eine Story! \n%@";
-"create_story_pop_up_message" = "Ihre Story wird vorbereitet. Bei Abschluss können Sie sie unter %@ finden";
+"create_story_pop_up_message" = "Geschichte erstellt";
 "create_story_path_to_story" = "Bilder & Videos > Meine Storys";
 "You can not share empty album" = "Sie können kein leeres Album teilen";
 "etk_permission_description" = "Ich erteilte gemäß der Gesetzes-Nr. 6563 bezüglich vorteilhafter Produkte und Dienstleistungen von Turkcell und den Gemeinschaftsunternehmen sowie den sonstigen betreffenden Gesetzen, die Erlaubnis mir gewerbliche Nachrichten zu Informationszwecken per E-Mail zuzusenden, sofern ich nichts gegenteiliges angebe und nichts gegenseitiges beantrage.";
@@ -1288,7 +1287,7 @@
 "profile_detail_address_placeholder" = "Bitte gib Deine Adressangaben ein";
 "profile_detail_error_contact_call_center" = "Bitte kontaktiere den Kundendienst damit Du Deine Nummer ändern kannst.";
 "temporary_error" = "Ein vorübergehender Fehler ist aufgetreten, versuche es bitte noch einmal";
-"move_to_trash_albums_message" = "Das/die ausgewählte/-n Album/-en wird/werden in den Papierkorb verschoben. Du kannst diese innerhalb von 30 Tagen wieder vom Papierkorb zurückholen. Vergiss nicht, den Papierkorb zuerst zu leeren, wenn Du Speicherplatz für Deine Lifebox freigeben willst.";
+"move_to_trash_albums_message" = "Das/die ausgewählte/-n Album/-en wird/werden in den Papierkorb verschoben. Du kannst diese innerhalb von 90 Tagen wieder vom Papierkorb zurückholen. Vergiss nicht, den Papierkorb zuerst zu leeren, wenn Du Speicherplatz für Deine Lifebox freigeben willst.";
 "move_to_trash_albums_success_message" = "Das Album / die Alben und der Inhalt wurden in den Papierkorb verschoben.";
 "confirmation_popup_title_hide" = "Ausblenden";
 "confirmation_popup_message_hide" = "Das/die ausgewählte/-n Element/-e wird/werden ausgeblendet und sind nur über das Album \"Ausgeblendet\" zugänglich. Relevante Inhalte werden nicht in Lifebox-Listen oder Erinnerungen angezeigt. Du kannst es jederzeit wiederherstellen. Möchtest Du fortfahren?";
@@ -1334,7 +1333,7 @@
 "carousel_view_second_page_title" = "Kontakte, die Du nicht willst, ausblenden!";
 "carousel_view_second_page_text" = "Gibt es Kontakte, die nicht mehr in Deiner Fotoliste und auf Deiner Homepage-Vorschlägen aufgeführt werden sollen? Wähle einfach den gewünschten Kontakt im Kontaktalbum aus und es genügt mit einem Klick zu sagen ‘‘Ausblenden\". Du kannst somit auf die Erinnerungen der ausgeblendeten Kontakte über das Album \"Ausgeblendet\" zugreifen. Du kannst diesen Vorgang jederzeit rückgängig machen.";
 "carousel_view_third_page_title" = "Lösche die unerwünschten Kontakte!";
-"carousel_view_third_page_text" = "Wenn es sich nicht lohnt, einen Kontakt und seine Erinnerungen zu sichern, kannst Du sie sofort in den Papierkorb verschieben, indem du im Album der Kontakte den Vorgang \"Löschen\" auswählst. Wenn Du es bereust, kannst Du die Wiederherstellungsfunktion innerhalb von 30 Tagen aus dem Papierkorb verwenden. Wenn Du dir sagst ‘‘ich kann mich von meinen Erinnerungen nicht trennen, aber ich will sie nicht immer vor mir haben‘‘, die Ausblendfunktion ist gleich über der Löschaktion.";
+"carousel_view_third_page_text" = "Wenn es sich nicht lohnt, einen Kontakt und seine Erinnerungen zu sichern, kannst Du sie sofort in den Papierkorb verschieben, indem du im Album der Kontakte den Vorgang \"Löschen\" auswählst. Wenn Du es bereust, kannst Du die Wiederherstellungsfunktion innerhalb von 90 Tagen aus dem Papierkorb verwenden. Wenn Du dir sagst ‘‘ich kann mich von meinen Erinnerungen nicht trennen, aber ich will sie nicht immer vor mir haben‘‘, die Ausblendfunktion ist gleich über der Löschaktion.";
 "hidden_bin_album_slider_title" = "Ausgeblendet";
 "hidden_bin_album_slider_empty" = "Du hast noch keine versteckten Alben mit Kontakten, Orte usw. Du kannst irgendein Album auswählen und dieses auf einmal ausblenden.";
 "hidden_bin_empty" = "Du hast noch keine ausgeblendeten Fotos. Es genügt, ein Foto auszuwählen und ‘‘Ausblenden‘‘ anzuwählen.";
@@ -1347,17 +1346,17 @@
 "trash_bin_album_slider_empty" = "Es befindet sich noch kein gelöschtes Album im Papierkorb";
 "trash_bin_empty" = "Es befindet sich noch kein gelöschtes Element im Papierkorb";
 "delete_confirmation_popup_title" = "Verschiebe in den Papierkorb";
-"delete_confirmation_popup_text" = "Das/die ausgewählte/-n Element/-e wird/werden in den Papierkorb verschoben. Du kannst diese innerhalb von 30 Tagen wieder vom Papierkorb zurückholen. Vergiss nicht, den Papierkorb zuerst zu leeren, wenn Du Speicherplatz für Deine Lifebox freigeben willst.";
+"delete_confirmation_popup_text" = "Das/die ausgewählte/-n Element/-e wird/werden in den Papierkorb verschoben. Du kannst diese innerhalb von 90 Tagen wieder vom Papierkorb zurückholen. Vergiss nicht, den Papierkorb zuerst zu leeren, wenn Du Speicherplatz für Deine Lifebox freigeben willst.";
 "restore_confirmation_popup_title" = "Lade zurück";
 "restore_confirmation_popup_text" = "Das/die ausgewählte/-n Element/-e wird/werden zurückgeladen. Möchtest Du fortfahren?";
 "delete_from_hidden_bin_popup_success_title" = "Lösche";
-"delete_from_hidden_bin_popup_success_text" = "Die ausgewählte/-n Datei/-en wird/werden in den Papierkorb verschoben. Du kannst diese innerhalb von 30 Tagen wieder vom Papierkorb zurückholen. Vergiss nicht, den Papierkorb zuerst zu leeren, wenn Du Speicherplatz für Deine Lifebox freigeben willst.";
+"delete_from_hidden_bin_popup_success_text" = "Die ausgewählte/-n Datei/-en wird/werden in den Papierkorb verschoben. Du kannst diese innerhalb von 90 Tagen wieder vom Papierkorb zurückholen. Vergiss nicht, den Papierkorb zuerst zu leeren, wenn Du Speicherplatz für Deine Lifebox freigeben willst.";
 "unhide_popup_success_title" = "Das/die ausgewählte/-n Element/-e wurden zurückgeladen.";
-"delete_popup_text" = "Die ausgewählte/-n Datei/-en wird/werden in den Papierkorb verschoben. Du kannst diese innerhalb von 30 Tagen wieder vom Papierkorb zurückholen. Vergiss nicht, den Papierkorb zuerst zu leeren, wenn Du Speicherplatz für Deine Lifebox freigeben willst.";
+"delete_popup_text" = "Die ausgewählte/-n Datei/-en wird/werden in den Papierkorb verschoben. Du kannst diese innerhalb von 90 Tagen wieder vom Papierkorb zurückholen. Vergiss nicht, den Papierkorb zuerst zu leeren, wenn Du Speicherplatz für Deine Lifebox freigeben willst.";
 "PackagesPolicyTextBillo" = "Die Abonnements werden monatlich erneuert. Die Zahlung wird dem iTunes-Konto bei der Kaufbestätigung belastet. Das Abonnement verlängert sich automatisch, wenn die automatische Verlängerung nicht mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums deaktiviert wird\nDas Konto wird für die Verlängerung innerhalb von 24 Stunden vor Ablauf des aktuellen Zeitraums belastet. Die Gebühren werden so wiedergegeben, wie sie auf dem In-App-Kaufbildschirm angezeigt werden.\nAbonnements können vom Benutzer verwaltet werden und die automatische Verlängerung kann deaktiviert werden, indem Sie nach dem Kauf zu den Kontoeinstellungen des Benutzers wechseln\nJeder nicht genutzte Teil eines kostenlosen Testzeitraums, falls angeboten, verfällt, wenn der Nutzer ein Abonnement für diese Veröffentlichung erwirbt, sofern zutreffend \nDatenschutzbestimmungen: https://billostorage.com/policy\nNutzungsbedingungen:";
 "unhide_items_popup_text" = "Das/die ausgewählte/-n Element/-e wird/werden in ihre alten Ordner verschoben und in den Lifebox-Listen angezeigt. Möchtest Du fortfahren?";
 "unhide_albums_popup_text" = "Das/die ausgewählte/-n Album/-en wird/werden in ihre alten Ordner verschoben und in den Lifebox-Listen angezeigt. Möchtest Du fortfahren?";
-"move_to_trash_hidden_albums_confirmation_popup_text" = "Die ausgewählte Datei wird in den Papierkorb verschoben. Sie können diese innerhalb von 30 Tagen wieder vom Papierkorb zurückholen. Vergessen Sie nicht, den Papierkorb zuerst zu leeren, wenn Sie Speicherplatz für Ihre Lifebox freigeben wollen. Möchten Sie fortfahren.";
+"move_to_trash_hidden_albums_confirmation_popup_text" = "Die ausgewählte Datei wird in den Papierkorb verschoben. Sie können diese innerhalb von 90 Tagen wieder vom Papierkorb zurückholen. Vergessen Sie nicht, den Papierkorb zuerst zu leeren, wenn Sie Speicherplatz für Ihre Lifebox freigeben wollen. Möchten Sie fortfahren.";
 "delete_items_confirmation_popup_text" = "Das/die ausgewählte/-n Element/-e wird/werden von Lifebox für immer entfernt. Möchtest Du fortfahren?";
 "delete_albums_confirmation_popup_text" = "Das/die ausgewählte/-n Album/-en und die Inhalte wird/werden von Lifebox für immer entfernt. Möchtest Du fortfahren?";
 "delete_folders_confirmation_popup_text" = "Die ausgewählte/-n Datei/-en und die Inhalte werden von Lifebox für immer entfernt. Möchtest Du fortfahren?";
@@ -1474,8 +1473,8 @@
 "sign_up_password_rules" = "Das Passwort muss mindestens 6 und höchstens 16 Zeichen lang sein, mindestens eine Zahl und einen Großbuchstaben und keine aufeinanderfolgenden Buchstaben enthalten.";
 "documents_album_card_title" = "Möchten Sie diese Dateien ausblenden?";
 "documents_album_card_description" = "%d-Elemente, einschließlich Screenshots und Dokumente, sind im Dokumentalbum gruppiert. Sie können Ihre Galerie bearbeiten, indem Sie dieses Album ausblenden. Sie können jederzeit über das verschlüsselte Album auf diese Fotos zugreifen.";
-"documents_album_card_hide_button" = "Dokumentalbum ausblenden";
-"documents_album_card_view_button" = "Dokumentalbum anzeigen";
+"documents_album_card_hide_button" = "Album Ausblenden";
+"documents_album_card_view_button" = "Album Anzeigen";
 "snackbar_ok" = "OK";
 "snackbar_trash_bin" = "Mülleimer";
 "snackbar_hidden_bin" = "Verstecktes Album";
@@ -1590,3 +1589,4 @@
 "contact_phase2_error_quota_restore" = "";
 "contact_phase2_error_quota_backup" = "";
 "download_document_error_popup" = "Sie können nur Fotos, Videos oder Alben herunterladen.";
+"contact_phase2_history_cell_Contact_List" = "";

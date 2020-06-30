@@ -14,4 +14,11 @@ class AlbumsDataSourceForCollectionView: ArrayDataSourceForCollectionView {
         return .zero
     }
     
+    override func didUnhideAlbums(_ albums: [AlbumItem]) {
+        delegate?.needReloadData()
+    }
+    
+    override func putBackFromTrashAlbums(_ albums: [AlbumItem]) {
+        delegate?.needReloadData()
+    }
 }

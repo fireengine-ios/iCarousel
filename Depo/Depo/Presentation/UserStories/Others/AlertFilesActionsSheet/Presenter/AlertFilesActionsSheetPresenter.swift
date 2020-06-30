@@ -309,7 +309,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if selectedItems.count <= allowedNumberLimit {
-                            self.interactor.moveToTrash(item: currentItems)
+                            self.interactor.moveToTrash(items: currentItems)
                         } else {
                             let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
                             UIApplication.showErrorAlert(message: text)

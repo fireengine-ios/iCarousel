@@ -45,6 +45,8 @@ class PhotoVideoDetailModuleInitializer: NSObject {
                                                style: .blackOpaque, tintColor: nil)
         
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
+        viewController.parentUUID = albumUUID
+        
         let configurator = PhotoVideoDetailModuleConfigurator()
         let presenter = PhotoVideoDetailPresenter()
         configurator.configureModuleFromAlbumForViewInput(viewInput: viewController,
@@ -66,6 +68,8 @@ class PhotoVideoDetailModuleInitializer: NSObject {
                                                style: .blackOpaque, tintColor: nil)
         
         let viewController = PhotoVideoDetailViewController(nibName: nibName, bundle: nil)
+        viewController.parentUUID = albumUUID
+        
         let configurator = PhotoVideoDetailModuleConfigurator()
         let presenter = PhotoVideoDetailPresenter()
         configurator.configureModuleFromFaceImageAlbumForViewInput(viewInput: viewController,

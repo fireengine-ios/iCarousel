@@ -47,8 +47,10 @@ final class PeopleSliderDataSource: NSObject {
     //MARK: - Shared methods
 
     func reloadCollection(with items: [PeopleOnPhotoItemResponse]) {
-        self.items = items
-        collectionView?.reloadData()
+        DispatchQueue.main.async {
+            self.items = items
+            self.collectionView?.reloadData()
+        }
     }
     
     func deleteItem(at index: Int) {
