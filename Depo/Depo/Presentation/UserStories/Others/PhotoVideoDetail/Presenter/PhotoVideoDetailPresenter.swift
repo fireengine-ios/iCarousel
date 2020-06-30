@@ -193,7 +193,6 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         default:
             break
         }
-        
     }
     
     func operationFailed(withType type: ElementTypes) {
@@ -202,7 +201,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         debugPrint("failed")
     }
     
-    func successPopupClosed() {
+    func successPopupWillAppear() {
         if interactor.allItems.isEmpty {
             goBack()
         }
