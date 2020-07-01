@@ -26,9 +26,10 @@ class SplashRouter: SplashRouterInput {
     }
     
     func navigateToTermsAndService(isFirstLogin: Bool) {
-        let temsAndServices = router.termsAndServicesScreen(login: isFirstLogin, phoneNumber: nil)
-        router.setNavigationController(controller: router.onboardingScreen)
-        router.pushViewControllerWithoutAnimation(viewController: temsAndServices)
+        let termsAndServices = router.termsAndServicesScreen(login: isFirstLogin, phoneNumber: nil)
+        router.setNavigationController(controller: termsAndServices)
+        //no turning back now,FE-2712 and FE-84
+//        router.pushViewControllerWithoutAnimation(viewController: temsAndServices)
     }
     
     func showNetworkError() {
