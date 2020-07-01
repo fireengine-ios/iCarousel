@@ -11,7 +11,7 @@ import Foundation
 protocol StorageVars: class {
     var isAppFirstLaunch: Bool { get set }
     var currentUserID: String? { get set }
-    var autoSyncSet: Bool { get set }
+    var isAutoSyncSet: Bool { get set }
     var autoSyncSettings: [String: Any]? { get set }
     var autoSyncSettingsMigrationCompleted: Bool { get set }
     var smallFullOfQuotaPopUpCheckBox: Bool { get set }
@@ -101,7 +101,7 @@ final class UserDefaultsVars: StorageVars {
     }
     
     private let autoSyncSetKey = "AutoSyncSetKey"
-    var autoSyncSet: Bool {
+    var isAutoSyncSet: Bool {
         get { return userDefaults.bool(forKey: autoSyncSetKey) }
         set { userDefaults.set(newValue, forKey: autoSyncSetKey) }
     }
