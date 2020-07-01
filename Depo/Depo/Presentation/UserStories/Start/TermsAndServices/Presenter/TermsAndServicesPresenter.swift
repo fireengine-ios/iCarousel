@@ -44,10 +44,9 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         /// from login
         if interactor.cameFromLogin {
             router.goToAutoSync()
-            
         /// from splash
         } else {
-            router.goToHomePage()
+            openAutoSyncIfNeeded()
         }
     }
     
@@ -106,18 +105,19 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     }
     
     // MARK: Utility Methods
-    private func openAutoSyncIfNeeded() {
+    private func openAutoSyncIfNeeded(else handler: VoidHandler? = nil) {
         view.showSpinner()
-        
-        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
-            self?.view.hideSpinner()
-            
-            if needToOpenAutoSync {
-                self?.router.goToAutoSync()
+        autoSyncRoutingService.checkNeededOpenAutoSync(
+            success: { [weak self] needToOpenAutoSync in
+                self?.view.hideSpinner()
+                if needToOpenAutoSync {
+                    self?.router.goToAutoSync()
+                }
+            },
+            error: { [weak self] _ in
+                self?.view.hideSpinner()
             }
-        }) { [weak self] error in
-            self?.view.hideSpinner()
-        }
+        )
     }
     
     //MARK : BasePresenter
