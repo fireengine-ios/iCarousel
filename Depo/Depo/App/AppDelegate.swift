@@ -14,6 +14,7 @@ import XCGLogger
 import Adjust
 import Netmera
 import UserNotifications
+import KeychainSwift
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -103,7 +104,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         debugLog("didFinishLaunchingWithOptions !TOKEN \(tokenStorage.refreshToken)")
-
+        let swiftKeychain = KeychainSwift()
+        swiftKeychain.accessGroup = "7YZS5NTGYH.com.turkcell.akillidepo"
+        let refreshT = swiftKeychain.get("refreshToken")
+        let accessT = swiftKeychain.get("accessToken")
+        
+        debugLog("didFinishLaunchingWithOptions !TOKEN specific group refresh \(refreshT) access \(accessT)")
         
         if #available(iOS 13.0, *) {
             debugLog("BG! Registeration")
