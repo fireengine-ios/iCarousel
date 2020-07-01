@@ -457,7 +457,7 @@ class AuthenticationService: BaseRequestService {
             UploadService.default.cancelOperations()
             AutoSyncDataStorage().clear()
             AuthoritySingleton.shared.clear()
-            storageVars.autoSyncSet = false
+            storageVars.isAutoSyncSet = false
             SingletonStorage.shared.logoutClear()
             SyncSettings.shared().periodicBackup = SYNCPeriodic.none
 //            ItemsRepository.sharedSession.dropCache()
