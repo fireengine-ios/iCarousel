@@ -58,10 +58,10 @@ final class BackgroundSyncService {
         sendNetmeraEvent(type: task.identifier)
         guard
             LocalMediaStorage.default.photoLibraryIsAvailible(),
-            storageVars.autoSyncSet,
+            storageVars.isAutoSyncSet,
             ApplicationStateHelper.shared.isBackground
         else {
-            debugLog("BG! DECLINED: Photo \(LocalMediaStorage.default.photoLibraryIsAvailible()) and autosync \(storageVars.autoSyncSet) is disabled and isBackground \(ApplicationStateHelper.shared.isBackground) for \(task.identifier)")
+            debugLog("BG! DECLINED: Photo \(LocalMediaStorage.default.photoLibraryIsAvailible()) and autosync \(storageVars.isAutoSyncSet) is disabled and isBackground \(ApplicationStateHelper.shared.isBackground) for \(task.identifier)")
             
             scheduleTask(taskIdentifier: task.identifier)
             
