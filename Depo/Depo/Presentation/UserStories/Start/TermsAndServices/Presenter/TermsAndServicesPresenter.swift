@@ -45,10 +45,10 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         if interactor.cameFromLogin {
             router.goToAutoSync()
         /// from splash
-        } else if storageVars.autoSyncSet == false {
-            router.goToAutoSync()
-        } else {
+        } else if storageVars.autoSyncSet {
             router.goToHomePage()
+        } else {
+            router.goToAutoSync()
         }
     }
     
