@@ -101,6 +101,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = InitializingViewController()
         self.window?.makeKeyAndVisible()
         
+        
+        debugLog("didFinishLaunchingWithOptions !TOKEN \(tokenStorage.refreshToken)")
+
+        
         if #available(iOS 13.0, *) {
             debugLog("BG! Registeration")
             self.backgroundSyncService.registerLaunchHandlers()
@@ -111,14 +115,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return
             }
             
-            
-            DispatchQueue.main.async {
-                AppConfigurator.logoutIfNeed()
+            //DELETEME:
+            MediaItemOperationsService.shared.getAllRemotesMediaItem { items in
+                debugLog(" !TOKEN all remotes count \(items)")
                 
-                self.window?.rootViewController = router.vcForCurrentState()
-                self.window?.isHidden = false
-                
+                MediaItemOperationsService.shared.allLocalItems { locals in
+                    
+                    debugLog(" !TOKEN all locals count \(locals)")
+                    
+                    DispatchQueue.main.async {
+                        debugLog(" !TOKEN check for token")
+                        AppConfigurator.logoutIfNeed()
+                        
+                        self.window?.rootViewController = router.vcForCurrentState()
+                        self.window?.isHidden = false
+                        
+                    }
+                }
             }
+            //
+            
         }
         
         return true
@@ -205,7 +221,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)
         
         if tokenStorage.refreshToken != nil {
+            debugLog("applicationDidEnterBackground !TOKEN NOT EMPTY")
             LocationManager.shared.startUpdateLocationInBackground()
+        } else {
+            debugLog("applicationDidEnterBackground !TOKEN IS EMPTY")
         }
         
         if !passcodeStorage.isEmpty {
