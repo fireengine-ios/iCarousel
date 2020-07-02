@@ -249,10 +249,6 @@ private extension ContactListViewController {
     
     func showMoreActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let restoreAction = UIAlertAction(title: TextConstants.contactListRestore, style: .default) { [weak self] _ in
-            self?.showPopup(type: .restoreContacts)
-        }
-        actionSheet.addAction(restoreAction)
         
         let deleteAllAction = UIAlertAction(title: TextConstants.contactListDeleteAll, style: .default) { [weak self] _ in
             self?.showPopup(type: .deleteAllContacts)
