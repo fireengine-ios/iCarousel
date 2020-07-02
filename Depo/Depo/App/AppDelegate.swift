@@ -102,15 +102,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = InitializingViewController()
         self.window?.makeKeyAndVisible()
         
-        
-        debugLog("didFinishLaunchingWithOptions !TOKEN \(tokenStorage.refreshToken)")
-        let swiftKeychain = KeychainSwift()
-        swiftKeychain.accessGroup = "7YZS5NTGYH.com.turkcell.akillidepo"
-        let refreshT = swiftKeychain.get("refreshToken")
-        let accessT = swiftKeychain.get("accessToken")
-        
-        debugLog("didFinishLaunchingWithOptions !TOKEN specific group refresh \(refreshT) access \(accessT)")
-        
         if #available(iOS 13.0, *) {
             debugLog("BG! Registeration")
             self.backgroundSyncService.registerLaunchHandlers()
@@ -120,27 +111,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             guard let self = self else {
                 return
             }
-            
-            //DELETEME:
-            MediaItemOperationsService.shared.getAllRemotesMediaItem { items in
-                debugLog(" !TOKEN all remotes count \(items)")
+
+            DispatchQueue.main.async {
+                AppConfigurator.logoutIfNeed()
                 
-                MediaItemOperationsService.shared.allLocalItems { locals in
-                    
-                    debugLog(" !TOKEN all locals count \(locals)")
-                    
-                    DispatchQueue.main.async {
-                        debugLog(" !TOKEN check for token")
-                        AppConfigurator.logoutIfNeed()
-                        
-                        self.window?.rootViewController = router.vcForCurrentState()
-                        self.window?.isHidden = false
-                        
-                    }
-                }
+                self.window?.rootViewController = router.vcForCurrentState()
+                self.window?.isHidden = false
+                
             }
-            //
-            
         }
         
         return true
@@ -227,10 +205,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SDImageCache.shared().deleteOldFiles(completionBlock: nil)
         
         if tokenStorage.refreshToken != nil {
-            debugLog("applicationDidEnterBackground !TOKEN NOT EMPTY")
             LocationManager.shared.startUpdateLocationInBackground()
-        } else {
-            debugLog("applicationDidEnterBackground !TOKEN IS EMPTY")
         }
         
         if !passcodeStorage.isEmpty {
