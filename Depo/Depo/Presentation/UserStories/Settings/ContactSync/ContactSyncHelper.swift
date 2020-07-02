@@ -69,12 +69,15 @@ final class ContactSyncHelper {
     //MARK: - Public
     
     var isRunning: Bool {
-        return ContactSyncSDK.isRunning() || currentOperation != nil
+        return ContactSyncSDK.isRunning()
     }
     
     func prepare() -> Bool {
         //TODO: check logic, maybe just cancel and call .getBackUpStatus
         guard !ContactSyncSDK.isRunning() else {
+            if let currentOperation = currentOperation, currentOperation.isContained(in: [.backup, .restore]) {
+                return false
+            }
             if AnalyzeStatus.shared().analyzeStep == AnalyzeStep.ANALYZE_STEP_INITAL {
                 performOperation(forType: SyncSettings.shared().mode)
             } else if AnalyzeStatus.shared().analyzeStep != AnalyzeStep.ANALYZE_STEP_PROCESS_DUPLICATES {

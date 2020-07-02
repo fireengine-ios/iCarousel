@@ -52,7 +52,9 @@ final class DeleteDuplicatesViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        contactSyncHelper.cancelAnalyze()
+        if AnalyzeStatus.shared().analyzeStep == .ANALYZE_STEP_PROCESS_DUPLICATES {
+            contactSyncHelper.cancelAnalyze()
+        }
     }
     
     private func trackScreen() {
