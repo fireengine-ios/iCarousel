@@ -100,6 +100,12 @@ final class BackgroundSyncService {
     }
     
     private func scheduleTask(taskIdentifier: String) {
+        let settings = AutoSyncDataStorage().settings
+        
+        guard settings.isAutoSyncEnabled || !CacheManager.shared.isCacheActualized else {
+            return
+        }
+        
         debugLog("BG! scheduleTask \(taskIdentifier)")
         let request: BGTaskRequest
         
