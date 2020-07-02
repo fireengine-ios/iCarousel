@@ -10,8 +10,7 @@ apps = [
             name: 'lifebox',// name will be the base filename of the app
             versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
             ictsContainerId: '743', // ICT Store
-            appleId: '693N5K66ZJ', // Apple ID property in the App Information section in App Store Connect,
-            prodTeamID: '7YZS5NTGYH',
+            prodTeamID: '693N5K66ZJ',
             xcodeSchema: 'TC_Depo_LifeTech_Bundle',
             xcodeTarget: 'TC_Depo_LifeTech_Bundle'
         ],
@@ -21,8 +20,10 @@ apps = [
             ictsContainerId: '966', // ICT Store
             appleId: '1488914348',
             prodTeamID: '729CGH4BJD',
-            xcodeSchema: 'lifedrive_Bundle', // Defaults to app name
-            xcodeTarget: 'lifedrive_Bundle'  // Defaults to app name
+	    //xcodeSchema: // Defaults to app name
+            //xcodeTarget: // Defaults to app name
+            //xcodeSchema: 'lifedrive_Bundle', 
+            //xcodeTarget: 'lifedrive_Bundle'  
         ]
 ]
 derivedDir = 'lifebox'
@@ -34,7 +35,7 @@ ictsDeployers = "EXT02D9926" // To enable, uncomment submitters in approval stag
 testFlightDeployers = "TCUSER" // To enable, uncomment submitters in approval stage code
 
 // Email notification
-devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;samet.alkan@turkcell.com.tr;can.kucukakdag@turkcell.com.tr"
+devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;can.kucukakdag@turkcell.com.tr"
 
 xcodeParams = [
         xcodeApp: 'Xcode11.3.app',
