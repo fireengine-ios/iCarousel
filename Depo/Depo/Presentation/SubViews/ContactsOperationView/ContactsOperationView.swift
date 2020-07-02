@@ -8,13 +8,29 @@
 
 import UIKit
 
-//TODO: Need configure states and localize strings
+import UIKit
+
 enum ContactsOperationType {
     case backUp(ContactSync.SyncResponse?)
     case deleteBackUp
     case deleteDuplicates
     case deleteAllContacts
     case restore
+    
+    var navBarTitle: String {
+        switch self {
+        case .backUp(_):
+            return TextConstants.contactBackupResultNavBarTitle
+        case .deleteBackUp:
+            return TextConstants.contactDeleteBackUpResultNavBarTitle
+        case .deleteDuplicates:
+            return TextConstants.contactDeleteDuplicatesResultNavBarTitle
+        case .deleteAllContacts:
+            return TextConstants.contactDeleteAllContactsResultNavBarTitle
+        case .restore:
+            return TextConstants.contactRestoreResultNavBarTitle
+        }
+    }
     
     func title(result: ContactsOperationResult) -> String {
         if result == .failed {
@@ -40,7 +56,7 @@ enum ContactsOperationType {
     
     func message(result: ContactsOperationResult) -> String {
         if result == .failed {
-            return "An unknown error was encountered. Please try again later."
+            return TextConstants.contactSyncErrorMessage
         }
         
         switch self {

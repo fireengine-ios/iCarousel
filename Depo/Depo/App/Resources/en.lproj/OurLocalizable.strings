@@ -1700,3 +1700,9 @@
 "contact_phase2_error_backup_title" = "contact_phase2_error_backup";
 "contact_phase2_error_restore_title" = "contact_phase2_error_restore";
 "contact_phase2_error_delete_title" = "contact_phase2_error_delete_title";
+"contact_phase2_error_message" = "An unknown error was encountered. Please try again later.";
+"contact_phase2_result_backup_nav_bar_title" = "Back up";
+"contact_phase2_result_restore_nav_bar_title" = "Restore";
+"contact_phase2_result_delete_backup_nav_bar_title" = "Delete Back up";
+"contact_phase2_result_delete_duplicates_nav_bar_title" = "Delete Duplicates";
+"contact_phase2_result_delete_all_contacts_nav_bar_title" = "Delete Contacts";

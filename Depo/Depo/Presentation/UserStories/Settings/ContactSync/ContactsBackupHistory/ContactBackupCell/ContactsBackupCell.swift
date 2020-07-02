@@ -29,7 +29,7 @@ final class ContactsBackupCell: UITableViewCell, ContactsBackupCellProtocol {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        selectionStyle = .none
+        accessoryType = .disclosureIndicator
     }
     
     func setupCell(title: String, detail: String) {

@@ -9,33 +9,20 @@
 import UIKit
 
 
-class ContactSyncOperationResultController: BaseViewController, NibInit {
+final class ContactSyncOperationResultController: BaseViewController, NibInit {
     
-    static func create(with type: ContactsOperationResult, syncResult: ContactSync.SyncResponse?, periodicSync: PeriodicSync) -> ContactSyncOperationResultController {
+    static func create(with view: UIView, navBarTitle: String) -> ContactSyncOperationResultController {
         let controller = ContactSyncOperationResultController.initFromNib()
-        controller.periodicSyncHelper = periodicSync
-        controller.syncResult = syncResult
-        controller.type = type
+        controller.resultView = view
+        controller.navBarTitle = navBarTitle
         return controller
     }
-    
-    static func createFailed(with view: ContactsOperationView) -> ContactSyncOperationResultController {
-        let controller = ContactSyncOperationResultController.initFromNib()
-        controller.failView = view
-        controller.type = .failed
-        return controller
-    }
-    
 
     @IBOutlet private weak var contentView: UIView!
     
-    private var periodicSyncHelper: PeriodicSync!
-    private var type: ContactsOperationResult!
-    private var syncResult: ContactSync.SyncResponse?
-    
-    private lazy var successView = BackupContactsOperationView.with(type: .backUp(syncResult), result: .success)
-    private lazy var failView = ContactsOperationView.with(type: .backUp(nil), result: .failed)
-    
+    private var resultView: UIView?
+    private var navBarTitle = ""
+
     //MARK: - Override
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,24 +41,13 @@ class ContactSyncOperationResultController: BaseViewController, NibInit {
     
     private func setupNavBar() {
         navigationBarWithGradientStyle()
-        setTitle(withString: TextConstants.contactBackupSuccessNavbarTitle)
+        setTitle(withString: navBarTitle)
     }
     
     private func showRelatedView() {
-        
-        switch type {
-            case .success:
-                successView.frame = contentView.bounds
-                if successView.superview == nil {
-                    contentView.addSubview(successView)
-                }
-            case .failed:
-                failView.frame = contentView.bounds
-                if failView.superview == nil {
-                    contentView.addSubview(failView)
-                }
-            default:
-                break
+        resultView?.frame = contentView.bounds
+        if let resultView = resultView {
+            contentView.addSubview(resultView)
         }
     }
 }

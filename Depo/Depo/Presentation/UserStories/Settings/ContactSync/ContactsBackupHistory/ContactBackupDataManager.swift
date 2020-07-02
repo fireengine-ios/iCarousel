@@ -8,15 +8,15 @@
 
 import UIKit
 
-typealias ContactBuckupItem = ContactSync.SyncResponse
+typealias ContactBackupItem = ContactSync.SyncResponse
 
 protocol ContactBackupHistoryDataManagerProtocol: class {
-    func appendItemsForPresent(items: [ContactBuckupItem])
-    func getSelectedItems() -> [ContactBuckupItem]
+    func appendItemsForPresent(items: [ContactBackupItem])
+    func getSelectedItems() -> [ContactBackupItem]
 }
 
 protocol ContactBackupHistoryDataManagerDelegate: class {
-    func showDetailsForBuckupItem(item: ContactBuckupItem)
+    func showDetailsForBuckupItem(item: ContactBackupItem)
 }
 
 //TODO: Change logic/ uncomment when new logic (with cell selection mode) will be implemented
@@ -29,11 +29,9 @@ final class ContactBackupHistoryDataManager: NSObject, ContactBackupHistoryDataM
     
     init(tableView: UITableView, delegate: ContactBackupHistoryDataManagerDelegate) {
         self.tableView = tableView
-        self.tableView.register(nibCell: ContactsBackupCell.self)
         super.init()
-        tableView.dataSource = self
-        tableView.delegate = self
         self.delegate = delegate
+        setupTableView()
     }
     
 //    private var contactBackups = [ContactBuckupItem]() {
@@ -42,20 +40,26 @@ final class ContactBackupHistoryDataManager: NSObject, ContactBackupHistoryDataM
 //        }
 //    }
     
-    private var selectedItems = [ContactBuckupItem]() {
+    private var selectedItems = [ContactBackupItem]() {
         didSet {
             // remove did set
             tableView.reloadData()
         }
     }
     
-    func appendItemsForPresent(items: [ContactBuckupItem]) {
+    func appendItemsForPresent(items: [ContactBackupItem]) {
       //contactBackups.append(contentsOf: items)
         selectedItems.append(contentsOf: items)
     }
     
-    func getSelectedItems() -> [ContactBuckupItem] {
+    func getSelectedItems() -> [ContactBackupItem] {
         return selectedItems
+    }
+    
+    private func setupTableView() {
+        tableView.register(nibCell: ContactsBackupCell.self)
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     private func manageSelectionStateForCell(_ cell: ContactsBackupCellProtocol, indexPath: IndexPath, isWillDisplayFunc: Bool) {
@@ -77,7 +81,7 @@ final class ContactBackupHistoryDataManager: NSObject, ContactBackupHistoryDataM
         }
     }
     
-    private func prepareInfoForCellPresenting(for item: ContactBuckupItem) -> (title: String, description: String) {
+    private func prepareInfoForCellPresenting(for item: ContactBackupItem) -> (title: String, description: String) {
         guard let date = item.date else {
             assertionFailure()
             return (title: TextConstants.contactBackupHistoryCellTitle, description: "")
@@ -89,6 +93,8 @@ final class ContactBackupHistoryDataManager: NSObject, ContactBackupHistoryDataM
     }
 }
 
+//MARK: - UITableViewDataSource
+
 extension ContactBackupHistoryDataManager: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {   //contactBackups.count
@@ -99,6 +105,8 @@ extension ContactBackupHistoryDataManager: UITableViewDataSource {
         tableView.dequeue(reusable: ContactsBackupCell.self, for: indexPath)
     }
 }
+
+//MARK: - UITableViewDelegate
 
 extension ContactBackupHistoryDataManager: UITableViewDelegate {
     
@@ -116,8 +124,9 @@ extension ContactBackupHistoryDataManager: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
                   //contactBackups[indexPath.row]
-         let item = selectedItems[indexPath.row]
-         delegate?.showDetailsForBuckupItem(item: item)
+        let item = selectedItems[indexPath.row]
+        delegate?.showDetailsForBuckupItem(item: item)
+        tableView.deselectRow(at: indexPath, animated: true)
      }
 }
 
