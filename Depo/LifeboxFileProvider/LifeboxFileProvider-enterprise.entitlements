@@ -4,7 +4,6 @@
 <dict>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>7YZS5NTGYH.com.turkcell.akillidepo</string>
 		<string>$(AppIdentifierPrefix)by.come.life.Lifebox</string>
 		<string>$(AppIdentifierPrefix)com.turkcell.akillidepo</string>
 		<string>$(AppIdentifierPrefix)com.turkcell.akillideponew.ent</string>
