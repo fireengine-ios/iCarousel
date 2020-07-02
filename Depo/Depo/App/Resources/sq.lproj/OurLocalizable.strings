@@ -1033,7 +1033,7 @@
 "create_story_press_and_hold_description" = "%@ në imazh për të ndryshuar rendin e historisë suaj.";
 "create_story_name_title" = "Emri i Historisë";
 "create_story_pop_up_title" = "Ju krijuat një histori!\n %@";
-"create_story_pop_up_message" = "Jemi duke përgatitur historinë tuaj. Sapo ajo të përfundojë, mund ta gjeni nën\n%@";
+"create_story_pop_up_message" = "Jemi duke përgatitur historinë tuaj. Në mbarim të saj, ju mund ta aksesoni atë nga Albumi i Videove.";
 "create_story_path_to_story" = "Foto & Video> Historitë e mia";
 "You can not share empty album" = "Nuk mund të ndani albumin bosh.";
 "etk_permission_description" = "Unë jap pëlqimin tim për marrjen e mesazheve komerciale në mënyrë që të informohem për produktet dhe shërbimet e favorshme të Turkcell dhe kompanive të saj të grupit përveç dhe derisa të kërkoj ndryshe, në pajtim me Ligjin Nr. 6563 dhe legjislacionin në fuqi.";

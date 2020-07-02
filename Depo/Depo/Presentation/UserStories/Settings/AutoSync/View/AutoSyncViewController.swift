@@ -58,7 +58,7 @@ final class AutoSyncViewController: BaseViewController, NibInit {
         super.viewWillDisappear(animated)
         
         if fromSettings {
-            storageVars.autoSyncSet = true
+            storageVars.isAutoSyncSet = true
             output.save(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
         }
     }
@@ -106,7 +106,7 @@ final class AutoSyncViewController: BaseViewController, NibInit {
     @IBAction func onStartUsingButton() {
         onStartUsingButtonTapped = true
         
-        storageVars.autoSyncSet = true
+        storageVars.isAutoSyncSet = true
         output.change(settings: dataSource.autoSyncSetting, albums: dataSource.autoSyncAlbums)
     }
 
