@@ -141,7 +141,7 @@ final class PhotoVideoCollectionViewManager {
     private func setupSlider() {
         let sliderController = contentSlider
         
-        let height = scrolliblePopUpView.frame.height + BaseFilesGreedViewController.sliderH 
+        let height = scrolliblePopUpView.frame.height + BaseFilesGreedViewController.sliderH
         
         let subView = UIView(frame: CGRect(x: 0, y: -height, width: collectionView.frame.width, height: BaseFilesGreedViewController.sliderH))
         subView.addSubview(sliderController.view)
@@ -183,8 +183,9 @@ final class PhotoVideoCollectionViewManager {
         checkBox.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
+        let height = scrolliblePopUpView.frame.height + BaseFilesGreedViewController.sliderH
         var constraintsArray = [NSLayoutConstraint]()
-        constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .bottom, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .top, relatedBy: .equal, toItem: scrolliblePopUpView, attribute: .bottom, multiplier: 1, constant: height))
         constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
         constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
         constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: showOnlySyncItemsCheckBoxHeight))

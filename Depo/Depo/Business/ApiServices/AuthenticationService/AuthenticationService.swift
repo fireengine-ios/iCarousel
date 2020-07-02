@@ -200,10 +200,11 @@ struct  ForgotPassword: RequestParametrs {
     }
     
     var header: RequestHeaderParametrs {
+        let headers = RequestHeaders.base() + RequestHeaders.deviceUuidHeader()
         if let captcha = attachedCaptcha {
-            return RequestHeaders.base() + captcha.header
+            return headers + captcha.header
         }
-        return RequestHeaders.base()
+        return headers
     }
 }
 
