@@ -335,9 +335,10 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
     }
     
     private func setupAndStartBackHandler(toOriginal: Bool) {
-        removePreviewController()
-        setupBackHandler(toOriginal: toOriginal)
-        backHandler?()
+        removePreviewController { [weak self] in
+            self?.setupBackHandler(toOriginal: toOriginal)
+            self?.backHandler?()
+        }
     }
     
     private func setupBackHandler(toOriginal: Bool) {
@@ -371,9 +372,9 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
         return destination
     }
     
-    private func removePreviewController() {
+    private func removePreviewController(completion: VoidHandler? = nil) {
         let navVC = (view as? UIViewController)?.navigationController
-        navVC?.dismiss(animated: true, completion: nil)
+        navVC?.dismiss(animated: true, completion: completion)
     }
 }
 
