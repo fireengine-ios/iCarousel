@@ -115,7 +115,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     }
     
     func showRelatedView() {
-        guard !contactSyncHelper.isRunning else {
+        guard !contactSyncHelper.isRunning || AnalyzeStatus.shared().analyzeStep == .ANALYZE_STEP_PROCESS_DUPLICATES else {
             return
         }
         
