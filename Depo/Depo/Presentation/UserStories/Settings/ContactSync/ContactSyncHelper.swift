@@ -96,7 +96,7 @@ final class ContactSyncHelper {
     
     func analyze(onStart: @escaping VoidHandler) {
         userHasPermissionFor(type: .deleteDublicate) { [weak self] hasPermission in
-            guard !hasPermission else {
+            guard hasPermission else {
                 self?.failed(operationType: .analyze, error: .notPremiumUser)
                 return
             }
@@ -106,7 +106,7 @@ final class ContactSyncHelper {
     
     func deleteDuplicates(onStart: @escaping VoidHandler) {
         userHasPermissionFor(type: .deleteDublicate) { [weak self] hasPermission in
-            guard !hasPermission else {
+            guard hasPermission else {
                 self?.failed(operationType: .deleteDuplicated, error: .notPremiumUser)
                 return
             }
