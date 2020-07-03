@@ -259,9 +259,10 @@ final class ContactSyncHelper {
     private func performOperation(forType type: SYNCMode) {
         UIApplication.setIdleTimerDisabled(true)
 
-        // TODO: clear NumericConstants.limitContactsForBackUp
         contactSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, opertionType in
-            self?.delegate?.progress(progress: progressPercentage, for: opertionType)
+            DispatchQueue.main.async {
+                self?.delegate?.progress(progress: progressPercentage, for: opertionType)
+            }
             
             }, finishCallback: { [weak self] result, operationType in
                 self?.analyticsHelper.trackOperationSuccess(type: type)
