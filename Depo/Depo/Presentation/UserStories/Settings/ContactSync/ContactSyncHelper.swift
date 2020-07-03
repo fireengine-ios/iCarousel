@@ -219,6 +219,7 @@ final class ContactSyncHelper {
             if progressPercentage == 0 && type == .deleteDuplicated {
                 self?.delegate?.didDeleteDuplicates()
                 self?.currentOperation = nil
+                AnalyzeStatus.shared().reset()
             } else {
                 self?.delegate?.progress(progress: progressPercentage, for: type)
             }
