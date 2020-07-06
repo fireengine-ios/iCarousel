@@ -48,15 +48,15 @@ final class PremiumPresenter {
             DispatchQueue.toMain {
                 self?.view.startActivityIndicator()
                 guard let offer = self?.featureToBuy else {
-                    self?.failed(with: "Couldn't get feature offer for this authority type")
+                    assertionFailure("Couldn't get feature offer for this authority type")
                     return
                 }
                 self?.interactor.getToken(for: offer)
             }
-        }, fail: { [weak self] failResponse in
+        }, fail: { [weak self] errorResponse in
             DispatchQueue.toMain {
                 self?.view.stopActivityIndicator()
-                self?.failed(with: failResponse.description)
+                self?.failed(with: errorResponse)
             }
         })
     }
@@ -135,23 +135,26 @@ final class PremiumPresenter {
         
         featureToBuy = model
         
-        model.type?.purchaseActions( slcm: { [weak self] in
-            self?.view.startActivityIndicator()
-            self?.buy()
-        }, apple: { [weak self] in
-            self?.view.startActivityIndicator()
-            self?.interactor.activate(offer: model)
-        }, paycell: { [weak self] in
-            guard let offerId = model.cpcmOfferId else {
-                assertionFailure()
-                return
+        model.type?.purchaseActions(
+            slcm: { [weak self] in
+                self?.view.startActivityIndicator()
+                self?.buy()
+            },
+            apple: { [weak self] in
+                self?.view.startActivityIndicator()
+                self?.interactor.activate(offer: model)
+            },
+            paycell: { [weak self] in
+                guard let offerId = model.cpcmOfferId else {
+                    assertionFailure()
+                    return
+                }
+                self?.view?.showPaycellProcess(with: offerId)
+            },
+            notPaymentType: {
+                assertionFailure("should not be another purchase options")
             }
-            self?.view?.showPaycellProcess(with: offerId)
-        }, notPaymentType: { [weak self] in
-            assertionFailure("should not be another purchase options")
-            let error = CustomErrors.serverError("This is not buyable offer type")
-            self?.failed(with: error.localizedDescription)
-        })
+        )
     }
     
     private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, type: PackageContentType) -> SubscriptionPlan?  {
@@ -259,9 +262,13 @@ extension PremiumPresenter: PremiumInteractorOutput {
         displayFeatureInfo(isError: isError)
     }
     
-    func failed(with errorMessage: String) {
+    func failed(with error: ErrorResponse) {
         view?.stopActivityIndicator()
-        router.displayError(with: errorMessage)
+        if error.isNetworkConnectionMissing {
+            router.displayNoInternetError(with: error.localizedDescription)
+        } else {
+            router.displayError(with: error.localizedDescription)
+        }
     }
     
     func failedResendToken(with errorMessage: String) {
@@ -289,7 +296,7 @@ extension PremiumPresenter: OptInControllerDelegate {
         optInVC.startLoading()
         self.optInVC = optInVC
         guard let offer = featureToBuy else {
-            self.failed(with: "Couldn't get feature offer for this authority type")
+            assertionFailure("Couldn't get feature offer for this authority type")
             return
         }
         interactor.getResendToken(for: offer)
@@ -309,7 +316,7 @@ extension PremiumPresenter: OptInControllerDelegate {
         optInVC.startLoading()
         self.optInVC = optInVC
         guard let offer = featureToBuy else {
-            self.failed(with: "Couldn't get feature offer for this authority type")
+            assertionFailure("Couldn't get feature offer for this authority type")
             return
         }
         interactor.verifyOffer(offer, token: referenceToken, otp: code)

@@ -34,6 +34,20 @@ extension PremiumRouter: PremiumRouterInput {
         UIApplication.showErrorAlert(message: errorMessage)
     }
     
+    func displayNoInternetError(with message: String) {
+        let popUp = PopUpController.with(
+            title: TextConstants.errorAlert,
+            message: message,
+            image: .error,
+            buttonTitle: TextConstants.ok,
+            action: { vc in
+                vc.close { [weak self] in
+                    self?.router.popViewController()
+                }
+        })
+        router.presentViewController(controller: popUp)
+    }
+    
     func showNoDetailsAlert(with message: String) {
         let vc = DarkPopUpController.with(title: TextConstants.offersInfo,
                                           message: message,
