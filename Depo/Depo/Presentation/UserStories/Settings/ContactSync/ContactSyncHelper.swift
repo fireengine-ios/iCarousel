@@ -261,7 +261,10 @@ final class ContactSyncHelper {
 
         contactSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, opertionType in
             DispatchQueue.main.async {
-                self?.delegate?.progress(progress: progressPercentage, for: opertionType)
+                //progress may be later than the end of the operation
+                if self?.currentOperation != nil {
+                    self?.delegate?.progress(progress: progressPercentage, for: opertionType)
+                }
             }
             
             }, finishCallback: { [weak self] result, operationType in
@@ -431,7 +434,6 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
     }
     
     func progress(progress: Int, for operationType: SyncOperationType) {
-        printLog("\(operationType) progress - \(progress)")
         if progressView?.type != operationType {
             progressView = createProgressView(for: operationType)
         }
