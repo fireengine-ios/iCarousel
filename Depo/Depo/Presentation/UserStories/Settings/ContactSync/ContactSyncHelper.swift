@@ -265,6 +265,7 @@ final class ContactSyncHelper {
             }
             
             }, finishCallback: { [weak self] result, operationType in
+                printLog("Finish operation - \(operationType)")
                 self?.analyticsHelper.trackOperationSuccess(type: type)
                 
                 UIApplication.setIdleTimerDisabled(false)
@@ -430,6 +431,7 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
     }
     
     func progress(progress: Int, for operationType: SyncOperationType) {
+        printLog("\(operationType) progress - \(progress)")
         if progressView?.type != operationType {
             progressView = createProgressView(for: operationType)
         }
@@ -622,7 +624,7 @@ extension ContactSyncControllerProtocol {
             }
         }
         
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             self.showResultView(view: resultView, title: type.navBarTitle)
         }
     }
