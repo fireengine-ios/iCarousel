@@ -61,7 +61,7 @@ final class ContactsBackupHistoryController: BaseViewController {
 
 extension ContactsBackupHistoryController: ContactBackupHistoryDataManagerDelegate {
     func showDetailsForBuckupItem(item: ContactBackupItem) {
-        let controller = router.contactList(backUpInfo: item)
+        let controller = router.contactList(backUpInfo: item, delegate: self)
         router.pushViewController(viewController: controller)
     }
 }
@@ -92,5 +92,18 @@ extension ContactsBackupHistoryController: ContactSyncControllerProtocol, Contac
     }
     
     func handle(error: ContactSyncHelperError, operationType: SyncOperationType) { }
-    func didFinishOperation(operationType: SyncOperationType) { }
+    func didFinishOperation(operationType: ContactsOperationType) { }
+}
+
+//MARK: - ContactListViewDelegate
+
+extension ContactsBackupHistoryController: ContactListViewDelegate {
+
+    func didCreateNewBackup(_ backup: ContactSync.SyncResponse) {
+        //TODO: - add new backup
+    }
+    
+    func didDeleteContacts(for backup: ContactSync.SyncResponse) {
+        //TODO: - remove backup from list
+    }
 }

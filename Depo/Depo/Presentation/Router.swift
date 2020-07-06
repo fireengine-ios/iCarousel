@@ -475,8 +475,8 @@ class RouterVC: NSObject {
         return DeleteDuplicatesViewController.with(contacts: analyzeResponse)
     }
     
-    func contactList(backUpInfo: ContactSync.SyncResponse) -> UIViewController {
-        return ContactListViewController.with(backUpInfo: backUpInfo)
+    func contactList(backUpInfo: ContactSync.SyncResponse, delegate: ContactListViewDelegate?) -> UIViewController {
+        return ContactListViewController.with(backUpInfo: backUpInfo, delegate: delegate)
     }
     
     func contactDetail(with contact: RemoteContact) -> UIViewController {

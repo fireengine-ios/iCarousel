@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol ContactListViewDelegate: class {
+    func didDeleteContacts(for backup: ContactSync.SyncResponse)
+    func didCreateNewBackup(_ backup: ContactSync.SyncResponse)
+}
+
 final class ContactListViewController: BaseViewController {
     
     private lazy var mainView = ContactListMainView.with(backUpInfo: backUpInfo, delegate: self)
@@ -35,9 +40,12 @@ final class ContactListViewController: BaseViewController {
     private var isLoadingData = false
     private var currentTask: URLSessionTask?
     
-    static func with(backUpInfo: ContactSync.SyncResponse) -> ContactListViewController {
+    private weak var delegate: ContactListViewDelegate?
+    
+    static func with(backUpInfo: ContactSync.SyncResponse, delegate: ContactListViewDelegate?) -> ContactListViewController {
         let controller = ContactListViewController()
         controller.backUpInfo = backUpInfo
+        controller.delegate = delegate
         return controller
     }
     
@@ -197,7 +205,29 @@ extension ContactListViewController: ContactSyncControllerProtocol, ContactSyncH
     }
     
     func handle(error: ContactSyncHelperError, operationType: SyncOperationType) { }
-    func didFinishOperation(operationType: SyncOperationType) { }
+    
+    func didFinishOperation(operationType: ContactsOperationType) {
+        switch operationType {
+        case .backUp(let result):
+            if let result = result {
+                delegate?.didCreateNewBackup(result)
+            }
+        case .deleteAllContacts:
+            if let backUpInfo = backUpInfo {
+                delegate?.didDeleteContacts(for: backUpInfo)
+            }
+            
+            //TODO: need to delete in future
+            //For now we return to main page
+            guard let viewControllers = navigationController?.viewControllers else {
+                return
+            }
+            navigationController?.viewControllers = viewControllers.filter { !($0 is ContactsBackupHistoryController) }
+            
+        default:
+            break
+        }        
+    }
 }
 
 //MARK: - ContactListMainViewDelegate
