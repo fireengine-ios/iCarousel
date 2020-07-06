@@ -156,6 +156,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         CellImageManager.clear()
         assetsFileCacheManager.resetCachedAssets()
         dataSource.performFetch()
+        collectionViewManager.showEmptyDataViewIfNeeded(isShow: dataSource.isObjectsEmpty)
         collectionView.reloadData()
         collectionView.collectionViewLayout.invalidateLayout()
     }
@@ -275,6 +276,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 }
             }
         }
+    }
+    
+    private func showUploadScreen() {
+        let controller = router.uploadPhotos()
+        let navigation = NavigationController(rootViewController: controller)
+        navigation.navigationBar.isHidden = false
+        router.presentViewController(controller: navigation)
     }
     
     private func updateSelection(cell: PhotoVideoCell) {
@@ -637,6 +645,10 @@ extension PhotoVideoController: PhotoVideoNavBarManagerDelegate {
     
     func onSearchButton() {
         showSearchScreen()
+    }
+    
+    func openUploadPhotos() {
+        showUploadScreen()
     }
 }
 
