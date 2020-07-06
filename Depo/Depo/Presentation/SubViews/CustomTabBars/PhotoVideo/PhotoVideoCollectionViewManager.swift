@@ -101,9 +101,7 @@ final class PhotoVideoCollectionViewManager {
     
     func showEmptyDataViewIfNeeded(isShow: Bool) {
         guard isShow else {
-            collectionView.subviews.forEach {
-                ($0 as? EmptyDataView)?.removeFromSuperview()
-            }
+            emptyDataView.removeFromSuperview()
             return
         }
         emptyDataView.configure(title: TextConstants.photosVideosViewNoPhotoTitleText, image: UIImage(named: "ImageNoPhotos") ?? UIImage(), actionTitle: TextConstants.photosVideosViewNoPhotoButtonText)
