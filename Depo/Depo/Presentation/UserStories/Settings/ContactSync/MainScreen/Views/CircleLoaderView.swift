@@ -97,6 +97,7 @@ final class CircleLoaderView: UIView {
         return attributed
     }()
    
+    private var currentValue = 0
     
     //MARK:- Override
     
@@ -136,6 +137,11 @@ final class CircleLoaderView: UIView {
     }
     
     func set(progress: Int) {
+        guard currentValue != progress else {
+            return
+        }
+        currentValue = progress
+        
         DispatchQueue.toMain {
             self.set(percentageValue: progress)
             self.progressLayer.strokeEnd = CGFloat(progress) / 100

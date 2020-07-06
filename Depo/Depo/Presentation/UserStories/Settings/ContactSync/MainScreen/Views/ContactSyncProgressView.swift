@@ -34,14 +34,30 @@ enum ContactSyncProgressType {
             return TextConstants.restoreContactsProgressMessage
         }
     }
+    
+    static func convertSyncOperationType(_ type: SyncOperationType) -> ContactSyncProgressType? {
+        switch type {
+        case .backup:
+            return .backup
+        case .deleteDuplicated:
+            return .deleteDuplicates
+        case .restore:
+            return .restore
+        default:
+            return nil
+        }
+    }
 }
 
-final class ContactSyncProgressView: UIView, NibInit {
+final class ContactSyncProgressView: UIView, NibInit, ContactOperationProgressView {
     
-    static func setup(type: ContactSyncProgressType) -> ContactSyncProgressView {
+    static func setup(type: SyncOperationType) -> ContactSyncProgressView {
         let view = ContactSyncProgressView.initFromNib()
-        view.title.text = type.title
-        view.message.text = type.message
+        view.type = type
+        if let progressType = ContactSyncProgressType.convertSyncOperationType(type) {
+            view.title.text = progressType.title
+            view.message.text = progressType.message
+        }
         return view
     }
     
@@ -69,6 +85,8 @@ final class ContactSyncProgressView: UIView, NibInit {
             newValue.set(lineBackgroundColor: ColorConstants.lighterGray)
         }
     }
+    
+    var type: SyncOperationType!
     
     func reset() {
         loader.resetProgress()
