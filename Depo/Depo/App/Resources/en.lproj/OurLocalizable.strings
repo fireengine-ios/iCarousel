@@ -1363,6 +1363,11 @@
 "confirmation_popup_message_hide" = "Selected item(s) will only be available in \"Hidden\" Album. You can restore them any time. Are you sure to continue?";
 "confirmation_popup_message_hide_albums" = "Selected album(s) will only be available in \"Hidden\" Album. You can restore them any time. Are you sure to continue?";
 "confirmation_popup_title_hide_single_album" = "Hide Album";
+"confirmation_popup_message_hide_single_album" = "You will not see this album...";
+"smash_screen_title" = "Smash effect";
+"smash_popup_message" = "This edited photo will be saved as a new photo in your device gallery";
+"Smash" = "Smash";
+"confirmation_popup_message_hide_single_album" = "Album will be hidden. Are you sure?";
 "confirmation_popup_message_hide_single_album" = "Selected album will only be available in \"Hidden\" Album. You can restore them any time. Are you sure to continue?";
 "smash_screen_title" = "Fun Effect";
 "smash_popup_message" = "This edited photo will be saved to device gallery and uploaded on lifebox as a new item.";
@@ -1403,6 +1408,11 @@
 "hide_successed_alert_people_album_description" = "You can hide(move to a hidden album) or delete (move to trash bin) the photos of a specific person with one click";
 "hide_successed_alert_do_not_show_this_message" = "Don’t show this message again.";
 "hide_successed_alert_view_people_album" = "View People Album";
+"smash_successed_alert_title" = "Saved successfully!";
+"smash_successed_alert_second_title" = "What would you like to do?";
+"smash_successed_alert_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
+"smash_successed_simple_alert_title" = "Saved successfully!";
+"smash_successed_simple_alert_description" = "Lorem ipsum kisilerine ait fotografları topluca silebilir ve gizleyebilirsin.";
 "smash_successed_alert_title" = "Saved successfully to your device gallery and uploaded on lifebox!";
 "smash_successed_alert_second_title" = "Have Fun? What's Next?";
 "smash_successed_alert_description" = "Now you can share the edited photo with your friends.\nAlso you can get rid off the undesirable memories by hiding or deleting with one click in the People Album.";
