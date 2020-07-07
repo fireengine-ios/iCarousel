@@ -11,7 +11,7 @@ import Photos
 import YYImage
 
 ///Static parameters for UI elements set up in OverlayStickerViewControllerDesigner
-final class OverlayStickerViewController: ViewController {
+final class OverlayStickerViewController: UIViewController {
 
     @IBOutlet private weak var overlayingStickerImageView: OverlayStickerImageView!
     @IBOutlet private weak var gifButton: UIButton!
@@ -43,7 +43,7 @@ final class OverlayStickerViewController: ViewController {
     
     private var isFullScreen = false
     
-    var selectedImage: UIImage? {
+    weak var selectedImage: UIImage? {
         didSet {
             setupEnvironment()
         }
@@ -306,7 +306,7 @@ final class OverlayStickerViewController: ViewController {
     }
 }
 
-extension OverlayStickerViewController: OverlayStickerImageViewdelegate {
+extension OverlayStickerViewController: OverlayStickerImageViewDelegate {
     func makeTopAndBottomBarsIsHidden(isHidden: Bool) {
         guard !isFullScreen else {
             return
@@ -317,8 +317,7 @@ extension OverlayStickerViewController: OverlayStickerImageViewdelegate {
 
 extension OverlayStickerViewController: OverlayStickerViewControllerDataSourceDelegate {
     
-    func didSelectItem(item: SmashStickerResponse, attachmentType: AttachedEntityType) {
-        
+    func didSelectItem(item: SmashStickerResponse, attachmentType: AttachedEntityType) {       
         showSpinner()
         overlayingStickerImageView.addAttachment(item: item, attachmentType: attachmentType, completion: { [weak self] in
             self?.hideSpinner()

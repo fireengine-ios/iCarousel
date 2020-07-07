@@ -12,7 +12,7 @@ import SDWebImage
 
 final class StickerCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet private weak var previewImageView: YYAnimatedImageView! {
+    @IBOutlet private weak var previewImageView: UIImageView! {
         willSet {
             newValue.layer.borderColor = ColorConstants.stickerBorderColor.cgColor
             newValue.layer.borderWidth = 1
@@ -21,17 +21,8 @@ final class StickerCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    var stickerType: AttachedEntityType = .gif {
-        didSet {
-            switch stickerType {
-            case .gif:
-                previewImageView.startAnimating()
-            case .image:
-                previewImageView.stopAnimating()
-            }
-        }
-    }
-    
+    var stickerType: AttachedEntityType = .gif
+
     private var gifURL: URL?
     
     func setup(with object: SmashStickerResponse, type: AttachedEntityType) {
@@ -44,7 +35,13 @@ final class StickerCollectionViewCell: UICollectionViewCell {
     
     func setupGif(image: UIImage, url: URL) {
         if stickerType == .gif, gifURL == url {
-            previewImageView.image = image
+            previewImageView.animationImages = image.images
+            previewImageView.startAnimating()
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        previewImageView.animationImages = nil
     }
 }
