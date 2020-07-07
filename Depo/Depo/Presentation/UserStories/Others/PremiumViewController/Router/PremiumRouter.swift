@@ -40,7 +40,7 @@ extension PremiumRouter: PremiumRouterInput {
             message: message,
             image: .error,
             buttonTitle: TextConstants.ok,
-            action: { vc in
+            action: { [weak self] vc in
                 vc.close { [weak self] in
                     self?.router.popViewController()
                 }
