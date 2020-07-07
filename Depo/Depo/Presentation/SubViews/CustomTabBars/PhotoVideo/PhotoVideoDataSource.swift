@@ -78,6 +78,10 @@ final class PhotoVideoDataSource: NSObject {
         return frController
     }()
     
+    var isObjectsEmpty: Bool {
+        fetchedResultsController.fetchedObjects?.isEmpty != false
+    }
+    
     /// collectionView needs only for NSFetchedResultsControllerDelegate
     init(collectionView: UICollectionView?, delegate: PhotoVideoDataSourceDelegate?) {
         self.collectionView = collectionView
