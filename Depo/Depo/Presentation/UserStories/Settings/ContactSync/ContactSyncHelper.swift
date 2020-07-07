@@ -268,7 +268,6 @@ final class ContactSyncHelper {
             }
             
             }, finishCallback: { [weak self] result, operationType in
-                printLog("Finish operation - \(operationType)")
                 self?.analyticsHelper.trackOperationSuccess(type: type)
                 
                 UIApplication.setIdleTimerDisabled(false)
