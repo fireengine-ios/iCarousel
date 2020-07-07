@@ -262,7 +262,6 @@ final class ContentViewAnimator {
             
             if let oldView = currentView {
                 let duration = animated ? 0.25 : 0.0
-                printLog("update view from \(oldView.classForCoder) to \(newView.classForCoder)")
                 UIView.transition(from: oldView, to: newView, duration: duration, options: [.curveLinear], completion: nil)
             } else {
                 contentView.addSubview(newView)
