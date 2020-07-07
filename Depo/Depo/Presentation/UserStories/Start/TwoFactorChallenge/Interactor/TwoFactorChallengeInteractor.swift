@@ -97,9 +97,11 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
                     //TODO: NETMERA how do we log login here?
                     self?.proccessLoginHeaders(headers: result)
                 case .failed(let error):
+                    
                     let errorText = error.localizedDescription
                     self?.output.verificationFailed(with: errorText)
 
+                    self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: GAEventLabel.failure.text)
                     if let action = self?.challenge.challengeType.GAAction {
                         self?.analyticsService.trackCustomGAEvent(eventCategory: .twoFactorAuthentication,
                                                                   eventActions: action,
@@ -161,6 +163,7 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
                                                      eventActions: self.challenge.challengeType.GAAction,
                                                       eventLabel: .confirmStatus(isSuccess: true))
         }, fail: { [weak self] error in
+            self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .login, eventLabel: GAEventLabel.failure.text)
             self?.output.verificationFailed(with: error.localizedDescription)
         })
     }

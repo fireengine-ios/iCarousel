@@ -83,7 +83,7 @@ final class AutoSyncSettings : Equatable {
     var isAutoSyncOptionEnabled: Bool = true //auto sync switcher in settings is on/off
     
     var isAutosyncSettingsApplied: Bool {
-        return storageVars.autoSyncSet
+        return storageVars.isAutoSyncSet
     }
     
     init() { }
@@ -224,6 +224,6 @@ extension AutoSyncSettings {
             }
         }
         
-        storageVars.autoSyncSet = true
+        storageVars.isAutoSyncSet = true
     }
 }

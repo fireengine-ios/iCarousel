@@ -12,11 +12,16 @@ protocol ContactSyncAnalyzeProgressViewDelegate: class {
     func cancelAnalyze()
 }
 
+protocol ContactOperationProgressView: UIView {
+    var type: SyncOperationType! { get }
+    func update(progress: Int)
+    func reset()
+}
 
-final class ContactSyncAnalyzeProgressView: UIView, NibInit {
+
+final class ContactSyncAnalyzeProgressView: UIView, NibInit, ContactOperationProgressView {
     
     weak var delegate: ContactSyncAnalyzeProgressViewDelegate?
-    
     
     @IBOutlet private weak var percentage: UILabel! {
         willSet {
@@ -83,6 +88,9 @@ final class ContactSyncAnalyzeProgressView: UIView, NibInit {
         return attributed
     }()
     
+    var type: SyncOperationType! {
+        .analyze
+    }
     
     //MARK: - Public
     

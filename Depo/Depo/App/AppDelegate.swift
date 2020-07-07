@@ -14,6 +14,7 @@ import XCGLogger
 import Adjust
 import Netmera
 import UserNotifications
+import KeychainSwift
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -110,8 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             guard let self = self else {
                 return
             }
-            
-            
+
             DispatchQueue.main.async {
                 AppConfigurator.logoutIfNeed()
                 

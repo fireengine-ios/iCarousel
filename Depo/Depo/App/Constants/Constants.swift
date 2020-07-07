@@ -1907,6 +1907,7 @@ struct TextConstants {
     static let contactBackupSuccessNavbarTitle = NSLocalizedString("contact_phase2_contact_backup_success_navbar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactBackupSuccessTitle = NSLocalizedString("contact_phase2_contact_backup_success_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactBackupSuccessMessage = NSLocalizedString("contact_phase2_contact_backup_success_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactSyncErrorMessage = NSLocalizedString("contact_phase2_error_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let warningPopupContactPermissionsTitle = NSLocalizedString("contact_phase2_warning_popup_contact_permissions_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let warningPopupContactPermissionsMessage = NSLocalizedString("contact_phase2_warning_popup_contact_permissions_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1920,4 +1921,10 @@ struct TextConstants {
     static let contactSyncErrorRestoreTitle = NSLocalizedString("contact_phase2_error_restore_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncErrorBackupTitle = NSLocalizedString("contact_phase2_error_backup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactSyncErrorDeleteTitle = NSLocalizedString("contact_phase2_error_delete_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let contactBackupResultNavBarTitle = NSLocalizedString("contact_phase2_result_backup_nav_bar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactRestoreResultNavBarTitle = NSLocalizedString("contact_phase2_result_restore_nav_bar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactDeleteBackUpResultNavBarTitle = NSLocalizedString("contact_phase2_result_delete_backup_nav_bar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactDeleteDuplicatesResultNavBarTitle = NSLocalizedString("contact_phase2_result_delete_duplicates_nav_bar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let contactDeleteAllContactsResultNavBarTitle = NSLocalizedString("contact_phase2_result_delete_all_contacts_nav_bar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

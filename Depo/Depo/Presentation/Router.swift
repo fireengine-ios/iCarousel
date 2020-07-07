@@ -455,12 +455,8 @@ class RouterVC: NSObject {
         return ContactSyncViewController.initFromNib()
     }
     
-    func contactSyncSuccessController(syncResult: ContactSync.SyncResponse?, periodicSync: PeriodicSync) -> UIViewController {
-        return ContactSyncOperationResultController.create(with: .success, syncResult: syncResult, periodicSync: periodicSync)
-    }
-    
-    func contactSyncFailController(with view: ContactsOperationView) -> UIViewController {
-        return ContactSyncOperationResultController.createFailed(with: view)
+    func contactSyncResultController(with view: UIView, navBarTitle: String) -> UIViewController {
+        return ContactSyncOperationResultController.create(with: view, navBarTitle: navBarTitle)
     }
     
     // MARK: PeriodicContacsSync
@@ -479,8 +475,8 @@ class RouterVC: NSObject {
         return DeleteDuplicatesViewController.with(contacts: analyzeResponse)
     }
     
-    func contactList(backUpInfo: ContactSync.SyncResponse) -> UIViewController {
-        return ContactListViewController.with(backUpInfo: backUpInfo)
+    func contactList(backUpInfo: ContactSync.SyncResponse, delegate: ContactListViewDelegate?) -> UIViewController {
+        return ContactListViewController.with(backUpInfo: backUpInfo, delegate: delegate)
     }
     
     func contactDetail(with contact: RemoteContact) -> UIViewController {
