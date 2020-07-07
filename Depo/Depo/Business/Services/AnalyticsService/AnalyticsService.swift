@@ -387,6 +387,16 @@ extension AnalyticsService: AnalyticsGA {
             Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }
     }
+    ///Used for erorless login event
+    func trackLoginEvent(loginType: GADementionValues.login? = nil, isSuccesfull: Bool) {
+        prepareDimentionsParametrs(screen: nil, loginType: loginType, errorType: nil) { dimentionParametrs in
+            let parametrs = self.parameters(category: .functions,
+                                            action: .login,
+                                            label: isSuccesfull ? .success : .failure)
+            
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
+        }
+    }
     
     func trackSignupEvent(error: SignupResponseError? = nil) {
         prepareDimentionsParametrs(screen: nil, errorType: error?.dimensionValue) { dimentionParametrs in

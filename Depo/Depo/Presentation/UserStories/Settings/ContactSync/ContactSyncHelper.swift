@@ -261,7 +261,10 @@ final class ContactSyncHelper {
 
         contactSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, opertionType in
             DispatchQueue.main.async {
-                self?.delegate?.progress(progress: progressPercentage, for: opertionType)
+                //progress may be later than the end of the operation
+                if self?.currentOperation != nil {
+                    self?.delegate?.progress(progress: progressPercentage, for: opertionType)
+                }
             }
             
             }, finishCallback: { [weak self] result, operationType in
@@ -408,7 +411,7 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .backup, status: .success))
         
         showResultView(type: .backUp(result), result: .success)
-        finishOperation(operationType: .backup)
+        finishOperation(operationType: .backUp(result))
     }
     
     func didDeleteDuplicates() {
@@ -420,7 +423,7 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
         }
     }
     
-    private func finishOperation(operationType: SyncOperationType) {
+    private func finishOperation(operationType: ContactsOperationType) {
         DispatchQueue.main.async {
             CardsManager.default.stopOperationWith(type: .contactBacupOld)
             CardsManager.default.stopOperationWith(type: .contactBacupEmpty)
@@ -622,7 +625,7 @@ extension ContactSyncControllerProtocol {
             }
         }
         
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             self.showResultView(view: resultView, title: type.navBarTitle)
         }
     }
@@ -667,6 +670,7 @@ extension ContactSyncControllerProtocol {
             switch result {
             case .success(_):
                 self.showResultView(type: type, result: .success)
+                self.didFinishOperation(operationType: .deleteAllContacts)
             case .failed(_):
                 self.showResultView(type: type, result: .failed)
             }

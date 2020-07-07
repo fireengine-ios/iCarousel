@@ -20,7 +20,7 @@ protocol ContactSyncControllerProtocol: ViewController {
     func showRelatedView()
     func showResultView(view: UIView, title: String)
     func handle(error: ContactSyncHelperError, operationType: SyncOperationType)
-    func didFinishOperation(operationType: SyncOperationType)
+    func didFinishOperation(operationType: ContactsOperationType)
 }
 
 final class ContactSyncViewController: BaseViewController, NibInit {
@@ -154,7 +154,7 @@ extension ContactSyncViewController: ContactSyncMainViewDelegate {
             return
         }
         
-        let contactList = router.contactList(backUpInfo: info)
+        let contactList = router.contactList(backUpInfo: info, delegate: nil)
         router.pushViewController(viewController: contactList)
     }
     
@@ -189,11 +189,14 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
         showRelatedView()
     }
     
-    func didFinishOperation(operationType: SyncOperationType) {
-        if operationType == .backup {
+    func didFinishOperation(operationType: ContactsOperationType) {
+        switch operationType {
+        case .backUp(_):
             updateBackupStatus()
+            fallthrough
+        default:
+            showRelatedView()
         }
-        showRelatedView()
     }
     
     func didAnalyze(contacts: [ContactSync.AnalyzedContact]) {
@@ -242,7 +245,6 @@ extension ContactSyncViewController: ContactSyncControllerProtocol {
         navigationController?.pushViewController(controller, animated: true)
     }
 }
-
 
 //MARK: - Private classes - helpers
 
