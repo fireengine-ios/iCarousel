@@ -106,7 +106,6 @@ class ContactsSyncService: BaseRequestService {
             }
             
             let progressPerecentage = SyncStatus.shared().progress ?? 0
-            printLog("progress - \(progressPerecentage)")
             progress?(Int(truncating: progressPerecentage), 0, status)
         }
         
