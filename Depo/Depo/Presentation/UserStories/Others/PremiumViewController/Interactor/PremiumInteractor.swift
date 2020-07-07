@@ -32,11 +32,12 @@ extension PremiumInteractor: PremiumInteractorInput {
     func getAccountType() {
         accountService.info(
             success: { [weak self] response in
-                guard let response = response as? AccountInfoResponse, let accountType = response.accountType else {
-                    assertionFailure("An error occurred while getting account info.")
-                    return
-                }
                 DispatchQueue.toMain {
+                    guard let response = response as? AccountInfoResponse, let accountType = response.accountType else {
+                        self?.output.stopLoading()
+                        assertionFailure("An error occurred while getting account info.")
+                        return
+                    }
                     self?.output.successed(accountType: accountType)
                 }
             }, fail: { [weak self] errorResponse in
@@ -92,6 +93,9 @@ extension PremiumInteractor: PremiumInteractorInput {
     //MARK: apple purchase
     func activate(offer: PackageModelResponse) {
         guard let product = iapManager.product(for: offer.inAppPurchaseId ?? "") else {
+            DispatchQueue.toMain {
+                self.output.stopLoading()
+            }
             assertionFailure(
                 "An error occured while getting product with id - \(offer.inAppPurchaseId ?? "") from App Store"
             )
@@ -131,12 +135,18 @@ extension PremiumInteractor: PremiumInteractorInput {
     
     private func validatePurchase(productId: String) {
         guard let receipt = iapManager.receipt else {
+            DispatchQueue.toMain {
+                self.output.stopLoading()
+            }
             assertionFailure("An error occured while getting receipt from Apple Store.")
             return
         }
         
         offersService.validateApplePurchase(with: receipt, productId: productId, success: { [weak self] response in
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
+                DispatchQueue.main.async {
+                    self?.output.stopLoading()
+                }
                 assertionFailure("Something went wrong on validation apple purchase.")
                 return
             }
@@ -164,6 +174,9 @@ extension PremiumInteractor: PremiumInteractorInput {
     
     private func validateRestorePurchase(offersApple: [OfferApple]) {
         guard let receipt = iapManager.receipt else {
+            DispatchQueue.main.async {
+                self.output.stopLoading()
+            }
             assertionFailure("An error occured while getting receipt from Apple Store.")
             return
         }
@@ -175,6 +188,9 @@ extension PremiumInteractor: PremiumInteractorInput {
         offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
             group.leave()
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
+                DispatchQueue.main.async {
+                    self?.output.stopLoading()
+                }
                 assertionFailure("An error occurred while getting response for purchase validation")
                 return
             }
@@ -203,6 +219,9 @@ extension PremiumInteractor: PremiumInteractorInput {
     func getToken(for offer: PackageModelResponse) {
         offersService.initOffer(offer: offer, success: { [weak self] response in
             guard let offerResponse = response as? InitOfferResponse, let token = offerResponse.referenceToken else {
+                DispatchQueue.main.async {
+                    self?.output.stopLoading()
+                }
                 assertionFailure("An error occurred while getting token.")
                 return
             }
@@ -224,6 +243,9 @@ extension PremiumInteractor: PremiumInteractorInput {
                                         let offerResponse = response as? InitOfferResponse,
                                         let token = offerResponse.referenceToken
                                         else {
+                                            DispatchQueue.main.async {
+                                                self?.output.stopLoading()
+                                            }
                                             assertionFailure("An error occurred while getting token.")
                                             return
                                     }

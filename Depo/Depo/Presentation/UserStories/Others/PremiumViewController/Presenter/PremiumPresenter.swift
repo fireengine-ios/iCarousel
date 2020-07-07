@@ -261,7 +261,11 @@ extension PremiumPresenter: PremiumInteractorOutput {
     func switchToTextWithoutPrice(isError: Bool) {
         displayFeatureInfo(isError: isError)
     }
-    
+
+    func stopLoading() {
+        view?.stopActivityIndicator()
+    }
+
     func failed(with error: ErrorResponse) {
         view?.stopActivityIndicator()
         if error.isNetworkConnectionMissing {
