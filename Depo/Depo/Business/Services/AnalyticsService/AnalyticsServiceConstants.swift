@@ -196,7 +196,7 @@ enum AnalyticsAppScreens {
     case settingsPhotoEdit
     case autoSyncSettings
     ///contactSync
-    case contacSyncDeleteDuplicates
+    case contactSyncDeleteDuplicates
     case contactSyncBackUp
     case contactSyncGeneral
     ///Previews
@@ -310,7 +310,7 @@ enum AnalyticsAppScreens {
             return "All Files"
         case .favorites:
             return "Favorites"
-        case .contacSyncDeleteDuplicates:
+        case .contactSyncDeleteDuplicates:
             return "Delete Duplicate"
         case .contactSyncBackUp:
             return "Contact Back Up"

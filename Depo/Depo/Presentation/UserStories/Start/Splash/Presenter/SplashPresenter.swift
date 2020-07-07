@@ -126,7 +126,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         AuthoritySingleton.shared.checkNewVersionApp()
         
         if turkcellLogin {
-            if storageVars.autoSyncSet {
+            if storageVars.isAutoSyncSet {
                 if !Device.isIpad, !storageVars.isShownLanding {
                     storageVars.isShownLanding = true
                     router.navigateToLandingPages(isTurkCell: turkcellLogin)
@@ -143,7 +143,7 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
                 }
             }
         } else {
-            if storageVars.autoSyncSet {
+            if storageVars.isAutoSyncSet {
                 router.navigateToApplication()
                 openLink()
             } else {

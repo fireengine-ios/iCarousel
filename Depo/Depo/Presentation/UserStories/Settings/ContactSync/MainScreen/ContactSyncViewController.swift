@@ -15,9 +15,12 @@ protocol ContactsBackupActionProviderProtocol: class {
 }
 
 protocol ContactSyncControllerProtocol: ViewController {
-    func showErrorView(view: ContactsOperationView)
-    func showPopup(type: ContactSyncPopupType)
+    var progressView: ContactOperationProgressView? { get set }
+    func show(view: UIView, animated: Bool)
+    func showRelatedView()
+    func showResultView(view: UIView, title: String)
     func handle(error: ContactSyncHelperError, operationType: SyncOperationType)
+    func didFinishOperation(operationType: ContactsOperationType)
 }
 
 final class ContactSyncViewController: BaseViewController, NibInit {
@@ -38,19 +41,12 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         return view
     }()
     
-    private lazy var backupProgressView = ContactSyncProgressView.setup(type: .backup)
-    
-    private lazy var analyzeProgressView: ContactSyncAnalyzeProgressView = {
-        let view = ContactSyncAnalyzeProgressView.initFromNib()
-        view.delegate = self
-        return view
-    }()
-    
+    var progressView: ContactOperationProgressView?
     
     private let syncService = ContactsSyncService()
     private let periodicSyncHelper = PeriodicSync()
     private var animator = ContentViewAnimator()
-    private let analyticsHelper = Analytics()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     private let contactSyncHelper = ContactSyncHelper.shared
     
     private var syncModel: ContactSync.SyncResponse? {
@@ -68,7 +64,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        analyticsHelper.trackScreen()
+        trackScreen()
         
         if tabBarIsVisible {
             needToShowTabBar = true
@@ -86,6 +82,12 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         showRelatedView()
+    }
+    
+    func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactsSyncScreen())
+        analyticsService.logScreen(screen: .contactSyncGeneral)
+        analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncGeneral)
     }
     
     //MARK: - Public
@@ -112,26 +114,20 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         }
     }
     
-    private func showRelatedView() {
-        guard !contactSyncHelper.isRunning else {
+    func showRelatedView() {
+        guard !contactSyncHelper.isRunning || AnalyzeStatus.shared().analyzeStep == .ANALYZE_STEP_PROCESS_DUPLICATES else {
             return
         }
         
         guard let model = syncModel, model.totalNumberOfContacts != 0 else {
-            self.show(view: self.noBackupView, animated: true)
+            show(view: noBackupView, animated: true)
             return
         }
         
-        self.mainView.update(with: model, periodicSyncOption: periodicSyncHelper.settings.timeSetting.option)
-        self.show(view: self.mainView, animated: true)
+        mainView.update(with: model, periodicSyncOption: periodicSyncHelper.settings.timeSetting.option)
+        show(view: mainView, animated: true)
     }
-    
-    private func show(view: UIView, animated: Bool) {
-        animator.showTransition(to: view, on: contentView, animated: true)
-    }
-
 }
-
 
 //MARK:- protocols extensions
 
@@ -144,24 +140,9 @@ extension ContactSyncViewController: ContactSyncAnalyzeProgressViewDelegate {
 extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
     func backUp(isConfirmed: Bool) {
         if isConfirmed {
-            startBackUp()
+            startBackup()
         } else {
             showPopup(type: .backup)
-        }
-    }
-    
-    private func startBackUp() {
-        analyzeProgressView.reset()
-        backupProgressView.reset()
-        
-        showSpinner()
-        contactSyncHelper.backup { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            self.analyticsHelper.trackBackupScreen()
-            self.hideSpinner()
         }
     }
 }
@@ -173,7 +154,7 @@ extension ContactSyncViewController: ContactSyncMainViewDelegate {
             return
         }
         
-        let contactList = router.contactList(backUpInfo: info)
+        let contactList = router.contactList(backUpInfo: info, delegate: nil)
         router.pushViewController(viewController: contactList)
     }
     
@@ -189,7 +170,7 @@ extension ContactSyncViewController: ContactSyncMainViewDelegate {
     func deleteDuplicates() {
         showSpinner()
         
-        analyzeProgressView.reset()
+        progressView?.reset()
         contactSyncHelper.analyze { [weak self] in
             self?.hideSpinner()
         }
@@ -208,29 +189,13 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
         showRelatedView()
     }
     
-    func didRestore() {
-        hideSpinner()
-        showRelatedView()
-        
-        DispatchQueue.main.async {
-            CardsManager.default.stopOperationWith(type: .contactBacupOld)
-            CardsManager.default.stopOperationWith(type: .contactBacupEmpty)
-        }
-    }
-    
-    func didBackup(result: ContactSync.SyncResponse) {
-        hideSpinner()
-        updateBackupStatus()
-        
-        DispatchQueue.main.async {
-            self.showRelatedView()
-            
-            let controller = self.router.contactSyncSuccessController(syncResult: result, periodicSync: self.periodicSyncHelper)
-            
-            self.navigationController?.pushViewController(controller, animated: true)
-            
-            CardsManager.default.stopOperationWith(type: .contactBacupOld)
-            CardsManager.default.stopOperationWith(type: .contactBacupEmpty)
+    func didFinishOperation(operationType: ContactsOperationType) {
+        switch operationType {
+        case .backUp(_):
+            updateBackupStatus()
+            fallthrough
+        default:
+            showRelatedView()
         }
     }
     
@@ -252,24 +217,15 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
         hideSpinner()
         showRelatedView()
     }
-    
-    func progress(progress: Int, for operationType: SyncOperationType) {
-        switch operationType {
-            case .backup:
-                show(view: backupProgressView, animated: true)
-                backupProgressView.update(progress: progress)
-            case .analyze:
-                show(view: analyzeProgressView, animated: true)
-                analyzeProgressView.update(progress: progress)
-            default:
-                showRelatedView()
-        }
-    }
 }
 
 //MARK: - ContactSyncControllerProtocol
 
 extension ContactSyncViewController: ContactSyncControllerProtocol {
+    
+    func show(view: UIView, animated: Bool) {
+        animator.showTransition(to: view, on: contentView, animated: true)
+    }
     
     func handle(error: ContactSyncHelperError, operationType: SyncOperationType) {
         switch error {
@@ -280,41 +236,15 @@ extension ContactSyncViewController: ContactSyncControllerProtocol {
         }
     }
     
-    func showPopup(type: ContactSyncPopupType) {
-        let handler: VoidHandler = { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            switch type {
-            case .backup:
-                self.startBackUp()
-            case .premium:
-                let controller = self.router.premium(source: .contactSync)
-                self.router.pushViewController(viewController: controller)
-            default:
-                break
-            }
-        }
-
-        let popup = ContactSyncPopupFactory.createPopup(type: type) { vc in
-            vc.close(isFinalStep: false, completion: handler)
-        }
-        
-        present(popup, animated: true)
-    }
-    
     private func noDuplicatesPopup() {
         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.errorAlertTextNoDuplicatedContacts)
     }
     
-    func showErrorView(view: ContactsOperationView) {
-        let router = RouterVC()
-        let controller = router.contactSyncFailController(with: view)
-        router.pushViewController(viewController: controller)
+    func showResultView(view: UIView, title: String) {
+        let controller = router.contactSyncResultController(with: view, navBarTitle: title)
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
-
 
 //MARK: - Private classes - helpers
 
@@ -369,66 +299,5 @@ final class PeriodicSync {
         }
         
         contactsService.setPeriodicForContactsSync(periodic: periodicBackUp)
-    }
-}
-
-
-private final class Analytics {
-    private lazy var analyticsService: AnalyticsService = factory.resolve()
-    
-    func trackScreen() {
-        analyticsService.logScreen(screen: .contactSyncGeneral)
-        analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncGeneral)
-    }
-    
-    func trackBackupScreen() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactsSyncScreen())
-        analyticsService.logScreen(screen: .contactSyncBackUp)
-        analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackUp)
-    }
-    
-    func trackOperation(type: SyncOperationType) {
-        switch type {
-            case .backup:
-                analyticsService.track(event: .contactBackup)
-                analyticsService.trackCustomGAEvent(eventCategory: .functions,
-                                                    eventActions: .phonebook,
-                                                    eventLabel: .contact(.backup))
-            case .restore:
-                analyticsService.trackCustomGAEvent(eventCategory: .functions,
-                                                    eventActions: .phonebook,
-                                                    eventLabel: .contact(.restore))
-            
-            default: break
-        }
-    }
-    
-    func trackOperationSuccess(type: SYNCMode) {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions,
-                                            eventActions: .contactOperation(type),
-                                            eventLabel: .success)
-        
-        trackNetmera(operationType: type, status: .success)
-    }
-    
-    func trackOperationFailure(type: SYNCMode) {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions,
-                                            eventActions: .contactOperation(type),
-                                            eventLabel: .failure)
-        
-        trackNetmera(operationType: type, status: .failure)
-    }
-    
-    
-    private func trackNetmera(operationType: SYNCMode, status: NetmeraEventValues.GeneralStatus) {
-        switch operationType {
-            case .backup:
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .backup, status: status))
-            
-            case .restore:
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .restore, status: status))
-            
-            default: break
-        }
     }
 }

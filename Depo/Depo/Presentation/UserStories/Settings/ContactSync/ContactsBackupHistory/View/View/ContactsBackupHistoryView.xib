@@ -50,7 +50,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rvl-Gt-mCm">
-                    <rect key="frame" x="0.0" y="136" width="414" height="598"/>
+                    <rect key="frame" x="0.0" y="152" width="414" height="582"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                 </tableView>
@@ -94,7 +94,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="zZb-K9-hPU" secondAttribute="trailing" id="3Bw-cN-Ath"/>
-                <constraint firstItem="Rvl-Gt-mCm" firstAttribute="top" secondItem="zZb-K9-hPU" secondAttribute="bottom" id="JTu-oc-LUf"/>
+                <constraint firstItem="Rvl-Gt-mCm" firstAttribute="top" secondItem="zZb-K9-hPU" secondAttribute="bottom" constant="16" id="JTu-oc-LUf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Rvl-Gt-mCm" secondAttribute="trailing" id="NiV-tf-VW5"/>
                 <constraint firstItem="Rvl-Gt-mCm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NnZ-8R-loW"/>
                 <constraint firstItem="zZb-K9-hPU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="OAJ-dw-4Jm"/>
