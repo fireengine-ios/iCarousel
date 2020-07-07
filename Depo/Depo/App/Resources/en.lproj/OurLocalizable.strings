@@ -1716,3 +1716,10 @@
 "contact_phase2_result_delete_backup_nav_bar_title" = "Delete Back up";
 "contact_phase2_result_delete_duplicates_nav_bar_title" = "Delete Duplicates";
 "contact_phase2_result_delete_all_contacts_nav_bar_title" = "Delete Contacts";
+
+"gallery_filter_all" = "Show: All";
+"gallery_filter_synced" = "Show: Only synced";
+"gallery_filter_unsynced" = "Show: Only unsynced";
+"gallery_filter_action_sheet_all" = "All";
+"gallery_filter_action_sheet_synced" = "Only synced";
+"gallery_filter_action_sheet_unsynced" = "Only unsynced";

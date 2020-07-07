@@ -1927,4 +1927,10 @@ struct TextConstants {
     static let contactDeleteBackUpResultNavBarTitle = NSLocalizedString("contact_phase2_result_delete_backup_nav_bar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactDeleteDuplicatesResultNavBarTitle = NSLocalizedString("contact_phase2_result_delete_duplicates_nav_bar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let contactDeleteAllContactsResultNavBarTitle = NSLocalizedString("contact_phase2_result_delete_all_contacts_nav_bar_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galleryFilterAll = NSLocalizedString("gallery_filter_all", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galleryFilterSynced = NSLocalizedString("gallery_filter_synced", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galleryFilterUnsynced = NSLocalizedString("gallery_filter_unsynced", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galleryFilterActionSheetAll = NSLocalizedString("gallery_filter_action_sheet_all", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galleryFilterActionSheetSynced  = NSLocalizedString("gallery_filter_action_sheet_synced", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let galleryFilterActionSheetUnsynced = NSLocalizedString("gallery_filter_action_sheet_unsynced", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

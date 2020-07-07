@@ -62,12 +62,12 @@ final class PhotoVideoPredicateManager {
         createdPredicateCallback(duplicationPredicateTmp)
     }
 
-    func getSyncPredicate(isPhotos: Bool) -> NSPredicate {
+    func getSyncPredicate(isSynced: Bool, isPhotos: Bool) -> NSPredicate {
         let hiddenStatusValue = ItemStatus.hidden.valueForCoreDataMapping()
         
-        let remoteUnhidden = NSPredicate(format:"(\(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.status) != %ui)", hiddenStatusValue)
+        let unhidden = NSPredicate(format:"(\(MediaItem.PropertyNameKey.isLocalItemValue) = \(!isSynced) AND \(MediaItem.PropertyNameKey.status) != %ui)", hiddenStatusValue)
         
-        return NSCompoundPredicate(andPredicateWithSubpredicates: [getFiltrationPredicate(isPhotos: isPhotos), remoteUnhidden])
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [getFiltrationPredicate(isPhotos: isPhotos), unhidden])
     }
     
     private func getFiltrationPredicate(isPhotos: Bool) -> NSPredicate {
