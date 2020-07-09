@@ -102,13 +102,17 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
                     self?.output.verificationFailed(with: errorText)
 
                     let loginType: GADementionValues.login
+                    let loginNetmeraType: NetmeraEventValues.LoginType
                     if self?.challenge.challengeType == .email {
                         loginType = .email
+                        loginNetmeraType = .email
                     } else {
                         loginType = .gsm
+                        loginNetmeraType = .phone
                     }
                     
                     self?.analyticsService.trackLoginEvent(loginType: loginType, isSuccesfull: false)
+                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: loginNetmeraType))
                     if let action = self?.challenge.challengeType.GAAction {
                         self?.analyticsService.trackCustomGAEvent(eventCategory: .twoFactorAuthentication,
                                                                   eventActions: action,
@@ -143,10 +147,14 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     }
     
     private func verifyProcess(_ accountReadOnly: Bool = false) {
+        
         let loginType: GADementionValues.login
+        let loginNetmeraType: NetmeraEventValues.LoginType
         if self.challenge.challengeType == .email {
+            loginNetmeraType = .email
             loginType = .email
         } else {
+            loginNetmeraType = .phone
             loginType = .gsm
         }
         
@@ -166,11 +174,13 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
                 self.output.verificationSucces()
             }
             
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: loginNetmeraType))
             self.analyticsService.trackLoginEvent(loginType: loginType, error: nil)
             self.analyticsService.trackCustomGAEvent(eventCategory: .twoFactorAuthentication,
                                                      eventActions: self.challenge.challengeType.GAAction,
                                                       eventLabel: .confirmStatus(isSuccess: true))
         }, fail: { [weak self] error in
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: loginNetmeraType))
             self?.analyticsService.trackLoginEvent(loginType: loginType, isSuccesfull: false)
             self?.output.verificationFailed(with: error.localizedDescription)
         })
