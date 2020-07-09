@@ -1534,7 +1534,7 @@
 "contact_phase2_back_up_contacts_confirm_message" = "Hali hazırda bir yedeğin var. Var olanın üzerine yazmak istiyor musun?";
 "contact_phase2_contact_list_navbar_title" = "Kişi Listesi";
 "contact_phase2_contact_list_title" = "Kişi Listesi";
-"contact_phase2_contact_list_info" = "%@ tarihli rehber yedeklemende %d kayıt yedeklenmiştir.";
+"contact_phase2_contact_list_info" = "%2$@ tarihli rehber yedeklemende %1$d kayıt yedeklenmiştir.";
 "contact_phase2_contact_list_restore" = "Telefona Aktar";
 "contact_phase2_contact_list_delete_all" = "Tümünü Sil";
 "contact_phase2_restore_contacts_confirm_title" = "Telefona Aktar";
@@ -1611,3 +1611,9 @@
 "gallery_filter_action_sheet_unsynced" = "";
 "contact_phase2_error_quota_restore" = "Sakalama alanında yer kalmadığı için işleme devam edemiyorsun. Saklama alanını yükseltebilir veya dosyalarını silerek saklama alanında yer açabilirsin.";
 "contact_phase2_error_quota_backup" = "Sakalama alanında yer kalmadığı için işleme devam edemiyorsun. Saklama alanını yükseltebilir veya dosyalarını silerek saklama alanında yer açabilirsin.";
+"contact_phase2_error_message" = "";
+"contact_phase2_result_backup_nav_bar_title" = "Yedekle";
+"contact_phase2_result_restore_nav_bar_title" = "Telefona Aktar";
+"contact_phase2_result_delete_backup_nav_bar_title" = "Yedeği Sil";
+"contact_phase2_result_delete_duplicates_nav_bar_title" = "Tekrarlayanları Sil";
+"contact_phase2_result_delete_all_contacts_nav_bar_title" = "Kişileri Sil";
