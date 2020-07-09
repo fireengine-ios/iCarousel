@@ -1613,3 +1613,9 @@
 "gallery_filter_action_sheet_unsynced" = "";
 "contact_phase2_error_quota_restore" = "";
 "contact_phase2_error_quota_backup" = "";
+"contact_phase2_error_message" = "";
+"contact_phase2_result_backup_nav_bar_title" = "";
+"contact_phase2_result_restore_nav_bar_title" = "";
+"contact_phase2_result_delete_backup_nav_bar_title" = "";
+"contact_phase2_result_delete_duplicates_nav_bar_title" = "";
+"contact_phase2_result_delete_all_contacts_nav_bar_title" = "";
