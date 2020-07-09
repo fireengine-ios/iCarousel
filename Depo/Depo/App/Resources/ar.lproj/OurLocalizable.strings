@@ -616,6 +616,7 @@
 "Add GSM Number" = "إضافة رقم GSM";
 "The videos larger than 4GB can not be uploaded to lifebox" = "لا يمكن تحميل مقاطع الفيديو التي يزيد حجمها عن 4 غيغابايت إلى قائمة التشغيل";
 "You have not enough memory in your device" = "ليس لديك ذاكرة كافية في جهازك";
+"The purchase was canceled" = "تم إلغاء الشراء";
 "The purchase in progress" = "الشراء قيد التقدم";
 "You have no duplicated contacts!" = "ليس لديك أي جهات اتصال مكررة!";
 "Daily" = "يومياً";
@@ -1598,7 +1599,17 @@
 "contact_phase2_warning_popup_storage_limit_message" = "";
 "contact_phase2_warning_popup_storage_limit_settings_button" = "";
 "contact_phase2_error_iternal" = "";
-"contact_phase2_error_quota_restore" = "";
-"contact_phase2_error_quota_backup" = "";
 "download_document_error_popup" = "يمكنك تنزيل الصور والفيديو أوالألبوم فقط.";
 "contact_phase2_history_cell_Contact_List" = "";
+"settings_action_sheet_account_details" = "";
+"contact_phase2_error_backup_title" = "";
+"contact_phase2_error_restore_title" = "";
+"contact_phase2_error_delete_title" = "";
+"gallery_filter_all" = "";
+"gallery_filter_synced" = "";
+"gallery_filter_unsynced" = "";
+"gallery_filter_action_sheet_all" = "";
+"gallery_filter_action_sheet_synced" = "";
+"gallery_filter_action_sheet_unsynced" = "";
+"contact_phase2_error_quota_restore" = "";
+"contact_phase2_error_quota_backup" = "";

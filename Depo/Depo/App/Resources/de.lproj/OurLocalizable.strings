@@ -604,6 +604,7 @@
 "Add GSM Number" = "Addiere GSM-Nummer";
 "The videos larger than 4GB can not be uploaded to lifebox" = "Videos, die größer als 4 GB sind, können nicht auf die Lifebox hochgeladen werden";
 "You have not enough memory in your device" = "Sie haben nicht genügend Speicher auf Ihrem Gerät";
+"The purchase was canceled" = "Der Kauf wurde storniert";
 "The purchase in progress" = "Der Kauf ist im Gange";
 "You have no duplicated contacts!" = "Sie haben keine doppelten Kontakte";
 "Daily" = "Täglich";
@@ -1586,7 +1587,17 @@
 "contact_phase2_warning_popup_storage_limit_message" = "";
 "contact_phase2_warning_popup_storage_limit_settings_button" = "";
 "contact_phase2_error_iternal" = "";
-"contact_phase2_error_quota_restore" = "";
-"contact_phase2_error_quota_backup" = "";
 "download_document_error_popup" = "Sie können nur Fotos, Videos oder Alben herunterladen.";
 "contact_phase2_history_cell_Contact_List" = "";
+"settings_action_sheet_account_details" = "";
+"contact_phase2_error_backup_title" = "";
+"contact_phase2_error_restore_title" = "";
+"contact_phase2_error_delete_title" = "";
+"gallery_filter_all" = "";
+"gallery_filter_synced" = "";
+"gallery_filter_unsynced" = "";
+"gallery_filter_action_sheet_all" = "";
+"gallery_filter_action_sheet_synced" = "";
+"gallery_filter_action_sheet_unsynced" = "";
+"contact_phase2_error_quota_restore" = "";
+"contact_phase2_error_quota_backup" = "";
