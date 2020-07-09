@@ -604,6 +604,7 @@
 "Add GSM Number" = "Додати номер GSM";
 "The videos larger than 4GB can not be uploaded to lifebox" = "Відео, що більше 4 Гб, не можна завантажити в lifebox";
 "You have not enough memory in your device" = "На вашому пристрої недостатньо пам'яті";
+"The purchase was canceled" = "Купівля була скасована";
 "The purchase in progress" = "Покупка в процесі";
 "You have no duplicated contacts!" = "У вас немає дубльованих контактів!";
 "Daily" = "Щодня";
@@ -1588,7 +1589,17 @@
 "contact_phase2_warning_popup_storage_limit_message" = "";
 "contact_phase2_warning_popup_storage_limit_settings_button" = "";
 "contact_phase2_error_iternal" = "";
-"contact_phase2_error_quota_restore" = "";
-"contact_phase2_error_quota_backup" = "";
 "download_document_error_popup" = "Ви можете завантажувати тільки фотографії, відео чи альбоми.";
 "contact_phase2_history_cell_Contact_List" = "";
+"settings_action_sheet_account_details" = "";
+"contact_phase2_error_backup_title" = "";
+"contact_phase2_error_restore_title" = "";
+"contact_phase2_error_delete_title" = "";
+"gallery_filter_all" = "";
+"gallery_filter_synced" = "";
+"gallery_filter_unsynced" = "";
+"gallery_filter_action_sheet_all" = "";
+"gallery_filter_action_sheet_synced" = "";
+"gallery_filter_action_sheet_unsynced" = "";
+"contact_phase2_error_quota_restore" = "";
+"contact_phase2_error_quota_backup" = "";
