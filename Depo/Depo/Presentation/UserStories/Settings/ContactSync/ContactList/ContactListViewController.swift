@@ -40,6 +40,8 @@ final class ContactListViewController: BaseViewController {
     private var isLoadingData = false
     private var currentTask: URLSessionTask?
     
+    private let analyticsService = AnalyticsService()
+    
     private weak var delegate: ContactListViewDelegate?
     
     static func with(backUpInfo: ContactSync.SyncResponse, delegate: ContactListViewDelegate?) -> ContactListViewController {
@@ -58,6 +60,7 @@ final class ContactListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        trackScreen()
         setupNavigationBar()
         showRelatedView()
         reloadData()
@@ -90,6 +93,16 @@ final class ContactListViewController: BaseViewController {
     }
 }
 
+//MARK: - Analytics
+
+private extension ContactListViewController {
+    
+    func trackScreen() {
+        analyticsService.logScreen(screen: .contactSyncContactsListScreen)
+    }
+    
+}
+ 
 //MARK: - Private actions
 
 private extension ContactListViewController {

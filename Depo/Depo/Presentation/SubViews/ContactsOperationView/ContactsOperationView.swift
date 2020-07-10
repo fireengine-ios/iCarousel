@@ -79,6 +79,15 @@ enum ContactsOperationResult {
     case success
     case failed
     
+    var analyticsGALabel: GAEventLabel {
+        switch self {
+        case .success:
+            return .success
+        case .failed:
+            return .failure
+        }
+    }
+    
     var image: UIImage? {
         switch self {
         case .success:

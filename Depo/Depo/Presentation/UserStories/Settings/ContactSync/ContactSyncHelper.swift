@@ -402,7 +402,6 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
     
     func didRestore() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .restore, status: .success))
-        
         showResultView(type: .restore, result: .success)
         finishOperation(operationType: .restore)
     }
@@ -666,17 +665,35 @@ extension ContactSyncControllerProtocol {
             }
             
             self.hideSpinner()
-            
+
             switch result {
             case .success(_):
                 self.showResultView(type: type, result: .success)
-                self.didFinishOperation(operationType: .deleteAllContacts)
+                self.didFinishOperation(operationType: .deleteAllContacts) //
+                self.trackAction(type: type, result: .success)
+               
             case .failed(_):
                 self.showResultView(type: type, result: .failed)
+                self.trackAction(type: type, result: .failed)
             }
         }
     }
  
+    //only for delete backups for now
+    private func trackAction(type: ContactsOperationType, result: ContactsOperationResult) {
+
+        let analytics = AnalyticsService()
+        
+        switch type {
+        case .deleteBackUp:
+            analytics.trackCustomGAEvent(eventCategory: .functions,
+                                         eventActions: .deleteContactBackups,
+                                         eventLabel: result.analyticsGALabel)
+        default:
+            break
+        }
+    }
+    
     private func restore() {
         navigationItem.rightBarButtonItem = nil
         showSpinner()
