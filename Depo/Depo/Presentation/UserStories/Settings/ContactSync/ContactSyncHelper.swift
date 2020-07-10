@@ -554,9 +554,9 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
     }
     
     private func showEmptyContactsPopup() {
+        RouterVC().popToRootViewController()
         SnackbarManager.shared.show(type: .critical, message: TextConstants.absentContactsForBackup, action: .ok)
         showRelatedView()
-        RouterVC().popToRootViewController()
     }
     
     private func showEmptyLifeboxContactsPopup() {
