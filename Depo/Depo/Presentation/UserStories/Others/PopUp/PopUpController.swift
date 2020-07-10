@@ -199,6 +199,19 @@ extension PopUpController {
         return vc
     }
     
+    static func with(title: String?, attributedMessage: NSAttributedString?, image: PopUpImage, buttonTitle: String, action: PopUpButtonHandler? = nil) -> PopUpController {
+        
+        let vc = controllerWith(title: title, attributedMessage: attributedMessage, image: image)
+        vc.buttonState = .single
+        
+        if let action = action {
+            vc.singleAction = action
+        }
+        vc.singleButtonTitle = buttonTitle
+        
+        return vc
+    }
+    
     static func with(title: String?, message: String?, image: PopUpImage, firstButtonTitle: String, secondButtonTitle: String, firstUrl: URL? = nil, secondUrl: URL? = nil, firstAction: PopUpButtonHandler? = nil, secondAction: PopUpButtonHandler? = nil) -> PopUpController {
         
         let vc = controllerWith(title: title, message: message, image: image, firstUrl: firstUrl, secondUrl: secondUrl)

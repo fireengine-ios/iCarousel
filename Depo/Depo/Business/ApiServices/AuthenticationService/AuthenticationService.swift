@@ -257,15 +257,25 @@ struct ResendVerificationSMS: RequestParametrs {
     let refreshToken: String
     let eulaId: Int
     let processPersonalData: Bool
-    let etkAuth: Bool
+    let etkAuth: Bool?
     let globalPermAuth: Bool
+    let kvkkAuth: Bool?
     
     var requestParametrs: Any {
-        return [LbRequestkeys.referenceToken : refreshToken,
-                LbRequestkeys.eulaId : eulaId,
-                LbRequestkeys.processPersonalData : processPersonalData,
-                LbRequestkeys.etkAuth : etkAuth,
-                LbRequestkeys.globalPermAuth: globalPermAuth]
+        var parameters: [String : Any] = [LbRequestkeys.referenceToken : refreshToken,
+                                          LbRequestkeys.eulaId : eulaId,
+                                          LbRequestkeys.processPersonalData : processPersonalData,
+                                          LbRequestkeys.globalPermAuth: globalPermAuth]
+        
+        if let etkAuth = etkAuth {
+            parameters[LbRequestkeys.etkAuth] = etkAuth
+        }
+        
+        if let kvkkAuth = kvkkAuth {
+            parameters[LbRequestkeys.kvkkAuth] = kvkkAuth
+        }
+        
+        return parameters
     }
     
     var patch: URL {
@@ -360,13 +370,14 @@ class AuthenticationService: BaseRequestService {
                             return
                         }
                         
-                        SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                        SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                             CacheManager.shared.actualizeCache()
                             
                             SingletonStorage.shared.isTwoFactorAuthEnabled = false
                             
-                            sucess?(headers)
-                            MenloworksAppEvents.onLogin()
+                            self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
+                                sucess?(headers)
+                            })
                         }, fail: { error in
                             fail?(error)
                         })
@@ -394,9 +405,11 @@ class AuthenticationService: BaseRequestService {
                 let refreshToken = headers[HeaderConstant.RememberMeToken] as? String {
                 self.tokenStorage.accessToken = accessToken
                 self.tokenStorage.refreshToken = refreshToken
-                SingletonStorage.shared.getAccountInfoForUser(success: { _ in
+                SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                     CacheManager.shared.actualizeCache()
-                    sucess?()
+                    self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
+                        sucess?()
+                    })
                 }, fail: { error in
                     fail?(error)
                 })
@@ -409,16 +422,33 @@ class AuthenticationService: BaseRequestService {
         }
     }
     
+    private func accountReadOnlyPopUpHandler(headers:[String: Any], completion: @escaping VoidHandler) {
+        guard
+            let accountStatus = headers[HeaderConstant.accountStatus] as? String,
+            accountStatus.uppercased() == ErrorResponseText.accountReadOnly
+        else {
+            completion()
+            return
+        }
+        
+        SingletonStorage.shared.getOverQuotaStatus {
+            completion()
+        }
+    }
+    
     // MARK: - Authentication
 
     func logout(async: Bool = true, success: SuccessLogout?) {
+        debugLog("calling logout \(async ? "async" : "sync")")
+        
         func logout() {
-            debugLog("AuthenticationService logout")
+            debugLog("starting logout")
             self.passcodeStorage.clearPasscode()
             self.biometricsManager.isEnabled = false
             self.tokenStorage.clearTokens()
             self.cancellAllRequests()
             
+            ItemOperationManager.default.clear()
             CellImageManager.clear()
             FreeAppSpace.session.clear()//with session singleton for Free app this one is pointless
             FreeAppSpace.session.handleLogout()
@@ -427,23 +457,23 @@ class AuthenticationService: BaseRequestService {
             UploadService.default.cancelOperations()
             AutoSyncDataStorage().clear()
             AuthoritySingleton.shared.clear()
-            storageVars.autoSyncSet = false
-            SingletonStorage.shared.accountInfo = nil
-            SingletonStorage.shared.isJustRegistered = nil
+            storageVars.isAutoSyncSet = false
+            SingletonStorage.shared.logoutClear()
             SyncSettings.shared().periodicBackup = SYNCPeriodic.none
-            ItemOperationManager.default.clear()
 //            ItemsRepository.sharedSession.dropCache()
             ViewSortStorage.shared.resetToDefault()
             AuthoritySingleton.shared.setLoginAlready(isLoginAlready: false)
             
             CardsManager.default.stopAllOperations()
             CardsManager.default.clear()
+            LocalAlbumsCache.shared.clear()
             
             self.player.stop()
             
             self.storageVars.currentUserID = nil
             
             CacheManager.shared.logout {
+                debugLog("logout success")
                 WormholePoster().didLogout()
                 success?()
             }

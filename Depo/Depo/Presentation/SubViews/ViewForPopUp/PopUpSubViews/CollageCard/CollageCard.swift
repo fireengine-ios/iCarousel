@@ -38,6 +38,7 @@ final class CollageCard: BaseCardView {
     @IBOutlet private weak var photoImageView: LoadingImageView!
     
     private var item: WrapData?
+    private let routerVC = RouterVC()
     
     private var cardType = CardActionType.save {
         didSet {
@@ -85,6 +86,8 @@ final class CollageCard: BaseCardView {
     }
     
     override func viewWillShow() {
+        debugLog("Collage Card - start load image")
+        photoImageView.setLogs(enabled: true)
         photoImageView.loadImage(with: item)
     }
     
@@ -99,16 +102,11 @@ final class CollageCard: BaseCardView {
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .collage, serverObject: cardObject)
+        CardsManager.default.stopOperationWith(type: .collage, serverObject: cardObject)
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
-        guard let image = photoImageView.image else { return }
-        
-        let vc = PVViewerController.initFromNib()
-        vc.image = image
-        let nController = NavigationController(rootViewController: vc)
-        RouterVC().presentViewController(controller: nController)
+        showPreview()
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
@@ -133,7 +131,11 @@ final class CollageCard: BaseCardView {
                 case .success(_):
                     self?.cardType = .display
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
+                    if error.isOutOfSpaceError {
+                        self?.routerVC.showFullQuotaPopUp()
+                    } else {
+                        UIApplication.showErrorAlert(message: error.description)
+                    }
                 }
             }
         }
@@ -142,13 +144,24 @@ final class CollageCard: BaseCardView {
     private func showPhotoVideoDetail() {
         guard let item = item else { return }
         
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
-                                                                                    selectedItem: item,
-                                                                                    allItems: [item],
-                                                                                    status: .active)
-        controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = NavigationController(rootViewController: controller)
-        RouterVC().presentViewController(controller: nController)
+        let detailModule = routerVC.filesDetailModule(fileObject: item,
+                                                      items: [item],
+                                                      status: .active,
+                                                      canLoadMoreItems: false,
+                                                      moduleOutput: nil)
+
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        routerVC.presentViewController(controller: nController)
+    }
+    
+    private func showPreview() {
+        guard let item = item else {
+            return
+        }
+        
+        let controller = PVViewerController.with(item: item)
+        let navController = NavigationController(rootViewController: controller)
+        routerVC.presentViewController(controller: navController)
     }
     
     override func spotlightHeight() -> CGFloat {

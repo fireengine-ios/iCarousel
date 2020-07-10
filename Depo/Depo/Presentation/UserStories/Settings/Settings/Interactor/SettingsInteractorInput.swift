@@ -10,6 +10,7 @@ import Foundation
 
 protocol SettingsInteractorInput {
     
+    var userInfoResponse: AccountInfoResponse? { get }
     var isPasscodeEmpty: Bool { get }
     var isTurkcellUser: Bool { get }
     var isEmptyMail: Bool { get }

@@ -27,8 +27,14 @@ final class AlbumDetailRouter: BaseFilesGreedRouter {
             player.play(list: [wrappered], startAt: 0)
         default:
             let albumUUID = router.getParentUUID()
-            let controller = router.filesDetailAlbumViewController(fileObject: wrappered, items: wrapperedArray, albumUUID: albumUUID, status: view.status)
-            let nController = NavigationController(rootViewController: controller)
+            let detailModule = router.filesDetailAlbumModule(fileObject: wrappered,
+                                                             items: wrapperedArray,
+                                                             albumUUID: albumUUID,
+                                                             status: view.status,
+                                                             moduleOutput: moduleOutput as? PhotoVideoDetailModuleOutput)
+            
+            presenter.photoVideoDetailModule = detailModule.moduleInput
+            let nController = NavigationController(rootViewController: detailModule.controller)
             router.presentViewController(controller: nController)
         }
     }

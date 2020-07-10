@@ -44,10 +44,11 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
         /// from login
         if interactor.cameFromLogin {
             router.goToAutoSync()
-            
         /// from splash
-        } else {
+        } else if storageVars.isAutoSyncSet {
             router.goToHomePage()
+        } else {
+            router.goToAutoSync()
         }
     }
     
@@ -61,6 +62,7 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     
     func confirmEtk(_ etk: Bool) {
         interactor.etkAuth = etk
+        interactor.kvkkAuth = etk
     }
     
     func confirmGlobalPerm(_ globalPerm: Bool) {
@@ -105,18 +107,19 @@ class TermsAndServicesPresenter: BasePresenter, TermsAndServicesModuleInput, Ter
     }
     
     // MARK: Utility Methods
-    private func openAutoSyncIfNeeded() {
+    private func openAutoSyncIfNeeded(else handler: VoidHandler? = nil) {
         view.showSpinner()
-        
-        autoSyncRoutingService.checkNeededOpenAutoSync(success: { [weak self] needToOpenAutoSync in
-            self?.view.hideSpinner()
-            
-            if needToOpenAutoSync {
-                self?.router.goToAutoSync()
+        autoSyncRoutingService.checkNeededOpenAutoSync(
+            success: { [weak self] needToOpenAutoSync in
+                self?.view.hideSpinner()
+                if needToOpenAutoSync {
+                    self?.router.goToAutoSync()
+                }
+            },
+            error: { [weak self] _ in
+                self?.view.hideSpinner()
             }
-        }) { [weak self] error in
-            self?.view.hideSpinner()
-        }
+        )
     }
     
     //MARK : BasePresenter

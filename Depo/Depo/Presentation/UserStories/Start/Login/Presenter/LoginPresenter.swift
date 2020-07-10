@@ -196,7 +196,6 @@ extension LoginPresenter: LoginInteractorOutput {
     
     func succesLogin() {
         tokenStorage.isClearTokens = false
-        MenloworksTagsService.shared.onStartWithLogin(true)
         interactor.checkEULA()
     }
 
@@ -236,8 +235,15 @@ extension LoginPresenter: LoginInteractorOutput {
             completeAsyncOperationEnableScreen()
             openEmptyPhone()
             
+        case .emptyCaptcha:
+            view.captchaFieldError(TextConstants.captchaIsEmpty)
+            
         case .serverError:
             failLogin(message: TextConstants.loginScreenServerError)
+            
+        case .emptyEmail:
+            completeAsyncOperationEnableScreen()
+            openEmptyEmail()
         }
         
     }

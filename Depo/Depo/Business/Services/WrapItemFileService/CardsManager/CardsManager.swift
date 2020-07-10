@@ -39,6 +39,7 @@ enum OperationType: String {
     case tbMatik                    = "TBMATIC"
     case campaignCard               = "CAMPAIGN"
     case divorce                    = "DIVORCE"
+    case documents                  = "THINGS_DOCUMENT"
 }
 
 typealias BlockObject = VoidHandler
@@ -234,7 +235,7 @@ class CardsManager: NSObject {
         }
     }
 
-    func stopOperationWithType(type: OperationType) {
+    func stopOperationWith(type: OperationType) {
         DispatchQueue.toMain {
             self.progresForOperation[type] = nil
             print("operation stopped ", type.rawValue)
@@ -244,9 +245,9 @@ class CardsManager: NSObject {
         }
     }
     
-    func stopOperationWithType(type: OperationType, serverObject: HomeCardResponse?) {
+    func stopOperationWith(type: OperationType, serverObject: HomeCardResponse?) {
         guard let object = serverObject else {
-            stopOperationWithType(type: type)
+            stopOperationWith(type: type)
             return
         }
         
@@ -270,41 +271,37 @@ class CardsManager: NSObject {
             deletedCards.insert(type)
         }
         
-        stopOperationWithType(type: type, serverObject: homeCardResponse)
+        stopOperationWith(type: type, serverObject: homeCardResponse)
     }
     
     func stopAllOperations() {
         for operation in progresForOperation.keys {
-            stopOperationWithType(type: operation)
+            stopOperationWith(type: operation)
         }
     }
     
     func hidePopUpsByDepends(type: OperationType) {
         switch type {
         case .sync:
-            stopOperationWithType(type: .prepareToAutoSync)
-            stopOperationWithType(type: .waitingForWiFi)
-            stopOperationWithType(type: .freeAppSpaceLocalWarning)
-            stopOperationWithType(type: .freeAppSpace)
-            stopOperationWithType(type: .autoUploadIsOff)
+            stopOperationWith(type: .prepareToAutoSync)
+            stopOperationWith(type: .waitingForWiFi)
+            stopOperationWith(type: .autoUploadIsOff)
         case .upload:
 //            stopOperationWithType(type: .prepareToAutoSync)
-            stopOperationWithType(type: .waitingForWiFi)
-            stopOperationWithType(type: .freeAppSpaceLocalWarning)
-            stopOperationWithType(type: .freeAppSpace)
+            stopOperationWith(type: .waitingForWiFi)
         case .freeAppSpace:
-            stopOperationWithType(type: .emptyStorage)
+            stopOperationWith(type: .emptyStorage)
         case .prepareToAutoSync:
-            stopOperationWithType(type: .waitingForWiFi)
-            stopOperationWithType(type: .autoUploadIsOff)
+            stopOperationWith(type: .waitingForWiFi)
+            stopOperationWith(type: .autoUploadIsOff)
         case .waitingForWiFi:
-            stopOperationWithType(type: .sync)
-            stopOperationWithType(type: .autoUploadIsOff)
-            stopOperationWithType(type: .prepareToAutoSync)
+            stopOperationWith(type: .sync)
+            stopOperationWith(type: .autoUploadIsOff)
+            stopOperationWith(type: .prepareToAutoSync)
         case .autoUploadIsOff:
-            stopOperationWithType(type: .prepareToAutoSync)
-            stopOperationWithType(type: .waitingForWiFi)
-            stopOperationWithType(type: .sync)
+            stopOperationWith(type: .prepareToAutoSync)
+            stopOperationWith(type: .waitingForWiFi)
+            stopOperationWith(type: .sync)
         default:
             break
         }
@@ -404,6 +401,8 @@ class CardsManager: NSObject {
             cardView = CampaignCard.initFromNib()
         case .divorce:
             cardView = DivorceCard.initFromNib()
+        case .documents:
+            cardView = DocumentsAlbumCard.initFromNib()
         }
         
         /// seems like duplicated logic "set(object:".

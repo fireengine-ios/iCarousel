@@ -45,6 +45,17 @@ enum FaceImageType {
             return .things
         }
     }
+    
+    var premiumType: BecomePremiumViewSourceType {
+        switch self {
+        case .people:
+            return .people
+        case .places:
+            return .places
+        case .things:
+            return .things
+        }
+    }
 }
 
 final class FaceImageService: BaseRequestService {
@@ -95,7 +106,7 @@ final class PeopleService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getPeopleAlbum(id: Int, status: ItemStatus, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
+    func getPeopleAlbum(id: Int, status: ItemStatus, success: @escaping AlbumOperationResponse, fail:@escaping FailResponse) {
         debugLog("PeopleService getPeopleAlbumWithID")
         
         let param = PeopleAlbumParameters(id: id, status: status)
@@ -136,6 +147,21 @@ final class PeopleService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
+    func getPeopleForMedia(with uuid: String, success:@escaping (_ peopleThumbnails: [PeopleOnPhotoItemResponse]) -> Void, fail:@escaping FailResponse) {
+        debugLog("PeopleService getPeopleForMedia")
+        
+        let param = PeopleOnPhotoParameters(uuid: uuid)
+        
+        let handler = BaseResponseHandler<PeopleThumbnailsResponse, ObjectRequestResponse>(success: { response in
+            if let response = response as? PeopleThumbnailsResponse {
+                success(response.list)
+            } else {
+                fail(ErrorResponse.failResponse(response))
+            }
+        }, fail: fail)
+        executeGetRequest(param: param, handler: handler)
+    }
+    
     func changePeopleVisibility(peoples: [PeopleItem], success:@escaping SuccessResponse, fail:@escaping FailResponse) {
         debugLog("PeopleService changePeopleVisibility")
         
@@ -168,9 +194,7 @@ final class PeopleService: BaseRequestService {
         
         let parameters = DeletePhotosFromPeopleAlbum(id: id, photos: photos)
         
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { response  in
-            debugLog("PeopleService deletePhotosFromAlbum success")
-            
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
             success?()
         }, fail: fail)
         executePostRequest(param: parameters, handler: handler)
@@ -179,7 +203,7 @@ final class PeopleService: BaseRequestService {
 }
 
 final class PeopleItemsService: RemoteItemsService {
-    private let service = PeopleService(transIdLogging: true)
+    private let service = PeopleService()
     
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .image)
@@ -197,13 +221,9 @@ final class PeopleItemsService: RemoteItemsService {
             success?(response.list.map({ PeopleItem(response: $0) }))
             self?.currentPage += 1
             
-            self?.service.debugLogTransIdIfNeeded(headers: response.response?.allHeaderFields, method: "getPeople")
-            
-        }, fail: { [weak self] error in
+        }, fail: { error in
             error.showInternetErrorGlobal()
             fail?()
-            
-            self?.service.debugLogTransIdIfNeeded(errorResponse: error, method: "getPeople")
         })
     }
     
@@ -311,6 +331,19 @@ final class PeopleSearchParameters: BaseRequestParametrs {
     
     override var patch: URL {
         let searchWithParam = String(format: RouteRequests.peopleSearch, text)
+        return URL.encodingURL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
+    }
+}
+
+final class PeopleOnPhotoParameters: BaseRequestParametrs {
+    private let uuid: String
+    
+    init(uuid: String) {
+        self.uuid = uuid
+    }
+    
+    override var patch: URL {
+        let searchWithParam = String(format: RouteRequests.peoplePhotoWithMedia, uuid)
         return URL.encodingURL(string: searchWithParam, relativeTo: RouteRequests.baseUrl)!
     }
 }

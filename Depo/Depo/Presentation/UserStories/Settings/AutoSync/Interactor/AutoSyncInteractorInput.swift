@@ -11,9 +11,11 @@ import Foundation
 protocol AutoSyncInteractorInput {
     func prepareCellModels()
 
-    func onSave(settings: AutoSyncSettings, fromSettings: Bool)
+    func onSave(settings: AutoSyncSettings, albums: [AutoSyncAlbum], fromSettings: Bool)
     
     func trackScreen(fromSettings: Bool)
+    func trackTurnOnAutosync()
+    func trackSettings(_ settings: AutoSyncSetting, fromSettings: Bool)
     
     func checkPermissions()
 }

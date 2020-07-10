@@ -139,7 +139,7 @@ final class InstaPickCampaignViewController: UIViewController, NibInit {
     }
     
     @IBAction private func becomePremiumButtonTapped(_ sender: Any) {
-        let controller = router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember, viewControllerForPresentOn: self)
+        let controller = router.premium(viewControllerForPresentOn: self)
         
         navigationController?.pushViewController(controller, animated: true)
     }

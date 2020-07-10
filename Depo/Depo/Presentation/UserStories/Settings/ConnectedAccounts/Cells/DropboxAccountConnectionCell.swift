@@ -142,7 +142,7 @@ extension DropboxAccountConnectionCell: ImportFromDropboxViewInput {
     
     /// nothing. maybe will be toast message
     func dbStartSuccessCallback() {
-        MenloworksEventsService.shared.onDropboxTransfered()
+        
     }
     
     func failedDropboxStart(errorMessage: String) {

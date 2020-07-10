@@ -76,7 +76,7 @@ final class PremiumHeaderView: UIView {
         titleLabel.font = UIFont.TurkcellSaturaBolFont(size: 20)
         titleLabel.textColor = ColorConstants.darkText
         
-        subtitleLabel.font = UIFont.TurkcellSaturaMedFont(size: 20)
+        subtitleLabel.font = UIFont.TurkcellSaturaFont(size: 20)
         subtitleLabel.textColor = ColorConstants.darkText
 
         premiumButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)
@@ -84,7 +84,7 @@ final class PremiumHeaderView: UIView {
     
     private func getAttributeText(with text: String, price: String?) -> NSMutableAttributedString {
         let range = (text as NSString).range(of: price ?? "")
-        let attr: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont.TurkcellSaturaBolFont(size: 18),
+        let attr: [NSAttributedStringKey: AnyObject] = [NSAttributedStringKey.font: UIFont.TurkcellSaturaFont(size: 18),
                                                         NSAttributedStringKey.foregroundColor: UIColor.lrTealish]
         
         let attributedString = NSMutableAttributedString(string: text)

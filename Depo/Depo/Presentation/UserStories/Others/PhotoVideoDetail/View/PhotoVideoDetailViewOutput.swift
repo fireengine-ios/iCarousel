@@ -28,4 +28,11 @@ protocol PhotoVideoDetailViewOutput {
     
     func videoStarted()
     func videoStoped()
+    
+    func willDisplayLastCell()
+    
+    func getFIRStatus(completion: VoidHandler?)
+
+    func configureFileInfo(_ view: FileInfoView)
+    func getPersonsForSelectedPhoto(completion: VoidHandler?)
 }

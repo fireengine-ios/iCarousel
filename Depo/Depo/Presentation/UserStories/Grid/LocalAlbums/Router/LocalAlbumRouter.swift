@@ -8,23 +8,25 @@
 
 class LocalAlbumRouter: BaseFilesGreedRouter {
         
-    override func onItemSelected(selectedItem: BaseDataSourceItem, sameTypeItems: [BaseDataSourceItem], type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, moduleOutput: BaseFilesGreedModuleOutput?) {
-
-        let router = RouterVC()
-        
-        if (selectedItem.fileType == .photoAlbum) {
-            guard let album = selectedItem as? AlbumItem else {
-                return
-            }
-            let controller = router.uploadPhotos(rootUUID: album.uuid)
-
-            view.navigationController?.pushViewController(controller, animated: true)
+    override func onItemSelected(selectedItem: BaseDataSourceItem,
+                                 sameTypeItems: [BaseDataSourceItem],
+                                 type: MoreActionsConfig.ViewType,
+                                 sortType: MoreActionsConfig.SortRullesType,
+                                 moduleOutput: BaseFilesGreedModuleOutput?) {
+        guard let album = selectedItem as? AlbumItem, selectedItem.fileType == .photoAlbum else {
             return
         }
+        
+        let router = RouterVC()
+        let presenter = self.presenter as? LocalAlbumPresenter
+        let controller = router.uploadPhotos(rootUUID: album.uuid,
+                                             getItems: presenter?.getItems,
+                                             saveItems: presenter?.saveItems)
+        router.pushViewController(viewController: controller)
     }
     
     override func showBack() {
-        view.dismiss(animated: true, completion: {})
+        view.dismiss(animated: true)
     }
     
 }

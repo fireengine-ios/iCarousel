@@ -10,6 +10,7 @@ import Foundation
 
 
 final class PhotoSyncService: ItemSyncServiceImpl {
+    
     override init() {
         super.init()
         
@@ -18,18 +19,15 @@ final class PhotoSyncService: ItemSyncServiceImpl {
     }
     
     override func itemsSortedToUpload(completion: @escaping WrapObjectsCallBack) {
-        MediaItemOperationsService.shared.allLocalItemsForSync(video: false, image: true) { items in
+        debugLog("PhotoSyncService itemsSortedToUpload")
+        mediaItemOperationsService.allLocalItemsForSync(video: false, image: true) { items in
+            debugLog("PhotoSyncService itemsSortedToUpload completion")
             completion(items.filter { $0.fileSize < NumericConstants.fourGigabytes }.sorted(by: { $0.metaDate > $1.metaDate }))
         }
     }
     
     override func start(newItems: Bool) {
         super.start(newItems: newItems)
-        
-        // This tag triggering when user changes autosync preferences
-//        let isWiFi = ReachabilityService.shared.isReachableViaWiFi
-//        isWiFi ? MenloworksTagsService.shared.onAutosyncPhotosViaWifi() : MenloworksTagsService.shared.onAutosyncPhotosViaLte()
-        
     }
     
     override func stop() {

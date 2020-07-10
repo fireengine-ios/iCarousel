@@ -122,7 +122,7 @@ class LatestUpladsCard: BaseCardView {
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .latestUploads, serverObject: cardObject)
+        CardsManager.default.stopOperationWith(type: .latestUploads, serverObject: cardObject)
     }
 }
 

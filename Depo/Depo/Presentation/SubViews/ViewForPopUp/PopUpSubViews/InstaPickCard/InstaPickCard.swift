@@ -172,7 +172,7 @@ final class InstaPickCard: BaseCardView {
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .instaPick)
+        CardsManager.default.stopOperationWith(type: .instaPick)
     }
     
     //MARK: - Utility Methods(private)

@@ -37,20 +37,20 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
         if settings.isPeriodicContactsSyncOptionEnabled {
             switch settings.timeSetting.option {
             case .daily:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .on, type: .daily))
                 periodicBackUp = SYNCPeriodic.daily
-                MenloworksTagsService.shared.onPeriodicContactSync("daily")
             case .weekly:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .on, type: .weekly))
                 periodicBackUp = SYNCPeriodic.every7
-                MenloworksTagsService.shared.onPeriodicContactSync("weekly")
             case .monthly:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .on, type: .monthly))
                 periodicBackUp = SYNCPeriodic.every30
-                MenloworksTagsService.shared.onPeriodicContactSync("monthly")
             case .none:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .off, type: nil))
                 periodicBackUp = SYNCPeriodic.none
-                MenloworksTagsService.shared.onPeriodicContactSync("off")
             }
         } else {
-            MenloworksTagsService.shared.onPeriodicContactSync("off")
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .off, type: nil))
         }
         
         contactsService.setPeriodicForContactsSync(periodic: periodicBackUp)
@@ -59,10 +59,12 @@ extension PeriodicContactSyncInteractor: PeriodicContactSyncInteractorInput {
     func checkPermission() {
         self.contactsService.askPermissionForContactsFramework(redirectToSettings: false, completion: { [weak self] isAccessGranted in
             AnalyticsPermissionNetmeraEvent.sendContactPermissionNetmeraEvents(isAccessGranted)
-            if isAccessGranted {
-                self?.output.permissionSuccess()
-            } else {
-                self?.output.permissionFail()
+            DispatchQueue.main.async {
+                if isAccessGranted {
+                    self?.output.permissionSuccess()
+                } else {
+                    self?.output.permissionFail()
+                }
             }
         })
     }

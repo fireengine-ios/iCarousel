@@ -11,9 +11,7 @@ import UIKit
 class LocalAlbumConfigurator: BaseFilesGreedModuleConfigurator {
     
     func configure(viewController: BaseFilesGreedChildrenViewController) {
-        
         let router = LocalAlbumRouter()
-        
         let presenter = LocalAlbumPresenter()
         
         presenter.view = viewController
@@ -25,6 +23,7 @@ class LocalAlbumConfigurator: BaseFilesGreedModuleConfigurator {
         presenter.interactor = interactor
         viewController.output = presenter
         router.view = viewController
+        router.presenter = presenter
     }
     
 }

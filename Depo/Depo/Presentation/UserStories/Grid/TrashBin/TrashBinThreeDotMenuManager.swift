@@ -13,6 +13,7 @@ protocol TrashBinThreeDotMenuManagerDelegate: class {
     func onThreeDotsManagerRestore(item: Item?)
     func onThreeDotsManagerDelete(item: Item?)
     func onThreeDotsManagerInfo(item: Item?)
+    func onThreeDotsManagerDeleteAll()
 }
 
 final class TrashBinThreeDotMenuManager {
@@ -27,7 +28,7 @@ final class TrashBinThreeDotMenuManager {
         if isSelectingMode {
             showAlertSheet(with: ElementTypes.trashState, item: nil, sender: sender)
         } else {
-            showAlertSheet(with: [.select], item: nil, sender: sender)
+            showAlertSheet(with: [.select, .emptyTrashBin], item: nil, sender: sender)
         }
     }
     
@@ -58,6 +59,10 @@ final class TrashBinThreeDotMenuManager {
             case .delete:
                 action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { [weak self] _ in
                     self?.delegate.onThreeDotsManagerDelete(item: item)
+                })
+            case .emptyTrashBin:
+                action = UIAlertAction(title: TextConstants.actionSheetEmptyTrashBin, style: .default, handler: { [weak self] _ in
+                    self?.delegate.onThreeDotsManagerDeleteAll()
                 })
             case .info:
                 action = UIAlertAction(title: TextConstants.actionSheetInfo, style: .default, handler: { [weak self] _ in

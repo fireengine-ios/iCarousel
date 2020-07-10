@@ -40,15 +40,18 @@ extension NetmeraEvents.Actions {
         private let kSignupKey = "ylx"
         
         @objc var status = ""
+        @objc var errorType = ""
         
-        convenience init(status: NetmeraEventValues.GeneralStatus) {
+        convenience init(status: NetmeraEventValues.GeneralStatus, errorType: String? = nil) {
             self.init()
             self.status = status.text
+            self.errorType = errorType ?? ""
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
             return [
                 "ea" : #keyPath(status),
+                "eb" : #keyPath(errorType),
             ]
         }
         
@@ -124,9 +127,11 @@ extension NetmeraEvents.Actions {
         private let kPackageChannelClickKey = "tvm"
         
         @objc var type = ""
+        @objc var packageName = ""
         
-        convenience init(channelType: PaymentType) {
+        convenience init(channelType: PaymentType, packageName: String) {
             self.init()
+            self.packageName = packageName
             switch channelType {
             case .appStore:
                 self.type = NetmeraEventValues.PackageChannelType.inAppStorePurchase.text
@@ -140,7 +145,8 @@ extension NetmeraEvents.Actions {
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
             return [
-                "ea": #keyPath(type)
+                "ea": #keyPath(type),
+                "eb" : #keyPath(packageName)
             ]
         }
         
@@ -370,6 +376,31 @@ extension NetmeraEvents.Actions {
         }
     }
     
+    final class PackageCancelClick: NetmeraEvent {
+        
+        private let kPackageCancelClickKey = "iwj"
+        
+        @objc var packageName = ""
+        @objc var type = ""
+        
+        convenience init(type: String, packageName: String) {
+            self.init()
+            self.packageName = packageName
+            self.type = type
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "eb" : #keyPath(type),
+                "ea" : #keyPath(packageName)
+            ]
+        }
+        
+        override var eventKey : String {
+            return kPackageCancelClickKey
+        }
+    }
+    
     final class Delete: NetmeraEvent {
         
         private let kDeleteKey = "trb"
@@ -572,12 +603,12 @@ extension NetmeraEvents.Actions {
             
             switch uploadType {
             case .autoSync:
-                if UIApplication.shared.applicationState == .background {
+                if ApplicationStateHelper.shared.isBackground {
                     appopriateUploadType = .background
                 } else {
                     appopriateUploadType = .autosync
                 }
-            case .fromHomePage, .syncToUse, .other:
+            case .upload, .syncToUse:
                 appopriateUploadType = .manual
             }
             
@@ -607,19 +638,32 @@ extension NetmeraEvents.Actions {
         private let kPackagePurchaseKey = "zfz"
         
         @objc var status = ""
+        @objc var type = ""
+        @objc var packageName = ""
         
-        convenience init(status: NetmeraEventValues.GeneralStatus) {
-            self.init(status: status.text)
+        convenience init(status: NetmeraEventValues.GeneralStatus, channelType: PaymentType, packageName: String) {
+            self.init(status: status.text, channelType: channelType, packageName: packageName)
         }
         
-        convenience init(status: String) {
+        convenience init(status: String, channelType: PaymentType, packageName: String) {
             self.init()
             self.status = status
+            self.packageName = packageName
+            switch channelType {
+            case .appStore:
+                self.type = NetmeraEventValues.PackageChannelType.inAppStorePurchase.text
+            case .paycell:
+                self.type = NetmeraEventValues.PackageChannelType.creditCard.text
+            case .slcm:
+                self.type = NetmeraEventValues.PackageChannelType.chargeToBill.text
+            }
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
             return [
                 "eb" : #keyPath(status),
+                "ea" : #keyPath(packageName),
+                "ee" : #keyPath(type),
             ]
         }
         
@@ -1010,4 +1054,169 @@ extension NetmeraEvents.Actions {
         }
     }
     
+    
+    final class BackgroundSync: NetmeraEvent {
+        
+        enum BackgroundSyncType {
+            
+            case locationChange
+            case backgroundTask(type: String)
+            
+            var description: String {
+                switch self {
+                case .locationChange:
+                    return "LocationChange"
+                case .backgroundTask(type: let type):
+                    return "BackgroundTask(\(type))"
+                }
+            }
+        }
+        
+        private let kBackgroundSyncKey = "goa"
+        @objc var syncType = ""
+        
+        convenience init(syncType: BackgroundSyncType) {
+            self.init()
+            self.syncType = syncType.description
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return [
+                "ea" : #keyPath(syncType),
+            ]
+        }
+        
+        override var eventKey : String {
+            return kBackgroundSyncKey
+        }
+    }
+    
+    final class AddToFavorites: NetmeraEvent {
+        private let key = "mzf"
+        @objc var status = ""
+        
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
+            self.init()
+            self.status = status.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(status),
+            ]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class RemoveFromAlbum: NetmeraEvent {
+        private let key = "wts"
+        @objc var status = ""
+        
+        convenience init(status: NetmeraEventValues.GeneralStatus) {
+            self.init()
+            self.status = status.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(status),
+            ]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class PlusButton: NetmeraEvent {
+        private let key = "xoy"
+        @objc var action = ""
+        
+        convenience init?(action: TabBarViewController.Action) {
+            let netmeraPussButtonAction: NetmeraEventValues.PlusButtonAction
+            switch action {
+            case .takePhoto:
+                netmeraPussButtonAction = .useCamera
+            case .createFolder:
+                netmeraPussButtonAction = .newFolder
+            case .createStory:
+                netmeraPussButtonAction = .createStory
+            case .upload:
+                netmeraPussButtonAction = .upload
+            case .createAlbum:
+                netmeraPussButtonAction = .createAlbum
+            case .uploadFromApp:
+                netmeraPussButtonAction = .uploadFromLifebox
+            case .importFromSpotify:
+                netmeraPussButtonAction = .importFromSpotify
+            default:
+                return nil
+            }
+            self.init(action: netmeraPussButtonAction)
+        }
+        
+        convenience init(action: NetmeraEventValues.PlusButtonAction) {
+            self.init()
+            self.action = action.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(action),
+            ]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class Search: NetmeraEvent {
+        private let key = "rki"
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[:]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class VideoDisplayed: NetmeraEvent {
+        private let key = "zcd"
+       
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[:]
+        }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class PeriodicContactSync: NetmeraEvent {
+        private let key = "dak"
+        @objc var action = ""
+        @objc var type = ""
+        
+        convenience init(action: NetmeraEventValues.OnOffSettings, type: NetmeraEventValues.PeriodicContactSyncType?) {
+            self.init()
+            self.action = action.text
+            self.type = type?.text ?? ""
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(action),
+                "eb" : #keyPath(type),
+            ]
+        }
+        override var eventKey : String {
+            return key
+        }
+    }
 }

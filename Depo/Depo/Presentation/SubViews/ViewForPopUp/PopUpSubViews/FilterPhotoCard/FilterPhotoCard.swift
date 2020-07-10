@@ -14,6 +14,7 @@ final class FilterPhotoCard: BaseCardView {
     private lazy var imageManager = ImageManager()
     private lazy var filesDataSource = FilesDataSource()
     private var originalItem: WrapData?
+    private lazy var router = RouterVC()
     
     @IBOutlet private weak var headerLabel: UILabel! {
         didSet {
@@ -139,7 +140,7 @@ final class FilterPhotoCard: BaseCardView {
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .stylizedPhoto, serverObject: cardObject)
+        CardsManager.default.stopOperationWith(type: .stylizedPhoto, serverObject: cardObject)
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
@@ -152,12 +153,12 @@ final class FilterPhotoCard: BaseCardView {
     }
     
     private func displayNotSavedPhoto() {
-        
-        guard let image = photoImageView.image else { return }
-        let vc = PVViewerController.initFromNib()
-        vc.image = image
+        guard let item = originalItem else {
+            return
+        }
+        let vc = PVViewerController.with(item: item)
         let nController = NavigationController(rootViewController: vc)
-        RouterVC().presentViewController(controller: nController)
+        router.presentViewController(controller: nController)
     }
 
     
@@ -201,14 +202,17 @@ final class FilterPhotoCard: BaseCardView {
         DispatchQueue.global().async {
             let item = WrapData(asset: asset)
             
-            let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
-                                                                                        selectedItem: item,
-                                                                                        allItems: [item],
-                                                                                        status: .active)
-            controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-            let nController = NavigationController(rootViewController: controller)
+            let router = RouterVC()
+            let detailModule = router.filesDetailModule(fileObject: item,
+                                                        items: [item],
+                                                        status: .active,
+                                                        canLoadMoreItems: false,
+                                                        moduleOutput: nil)
+
+            let nController = NavigationController(rootViewController: detailModule.controller)
+            
             DispatchQueue.main.async {
-                RouterVC().presentViewController(controller: nController)
+                router.presentViewController(controller: nController)
             }
         }
     }

@@ -38,7 +38,7 @@ extension PasscodeSettingsPresenter: PasscodeSettingsViewOutput {
     }
     
     func turnOffPasscode() {
-        MenloworksTagsService.shared.passcodeStatus(false)
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.snackbarMessageResetPasscodeSuccess)
         interactor.clearPasscode()
         view?.setup(state: .set, animated: true)
     }

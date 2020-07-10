@@ -7,10 +7,29 @@
 //
 
 class LocalAlbumPresenter: BaseFilesGreedPresenter {
-        
+    
+    typealias PassBaseDataSourceItemsHandler = () -> (Set<BaseDataSourceItem>)
+    typealias ReturnBaseDataSourceItemsHandler = (Set<BaseDataSourceItem>) -> ()
+
+    private var items = Set<BaseDataSourceItem>()
+    
+    var getItems: PassBaseDataSourceItemsHandler = { return [] }
+    var saveItems: ReturnBaseDataSourceItemsHandler = { _ in return }
+
     override func viewIsReady(collectionView: UICollectionView) {
         debugLog("LocalAlbumPresenter viewIsReady")
-
+        
+        getItems = { [weak self] in
+            return self?.items ?? []
+        }
+        
+        saveItems = { [weak self] items in
+            guard let self = self else {
+                return
+            }
+            self.items = self.items.union(items)
+        }
+        
         dataSource = ArrayDataSourceForCollectionView()
         interactor.viewIsReady()
         dataSource.setPreferedCellReUseID(reUseID: CollectionViewCellsIdsConstant.localAlbumCell)

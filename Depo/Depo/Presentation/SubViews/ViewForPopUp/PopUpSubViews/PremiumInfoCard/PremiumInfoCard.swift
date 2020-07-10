@@ -59,7 +59,7 @@ final class PremiumInfoCard: BaseCardView {
 
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .premium)
+        CardsManager.default.stopOperationWith(type: .premium)
     }
     
     override func layoutSubviews() {
@@ -76,7 +76,7 @@ final class PremiumInfoCard: BaseCardView {
     
     @IBAction private func onBecomePremiumTap(_ sender: Any) {
         let router = RouterVC()
-        let vc = router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember)
+        let vc = router.premium()
         router.pushViewController(viewController: vc)
     }
 }

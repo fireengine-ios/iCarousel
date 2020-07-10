@@ -10,14 +10,14 @@ import UIKit
 
 //MARK: - LargeFullOfQuotaPopUpType
 enum LargeFullOfQuotaPopUpType{
-    case LargeFullOfQuotaPopUpType80
-    case LargeFullOfQuotaPopUpType90
-    case LargeFullOfQuotaPopUpType100
+    case LargeFullOfQuotaPopUpTypeBetween80And99(_ percentage: Float)
+    case LargeFullOfQuotaPopUpType100(_ premium: Bool)
 }
 
 //MARK: - LargeFullOfQuotaPopUpDelegate
 protocol LargeFullOfQuotaPopUpDelegate: class {
     func onOpenExpandTap()
+    func onDeleteFilesTap()
 }
 
 final class LargeFullOfQuotaPopUp: BasePopUpController {
@@ -25,7 +25,10 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
     //MARK: Properties
     weak var delegate: LargeFullOfQuotaPopUpDelegate?
     
-    var viewType: LargeFullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100
+    var viewType: LargeFullOfQuotaPopUpType = .LargeFullOfQuotaPopUpType100(false)
+    
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private var doNotShowAgain: Bool = false
     
     //MARK: IBOutlets
     @IBOutlet weak var gradientView: GradientOrangeView! {
@@ -56,13 +59,44 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         willSet {
             newValue.textColor = ColorConstants.whiteColor
             newValue.font = UIFont.TurkcellSaturaDemFont(size: 18)
-            newValue.text = TextConstants.lifeboxLargePopUpSubTitle
+        }
+    }
+    
+    @IBOutlet private weak var checkBoxLabel: UILabel! {
+        willSet {
+            newValue.textColor = ColorConstants.whiteColor
+            newValue.text = TextConstants.instaPickDontShowThisAgain
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 16)
+        }
+    }
+    
+    @IBOutlet private weak var customCheckBox: CustomCheckBox! {
+        willSet {
+            newValue.layer.borderWidth = 1
+            newValue.layer.borderColor = ColorConstants.whiteColor.cgColor
+            newValue.setImage(UIImage(named: "applyIcon"), for: .selected)
+            
         }
     }
     
     @IBOutlet private weak var expandButton: BlueButtonWithWhiteText! {
         willSet {
             newValue.setTitle(TextConstants.lifeboxLargePopUpExpandButtonTitle, for: .normal)
+            newValue.adjustsFontSizeToFitWidth()
+        }
+    }
+    
+    @IBOutlet private weak var closeButton: UIButton! {
+        willSet {
+            newValue.setImage(UIImage(named: "CloseCardIconWhite"), for: .normal)
+        }
+    }
+    
+    @IBOutlet private weak var deleteFilesButton: UIButton! {
+        willSet {
+            newValue.setTitle(TextConstants.lifeboxLargePopUpDeleteFilesButtonTitle, for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 22)
+            newValue.setTitleColor(ColorConstants.marineTwo, for: .normal)
             newValue.adjustsFontSizeToFitWidth()
         }
     }
@@ -75,6 +109,7 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             newValue.adjustsFontSizeToFitWidth()
         }
     }
+     
     @IBOutlet private weak var backgroundImageView: UIImageView!
     
     //MARK: Life cycle
@@ -84,12 +119,30 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         contentView = containerView
         
         titleLabel.text = LargeFullOfQuotaPopUp.textForTitle(type: viewType)
+        subTitleLabel.text = LargeFullOfQuotaPopUp.textForSubtitle(type: viewType)
         setupBackgroundImageView()
+        setupViewAsType()
     }
     
     //MARK: Actions
     @IBAction func onSkipButton() {
         close()
+        analyticsHandler(eventLabel: .overQuota(.skip))
+    }
+    
+    @IBAction func onDeleteFilesButton() {
+        close(isFinalStep: false) { [weak self] in
+            self?.delegate?.onDeleteFilesTap()
+            
+            let router = RouterVC()
+            router.tabBarController?.showPhotoScreen()
+        }
+        analyticsHandler(eventLabel: .overQuota(.deleteFiles(doNotShowAgain)))
+    }
+    
+    @IBAction func onCloseButton() {
+        close()
+        analyticsHandler(eventLabel: .overQuota(.cancel(doNotShowAgain)))
     }
     
     @IBAction func onExpandButton() {
@@ -101,6 +154,17 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
             viewController.needToShowTabBar = false
             router.pushViewController(viewController: viewController)
         }
+        analyticsHandler(eventLabel: .overQuota(.expandMyStorage(doNotShowAgain)))
+    }
+    
+    @IBOutlet private weak var doNotShowStackView: UIStackView!
+    
+    @IBAction private func onCustomCheckBoxTap(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        
+        doNotShowAgain = sender.isSelected
+        let storageVars: StorageVars = factory.resolve()
+        storageVars.largeFullOfQuotaPopUpCheckBox = doNotShowAgain
     }
     
     private func setupBackgroundImageView() {
@@ -109,6 +173,34 @@ final class LargeFullOfQuotaPopUp: BasePopUpController {
         #else
         backgroundImageView.image = UIImage(named: "FullOfQuotaImage")
         #endif
+    }
+    
+    private func setupViewAsType() {
+        switch viewType {
+        case .LargeFullOfQuotaPopUpTypeBetween80And99:
+            doNotShowStackView.isHidden = true
+            closeButton.isHidden = true
+            deleteFilesButton.isHidden = true
+            skipButton.isHidden = false
+        case .LargeFullOfQuotaPopUpType100:
+            doNotShowStackView.isHidden = false
+            closeButton.isHidden = false
+            deleteFilesButton.isHidden = false
+            skipButton.isHidden = true
+        }
+    }
+    
+    private func analyticsHandler(eventLabel: GAEventLabel) {
+        let eventAction: GAEventAction
+           
+        switch viewType {
+        case .LargeFullOfQuotaPopUpTypeBetween80And99:
+            eventAction = .quotaAlmostFullPopup
+        case .LargeFullOfQuotaPopUpType100(let premium):
+            eventAction = premium ? .overQuotaPremiumPopup: .overQuotaFreemiumPopup
+        }
+        
+        self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: eventAction, eventLabel: eventLabel)
     }
 }
 
@@ -127,15 +219,22 @@ extension LargeFullOfQuotaPopUp {
     
     private static func textForTitle(type: LargeFullOfQuotaPopUpType) -> String {
         switch type {
-        case .LargeFullOfQuotaPopUpType80:
-            return TextConstants.lifeboxLargePopUpTitle80
-            
-        case .LargeFullOfQuotaPopUpType90:
-            return TextConstants.lifeboxLargePopUpTitle90
-            
+        case .LargeFullOfQuotaPopUpTypeBetween80And99(let usagePercentage):
+            let percentage = (usagePercentage * 100).rounded(.toNearestOrAwayFromZero)
+            return String(format: TextConstants.lifeboxLargePopUpTitleBetween80And99, percentage)
         case .LargeFullOfQuotaPopUpType100:
             return TextConstants.lifeboxLargePopUpTitle100
             
+        }
+    }
+    
+    private static func textForSubtitle(type: LargeFullOfQuotaPopUpType) -> String {
+        switch type {
+        case .LargeFullOfQuotaPopUpTypeBetween80And99(_):
+            return TextConstants.lifeboxLargePopUpSubTitleBeetween80And99
+        case .LargeFullOfQuotaPopUpType100(let premium):
+            return premium ? TextConstants.lifeboxLargePopUpSubTitle100Premium:
+                             TextConstants.lifeboxLargePopUpSubTitle100Freemium
         }
     }
 }

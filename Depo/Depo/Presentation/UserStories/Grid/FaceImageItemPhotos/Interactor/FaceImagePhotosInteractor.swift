@@ -14,8 +14,9 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
     private let peopleService = PeopleService()
     private let thingsService = ThingsService()
     private let placesService = PlacesService()
-    private lazy var hideService: HideFuncServiceProtocol = HideSmashCoordinator()
     
+    private lazy var hideActionService: HideActionServiceProtocol = HideActionService()
+
     var album: AlbumItem?
     var status: ItemStatus = .active
     
@@ -59,123 +60,34 @@ final class FaceImagePhotosInteractor: BaseFilesGreedInteractor {
 
 extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
     
-    func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64) {
-        let okHandler: () -> Void = { [weak self] in
-            if let items = items as? [Item],
-                let uuid = self?.album?.uuid {
-                self?.output.startAsyncOperation()
-
-                PeopleService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
-                    DispatchQueue.main.async {
-                        ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: uuid)
-                        
-                        if let output = self?.output as? BaseItemInputPassingProtocol {
-                            output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
-                        }
-                    }
-                }) { [weak self] error in
-                    self?.output.asyncOperationFail(errorMessage: error.description)
-                }
-            }
-        }
-        
-        if let output = output as? FaceImagePhotosInteractorOutput {
-            output.didRemoveFromAlbum(completion: okHandler)
-        }
-    }
-    
-    func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64) {
-        let okHandler: () -> Void = { [weak self] in
-            if let items = items as? [Item],
-                let uuid = self?.album?.uuid {
-                self?.output.startAsyncOperation()
-
-                ThingsService().deletePhotosFromAlbum(id: id, photos: items, success: { [weak self] in
-                    DispatchQueue.main.async {
-                        ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: uuid)
-                    
-                        if let output = self?.output as? BaseItemInputPassingProtocol {
-                            output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
-                        }
-                    }
-                }) { [weak self] error in
-                    self?.output.asyncOperationFail(errorMessage: error.description)
-                }
-            }
-        }
-        
-        if let output = output as? FaceImagePhotosInteractorOutput {
-            output.didRemoveFromAlbum(completion: okHandler)
-        }
-    }
-    
-    func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], id: Int64) {
-        let okHandler: () -> Void = { [weak self] in
-            if let items = items as? [Item],
-                let uuid = self?.album?.uuid {
-                self?.output.startAsyncOperation()
-
-                PlacesService().deletePhotosFromAlbum(uuid: uuid, photos: items, success: { [weak self] in
-                    DispatchQueue.main.async {
-                        ItemOperationManager.default.filesRomovedFromAlbum(items: items, albumUUID: uuid)
-                    
-                        if let output = self?.output as? BaseItemInputPassingProtocol {
-                            output.operationFinished(withType: .removeFromFaceImageAlbum, response: nil)
-                        }
-                    }
-                }) { [weak self] error in
-                    self?.output.asyncOperationFail(errorMessage: error.description)
-                }
-            }
-        }
-        
-        if let output = output as? FaceImagePhotosInteractorOutput {
-            output.didRemoveFromAlbum(completion: okHandler)
-        }
-    }
-    
     func loadItem(_ item: BaseDataSourceItem) {
-        guard let item = item as? Item, let id = item.id else { return }
+        guard let item = item as? Item, item.fileType.isFaceImageType, let id = item.id else {
+            return
+        }
+        
+        let successHandler: AlbumOperationResponse = { [weak self] album in
+            DispatchQueue.main.async {
+                if let output = self?.output as? FaceImagePhotosInteractorOutput,
+                    let count = album.imageCount{
+                    output.didCountImage(count)
+                }
+                
+                self?.output.asyncOperationSuccess()
+            }
+        }
+        
+        let failHandler: FailResponse = { [weak self] error in
+            self?.output.asyncOperationFail(errorMessage: error.description)
+        }
+        
+        output.startAsyncOperation()
         
         if item is PeopleItem {
-            output.startAsyncOperation()
-            
-            peopleService.getPeopleAlbum(id: Int(id), status: status, success: { [weak self] album in
-                if let output = self?.output as? FaceImagePhotosInteractorOutput,
-                    let count = album.imageCount{
-                    output.didCountImage(count)
-                }
-                
-                self?.output.asyncOperationSuccess()
-                }, fail: { [weak self] fail in
-                    self?.output.asyncOperationFail(errorMessage: fail.description)
-            })
+            peopleService.getPeopleAlbum(id: Int(truncatingIfNeeded: id), status: status, success: successHandler, fail: failHandler)
         } else if item is ThingsItem {
-            output.startAsyncOperation()
-            
-            thingsService.getThingsAlbum(id: Int(id), status: status, success: { [weak self] album in
-                if let output = self?.output as? FaceImagePhotosInteractorOutput,
-                    let count = album.imageCount{
-                    output.didCountImage(count)
-                }
-                
-                self?.output.asyncOperationSuccess()
-                }, fail: { [weak self] fail in
-                    self?.output.asyncOperationFail(errorMessage: fail.description)
-            })
+            thingsService.getThingsAlbum(id: Int(truncatingIfNeeded: id), status: status, success: successHandler, fail: failHandler)
         } else if item is PlacesItem {
-            output.startAsyncOperation()
-            
-            placesService.getPlacesAlbum(id: Int(id), status: status, success: { [weak self] album in
-                if let output = self?.output as? FaceImagePhotosInteractorOutput,
-                    let count = album.imageCount{
-                    output.didCountImage(count)
-                }
-                
-                self?.output.asyncOperationSuccess()
-                }, fail: { [weak self] fail in
-                    self?.output.asyncOperationFail(errorMessage: fail.description)
-            })
+            placesService.getPlacesAlbum(id: Int(truncatingIfNeeded: id), status: status, success: successHandler, fail: failHandler)
         }
     }
     
@@ -204,7 +116,7 @@ extension FaceImagePhotosInteractor: FaceImagePhotosInteractorInput {
             return
         }
         
-        hideService.startHideAlbumsOperation(for: [album], output: output, success: { [weak self] in
+        hideActionService.startOperation(for: .albums([album]), output: output, success: { [weak self] in
             self?.output.completeAsyncOperationEnableScreen()
         }, fail: { [weak self] errorResponse in
             self?.output.completeAsyncOperationEnableScreen(errorMessage: errorResponse.description)

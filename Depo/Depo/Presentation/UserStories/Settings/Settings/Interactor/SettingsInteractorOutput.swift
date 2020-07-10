@@ -10,12 +10,10 @@ import Foundation
 
 protocol SettingsInteractorOutput: class {
     
-    func cellsDataForSettings(array: [[String]])
+    func cellsDataForSettings(isPermissionShown: Bool)
     
     func goToOnboarding()
-    
-    func goToContactSync()
-    
+        
     func profilePhotoUploadSuccessed(image: UIImage?)
     func profilePhotoUploadFailed(error: Error)
     

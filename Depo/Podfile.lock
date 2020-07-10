@@ -99,7 +99,7 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
-  - Netmera (3.4.30)
+  - Netmera (3.6.0)
   - ObjcExceptionBridging (1.0.1):
     - ObjcExceptionBridging/ObjcExceptionBridging (= 1.0.1)
   - ObjcExceptionBridging/ObjcExceptionBridging (1.0.1)
@@ -115,13 +115,13 @@ PODS:
     - Alamofire (~> 4.8.2)
   - SwiftyGif (4.1.0)
   - SwiftyJSON (3.1.4)
+  - TTGSnackbar (1.10.2)
   - Typist (1.1.0)
   - UIImage-Categories (1.0.0)
   - XCGLogger (6.1.0):
     - XCGLogger/Core (= 6.1.0)
   - XCGLogger/Core (6.1.0):
     - ObjcExceptionBridging
-  - Xtremepush-iOS-SDK (4.1.2)
   - XYPieChart (0.2)
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
@@ -151,15 +151,15 @@ DEPENDENCIES:
   - SwiftyDropbox
   - SwiftyGif (= 4.1.0)
   - SwiftyJSON (~> 3)
+  - TTGSnackbar
   - Typist (~> 1.1.0)
   - UIImage-Categories
   - XCGLogger (~> 6.0)
-  - Xtremepush-iOS-SDK
   - XYPieChart
   - YYImage
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Adjust
     - Alamofire
     - CircleProgressBar
@@ -196,10 +196,10 @@ SPEC REPOS:
     - SwiftyDropbox
     - SwiftyGif
     - SwiftyJSON
+    - TTGSnackbar
     - Typist
     - UIImage-Categories
     - XCGLogger
-    - Xtremepush-iOS-SDK
     - XYPieChart
     - YYImage
 
@@ -241,7 +241,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MMWormhole: 0cd3fd35a9118b2e2d762b499f54eeaace0be791
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  Netmera: 9d5431040f5d603f9edf8fbb75d91b2bf7dffbb4
+  Netmera: 232648c44bcff68b81dbb7116d6cdf18d52a453a
   ObjcExceptionBridging: c30e00eb3700467e695faeea30e26e18bd445001
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SDWebImage: c10d14a8883ebd89664f02a422006f66a85c0c5d
@@ -250,13 +250,13 @@ SPEC CHECKSUMS:
   SwiftyDropbox: 7ca4961e0340c62c8d6d1ece91d67badfe4c0380
   SwiftyGif: d36c6dfb52e2ca1e48fe349d225f50ec4123ec85
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  TTGSnackbar: fc26ad27ae180f4045b03ba19defdc57238e9215
   Typist: 31a3eb9d6b97ea28e0e247bb8b14ed23fe624170
   UIImage-Categories: a0593f6a7991c99016b9ecadfbd38b3717ff1a73
   XCGLogger: 7f7f43f15dfe3a305fa1342b7dc29af656289abd
-  Xtremepush-iOS-SDK: ea060cc63fec2797cdba0910b148481b10312fff
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: b58fb5e2eb970ee79b4d28672f2a21fbdcdf9a03
+PODFILE CHECKSUM: daef4684596e729d9aafe010f2ad3d1d8f093899
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.5.3

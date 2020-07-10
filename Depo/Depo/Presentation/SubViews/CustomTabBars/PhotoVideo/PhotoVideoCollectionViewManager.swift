@@ -11,6 +11,7 @@ import UIKit
 protocol PhotoVideoCollectionViewManagerDelegate: class {
     func refreshData(refresher: UIRefreshControl)
     func showOnlySyncItemsCheckBoxDidChangeValue(_ value: Bool)
+    func openAutoSyncSettings()
 }
 
 final class PhotoVideoCollectionViewManager {
@@ -30,7 +31,7 @@ final class PhotoVideoCollectionViewManager {
     }()
     
     let scrolliblePopUpView = CardsContainerView()
-    private let showOnlySyncItemsCheckBox = CheckBoxView.initFromXib()
+    private let showOnlySyncItemsCheckBox = CheckBoxView.initFromNib()
     
     private weak var collectionView: UICollectionView!
     private weak var delegate: PhotoVideoCollectionViewManagerDelegate?
@@ -97,9 +98,7 @@ final class PhotoVideoCollectionViewManager {
         collectionView.allowsMultipleSelection = true
         collectionView.register(nibCell: PhotoVideoCell.self)
         collectionView.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self, kind: UICollectionElementKindSectionHeader)
-        if #available(iOS 10.0, *) {
-            collectionView.isPrefetchingEnabled = false
-        }
+        collectionView.isPrefetchingEnabled = false
         //        collectionView.alwaysBounceVertical = true
         //        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
     }
@@ -230,5 +229,9 @@ extension PhotoVideoCollectionViewManager: CardsContainerViewDelegate {
 extension PhotoVideoCollectionViewManager: CheckBoxViewDelegate {
     func checkBoxViewDidChangeValue(_ value: Bool) {
         delegate?.showOnlySyncItemsCheckBoxDidChangeValue(value)
+    }
+    
+    func openAutoSyncSettings() {
+        delegate?.openAutoSyncSettings()
     }
 }

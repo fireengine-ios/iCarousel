@@ -35,16 +35,13 @@ class RequestService {
                             method: RequestMethod,
                             timeoutInterval: TimeInterval,
                             response: @escaping RequestResponse ) -> URLSessionTask {
-        debugLog("RequestService requestTask")
         
         var request = URLRequest(url: patch)
             request.timeoutInterval = timeoutInterval
             request.httpMethod = method.rawValue
             request.httpBody = body
             request.allHTTPHeaderFields = headerParametrs
-        
-        debugPrint("REQUEST: \(request)")
-        
+                
         let sessionRequest = SessionManager.customDefault.request(request)
             .customValidate()
             .response { requestResponse in
@@ -59,8 +56,7 @@ class RequestService {
                               method: RequestMethod,
                               timeoutInterval: TimeInterval,
                               response: @escaping RequestResponse ) -> URLSessionTask {
-        debugLog("RequestService uploadRequestTask")
-        
+
         var request: URLRequest = URLRequest(url: patch)
             request.timeoutInterval = timeoutInterval
             request.httpMethod = method.rawValue
@@ -84,14 +80,11 @@ class RequestService {
                                         method: RequestMethod,
                                         timeoutInterval: TimeInterval,
                                         response: @escaping RequestFileDownloadResponse ) -> URLSessionTask {
-        debugLog("RequestService downloadFileRequestTask")
-
+        
         var request: URLRequest = URLRequest(url: patch)
         request.timeoutInterval = timeoutInterval
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headerParametrs
-    
-        debugPrint("REQUEST: \(request)")
         
         let destination: DownloadRequest.DownloadFileDestination = { _, _ in
             let tempDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory())
@@ -116,14 +109,11 @@ class RequestService {
                                   method: RequestMethod,
                                   timeoutInterval: TimeInterval,
                                   response: @escaping RequestFileUploadResponse ) -> URLSessionTask {
-        debugLog("RequestService uploadFileRequestTask")
         
         var request: URLRequest = URLRequest(url: patch)
         request.timeoutInterval = timeoutInterval
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headerParametrs
-        
-        debugPrint("REQUEST: \(request)")
         
         let sessionRequest = SessionManager.customDefault.upload(fromFile, with: request)
             .customValidate()
@@ -142,14 +132,11 @@ class RequestService {
                                       method: RequestMethod,
                                       timeoutInterval: TimeInterval,
                                       response: @escaping RequestFileUploadResponse ) -> URLSessionTask {
-        debugLog("RequestService uploadFileRequestTask")
         
         var request: URLRequest = URLRequest(url: path)
         request.timeoutInterval = timeoutInterval
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headerParametrs
-        
-        debugPrint("REQUEST: \(request)")
         
         let sessionRequest = SessionManager.customDefault.upload(fileData, with: request)
             .customValidate()
@@ -174,8 +161,6 @@ class RequestService {
         request.allHTTPHeaderFields = headerParametrs
         request.cachePolicy = .reloadRevalidatingCacheData
         
-        debugPrint("REQUEST: \(request)")
-        
         let sessionRequest = SessionManager.customDefault.request(request)
             .customValidate()
             .response { requestResponse in
@@ -189,7 +174,7 @@ class RequestService {
             else { return }
         
         SingletonStorage.shared.progressDelegates.invoke(invocation: { delegate in
-            delegate.didSend(ratio: Float(progress.fractionCompleted), for: url)
+            delegate.didSend(ratio: Float(progress.fractionCompleted), bytes: progress.completedUnitCount.intValue, for: url)
         })
     }
 }

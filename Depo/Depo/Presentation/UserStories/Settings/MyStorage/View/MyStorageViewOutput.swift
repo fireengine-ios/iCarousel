@@ -11,7 +11,8 @@ protocol MyStorageViewOutput {
     
     func didPressOn(plan: SubscriptionPlan, planIndex: Int)    
     func restorePurchasesPressed()
-    
+    func configureCard(_ card: PackageInfoView)
+
     var displayableOffers: [SubscriptionPlan] { get }
     var accountType: AccountType { get }
     var title: String { get }

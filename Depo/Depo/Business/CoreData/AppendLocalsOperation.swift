@@ -16,14 +16,15 @@ final class AppendLocalsOperation: Operation {
     private var assets = [PHAsset]()
     private let itemOperationService = MediaItemOperationsService.shared
     private let coreDataStack: CoreDataStack = factory.resolve()
-    private let context: NSManagedObjectContext
     private let mediaStorage = LocalMediaStorage.default
+    private let needCreateRelationships: Bool
+    private lazy var localAlbumsCache = LocalAlbumsCache.shared
     
     
-    init(assets: [PHAsset], completion: VoidHandler?) {
-        context = coreDataStack.newChildBackgroundContext
+    init(assets: [PHAsset], needCreateRelationships: Bool, completion: VoidHandler?) {
         self.completionHandler = completion
         self.assets = assets
+        self.needCreateRelationships = needCreateRelationships
     }
     
     override func cancel() {
@@ -38,7 +39,7 @@ final class AppendLocalsOperation: Operation {
             return
         }
         
-        itemOperationService.notSaved(assets: assets, context: context) { [weak self] notSaved in
+        itemOperationService.notSaved(assets: assets) { [weak self] notSaved in
             guard let self = self else {
                 return
             }
@@ -48,6 +49,8 @@ final class AppendLocalsOperation: Operation {
                 self.completionHandler?()
                 return
             }
+            
+            debugLog("appending \(notSaved.count) local items")
             
             self.saveLocalMediaItemsPaged(items: notSaved, completion: { [weak self] in
                 guard let self = self else {
@@ -74,7 +77,9 @@ final class AppendLocalsOperation: Operation {
                 return
             }
             
-            self.context.perform { [weak self] in
+            debugLog("page has \(info.count) local items")
+            
+            self.coreDataStack.performBackgroundTask { [weak self] context in
                 guard let self = self, !self.isCancelled else {
                     completion()
                     return
@@ -82,16 +87,49 @@ final class AppendLocalsOperation: Operation {
                 
                 var addedObjects = [WrapData]()
                 let updatedCache = self.mediaStorage.assetsCache
-                let assetsInfo = info.filter { $0.isValid && updatedCache.assetBy(identifier: $0.asset.localIdentifier) != nil }
-                assetsInfo.forEach { element in
+                
+                var validAssetsInfo = [AssetInfo]()
+                var invalidAssetsInfo = [AssetInfo]()
+                info.forEach { assetInfo in
+                    if assetInfo.isValid && updatedCache.assetBy(identifier: assetInfo.asset.localIdentifier) != nil {
+                        validAssetsInfo.append(assetInfo)
+                    } else {
+                        invalidAssetsInfo.append(assetInfo)
+                    }
+                }
+                
+                invalidAssetsInfo.forEach {
+                    self.localAlbumsCache.remove(assetId: $0.asset.localIdentifier)
+                }
+                
+                let smartAssets = PHAssetCollection.smartAlbums.map { (album: $0, assets: $0.allAssets) }
+                
+                debugLog("page has \(validAssetsInfo.count) valid local items")
+                
+                validAssetsInfo.forEach { element in
                     autoreleasepool {
+                        if self.needCreateRelationships {
+                            var albums = element.asset.containingAlbums
+                            let smartAlbums = smartAssets.filter { $0.assets.contains(element.asset) }.map { $0.album }
+                            
+                            albums.append(contentsOf: smartAlbums)
+                            albums.forEach {
+                                self.localAlbumsCache.append(albumId: $0.localIdentifier, with: [element.asset.localIdentifier])
+                            }
+                        }
+                        
                         let wrapedItem = WrapData(info: element)
-                        _ = MediaItem(wrapData: wrapedItem, context: self.context)
+                        _ = MediaItem(wrapData: wrapedItem, context: context)
+                        
+                        //                        debugLog("local_appended: \(wrapedItem.name ?? "_EMPTY_")")
                         
                         addedObjects.append(wrapedItem)
                     }
                 }
-                self.coreDataStack.saveDataForContext(context: self.context, saveAndWait: true, savedCallBack: { [weak self] in
+                self.coreDataStack.saveDataForContext(context: context, saveAndWait: true, savedCallBack: { [weak self] in
+                    
+                    debugLog("page is saved")
+                    
                     ItemOperationManager.default.addedLocalFiles(items: addedObjects)
                     
                     guard let self = self, !self.isCancelled else {
@@ -102,6 +140,7 @@ final class AppendLocalsOperation: Operation {
                     self.saveLocalMediaItemsPaged(items: Array(items.dropFirst(nextItemsToSave.count)), completion: completion)
                 })
             }
+            
         })
     }
 }

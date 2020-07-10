@@ -8,6 +8,9 @@
 
 class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelectionModuleInput, UploadFilesSelectionViewOutput {
 
+    var getOtherSelectedPhotos: LocalAlbumPresenter.PassBaseDataSourceItemsHandler?
+    var saveSelectedPhotos: LocalAlbumPresenter.ReturnBaseDataSourceItemsHandler?
+
     init() {
         super.init(sortedRule: .timeDownWithoutSection)
     }
@@ -18,12 +21,24 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
         dataSource.isHeaderless = true
         dataSource.canReselect = true
         dataSource.enableSelectionOnHeader = true
-        dataSource.setSelectionState(selectionState: true)
         dataSource.updateDisplayngType(type: .greed)
     }
     
-    override func viewWillAppear() {
-        super.viewWillAppear()
+    override func updateThreeDotsButton() {
+        super.updateThreeDotsButton()
+        
+        getOtherSelectedPhotos.map { dataSource.selectedItemsArray.formUnion($0()) }
+        
+        if dataSource.selectedItemsArray.isEmpty == false {
+            dataSource.updateSelectionCount()
+        }
+        dataSource.setSelectionState(selectionState: true)
+    }
+    
+    override func viewWillDisappear() {
+        saveSelectedPhotos?(dataSource.selectedItemsArray)
+
+        super.viewWillDisappear()
     }
     
     override func reloadData() {
@@ -36,9 +51,8 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     func newLocalItemsReceived(newItems: [BaseDataSourceItem]) {
-        guard let uploadDataSource  = dataSource as? UploadFilesSelectionDataSource,
-            !newItems.isEmpty else {
-                asyncOperationSuccess()
+        guard let uploadDataSource = dataSource as? UploadFilesSelectionDataSource, newItems.isEmpty == false else {
+            asyncOperationSuccess()
             return
         }
         uploadDataSource.appendNewLocalItems(newItems: newItems)
@@ -46,11 +60,15 @@ class UploadFilesSelectionPresenter: BaseFilesGreedPresenter, UploadFilesSelecti
     }
     
     override func onNextButton() {
-        if !dataSource.selectedItemsArray.isEmpty {
+        if dataSource.selectedItemsArray.isEmpty == false {
             startAsyncOperation()
-            if let interactor_ = interactor as? UploadFilesSelectionInteractor, let dataSource = dataSource as? ArrayDataSourceForCollectionView {
-                interactor_.addToUploadOnDemandItems(items: dataSource.getSelectedItems())
+            if let interactor = interactor as? UploadFilesSelectionInteractor,
+                let dataSource = dataSource as? ArrayDataSourceForCollectionView {
+                
+                let items = dataSource.getSelectedItems() + (getOtherSelectedPhotos?() ?? [])
+                interactor.addToUploadOnDemandItems(items: items)
             }
+            
             dataSource.selectAll(isTrue: false)
         } else {
             UIApplication.showErrorAlert(message: TextConstants.uploadFilesNothingUploadError)

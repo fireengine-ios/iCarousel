@@ -92,8 +92,10 @@ final class PremiumView: UIView {
             attributes: [.foregroundColor: ColorConstants.textGrayColor,
                          .font: UIFont.TurkcellSaturaBolFont(size: policyHeaderSize)])
         
+        var policyText = RouteRequests.isBillo ? TextConstants.packagesPolicyBilloText : TextConstants.packagesPolicyText
+        
         let policyAttributedString = NSMutableAttributedString(
-            string: "\n\n" + TextConstants.packagesPolicyText,
+            string: "\n\n" + policyText,
             attributes: [.foregroundColor: ColorConstants.textGrayColor,
                          .font: UIFont.TurkcellSaturaRegFont(size: policyTextSize)])
         attributedString.append(policyAttributedString)
@@ -122,7 +124,6 @@ extension PremiumView: PremiumHeaderViewDelegate {
 // MARK: - UITextViewDelegate
 extension PremiumView: UITextViewDelegate {
     
-    @available(iOS 10.0, *)
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
         if URL.absoluteString == TextConstants.NotLocalized.termsOfUseLink {
             DispatchQueue.toMain {

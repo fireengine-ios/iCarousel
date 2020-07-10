@@ -31,7 +31,7 @@ final class AlbumsSliderCell: UICollectionViewCell {
     @IBOutlet private weak var emptyLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.numberOfLines = 2
+            newValue.numberOfLines = 3
             newValue.lineBreakMode = .byWordWrapping
             newValue.textColor = UIColor.lrBrownishGrey.withAlphaComponent(0.5)
             newValue.font = UIFont.TurkcellSaturaMedFont(size: 18)

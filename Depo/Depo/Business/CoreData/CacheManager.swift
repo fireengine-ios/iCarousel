@@ -22,6 +22,7 @@ final class CacheManager {
     static let shared = CacheManager()
     
     private lazy var coreDataStack: CoreDataStack = factory.resolve()
+    private lazy var logoutCleaner: LogoutDBCleaner = factory.resolve()
     
     private static let pageSize: Int = 500
     private let photoVideoService = PhotoAndVideoService(requestSize: CacheManager.pageSize,
@@ -46,53 +47,102 @@ final class CacheManager {
     }
     
     func actualizeCache() {
+        debugLog("CacheManager calling actualizeCache")
+        
         guard coreDataStack.isReady else {
+            debugLog("CacheManager coreData not ready")
             scheduleActualization()
             return
         }
         
+        guard !isProcessing else {
+            debugLog("CacheManager Still processing remotes...")
+            return
+        }
+        
+        debugLog("CacheManager starting actualizeCache")
+        
         isCacheActualized = false
         isProcessing = true
 
-        MediaItemOperationsService.shared.removeZeroBytesLocalItems { [weak self] _ in
-            MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
-                guard let `self` = self else {
-                    return
-                }
-                
-                if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
-                    self.showPreparationCardAfterDelay()
-                    self.startAppendingAllRemotes(completion: { [weak self] in
-                        guard let `self` = self,
-                            !self.processingRemoteItems else {
-                                return
-                        }
-                        self.userDefaultsVars.currentRemotesPage = 0
-                        self.startProcessingAllLocals(completion: { [weak self] in
-                            guard let `self` = self,
-                                !self.processingLocalItems else {
-                                    return
-                            }
-                            //FIXME: need handling if we logouted and locals still in progress
-                            self.isProcessing = false
-                            self.isCacheActualized = true
-                            CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-                            self.delegates.invoke { $0.didCompleteCacheActualization() }
-                        })
-                    })
-                } else {
-                    guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessLocalFiles flag in MediaItemsOperationService processLocalGallery method
+        self.startProccessingLocalAlbums { [weak self] in
+            debugLog("CacheManager startProccessingLocalAlbums")
+            guard let self = self else {
+                return
+            }
+            
+            debugLog("CacheManager albums are processed")
+            
+            MediaItemOperationsService.shared.removeZeroBytesLocalItems { [weak self] _ in
+                debugLog("CacheManager zero bytes items removed")
+                MediaItemOperationsService.shared.isNoRemotesInDB { [weak self] isNoRemotes in
+                    debugLog("CacheManager isNoRemotes \(isNoRemotes)")
+                    guard let self = self else {
                         return
                     }
-                    self.showPreparationCardAfterDelay()
-                    self.startProcessingAllLocals(completion: { [weak self] in
-                        self?.isProcessing = false
-                        self?.isCacheActualized = true
-                        CardsManager.default.stopOperationWithType(type: .prepareQuickScroll)
-                        self?.delegates.invoke { $0.didCompleteCacheActualization() }
-                    })
+                    
+                    if isNoRemotes || self.userDefaultsVars.currentRemotesPage > 0 {
+                        self.showPreparationCardAfterDelay()
+                        self.startAppendingAllRemotes(completion: { [weak self] in
+                            debugLog("CacheManager no remotes, appended all remotes")
+                            guard let self = self, !self.processingRemoteItems else {
+                                return
+                            }
+                            
+                            self.userDefaultsVars.currentRemotesPage = 0
+                            self.startProcessingAllLocals(completion: { [weak self] in
+                                self?.actualizeUnsavedFileSyncStatus() { [weak self] in
+                                    guard let self = self, !self.processingLocalItems else {
+                                        return
+                                    }
+                                    debugLog("CacheManager no remotes, all locals processed")
+                                    //FIXME: need handling if we logouted and locals still in progress
+                                    
+                                    
+                                    self.isProcessing = false
+                                    self.isCacheActualized = true
+                                    debugLog("CacheManager cache is actualized")
+                                    self.updatePreparation(isBegun: false)
+                                    SyncServiceManager.shared.updateImmediately()
+                                    self.delegates.invoke { $0.didCompleteCacheActualization() }
+                                }
+                            })
+                        })
+                    } else {
+                        guard !self.processingLocalItems else {/// these checks are made just to double check, there is already inProcessLocalFiles flag in MediaItemsOperationService processLocalGallery method
+                            debugLog("CacheManager there are remotes, but locals already being processed")
+                            return
+                        }
+                        self.showPreparationCardAfterDelay()
+                        self.startProcessingAllLocals(completion: { [weak self] in
+                            self?.actualizeUnsavedFileSyncStatus() { [weak self] in
+                                guard let self = self, !self.processingRemoteItems else {
+                                    return
+                                }
+                                debugLog("CacheManager there are remotes, all local processed")
+                                self.isProcessing = false
+                                self.isCacheActualized = true
+                                debugLog("CacheManager cache is actualized")
+                                self.updatePreparation(isBegun: false)
+                                SyncServiceManager.shared.updateImmediately()
+                                self.delegates.invoke { $0.didCompleteCacheActualization() }
+                            }
+                        })
+                    }
                 }
             }
+        }
+    }
+    
+    private func updatePreparation(isBegun: Bool) {
+        if isBegun {
+            CardsManager.default.startOperationWith(type: .prepareQuickScroll)
+        } else {
+            CardsManager.default.stopOperationWith(type: .prepareQuickScroll)
+        }
+        
+        DispatchQueue.main.async {
+            UIApplication.shared.isIdleTimerDisabled = isBegun
         }
     }
     
@@ -104,7 +154,7 @@ final class CacheManager {
         ///prevent blinking
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
             if self.isProcessing {
-                CardsManager.default.startOperationWith(type: .prepareQuickScroll)
+                self.updatePreparation(isBegun: true)
             }
         })
     }
@@ -115,6 +165,8 @@ final class CacheManager {
             guard !self.processingRemoteItems else {
                 return
             }
+        
+            debugLog("actualizeCache processing remote items")
         
             self.processingRemoteItems = true
             self.addNextRemoteItemsPage { [weak self] in
@@ -128,7 +180,16 @@ final class CacheManager {
             guard let self = self else {
                 return
             }
+            
             guard self.processingRemoteItems else {
+                debugLog("actualizeCache: not processing")
+                return
+            }
+            
+            guard !remoteItems.isEmpty else {
+                debugLog("actualizeCache: got empty page")
+                self.photoVideoService.currentPage = 0
+                completion()
                 return
             }
             
@@ -138,14 +199,12 @@ final class CacheManager {
                     return
                 }
                 
-                if remoteItems.count < CacheManager.pageSize {
-                    self.photoVideoService.currentPage = 0
-                    completion()///means all files are downloaded
-                } else {
-                    //FIXME: When BackEnd would fix duplication problem we should remove else part
-                    self.userDefaultsVars.currentRemotesPage = self.photoVideoService.currentPage
-                    self.addNextRemoteItemsPage(completion: completion)
-                }
+                //FIXME: When BackEnd would fix duplication problem we should remove else part
+                let page = self.photoVideoService.currentPage
+                self.userDefaultsVars.currentRemotesPage = page
+                debugLog("actualizeCache: save current page \(page)")
+                
+                self.addNextRemoteItemsPage(completion: completion)
             }
             //FIXME: When BackEnd would fix duplication problem we should uncomment this
 //            if remoteItems.count >= CacheManager.pageSize {
@@ -187,10 +246,15 @@ final class CacheManager {
         internetConnectionBackCallback()
     }
     
+    private func startProccessingLocalAlbums(completion: @escaping VoidHandler) {
+        MediaItemsAlbumOperationService.shared.processLocalMediaItemAlbums(completion: completion)
+    }
+    
     private func startProcessingAllLocals(completion: @escaping VoidHandler) {
         guard !self.processingLocalItems else {
             return
         }
+        debugLog("actualizeCache processing local items")
         
         processingLocalItems = true
         MediaItemOperationsService.shared.processLocalMediaItems { [weak self] in
@@ -200,24 +264,31 @@ final class CacheManager {
     }
     
     func stopRemotesActualizeCache() {
-        processingRemoteItems = false
-//        processingLocalItems = false//still need to test what would ahppen in parallel downlaod
-//        isProcessing = false
+        debugLog("CacheManager stop remotes actualization")
+        
+        if processingRemoteItems {
+            processingRemoteItems = false
+            //        processingLocalItems = false//still need to test what would ahppen in parallel downlaod
+            isProcessing = false
+            photoVideoService.stopAllOperations() //Dont know if it actualy affects opration by cancell all
+            ///unsubscribe
+        }
+        
         isCacheActualized = false
-        photoVideoService.stopAllOperations() //Dont know if it actualy affects opration by cancell all
-        ///unsubscribe
         reachabilityService.delegates.remove(self)
         internetConnectionIsBackCallback = nil
     }
     
     func dropAllRemotes(completion: VoidHandler?) {
+        debugLog("dropAllRemotes")
         
         userDefaultsVars.currentRemotesPage = 0
         processingRemoteItems = false
         isCacheActualized = false
-        MediaItemOperationsService.shared.deleteRemoteEntities { _ in
-            completion?()
-        }
+        
+        logoutCleaner
+            .onCompletion(completion: completion)
+            .start()
     }
     
     func logout(completion: VoidHandler?) {
@@ -228,6 +299,55 @@ final class CacheManager {
     
     //TODO: move method of QS DB update here.
 
+}
+
+//MARK: - Sync Status Actualization
+extension CacheManager {
+    ///Since we backgeound tasks can expire before we save latest changes to DB
+    ///In order to prevent duplication of unsaved file, we call it on each actualization
+    private func actualizeUnsavedFileSyncStatus(completion: @escaping VoidHandler) {
+        //TODO: during actualisation task, think about the best way to call it for regular launch
+        debugLog("CacheManager checkLatestUnsavedFile")
+        guard let latestUnsavedUUID = userDefaultsVars.lastUnsavedFileUUID else {
+            debugLog("CacheManager no unsaved items found")
+            completion()
+            return
+        }
+        
+        let remoteFileService = FileService.shared
+        remoteFileService.details(uuids: [latestUnsavedUUID], success: { [weak self] items in
+            guard let remoteItem = items.first else {
+                debugLog("CacheManager no item with this UUID \(items.count)")
+                completion()
+                return
+            }
+            debugLog("CacheManager TEST: got detail info for last UNSAVED to DB \(remoteItem.uuid) AND name \(remoteItem.name)")
+            
+            let trimmedLocalID = remoteItem.getTrimmedLocalID()
+            
+            MediaItemOperationsService.shared.mediaItemByLocalID(trimmedLocalIDS: [trimmedLocalID]) { [weak self] localItems in
+                guard let firstLocal = localItems.first else {
+                    debugLog("CacheManager ERROR: Failed to find related locals with this  ID")
+                    completion()
+                    return
+                }
+                debugLog("CacheManager found related local to unsaved remote")
+                
+                let localWrapData = WrapData(mediaItem: firstLocal)
+                localWrapData.syncStatus = .synced
+                localWrapData.setSyncStatusesAsSyncedForCurrentUser()
+                
+                MediaItemOperationsService.shared.updateLocalItemSyncStatus(item: localWrapData, newRemote: remoteItem) { [weak self] in
+                    debugLog("CacheManager TEST: SYNC stasus updated last unsaved UPDATED uuid \(self?.userDefaultsVars.lastUnsavedFileUUID) AND name \(remoteItem.name)")
+                    self?.userDefaultsVars.lastUnsavedFileUUID = nil
+                    completion()
+                }
+            }
+            }, fail: { error in
+                debugLog("CacheManager ERROR: faild to get item details \(error.description)")
+                completion()
+        })
+    }
 }
 
 //MARK: - ReachabilityServiceDelegate
@@ -242,6 +362,7 @@ extension CacheManager: ReachabilityServiceDelegate {
 
 extension CacheManager: CoreDataStackDelegate {
     func onCoreDataStackSetupCompleted() {
+        debugLog("CacheManager scheduled actualization start")
         coreDataStack.delegates.remove(self)
         actualizeCache()
     }

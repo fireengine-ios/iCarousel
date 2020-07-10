@@ -12,8 +12,6 @@ final class FileInfoPresenter: BasePresenter {
     var interactor: FileInfoInteractorInput!
     var router: FileInfoRouterInput!
     
-    var fileInfoModuleOutput: FileInfoModuleOutput?
-    
     // MARK : BasePresenter
     
     override func outputView() -> Waiting? {
@@ -50,14 +48,11 @@ extension FileInfoPresenter: FileInfoInteractorOutput {
             view.startActivityIndicator()
             interactor.getAlbum(for: object)
         } else {
-            view.setObject(object: object)
+            view.setObject(object)
         }
     }
     
     func updated() {
-        if let item = interactor.item {
-            fileInfoModuleOutput?.didRenameItem(item)
-        }
         asyncOperationSuccess()
         view.goBack()
     }
@@ -65,7 +60,7 @@ extension FileInfoPresenter: FileInfoInteractorOutput {
     func albumForUuidSuccessed(album: AlbumServiceResponse) {
         let albumItem = AlbumItem(remote: album)
         view.showViews()
-        view.setObject(object: albumItem)
+        view.setObject(albumItem)
         view.stopActivityIndicator()
     }
     

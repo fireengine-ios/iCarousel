@@ -45,6 +45,7 @@ final class MovieCard: BaseCardView {
     @IBOutlet private weak var videoPreviewImageView: LoadingImageView!
     
     private var item: WrapData?
+    private let routerVC = RouterVC()
     
     private var cardType = CardActionType.save {
         didSet {
@@ -91,6 +92,8 @@ final class MovieCard: BaseCardView {
     }
     
     override func viewWillShow() {
+        debugLog("Movie Card - start load image")
+        videoPreviewImageView.setLogs(enabled: true)
         videoPreviewImageView.loadImage(with: item)
     }
     
@@ -100,7 +103,7 @@ final class MovieCard: BaseCardView {
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .movieCard, serverObject: cardObject)
+        CardsManager.default.stopOperationWith(type: .movieCard, serverObject: cardObject)
     }
     
     @IBAction private func actionVideoViewButton(_ sender: UIButton) {
@@ -129,7 +132,11 @@ final class MovieCard: BaseCardView {
                 case .success(_):
                     self?.cardType = .display
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
+                    if error.isOutOfSpaceError {
+                        self?.routerVC.showFullQuotaPopUp()
+                    } else {
+                        UIApplication.showErrorAlert(message: error.description)
+                    }
                 }
             }
         }
@@ -148,10 +155,14 @@ final class MovieCard: BaseCardView {
             status = .active
         }
 
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], status: status)
-        controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = NavigationController(rootViewController: controller)
-        RouterVC().presentViewController(controller: nController)
+        let detailModule = routerVC.filesDetailModule(fileObject: item,
+                                                      items: [item],
+                                                      status: status,
+                                                      canLoadMoreItems: false,
+                                                      moduleOutput: nil)
+
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        routerVC.presentViewController(controller: nController)
     }
     
     override func spotlightHeight() -> CGFloat {
@@ -189,7 +200,7 @@ extension MovieCard: ItemOperationManagerViewProtocol {
         }
         
         if items.first(where: { $0.uuid == uuid }) != nil {
-            CardsManager.default.stopOperationWithType(type: .movieCard, serverObject: cardObject)
+            CardsManager.default.stopOperationWith(type: .movieCard, serverObject: cardObject)
         }
     }
 }

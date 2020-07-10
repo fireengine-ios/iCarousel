@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +15,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="View" customClass="PermissionsView" customModule="lifebox" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="View" customClass="PermissionsView" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="362" height="130"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -43,7 +41,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q0l-s5-sKr" userLabel="Description View" customClass="IntrinsicEmptiableTextView" customModule="lifebox" customModuleProvider="target">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q0l-s5-sKr" userLabel="Description View" customClass="IntrinsicEmptiableTextView" customModule="LifeTech_lifedrive" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="70" width="331" height="17"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
@@ -54,7 +52,7 @@
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XhQ-9N-Hd4">
                     <rect key="frame" x="295" y="16" width="51" height="31"/>
                     <connections>
-                        <action selector="permissionSwitchValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="IgA-WU-6Dt"/>
+                        <action selector="permissionSwitchTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="WA6-Ez-38u"/>
                     </connections>
                 </switch>
             </subviews>
@@ -80,7 +78,7 @@
             </connections>
             <point key="canvasLocation" x="118" y="-35"/>
         </view>
-        <customObject id="2Cb-Ii-y0R" customClass="PermissionsDesigner" customModule="lifebox" customModuleProvider="target">
+        <customObject id="2Cb-Ii-y0R" customClass="PermissionsDesigner" customModule="LifeTech_lifedrive" customModuleProvider="target">
             <connections>
                 <outlet property="descriptionView" destination="q0l-s5-sKr" id="Utn-Ue-a50"/>
                 <outlet property="informativeLabel" destination="YOm-67-OGW" id="g9j-Rd-qAt"/>

@@ -12,4 +12,9 @@ extension Int64 {
     var bytesString: String {
         return ByteCountFormatter.string(fromByteCount: self, countStyle: .binary)
     }
+    
+    var intValue: Int {
+        return Int(exactly: self) ?? NSNumber(value: self).intValue
+    }
+    
 }

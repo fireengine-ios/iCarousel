@@ -198,9 +198,6 @@ extension IAPManager {
         debugLog("IAPManager completeTransaction...")
         
         if purchaseInProgress {
-            if let type = MenloworksSubscriptionProductID(rawValue: transaction.payment.productIdentifier) {
-                MenloworksAppEvents.onSubscriptionPurchaseCompleted(type)
-            }
             purchaseHandler(.success(transaction.payment.productIdentifier))
         }
         

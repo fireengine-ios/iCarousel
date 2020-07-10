@@ -61,11 +61,8 @@ final class BiometricsManagerImp: BiometricsManager {
         get { return defaults?.bool(forKey: BiometricsManagerImp.isEnabledKey) ?? false}
         set {
             #if MAIN_APP
-            if isEnabled != newValue {
-                MenloworksTagsService.shared.onTouchIDSettingsChanged(newValue)
-            }
             if newValue {
-                MenloworksEventsService.shared.onTouchIDSet()
+                NetmeraExtensionsService.sendEvent(event: TouchidSet(isEnabled: newValue))
             }
             #endif
             defaults?.set(newValue, forKey: BiometricsManagerImp.isEnabledKey)

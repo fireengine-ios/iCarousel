@@ -153,10 +153,8 @@ extension FacebookAccountConnectionCell: ImportFromFBViewInput {
     }
     
     func importStartSuccess() {
-        MenloworksEventsService.shared.onFacebookTransfered()
-        MenloworksTagsService.shared.facebookImport(isOn: true)
-        
         isImportOn = true
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.snackbarMessageImportFromFBStarted)
     }
     
     func importStartFailure(errorMessage: String) {

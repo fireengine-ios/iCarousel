@@ -8,7 +8,7 @@
 
 class UploadFilesSelectionRouter: BaseFilesGreedRouter {
     @objc override func showBack() {
-        view.dismiss(animated: true, completion: {
+        view.dismiss(animated: false, completion: {
             PremiumService.shared.showPopupForNewUserIfNeeded()
         })
     }

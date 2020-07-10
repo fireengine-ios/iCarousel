@@ -27,7 +27,7 @@ class RemoteItemsService {
     
     var fieldValue: FieldValue
     
-    let remote = SearchService(transIdLogging: true)
+    let remote = SearchService()
     
     private let queueOperations: OperationQueue
     
@@ -160,22 +160,17 @@ class RemoteItemsService {
         debugLog("RemoteItemsService getSuggestion")
 
         let parametrs = SuggestionParametrs(withText: text)
-        remote.suggestion(param: parametrs, success: { [weak self] response in
-            debugLog("RemoteItemsService getSuggestion SearchService suggestion success")
+        remote.suggestion(param: parametrs, success: { response in
             guard let suggestionResponse = response as? SuggestionResponse else {
                 fail(ErrorResponse.failResponse(response))
                 return
             }
             
             success(suggestionResponse.list)
-            self?.remote.debugLogTransIdIfNeeded(headers: suggestionResponse.response?.allHeaderFields, method: "getSuggestion")
-        }, fail: { [weak self] errorResponse in
-            errorResponse.showInternetErrorGlobal()
-            debugLog("RemoteItemsService getSuggestion SearchService suggestion fail")
 
+        }, fail: { errorResponse in
+            errorResponse.showInternetErrorGlobal()
             fail(errorResponse)
-            
-            self?.remote.debugLogTransIdIfNeeded(errorResponse: errorResponse, method: "getSuggestion")
         })
     }
     
@@ -197,7 +192,7 @@ final class NextPageOperation: Operation {
 
     
     init(requestParam: SearchByFieldParameters, success: ListRemoteItems?, fail: FailRemoteItems?) {
-        self.searchService = SearchService(transIdLogging: true)
+        self.searchService = SearchService()
         self.requestParam = requestParam
         self.fail = fail
         self.success = success
@@ -233,8 +228,6 @@ final class NextPageOperation: Operation {
                 let list = resultResponse.compactMap { WrapData(remote: $0) }
                 self.success?(list)
                 
-                self.searchService.debugLogTransIdIfNeeded(headers: (response as? SearchResponse)?.response?.allHeaderFields, method: "searchByField")
-                
                 self.semaphore.signal()
             }
         }, fail: { [weak self] errorResponse in
@@ -247,8 +240,6 @@ final class NextPageOperation: Operation {
             }
             
             self?.fail?()
-            
-            self?.searchService.debugLogTransIdIfNeeded(errorResponse: errorResponse, method: "searchByField")
 
             self?.semaphore.signal()
         })
@@ -329,20 +320,14 @@ class StoryService: RemoteItemsService {
                 fail?()
                 return
             }
-            
-            debugLog("StoryService remote searchStories success")
-            
+
             self?.currentPage += 1
-            let list = resultResponse.list.flatMap { Item(remote: $0) }
+            let list = resultResponse.list.compactMap { Item(remote: $0) }
             success?(list)
-            
-            self?.remote.debugLogTransIdIfNeeded(headers: resultResponse.response?.allHeaderFields, method: "search")
-        }, fail: { [weak self] errorResponse in
+
+        }, fail: { errorResponse in
             errorResponse.showInternetErrorGlobal()
-            debugLog("StoryService remote searchStories fail")
             fail?()
-            
-            self?.remote.debugLogTransIdIfNeeded(errorResponse: errorResponse, method: "search")
         })
     }
 }

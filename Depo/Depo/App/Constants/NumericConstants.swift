@@ -16,8 +16,15 @@ struct NumericConstants {
     static let verificationCharacterLimit = 6
     static let verificationTimerLimit = 120//in seconds
     static let maxVerificationAttempts = 3
+    
+    #if LIFEBOX
     static let showFAQViewAttempts = 3
     static let showSupportViewAttempts = 6
+    #elseif LIFEDRIVE
+    static let showFAQViewAttempts = 3000
+    static let showSupportViewAttempts = 6000
+    #endif
+    
     
     static let maxDetailsLoadingAttempts = 5
     static let detailsLoadingTimeAwait = UInt32(2)
@@ -61,6 +68,7 @@ struct NumericConstants {
     static let fourGigabytes: UInt64 = 4 * 1024 * 1024 * 1024
     static let hundredMegabytes: UInt64 = 100 * 1024 * 1024
     static let copyVideoBufferSize = 4096 //old 1024 * 1024
+    static let defaultResumableUploadChunkSize = 15728640 // 15MB
     
     static let scaleTransform = CGAffineTransform(scaleX: 0.0001, y: 0.0001)
     

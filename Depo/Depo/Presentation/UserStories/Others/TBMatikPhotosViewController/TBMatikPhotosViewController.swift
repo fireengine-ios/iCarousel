@@ -349,7 +349,6 @@ extension TBMatikPhotosViewController: BaseItemInputPassingProtocol {
     func stopModeSelected() { }
     func printSelected() { }
     func changeCover() { }
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) { }
     func openInstaPick() { }
     
     func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {

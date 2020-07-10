@@ -19,11 +19,13 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     func viewIsReady() {
         interactor.trackScreen()
+
         TurkcellUpdaterService().startUpdater(controller: self.view as? UIViewController) { [weak self] shouldProceed in
             guard shouldProceed else {
                 self?.showUpdateIsRequiredPopup()
                 return
             }
+
             self?.showPasscodeIfNeed()
         }
     }
@@ -41,10 +43,10 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     }
     
     private func showLandingPagesIfNeeded() {
-        if storageVars.isNewAppVersionFirstLaunchTurkcellLanding {
-            router.navigateToLandingPages(isTurkCell: false)
-        } else {
+        if storageVars.isShownLanding {
             router.navigateToOnboarding()
+        } else {
+            router.navigateToLandingPages(isTurkCell: false)
         }
     }
     
@@ -83,18 +85,15 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
     
     func onSuccessLogin() {
         interactor.checkEULA()
-        MenloworksAppEvents.onStartWithLogin(true)
     }
     
     func onSuccessLoginTurkcell() {
         turkcellLogin = true
         interactor.checkEULA()
-        MenloworksAppEvents.onStartWithLogin(true)
     }
     
     func onFailLogin() {
         showLandingPagesIfNeeded()
-        MenloworksAppEvents.onStartWithLogin(false)
     }
     
     func onNetworkFail() {
@@ -127,24 +126,24 @@ final class SplashPresenter: BasePresenter, SplashModuleInput, SplashViewOutput,
         AuthoritySingleton.shared.checkNewVersionApp()
         
         if turkcellLogin {
-            if storageVars.autoSyncSet {
-                if !Device.isIpad, storageVars.isNewAppVersionFirstLaunchTurkcellLanding {
-                    storageVars.isNewAppVersionFirstLaunchTurkcellLanding = false
+            if storageVars.isAutoSyncSet {
+                if !Device.isIpad, !storageVars.isShownLanding {
+                    storageVars.isShownLanding = true
                     router.navigateToLandingPages(isTurkCell: turkcellLogin)
                 } else {
                     router.navigateToApplication()
                     openLink()
                 }
             } else {
-                if !Device.isIpad, storageVars.isNewAppVersionFirstLaunchTurkcellLanding {
-                    storageVars.isNewAppVersionFirstLaunchTurkcellLanding = false
+                if !Device.isIpad, !storageVars.isShownLanding {
+                    storageVars.isShownLanding = true
                     router.navigateToLandingPages(isTurkCell: turkcellLogin)
                 } else {
                     openAutoSyncIfNeeded()
                 }
             }
         } else {
-            if storageVars.autoSyncSet {
+            if storageVars.isAutoSyncSet {
                 router.navigateToApplication()
                 openLink()
             } else {

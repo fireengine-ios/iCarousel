@@ -120,7 +120,7 @@ extension PasscodeManagerImp: PasscodeManager {
     
     private func canShowBiometrics() -> Bool {
         #if MAIN_APP
-        if UIApplication.shared.applicationState != .active {
+        if ApplicationStateHelper.shared.safeApplicationState != .active {
             return false
         }
         #endif

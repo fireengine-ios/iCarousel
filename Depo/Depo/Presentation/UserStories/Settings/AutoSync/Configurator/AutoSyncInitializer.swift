@@ -9,23 +9,9 @@
 import UIKit
 
 class AutoSyncModuleInitializer: NSObject {
-
-    //Connect with object on storyboard
-    @IBOutlet weak var autosyncViewController: AutoSyncViewController!
-
-    override func awakeFromNib() {
-
-        let configurator = AutoSyncModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: autosyncViewController)
-    }
     
-    func setupVC() {
-        let configurator = AutoSyncModuleConfigurator()
-        configurator.configureModuleForViewInput(viewInput: autosyncViewController)
-    }
-    
-    class func initializeViewController(with nibName: String, fromSettings: Bool = false) -> UIViewController {
-        let viewController = AutoSyncViewController(nibName: nibName, bundle: nil)
+    class func initializeViewController(fromSettings: Bool = false) -> UIViewController {
+        let viewController = AutoSyncViewController.initFromNib()
         let configurator = AutoSyncModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController, fromSettings: fromSettings)
         return viewController

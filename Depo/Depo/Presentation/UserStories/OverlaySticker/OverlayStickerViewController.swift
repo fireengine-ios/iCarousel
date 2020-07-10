@@ -25,6 +25,7 @@ final class OverlayStickerViewController: ViewController {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private let stickerService = SmashServiceImpl()
     private lazy var overlayAnimationService = OverlayAnimationService()
+    private lazy var router = RouterVC()
     
     private lazy var applyButton: UIBarButtonItem = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
@@ -42,25 +43,24 @@ final class OverlayStickerViewController: ViewController {
     
     private var isFullScreen = false
     
-    var selectedImage: UIImage?
+    var selectedImage: UIImage? {
+        didSet {
+            setupEnvironment()
+        }
+    }
+    
     var imageName: String?
-    var smashCoordinator: SmashServiceProtocol?
+    var smashActionService: SmashActionServiceProtocol?
 
     private lazy var defaultName = UUID().uuidString
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectStickerType(type: .gif)
-        setupImage()
         navigationController?.navigationBar.isHidden = true
         
         view.backgroundColor = .black
         statusBarColor = .black
-        overlayingStickerImageView.stickersDelegate = self
-        overlayStickerViewControllerDataSource.delegate = self
-        overlayStickerViewControllerDataSource.setStateForSelectedType(type: .gif)
 
-        addTapGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,23 +87,30 @@ final class OverlayStickerViewController: ViewController {
             return
         }
 
-        smashCoordinator?.smashConfirmPopUp { [weak self] isConfirmed in
-            
+        smashActionService?.startOperation { [weak self] isConfirmed in
             guard let self = self else {
                 return
             }
             
+            let eventLable = self.overlayingStickerImageView.getAttachmentInfoForAnalytics()
             self.analyticsService.logScreen(screen: .smashConfirmPopUp)
-            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .smashSave, eventLabel: self.overlayingStickerImageView.getAttachmentInfoForAnalytics())
-            self.analyticsService.trackCustomGAEvent(eventCategory: .popUp, eventActions: .smashConfirmPopUp, eventLabel: isConfirmed ? .ok : .cancel)
-        
+            self.analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                                     eventActions: .smashSave,
+                                                     eventLabel: eventLable)
+            self.analyticsService.trackCustomGAEvent(eventCategory: .popUp,
+                                                     eventActions: .smashConfirmPopUp,
+                                                     eventLabel: isConfirmed ? .ok : .cancel)
+            
             let gifsToStickersIds = self.overlayingStickerImageView.getAttachmentGifStickersIDs()
-            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SmashSave(action: isConfirmed ? .save : .cancel, stickerId: gifsToStickersIds.gifsIDs, gifId: gifsToStickersIds.stickersIDs))
+            
+            let event = NetmeraEvents.Actions.SmashSave(action: isConfirmed ? .save : .cancel,
+                                                        stickerId: gifsToStickersIds.stickersIDs,
+                                                        gifId: gifsToStickersIds.gifsIDs)
+            AnalyticsService.sendNetmeraEvent(event: event)
             
             if isConfirmed {
-                
                 self.showSpinnerIncludeNavigationBar()
-            
+                
                 guard let (originalImage, attachments) = self.overlayingStickerImageView.getCondition() else {
                     assertionFailure()
                     return
@@ -160,16 +167,19 @@ final class OverlayStickerViewController: ViewController {
 
     private func showCompletionPopUp() {
         analyticsService.logScreen(screen: .saveSmashSuccessfullyPopUp)
-        smashCoordinator?.smashSuccessed()
+        smashActionService?.smashSuccessed()
     }
     
     private func showPhotoVideoPreview(item: WrapData) {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SmashPreview())
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], status: item.status)
-        
-        controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = NavigationController(rootViewController: controller)
-        RouterVC().presentViewController(controller: nController)
+        let detailModule = router.filesDetailModule(fileObject: item,
+                                                    items: [item],
+                                                    status: item.status,
+                                                    canLoadMoreItems: false,
+                                                    moduleOutput: nil)
+
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        router.presentViewController(controller: nController)
         
         showCompletionPopUp()
     }
@@ -180,13 +190,15 @@ final class OverlayStickerViewController: ViewController {
             
             if libraryIsAvailable == true {
                 
-                let commonCompletionHandler: (_ remoteItem: WrapData?)->() = { [weak self] remoteItem in
+                let commonCompletionHandler: (WrapData?, Error?)->() = { [weak self] remoteItem, error in
                     DispatchQueue.main.async {
                         self?.hideSpinnerIncludeNavigationBar()
                         self?.close { [weak self] in
                             if let itemToShow = remoteItem {
                                 self?.showPhotoVideoPreview(item: itemToShow)
                                 self?.analyticsService.logScreen(screen: .smashPreview)
+                            }  else if error?.isOutOfSpaceError == true {
+                                self?.onOutOfSpaceError()
                             }
                         }
                     }
@@ -200,14 +212,17 @@ final class OverlayStickerViewController: ViewController {
                             self?.uploadItem(item: localItem, completion: { uploadResult in
                                 switch uploadResult {
                                 case .success(let remote):
+                                    self?.removeImage(at: result.url)
                                     remote?.patchToPreview = localItem.patchToPreview
-                                    commonCompletionHandler(remote)
-                                case .failed(_):
-                                    commonCompletionHandler(nil)
+                                    commonCompletionHandler(remote, nil)
+                                    
+                                case .failed(let error):
+                                    commonCompletionHandler(nil, error)
                                 }
                             })
-                        case .failed(_):
-                            commonCompletionHandler(nil)
+                            
+                        case .failed(let error):
+                            commonCompletionHandler(nil, error)
                         }
                     })
                     
@@ -234,12 +249,26 @@ final class OverlayStickerViewController: ViewController {
         }
     }
     
-    private func setupImage() {
+    private func onOutOfSpaceError() {
+        RouterVC().showFullQuotaPopUp()
+    }
+    
+    private func setupEnvironment() {
         guard let selectedImage = selectedImage else {
             assertionFailure()
             return
         }
+        
+        loadView()
+        view.backgroundColor = .black
+        
+        selectStickerType(type: .gif)
+        
+        overlayingStickerImageView.stickersDelegate = self
+        overlayStickerViewControllerDataSource.delegate = self
+        overlayStickerViewControllerDataSource.loadNext()
         overlayingStickerImageView.image = selectedImage
+        addTapGesture()
     }
     
     private func setupNavigationBar() {
@@ -400,6 +429,14 @@ extension OverlayStickerViewController {
             completion(.success(CreateOverlayStickersSuccessResult(url: path, type: .image)))
         } catch {
             completion(.failure(.unknown))
+        }
+    }
+    
+    private func removeImage(at url: URL) {
+        do {
+            try FileManager.default.removeItem(at: url)
+        } catch {
+            print(error.description)
         }
     }
 }

@@ -39,7 +39,7 @@ class AlbumDetailModuleInitializer: NSObject {
         presenter.moduleOutput = moduleOutput
         presenter.albumDetailModuleOutput = moduleOutput as? AlbumDetailModuleOutput
         
-        let interactor = AlbumDetailInteractor(remoteItems: AlbumDetailService(requestSize: 140))
+        let interactor = AlbumDetailInteractor(remoteItems: AlbumDetailService(requestSize: 40))
         interactor.album = album
         
         // FIXME: need to change folder property to uuid in base class

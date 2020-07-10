@@ -28,19 +28,32 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
         basePassingPresenter?.successPopupClosed()
     }
     
+    func successPopupWillAppear() {
+        basePassingPresenter?.successPopupWillAppear()
+    }
+    
     private func operationFailed(with type: ElementTypes) {
         completeAsyncOperationEnableScreen()
         basePassingPresenter?.operationFailed(withType: type)
     }
     
     func operationStarted(type: ElementTypes) {
+        basePassingPresenter?.stopModeSelected()
         startAsyncOperationDisableScreen()
+    }
+    
+    func operationCancelled(type: ElementTypes) {
+        completeAsyncOperationEnableScreen()
     }
     
     func dismiss(animated: Bool) {} /// overriding
     
     func showWrongFolderPopup() {
         basePassingPresenter?.showAlert(with: TextConstants.errorSameDestinationFolder)
+    }
+    
+    func stopSelectionMode() {
+        basePassingPresenter?.stopModeSelected()
     }
     
     // MARK: - Base presenter
@@ -51,25 +64,6 @@ class MoreFilesActionsPresenter: BasePresenter, MoreFilesActionsModuleInput, Mor
     
     func showOutOfSpaceAlert(failedType type: ElementTypes) {
         operationFailed(with: type)
-        
-        let controller = PopUpController.with(title: TextConstants.syncOutOfSpaceAlertTitle,
-                                              message: TextConstants.syncOutOfSpaceAlertText,
-                                              image: .none,
-                                              firstButtonTitle: TextConstants.syncOutOfSpaceAlertCancel,
-                                              secondButtonTitle: TextConstants.upgrade,
-                                              secondAction: { vc in
-                                                vc.close(completion: {
-                                                    let router = RouterVC()
-                                                    if router.navigationController?.presentedViewController != nil {
-                                                        router.pushOnPresentedView(viewController: router.packages)
-                                                    } else {
-                                                        router.pushViewController(viewController: router.packages)
-                                                    }
-                                                })
-        })
-        
-        DispatchQueue.toMain {
-            UIApplication.topController()?.present(controller, animated: false, completion: nil)
-        }
+        RouterVC().showFullQuotaPopUp()
     }
 }

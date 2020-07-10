@@ -79,25 +79,21 @@ final class FaceImageViewController: ViewController, NibInit {
     
     private func goToPremium() {
         let router = RouterVC()
-        router.pushViewController(viewController: router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
+        router.pushViewController(viewController: router.premium())
     }
     
     private func sendAnaliticsForFaceImageAllowed(isAllowed: Bool) {
         analyticsManager.trackCustomGAEvent(eventCategory: .functions, eventActions: .faceRecognition, eventLabel: .faceRecognition(isAllowed))
         
-        MenloworksTagsService.shared.faceImageRecognition(isOn: isAllowed)
         if isAllowed {
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FaceImageGrouping(action: .on))
-            MenloworksEventsService.shared.onFaceImageRecognitionOn()
         } else {
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.FaceImageGrouping(action: .off))
-            MenloworksEventsService.shared.onFaceImageRecognitionOff()
         }
     }
     
     private func showFaceImageWaitAlert() {
-        let popUp = PopUpController.with(title: nil, message: TextConstants.faceImageWaitAlbum, image: .none, buttonTitle: TextConstants.ok)
-        RouterVC().presentViewController(controller: popUp)
+        SnackbarManager.shared.show(type: .critical, message: TextConstants.faceImageWaitAlbum, action: .ok)
     }
     
     // MARK: - face image

@@ -71,7 +71,7 @@ final class LaunchCampaignCard: BaseCardView {
     override func deleteCard() {
         /// we don't need: super.deleteCard()
         CardsManager.default.manuallyDeleteCardsByType(type: .launchCampaign, homeCardResponse: cardObject)
-        CardsManager.default.stopOperationWithType(type: .launchCampaign, serverObject: cardObject)
+        CardsManager.default.stopOperationWith(type: .launchCampaign, serverObject: cardObject)
     }
     
     override func layoutSubviews() {

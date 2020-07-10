@@ -132,7 +132,7 @@ final class LandingPageViewController: ViewController, UIScrollViewDelegate {
     
     @IBAction private func onStartUsingButton() {
         let storageVars: StorageVars = factory.resolve()
-        storageVars.isNewAppVersionFirstLaunchTurkcellLanding = false
+        storageVars.isShownLanding = true
         
         if isTurkcell {
             openAutoSyncIfNeeded()

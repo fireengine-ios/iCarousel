@@ -11,7 +11,7 @@ apps = [
             versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
             ictsContainerId: '743', // ICT Store
             appleId: '665036334', // Apple ID property in the App Information section in App Store Connect,
-            prodTeamID: '7YZS5NTGYH',
+            prodTeamID: '693N5K66ZJ',
 	    xcodeSchema: 'TC_Depo_LifeTech',
             xcodeTarget: 'TC_Depo_LifeTech'
             //xcodeSchema: 'TC_Depo_LifeTech_Bundle',
@@ -63,7 +63,7 @@ def flavors = [
 artifactory = Artifactory.server 'turkcell-artifactory'
 
 branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
-isDev = branchName == 'special_billo'
+isDev = branchName == 'pre_release_v2'
 echo "Branch Name: ${branchName}"
 
 def readVersion = { app ->

@@ -41,15 +41,7 @@ class CameraService {
         
         switch status {
         case .authorized:            
-            if (Device.operationSystemVersionLessThen(10)) {
-                PHPhotoLibrary.requestAuthorization({ status in
-                    if status == .authorized {
-                        photoLibraryGranted(true, status)
-                    }
-                })
-            } else {
-                photoLibraryGranted(true, status)
-            }
+            photoLibraryGranted(true, status)
         case .notDetermined, .restricted:
             passcodeStorage.systemCallOnScreen = true
             

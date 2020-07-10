@@ -96,7 +96,7 @@ final class CreateStoryViewController: BaseViewController {
     
     private var selectedImages: [Item]
     
-    private lazy var createStoryService = CreateStoryService(transIdLogging: true)
+    private lazy var createStoryService = CreateStoryService()
     private lazy var activityManager = ActivityIndicatorManager()
     private let dataSource = CreateStoryMusicService()
 

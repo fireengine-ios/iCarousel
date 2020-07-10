@@ -77,7 +77,7 @@ class StorageCard: BaseCardView {
     override func deleteCard() {
         super.deleteCard()
         if let type = operationType {
-            CardsManager.default.stopOperationWithType(type: type)
+            CardsManager.default.stopOperationWith(type: type)
         }
     }
     

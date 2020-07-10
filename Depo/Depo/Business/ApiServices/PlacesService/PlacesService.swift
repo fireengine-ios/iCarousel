@@ -24,7 +24,7 @@ final class PlacesService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getPlacesAlbum(id: Int, status: ItemStatus, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
+    func getPlacesAlbum(id: Int, status: ItemStatus, success:@escaping AlbumOperationResponse, fail:@escaping FailResponse) {
         debugLog("PlacesService getPlacesAlbumWithID")
         
         let param = PlacesAlbumParameters(id: id, status: status)
@@ -46,8 +46,6 @@ final class PlacesService: BaseRequestService {
         let parameters = DeletePhotosFromPlacesAlbum(albumUUID: uuid, photos: photos)
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            debugLog("PeopleService deletePhotosFromAlbum success")
-            
             success?()
         }, fail: fail)
         executePutRequest(param: parameters, handler: handler)
@@ -55,7 +53,7 @@ final class PlacesService: BaseRequestService {
 }
 
 final class PlacesItemsService: RemoteItemsService {
-    private let service = PlacesService(transIdLogging: true)
+    private let service = PlacesService()
     
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .image)
@@ -72,12 +70,10 @@ final class PlacesItemsService: RemoteItemsService {
 
             success?(response.list.map({ PlacesItem(response: $0) }))
             self?.currentPage += 1
-            
-            self?.service.debugLogTransIdIfNeeded(headers: response.response?.allHeaderFields, method: "getPlaces")
-        }, fail: { [weak self] error in
+
+        }, fail: { error in
             error.showInternetErrorGlobal()
             fail?()
-            self?.service.debugLogTransIdIfNeeded(errorResponse: error, method: "getPlaces")
         })
     }
 }

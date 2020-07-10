@@ -47,6 +47,14 @@ class ViewController: UIViewController {
         viewControllerToPresent.checkModalPresentationStyle()
         super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if preferredNavigationBarStyle == .black {
+            extendedLayoutIncludesOpaqueBars = true
+        }
+    }
 }
 
 extension UIViewController {

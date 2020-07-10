@@ -23,7 +23,11 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
     var moreMenuConfig = [ElementTypes]()
     
+    private let peopleService = PeopleService()
+    
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var accountService = AccountService()
+    private let authorityStorage = AuthoritySingleton.shared
     
     var setupedMoreMenuConfig: [ElementTypes] {
         return moreMenuConfig
@@ -54,6 +58,8 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         } else if let index = items.firstIndex(where: { $0.uuid == fileObject.uuid }) {
             selectedIndex = index
         }
+        
+        
     }
     
     func onViewIsReady() {
@@ -75,37 +81,19 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             return
         }
         
-        let isRightSwipe = index == array.count - 1
-        
-        let removedObject = array[index]
-            
         array.remove(at: index)
 
         if index >= array.count {
             selectedIndex = array.count - 1
         }
-        
-        switch type {
-        case .hide, .unhide, .delete:
-            ///its already being called from different place, we dont need to call
-            break
-        case .removeFromAlbum, .removeFromFaceImageAlbum:
-            ItemOperationManager.default.filesRomovedFromAlbum(items: [removedObject], albumUUID: albumUUID ?? "")
-        default:
-            break
-        }
-        
+                
         if !array.isEmpty {
             let nextIndex = index == array.count ? array.count - 1 : index
-            output.updateItems(objects: array, selectedIndex: nextIndex, isRightSwipe: isRightSwipe)
+            output.updateItems(objects: array, selectedIndex: nextIndex)
+        } else {
+            output.onLastRemoved()
         }
     }
-    
-    func deletePhotosFromPeopleAlbum(items: [BaseDataSourceItem], id: Int64) { }
-    
-    func deletePhotosFromThingsAlbum(items: [BaseDataSourceItem], id: Int64) { }
-    
-    func deletePhotosFromPlacesAlbum(items: [BaseDataSourceItem], uuid: String) { }
     
     func replaceUploaded(_ item: WrapData) {
         if let indexToChange = array.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) {
@@ -115,11 +103,144 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     }
     
     func trackVideoStart() {
-        analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: .storyOrVideo)
+        if
+            let index = currentItemIndex,
+            let item = allItems[safe: index],
+            let metadata = item.metaData {
+            analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: metadata.isVideoSlideshow ? .videoStartStroy : .videoStartVideo)
+        } else {
+            analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .startVideo, eventLabel: .storyOrVideo)
+        }
         analyticsService.trackEventTimely(eventCategory: .videoAnalytics, eventActions: .everyMinuteVideo)
     }
     
     func trackVideoStop() {
         analyticsService.stopTimelyTracking()
+    }
+    
+    func appendItems(_ items: [Item]) {
+        array.append(contentsOf: items)
+    }
+    
+    func onRename(newName: String) {
+        guard let index = currentItemIndex,
+            let item = allItems[safe: index] else {
+                return
+        }
+        
+        guard !newName.isEmpty else {
+            if let name = item.name {
+                output.cancelSave(use: name)
+            } else {
+                output.updated()
+            }
+            
+            return
+        }
+        
+            let renameFile = RenameFile(uuid: item.uuid, newName: newName)
+            FileService().rename(rename: renameFile, success: { [weak self] in
+                DispatchQueue.main.async {
+                    item.name = newName
+                    self?.output.updated()
+                    ItemOperationManager.default.didRenameItem(item)
+                }
+                }, fail: { [weak self] error in
+                    DispatchQueue.main.async {
+                        self?.output.failedUpdate(error: error)
+                    }
+            })
+    }
+    
+    func onValidateName(newName: String) {
+        guard let index = currentItemIndex,
+            let item = allItems[safe: index] else {
+                return
+        }
+        if newName.isEmpty {
+            if let name = item.name {
+                output.cancelSave(use: name)
+            }
+        } else {
+            output.didValidateNameSuccess(name: newName)
+        }
+    }
+    
+    func getPeopleAlbum(with item: PeopleItem, id: Int64) {
+        let successHandler: AlbumOperationResponse = { [weak self] album in
+            DispatchQueue.main.async {
+                self?.output.didLoadAlbum(album, forItem: item)
+            }
+        }
+        
+        let failHandler: FailResponse = { [weak self] error in
+            DispatchQueue.main.async {
+                self?.output.didFailedLoadAlbum(error: error)
+            }
+        }
+        
+        peopleService.getPeopleAlbum(id: Int(truncatingIfNeeded: id),
+                                     status: item.status,
+                                     success: successHandler,
+                                     fail: failHandler)
+    }
+    
+    func getFIRStatus(success: @escaping (SettingsInfoPermissionsResponse) -> (), fail: @escaping (Error) -> ()) {
+        accountService.getSettingsInfoPermissions { response in
+            switch response {
+            case .success(let result):
+                success(result)
+            case .failed(let error):
+                fail(error)
+            }
+        }
+    }
+    
+    func enableFIR(completion: VoidHandler?) {
+        accountService.changeFaceImageAndFacebookAllowed(isFaceImageAllowed: true,
+                                                         isFacebookAllowed: true) { [weak self] response in
+            DispatchQueue.toMain {
+                switch response {
+                case .success(let result):
+                    NotificationCenter.default.post(name: .changeFaceImageStatus, object: self)
+                    if result.isFaceImageAllowed == true {
+                        DispatchQueue.main.async {
+                            completion?()
+                        }
+                    }
+                case .failed(let error):
+                    UIApplication.showErrorAlert(message: error.description)
+                    
+                }
+            }
+        }
+    }
+    
+    func getAuthority() {
+        accountService.permissions { [weak self] result in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self?.output.didLoadFaceRecognitionPermissionStatus(response.hasPermissionFor(.faceRecognition))
+                }
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
+    }
+    
+    func getPersonsOnPhoto(uuid: String, completion: VoidHandler? = nil) {
+        peopleService.getPeopleForMedia(with: uuid, success: { [weak self] peopleThumbnails in
+            DispatchQueue.main.async {
+                self?.output.updatePeople(items: peopleThumbnails)
+                    completion?()
+            }
+        }) { [weak self] (errorResponse) in
+            DispatchQueue.main.async {
+                self?.output.failedUpdate(error: errorResponse)
+                self?.output.updatePeople(items: [])
+                    completion?()
+            }
+        }
     }
 }

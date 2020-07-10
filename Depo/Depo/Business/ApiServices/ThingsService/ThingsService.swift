@@ -24,7 +24,7 @@ final class ThingsService: BaseRequestService {
         executeGetRequest(param: param, handler: handler)
     }
     
-    func getThingsAlbum(id: Int, status: ItemStatus, success:@escaping (_ album: AlbumServiceResponse) -> Void, fail:@escaping FailResponse) {
+    func getThingsAlbum(id: Int, status: ItemStatus, success:@escaping AlbumOperationResponse, fail:@escaping FailResponse) {
         debugLog("ThingsService getThingsAlbumWithID")
         
         let param = ThingsAlbumParameters(id: id, status: status)
@@ -46,8 +46,6 @@ final class ThingsService: BaseRequestService {
         let parameters = DeletePhotosFromThingsAlbum(id: id, photos: photos)
         
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            debugLog("ThingsService deletePhotosFromAlbum success")
-            
             success?()
         }, fail: fail)
         executePostRequest(param: parameters, handler: handler)
@@ -64,7 +62,7 @@ final class ThingsService: BaseRequestService {
 //}
 
 final class ThingsItemsService: RemoteItemsService {
-    private let service = ThingsService(transIdLogging: true)
+    private let service = ThingsService()
     
     init(requestSize: Int) {
         super.init(requestSize: requestSize, fieldValue: .image)
@@ -79,16 +77,12 @@ final class ThingsItemsService: RemoteItemsService {
                 return
             }
 
-            success?(response.list.map({ ThingsItem(response: $0) }))
+            success?(response.list.map { ThingsItem(response: $0) })
             self?.currentPage += 1
             
-            self?.service.debugLogTransIdIfNeeded(headers: response.response?.allHeaderFields, method: "getThings")
-            
-        }, fail: { [weak self] error in
+        }, fail: { error in
             error.showInternetErrorGlobal()
             fail?()
-            
-            self?.service.debugLogTransIdIfNeeded(errorResponse: error, method: "getThings")
         })
     }
 }

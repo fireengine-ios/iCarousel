@@ -14,9 +14,25 @@ protocol PhotoVideoDetailInteractorOutput: class {
     
     func goBack()
     
-    func updateItems(objects: [Item], selectedIndex: Int, isRightSwipe: Bool)
+    func updateItems(objects: [Item], selectedIndex: Int)
     
-    func didRemoveFromAlbum(completion: @escaping (() -> Void))
+    func onLastRemoved()
     
     func startAsyncOperation()
+    
+    func cancelSave(use name: String)
+    
+    func updated()
+    
+    func failedUpdate(error: Error)
+    
+    func didValidateNameSuccess(name: String)
+    
+    func updatePeople(items: [PeopleOnPhotoItemResponse])
+    
+    func didLoadAlbum(_ album: AlbumServiceResponse, forItem item: Item)
+    
+    func didFailedLoadAlbum(error: Error)
+    
+    func didLoadFaceRecognitionPermissionStatus(_ isPermitted: Bool)
 }

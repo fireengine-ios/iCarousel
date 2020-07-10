@@ -28,6 +28,8 @@ protocol ItemSyncServiceDelegate: class {
 
 class ItemSyncServiceImpl: ItemSyncService {
     
+    let mediaItemOperationsService = MediaItemOperationsService.shared
+    
     var fileType: FileType = .unknown
     var status: AutoSyncStatus = .undetermined {
         didSet {
@@ -41,7 +43,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     var localItems: [WrapData] = []
     var lastSyncedMD5s: [String] = []
     var storageVars: StorageVars = factory.resolve()
-    var lastInterruptedItemsUUIDs = [String]()
+    private let uploadService = UploadService.default
     
     var photoVideoService: PhotoAndVideoService {
         let fieldValue: FieldValue = (fileType == .image) ? .image : .video
@@ -76,7 +78,6 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl stop")
         
         lastSyncedMD5s.removeAll()
-        lastInterruptedItemsUUIDs.removeAll()
         
         if status != .synced {
             status = .stoped
@@ -87,7 +88,6 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl waitForWiFi")
         
         lastSyncedMD5s.removeAll()
-        lastInterruptedItemsUUIDs.removeAll()
         
         status = .waitingForWifi
         
@@ -106,7 +106,6 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl fail")
         
         lastSyncedMD5s.removeAll()
-        lastInterruptedItemsUUIDs.removeAll()
         status = .failed
     }
     
@@ -116,22 +115,22 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl sync")
 
         guard !status.isContained(in: [.executing, .prepairing]) else {
+            debugLog("ItemSyncServiceImpl isContained")
             return
         }
         
         status = .prepairing
         
         localItems.removeAll()
-        lastInterruptedItemsUUIDs = self.storageVars.interruptedSyncVideoQueueItems
         itemsSortedToUpload { [weak self] items in
-            guard let `self` = self else {
+
+            guard let self = self else {
                 return
             }
             
             if self.status == .prepairing {
                 self.localItems = items
                 self.lastSyncedMD5s = self.localItems.map { $0.md5 }
-                self.lastInterruptedItemsUUIDs.append(contentsOf: self.localItems.map { $0.getTrimmedLocalID() })
                 
                 guard !self.localItems.isEmpty else {
                     self.status = .synced
@@ -148,27 +147,28 @@ class ItemSyncServiceImpl: ItemSyncService {
         debugLog("ItemSyncServiceImpl upload")
 
         guard !items.isEmpty, status != .stoped else {
+            debugLog("ItemSyncServiceImpl status != .stoped")
             return
         }
         
-        UploadService.default.uploadFileList(items: items,
+        uploadService.uploadFileList(items: items,
                                              uploadType: .autoSync,
                                              uploadStategy: .WithoutConflictControl,
                                              uploadTo: .MOBILE_UPLOAD,
                                              success: { [weak self] in
-                                                debugLog("ItemSyncServiceImpl upload UploadService uploadFileList success")
                                                 if self?.status == .executing {
                                                     self?.status = .synced
                                                 }
         }, fail: { [weak self] error in
-            guard let `self` = self else {
+            
+            guard let self = self else {
+                debugLog("ItemSyncServiceImpl self == nil")
                 print("\(#function): self == nil")
                 return
             }
             
-            debugLog("ItemSyncServiceImpl upload UploadService uploadFileList fail")
-            
             if error.description == TextConstants.canceledOperationTextError || error.description == TextConstants.networkConnectionLostTextError {
+                debugLog("ItemSyncServiceImpl \(error.description)")
                 return
             }
             
@@ -178,12 +178,14 @@ class ItemSyncServiceImpl: ItemSyncService {
                 self.delegate?.didReceiveError()
             }
             
-            self.fail()
+            /// do not stop whole autosync if one error is received
+//            self.fail()
             
             }, returnedUploadOperation: { [weak self] operations in
                 guard self?.status != .executing else {
                     /// status == .executing
                     /// means that uploading is already in progress and we've just appended new items
+                    debugLog("returnedUploadOperation already executing")
                     return
                 }
                 
@@ -197,7 +199,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     
     private func appendNewUnsyncedItems() {
         itemsSortedToUpload { [weak self] items in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             

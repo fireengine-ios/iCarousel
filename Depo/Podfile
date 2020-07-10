@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
 inhibit_all_warnings!
 ENV['COCOAPODS_DISABLE_STATS'] = "true"
@@ -11,7 +11,6 @@ end
 
 def core_pods
   shared_pods
-  pod 'Xtremepush-iOS-SDK'
   pod 'Fabric'
   pod 'Crashlytics', '~>  3.14'
   pod 'FBSDKCoreKit'
@@ -41,6 +40,7 @@ def core_pods
 
   pod 'ReachabilitySwift'
   pod 'MBProgressHUD', '~> 1.1.0'
+  pod 'TTGSnackbar'
 
   #logger
   pod 'XCGLogger', '~> 6.0'
@@ -69,6 +69,7 @@ end
 
 target 'LifeTech-LifeboxFileProvider' do
     shared_pods
+    pod 'Netmera'
     pod 'MMWormhole', '~> 2.0.0'
 end
 
@@ -78,6 +79,7 @@ end
 
 target 'LifeTech-autosync-widget' do
     pod 'MMWormhole', '~> 2.0.0'
+    pod 'KeychainSwift', '~> 11.0'
 end
 
 target "LifeTech-NotificationService" do
@@ -100,6 +102,7 @@ target 'LifeboxShared' do
 end
 
 target 'LifeboxFileProvider' do
+    pod 'Netmera'
     shared_pods
     pod 'MMWormhole', '~> 2.0.0'
 end
@@ -110,6 +113,7 @@ end
 
 target 'autosync-widget' do
     pod 'MMWormhole', '~> 2.0.0'
+    pod 'KeychainSwift', '~> 11.0'
 end
 
 target "LifeboxNotificationService" do
@@ -136,6 +140,7 @@ target 'LifeDriveShared' do
 end
 
 target 'LifeDriveFileProvider' do
+    pod 'Netmera'
     shared_pods
     pod 'MMWormhole', '~> 2.0.0'
 end
@@ -146,6 +151,7 @@ end
 
 target 'LifeDrive-widget' do
     pod 'MMWormhole', '~> 2.0.0'
+    pod 'KeychainSwift', '~> 11.0'
 end
 
 target 'LifeDriveNotificationService' do
@@ -164,6 +170,7 @@ target 'LifeTech_LifeDriveShared' do
 end
 
 target 'LifeTech_LifeDriveFileProvider' do
+    pod 'Netmera'
     shared_pods
     pod 'MMWormhole', '~> 2.0.0'
 end
@@ -174,6 +181,7 @@ end
 
 target 'LifeTech_LifeDrive-widget' do
     pod 'MMWormhole', '~> 2.0.0'
+    pod 'KeychainSwift', '~> 11.0'
 end
 
 target 'LifeTech_LifeDriveNotificationService' do
@@ -184,17 +192,24 @@ end
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         if ['XCGLogger', 'SwiftyJSON'].include? "#{target}"
-            print "Setting #{target}'s SWIFT_VERSION to 4.0\n"
+          print "Setting #{target}'s SWIFT_VERSION to 4.0\n"
+          target.build_configurations.each do |config|
+              config.build_settings['SWIFT_VERSION'] = '4.0'
+          end
+          else
+          if ['TTGSnackbar'].include? "#{target}"
+            print "Setting #{target}'s SWIFT_VERSION to 5.0\n"
             target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '4.0'
+                config.build_settings['SWIFT_VERSION'] = '5.0'
             end
             else
-            target.build_configurations.each do |config|
-                config.build_settings.delete('SWIFT_VERSION')
-            end
+              target.build_configurations.each do |config|
+                  config.build_settings.delete('SWIFT_VERSION')
+              end
+          end
         end
     end
-
+    
     print "Setting the default SWIFT_VERSION to 4.0\n"
     installer.pods_project.build_configurations.each do |config|
         config.build_settings['SWIFT_VERSION'] = '4.0'

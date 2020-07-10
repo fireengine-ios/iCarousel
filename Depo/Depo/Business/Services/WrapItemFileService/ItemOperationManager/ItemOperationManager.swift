@@ -18,6 +18,8 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func finishedUploadFile(file: WrapData)
     
+    func failedUploadFile(file: WrapData, error: Error?)
+    
     ///cancelled by user
     func cancelledUpload(file: WrapData)
     
@@ -47,13 +49,15 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func fileAddedToAlbum(item: WrapData, error: Bool)
     
-    func filesAddedToAlbum()
+    func filesAddedToAlbum(isAutoSyncOperation: Bool)
     
     func filesUpload(count: Int, toFolder folderUUID: String)
     
     func filesRomovedFromAlbum(items: [Item], albumUUID: String)
     
     func filesMoved(items: [Item], toFolder folderUUID: String)
+    
+    func didRenameItem(_ item: BaseDataSourceItem)
     
     func syncFinished()
     
@@ -84,18 +88,28 @@ protocol ItemOperationManagerViewProtocol: class {
     func putBackFromTrashPeople(items: [PeopleItem])
     func putBackFromTrashPlaces(items: [PlacesItem])
     func putBackFromTrashThings(items: [ThingsItem])
+    
+    func didEmptyTrashBin()
 }
 
 extension ItemOperationManagerViewProtocol {
-    func startUploadFile(file: WrapData) {}
+    func startUploadFile(file: WrapData) {
+        UIApplication.setIdleTimerDisabled(true)
+    }
     
-    func startUploadFilesToAlbum(files: [WrapData]) {}
+    func startUploadFilesToAlbum(files: [WrapData]) {
+        UIApplication.setIdleTimerDisabled(true)
+    }
     
     func setProgressForUploadingFile(file: WrapData, progress: Float) {}
     
     func finishedUploadFile(file: WrapData) {}
     
-    func cancelledUpload(file: WrapData) {}
+    func failedUploadFile(file: WrapData, error: Error?) {}
+    
+    func cancelledUpload(file: WrapData) {
+        UIApplication.setIdleTimerDisabled(true)
+    }
     
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {}
     
@@ -123,7 +137,7 @@ extension ItemOperationManagerViewProtocol {
     
     func fileAddedToAlbum(item: WrapData, error: Bool) {}
     
-    func filesAddedToAlbum() {}
+    func filesAddedToAlbum(isAutoSyncOperation: Bool) {}
     
     func filesUpload(count: Int, toFolder folderUUID: String) {}
     
@@ -131,9 +145,15 @@ extension ItemOperationManagerViewProtocol {
     
     func filesMoved(items: [Item], toFolder folderUUID: String) {}
     
-    func syncFinished() {}
+    func didRenameItem(_ item: BaseDataSourceItem) {}
     
-    func finishUploadFiles() {}
+    func syncFinished() {
+        UIApplication.setIdleTimerDisabled(false)
+    }
+    
+    func finishUploadFiles() {
+        UIApplication.setIdleTimerDisabled(false)
+    }
     
     func didHideItems(_ items: [WrapData]) {}
     func didHideAlbums(_ albums: [AlbumItem]) {}
@@ -158,6 +178,8 @@ extension ItemOperationManagerViewProtocol {
     func putBackFromTrashPeople(items: [PeopleItem]) {}
     func putBackFromTrashPlaces(items: [PlacesItem]) {}
     func putBackFromTrashThings(items: [ThingsItem]) {}
+    
+    func didEmptyTrashBin() {}
 }
 
 
@@ -177,9 +199,9 @@ class ItemOperationManager: NSObject {
     func startUpdateView(view: ItemOperationManagerViewProtocol) {
         views.add(view)
         
-        if currentUploadingObject != nil {
-            view.startUploadFile(file: currentUploadingObject!)
-            view.setProgressForUploadingFile(file: currentUploadingObject!, progress: currentUploadProgress)
+        if let object = currentUploadingObject {
+            view.startUploadFile(file: object)
+            view.setProgressForUploadingFile(file: object, progress: currentUploadProgress)
         }
     }
     
@@ -222,7 +244,12 @@ class ItemOperationManager: NSObject {
         views.invoke { $0.finishedUploadFile(file: file) }
         //        }
         
-        MenloworksAppEvents.onFileUploadedWithType(file.fileType, isAutosync: isAutoSync)
+        currentUploadingObject = nil
+        currentUploadProgress = 0
+    }
+    
+    func failedUploadFile(file: WrapData, error: Error?) {
+        views.invoke { $0.failedUploadFile(file: file, error: error) }
         
         currentUploadingObject = nil
         currentUploadProgress = 0
@@ -319,9 +346,9 @@ class ItemOperationManager: NSObject {
         }
     }
     
-    func filesAddedToAlbum() {
+    func filesAddedToAlbum(isAutoSyncOperation: Bool) {
         DispatchQueue.main.async {
-            self.views.invoke { $0.filesAddedToAlbum() }
+            self.views.invoke { $0.filesAddedToAlbum(isAutoSyncOperation: isAutoSyncOperation) }
         }
     }
     
@@ -349,8 +376,15 @@ class ItemOperationManager: NSObject {
         }
     }
     
+    func didRenameItem(_ item: BaseDataSourceItem) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didRenameItem(item) }
+        }
+    }
+    
     func syncFinished() {
 //        DispatchQueue.main.async {
+        currentUploadingObject = nil
         views.invoke { $0.syncFinished() }
 //        }
     }
@@ -484,6 +518,12 @@ class ItemOperationManager: NSObject {
     func putBackFromTrashThings(items: [ThingsItem]) {
         DispatchQueue.main.async {
             self.views.invoke { $0.putBackFromTrashThings(items: items) }
+        }
+    }
+    
+    func didEmptyTrashBin() {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didEmptyTrashBin() }
         }
     }
 }

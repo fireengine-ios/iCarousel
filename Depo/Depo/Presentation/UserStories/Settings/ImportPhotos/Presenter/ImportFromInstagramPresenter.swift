@@ -48,14 +48,12 @@ extension ImportFromInstagramPresenter: ImportFromInstagramViewOutput {
         
         syncIsAwaiting = true
         interactor.setSync(status: true)
-        interactor.trackImportActivationInstagram()
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .on, socialType: .instagram))
     }
     
     func stopInstagram() {
         view?.startActivityIndicator()
         view?.startActivityIndicator()
-        MenloworksTagsService.shared.instagramImport(isOn: false)
         interactor.setSync(status: false)
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .off, socialType: .instagram))
     }
@@ -84,6 +82,12 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
         view?.instaPickStatusSuccess(isOn)
     }
     
+    func instaPickStatusSuccess(status: Bool) {
+        //FIXME: find the leak
+        view?.stopActivityIndicator()
+        view?.instaPickStatusSuccess(status)
+    }
+    
     func instaPickFailure(errorMessage: String) {
         instaPickIsAwaiting = false
         UIApplication.showErrorAlert(message: errorMessage)
@@ -97,7 +101,6 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
         view?.stopActivityIndicator()
         
         if isConnected {
-            MenloworksAppEvents.onInstagramConnected()
             view?.connectionStatusSuccess(isConnected, username: username)
         }
     }
@@ -109,6 +112,7 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
     }
     
     func disconnectionSuccess() {
+        interactor.trackConnectionStatusInstagram(isConnected: false)
         view?.stopActivityIndicator()
         view?.disconnectionSuccess()
     }
@@ -154,6 +158,7 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
         
         view?.stopActivityIndicator()
         view?.syncStartSuccess()
+        interactor.trackImportStatusInstagram(isOn: true)
         analyticsService.track(event: .importInstagram)
     }
     
@@ -179,6 +184,7 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
     // MARK: stopSync
     
     func stopSyncSuccess() {
+        interactor.trackImportStatusInstagram(isOn: false)
         view?.stopActivityIndicator()
         view?.syncStopSuccess()
     }
@@ -205,6 +211,7 @@ extension ImportFromInstagramPresenter: ImportFromInstagramInteractorOutput {
 extension ImportFromInstagramPresenter: InstagramAuthViewControllerDelegate {
     
     func instagramAuthSuccess() {
+        interactor.trackConnectionStatusInstagram(isConnected: true)
         view?.startActivityIndicator()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { /// + 1 for backend bug
             if self.instaPickIsAwaiting {
@@ -219,7 +226,7 @@ extension ImportFromInstagramPresenter: InstagramAuthViewControllerDelegate {
     
     func instagramAuthCancel() {
         if self.instaPickIsAwaiting {
-            self.instaPickSuccess(isOn: false)
+            self.instaPickStatusSuccess(status: false)
         } else if self.syncIsAwaiting {
             self.syncStatusSuccess(status: false)
         }

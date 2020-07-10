@@ -30,6 +30,12 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         }
     }
     
+    var kvkkAuth: Bool? {
+        didSet {
+            dataStorage.signUpResponse.kvkkAuth = kvkkAuth
+        }
+    }
+    
     var globalPermAuth: Bool? {
         didSet {
             dataStorage.signUpResponse.globalPermAuth = globalPermAuth
@@ -63,11 +69,17 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
             return
         }
         
-        eulaService.eulaApprove(eulaId: eulaID, etkAuth: etkAuth, globalPermAuth: globalPermAuth, success: { [weak self] successResponse in
-            DispatchQueue.main.async {
-                self?.output.eulaApplied()
-            }
-            }, fail: { [weak self] errorResponse in
+        eulaService.eulaApprove(
+            eulaId: eulaID,
+            etkAuth: etkAuth,
+            kvkkAuth: kvkkAuth,
+            globalPermAuth: globalPermAuth,
+            success: { [weak self] successResponse in
+                DispatchQueue.main.async {
+                    self?.output.eulaApplied()
+                }
+            },
+            fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {
                     self?.output.applyEulaFailed(errorResponse: errorResponse)
                 }
@@ -79,6 +91,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
         dataStorage.signUpUserInfo = userInfo
         isFromRegistration = true
         dataStorage.signUpResponse.etkAuth = etkAuth
+        dataStorage.signUpResponse.kvkkAuth = kvkkAuth
     }
     
     func trackScreen() {
@@ -152,6 +165,9 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                     /// if we show etk default value must be false (user didn't check etk)
                     if isShowEtk {
                         self.etkAuth = false
+                        self.kvkkAuth = false
+                    } else {
+                        self.kvkkAuth = nil
                     }
                 case .failed(_):
                     completion?(false)

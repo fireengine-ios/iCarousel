@@ -83,7 +83,7 @@ final class AutoSyncSettings : Equatable {
     var isAutoSyncOptionEnabled: Bool = true //auto sync switcher in settings is on/off
     
     var isAutosyncSettingsApplied: Bool {
-        return storageVars.autoSyncSet
+        return storageVars.isAutoSyncSet
     }
     
     init() { }
@@ -111,8 +111,7 @@ final class AutoSyncSettings : Equatable {
         //setup video setting
         
         if mobileDataVideo {
-            ///Because of interrupted sync via mobile network in the background
-            videoSetting.option = .wifiOnly
+            videoSetting.option = .wifiAndCellular
         } else if wifiVideo {
             videoSetting.option = .wifiOnly
         } else {
@@ -146,9 +145,7 @@ final class AutoSyncSettings : Equatable {
     func asDictionary() -> [String: Bool] {
         return [SettingsKeys.isAutoSyncEnabledKey: isAutoSyncOptionEnabled,
                 SettingsKeys.mobileDataPhotosKey: (photoSetting.option == .wifiAndCellular),
-                ///Because of interrupted sync via mobile network in the background
-//                SettingsKeys.mobileDataVideoKey: (videoSetting.option == .wifiAndCellular),
-                SettingsKeys.mobileDataVideoKey: false,
+                SettingsKeys.mobileDataVideoKey: (videoSetting.option == .wifiAndCellular),
                 SettingsKeys.wifiPhotosKey: (photoSetting.option == .wifiOnly),
                 SettingsKeys.wifiVideoKey: (videoSetting.option == .wifiOnly)]
     }
@@ -217,20 +214,16 @@ extension AutoSyncSettings {
                 videoSetting.option = .wifiOnly
             case .videos:
                 photoSetting.option = .wifiOnly
-                videoSetting.option = .wifiOnly
-                ///Because of interrupted sync via mobile network in the background
-//                videoSetting.option = .wifiAndCellular
+                videoSetting.option = .wifiAndCellular
             case .all:
                 photoSetting.option = .wifiAndCellular
-                videoSetting.option = .wifiOnly
-                ///Because of interrupted sync via mobile network in the background
-//                videoSetting.option = .wifiAndCellular
+                videoSetting.option = .wifiAndCellular
             case .none:
                 photoSetting.option = .wifiOnly
                 videoSetting.option = .wifiOnly
             }
         }
         
-        storageVars.autoSyncSet = true
+        storageVars.isAutoSyncSet = true
     }
 }

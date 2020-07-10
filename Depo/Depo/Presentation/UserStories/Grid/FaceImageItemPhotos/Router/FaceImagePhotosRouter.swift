@@ -19,13 +19,15 @@ final class FaceImagePhotosRouter: BaseFilesGreedRouter {
         guard let wrapperedArray = sameTypeItems as? [Item] else { return }
         
         let albumUUID = router.getParentUUID()
-        let controller = router.filesDetailFaceImageAlbumViewController(fileObject: wrappered,
-                                                                        items: wrapperedArray,
-                                                                        albumUUID: albumUUID,
-                                                                        albumItem: item,
-                                                                        status: view.status)
+        let detailModule = router.filesDetailFaceImageAlbumModule(fileObject: wrappered,
+                                                                  items: wrapperedArray,
+                                                                  albumUUID: albumUUID,
+                                                                  albumItem: item,
+                                                                  status: view.status,
+                                                                  moduleOutput: moduleOutput as? PhotoVideoDetailModuleOutput)
             
-        let nController = NavigationController(rootViewController: controller)
+        presenter.photoVideoDetailModule = detailModule.moduleInput
+        let nController = NavigationController(rootViewController: detailModule.controller)
         router.presentViewController(controller: nController)
     }
     
@@ -47,18 +49,4 @@ extension FaceImagePhotosRouter: FaceImagePhotosRouterInput {
         let vc = router.faceImageAddName(item, moduleOutput: moduleOutput, isSearchItem: isSearchItem)
         router.pushViewController(viewController: vc)
     }
-    
-    func showRemoveFromAlbum(completion: @escaping (() -> Void)) {
-        let controller = PopUpController.with(title: TextConstants.actionSheetRemove,
-                                              message: TextConstants.removeFromAlbum,
-                                              image: .delete,
-                                              firstButtonTitle: TextConstants.cancel,
-                                              secondButtonTitle: TextConstants.ok,
-                                              secondAction: { vc in
-                                                vc.close(completion: completion)
-        })
-        
-        router.presentViewController(controller: controller)
-    }
-    
 }

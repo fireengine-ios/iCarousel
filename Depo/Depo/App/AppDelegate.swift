@@ -12,7 +12,6 @@ import FBSDKCoreKit
 import SDWebImage
 import XCGLogger
 import Adjust
-import XPush
 import Netmera
 import UserNotifications
 
@@ -53,6 +52,12 @@ func debugLog(_ string: String, functionName: StaticString = #function, fileName
     CLSLogv("%@", getVaList([string]))
 }
 
+func printLog(_ string: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
+    print(string)
+    log.debug(string, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
+    CLSLogv("%@", getVaList([string]))
+}
+
 func fatalLog(_ string: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) -> Never {
     debugLog(string, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
     fatalError(string)
@@ -74,14 +79,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private lazy var player: MediaPlayer = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    @available(iOS 13.0, *)
+    private lazy var backgroundSyncService = BackgroundSyncService.shared
     
     var window: UIWindow?
     var watchdog: Watchdog?
+
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         let coreDataStack: CoreDataStack = factory.resolve()
         
         startCoreDataSafeServices(with: application, options: launchOptions)
+        
+        APILogger.shared.startLogging()
         
         ///call debugLog only if the Crashlytics is already initialized
         debugLog("AppDelegate didFinishLaunchingWithOptions")
@@ -91,16 +101,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = InitializingViewController()
         self.window?.makeKeyAndVisible()
         
+        if #available(iOS 13.0, *) {
+            debugLog("BG! Registeration")
+            self.backgroundSyncService.registerLaunchHandlers()
+            
+        }
         coreDataStack.setup { [weak self] in
             guard let self = self else {
                 return
             }
+            
             
             DispatchQueue.main.async {
                 AppConfigurator.logoutIfNeed()
                 
                 self.window?.rootViewController = router.vcForCurrentState()
                 self.window?.isHidden = false
+                
             }
         }
         
@@ -121,7 +138,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppConfigurator.applicationStarted(with: options)
         
         ContactSyncSDK.doPeriodicSync()
-        MenloworksAppEvents.onAppLaunch()
         
         passcodeStorage.systemCallOnScreen = false
         
@@ -138,36 +154,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func setupPushNotifications(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         // required setup order
-        // 1. XPush SDK setup
-        // 2. subscribe to notification delegate
-        // 3. Netmera SDK setup
+        // 1. subscribe to notification delegate
+        // 2. Netmera SDK setup
         
-        AppConfigurator.startXtremePush(with: launchOptions)
-        
-        if #available(iOS 10, *) {
-            let options: UNAuthorizationOptions = [.alert, .sound, .badge]
-            UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
-                XPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
-                Netmera.requestPushNotificationAuthorization(forTypes: [.alert, .badge, .sound])
-                AnalyticsPermissionNetmeraEvent.sendNotificationPermissionNetmeraEvents()
-                ///call processLocalMediaItems either here or in the AppDelegate
-                ///application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings)
-                ///it depends on iOS version
-                
-                /// start photos logic after notification permission
-                ///MOVED TO CACHE MANAGER TO BE TRIGGERED AFTER ALL REMOTES ARE ADDED
-    //                MediaItemOperationsService.shared.processLocalMediaItems(completion: nil)
-                LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
-                    
-                }
-            }
-            UNUserNotificationCenter.current().delegate = self
-            AnalyticsService.startNetmera()
-        } else {
-            XPush.register(forRemoteNotificationTypes: [.alert, .badge, .sound])
-            AnalyticsService.startNetmera()
+        let options: UNAuthorizationOptions = [.alert, .sound, .badge]
+        UNUserNotificationCenter.current().requestAuthorization(options: options) { _, _ in
             Netmera.requestPushNotificationAuthorization(forTypes: [.alert, .badge, .sound])
+            AnalyticsPermissionNetmeraEvent.sendNotificationPermissionNetmeraEvents()
         }
+        UNUserNotificationCenter.current().delegate = self
+        AnalyticsService.startNetmera()
     }
     
     /// iOS 9+
@@ -191,19 +187,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return false
     }
     
-    /// iOS targets < 9
-    /// TODO: for Facebook ???
-    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
-        if dropboxManager.handleRedirect(url: url) {
-            return true
-        }
-        return false
-    }
-    
     private var firstResponder: UIResponder?
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         debugLog("AppDelegate applicationDidEnterBackground")
+        
+        
+        if #available(iOS 13.0, *) {
+            debugLog("BG! AppDelegate applicationDidEnterBackground")
+            backgroundSyncService.scheduleProcessingSync()
+            backgroundSyncService.scheduleRefreshSync()
+        }
         
         BackgroundTaskService.shared.beginBackgroundTask()
 
@@ -233,22 +227,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         debugLog("AppDelegate applicationWillEnterForeground")
         if BackgroundTaskService.shared.appWasSuspended {
+            debugLog("App was suspended")
+            CacheManager.shared.stopRemotesActualizeCache()
             CacheManager.shared.actualizeCache()
+        } else if tokenStorage.refreshToken != nil {
+            SyncServiceManager.shared.update()
         }
         ContactSyncSDK.doPeriodicSync()
-        MenloworksAppEvents.sendProfileName()
-        
-        // handle netmera push notifications
-        if let object = Netmera.recentPushObject(),
-            Device.operationSystemVersionLessThen(10),
-            PushNotificationService.shared.assignNotificationActionBy(launchOptions: object.customDictionary)
-        {
-            PushNotificationService.shared.openActionScreen()
-        }
     }
     
     func showPasscodeIfNeedInBackground() {
-        let state = UIApplication.shared.applicationState
+        let state = ApplicationStateHelper.shared.safeApplicationState
         if state == .background || state == .inactive {
             showPasscodeIfNeed()
         }
@@ -365,32 +354,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     
-    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
-        debugLog("AppDelegate didRegister notificationSettings")
-        if #available(iOS 10, *) {
-            ///deprecated
-            ///call processLocalMediaItems in the AppConfigurator
-            return
-        }
-        /// start photos logic after notification permission///MOVED TO CACHE MANAGER, when all remotes are added.
-//        MediaItemOperationsService.shared.processLocalMediaItems(completion: nil)
-        LocalMediaStorage.default.askPermissionForPhotoFramework(redirectToSettings: false){ available, status in
-            
-        }
-    }
-    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         debugLog("AppDelegate didRegisterForRemoteNotificationsWithDeviceToken")
-        MenloworksTagsService.shared.onNotificationPermissionChanged(true)
         AnalyticsPermissionNetmeraEvent.sendNotificationPermissionNetmeraEvents()
-        XPush.applicationDidRegisterForRemoteNotifications(withDeviceToken: deviceToken)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         debugLog("AppDelegate didFailToRegisterForRemoteNotificationsWithError")
-        MenloworksTagsService.shared.onNotificationPermissionChanged(false)
         AnalyticsPermissionNetmeraEvent.sendNotificationPermissionNetmeraEvents()
-        XPush.applicationDidFailToRegisterForRemoteNotificationsWithError(error)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
@@ -400,7 +371,6 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         debugLog("AppDelegate didReceiveRemoteNotification")
-        XPush.applicationDidReceiveRemoteNotification(userInfo, fetchCompletionHandler: completionHandler)
         
         AppEvents.logPushNotificationOpen(userInfo)
         
@@ -410,12 +380,6 @@ extension AppDelegate {
             analyticsService.logScreen(screen: .tbmatikPushNotification)
             analyticsService.trackDimentionsEveryClickGA(screen: .tbmatikPushNotification)
         }
-    }
-    
-    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        debugLog("AppDelegate didReceive")
-
-        XPush.applicationDidReceive(notification)
     }
     
     //MARK: Adjust
@@ -443,7 +407,6 @@ extension AppDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
-    @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         debugLog("userNotificationCenter didReceive response")
 
@@ -457,19 +420,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         } else {
             debugLog("userNotificationCenter Netmera push object is empty")
         }
-
-        XPush.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
     }
     
-    @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound, .badge])
-    }
-    
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
-        if #available(iOS 12.0, *) {
-            XPush.userNotificationCenter(center, openSettingsFor: notification)
-        }
     }
 }

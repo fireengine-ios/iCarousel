@@ -32,8 +32,6 @@ final class TrashBinInteractor: MoreFilesActionsInteractor {
     private weak var delegate: TrashBinInteractorDelegate?
 
     private lazy var hiddenService = HiddenService()
-    private lazy var fileService = WrapItemFileService()
-    private lazy var albumService = PhotosAlbumService()
 
     private var itemsPage = 0
     private var currentAlbumsPage = 0

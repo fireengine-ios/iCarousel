@@ -15,27 +15,24 @@ class TermsAndServicesViewController: ViewController {
 
     @IBOutlet private weak var welcomeLabel: UILabel!
     
-    @IBOutlet private weak var contentView: UITextView! {
+    @IBOutlet private weak var contenViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var contenView: UIStackView! {
         willSet {
-            newValue.text = ""
-            newValue.backgroundColor = ColorConstants.lighterGray
-            newValue.layer.borderColor = ColorConstants.darkTintGray.cgColor
-            newValue.layer.borderWidth = 1
-            
-            newValue.linkTextAttributes = [
-                NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
-                NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
-                NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
-            ]
-            
-            newValue.dataDetectorTypes = [.link, .phoneNumber]
-            newValue.isEditable = false
-            
-            /// to remove insets
-            /// https://stackoverflow.com/a/42333832/5893286
-            newValue.textContainer.lineFragmentPadding = 0
-            let defaultInset: CGFloat = 14
-            newValue.textContainerInset = UIEdgeInsets(top: defaultInset, left: defaultInset, bottom: defaultInset, right: defaultInset)
+            newValue.spacing = 10
+        }
+    }
+    
+    @IBOutlet private weak var eulaTextView: UITextView! {
+        willSet {
+            newValue.setupEulaStyle()
+            newValue.delegate = self
+        }
+    }
+    
+    @IBOutlet private weak var etkTextView: UITextView! {
+        willSet {
+            newValue.isHidden = true
+            newValue.setupEulaStyle()
             newValue.delegate = self
         }
     }
@@ -54,8 +51,25 @@ class TermsAndServicesViewController: ViewController {
     }
     
     @IBOutlet private weak var topContraintIOS10: NSLayoutConstraint!
-
-    @IBOutlet private weak var contenViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet private weak var privacyPolicyView: UIView! {
+        willSet {
+            newValue.layer.cornerRadius = 6
+            newValue.backgroundColor =  UIColor.lrTealishTwo.withAlphaComponent(0.05)
+        }
+    }
+    
+    @IBOutlet weak var privacyPolicyTextView: IntrinsicTextView! {
+        willSet {
+            newValue.delegate = self
+            newValue.backgroundColor = .clear
+            newValue.linkTextAttributes = [
+                NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
+                NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
+                NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+            ]
+        }
+    }
     
     private let generalTermsCheckboxView = TermsCheckboxTextView.initFromNib()
     private var etkTermsCheckboxView: TermsCheckboxTextView?
@@ -81,6 +95,7 @@ class TermsAndServicesViewController: ViewController {
         
         configureUI()
         setupIntroductionTextView()
+        setupPrivacyPolicyTextView()
         output.viewIsReady()
     }
     
@@ -102,13 +117,11 @@ class TermsAndServicesViewController: ViewController {
         view.layoutIfNeeded()
         
         acceptButton.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
-        
-        contentView.clipsToBounds = true
-        contentView.layer.cornerRadius = 10
     }
     
     func showEtk() {
-        setupEtkText()
+        showEtkText()
+        setupEtkCheckbox()
         view.layoutIfNeeded()
     }
     
@@ -124,13 +137,22 @@ class TermsAndServicesViewController: ViewController {
                                                attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
                                                             .foregroundColor: ColorConstants.darkText])
         
+        generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self, textViewDelegate: self)
+    }
+    
+    private func setupPrivacyPolicyTextView() {
+        
+        let header = NSMutableAttributedString(string: TextConstants.privacyPolicy,
+                                               attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
+                                                            .foregroundColor: ColorConstants.darkText])
+        
         let rangeLink = header.mutableString.range(of: TextConstants.privacyPolicyCondition)
         header.addAttributes([.link: TextConstants.NotLocalized.privacyPolicyConditions], range: rangeLink)
         
-        generalTermsCheckboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self)
+        privacyPolicyTextView.attributedText = header
     }
     
-    private func setupEtkText() {
+    private func setupEtkCheckbox() {
         let etkChecboxView = TermsCheckboxTextView.initFromNib()
         etkTermsCheckboxView = etkChecboxView
         checkboxesStack.addArrangedSubview(etkChecboxView)
@@ -138,18 +160,8 @@ class TermsAndServicesViewController: ViewController {
         let header = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckboxHeader,
                                                attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 15),
                                                             .foregroundColor: ColorConstants.darkText])
-        
-        let descriptionText = NSMutableAttributedString(string: TextConstants.termsAndUseEtkCheckbox,
-                                                 attributes: [.font: UIFont.TurkcellSaturaRegFont(size: 12),
-                                                              .foregroundColor: UIColor.lightGray])
-        
-        let rangeLink1 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkTurkcellAndGroupCompanies)
-        descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkTurkcellAndGroupCompanies], range: rangeLink1)
-        
-        let rangeLink2 = descriptionText.mutableString.range(of: TextConstants.termsAndUseEtkLinkCommercialEmailMessages)
-        descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsAndUseEtkLinkCommercialEmailMessages], range: rangeLink2)
 
-        etkChecboxView.setup(atributedTitleText: header, atributedText: descriptionText, delegate: self)
+        etkChecboxView.setup(atributedTitleText: header, atributedText: nil, delegate: self, textViewDelegate: self)
     }
 
     func setupGlobalPermissionTextView() {
@@ -167,7 +179,7 @@ class TermsAndServicesViewController: ViewController {
         let rangeLink1 = descriptionText.mutableString.range(of: TextConstants.termsOfUseGlobalDataPermLinkSeeDetails)
         descriptionText.addAttributes([.link: TextConstants.NotLocalized.termsOfUseGlobalDataPermLink1], range: rangeLink1)
         
-        globalPermissionsView.setup(atributedTitleText: header, atributedText: descriptionText, delegate: self)
+        globalPermissionsView.setup(atributedTitleText: header, atributedText: descriptionText, delegate: self, textViewDelegate: self)
     }
     
     // MARK: Buttons action
@@ -184,37 +196,54 @@ extension TermsAndServicesViewController: TermsAndServicesViewInput {
     }
     
     func showLoadedTermsAndUses(eula: String) {
-        guard !eula.isEmpty else {
+        guard let htmlString = prepareHtml(from: eula) else {
+            assertionFailure()
             return
         }
         
-        DispatchQueue.global().async { [weak self] in
-            
-            let font = UIFont.TurkcellSaturaRegFont(size: 14)
-            /// https://stackoverflow.com/a/27422343
-//            body{font-family: '\(font.familyName)'; because turkcell fonts currently are not recognizable as family of fonts - all text from htm will be shown as regular, no bold and etc.
-            let customFontEulaString = "<style>font-size:\(font.pointSize);}</style>" + eula
-            
-            guard let data = customFontEulaString.data(using: .utf8) else {
-                assertionFailure()
-                return
-            }
-            
-            /// https://stackoverflow.com/q/50969015/5893286
-            /// fixed black screen
-            /// and error "AttributedString called within transaction"
-            do {
-                let attributedString = try NSAttributedString(data: data, options:
-                    [.documentType: NSAttributedString.DocumentType.html,
-                     .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
-                // https://www.oipapio.com/question-726375
-                DispatchQueue.main.async {
-                    self?.contentView.textStorage.append(attributedString)
-                    self?.contentView.dataDetectorTypes = [.phoneNumber, .address]
-                }
-            } catch {
-                assertionFailure()
-            }
+        // https://www.oipapio.com/question-726375
+        eulaTextView.textStorage.append(htmlString)
+        eulaTextView.dataDetectorTypes = [.phoneNumber, .address]
+    }
+    
+    func showEtkText() {
+        guard let htmlString = prepareHtml(from: TextConstants.etkHTMLText) else {
+            assertionFailure()
+            return
+        }
+        
+        etkTextView.textStorage.append(htmlString)
+        etkTextView.dataDetectorTypes = [.phoneNumber, .address]
+        etkTextView.isHidden = false
+    }
+    
+    private func prepareHtml(from text: String) -> NSAttributedString? {
+        guard !text.isEmpty else {
+            return nil
+        }
+        
+        let font = UIFont.TurkcellSaturaRegFont(size: 14)
+        /// https://stackoverflow.com/a/27422343
+        //  body{font-family: '\(font.familyName)'; because turkcell fonts currently are not recognizable as family of fonts - all text from htm will be shown as regular, no bold and etc.
+        let customFontString = "<style>font-size:\(font.pointSize);}</style>" + text
+        
+        guard let data = customFontString.data(using: .utf8) else {
+            assertionFailure()
+            return nil
+        }
+        
+        /// https://stackoverflow.com/q/50969015/5893286
+        /// fixed black screen
+        /// and error "AttributedString called within transaction"
+        do {
+            let attributedString = try NSAttributedString(data: data,
+                                                          options: [.documentType: NSAttributedString.DocumentType.html,
+                                                                    .characterEncoding: String.Encoding.utf8.rawValue],
+                                                          documentAttributes: nil)
+            return attributedString
+        } catch {
+            assertionFailure()
+            return nil
         }
     }
     
@@ -280,7 +309,38 @@ extension TermsAndServicesViewController: TermsCheckboxTextViewDelegate {
 // MARK: - UITextViewDelegate
 extension TermsAndServicesViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        UIApplication.shared.openSafely(URL)
-        return true
+
+        return tappedOnURL(url: URL)
+    }
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+
+        return tappedOnURL(url: URL)
+    }
+}
+
+private extension UITextView {
+    func setupEulaStyle() {
+        text = ""
+        backgroundColor = ColorConstants.lighterGray
+        layer.borderColor = ColorConstants.darkTintGray.cgColor
+        layer.borderWidth = 1
+        layer.masksToBounds = true
+        layer.cornerRadius = 10
+        
+        linkTextAttributes = [
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor.lrTealishTwo,
+            NSAttributedStringKey.underlineColor.rawValue: UIColor.lrTealishTwo,
+            NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue
+        ]
+        
+        dataDetectorTypes = [.link, .phoneNumber]
+        isEditable = false
+        
+        /// to remove insets
+        /// https://stackoverflow.com/a/42333832/5893286
+        textContainer.lineFragmentPadding = 0
+        let defaultInset: CGFloat = 14
+        textContainerInset = UIEdgeInsets(top: defaultInset, left: defaultInset, bottom: defaultInset, right: defaultInset)
     }
 }

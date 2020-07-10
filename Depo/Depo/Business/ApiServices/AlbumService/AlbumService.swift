@@ -155,30 +155,24 @@ class AlbumService: RemoteItemsService {
         
         remote.searchAlbums(param: serchParam, success: { [weak self] response in
             guard let resultResponse = response as? AlbumResponse else {
-                debugLog("AlbumService remote searchAlbums fail")
-
                 return fail()
             }
             
-            debugLog("AlbumService remote searchAlbums success")
-            
             self?.currentPage += 1
-            let list = resultResponse.list.flatMap { AlbumItem(remote: $0) }
+            let list = resultResponse.list.compactMap { AlbumItem(remote: $0) }
             success(list)
-            
-            self?.remote.debugLogTransIdIfNeeded(headers: resultResponse.response?.allHeaderFields, method: "searchAlbums")
-        }, fail: { [weak self] errorResponse in
-            errorResponse.showInternetErrorGlobal()
-            debugLog("AlbumService remote searchAlbums fail")
 
+        }, fail: { errorResponse in
+            errorResponse.showInternetErrorGlobal()
             fail()
-            self?.remote.debugLogTransIdIfNeeded(errorResponse: errorResponse, method: "searchAlbums")
         })
     }
     
 }
 
 typealias AlbumCreatedOperation = (AlbumItem?) -> Void
+typealias AlbumsSuccess = ([AlbumItem]) -> Void
+typealias AlbumOperationResponse = (_ album: AlbumServiceResponse) -> Void
 typealias PhotosAlbumOperation = () -> Void
 typealias PhotosAlbumDeleteOperation = (_ deletedItems: [AlbumItem]) -> Void
 typealias PhotosFromAlbumsOperation = (_ items: [Item]) -> Void
@@ -192,8 +186,6 @@ class PhotosAlbumService: BaseRequestService {
         debugLog("PhotosAlbumService createAlbum")
 
         let handler = BaseResponseHandler<AlbumServiceResponse, ObjectRequestResponse>(success: { response in
-            debugLog("PhotosAlbumService createAlbum success")
-            
             if let albumResponse = response as? AlbumServiceResponse { 
                 let item = AlbumItem(remote: albumResponse)
                 success?(item)
@@ -215,8 +207,6 @@ class PhotosAlbumService: BaseRequestService {
         
         let params = DeleteAlbums(albums: deleteAlbums)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            debugLog("PhotosAlbumService deleteAlbums success")
-
             success?(deleteAlbums)
         }, fail: fail)
         executeDeleteRequest(param: params, handler: handler)
@@ -237,8 +227,6 @@ class PhotosAlbumService: BaseRequestService {
         }
         
         loadAllItemsFrom(albums: deleteAlbums) { items in
-            debugLog("PhotosAlbumService loadAllItemsFrom")
-
             let fileService = WrapItemFileService()
             fileService.delete(deleteFiles: items, success: { [weak self] in
                 self?.delete(albums: deleteAlbums, success: wrappedSuccess, fail: fail)
@@ -247,7 +235,7 @@ class PhotosAlbumService: BaseRequestService {
     }
     
     func moveToTrash(albums: [AlbumItem], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
-        debugLog("PhotosAlbumService completelyDelete")
+        debugLog("PhotosAlbumService completelyMoveToTrash")
         
         let moveToTrashAlbums = albums.filter { $0.readOnly != true || $0.fileType.isFaceImageAlbum }
         guard !moveToTrashAlbums.isEmpty else {
@@ -255,21 +243,22 @@ class PhotosAlbumService: BaseRequestService {
             return
         }
         
-        loadAllItemsFrom(albums: moveToTrashAlbums) { items in
-            debugLog("PhotosAlbumService loadAllItemsFrom")
-            let fileService = WrapItemFileService()
-            fileService.moveToTrash(files: items, success: { [weak self] in
-                self?.moveToTrashAlbums(moveToTrashAlbums, success: success, fail: fail)
-            }, fail: fail)
+        loadAllItemsFrom(albums: moveToTrashAlbums) { [weak self] items in
+            self?.moveToTrash(albums: albums, albumItems: items, success: success, fail: fail)
         }
     }
     
     func moveToTrash(albums: [AlbumItem], albumItems: [Item], success: PhotosAlbumDeleteOperation?, fail: FailResponse?) {
-        debugLog("PhotosAlbumService completelyDelete")
+        debugLog("PhotosAlbumService completelyMoveToTrash")
+
+        let wrappedSuccess: PhotosAlbumDeleteOperation = { deletedAlbums in
+            success?(deletedAlbums)
+            ItemOperationManager.default.didMoveToTrashAlbums(deletedAlbums)
+        }
         
         let fileService = WrapItemFileService()
         fileService.moveToTrash(files: albumItems, success: { [weak self] in
-            self?.moveToTrashAlbums(albums, success: success, fail: fail)
+            self?.moveToTrashAlbums(albums, success: wrappedSuccess, fail: fail)
         }, fail: fail)
     }
     
@@ -277,8 +266,6 @@ class PhotosAlbumService: BaseRequestService {
         debugLog("PhotosAlbumService addPhotosToAlbum")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            debugLog("PhotosAlbumService addPhotosToAlbum success")
-
             success?()
         }, fail: fail)
         //executePostRequest(param: parameters, handler: handler)
@@ -289,8 +276,6 @@ class PhotosAlbumService: BaseRequestService {
         debugLog("PhotosAlbumService deletePhotosFromAlbum")
 
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            debugLog("PhotosAlbumService deletePhotosFromAlbum success")
-
             success?()
         }, fail: fail)
         executePutRequest(param: parameters, handler: handler)
@@ -308,9 +293,7 @@ class PhotosAlbumService: BaseRequestService {
     func renameAlbum(parameters: RenameAlbum, success: PhotosAlbumOperation?, fail: FailResponse?) {
         debugLog("PhotosAlbumService renameAlbum")
 
-        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            debugLog("PhotosAlbumService renameAlbum success")
-
+        let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _ in
             success?()
         }, fail: fail)
         executePutRequest(param: parameters, handler: handler)
@@ -325,19 +308,13 @@ class PhotosAlbumService: BaseRequestService {
         for album in albums {
             group.enter()
             albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { items in
-                debugLog("PhotosAlbumService loadAllItemsFrom albumService allItems success")
-
                 allItems.append(contentsOf: items)
                 group.leave()
             }, fail: {
-                debugLog("PhotosAlbumService loadAllItemsFrom AlbumDetailService allItems fail")
-
                 group.leave()
             })
         }
         group.notify(queue: DispatchQueue.main) {
-            debugLog("PhotosAlbumService loadAllItemsFrom success")
-
             success?(allItems)
         }
     }
@@ -355,13 +332,9 @@ class PhotosAlbumService: BaseRequestService {
         for album in albums {
             group.enter()
             albumService.allItems(albumUUID: album.uuid, sortBy: .name, sortOrder: .asc, success: { items in
-                debugLog("PhotosAlbumService loadItemsBy AlbumDetailService allItems success")
-
                 allItems[album] = items
                 group.leave()
             }, fail: {
-                debugLog("PhotosAlbumService loadItemsBy AlbumDetailService allItems fail")
-
                 group.leave()
             })
         }
@@ -388,10 +361,65 @@ class PhotosAlbumService: BaseRequestService {
         
         let params = MoveToTrashAlbums(albums: moveToTrashAlbums)
         let handler = BaseResponseHandler<ObjectRequestResponse, ObjectRequestResponse>(success: { _  in
-            debugLog("PhotosAlbumService trashAlbums success")
-
             success?(moveToTrashAlbums)
         }, fail: fail)
         executeDeleteRequest(param: params, handler: handler)
+    }
+}
+
+/// For UploadOperation
+extension PhotosAlbumService {
+    /// call only if serverErrorMessage is enough or pass real errors
+    func createAlbums(names: [String], success: @escaping AlbumsSuccess, fail: @escaping FailResponse) {
+        var albums = [AlbumItem]()
+        
+        let group = DispatchGroup()
+        names.forEach {
+            group.enter()
+            
+            let params = CreatesAlbum(albumName: $0)
+            createAlbum(createAlbum: params, success: { item in
+                if let item = item {
+                    ItemOperationManager.default.newAlbumCreated()
+                    albums.append(item)
+                }
+                
+                group.leave()
+                
+            }, fail: { error in
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: DispatchQueue.global()) {
+            if !albums.isEmpty {
+                success(albums)
+            } else {
+                /// silence real errors
+                fail(.string(TextConstants.serverErrorMessage))
+            }
+        }
+    }
+    
+    func addItem(item: Item, to albums: [String], isAutoSync: Bool, completion: @escaping VoidHandler) {
+        let group = DispatchGroup()
+        
+        albums.forEach {
+            group.enter()
+            let parameters = AddPhotosToAlbum(albumUUID: $0, photos: [item])
+            
+            addPhotosToAlbum(parameters: parameters, success: {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .success))
+                ItemOperationManager.default.filesAddedToAlbum(isAutoSyncOperation: isAutoSync)
+                group.leave()
+            }, fail: { _ in
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .failure))
+                group.leave()
+            })
+        }
+        
+        group.notify(queue: DispatchQueue.global()) {
+            completion()
+        }
     }
 }

@@ -18,6 +18,8 @@ class SelectNameInteractor: SelectNameInteractorInput {
     
     var moduleType: SelectNameScreenType = .selectAlbumName
     
+    private let albumService = PhotosAlbumService()
+    
     var rootFolderID: String?
     var isFavorite: Bool?
     
@@ -82,7 +84,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
     
     private func onCreateAlbumWithName(name: String) {
         let createAlbumParams = CreatesAlbum(albumName: name)
-        PhotosAlbumService().createAlbum(createAlbum: createAlbumParams, success: { [weak self] albumItem in
+        albumService.createAlbum(createAlbum: createAlbumParams, success: { [weak self] albumItem in
             DispatchQueue.main.async {
                 if let self_ = self {
                     self_.output.createAlbumOperationSuccess(item: albumItem)

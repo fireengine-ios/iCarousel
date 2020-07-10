@@ -17,4 +17,8 @@ protocol HomePageViewInput: class, CurrentNavController {
     func showGiftBox()
     
     func hideGiftBox()
+    
+    func closePermissionPopUp()
+    
+    func showSnackBarWithMessage(message: String)
 }

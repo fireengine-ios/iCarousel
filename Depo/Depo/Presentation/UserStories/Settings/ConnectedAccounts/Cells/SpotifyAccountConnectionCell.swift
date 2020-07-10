@@ -161,13 +161,17 @@ extension SpotifyAccountConnectionCell: SocialConnectionCell {
     func disconnect() {
         service.disconnectFromSpotify { [weak self] result in
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .off, socialType: .spotify))
-            guard let section = self?.section else {
+            guard
+                let self = self,
+                let section = self.section
+            else {
                 assertionFailure()
                 return
             }
             switch result {
             case .success(_):
-                self?.delegate?.didDisconnectSuccessfully(section: section)
+                self.analyticsService.trackConnectedAccountsGAEvent(action: .connectedAccounts, label: .spotify, dimension: .connectionStatus, status: false)
+                self.delegate?.didDisconnectSuccessfully(section: section)
             case .failed(let error):
                 print(error)
             }

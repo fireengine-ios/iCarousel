@@ -10,7 +10,6 @@ import Foundation
 
 protocol TermsCheckboxTextViewDelegate: class {
     func checkBoxPressed(isSelected: Bool, sender: TermsCheckboxTextView)
-    func tappedOnURL(url: URL) -> Bool
 }
 
 final class TermsCheckboxTextView: UIView, NibInit {
@@ -58,7 +57,6 @@ final class TermsCheckboxTextView: UIView, NibInit {
     
     private func setupDefaultTextViewState(textView: UITextView) {
         textView.text = ""
-        textView.delegate = self
     }
     
     func setup(title: String?, text: String?, delegate: TermsCheckboxTextViewDelegate) {
@@ -71,8 +69,9 @@ final class TermsCheckboxTextView: UIView, NibInit {
         }
     }
   
-    func setup(atributedTitleText: NSMutableAttributedString?, atributedText: NSMutableAttributedString?, delegate: TermsCheckboxTextViewDelegate) {
+    func setup(atributedTitleText: NSMutableAttributedString?, atributedText: NSMutableAttributedString?, delegate: TermsCheckboxTextViewDelegate, textViewDelegate: UITextViewDelegate) {
         self.delegate = delegate
+        descriptionView.delegate = textViewDelegate
         if let atributedTitleText = atributedTitleText {
             titleView.attributedText = atributedTitleText
         }
@@ -88,15 +87,3 @@ final class TermsCheckboxTextView: UIView, NibInit {
     
 }
 
-extension TermsCheckboxTextView: UITextViewDelegate {
-    
-    @available(iOS 10.0, *)
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        return delegate?.tappedOnURL(url: URL) ?? true
-    }
-    
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        return delegate?.tappedOnURL(url: URL) ?? true//UIApplication.shared.openURL(URL)
-    }
-    
-}

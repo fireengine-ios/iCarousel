@@ -12,8 +12,6 @@ protocol SettingsRouterInput {
     
     func goToOnboarding()
     
-    func goToContactSync()
-    
     func goToConnectedAccounts()
     
     func goToPermissions()
@@ -28,9 +26,7 @@ protocol SettingsRouterInput {
     
     func goToTermsAndPolicy()
     
-    func goToUsageInfo()
-    
-    func goToUserInfo(userInfo: AccountInfoResponse, isTurkcellUser: Bool)
+    func goToUserInfo(userInfo: AccountInfoResponse)
     
     func goToActivityTimeline()
     
@@ -51,4 +47,7 @@ protocol SettingsRouterInput {
     func showMailUpdatePopUp(delegate: MailVerificationViewControllerDelegate?)
     
     func showError(errorMessage: String)
+    
+    func presentAlertSheet(alertController: UIAlertController)
+    
 }

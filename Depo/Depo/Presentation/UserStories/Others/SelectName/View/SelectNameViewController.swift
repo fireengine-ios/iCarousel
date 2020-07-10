@@ -48,13 +48,11 @@ class SelectNameViewController: BaseViewController, SelectNameViewInput {
     }
     
     @objc func onCancelButton() {
-        hideView()
+        hideView(completion: nil)
     }
     
-    func hideView() {
-        dismiss(animated: true) {
-            
-        }
+    func hideView(completion: VoidHandler?) {
+        dismiss(animated: true, completion: completion)
     }
     
     // MARK: SelectNameViewInput

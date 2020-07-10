@@ -74,6 +74,8 @@ class AnimationCard: BaseCardView {
     }
     
     override func viewWillShow() {
+        debugLog("Animation Card - start load image")
+        photoImageView.setLogs(enabled: true)
         photoImageView.loadImageData(with: item?.tmpDownloadUrl)
     }
     
@@ -83,14 +85,15 @@ class AnimationCard: BaseCardView {
     
     override func deleteCard() {
         super.deleteCard()
-        CardsManager.default.stopOperationWithType(type: .collage, serverObject: cardObject)
+        CardsManager.default.stopOperationWith(type: .collage, serverObject: cardObject)
     }
     
     @IBAction private func actionPhotoViewButton(_ sender: UIButton) {
-        guard let image = photoImageView.originalImage else { return }
+        guard let item = item else {
+            return
+        }
         
-        let vc = PVViewerController.initFromNib()
-        vc.image = image
+        let vc = PVViewerController.with(item: item)
         let nController = UINavigationController(rootViewController: vc)
         RouterVC().presentViewController(controller: nController)
     }
@@ -127,7 +130,11 @@ class AnimationCard: BaseCardView {
                 case .success(_):
                     self?.cardType = .display
                 case .failed(let error):
-                    UIApplication.showErrorAlert(message: error.description)
+                    if error.isOutOfSpaceError {
+                        RouterVC().showFullQuotaPopUp()
+                    } else {
+                        UIApplication.showErrorAlert(message: error.description)
+                    }
                 }
             }
         }
@@ -136,10 +143,15 @@ class AnimationCard: BaseCardView {
     private func showPhotoVideoDetail() {
         guard let item = item else { return }
         
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController", selectedItem: item, allItems: [item], status: .active)
-        controller.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let nController = UINavigationController(rootViewController: controller)
-        RouterVC().presentViewController(controller: nController)
+        let router = RouterVC()
+        let detailModule = router.filesDetailModule(fileObject: item,
+                                                    items: [item],
+                                                    status: .active,
+                                                    canLoadMoreItems: false,
+                                                    moduleOutput: nil)
+
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        router.presentViewController(controller: nController)
     }
 
     override func spotlightHeight() -> CGFloat {

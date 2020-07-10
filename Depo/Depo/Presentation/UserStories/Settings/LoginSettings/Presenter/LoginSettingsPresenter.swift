@@ -62,14 +62,6 @@ extension LoginSettingsPresenter: LoginSettingsViewOutput {
                                              buttonAction: nil)
                 }
                 
-                if isOn != interactor.turkcellPasswordOn {
-                    MenloworksTagsService.shared.onTurkcellPasswordSettingsChanged(isOn)
-                }
-                
-                if isOn {
-                    MenloworksEventsService.shared.onTurkcellPasswordSet()
-                }
-                
                 updateStatuses()
             }
             
@@ -88,15 +80,6 @@ extension LoginSettingsPresenter: LoginSettingsViewOutput {
                                              buttonTitle: TextConstants.ok,
                                              buttonAction: nil)
                 }
-                
-                if isOn != interactor.turkcellAutoLoginOn {
-                    MenloworksTagsService.shared.onAutoLoginSettingsChanged(isOn)
-                }
-                
-                if isOn {
-                    MenloworksEventsService.shared.onAutoLoginSet()
-                }
-                
                 updateStatuses()
             }
             

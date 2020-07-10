@@ -54,6 +54,7 @@
                                         <constraint firstItem="NFf-uV-QSs" firstAttribute="leading" secondItem="0Zp-Vl-UsS" secondAttribute="leading" id="IjA-ly-Djj"/>
                                         <constraint firstItem="NFf-uV-QSs" firstAttribute="top" secondItem="0Zp-Vl-UsS" secondAttribute="top" id="RlU-j5-1O8"/>
                                         <constraint firstAttribute="trailing" secondItem="BRF-9H-wZ4" secondAttribute="trailing" id="c0S-9a-zts"/>
+                                        <constraint firstAttribute="width" secondItem="0Zp-Vl-UsS" secondAttribute="height" multiplier="118:53" id="dOZ-cP-EfY"/>
                                         <constraint firstAttribute="bottom" secondItem="NFf-uV-QSs" secondAttribute="bottom" id="hci-FJ-IGj"/>
                                         <constraint firstAttribute="bottom" secondItem="BRF-9H-wZ4" secondAttribute="bottom" id="sZC-Lg-UNZ"/>
                                     </constraints>
@@ -119,7 +120,6 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="C7o-qz-x6b" firstAttribute="centerY" secondItem="cuw-6n-2qo" secondAttribute="centerY" id="Acf-BF-NCY"/>
                 <constraint firstItem="C7o-qz-x6b" firstAttribute="trailing" secondItem="cuw-6n-2qo" secondAttribute="trailing" id="L2U-u4-pU1"/>
                 <constraint firstItem="C7o-qz-x6b" firstAttribute="leading" secondItem="cuw-6n-2qo" secondAttribute="leading" id="LR6-Mr-OXr"/>
                 <constraint firstItem="C7o-qz-x6b" firstAttribute="top" secondItem="cuw-6n-2qo" secondAttribute="top" id="uiA-df-ua4"/>

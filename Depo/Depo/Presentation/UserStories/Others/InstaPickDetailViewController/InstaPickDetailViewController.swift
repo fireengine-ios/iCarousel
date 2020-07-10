@@ -287,10 +287,8 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
             ///if selected photo was deleted/nil/zero size
             return
         }
-        
-        let vc = PVViewerController.initFromNib()
-        vc.image = image
-        
+
+        let vc = PVViewerController.with(image: image)
         let nController = NavigationController(rootViewController: vc)
         present(nController, animated: true, completion: nil) ///routerVC not work
     }
@@ -307,6 +305,8 @@ final class InstaPickDetailViewController: ViewController, ControlTabBarProtocol
     @IBAction private func onCopyToClipboardTap(_ sender: Any) {
         let clipboardString = dataSource.hashtags.joined()
         UIPasteboard.general.string = clipboardString
+        
+        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.snackbarMessageHashTagsCopied)
     }
     
     @IBAction private func onShareTap(_ sender: Any) {

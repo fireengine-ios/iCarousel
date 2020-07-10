@@ -18,7 +18,7 @@ protocol MoreFilesActionsInteractorInput {
     
     func smash(item: [BaseDataSourceItem], completion: VoidHandler?)
     
-    func moveToTrash(item: [BaseDataSourceItem])
+    func moveToTrash(items: [BaseDataSourceItem])
     
     func removeAlbums(items: [BaseDataSourceItem])
     
@@ -49,6 +49,8 @@ protocol MoreFilesActionsInteractorInput {
     func backUp(items: [BaseDataSourceItem])
     
     func removeFromAlbum(items: [BaseDataSourceItem])
+    
+    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem], item: Item)
     
     func photos(items: [BaseDataSourceItem])
     
@@ -81,4 +83,6 @@ protocol MoreFilesActionsInteractorInput {
     func deleteDeviceOriginal(items: [BaseDataSourceItem])
     
     func trackEvent(elementType: ElementTypes)
+    
+    func emptyTrashBin()
 }

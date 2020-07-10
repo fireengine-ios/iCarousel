@@ -69,7 +69,7 @@ extension UIViewController: Waiting {
     }
     
     func showSpinner() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             _ = MBProgressHUD.showAdded(to: self.view, animated: true)
         }
     }
@@ -81,7 +81,7 @@ extension UIViewController: Waiting {
     }
     
     func showSpinnerIncludeNavigationBar() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             let hud = MBProgressHUD.showAdded(to: window, animated: true)
             window.addSubview(hud)
@@ -89,7 +89,7 @@ extension UIViewController: Waiting {
     }
     
     func hideSpinnerIncludeNavigationBar() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return }
             MBProgressHUD.hideAllHUDs(for: window, animated: true)
         }

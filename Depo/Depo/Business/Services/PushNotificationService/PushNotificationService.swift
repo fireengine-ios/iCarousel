@@ -162,7 +162,7 @@ final class PushNotificationService {
         }
         
         DispatchQueue.main.async {
-            if self.router.navigationController?.presentedViewController != nil {
+            if self.router.topNavigationController?.presentedViewController != nil {
                 self.router.pushOnPresentedView(viewController: controller)
             } else {
                 self.router.pushViewController(viewController: controller)
@@ -379,7 +379,7 @@ final class PushNotificationService {
     }
     
     private func openBecomePremium() {
-        pushTo(router.premium(title: TextConstants.lifeboxPremium, headerTitle: TextConstants.becomePremiumMember))
+        pushTo(router.premium())
     }
     
     private func openTBMaticPhotos(_ uuidsByString: String?) {

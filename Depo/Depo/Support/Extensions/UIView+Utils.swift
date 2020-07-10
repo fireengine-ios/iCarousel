@@ -54,9 +54,9 @@ extension UIView {
             return
         }
         topAnchor.constraint(equalTo: superview.topAnchor, constant: offset).activate()
-        bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: offset).activate()
+        bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -offset).activate()
         leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: offset).activate()
-        trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: offset).activate()
+        trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -offset).activate()
     }
     
     /// returns all subviews except self

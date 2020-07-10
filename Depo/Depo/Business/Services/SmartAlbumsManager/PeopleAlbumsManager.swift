@@ -44,4 +44,12 @@ final class PeopleAlbumsManager: SmartAlbumsManagerImpl {
     override func newStoryCreated() { }
     
     override func finishUploadFiles() { }
+    
+    override func reload(types: [MyStreamType]) {
+        guard types.contains(.albums) else {
+            return
+        }
+        
+        requestAllItems()
+    }
 }

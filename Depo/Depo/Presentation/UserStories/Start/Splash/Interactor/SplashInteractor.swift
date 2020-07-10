@@ -91,6 +91,7 @@ class SplashInteractor: SplashInteractorInput {
                         SingletonStorage.shared.isJustRegistered = false
                         self?.isFirstLogin = true
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .turkcell))
+                        CacheManager.shared.actualizeCache()
                         self?.turkcellSuccessLogin()
                         self?.isTryingToLogin = false
                     }, fail: { [weak self] error in
@@ -130,8 +131,10 @@ class SplashInteractor: SplashInteractorInput {
                     CacheManager.shared.actualizeCache()
                     self?.isTryingToLogin = false
                     SingletonStorage.shared.isJustRegistered = false
-                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .rememberMe))
-                    self?.successLogin()
+                    SingletonStorage.shared.getOverQuotaStatus {
+                        self?.successLogin()
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .rememberMe))
+                    }
                 }, fail: { [weak self] error in
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .rememberMe))
                     /// we don't need logout here

@@ -11,7 +11,6 @@ class VisualMusicPlayerPresenter: VisualMusicPlayerModuleInput, VisualMusicPlaye
     func operationFinished(withType type: ElementTypes, response: Any?) {}
     func operationFailed(withType type: ElementTypes) {}
     func changeCover() {}
-    func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) { }
     func selectModeSelected() {}
     func selectAllModeSelected() {}
     func deSelectAll() {}

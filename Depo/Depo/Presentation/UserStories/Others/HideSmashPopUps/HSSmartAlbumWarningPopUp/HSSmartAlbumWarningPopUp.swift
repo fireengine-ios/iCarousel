@@ -105,9 +105,10 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
     private lazy var storageVars: StorageVars = factory.resolve()
     
     private let mode: Mode
-    private weak var delegate: HideFuncRoutingProtocol?
+    
+    private weak var delegate: DivorceActionStateProtocol?
 
-    init(mode: Mode, delegate: HideFuncRoutingProtocol) {
+    init(mode: Mode, delegate: DivorceActionStateProtocol) {
         self.mode = mode
         self.delegate = delegate
 
@@ -156,21 +157,20 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
     }
 
     @IBAction func onCloseTap(_ sender: Any) {
-        self.delegate?.popUPClosed()
+        self.delegate?.onPopUpClosed()
         close()
     }
 
     @IBAction func onPremiumTap(_ sender: Any) {
         close(isFinalStep: false) {
-            self.delegate?.becomePremium()
-            self.delegate?.openPremium()
+            self.delegate?.onOpenPremium()
+
         }
     }
 
     @IBAction func onFunctionTap(_ sender: Any) {
         close(isFinalStep: false) {
-            self.delegate?.proceedWithExistingPeople()
-            self.delegate?.openFaceImageGrouping()
+            self.delegate?.onOpenFaceImageGrouping()
         }
     }
 

@@ -50,18 +50,8 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
         }
     }
     
-    override func deleteFromFaceImageAlbum(items: [BaseDataSourceItem]) {
-        if let interactor = interactor as? FaceImagePhotosInteractor,
-            let id = item.id {
-            
-            if item is PeopleItem {
-                interactor.deletePhotosFromPeopleAlbum(items: items, id: id)
-            } else if item is ThingsItem {
-                interactor.deletePhotosFromThingsAlbum(items: items, id: id)
-            } else if item is PlacesItem {
-                interactor.deletePhotosFromPlacesAlbum(items: items, id: id)
-            }
-        }
+    override func getFIRParent() -> Item? {
+        return item
     }
     
     override func operationFinished(withType type: ElementTypes, response: Any?) {
@@ -71,9 +61,12 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
             }
         } else if type == .changeCoverPhoto {
             outputView()?.hideSpinner()
-
-            if let view = view as? FaceImagePhotosViewController, let item = response as? Item {
-                view.setHeaderImage(with: item.patchToPreview)
+            
+            if let view = view as? FaceImagePhotosViewController {
+                view.reloadSlider()
+                if let item = response as? Item {
+                    view.setHeaderImage(with: item.patchToPreview)
+                }
             }
         }
     }
@@ -117,6 +110,9 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     }
     
     override func updateThreeDotsButton() {
+        guard view != nil else {
+            return
+        }
         view.setThreeDotsMenu(active: true)
     }
     
@@ -129,28 +125,23 @@ class FaceImagePhotosPresenter: BaseFilesGreedPresenter {
     }
     
     override func didDelete(items: [BaseDataSourceItem]) {
-        //hide or delete fir album
-        if
-            let album = items.first as? AlbumItem,
-            let interactor = interactor as? FaceImagePhotosInteractor,
-            album == interactor.album
-        {
-            faceImageItemsModuleOutput?.delete(item: item)
-            goBack()
-            return
-        }
-        
         if dataSource.allObjectIsEmpty() {
             faceImageItemsModuleOutput?.delete(item: item)
-            backToOriginController()
-        } else {
-            if let interactor = interactor as? FaceImagePhotosInteractorInput {
-                interactor.loadItem(item)
+            
+            if (dataSource as? FaceImagePhotosDataSource)?.isRemoveFromAlbum == true {
+                setupBackHandler(toOriginal: false)
+                backHandler?()
+            } else {
+                setupBackHandler(toOriginal: true)
             }
+        } else if let interactor = interactor as? FaceImagePhotosInteractorInput, backHandler == nil {
+            interactor.loadItem(item)
         }
     }
     
-    
+    override func showBottomBar(animated: Bool, onView: UIView?) {
+        bottomBarPresenter?.show(animated: true, onView: (view as? FaceImagePhotosViewInput)?.contentView)
+    }
 }
 
 // MARK: FaceImageChangeCoverModuleOutput
@@ -243,12 +234,6 @@ extension FaceImagePhotosPresenter: FaceImagePhotosInteractorOutput {
         }
     }
     
-    func didRemoveFromAlbum(completion: @escaping (() -> Void)) {
-        if let router = router as? FaceImagePhotosRouterInput {
-            router.showRemoveFromAlbum(completion: completion)
-        }
-    }
-    
     func didReload() {
         reloadData()
     }
@@ -264,56 +249,76 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
         return obj.item == self.item
     }
     
+    //MARK: MoveToTrash
+    
     func didMoveToTrashItems(_ items: [Item]) {
-        backToOriginController()
+        guard items.first?.status == .hidden else {
+            return
+        }
+        setupBackHandler(toOriginal: true)
     }
     
     func didMoveToTrashPeople(items: [PeopleItem]) {
-        backToOriginController()
+        guard items.first?.status == .hidden else {
+            return
+        }
+        setupBackHandler(toOriginal: true)
     }
     
     func didMoveToTrashThings(items: [ThingsItem]) {
-        backToOriginController()
+        guard items.first?.status == .hidden else {
+            return
+        }
+        setupBackHandler(toOriginal: true)
     }
     
     func didMoveToTrashPlaces(items: [PlacesItem]) {
-        backToOriginController()
+        guard items.first?.status == .hidden else {
+            return
+        }
+        setupBackHandler(toOriginal: true)
     }
     
+    //MARK: Unhide
+    
     func didUnhideItems(_ items: [WrapData]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
     }
     
     func didUnhidePeople(items: [PeopleItem]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
     }
     
     func didUnhideThings(items: [ThingsItem]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
     }
     
     func didUnhidePlaces(items: [PlacesItem]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
     }
     
+    //MARK: Restore
+    
     func putBackFromTrashItems(_ items: [Item]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
     }
     
     func putBackFromTrashPeople(items: [PeopleItem]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
     }
     
     func putBackFromTrashPlaces(items: [PlacesItem]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
     }
     
     func putBackFromTrashThings(items: [ThingsItem]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
     }
     
+    //MARK: Delete
+    
     func deleteItems(items: [Item]) {
-        backToOriginController()
+        setupBackHandler(toOriginal: true)
     }
     
     func goBack() {
@@ -323,6 +328,16 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
         
         isDismissing = true
         router.back()
+    }
+    
+    private func setupBackHandler(toOriginal: Bool) {
+        backHandler = { [weak self] in
+            if toOriginal {
+                self?.backToOriginController()
+            } else {
+                self?.router.back()
+            }
+        }
     }
     
     private func backToOriginController() {
@@ -344,5 +359,31 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
         }
         
         return destination
+    }
+    
+    private func removePreviewController() {
+        let navVC = (view as? UIViewController)?.navigationController
+        navVC?.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension FaceImagePhotosPresenter: FaceImagePhotosDataSourceDelegate {
+    func didFinishFIRAlbum(operation: ElementTypes, album: Item) {
+        faceImageItemsModuleOutput?.delete(item: item)
+        
+        switch operation {
+        case .unhide, .moveToTrash, .delete, .restore:
+            removePreviewController()
+            setupBackHandler(toOriginal: false)
+        case .hide:
+            removePreviewController()
+            router.back()
+        default:
+            break 
+        }
+    }
+    
+    func didFinishAlbumOperation() {
+        reloadData()
     }
 }

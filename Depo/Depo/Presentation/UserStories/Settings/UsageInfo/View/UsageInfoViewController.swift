@@ -170,7 +170,7 @@ final class UsageInfoViewController: ViewController {
         docsUsageInfoView.configure(type: .docs, count: zero, volume: zeroBytes)
         
         circleProgressView.layoutIfNeeded()
-        setTitle(withString: TextConstants.settingsViewCellUsageInfo)
+        setTitle(withString: TextConstants.usage)
     }
     
     ///This method need to calculate height for collectionView.

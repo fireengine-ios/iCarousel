@@ -182,12 +182,6 @@ extension NetmeraEvents.Screens {
         }
     }
     
-    final class ImportPhotosScreen: NetmeraScreenEventTemplate {
-        override var key: String {
-            return "qsq"
-        }
-    }
-    
     final class ContactsSyncScreen: NetmeraScreenEventTemplate {
         override var key: String {
             return "lil"
@@ -311,6 +305,12 @@ extension NetmeraEvents.Screens {
     final class SplashPageScreen: NetmeraScreenEventTemplate {
         override var key: String {
             return "vgg"
+        }
+    }
+    
+    final class LiveCollectRememberScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "mms"
         }
     }
     
@@ -438,6 +438,12 @@ extension NetmeraEvents.Screens {
     final class SaveHiddenSuccessfullyPopUp: NetmeraScreenEventTemplate {
         override var key: String {
             return "hbh"
+        }
+    }
+    
+    final class VerifyEmailPopUp: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "ncs"
         }
     }
 }

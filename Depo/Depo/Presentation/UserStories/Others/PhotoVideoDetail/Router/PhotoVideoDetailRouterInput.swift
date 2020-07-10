@@ -14,5 +14,10 @@ protocol PhotoVideoDetailRouterInput {
     
     func goBack(navigationConroller: UINavigationController?)
     
-    func showRemoveFromAlbum(completion: @escaping (() -> Void))
+    func showConfirmationPopup(completion: @escaping () -> ())
+    
+    func goToPremium()
+    
+    func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem, moduleOutput: FaceImageItemsModuleOutput?)
+    
 }

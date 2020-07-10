@@ -18,10 +18,7 @@ final class EmailEnterDesigner: NSObject {
             newValue.textField.keyboardType = .emailAddress
             newValue.textField.enablesReturnKeyAutomatically = true
             newValue.textField.returnKeyType = .done
-            
-            if #available(iOS 10.0, *) {
-                newValue.textField.textContentType = .emailAddress
-            }
+            newValue.textField.textContentType = .emailAddress
         }
     }
     

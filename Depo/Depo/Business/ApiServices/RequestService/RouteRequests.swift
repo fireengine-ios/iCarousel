@@ -56,11 +56,13 @@ struct RouteRequests {
         }
     }()
     
-    static let baseContactsUrl: URL = {
+    static let baseContactsUrl: URL = baseContactsUrlShort +/ "ttyapi/"
+    
+    static let baseContactsUrlShort: URL = {
         switch currentServerEnvironment {
-        case .test: return URL(string: "https://tcloudstb.turkcell.com.tr/ttyapi/")!
-        case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/ttyapi/")!
-        case .production: return URL(string: "https://contactsync.turkcell.com.tr/ttyapi/")!
+        case .test: return URL(string: "https://contactsynctest.turkcell.com.tr/")!
+        case .preProduction: return URL(string: "https://adepotest-contactsync.turkcell.com.tr/")!
+        case .production: return URL(string: "https://contactsync.turkcell.com.tr/")!
         }
     }()
     
@@ -75,19 +77,8 @@ struct RouteRequests {
         }
     }()
     
-    static let privacyPolicy: String = {
-        switch currentServerEnvironment {
-        case .test: return isBillo ? "https://dev.mylifebox.com/policy/?lang=" :
-                                     "https://adepotest.turkcell.com.tr/policy/?lang="
-            
-        case .preProduction: return isBillo ? "https://prp.mylifebox.com/policy/?lang=" :
-                                              "https://adepotest.turkcell.com.tr/policy/?lang="
-            
-        case .production: return isBillo ? "https://billostorage.com/policy/?lang=" :
-                                           "https://mylifebox.com/policy/?lang="
-                                            
-        }
-    }()
+    
+    static let privacyPolicy = baseUrl +/ "privacyPolicy/get/\(Device.locale)"
     
     static let silentLogin: String = RouteRequests.baseShortUrlString + "api/auth/silent/token?rememberMe=on"
     
@@ -112,7 +103,7 @@ struct RouteRequests {
     static let eulaGet     = "eula/get/%@?brand=" + applicationTarget
     static let eulaCheck   = "eula/check/%@"
     static let eulaApprove = "eula/approve"
-    static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth"
+    static let eulaGetEtkAuth = baseUrl +/ "eula/getEtkAuth/v2"
     static let eulaGetGlobalPermAuth = baseUrl +/ "eula/getGlobalPermAuth"
     
     //MARK: Social Connections
@@ -182,6 +173,7 @@ struct RouteRequests {
     static let peopleRecovery = baseUrl.absoluteString + people + "recover"
     static let peopleTrash = baseUrl.absoluteString + people + "trash"
     static let peopleDelete = baseUrl.absoluteString + people + "delete"
+    static let peoplePhotoWithMedia = people + "media?fileUuid=%@"
 //    static let peopleDeletePhoto = "/person/photo/%d/%d"
     static let things = "object/"
     static let thingsThumbnails = "object/thumbnails"
@@ -214,7 +206,7 @@ struct RouteRequests {
     //MARK : Faq
     static var faqContentUrl: String {
         switch currentServerEnvironment {
-        case .production: return isBillo ? "https://billostorage.com/faq/?lang=%@)" :
+        case .production: return isBillo ? "https://mybilloapp.com/faq/?lang=%@)" :
                                            "https://mylifebox.com/faq/?lang=%@"
             
         case .preProduction: return isBillo ? "https://prp.mylifebox.com/faq/?lang=%@" :
@@ -299,6 +291,7 @@ struct RouteRequests {
         static let updateSecurityQuestion = accountApi +/ "updateSecurityQuestion"
         static let updateInfoFeedback = accountApi +/ "updateInfoFeedback"
         static let updateAddress = accountApi +/ "address"
+        static let info = accountApi +/ "info"
         
         enum Settings {
             /// without "s" at the end
@@ -312,11 +305,14 @@ struct RouteRequests {
         enum Permissions {
             static let authority = Account.accountApi +/ "authority"
             static let featurePacks = Account.accountApi +/ "feature-packs/IOS"
+            static let featurePacksV2 = Account.accountApi +/ "feature-packs/v2/IOS"
             static let availableOffers = Account.accountApi +/ "available-offers/IOS"
             static let features = baseUrl +/ "features"
             
             static let permissionsList = Account.accountApi +/ "permission/list"
+            static let permissionWithType = Account.accountApi.absoluteString + "/permission/list?permissionType=%@"
             static let permissionsUpdate = Account.accountApi +/ "permission/update"
+            static let mobilePaymentPermissionFeedback = Account.accountApi +/ "updateMobilePaymentPermissionFeedback"
         }
     }
     
@@ -346,6 +342,7 @@ struct RouteRequests {
         static let detail = filesystemBase + "detail/%@"
         static let metaData = filesystemBase + "metadata"
         static let trash = filesystemBase + "trash"
+        static let emptyTrash = baseUrl +/ "trash/empty"
         static let hide = baseUrl +/ (filesystemBase + "hide")
         static let recover = (baseUrl +/ filesystemBase) +/ "recover"
     }
@@ -356,7 +353,7 @@ struct RouteRequests {
     
     static var globalPermissionsDetails: String {
         switch currentServerEnvironment {
-        case .production: return isBillo ? "https://billostorage.com/global_ops.html ?lang=\(Device.locale)" :
+        case .production: return isBillo ? "https://mybilloapp.com/global_ops.html?lang=\(Device.locale)" :
                                            "https://mylifebox.com/portal/global_ops.html?lang=\(Device.locale)"
                                             
         case .preProduction: return isBillo ? "https://prp.mylifebox.com/global_ops.html?lang=\(Device.locale)" :

@@ -20,4 +20,6 @@ protocol PremiumRouterInput: class {
     func showTermsOfUse()
     func presentPaymentPopUp(paymentModel: PaymentModel?)
     func closePaymentPopUpController(closeAction: @escaping VoidHandler)
+    
+    func showAllPackages()
 }

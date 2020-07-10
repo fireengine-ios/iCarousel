@@ -28,7 +28,11 @@ protocol RequestParametrs {
 
 protocol UploadRequestParametrs: RequestParametrs {
     var urlToLocalFile: URL? { get }
+    var rootFolder: String { get }
+    var tmpUUID: String { get }
     var fileData: Data? { get }
+    var fileName: String { get }
+    var uploadType: UploadType? { get }
 }
 
 protocol DownloadRequestParametrs: RequestParametrs {
@@ -115,14 +119,9 @@ class JsonConvertor {
     }
 }
 
-class BaseRequestService: TransIdLogging {
+class BaseRequestService {
     
     let requestService = RequestService.default
-    let transIdLogging: Bool
-    
-    init(transIdLogging: Bool = false) {
-        self.transIdLogging = transIdLogging
-    }
     
     func executePostRequest<T, P> (param: RequestParametrs, handler: BaseResponseHandler<T, P>) {
         let task = requestService.requestTask(patch: param.patch,
@@ -221,28 +220,5 @@ class BaseRequestService: TransIdLogging {
                                                   timeoutInterval: param.timeout,
                                                   response: handler.response)
         task.resume()
-    }
-}
-
-protocol TransIdLogging: class {
-    var transIdLogging: Bool { get }
-    func debugLogTransIdIfNeeded(headers: [AnyHashable: Any]?, method: String)
-    func debugLogTransIdIfNeeded(errorResponse: ErrorResponse, method: String)
-}
-
-extension TransIdLogging {
-    func debugLogTransIdIfNeeded(headers: [AnyHashable: Any]?, method: String) {
-        if transIdLogging,
-            let headers = headers,
-            let transId = headers[HeaderConstant.transId] {
-            let serviceName = String(describing: type(of: self))
-            debugLog("\(serviceName) \(method) \(HeaderConstant.transId): \(transId)")
-        }
-    }
-    
-    func debugLogTransIdIfNeeded(errorResponse: ErrorResponse, method: String) {
-        if case ErrorResponse.failResponse(let response) = errorResponse {
-            debugLogTransIdIfNeeded(headers: (response as? ObjectRequestResponse)?.response?.allHeaderFields, method: method)
-        }
     }
 }

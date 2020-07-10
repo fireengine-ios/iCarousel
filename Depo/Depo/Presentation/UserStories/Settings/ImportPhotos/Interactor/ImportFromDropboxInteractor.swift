@@ -51,7 +51,7 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
             switch response {
             case .success(_):
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Import(status: .off, socialType: .dropbox))
-                self?.output?.disconnectionSuccess()  
+                self?.output?.disconnectionSuccess()
             case .failed(let error):
                 self?.output?.disconnectionFailure(errorMessage: error.description)
             }
@@ -156,7 +156,12 @@ extension ImportFromDropboxInteractor: ImportFromDropboxInteractorInput {
         })
     }
     
-    func trackImportActivationDropBox() {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .importFrom, eventLabel: .importDropbox)
+    func trackImportStatusDropBox(isOn: Bool) {
+        analyticsService.trackConnectedAccountsGAEvent(action: .importFrom, label: .dropbox, dimension: .statusType, status: isOn)
     }
+    
+    func trackConnectionStatusDropBox(isConnected: Bool) {
+        analyticsService.trackConnectedAccountsGAEvent(action: .connectedAccounts, label: .dropbox, dimension: .connectionStatus, status: isConnected)
+    }
+    
 }

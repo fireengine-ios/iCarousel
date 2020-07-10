@@ -111,7 +111,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
     
     private func deleteLocalItems(localItemsToDelete: [WrapData]) {
         wrapFileService.deleteLocalFiles(deleteFiles: localItemsToDelete, success: { [weak self] in
-            guard let `self` = self else {
+            guard let self = self else {
                 return
             }
             
@@ -120,11 +120,7 @@ class FreeAppSpaceInteractor: BaseFilesGreedInteractor {
             if let presenter = self.output as? FreeAppSpacePresenter {
                 DispatchQueue.main.async {
                     presenter.onItemDeleted(count: localItemsToDelete.count)
-                    if FreeAppSpace.session.getDuplicatesObjects().isEmpty {
-                        
-                        CardsManager.default.stopOperationWithType(type: .freeAppSpace)
-                        CardsManager.default.stopOperationWithType(type: .freeAppSpaceLocalWarning)
-                    }
+                    self.freeAppSpace.updateFreeUpSpaceCard()
                     presenter.goBack()
                 }
             }

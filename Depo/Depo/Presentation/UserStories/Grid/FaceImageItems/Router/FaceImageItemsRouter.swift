@@ -22,8 +22,7 @@ extension FaceImageItemsRouter: FaceImageItemsRouterInput {
     }
     
     func showPopUp() {
-        let popUp = PopUpController.with(title: nil, message: TextConstants.faceImageWaitAlbum, image: .none, buttonTitle: TextConstants.ok)
-        router.presentViewController(controller: popUp)
+        SnackbarManager.shared.show(type: .critical, message: TextConstants.faceImageWaitAlbum, action: .ok)
     }
     
     func showNoDetailsAlert(with message: String) {
@@ -33,8 +32,8 @@ extension FaceImageItemsRouter: FaceImageItemsRouterInput {
         router.presentViewController(controller: alert)
     }
     
-    func openPremium(title: String, headerTitle: String, module: FaceImageItemsModuleOutput) {
-        let vc = router.premium(title: title, headerTitle: headerTitle, module: module)
+    func openPremium(source: BecomePremiumViewSourceType, module: FaceImageItemsModuleOutput) {
+        let vc = router.premium(source: source, module: module)
         router.pushViewController(viewController: vc)
     }
     

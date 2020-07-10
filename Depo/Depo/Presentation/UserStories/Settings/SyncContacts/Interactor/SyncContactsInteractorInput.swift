@@ -14,4 +14,6 @@ protocol SyncContactsInteractorInput {
     func analyze()
     func performOperation(forType type: SYNCMode)
     func getUserStatus()
+    func getStoredContactsCount() -> Int
+    func getContactsPermissionStatus(completionHandler: @escaping ContactsPermissionCallback)
 }

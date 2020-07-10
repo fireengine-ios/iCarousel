@@ -130,7 +130,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             return
         }
         
-        if UIApplication.shared.applicationState == .background {
+        if ApplicationStateHelper.shared.isBackground {
             if BackgroundTaskService.shared.appWasSuspended {
                 CacheManager.shared.actualizeCache()
             }
@@ -150,15 +150,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         if status == .authorizedAlways || status == .authorizedWhenInUse {
             startUpdateLocation()
         }
-        
-        if status == .authorizedAlways {
-            MenloworksTagsService.shared.onLocationPermissionChanged("always")
-        } else if status == .authorizedWhenInUse {
-            MenloworksTagsService.shared.onLocationPermissionChanged("in use")
-        } else if status == .denied {
-            MenloworksTagsService.shared.onLocationPermissionChanged("denied")
-        }
-        
         AnalyticsPermissionNetmeraEvent.sendLocationPermissionNetmeraEvents(status)
         
         if status != .notDetermined, let handler = requestAuthorizationStatusHandler {

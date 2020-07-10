@@ -95,7 +95,7 @@ final class LeavePremiumPresenter {
             return nil
         }
         
-        guard let featureType = feature.subscriptionPlanFeatureType else {
+        guard let contentType = feature.subscriptionPlanType else {
             if let key = feature.subscriptionPlanLanguageKey {
                 return TextConstants.digicelCancelText(for: key)
             } else {
@@ -103,8 +103,7 @@ final class LeavePremiumPresenter {
             }
         }
         
-        if featureType == .allAccessFeature {
-            
+        if contentType.isSameAs(FeaturePackageType.allAccessFeature) {
             guard let accountType = interactor.getAccountType(with: accountType.rawValue, offers: [feature]) else {
                 if let key = feature.subscriptionPlanLanguageKey {
                     return TextConstants.digicelCancelText(for: key)
@@ -114,18 +113,27 @@ final class LeavePremiumPresenter {
             }
             
             switch accountType {
-            case .all: return TextConstants.offersAllCancel
-            case .cyprus: return TextConstants.featureKKTCellCancelText
-            case .ukranian: return TextConstants.featureLifeCellCancelText
-            case .life: return TextConstants.featureLifeCancelText
-            case .moldovian: return TextConstants.featureMoldCellCancelText
-            case .albanian: return TextConstants.featureAlbanianCancelText
-            case .turkcell: return String(format: TextConstants.offersCancelTurkcell, feature.subscriptionPlanName ?? "")
-            case .FWI: return TextConstants.featureDigicellCancelText
-            case .jamaica: return TextConstants.featureDigicellCancelText
+            case .all:
+                return TextConstants.offersAllCancel
+            case .cyprus:
+                return TextConstants.featureKKTCellCancelText
+            case .ukranian:
+                return TextConstants.featureLifeCellCancelText
+            case .life:
+                return TextConstants.featureLifeCancelText
+            case .moldovian:
+                return TextConstants.featureMoldCellCancelText
+            case .albanian:
+                return TextConstants.featureAlbanianCancelText
+            case .turkcell:
+                return String(format: TextConstants.offersCancelTurkcell, feature.subscriptionPlanName ?? "")
+            case .FWI:
+                return TextConstants.featureDigicellCancelText
+            case .jamaica:
+                return TextConstants.featureDigicellCancelText
             }
         } else {
-            return featureType.cancelText
+            return contentType.type.cancelText
         }
     }
     
@@ -158,44 +166,12 @@ extension LeavePremiumPresenter: LeavePremiumViewOutput {
         premiumView.delegate = self
         
         interactor.trackScreen(screenType: controllerType)
-        if controllerType != .standard {
-            view?.startActivityIndicator()
-            interactor.getActiveSubscription()
-        }
     }
     
 }
 
 // MARK: - LeavePremiumInteractorOtuput
 extension LeavePremiumPresenter: LeavePremiumInteractorOutput {
-    func didLoadActiveSubscriptions(_ offers: [SubscriptionPlanBaseResponse]) {
-        let type: AuthorityType = controllerType == .premium ? .premiumUser : .middleUser
-        feature = offers.first(where: { offer in
-            return offer.subscriptionPlanAuthorities?.contains(where: { $0.authorityType == type }) ?? false
-        })
-        
-        guard let feature = feature, let featureType = feature.subscriptionPlanFeatureType else {
-            let error = CustomErrors.text("An error occurred while getting feature type from offer.")
-            didErrorMessage(with: error.localizedDescription)
-            return
-        }
-        
-        if featureType == .appleFeature {
-            interactor.getAppleInfo(for: feature)
-        } else {
-            price = interactor.getPrice(for: feature, accountType: accountType)
-        }
-    }
-    
-    func didLoadInfoFromApple() {
-        guard let offer = feature else {
-            let error = CustomErrors.serverError("An error occurred while getting offer.")
-            didErrorMessage(with: error.localizedDescription)
-            return
-        }
-        price = interactor.getPrice(for: offer, accountType: accountType)
-    }
-    
     func didErrorMessage(with text: String) {
         view?.stopActivityIndicator()
         router.showError(with: text)

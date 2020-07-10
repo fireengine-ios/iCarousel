@@ -31,6 +31,9 @@ class BaseFilesGreedModuleConfigurator {
             presenter?.needShowScrollIndicator = true
             presenter?.needShowEmptyMetaItems = true
             presenter?.ifNeedReloadData = false
+        } else if remoteServices is AllFilesService || remoteServices is FavouritesService {
+            presenter = DocumentsGreedPresenter(sortedRule: .lastModifiedTimeDown)
+            presenter?.sortedType = .lastModifiedTimeNewOld
         } else {
             presenter = DocumentsGreedPresenter()
             presenter?.sortedRule = .timeUpWithoutSection
@@ -63,7 +66,7 @@ class BaseFilesGreedModuleConfigurator {
             sliderPresenter.baseGreedPresenterModule = presenter
         }
         if visibleSyncItemsCheckBox {
-            viewController.showOnlySyncItemsCheckBox = CheckBoxView.initFromXib()
+            viewController.showOnlySyncItemsCheckBox = CheckBoxView.initFromNib()
         }
         if let underNavBarBarConfig = topBarConfig {
             presenter?.topBarConfig = underNavBarBarConfig
@@ -149,9 +152,8 @@ class BaseFilesGreedModuleConfigurator {
             
         }
         
-        if let uploadPresenter = presenter as? UploadFilesSelectionPresenter,
-            let uploadInteracotor = interactor as? UploadFilesSelectionInteractor {
-            uploadInteracotor.uploadOutput = uploadPresenter
+        if let uploadInteracotor = interactor as? UploadFilesSelectionInteractor {
+            uploadInteracotor.uploadOutput = presenter as? UploadFilesSelectionPresenter
         }
         
         interactor.originalFilters = fileFilters

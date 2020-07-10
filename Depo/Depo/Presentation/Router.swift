@@ -44,19 +44,22 @@ class RouterVC: NSObject {
     }
     
     func getParentUUID() -> String {
-        if let tabBarController = tabBarController, let viewController = tabBarController.customNavigationControllers[tabBarController.selectedIndex].viewControllers.last as? BaseViewController
-        {
+        //TODO: get rid of getParentUUID
+        if topNavigationController?.viewControllers.first is PhotoVideoDetailViewController,
+           let viewController = topNavigationController?.viewControllers.last as? BaseViewController {
             return viewController.parentUUID
-        } else if let viewController = navigationController?.viewControllers.last as? BaseViewController {
+        } else if let tabBarController = tabBarController,
+            let viewControllers = tabBarController.customNavigationControllers[safe: tabBarController.selectedIndex]?.viewControllers,
+            let viewController = viewControllers.last as? BaseViewController {
             return viewController.parentUUID
         }
-        
         return ""
     }
     
     func isRootViewControllerAlbumDetail() -> Bool {
-        if let tabBarController = tabBarController, let viewController = tabBarController.customNavigationControllers[tabBarController.selectedIndex].viewControllers.last as? BaseViewController
-        {
+        if let tabBarController = tabBarController,
+            let viewControllers = tabBarController.customNavigationControllers[safe: tabBarController.selectedIndex]?.viewControllers,
+            let viewController = viewControllers.last as? BaseViewController {
             return viewController is AlbumDetailViewController
         } else {
             return navigationController?.viewControllers.last is AlbumDetailViewController
@@ -111,6 +114,13 @@ class RouterVC: NSObject {
         return UIApplication.topController()
     }
     
+    var topNavigationController: UINavigationController? {
+        if let navigationController = defaultTopController?.navigationController {
+            return navigationController
+        }
+        return navigationController
+    }
+    
     func createRootNavigationController(controller: UIViewController) -> UINavigationController {
         
         let navController = NavigationController(rootViewController: controller)
@@ -133,10 +143,10 @@ class RouterVC: NSObject {
 //        window.makeKeyAndVisible()
     }
     
-    func pushViewControllertoTableViewNavBar(viewController: UIViewController) {
+    func pushViewControllertoTableViewNavBar(viewController: UIViewController, animated: Bool = true) {
         if let tabBarVc = tabBarVC {
             
-            tabBarVc.pushViewController(viewController, animated: true)
+            tabBarVc.pushViewController(viewController, animated: animated)
             return
         }
     }
@@ -154,7 +164,12 @@ class RouterVC: NSObject {
             NotificationCenter.default.post(name: notificationName, object: nil)
         }
         
-        navigationController?.pushViewController(viewController, animated: animated)
+        if let navController = topNavigationController {
+            navController.pushViewController(viewController, animated: animated)
+        } else {
+            pushViewControllertoTableViewNavBar(viewController: viewController, animated: animated)
+        }
+    
         viewController.navigationController?.isNavigationBarHidden = false
         
         if let tabBarViewController = tabBarController, let baseView = viewController as? BaseViewController {
@@ -312,7 +327,7 @@ class RouterVC: NSObject {
     }
     
     func getViewControllerForPresent() -> UIViewController? {
-        if let nController = navigationController?.presentedViewController as? UINavigationController,
+        if let nController = topNavigationController?.presentedViewController as? UINavigationController,
             let viewController = nController.viewControllers.first as? PhotoVideoDetailViewController {
             return viewController
         }
@@ -320,6 +335,11 @@ class RouterVC: NSObject {
         if let presentedController = navigationController?.viewControllers.last?.presentedViewController as? TBMatikPhotosViewController {
             return presentedController
         }
+        
+        if let navBarController = navigationController?.viewControllers.last?.presentedViewController as? UINavigationController {
+            return navBarController.visibleViewController
+        }
+        
         return navigationController?.viewControllers.last
     }
         
@@ -478,12 +498,7 @@ class RouterVC: NSObject {
     // MARK: SynchronyseSettings
     
     var synchronyseScreen: UIViewController {
-        
-        let inicializer = AutoSyncModuleInitializer()
-        let controller = AutoSyncViewController(nibName: "AutoSyncViewController", bundle: nil)
-        inicializer.autosyncViewController = controller
-        inicializer.setupVC()
-        return controller
+        return AutoSyncModuleInitializer.initializeViewController()
     }
     
     
@@ -543,23 +558,6 @@ class RouterVC: NSObject {
     var musics: UIViewController? {
         let controller = MusicInitializer.initializeViewController(with: "BaseFilesGreedViewController")
         return controller
-    }
-    
-    
-    private(set) var allFilesViewType = MoreActionsConfig.ViewType.Grid
-    private(set) var allFilesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
-    
-    private(set) var favoritesViewType = MoreActionsConfig.ViewType.Grid
-    private(set) var favoritesSortType = MoreActionsConfig.SortRullesType.TimeNewOld
-    
-    func reloadType(_ type: MoreActionsConfig.ViewType, sortedType: MoreActionsConfig.SortRullesType, fieldType: FieldValue) {
-        if fieldType == .all {
-            self.allFilesViewType = type
-            self.allFilesSortType = sortedType
-        } else if fieldType == .favorite {
-            self.favoritesViewType = type
-            self.favoritesSortType = sortedType
-        }
     }
     
     var favorites: UIViewController? {
@@ -648,10 +646,9 @@ class RouterVC: NSObject {
     
     // MARK: File info
     
-    func fileInfo(item: BaseDataSourceItem, moduleOutput: FileInfoModuleOutput? = nil) -> UIViewController {
+    func fileInfo(item: BaseDataSourceItem) -> UIViewController {
         let viewController = FileInfoModuleInitializer.initializeViewController(with: "FileInfoViewController",
-                                                                                item: item,
-                                                                                moduleOutput: moduleOutput)
+                                                                                item: item)
         return viewController
     }
     
@@ -713,8 +710,12 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func uploadPhotos(rootUUID: String) -> UIViewController {
-        let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController(rootUUID: rootUUID)
+    func uploadPhotos(rootUUID: String,
+                      getItems: LocalAlbumPresenter.PassBaseDataSourceItemsHandler?,
+                      saveItems: LocalAlbumPresenter.ReturnBaseDataSourceItemsHandler?) -> UIViewController {
+        let controller = UploadFilesSelectionModuleInitializer.initializeUploadPhotosViewController(rootUUID: rootUUID,
+                                                                                                    getItems: getItems,
+                                                                                                    saveItems: saveItems)
         return controller
     }
     
@@ -759,37 +760,32 @@ class RouterVC: NSObject {
         return controller
     }
     
-    func filesDetailViewController(fileObject: WrapData, items: [WrapData], status: ItemStatus) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
-                                                                                    selectedItem: fileObject,
-                                                                                    allItems: items,
-                                                                                    status: status)
-        let c = controller as! PhotoVideoDetailViewController
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return c
+    func filesDetailModule(fileObject: WrapData, items: [WrapData], status: ItemStatus, canLoadMoreItems: Bool, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
+        return PhotoVideoDetailModuleInitializer.initializeViewController(with: "PhotoVideoDetailViewController",
+                                                                          moduleOutput: moduleOutput,
+                                                                          selectedItem: fileObject,
+                                                                          allItems: items,
+                                                                          status: status,
+                                                                          canLoadMoreItems: canLoadMoreItems)
     }
     
-    func filesDetailAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, status: ItemStatus) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
-                                                                                         selectedItem: fileObject,
-                                                                                         allItems: items,
-                                                                                         albumUUID: albumUUID,
-                                                                                         status: status)
-        let c = controller as! PhotoVideoDetailViewController
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return c
+    func filesDetailAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
+        return PhotoVideoDetailModuleInitializer.initializeAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                               moduleOutput: moduleOutput,
+                                                                               selectedItem: fileObject,
+                                                                               allItems: items,
+                                                                               albumUUID: albumUUID,
+                                                                               status: status)
     }
     
-    func filesDetailFaceImageAlbumViewController(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?, status: ItemStatus) -> UIViewController {
-        let controller = PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
-                                                                                         selectedItem: fileObject,
-                                                                                         allItems: items,
-                                                                                         albumUUID: albumUUID,
-                                                                                         albumItem: albumItem,
-                                                                                         status: status)
-        let c = controller as! PhotoVideoDetailViewController
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        return c
+    func filesDetailFaceImageAlbumModule(fileObject: WrapData, items: [WrapData], albumUUID: String, albumItem: Item?, status: ItemStatus, moduleOutput: PhotoVideoDetailModuleOutput?) -> PhotoVideoDetailModule {
+        return PhotoVideoDetailModuleInitializer.initializeFaceImageAlbumViewController(with: "PhotoVideoDetailViewController",
+                                                                                        moduleOutput: moduleOutput,
+                                                                                        selectedItem: fileObject,
+                                                                                        allItems: items,
+                                                                                        albumUUID: albumUUID,
+                                                                                        albumItem: albumItem,
+                                                                                        status: status)
     }
 
     // MARK: Albums list
@@ -915,8 +911,7 @@ class RouterVC: NSObject {
     // MARK: Auto Upload
     
     var autoUpload: UIViewController {
-        let controller = AutoSyncModuleInitializer.initializeViewController(with: "AutoSyncViewController", fromSettings: true)
-        return controller
+        return AutoSyncModuleInitializer.initializeViewController(fromSettings: true)
     }
     
     // MARK: Change Password
@@ -1029,8 +1024,8 @@ class RouterVC: NSObject {
     
     // MARK: - Premium
     
-    func premium(title: String, headerTitle: String, module: FaceImageItemsModuleOutput? = nil, viewControllerForPresentOn: UIViewController? = nil) -> UIViewController{
-        let controller = PremiumModuleInitializer.initializePremiumController(with: "PremiumViewController", title: title, headerTitle: headerTitle, module: module, viewControllerForPresentOn: viewControllerForPresentOn)
+    func premium(source: BecomePremiumViewSourceType = .default, module: FaceImageItemsModuleOutput? = nil, viewControllerForPresentOn: UIViewController? = nil) -> UIViewController{
+        let controller = PremiumModuleInitializer.initializePremiumController(source: source, module: module, viewControllerForPresentOn: viewControllerForPresentOn)
         return controller
     }
     
@@ -1163,5 +1158,52 @@ class RouterVC: NSObject {
     
     func trashBinController() -> TrashBinViewController {
         return TrashBinViewController.initFromNib()
+    }
+    
+    func showFullQuotaPopUp(_ popUpType: FullQuotaWarningPopUpType = .standard) {
+        let controller = FullQuotaWarningPopUp(popUpType)
+        DispatchQueue.main.async {
+            if
+                let topController = self.defaultTopController,
+                topController is AutoSyncViewController == false,
+                topController is FullQuotaWarningPopUp == false,
+                topController is LoginViewController == false {
+                topController.present(controller, animated: false)
+            }
+        }
+    }
+    
+    func mobilePaymentPermissionController() -> MobilePaymentPermissionViewController {
+        return MobilePaymentPermissionViewController.initFromNib()
+    }
+    
+    func openTrashBin() {
+        guard let tabBarVC = tabBarController else {
+            return
+        }
+        
+        tabBarVC.dismiss(animated: true)
+        
+        func switchToTrashBin() {
+            guard let segmentedController = tabBarVC.currentViewController as? SegmentedController else {
+                return
+            }
+            
+            segmentedController.loadViewIfNeeded()
+            segmentedController.switchSegment(to: DocumentsScreenSegmentIndex.trashBin.rawValue)
+        }
+        
+        let index = TabScreenIndex.documentsScreenIndex.rawValue
+        if tabBarVC.selectedIndex == index {
+            switchToTrashBin()
+        } else {
+            guard let newSelectedItem = tabBarVC.tabBar.items?[safe: index] else {
+                assertionFailure("This index is non existent 😵")
+                return
+            }
+            tabBarVC.tabBar.selectedItem = newSelectedItem
+            tabBarVC.selectedIndex = index - 1
+            switchToTrashBin()
+        }
     }
 }

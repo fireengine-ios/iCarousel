@@ -190,13 +190,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     private func setupTabBarItems() {
-        let items = [("outlineHome", "", TextConstants.accessibilityHome),
-                     ("outlinePhotosVideos", "", TextConstants.accessibilityPhotosVideos),
-                     ("", "", ""),
-                     ("outlineContacts", "", TextConstants.periodicContactsSync),
-                     ("outlineDocs", "", TextConstants.homeButtonAllFiles)]
-        
-        tabBar.setupItems(withImageToTitleNames: items)
+        tabBar.setupItems()
     }
     
     private func setupObserving() {
@@ -457,8 +451,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     private func setupCurtainView() {
         curtainView.layer.masksToBounds = true
         
-        curtainView.backgroundColor = ColorConstants.whiteColor
-        curtainView.alpha = 0.88
+        curtainView.backgroundColor = ColorConstants.searchShadowColor.withAlphaComponent(0.85)
         showCurtainView(show: false)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(TabBarViewController.closeCurtainView))
@@ -479,9 +472,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         }
         
         if show {
-            curtainView.frame = currentViewController.view.bounds
-            currentViewController.view.addSubview(curtainView)
-            currentViewController.view.bringSubview(toFront: curtainView)
+            let container = currentViewController.navigationController ?? currentViewController
+            curtainView.frame = container.view.bounds
+            container.view.addSubview(curtainView)
+            container.view.bringSubview(toFront: curtainView)
         } else {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationUpdateThreeDots), object: nil)
             curtainView.removeFromSuperview()
@@ -668,28 +662,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         changeButtonsAppearance(toHidden: true, withAnimation: true, forButtons: buttonsArray)
     }
     
-    fileprivate func log(for index: TabScreenIndex) {
-        switch index {
-        case .photosScreenIndex:
-            MenloworksAppEvents.onPhotosAndVideosOpen()
-            let settings = AutoSyncDataStorage().settings
-            
-            if settings.isAutoSyncEnabled {
-                MenloworksTagsService.shared.onAutosyncPhotosStatusOn(isWifi: !(settings.photoSetting.option == .wifiOnly))
-                MenloworksTagsService.shared.onAutosyncVideosStatusOn(isWifi: !(settings.videoSetting.option == .wifiOnly))
-            } else {
-                MenloworksTagsService.shared.onAutosyncVideosStatusOff()
-                MenloworksTagsService.shared.onAutosyncPhotosStatusOff()
-            }
-        case .contactsSyncScreenIndex:
-            MenloworksAppEvents.onContactSyncPageOpen()
-        case .documentsScreenIndex:
-            MenloworksAppEvents.onDocumentsOpen()
-        default:
-            break
-        }
-    }
-    
     private func changeButtonsAppearance(toHidden hidden: Bool, withAnimation animate: Bool, forButtons buttons: [SubPlussButtonView]) {
         if buttons.count == 0 {
             return
@@ -748,9 +720,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 return
             }
             
-            if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
-                log(for: tabScreenIndex)
-            }
+//            if let tabScreenIndex = TabScreenIndex(rawValue: selectedIndex) {
+//                log(for: tabScreenIndex)
+//            }
 
             selectedIndex = tabbarSelectedIndex
         }
@@ -786,6 +758,10 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .plus, eventLabel: .plusAction(action))
         
+        if let netmeraEvent = NetmeraEvents.Actions.PlusButton(action: action) {
+            AnalyticsService.sendNetmeraEvent(event: netmeraEvent)
+        }
+        
         if let externalActionHandler = externalActionHandler, externalActionHandler.canHandleTabBarAction(action) {
             externalActionHandler.handleAction(action)
         } else {
@@ -816,22 +792,26 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         
         wrapData.patchToPreview = PathForItem.remoteUrl(url)
         
-        let isFromAlbum = RouterVC().isRootViewControllerAlbumDetail() 
-        UploadService.default.uploadFileList(items: [wrapData], uploadType: .fromHomePage, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: getFolderUUID() ?? "", isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: true, success: {
-        }, fail: { [weak self] error in
-            DispatchQueue.main.async {
-                let vc = PopUpController.with(title: TextConstants.errorAlert,
-                                              message: error.description,
-                                              image: .error,
-                                              buttonTitle: TextConstants.ok)
-                self?.present(vc, animated: true, completion: nil)
-            }
-        }) { _ in
-            
-        }
+        let isFromAlbum = RouterVC().isRootViewControllerAlbumDetail()
         
-        picker.dismiss(animated: true, completion: {
-            self.statusBarHidden = false
+        picker.dismiss(animated: true, completion: { [weak self] in
+            self?.statusBarHidden = false
+            
+            UploadService.default.uploadFileList(items: [wrapData], uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: self?.getFolderUUID() ?? "", isFavorites: false, isFromAlbum: isFromAlbum, isFromCamera: true, success: {
+            }, fail: { [weak self] error in
+                guard !error.isOutOfSpaceError else {
+                    //showing special popup for this error
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    let vc = PopUpController.with(title: TextConstants.errorAlert,
+                                                  message: error.description,
+                                                  image: .error,
+                                                  buttonTitle: TextConstants.ok)
+                    self?.present(vc, animated: true, completion: nil)
+                }
+            }, returnedUploadOperation: { _ in })
         })
     }
     

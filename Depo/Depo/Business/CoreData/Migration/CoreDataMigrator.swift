@@ -19,7 +19,7 @@ final class CoreDataMigrator {
     // MARK: - Check
     
     private func requiresMigration(at storeURL: URL, toVersion version: CoreDataMigrationVersion) -> Bool {
-        guard let metadata = NSPersistentStoreCoordinator.metadata(at: storeURL) else {
+        guard let metadata = try? NSPersistentStoreCoordinator.metadata(at: storeURL) else {
             return false
         }
 
@@ -30,6 +30,7 @@ final class CoreDataMigrator {
     
     func migrateStoreIfNeeded(at storeURL: URL, toVersion version: CoreDataMigrationVersion) {
         if requiresMigration(at: storeURL, toVersion: version) {
+            printLog("db_migration: migration is required at \(storeURL) to \(version)")
             migrateStore(at: storeURL, toVersion: version)
         }
     }
@@ -46,6 +47,7 @@ final class CoreDataMigrator {
             
             do {
                 try manager.migrateStore(from: currentURL, sourceType: NSSQLiteStoreType, options: nil, with: migrationStep.mappingModel, toDestinationURL: tempDirectoryURL, destinationType: NSSQLiteStoreType, destinationOptions: nil)
+                printLog("db_migration: migrate store from \(currentURL) to \(tempDirectoryURL)")
             } catch let error {
                 fatalLog("failed attempting to migrate from \(migrationStep.sourceModel) to \(migrationStep.destinationModel), error: \(error)")
             }
@@ -58,6 +60,7 @@ final class CoreDataMigrator {
             currentURL = tempDirectoryURL
         }
         
+        printLog("db_migration: replace store at \(storeURL) with \(currentURL)")
         NSPersistentStoreCoordinator.replaceStore(at: storeURL, withStoreAt: currentURL)
         
         if currentURL != storeURL {
@@ -67,7 +70,7 @@ final class CoreDataMigrator {
     
     private func migrationStepsForStore(at storeURL: URL, toVersion destinationVersion: CoreDataMigrationVersion) -> [CoreDataMigrationStep] {
         guard
-            let metadata = NSPersistentStoreCoordinator.metadata(at: storeURL),
+            let metadata = try? NSPersistentStoreCoordinator.metadata(at: storeURL),
             let sourceVersion = CoreDataMigrationVersion.compatibleVersionForStoreMetadata(metadata)
         else {
             fatalLog("unknown store version at URL \(storeURL)")
@@ -80,6 +83,8 @@ final class CoreDataMigrator {
         var sourceVersion = sourceVersion
         var migrationSteps = [CoreDataMigrationStep]()
 
+        printLog("db_migration: prepare steps from \(sourceVersion) to \(destinationVersion)")
+        
         while sourceVersion != destinationVersion, let nextVersion = sourceVersion.next {
             let migrationStep = CoreDataMigrationStep(sourceVersion: sourceVersion, destinationVersion: nextVersion)
             migrationSteps.append(migrationStep)
@@ -91,15 +96,21 @@ final class CoreDataMigrator {
     }
     
     // MARK: - WAL
-    func forceWALCheckpointingForStore(at storeURL: URL) {
-        guard let metadata = NSPersistentStoreCoordinator.metadata(at: storeURL), let currentModel = NSManagedObjectModel.compatibleModelForStoreMetadata(metadata) else {
+    private func forceWALCheckpointingForStore(at storeURL: URL) {
+        guard
+            let metadata = try? NSPersistentStoreCoordinator.metadata(at: storeURL),
+            let currentModel = NSManagedObjectModel.compatibleModelForStoreMetadata(metadata)
+        else {
             return
         }
+        
+        printLog("db_migration: WALCheckpointing")
         
         do {
             let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: currentModel)
             
-            let options = [NSSQLitePragmasOption: ["journal_mode": "DELETE"]]
+            let options = [NSSQLitePragmasOption: ["journal_mode": "DELETE"],
+                           NSPersistentStoreFileProtectionKey: FileProtectionType.none] as [String : Any]
             let store = persistentStoreCoordinator.addPersistentStore(at: storeURL, options: options)
             try persistentStoreCoordinator.remove(store)
         } catch let error {

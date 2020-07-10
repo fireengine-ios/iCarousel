@@ -28,8 +28,12 @@ class SeacrhViewRouter: SearchViewRouterInput {
             let player: MediaPlayer = factory.resolve()
             player.play(list: wrapperedArray, startAt: wrapperedArray.index(of: wrapperedItem) ?? 0)
         default:
-            let controller = router.filesDetailViewController(fileObject: wrapperedItem, items: wrapperedArray, status: .active)
-            let nController = NavigationController(rootViewController: controller)
+            let detailModule = router.filesDetailModule(fileObject: wrapperedItem,
+                                                        items: wrapperedArray,
+                                                        status: .active,
+                                                        canLoadMoreItems: false,
+                                                        moduleOutput: nil)
+            let nController = NavigationController(rootViewController: detailModule.controller)
             router.presentViewController(controller: nController)
         }
     }

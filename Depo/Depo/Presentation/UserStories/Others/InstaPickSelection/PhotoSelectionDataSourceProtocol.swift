@@ -50,7 +50,16 @@ final class AllPhotosSelectionDataSource: PhotoSelectionDataSourceProtocol {
                 
                 var filteredItems = filteredItems
                 /// filter missing dates
-                filteredItems.append(contentsOf: items.filter { $0.metadata?.takenDate != nil })
+                filteredItems.append(contentsOf: items.filter {
+                    guard
+                        $0.metadata?.takenDate != nil,
+                        let name = $0.name,
+                        !name.isPathExtensionGif()
+                    else {
+                        return false
+                    }
+                        return true
+                    })
                 
                 let isSomethingFiltered = (filteredItems.count != items.count)
                 let isEnoughForPaginationSize = (filteredItems.count >= self.paginationPageSize)
