@@ -199,6 +199,8 @@ enum AnalyticsAppScreens {
     case contactSyncDeleteDuplicates
     case contactSyncBackUp
     case contactSyncGeneral
+    case contactSyncContactsListScreen
+    case contactSyncBackupsScreen
     ///Previews
 //    case photoPreview
 //    case videoPreview
@@ -316,6 +318,10 @@ enum AnalyticsAppScreens {
             return "Contact Back Up"
         case .contactSyncGeneral:
             return "Contacts Sync"
+        case .contactSyncContactsListScreen:
+            return "ContactListScreen"
+        case .contactSyncBackupsScreen:
+            return "BackupsScreen"
         case .upload:
             return "Manual Upload"
         case .search:
@@ -665,6 +671,7 @@ enum GAEventAction {
     case sync
     case recognition
     case contact
+    case deleteContactBackups
     case startVideo ///or story
     case everyMinuteVideo
     case serviceError
@@ -674,7 +681,7 @@ enum GAEventAction {
     case settingsAutoSync
     case captcha
     case photopickShare
-    case contactOperation(SYNCMode)
+    case contactOperation(GAEventLabel.ContactEvent)
     case plus
     case connectedAccounts
     case deleteAccount
@@ -800,6 +807,10 @@ enum GAEventAction {
                 return "Contact Backup"
             case .restore:
                 return "Contact Restore"
+            case .deleteDuplicates:
+                return "Delete Duplicate"
+            case .deleteBackup:
+                return "Delete Backup"
             }
         case .plus:
             return "Plus"
@@ -879,6 +890,8 @@ enum GAEventAction {
             return "Mobile Payment Explanation"
         case .openMobilePaymentPermission:
             return "Open Mobile Payment Permission"
+        case .deleteContactBackups:
+            return "Delete Backup"
         }
     }
 }
@@ -979,6 +992,7 @@ enum GAEventLabel {
         case backup
         case restore
         case deleteDuplicates
+        case deleteBackup
         
         var text: String {
             switch self {
@@ -988,6 +1002,8 @@ enum GAEventLabel {
                 return "Restore"
             case .deleteDuplicates:
                 return "Delete of Duplicate"
+            case .deleteBackup:
+                return "Delete Backup"
             }
         }
     }
