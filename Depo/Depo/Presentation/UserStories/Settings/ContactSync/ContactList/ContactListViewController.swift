@@ -60,6 +60,7 @@ final class ContactListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        trackScreen()
         setupNavigationBar()
         showRelatedView()
         reloadData()
