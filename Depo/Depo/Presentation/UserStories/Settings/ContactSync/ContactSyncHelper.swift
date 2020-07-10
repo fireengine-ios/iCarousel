@@ -115,7 +115,7 @@ final class ContactSyncHelper {
                 return
             }
             
-            self.analyticsHelper.trackOperation(type: .deleteDuplicated)
+            self.analyticsHelper.trackStartOperation(type: .deleteDuplicated)
             self.checkAnalyze()
             self.currentOperation = .deleteDuplicated
             self.contactSyncService.deleteDuplicates()
@@ -186,7 +186,7 @@ final class ContactSyncHelper {
             switch result {
             case .success(_):
                 self.currentOperation = operationType
-                self.analyticsHelper.trackOperation(type: operationType)
+                self.analyticsHelper.trackStartOperation(type: operationType)
 
                 switch operationType {
                 case .backup:
@@ -220,6 +220,7 @@ final class ContactSyncHelper {
     private func checkAnalyze() {
         contactSyncService.analyze(progressCallback: { [weak self] progressPercentage, count, type in
             if progressPercentage == 0 && type == .deleteDuplicated {
+                self?.analyticsHelper.trackFinishOperation(type: type, status: .success)
                 self?.delegate?.didDeleteDuplicates()
                 self?.currentOperation = nil
                 AnalyzeStatus.shared().reset()
@@ -228,13 +229,13 @@ final class ContactSyncHelper {
             }
         }, successCallback: { [weak self] response in
             debugLog("contactsSyncService.analyze successCallback")
-            
             self?.delegate?.didAnalyze(contacts: response)
             self?.currentOperation = nil
             
         }, cancelCallback: { [weak self] in
             self?.currentOperation = nil
         }, errorCallback: { [weak self] errorType, type in
+            self?.analyticsHelper.trackFinishOperation(type: type, status: .failed)
             debugLog("contactsSyncService.analyze errorCallback")
             self?.delegate?.didFailed(operationType: type, error: .syncError(errorType))
         })
@@ -268,7 +269,7 @@ final class ContactSyncHelper {
             }
             
             }, finishCallback: { [weak self] result, operationType in
-                self?.analyticsHelper.trackOperationSuccess(type: type)
+                self?.analyticsHelper.trackFinishOperation(type: operationType, status: .success)
                 
                 UIApplication.setIdleTimerDisabled(false)
                 debugLog("contactsSyncService.executeOperation finishCallback: \(result)")
@@ -277,7 +278,7 @@ final class ContactSyncHelper {
                 self?.currentOperation = nil
                 
             }, errorCallback: { [weak self] errorType, operationType in
-                self?.analyticsHelper.trackOperationFailure(type: type)
+                self?.analyticsHelper.trackFinishOperation(type: operationType, status: .failed)
                 
                 debugLog("contactsSyncService.executeOperation errorCallback: \(errorType)")
                 
@@ -336,7 +337,7 @@ final class ContactSyncHelper {
 private final class Analytics {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     
-    func trackOperation(type: SyncOperationType) {
+    func trackStartOperation(type: SyncOperationType) {
         switch type {
         case .backup:
             trackBackup()
@@ -349,31 +350,25 @@ private final class Analytics {
         }
     }
     
-    func trackOperationSuccess(type: SYNCMode) {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions,
-                                            eventActions: .contactOperation(type),
-                                            eventLabel: .success)
+    func trackFinishOperation(type: SyncOperationType, status: ContactsOperationResult) {
+        let netmeraStatus: NetmeraEventValues.GeneralStatus = status == .success ? .success : .failure
+        let gaEventLabel: GAEventLabel = status.analyticsGALabel
         
-        trackNetmera(operationType: type, status: .success)
-    }
-    
-    func trackOperationFailure(type: SYNCMode) {
-        analyticsService.trackCustomGAEvent(eventCategory: .functions,
-                                            eventActions: .contactOperation(type),
-                                            eventLabel: .failure)
-        
-        trackNetmera(operationType: type, status: .failure)
-    }
-
-    private func trackNetmera(operationType: SYNCMode, status: NetmeraEventValues.GeneralStatus) {
-        switch operationType {
-            case .backup:
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .backup, status: status))
-            
-            case .restore:
-                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .restore, status: status))
-            
-            default: break
+        switch type {
+        case .backup:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .backup, status: netmeraStatus))
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .contactOperation(.backup), eventLabel: gaEventLabel)
+        case .restore:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .restore, status: netmeraStatus))
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .contactOperation(.restore), eventLabel: gaEventLabel)
+        case .deleteDuplicated:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, status: netmeraStatus))
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .contactOperation(.deleteDuplicates), eventLabel: gaEventLabel)
+        case .deleteBackup:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteBackup, status: netmeraStatus))
+            analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .contactOperation(.deleteBackup), eventLabel: gaEventLabel)
+        default:
+            break
         }
     }
     
@@ -401,21 +396,16 @@ private final class Analytics {
 extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
     
     func didRestore() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .restore, status: .success))
         showResultView(type: .restore, result: .success)
         finishOperation(operationType: .restore)
     }
     
     func didBackup(result: ContactSync.SyncResponse) {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .backup, status: .success))
-        
         showResultView(type: .backUp(result), result: .success)
         finishOperation(operationType: .backUp(result))
     }
     
     func didDeleteDuplicates() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Contact(actionType: .deleteDuplicate, status: .success))
-        
         //delete contacts is very fast, a delay is needed so that progress can be seen
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             self?.showResultView(type: .deleteDuplicates, result: .success)
@@ -670,28 +660,13 @@ extension ContactSyncControllerProtocol {
             switch result {
             case .success(_):
                 self.showResultView(type: type, result: .success)
-                self.didFinishOperation(operationType: .deleteAllContacts) //
-                self.trackAction(type: type, result: .success)
+                self.didFinishOperation(operationType: type)
+                Analytics().trackFinishOperation(type: .deleteBackup, status: .success)
                
             case .failed(_):
                 self.showResultView(type: type, result: .failed)
-                self.trackAction(type: type, result: .failed)
+                Analytics().trackFinishOperation(type: .deleteBackup, status: .failed)
             }
-        }
-    }
- 
-    //only for delete backups for now
-    private func trackAction(type: ContactsOperationType, result: ContactsOperationResult) {
-
-        let analytics = AnalyticsService()
-        
-        switch type {
-        case .deleteBackUp:
-            analytics.trackCustomGAEvent(eventCategory: .functions,
-                                         eventActions: .deleteContactBackups,
-                                         eventLabel: result.analyticsGALabel)
-        default:
-            break
         }
     }
     

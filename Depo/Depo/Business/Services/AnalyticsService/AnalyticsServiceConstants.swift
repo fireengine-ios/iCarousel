@@ -681,7 +681,7 @@ enum GAEventAction {
     case settingsAutoSync
     case captcha
     case photopickShare
-    case contactOperation(SYNCMode)
+    case contactOperation(GAEventLabel.ContactEvent)
     case plus
     case connectedAccounts
     case deleteAccount
@@ -807,6 +807,10 @@ enum GAEventAction {
                 return "Contact Backup"
             case .restore:
                 return "Contact Restore"
+            case .deleteDuplicates:
+                return "Delete Duplicate"
+            case .deleteBackup:
+                return "Delete Backup"
             }
         case .plus:
             return "Plus"

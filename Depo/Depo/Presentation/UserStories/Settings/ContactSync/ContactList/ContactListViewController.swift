@@ -98,7 +98,9 @@ final class ContactListViewController: BaseViewController {
 private extension ContactListViewController {
     
     func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactListScreen())
         analyticsService.logScreen(screen: .contactSyncContactsListScreen)
+        analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncContactsListScreen)
     }
     
 }
