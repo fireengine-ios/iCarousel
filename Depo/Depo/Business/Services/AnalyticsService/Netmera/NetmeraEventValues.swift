@@ -167,7 +167,7 @@ enum NetmeraEventValues {
             case .backup:
                 return "Backup"
             case .restore:
-                return "Restore  "
+                return "Restore"
             case .deleteDuplicate:
                 return "DeleteDuplicate"
             case .deleteBackup:
