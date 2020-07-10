@@ -15,27 +15,27 @@ enum WarningPopupType {
     fileprivate var title: String {
         switch self {
         case .contactPermissionDenied:
-            return TextConstants.warningPopupStorageLimitTitle
-        case .lifeboxStorageLimit:
             return TextConstants.warningPopupContactPermissionsTitle
+        case .lifeboxStorageLimit:
+            return TextConstants.warningPopupStorageLimitTitle
         }
     }
     
     fileprivate var message: String {
         switch self {
         case .contactPermissionDenied:
-            return TextConstants.warningPopupStorageLimitMessage
-        case .lifeboxStorageLimit:
             return TextConstants.warningPopupContactPermissionsMessage
+        case .lifeboxStorageLimit:
+            return TextConstants.warningPopupStorageLimitMessage
         }
     }
     
     fileprivate var firstButtonTitle: String? {
         switch self {
         case .contactPermissionDenied:
-            return TextConstants.warningPopupStorageLimitSettingsButton
-        case .lifeboxStorageLimit:
             return TextConstants.warningPopupContactPermissionsStorageButton
+        case .lifeboxStorageLimit:
+            return TextConstants.warningPopupStorageLimitSettingsButton
         }
     }
     

@@ -13,6 +13,7 @@ enum SyncOperationType {
     case restore
     case analyze
     case deleteDuplicated
+    case deleteBackup
     case getBackUpStatus
     case cancel
     
@@ -26,6 +27,8 @@ enum SyncOperationType {
             return nil
         case .deleteDuplicated:
             return .deleteDuplicates
+        case .deleteBackup:
+            return .deleteBackUp
         }
     }
     
@@ -35,7 +38,7 @@ enum SyncOperationType {
             return .backup
         case .restore:
             return .restore
-        case .analyze, .getBackUpStatus, .cancel, .deleteDuplicated:
+        case .analyze, .getBackUpStatus, .cancel, .deleteDuplicated, .deleteBackup:
             return nil
         }
     }
