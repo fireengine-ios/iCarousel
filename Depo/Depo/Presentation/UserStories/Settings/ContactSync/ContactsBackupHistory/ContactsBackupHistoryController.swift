@@ -54,8 +54,8 @@ final class ContactsBackupHistoryController: BaseViewController {
     
     private func trackScreen() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactBackUpScreen())
-        analyticsService.logScreen(screen: .contactSyncBackUp)
-        analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackUp)
+        analyticsService.logScreen(screen: .contactSyncBackupsScreen)
+        analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackupsScreen)
     }
 }
 
