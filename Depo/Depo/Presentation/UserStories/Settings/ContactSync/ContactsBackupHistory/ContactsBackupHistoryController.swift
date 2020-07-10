@@ -91,7 +91,6 @@ extension ContactsBackupHistoryController: ContactSyncControllerProtocol, Contac
         show(view: contactHistoryView, animated: true)
     }
     
-    func handle(error: ContactSyncHelperError, operationType: SyncOperationType) { }
     func didFinishOperation(operationType: ContactsOperationType) { }
 }
 
