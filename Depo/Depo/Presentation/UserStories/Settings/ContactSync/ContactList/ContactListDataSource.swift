@@ -179,13 +179,14 @@ extension ContactListDataSource: UITableViewDataSource {
         return tableView.dequeue(reusable: ContactListCell.self, for: indexPath)
     }
     
-    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        sectionTitles
-    }
-    
-    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        index
-    }
+    //maybe needed in future
+//    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+//        sectionTitles
+//    }
+//
+//    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+//        index
+//    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ContactListSectionHeader()
