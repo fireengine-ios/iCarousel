@@ -219,8 +219,6 @@ extension ContactListViewController: ContactSyncControllerProtocol, ContactSyncH
         navigationItem.rightBarButtonItem = moreButton
     }
     
-    func handle(error: ContactSyncHelperError, operationType: SyncOperationType) { }
-    
     func didFinishOperation(operationType: ContactsOperationType) {
         switch operationType {
         case .backUp(let result):
