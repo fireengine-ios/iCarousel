@@ -49,6 +49,7 @@ final class PeopleSliderDataSource: NSObject {
     func reloadCollection(with items: [PeopleOnPhotoItemResponse]) {
         DispatchQueue.main.async {
             self.items = items
+            self.collectionView?.collectionViewLayout.invalidateLayout()
             self.collectionView?.reloadData()
         }
     }

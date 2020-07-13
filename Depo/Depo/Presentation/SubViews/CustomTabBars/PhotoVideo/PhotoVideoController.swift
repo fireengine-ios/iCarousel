@@ -156,6 +156,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         CellImageManager.clear()
         assetsFileCacheManager.resetCachedAssets()
         dataSource.performFetch()
+        collectionViewManager.showEmptyDataViewIfNeeded(isShow: dataSource.isObjectsEmpty)
         collectionView.reloadData()
         collectionView.collectionViewLayout.invalidateLayout()
     }
@@ -275,6 +276,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
                 }
             }
         }
+    }
+    
+    private func showUploadScreen() {
+        let controller = router.uploadPhotos()
+        let navigation = NavigationController(rootViewController: controller)
+        navigation.navigationBar.isHidden = false
+        router.presentViewController(controller: navigation)
     }
     
     private func updateSelection(cell: PhotoVideoCell) {
@@ -638,6 +646,10 @@ extension PhotoVideoController: PhotoVideoNavBarManagerDelegate {
     func onSearchButton() {
         showSearchScreen()
     }
+    
+    func openUploadPhotos() {
+        showUploadScreen()
+    }
 }
 
 // MARK: - PhotoVideoCollectionViewManagerDelegate
@@ -648,16 +660,41 @@ extension PhotoVideoController: PhotoVideoCollectionViewManagerDelegate {
         refresher.endRefreshing()
     }
     
-    func showOnlySyncItemsCheckBoxDidChangeValue(_ value: Bool) {
-        dataSource.changeSourceFilter(syncOnly: value, isPhotos: isPhoto, newPredicateSetupedCallback: { [weak self] in
+    func openAutoSyncSettings() {
+        router.pushViewController(viewController: router.autoUpload)
+    }
+
+    func openViewTypeMenu(sender: UIButton) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let actions = GalleryViewType.createAlertActions { [weak self] type in
+            self?.changeViewType(to: type)
+        }
+        actions.forEach { actionSheet.addAction($0) }
+    
+        let cancelAction = UIAlertAction(title: TextConstants.cancel, style: .cancel)
+        actionSheet.addAction(cancelAction)
+        
+        let rect = sender.convert(sender.bounds, to: self.view)
+        actionSheet.popoverPresentationController?.sourceRect = rect
+        actionSheet.popoverPresentationController?.sourceView = self.view
+        actionSheet.popoverPresentationController?.permittedArrowDirections = .up
+
+        present(actionSheet, animated: true)
+    }
+    
+    private func changeViewType(to type: GalleryViewType) {
+        guard collectionViewManager.viewType != type else {
+            return
+        }
+        
+        collectionViewManager.viewType = type
+        
+        dataSource.changeSourceFilter(type: type, isPhotos: isPhoto) { [weak self] in
             DispatchQueue.main.async {
                 self?.fetchAndReload()
             }
-        })
-    }
-    
-    func openAutoSyncSettings() {
-        router.pushViewController(viewController: router.autoUpload)
+        }
     }
 }
 
