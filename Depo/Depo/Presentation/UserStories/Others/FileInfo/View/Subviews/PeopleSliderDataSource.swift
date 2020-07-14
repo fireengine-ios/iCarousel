@@ -35,13 +35,6 @@ final class PeopleSliderDataSource: NSObject {
         collectionView?.delegate = self
         collectionView?.dataSource = self
         collectionView?.register(nibCell: PeopleCollectionViewCell.self)
-        
-        if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-            layout.itemSize = CGSize(width: 100, height: 130)
-            layout.minimumInteritemSpacing = 0
-            layout.minimumLineSpacing = 16
-        }
     }
     
     //MARK: - Shared methods
@@ -49,8 +42,8 @@ final class PeopleSliderDataSource: NSObject {
     func reloadCollection(with items: [PeopleOnPhotoItemResponse]) {
         DispatchQueue.main.async {
             self.items = items
-            self.collectionView?.collectionViewLayout.invalidateLayout()
             self.collectionView?.reloadData()
+            self.collectionView?.collectionViewLayout.invalidateLayout()
         }
     }
     
@@ -95,3 +88,21 @@ extension PeopleSliderDataSource: UICollectionViewDelegate {
         delegate?.didSelect(item: selectedItem)
     }
 }
+
+
+extension PeopleSliderDataSource: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 100, height: 130)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 16
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}
+
+
