@@ -80,5 +80,16 @@ final class ContactService {
     
     func setPeriodicForContactsSync(periodic: SYNCPeriodic) {
         SyncSettings.shared().periodicBackup = periodic
+        
+        switch periodic {
+        case .daily:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .on, type: .daily))
+        case .every7:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .on, type: .weekly))
+        case .every30:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .on, type: .monthly))
+        case .none:
+            AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PeriodicContactSync(action: .off, type: nil))
+        }
     }
 }

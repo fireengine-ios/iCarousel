@@ -40,6 +40,8 @@ final class ContactListViewController: BaseViewController {
     private var isLoadingData = false
     private var currentTask: URLSessionTask?
     
+    private let analyticsService = AnalyticsService()
+    
     private weak var delegate: ContactListViewDelegate?
     
     static func with(backUpInfo: ContactSync.SyncResponse, delegate: ContactListViewDelegate?) -> ContactListViewController {
@@ -58,6 +60,7 @@ final class ContactListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        trackScreen()
         setupNavigationBar()
         showRelatedView()
         reloadData()
@@ -90,6 +93,18 @@ final class ContactListViewController: BaseViewController {
     }
 }
 
+//MARK: - Analytics
+
+private extension ContactListViewController {
+    
+    func trackScreen() {
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactListScreen())
+        analyticsService.logScreen(screen: .contactSyncContactsListScreen)
+        analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncContactsListScreen)
+    }
+    
+}
+ 
 //MARK: - Private actions
 
 private extension ContactListViewController {
@@ -203,8 +218,6 @@ extension ContactListViewController: ContactSyncControllerProtocol, ContactSyncH
         show(view: mainView, animated: true)
         navigationItem.rightBarButtonItem = moreButton
     }
-    
-    func handle(error: ContactSyncHelperError, operationType: SyncOperationType) { }
     
     func didFinishOperation(operationType: ContactsOperationType) {
         switch operationType {
