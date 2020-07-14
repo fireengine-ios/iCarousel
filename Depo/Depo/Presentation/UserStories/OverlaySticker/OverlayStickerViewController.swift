@@ -56,11 +56,8 @@ final class OverlayStickerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
-        
         view.backgroundColor = .black
         statusBarColor = .black
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -276,14 +273,15 @@ final class OverlayStickerViewController: UIViewController {
         navigationBarWithGradientStyle()
         navigationItem.leftBarButtonItem = closeButton
         navigationItem.rightBarButtonItem = applyButton
-        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.isTranslucent = true
     }
     
     private func makeTopAndBottomBarsIsHidden(hide: Bool) {
-        UIView.animate(withDuration: NumericConstants.animationDuration) {
-            self.navigationController?.navigationBar.isHidden = hide
+        
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            self.navigationController?.setNavigationBarHidden(hide, animated: true)
             self.stickersView.isHidden = hide
-        }
+        })
     }
     
     @objc private func actionFullscreenTapGesture() {
