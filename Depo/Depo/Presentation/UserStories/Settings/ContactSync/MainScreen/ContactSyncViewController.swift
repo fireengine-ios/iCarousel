@@ -68,6 +68,10 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         if tabBarIsVisible {
             needToShowTabBar = true
         }
+        
+        NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { [weak self] _ in
+            self?.updateBackupStatus()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
