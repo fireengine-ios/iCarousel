@@ -16,7 +16,7 @@ class BottomSelectionTabBarModuleInitializer: NSObject {
     func setupModule(config: EditingBarConfig, sourceView: UIView? = nil,
                      settablePresenter: BottomSelectionTabBarPresenter?) -> BottomSelectionTabBarViewController {
         presenter = settablePresenter
-        let bottomTabBatVC = BottomSelectionTabBarViewController.initFromXib()
+        let bottomTabBatVC = BottomSelectionTabBarViewController.initFromNib()
         let configurator = BottomSelectionTabBarModuleConfigurator()
         let interactor = BottomSelectionTabBarInteractor()
         let router = BottomSelectionTabBarRouter()
@@ -28,7 +28,7 @@ class BottomSelectionTabBarModuleInitializer: NSObject {
     func setupMusicModule(config: EditingBarConfig, sourceView: UIView? = nil,
                      settablePresenter: BottomSelectionTabBarPresenter?) -> BottomSelectionTabBarViewController {
         presenter = settablePresenter
-        let bottomTabBatVC = BottomSelectionTabBarViewController.initFromXib()
+        let bottomTabBatVC = BottomSelectionTabBarViewController.initFromNib()
         let configurator = BottomSelectionTabBarModuleConfigurator()
         let interactor = BottomSelectionMusicTabBarInteractor()
         let router = BottomSelectionMusicTabBarRouter()

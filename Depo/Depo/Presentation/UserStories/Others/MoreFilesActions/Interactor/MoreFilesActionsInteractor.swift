@@ -596,42 +596,15 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func sync(item: [BaseDataSourceItem]) {
-        guard let items = item as? [Item] else { //FIXME: transform all to BaseDataSourceItem
+        guard let items = item as? [Item] else {
             return
         }
         
-        ///logic is appliable for a ONE syncing item only
-        if let firstItem = items.first, router.getViewControllerForPresent() is PhotoVideoDetailViewController {
-            
-            let hideHUD = {
-                DispatchQueue.toMain {
-                    self.output?.completeAsyncOperationEnableScreen()
-                }
-            }
-            
-            fileService.cancellableUpload(items: [firstItem], toPath: "",
-                                          success: { [weak self] in
-                                            hideHUD()
-                                            self?.successAction(elementType: .sync)()
-                                        }, fail: { [weak self] response in
-                                            hideHUD()
-                                            let handler = self?.failAction(elementType: .sync)
-                                            handler?(response)
-                                        }, returnedUploadOperations: { [weak self] (operations) in
-                                            guard let operations = operations, !operations.isEmpty else {
-                                                return
-                                            }
-                                            self?.output?.startCancelableAsync(with: TextConstants.uploading, cancel: {
-                                                UploadService.default.cancelUploadOperations(operations: operations)
-                                                ItemOperationManager.default.cancelledUpload(file: firstItem)
-                                            })
-                                        })
-        } else {
-            fileService.upload(items: items, toPath: "",
-                               success: successAction(elementType: .sync),
-                               fail: failAction(elementType: .sync))
-        }
+        fileService.upload(items: items, toPath: "",
+                           success: successAction(elementType: .sync),
+                           fail: failAction(elementType: .sync))
     }
+    
     
     func download(item: [BaseDataSourceItem]) {
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
