@@ -21,46 +21,6 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return [.AlphaBetricAZ, .AlphaBetricZA, .lastModifiedTimeNewOld, .lastModifiedTimeOldNew, .Largest, .Smallest]
     }
     
-    class func initializePhotoVideosViewController(with nibName: String, screenFilterType: MoreActionsConfig.MoreActionsFileType) -> UIViewController {
-        let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)//PhotoVideoController(nibName: nibName, bundle: nil)
-        viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
-        viewController.scrollablePopUpView.addNotPermittedCardViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
-        viewController.scrollablePopUpView.isEnable = true
-        let configurator = BaseFilesGreedModuleConfigurator()//PhotoVideoFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download, .sync, .addToAlbum, .moveToTrash],
-                                               style: .default, tintColor: nil)
-        
-        let gridListTopBarConfig = GridListTopBarConfig(defaultGridListViewtype: .List,
-                                                        availableSortTypes: [.AlphaBetricAZ, .AlphaBetricZA,
-                                                                             .metaDataTimeNewOld, .metaDataTimeOldNew,
-                                                                             .Largest, .Smallest],
-                                                        defaultSortType: .metaDataTimeNewOld,
-                                                        availableFilter: true,
-                                                        showGridListButton: false,
-                                                        defaultFilterState: screenFilterType)
-
-        let alertSheetConfig = AlertFilesActionsSheetInitialConfig(initialTypes: [.select, .instaPick],
-                                                                   selectionModeTypes: [.createStory, .print, .deleteDeviceOriginal])
-
-        let fileType: FileType = screenFilterType.convertToFileType()
-
-//        topBarConfig: gridListTopBarConfig,
-//        alertSheetConfig: alertSheetConfig)
-        configurator.configure(viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
-                               fileFilters: [.fileType(fileType)],
-                               bottomBarConfig: bottomBarConfig, visibleSlider: true, visibleSyncItemsCheckBox: true,
-                               topBarConfig: gridListTopBarConfig,
-                               alertSheetConfig: alertSheetConfig)
-//        (viewController: viewController, remoteServices: PhotoAndVideoService(requestSize: 100),
-//                               fileFilters: [.fileType(fileType)],
-//                               bottomBarConfig: bottomBarConfig, visibleSlider: true, visibleSyncItemsCheckBox: true,
-//                               topBarConfig: gridListTopBarConfig,
-//                               alertSheetConfig: alertSheetConfig, filedType: fileType.convertedToSearchFieldValue)
-        viewController.mainTitle = ""
-        return viewController
-    }
-    
     class func initializeMusicViewController(with nibName: String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true

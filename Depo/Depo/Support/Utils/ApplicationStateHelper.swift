@@ -20,6 +20,9 @@ final class ApplicationStateHelper {
     }
     
     var safeApplicationState: UIApplication.State {
+        if DispatchQueue.isMainQueue || Thread.isMainThread {
+            return state
+        }
         let semaphore = DispatchSemaphore(value: 0)
         var state: UIApplication.State = .background
         applicationState { appState in

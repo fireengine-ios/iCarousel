@@ -263,7 +263,7 @@ final class ContactSyncHelper {
         contactSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, opertionType in
             DispatchQueue.main.async {
                 //progress may be later than the end of the operation
-                if self?.currentOperation != nil {
+                if self?.isRunning == true {
                     self?.delegate?.progress(progress: progressPercentage, for: opertionType)
                 }
             }

@@ -64,9 +64,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet private weak var scrollIndicator: CustomScrollIndicator?
     
-    var showOnlySyncItemsCheckBox: CheckBoxView?
-    private let showOnlySyncItemsCheckBoxHeight: CGFloat = 44
-    
     private var isRefreshAllowed = true
     
     var status: ItemStatus = .active
@@ -218,9 +215,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func setupInitialState() {
         setupViewForPopUp()
-        if let checkBox = showOnlySyncItemsCheckBox {
-            setup(checkBox: checkBox)
-        }
         if let unwrapedSlider = contentSlider {
             setupSlider(sliderController: unwrapedSlider)
         }
@@ -374,10 +368,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     private func setupSlider(sliderController: LBAlbumLikePreviewSliderViewController) {
         contentSlider = sliderController
 
-        var height = scrollablePopUpView.frame.size.height + BaseFilesGreedViewController.sliderH
-        if showOnlySyncItemsCheckBox != nil {
-            height += showOnlySyncItemsCheckBoxHeight
-        }
+        let height = scrollablePopUpView.frame.size.height + BaseFilesGreedViewController.sliderH
         
         let subView = UIView(frame: CGRect(x: 0, y: -height, width: collectionView.frame.size.width, height: BaseFilesGreedViewController.sliderH))
         subView.addSubview(sliderController.view)
@@ -394,7 +385,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         subView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        let relatedView = showOnlySyncItemsCheckBox ?? scrollablePopUpView
+        let relatedView = scrollablePopUpView
         
         var constraintsArray = [NSLayoutConstraint]()
         constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .top, relatedBy: .equal, toItem: relatedView, attribute: .bottom, multiplier: 1, constant: 0))
@@ -434,22 +425,6 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         scrollablePopUpView.delegate = self
     }
     
-    private func setup(checkBox: CheckBoxView) {
-        collectionView.addSubview(checkBox)
-        
-        checkBox.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        var constraintsArray = [NSLayoutConstraint]()
-        constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .top, relatedBy: .equal, toItem: scrollablePopUpView, attribute: .bottom, multiplier: 1, constant: 0))
-        constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
-        constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
-        constraintsArray.append(NSLayoutConstraint(item: checkBox, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: showOnlySyncItemsCheckBoxHeight))
-        
-        NSLayoutConstraint.activate(constraintsArray)
-        checkBox.delegate = self
-    }
-    
     // MARK: ViewForPopUpDelegate
     
     func onUpdateViewForPopUpH(h: CGFloat) {
@@ -458,12 +433,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         if let slider = self.contentSlider {
             sliderH = sliderH + slider.view.frame.size.height
         }
-        var checkBoxH: CGFloat = 0
-        if let checkBox = showOnlySyncItemsCheckBox {
-            checkBoxH = checkBox.frame.height
-        }
         
-        let calculatedH = h + sliderH + checkBoxH
+        let calculatedH = h + sliderH
         
         UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
             if let yConstr = self.contentSliderTopY {
@@ -567,13 +538,4 @@ extension BaseFilesGreedViewController {
     private func scrollIndicator(set topOffset: CGFloat) {
         scrollIndicator?.titleOffset = topOffset
     }
-}
-
-extension BaseFilesGreedViewController: CheckBoxViewDelegate {
-    
-    func checkBoxViewDidChangeValue(_ value: Bool) {
-        output.showOnlySyncedItems(value)
-    }
-    
-    func openAutoSyncSettings() { }
 }

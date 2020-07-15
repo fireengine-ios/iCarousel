@@ -15,6 +15,7 @@ enum ElementTypes {
     case deleteDeviceOriginal
     case move
     case sync
+    case syncInProgress
     case download
     case undetermend
     case rename
@@ -73,7 +74,8 @@ enum ElementTypes {
             result = ElementTypes.trashState
         default:
             if item.isLocalItem {
-                result = [.share, .sync, .info]
+                let inProgress = UploadService.default.isInQueue(item: item.uuid)
+                result = [.share, inProgress ? .syncInProgress : .sync, .info]
             } else {
                 switch item.fileType {
                 case .image, .video:

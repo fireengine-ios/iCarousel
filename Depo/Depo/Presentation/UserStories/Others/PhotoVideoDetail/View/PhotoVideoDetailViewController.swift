@@ -491,6 +491,18 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
         }
     }
     
+    func startUploadFile(file: WrapData) {
+        output.updateBottomBar()
+    }
+    
+    func failedUploadFile(file: WrapData, error: Error?) {
+        output.updateBottomBar()
+    }
+    
+    func cancelledUpload(file: WrapData) {
+        output.updateBottomBar()
+    }
+    
     private func replaceUploaded(_ item: WrapData) {
         guard let indexToChange = objects.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) else {
             return

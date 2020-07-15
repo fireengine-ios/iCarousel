@@ -12,8 +12,6 @@ import WebKit
 class TermsAndServicesViewController: ViewController {
 
     var output: TermsAndServicesViewOutput!
-
-    @IBOutlet private weak var welcomeLabel: UILabel!
     
     @IBOutlet private weak var contenViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet private weak var contenView: UIStackView! {
@@ -88,7 +86,7 @@ class TermsAndServicesViewController: ViewController {
         super.viewDidLoad()
 
         if !Device.isIpad {
-            setNavigationTitle(title: TextConstants.termsAndUsesTitile)
+            setNavigationTitle(title: TextConstants.termsAndUsesTitle)
         }
 
         contenViewHeightConstraint.constant = Device.winSize.height * 0.5
@@ -110,12 +108,6 @@ class TermsAndServicesViewController: ViewController {
     
     //MARK: - Configuration and Input
     private func configureUI() {
-        welcomeLabel.text = TextConstants.termsAndUseWelcomeText
-        welcomeLabel.font = UIFont.TurkcellSaturaDemFont(size: 25)
-        welcomeLabel.textColor = ColorConstants.darkBlueColor
-       
-        view.layoutIfNeeded()
-        
         acceptButton.setTitle(TextConstants.termsAndUseStartUsingText, for: .normal)
     }
     
