@@ -143,8 +143,7 @@ final class SnackbarManager {
     }
     
     private func createSnackbar(contentView: SnackbarView, duration: TTGSnackbarDuration) -> TTGSnackbar {
-        let size = contentView.sizeToFit(width: Device.winSize.width - offset * 2)
-        contentView.frame.size.width = size.width
+        contentView.widthAnchor.constraint(equalToConstant: Device.winSize.width - offset * 2).activate()
         
         let snackbar = TTGSnackbar(customContentView: contentView, duration: duration)
         snackbar.animationType = .fadeInFadeOut
