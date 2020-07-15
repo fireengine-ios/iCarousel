@@ -53,9 +53,9 @@ final class ContactsBackupHistoryController: BaseViewController {
     }
     
     private func trackScreen() {
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.ContactBackUpScreen())
-        analyticsService.logScreen(screen: .contactSyncBackUp)
-        analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackUp)
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.BackupsScreen())
+        analyticsService.logScreen(screen: .contactSyncBackupsScreen)
+        analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackupsScreen)
     }
 }
 
@@ -91,7 +91,6 @@ extension ContactsBackupHistoryController: ContactSyncControllerProtocol, Contac
         show(view: contactHistoryView, animated: true)
     }
     
-    func handle(error: ContactSyncHelperError, operationType: SyncOperationType) { }
     func didFinishOperation(operationType: ContactsOperationType) { }
 }
 

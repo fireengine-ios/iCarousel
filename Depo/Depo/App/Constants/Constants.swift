@@ -115,7 +115,7 @@ struct TextConstants {
     static let signUpErrorNumberMissing = NSLocalizedString("sing_up_error_number_missing", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let signUpErrorUnauthorized = NSLocalizedString("sing_up_error_unauthorized", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     // MARK: -
-    static let termsAndUsesTitile = NSLocalizedString("Sign Up", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let termsAndUsesTitle = NSLocalizedString("eula_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUsesApplyButtonText = NSLocalizedString("Accept  Terms", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseTextFormat = NSLocalizedString("<html><body text=\"#FFFFFF\" face=\"Bookman Old Style, Book Antiqua, Garamond\" size=\"5\">%@</body></html>", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseStartUsingText = NSLocalizedString("Get Started", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -128,7 +128,6 @@ struct TextConstants {
     static let privacyPolicyCondition = NSLocalizedString("privacy_policy_condition", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privacyPolicyHeadLine = NSLocalizedString("privacy_policy_head_line", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseEtkLinkCommercialEmailMessages = NSLocalizedString("terms_and_use_etk_link_commercial_email_messages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let termsAndUseWelcomeText = NSLocalizedString("Welcome to Lifebox!", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsAndUseCheckboxErrorText = NSLocalizedString("You need to confirm the User Agreement to continue.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let commercialEmailMessages = NSLocalizedString("commercial_email_messages", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let termsOfUseGlobalPermScreenTitle = NSLocalizedString("global_permission_screen_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

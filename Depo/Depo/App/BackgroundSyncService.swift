@@ -146,7 +146,10 @@ final class BackgroundSyncService {
     }
     
     private func sendNetmeraEvent(type: String) {
-        let event = NetmeraEvents.Actions.BackgroundSync(syncType: .backgroundTask(type: type))
-        AnalyticsService.sendNetmeraEvent(event: event)
+        DispatchQueue.main.async {
+            debugLog("BG! Netmera event")
+            let event = NetmeraEvents.Actions.BackgroundSync(syncType: .backgroundTask(type: type))
+            AnalyticsService.sendNetmeraEvent(event: event)
+        }
     }
 }

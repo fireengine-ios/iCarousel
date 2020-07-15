@@ -19,7 +19,6 @@ protocol ContactSyncControllerProtocol: ViewController {
     func show(view: UIView, animated: Bool)
     func showRelatedView()
     func showResultView(view: UIView, title: String)
-    func handle(error: ContactSyncHelperError, operationType: SyncOperationType)
     func didFinishOperation(operationType: ContactsOperationType)
 }
 
@@ -225,15 +224,6 @@ extension ContactSyncViewController: ContactSyncControllerProtocol {
     
     func show(view: UIView, animated: Bool) {
         animator.showTransition(to: view, on: contentView, animated: true)
-    }
-    
-    func handle(error: ContactSyncHelperError, operationType: SyncOperationType) {
-        switch error {
-        case .noBackUp:
-            showRelatedView()
-        default:
-            break
-        }
     }
     
     private func noDuplicatesPopup() {

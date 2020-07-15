@@ -41,17 +41,19 @@ final class SnackbarView: UIView, NibInit {
         backgroundColor = ColorConstants.snackbarGray
     }
     
-    func setup(type: SnackbarType, message: String, actionTitle: String?, axis: NSLayoutConstraint.Axis, action: VoidHandler?) {
-        titleLabel.numberOfLines = type.numberOfLinesLimit
-        titleLabel.text = message
+    static func with(type: SnackbarType, message: String, actionTitle: String?, axis: NSLayoutConstraint.Axis, action: VoidHandler?) -> SnackbarView {
+        let view = SnackbarView.initFromNib()
         
-        guard actionTitle != nil else {
-            return
+        view.titleLabel.numberOfLines = type.numberOfLinesLimit
+        view.titleLabel.text = message
+        
+        if let actionTitle = actionTitle {
+            view.actionButton.setTitle(actionTitle, for: .normal)
+            view.setup(axis: axis)
+            view.action = action
         }
-        
-        actionButton.setTitle(actionTitle, for: .normal)
-        setup(axis: axis)
-        self.action = action
+
+        return view
     }
 
     private func setup(axis: NSLayoutConstraint.Axis) {
