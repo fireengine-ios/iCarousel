@@ -469,6 +469,8 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
             showEmptyContactsPopup()
         case .emptyLifeboxContacts:
             showEmptyLifeboxContactsPopup()
+        case .noBackUp:
+            showRelatedView()
         case .syncError(let error):
             guard let syncError = error as? SyncOperationErrors else {
                 debugLog("ContactSync error not expected type SyncOperationErrors ")
@@ -477,7 +479,11 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
             }
             handleSyncError(syncError: syncError, operationType: operationType)
         default:
-            handle(error: error, operationType: operationType)
+            let type = operationType.transformToContactOperationSyncType()
+            let title = type?.title(result: .failed) ?? TextConstants.errorUnknown
+            let message = TextConstants.contactSyncErrorMessage
+            let errorView = ContactsOperationView.with(title: title, message: message, operationResult: .failed)
+            showResultView(view: errorView, title: type?.navBarTitle ?? "")
         }
     }
     
