@@ -61,7 +61,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
                 self?.sync(items: self?.sharingItems, action: { [weak self] in
                     self?.shareSmallSize(sourceRect: sourceRect)
-                    }, cancel: {}, fail: { errorResponse in
+                    }, fail: { errorResponse in
                         UIApplication.showErrorAlert(message: errorResponse.description)
                 })
             }
@@ -71,7 +71,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
                 self?.sync(items: self?.sharingItems, action: { [weak self] in
                     self?.shareOrignalSize(sourceRect: sourceRect)
-                    }, cancel: {}, fail: { errorResponse in
+                    }, fail: { errorResponse in
                         UIApplication.showErrorAlert(message: errorResponse.description)
                 })
             }
@@ -82,7 +82,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             
             self?.sync(items: self?.sharingItems, action: { [weak self] in
                 self?.shareViaLink(sourceRect: sourceRect)
-            }, cancel: {}, fail: { errorResponse in
+            }, fail: { errorResponse in
                 debugLog("sync(items: \(errorResponse.description)")
                 UIApplication.showErrorAlert(message: errorResponse.description)
             })
@@ -652,7 +652,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 let controller = router.createStory(items: items)
                 router.pushViewController(viewController: controller)
             }
-            }, cancel: {}, fail: { errorResponse in
+            }, fail: { errorResponse in
                 UIApplication.showErrorAlert(message: errorResponse.description)
         })
     }
@@ -684,7 +684,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     self?.router.pushOnPresentedView(viewController: vc)
                 }
             }
-            }, cancel: {}, fail: { errorResponse in
+            }, fail: { errorResponse in
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.AddToAlbum(status: .failure))
                 UIApplication.showErrorAlert(message: errorResponse.description)
         })
@@ -884,7 +884,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                          fail: failAction(elementType: .emptyTrashBin))
     }
     
-    private func sync(items: [BaseDataSourceItem]?, action: @escaping VoidHandler, cancel: @escaping VoidHandler, fail: FailResponse?) {
+    private func sync(items: [BaseDataSourceItem]?, action: @escaping VoidHandler, fail: FailResponse?) {
         
         guard let items = items as? [WrapData] else {
             assertionFailure()
@@ -894,7 +894,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let successClosure = { [weak self] in
             debugLog("SyncToUse - Success closure")
             DispatchQueue.main.async {
-                self?.output?.completeAsyncOperationEnableScreen()
+//                self?.output?.completeAsyncOperationEnableScreen()
                 action()
             }
         }
@@ -902,24 +902,24 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let failClosure: FailResponse = { [weak self] errorResponse in
             debugLog("SyncToUse - Fail closure")
             DispatchQueue.main.async {
-                self?.output?.completeAsyncOperationEnableScreen()
-                if errorResponse.errorDescription == TextConstants.canceledOperationTextError {
-                    cancel()
-                    return
-                }
+//                self?.output?.completeAsyncOperationEnableScreen()
+//                if errorResponse.errorDescription == TextConstants.canceledOperationTextError {
+//                    cancel()
+//                    return
+//                }
                 fail?(errorResponse)
             }
         }
-        fileService.syncItemsIfNeeded(items, success: successClosure, fail: failClosure, syncOperations: {[weak self] syncOperations in
-            let operations = syncOperations
-            if operations != nil {
-                self?.output?.startCancelableAsync {
-                    UploadService.default.cancelSyncToUseOperations()
-                    cancel()
-                }
-            } else {
-                debugLog("syncItemsIfNeeded count: \(operations?.count ?? -1)")
-            }
+        fileService.syncItemsIfNeeded(items, success: successClosure, fail: failClosure, syncOperations: { [weak self] syncOperations in
+//            let operations = syncOperations
+//            if operations != nil {
+//                self?.output?.startCancelableAsync {
+//                    UploadService.default.cancelSyncToUseOperations()
+//                    cancel()
+//                }
+//            } else {
+                debugLog("syncItemsIfNeeded count: \(syncOperations?.count ?? -1)")
+//            }
         })
         
     }
