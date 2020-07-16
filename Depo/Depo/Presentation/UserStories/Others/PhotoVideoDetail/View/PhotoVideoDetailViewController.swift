@@ -183,7 +183,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        hideDetailViewIfChangedRotation()
         collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
             guard let `self` = self else {
                 return
@@ -197,6 +197,12 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
         return .black
+    }
+    
+    private func hideDetailViewIfChangedRotation() {
+        if UIDevice.current.orientation.isLandscape {
+            bottomDetailViewManager?.closeDetailView()
+        }
     }
     
     func hideView() {
