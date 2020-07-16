@@ -550,7 +550,6 @@
 "Lifebox can sync your files automatically." = "lifebox can sync your files, photos and videos automatically. \n\nTo enable background sync of your photos and videos, please make sure that your location permission is set to \"ALWAYS\" by going to “Device Settings > lifebox > Location\" menu.";
 "Get Started" = "Get Started";
 "I have read and accepted terms of use" = "I have read and accepted terms of use";
-"Welcome to Lifebox!" = "Welcome to lifebox!";
 "You need to confirm the User Agreement to continue." = "You need to confirm the User Agreement to continue.";
 "PhotosAndViedos" = "Photos and Videos";
 "Are these the same person?" = "Are these the same person?";
@@ -1637,6 +1636,10 @@
 "contact_phase2_error_iternal" = "A temporary error has occurred. Please try again.";
 "download_document_error_popup" = "You can only download photo, video or album";
 "contact_phase2_history_cell_Contact_List" = "Contact List";
+"contact_phase2_error_backup_title" = "contact_phase2_error_backup";
+"contact_phase2_error_restore_title" = "contact_phase2_error_restore";
+"contact_phase2_error_delete_title" = "contact_phase2_error_delete_title";
+
 "settings_action_sheet_account_details" = "Account details";
 "contact_phase2_error_backup_title" = "Back up Failed";
 "contact_phase2_error_restore_title" = "Restore Failed";
@@ -1655,4 +1658,5 @@
 "contact_phase2_result_delete_backup_nav_bar_title" = "Delete Back up";
 "contact_phase2_result_delete_duplicates_nav_bar_title" = "Delete Duplicates";
 "contact_phase2_result_delete_all_contacts_nav_bar_title" = "Delete Contacts";
+
 "eula_title" = "EULA";

@@ -41,30 +41,44 @@ final class CoreDataMigrator {
         var currentURL = storeURL
         let migrationSteps = migrationStepsForStore(at: storeURL, toVersion: version)
         
+        
+        let destroyStore: (URL) -> () = { url in
+            NSPersistentStoreCoordinator.destroyStore(at: url)
+        }
+        
+        guard !migrationSteps.isEmpty else {
+            destroyStore(storeURL)
+            return
+        }
+        
         for migrationStep in migrationSteps {
             let manager = NSMigrationManager(sourceModel: migrationStep.sourceModel, destinationModel: migrationStep.destinationModel)
             let tempDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true).appendingPathComponent(UUID().uuidString + ".sqlite")
             
             do {
                 try manager.migrateStore(from: currentURL, sourceType: NSSQLiteStoreType, options: nil, with: migrationStep.mappingModel, toDestinationURL: tempDirectoryURL, destinationType: NSSQLiteStoreType, destinationOptions: nil)
-                printLog("db_migration: migrate store from \(currentURL) to \(tempDirectoryURL)")
+                debugLog("db_migration: migrated store from \(currentURL) to \(tempDirectoryURL)")
             } catch let error {
-                fatalLog("failed attempting to migrate from \(migrationStep.sourceModel) to \(migrationStep.destinationModel), error: \(error)")
+                destroyStore(currentURL)
+                debugLog("failed attempting to migrate from \(migrationStep.sourceModel) to \(migrationStep.destinationModel), error: \(error)")
+                return
             }
             
             if currentURL != storeURL {
                 //Destroy intermediate step's store
-                NSPersistentStoreCoordinator.destroyStore(at: currentURL)
+                destroyStore(currentURL)
+                debugLog("db_migration: destroyed temporary store at \(currentURL)")
             }
             
             currentURL = tempDirectoryURL
         }
         
-        printLog("db_migration: replace store at \(storeURL) with \(currentURL)")
         NSPersistentStoreCoordinator.replaceStore(at: storeURL, withStoreAt: currentURL)
+        debugLog("db_migration: replaced store at \(storeURL) with \(currentURL)")
         
         if currentURL != storeURL {
-            NSPersistentStoreCoordinator.destroyStore(at: currentURL)
+            destroyStore(currentURL)
+            debugLog("db_migration: destroyed final temporary store at \(currentURL)")
         }
     }
     
@@ -73,7 +87,8 @@ final class CoreDataMigrator {
             let metadata = try? NSPersistentStoreCoordinator.metadata(at: storeURL),
             let sourceVersion = CoreDataMigrationVersion.compatibleVersionForStoreMetadata(metadata)
         else {
-            fatalLog("unknown store version at URL \(storeURL)")
+            debugLog("unknown store version at URL \(storeURL)")
+            return []
         }
         
         return migrationSteps(fromSourceVersion: sourceVersion, toDestinationVersion: destinationVersion)

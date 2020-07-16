@@ -25,6 +25,7 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     @IBOutlet weak var uploadDateLabel: UILabel!
     @IBOutlet weak var takenDateTitle: UILabel!
     @IBOutlet weak var takenDateLabel: UILabel!
+    @IBOutlet private weak var editButton: UIButton!
     
     var output: FileInfoViewOutput!
     var interactor: FileInfoInteractor!
@@ -131,13 +132,17 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     
     // MARK: Actions
     
-    @IBAction func onHideKeyboard() {
+    @IBAction private func onHideKeyboard() {
         if let text = fileName.text {
             output.validateName(newName: text)
         }
     }
     
-    @objc func onSave() {
+    @IBAction private func onEditButtonTapped(_ sender: UIButton) {
+        fileName.isEditing ? fileName.resignFirstResponder() : fileName.becomeFirstResponder()
+    }
+    
+    @objc private func onSave() {
         guard let text = fileName.text?.nonEmptyString else {
             return
         }

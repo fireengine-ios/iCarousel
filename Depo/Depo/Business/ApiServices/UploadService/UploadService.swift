@@ -786,6 +786,12 @@ final class UploadService: BaseRequestService {
         let handler = BaseResponseHandler<SearchItemResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
     }
+    
+    func isInQueue(item uuid: String) -> Bool {
+        return uploadOperations.first(where: {
+            $0.inputItem.uuid == uuid && !($0.isCancelled || $0.isFinished)
+        }) != nil
+    }
 }
 
 

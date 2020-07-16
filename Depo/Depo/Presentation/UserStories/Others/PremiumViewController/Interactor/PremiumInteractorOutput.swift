@@ -19,7 +19,9 @@ protocol PremiumInteractorOutput: class {
     func successedVerifyOffer()
     func successedGotAppleInfo(offers: [PackageModelResponse])
     
-    func failed(with errorMessage: String)
+    func stopLoading()
+
+    func failed(with error: ErrorResponse)
     func failedResendToken(with errorMessage: String)
     func switchToTextWithoutPrice(isError: Bool)
     func failedVerifyOffer()
