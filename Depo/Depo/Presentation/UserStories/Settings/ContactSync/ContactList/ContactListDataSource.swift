@@ -45,6 +45,7 @@ final class ContactListDataSource: NSObject {
     }
 
     func reset() {
+        isPaginationDidEnd = false
         sectionTitles.removeAll()
         contacts.removeAll()
         tableView.reloadData()
