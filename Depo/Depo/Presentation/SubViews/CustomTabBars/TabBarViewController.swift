@@ -708,9 +708,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 tabBar.selectedItem = tabBar.items?[tabbarSelectedIndex]
             }
             
-            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.contactsSyncScreenIndex.rawValue,
-                                                                TabScreenIndex.documentsScreenIndex.rawValue,
-                                                                TabScreenIndex.homePageScreenIndex.rawValue]
+            let arrayOfIndexesOfViewsThatShouldntBeRefreshed = [TabScreenIndex.homePageScreenIndex.rawValue,
+                                                                TabScreenIndex.contactsSyncScreenIndex.rawValue - 1,
+                                                                TabScreenIndex.documentsScreenIndex.rawValue - 1]
             
             if tabbarSelectedIndex > 2 {
                 tabbarSelectedIndex -= 1
