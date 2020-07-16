@@ -24,11 +24,11 @@ final class ContactSyncSmallCardView: ContactSyncBaseCardView, NibInit {
     }
     @IBOutlet private weak var message: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaMedFont(size: 16.0)
+            newValue.font = .TurkcellSaturaMedFont(size: 14.0)
             newValue.textColor = ColorConstants.charcoalGrey
-            newValue.numberOfLines = 0
             newValue.textAlignment = .left
-            newValue.adjustsFontSizeToFitWidth()
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     
@@ -43,6 +43,7 @@ final class ContactSyncSmallCardView: ContactSyncBaseCardView, NibInit {
         willSet {
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 14.0)
             newValue.setTitleColor(.lrTealishTwo, for: .normal)
+            newValue.adjustsFontSizeToFitWidth()
         }
     }
 
@@ -86,7 +87,7 @@ final class ContactSyncSmallCardView: ContactSyncBaseCardView, NibInit {
     func update(type: ContactSyncSmallCardType) {
         switch type {
             case .showBackup(let date):
-                let attributed = attributedString(dateString: dateFormatter.string(from: date))
+                let attributed = attributedString(dateString: " " + dateFormatter.string(from: date))
                 message.attributedText = attributed
                 
             default:

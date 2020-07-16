@@ -1602,7 +1602,7 @@
 "contact_phase2_error_iternal" = "Произошла временная ошибка. Пожалуйста, попробуйте еще раз.";
 "download_document_error_popup" = "Вы можете загружать только фотографии, видео или альбомы.";
 "contact_phase2_history_cell_Contact_List" = "Список Контактов";
-"settings_action_sheet_account_details" = "";
+"settings_action_sheet_account_details" = "Детали учетной записи";
 "contact_phase2_error_backup_title" = "Ошибка резервного копирования!";
 "contact_phase2_error_restore_title" = "Передача на телефон не удалась!";
 "contact_phase2_error_delete_title" = "Удаление не удалось!";

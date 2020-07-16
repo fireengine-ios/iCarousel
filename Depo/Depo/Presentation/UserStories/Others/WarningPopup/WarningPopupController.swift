@@ -106,6 +106,7 @@ final class WarningPopupController: BasePopUpController, NibInit {
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
             newValue.setTitleColor(.white, for: .normal)
             newValue.backgroundColor = ColorConstants.navy
+            newValue.adjustsFontSizeToFitWidth()
         }
     }
     

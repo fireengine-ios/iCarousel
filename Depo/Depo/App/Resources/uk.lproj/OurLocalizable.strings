@@ -1590,7 +1590,7 @@
 "contact_phase2_error_iternal" = "Виникла тимчасова помилка. Будь ласка, спробуйте ще раз.";
 "download_document_error_popup" = "Ви можете завантажувати тільки фотографії, відео чи альбоми.";
 "contact_phase2_history_cell_Contact_List" = "Список Контактів";
-"settings_action_sheet_account_details" = "";
+"settings_action_sheet_account_details" = "Деталі облікового запису";
 "contact_phase2_error_backup_title" = "Створення резервних копій не виконана!";
 "contact_phase2_error_restore_title" = "Переміщення на телефон не вдалося!";
 "contact_phase2_error_delete_title" = "Видалення не виконане!";

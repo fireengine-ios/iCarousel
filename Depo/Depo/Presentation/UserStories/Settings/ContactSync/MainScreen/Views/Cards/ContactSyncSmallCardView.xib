@@ -40,7 +40,8 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="48" id="Nna-gt-ueF"/>
+                        <constraint firstAttribute="height" constant="48" id="EKa-rK-Fzf"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jYJ-0I-LZu" secondAttribute="trailing" constant="16" id="QaG-A3-6f9"/>
                         <constraint firstItem="jYJ-0I-LZu" firstAttribute="centerY" secondItem="zld-NN-vDA" secondAttribute="centerY" id="jJo-WI-dRj"/>
                         <constraint firstItem="jYJ-0I-LZu" firstAttribute="leading" secondItem="zld-NN-vDA" secondAttribute="leading" constant="16" id="nrr-NK-xjN"/>
                     </constraints>
@@ -58,8 +59,8 @@
                 <constraint firstItem="zld-NN-vDA" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="7kz-xE-dhF"/>
                 <constraint firstItem="UWB-bn-lOf" firstAttribute="leading" secondItem="dzU-Oe-zrH" secondAttribute="trailing" constant="8" id="Ga7-qx-lPj"/>
                 <constraint firstItem="zld-NN-vDA" firstAttribute="top" secondItem="UWB-bn-lOf" secondAttribute="bottom" constant="12" id="JoT-sl-MGa"/>
+                <constraint firstItem="UWB-bn-lOf" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="12" id="KwM-3A-isK"/>
                 <constraint firstItem="dzU-Oe-zrH" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="12" id="NZk-be-pyk"/>
-                <constraint firstItem="UWB-bn-lOf" firstAttribute="centerY" secondItem="dzU-Oe-zrH" secondAttribute="centerY" id="NnO-2Z-sbi"/>
                 <constraint firstItem="dzU-Oe-zrH" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="TyU-NR-l6Y"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="UWB-bn-lOf" secondAttribute="trailing" constant="16" id="hQF-hL-O0d"/>
                 <constraint firstAttribute="trailing" secondItem="d7h-2A-oxt" secondAttribute="trailing" id="k9N-wL-lau"/>

@@ -1588,7 +1588,7 @@
 "contact_phase2_error_iternal" = "Ein vorübergehender Fehler ist aufgetreten. Bitte versuchen Sie es erneut.";
 "download_document_error_popup" = "Sie können nur Fotos, Videos oder Alben herunterladen.";
 "contact_phase2_history_cell_Contact_List" = "Kontaktliste";
-"settings_action_sheet_account_details" = "";
+"settings_action_sheet_account_details" = "Kontodetails";
 "contact_phase2_error_backup_title" = "Backup fehlgeschlagen!";
 "contact_phase2_error_restore_title" = "Übertragung auf das Handy fehlgeschlagen!";
 "contact_phase2_error_delete_title" = "Löschen fehlgeschlagen!";

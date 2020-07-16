@@ -1588,7 +1588,7 @@
 "contact_phase2_error_iternal" = "A apărut o eroare temporară. Te rog să încerci din nou.";
 "download_document_error_popup" = "Poţi descărca numai fotografii, videoclipuri sau albume.";
 "contact_phase2_history_cell_Contact_List" = "Lista Persoanelor de Contact";
-"settings_action_sheet_account_details" = "";
+"settings_action_sheet_account_details" = "Detalii Cont";
 "contact_phase2_error_backup_title" = "Backup-ul nu a putut fi realizat!";
 "contact_phase2_error_restore_title" = "Transferul pe telefon nu a putut fi realizat!";
 "contact_phase2_error_delete_title" = "Operațiunea de Ștergere nu a putut fi realizată!";

@@ -1630,7 +1630,7 @@
 "contact_phase2_error_iternal" = "Ha ocurrido un error temporal. Inténtalo de nuevo.";
 "download_document_error_popup" = "Sólo puedes descargar fotos, video o álbum.";
 "contact_phase2_history_cell_Contact_List" = "Lista de Contactos";
-"settings_action_sheet_account_details" = "";
+"settings_action_sheet_account_details" = "Los detalles de cuenta";
 "contact_phase2_error_backup_title" = "¡Copia de seguridad fallida!";
 "contact_phase2_error_restore_title" = "¡La transferencia al teléfono ha fallado!";
 "contact_phase2_error_delete_title" = "¡El proceso de eliminación ha fallado!";
