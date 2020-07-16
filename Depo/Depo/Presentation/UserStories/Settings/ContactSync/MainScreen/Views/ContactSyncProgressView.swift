@@ -66,16 +66,18 @@ final class ContactSyncProgressView: UIView, NibInit, ContactOperationProgressVi
             newValue.textAlignment = .center
             newValue.font = .TurkcellSaturaDemFont(size: 24.0)
             newValue.textColor = ColorConstants.marineTwo
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     
     @IBOutlet private weak var message: UILabel! {
         willSet {
             newValue.textAlignment = .center
-            newValue.numberOfLines = 0
             newValue.font = .TurkcellSaturaFont(size: 16.0)
             newValue.textColor = ColorConstants.lightGray
-            newValue.adjustsFontSizeToFitWidth()
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     @IBOutlet private weak var loader: CircleLoaderView! {

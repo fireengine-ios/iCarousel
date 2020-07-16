@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -27,13 +27,13 @@
                         <action selector="didTouchBackup:" destination="iN0-l3-epB" eventType="touchUpInside" id="5KK-YG-kIW"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWV-SG-vJL">
-                    <rect key="frame" x="317" y="37" width="42" height="48"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWV-SG-vJL">
+                    <rect key="frame" x="317.33333333333331" y="37" width="41.666666666666686" height="48"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdn-zp-NC8">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdn-zp-NC8">
                     <rect key="frame" x="317" y="85" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
@@ -75,6 +75,7 @@
                         <constraint firstItem="123-jy-SZM" firstAttribute="leading" secondItem="TUv-BK-Opi" secondAttribute="leading" constant="16" id="8Zf-Pq-sRL"/>
                         <constraint firstItem="m10-qi-RS5" firstAttribute="centerY" secondItem="4km-Pn-fa4" secondAttribute="centerY" id="EIs-9W-rgQ"/>
                         <constraint firstItem="4km-Pn-fa4" firstAttribute="centerY" secondItem="TUv-BK-Opi" secondAttribute="centerY" id="LsC-7L-eKd"/>
+                        <constraint firstItem="m10-qi-RS5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="123-jy-SZM" secondAttribute="trailing" constant="8" id="VFr-eL-oGE"/>
                         <constraint firstItem="j1x-6u-5JL" firstAttribute="trailing" secondItem="4km-Pn-fa4" secondAttribute="trailing" id="WWI-9O-brl"/>
                         <constraint firstItem="j1x-6u-5JL" firstAttribute="bottom" secondItem="4km-Pn-fa4" secondAttribute="bottom" id="XsA-Sb-4tR"/>
                         <constraint firstItem="j1x-6u-5JL" firstAttribute="top" secondItem="4km-Pn-fa4" secondAttribute="top" id="a5x-E8-i3B"/>
@@ -92,10 +93,12 @@
                 <constraint firstItem="gjW-Cx-S66" firstAttribute="top" secondItem="hlk-9q-TIc" secondAttribute="bottom" constant="18" id="81k-uc-fNg"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hlk-9q-TIc" secondAttribute="trailing" constant="16" id="H4y-sd-FOo"/>
                 <constraint firstItem="hlk-9q-TIc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="OYv-jE-utb"/>
+                <constraint firstItem="Qdn-zp-NC8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gjW-Cx-S66" secondAttribute="trailing" constant="16" id="QXu-Sv-m1y"/>
                 <constraint firstItem="nWV-SG-vJL" firstAttribute="bottom" secondItem="gjW-Cx-S66" secondAttribute="bottom" id="RGt-SS-qVk"/>
                 <constraint firstItem="TUv-BK-Opi" firstAttribute="top" secondItem="Qdn-zp-NC8" secondAttribute="bottom" constant="8" id="U62-aI-vG8"/>
                 <constraint firstItem="TUv-BK-Opi" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="YN4-bn-gSc"/>
                 <constraint firstItem="4km-Pn-fa4" firstAttribute="trailing" secondItem="Qdn-zp-NC8" secondAttribute="trailing" id="ZeN-fp-CTp"/>
+                <constraint firstItem="nWV-SG-vJL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gjW-Cx-S66" secondAttribute="trailing" constant="16" id="ao1-dQ-SmY"/>
                 <constraint firstItem="hlk-9q-TIc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="gsq-Zi-cOm"/>
                 <constraint firstItem="TUv-BK-Opi" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="guD-lZ-buL"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nWV-SG-vJL" secondAttribute="trailing" constant="16" id="l9g-RE-adz"/>

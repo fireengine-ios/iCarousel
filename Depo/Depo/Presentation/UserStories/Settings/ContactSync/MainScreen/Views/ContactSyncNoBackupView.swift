@@ -20,17 +20,18 @@ final class ContactSyncNoBackupView: UIView, NibInit {
             newValue.textColor = ColorConstants.darkBlueColor
             newValue.textAlignment = .center
             newValue.text = TextConstants.contactSyncBackupTitle
-            newValue.adjustsFontSizeToFitWidth()
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     @IBOutlet private weak var message: UILabel! {
         willSet {
             newValue.font = UIFont.TurkcellSaturaFont(size: 16.0)
             newValue.textColor = ColorConstants.charcoalGrey
-            newValue.numberOfLines = 0
             newValue.textAlignment = .center
             newValue.text = TextConstants.contactSyncBackupMessage
-            newValue.adjustsFontSizeToFitWidth()
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     
@@ -41,6 +42,7 @@ final class ContactSyncNoBackupView: UIView, NibInit {
             newValue.setTitleColor(.white, for: .normal)
             newValue.titleLabel?.font = UIFont.TurkcellSaturaDemFont(size: 16)
             newValue.setTitle(TextConstants.contactSyncBackupButton, for: .normal)
+            newValue.adjustsFontSizeToFitWidth()
         }
     }
     
