@@ -1601,7 +1601,7 @@
 "contact_phase2_error_iternal" = "حدثخطأمؤقت.من فضلكحاولمرةاخرى.";
 "download_document_error_popup" = "يمكنك تنزيل الصور والفيديو أوالألبوم فقط.";
 "contact_phase2_history_cell_Contact_List" = "قائمة جهات الاتصال";
-"settings_action_sheet_account_details" = "";
+"settings_action_sheet_account_details" = "تفاصيل الحساب";
 "contact_phase2_error_backup_title" = "لم يتم التمكن من القيام بالنسخ الاحتياطي!";
 "contact_phase2_error_restore_title" = "لم يتم التمكن من القيام بالنقل إلى الهاتف!";
 "contact_phase2_error_delete_title" = "لم يتم التمكن من القيام بعملية المسح!";

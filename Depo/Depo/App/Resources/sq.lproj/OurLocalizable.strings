@@ -1632,7 +1632,7 @@
 "contact_phase2_error_iternal" = "Ka ndodhur një gabim i përkohshëm. Ju lutemi provojeni përsëri.";
 "download_document_error_popup" = "Vetëm mund të shkarkosh  fotografi, video ose albume.";
 "contact_phase2_history_cell_Contact_List" = "Lista e Personave";
-"settings_action_sheet_account_details" = "";
+"settings_action_sheet_account_details" = "Detajet e llogarisë";
 "contact_phase2_error_backup_title" = "Rezervimi nuk është mundur të kryhet!";
 "contact_phase2_error_restore_title" = "Transferimi në telefon nuk është mundur të kryhet!";
 "contact_phase2_error_delete_title" = "Veprimi i fshirjes nuk është mundur të kryhet!";

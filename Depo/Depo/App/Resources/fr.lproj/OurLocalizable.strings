@@ -1895,7 +1895,7 @@ Please check I have understood the intended command here*/
 "contact_phase2_error_iternal" = "Une erreur temporaire s'est produite. Veuillez réessayer.";
 "download_document_error_popup" = "Vous ne pouvez télécharger que des photos, des vidéos ou des albums.";
 "contact_phase2_history_cell_Contact_List" = "Liste De Contacts";
-"settings_action_sheet_account_details" = "";
+"settings_action_sheet_account_details" = "Mon compte";
 "contact_phase2_error_backup_title" = "La sauvegarde a échoué!";
 "contact_phase2_error_restore_title" = "Le transfert vers le téléphone a échoué!";
 "contact_phase2_error_delete_title" = "La suppression a échoué!";
