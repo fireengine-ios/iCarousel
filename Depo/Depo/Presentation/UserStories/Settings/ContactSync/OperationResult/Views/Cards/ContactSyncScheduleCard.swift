@@ -36,7 +36,6 @@ class ContactSyncScheduleCard: ContactSyncBaseCardView, NibInit {
             newValue.text = TextConstants.contactSyncBigCardAutobackupFormat
             newValue.font = .TurkcellSaturaDemFont(size: 14.0)
             newValue.textColor =  .lrTealishTwo
-            newValue.numberOfLines = 1
             newValue.adjustsFontSizeToFitWidth()
         }
     }

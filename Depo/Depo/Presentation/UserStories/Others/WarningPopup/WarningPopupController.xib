@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -81,8 +81,8 @@
                         <constraint firstItem="jBC-O6-wEv" firstAttribute="top" secondItem="MJT-Kl-EFs" secondAttribute="bottom" constant="16" id="43O-3T-bPO"/>
                         <constraint firstItem="mGr-Gt-VEY" firstAttribute="top" secondItem="3Lx-Qd-Ff2" secondAttribute="bottom" constant="16" id="43f-AX-Rma"/>
                         <constraint firstItem="3Lx-Qd-Ff2" firstAttribute="centerX" secondItem="mLL-lV-btu" secondAttribute="centerX" id="CLd-CD-FKZ"/>
-                        <constraint firstItem="jBC-O6-wEv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mLL-lV-btu" secondAttribute="leading" constant="16" id="D65-Zn-vkM"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jBC-O6-wEv" secondAttribute="trailing" constant="16" id="U7l-qi-yOE"/>
+                        <constraint firstItem="jBC-O6-wEv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mLL-lV-btu" secondAttribute="leading" constant="8" id="D65-Zn-vkM"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jBC-O6-wEv" secondAttribute="trailing" constant="8" id="U7l-qi-yOE"/>
                         <constraint firstItem="MJT-Kl-EFs" firstAttribute="leading" secondItem="mLL-lV-btu" secondAttribute="leading" constant="16" id="ahv-Ge-naB"/>
                         <constraint firstAttribute="bottom" secondItem="jBC-O6-wEv" secondAttribute="bottom" constant="16" id="c4O-lG-w4M"/>
                         <constraint firstAttribute="trailing" secondItem="mGr-Gt-VEY" secondAttribute="trailing" constant="16" id="hqm-hJ-GxE"/>

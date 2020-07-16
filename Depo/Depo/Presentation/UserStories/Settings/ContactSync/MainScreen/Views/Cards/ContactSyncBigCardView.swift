@@ -47,12 +47,14 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     
     @IBOutlet private weak var backUpButton: RoundedInsetsButton! {
         willSet {
-            newValue.insets = UIEdgeInsets(topBottom: 8.0, rightLeft: 24.0)
-            newValue.setTitle(TextConstants.contactSyncBackupButton, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16.0)
-            newValue.setTitleColor(.lrTealishTwo, for: .normal)
             newValue.setBackgroundColor(.white, for: .normal)
+            
+            newValue.setTitle(TextConstants.contactSyncBackupButton, for: .normal)
+            newValue.setTitleColor(.lrTealishTwo, for: .normal)
+            
+            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16.0)
             newValue.adjustsFontSizeToFitWidth()
+            newValue.insets = UIEdgeInsets(topBottom: 8.0, rightLeft: 24.0)
         }
     }
     
