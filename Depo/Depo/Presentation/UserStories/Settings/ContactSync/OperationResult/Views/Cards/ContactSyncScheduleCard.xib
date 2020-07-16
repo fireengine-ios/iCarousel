@@ -64,6 +64,7 @@
                 <constraint firstItem="5sB-k8-Afg" firstAttribute="leading" secondItem="pse-P2-pI0" secondAttribute="leading" constant="9" id="pqb-7L-aN7"/>
                 <constraint firstItem="VC2-Py-yTT" firstAttribute="centerY" secondItem="pse-P2-pI0" secondAttribute="centerY" id="qAF-wQ-uhh"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2ZD-Cg-Mzs" secondAttribute="trailing" constant="16" id="tRc-2r-ibf"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VC2-Py-yTT" secondAttribute="trailing" constant="16" id="uWA-ap-MdN"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

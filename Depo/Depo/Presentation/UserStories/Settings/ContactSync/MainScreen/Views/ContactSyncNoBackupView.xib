@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -15,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jb6-gk-zjc">
-                    <rect key="frame" x="166.5" y="64" width="42" height="21"/>
+                    <rect key="frame" x="16" y="64" width="343" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -57,15 +57,19 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bmk-yZ-yPW" secondAttribute="trailing" id="8hF-Tj-Wf7"/>
                 <constraint firstItem="E7z-FN-x2b" firstAttribute="top" secondItem="Tia-GQ-v25" secondAttribute="bottom" constant="32" id="CDZ-oe-60z"/>
                 <constraint firstItem="78p-Cm-1se" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Ecp-q0-czo"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="jb6-gk-zjc" secondAttribute="trailing" constant="16" id="LMA-JD-MEU"/>
                 <constraint firstItem="jb6-gk-zjc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="MIt-07-Or7"/>
                 <constraint firstItem="MPu-ha-F83" firstAttribute="top" secondItem="bmk-yZ-yPW" secondAttribute="bottom" constant="24" id="MPK-6r-Kmc"/>
                 <constraint firstItem="78p-Cm-1se" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="OzQ-aF-g0L"/>
                 <constraint firstItem="jb6-gk-zjc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="64" id="Rix-UD-Ofb"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MPu-ha-F83" secondAttribute="trailing" constant="16" id="S89-zB-bp3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Tia-GQ-v25" secondAttribute="trailing" constant="32" id="XR1-ze-7oO"/>
                 <constraint firstItem="E7z-FN-x2b" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="YWM-fn-1Fm"/>
                 <constraint firstItem="bmk-yZ-yPW" firstAttribute="top" secondItem="78p-Cm-1se" secondAttribute="bottom" id="ZJf-Tn-UG2"/>
+                <constraint firstItem="jb6-gk-zjc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="aaL-rv-uPb"/>
                 <constraint firstItem="Tia-GQ-v25" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="fc9-GO-Oys"/>
                 <constraint firstItem="78p-Cm-1se" firstAttribute="top" secondItem="Tia-GQ-v25" secondAttribute="bottom" id="g30-qE-xQF"/>
+                <constraint firstItem="MPu-ha-F83" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="iOM-KD-lkl"/>
                 <constraint firstItem="bmk-yZ-yPW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="lBy-8e-3RB"/>
                 <constraint firstItem="MPu-ha-F83" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qps-8a-pAC"/>
             </constraints>
