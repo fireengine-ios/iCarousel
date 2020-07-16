@@ -36,7 +36,7 @@ final class ContactSyncAnalyzeProgressView: UIView, NibInit, ContactOperationPro
             newValue.textColor = ColorConstants.navy
             newValue.textAlignment = .center
             newValue.numberOfLines = 0
-            newValue.adjustsFontSizeToFitWidth()
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     

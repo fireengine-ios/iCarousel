@@ -14,9 +14,9 @@ class ContactSyncScheduleCard: ContactSyncBaseCardView, NibInit {
             newValue.text = TextConstants.contactSyncBackupSuccessCardTitle
             newValue.font = .TurkcellSaturaDemFont(size: 18.0)
             newValue.textColor = ColorConstants.navy
-            newValue.numberOfLines = 0
             newValue.textAlignment = .left
-            newValue.adjustsFontSizeToFitWidth()
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     
@@ -25,9 +25,9 @@ class ContactSyncScheduleCard: ContactSyncBaseCardView, NibInit {
             newValue.text = TextConstants.contactSyncBackupSuccessCardMessage
             newValue.font = .TurkcellSaturaFont(size: 16.0)
             newValue.textColor = .lrBrownishGrey
-            newValue.numberOfLines = 0
             newValue.textAlignment = .left
-            newValue.adjustsFontSizeToFitWidth()
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     
@@ -36,7 +36,6 @@ class ContactSyncScheduleCard: ContactSyncBaseCardView, NibInit {
             newValue.text = TextConstants.contactSyncBigCardAutobackupFormat
             newValue.font = .TurkcellSaturaDemFont(size: 14.0)
             newValue.textColor =  .lrTealishTwo
-            newValue.numberOfLines = 1
             newValue.adjustsFontSizeToFitWidth()
         }
     }

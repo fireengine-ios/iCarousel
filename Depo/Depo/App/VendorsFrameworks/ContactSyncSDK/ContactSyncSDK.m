@@ -999,6 +999,10 @@ static bool syncing = false;
         errorCode = item[@"code"];
     }
     
+    if (!SYNC_IS_NULL(errorCode) && [errorCode isEqualToString:@"3000"]) {
+        [self.partialInfo erase];
+    }
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *key = self.updateId == nil ? [defaults objectForKey:SYNC_KEY_CHECK_UPDATE]: self.updateId;
     [SyncAdapter sendStats:key start:self.initialContactCount

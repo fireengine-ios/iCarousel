@@ -113,6 +113,8 @@ final class ContactsOperationView: UIView, NibInit {
             newValue.font = .TurkcellSaturaDemFont(size: 24)
             newValue.textAlignment = .center
             newValue.textColor = ColorConstants.navy
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     @IBOutlet private weak var messageLabel: UILabel! {
