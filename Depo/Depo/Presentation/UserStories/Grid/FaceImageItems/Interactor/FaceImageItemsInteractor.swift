@@ -78,11 +78,15 @@ final class FaceImageItemsInteractor: BaseFilesGreedInteractor {
     }
     
     override func reloadItems(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
-        reloadItemsHandler = {
-            super.reloadItems(searchText, sortBy: sortBy, sortOrder: sortOrder, newFieldValue: newFieldValue)
+        reloadItemsHandler = { [weak self] in
+            self?.reloadHandler(searchText, sortBy: sortBy, sortOrder: sortOrder, newFieldValue: newFieldValue)
         }
         
         getAuthorities()
+    }
+    
+    private func reloadHandler(_ searchText: String!, sortBy: SortType, sortOrder: SortOrder, newFieldValue: FieldValue?) {
+        super.reloadItems(searchText, sortBy: sortBy, sortOrder: sortOrder, newFieldValue: newFieldValue)
     }
     
     //MARK: - Utility Methods(private)
