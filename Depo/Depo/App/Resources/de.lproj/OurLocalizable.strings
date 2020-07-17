@@ -1548,7 +1548,7 @@
 "contact_phase2_backup_contacts_title" = "Sichern Sie Ihre Kontakte";
 "contact_phase2_backup_contacts_message" = "Auch Ihre Kontakte sind auf Lifebox sicher! Sie können Ihre Kontakte von überall und von jedem Gerät  aus erreichen.";
 "contact_phase2_backup_contacts_button" = "Jetzt sichern";
-"contact_phase2_small_card_backup_message" = "Datum der letzten Backupaktualisierung";
+"contact_phase2_small_card_backup_message" = "Datum der letzten Backupaktualisierung ";
 "contact_phase2_small_card_backup_button" = "Backups ansehen";
 "contact_phase2_small_card_duplicates_message" = "Bearbeiten Sie Ihre Kontakte, indem Sie doppelte Einträge aus Ihrem Handy löschen";
 "contact_phase2_small_card_duplicates_button" = "Löschen Sie wiederkehrende Einträge aus Ihrem Handy";
