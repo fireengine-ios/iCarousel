@@ -122,12 +122,12 @@ extension FaceImageItemsInteractor: FaceImageItemsInteractorInput {
                     output.didLoadAlbum(album, forItem: item)
                 }
                 
-                self?.output.asyncOperationSuccess()
+                self?.output?.asyncOperationSuccess()
             }
         }
         
         let failHandler: FailResponse = { [weak self] error in
-            self?.output.asyncOperationFail(errorMessage: error.description)
+            self?.output?.asyncOperationFail(errorMessage: error.description)
         }
         
         output.startAsyncOperation()
