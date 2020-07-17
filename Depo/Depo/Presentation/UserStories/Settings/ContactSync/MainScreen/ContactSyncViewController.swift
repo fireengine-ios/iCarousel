@@ -175,9 +175,7 @@ extension ContactSyncViewController: ContactSyncMainViewDelegate {
         showSpinner()
         
         progressView?.reset()
-        contactSyncHelper.analyze { [weak self] in
-            self?.hideSpinner()
-        }
+        contactSyncHelper.analyze { }
     }
     
     func changePeriodicSync(to option: PeriodicContactsSyncOption) {
