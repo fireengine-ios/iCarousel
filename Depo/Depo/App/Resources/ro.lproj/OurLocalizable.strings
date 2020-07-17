@@ -1547,7 +1547,7 @@
 "contact_phase2_backup_contacts_title" = "Efectuează Backup Contactelor";
 "contact_phase2_backup_contacts_message" = "Agenda telefonică este în siguranță în lifebox!\nPoți accesa de oriunde, de pe orice dispozitiv persoanele de contact din agenda ta.";
 "contact_phase2_backup_contacts_button" = "Efectuează Backup Acum";
-"contact_phase2_small_card_backup_message" = "Ultima dată a actualizării backup-ului";
+"contact_phase2_small_card_backup_message" = "Ultima dată a actualizării backup-ului ";
 "contact_phase2_small_card_backup_button" = "Vezi backup-urile";
 "contact_phase2_small_card_duplicates_message" = "Îți poți edita agenda telefonică prin ștergerea contactelor duplicate din agenda telefonică.";
 "contact_phase2_small_card_duplicates_button" = "Șterge Contactele Duplicate din Telefonul Tău";

@@ -1861,7 +1861,7 @@ Please check I have understood the intended command here*/
 "contact_phase2_backup_contacts_title" = "Sauvegardez Vos Contacts";
 "contact_phase2_backup_contacts_message" = "Votre répertoire téléphonique est également en sécurité dans lifebox! Vous pouvez joindre vos contacts de n'importe où, sur n'importe quel appareil.";
 "contact_phase2_backup_contacts_button" = "Sauvegarder Maintenant";
-"contact_phase2_small_card_backup_message" = "Date de la dernière mise à jour de la sauvegarde";
+"contact_phase2_small_card_backup_message" = "Date de la dernière mise à jour de la sauvegarde ";
 "contact_phase2_small_card_backup_button" = "Voir les sauvegardes";
 "contact_phase2_small_card_duplicates_message" = "Vous pouvez modifier votre répertoire téléphonique en effaçant les enregistrements répétés sur votre téléphone.";
 "contact_phase2_small_card_duplicates_button" = "Supprimer les enregistrements répétés sur votre téléphone";

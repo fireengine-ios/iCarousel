@@ -1549,7 +1549,7 @@
 "contact_phase2_backup_contacts_title" = "Зробіть Резервну Копію Контактів";
 "contact_phase2_backup_contacts_message" = "Ваша телефонна книга в безпеці у lifebox! Ви можете зв’язатися з вашими контактами з будь-якого місця, з будь-якого пристрою.";
 "contact_phase2_backup_contacts_button" = "Створити Резервну Копію Зараз";
-"contact_phase2_small_card_backup_message" = "Дата останнього оновлення резервної копії";
+"contact_phase2_small_card_backup_message" = "Дата останнього оновлення резервної копії ";
 "contact_phase2_small_card_backup_button" = "Подивитися резервні копії";
 "contact_phase2_small_card_duplicates_message" = "Ви можете редагувати свою телефонну книгу, видаливши повторювані записи на телефоні.";
 "contact_phase2_small_card_duplicates_button" = "Видалити повторювані записи на телефоні";

@@ -1590,7 +1590,7 @@
 "contact_phase2_backup_contacts_title" = "Rezervoji personat e tua";
 "contact_phase2_backup_contacts_message" = "Edhe libri yt i telefonit është gjithashtu i sigurt në lifebox! Mund të arrish tek personat e tua që janë në librin tënd të telefonit nga kudo që dëshiron dhe nga  çdo aparat që dëshiron.";
 "contact_phase2_backup_contacts_button" = "Rezervo Tani";
-"contact_phase2_small_card_backup_message" = "Data kur rezervimi u azhurnua për herë të fundit";
+"contact_phase2_small_card_backup_message" = "Data kur rezervimi u azhurnua për herë të fundit ";
 "contact_phase2_small_card_backup_button" = "Shikoji rezervimet";
 "contact_phase2_small_card_duplicates_message" = "Mund të redaktosh librin tënd të telefonit duke  i  pastruar   regjistrimet e tua të përsëritura që janë  në telefonin tënd.";
 "contact_phase2_small_card_duplicates_button" = "Fshiji  regjistrimet e tua të përsëritura që janë  në telefonin tënd";

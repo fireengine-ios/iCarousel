@@ -1589,7 +1589,7 @@
 "contact_phase2_backup_contacts_title" = "Copia de seguridad de tus contactos";
 "contact_phase2_backup_contacts_message" = "¡Tu guía telefónica también está segura en lifebox! Puede comunicarse con sus contactos desde cualquier lugar, en cualquier dispositivo.";
 "contact_phase2_backup_contacts_button" = "Copia Ahora";
-"contact_phase2_small_card_backup_message" = "Fecha en la que la copia de seguridad se actualizó por última vez";
+"contact_phase2_small_card_backup_message" = "Fecha en la que la copia de seguridad se actualizó por última vez ";
 "contact_phase2_small_card_backup_button" = "Ver copias de seguridad";
 "contact_phase2_small_card_duplicates_message" = "Puede editar la guía telefónica borrando las entradas repetidas en su teléfono.";
 "contact_phase2_small_card_duplicates_button" = "Eliminar entradas repetidas en su teléfono";

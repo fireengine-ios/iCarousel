@@ -1561,7 +1561,7 @@
 "contact_phase2_backup_contacts_title" = "Сделайте Резервную Копию Ваших Контактов";
 "contact_phase2_backup_contacts_message" = "Ваша телефонная книга также в безопасности в lifebox! Вы можете связаться с вашими контактами из любого места, с любого устройства.";
 "contact_phase2_backup_contacts_button" = "Сделать Резервное Копирование Сейчас";
-"contact_phase2_small_card_backup_message" = "Дата последнего обновления резервной копии";
+"contact_phase2_small_card_backup_message" = "Дата последнего обновления резервной копии ";
 "contact_phase2_small_card_backup_button" = "Показать резервные копии";
 "contact_phase2_small_card_duplicates_message" = "Вы можете отредактировать свою телефонную книгу, удалив дубликаты записей на вашем телефоне.";
 "contact_phase2_small_card_duplicates_button" = "Удалить дубликаты с вашего телефона";
