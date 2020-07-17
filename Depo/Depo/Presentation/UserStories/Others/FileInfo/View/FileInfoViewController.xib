@@ -47,7 +47,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="77o-rW-aKy">
-                    <rect key="frame" x="22" y="47" width="286" height="22"/>
+                    <rect key="frame" x="22" y="47" width="331" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="6ex-g9-480"/>
                     </constraints>
@@ -57,17 +57,6 @@
                         <outlet property="delegate" destination="-1" id="RRv-bH-iEw"/>
                     </connections>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ku-t7-84I">
-                    <rect key="frame" x="330" y="41" width="29" height="34"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="29" id="2I9-Ah-NS7"/>
-                    </constraints>
-                    <inset key="contentEdgeInsets" minX="6" minY="6" maxX="6" maxY="6"/>
-                    <state key="normal" image="shape"/>
-                    <connections>
-                        <action selector="onEditButtonTapped:" destination="-1" eventType="touchUpInside" id="V0C-ot-vuG"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hem-zh-lNu">
                     <rect key="frame" x="7" y="81" width="361" height="1"/>
                     <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
@@ -179,7 +168,6 @@
                 <constraint firstItem="kIx-nZ-QgV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="AMe-Gn-NR1"/>
                 <constraint firstItem="4aH-FR-8Sf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="ETa-OS-zmd"/>
                 <constraint firstItem="77o-rW-aKy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="FfF-7U-I7T"/>
-                <constraint firstItem="4ku-t7-84I" firstAttribute="leading" secondItem="77o-rW-aKy" secondAttribute="trailing" constant="22" id="FwO-G1-fPQ"/>
                 <constraint firstItem="kIx-nZ-QgV" firstAttribute="top" secondItem="miw-2C-Mdw" secondAttribute="top" constant="15" id="GhO-W6-vD1"/>
                 <constraint firstAttribute="trailing" secondItem="kIx-nZ-QgV" secondAttribute="trailing" constant="22" id="H4y-m1-onP"/>
                 <constraint firstAttribute="trailing" secondItem="Of7-IW-hVl" secondAttribute="trailing" constant="7" id="HUL-1e-2Pi"/>
@@ -190,12 +178,10 @@
                 <constraint firstAttribute="trailing" secondItem="4aH-FR-8Sf" secondAttribute="trailing" constant="22" id="NRF-jS-Xkd"/>
                 <constraint firstItem="77o-rW-aKy" firstAttribute="top" secondItem="kIx-nZ-QgV" secondAttribute="bottom" constant="16" id="NYq-2Y-zwO"/>
                 <constraint firstItem="Sws-0u-8c8" firstAttribute="top" secondItem="6gm-iK-w9c" secondAttribute="bottom" id="OIE-vR-Hhh"/>
-                <constraint firstItem="miw-2C-Mdw" firstAttribute="trailing" secondItem="4ku-t7-84I" secondAttribute="trailing" constant="16" id="PR0-2t-2tY"/>
                 <constraint firstItem="Of7-IW-hVl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="7" id="Qat-0l-qsy"/>
                 <constraint firstAttribute="trailing" secondItem="6gm-iK-w9c" secondAttribute="trailing" constant="22" id="SZ5-he-J40"/>
                 <constraint firstAttribute="trailing" secondItem="abs-2N-74x" secondAttribute="trailing" id="SiO-0z-nRm"/>
                 <constraint firstAttribute="trailing" secondItem="Sws-0u-8c8" secondAttribute="trailing" constant="22" id="Tud-7o-ST6"/>
-                <constraint firstItem="4ku-t7-84I" firstAttribute="centerY" secondItem="77o-rW-aKy" secondAttribute="centerY" id="WJx-ba-5Dr"/>
                 <constraint firstItem="hem-zh-lNu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="7" id="X26-5G-Jf9"/>
                 <constraint firstItem="m5X-lA-kgv" firstAttribute="top" secondItem="boz-R0-aEv" secondAttribute="top" id="XTV-KY-VPu"/>
                 <constraint firstItem="4aH-FR-8Sf" firstAttribute="top" secondItem="Sws-0u-8c8" secondAttribute="bottom" id="YTF-o1-RrV"/>
@@ -208,6 +194,7 @@
                 <constraint firstItem="Sws-0u-8c8" firstAttribute="leading" secondItem="5Au-NX-n16" secondAttribute="trailing" constant="8" id="mMe-xp-vTf"/>
                 <constraint firstItem="qsp-jh-5I9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="nqL-gj-F71"/>
                 <constraint firstItem="VnX-Ji-QDm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="o9L-KD-XuU"/>
+                <constraint firstItem="miw-2C-Mdw" firstAttribute="trailing" secondItem="77o-rW-aKy" secondAttribute="trailing" constant="22" id="odl-wg-Scx"/>
                 <constraint firstItem="boz-R0-aEv" firstAttribute="leading" secondItem="m5X-lA-kgv" secondAttribute="trailing" constant="8" id="r3Y-hj-ssw"/>
                 <constraint firstAttribute="trailing" secondItem="4t8-mh-2vG" secondAttribute="trailing" constant="22" id="tPS-J4-Q2G"/>
                 <constraint firstItem="4t8-mh-2vG" firstAttribute="trailing" secondItem="boz-R0-aEv" secondAttribute="trailing" id="umh-rN-XMp"/>
@@ -224,7 +211,4 @@
             <point key="canvasLocation" x="25.5" y="51.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="shape" width="17" height="17"/>
-    </resources>
 </document>
