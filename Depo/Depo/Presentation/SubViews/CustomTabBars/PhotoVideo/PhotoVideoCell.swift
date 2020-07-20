@@ -192,9 +192,10 @@ final class PhotoVideoCell: UICollectionViewCell {
         bleachView.isHidden = !syncStatus.isBleached
         gradientImageView.isHidden = !syncStatus.isBleached
 
-        if case let SyncStatus.syncing(value: value) = syncStatus {
+        switch syncStatus {
+        case .syncing(let value):
             runOrUpdateProgress(value: value)
-        } else {
+        default:
             stopProgressing()
         }
     }
