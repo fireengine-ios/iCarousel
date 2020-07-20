@@ -550,13 +550,19 @@ extension TrashBinDataSource: UICollectionViewDelegate {
         }
         
         if isSelectionStateActive {
-            if selectedItems.contains(item) {
+            let isSelected = selectedItems.contains(item)
+            if isSelected {
                 selectedItems.remove(item)
             } else {
                 selectedItems.append(item)
             }
-            collectionView.reloadItems(at: [indexPath])
             updateSelectionCount()
+            
+            guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell else {
+                return
+            }
+            cell.setSelection(isSelectionActive: isSelectionStateActive, isSelected: !isSelected)
+            
         } else  {
             delegate?.didSelect(item: item)
         }
