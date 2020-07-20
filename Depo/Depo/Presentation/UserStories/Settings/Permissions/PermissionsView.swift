@@ -115,10 +115,9 @@ class PermissionsView: UIView, PermissionsViewProtocol, NibInit {
 extension PermissionsView: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        return textviewDelegate?.tappedOnURL(url: URL) ?? true
-    }
-    
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        return textviewDelegate?.tappedOnURL(url: URL) ?? true
+        if textviewDelegate?.tappedOnURL(url: URL) == true {
+            return false
+        }
+        return defaultHandle(url: URL, interaction: interaction)
     }
 }

@@ -94,7 +94,6 @@ struct NumericConstants {
     static let numberOfLocalItemsOnPage: Int = 100
     static let itemProviderSearchRequest: Int = 1000
     
-    static let limitContactsForBackUp: Int = 5000
     static let contactSyncBulk = 1000
     static let defaultCustomScrollIndicatorOffset: CGFloat = 50
     
@@ -174,6 +173,10 @@ struct NumericConstants {
     static let langingPageCount = 7
     
     static let passwordRuleSetVersion = 1
+    
+    static let contactSyncSmallCardCornerRadius: CGFloat = 4.0
+    static let contactSyncSmallCardShadowOpacity: Float = 0.5
+    static let contactSyncSmallCardShadowRadius: CGFloat = 3
 }
 
 struct RequestSizeConstant {

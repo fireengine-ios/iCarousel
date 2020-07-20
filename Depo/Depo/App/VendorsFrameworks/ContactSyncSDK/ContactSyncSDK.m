@@ -348,11 +348,11 @@
         if ([SyncSettings shared].analyzeNotifyCallback != nil) {
             NSMutableDictionary<NSString*, NSNumber*> *willMergeMap = [NSMutableDictionary new];
             for (Contact *contact in [self.mergeMap allKeys]){
-                [willMergeMap setObject:@([[self.mergeMap objectForKey:contact] count]) forKey:contact.nameForCompare];
+                [willMergeMap setObject:@([[self.mergeMap objectForKey:contact] count]) forKey:contact.generateDisplayName];
             }
             NSMutableArray<NSString*> *willDeleteList = [NSMutableArray new];
             for (Contact *contact in self.willDelete) {
-                [willDeleteList addObject:contact.nameForCompare];
+                [willDeleteList addObject:contact.generateDisplayName];
             }
             [self onNotify:willMergeMap delete:willDeleteList];
         }
@@ -568,7 +568,12 @@ static bool syncing = false;
                     [self uploadVCF:value];
                 } else {
                     SYNC_Log(@"Error while getting upload url %@", response);
-                    [self endOfSyncCycleError:SYNC_RESULT_ERROR_DEPO response: response];
+                    if (response==nil){
+                        SYNC_Log(@"%@", @"We got NULL response Possible network error");
+                        [self endOfSyncCycle:SYNC_RESULT_ERROR_NETWORK];
+                    } else {
+                        [self endOfSyncCycleError:SYNC_RESULT_ERROR_DEPO response: response];
+                    }
                 }
             }];
         } else {
@@ -994,6 +999,10 @@ static bool syncing = false;
         errorCode = item[@"code"];
     }
     
+    if (!SYNC_IS_NULL(errorCode) && [errorCode isEqualToString:@"3000"]) {
+        [self.partialInfo erase];
+    }
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *key = self.updateId == nil ? [defaults objectForKey:SYNC_KEY_CHECK_UPDATE]: self.updateId;
     [SyncAdapter sendStats:key start:self.initialContactCount
@@ -1015,7 +1024,7 @@ static bool syncing = false;
                       [SyncStatus shared].mergedOnServer = stats.mergedOnServer;
                   }
                   
-                  if ([self.partialInfo isLastStep]){
+                  if ([self.partialInfo isLastStep] || !SYNC_IS_NULL(messages) || !syncing){
                       [self callStats:messages];
                   }
               } else {
@@ -1068,7 +1077,12 @@ static bool syncing = false;
             [self resolveMsisdn];
         } else {
             SYNC_Log(@"Error while uploading vcf %@", response);
-            [self endOfSyncCycleError:SYNC_RESULT_ERROR_DEPO response: response];
+            if (response==nil){
+                SYNC_Log(@"%@", @"We got NULL response Possible network error");
+                [self endOfSyncCycle:SYNC_RESULT_ERROR_NETWORK];
+            } else {
+                [self endOfSyncCycleError:SYNC_RESULT_ERROR_DEPO response: response];
+            }
         }
     }];
 }

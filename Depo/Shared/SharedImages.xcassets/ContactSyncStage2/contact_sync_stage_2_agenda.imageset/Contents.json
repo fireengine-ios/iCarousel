@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "constact_sync_stage_2_agenda.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true
+  }
+}

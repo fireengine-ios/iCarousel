@@ -88,8 +88,7 @@ class SpotifyObject: Equatable {
         self.createdDate = json["createdDate"].date
         self.lastModifiedDate = json["lastModifiedDate"].date
         self.imagePath = json["imagePath"].url
-        
-        monthValue = lastModifiedDate?.getDateInTextForCollectionViewHeader() ?? ""
+        monthValue = createdDate?.getDateInTextForCollectionViewHeader() ?? ""
         nameFirstLetter = String(name.first ?? Character("")).uppercased()
     }
     

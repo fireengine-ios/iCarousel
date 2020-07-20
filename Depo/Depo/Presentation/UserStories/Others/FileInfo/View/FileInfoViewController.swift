@@ -138,12 +138,13 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     }
     
     @objc func onSave() {
+        
         guard let text = fileName.text?.nonEmptyString else {
             return
         }
         if let fileExtension = fileExtension?.nonEmptyString {
             output.onRename(newName: text.makeFileName(with: fileExtension))
-        } else if fileType == .folder {
+        } else if fileType == .folder || fileType == .photoAlbum {
             output.onRename(newName: text)
         }
     }

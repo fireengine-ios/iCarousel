@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ContactSyncNoBackupView" customModule="LifeTech_lifedrive" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jb6-gk-zjc">
+                    <rect key="frame" x="16" y="64" width="343" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tia-GQ-v25">
+                    <rect key="frame" x="32" y="105" width="311" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contact_sync_stage_2_nobackup_small_clouds" translatesAutoresizingMaskIntoConstraints="NO" id="78p-Cm-1se">
+                    <rect key="frame" x="0.0" y="126" width="375" height="166"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="78p-Cm-1se" secondAttribute="height" multiplier="375:166" priority="750" id="yG1-Yx-uFk"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contact_sync_stage_2_agenda" translatesAutoresizingMaskIntoConstraints="NO" id="E7z-FN-x2b">
+                    <rect key="frame" x="142" y="158" width="91" height="114"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPu-ha-F83" customClass="RoundedInsetsButton" customModule="LifeTech_lifedrive" customModuleProvider="target">
+                    <rect key="frame" x="164.5" y="451" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="backUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="sew-qz-uqR"/>
+                    </connections>
+                </button>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contact_sync_stage_2_nobackup_clouds" translatesAutoresizingMaskIntoConstraints="NO" id="bmk-yZ-yPW">
+                    <rect key="frame" x="0.0" y="292" width="375" height="135"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="bmk-yZ-yPW" secondAttribute="height" multiplier="25:9" priority="750" id="Htv-am-cCg"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="Tia-GQ-v25" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="32" id="3Bv-li-dQe"/>
+                <constraint firstItem="Tia-GQ-v25" firstAttribute="top" secondItem="jb6-gk-zjc" secondAttribute="bottom" constant="20" id="6cr-vT-LlN"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MPu-ha-F83" secondAttribute="bottom" constant="32" id="70H-0s-2S1"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bmk-yZ-yPW" secondAttribute="trailing" id="8hF-Tj-Wf7"/>
+                <constraint firstItem="E7z-FN-x2b" firstAttribute="top" secondItem="Tia-GQ-v25" secondAttribute="bottom" constant="32" id="CDZ-oe-60z"/>
+                <constraint firstItem="78p-Cm-1se" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Ecp-q0-czo"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="jb6-gk-zjc" secondAttribute="trailing" constant="16" id="LMA-JD-MEU"/>
+                <constraint firstItem="jb6-gk-zjc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="MIt-07-Or7"/>
+                <constraint firstItem="MPu-ha-F83" firstAttribute="top" secondItem="bmk-yZ-yPW" secondAttribute="bottom" constant="24" id="MPK-6r-Kmc"/>
+                <constraint firstItem="78p-Cm-1se" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="OzQ-aF-g0L"/>
+                <constraint firstItem="jb6-gk-zjc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="64" id="Rix-UD-Ofb"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MPu-ha-F83" secondAttribute="trailing" constant="16" id="S89-zB-bp3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Tia-GQ-v25" secondAttribute="trailing" constant="32" id="XR1-ze-7oO"/>
+                <constraint firstItem="E7z-FN-x2b" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="YWM-fn-1Fm"/>
+                <constraint firstItem="bmk-yZ-yPW" firstAttribute="top" secondItem="78p-Cm-1se" secondAttribute="bottom" id="ZJf-Tn-UG2"/>
+                <constraint firstItem="jb6-gk-zjc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="aaL-rv-uPb"/>
+                <constraint firstItem="Tia-GQ-v25" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="fc9-GO-Oys"/>
+                <constraint firstItem="78p-Cm-1se" firstAttribute="top" secondItem="Tia-GQ-v25" secondAttribute="bottom" id="g30-qE-xQF"/>
+                <constraint firstItem="MPu-ha-F83" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="iOM-KD-lkl"/>
+                <constraint firstItem="bmk-yZ-yPW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="lBy-8e-3RB"/>
+                <constraint firstItem="MPu-ha-F83" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qps-8a-pAC"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="actionButton" destination="MPu-ha-F83" id="ymd-Cn-xfQ"/>
+                <outlet property="message" destination="Tia-GQ-v25" id="faC-zw-Cyq"/>
+                <outlet property="title" destination="jb6-gk-zjc" id="zIM-D8-adB"/>
+            </connections>
+            <point key="canvasLocation" x="136.80000000000001" y="141.67916041979012"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="contact_sync_stage_2_agenda" width="91" height="114"/>
+        <image name="contact_sync_stage_2_nobackup_clouds" width="375" height="135"/>
+        <image name="contact_sync_stage_2_nobackup_small_clouds" width="375" height="166"/>
+    </resources>
+</document>

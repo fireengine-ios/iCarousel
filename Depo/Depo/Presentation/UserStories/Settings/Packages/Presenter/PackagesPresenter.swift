@@ -265,6 +265,10 @@ extension PackagesPresenter: PackagesInteractorOutput {
     
     func purchasesRestored(text: String) { }
     
+    func purchaseCancelled() {
+        view?.stopActivityIndicator()
+    }
+    
     func refreshPackages() {
         view?.stopActivityIndicator()
         refreshPage()

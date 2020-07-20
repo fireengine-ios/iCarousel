@@ -38,3 +38,17 @@ final class BlueButtonWithNoFilesWhiteText: BlueButtonWithWhiteText {
         titleLabel?.textAlignment = .center
     }
 }
+
+final class NavyButtonWithWhiteText: WhiteButtonWithRoundedCorner {
+    override func configurate() {
+        super.configurate()
+        
+        setBackgroundColor(ColorConstants.navy, for: .normal)
+        setBackgroundColor(ColorConstants.navy.lighter(by: 30.0), for: .disabled)
+        setTitleColor(ColorConstants.whiteColor, for: .normal)
+        setTitleColor(ColorConstants.lightGrayColor, for: .disabled)
+        
+        titleLabel?.font = ApplicationPalette.mediumDemiRoundButtonFont
+        titleLabel?.textAlignment = .center
+    }
+}
