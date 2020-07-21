@@ -36,9 +36,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     var sharingItems = [BaseDataSourceItem]()
     
     func share(item: [BaseDataSourceItem], sourceRect: CGRect?) {
-        if (item.count == 0) {
+        guard !item.isEmpty else {
             return
         }
+        
         sharingItems.removeAll()
         sharingItems.append(contentsOf: item)
         
@@ -124,25 +125,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 let activityVC = UIActivityViewController(activityItems: fileURLs, applicationActivities: nil)
                 
                 activityVC.completionWithItemsHandler = { [weak self] activityType, completed, _, _ in
-                    guard let activityType = activityType else {
+                    guard completed, let activityTypeString = activityType?.rawValue  else {
                         return
                     }
-                    if activityType == .postToFacebook {
-                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .share, eventLabel: .share(.facebook))
-                    } else if activityType == .postToTwitter {
-                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .share, eventLabel: .share(.twitter))
-                    } else if activityType == .mail {
-                        self?.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .share, eventLabel: .share(.eMail))
-                    }
-                    
-                    guard
-                        completed,
-                        let activityTypeString = (activityType as NSString?) as String?,
-                        let fileType = filesForDownload.first?.type
-                    else {
-                        return
-                    }
-                    
+
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Share(method: shareType, channelType: activityTypeString.knownAppName()))
                     self?.analyticsService.trackCustomGAEvent(eventCategory: .functions,
                                                               eventActions: .share,
@@ -167,9 +153,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func shareViaLink(item: [BaseDataSourceItem], sourceRect: CGRect?) {
-        if (item.count == 0) {
+        guard !item.isEmpty else {
             return
         }
+        
         sharingItems.removeAll()
         sharingItems.append(contentsOf: item)
         
@@ -183,7 +170,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                                  eventActions: .share,
                                                  eventLabel: .shareViaLink)
         
-        let fileType = sharingItems.first?.fileType
         fileService.share(sharedFiles: sharingItems, success: { [weak self] url in
             DispatchQueue.main.async {
                 guard
@@ -198,11 +184,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 let activityVC = UIActivityViewController(activityItems: objectsToShare,
                                                           applicationActivities: nil)
                 activityVC.completionWithItemsHandler = { activityType, completed, _, _ in
-                    guard
-                        completed,
-                        let activityTypeString = (activityType as NSString?) as String?,
-                        let fileType = fileType
-                    else {
+                    guard completed, let activityTypeString = activityType?.rawValue else {
                         return
                     }
                     output.stopSelectionMode()
