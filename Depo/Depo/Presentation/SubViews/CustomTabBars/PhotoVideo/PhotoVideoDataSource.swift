@@ -272,8 +272,11 @@ final class PhotoVideoDataSource: NSObject {
                 self?.fetchedResultsController.fetchRequest.predicate = compundedPredicate
                 newPredicateSetupedCallback()
             }
-        case .synced, .unsynced:
-            fetchedResultsController.fetchRequest.predicate = predicateManager.getSyncPredicate(isSynced: type == .synced, isPhotos: isPhotos)
+        case .synced:
+            fetchedResultsController.fetchRequest.predicate = predicateManager.getSyncPredicate(isPhotos: isPhotos)
+            newPredicateSetupedCallback()
+        case .unsynced:
+            fetchedResultsController.fetchRequest.predicate = predicateManager.getUnsyncPredicate(isPhotos: isPhotos)
             newPredicateSetupedCallback()
         }
     }
