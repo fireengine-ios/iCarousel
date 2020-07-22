@@ -25,8 +25,8 @@ apps = [
             prodTeamID: '729CGH4BJD',
 	    //xcodeSchema: // Defaults to app name
             //xcodeTarget: // Defaults to app name
-            //xcodeSchema: 'Billo_Bundle', 
-            //xcodeTarget: 'Billo_Bundle'  
+            xcodeSchema: 'Billo_Bundle', 
+            xcodeTarget: 'Billo_Bundle'  
         ]
 ]
 derivedDir = 'lifebox'
