@@ -76,8 +76,7 @@ extension DeleteDuplicatesViewController: ContactSyncControllerProtocol, Contact
     func showRelatedView() {
         show(view: mainView, animated: true)
     }
-    
-    func handle(error: ContactSyncHelperError, operationType: SyncOperationType) { }
+
     func didFinishOperation(operationType: ContactsOperationType) { }
 }
 

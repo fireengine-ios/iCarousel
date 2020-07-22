@@ -19,7 +19,6 @@ protocol ContactSyncControllerProtocol: ViewController {
     func show(view: UIView, animated: Bool)
     func showRelatedView()
     func showResultView(view: UIView, title: String)
-    func handle(error: ContactSyncHelperError, operationType: SyncOperationType)
     func didFinishOperation(operationType: ContactsOperationType)
 }
 
@@ -65,9 +64,14 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         super.viewDidLoad()
         
         trackScreen()
+        floatingButtonsArray = [.takePhoto, .upload, .createAStory, .newFolder]
         
         if tabBarIsVisible {
             needToShowTabBar = true
+        }
+        
+        NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { [weak self] _ in
+            self?.updateBackupStatus()
         }
     }
     
@@ -171,9 +175,7 @@ extension ContactSyncViewController: ContactSyncMainViewDelegate {
         showSpinner()
         
         progressView?.reset()
-        contactSyncHelper.analyze { [weak self] in
-            self?.hideSpinner()
-        }
+        contactSyncHelper.analyze { }
     }
     
     func changePeriodicSync(to option: PeriodicContactsSyncOption) {
@@ -225,15 +227,6 @@ extension ContactSyncViewController: ContactSyncControllerProtocol {
     
     func show(view: UIView, animated: Bool) {
         animator.showTransition(to: view, on: contentView, animated: true)
-    }
-    
-    func handle(error: ContactSyncHelperError, operationType: SyncOperationType) {
-        switch error {
-        case .noBackUp:
-            showRelatedView()
-        default:
-            break
-        }
     }
     
     private func noDuplicatesPopup() {

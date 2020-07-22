@@ -16,8 +16,8 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "0303A0132397D0D000907F42"
-                     BuildableName = "LifeTech_lifedrive.app"
-                     BlueprintName = "LifeTech_lifedrive"
+                     BuildableName = "LifeTech_Billo.app"
+                     BlueprintName = "LifeTech_Billo"
                      ReferencedContainer = "container:Depo.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0303A0132397D0D000907F42"
-               BuildableName = "LifeTech_lifedrive.app"
-               BlueprintName = "LifeTech_lifedrive"
+               BuildableName = "LifeTech_Billo.app"
+               BlueprintName = "LifeTech_Billo"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -64,8 +64,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0303A0132397D0D000907F42"
-            BuildableName = "LifeTech_lifedrive.app"
-            BlueprintName = "LifeTech_lifedrive"
+            BuildableName = "LifeTech_Billo.app"
+            BlueprintName = "LifeTech_Billo"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -81,8 +81,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0303A0132397D0D000907F42"
-            BuildableName = "LifeTech_lifedrive.app"
-            BlueprintName = "LifeTech_lifedrive"
+            BuildableName = "LifeTech_Billo.app"
+            BlueprintName = "LifeTech_Billo"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

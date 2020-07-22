@@ -528,7 +528,6 @@
 "Lifebox can sync your files automatically." = "lifebox fotoğraf ve videolarını otomatik olarak yedekleyebilir.\n\nFotoğraf ve videolarının arka planda yedeklenebilmesi için, lütfen lifebox konum izninin \"cihaz ayarları-lifebox-konum\" menüsü altında \"Her Zaman\" olarak ayarlandığına emin ol.";
 "Get Started" = "Başla";
 "I have read and accepted terms of use" = "Kullanım koşullarını okudum ve kabul ettim.";
-"Welcome to Lifebox!" = "lifebox’a hoş geldin!";
 "You need to confirm the User Agreement to continue." = "Devam edebilmek için Kullanıcı Sözleşmesi'ni onaylaman gerekiyor.";
 "PhotosAndViedos" = "Fotoğraflar ve videolar";
 "Are these the same person?" = "Bunlar aynı kişiler mi?";
@@ -1617,3 +1616,4 @@
 "contact_phase2_result_delete_backup_nav_bar_title" = "Yedeği Sil";
 "contact_phase2_result_delete_duplicates_nav_bar_title" = "Tekrarlayanları Sil";
 "contact_phase2_result_delete_all_contacts_nav_bar_title" = "Kişileri Sil";
+"eula_title" = "";

@@ -89,6 +89,7 @@ class CreateStoryPreviewViewController: BaseViewController, AVPlayerViewControll
     
     @objc private func onSaveButton() {
         output.onSaveStory()
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     @objc private func didEnterBackground() {

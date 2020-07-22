@@ -513,6 +513,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     }
                 case .sync:
                     action = UIAlertAction()
+                    case .syncInProgress:
+                    action = UIAlertAction()
                 case .undetermend:
                     action = UIAlertAction()
                 case .changeCoverPhoto:

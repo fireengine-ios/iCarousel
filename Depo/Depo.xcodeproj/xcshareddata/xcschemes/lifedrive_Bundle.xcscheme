@@ -16,8 +16,8 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "CF8B6B3023CBCA280021B021"
-                     BuildableName = "lifedrive_Bundle.app"
-                     BlueprintName = "lifedrive_Bundle"
+                     BuildableName = "Billo_Bundle.app"
+                     BlueprintName = "Billo_Bundle"
                      ReferencedContainer = "container:Depo.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CF8B6B3023CBCA280021B021"
-               BuildableName = "lifedrive_Bundle.app"
-               BlueprintName = "lifedrive_Bundle"
+               BuildableName = "Billo_Bundle.app"
+               BlueprintName = "Billo_Bundle"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -64,8 +64,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CF8B6B3023CBCA280021B021"
-            BuildableName = "lifedrive_Bundle.app"
-            BlueprintName = "lifedrive_Bundle"
+            BuildableName = "Billo_Bundle.app"
+            BlueprintName = "Billo_Bundle"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -81,8 +81,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CF8B6B3023CBCA280021B021"
-            BuildableName = "lifedrive_Bundle.app"
-            BlueprintName = "lifedrive_Bundle"
+            BuildableName = "Billo_Bundle.app"
+            BlueprintName = "Billo_Bundle"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

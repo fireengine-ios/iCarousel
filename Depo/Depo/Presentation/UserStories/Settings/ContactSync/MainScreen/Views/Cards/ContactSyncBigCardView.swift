@@ -21,7 +21,7 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
             newValue.font = .TurkcellSaturaMedFont(size: 24.0)
             newValue.textColor =  .white
             newValue.numberOfLines = 0
-            newValue.adjustsFontSizeToFitWidth()
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     
@@ -47,11 +47,14 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
     
     @IBOutlet private weak var backUpButton: RoundedInsetsButton! {
         willSet {
-            newValue.insets = UIEdgeInsets(topBottom: 8.0, rightLeft: 24.0)
-            newValue.setTitle(TextConstants.contactSyncBackupButton, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16.0)
-            newValue.setTitleColor(.lrTealishTwo, for: .normal)
             newValue.setBackgroundColor(.white, for: .normal)
+            
+            newValue.setTitle(TextConstants.contactSyncBackupButton, for: .normal)
+            newValue.setTitleColor(.lrTealishTwo, for: .normal)
+            
+            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16.0)
+            newValue.adjustsFontSizeToFitWidth()
+            newValue.insets = UIEdgeInsets(topBottom: 8.0, rightLeft: 24.0)
         }
     }
     
@@ -62,6 +65,7 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
             newValue.setTitle(TextConstants.contactSyncBigCardSeeContactsButton, for: .normal)
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 14.0)
             newValue.setTitleColor(.lrTealishTwo, for: .normal)
+            newValue.adjustsFontSizeToFitWidth()
         }
     }
     
@@ -86,8 +90,8 @@ final class ContactSyncBigCardView: ContactSyncBaseCardView, NibInit {
             newValue.text = TextConstants.contactSyncBigCardAutobackupFormat
             newValue.font = .TurkcellSaturaDemFont(size: 14.0)
             newValue.textColor =  .lrTealishTwo
-            newValue.numberOfLines = 1
-            newValue.adjustsFontSizeToFitWidth()
+            newValue.numberOfLines = 0
+            newValue.lineBreakMode = .byWordWrapping
         }
     }
     

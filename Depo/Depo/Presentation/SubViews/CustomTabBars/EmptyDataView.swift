@@ -8,11 +8,15 @@
 
 import UIKit
 
-final class EmptyDataView: UIView {
+protocol EmptyDataViewDelegate: AnyObject {
+    func didButtonTapped()
+}
+
+final class EmptyDataView: UIView, NibInit {
+    weak var delegate: EmptyDataViewDelegate?
     
     @IBOutlet private weak var messageLabel: UILabel! {
         willSet {
-            newValue.text = TextConstants.photosVideosViewNoPhotoTitleText
             newValue.textColor = ColorConstants.textGrayColor
             newValue.font = UIFont.TurkcellSaturaRegFont(size: 14)
         }
@@ -22,7 +26,14 @@ final class EmptyDataView: UIView {
     
     @IBOutlet private weak var actionButton: UIButton!
     
+    func configure(title: String, image: UIImage, actionTitle: String? = nil) {
+        messageLabel.text = title
+        iconImageView.image = image
+        actionButton.setTitle(actionTitle, for: .normal)
+        actionButton.isHidden = actionTitle == nil
+    }
+    
     @IBAction private func onActionButton(_ sender: UIButton) {
-        
+        delegate?.didButtonTapped()
     }
 }

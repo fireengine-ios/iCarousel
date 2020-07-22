@@ -22,17 +22,6 @@
 	<string>2.35</string>
 	<key>NSExtension</key>
 	<dict>
-		<key>NSExtensionFileProviderActions</key>
-		<array>
-			<dict>
-				<key>NSExtensionFileProviderActionActivationRule</key>
-				<string>TRUEPREDICATE</string>
-				<key>NSExtensionFileProviderActionIdentifier</key>
-				<string>com.mycompany.FileProviderUI.CustomAction</string>
-				<key>NSExtensionFileProviderActionName</key>
-				<string>Custom Action</string>
-			</dict>
-		</array>
 		<key>NSExtensionFileProviderDocumentGroup</key>
 		<string>group.com.lcv.billo</string>
 		<key>NSExtensionMainStoryboard</key>

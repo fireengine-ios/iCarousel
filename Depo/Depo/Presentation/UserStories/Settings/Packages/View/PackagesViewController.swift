@@ -177,12 +177,12 @@ extension PackagesViewController: SubscriptionOfferViewDelegate {
     }
     
     private func presentPaymentPopUp(plan: PackageOffer, planIndex: Int) {
-        guard let name = plan.offers.first?.name else {
+        guard let offer = plan.offers.first else {
             assertionFailure()
             return
         }
         
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackageClick(packageName: name))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackageClick(packageName: offer.name))
         
         let paymentMethods: [PaymentMethod] = plan.offers.compactMap { offer in
             if let model = offer.model as? PackageModelResponse {
@@ -192,8 +192,9 @@ extension PackagesViewController: SubscriptionOfferViewDelegate {
             }
         }
         
-        let subtitle = TextConstants.storage
-        let paymentModel = PaymentModel(name: name, subtitle: subtitle, types: paymentMethods)
+        let titles = createTitlesForPopUp(offer: offer)
+        
+        let paymentModel = PaymentModel(name: titles.title, subtitle: titles.subtitle, types: paymentMethods)
         let popup = PaymentPopUpController.controllerWith(paymentModel)
         present(popup, animated: false, completion: nil)
     }
@@ -226,6 +227,14 @@ extension PackagesViewController: SubscriptionOfferViewDelegate {
     
     private func getChoosenSubscriptionPlan(availableOffers: PackageOffer, packageType: PackageContentType) -> SubscriptionPlan?  {
         return availableOffers.offers.first(where: { ($0.model as? PackageModelResponse)?.type == packageType })
+    }
+    
+    private func createTitlesForPopUp(offer: SubscriptionPlan) -> (title: String, subtitle: String) {
+        if offer.addonType == .featureOnly {
+            return (title: TextConstants.lifeboxPremium, subtitle: TextConstants.feature)
+        } else {
+            return (title: offer.name, subtitle: TextConstants.storage)
+        }
     }
 }
 

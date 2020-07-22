@@ -36,7 +36,7 @@ struct CreateOverlayStickersSuccessResult {
 
 typealias CreateOverlayStickersResult = Result<CreateOverlayStickersSuccessResult, CreateOverlayStickerError>
 
-protocol OverlayStickerImageViewdelegate: class {
+protocol OverlayStickerImageViewDelegate: class {
     func makeTopAndBottomBarsIsHidden(isHidden: Bool)
 }
 
@@ -63,7 +63,7 @@ final class OverlayStickerImageView: UIImageView {
     private var startSizeSelectedView: CGSize?
     private var startRotatePosition: CGFloat?
     private var selectedSticker: UIImageView?
-    weak var stickersDelegate: OverlayStickerImageViewdelegate?
+    weak var stickersDelegate: OverlayStickerImageViewDelegate?
     
     private let stickerSize = CGSize(width: 50, height: 50)
     private let downloader = ImageDownloder()
@@ -86,6 +86,12 @@ final class OverlayStickerImageView: UIImageView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupView()
+    }
+    
+    deinit {
+        panGesture.delegate = nil
+        pinchGesture.delegate = nil
+        rotationGesture.delegate = nil
     }
     
     private func setupView() {
@@ -156,7 +162,7 @@ final class OverlayStickerImageView: UIImageView {
                 return
             }
             
-            DispatchQueue.toMain {
+            DispatchQueue.main.async {
                 let imageView = UIImageView(image: image)
                 
                 imageView.frame.size = CGSize(width: UIScreen.main.bounds.width * 0.4,
@@ -175,7 +181,7 @@ final class OverlayStickerImageView: UIImageView {
         let trashBinOrigin = CGPoint(x: UIScreen.main.bounds.width / 2 - (self.stickerSize.width / 2),
                                      y: self.frame.height - self.stickerSize.height - 20)
         trashBinLayer.frame = CGRect(origin: trashBinOrigin, size: self.stickerSize)
-        self.layer.addSublayer(trashBinLayer)
+        layer.addSublayer(trashBinLayer)
     }
     
     @objc private func handlePan(_ pan:UIPanGestureRecognizer) {
@@ -194,7 +200,7 @@ final class OverlayStickerImageView: UIImageView {
             startPositionSelectedView = subview.center
             selectedSticker = subview
             if subview != mainSticker {
-                self.bringSubview(toFront: subview)
+                bringSubview(toFront: subview)
             }
             
         case .changed:
@@ -232,9 +238,8 @@ final class OverlayStickerImageView: UIImageView {
                 
                 UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseIn, animations: {
                     selectedSticker.alpha = 0
-                }) { _ in
-                    
-                    self.attachments.removeAll(where: { $0.imageView === selectedSticker })
+                }) { [weak self] _ in
+                    self?.attachments.removeAll(where: { $0.imageView === selectedSticker })
                     selectedSticker.removeFromSuperview()
                 }
             }
@@ -249,7 +254,7 @@ final class OverlayStickerImageView: UIImageView {
         
         let point = pinch.location(in: self)
         
-        guard let subview = self.subviews.filter({$0.frame.contains(point)}).last, subview != mainSticker else {
+        guard let subview = subviews.filter({$0.frame.contains(point)}).last, subview != mainSticker else {
             hideTrashBin()
             return
         }
@@ -270,7 +275,7 @@ final class OverlayStickerImageView: UIImageView {
             subview.bounds.size = CGSize(width: height * ratio, height: height)
             
         case .ended, .possible, .cancelled, .failed:
-            self.selectedSticker = nil
+            selectedSticker = nil
             hideTrashBin()
         }
     }
@@ -279,7 +284,7 @@ final class OverlayStickerImageView: UIImageView {
         
         let point = rotate.location(in: self)
         
-        guard let subview = self.subviews.filter({$0.frame.contains(point)}).last, subview != mainSticker else {
+        guard let subview = subviews.filter({$0.frame.contains(point)}).last, subview != mainSticker else {
             hideTrashBin()
             return
         }
@@ -297,7 +302,7 @@ final class OverlayStickerImageView: UIImageView {
             startRotatePosition = atan2(subview.transform.b, subview.transform.a)
             
         case .ended, .possible, .cancelled, .failed:
-            self.selectedSticker = nil
+            selectedSticker = nil
             hideTrashBin()
         }
     }
@@ -315,7 +320,7 @@ final class OverlayStickerImageView: UIImageView {
     }
     
     private func setupGestureRecognizers() {
-        panGesture.addTarget(self, action: #selector(self.handlePan(_:)))
+        panGesture.addTarget(self, action: #selector(handlePan(_:)))
         panGesture.delegate = self
         addGestureRecognizer(panGesture)
         

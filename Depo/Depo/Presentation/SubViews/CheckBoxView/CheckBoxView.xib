@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -13,74 +13,45 @@
             <rect key="frame" x="0.0" y="0.0" width="415" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="YqH-cP-VE9">
-                    <rect key="frame" x="13" y="0.0" width="389" height="44"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oL-dg-Gk9">
-                            <rect key="frame" x="0.0" y="0.0" width="127" height="44"/>
-                            <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="-4" maxY="0.0"/>
-                            <state key="normal" title="Button" image="autoSync"/>
-                            <connections>
-                                <action selector="onOpenAutoSyncSettings:" destination="iN0-l3-epB" eventType="touchUpInside" id="Fjs-Ds-Lub"/>
-                            </connections>
-                        </button>
-                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="voP-z2-koU">
-                            <rect key="frame" x="135" y="0.0" width="254" height="44"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98Q-sx-Vlb">
-                                    <rect key="frame" x="43.5" y="13" width="18" height="18"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="18" id="fzX-kt-3ec"/>
-                                        <constraint firstAttribute="height" constant="18" id="yzu-3e-xcu"/>
-                                    </constraints>
-                                    <state key="normal" image="checkBoxNotSelected"/>
-                                    <state key="selected" image="checkboxSelected"/>
-                                    <connections>
-                                        <action selector="onCheckBox:" destination="iN0-l3-epB" eventType="touchUpInside" id="hAA-4p-f6S"/>
-                                    </connections>
-                                </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show only synced items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rh4-n8-JyH">
-                                    <rect key="frame" x="69.5" y="12" width="184.5" height="20.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            <constraints>
-                                <constraint firstItem="rh4-n8-JyH" firstAttribute="centerY" secondItem="voP-z2-koU" secondAttribute="centerY" id="2fd-it-WqY"/>
-                                <constraint firstAttribute="trailing" secondItem="rh4-n8-JyH" secondAttribute="trailing" id="Ibi-kS-Q8R"/>
-                                <constraint firstItem="rh4-n8-JyH" firstAttribute="leading" secondItem="98Q-sx-Vlb" secondAttribute="trailing" constant="8" id="cdD-Nt-vgQ"/>
-                                <constraint firstItem="98Q-sx-Vlb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="voP-z2-koU" secondAttribute="leading" id="et1-jJ-9lI"/>
-                                <constraint firstItem="rh4-n8-JyH" firstAttribute="centerY" secondItem="98Q-sx-Vlb" secondAttribute="centerY" id="y5X-I5-m53"/>
-                            </constraints>
-                        </view>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="1oL-dg-Gk9" firstAttribute="width" relation="lessThanOrEqual" secondItem="voP-z2-koU" secondAttribute="width" multiplier="1:1.2" id="FfD-2b-NfY"/>
-                        <constraint firstItem="1oL-dg-Gk9" firstAttribute="width" relation="greaterThanOrEqual" secondItem="voP-z2-koU" secondAttribute="width" multiplier="1:2" id="HS6-G0-YNI"/>
-                    </constraints>
-                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oL-dg-Gk9">
+                    <rect key="frame" x="13" y="0.0" width="69" height="44"/>
+                    <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="-4" maxY="0.0"/>
+                    <state key="normal" title="Button" image="autoSync"/>
+                    <connections>
+                        <action selector="onOpenAutoSyncSettings:" destination="iN0-l3-epB" eventType="touchUpInside" id="Fjs-Ds-Lub"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JmU-KN-S6c">
+                    <rect key="frame" x="318" y="0.0" width="82" height="44"/>
+                    <inset key="imageEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="Show: All" image="TriangleCopy3">
+                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </state>
+                    <connections>
+                        <action selector="onOpenViewTypeMenu:" destination="iN0-l3-epB" eventType="touchUpInside" id="VfI-Kf-bfK"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="YqH-cP-VE9" secondAttribute="trailing" constant="13" id="BXR-KR-oTk"/>
-                <constraint firstAttribute="bottom" secondItem="YqH-cP-VE9" secondAttribute="bottom" id="LUG-hT-e2V"/>
-                <constraint firstItem="YqH-cP-VE9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="fPL-BV-HXv"/>
-                <constraint firstItem="YqH-cP-VE9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="13" id="iIK-uk-VFw"/>
+                <constraint firstAttribute="bottom" secondItem="JmU-KN-S6c" secondAttribute="bottom" id="3Oe-T8-hYt"/>
+                <constraint firstAttribute="bottom" secondItem="1oL-dg-Gk9" secondAttribute="bottom" id="B1U-i3-trU"/>
+                <constraint firstItem="JmU-KN-S6c" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Don-el-e1N"/>
+                <constraint firstItem="1oL-dg-Gk9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="13" id="JuP-6Q-09L"/>
+                <constraint firstAttribute="trailing" secondItem="JmU-KN-S6c" secondAttribute="trailing" constant="15" id="O2x-fE-1cI"/>
+                <constraint firstItem="JmU-KN-S6c" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1oL-dg-Gk9" secondAttribute="trailing" constant="8" id="RqQ-eD-HCH"/>
+                <constraint firstItem="1oL-dg-Gk9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xGd-kE-Gmu"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="autoSyncSettingsButton" destination="1oL-dg-Gk9" id="RyY-D2-5Pl"/>
-                <outlet property="checkBoxButton" destination="98Q-sx-Vlb" id="ub4-Bo-XAB"/>
-                <outlet property="titleLabel" destination="rh4-n8-JyH" id="Ywe-QS-xZP"/>
+                <outlet property="viewTypeButton" destination="JmU-KN-S6c" id="HaI-bK-eD8"/>
             </connections>
             <point key="canvasLocation" x="56.799999999999997" y="-260.86956521739131"/>
         </view>
     </objects>
     <resources>
+        <image name="TriangleCopy3" width="7" height="5"/>
         <image name="autoSync" width="23" height="16"/>
-        <image name="checkBoxNotSelected" width="26" height="26"/>
-        <image name="checkboxSelected" width="26" height="26"/>
     </resources>
 </document>

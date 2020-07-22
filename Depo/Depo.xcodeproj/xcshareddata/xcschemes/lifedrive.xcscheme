@@ -16,8 +16,8 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "CE7847EC22A685FB00662219"
-                     BuildableName = "lifedrive.app"
-                     BlueprintName = "lifedrive"
+                     BuildableName = "Billo.app"
+                     BlueprintName = "Billo"
                      ReferencedContainer = "container:Depo.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
@@ -34,8 +34,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CE7847EC22A685FB00662219"
-               BuildableName = "lifedrive.app"
-               BlueprintName = "lifedrive"
+               BuildableName = "Billo.app"
+               BlueprintName = "Billo"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -50,8 +50,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE7847EC22A685FB00662219"
-            BuildableName = "lifedrive.app"
-            BlueprintName = "lifedrive"
+            BuildableName = "Billo.app"
+            BlueprintName = "Billo"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -73,8 +73,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE7847EC22A685FB00662219"
-            BuildableName = "lifedrive.app"
-            BlueprintName = "lifedrive"
+            BuildableName = "Billo.app"
+            BlueprintName = "Billo"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -90,8 +90,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE7847EC22A685FB00662219"
-            BuildableName = "lifedrive.app"
-            BlueprintName = "lifedrive"
+            BuildableName = "Billo.app"
+            BlueprintName = "Billo"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
