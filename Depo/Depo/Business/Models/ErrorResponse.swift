@@ -52,11 +52,14 @@ extension ErrorResponse {
     
     var isNetworkConnectionMissing: Bool {
         let code: URLError.Code
-        if case let Self.error(error) = self {
+        
+        switch self {
+        case .error(let error):
             code = error.urlErrorCode
-        } else {
+        default:
             code = urlErrorCode
         }
+
         return [.notConnectedToInternet, .networkConnectionLost].contains(code)
     }
 }
