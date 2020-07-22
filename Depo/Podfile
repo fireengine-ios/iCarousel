@@ -139,55 +139,55 @@ target 'LifeboxUnitTests' do
   core_pods
 end
 
-target 'lifedrive' do
+target 'Billo' do
   core_pods
 end
 
-target 'lifedrive_Bundle' do
+target 'Billo_Bundle' do
   core_pods
 end
 
-target 'LifeDriveShared' do
+target 'BilloShared' do
   sharing_pods
 end
 
-target 'LifeDriveFileProvider' do
+target 'BilloFileProvider' do
   file_provider_pods
 end
 
-target 'LifeDriveProviderUI' do
+target 'BilloProviderUI' do
   file_provider_ui_pods
 end
 
-target 'LifeDrive-widget' do
+target 'Billo-widget' do
   autosync_widget_pods
 end
 
-target 'LifeDriveNotificationService' do
+target 'BilloNotificationService' do
   notification_pods
 end
 
-target 'LifeTech_lifedrive' do
+target 'LifeTech_Billo' do
   core_pods
 end
 
-target 'LifeTech_LifeDriveShared' do
+target 'LifeTech_BilloShared' do
   sharing_pods
 end
 
-target 'LifeTech_LifeDriveFileProvider' do
+target 'LifeTech_BilloFileProvider' do
   file_provider_pods
 end
 
-target 'LifeTech_LifeDriveProviderUI' do
+target 'LifeTech_BilloProviderUI' do
   file_provider_ui_pods
 end
 
-target 'LifeTech_LifeDrive-widget' do
+target 'LifeTech_Billo-widget' do
   autosync_widget_pods
 end
 
-target 'LifeTech_LifeDriveNotificationService' do
+target 'LifeTech_BilloNotificationService' do
   notification_pods
 end
 
