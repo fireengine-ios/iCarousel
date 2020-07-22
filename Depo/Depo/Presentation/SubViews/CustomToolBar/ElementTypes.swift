@@ -177,7 +177,7 @@ enum ElementTypes {
                     result.append(contentsOf: ElementTypes.trashState)
                     
                 default:
-                    result.append(contentsOf: [.changeCoverPhoto] + ElementTypes.activeState + [.share])
+                    result.append(contentsOf: [.changeCoverPhoto, .share] + ElementTypes.activeState)
                 }
             }
             
