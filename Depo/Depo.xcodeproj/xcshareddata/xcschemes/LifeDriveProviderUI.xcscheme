@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8C3BA37A22B3CC53006D901E"
-               BuildableName = "LifeDriveProviderUI.appex"
-               BlueprintName = "LifeDriveProviderUI"
+               BuildableName = "BilloProviderUI.appex"
+               BlueprintName = "BilloProviderUI"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -30,8 +30,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CE7847EC22A685FB00662219"
-               BuildableName = "lifedrive.app"
-               BlueprintName = "lifedrive"
+               BuildableName = "Billo.app"
+               BlueprintName = "Billo"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,25 +42,24 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-      </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8C3BA37A22B3CC53006D901E"
-            BuildableName = "LifeDriveProviderUI.appex"
-            BlueprintName = "LifeDriveProviderUI"
+            BuildableName = "BilloProviderUI.appex"
+            BlueprintName = "BilloProviderUI"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <Testables>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = ""
       selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
+      askForAppToLaunch = "Yes"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
@@ -72,13 +71,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE7847EC22A685FB00662219"
-            BuildableName = "lifedrive.app"
-            BlueprintName = "lifedrive"
+            BuildableName = "Billo.app"
+            BlueprintName = "Billo"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -92,8 +89,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE7847EC22A685FB00662219"
-            BuildableName = "lifedrive.app"
-            BlueprintName = "lifedrive"
+            BuildableName = "Billo.app"
+            BlueprintName = "Billo"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
