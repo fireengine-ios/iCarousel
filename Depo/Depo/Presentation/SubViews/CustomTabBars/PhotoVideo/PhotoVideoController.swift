@@ -744,7 +744,8 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         }
         
         DispatchQueue.toMain {
-            self.getCellForTrimmedID(objectTrimmedLocalID: id) { [weak self] _ in
+            self.getCellForTrimmedID(objectTrimmedLocalID: id) { [weak self] cell in
+                cell?.update(syncStatus: .synced)
                 self?.postFinishedUploadFileAction(file: file)
             }
         }
