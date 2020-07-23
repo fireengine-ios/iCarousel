@@ -522,7 +522,8 @@ final class MediaItemOperationsService {
                 MediaItemOperationsService.shared.deleteLocalFiles(completion: { _ in
                     completion?()
                 })
-            case .authorized:
+            //TODO: uncomment for xcode 12
+            case .authorized://, .limited:
                 self?.processLocalGallery(completion: completion)
             case .restricted, .notDetermined:
                 break
