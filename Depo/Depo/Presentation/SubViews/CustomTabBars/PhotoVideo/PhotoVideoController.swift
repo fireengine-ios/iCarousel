@@ -805,7 +805,7 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
             trimmedIDs.forEach { trimmedID in
                 DispatchQueue.toMain {
                     self.getVisibleCellForLocalFile(objectTrimmedLocalID: trimmedID) {
-                        $0?.update(syncStatus: .regular)
+                        $0?.update(syncStatus: .notSynced)
                     }
                 }
             }
