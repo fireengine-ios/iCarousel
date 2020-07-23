@@ -46,6 +46,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.share)
             case .sync:
                 itemTupple.append(EditinglBar.PreDetermendTypes.sync)
+            case .syncInProgress:
+                itemTupple.append(EditinglBar.PreDetermendTypes.syncInProgress)
             case .removeFromAlbum:
                 itemTupple.append(EditinglBar.PreDetermendTypes.removeFromAlbum)
             case .removeFromFaceImageAlbum:
@@ -559,7 +561,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             return
         }
         bottomBarInteractor.currentBarcongfig = config
-        setupConfig(withConfig: config)
+        
+        DispatchQueue.main.async {
+            self.setupConfig(withConfig: config)
+        }
     }
     
     

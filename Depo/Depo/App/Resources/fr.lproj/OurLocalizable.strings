@@ -673,10 +673,17 @@ English is correct. GSM may be confusing to the customer*/
 /*Suggested: "lifebox can sync your files, photos and videos automatically."
 
 Comma added*/
+"Lifebox can sync your files automatically." = "Lifebox peut synchroniser vos fichiers, photos et vidéos automatiquement.\nPour activer la synchronisation en arrière-plan de vos photos et vidéos, assurez-vous que votre autorisation d'emplacement est réglée sur \"TOUJOURS\" dans le menu \"Paramètres du périphérique-lifebox-location\".";
+"Get Started" = "Commencer";
+"I have read and accepted terms of use" = "J'ai lu et accepté les conditions d'utilisation";
+"You need to confirm the User Agreement to continue." = "Vous devez confirmer le Contrat d’Utilisation pour continuer.";
+"PhotosAndViedos" = "Photos et Vidéos";
+"Are these the same person?" = "S'agit-il de la même personne ?";
+"We couldn't find anybody on your Lifebox yet." = "Nous n’avons trouvé aucune personne dans votre lifebox.";
+"Grouping of your photos will take some time. Please wait and then check the albums." = "Le regroupement de vos photos prendra un certain temps. Veuillez patienter puis vérifiez les albums créés s'il vous plaît.";
 "Lifebox can sync your files automatically." = "lifebox peut synchroniser vos fichiers, photos et vidéos automatiquement.\nPour activer la synchronisation en arrière-plan de vos photos et vidéos, assurez-vous que votre autorisation de géolocalisation est réglée sur \"TOUJOURS\" dans le menu \"Paramètres du périphérique-lifebox-géolocalisation\".";
 "Get Started" = "Commencer";
 "I have read and accepted terms of use" = "J'ai lu et accepte les conditions d'utilisation";
-"Welcome to Lifebox!" = "Bienvenue dans lifebox !";
 "You need to confirm the User Agreement to continue." = "Vous devez accepter le contrat d’utilisation pour continuer.";
 "PhotosAndViedos" = "Photos et Vidéos";
 "Are these the same person?" = "S'agit-il de la même personne ?";

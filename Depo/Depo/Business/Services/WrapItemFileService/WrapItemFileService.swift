@@ -272,7 +272,7 @@ class WrapItemFileService: WrapItemFileOperations {
             return
         }
         
-        let isAlbum = !sharedFiles.contains(where: { $0.fileType != .photoAlbum })
+        let isAlbum = sharedFiles.contains(where: { $0.fileType == .photoAlbum || $0.fileType.isFaceImageAlbum })
         let param = SharedServiceParam(filesList: uuidsToShare, isAlbum: isAlbum, sharedType: .link)
         sharedFileService.share(param: param, success: success, fail: fail)
     }

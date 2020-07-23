@@ -50,6 +50,15 @@ extension ErrorResponse {
         return false
     }
     
+    var isNetworkConnectionMissing: Bool {
+        let code: URLError.Code
+        if case let Self.error(error) = self {
+            code = error.urlErrorCode
+        } else {
+            code = urlErrorCode
+        }
+        return [.notConnectedToInternet, .networkConnectionLost].contains(code)
+    }
 }
 
 extension ErrorResponse: CustomStringConvertible {

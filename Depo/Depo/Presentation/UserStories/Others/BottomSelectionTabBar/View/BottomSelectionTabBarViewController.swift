@@ -8,14 +8,14 @@
 
 import UIKit
 
-class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabBarViewInput, UITabBarDelegate {
+
+class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabBarViewInput, NibInit {
 
     @IBOutlet var editingBar: EditinglBar!
     var output: BottomSelectionTabBarViewOutput!
-
-    static let xibName = "BottomSelectionTabBarViewController"
     
     var sourceView: UIView?
+    
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -28,9 +28,6 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
         editingBar.delegate = self
     }
     
-    class func initFromXib() -> BottomSelectionTabBarViewController {
-        return BottomSelectionTabBarViewController(nibName: BottomSelectionTabBarViewController.xibName, bundle: nil)
-    }
     
     // MARK: BottomSelectionTabBarViewInput
     func setupInitialState() {
@@ -46,28 +43,18 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
         if let style = style, style != .default {
             editingBar.backgroundImage = UIImage()
         }
+        
         editingBar.setupItems(withImageToTitleNames: items)
     }
     
     func showBar(animated: Bool, onView sourceView: UIView) {
         self.sourceView = sourceView
-        
+
         editingBar.show(animated: animated, onView: sourceView)
     }
     
     func hideBar(animated: Bool) {
         editingBar?.dismiss(animated: animated)
-    }
-    
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        guard let selectedItemIndex = tabBar.items?.index(of: item) else {
-            return
-        }
-        output.bottomBarSelectedItem(index: selectedItemIndex, sender: item)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {[weak self] in
-            self?.unselectAll()
-        }
     }
     
     func unselectAll() {
@@ -91,4 +78,21 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
     func enableItems(at indexes: [Int]) {
         changeStatusForTabs(atIntdex: indexes, enabled: true)
     }
+}
+
+
+extension BottomSelectionTabBarViewController: UITabBarDelegate {
+    
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        guard let selectedItemIndex = tabBar.items?.index(of: item) else {
+            return
+        }
+        
+        output.bottomBarSelectedItem(index: selectedItemIndex, sender: item)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + NumericConstants.animationDuration) {[weak self] in
+            self?.unselectAll()
+        }
+    }
+    
 }

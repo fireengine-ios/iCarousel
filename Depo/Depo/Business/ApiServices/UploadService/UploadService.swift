@@ -259,8 +259,9 @@ final class UploadService: BaseRequestService {
                                                              object: firstObject,
                                                              allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
                                                              completedOperations: self.currentUploadOperationNumber)
-            
-            ItemOperationManager.default.startUploadFile(file: firstObject)
+        
+            // change cells into inQueue state
+            itemsToUpload.forEach { ItemOperationManager.default.startUploadFile(file: $0) }
             
             self.logSyncSettings(state: "StartSyncToUseFileList")
             
@@ -360,7 +361,8 @@ final class UploadService: BaseRequestService {
                                                              allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
                                                              completedOperations: self.currentUploadOperationNumber)
             
-            ItemOperationManager.default.startUploadFile(file: firstObject)
+            // change cells into inQueue state
+            itemsToUpload.forEach { ItemOperationManager.default.startUploadFile(file: $0) }
             
             self.logSyncSettings(state: "StartUploadFileList")
             
@@ -454,8 +456,9 @@ final class UploadService: BaseRequestService {
                                                              allOperations: self.allSyncOperationsCount + itemsToSync.count,
                                                              completedOperations: self.currentSyncOperationNumber)
             WidgetService.shared.notifyWidgetAbout(self.currentSyncOperationNumber, of: self.allSyncOperationsCount + itemsToSync.count)
-            
-            ItemOperationManager.default.startUploadFile(file: firstObject)
+
+            // change cells into inQueue state
+            itemsToSync.forEach { ItemOperationManager.default.startUploadFile(file: $0) }
             
             self.logSyncSettings(state: "StartSyncFileList")
             
@@ -785,6 +788,12 @@ final class UploadService: BaseRequestService {
     func uploadNotify(param: UploadNotify, success: @escaping SuccessResponse, fail: FailResponse?) {
         let handler = BaseResponseHandler<SearchItemResponse, ObjectRequestResponse>(success: success, fail: fail)
         executeGetRequest(param: param, handler: handler)
+    }
+    
+    func isInQueue(item uuid: String) -> Bool {
+        return uploadOperations.first(where: {
+            $0.inputItem.uuid == uuid && !($0.isCancelled || $0.isFinished)
+        }) != nil
     }
 }
 

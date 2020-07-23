@@ -69,6 +69,10 @@ final class ContactSyncViewController: BaseViewController, NibInit {
         if tabBarIsVisible {
             needToShowTabBar = true
         }
+        
+        NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { [weak self] _ in
+            self?.updateBackupStatus()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -171,9 +175,7 @@ extension ContactSyncViewController: ContactSyncMainViewDelegate {
         showSpinner()
         
         progressView?.reset()
-        contactSyncHelper.analyze { [weak self] in
-            self?.hideSpinner()
-        }
+        contactSyncHelper.analyze { }
     }
     
     func changePeriodicSync(to option: PeriodicContactsSyncOption) {

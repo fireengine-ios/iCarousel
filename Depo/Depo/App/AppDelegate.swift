@@ -186,6 +186,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         UNUserNotificationCenter.current().delegate = self
         AnalyticsService.startNetmera()
+        debugLog("AppDelegate setupPushNotifications setuped")
     }
     
     /// iOS 9+
