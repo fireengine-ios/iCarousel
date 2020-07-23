@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1100"
+   LastUpgradeVersion = "1010"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0303A7D92397D0E900907F42"
-               BuildableName = "LifeTech_LifeDrive-widget.appex"
-               BlueprintName = "LifeTech_LifeDrive-widget"
+               BlueprintIdentifier = "8C3BA34022B3CC49006D901E"
+               BuildableName = "BilloFileProvider.appex"
+               BlueprintName = "BilloFileProvider"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,9 +29,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0303A0132397D0D000907F42"
-               BuildableName = "LifeTech_lifedrive.app"
-               BlueprintName = "LifeTech_lifedrive"
+               BlueprintIdentifier = "CE7847EC22A685FB00662219"
+               BuildableName = "Billo.app"
+               BlueprintName = "Billo"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,6 +42,15 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8C3BA34022B3CC49006D901E"
+            BuildableName = "BilloFileProvider.appex"
+            BlueprintName = "BilloFileProvider"
+            ReferencedContainer = "container:Depo.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <Testables>
       </Testables>
    </TestAction>
@@ -61,9 +70,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0303A0132397D0D000907F42"
-            BuildableName = "LifeTech_lifedrive.app"
-            BlueprintName = "LifeTech_lifedrive"
+            BlueprintIdentifier = "CE7847EC22A685FB00662219"
+            BuildableName = "Billo.app"
+            BlueprintName = "Billo"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -79,9 +88,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0303A0132397D0D000907F42"
-            BuildableName = "LifeTech_lifedrive.app"
-            BlueprintName = "LifeTech_lifedrive"
+            BlueprintIdentifier = "CE7847EC22A685FB00662219"
+            BuildableName = "Billo.app"
+            BlueprintName = "Billo"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

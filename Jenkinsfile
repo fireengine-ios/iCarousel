@@ -12,21 +12,21 @@ apps = [
             ictsContainerId: '743', // ICT Store
             appleId: '665036334', // Apple ID property in the App Information section in App Store Connect,
             prodTeamID: '693N5K66ZJ',
-	    xcodeSchema: 'TC_Depo_LifeTech',
-            xcodeTarget: 'TC_Depo_LifeTech'
-            //xcodeSchema: 'TC_Depo_LifeTech_Bundle',
-            //xcodeTarget: 'TC_Depo_LifeTech_Bundle'
+	    //xcodeSchema: 'TC_Depo_LifeTech',
+            //xcodeTarget: 'TC_Depo_LifeTech'
+            xcodeSchema: 'TC_Depo_LifeTech_Bundle',
+            xcodeTarget: 'TC_Depo_LifeTech_Bundle'
         ],
  [
-            name: 'lifedrive',// name will be the base filename of the app
+            name: 'Billo',// name will be the base filename of the app
             versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
             ictsContainerId: '966', // ICT Store
             appleId: '1488914348',
             prodTeamID: '729CGH4BJD',
 	    //xcodeSchema: // Defaults to app name
             //xcodeTarget: // Defaults to app name
-            //xcodeSchema: 'lifedrive_Bundle', 
-            //xcodeTarget: 'lifedrive_Bundle'  
+            xcodeSchema: 'Billo_Bundle', 
+            xcodeTarget: 'Billo_Bundle'  
         ]
 ]
 derivedDir = 'lifebox'
@@ -63,7 +63,7 @@ def flavors = [
 artifactory = Artifactory.server 'turkcell-artifactory'
 
 branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
-isDev = branchName == 'pre_release_v2'
+isDev = branchName == 'dev2_friendly'
 echo "Branch Name: ${branchName}"
 
 def readVersion = { app ->

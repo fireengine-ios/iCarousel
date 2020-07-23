@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0303A8D12397D15800907F42"
-               BuildableName = "LifeTech_LifeDriveNotificationService.appex"
-               BlueprintName = "LifeTech_LifeDriveNotificationService"
+               BlueprintIdentifier = "0303A7D92397D0E900907F42"
+               BuildableName = "LifeTech_Billo-widget.appex"
+               BlueprintName = "LifeTech_Billo-widget"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -30,8 +30,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0303A0132397D0D000907F42"
-               BuildableName = "LifeTech_lifedrive.app"
-               BlueprintName = "LifeTech_lifedrive"
+               BuildableName = "LifeTech_Billo.app"
+               BlueprintName = "LifeTech_Billo"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0303A0132397D0D000907F42"
-            BuildableName = "LifeTech_lifedrive.app"
-            BlueprintName = "LifeTech_lifedrive"
+            BuildableName = "LifeTech_Billo.app"
+            BlueprintName = "LifeTech_Billo"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -80,8 +80,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0303A0132397D0D000907F42"
-            BuildableName = "LifeTech_lifedrive.app"
-            BlueprintName = "LifeTech_lifedrive"
+            BuildableName = "LifeTech_Billo.app"
+            BlueprintName = "LifeTech_Billo"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

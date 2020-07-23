@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "1100"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8C3BA2E122B3CC45006D901E"
-               BuildableName = "LifeDriveShared.appex"
-               BlueprintName = "LifeDriveShared"
+               BlueprintIdentifier = "0303A8642397D14900907F42"
+               BuildableName = "LifeTech_BilloFileProvider.appex"
+               BlueprintName = "LifeTech_BilloFileProvider"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,9 +29,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CE7847EC22A685FB00662219"
-               BuildableName = "lifedrive.app"
-               BlueprintName = "lifedrive"
+               BlueprintIdentifier = "0303A0132397D0D000907F42"
+               BuildableName = "LifeTech_Billo.app"
+               BlueprintName = "LifeTech_Billo"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,23 +44,13 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C3BA2E122B3CC45006D901E"
-            BuildableName = "LifeDriveShared.appex"
-            BlueprintName = "LifeDriveShared"
-            ReferencedContainer = "container:Depo.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = ""
       selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
+      askForAppToLaunch = "Yes"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
@@ -71,14 +61,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE7847EC22A685FB00662219"
-            BuildableName = "lifedrive.app"
-            BlueprintName = "lifedrive"
+            BlueprintIdentifier = "0303A0132397D0D000907F42"
+            BuildableName = "LifeTech_Billo.app"
+            BlueprintName = "LifeTech_Billo"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -91,9 +79,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE7847EC22A685FB00662219"
-            BuildableName = "lifedrive.app"
-            BlueprintName = "lifedrive"
+            BlueprintIdentifier = "0303A0132397D0D000907F42"
+            BuildableName = "LifeTech_Billo.app"
+            BlueprintName = "LifeTech_Billo"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
