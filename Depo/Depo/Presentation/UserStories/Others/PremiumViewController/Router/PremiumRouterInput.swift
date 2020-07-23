@@ -12,6 +12,7 @@ protocol PremiumRouterInput: class {
 
     func goToBack()
     func displayError(with errorMessage: String)
+    func displayNoInternetError(with message: String)
     func showNoDetailsAlert(with message: String)
     func showPromocodInvalideAlert(for vc: UIViewController?)
     func purchaseSuccessed(with delegate: FaceImageItemsModuleOutput?)

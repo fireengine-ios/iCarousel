@@ -935,23 +935,6 @@ enum GAEventLabel {
         }
     }
     
-    enum ShareType {
-        case facebook
-        case twitter
-        case eMail
-        
-        var text: String {
-            switch self {
-            case .facebook:
-                return "Facebook"
-            case .twitter:
-                return "Twitter"
-            case .eMail:
-                return "e - mail"
-            }
-        }
-    }
-    
     enum StoryEvent {
         case click
         case name
@@ -1183,7 +1166,6 @@ enum GAEventLabel {
     case feedbackOpen
     case feedbackSend
     case download(FileType)
-    case share(ShareType)
     case quotaUsed(Int)
     case clickPhoto
     case clickVideo
@@ -1292,8 +1274,6 @@ enum GAEventLabel {
             return "Send"
         case .download(let fileType):
             return fileType.text
-        case .share(let shareType):
-            return shareType.text
         case .quotaUsed(let quota): ///80 90 95 100
             return "\(quota)"
         case .clickPhoto:

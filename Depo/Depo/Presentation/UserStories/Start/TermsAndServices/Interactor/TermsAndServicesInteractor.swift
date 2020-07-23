@@ -50,7 +50,7 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
                 case .success(let eulaContent):
                     self?.eula = eulaContent
                     self?.dataStorage.signUpResponse.eulaId = eulaContent.id
-                    DispatchQueue.toMain {
+                    DispatchQueue.main.async {
                         self?.output.showLoadedTermsAndUses(eula: eulaContent.content ?? "")
                     }
                 case .failed(let error):
@@ -149,7 +149,9 @@ class TermsAndServicesInteractor: TermsAndServicesInteractorInput {
     func checkEtk() {
         /// phoneNumber will exist only for signup
         checkEtk(for: phoneNumber) { [weak self] isShowEtk in
-            self?.output.setupEtk(isShowEtk: isShowEtk)
+            DispatchQueue.main.async {
+                self?.output.setupEtk(isShowEtk: isShowEtk)
+            }
         }
     }
     

@@ -183,7 +183,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        hideDetailViewIfChangedRotation()
         collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
             guard let `self` = self else {
                 return
@@ -197,6 +197,12 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
         return .black
+    }
+    
+    private func hideDetailViewIfChangedRotation() {
+        if UIDevice.current.orientation.isLandscape {
+            bottomDetailViewManager?.closeDetailView()
+        }
     }
     
     func hideView() {
@@ -489,6 +495,18 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
         DispatchQueue.main.async {
             self.replaceUploaded(file)
         }
+    }
+    
+    func startUploadFile(file: WrapData) {
+        output.updateBottomBar()
+    }
+    
+    func failedUploadFile(file: WrapData, error: Error?) {
+        output.updateBottomBar()
+    }
+    
+    func cancelledUpload(file: WrapData) {
+        output.updateBottomBar()
     }
     
     private func replaceUploaded(_ item: WrapData) {

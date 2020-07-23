@@ -32,19 +32,17 @@ extension PremiumInteractor: PremiumInteractorInput {
     func getAccountType() {
         accountService.info(
             success: { [weak self] response in
-                guard let response = response as? AccountInfoResponse, let accountType = response.accountType else {
-                    let error = CustomErrors.serverError("An error occurred while getting account info.")
-                    DispatchQueue.toMain {
-                        self?.output.failed(with: error.localizedDescription)
-                    }
-                    return
-                }
                 DispatchQueue.toMain {
+                    guard let response = response as? AccountInfoResponse, let accountType = response.accountType else {
+                        self?.output.stopLoading()
+                        assertionFailure("An error occurred while getting account info.")
+                        return
+                    }
                     self?.output.successed(accountType: accountType)
                 }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.toMain {
-                    self?.output.failed(with: errorResponse.description)
+                    self?.output.failed(with: errorResponse)
                 }
         })
     }
@@ -59,7 +57,7 @@ extension PremiumInteractor: PremiumInteractorInput {
             case .failed(let error):
                 DispatchQueue.toMain {
                     if error.isServerUnderMaintenance {
-                        self?.output.failed(with: error.description)
+                        self?.output.failed(with: .error(error))
                     } else {
                         self?.output.switchToTextWithoutPrice(isError: true)
                     }
@@ -76,7 +74,7 @@ extension PremiumInteractor: PremiumInteractorInput {
         }, fail: { [weak self] error in
             DispatchQueue.toMain {
                 if error.isServerUnderMaintenance {
-                    self?.output.failed(with: error.description)
+                    self?.output.failed(with: .error(error))
                 } else {
                     self?.output.switchToTextWithoutPrice(isError: true)
                 }
@@ -95,10 +93,12 @@ extension PremiumInteractor: PremiumInteractorInput {
     //MARK: apple purchase
     func activate(offer: PackageModelResponse) {
         guard let product = iapManager.product(for: offer.inAppPurchaseId ?? "") else {
-            let error = CustomErrors.serverError("An error occured while getting product with id - \(offer.inAppPurchaseId ?? "") from App Store")
             DispatchQueue.toMain {
-                self.output.failed(with: error.localizedDescription)
+                self.output.stopLoading()
             }
+            assertionFailure(
+                "An error occured while getting product with id - \(offer.inAppPurchaseId ?? "") from App Store"
+            )
             return
         }
         
@@ -123,11 +123,11 @@ extension PremiumInteractor: PremiumInteractorInput {
                 self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .failure)
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.PackagePurchase(status: .failure, channelType: .appStore, packageName: offer.displayName ?? ""))
                 DispatchQueue.main.async {
-                    self?.output.failed(with: error.description)
+                    self?.output.failed(with: .error(error))
                 }
             case .inProgress:
                 DispatchQueue.main.async {
-                    self?.output.failed(with: ErrorResponse.string(TextConstants.inProgressPurchase).description)
+                    self?.output.failed(with: ErrorResponse.string(TextConstants.inProgressPurchase))
                 }
             }
         }
@@ -135,19 +135,19 @@ extension PremiumInteractor: PremiumInteractorInput {
     
     private func validatePurchase(productId: String) {
         guard let receipt = iapManager.receipt else {
-            let error = CustomErrors.serverError("An error occured while getting receipt from Apple Store.")
             DispatchQueue.toMain {
-                self.output.failed(with: error.localizedDescription)
+                self.output.stopLoading()
             }
+            assertionFailure("An error occured while getting receipt from Apple Store.")
             return
         }
         
         offersService.validateApplePurchase(with: receipt, productId: productId, success: { [weak self] response in
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
-                let error = CustomErrors.text("Something went wrong on validation apple purchase.")
-                DispatchQueue.toMain {
-                    self?.output.failed(with: error.localizedDescription)
+                DispatchQueue.main.async {
+                    self?.output.stopLoading()
                 }
+                assertionFailure("Something went wrong on validation apple purchase.")
                 return
             }
             
@@ -162,22 +162,22 @@ extension PremiumInteractor: PremiumInteractorInput {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self?.output.failed(with: ErrorResponse.string(status.description).description)
+                    self?.output.failed(with: ErrorResponse.string(status.description))
                 }
             }
             }, fail: { [weak self] errorResponse in
                 DispatchQueue.main.async {
-                    self?.output.failed(with: errorResponse.description)
+                    self?.output.failed(with: errorResponse)
                 }
         })
     }
     
     private func validateRestorePurchase(offersApple: [OfferApple]) {
         guard let receipt = iapManager.receipt else {
-            let error = CustomErrors.serverError("An error occured while getting receipt from Apple Store.")
-            DispatchQueue.toMain {
-                self.output.failed(with: error.localizedDescription)
+            DispatchQueue.main.async {
+                self.output.stopLoading()
             }
+            assertionFailure("An error occured while getting receipt from Apple Store.")
             return
         }
         
@@ -188,23 +188,22 @@ extension PremiumInteractor: PremiumInteractorInput {
         offersService.validateApplePurchase(with: receipt, productId: nil, success: { [weak self] response in
             group.leave()
             guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
-                let error = CustomErrors.serverError("An error occurred while getting response for purchase validation")
-                DispatchQueue.toMain {
-                    self?.output.failed(with: error.localizedDescription)
+                DispatchQueue.main.async {
+                    self?.output.stopLoading()
                 }
+                assertionFailure("An error occurred while getting response for purchase validation")
                 return
             }
             if !(status == .restored || status == .success) {
                 debugLog("validateRestorePurchaseFailed: \(status.description)")
-                let error = CustomErrors.serverError(status.description)
                 DispatchQueue.toMain {
-                    self?.output.failed(with: error.localizedDescription)
+                    self?.output.failed(with: .string(status.description))
                 }
             }
         }, fail: { [weak self] errorResponse in
             debugLog("validateRestorePurchaseFailed: \(errorResponse.description)")
             DispatchQueue.toMain {
-                self?.output.failed(with: errorResponse.description)
+                self?.output.failed(with: errorResponse)
             }
             group.leave()
         })
@@ -220,11 +219,11 @@ extension PremiumInteractor: PremiumInteractorInput {
     func getToken(for offer: PackageModelResponse) {
         offersService.initOffer(offer: offer, success: { [weak self] response in
             guard let offerResponse = response as? InitOfferResponse, let token = offerResponse.referenceToken else {
-                    let error = CustomErrors.serverError("An error occurred while getting token.")
-                    DispatchQueue.toMain {
-                        self?.output.failed(with: error.localizedDescription)
-                    }
-                    return
+                DispatchQueue.main.async {
+                    self?.output.stopLoading()
+                }
+                assertionFailure("An error occurred while getting token.")
+                return
             }
             
             DispatchQueue.toMain {
@@ -232,7 +231,7 @@ extension PremiumInteractor: PremiumInteractorInput {
             }
         }, fail: { [weak self] errorResponse in
             DispatchQueue.toMain {
-                self?.output.failed(with: errorResponse.description)
+                self?.output.failed(with: errorResponse)
             }
         })
     }
@@ -240,13 +239,14 @@ extension PremiumInteractor: PremiumInteractorInput {
     func getResendToken(for offer: PackageModelResponse) {
         offersService.initOffer(offer: offer,
                                 success: { [weak self] response in
-                                    guard let offerResponse = response as? InitOfferResponse,
+                                    guard
+                                        let offerResponse = response as? InitOfferResponse,
                                         let token = offerResponse.referenceToken
                                         else {
-                                            let error = CustomErrors.serverError("An error occurred while getting token.")
                                             DispatchQueue.main.async {
-                                                self?.output.failed(with: error.localizedDescription)
+                                                self?.output.stopLoading()
                                             }
+                                            assertionFailure("An error occurred while getting token.")
                                             return
                                     }
                                     

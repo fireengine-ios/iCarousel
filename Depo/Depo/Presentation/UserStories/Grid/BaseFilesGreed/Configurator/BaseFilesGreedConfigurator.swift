@@ -16,7 +16,6 @@ class BaseFilesGreedModuleConfigurator {
                    fileFilters: [GeneralFilesFiltrationType],
                    bottomBarConfig: EditingBarConfig?,
                    visibleSlider: Bool = false,
-                   visibleSyncItemsCheckBox: Bool = false,
                    topBarConfig: GridListTopBarConfig?,
                    alertSheetConfig: AlertFilesActionsSheetInitialConfig?,
                    alertSheetExcludeTypes: [ElementTypes]? = nil) {
@@ -65,9 +64,7 @@ class BaseFilesGreedModuleConfigurator {
             presenter?.sliderModule = sliderPresenter
             sliderPresenter.baseGreedPresenterModule = presenter
         }
-        if visibleSyncItemsCheckBox {
-            viewController.showOnlySyncItemsCheckBox = CheckBoxView.initFromNib()
-        }
+
         if let underNavBarBarConfig = topBarConfig {
             presenter?.topBarConfig = underNavBarBarConfig
             let gridListTopBar = GridListTopBar.initFromXib()
