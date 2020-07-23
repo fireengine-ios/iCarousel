@@ -142,16 +142,32 @@ final class CollageCard: BaseCardView {
     }
     
     private func showPhotoVideoDetail() {
-        guard let item = item else { return }
         
-        let detailModule = routerVC.filesDetailModule(fileObject: item,
-                                                      items: [item],
-                                                      status: .active,
-                                                      canLoadMoreItems: false,
-                                                      moduleOutput: nil)
-
-        let nController = NavigationController(rootViewController: detailModule.controller)
-        routerVC.presentViewController(controller: nController)
+        guard let item = item else {
+            return
+        }
+        
+        homeCardsService.updateItem(uuid: item.uuid) { [weak self] responseResult in
+            switch responseResult {
+            case .success(let updatedItem):
+                self?.item = updatedItem
+                let detailModule = self?.routerVC.filesDetailModule(fileObject: item,
+                                                              items: [item],
+                                                              status: .active,
+                                                              canLoadMoreItems: false,
+                                                              moduleOutput: nil)
+                
+                guard let controller = detailModule?.controller else {
+                    assertionFailure()
+                    return
+                }
+                
+                let nController = NavigationController(rootViewController: controller)
+                self?.routerVC.presentViewController(controller: nController)
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
     }
     
     private func showPreview() {
