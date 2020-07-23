@@ -156,7 +156,6 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         CellImageManager.clear()
         assetsFileCacheManager.resetCachedAssets()
         dataSource.performFetch()
-        collectionViewManager.showEmptyDataViewIfNeeded(isShow: dataSource.isObjectsEmpty)
         collectionView.reloadData()
         collectionView.collectionViewLayout.invalidateLayout()
     }
@@ -941,12 +940,11 @@ extension PhotoVideoController: PhotoVideoDataSourceDelegate {
     func fetchPredicateCreated() { }
     
     func contentDidChange(_ fetchedObjects: [MediaItem]) {
-//        DispatchQueue.toMain {
-        ///Already called from context
-            self.scrollBarManager.updateYearsView(with: fetchedObjects,
-                                                  cellHeight: self.collectionViewManager.collectionViewLayout.itemSize.height,
-                                                  numberOfColumns: Int(self.collectionViewManager.collectionViewLayout.columns))
-//        }
+        scrollBarManager.updateYearsView(with: fetchedObjects,
+                                         cellHeight: collectionViewManager.collectionViewLayout.itemSize.height,
+                                         numberOfColumns: Int(collectionViewManager.collectionViewLayout.columns))
+        
+        collectionViewManager.showEmptyDataViewIfNeeded(isShow: fetchedObjects.isEmpty)
     }
     
     func convertFetchedObjectsInProgress() {
