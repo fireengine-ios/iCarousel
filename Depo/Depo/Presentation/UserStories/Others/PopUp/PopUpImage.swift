@@ -17,6 +17,7 @@ enum PopUpImage {
     case hide
     case unhide
     case restore
+    case question
     case none
     case custom(UIImage?)
     
@@ -39,6 +40,8 @@ enum PopUpImage {
             image = UIImage(named: "unhideAlert")
         case .restore:
             image = UIImage(named: "restoreAlert")
+        case .question:
+            image = UIImage(named: "questionAlert")
         case .none:
             image = nil
         case .custom(let customImage):

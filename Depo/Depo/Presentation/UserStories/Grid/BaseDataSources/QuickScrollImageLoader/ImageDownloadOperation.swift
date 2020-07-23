@@ -70,8 +70,10 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
                     self.semaphore.signal()
                     return
                 }
-                
-                self.logError(dataResponse.error)
+            
+                if dataResponse.result.isFailure {
+                    self.logError(dataResponse)
+                }
                 
                 guard
                     let data = dataResponse.value,
@@ -91,11 +93,7 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
         
         semaphore.wait()
         
-        defer {
-            task?.cancel()
-            outputBlock?(outputImage, outputData)
-            semaphore.signal()
-        }
+        outputBlock?(outputImage, outputData)
     }
     
     private func formattedImage(data: Data?) -> UIImage? {
@@ -104,7 +102,7 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
             let format = ImageFormat.get(from: data)
             switch format {
             case .gif:
-                image = UIImage(gifData: data)
+                image = try? UIImage(gifData: data)
             default:
                 image = UIImage(data: data)
             }
@@ -115,9 +113,15 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
 }
 
 extension ImageDownloadOperation {
-    private func logError(_ error: Error?) {
-        if self.isErrorLogEnabled, let error = error {
-            debugLog("Load image error - \(error.description)")
+    private func logError(_ response: DataResponse<Data>) {
+        guard isErrorLogEnabled else {
+            return
         }
+        
+        guard let code = response.response?.statusCode, let error = response.error else {
+            return
+        }
+    
+        debugLog("Load image error - \(code): \(error.description)")
     }
 }

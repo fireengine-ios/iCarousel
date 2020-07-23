@@ -408,11 +408,11 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     func setupCustomNavControllers() {
         let router = RouterVC()
-        guard let syncContactsVC = router.syncContacts as? SyncContactsViewController else {
+        guard let syncContactsVC = router.syncContacts as? ContactSyncViewController else {
             assertionFailure()
             return
         }
-        syncContactsVC.tabBarSetup = true
+        syncContactsVC.setTabBar(isVisible: true)
         
         let list = [router.homePageScreen,
                     router.segmentedMedia(),

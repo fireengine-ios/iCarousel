@@ -100,6 +100,8 @@ enum SnackbarType {
 
 final class SnackbarManager {
     
+    private let offset: CGFloat = 16
+    
     static let shared = SnackbarManager()
     
     private lazy var router = RouterVC()
@@ -129,26 +131,26 @@ final class SnackbarManager {
             handler?()
         }
 
-        currentSnackbar = createSnackbar(duration: type.duration)
-        let contentView = currentSnackbar?.customContentView as? SnackbarView
-        contentView?.setup(type: type,
-                           message: message,
-                           actionTitle: action?.localizedTitle,
-                           axis: axis,
-                           action: actionHandler)
-        
+        let contentView = SnackbarView.with(type: type,
+                                            message: message,
+                                            actionTitle: action?.localizedTitle,
+                                            axis: axis,
+                                            action: actionHandler)
+    
+        currentSnackbar = createSnackbar(contentView: contentView, duration: type.duration)
         updateBottomMargin(animated: false)
         currentSnackbar?.show()
     }
     
-    private func createSnackbar(duration: TTGSnackbarDuration) -> TTGSnackbar {
-        let contentView = SnackbarView.initFromNib()
+    private func createSnackbar(contentView: SnackbarView, duration: TTGSnackbarDuration) -> TTGSnackbar {
+        contentView.widthAnchor.constraint(equalToConstant: Device.winSize.width - offset * 2).activate()
+        
         let snackbar = TTGSnackbar(customContentView: contentView, duration: duration)
         snackbar.animationType = .fadeInFadeOut
         snackbar.backgroundColor = ColorConstants.snackbarGray
         snackbar.shouldActivateLeftAndRightMarginOnCustomContentView = true
-        snackbar.leftMargin = 16
-        snackbar.rightMargin = 16
+        snackbar.leftMargin = offset
+        snackbar.rightMargin = offset
         snackbar.layer.zPosition = 1000 //need for display over the presented controllers
         return snackbar
     }

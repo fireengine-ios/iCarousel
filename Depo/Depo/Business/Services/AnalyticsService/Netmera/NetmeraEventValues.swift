@@ -160,6 +160,7 @@ enum NetmeraEventValues {
         case backup
         case restore
         case deleteDuplicate
+        case deleteBackup
         
         var text: String {
             switch self {
@@ -169,6 +170,8 @@ enum NetmeraEventValues {
                 return "Restore"
             case .deleteDuplicate:
                 return "DeleteDuplicate"
+            case .deleteBackup:
+                return "DeleteBackup"
             }
         }
     }

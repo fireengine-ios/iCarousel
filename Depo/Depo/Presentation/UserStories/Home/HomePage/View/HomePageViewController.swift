@@ -64,8 +64,6 @@ final class HomePageViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         updateNavigationItemsState(state: true)
-        
-        CardsManager.default.updateAllProgressesInCardsForView(view: homePageDataSource)
                 
         if let searchController = navigationController?.topViewController as? SearchViewController {
             searchController.dismissController(animated: false)
@@ -82,6 +80,8 @@ final class HomePageViewController: BaseViewController {
         debugLog("HomePage viewDidAppear")
         
         homePageDataSource.isViewActive = true
+        
+        CardsManager.default.updateAllProgressesInCardsForView(view: homePageDataSource)
 
         if homepageIsActiveAndVisible {
             homePageNavigationBarStyle()

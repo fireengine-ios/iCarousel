@@ -489,8 +489,8 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     private func startEditing() {
         let selectedItemsCount = dataSource.selectedItemsArray.count
         view.startSelection(with: selectedItemsCount)
-        view.setThreeDotsMenu(active: canShow3DotsButton())
         dataSource.setSelectionState(selectionState: true)
+        view.setThreeDotsMenu(active: canShow3DotsButton())
     }
     
     
@@ -723,6 +723,10 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
                 
                 if let selectIndex = actionTypes.index(of: .select) {
                     actionTypes.remove(at: selectIndex)
+                }
+                
+                if let shareAlbumIndex = actionTypes.index(of: .shareAlbum) {
+                    actionTypes.remove(at: shareAlbumIndex)
                 }
             }
             

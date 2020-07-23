@@ -28,7 +28,7 @@ protocol SettingsViewOutput {
         
     func goToPermissions()
     //Photo related methods - below
-    func onChangeUserPhoto()
+    func onChangeUserPhoto(quotaInfo: QuotaInfoResponse?)
         
     func onChooseFromPhotoLibriary(onViewController viewController: UIViewController)
     func onChooseFromPhotoCamera(onViewController viewController: UIViewController)

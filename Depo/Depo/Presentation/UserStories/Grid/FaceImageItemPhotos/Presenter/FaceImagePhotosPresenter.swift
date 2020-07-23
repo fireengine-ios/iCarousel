@@ -282,7 +282,7 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
     //MARK: Unhide
     
     func didUnhideItems(_ items: [WrapData]) {
-        setupBackHandler(toOriginal: true)
+        setupAndStartBackHandler(toOriginal: true)
     }
     
     func didUnhidePeople(items: [PeopleItem]) {
@@ -300,7 +300,7 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
     //MARK: Restore
     
     func putBackFromTrashItems(_ items: [Item]) {
-        setupBackHandler(toOriginal: true)
+        setupAndStartBackHandler(toOriginal: true)
     }
     
     func putBackFromTrashPeople(items: [PeopleItem]) {
@@ -318,7 +318,11 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
     //MARK: Delete
     
     func deleteItems(items: [Item]) {
-        setupBackHandler(toOriginal: true)
+        if items.first?.status == .trashed {
+            setupAndStartBackHandler(toOriginal: true)
+        } else {
+            setupBackHandler(toOriginal: true)
+        }
     }
     
     func goBack() {
@@ -328,6 +332,13 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
         
         isDismissing = true
         router.back()
+    }
+    
+    private func setupAndStartBackHandler(toOriginal: Bool) {
+        removePreviewController { [weak self] in
+            self?.setupBackHandler(toOriginal: toOriginal)
+            self?.backHandler?()
+        }
     }
     
     private func setupBackHandler(toOriginal: Bool) {
@@ -361,9 +372,9 @@ extension FaceImagePhotosPresenter: ItemOperationManagerViewProtocol {
         return destination
     }
     
-    private func removePreviewController() {
+    private func removePreviewController(completion: VoidHandler? = nil) {
         let navVC = (view as? UIViewController)?.navigationController
-        navVC?.dismiss(animated: true, completion: nil)
+        navVC?.dismiss(animated: true, completion: completion)
     }
 }
 

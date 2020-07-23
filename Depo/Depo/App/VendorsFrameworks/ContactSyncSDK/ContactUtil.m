@@ -460,7 +460,8 @@
     int counter = 0;
     for (Contact *c in contacts){
         [self save:c];
-        if (counter >= SYNC_RESTORE_THRESHOLD || counter+1 == [contacts count]){
+        counter++;
+        if (counter % SYNC_RESTORE_THRESHOLD == 0 || counter == [contacts count]){
             CFErrorRef error;
             bool success = false;
             success = ABAddressBookSave(_addressBook, &error);
@@ -468,7 +469,6 @@
                 SYNC_Log(@"An error occurred while saving contacts : %@",error);
             }
         }
-        counter++;
     }
 }
 

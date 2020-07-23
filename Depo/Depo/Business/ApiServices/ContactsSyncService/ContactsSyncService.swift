@@ -8,6 +8,76 @@
 
 typealias ContactsOperation = (ContactsResponse) -> Void
 
+enum SyncOperationType {
+    case backup
+    case restore
+    case analyze
+    case deleteDuplicated
+    case deleteBackup
+    case getBackUpStatus
+    case cancel
+    
+    func transformToContactOperationSyncType(contactSyncResponse: ContactSync.SyncResponse? = nil) -> ContactsOperationType? {
+        switch self {
+        case .backup:
+            return .backUp(contactSyncResponse)
+        case .restore:
+            return .restore
+        case .analyze, .getBackUpStatus, .cancel:
+            return nil
+        case .deleteDuplicated:
+            return .deleteDuplicates
+        case .deleteBackup:
+            return .deleteBackUp
+        }
+    }
+    
+    func transformToContactSyncQuotaTypeOperation() -> FullQuotaWarningPopUpType.ContactsOperationType? {
+        switch self {
+        case .backup:
+            return .backup
+        case .restore:
+            return .restore
+        case .analyze, .getBackUpStatus, .cancel, .deleteDuplicated, .deleteBackup:
+            return nil
+        }
+    }
+    
+}
+
+enum SyncOperationErrors: Error {
+    case accessDenied
+    case failed
+    case remoteServerError(Int?)
+    case networkError
+    case internalError
+    case depoError
+    
+    var description: String {
+        switch self {
+        case .networkError:
+            return TextConstants.errorConnectedToNetwork
+        case .remoteServerError(let code):
+            switch code {
+            case 1101:
+                return TextConstants.contactSyncErrorRemoteServer1101
+            case 2000:
+                return TextConstants.contactSyncErrorRemoteServer2000
+            case 3000:
+                return TextConstants.contactSyncErrorRemoteServer3000
+            case 4000:
+                return TextConstants.contactSyncErrorRemoteServer4000
+            default:
+                return TextConstants.errorManyContactsToBackUp
+            }
+        case .failed:
+            return TextConstants.serverErrorMessage
+        default:
+            return ""
+        }
+    }
+}
+
 class ContactsSyncService: BaseRequestService {
     
     override init() {
@@ -30,7 +100,7 @@ class ContactsSyncService: BaseRequestService {
         SyncSettings.shared().bulk = NumericConstants.contactSyncBulk
         
         SyncSettings.shared().callback = { [weak self] response in
-            self?.checkStatus(with: errorCallback, finishCallback: finishCallback)
+            self?.checkStatus(with: response as? [[String : Any]], errorCallback: errorCallback, finishCallback: finishCallback)
         }
         
         SyncSettings.shared().progressCallback = { [weak self] in
@@ -68,12 +138,14 @@ class ContactsSyncService: BaseRequestService {
                     return
             }
             
+            let timeIntervalSince1970: TimeInterval = time / 1000
+            let date = Date(timeIntervalSince1970: timeIntervalSince1970)
             let syncModel = ContactSync.SyncResponse(responseType: .getBackUpStatus,
                                                     totalNumberOfContacts: contactsAmount,
                                                     newContactsNumber: createdContactsAmount,
                                                     duplicatesNumber: updatedContactsAmount,
                                                     deletedNumber: deletedContactsAmount,
-                                                    date: Date(timeIntervalSince1970: time / 1000))
+                                                    date: date)
             completion(syncModel)
         }
     }
@@ -87,28 +159,33 @@ class ContactsSyncService: BaseRequestService {
         }
     }
     
-    func checkStatus(with errorCallback: ErrorCallback?, finishCallback: FinishCallback?) {
+    func checkStatus(with response: [[String: Any]]?, errorCallback: ErrorCallback?, finishCallback: FinishCallback?) {
         if SyncStatus.shared().status == .RESULT_SUCCESS {
             constractSuccessResponse(finishCallback: finishCallback)
         } else {
-            constractErrorCallBack(errorCallback: errorCallback)
+            constractErrorCallBack(response: response, errorCallback: errorCallback)
         }
     }
     
-    func constractErrorCallBack(errorCallback: ErrorCallback?) {
+    func constractErrorCallBack(response: [[String: Any]]?, errorCallback: ErrorCallback?) {
         switch SyncStatus.shared().status {
         case .RESULT_ERROR_PERMISSION_ADDRESS_BOOK:
             errorCallback?(.accessDenied, getCurrentOperationType())
         case .RESULT_ERROR_REMOTE_SERVER:
             ReachabilityService.shared.forceCheckAPI { [weak self] isReachable in
-                guard let `self` = self else {
+                guard let self = self else {
                     return
                 }
-                if isReachable {
-                    errorCallback?(.remoteServerError, self.getCurrentOperationType())
-                } else {
+                
+                guard isReachable,
+                    let unwrappedCode = response?.first?["code"] as? String,
+                    let code = Int(unwrappedCode)
+                else {
                     errorCallback?(.networkError, self.getCurrentOperationType())
+                    return
                 }
+                
+                errorCallback?(.remoteServerError(code), self.getCurrentOperationType())
             }
         case .RESULT_ERROR_NETWORK:
             errorCallback?(.networkError, getCurrentOperationType())
@@ -210,7 +287,9 @@ class ContactsSyncService: BaseRequestService {
         }
     }
     
-    func searchRemoteContacts(with query: String, page: Int, success: ContactsOperation?, fail: FailResponse?) {
+    //TODO: Need delete API requests
+    @discardableResult
+    func searchRemoteContacts(with query: String, page: Int, success: ContactsOperation?, fail: FailResponse?) -> URLSessionTask {
         debugLog("ContactsSyncService searchRemoteContacts")
         
         let handler = BaseResponseHandler<ContactsResponse, ObjectRequestResponse>(success: { response  in
@@ -219,7 +298,7 @@ class ContactsSyncService: BaseRequestService {
             }
             success?(response)
         }, fail: fail)
-        executeGetRequest(param: SearchContacts(query: query, page: page), handler: handler)
+        return executeGetRequest(param: SearchContacts(query: query, page: page), handler: handler)
     }
     
     func deleteRemoteContacts(_ contacts: [RemoteContact], success: SuccessResponse?, fail: FailResponse?) {
@@ -230,7 +309,8 @@ class ContactsSyncService: BaseRequestService {
         executeDeleteRequest(param: param, handler: handler)
     }
     
-    func getContacts(with page: Int, success: ContactsOperation?, fail: FailResponse?) {
+    @discardableResult
+    func getContacts(with page: Int, success: ContactsOperation?, fail: FailResponse?) -> URLSessionTask {
         debugLog("ContactsSyncService getContacts")
         
         let handler = BaseResponseHandler<ContactsResponse, ObjectRequestResponse>(success: { response  in
@@ -240,7 +320,7 @@ class ContactsSyncService: BaseRequestService {
             success?(response)
         },
             fail: fail)
-        executeGetRequest(param: GetContacts(page: page), handler: handler)
+        return executeGetRequest(param: GetContacts(page: page), handler: handler)
     }
     
     static private func parseContactsToMerge(_ contactsToMerge: [String: Int]) -> [ContactSync.AnalyzedContact] {

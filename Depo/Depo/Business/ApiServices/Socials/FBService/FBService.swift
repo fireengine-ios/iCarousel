@@ -23,14 +23,18 @@ public enum FBStatusValue: String {
 }
 
 class FBService: BaseRequestService {
+    private lazy var passcodeStorage: PasscodeStorage = factory.resolve()
+    
     func requestToken(permissions: [String], success: ((String) -> Void)?, fail: FailResponse?) {
         debugLog("FBService requestToken")
+        passcodeStorage.systemCallOnScreen = true
 
         let vc = (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController!
 
         let fbManager = LoginManager()
         fbManager.logOut()
-        fbManager.logIn(permissions: permissions, from: vc) { result, error in
+        fbManager.logIn(permissions: permissions, from: vc) { [weak self] result, error in
+            self?.passcodeStorage.systemCallOnScreen = false
             if let error = error {
                 fail?(.error(error))
             } else if let result = result {
