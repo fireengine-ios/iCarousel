@@ -487,7 +487,6 @@ final class UploadService: BaseRequestService {
                         if let error = error {
                             if finishedOperation.isCancelled {
                                 /// don't call main thread here due a lot of cancel operations
-                                ItemOperationManager.default.cancelledUpload(file: finishedOperation.inputItem)
                                 checkIfFinished()
                             } else {
                                 if let fileName = finishedOperation.inputItem.name {
@@ -588,7 +587,7 @@ final class UploadService: BaseRequestService {
         cancelAndRemove(operations: operations)
     }
     
-    func cancelSyncOperations(photo: Bool, video: Bool) {
+    func cancelSyncOperations(photo: Bool, video: Bool, networkError: Bool) {
         dispatchQueue.async { [weak self] in
             guard let `self` = self else {
                 return
@@ -600,6 +599,13 @@ final class UploadService: BaseRequestService {
                 ((video && $0.inputItem.fileType == .video) || (photo && $0.inputItem.fileType == .image)) })
             
             print("AUTOSYNC: found \(operationsToRemove.count) operations to remove in \(Date().timeIntervalSince(time)) secs")
+            
+            if networkError {
+                //need for notify photo/video page and corrent cell status display
+                operationsToRemove.map { $0.inputItem }.forEach {
+                    ItemOperationManager.default.cancelledUpload(file: $0)
+                }
+            }
             
             self.cancelAndRemove(operations: operationsToRemove)
             

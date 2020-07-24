@@ -31,7 +31,7 @@ final class PhotoSyncService: ItemSyncServiceImpl {
     }
     
     override func stop() {
-        stopAllOperations()
+        stopAllOperations(networkError: false)
         super.stop()
         
         debugLog("PhotoSyncService stop")
@@ -40,20 +40,20 @@ final class PhotoSyncService: ItemSyncServiceImpl {
     override func waitForWiFi() {
         debugLog("PhotoSyncService waitForWiFi")
         
-        stopAllOperations()
+        stopAllOperations(networkError: true)
         super.waitForWiFi()
     }
     
     
     // MARK: - Private
     
-    private func stopAllOperations() {
+    private func stopAllOperations(networkError: Bool) {
         guard self.status.isContained(in: [.prepairing, .executing]) else {
             return
         }
         
         getUnsyncedOperationQueue.cancelAllOperations()
         photoVideoService.stopAllOperations()
-        UploadService.default.cancelSyncOperations(photo: true, video: false)
+        UploadService.default.cancelSyncOperations(photo: true, video: false, networkError: networkError)
     }
 }
