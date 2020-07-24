@@ -795,7 +795,23 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         }
     }
     
+    func failedAutoSync(forPhotos: Bool) {
+        if isPhoto == forPhotos {
+            updateUploadProgressForVisibleCells(newStatus: .syncFailed)
+        }
+    }
+    
     func syncFinished() {
+        updateUploadProgressForVisibleCells(newStatus: .notSynced)
+    }
+    
+    func filesAddedToAlbum(isAutoSyncOperation: Bool) {
+        if !isAutoSyncOperation {
+            stopEditingMode()
+        }
+    }
+    
+    private func updateUploadProgressForVisibleCells(newStatus: PhotoVideoCell.SyncStatus) {
         let trimmedIDs = Array(uploadProgress.keys)
         guard !trimmedIDs.isEmpty else {
             return
@@ -805,7 +821,7 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
             trimmedIDs.forEach { trimmedID in
                 DispatchQueue.toMain {
                     self.getVisibleCellForLocalFile(objectTrimmedLocalID: trimmedID) {
-                        $0?.update(syncStatus: .notSynced)
+                        $0?.update(syncStatus: newStatus)
                     }
                 }
             }
@@ -813,14 +829,7 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         }
     }
     
-    func filesAddedToAlbum(isAutoSyncOperation: Bool) {
-        if !isAutoSyncOperation {
-            stopEditingMode()
-        }
-    }
-    
-    private func getCellForFile(objectUUID: String, completion: @escaping (_ cell: PhotoVideoCell?) -> Void)
-{
+    private func getCellForFile(objectUUID: String, completion: @escaping (_ cell: PhotoVideoCell?) -> Void) {
         dataSource.getIndexPathForRemoteObject(itemUUID: objectUUID) { [weak self] indexPath in
             guard let path = indexPath,
             let cell = self?.collectionView?.cellForItem(at: path) as? PhotoVideoCell else {
