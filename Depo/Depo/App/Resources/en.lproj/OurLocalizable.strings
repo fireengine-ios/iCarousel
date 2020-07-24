@@ -1495,6 +1495,7 @@
 "contact_sync_confirm_premium_popup_text" = "To delete your duplicate contacts in your device easily and unlock many more features, become a Premium member.";
 "my_packages_description" = "If you want to restore your existing purchases, click on Restore Purchases button.";
 "photo_video_auto_sync_settings" = "Auto-Sync Settings";
+"photo_video_empty_no_unsync_photos_title" = "photo_video_empty_no_unsync_photos_title";
 "ubsent_contacts_in_lifebox" = "There is no any contact in your lifebox";
 "auto_sync_albums_description" = "You can choose which albums to sync automatically.";
 "tabbar_item_home_label" = "Home";
