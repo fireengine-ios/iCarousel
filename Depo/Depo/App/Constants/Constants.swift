@@ -435,6 +435,7 @@ struct TextConstants {
     static let photosVideosViewMissingDatesHeaderText = NSLocalizedString("Missing Dates", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let showOnlySyncedItemsText = NSLocalizedString("Show only synced items", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photosVideosAutoSyncSettings = NSLocalizedString("photo_video_auto_sync_settings", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photosVideosEmptyNoUnsyncPhotosTitle = NSLocalizedString("photo_video_empty_no_unsync_photos_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     // MARK: AudioView
     static let audioViewNoAudioTitleText = NSLocalizedString("You don’t have any music on your Lifebox yet.", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

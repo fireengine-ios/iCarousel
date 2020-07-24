@@ -104,8 +104,14 @@ final class PhotoVideoCollectionViewManager {
             emptyDataView.removeFromSuperview()
             return
         }
-        emptyDataView.configure(title: TextConstants.photosVideosViewNoPhotoTitleText, image: UIImage(named: "ImageNoPhotos") ?? UIImage(), actionTitle: TextConstants.photosVideosViewNoPhotoButtonText)
+        
+        emptyDataView.configure(viewType: showOnlySyncItemsCheckBox.type)
         emptyDataView.delegate = self
+        
+        guard emptyDataView.superview == nil else {
+            return
+        }
+        
         collectionView.addSubview(emptyDataView)
         
         emptyDataView.translatesAutoresizingMaskIntoConstraints = false
