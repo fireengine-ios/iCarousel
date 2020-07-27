@@ -141,6 +141,8 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
     
     func handlePan(recognizer: UIPanGestureRecognizer) {
         
+        let coef = (view.frame.height * 0.9 - view.frame.height * 0.80)
+        
         switch recognizer.state {
         case .began:
             
@@ -159,8 +161,14 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
 
             isFullScreen = true
             collectionView.frame.origin.y = newLocation
+            
+            if abs(newLocation) < coef {
+                managedView.alpha = max(0, min(1, abs(newLocation / coef)))
+                managedView.frame.origin.y = collectionView.frame.maxY - imageMaxY + max(0, coef - coef * abs(newLocation / coef))
+                return
+            }
+            
             managedView.frame.origin.y = collectionView.frame.maxY - imageMaxY
-            detailViewIsHidden = needHideDetailView()
             
         case .ended:
             dissableTouchUntillFinish(isDisabled: true)
