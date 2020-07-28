@@ -7,37 +7,48 @@
 //
 
 
-typealias AdjustmentParameterValues = (tag: Int, min: Float, max: Float, default: Float)
+typealias AdjustmentParameterValues = (min: Float, max: Float, default: Float)
 
 enum AdjustmentParameterType: String {
     case brightness
     case contrast
     case exposure
+    case highlights
+    case shadows
+    case temperature
+    case tint
     case saturation
     case gamma
     case hue
-    case temperature
-    case tint
+    case intensity
     
     
     var defaultValues: AdjustmentParameterValues {
         switch self {
             case .brightness:
-                return (100, -1, 1, 0)
+                return (-1, 1, 0)
             case .contrast:
-                return (101, 0, 4, 1)
+                return (0, 4, 1)
             case .exposure:
-                return (102, -10, 10, 0)
+                return (-10, 10, 0)
             case .saturation:
-                return (103, 0, 2, 1)
+                return (0, 2, 1)
             case .gamma:
-                return (104, 0, 3, 1)
+                return (0, 3, 1)
             case .hue:
-                return (105, 0, 360, 90)
+                return (0, 360, 90)
             case .temperature:
-                return (106, 4000, 7000, 5000)
+                return (4000, 7000, 5000)
             case .tint:
-                return (107, -200, 200, 0)
+                return (-200, 200, 0)
+            case .highlights:
+                return (0, 1, 0)
+            case .shadows:
+                return (0, 1, 1)
+            case .intensity:
+                return (0, 1, 1)
+            default:
+                return (0, 0, 0)
         }
     }
 }
@@ -51,6 +62,8 @@ protocol AdjustmentParameterProtocol {
     var defaultValue: Float { get }
     var currentValue: Float { get }
     
+    func set(value: Float)
+    
     @discardableResult
     func onValueDidChange(handler: @escaping ValueHandler<Float>) -> AdjustmentParameterProtocol
 }
@@ -63,7 +76,7 @@ final class AdjustmentParameter: AdjustmentParameterProtocol {
     let minValue: Float
     let maxValue: Float
     let defaultValue: Float
-    let currentValue: Float
+    private(set) var currentValue: Float
     
     private var onValueDidChangeAction: ValueHandler<Float>?
     
@@ -80,6 +93,12 @@ final class AdjustmentParameter: AdjustmentParameterProtocol {
     }
     
     
+    func set(value: Float) {
+        currentValue = value
+        onValueDidChangeAction?(value)
+    }
+    
+    @discardableResult
     func onValueDidChange(handler: @escaping ValueHandler<Float>) -> AdjustmentParameterProtocol {
         onValueDidChangeAction = handler
         

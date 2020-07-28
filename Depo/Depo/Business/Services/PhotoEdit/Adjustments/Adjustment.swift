@@ -7,18 +7,48 @@
 //
 
 enum AdjustmentType {
+    
+    //light
     case brightness
     case contrast
     case exposure
+    case highlightsAndShadows
+    
+    //color
+    case whiteBalance
     case saturation
     case gamma
+    
+    //hsl
     case hue
-    case whiteBalance
-    case sepia
-    case sharpen
-    case vignette
-    case halftone
-    case crop
+    //case saturation
+    //case luminance - there's no such adjustment, replaced with the monochrome
+    case monochrome
+    
+//    var parametersTypes: [AdjustmentParameterType] {
+//        switch self {
+//            case .brightness:
+//                return [.brightness]
+//            case .contrast:
+//                return [.contrast]
+//            case .exposure:
+//                return [.exposure]
+//            case .highlightsAndShadows:
+//                return [.highlights, .shadows]
+//            case .whiteBalance:
+//                return [.temperature, .tint]
+//            case .saturation:
+//                return [.saturation]
+//            case .gamma:
+//                return [.gamma]
+//            case .hue:
+//                return [.hue]
+//            case .monochrome:
+//                return [.intensity]
+//            default:
+//                return []
+//        }
+//    }
 }
 
 protocol AdjustmentProtocol {
