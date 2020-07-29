@@ -486,6 +486,7 @@ final class UploadService: BaseRequestService {
                         
                         if let error = error {
                             if finishedOperation.isCancelled {
+                                ItemOperationManager.default.cancelledUpload(file: finishedOperation.inputItem)
                                 /// don't call main thread here due a lot of cancel operations
                                 checkIfFinished()
                             } else {
