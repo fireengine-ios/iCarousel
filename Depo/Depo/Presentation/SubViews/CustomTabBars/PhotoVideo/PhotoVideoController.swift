@@ -488,11 +488,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
 // MARK: - UICollectionViewDelegate
 extension PhotoVideoController: UICollectionViewDelegate {
 
-    func collectionView(
-        _ collectionView: UICollectionView,
-        willDisplay cell: UICollectionViewCell,
-        forItemAt indexPath: IndexPath
-    ) {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? PhotoVideoCell else {
             return
         }
@@ -510,7 +506,7 @@ extension PhotoVideoController: UICollectionViewDelegate {
             cell.setup(with: object)
             cell.updateSelection(isSelectionMode: self.dataSource.isSelectingMode, animated: true)
             
-            if self.resentlyUploadedObjectUUIDs.contains(object.uuid ?? "") {
+            if let uuid = object.uuid, self.resentlyUploadedObjectUUIDs.contains(uuid) {
                 cell.update(syncStatus: .synced)
             } else if
                 object.isLocalItemValue,
