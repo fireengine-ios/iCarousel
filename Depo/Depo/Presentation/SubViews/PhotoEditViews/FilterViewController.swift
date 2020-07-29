@@ -38,13 +38,17 @@ final class FilterViewController: ViewController, NibInit {
     private lazy var filterCategoriesView = FilterCategoriesView.with(delegate: self)
     private var changesFilterView: FilterChangesBar?
     
-    private lazy var animator = ContentViewAnimator()
+    private lazy var animator = ContentAnimator()
     private var manager: AdjustmentManager?
     private var sourceImage = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        showInitialState()
+    }
+    
+    private func showInitialState() {
         animator.showTransition(to: filterCategoriesView, on: filtersContainerView, animated: true)
         animator.showTransition(to: tabbar, on: bottomBarContainer, animated: true)
     }
@@ -141,11 +145,43 @@ extension FilterViewController: FilterCategoriesViewDelegate {
 
 extension FilterViewController: FilterChangesBarDelegate {
     func cancelFilter() {
-        animator.showTransition(to: tabbar, on: bottomBarContainer, animated: true)
-        animator.showTransition(to: filterCategoriesView, on: filtersContainerView, animated: true)
+        showInitialState()
     }
     
     func applyFilter() {
         
+    }
+}
+
+//MARK: - ContentAnimator
+
+private final class ContentAnimator {
+    
+    func showTransition(to newView: UIView, on contentView: UIView, animated: Bool) {
+        let currentView = contentView.subviews.first
+        
+        guard newView != currentView else {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            let updateContentConstaints: VoidHandler = {
+                newView.translatesAutoresizingMaskIntoConstraints = false
+                newView.pinToSuperviewEdges()
+                contentView.layoutIfNeeded()
+            }
+            
+            newView.frame = contentView.bounds
+            
+            if let oldView = currentView {
+                let duration = animated ? 0.25 : 0.0
+                UIView.transition(from: oldView, to: newView, duration: duration, options: [.curveLinear], completion: { _ in
+                    updateContentConstaints()
+                })
+            } else {
+                contentView.addSubview(newView)
+                updateContentConstaints()
+            }
+        }
     }
 }
