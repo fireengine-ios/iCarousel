@@ -806,16 +806,20 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         guard !trimmedIDs.isEmpty else {
             return
         }
-        inProgressMediaIDs.removeAll()
 
         DispatchQueue.toMain {
             trimmedIDs.forEach { trimmedID in
                 DispatchQueue.toMain {
                     self.getVisibleCellForLocalFile(objectTrimmedLocalID: trimmedID) {
+                        guard let progress = self.inProgressMediaIDs[trimmedID], progress > .zero else {
+                            $0?.update(syncStatus: .notSynced)
+                            return
+                        }
                         $0?.update(syncStatus: newStatus)
                     }
                 }
             }
+            self.inProgressMediaIDs.removeAll()
         }
     }
     
