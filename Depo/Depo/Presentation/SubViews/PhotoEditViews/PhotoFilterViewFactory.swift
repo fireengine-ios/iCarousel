@@ -14,6 +14,21 @@ enum FilterViewType {
     case color
     case effect
     case hls
+    
+        var title: String {
+        switch self {
+        case .adjust:
+            return "Adjust"
+        case .light:
+            return "Light"
+        case .color:
+            return "Color"
+        case .effect:
+            return "Effect"
+        case .hls:
+            return "HLS"
+        }
+    }
 }
 
 final class PhotoFilterViewFactory {
@@ -34,5 +49,9 @@ final class PhotoFilterViewFactory {
         case .hls:
             return HLSFilterView.with(parameters: adjustmentParameters, delegate: delegate)
         }
+    }
+    
+    static func generateChangesBar(for type: FilterViewType, delegate: FilterChangesBarDelegate?) -> FilterChangesBar {
+        return FilterChangesBar.with(title: type.title, delegate: delegate)
     }
 }

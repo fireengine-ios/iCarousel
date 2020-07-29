@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MaterialComponents.MaterialSlider
 
 final class AdjustFilterView: AdjustmentParameterSliderView, NibInit {
 

@@ -13,13 +13,30 @@ let filterBackColor = UIColor.darkGray
 //Test controller
 final class FilterViewController: ViewController, NibInit {
 
+    @IBOutlet private weak var filtersScrollView: UIScrollView! {
+        willSet {
+            newValue.backgroundColor = filterBackColor
+        }
+    }
+
     @IBOutlet private weak var filtersContainerView: UIView! {
         willSet {
             newValue.backgroundColor = filterBackColor
         }
     }
     
+    @IBOutlet private weak var bottomBarContainer: UIView!
+    
     private var currentFilterViewType = FilterViewType.light
+    private lazy var tabbar: PhotoEditTabbar = {
+        let tabbar = PhotoEditTabbar.initFromNib()
+        tabbar.setup(with: [.filters, .adjustments])
+        tabbar.delegate = self
+        return tabbar
+    }()
+    
+    private lazy var filterCategoriesView = FilterCategoriesView.with(delegate: self)
+    private var changesFilterView: FilterChangesBar?
     
     private lazy var animator = ContentViewAnimator()
     private var manager: AdjustmentManager?
@@ -28,10 +45,11 @@ final class FilterViewController: ViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        showFilter(to: .color)
+        animator.showTransition(to: filterCategoriesView, on: filtersContainerView, animated: true)
+        animator.showTransition(to: tabbar, on: bottomBarContainer, animated: true)
     }
     
-    private func showFilter(to newType: FilterViewType) {
+    private func showFilter(_ newType: FilterViewType) {
         manager = adjustmentManager(for: newType)
         guard let parameters = manager?.parameters, !parameters.isEmpty,
             let view = PhotoFilterViewFactory.generateView(for: newType,
@@ -42,6 +60,9 @@ final class FilterViewController: ViewController, NibInit {
         }
         currentFilterViewType = newType
         animator.showTransition(to: view, on: filtersContainerView, animated: true)
+        
+        let changesBar = PhotoFilterViewFactory.generateChangesBar(for: newType, delegate: self)
+        animator.showTransition(to: changesBar, on: bottomBarContainer, animated: true)
     }
 
     private func adjustmentManager(for type: FilterViewType) -> AdjustmentManager? {
@@ -73,7 +94,7 @@ extension FilterViewController: FilterSliderViewDelegate {
             //show action menu
             break
         case .color:
-            showFilter(to: .hls)
+            showFilter(.hls)
             break
         default:
             break
@@ -94,5 +115,37 @@ extension FilterViewController: FilterSliderViewDelegate {
         manager.applyOnValueDidChange(parameterType: type, value: newValue, sourceImage: sourceImage) { _ in
             debugPrint("new adjustment apply")
         }
+    }
+}
+
+extension FilterViewController: PhotoEditTabbarDelegate {
+    func didSelectItem(_ item: PhotoEditTabbarItemType) {
+        //switch tab
+    }
+}
+
+extension FilterViewController: FilterCategoriesViewDelegate {
+    func didSelectCategory(_ category: FilterCategory) {
+        switch category {
+        case .adjust:
+            showFilter(.adjust)
+        case .color:
+            showFilter(.color)
+        case .effect:
+            showFilter(.effect)
+        case .light:
+            showFilter(.light)
+        }
+    }
+}
+
+extension FilterViewController: FilterChangesBarDelegate {
+    func cancelFilter() {
+        animator.showTransition(to: tabbar, on: bottomBarContainer, animated: true)
+        animator.showTransition(to: filterCategoriesView, on: filtersContainerView, animated: true)
+    }
+    
+    func applyFilter() {
+        
     }
 }
