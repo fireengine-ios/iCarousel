@@ -508,10 +508,7 @@ extension PhotoVideoController: UICollectionViewDelegate {
             
             if let uuid = object.uuid, self.resentlyUploadedObjectUUIDs.contains(uuid) {
                 cell.update(syncStatus: .synced)
-            } else if
-                object.isLocalItemValue,
-                let trimmedLocalFileID = object.trimmedLocalFileID,
-                let progress = self.inProgressMediaIDs[trimmedLocalFileID] {
+            } else if object.isLocalItemValue, let trimmedLocalFileID = object.trimmedLocalFileID, let progress = self.inProgressMediaIDs[trimmedLocalFileID] {
                 progress > .zero
                     ? cell.setProgressForObject(progress: progress)
                     : cell.update(syncStatus: .syncInQueue)
