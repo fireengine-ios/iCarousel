@@ -1,5 +1,5 @@
 //
-//  SliderFilterView.swift
+//  AdjustmentParameterSliderView.swift
 //  Depo
 //
 //  Created by Andrei Novikau on 7/28/20.
@@ -9,7 +9,7 @@
 import UIKit
 import MaterialComponents.MaterialSlider
 
-class SliderFilterView: UIView {
+class AdjustmentParameterSliderView: UIView {
 
     @IBOutlet private weak var sliderContentView: UIView!
     
@@ -34,9 +34,10 @@ class SliderFilterView: UIView {
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.pinToSuperviewEdges()
         
-        slider.setValue(CGFloat(parameter.currentValue), animated: false)
         slider.minimumValue = CGFloat(parameter.minValue)
         slider.maximumValue = CGFloat(parameter.maxValue)
+        slider.filledTrackAnchorValue = CGFloat(parameter.defaultValue)
+        slider.setValue(CGFloat(parameter.currentValue), animated: false)
     
         self.delegate = delegate
         type = parameter.type

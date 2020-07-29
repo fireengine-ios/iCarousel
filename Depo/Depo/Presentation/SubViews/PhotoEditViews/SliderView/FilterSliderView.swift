@@ -14,7 +14,7 @@ protocol FilterSliderViewDelegate: class {
     func sliderValueChanged(newValue: Float, type: AdjustmentParameterType)
 }
 
-final class FilterSliderView: SliderFilterView, NibInit {
+final class FilterSliderView: AdjustmentParameterSliderView, NibInit {
 
     static func with(parameter: AdjustmentParameterProtocol, delegate: FilterSliderViewDelegate?) -> FilterSliderView {
         let view = FilterSliderView.initFromNib()

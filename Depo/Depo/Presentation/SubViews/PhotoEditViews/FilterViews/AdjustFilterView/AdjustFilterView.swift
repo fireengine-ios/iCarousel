@@ -9,7 +9,7 @@
 import UIKit
 import MaterialComponents.MaterialSlider
 
-final class AdjustFilterView: SliderFilterView, NibInit {
+final class AdjustFilterView: AdjustmentParameterSliderView, NibInit {
 
     static func with(parameter: AdjustmentParameterProtocol, delegate: FilterSliderViewDelegate?) -> AdjustFilterView {
         let view = AdjustFilterView.initFromNib()
