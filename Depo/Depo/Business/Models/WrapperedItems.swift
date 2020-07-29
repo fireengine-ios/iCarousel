@@ -10,6 +10,7 @@ import Foundation
 import Photos
 import SDWebImage
 import SwiftyJSON
+import MobileCoreServices
 
 typealias Item = WrapData
 typealias UploadServiceBaseUrlResponse = (_ resonse: UploadBaseURLResponse?) -> Void

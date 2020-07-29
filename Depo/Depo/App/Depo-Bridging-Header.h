@@ -10,8 +10,7 @@
 #import "SyncSettings.h"
 #import "SyncStatus.h"
 #import "AppRater.h"
-#import "CropySDK.h"
-#import "CRYConfiguration.h"
+#import <Photos/Photos.h>
 #import <CommonCrypto/CommonCrypto.h>
 #import "UpdaterController.h"
 #import <SpotifyiOS/SpotifyiOS.h>

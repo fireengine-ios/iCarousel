@@ -220,33 +220,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     
-    private var cropyController: CRYCropNavigationController?
     
     func edit(item: [BaseDataSourceItem], complition: VoidHandler?) {
-        
-        guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
-            return
-        }
-        ImageDownloder().getImage(patch: url) { [weak self] image in
-            guard
-                let `self` = self,
-                let image = image,
-                let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
-                else {
-                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .failure))
-                    UIApplication.showErrorAlert(message: TextConstants.errorServer)
-                    complition?()
-                    return
-            }
-            
-            //vc.setShareEnabled(true)
-            //        vc.setCropDelegate(self)
-            vc.sharedDelegate = self
-            self.cropyController = vc
-            
-            complition?()
-            self.router.presentViewController(controller: vc)
-        }
+        complition?()
     }
     
     func smash(item: [BaseDataSourceItem], completion: VoidHandler?) {
@@ -950,28 +926,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
 }
 
 
-// MARK: - Cropy delegate
-/// https://wiki.life.com.by/pages/viewpage.action?spaceKey=LTFizy&title=Cropy
-/// https://stash.turkcell.com.tr/git/projects/CROP/repos/cropy-ios-sdk/browse
-extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
-    
-    @objc func getEditedImage(_ image: UIImage) {
-        
-        let vc = PopUpController.with(title: TextConstants.save, message: TextConstants.cropyMessage, image: .error, firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.ok, secondAction: { [weak self] vc in
-            self?.save(image: image)
-            vc.close { [weak self] in
-                self?.cropyController?.dismiss(animated: true, completion: nil)
-            }
-        })
-        UIApplication.topController()?.present(vc, animated: false, completion: nil)
-    }
-    
-    private func save(image: UIImage) {
-        showSnackbar(elementType: .edit, relatedItems: [])
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .success))
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-    }
-}
 
 //MARK: - Actions
 
