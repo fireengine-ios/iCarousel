@@ -36,7 +36,7 @@ final class HLSFilterView: UIView, NibInit {
         colorAssets.delegate = self
         colorAssets.allowsMultipleSelection = false
         colorAssets.showsHorizontalScrollIndicator = false
-        colorAssets.backgroundColor = filterBackColor
+        colorAssets.backgroundColor = ColorConstants.filterBackColor
         colorAssets.register(nibCell: ColorCell.self)
     }
     

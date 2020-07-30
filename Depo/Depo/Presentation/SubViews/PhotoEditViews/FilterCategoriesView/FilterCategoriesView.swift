@@ -77,7 +77,7 @@ final class FilterCategoriesView: UIView, NibInit {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = filterBackColor
+        collectionView.backgroundColor = ColorConstants.filterBackColor
         collectionView.register(nibCell: FilterCategoryCell.self)
     }
 }

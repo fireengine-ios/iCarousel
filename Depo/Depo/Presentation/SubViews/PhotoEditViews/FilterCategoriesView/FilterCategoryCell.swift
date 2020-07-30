@@ -27,7 +27,7 @@ final class FilterCategoryCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = filterBackColor
+        contentView.backgroundColor = ColorConstants.filterBackColor
     }
     
     func setup(with title: String, image: UIImage?) {

@@ -56,12 +56,15 @@ final class PhotoEditTabbar: UIView, NibInit {
     @IBOutlet private weak var contentView: UIStackView!
     
     private var selectedItem: PhotoEditButtonItem?
+    var selectedType: PhotoEditTabbarItemType {
+        selectedItem?.type ?? .filters
+    }
     
     weak var delegate: PhotoEditTabbarDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = filterBackColor
+        backgroundColor = ColorConstants.filterBackColor
     }
     
     func setup(with types: [PhotoEditTabbarItemType]) {

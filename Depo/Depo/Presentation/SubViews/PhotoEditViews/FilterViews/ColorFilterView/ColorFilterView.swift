@@ -22,7 +22,7 @@ final class ColorFilterView: UIView, NibInit {
     private weak var delegate: FilterSliderViewDelegate?
     
     private func setup(parameters: [AdjustmentParameterProtocol], delegate: FilterSliderViewDelegate?) {
-        backgroundColor = filterBackColor
+        backgroundColor = ColorConstants.filterBackColor
         
         self.delegate = delegate
         

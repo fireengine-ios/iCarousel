@@ -13,6 +13,7 @@
                 <outlet property="bottomBarContainer" destination="BUf-nW-9bz" id="KUL-8e-kYx"/>
                 <outlet property="filtersContainerView" destination="PiM-mg-5MO" id="zHD-BW-8dn"/>
                 <outlet property="filtersScrollView" destination="bBm-Ct-o7t" id="45Q-wy-f6i"/>
+                <outlet property="navBarContainer" destination="6eJ-04-lW6" id="bLh-B3-Vh2"/>
                 <outlet property="view" destination="iN0-l3-epB" id="K8c-jt-Bfv"/>
             </connections>
         </placeholder>
@@ -21,6 +22,13 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6eJ-04-lW6">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="qKh-nr-Azi"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nFk-JH-Rpa" customClass="ContainerView" customModule="Billo" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="728" width="414" height="90"/>
                     <subviews>
@@ -66,8 +74,11 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nFk-JH-Rpa" secondAttribute="trailing" id="Lqm-wV-pZm"/>
                 <constraint firstItem="BUf-nW-9bz" firstAttribute="top" secondItem="nFk-JH-Rpa" secondAttribute="bottom" id="Taf-h1-9XD"/>
                 <constraint firstItem="nFk-JH-Rpa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="VlH-gV-alA"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6eJ-04-lW6" secondAttribute="trailing" id="ajg-OA-4V3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="BUf-nW-9bz" secondAttribute="bottom" id="avk-7L-lpu"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="BUf-nW-9bz" secondAttribute="trailing" id="uCb-zo-rfO"/>
+                <constraint firstItem="6eJ-04-lW6" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="vQ0-oZ-1Xk"/>
+                <constraint firstItem="6eJ-04-lW6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="yBR-aj-pFZ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>

@@ -8,26 +8,33 @@
 
 import UIKit
 
-let filterBackColor = UIColor.darkGray
-
 //Test controller
 final class FilterViewController: ViewController, NibInit {
 
     @IBOutlet private weak var filtersScrollView: UIScrollView! {
         willSet {
-            newValue.backgroundColor = filterBackColor
+            newValue.backgroundColor = ColorConstants.filterBackColor
         }
     }
 
     @IBOutlet private weak var filtersContainerView: UIView! {
         willSet {
-            newValue.backgroundColor = filterBackColor
+            newValue.backgroundColor = ColorConstants.filterBackColor
         }
     }
     
+    @IBOutlet private weak var navBarContainer: UIView! {
+        willSet {
+            newValue.addSubview(navBarView)
+            navBarView.translatesAutoresizingMaskIntoConstraints = false
+            navBarView.pinToSuperviewEdges()
+        }
+    }
     @IBOutlet private weak var bottomBarContainer: UIView!
     
     private var currentFilterViewType = FilterViewType.light
+    
+    private lazy var navBarView = PhotoEditNavbar.with(delegate: self)
     private lazy var tabbar: PhotoEditTabbar = {
         let tabbar = PhotoEditTabbar.initFromNib()
         tabbar.setup(with: [.filters, .adjustments])
@@ -35,6 +42,7 @@ final class FilterViewController: ViewController, NibInit {
         return tabbar
     }()
     
+    private lazy var preferredFiltersView = PreparedFiltersView.with(filters: PreparedFilterCategory.tempArray, delegate: self)
     private lazy var filterCategoriesView = FilterCategoriesView.with(delegate: self)
     private var changesFilterView: FilterChangesBar?
     
@@ -45,12 +53,20 @@ final class FilterViewController: ViewController, NibInit {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .black
         showInitialState()
     }
     
     private func showInitialState() {
-        animator.showTransition(to: filterCategoriesView, on: filtersContainerView, animated: true)
+        switch tabbar.selectedType {
+        case .filters:
+            animator.showTransition(to: preferredFiltersView, on: filtersContainerView, animated: true)
+        case .adjustments:
+            animator.showTransition(to: filterCategoriesView, on: filtersContainerView, animated: true)
+        }
+        
         animator.showTransition(to: tabbar, on: bottomBarContainer, animated: true)
+        navBarView.state = .initial
     }
     
     private func showFilter(_ newType: FilterViewType) {
@@ -67,6 +83,8 @@ final class FilterViewController: ViewController, NibInit {
         
         let changesBar = PhotoFilterViewFactory.generateChangesBar(for: newType, delegate: self)
         animator.showTransition(to: changesBar, on: bottomBarContainer, animated: true)
+        
+        navBarView.state = .edit
     }
 
     private func adjustmentManager(for type: FilterViewType) -> AdjustmentManager? {
@@ -87,6 +105,25 @@ final class FilterViewController: ViewController, NibInit {
         }
 
         return AdjustmentManager(types: types)
+    }
+    
+    private func showSaveMenu() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let saveAsCopyAction = UIAlertAction(title: "Save as copy", style: .default, handler: nil)
+        let resetAction = UIAlertAction(title: "Reset to original", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        actionSheet.view.tintColor = UIColor.black
+        actionSheet.popoverPresentationController?.sourceView = view
+        actionSheet.popoverPresentationController?.permittedArrowDirections = .up
+        
+        let moreButtonRect = navBarView.moreButton.convert(navBarView.moreButton.bounds, to: view)
+        let rect = CGRect(x: moreButtonRect.midX, y: moreButtonRect.minY - 10, width: 10, height: 50)
+        actionSheet.popoverPresentationController?.sourceRect = rect
+        
+        actionSheet.addActions(saveAsCopyAction, resetAction, cancelAction)
+        
+        present(actionSheet, animated: true)
     }
 }
 
@@ -124,7 +161,12 @@ extension FilterViewController: FilterSliderViewDelegate {
 
 extension FilterViewController: PhotoEditTabbarDelegate {
     func didSelectItem(_ item: PhotoEditTabbarItemType) {
-        //switch tab
+        switch item {
+        case .filters:
+            animator.showTransition(to: preferredFiltersView, on: filtersContainerView, animated: true)
+        case .adjustments:
+            animator.showTransition(to: filterCategoriesView, on: filtersContainerView, animated: true)
+        }
     }
 }
 
@@ -149,6 +191,25 @@ extension FilterViewController: FilterChangesBarDelegate {
     }
     
     func applyFilter() {
+        
+    }
+}
+
+extension FilterViewController: PhotoEditNavbarDelegate {
+    func onClose() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func onSavePhoto() {
+        showSaveMenu()
+    }
+    
+    func onMoreActions() {}
+    func onSharePhoto() {}
+}
+
+extension FilterViewController: PreparedFiltersViewDelegate {
+    func didSelectPreparedFilter(_ filter: PreparedFilter) {
         
     }
 }
