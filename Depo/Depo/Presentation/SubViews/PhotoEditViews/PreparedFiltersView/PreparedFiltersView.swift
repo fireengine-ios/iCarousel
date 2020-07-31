@@ -43,7 +43,7 @@ protocol PreparedFiltersViewDelegate: class {
     func didSelectPreparedFilter(_ filter: PreparedFilter)
 }
 
-final class FilterCategoryButton: UIButton {
+private final class FilterCategoryButton: UIButton {
     static func with(category: PreparedFilterCategory?) -> FilterCategoryButton {
         let button = FilterCategoryButton(type: .custom)
         button.category = category
@@ -59,18 +59,6 @@ final class FilterCategoryButton: UIButton {
     }
     
     private(set) var category: PreparedFilterCategory?
-    
-//    override var isHighlighted: Bool {
-//        didSet {
-//            tintColor = isHighlighted ? .white : .lightGray
-//        }
-//    }
-//
-//    override var isSelected: Bool {
-//        didSet {
-//            tintColor = isSelected ? .white : .lightGray
-//        }
-//    }
 }
 
 final class PreparedFiltersView: UIView, NibInit {

@@ -107,23 +107,12 @@ final class FilterViewController: ViewController, NibInit {
         return AdjustmentManager(types: types)
     }
     
-    private func showSaveMenu() {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let saveAsCopyAction = UIAlertAction(title: "Save as copy", style: .default, handler: nil)
-        let resetAction = UIAlertAction(title: "Reset to original", style: .default, handler: nil)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        actionSheet.view.tintColor = UIColor.black
-        actionSheet.popoverPresentationController?.sourceView = view
-        actionSheet.popoverPresentationController?.permittedArrowDirections = .up
-        
-        let moreButtonRect = navBarView.moreButton.convert(navBarView.moreButton.bounds, to: view)
-        let rect = CGRect(x: moreButtonRect.midX, y: moreButtonRect.minY - 10, width: 10, height: 50)
-        actionSheet.popoverPresentationController?.sourceRect = rect
-        
-        actionSheet.addActions(saveAsCopyAction, resetAction, cancelAction)
-        
-        present(actionSheet, animated: true)
+    private func showMoreActionsMenu() {
+        let items = ["Save as copy", "Reset to original"]
+        let controller = SelectionMenuController.with(style: .simple, items: items, selectedIndex: nil) { [weak self] index in
+            debugPrint(index)
+        }
+        present(controller, animated: true)
     }
 }
 
@@ -132,8 +121,11 @@ extension FilterViewController: FilterSliderViewDelegate {
     func leftButtonTapped() {
         switch currentFilterViewType {
         case .adjust:
-            //show action menu
-            break
+            let items = ["string 1", "string 2", "string 3", "string 4", "string 5"]
+            let controller = SelectionMenuController.with(style: .checkmark, items: items, selectedIndex: 1) { [weak self] index in
+                debugPrint(index)
+            }
+            present(controller, animated: true)
         case .color:
             showFilter(.hls)
             break
@@ -201,10 +193,13 @@ extension FilterViewController: PhotoEditNavbarDelegate {
     }
     
     func onSavePhoto() {
-        showSaveMenu()
+        
     }
     
-    func onMoreActions() {}
+    func onMoreActions() {
+        showMoreActionsMenu()
+    }
+    
     func onSharePhoto() {}
 }
 
@@ -232,7 +227,8 @@ private final class ContentAnimator {
                 contentView.layoutIfNeeded()
             }
             
-            newView.frame = contentView.bounds
+            contentView.frame.size.height = newView.frame.height
+            contentView.frame.origin.y += newView.frame.origin.y - contentView.frame.origin.y
             
             if let oldView = currentView {
                 let duration = animated ? 0.25 : 0.0
