@@ -17,10 +17,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAs-Re-rVZ">
+                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAs-Re-rVZ">
                         <rect key="frame" x="16" y="0.0" width="304" height="44"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="applyIcon" translatesAutoresizingMaskIntoConstraints="NO" id="PRQ-ym-2GZ">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PRQ-ym-2GZ">
                                 <rect key="frame" x="0.0" y="0.0" width="24" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="OeC-th-mNC"/>
@@ -35,7 +35,6 @@
                         </subviews>
                     </stackView>
                 </subviews>
-                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="NAs-Re-rVZ" secondAttribute="trailing" id="Brq-LF-lKf"/>
                     <constraint firstItem="NAs-Re-rVZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="J7s-QW-akQ"/>
@@ -51,7 +50,4 @@
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="applyIcon" width="15" height="15"/>
-    </resources>
 </document>

@@ -29,9 +29,6 @@ final class SelectionMenuCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = UIColor(white: 0, alpha: 0.3)
-        selectedBackgroundView = backgroundView
         backgroundColor = ColorConstants.filterBackColor
     }
     
@@ -44,7 +41,6 @@ final class SelectionMenuCell: UITableViewCell {
         }
         
         titleLabel.text = title
-        
     }
     
     func setSeleted(_ isSelected: Bool) {

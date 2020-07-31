@@ -10,8 +10,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SelectionMenuController" customModule="Billo" customModuleProvider="target">
             <connections>
+                <outlet property="backgroundView" destination="tra-f0-MgT" id="cln-8i-dRB"/>
                 <outlet property="tableView" destination="sVM-a3-PU3" id="qyk-FU-yck"/>
-                <outlet property="tableViewHeight" destination="yd5-ZG-hXp" id="m9p-LK-GMY"/>
+                <outlet property="tableViewHeightConstraint" destination="yd5-ZG-hXp" id="O7x-Ix-0uF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,19 +21,27 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tra-f0-MgT">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sVM-a3-PU3">
-                    <rect key="frame" x="0.0" y="448" width="414" height="448"/>
+                    <rect key="frame" x="0.0" y="896" width="414" height="0.0"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" priority="250" constant="448" id="yd5-ZG-hXp"/>
+                        <constraint firstAttribute="height" priority="250" id="yd5-ZG-hXp"/>
                     </constraints>
                 </tableView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
+                <constraint firstItem="tra-f0-MgT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="QKR-sk-vVT"/>
                 <constraint firstItem="sVM-a3-PU3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="XCa-8c-A16"/>
+                <constraint firstItem="tra-f0-MgT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aGQ-qg-e5A"/>
                 <constraint firstItem="sVM-a3-PU3" firstAttribute="height" relation="lessThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.5" id="aNW-JR-Wsi"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sVM-a3-PU3" secondAttribute="trailing" id="f2D-pn-ShY"/>
+                <constraint firstAttribute="trailing" secondItem="tra-f0-MgT" secondAttribute="trailing" id="j7a-bW-jkv"/>
+                <constraint firstAttribute="bottom" secondItem="tra-f0-MgT" secondAttribute="bottom" id="mNY-hx-gKk"/>
                 <constraint firstAttribute="bottom" secondItem="sVM-a3-PU3" secondAttribute="bottom" id="nxw-vI-BJx"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

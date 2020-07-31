@@ -30,6 +30,13 @@ final class FilterViewController: ViewController, NibInit {
             navBarView.pinToSuperviewEdges()
         }
     }
+    
+    @IBOutlet private weak var bottomSafeAreaView: UIView! {
+        willSet {
+            newValue.backgroundColor = ColorConstants.filterBackColor
+        }
+    }
+    
     @IBOutlet private weak var bottomBarContainer: UIView!
     
     private var currentFilterViewType = FilterViewType.light
@@ -112,7 +119,7 @@ final class FilterViewController: ViewController, NibInit {
         let controller = SelectionMenuController.with(style: .simple, items: items, selectedIndex: nil) { [weak self] index in
             debugPrint(index)
         }
-        present(controller, animated: true)
+        present(controller, animated: false)
     }
 }
 
@@ -125,7 +132,7 @@ extension FilterViewController: FilterSliderViewDelegate {
             let controller = SelectionMenuController.with(style: .checkmark, items: items, selectedIndex: 1) { [weak self] index in
                 debugPrint(index)
             }
-            present(controller, animated: true)
+            present(controller, animated: false)
         case .color:
             showFilter(.hls)
             break

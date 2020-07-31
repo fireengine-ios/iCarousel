@@ -19,13 +19,22 @@ final class SelectionMenuController: UIViewController, NibInit {
         controller.handler = handler
         
         controller.modalPresentationStyle = .overFullScreen
-        controller.modalTransitionStyle = .coverVertical
-        
+        controller.modalTransitionStyle = .crossDissolve
         return controller
     }
     
+    @IBOutlet private weak var backgroundView: UIView! {
+        willSet {
+            newValue.backgroundColor = UIColor(white: 0, alpha: 0.3)
+            newValue.alpha = 0
+            
+            let recognizer = UITapGestureRecognizer(target: self, action: #selector(onViewTap))
+            newValue.addGestureRecognizer(recognizer)
+        }
+    }
+    
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet private weak var tableViewHeightConstraint: NSLayoutConstraint!
     
     private var style: SelectionMenuCell.Style = .simple
     private var items = [String]()
@@ -33,39 +42,38 @@ final class SelectionMenuController: UIViewController, NibInit {
     private var handler: ValueHandler<Int?>?
     
     private let cellHeight: CGFloat = 44
+    private var tableViewHeight: CGFloat = 0
     
     //MARK: -
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(white: 0, alpha: 0.3)
-        setupBackView()
+        view.backgroundColor = .clear
         setupTableView()
     }
-
-    private func setupBackView() {
-        let backView = UIView(frame: view.bounds)
-        backView.backgroundColor = .clear
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(onViewTap))
-        backView.addGestureRecognizer(recognizer)
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        view.addSubview(backView)
-        view.sendSubview(toBack: backView)
-        backView.translatesAutoresizingMaskIntoConstraints = false
-        backView.pinToSuperviewEdges()
+        UIView.animate(withDuration: NumericConstants.animationDuration) {
+            self.tableViewHeightConstraint.constant = self.tableViewHeight
+            self.backgroundView.alpha = 1
+            self.view.layoutIfNeeded()
+        }
     }
     
     private func setupTableView() {
+        tableViewHeightConstraint.constant = 0
         tableView.register(nibCell: SelectionMenuCell.self)
         tableView.rowHeight = cellHeight
         
         if #available(iOS 11.0, *) {
             let bottomInsets = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
-            tableViewHeight.constant = CGFloat(items.count) * cellHeight + bottomInsets
+            tableViewHeight = CGFloat(items.count) * cellHeight + bottomInsets
             tableView.contentInset.bottom = bottomInsets
         } else {
-            tableViewHeight.constant = CGFloat(items.count) * cellHeight
+            tableViewHeight = CGFloat(items.count) * cellHeight
         }
         
         tableView.dataSource = self
@@ -80,9 +88,14 @@ final class SelectionMenuController: UIViewController, NibInit {
     }
     
     private func close(with value: Int?) {
-        dismiss(animated: true) { [weak self] in
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            self.tableViewHeightConstraint.constant = 0
+            self.backgroundView.alpha = 0
+            self.view.layoutIfNeeded()
+        }, completion: { [weak self]_ in
             self?.handler?(value)
-        }
+            self?.dismiss(animated: false, completion: nil)
+        })
     }
 }
 
