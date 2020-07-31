@@ -17,38 +17,39 @@ enum PhotoEditTabbarItemType {
     case adjustments
     
     //TODO: - Change Images
-    var image: UIImage? {
+    private var templateImage: UIImage? {
+        let imageName: String
         switch self {
         case .filters:
-            return UIImage(named: "WiFiIcon")
+            imageName = "EditButtonIcon"
         case .adjustments:
-            return UIImage(named: "yellowInfoIcon")
+            imageName = "cog"
         }
+        return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+    }
+    
+    var normalImage: UIImage? {
+        templateImage?.mask(with: .lightGray)
+    }
+    
+    var selectedImage: UIImage? {
+        templateImage?.mask(with: .white)
     }
 }
 
 private final class PhotoEditButtonItem: UIButton {
     
     static func with(type: PhotoEditTabbarItemType) -> PhotoEditButtonItem {
-        let button = PhotoEditButtonItem(type: .system)
+        let button = PhotoEditButtonItem(type: .custom)
         button.type = type
         button.isSelected = false
+        button.setImage(type.normalImage, for: .normal)
+        button.setImage(type.selectedImage, for: .highlighted)
+        button.setImage(type.selectedImage, for: .selected)
         return button
     }
     
     private(set) var type: PhotoEditTabbarItemType = .filters
-    
-    override var isHighlighted: Bool {
-        didSet {
-            tintColor = isHighlighted ? .white : .lightGray
-        }
-    }
-    
-    override var isSelected: Bool {
-        didSet {
-            tintColor = isSelected ? .white : .lightGray
-        }
-    }
 }
 
 final class PhotoEditTabbar: UIView, NibInit {
@@ -75,7 +76,6 @@ final class PhotoEditTabbar: UIView, NibInit {
     
     private func addItem(type: PhotoEditTabbarItemType) {
         let button = PhotoEditButtonItem.with(type: type)
-        button.setImage(type.image, for: .normal)
         button.addTarget(self, action: #selector(onSelectItem(_:)), for: .touchUpInside)
         
         contentView.addArrangedSubview(button)
