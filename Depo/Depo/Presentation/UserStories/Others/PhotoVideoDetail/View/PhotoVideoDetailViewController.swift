@@ -567,7 +567,7 @@ extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
     
     func imageLoadingFinished() {
-       hideSpinner()
+        hideSpinner()
     }
     
     func tapOnCellForFullScreen() {

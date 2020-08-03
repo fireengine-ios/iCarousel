@@ -198,6 +198,6 @@ extension UIFont {
     }
     
     static func TurkcellSaturaFont(size: CGFloat = 18) -> UIFont {
-        return UIFont(name: "TurkcellSatura", size: size)!
+        return UIFont(name: "TurkcellSaturaReg", size: size)!
     }
 }
