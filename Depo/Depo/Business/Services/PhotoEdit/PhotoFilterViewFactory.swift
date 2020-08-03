@@ -15,7 +15,7 @@ enum FilterViewType {
     case effect
     case hls
     
-        var title: String {
+    var title: String {
         switch self {
         case .adjust:
             return "Adjust"
@@ -27,6 +27,22 @@ enum FilterViewType {
             return "Effect"
         case .hls:
             return "HLS"
+        }
+    }
+    
+    var adjustmenTypes: [AdjustmentType] {
+        switch self {
+        case .adjust:
+            //temp
+            return [.brightness]
+        case .color:
+            return [.whiteBalance, .saturation, .gamma]
+        case .effect:
+            return []
+        case .hls:
+            return [.hue, .saturation, .monochrome]
+        case .light:
+            return [.brightness, .contrast, .exposure, .highlightsAndShadows]
         }
     }
 }

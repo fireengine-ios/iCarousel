@@ -17,12 +17,6 @@ protocol PhotoEditNavbarDelegate: class {
 
 final class PhotoEditNavbar: UIView, NibInit {
 
-    static func with(delegate: PhotoEditNavbarDelegate?) -> PhotoEditNavbar {
-        let view = PhotoEditNavbar.initFromNib()
-        view.delegate = delegate
-        return view
-    }
-
     enum State {
         case initial
         case edit
@@ -41,7 +35,8 @@ final class PhotoEditNavbar: UIView, NibInit {
     @IBOutlet private weak var shareButton: UIButton!
     @IBOutlet private weak var rightButtonsContainer: UIStackView!
     
-    private weak var delegate: PhotoEditNavbarDelegate?
+    weak var delegate: PhotoEditNavbarDelegate?
+    
     var state: State = .initial {
         didSet {
             switch state {

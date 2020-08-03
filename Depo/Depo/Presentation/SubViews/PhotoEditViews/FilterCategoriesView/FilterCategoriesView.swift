@@ -49,7 +49,7 @@ protocol FilterCategoriesViewDelegate: class {
 
 final class FilterCategoriesView: UIView, NibInit {
     
-    static func with(delegate: FilterCategoriesViewDelegate) -> FilterCategoriesView {
+    static func with(delegate: FilterCategoriesViewDelegate?) -> FilterCategoriesView {
         let view = FilterCategoriesView.initFromNib()
         view.delegate = delegate
         return view

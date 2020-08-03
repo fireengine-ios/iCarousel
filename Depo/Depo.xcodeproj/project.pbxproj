@@ -5179,6 +5179,12 @@
 		98B01C77206BCD7300DD78C7 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */; };
 		98B01C79206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */; };
 		98B01C7A206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */; };
+		98BB909A24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */; };
+		98BB909B24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */; };
+		98BB909C24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */; };
+		98BB909D24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */; };
+		98BB909E24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */; };
+		98BB909F24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */; };
 		98BCD711224A615A0090C13D /* SmartAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCD70F224A61590090C13D /* SmartAlbumCell.swift */; };
 		98BCD712224A615A0090C13D /* SmartAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCD70F224A61590090C13D /* SmartAlbumCell.swift */; };
 		98BCD713224A615A0090C13D /* SmartAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98BCD710224A615A0090C13D /* SmartAlbumCell.xib */; };
@@ -13178,6 +13184,7 @@
 		98AA104423585E0C00B12485 /* CampaignDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CampaignDetailViewController.xib; sourceTree = "<group>"; };
 		98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceConstants.swift; sourceTree = "<group>"; };
+		98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditViewUIManager.swift; sourceTree = "<group>"; };
 		98BCD70F224A61590090C13D /* SmartAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartAlbumCell.swift; sourceTree = "<group>"; };
 		98BCD710224A615A0090C13D /* SmartAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartAlbumCell.xib; sourceTree = "<group>"; };
 		98BE78A524517E4200B8864F /* SnackbarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SnackbarView.xib; sourceTree = "<group>"; };
@@ -19688,6 +19695,7 @@
 			isa = PBXGroup;
 			children = (
 				985D87F024D0237D004BCDFF /* PhotoFilterViewFactory.swift */,
+				98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */,
 				985D87BA24D0156A004BCDFF /* PhotoEditViewController.xib */,
 				985D87BB24D0156A004BCDFF /* PhotoEditViewController.swift */,
 				B5FBD25A24D1AF49009AD4F7 /* Adjust */,
@@ -27334,6 +27342,7 @@
 				0303A1852397D0D000907F42 /* FaceImagePhotosConfigurator.swift in Sources */,
 				0303A1862397D0D000907F42 /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				0303A1872397D0D000907F42 /* PreventCollectionView.swift in Sources */,
+				98BB909D24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */,
 				0303A1882397D0D000907F42 /* BottomSelectionTabBarViewController.swift in Sources */,
 				0303A1892397D0D000907F42 /* InstagramAccountConnectionCell.swift in Sources */,
 				0303A18A2397D0D000907F42 /* BaseDataSourceForCollectionView.swift in Sources */,
@@ -29966,6 +29975,7 @@
 				8C0E8FB51FDEBDFF00789C91 /* BaseViewController.swift in Sources */,
 				8C06AC272008AB91003D8E05 /* FreeAppSpacePresenter.swift in Sources */,
 				8C0E8FB61FDEBDFF00789C91 /* FeedbackViewInteractorInput.swift in Sources */,
+				98BB909B24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */,
 				17589F732276336800A5DB37 /* ProfilePhoneEnterView.swift in Sources */,
 				8C0E8FB71FDEBDFF00789C91 /* UIImage+Orientation.swift in Sources */,
 				CE5FE966208B204A0065AC7E /* FileManager+Size.swift in Sources */,
@@ -30814,6 +30824,7 @@
 				CE95ED4B1F516736002F923A /* HelpAndSupportConfigurator.swift in Sources */,
 				0309F93923D57F3B001DB5FA /* NetmeraEvents.swift in Sources */,
 				B5CDB33E21787FEF006CFA50 /* Configuration.m in Sources */,
+				98BB909A24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */,
 				98DBC0462410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift in Sources */,
 				CE51AC091EF90853005DCEE0 /* AutoSyncInteractor.swift in Sources */,
 				8CF6A9BE207C8C32007DEF71 /* PageCompounder.swift in Sources */,
@@ -32420,6 +32431,7 @@
 				CE78491F22A685FB00662219 /* MyStorageViewInput.swift in Sources */,
 				CE78492022A685FB00662219 /* String+Int.swift in Sources */,
 				8E26D9802306999800D08123 /* MusicViewInput.swift in Sources */,
+				98BB909E24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */,
 				CE78492322A685FB00662219 /* CustomTabBar.swift in Sources */,
 				CE78492422A685FB00662219 /* BottomSelectionTabBarInteractorInput.swift in Sources */,
 				CE78492522A685FB00662219 /* FolderSelectionCollectionViewCell.swift in Sources */,
@@ -33873,6 +33885,7 @@
 				CF8B64AD23CBC9D70021B021 /* CaptchaViewController.swift in Sources */,
 				CF8B64AE23CBC9D70021B021 /* CollectionSortingRules.swift in Sources */,
 				734CA129244D753C0076F6A7 /* DocumentsAlbumCardResponce.swift in Sources */,
+				98BB909C24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */,
 				CF8B64B023CBC9D70021B021 /* BottomSelectionTabBarPresenter.swift in Sources */,
 				CF8B64B123CBC9D70021B021 /* SharedService.swift in Sources */,
 				CF8B64B223CBC9D70021B021 /* CellsConstant.swift in Sources */,
@@ -35342,6 +35355,7 @@
 				CF8B6C8823CBCA280021B021 /* FreeAppSpace.swift in Sources */,
 				0305A32823D5C3BC004D1EC7 /* HiddenPhotosNavbarManager.swift in Sources */,
 				CF8B6C8923CBCA280021B021 /* UploadFromLifeBoxInitializer.swift in Sources */,
+				98BB909F24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */,
 				CF8B6C8A23CBCA280021B021 /* (null) in Sources */,
 				CF8B6C8B23CBCA280021B021 /* UserProfileViewController.swift in Sources */,
 				CF8B6C8C23CBCA280021B021 /* DataStorage.swift in Sources */,
