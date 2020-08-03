@@ -49,7 +49,7 @@ enum FilterViewType {
 
 final class PhotoFilterViewFactory {
     
-    static func generateView(for type: FilterViewType, adjustmentParameters: [AdjustmentParameterProtocol], delegate: FilterSliderViewDelegate?) -> UIView? {
+    static func generateView(for type: FilterViewType, adjustmentParameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) -> UIView? {
         switch type {
         case .adjust:
             guard let parameter = adjustmentParameters.first else {

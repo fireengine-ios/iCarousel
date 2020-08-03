@@ -8,14 +8,15 @@
 
 import UIKit
 
-final class AdjustFilterView: AdjustmentParameterSliderView, NibInit {
+final class AdjustFilterView: AdjustmentsView, NibInit {
 
-    static func with(parameter: AdjustmentParameterProtocol, delegate: FilterSliderViewDelegate?) -> AdjustFilterView {
+    static func with(parameter: AdjustmentParameterProtocol, delegate: AdjustmentsViewDelegate?) -> AdjustFilterView {
         let view = AdjustFilterView.initFromNib()
         view.setup(with: parameter, delegate: delegate)
         return view
     }
     
+    @IBOutlet private weak var sliderView: AdjustmentParameterSliderView!
     @IBOutlet private weak var contentView: UIStackView!
     @IBOutlet private weak var leftButton: UIButton!
     @IBOutlet private weak var rightButton: UIButton!
@@ -41,9 +42,10 @@ final class AdjustFilterView: AdjustmentParameterSliderView, NibInit {
         }
     }
     
-    override func setup(with parameter: AdjustmentParameterProtocol, delegate: FilterSliderViewDelegate?) {
-        super.setup(with: parameter, delegate: delegate)
+    func setup(with parameter: AdjustmentParameterProtocol, delegate: AdjustmentsViewDelegate?) {
+        super.setup(parameters: [parameter], delegate: delegate)
         
+        sliderView.setup(with: parameter, delegate: self)
         minValueLabel.text = "\(Int(parameter.minValue))"
         maxValueLabel.text = "\(Int(parameter.maxValue))"
         currentValueLabel.text = String(format: "%.1f", parameter.currentValue)
@@ -52,14 +54,15 @@ final class AdjustFilterView: AdjustmentParameterSliderView, NibInit {
     //MARK: - Actions
     
     @IBAction private func onLeftButtonTapped(_ sender: UIButton) {
-        delegate?.leftButtonTapped()
+        delegate?.showAdjustMenu()
     }
     
     @IBAction private func onRightButtonTapped(_ sender: UIButton) {
-        delegate?.rightButtonTapped()
+        //TODO: Rotate - change angle +90 degrees
     }
     
-    override func didChangeValue(_ value: CGFloat) {
-        currentValueLabel.text = String(format: "%.1f", value)
+    override func sliderValueChanged(newValue: Float, type: AdjustmentParameterType) {
+        super.sliderValueChanged(newValue: newValue, type: type)
+        currentValueLabel.text = String(format: "%.1f", newValue)
     }
 }

@@ -65,40 +65,48 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
 }
 
-//MARK: -
+//MARK: - AdjustmentsViewDelegate
 
-extension PhotoEditViewController: FilterSliderViewDelegate {
+extension PhotoEditViewController: AdjustmentsViewDelegate {
     
-    func leftButtonTapped() {
-        switch uiManager.currentFilterViewType {
-        case .adjust:
-            let items = ["string 1", "string 2", "string 3", "string 4", "string 5"]
-            let controller = SelectionMenuController.with(style: .checkmark, items: items, selectedIndex: 1) { [weak self] index in
-                debugPrint(index)
-            }
-            present(controller, animated: false)
-        case .color:
-            needShowFilterView(for: .hls)
-            break
-        default:
-            break
+    func showAdjustMenu() {
+        let items = ["string 1", "string 2", "string 3", "string 4", "string 5"]
+        let controller = SelectionMenuController.with(style: .checkmark, items: items, selectedIndex: 1) { [weak self] index in
+            debugPrint(index)
         }
+        present(controller, animated: false)
     }
     
-    func rightButtonTapped() {
-        if uiManager.currentFilterViewType == .adjust {
-            //rotate
-        }
+    func showHLSFilter() {
+        needShowFilterView(for: .hls)
     }
     
-    func sliderValueChanged(newValue: Float, type: AdjustmentParameterType) {
+    func didChangeAdjustments(_ adjustments: [AdjustmentValue]) {
         guard let manager = adjustmentManager else {
             return
         }
         
-        manager.applyOnValueDidChange(parameterType: type, value: newValue, sourceImage: sourceImage) { [weak self] image in
-            self?.uiManager.setImage(image)
+        //TODO: APPLY NEW VALUES
+        
+        var editingImage = sourceImage
+        
+        let queue = DispatchQueue.global()
+
+        queue.async {
+            adjustments.forEach { type, value in
+                let semaphore = DispatchSemaphore(value: 0)
+                manager.applyOnValueDidChange(parameterType: type, value: value, sourceImage: editingImage) { image in
+                    editingImage = image
+                    semaphore.signal()
+                }
+                semaphore.wait()
+            }
+            
+            DispatchQueue.main.async {
+                self.uiManager.setImage(editingImage)
+            }
         }
+
     }
 }
 
