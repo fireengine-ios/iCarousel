@@ -108,6 +108,8 @@ struct ColorConstants {
     static let duplicatesGray = UIColor(white: 86/255, alpha: 1)
 
     static let navy = UIColor(red: 4 / 255.0, green: 37 / 255.0, blue: 56 / 255.0, alpha: 1)
+    
+    static let filterBackColor = UIColor.darkGray
 }
 
 extension UIColor {

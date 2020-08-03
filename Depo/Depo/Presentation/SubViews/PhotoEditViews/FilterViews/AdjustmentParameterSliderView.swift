@@ -29,7 +29,7 @@ class AdjustmentParameterSliderView: UIView {
     private(set) var type: AdjustmentParameterType?
     
     func setup(with parameter: AdjustmentParameterProtocol, delegate: FilterSliderViewDelegate?) {
-        backgroundColor = filterBackColor
+        backgroundColor = ColorConstants.filterBackColor
         sliderContentView.addSubview(slider)
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.pinToSuperviewEdges()

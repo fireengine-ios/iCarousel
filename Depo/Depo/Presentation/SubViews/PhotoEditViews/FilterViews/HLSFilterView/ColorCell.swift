@@ -19,7 +19,7 @@ final class ColorCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = filterBackColor
+        contentView.backgroundColor = ColorConstants.filterBackColor
     }
     
     func setup(color: UIColor, isSelected: Bool) {
@@ -28,7 +28,7 @@ final class ColorCell: UICollectionViewCell {
     }
     
     func setSelected(_ isSelected: Bool) {
-        contentView.layer.borderColor = isSelected ? UIColor.blue.cgColor : filterBackColor.cgColor
+        contentView.layer.borderColor = isSelected ? UIColor.blue.cgColor : ColorConstants.filterBackColor.cgColor
         contentView.layer.borderWidth = 2
     }
 }

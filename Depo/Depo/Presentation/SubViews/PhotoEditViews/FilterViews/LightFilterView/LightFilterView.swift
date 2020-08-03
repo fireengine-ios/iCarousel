@@ -19,7 +19,7 @@ final class LightFilterView: UIView, NibInit {
     @IBOutlet private weak var contentView: UIStackView!
     
     private func setup(parameters: [AdjustmentParameterProtocol], delegate: FilterSliderViewDelegate?) {
-        backgroundColor = filterBackColor
+        backgroundColor = ColorConstants.filterBackColor
         
         parameters.forEach {
             let view = FilterSliderView.with(parameter: $0, delegate: delegate)

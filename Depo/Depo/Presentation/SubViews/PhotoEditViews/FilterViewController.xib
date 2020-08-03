@@ -10,7 +10,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FilterViewController" customModule="Billo" customModuleProvider="target">
             <connections>
+                <outlet property="bottomBarContainer" destination="BUf-nW-9bz" id="KUL-8e-kYx"/>
+                <outlet property="bottomSafeAreaView" destination="U8f-ha-09S" id="IoR-y1-FQI"/>
                 <outlet property="filtersContainerView" destination="PiM-mg-5MO" id="zHD-BW-8dn"/>
+                <outlet property="filtersScrollView" destination="bBm-Ct-o7t" id="45Q-wy-f6i"/>
+                <outlet property="navBarContainer" destination="6eJ-04-lW6" id="bLh-B3-Vh2"/>
                 <outlet property="view" destination="iN0-l3-epB" id="K8c-jt-Bfv"/>
             </connections>
         </placeholder>
@@ -19,14 +23,25 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nFk-JH-Rpa">
-                    <rect key="frame" x="0.0" y="662" width="414" height="200"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U8f-ha-09S">
+                    <rect key="frame" x="0.0" y="862" width="414" height="34"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6eJ-04-lW6">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="qKh-nr-Azi"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nFk-JH-Rpa" customClass="ContainerView" customModule="Billo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="728" width="414" height="90"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBm-Ct-o7t">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiM-mg-5MO">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </view>
                             </subviews>
@@ -45,17 +60,34 @@
                         <constraint firstItem="PiM-mg-5MO" firstAttribute="width" secondItem="nFk-JH-Rpa" secondAttribute="width" multiplier="1:1" id="Pri-tH-A3c"/>
                         <constraint firstAttribute="trailing" secondItem="bBm-Ct-o7t" secondAttribute="trailing" id="TPg-8f-Rkc"/>
                         <constraint firstItem="PiM-mg-5MO" firstAttribute="height" secondItem="nFk-JH-Rpa" secondAttribute="height" multiplier="1:1" priority="250" id="UT7-cT-me2"/>
-                        <constraint firstAttribute="height" priority="100" constant="200" id="jqu-LP-kDn"/>
+                        <constraint firstAttribute="height" priority="100" constant="90" id="jqu-LP-kDn"/>
                         <constraint firstItem="bBm-Ct-o7t" firstAttribute="top" secondItem="nFk-JH-Rpa" secondAttribute="top" id="set-P1-rdo"/>
                         <constraint firstAttribute="bottom" secondItem="bBm-Ct-o7t" secondAttribute="bottom" id="vmd-DC-68F"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BUf-nW-9bz">
+                    <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="250" constant="44" id="a5u-Sl-b88"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="nFk-JH-Rpa" secondAttribute="bottom" id="8Ld-fJ-s7R"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="U8f-ha-09S" secondAttribute="trailing" id="2kb-Pw-X7w"/>
+                <constraint firstItem="BUf-nW-9bz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="3lh-Ta-LMJ"/>
+                <constraint firstAttribute="bottom" secondItem="U8f-ha-09S" secondAttribute="bottom" id="KkN-gX-tfD"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nFk-JH-Rpa" secondAttribute="trailing" id="Lqm-wV-pZm"/>
+                <constraint firstItem="U8f-ha-09S" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="ODD-4j-njp"/>
+                <constraint firstItem="BUf-nW-9bz" firstAttribute="top" secondItem="nFk-JH-Rpa" secondAttribute="bottom" id="Taf-h1-9XD"/>
                 <constraint firstItem="nFk-JH-Rpa" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="VlH-gV-alA"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6eJ-04-lW6" secondAttribute="trailing" id="ajg-OA-4V3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="BUf-nW-9bz" secondAttribute="bottom" id="avk-7L-lpu"/>
+                <constraint firstItem="U8f-ha-09S" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="eY9-EN-LaD"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="BUf-nW-9bz" secondAttribute="trailing" id="uCb-zo-rfO"/>
+                <constraint firstItem="6eJ-04-lW6" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="vQ0-oZ-1Xk"/>
+                <constraint firstItem="6eJ-04-lW6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="yBR-aj-pFZ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>

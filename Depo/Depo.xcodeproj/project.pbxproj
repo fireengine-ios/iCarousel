@@ -4728,6 +4728,18 @@
 		9845489A22FBFF4100D7F29C /* SpotifyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845489622FBFF4000D7F29C /* SpotifyStatusView.swift */; };
 		9845489B22FBFF4100D7F29C /* SpotifyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845489622FBFF4000D7F29C /* SpotifyStatusView.swift */; };
 		9845489C22FBFF4100D7F29C /* SpotifyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845489622FBFF4000D7F29C /* SpotifyStatusView.swift */; };
+		98467B6624D17F6000B6C33E /* FilterChangesBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98467B6524D17F6000B6C33E /* FilterChangesBar.swift */; };
+		98467B6724D17F6000B6C33E /* FilterChangesBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98467B6524D17F6000B6C33E /* FilterChangesBar.swift */; };
+		98467B6824D17F6000B6C33E /* FilterChangesBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98467B6524D17F6000B6C33E /* FilterChangesBar.swift */; };
+		98467B6924D17F6000B6C33E /* FilterChangesBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98467B6524D17F6000B6C33E /* FilterChangesBar.swift */; };
+		98467B6A24D17F6000B6C33E /* FilterChangesBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98467B6524D17F6000B6C33E /* FilterChangesBar.swift */; };
+		98467B6B24D17F6000B6C33E /* FilterChangesBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98467B6524D17F6000B6C33E /* FilterChangesBar.swift */; };
+		98467B6D24D17F6F00B6C33E /* FilterChangesBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98467B6C24D17F6F00B6C33E /* FilterChangesBar.xib */; };
+		98467B6E24D17F6F00B6C33E /* FilterChangesBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98467B6C24D17F6F00B6C33E /* FilterChangesBar.xib */; };
+		98467B6F24D17F6F00B6C33E /* FilterChangesBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98467B6C24D17F6F00B6C33E /* FilterChangesBar.xib */; };
+		98467B7024D17F6F00B6C33E /* FilterChangesBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98467B6C24D17F6F00B6C33E /* FilterChangesBar.xib */; };
+		98467B7124D17F6F00B6C33E /* FilterChangesBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98467B6C24D17F6F00B6C33E /* FilterChangesBar.xib */; };
+		98467B7224D17F6F00B6C33E /* FilterChangesBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98467B6C24D17F6F00B6C33E /* FilterChangesBar.xib */; };
 		9849B5B621FF49400059F9A9 /* InstapickFreeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9849B5B521FF49400059F9A9 /* InstapickFreeCell.swift */; };
 		9849B5B721FF49400059F9A9 /* InstapickFreeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9849B5B521FF49400059F9A9 /* InstapickFreeCell.swift */; };
 		9849B5B921FF49630059F9A9 /* InstapickFreeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9849B5B821FF49630059F9A9 /* InstapickFreeCell.xib */; };
@@ -4879,12 +4891,72 @@
 		985E9BFF2493AFD6004D70BA /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985E9BFB2493AFD6004D70BA /* UITextView+Extensions.swift */; };
 		985E9C002493AFD6004D70BA /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985E9BFB2493AFD6004D70BA /* UITextView+Extensions.swift */; };
 		985E9C012493AFD6004D70BA /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985E9BFB2493AFD6004D70BA /* UITextView+Extensions.swift */; };
+		9863B88624D2AA7700664810 /* PreparedFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B88524D2AA7700664810 /* PreparedFiltersView.swift */; };
+		9863B88724D2AA7700664810 /* PreparedFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B88524D2AA7700664810 /* PreparedFiltersView.swift */; };
+		9863B88824D2AA7700664810 /* PreparedFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B88524D2AA7700664810 /* PreparedFiltersView.swift */; };
+		9863B88924D2AA7700664810 /* PreparedFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B88524D2AA7700664810 /* PreparedFiltersView.swift */; };
+		9863B88A24D2AA7700664810 /* PreparedFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B88524D2AA7700664810 /* PreparedFiltersView.swift */; };
+		9863B88B24D2AA7700664810 /* PreparedFiltersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B88524D2AA7700664810 /* PreparedFiltersView.swift */; };
+		9863B88D24D2AA8000664810 /* PreparedFiltersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B88C24D2AA8000664810 /* PreparedFiltersView.xib */; };
+		9863B88E24D2AA8000664810 /* PreparedFiltersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B88C24D2AA8000664810 /* PreparedFiltersView.xib */; };
+		9863B88F24D2AA8000664810 /* PreparedFiltersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B88C24D2AA8000664810 /* PreparedFiltersView.xib */; };
+		9863B89024D2AA8000664810 /* PreparedFiltersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B88C24D2AA8000664810 /* PreparedFiltersView.xib */; };
+		9863B89124D2AA8000664810 /* PreparedFiltersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B88C24D2AA8000664810 /* PreparedFiltersView.xib */; };
+		9863B89224D2AA8000664810 /* PreparedFiltersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B88C24D2AA8000664810 /* PreparedFiltersView.xib */; };
+		9863B89524D2AB0C00664810 /* PhotoEditNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B89424D2AB0C00664810 /* PhotoEditNavbar.swift */; };
+		9863B89624D2AB0C00664810 /* PhotoEditNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B89424D2AB0C00664810 /* PhotoEditNavbar.swift */; };
+		9863B89724D2AB0C00664810 /* PhotoEditNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B89424D2AB0C00664810 /* PhotoEditNavbar.swift */; };
+		9863B89824D2AB0C00664810 /* PhotoEditNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B89424D2AB0C00664810 /* PhotoEditNavbar.swift */; };
+		9863B89924D2AB0C00664810 /* PhotoEditNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B89424D2AB0C00664810 /* PhotoEditNavbar.swift */; };
+		9863B89A24D2AB0C00664810 /* PhotoEditNavbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B89424D2AB0C00664810 /* PhotoEditNavbar.swift */; };
+		9863B89C24D2AC4800664810 /* PhotoEditNavbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B89B24D2AC4800664810 /* PhotoEditNavbar.xib */; };
+		9863B89D24D2AC4800664810 /* PhotoEditNavbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B89B24D2AC4800664810 /* PhotoEditNavbar.xib */; };
+		9863B89E24D2AC4800664810 /* PhotoEditNavbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B89B24D2AC4800664810 /* PhotoEditNavbar.xib */; };
+		9863B89F24D2AC4800664810 /* PhotoEditNavbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B89B24D2AC4800664810 /* PhotoEditNavbar.xib */; };
+		9863B8A024D2AC4800664810 /* PhotoEditNavbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B89B24D2AC4800664810 /* PhotoEditNavbar.xib */; };
+		9863B8A124D2AC4800664810 /* PhotoEditNavbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B89B24D2AC4800664810 /* PhotoEditNavbar.xib */; };
+		9863B8A424D2B7D600664810 /* PreparedFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B8A224D2B7D600664810 /* PreparedFilterCell.swift */; };
+		9863B8A524D2B7D600664810 /* PreparedFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B8A224D2B7D600664810 /* PreparedFilterCell.swift */; };
+		9863B8A624D2B7D600664810 /* PreparedFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B8A224D2B7D600664810 /* PreparedFilterCell.swift */; };
+		9863B8A724D2B7D600664810 /* PreparedFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B8A224D2B7D600664810 /* PreparedFilterCell.swift */; };
+		9863B8A824D2B7D600664810 /* PreparedFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B8A224D2B7D600664810 /* PreparedFilterCell.swift */; };
+		9863B8A924D2B7D600664810 /* PreparedFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9863B8A224D2B7D600664810 /* PreparedFilterCell.swift */; };
+		9863B8AA24D2B7D600664810 /* PreparedFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B8A324D2B7D600664810 /* PreparedFilterCell.xib */; };
+		9863B8AB24D2B7D600664810 /* PreparedFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B8A324D2B7D600664810 /* PreparedFilterCell.xib */; };
+		9863B8AC24D2B7D600664810 /* PreparedFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B8A324D2B7D600664810 /* PreparedFilterCell.xib */; };
+		9863B8AD24D2B7D600664810 /* PreparedFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B8A324D2B7D600664810 /* PreparedFilterCell.xib */; };
+		9863B8AE24D2B7D600664810 /* PreparedFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B8A324D2B7D600664810 /* PreparedFilterCell.xib */; };
+		9863B8AF24D2B7D600664810 /* PreparedFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9863B8A324D2B7D600664810 /* PreparedFilterCell.xib */; };
 		9864296822F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
 		9864296922F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
 		9864296A22F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
 		9864297022F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
 		9864297122F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
 		9864297222F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
+		986AD0DE24D307FB000B0D3C /* SelectionMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AD0DC24D307FB000B0D3C /* SelectionMenuController.swift */; };
+		986AD0DF24D307FB000B0D3C /* SelectionMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AD0DC24D307FB000B0D3C /* SelectionMenuController.swift */; };
+		986AD0E024D307FB000B0D3C /* SelectionMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AD0DC24D307FB000B0D3C /* SelectionMenuController.swift */; };
+		986AD0E124D307FB000B0D3C /* SelectionMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AD0DC24D307FB000B0D3C /* SelectionMenuController.swift */; };
+		986AD0E224D307FB000B0D3C /* SelectionMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AD0DC24D307FB000B0D3C /* SelectionMenuController.swift */; };
+		986AD0E324D307FB000B0D3C /* SelectionMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AD0DC24D307FB000B0D3C /* SelectionMenuController.swift */; };
+		986AD0E424D307FB000B0D3C /* SelectionMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 986AD0DD24D307FB000B0D3C /* SelectionMenuController.xib */; };
+		986AD0E524D307FB000B0D3C /* SelectionMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 986AD0DD24D307FB000B0D3C /* SelectionMenuController.xib */; };
+		986AD0E624D307FB000B0D3C /* SelectionMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 986AD0DD24D307FB000B0D3C /* SelectionMenuController.xib */; };
+		986AD0E724D307FB000B0D3C /* SelectionMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 986AD0DD24D307FB000B0D3C /* SelectionMenuController.xib */; };
+		986AD0E824D307FB000B0D3C /* SelectionMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 986AD0DD24D307FB000B0D3C /* SelectionMenuController.xib */; };
+		986AD0E924D307FB000B0D3C /* SelectionMenuController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 986AD0DD24D307FB000B0D3C /* SelectionMenuController.xib */; };
+		986AD0EC24D30929000B0D3C /* SelectionMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AD0EA24D30929000B0D3C /* SelectionMenuCell.swift */; };
+		986AD0ED24D30929000B0D3C /* SelectionMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AD0EA24D30929000B0D3C /* SelectionMenuCell.swift */; };
+		986AD0EE24D30929000B0D3C /* SelectionMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AD0EA24D30929000B0D3C /* SelectionMenuCell.swift */; };
+		986AD0EF24D30929000B0D3C /* SelectionMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AD0EA24D30929000B0D3C /* SelectionMenuCell.swift */; };
+		986AD0F024D30929000B0D3C /* SelectionMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AD0EA24D30929000B0D3C /* SelectionMenuCell.swift */; };
+		986AD0F124D30929000B0D3C /* SelectionMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986AD0EA24D30929000B0D3C /* SelectionMenuCell.swift */; };
+		986AD0F224D30929000B0D3C /* SelectionMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 986AD0EB24D30929000B0D3C /* SelectionMenuCell.xib */; };
+		986AD0F324D30929000B0D3C /* SelectionMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 986AD0EB24D30929000B0D3C /* SelectionMenuCell.xib */; };
+		986AD0F424D30929000B0D3C /* SelectionMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 986AD0EB24D30929000B0D3C /* SelectionMenuCell.xib */; };
+		986AD0F524D30929000B0D3C /* SelectionMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 986AD0EB24D30929000B0D3C /* SelectionMenuCell.xib */; };
+		986AD0F624D30929000B0D3C /* SelectionMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 986AD0EB24D30929000B0D3C /* SelectionMenuCell.xib */; };
+		986AD0F724D30929000B0D3C /* SelectionMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 986AD0EB24D30929000B0D3C /* SelectionMenuCell.xib */; };
 		986B20622077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		986B20632077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		98732B3F2460168900E9D5D2 /* ElementTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98732B3E2460168900E9D5D2 /* ElementTypes.swift */; };
@@ -4902,6 +4974,30 @@
 		98758F612359BC3E00D06952 /* CampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F602359BC3E00D06952 /* CampaignService.swift */; };
 		98758F622359BC3E00D06952 /* CampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F602359BC3E00D06952 /* CampaignService.swift */; };
 		98758F632359BC3E00D06952 /* CampaignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98758F602359BC3E00D06952 /* CampaignService.swift */; };
+		9875910A24D1745D00D986C7 /* FilterCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9875910924D1745D00D986C7 /* FilterCategoriesView.swift */; };
+		9875910B24D1745D00D986C7 /* FilterCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9875910924D1745D00D986C7 /* FilterCategoriesView.swift */; };
+		9875910C24D1745D00D986C7 /* FilterCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9875910924D1745D00D986C7 /* FilterCategoriesView.swift */; };
+		9875910D24D1745D00D986C7 /* FilterCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9875910924D1745D00D986C7 /* FilterCategoriesView.swift */; };
+		9875910E24D1745D00D986C7 /* FilterCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9875910924D1745D00D986C7 /* FilterCategoriesView.swift */; };
+		9875910F24D1745D00D986C7 /* FilterCategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9875910924D1745D00D986C7 /* FilterCategoriesView.swift */; };
+		9875911124D1746C00D986C7 /* FilterCategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9875911024D1746C00D986C7 /* FilterCategoriesView.xib */; };
+		9875911224D1746C00D986C7 /* FilterCategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9875911024D1746C00D986C7 /* FilterCategoriesView.xib */; };
+		9875911324D1746C00D986C7 /* FilterCategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9875911024D1746C00D986C7 /* FilterCategoriesView.xib */; };
+		9875911424D1746C00D986C7 /* FilterCategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9875911024D1746C00D986C7 /* FilterCategoriesView.xib */; };
+		9875911524D1746C00D986C7 /* FilterCategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9875911024D1746C00D986C7 /* FilterCategoriesView.xib */; };
+		9875911624D1746C00D986C7 /* FilterCategoriesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9875911024D1746C00D986C7 /* FilterCategoriesView.xib */; };
+		9875911924D1762800D986C7 /* FilterCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9875911724D1762800D986C7 /* FilterCategoryCell.swift */; };
+		9875911A24D1762800D986C7 /* FilterCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9875911724D1762800D986C7 /* FilterCategoryCell.swift */; };
+		9875911B24D1762800D986C7 /* FilterCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9875911724D1762800D986C7 /* FilterCategoryCell.swift */; };
+		9875911C24D1762800D986C7 /* FilterCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9875911724D1762800D986C7 /* FilterCategoryCell.swift */; };
+		9875911D24D1762800D986C7 /* FilterCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9875911724D1762800D986C7 /* FilterCategoryCell.swift */; };
+		9875911E24D1762800D986C7 /* FilterCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9875911724D1762800D986C7 /* FilterCategoryCell.swift */; };
+		9875911F24D1762800D986C7 /* FilterCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9875911824D1762800D986C7 /* FilterCategoryCell.xib */; };
+		9875912024D1762800D986C7 /* FilterCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9875911824D1762800D986C7 /* FilterCategoryCell.xib */; };
+		9875912124D1762800D986C7 /* FilterCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9875911824D1762800D986C7 /* FilterCategoryCell.xib */; };
+		9875912224D1762800D986C7 /* FilterCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9875911824D1762800D986C7 /* FilterCategoryCell.xib */; };
+		9875912324D1762800D986C7 /* FilterCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9875911824D1762800D986C7 /* FilterCategoryCell.xib */; };
+		9875912424D1762800D986C7 /* FilterCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9875911824D1762800D986C7 /* FilterCategoryCell.xib */; };
 		9877FABA23B62AE800DA6C63 /* FaceImagePhotosDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9877FAB923B62AE800DA6C63 /* FaceImagePhotosDataSource.swift */; };
 		9877FABB23B62AE800DA6C63 /* FaceImagePhotosDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9877FAB923B62AE800DA6C63 /* FaceImagePhotosDataSource.swift */; };
 		9877FABC23B62AE800DA6C63 /* FaceImagePhotosDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9877FAB923B62AE800DA6C63 /* FaceImagePhotosDataSource.swift */; };
@@ -4935,6 +5031,18 @@
 		9886113A240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98861138240FF4DB00A49C5B /* BecomePremiumViewSourceType.swift */; };
 		9886113B240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98861138240FF4DB00A49C5B /* BecomePremiumViewSourceType.swift */; };
 		9886113C240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98861138240FF4DB00A49C5B /* BecomePremiumViewSourceType.swift */; };
+		988CD63F24D1613C00C81241 /* PhotoEditTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988CD63E24D1613C00C81241 /* PhotoEditTabbar.swift */; };
+		988CD64024D1613C00C81241 /* PhotoEditTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988CD63E24D1613C00C81241 /* PhotoEditTabbar.swift */; };
+		988CD64124D1613C00C81241 /* PhotoEditTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988CD63E24D1613C00C81241 /* PhotoEditTabbar.swift */; };
+		988CD64224D1613C00C81241 /* PhotoEditTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988CD63E24D1613C00C81241 /* PhotoEditTabbar.swift */; };
+		988CD64324D1613C00C81241 /* PhotoEditTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988CD63E24D1613C00C81241 /* PhotoEditTabbar.swift */; };
+		988CD64424D1613C00C81241 /* PhotoEditTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988CD63E24D1613C00C81241 /* PhotoEditTabbar.swift */; };
+		988CD64624D1618500C81241 /* PhotoEditTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 988CD64524D1618500C81241 /* PhotoEditTabbar.xib */; };
+		988CD64724D1618500C81241 /* PhotoEditTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 988CD64524D1618500C81241 /* PhotoEditTabbar.xib */; };
+		988CD64824D1618500C81241 /* PhotoEditTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 988CD64524D1618500C81241 /* PhotoEditTabbar.xib */; };
+		988CD64924D1618500C81241 /* PhotoEditTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 988CD64524D1618500C81241 /* PhotoEditTabbar.xib */; };
+		988CD64A24D1618500C81241 /* PhotoEditTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 988CD64524D1618500C81241 /* PhotoEditTabbar.xib */; };
+		988CD64B24D1618500C81241 /* PhotoEditTabbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 988CD64524D1618500C81241 /* PhotoEditTabbar.xib */; };
 		98922292240D0C0E004155A5 /* BecomePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98922291240D0C0D004155A5 /* BecomePremiumView.swift */; };
 		98922293240D0C0E004155A5 /* BecomePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98922291240D0C0D004155A5 /* BecomePremiumView.swift */; };
 		98922294240D0C0E004155A5 /* BecomePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98922291240D0C0D004155A5 /* BecomePremiumView.swift */; };
@@ -12941,6 +13049,8 @@
 		98435B7723F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailModuleOuput.swift; sourceTree = "<group>"; };
 		9845489522FBFF4000D7F29C /* SpotifyStatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotifyStatusView.xib; sourceTree = "<group>"; };
 		9845489622FBFF4000D7F29C /* SpotifyStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyStatusView.swift; sourceTree = "<group>"; };
+		98467B6524D17F6000B6C33E /* FilterChangesBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterChangesBar.swift; sourceTree = "<group>"; };
+		98467B6C24D17F6F00B6C33E /* FilterChangesBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterChangesBar.xib; sourceTree = "<group>"; };
 		9849B5B521FF49400059F9A9 /* InstapickFreeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickFreeCell.swift; sourceTree = "<group>"; };
 		9849B5B821FF49630059F9A9 /* InstapickFreeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstapickFreeCell.xib; sourceTree = "<group>"; };
 		984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryViewController.swift; sourceTree = "<group>"; };
@@ -12996,13 +13106,27 @@
 		985D87BC24D0156A004BCDFF /* LightFilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LightFilterView.xib; sourceTree = "<group>"; };
 		985D87F024D0237D004BCDFF /* PhotoFilterViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFilterViewFactory.swift; sourceTree = "<group>"; };
 		985E9BFB2493AFD6004D70BA /* UITextView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
+		9863B88524D2AA7700664810 /* PreparedFiltersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparedFiltersView.swift; sourceTree = "<group>"; };
+		9863B88C24D2AA8000664810 /* PreparedFiltersView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreparedFiltersView.xib; sourceTree = "<group>"; };
+		9863B89424D2AB0C00664810 /* PhotoEditNavbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditNavbar.swift; sourceTree = "<group>"; };
+		9863B89B24D2AC4800664810 /* PhotoEditNavbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoEditNavbar.xib; sourceTree = "<group>"; };
+		9863B8A224D2B7D600664810 /* PreparedFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparedFilterCell.swift; sourceTree = "<group>"; };
+		9863B8A324D2B7D600664810 /* PreparedFilterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreparedFilterCell.xib; sourceTree = "<group>"; };
 		9864296722F834F10039811C /* SpotifyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyResponse.swift; sourceTree = "<group>"; };
 		9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPhotoSelectionController.swift; sourceTree = "<group>"; };
+		986AD0DC24D307FB000B0D3C /* SelectionMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMenuController.swift; sourceTree = "<group>"; };
+		986AD0DD24D307FB000B0D3C /* SelectionMenuController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionMenuController.xib; sourceTree = "<group>"; };
+		986AD0EA24D30929000B0D3C /* SelectionMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMenuCell.swift; sourceTree = "<group>"; };
+		986AD0EB24D30929000B0D3C /* SelectionMenuCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectionMenuCell.xib; sourceTree = "<group>"; };
 		986B20612077684B00E04B96 /* StreamReaderWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReaderWriter.swift; sourceTree = "<group>"; };
 		9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewModuleInput.swift; sourceTree = "<group>"; };
 		98732B3E2460168900E9D5D2 /* ElementTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementTypes.swift; sourceTree = "<group>"; };
 		98732B592461459200E9D5D2 /* APILogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APILogger.swift; sourceTree = "<group>"; };
 		98758F602359BC3E00D06952 /* CampaignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignService.swift; sourceTree = "<group>"; };
+		9875910924D1745D00D986C7 /* FilterCategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCategoriesView.swift; sourceTree = "<group>"; };
+		9875911024D1746C00D986C7 /* FilterCategoriesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterCategoriesView.xib; sourceTree = "<group>"; };
+		9875911724D1762800D986C7 /* FilterCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCategoryCell.swift; sourceTree = "<group>"; };
+		9875911824D1762800D986C7 /* FilterCategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterCategoryCell.xib; sourceTree = "<group>"; };
 		9877FAB923B62AE800DA6C63 /* FaceImagePhotosDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosDataSource.swift; sourceTree = "<group>"; };
 		98792DCD22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyImportedPlaylistsViewController.swift; sourceTree = "<group>"; };
 		98792DCE22FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpotifyImportedPlaylistsViewController.xib; sourceTree = "<group>"; };
@@ -13012,6 +13136,8 @@
 		98792DE122FD5CD9000A77E5 /* SpotifyImportedPlaylistsNavbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyImportedPlaylistsNavbarManager.swift; sourceTree = "<group>"; };
 		98792DE522FD83BF000A77E5 /* SpotifyImportedTracksNavbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyImportedTracksNavbarManager.swift; sourceTree = "<group>"; };
 		98861138240FF4DB00A49C5B /* BecomePremiumViewSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BecomePremiumViewSourceType.swift; sourceTree = "<group>"; };
+		988CD63E24D1613C00C81241 /* PhotoEditTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditTabbar.swift; sourceTree = "<group>"; };
+		988CD64524D1618500C81241 /* PhotoEditTabbar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoEditTabbar.xib; sourceTree = "<group>"; };
 		98922291240D0C0D004155A5 /* BecomePremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BecomePremiumView.swift; sourceTree = "<group>"; };
 		98922298240D0C3C004155A5 /* BecomePremiumView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BecomePremiumView.xib; sourceTree = "<group>"; };
 		989686CA24C969FF00171375 /* PHPhotoLibrary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHPhotoLibrary+Extensions.swift"; sourceTree = "<group>"; };
@@ -18519,6 +18645,15 @@
 			path = SpotifyStatusView;
 			sourceTree = "<group>";
 		};
+		98467B6124D17F2E00B6C33E /* FilterChangesBar */ = {
+			isa = PBXGroup;
+			children = (
+				98467B6524D17F6000B6C33E /* FilterChangesBar.swift */,
+				98467B6C24D17F6F00B6C33E /* FilterChangesBar.xib */,
+			);
+			path = FilterChangesBar;
+			sourceTree = "<group>";
+		};
 		984A511321E72A29004525F5 /* InstaPick */ = {
 			isa = PBXGroup;
 			children = (
@@ -18692,6 +18827,12 @@
 		985D87B424D0156A004BCDFF /* PhotoEditViews */ = {
 			isa = PBXGroup;
 			children = (
+				986AD0DB24D307CA000B0D3C /* SelectionMenuController */,
+				9863B89324D2AAD600664810 /* Navbar */,
+				9863B88124D2AA5700664810 /* PreparedFiltersView */,
+				98467B6124D17F2E00B6C33E /* FilterChangesBar */,
+				988CD63D24D1611900C81241 /* Tabbar */,
+				9875910524D171BD00D986C7 /* FilterCategoriesView */,
 				98D7212724D05B9C001D2896 /* FilterViews */,
 				989FEFE024D062C0008F7191 /* SliderView */,
 				985D87BA24D0156A004BCDFF /* FilterViewController.xib */,
@@ -18701,12 +18842,54 @@
 			path = PhotoEditViews;
 			sourceTree = "<group>";
 		};
+		9863B88124D2AA5700664810 /* PreparedFiltersView */ = {
+			isa = PBXGroup;
+			children = (
+				9863B88524D2AA7700664810 /* PreparedFiltersView.swift */,
+				9863B88C24D2AA8000664810 /* PreparedFiltersView.xib */,
+				9863B8A224D2B7D600664810 /* PreparedFilterCell.swift */,
+				9863B8A324D2B7D600664810 /* PreparedFilterCell.xib */,
+			);
+			path = PreparedFiltersView;
+			sourceTree = "<group>";
+		};
+		9863B89324D2AAD600664810 /* Navbar */ = {
+			isa = PBXGroup;
+			children = (
+				9863B89424D2AB0C00664810 /* PhotoEditNavbar.swift */,
+				9863B89B24D2AC4800664810 /* PhotoEditNavbar.xib */,
+			);
+			path = Navbar;
+			sourceTree = "<group>";
+		};
+		986AD0DB24D307CA000B0D3C /* SelectionMenuController */ = {
+			isa = PBXGroup;
+			children = (
+				986AD0DC24D307FB000B0D3C /* SelectionMenuController.swift */,
+				986AD0DD24D307FB000B0D3C /* SelectionMenuController.xib */,
+				986AD0EA24D30929000B0D3C /* SelectionMenuCell.swift */,
+				986AD0EB24D30929000B0D3C /* SelectionMenuCell.xib */,
+			);
+			path = SelectionMenuController;
+			sourceTree = "<group>";
+		};
 		98758F5F2359BC1900D06952 /* CampaignService */ = {
 			isa = PBXGroup;
 			children = (
 				98758F602359BC3E00D06952 /* CampaignService.swift */,
 			);
 			path = CampaignService;
+			sourceTree = "<group>";
+		};
+		9875910524D171BD00D986C7 /* FilterCategoriesView */ = {
+			isa = PBXGroup;
+			children = (
+				9875910924D1745D00D986C7 /* FilterCategoriesView.swift */,
+				9875911024D1746C00D986C7 /* FilterCategoriesView.xib */,
+				9875911724D1762800D986C7 /* FilterCategoryCell.swift */,
+				9875911824D1762800D986C7 /* FilterCategoryCell.xib */,
+			);
+			path = FilterCategoriesView;
 			sourceTree = "<group>";
 		};
 		98792DCB22FD47EF000A77E5 /* ImportedPlaylists */ = {
@@ -18727,6 +18910,15 @@
 				98792DE522FD83BF000A77E5 /* SpotifyImportedTracksNavbarManager.swift */,
 			);
 			path = ImportedTracks;
+			sourceTree = "<group>";
+		};
+		988CD63D24D1611900C81241 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				988CD63E24D1613C00C81241 /* PhotoEditTabbar.swift */,
+				988CD64524D1618500C81241 /* PhotoEditTabbar.xib */,
+			);
+			path = Tabbar;
 			sourceTree = "<group>";
 		};
 		989BDE2622F47B1E001DDEB2 /* Spotify */ = {
@@ -23217,7 +23409,11 @@
 				0303A55C2397D0D000907F42 /* HomeViewTopView.xib in Resources */,
 				0303A55D2397D0D000907F42 /* TermsCheckboxTextView.xib in Resources */,
 				0303A55E2397D0D000907F42 /* LoginViewController.xib in Resources */,
+				988CD64924D1618500C81241 /* PhotoEditTabbar.xib in Resources */,
 				98DBC04F2410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
+				0303A55F2397D0D000907F42 /* undo.png in Resources */,
+				9863B8AD24D2B7D600664810 /* PreparedFilterCell.xib in Resources */,
+				0303A5602397D0D000907F42 /* tik_icon@3x.png in Resources */,
 				0303A5612397D0D000907F42 /* LandingCollectionViewCell.xib in Resources */,
 				0303A5652397D0D000907F42 /* OptInController.xib in Resources */,
 				0303A5662397D0D000907F42 /* FaceImageChangeCoverViewController.xib in Resources */,
@@ -23278,6 +23474,11 @@
 				CF7146EA24B597A900D83E60 /* DeleteDuplicatesCell.xib in Resources */,
 				CF71465A24B597A800D83E60 /* ContactSyncSmallCardView.xib in Resources */,
 				0303A5CD2397D0D000907F42 /* CollectionViewCellForFaceImageAddName.xib in Resources */,
+				0303A5CE2397D0D000907F42 /* ok_selected@3x.png in Resources */,
+				0303A5CF2397D0D000907F42 /* oval_beyaz.png in Resources */,
+				0303A5D02397D0D000907F42 /* text@2x.png in Resources */,
+				0303A5D12397D0D000907F42 /* cancel_buton.png in Resources */,
+				986AD0F524D30929000B0D3C /* SelectionMenuCell.xib in Resources */,
 				0303A5D22397D0D000907F42 /* SpotifyPlaylistsViewController.xib in Resources */,
 				0303A5D52397D0D000907F42 /* InstaPickSmartAlbumCell.xib in Resources */,
 				0303A5D82397D0D000907F42 /* CaptchaView.xib in Resources */,
@@ -23322,6 +23523,8 @@
 				0303A6272397D0D000907F42 /* TermsOfUseViewController.xib in Resources */,
 				0303A62A2397D0D000907F42 /* AnalyzeHistoryViewController.xib in Resources */,
 				89E3409524747CBF00EB68C3 /* PeopleCollectionViewCell.xib in Resources */,
+				98467B7024D17F6F00B6C33E /* FilterChangesBar.xib in Resources */,
+				0303A62D2397D0D000907F42 /* bottomright@3x.png in Resources */,
 				0303A62E2397D0D000907F42 /* OurLocalizable.strings in Resources */,
 				0303A62F2397D0D000907F42 /* SecretAnswerView.xib in Resources */,
 				985D87D524D0156A004BCDFF /* FilterSliderView.xib in Resources */,
@@ -23368,9 +23571,21 @@
 				0303A6912397D0D000907F42 /* PremiumInfoCard.xib in Resources */,
 				0303A6962397D0D000907F42 /* SuggestionTableViewCell.xib in Resources */,
 				0303A6982397D0D000907F42 /* GridListTopBar.xib in Resources */,
+				0303A6992397D0D000907F42 /* Orta@2x.png in Resources */,
+				0303A69A2397D0D000907F42 /* refresh@3x.png in Resources */,
+				9875912224D1762800D986C7 /* FilterCategoryCell.xib in Resources */,
+				0303A69B2397D0D000907F42 /* lookup_miss_etikate.png in Resources */,
+				0303A69C2397D0D000907F42 /* parlaklik_secili@2x.png in Resources */,
+				0303A69D2397D0D000907F42 /* error_icon.png in Resources */,
+				0303A69E2397D0D000907F42 /* crop_icon@2x.png in Resources */,
 				98A86D6023A2415D00438225 /* AlbumsSliderCell.xib in Resources */,
 				0303A69F2397D0D000907F42 /* CollectionViewCellForPhoto.xib in Resources */,
 				0303A6A02397D0D000907F42 /* TurkcellSaturaDemIta.ttf in Resources */,
+				0303A6A12397D0D000907F42 /* bold_secili@3x.png in Resources */,
+				0303A6A22397D0D000907F42 /* close_icon@3x.png in Resources */,
+				0303A6A32397D0D000907F42 /* yesil@3x.png in Resources */,
+				9863B89024D2AA8000664810 /* PreparedFiltersView.xib in Resources */,
+				0303A6A42397D0D000907F42 /* serbest_cizgi_selected@3x.png in Resources */,
 				0303A6A52397D0D000907F42 /* CreateStoryPreviewViewController.xib in Resources */,
 				0303A6A62397D0D000907F42 /* SpotifyImportViewController.xib in Resources */,
 				CF71472C24B597AA00D83E60 /* ContactSyncOperationResultController.xib in Resources */,
@@ -23441,6 +23656,12 @@
 				0303A7482397D0D000907F42 /* WaitingForWiFiPopUp.xib in Resources */,
 				0303A74B2397D0D000907F42 /* ConnectWithInstaView.xib in Resources */,
 				0303A74E2397D0D000907F42 /* VerifyEmailPopUp.xib in Resources */,
+				0303A74F2397D0D000907F42 /* kontrast.png in Resources */,
+				0303A7502397D0D000907F42 /* status_badge.png in Resources */,
+				9875911424D1746C00D986C7 /* FilterCategoriesView.xib in Resources */,
+				0303A7512397D0D000907F42 /* rotation_secili@2x.png in Resources */,
+				0303A7522397D0D000907F42 /* frekans_secili@3x.png in Resources */,
+				0303A7532397D0D000907F42 /* edit_selected@3x.png in Resources */,
 				0303A7542397D0D000907F42 /* PasswordCell.xib in Resources */,
 				0303A7562397D0D000907F42 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
 				0303A7572397D0D000907F42 /* QuestionCell.xib in Resources */,
@@ -23448,10 +23669,17 @@
 				0303A75C2397D0D000907F42 /* AnalyzeHistoryEmptyCell.xib in Resources */,
 				89CC89F923AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib in Resources */,
 				0303A75F2397D0D000907F42 /* ForgotPasswordViewController.xib in Resources */,
+				0303A7602397D0D000907F42 /* cropy_icon.png in Resources */,
+				0303A7612397D0D000907F42 /* caps2_selected.png in Resources */,
+				9863B89F24D2AC4800664810 /* PhotoEditNavbar.xib in Resources */,
 				0303A7622397D0D000907F42 /* SettingsViewController.xib in Resources */,
 				0303A7642397D0D000907F42 /* TBMatikPhotosViewController.xib in Resources */,
 				0303A7672397D0D000907F42 /* PackagePremiumView.xib in Resources */,
 				0303A7682397D0D000907F42 /* SpotifyAccountConnectionCell.xib in Resources */,
+				0303A7692397D0D000907F42 /* paylas_bip@3x.png in Resources */,
+				0303A76A2397D0D000907F42 /* Turkcell_Satura_Regular.ttf in Resources */,
+				986AD0E724D307FB000B0D3C /* SelectionMenuController.xib in Resources */,
+				0303A76B2397D0D000907F42 /* parlaklik_secili.png in Resources */,
 				0303A76C2397D0D000907F42 /* PeriodicContactSyncSettingsTableViewCell.xib in Resources */,
 				89EA4F82240902C400A2C543 /* PackagesTableViewCell.xib in Resources */,
 				0303A76E2397D0D000907F42 /* ActionsMenuView.xib in Resources */,
@@ -23647,6 +23875,9 @@
 				98A86D4E23A2208800438225 /* HiddenPhotosViewController.xib in Resources */,
 				B50B4A6C220C27C20056FC86 /* SocialAccountRemoveConnectionCell.xib in Resources */,
 				A2EF976C21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */,
+				8C06B0692008AD71003D8E05 /* Paylas_butnuna_basin@3x.png in Resources */,
+				8C06B0292008AD71003D8E05 /* ok_btn_kucuk.png in Resources */,
+				9875912024D1762800D986C7 /* FilterCategoryCell.xib in Resources */,
 				8C0E90101FDEBDFF00789C91 /* SplashViewController.xib in Resources */,
 				B5AB2F092204356400E3AF23 /* InstaPickSmartAlbumCell.xib in Resources */,
 				8C86111122BCF28600108958 /* TermsAndPolicyViewController.xib in Resources */,
@@ -23663,6 +23894,14 @@
 				CF8B72FB23CBD1D70021B021 /* SettingsTC.bundle in Resources */,
 				8C0E901A1FDEBDFF00789C91 /* AudioSelectionCollectionViewCell.xib in Resources */,
 				CF71465224B597A800D83E60 /* ContactSyncBigCardView.xib in Resources */,
+				8C06AFB92008AD71003D8E05 /* frekans_secili@3x.png in Resources */,
+				8C06B15D2008AD72003D8E05 /* tik_icon@3x.png in Resources */,
+				8C06B08B2008AD71003D8E05 /* paylas_twitter@2x.png in Resources */,
+				8C06B1272008AD72003D8E05 /* t_kucuk@3x.png in Resources */,
+				988CD64724D1618500C81241 /* PhotoEditTabbar.xib in Resources */,
+				8C06B06B2008AD71003D8E05 /* paylas_diger.png in Resources */,
+				8C06AED92008AD70003D8E05 /* bold@3x.png in Resources */,
+				8C06AF4F2008AD70003D8E05 /* crop_selected@3x.png in Resources */,
 				985D87EB24D0156B004BCDFF /* LightFilterView.xib in Resources */,
 				8C0E901C1FDEBDFF00789C91 /* CollectionViewCellForStoryPhoto.xib in Resources */,
 				9219B19D21ECB7B900098021 /* InstaPickHashtagCell.xib in Resources */,
@@ -23695,6 +23934,9 @@
 				8C0E902A1FDEBDFF00789C91 /* InstagramAuthViewController.xib in Resources */,
 				734CA11A244D64150076F6A7 /* DocumentsAlbumCard.xib in Resources */,
 				17589F7D2276336800A5DB37 /* ProfilePhoneEnterView.xib in Resources */,
+				8C06AF672008AD70003D8E05 /* duz_cizgi@2x.png in Resources */,
+				8C06B1992008AD72003D8E05 /* vintage@2x.png in Resources */,
+				98467B6E24D17F6F00B6C33E /* FilterChangesBar.xib in Resources */,
 				9855608D24D06DFF00035361 /* ColorCell.xib in Resources */,
 				8C23F2922286C95600C5BF9E /* SingleThumbnailAlbumCell.xib in Resources */,
 				4A56D5CB202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib in Resources */,
@@ -23705,6 +23947,8 @@
 				8C0E902B1FDEBDFF00789C91 /* TurkcellSaturaMed.ttf in Resources */,
 				8C0E902D1FDEBDFF00789C91 /* RegistrationScreen.xib in Resources */,
 				8934DD6E23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */,
+				9863B89D24D2AC4800664810 /* PhotoEditNavbar.xib in Resources */,
+				8C06AF6F2008AD70003D8E05 /* duz_cizgi_selected@3x.png in Resources */,
 				8C0E902F1FDEBDFF00789C91 /* ActivityTimelineTimeCell.xib in Resources */,
 				8C0E90311FDEBDFF00789C91 /* FeedbackViewController.xib in Resources */,
 				CF7146DC24B597A900D83E60 /* DeleteDuplicatesMainView.xib in Resources */,
@@ -23764,6 +24008,9 @@
 				8C0E90471FDEBDFF00789C91 /* ActivityTimelineFileCell.xib in Resources */,
 				8C0E90491FDEBDFF00789C91 /* EditinglBar.xib in Resources */,
 				8C0E904A1FDEBDFF00789C91 /* AlbumCollectionViewCell.xib in Resources */,
+				8C06B0372008AD71003D8E05 /* Orta@2x.png in Resources */,
+				986AD0F324D30929000B0D3C /* SelectionMenuCell.xib in Resources */,
+				8C06B0832008AD71003D8E05 /* paylas_mail.png in Resources */,
 				8C3930F02100668300C1D82D /* GoogleService-Info-ent.plist in Resources */,
 				8C0E904D1FDEBDFF00789C91 /* IntroduceViewController.xib in Resources */,
 				4A6DBE8E21A6F93E0003D1B4 /* PremiumListView.xib in Resources */,
@@ -23771,12 +24018,24 @@
 				CEFFA8F321AFC27900B34F36 /* SegmentedController.xib in Resources */,
 				8C0E904E1FDEBDFF00789C91 /* FileInfoViewController.xib in Resources */,
 				CEE3B7CF225791D900B99FE7 /* ChangePasswordController.xib in Resources */,
+				8C06B1632008AD72003D8E05 /* toolbar_ciz_icon@3x.png in Resources */,
+				8C06B1752008AD72003D8E05 /* toolbar_undo_icon@3x.png in Resources */,
+				986AD0E524D307FB000B0D3C /* SelectionMenuController.xib in Resources */,
 				A2268EC321A68C1A002F2611 /* LeavePremiumHeaderView.xib in Resources */,
 				CF7145F824B597A800D83E60 /* ContactDetailNoInfoCell.xib in Resources */,
 				C62239B6204976E40043ED44 /* FaceImagePhotosViewController.xib in Resources */,
 				989BDE3B22F47B1E001DDEB2 /* SpotifyPlaylistsViewController.xib in Resources */,
 				8C0E90501FDEBDFF00789C91 /* TurkcellSaturaDem.ttf in Resources */,
 				98AA104623585E0C00B12485 /* CampaignDetailViewController.xib in Resources */,
+				8C06B16B2008AD72003D8E05 /* toolbar_sekil_icon.png in Resources */,
+				8C06AF172008AD70003D8E05 /* cizgi_1@2x.png in Resources */,
+				8C06B0512008AD71003D8E05 /* parlaklik@3x.png in Resources */,
+				8C06B1CF2008AD72003D8E05 /* sticker_resize@2x.png in Resources */,
+				8C06B0BD2008AD71003D8E05 /* rotation_secili@2x.png in Resources */,
+				8C06B0D52008AD71003D8E05 /* sample_oldie@2x.png in Resources */,
+				9875911224D1746C00D986C7 /* FilterCategoriesView.xib in Resources */,
+				8C06B1552008AD72003D8E05 /* text_selected@2x.png in Resources */,
+				8C06AEFD2008AD70003D8E05 /* caps2@2x.png in Resources */,
 				8C0E90511FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.xib in Resources */,
 				CF7145FE24B597A800D83E60 /* ContactDetailCell.xib in Resources */,
 				98E792D6203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib in Resources */,
@@ -23802,7 +24061,20 @@
 				730A997522D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				735766E923AE1B34008589E9 /* StickerCollectionViewCell.xib in Resources */,
 				B5B6B1542170A01E00463260 /* PrepareQuickScroll.xib in Resources */,
+				8C06AED12008AD70003D8E05 /* beyaz_cerceve@2x.png in Resources */,
+				8C06B1212008AD72003D8E05 /* t_buyuk_selected@3x.png in Resources */,
+				8C06AF152008AD70003D8E05 /* cizgi_1.png in Resources */,
+				8C06B0A12008AD71003D8E05 /* refreshicon.png in Resources */,
+				8C06B1732008AD72003D8E05 /* toolbar_undo_icon@2x.png in Resources */,
+				8C06AFCB2008AD71003D8E05 /* header_icon@3x.png in Resources */,
+				9863B88E24D2AA8000664810 /* PreparedFiltersView.xib in Resources */,
 				B5AB5B6D21F9B029003AABB4 /* FacebookAccountConnectionCell.xib in Resources */,
+				8C06B1AD2008AD72003D8E05 /* CRYFrameCell.nib in Resources */,
+				8C06B0F52008AD72003D8E05 /* serbest_cizgi_selected@2x.png in Resources */,
+				9863B8AB24D2B7D600664810 /* PreparedFilterCell.xib in Resources */,
+				8C06B13D2008AD72003D8E05 /* tahta_yeni@2x.png in Resources */,
+				8C06B0C92008AD71003D8E05 /* sample@3x.png in Resources */,
+				8C06B0A92008AD71003D8E05 /* renk_selected@2x.png in Resources */,
 				98DBC04D2410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
 				8C0E90581FDEBDFF00789C91 /* SwipeableCardCell.xib in Resources */,
 				8CF6A9C4207C8CF9007DEF71 /* CollectionViewSpinnerFooter.xib in Resources */,
@@ -24113,6 +24385,8 @@
 				8C6EF8821F348B5C002AC795 /* BottomSelectionTabBarViewController.xib in Resources */,
 				CEB27349205BE3DC00E1AE9C /* EmailEnterController.xib in Resources */,
 				8CF6A9C3207C8CF9007DEF71 /* CollectionViewSpinnerFooter.xib in Resources */,
+				8C06B0D62008AD71003D8E05 /* sample_oldie@3x.png in Resources */,
+				986AD0E424D307FB000B0D3C /* SelectionMenuController.xib in Resources */,
 				73FE51FF22CF5EC300270448 /* CreateStoryAudioItemCell.xib in Resources */,
 				985786F723E01F8800D35DDA /* SettingFooterView.xib in Resources */,
 				B57D854023D9EFBE0057B5D6 /* Localizable.strings in Resources */,
@@ -24227,6 +24501,14 @@
 				CE51AEEB1EF90853005DCEE0 /* inputCell.xib in Resources */,
 				CE7040AF22EB180D00124073 /* SupportFormPrefilledController.xib in Resources */,
 				4BF3A68D22B2690A0082130F /* PermissionsView.xib in Resources */,
+				9863B89C24D2AC4800664810 /* PhotoEditNavbar.xib in Resources */,
+				8C06AF302008AD70003D8E05 /* cizgi_3@3x.png in Resources */,
+				8C06AFC82008AD71003D8E05 /* header_icon@2x.png in Resources */,
+				8C06AF2A2008AD70003D8E05 /* cizgi_2_selected@3x.png in Resources */,
+				8C06B02E2008AD71003D8E05 /* ok_selected.png in Resources */,
+				8C06B0A22008AD71003D8E05 /* refreshicon@2x.png in Resources */,
+				8C06B0CC2008AD71003D8E05 /* sample_bw@3x.png in Resources */,
+				8C06AFDE2008AD71003D8E05 /* italic_secili.png in Resources */,
 				A2268EB921A688DB002F2611 /* LeavePremiumViewController.xib in Resources */,
 				7C3A74551F07B20600124DF5 /* PhotoVideoDetailViewController.xib in Resources */,
 				CE44714E1F6962F00017B4F0 /* ActivityTimelineViewController.xib in Resources */,
@@ -24237,6 +24519,7 @@
 				B5AB5B6C21F9B029003AABB4 /* FacebookAccountConnectionCell.xib in Resources */,
 				73A63F6A22B240310062DDE5 /* TermsAndPolicyViewController.xib in Resources */,
 				98D7212124D05AE4001D2896 /* ColorFilterView.xib in Resources */,
+				9863B88D24D2AA8000664810 /* PreparedFiltersView.xib in Resources */,
 				7C3A74331F04DDD300124DF5 /* BaseFilesGreedViewController.xib in Resources */,
 				7CEE2724209C560500EF6C79 /* PageForLanding.xib in Resources */,
 				CEBBDE0D1F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf in Resources */,
@@ -24255,6 +24538,7 @@
 				CEBBDE0A1F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf in Resources */,
 				CEEB7A9B20A5BC230070FDC2 /* InfoPlist.strings in Resources */,
 				7CED0B111F21ECDE0016CE0C /* BasicCollectionMultiFileCell.xib in Resources */,
+				986AD0F224D30929000B0D3C /* SelectionMenuCell.xib in Resources */,
 				B5AB5B6621F9B01B003AABB4 /* DropboxAccountConnectionCell.xib in Resources */,
 				7C3B186F1FE0153E00FF3C39 /* PrepareToAutoSync.xib in Resources */,
 				89CC89F723AA1308003C58BB /* HSSmartAlbumWarningPopUp.xib in Resources */,
@@ -24330,12 +24614,18 @@
 				CE51AFB71EF90853005DCEE0 /* PasswordCell.xib in Resources */,
 				8C20864B228D4B2E000BEDAD /* PhotoVideoController.xib in Resources */,
 				CEAE3FD71EFD500B00A405B2 /* BaseCollectionViewCellWithSwipe.xib in Resources */,
+				8C06B0822008AD71003D8E05 /* paylas_mail.png in Resources */,
+				988CD64624D1618500C81241 /* PhotoEditTabbar.xib in Resources */,
+				8C06AEF62008AD70003D8E05 /* cancel_buton@2x.png in Resources */,
 				CE634AFB230ED69900CED18C /* PaymentTypeView.xib in Resources */,
 				7C4F60B3201C675F0033C58F /* MovieCard.xib in Resources */,
 				CE51AFD11EF90853005DCEE0 /* ForgotPasswordViewController.xib in Resources */,
 				CF71468724B597A900D83E60 /* ContactSyncAnalyzeProgressView.xib in Resources */,
 				7C634FA51F0F8BA200B5B93D /* SettingsViewController.xib in Resources */,
+				9875911F24D1762800D986C7 /* FilterCategoryCell.xib in Resources */,
 				CF71469924B597A900D83E60 /* ContactsBackupHistoryView.xib in Resources */,
+				9863B8AA24D2B7D600664810 /* PreparedFilterCell.xib in Resources */,
+				8C06B1862008AD72003D8E05 /* underline@2x.png in Resources */,
 				734CA119244D64150076F6A7 /* DocumentsAlbumCard.xib in Resources */,
 				4A26E66E21A6E7F00033B797 /* PackagePremiumView.xib in Resources */,
 				4A9F8E5520875A4300622A6C /* PeriodicContactSyncSettingsTableViewCell.xib in Resources */,
@@ -24357,6 +24647,11 @@
 				989BDE5222F47B1E001DDEB2 /* SpotifyPlaylistCollectionViewCell.xib in Resources */,
 				98DBC04C2410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
 				CEC3C2441FB99AF800C3D67F /* PasscodeSettingsViewController.xib in Resources */,
+				8C06B03A2008AD71003D8E05 /* Orta_Selected.png in Resources */,
+				8C06B1802008AD72003D8E05 /* turuncu@2x.png in Resources */,
+				8C06B0B42008AD71003D8E05 /* rotate@3x.png in Resources */,
+				8C06AFC62008AD71003D8E05 /* header_icon.png in Resources */,
+				9875911124D1746C00D986C7 /* FilterCategoriesView.xib in Resources */,
 				CE634AF6230EAAA700CED18C /* PaymentPopUpController.xib in Resources */,
 				A2268EC221A68C1A002F2611 /* LeavePremiumHeaderView.xib in Resources */,
 				985D87C024D0156A004BCDFF /* AdjustFilterView.xib in Resources */,
@@ -24366,6 +24661,15 @@
 				7CD7C2A620189E24009F6D3D /* StorageCard.xib in Resources */,
 				B5AB5B7221F9B040003AABB4 /* InstagramAccountConnectionCell.xib in Resources */,
 				CF71468124B597A900D83E60 /* ContactSyncNoBackupView.xib in Resources */,
+				8C06AF5A2008AD70003D8E05 /* daire@3x.png in Resources */,
+				8C06AEB82008AD70003D8E05 /* akilli_depo_beyaz@2x.png in Resources */,
+				98467B6D24D17F6F00B6C33E /* FilterChangesBar.xib in Resources */,
+				8C06AED22008AD70003D8E05 /* beyaz_cerceve@3x.png in Resources */,
+				8C06AFE42008AD71003D8E05 /* kare.png in Resources */,
+				8C06B0AC2008AD71003D8E05 /* right@2x.png in Resources */,
+				8C06B1262008AD72003D8E05 /* t_kucuk@3x.png in Resources */,
+				8C06B15A2008AD72003D8E05 /* tik_icon@2x.png in Resources */,
+				8C06AECE2008AD70003D8E05 /* beyaz_cerceve.png in Resources */,
 				98A86D5E23A2415D00438225 /* AlbumsSliderCell.xib in Resources */,
 				CEBBDE081F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf in Resources */,
 				CF71460924B597A800D83E60 /* ContactDetailHeader.xib in Resources */,
@@ -24468,6 +24772,11 @@
 				CE784D2F22A685FB00662219 /* FaceImageViewController.xib in Resources */,
 				CE784D3122A685FB00662219 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				CE784D3322A685FB00662219 /* CollectionViewCellForFaceImageAddName.xib in Resources */,
+				CE784D3422A685FB00662219 /* ok_selected@3x.png in Resources */,
+				9875912324D1762800D986C7 /* FilterCategoryCell.xib in Resources */,
+				CE784D3522A685FB00662219 /* oval_beyaz.png in Resources */,
+				CE784D3622A685FB00662219 /* text@2x.png in Resources */,
+				CE784D3722A685FB00662219 /* cancel_buton.png in Resources */,
 				989BDE3C22F47B1E001DDEB2 /* SpotifyPlaylistsViewController.xib in Resources */,
 				A74ADA3F23A2AC40007DD192 /* DivorceCard.xib in Resources */,
 				CE784D3A22A685FB00662219 /* InstaPickSmartAlbumCell.xib in Resources */,
@@ -24484,6 +24793,10 @@
 				CF71465524B597A800D83E60 /* ContactSyncBigCardView.xib in Resources */,
 				CE784D5D22A685FB00662219 /* FreeUpSpacePopUp.xib in Resources */,
 				CE784D6022A685FB00662219 /* SelectNameViewController.xib in Resources */,
+				988CD64A24D1618500C81241 /* PhotoEditTabbar.xib in Resources */,
+				CE784D6122A685FB00662219 /* cizgi_1.png in Resources */,
+				CE784D6222A685FB00662219 /* alt_cizgili.png in Resources */,
+				CE784D6322A685FB00662219 /* header_icon@3x.png in Resources */,
 				985D87EE24D0156B004BCDFF /* LightFilterView.xib in Resources */,
 				98792DD422FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.xib in Resources */,
 				CE784D6922A685FB00662219 /* FaceImageItemsViewController.xib in Resources */,
@@ -24510,6 +24823,7 @@
 				CE784D9322A685FB00662219 /* TurkcellSaturaMed.ttf in Resources */,
 				734CA11D244D64150076F6A7 /* DocumentsAlbumCard.xib in Resources */,
 				CE784D9722A685FB00662219 /* RegistrationScreen.xib in Resources */,
+				98467B7124D17F6F00B6C33E /* FilterChangesBar.xib in Resources */,
 				9855609024D06DFF00035361 /* ColorCell.xib in Resources */,
 				CE784D9822A685FB00662219 /* PremiumFooterCollectionReusableView.xib in Resources */,
 				CE784D9922A685FB00662219 /* ActivityTimelineTimeCell.xib in Resources */,
@@ -24517,6 +24831,14 @@
 				CE784D9C22A685FB00662219 /* TitleView.xib in Resources */,
 				CE784DA022A685FB00662219 /* FeedbackViewController.xib in Resources */,
 				CE784DA122A685FB00662219 /* LargeFullOfQuotaPopUp.xib in Resources */,
+				CE784DA222A685FB00662219 /* bold.png in Resources */,
+				CE784DA322A685FB00662219 /* undo@3x.png in Resources */,
+				9863B8A024D2AC4800664810 /* PhotoEditNavbar.xib in Resources */,
+				CE784DA422A685FB00662219 /* Kucuk.png in Resources */,
+				CE784DA522A685FB00662219 /* t_buyuk.png in Resources */,
+				CE784DA622A685FB00662219 /* italic_secili@2x.png in Resources */,
+				CE784DA722A685FB00662219 /* t_orta.png in Resources */,
+				CE784DA822A685FB00662219 /* refreshicon@3x.png in Resources */,
 				CE784DA922A685FB00662219 /* ActivityTimelineTableBackView.xib in Resources */,
 				CF7146DF24B597A900D83E60 /* DeleteDuplicatesMainView.xib in Resources */,
 				CE784DB422A685FB00662219 /* RecentlySearchedFaceImageTableViewCell.xib in Resources */,
@@ -24578,6 +24900,7 @@
 				CE784E1E22A685FB00662219 /* MyStorageViewController.xib in Resources */,
 				CE784E1F22A685FB00662219 /* ManageContactTableViewCell.xib in Resources */,
 				CE784E2022A685FB00662219 /* AlbumCollectionViewCell.xib in Resources */,
+				986AD0F624D30929000B0D3C /* SelectionMenuCell.xib in Resources */,
 				CE784E2122A685FB00662219 /* ContactBackupOld.xib in Resources */,
 				CE784E2422A685FB00662219 /* PremiumViewController.xib in Resources */,
 				4815689322BCF2E400376DFC /* GoogleService-Info.plist in Resources */,
@@ -24585,6 +24908,11 @@
 				989BDE5422F47B1E001DDEB2 /* SpotifyPlaylistCollectionViewCell.xib in Resources */,
 				CE784E3422A685FB00662219 /* SegmentedController.xib in Resources */,
 				CE784E3922A685FB00662219 /* PopUpController.xib in Resources */,
+				CE784E3A22A685FB00662219 /* sag_ok@2x.png in Resources */,
+				986AD0E824D307FB000B0D3C /* SelectionMenuController.xib in Resources */,
+				CE784E3B22A685FB00662219 /* duz_siyah.png in Resources */,
+				CE784E3C22A685FB00662219 /* kontrast_secili@3x.png in Resources */,
+				CE784E3D22A685FB00662219 /* focus.png in Resources */,
 				CF7145FB24B597A800D83E60 /* ContactDetailNoInfoCell.xib in Resources */,
 				CE784E3E22A685FB00662219 /* FileInfoViewController.xib in Resources */,
 				CE784E4722A685FB00662219 /* SuggestionTableSectionHeader.xib in Resources */,
@@ -24593,6 +24921,10 @@
 				CE784E4A22A685FB00662219 /* LatestUpladsCard.xib in Resources */,
 				989BDE5D22F47B1E001DDEB2 /* SpotifyPlaylistViewController.xib in Resources */,
 				CE784E4F22A685FB00662219 /* FaceImageAddNameViewController.xib in Resources */,
+				9875911524D1746C00D986C7 /* FilterCategoriesView.xib in Resources */,
+				CE784E5022A685FB00662219 /* daire@2x.png in Resources */,
+				CE784E5122A685FB00662219 /* extraOptions_selected@3x.png in Resources */,
+				CE784E5222A685FB00662219 /* sample_green.png in Resources */,
 				CF71460124B597A800D83E60 /* ContactDetailCell.xib in Resources */,
 				CE784E5422A685FB00662219 /* TurkcellSaturaDem.ttf in Resources */,
 				890F737A22EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */,
@@ -24620,7 +24952,14 @@
 				98E4B9F423C6FF70003A4631 /* TrashBinViewController.xib in Resources */,
 				CE784E8222A685FB00662219 /* GridListTopBarSortingTableCell.xib in Resources */,
 				CE784E8422A685FB00662219 /* TurkcellSaturaIta.ttf in Resources */,
+				CE784E8522A685FB00662219 /* bottomleft@2x.png in Resources */,
+				CE784E8622A685FB00662219 /* text@3x.png in Resources */,
+				9863B89124D2AA8000664810 /* PreparedFiltersView.xib in Resources */,
+				CE784E8722A685FB00662219 /* kare_selected@2x.png in Resources */,
 				CE784E8822A685FB00662219 /* PasscodeViewImp.xib in Resources */,
+				CE784E8922A685FB00662219 /* Kucuk_Selected@3x.png in Resources */,
+				9863B8AE24D2B7D600664810 /* PreparedFilterCell.xib in Resources */,
+				CE784E8A22A685FB00662219 /* t_kucuk_selected@3x.png in Resources */,
 				CE784E8B22A685FB00662219 /* SearchView.xib in Resources */,
 				CE784E8C22A685FB00662219 /* ManageContactsViewController.xib in Resources */,
 				98DBC0502410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
@@ -24763,6 +25102,9 @@
 				CF8B691D23CBC9D70021B021 /* TabBarView.xib in Resources */,
 				CF8B691E23CBC9D70021B021 /* SocialAccountRemoveConnectionCell.xib in Resources */,
 				CF8B691F23CBC9D70021B021 /* ConnectWithInstaView.xib in Resources */,
+				CF8B692023CBC9D70021B021 /* Paylas_butnuna_basin@3x.png in Resources */,
+				9875912124D1762800D986C7 /* FilterCategoryCell.xib in Resources */,
+				CF8B692123CBC9D70021B021 /* ok_btn_kucuk.png in Resources */,
 				CF8B692223CBC9D70021B021 /* SplashViewController.xib in Resources */,
 				CF8B692423CBC9D70021B021 /* InstaPickSmartAlbumCell.xib in Resources */,
 				CF8B692823CBC9D70021B021 /* TermsAndPolicyViewController.xib in Resources */,
@@ -24777,6 +25119,14 @@
 				CF8B694323CBC9D70021B021 /* CreateStoryAudioSelectionItemViewController.xib in Resources */,
 				CF8B694923CBC9D70021B021 /* AudioSelectionCollectionViewCell.xib in Resources */,
 				CF71465324B597A800D83E60 /* ContactSyncBigCardView.xib in Resources */,
+				CF8B694D23CBC9D70021B021 /* tik_icon@3x.png in Resources */,
+				CF8B694E23CBC9D70021B021 /* paylas_twitter@2x.png in Resources */,
+				CF8B694F23CBC9D70021B021 /* t_kucuk@3x.png in Resources */,
+				CF8B695023CBC9D70021B021 /* paylas_diger.png in Resources */,
+				988CD64824D1618500C81241 /* PhotoEditTabbar.xib in Resources */,
+				CF8B695123CBC9D70021B021 /* bold@3x.png in Resources */,
+				CF8B695323CBC9D70021B021 /* crop_selected@3x.png in Resources */,
+				CF8B695423CBC9D70021B021 /* polaroid_yeni.png in Resources */,
 				985D87EC24D0156B004BCDFF /* LightFilterView.xib in Resources */,
 				CF8B695523CBC9D70021B021 /* CollectionViewCellForStoryPhoto.xib in Resources */,
 				CF8B695623CBC9D70021B021 /* InstaPickHashtagCell.xib in Resources */,
@@ -24810,6 +25160,7 @@
 				734CA11B244D64150076F6A7 /* DocumentsAlbumCard.xib in Resources */,
 				CF8B698C23CBC9D70021B021 /* SingleThumbnailAlbumCell.xib in Resources */,
 				CF8B698D23CBC9D70021B021 /* CollectionViewCellForFaceImageAddName.xib in Resources */,
+				98467B6F24D17F6F00B6C33E /* FilterChangesBar.xib in Resources */,
 				9855608E24D06DFF00035361 /* ColorCell.xib in Resources */,
 				CF8B698E23CBC9D70021B021 /* Localizable.strings in Resources */,
 				985D87C224D0156A004BCDFF /* AdjustFilterView.xib in Resources */,
@@ -24819,6 +25170,11 @@
 				CF8B699423CBC9D70021B021 /* RegistrationScreen.xib in Resources */,
 				CF8B699523CBC9D70021B021 /* EmailVerifiedPopUp.xib in Resources */,
 				CF8B699723CBC9D70021B021 /* ActivityTimelineTimeCell.xib in Resources */,
+				9863B89E24D2AC4800664810 /* PhotoEditNavbar.xib in Resources */,
+				CF8B699823CBC9D70021B021 /* Buyuk.png in Resources */,
+				CF8B699923CBC9D70021B021 /* parlaklik_secili@3x.png in Resources */,
+				CF8B699A23CBC9D70021B021 /* caps2.png in Resources */,
+				CF8B699B23CBC9D70021B021 /* cropy_icon.png in Resources */,
 				CF8B699C23CBC9D70021B021 /* FeedbackViewController.xib in Resources */,
 				CF7146DD24B597A900D83E60 /* DeleteDuplicatesMainView.xib in Resources */,
 				CF8B69A123CBC9D70021B021 /* SpotifyImportedTracksViewController.xib in Resources */,
@@ -24877,6 +25233,11 @@
 				CF8B6A1A23CBC9D70021B021 /* AlbumCollectionViewCell.xib in Resources */,
 				CF8B6A1D23CBC9D70021B021 /* GoogleService-Info-ent.plist in Resources */,
 				CF8B6A1E23CBC9D70021B021 /* IntroduceViewController.xib in Resources */,
+				CF8B6A1F23CBC9D70021B021 /* filtre_selected@3x.png in Resources */,
+				986AD0F424D30929000B0D3C /* SelectionMenuCell.xib in Resources */,
+				CF8B6A2023CBC9D70021B021 /* oval_beyaz@3x.png in Resources */,
+				CF8B6A2123CBC9D70021B021 /* paylas_diger@3x.png in Resources */,
+				CF8B6A2223CBC9D70021B021 /* rotation_secili@3x.png in Resources */,
 				CF8B6A2323CBC9D70021B021 /* PremiumListView.xib in Resources */,
 				CF8B6A2723CBC9D70021B021 /* SpotifyOverwritePopup.xib in Resources */,
 				CF8B6A2E23CBC9D70021B021 /* SegmentedController.xib in Resources */,
@@ -24884,6 +25245,7 @@
 				CF8B6A3223CBC9D70021B021 /* ChangePasswordController.xib in Resources */,
 				CF8B6A3523CBC9D70021B021 /* LeavePremiumHeaderView.xib in Resources */,
 				CF8B6A3823CBC9D70021B021 /* FaceImagePhotosViewController.xib in Resources */,
+				986AD0E624D307FB000B0D3C /* SelectionMenuController.xib in Resources */,
 				0305A31423D5C35D004D1EC7 /* AlbumCell.xib in Resources */,
 				CF8B6A3923CBC9D70021B021 /* SpotifyPlaylistsViewController.xib in Resources */,
 				CF7145F924B597A800D83E60 /* ContactDetailNoInfoCell.xib in Resources */,
@@ -24891,6 +25253,15 @@
 				CF8B6A3C23CBC9D70021B021 /* TurkcellSaturaDem.ttf in Resources */,
 				CF8B72FA23CBD17E0021B021 /* Settings.bundle in Resources */,
 				CF8B6A4623CBC9D70021B021 /* CampaignDetailViewController.xib in Resources */,
+				CF8B6A4723CBC9D70021B021 /* toolbar_sekil_icon.png in Resources */,
+				CF8B6A4823CBC9D70021B021 /* cizgi_1@2x.png in Resources */,
+				CF8B6A4923CBC9D70021B021 /* parlaklik@3x.png in Resources */,
+				CF8B6A4A23CBC9D70021B021 /* sticker_resize@2x.png in Resources */,
+				CF8B6A4B23CBC9D70021B021 /* rotation_secili@2x.png in Resources */,
+				CF8B6A4C23CBC9D70021B021 /* sample_oldie@2x.png in Resources */,
+				CF8B6A4D23CBC9D70021B021 /* text_selected@2x.png in Resources */,
+				9875911324D1746C00D986C7 /* FilterCategoriesView.xib in Resources */,
+				CF8B6A4E23CBC9D70021B021 /* caps2@2x.png in Resources */,
 				CF8B6A4F23CBC9D70021B021 /* FolderSelectionCollectionViewCell.xib in Resources */,
 				CF7145FF24B597A800D83E60 /* ContactDetailCell.xib in Resources */,
 				0305A34F23D5C5A6004D1EC7 /* HSCompletionPopUp.xib in Resources */,
@@ -24917,7 +25288,20 @@
 				CF8B6A7F23CBC9D70021B021 /* AnalyzeHistoryEmptyCell.xib in Resources */,
 				CF8B6A8323CBC9D70021B021 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				CF8B6A8423CBC9D70021B021 /* PrepareQuickScroll.xib in Resources */,
+				CF8B6A8523CBC9D70021B021 /* beyaz_cerceve@2x.png in Resources */,
+				CF8B6A8623CBC9D70021B021 /* t_buyuk_selected@3x.png in Resources */,
+				CF8B6A8723CBC9D70021B021 /* cizgi_1.png in Resources */,
+				CF8B6A8823CBC9D70021B021 /* refreshicon.png in Resources */,
+				CF8B6A8A23CBC9D70021B021 /* toolbar_undo_icon@2x.png in Resources */,
+				CF8B6A8B23CBC9D70021B021 /* header_icon@3x.png in Resources */,
+				9863B88F24D2AA8000664810 /* PreparedFiltersView.xib in Resources */,
 				CF8B6A8C23CBC9D70021B021 /* FacebookAccountConnectionCell.xib in Resources */,
+				CF8B6A8D23CBC9D70021B021 /* CRYFrameCell.nib in Resources */,
+				CF8B6A8E23CBC9D70021B021 /* serbest_cizgi_selected@2x.png in Resources */,
+				9863B8AC24D2B7D600664810 /* PreparedFilterCell.xib in Resources */,
+				CF8B6A8F23CBC9D70021B021 /* tahta_yeni@2x.png in Resources */,
+				CF8B6A9023CBC9D70021B021 /* sample@3x.png in Resources */,
+				CF8B6A9123CBC9D70021B021 /* renk_selected@2x.png in Resources */,
 				98DBC04E2410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
 				CF8B6A9323CBC9D70021B021 /* SwipeableCardCell.xib in Resources */,
 				CF8B6A9923CBC9D70021B021 /* CollectionViewSpinnerFooter.xib in Resources */,
@@ -25062,6 +25446,11 @@
 				CF8B70EB23CBCA280021B021 /* FaceImageViewController.xib in Resources */,
 				CF8B70ED23CBCA280021B021 /* FreeAppSpaceViewCotroller.xib in Resources */,
 				CF8B70EF23CBCA280021B021 /* CollectionViewCellForFaceImageAddName.xib in Resources */,
+				CF8B70F023CBCA280021B021 /* ok_selected@3x.png in Resources */,
+				9875912424D1762800D986C7 /* FilterCategoryCell.xib in Resources */,
+				CF8B70F123CBCA280021B021 /* oval_beyaz.png in Resources */,
+				CF8B70F223CBCA280021B021 /* text@2x.png in Resources */,
+				CF8B70F323CBCA280021B021 /* cancel_buton.png in Resources */,
 				CF8B70F423CBCA280021B021 /* SpotifyPlaylistsViewController.xib in Resources */,
 				CF8B70F723CBCA280021B021 /* InstaPickSmartAlbumCell.xib in Resources */,
 				CF8B70FA23CBCA280021B021 /* CaptchaView.xib in Resources */,
@@ -25077,6 +25466,11 @@
 				CF8B711A23CBCA280021B021 /* FreeUpSpacePopUp.xib in Resources */,
 				CF71465624B597A800D83E60 /* ContactSyncBigCardView.xib in Resources */,
 				CF8B711D23CBCA280021B021 /* SelectNameViewController.xib in Resources */,
+				CF8B711E23CBCA280021B021 /* cizgi_1.png in Resources */,
+				988CD64B24D1618500C81241 /* PhotoEditTabbar.xib in Resources */,
+				CF8B711F23CBCA280021B021 /* alt_cizgili.png in Resources */,
+				CF8B712023CBCA280021B021 /* header_icon@3x.png in Resources */,
+				CF8B712123CBCA280021B021 /* toolbar_ciz_icon@2x.png in Resources */,
 				985D87EF24D0156B004BCDFF /* LightFilterView.xib in Resources */,
 				CF8B712223CBCA280021B021 /* SpotifyImportedPlaylistsViewController.xib in Resources */,
 				CF8B712723CBCA280021B021 /* FaceImageItemsViewController.xib in Resources */,
@@ -25104,6 +25498,7 @@
 				CF8B715423CBCA280021B021 /* TurkcellSaturaMed.ttf in Resources */,
 				734CA11E244D64150076F6A7 /* DocumentsAlbumCard.xib in Resources */,
 				CF8B715823CBCA280021B021 /* RegistrationScreen.xib in Resources */,
+				98467B7224D17F6F00B6C33E /* FilterChangesBar.xib in Resources */,
 				9855609124D06DFF00035361 /* ColorCell.xib in Resources */,
 				CF8B715923CBCA280021B021 /* PremiumFooterCollectionReusableView.xib in Resources */,
 				CF8B715A23CBCA280021B021 /* ActivityTimelineTimeCell.xib in Resources */,
@@ -25111,6 +25506,14 @@
 				CF8B715D23CBCA280021B021 /* TitleView.xib in Resources */,
 				CF8B716123CBCA280021B021 /* FeedbackViewController.xib in Resources */,
 				CF8B716223CBCA280021B021 /* LargeFullOfQuotaPopUp.xib in Resources */,
+				CF8B716323CBCA280021B021 /* bold.png in Resources */,
+				CF8B716423CBCA280021B021 /* undo@3x.png in Resources */,
+				9863B8A124D2AC4800664810 /* PhotoEditNavbar.xib in Resources */,
+				CF8B716523CBCA280021B021 /* Kucuk.png in Resources */,
+				CF8B716623CBCA280021B021 /* t_buyuk.png in Resources */,
+				CF8B716723CBCA280021B021 /* italic_secili@2x.png in Resources */,
+				CF8B716823CBCA280021B021 /* t_orta.png in Resources */,
+				CF8B716923CBCA280021B021 /* refreshicon@3x.png in Resources */,
 				CF8B716A23CBCA280021B021 /* ActivityTimelineTableBackView.xib in Resources */,
 				CF7146E024B597A900D83E60 /* DeleteDuplicatesMainView.xib in Resources */,
 				CF8B717523CBCA280021B021 /* RecentlySearchedFaceImageTableViewCell.xib in Resources */,
@@ -25172,11 +25575,19 @@
 				CF8B71E923CBCA280021B021 /* ManageContactTableViewCell.xib in Resources */,
 				CF8B71EA23CBCA280021B021 /* AlbumCollectionViewCell.xib in Resources */,
 				CF8B71EB23CBCA280021B021 /* ContactBackupOld.xib in Resources */,
+				986AD0F724D30929000B0D3C /* SelectionMenuCell.xib in Resources */,
+				CF8B71EC23CBCA280021B021 /* kirmizi@2x.png in Resources */,
+				CF8B71ED23CBCA280021B021 /* paylas_linkedin@2x.png in Resources */,
 				CF8B71EE23CBCA280021B021 /* PremiumViewController.xib in Resources */,
 				CF8B71F123CBCA280021B021 /* GoogleService-Info.plist in Resources */,
 				CF8B71FA23CBCA280021B021 /* SpotifyPlaylistCollectionViewCell.xib in Resources */,
 				CF8B71FD23CBCA280021B021 /* SegmentedController.xib in Resources */,
 				CF8B720123CBCA280021B021 /* PopUpController.xib in Resources */,
+				CF8B720223CBCA280021B021 /* sag_ok@2x.png in Resources */,
+				CF8B720323CBCA280021B021 /* duz_siyah.png in Resources */,
+				CF8B720423CBCA280021B021 /* kontrast_secili@3x.png in Resources */,
+				986AD0E924D307FB000B0D3C /* SelectionMenuController.xib in Resources */,
+				CF8B720523CBCA280021B021 /* focus.png in Resources */,
 				CF8B720623CBCA280021B021 /* FileInfoViewController.xib in Resources */,
 				CF7145FC24B597A800D83E60 /* ContactDetailNoInfoCell.xib in Resources */,
 				CF8B720F23CBCA280021B021 /* SuggestionTableSectionHeader.xib in Resources */,
@@ -25185,6 +25596,11 @@
 				CF8B721423CBCA280021B021 /* LatestUpladsCard.xib in Resources */,
 				CF8B721823CBCA280021B021 /* SpotifyPlaylistViewController.xib in Resources */,
 				CF8B721A23CBCA280021B021 /* FaceImageAddNameViewController.xib in Resources */,
+				CF8B721B23CBCA280021B021 /* daire@2x.png in Resources */,
+				CF8B721C23CBCA280021B021 /* extraOptions_selected@3x.png in Resources */,
+				9875911624D1746C00D986C7 /* FilterCategoriesView.xib in Resources */,
+				CF8B721D23CBCA280021B021 /* sample_green.png in Resources */,
+				CF8B721E23CBCA280021B021 /* toolbar_crop_icon@2x.png in Resources */,
 				CF8B721F23CBCA280021B021 /* TurkcellSaturaDem.ttf in Resources */,
 				CF71460224B597A800D83E60 /* ContactDetailCell.xib in Resources */,
 				CF8B722123CBCA280021B021 /* ChangeEmailPopUp.xib in Resources */,
@@ -25212,8 +25628,12 @@
 				CF8B725423CBCA280021B021 /* TurkcellSaturaIta.ttf in Resources */,
 				B5FBD27224D1AFCB009AD4F7 /* AdjustViewController.xib in Resources */,
 				CF8B725823CBCA280021B021 /* PasscodeViewImp.xib in Resources */,
+				CF8B725923CBCA280021B021 /* Kucuk_Selected@3x.png in Resources */,
+				9863B89224D2AA8000664810 /* PreparedFiltersView.xib in Resources */,
+				CF8B725A23CBCA280021B021 /* t_kucuk_selected@3x.png in Resources */,
 				0305A35023D5C5A9004D1EC7 /* HSCompletionPopUp.xib in Resources */,
 				CF8B725B23CBCA280021B021 /* SearchView.xib in Resources */,
+				9863B8AF24D2B7D600664810 /* PreparedFilterCell.xib in Resources */,
 				CF8B725C23CBCA280021B021 /* ManageContactsViewController.xib in Resources */,
 				CF8B725E23CBCA280021B021 /* InstaPickDetailViewController.xib in Resources */,
 				98DBC0512410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
@@ -26733,6 +27153,7 @@
 				0303A04C2397D0D000907F42 /* BottomSelectionMusicTabBarRouter.swift in Sources */,
 				0303A04D2397D0D000907F42 /* FaceImageItemsInteractorOutput.swift in Sources */,
 				0303A04E2397D0D000907F42 /* ActivityTimelineTimeCell.swift in Sources */,
+				9863B89824D2AB0C00664810 /* PhotoEditNavbar.swift in Sources */,
 				0303A04F2397D0D000907F42 /* NSLayoutConstraint+Extensions.swift in Sources */,
 				0303A0512397D0D000907F42 /* MusicBar.swift in Sources */,
 				0303A0522397D0D000907F42 /* CustomTabBarItem.swift in Sources */,
@@ -26805,6 +27226,7 @@
 				0303A0922397D0D000907F42 /* LeavePremiumInteractorInput.swift in Sources */,
 				98BE78B124517E4300B8864F /* SnackbarManager.swift in Sources */,
 				49E952A12400013E00E2ABCD /* MobilePaymentPermissionViewController.swift in Sources */,
+				986AD0E124D307FB000B0D3C /* SelectionMenuController.swift in Sources */,
 				0303A0932397D0D000907F42 /* RangeAPIInfo.swift in Sources */,
 				0303A0942397D0D000907F42 /* AppMigrator.swift in Sources */,
 				0303A0952397D0D000907F42 /* ContactBackupEmpty.swift in Sources */,
@@ -26946,10 +27368,12 @@
 				0303A1082397D0D000907F42 /* LoginSettingsRouter.swift in Sources */,
 				0303A1092397D0D000907F42 /* PopUpController.swift in Sources */,
 				0303A10A2397D0D000907F42 /* CreateStoryPreviewInteractor.swift in Sources */,
+				9875911C24D1762800D986C7 /* FilterCategoryCell.swift in Sources */,
 				0303A10B2397D0D000907F42 /* ErrorResponse.swift in Sources */,
 				CF71466C24B597A900D83E60 /* CircleLoaderView.swift in Sources */,
 				0303A10C2397D0D000907F42 /* AutoSyncSettingsModel.swift in Sources */,
 				0303A10D2397D0D000907F42 /* ButtonWithCorner.swift in Sources */,
+				9863B8A724D2B7D600664810 /* PreparedFilterCell.swift in Sources */,
 				CF71474424B597AA00D83E60 /* ContactSyncHelper.swift in Sources */,
 				0303A10E2397D0D000907F42 /* SettingHeaderView.swift in Sources */,
 				0303A10F2397D0D000907F42 /* PeriodicContactSyncInitializer.swift in Sources */,
@@ -27441,6 +27865,7 @@
 				0303A2C02397D0D000907F42 /* PasscodeSettingsModuleInput.swift in Sources */,
 				0303A2C12397D0D000907F42 /* ForgotPasswordPresenter.swift in Sources */,
 				0303A2C22397D0D000907F42 /* ActivityTimelineFileCell.swift in Sources */,
+				9875910D24D1745D00D986C7 /* FilterCategoriesView.swift in Sources */,
 				0303A2C32397D0D000907F42 /* Error+Network.swift in Sources */,
 				0303A2C42397D0D000907F42 /* PremiumPresenter.swift in Sources */,
 				0303A2C52397D0D000907F42 /* CreateStoryViewController.swift in Sources */,
@@ -27686,6 +28111,7 @@
 				0303A3962397D0D000907F42 /* PhotoVideoDetailInteractorInput.swift in Sources */,
 				0303A3972397D0D000907F42 /* MediaItem+CoreDataClass.swift in Sources */,
 				0303A3982397D0D000907F42 /* HelpAndSupportInteractor.swift in Sources */,
+				98467B6924D17F6000B6C33E /* FilterChangesBar.swift in Sources */,
 				0303A3992397D0D000907F42 /* BottomSelectionTabBarConfigurator.swift in Sources */,
 				0303A39B2397D0D000907F42 /* BackgroundTaskService.swift in Sources */,
 				0303A39C2397D0D000907F42 /* PhotoVideoDetailInteractorOutput.swift in Sources */,
@@ -27703,6 +28129,7 @@
 				0303A3A62397D0D000907F42 /* ItemSyncService.swift in Sources */,
 				0303A3A72397D0D000907F42 /* UserInfoSubViewViewInput.swift in Sources */,
 				0303A3A82397D0D000907F42 /* UserInfoSubViewViewOutput.swift in Sources */,
+				986AD0EF24D30929000B0D3C /* SelectionMenuCell.swift in Sources */,
 				0303A3A92397D0D000907F42 /* IAPManager.swift in Sources */,
 				0303A3AA2397D0D000907F42 /* UserInfoSubViewViewController.swift in Sources */,
 				0303A3AB2397D0D000907F42 /* UserInfoSubViewModuleInput.swift in Sources */,
@@ -27976,6 +28403,7 @@
 				0303A4A72397D0D000907F42 /* ManageContactsRouter.swift in Sources */,
 				0303A4A82397D0D000907F42 /* PHAsset+Properties.swift in Sources */,
 				0303A4A92397D0D000907F42 /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
+				988CD64224D1613C00C81241 /* PhotoEditTabbar.swift in Sources */,
 				0303A4AA2397D0D000907F42 /* LBAlbumLikePreviewSliderInteractor.swift in Sources */,
 				0303A4AB2397D0D000907F42 /* PackageInfoView.swift in Sources */,
 				0303A4AC2397D0D000907F42 /* FreeAppSpaceInteractor.swift in Sources */,
@@ -28011,6 +28439,7 @@
 				0303A4C72397D0D000907F42 /* AlbumsInitializer.swift in Sources */,
 				0303A4C82397D0D000907F42 /* AlbumDetailViewController.swift in Sources */,
 				0303A4C92397D0D000907F42 /* FreeAppSpaceRouter.swift in Sources */,
+				9863B88924D2AA7700664810 /* PreparedFiltersView.swift in Sources */,
 				0303A4CA2397D0D000907F42 /* SingletonStorage.swift in Sources */,
 				0303A4CB2397D0D000907F42 /* HelpAndSupportViewOutput.swift in Sources */,
 				8E802E18246C42A200D24561 /* PeopleSliderDataSource.swift in Sources */,
@@ -28458,6 +28887,7 @@
 				73E065D2242A33AE008E73B3 /* BackgroundSyncService.swift in Sources */,
 				921E7C3B2201ED8B00341F75 /* InstaPickSmallPhotoView.swift in Sources */,
 				CF71467624B597A900D83E60 /* ContactSyncProgressView.swift in Sources */,
+				986AD0ED24D30929000B0D3C /* SelectionMenuCell.swift in Sources */,
 				A2268EC021A68BD3002F2611 /* LeavePremiumHeaderView.swift in Sources */,
 				9228459B227B3E9600909FFC /* LoginViewController.swift in Sources */,
 				8C0E8C921FDEBDFF00789C91 /* AutoSyncSwitcherTableViewCell.swift in Sources */,
@@ -28775,6 +29205,7 @@
 				73A1834A2359CC550095719F /* CampaignCardResponse.swift in Sources */,
 				8C0E8D7E1FDEBDFF00789C91 /* AutoNextEditingRowPasser.swift in Sources */,
 				49E9529F2400013E00E2ABCD /* MobilePaymentPermissionViewController.swift in Sources */,
+				98467B6724D17F6000B6C33E /* FilterChangesBar.swift in Sources */,
 				C62239B5204976DD0043ED44 /* FaceImagePhotosViewController.swift in Sources */,
 				89E51D4922CA1112007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				8C0E8D7F1FDEBDFF00789C91 /* FloatingContainerVC.swift in Sources */,
@@ -28903,6 +29334,7 @@
 				8C89255022529CAD004BE02E /* SettingsBundleHelper.swift in Sources */,
 				8C208675228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift in Sources */,
 				984A515B21E88D28004525F5 /* InstapickAnalysisCell.swift in Sources */,
+				9875910B24D1745D00D986C7 /* FilterCategoriesView.swift in Sources */,
 				CF71470624B597A900D83E60 /* ContactListMainView.swift in Sources */,
 				4A56D5B3202AF529003A4624 /* FaceImageAddNameRouter.swift in Sources */,
 				8C0E8DD31FDEBDFF00789C91 /* AudioSelectionCollectionViewCell.swift in Sources */,
@@ -29181,6 +29613,7 @@
 				FA793D8E201872EA00A02B46 /* ThingsServiceResponse.swift in Sources */,
 				8C0E8E8B1FDEBDFF00789C91 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
 				8C0E8E8D1FDEBDFF00789C91 /* DropboxParametrs.swift in Sources */,
+				9863B8A524D2B7D600664810 /* PreparedFilterCell.swift in Sources */,
 				8C0E8E8F1FDEBDFF00789C91 /* CustomErrors.swift in Sources */,
 				8C0E8E921FDEBDFF00789C91 /* CircleYellowButton.swift in Sources */,
 				4A56D5B0202AF51D003A4624 /* FaceImageAddNameViewController.swift in Sources */,
@@ -29243,9 +29676,11 @@
 				8C0E8EC91FDEBDFF00789C91 /* UIviewControlllerExtensions.swift in Sources */,
 				8C0E8ECA1FDEBDFF00789C91 /* Dictionary.swift in Sources */,
 				8C0E8ECB1FDEBDFF00789C91 /* UsageInfoInteractor.swift in Sources */,
+				9863B89624D2AB0C00664810 /* PhotoEditNavbar.swift in Sources */,
 				CF71466A24B597A900D83E60 /* CircleLoaderView.swift in Sources */,
 				CF7146A024B597A900D83E60 /* ContactsBackupHistoryView.swift in Sources */,
 				8C0E8ECD1FDEBDFF00789C91 /* LocalAlbumCollectionViewCell.swift in Sources */,
+				986AD0DF24D307FB000B0D3C /* SelectionMenuController.swift in Sources */,
 				8C0E8ECE1FDEBDFF00789C91 /* AlbumItem.swift in Sources */,
 				CF71469424B597A900D83E60 /* ContactsBackupHistoryController.swift in Sources */,
 				8C0E8ECF1FDEBDFF00789C91 /* UserProfileRouter.swift in Sources */,
@@ -29256,6 +29691,7 @@
 				8C0E8ED11FDEBDFF00789C91 /* Int64+Bytes.swift in Sources */,
 				C62239A5204972D00043ED44 /* SharedEnums.swift in Sources */,
 				984A515821E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */,
+				9875911A24D1762800D986C7 /* FilterCategoryCell.swift in Sources */,
 				4ADE0888202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */,
 				B56FBB382122C956004F4A59 /* TermsOfUseModuleInput.swift in Sources */,
 				8C0E8ED21FDEBDFF00789C91 /* BottomSelectionTabBarModuleInput.swift in Sources */,
@@ -29267,6 +29703,7 @@
 				989BDE4122F47B1E001DDEB2 /* SpotifyPlaylistsViewController.swift in Sources */,
 				4BF3A69822B38C590082130F /* PermissionsView.swift in Sources */,
 				8C286C4A232134080061EA20 /* SpotifyAccountConnectionCell.swift in Sources */,
+				988CD64024D1613C00C81241 /* PhotoEditTabbar.swift in Sources */,
 				8C0E8ED71FDEBDFF00789C91 /* CollectionViewStoryReorderView.swift in Sources */,
 				CE3435EA224A5A8B00AFAABB /* WebViewController.swift in Sources */,
 				92004B6D21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
@@ -29596,6 +30033,7 @@
 				8C0E8F841FDEBDFF00789C91 /* SelectNameRouter.swift in Sources */,
 				CF71460424B597A800D83E60 /* ContactDetailCell.swift in Sources */,
 				B50B4A6A220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift in Sources */,
+				9863B88724D2AA7700664810 /* PreparedFiltersView.swift in Sources */,
 				8CD2B3B11FE7B3BD00280547 /* UIButton+Color.swift in Sources */,
 				A20B356E21B823D000A5E4F2 /* FaceImageItemsDataSource.swift in Sources */,
 				8C0E8F851FDEBDFF00789C91 /* SelectNameConfigurator.swift in Sources */,
@@ -30270,6 +30708,7 @@
 				CF83CF2F243F1630009DF60F /* BackgroundSyncOperation.swift in Sources */,
 				CE634AF3230EAAA700CED18C /* PaymentPopUpController.swift in Sources */,
 				03135F4523F3E0900088E8BB /* ApplicationStateHelper.swift in Sources */,
+				986AD0DE24D307FB000B0D3C /* SelectionMenuController.swift in Sources */,
 				CEADDA9E1F234920001DDA8A /* FileServiceResponse.swift in Sources */,
 				7CDABD0B1F1E3A6300C8CC16 /* UserProfilePresenter.swift in Sources */,
 				CEC3C2421FB99AF800C3D67F /* PasscodeSettingsPresenter.swift in Sources */,
@@ -30293,6 +30732,7 @@
 				CF71466924B597A900D83E60 /* CircleLoaderView.swift in Sources */,
 				17589F722276336800A5DB37 /* ProfilePhoneEnterView.swift in Sources */,
 				B56FBB2E2122C811004F4A59 /* TermsOfUseInteractor.swift in Sources */,
+				9875911924D1762800D986C7 /* FilterCategoryCell.swift in Sources */,
 				17035BAB226DABE000FE7362 /* ProfileFieldView.swift in Sources */,
 				4BF3A68522B23F4F0082130F /* PermissionViewController.swift in Sources */,
 				7CC11AAE1FE276DC00AF022D /* WaitingForWiFiPopUp.swift in Sources */,
@@ -30606,6 +31046,7 @@
 				7C83B6F01F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				7CB2E30E1FB9CB4C009CF813 /* FreeAppSpace.swift in Sources */,
 				98AA10432358597800B12485 /* CampaingnInfoView.swift in Sources */,
+				986AD0EC24D30929000B0D3C /* SelectionMenuCell.swift in Sources */,
 				7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				CE51AC471EF90853005DCEE0 /* DataStorage.swift in Sources */,
 				73FE51F122CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.swift in Sources */,
@@ -30802,6 +31243,7 @@
 				7CBF50241F44723D00D67BF3 /* AlbumService.swift in Sources */,
 				7326801424855248007E2CDF /* ExtandedTapAreaButton.swift in Sources */,
 				CE51ACD11EF90853005DCEE0 /* TermsAndServicesViewOutput.swift in Sources */,
+				9863B8A424D2B7D600664810 /* PreparedFilterCell.swift in Sources */,
 				CE2F56191F7552A900F49DA1 /* PackagesInteractorOutput.swift in Sources */,
 				73D723F0231D092E006AE835 /* UIStackView+Extensions.swift in Sources */,
 				989BDE4022F47B1E001DDEB2 /* SpotifyPlaylistsViewController.swift in Sources */,
@@ -30935,6 +31377,7 @@
 				B586A5A921EC7164009B07CF /* InstaPickProgressPopup.swift in Sources */,
 				8E26D98E2306B48800D08123 /* MusicViewOutput.swift in Sources */,
 				CE51ACEE1EF90853005DCEE0 /* PhoneVerificationInteractorInput.swift in Sources */,
+				988CD63F24D1613C00C81241 /* PhotoEditTabbar.swift in Sources */,
 				7C241EF81F960BA300322149 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				984A512B21E72C18004525F5 /* AnalyzeHistoryViewController.swift in Sources */,
 				CE51ACEF1EF90853005DCEE0 /* PhoneVerificationInteractorOutput.swift in Sources */,
@@ -31216,6 +31659,7 @@
 				CE4D282C207E3E6E003AE4FB /* WormholePoster.swift in Sources */,
 				873204F01FCC121B004DEB31 /* LocalAlbumCollectionViewCell.swift in Sources */,
 				7CFF0C8E1F4C1E1800E72E6A /* AlbumItem.swift in Sources */,
+				98467B6624D17F6000B6C33E /* FilterChangesBar.swift in Sources */,
 				7CDABD0C1F1E3A6300C8CC16 /* UserProfileRouter.swift in Sources */,
 				7C0DBC311F2F2CE000F90590 /* SelectionImageView.swift in Sources */,
 				17589F7E2276336800A5DB37 /* SupportFormController.swift in Sources */,
@@ -31292,6 +31736,7 @@
 				737685E223704BF300ED6BD6 /* PhotoVideoSegmentedController.swift in Sources */,
 				CEDFECA51F10C77E003D1A75 /* BasePresentor.swift in Sources */,
 				CEF69DE51FB5861A00FCE6AB /* UploadHelpers.swift in Sources */,
+				9875910A24D1745D00D986C7 /* FilterCategoriesView.swift in Sources */,
 				7CDABD0D1F1E3A6300C8CC16 /* UserProfileRouterInput.swift in Sources */,
 				89D1EBEA23EC3BF000092031 /* UIApplication+Display.swift in Sources */,
 				CE6DE7571FCBE84100C23CBD /* FBService.swift in Sources */,
@@ -31327,6 +31772,7 @@
 				8C6EF87C1F348B5C002AC795 /* BaseItemPassingProtocol.swift in Sources */,
 				2B5261513879D04FFE1D241C /* SettingsViewOutput.swift in Sources */,
 				98BCD711224A615A0090C13D /* SmartAlbumCell.swift in Sources */,
+				9863B89524D2AB0C00664810 /* PhotoEditNavbar.swift in Sources */,
 				7764E006C922DEA29D9C0744 /* SettingsViewController.swift in Sources */,
 				CE0ED9721FBC0F5A00487632 /* PasscodeInputView.swift in Sources */,
 				78052962200DCDA70051FA78 /* ManageContactTableViewCell.swift in Sources */,
@@ -31534,6 +31980,7 @@
 				B89728CAE994F4F93C31E016 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
 				4A9B38FF201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */,
 				0D9510CB65B6DA6F2D661754 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
+				9863B88624D2AA7700664810 /* PreparedFiltersView.swift in Sources */,
 				7859299120060E85003F8AB3 /* ManageContactsRouter.swift in Sources */,
 				CE055F3F20383A3400E6BFE8 /* PHAsset+Properties.swift in Sources */,
 				4A92D9A6CC51CFB44B9D208D /* LBAlbumLikePreviewSliderInteractorOutput.swift in Sources */,
@@ -31883,6 +32330,7 @@
 				CE78484A22A685FB00662219 /* SwipeableCardCell.swift in Sources */,
 				CE78484B22A685FB00662219 /* FaceImageItemsViewOutput.swift in Sources */,
 				8E26D9942306B49D00D08123 /* MusicInteractorInput.swift in Sources */,
+				986AD0F024D30929000B0D3C /* SelectionMenuCell.swift in Sources */,
 				981EA2F0247D4CA700A51B7D /* ContactsOperationView.swift in Sources */,
 				CE78484C22A685FB00662219 /* ErrorPresenter.swift in Sources */,
 				CE78484D22A685FB00662219 /* LoginPresenter.swift in Sources */,
@@ -32023,6 +32471,7 @@
 				CE7848BC22A685FB00662219 /* LoginInteractor.swift in Sources */,
 				CE7848BD22A685FB00662219 /* TermsOfUseInitializer.swift in Sources */,
 				CE7848BE22A685FB00662219 /* ProgressCardProtocol.swift in Sources */,
+				9863B88A24D2AA7700664810 /* PreparedFiltersView.swift in Sources */,
 				CE7848BF22A685FB00662219 /* LocalAlbumModuleInitializer.swift in Sources */,
 				CF71469124B597A900D83E60 /* ContactBackupDataManager.swift in Sources */,
 				CE7848C022A685FB00662219 /* ContactSyncParametrs.swift in Sources */,
@@ -32168,6 +32617,7 @@
 				CE78493222A685FB00662219 /* ManageContactsInteractor.swift in Sources */,
 				98A86D7023A2795B00438225 /* HiddenPhotosDataLoader.swift in Sources */,
 				8CBD3A7F2306D4B3005FF1C9 /* RequestService.swift in Sources */,
+				9863B89924D2AB0C00664810 /* PhotoEditNavbar.swift in Sources */,
 				CE78493322A685FB00662219 /* AnalyzeHistoryDisplayManager.swift in Sources */,
 				98BE78B224517E4300B8864F /* SnackbarManager.swift in Sources */,
 				CE78493422A685FB00662219 /* BaseMediaContent.swift in Sources */,
@@ -32219,6 +32669,7 @@
 				CE78495D22A685FB00662219 /* MediaItem+CoreDataProperties.swift in Sources */,
 				89E3409124747CB900EB68C3 /* PeopleCollectionViewCell.swift in Sources */,
 				CE78495E22A685FB00662219 /* AuthenticationService.swift in Sources */,
+				9863B8A824D2B7D600664810 /* PreparedFilterCell.swift in Sources */,
 				CE78495F22A685FB00662219 /* ReachabilityService.swift in Sources */,
 				CE78496022A685FB00662219 /* AutoNextEditingRowPasser.swift in Sources */,
 				CE78496122A685FB00662219 /* (null) in Sources */,
@@ -32247,6 +32698,7 @@
 				CE78497722A685FB00662219 /* LeavePremiumConfigurator.swift in Sources */,
 				CE78497822A685FB00662219 /* UserProfileViewOutput.swift in Sources */,
 				CE78497922A685FB00662219 /* UploadResponse.swift in Sources */,
+				988CD64324D1613C00C81241 /* PhotoEditTabbar.swift in Sources */,
 				89E51D6022CA2ECA007A7DBC /* CreateStoryPopUp.swift in Sources */,
 				CE78497A22A685FB00662219 /* UsageInfoInteractorInput.swift in Sources */,
 				CE78497B22A685FB00662219 /* SharedEnums.swift in Sources */,
@@ -32429,6 +32881,7 @@
 				CE784A0A22A685FB00662219 /* ActivityTimelineHeader.swift in Sources */,
 				CE784A0B22A685FB00662219 /* PrintViewInput.swift in Sources */,
 				CE784A0C22A685FB00662219 /* AnimationFlowManager.swift in Sources */,
+				98467B6A24D17F6000B6C33E /* FilterChangesBar.swift in Sources */,
 				CE784A0D22A685FB00662219 /* PhotoSelectionController.swift in Sources */,
 				CE784A0E22A685FB00662219 /* TransparentGradientView.swift in Sources */,
 				896133A52338C29F000083B7 /* HomePagePopUpOperation.swift in Sources */,
@@ -32450,6 +32903,7 @@
 				8C1E5BD922CB8C02008FDA02 /* PhotoVideoPredicateManager.swift in Sources */,
 				89DA5D0523ACF635000FA31D /* SmartAlbumWarningPopUpsFactory.swift in Sources */,
 				CE784A1D22A685FB00662219 /* SplitIpadViewContoller.swift in Sources */,
+				9875910E24D1745D00D986C7 /* FilterCategoriesView.swift in Sources */,
 				CE784A1E22A685FB00662219 /* InstagramService.swift in Sources */,
 				CE784A1F22A685FB00662219 /* LocationManager.swift in Sources */,
 				CE784A2022A685FB00662219 /* LoginViewController.swift in Sources */,
@@ -32973,6 +33427,7 @@
 				CE784BD522A685FB00662219 /* FaceImageItemsRouterInput.swift in Sources */,
 				9864296A22F834F10039811C /* SpotifyResponse.swift in Sources */,
 				CF7146BB24B597A900D83E60 /* DeleteDuplicatesViewController.swift in Sources */,
+				986AD0E224D307FB000B0D3C /* SelectionMenuController.swift in Sources */,
 				8C1E5BEB22CB8D03008FDA02 /* ProfileTextViewEnterView.swift in Sources */,
 				A74ADA4E23A38362007DD192 /* CarouselPageModel.swift in Sources */,
 				CE784BDA22A685FB00662219 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
@@ -33016,6 +33471,7 @@
 				CE784BFD22A685FB00662219 /* VisualMusicPlayerInteractor.swift in Sources */,
 				CE784BFE22A685FB00662219 /* BaseFilesGreedModuleOutput.swift in Sources */,
 				CE784BFF22A685FB00662219 /* SelectNameViewInput.swift in Sources */,
+				9875911D24D1762800D986C7 /* FilterCategoryCell.swift in Sources */,
 				CE784C0022A685FB00662219 /* AccountParameters.swift in Sources */,
 				CE784C0122A685FB00662219 /* PrintViewOutput.swift in Sources */,
 				CE784C0222A685FB00662219 /* UIBarButtonItem+Extensions.swift in Sources */,
@@ -33526,6 +33982,8 @@
 				CF8B647323CBC9D70021B021 /* DarkPopUpController.swift in Sources */,
 				CF8B647423CBC9D70021B021 /* AutoSyncDataStorage.swift in Sources */,
 				CF8B647523CBC9D70021B021 /* PrintInitializer.swift in Sources */,
+				988CD64124D1613C00C81241 /* PhotoEditTabbar.swift in Sources */,
+				9863B89724D2AB0C00664810 /* PhotoEditNavbar.swift in Sources */,
 				CF8B647623CBC9D70021B021 /* UserProfileInitializer.swift in Sources */,
 				CF8B647723CBC9D70021B021 /* BaseCellModel.swift in Sources */,
 				CF8B647823CBC9D70021B021 /* LeavePremiumView.swift in Sources */,
@@ -34195,6 +34653,7 @@
 				CF8B66C623CBC9D70021B021 /* ActivityIndicator.swift in Sources */,
 				CF8B66C723CBC9D70021B021 /* UsageInfoViewController.swift in Sources */,
 				CF8B66C823CBC9D70021B021 /* FileProviderWormholeListener.swift in Sources */,
+				9863B88824D2AA7700664810 /* PreparedFiltersView.swift in Sources */,
 				CF8B66C923CBC9D70021B021 /* UpdateCheck.m in Sources */,
 				730F8AC023CDEE6000798B61 /* OptimizingGifService.swift in Sources */,
 				B589FC5123F1388D00DD528D /* DataChunkProvider.swift in Sources */,
@@ -34294,6 +34753,7 @@
 				CF8B672923CBC9D70021B021 /* SearchViewConfigurator.swift in Sources */,
 				CF8B672A23CBC9D70021B021 /* MusicInteractorOutput.swift in Sources */,
 				CF8B672B23CBC9D70021B021 /* RecentSearchesService.swift in Sources */,
+				986AD0EE24D30929000B0D3C /* SelectionMenuCell.swift in Sources */,
 				985B0C582412A0C400C0342C /* AutoSyncDataSource.swift in Sources */,
 				0305A34423D5C563004D1EC7 /* TrashBinRouter.swift in Sources */,
 				98F0332D2403FFC100F1D415 /* SyncLogger.m in Sources */,
@@ -34365,6 +34825,7 @@
 				CF8B676923CBC9D70021B021 /* SearchViewInteractorOutput.swift in Sources */,
 				CF8B676A23CBC9D70021B021 /* SplashInteractorInput.swift in Sources */,
 				CF8B676B23CBC9D70021B021 /* BottomSelectionTabBarInitializer.swift in Sources */,
+				9863B8A624D2B7D600664810 /* PreparedFilterCell.swift in Sources */,
 				CF8B676C23CBC9D70021B021 /* SplashInteractorOutput.swift in Sources */,
 				CF8B676E23CBC9D70021B021 /* LoginSettingsInteractor.swift in Sources */,
 				CF7146C524B597A900D83E60 /* DeleteDuplicatesCell.swift in Sources */,
@@ -34392,6 +34853,7 @@
 				CF8B678223CBC9D70021B021 /* CreateStoryPreviewRouter.swift in Sources */,
 				CF8B678323CBC9D70021B021 /* SplashInitializer.swift in Sources */,
 				CF8B678423CBC9D70021B021 /* LeavePremiumRouter.swift in Sources */,
+				98467B6824D17F6000B6C33E /* FilterChangesBar.swift in Sources */,
 				73E6715D23EBFE53000C4AF7 /* PrivacyPolicyResponse.swift in Sources */,
 				CF8B678523CBC9D70021B021 /* CollectionViewCellForFaceImageAddName.swift in Sources */,
 				CF8B678623CBC9D70021B021 /* ActionsMenuViewInput.swift in Sources */,
@@ -34550,6 +35012,7 @@
 				CF8B680F23CBC9D70021B021 /* CreateStoryPreviewViewIO.swift in Sources */,
 				CF8B681023CBC9D70021B021 /* SpotifyCollectionViewDataSource.swift in Sources */,
 				CF8B681123CBC9D70021B021 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
+				9875911B24D1762800D986C7 /* FilterCategoryCell.swift in Sources */,
 				9855607D24D0673C00035361 /* HLSFilterView.swift in Sources */,
 				CF8B681223CBC9D70021B021 /* TwoFactorAuthenticationCell.swift in Sources */,
 				CF8B681323CBC9D70021B021 /* LeavePremiumRouterInput.swift in Sources */,
@@ -34613,6 +35076,7 @@
 				CF8B684823CBC9D70021B021 /* SubscriptionsService.swift in Sources */,
 				CF8B684923CBC9D70021B021 /* FeedbackViewOutput.swift in Sources */,
 				CF8B684A23CBC9D70021B021 /* FaceImageItemsPresenter.swift in Sources */,
+				9875910C24D1745D00D986C7 /* FilterCategoriesView.swift in Sources */,
 				CF8B684B23CBC9D70021B021 /* FeedbackViewController.swift in Sources */,
 				CF8B684C23CBC9D70021B021 /* FeedbackViewModuleInput.swift in Sources */,
 				739E2C2F247BA92200C74757 /* UIView+ParentViewController.swift in Sources */,
@@ -34648,6 +35112,7 @@
 				CF8B686B23CBC9D70021B021 /* ActivityTimelineInteractor.swift in Sources */,
 				CF71464724B597A800D83E60 /* ContactSyncSmallCardView.swift in Sources */,
 				CF8B686C23CBC9D70021B021 /* ActivityTimelineRouterInput.swift in Sources */,
+				986AD0E024D307FB000B0D3C /* SelectionMenuController.swift in Sources */,
 				CF8B686D23CBC9D70021B021 /* FaceImageAddNameRouterInput.swift in Sources */,
 				98922294240D0C0E004155A5 /* BecomePremiumView.swift in Sources */,
 				89E3408F24747CB700EB68C3 /* PeopleCollectionViewCell.swift in Sources */,
@@ -34787,6 +35252,7 @@
 				CF8B6B9523CBCA280021B021 /* EmailVerifiedPopUp.swift in Sources */,
 				B57D854A23DAD11E0057B5D6 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				CF8B6B9623CBCA280021B021 /* MulticastDelegate.swift in Sources */,
+				986AD0F124D30929000B0D3C /* SelectionMenuCell.swift in Sources */,
 				981EA2F1247D4CA700A51B7D /* ContactsOperationView.swift in Sources */,
 				CF8B6B9723CBCA280021B021 /* SwipeableCardCell.swift in Sources */,
 				CF8B6B9823CBCA280021B021 /* FaceImageItemsViewOutput.swift in Sources */,
@@ -34927,6 +35393,7 @@
 				0305A31A23D5C36F004D1EC7 /* AlbumsSliderCell.swift in Sources */,
 				CF8B6C1423CBCA280021B021 /* ProgressCardProtocol.swift in Sources */,
 				CF8B6C1523CBCA280021B021 /* LocalAlbumModuleInitializer.swift in Sources */,
+				9863B88B24D2AA7700664810 /* PreparedFiltersView.swift in Sources */,
 				CF8B6C1623CBCA280021B021 /* ContactSyncParametrs.swift in Sources */,
 				CF71469224B597A900D83E60 /* ContactBackupDataManager.swift in Sources */,
 				CF8B6C1723CBCA280021B021 /* ActivityTimelineService.swift in Sources */,
@@ -35072,6 +35539,7 @@
 				CF8B6C9E23CBCA280021B021 /* LoginInteractorOutput.swift in Sources */,
 				CF8B6C9F23CBCA280021B021 /* ImageFormat.swift in Sources */,
 				CF8B6CA023CBCA280021B021 /* PremiumView.swift in Sources */,
+				9863B89A24D2AB0C00664810 /* PhotoEditNavbar.swift in Sources */,
 				98BE78B324517E4300B8864F /* SnackbarManager.swift in Sources */,
 				CF8B6CA123CBCA280021B021 /* SpotifyDeletePopup.swift in Sources */,
 				CF8B6CA223CBCA280021B021 /* UsageInfoInitializer.swift in Sources */,
@@ -35123,6 +35591,7 @@
 				CF8B6CCA23CBCA280021B021 /* FloatingContainerVC.swift in Sources */,
 				89E3409224747CB900EB68C3 /* PeopleCollectionViewCell.swift in Sources */,
 				CF8B6CCB23CBCA280021B021 /* Array+Safe.swift in Sources */,
+				9863B8A924D2B7D600664810 /* PreparedFilterCell.swift in Sources */,
 				730F8AC323CDEE6000798B61 /* OptimizingGifService.swift in Sources */,
 				CF8B6CCC23CBCA280021B021 /* AutoSyncRouter.swift in Sources */,
 				CF8B6CCD23CBCA280021B021 /* FaceImageDesigner.swift in Sources */,
@@ -35151,6 +35620,7 @@
 				CF8B6CE223CBCA280021B021 /* SharedEnums.swift in Sources */,
 				CF8B6CE323CBCA280021B021 /* ResponseResult.swift in Sources */,
 				CF8B6CE423CBCA280021B021 /* TBMatikCard.swift in Sources */,
+				988CD64424D1613C00C81241 /* PhotoEditTabbar.swift in Sources */,
 				CF8B6CE523CBCA280021B021 /* FreeAppSpaceInitializer.swift in Sources */,
 				CF8B6CE623CBCA280021B021 /* CoreTelephonyService.swift in Sources */,
 				CF8B6CE723CBCA280021B021 /* MediaItemsAlbum+CoreDataProperties.swift in Sources */,
@@ -35333,6 +35803,7 @@
 				CF8B6D8623CBCA280021B021 /* PhotoSelectionController.swift in Sources */,
 				CF8B6D8723CBCA280021B021 /* TransparentGradientView.swift in Sources */,
 				CF8B6D8823CBCA280021B021 /* HomePagePopUpOperation.swift in Sources */,
+				98467B6B24D17F6000B6C33E /* FilterChangesBar.swift in Sources */,
 				CF8B6D8923CBCA280021B021 /* UINavigationBarExtension.swift in Sources */,
 				CF8B6D8A23CBCA280021B021 /* UsageInfoViewOutput.swift in Sources */,
 				CF8B6D8B23CBCA280021B021 /* IntroduceInitializer.swift in Sources */,
@@ -35354,6 +35825,7 @@
 				CF8B6D9C23CBCA280021B021 /* LoginViewController.swift in Sources */,
 				CF8B6D9D23CBCA280021B021 /* PrintService.swift in Sources */,
 				CF8B6D9E23CBCA280021B021 /* UpdatePasswordErrors.swift in Sources */,
+				9875910F24D1745D00D986C7 /* FilterCategoriesView.swift in Sources */,
 				CF8B6D9F23CBCA280021B021 /* WrapperedItemUtil.swift in Sources */,
 				CF8B6DA023CBCA280021B021 /* TwoFactorAuthenticationDesigner.swift in Sources */,
 				CF8B6DA123CBCA280021B021 /* ImageDownloadOperation.swift in Sources */,
@@ -35877,6 +36349,7 @@
 				CF8B6F7023CBCA280021B021 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				CF8B6F7123CBCA280021B021 /* FaceImageAddNameInitializer.swift in Sources */,
 				CF7146BC24B597A900D83E60 /* DeleteDuplicatesViewController.swift in Sources */,
+				986AD0E324D307FB000B0D3C /* SelectionMenuController.swift in Sources */,
 				CF8B6F7223CBCA280021B021 /* UploadFilesSelectionViewInput.swift in Sources */,
 				CF8B6F7323CBCA280021B021 /* UploadFilesSelectionViewOutput.swift in Sources */,
 				CF8B6F7423CBCA280021B021 /* SubscriptionPlanBaseResponse.swift in Sources */,
@@ -35920,6 +36393,7 @@
 				CF8B6F9B23CBCA280021B021 /* UIBarButtonItem+Extensions.swift in Sources */,
 				CF8B6F9C23CBCA280021B021 /* PackagesViewInput.swift in Sources */,
 				CF8B6F9D23CBCA280021B021 /* SelectNameViewOutput.swift in Sources */,
+				9875911E24D1762800D986C7 /* FilterCategoryCell.swift in Sources */,
 				0305A33223D5C477004D1EC7 /* SmashService.swift in Sources */,
 				CF8B6F9E23CBCA280021B021 /* SelectNameViewController.swift in Sources */,
 				CF8B6F9F23CBCA280021B021 /* SelectNameModuleInput.swift in Sources */,
