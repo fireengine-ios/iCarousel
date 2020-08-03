@@ -65,9 +65,14 @@ final class PhotoEditViewController: ViewController, NibInit {
     private var manager: AdjustmentManager?
     var sourceImage = UIImage()
     
+    var presentedCallback: VoidHandler?
+    var finishedEditing: PhotoEditCompletionHandler?
+    
     static func with(image: UIImage, presented: VoidHandler?, completion: PhotoEditCompletionHandler?) -> PhotoEditViewController {
         let controller = PhotoEditViewController.initFromNib()
         controller.sourceImage = image
+        controller.presentedCallback = presented
+        controller.finishedEditing = completion
         return controller
     }
     
@@ -76,6 +81,7 @@ final class PhotoEditViewController: ViewController, NibInit {
         
         view.backgroundColor = .black
         showInitialState()
+        presentedCallback?()
     }
     
     private func showInitialState() {

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CropViewController
+
 
 final class AdjustViewController: UIViewController, NibInit {
     

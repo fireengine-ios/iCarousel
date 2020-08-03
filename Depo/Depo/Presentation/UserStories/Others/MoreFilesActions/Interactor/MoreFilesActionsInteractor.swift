@@ -222,7 +222,25 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     
     func edit(item: [BaseDataSourceItem], complition: VoidHandler?) {
-        complition?()
+        guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
+            return
+        }
+        ImageDownloder().getImage(patch: url) { [weak self] image in
+            guard
+                let self = self,
+                let image = image
+            else {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .failure))
+                UIApplication.showErrorAlert(message: TextConstants.errorServer)
+                complition?()
+                return
+            }
+            let vc = PhotoEditViewController.with(image: image, presented: complition) { completionType in
+                debugPrint(completionType)
+            }
+            
+            self.router.presentViewController(controller: vc)
+        }
     }
     
     func smash(item: [BaseDataSourceItem], completion: VoidHandler?) {
