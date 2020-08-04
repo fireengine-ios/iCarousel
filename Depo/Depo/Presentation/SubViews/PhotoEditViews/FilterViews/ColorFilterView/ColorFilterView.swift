@@ -8,9 +8,9 @@
 
 import UIKit
 
-final class ColorFilterView: UIView, NibInit {
+final class ColorFilterView: AdjustmentsView, NibInit {
 
-    static func with(parameters: [AdjustmentParameterProtocol], delegate: FilterSliderViewDelegate?) -> ColorFilterView {
+    static func with(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) -> ColorFilterView {
         let view = ColorFilterView.initFromNib()
         view.setup(parameters: parameters, delegate: delegate)
         return view
@@ -19,20 +19,18 @@ final class ColorFilterView: UIView, NibInit {
     @IBOutlet private weak var hlsButton: UIButton!
     @IBOutlet private weak var contentView: UIStackView!
     
-    private weak var delegate: FilterSliderViewDelegate?
-    
-    private func setup(parameters: [AdjustmentParameterProtocol], delegate: FilterSliderViewDelegate?) {
+    override func setup(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) {
+        super.setup(parameters: parameters, delegate: delegate)
+        
         backgroundColor = ColorConstants.filterBackColor
         
-        self.delegate = delegate
-        
         parameters.forEach {
-            let view = FilterSliderView.with(parameter: $0, delegate: delegate)
+            let view = FilterSliderView.with(parameter: $0, delegate: self)
             contentView.addArrangedSubview(view)
         }
     }
 
     @IBAction private func onHLSTapped(_ sender: UIButton) {
-        delegate?.leftButtonTapped()
+        delegate?.showHLSFilter()
     }
 }

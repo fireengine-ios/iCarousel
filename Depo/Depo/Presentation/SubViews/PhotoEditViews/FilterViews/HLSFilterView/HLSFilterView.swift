@@ -8,9 +8,9 @@
 
 import UIKit
 
-final class HLSFilterView: UIView, NibInit {
+final class HLSFilterView: AdjustmentsView, NibInit {
 
-    static func with(parameters: [AdjustmentParameterProtocol], delegate: FilterSliderViewDelegate?) -> HLSFilterView {
+    static func with(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) -> HLSFilterView {
         let view = HLSFilterView.initFromNib()
         view.setup(parameters: parameters, delegate: delegate)
         return view
@@ -40,11 +40,13 @@ final class HLSFilterView: UIView, NibInit {
         colorAssets.register(nibCell: ColorCell.self)
     }
     
-    private func setup(parameters: [AdjustmentParameterProtocol], delegate: FilterSliderViewDelegate?) {
-        backgroundColor = .darkGray
+    override func setup(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) {
+        super.setup(parameters: parameters, delegate: delegate)
+        
+        backgroundColor = ColorConstants.filterBackColor
         
         parameters.enumerated().forEach {
-            let view = FilterSliderView.with(parameter: $0.element, delegate: delegate)
+            let view = FilterSliderView.with(parameter: $0.element, delegate: self)
             contentView.insertArrangedSubview(view, at: $0.offset)
         }
     }

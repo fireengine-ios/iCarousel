@@ -5185,6 +5185,12 @@
 		98BB909D24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */; };
 		98BB909E24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */; };
 		98BB909F24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */; };
+		98BB90A424D84C7800C4D246 /* AdjustmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB90A324D84C7800C4D246 /* AdjustmentsView.swift */; };
+		98BB90A524D84C7800C4D246 /* AdjustmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB90A324D84C7800C4D246 /* AdjustmentsView.swift */; };
+		98BB90A624D84C7800C4D246 /* AdjustmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB90A324D84C7800C4D246 /* AdjustmentsView.swift */; };
+		98BB90A724D84C7800C4D246 /* AdjustmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB90A324D84C7800C4D246 /* AdjustmentsView.swift */; };
+		98BB90A824D84C7800C4D246 /* AdjustmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB90A324D84C7800C4D246 /* AdjustmentsView.swift */; };
+		98BB90A924D84C7800C4D246 /* AdjustmentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB90A324D84C7800C4D246 /* AdjustmentsView.swift */; };
 		98BCD711224A615A0090C13D /* SmartAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCD70F224A61590090C13D /* SmartAlbumCell.swift */; };
 		98BCD712224A615A0090C13D /* SmartAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCD70F224A61590090C13D /* SmartAlbumCell.swift */; };
 		98BCD713224A615A0090C13D /* SmartAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98BCD710224A615A0090C13D /* SmartAlbumCell.xib */; };
@@ -13185,6 +13191,7 @@
 		98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceConstants.swift; sourceTree = "<group>"; };
 		98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditViewUIManager.swift; sourceTree = "<group>"; };
+		98BB90A324D84C7800C4D246 /* AdjustmentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentsView.swift; sourceTree = "<group>"; };
 		98BCD70F224A61590090C13D /* SmartAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartAlbumCell.swift; sourceTree = "<group>"; };
 		98BCD710224A615A0090C13D /* SmartAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartAlbumCell.xib; sourceTree = "<group>"; };
 		98BE78A524517E4200B8864F /* SnackbarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SnackbarView.xib; sourceTree = "<group>"; };
@@ -19097,6 +19104,7 @@
 				9855609224D0ACE200035361 /* HLSFilterView */,
 				9855609C24D0AD2900035361 /* LightFilterView */,
 				98D7212824D05BCF001D2896 /* AdjustmentParameterSliderView.swift */,
+				98BB90A324D84C7800C4D246 /* AdjustmentsView.swift */,
 			);
 			path = FilterViews;
 			sourceTree = "<group>";
@@ -28014,6 +28022,7 @@
 				0303A3DA2397D0D000907F42 /* ImportPhotosViewInput.swift in Sources */,
 				0303A3DB2397D0D000907F42 /* MoreFilesActionsModuleInput.swift in Sources */,
 				0303A3DC2397D0D000907F42 /* LandingCollectionViewCell.swift in Sources */,
+				98BB90A724D84C7800C4D246 /* AdjustmentsView.swift in Sources */,
 				0303A3DD2397D0D000907F42 /* AnalyticsServiceConstants.swift in Sources */,
 				0303A3DE2397D0D000907F42 /* FaceImagePhotosViewController.swift in Sources */,
 				0303A3E12397D0D000907F42 /* ManageContactsViewInput.swift in Sources */,
@@ -28651,6 +28660,7 @@
 				CE1B7625204D347D00B5E12A /* Error+Network.swift in Sources */,
 				4A9886F520443F800027D7CD /* FaceImagePhotosInteractorInput.swift in Sources */,
 				8C0E8C681FDEBDFF00789C91 /* FileServiceResponse.swift in Sources */,
+				98BB90A524D84C7800C4D246 /* AdjustmentsView.swift in Sources */,
 				B5C7C583211C6A21006E94DB /* AugmentedRealityItem.swift in Sources */,
 				89E51D3D22CA10FC007A7DBC /* CreateStoryPreviewInitializer.swift in Sources */,
 				8C0E8C6B1FDEBDFF00789C91 /* UserProfilePresenter.swift in Sources */,
@@ -31764,6 +31774,7 @@
 				8C208657228D4B2E000BEDAD /* PhotoVideoThreeDotMenuManager.swift in Sources */,
 				92004B6921AD197800582C45 /* MyStorageInteractorInput.swift in Sources */,
 				34EB62653F5454C7AC298EE3 /* SelectFolderInitializer.swift in Sources */,
+				98BB90A424D84C7800C4D246 /* AdjustmentsView.swift in Sources */,
 				7CE825BE1F823D9700356AD2 /* FreeUpSpacePopUp.swift in Sources */,
 				8C77869F1F3F38EF005CB432 /* VisualMusicPlayerInteractor.swift in Sources */,
 				73B623D623BF5CB600839C47 /* SmashService.swift in Sources */,
@@ -32662,6 +32673,7 @@
 				8C1E5BD822CB8BD1008FDA02 /* TextInsetsLabel.swift in Sources */,
 				CE7849DC22A685FB00662219 /* TermsAndServicesInteractor.swift in Sources */,
 				CE7849DD22A685FB00662219 /* UploadFromLifeBoxViewIO.swift in Sources */,
+				98BB90A824D84C7800C4D246 /* AdjustmentsView.swift in Sources */,
 				CE7849DE22A685FB00662219 /* TermsAndServicesDataStorage.swift in Sources */,
 				CE7849DF22A685FB00662219 /* ProfilePasswordEnterView.swift in Sources */,
 				983A397F2409357700418F5E /* SubscriptionsPolicyView.swift in Sources */,
@@ -33768,6 +33780,7 @@
 				03135F4823F3E0900088E8BB /* ApplicationStateHelper.swift in Sources */,
 				0305A32A23D5C3C1004D1EC7 /* HiddenPhotosThreeDotMenuManager.swift in Sources */,
 				CF8B644523CBC9D70021B021 /* PackageInfoView.swift in Sources */,
+				98BB90A624D84C7800C4D246 /* AdjustmentsView.swift in Sources */,
 				CF8B644623CBC9D70021B021 /* UIImage+JPEG.swift in Sources */,
 				CF8B644723CBC9D70021B021 /* HelpAndSupportModuleInput.swift in Sources */,
 				CF8B644823CBC9D70021B021 /* UIButton+Font.swift in Sources */,
@@ -35586,6 +35599,7 @@
 				CF8B6D5123CBCA280021B021 /* TermsAndServicesDataStorage.swift in Sources */,
 				0305A31623D5C363004D1EC7 /* AlbumCell.swift in Sources */,
 				CF8B6D5223CBCA280021B021 /* ProfilePasswordEnterView.swift in Sources */,
+				98BB90A924D84C7800C4D246 /* AdjustmentsView.swift in Sources */,
 				CF8B6D5323CBCA280021B021 /* TermsAndServicesRouterInput.swift in Sources */,
 				0305A33623D5C4AC004D1EC7 /* NSManagedObjectModel+Resource.swift in Sources */,
 				983A39802409357700418F5E /* SubscriptionsPolicyView.swift in Sources */,

@@ -9,8 +9,6 @@
 import UIKit
 
 protocol FilterSliderViewDelegate: class {
-    func leftButtonTapped()
-    func rightButtonTapped()
     func sliderValueChanged(newValue: Float, type: AdjustmentParameterType)
 }
 

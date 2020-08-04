@@ -46,8 +46,6 @@ class AdjustmentParameterSliderView: UIView {
     //MARK: - Actions
     
     @objc private func didChangeSliderValue(_ sender: MDCSlider) {
-        debugPrint(sender.value)
-            
         didChangeValue(sender.value)
         if let type = type {
             delegate?.sliderValueChanged(newValue: Float(sender.value), type: type)
