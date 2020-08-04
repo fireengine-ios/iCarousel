@@ -85,28 +85,16 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
         guard let manager = adjustmentManager else {
             return
         }
-        
-        //TODO: APPLY NEW VALUES
-        
-        var editingImage = sourceImage
-        
-        let queue = DispatchQueue.global()
-
-        queue.async {
-            adjustments.forEach { type, value in
-                let semaphore = DispatchSemaphore(value: 0)
-                manager.applyOnValueDidChange(parameterType: type, value: value, sourceImage: editingImage) { image in
-                    editingImage = image
-                    semaphore.signal()
-                }
-                semaphore.wait()
+       
+        manager.applyOnValueDidChange(adjustmentValues: adjustments, sourceImage: sourceImage) { [weak self] outputImage in
+            guard let self = self else {
+                return
             }
             
             DispatchQueue.main.async {
-                self.uiManager.setImage(editingImage)
+                self.uiManager.setImage(outputImage)
             }
         }
-
     }
 }
 

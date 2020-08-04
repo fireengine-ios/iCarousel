@@ -5713,6 +5713,12 @@
 		B569220023ACEDA400E255C4 /* MigrationModel_1_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B56921FA23ACEDA300E255C4 /* MigrationModel_1_3.xcmappingmodel */; };
 		B569220123ACEDA400E255C4 /* MigrationModel_1_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B56921FA23ACEDA300E255C4 /* MigrationModel_1_3.xcmappingmodel */; };
 		B569220223ACEDA400E255C4 /* MigrationModel_1_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = B56921FA23ACEDA300E255C4 /* MigrationModel_1_3.xcmappingmodel */; };
+		B569563224D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569563124D98A7F00B7B336 /* AdjustmentOperation.swift */; };
+		B569563324D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569563124D98A7F00B7B336 /* AdjustmentOperation.swift */; };
+		B569563424D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569563124D98A7F00B7B336 /* AdjustmentOperation.swift */; };
+		B569563524D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569563124D98A7F00B7B336 /* AdjustmentOperation.swift */; };
+		B569563624D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569563124D98A7F00B7B336 /* AdjustmentOperation.swift */; };
+		B569563724D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569563124D98A7F00B7B336 /* AdjustmentOperation.swift */; };
 		B56B97B4212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */; };
 		B56B97B5212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */; };
 		B56BE2B51FE2732F007DC1BC /* ItemSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */; };
@@ -13404,6 +13410,7 @@
 		B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AugmentedRealityDataSource.swift; sourceTree = "<group>"; };
 		B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationPolicy_1_3.swift; sourceTree = "<group>"; };
 		B56921FA23ACEDA300E255C4 /* MigrationModel_1_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MigrationModel_1_3.xcmappingmodel; sourceTree = "<group>"; };
+		B569563124D98A7F00B7B336 /* AdjustmentOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentOperation.swift; sourceTree = "<group>"; };
 		B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityFileProvider.swift; sourceTree = "<group>"; };
 		B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncService.swift; sourceTree = "<group>"; };
 		B56E0DD620B414510082044D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -19639,6 +19646,7 @@
 				B549B6D124CF09D000D39C44 /* AdjustmentParameter.swift */,
 				B51D958D24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift */,
 				B51D959724D00E4300FA2EA0 /* AdjustmentManager.swift */,
+				B569563124D98A7F00B7B336 /* AdjustmentOperation.swift */,
 			);
 			path = Adjustments;
 			sourceTree = "<group>";
@@ -27972,6 +27980,7 @@
 				0303A3A62397D0D000907F42 /* ItemSyncService.swift in Sources */,
 				0303A3A72397D0D000907F42 /* UserInfoSubViewViewInput.swift in Sources */,
 				0303A3A82397D0D000907F42 /* UserInfoSubViewViewOutput.swift in Sources */,
+				B569563524D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */,
 				986AD0EF24D30929000B0D3C /* SelectionMenuCell.swift in Sources */,
 				0303A3A92397D0D000907F42 /* IAPManager.swift in Sources */,
 				0303A3AA2397D0D000907F42 /* UserInfoSubViewViewController.swift in Sources */,
@@ -28722,6 +28731,7 @@
 				4A56D5B6202AF536003A4624 /* FaceImageAddNamePresenter.swift in Sources */,
 				7C6B30021FFCC6510066C818 /* ItemOperationManager.swift in Sources */,
 				8C0E8C8D1FDEBDFF00789C91 /* MusicBar.swift in Sources */,
+				B569563324D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */,
 				8C0E8C8E1FDEBDFF00789C91 /* CustomTabBarItem.swift in Sources */,
 				8C0E8C8F1FDEBDFF00789C91 /* EditinglBar.swift in Sources */,
 				CED4B0242017505300D06CA9 /* HomeCardsService.swift in Sources */,
@@ -31745,6 +31755,7 @@
 				170EB21122783E9D008588C1 /* QuickDismissPlaceholderTextField.swift in Sources */,
 				87AD15E41FD678B800DE97DB /* String+Subscript.swift in Sources */,
 				DAC81A65DF324B39D22D480E /* UploadFilesSelectionModuleInput.swift in Sources */,
+				B569563224D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */,
 				001F64B2FEA10A0FC9BC0AB3 /* UploadFilesSelectionPresenter.swift in Sources */,
 				CE6BD9CC1FBEF8D5008FA8A1 /* InsetsLabel.swift in Sources */,
 				B52BAC5C23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */,
@@ -32206,6 +32217,7 @@
 				98922296240D0C0E004155A5 /* BecomePremiumView.swift in Sources */,
 				CE78485C22A685FB00662219 /* WidgetService.swift in Sources */,
 				CE78485D22A685FB00662219 /* TabBarViewController.swift in Sources */,
+				B569563624D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */,
 				CE78485E22A685FB00662219 /* LeavePremiumInteractorInput.swift in Sources */,
 				8C1E5BDE22CB8C1A008FDA02 /* RangeAPIInfo.swift in Sources */,
 				98A86D5823A238E700438225 /* AlbumsSliderCell.swift in Sources */,
@@ -34934,6 +34946,7 @@
 				739E2C2F247BA92200C74757 /* UIView+ParentViewController.swift in Sources */,
 				CF8B684D23CBC9D70021B021 /* FeedbackViewPresenter.swift in Sources */,
 				CF8B684E23CBC9D70021B021 /* AsyncOperation.swift in Sources */,
+				B569563424D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */,
 				CF8B684F23CBC9D70021B021 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				CF8B685023CBC9D70021B021 /* AppWormholeListener.swift in Sources */,
 				CF8B685123CBC9D70021B021 /* PeopleService.swift in Sources */,
@@ -35132,6 +35145,7 @@
 				98922297240D0C0E004155A5 /* BecomePremiumView.swift in Sources */,
 				CF8B6BAB23CBCA280021B021 /* ButtonWithGrayCorner.swift in Sources */,
 				CF8B6BAC23CBCA280021B021 /* SubscriptionParameters.swift in Sources */,
+				B569563724D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */,
 				CF8B6BAD23CBCA280021B021 /* ContactSyncResponse.swift in Sources */,
 				CF8B6BAE23CBCA280021B021 /* WidgetService.swift in Sources */,
 				CF8B6BAF23CBCA280021B021 /* TabBarViewController.swift in Sources */,

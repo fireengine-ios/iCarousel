@@ -111,6 +111,12 @@ final class AdjustmentManager {
     let adjustments: [AdjustmentProtocol]
     let parameters: [AdjustmentParameterProtocol]
     
+    private let operationQueue: OperationQueue = {
+           let queue = OperationQueue()
+           queue.maxConcurrentOperationCount = 1
+           return queue
+       }()
+    
     
     required init(types: [AdjustmentType]) {
         adjustments = types.compactMap { AdjustmentManager.adjustment(type: $0) }
@@ -118,24 +124,63 @@ final class AdjustmentManager {
     }
     
     
-    func applyOnValueDidChange(parameterType: AdjustmentParameterType, value: Float, sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
+    private func updateValues(parameterType: AdjustmentParameterType, value: Float) -> AdjustmentProtocol? {
         let relatedAdjustment = adjustments.first(where: { $0.parameters.contains(where: { $0.type == parameterType }) })
         
         guard let adjustment = relatedAdjustment else {
-            onFinished(sourceImage)
-            return
+            assertionFailure("Unknown adjustment")
+            return nil
         }
-        
         
         let relatedParameter = adjustment.parameters.first(where: { $0.type == parameterType })
         
-        guard let parameter = relatedParameter else  {
-            onFinished(sourceImage)
-            return
+        guard let parameter = relatedParameter else {
+            assertionFailure("Unknown adjustment parameter")
+            return nil
         }
         
         parameter.set(value: value)
-        adjustment.applyOn(image: sourceImage, onFinished: onFinished)
         
+        //because we're applying the adjustment on a sourceImage
+        guard parameter.currentValue != parameter.defaultValue else {
+            return nil
+        }
+        
+        return adjustment
+    }
+    
+    
+    func applyOnValueDidChange(adjustmentValues: [AdjustmentValue], sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
+        
+        operationQueue.cancelAllOperations()
+        
+        AdjustmentOperation.sourceImage = sourceImage
+        
+        var relatedAdjustments = [AdjustmentProtocol]()
+        adjustmentValues.forEach { adjValue in
+            let adjustment = updateValues(parameterType: adjValue.type, value: adjValue.value)
+            relatedAdjustments.append(adjustment)
+        }
+        
+        let operations: [AdjustmentOperation] = relatedAdjustments.map { adjustment in
+
+            let operation = AdjustmentOperation(adjustment: adjustment) { [weak self] output in
+                guard let self = self else {
+                    return
+                }
+                
+                AdjustmentOperation.sourceImage = output
+                
+                let unfinishedOperations = self.operationQueue.operations.filter { $0.isReady || $0.isExecuting }
+                let operationQueueIsEmpty = self.operationQueue.operations.isEmpty || unfinishedOperations.count <= 1
+                
+                if operationQueueIsEmpty {
+                    onFinished(output)
+                }
+            }
+            return operation
+        }
+    
+        operationQueue.addOperations(operations, waitUntilFinished: false)
     }
 }
