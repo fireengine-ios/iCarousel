@@ -42,9 +42,8 @@ class EditinglBar: CustomTabBar {
     private lazy var syncProgressAnimation: AnimatedCircularLoader = {
         let side = bounds.height / 2
         let frame = CGRect(x: bounds.width / 2 - side / 2,
-                           y: 0,
+                           y: 8,
                            width: side, height: side)
-        
         let loader = AnimatedCircularLoader(frame: frame)
         
         loader.set(lineBackgroundColor: .clear)
