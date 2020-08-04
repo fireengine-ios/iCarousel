@@ -39,7 +39,7 @@ final class VideoSyncService: ItemSyncServiceImpl {
     override func waitForWiFi() {
         debugLog("VideoSyncService waitForWiFi")
 
-        ItemOperationManager.default.failedAutoSync(forPhotos: false)
+        ItemOperationManager.default.failedAutoSync()
         stopAllOperations()
         super.waitForWiFi()
     }
