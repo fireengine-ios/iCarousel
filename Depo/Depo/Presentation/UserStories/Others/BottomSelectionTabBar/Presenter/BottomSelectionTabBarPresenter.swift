@@ -212,7 +212,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .edit:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .edit))
                 RouterVC().getViewControllerForPresent()?.showSpinner()
-                self.interactor.edit(item: selectedItems, complition: {
+                self.interactor.edit(item: selectedItems, completion: {
                     RouterVC().getViewControllerForPresent()?.hideSpinner()
                 })
             case .info:
@@ -399,7 +399,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 case .edit:
                     action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
                         RouterVC().tabBarVC?.showSpinner()
-                        self.interactor.edit(item: currentItems, complition: {
+                        self.interactor.edit(item: currentItems, completion: {
                             RouterVC().tabBarVC?.hideSpinner()
                         })
                     })

@@ -221,7 +221,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     
     
-    func edit(item: [BaseDataSourceItem], complition: VoidHandler?) {
+    func edit(item: [BaseDataSourceItem], completion: VoidHandler?) {
         guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
             return
         }
@@ -232,10 +232,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             else {
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .failure))
                 UIApplication.showErrorAlert(message: TextConstants.errorServer)
-                complition?()
+                
                 return
             }
-            let vc = PhotoEditViewController.with(image: image, presented: complition) { completionType in
+            let vc = PhotoEditViewController.with(image: image, presented: completion) { completionType in
                 debugPrint(completionType)
             }
             

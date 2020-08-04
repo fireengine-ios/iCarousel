@@ -23,6 +23,8 @@ protocol  WrapItemFileOperations {
     
     func upload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse)
     
+    func save(item: BaseDataSourceItem, imageData: Data, asNew: Bool, success: FileOperationSucces?, fail: FailResponse?)
+    
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?)
     
     func share(sharedFiles: [BaseDataSourceItem], success: SuccessShared?, fail: FailResponse?)
@@ -182,6 +184,10 @@ class WrapItemFileService: WrapItemFileOperations {
                                      uploadTo: .MOBILE_UPLOAD,
                                      success: success,
                                      fail: fail, returnedUploadOperation: { _ in})
+    }
+    
+    func save(item: BaseDataSourceItem, imageData: Data, asNew: Bool, success: FileOperationSucces?, fail: FailResponse?) {
+        
     }
     
     func cancellableUpload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedUploadOperations: @escaping ([UploadOperation]?) -> Void) {

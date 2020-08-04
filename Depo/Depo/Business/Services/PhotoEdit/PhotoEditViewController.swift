@@ -10,8 +10,8 @@ import UIKit
 
 enum PhotoEditiComletion {
     case canceled
-    case saved
-    case savedAs
+    case saved(image: UIImage)
+    case savedAs(image: UIImage)
 }
 
 typealias PhotoEditCompletionHandler = (PhotoEditiComletion) -> Void
@@ -59,6 +59,15 @@ final class PhotoEditViewController: ViewController, NibInit {
     private func showMoreActionsMenu() {
         let items = ["Save as copy", "Reset to original"]
         let controller = SelectionMenuController.with(style: .simple, items: items, selectedIndex: nil) { [weak self] index in
+            guard let self = self else {
+                return
+            }
+            switch index {
+            case 0:
+                self.finishedEditing?(.savedAs(image: self.sourceImage))
+            default:
+                break;
+            }
             debugPrint(index)
         }
         present(controller, animated: false)
@@ -118,11 +127,12 @@ extension PhotoEditViewController: FilterChangesBarDelegate {
 
 extension PhotoEditViewController: PhotoEditNavbarDelegate {
     func onClose() {
+        finishedEditing?(.canceled)
         dismiss(animated: true, completion: nil)
     }
     
     func onSavePhoto() {
-        
+        finishedEditing?(.saved(image: sourceImage))
     }
     
     func onMoreActions() {
