@@ -785,10 +785,8 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
         }
     }
     
-    func failedAutoSync(forPhotos: Bool) {
-        if isPhoto == forPhotos {
-            updateUploadProgressForVisibleCells(newStatus: .syncFailed)
-        }
+    func failedAutoSync() {
+        updateUploadProgressForVisibleCells(newStatus: .syncFailed)
     }
     
     func syncFinished() {
@@ -811,7 +809,10 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
             trimmedIDs.forEach { trimmedID in
                 DispatchQueue.toMain {
                     self.getVisibleCellForLocalFile(objectTrimmedLocalID: trimmedID) {
-                        guard let progress = self.inProgressMediaIDs[trimmedID], progress > .zero else {
+                        guard
+                            let progress = self.inProgressMediaIDs.removeValueSafely(forKey: trimmedID),
+                            progress > .zero
+                        else {
                             $0?.update(syncStatus: .notSynced)
                             return
                         }
@@ -819,7 +820,6 @@ extension PhotoVideoController: ItemOperationManagerViewProtocol {
                     }
                 }
             }
-            self.inProgressMediaIDs.removeAll()
         }
     }
     
