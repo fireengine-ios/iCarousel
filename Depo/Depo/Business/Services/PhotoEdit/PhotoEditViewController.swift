@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 enum PhotoEditiComletion {
     case canceled
     case saved
@@ -68,6 +69,9 @@ final class PhotoEditViewController: ViewController, NibInit {
 //MARK: - AdjustmentsViewDelegate
 
 extension PhotoEditViewController: AdjustmentsViewDelegate {
+    func roatate90Degrees() {
+        //
+    }
     
     func showAdjustMenu() {
         let items = ["string 1", "string 2", "string 3", "string 4", "string 5"]
@@ -133,6 +137,16 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
 extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     
     func needShowFilterView(for type: FilterViewType) {
+        guard type != .adjust else {
+            DispatchQueue.main.async {
+                let controller = CropViewController(image: self.sourceImage)
+                controller.delegate = self
+                self.present(controller, animated: true, completion: nil)
+            }
+            return
+        }
+        
+        
         let manager = AdjustmentManager(types: type.adjustmenTypes)
         
         guard !manager.parameters.isEmpty,
@@ -147,3 +161,19 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
         uiManager.showFilter(type: type, view: view, changesBar: changesBar)
     }
 }
+
+extension PhotoEditViewController: CropViewControllerDelegate {
+    func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
+        cropViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    func cropViewControllerDidFailToCrop(_ cropViewController: CropViewController, original: UIImage) {
+        cropViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
+        uiManager.setImage(cropped)
+        cropViewController.dismiss(animated: true, completion: nil)
+    }
+}
+
