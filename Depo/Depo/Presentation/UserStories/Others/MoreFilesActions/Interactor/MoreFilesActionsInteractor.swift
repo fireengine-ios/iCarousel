@@ -235,8 +235,26 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 
                 return
             }
-            let vc = PhotoEditViewController.with(image: image, presented: completion) { completionType in
-                debugPrint(completionType)
+            let vc = PhotoEditViewController.with(image: image, presented: completion) { [weak self] completionType in
+                switch completionType {
+                case .canceled:
+                    break
+                case .savedAs(image: let newImage):
+                    
+                    self?.fileService.save(item: item, imageData: UIImagePNGRepresentation(newImage), asNew: true,
+                                     success: {
+                        debugPrint("!!save as succ")
+                    }) { error in
+                        debugPrint("!!save as succ")
+                    }
+                case .saved(image: let newImage):
+                    self?.fileService.save(item: item, imageData: UIImagePNGRepresentation(newImage), asNew: false,
+                                     success: {
+                        debugPrint("!!save succ")
+                    }) { error in
+                        debugPrint("!!save succ")
+                    }
+                }
             }
             
             self.router.presentViewController(controller: vc)

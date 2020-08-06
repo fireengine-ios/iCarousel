@@ -23,7 +23,8 @@ protocol  WrapItemFileOperations {
     
     func upload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse)
     
-    func save(item: BaseDataSourceItem, imageData: Data, asNew: Bool, success: FileOperationSucces?, fail: FailResponse?)
+    //basicaly reupload with same UUID if regular save, and with new UUID if save as.
+    func save(item: WrapData, imageData: Data?, asNew: Bool, success: @escaping FileOperationSucces, fail: @escaping FailResponse)
     
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?)
     
@@ -186,8 +187,37 @@ class WrapItemFileService: WrapItemFileOperations {
                                      fail: fail, returnedUploadOperation: { _ in})
     }
     
-    func save(item: BaseDataSourceItem, imageData: Data, asNew: Bool, success: FileOperationSucces?, fail: FailResponse?) {
+    //basicaly reupload with same UUID if regular save, and with new UUID if save as.
+    func save(item: WrapData, imageData: Data?, asNew: Bool, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
+        guard let itemToSave = prepareItemForSaving(item: item, imageData: imageData, asNew: asNew) else {
+            return
+        }
+        //if we choose "save us" we upload as usual
+        uploadService.uploadFileList(items: [itemToSave],
+                                     uploadType: asNew ? .upload : .save,
+                                     uploadStategy: .WithoutConflictControl,
+                                     uploadTo: .MOBILE_UPLOAD,
+                                     success: success,
+                                     fail: fail, returnedUploadOperation: { _ in})
+    }
+    
+    private func prepareItemForSaving(item: WrapData, imageData: Data?, asNew: Bool) -> WrapData? {
+        guard let data = imageData else {
+            return nil
+        }
+        let newItem = WrapData(imageData: data, isLocal: asNew)//
+        newItem.fileData = data
+        newItem.patchToPreview = .remoteUrl(nil)
+        newItem.localFileUrl = nil
+        newItem.isLocalItem = asNew// if local we generate new UUID, maybe we should rewrite it to pass just a flag that decides to generate new UUID or not
         
+        if !asNew {
+            newItem.favorites = item.favorites
+            newItem.uuid = item.uuid
+            newItem.name = item.name
+        }
+        
+        return newItem
     }
     
     func cancellableUpload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedUploadOperations: @escaping ([UploadOperation]?) -> Void) {
