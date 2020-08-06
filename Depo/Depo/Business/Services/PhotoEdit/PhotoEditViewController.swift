@@ -26,15 +26,17 @@ final class PhotoEditViewController: ViewController, NibInit {
         }
     }
     
-    var adjustmentManager: AdjustmentManager?
+    private var adjustmentManager: AdjustmentManager?
     
-    var sourceImage = UIImage()
+    private var originalImage = UIImage()
+    private var sourceImage = UIImage()
     
     var presentedCallback: VoidHandler?
     var finishedEditing: PhotoEditCompletionHandler?
     
     static func with(image: UIImage, presented: VoidHandler?, completion: PhotoEditCompletionHandler?) -> PhotoEditViewController {
         let controller = PhotoEditViewController.initFromNib()
+        controller.originalImage = image
         controller.sourceImage = image
         controller.presentedCallback = presented
         controller.finishedEditing = completion
@@ -47,14 +49,20 @@ final class PhotoEditViewController: ViewController, NibInit {
         super.viewDidLoad()
         
         view.backgroundColor = .black
-        uiManager.navBarView.delegate = self
         setInitialState()
         presentedCallback?()
     }
 
     private func setInitialState() {
         uiManager.showInitialState()
+        
         uiManager.setImage(sourceImage)
+        
+        if originalImage != sourceImage {
+            uiManager.navBarView.state = .edit
+        } else {
+            uiManager.navBarView.state = .initial
+        }
     }
     
     private func showMoreActionsMenu() {
@@ -72,6 +80,12 @@ final class PhotoEditViewController: ViewController, NibInit {
             debugPrint(index)
         }
         present(controller, animated: false)
+    }
+    
+    private func resetToOriginal() {
+        sourceImage = originalImage
+        uiManager.setImage(sourceImage)
+        uiManager.navBarView.state = .initial
     }
 }
 
@@ -119,7 +133,10 @@ extension PhotoEditViewController: FilterChangesBarDelegate {
     }
     
     func applyFilter() {
-        
+        if let image = uiManager.imageView.image {
+            sourceImage = image
+        }
+        setInitialState()
     }
 }
 
@@ -128,7 +145,7 @@ extension PhotoEditViewController: FilterChangesBarDelegate {
 extension PhotoEditViewController: PhotoEditNavbarDelegate {
     func onClose() {
         finishedEditing?(.canceled)
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     
     func onSavePhoto() {
@@ -174,16 +191,17 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
 
 extension PhotoEditViewController: CropViewControllerDelegate {
     func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
-        cropViewController.dismiss(animated: true, completion: nil)
+        cropViewController.dismiss(animated: true)
     }
     
     func cropViewControllerDidFailToCrop(_ cropViewController: CropViewController, original: UIImage) {
-        cropViewController.dismiss(animated: true, completion: nil)
+        cropViewController.dismiss(animated: true)
     }
     
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
         uiManager.setImage(cropped)
-        cropViewController.dismiss(animated: true, completion: nil)
+        applyFilter()
+        cropViewController.dismiss(animated: true)
     }
 }
 
