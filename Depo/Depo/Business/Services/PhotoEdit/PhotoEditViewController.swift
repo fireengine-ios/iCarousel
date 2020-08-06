@@ -97,9 +97,17 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
     }
     
     func showAdjustMenu() {
-        let items = ["string 1", "string 2", "string 3", "string 4", "string 5"]
+        let items = ["Save As", "reser 1", "reset 2", "reset 3", "reset 4"]
         let controller = SelectionMenuController.with(style: .checkmark, items: items, selectedIndex: 1) { [weak self] index in
-            debugPrint(index)
+            guard let self = self else {
+                return
+            }
+            switch index {
+            case 0:
+                self.finishedEditing?(.savedAs(image: self.sourceImage))
+            default:
+                self.resetToOriginal()
+            }
         }
         present(controller, animated: false)
     }

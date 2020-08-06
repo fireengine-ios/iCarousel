@@ -24,7 +24,9 @@ protocol  WrapItemFileOperations {
     func upload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse)
     
     //basicaly reupload with same UUID if regular save, and with new UUID if save as.
-    func save(item: WrapData, imageData: Data?, asNew: Bool, success: @escaping FileOperationSucces, fail: @escaping FailResponse)
+    func save(item: WrapData, imageData: Data?, success: @escaping FileOperationSucces, fail: @escaping FailResponse)
+    
+    func saveAs(item: WrapData, imageData: Data?, success: @escaping FileOperationSucces, fail: @escaping FailResponse)
     
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?)
     
@@ -188,13 +190,24 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     //basicaly reupload with same UUID if regular save, and with new UUID if save as.
-    func save(item: WrapData, imageData: Data?, asNew: Bool, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
-        guard let itemToSave = prepareItemForSaving(item: item, imageData: imageData, asNew: asNew) else {
+    func save(item: WrapData, imageData: Data?, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
+        guard let itemToSave = prepareItemForSaving(item: item, imageData: imageData, asNew: false) else {
             return
         }
-        //if we choose "save us" we upload as usual
         uploadService.uploadFileList(items: [itemToSave],
-                                     uploadType: asNew ? .upload : .save,
+                                     uploadType: .save,
+                                     uploadStategy: .WithoutConflictControl,
+                                     uploadTo: .MOBILE_UPLOAD,
+                                     success: success,
+                                     fail: fail, returnedUploadOperation: { _ in})
+    }
+    
+    func saveAs(item: WrapData, imageData: Data?, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
+        guard let itemToSave = prepareItemForSaving(item: item, imageData: imageData, asNew: true) else {
+            return
+        }
+        uploadService.uploadFileList(items: [itemToSave],
+                                     uploadType: .saveAs,
                                      uploadStategy: .WithoutConflictControl,
                                      uploadTo: .MOBILE_UPLOAD,
                                      success: success,
@@ -206,14 +219,12 @@ class WrapItemFileService: WrapItemFileOperations {
             return nil
         }
         let newItem = WrapData(imageData: data, isLocal: asNew)//
-        newItem.fileData = data
         newItem.patchToPreview = .remoteUrl(nil)
         newItem.localFileUrl = nil
-        newItem.isLocalItem = asNew// if local we generate new UUID, maybe we should rewrite it to pass just a flag that decides to generate new UUID or not
-        
+         newItem.uuid = item.uuid//since we dont have an asset pointer, we use original UUID to get local trimmed ID
         if !asNew {
+            newItem.albums = item.albums
             newItem.favorites = item.favorites
-            newItem.uuid = item.uuid
             newItem.name = item.name
         }
         

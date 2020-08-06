@@ -76,9 +76,9 @@ final class UploadOperation: Operation {
     
     private func setupQualityOfService(uploadType: UploadType) {
         switch uploadType {
-        case .syncToUse:
+        case .syncToUse, .save, .saveAs:
             qualityOfService = .userInteractive
-        case .upload, .save:
+        case .upload:
             qualityOfService = .userInitiated
         case .autoSync:
             qualityOfService = .background
@@ -442,6 +442,15 @@ final class UploadOperation: Operation {
                 if let uploadType = self.uploadType,
                     uploadType == .save {
                     parameters = SaveUpload(item: self.inputItem,
+                    destitantion: baseURL,
+                    uploadStategy: self.uploadStategy,
+                    uploadTo: self.uploadTo,
+                    rootFolder: self.folder,
+                    isFavorite: self.isFavorites,
+                    uploadType: self.uploadType)
+                } else if let uploadType = self.uploadType,
+                    uploadType == .saveAs {
+                    parameters = SaveAsUpload(item: self.inputItem,
                     destitantion: baseURL,
                     uploadStategy: self.uploadStategy,
                     uploadTo: self.uploadTo,

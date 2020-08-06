@@ -76,7 +76,7 @@ final class UploadService: BaseRequestService {
         switch uploadType {
         case .autoSync:
             return .sync
-        case .syncToUse, .upload, .save:
+        case .syncToUse, .upload, .save, .saveAs:
             return .upload
         }
     }

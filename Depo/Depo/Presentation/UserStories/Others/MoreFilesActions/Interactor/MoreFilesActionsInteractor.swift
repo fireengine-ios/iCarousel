@@ -240,16 +240,15 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 case .canceled:
                     break
                 case .savedAs(image: let newImage):
-                    
-                    self?.fileService.save(item: item, imageData: UIImagePNGRepresentation(newImage), asNew: true,
-                                     success: {
+                    self?.fileService.saveAs(item: item, imageData: UIImagePNGRepresentation(newImage),
+                    success: {
                         debugPrint("!!save as succ")
                     }, fail:  { error in
                         debugPrint("!!save as succ")
                     })
                 case .saved(image: let newImage):
-                    self?.fileService.save(item: item, imageData: UIImagePNGRepresentation(newImage), asNew: false,
-                                     success: {
+                    self?.fileService.save(item: item, imageData: UIImagePNGRepresentation(newImage),
+                    success: {
                         debugPrint("!!save succ")
                     }, fail:  { error in
                         debugPrint("!!save succ")
