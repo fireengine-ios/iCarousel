@@ -28,7 +28,7 @@ final class PhotoEditViewUIManager: NSObject {
             newValue.maximumZoomScale = 5
         }
     }
-    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private(set) weak var imageView: UIImageView!
     
     @IBOutlet private weak var filtersScrollView: UIScrollView! {
         willSet {
