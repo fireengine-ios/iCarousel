@@ -58,7 +58,7 @@ final class AdjustFilterView: AdjustmentsView, NibInit {
     }
     
     @IBAction private func onRightButtonTapped(_ sender: UIButton) {
-        //TODO: Rotate - change angle +90 degrees
+        delegate?.roatate90Degrees()
     }
     
     override func sliderValueChanged(newValue: Float, type: AdjustmentParameterType) {

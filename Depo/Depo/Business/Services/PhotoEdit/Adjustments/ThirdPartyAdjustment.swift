@@ -48,7 +48,7 @@ final class GPUAdjustment: ThirdPartyAdjustmentProtocol {
             self.operation.removeSourceAtIndex(0)
             
             input --> self.operation
-            input.processImage(synchronously: true)
+            input.processImage(synchronously: false)
         }
     }
 }

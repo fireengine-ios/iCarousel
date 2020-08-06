@@ -21,6 +21,7 @@ enum AdjustmentParameterType: String {
     case gamma
     case hue
     case intensity
+    case angle
     
     
     var defaultValues: AdjustmentParameterValues {
@@ -47,6 +48,8 @@ enum AdjustmentParameterType: String {
                 return (0, 1, 1)
             case .intensity:
                 return (0, 1, 1)
+            case .angle:
+                return (-45, 45, 0)
             default:
                 return (0, 0, 0)
         }
