@@ -29,6 +29,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     var adjustmentManager: AdjustmentManager?
     
     var sourceImage = UIImage()
+    var outputImage: UIImage?
     
     var presentedCallback: VoidHandler?
     var finishedEditing: PhotoEditCompletionHandler?
@@ -47,14 +48,20 @@ final class PhotoEditViewController: ViewController, NibInit {
         super.viewDidLoad()
         
         view.backgroundColor = .black
-        uiManager.navBarView.delegate = self
         setInitialState()
         presentedCallback?()
     }
 
     private func setInitialState() {
         uiManager.showInitialState()
-        uiManager.setImage(sourceImage)
+        
+        if outputImage != nil {
+            uiManager.setImage(outputImage)
+            uiManager.navBarView.state = .edit
+        } else {
+            uiManager.setImage(sourceImage)
+            uiManager.navBarView.state = .initial
+        }
     }
     
     private func showMoreActionsMenu() {
@@ -63,6 +70,12 @@ final class PhotoEditViewController: ViewController, NibInit {
             debugPrint(index)
         }
         present(controller, animated: false)
+    }
+    
+    private func resetToOriginal() {
+        outputImage = nil
+        uiManager.setImage(sourceImage)
+        uiManager.navBarView.state = .initial
     }
 }
 
@@ -97,6 +110,7 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
             
             DispatchQueue.main.async {
                 self.uiManager.setImage(outputImage)
+                self.outputImage = outputImage
             }
         }
     }
@@ -110,7 +124,7 @@ extension PhotoEditViewController: FilterChangesBarDelegate {
     }
     
     func applyFilter() {
-        
+        setInitialState()
     }
 }
 

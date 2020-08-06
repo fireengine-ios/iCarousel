@@ -33,6 +33,7 @@ final class PhotoEditViewUIManager: NSObject {
     @IBOutlet private weak var filtersScrollView: UIScrollView! {
         willSet {
             newValue.backgroundColor = ColorConstants.filterBackColor
+            newValue.showsVerticalScrollIndicator = false
         }
     }
 
@@ -74,7 +75,6 @@ final class PhotoEditViewUIManager: NSObject {
         showTabBarItemView(tabbar.selectedType)
         animator.showTransition(to: navBarView, on: navBarContainer, animated: true)
         animator.showTransition(to: tabbar, on: bottomBarContainer, animated: true)
-        navBarView.state = .initial
     }
     
     func setImage(_ image: UIImage?) {
@@ -125,7 +125,7 @@ extension PhotoEditViewUIManager: FilterCategoriesViewDelegate {
         currentFilterViewType = type
         animator.showTransition(to: view, on: filtersContainerView, animated: true)
         animator.showTransition(to: changesBar, on: bottomBarContainer, animated: true)
-        navBarView.state = .edit
+        navBarView.state = .initial
     }
 }
 
