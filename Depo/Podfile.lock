@@ -6,7 +6,6 @@ PODS:
   - CircleProgressBar (0.32)
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
-  - CropViewController (2.5.4)
   - Fabric (1.10.2)
   - FBSDKCoreKit (7.0.1):
     - FBSDKCoreKit/Basics (= 7.0.1)
@@ -180,7 +179,6 @@ DEPENDENCIES:
   - Alamofire (~> 4.8.1)
   - CircleProgressBar (~> 0.32)
   - Crashlytics (= 3.14.0)
-  - CropViewController (~> 2)
   - Fabric (~> 1.10)
   - FBSDKCoreKit (~> 7)
   - FBSDKLoginKit (~> 7)
@@ -254,7 +252,6 @@ SPEC REPOS:
     - XYPieChart
     - YYImage
   trunk:
-    - CropViewController
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
@@ -273,7 +270,6 @@ SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   CircleProgressBar: 3920079be5224b62b3d9ed6eeb23ac01c835b681
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
-  CropViewController: 980df34ffc499db89755b2f307f20eca00cd40c6
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
   FBSDKCoreKit: 9cc05bec0568a5955c82eb59ae95da0fe125b88d
   FBSDKLoginKit: ecc6fd43c81b60f5b5e9388d58f137aff4a5d00b
@@ -318,6 +314,6 @@ SPEC CHECKSUMS:
   XYPieChart: 0efd8069d26c25d20ab74c01b5ad455f1fc48153
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: d54cb07833d352fffd701087b2eaddee84745025
+PODFILE CHECKSUM: f319ea26fee91f37c7877deb8d869c851d3defa1
 
 COCOAPODS: 1.9.3
