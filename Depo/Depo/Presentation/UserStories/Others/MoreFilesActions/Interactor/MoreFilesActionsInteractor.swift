@@ -235,22 +235,38 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 
                 return
             }
-            let vc = PhotoEditViewController.with(image: image, presented: completion) { [weak self] completionType in
+            let vc = PhotoEditViewController.with(image: image, presented: completion) { [weak self] controller, completionType in
                 switch completionType {
                 case .canceled:
-                    break
+                    controller.dismiss(animated: true)
                 case .savedAs(image: let newImage):
+                    controller.showSpinner()
                     self?.fileService.saveAs(item: item, imageData: UIImagePNGRepresentation(newImage),
                     success: {
                         debugPrint("!!save as succ")
+                        DispatchQueue.main.async {
+                            controller.dismiss(animated: true)
+                        }
                     }, fail:  { error in
+                        DispatchQueue.main.async {
+                            controller.hideSpinner()
+                            UIApplication.showErrorAlert(message: "Save image error")
+                        }
                         debugPrint("!!save as succ")
                     })
                 case .saved(image: let newImage):
+                    controller.showSpinner()
                     self?.fileService.save(item: item, imageData: UIImagePNGRepresentation(newImage),
                     success: {
+                        DispatchQueue.main.async {
+                            controller.dismiss(animated: true)
+                        }
                         debugPrint("!!save succ")
                     }, fail:  { error in
+                        DispatchQueue.main.async {
+                            controller.hideSpinner()
+                            UIApplication.showErrorAlert(message: "Save image error")
+                        }
                         debugPrint("!!save succ")
                     })
                 }
