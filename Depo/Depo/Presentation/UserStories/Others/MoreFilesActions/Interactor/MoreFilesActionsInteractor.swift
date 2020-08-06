@@ -244,16 +244,16 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     self?.fileService.save(item: item, imageData: UIImagePNGRepresentation(newImage), asNew: true,
                                      success: {
                         debugPrint("!!save as succ")
-                    }) { error in
+                    }, fail:  { error in
                         debugPrint("!!save as succ")
-                    }
+                    })
                 case .saved(image: let newImage):
                     self?.fileService.save(item: item, imageData: UIImagePNGRepresentation(newImage), asNew: false,
                                      success: {
                         debugPrint("!!save succ")
-                    }) { error in
+                    }, fail:  { error in
                         debugPrint("!!save succ")
-                    }
+                    })
                 }
             }
             
