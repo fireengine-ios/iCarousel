@@ -9,13 +9,13 @@
 import UIKit
 
 
-enum PhotoEditiComletion {
+enum PhotoEditCompletion {
     case canceled
-    case saved
-    case savedAs
+    case saved(image: UIImage)
+    case savedAs(image: UIImage)
 }
 
-typealias PhotoEditCompletionHandler = (PhotoEditiComletion) -> Void
+typealias PhotoEditCompletionHandler = (_ controller: PhotoEditViewController, _ result: PhotoEditCompletion) -> Void
 
 final class PhotoEditViewController: ViewController, NibInit {
     
@@ -26,15 +26,20 @@ final class PhotoEditViewController: ViewController, NibInit {
         }
     }
     
-    var adjustmentManager: AdjustmentManager?
+    private var adjustmentManager: AdjustmentManager?
     
-    var sourceImage = UIImage()
+    private var originalImage = UIImage()
+    private var sourceImage = UIImage()
+    private var hasChanges: Bool {
+        originalImage != sourceImage
+    }
     
     var presentedCallback: VoidHandler?
     var finishedEditing: PhotoEditCompletionHandler?
     
     static func with(image: UIImage, presented: VoidHandler?, completion: PhotoEditCompletionHandler?) -> PhotoEditViewController {
         let controller = PhotoEditViewController.initFromNib()
+        controller.originalImage = image
         controller.sourceImage = image
         controller.presentedCallback = presented
         controller.finishedEditing = completion
@@ -47,7 +52,6 @@ final class PhotoEditViewController: ViewController, NibInit {
         super.viewDidLoad()
         
         view.backgroundColor = .black
-        uiManager.navBarView.delegate = self
         setInitialState()
         presentedCallback?()
     }
@@ -55,14 +59,28 @@ final class PhotoEditViewController: ViewController, NibInit {
     private func setInitialState() {
         uiManager.showInitialState()
         uiManager.setImage(sourceImage)
+        uiManager.navBarView.state = hasChanges ? .edit : .initial
     }
     
     private func showMoreActionsMenu() {
         let items = ["Save as copy", "Reset to original"]
         let controller = SelectionMenuController.with(style: .simple, items: items, selectedIndex: nil) { [weak self] index in
-            debugPrint(index)
+            guard let self = self else {
+                return
+            }
+            switch index {
+            case 0:
+                self.finishedEditing?(self, .savedAs(image: self.sourceImage))
+            default:
+                self.resetToOriginal()
+            }
         }
         present(controller, animated: false)
+    }
+    
+    private func resetToOriginal() {
+        sourceImage = originalImage
+        setInitialState()
     }
 }
 
@@ -74,9 +92,9 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
     }
     
     func showAdjustMenu() {
-        let items = ["string 1", "string 2", "string 3", "string 4", "string 5"]
-        let controller = SelectionMenuController.with(style: .checkmark, items: items, selectedIndex: 1) { [weak self] index in
-            debugPrint(index)
+        let items = ["Free", "Original", "16:9", "4:3", "3:2"]
+        let controller = SelectionMenuController.with(style: .checkmark, items: items, selectedIndex: 1) { index in
+            //TODO: need handle if will be use AdjustFilterView
         }
         present(controller, animated: false)
     }
@@ -110,7 +128,10 @@ extension PhotoEditViewController: FilterChangesBarDelegate {
     }
     
     func applyFilter() {
-        
+        if let image = uiManager.imageView.image {
+            sourceImage = image
+        }
+        setInitialState()
     }
 }
 
@@ -118,11 +139,33 @@ extension PhotoEditViewController: FilterChangesBarDelegate {
 
 extension PhotoEditViewController: PhotoEditNavbarDelegate {
     func onClose() {
-        dismiss(animated: true, completion: nil)
+        let closeHandler: VoidHandler = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.finishedEditing?(self, .canceled)
+        }
+        
+        if !hasChanges {
+            closeHandler()
+            return
+        }
+
+        let popup = PopUpController.with(title: "Discart Changes?",
+                                         message: "Your changer won't be saved",
+                                         image: .question,
+                                         firstButtonTitle: "Keep editing",
+                                         secondButtonTitle: "Discard",
+                                         secondAction: { vc in
+                                            vc.close {
+                                                closeHandler()
+                                            }
+        })
+        present(popup, animated: true)
     }
     
     func onSavePhoto() {
-        
+        finishedEditing?(self, .saved(image: sourceImage))
     }
     
     func onMoreActions() {
@@ -141,7 +184,7 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
             DispatchQueue.main.async {
                 let controller = CropViewController(image: self.sourceImage)
                 controller.delegate = self
-                self.present(controller, animated: true, completion: nil)
+                self.present(controller, animated: true)
             }
             return
         }
@@ -164,16 +207,17 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
 
 extension PhotoEditViewController: CropViewControllerDelegate {
     func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
-        cropViewController.dismiss(animated: true, completion: nil)
+        cropViewController.dismiss(animated: true)
     }
     
     func cropViewControllerDidFailToCrop(_ cropViewController: CropViewController, original: UIImage) {
-        cropViewController.dismiss(animated: true, completion: nil)
+        cropViewController.dismiss(animated: true)
     }
     
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
         uiManager.setImage(cropped)
-        cropViewController.dismiss(animated: true, completion: nil)
+        applyFilter()
+        cropViewController.dismiss(animated: true)
     }
 }
 

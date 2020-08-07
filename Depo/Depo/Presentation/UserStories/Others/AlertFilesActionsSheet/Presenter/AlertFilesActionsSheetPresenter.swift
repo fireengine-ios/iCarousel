@@ -288,7 +288,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .edit))
                         UIApplication.topController()?.showSpinner()
-                        self.interactor.edit(item: currentItems, complition: {
+                        self.interactor.edit(item: currentItems, completion: {
                             UIApplication.topController()?.hideSpinner()
                         })
                     })
