@@ -29,25 +29,25 @@ enum AdjustmentParameterType: String {
             case .brightness:
                 return (-1, 1, 0)
             case .contrast:
-                return (0, 4, 1)
+                return (0, 4, 2)
             case .exposure:
                 return (-10, 10, 0)
             case .saturation:
                 return (0, 2, 1)
             case .gamma:
-                return (0, 3, 1)
+                return (0, 3, 1.5)
             case .hue:
-                return (0, 360, 90)
+                return (-180, 180, 0)
             case .temperature:
-                return (4000, 7000, 5000)
+                return (4000, 7000, 5500)
             case .tint:
                 return (-200, 200, 0)
             case .highlights:
-                return (0, 1, 0)
+                return (0, 1, 0.5)
             case .shadows:
-                return (0, 1, 1)
+                return (0, 1, 0.5)
             case .intensity:
-                return (0, 1, 1)
+                return (0, 1, 0.5)
             case .angle:
                 return (-45, 45, 0)
             default:

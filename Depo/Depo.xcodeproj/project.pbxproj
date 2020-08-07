@@ -5941,6 +5941,12 @@
 		B569575624DAAFA100B7B336 /* DialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569567724DAAF9D00B7B336 /* DialConfig.swift */; };
 		B569575724DAAFA100B7B336 /* DialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569567724DAAF9D00B7B336 /* DialConfig.swift */; };
 		B569575824DAAFA100B7B336 /* DialConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569567724DAAF9D00B7B336 /* DialConfig.swift */; };
+		B569577424DBE7AC00B7B336 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B569577324DBE7AB00B7B336 /* LICENSE */; };
+		B569577524DBE7AC00B7B336 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B569577324DBE7AB00B7B336 /* LICENSE */; };
+		B569577624DBE7AC00B7B336 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B569577324DBE7AB00B7B336 /* LICENSE */; };
+		B569577724DBE7AC00B7B336 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B569577324DBE7AB00B7B336 /* LICENSE */; };
+		B569577824DBE7AC00B7B336 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B569577324DBE7AB00B7B336 /* LICENSE */; };
+		B569577924DBE7AC00B7B336 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B569577324DBE7AB00B7B336 /* LICENSE */; };
 		B56B97B4212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */; };
 		B56B97B5212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */; };
 		B56BE2B51FE2732F007DC1BC /* ItemSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */; };
@@ -13671,6 +13677,7 @@
 		B569567524DAAF9D00B7B336 /* RotationDial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationDial.swift; sourceTree = "<group>"; };
 		B569567624DAAF9D00B7B336 /* CGAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGAngle.swift; sourceTree = "<group>"; };
 		B569567724DAAF9D00B7B336 /* DialConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialConfig.swift; sourceTree = "<group>"; };
+		B569577324DBE7AB00B7B336 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityFileProvider.swift; sourceTree = "<group>"; };
 		B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncService.swift; sourceTree = "<group>"; };
 		B56E0DD620B414510082044D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -20028,6 +20035,7 @@
 		B569563D24DAAF9D00B7B336 /* Mantis */ = {
 			isa = PBXGroup;
 			children = (
+				B569577324DBE7AB00B7B336 /* LICENSE */,
 				B569563E24DAAF9D00B7B336 /* Resources */,
 				B569564D24DAAF9D00B7B336 /* RatioOptions.swift */,
 				B569564E24DAAF9D00B7B336 /* Mantis.swift */,
@@ -23863,6 +23871,7 @@
 				0303A5DF2397D0D000907F42 /* PrintViewController.xib in Resources */,
 				CF71472024B597AA00D83E60 /* ContactListHeader.xib in Resources */,
 				0303A5E02397D0D000907F42 /* CaptchaViewController.xib in Resources */,
+				B569577724DBE7AC00B7B336 /* LICENSE in Resources */,
 				A74ADA3E23A2AC3F007DD192 /* DivorceCard.xib in Resources */,
 				0303A5E62397D0D000907F42 /* AutoSyncViewController.xib in Resources */,
 				985D87E124D0156B004BCDFF /* PhotoEditViewController.xib in Resources */,
@@ -24350,6 +24359,7 @@
 				CF71471224B597AA00D83E60 /* ContactListMainView.xib in Resources */,
 				B5AB5B6721F9B01B003AABB4 /* DropboxAccountConnectionCell.xib in Resources */,
 				8C0E90471FDEBDFF00789C91 /* ActivityTimelineFileCell.xib in Resources */,
+				B569577524DBE7AC00B7B336 /* LICENSE in Resources */,
 				8C0E90491FDEBDFF00789C91 /* EditinglBar.xib in Resources */,
 				8C0E904A1FDEBDFF00789C91 /* AlbumCollectionViewCell.xib in Resources */,
 				986AD0F324D30929000B0D3C /* SelectionMenuCell.xib in Resources */,
@@ -24792,6 +24802,7 @@
 				CEF0C28B1FC594E300105C31 /* InstagramAuthViewController.xib in Resources */,
 				4A9B38F6201F2D99009FC572 /* CollectionViewCellForFaceImage.xib in Resources */,
 				737A2EBE2338E03A0014258A /* SelectQuestionViewController.xib in Resources */,
+				B569577424DBE7AC00B7B336 /* LICENSE in Resources */,
 				B56FBB1C2122C23D004F4A59 /* TermsOfUseViewController.xib in Resources */,
 				CF7145FD24B597A800D83E60 /* ContactDetailCell.xib in Resources */,
 				984A514021E734D2004525F5 /* AnalyzeHistoryViewController.xib in Resources */,
@@ -25293,6 +25304,7 @@
 				CF71468524B597A900D83E60 /* ContactSyncNoBackupView.xib in Resources */,
 				CE784F0322A685FB00662219 /* TurkcellSaturaBolIta.ttf in Resources */,
 				CF7146D324B597A900D83E60 /* DeleteDuplicatesHeader.xib in Resources */,
+				B569577824DBE7AC00B7B336 /* LICENSE in Resources */,
 				8C86111222BCF28900108958 /* TermsAndPolicyViewController.xib in Resources */,
 				CE784F0822A685FB00662219 /* VisualMusicPlayerViewController.xib in Resources */,
 				CE784F0922A685FB00662219 /* InstaPickHashtagCell.xib in Resources */,
@@ -25495,6 +25507,7 @@
 				CF8B6A1A23CBC9D70021B021 /* AlbumCollectionViewCell.xib in Resources */,
 				CF8B6A1D23CBC9D70021B021 /* GoogleService-Info-ent.plist in Resources */,
 				CF8B6A1E23CBC9D70021B021 /* IntroduceViewController.xib in Resources */,
+				B569577624DBE7AC00B7B336 /* LICENSE in Resources */,
 				986AD0F424D30929000B0D3C /* SelectionMenuCell.xib in Resources */,
 				CF8B6A2323CBC9D70021B021 /* PremiumListView.xib in Resources */,
 				CF8B6A2723CBC9D70021B021 /* SpotifyOverwritePopup.xib in Resources */,
@@ -25907,6 +25920,7 @@
 				CF71468624B597A900D83E60 /* ContactSyncNoBackupView.xib in Resources */,
 				CF8B72DE23CBCA280021B021 /* TurkcellSaturaBolIta.ttf in Resources */,
 				CF7146D424B597A900D83E60 /* DeleteDuplicatesHeader.xib in Resources */,
+				B569577924DBE7AC00B7B336 /* LICENSE in Resources */,
 				CF8B72E223CBCA280021B021 /* TermsAndPolicyViewController.xib in Resources */,
 				CF8B72E423CBCA280021B021 /* VisualMusicPlayerViewController.xib in Resources */,
 				CF8B72E523CBCA280021B021 /* InstaPickHashtagCell.xib in Resources */,
