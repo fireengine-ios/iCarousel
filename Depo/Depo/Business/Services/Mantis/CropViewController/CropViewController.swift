@@ -146,10 +146,10 @@ public class CropViewController: UIViewController {
         return true
     }
     
-//    @available(iOS 11, *)
-//    public override var preferredScreenEdgesDeferringSystemGestures: UIRectEdge {
-//        return [.top, .bottom]
-//    }
+    public override func preferredScreenEdgesDeferringSystemGestures() -> UIRectEdge {
+        return [.top, .bottom]
+    }
+    
     
     public override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
