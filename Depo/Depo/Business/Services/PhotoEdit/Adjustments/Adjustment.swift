@@ -19,6 +19,7 @@ enum AdjustmentType {
     case saturation
     case gamma
     
+    case hsl
     //hsl
     case hue
     //case saturation

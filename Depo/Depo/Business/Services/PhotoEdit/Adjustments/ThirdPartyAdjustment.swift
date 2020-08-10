@@ -12,6 +12,32 @@ protocol ThirdPartyAdjustmentProtocol {
     func applyOn(image: UIImage, onFinished: @escaping ValueHandler<UIImage>)
 }
 
+final class CoreImageAdjustment: ThirdPartyAdjustmentProtocol {
+    
+    private var filter: BasicFilter?
+    
+    init(filter: BasicFilter) {
+        self.filter = filter
+    }
+    
+    func applyOn(image: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
+        guard let inputImage = CIImage(image: image) else {
+            onFinished(image)
+            return
+        }
+        
+        filter?.inputImage = inputImage
+        
+        guard let adjustedImage = filter?.outputImage else {
+            onFinished(image)
+            return
+        }
+        
+        let output = UIImage(ciImage: adjustedImage)
+        onFinished(output)
+    }
+}
+
 
 final class GPUAdjustment: ThirdPartyAdjustmentProtocol {
     

@@ -40,7 +40,7 @@ enum FilterViewType {
         case .effect:
             return []
         case .hls:
-            return [.hue, .saturation, .monochrome]
+            return [.hsl]
         case .light:
             return [.brightness, .contrast, .exposure, .highlightsAndShadows]
         }

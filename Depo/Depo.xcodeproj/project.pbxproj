@@ -5947,6 +5947,12 @@
 		B569577724DBE7AC00B7B336 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B569577324DBE7AB00B7B336 /* LICENSE */; };
 		B569577824DBE7AC00B7B336 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B569577324DBE7AB00B7B336 /* LICENSE */; };
 		B569577924DBE7AC00B7B336 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = B569577324DBE7AB00B7B336 /* LICENSE */; };
+		B569578124DD72D800B7B336 /* HSVMultiband.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569578024DD72D700B7B336 /* HSVMultiband.swift */; };
+		B569578224DD72D800B7B336 /* HSVMultiband.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569578024DD72D700B7B336 /* HSVMultiband.swift */; };
+		B569578324DD72D900B7B336 /* HSVMultiband.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569578024DD72D700B7B336 /* HSVMultiband.swift */; };
+		B569578424DD72D900B7B336 /* HSVMultiband.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569578024DD72D700B7B336 /* HSVMultiband.swift */; };
+		B569578524DD72D900B7B336 /* HSVMultiband.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569578024DD72D700B7B336 /* HSVMultiband.swift */; };
+		B569578624DD72D900B7B336 /* HSVMultiband.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569578024DD72D700B7B336 /* HSVMultiband.swift */; };
 		B56B97B4212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */; };
 		B56B97B5212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */; };
 		B56BE2B51FE2732F007DC1BC /* ItemSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */; };
@@ -13678,6 +13684,7 @@
 		B569567624DAAF9D00B7B336 /* CGAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGAngle.swift; sourceTree = "<group>"; };
 		B569567724DAAF9D00B7B336 /* DialConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialConfig.swift; sourceTree = "<group>"; };
 		B569577324DBE7AB00B7B336 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		B569578024DD72D700B7B336 /* HSVMultiband.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSVMultiband.swift; sourceTree = "<group>"; };
 		B56B97B3212EE4EB00732C2B /* AugmentedRealityFileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityFileProvider.swift; sourceTree = "<group>"; };
 		B56BE2B41FE2732F007DC1BC /* ItemSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncService.swift; sourceTree = "<group>"; };
 		B56E0DD620B414510082044D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -19908,6 +19915,7 @@
 		B51D959E24D0105400FA2EA0 /* Adjustments */ = {
 			isa = PBXGroup;
 			children = (
+				B569577F24DD72AC00B7B336 /* CoreImageAdjustments */,
 				B549B6CA24CF099500D39C44 /* Adjustment.swift */,
 				B549B6D124CF09D000D39C44 /* AdjustmentParameter.swift */,
 				B51D958D24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift */,
@@ -20132,6 +20140,14 @@
 				B569567724DAAF9D00B7B336 /* DialConfig.swift */,
 			);
 			path = RotationDial;
+			sourceTree = "<group>";
+		};
+		B569577F24DD72AC00B7B336 /* CoreImageAdjustments */ = {
+			isa = PBXGroup;
+			children = (
+				B569578024DD72D700B7B336 /* HSVMultiband.swift */,
+			);
+			path = CoreImageAdjustments;
 			sourceTree = "<group>";
 		};
 		B56FBB102122C191004F4A59 /* TermsOfUse */ = {
@@ -27470,6 +27486,7 @@
 				0303A0A92397D0D000907F42 /* PeriodicContactSyncDataSource.swift in Sources */,
 				739D4AB6248910C20032EA31 /* BottomDetailViewAnimationManager.swift in Sources */,
 				0303A0AA2397D0D000907F42 /* UserProfileInteractor.swift in Sources */,
+				B569578424DD72D900B7B336 /* HSVMultiband.swift in Sources */,
 				0303A0AB2397D0D000907F42 /* HomePagePresenter.swift in Sources */,
 				7378052023AB9D19001D57BD /* CreateOverlayStickerError.swift in Sources */,
 				0303A0AC2397D0D000907F42 /* LeavePremiumInitializer.swift in Sources */,
@@ -29935,6 +29952,7 @@
 				CF71461024B597A800D83E60 /* ContactDetailNoInfoCell.swift in Sources */,
 				8C0E8EBF1FDEBDFF00789C91 /* CircleButton.swift in Sources */,
 				8C26008822919AAD0063E913 /* SecurityCodeTextField.swift in Sources */,
+				B569578224DD72D800B7B336 /* HSVMultiband.swift in Sources */,
 				8C0E8EC01FDEBDFF00789C91 /* DateExtension.swift in Sources */,
 				8E3B6B4B2462E43D00BCB052 /* FileInfoView.swift in Sources */,
 				B5AB5B5721F9A92B003AABB4 /* ConnectedAccountsViewController.swift in Sources */,
@@ -31702,6 +31720,7 @@
 				2BA37C40202883BF00660394 /* FaceImagePhotosRouterInput.swift in Sources */,
 				EFA74FB71FBF378F00CF946E /* PrintInteractor.swift in Sources */,
 				CE51ACF21EF90853005DCEE0 /* PhoneVerificationRouterInput.swift in Sources */,
+				B569578124DD72D800B7B336 /* HSVMultiband.swift in Sources */,
 				98BE78AE24517E4300B8864F /* SnackbarManager.swift in Sources */,
 				B579E81B1FE2892200F47B0A /* VideoSyncService.swift in Sources */,
 				8C20864D228D4B2E000BEDAD /* PhotoVideoNavBarManager.swift in Sources */,
@@ -33100,6 +33119,7 @@
 				73B4077822E9C1380033D317 /* TermsCheckboxTextView.swift in Sources */,
 				CE7849A322A685FB00662219 /* RegistrationInteractorInput.swift in Sources */,
 				CE7849A422A685FB00662219 /* CollectionViewHeaderWithText.swift in Sources */,
+				B569578524DD72D900B7B336 /* HSVMultiband.swift in Sources */,
 				89E51D5122CA1121007A7DBC /* CreateStoryPreviewModuleInput.swift in Sources */,
 				CE7849A522A685FB00662219 /* RegistrationInteractorOutput.swift in Sources */,
 				CE7849A622A685FB00662219 /* MaskService.swift in Sources */,
@@ -34352,6 +34372,7 @@
 				CF8B647223CBC9D70021B021 /* SmartAlbumCell.swift in Sources */,
 				CF8B647323CBC9D70021B021 /* DarkPopUpController.swift in Sources */,
 				CF8B647423CBC9D70021B021 /* AutoSyncDataStorage.swift in Sources */,
+				B569578324DD72D900B7B336 /* HSVMultiband.swift in Sources */,
 				CF8B647523CBC9D70021B021 /* PrintInitializer.swift in Sources */,
 				988CD64124D1613C00C81241 /* PhotoEditTabbar.swift in Sources */,
 				9863B89724D2AB0C00664810 /* PhotoEditNavbar.swift in Sources */,
@@ -36096,6 +36117,7 @@
 				CF8B6D1823CBCA280021B021 /* MaskService.swift in Sources */,
 				CF8B6D1923CBCA280021B021 /* SpotifyAuthViewController.swift in Sources */,
 				0305A33F23D5C54B004D1EC7 /* TrashBinDataSource.swift in Sources */,
+				B569578624DD72D900B7B336 /* HSVMultiband.swift in Sources */,
 				CF8B6D1A23CBCA280021B021 /* ArrayDataSourceForCollectionView.swift in Sources */,
 				CF8B6D1B23CBCA280021B021 /* TermsAndPolicyViewController.swift in Sources */,
 				CF8B6D1C23CBCA280021B021 /* InstaPickBigPhotoView.swift in Sources */,

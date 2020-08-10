@@ -94,6 +94,26 @@ final class AdjustmentManager {
                 parameters = [intensityParameter]
                 thirdPartyAdjustment = GPUAdjustment(operation: gpuOperation)
             
+            case .hsl:
+                let coreAdjustment = HSVMultiband()
+                
+                let saturarionParameter = AdjustmentParameter(type: .saturation).onValueDidChange { value in
+                    let newShift = CIVector(x: 0, y: CGFloat(value), z: 1)
+                    coreAdjustment.inputBlueShift = newShift
+                }
+                
+                let intensityParameter = AdjustmentParameter(type: .intensity).onValueDidChange { value in
+                    let newShift = CIVector(x: 0, y: 1, z: CGFloat(value))
+                    //                    coreAdjustment.inputGreenShift = newShift
+                    //                    coreAdjustment.inputAquaShift = newShift
+                    coreAdjustment.inputBlueShift = newShift
+                    //                    coreAdjustment.inputMagentaShift = newShift
+                    //                    coreAdjustment.inputPurpleShift = newShift
+                    //                    coreAdjustment.inputOrangeShift = newShift
+                }
+                parameters = [saturarionParameter, intensityParameter]
+                thirdPartyAdjustment = CoreImageAdjustment(filter: coreAdjustment)
+            
             default:
                 assertionFailure("Add missing AdjustmentType")
                 break
