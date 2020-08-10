@@ -120,10 +120,7 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
     }
     
     private func getCellMaxY() -> CGFloat {
-        guard let cell = collectionView.cellForItem(at: IndexPath(row: selectedIndex, section: 0)) as? PhotoVideoDetailCell else {
-            return .zero
-        }
-        return cell.frame.maxY
+        collectionView.cellForItem(at: IndexPath(row: selectedIndex, section: .zero))?.frame.maxY ?? .zero
     }
     
     private func setupDetailViewAlpha(isHidden: Bool) {
@@ -282,6 +279,7 @@ extension BottomDetailViewAnimationManager {
         viewState = .expanded
         managedView.frame.origin.y = yPositionForBottomView
         collectionView.frame.origin.y = yPositionForBottomView - collectionViewCellMaxY + imageMaxY
+        stopVideoIfNeeded()
     }
     
     private func setFullState() {
@@ -293,6 +291,12 @@ extension BottomDetailViewAnimationManager {
         collapseView.isHidden = false
         setupDetailViewAlpha(isHidden: false)
         isFullScreen = true
+    }
+    
+    private func stopVideoIfNeeded() {
+        if let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: .zero)) as? VideoInterruptable {
+            cell.stop()
+        }
     }
     
     func showDetailView() {
@@ -344,8 +348,8 @@ extension BottomDetailViewAnimationManager {
             return
         }
         
-        let cell = collectionView.visibleCells.first as? PhotoVideoDetailCell
-        cell?.delegate = self
+        let cell = collectionView.visibleCells.first as? CellConfigurable
+        cell?.responder = self
         let offsetY = collectionView.contentOffset.y
         selectedIndex = index
         
