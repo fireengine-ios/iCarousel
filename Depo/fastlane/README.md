@@ -35,9 +35,9 @@ fastlane my_gym_lifedrive
 fastlane firebase_lifetech_lifebox
 ```
 LifeTech Lifebox build distribution via Firebase
-### firebase_lifetech_lifedrive
+### firebase_lifetech_billo
 ```
-fastlane firebase_lifetech_lifedrive
+fastlane firebase_lifetech_billo
 ```
 LifeTech Lifedrive build distribution via Firebase
 ### slack_post
