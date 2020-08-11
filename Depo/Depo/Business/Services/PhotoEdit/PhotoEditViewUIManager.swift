@@ -155,6 +155,7 @@ private final class ContentAnimator {
                 contentView.layoutIfNeeded()
             }
             
+            newView.frame.size.width = contentView.frame.width
             contentView.frame.size.height = newView.frame.height
             contentView.frame.origin.y += newView.frame.origin.y - contentView.frame.origin.y
             
