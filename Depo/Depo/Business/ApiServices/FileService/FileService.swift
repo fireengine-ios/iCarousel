@@ -252,6 +252,7 @@ class DetailResponse: ObjectRequestResponse {
 
 typealias FileOperation = () -> Void
 typealias FolderOperation = (Item?) -> Void
+typealias UpdateFileOperation = (WrapData) -> Void
 
 class FileService: BaseRequestService {
     
@@ -528,6 +529,24 @@ class FileService: BaseRequestService {
         }, fail: fail)
         executePutRequest(param: param,
                         handler: handler)
+    }
+    
+    
+    func updateDetail(uuids: String, success: UpdateFileOperation?, fail: FailResponse?) {
+        let param = FileDetail(uuid: uuids)
+        let handler = BaseResponseHandler<SearchItemResponse, ObjectRequestResponse>(success: {  detail  in
+  
+            guard let resultResponse = detail as? SearchItemResponse else {
+                assertionFailure()
+                let error = ErrorResponse.string("Unknown error")
+                fail?(error)
+                return
+            }
+            
+            success?(WrapData(remote: resultResponse))
+        
+        }, fail: fail)
+        executeGetRequest(param: param, handler: handler)
     }
     
     func details(uuids: [String], success: ListRemoteItems?, fail: FailResponse?) {

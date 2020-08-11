@@ -32,9 +32,9 @@ class EditinglBar: CustomTabBar {
         static let restore = ("RestoreButtonIcon", TextConstants.actionSheetRestore, "")
     }
     
-    private let tabBarHeight: CGFloat = 49
+    private let tabBarHeight: CGFloat = NumericConstants.tabBarHight
     
-    private let originalY: CGFloat = -49
+    private let originalY: CGFloat = -NumericConstants.tabBarHight
     private let originalX: CGFloat = 0
     
     private var animationsArray = [AnimationBlock]()
@@ -42,9 +42,8 @@ class EditinglBar: CustomTabBar {
     private lazy var syncProgressAnimation: AnimatedCircularLoader = {
         let side = bounds.height / 2
         let frame = CGRect(x: bounds.width / 2 - side / 2,
-                           y: 0,
+                           y: 8,
                            width: side, height: side)
-        
         let loader = AnimatedCircularLoader(frame: frame)
         
         loader.set(lineBackgroundColor: .clear)

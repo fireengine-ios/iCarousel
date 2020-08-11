@@ -40,6 +40,7 @@ final class PhotoSyncService: ItemSyncServiceImpl {
     override func waitForWiFi() {
         debugLog("PhotoSyncService waitForWiFi")
         
+        ItemOperationManager.default.failedAutoSync()
         stopAllOperations()
         super.waitForWiFi()
     }
