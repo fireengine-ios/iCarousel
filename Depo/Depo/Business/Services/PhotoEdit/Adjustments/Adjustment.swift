@@ -22,7 +22,6 @@ enum AdjustmentType {
     case hsl
     //hsl
     case hue
-    //case saturation
     //case luminance - there's no such adjustment, replaced with the monochrome
     case monochrome
     

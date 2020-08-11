@@ -29,25 +29,25 @@ enum AdjustmentParameterType: String {
             case .brightness:
                 return (-1, 1, 0)
             case .contrast:
-                return (0, 4, 2)
+                return (0, 4, 1)
             case .exposure:
                 return (-10, 10, 0)
             case .saturation:
                 return (0, 2, 1)
             case .gamma:
-                return (0, 3, 1.5)
+                return (0, 3, 1)
             case .hue:
                 return (-180, 180, 0)
             case .temperature:
-                return (4000, 7000, 5500)
+                return (4000, 7000, 5000)
             case .tint:
                 return (-200, 200, 0)
             case .highlights:
-                return (0, 1, 0.5)
+                return (0, 1, 1.0)
             case .shadows:
-                return (0, 1, 0.5)
+                return (0, 1, 0)
             case .intensity:
-                return (0, 1, 0.5)
+                return (0, 1, 1)
             case .angle:
                 return (-45, 45, 0)
             default:
@@ -81,6 +81,18 @@ final class AdjustmentParameter: AdjustmentParameterProtocol {
     let defaultValue: Float
     private(set) var currentValue: Float
     
+    private let minMiddle: Float
+    private let maxMiddle: Float
+    private let middleValue: Float
+    
+    private var realCurrentValue: Float {
+        if currentValue <= defaultValue {
+            return middleValue - ((1 - currentValue / (defaultValue - minValue)) * minMiddle)
+        } else {
+            return middleValue + (((currentValue - defaultValue) / (maxValue - defaultValue)) * minMiddle)
+        }
+    }
+    
     private var onValueDidChangeAction: ValueHandler<Float>?
     
     
@@ -89,16 +101,22 @@ final class AdjustmentParameter: AdjustmentParameterProtocol {
         
         let defaultValues = type.defaultValues
 
-        minValue = defaultValues.min
-        maxValue = defaultValues.max
-        defaultValue = defaultValues.default
+        //ui values
+        minValue = 0
+        maxValue = 1
+        defaultValue = 0.5
         currentValue = defaultValue
+        
+        //real values
+        middleValue = defaultValues.default
+        minMiddle = defaultValues.default - defaultValues.min
+        maxMiddle = defaultValues.max - defaultValues.default
     }
     
     
     func set(value: Float) {
         currentValue = value
-        onValueDidChangeAction?(value)
+        onValueDidChangeAction?(realCurrentValue)
     }
     
     @discardableResult
