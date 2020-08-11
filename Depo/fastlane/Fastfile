@@ -25,8 +25,8 @@ BUILD_NUMBER_LIFEBOX = VersionManager.get_build_number_my(xcodeproj: ".", target
 #Lifedrive
 #BUNDLE_ID_LIFEDRIVE = 'by.com.life.LifeDrive'
 APP_NAME_LIFEDRIVE = "billo_LifeTech"
-SCHEME_LIFEDRIVE = "LifeTech_lifedrive"
-TARGET_LIFEDRIVE = "LifeTech_lifedrive"
+SCHEME_LIFEDRIVE = "LifeTech_Billo"
+TARGET_LIFEDRIVE = "LifeTech_Billo"
 
 BUILD_NUMBER_LIFEDRIVE = VersionManager.get_build_number_my(xcodeproj: ".", target: TARGET_LIFEDRIVE)
 
@@ -207,7 +207,7 @@ lane :my_gym_lifedrive do # |options|
   end
 
   desc "LifeTech Lifedrive build distribution via Firebase"
-  lane :firebase_lifetech_lifedrive do
+  lane :firebase_lifetech_billo do
     my_gym_lifedrive
     firebase_lifetech(key: FIREBASE_KEY_LIFEDRIVE, appName: APP_NAME_LIFEDRIVE)
     slack_post(target: TARGET_LIFEDRIVE)

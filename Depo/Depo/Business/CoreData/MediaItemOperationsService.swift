@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Photos
 
 typealias WrapObjectsCallBack = (_ items: [WrapData]) -> Void
 typealias BaseDataSourceItems = (_ baseDSItems: [BaseDataSourceItem]) -> Void

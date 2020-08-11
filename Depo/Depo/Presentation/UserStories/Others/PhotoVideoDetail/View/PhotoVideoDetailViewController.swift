@@ -9,7 +9,6 @@
 import UIKit
 import AVKit
 import AVFoundation
-import Photos
 
 final class PhotoVideoDetailViewController: BaseViewController {
     
@@ -568,7 +567,7 @@ extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
     
     func imageLoadingFinished() {
-       hideSpinner()
+        hideSpinner()
     }
     
     func tapOnCellForFullScreen() {

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Photos
 import YYImage
 
 ///Static parameters for UI elements set up in OverlayStickerViewControllerDesigner

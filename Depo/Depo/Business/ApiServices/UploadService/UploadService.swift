@@ -76,7 +76,7 @@ final class UploadService: BaseRequestService {
         switch uploadType {
         case .autoSync:
             return .sync
-        case .syncToUse, .upload:
+        case .syncToUse, .upload, .save, .saveAs:
             return .upload
         }
     }
@@ -149,7 +149,7 @@ final class UploadService: BaseRequestService {
             default:
                  self.analyticsService.trackDimentionsEveryClickGA(screen: .upload, downloadsMetrics: nil, uploadsMetrics: items.count)
                  
-                self.uploadFileList(items: filteredItems, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
+                 self.uploadFileList(items: filteredItems, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
                     self?.stopTracking()
                     self?.clearUploadCounters()
                     self?.hideUploadCardIfNeeded()
@@ -331,7 +331,7 @@ final class UploadService: BaseRequestService {
 //        }
     }
     
-    private func uploadFileList(items: [WrapData], uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedOprations: @escaping ([UploadOperation]?) -> Void) {
+    private func uploadFileList(items: [WrapData], uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedOprations: @escaping ([UploadOperation]?) -> Void) {
         
 //        dispatchQueue.async { [weak self] in
 //            guard let `self` = self else {
@@ -367,7 +367,7 @@ final class UploadService: BaseRequestService {
             self.logSyncSettings(state: "StartUploadFileList")
             
             let operations: [UploadOperation] = itemsToUpload.compactMap {
-                let operation = UploadOperation(item: $0, uploadType: .upload, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
+                let operation = UploadOperation(item: $0, uploadType: uploadType, uploadStategy: uploadStategy, uploadTo: uploadTo, folder: folder, isFavorites: isFavorites, isFromAlbum: isFromAlbum, handler: { [weak self] finishedOperation, error in
                     self?.dispatchQueue.async { [weak self] in
                         guard let `self` = self else {
                             returnedOprations(nil)

@@ -76,7 +76,7 @@ final class UploadOperation: Operation {
     
     private func setupQualityOfService(uploadType: UploadType) {
         switch uploadType {
-        case .syncToUse:
+        case .syncToUse, .save, .saveAs:
             qualityOfService = .userInteractive
         case .upload:
             qualityOfService = .userInitiated
@@ -345,7 +345,7 @@ final class UploadOperation: Operation {
                     fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
                     return
                 }
-
+                
                 self.clearingAction = { [weak self] in
                     self?.removeTemporaryFile(at: parameters.urlToLocalFile)
                 }
@@ -438,13 +438,34 @@ final class UploadOperation: Operation {
                                              isFavorite: self.isFavorites,
                                              uploadType: self.uploadType)
             } else {
-                parameters = SimpleUpload(item: self.inputItem,
-                                          destitantion: baseURL,
-                                          uploadStategy: self.uploadStategy,
-                                          uploadTo: self.uploadTo,
-                                          rootFolder: self.folder,
-                                          isFavorite: self.isFavorites,
-                                          uploadType: self.uploadType)
+                
+                if let uploadType = self.uploadType,
+                    uploadType == .save {
+                    parameters = SaveUpload(item: self.inputItem,
+                    destitantion: baseURL,
+                    uploadStategy: self.uploadStategy,
+                    uploadTo: self.uploadTo,
+                    rootFolder: self.folder,
+                    isFavorite: self.isFavorites,
+                    uploadType: self.uploadType)
+                } else if let uploadType = self.uploadType,
+                    uploadType == .saveAs {
+                    parameters = SaveAsUpload(item: self.inputItem,
+                    destitantion: baseURL,
+                    uploadStategy: self.uploadStategy,
+                    uploadTo: self.uploadTo,
+                    rootFolder: self.folder,
+                    isFavorite: self.isFavorites,
+                    uploadType: self.uploadType)
+                } else {
+                    parameters = SimpleUpload(item: self.inputItem,
+                    destitantion: baseURL,
+                    uploadStategy: self.uploadStategy,
+                    uploadTo: self.uploadTo,
+                    rootFolder: self.folder,
+                    isFavorite: self.isFavorites,
+                    uploadType: self.uploadType)
+                }
             }
             
             
