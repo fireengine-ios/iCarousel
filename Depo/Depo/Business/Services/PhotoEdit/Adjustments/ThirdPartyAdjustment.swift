@@ -44,13 +44,6 @@ final class GPUAdjustment: ThirdPartyAdjustmentProtocol {
     private let operation: BasicOperation
     private let pictureOutput = PictureOutput()
     
-    private let operationQueue: OperationQueue = {
-        let queue = OperationQueue()
-        queue.maxConcurrentOperationCount = 1
-        queue.qualityOfService = .userInteractive
-        return queue
-    }()
-    
     
     init(operation: BasicOperation) {
         self.operation = operation
@@ -61,20 +54,14 @@ final class GPUAdjustment: ThirdPartyAdjustmentProtocol {
     
     
     func applyOn(image: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
-        operationQueue.addOperation { [weak self] in
-            guard let self = self else {
-                onFinished(image)
-                return
-            }
-            let input = PictureInput(image: image)
-            
-            self.pictureOutput.imageAvailableCallback = onFinished
-            
-            //remove previous input
-            self.operation.removeSourceAtIndex(0)
-            
-            input --> self.operation
-            input.processImage(synchronously: false)
-        }
+        let input = PictureInput(image: image)
+        
+        pictureOutput.imageAvailableCallback = onFinished
+        
+        //remove previous input
+        operation.removeSourceAtIndex(0)
+        
+        input --> operation
+        input.processImage(synchronously: false)
     }
 }
