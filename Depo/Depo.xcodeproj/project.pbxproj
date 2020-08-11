@@ -10098,15 +10098,15 @@
 		CF8B6AF423CBC9D70021B021 /* UsageInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47863EE1F3F18FA00EFDC6D /* UsageInfoViewController.xib */; };
 		CF8B6AFB23CBC9D70021B021 /* PaymentPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AF2230EAAA700CED18C /* PaymentPopUpController.xib */; };
 		CF8B6AFC23CBC9D70021B021 /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
-		CF8B6AFD23CBC9D70021B021 /* cropy_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC7E2008AD6F003D8E05 /* cropy_icon@2x.png */; };
-		CF8B6AFE23CBC9D70021B021 /* Buyuk_Selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC4E2008AD6F003D8E05 /* Buyuk_Selected@3x.png */; };
-		CF8B6AFF23CBC9D70021B021 /* sag_ok@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD362008AD6F003D8E05 /* sag_ok@2x.png */; };
-		CF8B6B0023CBC9D70021B021 /* italic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACC22008AD6F003D8E05 /* italic@2x.png */; };
+		CF8B6AFD23CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6AFE23CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6AFF23CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6B0023CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		CF8B6B0123CBC9D70021B021 /* PhotoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoDetailCell.xib */; };
-		CF8B6B0223CBC9D70021B021 /* lookup_soft_elegance_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AEA02008AD6F003D8E05 /* lookup_soft_elegance_1.png */; };
-		CF8B6B0323CBC9D70021B021 /* sample_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD472008AD6F003D8E05 /* sample_yellow.png */; };
-		CF8B6B0423CBC9D70021B021 /* sample_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD432008AD6F003D8E05 /* sample_red@2x.png */; };
-		CF8B6B0523CBC9D70021B021 /* t_kucuk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD672008AD6F003D8E05 /* t_kucuk@2x.png */; };
+		CF8B6B0223CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6B0323CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6B0423CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6B0523CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		CF8B6B0623CBC9D70021B021 /* ProgressCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressCard.xib */; };
 		CF8B6B0823CBC9D70021B021 /* SetSecurityQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2E992338989B0014258A /* SetSecurityQuestionViewController.xib */; };
 		CF8B6B0D23CBC9D70021B021 /* MyStorageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92004B2521AD0F2100582C45 /* MyStorageViewController.xib */; };
@@ -24488,15 +24488,7 @@
 				8C0E90691FDEBDFF00789C91 /* UsageInfoViewController.xib in Resources */,
 				CE634AF7230EAAA700CED18C /* PaymentPopUpController.xib in Resources */,
 				B5B6543122A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */,
-				8C06AF532008AD70003D8E05 /* cropy_icon@2x.png in Resources */,
-				8C06AEF32008AD70003D8E05 /* Buyuk_Selected@3x.png in Resources */,
-				8C06B0C32008AD71003D8E05 /* sag_ok@2x.png in Resources */,
-				8C06AFDB2008AD71003D8E05 /* italic@2x.png in Resources */,
 				CEF41E9E2035B2DF0008FCD5 /* PhotoDetailCell.xib in Resources */,
-				8C06B1C32008AD72003D8E05 /* lookup_soft_elegance_1.png in Resources */,
-				8C06B0E52008AD71003D8E05 /* sample_yellow.png in Resources */,
-				8C06B0DD2008AD71003D8E05 /* sample_red@2x.png in Resources */,
-				8C06B1252008AD72003D8E05 /* t_kucuk@2x.png in Resources */,
 				8C0E906D1FDEBDFF00789C91 /* ProgressCard.xib in Resources */,
 				737A2E9E2338989B0014258A /* SetSecurityQuestionViewController.xib in Resources */,
 				92004B3921AD0F2200582C45 /* MyStorageViewController.xib in Resources */,
@@ -24968,12 +24960,7 @@
 				9219B18C21ECA25800098021 /* InstaPickDetailViewController.xib in Resources */,
 				7C2F56FB1F1CC1CC0014870B /* ActionsMenuTableViewCell.xib in Resources */,
 				CE51AF921EF90853005DCEE0 /* IntroduceSubView.xib in Resources */,
-				8C06AF5E2008AD70003D8E05 /* daire_selected@2x.png in Resources */,
-				8C06B0502008AD71003D8E05 /* parlaklik@3x.png in Resources */,
 				B5E3AB7124DA8F4A009E6D7F /* VideoPlayerCell.xib in Resources */,
-				8C06B0142008AD71003D8E05 /* kup@2x.png in Resources */,
-				8C06AEE82008AD70003D8E05 /* Buyuk.png in Resources */,
-				8C06AF842008AD70003D8E05 /* extraOptions.png in Resources */,
 				7CC11AB01FE276F500AF022D /* WaitingForWiFiPopUp.xib in Resources */,
 				B569567B24DAAF9F00B7B336 /* MantisLocalizable.strings in Resources */,
 				890F737222EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
@@ -25652,15 +25639,15 @@
 				CF8B6AF423CBC9D70021B021 /* UsageInfoViewController.xib in Resources */,
 				CF8B6AFB23CBC9D70021B021 /* PaymentPopUpController.xib in Resources */,
 				CF8B6AFC23CBC9D70021B021 /* SharedImages.xcassets in Resources */,
-				CF8B6AFD23CBC9D70021B021 /* cropy_icon@2x.png in Resources */,
-				CF8B6AFE23CBC9D70021B021 /* Buyuk_Selected@3x.png in Resources */,
-				CF8B6AFF23CBC9D70021B021 /* sag_ok@2x.png in Resources */,
-				CF8B6B0023CBC9D70021B021 /* italic@2x.png in Resources */,
+				CF8B6AFD23CBC9D70021B021 /* (null) in Resources */,
+				CF8B6AFE23CBC9D70021B021 /* (null) in Resources */,
+				CF8B6AFF23CBC9D70021B021 /* (null) in Resources */,
+				CF8B6B0023CBC9D70021B021 /* (null) in Resources */,
 				CF8B6B0123CBC9D70021B021 /* PhotoDetailCell.xib in Resources */,
-				CF8B6B0223CBC9D70021B021 /* lookup_soft_elegance_1.png in Resources */,
-				CF8B6B0323CBC9D70021B021 /* sample_yellow.png in Resources */,
-				CF8B6B0423CBC9D70021B021 /* sample_red@2x.png in Resources */,
-				CF8B6B0523CBC9D70021B021 /* t_kucuk@2x.png in Resources */,
+				CF8B6B0223CBC9D70021B021 /* (null) in Resources */,
+				CF8B6B0323CBC9D70021B021 /* (null) in Resources */,
+				CF8B6B0423CBC9D70021B021 /* (null) in Resources */,
+				CF8B6B0523CBC9D70021B021 /* (null) in Resources */,
 				CF8B6B0623CBC9D70021B021 /* ProgressCard.xib in Resources */,
 				CF8B6B0823CBC9D70021B021 /* SetSecurityQuestionViewController.xib in Resources */,
 				CF8B6B0D23CBC9D70021B021 /* MyStorageViewController.xib in Resources */,
@@ -41039,7 +41026,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.53.3;
+				CURRENT_PROJECT_VERSION = d2.53.4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -41101,7 +41088,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.53.3;
+				CURRENT_PROJECT_VERSION = d2.53.4;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -41159,7 +41146,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.53.3;
+				CURRENT_PROJECT_VERSION = d2.53.4;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -41218,7 +41205,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.53.3;
+				CURRENT_PROJECT_VERSION = d2.53.4;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
