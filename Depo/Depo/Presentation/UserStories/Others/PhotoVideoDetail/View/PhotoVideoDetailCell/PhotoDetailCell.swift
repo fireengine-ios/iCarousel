@@ -53,10 +53,8 @@ final class PhotoDetailCell: UICollectionViewCell {
         imageScrollView.imageViewDelegate = self
         contentView.addSubview(webView)
         
-        if #available(iOS 11.0, *) {
-            imageScrollView.contentInsetAdjustmentBehavior = .never
-            webView.scrollView.contentInsetAdjustmentBehavior = .never
-        }
+        imageScrollView.contentInsetAdjustmentBehavior = .never
+        webView.scrollView.contentInsetAdjustmentBehavior = .never
         
         backgroundColor = UIColor.clear
         

@@ -48,13 +48,7 @@ final class SpotifySDKService: NSObject {
         
         let scope: SPTScope = [.playlistReadPrivate, .userLibraryRead]
         
-        if #available(iOS 11, *) {
-            sessionManager?.initiateSession(with: scope, options: .clientOnly)
-        } else {
-            if let controller = self.router.navigationController?.viewControllers.last {
-                sessionManager?.initiateSession(with: scope, options: .clientOnly, presenting: controller)
-            }
-        }
+        sessionManager?.initiateSession(with: scope, options: .clientOnly)
     }
     
     private func parseSpotifyUrl(url: URL?) {

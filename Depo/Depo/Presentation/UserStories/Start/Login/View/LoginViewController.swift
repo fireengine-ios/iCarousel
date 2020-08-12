@@ -220,11 +220,7 @@ final class LoginViewController: ViewController {
     }
     
     private func updateScroll(with keyboardFrame: CGRect) {
-        var bottomInset = keyboardFrame.height + UIScreen.main.bounds.height - keyboardFrame.maxY
-        
-        if #available(iOS 11.0, *) {
-            bottomInset -= scrollView.safeAreaInsets.bottom
-        }
+        let bottomInset = keyboardFrame.height + UIScreen.main.bounds.height - keyboardFrame.maxY - scrollView.safeAreaInsets.bottom
         
         let insets = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
         self.scrollView.contentInset = insets
