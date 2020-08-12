@@ -196,7 +196,7 @@ def deployToIctStore = { app ->
 }
 
 def deployToTestflight = { app ->
-    def uploadCommand = 'run upload_to_testflight skip_submission:true skip_waiting_for_build_processing:true'
+    def uploadCommand = 'run upload_to_testflight skip_submission:true skip_waiting_for_build_processing:true itc_provider:T82SW35WCR'
     def ipaFile = "build/${app.name}-${BUILD_ID}-prod.ipa"
     
     def artifactPath = "turkcell-development/${groupPath}/${app.name}/${app.version}"
@@ -250,8 +250,9 @@ pipeline {
                         sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
                         sh "source ~/.bash_profile; cd Depo; pod install" // --repo-update occasionally
                         apps.each { app ->
-                            runXcode(app, 'test')
-                            publishToArtifactory(app, 'test')
+                            //runXcode(app, 'test')
+                            //publishToArtifactory(app, 'test')
+                          	sleep 1
                         }
                     }
                 }
@@ -382,7 +383,7 @@ pipeline {
             environment {
                 IOS_PASS = credentials('iosLoginPass')
                 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
-                TESTFLIGHT_UPLOAD = credentials('testflight')
+                TESTFLIGHT_UPLOAD = credentials('testflight_generic')
                 FASTLANE_DONT_STORE_PASSWORD = 1
            }
             steps {
