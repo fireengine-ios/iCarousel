@@ -196,7 +196,7 @@ def deployToIctStore = { app ->
 }
 
 def deployToTestflight = { app ->
-    def uploadCommand = 'run upload_to_testflight skip_submission:true skip_waiting_for_build_processing:true itc_provider:T82SW35WCR'
+    def uploadCommand = 'run upload_to_testflight skip_submission:true skip_waiting_for_build_processing:true'
     def ipaFile = "build/${app.name}-${BUILD_ID}-prod.ipa"
     
     def artifactPath = "turkcell-development/${groupPath}/${app.name}/${app.version}"
@@ -205,7 +205,7 @@ def deployToTestflight = { app ->
 
     sh """
         export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
-        ~/.fastlane/bin/fastlane ${uploadCommand} ipa:"${ipaFile}" apple_id:"${app.appleId}" username:"${TESTFLIGHT_UPLOAD_USR}"
+        ~/.fastlane/bin/fastlane ${uploadCommand} ipa:"${ipaFile}" username:"${TESTFLIGHT_UPLOAD_USR}"
     """
 }
 
@@ -250,9 +250,8 @@ pipeline {
                         sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
                         sh "source ~/.bash_profile; cd Depo; pod install" // --repo-update occasionally
                         apps.each { app ->
-                            //runXcode(app, 'test')
-                            //publishToArtifactory(app, 'test')
-                          	sleep 1
+                            runXcode(app, 'test')
+                            publishToArtifactory(app, 'test')
                         }
                     }
                 }
@@ -393,6 +392,12 @@ pipeline {
                     apps.each { app ->
                         try {
                             if (env.getProperty("DEPLOY_${app.name}") == 'true') {
+                                if ("${app.name}" == "lifebox") {
+                                    env.FASTLANE_ITC_TEAM_ID="121548574"
+                                }
+                                if ("${app.name}" == "lifedrive") {
+                                    env.FASTLANE_ITC_TEAM_ID="118347642"
+                                }
                                 deployToTestflight app
                             }
 
