@@ -399,7 +399,7 @@ extension SyncServiceManager {
 
 extension SyncServiceManager: ReachabilityServiceDelegate {
     func reachabilityDidChanged(_ service: ReachabilityService) {
-        debugPrint("AUTOSYNC: is" + (service.isReachable ? "reachable" : "unreachable"))
+        debugPrint("AUTOSYNC: is " + (service.isReachable ? "reachable" : "unreachable"))
 
         self.checkReachabilityAndSettings(reachabilityChanged: true, newItems: false)
     }

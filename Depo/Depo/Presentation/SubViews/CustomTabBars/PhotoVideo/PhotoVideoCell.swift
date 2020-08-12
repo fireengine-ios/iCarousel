@@ -178,7 +178,6 @@ final class PhotoVideoCell: UICollectionViewCell {
             thumbnailImageView.image = nil
             isBlurred = false
         }
-        
     }
     
     func didEndDisplay() {

@@ -17,4 +17,5 @@ extension Notification.Name {
     public static let notificationPhotoLibraryDidChange = Notification.Name("notificationPhotoLibraryDidChange")
     public static let reachabilityChanged = Notification.Name("reachabilityChanged")
     public static let localAlbumStatusDidChange = Notification.Name("localAlbumStatusDidChange")
+    public static let deinitPlayer = Notification.Name("deinitPlayer")
 }
