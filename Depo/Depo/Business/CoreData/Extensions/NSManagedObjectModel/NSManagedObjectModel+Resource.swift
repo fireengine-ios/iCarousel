@@ -17,13 +17,7 @@ extension NSManagedObjectModel {
         let omoURL = bundle.url(forResource: name, withExtension: "omo", subdirectory: directory)
         let momURL = bundle.url(forResource: name, withExtension: "mom", subdirectory: directory)
         
-        let url: URL?
-        /// Use optimized model version only if iOS >= 11
-        if #available(iOS 11, *) {
-            url = omoURL ?? momURL
-        } else {
-            url = momURL ?? omoURL
-        }
+        let url = omoURL ?? momURL
         
         guard let modelURL = url else {
             fatalLog("unable to find model in bundle")

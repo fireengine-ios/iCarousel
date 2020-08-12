@@ -149,18 +149,11 @@ private extension ContactListDataSource {
     }
     
     private func updateTableView(_ updates: VoidHandler, completion: VoidHandler?) {
-        if #available(iOS 11.0, *) {
-            tableView.performBatchUpdates({
-                updates()
-            }, completion: { _ in
-                completion?()
-            })
-        } else {
-            tableView.beginUpdates()
+        tableView.performBatchUpdates({
             updates()
-            tableView.endUpdates()
+        }, completion: { _ in
             completion?()
-        }
+        })
     }
 }
 

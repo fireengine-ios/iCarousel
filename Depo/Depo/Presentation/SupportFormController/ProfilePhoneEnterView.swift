@@ -51,11 +51,9 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.autocapitalizationType = .none
             newValue.spellCheckingType = .no
             newValue.enablesReturnKeyAutomatically = true
-            if #available(iOS 11.0, *) {
-                newValue.smartQuotesType = .no
-                newValue.smartDashesType = .no
-            }
-            
+            newValue.smartQuotesType = .no
+            newValue.smartDashesType = .no
+
             let image = UIImage(named: "ic_arrow_down")
             let imageView = UIImageView(image: image)
             newValue.rightView = imageView
@@ -107,10 +105,8 @@ final class ProfilePhoneEnterView: UIView, FromNib {
             newValue.autocapitalizationType = .none
             newValue.spellCheckingType = .no
             newValue.enablesReturnKeyAutomatically = true
-            if #available(iOS 11.0, *) {
-                newValue.smartQuotesType = .no
-                newValue.smartDashesType = .no
-            }
+            newValue.smartQuotesType = .no
+            newValue.smartDashesType = .no
             
             /// true from IB by default
             newValue.adjustsFontSizeToFitWidth = false

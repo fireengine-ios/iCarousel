@@ -158,11 +158,7 @@ class EditinglBar: CustomTabBar {
                 }
             } else {
                 if withAnimation {
-                    var animationFrame = self.frame.origin.y - self.originalY
-                    
-                    if #available(iOS 11.0, *) {
-                        animationFrame += UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
-                    }
+                    let animationFrame = self.frame.origin.y - self.originalY + (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
                     
                     self.animateAppearance(with: animationFrame) { [weak self] in
                         guard let `self` = self else {

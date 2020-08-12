@@ -140,11 +140,7 @@ final class ChangeEmailPopUp: UIViewController {
                     return
                 }
                 
-                var bottomInset = options.endFrame.height
-                
-                if #available(iOS 11.0, *) {
-                    bottomInset -= self.scrollView.safeAreaInsets.bottom
-                }
+                let bottomInset = options.endFrame.height - self.scrollView.safeAreaInsets.bottom
                 
                 let insets = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
                 self.scrollView.contentInset = insets
