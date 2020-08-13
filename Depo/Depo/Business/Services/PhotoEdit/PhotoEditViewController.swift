@@ -124,7 +124,12 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
 
 extension PhotoEditViewController: FilterChangesBarDelegate {
     func cancelFilter() {
-        setInitialState()
+        switch uiManager.currentFilterViewType {
+        case .hls:
+            needShowFilterView(for: .color)
+        default:
+            setInitialState()
+        }
     }
     
     func applyFilter() {
