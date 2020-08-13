@@ -1102,6 +1102,12 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                             return
                         }
                         
+                        if assetInfo.size == .zero {
+                            assetInfo.isValid = false
+                            failCompletion()
+                            return
+                        }
+                        
                         if let name = asset.originalFilename {
                             assetInfo.name = name
                         }
@@ -1186,7 +1192,12 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     if let name = asset.originalFilename {
                         assetInfo.name = name
                     }
+                    
                     assetInfo.size = Int64(dataValue.count)
+                    if assetInfo.size == .zero {
+                        assetInfo.isValid = false
+                    }
+                    
                     semaphore.signal()
                 } else {
                     failCompletion()
