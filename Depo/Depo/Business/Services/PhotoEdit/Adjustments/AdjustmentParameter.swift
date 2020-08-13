@@ -22,6 +22,9 @@ enum AdjustmentParameterType: String {
     case hue
     case intensity
     case angle
+    case sharpness
+    case blurRadius
+    case vignetteRatio
     
     
     var defaultValues: AdjustmentParameterValues {
@@ -50,6 +53,12 @@ enum AdjustmentParameterType: String {
                 return (0, 1, 1)
             case .angle:
                 return (-45, 45, 0)
+            case .sharpness:
+                return (-4, 4, 0)
+            case .blurRadius:
+                return (1, 8, 2)
+            case .vignetteRatio:
+                return (0, 1, 0)
             default:
                 return (0, 0, 0)
         }
@@ -100,11 +109,18 @@ final class AdjustmentParameter: AdjustmentParameterProtocol {
         self.type = type
         
         let defaultValues = type.defaultValues
-
+        
+        var middle: Float = 0.5
+        if defaultValues.min == defaultValues.default {
+            middle = 0
+        } else if defaultValues.max == defaultValues.default {
+            middle = 1
+        }
+        
         //ui values
         minValue = 0
         maxValue = 1
-        defaultValue = 0.5
+        defaultValue = middle
         currentValue = defaultValue
         
         //real values

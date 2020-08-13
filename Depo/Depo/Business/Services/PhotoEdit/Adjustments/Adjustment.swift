@@ -25,6 +25,10 @@ enum AdjustmentType {
     //case luminance - there's no such adjustment, replaced with the monochrome
     case monochrome
     
+    case sharpen
+    case blur
+    case vignette
+    
 //    var parametersTypes: [AdjustmentParameterType] {
 //        switch self {
 //            case .brightness:
