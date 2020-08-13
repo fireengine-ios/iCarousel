@@ -94,6 +94,31 @@ final class AdjustmentManager {
                 parameters = [intensityParameter]
                 thirdPartyAdjustment = GPUAdjustment(operation: gpuOperation)
             
+            case .sharpen:
+                let gpuOperation = Sharpen()
+                let sharpnessParameter = AdjustmentParameter(type: .sharpness).onValueDidChange { value in
+                    gpuOperation.sharpness = value
+                }
+                parameters = [sharpnessParameter]
+                thirdPartyAdjustment = GPUAdjustment(operation: gpuOperation)
+            
+            case .blur:
+                let gpuOperation = GaussianBlur()
+                let blurRadiusParameter = AdjustmentParameter(type: .blurRadius).onValueDidChange { value in
+                    gpuOperation.blurRadiusInPixels = value
+                }
+                parameters = [blurRadiusParameter]
+                thirdPartyAdjustment = GPUAdjustment(operation: gpuOperation)
+            
+            case .vignette:
+                let gpuOperation = Vignette()
+                gpuOperation.end = 1
+                let ratioParameter = AdjustmentParameter(type: .vignetteRatio).onValueDidChange { value in
+                    gpuOperation.start = 1 - value
+                }
+                parameters = [ratioParameter]
+                thirdPartyAdjustment = GPUAdjustment(operation: gpuOperation)
+            
             case .hsl:
                 let coreAdjustment = HSVMultiband()
                 
