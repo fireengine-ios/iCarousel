@@ -368,7 +368,7 @@ final class ScrollBarView: UIView {
         
         let contentSize = scrollView.contentSize
         
-        let contentInset = scrollView.adjustedContentInset
+        var contentInset = scrollView.adjustedContentInset
         contentInset.top = originalTopInset
         
         let totalScrollSize = contentSize.height + contentInset.bottom - scrollView.frame.height //+ contentInset.top
