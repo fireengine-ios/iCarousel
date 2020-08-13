@@ -113,6 +113,7 @@ final class AdjustmentManager {
             case .vignette:
                 let gpuOperation = Vignette()
                 gpuOperation.end = 1
+                gpuOperation.start = 0
                 let ratioParameter = AdjustmentParameter(type: .vignetteRatio).onValueDidChange { value in
                     gpuOperation.start = 1 - value
                 }
