@@ -263,7 +263,7 @@ final class ContactSyncHelper {
         contactSyncService.executeOperation(type: type, progress: { [weak self] progressPercentage, count, opertionType in
             DispatchQueue.main.async {
                 //progress may be later than the end of the operation
-                if self?.currentOperation != nil {
+                if self?.isRunning == true {
                     self?.delegate?.progress(progress: progressPercentage, for: opertionType)
                 }
             }
@@ -422,6 +422,8 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
     }
     
     func progress(progress: Int, for operationType: SyncOperationType) {
+        hideSpinner()
+        
         if progressView?.type != operationType {
             progressView = createProgressView(for: operationType)
         }
@@ -478,12 +480,6 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
                 return
             }
             handleSyncError(syncError: syncError, operationType: operationType)
-        default:
-            let type = operationType.transformToContactOperationSyncType()
-            let title = type?.title(result: .failed) ?? TextConstants.errorUnknown
-            let message = TextConstants.contactSyncErrorMessage
-            let errorView = ContactsOperationView.with(title: title, message: message, operationResult: .failed)
-            showResultView(view: errorView, title: type?.navBarTitle ?? "")
         }
     }
     
@@ -637,9 +633,7 @@ extension ContactSyncControllerProtocol {
         progressView?.reset()
         
         showSpinner()
-        ContactSyncHelper.shared.backup { [weak self] in
-            self?.hideSpinner()
-        }
+        ContactSyncHelper.shared.backup { }
     }
     
     private func deleteDuplicates() {
@@ -647,9 +641,7 @@ extension ContactSyncControllerProtocol {
         progressView?.reset()
         
         showSpinner()
-        ContactSyncHelper.shared.deleteDuplicates { [weak self] in
-            self?.hideSpinner()
-        }
+        ContactSyncHelper.shared.deleteDuplicates { }
     }
     
     private func deleteContacts(type: ContactsOperationType) {
@@ -661,8 +653,6 @@ extension ContactSyncControllerProtocol {
                 return
             }
             
-            self.hideSpinner()
-
             switch result {
             case .success(_):
                 self.showResultView(type: type, result: .success)
@@ -681,8 +671,6 @@ extension ContactSyncControllerProtocol {
         showSpinner()
         
         progressView?.reset()
-        ContactSyncHelper.shared.restore { [weak self] in
-            self?.hideSpinner()
-        }
+        ContactSyncHelper.shared.restore { }
     }
 }

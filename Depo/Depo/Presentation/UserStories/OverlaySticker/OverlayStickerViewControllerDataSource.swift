@@ -23,9 +23,6 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     
     @IBOutlet private weak var stickersCollectionView: UICollectionView!
     
-    private let downloader = ImageDownloder()
-    private let optimizingGifService = OptimizingGifService()
-    
     private let paginationPageSize = 20
     private var isPaginating = false
     private var gifState = State()
@@ -36,7 +33,8 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     }
     
     private let stickerService: SmashService = SmashServiceImpl()
-    private let gifOptimizationQueue = DispatchQueue(label: DispatchQueueLabels.gifOptimizationQueue, qos: .utility)
+    private let overlayStickerDownloadManager = OverlayStickerDownloadManager()
+
     weak var delegate: OverlayStickerViewControllerDataSourceDelegate?
     
     private let operationQueue: OperationQueue = {
@@ -127,21 +125,6 @@ final class OverlayStickerViewControllerDataSource: NSObject {
             selectedAttachmentType = .image
         }
     }
-    
-    private func downloadGifForCell(cell: StickerCollectionViewCell, url: URL) {
-    
-        downloader.getImageData(url: url) { [weak self] data in
-            self?.gifOptimizationQueue.async {
-                guard let imageData = data, let image = self?.optimizingGifService.optimizeImage(data: imageData, optimizeFor: .cell) else {
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    cell.setupGif(image: image, url: url)
-                }
-            }
-        }
-    }
 }
 
 extension OverlayStickerViewControllerDataSource: UICollectionViewDataSource {
@@ -167,7 +150,13 @@ extension OverlayStickerViewControllerDataSource: UICollectionViewDelegate {
 
         cell.setup(with: object, type: selectedAttachmentType)        
         if selectedAttachmentType == .gif {
-            downloadGifForCell(cell: cell, url: object.path)
+            overlayStickerDownloadManager.prepareGifForCell(url: object.path) {  image in
+                DispatchQueue.main.async {
+                    if collectionView.visibleCells.contains(cell) {
+                        cell.setupGif(image: image, url: object.path)
+                    }
+                }
+            }
         }
         
         let attachmentCount = currentState.source.count

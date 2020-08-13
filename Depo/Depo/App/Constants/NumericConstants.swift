@@ -30,7 +30,8 @@ struct NumericConstants {
     static let detailsLoadingTimeAwait = UInt32(2)
     
     static let countOfLoginBeforeNeedShowUploadOffPopUp = 3
-    
+    static let navigationBarHeight: CGFloat = 44
+    static let tabBarHight: CGFloat = 49
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2
     static let iPhoneGreedInset: CGFloat = 2
@@ -88,7 +89,7 @@ struct NumericConstants {
     static let maxNumberOfUploadAttempts = 5
     static let secondsBeetweenUploadAttempts = 5
     
-    static let logDuration: TimeInterval = 24 * 60 * 60 * 3
+    static let logDuration: TimeInterval = 0
     static let logMaxSize: UInt64 = 5_242_880
     
     static let numberOfLocalItemsOnPage: Int = 100

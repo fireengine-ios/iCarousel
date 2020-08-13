@@ -19,9 +19,11 @@ func + <K, V>(left: Dictionary<K, V>, right: Dictionary<K, V>) -> Dictionary<K, 
 }
 
 extension Dictionary {
-    mutating func removeValueSafely(forKey key: Key) {
+    mutating func removeValueSafely(forKey key: Key) -> Value? {
         if keys.contains(key), self[key] != nil {
-            removeValue(forKey: key)
-        } 
+            return removeValue(forKey: key)
+        } else {
+            return nil
+        }
     }
 }

@@ -10,8 +10,9 @@ import UIKit
 
 protocol PhotoVideoCollectionViewManagerDelegate: class {
     func refreshData(refresher: UIRefreshControl)
-    func showOnlySyncItemsCheckBoxDidChangeValue(_ value: Bool)
     func openAutoSyncSettings()
+    func openViewTypeMenu(sender: UIButton)
+    func openUploadPhotos()
 }
 
 final class PhotoVideoCollectionViewManager {
@@ -32,6 +33,7 @@ final class PhotoVideoCollectionViewManager {
     
     let scrolliblePopUpView = CardsContainerView()
     private let showOnlySyncItemsCheckBox = CheckBoxView.initFromNib()
+    private let emptyDataView = EmptyDataView.initFromNib()
     
     private weak var collectionView: UICollectionView!
     private weak var delegate: PhotoVideoCollectionViewManagerDelegate?
@@ -41,6 +43,10 @@ final class PhotoVideoCollectionViewManager {
         return collectionView.indexPathsForSelectedItems ?? []
     }
     
+    var viewType: GalleryViewType {
+        get { showOnlySyncItemsCheckBox.type }
+        set { showOnlySyncItemsCheckBox.type = newValue }
+    }
     
     init(collectionView: UICollectionView, delegate: PhotoVideoCollectionViewManagerDelegate) {
         self.collectionView = collectionView
@@ -91,6 +97,31 @@ final class PhotoVideoCollectionViewManager {
         selectedIndexes.forEach { indexPath in
             collectionView.deselectItem(at: indexPath, animated: false)
         }
+    }
+    
+    func showEmptyDataViewIfNeeded(isShow: Bool) {
+        guard isShow else {
+            emptyDataView.removeFromSuperview()
+            return
+        }
+        
+        emptyDataView.configure(viewType: showOnlySyncItemsCheckBox.type)
+        emptyDataView.delegate = self
+        
+        guard emptyDataView.superview == nil else {
+            return
+        }
+        
+        collectionView.addSubview(emptyDataView)
+        
+        emptyDataView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        var constraintsArray = [NSLayoutConstraint]()
+        constraintsArray.append(NSLayoutConstraint(item: emptyDataView, attribute: .centerY, relatedBy: .equal, toItem: collectionView, attribute: .centerY, multiplier: 1, constant: -showOnlySyncItemsCheckBoxHeight))
+        constraintsArray.append(NSLayoutConstraint(item: emptyDataView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: emptyDataView, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
+        NSLayoutConstraint.activate(constraintsArray)
     }
     
     private func setupCollectionView() {
@@ -226,11 +257,20 @@ extension PhotoVideoCollectionViewManager: CardsContainerViewDelegate {
 
 // MARK: - CheckBoxViewDelegate checkBox.delegate
 extension PhotoVideoCollectionViewManager: CheckBoxViewDelegate {
-    func checkBoxViewDidChangeValue(_ value: Bool) {
-        delegate?.showOnlySyncItemsCheckBoxDidChangeValue(value)
+    
+    func openViewTypeMenu(sender: UIButton) {
+        delegate?.openViewTypeMenu(sender: sender)
     }
     
     func openAutoSyncSettings() {
         delegate?.openAutoSyncSettings()
+    }
+}
+
+// MARK: - EmptyDataViewDelegate
+
+extension PhotoVideoCollectionViewManager: EmptyDataViewDelegate {
+    func didButtonTapped() {
+        delegate?.openUploadPhotos()
     }
 }

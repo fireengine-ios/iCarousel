@@ -78,6 +78,10 @@ final class PhotoVideoDataSource: NSObject {
         return frController
     }()
     
+    var isObjectsEmpty: Bool {
+        fetchedResultsController.fetchedObjects?.isEmpty != false
+    }
+    
     /// collectionView needs only for NSFetchedResultsControllerDelegate
     init(collectionView: UICollectionView?, delegate: PhotoVideoDataSourceDelegate?) {
         self.collectionView = collectionView
@@ -259,16 +263,21 @@ final class PhotoVideoDataSource: NSObject {
         }
     }
     
-    func changeSourceFilter(syncOnly: Bool, isPhotos: Bool, newPredicateSetupedCallback: @escaping VoidHandler) {
+    func changeSourceFilter(type: GalleryViewType, isPhotos: Bool, newPredicateSetupedCallback: @escaping VoidHandler) {
         lastWrapedObjects.removeAll()
-        if syncOnly {
-            fetchedResultsController.fetchRequest.predicate = predicateManager.getSyncPredicate(isPhotos: isPhotos)
-            newPredicateSetupedCallback()
-        } else {
+        
+        switch type {
+        case .all:
             predicateManager.getMainCompoundedPredicate(isPhotos: isPhotos) { [weak self] compundedPredicate in
                 self?.fetchedResultsController.fetchRequest.predicate = compundedPredicate
                 newPredicateSetupedCallback()
             }
+        case .synced:
+            fetchedResultsController.fetchRequest.predicate = predicateManager.getSyncPredicate(isPhotos: isPhotos)
+            newPredicateSetupedCallback()
+        case .unsynced:
+            fetchedResultsController.fetchRequest.predicate = predicateManager.getUnsyncPredicate(isPhotos: isPhotos)
+            newPredicateSetupedCallback()
         }
     }
     

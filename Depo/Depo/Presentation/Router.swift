@@ -552,19 +552,6 @@ class RouterVC: NSObject {
         return PhotoVideoSegmentedController.initPhotoVideoSegmentedControllerWith([photos, videos]) 
     }
     
-    
-    // MARK: Photos and Videos
-    
-//    var photosScreen: UIViewController? {
-//        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Photo)
-//        return controller
-//    }
-    
-//    var videosScreen: UIViewController? {
-//        let controller = BaseFilesGreedModuleInitializer.initializePhotoVideosViewController(with: "BaseFilesGreedViewController", screenFilterType: .Video)
-//        return controller
-//    }
-    
     // MARK: Music
     
     var musics: UIViewController? {
