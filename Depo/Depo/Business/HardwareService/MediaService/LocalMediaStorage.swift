@@ -807,10 +807,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
     }
     
-    func copyVideoAsset(asset: PHAsset) -> URL {
+    func copyVideoAsset(asset: PHAsset) -> URL? {
         debugLog("LocalMediaStorage copyVideoAsset")
 
-        var url = LocalMediaStorage.defaultUrl
+        var url: URL?
         
         guard let photoManager = photoManager else {
             return url
@@ -824,12 +824,18 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                                     if let urlToFile = (avAsset as? AVURLAsset)?.url {
                                                         let file = UUID().uuidString
                                                         url = Device.tmpFolderUrl(withComponent: file)
+                                                        
+                                                        guard let url = url else {
+                                                            semaphore.signal()
+                                                            return
+                                                        }
 
                                                         self?.streamReaderWrite.copyFile(from: urlToFile, to: url, completion: { result in
                                                             switch result {
                                                             case .success(_):
                                                                 break
                                                             case .failed(let error):
+                                                                debugLog(error.description)
                                                                 UIApplication.showErrorAlert(message: error.description)
                                                             }
                                                             semaphore.signal()
@@ -843,10 +849,10 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return url
     }
     
-    func copyImageAsset(asset: PHAsset) -> URL {
+    func copyImageAsset(asset: PHAsset) -> URL? {
         debugLog("LocalMediaStorage copyImageAsset")
         
-        var url = LocalMediaStorage.defaultUrl
+        var url: URL?
         
         guard let photoManager = photoManager else {
             return url
@@ -859,10 +865,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                                     let file = UUID().uuidString
                                                     url = Device.tmpFolderUrl(withComponent: file)
                                                     do {
+                                                        guard let url = url else {
+                                                            semaphore.signal()
+                                                            return
+                                                        }
                                                         try data?.write(to: url)
                                                         semaphore.signal()
                                                     } catch {
-                                                        print(error.description)
+                                                        debugLog(error.description)
                                                         semaphore.signal()
                                                     }
         }
