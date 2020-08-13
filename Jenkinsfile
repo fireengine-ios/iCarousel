@@ -12,7 +12,8 @@ apps = [
             ictsContainerId: '743', // ICT Store
             prodTeamID: '693N5K66ZJ',
             xcodeSchema: 'TC_Depo_LifeTech_Bundle',
-            xcodeTarget: 'TC_Depo_LifeTech_Bundle'
+            xcodeTarget: 'TC_Depo_LifeTech_Bundle',
+            itcTeamId: '121548574',
         ],
  [
             name: 'lifedrive',// name will be the base filename of the app
@@ -20,6 +21,7 @@ apps = [
             ictsContainerId: '966', // ICT Store
             appleId: '1488914348',
             prodTeamID: '729CGH4BJD',
+            itcTeamId: '118347642',
 	    //xcodeSchema: // Defaults to app name
             //xcodeTarget: // Defaults to app name
             //xcodeSchema: 'lifedrive_Bundle', 
@@ -205,7 +207,7 @@ def deployToTestflight = { app ->
 
     sh """
         export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
-        ~/.fastlane/bin/fastlane ${uploadCommand} ipa:"${ipaFile}" apple_id:"${app.appleId}" username:"${TESTFLIGHT_UPLOAD_USR}"
+        ~/.fastlane/bin/fastlane ${uploadCommand} ipa:"${ipaFile}" username:"${TESTFLIGHT_UPLOAD_USR}"
     """
 }
 
@@ -382,7 +384,7 @@ pipeline {
             environment {
                 IOS_PASS = credentials('iosLoginPass')
                 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
-                TESTFLIGHT_UPLOAD = credentials('testflight')
+                TESTFLIGHT_UPLOAD = credentials('testflight-generic')
                 FASTLANE_DONT_STORE_PASSWORD = 1
            }
             steps {
@@ -391,7 +393,8 @@ pipeline {
                     def failReasons = [:]
                     apps.each { app ->
                         try {
-                            if (env.getProperty("DEPLOY_${app.name}") == 'true') {
+                            if (env.getProperty("DEPLOY_${app.name}") == 'true') {           
+                                env.FASTLANE_ITC_TEAM_ID="${app.itcTeamId}"
                                 deployToTestflight app
                             }
 
