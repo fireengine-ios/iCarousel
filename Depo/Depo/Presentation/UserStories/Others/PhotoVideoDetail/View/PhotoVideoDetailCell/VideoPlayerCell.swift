@@ -17,7 +17,7 @@ protocol VideoInterruptable {
 final class VideoPlayerCell: UICollectionViewCell {
     
     private weak var delegate: PhotoVideoDetailCellDelegate?
-    private let avpController = FixedAVPlayerViewController()
+    private var avpController = FixedAVPlayerViewController()
     private var player:AVPlayer? {
         willSet {
             if newValue == nil {
@@ -36,19 +36,9 @@ final class VideoPlayerCell: UICollectionViewCell {
         super.prepareForReuse()
         player = nil
     }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if object as AnyObject? === player {
-            if #available(iOS 10.0, *), keyPath == "timeControlStatus", player?.timeControlStatus == .playing {
-                enterFullscreen(playerViewController: avpController)
-            } else if player?.timeControlStatus == .playing, player?.rate != .zero  {
-                enterFullscreen(playerViewController: avpController)
-            }
-        }
-    }
-    
+ 
     //MARK: - Utility methods(Private)
-    private func setup() {
+    private func setup(){
         if let view = avpController.view {
             self.contentView.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -84,14 +74,6 @@ final class VideoPlayerCell: UICollectionViewCell {
             name: .deinitPlayer,
             object: nil
         )
-    }
-
-    private func configurePlayerObserver() {
-        if #available(iOS 10.0, *) {
-            player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-        } else {
-            player?.addObserver(self, forKeyPath: "rate", options: [.old, .new], context: nil)
-        }
     }
     
     private func prepareForPlayVideo( file: Item) {
@@ -136,30 +118,11 @@ final class VideoPlayerCell: UICollectionViewCell {
     private func play(item: AVPlayerItem) {
         player = AVPlayer(playerItem: item)
         avpController.player = player
-        configurePlayerObserver()
     }
     
     @objc private func deinitPlayer(){
         self.player?.replaceCurrentItem(with: nil)
         self.player = nil
-    }
-    
-    /// https://stackoverflow.com/a/51618451
-    private func enterFullscreen(playerViewController: AVPlayerViewController) {
-        let selectorName: String = {
-            if #available(iOS 11.3, *) {
-                return "_transitionToFullScreenAnimated:interactive:completionHandler:"
-            } else if #available(iOS 11, *) {
-                return "_transitionToFullScreenAnimated:completionHandler:"
-            } else {
-                return "_transitionToFullScreenViewControllerAnimated:completionHandler:"
-            }
-        }()
-        let selectorToForceFullScreenMode = NSSelectorFromString(selectorName)
-
-        if playerViewController.responds(to: selectorToForceFullScreenMode) {
-            playerViewController.perform(selectorToForceFullScreenMode, with: true, with: nil)
-        }
     }
 }
 
@@ -186,3 +149,4 @@ extension VideoPlayerCell: VideoInterruptable {
         player?.pause()
     }
 }
+
