@@ -164,11 +164,9 @@ extension UIViewController {
     func blackNavigationBarStyle() {
         defaultNavBarStyle()
         
-        if #available(iOS 11.0, *) {
-            let image = UIImage(named: "NavigatonBarBlackBacground")
-            navBar?.setBackgroundImage(image, for: .default)
-        }
-        
+        let image = UIImage(named: "NavigatonBarBlackBacground")
+        navBar?.setBackgroundImage(image, for: .default)
+
         statusBarColor = .black
 
         navBar?.barTintColor = .black
@@ -220,16 +218,6 @@ extension UIViewController {
         let customTitleView = TitleView.initFromXib()
         customTitleView.tag = tagTitleView
         customTitleView.setTitle(title)
-        
-        if #available(iOS 11.0, *) {
-            // do nothing
-        } else {
-            // trick for resize
-            customTitleView.translatesAutoresizingMaskIntoConstraints = false
-            customTitleView.layoutIfNeeded()
-            customTitleView.sizeToFit()
-            customTitleView.translatesAutoresizingMaskIntoConstraints = true
-        }
         
         navigationItem.titleView = customTitleView
         

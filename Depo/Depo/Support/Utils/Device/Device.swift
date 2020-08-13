@@ -84,11 +84,7 @@ class Device {
     }
     
     static func getFreeDiskSpaceInBytes() -> Int64 {
-        if #available(iOS 11.0, *) {
-            return getFreeDiskSpaceInBytesIOS11()
-        } else {
-            return getFreeDiskSpaceInBytesIOS10()
-        }
+        return getFreeDiskSpaceInBytesIOS11()
     }
     
     @available(iOS 11.0, *)
@@ -118,11 +114,7 @@ class Device {
     }
     
     static func getTotalDiskSpace() -> Int64? {
-        if #available(iOS 11.0, *) {
-            return getTotalDiskSpaceIOS11()
-        } else {
-            return getTotalDiskSpaceIOS10()
-        }
+        return getTotalDiskSpaceIOS11()
     }
     
     static func getTotalDiskSpaceIOS10() -> Int64? {

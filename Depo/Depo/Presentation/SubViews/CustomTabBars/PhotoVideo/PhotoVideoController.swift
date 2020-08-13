@@ -558,7 +558,7 @@ extension PhotoVideoController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         /// fixing iOS11 UICollectionSectionHeader clipping scroll indicator
         /// https://stackoverflow.com/a/46930410/5893286
-        if #available(iOS 11.0, *), elementKind == UICollectionElementKindSectionHeader {
+        if elementKind == UICollectionElementKindSectionHeader {
             view.layer.zPosition = 0
         }
         guard let view = view as? CollectionViewSimpleHeaderWithText else {
