@@ -128,9 +128,7 @@ final class BecomePremiumView: UIView, NibInit {
             
             if index > 0 {
                 contentView.addArrangedSubview(orLabel)
-                if #available(iOS 11.0, *) {
-                    contentView.setCustomSpacing(12, after: orLabel)
-                }
+                contentView.setCustomSpacing(12, after: orLabel)
             }
             
             let view = SubscriptionOfferView.initFromNib()
@@ -146,9 +144,7 @@ final class BecomePremiumView: UIView, NibInit {
                 view.widthAnchor.constraint(equalTo: contentView.widthAnchor).activate()
             }
             
-            if #available(iOS 11.0, *) {
-                contentView.setCustomSpacing(16, after: orLabel)
-            }
+            contentView.setCustomSpacing(16, after: orLabel)
         }
         
         contentView.addArrangedSubview(seeAllPackagesButton)

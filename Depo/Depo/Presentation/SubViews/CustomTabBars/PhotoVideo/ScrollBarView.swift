@@ -215,11 +215,7 @@ final class ScrollBarView: UIView {
         var frame = CGRect.zero
         frame.size.width = scrollBarWidth
         frame.size.height = isDragging ? originalHeight : height
-        frame.origin.x = scrollViewFrame.width - (edgeInset + halfWidth)
-        
-        if #available(iOS 11.0, *) {
-            frame.origin.x -= scrollView.safeAreaInsets.right
-        }
+        frame.origin.x = scrollViewFrame.width - (edgeInset + halfWidth) - scrollView.safeAreaInsets.right
         
         frame.origin.x = min(frame.origin.x, scrollViewFrame.width - scrollBarWidth)
         
@@ -256,12 +252,7 @@ final class ScrollBarView: UIView {
         
         // Work out the y offset of the handle
         // TODO: check other scrollView.contentInset for
-        let contentInset: UIEdgeInsets
-        if #available(iOS 11.0, *) {
-            contentInset = scrollView.safeAreaInsets
-        } else {
-            contentInset = scrollView.contentInset
-        }
+        let contentInset: UIEdgeInsets = scrollView.safeAreaInsets
         
         let contentOffset = scrollView.contentOffset
         let contentSize = scrollView.contentSize
@@ -335,11 +326,7 @@ final class ScrollBarView: UIView {
         originalHeight = frame.height
         originalYOffset = frame.origin.y - scrollView.contentOffset.y
         
-        if #available(iOS 11.0, *) {
-            originalTopInset = scrollView.adjustedContentInset.top
-        } else {
-            originalTopInset = scrollView.contentInset.top
-        }
+        originalTopInset = scrollView.adjustedContentInset.top
         
         var handleFrame = handleView.frame
         let handleY = handleFrame.origin.y
@@ -381,10 +368,7 @@ final class ScrollBarView: UIView {
         
         let contentSize = scrollView.contentSize
         
-        var contentInset = scrollView.contentInset
-        if #available(iOS 11.0, *) {
-            contentInset = scrollView.adjustedContentInset
-        }
+        let contentInset = scrollView.adjustedContentInset
         contentInset.top = originalTopInset
         
         let totalScrollSize = contentSize.height + contentInset.bottom - scrollView.frame.height //+ contentInset.top
