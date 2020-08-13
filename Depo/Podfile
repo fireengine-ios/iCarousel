@@ -1,4 +1,4 @@
-platform :ios, '10.0'
+platform :ios, '11.0'
 use_frameworks!
 inhibit_all_warnings!
 ENV['COCOAPODS_DISABLE_STATS'] = "true"
@@ -51,6 +51,7 @@ def core_pods
   #migration
   pod 'SQLite.swift', '0.11.4'
   
+  pod 'Mantis', '~> 1.3.2'
 #  pod 'MetalPetal', '~> 1.0'
 #  pod 'GPUImage'
 

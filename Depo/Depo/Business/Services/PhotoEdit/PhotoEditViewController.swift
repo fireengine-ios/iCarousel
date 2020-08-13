@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Mantis
 
 enum PhotoEditCompletion {
     case canceled
@@ -182,7 +182,7 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     func needShowFilterView(for type: FilterViewType) {
         guard type != .adjust else {
             DispatchQueue.main.async {
-                let controller = CropViewController(image: self.sourceImage)
+                let controller = Mantis.cropViewController(image: self.sourceImage)
                 controller.delegate = self
                 self.present(controller, animated: true)
             }
