@@ -63,8 +63,13 @@ final class APILogger {
             }
             
             self.startDates[task] = Date()
-            self.log(string: "--> \(httpMethod) \(requestURL.absoluteString)")
             
+            if let dataLength = request.allHTTPHeaderFields?[HeaderConstant.ContentLength] {
+                self.log(string: "--> \(httpMethod) (\(dataLength) bytes) \(requestURL.absoluteString)")
+            } else {
+                self.log(string: "--> \(httpMethod) \(requestURL.absoluteString)")
+            }
+
             if requestURL.absoluteString.contains("upload-type=resumable") {
                 self.logResumableUpload(headers: request.allHTTPHeaderFields)
             }
@@ -80,7 +85,7 @@ final class APILogger {
                 let httpMethod = request.httpMethod,
                 let requestURL = self.filteredUrlString(request.url),
                 self.canLogRequest(requestURL, httpMethod: httpMethod),
-                !(task.state == .canceling && httpMethod == "GET")
+                !(task.state == .canceling && httpMethod == HTTPMethod.get.rawValue)
                 else {
                     return
             }
@@ -137,7 +142,7 @@ final class APILogger {
         
         // Download images for display in cells|views
         // CONTAINER_EXTENDED and CONTAINER_MAIN
-        if httpMethod == "GET", url.absoluteString.uppercased().contains("CONTAINER_") {
+        if httpMethod == HTTPMethod.get.rawValue, url.absoluteString.uppercased().contains("CONTAINER_") {
             return false
         }
         
