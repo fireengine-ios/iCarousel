@@ -56,7 +56,7 @@ enum AdjustmentParameterType: String {
             case .sharpness:
                 return (-4, 4, 0)
             case .blurRadius:
-                return (1, 8, 2)
+                return (1, 16, 2)
             case .vignetteRatio:
                 return (0, 1, 0)
             default:
@@ -95,11 +95,14 @@ final class AdjustmentParameter: AdjustmentParameterProtocol {
     private let middleValue: Float
     
     private var realCurrentValue: Float {
-        if currentValue <= defaultValue {
-            return middleValue - ((1 - currentValue / (defaultValue - minValue)) * minMiddle)
+        let real: Float
+        if currentValue <= defaultValue, minMiddle != 0 {
+            real = middleValue - ((1 - currentValue / (defaultValue - minValue)) * minMiddle)
         } else {
-            return middleValue + (((currentValue - defaultValue) / (maxValue - defaultValue)) * minMiddle)
+            real = middleValue + (((currentValue - defaultValue) / (maxValue - defaultValue)) * maxMiddle)
         }
+        
+        return real
     }
     
     private var onValueDidChangeAction: ValueHandler<Float>?

@@ -745,7 +745,9 @@ extension AnalyticsService: NetmeraProtocol {
     }
     
     static func startNetmera() {
+        #if !targetEnvironment(simulator)
         NetmeraService.startNetmera()
+        #endif
     }
     
     static func updateNetmeraAPIKey() {
