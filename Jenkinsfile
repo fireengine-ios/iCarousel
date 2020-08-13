@@ -12,7 +12,8 @@ apps = [
             ictsContainerId: '743', // ICT Store
             prodTeamID: '693N5K66ZJ',
             xcodeSchema: 'TC_Depo_LifeTech_Bundle',
-            xcodeTarget: 'TC_Depo_LifeTech_Bundle'
+            xcodeTarget: 'TC_Depo_LifeTech_Bundle',
+            itcTeamId: '121548574',
         ],
  [
             name: 'lifedrive',// name will be the base filename of the app
@@ -20,6 +21,7 @@ apps = [
             ictsContainerId: '966', // ICT Store
             appleId: '1488914348',
             prodTeamID: '729CGH4BJD',
+            itcTeamId: '118347642',
 	    //xcodeSchema: // Defaults to app name
             //xcodeTarget: // Defaults to app name
             //xcodeSchema: 'lifedrive_Bundle', 
@@ -391,13 +393,8 @@ pipeline {
                     def failReasons = [:]
                     apps.each { app ->
                         try {
-                            if (env.getProperty("DEPLOY_${app.name}") == 'true') {
-                                if ("${app.name}" == "lifebox") {
-                                    env.FASTLANE_ITC_TEAM_ID="121548574"
-                                }
-                                if ("${app.name}" == "lifedrive") {
-                                    env.FASTLANE_ITC_TEAM_ID="118347642"
-                                }
+                            if (env.getProperty("DEPLOY_${app.name}") == 'true') {           
+                                env.FASTLANE_ITC_TEAM_ID="${app.itcTeamId}"
                                 deployToTestflight app
                             }
 
