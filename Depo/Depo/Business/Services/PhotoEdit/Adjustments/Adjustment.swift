@@ -25,6 +25,7 @@ enum AdjustmentType {
     //case luminance - there's no such adjustment, replaced with the monochrome
     case monochrome
     
+    //effect
     case sharpen
     case blur
     case vignette

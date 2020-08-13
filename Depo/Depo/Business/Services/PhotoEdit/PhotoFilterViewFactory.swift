@@ -38,7 +38,7 @@ enum FilterViewType {
         case .color:
             return [.whiteBalance, .saturation, .gamma]
         case .effect:
-            return []
+            return [.sharpen, .blur, .vignette]
         case .hls:
             return [.hsl]
         case .light:
@@ -59,7 +59,7 @@ final class PhotoFilterViewFactory {
         case .color:
             return ColorFilterView.with(parameters: adjustmentParameters, delegate: delegate)
         case .effect:
-            return nil
+            return LightFilterView.with(parameters: adjustmentParameters, delegate: delegate)
         case .light:
             return LightFilterView.with(parameters: adjustmentParameters, delegate: delegate)
         case .hls:
