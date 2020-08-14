@@ -48,6 +48,10 @@ final class ShareCardContentManager {
             }
             controler.addAction(originalAction)
             
+            let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] _ in
+                self?.shareViaLink(item: item)
+            }
+            controler.addAction(shareViaLinkAction)
         } else {
             
             let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] _ in
