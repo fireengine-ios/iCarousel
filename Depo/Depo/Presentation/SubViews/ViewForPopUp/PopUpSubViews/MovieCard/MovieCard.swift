@@ -35,6 +35,14 @@ final class MovieCard: BaseCardView {
         }
     }
     
+    @IBOutlet private weak var shareButton: UIButton!  {
+        didSet {
+            shareButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            shareButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+            shareButton.setTitle(TextConstants.tabBarShareLabel, for: .normal)
+        }
+    }
+    
     @IBOutlet private weak var durationLabel: UILabel! {
         didSet {
             durationLabel.textColor = ColorConstants.whiteColor
@@ -52,8 +60,10 @@ final class MovieCard: BaseCardView {
             switch cardType {
             case .save:
                 bottomButton.setTitle(TextConstants.homeMovieCardSaveButton, for: .normal)
+                shareButton.isHidden = true
             case .display:
                 bottomButton.setTitle(TextConstants.homeMovieCardViewButton, for: .normal)
+                shareButton.isHidden = false
             }
         }
     }
@@ -81,7 +91,6 @@ final class MovieCard: BaseCardView {
         }
     }
     
-    
     private func set(details object: JSON) {
         let searchItem = SearchItemResponse(withJSON: object)
         let item = WrapData(remote: searchItem)
@@ -108,6 +117,14 @@ final class MovieCard: BaseCardView {
     
     @IBAction private func actionVideoViewButton(_ sender: UIButton) {
         showPhotoVideoDetail()
+    }
+    
+    @IBAction private func shareButtonTapped(_ sender: UIButton) {
+        guard let item = item else {
+            assertionFailure()
+            return
+        }
+        delegate?.share(item: item, type: .origin)
     }
     
     @IBAction private func actionBottomButton(_ sender: UIButton) {
