@@ -2317,6 +2317,12 @@
 		733C51502320F75700CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
 		733C515123213C5500CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
 		733C515223213C5600CC5DD2 /* SpotifySDKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */; };
+		734C271C24E578960067F337 /* CardsShareButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734C271B24E578960067F337 /* CardsShareButtonDelegate.swift */; };
+		734C271D24E578960067F337 /* CardsShareButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734C271B24E578960067F337 /* CardsShareButtonDelegate.swift */; };
+		734C271E24E578960067F337 /* CardsShareButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734C271B24E578960067F337 /* CardsShareButtonDelegate.swift */; };
+		734C271F24E578960067F337 /* CardsShareButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734C271B24E578960067F337 /* CardsShareButtonDelegate.swift */; };
+		734C272024E578960067F337 /* CardsShareButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734C271B24E578960067F337 /* CardsShareButtonDelegate.swift */; };
+		734C272424E58B3E0067F337 /* CardsShareButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734C271B24E578960067F337 /* CardsShareButtonDelegate.swift */; };
 		734CA112244D64000076F6A7 /* DocumentsAlbumCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734CA111244D64000076F6A7 /* DocumentsAlbumCard.swift */; };
 		734CA113244D64000076F6A7 /* DocumentsAlbumCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734CA111244D64000076F6A7 /* DocumentsAlbumCard.swift */; };
 		734CA114244D64000076F6A7 /* DocumentsAlbumCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734CA111244D64000076F6A7 /* DocumentsAlbumCard.swift */; };
@@ -2482,6 +2488,12 @@
 		73D723F0231D092E006AE835 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */; };
 		73D723F1231D092E006AE835 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */; };
 		73D723F2231D092E006AE835 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */; };
+		73DFEEC324E65D19009D925D /* ShareCardContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFEEC224E65D19009D925D /* ShareCardContentManager.swift */; };
+		73DFEEC424E65D19009D925D /* ShareCardContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFEEC224E65D19009D925D /* ShareCardContentManager.swift */; };
+		73DFEEC524E65D19009D925D /* ShareCardContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFEEC224E65D19009D925D /* ShareCardContentManager.swift */; };
+		73DFEEC624E65D19009D925D /* ShareCardContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFEEC224E65D19009D925D /* ShareCardContentManager.swift */; };
+		73DFEEC724E65D19009D925D /* ShareCardContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFEEC224E65D19009D925D /* ShareCardContentManager.swift */; };
+		73DFEEC824E65D19009D925D /* ShareCardContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DFEEC224E65D19009D925D /* ShareCardContentManager.swift */; };
 		73E065D1242A33AE008E73B3 /* BackgroundSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E065D0242A33AE008E73B3 /* BackgroundSyncService.swift */; };
 		73E065D2242A33AE008E73B3 /* BackgroundSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E065D0242A33AE008E73B3 /* BackgroundSyncService.swift */; };
 		73E065D3242A33AE008E73B3 /* BackgroundSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E065D0242A33AE008E73B3 /* BackgroundSyncService.swift */; };
@@ -12340,6 +12352,7 @@
 		7326801324855248007E2CDF /* ExtandedTapAreaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtandedTapAreaButton.swift; sourceTree = "<group>"; };
 		7329EE6F231F9AD90078396D /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		733C514F2320F75700CC5DD2 /* SpotifySDKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifySDKService.swift; sourceTree = "<group>"; };
+		734C271B24E578960067F337 /* CardsShareButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsShareButtonDelegate.swift; sourceTree = "<group>"; };
 		734CA111244D64000076F6A7 /* DocumentsAlbumCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsAlbumCard.swift; sourceTree = "<group>"; };
 		734CA118244D64150076F6A7 /* DocumentsAlbumCard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DocumentsAlbumCard.xib; sourceTree = "<group>"; };
 		734CA11F244D67860076F6A7 /* DocumentAlbumCardDesigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentAlbumCardDesigner.swift; sourceTree = "<group>"; };
@@ -12395,6 +12408,7 @@
 		73D723E7231D0855006AE835 /* PaymentModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModels.swift; sourceTree = "<group>"; };
 		73D723E9231D08A6006AE835 /* PackageOffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageOffer.swift; sourceTree = "<group>"; };
 		73D723EF231D092E006AE835 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
+		73DFEEC224E65D19009D925D /* ShareCardContentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCardContentManager.swift; sourceTree = "<group>"; };
 		73E065D0242A33AE008E73B3 /* BackgroundSyncService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BackgroundSyncService.swift; path = Depo/App/BackgroundSyncService.swift; sourceTree = SOURCE_ROOT; };
 		73E41D9322DDAFD000B036F4 /* TwoFactorAuthErrorResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoFactorAuthErrorResponse.swift; sourceTree = "<group>"; };
 		73E6715323EBF789000C4AF7 /* PrivacyPolicyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyService.swift; sourceTree = "<group>"; };
@@ -16554,6 +16568,7 @@
 			children = (
 				7CE825B81F823CAD00356AD2 /* PopUpSubViews */,
 				7C1F89911F70FFDF00740177 /* CardsContainerView.swift */,
+				734C271B24E578960067F337 /* CardsShareButtonDelegate.swift */,
 				CE99AC77201CB778003DD3B7 /* CardActionType.swift */,
 				7C1F89931F7140AF00740177 /* SwipeableCardCell.swift */,
 				7C1F89941F7140AF00740177 /* SwipeableCardCell.xib */,
@@ -16793,6 +16808,7 @@
 			children = (
 				7C5526121F7B9CCD00A21F3C /* CardsManager.swift */,
 				7C5526151F7BA1B400A21F3C /* CardsManagerViewProtocol.swift */,
+				73DFEEC224E65D19009D925D /* ShareCardContentManager.swift */,
 			);
 			path = CardsManager;
 			sourceTree = "<group>";
@@ -27519,6 +27535,7 @@
 				0303A1F82397D0D000907F42 /* RegistrationInteractorOutput.swift in Sources */,
 				0303A1F92397D0D000907F42 /* MaskService.swift in Sources */,
 				0303A1FA2397D0D000907F42 /* SpotifyAuthViewController.swift in Sources */,
+				73DFEEC624E65D19009D925D /* ShareCardContentManager.swift in Sources */,
 				0303A1FB2397D0D000907F42 /* ArrayDataSourceForCollectionView.swift in Sources */,
 				0303A1FC2397D0D000907F42 /* TermsAndPolicyViewController.swift in Sources */,
 				0303A1FD2397D0D000907F42 /* InstaPickBigPhotoView.swift in Sources */,
@@ -27946,6 +27963,7 @@
 				CF71472624B597AA00D83E60 /* ContactSyncOperationResultController.swift in Sources */,
 				0303A36C2397D0D000907F42 /* BaseFilesGreedRouter.swift in Sources */,
 				0303A36D2397D0D000907F42 /* BaseFilesGreedConfigurator.swift in Sources */,
+				734C271E24E578960067F337 /* CardsShareButtonDelegate.swift in Sources */,
 				0303A36E2397D0D000907F42 /* ActionsMenuTableViewCell.swift in Sources */,
 				0303A36F2397D0D000907F42 /* CreateStoryPreviewRouterInput.swift in Sources */,
 				0303A3702397D0D000907F42 /* DropboxAccountConnectionCell.swift in Sources */,
@@ -29735,6 +29753,7 @@
 				98D7211B24D05ACF001D2896 /* ColorFilterView.swift in Sources */,
 				8CD2B3B71FE7B43D00280547 /* WaitingForWiFiPopUp.swift in Sources */,
 				8C0E8F2A1FDEBDFF00789C91 /* ImportPhotosRouter.swift in Sources */,
+				73DFEEC424E65D19009D925D /* ShareCardContentManager.swift in Sources */,
 				8C0B91A920170EB000A5BA81 /* ManageContactsRouter.swift in Sources */,
 				8C0E8F2B1FDEBDFF00789C91 /* SettingsRouterInput.swift in Sources */,
 				8C0E8F2C1FDEBDFF00789C91 /* SettingsRouter.swift in Sources */,
@@ -30014,6 +30033,7 @@
 				8C0E8FAD1FDEBDFF00789C91 /* FeedbackViewInput.swift in Sources */,
 				8C0E8FAE1FDEBDFF00789C91 /* SubscriptionsService.swift in Sources */,
 				8C0E8FAF1FDEBDFF00789C91 /* FeedbackViewOutput.swift in Sources */,
+				734C271D24E578960067F337 /* CardsShareButtonDelegate.swift in Sources */,
 				98A86D7823A76F1800438225 /* HiddenPhotosNavbarManager.swift in Sources */,
 				4A9B3903201F3513009FC572 /* FaceImageItemsPresenter.swift in Sources */,
 				8C0E8FB11FDEBDFF00789C91 /* FeedbackViewController.swift in Sources */,
@@ -30680,6 +30700,7 @@
 				8DCB21731F3C86D700BAFE1E /* SearchViewInteractorInput.swift in Sources */,
 				CE8F44E41F6AAFA80062C2E0 /* UITableView+Extensions.swift in Sources */,
 				CE27C31E1EF9515400D4D156 /* RequestService.swift in Sources */,
+				734C271C24E578960067F337 /* CardsShareButtonDelegate.swift in Sources */,
 				7CD7C2A320189C6C009F6D3D /* StorageCard.swift in Sources */,
 				B527CF8B2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */,
 				CE00B24A21F5A7B000A5A696 /* PhotoCell.swift in Sources */,
@@ -30766,6 +30787,7 @@
 				CE51ABB31EF90853005DCEE0 /* AutoSyncModuleInput.swift in Sources */,
 				CE00B2792204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
 				73B623E023C07D7900839C47 /* OverlayStickerViewControllerDataSource.swift in Sources */,
+				73DFEEC324E65D19009D925D /* ShareCardContentManager.swift in Sources */,
 				CE51ABB51EF90853005DCEE0 /* AutoSyncInteractorOutput.swift in Sources */,
 				7C04350B1F4EF3DA00193C75 /* AlbumDetailService.swift in Sources */,
 				CE33DFFF1F0296C000706C40 /* RequestHeader.swift in Sources */,
@@ -32874,6 +32896,7 @@
 				CE784A5A22A685FB00662219 /* ForgotPasswordViewController.swift in Sources */,
 				B51205CB2305350D007EB951 /* AppendLocalsOperation.swift in Sources */,
 				CE784A5B22A685FB00662219 /* LeavePremiumHeaderView.swift in Sources */,
+				73DFEEC724E65D19009D925D /* ShareCardContentManager.swift in Sources */,
 				CE784A5C22A685FB00662219 /* ForgotPasswordModuleInput.swift in Sources */,
 				CE784A5D22A685FB00662219 /* EditingBarConfig.swift in Sources */,
 				CFACACA7247CF65400645B40 /* NetmeraExtensionService.swift in Sources */,
@@ -33272,6 +33295,7 @@
 				CE784BAE22A685FB00662219 /* UISearchBar+Cancel.swift in Sources */,
 				CE784BAF22A685FB00662219 /* ActionsMenuViewInput.swift in Sources */,
 				CE784BB022A685FB00662219 /* ActionsMenuView.swift in Sources */,
+				734C271F24E578960067F337 /* CardsShareButtonDelegate.swift in Sources */,
 				CE784BB122A685FB00662219 /* AppWormholeListener.swift in Sources */,
 				CE784BB222A685FB00662219 /* LoginSettingsViewIO.swift in Sources */,
 				98792DE422FD5CD9000A77E5 /* SpotifyImportedPlaylistsNavbarManager.swift in Sources */,
@@ -34387,6 +34411,7 @@
 				CF8B663223CBC9D70021B021 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				CF8B663323CBC9D70021B021 /* ForgotPasswordInitializer.swift in Sources */,
 				CF8B663423CBC9D70021B021 /* PasscodeView.swift in Sources */,
+				734C272424E58B3E0067F337 /* CardsShareButtonDelegate.swift in Sources */,
 				CF8B663523CBC9D70021B021 /* BiometricsManager.swift in Sources */,
 				CF8B663623CBC9D70021B021 /* UIImage+Color.swift in Sources */,
 				CF8B663723CBC9D70021B021 /* LoginSettingsViewIO.swift in Sources */,
@@ -34990,6 +35015,7 @@
 				CF8B685323CBC9D70021B021 /* BaseViewController.swift in Sources */,
 				CF8B685423CBC9D70021B021 /* FreeAppSpacePresenter.swift in Sources */,
 				CF8B685523CBC9D70021B021 /* FeedbackViewInteractorInput.swift in Sources */,
+				73DFEEC524E65D19009D925D /* ShareCardContentManager.swift in Sources */,
 				CF8B685623CBC9D70021B021 /* ProfilePhoneEnterView.swift in Sources */,
 				CF8B685723CBC9D70021B021 /* UIImage+Orientation.swift in Sources */,
 				CF8B685823CBC9D70021B021 /* FileManager+Size.swift in Sources */,
@@ -35804,6 +35830,7 @@
 				171090E623FC8E350036A033 /* SmashActionService.swift in Sources */,
 				CF8B6DD823CBCA280021B021 /* ForgotPasswordModuleInput.swift in Sources */,
 				CF8B6DD923CBCA280021B021 /* EditingBarConfig.swift in Sources */,
+				73DFEEC824E65D19009D925D /* ShareCardContentManager.swift in Sources */,
 				CF8B6DDA23CBCA280021B021 /* DeviceExtension.swift in Sources */,
 				CF8B6DDB23CBCA280021B021 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				CFACACA8247CF65400645B40 /* NetmeraExtensionService.swift in Sources */,
@@ -36202,6 +36229,7 @@
 				CF8B6F3D23CBCA280021B021 /* UISearchBar+Cancel.swift in Sources */,
 				CF8B6F3E23CBCA280021B021 /* ActionsMenuViewInput.swift in Sources */,
 				CF8B6F3F23CBCA280021B021 /* ActionsMenuView.swift in Sources */,
+				734C272024E578960067F337 /* CardsShareButtonDelegate.swift in Sources */,
 				CF8B6F4023CBCA280021B021 /* AppWormholeListener.swift in Sources */,
 				CF8B6F4123CBCA280021B021 /* LoginSettingsViewIO.swift in Sources */,
 				CF8B6F4223CBCA280021B021 /* SpotifyImportedPlaylistsNavbarManager.swift in Sources */,

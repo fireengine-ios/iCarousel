@@ -27,6 +27,14 @@ final class CollageCard: BaseCardView {
         }
     }
     
+    @IBOutlet private weak var shareButton: UIButton! {
+        didSet {
+            shareButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            shareButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+            shareButton.setTitle(TextConstants.tabBarShareLabel, for: .normal)
+        }
+    }
+    
     @IBOutlet private weak var bottomButton: UIButton! {
         didSet {
             bottomButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
@@ -45,8 +53,10 @@ final class CollageCard: BaseCardView {
             switch cardType {
             case .save:
                 bottomButton.setTitle(TextConstants.homeLikeFilterSavePhotoButton, for: .normal)
+                shareButton.isHidden = true
             case .display:
                 bottomButton.setTitle(TextConstants.homeLikeFilterViewPhoto, for: .normal)
+                shareButton.isHidden = false
             }
         }
     }
@@ -74,7 +84,6 @@ final class CollageCard: BaseCardView {
             layoutIfNeeded()
         }
     }
-    
     
     private func set(details object: JSON) {
         let searchItem = SearchItemResponse(withJSON: object)
@@ -116,6 +125,14 @@ final class CollageCard: BaseCardView {
         case .display:
             showPhotoVideoDetail()
         }
+    }
+    
+    @IBAction private func shareButtonTapped(_ sender: UIButton) {
+        guard let item = item else {
+            assertionFailure()
+            return
+        }
+        delegate?.share(item: item, type: .origin)
     }
     
     private func saveImage() {
