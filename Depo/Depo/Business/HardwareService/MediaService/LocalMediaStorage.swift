@@ -825,18 +825,19 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                                         let file = UUID().uuidString
                                                         url = Device.tmpFolderUrl(withComponent: file)
                                                         
-                                                        guard let url = url else {
+                                                        guard let unwrapedUrl = url else {
                                                             semaphore.signal()
                                                             return
                                                         }
 
-                                                        self?.streamReaderWrite.copyFile(from: urlToFile, to: url, completion: { result in
+                                                        self?.streamReaderWrite.copyFile(from: urlToFile, to: unwrapedUrl, completion: { result in
                                                             switch result {
                                                             case .success(_):
                                                                 break
                                                             case .failed(let error):
                                                                 debugLog(error.description)
                                                                 UIApplication.showErrorAlert(message: error.description)
+                                                                url = nil
                                                             }
                                                             semaphore.signal()
                                                         })
@@ -873,6 +874,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                                                         semaphore.signal()
                                                     } catch {
                                                         debugLog(error.description)
+                                                        url = nil
                                                         semaphore.signal()
                                                     }
         }
