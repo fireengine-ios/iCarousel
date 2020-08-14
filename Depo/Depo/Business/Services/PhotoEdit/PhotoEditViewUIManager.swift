@@ -14,21 +14,8 @@ protocol PhotoEditViewUIManagerDelegate: class {
 
 final class PhotoEditViewUIManager: NSObject {
     
-    @IBOutlet private weak var contentImageVIew: UIView! {
-        willSet {
-            newValue.backgroundColor = .black
-        }
-    }
-    
     @IBOutlet private weak var navBarContainer: UIView!
-    @IBOutlet private weak var imageScrollView: UIScrollView! {
-        willSet {
-            newValue.backgroundColor = .black
-            newValue.minimumZoomScale = 1
-            newValue.maximumZoomScale = 5
-        }
-    }
-    @IBOutlet private(set) weak var imageView: UIImageView!
+    @IBOutlet private weak var imageScrollView: ImageScrollView! 
     
     @IBOutlet private weak var filtersScrollView: UIScrollView! {
         willSet {
@@ -69,18 +56,28 @@ final class PhotoEditViewUIManager: NSObject {
     
     weak var delegate: PhotoEditViewUIManagerDelegate?
     
+    var image: UIImage? {
+        get {
+            imageScrollView.imageView.originalImage
+        }
+        set {
+            DispatchQueue.toMain {
+                self.imageScrollView.imageView.originalImage = newValue
+            }
+        }
+    }
+    
     //MARK: -
+    
+    func viewDidLayoutSubviews() {
+        imageScrollView.updateZoom()
+        imageScrollView.adjustFrameToCenter()
+    }
     
     func showInitialState() {
         showTabBarItemView(tabbar.selectedType)
         animator.showTransition(to: navBarView, on: navBarContainer, animated: true)
         animator.showTransition(to: tabbar, on: bottomBarContainer, animated: true)
-    }
-    
-    func setImage(_ image: UIImage?) {
-        DispatchQueue.toMain {
-            self.imageView.image = image
-        }
     }
     
     private func showTabBarItemView(_ item: PhotoEditTabbarItemType) {
@@ -171,4 +168,3 @@ private final class ContentAnimator {
         }
     }
 }
-

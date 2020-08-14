@@ -55,10 +55,15 @@ final class PhotoEditViewController: ViewController, NibInit {
         setInitialState()
         presentedCallback?()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        uiManager.viewDidLayoutSubviews()
+    }
 
     private func setInitialState() {
         uiManager.showInitialState()
-        uiManager.setImage(sourceImage)
+        uiManager.image = sourceImage
         uiManager.navBarView.state = hasChanges ? .edit : .initial
     }
     
@@ -113,9 +118,7 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
                 return
             }
             
-            DispatchQueue.main.async {
-                self.uiManager.setImage(outputImage)
-            }
+            self.uiManager.image = outputImage
         }
     }
 }
@@ -133,7 +136,7 @@ extension PhotoEditViewController: FilterChangesBarDelegate {
     }
     
     func applyFilter() {
-        if let image = uiManager.imageView.image {
+        if let image = uiManager.image {
             sourceImage = image
         }
         setInitialState()
@@ -220,7 +223,7 @@ extension PhotoEditViewController: CropViewControllerDelegate {
     }
     
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
-        uiManager.setImage(cropped)
+        uiManager.image = cropped
         applyFilter()
         cropViewController.dismiss(animated: true)
     }
