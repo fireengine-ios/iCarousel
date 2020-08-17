@@ -5646,102 +5646,12 @@
 		B5435DE724E670600091B77C /* BasicFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DE324E670600091B77C /* BasicFilter.swift */; };
 		B5435DE824E670600091B77C /* BasicFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DE324E670600091B77C /* BasicFilter.swift */; };
 		B5435DE924E670600091B77C /* BasicFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DE324E670600091B77C /* BasicFilter.swift */; };
-		B5435E0824E6A1250091B77C /* AweStruckFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DF824E6A1170091B77C /* AweStruckFilter.swift */; };
-		B5435E0924E6A1250091B77C /* AweStruckFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DF824E6A1170091B77C /* AweStruckFilter.swift */; };
-		B5435E0A24E6A1250091B77C /* AweStruckFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DF824E6A1170091B77C /* AweStruckFilter.swift */; };
-		B5435E0B24E6A1250091B77C /* AweStruckFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DF824E6A1170091B77C /* AweStruckFilter.swift */; };
-		B5435E0C24E6A1250091B77C /* AweStruckFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DF824E6A1170091B77C /* AweStruckFilter.swift */; };
-		B5435E0D24E6A1250091B77C /* AweStruckFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DF824E6A1170091B77C /* AweStruckFilter.swift */; };
-		B5435E0E24E6A1250091B77C /* AudreyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DF924E6A1180091B77C /* AudreyFilter.swift */; };
-		B5435E0F24E6A1250091B77C /* AudreyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DF924E6A1180091B77C /* AudreyFilter.swift */; };
-		B5435E1024E6A1250091B77C /* AudreyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DF924E6A1180091B77C /* AudreyFilter.swift */; };
-		B5435E1124E6A1250091B77C /* AudreyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DF924E6A1180091B77C /* AudreyFilter.swift */; };
-		B5435E1224E6A1250091B77C /* AudreyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DF924E6A1180091B77C /* AudreyFilter.swift */; };
-		B5435E1324E6A1250091B77C /* AudreyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DF924E6A1180091B77C /* AudreyFilter.swift */; };
-		B5435E1424E6A1250091B77C /* BluemessFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFA24E6A1190091B77C /* BluemessFilter.swift */; };
-		B5435E1524E6A1250091B77C /* BluemessFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFA24E6A1190091B77C /* BluemessFilter.swift */; };
-		B5435E1624E6A1250091B77C /* BluemessFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFA24E6A1190091B77C /* BluemessFilter.swift */; };
-		B5435E1724E6A1250091B77C /* BluemessFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFA24E6A1190091B77C /* BluemessFilter.swift */; };
-		B5435E1824E6A1250091B77C /* BluemessFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFA24E6A1190091B77C /* BluemessFilter.swift */; };
-		B5435E1924E6A1250091B77C /* BluemessFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFA24E6A1190091B77C /* BluemessFilter.swift */; };
-		B5435E1A24E6A1250091B77C /* AmazonFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFB24E6A1190091B77C /* AmazonFilter.swift */; };
-		B5435E1B24E6A1250091B77C /* AmazonFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFB24E6A1190091B77C /* AmazonFilter.swift */; };
-		B5435E1C24E6A1250091B77C /* AmazonFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFB24E6A1190091B77C /* AmazonFilter.swift */; };
-		B5435E1D24E6A1250091B77C /* AmazonFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFB24E6A1190091B77C /* AmazonFilter.swift */; };
-		B5435E1E24E6A1250091B77C /* AmazonFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFB24E6A1190091B77C /* AmazonFilter.swift */; };
-		B5435E1F24E6A1250091B77C /* AmazonFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFB24E6A1190091B77C /* AmazonFilter.swift */; };
-		B5435E2024E6A1250091B77C /* MetropolisFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFC24E6A11C0091B77C /* MetropolisFilter.swift */; };
-		B5435E2124E6A1250091B77C /* MetropolisFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFC24E6A11C0091B77C /* MetropolisFilter.swift */; };
-		B5435E2224E6A1250091B77C /* MetropolisFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFC24E6A11C0091B77C /* MetropolisFilter.swift */; };
-		B5435E2324E6A1250091B77C /* MetropolisFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFC24E6A11C0091B77C /* MetropolisFilter.swift */; };
-		B5435E2424E6A1250091B77C /* MetropolisFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFC24E6A11C0091B77C /* MetropolisFilter.swift */; };
-		B5435E2524E6A1250091B77C /* MetropolisFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFC24E6A11C0091B77C /* MetropolisFilter.swift */; };
-		B5435E2624E6A1250091B77C /* AprilFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFD24E6A11D0091B77C /* AprilFilter.swift */; };
-		B5435E2724E6A1250091B77C /* AprilFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFD24E6A11D0091B77C /* AprilFilter.swift */; };
-		B5435E2824E6A1250091B77C /* AprilFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFD24E6A11D0091B77C /* AprilFilter.swift */; };
-		B5435E2924E6A1250091B77C /* AprilFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFD24E6A11D0091B77C /* AprilFilter.swift */; };
-		B5435E2A24E6A1250091B77C /* AprilFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFD24E6A11D0091B77C /* AprilFilter.swift */; };
-		B5435E2B24E6A1250091B77C /* AprilFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFD24E6A11D0091B77C /* AprilFilter.swift */; };
-		B5435E2C24E6A1250091B77C /* WhisperFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFE24E6A11E0091B77C /* WhisperFilter.swift */; };
-		B5435E2D24E6A1250091B77C /* WhisperFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFE24E6A11E0091B77C /* WhisperFilter.swift */; };
-		B5435E2E24E6A1250091B77C /* WhisperFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFE24E6A11E0091B77C /* WhisperFilter.swift */; };
-		B5435E2F24E6A1250091B77C /* WhisperFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFE24E6A11E0091B77C /* WhisperFilter.swift */; };
-		B5435E3024E6A1250091B77C /* WhisperFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFE24E6A11E0091B77C /* WhisperFilter.swift */; };
-		B5435E3124E6A1250091B77C /* WhisperFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFE24E6A11E0091B77C /* WhisperFilter.swift */; };
-		B5435E3224E6A1250091B77C /* LimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFF24E6A11E0091B77C /* LimeFilter.swift */; };
-		B5435E3324E6A1250091B77C /* LimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFF24E6A11E0091B77C /* LimeFilter.swift */; };
-		B5435E3424E6A1250091B77C /* LimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFF24E6A11E0091B77C /* LimeFilter.swift */; };
-		B5435E3524E6A1250091B77C /* LimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFF24E6A11E0091B77C /* LimeFilter.swift */; };
-		B5435E3624E6A1250091B77C /* LimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFF24E6A11E0091B77C /* LimeFilter.swift */; };
-		B5435E3724E6A1250091B77C /* LimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435DFF24E6A11E0091B77C /* LimeFilter.swift */; };
-		B5435E3824E6A1250091B77C /* OldManFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0024E6A11F0091B77C /* OldManFilter.swift */; };
-		B5435E3924E6A1250091B77C /* OldManFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0024E6A11F0091B77C /* OldManFilter.swift */; };
-		B5435E3A24E6A1250091B77C /* OldManFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0024E6A11F0091B77C /* OldManFilter.swift */; };
-		B5435E3B24E6A1250091B77C /* OldManFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0024E6A11F0091B77C /* OldManFilter.swift */; };
-		B5435E3C24E6A1250091B77C /* OldManFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0024E6A11F0091B77C /* OldManFilter.swift */; };
-		B5435E3D24E6A1250091B77C /* OldManFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0024E6A11F0091B77C /* OldManFilter.swift */; };
-		B5435E3E24E6A1250091B77C /* RiseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0124E6A1200091B77C /* RiseFilter.swift */; };
-		B5435E3F24E6A1250091B77C /* RiseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0124E6A1200091B77C /* RiseFilter.swift */; };
-		B5435E4024E6A1250091B77C /* RiseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0124E6A1200091B77C /* RiseFilter.swift */; };
-		B5435E4124E6A1250091B77C /* RiseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0124E6A1200091B77C /* RiseFilter.swift */; };
-		B5435E4224E6A1250091B77C /* RiseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0124E6A1200091B77C /* RiseFilter.swift */; };
-		B5435E4324E6A1250091B77C /* RiseFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0124E6A1200091B77C /* RiseFilter.swift */; };
 		B5435E4424E6A1250091B77C /* ClarendonFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0224E6A1200091B77C /* ClarendonFilter.swift */; };
 		B5435E4524E6A1250091B77C /* ClarendonFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0224E6A1200091B77C /* ClarendonFilter.swift */; };
 		B5435E4624E6A1250091B77C /* ClarendonFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0224E6A1200091B77C /* ClarendonFilter.swift */; };
 		B5435E4724E6A1250091B77C /* ClarendonFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0224E6A1200091B77C /* ClarendonFilter.swift */; };
 		B5435E4824E6A1250091B77C /* ClarendonFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0224E6A1200091B77C /* ClarendonFilter.swift */; };
 		B5435E4924E6A1250091B77C /* ClarendonFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0224E6A1200091B77C /* ClarendonFilter.swift */; };
-		B5435E4A24E6A1250091B77C /* AdeleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0324E6A1210091B77C /* AdeleFilter.swift */; };
-		B5435E4B24E6A1250091B77C /* AdeleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0324E6A1210091B77C /* AdeleFilter.swift */; };
-		B5435E4C24E6A1250091B77C /* AdeleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0324E6A1210091B77C /* AdeleFilter.swift */; };
-		B5435E4D24E6A1250091B77C /* AdeleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0324E6A1210091B77C /* AdeleFilter.swift */; };
-		B5435E4E24E6A1250091B77C /* AdeleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0324E6A1210091B77C /* AdeleFilter.swift */; };
-		B5435E4F24E6A1250091B77C /* AdeleFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0324E6A1210091B77C /* AdeleFilter.swift */; };
-		B5435E5024E6A1250091B77C /* MarsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0424E6A1220091B77C /* MarsFilter.swift */; };
-		B5435E5124E6A1250091B77C /* MarsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0424E6A1220091B77C /* MarsFilter.swift */; };
-		B5435E5224E6A1250091B77C /* MarsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0424E6A1220091B77C /* MarsFilter.swift */; };
-		B5435E5324E6A1250091B77C /* MarsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0424E6A1220091B77C /* MarsFilter.swift */; };
-		B5435E5424E6A1250091B77C /* MarsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0424E6A1220091B77C /* MarsFilter.swift */; };
-		B5435E5524E6A1250091B77C /* MarsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0424E6A1220091B77C /* MarsFilter.swift */; };
-		B5435E5624E6A1250091B77C /* StarlitFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0524E6A1230091B77C /* StarlitFilter.swift */; };
-		B5435E5724E6A1250091B77C /* StarlitFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0524E6A1230091B77C /* StarlitFilter.swift */; };
-		B5435E5824E6A1250091B77C /* StarlitFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0524E6A1230091B77C /* StarlitFilter.swift */; };
-		B5435E5924E6A1250091B77C /* StarlitFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0524E6A1230091B77C /* StarlitFilter.swift */; };
-		B5435E5A24E6A1250091B77C /* StarlitFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0524E6A1230091B77C /* StarlitFilter.swift */; };
-		B5435E5B24E6A1250091B77C /* StarlitFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0524E6A1230091B77C /* StarlitFilter.swift */; };
-		B5435E5C24E6A1250091B77C /* HaanFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0624E6A1230091B77C /* HaanFilter.swift */; };
-		B5435E5D24E6A1250091B77C /* HaanFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0624E6A1230091B77C /* HaanFilter.swift */; };
-		B5435E5E24E6A1250091B77C /* HaanFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0624E6A1230091B77C /* HaanFilter.swift */; };
-		B5435E5F24E6A1250091B77C /* HaanFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0624E6A1230091B77C /* HaanFilter.swift */; };
-		B5435E6024E6A1250091B77C /* HaanFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0624E6A1230091B77C /* HaanFilter.swift */; };
-		B5435E6124E6A1250091B77C /* HaanFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0624E6A1230091B77C /* HaanFilter.swift */; };
-		B5435E6224E6A1250091B77C /* CruzFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0724E6A1240091B77C /* CruzFilter.swift */; };
-		B5435E6324E6A1250091B77C /* CruzFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0724E6A1240091B77C /* CruzFilter.swift */; };
-		B5435E6424E6A1260091B77C /* CruzFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0724E6A1240091B77C /* CruzFilter.swift */; };
-		B5435E6524E6A1260091B77C /* CruzFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0724E6A1240091B77C /* CruzFilter.swift */; };
-		B5435E6624E6A1260091B77C /* CruzFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0724E6A1240091B77C /* CruzFilter.swift */; };
-		B5435E6724E6A1260091B77C /* CruzFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E0724E6A1240091B77C /* CruzFilter.swift */; };
 		B5435E6A24E6A15D0091B77C /* UIImage+GPUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E6824E6A15C0091B77C /* UIImage+GPUImage.swift */; };
 		B5435E6B24E6A15D0091B77C /* UIImage+GPUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E6824E6A15C0091B77C /* UIImage+GPUImage.swift */; };
 		B5435E6C24E6A15D0091B77C /* UIImage+GPUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5435E6824E6A15C0091B77C /* UIImage+GPUImage.swift */; };
@@ -5947,6 +5857,12 @@
 		B592448F23C86BA70066CA57 /* HiddenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592448D23C86BA70066CA57 /* HiddenService.swift */; };
 		B592449023C86BA70066CA57 /* HiddenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592448D23C86BA70066CA57 /* HiddenService.swift */; };
 		B592449123C86BA70066CA57 /* HiddenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B592448D23C86BA70066CA57 /* HiddenService.swift */; };
+		B596530224EA6D210076A8F3 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530124EA6D210076A8F3 /* FilterManager.swift */; };
+		B596530324EA6D210076A8F3 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530124EA6D210076A8F3 /* FilterManager.swift */; };
+		B596530424EA6D210076A8F3 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530124EA6D210076A8F3 /* FilterManager.swift */; };
+		B596530524EA6D210076A8F3 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530124EA6D210076A8F3 /* FilterManager.swift */; };
+		B596530624EA6D210076A8F3 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530124EA6D210076A8F3 /* FilterManager.swift */; };
+		B596530724EA6D210076A8F3 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530124EA6D210076A8F3 /* FilterManager.swift */; };
 		B59A63DF2167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B59A63E02167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B59CCE812213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
@@ -13516,22 +13432,7 @@
 		B53A6501D09587A6DE4B5B8F /* Pods-Billo.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billo.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Billo/Pods-Billo.appstore.xcconfig"; sourceTree = "<group>"; };
 		B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebView+Extensions.swift"; sourceTree = "<group>"; };
 		B5435DE324E670600091B77C /* BasicFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicFilter.swift; sourceTree = "<group>"; };
-		B5435DF824E6A1170091B77C /* AweStruckFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AweStruckFilter.swift; sourceTree = "<group>"; };
-		B5435DF924E6A1180091B77C /* AudreyFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudreyFilter.swift; sourceTree = "<group>"; };
-		B5435DFA24E6A1190091B77C /* BluemessFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluemessFilter.swift; sourceTree = "<group>"; };
-		B5435DFB24E6A1190091B77C /* AmazonFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmazonFilter.swift; sourceTree = "<group>"; };
-		B5435DFC24E6A11C0091B77C /* MetropolisFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetropolisFilter.swift; sourceTree = "<group>"; };
-		B5435DFD24E6A11D0091B77C /* AprilFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AprilFilter.swift; sourceTree = "<group>"; };
-		B5435DFE24E6A11E0091B77C /* WhisperFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhisperFilter.swift; sourceTree = "<group>"; };
-		B5435DFF24E6A11E0091B77C /* LimeFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimeFilter.swift; sourceTree = "<group>"; };
-		B5435E0024E6A11F0091B77C /* OldManFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldManFilter.swift; sourceTree = "<group>"; };
-		B5435E0124E6A1200091B77C /* RiseFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiseFilter.swift; sourceTree = "<group>"; };
 		B5435E0224E6A1200091B77C /* ClarendonFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClarendonFilter.swift; sourceTree = "<group>"; };
-		B5435E0324E6A1210091B77C /* AdeleFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdeleFilter.swift; sourceTree = "<group>"; };
-		B5435E0424E6A1220091B77C /* MarsFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarsFilter.swift; sourceTree = "<group>"; };
-		B5435E0524E6A1230091B77C /* StarlitFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarlitFilter.swift; sourceTree = "<group>"; };
-		B5435E0624E6A1230091B77C /* HaanFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaanFilter.swift; sourceTree = "<group>"; };
-		B5435E0724E6A1240091B77C /* CruzFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CruzFilter.swift; sourceTree = "<group>"; };
 		B5435E6824E6A15C0091B77C /* UIImage+GPUImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+GPUImage.swift"; sourceTree = "<group>"; };
 		B5435E6924E6A15D0091B77C /* MTIImage+UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MTIImage+UIImage.swift"; sourceTree = "<group>"; };
 		B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCGLogger+Extension.swift"; sourceTree = "<group>"; };
@@ -13595,6 +13496,7 @@
 		B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickProgressPopup.swift; sourceTree = "<group>"; };
 		B589FC4E23F1388D00DD528D /* DataChunkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataChunkProvider.swift; sourceTree = "<group>"; };
 		B592448D23C86BA70066CA57 /* HiddenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenService.swift; sourceTree = "<group>"; };
+		B596530124EA6D210076A8F3 /* FilterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterManager.swift; sourceTree = "<group>"; };
 		B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+TrimmedQuery.swift"; sourceTree = "<group>"; };
 		B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountSectionMediator.swift; sourceTree = "<group>"; };
 		B5A84522212DA314007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
@@ -19834,22 +19736,8 @@
 			children = (
 				B5435E6924E6A15D0091B77C /* MTIImage+UIImage.swift */,
 				B5435E6824E6A15C0091B77C /* UIImage+GPUImage.swift */,
-				B5435E0324E6A1210091B77C /* AdeleFilter.swift */,
-				B5435DFB24E6A1190091B77C /* AmazonFilter.swift */,
-				B5435DFD24E6A11D0091B77C /* AprilFilter.swift */,
-				B5435DF924E6A1180091B77C /* AudreyFilter.swift */,
-				B5435DF824E6A1170091B77C /* AweStruckFilter.swift */,
-				B5435DFA24E6A1190091B77C /* BluemessFilter.swift */,
 				B5435E0224E6A1200091B77C /* ClarendonFilter.swift */,
-				B5435E0724E6A1240091B77C /* CruzFilter.swift */,
-				B5435E0624E6A1230091B77C /* HaanFilter.swift */,
-				B5435DFF24E6A11E0091B77C /* LimeFilter.swift */,
-				B5435E0424E6A1220091B77C /* MarsFilter.swift */,
-				B5435DFC24E6A11C0091B77C /* MetropolisFilter.swift */,
-				B5435E0024E6A11F0091B77C /* OldManFilter.swift */,
-				B5435E0124E6A1200091B77C /* RiseFilter.swift */,
-				B5435E0524E6A1230091B77C /* StarlitFilter.swift */,
-				B5435DFE24E6A11E0091B77C /* WhisperFilter.swift */,
+				B596530124EA6D210076A8F3 /* FilterManager.swift */,
 			);
 			path = CustomFilters;
 			sourceTree = "<group>";
@@ -27202,9 +27090,7 @@
 				0303A0472397D0D000907F42 /* PHPhotoLibraryChangeObserver.swift in Sources */,
 				0303A0482397D0D000907F42 /* UserProfileModuleInput.swift in Sources */,
 				0303A0492397D0D000907F42 /* SettingsBundleHelper.swift in Sources */,
-				B5435E3524E6A1250091B77C /* LimeFilter.swift in Sources */,
 				98F033582403FFC100F1D415 /* SyncAdapter.m in Sources */,
-				B5435E0B24E6A1250091B77C /* AweStruckFilter.swift in Sources */,
 				0303A04A2397D0D000907F42 /* UIEdgeInsets+Extensions.swift in Sources */,
 				0303A04B2397D0D000907F42 /* MD5.swift in Sources */,
 				0303A04C2397D0D000907F42 /* BottomSelectionMusicTabBarRouter.swift in Sources */,
@@ -27416,7 +27302,6 @@
 				0303A0FE2397D0D000907F42 /* AutoSyncDataStorage.swift in Sources */,
 				0303A0FF2397D0D000907F42 /* PrintInitializer.swift in Sources */,
 				0303A1002397D0D000907F42 /* UserProfileInitializer.swift in Sources */,
-				B5435E2924E6A1250091B77C /* AprilFilter.swift in Sources */,
 				0303A1022397D0D000907F42 /* BaseCellModel.swift in Sources */,
 				0303A1032397D0D000907F42 /* FaceImagePhotosInteractorOutput.swift in Sources */,
 				CF71473824B597AA00D83E60 /* ContactSyncScheduleCard.swift in Sources */,
@@ -27453,6 +27338,7 @@
 				0303A11B2397D0D000907F42 /* AlbumDetailResponse.swift in Sources */,
 				0303A11C2397D0D000907F42 /* CountiesGSMCodeCompositor.swift in Sources */,
 				0303A11D2397D0D000907F42 /* HomePageInteractorInput.swift in Sources */,
+				B596530524EA6D210076A8F3 /* FilterManager.swift in Sources */,
 				0303A11E2397D0D000907F42 /* BaseCollectionViewCellWithSwipe.swift in Sources */,
 				0303A11F2397D0D000907F42 /* CardsContainerView.swift in Sources */,
 				0303A1202397D0D000907F42 /* InstagramParametrs.swift in Sources */,
@@ -27499,7 +27385,6 @@
 				98F032FE2403FFC100F1D415 /* SyncRecord.m in Sources */,
 				0303A1472397D0D000907F42 /* SpotifySortingManager.swift in Sources */,
 				98F0335E2403FFC100F1D415 /* PartialInfo.m in Sources */,
-				B5435E2324E6A1250091B77C /* MetropolisFilter.swift in Sources */,
 				98F0331C2403FFC100F1D415 /* Utils.m in Sources */,
 				0303A1482397D0D000907F42 /* CellsConstant.swift in Sources */,
 				0303A1492397D0D000907F42 /* GradientView.swift in Sources */,
@@ -27624,11 +27509,9 @@
 				982E17C62417A67200B07707 /* AutoSyncCheckBox.swift in Sources */,
 				0303A1B52397D0D000907F42 /* HomeCardsService.swift in Sources */,
 				0303A1B62397D0D000907F42 /* FileForDownload.swift in Sources */,
-				B5435E1D24E6A1250091B77C /* AmazonFilter.swift in Sources */,
 				0303A1B82397D0D000907F42 /* ServerErrors.swift in Sources */,
 				0303A1B92397D0D000907F42 /* SearchService.swift in Sources */,
 				0303A1BA2397D0D000907F42 /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
-				B5435E5F24E6A1250091B77C /* HaanFilter.swift in Sources */,
 				CF7146A824B597A900D83E60 /* ContactBackupHistoryPopupFactory.swift in Sources */,
 				0303A1BB2397D0D000907F42 /* PackagePremiumView.swift in Sources */,
 				0303A1BC2397D0D000907F42 /* AutoSyncInteractorInput.swift in Sources */,
@@ -27831,7 +27714,6 @@
 				0303A2672397D0D000907F42 /* TransparentGradientView.swift in Sources */,
 				0303A2682397D0D000907F42 /* HomePagePopUpOperation.swift in Sources */,
 				0303A2692397D0D000907F42 /* UINavigationBarExtension.swift in Sources */,
-				B5435E5924E6A1250091B77C /* StarlitFilter.swift in Sources */,
 				0303A26A2397D0D000907F42 /* UsageInfoViewOutput.swift in Sources */,
 				0303A26B2397D0D000907F42 /* IntroduceInitializer.swift in Sources */,
 				0303A26C2397D0D000907F42 /* InstapickAlbumSelectionDataSource.swift in Sources */,
@@ -27906,7 +27788,6 @@
 				0303A2A92397D0D000907F42 /* AugmentedRealityInitializer.swift in Sources */,
 				B571FC8E23AE1B3800398B48 /* CoreDataMigrationVersion.swift in Sources */,
 				0303A2AA2397D0D000907F42 /* PhoneVerificationConfigurator.swift in Sources */,
-				B5435E4D24E6A1250091B77C /* AdeleFilter.swift in Sources */,
 				0303A2AB2397D0D000907F42 /* PhoneVerificationInitializer.swift in Sources */,
 				0303A2AC2397D0D000907F42 /* MyStoragePresenter.swift in Sources */,
 				0303ED8B23BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */,
@@ -27992,7 +27873,6 @@
 				0303A2F42397D0D000907F42 /* InstaPickPhotoView.swift in Sources */,
 				0303A2F52397D0D000907F42 /* CircleProgressView.swift in Sources */,
 				0303A2F62397D0D000907F42 /* PasscodeState.swift in Sources */,
-				B5435E2F24E6A1250091B77C /* WhisperFilter.swift in Sources */,
 				0303A2F72397D0D000907F42 /* UserProfileConfigurator.swift in Sources */,
 				0303A2F82397D0D000907F42 /* LocalAlbumConfigurator.swift in Sources */,
 				0303A2F92397D0D000907F42 /* ItemOperationManager.swift in Sources */,
@@ -28148,7 +28028,6 @@
 				98BE78B724517E4300B8864F /* SnackbarView.swift in Sources */,
 				0303A3792397D0D000907F42 /* AlbumItem.swift in Sources */,
 				0303A37A2397D0D000907F42 /* UserProfileRouter.swift in Sources */,
-				B5435E3B24E6A1250091B77C /* OldManFilter.swift in Sources */,
 				B5B01A7323FA7CB900B03426 /* ResumableUploadInfoService.swift in Sources */,
 				0303A37B2397D0D000907F42 /* SelectionImageView.swift in Sources */,
 				0303A37C2397D0D000907F42 /* SupportFormController.swift in Sources */,
@@ -28332,7 +28211,6 @@
 				0303A4292397D0D000907F42 /* FileInfoViewController.swift in Sources */,
 				0303A42A2397D0D000907F42 /* FileInfoModuleInput.swift in Sources */,
 				98A86D9323A8BD4F00438225 /* AlbumCell.swift in Sources */,
-				B5435E1724E6A1250091B77C /* BluemessFilter.swift in Sources */,
 				0303A42B2397D0D000907F42 /* InsetsButton.swift in Sources */,
 				0303A42C2397D0D000907F42 /* BottomSelectionTabBarRouterInput.swift in Sources */,
 				0303A42D2397D0D000907F42 /* InstapickAnalysisCell.swift in Sources */,
@@ -28361,7 +28239,6 @@
 				98922295240D0C0E004155A5 /* BecomePremiumView.swift in Sources */,
 				0303A4432397D0D000907F42 /* AppConfigurator.swift in Sources */,
 				030480DD23AA0771006DC316 /* DebugAnalyticsService.swift in Sources */,
-				B5435E6524E6A1260091B77C /* CruzFilter.swift in Sources */,
 				0303A4442397D0D000907F42 /* InstaPickRoutingService.swift in Sources */,
 				174F99E8243D448900986C8B /* ControlContainableScrollView.swift in Sources */,
 				0303A4452397D0D000907F42 /* ActionSheetPredetermendConfigs.swift in Sources */,
@@ -28397,7 +28274,6 @@
 				0303A4602397D0D000907F42 /* LandingPageCollectionViewDataSource.swift in Sources */,
 				0303A4622397D0D000907F42 /* FaceImageChangeCoverRouterInput.swift in Sources */,
 				0303A4632397D0D000907F42 /* ResizableTableView.swift in Sources */,
-				B5435E4124E6A1250091B77C /* RiseFilter.swift in Sources */,
 				0303A4642397D0D000907F42 /* UploadFilesSelectionInteractor.swift in Sources */,
 				0303A4652397D0D000907F42 /* FirstResponder.swift in Sources */,
 				0303A4662397D0D000907F42 /* PasscodeSettingsRouterInput.swift in Sources */,
@@ -28511,7 +28387,6 @@
 				0303A4C22397D0D000907F42 /* AlbumsInteractor.swift in Sources */,
 				0303A4C32397D0D000907F42 /* GridListTopBar.swift in Sources */,
 				0303A4C42397D0D000907F42 /* FaceImageItemsInteractorInput.swift in Sources */,
-				B5435E5324E6A1250091B77C /* MarsFilter.swift in Sources */,
 				0303A4C52397D0D000907F42 /* AlbumsRouter.swift in Sources */,
 				0303A4C62397D0D000907F42 /* UICollectionView+Extensions.swift in Sources */,
 				0303A4C72397D0D000907F42 /* AlbumsInitializer.swift in Sources */,
@@ -28566,7 +28441,6 @@
 				0303A4F82397D0D000907F42 /* FeedbackViewRouterInput.swift in Sources */,
 				CF9B1F6D24C0A93E002CE8E9 /* EmptyDataView.swift in Sources */,
 				0303A4F92397D0D000907F42 /* FeedbackViewRouter.swift in Sources */,
-				B5435E1124E6A1250091B77C /* AudreyFilter.swift in Sources */,
 				0303A4FA2397D0D000907F42 /* FeedbackViewConfigurator.swift in Sources */,
 				0303A4FB2397D0D000907F42 /* InstapickPopUpController.swift in Sources */,
 				0303A4FC2397D0D000907F42 /* FaceImageViewController.swift in Sources */,
@@ -28920,7 +28794,6 @@
 				4A6DBE8D21A6F93A0003D1B4 /* PremiumListView.swift in Sources */,
 				8C0E8C781FDEBDFF00789C91 /* ApplicationPalette.swift in Sources */,
 				173B144922F99F6100FAAC97 /* AccountWarningService.swift in Sources */,
-				B5435E0F24E6A1250091B77C /* AudreyFilter.swift in Sources */,
 				4A9B390F201F3969009FC572 /* FaceImageItemsInitializer.swift in Sources */,
 				7C379F41202C36BE0050C055 /* OrientationManager.swift in Sources */,
 				4B34A3FA2334CF8C00C9B12B /* SupportFormBannerView.swift in Sources */,
@@ -29005,7 +28878,6 @@
 				8C0E8CB51FDEBDFF00789C91 /* SubscriptionParameters.swift in Sources */,
 				8C0E8CB61FDEBDFF00789C91 /* TabBarViewController.swift in Sources */,
 				98BE78B524517E4300B8864F /* SnackbarView.swift in Sources */,
-				B5435E1524E6A1250091B77C /* BluemessFilter.swift in Sources */,
 				B5C4C8A32049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				8C208648228D4B2E000BEDAD /* ThresholdBlockService.swift in Sources */,
 				482509DA2061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */,
@@ -29073,7 +28945,6 @@
 				8C0B91BD2017108100A5BA81 /* Validator.swift in Sources */,
 				8C0E8CE61FDEBDFF00789C91 /* HomePageViewController.swift in Sources */,
 				7CA4A172207E49F200F270C8 /* SmallFullOfQuotaPopUp.swift in Sources */,
-				B5435E3F24E6A1250091B77C /* RiseFilter.swift in Sources */,
 				98DBC0472410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift in Sources */,
 				8C0E8CE71FDEBDFF00789C91 /* LoginViewOutput.swift in Sources */,
 				B5781BD1210F50A800AF2DA5 /* UIApplication+OpenURL.swift in Sources */,
@@ -29120,7 +28991,6 @@
 				FA33A7E3209451B1008F946C /* NavigationBarStyle.swift in Sources */,
 				C62239AE204973300043ED44 /* FaceImageChangeCoverRouterInput.swift in Sources */,
 				C62239A82049731B0043ED44 /* FaceImageChangeCoverInteractor.swift in Sources */,
-				B5435E2724E6A1250091B77C /* AprilFilter.swift in Sources */,
 				8C0E8D031FDEBDFF00789C91 /* ProgressCardProtocol.swift in Sources */,
 				9809317823952CAC00ECFEF8 /* SmartAlbumsManager.swift in Sources */,
 				CE58FB0720444BFF007F3F54 /* ColorConstants.swift in Sources */,
@@ -29152,6 +29022,7 @@
 				CE634AF4230EAAA700CED18C /* PaymentPopUpController.swift in Sources */,
 				89E51D5F22CA2ECA007A7DBC /* CreateStoryPopUp.swift in Sources */,
 				CE61D1B82045947C001D01DC /* SharedConstants.swift in Sources */,
+				B596530324EA6D210076A8F3 /* FilterManager.swift in Sources */,
 				8C0E8D181FDEBDFF00789C91 /* AccountType.swift in Sources */,
 				8C0E8D191FDEBDFF00789C91 /* InfoButtonCellProtocol.swift in Sources */,
 				8C0E8D1A1FDEBDFF00789C91 /* Mail.swift in Sources */,
@@ -29295,7 +29166,6 @@
 				89E51D4922CA1112007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				8C0E8D7F1FDEBDFF00789C91 /* FloatingContainerVC.swift in Sources */,
 				8C0E8D801FDEBDFF00789C91 /* Array+Safe.swift in Sources */,
-				B5435E3324E6A1250091B77C /* LimeFilter.swift in Sources */,
 				8C0E8D811FDEBDFF00789C91 /* AutoSyncRouter.swift in Sources */,
 				8C0E8D831FDEBDFF00789C91 /* HomePageConfigurator.swift in Sources */,
 				8C0E8D861FDEBDFF00789C91 /* AutoSyncConfigurator.swift in Sources */,
@@ -29313,7 +29183,6 @@
 				8C0E8D931FDEBDFF00789C91 /* CustomNavBarButton.swift in Sources */,
 				986B20632077684C00E04B96 /* StreamReaderWriter.swift in Sources */,
 				8C0E8D941FDEBDFF00789C91 /* UserProfileViewOutput.swift in Sources */,
-				B5435E5724E6A1250091B77C /* StarlitFilter.swift in Sources */,
 				8C0E8D951FDEBDFF00789C91 /* UploadResponse.swift in Sources */,
 				8C0E8D961FDEBDFF00789C91 /* UsageInfoInteractorInput.swift in Sources */,
 				9845489B22FBFF4100D7F29C /* SpotifyStatusView.swift in Sources */,
@@ -29380,7 +29249,6 @@
 				B569220023ACEDA400E255C4 /* MigrationModel_1_3.xcmappingmodel in Sources */,
 				8C0E8DB91FDEBDFF00789C91 /* VisualMusicPlayerPresenter.swift in Sources */,
 				8C0E8DBA1FDEBDFF00789C91 /* AuthenticationServiceResponse.swift in Sources */,
-				B5435E0924E6A1250091B77C /* AweStruckFilter.swift in Sources */,
 				8C0E8DBB1FDEBDFF00789C91 /* RegistrationInteractor.swift in Sources */,
 				8C0E8DBC1FDEBDFF00789C91 /* BottomSelectionTabBarInteractor.swift in Sources */,
 				CE23A0F4205FF5290048267D /* SavingAttemptsCounterByUnigueUserID.swift in Sources */,
@@ -29482,7 +29350,6 @@
 				8CDB21EC20AC11B600739700 /* UIButton+Image.swift in Sources */,
 				78DDEF9D201908CB00E3530B /* String+CyrillicCompare.swift in Sources */,
 				8C0E8DF21FDEBDFF00789C91 /* AlertFilesActionsSheetInteractor.swift in Sources */,
-				B5435E5124E6A1250091B77C /* MarsFilter.swift in Sources */,
 				4A0AC1482087375B00032CC7 /* PeriodicContactSyncViewInput.swift in Sources */,
 				8C0E8DF31FDEBDFF00789C91 /* TapGestureRecognizerWithClosure.swift in Sources */,
 				98E792D9203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */,
@@ -29652,7 +29519,6 @@
 				8C0E8E511FDEBDFF00789C91 /* SearchViewOutput.swift in Sources */,
 				73A183462359B1A10095719F /* CampaignCardDesigner.swift in Sources */,
 				8C0E8E521FDEBDFF00789C91 /* OfferApple.swift in Sources */,
-				B5435E2D24E6A1250091B77C /* WhisperFilter.swift in Sources */,
 				FA793D89201872E200A02B46 /* PlacesServiceResponse.swift in Sources */,
 				8C0E8E541FDEBDFF00789C91 /* ActivityTimelineSectionsBuider.swift in Sources */,
 				7326801524855248007E2CDF /* ExtandedTapAreaButton.swift in Sources */,
@@ -29732,7 +29598,6 @@
 				8C0E8EB21FDEBDFF00789C91 /* ImportFromDropboxInteractor.swift in Sources */,
 				9864296922F834F10039811C /* SpotifyResponse.swift in Sources */,
 				CEE3B7D2225791D900B99FE7 /* PasswordView.swift in Sources */,
-				B5435E1B24E6A1250091B77C /* AmazonFilter.swift in Sources */,
 				8C0E8EB31FDEBDFF00789C91 /* BaseFilesGreedModuleInput.swift in Sources */,
 				CEF371AD20887BC3007AD36E /* MD5.swift in Sources */,
 				8C0E8EB51FDEBDFF00789C91 /* KeyboardHideManager.swift in Sources */,
@@ -29799,7 +29664,6 @@
 				CE3435EA224A5A8B00AFAABB /* WebViewController.swift in Sources */,
 				92004B6D21AD199100582C45 /* MyStorageInteractorOutput.swift in Sources */,
 				CED4B02E2018594700D06CA9 /* HomeCardResponse.swift in Sources */,
-				B5435E2124E6A1250091B77C /* MetropolisFilter.swift in Sources */,
 				92203C3721EA0E8800926469 /* InstaPickRoutingService.swift in Sources */,
 				8C0E8ED81FDEBDFF00789C91 /* SearchViewController.swift in Sources */,
 				8C0E8ED91FDEBDFF00789C91 /* BasicCollectionMultiFileCell.swift in Sources */,
@@ -30009,7 +29873,6 @@
 				8C0E8F471FDEBDFF00789C91 /* FileInfoViewInput.swift in Sources */,
 				4A9B3900201F3502009FC572 /* FaceImageItemsViewController.swift in Sources */,
 				8C0B91C02017145D00A5BA81 /* UISearchBar+Cancel.swift in Sources */,
-				B5435E5D24E6A1250091B77C /* HaanFilter.swift in Sources */,
 				7378052523AB9E5D001D57BD /* OverlayAnimationService.swift in Sources */,
 				981642FB233CE2D40070F8B9 /* TBMatikPhotoView.swift in Sources */,
 				8C0E8F481FDEBDFF00789C91 /* FileInfoViewOutput.swift in Sources */,
@@ -30041,7 +29904,6 @@
 				8C0E8F551FDEBDFF00789C91 /* UsageInfoRouter.swift in Sources */,
 				7C121F01208742A800AA585F /* TokenKeychainStorage.swift in Sources */,
 				8C0E8F561FDEBDFF00789C91 /* ActionSheetPredetermendConfigs.swift in Sources */,
-				B5435E4B24E6A1250091B77C /* AdeleFilter.swift in Sources */,
 				8C0E8F571FDEBDFF00789C91 /* FileInfoConfigurator.swift in Sources */,
 				CF71473C24B597AA00D83E60 /* ContactSyncPopupFactory.swift in Sources */,
 				8C0E8F581FDEBDFF00789C91 /* FileInfoInitializer.swift in Sources */,
@@ -30113,7 +29975,6 @@
 				8C0E8F7B1FDEBDFF00789C91 /* SelectNamePresenter.swift in Sources */,
 				737A2EAA2338AF410014258A /* SecretAnswerView.swift in Sources */,
 				C62239A6204972F40043ED44 /* FaceImageItemsInteractorOutput.swift in Sources */,
-				B5435E3924E6A1250091B77C /* OldManFilter.swift in Sources */,
 				987E21822360380100D45AEA /* CampaingnInfoView.swift in Sources */,
 				8C0E8F7C1FDEBDFF00789C91 /* BaseCardView.swift in Sources */,
 				8C0E8F7D1FDEBDFF00789C91 /* ImageForDowload.swift in Sources */,
@@ -30130,7 +29991,6 @@
 				8C0E8F841FDEBDFF00789C91 /* SelectNameRouter.swift in Sources */,
 				CF71460424B597A800D83E60 /* ContactDetailCell.swift in Sources */,
 				B50B4A6A220C27C20056FC86 /* SocialAccountRemoveConnectionCell.swift in Sources */,
-				B5435E6324E6A1250091B77C /* CruzFilter.swift in Sources */,
 				9863B88724D2AA7700664810 /* PreparedFiltersView.swift in Sources */,
 				8CD2B3B11FE7B3BD00280547 /* UIButton+Color.swift in Sources */,
 				A20B356E21B823D000A5E4F2 /* FaceImageItemsDataSource.swift in Sources */,
@@ -30898,7 +30758,6 @@
 				B527CF8B2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */,
 				CE00B24A21F5A7B000A5A696 /* PhotoCell.swift in Sources */,
 				CE47D1FC1FD147BA00888D2E /* InsetsTextField.swift in Sources */,
-				B5435E5024E6A1250091B77C /* MarsFilter.swift in Sources */,
 				8E802E15246C42A200D24561 /* PeopleSliderDataSource.swift in Sources */,
 				CE907A311F94D49900D2F8CE /* MulticastDelegate.swift in Sources */,
 				7C1F89951F7140AF00740177 /* SwipeableCardCell.swift in Sources */,
@@ -30973,8 +30832,6 @@
 				4ADE087E202DC7890095346F /* FaceImagePhotosModuleOutput.swift in Sources */,
 				CE2F55F71F75518F00F49DA1 /* PlanType.swift in Sources */,
 				98A86D7C23A7721B00438225 /* HiddenPhotosThreeDotMenuManager.swift in Sources */,
-				B5435E1A24E6A1250091B77C /* AmazonFilter.swift in Sources */,
-				B5435E0824E6A1250091B77C /* AweStruckFilter.swift in Sources */,
 				0334575223C714C100FB6386 /* NetmeraScreenEvents.swift in Sources */,
 				8DCB21671F3C7CBF00BAFE1E /* SearchViewInitializer.swift in Sources */,
 				B5FB65761FDE6F6900A02FD7 /* OperationProgressService.swift in Sources */,
@@ -31169,7 +31026,6 @@
 				CE2F56161F7552A900F49DA1 /* PackagesInitializer.swift in Sources */,
 				CE15AFBE20A0846E00015874 /* UINavigationController+Push.swift in Sources */,
 				7859299920060E94003F8AB3 /* ManageContactsInteractor.swift in Sources */,
-				B5435E2C24E6A1250091B77C /* WhisperFilter.swift in Sources */,
 				CF7146E124B597A900D83E60 /* DeleteDuplicatesHeader.swift in Sources */,
 				984A515721E87A50004525F5 /* AnalyzeHistoryDisplayManager.swift in Sources */,
 				7C3A74391F04F4B800124DF5 /* BaseMediaContent.swift in Sources */,
@@ -31306,7 +31162,6 @@
 				CE51ACC81EF90853005DCEE0 /* RegistrationPresenter.swift in Sources */,
 				9219B18A21ECA25800098021 /* InstaPickDetailViewController.swift in Sources */,
 				CE51ACC91EF90853005DCEE0 /* RegistrationInteractorInput.swift in Sources */,
-				B5435E2624E6A1250091B77C /* AprilFilter.swift in Sources */,
 				89E51D4F22CA111F007A7DBC /* CreateStoryPreviewModuleInput.swift in Sources */,
 				9824FED820061AFC00B3BFC6 /* CollectionViewHeaderWithText.swift in Sources */,
 				B5C9526E2316975C00C06263 /* CoreDataStack.swift in Sources */,
@@ -31329,7 +31184,6 @@
 				A74ADA4B23A38344007DD192 /* CarouselPageModel.swift in Sources */,
 				A225690B21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */,
 				CE3471871F02F38400B97AC3 /* AuthenticationServiceResponse.swift in Sources */,
-				B5435E5C24E6A1250091B77C /* HaanFilter.swift in Sources */,
 				CE3435FF224B5C4400AFAABB /* FullscreenTextController.swift in Sources */,
 				CE51ACCB1EF90853005DCEE0 /* RegistrationInteractor.swift in Sources */,
 				8C6EF8781F348B5C002AC795 /* BottomSelectionTabBarInteractor.swift in Sources */,
@@ -31350,7 +31204,6 @@
 				78052965200DD3470051FA78 /* ManageContactsModels.swift in Sources */,
 				736B67152493EDD100ED12B1 /* TopSafeAreaConstraint.swift in Sources */,
 				CE51ACD01EF90853005DCEE0 /* TermsAndServicesViewInput.swift in Sources */,
-				B5435E1424E6A1250091B77C /* BluemessFilter.swift in Sources */,
 				8C26008722919AAD0063E913 /* SecurityCodeTextField.swift in Sources */,
 				CEAE3F981EFD4E6900A405B2 /* WhiteButtonWithRoundedCorner.swift in Sources */,
 				7CBF50241F44723D00D67BF3 /* AlbumService.swift in Sources */,
@@ -31500,7 +31353,6 @@
 				486F7B57208D10D3009EB73F /* PeriodicContactSyncDataStorage.swift in Sources */,
 				92004B5D21AD14F400582C45 /* MyStorageRouterInput.swift in Sources */,
 				CE51ACF01EF90853005DCEE0 /* SmartTimerLabel.swift in Sources */,
-				B5435E3824E6A1250091B77C /* OldManFilter.swift in Sources */,
 				4BF3A69722B38C590082130F /* PermissionsView.swift in Sources */,
 				8C06AC1220066641003D8E05 /* LoginSettingsPresenter.swift in Sources */,
 				EF1B60461FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift in Sources */,
@@ -31546,10 +31398,8 @@
 				985B0C562412A0C400C0342C /* AutoSyncDataSource.swift in Sources */,
 				CF71460324B597A800D83E60 /* ContactDetailCell.swift in Sources */,
 				8C6EF88F1F348B77002AC795 /* EditingBarConfig.swift in Sources */,
-				B5435E0E24E6A1250091B77C /* AudreyFilter.swift in Sources */,
 				8C9EA13F20B593E600FED3A2 /* DeviceExtension.swift in Sources */,
 				B5C4C8A22049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */,
-				B5435E2024E6A1250091B77C /* MetropolisFilter.swift in Sources */,
 				B549B6CB24CF099500D39C44 /* Adjustment.swift in Sources */,
 				92004B6321AD18E100582C45 /* MyStorageModuleInput.swift in Sources */,
 				CE2F561E1F7552A900F49DA1 /* PackagesViewController.swift in Sources */,
@@ -31664,7 +31514,6 @@
 				CE6A8F1720737E230001EB54 /* ServerMessageError.swift in Sources */,
 				A22A3BEE2215A5B700FF03C1 /* Error+Alamofire.swift in Sources */,
 				739E2C2D247BA92200C74757 /* UIView+ParentViewController.swift in Sources */,
-				B5435E6224E6A1250091B77C /* CruzFilter.swift in Sources */,
 				B5BA987B2068C6F200CA3BF9 /* UIImage+Size.swift in Sources */,
 				CEFFA8F521B0089800B34F36 /* ViewSortStorage.swift in Sources */,
 				CF71473524B597AA00D83E60 /* ContactSyncScheduleCard.swift in Sources */,
@@ -31731,6 +31580,7 @@
 				98F0335B2403FFC100F1D415 /* PartialInfo.m in Sources */,
 				4BF7CF5222310519002DAF37 /* AdjustsFontSizeInsetsButton.swift in Sources */,
 				CECD4E561FE1152600978BE7 /* UIImage+Color.swift in Sources */,
+				B596530224EA6D210076A8F3 /* FilterManager.swift in Sources */,
 				CE170F6A21E76DFD00BE352D /* InstapickService.swift in Sources */,
 				FDC8F998E27D9EA9B6B95F47 /* BaseFilesGreedInteractorInput.swift in Sources */,
 				CE9487D985CF5DEAC28D4438 /* BaseFilesGreedInteractorOutput.swift in Sources */,
@@ -31921,7 +31771,6 @@
 				CF71463324B597A800D83E60 /* ContactSyncNoBackupView.swift in Sources */,
 				AAADE05BB4633A42298A897A /* SettingsInitializer.swift in Sources */,
 				9845489A22FBFF4100D7F29C /* SpotifyStatusView.swift in Sources */,
-				B5435E4A24E6A1250091B77C /* AdeleFilter.swift in Sources */,
 				8CB293331F72676900134C97 /* AlertFilesActionsSheetInitialConfig.swift in Sources */,
 				574356A9865D094DB570AD08 /* SplashViewInput.swift in Sources */,
 				E7C61128665828354AB0EBDC /* SplashViewOutput.swift in Sources */,
@@ -32139,7 +31988,6 @@
 				8C208676228D4FF1000BEDAD /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
 				4E2D35C770D6AD2189D274A8 /* AlbumsInitializer.swift in Sources */,
 				9065EE336B9F1D044DBD3944 /* AlbumDetailViewController.swift in Sources */,
-				B5435E3224E6A1250091B77C /* LimeFilter.swift in Sources */,
 				7C6945E920039F4A00152344 /* FreeAppSpaceRouter.swift in Sources */,
 				7C00FE1C1F5958380041D041 /* SingletonStorage.swift in Sources */,
 				CE95ED591F516736002F923A /* HelpAndSupportViewOutput.swift in Sources */,
@@ -32198,7 +32046,6 @@
 				8AC9821D58B05574782F11AB /* FeedbackViewInitializer.swift in Sources */,
 				CE292C1421BE5C54004FC745 /* Text+Size.swift in Sources */,
 				9807261C203C340B004E1505 /* SuggestionTableViewCell.swift in Sources */,
-				B5435E3E24E6A1250091B77C /* RiseFilter.swift in Sources */,
 				B551D0D124614C5900B21970 /* LogoutDBCleaner.swift in Sources */,
 				AD2151F5167A65F51A485818 /* ActivityTimelineViewInput.swift in Sources */,
 				EBE4DB98A7204834F0BB6B76 /* ActivityTimelineViewOutput.swift in Sources */,
@@ -32254,7 +32101,6 @@
 				4A2039C72087ACBC004850ED /* AutoSyncRouterInput.swift in Sources */,
 				985D87E424D0156B004BCDFF /* PhotoEditViewController.swift in Sources */,
 				CE08BDEB1FC8404600440CA0 /* TokenStorage.swift in Sources */,
-				B5435E5624E6A1250091B77C /* StarlitFilter.swift in Sources */,
 				CE6DE75C1FCC3ECF00C23CBD /* OptInController.swift in Sources */,
 				7CD92DC12076027D00010BFA /* iOSDevCenters+GIF.swift in Sources */,
 				98F9C57223585168008C5ECF /* CampaignContestInfoView.swift in Sources */,
@@ -32365,7 +32211,6 @@
 				8E26D98C230699CF00D08123 /* MusicInteractorOutput.swift in Sources */,
 				CE78480022A685FB00662219 /* PasscodeSettingsPresenter.swift in Sources */,
 				CE78480122A685FB00662219 /* Bool+Init.swift in Sources */,
-				B5435E5A24E6A1250091B77C /* StarlitFilter.swift in Sources */,
 				CE78480222A685FB00662219 /* Router.swift in Sources */,
 				CE78480322A685FB00662219 /* AugmentedRealityItem.swift in Sources */,
 				98A86D7F23A7721B00438225 /* HiddenPhotosThreeDotMenuManager.swift in Sources */,
@@ -32377,7 +32222,6 @@
 				CE78480722A685FB00662219 /* HomePageInteractorOutput.swift in Sources */,
 				CE78480822A685FB00662219 /* PackagesPresenter.swift in Sources */,
 				CE78480922A685FB00662219 /* (null) in Sources */,
-				B5435E2A24E6A1250091B77C /* AprilFilter.swift in Sources */,
 				98DBC05F2410FB4F00926F40 /* AutoSyncAlbumTableViewCell.swift in Sources */,
 				CE78480A22A685FB00662219 /* StoriesInitializer.swift in Sources */,
 				CE78480B22A685FB00662219 /* ApplicationPalette.swift in Sources */,
@@ -32492,7 +32336,6 @@
 				CE78485F22A685FB00662219 /* AppMigrator.swift in Sources */,
 				CE78486122A685FB00662219 /* ContactBackupEmpty.swift in Sources */,
 				CE78486222A685FB00662219 /* KeyboardHandler.swift in Sources */,
-				B5435E4E24E6A1250091B77C /* AdeleFilter.swift in Sources */,
 				CE78486322A685FB00662219 /* LoginRouter.swift in Sources */,
 				7378051C23AB9789001D57BD /* OverlayStickerImageView.swift in Sources */,
 				CE78486422A685FB00662219 /* ActivityIndicatorManager.swift in Sources */,
@@ -32537,7 +32380,6 @@
 				98A86D6B23A246A700438225 /* HiddenPhotosDataSource.swift in Sources */,
 				CE78488522A685FB00662219 /* AnalyticsService.swift in Sources */,
 				CE78488622A685FB00662219 /* CustomProgressHUD.swift in Sources */,
-				B5435E3024E6A1250091B77C /* WhisperFilter.swift in Sources */,
 				CE78488722A685FB00662219 /* GSMCodeModel.swift in Sources */,
 				CE78488822A685FB00662219 /* FaceImagePhotosModuleOutput.swift in Sources */,
 				CE78488922A685FB00662219 /* PlanType.swift in Sources */,
@@ -32567,7 +32409,6 @@
 				CE78489D22A685FB00662219 /* BaseFilesGreedChildrenViewController.swift in Sources */,
 				CE78489F22A685FB00662219 /* CustomSwitch.swift in Sources */,
 				98F0331D2403FFC100F1D415 /* Utils.m in Sources */,
-				B5435E6624E6A1260091B77C /* CruzFilter.swift in Sources */,
 				CE7848A022A685FB00662219 /* MediaItemsAlbum+CoreDataClass.swift in Sources */,
 				CE7848A122A685FB00662219 /* FaceImageChangeCoverRouter.swift in Sources */,
 				CE7848A222A685FB00662219 /* AutoSyncModel.swift in Sources */,
@@ -32599,7 +32440,6 @@
 				892B015822DF170600BCECBC /* TwoFactorChallengeInteractor.swift in Sources */,
 				98792DD922FD486F000A77E5 /* SpotifyImportedTracksViewController.swift in Sources */,
 				CE7848BA22A685FB00662219 /* RecentSearchesService.swift in Sources */,
-				B5435E1824E6A1250091B77C /* BluemessFilter.swift in Sources */,
 				CE7848BB22A685FB00662219 /* LeavePremiumInteractor.swift in Sources */,
 				CE7848BC22A685FB00662219 /* LoginInteractor.swift in Sources */,
 				CE7848BD22A685FB00662219 /* TermsOfUseInitializer.swift in Sources */,
@@ -32774,7 +32614,6 @@
 				CE78494322A685FB00662219 /* AutoSyncViewController.swift in Sources */,
 				CE78494422A685FB00662219 /* AlertFilesActionsSheetInteractorInput.swift in Sources */,
 				CE78494722A685FB00662219 /* PackagesConfigurator.swift in Sources */,
-				B5435E1E24E6A1250091B77C /* AmazonFilter.swift in Sources */,
 				CE78494822A685FB00662219 /* EmptyContainerNavVC.swift in Sources */,
 				CE78494922A685FB00662219 /* PasscodeViewImp.swift in Sources */,
 				CE78494A22A685FB00662219 /* PeriodicContactSyncViewOutput.swift in Sources */,
@@ -33073,6 +32912,7 @@
 				CE784A3522A685FB00662219 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				CE784A3622A685FB00662219 /* AnalyzeHistoryViewController.swift in Sources */,
 				CE784A3722A685FB00662219 /* PhoneVerificationInteractorOutput.swift in Sources */,
+				B596530624EA6D210076A8F3 /* FilterManager.swift in Sources */,
 				CE784A3822A685FB00662219 /* PeriodicContactSyncDataStorage.swift in Sources */,
 				CE784A3A22A685FB00662219 /* MyStorageRouterInput.swift in Sources */,
 				CE784A3B22A685FB00662219 /* SmartTimerLabel.swift in Sources */,
@@ -33208,7 +33048,6 @@
 				CE784AAB22A685FB00662219 /* ManageContactsModuleInput.swift in Sources */,
 				CE784AAC22A685FB00662219 /* LoadingImageView.swift in Sources */,
 				CE784AAD22A685FB00662219 /* InstaPickCircularLoader.swift in Sources */,
-				B5435E1224E6A1250091B77C /* AudreyFilter.swift in Sources */,
 				CE784AAE22A685FB00662219 /* PasscodeSettingsViewIO.swift in Sources */,
 				CE784AAF22A685FB00662219 /* PushNotificationService.swift in Sources */,
 				CE784AB022A685FB00662219 /* EmailEnterDesigner.swift in Sources */,
@@ -33219,7 +33058,6 @@
 				89E51D5622CA1129007A7DBC /* CreateStoryPreviyInteractorIO.swift in Sources */,
 				CE784AB422A685FB00662219 /* GridListTopBarConfig.swift in Sources */,
 				CE784AB522A685FB00662219 /* InstapickFreeCell.swift in Sources */,
-				B5435E6024E6A1250091B77C /* HaanFilter.swift in Sources */,
 				CE784AB622A685FB00662219 /* ColumnsCollectionLayout.swift in Sources */,
 				CE784AB722A685FB00662219 /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
 				CE784AB822A685FB00662219 /* ServerMessageError.swift in Sources */,
@@ -33379,7 +33217,6 @@
 				CF7146E524B597A900D83E60 /* DeleteDuplicatesHeader.swift in Sources */,
 				CE784B3622A685FB00662219 /* PhotoVideoDetailInteractorOutput.swift in Sources */,
 				CE784B3722A685FB00662219 /* AsyncOperation.swift in Sources */,
-				B5435E3C24E6A1250091B77C /* OldManFilter.swift in Sources */,
 				985D87DC24D0156B004BCDFF /* LightFilterView.swift in Sources */,
 				CE784B3822A685FB00662219 /* PhotoVideoDetailInteractor.swift in Sources */,
 				CE784B3922A685FB00662219 /* PackagesModuleInput.swift in Sources */,
@@ -33531,7 +33368,6 @@
 				CE784BBA22A685FB00662219 /* BottomSelectionTabBarRouterInput.swift in Sources */,
 				CE784BBB22A685FB00662219 /* InstapickAnalysisCell.swift in Sources */,
 				CF71462B24B597A800D83E60 /* ContactSyncViewController.swift in Sources */,
-				B5435E4224E6A1250091B77C /* RiseFilter.swift in Sources */,
 				989BDE6322F47B1E001DDEB2 /* SpotifyCollectionViewDataSource.swift in Sources */,
 				8C1E5BD422CB8B9F008FDA02 /* CacheManager.swift in Sources */,
 				CE784BBC22A685FB00662219 /* FileInfoPresenter.swift in Sources */,
@@ -33595,7 +33431,6 @@
 				CE784BEB22A685FB00662219 /* ResizableTableView.swift in Sources */,
 				CE784BEC22A685FB00662219 /* UploadFilesSelectionInteractor.swift in Sources */,
 				CE784BED22A685FB00662219 /* FirstResponder.swift in Sources */,
-				B5435E2424E6A1250091B77C /* MetropolisFilter.swift in Sources */,
 				CE784BEE22A685FB00662219 /* PasscodeSettingsRouterInput.swift in Sources */,
 				CE784BEF22A685FB00662219 /* PasscodeSettingsConfigurator.swift in Sources */,
 				CE784BF022A685FB00662219 /* UploadFilesSelectionRouterInput.swift in Sources */,
@@ -33631,7 +33466,6 @@
 				CE784C0922A685FB00662219 /* BaseCardView.swift in Sources */,
 				892B014A22DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */,
 				CE784C0A22A685FB00662219 /* ImageForDowload.swift in Sources */,
-				B5435E5424E6A1250091B77C /* MarsFilter.swift in Sources */,
 				8C86111C22BCFDF200108958 /* PermissionsView.swift in Sources */,
 				CE784C0C22A685FB00662219 /* ProfileTextPickerView.swift in Sources */,
 				CE784C0D22A685FB00662219 /* SelectNameInteractorInput.swift in Sources */,
@@ -33739,11 +33573,9 @@
 				CE784C5C22A685FB00662219 /* SubscriptionsService.swift in Sources */,
 				987E21832360380200D45AEA /* CampaingnInfoView.swift in Sources */,
 				8C1E72EE22BEB65300DC57B6 /* SharedConstants.swift in Sources */,
-				B5435E3624E6A1250091B77C /* LimeFilter.swift in Sources */,
 				CE784C5D22A685FB00662219 /* ItemSyncOperation.swift in Sources */,
 				CE784C5E22A685FB00662219 /* FeedbackViewOutput.swift in Sources */,
 				CE784C6022A685FB00662219 /* TermsOfUseRouter.swift in Sources */,
-				B5435E0C24E6A1250091B77C /* AweStruckFilter.swift in Sources */,
 				739D4AB7248910C20032EA31 /* BottomDetailViewAnimationManager.swift in Sources */,
 				CE784C6122A685FB00662219 /* FeedbackViewController.swift in Sources */,
 				CE784C6222A685FB00662219 /* FeedbackViewModuleInput.swift in Sources */,
@@ -34050,7 +33882,6 @@
 				CF8B642923CBC9D70021B021 /* GSMCodeModel.swift in Sources */,
 				CF8B642A23CBC9D70021B021 /* PlanType.swift in Sources */,
 				CF8B642C23CBC9D70021B021 /* WormholePoster.swift in Sources */,
-				B5435E2824E6A1250091B77C /* AprilFilter.swift in Sources */,
 				CF8B642D23CBC9D70021B021 /* UIScrollView+Scroll.swift in Sources */,
 				CF8B642E23CBC9D70021B021 /* SearchViewInitializer.swift in Sources */,
 				CF8B643023CBC9D70021B021 /* VisualMusicPlayerViewInput.swift in Sources */,
@@ -34170,7 +34001,6 @@
 				CF8B649223CBC9D70021B021 /* AlbumDetailResponse.swift in Sources */,
 				CF8B649323CBC9D70021B021 /* UpdaterController.m in Sources */,
 				CF8B649423CBC9D70021B021 /* CountiesGSMCodeCompositor.swift in Sources */,
-				B5435E2E24E6A1250091B77C /* WhisperFilter.swift in Sources */,
 				CF8B649523CBC9D70021B021 /* PeriodicContactSyncInteractorOutput.swift in Sources */,
 				CF8B649623CBC9D70021B021 /* TermsOfUseRouterInput.swift in Sources */,
 				CF8B649723CBC9D70021B021 /* FaceImageDesigner.swift in Sources */,
@@ -34191,7 +34021,6 @@
 				CF8B64A623CBC9D70021B021 /* UIApplication+topController.swift in Sources */,
 				174F99E7243D448900986C8B /* ControlContainableScrollView.swift in Sources */,
 				CF8B64A723CBC9D70021B021 /* VisualMusicPlayerViewOutput.swift in Sources */,
-				B5435E1024E6A1250091B77C /* AudreyFilter.swift in Sources */,
 				CF8B64A823CBC9D70021B021 /* MyStorageInteractorInput.swift in Sources */,
 				CF8B64A923CBC9D70021B021 /* UINavigationController+Push.swift in Sources */,
 				CF8B64AA23CBC9D70021B021 /* LocalAlbumPresenter.swift in Sources */,
@@ -34242,7 +34071,6 @@
 				CF8B64D423CBC9D70021B021 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				CF7146D724B597A900D83E60 /* DeleteDuplicatesMainView.swift in Sources */,
 				CF8B64D523CBC9D70021B021 /* DataStorage.swift in Sources */,
-				B5435E5E24E6A1250091B77C /* HaanFilter.swift in Sources */,
 				CF8B64D623CBC9D70021B021 /* BaseUserInputCellView.swift in Sources */,
 				98F032F72403FFC100F1D415 /* ContactAddress.m in Sources */,
 				CF8B64D723CBC9D70021B021 /* LoginConfigurator.swift in Sources */,
@@ -34261,7 +34089,6 @@
 				CF8B64E223CBC9D70021B021 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
 				CF8B64E323CBC9D70021B021 /* BaseDataSourceForCollectionView.swift in Sources */,
 				490222C22403F9B300B120BA /* MobilePaymentPermissionViewInput.swift in Sources */,
-				B5435E1624E6A1250091B77C /* BluemessFilter.swift in Sources */,
 				CF8B64E423CBC9D70021B021 /* Watchdog.swift in Sources */,
 				CF8B64E523CBC9D70021B021 /* AutoSyncViewController.swift in Sources */,
 				CF8B64E623CBC9D70021B021 /* BorderDotsPageControl.swift in Sources */,
@@ -34310,7 +34137,6 @@
 				0305A32723D5C3BB004D1EC7 /* HiddenPhotosNavbarManager.swift in Sources */,
 				CF8B650923CBC9D70021B021 /* BackButton.swift in Sources */,
 				CF8B650A23CBC9D70021B021 /* InsetsButton.swift in Sources */,
-				B5435E2224E6A1250091B77C /* MetropolisFilter.swift in Sources */,
 				CF8B650B23CBC9D70021B021 /* SearchService.swift in Sources */,
 				89DCC5CD2403A99900488F1F /* SubscriptionOfferView.swift in Sources */,
 				CF8B650C23CBC9D70021B021 /* MediaItemsMetaData+CoreDataClass.swift in Sources */,
@@ -34353,7 +34179,6 @@
 				CF8B652F23CBC9D70021B021 /* ImageScrollView.swift in Sources */,
 				CF8B653023CBC9D70021B021 /* ArrayExtension.swift in Sources */,
 				CF8B653123CBC9D70021B021 /* RegistrationViewOutput.swift in Sources */,
-				B5435E0A24E6A1250091B77C /* AweStruckFilter.swift in Sources */,
 				CF8B653223CBC9D70021B021 /* AnalyticsDimension.swift in Sources */,
 				CF8B653323CBC9D70021B021 /* RegistrationViewController.swift in Sources */,
 				CF8B653423CBC9D70021B021 /* HelpAndSupportRouter.swift in Sources */,
@@ -34475,7 +34300,6 @@
 				CF8B659E23CBC9D70021B021 /* IntroduceRouterInput.swift in Sources */,
 				CF71466B24B597A900D83E60 /* CircleLoaderView.swift in Sources */,
 				CF8B659F23CBC9D70021B021 /* PermissionsDesigner.swift in Sources */,
-				B5435E1C24E6A1250091B77C /* AmazonFilter.swift in Sources */,
 				CF8B65A023CBC9D70021B021 /* IntroduceRouter.swift in Sources */,
 				CF8B65A123CBC9D70021B021 /* SettingsTableViewSwitchCell.swift in Sources */,
 				CF8B65A223CBC9D70021B021 /* InstaPickHashtagCollectionViewDataSource.swift in Sources */,
@@ -34701,7 +34525,6 @@
 				CF8B666423CBC9D70021B021 /* PrintViewController.swift in Sources */,
 				CF8B666523CBC9D70021B021 /* GridListTopBarConfig.swift in Sources */,
 				CF8B666623CBC9D70021B021 /* ColumnsCollectionLayout.swift in Sources */,
-				B5435E3A24E6A1250091B77C /* OldManFilter.swift in Sources */,
 				CF8B666723CBC9D70021B021 /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
 				730F8AC423CE32EB00798B61 /* OverlayStickerViewController.swift in Sources */,
 				CF8B666823CBC9D70021B021 /* CollectionViewCellForVideo.swift in Sources */,
@@ -34766,7 +34589,6 @@
 				CF8B669E23CBC9D70021B021 /* BaseFilesGreedConfigurator.swift in Sources */,
 				CF8B669F23CBC9D70021B021 /* FaceImageAddNameInteractor.swift in Sources */,
 				CF8B66A023CBC9D70021B021 /* FreeAppSpaceInteractor.swift in Sources */,
-				B5435E4C24E6A1250091B77C /* AdeleFilter.swift in Sources */,
 				CF8B66A123CBC9D70021B021 /* AppResponsivenessService.swift in Sources */,
 				CF8B66A223CBC9D70021B021 /* TextInsetsLabel.swift in Sources */,
 				CF8B66A323CBC9D70021B021 /* ActionsMenuTableViewCell.swift in Sources */,
@@ -34827,7 +34649,6 @@
 				CF8B66D023CBC9D70021B021 /* PhotoVideoDetailInteractorInput.swift in Sources */,
 				CF8B66D223CBC9D70021B021 /* AuthenticationServiceResponseError.swift in Sources */,
 				CF8B66D323CBC9D70021B021 /* MediaItem+CoreDataClass.swift in Sources */,
-				B5435E5224E6A1250091B77C /* MarsFilter.swift in Sources */,
 				CF8B66D423CBC9D70021B021 /* TermsOfUsePresenter.swift in Sources */,
 				CF8B66D523CBC9D70021B021 /* HelpAndSupportInteractor.swift in Sources */,
 				CF8B66D623CBC9D70021B021 /* UIStackView+Extensions.swift in Sources */,
@@ -34945,7 +34766,6 @@
 				CF8B674223CBC9D70021B021 /* SettingsViewController.swift in Sources */,
 				CF8B674323CBC9D70021B021 /* ManageContactsInteractorInput.swift in Sources */,
 				CF8B674423CBC9D70021B021 /* PasscodeInputView.swift in Sources */,
-				B5435E3424E6A1250091B77C /* LimeFilter.swift in Sources */,
 				CF8B674523CBC9D70021B021 /* SettingsModuleInput.swift in Sources */,
 				CF8B674623CBC9D70021B021 /* CreateStoryAudioSelectionItemDesigner.swift in Sources */,
 				CF8B674723CBC9D70021B021 /* SettingsPresenter.swift in Sources */,
@@ -34984,7 +34804,6 @@
 				CF8B676423CBC9D70021B021 /* SplashPresenter.swift in Sources */,
 				CF8B676523CBC9D70021B021 /* ManageContactsInteractorOutput.swift in Sources */,
 				CF8B676623CBC9D70021B021 /* GeneralFilesFiltration.swift in Sources */,
-				B5435E4024E6A1250091B77C /* RiseFilter.swift in Sources */,
 				CF8B676723CBC9D70021B021 /* TermsCheckboxTextView.swift in Sources */,
 				0302079523D1D2D100BF8006 /* NetmeraService.swift in Sources */,
 				CF8B676823CBC9D70021B021 /* ControlTabBarProtocol.swift in Sources */,
@@ -35106,7 +34925,6 @@
 				CF8B67CF23CBC9D70021B021 /* SelectFolderViewController.swift in Sources */,
 				CF8B67D023CBC9D70021B021 /* SelectFolderPresenter.swift in Sources */,
 				CF8B67D123CBC9D70021B021 /* AlbumCollectionViewCell.swift in Sources */,
-				B5435E6424E6A1260091B77C /* CruzFilter.swift in Sources */,
 				CF8B67D223CBC9D70021B021 /* SelectFolderInitializer.swift in Sources */,
 				CF8B67D323CBC9D70021B021 /* FreeUpSpacePopUp.swift in Sources */,
 				CF8B67D423CBC9D70021B021 /* LeavePremiumConfigurator.swift in Sources */,
@@ -35171,6 +34989,7 @@
 				734CA114244D64000076F6A7 /* DocumentsAlbumCard.swift in Sources */,
 				CF8B680923CBC9D70021B021 /* AugmentedRealityFileProvider.swift in Sources */,
 				CF8B680A23CBC9D70021B021 /* iOSDevCenters+GIF.swift in Sources */,
+				B596530424EA6D210076A8F3 /* FilterManager.swift in Sources */,
 				CF8B680B23CBC9D70021B021 /* LeavePremiumViewOutput.swift in Sources */,
 				CF8B680C23CBC9D70021B021 /* LBAlbumLikePreviewSliderModuleInput.swift in Sources */,
 				0305A35223D5C5AD004D1EC7 /* HSCompletionPopUp.swift in Sources */,
@@ -35258,7 +35077,6 @@
 				CF8B685323CBC9D70021B021 /* BaseViewController.swift in Sources */,
 				CF8B685423CBC9D70021B021 /* FreeAppSpacePresenter.swift in Sources */,
 				CF8B685523CBC9D70021B021 /* FeedbackViewInteractorInput.swift in Sources */,
-				B5435E5824E6A1250091B77C /* StarlitFilter.swift in Sources */,
 				CF8B685623CBC9D70021B021 /* ProfilePhoneEnterView.swift in Sources */,
 				CF8B685723CBC9D70021B021 /* UIImage+Orientation.swift in Sources */,
 				CF8B685823CBC9D70021B021 /* FileManager+Size.swift in Sources */,
@@ -35333,7 +35151,6 @@
 				CF8B6B4623CBCA280021B021 /* PasscodeSettingsPresenter.swift in Sources */,
 				CF8B6B4723CBCA280021B021 /* Bool+Init.swift in Sources */,
 				CF8B6B4823CBCA280021B021 /* Router.swift in Sources */,
-				B5435E5B24E6A1250091B77C /* StarlitFilter.swift in Sources */,
 				CF8B6B4923CBCA280021B021 /* AugmentedRealityItem.swift in Sources */,
 				CF8B6B4A23CBCA280021B021 /* ScrollBarView.swift in Sources */,
 				CF8B6B4B23CBCA280021B021 /* ValidationResults.swift in Sources */,
@@ -35345,7 +35162,6 @@
 				CF8B6B5023CBCA280021B021 /* StoriesInitializer.swift in Sources */,
 				CF8B6B5123CBCA280021B021 /* ApplicationPalette.swift in Sources */,
 				CF8B6B5223CBCA280021B021 /* ContactBackupOld.swift in Sources */,
-				B5435E2B24E6A1250091B77C /* AprilFilter.swift in Sources */,
 				98DBC0602410FB4F00926F40 /* AutoSyncAlbumTableViewCell.swift in Sources */,
 				CF8B6B5323CBCA280021B021 /* Alamofire+Validate.swift in Sources */,
 				CF8B6B5423CBCA280021B021 /* AnimationCard.swift in Sources */,
@@ -35460,7 +35276,6 @@
 				CF8B6BB023CBCA280021B021 /* LeavePremiumInteractorInput.swift in Sources */,
 				CF8B6BB123CBCA280021B021 /* RangeAPIInfo.swift in Sources */,
 				CF8B6BB223CBCA280021B021 /* AppMigrator.swift in Sources */,
-				B5435E4F24E6A1250091B77C /* AdeleFilter.swift in Sources */,
 				CF8B6BB323CBCA280021B021 /* ContactBackupEmpty.swift in Sources */,
 				CF8B6BB423CBCA280021B021 /* KeyboardHandler.swift in Sources */,
 				CF8B6BB523CBCA280021B021 /* LoginRouter.swift in Sources */,
@@ -35505,7 +35320,6 @@
 				CF8B6BD823CBCA280021B021 /* HomePageModuleInput.swift in Sources */,
 				CF8B6BD923CBCA280021B021 /* AnalyticsService.swift in Sources */,
 				CF8B6BDA23CBCA280021B021 /* CustomProgressHUD.swift in Sources */,
-				B5435E3124E6A1250091B77C /* WhisperFilter.swift in Sources */,
 				CF8B6BDB23CBCA280021B021 /* GSMCodeModel.swift in Sources */,
 				CF8B6BDC23CBCA280021B021 /* FaceImagePhotosModuleOutput.swift in Sources */,
 				CF8B6BDD23CBCA280021B021 /* PlanType.swift in Sources */,
@@ -35535,7 +35349,6 @@
 				CF8B6BF323CBCA280021B021 /* CustomSwitch.swift in Sources */,
 				CF8B6BF423CBCA280021B021 /* MediaItemsAlbum+CoreDataClass.swift in Sources */,
 				CF8B6BF523CBCA280021B021 /* FaceImageChangeCoverRouter.swift in Sources */,
-				B5435E6724E6A1260091B77C /* CruzFilter.swift in Sources */,
 				98F0331E2403FFC100F1D415 /* Utils.m in Sources */,
 				CF8B6BF623CBCA280021B021 /* AutoSyncModel.swift in Sources */,
 				CF8B6BF723CBCA280021B021 /* UIApplication+OpenURL.swift in Sources */,
@@ -35567,7 +35380,6 @@
 				CF8B6C1023CBCA280021B021 /* RecentSearchesService.swift in Sources */,
 				CF8B6C1123CBCA280021B021 /* LeavePremiumInteractor.swift in Sources */,
 				CF8B6C1223CBCA280021B021 /* LoginInteractor.swift in Sources */,
-				B5435E1924E6A1250091B77C /* BluemessFilter.swift in Sources */,
 				CF8B6C1323CBCA280021B021 /* TermsOfUseInitializer.swift in Sources */,
 				0305A31A23D5C36F004D1EC7 /* AlbumsSliderCell.swift in Sources */,
 				CF8B6C1423CBCA280021B021 /* ProgressCardProtocol.swift in Sources */,
@@ -35742,7 +35554,6 @@
 				CF8B6CB023CBCA280021B021 /* FaceImageAddNameConfigurator.swift in Sources */,
 				CF8B6CB123CBCA280021B021 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
 				CF8B6CB223CBCA280021B021 /* FaceImagePhotosRouter.swift in Sources */,
-				B5435E1F24E6A1250091B77C /* AmazonFilter.swift in Sources */,
 				CF8B6CB323CBCA280021B021 /* MusicConfigurator.swift in Sources */,
 				CF8B6CB423CBCA280021B021 /* FaceImageChangeCoverInteractorInput.swift in Sources */,
 				030207A223D1D30D00BF8006 /* NetmeraActionEvents.swift in Sources */,
@@ -36041,6 +35852,7 @@
 				CF8B6DB423CBCA280021B021 /* PhoneVerificationInteractorOutput.swift in Sources */,
 				CF8B6DB523CBCA280021B021 /* PeriodicContactSyncDataStorage.swift in Sources */,
 				CF8B6DB623CBCA280021B021 /* MyStorageRouterInput.swift in Sources */,
+				B596530724EA6D210076A8F3 /* FilterManager.swift in Sources */,
 				CF8B6DB723CBCA280021B021 /* SmartTimerLabel.swift in Sources */,
 				CF8B6DB823CBCA280021B021 /* LoginSettingsPresenter.swift in Sources */,
 				CF8B6DB923CBCA280021B021 /* BottomSelectionMusicTabBarInteractor.swift in Sources */,
@@ -36176,7 +35988,6 @@
 				CF8B6E2D23CBCA280021B021 /* ManageContactsModuleInput.swift in Sources */,
 				CF8B6E2E23CBCA280021B021 /* LoadingImageView.swift in Sources */,
 				CF8B6E2F23CBCA280021B021 /* InstaPickCircularLoader.swift in Sources */,
-				B5435E1324E6A1250091B77C /* AudreyFilter.swift in Sources */,
 				CF8B6E3023CBCA280021B021 /* PasscodeSettingsViewIO.swift in Sources */,
 				CF8B6E3123CBCA280021B021 /* PushNotificationService.swift in Sources */,
 				0305A33023D5C44E004D1EC7 /* SmartAlbumWarningPopUpsFactory.swift in Sources */,
@@ -36187,7 +35998,6 @@
 				CF8B6E3523CBCA280021B021 /* PrintViewController.swift in Sources */,
 				CF8B6E3623CBCA280021B021 /* CreateStoryPreviyInteractorIO.swift in Sources */,
 				CF8B6E3723CBCA280021B021 /* GridListTopBarConfig.swift in Sources */,
-				B5435E6124E6A1250091B77C /* HaanFilter.swift in Sources */,
 				CF8B6E3823CBCA280021B021 /* InstapickFreeCell.swift in Sources */,
 				CF8B6E3923CBCA280021B021 /* ColumnsCollectionLayout.swift in Sources */,
 				CF8B6E3A23CBCA280021B021 /* AlertFilesActionsSheetInteractorOutput.swift in Sources */,
@@ -36347,7 +36157,6 @@
 				CF7146E624B597A900D83E60 /* DeleteDuplicatesHeader.swift in Sources */,
 				CF8B6EC023CBCA280021B021 /* PhotoVideoDetailRouterInput.swift in Sources */,
 				CF8B6EC123CBCA280021B021 /* PhotoVideoDetailRouter.swift in Sources */,
-				B5435E3D24E6A1250091B77C /* OldManFilter.swift in Sources */,
 				985D87DD24D0156B004BCDFF /* LightFilterView.swift in Sources */,
 				CF8B6EC223CBCA280021B021 /* PhotoVideoDetailConfigurator.swift in Sources */,
 				CF8B6EC323CBCA280021B021 /* LeavePremiumInteractorOutput.swift in Sources */,
@@ -36499,7 +36308,6 @@
 				CF8B6F4C23CBCA280021B021 /* InstapickAnalysisCell.swift in Sources */,
 				CF8B6F4D23CBCA280021B021 /* SpotifyCollectionViewDataSource.swift in Sources */,
 				CF71462C24B597A800D83E60 /* ContactSyncViewController.swift in Sources */,
-				B5435E4324E6A1250091B77C /* RiseFilter.swift in Sources */,
 				CF8B6F4E23CBCA280021B021 /* CacheManager.swift in Sources */,
 				CF8B6F4F23CBCA280021B021 /* FileInfoPresenter.swift in Sources */,
 				CF8B6F5023CBCA280021B021 /* FileInfoInteractorInput.swift in Sources */,
@@ -36563,7 +36371,6 @@
 				CF8B6F8823CBCA280021B021 /* UploadFilesSelectionRouterInput.swift in Sources */,
 				CF8B6F8923CBCA280021B021 /* PopUpService.swift in Sources */,
 				CF8B6F8A23CBCA280021B021 /* UploadFilesSelectionRouter.swift in Sources */,
-				B5435E2524E6A1250091B77C /* MetropolisFilter.swift in Sources */,
 				CF8B6F8B23CBCA280021B021 /* BackButtonActions.swift in Sources */,
 				CF8B6F8C23CBCA280021B021 /* UploadFilesSelectionInitializer.swift in Sources */,
 				CF8B6F8D23CBCA280021B021 /* PremiumViewInput.swift in Sources */,
@@ -36599,7 +36406,6 @@
 				CF8B6FA623CBCA280021B021 /* PermissionsView.swift in Sources */,
 				CF8B6FA723CBCA280021B021 /* ProfileTextPickerView.swift in Sources */,
 				CF8B6FA823CBCA280021B021 /* SelectNameInteractorInput.swift in Sources */,
-				B5435E5524E6A1250091B77C /* MarsFilter.swift in Sources */,
 				CF8B6FA923CBCA280021B021 /* ImageScrollView.swift in Sources */,
 				CF8B6FAA23CBCA280021B021 /* TermsDescriptionController.swift in Sources */,
 				CF8B6FAB23CBCA280021B021 /* SelectNameInteractorOutput.swift in Sources */,
@@ -36707,11 +36513,9 @@
 				CF8B700623CBCA280021B021 /* CampaingnInfoView.swift in Sources */,
 				CF8B700723CBCA280021B021 /* SharedConstants.swift in Sources */,
 				CF8B700823CBCA280021B021 /* ItemSyncOperation.swift in Sources */,
-				B5435E3724E6A1250091B77C /* LimeFilter.swift in Sources */,
 				CF8B700923CBCA280021B021 /* FeedbackViewOutput.swift in Sources */,
 				CF8B700A23CBCA280021B021 /* TermsOfUseRouter.swift in Sources */,
 				0305A35123D5C5AC004D1EC7 /* HSCompletionPopUp.swift in Sources */,
-				B5435E0D24E6A1250091B77C /* AweStruckFilter.swift in Sources */,
 				739D4AB8248910C20032EA31 /* BottomDetailViewAnimationManager.swift in Sources */,
 				CF8B700B23CBCA280021B021 /* FeedbackViewController.swift in Sources */,
 				CF8B700C23CBCA280021B021 /* FeedbackViewModuleInput.swift in Sources */,

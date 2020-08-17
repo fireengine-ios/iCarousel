@@ -10,7 +10,7 @@ import Foundation
 import MetalPetal
 
 
-final class MPStartlitFilter: ComplexFilter {
+final class MPStartlitFilter: CustomFilterProtocol {
     private lazy var toneFilter: MTIRGBToneCurveFilter = {
         let filter = MTIRGBToneCurveFilter()
         filter.rgbCompositeControlPoints = [MTIVector(x: 0/255, y: 0/255),
@@ -25,11 +25,12 @@ final class MPStartlitFilter: ComplexFilter {
         return filter
     }()
     
-    
     func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
+        
+        toneFilter.intensity = intensity
         
         toneFilter.inputImage = inputImage
         

@@ -10,7 +10,7 @@ import Foundation
 import MetalPetal
 
 
-final class MPAmazonFilter: ComplexFilter {
+final class MPAmazonFilter: CustomFilterProtocol {
     private lazy var toneFilter: MTIRGBToneCurveFilter = {
         let filter = MTIRGBToneCurveFilter()
         
@@ -24,11 +24,12 @@ final class MPAmazonFilter: ComplexFilter {
         return filter
     }()
     
-    
     func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
+        
+        toneFilter.intensity = intensity
         
         toneFilter.inputImage = inputImage.adjusting(contrast: 1.2)
         

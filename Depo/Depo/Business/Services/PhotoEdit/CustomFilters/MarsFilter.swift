@@ -10,8 +10,7 @@ import Foundation
 import MetalPetal
 
 
-final class MPMarsFilter: ComplexFilter {
-
+final class MPMarsFilter: CustomFilterProtocol {
     func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
         guard let inputImage = image else {
             return nil

@@ -10,7 +10,7 @@ import Foundation
 import MetalPetal
 
 
-final class MPCruzFilter: ComplexFilter {
+final class MPCruzFilter: CustomFilterProtocol {
     
     func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
         guard let inputImage = image else {
@@ -22,4 +22,5 @@ final class MPCruzFilter: ComplexFilter {
             .adjusting(contrast: 1.3)
             .adjusting(brightness: 20/255)
     }
+    
 }

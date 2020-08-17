@@ -10,7 +10,7 @@ import Foundation
 import MetalPetal
 
 
-final class MPLimeFilter: ComplexFilter {
+final class MPLimeFilter: CustomFilterProtocol {
     private lazy var toneFilter: MTIRGBToneCurveFilter = {
         let filter = MTIRGBToneCurveFilter()
         filter.blueControlPoints = [MTIVector(x: 0/255, y: 0/255),
@@ -20,11 +20,12 @@ final class MPLimeFilter: ComplexFilter {
         return filter
     }()
     
-    
     func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
+        
+        toneFilter.intensity = intensity
         
         toneFilter.inputImage = inputImage
         

@@ -10,7 +10,7 @@ import Foundation
 import MetalPetal
 
 
-final class MPAudreyFilter: ComplexFilter {
+final class MPAudreyFilter: CustomFilterProtocol {
     private lazy var toneFilter: MTIRGBToneCurveFilter = {
         let filter = MTIRGBToneCurveFilter()
         
@@ -26,6 +26,8 @@ final class MPAudreyFilter: ComplexFilter {
         guard let inputImage = image else {
             return nil
         }
+        
+        toneFilter.intensity = intensity
         
         toneFilter.inputImage = inputImage
             .adjusting(saturation: -100/255)

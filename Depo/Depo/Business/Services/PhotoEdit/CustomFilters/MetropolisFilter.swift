@@ -10,7 +10,7 @@ import Foundation
 import MetalPetal
 
 
-final class MPMetropolisFilter: ComplexFilter {
+final class MPMetropolisFilter: CustomFilterProtocol {
     
     func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
         guard let inputImage = image else {

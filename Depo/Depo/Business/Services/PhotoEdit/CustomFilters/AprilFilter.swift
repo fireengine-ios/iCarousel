@@ -10,7 +10,7 @@ import Foundation
 import MetalPetal
 
 
-final class MPAprilFilter: ComplexFilter {
+final class MPAprilFilter: CustomFilterProtocol {
     private var mpContext: MTIContext
     
     private lazy var toneCurve: MTIRGBToneCurveFilter = {
@@ -44,7 +44,6 @@ final class MPAprilFilter: ComplexFilter {
             return nil
         }
     }
-    
     
     func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
         guard let inputImage = image, let cgImage = try? mpContext.makeCGImage(from: inputImage) else {

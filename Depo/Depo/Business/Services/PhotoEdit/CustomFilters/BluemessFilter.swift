@@ -10,7 +10,7 @@ import Foundation
 import MetalPetal
 
 
-final class MPBluemessFilter: ComplexFilter {
+final class MPBluemessFilter: CustomFilterProtocol {
     private lazy var toneFilter: MTIRGBToneCurveFilter = {
         let filter = MTIRGBToneCurveFilter()
         
@@ -31,6 +31,8 @@ final class MPBluemessFilter: ComplexFilter {
         guard let inputImage = image else {
             return nil
         }
+        
+        toneFilter.intensity = intensity
         
         toneFilter.inputImage = inputImage
         

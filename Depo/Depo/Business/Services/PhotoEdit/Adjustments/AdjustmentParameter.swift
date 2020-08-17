@@ -59,6 +59,8 @@ enum AdjustmentParameterType: String {
                 return (1, 16, 2)
             case .vignetteRatio:
                 return (0, 1, 0)
+            case .filterIntensity:
+                return (0, 1, 1)
             default:
                 return (0, 0, 0)
         }

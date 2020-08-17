@@ -10,7 +10,7 @@ import Foundation
 import MetalPetal
 
 
-final class MPAweStruckFilter: ComplexFilter {
+final class MPAweStruckFilter: CustomFilterProtocol {
     private lazy var toneFilter: MTIRGBToneCurveFilter = {
         let filter = MTIRGBToneCurveFilter()
         
@@ -49,6 +49,8 @@ final class MPAweStruckFilter: ComplexFilter {
         guard let inputImage = image else {
             return nil
         }
+        
+        toneFilter.intensity = intensity
         
         toneFilter.inputImage = inputImage
         

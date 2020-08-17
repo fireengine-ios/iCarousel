@@ -10,7 +10,7 @@ import Foundation
 import MetalPetal
 
 
-final class MPHaanFilter: ComplexFilter {
+final class MPHaanFilter: CustomFilterProtocol {
     private var mpContext: MTIContext
     
     private lazy var toneCurve: MTIRGBToneCurveFilter = {

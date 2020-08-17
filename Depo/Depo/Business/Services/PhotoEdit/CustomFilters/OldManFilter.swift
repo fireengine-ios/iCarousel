@@ -10,7 +10,7 @@ import Foundation
 import MetalPetal
 
 
-final class MPOldManFilter: ComplexFilter {
+final class MPOldManFilter: CustomFilterProtocol {
     private var mpContext: MTIContext
     
     init?() {
@@ -33,6 +33,7 @@ final class MPOldManFilter: ComplexFilter {
         guard let inputImage = image else {
             return nil
         }
+    
         
         let tmpImage = inputImage
             .adjusting(brightness: 30/255)

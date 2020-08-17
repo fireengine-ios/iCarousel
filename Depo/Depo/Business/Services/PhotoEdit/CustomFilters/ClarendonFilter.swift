@@ -10,12 +10,18 @@ import Foundation
 import MetalPetal
 
 
-protocol ComplexFilter {
+protocol CustomFilterProtocol {
+    var type: FilterType { get }
+    var parameters: [AdjustmentParameterProtocol] { get }
+    
     func apply(on image: MTIImage?, intensity: Float) -> MTIImage?
 }
 
 
-class MPClarendonFilter: ComplexFilter {
+class MPClarendonFilter: CustomFilterProtocol {
+    
+    let type: FilterType = .clarendon
+    let parameters: [AdjustmentParameterProtocol]
     
     private lazy var toneFilter: MTIRGBToneCurveFilter = {
         let filter = MTIRGBToneCurveFilter()
@@ -37,12 +43,20 @@ class MPClarendonFilter: ComplexFilter {
         
         return filter
     }()
-
+    
+    init(parameters: [AdjustmentParameterProtocol]) {
+        self.parameters = parameters
+    }
+    
     
     func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
+        
+        toneFilter.intensity = intensity
+        
+        toneFilter.intensity = intensity
         
         toneFilter.inputImage = inputImage
             .adjusting(brightness: -10/255)
