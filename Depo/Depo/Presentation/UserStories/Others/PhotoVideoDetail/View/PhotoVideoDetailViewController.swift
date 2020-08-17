@@ -271,7 +271,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
         } else {
             needUpdate = true
         }
-        selectedIndex = index
+        
+        if selectedIndex != index {
+            selectedIndex = index
+        }
+
         updateAllItems(with: items, updateCollection: needUpdate)
     }
 
