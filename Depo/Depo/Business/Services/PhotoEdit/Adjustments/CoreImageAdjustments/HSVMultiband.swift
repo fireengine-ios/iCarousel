@@ -25,10 +25,7 @@ extension UIColor {
     }
 }
 
-protocol BasicFilter {
-    var inputImage: CIImage? { get set }
-    var outputImage: CIImage? { get }
-}
+
 
 class HSVMultiband: CIFilter, BasicFilter {
     let HSVMultibandKernel: CIColorKernel = {

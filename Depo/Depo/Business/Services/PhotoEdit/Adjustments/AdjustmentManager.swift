@@ -11,7 +11,7 @@ import GPUImage
 
 final class AdjustmentManager {
     
-    private static func adjustment(type: AdjustmentType) -> Adjustment? {
+    private static func adjustment(type: AdjustmentType) -> AdjustmentProtocol? {
         var parameters = [AdjustmentParameterProtocol]()
         var thirdPartyAdjustment: ThirdPartyAdjustmentProtocol?
         
@@ -158,10 +158,10 @@ final class AdjustmentManager {
     let parameters: [AdjustmentParameterProtocol]
     
     private let operationQueue: OperationQueue = {
-           let queue = OperationQueue()
-           queue.maxConcurrentOperationCount = 1
-           return queue
-       }()
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
     
     
     required init(types: [AdjustmentType]) {

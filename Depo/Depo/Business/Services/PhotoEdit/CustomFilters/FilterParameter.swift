@@ -1,65 +1,19 @@
 //
-//  AdjustmentParameter.swift
+//  FilterParameter.swift
 //  Depo
 //
-//  Created by Konstantin Studilin on 27.07.2020.
+//  Created by Konstantin Studilin on 17.08.2020.
 //  Copyright © 2020 LifeTech. All rights reserved.
 //
 
+typealias FilterParameterValues = (min: Float, max: Float, default: Float)
 
-typealias AdjustmentParameterValues = (min: Float, max: Float, default: Float)
-
-enum AdjustmentParameterType: String {
-    case brightness
-    case contrast
-    case exposure
-    case highlights
-    case shadows
-    case temperature
-    case tint
-    case saturation
-    case gamma
-    case hue
-    case intensity
-    case angle
-    case sharpness
-    case blurRadius
-    case vignetteRatio
+enum FilterParameterType: String {
     case filterIntensity
     
     
-    var defaultValues: AdjustmentParameterValues {
+    var defaultValues: FilterParameterValues {
         switch self {
-            case .brightness:
-                return (-1, 1, 0)
-            case .contrast:
-                return (0, 4, 1)
-            case .exposure:
-                return (-10, 10, 0)
-            case .saturation:
-                return (0, 2, 1)
-            case .gamma:
-                return (0, 3, 1)
-            case .hue:
-                return (-180, 180, 0)
-            case .temperature:
-                return (4000, 7000, 5000)
-            case .tint:
-                return (-200, 200, 0)
-            case .highlights:
-                return (0, 1, 1.0)
-            case .shadows:
-                return (0, 1, 0)
-            case .intensity:
-                return (0, 1, 1)
-            case .angle:
-                return (-45, 45, 0)
-            case .sharpness:
-                return (-4, 4, 0)
-            case .blurRadius:
-                return (1, 16, 2)
-            case .vignetteRatio:
-                return (0, 1, 0)
             case .filterIntensity:
                 return (0, 1, 1)
             default:
@@ -69,8 +23,8 @@ enum AdjustmentParameterType: String {
 }
 
 
-protocol AdjustmentParameterProtocol {
-    var type: AdjustmentParameterType { get }
+protocol FilterParameterProtocol {
+    var type: FilterParameterType { get }
     
     var minValue: Float { get }
     var maxValue: Float { get }
@@ -80,13 +34,13 @@ protocol AdjustmentParameterProtocol {
     func set(value: Float)
     
     @discardableResult
-    func onValueDidChange(handler: @escaping ValueHandler<Float>) -> AdjustmentParameterProtocol
+    func onValueDidChange(handler: @escaping ValueHandler<Float>) -> FilterParameterProtocol
 }
 
 
-final class AdjustmentParameter: AdjustmentParameterProtocol {
+final class FilterParameter: FilterParameterProtocol {
     
-    let type: AdjustmentParameterType
+    let type: FilterParameterType
     
     let minValue: Float
     let maxValue: Float
@@ -111,7 +65,7 @@ final class AdjustmentParameter: AdjustmentParameterProtocol {
     private var onValueDidChangeAction: ValueHandler<Float>?
     
     
-    required init(type: AdjustmentParameterType) {
+    required init(type: FilterParameterType) {
         self.type = type
         
         let defaultValues = type.defaultValues
@@ -142,7 +96,7 @@ final class AdjustmentParameter: AdjustmentParameterProtocol {
     }
     
     @discardableResult
-    func onValueDidChange(handler: @escaping ValueHandler<Float>) -> AdjustmentParameterProtocol {
+    func onValueDidChange(handler: @escaping ValueHandler<Float>) -> FilterParameterProtocol {
         onValueDidChangeAction = handler
         
         return self
