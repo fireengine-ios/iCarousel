@@ -255,8 +255,8 @@ final class LoadingImageView: UIImageView {
                 with: self,
                 duration: NumericConstants.animationDuration,
                 options: .transitionCrossDissolve,
-                animations: {
-                    self.alpha = 0
+                animations: { [weak self] in
+                    self?.alpha = 0
             }) { [weak self] _ in
                 self?.originalImage = image
                 UIView.animate(withDuration: NumericConstants.animationDuration) {
