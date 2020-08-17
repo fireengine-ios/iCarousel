@@ -25,6 +25,7 @@ enum AdjustmentParameterType: String {
     case sharpness
     case blurRadius
     case vignetteRatio
+    case filterIntensity
     
     
     var defaultValues: AdjustmentParameterValues {
