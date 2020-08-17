@@ -150,7 +150,7 @@ final class LoadingImageView: UIImageView {
             return
         }
         
-        loadImage(with: object.patchToPreview)
+        loadImage(with: object.patchToPreview, smooth: smooth)
     }
     
     func loadImageIncludingGif(with object: Item?, smooth: Bool = false) {
@@ -242,20 +242,29 @@ final class LoadingImageView: UIImageView {
             self.loadingImageViewDelegate?.loadingFinished()
             
             if animated {
-                UIView.transition(
-                    with: self,
-                    duration: NumericConstants.animationDuration,
-                    options: .transitionCrossDissolve,
-                    animations: nil,
-                    completion: { [weak self] _ in
-                        self?.originalImage = image
-                })
+                self.changeImageAnimatedly(image: image)
             } else {
                 self.originalImage = image
             }
         }
     }
-
+    
+    private func changeImageAnimatedly(image: UIImage?) {
+        DispatchQueue.main.async {
+            UIView.transition(
+                with: self,
+                duration: NumericConstants.animationDuration,
+                options: .transitionCrossDissolve,
+                animations: {
+                    self.alpha = 0
+            }) { [weak self] _ in
+                self?.originalImage = image
+                UIView.animate(withDuration: NumericConstants.animationDuration) {
+                    self?.alpha = 1
+                }
+            }
+        }
+    }
 }
 
 extension LoadingImageView {
