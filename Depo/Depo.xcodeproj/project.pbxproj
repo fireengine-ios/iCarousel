@@ -5881,6 +5881,12 @@
 		B596532424EAB1520076A8F3 /* CustomFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532024EAB1520076A8F3 /* CustomFilter.swift */; };
 		B596532524EAB1520076A8F3 /* CustomFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532024EAB1520076A8F3 /* CustomFilter.swift */; };
 		B596532624EAB1520076A8F3 /* CustomFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532024EAB1520076A8F3 /* CustomFilter.swift */; };
+		B596532824EAB3610076A8F3 /* FilterParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532724EAB3610076A8F3 /* FilterParameter.swift */; };
+		B596532924EAB3610076A8F3 /* FilterParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532724EAB3610076A8F3 /* FilterParameter.swift */; };
+		B596532A24EAB3610076A8F3 /* FilterParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532724EAB3610076A8F3 /* FilterParameter.swift */; };
+		B596532B24EAB3610076A8F3 /* FilterParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532724EAB3610076A8F3 /* FilterParameter.swift */; };
+		B596532C24EAB3610076A8F3 /* FilterParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532724EAB3610076A8F3 /* FilterParameter.swift */; };
+		B596532D24EAB3610076A8F3 /* FilterParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532724EAB3610076A8F3 /* FilterParameter.swift */; };
 		B59A63DF2167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B59A63E02167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B59CCE812213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
@@ -13518,6 +13524,7 @@
 		B596530F24EAAD960076A8F3 /* MetropolisFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetropolisFilter.swift; sourceTree = "<group>"; };
 		B596531324EAAD970076A8F3 /* LimeFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimeFilter.swift; sourceTree = "<group>"; };
 		B596532024EAB1520076A8F3 /* CustomFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFilter.swift; sourceTree = "<group>"; };
+		B596532724EAB3610076A8F3 /* FilterParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterParameter.swift; sourceTree = "<group>"; };
 		B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+TrimmedQuery.swift"; sourceTree = "<group>"; };
 		B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountSectionMediator.swift; sourceTree = "<group>"; };
 		B5A84522212DA314007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
@@ -19762,6 +19769,7 @@
 				B5435E0224E6A1200091B77C /* ClarendonFilter.swift */,
 				B596530124EA6D210076A8F3 /* FilterManager.swift */,
 				B596532024EAB1520076A8F3 /* CustomFilter.swift */,
+				B596532724EAB3610076A8F3 /* FilterParameter.swift */,
 			);
 			path = CustomFilters;
 			sourceTree = "<group>";
@@ -27910,6 +27918,7 @@
 				0303A3002397D0D000907F42 /* DropboxResponse.swift in Sources */,
 				0303A3012397D0D000907F42 /* FileService.swift in Sources */,
 				0303A3022397D0D000907F42 /* DispatchQueueLabels.swift in Sources */,
+				B596532B24EAB3610076A8F3 /* FilterParameter.swift in Sources */,
 				0303A3032397D0D000907F42 /* OrientationManager.swift in Sources */,
 				0303A3042397D0D000907F42 /* CustomScrollIndicator.swift in Sources */,
 				0303A3052397D0D000907F42 /* PeriodicContactSyncInteractor.swift in Sources */,
@@ -29191,6 +29200,7 @@
 				8C0E8D7E1FDEBDFF00789C91 /* AutoNextEditingRowPasser.swift in Sources */,
 				49E9529F2400013E00E2ABCD /* MobilePaymentPermissionViewController.swift in Sources */,
 				98467B6724D17F6000B6C33E /* FilterChangesBar.swift in Sources */,
+				B596532924EAB3610076A8F3 /* FilterParameter.swift in Sources */,
 				C62239B5204976DD0043ED44 /* FaceImagePhotosViewController.swift in Sources */,
 				89E51D4922CA1112007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				8C0E8D7F1FDEBDFF00789C91 /* FloatingContainerVC.swift in Sources */,
@@ -31466,6 +31476,7 @@
 				98C2983F2302AD1100C9811E /* BlurBackgroundPopup.swift in Sources */,
 				98D3856D21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift in Sources */,
 				7378052923AB9EF7001D57BD /* GifToMP4Formatter.swift in Sources */,
+				B596532824EAB3610076A8F3 /* FilterParameter.swift in Sources */,
 				CEB996CF1F0770470074E264 /* RequestsKey.swift in Sources */,
 				7CAC23BC1F45718700607660 /* RemoteService.swift in Sources */,
 				D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */,
@@ -33658,6 +33669,7 @@
 				CE784C8222A685FB00662219 /* MyStorageRouter.swift in Sources */,
 				CE784C8322A685FB00662219 /* ManageContactsInteractorOutput.swift in Sources */,
 				73FE51F622CF5D8800270448 /* CreateStoryAudioSelectionItemDesigner.swift in Sources */,
+				B596532C24EAB3610076A8F3 /* FilterParameter.swift in Sources */,
 				CE784C8422A685FB00662219 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				CE784C8522A685FB00662219 /* ActivityTimelineRouter.swift in Sources */,
 				CE784C8622A685FB00662219 /* ManageContactsModuleOutput.swift in Sources */,
@@ -33805,6 +33817,7 @@
 				CF8B63C923CBC9D70021B021 /* UsageInfoPresenter.swift in Sources */,
 				0309F93C23D57F3B001DB5FA /* NetmeraEvents.swift in Sources */,
 				CF8B63CA23CBC9D70021B021 /* PasscodeEnterViewController.swift in Sources */,
+				B596532A24EAB3610076A8F3 /* FilterParameter.swift in Sources */,
 				CF8B63CB23CBC9D70021B021 /* FaceImageItemsRouterInput.swift in Sources */,
 				CF8B63CC23CBC9D70021B021 /* UploadOperation.swift in Sources */,
 				CF8B63CD23CBC9D70021B021 /* FaceImageChangeCoverViewController.swift in Sources */,
@@ -36604,6 +36617,7 @@
 				CF8B702F23CBCA280021B021 /* MyStorageRouter.swift in Sources */,
 				CF8B703023CBCA280021B021 /* ManageContactsInteractorOutput.swift in Sources */,
 				CF8B703123CBCA280021B021 /* CreateStoryAudioSelectionItemDesigner.swift in Sources */,
+				B596532D24EAB3610076A8F3 /* FilterParameter.swift in Sources */,
 				CF8B703223CBCA280021B021 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				CF8B703323CBCA280021B021 /* ActivityTimelineRouter.swift in Sources */,
 				0305A2F423D5C18C004D1EC7 /* HiddenService.swift in Sources */,

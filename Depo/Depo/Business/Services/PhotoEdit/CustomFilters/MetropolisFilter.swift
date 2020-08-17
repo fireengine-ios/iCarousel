@@ -13,12 +13,12 @@ import MetalPetal
 final class MPMetropolisFilter: CustomFilterProtocol {
     
     let type: FilterType = .metropolis
-    let parameters: [AdjustmentParameterProtocol]
+    let parameters: [FilterParameterProtocol]
     
     var intensity: Float = 1.0
     
     
-    init(parameters: [AdjustmentParameterProtocol]) {
+    init(parameters: [FilterParameterProtocol]) {
         self.parameters = parameters
     }
     

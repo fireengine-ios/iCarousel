@@ -23,10 +23,10 @@ final class MPLimeFilter: CustomFilterProtocol {
     var intensity: Float = 1.0
     
     let type: FilterType = .lime
-    let parameters: [AdjustmentParameterProtocol]
+    let parameters: [FilterParameterProtocol]
     
     
-    init(parameters: [AdjustmentParameterProtocol]) {
+    init(parameters: [FilterParameterProtocol]) {
         self.parameters = parameters
     }
     

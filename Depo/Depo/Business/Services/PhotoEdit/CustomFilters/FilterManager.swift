@@ -11,7 +11,7 @@ final class FilterManager {
     private static func filter(type: FilterType) -> CustomFilterProtocol? {
         switch type {
             case .clarendon:
-                let intensityParameter = AdjustmentParameter(type: .filterIntensity)
+                let intensityParameter = FilterParameter(type: .filterIntensity)
                 let filter = MPClarendonFilter(parameters: [intensityParameter])
                 intensityParameter.onValueDidChange { newValue in
                     filter.intensity = newValue
@@ -19,7 +19,7 @@ final class FilterManager {
                 return filter
             
             case .lime:
-                let intensityParameter = AdjustmentParameter(type: .filterIntensity)
+                let intensityParameter = FilterParameter(type: .filterIntensity)
                 let filter = MPLimeFilter(parameters: [intensityParameter])
                 intensityParameter.onValueDidChange { newValue in
                     filter.intensity = newValue
@@ -27,7 +27,7 @@ final class FilterManager {
                 return filter
             
             case .metropolis:
-                let intensityParameter = AdjustmentParameter(type: .filterIntensity)
+                let intensityParameter = FilterParameter(type: .filterIntensity)
                 let filter = MPMetropolisFilter(parameters: [intensityParameter])
                 intensityParameter.onValueDidChange { newValue in
                     filter.intensity = newValue

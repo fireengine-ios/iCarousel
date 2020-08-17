@@ -15,7 +15,7 @@ class MPClarendonFilter: CustomFilterProtocol {
     var intensity: Float = 1.0
     
     let type: FilterType = .clarendon
-    let parameters: [AdjustmentParameterProtocol]
+    let parameters: [FilterParameterProtocol]
     
     private lazy var toneFilter: MTIRGBToneCurveFilter = {
         let filter = MTIRGBToneCurveFilter()
@@ -39,7 +39,7 @@ class MPClarendonFilter: CustomFilterProtocol {
     }()
     
     
-    init(parameters: [AdjustmentParameterProtocol]) {
+    init(parameters: [FilterParameterProtocol]) {
         self.parameters = parameters
     }
     

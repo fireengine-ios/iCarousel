@@ -10,7 +10,7 @@ import MetalPetal
 
 protocol CustomFilterProtocol {
     var type: FilterType { get }
-    var parameters: [AdjustmentParameterProtocol] { get }
+    var parameters: [FilterParameterProtocol] { get }
     
     func apply(on image: MTIImage?) -> MTIImage?
 }
