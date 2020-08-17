@@ -10,15 +10,9 @@ import Foundation
 import MetalPetal
 
 
-protocol CustomFilterProtocol {
-    var type: FilterType { get }
-    var parameters: [AdjustmentParameterProtocol] { get }
-    
-    func apply(on image: MTIImage?, intensity: Float) -> MTIImage?
-}
-
-
 class MPClarendonFilter: CustomFilterProtocol {
+    
+    var intensity: Float = 1.0
     
     let type: FilterType = .clarendon
     let parameters: [AdjustmentParameterProtocol]
@@ -44,17 +38,16 @@ class MPClarendonFilter: CustomFilterProtocol {
         return filter
     }()
     
+    
     init(parameters: [AdjustmentParameterProtocol]) {
         self.parameters = parameters
     }
     
     
-    func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
+    func apply(on image: MTIImage?) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
-        
-        toneFilter.intensity = intensity
         
         toneFilter.intensity = intensity
         

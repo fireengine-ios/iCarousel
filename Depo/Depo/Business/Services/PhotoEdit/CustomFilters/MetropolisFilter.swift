@@ -12,10 +12,22 @@ import MetalPetal
 
 final class MPMetropolisFilter: CustomFilterProtocol {
     
-    func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
+    let type: FilterType = .metropolis
+    let parameters: [AdjustmentParameterProtocol]
+    
+    var intensity: Float = 1.0
+    
+    
+    init(parameters: [AdjustmentParameterProtocol]) {
+        self.parameters = parameters
+    }
+    
+    func apply(on image: MTIImage?) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
+        
+        //TODO: intensity
         
         return inputImage
             .adjusting(saturation: -1/255)

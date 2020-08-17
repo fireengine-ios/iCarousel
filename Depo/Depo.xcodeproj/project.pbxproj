@@ -5863,6 +5863,24 @@
 		B596530524EA6D210076A8F3 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530124EA6D210076A8F3 /* FilterManager.swift */; };
 		B596530624EA6D210076A8F3 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530124EA6D210076A8F3 /* FilterManager.swift */; };
 		B596530724EA6D210076A8F3 /* FilterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530124EA6D210076A8F3 /* FilterManager.swift */; };
+		B596531424EAAD970076A8F3 /* MetropolisFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530F24EAAD960076A8F3 /* MetropolisFilter.swift */; };
+		B596531524EAAD970076A8F3 /* MetropolisFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530F24EAAD960076A8F3 /* MetropolisFilter.swift */; };
+		B596531624EAAD980076A8F3 /* MetropolisFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530F24EAAD960076A8F3 /* MetropolisFilter.swift */; };
+		B596531724EAAD980076A8F3 /* MetropolisFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530F24EAAD960076A8F3 /* MetropolisFilter.swift */; };
+		B596531824EAAD980076A8F3 /* MetropolisFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530F24EAAD960076A8F3 /* MetropolisFilter.swift */; };
+		B596531924EAAD980076A8F3 /* MetropolisFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596530F24EAAD960076A8F3 /* MetropolisFilter.swift */; };
+		B596531A24EAAD980076A8F3 /* LimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596531324EAAD970076A8F3 /* LimeFilter.swift */; };
+		B596531B24EAAD980076A8F3 /* LimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596531324EAAD970076A8F3 /* LimeFilter.swift */; };
+		B596531C24EAAD980076A8F3 /* LimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596531324EAAD970076A8F3 /* LimeFilter.swift */; };
+		B596531D24EAAD980076A8F3 /* LimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596531324EAAD970076A8F3 /* LimeFilter.swift */; };
+		B596531E24EAAD980076A8F3 /* LimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596531324EAAD970076A8F3 /* LimeFilter.swift */; };
+		B596531F24EAAD980076A8F3 /* LimeFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596531324EAAD970076A8F3 /* LimeFilter.swift */; };
+		B596532124EAB1520076A8F3 /* CustomFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532024EAB1520076A8F3 /* CustomFilter.swift */; };
+		B596532224EAB1520076A8F3 /* CustomFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532024EAB1520076A8F3 /* CustomFilter.swift */; };
+		B596532324EAB1520076A8F3 /* CustomFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532024EAB1520076A8F3 /* CustomFilter.swift */; };
+		B596532424EAB1520076A8F3 /* CustomFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532024EAB1520076A8F3 /* CustomFilter.swift */; };
+		B596532524EAB1520076A8F3 /* CustomFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532024EAB1520076A8F3 /* CustomFilter.swift */; };
+		B596532624EAB1520076A8F3 /* CustomFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B596532024EAB1520076A8F3 /* CustomFilter.swift */; };
 		B59A63DF2167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B59A63E02167923E00C90FBD /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
 		B59CCE812213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
@@ -13497,6 +13515,9 @@
 		B589FC4E23F1388D00DD528D /* DataChunkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataChunkProvider.swift; sourceTree = "<group>"; };
 		B592448D23C86BA70066CA57 /* HiddenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenService.swift; sourceTree = "<group>"; };
 		B596530124EA6D210076A8F3 /* FilterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterManager.swift; sourceTree = "<group>"; };
+		B596530F24EAAD960076A8F3 /* MetropolisFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetropolisFilter.swift; sourceTree = "<group>"; };
+		B596531324EAAD970076A8F3 /* LimeFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LimeFilter.swift; sourceTree = "<group>"; };
+		B596532024EAB1520076A8F3 /* CustomFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFilter.swift; sourceTree = "<group>"; };
 		B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+TrimmedQuery.swift"; sourceTree = "<group>"; };
 		B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountSectionMediator.swift; sourceTree = "<group>"; };
 		B5A84522212DA314007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
@@ -19734,10 +19755,13 @@
 		B5435DD824E66A520091B77C /* CustomFilters */ = {
 			isa = PBXGroup;
 			children = (
+				B596531324EAAD970076A8F3 /* LimeFilter.swift */,
+				B596530F24EAAD960076A8F3 /* MetropolisFilter.swift */,
 				B5435E6924E6A15D0091B77C /* MTIImage+UIImage.swift */,
 				B5435E6824E6A15C0091B77C /* UIImage+GPUImage.swift */,
 				B5435E0224E6A1200091B77C /* ClarendonFilter.swift */,
 				B596530124EA6D210076A8F3 /* FilterManager.swift */,
+				B596532024EAB1520076A8F3 /* CustomFilter.swift */,
 			);
 			path = CustomFilters;
 			sourceTree = "<group>";
@@ -27486,6 +27510,7 @@
 				0303A1A12397D0D000907F42 /* UploadFromLifeBoxRouterInput.swift in Sources */,
 				0303A1A22397D0D000907F42 /* HelpAndSupportInteractorOutput.swift in Sources */,
 				B5435E4724E6A1250091B77C /* ClarendonFilter.swift in Sources */,
+				B596532424EAB1520076A8F3 /* CustomFilter.swift in Sources */,
 				0303A1A32397D0D000907F42 /* InfinityRotater.swift in Sources */,
 				0303A1A42397D0D000907F42 /* MoreFilesActionsInteractorOutput.swift in Sources */,
 				0303A1A52397D0D000907F42 /* HomePageRouterInput.swift in Sources */,
@@ -28155,6 +28180,7 @@
 				0303A3F52397D0D000907F42 /* ImportPhotosRouter.swift in Sources */,
 				0303A3F62397D0D000907F42 /* AlbumsDataSourceForCollectionView.swift in Sources */,
 				0303A3F72397D0D000907F42 /* SettingsRouterInput.swift in Sources */,
+				B596531D24EAAD980076A8F3 /* LimeFilter.swift in Sources */,
 				0303A3F82397D0D000907F42 /* CreateStoryPreviewConfigurator.swift in Sources */,
 				B5435E6D24E6A15D0091B77C /* UIImage+GPUImage.swift in Sources */,
 				0303A3F92397D0D000907F42 /* SettingsRouter.swift in Sources */,
@@ -28351,6 +28377,7 @@
 				0303A4A32397D0D000907F42 /* DropboxStatusValue.swift in Sources */,
 				CF71473E24B597AA00D83E60 /* ContactSyncPopupFactory.swift in Sources */,
 				0303A4A42397D0D000907F42 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */,
+				B596531724EAAD980076A8F3 /* MetropolisFilter.swift in Sources */,
 				0303A4A52397D0D000907F42 /* FaceImageItemsViewController.swift in Sources */,
 				0303A4A62397D0D000907F42 /* LBAlbumLikePreviewSliderInteractorInput.swift in Sources */,
 				0303A4A72397D0D000907F42 /* ManageContactsRouter.swift in Sources */,
@@ -29104,6 +29131,7 @@
 				8C0B91BE201710EB00A5BA81 /* TitleView.swift in Sources */,
 				8C0E8D471FDEBDFF00789C91 /* String+Int.swift in Sources */,
 				8C0E8D491FDEBDFF00789C91 /* CustomTabBar.swift in Sources */,
+				B596531524EAAD970076A8F3 /* MetropolisFilter.swift in Sources */,
 				8C0E8D4B1FDEBDFF00789C91 /* BottomSelectionTabBarInteractorInput.swift in Sources */,
 				8C0E8D4D1FDEBDFF00789C91 /* FolderSelectionCollectionViewCell.swift in Sources */,
 				03404571240794FD0024135B /* SynchronizedDictionary.swift in Sources */,
@@ -29151,6 +29179,7 @@
 				9808A05F206A88580022376D /* PushNotificationService.swift in Sources */,
 				B5CDB33721787FEF006CFA50 /* Controller.m in Sources */,
 				98F0330E2403FFC100F1D415 /* SyncStatus.m in Sources */,
+				B596531B24EAAD980076A8F3 /* LimeFilter.swift in Sources */,
 				735766CD23AD1011008589E9 /* OverlayStickerViewControllerDesigner.swift in Sources */,
 				8C0E8D781FDEBDFF00789C91 /* HomePageRouterInput.swift in Sources */,
 				8C0E8D791FDEBDFF00789C91 /* MediaItem+CoreDataProperties.swift in Sources */,
@@ -30043,6 +30072,7 @@
 				8C0E8F981FDEBDFF00789C91 /* LBAlbumLikePreviewSliderInitializer.swift in Sources */,
 				8C0E8F991FDEBDFF00789C91 /* PackagesInteractor.swift in Sources */,
 				8CD2B3AC1FE7B25E00280547 /* PopUpImage.swift in Sources */,
+				B596532224EAB1520076A8F3 /* CustomFilter.swift in Sources */,
 				8C0E8F9A1FDEBDFF00789C91 /* AlbumSelectionViewController.swift in Sources */,
 				8C0E8F9B1FDEBDFF00789C91 /* AlbumsPresenter.swift in Sources */,
 				8C0E8F9C1FDEBDFF00789C91 /* AlbumsInteractor.swift in Sources */,
@@ -30665,6 +30695,7 @@
 				171090E123FC8E350036A033 /* SmashActionService.swift in Sources */,
 				CE4363441F6FC43F004724BF /* ActivityType.swift in Sources */,
 				981EA2EC247D4CA700A51B7D /* ContactsOperationView.swift in Sources */,
+				B596531424EAAD970076A8F3 /* MetropolisFilter.swift in Sources */,
 				4BAF259122F8474F00979F19 /* SegmentedControl.swift in Sources */,
 				CF83CF2F243F1630009DF60F /* BackgroundSyncOperation.swift in Sources */,
 				CE634AF3230EAAA700CED18C /* PaymentPopUpController.swift in Sources */,
@@ -31889,6 +31920,7 @@
 				6F1E64C890D98AD859149D80 /* UploadFilesSelectionRouter.swift in Sources */,
 				CE00B256220334D800A5A696 /* BackButtonActions.swift in Sources */,
 				617E2F43F78753FD7989435D /* UploadFilesSelectionInitializer.swift in Sources */,
+				B596532124EAB1520076A8F3 /* CustomFilter.swift in Sources */,
 				A2079904219F132E00AD5037 /* PremiumViewInput.swift in Sources */,
 				F05F94EB8B3A970E994475FE /* SelectFolderViewController.swift in Sources */,
 				623832623FBADF19F6C0036D /* SelectFolderPresenter.swift in Sources */,
@@ -32007,6 +32039,7 @@
 				81E0ADA871598E31E25ABC23 /* AlbumDetailInitializer.swift in Sources */,
 				CE1353352004F0F90004CBBE /* TextEnterController.swift in Sources */,
 				B57AB753237989F600467573 /* NSLocking+Extension.swift in Sources */,
+				B596531A24EAAD980076A8F3 /* LimeFilter.swift in Sources */,
 				B56FBB312122C84F004F4A59 /* TermsOfUseInteractorInput.swift in Sources */,
 				0303ED8923BB2F1200044D6A /* SubscribedAlbumDetailPresenter.swift in Sources */,
 				98861139240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */,
@@ -32514,6 +32547,7 @@
 				CE7848F322A685FB00662219 /* PageCompounder.swift in Sources */,
 				CE7848F422A685FB00662219 /* FilesDataSource.swift in Sources */,
 				89DCC5DD2403AC3F00488F1F /* SubscriptionFeaturesView.swift in Sources */,
+				B596532524EAB1520076A8F3 /* CustomFilter.swift in Sources */,
 				CE7848F522A685FB00662219 /* (null) in Sources */,
 				CE7848F622A685FB00662219 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				CE7848F722A685FB00662219 /* UIApplication+topController.swift in Sources */,
@@ -32538,6 +32572,7 @@
 				98792DE022FD4D11000A77E5 /* SpotifySortingManager.swift in Sources */,
 				CE78490722A685FB00662219 /* CellsConstant.swift in Sources */,
 				CE78490822A685FB00662219 /* GradientView.swift in Sources */,
+				B596531E24EAAD980076A8F3 /* LimeFilter.swift in Sources */,
 				CE78490922A685FB00662219 /* FaceImagePhotosViewInput.swift in Sources */,
 				CE78490A22A685FB00662219 /* ImportPhotosRouterInput.swift in Sources */,
 				CF9B1F6E24C0A940002CE8E9 /* EmptyDataView.swift in Sources */,
@@ -33319,6 +33354,7 @@
 				CE784B9522A685FB00662219 /* SplashModuleInput.swift in Sources */,
 				CE784B9622A685FB00662219 /* ErrorBannerView.swift in Sources */,
 				CE784B9722A685FB00662219 /* MoreFilesActionsPresenter.swift in Sources */,
+				B596531824EAAD980076A8F3 /* MetropolisFilter.swift in Sources */,
 				734D9E15233B58B600B143D4 /* SetSecretQuestionErrors.swift in Sources */,
 				CE784B9822A685FB00662219 /* SplashPresenter.swift in Sources */,
 				CE784B9922A685FB00662219 /* GeneralFilesFiltration.swift in Sources */,
@@ -33822,6 +33858,7 @@
 				0305A36623D5C66B004D1EC7 /* CarouselPagerDataSource.swift in Sources */,
 				CF8B63F823CBC9D70021B021 /* SwipeableCardCell.swift in Sources */,
 				CF8B63F923CBC9D70021B021 /* LoginPresenter.swift in Sources */,
+				B596532324EAB1520076A8F3 /* CustomFilter.swift in Sources */,
 				CF8B63FA23CBC9D70021B021 /* InstaPickSmartAlbumCell.swift in Sources */,
 				CF8B63FB23CBC9D70021B021 /* AutoSyncViewInput.swift in Sources */,
 				FA016FB523D30750008713ED /* FileInfoModuleOutput.swift in Sources */,
@@ -34245,6 +34282,7 @@
 				CF8B656B23CBC9D70021B021 /* InstagramAccountConnectionCell.swift in Sources */,
 				030207B023D1D32C00BF8006 /* NetmeraScreenEvents.swift in Sources */,
 				CF8B656C23CBC9D70021B021 /* TermsAndServicesModuleInput.swift in Sources */,
+				B596531624EAAD980076A8F3 /* MetropolisFilter.swift in Sources */,
 				CF8B656D23CBC9D70021B021 /* LoginInteractorInput.swift in Sources */,
 				CF8B656E23CBC9D70021B021 /* PeriodicContactSyncRouter.swift in Sources */,
 				CF8B656F23CBC9D70021B021 /* SettingsBundleHelper.swift in Sources */,
@@ -34447,6 +34485,7 @@
 				CF8B662023CBC9D70021B021 /* UploadFromLifeBoxViewController.swift in Sources */,
 				CF8B662123CBC9D70021B021 /* RequestsKey.swift in Sources */,
 				CF8B662223CBC9D70021B021 /* RemoteService.swift in Sources */,
+				B596531C24EAAD980076A8F3 /* LimeFilter.swift in Sources */,
 				CF8B662323CBC9D70021B021 /* UsageInfoConfigurator.swift in Sources */,
 				CF8B662423CBC9D70021B021 /* ForgotPasswordRouterInput.swift in Sources */,
 				CF8B662523CBC9D70021B021 /* LanguageModel.swift in Sources */,
@@ -35454,6 +35493,7 @@
 				CF8B6C5123CBCA280021B021 /* UploadFromLifeBoxInteractor.swift in Sources */,
 				CF8B6C5223CBCA280021B021 /* UIApplication+topController.swift in Sources */,
 				CF8B6C5323CBCA280021B021 /* VisualMusicPlayerViewOutput.swift in Sources */,
+				B596532624EAB1520076A8F3 /* CustomFilter.swift in Sources */,
 				89DCC5DE2403AC3F00488F1F /* SubscriptionFeaturesView.swift in Sources */,
 				CF8B6C5423CBCA280021B021 /* TwoFactorAuthenticationCell.swift in Sources */,
 				CF8B6C5623CBCA280021B021 /* ManageContactsRouterInput.swift in Sources */,
@@ -35478,6 +35518,7 @@
 				CF8B6C6A23CBCA280021B021 /* ProtoInputTextCell.swift in Sources */,
 				CF8B6C6B23CBCA280021B021 /* RemoteSearchService.swift in Sources */,
 				CF8B6C6C23CBCA280021B021 /* MyStorageModuleConfigurator.swift in Sources */,
+				B596531F24EAAD980076A8F3 /* LimeFilter.swift in Sources */,
 				CF8B6C6D23CBCA280021B021 /* HomeCollectionViewDataSource.swift in Sources */,
 				CF8B6C6E23CBCA280021B021 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				CF9B1F6F24C0A940002CE8E9 /* EmptyDataView.swift in Sources */,
@@ -36259,6 +36300,7 @@
 				CF8B6F2123CBCA280021B021 /* ErrorBannerView.swift in Sources */,
 				CF8B6F2223CBCA280021B021 /* MoreFilesActionsPresenter.swift in Sources */,
 				CF8B6F2323CBCA280021B021 /* SetSecretQuestionErrors.swift in Sources */,
+				B596531924EAAD980076A8F3 /* MetropolisFilter.swift in Sources */,
 				CF8B6F2423CBCA280021B021 /* SplashPresenter.swift in Sources */,
 				0305A2F023D5C154004D1EC7 /* TrashBinViewController.swift in Sources */,
 				CF8B6F2523CBCA280021B021 /* GeneralFilesFiltration.swift in Sources */,
