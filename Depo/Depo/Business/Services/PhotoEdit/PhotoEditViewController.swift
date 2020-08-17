@@ -105,7 +105,7 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
     }
     
     func showHLSFilter() {
-        needShowFilterView(for: .hls)
+        needShowAdjustmentView(for: .hls)
     }
     
     func didChangeAdjustments(_ adjustments: [AdjustmentValue]) {
@@ -125,17 +125,17 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
 
 //MARK: - FilterChangesBarDelegate
 
-extension PhotoEditViewController: FilterChangesBarDelegate {
-    func cancelFilter() {
-        switch uiManager.currentFilterViewType {
+extension PhotoEditViewController: PhotoEditChangesBarDelegate {
+    func cancelChanges() {
+        switch uiManager.currentAdjustmentViewType {
         case .hls:
-            needShowFilterView(for: .color)
+            needShowAdjustmentView(for: .color)
         default:
             setInitialState()
         }
     }
     
-    func applyFilter() {
+    func applyChanges() {
         if let image = uiManager.image {
             sourceImage = image
         }
@@ -187,7 +187,7 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
 
 extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     
-    func needShowFilterView(for type: FilterViewType) {
+    func needShowAdjustmentView(for type: AdjustmentViewType) {
         guard type != .adjust else {
             DispatchQueue.main.async {
                 let controller = Mantis.cropViewController(image: self.sourceImage)
@@ -198,16 +198,16 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
         }
         
         
-        let manager = AdjustmentManager(types: type.adjustmenTypes)
+        let manager = AdjustmentManager(types: type.adjustmentTypes)
         
         guard !manager.parameters.isEmpty,
-            let view = PhotoFilterViewFactory.generateView(for: type, adjustmentParameters: manager.parameters, delegate: self)
+            let view = PhotoEditViewFactory.generateView(for: type, adjustmentParameters: manager.parameters, delegate: self)
         else {
             return
         }
         
         adjustmentManager = manager
-        let changesBar = PhotoFilterViewFactory.generateChangesBar(for: type, delegate: self)
+        let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
         
         uiManager.showFilter(type: type, view: view, changesBar: changesBar)
     }
@@ -224,7 +224,7 @@ extension PhotoEditViewController: CropViewControllerDelegate {
     
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
         uiManager.image = cropped
-        applyFilter()
+        applyChanges()
         cropViewController.dismiss(animated: true)
     }
 }

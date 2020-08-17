@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PhotoEditViewUIManagerDelegate: class {
-    func needShowFilterView(for type: FilterViewType)
+    func needShowAdjustmentView(for type: AdjustmentViewType)
 }
 
 final class PhotoEditViewUIManager: NSObject {
@@ -48,11 +48,11 @@ final class PhotoEditViewUIManager: NSObject {
     private(set) lazy var navBarView = PhotoEditNavbar.initFromNib()
     
     private lazy var preferredFiltersView = PreparedFiltersView.with(filters: PreparedFilterCategory.tempArray, delegate: self)
-    private lazy var filterCategoriesView = FilterCategoriesView.with(delegate: self)
-    private var changesFilterView: FilterChangesBar?
+    private lazy var adjustmentCategoriesView = AdjustmentCategoriesView.with(delegate: self)
+    private var changesBar: PhotoEditChangesBar?
     
     private lazy var animator = ContentAnimator()
-    private(set) var currentFilterViewType = FilterViewType.light
+    private(set) var currentAdjustmentViewType = AdjustmentViewType.light
     
     weak var delegate: PhotoEditViewUIManagerDelegate?
     
@@ -85,7 +85,7 @@ final class PhotoEditViewUIManager: NSObject {
         case .filters:
             animator.showTransition(to: preferredFiltersView, on: filtersContainerView, animated: true)
         case .adjustments:
-            animator.showTransition(to: filterCategoriesView, on: filtersContainerView, animated: true)
+            animator.showTransition(to: adjustmentCategoriesView, on: filtersContainerView, animated: true)
         }
     }
 }
@@ -100,9 +100,9 @@ extension PhotoEditViewUIManager: PhotoEditTabbarDelegate {
 
 //MARK: - FilterCategoriesViewDelegate
 
-extension PhotoEditViewUIManager: FilterCategoriesViewDelegate {
-    func didSelectCategory(_ category: FilterCategory) {
-        let viewType: FilterViewType
+extension PhotoEditViewUIManager: AdjustmentCategoriesViewDelegate {
+    func didSelectCategory(_ category: AdjustmentCategory) {
+        let viewType: AdjustmentViewType
         
         switch category {
         case .adjust:
@@ -115,11 +115,11 @@ extension PhotoEditViewUIManager: FilterCategoriesViewDelegate {
             viewType = .light
         }
         
-        delegate?.needShowFilterView(for: viewType)
+        delegate?.needShowAdjustmentView(for: viewType)
     }
     
-    func showFilter(type: FilterViewType, view: UIView, changesBar: FilterChangesBar) {
-        currentFilterViewType = type
+    func showFilter(type: AdjustmentViewType, view: UIView, changesBar: PhotoEditChangesBar) {
+        currentAdjustmentViewType = type
         animator.showTransition(to: view, on: filtersContainerView, animated: true)
         animator.showTransition(to: changesBar, on: bottomBarContainer, animated: true)
         navBarView.state = .initial
@@ -130,7 +130,7 @@ extension PhotoEditViewUIManager: FilterCategoriesViewDelegate {
 
 extension PhotoEditViewUIManager: PreparedFiltersViewDelegate {
     func didSelectPreparedFilter(_ filter: PreparedFilter) {
-        
+//        delegate?.needShowFilterView(for: .preparedFilter)
     }
 }
 
