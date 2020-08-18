@@ -49,11 +49,20 @@ final class FilterManager {
     }
     
     
-    func filteredPreviews(image: UIImage) -> [FilterType: UIImage] {
+    func filteredPreviews(image: UIImage?) -> [FilterType: UIImage] {
         var result = [FilterType: UIImage]()
         
+        guard let image = image else {
+            assertionFailure("Pass a nonnil image")
+            return result
+        }
+        
+        guard let mtiImage = image.makeMTIImage(isOpaque: image.isOpaque) else {
+            return result
+        }
+        
         filters.forEach {
-            if let filtered = $0.apply(on: image.makeMTIImage())?.makeUIImage() {
+            if let filtered = $0.apply(on: mtiImage)?.makeUIImage() {
                 result[$0.type] = filtered
             }
         }

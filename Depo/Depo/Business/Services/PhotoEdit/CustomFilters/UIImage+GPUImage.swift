@@ -21,16 +21,4 @@ extension UIImage {
         
         return filtered
     }
-    
-    func resize(newWidth: CGFloat) -> UIImage? {
-
-      let scale = newWidth / size.width
-      let newHeight = size.height * scale
-        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
-        self.draw(in: CGRect(x: 0, y: 0, width: newWidth, height: newHeight))
-      let newImage = UIGraphicsGetImageFromCurrentImageContext()
-      UIGraphicsEndImageContext()
-
-      return newImage
-    }
 }
