@@ -20,14 +20,12 @@ final class MPLimeFilter: CustomFilterProtocol {
         return filter
     }()
     
-    var intensity: Float = 1.0
-    
     let type: FilterType = .lime
-    let parameters: [FilterParameterProtocol]
+    let parameter: FilterParameterProtocol
     
     
-    init(parameters: [FilterParameterProtocol]) {
-        self.parameters = parameters
+    init(parameter: FilterParameterProtocol) {
+        self.parameter = parameter
     }
     
     func apply(on image: MTIImage?) -> MTIImage? {
@@ -35,9 +33,8 @@ final class MPLimeFilter: CustomFilterProtocol {
             return nil
         }
         
-        toneFilter.intensity = intensity
         toneFilter.inputImage = inputImage
         
-        return toneFilter.outputImage
+        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
     }
 }

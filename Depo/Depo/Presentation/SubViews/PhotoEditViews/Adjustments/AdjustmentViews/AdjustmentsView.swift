@@ -17,7 +17,7 @@ protocol AdjustmentsViewDelegate: class {
     func didChangeAdjustments(_ adjustments: [AdjustmentParameterValue])
 }
 
-class AdjustmentsView: UIView, AdjustmentParameterSliderViewDelegate {
+class AdjustmentsView: UIView, FilterSliderViewDelegate{
     
     var adjustments = [AdjustmentParameterValue]()
     
@@ -33,7 +33,13 @@ class AdjustmentsView: UIView, AdjustmentParameterSliderViewDelegate {
             return
         }
         
+        
+        
         adjustments[index] = AdjustmentParameterValue(type: type, value: newValue)
+        
+        guard type == .highlights else {
+            return
+        }
         delegate?.didChangeAdjustments(adjustments)
     }
 }
