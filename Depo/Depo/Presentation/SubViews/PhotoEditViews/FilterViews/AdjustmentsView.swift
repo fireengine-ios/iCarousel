@@ -24,7 +24,7 @@ class AdjustmentsView: UIView, FilterSliderViewDelegate{
     weak var delegate: AdjustmentsViewDelegate?
     
     func setup(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) {
-        adjustments = parameters.map { AdjustmentValue(type: $0.type, value: $0.currentValue) }
+        adjustments = parameters.map { AdjustmentParameterValue(type: $0.type, value: $0.currentValue) }
         self.delegate = delegate
     }
     
@@ -33,7 +33,13 @@ class AdjustmentsView: UIView, FilterSliderViewDelegate{
             return
         }
         
-        adjustments[index] = AdjustmentValue(type: type, value: newValue)
+        
+        
+        adjustments[index] = AdjustmentParameterValue(type: type, value: newValue)
+        
+        guard type == .highlights else {
+            return
+        }
         delegate?.didChangeAdjustments(adjustments)
     }
 }

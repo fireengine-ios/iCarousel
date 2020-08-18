@@ -9,13 +9,10 @@
 import Foundation
 import MetalPetal
 
-
 class MPClarendonFilter: CustomFilterProtocol {
     
-    var intensity: Float = 1.0
-    
     let type: FilterType = .clarendon
-    let parameters: [FilterParameterProtocol]
+    let parameter: FilterParameterProtocol
     
     private lazy var toneFilter: MTIRGBToneCurveFilter = {
         let filter = MTIRGBToneCurveFilter()
@@ -39,8 +36,8 @@ class MPClarendonFilter: CustomFilterProtocol {
     }()
     
     
-    init(parameters: [FilterParameterProtocol]) {
-        self.parameters = parameters
+    init(parameter: FilterParameterProtocol) {
+        self.parameter = parameter
     }
     
     
@@ -53,8 +50,7 @@ class MPClarendonFilter: CustomFilterProtocol {
             .adjusting(brightness: -10/255)
             .adjusting(contrast: 1.0)
         
-        
-        return toneFilter.outputImage
+        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
     }
     
 }

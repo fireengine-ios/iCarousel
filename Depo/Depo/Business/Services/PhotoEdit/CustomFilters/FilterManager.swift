@@ -12,17 +12,17 @@ final class FilterManager {
         switch type {
             case .clarendon:
                 let intensityParameter = FilterParameter(type: .filterIntensity)
-                let filter = MPClarendonFilter(parameters: [intensityParameter])
+                let filter = MPClarendonFilter(parameter: intensityParameter)
                 return filter
             
             case .lime:
                 let intensityParameter = FilterParameter(type: .filterIntensity)
-                let filter = MPLimeFilter(parameters: [intensityParameter])
+                let filter = MPLimeFilter(parameter: intensityParameter)
                 return filter
             
             case .metropolis:
                 let intensityParameter = FilterParameter(type: .filterIntensity)
-                let filter = MPMetropolisFilter(parameters: [intensityParameter])
+                let filter = MPMetropolisFilter(parameter: intensityParameter)
                 return filter
             
             default:
@@ -62,7 +62,7 @@ final class FilterManager {
     }
     
 
-    func filter(image: UIImage?, type: FilterType) -> UIImage? {
+    func filter(image: UIImage?, type: FilterType, intensity: Float) -> UIImage? {
         guard let source = image, let filter = filters.first(where: { $0.type == type }) else {
             return image
         }
@@ -71,6 +71,7 @@ final class FilterManager {
             return image
         }
         
+        filter.parameter.set(value: intensity)
         return filter.apply(on: mtiImage)?.makeUIImage()
     }
 }

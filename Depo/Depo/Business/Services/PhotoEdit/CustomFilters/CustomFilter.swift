@@ -10,9 +10,19 @@ import MetalPetal
 
 protocol CustomFilterProtocol {
     var type: FilterType { get }
-    var parameters: [FilterParameterProtocol] { get }
+    var parameter: FilterParameterProtocol { get }
     
     func apply(on image: MTIImage?) -> MTIImage?
+}
+
+extension CustomFilterProtocol {
+    func blend(background: MTIImage?, image: MTIImage?, intensity: Float) -> MTIImage? {
+        let blend = MTIBlendFilter(blendMode: .normal)
+        blend.intensity = intensity
+        blend.inputBackgroundImage = background
+        blend.inputImage = image
+        return blend.outputImage
+    }
 }
 
 
