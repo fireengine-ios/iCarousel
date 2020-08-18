@@ -196,7 +196,7 @@ final class AdjustmentManager {
     }
     
     
-    func applyOnValueDidChange(adjustmentValues: [AdjustmentValue], sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
+    func applyOnValueDidChange(adjustmentValues: [AdjustmentParameterValue], sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
         
         operationQueue.cancelAllOperations()
         
