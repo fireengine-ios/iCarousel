@@ -13,25 +13,16 @@ final class FilterManager {
             case .clarendon:
                 let intensityParameter = FilterParameter(type: .filterIntensity)
                 let filter = MPClarendonFilter(parameters: [intensityParameter])
-                intensityParameter.onValueDidChange { newValue in
-                    filter.intensity = newValue
-                }
                 return filter
             
             case .lime:
                 let intensityParameter = FilterParameter(type: .filterIntensity)
                 let filter = MPLimeFilter(parameters: [intensityParameter])
-                intensityParameter.onValueDidChange { newValue in
-                    filter.intensity = newValue
-                }
                 return filter
             
             case .metropolis:
                 let intensityParameter = FilterParameter(type: .filterIntensity)
                 let filter = MPMetropolisFilter(parameters: [intensityParameter])
-                intensityParameter.onValueDidChange { newValue in
-                    filter.intensity = newValue
-                }
                 return filter
             
             default:
@@ -49,15 +40,37 @@ final class FilterManager {
     }
     
     
-    func filteredPreviews(image: UIImage) -> [FilterType: UIImage] {
+    func filteredPreviews(image: UIImage?) -> [FilterType: UIImage] {
         var result = [FilterType: UIImage]()
         
+        guard let source = image else {
+            assertionFailure("Pass a nonnil image")
+            return result
+        }
+        
+        guard let mtiImage = source.makeMTIImage(isOpaque: source.isOpaque) else {
+            return result
+        }
+        
         filters.forEach {
-            if let filtered = $0.apply(on: image.makeMTIImage())?.makeUIImage() {
+            if let filtered = $0.apply(on: mtiImage)?.makeUIImage() {
                 result[$0.type] = filtered
             }
         }
         
         return result
+    }
+    
+
+    func filter(image: UIImage?, type: FilterType) -> UIImage? {
+        guard let source = image, let filter = filters.first(where: { $0.type == type }) else {
+            return image
+        }
+        
+        guard let mtiImage = source.makeMTIImage(isOpaque: source.isOpaque) else {
+            return image
+        }
+        
+        return filter.apply(on: mtiImage)?.makeUIImage()
     }
 }
