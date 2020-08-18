@@ -46,13 +46,11 @@ final class PreparedFilterSliderView: UIView, NibInit {
             slider.pinToSuperviewEdges()
         }
         
-        if let parameter = filter.parameters.first {
-            slider.setup(minValue: parameter.minValue,
-                         maxValue: parameter.maxValue,
-                         anchorValue: parameter.defaultValue,
-                         currentValue: parameter.currentValue)
-        }
-
+        slider.setup(minValue: filter.parameter.minValue,
+                     maxValue: filter.parameter.maxValue,
+                     anchorValue: filter.parameter.defaultValue,
+                     currentValue: filter.parameter.currentValue)
+        
         slider.changeValueHandler = { [weak self] value in
             if let type = self?.filter?.type {
                 self?.delegate?.didChangeFilter(type, newValue: value)

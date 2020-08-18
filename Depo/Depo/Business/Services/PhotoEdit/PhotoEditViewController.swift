@@ -149,13 +149,8 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
             
         case .filterView(let type):
             setInitialState()
-            
-            guard let filter = filterManager.filters.first(where: { $0.type == type }),
-                let parameter = filter.parameters.first else {
-                return
-            }
-            
-            didChangeFilter(type, newValue: parameter.defaultValue)
+            let value = filterManager.filters.first(where: { $0.type == type })?.parameter.defaultValue ?? 1
+            didChangeFilter(type, newValue: value)
         }
     }
     
@@ -282,10 +277,9 @@ extension PhotoEditViewController: PreparedFiltersViewDelegate {
     }
     
     func didSelectFilter(_ type: FilterType) {
-        if let filteredImage = filterManager.filter(image: sourceImage, type: type) {
-            uiManager.image = filteredImage
-            uiManager.navBarView.state = .edit
-        }
+        let value = filterManager.filters.first(where: { $0.type == type })?.parameter.currentValue ?? 1
+        didChangeFilter(type, newValue: value)
+        uiManager.navBarView.state = .edit
     }
     
     func needOpenFilterSlider(for type: FilterType) {
@@ -294,7 +288,7 @@ extension PhotoEditViewController: PreparedFiltersViewDelegate {
         }
         
         let filterView = PhotoEditViewFactory.generateFilterView(filter, delegate: self)
-        let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.rawValue, delegate: self)
+        let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.rawValue.capitalized, delegate: self)
         uiManager.showView(type: .filterView(type), view: filterView, changesBar: changesBar)
     }
 }
@@ -303,14 +297,7 @@ extension PhotoEditViewController: PreparedFiltersViewDelegate {
 
 extension PhotoEditViewController: PreparedFilterSliderViewDelegate {
     func didChangeFilter(_ filterType: FilterType, newValue: Float) {
-        guard let filter = filterManager.filters.first(where: { $0.type == filterType }) else {
-            return
-        }
-        
-        filter.parameters.first?.set(value: newValue)
-        
-        if let filteredImage = filterManager.filter(image: sourceImage, type: filterType) {
-            uiManager.image = filteredImage
-        }
+        let filteredImage = filterManager.filter(image: sourceImage, type: filterType, intensity: newValue)
+        uiManager.image = filteredImage
     }
 }

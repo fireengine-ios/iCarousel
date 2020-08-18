@@ -17,7 +17,7 @@ protocol AdjustmentsViewDelegate: class {
     func didChangeAdjustments(_ adjustments: [AdjustmentParameterValue])
 }
 
-class AdjustmentsView: UIView, FilterSliderViewDelegate{
+class AdjustmentsView: UIView, AdjustmentParameterSliderViewDelegate {
     
     var adjustments = [AdjustmentParameterValue]()
     
