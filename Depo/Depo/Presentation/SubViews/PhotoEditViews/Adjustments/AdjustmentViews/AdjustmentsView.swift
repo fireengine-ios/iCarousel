@@ -8,18 +8,18 @@
 
 import UIKit
 
-typealias AdjustmentValue = (type: AdjustmentParameterType, value: Float)
+typealias AdjustmentParameterValue = (type: AdjustmentParameterType, value: Float)
 
 protocol AdjustmentsViewDelegate: class {
     func showAdjustMenu()
     func showHLSFilter()
     func roatate90Degrees()
-    func didChangeAdjustments(_ adjustments: [AdjustmentValue])
+    func didChangeAdjustments(_ adjustments: [AdjustmentParameterValue])
 }
 
 class AdjustmentsView: UIView, AdjustmentParameterSliderViewDelegate {
     
-    var adjustments = [AdjustmentValue]()
+    var adjustments = [AdjustmentParameterValue]()
     
     weak var delegate: AdjustmentsViewDelegate?
     
