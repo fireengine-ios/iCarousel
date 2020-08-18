@@ -19107,9 +19107,9 @@
 			isa = PBXGroup;
 			children = (
 				98CA8C5D24EAB52800F98D7A /* PreparedFiltersView.swift */,
+				98CA8C6024EAB52800F98D7A /* PreparedFiltersView.xib */,
 				98CA8C5E24EAB52800F98D7A /* PreparedFilterCell.swift */,
 				98CA8C5F24EAB52800F98D7A /* PreparedFilterCell.xib */,
-				98CA8C6024EAB52800F98D7A /* PreparedFiltersView.xib */,
 			);
 			path = PreparedFiltersView;
 			sourceTree = "<group>";

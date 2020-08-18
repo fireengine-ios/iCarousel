@@ -40,7 +40,9 @@ struct PreparedFilter {
 }
 
 protocol PreparedFiltersViewDelegate: class {
-    func didSelectPreparedFilter(_ filter: PreparedFilter)
+    func didSelectOriginal()
+    func didSelectFilter(_ type: FilterType)
+    func needOpenFilterSlider(for type: FilterType)
 }
 
 private final class FilterCategoryButton: UIButton {
@@ -63,21 +65,23 @@ private final class FilterCategoryButton: UIButton {
 
 final class PreparedFiltersView: UIView, NibInit {
     
-    static func with(filters: [PreparedFilter], delegate: PreparedFiltersViewDelegate?) -> PreparedFiltersView {
+    static func with(previewImage: UIImage, manager: FilterManager, delegate: PreparedFiltersViewDelegate?) -> PreparedFiltersView {
         let view = PreparedFiltersView.initFromNib()
         view.delegate = delegate
-        view.allFilters = filters
+        view.filtermanager = manager
+        view.previewImage = previewImage
+        view.setupImages()
         
-        let categories: [PreparedFilterCategory?] = [nil, .recent, .influncer]
-        view.categoryButtons = categories.map { FilterCategoryButton.with(category: $0) }
-        
-        view.selectedCategory = nil
+//        let categories: [PreparedFilterCategory?] = [nil, .recent, .influncer]
+//        view.categoryButtons = categories.map { FilterCategoryButton.with(category: $0) }
+//        view.selectedCategory = nil
         return view
     }
     
     @IBOutlet private weak var filterCategoriesScrollView: UIScrollView! {
         willSet {
             newValue.backgroundColor = ColorConstants.filterBackColor
+            newValue.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: 8)
         }
     }
     
@@ -96,27 +100,31 @@ final class PreparedFiltersView: UIView, NibInit {
             }
         }
     }
-
-    private weak var delegate: PreparedFiltersViewDelegate?
-    private var allFilters = [PreparedFilter]()
     
-    private var filters = [PreparedFilter]() {
+    private weak var delegate: PreparedFiltersViewDelegate?
+    
+    private var filtermanager: FilterManager?
+    private var previewImage = UIImage()
+    private var filters = FilterType.allCases
+    private var filtersData = [FilterType: UIImage]() {
         didSet {
             collectionView.reloadData()
         }
     }
     
-    private var selectedCategory: PreparedFilterCategory? {
-        didSet {
-            categoryButtons.forEach { $0.isSelected = ($0.category == selectedCategory) }
-            
-            if let category = selectedCategory {
-                filters = allFilters.filter { $0.category == category }
-            } else {
-                filters = allFilters
-            }
-        }
-    }
+//    private var selectedCategory: PreparedFilterCategory? {
+//        didSet {
+//            categoryButtons.forEach { $0.isSelected = ($0.category == selectedCategory) }
+//
+//            if let category = selectedCategory {
+//                filters = allFilters.filter { $0.category == category }
+//            } else {
+//                filters = allFilters
+//            }
+//        }
+//    }
+    
+    //MARK: - Setup
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -127,11 +135,11 @@ final class PreparedFiltersView: UIView, NibInit {
     
     private func setupCollectionView() {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: 50, height: 80)
+            layout.itemSize = CGSize(width: 60, height: 90)
             layout.minimumInteritemSpacing = 16
             layout.minimumLineSpacing = 16
         }
-        collectionView.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: 8)
+        collectionView.contentInset = UIEdgeInsets(topBottom: 15, rightLeft: 16)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
@@ -139,8 +147,16 @@ final class PreparedFiltersView: UIView, NibInit {
         collectionView.register(nibCell: PreparedFilterCell.self)
     }
     
+    private func setupImages() {
+        guard let manager = filtermanager else {
+            assertionFailure("Need setup filter manager")
+            return
+        }
+        filtersData = manager.filteredPreviews(image: previewImage)
+    }
+    
     @objc private func onSwitchFilterCategory(_ sender: FilterCategoryButton) {
-        selectedCategory = sender.category
+//        selectedCategory = sender.category
     }
 }
 
@@ -148,13 +164,18 @@ final class PreparedFiltersView: UIView, NibInit {
 
 extension PreparedFiltersView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        filters.count
+        filtersData.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(cell: PreparedFilterCell.self, for: indexPath)
-        let filter = filters[indexPath.item]
-        cell.setup(title: filter.name, image: filter.image)
+        
+        if indexPath.row == 0 {
+            cell.setup(title: "Original", image: previewImage, isOriginal: true)
+        } else if let filter = filters[safe: indexPath.row - 1] {
+            let image = filtersData[filter]
+            cell.setup(title: filter.rawValue.capitalized, image: image, isOriginal: false)
+        }
         return cell
     }
 }
@@ -164,9 +185,17 @@ extension PreparedFiltersView: UICollectionViewDataSource {
 extension PreparedFiltersView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        if collectionView.cellForItem(at: indexPath)?.isSelected == true {
-            delegate?.didSelectPreparedFilter(filters[indexPath.item])
+        if collectionView.cellForItem(at: indexPath)?.isSelected == true, let type = filters[safe: indexPath.item - 1] {
+            delegate?.needOpenFilterSlider(for: type)
         }
         return true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            delegate?.didSelectOriginal()
+        } else if let type = filters[safe: indexPath.item - 1] {
+            delegate?.didSelectFilter(type)
+        }
     }
 }

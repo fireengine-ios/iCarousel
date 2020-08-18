@@ -10,6 +10,7 @@ import UIKit
 
 protocol PhotoEditViewUIManagerDelegate: class {
     func needShowAdjustmentView(for type: AdjustmentViewType)
+    func filtersView() -> UIView
 }
 
 final class PhotoEditViewUIManager: NSObject {
@@ -47,12 +48,11 @@ final class PhotoEditViewUIManager: NSObject {
     
     private(set) lazy var navBarView = PhotoEditNavbar.initFromNib()
     
-    private lazy var preferredFiltersView = PreparedFiltersView.with(filters: PreparedFilterCategory.tempArray, delegate: self)
     private lazy var adjustmentCategoriesView = AdjustmentCategoriesView.with(delegate: self)
     private var changesBar: PhotoEditChangesBar?
     
     private lazy var animator = ContentAnimator()
-    private(set) var currentAdjustmentViewType = AdjustmentViewType.light
+    private(set) var currentPhotoEditViewType: PhotoEditViewType?
     
     weak var delegate: PhotoEditViewUIManagerDelegate?
     
@@ -83,7 +83,9 @@ final class PhotoEditViewUIManager: NSObject {
     private func showTabBarItemView(_ item: PhotoEditTabbarItemType) {
         switch item {
         case .filters:
-            animator.showTransition(to: preferredFiltersView, on: filtersContainerView, animated: true)
+            if let filtersView = delegate?.filtersView() {
+                animator.showTransition(to: filtersView, on: filtersContainerView, animated: true)
+            }
         case .adjustments:
             animator.showTransition(to: adjustmentCategoriesView, on: filtersContainerView, animated: true)
         }
@@ -118,19 +120,11 @@ extension PhotoEditViewUIManager: AdjustmentCategoriesViewDelegate {
         delegate?.needShowAdjustmentView(for: viewType)
     }
     
-    func showFilter(type: AdjustmentViewType, view: UIView, changesBar: PhotoEditChangesBar) {
-        currentAdjustmentViewType = type
+    func showView(type: PhotoEditViewType, view: UIView, changesBar: PhotoEditChangesBar) {
+        currentPhotoEditViewType = type
         animator.showTransition(to: view, on: filtersContainerView, animated: true)
         animator.showTransition(to: changesBar, on: bottomBarContainer, animated: true)
         navBarView.state = .initial
-    }
-}
-
-//MARK: - PreparedFiltersViewDelegate
-
-extension PhotoEditViewUIManager: PreparedFiltersViewDelegate {
-    func didSelectPreparedFilter(_ filter: PreparedFilter) {
-//        delegate?.needShowFilterView(for: .preparedFilter)
     }
 }
 

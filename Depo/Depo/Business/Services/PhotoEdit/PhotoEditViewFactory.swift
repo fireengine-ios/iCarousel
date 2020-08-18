@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum PhotoEditViewType {
+    case adjustmentView(AdjustmentViewType)
+    case filterView(FilterType)
+}
+
 enum AdjustmentViewType {
     case adjust
     case light
@@ -67,9 +72,9 @@ final class PhotoEditViewFactory {
         }
     }
     
-//    static func generateFilterView() -> PreparedFilterSliderView {
-//        return
-//    }
+    static func generateFilterView(_ filter: CustomFilterProtocol, delegate: PreparedFilterSliderViewDelegate?) -> PreparedFilterSliderView {
+        return PreparedFilterSliderView.with(filter: filter, delegate: delegate)
+    }
     
     static func generateChangesBar(with title: String, delegate: PhotoEditChangesBarDelegate?) -> PhotoEditChangesBar {
         return PhotoEditChangesBar.with(title: title, delegate: delegate)

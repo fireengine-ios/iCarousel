@@ -14,27 +14,9 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hfv-WU-IWO" customClass="AdjustmentParameterSliderView" customModule="Billo" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hfv-WU-IWO">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7P6-JN-DzQ">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="44" id="Whk-i2-FCc"/>
-                            </constraints>
-                        </view>
-                    </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="7P6-JN-DzQ" secondAttribute="bottom" id="OCy-K5-bq0"/>
-                        <constraint firstItem="7P6-JN-DzQ" firstAttribute="top" secondItem="Hfv-WU-IWO" secondAttribute="top" id="WCP-BK-HSl"/>
-                        <constraint firstItem="7P6-JN-DzQ" firstAttribute="leading" secondItem="Hfv-WU-IWO" secondAttribute="leading" id="mzr-0O-xKu"/>
-                        <constraint firstAttribute="trailing" secondItem="7P6-JN-DzQ" secondAttribute="trailing" id="t8X-Ld-ukw"/>
-                    </constraints>
-                    <connections>
-                        <outlet property="sliderContentView" destination="7P6-JN-DzQ" id="n6b-sk-J1a"/>
-                    </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -47,7 +29,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="sliderView" destination="Hfv-WU-IWO" id="YOo-Sv-S7g"/>
+                <outlet property="sliderContentView" destination="Hfv-WU-IWO" id="eSE-1d-sch"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="110.49107142857143"/>
         </view>

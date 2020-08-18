@@ -27,14 +27,18 @@ final class PreparedFilterCell: UICollectionViewCell {
             newValue.backgroundColor = UIColor(white: 0, alpha: 0.3)
         }
     }
+    @IBOutlet private weak var adjustmentImageView: UIImageView!
     
     override var isSelected: Bool {
         didSet {
             adjustmentView.isHidden = !isSelected
+            adjustmentImageView.isHidden = isOriginal
             imageContentView.transform = isSelected ? CGAffineTransform(scaleX: 1.15, y: 1.15) : .identity
             titleLabel.font = isSelected ? .TurkcellSaturaBolFont(size: 13) : .TurkcellSaturaDemFont(size: 12)
         }
     }
+    
+    private var isOriginal = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,8 +46,9 @@ final class PreparedFilterCell: UICollectionViewCell {
         imageContentView.backgroundColor = ColorConstants.filterBackColor
     }
 
-    func setup(title: String, image: UIImage?) {
+    func setup(title: String, image: UIImage?, isOriginal: Bool) {
         titleLabel.text = title
         imageView.image = image
+        self.isOriginal = isOriginal
     }
 }

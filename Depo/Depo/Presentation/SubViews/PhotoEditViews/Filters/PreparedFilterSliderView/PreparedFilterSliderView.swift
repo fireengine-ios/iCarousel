@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PreparedFilterSliderViewDelegate: class {
-    func didChangeFilterIntensity(_ newValue: Float, filterType: PhotoFilterType)
+    func didChangeFilter(_ filterType: FilterType, newValue: Float)
 }
 
 enum PhotoFilterType {
@@ -18,9 +18,9 @@ enum PhotoFilterType {
 
 final class PreparedFilterSliderView: UIView, NibInit {
 
-    static func with(filterType: PhotoFilterType, delegate: PreparedFilterSliderViewDelegate?) -> PreparedFilterSliderView {
+    static func with(filter: CustomFilterProtocol, delegate: PreparedFilterSliderViewDelegate?) -> PreparedFilterSliderView {
         let view = PreparedFilterSliderView.initFromNib()
-        view.setup(filterType: filterType, delegate: delegate)
+        view.setup(filter: filter, delegate: delegate)
         return view
     }
     
@@ -29,33 +29,35 @@ final class PreparedFilterSliderView: UIView, NibInit {
     
     private weak var delegate: PreparedFilterSliderViewDelegate?
     
-    private var filterType: PhotoFilterType?
+    private var filter: CustomFilterProtocol?
     
-    private func setup(filterType: PhotoFilterType, delegate: PreparedFilterSliderViewDelegate?) {
+    private func setup(filter: CustomFilterProtocol, delegate: PreparedFilterSliderViewDelegate?) {
         backgroundColor = ColorConstants.filterBackColor
-        self.filterType = filterType
+        self.filter = filter
         self.delegate = delegate
 
-        setupSlider(filterType: filterType)
+        setupSlider(filter: filter)
     }
 
-    private func setupSlider(filterType: PhotoFilterType) {
+    private func setupSlider(filter: CustomFilterProtocol) {
         if slider.superview == nil {
             sliderContentView.addSubview(slider)
             slider.translatesAutoresizingMaskIntoConstraints = false
             slider.pinToSuperviewEdges()
         }
         
-//        slider.setup(minValue: parameter.minValue,
-//                     maxValue: parameter.maxValue,
-//                     anchorValue: parameter.defaultValue,
-//                     currentValue: parameter.currentValue)
-        
+        if let parameter = filter.parameters.first {
+            slider.setup(minValue: parameter.minValue,
+                         maxValue: parameter.maxValue,
+                         anchorValue: parameter.defaultValue,
+                         currentValue: parameter.currentValue)
+        }
+
         slider.changeValueHandler = { [weak self] value in
-            self?.delegate?.didChangeFilterIntensity(value, filterType: filterType)
+            if let type = self?.filter?.type {
+                self?.delegate?.didChangeFilter(type, newValue: value)
+            }
         }
     }
-
-
 }
 

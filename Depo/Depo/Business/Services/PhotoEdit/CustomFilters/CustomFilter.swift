@@ -16,7 +16,7 @@ protocol CustomFilterProtocol {
 }
 
 
-enum FilterType: String {
+enum FilterType: String, CaseIterable {
     case clarendon
     case metropolis
     case lime
