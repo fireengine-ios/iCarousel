@@ -150,6 +150,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         //editingTabBar.editingBar.layer.borderWidth = 0
         
         statusBarColor = .black
+        
+        NotificationCenter.default.post(name: .reusePlayer, object: self)
 
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
