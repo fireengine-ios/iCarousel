@@ -70,7 +70,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
     
     private func prepareFilterView() -> PreparedFiltersView {
-        let previewImage = sourceImage//sourceImage.resizedImage(to: CGSize(width: 100, height: 100)) ?? sourceImage
+        let previewImage = sourceImage.resizedImage(to: CGSize(width: 100, height: 100)) ?? sourceImage
         return PreparedFiltersView.with(previewImage: previewImage, manager: filterManager, delegate: self)
     }
     
@@ -115,7 +115,7 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
         needShowAdjustmentView(for: .hls)
     }
     
-    func didChangeAdjustments(_ adjustments: [AdjustmentValue]) {
+    func didChangeAdjustments(_ adjustments: [AdjustmentParameterValue]) {
         guard let manager = adjustmentManager else {
             return
         }
@@ -147,8 +147,15 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
                 setInitialState()
             }
             
-        case .filterView(_):
+        case .filterView(let type):
             setInitialState()
+            
+            guard let filter = filterManager.filters.first(where: { $0.type == type }),
+                let parameter = filter.parameters.first else {
+                return
+            }
+            
+            didChangeFilter(type, newValue: parameter.defaultValue)
         }
     }
     
@@ -241,6 +248,10 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     func filtersView() -> UIView {
         return filterView
     }
+    
+    func didSwitchTabBarItem(_ item: PhotoEditTabbarItemType) {
+        resetToOriginal()
+    }
 }
 
 //MARK: - CropViewControllerDelegate
@@ -267,18 +278,14 @@ extension PhotoEditViewController: PreparedFiltersViewDelegate {
 
     func didSelectOriginal() {
         uiManager.image = sourceImage
+        uiManager.navBarView.state = .initial
     }
     
     func didSelectFilter(_ type: FilterType) {
-        guard let filter = filterManager.filters.first(where: { $0.type == type}) else {
-            return
+        if let filteredImage = filterManager.filter(image: sourceImage, type: type) {
+            uiManager.image = filteredImage
+            uiManager.navBarView.state = .edit
         }
-        
-//        let manager = FilterManager(types: [type])
-//        guard let filteredImage = manager.filteredPreviews(image: sourceImage).first?.value else {
-//            return
-//        }
-//        uiManager.image = filteredImage
     }
     
     func needOpenFilterSlider(for type: FilterType) {
@@ -296,6 +303,14 @@ extension PhotoEditViewController: PreparedFiltersViewDelegate {
 
 extension PhotoEditViewController: PreparedFilterSliderViewDelegate {
     func didChangeFilter(_ filterType: FilterType, newValue: Float) {
+        guard let filter = filterManager.filters.first(where: { $0.type == filterType }) else {
+            return
+        }
         
+        filter.parameters.first?.set(value: newValue)
+        
+        if let filteredImage = filterManager.filter(image: sourceImage, type: filterType) {
+            uiManager.image = filteredImage
+        }
     }
 }

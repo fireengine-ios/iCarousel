@@ -11,6 +11,7 @@ import UIKit
 protocol PhotoEditViewUIManagerDelegate: class {
     func needShowAdjustmentView(for type: AdjustmentViewType)
     func filtersView() -> UIView
+    func didSwitchTabBarItem(_ item: PhotoEditTabbarItemType)
 }
 
 final class PhotoEditViewUIManager: NSObject {
@@ -97,6 +98,7 @@ final class PhotoEditViewUIManager: NSObject {
 extension PhotoEditViewUIManager: PhotoEditTabbarDelegate {
     func didSelectItem(_ item: PhotoEditTabbarItemType) {
         showTabBarItemView(item)
+        delegate?.didSwitchTabBarItem(item)
     }
 }
 
