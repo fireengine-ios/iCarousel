@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Crashlytics
 
 class UploadBaseURL: BaseRequestParametrs {
     override var requestParametrs: Any {
