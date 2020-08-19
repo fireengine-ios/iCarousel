@@ -140,7 +140,7 @@ final class VideoPlayerCell: UICollectionViewCell {
         configurePlayerObserver()
     }
     
-    func didEndDisplay() {
+    func didEndDisplaying() {
         avpController.player = nil
     }
     

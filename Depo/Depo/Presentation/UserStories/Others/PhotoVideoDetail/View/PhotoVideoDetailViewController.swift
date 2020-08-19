@@ -532,7 +532,7 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        (cell as? VideoPlayerCell)?.didEndDisplay()
+        (cell as? VideoPlayerCell)?.didEndDisplaying()
     }
 }
 
