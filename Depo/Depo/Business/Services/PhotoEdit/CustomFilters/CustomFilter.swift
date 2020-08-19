@@ -43,4 +43,41 @@ enum FilterType: String, CaseIterable {
     case rise
     case starlit
     case whisper
+    
+    var title: String {
+        switch self {
+        case .clarendon:
+            return TextConstants.photoEditFilterClarendon
+        case .metropolis:
+            return TextConstants.photoEditFilterMetropolis
+        case .lime:
+            return TextConstants.photoEditFilterLime
+        case .adele:
+            return TextConstants.photoEditFilterAdele
+        case .amazon:
+            return TextConstants.photoEditFilterAmazon
+        case .april:
+            return TextConstants.photoEditFilterApril
+        case .audrey:
+            return TextConstants.photoEditFilterAudrey
+        case .aweStruck:
+            return TextConstants.photoEditFilterAweStruck
+        case .bluemess:
+            return TextConstants.photoEditFilterBluemess
+        case .cruz:
+            return TextConstants.photoEditFilterCruz
+        case .haan:
+            return TextConstants.photoEditFilterHaan
+        case .mars:
+            return TextConstants.photoEditFilterMars
+        case .oldMan:
+            return TextConstants.photoEditFilteroOldMan
+        case .rise:
+            return TextConstants.photoEditFilterRise
+        case .starlit:
+            return TextConstants.photoEditFilterStarlit
+        case .whisper:
+            return TextConstants.photoEditFilterWhisper
+        }
+    }
 }

@@ -5152,24 +5152,24 @@
 		98CA8CDB24EAB52900F98D7A /* ColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6E24EAB52800F98D7A /* ColorCell.xib */; };
 		98CA8CDC24EAB52900F98D7A /* ColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6E24EAB52800F98D7A /* ColorCell.xib */; };
 		98CA8CDD24EAB52900F98D7A /* ColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6E24EAB52800F98D7A /* ColorCell.xib */; };
-		98CA8CDE24EAB52900F98D7A /* HLSView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6F24EAB52800F98D7A /* HLSView.xib */; };
-		98CA8CDF24EAB52900F98D7A /* HLSView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6F24EAB52800F98D7A /* HLSView.xib */; };
-		98CA8CE024EAB52900F98D7A /* HLSView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6F24EAB52800F98D7A /* HLSView.xib */; };
-		98CA8CE124EAB52900F98D7A /* HLSView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6F24EAB52800F98D7A /* HLSView.xib */; };
-		98CA8CE224EAB52900F98D7A /* HLSView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6F24EAB52800F98D7A /* HLSView.xib */; };
-		98CA8CE324EAB52900F98D7A /* HLSView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6F24EAB52800F98D7A /* HLSView.xib */; };
+		98CA8CDE24EAB52900F98D7A /* HSLView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6F24EAB52800F98D7A /* HSLView.xib */; };
+		98CA8CDF24EAB52900F98D7A /* HSLView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6F24EAB52800F98D7A /* HSLView.xib */; };
+		98CA8CE024EAB52900F98D7A /* HSLView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6F24EAB52800F98D7A /* HSLView.xib */; };
+		98CA8CE124EAB52900F98D7A /* HSLView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6F24EAB52800F98D7A /* HSLView.xib */; };
+		98CA8CE224EAB52900F98D7A /* HSLView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6F24EAB52800F98D7A /* HSLView.xib */; };
+		98CA8CE324EAB52900F98D7A /* HSLView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CA8C6F24EAB52800F98D7A /* HSLView.xib */; };
 		98CA8CE424EAB52900F98D7A /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7024EAB52800F98D7A /* ColorCell.swift */; };
 		98CA8CE524EAB52900F98D7A /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7024EAB52800F98D7A /* ColorCell.swift */; };
 		98CA8CE624EAB52900F98D7A /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7024EAB52800F98D7A /* ColorCell.swift */; };
 		98CA8CE724EAB52900F98D7A /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7024EAB52800F98D7A /* ColorCell.swift */; };
 		98CA8CE824EAB52900F98D7A /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7024EAB52800F98D7A /* ColorCell.swift */; };
 		98CA8CE924EAB52900F98D7A /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7024EAB52800F98D7A /* ColorCell.swift */; };
-		98CA8CEA24EAB52900F98D7A /* HLSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7124EAB52800F98D7A /* HLSView.swift */; };
-		98CA8CEB24EAB52900F98D7A /* HLSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7124EAB52800F98D7A /* HLSView.swift */; };
-		98CA8CEC24EAB52900F98D7A /* HLSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7124EAB52800F98D7A /* HLSView.swift */; };
-		98CA8CED24EAB52900F98D7A /* HLSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7124EAB52800F98D7A /* HLSView.swift */; };
-		98CA8CEE24EAB52900F98D7A /* HLSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7124EAB52800F98D7A /* HLSView.swift */; };
-		98CA8CEF24EAB52900F98D7A /* HLSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7124EAB52800F98D7A /* HLSView.swift */; };
+		98CA8CEA24EAB52900F98D7A /* HSLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7124EAB52800F98D7A /* HSLView.swift */; };
+		98CA8CEB24EAB52900F98D7A /* HSLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7124EAB52800F98D7A /* HSLView.swift */; };
+		98CA8CEC24EAB52900F98D7A /* HSLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7124EAB52800F98D7A /* HSLView.swift */; };
+		98CA8CED24EAB52900F98D7A /* HSLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7124EAB52800F98D7A /* HSLView.swift */; };
+		98CA8CEE24EAB52900F98D7A /* HSLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7124EAB52800F98D7A /* HSLView.swift */; };
+		98CA8CEF24EAB52900F98D7A /* HSLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7124EAB52800F98D7A /* HSLView.swift */; };
 		98CA8CF024EAB52900F98D7A /* AdjustmentParameterSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7324EAB52800F98D7A /* AdjustmentParameterSliderView.swift */; };
 		98CA8CF124EAB52900F98D7A /* AdjustmentParameterSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7324EAB52800F98D7A /* AdjustmentParameterSliderView.swift */; };
 		98CA8CF224EAB52900F98D7A /* AdjustmentParameterSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CA8C7324EAB52800F98D7A /* AdjustmentParameterSliderView.swift */; };
@@ -13296,9 +13296,9 @@
 		98CA8C6B24EAB52800F98D7A /* LightView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LightView.xib; sourceTree = "<group>"; };
 		98CA8C6C24EAB52800F98D7A /* LightView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightView.swift; sourceTree = "<group>"; };
 		98CA8C6E24EAB52800F98D7A /* ColorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColorCell.xib; sourceTree = "<group>"; };
-		98CA8C6F24EAB52800F98D7A /* HLSView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HLSView.xib; sourceTree = "<group>"; };
+		98CA8C6F24EAB52800F98D7A /* HSLView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSLView.xib; sourceTree = "<group>"; };
 		98CA8C7024EAB52800F98D7A /* ColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
-		98CA8C7124EAB52800F98D7A /* HLSView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLSView.swift; sourceTree = "<group>"; };
+		98CA8C7124EAB52800F98D7A /* HSLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSLView.swift; sourceTree = "<group>"; };
 		98CA8C7324EAB52800F98D7A /* AdjustmentParameterSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdjustmentParameterSliderView.swift; sourceTree = "<group>"; };
 		98CA8C7424EAB52800F98D7A /* AdjustmentParameterSliderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdjustmentParameterSliderView.xib; sourceTree = "<group>"; };
 		98CA8C7624EAB52800F98D7A /* AdjustmentCategoriesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AdjustmentCategoriesView.xib; sourceTree = "<group>"; };
@@ -19148,9 +19148,9 @@
 			children = (
 				98CA8C6324EAB52800F98D7A /* AdjustView */,
 				98CA8C6624EAB52800F98D7A /* ColorView */,
-				98CA8C6924EAB52800F98D7A /* AdjustmentsView.swift */,
 				98CA8C6A24EAB52800F98D7A /* LightView */,
-				98CA8C6D24EAB52800F98D7A /* HLSView */,
+				98CA8C6D24EAB52800F98D7A /* HSLView */,
+				98CA8C6924EAB52800F98D7A /* AdjustmentsView.swift */,
 			);
 			path = AdjustmentViews;
 			sourceTree = "<group>";
@@ -19182,15 +19182,15 @@
 			path = LightView;
 			sourceTree = "<group>";
 		};
-		98CA8C6D24EAB52800F98D7A /* HLSView */ = {
+		98CA8C6D24EAB52800F98D7A /* HSLView */ = {
 			isa = PBXGroup;
 			children = (
 				98CA8C6E24EAB52800F98D7A /* ColorCell.xib */,
-				98CA8C6F24EAB52800F98D7A /* HLSView.xib */,
 				98CA8C7024EAB52800F98D7A /* ColorCell.swift */,
-				98CA8C7124EAB52800F98D7A /* HLSView.swift */,
+				98CA8C6F24EAB52800F98D7A /* HSLView.xib */,
+				98CA8C7124EAB52800F98D7A /* HSLView.swift */,
 			);
-			path = HLSView;
+			path = HSLView;
 			sourceTree = "<group>";
 		};
 		98CA8C7224EAB52800F98D7A /* AdjustmentParameterSliderView */ = {
@@ -23590,7 +23590,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0303A5532397D0D000907F42 /* PhoneVerificationScreen.xib in Resources */,
-				98CA8CE124EAB52900F98D7A /* HLSView.xib in Resources */,
+				98CA8CE124EAB52900F98D7A /* HSLView.xib in Resources */,
 				0303A5542397D0D000907F42 /* EmptyDataView.xib in Resources */,
 				0303A5552397D0D000907F42 /* PremiumListView.xib in Resources */,
 				0303A55A2397D0D000907F42 /* InstapickAnalysisCell.xib in Resources */,
@@ -24064,7 +24064,7 @@
 				98CA8D1524EAB52900F98D7A /* PhotoEditNavbar.xib in Resources */,
 				8C0E901E1FDEBDFF00789C91 /* MailVerificationViewController.xib in Resources */,
 				4A8CC306201A00D400C040C4 /* FaceImageViewController.xib in Resources */,
-				98CA8CDF24EAB52900F98D7A /* HLSView.xib in Resources */,
+				98CA8CDF24EAB52900F98D7A /* HSLView.xib in Resources */,
 				98BCD714224A615A0090C13D /* SmartAlbumCell.xib in Resources */,
 				CEA1B6AD213EAA09000B3DF4 /* LaunchCampaignCard.xib in Resources */,
 				989BDE5C22F47B1E001DDEB2 /* SpotifyPlaylistViewController.xib in Resources */,
@@ -24562,7 +24562,7 @@
 				4A56D5CA202B25F0003A4624 /* CollectionViewCellForFaceImageAddName.xib in Resources */,
 				98BE78A824517E4300B8864F /* SnackbarView.xib in Resources */,
 				A74ADA3C23A2ABFF007DD192 /* DivorceCard.xib in Resources */,
-				98CA8CDE24EAB52900F98D7A /* HLSView.xib in Resources */,
+				98CA8CDE24EAB52900F98D7A /* HSLView.xib in Resources */,
 				B5AB2F082204356400E3AF23 /* InstaPickSmartAlbumCell.xib in Resources */,
 				CE127E9A2268A025005A4214 /* CaptchaView.xib in Resources */,
 				8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */,
@@ -24888,7 +24888,7 @@
 				9853CD482361BDD200E19BF7 /* LandingPageViewController.xib in Resources */,
 				CE784D4422A685FB00662219 /* PrintViewController.xib in Resources */,
 				CE784D4522A685FB00662219 /* CaptchaViewController.xib in Resources */,
-				98CA8CE224EAB52900F98D7A /* HLSView.xib in Resources */,
+				98CA8CE224EAB52900F98D7A /* HSLView.xib in Resources */,
 				CE784D4B22A685FB00662219 /* AutoSyncViewController.xib in Resources */,
 				CE784D5122A685FB00662219 /* FaceImagePhotosViewController.xib in Resources */,
 				CE784D5322A685FB00662219 /* TurkcellSaturaBol.ttf in Resources */,
@@ -25162,7 +25162,7 @@
 				CF8B68E423CBC9D70021B021 /* LaunchScreen.storyboard in Resources */,
 				CF7146AD24B597A900D83E60 /* ContactsBackupCell.xib in Resources */,
 				CF8B68E623CBC9D70021B021 /* BottomSelectionTabBarViewController.xib in Resources */,
-				98CA8CE024EAB52900F98D7A /* HLSView.xib in Resources */,
+				98CA8CE024EAB52900F98D7A /* HSLView.xib in Resources */,
 				CF8B68E923CBC9D70021B021 /* InstapickCampaignCell.xib in Resources */,
 				CF8B68EA23CBC9D70021B021 /* LargeFullOfQuotaPopUp.xib in Resources */,
 				CF8B68ED23CBC9D70021B021 /* SpotifyImportedPlaylistsViewController.xib in Resources */,
@@ -25510,7 +25510,7 @@
 				CF8B710123CBCA280021B021 /* PrintViewController.xib in Resources */,
 				CF8B710223CBCA280021B021 /* CaptchaViewController.xib in Resources */,
 				CF8B710823CBCA280021B021 /* AutoSyncViewController.xib in Resources */,
-				98CA8CE324EAB52900F98D7A /* HLSView.xib in Resources */,
+				98CA8CE324EAB52900F98D7A /* HSLView.xib in Resources */,
 				CF8B710D23CBCA280021B021 /* FaceImagePhotosViewController.xib in Resources */,
 				CF8B710F23CBCA280021B021 /* TurkcellSaturaBol.ttf in Resources */,
 				CF8B711423CBCA280021B021 /* SpotifyDeletePopup.xib in Resources */,
@@ -27961,7 +27961,7 @@
 				0303A32A2397D0D000907F42 /* FreeAppSpacePresenter.swift in Sources */,
 				B5435DE724E670600091B77C /* BasicFilter.swift in Sources */,
 				0303A32B2397D0D000907F42 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
-				98CA8CED24EAB52900F98D7A /* HLSView.swift in Sources */,
+				98CA8CED24EAB52900F98D7A /* HSLView.swift in Sources */,
 				0303A32C2397D0D000907F42 /* DropboxParametrs.swift in Sources */,
 				0303A32D2397D0D000907F42 /* SingleThumbnailAlbumCell.swift in Sources */,
 				0303A32E2397D0D000907F42 /* CustomErrors.swift in Sources */,
@@ -29992,7 +29992,7 @@
 				8E1E080F2423B0260054BF86 /* KeychainCleaner.swift in Sources */,
 				8C0E8F6A1FDEBDFF00789C91 /* PasscodeSettingsConfigurator.swift in Sources */,
 				CE343600224B5C6C00AFAABB /* FullscreenTextController.swift in Sources */,
-				98CA8CEB24EAB52900F98D7A /* HLSView.swift in Sources */,
+				98CA8CEB24EAB52900F98D7A /* HSLView.swift in Sources */,
 				8C0E8F6B1FDEBDFF00789C91 /* UploadFilesSelectionRouterInput.swift in Sources */,
 				8C0E8F6C1FDEBDFF00789C91 /* UploadFilesSelectionRouter.swift in Sources */,
 				B52BAC6223AE1F830051E21D /* NSManagedObjectModel+Compatible.swift in Sources */,
@@ -31218,7 +31218,7 @@
 				CEDFECBB1F11F86B003D1A75 /* SearchServiceResponse.swift in Sources */,
 				B56FBB3D2122C9B9004F4A59 /* TermsOfUseViewOutput.swift in Sources */,
 				B56B97B4212EE4EB00732C2B /* AugmentedRealityFileProvider.swift in Sources */,
-				98CA8CEA24EAB52900F98D7A /* HLSView.swift in Sources */,
+				98CA8CEA24EAB52900F98D7A /* HSLView.swift in Sources */,
 				984F8E7D200CDEA200D9D595 /* StoriesInteractor.swift in Sources */,
 				CE5921DA2256446F005882CE /* PasswordView.swift in Sources */,
 				CE7040AE22EB180D00124073 /* SupportFormPrefilledController.swift in Sources */,
@@ -32500,7 +32500,7 @@
 				98F032E72403FFC000F1D415 /* Contact.m in Sources */,
 				CEFAF2E223210D22004A157C /* PhotoSelectionNoFilesView.swift in Sources */,
 				CE7848AB22A685FB00662219 /* CollectionViewCellForController.swift in Sources */,
-				98CA8CEE24EAB52900F98D7A /* HLSView.swift in Sources */,
+				98CA8CEE24EAB52900F98D7A /* HSLView.swift in Sources */,
 				CE7848AD22A685FB00662219 /* AccountResponse.swift in Sources */,
 				CE7848AE22A685FB00662219 /* CollectionViewCellForAudio.swift in Sources */,
 				CE7848AF22A685FB00662219 /* KeyboardLayoutConstraint.swift in Sources */,
@@ -34504,7 +34504,7 @@
 				CF8B65F723CBC9D70021B021 /* InitializingViewController.swift in Sources */,
 				CF8B65F823CBC9D70021B021 /* ActivityTimelineTableBackView.swift in Sources */,
 				CF8B65F923CBC9D70021B021 /* ManageContactsModels.swift in Sources */,
-				98CA8CEC24EAB52900F98D7A /* HLSView.swift in Sources */,
+				98CA8CEC24EAB52900F98D7A /* HSLView.swift in Sources */,
 				CF71463524B597A800D83E60 /* ContactSyncNoBackupView.swift in Sources */,
 				CF8B65FA23CBC9D70021B021 /* SpotifyDeletePopup.swift in Sources */,
 				CF8B65FB23CBC9D70021B021 /* ForgotPasswordViewOutput.swift in Sources */,
@@ -35480,7 +35480,7 @@
 				CF8B6C0123CBCA280021B021 /* AccountResponse.swift in Sources */,
 				98F032E82403FFC000F1D415 /* Contact.m in Sources */,
 				CF8B6C0223CBCA280021B021 /* CollectionViewCellForAudio.swift in Sources */,
-				98CA8CEF24EAB52900F98D7A /* HLSView.swift in Sources */,
+				98CA8CEF24EAB52900F98D7A /* HSLView.swift in Sources */,
 				CF8B6C0323CBCA280021B021 /* KeyboardLayoutConstraint.swift in Sources */,
 				CF8B6C0423CBCA280021B021 /* InstaPickSelectionSegmentedController.swift in Sources */,
 				CF8B6C0523CBCA280021B021 /* PhotoVideoBottomBarManager.swift in Sources */,

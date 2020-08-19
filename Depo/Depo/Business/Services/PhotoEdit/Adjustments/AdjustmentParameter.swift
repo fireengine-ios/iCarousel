@@ -25,8 +25,6 @@ enum AdjustmentParameterType: String {
     case sharpness
     case blurRadius
     case vignetteRatio
-    case filterIntensity
-    
     
     var defaultValues: AdjustmentParameterValues {
         switch self {
@@ -60,10 +58,41 @@ enum AdjustmentParameterType: String {
                 return (1, 16, 2)
             case .vignetteRatio:
                 return (0, 1, 0)
-            case .filterIntensity:
-                return (0, 1, 1)
-            default:
-                return (0, 0, 0)
+        }
+    }
+    
+    var title: String {
+        switch self {
+            case .brightness:
+                return TextConstants.photoEditAdjustmentBrightness
+            case .contrast:
+                return TextConstants.photoEditAdjustmentContrast
+            case .exposure:
+                return TextConstants.photoEditAdjustmentExposure
+            case .saturation:
+                return TextConstants.photoEditAdjustmentSaturation
+            case .gamma:
+                return TextConstants.photoEditAdjustmentGamma
+            case .hue:
+                return TextConstants.photoEditAdjustmentHue
+            case .temperature:
+                return TextConstants.photoEditAdjustmentTemperature
+            case .tint:
+                return TextConstants.photoEditAdjustmentTint
+            case .highlights:
+                return TextConstants.photoEditAdjustmentHighlights
+            case .shadows:
+                return TextConstants.photoEditAdjustmentShadows
+            case .intensity:
+                return TextConstants.photoEditAdjustmentIntensity
+            case .angle:
+                return TextConstants.photoEditAdjustmentAngle
+            case .sharpness:
+                return TextConstants.photoEditAdjustmentSharpness
+            case .blurRadius:
+                return TextConstants.photoEditAdjustmentBlur
+            case .vignetteRatio:
+                return TextConstants.photoEditAdjustmentVignette
         }
     }
 }

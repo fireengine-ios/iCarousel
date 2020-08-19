@@ -51,7 +51,7 @@ final class AdjustmentParameterSliderView: UIView, NibInit {
         self.delegate = delegate
         
         backgroundColor = ColorConstants.filterBackColor
-        titleLabel.text = parameter.type.rawValue.capitalized
+        titleLabel.text = parameter.type.title
         valueLabel.text = String(format: "%.1f", parameter.currentValue)
         
         setupSlider(parameter: parameter)

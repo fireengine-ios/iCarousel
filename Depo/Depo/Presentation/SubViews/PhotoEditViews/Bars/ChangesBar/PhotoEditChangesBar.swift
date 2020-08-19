@@ -30,9 +30,17 @@ final class PhotoEditChangesBar: UIView, NibInit {
         }
     }
     
-    @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var cancelButton: UIButton! {
+        willSet {
+            newValue.setImage(UIImage(named: "photo_edit_cancel"), for: .normal)
+        }
+    }
     
-    @IBOutlet private weak var applyButton: UIButton!
+    @IBOutlet private weak var applyButton: UIButton! {
+           willSet {
+               newValue.setImage(UIImage(named: "photo_edit_apply"), for: .normal)
+           }
+       }
     
     private weak var delegate: PhotoEditChangesBarDelegate?
     

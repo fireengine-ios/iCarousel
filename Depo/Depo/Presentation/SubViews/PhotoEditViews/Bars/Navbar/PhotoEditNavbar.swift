@@ -26,6 +26,7 @@ final class PhotoEditNavbar: UIView, NibInit {
     @IBOutlet private weak var closeButton: UIButton!
     @IBOutlet private weak var saveButton: UIButton! {
         willSet {
+            newValue.setTitle(TextConstants.photoEditNavBarSave, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 13)
         }

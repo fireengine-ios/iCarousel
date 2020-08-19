@@ -12,7 +12,7 @@ typealias AdjustmentParameterValue = (type: AdjustmentParameterType, value: Floa
 
 protocol AdjustmentsViewDelegate: class {
     func showAdjustMenu()
-    func showHLSFilter()
+    func showHSLFilter()
     func roatate90Degrees()
     func didChangeAdjustments(_ adjustments: [AdjustmentParameterValue])
 }

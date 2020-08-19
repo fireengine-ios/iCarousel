@@ -11,7 +11,12 @@ import UIKit
 final class PreparedFilterCell: UICollectionViewCell {
 
     @IBOutlet private weak var imageContentView: UIView!
-    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var imageView: UIImageView! {
+        willSet {
+            newValue.contentMode = .scaleAspectFill
+        }
+    }
+    
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
             newValue.font = .TurkcellSaturaDemFont(size: 12)
@@ -21,13 +26,19 @@ final class PreparedFilterCell: UICollectionViewCell {
             newValue.lineBreakMode = .byWordWrapping
         }
     }
+    
     @IBOutlet private weak var adjustmentView: UIView! {
         willSet {
             newValue.isHidden = true
             newValue.backgroundColor = UIColor(white: 0, alpha: 0.3)
         }
     }
-    @IBOutlet private weak var adjustmentImageView: UIImageView!
+    
+    @IBOutlet private weak var adjustmentImageView: UIImageView! {
+        willSet {
+            newValue.tintColor = .white
+        }
+    }
     
     override var isSelected: Bool {
         didSet {

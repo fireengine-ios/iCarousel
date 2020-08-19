@@ -75,7 +75,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
     
     private func showMoreActionsMenu() {
-        let items = ["Save as copy", "Reset to original"]
+        let items = [TextConstants.photoEditSaveAsCopy, TextConstants.photoEditResetToOriginal]
         let controller = SelectionMenuController.with(style: .simple, items: items, selectedIndex: nil) { [weak self] index in
             guard let self = self else {
                 return
@@ -111,8 +111,8 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
         present(controller, animated: false)
     }
     
-    func showHLSFilter() {
-        needShowAdjustmentView(for: .hls)
+    func showHSLFilter() {
+        needShowAdjustmentView(for: .hsl)
     }
     
     func didChangeAdjustments(_ adjustments: [AdjustmentParameterValue]) {
@@ -141,7 +141,7 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
         switch currentPhotoEditViewType {
         case .adjustmentView(let type):
             switch type {
-            case .hls:
+            case .hsl:
                 needShowAdjustmentView(for: .color)
             default:
                 setInitialState()
@@ -187,11 +187,11 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
             return
         }
 
-        let popup = PopUpController.with(title: "Discart Changes?",
-                                         message: "Your changer won't be saved",
+        let popup = PopUpController.with(title: TextConstants.photoEditCloseAlertTitle,
+                                         message: TextConstants.photoEditCloseAlertMessage,
                                          image: .question,
-                                         firstButtonTitle: "Keep editing",
-                                         secondButtonTitle: "Discard",
+                                         firstButtonTitle: TextConstants.photoEditCloseAlertKeepButton,
+                                         secondButtonTitle: TextConstants.photoEditCloseAlertDiscardButton,
                                          secondAction: { vc in
                                             vc.close {
                                                 closeHandler()
@@ -245,7 +245,8 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     }
     
     func didSwitchTabBarItem(_ item: PhotoEditTabbarItemType) {
-        resetToOriginal()
+        uiManager.image = sourceImage
+        setInitialState()
     }
 }
 
@@ -288,7 +289,7 @@ extension PhotoEditViewController: PreparedFiltersViewDelegate {
         }
         
         let filterView = PhotoEditViewFactory.generateFilterView(filter, delegate: self)
-        let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.rawValue.capitalized, delegate: self)
+        let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
         uiManager.showView(type: .filterView(type), view: filterView, changesBar: changesBar)
     }
 }

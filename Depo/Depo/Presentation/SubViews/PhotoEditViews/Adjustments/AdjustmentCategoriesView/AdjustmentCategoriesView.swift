@@ -17,28 +17,26 @@ enum AdjustmentCategory: CaseIterable {
     var title: String {
         switch self {
         case .adjust:
-            return "Adjust"
+            return TextConstants.photoEditAdjust
         case .light:
-            return "Light"
+            return TextConstants.photoEditLight
         case .color:
-            return "Color"
+            return TextConstants.photoEditColor
         case .effect:
-            return "Effect"
+            return TextConstants.photoEditEffect
         }
     }
     
     var image: UIImage? {
-        return UIImage(named: "addAlbum")
-        
         switch self {
         case .adjust:
-            return UIImage(named: "")
+            return UIImage(named: "photo_edit_adjust")
         case .light:
-            return UIImage(named: "")
+            return UIImage(named: "photo_edit_light")
         case .color:
-            return UIImage(named: "")
+            return UIImage(named: "photo_edit_color")
         case .effect:
-            return UIImage(named: "")
+            return UIImage(named: "photo_edit_effect")
         }
     }
 }

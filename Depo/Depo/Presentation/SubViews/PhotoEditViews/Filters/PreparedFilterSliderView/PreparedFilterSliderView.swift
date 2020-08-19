@@ -12,10 +12,6 @@ protocol PreparedFilterSliderViewDelegate: class {
     func didChangeFilter(_ filterType: FilterType, newValue: Float)
 }
 
-enum PhotoFilterType {
-    case filter1
-}
-
 final class PreparedFilterSliderView: UIView, NibInit {
 
     static func with(filter: CustomFilterProtocol, delegate: PreparedFilterSliderViewDelegate?) -> PreparedFilterSliderView {

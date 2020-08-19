@@ -20,17 +20,6 @@ enum PreparedFilterCategory {
             return "Influncer filters"
         }
     }
-    
-    static var tempArray = [PreparedFilter(name: "Filter1", image: UIImage(named: "addAlbum"), category: .recent),
-                            PreparedFilter(name: "Filter2", image: UIImage(named: "addAlbum"), category: .recent),
-                            PreparedFilter(name: "Filter3", image: UIImage(named: "addAlbum"), category: .recent),
-                            PreparedFilter(name: "Filter4", image: UIImage(named: "addAlbum"), category: .recent),
-                            PreparedFilter(name: "Filter5", image: UIImage(named: "addAlbum"), category: .recent),
-                            PreparedFilter(name: "Filter6", image: UIImage(named: "addAlbum"), category: .influncer),
-                            PreparedFilter(name: "Filter7", image: UIImage(named: "addAlbum"), category: .influncer),
-                            PreparedFilter(name: "Filter8", image: UIImage(named: "addAlbum"), category: .influncer),
-                            PreparedFilter(name: "Filter9", image: UIImage(named: "addAlbum"), category: .influncer),
-                            PreparedFilter(name: "Filter10", image: UIImage(named: "addAlbum"), category: .influncer)]
 }
 
 struct PreparedFilter {
@@ -171,10 +160,10 @@ extension PreparedFiltersView: UICollectionViewDataSource {
         let cell = collectionView.dequeue(cell: PreparedFilterCell.self, for: indexPath)
         
         if indexPath.row == 0 {
-            cell.setup(title: "Original", image: previewImage, isOriginal: true)
+            cell.setup(title: TextConstants.photoEditFilterOriginal, image: previewImage, isOriginal: true)
         } else if let filter = filters[safe: indexPath.row - 1] {
             let image = filtersData[filter]
-            cell.setup(title: filter.rawValue.capitalized, image: image, isOriginal: false)
+            cell.setup(title: filter.title, image: image, isOriginal: false)
         }
         return cell
     }
@@ -187,6 +176,7 @@ extension PreparedFiltersView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         if collectionView.cellForItem(at: indexPath)?.isSelected == true, let type = filters[safe: indexPath.item - 1] {
             delegate?.needOpenFilterSlider(for: type)
+            return false
         }
         return true
     }

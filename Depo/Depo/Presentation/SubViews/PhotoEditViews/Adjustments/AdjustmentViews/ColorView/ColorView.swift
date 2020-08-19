@@ -16,7 +16,13 @@ final class ColorView: AdjustmentsView, NibInit {
         return view
     }
     
-    @IBOutlet private weak var hlsButton: UIButton!
+    @IBOutlet private weak var hslButton: UIButton! {
+        willSet {
+            newValue.setTitle(TextConstants.photoEditHSL, for: .normal)
+            newValue.setTitleColor(.white, for: .normal)
+            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 15)
+        }
+    }
     @IBOutlet private weak var contentView: UIStackView!
     
     override func setup(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) {
@@ -30,7 +36,7 @@ final class ColorView: AdjustmentsView, NibInit {
         }
     }
 
-    @IBAction private func onHLSTapped(_ sender: UIButton) {
-        delegate?.showHLSFilter()
+    @IBAction private func onHSLTapped(_ sender: UIButton) {
+        delegate?.showHSLFilter()
     }
 }

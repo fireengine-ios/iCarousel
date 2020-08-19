@@ -1,5 +1,5 @@
 //
-//  HLSView.swift
+//  HSLView.swift
 //  Depo
 //
 //  Created by Andrei Novikau on 7/28/20.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-final class HLSView: AdjustmentsView, NibInit {
+final class HSLView: AdjustmentsView, NibInit {
 
-    static func with(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) -> HLSView {
-        let view = HLSView.initFromNib()
+    static func with(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) -> HSLView {
+        let view = HSLView.initFromNib()
         view.setup(parameters: parameters, delegate: delegate)
         return view
     }
@@ -52,7 +52,7 @@ final class HLSView: AdjustmentsView, NibInit {
     }
 }
 
-extension HLSView: UICollectionViewDataSource, UICollectionViewDelegate {
+extension HSLView: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         colors.count

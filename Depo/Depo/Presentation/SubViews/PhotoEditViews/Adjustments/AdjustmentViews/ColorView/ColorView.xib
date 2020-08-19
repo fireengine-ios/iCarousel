@@ -16,9 +16,9 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOh-2b-yXS">
                     <rect key="frame" x="20" y="8" width="30" height="30"/>
-                    <state key="normal" title="HLS"/>
+                    <state key="normal" title="HSL"/>
                     <connections>
-                        <action selector="onHLSTapped:" destination="L4h-0S-5vj" eventType="touchUpInside" id="kAO-2Y-Ib3"/>
+                        <action selector="onHSLTapped:" destination="L4h-0S-5vj" eventType="touchUpInside" id="Fwv-fP-0I0"/>
                     </connections>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gyq-xi-cv2">
@@ -38,7 +38,7 @@
             <viewLayoutGuide key="safeArea" id="lbw-XP-mS9"/>
             <connections>
                 <outlet property="contentView" destination="gyq-xi-cv2" id="E3Z-co-QCY"/>
-                <outlet property="hlsButton" destination="IOh-2b-yXS" id="QQi-Wk-olH"/>
+                <outlet property="hslButton" destination="IOh-2b-yXS" id="STL-Ai-p0g"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="136.60714285714286"/>
         </view>

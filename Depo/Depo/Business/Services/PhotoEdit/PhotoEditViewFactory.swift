@@ -18,20 +18,20 @@ enum AdjustmentViewType {
     case light
     case color
     case effect
-    case hls
+    case hsl
     
     var title: String {
         switch self {
         case .adjust:
-            return "Adjust"
+            return TextConstants.photoEditAdjust
         case .light:
-            return "Light"
+            return TextConstants.photoEditLight
         case .color:
-            return "Color"
+            return TextConstants.photoEditColor
         case .effect:
-            return "Effect"
-        case .hls:
-            return "HLS"
+            return TextConstants.photoEditEffect
+        case .hsl:
+            return TextConstants.photoEditHSL
         }
     }
     
@@ -44,7 +44,7 @@ enum AdjustmentViewType {
             return [.whiteBalance, .saturation, .gamma]
         case .effect:
             return [.sharpen, .blur, .vignette]
-        case .hls:
+        case .hsl:
             return [.hsl]
         case .light:
             return [.brightness, .contrast, .exposure, .highlightsAndShadows]
@@ -67,8 +67,8 @@ final class PhotoEditViewFactory {
             return LightView.with(parameters: adjustmentParameters, delegate: delegate)
         case .light:
             return LightView.with(parameters: adjustmentParameters, delegate: delegate)
-        case .hls:
-            return HLSView.with(parameters: adjustmentParameters, delegate: delegate)
+        case .hsl:
+            return HSLView.with(parameters: adjustmentParameters, delegate: delegate)
         }
     }
     
