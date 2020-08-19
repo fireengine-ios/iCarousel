@@ -30,6 +30,7 @@ final class VideoPlayerCell: UICollectionViewCell {
     private let avpController = FixedAVPlayerViewController()
     private var player = AVPlayer()
 
+    private let previewImageView = LoadingImageView()
 
     //MARK: - Life Cycle
     override func awakeFromNib() {
@@ -41,12 +42,14 @@ final class VideoPlayerCell: UICollectionViewCell {
         super.prepareForReuse()
         player.replaceCurrentItem(with: nil)
         avpController.player = nil
+        previewImageView.isHidden = false
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if object as AnyObject? === player {
             if keyPath == "timeControlStatus", player.timeControlStatus == .playing {
                 enterFullscreen(playerViewController: avpController)
+                previewImageView.isHidden = true
             }
         }
     }
@@ -101,11 +104,8 @@ final class VideoPlayerCell: UICollectionViewCell {
         player.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
     }
     
-    private func prepareForPlayVideo( file: Item) {
-        guard let url = file.metaData?.videoPreviewURL ?? file.urlToFile else {
-            return
-        }
-        
+    private func prepareForPlayVideo(file: Item) {
+        previewImageView.loadImageIncludingGif(with: file)
         switch file.patchToPreview {
         case let .localMediaContent(local):
             guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
@@ -129,8 +129,9 @@ final class VideoPlayerCell: UICollectionViewCell {
                 }
             }
         case .remoteUrl(_):
+            guard let url = file.urlToFile else { return }
             debugLog("about to play remote video item")
-            DispatchQueue.global(qos: .default).async { [weak self] in
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 let playerItem = AVPlayerItem(url: url)
                 self?.delegate?.imageLoadingFinished()
                 debugLog("playerItem created \(playerItem.asset.isPlayable)")
@@ -139,10 +140,32 @@ final class VideoPlayerCell: UICollectionViewCell {
                 }
             }
         }
+        
+    }
+    
+    private func addPreviewToVideo(){
+        avpController.contentOverlayView?.addSubview(previewImageView)
+        previewImageView.translatesAutoresizingMaskIntoConstraints = false
+        previewImageView.contentMode = .scaleAspectFit
+        NSLayoutConstraint.activate(
+            [
+                previewImageView.topAnchor.constraint(
+                    equalTo: self.contentView.topAnchor,
+                    constant: NumericConstants.navigationBarHeight),
+                previewImageView.leadingAnchor.constraint(
+                    equalTo: self.contentView.leadingAnchor),
+                previewImageView.trailingAnchor.constraint(
+                    equalTo: self.contentView.trailingAnchor),
+                previewImageView.bottomAnchor.constraint(
+                    equalTo: self.contentView.bottomAnchor,
+                    constant: -NumericConstants.tabBarHight)
+            ]
+        )
     }
     
     private func play(item: AVPlayerItem) {
         player = AVPlayer(playerItem: item)
+        addPreviewToVideo()
         avpController.player = player
         configurePlayerObserver()
     }
