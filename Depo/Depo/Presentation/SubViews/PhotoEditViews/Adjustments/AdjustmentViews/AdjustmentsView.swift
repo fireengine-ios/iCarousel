@@ -32,14 +32,8 @@ class AdjustmentsView: UIView, AdjustmentParameterSliderViewDelegate {
         guard let index = adjustments.firstIndex(where: { $0.type == type}) else {
             return
         }
-        
-        
-        
+
         adjustments[index] = AdjustmentParameterValue(type: type, value: newValue)
-        
-        guard type == .highlights else {
-            return
-        }
         delegate?.didChangeAdjustments(adjustments)
     }
 }
