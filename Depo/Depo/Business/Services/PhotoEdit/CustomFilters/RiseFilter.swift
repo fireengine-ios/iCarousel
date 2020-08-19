@@ -13,7 +13,7 @@ import MetalPetal
 final class MPRiseFilter: CustomFilterProtocol {
     private var mpContext: MTIContext
     
-    private lazy var toneCurve: MTIRGBToneCurveFilter = {
+    private lazy var toneFilter: MTIRGBToneCurveFilter = {
         let filter = MTIRGBToneCurveFilter()
         
         filter.blueControlPoints = [MTIVector(x: 0/255, y: 0/255),
@@ -30,7 +30,7 @@ final class MPRiseFilter: CustomFilterProtocol {
     }()
     
     
-    init?() {
+    init?(parameter: FilterParameterProtocol) {
         let options = MTIContextOptions()
         
         guard let device = MTLCreateSystemDefaultDevice() else {
@@ -43,19 +43,25 @@ final class MPRiseFilter: CustomFilterProtocol {
             print(error.localizedDescription)
             return nil
         }
+        
+        self.parameter = parameter
     }
     
-    func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
+    let type: FilterType = .rise
+    let parameter: FilterParameterProtocol
+    
+    
+    func apply(on image: MTIImage?) -> MTIImage? {
         guard let inputImage = image, let cgImage = try? mpContext.makeCGImage(from: inputImage) else {
             return nil
         }
         
         let tmpImage = UIImage(cgImage: cgImage)
-        toneCurve.inputImage = tmpImage
+        toneFilter.inputImage = tmpImage
             .adjusting(vignetteAlpha: 200).makeMTIImage()?
             .adjusting(contrast: 1.9)
             .adjusting(brightness: 60/255)
         
-        return toneCurve.outputImage
+        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
     }
 }

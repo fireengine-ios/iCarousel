@@ -27,17 +27,25 @@ final class MPBluemessFilter: CustomFilterProtocol {
     }()
     
     
-    func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
+    let type: FilterType = .bluemess
+    let parameter: FilterParameterProtocol
+    
+    
+    init(parameter: FilterParameterProtocol) {
+        self.parameter = parameter
+    }
+    
+    func apply(on image: MTIImage?) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
         
-        toneFilter.intensity = intensity
-        
         toneFilter.inputImage = inputImage
         
-        return toneFilter.outputImage?
+        let output = toneFilter.outputImage?
             .adjusting(brightness: 30/255)
             .adjusting(contrast: 1)
+        
+        return blend(background: image, image: output, intensity: parameter.currentValue)
     }
 }

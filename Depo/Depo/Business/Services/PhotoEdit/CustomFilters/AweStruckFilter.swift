@@ -44,16 +44,21 @@ final class MPAweStruckFilter: CustomFilterProtocol {
         return filter
     }()
     
+    let type: FilterType = .aweStruck
+    let parameter: FilterParameterProtocol
     
-    func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
+    
+    init(parameter: FilterParameterProtocol) {
+        self.parameter = parameter
+    }
+    
+    func apply(on image: MTIImage?) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
         
-        toneFilter.intensity = intensity
-        
         toneFilter.inputImage = inputImage
         
-        return toneFilter.outputImage
+        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
     }
 }

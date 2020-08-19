@@ -11,12 +11,23 @@ import MetalPetal
 
 
 final class MPAdeleFilter: CustomFilterProtocol {
-   
-    func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
+    
+    var type: FilterType = .adele
+    var parameter: FilterParameterProtocol
+    
+    
+    init(parameter: FilterParameterProtocol) {
+        self.parameter = parameter
+    }
+    
+    
+    func apply(on image: MTIImage?) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
         
-        return inputImage.adjusting(saturation: -100/255)
+        let output = inputImage.adjusting(saturation: -100/255)
+        
+        return blend(background: image, image: output, intensity: parameter.currentValue)
     }
 }

@@ -12,15 +12,25 @@ import MetalPetal
 
 final class MPCruzFilter: CustomFilterProtocol {
     
-    func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
+    let type: FilterType = .cruz
+    let parameter: FilterParameterProtocol
+    
+    
+    init(parameter: FilterParameterProtocol) {
+        self.parameter = parameter
+    }
+    
+    func apply(on image: MTIImage?) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
         
-        return inputImage
+        let output = inputImage
             .adjusting(saturation: -100/255)
             .adjusting(contrast: 1.3)
             .adjusting(brightness: 20/255)
+        
+        return blend(background: image, image: output, intensity: parameter.currentValue)
     }
     
 }

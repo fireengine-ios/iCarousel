@@ -11,13 +11,24 @@ import MetalPetal
 
 
 final class MPMarsFilter: CustomFilterProtocol {
-    func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
+    
+    let type: FilterType = .mars
+    let parameter: FilterParameterProtocol
+    
+    
+    init(parameter: FilterParameterProtocol) {
+        self.parameter = parameter
+    }
+    
+    func apply(on image: MTIImage?) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
         
-        return inputImage
+        let output = inputImage
             .adjusting(contrast: 1.5)
             .adjusting(brightness: 10/255)
+        
+        return blend(background: image, image: output, intensity: parameter.currentValue)
     }
 }
