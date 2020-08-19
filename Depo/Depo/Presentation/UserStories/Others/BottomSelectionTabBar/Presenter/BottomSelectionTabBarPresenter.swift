@@ -344,7 +344,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
                     actionTypes.append(.moveToTrash)
                     
-                case .doc, .pdf, .txt, .ppt, .xls, .html:
+                case .doc, .pdf, .txt, .ppt, .xls, .html, .pptx:
                     actionTypes = [.move, .copy, .documentDetails]
                     actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
                     actionTypes.append(.moveToTrash)

@@ -50,6 +50,16 @@ class SimpleUpload: UploadRequestParametrs {
         return item.fileData
     }
     
+    private var fileSize: Int64 {
+        if let url = urlToLocalFile,
+            let resources = try? url.resourceValues(forKeys:[.fileSizeKey]),
+            let fileSize = resources.fileSize {
+            return Int64(fileSize)
+        }
+        
+        return item.fileSize
+    }
+    
     let tmpUUID: String
     
     init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) {
@@ -103,7 +113,7 @@ class SimpleUpload: UploadRequestParametrs {
             HeaderConstant.Expect                : "100-continue",
             HeaderConstant.XObjectMetaDeviceType : Device.deviceType,
             HeaderConstant.XObjectMetaIosMetadataHash : item.asset?.localIdentifier ?? "",
-            HeaderConstant.ContentLength         : "\(item.fileSize)"
+            HeaderConstant.ContentLength         : "\(fileSize)"
         ]
         return header
     }
