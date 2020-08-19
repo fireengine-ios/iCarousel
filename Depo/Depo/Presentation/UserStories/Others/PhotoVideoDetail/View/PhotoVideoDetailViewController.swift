@@ -103,6 +103,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     // MARK: Life cycle
     
+    deinit {
+        NotificationCenter.default.post(name: .deinitPlayer, object: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -151,8 +155,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         statusBarColor = .black
         
-        NotificationCenter.default.post(name: .reusePlayer, object: self)
-
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
         bottomDetailViewManager?.updatePassThroughViewDelegate(passThroughView: passThroughView)
@@ -172,8 +174,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         visibleNavigationBarStyle()
         statusBarColor = .clear
-        
-        NotificationCenter.default.post(name: .deinitPlayer, object: self)
         
         output.viewWillDisappear()
         passThroughView?.disableGestures()
@@ -529,6 +529,10 @@ extension PhotoVideoDetailViewController: UICollectionViewDataSource {
         if indexPath.row == objects.count - 1 {
             output.willDisplayLastCell()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        (cell as? VideoPlayerCell)?.didEndDisplaying()
     }
 }
 
