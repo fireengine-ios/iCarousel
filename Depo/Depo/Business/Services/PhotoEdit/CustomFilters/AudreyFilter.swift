@@ -21,19 +21,24 @@ final class MPAudreyFilter: CustomFilterProtocol {
         return filter
     }()
     
+    let type: FilterType = .audrey
+    let parameter: FilterParameterProtocol
     
-    func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
+    
+    init(parameter: FilterParameterProtocol) {
+        self.parameter = parameter
+    }
+    
+    func apply(on image: MTIImage?) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
-        
-        toneFilter.intensity = intensity
         
         toneFilter.inputImage = inputImage
             .adjusting(saturation: -100/255)
             .adjusting(contrast: 1.3)
             .adjusting(brightness: 20/255)
         
-        return toneFilter.outputImage
+        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
     }
 }

@@ -30,4 +30,17 @@ enum FilterType: String, CaseIterable {
     case clarendon
     case metropolis
     case lime
+    case adele
+    case amazon
+    case april
+    case audrey
+    case aweStruck
+    case bluemess
+    case cruz
+    case haan
+    case mars
+    case oldMan
+    case rise
+    case starlit
+    case whisper
 }

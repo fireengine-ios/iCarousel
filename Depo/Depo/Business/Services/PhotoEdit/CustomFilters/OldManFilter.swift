@@ -13,7 +13,7 @@ import MetalPetal
 final class MPOldManFilter: CustomFilterProtocol {
     private var mpContext: MTIContext
     
-    init?() {
+    init?(parameter: FilterParameterProtocol) {
         let options = MTIContextOptions()
         
         guard let device = MTLCreateSystemDefaultDevice() else {
@@ -26,10 +26,15 @@ final class MPOldManFilter: CustomFilterProtocol {
             print(error.localizedDescription)
             return nil
         }
+        
+        self.parameter = parameter
     }
     
+    let type: FilterType = .oldMan
+    let parameter: FilterParameterProtocol
     
-    func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
+    
+    func apply(on image: MTIImage?) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
@@ -44,8 +49,8 @@ final class MPOldManFilter: CustomFilterProtocol {
             return nil
         }
         
-        //TODO: color overlay
+        let output = UIImage(cgImage: cgImage).adjusting(vignetteAlpha: 100).makeMTIImage()
         
-        return UIImage(cgImage: cgImage).adjusting(vignetteAlpha: 100).makeMTIImage()
+        return blend(background: image, image: output, intensity: parameter.currentValue)
     }
 }

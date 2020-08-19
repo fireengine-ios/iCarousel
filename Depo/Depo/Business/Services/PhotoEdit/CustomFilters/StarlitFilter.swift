@@ -25,15 +25,22 @@ final class MPStartlitFilter: CustomFilterProtocol {
         return filter
     }()
     
-    func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
+    let type: FilterType = .starlit
+    let parameter: FilterParameterProtocol
+    
+    
+    init(parameter: FilterParameterProtocol) {
+        self.parameter = parameter
+    }
+    
+    
+    func apply(on image: MTIImage?) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
         
-        toneFilter.intensity = intensity
-        
         toneFilter.inputImage = inputImage
         
-        return toneFilter.outputImage
+        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
     }
 }

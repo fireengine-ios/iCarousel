@@ -24,15 +24,22 @@ final class MPAmazonFilter: CustomFilterProtocol {
         return filter
     }()
     
-    func apply(on image: MTIImage?, intensity: Float) -> MTIImage? {
+    var type: FilterType = .amazon
+    var parameter: FilterParameterProtocol
+    
+    
+    init(parameter: FilterParameterProtocol) {
+        self.parameter = parameter
+    }
+    
+    
+    func apply(on image: MTIImage?) -> MTIImage? {
         guard let inputImage = image else {
             return nil
         }
         
-        toneFilter.intensity = intensity
-        
         toneFilter.inputImage = inputImage.adjusting(contrast: 1.2)
         
-        return toneFilter.outputImage
+        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
     }
 }

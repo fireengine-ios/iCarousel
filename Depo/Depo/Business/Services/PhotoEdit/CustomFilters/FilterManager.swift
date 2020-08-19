@@ -9,21 +9,56 @@
 
 final class FilterManager {
     private static func filter(type: FilterType) -> CustomFilterProtocol? {
+        let intensityParameter = FilterParameter(type: .filterIntensity)
+        
         switch type {
             case .clarendon:
-                let intensityParameter = FilterParameter(type: .filterIntensity)
-                let filter = MPClarendonFilter(parameter: intensityParameter)
-                return filter
+                return MPClarendonFilter(parameter: intensityParameter)
             
             case .lime:
-                let intensityParameter = FilterParameter(type: .filterIntensity)
-                let filter = MPLimeFilter(parameter: intensityParameter)
-                return filter
+                return MPLimeFilter(parameter: intensityParameter)
             
             case .metropolis:
-                let intensityParameter = FilterParameter(type: .filterIntensity)
-                let filter = MPMetropolisFilter(parameter: intensityParameter)
-                return filter
+                return MPMetropolisFilter(parameter: intensityParameter)
+            
+            case .adele:
+                return MPAdeleFilter(parameter: intensityParameter)
+            
+            case .amazon:
+                return MPAmazonFilter(parameter: intensityParameter)
+            
+            case .april:
+                return MPAprilFilter(parameter: intensityParameter)
+            
+            case .audrey:
+                return MPAudreyFilter(parameter: intensityParameter)
+            
+            case .aweStruck:
+                return MPAweStruckFilter(parameter: intensityParameter)
+            
+            case .bluemess:
+                return MPBluemessFilter(parameter: intensityParameter)
+            
+            case .cruz:
+                return MPCruzFilter(parameter: intensityParameter)
+            
+            case .haan:
+                return MPHaanFilter(parameter: intensityParameter)
+            
+            case .mars:
+                return MPMarsFilter(parameter: intensityParameter)
+            
+            case .oldMan:
+                return MPOldManFilter(parameter: intensityParameter)
+            
+            case .rise:
+                return MPRiseFilter(parameter: intensityParameter)
+            
+            case .starlit:
+                return MPStartlitFilter(parameter: intensityParameter)
+            
+            case .whisper:
+                return MPWhisperFilter(parameter: intensityParameter)
             
             default:
                 assertionFailure("Filter is not implemented")
