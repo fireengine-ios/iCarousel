@@ -64,6 +64,7 @@ enum ApplicationType: String {
     case xls = "xls"
     case pdf = "pdf"
     case ppt = "ppt"
+    case pptx = "pptx"
     case usdz = "usdz"
     
 //    func bigIconImage() -> UIImage? {
@@ -168,7 +169,7 @@ enum FileType: Hashable, Equatable {
         guard case let FileType.application(applicationType) = self else {
             return false
         }
-        return applicationType.isContained(in: [.doc, .txt, .html, .xls, .pdf, .ppt, .usdz])
+        return applicationType.isContained(in: [.doc, .txt, .html, .xls, .pdf, .ppt, .pptx, .usdz])
     }
     
     var  isSupportedOpenType: Bool {
@@ -322,6 +323,9 @@ enum FileType: Hashable, Equatable {
                 case "vnd.ms-powerpoint":
                     self = .application(.ppt)
                     return
+                case "vnd.openxmlformats-officedocument.presentationml.presentation":
+                    self = .application(.pptx)
+                    return
                 default:
                     self = .application(.unknown)
                 }
@@ -370,6 +374,8 @@ enum FileType: Hashable, Equatable {
             self = .application(.pdf)
         case 18:
             self = .application(.ppt)
+        case 19:
+            self = .application(.pptx)
         default:
             self = .unknown
         }
@@ -410,9 +416,10 @@ enum FileType: Hashable, Equatable {
             return 17
         case .application(.ppt):
             return 18
-        case .allDocs:
+        case .application(.pptx):
             return 19
-            
+        case .allDocs:
+            return 20
         default:
             return 0
         }

@@ -303,7 +303,7 @@ extension NetmeraEvents.Actions {
             case .application(.doc), .application(.txt),
                  .application(.html), .application(.xls),
                  .application(.pdf), .application(.ppt),
-                 .application(.usdz), .allDocs:
+                 .application(.usdz), .application(.pptx) ,.allDocs:
                 accaptableType = .document
             case .audio:
                 accaptableType = .music
@@ -423,7 +423,7 @@ extension NetmeraEvents.Actions {
                 acceptableType = .video
             case .application(.doc), .application(.txt),
                  .application(.html), .application(.xls),
-                 .application(.pdf), .application(.ppt),
+                 .application(.pdf), .application(.ppt), .application(.pptx),
                  .application(.usdz), .allDocs:
                 acceptableType = .document
             case .audio:
@@ -483,7 +483,7 @@ extension NetmeraEvents.Actions {
                 acceptableType = .video
             case .application(.doc), .application(.txt),
                  .application(.html), .application(.xls),
-                 .application(.pdf), .application(.ppt),
+                 .application(.pdf), .application(.ppt), .application(.pptx),
                  .application(.usdz), .allDocs:
                 acceptableType = .document
             case .audio:
@@ -592,7 +592,7 @@ extension NetmeraEvents.Actions {
                 appopriateFileType = .music
             case .application(.doc), .application(.txt),
                  .application(.html), .application(.xls),
-                 .application(.pdf), .application(.ppt),
+                 .application(.pdf), .application(.ppt), .application(.pptx),
                  .application(.usdz), .allDocs:
                 appopriateFileType = .document
             default:
@@ -850,7 +850,7 @@ extension NetmeraEvents.Actions {
                 acceptableType = .video
             case .application(.doc), .application(.txt),
                  .application(.html), .application(.xls),
-                 .application(.pdf), .application(.ppt),
+                 .application(.pdf), .application(.ppt), .application(.pptx),
                  .application(.usdz), .allDocs:
                 acceptableType = .document
             case .audio:
