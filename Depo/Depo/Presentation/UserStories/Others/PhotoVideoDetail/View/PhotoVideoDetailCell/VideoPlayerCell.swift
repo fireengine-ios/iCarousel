@@ -45,12 +45,15 @@ final class VideoPlayerCell: UICollectionViewCell {
         previewImageView.isHidden = false
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if object as AnyObject? === player {
-            if keyPath == "timeControlStatus", player.timeControlStatus == .playing {
-                enterFullscreen(playerViewController: avpController)
-                previewImageView.isHidden = true
-            }
+    override func observeValue(
+        forKeyPath keyPath: String?,
+        of object: Any?,
+        change: [NSKeyValueChangeKey : Any]?,
+        context: UnsafeMutableRawPointer?
+    ) {
+        if object as AnyObject? === player, keyPath == "timeControlStatus", player.timeControlStatus != .paused, player.status == .readyToPlay {
+            enterFullscreen(playerViewController: avpController)
+            previewImageView.isHidden = true
         }
     }
     
@@ -89,13 +92,6 @@ final class VideoPlayerCell: UICollectionViewCell {
             self,
             selector: #selector(deinitPlayer),
             name: .deinitPlayer,
-            object: nil
-        )
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(reusePlayer),
-            name: .reusePlayer,
             object: nil
         )
     }
@@ -144,23 +140,23 @@ final class VideoPlayerCell: UICollectionViewCell {
     }
     
     private func addPreviewToVideo(){
+        print(avpController.view.frame, previewImageView.frame)
         avpController.contentOverlayView?.addSubview(previewImageView)
         previewImageView.translatesAutoresizingMaskIntoConstraints = false
         previewImageView.contentMode = .scaleAspectFit
+        previewImageView.clipsToBounds = true
         NSLayoutConstraint.activate(
             [
                 previewImageView.topAnchor.constraint(
                     equalTo: self.contentView.topAnchor,
-                    constant: NumericConstants.navigationBarHeight),
-                previewImageView.leadingAnchor.constraint(
-                    equalTo: self.contentView.leadingAnchor),
-                previewImageView.trailingAnchor.constraint(
-                    equalTo: self.contentView.trailingAnchor),
-                previewImageView.bottomAnchor.constraint(
-                    equalTo: self.contentView.bottomAnchor,
-                    constant: -NumericConstants.tabBarHight)
+                    constant: NumericConstants.navigationBarHeight
+                ),
+                previewImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+                previewImageView.widthAnchor.constraint(equalToConstant: avpController.view.frame.width),
+                previewImageView.heightAnchor.constraint(equalToConstant: avpController.view.frame.height)
             ]
         )
+        print("After:", avpController.view.frame, previewImageView.frame)
     }
     
     private func play(item: AVPlayerItem) {
@@ -170,11 +166,8 @@ final class VideoPlayerCell: UICollectionViewCell {
         configurePlayerObserver()
     }
     
-    @objc private func reusePlayer(){
-        guard player.currentItem != nil else {
-            return
-        }
-        avpController.player = player
+    func didEndDisplaying() {
+        avpController.player = nil
     }
     
     @objc private func deinitPlayer(){
