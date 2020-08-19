@@ -88,13 +88,6 @@ final class VideoPlayerCell: UICollectionViewCell {
             name: .deinitPlayer,
             object: nil
         )
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(reusePlayer),
-            name: .reusePlayer,
-            object: nil
-        )
     }
 
     private func configurePlayerObserver() {
@@ -147,11 +140,8 @@ final class VideoPlayerCell: UICollectionViewCell {
         configurePlayerObserver()
     }
     
-    @objc private func reusePlayer(){
-        guard player.currentItem != nil else {
-            return
-        }
-        avpController.player = player
+    func didEndDisplay() {
+        avpController.player = nil
     }
     
     @objc private func deinitPlayer(){
