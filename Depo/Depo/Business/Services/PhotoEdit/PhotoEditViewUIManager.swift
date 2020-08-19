@@ -9,26 +9,15 @@
 import UIKit
 
 protocol PhotoEditViewUIManagerDelegate: class {
-    func needShowFilterView(for type: FilterViewType)
+    func needShowAdjustmentView(for type: AdjustmentViewType)
+    func filtersView() -> UIView
+    func didSwitchTabBarItem(_ item: PhotoEditTabbarItemType)
 }
 
 final class PhotoEditViewUIManager: NSObject {
     
-    @IBOutlet private weak var contentImageVIew: UIView! {
-        willSet {
-            newValue.backgroundColor = .black
-        }
-    }
-    
     @IBOutlet private weak var navBarContainer: UIView!
-    @IBOutlet private weak var imageScrollView: UIScrollView! {
-        willSet {
-            newValue.backgroundColor = .black
-            newValue.minimumZoomScale = 1
-            newValue.maximumZoomScale = 5
-        }
-    }
-    @IBOutlet private(set) weak var imageView: UIImageView!
+    @IBOutlet private weak var imageScrollView: ImageScrollView! 
     
     @IBOutlet private weak var filtersScrollView: UIScrollView! {
         willSet {
@@ -60,16 +49,31 @@ final class PhotoEditViewUIManager: NSObject {
     
     private(set) lazy var navBarView = PhotoEditNavbar.initFromNib()
     
-    private lazy var preferredFiltersView = PreparedFiltersView.with(filters: PreparedFilterCategory.tempArray, delegate: self)
-    private lazy var filterCategoriesView = FilterCategoriesView.with(delegate: self)
-    private var changesFilterView: FilterChangesBar?
+    private lazy var adjustmentCategoriesView = AdjustmentCategoriesView.with(delegate: self)
+    private var changesBar: PhotoEditChangesBar?
     
     private lazy var animator = ContentAnimator()
-    private(set) var currentFilterViewType = FilterViewType.light
+    private(set) var currentPhotoEditViewType: PhotoEditViewType?
     
     weak var delegate: PhotoEditViewUIManagerDelegate?
     
+    var image: UIImage? {
+        get {
+            imageScrollView.imageView.originalImage
+        }
+        set {
+            DispatchQueue.toMain {
+                self.imageScrollView.imageView.originalImage = newValue
+            }
+        }
+    }
+    
     //MARK: -
+    
+    func viewDidLayoutSubviews() {
+        imageScrollView.updateZoom()
+        imageScrollView.adjustFrameToCenter()
+    }
     
     func showInitialState() {
         showTabBarItemView(tabbar.selectedType)
@@ -77,18 +81,14 @@ final class PhotoEditViewUIManager: NSObject {
         animator.showTransition(to: tabbar, on: bottomBarContainer, animated: true)
     }
     
-    func setImage(_ image: UIImage?) {
-        DispatchQueue.toMain {
-            self.imageView.image = image
-        }
-    }
-    
     private func showTabBarItemView(_ item: PhotoEditTabbarItemType) {
         switch item {
         case .filters:
-            animator.showTransition(to: preferredFiltersView, on: filtersContainerView, animated: true)
+            if let filtersView = delegate?.filtersView() {
+                animator.showTransition(to: filtersView, on: filtersContainerView, animated: true)
+            }
         case .adjustments:
-            animator.showTransition(to: filterCategoriesView, on: filtersContainerView, animated: true)
+            animator.showTransition(to: adjustmentCategoriesView, on: filtersContainerView, animated: true)
         }
     }
 }
@@ -98,14 +98,15 @@ final class PhotoEditViewUIManager: NSObject {
 extension PhotoEditViewUIManager: PhotoEditTabbarDelegate {
     func didSelectItem(_ item: PhotoEditTabbarItemType) {
         showTabBarItemView(item)
+        delegate?.didSwitchTabBarItem(item)
     }
 }
 
 //MARK: - FilterCategoriesViewDelegate
 
-extension PhotoEditViewUIManager: FilterCategoriesViewDelegate {
-    func didSelectCategory(_ category: FilterCategory) {
-        let viewType: FilterViewType
+extension PhotoEditViewUIManager: AdjustmentCategoriesViewDelegate {
+    func didSelectCategory(_ category: AdjustmentCategory) {
+        let viewType: AdjustmentViewType
         
         switch category {
         case .adjust:
@@ -118,22 +119,14 @@ extension PhotoEditViewUIManager: FilterCategoriesViewDelegate {
             viewType = .light
         }
         
-        delegate?.needShowFilterView(for: viewType)
+        delegate?.needShowAdjustmentView(for: viewType)
     }
     
-    func showFilter(type: FilterViewType, view: UIView, changesBar: FilterChangesBar) {
-        currentFilterViewType = type
+    func showView(type: PhotoEditViewType, view: UIView, changesBar: PhotoEditChangesBar) {
+        currentPhotoEditViewType = type
         animator.showTransition(to: view, on: filtersContainerView, animated: true)
         animator.showTransition(to: changesBar, on: bottomBarContainer, animated: true)
         navBarView.state = .initial
-    }
-}
-
-//MARK: - PreparedFiltersViewDelegate
-
-extension PhotoEditViewUIManager: PreparedFiltersViewDelegate {
-    func didSelectPreparedFilter(_ filter: PreparedFilter) {
-        
     }
 }
 
@@ -171,4 +164,3 @@ private final class ContentAnimator {
         }
     }
 }
-
