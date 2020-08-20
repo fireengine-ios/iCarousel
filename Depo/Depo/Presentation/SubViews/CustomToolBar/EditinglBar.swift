@@ -32,9 +32,9 @@ class EditinglBar: CustomTabBar {
         static let restore = ("RestoreButtonIcon", TextConstants.actionSheetRestore, "")
     }
     
-    private let tabBarHeight: CGFloat = NumericConstants.tabBarHight
+    private let tabBarHeight: CGFloat = 49
     
-    private let originalY: CGFloat = -NumericConstants.tabBarHight
+    private let originalY: CGFloat = -49
     private let originalX: CGFloat = 0
     
     private var animationsArray = [AnimationBlock]()
