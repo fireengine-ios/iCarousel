@@ -43,7 +43,7 @@ testFlightDeployers = "TCUSER" // To enable, uncomment submitters in approval st
 devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;can.kucukakdag@turkcell.com.tr"
 
 xcodeParams = [
-        xcodeApp: 'Xcode11.app',
+        xcodeApp: '11.0',
         workspaceFile: 'Depo/Depo'
 ]
 
@@ -96,6 +96,7 @@ def runXcode = { app, flavorId ->
     sh "rm -f '${WORKSPACE}/${app.name}-logs/*'"
 
     xcodeBuild target: app.xcodeTarget ?: app.name,
+      xcodeName: xcodeParams.xcodeApp,
       interpretTargetAsRegEx: false,
       cleanBeforeBuild: true,
       allowFailingBuildResults: false,
@@ -252,7 +253,6 @@ pipeline {
 
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
-                        sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
                         sh "source ~/.bash_profile; cd Depo; pod install" // --repo-update occasionally
                         apps.each { app ->
                             runXcode(app, 'test')
