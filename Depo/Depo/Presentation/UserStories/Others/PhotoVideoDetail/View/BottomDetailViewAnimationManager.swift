@@ -26,7 +26,7 @@ enum CardState {
     }
 }
 
-protocol BottomDetailViewAnimationManagerDelegate: class {
+protocol BottomDetailViewAnimationManagerDelegate {
     func getSelectedIindex() -> Int
     func getObjectsCount() -> Int
     func getIsFullScreenState() -> Bool
@@ -53,23 +53,23 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
         
     private var isFullScreen: Bool {
         get {
-            self.delegate?.getIsFullScreenState() ?? false
+            delegate.getIsFullScreenState()
         }
         set {
-            self.delegate?.setIsFullScreenState(newValue)
+            delegate.setIsFullScreenState(newValue)
         }
     }
     
     private var selectedIndex: Int {
         get {
-            delegate?.getSelectedIindex() ?? 0
+            delegate.getSelectedIindex()
         }
         set {
-            delegate?.setSelectedIndex(newValue)
+            delegate.setSelectedIndex(newValue)
         }
     }
     
-    private weak var delegate: BottomDetailViewAnimationManagerDelegate?
+    var delegate: BottomDetailViewAnimationManagerDelegate
 
     private var viewState: CardState = .collapsed
     private var gestureBeginLocation: CGPoint = .zero
@@ -120,7 +120,10 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
     }
     
     private func getCellMaxY() -> CGFloat {
-        collectionView.cellForItem(at: IndexPath(row: selectedIndex, section: .zero))?.frame.maxY ?? .zero
+        guard let cell = collectionView.cellForItem(at: IndexPath(row: selectedIndex, section: 0)) as? PhotoVideoDetailCell else {
+            return .zero
+        }
+        return cell.frame.maxY
     }
     
     private func setupDetailViewAlpha(isHidden: Bool) {
@@ -279,7 +282,6 @@ extension BottomDetailViewAnimationManager {
         viewState = .expanded
         managedView.frame.origin.y = yPositionForBottomView
         collectionView.frame.origin.y = yPositionForBottomView - collectionViewCellMaxY + imageMaxY
-        stopVideoIfNeeded()
     }
     
     private func setFullState() {
@@ -291,12 +293,6 @@ extension BottomDetailViewAnimationManager {
         collapseView.isHidden = false
         setupDetailViewAlpha(isHidden: false)
         isFullScreen = true
-    }
-    
-    private func stopVideoIfNeeded() {
-        if let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: .zero)) as? VideoInterruptable {
-            cell.stop()
-        }
     }
     
     func showDetailView() {
@@ -344,17 +340,12 @@ extension BottomDetailViewAnimationManager {
     }
 
     private func scroll(to index: Int) {
-        guard let objectsCount = delegate?.getObjectsCount(), objectsCount > 0 else {
-            collectionView.setContentOffset(.zero, animated: true)
+        guard 0..<delegate.getObjectsCount() ~= index else {
             return
         }
         
-        guard 0..<objectsCount ~= index else {
-            return
-        }
-        
-        let cell = collectionView.visibleCells.first as? CellConfigurable
-        cell?.responder = self
+        let cell = collectionView.visibleCells.first as? PhotoVideoDetailCell
+        cell?.delegate = self
         let offsetY = collectionView.contentOffset.y
         selectedIndex = index
         
