@@ -546,6 +546,7 @@
 "Lifebox can sync your files automatically." = "Lifebox puede sincronizar sus archivos automáticamente.\nPara habilitar la sincronización en segundo plano de sus fotos y videos, asegúrese de que su permiso de ubicación esté establecido en \"SIEMPRE\" en el menú \"configuración del dispositivo-lifebox-ubicación\".";
 "Get Started" = "Iniciar";
 "I have read and accepted terms of use" = "He leído y acepto los términos de uso";
+"Welcome to Lifebox!" = "¡Bienvenido a Lifebox!";
 "You need to confirm the User Agreement to continue." = "Debe confirmar el Acuerdo de Usuario para continuar.";
 "PhotosAndViedos" = "Fotos y videos";
 "Are these the same person?" = "¿Son la misma persona?";
@@ -1634,12 +1635,12 @@
 "contact_phase2_error_backup_title" = "¡Copia de seguridad fallida!";
 "contact_phase2_error_restore_title" = "¡La transferencia al teléfono ha fallado!";
 "contact_phase2_error_delete_title" = "¡El proceso de eliminación ha fallado!";
-"gallery_filter_all" = "";
-"gallery_filter_synced" = "";
-"gallery_filter_unsynced" = "";
-"gallery_filter_action_sheet_all" = "";
-"gallery_filter_action_sheet_synced" = "";
-"gallery_filter_action_sheet_unsynced" = "";
+"gallery_filter_all" = "Mostrar: Todo";
+"gallery_filter_synced" = "Mostrar: Elementos respaldados";
+"gallery_filter_unsynced" = "Mostrar: Elementos que no se han respaldado";
+"gallery_filter_action_sheet_all" = "Todos";
+"gallery_filter_action_sheet_synced" = "Elementos respaldados";
+"gallery_filter_action_sheet_unsynced" = "Elementos que no se han respaldado";
 "contact_phase2_error_quota_restore" = "No puede continuar el proceso porque no hay espacio en el área de almacenamiento. Puede aumentar su capacidad de almacenamiento o puede crear espacio libre eliminando los archivos existentes en su almacenamiento.";
 "contact_phase2_error_quota_backup" = "No puede continuar el proceso porque no hay espacio en el área de almacenamiento. Puede aumentar su capacidad de almacenamiento o puede crear espacio libre eliminando los archivos existentes en su almacenamiento.";
 "contact_phase2_error_message" = "Ha ocurrido un error temporal. Inténtalo de nuevo.";
@@ -1648,4 +1649,5 @@
 "contact_phase2_result_delete_backup_nav_bar_title" = "Eliminar Copia de Seguridad";
 "contact_phase2_result_delete_duplicates_nav_bar_title" = "Eliminar las Entradas Repetidas";
 "contact_phase2_result_delete_all_contacts_nav_bar_title" = "Eliminar Contactos";
-"eula_title" = "";
+"eula_title" = "Acuerdo del Usuario";
+"photo_video_empty_no_unsync_photos_title" = "Todos los archivos están respaldados.";
