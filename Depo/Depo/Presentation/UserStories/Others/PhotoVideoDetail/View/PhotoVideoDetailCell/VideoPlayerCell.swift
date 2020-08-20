@@ -42,6 +42,7 @@ final class VideoPlayerCell: UICollectionViewCell {
         super.prepareForReuse()
         player.replaceCurrentItem(with: nil)
         avpController.player = nil
+        previewImageView.cancelLoadRequest()
         previewImageView.isHidden = false
     }
     
@@ -130,7 +131,6 @@ final class VideoPlayerCell: UICollectionViewCell {
             DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 let playerItem = AVPlayerItem(url: url)
                 self?.delegate?.imageLoadingFinished()
-                debugLog("playerItem created \(playerItem.asset.isPlayable)")
                 DispatchQueue.main.async {
                     self?.play(item: playerItem)
                 }
