@@ -15,22 +15,16 @@ protocol VideoInterruptable {
 }
 
 final class VideoPlayerCell: UICollectionViewCell {
-
-    private static let fullScreenSelector: Selector = {
-        let name: String
-        if #available(iOS 11.3, *) {
-            name = "_transitionToFullScreenAnimated:interactive:completionHandler:"
-        } else {
-            name = "_transitionToFullScreenAnimated:completionHandler:"
-        }
-        return NSSelectorFromString(name)
-    }()
-
+    
     private weak var delegate: PhotoVideoDetailCellDelegate?
-    private let avpController = FixedAVPlayerViewController()
-    private var player = AVPlayer()
-
-    private let previewImageView = LoadingImageView()
+    private var avpController = FixedAVPlayerViewController()
+    private var player:AVPlayer? {
+        willSet {
+            if newValue == nil {
+                avpController.player = nil
+            }
+        }
+    }
 
     //MARK: - Life Cycle
     override func awakeFromNib() {
@@ -40,25 +34,11 @@ final class VideoPlayerCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        player.replaceCurrentItem(with: nil)
-        avpController.player = nil
-        previewImageView.isHidden = false
+        player = nil
     }
-    
-    override func observeValue(
-        forKeyPath keyPath: String?,
-        of object: Any?,
-        change: [NSKeyValueChangeKey : Any]?,
-        context: UnsafeMutableRawPointer?
-    ) {
-        if object as AnyObject? === player, keyPath == "timeControlStatus", player.timeControlStatus != .paused, player.status == .readyToPlay {
-            enterFullscreen(playerViewController: avpController)
-            previewImageView.isHidden = true
-        }
-    }
-    
+ 
     //MARK: - Utility methods(Private)
-    private func setup() {
+    private func setup(){
         if let view = avpController.view {
             self.contentView.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -95,13 +75,12 @@ final class VideoPlayerCell: UICollectionViewCell {
             object: nil
         )
     }
-
-    private func configurePlayerObserver() {
-        player.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-    }
     
-    private func prepareForPlayVideo(file: Item) {
-        previewImageView.loadImageIncludingGif(with: file)
+    private func prepareForPlayVideo( file: Item) {
+        guard let url = file.metaData?.videoPreviewURL ?? file.urlToFile else {
+            return
+        }
+        
         switch file.patchToPreview {
         case let .localMediaContent(local):
             guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
@@ -125,60 +104,25 @@ final class VideoPlayerCell: UICollectionViewCell {
                 }
             }
         case .remoteUrl(_):
-            guard let url = file.urlToFile else { return }
             debugLog("about to play remote video item")
-            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            DispatchQueue.global(qos: .default).async { [weak self] in
                 let playerItem = AVPlayerItem(url: url)
-                self?.delegate?.imageLoadingFinished()
                 debugLog("playerItem created \(playerItem.asset.isPlayable)")
                 DispatchQueue.main.async {
                     self?.play(item: playerItem)
                 }
             }
         }
-        
-    }
-    
-    private func addPreviewToVideo(){
-        print(avpController.view.frame, previewImageView.frame)
-        avpController.contentOverlayView?.addSubview(previewImageView)
-        previewImageView.translatesAutoresizingMaskIntoConstraints = false
-        previewImageView.contentMode = .scaleAspectFit
-        previewImageView.clipsToBounds = true
-        NSLayoutConstraint.activate(
-            [
-                previewImageView.topAnchor.constraint(
-                    equalTo: self.contentView.topAnchor,
-                    constant: NumericConstants.navigationBarHeight
-                ),
-                previewImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-                previewImageView.widthAnchor.constraint(equalToConstant: avpController.view.frame.width),
-                previewImageView.heightAnchor.constraint(equalToConstant: avpController.view.frame.height)
-            ]
-        )
-        print("After:", avpController.view.frame, previewImageView.frame)
     }
     
     private func play(item: AVPlayerItem) {
         player = AVPlayer(playerItem: item)
-        addPreviewToVideo()
         avpController.player = player
-        configurePlayerObserver()
-    }
-    
-    func didEndDisplaying() {
-        avpController.player = nil
     }
     
     @objc private func deinitPlayer(){
-        avpController.player = nil
-    }
-    
-    /// https://stackoverflow.com/a/51618451
-    private func enterFullscreen(playerViewController: AVPlayerViewController) {
-        if playerViewController.responds(to: VideoPlayerCell.fullScreenSelector) {
-            playerViewController.perform(VideoPlayerCell.fullScreenSelector, with: true, with: nil)
-        }
+        self.player?.replaceCurrentItem(with: nil)
+        self.player = nil
     }
 }
 
@@ -199,9 +143,10 @@ extension VideoPlayerCell: CellConfigurable {
 
 extension VideoPlayerCell: VideoInterruptable {
     @objc func stop() {
-        guard player.timeControlStatus != .paused else {
+        guard player?.timeControlStatus != .paused else {
             return
         }
-        player.pause()
+        player?.pause()
     }
 }
+
