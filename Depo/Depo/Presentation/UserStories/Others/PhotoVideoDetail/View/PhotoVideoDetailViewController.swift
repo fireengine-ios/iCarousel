@@ -120,7 +120,9 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isHidden = true
         
-        navigationItem.leftBarButtonItem = BackButtonItem(action: hideView)
+        navigationItem.leftBarButtonItem = BackButtonItem { [weak self] in
+            self?.hideView()
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
         showSpinner()
