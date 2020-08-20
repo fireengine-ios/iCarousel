@@ -26,7 +26,7 @@ enum CardState {
     }
 }
 
-protocol BottomDetailViewAnimationManagerDelegate: class {
+protocol BottomDetailViewAnimationManagerDelegate {
     func getSelectedIindex() -> Int
     func getObjectsCount() -> Int
     func getIsFullScreenState() -> Bool
@@ -53,23 +53,23 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
         
     private var isFullScreen: Bool {
         get {
-            self.delegate?.getIsFullScreenState() ?? false
+            delegate.getIsFullScreenState()
         }
         set {
-            self.delegate?.setIsFullScreenState(newValue)
+            delegate.setIsFullScreenState(newValue)
         }
     }
     
     private var selectedIndex: Int {
         get {
-            delegate?.getSelectedIindex() ?? 0
+            delegate.getSelectedIindex()
         }
         set {
-            delegate?.setSelectedIndex(newValue)
+            delegate.setSelectedIndex(newValue)
         }
     }
     
-    private weak var delegate: BottomDetailViewAnimationManagerDelegate?
+    var delegate: BottomDetailViewAnimationManagerDelegate
 
     private var viewState: CardState = .collapsed
     private var gestureBeginLocation: CGPoint = .zero
@@ -340,12 +340,7 @@ extension BottomDetailViewAnimationManager {
     }
 
     private func scroll(to index: Int) {
-        guard let objectsCount = delegate?.getObjectsCount(), objectsCount > 0 else {
-            collectionView.setContentOffset(.zero, animated: true)
-            return
-        }
-        
-        guard 0..<objectsCount ~= index else {
+        guard 0..<delegate.getObjectsCount() ~= index else {
             return
         }
         
