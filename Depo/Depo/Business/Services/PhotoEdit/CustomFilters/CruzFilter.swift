@@ -26,7 +26,7 @@ final class MPCruzFilter: CustomFilterProtocol {
         }
         
         let output = inputImage
-            .adjusting(saturation: -100/255)
+            .adjusting(saturation: -100/100)
             .adjusting(contrast: 1.3)
             .adjusting(brightness: 20/255)
         
