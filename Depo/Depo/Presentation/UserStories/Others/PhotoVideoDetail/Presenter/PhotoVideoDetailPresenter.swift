@@ -19,6 +19,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     var alertSheetExcludeTypes = [ElementTypes]()
     
     var item: Item?
+    private var allSelectedItemsTypes: [FileType]?
     
     var canLoadMoreItems = true
     
@@ -72,8 +73,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             }
             let allSelectedItemsTypes = selectedItems.map { $0.fileType }
             
-            let barConfig = self.prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: index)
-            self.bottomBarPresenter?.setupTabBarWith(config: barConfig)
+            if self.allSelectedItemsTypes != allSelectedItemsTypes {
+                let barConfig = self.prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: index)
+                self.bottomBarPresenter?.setupTabBarWith(config: barConfig)
+                self.allSelectedItemsTypes = allSelectedItemsTypes
+            }
+            
             self.view.onItemSelected(at: index, from: items)
         }
     }

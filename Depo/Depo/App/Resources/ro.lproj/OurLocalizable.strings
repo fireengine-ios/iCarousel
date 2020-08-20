@@ -522,6 +522,7 @@
 "Lifebox can sync your files automatically." = "lifebox poate sincroniza fișierele tale automat.\nPentru a activa sincronizarea în fundal a fotografiilor și videoclipurilor dvs., vă rugăm să vă asigurați că permisiunea dvs. pentru locație este setată „ÎNTOTDEAUNA” sub meniul „Setări dispozitiv-salvare locație”.";
 "Get Started" = "Să începem";
 "I have read and accepted terms of use" = "Am citit și accept termenii de utilizare";
+"Welcome to Lifebox!" = "Bine ai venit în lifebox!";
 "You need to confirm the User Agreement to continue." = "Pentru a continua, e nevoie să confirmi Acordul de Utilizare.";
 "PhotosAndViedos" = "Fotografii și clipuri Video";
 "Are these the same person?" = "Sunt aceeași persoană?";
@@ -1607,3 +1608,4 @@
 "contact_phase2_result_delete_duplicates_nav_bar_title" = "Șterge duplicatele";
 "contact_phase2_result_delete_all_contacts_nav_bar_title" = "Șterge Persoanele de Contact";
 "eula_title" = "";
+"photo_video_empty_no_unsync_photos_title" = "";
