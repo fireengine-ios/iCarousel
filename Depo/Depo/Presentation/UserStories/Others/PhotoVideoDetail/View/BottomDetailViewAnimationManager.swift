@@ -26,7 +26,7 @@ enum CardState {
     }
 }
 
-protocol BottomDetailViewAnimationManagerDelegate {
+protocol BottomDetailViewAnimationManagerDelegate: class {
     func getSelectedIindex() -> Int
     func getObjectsCount() -> Int
     func getIsFullScreenState() -> Bool
@@ -53,23 +53,23 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
         
     private var isFullScreen: Bool {
         get {
-            delegate.getIsFullScreenState()
+            self.delegate?.getIsFullScreenState() ?? false
         }
         set {
-            delegate.setIsFullScreenState(newValue)
+            self.delegate?.setIsFullScreenState(newValue)
         }
     }
     
     private var selectedIndex: Int {
         get {
-            delegate.getSelectedIindex()
+            delegate?.getSelectedIindex() ?? 0
         }
         set {
-            delegate.setSelectedIndex(newValue)
+            delegate?.setSelectedIndex(newValue)
         }
     }
     
-    var delegate: BottomDetailViewAnimationManagerDelegate
+    private weak var delegate: BottomDetailViewAnimationManagerDelegate?
 
     private var viewState: CardState = .collapsed
     private var gestureBeginLocation: CGPoint = .zero
@@ -120,10 +120,7 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
     }
     
     private func getCellMaxY() -> CGFloat {
-        guard let cell = collectionView.cellForItem(at: IndexPath(row: selectedIndex, section: 0)) as? PhotoVideoDetailCell else {
-            return .zero
-        }
-        return cell.frame.maxY
+        collectionView.cellForItem(at: IndexPath(row: selectedIndex, section: .zero))?.frame.maxY ?? .zero
     }
     
     private func setupDetailViewAlpha(isHidden: Bool) {
@@ -340,7 +337,8 @@ extension BottomDetailViewAnimationManager {
     }
 
     private func scroll(to index: Int) {
-        guard 0..<delegate.getObjectsCount() ~= index else {
+        guard let objectsCount = delegate?.getObjectsCount(), objectsCount > 0 else {
+            collectionView.setContentOffset(.zero, animated: true)
             return
         }
         
