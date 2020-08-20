@@ -83,8 +83,10 @@ final class PhotoEditViewController: ViewController, NibInit {
             switch index {
             case 0:
                 self.finishedEditing?(self, .savedAs(image: self.sourceImage))
-            default:
+            case 1:
                 self.resetToOriginal()
+            default:
+                break
             }
         }
         present(controller, animated: false)
