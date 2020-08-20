@@ -162,7 +162,7 @@ sent to your phone number %@"*/
 "Download" = "Télécharger";
 "Sync" = "Synchroniser";
 "Move" = "Déplacer";
-"Edit" = "Éditer";
+"Edit" = "Modifier";
 "Share" = "Partager";
 "Wait for a Wi-Fi Connection" = "Attente d’une connexion Wi-Fi";
 "Auto Sync Preparation" = "Préparation à la Sync. Auto.";
@@ -300,7 +300,7 @@ Is it "Use "this" to be the album cover?*/
 "File Info" = "Informations sur le Fichier";
 "File Name" = "Nom du Fichier";
 "Data is not correct" = "Les données ne sont pas correctes";
-"Done" = "Fait";
+"Done" = "Enregistrer";
 "I want to change my password" = "Je souhaite changer mon mot de passe";
 "We promise, we won’t sent you spam." = "Promis, nous ne vous enverrons pas de spams.";
 
@@ -328,9 +328,9 @@ Is it "Use "this" to be the album cover?*/
 "Upload Photo" = "Télécharger les Photos";
 "Back to Lifebox" = "Retour à lifebox ";
 "Start adding your documents" = "Commencer à ajouter vos documents";
-"You don’t have any documents on your Lifebox yet." = "Vous n’avez encore aucun documents dans lifebox.";
+"You don’t have any documents on your Lifebox yet." = "Commencez à ajouter vos documents";
 "Start adding your music" = "Commencez à ajouter votre musique.";
-"You don’t have any music on your Lifebox yet." = "Vous n’avez pas encore de musique dans lifebox.";
+"You don’t have any music on your Lifebox yet." = "Commencez à ajouter votre Musique";
 "info" = "Info";
 "Enable photo permissions in settings" = "Activer les autorisations photo dans les paramètres";
 "Start adding your photos" = "Commencer à ajouter vos photos";
@@ -673,17 +673,10 @@ English is correct. GSM may be confusing to the customer*/
 /*Suggested: "lifebox can sync your files, photos and videos automatically."
 
 Comma added*/
-"Lifebox can sync your files automatically." = "Lifebox peut synchroniser vos fichiers, photos et vidéos automatiquement.\nPour activer la synchronisation en arrière-plan de vos photos et vidéos, assurez-vous que votre autorisation d'emplacement est réglée sur \"TOUJOURS\" dans le menu \"Paramètres du périphérique-lifebox-location\".";
-"Get Started" = "Commencer";
-"I have read and accepted terms of use" = "J'ai lu et accepté les conditions d'utilisation";
-"You need to confirm the User Agreement to continue." = "Vous devez confirmer le Contrat d’Utilisation pour continuer.";
-"PhotosAndViedos" = "Photos et Vidéos";
-"Are these the same person?" = "S'agit-il de la même personne ?";
-"We couldn't find anybody on your Lifebox yet." = "Nous n’avons trouvé aucune personne dans votre lifebox.";
-"Grouping of your photos will take some time. Please wait and then check the albums." = "Le regroupement de vos photos prendra un certain temps. Veuillez patienter puis vérifiez les albums créés s'il vous plaît.";
 "Lifebox can sync your files automatically." = "lifebox peut synchroniser vos fichiers, photos et vidéos automatiquement.\nPour activer la synchronisation en arrière-plan de vos photos et vidéos, assurez-vous que votre autorisation de géolocalisation est réglée sur \"TOUJOURS\" dans le menu \"Paramètres du périphérique-lifebox-géolocalisation\".";
 "Get Started" = "Commencer";
 "I have read and accepted terms of use" = "J'ai lu et accepte les conditions d'utilisation";
+"Welcome to Lifebox!" = "Bienvenue dans lifebox !";
 "You need to confirm the User Agreement to continue." = "Vous devez accepter le contrat d’utilisation pour continuer.";
 "PhotosAndViedos" = "Photos et Vidéos";
 "Are these the same person?" = "S'agit-il de la même personne ?";
@@ -768,7 +761,7 @@ Full stop added*/
 "Delete all" = "Tout supprimer";
 "Keep" = "Garder";
 "Duplicated Contacts" = "Contacts en doublon";
-"Free" = "Libre";
+"Free" = "Gratuit";
 "%d%% Backed up…" = "%d%%  Sauvegardé...";
 "%d%% Restored…" = "%d%%  Restauré...";
 "%d%% Analyzed…" = "%d%% Analysé...";
@@ -811,7 +804,7 @@ Full stop added*/
 "LifeboxSmallPopUpSubTitle" = "Découvrez les options d'augmentation de votre espace de stockage !";
 "LifeboxSmallPopUpCheckBoxTex" = "Ne plus afficher";
 "LifeboxSmallPopUpFirstButtonText" = "OK";
-"LifeboxSmallPopUpSecondButtonText" = "MISE À NIVEAU";
+"LifeboxSmallPopUpSecondButtonText" = "Détails";
 
 /*What does this mean?*/
 "has_remained_lifebox_usage" = "\"%@ de %@ est resté (seulement pour l'utilisation de lifebox )";
@@ -1857,7 +1850,7 @@ Please check I have understood the intended command here*/
 "contact_phase2_contact_detail_section_birthday" = "Anniversaire";
 "contact_phase2_contact_detail_section_notes" = "Remarques";
 "contact_phase2_contact_detail_no_info" = "Aucun enregistrement sauvegardé";
-"Off" = "Fermé";
+"Off" = "Jamais";
 "contact_phase2_backup_contacts_title" = "Sauvegardez Vos Contacts";
 "contact_phase2_backup_contacts_message" = "Votre répertoire téléphonique est également en sécurité dans lifebox! Vous pouvez joindre vos contacts de n'importe où, sur n'importe quel appareil.";
 "contact_phase2_backup_contacts_button" = "Sauvegarder Maintenant";
@@ -1906,12 +1899,12 @@ Please check I have understood the intended command here*/
 "contact_phase2_error_backup_title" = "La sauvegarde a échoué!";
 "contact_phase2_error_restore_title" = "Le transfert vers le téléphone a échoué!";
 "contact_phase2_error_delete_title" = "La suppression a échoué!";
-"gallery_filter_all" = "";
-"gallery_filter_synced" = "";
-"gallery_filter_unsynced" = "";
-"gallery_filter_action_sheet_all" = "";
-"gallery_filter_action_sheet_synced" = "";
-"gallery_filter_action_sheet_unsynced" = "";
+"gallery_filter_all" = "Afficher: Tout";
+"gallery_filter_synced" = "Afficher: Éléments sauvegardés";
+"gallery_filter_unsynced" = "Afficher: Éléments non sauvegardés";
+"gallery_filter_action_sheet_all" = "Tout";
+"gallery_filter_action_sheet_synced" = "Éléments sauvegardés";
+"gallery_filter_action_sheet_unsynced" = "Éléments non sauvegardés";
 "contact_phase2_error_quota_restore" = "Vous ne pouvez pas continuer l’opération car il n'y a pas d'espace de stockage. Vous pouvez mettre à niveau votre espace de stockage ou supprimer des fichiers et libérer de place dans votre espace de stockage.";
 "contact_phase2_error_quota_backup" = "Vous ne pouvez pas continuer l’opération car il n'y a pas d'espace de stockage. Vous pouvez mettre à niveau votre espace de stockage ou supprimer des fichiers et libérer de place dans votre espace de stockage.";
 "contact_phase2_error_message" = "Une erreur temporaire s'est produite. Veuillez réessayer.";
@@ -1920,4 +1913,5 @@ Please check I have understood the intended command here*/
 "contact_phase2_result_delete_backup_nav_bar_title" = "Supprimer la Sauvegarde";
 "contact_phase2_result_delete_duplicates_nav_bar_title" = "Supprimer Ceux Qui Répètent";
 "contact_phase2_result_delete_all_contacts_nav_bar_title" = "Supprimer les Contacts";
-"eula_title" = "";
+"eula_title" = "Accord de l'utilisateur";
+"photo_video_empty_no_unsync_photos_title" = "Tous les fichiers sont sauvegardés.";

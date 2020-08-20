@@ -534,6 +534,7 @@
 "Lifebox can sync your files automatically." = "يمكن للايف بوكس مزامنة الملفات تلقائياً.\nلتمكين مزامنة الخلفية لصورك ومقاطع الفيديو الخاصة بك ، يرجى التأكد من تعيين إذن الموقع الخاص بك إلى \"ALWAYS\" ضمن قائمة \"إعدادات الجهاز - موقع lifebox- الموقع\".";
 "Get Started" = "بدء الاستعمال";
 "I have read and accepted terms of use" = "قرأتُ شروط الاستعمال وأوافق عليها.";
+"Welcome to Lifebox!" = "مرحباً بك في لايف بوكس!";
 "You need to confirm the User Agreement to continue." = "يرجى تأكيد اتفاقية المستخدم وقبولها للمتابعة.";
 "PhotosAndViedos" = "الصور ومقاطع الفيديو";
 "Are these the same person?" = "أهو الشخص نفسه؟";
@@ -1604,12 +1605,12 @@
 "contact_phase2_error_backup_title" = "لم يتم التمكن من القيام بالنسخ الاحتياطي!";
 "contact_phase2_error_restore_title" = "لم يتم التمكن من القيام بالنقل إلى الهاتف!";
 "contact_phase2_error_delete_title" = "لم يتم التمكن من القيام بعملية المسح!";
-"gallery_filter_all" = "";
-"gallery_filter_synced" = "";
-"gallery_filter_unsynced" = "";
-"gallery_filter_action_sheet_all" = "";
-"gallery_filter_action_sheet_synced" = "";
-"gallery_filter_action_sheet_unsynced" = "";
+"gallery_filter_all" = "اعرض:الجميع";
+"gallery_filter_synced" = "اعرض:العناصر التي تم نسخها احتياطيا";
+"gallery_filter_unsynced" = "اعرض: العناصر التي لم يتم نسخها احتياطيا";
+"gallery_filter_action_sheet_all" = "الجميع";
+"gallery_filter_action_sheet_synced" = "العناصر التي تم نسخها احتياطيا";
+"gallery_filter_action_sheet_unsynced" = "العناصر التي لم يتم نسخها احتياطيا";
 "contact_phase2_error_quota_restore" = "لا يمكنك الاستمرار بالعملية بسبب عدم تواجد مكان فارغ بمساحة التخزين.يمكنك رفع مساحة التخزين أو يمكنك فتح مكان بمساحة التخزين من خلال مسح ملفاتك.";
 "contact_phase2_error_quota_backup" = "لا يمكنك الاستمرار بالعملية بسبب عدم تواجد مكان فارغ بمساحة التخزين.يمكنك رفع مساحة التخزين أو يمكنك فتح مكان بمساحة التخزين من خلال مسح ملفاتك.";
 "contact_phase2_error_message" = "حدثخطأمؤقت.من فضلكحاولمرةاخرى.";
@@ -1618,4 +1619,5 @@
 "contact_phase2_result_delete_backup_nav_bar_title" = "امسح النسخة الاحتياطية";
 "contact_phase2_result_delete_duplicates_nav_bar_title" = "امسح المتكرر";
 "contact_phase2_result_delete_all_contacts_nav_bar_title" = "امسح جهات الاتصال";
-"eula_title" = "";
+"eula_title" = "اتفاقية المستخدم";
+"photo_video_empty_no_unsync_photos_title" = "جميع المستندات تم نسخها احتياطيا";
