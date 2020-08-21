@@ -29,6 +29,8 @@ final class PreparedFilterSliderView: UIView, NibInit {
     
     private func setup(filter: CustomFilterProtocol, delegate: PreparedFilterSliderViewDelegate?) {
         backgroundColor = ColorConstants.filterBackColor
+        sliderContentView.backgroundColor = ColorConstants.filterBackColor
+        
         self.filter = filter
         self.delegate = delegate
 

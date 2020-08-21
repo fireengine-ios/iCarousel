@@ -142,10 +142,22 @@ final class PreparedFiltersView: UIView, NibInit {
             return
         }
         filtersData = manager.filteredPreviews(image: previewImage)
+        selectOriginal(animated: false)
     }
     
     @objc private func onSwitchFilterCategory(_ sender: FilterCategoryButton) {
 //        selectedCategory = sender.category
+    }
+    
+    func resetToOriginal() {
+        selectOriginal(animated: true)
+    }
+    
+    private func selectOriginal(animated: Bool) {
+        if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+            collectionView.deselectItem(at: indexPath, animated: animated)
+        }
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: animated)
     }
 }
 
@@ -184,6 +196,7 @@ extension PreparedFiltersView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             delegate?.didSelectOriginal()
+            collectionView.deselectItem(at: indexPath, animated: true)
         } else if let type = filters[safe: indexPath.item - 1] {
             delegate?.didSelectFilter(type)
         }
