@@ -54,7 +54,6 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="0n3-IS-eVE"/>
                         <constraint firstItem="bBm-Ct-o7t" firstAttribute="leading" secondItem="nFk-JH-Rpa" secondAttribute="leading" id="8pb-Fw-LLZ"/>
                         <constraint firstItem="PiM-mg-5MO" firstAttribute="width" secondItem="nFk-JH-Rpa" secondAttribute="width" multiplier="1:1" id="Pri-tH-A3c"/>
                         <constraint firstAttribute="trailing" secondItem="bBm-Ct-o7t" secondAttribute="trailing" id="TPg-8f-Rkc"/>
@@ -87,6 +86,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6eJ-04-lW6" secondAttribute="trailing" id="ajg-OA-4V3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="BUf-nW-9bz" secondAttribute="bottom" id="avk-7L-lpu"/>
                 <constraint firstItem="U8f-ha-09S" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="eY9-EN-LaD"/>
+                <constraint firstItem="nFk-JH-Rpa" firstAttribute="height" relation="lessThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.3" id="jIy-A0-pIH"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="BUf-nW-9bz" secondAttribute="trailing" id="uCb-zo-rfO"/>
                 <constraint firstItem="6eJ-04-lW6" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="vQ0-oZ-1Xk"/>
                 <constraint firstItem="SgF-7J-zsa" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="vgu-dY-T1d"/>

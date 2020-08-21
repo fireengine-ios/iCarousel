@@ -38,6 +38,7 @@ final class HSLView: AdjustmentsView, NibInit {
         colorAssets.showsHorizontalScrollIndicator = false
         colorAssets.backgroundColor = ColorConstants.filterBackColor
         colorAssets.register(nibCell: ColorCell.self)
+        colorAssets.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: 8)
     }
     
     override func setup(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) {
@@ -50,6 +51,15 @@ final class HSLView: AdjustmentsView, NibInit {
             contentView.insertArrangedSubview(view, at: $0.offset)
         }
     }
+    
+    override func sliderValueChanged(newValue: Float, type: AdjustmentParameterType) {
+        guard let index = adjustments.firstIndex(where: { $0.type == type}) else {
+            return
+        }
+
+        adjustments[index] = AdjustmentParameterValue(type: type, value: newValue)
+        delegate?.didChangeAdjustments(adjustments)
+    }
 }
 
 extension HSLView: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -60,20 +70,11 @@ extension HSLView: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(cell: ColorCell.self, for: indexPath)
-        cell.setup(color: colors[indexPath.row], isSelected: selectedIndex == indexPath.row)
+        cell.setup(color: colors[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard indexPath.row != selectedIndex else {
-            return
-        }
         
-        if let selectedIndex = selectedIndex {
-            (collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: 0)) as? ColorCell)?.setSelected(false)
-        }
-
-        selectedIndex = indexPath.row
-        (collectionView.cellForItem(at: indexPath) as? ColorCell)?.setSelected(true)
     }
 }

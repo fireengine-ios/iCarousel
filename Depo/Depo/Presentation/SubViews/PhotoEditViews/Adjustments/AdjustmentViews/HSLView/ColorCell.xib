@@ -17,6 +17,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="236" height="144"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPv-va-E4d">
+                        <rect key="frame" x="100" y="54" width="36" height="36"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fV4-yh-olZ">
                         <rect key="frame" x="103" y="57" width="30" height="30"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -28,12 +32,17 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="fV4-yh-olZ" firstAttribute="centerY" secondItem="909-nW-OGx" secondAttribute="centerY" id="6Rp-VE-iSc"/>
+                    <constraint firstItem="hPv-va-E4d" firstAttribute="centerX" secondItem="fV4-yh-olZ" secondAttribute="centerX" id="N4A-uK-i1J"/>
                     <constraint firstItem="fV4-yh-olZ" firstAttribute="centerX" secondItem="909-nW-OGx" secondAttribute="centerX" id="V56-5H-wCa"/>
+                    <constraint firstItem="hPv-va-E4d" firstAttribute="width" secondItem="fV4-yh-olZ" secondAttribute="width" constant="6" id="WHc-kw-Azl"/>
+                    <constraint firstItem="hPv-va-E4d" firstAttribute="centerY" secondItem="fV4-yh-olZ" secondAttribute="centerY" id="uKI-WT-DDr"/>
+                    <constraint firstItem="hPv-va-E4d" firstAttribute="height" secondItem="fV4-yh-olZ" secondAttribute="height" constant="6" id="wAf-fh-pOb"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="236" height="144"/>
             <connections>
                 <outlet property="colorView" destination="fV4-yh-olZ" id="38V-gO-YYz"/>
+                <outlet property="selectedView" destination="hPv-va-E4d" id="HGf-nV-VCy"/>
             </connections>
             <point key="canvasLocation" x="-143.47826086956522" y="115.84821428571428"/>
         </collectionViewCell>

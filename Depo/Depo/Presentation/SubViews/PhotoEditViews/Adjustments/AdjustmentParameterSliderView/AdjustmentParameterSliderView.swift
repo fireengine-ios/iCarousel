@@ -61,7 +61,7 @@ final class AdjustmentParameterSliderView: UIView, NibInit {
         if slider.superview == nil {
             sliderContentView.addSubview(slider)
             slider.translatesAutoresizingMaskIntoConstraints = false
-            slider.pinToSuperviewEdges()
+            slider.pinToSuperviewEdges(offset: UIEdgeInsets(topBottom: 0, rightLeft: 8))
         }
         
         slider.setup(minValue: parameter.minValue,

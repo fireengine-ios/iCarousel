@@ -21,13 +21,13 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="29"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GdM-VB-OZp">
-                                    <rect key="frame" x="8" y="0.0" width="42" height="29"/>
+                                    <rect key="frame" x="16" y="0.0" width="42" height="29"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCw-WG-At2">
-                                    <rect key="frame" x="364" y="0.0" width="42" height="29"/>
+                                    <rect key="frame" x="356" y="0.0" width="42" height="29"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -40,8 +40,8 @@
                                 <constraint firstAttribute="bottom" secondItem="GdM-VB-OZp" secondAttribute="bottom" id="mLi-ps-mNl"/>
                                 <constraint firstItem="qCw-WG-At2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GdM-VB-OZp" secondAttribute="trailing" constant="16" id="oKV-db-plx"/>
                                 <constraint firstAttribute="bottom" secondItem="qCw-WG-At2" secondAttribute="bottom" id="pvN-fe-dIk"/>
-                                <constraint firstItem="GdM-VB-OZp" firstAttribute="leading" secondItem="VfK-jy-K9Y" secondAttribute="leading" constant="8" id="tM9-nY-XX6"/>
-                                <constraint firstAttribute="trailing" secondItem="qCw-WG-At2" secondAttribute="trailing" constant="8" id="u7U-YL-4Yh"/>
+                                <constraint firstItem="GdM-VB-OZp" firstAttribute="leading" secondItem="VfK-jy-K9Y" secondAttribute="leading" constant="16" id="tM9-nY-XX6"/>
+                                <constraint firstAttribute="trailing" secondItem="qCw-WG-At2" secondAttribute="trailing" constant="16" id="u7U-YL-4Yh"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dB0-I4-r1x">

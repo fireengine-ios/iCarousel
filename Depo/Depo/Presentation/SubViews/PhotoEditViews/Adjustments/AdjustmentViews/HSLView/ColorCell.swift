@@ -16,19 +16,31 @@ final class ColorCell: UICollectionViewCell {
             newValue.layer.cornerRadius = newValue.frame.height * 0.5
         }
     }
+    
+    @IBOutlet private weak var selectedView: UIView! {
+        willSet {
+            newValue.layer.masksToBounds = true
+            newValue.layer.borderWidth = 2
+            newValue.layer.cornerRadius = newValue.frame.height * 0.5
+            newValue.backgroundColor = .clear
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            selectedView.isHidden = !isSelected
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.backgroundColor = ColorConstants.filterBackColor
     }
     
-    func setup(color: UIColor, isSelected: Bool) {
-        setSelected(isSelected)
+    func setup(color: UIColor) {
         colorView.backgroundColor = color
+        selectedView.layer.borderColor = color.cgColor
+        selectedView.isHidden = !isSelected
     }
-    
-    func setSelected(_ isSelected: Bool) {
-        contentView.layer.borderColor = isSelected ? UIColor.blue.cgColor : ColorConstants.filterBackColor.cgColor
-        contentView.layer.borderWidth = 2
-    }
+
 }
