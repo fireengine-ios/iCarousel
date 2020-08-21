@@ -14,6 +14,7 @@ final class AdjustmentManager {
     private static func adjustment(type: AdjustmentType) -> AdjustmentProtocol? {
         var parameters = [AdjustmentParameterProtocol]()
         var thirdPartyAdjustment: ThirdPartyAdjustmentProtocol?
+        var hslParameterAdjustment: HSLColorAdjustmentParameterProtocol?
         
         switch type {
             case .brightness:
@@ -123,21 +124,21 @@ final class AdjustmentManager {
             case .hsl:
                 let coreAdjustment = HSVMultiband()
                 
+                hslParameterAdjustment = HSLColorAdjustmentParameter().onValueDidChange { color in
+                    coreAdjustment.set(color: color)
+                }
+                let hueParameter = AdjustmentParameter(type: .hue).onValueDidChange { value in
+                    coreAdjustment.set(hue: value)
+                }
+                
                 let saturarionParameter = AdjustmentParameter(type: .saturation).onValueDidChange { value in
-                    let newShift = CIVector(x: 0, y: CGFloat(value), z: 1)
-                    coreAdjustment.inputBlueShift = newShift
+                    coreAdjustment.set(saturation: value)
                 }
                 
                 let intensityParameter = AdjustmentParameter(type: .intensity).onValueDidChange { value in
-                    let newShift = CIVector(x: 0, y: 1, z: CGFloat(value))
-                    //                    coreAdjustment.inputGreenShift = newShift
-                    //                    coreAdjustment.inputAquaShift = newShift
-                    coreAdjustment.inputBlueShift = newShift
-                    //                    coreAdjustment.inputMagentaShift = newShift
-                    //                    coreAdjustment.inputPurpleShift = newShift
-                    //                    coreAdjustment.inputOrangeShift = newShift
+                   coreAdjustment.set(luminosity: value)
                 }
-                parameters = [saturarionParameter, intensityParameter]
+                parameters = [hueParameter, saturarionParameter, intensityParameter]
                 thirdPartyAdjustment = CoreImageAdjustment(filter: coreAdjustment)
             
             default:
@@ -150,7 +151,7 @@ final class AdjustmentManager {
             return nil
         }
         
-        return Adjustment(type: type, parameters: parameters, thirdPartyAdjustment: thirdParty)
+        return Adjustment(type: type, parameters: parameters, hslColorParameter: hslParameterAdjustment, thirdPartyAdjustment: thirdParty)
     }
     
     
