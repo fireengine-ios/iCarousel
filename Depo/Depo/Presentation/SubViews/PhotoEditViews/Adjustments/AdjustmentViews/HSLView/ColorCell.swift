@@ -37,9 +37,9 @@ final class ColorCell: UICollectionViewCell {
         contentView.backgroundColor = ColorConstants.filterBackColor
     }
     
-    func setup(color: UIColor) {
-        colorView.backgroundColor = color
-        selectedView.layer.borderColor = color.cgColor
+    func setup(hsvColor: HSVMultibandColor) {
+        colorView.backgroundColor = hsvColor.color
+        selectedView.layer.borderColor = hsvColor.color.cgColor
         selectedView.isHidden = !isSelected
     }
 

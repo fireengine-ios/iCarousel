@@ -54,7 +54,7 @@ enum AdjustmentViewType {
 
 final class PhotoEditViewFactory {
     
-    static func generateView(for type: AdjustmentViewType, adjustmentParameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) -> UIView? {
+    static func generateView(for type: AdjustmentViewType, adjustmentParameters: [AdjustmentParameterProtocol], adjustments: [AdjustmentProtocol], delegate: AdjustmentsViewDelegate?) -> UIView? {
         switch type {
         case .adjust:
             guard let parameter = adjustmentParameters.first else {
@@ -68,7 +68,12 @@ final class PhotoEditViewFactory {
         case .light:
             return LightView.with(parameters: adjustmentParameters, delegate: delegate)
         case .hsl:
-            return HSLView.with(parameters: adjustmentParameters, delegate: delegate)
+            guard let adjustment = adjustments.first(where: { $0.type == .hsl }),
+                let colorParameter = adjustment.hslColorParameter else {
+                return nil
+            }
+
+            return HSLView.with(parameters: adjustmentParameters, colorParameter: colorParameter, delegate: delegate)
         }
     }
     

@@ -223,7 +223,10 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
         let manager = AdjustmentManager(types: type.adjustmentTypes)
         
         guard !manager.parameters.isEmpty,
-            let view = PhotoEditViewFactory.generateView(for: type, adjustmentParameters: manager.parameters, delegate: self)
+            let view = PhotoEditViewFactory.generateView(for: type,
+                                                         adjustmentParameters: manager.parameters,
+                                                         adjustments: manager.adjustments,
+                                                         delegate: self)
         else {
             return
         }
