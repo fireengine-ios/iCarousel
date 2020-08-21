@@ -26,7 +26,7 @@ final class MPAdeleFilter: CustomFilterProtocol {
             return nil
         }
         
-        let output = inputImage.adjusting(saturation: -100/100)
+        let output = inputImage.adjusting(saturation: 0)
         
         return blend(background: image, image: output, intensity: parameter.currentValue)
     }

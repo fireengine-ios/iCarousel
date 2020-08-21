@@ -26,17 +26,54 @@ extension UIColor {
 }
 
 
+enum HSVMultibandColor: CaseIterable {
+    case red
+    case orange
+    case yellow
+    case green
+    case aqua
+    case blue
+    case purple
+    case magenta
+    
+    var color: UIColor {
+        switch self {
+            case .red:
+                return UIColor(red: 0.901961, green: 0.270588, blue: 0.270588, alpha: 1)
+            case .orange:
+                return UIColor(red: 0.901961, green: 0.584314, blue: 0.270588, alpha: 1)
+            case .yellow:
+                return UIColor(red: 0.901961, green: 0.901961, blue: 0.270588, alpha: 1)
+            case .green:
+                return UIColor(red: 0.270588, green: 0.901961, blue: 0.270588, alpha: 1)
+            case .aqua:
+                return UIColor(red: 0.270588, green: 0.901961, blue: 0.901961, alpha: 1)
+            case .blue:
+                return UIColor(red: 0.270588, green: 0.270588, blue: 0.901961, alpha: 1)
+            case .purple:
+                return UIColor(red: 0.584314, green: 0.270588, blue: 0.901961, alpha: 1)
+            case .magenta:
+                return UIColor(red: 0.901961, green: 0.270588, blue: 0.901961, alpha: 1)
+        }
+    }
+    
+    var hue: CGFloat {
+        return color.hue()
+    }
+}
 
-class HSVMultiband: CIFilter, BasicFilter {
-    let HSVMultibandKernel: CIColorKernel = {
-        let red = CGFloat(0)
-        let orange = UIColor(red: 0.901961, green: 0.584314, blue: 0.270588, alpha: 1).hue()
-        let yellow = UIColor(red: 0.901961, green: 0.901961, blue: 0.270588, alpha: 1).hue()
-        let green = UIColor(red: 0.270588, green: 0.901961, blue: 0.270588, alpha: 1).hue()
-        let aqua = UIColor(red: 0.270588, green: 0.901961, blue: 0.901961, alpha: 1).hue()
-        let blue = UIColor(red: 0.270588, green: 0.270588, blue: 0.901961, alpha: 1).hue()
-        let purple = UIColor(red: 0.584314, green: 0.270588, blue: 0.901961, alpha: 1).hue()
-        let magenta = UIColor(red: 0.901961, green: 0.270588, blue: 0.901961, alpha: 1).hue()
+
+
+final class HSVMultiband: CIFilter, BasicFilter {
+    private let HSVMultibandKernel: CIColorKernel = {
+        let red = HSVMultibandColor.red.hue
+        let orange = HSVMultibandColor.orange.hue
+        let yellow = HSVMultibandColor.yellow.hue
+        let green = HSVMultibandColor.green.hue
+        let aqua = HSVMultibandColor.aqua.hue
+        let blue = HSVMultibandColor.blue.hue
+        let purple = HSVMultibandColor.purple.hue
+        let magenta = HSVMultibandColor.magenta.hue
         
         var shaderString = ""
         
@@ -100,14 +137,16 @@ class HSVMultiband: CIFilter, BasicFilter {
     
     var inputImage: CIImage?
     
-    var inputRedShift = CIVector(x: 0, y: 1, z: 1)
-    var inputOrangeShift = CIVector(x: 0, y: 1, z: 1)
-    var inputYellowShift = CIVector(x: 0, y: 1, z: 1)
-    var inputGreenShift = CIVector(x: 0, y: 1, z: 1)
-    var inputAquaShift = CIVector(x: 0, y: 1, z: 1)
-    var inputBlueShift = CIVector(x: 0, y: 1, z: 1)
-    var inputPurpleShift = CIVector(x: 0, y: 1, z: 1)
-    var inputMagentaShift = CIVector(x: 0, y: 1, z: 1)
+    private var filteredColor: HSVMultibandColor = .red
+    
+    private var inputRedShift = CIVector(x: 0, y: 1, z: 1)
+    private var inputOrangeShift = CIVector(x: 0, y: 1, z: 1)
+    private var inputYellowShift = CIVector(x: 0, y: 1, z: 1)
+    private var inputGreenShift = CIVector(x: 0, y: 1, z: 1)
+    private var inputAquaShift = CIVector(x: 0, y: 1, z: 1)
+    private var inputBlueShift = CIVector(x: 0, y: 1, z: 1)
+    private var inputPurpleShift = CIVector(x: 0, y: 1, z: 1)
+    private var inputMagentaShift = CIVector(x: 0, y: 1, z: 1)
     
     override var attributes: [String : Any] {
         return [
@@ -191,5 +230,94 @@ class HSVMultiband: CIFilter, BasicFilter {
                                                     inputBlueShift,
                                                     inputPurpleShift,
                                                     inputMagentaShift])
+    }
+    
+    
+    func set(color: HSVMultibandColor) {
+        guard color != filteredColor else {
+            return
+        }
+        
+        resetColors()
+    }
+    
+    private func resetColors() {
+        inputRedShift = CIVector(x: 0, y: 1, z: 1)
+        inputOrangeShift = CIVector(x: 0, y: 1, z: 1)
+        inputYellowShift = CIVector(x: 0, y: 1, z: 1)
+        inputGreenShift = CIVector(x: 0, y: 1, z: 1)
+        inputAquaShift = CIVector(x: 0, y: 1, z: 1)
+        inputBlueShift = CIVector(x: 0, y: 1, z: 1)
+        inputPurpleShift = CIVector(x: 0, y: 1, z: 1)
+        inputMagentaShift = CIVector(x: 0, y: 1, z: 1)
+    }
+    
+    func set(hue: Float) {
+        let newHue = CGFloat(hue)
+        
+        switch filteredColor {
+            case .red:
+                inputRedShift = CIVector(x: newHue, y: inputRedShift.y, z: inputRedShift.z)
+            case .orange:
+                inputOrangeShift = CIVector(x: newHue, y: inputOrangeShift.y, z: inputOrangeShift.z)
+            case .yellow:
+                inputYellowShift = CIVector(x: newHue, y: inputYellowShift.y, z: inputYellowShift.z)
+            case .green:
+                inputGreenShift = CIVector(x: newHue, y: inputGreenShift.y, z: inputGreenShift.z)
+            case .aqua:
+                inputAquaShift = CIVector(x: newHue, y: inputAquaShift.y, z: inputAquaShift.z)
+            case .blue:
+                inputBlueShift = CIVector(x: newHue, y: inputBlueShift.y, z: inputBlueShift.z)
+            case .purple:
+                inputPurpleShift = CIVector(x: newHue, y: inputPurpleShift.y, z: inputPurpleShift.z)
+            case .magenta:
+                inputMagentaShift = CIVector(x: newHue, y: inputMagentaShift.y, z: inputMagentaShift.z)
+        }
+    }
+    
+    func set(saturation: Float) {
+        let newSaturation = CGFloat(saturation)
+        
+        switch filteredColor {
+            case .red:
+                inputRedShift = CIVector(x: inputRedShift.x, y: newSaturation, z: inputRedShift.z)
+            case .orange:
+                inputOrangeShift = CIVector(x: inputOrangeShift.x, y: newSaturation, z: inputOrangeShift.z)
+            case .yellow:
+                inputYellowShift = CIVector(x: inputYellowShift.x, y: newSaturation, z: inputYellowShift.z)
+            case .green:
+                inputGreenShift = CIVector(x: inputGreenShift.x, y: newSaturation, z: inputGreenShift.z)
+            case .aqua:
+                inputAquaShift = CIVector(x: inputAquaShift.x, y: newSaturation, z: inputAquaShift.z)
+            case .blue:
+                inputBlueShift = CIVector(x: inputBlueShift.x, y: newSaturation, z: inputBlueShift.z)
+            case .purple:
+                inputPurpleShift = CIVector(x: inputPurpleShift.x, y: newSaturation, z: inputPurpleShift.z)
+            case .magenta:
+                inputMagentaShift = CIVector(x: inputMagentaShift.x, y: newSaturation, z: inputMagentaShift.z)
+        }
+    }
+    
+    func set(luminosity: Float) {
+        let newLuminosity = CGFloat(luminosity)
+        
+        switch filteredColor {
+            case .red:
+                inputRedShift = CIVector(x: inputRedShift.x, y: inputRedShift.y, z: newLuminosity)
+            case .orange:
+                inputOrangeShift = CIVector(x: inputOrangeShift.x, y: inputOrangeShift.y, z: newLuminosity)
+            case .yellow:
+                inputYellowShift = CIVector(x: inputYellowShift.x, y: inputYellowShift.y, z: newLuminosity)
+            case .green:
+                inputGreenShift = CIVector(x: inputGreenShift.x, y: inputGreenShift.y, z: newLuminosity)
+            case .aqua:
+                inputAquaShift = CIVector(x: inputAquaShift.x, y: inputAquaShift.y, z: newLuminosity)
+            case .blue:
+                inputBlueShift = CIVector(x: inputBlueShift.x, y: inputBlueShift.y, z: newLuminosity)
+            case .purple:
+                inputPurpleShift = CIVector(x: inputPurpleShift.x, y: inputPurpleShift.y, z: newLuminosity)
+            case .magenta:
+                inputMagentaShift = CIVector(x: inputMagentaShift.x, y: inputMagentaShift.y, z: newLuminosity)
+        }
     }
 }

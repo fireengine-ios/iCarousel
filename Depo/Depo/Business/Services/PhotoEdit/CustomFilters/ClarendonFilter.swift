@@ -47,7 +47,7 @@ class MPClarendonFilter: CustomFilterProtocol {
         }
         
         toneFilter.inputImage = inputImage
-            .adjusting(brightness: -10/255)
+            .adjusting(brightness: -0.1)
             .adjusting(contrast: 1.0)
         
         return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)

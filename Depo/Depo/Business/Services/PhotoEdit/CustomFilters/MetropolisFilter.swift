@@ -26,7 +26,7 @@ final class MPMetropolisFilter: CustomFilterProtocol {
         }
         
         let output = inputImage
-            .adjusting(saturation: -1/100)
+            .adjusting(saturation: 0)
             .adjusting(contrast: 1.7)
             .adjusting(brightness: 70/255)
         

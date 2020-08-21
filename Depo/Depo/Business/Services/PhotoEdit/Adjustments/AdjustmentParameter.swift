@@ -98,6 +98,43 @@ enum AdjustmentParameterType: String {
 }
 
 
+protocol HSLColorAdjustmentParameterProtocol {
+    
+    var possibleValues: HSVMultibandColor.AllCases { get }
+    var currentValue: HSVMultibandColor { get }
+    
+    func set(value: HSVMultibandColor)
+    
+    @discardableResult
+    func onValueDidChange(handler: @escaping ValueHandler<HSVMultibandColor>) -> HSLColorAdjustmentParameterProtocol
+}
+
+final class HSLColorAdjustmentParameter: HSLColorAdjustmentParameterProtocol {
+    let possibleValues: HSVMultibandColor.AllCases
+    
+    private(set) var currentValue: HSVMultibandColor
+    private var onValueDidChangeAction: ValueHandler<HSVMultibandColor>?
+    
+    
+    init() {
+        possibleValues = HSVMultibandColor.allCases
+        currentValue = .red
+    }
+    
+    func set(value: HSVMultibandColor) {
+        currentValue = value
+        onValueDidChangeAction?(currentValue)
+    }
+    
+    func onValueDidChange(handler: @escaping ValueHandler<HSVMultibandColor>) -> HSLColorAdjustmentParameterProtocol {
+        onValueDidChangeAction = handler
+        return self
+    }
+    
+    
+}
+
+
 protocol AdjustmentParameterProtocol {
     var type: AdjustmentParameterType { get }
     
