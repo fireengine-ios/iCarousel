@@ -43,7 +43,7 @@ testFlightDeployers = "TCUSER" // To enable, uncomment submitters in approval st
 devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;can.kucukakdag@turkcell.com.tr"
 
 xcodeParams = [
-        xcodeApp: '11.0',
+        xcodeApp: '11.6',
         workspaceFile: 'Depo/Depo'
 ]
 

@@ -1607,12 +1607,12 @@
 "contact_phase2_error_backup_title" = "Ошибка резервного копирования!";
 "contact_phase2_error_restore_title" = "Передача на телефон не удалась!";
 "contact_phase2_error_delete_title" = "Удаление не удалось!";
-"gallery_filter_all" = "Показать: Все";
-"gallery_filter_synced" = "Показать: Файлы с Резервным копированием";
-"gallery_filter_unsynced" = "Показать: Файлы с не выполненным резервным копированием";
+"gallery_filter_all" = "Все";
+"gallery_filter_synced" = "Синхронизированные";
+"gallery_filter_unsynced" = "Несинхронизированные";
 "gallery_filter_action_sheet_all" = "Все";
-"gallery_filter_action_sheet_synced" = "Файлы с Резервным копированием";
-"gallery_filter_action_sheet_unsynced" = "Файлы с не выполненным резервным копированием";
+"gallery_filter_action_sheet_synced" = "Синхронизированные";
+"gallery_filter_action_sheet_unsynced" = "Несинхронизированные";
 "contact_phase2_error_quota_restore" = "Вы не можете продолжить действие по причине недостатка свободного места в хранилище. Вы можете увеличить пространство для хранения или освободить место удалив файлы.";
 "contact_phase2_error_quota_backup" = "Вы не можете продолжить действие по причине недостатка свободного места в хранилище. Вы можете увеличить пространство для хранения или освободить место удалив файлы.";
 "contact_phase2_error_message" = "Произошла временная ошибка. Пожалуйста, попробуйте еще раз.";

@@ -1899,9 +1899,9 @@ Please check I have understood the intended command here*/
 "contact_phase2_error_backup_title" = "La sauvegarde a échoué!";
 "contact_phase2_error_restore_title" = "Le transfert vers le téléphone a échoué!";
 "contact_phase2_error_delete_title" = "La suppression a échoué!";
-"gallery_filter_all" = "Afficher: Tout";
-"gallery_filter_synced" = "Afficher: Éléments sauvegardés";
-"gallery_filter_unsynced" = "Afficher: Éléments non sauvegardés";
+"gallery_filter_all" = "Tout";
+"gallery_filter_synced" = "Éléments sauvegardés";
+"gallery_filter_unsynced" = "Éléments non sauvegardés";
 "gallery_filter_action_sheet_all" = "Tout";
 "gallery_filter_action_sheet_synced" = "Éléments sauvegardés";
 "gallery_filter_action_sheet_unsynced" = "Éléments non sauvegardés";
