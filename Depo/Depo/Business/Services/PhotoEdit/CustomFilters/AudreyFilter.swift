@@ -35,7 +35,7 @@ final class MPAudreyFilter: CustomFilterProtocol {
         }
         
         toneFilter.inputImage = inputImage
-            .adjusting(saturation: -100/100)
+            .adjusting(saturation: 0)
             .adjusting(contrast: 1.3)
             .adjusting(brightness: 20/255)
         
