@@ -15,15 +15,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kXu-J2-Doj">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="252"/>
+                    <rect key="frame" x="0.0" y="16" width="414" height="236"/>
                 </stackView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="kXu-J2-Doj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="9JU-8J-QTL"/>
-                <constraint firstItem="kXu-J2-Doj" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="HIE-BZ-ed5"/>
-                <constraint firstItem="kXu-J2-Doj" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="qi6-fr-SUb"/>
-                <constraint firstItem="kXu-J2-Doj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uoy-ng-qE9"/>
+                <constraint firstItem="kXu-J2-Doj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9JU-8J-QTL"/>
+                <constraint firstItem="kXu-J2-Doj" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="HIE-BZ-ed5"/>
+                <constraint firstItem="kXu-J2-Doj" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="qi6-fr-SUb"/>
+                <constraint firstItem="kXu-J2-Doj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="uoy-ng-qE9"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

@@ -75,7 +75,7 @@ final class AdjustmentCategoriesView: UIView, NibInit {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = ColorConstants.filterBackColor
+        collectionView.backgroundColor = ColorConstants.photoEditBackgroundColor
         collectionView.register(nibCell: AdjustmentCategoryCell.self)
     }
 }

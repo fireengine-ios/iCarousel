@@ -21,7 +21,7 @@ final class LightView: AdjustmentsView, NibInit {
     override func setup(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) {
         super.setup(parameters: parameters, delegate: delegate)
         
-        backgroundColor = ColorConstants.filterBackColor
+        backgroundColor = ColorConstants.photoEditBackgroundColor
         
         parameters.forEach {
             let view = AdjustmentParameterSliderView.with(parameter: $0, delegate: self)

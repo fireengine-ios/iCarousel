@@ -24,7 +24,7 @@ final class AdjustmentParameterSliderView: UIView, NibInit {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaDemFont(size: 12)
+            newValue.font = .TurkcellSaturaMedFont(size: 12)
             newValue.textColor = .white
         }
     }
@@ -32,7 +32,7 @@ final class AdjustmentParameterSliderView: UIView, NibInit {
     @IBOutlet private weak var valueLabel: UILabel! {
         willSet {
             newValue.textAlignment = .right
-            newValue.font = .TurkcellSaturaDemFont(size: 12)
+            newValue.font = .TurkcellSaturaMedFont(size: 12)
             newValue.textColor = .white
         }
     }
@@ -50,7 +50,7 @@ final class AdjustmentParameterSliderView: UIView, NibInit {
         self.type = parameter.type
         self.delegate = delegate
         
-        backgroundColor = ColorConstants.filterBackColor
+        backgroundColor = ColorConstants.photoEditBackgroundColor
         titleLabel.text = parameter.type.title
         valueLabel.text = String(format: "%.1f", parameter.currentValue)
         

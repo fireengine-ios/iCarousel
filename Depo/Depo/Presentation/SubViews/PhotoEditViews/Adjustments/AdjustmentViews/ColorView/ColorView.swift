@@ -18,9 +18,11 @@ final class ColorView: AdjustmentsView, NibInit {
     
     @IBOutlet private weak var hslButton: UIButton! {
         willSet {
+            newValue.tintColor = .white
             newValue.setTitle(TextConstants.photoEditHSL, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 15)
+            newValue.titleLabel?.font = .TurkcellSaturaMedFont(size: 12)
+            newValue.titleEdgeInsets = UIEdgeInsets(top: 0, left: 6, bottom: 0, right: -6)
         }
     }
     @IBOutlet private weak var contentView: UIStackView!
@@ -28,7 +30,7 @@ final class ColorView: AdjustmentsView, NibInit {
     override func setup(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) {
         super.setup(parameters: parameters, delegate: delegate)
         
-        backgroundColor = ColorConstants.filterBackColor
+        backgroundColor = ColorConstants.photoEditBackgroundColor
         
         parameters.forEach {
             let view = AdjustmentParameterSliderView.with(parameter: $0, delegate: self)

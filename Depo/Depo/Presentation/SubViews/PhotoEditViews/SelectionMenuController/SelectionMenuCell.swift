@@ -17,7 +17,7 @@ final class SelectionMenuCell: UITableViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaDemFont(size: 13)
+            newValue.font = .TurkcellSaturaDemFont(size: 16)
             newValue.textColor = .white
         }
     }
@@ -29,7 +29,7 @@ final class SelectionMenuCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = ColorConstants.filterBackColor
+        backgroundColor = ColorConstants.photoEditBackgroundColor
     }
     
     func setup(style: Style, title: String, isSelected: Bool) {
@@ -44,6 +44,6 @@ final class SelectionMenuCell: UITableViewCell {
     }
     
     func setSeleted(_ isSelected: Bool) {
-        checkmarkImageView.image = isSelected ? UIImage(named: "applyIcon") : nil
+        checkmarkImageView.image = isSelected ? UIImage(named: "photo_edit_apply") : nil
     }
 }

@@ -14,7 +14,7 @@ final class AdjustmentCategoryCell: UICollectionViewCell {
         willSet {
             newValue.textColor = .white
             newValue.textAlignment = .center
-            newValue.font = .TurkcellSaturaDemFont(size: 14)
+            newValue.font = .TurkcellSaturaMedFont(size: 12)
         }
     }
     
@@ -27,7 +27,7 @@ final class AdjustmentCategoryCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = ColorConstants.filterBackColor
+        contentView.backgroundColor = ColorConstants.photoEditBackgroundColor
     }
     
     func setup(with title: String, image: UIImage?) {

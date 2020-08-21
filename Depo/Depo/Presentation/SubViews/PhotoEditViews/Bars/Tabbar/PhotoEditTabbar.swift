@@ -16,24 +16,23 @@ enum PhotoEditTabbarItemType {
     case filters
     case adjustments
     
-    //TODO: - Change Images
     private var templateImage: UIImage? {
         let imageName: String
         switch self {
         case .filters:
-            imageName = "EditButtonIcon"
+            imageName = "photo_edit_tabbar_filters"
         case .adjustments:
-            imageName = "cog"
+            imageName = "photo_edit_tabbar_adjustments"
         }
         return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
     }
     
     var normalImage: UIImage? {
-        templateImage?.mask(with: .lightGray)
+        templateImage?.mask(with: .white)
     }
     
     var selectedImage: UIImage? {
-        templateImage?.mask(with: .white)
+        templateImage?.mask(with: .lrTealish)
     }
 }
 
@@ -65,7 +64,7 @@ final class PhotoEditTabbar: UIView, NibInit {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = ColorConstants.filterBackColor
+        backgroundColor = ColorConstants.photoEditBackgroundColor
     }
     
     func setup(with types: [PhotoEditTabbarItemType]) {

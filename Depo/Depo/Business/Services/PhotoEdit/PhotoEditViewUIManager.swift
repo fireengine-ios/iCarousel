@@ -21,20 +21,21 @@ final class PhotoEditViewUIManager: NSObject {
     
     @IBOutlet private weak var filtersScrollView: UIScrollView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.filterBackColor
+            newValue.backgroundColor = ColorConstants.photoEditBackgroundColor
             newValue.showsVerticalScrollIndicator = false
+            newValue.delaysContentTouches = false
         }
     }
 
     @IBOutlet private weak var filtersContainerView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.filterBackColor
+            newValue.backgroundColor = ColorConstants.photoEditBackgroundColor
         }
     }
 
     @IBOutlet private weak var bottomSafeAreaView: UIView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.filterBackColor
+            newValue.backgroundColor = ColorConstants.photoEditBackgroundColor
         }
     }
     
