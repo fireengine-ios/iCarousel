@@ -1595,12 +1595,12 @@
 "contact_phase2_error_backup_title" = "Створення резервних копій не виконана!";
 "contact_phase2_error_restore_title" = "Переміщення на телефон не вдалося!";
 "contact_phase2_error_delete_title" = "Видалення не виконане!";
-"gallery_filter_all" = "Показати: Все";
-"gallery_filter_synced" = "Показати: Резервні копії елементів";
-"gallery_filter_unsynced" = "Показати: Елементи, які не були резервні копії";
+"gallery_filter_all" = "Всі";
+"gallery_filter_synced" = "Cинхронізовані";
+"gallery_filter_unsynced" = "Несинхронізовані";
 "gallery_filter_action_sheet_all" = "Все";
-"gallery_filter_action_sheet_synced" = "Резервні елементи";
-"gallery_filter_action_sheet_unsynced" = "Елементи не резервні";
+"gallery_filter_action_sheet_synced" = "Cинхронізовані";
+"gallery_filter_action_sheet_unsynced" = "Несинхронізовані";
 "contact_phase2_error_quota_restore" = "Ви не можете продовжити обробку, так як в сховищі немає місця. Ви можете збільшити простір або видалити файли та звільнити місце для зберігання.";
 "contact_phase2_error_quota_backup" = "Ви не можете продовжити обробку, так як в сховищі немає місця. Ви можете збільшити простір або видалити файли та звільнити місце для зберігання.";
 "contact_phase2_error_message" = "Виникла тимчасова помилка. Будь ласка, спробуйте ще раз.";

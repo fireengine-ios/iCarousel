@@ -1635,9 +1635,9 @@
 "contact_phase2_error_backup_title" = "¡Copia de seguridad fallida!";
 "contact_phase2_error_restore_title" = "¡La transferencia al teléfono ha fallado!";
 "contact_phase2_error_delete_title" = "¡El proceso de eliminación ha fallado!";
-"gallery_filter_all" = "Mostrar: Todo";
-"gallery_filter_synced" = "Mostrar: Elementos respaldados";
-"gallery_filter_unsynced" = "Mostrar: Elementos que no se han respaldado";
+"gallery_filter_all" = "Todo";
+"gallery_filter_synced" = "Elementos respaldados";
+"gallery_filter_unsynced" = "Elementos que no se han respaldado";
 "gallery_filter_action_sheet_all" = "Todos";
 "gallery_filter_action_sheet_synced" = "Elementos respaldados";
 "gallery_filter_action_sheet_unsynced" = "Elementos que no se han respaldado";
