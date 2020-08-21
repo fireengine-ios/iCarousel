@@ -101,7 +101,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if #available(iOS 11.0, *), Device.operationSystemVersionLessThen(13) {
+        if Device.operationSystemVersionLessThen(13) {
             defaultNavBarStyle()
             statusBarColor = .white
         }
@@ -209,7 +209,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         searchBar.setImage(UIImage(named: TextConstants.searchIcon), for: .search, state: .normal)
         searchBar.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: Device.winSize.width, height: NumericConstants.navigationBarHeight))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: Device.winSize.width, height: 44))
         view.backgroundColor = .white
         searchBar.addSubview(view)
         searchBar.sendSubview(toBack: view)

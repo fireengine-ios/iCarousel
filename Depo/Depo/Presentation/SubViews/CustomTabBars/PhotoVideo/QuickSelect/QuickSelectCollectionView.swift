@@ -98,12 +98,7 @@ final class QuickSelectCollectionView: UICollectionView {
     }
     
     private func updateOffsetRange() {
-        let inset: UIEdgeInsets
-        if #available(iOS 11.0, *) {
-            inset = adjustedContentInset
-        } else {
-            inset = contentInset
-        }
+        let inset: UIEdgeInsets = adjustedContentInset
         
         let maxBottomOffset = contentSize.height + inset.bottom - frame.height
         offsetRange = -inset.top...max(0.0, maxBottomOffset)

@@ -550,6 +550,7 @@
 "Lifebox can sync your files automatically." = "lifebox can sync your files, photos and videos automatically. \n\nTo enable background sync of your photos and videos, please make sure that your location permission is set to \"ALWAYS\" by going to “Device Settings > lifebox > Location\" menu.";
 "Get Started" = "Get Started";
 "I have read and accepted terms of use" = "I have read and accepted terms of use";
+"Welcome to Lifebox!" = "Welcome to lifebox!";
 "You need to confirm the User Agreement to continue." = "You need to confirm the User Agreement to continue.";
 "PhotosAndViedos" = "Photos and Videos";
 "Are these the same person?" = "Are these the same person?";
@@ -1495,7 +1496,6 @@
 "contact_sync_confirm_premium_popup_text" = "To delete your duplicate contacts in your device easily and unlock many more features, become a Premium member.";
 "my_packages_description" = "If you want to restore your existing purchases, click on Restore Purchases button.";
 "photo_video_auto_sync_settings" = "Auto-Sync Settings";
-"photo_video_empty_no_unsync_photos_title" = "photo_video_empty_no_unsync_photos_title";
 "ubsent_contacts_in_lifebox" = "There is no any contact in your lifebox";
 "auto_sync_albums_description" = "You can choose which albums to sync automatically.";
 "tabbar_item_home_label" = "Home";
@@ -1625,7 +1625,7 @@
 "contact_phase2_delete_backup_success_card_title" = "Auto Contact Backup";
 "contact_phase2_delete_backup_success_card_message" = "Your auto contact backup is off! If you enable it, lifebox can sync your contacts automatically.";
 "contact_phase2_contact_backup_success_navbar_title" = "Back up";
-"contact_phase2_contact_backup_success_title" = "Back up Successfully";
+"contact_phase2_contact_backup_success_title" = "Back up Successful";
 "contact_phase2_contact_backup_success_message" = "You have new %d contacts and no possible duplicates to review in your lifebox.";
 "contact_phase2_warning_popup_contact_permissions_title" = "Permission Denied";
 "contact_phase2_warning_popup_contact_permissions_message" = "To be able to back up your phone book to lifebox, you must allow lifebox to access your contacts in the phone settings.";
@@ -1637,10 +1637,6 @@
 "contact_phase2_error_iternal" = "A temporary error has occurred. Please try again.";
 "download_document_error_popup" = "You can only download photo, video or album";
 "contact_phase2_history_cell_Contact_List" = "Contact List";
-"contact_phase2_error_backup_title" = "contact_phase2_error_backup";
-"contact_phase2_error_restore_title" = "contact_phase2_error_restore";
-"contact_phase2_error_delete_title" = "contact_phase2_error_delete_title";
-
 "settings_action_sheet_account_details" = "Account details";
 "contact_phase2_error_backup_title" = "Back up Failed";
 "contact_phase2_error_restore_title" = "Restore Failed";
@@ -1659,5 +1655,5 @@
 "contact_phase2_result_delete_backup_nav_bar_title" = "Delete Back up";
 "contact_phase2_result_delete_duplicates_nav_bar_title" = "Delete Duplicates";
 "contact_phase2_result_delete_all_contacts_nav_bar_title" = "Delete Contacts";
-
-"eula_title" = "EULA";
+"eula_title" = "Terms of Use";
+"photo_video_empty_no_unsync_photos_title" = "All your files are synced!";

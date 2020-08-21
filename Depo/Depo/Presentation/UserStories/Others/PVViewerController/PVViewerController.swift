@@ -39,11 +39,7 @@ final class PVViewerController: BaseViewController, NibInit {
         
         setupImageView()
         
-        if #available(iOS 11.0, *) {
-            imageScrollView.contentInsetAdjustmentBehavior = .never
-        } else {
-            automaticallyAdjustsScrollViewInsets = false
-        }
+        imageScrollView.contentInsetAdjustmentBehavior = .never
          
         navigationItem.leftBarButtonItem = BackButtonItem { [weak self] in
             self?.hideView()

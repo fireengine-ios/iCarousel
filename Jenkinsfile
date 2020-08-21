@@ -11,6 +11,8 @@ apps = [
             versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
             ictsContainerId: '743', // ICT Store
             prodTeamID: '693N5K66ZJ',
+	    //xcodeSchema: 'TC_Depo_LifeTech',
+            //xcodeTarget: 'TC_Depo_LifeTech',
             xcodeSchema: 'TC_Depo_LifeTech_Bundle',
             xcodeTarget: 'TC_Depo_LifeTech_Bundle',
             itcTeamId: '121548574',
@@ -40,7 +42,7 @@ testFlightDeployers = "TCUSER" // To enable, uncomment submitters in approval st
 devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;can.kucukakdag@turkcell.com.tr"
 
 xcodeParams = [
-        xcodeApp: 'Xcode11.3.app',
+        xcodeApp: '11.6',
         workspaceFile: 'Depo/Depo'
 ]
 
@@ -93,6 +95,7 @@ def runXcode = { app, flavorId ->
     sh "rm -f '${WORKSPACE}/${app.name}-logs/*'"
 
     xcodeBuild target: app.xcodeTarget ?: app.name,
+      xcodeName: xcodeParams.xcodeApp,
       interpretTargetAsRegEx: false,
       cleanBeforeBuild: true,
       allowFailingBuildResults: false,
@@ -249,7 +252,6 @@ pipeline {
 
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
-                        sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
                         sh "source ~/.bash_profile; cd Depo; pod install" // --repo-update occasionally
                         apps.each { app ->
                             runXcode(app, 'test')

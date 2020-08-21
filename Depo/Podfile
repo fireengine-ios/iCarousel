@@ -1,4 +1,4 @@
-platform :ios, '10.0'
+platform :ios, '11.0'
 use_frameworks!
 inhibit_all_warnings!
 ENV['COCOAPODS_DISABLE_STATS'] = "true"
@@ -99,9 +99,9 @@ target 'LifeTech-LifeboxFileProviderUI' do
   file_provider_ui_pods
 end
 
-target 'LifeTech-autosync-widget' do
-  autosync_widget_pods
-end
+#target 'LifeTech-autosync-widget' do
+#  autosync_widget_pods
+#end
 
 target "LifeTech-NotificationService" do
   notification_pods
@@ -127,9 +127,9 @@ target 'LifeboxFileProviderUI' do
   file_provider_ui_pods
 end
 
-target 'autosync-widget' do
-  autosync_widget_pods
-end
+#target 'autosync-widget' do
+#  autosync_widget_pods
+#end
 
 target "LifeboxNotificationService" do
   notification_pods
@@ -159,9 +159,9 @@ target 'LifeDriveProviderUI' do
   file_provider_ui_pods
 end
 
-target 'LifeDrive-widget' do
-  autosync_widget_pods
-end
+#target 'LifeDrive-widget' do
+#  autosync_widget_pods
+#end
 
 target 'LifeDriveNotificationService' do
   notification_pods
@@ -183,9 +183,9 @@ target 'LifeTech_LifeDriveProviderUI' do
   file_provider_ui_pods
 end
 
-target 'LifeTech_LifeDrive-widget' do
-  autosync_widget_pods
-end
+#target 'LifeTech_LifeDrive-widget' do
+#  autosync_widget_pods
+#end
 
 target 'LifeTech_LifeDriveNotificationService' do
   notification_pods
