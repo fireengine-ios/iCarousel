@@ -10,17 +10,19 @@ import UIKit
 
 final class HSLView: AdjustmentsView, NibInit {
 
-    static func with(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) -> HSLView {
+    static func with(parameters: [AdjustmentParameterProtocol], colorParameter: HSLColorAdjustmentParameterProtocol, delegate: AdjustmentsViewDelegate?) -> HSLView {
         let view = HSLView.initFromNib()
-        view.setup(parameters: parameters, delegate: delegate)
+        view.setup(parameters: parameters, colorParameter: colorParameter, delegate: delegate)
         return view
     }
     
     @IBOutlet private weak var contentView: UIStackView!
     @IBOutlet private weak var colorAssets: UICollectionView!
     
-    private let colors: [UIColor] = [.black, .blue, .brown, .cyan, .green, .magenta, .orange, .purple, .red]
-    private var selectedIndex: Int?
+    private var colors = [HSVMultibandColor]()
+    private var colorParameter: HSLColorAdjustmentParameterProtocol?
+    
+    //MAKR: - Setup
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,8 +43,8 @@ final class HSLView: AdjustmentsView, NibInit {
         colorAssets.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: 8)
     }
     
-    override func setup(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) {
-        super.setup(parameters: parameters, delegate: delegate)
+    func setup(parameters: [AdjustmentParameterProtocol], colorParameter: HSLColorAdjustmentParameterProtocol, delegate: AdjustmentsViewDelegate?) {
+        setup(parameters: parameters, delegate: delegate)
         
         backgroundColor = ColorConstants.filterBackColor
         
@@ -50,15 +52,15 @@ final class HSLView: AdjustmentsView, NibInit {
             let view = AdjustmentParameterSliderView.with(parameter: $0.element, delegate: self)
             contentView.insertArrangedSubview(view, at: $0.offset)
         }
-    }
     
-    override func sliderValueChanged(newValue: Float, type: AdjustmentParameterType) {
-        guard let index = adjustments.firstIndex(where: { $0.type == type}) else {
+        self.colorParameter = colorParameter
+        colors = colorParameter.possibleValues
+        colorAssets.reloadData()
+        
+        guard let index = colors.firstIndex(where: { $0 == colorParameter.currentValue }) else {
             return
         }
-
-        adjustments[index] = AdjustmentParameterValue(type: type, value: newValue)
-        delegate?.didChangeAdjustments(adjustments)
+        colorAssets.selectItem(at: IndexPath(row: index, section: 0), animated: false, scrollPosition: .left)
     }
 }
 
@@ -70,11 +72,12 @@ extension HSLView: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(cell: ColorCell.self, for: indexPath)
-        cell.setup(color: colors[indexPath.row])
+        let color = colors[indexPath.row]
+        cell.setup(hsvColor: color)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        colorParameter?.set(value: colors[indexPath.row])
     }
 }
