@@ -8022,16 +8022,16 @@
 		CF01729723D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF01729323D00B9F00C0B0DE /* NetmeraCustomUser.swift */; };
 		CF01729823D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF01729323D00B9F00C0B0DE /* NetmeraCustomUser.swift */; };
 		CF01729923D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF01729323D00B9F00C0B0DE /* NetmeraCustomUser.swift */; };
-		CF703F4524E3CC49005EFFFD /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
-		CF703F4624E3CC4A005EFFFD /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
-		CF703F4724E3CC4B005EFFFD /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
-		CF703F4824E3CC4D005EFFFD /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
-		CF703F4924E3CC4E005EFFFD /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
-		CF703F4A24E3CC57005EFFFD /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
-		CF703F4B24E3CC58005EFFFD /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
-		CF703F4C24E3CC5A005EFFFD /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
-		CF703F4D24E3CC5B005EFFFD /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
-		CF703F4E24E3CC5C005EFFFD /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
+		CF703F4524E3CC49005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF703F4624E3CC4A005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF703F4724E3CC4B005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF703F4824E3CC4D005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF703F4924E3CC4E005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CF703F4A24E3CC57005EFFFD /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF703F4B24E3CC58005EFFFD /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF703F4C24E3CC5A005EFFFD /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF703F4D24E3CC5B005EFFFD /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF703F4E24E3CC5C005EFFFD /* (null) in Resources */ = {isa = PBXBuildFile; };
 		CF71458C24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF71458B24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift */; };
 		CF71458D24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF71458B24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift */; };
 		CF71458E24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF71458B24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift */; };
@@ -9893,6 +9893,15 @@
 		CF8B6B0323CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		CF8B6B0423CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		CF8B6B0523CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6AFD23CBC9D70021B021 /* cropy_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC7E2008AD6F003D8E05 /* cropy_icon@2x.png */; };
+		CF8B6AFE23CBC9D70021B021 /* Buyuk_Selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC4E2008AD6F003D8E05 /* Buyuk_Selected@3x.png */; };
+		CF8B6AFF23CBC9D70021B021 /* sag_ok@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD362008AD6F003D8E05 /* sag_ok@2x.png */; };
+		CF8B6B0023CBC9D70021B021 /* italic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACC22008AD6F003D8E05 /* italic@2x.png */; };
+		CF8B6B0123CBC9D70021B021 /* PhotoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoDetailCell.xib */; };
+		CF8B6B0223CBC9D70021B021 /* lookup_soft_elegance_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AEA02008AD6F003D8E05 /* lookup_soft_elegance_1.png */; };
+		CF8B6B0323CBC9D70021B021 /* sample_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD472008AD6F003D8E05 /* sample_yellow.png */; };
+		CF8B6B0423CBC9D70021B021 /* sample_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD432008AD6F003D8E05 /* sample_red@2x.png */; };
+		CF8B6B0523CBC9D70021B021 /* t_kucuk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD672008AD6F003D8E05 /* t_kucuk@2x.png */; };
 		CF8B6B0623CBC9D70021B021 /* ProgressCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressCard.xib */; };
 		CF8B6B0823CBC9D70021B021 /* SetSecurityQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2E992338989B0014258A /* SetSecurityQuestionViewController.xib */; };
 		CF8B6B0D23CBC9D70021B021 /* MyStorageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92004B2521AD0F2100582C45 /* MyStorageViewController.xib */; };
@@ -11972,7 +11981,6 @@
 		0334575123C714C100FB6386 /* NetmeraScreenEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraScreenEvents.swift; sourceTree = "<group>"; };
 		0334578423C725AC00FB6386 /* NetmeraActionEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraActionEvents.swift; sourceTree = "<group>"; };
 		0340456F240794FD0024135B /* SynchronizedDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedDictionary.swift; sourceTree = "<group>"; };
-		03C8F5D804A48664D495ADD7 /* Pods-LifeTech_LifeDrive-widget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_LifeDrive-widget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_LifeDrive-widget/Pods-LifeTech_LifeDrive-widget.appstore.xcconfig"; sourceTree = "<group>"; };
 		04CF1643276D50FAE9FC2305 /* RegistrationViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationViewInput.swift; sourceTree = "<group>"; };
 		051E1DF819CAC2F900FD1E03 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		051E1E0419CAC2F900FD1E03 /* Depo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Depo-Prefix.pch"; sourceTree = "<group>"; };
@@ -12037,7 +12045,6 @@
 		17CD85B123ACDA40004CFF7E /* HSCompetionPopUpsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSCompetionPopUpsFactory.swift; sourceTree = "<group>"; };
 		17E9B7112250AF6C00C0FE70 /* MediaUsageInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaUsageInfoView.swift; sourceTree = "<group>"; };
 		17FBD51823FB2C6200979F39 /* DivorceActionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivorceActionService.swift; sourceTree = "<group>"; };
-		18727347BB1DC5883DFADF41 /* Pods-LifeDrive-widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.debug.xcconfig"; sourceTree = "<group>"; };
 		1973A5BB3216D20AA2C127C5 /* OTPViewRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewRouter.swift; sourceTree = "<group>"; };
 		19AAC1F6216362FE76CE2075 /* Pods_LifeTech_BilloFileProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeTech_BilloFileProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		19F52CA63982376B16C6EAC7 /* Pods-BilloNotificationService.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BilloNotificationService.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-BilloNotificationService/Pods-BilloNotificationService.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -12110,7 +12117,6 @@
 		35C6583C7BEFBA369D630046 /* FileInfoInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInteractorInput.swift; sourceTree = "<group>"; };
 		35C71D6E2FCFC8C34611820B /* FileInfoViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoViewController.swift; sourceTree = "<group>"; };
 		361CEF99599CB6D50ED90150 /* LBAlbumLikePreviewSliderRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderRouterInput.swift; sourceTree = "<group>"; };
-		36347F41C4CC01801EE3961B /* Pods-LifeDrive-widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.release.xcconfig"; sourceTree = "<group>"; };
 		36455722C76D9C3E84DD8173 /* Pods-lifedrive.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lifedrive.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive.appstore.xcconfig"; sourceTree = "<group>"; };
 		36EBB7BF1EFE63603733D486 /* Pods_Billo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Billo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3719FAAB5ABAB569DEF795FF /* Pods_LifeTech_BilloNotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeTech_BilloNotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -12256,7 +12262,6 @@
 		65608559B51A53B7DD6B9B70 /* Pods-lifedrive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lifedrive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive.debug.xcconfig"; sourceTree = "<group>"; };
 		669AB32EC041C5277B6D63E3 /* SelectNameRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameRouter.swift; sourceTree = "<group>"; };
 		66EA238C411DE4D11DBC9837 /* LBAlbumLikePreviewSliderRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderRouter.swift; sourceTree = "<group>"; };
-		672401F41F61705DEED81168 /* Pods-LifeTech_LifeDrive-widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_LifeDrive-widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_LifeDrive-widget/Pods-LifeTech_LifeDrive-widget.debug.xcconfig"; sourceTree = "<group>"; };
 		672F866E1E6027EF00229F58 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		68155E6558BE51BE961DBF01 /* Pods-BilloShared.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BilloShared.release.xcconfig"; path = "Pods/Target Support Files/Pods-BilloShared/Pods-BilloShared.release.xcconfig"; sourceTree = "<group>"; };
 		6840ABB184FD2E3A6427963E /* Pods-LifeDriveProviderUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveProviderUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveProviderUI/Pods-LifeDriveProviderUI.release.xcconfig"; sourceTree = "<group>"; };
@@ -14063,7 +14068,6 @@
 		EED76B8EC80CDF294DAF95F7 /* ActivityTimelineRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineRouter.swift; sourceTree = "<group>"; };
 		EF1B60451FCEE9F900662CBC /* BottomSelectionMusicTabBarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSelectionMusicTabBarInteractor.swift; sourceTree = "<group>"; };
 		EF1B60471FCEF38400662CBC /* BottomSelectionMusicTabBarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSelectionMusicTabBarRouter.swift; sourceTree = "<group>"; };
-		EF7F4341F6F078F59BAE4083 /* Pods-LifeDrive-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDrive-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDrive-widget/Pods-LifeDrive-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		EFA74F9D1FBF371100CF946E /* PrintService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintService.swift; sourceTree = "<group>"; };
 		EFA74FA11FBF378F00CF946E /* PrintPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintPresenter.swift; sourceTree = "<group>"; };
 		EFA74FA31FBF378F00CF946E /* PrintViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintViewController.swift; sourceTree = "<group>"; };
@@ -14091,7 +14095,6 @@
 		F64007ACBE141535B47058DF /* IntroduceViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewController.swift; sourceTree = "<group>"; };
 		F669E65CFFD6F28F9C6A7A59 /* Pods-LifeboxFileProvider.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProvider.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProvider/Pods-LifeboxFileProvider.appstore.xcconfig"; sourceTree = "<group>"; };
 		F7A3077F02ED54E20D070D6C /* Pods_LifeTech_LifeboxShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeTech_LifeboxShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F83B3DE318C401A5B20D43FF /* Pods-LifeTech_LifeDrive-widget.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_LifeDrive-widget.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_LifeDrive-widget/Pods-LifeTech_LifeDrive-widget.enterprise.xcconfig"; sourceTree = "<group>"; };
 		F8FA8222855A41A6E1DA96CC /* Pods-LifeTech_lifedrive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_lifedrive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_lifedrive/Pods-LifeTech_lifedrive.debug.xcconfig"; sourceTree = "<group>"; };
 		F9490A7550A6D3619929A250 /* UserInfoSubViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewModuleInput.swift; sourceTree = "<group>"; };
 		F96CB1C3C9928A6AA7F97841 /* FileInfoInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInitializer.swift; sourceTree = "<group>"; };
@@ -22336,10 +22339,6 @@
 				EDDA4151C609FCB8D4155B2F /* Pods-LifeDriveShared.release.xcconfig */,
 				F1F006A8DD397A0422D6D074 /* Pods-LifeDriveShared.appstore.xcconfig */,
 				395CAB459340BA6AD563A9CD /* Pods-LifeDriveShared.enterprise.xcconfig */,
-				672401F41F61705DEED81168 /* Pods-LifeTech_LifeDrive-widget.debug.xcconfig */,
-				C6259E774470392B704EB5F2 /* Pods-LifeTech_LifeDrive-widget.release.xcconfig */,
-				03C8F5D804A48664D495ADD7 /* Pods-LifeTech_LifeDrive-widget.appstore.xcconfig */,
-				F83B3DE318C401A5B20D43FF /* Pods-LifeTech_LifeDrive-widget.enterprise.xcconfig */,
 				0F9439ED2E7E74DE84E29DB7 /* Pods-LifeTech_LifeDriveFileProvider.debug.xcconfig */,
 				8893F4978960E146E4E633E1 /* Pods-LifeTech_LifeDriveFileProvider.release.xcconfig */,
 				3FCFFE152FECE3E81169CD02 /* Pods-LifeTech_LifeDriveFileProvider.appstore.xcconfig */,
@@ -22360,10 +22359,6 @@
 				22B1ABDE64A678C07E027E62 /* Pods-LifeTech_lifedrive.release.xcconfig */,
 				2C08D49DCF0B32ED4A1C207E /* Pods-LifeTech_lifedrive.appstore.xcconfig */,
 				61985FCC0EFA34A322F32AB7 /* Pods-LifeTech_lifedrive.enterprise.xcconfig */,
-				18727347BB1DC5883DFADF41 /* Pods-LifeDrive-widget.debug.xcconfig */,
-				36347F41C4CC01801EE3961B /* Pods-LifeDrive-widget.release.xcconfig */,
-				B0F2B159560EC4895B61A19E /* Pods-LifeDrive-widget.appstore.xcconfig */,
-				EF7F4341F6F078F59BAE4083 /* Pods-LifeDrive-widget.enterprise.xcconfig */,
 				303901C614BDC97968C83E79 /* Pods-TC_Depo_LifeTech.debug.xcconfig */,
 				EE2DEBC14C88399D81478A27 /* Pods-TC_Depo_LifeTech.release.xcconfig */,
 				56AAE583A515DFB162F1EAE6 /* Pods-TC_Depo_LifeTech.appstore.xcconfig */,
@@ -23547,6 +23542,15 @@
 				0303A6DF2397D0D000907F42 /* PopUpController.xib in Resources */,
 				0303A6E42397D0D000907F42 /* FileInfoViewController.xib in Resources */,
 				CF703F4C24E3CC5A005EFFFD /* VideoPlayerCell.xib in Resources */,
+				0303A6E52397D0D000907F42 /* ins_paylas@2x.png in Resources */,
+				0303A6E62397D0D000907F42 /* rotation.png in Resources */,
+				0303A6E72397D0D000907F42 /* t_kucuk@2x.png in Resources */,
+				0303A6E82397D0D000907F42 /* italic@2x.png in Resources */,
+				0303A6E92397D0D000907F42 /* tik_icon.png in Resources */,
+				0303A6EA2397D0D000907F42 /* kare_selected@3x.png in Resources */,
+				0303A6EB2397D0D000907F42 /* refresh@2x.png in Resources */,
+				CF703F4C24E3CC5A005EFFFD /* (null) in Resources */,
+				0303A6EC2397D0D000907F42 /* Orta_Selected@3x.png in Resources */,
 				981EA2E9247D4CA700A51B7D /* ContactsOperationView.xib in Resources */,
 				0303A6ED2397D0D000907F42 /* SuggestionTableSectionHeader.xib in Resources */,
 				0303A6EF2397D0D000907F42 /* Settings.bundle in Resources */,
@@ -23962,6 +23966,12 @@
 				B5AB5B6D21F9B029003AABB4 /* FacebookAccountConnectionCell.xib in Resources */,
 				9863B8AB24D2B7D600664810 /* PreparedFilterCell.xib in Resources */,
 				CF703F4A24E3CC57005EFFFD /* VideoPlayerCell.xib in Resources */,
+				8C06B1AD2008AD72003D8E05 /* CRYFrameCell.nib in Resources */,
+				CF703F4A24E3CC57005EFFFD /* (null) in Resources */,
+				8C06B0F52008AD72003D8E05 /* serbest_cizgi_selected@2x.png in Resources */,
+				8C06B13D2008AD72003D8E05 /* tahta_yeni@2x.png in Resources */,
+				8C06B0C92008AD71003D8E05 /* sample@3x.png in Resources */,
+				8C06B0A92008AD71003D8E05 /* renk_selected@2x.png in Resources */,
 				98DBC04D2410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
 				8C0E90581FDEBDFF00789C91 /* SwipeableCardCell.xib in Resources */,
 				8CF6A9C4207C8CF9007DEF71 /* CollectionViewSpinnerFooter.xib in Resources */,
@@ -24015,6 +24025,15 @@
 				CE634AF7230EAAA700CED18C /* PaymentPopUpController.xib in Resources */,
 				B5B6543122A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */,
 				CEF41E9E2035B2DF0008FCD5 /* PhotoDetailCell.xib in Resources */,
+				8C06AF532008AD70003D8E05 /* cropy_icon@2x.png in Resources */,
+				8C06AEF32008AD70003D8E05 /* Buyuk_Selected@3x.png in Resources */,
+				8C06B0C32008AD71003D8E05 /* sag_ok@2x.png in Resources */,
+				8C06AFDB2008AD71003D8E05 /* italic@2x.png in Resources */,
+				CEF41E9E2035B2DF0008FCD5 /* PhotoDetailCell.xib in Resources */,
+				8C06B1C32008AD72003D8E05 /* lookup_soft_elegance_1.png in Resources */,
+				8C06B0E52008AD71003D8E05 /* sample_yellow.png in Resources */,
+				8C06B0DD2008AD71003D8E05 /* sample_red@2x.png in Resources */,
+				8C06B1252008AD72003D8E05 /* t_kucuk@2x.png in Resources */,
 				8C0E906D1FDEBDFF00789C91 /* ProgressCard.xib in Resources */,
 				737A2E9E2338989B0014258A /* SetSecurityQuestionViewController.xib in Resources */,
 				92004B3921AD0F2200582C45 /* MyStorageViewController.xib in Resources */,
@@ -24485,6 +24504,12 @@
 				7C2F56FB1F1CC1CC0014870B /* ActionsMenuTableViewCell.xib in Resources */,
 				CE51AF921EF90853005DCEE0 /* IntroduceSubView.xib in Resources */,
 				B5E3AB7124DA8F4A009E6D7F /* VideoPlayerCell.xib in Resources */,
+				8C06AF5E2008AD70003D8E05 /* daire_selected@2x.png in Resources */,
+				8C06B0502008AD71003D8E05 /* parlaklik@3x.png in Resources */,
+				B5E3AB7124DA8F4A009E6D7F /* VideoPlayerCell.xib in Resources */,
+				8C06B0142008AD71003D8E05 /* kup@2x.png in Resources */,
+				8C06AEE82008AD70003D8E05 /* Buyuk.png in Resources */,
+				8C06AF842008AD70003D8E05 /* extraOptions.png in Resources */,
 				7CC11AB01FE276F500AF022D /* WaitingForWiFiPopUp.xib in Resources */,
 				890F737222EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
 				4B857863233908B400F378AB /* SubjectDetailsViewController.xib in Resources */,
@@ -24798,6 +24823,9 @@
 				CE784E8822A685FB00662219 /* PasscodeViewImp.xib in Resources */,
 				9863B8AE24D2B7D600664810 /* PreparedFilterCell.xib in Resources */,
 				CF703F4D24E3CC5B005EFFFD /* VideoPlayerCell.xib in Resources */,
+				CF703F4D24E3CC5B005EFFFD /* (null) in Resources */,
+				CE784E8922A685FB00662219 /* Kucuk_Selected@3x.png in Resources */,
+				CE784E8A22A685FB00662219 /* t_kucuk_selected@3x.png in Resources */,
 				CE784E8B22A685FB00662219 /* SearchView.xib in Resources */,
 				CE784E8C22A685FB00662219 /* ManageContactsViewController.xib in Resources */,
 				98DBC0502410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
@@ -25104,6 +25132,12 @@
 				CF8B6A8C23CBC9D70021B021 /* FacebookAccountConnectionCell.xib in Resources */,
 				9863B8AC24D2B7D600664810 /* PreparedFilterCell.xib in Resources */,
 				CF703F4B24E3CC58005EFFFD /* VideoPlayerCell.xib in Resources */,
+				CF8B6A8D23CBC9D70021B021 /* CRYFrameCell.nib in Resources */,
+				CF703F4B24E3CC58005EFFFD /* (null) in Resources */,
+				CF8B6A8E23CBC9D70021B021 /* serbest_cizgi_selected@2x.png in Resources */,
+				CF8B6A8F23CBC9D70021B021 /* tahta_yeni@2x.png in Resources */,
+				CF8B6A9023CBC9D70021B021 /* sample@3x.png in Resources */,
+				CF8B6A9123CBC9D70021B021 /* renk_selected@2x.png in Resources */,
 				98DBC04E2410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib in Resources */,
 				CF8B6A9323CBC9D70021B021 /* SwipeableCardCell.xib in Resources */,
 				CF8B6A9923CBC9D70021B021 /* CollectionViewSpinnerFooter.xib in Resources */,
@@ -25167,6 +25201,15 @@
 				CF8B6B0323CBC9D70021B021 /* (null) in Resources */,
 				CF8B6B0423CBC9D70021B021 /* (null) in Resources */,
 				CF8B6B0523CBC9D70021B021 /* (null) in Resources */,
+				CF8B6AFD23CBC9D70021B021 /* cropy_icon@2x.png in Resources */,
+				CF8B6AFE23CBC9D70021B021 /* Buyuk_Selected@3x.png in Resources */,
+				CF8B6AFF23CBC9D70021B021 /* sag_ok@2x.png in Resources */,
+				CF8B6B0023CBC9D70021B021 /* italic@2x.png in Resources */,
+				CF8B6B0123CBC9D70021B021 /* PhotoDetailCell.xib in Resources */,
+				CF8B6B0223CBC9D70021B021 /* lookup_soft_elegance_1.png in Resources */,
+				CF8B6B0323CBC9D70021B021 /* sample_yellow.png in Resources */,
+				CF8B6B0423CBC9D70021B021 /* sample_red@2x.png in Resources */,
+				CF8B6B0523CBC9D70021B021 /* t_kucuk@2x.png in Resources */,
 				CF8B6B0623CBC9D70021B021 /* ProgressCard.xib in Resources */,
 				CF8B6B0823CBC9D70021B021 /* SetSecurityQuestionViewController.xib in Resources */,
 				CF8B6B0D23CBC9D70021B021 /* MyStorageViewController.xib in Resources */,
@@ -25414,7 +25457,7 @@
 				CF8B725823CBCA280021B021 /* PasscodeViewImp.xib in Resources */,
 				9863B89224D2AA8000664810 /* PreparedFiltersView.xib in Resources */,
 				0305A35023D5C5A9004D1EC7 /* HSCompletionPopUp.xib in Resources */,
-				CF703F4E24E3CC5C005EFFFD /* VideoPlayerCell.xib in Resources */,
+				CF703F4E24E3CC5C005EFFFD /* (null) in Resources */,
 				CF8B725B23CBCA280021B021 /* SearchView.xib in Resources */,
 				9863B8AF24D2B7D600664810 /* PreparedFilterCell.xib in Resources */,
 				CF8B725C23CBCA280021B021 /* ManageContactsViewController.xib in Resources */,
@@ -27442,7 +27485,7 @@
 				0303A2522397D0D000907F42 /* IntroduceInteractorOutput.swift in Sources */,
 				985D87C924D0156A004BCDFF /* AdjustFilterView.swift in Sources */,
 				CF71463624B597A800D83E60 /* ContactSyncNoBackupView.swift in Sources */,
-				CF703F4724E3CC4B005EFFFD /* VideoPlayerCell.swift in Sources */,
+				CF703F4724E3CC4B005EFFFD /* (null) in Sources */,
 				0303A2532397D0D000907F42 /* IntroduceInteractor.swift in Sources */,
 				0303A2542397D0D000907F42 /* AuthoritySingleton.swift in Sources */,
 				0303A2552397D0D000907F42 /* PrintPresenter.swift in Sources */,
@@ -29844,7 +29887,7 @@
 				8C06AC242008AB17003D8E05 /* AsyncOperation.swift in Sources */,
 				FA793D88201872DC00A02B46 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				CE4D282B207E3D51003AE4FB /* AppWormholeListener.swift in Sources */,
-				CF703F4524E3CC49005EFFFD /* VideoPlayerCell.swift in Sources */,
+				CF703F4524E3CC49005EFFFD /* (null) in Sources */,
 				FA793D8B201872E600A02B46 /* PeopleService.swift in Sources */,
 				8C0E8FB41FDEBDFF00789C91 /* UploadFromLifeBoxRouter.swift in Sources */,
 				8C0E8FB51FDEBDFF00789C91 /* BaseViewController.swift in Sources */,
@@ -32119,7 +32162,7 @@
 				9853CD472361BDCE00E19BF7 /* IntroduceViewController.swift in Sources */,
 				8C86111922BCFDA700108958 /* PermissionType.swift in Sources */,
 				CE78488122A685FB00662219 /* MoreActionsConfig.swift in Sources */,
-				CF703F4824E3CC4D005EFFFD /* VideoPlayerCell.swift in Sources */,
+				CF703F4824E3CC4D005EFFFD /* (null) in Sources */,
 				CE78488222A685FB00662219 /* ServerValueError.swift in Sources */,
 				CE78488422A685FB00662219 /* HomePageModuleInput.swift in Sources */,
 				B51D959C24D00E4300FA2EA0 /* AdjustmentManager.swift in Sources */,
@@ -33614,7 +33657,7 @@
 				98F032E52403FFC000F1D415 /* Contact.m in Sources */,
 				CF8B642123CBC9D70021B021 /* PrintInteractorOutput.swift in Sources */,
 				CF8B642223CBC9D70021B021 /* MoreActionsConfig.swift in Sources */,
-				CF703F4624E3CC4A005EFFFD /* VideoPlayerCell.swift in Sources */,
+				CF703F4624E3CC4A005EFFFD /* (null) in Sources */,
 				CF8B642323CBC9D70021B021 /* InstaPickSelectionSegmentedController.swift in Sources */,
 				CF71470D24B597AA00D83E60 /* ContactListHeader.swift in Sources */,
 				CF8B642423CBC9D70021B021 /* InstaPickCircularLoader.swift in Sources */,
@@ -35053,7 +35096,7 @@
 				CF8B6BD323CBCA280021B021 /* PrintInteractorOutput.swift in Sources */,
 				CF8B6BD423CBCA280021B021 /* IntroduceViewController.swift in Sources */,
 				CF8B6BD523CBCA280021B021 /* PermissionType.swift in Sources */,
-				CF703F4924E3CC4E005EFFFD /* VideoPlayerCell.swift in Sources */,
+				CF703F4924E3CC4E005EFFFD /* (null) in Sources */,
 				CF8B6BD623CBCA280021B021 /* MoreActionsConfig.swift in Sources */,
 				CF8B6BD723CBCA280021B021 /* ServerValueError.swift in Sources */,
 				B51D959D24D00E4300FA2EA0 /* AdjustmentManager.swift in Sources */,
