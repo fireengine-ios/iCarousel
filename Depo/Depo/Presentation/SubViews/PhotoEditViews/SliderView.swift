@@ -17,19 +17,21 @@ final class SliderView: UIView {
         slider.isStatefulAPIEnabled = true
         slider.isThumbHollowAtStart = false
         slider.setThumbColor(.white, for: .normal)
-        slider.setTrackFillColor(.white, for: .normal)
-        slider.setTrackBackgroundColor(.gray, for: .normal)
+        slider.setTrackFillColor(.lrTealishTwo, for: .normal)
+        slider.setTrackBackgroundColor(ColorConstants.photoEditSliderColor, for: .normal)
         slider.addTarget(self, action: #selector(didTouchUpInside(_:)), for: .touchUpInside)
         slider.addTarget(self, action: #selector(didChangeSliderValue(_:)), for: .valueChanged)
         return slider
     }()
+    
+    private lazy var gradientView = GradientView()
     
     private var previosValue = CGFloat.greatestFiniteMagnitude
     
     var changeValueHandler: ValueHandler<Float>?
     
     func setup(minValue: Float, maxValue: Float, anchorValue: Float, currentValue: Float) {
-        backgroundColor = ColorConstants.filterBackColor
+        backgroundColor = ColorConstants.photoEditBackgroundColor
         addSubview(slider)
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.pinToSuperviewEdges()
@@ -38,6 +40,35 @@ final class SliderView: UIView {
         slider.maximumValue = CGFloat(maxValue)
         slider.filledTrackAnchorValue = CGFloat(anchorValue)
         slider.setValue(CGFloat(currentValue), animated: false)
+    }
+    
+    func setupGradient(startColor: UIColor, endColor: UIColor) {
+        guard gradientView.superview == nil else {
+            updateGradient(startColor: startColor, endColor: endColor)
+            return
+        }
+        
+        gradientView.setup(withFrame: bounds,
+                           startColor: startColor,
+                           endColoer: endColor,
+                           startPoint: .zero,
+                           endPoint: CGPoint(x: 1, y: 0))
+        
+        addSubview(gradientView)
+        sendSubview(toBack: gradientView)
+        
+        gradientView.translatesAutoresizingMaskIntoConstraints = false
+        gradientView.heightAnchor.constraint(equalToConstant: 2).activate()
+        gradientView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).activate()
+        gradientView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).activate()
+        gradientView.centerYAnchor.constraint(equalTo: centerYAnchor).activate()
+        gradientView.layoutSubviews()
+        
+        slider.setTrackBackgroundColor(.clear, for: .normal)
+    }
+    
+    func updateGradient(startColor: UIColor, endColor: UIColor) {
+        gradientView.gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
     }
     
     //MARK: - Actions

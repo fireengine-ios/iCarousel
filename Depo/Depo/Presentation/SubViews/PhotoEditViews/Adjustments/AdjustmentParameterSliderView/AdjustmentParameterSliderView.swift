@@ -57,6 +57,14 @@ final class AdjustmentParameterSliderView: UIView, NibInit {
         setupSlider(parameter: parameter)
     }
     
+    func setupGradient(startColor: UIColor, endColor: UIColor) {
+        slider.setupGradient(startColor: startColor, endColor: endColor)
+    }
+    
+    func updateGradient(startColor: UIColor, endColor: UIColor) {
+        slider.updateGradient(startColor: startColor, endColor: endColor)
+    }
+    
     private func setupSlider(parameter: AdjustmentParameterProtocol) {
         if slider.superview == nil {
             sliderContentView.addSubview(slider)
