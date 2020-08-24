@@ -11588,6 +11588,16 @@
 		CFACACAE247CF8AC00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
 		CFACACAF247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
 		CFACACB0247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
+		CFB6588324F3C03F0070E258 /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
+		CFB6588724F3C0400070E258 /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
+		CFB6588824F3C0410070E258 /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
+		CFB6588924F3C0420070E258 /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
+		CFB6588A24F3C0430070E258 /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
+		CFB6588B24F3C0470070E258 /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
+		CFB6588C24F3C0480070E258 /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
+		CFB6588D24F3C0490070E258 /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
+		CFB6588E24F3C04A0070E258 /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
+		CFB6588F24F3C04B0070E258 /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
 		D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */; };
 		D42ED46420C9D9E600761645 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */; };
 		D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E01F3F18FA00EFDC6D /* UsageInfoConfigurator.swift */; };
@@ -23658,6 +23668,7 @@
 				985D87E124D0156B004BCDFF /* PhotoEditViewController.xib in Resources */,
 				0303A5EB2397D0D000907F42 /* FaceImagePhotosViewController.xib in Resources */,
 				0303A5ED2397D0D000907F42 /* TurkcellSaturaBol.ttf in Resources */,
+				CFB6588D24F3C0490070E258 /* VideoPlayerCell.xib in Resources */,
 				982319C524F3A1E700FD16E2 /* AdjustmentParameterSliderView.xib in Resources */,
 				9892229C240D0C3C004155A5 /* BecomePremiumView.xib in Resources */,
 				0303A5F22397D0D000907F42 /* SpotifyDeletePopup.xib in Resources */,
@@ -24179,6 +24190,7 @@
 				982319E124F3A1E700FD16E2 /* PhotoEditNavbar.xib in Resources */,
 				8C3930F22100668300C1D82D /* GoogleService-Info.plist in Resources */,
 				0302B73923701F000005D78F /* AnalyzeHistoryEmptyCell.xib in Resources */,
+				CFB6588B24F3C0470070E258 /* VideoPlayerCell.xib in Resources */,
 				982319F324F3A1E700FD16E2 /* PhotoEditTabbar.xib in Resources */,
 				730A997522D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				735766E923AE1B34008589E9 /* StickerCollectionViewCell.xib in Resources */,
@@ -24960,6 +24972,7 @@
 				CF71468B24B597A900D83E60 /* ContactSyncAnalyzeProgressView.xib in Resources */,
 				CE784DFB22A685FB00662219 /* CollectionViewCellForPhoto.xib in Resources */,
 				CE784DFC22A685FB00662219 /* TurkcellSaturaDemIta.ttf in Resources */,
+				CFB6588E24F3C04A0070E258 /* VideoPlayerCell.xib in Resources */,
 				CF71460D24B597A800D83E60 /* ContactDetailHeader.xib in Resources */,
 				CF71467324B597A900D83E60 /* ContactSyncMainView.xib in Resources */,
 				89E51D4522CA110A007A7DBC /* CreateStoryPreviewViewController.xib in Resources */,
@@ -25244,6 +25257,7 @@
 				CF8B69B023CBC9D70021B021 /* inputCell.xib in Resources */,
 				17B9B0CD23F1F76900CAF5E1 /* FullQuotaWarningPopUp.xib in Resources */,
 				CF8B69B623CBC9D70021B021 /* PhotoVideoDetailViewController.xib in Resources */,
+				CFB6588C24F3C0480070E258 /* VideoPlayerCell.xib in Resources */,
 				CF7146E924B597A900D83E60 /* DeleteDuplicatesCell.xib in Resources */,
 				CF8B69B723CBC9D70021B021 /* SelectQuestionViewController.xib in Resources */,
 				CF8B69C023CBC9D70021B021 /* ActivityTimelineViewController.xib in Resources */,
@@ -25645,6 +25659,7 @@
 				982319E524F3A1E700FD16E2 /* PhotoEditNavbar.xib in Resources */,
 				0305A31F23D5C381004D1EC7 /* HiddenPhotosViewController.xib in Resources */,
 				CF8B724123CBCA280021B021 /* SpotifyImportedTracksViewController.xib in Resources */,
+				CFB6588F24F3C04B0070E258 /* VideoPlayerCell.xib in Resources */,
 				982319F724F3A1E700FD16E2 /* PhotoEditTabbar.xib in Resources */,
 				CF8B724223CBCA280021B021 /* PhotosOrderCollectionViewCell.xib in Resources */,
 				CF8B724423CBCA280021B021 /* LaunchScreen.storyboard in Resources */,
@@ -27957,6 +27972,7 @@
 				171090E423FC8E350036A033 /* SmashActionService.swift in Sources */,
 				0303A3292397D0D000907F42 /* PhotoVideoController.swift in Sources */,
 				0303A32A2397D0D000907F42 /* FreeAppSpacePresenter.swift in Sources */,
+				CFB6588824F3C0410070E258 /* VideoPlayerCell.swift in Sources */,
 				0303A32B2397D0D000907F42 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
 				0303A32C2397D0D000907F42 /* DropboxParametrs.swift in Sources */,
 				0303A32D2397D0D000907F42 /* SingleThumbnailAlbumCell.swift in Sources */,
@@ -30110,6 +30126,7 @@
 				CF71461624B597A800D83E60 /* ContactDetailHeader.swift in Sources */,
 				737A2EA22338A5200014258A /* SecurityQuestionView.swift in Sources */,
 				8CD7D8F92111ABA00019B4F3 /* FixedAVPlayerViewController.swift in Sources */,
+				CFB6588324F3C03F0070E258 /* VideoPlayerCell.swift in Sources */,
 				8C0E8FA11FDEBDFF00789C91 /* AlbumDetailViewController.swift in Sources */,
 				8C0E8FA21FDEBDFF00789C91 /* SingletonStorage.swift in Sources */,
 				CE0596F420385E950083D6FC /* ImageFormat.swift in Sources */,
@@ -33531,6 +33548,7 @@
 				CE784BF522A685FB00662219 /* PremiumViewInput.swift in Sources */,
 				CE784BF622A685FB00662219 /* SelectFolderViewController.swift in Sources */,
 				CE784BF722A685FB00662219 /* SelectFolderPresenter.swift in Sources */,
+				CFB6588924F3C0420070E258 /* VideoPlayerCell.swift in Sources */,
 				73A1833F235855AA0095719F /* CampaignCard.swift in Sources */,
 				CE784BF822A685FB00662219 /* Message.m in Sources */,
 				CE784BF922A685FB00662219 /* AlbumCollectionViewCell.swift in Sources */,
@@ -35149,6 +35167,7 @@
 				CF8B683123CBC9D70021B021 /* AlbumDetailViewController.swift in Sources */,
 				CF8B683323CBC9D70021B021 /* SingletonStorage.swift in Sources */,
 				CF8B683423CBC9D70021B021 /* ImageFormat.swift in Sources */,
+				CFB6588724F3C0400070E258 /* VideoPlayerCell.swift in Sources */,
 				CF8B683523CBC9D70021B021 /* ContactService.swift in Sources */,
 				0305A33A23D5C4DC004D1EC7 /* SubscribedAlbumDetailPresenter.swift in Sources */,
 				CF8B683623CBC9D70021B021 /* TermsOfUseInteractorInput.swift in Sources */,
@@ -36511,6 +36530,7 @@
 				CF8B6F9223CBCA280021B021 /* AlbumCollectionViewCell.swift in Sources */,
 				CF8B6F9323CBCA280021B021 /* MyStorageInteractorInput.swift in Sources */,
 				CF8B6F9423CBCA280021B021 /* SelectFolderInitializer.swift in Sources */,
+				CFB6588A24F3C0430070E258 /* VideoPlayerCell.swift in Sources */,
 				CF8B6F9523CBCA280021B021 /* FreeUpSpacePopUp.swift in Sources */,
 				CF8B6F9623CBCA280021B021 /* VisualMusicPlayerInteractor.swift in Sources */,
 				CF8B6F9723CBCA280021B021 /* BaseFilesGreedModuleOutput.swift in Sources */,
