@@ -11,8 +11,6 @@ import SDWebImage
 import Alamofire
 import Adjust
 import KeychainSwift
-import Fabric
-import Crashlytics
 
 final class AppConfigurator {
     
@@ -23,7 +21,6 @@ final class AppConfigurator {
     static let analyticsService: AnalyticsService = factory.resolve()
 
     static func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        Fabric.with([Crashlytics.self, Answers.self])
         
         /// force arabic language left to right
         UIView.appearance().semanticContentAttribute = .forceLeftToRight
