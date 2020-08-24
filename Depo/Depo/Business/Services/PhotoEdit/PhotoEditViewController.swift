@@ -131,6 +131,20 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
             self.uiManager.image = outputImage
         }
     }
+    
+    func didChangeHSLColor(_ color: HSVMultibandColor) {
+        guard let manager = adjustmentManager else {
+            return
+        }
+        
+        manager.applyOnHSLColorDidChange(value: color, sourceImage: sourceImage) { [weak self] outputImage in
+            guard let self = self else {
+                return
+            }
+            
+            self.uiManager.image = outputImage
+        }
+    }
 }
 
 //MARK: - FilterChangesBarDelegate

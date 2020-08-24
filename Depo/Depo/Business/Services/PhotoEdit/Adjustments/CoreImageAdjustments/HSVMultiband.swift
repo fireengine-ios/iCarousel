@@ -237,11 +237,11 @@ final class HSVMultiband: CIFilter, BasicFilter {
         guard color != filteredColor else {
             return
         }
-        
-        resetColors()
+        filteredColor = color
+        resetColorShifts()
     }
     
-    private func resetColors() {
+    private func resetColorShifts() {
         inputRedShift = CIVector(x: 0, y: 1, z: 1)
         inputOrangeShift = CIVector(x: 0, y: 1, z: 1)
         inputYellowShift = CIVector(x: 0, y: 1, z: 1)

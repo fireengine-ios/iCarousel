@@ -127,18 +127,19 @@ final class AdjustmentManager {
                 hslParameterAdjustment = HSLColorAdjustmentParameter().onValueDidChange { color in
                     coreAdjustment.set(color: color)
                 }
-                let hueParameter = AdjustmentParameter(type: .hue).onValueDidChange { value in
-                    coreAdjustment.set(hue: value)
+                let hueParameter = AdjustmentParameter(type: .hslHue).onValueDidChange { value in
+                    let radians = value * .pi / 180
+                    coreAdjustment.set(hue: radians)
                 }
                 
-                let saturarionParameter = AdjustmentParameter(type: .saturation).onValueDidChange { value in
+                let saturarionParameter = AdjustmentParameter(type: .hslSaturation).onValueDidChange { value in
                     coreAdjustment.set(saturation: value)
                 }
                 
-                let intensityParameter = AdjustmentParameter(type: .intensity).onValueDidChange { value in
+                let luminosityParameter = AdjustmentParameter(type: .hslLuminosity).onValueDidChange { value in
                    coreAdjustment.set(luminosity: value)
                 }
-                parameters = [hueParameter, saturarionParameter, intensityParameter]
+                parameters = [hueParameter, saturarionParameter, luminosityParameter]
                 thirdPartyAdjustment = CoreImageAdjustment(filter: coreAdjustment)
             
             default:
@@ -171,29 +172,32 @@ final class AdjustmentManager {
     }
     
     
-    private func updateValues(parameterType: AdjustmentParameterType, value: Float) -> AdjustmentProtocol? {
-        let relatedAdjustment = adjustments.first(where: { $0.parameters.contains(where: { $0.type == parameterType }) })
+    func applyOnHSLColorDidChange(value: HSVMultibandColor, sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
         
-        guard let adjustment = relatedAdjustment else {
-            assertionFailure("Unknown adjustment")
-            return nil
+        operationQueue.cancelAllOperations()
+        
+        AdjustmentOperation.sourceImage = sourceImage
+        
+        guard let relatedAdjustment = update(hslColor: value) else {
+            return
         }
         
-        let relatedParameter = adjustment.parameters.first(where: { $0.type == parameterType })
-        
-        guard let parameter = relatedParameter else {
-            assertionFailure("Unknown adjustment parameter")
-            return nil
+        let operation = AdjustmentOperation(adjustment: relatedAdjustment) { [weak self] output in
+            guard let self = self else {
+                return
+            }
+            
+            AdjustmentOperation.sourceImage = output
+            
+            let unfinishedOperations = self.operationQueue.operations.filter { $0.isReady || $0.isExecuting }
+            let operationQueueIsEmpty = self.operationQueue.operations.isEmpty || unfinishedOperations.count <= 1
+            
+            if operationQueueIsEmpty {
+                onFinished(output)
+            }
         }
         
-        parameter.set(value: value)
-        
-        //because we're applying the adjustment on a sourceImage
-        guard parameter.currentValue != parameter.defaultValue else {
-            return nil
-        }
-        
-        return adjustment
+        operationQueue.addOperations([operation], waitUntilFinished: false)
     }
     
     
@@ -230,4 +234,44 @@ final class AdjustmentManager {
     
         operationQueue.addOperations(operations, waitUntilFinished: false)
     }
+    
+    
+    private func updateValues(parameterType: AdjustmentParameterType, value: Float) -> AdjustmentProtocol? {
+           let relatedAdjustment = adjustments.first(where: { $0.parameters.contains(where: { $0.type == parameterType }) })
+           
+           guard let adjustment = relatedAdjustment else {
+               assertionFailure("Unknown adjustment")
+               return nil
+           }
+           
+           let relatedParameter = adjustment.parameters.first(where: { $0.type == parameterType })
+           
+           guard let parameter = relatedParameter else {
+               assertionFailure("Unknown adjustment parameter")
+               return nil
+           }
+           
+           parameter.set(value: value)
+           
+           //because we're applying the adjustment on a sourceImage
+           guard parameter.currentValue != parameter.defaultValue else {
+               return nil
+           }
+           
+           return adjustment
+       }
+       
+       private func update(hslColor: HSVMultibandColor) -> AdjustmentProtocol? {
+           guard let relatedAdjustment = adjustments.first(where: { $0.hslColorParameter != nil }) else {
+               return nil
+           }
+           
+           guard relatedAdjustment.hslColorParameter?.currentValue != hslColor else {
+               return nil
+           }
+           
+           relatedAdjustment.hslColorParameter?.set(value: hslColor)
+           
+           return relatedAdjustment
+       }
 }
