@@ -24,21 +24,21 @@ final class AdjustView: AdjustmentsView, NibInit {
     @IBOutlet private weak var minValueLabel: UILabel! {
         willSet {
             newValue.textColor = .white
-            newValue.font = .TurkcellSaturaDemFont(size: 12)
+            newValue.font = .TurkcellSaturaMedFont(size: 12)
         }
     }
     
     @IBOutlet private weak var maxValueLabel: UILabel! {
         willSet {
             newValue.textColor = .white
-            newValue.font = .TurkcellSaturaDemFont(size: 12)
+            newValue.font = .TurkcellSaturaMedFont(size: 12)
         }
     }
     
     @IBOutlet private weak var currentValueLabel: UILabel! {
         willSet {
             newValue.textColor = .white
-            newValue.font = .TurkcellSaturaDemFont(size: 12)
+            newValue.font = .TurkcellSaturaMedFont(size: 12)
         }
     }
     
@@ -57,11 +57,7 @@ final class AdjustView: AdjustmentsView, NibInit {
     }
     
     private func setupSlider(parameter: AdjustmentParameterProtocol) {
-        if slider.superview == nil {
-            sliderContentView.addSubview(slider)
-            slider.translatesAutoresizingMaskIntoConstraints = false
-            slider.pinToSuperviewEdges(offset: UIEdgeInsets(topBottom: 0, rightLeft: 8))
-        }
+        slider.add(to: contentView)
         
         slider.setup(minValue: parameter.minValue,
                      maxValue: parameter.maxValue,

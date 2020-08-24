@@ -14,25 +14,38 @@ final class AdjustmentCategoryCell: UICollectionViewCell {
         willSet {
             newValue.textColor = .white
             newValue.textAlignment = .center
-            newValue.font = .TurkcellSaturaDemFont(size: 14)
+            newValue.font = .TurkcellSaturaMedFont(size: 12)
         }
     }
     
-    @IBOutlet private weak var imageView: UIImageView! {
-        willSet {
-            newValue.contentMode = .center
+    @IBOutlet private weak var imageView: UIImageView!
+    
+    override var isHighlighted: Bool {
+        didSet {
+            updateStyle()
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            updateStyle()
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        contentView.backgroundColor = ColorConstants.filterBackColor
+        contentView.backgroundColor = ColorConstants.photoEditBackgroundColor
     }
     
     func setup(with title: String, image: UIImage?) {
         titleLabel.text = title
         imageView.image = image
+        imageView.highlightedImage = image?.withRenderingMode(.alwaysTemplate).mask(with: .lrTealish)
     }
-
+    
+    private func updateStyle() {
+        imageView.isHighlighted = isHighlighted
+        titleLabel.textColor = isHighlighted ? .lrTealish : .white
+    }
 }

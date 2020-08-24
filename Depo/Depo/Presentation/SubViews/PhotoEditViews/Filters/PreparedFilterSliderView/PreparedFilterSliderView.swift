@@ -28,8 +28,8 @@ final class PreparedFilterSliderView: UIView, NibInit {
     private var filter: CustomFilterProtocol?
     
     private func setup(filter: CustomFilterProtocol, delegate: PreparedFilterSliderViewDelegate?) {
-        backgroundColor = ColorConstants.filterBackColor
-        sliderContentView.backgroundColor = ColorConstants.filterBackColor
+        backgroundColor = ColorConstants.photoEditBackgroundColor
+        sliderContentView.backgroundColor = ColorConstants.photoEditBackgroundColor
         
         self.filter = filter
         self.delegate = delegate
@@ -38,11 +38,7 @@ final class PreparedFilterSliderView: UIView, NibInit {
     }
 
     private func setupSlider(filter: CustomFilterProtocol) {
-        if slider.superview == nil {
-            sliderContentView.addSubview(slider)
-            slider.translatesAutoresizingMaskIntoConstraints = false
-            slider.pinToSuperviewEdges(offset: UIEdgeInsets(topBottom: 0, rightLeft: 8))
-        }
+        slider.add(to: sliderContentView)
         
         slider.setup(minValue: filter.parameter.minValue,
                      maxValue: filter.parameter.maxValue,

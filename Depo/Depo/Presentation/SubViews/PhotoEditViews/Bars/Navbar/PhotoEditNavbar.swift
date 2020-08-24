@@ -28,7 +28,7 @@ final class PhotoEditNavbar: UIView, NibInit {
         willSet {
             newValue.setTitle(TextConstants.photoEditNavBarSave, for: .normal)
             newValue.setTitleColor(.white, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 13)
+            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 16)
         }
     }
     

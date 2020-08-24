@@ -78,7 +78,7 @@ final class SelectionMenuController: UIViewController, NibInit {
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.backgroundColor = ColorConstants.filterBackColor
+        tableView.backgroundColor = ColorConstants.photoEditBackgroundColor
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = tableView.contentSize.height > tableView.frame.height
     }

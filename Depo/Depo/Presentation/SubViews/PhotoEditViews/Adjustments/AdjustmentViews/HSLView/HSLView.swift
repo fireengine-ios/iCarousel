@@ -33,12 +33,13 @@ final class HSLView: AdjustmentsView, NibInit {
     private func setupCollectionView() {
         if let layout = colorAssets.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.itemSize = CGSize(width: 44, height: 44)
+            layout.minimumLineSpacing = 4
         }
         colorAssets.dataSource = self
         colorAssets.delegate = self
         colorAssets.allowsMultipleSelection = false
         colorAssets.showsHorizontalScrollIndicator = false
-        colorAssets.backgroundColor = ColorConstants.filterBackColor
+        colorAssets.backgroundColor = ColorConstants.photoEditBackgroundColor
         colorAssets.register(nibCell: ColorCell.self)
         colorAssets.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: 8)
     }
@@ -46,10 +47,13 @@ final class HSLView: AdjustmentsView, NibInit {
     func setup(parameters: [AdjustmentParameterProtocol], colorParameter: HSLColorAdjustmentParameterProtocol, delegate: AdjustmentsViewDelegate?) {
         setup(parameters: parameters, delegate: delegate)
         
-        backgroundColor = ColorConstants.filterBackColor
+        backgroundColor = ColorConstants.photoEditBackgroundColor
         
         parameters.enumerated().forEach {
             let view = AdjustmentParameterSliderView.with(parameter: $0.element, delegate: self)
+            if let colors = colorParameter.currentValue.sliderGradientColors(for: $0.element.type) {
+                view.setupGradient(startColor: colors.startColor, endColor: colors.endColor)
+            }
             contentView.insertArrangedSubview(view, at: $0.offset)
         }
     
@@ -78,6 +82,15 @@ extension HSLView: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didChangeHSLColor(colors[indexPath.row])
+        let color = colors[indexPath.row]
+        delegate?.didChangeHSLColor(color)
+        
+        contentView.arrangedSubviews.forEach { view in
+            if let sliderView = view as? AdjustmentParameterSliderView,
+                let type = sliderView.type,
+                let colors = color.sliderGradientColors(for: type) {
+                sliderView.updateGradient(startColor: colors.startColor, endColor: colors.endColor)
+            }
+        }
     }
 }

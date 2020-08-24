@@ -109,7 +109,10 @@ struct ColorConstants {
 
     static let navy = UIColor(red: 4 / 255.0, green: 37 / 255.0, blue: 56 / 255.0, alpha: 1)
     
-    static let filterBackColor = UIColor.darkGray
+    static let photoEditBackgroundColor = UIColor(white: 20 / 255, alpha: 1)
+    static let photoEditSliderColor = UIColor(white: 48 / 255, alpha: 1)
+    
+    static let greenyBlue = UIColor(red: 65 / 255.0, green: 196 / 255.0, blue: 199 / 255.0, alpha: 1)
 }
 
 extension UIColor {

@@ -26,21 +26,12 @@ final class PhotoEditChangesBar: UIView, NibInit {
         willSet {
             newValue.textColor = .white
             newValue.textAlignment = .center
-            newValue.font = .TurkcellSaturaDemFont(size: 14)
+            newValue.font = .TurkcellSaturaMedFont(size: 16)
         }
     }
     
-    @IBOutlet private weak var cancelButton: UIButton! {
-        willSet {
-            newValue.setImage(UIImage(named: "photo_edit_cancel"), for: .normal)
-        }
-    }
-    
-    @IBOutlet private weak var applyButton: UIButton! {
-           willSet {
-               newValue.setImage(UIImage(named: "photo_edit_apply"), for: .normal)
-           }
-       }
+    @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var applyButton: UIButton!
     
     private weak var delegate: PhotoEditChangesBarDelegate?
     
@@ -50,5 +41,10 @@ final class PhotoEditChangesBar: UIView, NibInit {
     
     @IBAction private func onApply(_ sender: UIButton) {
         delegate?.applyChanges()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        backgroundColor = ColorConstants.photoEditBackgroundColor
     }
 }

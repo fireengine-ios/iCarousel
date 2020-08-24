@@ -11,23 +11,23 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AdjustmentParameterSliderView" customModule="Billo" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="41"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9YI-81-AJM">
-                    <rect key="frame" x="0.0" y="8" width="414" height="92"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="9YI-81-AJM">
+                    <rect key="frame" x="0.0" y="8" width="414" height="33"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VfK-jy-K9Y">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="29"/>
+                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VfK-jy-K9Y">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="16"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GdM-VB-OZp">
-                                    <rect key="frame" x="16" y="0.0" width="42" height="29"/>
+                                    <rect key="frame" x="16" y="0.0" width="42" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCw-WG-At2">
-                                    <rect key="frame" x="356" y="0.0" width="42" height="29"/>
+                                    <rect key="frame" x="356" y="0.0" width="42" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -37,6 +37,7 @@
                             <constraints>
                                 <constraint firstItem="GdM-VB-OZp" firstAttribute="top" secondItem="VfK-jy-K9Y" secondAttribute="top" id="XaU-iu-CLP"/>
                                 <constraint firstItem="qCw-WG-At2" firstAttribute="top" secondItem="VfK-jy-K9Y" secondAttribute="top" id="Yxv-Cz-d4n"/>
+                                <constraint firstAttribute="height" constant="16" id="Zel-Tv-I3E"/>
                                 <constraint firstAttribute="bottom" secondItem="GdM-VB-OZp" secondAttribute="bottom" id="mLi-ps-mNl"/>
                                 <constraint firstItem="qCw-WG-At2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GdM-VB-OZp" secondAttribute="trailing" constant="16" id="oKV-db-plx"/>
                                 <constraint firstAttribute="bottom" secondItem="qCw-WG-At2" secondAttribute="bottom" id="pvN-fe-dIk"/>
@@ -45,8 +46,11 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dB0-I4-r1x">
-                            <rect key="frame" x="0.0" y="29" width="414" height="63"/>
+                            <rect key="frame" x="0.0" y="17" width="414" height="16"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="lYY-FR-020"/>
+                            </constraints>
                         </view>
                     </subviews>
                 </stackView>
@@ -66,7 +70,7 @@
                 <outlet property="titleLabel" destination="GdM-VB-OZp" id="lSB-zi-0s9"/>
                 <outlet property="valueLabel" destination="qCw-WG-At2" id="cbo-Uh-0aQ"/>
             </connections>
-            <point key="canvasLocation" x="134.78260869565219" y="133.92857142857142"/>
+            <point key="canvasLocation" x="134.78260869565219" y="125.55803571428571"/>
         </view>
     </objects>
 </document>

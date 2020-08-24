@@ -34,13 +34,13 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nFk-JH-Rpa" customClass="ContainerView" customModule="Billo" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="728" width="414" height="90"/>
+                    <rect key="frame" x="0.0" y="818" width="414" height="0.0"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBm-Ct-o7t">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PiM-mg-5MO">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </view>
                             </subviews>
@@ -57,8 +57,8 @@
                         <constraint firstItem="bBm-Ct-o7t" firstAttribute="leading" secondItem="nFk-JH-Rpa" secondAttribute="leading" id="8pb-Fw-LLZ"/>
                         <constraint firstItem="PiM-mg-5MO" firstAttribute="width" secondItem="nFk-JH-Rpa" secondAttribute="width" multiplier="1:1" id="Pri-tH-A3c"/>
                         <constraint firstAttribute="trailing" secondItem="bBm-Ct-o7t" secondAttribute="trailing" id="TPg-8f-Rkc"/>
-                        <constraint firstItem="PiM-mg-5MO" firstAttribute="height" secondItem="nFk-JH-Rpa" secondAttribute="height" multiplier="1:1" priority="250" id="UT7-cT-me2"/>
-                        <constraint firstAttribute="height" priority="100" constant="90" id="jqu-LP-kDn"/>
+                        <constraint firstItem="PiM-mg-5MO" firstAttribute="height" secondItem="nFk-JH-Rpa" secondAttribute="height" multiplier="1:1" priority="750" id="UT7-cT-me2"/>
+                        <constraint firstAttribute="height" priority="100" id="jqu-LP-kDn"/>
                         <constraint firstItem="bBm-Ct-o7t" firstAttribute="top" secondItem="nFk-JH-Rpa" secondAttribute="top" id="set-P1-rdo"/>
                         <constraint firstAttribute="bottom" secondItem="bBm-Ct-o7t" secondAttribute="bottom" id="vmd-DC-68F"/>
                     </constraints>

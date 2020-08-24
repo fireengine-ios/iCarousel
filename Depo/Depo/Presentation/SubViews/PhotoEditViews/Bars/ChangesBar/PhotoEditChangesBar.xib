@@ -28,7 +28,7 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="q0o-eO-qRu" secondAttribute="height" multiplier="1:1" id="K2t-rN-b4K"/>
                     </constraints>
-                    <state key="normal" image="closeButton"/>
+                    <state key="normal" image="photo_edit_cancel"/>
                     <connections>
                         <action selector="onCancel:" destination="iN0-l3-epB" eventType="touchUpInside" id="Axz-ZG-2bs"/>
                     </connections>
@@ -38,7 +38,7 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Vl5-HS-uTa" secondAttribute="height" multiplier="1:1" id="6cn-9o-aJB"/>
                     </constraints>
-                    <state key="normal" image="applyIcon"/>
+                    <state key="normal" image="photo_edit_apply"/>
                     <connections>
                         <action selector="onApply:" destination="iN0-l3-epB" eventType="touchUpInside" id="HF7-H6-bn9"/>
                     </connections>
@@ -68,7 +68,7 @@
         </view>
     </objects>
     <resources>
-        <image name="applyIcon" width="15" height="15"/>
-        <image name="closeButton" width="15" height="15"/>
+        <image name="photo_edit_apply" width="20" height="20"/>
+        <image name="photo_edit_cancel" width="20" height="20"/>
     </resources>
 </document>
