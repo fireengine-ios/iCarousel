@@ -30,6 +30,16 @@ final class SliderView: UIView {
     
     var changeValueHandler: ValueHandler<Float>?
     
+    func add(to view: UIView) {
+        guard superview == nil else {
+            return
+        }
+        
+        view.addSubview(self)
+        translatesAutoresizingMaskIntoConstraints = false
+        pinToSuperviewEdges(offset: UIEdgeInsets(topBottom: 0, rightLeft: 10))
+    }
+    
     func setup(minValue: Float, maxValue: Float, anchorValue: Float, currentValue: Float) {
         backgroundColor = ColorConstants.photoEditBackgroundColor
         addSubview(slider)

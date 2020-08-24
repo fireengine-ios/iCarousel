@@ -11,14 +11,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="JZw-SK-5Dm" customClass="AdjustmentCategoriesView" customModule="Billo" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="77"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="H6n-V9-GMn">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="77"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="90" id="2HT-Ua-uIO"/>
+                        <constraint firstAttribute="height" constant="77" id="2HT-Ua-uIO"/>
                     </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TqK-F4-1w1">
                         <size key="itemSize" width="128" height="128"/>

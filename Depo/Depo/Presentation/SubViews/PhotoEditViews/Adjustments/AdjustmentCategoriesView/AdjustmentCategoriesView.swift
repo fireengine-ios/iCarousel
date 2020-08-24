@@ -68,13 +68,14 @@ final class AdjustmentCategoriesView: UIView, NibInit {
     private func setupCollectionView() {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             let width = Device.winSize.width / 4
-            layout.itemSize = CGSize(width: width, height: 90)
+            layout.itemSize = CGSize(width: width, height: 77)
             layout.minimumLineSpacing = 0
             layout.minimumInteritemSpacing = 0
         }
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.delaysContentTouches = false
         collectionView.backgroundColor = ColorConstants.photoEditBackgroundColor
         collectionView.register(nibCell: AdjustmentCategoryCell.self)
     }

@@ -21,15 +21,15 @@
                         <action selector="onHSLTapped:" destination="L4h-0S-5vj" eventType="touchUpInside" id="Fwv-fP-0I0"/>
                     </connections>
                 </button>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gyq-xi-cv2">
-                    <rect key="frame" x="0.0" y="44" width="414" height="208"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="gyq-xi-cv2">
+                    <rect key="frame" x="0.0" y="44" width="414" height="192"/>
                 </stackView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="gyq-xi-cv2" firstAttribute="trailing" secondItem="lbw-XP-mS9" secondAttribute="trailing" id="4PU-YI-PeY"/>
-                <constraint firstItem="gyq-xi-cv2" firstAttribute="leading" secondItem="lbw-XP-mS9" secondAttribute="leading" id="YFV-VP-8WO"/>
-                <constraint firstItem="gyq-xi-cv2" firstAttribute="bottom" secondItem="lbw-XP-mS9" secondAttribute="bottom" id="cxW-6U-2kO"/>
+                <constraint firstItem="gyq-xi-cv2" firstAttribute="trailing" secondItem="L4h-0S-5vj" secondAttribute="trailing" id="4PU-YI-PeY"/>
+                <constraint firstItem="gyq-xi-cv2" firstAttribute="leading" secondItem="L4h-0S-5vj" secondAttribute="leading" id="YFV-VP-8WO"/>
+                <constraint firstAttribute="bottom" secondItem="gyq-xi-cv2" secondAttribute="bottom" constant="16" id="cxW-6U-2kO"/>
                 <constraint firstItem="IOh-2b-yXS" firstAttribute="top" secondItem="L4h-0S-5vj" secondAttribute="top" constant="16" id="epN-6o-zCz"/>
                 <constraint firstItem="IOh-2b-yXS" firstAttribute="leading" secondItem="lbw-XP-mS9" secondAttribute="leading" constant="20" id="q6v-qo-JzG"/>
                 <constraint firstItem="gyq-xi-cv2" firstAttribute="top" secondItem="IOh-2b-yXS" secondAttribute="bottom" constant="8" id="vFH-4N-9sT"/>
