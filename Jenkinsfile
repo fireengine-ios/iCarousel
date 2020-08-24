@@ -26,8 +26,8 @@ apps = [
             itcTeamId: '118347642',
 	    //xcodeSchema: // Defaults to app name
             //xcodeTarget: // Defaults to app name
-            //xcodeSchema: 'lifedrive_Bundle', 
-            //xcodeTarget: 'lifedrive_Bundle'  
+            xcodeSchema: 'lifedrive_Bundle', 
+            xcodeTarget: 'lifedrive_Bundle'  
         ]
 ]
 derivedDir = 'lifebox'
