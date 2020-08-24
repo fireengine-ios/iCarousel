@@ -104,7 +104,11 @@ final class ContactListHeader: UIView, NibInit {
 extension ContactListHeader: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        delegate?.search(query: searchText)
+        if searchText.isEmpty {
+            delegate?.cancelSearch()
+        } else {
+            delegate?.search(query: searchText)
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
