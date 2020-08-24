@@ -47,7 +47,7 @@ enum AdjustmentViewType {
         case .hsl:
             return [.hsl]
         case .light:
-            return [.brightness, .contrast, .exposure, .highlightsAndShadows]
+            return [.exposure, .contrast, .highlightsAndShadows, .brightness]
         }
     }
 }

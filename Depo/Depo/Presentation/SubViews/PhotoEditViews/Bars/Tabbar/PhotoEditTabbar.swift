@@ -16,24 +16,23 @@ enum PhotoEditTabbarItemType {
     case filters
     case adjustments
     
-    //TODO: - Change Images
     private var templateImage: UIImage? {
         let imageName: String
         switch self {
         case .filters:
-            imageName = "EditButtonIcon"
+            imageName = "photo_edit_tabbar_filters"
         case .adjustments:
-            imageName = "cog"
+            imageName = "photo_edit_tabbar_adjustments"
         }
         return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
     }
     
     var normalImage: UIImage? {
-        templateImage?.mask(with: .lightGray)
+        templateImage?.mask(with: .white)
     }
     
     var selectedImage: UIImage? {
-        templateImage?.mask(with: .white)
+        templateImage?.mask(with: .lrTealish)
     }
 }
 
@@ -42,7 +41,6 @@ private final class PhotoEditButtonItem: UIButton {
     static func with(type: PhotoEditTabbarItemType) -> PhotoEditButtonItem {
         let button = PhotoEditButtonItem(type: .custom)
         button.type = type
-        button.isSelected = false
         button.setImage(type.normalImage, for: .normal)
         button.setImage(type.selectedImage, for: .highlighted)
         button.setImage(type.selectedImage, for: .selected)
@@ -65,13 +63,11 @@ final class PhotoEditTabbar: UIView, NibInit {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = ColorConstants.filterBackColor
+        backgroundColor = ColorConstants.photoEditBackgroundColor
     }
     
     func setup(with types: [PhotoEditTabbarItemType]) {
         types.forEach { addItem(type: $0) }
-        selectedItem = contentView.arrangedSubviews.first as? PhotoEditButtonItem
-        selectedItem?.isSelected = true
     }
     
     private func addItem(type: PhotoEditTabbarItemType) {

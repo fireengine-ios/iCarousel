@@ -25,8 +25,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ASw-qu-qdg">
                                 <rect key="frame" x="0.0" y="0.0" width="80" height="90"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list.bullet" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="j9u-rw-LPI">
-                                        <rect key="frame" x="0.0" y="2.5" width="80" height="84.5"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo_edit_tabbar_adjustments" translatesAutoresizingMaskIntoConstraints="NO" id="j9u-rw-LPI">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="90"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>
@@ -81,6 +81,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="list.bullet" catalog="system" width="128" height="88"/>
+        <image name="photo_edit_tabbar_adjustments" width="22" height="21"/>
     </resources>
 </document>

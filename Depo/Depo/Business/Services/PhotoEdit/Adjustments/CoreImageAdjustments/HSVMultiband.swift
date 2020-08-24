@@ -57,6 +57,94 @@ enum HSVMultibandColor: CaseIterable {
         }
     }
     
+    func sliderGradientColors(for type: AdjustmentParameterType) -> (startColor: UIColor, endColor: UIColor)? {
+        switch type {
+        case .hue:
+            switch self {
+                case .red:
+                    return (startColor: UIColor(red: 255 / 255, green: 14 / 255, blue: 154 / 255, alpha: 1),
+                            endColor: UIColor(red: 255 / 255, green: 56 / 255, blue: 1 / 255, alpha: 1))
+                case .orange:
+                    return (startColor: UIColor(red: 145 / 255, green: 13 / 255, blue: 13 / 255, alpha: 1),
+                            endColor: UIColor(red: 138 / 255, green: 127 / 255, blue: 13 / 255, alpha: 1))
+                case .yellow:
+                    return (startColor: UIColor(red: 140 / 255, green: 77 / 255, blue: 13 / 255, alpha: 1),
+                            endColor: UIColor(red: 67 / 255, green: 141 / 255, blue: 14 / 255, alpha: 1))
+                case .green:
+                    return (startColor: UIColor(red: 141 / 255, green: 133 / 255, blue: 11 / 255, alpha: 1),
+                            endColor: UIColor(red: 10 / 255, green: 141 / 255, blue: 98 / 255, alpha: 1))
+                case .aqua:
+                    return (startColor: UIColor(red: 65 / 255, green: 140 / 255, blue: 14 / 255, alpha: 1),
+                            endColor: UIColor(red: 13 / 255, green: 35 / 255, blue: 140 / 255, alpha: 1))
+                case .blue:
+                    return (startColor: UIColor(red: 13 / 255, green: 141 / 255, blue: 99 / 255, alpha: 1),
+                            endColor: UIColor(red: 87 / 255, green: 13 / 255, blue: 142 / 255, alpha: 1))
+                case .purple:
+                    return (startColor: UIColor(red: 14 / 255, green: 34 / 255, blue: 141 / 255, alpha: 1),
+                             endColor: UIColor(red: 139 / 255, green: 13 / 255, blue: 78 / 255, alpha: 1))
+                case .magenta:
+                    return (startColor: UIColor(red: 88 / 255, green: 13 / 255, blue: 141 / 255, alpha: 1),
+                            endColor: UIColor(red: 141 / 255, green: 13 / 255, blue: 14 / 255, alpha: 1))
+            }
+        case .saturation:
+            switch self {
+                case .red:
+                    return (startColor: UIColor(red: 182 / 255, green: 145 / 255, blue: 152 / 255, alpha: 1),
+                           endColor: UIColor(red: 255 / 255, green: 4 / 255, blue: 105 / 255, alpha: 1))
+                case .orange:
+                    return (startColor: UIColor(red: 129 / 255, green: 129 / 255, blue: 129 / 255, alpha: 1),
+                            endColor: UIColor(red: 144 / 255, green: 78 / 255, blue: 14 / 255, alpha: 1))
+                case .yellow:
+                    return (startColor: UIColor(red: 128 / 255, green: 128 / 255, blue: 128 / 255, alpha: 1),
+                            endColor: UIColor(red: 142 / 255, green: 132 / 255, blue: 14 / 255, alpha: 1))
+                case .green:
+                    return (startColor: UIColor(red: 118 / 255, green: 119 / 255, blue: 118 / 255, alpha: 1),
+                            endColor: UIColor(red: 68 / 255, green: 143 / 255, blue: 14 / 255, alpha: 1))
+                case .aqua:
+                    return (startColor: UIColor(red: 128 / 255, green: 128 / 255, blue: 128 / 255, alpha: 1),
+                            endColor: UIColor(red: 12 / 255, green: 147 / 255, blue: 103 / 255, alpha: 1))
+                case .blue:
+                    return (startColor: UIColor(red: 128 / 255, green: 128 / 255, blue: 130 / 255, alpha: 1),
+                            endColor: UIColor(red: 13 / 255, green: 35 / 255, blue: 142 / 255, alpha: 1))
+                case .purple:
+                    return (startColor: UIColor(red: 127 / 255, green: 127 / 255, blue: 127 / 255, alpha: 1),
+                             endColor: UIColor(red: 88 / 255, green: 13 / 255, blue: 142 / 255, alpha: 1))
+                case .magenta:
+                    return (startColor: UIColor(red: 130 / 255, green: 120 / 255, blue: 125 / 255, alpha: 1),
+                            endColor: UIColor(red: 141 / 255, green: 14 / 255, blue: 77 / 255, alpha: 1))
+            }
+        case .intensity:
+            switch self {
+                case .red:
+                    return(startColor: UIColor(red: 88 / 255, green: 0 / 255, blue: 29 / 255, alpha: 1),
+                           endColor: UIColor(red: 218 / 255, green: 140 / 255, blue: 155 / 255, alpha: 1))
+                case .orange:
+                    return (startColor: UIColor(red: 42 / 255, green: 32 / 255, blue: 23 / 255, alpha: 1),
+                            endColor: UIColor(red: 134 / 255, green: 113 / 255, blue: 93 / 255, alpha: 1))
+                case .yellow:
+                    return (startColor: UIColor(red: 41 / 255, green: 39 / 255, blue: 24 / 255, alpha: 1),
+                            endColor: UIColor(red: 128 / 255, green: 127 / 255, blue: 123 / 255, alpha: 1))
+                case .green:
+                    return (startColor: UIColor(red: 29 / 255, green: 36 / 255, blue: 25 / 255, alpha: 1),
+                            endColor: UIColor(red: 117 / 255, green: 119 / 255, blue: 117 / 255, alpha: 1))
+                case .aqua:
+                    return (startColor: UIColor(red: 102 / 255, green: 134 / 255, blue: 123 / 255, alpha: 1),
+                            endColor: UIColor(red: 117 / 255, green: 119 / 255, blue: 117 / 255, alpha: 1))
+                case .blue:
+                    return (startColor: UIColor(red: 22 / 255, green: 27 / 255, blue: 50 / 255, alpha: 1),
+                            endColor: UIColor(red: 86 / 255, green: 95 / 255, blue: 138 / 255, alpha: 1))
+                case .purple:
+                    return (startColor: UIColor(red: 39 / 255, green: 22 / 255, blue: 50 / 255, alpha: 1),
+                             endColor: UIColor(red: 120 / 255, green: 103 / 255, blue: 132 / 255, alpha: 1))
+                case .magenta:
+                    return (startColor: UIColor(red: 48 / 255, green: 22 / 255, blue: 36 / 255, alpha: 1),
+                            endColor: UIColor(red: 129 / 255, green: 116 / 255, blue: 123 / 255, alpha: 1))
+            }
+        default:
+            return nil
+        }
+    }
+    
     var hue: CGFloat {
         return color.hue()
     }
@@ -237,11 +325,11 @@ final class HSVMultiband: CIFilter, BasicFilter {
         guard color != filteredColor else {
             return
         }
-        
-        resetColors()
+        filteredColor = color
+        resetColorShifts()
     }
     
-    private func resetColors() {
+    private func resetColorShifts() {
         inputRedShift = CIVector(x: 0, y: 1, z: 1)
         inputOrangeShift = CIVector(x: 0, y: 1, z: 1)
         inputYellowShift = CIVector(x: 0, y: 1, z: 1)

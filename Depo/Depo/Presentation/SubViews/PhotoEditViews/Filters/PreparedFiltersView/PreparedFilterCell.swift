@@ -19,7 +19,7 @@ final class PreparedFilterCell: UICollectionViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaDemFont(size: 12)
+            newValue.font = .TurkcellSaturaMedFont(size: 12)
             newValue.textColor = .white
             newValue.textAlignment = .center
             newValue.numberOfLines = 2
@@ -30,7 +30,7 @@ final class PreparedFilterCell: UICollectionViewCell {
     @IBOutlet private weak var adjustmentView: UIView! {
         willSet {
             newValue.isHidden = true
-            newValue.backgroundColor = UIColor(white: 0, alpha: 0.3)
+            newValue.backgroundColor = ColorConstants.greenyBlue.withAlphaComponent(0.6)
         }
     }
     
@@ -45,7 +45,7 @@ final class PreparedFilterCell: UICollectionViewCell {
             adjustmentView.isHidden = !isSelected
             adjustmentImageView.isHidden = isOriginal
             imageContentView.transform = isSelected ? CGAffineTransform(scaleX: 1.15, y: 1.15) : .identity
-            titleLabel.font = isSelected ? .TurkcellSaturaBolFont(size: 13) : .TurkcellSaturaDemFont(size: 12)
+            titleLabel.textColor = isSelected ? .lrTealishTwo : .white
         }
     }
     
@@ -54,7 +54,7 @@ final class PreparedFilterCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        imageContentView.backgroundColor = ColorConstants.filterBackColor
+        imageContentView.backgroundColor = ColorConstants.photoEditBackgroundColor
     }
 
     func setup(title: String, image: UIImage?, isOriginal: Bool) {

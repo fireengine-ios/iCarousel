@@ -15,13 +15,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hfv-WU-IWO">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                    <rect key="frame" x="0.0" y="20" width="414" height="24"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="Hfv-WU-IWO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="5ot-my-A84"/>
+                <constraint firstItem="Hfv-WU-IWO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" symbolic="YES" id="5ot-my-A84"/>
                 <constraint firstAttribute="bottom" secondItem="Hfv-WU-IWO" secondAttribute="bottom" id="NIF-1s-vXe"/>
                 <constraint firstItem="Hfv-WU-IWO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="exN-6V-Xud"/>
                 <constraint firstAttribute="trailing" secondItem="Hfv-WU-IWO" secondAttribute="trailing" id="ld6-Zy-1yJ"/>

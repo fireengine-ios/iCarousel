@@ -20,7 +20,7 @@ final class ColorCell: UICollectionViewCell {
     @IBOutlet private weak var selectedView: UIView! {
         willSet {
             newValue.layer.masksToBounds = true
-            newValue.layer.borderWidth = 2
+            newValue.layer.borderWidth = 1
             newValue.layer.cornerRadius = newValue.frame.height * 0.5
             newValue.backgroundColor = .clear
         }
@@ -34,7 +34,7 @@ final class ColorCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = ColorConstants.filterBackColor
+        contentView.backgroundColor = ColorConstants.photoEditBackgroundColor
     }
     
     func setup(hsvColor: HSVMultibandColor) {

@@ -69,7 +69,7 @@ final class PreparedFiltersView: UIView, NibInit {
     
     @IBOutlet private weak var filterCategoriesScrollView: UIScrollView! {
         willSet {
-            newValue.backgroundColor = ColorConstants.filterBackColor
+            newValue.backgroundColor = ColorConstants.photoEditBackgroundColor
             newValue.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: 8)
         }
     }
@@ -118,21 +118,21 @@ final class PreparedFiltersView: UIView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        backgroundColor = ColorConstants.filterBackColor
+        backgroundColor = ColorConstants.photoEditBackgroundColor
         setupCollectionView()
     }
     
     private func setupCollectionView() {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: 60, height: 90)
+            layout.itemSize = CGSize(width: 64, height: 94)
             layout.minimumInteritemSpacing = 16
             layout.minimumLineSpacing = 16
         }
-        collectionView.contentInset = UIEdgeInsets(topBottom: 15, rightLeft: 16)
+        collectionView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 8, right: 16)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = ColorConstants.filterBackColor
+        collectionView.backgroundColor = ColorConstants.photoEditBackgroundColor
         collectionView.register(nibCell: PreparedFilterCell.self)
     }
     

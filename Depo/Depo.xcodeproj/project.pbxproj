@@ -18790,9 +18790,9 @@
 			children = (
 				9823192F24F3A1E600FD16E2 /* AdjustView */,
 				9823193224F3A1E600FD16E2 /* ColorView */,
-				9823193524F3A1E600FD16E2 /* AdjustmentsView.swift */,
 				9823193624F3A1E600FD16E2 /* LightView */,
 				9823193924F3A1E600FD16E2 /* HSLView */,
+				9823193524F3A1E600FD16E2 /* AdjustmentsView.swift */,
 			);
 			path = AdjustmentViews;
 			sourceTree = "<group>";
@@ -18847,10 +18847,10 @@
 		9823194124F3A1E600FD16E2 /* AdjustmentCategoriesView */ = {
 			isa = PBXGroup;
 			children = (
+				9823194524F3A1E600FD16E2 /* AdjustmentCategoriesView.swift */,
 				9823194224F3A1E600FD16E2 /* AdjustmentCategoriesView.xib */,
 				9823194324F3A1E600FD16E2 /* AdjustmentCategoryCell.swift */,
 				9823194424F3A1E600FD16E2 /* AdjustmentCategoryCell.xib */,
-				9823194524F3A1E600FD16E2 /* AdjustmentCategoriesView.swift */,
 			);
 			path = AdjustmentCategoriesView;
 			sourceTree = "<group>";
