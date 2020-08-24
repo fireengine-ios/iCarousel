@@ -55,7 +55,7 @@ enum AdjustmentParameterType: String {
             case .sharpness:
                 return (-4, 4, 0)
             case .blurRadius:
-                return (1, 16, 2)
+                return (0, 16, 0)
             case .vignetteRatio:
                 return (0, 1, 0)
         }
