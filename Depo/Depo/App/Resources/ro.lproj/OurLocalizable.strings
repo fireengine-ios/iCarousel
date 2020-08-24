@@ -1596,9 +1596,9 @@
 "gallery_filter_all" = "";
 "gallery_filter_synced" = "";
 "gallery_filter_unsynced" = "";
-"gallery_filter_action_sheet_all" = "";
-"gallery_filter_action_sheet_synced" = "";
-"gallery_filter_action_sheet_unsynced" = "";
+"gallery_filter_action_sheet_all" = "toate";
+"gallery_filter_action_sheet_synced" = "sincronizată";
+"gallery_filter_action_sheet_unsynced" = "nu sincronizate";
 "contact_phase2_error_quota_restore" = "Nu puteți continua operațiunea deoarece nu a mai rămas loc în spațiu de stocare. Poți mări spațiul de stocare sau poți elibera spațiul de stocare prin ștergerea fișierelor.";
 "contact_phase2_error_quota_backup" = "Nu puteți continua operațiunea deoarece nu a mai rămas loc în spațiu de stocare. Poți mări spațiul de stocare sau poți elibera spațiul de stocare prin ștergerea fișierelor.";
 "contact_phase2_error_message" = "A apărut o eroare temporară. Te rog să încerci din nou.";
