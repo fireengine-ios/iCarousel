@@ -41,7 +41,6 @@ private final class PhotoEditButtonItem: UIButton {
     static func with(type: PhotoEditTabbarItemType) -> PhotoEditButtonItem {
         let button = PhotoEditButtonItem(type: .custom)
         button.type = type
-        button.isSelected = false
         button.setImage(type.normalImage, for: .normal)
         button.setImage(type.selectedImage, for: .highlighted)
         button.setImage(type.selectedImage, for: .selected)
@@ -69,8 +68,6 @@ final class PhotoEditTabbar: UIView, NibInit {
     
     func setup(with types: [PhotoEditTabbarItemType]) {
         types.forEach { addItem(type: $0) }
-        selectedItem = contentView.arrangedSubviews.first as? PhotoEditButtonItem
-        selectedItem?.isSelected = true
     }
     
     private func addItem(type: PhotoEditTabbarItemType) {

@@ -77,9 +77,13 @@ final class PhotoEditViewUIManager: NSObject {
     }
     
     func showInitialState() {
-        showTabBarItemView(tabbar.selectedType)
         animator.showTransition(to: navBarView, on: navBarContainer, animated: true)
         animator.showTransition(to: tabbar, on: bottomBarContainer, animated: true)
+    }
+    
+    func showDefaultState() {
+        showTabBarItemView(tabbar.selectedType)
+        showInitialState()
     }
     
     private func showTabBarItemView(_ item: PhotoEditTabbarItemType) {
@@ -150,11 +154,12 @@ private final class ContentAnimator {
             }
             
             newView.frame.size.width = contentView.frame.width
+            contentView.frame.origin.y += contentView.frame.height - newView.frame.height
             contentView.frame.size.height = newView.frame.height
-            contentView.frame.origin.y += newView.frame.origin.y - contentView.frame.origin.y
             
             if let oldView = currentView {
-                let duration = animated ? 0.25 : 0.0
+                oldView.frame = newView.bounds
+                let duration = 0.0//animated ? 0.25 : 0.0
                 UIView.transition(from: oldView, to: newView, duration: duration, options: [.curveLinear], completion: { _ in
                     updateContentConstaints()
                 })
