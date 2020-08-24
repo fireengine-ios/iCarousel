@@ -83,7 +83,7 @@ extension HSLView: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let color = colors[indexPath.row]
-        colorParameter?.set(value: color)
+        delegate?.didChangeHSLColor(color)
         
         contentView.arrangedSubviews.forEach { view in
             if let sliderView = view as? AdjustmentParameterSliderView,
