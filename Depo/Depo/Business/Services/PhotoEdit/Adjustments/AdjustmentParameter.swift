@@ -26,7 +26,6 @@ enum AdjustmentParameterType: String {
     case blurRadius
     case vignetteRatio
     
-    
     var defaultValues: AdjustmentParameterValues {
         switch self {
             case .brightness:
@@ -59,10 +58,80 @@ enum AdjustmentParameterType: String {
                 return (1, 16, 2)
             case .vignetteRatio:
                 return (0, 1, 0)
-            default:
-                return (0, 0, 0)
         }
     }
+    
+    var title: String {
+        switch self {
+            case .brightness:
+                return TextConstants.photoEditAdjustmentBrightness
+            case .contrast:
+                return TextConstants.photoEditAdjustmentContrast
+            case .exposure:
+                return TextConstants.photoEditAdjustmentExposure
+            case .saturation:
+                return TextConstants.photoEditAdjustmentSaturation
+            case .gamma:
+                return TextConstants.photoEditAdjustmentGamma
+            case .hue:
+                return TextConstants.photoEditAdjustmentHue
+            case .temperature:
+                return TextConstants.photoEditAdjustmentTemperature
+            case .tint:
+                return TextConstants.photoEditAdjustmentTint
+            case .highlights:
+                return TextConstants.photoEditAdjustmentHighlights
+            case .shadows:
+                return TextConstants.photoEditAdjustmentShadows
+            case .intensity:
+                return TextConstants.photoEditAdjustmentIntensity
+            case .angle:
+                return TextConstants.photoEditAdjustmentAngle
+            case .sharpness:
+                return TextConstants.photoEditAdjustmentSharpness
+            case .blurRadius:
+                return TextConstants.photoEditAdjustmentBlur
+            case .vignetteRatio:
+                return TextConstants.photoEditAdjustmentVignette
+        }
+    }
+}
+
+
+protocol HSLColorAdjustmentParameterProtocol {
+    
+    var possibleValues: HSVMultibandColor.AllCases { get }
+    var currentValue: HSVMultibandColor { get }
+    
+    func set(value: HSVMultibandColor)
+    
+    @discardableResult
+    func onValueDidChange(handler: @escaping ValueHandler<HSVMultibandColor>) -> HSLColorAdjustmentParameterProtocol
+}
+
+final class HSLColorAdjustmentParameter: HSLColorAdjustmentParameterProtocol {
+    let possibleValues: HSVMultibandColor.AllCases
+    
+    private(set) var currentValue: HSVMultibandColor
+    private var onValueDidChangeAction: ValueHandler<HSVMultibandColor>?
+    
+    
+    init() {
+        possibleValues = HSVMultibandColor.allCases
+        currentValue = .red
+    }
+    
+    func set(value: HSVMultibandColor) {
+        currentValue = value
+        onValueDidChangeAction?(currentValue)
+    }
+    
+    func onValueDidChange(handler: @escaping ValueHandler<HSVMultibandColor>) -> HSLColorAdjustmentParameterProtocol {
+        onValueDidChangeAction = handler
+        return self
+    }
+    
+    
 }
 
 

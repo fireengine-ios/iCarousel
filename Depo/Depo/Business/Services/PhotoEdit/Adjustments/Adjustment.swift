@@ -20,9 +20,8 @@ enum AdjustmentType {
     case gamma
     
     case hsl
-    //hsl
+    
     case hue
-    //case luminance - there's no such adjustment, replaced with the monochrome
     case monochrome
     
     //effect
@@ -59,6 +58,7 @@ enum AdjustmentType {
 protocol AdjustmentProtocol {
     var type: AdjustmentType { get }
     var parameters: [AdjustmentParameterProtocol] { get }
+    var hslColorParameter: HSLColorAdjustmentParameterProtocol? { get }
     
     func applyOn(image: UIImage, onFinished: @escaping ValueHandler<UIImage>)
 }
@@ -68,13 +68,15 @@ final class Adjustment: AdjustmentProtocol {
     
     let type: AdjustmentType
     let parameters: [AdjustmentParameterProtocol]
+    var hslColorParameter: HSLColorAdjustmentParameterProtocol?
 
     private let thirdPartyAdjustment: ThirdPartyAdjustmentProtocol
     
     
-    required init(type: AdjustmentType, parameters: [AdjustmentParameterProtocol], thirdPartyAdjustment: ThirdPartyAdjustmentProtocol) {
+    required init(type: AdjustmentType, parameters: [AdjustmentParameterProtocol], hslColorParameter: HSLColorAdjustmentParameterProtocol?, thirdPartyAdjustment: ThirdPartyAdjustmentProtocol) {
         self.type = type
         self.parameters = parameters
+        self.hslColorParameter = hslColorParameter
         self.thirdPartyAdjustment = thirdPartyAdjustment
     }
     

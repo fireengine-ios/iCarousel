@@ -25,8 +25,10 @@ final class PhotoEditViewController: ViewController, NibInit {
             newValue.navBarView.delegate = self
         }
     }
+    private lazy var filterView = self.prepareFilterView()
     
     private var adjustmentManager: AdjustmentManager?
+    private var filterManager = FilterManager(types: FilterType.allCases)
     
     private var originalImage = UIImage()
     private var sourceImage = UIImage()
@@ -55,15 +57,25 @@ final class PhotoEditViewController: ViewController, NibInit {
         setInitialState()
         presentedCallback?()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        uiManager.viewDidLayoutSubviews()
+    }
 
     private func setInitialState() {
         uiManager.showInitialState()
-        uiManager.setImage(sourceImage)
+        uiManager.image = sourceImage
         uiManager.navBarView.state = hasChanges ? .edit : .initial
     }
     
+    private func prepareFilterView() -> PreparedFiltersView {
+        let previewImage = originalImage.resizedImage(to: CGSize(width: 100, height: 100)) ?? originalImage
+        return PreparedFiltersView.with(previewImage: previewImage, manager: filterManager, delegate: self)
+    }
+    
     private func showMoreActionsMenu() {
-        let items = ["Save as copy", "Reset to original"]
+        let items = [TextConstants.photoEditSaveAsCopy, TextConstants.photoEditResetToOriginal]
         let controller = SelectionMenuController.with(style: .simple, items: items, selectedIndex: nil) { [weak self] index in
             guard let self = self else {
                 return
@@ -71,8 +83,10 @@ final class PhotoEditViewController: ViewController, NibInit {
             switch index {
             case 0:
                 self.finishedEditing?(self, .savedAs(image: self.sourceImage))
-            default:
+            case 1:
                 self.resetToOriginal()
+            default:
+                break
             }
         }
         present(controller, animated: false)
@@ -81,6 +95,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     private func resetToOriginal() {
         sourceImage = originalImage
         setInitialState()
+        filterView.resetToOriginal()
     }
 }
 
@@ -99,11 +114,11 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
         present(controller, animated: false)
     }
     
-    func showHLSFilter() {
-        needShowFilterView(for: .hls)
+    func showHSLFilter() {
+        needShowAdjustmentView(for: .hsl)
     }
     
-    func didChangeAdjustments(_ adjustments: [AdjustmentValue]) {
+    func didChangeAdjustments(_ adjustments: [AdjustmentParameterValue]) {
         guard let manager = adjustmentManager else {
             return
         }
@@ -113,27 +128,37 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
                 return
             }
             
-            DispatchQueue.main.async {
-                self.uiManager.setImage(outputImage)
-            }
+            self.uiManager.image = outputImage
         }
     }
 }
 
 //MARK: - FilterChangesBarDelegate
 
-extension PhotoEditViewController: FilterChangesBarDelegate {
-    func cancelFilter() {
-        switch uiManager.currentFilterViewType {
-        case .hls:
-            needShowFilterView(for: .color)
-        default:
+extension PhotoEditViewController: PhotoEditChangesBarDelegate {
+    func cancelChanges() {
+        guard let currentPhotoEditViewType = uiManager.currentPhotoEditViewType else {
+            return
+        }
+        
+        switch currentPhotoEditViewType {
+        case .adjustmentView(let type):
+            switch type {
+            case .hsl:
+                needShowAdjustmentView(for: .color)
+            default:
+                setInitialState()
+            }
+            
+        case .filterView(let type):
             setInitialState()
+            let value = filterManager.filters.first(where: { $0.type == type })?.parameter.defaultValue ?? 1
+            didChangeFilter(type, newValue: value)
         }
     }
     
-    func applyFilter() {
-        if let image = uiManager.imageView.image {
+    func applyChanges() {
+        if let image = uiManager.image {
             sourceImage = image
         }
         setInitialState()
@@ -156,11 +181,11 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
             return
         }
 
-        let popup = PopUpController.with(title: "Discart Changes?",
-                                         message: "Your changer won't be saved",
+        let popup = PopUpController.with(title: TextConstants.photoEditCloseAlertTitle,
+                                         message: TextConstants.photoEditCloseAlertMessage,
                                          image: .question,
-                                         firstButtonTitle: "Keep editing",
-                                         secondButtonTitle: "Discard",
+                                         firstButtonTitle: TextConstants.photoEditCloseAlertKeepButton,
+                                         secondButtonTitle: TextConstants.photoEditCloseAlertDiscardButton,
                                          secondAction: { vc in
                                             vc.close {
                                                 closeHandler()
@@ -184,7 +209,7 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
 
 extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     
-    func needShowFilterView(for type: FilterViewType) {
+    func needShowAdjustmentView(for type: AdjustmentViewType) {
         guard type != .adjust else {
             DispatchQueue.main.async {
                 let controller = Mantis.cropViewController(image: self.sourceImage)
@@ -195,20 +220,31 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
         }
         
         
-        let manager = AdjustmentManager(types: type.adjustmenTypes)
+        let manager = AdjustmentManager(types: type.adjustmentTypes)
         
         guard !manager.parameters.isEmpty,
-            let view = PhotoFilterViewFactory.generateView(for: type, adjustmentParameters: manager.parameters, delegate: self)
+            let view = PhotoEditViewFactory.generateView(for: type,
+                                                         adjustmentParameters: manager.parameters,
+                                                         adjustments: manager.adjustments,
+                                                         delegate: self)
         else {
             return
         }
         
         adjustmentManager = manager
-        let changesBar = PhotoFilterViewFactory.generateChangesBar(for: type, delegate: self)
+        let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
         
-        uiManager.showFilter(type: type, view: view, changesBar: changesBar)
+        uiManager.showView(type: .adjustmentView(type), view: view, changesBar: changesBar)
     }
+    
+    func filtersView() -> UIView {
+        return filterView
+    }
+    
+    func didSwitchTabBarItem(_ item: PhotoEditTabbarItemType) { }
 }
+
+//MARK: - CropViewControllerDelegate
 
 extension PhotoEditViewController: CropViewControllerDelegate {
     func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
@@ -220,9 +256,44 @@ extension PhotoEditViewController: CropViewControllerDelegate {
     }
     
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
-        uiManager.setImage(cropped)
-        applyFilter()
+        uiManager.image = cropped
+        applyChanges()
         cropViewController.dismiss(animated: true)
     }
 }
 
+//MARK: - PreparedFiltersViewDelegate
+
+extension PhotoEditViewController: PreparedFiltersViewDelegate {
+
+    func didSelectOriginal() {
+        sourceImage = originalImage
+        setInitialState()
+    }
+    
+    func didSelectFilter(_ type: FilterType) {
+        let value = filterManager.filters.first(where: { $0.type == type })?.parameter.currentValue ?? 1
+        didChangeFilter(type, newValue: value)
+        uiManager.navBarView.state = .edit
+        applyChanges()
+    }
+    
+    func needOpenFilterSlider(for type: FilterType) {
+        guard let filter = filterManager.filters.first(where: { $0.type == type}) else {
+            return
+        }
+        
+        let filterView = PhotoEditViewFactory.generateFilterView(filter, delegate: self)
+        let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
+        uiManager.showView(type: .filterView(type), view: filterView, changesBar: changesBar)
+    }
+}
+
+//MARK: - PreparedFilterSliderViewDelegate
+
+extension PhotoEditViewController: PreparedFilterSliderViewDelegate {
+    func didChangeFilter(_ filterType: FilterType, newValue: Float) {
+        let filteredImage = filterManager.filter(image: originalImage, type: filterType, intensity: newValue)
+        uiManager.image = filteredImage
+    }
+}

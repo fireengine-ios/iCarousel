@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="L4h-0S-5vj" customClass="ColorView" customModule="Billo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="252"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOh-2b-yXS">
+                    <rect key="frame" x="20" y="8" width="30" height="30"/>
+                    <state key="normal" title="HSL"/>
+                    <connections>
+                        <action selector="onHSLTapped:" destination="L4h-0S-5vj" eventType="touchUpInside" id="Fwv-fP-0I0"/>
+                    </connections>
+                </button>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gyq-xi-cv2">
+                    <rect key="frame" x="0.0" y="46" width="414" height="206"/>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="gyq-xi-cv2" firstAttribute="trailing" secondItem="lbw-XP-mS9" secondAttribute="trailing" id="4PU-YI-PeY"/>
+                <constraint firstItem="gyq-xi-cv2" firstAttribute="leading" secondItem="lbw-XP-mS9" secondAttribute="leading" id="YFV-VP-8WO"/>
+                <constraint firstItem="gyq-xi-cv2" firstAttribute="bottom" secondItem="lbw-XP-mS9" secondAttribute="bottom" id="cxW-6U-2kO"/>
+                <constraint firstItem="IOh-2b-yXS" firstAttribute="top" secondItem="L4h-0S-5vj" secondAttribute="top" constant="8" id="epN-6o-zCz"/>
+                <constraint firstItem="IOh-2b-yXS" firstAttribute="leading" secondItem="lbw-XP-mS9" secondAttribute="leading" constant="20" id="q6v-qo-JzG"/>
+                <constraint firstItem="gyq-xi-cv2" firstAttribute="top" secondItem="IOh-2b-yXS" secondAttribute="bottom" constant="8" id="vFH-4N-9sT"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="lbw-XP-mS9"/>
+            <connections>
+                <outlet property="contentView" destination="gyq-xi-cv2" id="E3Z-co-QCY"/>
+                <outlet property="hslButton" destination="IOh-2b-yXS" id="STL-Ai-p0g"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="136.60714285714286"/>
+        </view>
+    </objects>
+</document>
