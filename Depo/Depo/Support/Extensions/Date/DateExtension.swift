@@ -62,8 +62,8 @@ extension Date: Components {
         return Date(timeIntervalSinceReferenceDate: time)
     }
     
-    var millisecondsSince1970: Int {
-        return (timeIntervalSince1970 * 1000.0).toInt() ?? 0
+    var millisecondsSince1970: Int64 {
+        return (timeIntervalSince1970 * 1000.0).asInt64 ?? 0
     }
     
     static func from(string: String) -> Date? {

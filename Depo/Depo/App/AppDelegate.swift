@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Crashlytics
+import FirebaseCrashlytics
 import FBSDKCoreKit
 import SDWebImage
 import XCGLogger
@@ -50,13 +50,13 @@ let log: XCGLogger = {
 
 func debugLog(_ string: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
     log.debug(string, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
-    CLSLogv("%@", getVaList([string]))
+    Crashlytics.crashlytics().log(format: "%@", arguments: getVaList([string]))
 }
 
 func printLog(_ string: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) {
     print(string)
     log.debug(string, functionName: functionName, fileName: fileName, lineNumber: lineNumber)
-    CLSLogv("%@", getVaList([string]))
+    Crashlytics.crashlytics().log(format: "%@", arguments: getVaList([string]))
 }
 
 func fatalLog(_ string: String, functionName: StaticString = #function, fileName: StaticString = #file, lineNumber: Int = #line) -> Never {

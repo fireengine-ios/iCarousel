@@ -11,8 +11,9 @@ end
 
 def core_pods
   shared_pods
-  pod 'Fabric', '~> 1.10'
-  pod 'Crashlytics', '3.14.0'
+  pod 'Firebase/Core', '~> 6'
+  pod 'Firebase/Crashlytics', '~> 6'
+  pod 'Firebase/Analytics', '~> 6'
   pod 'FBSDKCoreKit', '~> 7'
   pod 'FBSDKLoginKit', '~> 7'
   pod 'FBSDKShareKit', '~> 7'
@@ -21,7 +22,6 @@ def core_pods
   pod 'SDWebImage', '~> 4'
   pod 'YYImage', '~> 1'
   pod 'GoogleConversionTracking', '~> 3'
-  pod 'Firebase/Core', '~> 6'
   pod 'GoogleTagManager', '~> 7'
   pod 'Adjust', '~> 4'
   #pod 'ActiveLabel'
