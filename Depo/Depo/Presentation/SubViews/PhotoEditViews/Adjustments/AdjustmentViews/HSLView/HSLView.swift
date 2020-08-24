@@ -78,6 +78,6 @@ extension HSLView: UICollectionViewDataSource, UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        colorParameter?.set(value: colors[indexPath.row])
+        delegate?.didChangeHSLColor(colors[indexPath.row])
     }
 }

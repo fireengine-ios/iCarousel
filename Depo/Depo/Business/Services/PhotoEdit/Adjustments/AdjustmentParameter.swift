@@ -25,6 +25,9 @@ enum AdjustmentParameterType: String {
     case sharpness
     case blurRadius
     case vignetteRatio
+    case hslHue
+    case hslSaturation
+    case hslLuminosity
     
     var defaultValues: AdjustmentParameterValues {
         switch self {
@@ -58,6 +61,12 @@ enum AdjustmentParameterType: String {
                 return (1, 16, 2)
             case .vignetteRatio:
                 return (0, 1, 0)
+            case .hslHue:
+                return (-20, 20, 0)
+            case .hslSaturation:
+                return (0, 2, 1)
+            case .hslLuminosity:
+                return (0, 1, 1)
         }
     }
     
@@ -93,6 +102,12 @@ enum AdjustmentParameterType: String {
                 return TextConstants.photoEditAdjustmentBlur
             case .vignetteRatio:
                 return TextConstants.photoEditAdjustmentVignette
+            case .hslHue:
+                return TextConstants.photoEditAdjustmentHue
+            case .hslSaturation:
+                return TextConstants.photoEditAdjustmentSaturation
+            case .hslLuminosity:
+                return TextConstants.photoEditAdjustmentIntensity
         }
     }
 }
