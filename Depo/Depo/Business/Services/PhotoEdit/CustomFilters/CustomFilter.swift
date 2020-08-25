@@ -27,22 +27,23 @@ extension CustomFilterProtocol {
 
 
 enum FilterType: String, CaseIterable {
-    case clarendon
-    case metropolis
-    case lime
-    case adele
-    case amazon
-    case april
-    case audrey
     case aweStruck
-    case bluemess
-    case cruz
-    case haan
-    case mars
+    case clarendon
     case oldMan
+    case mars
     case rise
+    case april
+    case amazon
     case starlit
     case whisper
+    case lime
+    case haan
+    case bluemess
+    case adele
+    case cruz
+    case metropolis
+    case audrey
+
     
     var title: String {
         switch self {
