@@ -15,7 +15,7 @@ enum FilterParameterType: String {
     var defaultValues: FilterParameterValues {
         switch self {
             case .filterIntensity:
-                return (0, 1, 1)
+                return (0, 1, 0)
             default:
                 return (0, 0, 0)
         }
@@ -54,7 +54,7 @@ final class FilterParameter: FilterParameterProtocol {
         minValue = defaultValues.min
         maxValue = defaultValues.max
         defaultValue = defaultValues.default
-        currentValue = defaultValue
+        currentValue = maxValue
     }
     
     
