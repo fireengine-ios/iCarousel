@@ -88,7 +88,7 @@ final class FilterManager {
         }
         
         filters.forEach {
-            if let filtered = $0.apply(on: mtiImage)?.makeUIImage() {
+            if let filtered = $0.apply(on: mtiImage)?.makeUIImage(scale: source.scale, orientation: source.imageOrientation) {
                 result[$0.type] = filtered
             }
         }
@@ -107,6 +107,6 @@ final class FilterManager {
         }
         
         filter.parameter.set(value: intensity)
-        return filter.apply(on: mtiImage)?.makeUIImage()
+        return filter.apply(on: mtiImage)?.makeUIImage(scale: source.scale, orientation: source.imageOrientation)
     }
 }
