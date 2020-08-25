@@ -1663,9 +1663,23 @@
 "photo_edit_reset_to_original" = "Reset to original";
 
 "photo_edit_close_alert_title" = "Discart Changes?";
-"photo_edit_close_alert_message" = "Your changer won't be saved";
-"photo_edit_close_alert_keep_button" = "Keep editing";
-"photo_edit_close_alert_discard_button" = "Discard";
+"photo_edit_close_alert_message" = "Your image edits will be discarded.";
+"photo_edit_close_alert_left_button" = "Keep editing";
+"photo_edit_close_alert_right_button" = "Discard";
+
+"photo_edit_modify_alert_title" = "Modify Photo?";
+"photo_edit_modify_alert_message" = "This photo will be modified on your phone and saved on Lifebox.";
+"photo_edit_modify_alert_left_button" = "Cancel";
+"photo_edit_modify_alert_right_button" = "Save";
+ 
+"photo_edit_save_as_copy_alert_title" = "Save as a copy?";
+"photo_edit_save_as_copy_alert_message" = "This photo will be saved as a copy on your phone and Lifebox.";
+"photo_edit_save_as_copy_alert_left_button" = "Cancel";
+"photo_edit_save_as_copy_alert_right_button" = "Save copy";
+
+"photo_edit_modify_success_snackbar_message" = "Photo is modified on your phone and saved on Lifebox.";
+"photo_edit_save_as_copy_success_snackbar_message" = "Photo is saved as on your Lifebox.";
+"photo_edit_save_image_error_message" = "Save image error";
 
 "photo_edit_filter_original" = "Original";
 "photo_edit_filter_clarendon" = "Clarendon";

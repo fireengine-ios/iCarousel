@@ -92,9 +92,10 @@ final class SelectionMenuController: UIViewController, NibInit {
             self.tableViewHeightConstraint.constant = 0
             self.backgroundView.alpha = 0
             self.view.layoutIfNeeded()
-        }, completion: { [weak self]_ in
-            self?.handler?(value)
-            self?.dismiss(animated: false, completion: nil)
+        }, completion: { [weak self] _ in
+            self?.dismiss(animated: false, completion: {
+                self?.handler?(value)
+            })
         })
     }
 }
