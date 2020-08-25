@@ -52,6 +52,56 @@ enum AdjustmentViewType {
     }
 }
 
+enum PhotoEditAlertType {
+    case close
+    case modify
+    case saveAsCopy
+    
+    var title: String {
+        switch self {
+        case .close:
+            return TextConstants.photoEditCloseAlertTitle
+        case .modify:
+            return TextConstants.photoEditModifyAlertTitle
+        case .saveAsCopy:
+            return TextConstants.photoEditSaveAsCopyAlertTitle
+        }
+    }
+    
+    var message: String {
+        switch self {
+        case .close:
+            return TextConstants.photoEditCloseAlertMessage
+        case .modify:
+            return TextConstants.photoEditModifyAlertMessage
+        case .saveAsCopy:
+            return TextConstants.photoEditSaveAsCopyAlertMessage
+        }
+    }
+    
+    var leftButtonTitle: String {
+        switch self {
+        case .close:
+            return TextConstants.photoEditCloseAlertLeftButton
+        case .modify:
+            return TextConstants.photoEditModifyAlertLeftButton
+        case .saveAsCopy:
+            return TextConstants.photoEditSaveAsCopyAlertLeftButton
+        }
+    }
+    
+    var rightButtonTitle: String {
+        switch self {
+        case .close:
+            return TextConstants.photoEditCloseAlertRightButton
+        case .modify:
+            return TextConstants.photoEditModifyAlertRightButton
+        case .saveAsCopy:
+            return TextConstants.photoEditSaveAsCopyAlertRightButton
+        }
+    }
+}
+
 final class PhotoEditViewFactory {
     
     static func generateView(for type: AdjustmentViewType, adjustmentParameters: [AdjustmentParameterProtocol], adjustments: [AdjustmentProtocol], delegate: AdjustmentsViewDelegate?) -> UIView? {
@@ -83,5 +133,23 @@ final class PhotoEditViewFactory {
     
     static func generateChangesBar(with title: String, delegate: PhotoEditChangesBarDelegate?) -> PhotoEditChangesBar {
         return PhotoEditChangesBar.with(title: title, delegate: delegate)
+    }
+    
+    static func alert(for type: PhotoEditAlertType, leftButtonHandler: VoidHandler? = nil, rightButtonHandler: VoidHandler?) -> PopUpController {
+        return PopUpController.with(title: type.title,
+                                    message: type.message,
+                                    image: .question,
+                                    firstButtonTitle: type.leftButtonTitle,
+                                    secondButtonTitle: type.rightButtonTitle,
+                                    firstAction: { vc in
+                                        vc.close {
+                                            leftButtonHandler?()
+                                        }
+                                    },
+                                    secondAction: { vc in
+                                        vc.close {
+                                            rightButtonHandler?()
+                                        }
+                                    })
     }
 }

@@ -89,7 +89,7 @@ final class PhotoEditViewController: ViewController, NibInit {
             }
             switch index {
             case 0:
-                self.finishedEditing?(self, .savedAs(image: self.sourceImage))
+                self.saveAsCopy()
             case 1:
                 self.resetToOriginal()
             default:
@@ -97,6 +97,26 @@ final class PhotoEditViewController: ViewController, NibInit {
             }
         }
         present(controller, animated: false)
+    }
+    
+    private func saveAsCopy() {
+        let popup = PhotoEditViewFactory.alert(for: .saveAsCopy) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.finishedEditing?(self, .savedAs(image: self.sourceImage))
+        }
+        present(popup, animated: true)
+    }
+    
+    private func saveWithModifyOriginal() {
+        let popup = PhotoEditViewFactory.alert(for: .modify) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.finishedEditing?(self, .saved(image: self.sourceImage))
+        }
+        present(popup, animated: true)
     }
     
     private func resetToOriginal() {
@@ -201,22 +221,13 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
             closeHandler()
             return
         }
-
-        let popup = PopUpController.with(title: TextConstants.photoEditCloseAlertTitle,
-                                         message: TextConstants.photoEditCloseAlertMessage,
-                                         image: .question,
-                                         firstButtonTitle: TextConstants.photoEditCloseAlertKeepButton,
-                                         secondButtonTitle: TextConstants.photoEditCloseAlertDiscardButton,
-                                         secondAction: { vc in
-                                            vc.close {
-                                                closeHandler()
-                                            }
-        })
+        
+        let popup = PhotoEditViewFactory.alert(for: .close, rightButtonHandler: closeHandler)
         present(popup, animated: true)
     }
     
     func onSavePhoto() {
-        finishedEditing?(self, .saved(image: sourceImage))
+        saveWithModifyOriginal()
     }
     
     func onMoreActions() {

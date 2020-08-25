@@ -246,11 +246,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         debugPrint("!!save as succ")
                         DispatchQueue.main.async {
                             controller.dismiss(animated: true)
+                            SnackbarManager.shared.show(type: .action, message: TextConstants.photoEditModifySnackbarMessage)
                         }
                     }, fail:  { error in
                         DispatchQueue.main.async {
                             controller.hideSpinner()
-                            UIApplication.showErrorAlert(message: "Save image error")
+                            UIApplication.showErrorAlert(message: TextConstants.photoEditSaveImageErrorMessage)
                         }
                         debugPrint("!!save as succ")
                     })
@@ -260,12 +261,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     success: {
                         DispatchQueue.main.async {
                             controller.dismiss(animated: true)
+                            SnackbarManager.shared.show(type: .action, message: TextConstants.photoEditSaveAsCopySnackbarMessage)
                         }
                         debugPrint("!!save succ")
                     }, fail:  { error in
                         DispatchQueue.main.async {
                             controller.hideSpinner()
-                            UIApplication.showErrorAlert(message: "Save image error")
+                            UIApplication.showErrorAlert(message: TextConstants.photoEditSaveImageErrorMessage)
                         }
                         debugPrint("!!save succ")
                     })

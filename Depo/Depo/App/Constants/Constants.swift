@@ -1940,9 +1940,23 @@ struct TextConstants {
     
     static let photoEditCloseAlertTitle = NSLocalizedString("photo_edit_close_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photoEditCloseAlertMessage = NSLocalizedString("photo_edit_close_alert_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let photoEditCloseAlertKeepButton = NSLocalizedString("photo_edit_close_alert_keep_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let photoEditCloseAlertDiscardButton = NSLocalizedString("photo_edit_close_alert_discard_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-  
+    static let photoEditCloseAlertLeftButton = NSLocalizedString("photo_edit_close_alert_left_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditCloseAlertRightButton = NSLocalizedString("photo_edit_close_alert_right_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoEditModifyAlertTitle = NSLocalizedString("photo_edit_modify_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditModifyAlertMessage = NSLocalizedString("photo_edit_modify_alert_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditModifyAlertLeftButton = NSLocalizedString("photo_edit_modify_alert_left_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditModifyAlertRightButton = NSLocalizedString("photo_edit_modify_alert_right_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoEditSaveAsCopyAlertTitle = NSLocalizedString("photo_edit_save_as_copy_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditSaveAsCopyAlertMessage = NSLocalizedString("photo_edit_save_as_copy_alert_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditSaveAsCopyAlertLeftButton = NSLocalizedString("photo_edit_save_as_copy_alert_left_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditSaveAsCopyAlertRightButton = NSLocalizedString("photo_edit_save_as_copy_alert_right_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoEditModifySnackbarMessage = NSLocalizedString("photo_edit_modify_success_snackbar_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditSaveAsCopySnackbarMessage = NSLocalizedString("photo_edit_save_as_copy_success_snackbar_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditSaveImageErrorMessage = NSLocalizedString("photo_edit_save_image_error_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let photoEditFilterOriginal = NSLocalizedString("photo_edit_filter_original", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photoEditFilterClarendon = NSLocalizedString("photo_edit_filter_clarendon", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photoEditFilterMetropolis = NSLocalizedString("photo_edit_filter_metropolis", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
