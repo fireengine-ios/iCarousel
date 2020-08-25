@@ -65,6 +65,12 @@ final class AdjustmentParameterSliderView: UIView, NibInit {
         slider.updateGradient(startColor: startColor, endColor: endColor)
     }
     
+    func resetToDefaultValue() {
+        let defaultValue = slider.slider.filledTrackAnchorValue
+        valueLabel.text = String(format: "%.1f", defaultValue)
+        slider.slider.value = defaultValue
+    }
+    
     private func setupSlider(parameter: AdjustmentParameterProtocol) {
         slider.add(to: sliderContentView)
         

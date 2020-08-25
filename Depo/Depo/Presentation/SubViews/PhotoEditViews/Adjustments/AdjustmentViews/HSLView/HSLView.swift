@@ -89,6 +89,7 @@ extension HSLView: UICollectionViewDataSource, UICollectionViewDelegate {
             if let sliderView = view as? AdjustmentParameterSliderView,
                 let type = sliderView.type,
                 let colors = color.sliderGradientColors(for: type) {
+                sliderView.resetToDefaultValue()
                 sliderView.updateGradient(startColor: colors.startColor, endColor: colors.endColor)
             }
         }

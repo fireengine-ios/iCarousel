@@ -59,7 +59,7 @@ enum HSVMultibandColor: CaseIterable {
     
     func sliderGradientColors(for type: AdjustmentParameterType) -> (startColor: UIColor, endColor: UIColor)? {
         switch type {
-        case .hue:
+        case .hslHue:
             switch self {
                 case .red:
                     return (startColor: UIColor(red: 255 / 255, green: 14 / 255, blue: 154 / 255, alpha: 1),
@@ -86,7 +86,7 @@ enum HSVMultibandColor: CaseIterable {
                     return (startColor: UIColor(red: 88 / 255, green: 13 / 255, blue: 141 / 255, alpha: 1),
                             endColor: UIColor(red: 141 / 255, green: 13 / 255, blue: 14 / 255, alpha: 1))
             }
-        case .saturation:
+        case .hslSaturation:
             switch self {
                 case .red:
                     return (startColor: UIColor(red: 182 / 255, green: 145 / 255, blue: 152 / 255, alpha: 1),
@@ -113,7 +113,7 @@ enum HSVMultibandColor: CaseIterable {
                     return (startColor: UIColor(red: 130 / 255, green: 120 / 255, blue: 125 / 255, alpha: 1),
                             endColor: UIColor(red: 141 / 255, green: 14 / 255, blue: 77 / 255, alpha: 1))
             }
-        case .intensity:
+        case .hslLuminosity:
             switch self {
                 case .red:
                     return(startColor: UIColor(red: 88 / 255, green: 0 / 255, blue: 29 / 255, alpha: 1),
