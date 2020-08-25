@@ -154,10 +154,7 @@ final class PreparedFiltersView: UIView, NibInit {
     }
     
     private func selectOriginal(animated: Bool) {
-        if let indexPath = collectionView.indexPathsForSelectedItems?.first {
-            collectionView.deselectItem(at: indexPath, animated: animated)
-        }
-        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: animated)
+        collectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: animated, scrollPosition: .left)
     }
 }
 
@@ -177,6 +174,8 @@ extension PreparedFiltersView: UICollectionViewDataSource {
             let image = filtersData[filter]
             cell.setup(title: filter.title, image: image, isOriginal: false)
         }
+        cell.isSelected = collectionView.indexPathsForSelectedItems?.first?.row == indexPath.row
+        
         return cell
     }
 }
@@ -196,7 +195,6 @@ extension PreparedFiltersView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             delegate?.didSelectOriginal()
-            collectionView.deselectItem(at: indexPath, animated: true)
         } else if let type = filters[safe: indexPath.item - 1] {
             delegate?.didSelectFilter(type)
         }
