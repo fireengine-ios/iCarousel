@@ -42,14 +42,13 @@ final class PreparedFilterCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            adjustmentView.isHidden = !isSelected
+            adjustmentView.isHidden = !isSelected || isOriginal
             adjustmentImageView.isHidden = isOriginal
-            imageContentView.transform = isSelected ? CGAffineTransform(scaleX: 1.15, y: 1.15) : .identity
             titleLabel.textColor = isSelected ? .lrTealishTwo : .white
         }
     }
     
-    private var isOriginal = false
+    private var isOriginal = true
     
     override func awakeFromNib() {
         super.awakeFromNib()
