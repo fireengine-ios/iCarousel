@@ -21,6 +21,14 @@ final class PreparedFilterSliderView: UIView, NibInit {
     }
     
     @IBOutlet private weak var sliderContentView: UIView!
+    @IBOutlet private weak var valueLabel: UILabel! {
+        willSet {
+            newValue.textAlignment = .right
+            newValue.font = .TurkcellSaturaMedFont(size: 12)
+            newValue.textColor = .white
+        }
+    }
+    
     private let slider = SliderView()
     
     private weak var delegate: PreparedFilterSliderViewDelegate?
@@ -30,6 +38,7 @@ final class PreparedFilterSliderView: UIView, NibInit {
     private func setup(filter: CustomFilterProtocol, delegate: PreparedFilterSliderViewDelegate?) {
         backgroundColor = ColorConstants.photoEditBackgroundColor
         sliderContentView.backgroundColor = ColorConstants.photoEditBackgroundColor
+        valueLabel.text = String(format: "%.1f", filter.parameter.currentValue)
         
         self.filter = filter
         self.delegate = delegate
@@ -46,6 +55,7 @@ final class PreparedFilterSliderView: UIView, NibInit {
                      currentValue: filter.parameter.currentValue)
         
         slider.changeValueHandler = { [weak self] value in
+            self?.valueLabel.text = String(format: "%.1f", value)
             if let type = self?.filter?.type {
                 self?.delegate?.didChangeFilter(type, newValue: value)
             }
