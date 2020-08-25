@@ -11,8 +11,8 @@ import MetalPetal
 
 
 extension MTIImage {
-    func makeUIImage() -> UIImage? {
-        return Transformation.shared?.uiImage(from: self)
+    func makeUIImage(scale: CGFloat, orientation: UIImageOrientation) -> UIImage? {
+        return Transformation.shared?.uiImage(from: self, scale: scale, orientation: orientation)
     }
 }
 
@@ -39,7 +39,7 @@ private final class Transformation {
         }
     }
     
-    func uiImage(from mtiImage: MTIImage?) -> UIImage? {
+    func uiImage(from mtiImage: MTIImage?, scale: CGFloat, orientation: UIImageOrientation) -> UIImage? {
         guard let input = mtiImage else {
             return nil
         }
@@ -48,6 +48,6 @@ private final class Transformation {
             return nil
         }
         
-        return UIImage(cgImage: cgImage)
+        return UIImage(cgImage: cgImage, scale: scale, orientation: orientation)
     }
 }

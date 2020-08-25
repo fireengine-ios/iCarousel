@@ -33,7 +33,7 @@ final class CoreImageAdjustment: ThirdPartyAdjustmentProtocol {
             return
         }
         
-        let output = UIImage(ciImage: adjustedImage)
+        let output = UIImage(ciImage: adjustedImage, scale: image.scale, orientation: image.imageOrientation)
         onFinished(output)
     }
 }
