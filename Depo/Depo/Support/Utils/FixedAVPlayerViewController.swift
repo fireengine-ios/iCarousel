@@ -11,10 +11,6 @@ import AVKit
 /// https://stackoverflow.com/a/48065188
 final class FixedAVPlayerViewController: AVPlayerViewController {
     override var prefersStatusBarHidden: Bool {
-        if #available(iOS 11.0, *) {
-            return false
-        } else {
-            return true
-        }
+        return false
     }
 }

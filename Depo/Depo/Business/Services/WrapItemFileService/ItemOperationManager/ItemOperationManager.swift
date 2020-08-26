@@ -23,6 +23,8 @@ protocol ItemOperationManagerViewProtocol: class {
     ///cancelled by user
     func cancelledUpload(file: WrapData)
     
+    func failedAutoSync()
+    
     func setProgressForDownloadingFile(file: WrapData, progress: Float)
     
     func finishedDownloadFile(file: WrapData)
@@ -110,6 +112,8 @@ extension ItemOperationManagerViewProtocol {
     func cancelledUpload(file: WrapData) {
         UIApplication.setIdleTimerDisabled(true)
     }
+    
+    func failedAutoSync() {}
     
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {}
     
@@ -239,7 +243,7 @@ class ItemOperationManager: NSObject {
     }
     
     
-    func finishedUploadFile(file: WrapData, isAutoSync: Bool) {
+    func finishedUploadFile(file: WrapData) {
         //        DispatchQueue.main.async {
         views.invoke { $0.finishedUploadFile(file: file) }
         //        }
@@ -260,6 +264,10 @@ class ItemOperationManager: NSObject {
         
         currentUploadingObject = nil
         currentUploadProgress = 0
+    }
+    
+    func failedAutoSync() {
+        views.invoke { $0.failedAutoSync() }
     }
 
     func setProgressForDownloadingFile(file: WrapData, progress: Float) {

@@ -101,7 +101,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if #available(iOS 11.0, *), Device.operationSystemVersionLessThen(13) {
+        if Device.operationSystemVersionLessThen(13) {
             defaultNavBarStyle()
             statusBarColor = .white
         }

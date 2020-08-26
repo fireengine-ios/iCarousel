@@ -36,16 +36,6 @@ extension UIViewController {
             customTitleView.setTitle(title)
             customTitleView.setSubTitle(subTitle)
             
-            if #available(iOS 11.0, *) {
-                // do nothing
-            } else {
-                // trick for resize
-                customTitleView.translatesAutoresizingMaskIntoConstraints = false
-                customTitleView.layoutIfNeeded()
-                customTitleView.sizeToFit()
-                customTitleView.translatesAutoresizingMaskIntoConstraints = true
-            }
-            
             navigationItem.titleView = customTitleView
         } else {
             navigationItem.titleView = nil

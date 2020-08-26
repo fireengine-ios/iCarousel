@@ -24,6 +24,8 @@ protocol PhotoVideoDetailViewOutput {
     func moreButtonPressed(sender: Any?, inAlbumState: Bool, object: Item, selectedIndex: Int)
     
     func updateBars()
+    func updateBottomBar()
+    
     func replaceUploaded(_ item: WrapData)
     
     func videoStarted()

@@ -44,37 +44,34 @@ final class IntroduceViewController: ViewController, IntroduceViewInput {
     
     @IBOutlet private weak var createAccountButton: RoundedInsetsButton! {
         willSet {
-            let font: UIFont
-            if Device.isIpad {
-                font = UIFont.TurkcellSaturaBolFont(size: 27)
-            } else {
-                font = UIFont.TurkcellSaturaBolFont(size: 18)
-            }
-            let attributedTitle = NSAttributedString(string: TextConstants.introCreateAccountButton,
-                                                     attributes:  [.foregroundColor : ColorConstants.darkBlueColor,
-                                                                   .underlineStyle : NSUnderlineStyle.styleNone.rawValue,
-                                                                   .font : font])
-            newValue.setAttributedTitle(attributedTitle, for: .normal)
-            newValue.layer.borderColor = ColorConstants.darkBlueColor.cgColor
-            newValue.layer.borderWidth = 2
+
+            newValue.backgroundColor = ColorConstants.darkBlueColor
+            newValue.setTitle(TextConstants.itroViewGoToRegisterButtonText, for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            newValue.setTitleColor(.white, for: .normal)
             newValue.insets = UIEdgeInsets(top: 5, left: 45, bottom: 5, right: 45)
+            newValue.adjustsFontSizeToFitWidth()
+        }
+    }
+    
+    @IBOutlet private weak var haveAccountLabel: UILabel! {
+        willSet {
+            newValue.text = TextConstants.alreadyHaveAccountTitle
+            newValue.font = UIFont.TurkcellSaturaDemFont(size: 12)
+            newValue.textColor = ColorConstants.billoGray
         }
     }
     
     @IBOutlet private weak var loginButton: UIButton! {
         willSet {
-            let font: UIFont
-            if Device.isIpad {
-                font = UIFont.TurkcellSaturaMedFont(size: 20)
-            } else {
-                font = UIFont.TurkcellSaturaMedFont(size: 13)
-            }
-            let attributedTitle = NSAttributedString(string: TextConstants.introLoginButton,
-                                                     attributes:  [.foregroundColor : ColorConstants.billoGray,
-                                                                   .underlineStyle : NSUnderlineStyle.styleSingle.rawValue,
-                                                                   .font : font]) //UIFont.SFProSemiboldFont(size: 13)
-            newValue.setAttributedTitle(attributedTitle, for: .normal)
+            newValue.setTitle(TextConstants.introViewGoToLoginButtonText, for: .normal)
+            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
+            newValue.backgroundColor = .white
             newValue.isOpaque = true
+            newValue.layer.borderColor = ColorConstants.darkBlueColor.cgColor
+            newValue.layer.borderWidth = 1
+            newValue.setTitleColor(ColorConstants.marineTwo, for: .normal)
+            newValue.adjustsFontSizeToFitWidth()
         }
     }
 

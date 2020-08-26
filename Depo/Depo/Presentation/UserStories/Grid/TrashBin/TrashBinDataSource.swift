@@ -530,7 +530,7 @@ extension TrashBinDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         /// fixing iOS11 UICollectionSectionHeader clipping scroll indicator
         /// https://stackoverflow.com/a/46930410/5893286
-        if #available(iOS 11.0, *), elementKind == UICollectionElementKindSectionHeader {
+        if elementKind == UICollectionElementKindSectionHeader {
             view.layer.zPosition = 0
         }
         guard indexPath.section > 0, let view = view as? CollectionViewSimpleHeaderWithText else {
@@ -550,13 +550,19 @@ extension TrashBinDataSource: UICollectionViewDelegate {
         }
         
         if isSelectionStateActive {
-            if selectedItems.contains(item) {
+            let isSelected = selectedItems.contains(item)
+            if isSelected {
                 selectedItems.remove(item)
             } else {
                 selectedItems.append(item)
             }
-            collectionView.reloadItems(at: [indexPath])
             updateSelectionCount()
+            
+            guard let cell = collectionView.cellForItem(at: indexPath) as? BasicCollectionMultiFileCell else {
+                return
+            }
+            cell.setSelection(isSelectionActive: isSelectionStateActive, isSelected: !isSelected)
+            
         } else  {
             delegate?.didSelect(item: item)
         }

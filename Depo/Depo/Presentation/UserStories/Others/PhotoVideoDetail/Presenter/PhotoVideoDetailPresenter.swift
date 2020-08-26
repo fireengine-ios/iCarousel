@@ -19,6 +19,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
     var alertSheetExcludeTypes = [ElementTypes]()
     
     var item: Item?
+    private var allSelectedItemsTypes: [FileType]?
     
     var canLoadMoreItems = true
     
@@ -41,7 +42,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         
         var barConfig = interactor.bottomBarConfig(for: selectedIndex)
         var actionTypes = barConfig.elementsConfig
-        
+          
         if !fileTypes.contains(.image) {
             if let editIndex = actionTypes.index(of: .edit) {
                 actionTypes.remove(at: editIndex)
@@ -72,8 +73,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             }
             let allSelectedItemsTypes = selectedItems.map { $0.fileType }
             
-            let barConfig = self.prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: index)
-            self.bottomBarPresenter?.setupTabBarWith(config: barConfig)
+            if self.allSelectedItemsTypes != allSelectedItemsTypes {
+                let barConfig = self.prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: index)
+                self.bottomBarPresenter?.setupTabBarWith(config: barConfig)
+                self.allSelectedItemsTypes = allSelectedItemsTypes
+            }
+            
             self.view.onItemSelected(at: index, from: items)
         }
     }
@@ -99,6 +104,18 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         }
         
         view.onItemSelected(at: index, from: interactor.allItems)
+        
+        let selectedItems = [interactor.allItems[index]]
+        let allSelectedItemsTypes = selectedItems.map { $0.fileType }
+        
+        let barConfig = prepareBarConfigForFileTypes(fileTypes: allSelectedItemsTypes, selectedIndex: index)
+        bottomBarPresenter?.setupTabBarWith(config: barConfig)
+    }
+    
+    func updateBottomBar() {
+        guard !interactor.allItems.isEmpty, let index = interactor.currentItemIndex else {
+            return
+        }
         
         let selectedItems = [interactor.allItems[index]]
         let allSelectedItemsTypes = selectedItems.map { $0.fileType }

@@ -154,7 +154,7 @@
 "Suggestion" = "Пропозиція";
 "Feedback Form" = "Для будь-яких пропозицій або скарг, будь ласка, зв'яжіться з нами:";
 "Thanks for leaving a comment!" = "Дякуємо за ваш коментар!";
-"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Будь-ласка, не видаляйте інформацію нижче. Ця інформація буде використовуватися для вирішення проблеми.\n\nВерсія програми: %@\nМсідн: %@\nПеревізник: %@\nПристрій: %@\nПристрій OS: %@\nМова: %@\nМовне уподобання: %@\nСтатус мережі: %@\nЗагальна кількість зберігання: %lld\nВикористано зберігання: %lld\nПакети: %@";
+"Please do not delete the information below. The information will be used to address the problem.\n\nApplication Version: %@\nMsisdn: %@\nCarrier: %@\nDevice:%@\nDevice OS: %@\nLanguage: %@\nLanguage preference: %@\nNetwork Status: %@\nTotal Storage: %lld\nUsed Storage: %lld\nPackages: %@\n" = "Будь-ласка, не видаляйте інформацію нижче. Ця інформація буде використовуватися для вирішення проблеми.\n\nВерсія програми: %@\nНомер: %@\nПеревізник: %@\nПристрій: %@\nПристрій OS: %@\nМова: %@\nМовне уподобання: %@\nСтатус мережі: %@\nЗагальна кількість зберігання: %lld\nВикористано зберігання: %lld\nПакети: %@";
 "Upload Photos" = "Завантажте фото";
 "Add" = "Додати";
 "Albums" = "Альбоми";
@@ -883,7 +883,7 @@
 "my_usage_storage" = "Моє використання Інтернету";
 "NSLocationAlwaysAndWhenInUseUsageDescription" = "Ваше місце розташування буде використано для синхронізації у фоновому режимі та для організації та пошуку фотографій.";
 "name" = "Ім'я";
-"surname" = "прізвище";
+"surname" = "Прізвище";
 "change password" = "Змінити пароль";
 "left_space" = "%1$@ / %2$@";
 
@@ -919,13 +919,13 @@
 "your_account_email" = "E-mail  вашого облікового запису";
 "enter_your_account_email" = "Введіть e-mail  вашого облікового запису";
 "enter_the_text_shown_in_the_image" = "Введіть текст на зображенні";
-"support_form_email_body" = "Будь ласка, не видаляйте інформацію. Дані будуть використовуватися для вирішення проблем:\nІм'я: %@\nпрізвище: %@\nE-mail: %@\nНомер телефона: %@\nВерсія додатка: %@\nОператор: %@\nПристрій: %@\nОС пристрою: %@\nМова: %@\nСтатус мережи: %@\n";
+"support_form_email_body" = "Будь ласка, не видаляйте інформацію. Дані будуть використовуватися для вирішення проблем:\nІм'я: %@\nПрізвище: %@\nE-mail: %@\nНомер телефона: %@\nВерсія додатка: %@\nОператор: %@\nПристрій: %@\nОС пристрою: %@\nМова: %@\nСтатус мережи: %@\n";
 "profile_phone_number_title" = "Номер телефона";
 "profile_phone_number_placeholder" = "Введіть номер телефона";
 "please_enter_your_name" = "Введіть ваше ім'я";
 "enter_your_name" = "Введіть ваше ім'я";
-"please_enter_your_surname" = "Введіть вашу фамілію";
-"enter_your_surname" = "Введіть вашу фамілію";
+"please_enter_your_surname" = "Введіть ваше прізвище";
+"enter_your_surname" = "Введіть ваше прізвище";
 "enter_your_email_address" = "Введіть ваш e-mail";
 "subject" = "Тема запиту";
 "please_enter_your_subject" = "Будь ласка введіть тему запиту";
@@ -1228,7 +1228,7 @@
 "campaign_detail_intro_noun_celebration" = "Скористайся можливістю стати власником одного з 20-тьох Samsung Galaxy Note 10? ";
 "campaign_detail_info_title" = "Деталі Акції";
 "campaign_detail_info_description" = "Акція, щодо отримання права виграти телефон закінчилась. Результати лотереї будуть оголошені 20 лютого з соціальних мереж нашого сайту. Інформацію, щодо загальної кількості права  ви  можете отримати  із наведеної вище інформації. Щоб дізнатися результати розіграшу, слідкуйте за нашими сторінками у соціальних мережах.";
-"AccessibilityGiftButton" = "";
+"AccessibilityGiftButton" = "GiftBox";
 "landing_start_button" = "Почати";
 "landing_billo_title_0" = "Живи, Зберігай, Пам’ятай";
 "landing_billo_subtitle_0" = "Безпечно створюйте резервні копії всіх своїх спогадів, файлів та контактів у Billo!";
@@ -1595,12 +1595,12 @@
 "contact_phase2_error_backup_title" = "Створення резервних копій не виконана!";
 "contact_phase2_error_restore_title" = "Переміщення на телефон не вдалося!";
 "contact_phase2_error_delete_title" = "Видалення не виконане!";
-"gallery_filter_all" = "";
-"gallery_filter_synced" = "";
-"gallery_filter_unsynced" = "";
-"gallery_filter_action_sheet_all" = "";
-"gallery_filter_action_sheet_synced" = "";
-"gallery_filter_action_sheet_unsynced" = "";
+"gallery_filter_all" = "Всі";
+"gallery_filter_synced" = "Cинхронізовані";
+"gallery_filter_unsynced" = "Несинхронізовані";
+"gallery_filter_action_sheet_all" = "Все";
+"gallery_filter_action_sheet_synced" = "Cинхронізовані";
+"gallery_filter_action_sheet_unsynced" = "Несинхронізовані";
 "contact_phase2_error_quota_restore" = "Ви не можете продовжити обробку, так як в сховищі немає місця. Ви можете збільшити простір або видалити файли та звільнити місце для зберігання.";
 "contact_phase2_error_quota_backup" = "Ви не можете продовжити обробку, так як в сховищі немає місця. Ви можете збільшити простір або видалити файли та звільнити місце для зберігання.";
 "contact_phase2_error_message" = "Виникла тимчасова помилка. Будь ласка, спробуйте ще раз.";
@@ -1609,4 +1609,5 @@
 "contact_phase2_result_delete_backup_nav_bar_title" = "Видалити Резервну Копію";
 "contact_phase2_result_delete_duplicates_nav_bar_title" = "Видалити Повторення";
 "contact_phase2_result_delete_all_contacts_nav_bar_title" = "Видалити Контакти";
-"eula_title" = "";
+"eula_title" = "Угода Користувача";
+"photo_video_empty_no_unsync_photos_title" = "Усі файли є резервними копіями.";

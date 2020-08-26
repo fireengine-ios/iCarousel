@@ -98,12 +98,7 @@ final class QuickSelectCollectionView: UICollectionView {
     }
     
     private func updateOffsetRange() {
-        let inset: UIEdgeInsets
-        if #available(iOS 11.0, *) {
-            inset = adjustedContentInset
-        } else {
-            inset = contentInset
-        }
+        let inset: UIEdgeInsets = adjustedContentInset
         
         let maxBottomOffset = contentSize.height + inset.bottom - frame.height
         offsetRange = -inset.top...max(0.0, maxBottomOffset)
@@ -310,9 +305,13 @@ final class QuickSelectCollectionView: UICollectionView {
             return indexPaths
         }
         
-        for row in range.lowerBound.row..<dataSource.collectionView(self, numberOfItemsInSection: beginSection) {
-            indexPaths.append(IndexPath(row: row, section: beginSection))
+        let numberOfItemsInSection = dataSource.collectionView(self, numberOfItemsInSection: beginSection)
+        if range.lowerBound.row <= numberOfItemsInSection {
+            for row in range.lowerBound.row..<numberOfItemsInSection {
+                indexPaths.append(IndexPath(row: row, section: beginSection))
+            }
         }
+        
         for row in 0...range.upperBound.row {
             indexPaths.append(IndexPath(row: row, section: endSection))
         }

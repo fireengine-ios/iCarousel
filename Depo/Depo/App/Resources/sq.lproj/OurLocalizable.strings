@@ -1636,12 +1636,12 @@
 "contact_phase2_error_backup_title" = "Rezervimi nuk është mundur të kryhet!";
 "contact_phase2_error_restore_title" = "Transferimi në telefon nuk është mundur të kryhet!";
 "contact_phase2_error_delete_title" = "Veprimi i fshirjes nuk është mundur të kryhet!";
-"gallery_filter_all" = "";
-"gallery_filter_synced" = "";
-"gallery_filter_unsynced" = "";
-"gallery_filter_action_sheet_all" = "";
-"gallery_filter_action_sheet_synced" = "";
-"gallery_filter_action_sheet_unsynced" = "";
+"gallery_filter_all" = "Trego: Të gjitha";
+"gallery_filter_synced" = "Trego: Artikuj të kopjuar për tu ringarkuar ";
+"gallery_filter_unsynced" = "Trego: Artikujt që nuk janë kopjuar për tu ringarkuar";
+"gallery_filter_action_sheet_all" = "Të gjitha";
+"gallery_filter_action_sheet_synced" = "Artikuj të kopjuar për tu ringarkuar";
+"gallery_filter_action_sheet_unsynced" = "Artikujt që nuk janë kopjuar për tu ringarkuar";
 "contact_phase2_error_quota_restore" = "Nuk mund të vazhdosh në veprim sepse nuk ka mbetur vend në hapësirën tënde të ruajtjes. Mund të zmadhosh hapësirën e ruajtjes  ose të lirosh  hapësirën e ruajtjes duke i fshirë  skedarët e tua.";
 "contact_phase2_error_quota_backup" = "Nuk mund të vazhdosh në veprim sepse nuk ka mbetur vend në hapësirën tënde të ruajtjes. Mund të zmadhosh hapësirën e ruajtjes  ose të lirosh  hapësirën e ruajtjes duke i fshirë  skedarët e tua.";
 "contact_phase2_error_message" = "Ka ndodhur një gabim i përkohshëm. Ju lutemi provojeni përsëri.";
@@ -1650,4 +1650,5 @@
 "contact_phase2_result_delete_backup_nav_bar_title" = "Fshije rezervën";
 "contact_phase2_result_delete_duplicates_nav_bar_title" = "Fshiji të përsëriturat";
 "contact_phase2_result_delete_all_contacts_nav_bar_title" = "Fshiji  personat";
-"eula_title" = "";
+"eula_title" = "Marrëveshja e Përdoruesit";
+"photo_video_empty_no_unsync_photos_title" = "Të gjitha skedarët janë të kopjuar për tu ringarkuar.";

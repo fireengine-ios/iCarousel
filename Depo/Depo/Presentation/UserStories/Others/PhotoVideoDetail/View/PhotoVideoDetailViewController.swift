@@ -106,11 +106,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if #available(iOS 11.0, *) {
-            collectionView.contentInsetAdjustmentBehavior = .never
-        } else {
-            automaticallyAdjustsScrollViewInsets = false
-        }
+        collectionView.contentInsetAdjustmentBehavior = .never
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         collectionView.register(nibCell: PhotoVideoDetailCell.self)
@@ -154,6 +150,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         //editingTabBar.editingBar.layer.borderWidth = 0
         
         statusBarColor = .black
+        
+        NotificationCenter.default.post(name: .reusePlayer, object: self)
 
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
@@ -175,6 +173,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         visibleNavigationBarStyle()
         statusBarColor = .clear
         
+        NotificationCenter.default.post(name: .deinitPlayer, object: self)
+        
         output.viewWillDisappear()
         passThroughView?.disableGestures()
         backButtonForNavigationItem(title: TextConstants.backTitle)
@@ -183,7 +183,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+        hideDetailViewIfChangedRotation()
         collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
             guard let `self` = self else {
                 return
@@ -197,6 +197,12 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     override var preferredNavigationBarStyle: NavigationBarStyle {
         return .black
+    }
+    
+    private func hideDetailViewIfChangedRotation() {
+        if UIDevice.current.orientation.isLandscape {
+            bottomDetailViewManager?.closeDetailView()
+        }
     }
     
     func hideView() {
@@ -267,7 +273,11 @@ final class PhotoVideoDetailViewController: BaseViewController {
         } else {
             needUpdate = true
         }
-        selectedIndex = index
+        
+        if selectedIndex != index {
+            selectedIndex = index
+        }
+
         updateAllItems(with: items, updateCollection: needUpdate)
     }
 
@@ -489,6 +499,18 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
         DispatchQueue.main.async {
             self.replaceUploaded(file)
         }
+    }
+    
+    func startUploadFile(file: WrapData) {
+        output.updateBottomBar()
+    }
+    
+    func failedUploadFile(file: WrapData, error: Error?) {
+        output.updateBottomBar()
+    }
+    
+    func cancelledUpload(file: WrapData) {
+        output.updateBottomBar()
     }
     
     private func replaceUploaded(_ item: WrapData) {

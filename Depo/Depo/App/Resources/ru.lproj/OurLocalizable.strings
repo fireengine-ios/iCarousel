@@ -1607,12 +1607,12 @@
 "contact_phase2_error_backup_title" = "Ошибка резервного копирования!";
 "contact_phase2_error_restore_title" = "Передача на телефон не удалась!";
 "contact_phase2_error_delete_title" = "Удаление не удалось!";
-"gallery_filter_all" = "";
-"gallery_filter_synced" = "";
-"gallery_filter_unsynced" = "";
-"gallery_filter_action_sheet_all" = "";
-"gallery_filter_action_sheet_synced" = "";
-"gallery_filter_action_sheet_unsynced" = "";
+"gallery_filter_all" = "Все";
+"gallery_filter_synced" = "Синхронизированные";
+"gallery_filter_unsynced" = "Несинхронизированные";
+"gallery_filter_action_sheet_all" = "Все";
+"gallery_filter_action_sheet_synced" = "Синхронизированные";
+"gallery_filter_action_sheet_unsynced" = "Несинхронизированные";
 "contact_phase2_error_quota_restore" = "Вы не можете продолжить действие по причине недостатка свободного места в хранилище. Вы можете увеличить пространство для хранения или освободить место удалив файлы.";
 "contact_phase2_error_quota_backup" = "Вы не можете продолжить действие по причине недостатка свободного места в хранилище. Вы можете увеличить пространство для хранения или освободить место удалив файлы.";
 "contact_phase2_error_message" = "Произошла временная ошибка. Пожалуйста, попробуйте еще раз.";
@@ -1621,4 +1621,5 @@
 "contact_phase2_result_delete_backup_nav_bar_title" = "Удалить Резервную Копию";
 "contact_phase2_result_delete_duplicates_nav_bar_title" = "Удалить Дубликаты";
 "contact_phase2_result_delete_all_contacts_nav_bar_title" = "Удалить Контакты";
-"eula_title" = "";
+"eula_title" = "Пользовательское Соглашение";
+"photo_video_empty_no_unsync_photos_title" = "Все ваши файлы имеют резервные копии.";

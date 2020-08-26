@@ -13,9 +13,10 @@ apps = [
             appleId: '665036334', // Apple ID property in the App Information section in App Store Connect,
             prodTeamID: '693N5K66ZJ',
 	    xcodeSchema: 'TC_Depo_LifeTech',
-            xcodeTarget: 'TC_Depo_LifeTech'
+            xcodeTarget: 'TC_Depo_LifeTech',
             //xcodeSchema: 'TC_Depo_LifeTech_Bundle',
-            //xcodeTarget: 'TC_Depo_LifeTech_Bundle'
+            //xcodeTarget: 'TC_Depo_LifeTech_Bundle',
+            itcTeamId: '121548574',
         ],
  [
             name: 'lifedrive',// name will be the base filename of the app
@@ -23,6 +24,7 @@ apps = [
             ictsContainerId: '966', // ICT Store
             appleId: '1488914348',
             prodTeamID: '729CGH4BJD',
+            itcTeamId: '118347642',
 	    //xcodeSchema: // Defaults to app name
             //xcodeTarget: // Defaults to app name
             //xcodeSchema: 'lifedrive_Bundle', 
@@ -41,7 +43,7 @@ testFlightDeployers = "TCUSER" // To enable, uncomment submitters in approval st
 devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;can.kucukakdag@turkcell.com.tr"
 
 xcodeParams = [
-        xcodeApp: 'Xcode11.app',
+        xcodeApp: '11.6',
         workspaceFile: 'Depo/Depo'
 ]
 
@@ -94,6 +96,7 @@ def runXcode = { app, flavorId ->
     sh "rm -f '${WORKSPACE}/${app.name}-logs/*'"
 
     xcodeBuild target: app.xcodeTarget ?: app.name,
+      xcodeName: xcodeParams.xcodeApp,
       interpretTargetAsRegEx: false,
       cleanBeforeBuild: true,
       allowFailingBuildResults: false,
@@ -208,7 +211,7 @@ def deployToTestflight = { app ->
 
     sh """
         export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
-        ~/.fastlane/bin/fastlane ${uploadCommand} ipa:"${ipaFile}" apple_id:"${app.appleId}" username:"${TESTFLIGHT_UPLOAD_USR}"
+        ~/.fastlane/bin/fastlane ${uploadCommand} ipa:"${ipaFile}" username:"${TESTFLIGHT_UPLOAD_USR}"
     """
 }
 
@@ -250,7 +253,6 @@ pipeline {
 
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
-                        sh "sudo xcode-select -switch /Applications/${xcodeParams.xcodeApp}/Contents/Developer"
                         sh "source ~/.bash_profile; cd Depo; pod install" // --repo-update occasionally
                         apps.each { app ->
                             runXcode(app, 'test')
@@ -385,7 +387,7 @@ pipeline {
             environment {
                 IOS_PASS = credentials('iosLoginPass')
                 DELIVER_ITMSTRANSPORTER_ADDITIONAL_UPLOAD_PARAMETERS = "-t HTTP"
-                TESTFLIGHT_UPLOAD = credentials('testflight')
+                TESTFLIGHT_UPLOAD = credentials('testflight-generic')
                 FASTLANE_DONT_STORE_PASSWORD = 1
            }
             steps {
@@ -394,7 +396,8 @@ pipeline {
                     def failReasons = [:]
                     apps.each { app ->
                         try {
-                            if (env.getProperty("DEPLOY_${app.name}") == 'true') {
+                            if (env.getProperty("DEPLOY_${app.name}") == 'true') {           
+                                env.FASTLANE_ITC_TEAM_ID="${app.itcTeamId}"
                                 deployToTestflight app
                             }
 

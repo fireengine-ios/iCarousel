@@ -26,7 +26,7 @@ enum CardState {
     }
 }
 
-protocol BottomDetailViewAnimationManagerDelegate {
+protocol BottomDetailViewAnimationManagerDelegate: class {
     func getSelectedIindex() -> Int
     func getObjectsCount() -> Int
     func getIsFullScreenState() -> Bool
@@ -53,23 +53,23 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
         
     private var isFullScreen: Bool {
         get {
-            delegate.getIsFullScreenState()
+            self.delegate?.getIsFullScreenState() ?? false
         }
         set {
-            delegate.setIsFullScreenState(newValue)
+            self.delegate?.setIsFullScreenState(newValue)
         }
     }
     
     private var selectedIndex: Int {
         get {
-            delegate.getSelectedIindex()
+            delegate?.getSelectedIindex() ?? 0
         }
         set {
-            delegate.setSelectedIndex(newValue)
+            delegate?.setSelectedIndex(newValue)
         }
     }
     
-    var delegate: BottomDetailViewAnimationManagerDelegate
+    private weak var delegate: BottomDetailViewAnimationManagerDelegate?
 
     private var viewState: CardState = .collapsed
     private var gestureBeginLocation: CGPoint = .zero
@@ -115,14 +115,12 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
     }
     
     private func needHideDetailView() -> Bool {
-        return managedView.frame.minY >= view.frame.height * 0.75
+
+        return managedView.frame.minY >= view.frame.height * 0.8
     }
     
     private func getCellMaxY() -> CGFloat {
-        guard let cell = collectionView.cellForItem(at: IndexPath(row: selectedIndex, section: 0)) as? PhotoVideoDetailCell else {
-            return .zero
-        }
-        return cell.frame.maxY
+        collectionView.cellForItem(at: IndexPath(row: selectedIndex, section: .zero))?.frame.maxY ?? .zero
     }
     
     private func setupDetailViewAlpha(isHidden: Bool) {
@@ -140,19 +138,35 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
     
     func handlePan(recognizer: UIPanGestureRecognizer) {
         
+        let coef = (view.frame.height * 0.9 - view.frame.height * 0.80)
+        
         switch recognizer.state {
         case .began:
             
             managedView.hideKeyboard()
             gestureBeginLocation = recognizer.location(in: view)
             dragViewBeginLocation = collectionView.frame.origin
-            isFullScreen = true
         case .changed:
             
             let newLocation = dragViewBeginLocation.y + (recognizer.location(in: view).y - gestureBeginLocation.y)
+            
+            if newLocation > 0 {
+                recognizer.state = .cancelled
+                setCollapsedState()
+                return
+            }
+
+            isFullScreen = true
             collectionView.frame.origin.y = newLocation
+            
+            if abs(newLocation) < coef {
+                managedView.alpha = max(0, min(1, abs(newLocation / coef)))
+                managedView.frame.origin.y = collectionView.frame.maxY - imageMaxY + max(0, coef - coef * abs(newLocation / coef))
+                return
+            }
+            
             managedView.frame.origin.y = collectionView.frame.maxY - imageMaxY
-            detailViewIsHidden = needHideDetailView()
+            
         case .ended:
             dissableTouchUntillFinish(isDisabled: true)
             UIView.animate(withDuration: 0.3, animations: {
@@ -160,7 +174,7 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
             }, completion: { _ in
                 switch self.viewState {
                 case .collapsed:
-                    self.setCollapseState()
+                    self.setCollapseStateAnimatedly()
                 case .expanded:
                     self.setExpandedState()
                 case .full:
@@ -191,7 +205,7 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
         if velocityY > 50, viewState.isFull {
             setExpandedState()
         } else if velocityY > 50 {
-            setCollapseState()
+            setCollapseStateAnimatedly()
         } else if velocityY < -50, managedView.frame.origin.y > detailViewExpandedPositionY, !viewState.isExpanded  {
             setExpandedState()
         } else if managedView.frame.origin.y < detailViewExpandedPositionY {
@@ -199,11 +213,11 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
         } else if expandedRange.contains(managedView.frame.origin.y) {
             setExpandedState()
         } else if managedView.frame.origin.y > view.frame.height {
-            setCollapseState()
+            setCollapseStateAnimatedly()
         } else {
             switch self.viewState {
             case .collapsed:
-                setCollapseState()
+                setCollapseStateAnimatedly()
             case .expanded:
                 setExpandedState()
             case .full:
@@ -218,32 +232,41 @@ extension BottomDetailViewAnimationManager {
     @objc func closeDetailView() {
         managedView.hideKeyboard()
         viewState = .collapsed
-        isFullScreen = false
         
         UIView.animate(withDuration: 0.5, animations: {
                         self.collectionView.frame.origin.y = .zero
-                        self.managedView.frame.origin.y = self.view.frame.height * 0.75
+                        self.managedView.frame.origin.y = self.collectionView.frame.maxY - self.imageMaxY
                         self.collapseView.isHidden = true
         }, completion: { _ in
             self.setupDetailViewAlpha(isHidden: true)
             self.managedView.frame.origin.y = self.view.frame.height
+            self.isFullScreen = false
         })
     }
     
-    private func setCollapseState() {
+    private func setCollapseStateAnimatedly() {
         
         managedView.hideKeyboard()
         viewState = .collapsed
-        isFullScreen = false
         
         UIView.animate(withDuration: 0.1, animations: {
             self.collectionView.frame.origin.y = .zero
-            self.managedView.frame.origin.y = self.view.frame.height * 0.75
+            self.managedView.frame.origin.y = self.collectionView.frame.maxY - self.imageMaxY
             self.collapseView.isHidden = true
         }) { _ in
             self.setupDetailViewAlpha(isHidden: true)
             self.managedView.frame.origin.y = self.view.frame.height
+            self.isFullScreen = false
         }
+    }
+    
+    private func setCollapsedState() {
+        managedView.hideKeyboard()
+        viewState = .collapsed
+        isFullScreen = false
+        collapseView.isHidden = true
+        setupDetailViewAlpha(isHidden: true)
+        managedView.frame.origin.y = self.view.frame.height
     }
     
     private func setExpandedState() {
@@ -314,7 +337,8 @@ extension BottomDetailViewAnimationManager {
     }
 
     private func scroll(to index: Int) {
-        guard 0..<delegate.getObjectsCount() ~= index else {
+        guard let objectsCount = delegate?.getObjectsCount(), objectsCount > 0 else {
+            collectionView.setContentOffset(.zero, animated: true)
             return
         }
         

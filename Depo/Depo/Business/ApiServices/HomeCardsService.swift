@@ -15,12 +15,14 @@ protocol HomeCardsService {
     func all(handler: @escaping (ResponseResult<[HomeCardResponse]>) -> Void)
     func save(with id: Int, handler: @escaping ResponseVoid)
     func delete(with id: Int, handler: @escaping ResponseVoid)
+    func updateItem(uuid: String, handler: @escaping (ResponseResult<WrapData>) -> Void)
 }
 
 final class HomeCardsServiceImp {
     
     var delegate: HomeCardsServiceImpDelegte?
     let sessionManager: SessionManager
+    private lazy var fileService = FileService.shared
     
     init(sessionManager: SessionManager = SessionManager.customDefault) {
         self.sessionManager = sessionManager
@@ -35,6 +37,7 @@ protocol HomeCardsServiceImpDelegte {
 }
 
 extension HomeCardsServiceImp: HomeCardsService {
+    
     func all(handler: @escaping (ResponseResult<[HomeCardResponse]>) -> Void) {
         sessionManager
             .request(RouteRequests.HomeCards.all)
@@ -73,5 +76,13 @@ extension HomeCardsServiceImp: HomeCardsService {
             .request(url, method: .delete)
             .customValidate()
             .responseVoid(handler)
+    }
+    
+    func updateItem(uuid: String, handler: @escaping (ResponseResult<WrapData>) -> Void) {
+        fileService.updateDetail(uuids: uuid, success: { updatedItem in
+            handler(.success(updatedItem))
+        }) { error in
+            handler(.failed(error))
+        }
     }
 }

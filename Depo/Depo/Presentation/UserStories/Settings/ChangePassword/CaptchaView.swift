@@ -61,10 +61,8 @@ final class CaptchaView: UIView, FromNib {
             newValue.autocapitalizationType = .none
             newValue.spellCheckingType = .no
             newValue.enablesReturnKeyAutomatically = true
-            if #available(iOS 11.0, *) {
-                newValue.smartQuotesType = .no
-                newValue.smartDashesType = .no
-            }
+            newValue.smartQuotesType = .no
+            newValue.smartDashesType = .no
         }
     }
     
