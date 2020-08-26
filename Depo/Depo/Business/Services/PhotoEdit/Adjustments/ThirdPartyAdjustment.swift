@@ -42,7 +42,7 @@ final class CoreImageAdjustment: ThirdPartyAdjustmentProtocol {
         onFinished(output)
     }
     
-    func convertCIImageToCGImage(inputImage: CIImage) -> CGImage? {
+    private func convertCIImageToCGImage(inputImage: CIImage) -> CGImage? {
         let context = CIContext(options: nil)
         
         return context.createCGImage(inputImage, from: inputImage.extent)
