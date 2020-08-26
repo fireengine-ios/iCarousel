@@ -21,6 +21,7 @@ final class PhotoEditViewUIManager: NSObject {
     
     @IBOutlet private weak var filtersScrollView: UIScrollView! {
         willSet {
+            newValue.superview?.backgroundColor = ColorConstants.photoEditBackgroundColor
             newValue.backgroundColor = ColorConstants.photoEditBackgroundColor
             newValue.showsVerticalScrollIndicator = false
             newValue.delaysContentTouches = false
@@ -39,7 +40,11 @@ final class PhotoEditViewUIManager: NSObject {
         }
     }
     
-    @IBOutlet private weak var bottomBarContainer: UIView!
+    @IBOutlet private weak var bottomBarContainer: UIView! {
+        willSet {
+            newValue.backgroundColor = ColorConstants.photoEditBackgroundColor
+        }
+    }
     
     private(set) lazy var tabbar: PhotoEditTabbar = {
         let tabbar = PhotoEditTabbar.initFromNib()
@@ -77,13 +82,9 @@ final class PhotoEditViewUIManager: NSObject {
     }
     
     func showInitialState() {
+        showTabBarItemView(tabbar.selectedType)
         animator.showTransition(to: navBarView, on: navBarContainer, animated: true)
         animator.showTransition(to: tabbar, on: bottomBarContainer, animated: true)
-    }
-    
-    func showDefaultState() {
-        showTabBarItemView(tabbar.selectedType)
-        showInitialState()
     }
     
     private func showTabBarItemView(_ item: PhotoEditTabbarItemType) {
@@ -131,7 +132,7 @@ extension PhotoEditViewUIManager: AdjustmentCategoriesViewDelegate {
         currentPhotoEditViewType = type
         animator.showTransition(to: view, on: filtersContainerView, animated: true)
         animator.showTransition(to: changesBar, on: bottomBarContainer, animated: true)
-        navBarView.state = .initial
+        navBarView.state = .empty
     }
 }
 
