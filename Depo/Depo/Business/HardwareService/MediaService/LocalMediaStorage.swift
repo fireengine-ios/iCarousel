@@ -80,7 +80,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     /// with message "This application is not allowed to access Photo data"
     /// https://stackoverflow.com/a/50663778/5893286
     private lazy var photoManager: PHImageManager? = {
-        guard PHPhotoLibrary.authorizationStatus() == .authorized else {
+        guard PHPhotoLibrary.isAccessibleAuthorizationStatus() else {
             return nil
         }
         
@@ -122,8 +122,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func photoLibraryIsAvailible() -> Bool {
-        let status = PHPhotoLibrary.authorizationStatus()
-        return status == .authorized
+        return PHPhotoLibrary.isAccessibleAuthorizationStatus()
     }
     
     func getInfo(from assets: [PHAsset], completion: @escaping (_ assetsInfo: [AssetInfo])->Void) {
@@ -181,29 +180,30 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     func askPermissionForPhotoFramework(redirectToSettings: Bool, completion: @escaping PhotoLibraryGranted) {
-        let status = PHPhotoLibrary.authorizationStatus()
+        let status = PHPhotoLibrary.currentAuthorizationStatus()
         switch status {
-        case .authorized:
+        //TODO: uncomment for xcode 12
+        case .authorized://, .limited:
             photoLibrary.register(self)
             completion(true, status)
             AnalyticsPermissionNetmeraEvent.sendPhotoPermissionNetmeraEvents(true)
         case .notDetermined, .restricted:
             isWaitingForPhotoPermission = true
             passcodeStorage.systemCallOnScreen = true
-            PHPhotoLibrary.requestAuthorization({ [weak self] authStatus in
+            PHPhotoLibrary.requestAuthorizationStatus { [weak self] authStatus in
                 guard let self = self else {
                     return
                 }
                 
                 self.passcodeStorage.systemCallOnScreen = false
-                let isAuthorized = authStatus == .authorized
+                let isAuthorized = authStatus.isAccessible
                 if isAuthorized {
                     self.photoLibrary.register(self)
                 }
                 AnalyticsPermissionNetmeraEvent.sendPhotoPermissionNetmeraEvents(isAuthorized)
                 self.isWaitingForPhotoPermission = false
                 completion(isAuthorized, authStatus)
-            })
+            }
         case .denied:
             completion(false, status)
             if redirectToSettings {

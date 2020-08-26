@@ -279,6 +279,7 @@ extension BottomDetailViewAnimationManager {
         viewState = .expanded
         managedView.frame.origin.y = yPositionForBottomView
         collectionView.frame.origin.y = yPositionForBottomView - collectionViewCellMaxY + imageMaxY
+        stopVideoIfNeeded()
     }
     
     private func setFullState() {
@@ -290,6 +291,12 @@ extension BottomDetailViewAnimationManager {
         collapseView.isHidden = false
         setupDetailViewAlpha(isHidden: false)
         isFullScreen = true
+    }
+    
+    private func stopVideoIfNeeded() {
+        if let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: .zero)) as? VideoInterruptable {
+            cell.stop()
+        }
     }
     
     func showDetailView() {
@@ -342,8 +349,12 @@ extension BottomDetailViewAnimationManager {
             return
         }
         
-        let cell = collectionView.visibleCells.first as? PhotoVideoDetailCell
-        cell?.delegate = self
+        guard 0..<objectsCount ~= index else {
+            return
+        }
+        
+        let cell = collectionView.visibleCells.first as? CellConfigurable
+        cell?.responder = self
         let offsetY = collectionView.contentOffset.y
         selectedIndex = index
         

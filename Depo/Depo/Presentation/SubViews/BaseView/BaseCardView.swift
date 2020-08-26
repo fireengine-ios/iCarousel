@@ -19,6 +19,8 @@ class BaseCardView: UIView, NibInit {
     lazy var homeCardsService: HomeCardsService = factory.resolve()
     var shouldScrollToTop: Bool = false
     
+    weak var delegate: CardsShareButtonDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         configurateView()

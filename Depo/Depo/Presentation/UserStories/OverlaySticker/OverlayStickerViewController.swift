@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Photos
 import YYImage
 
 ///Static parameters for UI elements set up in OverlayStickerViewControllerDesigner
@@ -290,16 +289,12 @@ final class OverlayStickerViewController: UIViewController {
     }
 
     private func checkLibraryAccessStatus(completion: @escaping BoolHandler) {
-        if PHPhotoLibrary.authorizationStatus() == .authorized {
+        if PHPhotoLibrary.isAccessibleAuthorizationStatus() {
             completion(true)
         } else {
-            PHPhotoLibrary.requestAuthorization({ (status) in
-                if status == .authorized {
-                    completion(true)
-                } else {
-                    completion(false)
-                }
-            })
+            PHPhotoLibrary.requestAuthorizationStatus { status in
+                completion(status.isAccessible)
+            }
         }
     }
 }

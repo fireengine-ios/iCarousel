@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreGraphics
 
 extension UIImage {
     func resizedImage(to targetSize: CGSize) -> UIImage? {
@@ -25,5 +26,16 @@ extension UIImage {
         UIGraphicsEndImageContext()
         
         return newImage
+    }
+    
+    public var isOpaque: Bool {
+        guard let alpha = self.cgImage?.alphaInfo else {
+            return false
+        }
+        
+        return alpha == .first ||
+            alpha == .last ||
+            alpha == .premultipliedFirst ||
+            alpha == .premultipliedLast
     }
 }

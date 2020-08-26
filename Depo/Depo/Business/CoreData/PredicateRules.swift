@@ -36,7 +36,7 @@ class PredicateRules {
     var document: NSPredicate {
         
         let start = FileType.application(.unknown).valueForCoreDataMapping() - 1
-        let end = FileType.application(.ppt).valueForCoreDataMapping() + 1
+        let end = FileType.application(.pptx).valueForCoreDataMapping() + 1
         let list = [start, end]
         
         return NSPredicate(format: "\(MediaItem.PropertyNameKey.fileTypeValue) BETWEEN %@ ", list)
@@ -83,7 +83,7 @@ class PredicateRules {
                 let allDocsTypes: [GeneralFilesFiltrationType] =
                     [.fileType(.application(.doc)), .fileType(.application(.txt)),
                      .fileType(.application(.pdf)), .fileType(.application(.xls)),
-                     .fileType(.application(.html)), .fileType(.application(.ppt))]
+                     .fileType(.application(.html)), .fileType(.application(.ppt)), .fileType(.application(.pptx))]
                 let predicates = allDocsTypes.flatMap { predicateFromGeneralFilterType(type: $0) }
                 return NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
             default:

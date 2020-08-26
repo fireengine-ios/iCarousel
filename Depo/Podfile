@@ -11,8 +11,9 @@ end
 
 def core_pods
   shared_pods
-  pod 'Fabric', '~> 1.10'
-  pod 'Crashlytics', '3.14.0'
+  pod 'Firebase/Core', '~> 6'
+  pod 'Firebase/Crashlytics', '~> 6'
+  pod 'Firebase/Analytics', '~> 6'
   pod 'FBSDKCoreKit', '~> 7'
   pod 'FBSDKLoginKit', '~> 7'
   pod 'FBSDKShareKit', '~> 7'
@@ -21,7 +22,6 @@ def core_pods
   pod 'SDWebImage', '~> 4'
   pod 'YYImage', '~> 1'
   pod 'GoogleConversionTracking', '~> 3'
-  pod 'Firebase/Core', '~> 6'
   pod 'GoogleTagManager', '~> 7'
   pod 'Adjust', '~> 4'
   #pod 'ActiveLabel'
@@ -41,7 +41,7 @@ def core_pods
   pod 'ReachabilitySwift'
   pod 'MBProgressHUD', '~> 1.1.0'
   pod 'TTGSnackbar', '~> 1'
-
+  pod 'MaterialComponents/Slider'
   #logger
   pod 'XCGLogger', '~> 7'
 
@@ -51,7 +51,8 @@ def core_pods
   #migration
   pod 'SQLite.swift', '0.11.4'
   
-#  pod 'MetalPetal', '~> 1.0'
+  pod 'Mantis', '~> 1.3.2'
+  pod 'MetalPetal/Swift'
 #  pod 'GPUImage'
 
   pod 'SwiftyGif', '~> 5'
@@ -139,55 +140,55 @@ target 'LifeboxUnitTests' do
   core_pods
 end
 
-target 'lifedrive' do
+target 'Billo' do
   core_pods
 end
 
-target 'lifedrive_Bundle' do
+target 'Billo_Bundle' do
   core_pods
 end
 
-target 'LifeDriveShared' do
+target 'BilloShared' do
   sharing_pods
 end
 
-target 'LifeDriveFileProvider' do
+target 'BilloFileProvider' do
   file_provider_pods
 end
 
-target 'LifeDriveProviderUI' do
+target 'BilloProviderUI' do
   file_provider_ui_pods
 end
 
-#target 'LifeDrive-widget' do
+#target 'Billo-widget' do
 #  autosync_widget_pods
 #end
 
-target 'LifeDriveNotificationService' do
+target 'BilloNotificationService' do
   notification_pods
 end
 
-target 'LifeTech_lifedrive' do
+target 'LifeTech_Billo' do
   core_pods
 end
 
-target 'LifeTech_LifeDriveShared' do
+target 'LifeTech_BilloShared' do
   sharing_pods
 end
 
-target 'LifeTech_LifeDriveFileProvider' do
+target 'LifeTech_BilloFileProvider' do
   file_provider_pods
 end
 
-target 'LifeTech_LifeDriveProviderUI' do
+target 'LifeTech_BilloProviderUI' do
   file_provider_ui_pods
 end
 
-#target 'LifeTech_LifeDrive-widget' do
+#target 'LifeTech_Billo-widget' do
 #  autosync_widget_pods
 #end
 
-target 'LifeTech_LifeDriveNotificationService' do
+target 'LifeTech_BilloNotificationService' do
   notification_pods
 end
 

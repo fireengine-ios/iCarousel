@@ -42,6 +42,14 @@ final class AlbumCard: BaseCardView {
         }
     }
     
+    @IBOutlet private weak var shareButton: UIButton!  {
+        didSet {
+            shareButton.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 14)
+            shareButton.setTitleColor(ColorConstants.blueColor, for: .normal)
+            shareButton.setTitle(TextConstants.tabBarShareLabel, for: .normal)
+        }
+    }
+    
     @IBOutlet private weak var previewImageView: LoadingImageView!
 
     private var album: AlbumServiceResponse?
@@ -56,8 +64,10 @@ final class AlbumCard: BaseCardView {
             switch cardType {
             case .save:
                 bottomButton.setTitle(TextConstants.homeAlbumCardBottomButtonSaveAlbum, for: .normal)
+                shareButton.isHidden = true
             case .display:
                 bottomButton.setTitle(TextConstants.homeAlbumCardBottomButtonViewAlbum, for: .normal)
+                shareButton.isHidden = false
             }
         }
     }
@@ -152,6 +162,14 @@ final class AlbumCard: BaseCardView {
     
     @IBAction private func actionAlbumViewButton(_ sender: UIButton) {
         showAlbum()
+    }
+    
+    @IBAction private func shareButtonTapped(_ sender: UIButton) {
+        guard let item = albumItem else {
+            assertionFailure()
+            return
+        }
+        delegate?.share(item: item, type: .link)
     }
     
     private func showAlbum() {
