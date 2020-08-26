@@ -22679,6 +22679,7 @@
 				F1598E4F75F4CE887BF4F33A /* [CP] Embed Pods Frameworks */,
 				BFEC8AF43C288E8FCF62AE03 /* [CP] Copy Pods Resources */,
 				B549B6BD24CF080900D39C44 /* Copy Files GPUImage */,
+				7326F89024F64FD90067B6F8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -22815,6 +22816,7 @@
 				8C0E90781FDEBDFF00789C91 /* Embed App Extensions */,
 				AD5485B92003DB16415CED11 /* [CP] Copy Pods Resources */,
 				B549B6B324CF07BB00D39C44 /* Copy Files GPUImage */,
+				7326F88E24F64FA70067B6F8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -23075,6 +23077,7 @@
 				B51FD6381FD13C93000344BD /* Embed App Extensions */,
 				8669CB1C4E4A3903FDCFE854 /* [CP] Copy Pods Resources */,
 				B549AA6424CF03B700D39C44 /* Copy Files GPUImage */,
+				7326F88924F64CEB0067B6F8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -23122,6 +23125,7 @@
 				CE784F1122A685FB00662219 /* Embed App Extensions */,
 				CE784F1622A685FB00662219 /* [CP] Copy Pods Resources */,
 				B549B6C224CF084400D39C44 /* Copy Files GPUImage */,
+				7326F89124F64FEB0067B6F8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -23190,6 +23194,7 @@
 				525A55E19B82F1A09AD40276 /* [CP] Embed Pods Frameworks */,
 				8B46DD40E38CABE92FA68256 /* [CP] Copy Pods Resources */,
 				B549B6B824CF07DF00D39C44 /* Copy Files GPUImage */,
+				7326F88F24F64FBA0067B6F8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -23219,6 +23224,7 @@
 				9A5E0034017CE1E734F05FD4 /* [CP] Embed Pods Frameworks */,
 				52D19F592C13611B406FA7BD /* [CP] Copy Pods Resources */,
 				B549B6C724CF086C00D39C44 /* Copy Files GPUImage */,
+				7326F89224F64FFB0067B6F8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -26114,6 +26120,108 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		7326F88924F64CEB0067B6F8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		7326F88E24F64FA70067B6F8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		7326F88F24F64FBA0067B6F8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		7326F89024F64FD90067B6F8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		7326F89124F64FEB0067B6F8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
+		7326F89224F64FFB0067B6F8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		7745E7DF35170131924746B7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
