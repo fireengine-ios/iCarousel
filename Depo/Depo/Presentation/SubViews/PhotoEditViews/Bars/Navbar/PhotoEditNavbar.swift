@@ -21,6 +21,20 @@ final class PhotoEditNavbar: UIView, NibInit {
         case initial
         case edit
         case share
+        case empty
+        
+        var buttonsHiddenValues: (close: Bool, save: Bool, share: Bool, more: Bool) {
+            switch self {
+            case .initial:
+                return (close: false, save: true, share: true, more: true)
+            case .edit:
+                return (close: false, save: false, share: true, more: false)
+            case .share:
+                return (close: false, save: true, share: false, more: true)
+            case .empty:
+                return (close: true, save: true, share: true, more: true)
+            }
+        }
     }
     
     @IBOutlet private weak var closeButton: UIButton!
@@ -40,20 +54,11 @@ final class PhotoEditNavbar: UIView, NibInit {
     
     var state: State = .initial {
         didSet {
-            switch state {
-            case .initial:
-                saveButton.isHidden = true
-                shareButton.isHidden = true
-                moreButton.isHidden = true
-            case .edit:
-                saveButton.isHidden = false
-                shareButton.isHidden = true
-                moreButton.isHidden = false
-            case .share:
-                saveButton.isHidden = true
-                shareButton.isHidden = false
-                moreButton.isHidden = true
-            }
+            let values = state.buttonsHiddenValues
+            closeButton.isHidden = values.close
+            saveButton.isHidden = values.save
+            shareButton.isHidden = values.share
+            moreButton.isHidden = values.more
         }
     }
     

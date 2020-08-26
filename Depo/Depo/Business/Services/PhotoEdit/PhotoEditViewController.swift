@@ -64,14 +64,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
 
     private func setInitialState() {
-        filterView.resetToOriginal()
         uiManager.showInitialState()
-        uiManager.image = sourceImage
-        uiManager.navBarView.state = .initial
-    }
-    
-    private func setDefaultState() {
-        uiManager.showDefaultState()
         uiManager.image = sourceImage
         uiManager.navBarView.state = hasChanges ? .edit : .initial
     }
@@ -121,7 +114,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     
     private func resetToOriginal() {
         sourceImage = originalImage
-        setDefaultState()
+        setInitialState()
         filterView.resetToOriginal()
     }
 }
@@ -188,12 +181,12 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
             case .hsl:
                 needShowAdjustmentView(for: .color)
             default:
-                setDefaultState()
+                setInitialState()
             }
             
         case .filterView(let type):
-            setDefaultState()
-            let value = filterManager.filters.first(where: { $0.type == type })?.parameter.defaultValue ?? 1
+            setInitialState()
+            let value = filterManager.filters.first(where: { $0.type == type })?.parameter.maxValue ?? 1
             didChangeFilter(type, newValue: value)
         }
     }
@@ -202,7 +195,7 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
         if let image = uiManager.image {
             sourceImage = image
         }
-        setDefaultState()
+        setInitialState()
     }
 }
 
@@ -300,7 +293,7 @@ extension PhotoEditViewController: PreparedFiltersViewDelegate {
 
     func didSelectOriginal() {
         sourceImage = originalImage
-        setDefaultState()
+        setInitialState()
     }
     
     func didSelectFilter(_ type: FilterType) {
