@@ -32,6 +32,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     
     private var originalImage = UIImage()
     private var sourceImage = UIImage()
+    private var tempOriginalImage = UIImage()
     private var hasChanges: Bool {
         originalImage != sourceImage
     }
@@ -42,6 +43,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     static func with(image: UIImage, presented: VoidHandler?, completion: PhotoEditCompletionHandler?) -> PhotoEditViewController {
         let controller = PhotoEditViewController.initFromNib()
         controller.originalImage = image
+        controller.tempOriginalImage = image
         controller.sourceImage = image
         controller.presentedCallback = presented
         controller.finishedEditing = completion
@@ -195,7 +197,7 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
     
     func applyChanges() {
         guard let currentPhotoEditViewType = uiManager.currentPhotoEditViewType else {
-            assertionFailure()
+//            assertionFailure()
             return
         }
         
@@ -279,7 +281,9 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
         return filterView
     }
     
-    func didSwitchTabBarItem(_ item: PhotoEditTabbarItemType) { }
+    func didSwitchTabBarItem(_ item: PhotoEditTabbarItemType) {
+        tempOriginalImage = sourceImage
+    }
 }
 
 //MARK: - CropViewControllerDelegate
@@ -331,7 +335,7 @@ extension PhotoEditViewController: PreparedFiltersViewDelegate {
 
 extension PhotoEditViewController: PreparedFilterSliderViewDelegate {
     func didChangeFilter(_ filterType: FilterType, newValue: Float) {
-        let filteredImage = filterManager.filter(image: originalImage, type: filterType, intensity: newValue)
+        let filteredImage = filterManager.filter(image: tempOriginalImage, type: filterType, intensity: newValue)
         uiManager.image = filteredImage
     }
 }
