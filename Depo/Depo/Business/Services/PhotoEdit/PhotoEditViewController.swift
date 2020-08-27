@@ -192,10 +192,21 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
     }
     
     func applyChanges() {
+        guard let currentPhotoEditViewType = uiManager.currentPhotoEditViewType else {
+            assertionFailure()
+            return
+        }
+        
         if let image = uiManager.image {
             sourceImage = image
         }
-        setInitialState()
+        
+        if case PhotoEditViewType.adjustmentView(let viewType) = currentPhotoEditViewType, viewType == .hsl {
+            needShowAdjustmentView(for: .color)
+            uiManager.navBarView.state = .edit
+        } else {
+            setInitialState()
+        }
     }
 }
 
