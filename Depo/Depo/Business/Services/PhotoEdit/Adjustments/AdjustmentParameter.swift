@@ -32,11 +32,11 @@ enum AdjustmentParameterType: String {
     var defaultValues: AdjustmentParameterValues {
         switch self {
             case .brightness:
-                return (-1, 1, 0)
+                return (-0.5, 0.5, 0)
             case .contrast:
                 return (0, 4, 1)
             case .exposure:
-                return (-10, 10, 0)
+                return (-3, 3, 0)
             case .saturation:
                 return (0, 2, 1)
             case .gamma:
