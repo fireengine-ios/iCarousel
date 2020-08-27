@@ -180,6 +180,8 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
             switch type {
             case .hsl:
                 needShowAdjustmentView(for: .color)
+                uiManager.image = sourceImage
+                uiManager.navBarView.state = hasChanges ? .edit : .initial
             default:
                 setInitialState()
             }
