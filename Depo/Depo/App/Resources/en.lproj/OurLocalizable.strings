@@ -1657,3 +1657,66 @@
 "contact_phase2_result_delete_all_contacts_nav_bar_title" = "Delete Contacts";
 "eula_title" = "Terms of Use";
 "photo_video_empty_no_unsync_photos_title" = "All your files are synced!";
+
+"photo_edit_navbar_save" = "Save";
+"photo_edit_save_as_copy" = "Save as copy";
+"photo_edit_reset_to_original" = "Reset to original";
+
+"photo_edit_close_alert_title" = "Discart Changes?";
+"photo_edit_close_alert_message" = "Your image edits will be discarded.";
+"photo_edit_close_alert_left_button" = "Keep editing";
+"photo_edit_close_alert_right_button" = "Discard";
+
+"photo_edit_modify_alert_title" = "Modify Photo?";
+"photo_edit_modify_alert_message" = "This photo will be modified on your phone and saved on Lifebox.";
+"photo_edit_modify_alert_left_button" = "Cancel";
+"photo_edit_modify_alert_right_button" = "Save";
+ 
+"photo_edit_save_as_copy_alert_title" = "Save as a copy?";
+"photo_edit_save_as_copy_alert_message" = "This photo will be saved as a copy on your phone and Lifebox.";
+"photo_edit_save_as_copy_alert_left_button" = "Cancel";
+"photo_edit_save_as_copy_alert_right_button" = "Save copy";
+
+"photo_edit_modify_success_snackbar_message" = "Photo is modified on your phone and saved on Lifebox.";
+"photo_edit_save_as_copy_success_snackbar_message" = "Photo is saved as on your Lifebox.";
+"photo_edit_save_image_error_message" = "Save image error";
+
+"photo_edit_filter_original" = "Original";
+"photo_edit_filter_clarendon" = "Clarendon";
+"photo_edit_filter_metropolis" = "Metropolis";
+"photo_edit_filter_lime" = "Lime";
+"photo_edit_filter_adele" = "Adele";
+"photo_edit_filter_amazon" = "Amazon";
+"photo_edit_filter_april" = "April";
+"photo_edit_filter_audrey" = "Audrey";
+"photo_edit_filter_aweStruck" = "Awe Struck";
+"photo_edit_filter_bluemess" = "Bluemess";
+"photo_edit_filter_cruz" = "Cruz";
+"photo_edit_filter_haan" = "Haan";
+"photo_edit_filter_mars" = "Mars";
+"photo_edit_filter_oldMan" = "Old Man";
+"photo_edit_filter_rise" = "Rise";
+"photo_edit_filter_starlit" = "Starlit";
+"photo_edit_filter_whisper" = "Whisper";
+
+"photo_edit_adjust" = "Adjust";
+"photo_edit_light" = "Light";
+"photo_edit_color" = "Color";
+"photo_edit_effect" = "Effect";
+"photo_edit_hsl" = "HSL";
+
+"photo_edit_adjustment_brightness" = "Brightness";
+"photo_edit_adjustment_contrast" = "Contrast";
+"photo_edit_adjustment_exposure" = "Exposure";
+"photo_edit_adjustment_highlights" = "Highlights";
+"photo_edit_adjustment_shadows" = "Shadows";
+"photo_edit_adjustment_temperature" = "Temperature";
+"photo_edit_adjustment_tint" = "Tint";
+"photo_edit_adjustment_saturation" = "Saturation";
+"photo_edit_adjustment_gamma" = "Gamma";
+"photo_edit_adjustment_hue" = "Hue";
+"photo_edit_adjustment_intensity" = "Intensity";
+"photo_edit_adjustment_angle" = "Angle";
+"photo_edit_adjustment_sharpness" = "Sharpness";
+"photo_edit_adjustment_blur" = "Blur";
+"photo_edit_adjustment_vignette" = "Vignette";

@@ -30,7 +30,8 @@ struct NumericConstants {
     static let detailsLoadingTimeAwait = UInt32(2)
     
     static let countOfLoginBeforeNeedShowUploadOffPopUp = 3
-    
+    static let navigationBarHeight: CGFloat = 44
+    static let tabBarHight: CGFloat = 49
     static let numerCellInLineOnIphone: CGFloat = 4
     static let numerCellInDocumentLineOnIphone: CGFloat = 2
     static let iPhoneGreedInset: CGFloat = 2

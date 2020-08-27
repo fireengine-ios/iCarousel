@@ -108,6 +108,11 @@ struct ColorConstants {
     static let duplicatesGray = UIColor(white: 86/255, alpha: 1)
 
     static let navy = UIColor(red: 4 / 255.0, green: 37 / 255.0, blue: 56 / 255.0, alpha: 1)
+    
+    static let photoEditBackgroundColor = UIColor(white: 20 / 255, alpha: 1)
+    static let photoEditSliderColor = UIColor(white: 48 / 255, alpha: 1)
+    
+    static let greenyBlue = UIColor(red: 65 / 255.0, green: 196 / 255.0, blue: 199 / 255.0, alpha: 1)
 }
 
 extension UIColor {
@@ -198,6 +203,6 @@ extension UIFont {
     }
     
     static func TurkcellSaturaFont(size: CGFloat = 18) -> UIFont {
-        return UIFont(name: "TurkcellSatura", size: size)!
+        return UIFont(name: "TurkcellSaturaReg", size: size)!
     }
 }

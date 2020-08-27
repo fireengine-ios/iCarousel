@@ -143,7 +143,7 @@ final class NetmeraService {
         }
         #endif
         
-        Netmera.start()
+//        Netmera.start()
         
         #if DEBUG
         Netmera.setLogLevel(.debug)

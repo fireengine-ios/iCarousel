@@ -220,31 +220,60 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     
-    private var cropyController: CRYCropNavigationController?
     
-    func edit(item: [BaseDataSourceItem], complition: VoidHandler?) {
-        
+    func edit(item: [BaseDataSourceItem], completion: VoidHandler?) {
         guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
             return
         }
         ImageDownloder().getImage(patch: url) { [weak self] image in
             guard
-                let `self` = self,
-                let image = image,
-                let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
-                else {
-                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .failure))
-                    UIApplication.showErrorAlert(message: TextConstants.errorServer)
-                    complition?()
-                    return
+                let self = self,
+                let image = image
+            else {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .failure))
+                UIApplication.showErrorAlert(message: TextConstants.errorServer)
+                
+                return
+            }
+            let vc = PhotoEditViewController.with(image: image, presented: completion) { [weak self] controller, completionType in
+                switch completionType {
+                case .canceled:
+                    controller.dismiss(animated: true)
+                case .savedAs(image: let newImage):
+                    controller.showSpinner()
+                    self?.fileService.saveAs(item: item, imageData: UIImagePNGRepresentation(newImage),
+                    success: {
+                        debugPrint("!!save as succ")
+                        DispatchQueue.main.async {
+                            controller.dismiss(animated: true)
+                            SnackbarManager.shared.show(type: .action, message: TextConstants.photoEditModifySnackbarMessage)
+                        }
+                    }, fail:  { error in
+                        DispatchQueue.main.async {
+                            controller.hideSpinner()
+                            UIApplication.showErrorAlert(message: TextConstants.photoEditSaveImageErrorMessage)
+                        }
+                        debugPrint("!!save as succ")
+                    })
+                case .saved(image: let newImage):
+                    controller.showSpinner()
+                    self?.fileService.save(item: item, imageData: UIImagePNGRepresentation(newImage),
+                    success: {
+                        DispatchQueue.main.async {
+                            controller.dismiss(animated: true)
+                            SnackbarManager.shared.show(type: .action, message: TextConstants.photoEditSaveAsCopySnackbarMessage)
+                        }
+                        debugPrint("!!save succ")
+                    }, fail:  { error in
+                        DispatchQueue.main.async {
+                            controller.hideSpinner()
+                            UIApplication.showErrorAlert(message: TextConstants.photoEditSaveImageErrorMessage)
+                        }
+                        debugPrint("!!save succ")
+                    })
+                }
             }
             
-            //vc.setShareEnabled(true)
-            //        vc.setCropDelegate(self)
-            vc.sharedDelegate = self
-            self.cropyController = vc
-            
-            complition?()
             self.router.presentViewController(controller: vc)
         }
     }
@@ -950,28 +979,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
 }
 
 
-// MARK: - Cropy delegate
-/// https://wiki.life.com.by/pages/viewpage.action?spaceKey=LTFizy&title=Cropy
-/// https://stash.turkcell.com.tr/git/projects/CROP/repos/cropy-ios-sdk/browse
-extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
-    
-    @objc func getEditedImage(_ image: UIImage) {
-        
-        let vc = PopUpController.with(title: TextConstants.save, message: TextConstants.cropyMessage, image: .error, firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.ok, secondAction: { [weak self] vc in
-            self?.save(image: image)
-            vc.close { [weak self] in
-                self?.cropyController?.dismiss(animated: true, completion: nil)
-            }
-        })
-        UIApplication.topController()?.present(vc, animated: false, completion: nil)
-    }
-    
-    private func save(image: UIImage) {
-        showSnackbar(elementType: .edit, relatedItems: [])
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .success))
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-    }
-}
 
 //MARK: - Actions
 

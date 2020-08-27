@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Photos
 
 typealias WrapObjectsCallBack = (_ items: [WrapData]) -> Void
 typealias BaseDataSourceItems = (_ baseDSItems: [BaseDataSourceItem]) -> Void
@@ -387,20 +386,20 @@ final class MediaItemOperationsService {
         let context = coreDataStack.newChildBackgroundContext
     
         let inRangePredicate = createInRangePredicate(fileType: fileType, topInfo: topInfo, bottomInfo: bottomInfo)
-        
+        debugLog("RangeAPI DB updateRemoteItems")
         executeSortedRequest(predicate: inRangePredicate, limit: RequestSizeConstant.quickScrollRangeApiPageSize, context: context) { inDateRangeItems in
 
             debugPrint("--- remotes in date range count \(remoteItems.count)")
-            debugPrint("--- count of already saved in date range \(inDateRangeItems.count)")
+            debugLog("--- count of already saved in date range \(inDateRangeItems.count)")
             
             let inDateRangeItemIds = inDateRangeItems.compactMap { $0.idValue }
             let inIdRangePredicate = NSPredicate(format:"\(MediaItem.PropertyNameKey.fileTypeValue) = %d AND \(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.idValue) IN %@ AND NOT \(MediaItem.PropertyNameKey.idValue) IN %@", fileType.valueForCoreDataMapping(), remoteIds, inDateRangeItemIds)
             
             self.executeRequest(predicate: inIdRangePredicate, context: context, mediaItemsCallBack: { inIdRangeItems in
-                debugPrint("--- count of already saved in id range \(inIdRangeItems.count)")
+                debugLog("--- count of already saved in id range \(inIdRangeItems.count)")
                 
                 var allSavedItems = (inDateRangeItems + inIdRangeItems).compactMap { WrapData(mediaItem: $0) }
-                debugPrint("--- count of already saved TOTAL count \(allSavedItems.count)")
+                debugLog("--- count of already saved TOTAL count \(allSavedItems.count)")
                 
                 var deletedItems = [WrapData]()
                 var newSavedItems = [WrapData]()
@@ -426,6 +425,9 @@ final class MediaItemOperationsService {
                 }
 
                 deletedItems.append(contentsOf: allSavedItems)
+                
+                debugLog("RangeAPI DB allSavedItems \(allSavedItems.count)")
+                debugLog("RangeAPI DB deletedItems \(deletedItems.count)")
                 
                 group.enter()
                 
@@ -522,7 +524,8 @@ final class MediaItemOperationsService {
                 MediaItemOperationsService.shared.deleteLocalFiles(completion: { _ in
                     completion?()
                 })
-            case .authorized:
+            //TODO: uncomment for xcode 12
+            case .authorized://, .limited:
                 self?.processLocalGallery(completion: completion)
             case .restricted, .notDetermined:
                 break

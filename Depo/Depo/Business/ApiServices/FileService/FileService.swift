@@ -388,7 +388,7 @@ class FileService: BaseRequestService {
                         self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.music))
                     case .application(let applicationType):
                         switch applicationType {
-                        case .pdf, .ppt, .xls, .txt, .doc :
+                        case .pdf, .ppt, .xls, .txt, .doc, .pptx :
                            self.analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .download, eventLabel: .download(.document))
                         default:
                             break

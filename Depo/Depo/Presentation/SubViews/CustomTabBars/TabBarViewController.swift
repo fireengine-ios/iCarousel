@@ -378,11 +378,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             }, completion: { _ in
                 self.tabBar.isHidden = true
                 self.bottomBGView.isHidden = true
-                
-                if !self.musicBar.isHidden {
-                    self.musicBar.alpha = 0
-                    self.musicBar.isUserInteractionEnabled = false
-                }
             })
         }
     }

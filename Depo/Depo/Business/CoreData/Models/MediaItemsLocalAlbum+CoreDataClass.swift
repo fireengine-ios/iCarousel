@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 public class MediaItemsLocalAlbum: NSManagedObject {
     convenience init(asset: PHAssetCollection, hasItems: Bool, context: NSManagedObjectContext) {
         let entityDescr = NSEntityDescription.entity(forEntityName: MediaItemsLocalAlbum.Identifier,

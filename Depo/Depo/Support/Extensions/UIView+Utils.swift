@@ -59,6 +59,17 @@ extension UIView {
         trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -offset).activate()
     }
     
+    func pinToSuperviewEdges(offset: UIEdgeInsets) {
+        guard let superview = superview else {
+            assertionFailure()
+            return
+        }
+        topAnchor.constraint(equalTo: superview.topAnchor, constant: offset.top).activate()
+        bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -offset.bottom).activate()
+        leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: offset.left).activate()
+        trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -offset.right).activate()
+    }
+    
     /// returns all subviews except self
     func allSubviews<T: UIView>(of: T.Type) -> [T] {
         var typeSubviews = [T]()

@@ -18,7 +18,7 @@ apps = [
             itcTeamId: '121548574',
         ],
  [
-            name: 'lifedrive',// name will be the base filename of the app
+            name: 'Billo',// name will be the base filename of the app
             versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
             ictsContainerId: '966', // ICT Store
             appleId: '1488914348',
@@ -26,8 +26,8 @@ apps = [
             itcTeamId: '118347642',
 	    //xcodeSchema: // Defaults to app name
             //xcodeTarget: // Defaults to app name
-            xcodeSchema: 'lifedrive_Bundle', 
-            xcodeTarget: 'lifedrive_Bundle'  
+            xcodeSchema: 'Billo_Bundle', 
+            xcodeTarget: 'Billo_Bundle'  
         ]
 ]
 derivedDir = 'lifebox'

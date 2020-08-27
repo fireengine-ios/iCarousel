@@ -26,6 +26,12 @@ enum CardState {
     }
 }
 
+enum PanGestureMoveDirection {
+    case undefined
+    case down
+    case up
+}
+
 protocol BottomDetailViewAnimationManagerDelegate: class {
     func getSelectedIindex() -> Int
     func getObjectsCount() -> Int
@@ -33,6 +39,7 @@ protocol BottomDetailViewAnimationManagerDelegate: class {
     
     func setIsFullScreenState(_ isFullScreen: Bool)
     func setSelectedIndex(_ selectedIndex: Int)
+    func pullToDownEffect()
 }
 
 protocol BottomDetailViewAnimationManagerProtocol {
@@ -72,6 +79,7 @@ final class BottomDetailViewAnimationManager: BottomDetailViewAnimationManagerPr
     private weak var delegate: BottomDetailViewAnimationManagerDelegate?
 
     private var viewState: CardState = .collapsed
+    private var panGestureDirectionState: PanGestureMoveDirection = .undefined
     private var gestureBeginLocation: CGPoint = .zero
     private var dragViewBeginLocation: CGPoint = .zero
     private let cardHeight: CGFloat = UIScreen.main.bounds.height * 0.7
@@ -148,10 +156,23 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
             dragViewBeginLocation = collectionView.frame.origin
         case .changed:
             
+            switch panGestureDirectionState {
+            case .undefined:
+                if recognizer.translation(in: recognizer.view).y >= 0 {
+                    panGestureDirectionState = .down
+                } else {
+                    panGestureDirectionState = .up
+                }
+            default:
+                break
+            }
+
             let newLocation = dragViewBeginLocation.y + (recognizer.location(in: view).y - gestureBeginLocation.y)
             
             if newLocation > 0 {
-                recognizer.state = .cancelled
+                if panGestureDirectionState == .down {
+                    delegate?.pullToDownEffect()
+                }
                 setCollapsedState()
                 return
             }
@@ -168,6 +189,7 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
             managedView.frame.origin.y = collectionView.frame.maxY - imageMaxY
             
         case .ended:
+            panGestureDirectionState = .undefined
             dissableTouchUntillFinish(isDisabled: true)
             UIView.animate(withDuration: 0.3, animations: {
                 self.positionForView(velocityY: recognizer.velocity(in: self.managedView).y)
@@ -183,7 +205,7 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
                 self.dissableTouchUntillFinish(isDisabled: false)
             })
         default:
-            break
+            panGestureDirectionState = .undefined
         }
     }
     
@@ -194,6 +216,16 @@ extension BottomDetailViewAnimationManager: PassThroughViewDelegate {
         } else {
             passThrowView.isUserInteractionEnabled = true
             passThrowView.enableGestures()
+        }
+    }
+    
+    private func pullToDownEffect(velocityY: CGFloat) {
+        guard viewState.isCollapsed else {
+            return
+        }
+        
+        if velocityY > 450 {
+            delegate?.pullToDownEffect()
         }
     }
     
@@ -279,6 +311,7 @@ extension BottomDetailViewAnimationManager {
         viewState = .expanded
         managedView.frame.origin.y = yPositionForBottomView
         collectionView.frame.origin.y = yPositionForBottomView - collectionViewCellMaxY + imageMaxY
+        stopVideoIfNeeded()
     }
     
     private func setFullState() {
@@ -290,6 +323,12 @@ extension BottomDetailViewAnimationManager {
         collapseView.isHidden = false
         setupDetailViewAlpha(isHidden: false)
         isFullScreen = true
+    }
+    
+    private func stopVideoIfNeeded() {
+        if let cell = collectionView.cellForItem(at: IndexPath(item: selectedIndex, section: .zero)) as? VideoInterruptable {
+            cell.stop()
+        }
     }
     
     func showDetailView() {
@@ -342,8 +381,12 @@ extension BottomDetailViewAnimationManager {
             return
         }
         
-        let cell = collectionView.visibleCells.first as? PhotoVideoDetailCell
-        cell?.delegate = self
+        guard 0..<objectsCount ~= index else {
+            return
+        }
+        
+        let cell = collectionView.visibleCells.first as? CellConfigurable
+        cell?.responder = self
         let offsetY = collectionView.contentOffset.y
         selectedIndex = index
         
