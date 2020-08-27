@@ -16,19 +16,20 @@ apps = [
             xcodeSchema: 'TC_Depo_LifeTech_Bundle',
             xcodeTarget: 'TC_Depo_LifeTech_Bundle',
             itcTeamId: '121548574',
-        ],
- [
-            name: 'Billo',// name will be the base filename of the app
-            versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
-            ictsContainerId: '966', // ICT Store
-            appleId: '1488914348',
-            prodTeamID: '729CGH4BJD',
-            itcTeamId: '118347642',
-	    //xcodeSchema: // Defaults to app name
-            //xcodeTarget: // Defaults to app name
-            xcodeSchema: 'Billo_Bundle', 
-            xcodeTarget: 'Billo_Bundle'  
         ]
+        // ,
+ // [
+ //            name: 'Billo',// name will be the base filename of the app
+ //            versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
+ //            ictsContainerId: '966', // ICT Store
+ //            appleId: '1488914348',
+ //            prodTeamID: '729CGH4BJD',
+ //            itcTeamId: '118347642',
+	//     //xcodeSchema: // Defaults to app name
+ //            //xcodeTarget: // Defaults to app name
+ //            xcodeSchema: 'Billo_Bundle', 
+ //            xcodeTarget: 'Billo_Bundle'  
+ //        ]
 ]
 derivedDir = 'lifebox'
 
