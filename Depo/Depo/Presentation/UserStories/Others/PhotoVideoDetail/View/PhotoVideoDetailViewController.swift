@@ -385,6 +385,10 @@ extension PhotoVideoDetailViewController: BottomDetailViewAnimationManagerDelega
         bottomDetailView = fileInfoView
         setupBottomDetailViewManager()
     }
+    
+    func pullToDownEffect() {
+        hideView()
+    }
 }
 
 extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
