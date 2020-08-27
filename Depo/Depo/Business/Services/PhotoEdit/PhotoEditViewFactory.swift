@@ -106,11 +106,6 @@ final class PhotoEditViewFactory {
     
     static func generateView(for type: AdjustmentViewType, adjustmentParameters: [AdjustmentParameterProtocol], adjustments: [AdjustmentProtocol], delegate: AdjustmentsViewDelegate?) -> UIView? {
         switch type {
-        case .adjust:
-            guard let parameter = adjustmentParameters.first else {
-                return nil
-            }
-            return AdjustView.with(parameter: parameter, delegate: delegate)
         case .color:
             return ColorView.with(parameters: adjustmentParameters, delegate: delegate)
         case .effect:
@@ -124,6 +119,8 @@ final class PhotoEditViewFactory {
             }
 
             return HSLView.with(parameters: adjustmentParameters, colorParameter: colorParameter, delegate: delegate)
+        default:
+            return nil
         }
     }
     

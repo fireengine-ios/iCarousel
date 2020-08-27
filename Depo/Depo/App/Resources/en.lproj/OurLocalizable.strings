@@ -1720,3 +1720,6 @@
 "photo_edit_adjustment_sharpness" = "Sharpness";
 "photo_edit_adjustment_blur" = "Blur";
 "photo_edit_adjustment_vignette" = "Vignette";
+
+"photo_edit_ratio_free" = "Free";
+"photo_edit_ratio_original" = "Original";

@@ -26,15 +26,23 @@ final class PhotoEditViewController: ViewController, NibInit {
         }
     }
     private lazy var filterView = self.prepareFilterView()
+    private var cropController: CropViewController?
     
     private var adjustmentManager: AdjustmentManager?
     private var filterManager = FilterManager(types: FilterType.allCases)
     
     private var originalImage = UIImage()
-    private var sourceImage = UIImage()
+    private var sourceImage = UIImage() {
+        didSet {
+            let originalRatio = Double(sourceImage.size.width / sourceImage.size.height)
+            ratios = AdjustRatio.allValues(originalRatio: originalRatio)
+        }
+    }
     private var hasChanges: Bool {
         originalImage != sourceImage
     }
+    
+    private var ratios = [AdjustRatio]()
     
     var presentedCallback: VoidHandler?
     var finishedEditing: PhotoEditCompletionHandler?
@@ -122,17 +130,6 @@ final class PhotoEditViewController: ViewController, NibInit {
 //MARK: - AdjustmentsViewDelegate
 
 extension PhotoEditViewController: AdjustmentsViewDelegate {
-    func roatate90Degrees() {
-        //
-    }
-    
-    func showAdjustMenu() {
-        let items = ["Free", "Original", "16:9", "4:3", "3:2"]
-        let controller = SelectionMenuController.with(style: .checkmark, items: items, selectedIndex: 1) { index in
-            //TODO: need handle if will be use AdjustFilterView
-        }
-        present(controller, animated: false)
-    }
     
     func showHSLFilter() {
         needShowAdjustmentView(for: .hsl)
@@ -172,6 +169,7 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
 extension PhotoEditViewController: PhotoEditChangesBarDelegate {
     func cancelChanges() {
         guard let currentPhotoEditViewType = uiManager.currentPhotoEditViewType else {
+            assertionFailure()
             return
         }
         
@@ -192,7 +190,14 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
     }
     
     func applyChanges() {
-        if let image = uiManager.image {
+        guard let currentPhotoEditViewType = uiManager.currentPhotoEditViewType else {
+            assertionFailure()
+            return
+        }
+
+        if case PhotoEditViewType.adjustmentView(let viewType) = currentPhotoEditViewType, viewType == .adjust {
+            cropController?.crop()
+        } else if let image = uiManager.image {
             sourceImage = image
         }
         setInitialState()
@@ -236,14 +241,18 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     
     func needShowAdjustmentView(for type: AdjustmentViewType) {
         guard type != .adjust else {
-            DispatchQueue.main.async {
-                let controller = Mantis.cropViewController(image: self.sourceImage)
-                controller.delegate = self
-                self.present(controller, animated: true)
-            }
+            let view = AdjustView.with(ratios: ratios, delegate: self)
+            var config = Mantis.Config()
+            config.showRotationDial = false
+            let controller = Mantis.cropCustomizableViewController(image: self.sourceImage, config: config, cropToolbar: view)
+            controller.delegate = self
+            
+            let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
+            uiManager.showView(type: .adjustmentView(type), view: controller.view, changesBar: changesBar)
+            
+            cropController = controller
             return
         }
-        
         
         let manager = AdjustmentManager(types: type.adjustmentTypes)
         
@@ -272,18 +281,16 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
 //MARK: - CropViewControllerDelegate
 
 extension PhotoEditViewController: CropViewControllerDelegate {
-    func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) {
-        cropViewController.dismiss(animated: true)
-    }
+    func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) { }
     
     func cropViewControllerDidFailToCrop(_ cropViewController: CropViewController, original: UIImage) {
-        cropViewController.dismiss(animated: true)
+        cropController = nil
     }
     
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
+        sourceImage = cropped
         uiManager.image = cropped
-        applyChanges()
-        cropViewController.dismiss(animated: true)
+        cropController = nil
     }
 }
 
@@ -320,5 +327,32 @@ extension PhotoEditViewController: PreparedFilterSliderViewDelegate {
     func didChangeFilter(_ filterType: FilterType, newValue: Float) {
         let filteredImage = filterManager.filter(image: originalImage, type: filterType, intensity: newValue)
         uiManager.image = filteredImage
+    }
+}
+
+//MARK: - AdjustViewDelegate
+
+extension PhotoEditViewController: AdjustViewDelegate {
+    func didShowRatioMenu(_ view: AdjustView, selectedRatio: AdjustRatio) {
+        guard let selectedIndex = ratios.firstIndex(where: { $0.name == selectedRatio.name }) else {
+            return
+        }
+        
+        let controller = SelectionMenuController.with(style: .checkmark, items: ratios.map { $0.name }, selectedIndex: selectedIndex) { [weak self] index in
+            guard let self = self, let index = index else {
+                return
+            }
+            
+            let newRatio = self.ratios[index]
+            view.updateRatio(newRatio)
+            //TODO: need to implement in Mantis pod
+//            self.cropController?.setRatio(newRatio.value)
+        }
+        present(controller, animated: false)
+    }
+    
+    func didChangeAngle(_ value: Float) {
+        //TODO: need to implement in Mantis pod
+//        cropController?.manualRotate(rotateAngle: CGFloat(value))
     }
 }
