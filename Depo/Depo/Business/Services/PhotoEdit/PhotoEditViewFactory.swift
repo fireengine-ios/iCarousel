@@ -13,7 +13,7 @@ enum PhotoEditViewType {
     case filterView(FilterType)
 }
 
-enum AdjustmentViewType: String, CaseIterable {
+enum AdjustmentViewType: CaseIterable {
     case adjust
     case light
     case color
