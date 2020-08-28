@@ -157,7 +157,6 @@ final class AdjustmentManager {
     
     
     let adjustments: [AdjustmentProtocol]
-    let parameters: [AdjustmentParameterProtocol]
     
     private let operationQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -165,12 +164,29 @@ final class AdjustmentManager {
         return queue
     }()
     
+    var adjustmentValues: [AdjustmentParameterValue] {
+        let parameters = adjustments.flatMap { $0.parameters }
+        return parameters.map { AdjustmentParameterValue(type: $0.type, value: $0.currentValue) }
+    }
     
     required init(types: [AdjustmentType]) {
         adjustments = types.compactMap { AdjustmentManager.adjustment(type: $0) }
-        parameters = adjustments.flatMap { $0.parameters }
     }
     
+    func updateValues(_ values: [AdjustmentParameterValue]) {
+        values.forEach { adjValue in
+            updateValues(parameterType: adjValue.type, value: adjValue.value)
+        }
+    }
+    
+    func updateHSLValue(_ color: HSVMultibandColor) {
+        update(hslColor: color)
+    }
+    
+    func resetValues() {
+        adjustments.forEach { $0.parameters.forEach { $0.set(value: $0.defaultValue) }}
+        updateHSLValue(.red)
+    }
     
     func applyOnHSLColorDidChange(value: HSVMultibandColor, sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
         
@@ -214,6 +230,14 @@ final class AdjustmentManager {
             relatedAdjustments.append(adjustment)
         }
         
+        //add all changed adjustments
+        let changedAdjustments = adjustments.filter { $0.parameters.first(where: { $0.currentValue != $0.defaultValue }) != nil }
+        changedAdjustments.forEach { adjustment in
+            if relatedAdjustments.first(where: { $0.type == adjustment.type }) == nil {
+                relatedAdjustments.append(adjustment)
+            }
+        }
+        
         guard !relatedAdjustments.isEmpty else {
             onFinished(sourceImage)
             return
@@ -241,7 +265,7 @@ final class AdjustmentManager {
         operationQueue.addOperations(operations, waitUntilFinished: false)
     }
     
-    
+    @discardableResult
     private func updateValues(parameterType: AdjustmentParameterType, value: Float) -> AdjustmentProtocol? {
         let relatedAdjustment = adjustments.first(where: { $0.parameters.contains(where: { $0.type == parameterType }) })
         
@@ -266,6 +290,7 @@ final class AdjustmentManager {
         return adjustment
     }
     
+    @discardableResult
     private func update(hslColor: HSVMultibandColor) -> AdjustmentProtocol? {
            guard let relatedAdjustment = adjustments.first(where: { $0.hslColorParameter != nil }) else {
                return nil
