@@ -68,6 +68,8 @@ final class PhotoEditTabbar: UIView, NibInit {
     
     func setup(with types: [PhotoEditTabbarItemType]) {
         types.forEach { addItem(type: $0) }
+        selectedItem = contentView.arrangedSubviews.first as? PhotoEditButtonItem
+        selectedItem?.isSelected = true
     }
     
     private func addItem(type: PhotoEditTabbarItemType) {

@@ -75,6 +75,7 @@ final class SliderView: UIView {
         gradientView.layoutSubviews()
         
         slider.setTrackBackgroundColor(.clear, for: .normal)
+        slider.setTrackFillColor(.clear, for: .normal)
     }
     
     func updateGradient(startColor: UIColor, endColor: UIColor) {

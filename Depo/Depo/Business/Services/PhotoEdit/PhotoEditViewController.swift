@@ -38,6 +38,7 @@ final class PhotoEditViewController: ViewController, NibInit {
             ratios = AdjustRatio.allValues(originalRatio: originalRatio)
         }
     }
+    private var tempOriginalImage = UIImage()
     private var hasChanges: Bool {
         originalImage != sourceImage
     }
@@ -50,6 +51,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     static func with(image: UIImage, presented: VoidHandler?, completion: PhotoEditCompletionHandler?) -> PhotoEditViewController {
         let controller = PhotoEditViewController.initFromNib()
         controller.originalImage = image
+        controller.tempOriginalImage = image
         controller.sourceImage = image
         controller.presentedCallback = presented
         controller.finishedEditing = completion
@@ -178,6 +180,8 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
             switch type {
             case .hsl:
                 needShowAdjustmentView(for: .color)
+                uiManager.image = sourceImage
+                uiManager.navBarView.state = hasChanges ? .edit : .initial
             default:
                 setInitialState()
             }
@@ -191,7 +195,6 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
     
     func applyChanges() {
         guard let currentPhotoEditViewType = uiManager.currentPhotoEditViewType else {
-            assertionFailure()
             return
         }
 
@@ -200,7 +203,13 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
         } else if let image = uiManager.image {
             sourceImage = image
         }
-        setInitialState()
+        
+        if case PhotoEditViewType.adjustmentView(let viewType) = currentPhotoEditViewType, viewType == .hsl {
+            needShowAdjustmentView(for: .color)
+            uiManager.navBarView.state = .edit
+        } else {
+            setInitialState()
+        }
     }
 }
 
@@ -275,7 +284,9 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
         return filterView
     }
     
-    func didSwitchTabBarItem(_ item: PhotoEditTabbarItemType) { }
+    func didSwitchTabBarItem(_ item: PhotoEditTabbarItemType) {
+        tempOriginalImage = sourceImage
+    }
 }
 
 //MARK: - CropViewControllerDelegate
@@ -325,7 +336,7 @@ extension PhotoEditViewController: PreparedFiltersViewDelegate {
 
 extension PhotoEditViewController: PreparedFilterSliderViewDelegate {
     func didChangeFilter(_ filterType: FilterType, newValue: Float) {
-        let filteredImage = filterManager.filter(image: originalImage, type: filterType, intensity: newValue)
+        let filteredImage = filterManager.filter(image: tempOriginalImage, type: filterType, intensity: newValue)
         uiManager.image = filteredImage
     }
 }
