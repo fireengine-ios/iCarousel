@@ -189,59 +189,27 @@ final class AdjustmentManager {
     }
     
     func applyOnHSLColorDidChange(value: HSVMultibandColor, sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
-        
-        operationQueue.cancelAllOperations()
-        
-        AdjustmentOperation.sourceImage = sourceImage
-        
-        guard let relatedAdjustment = update(hslColor: value) else {
-            onFinished(sourceImage)
-            return
-        }
-        
-        let operation = AdjustmentOperation(adjustment: relatedAdjustment) { [weak self] output in
-            guard let self = self else {
-                return
-            }
-            
-            AdjustmentOperation.sourceImage = output
-            
-            let unfinishedOperations = self.operationQueue.operations.filter { $0.isReady || $0.isExecuting }
-            let operationQueueIsEmpty = self.operationQueue.operations.isEmpty || unfinishedOperations.count <= 1
-            
-            if operationQueueIsEmpty {
-                onFinished(output)
-            }
-        }
-        
-        operationQueue.addOperations([operation], waitUntilFinished: false)
+        update(hslColor: value)
+        applyAdjustments(sourceImage: sourceImage, onFinished: onFinished)
     }
     
     
     func applyOnValueDidChange(adjustmentValues: [AdjustmentParameterValue], sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
-        
+        updateValues(adjustmentValues)
+        applyAdjustments(sourceImage: sourceImage, onFinished: onFinished)
+    }
+    
+    private func applyAdjustments(sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
         operationQueue.cancelAllOperations()
         
-        AdjustmentOperation.sourceImage = sourceImage
-        
-        var relatedAdjustments = [AdjustmentProtocol]()
-        adjustmentValues.forEach { adjValue in
-            let adjustment = updateValues(parameterType: adjValue.type, value: adjValue.value)
-            relatedAdjustments.append(adjustment)
-        }
-        
-        //add all changed adjustments
-        let changedAdjustments = adjustments.filter { $0.parameters.first(where: { $0.currentValue != $0.defaultValue }) != nil }
-        changedAdjustments.forEach { adjustment in
-            if relatedAdjustments.first(where: { $0.type == adjustment.type }) == nil {
-                relatedAdjustments.append(adjustment)
-            }
-        }
+        let relatedAdjustments = self.adjustments.filter { $0.modifed }
         
         guard !relatedAdjustments.isEmpty else {
             onFinished(sourceImage)
             return
         }
+        
+        AdjustmentOperation.sourceImage = sourceImage
         
         let operations: [AdjustmentOperation] = relatedAdjustments.map { adjustment in
 

@@ -146,6 +146,8 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
     }
     
     func showHSLFilter() {
+        //cancel unsaved color adjustments
+        adjustmentManager.updateValues(tempAdjustmentValues)
         needShowAdjustmentView(for: .hsl)
     }
     
