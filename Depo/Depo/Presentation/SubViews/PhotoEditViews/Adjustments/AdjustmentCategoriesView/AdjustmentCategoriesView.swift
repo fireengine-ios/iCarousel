@@ -62,16 +62,25 @@ final class AdjustmentCategoriesView: UIView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        backgroundColor = ColorConstants.photoEditBackgroundColor
         setupCollectionView()
     }
     
     private func setupCollectionView() {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            let width = Device.winSize.width / 4
-            layout.itemSize = CGSize(width: width, height: 77)
-            layout.minimumLineSpacing = 0
-            layout.minimumInteritemSpacing = 0
+            if Device.isIpad {
+                layout.itemSize = CGSize(width: 76, height: 110)
+                layout.minimumLineSpacing = 20
+                let width = layout.itemSize.width * CGFloat(categories.count) + layout.minimumLineSpacing * CGFloat(categories.count - 1)
+                collectionView.widthAnchor.constraint(equalToConstant: width).activate()
+            } else {
+                let width = Device.winSize.width / 4
+                layout.itemSize = CGSize(width: width, height: 77)
+                layout.minimumLineSpacing = 0
+                layout.minimumInteritemSpacing = 0
+            }
         }
+        collectionView.heightAnchor.constraint(equalToConstant: Device.isIpad ? 110 : 77).activate()
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false

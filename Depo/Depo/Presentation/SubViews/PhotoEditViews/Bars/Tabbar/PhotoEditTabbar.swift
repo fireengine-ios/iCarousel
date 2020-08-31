@@ -61,6 +61,7 @@ private final class PhotoEditButtonItem: UIButton {
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.lrTealish, for: .highlighted)
         button.setTitleColor(.lrTealish, for: .selected)
+        button.titleLabel?.font = .TurkcellSaturaRegFont(size: 16)
         
         if Device.isIpad {
             button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: -30)
