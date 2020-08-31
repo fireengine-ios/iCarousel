@@ -32,6 +32,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="contentView" destination="hSc-Fo-CEU" id="Qoi-kJ-QhR"/>
+                <outlet property="heightConstaint" destination="ixU-kw-0H1" id="ozX-iB-xXN"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="-38.169642857142854"/>
         </view>

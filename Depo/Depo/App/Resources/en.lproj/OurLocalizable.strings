@@ -1662,6 +1662,9 @@
 "photo_edit_save_as_copy" = "Save as copy";
 "photo_edit_reset_to_original" = "Reset to original";
 
+"photo_edit_tabbar_filters" = "Filters";
+"photo_edit_tabbar_adjustments" = "Adjustments";
+
 "photo_edit_close_alert_title" = "Discart Changes?";
 "photo_edit_close_alert_message" = "Your image edits will be discarded.";
 "photo_edit_close_alert_left_button" = "Keep editing";
