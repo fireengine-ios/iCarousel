@@ -11,6 +11,20 @@ import SDWebImage
 
 class ImageDownloder {
     
+    static func removeImageFromCache(url: URL?, completion: @escaping () -> Void) {
+        guard
+            let trimmedUrl = url?.byTrimmingQuery?.absoluteString,
+            let imageCache = SDWebImageManager.shared().imageCache
+        else {
+            completion()
+            return
+        }
+        
+        imageCache.removeImage(forKey: trimmedUrl, withCompletion: completion)
+    }
+    
+    
+    
     private let downloder: SDWebImageDownloader
     
     private var tokenList = SynchronizedDictionary<URL,SDWebImageOperation>()
@@ -235,19 +249,7 @@ class ImageDownloder {
             })
         }
     }
-    
-    func removeImageFromCache(url: URL?, completion: @escaping () -> Void) {
-        var cachePath: String?
-        if let path = url?.absoluteString, let query = url?.query, let imageCache = SDWebImageManager.shared().imageCache {
-            cachePath = path.replacingOccurrences(of: "?"+query, with: "")
-            
-            imageCache.removeImage(forKey: cachePath, withCompletion: {
-                completion()
-            })
-        } else {
-            completion()
-        }
-    }
+
     
     func cancelRequest(path: URL) {
         if let item = tokenList[path] {
