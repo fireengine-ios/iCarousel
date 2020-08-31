@@ -356,14 +356,12 @@ extension PhotoEditViewController: AdjustViewDelegate {
             
             let newRatio = self.ratios[index]
             view.updateRatio(newRatio)
-            //TODO: need to implement in Mantis pod
-//            self.cropController?.setRatio(newRatio.value)
+            self.cropController?.setRatio(newRatio.value)
         }
         present(controller, animated: false)
     }
     
     func didChangeAngle(_ value: Float) {
-        //TODO: need to implement in Mantis pod
-//        cropController?.manualRotate(rotateAngle: CGFloat(value))
+        cropController?.manualRotate(rotateAngle: CGFloat(value))
     }
 }
