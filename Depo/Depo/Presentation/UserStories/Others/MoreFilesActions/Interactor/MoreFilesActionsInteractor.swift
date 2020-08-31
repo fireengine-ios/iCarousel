@@ -239,6 +239,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 switch completionType {
                 case .canceled:
                     controller.dismiss(animated: true)
+                    
                 case .savedAs(image: let newImage):
                     controller.showSpinner()
                     self?.fileService.saveAs(item: item, imageData: UIImagePNGRepresentation(newImage),
@@ -255,6 +256,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         }
                         debugPrint("!!save as succ")
                     })
+                    
                 case .saved(image: let newImage):
                     controller.showSpinner()
                     self?.fileService.save(item: item, imageData: UIImagePNGRepresentation(newImage),

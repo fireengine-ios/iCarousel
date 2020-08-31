@@ -438,36 +438,14 @@ final class UploadOperation: Operation {
                                              isFavorite: self.isFavorites,
                                              uploadType: self.uploadType)
             } else {
-                
-                if let uploadType = self.uploadType,
-                    uploadType == .save {
-                    parameters = SaveUpload(item: self.inputItem,
-                    destitantion: baseURL,
-                    uploadStategy: self.uploadStategy,
-                    uploadTo: self.uploadTo,
-                    rootFolder: self.folder,
-                    isFavorite: self.isFavorites,
-                    uploadType: self.uploadType)
-                } else if let uploadType = self.uploadType,
-                    uploadType == .saveAs {
-                    parameters = SaveAsUpload(item: self.inputItem,
-                    destitantion: baseURL,
-                    uploadStategy: self.uploadStategy,
-                    uploadTo: self.uploadTo,
-                    rootFolder: self.folder,
-                    isFavorite: self.isFavorites,
-                    uploadType: self.uploadType)
-                } else {
-                    parameters = SimpleUpload(item: self.inputItem,
-                    destitantion: baseURL,
-                    uploadStategy: self.uploadStategy,
-                    uploadTo: self.uploadTo,
-                    rootFolder: self.folder,
-                    isFavorite: self.isFavorites,
-                    uploadType: self.uploadType)
-                }
+                parameters = SimpleUpload.with(item: self.inputItem,
+                                               destitantion: baseURL,
+                                               uploadStategy: self.uploadStategy,
+                                               uploadTo: self.uploadTo,
+                                               rootFolder: self.folder,
+                                               isFavorite: self.isFavorites,
+                                               uploadType: self.uploadType)
             }
-            
             
             success(parameters)
         }
