@@ -75,11 +75,6 @@ private final class PhotoEditButtonItem: UIButton {
 final class PhotoEditTabbar: UIView, NibInit {
     
     @IBOutlet private weak var contentView: UIStackView!
-    @IBOutlet private weak var heightConstaint: NSLayoutConstraint! {
-        willSet {
-            newValue.constant = Device.isIpad ? 60 : 44
-        }
-    }
     
     private var selectedItem: PhotoEditButtonItem?
     var selectedType: PhotoEditTabbarItemType {
@@ -91,6 +86,7 @@ final class PhotoEditTabbar: UIView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = ColorConstants.photoEditBackgroundColor
+        heightAnchor.constraint(equalToConstant: Device.isIpad ? 60 : 44).activate()
     }
     
     func setup(with types: [PhotoEditTabbarItemType]) {
