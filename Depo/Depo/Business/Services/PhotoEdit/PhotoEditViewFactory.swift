@@ -13,7 +13,7 @@ enum PhotoEditViewType {
     case filterView(FilterType)
 }
 
-enum AdjustmentViewType {
+enum AdjustmentViewType: CaseIterable {
     case adjust
     case light
     case color
@@ -38,8 +38,7 @@ enum AdjustmentViewType {
     var adjustmentTypes: [AdjustmentType] {
         switch self {
         case .adjust:
-            //temp
-            return [.brightness]
+            return []
         case .color:
             return [.whiteBalance, .saturation, .gamma]
         case .effect:
@@ -104,23 +103,25 @@ enum PhotoEditAlertType {
 
 final class PhotoEditViewFactory {
     
-    static func generateView(for type: AdjustmentViewType, adjustmentParameters: [AdjustmentParameterProtocol], adjustments: [AdjustmentProtocol], delegate: AdjustmentsViewDelegate?) -> UIView? {
+    static func generateView(for type: AdjustmentViewType, adjustments: [AdjustmentProtocol], delegate: AdjustmentsViewDelegate?) -> UIView? {
+        let types = type.adjustmentTypes
+        let parameters = adjustments.filter { types.contains($0.type) }.flatMap { $0.parameters }
+        
         switch type {
+        case .adjust:
+            return nil
         case .color:
-            return ColorView.with(parameters: adjustmentParameters, delegate: delegate)
+            return ColorView.with(parameters: parameters, delegate: delegate)
         case .effect:
-            return LightView.with(parameters: adjustmentParameters, delegate: delegate)
+            return LightView.with(parameters: parameters, delegate: delegate)
         case .light:
-            return LightView.with(parameters: adjustmentParameters, delegate: delegate)
+            return LightView.with(parameters: parameters, delegate: delegate)
         case .hsl:
             guard let adjustment = adjustments.first(where: { $0.type == .hsl }),
                 let colorParameter = adjustment.hslColorParameter else {
                 return nil
             }
-
-            return HSLView.with(parameters: adjustmentParameters, colorParameter: colorParameter, delegate: delegate)
-        default:
-            return nil
+            return HSLView.with(parameters: parameters, colorParameter: colorParameter, delegate: delegate)
         }
     }
     

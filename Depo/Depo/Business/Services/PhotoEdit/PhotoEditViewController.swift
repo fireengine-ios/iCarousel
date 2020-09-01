@@ -28,7 +28,14 @@ final class PhotoEditViewController: ViewController, NibInit {
     private lazy var filterView = self.prepareFilterView()
     private var cropController: CropViewController?
     
-    private var adjustmentManager: AdjustmentManager?
+    private lazy var adjustmentManager: AdjustmentManager = {
+        let types = AdjustmentViewType.allCases.flatMap { $0.adjustmentTypes }
+        return AdjustmentManager(types: types)
+    }()
+    
+    private var tempAdjustmentValues = [AdjustmentParameterValue]()
+    private var tempHSLValue: HSVMultibandColor?
+    
     private var filterManager = FilterManager(types: FilterType.allCases)
     
     private var originalImage = UIImage()
@@ -123,7 +130,9 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
     
     private func resetToOriginal() {
+        adjustmentManager.resetValues()
         sourceImage = originalImage
+        tempOriginalImage = originalImage
         setInitialState()
         filterView.resetToOriginal()
     }
@@ -134,15 +143,13 @@ final class PhotoEditViewController: ViewController, NibInit {
 extension PhotoEditViewController: AdjustmentsViewDelegate {
     
     func showHSLFilter() {
+        //cancel unsaved color adjustments
+        adjustmentManager.updateValues(tempAdjustmentValues)
         needShowAdjustmentView(for: .hsl)
     }
     
     func didChangeAdjustments(_ adjustments: [AdjustmentParameterValue]) {
-        guard let manager = adjustmentManager else {
-            return
-        }
-       
-        manager.applyOnValueDidChange(adjustmentValues: adjustments, sourceImage: sourceImage) { [weak self] outputImage in
+        adjustmentManager.applyOnValueDidChange(adjustmentValues: adjustments, sourceImage: tempOriginalImage) { [weak self] outputImage in
             guard let self = self else {
                 return
             }
@@ -152,11 +159,7 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
     }
     
     func didChangeHSLColor(_ color: HSVMultibandColor) {
-        guard let manager = adjustmentManager else {
-            return
-        }
-        
-        manager.applyOnHSLColorDidChange(value: color, sourceImage: sourceImage) { [weak self] outputImage in
+        adjustmentManager.applyOnHSLColorDidChange(value: color, sourceImage: tempOriginalImage) { [weak self] outputImage in
             guard let self = self else {
                 return
             }
@@ -177,11 +180,19 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
         
         switch currentPhotoEditViewType {
         case .adjustmentView(let type):
+            adjustmentManager.updateValues(tempAdjustmentValues)
+            tempAdjustmentValues = []
+            
             switch type {
             case .hsl:
                 needShowAdjustmentView(for: .color)
                 uiManager.image = sourceImage
                 uiManager.navBarView.state = hasChanges ? .edit : .initial
+                
+                if let color = tempHSLValue {
+                    adjustmentManager.updateHSLValue(color)
+                    tempHSLValue = nil
+                }
             default:
                 setInitialState()
             }
@@ -194,20 +205,30 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
     }
     
     func applyChanges() {
-        guard let currentPhotoEditViewType = uiManager.currentPhotoEditViewType else {
-            return
-        }
-
-        if case PhotoEditViewType.adjustmentView(let viewType) = currentPhotoEditViewType, viewType == .adjust {
-            cropController?.crop()
-        } else if let image = uiManager.image {
+        if let image = uiManager.image {
             sourceImage = image
         }
         
-        if case PhotoEditViewType.adjustmentView(let viewType) = currentPhotoEditViewType, viewType == .hsl {
-            needShowAdjustmentView(for: .color)
-            uiManager.navBarView.state = .edit
-        } else {
+        guard let currentPhotoEditViewType = uiManager.currentPhotoEditViewType else {
+            setInitialState()
+            return
+        }
+
+        switch currentPhotoEditViewType {
+        case .adjustmentView(let type):
+            tempAdjustmentValues = []
+            
+            switch type {
+            case .adjust:
+                cropController?.crop()
+            case .hsl:
+                needShowAdjustmentView(for: .color)
+                uiManager.navBarView.state = .edit
+            default:
+                setInitialState()
+            }
+            
+        case .filterView(_):
             setInitialState()
         }
     }
@@ -253,7 +274,7 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
             let view = AdjustView.with(ratios: ratios, delegate: self)
             var config = Mantis.Config()
             config.showRotationDial = false
-            let controller = Mantis.cropCustomizableViewController(image: self.sourceImage, config: config, cropToolbar: view)
+            let controller = Mantis.cropCustomizableViewController(image: self.tempOriginalImage, config: config, cropToolbar: view)
             controller.delegate = self
             
             let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
@@ -263,20 +284,17 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
             return
         }
         
-        let manager = AdjustmentManager(types: type.adjustmentTypes)
-        
-        guard !manager.parameters.isEmpty,
-            let view = PhotoEditViewFactory.generateView(for: type,
-                                                         adjustmentParameters: manager.parameters,
-                                                         adjustments: manager.adjustments,
-                                                         delegate: self)
-        else {
+        guard let view = PhotoEditViewFactory.generateView(for: type, adjustments: adjustmentManager.adjustments, delegate: self) else {
             return
         }
         
-        adjustmentManager = manager
-        let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
+        if type == .hsl, let adjustment = adjustmentManager.adjustments.first(where: { $0.type == .hsl }) {
+            tempHSLValue = adjustment.hslColorParameter?.currentValue
+        }
         
+        tempAdjustmentValues = adjustmentManager.adjustmentValues
+        
+        let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
         uiManager.showView(type: .adjustmentView(type), view: view, changesBar: changesBar)
     }
     
@@ -300,8 +318,10 @@ extension PhotoEditViewController: CropViewControllerDelegate {
     
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
         sourceImage = cropped
+        tempOriginalImage = cropped
         uiManager.image = cropped
         cropController = nil
+        setInitialState()
     }
 }
 
