@@ -14,7 +14,7 @@
 {
     self = [super init];
     if (self){
-        _localId = contact.objectId;
+        _localId = contact.objectIdentifier;
         _name = [contact generateDisplayName];
         _state = state;
     }
