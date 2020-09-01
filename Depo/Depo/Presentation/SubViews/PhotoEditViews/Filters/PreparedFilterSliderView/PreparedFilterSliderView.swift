@@ -24,7 +24,7 @@ final class PreparedFilterSliderView: UIView, NibInit {
     @IBOutlet private weak var valueLabel: UILabel! {
         willSet {
             newValue.textAlignment = .right
-            newValue.font = .TurkcellSaturaMedFont(size: 12)
+            newValue.font = Device.isIpad ? .TurkcellSaturaRegFont(size: 16) : .TurkcellSaturaMedFont(size: 12)
             newValue.textColor = .white
         }
     }

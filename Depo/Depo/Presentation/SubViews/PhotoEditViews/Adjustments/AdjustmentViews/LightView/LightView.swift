@@ -18,6 +18,20 @@ final class LightView: AdjustmentsView, NibInit {
     
     @IBOutlet private weak var contentView: UIStackView!
     
+    @IBOutlet private weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var leadingConstaint: NSLayoutConstraint!
+    @IBOutlet private weak var trailingConstaint: NSLayoutConstraint!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        topConstraint.constant = Device.isIpad ? 30 : 16
+        bottomConstraint.constant = Device.isIpad ? 40 : 16
+        leadingConstaint.constant = Device.isIpad ? 80 : 0
+        trailingConstaint.constant = Device.isIpad ? 80 : 0
+    }
+    
     override func setup(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) {
         super.setup(parameters: parameters, delegate: delegate)
         

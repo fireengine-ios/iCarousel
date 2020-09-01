@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -34,14 +34,20 @@
                 <constraint firstItem="gyq-xi-cv2" firstAttribute="leading" secondItem="L4h-0S-5vj" secondAttribute="leading" id="YFV-VP-8WO"/>
                 <constraint firstAttribute="bottom" secondItem="gyq-xi-cv2" secondAttribute="bottom" constant="16" id="cxW-6U-2kO"/>
                 <constraint firstItem="IOh-2b-yXS" firstAttribute="top" secondItem="L4h-0S-5vj" secondAttribute="top" constant="16" id="epN-6o-zCz"/>
-                <constraint firstItem="IOh-2b-yXS" firstAttribute="leading" secondItem="lbw-XP-mS9" secondAttribute="leading" constant="20" id="q6v-qo-JzG"/>
+                <constraint firstItem="IOh-2b-yXS" firstAttribute="leading" secondItem="L4h-0S-5vj" secondAttribute="leading" constant="20" id="q6v-qo-JzG"/>
                 <constraint firstItem="gyq-xi-cv2" firstAttribute="top" secondItem="IOh-2b-yXS" secondAttribute="bottom" constant="8" id="vFH-4N-9sT"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="lbw-XP-mS9"/>
             <connections>
+                <outlet property="bottomConstraint" destination="cxW-6U-2kO" id="qKU-12-8O3"/>
                 <outlet property="contentView" destination="gyq-xi-cv2" id="E3Z-co-QCY"/>
                 <outlet property="hslButton" destination="IOh-2b-yXS" id="STL-Ai-p0g"/>
+                <outlet property="hslLeadingOffset" destination="q6v-qo-JzG" id="HIs-q8-RZw"/>
+                <outlet property="leadingConstaint" destination="YFV-VP-8WO" id="DTN-He-Tye"/>
+                <outlet property="spacingConstraint" destination="vFH-4N-9sT" id="ZDJ-5O-SRB"/>
+                <outlet property="topConstraint" destination="epN-6o-zCz" id="5KS-Yj-8Jw"/>
+                <outlet property="trailingConstaint" destination="4PU-YI-PeY" id="Jl5-FM-uwZ"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="136.60714285714286"/>
         </view>

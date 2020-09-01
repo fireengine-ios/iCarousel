@@ -89,10 +89,10 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="Mtj-QW-bSX" firstAttribute="leading" secondItem="H5M-Oy-Hjk" secondAttribute="leading" id="6dr-tq-MPX"/>
-                <constraint firstItem="H5M-Oy-Hjk" firstAttribute="trailing" secondItem="Mtj-QW-bSX" secondAttribute="trailing" id="OBC-1S-5VA"/>
+                <constraint firstItem="Mtj-QW-bSX" firstAttribute="leading" secondItem="iz6-KA-1la" secondAttribute="leading" id="6dr-tq-MPX"/>
+                <constraint firstAttribute="trailing" secondItem="Mtj-QW-bSX" secondAttribute="trailing" id="OBC-1S-5VA"/>
                 <constraint firstItem="Mtj-QW-bSX" firstAttribute="top" secondItem="iz6-KA-1la" secondAttribute="top" id="kM0-I4-ILw"/>
-                <constraint firstItem="H5M-Oy-Hjk" firstAttribute="bottom" secondItem="Mtj-QW-bSX" secondAttribute="bottom" id="kN7-Hc-6Vm"/>
+                <constraint firstAttribute="bottom" secondItem="Mtj-QW-bSX" secondAttribute="bottom" id="kN7-Hc-6Vm"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="H5M-Oy-Hjk"/>

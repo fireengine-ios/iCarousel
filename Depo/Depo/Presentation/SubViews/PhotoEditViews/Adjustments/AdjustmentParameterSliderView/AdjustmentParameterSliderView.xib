@@ -65,6 +65,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="contentView" destination="9YI-81-AJM" id="JP1-7M-cbd"/>
                 <outlet property="labelsView" destination="VfK-jy-K9Y" id="S1j-4b-KQ0"/>
                 <outlet property="sliderContentView" destination="dB0-I4-r1x" id="jMc-we-a0U"/>
                 <outlet property="titleLabel" destination="GdM-VB-OZp" id="lSB-zi-0s9"/>

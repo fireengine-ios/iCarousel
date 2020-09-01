@@ -24,21 +24,21 @@ final class AdjustView: AdjustmentsView, NibInit {
     @IBOutlet private weak var minValueLabel: UILabel! {
         willSet {
             newValue.textColor = .white
-            newValue.font = .TurkcellSaturaMedFont(size: 12)
+            newValue.font = Device.isIpad ? .TurkcellSaturaRegFont(size: 16) : .TurkcellSaturaMedFont(size: 12)
         }
     }
     
     @IBOutlet private weak var maxValueLabel: UILabel! {
         willSet {
             newValue.textColor = .white
-            newValue.font = .TurkcellSaturaMedFont(size: 12)
+            newValue.font = Device.isIpad ? .TurkcellSaturaRegFont(size: 16) : .TurkcellSaturaMedFont(size: 12)
         }
     }
     
     @IBOutlet private weak var currentValueLabel: UILabel! {
         willSet {
             newValue.textColor = .white
-            newValue.font = .TurkcellSaturaMedFont(size: 12)
+            newValue.font = Device.isIpad ? .TurkcellSaturaRegFont(size: 16) : .TurkcellSaturaMedFont(size: 12)
         }
     }
     
