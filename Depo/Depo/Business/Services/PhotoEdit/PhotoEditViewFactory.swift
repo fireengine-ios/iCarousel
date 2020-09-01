@@ -121,7 +121,6 @@ final class PhotoEditViewFactory {
                 let colorParameter = adjustment.hslColorParameter else {
                 return nil
             }
-
             return HSLView.with(parameters: parameters, colorParameter: colorParameter, delegate: delegate)
         }
     }
