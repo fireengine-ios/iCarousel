@@ -59,6 +59,7 @@ protocol AdjustmentProtocol {
     var type: AdjustmentType { get }
     var parameters: [AdjustmentParameterProtocol] { get }
     var hslColorParameter: HSLColorAdjustmentParameterProtocol? { get }
+    var modifed: Bool { get }
     
     func applyOn(image: UIImage, onFinished: @escaping ValueHandler<UIImage>)
 }
@@ -72,6 +73,9 @@ final class Adjustment: AdjustmentProtocol {
 
     private let thirdPartyAdjustment: ThirdPartyAdjustmentProtocol
     
+    var modifed: Bool {
+        parameters.first(where: { $0.currentValue != $0.defaultValue }) != nil
+    }
     
     required init(type: AdjustmentType, parameters: [AdjustmentParameterProtocol], hslColorParameter: HSLColorAdjustmentParameterProtocol?, thirdPartyAdjustment: ThirdPartyAdjustmentProtocol) {
         self.type = type

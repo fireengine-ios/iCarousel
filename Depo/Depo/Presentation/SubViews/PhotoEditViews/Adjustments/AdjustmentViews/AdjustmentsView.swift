@@ -11,9 +11,7 @@ import UIKit
 typealias AdjustmentParameterValue = (type: AdjustmentParameterType, value: Float)
 
 protocol AdjustmentsViewDelegate: class {
-    func showAdjustMenu()
     func showHSLFilter()
-    func roatate90Degrees()
     func didChangeHSLColor(_ color: HSVMultibandColor)
     func didChangeAdjustments(_ adjustments: [AdjustmentParameterValue])
 }
