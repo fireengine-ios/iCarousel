@@ -29,11 +29,27 @@ final class PreparedFilterSliderView: UIView, NibInit {
         }
     }
     
+    @IBOutlet private weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var leadingConstaint: NSLayoutConstraint!
+    @IBOutlet private weak var trailingConstaint: NSLayoutConstraint!
+    @IBOutlet private weak var valueTrailingConstaint: NSLayoutConstraint!
+    
     private let slider = SliderView()
     
     private weak var delegate: PreparedFilterSliderViewDelegate?
     
     private var filter: CustomFilterProtocol?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        topConstraint.constant = Device.isIpad ? 30 : 16
+        bottomConstraint.constant = Device.isIpad ? 40 : 16
+        leadingConstaint.constant = Device.isIpad ? 72 : 0
+        trailingConstaint.constant = Device.isIpad ? 72 : 0
+        valueTrailingConstaint.constant = Device.isIpad ? 80 : 16
+    }
     
     private func setup(filter: CustomFilterProtocol, delegate: PreparedFilterSliderViewDelegate?) {
         backgroundColor = ColorConstants.photoEditBackgroundColor

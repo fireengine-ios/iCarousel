@@ -19,7 +19,7 @@ final class PreparedFilterCell: UICollectionViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = Device.isIpad ? .TurkcellSaturaRegFont(size: 16) : .TurkcellSaturaMedFont(size: 12)
+            newValue.font = .TurkcellSaturaMedFont(size: 12)
             newValue.textColor = .white
             newValue.textAlignment = .center
             newValue.numberOfLines = 2
