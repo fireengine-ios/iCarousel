@@ -1629,7 +1629,6 @@
 		0303A8472397D12100907F42 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
 		0303A8482397D12100907F42 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
 		0303A8492397D12100907F42 /* WormholePoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D2826207E3CF0003AE4FB /* WormholePoster.swift */; };
-		0303A84D2397D12100907F42 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610F522BCD27C00108958 /* Info.plist */; };
 		0303A84E2397D12100907F42 /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
 		0303A84F2397D12100907F42 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
 		0303A8502397D12100907F42 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84522212DA314007EA795 /* images.xcassets */; };
@@ -1692,8 +1691,6 @@
 		0303A8932397D14900907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A8942397D14900907F42 /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
 		0303A8982397D14900907F42 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
-		0303A8992397D14900907F42 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610FF22BCD41700108958 /* Info.plist */; };
-		0303A89A2397D14900907F42 /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AFAB3762073ADCB00C54C9B /* InfoEnterprise.plist */; };
 		0303A89B2397D14900907F42 /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610FB22BCD41700108958 /* InfoEnterprise.plist */; };
 		0303A89C2397D14900907F42 /* InfoAppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610FC22BCD41700108958 /* InfoAppStore.plist */; };
 		0303A8A72397D15100907F42 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC8F204E87CE00FA3F44 /* L10n.swift */; };
@@ -1713,8 +1710,6 @@
 		0303A8B52397D15100907F42 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB97AD2008CBA0000D8E2B /* TitleView.swift */; };
 		0303A8B62397D15100907F42 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
 		0303A8B72397D15100907F42 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
-		0303A8BB2397D15100907F42 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C86110922BCD46700108958 /* Info.plist */; };
-		0303A8BC2397D15100907F42 /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AFAB37C2073AE3200C54C9B /* InfoEnterprise.plist */; };
 		0303A8BD2397D15100907F42 /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
 		0303A8BF2397D15100907F42 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
 		0303A8C02397D15100907F42 /* InfoAppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C86110622BCD46700108958 /* InfoAppStore.plist */; };
@@ -4079,7 +4074,6 @@
 		8C3BA36B22B3CC49006D901E /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8C3BA36C22B3CC49006D901E /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
 		8C3BA37022B3CC49006D901E /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
-		8C3BA37222B3CC49006D901E /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AFAB3762073ADCB00C54C9B /* InfoEnterprise.plist */; };
 		8C3BA37D22B3CC53006D901E /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC8F204E87CE00FA3F44 /* L10n.swift */; };
 		8C3BA37E22B3CC53006D901E /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
 		8C3BA37F22B3CC53006D901E /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
@@ -4096,7 +4090,6 @@
 		8C3BA38A22B3CC53006D901E /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB97AD2008CBA0000D8E2B /* TitleView.swift */; };
 		8C3BA38B22B3CC53006D901E /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
 		8C3BA38C22B3CC53006D901E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
-		8C3BA39022B3CC53006D901E /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AFAB37C2073AE3200C54C9B /* InfoEnterprise.plist */; };
 		8C3BA39122B3CC53006D901E /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
 		8C3BA39322B3CC53006D901E /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
 		8C3BA39422B3CC53006D901E /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
@@ -4175,13 +4168,10 @@
 		8C8610ED22BCC08000108958 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610E722BCC07F00108958 /* Info-Enterprise.plist */; };
 		8C8610F622BCD27C00108958 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610F122BCD27C00108958 /* Info-AppStore.plist */; };
 		8C8610F722BCD27C00108958 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610F322BCD27C00108958 /* Info-Enterprise.plist */; };
-		8C8610F822BCD27C00108958 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610F522BCD27C00108958 /* Info.plist */; };
 		8C86110022BCD41800108958 /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610FB22BCD41700108958 /* InfoEnterprise.plist */; };
 		8C86110122BCD41800108958 /* InfoAppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610FC22BCD41700108958 /* InfoAppStore.plist */; };
-		8C86110222BCD41800108958 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610FF22BCD41700108958 /* Info.plist */; };
 		8C86110A22BCD46800108958 /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C86110422BCD46700108958 /* InfoEnterprise.plist */; };
 		8C86110B22BCD46800108958 /* InfoAppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C86110622BCD46700108958 /* InfoAppStore.plist */; };
-		8C86110C22BCD46800108958 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C86110922BCD46700108958 /* Info.plist */; };
 		8C86110D22BCF27300108958 /* SelectNameModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4812D8E922B25942007089BA /* SelectNameModuleOutput.swift */; };
 		8C86110E22BCF27500108958 /* SelectNameModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4812D8E922B25942007089BA /* SelectNameModuleOutput.swift */; };
 		8C86110F22BCF28000108958 /* TermsAndPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73A63F6722B240310062DDE5 /* TermsAndPolicyViewController.swift */; };
@@ -23913,7 +23903,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0303A84D2397D12100907F42 /* Info.plist in Resources */,
 				0303A84E2397D12100907F42 /* TurkcellSaturaBol.ttf in Resources */,
 				0303A84F2397D12100907F42 /* TurkcellSaturaBolIta.ttf in Resources */,
 				0303A8502397D12100907F42 /* images.xcassets in Resources */,
@@ -23937,8 +23926,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0303A8982397D14900907F42 /* OurLocalizable.strings in Resources */,
-				0303A8992397D14900907F42 /* Info.plist in Resources */,
-				0303A89A2397D14900907F42 /* InfoEnterprise.plist in Resources */,
 				0303A89B2397D14900907F42 /* InfoEnterprise.plist in Resources */,
 				0303A89C2397D14900907F42 /* InfoAppStore.plist in Resources */,
 			);
@@ -23948,9 +23935,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0303A8BB2397D15100907F42 /* Info.plist in Resources */,
 				0309C38123992FBA0031DB5B /* images.xcassets in Resources */,
-				0303A8BC2397D15100907F42 /* InfoEnterprise.plist in Resources */,
 				0303A8BD2397D15100907F42 /* TurkcellSaturaBol.ttf in Resources */,
 				0303A8BF2397D15100907F42 /* TurkcellSaturaBolIta.ttf in Resources */,
 				0303A8C02397D15100907F42 /* InfoAppStore.plist in Resources */,
@@ -24306,7 +24291,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C8610F822BCD27C00108958 /* Info.plist in Resources */,
 				8C3BA32C22B3CC45006D901E /* TurkcellSaturaBol.ttf in Resources */,
 				8C3BA32D22B3CC45006D901E /* TurkcellSaturaBolIta.ttf in Resources */,
 				8C3BA32E22B3CC45006D901E /* images.xcassets in Resources */,
@@ -24330,8 +24314,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C3BA37022B3CC49006D901E /* OurLocalizable.strings in Resources */,
-				8C86110222BCD41800108958 /* Info.plist in Resources */,
-				8C3BA37222B3CC49006D901E /* InfoEnterprise.plist in Resources */,
 				8C86110022BCD41800108958 /* InfoEnterprise.plist in Resources */,
 				8C86110122BCD41800108958 /* InfoAppStore.plist in Resources */,
 			);
@@ -24341,9 +24323,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C86110C22BCD46800108958 /* Info.plist in Resources */,
 				0309C38223992FBA0031DB5B /* images.xcassets in Resources */,
-				8C3BA39022B3CC53006D901E /* InfoEnterprise.plist in Resources */,
 				8C3BA39122B3CC53006D901E /* TurkcellSaturaBol.ttf in Resources */,
 				8C3BA39322B3CC53006D901E /* TurkcellSaturaBolIta.ttf in Resources */,
 				8C86110B22BCD46800108958 /* InfoAppStore.plist in Resources */,
@@ -26200,6 +26180,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
 			);
 			outputFileListPaths = (
 			);
