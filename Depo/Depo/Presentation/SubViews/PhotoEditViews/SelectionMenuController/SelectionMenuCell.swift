@@ -26,6 +26,12 @@ final class SelectionMenuCell: UITableViewCell {
     
     private var style: Style = .simple
     
+    override var isSelected: Bool {
+        didSet {
+            checkmarkImageView.image = isSelected ? UIImage(named: "photo_edit_apply") : nil
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -34,16 +40,7 @@ final class SelectionMenuCell: UITableViewCell {
     
     func setup(style: Style, title: String, isSelected: Bool) {
         self.style = style
-        if style == .checkmark {
-            setSeleted(isSelected)
-        } else {
-            checkmarkImageView.isHidden = true
-        }
-        
+        checkmarkImageView.isHidden = style == .simple
         titleLabel.text = title
-    }
-    
-    func setSeleted(_ isSelected: Bool) {
-        checkmarkImageView.image = isSelected ? UIImage(named: "photo_edit_apply") : nil
     }
 }
