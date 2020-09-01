@@ -111,14 +111,15 @@
 
 - (SyncRecord *) isRecorded:(Contact *) contact
 {
-    NSArray *result = [self fetch:[NSString stringWithFormat:@"%@=%lld",COLUMN_LOCAL_ID,[contact.objectId longLongValue]]];
-    if ([result count]==0){
-        return nil;
-    }
-    SyncRecord *rec = (SyncRecord*)result[0];
-    contact.remoteId = rec.remoteId;
-    
-    return rec;
+//    NSArray *result = [self fetch:[NSString stringWithFormat:@"%@=%lld",COLUMN_LOCAL_ID,[contact.objectId longLongValue]]];
+//    if ([result count]==0){
+//        return nil;
+//    }
+//    SyncRecord *rec = (SyncRecord*)result[0];
+//    contact.remoteId = rec.remoteId;
+//
+//    return rec;
+    return nil;
     
     
     

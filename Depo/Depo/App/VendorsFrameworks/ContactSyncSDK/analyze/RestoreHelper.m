@@ -70,7 +70,7 @@
         NSArray *localCs = [localContacts objectForKey:key];
         if (localCs == nil) {
             for (Contact *c in remoteCs) {
-                SYNC_Log(@"Contact create %@", [c objectId]);
+                SYNC_Log(@"Contact create %@", [c objectIdentifier]);
                 [[SyncStatus shared] addContact:c state:SYNC_INFO_NEW_CONTACT_ON_DEVICE];
             }
             [newContacts addObjectsFromArray:remoteCs];
@@ -87,18 +87,18 @@
                         [self setDeviceAndAddress:localContact];
                         if (localContact.dirty) {
                             [[SyncStatus shared] addContact:remoteContact state:SYNC_INFO_UPDATED_ON_DEVICE];
-                            SYNC_Log(@"Contact update %@", [localContact objectId]);
+                            SYNC_Log(@"Contact update %@", [localContact objectIdentifier]);
                             status = 2;
                             [updateContacts addObject:localContact];
                         } else {
-                            SYNC_Log(@"Contact no action %@", [localContact objectId]);
+                            SYNC_Log(@"Contact no action %@", [localContact objectIdentifier]);
                             status = 0;
                         }
                         break;
                     }
                 }
                 if (status == 1) {
-                    SYNC_Log(@"Contact create %@", [remoteContact objectId]);
+                    SYNC_Log(@"Contact create %@", [remoteContact objectIdentifier]);
                     [[SyncStatus shared] addContact:remoteContact state:SYNC_INFO_NEW_CONTACT_ON_DEVICE];
                     [newContacts addObject:remoteContact];
                 }
@@ -116,8 +116,8 @@
     NSArray *mergedContactIds = [[ContactUtil shared] getContactIds:mergedDefaultContacts];
     
     for(Contact *c in defaultContacts) {
-        if (![mergedContactIds containsObject:c.objectId]) {
-            SYNC_Log(@"Contact delete %@", [c objectId]);
+        if (![mergedContactIds containsObject:c.objectIdentifier]) {
+            SYNC_Log(@"Contact delete %@", [c objectIdentifier]);
             [deletedContacts addObject:c];
             [[SyncStatus shared] addContact:c state:SYNC_INFO_DELETED_ON_DEVICE];
         }
@@ -129,7 +129,7 @@
 -(NSMutableDictionary*)getLocalDefaultContacts {
     NSMutableDictionary *contactMap = [NSMutableDictionary new];
     for (Contact *c in [[ContactUtil shared] fetchLocalContacts]) {
-        [contactMap setObject:c forKey:c.objectId];
+        [contactMap setObject:c forKey:c.objectIdentifier];
     }
 
     return contactMap;
@@ -137,7 +137,7 @@
 
 -(NSDictionary*)getLocalContacts {
     NSMutableDictionary *resultMap = [NSMutableDictionary new];
-    NSMutableArray *contacts = [[ContactUtil shared] fetchContacts];
+    NSMutableArray *contacts = [[ContactUtil shared] fetchContacts:ALL_LOCAL];
     if ([contacts count] > 0) {
         for(Contact *c in contacts) {
             
@@ -145,10 +145,10 @@
                 NSMutableArray *cs = [resultMap objectForKey:c.nameForCompare];
                 if (cs != nil) {
                     if (c.defaultAccount) {
-                        SYNC_Log(@"Default account contact %@", c.objectId);
+                        SYNC_Log(@"Default account contact %@", c.objectIdentifier);
                         [cs insertObject:c atIndex:0];
                     } else {
-                        SYNC_Log(@"Differect account contact %@", c.objectId);
+                        SYNC_Log(@"Differect account contact %@", c.objectIdentifier);
                         [cs addObject:c];
                     }
                 } else {
@@ -158,7 +158,7 @@
                     [resultMap setObject:cs forKey:c.nameForCompare];
                 }
             } else {
-                SYNC_Log(@"Contact has no name %@", c.objectId);
+                SYNC_Log(@"Contact has no name %@", c.objectIdentifier);
             }
         }
     }
