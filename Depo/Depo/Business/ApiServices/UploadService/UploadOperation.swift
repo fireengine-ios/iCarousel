@@ -479,10 +479,19 @@ final class UploadOperation: Operation {
                 if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
                     self.outputItem?.metaData?.mediumUrl = preview
                 }
-                self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
-                    self?.storageVars.lastUnsavedFileUUID = nil
-                    debugLog("_upload: sync status is updated for \(self?.inputItem.name ?? "") ")
-                    success()
+                
+                if self.uploadType == .save, let updatedRemote = self.outputItem {
+                    self.mediaItemsService.replaceItem(uuid: self.inputItem.uuid, with: updatedRemote) { [weak self] in
+                        self?.storageVars.lastUnsavedFileUUID = nil
+                        debugLog("_upload: item is updated \(self?.inputItem.name ?? "") ")
+                        success()
+                    }
+                } else {
+                    self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
+                        self?.storageVars.lastUnsavedFileUUID = nil
+                        debugLog("_upload: sync status is updated for \(self?.inputItem.name ?? "") ")
+                        success()
+                    }
                 }
                 
                 debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")

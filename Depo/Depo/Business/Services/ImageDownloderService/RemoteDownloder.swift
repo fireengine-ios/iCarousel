@@ -11,7 +11,27 @@ import SDWebImage
 
 class ImageDownloder {
     
-    static func removeImageFromCache(url: URL?, completion: @escaping () -> Void) {
+    static func removeImagesFromCache(urls: [URL?], completion: @escaping VoidHandler) {
+        let existedUrls = urls.compactMap { $0 }
+        
+        guard !existedUrls.isEmpty else {
+            completion()
+            return
+        }
+        
+        let group = DispatchGroup()
+        existedUrls.forEach {
+            group.enter()
+            
+            removeImageFromCache(url: $0) {
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main, execute: completion)
+    }
+    
+    static func removeImageFromCache(url: URL?, completion: @escaping VoidHandler) {
         guard
             let trimmedUrl = url?.byTrimmingQuery?.absoluteString,
             let imageCache = SDWebImageManager.shared().imageCache

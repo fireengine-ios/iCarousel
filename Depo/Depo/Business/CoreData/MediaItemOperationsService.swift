@@ -9,6 +9,7 @@
 import Foundation
 
 typealias WrapObjectsCallBack = (_ items: [WrapData]) -> Void
+typealias WrapObjectCallBack = (_ item: WrapData?) -> Void
 typealias BaseDataSourceItems = (_ baseDSItems: [BaseDataSourceItem]) -> Void
 typealias MediaItemsCallBack = (_ mediaItems: [MediaItem]) -> Void
 typealias MediaItemCallback = (_ mediaItem: MediaItem?) -> Void
@@ -202,6 +203,30 @@ final class MediaItemOperationsService {
         }
     }
     
+    func itemByUUID(uuid: String, context: NSManagedObjectContext? = nil, completion: @escaping WrapObjectCallBack) {
+        let context = context ?? coreDataStack.newChildBackgroundContext
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.uuid) = %@", uuid)
+        executeRequest(predicate: predicate, context: context) { items in
+            guard let item = items.first else {
+                completion(nil)
+                return
+            }
+            completion(WrapData(mediaItem: item))
+        }
+    }
+    
+    func remoteItemBy(trimmedId: String, context: NSManagedObjectContext? = nil, completion: @escaping WrapObjectCallBack) {
+        let context = context ?? coreDataStack.newChildBackgroundContext
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.trimmedLocalFileID) = %@", trimmedId)
+        executeRequest(predicate: predicate, context: context) { items in
+            guard let item = items.first else {
+                completion(nil)
+                return
+            }
+            completion(WrapData(mediaItem: item))
+        }
+    }
+    
     // MARK: - MediaItemOperations
     
     //TODO: check the usefullness of it/or need of refactor
@@ -254,6 +279,28 @@ final class MediaItemOperationsService {
         }
     }
     
+    func replaceItem(uuid: String, with item: WrapData, completion: @escaping VoidHandler) {
+        coreDataStack.performBackgroundTask { [weak self] context in
+            guard let self = self else {
+                completion()
+                return
+            }
+            
+            let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = false AND \(MediaItem.PropertyNameKey.uuid) = %@", uuid)
+            
+            self.executeRequest(predicate: predicate, context: context) { [weak self] mediaItems in
+                guard let self = self, let remote = mediaItems.first else {
+                    completion()
+                    return
+                }
+                
+                remote.copyInfo(item: item, context: context)
+                
+                self.coreDataStack.saveDataForContext(context: context, savedCallBack: completion)
+            }
+        }
+    }
+    
     func updateRelationsAfterMerge(with uuid: String, localItem: MediaItem, context: NSManagedObjectContext, completion: @escaping VoidHandler) {
         let predicateForRemoteFiles = NSPredicate(format: "\(MediaItem.PropertyNameKey.uuid) = %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = false", uuid)
         
@@ -287,8 +334,8 @@ final class MediaItemOperationsService {
     }
     
     func mediaItems(by localId: String,
-                            context: NSManagedObjectContext,
-                            mediaItemsCallBack: @escaping MediaItemsCallBack) {
+                    context: NSManagedObjectContext,
+                    mediaItemsCallBack: @escaping MediaItemsCallBack) {
         let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.localFileID) = %@ AND \(MediaItem.PropertyNameKey.isLocalItemValue) = true", localId)
         executeRequest(predicate: predicate, context: context, mediaItemsCallBack: mediaItemsCallBack)
     }

@@ -547,7 +547,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         debugLog("LocalMediaStorage saveToGallery")
 
         guard photoLibraryIsAvailible() else {
-            handler(.failed(ErrorResponse.string("Photo libraryr is unavailable")))
+            handler(.failed(ErrorResponse.string("Photo library is unavailable")))
             return
         }
         
@@ -575,6 +575,59 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             handler(.success(assetPlaceholder))
         })
+    }
+    
+    @discardableResult
+    func replaceInGallery(asset: PHAsset, imageData: Data, handler: @escaping ResponseHandler<Void>) -> PHContentEditingInputRequestID? {
+        debugLog("LocalMediaStorage saveToGallery")
+
+        guard photoLibraryIsAvailible() else {
+            handler(.failed(ErrorResponse.string("Photo library is unavailable")))
+            return nil
+        }
+        
+        let requestId = asset.requestContentEditingInput(with: nil) { [weak self] input, _ in
+            guard let input = input else {
+                handler(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
+                assertionFailure("Can't create input")
+                return
+            }
+            
+            //TODO: pass adjustments and filters data
+            let adjustmentData = PHAdjustmentData(formatIdentifier: "lifeboxPhotoEdit", formatVersion: "1.0.0", data: "SomeChanges".data(using: .utf8) ?? Data())
+            let output = PHContentEditingOutput(contentEditingInput: input)
+            output.adjustmentData = adjustmentData
+            
+            do {
+                try imageData.write(to: output.renderedContentURL, options: .atomicWrite)
+            } catch {
+                handler(.failed(ErrorResponse.string("Can't write image data to the renderedContentURL")))
+            }
+            
+            self?.passcodeStorage.systemCallOnScreen = true
+            
+            PHPhotoLibrary.shared().performChanges({
+                let changeRequest = PHAssetChangeRequest(for: asset)
+                changeRequest.contentEditingOutput = output
+                
+            }, completionHandler: { [weak self] success, error in
+                self?.passcodeStorage.systemCallOnScreen = false
+                
+                if let error = error  {
+                    handler(.failed(error))
+                    return
+                }
+                
+                guard success else {
+                    handler(.failed(ErrorResponse.string(TextConstants.errorUnknown)))
+                    return
+                }
+                
+                handler(.success(()))
+            })
+        }
+        
+        return requestId
     }
     
     var addAssetToCollectionQueue: OperationQueue = {
