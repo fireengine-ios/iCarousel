@@ -71,6 +71,11 @@ final class AdjustView: UIView, NibInit, CropToolbarProtocol {
         }
     }
     
+    @IBOutlet private weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var leadingConstaint: NSLayoutConstraint!
+    @IBOutlet private weak var trailingConstaint: NSLayoutConstraint!
+    
     private let slider = SliderView()
     
     private weak var delegate: AdjustViewDelegate?
@@ -85,10 +90,13 @@ final class AdjustView: UIView, NibInit, CropToolbarProtocol {
         backgroundColor = ColorConstants.photoEditBackgroundColor
         sliderContentView.backgroundColor = ColorConstants.photoEditBackgroundColor
         
+        topConstraint.constant = Device.isIpad ? 30 : 16
+        bottomConstraint.constant = Device.isIpad ? 40 : 16
+        leadingConstaint.constant = Device.isIpad ? 16 : 0
+        trailingConstaint.constant = Device.isIpad ? 16 : 0
+        
         setup()
     }
-    
-    //MARK: - Setup
     
     private func setup() {
         minValueLabel.text = "\(Int(minValue))"

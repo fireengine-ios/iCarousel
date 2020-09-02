@@ -41,8 +41,8 @@ final class ColorView: AdjustmentsView, NibInit {
         spacingConstraint.constant = Device.isIpad ? 30 : 8
         topConstraint.constant = Device.isIpad ? 30 : 16
         bottomConstraint.constant = Device.isIpad ? 40 : 16
-        leadingConstaint.constant = Device.isIpad ? 80 : 0
-        trailingConstaint.constant = Device.isIpad ? 80 : 0
+        leadingConstaint.constant = Device.isIpad ? 80 : 16
+        trailingConstaint.constant = Device.isIpad ? 80 : 16
     }
     
     override func setup(parameters: [AdjustmentParameterProtocol], delegate: AdjustmentsViewDelegate?) {
