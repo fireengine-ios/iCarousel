@@ -41,7 +41,7 @@ final class SelectionMenuController: UIViewController, NibInit {
     private var selectedIndex: Int?
     private var handler: ValueHandler<Int?>?
     
-    private let cellHeight: CGFloat = 44
+    private let cellHeight: CGFloat = Device.isIpad ? 55 : 44
     private var tableViewHeight: CGFloat = 0
     
     //MARK: -
