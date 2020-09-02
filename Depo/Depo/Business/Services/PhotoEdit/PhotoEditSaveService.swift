@@ -221,7 +221,8 @@ final class PhotoEditSaveService {
     }
     
     private func replaceLocalItem(asset: PHAsset, imageData: Data, completion: @escaping ResponseHandler<WrapData>) {
-        localMediaStorage.replaceInGallery(asset: asset, imageData: imageData) { [weak self] result in
+        //TODO: pass real adjustments and filters info
+        localMediaStorage.replaceInGallery(asset: asset, imageData: imageData, adjustmentInfo: "Some lifebox adjustments info") { [weak self] result in
             switch result {
                 case .success:
                     self?.replaceInDB(assetId: asset.localIdentifier, completion: completion)

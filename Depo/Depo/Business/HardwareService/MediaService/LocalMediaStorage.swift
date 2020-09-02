@@ -578,7 +578,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     @discardableResult
-    func replaceInGallery(asset: PHAsset, imageData: Data, handler: @escaping ResponseHandler<Void>) -> PHContentEditingInputRequestID? {
+    func replaceInGallery(asset: PHAsset, imageData: Data, adjustmentInfo: String, handler: @escaping ResponseHandler<Void>) -> PHContentEditingInputRequestID? {
         debugLog("LocalMediaStorage saveToGallery")
 
         guard photoLibraryIsAvailible() else {
@@ -593,8 +593,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 return
             }
             
-            //TODO: pass adjustments and filters data
-            let adjustmentData = PHAdjustmentData(formatIdentifier: "lifeboxPhotoEdit", formatVersion: "1.0.0", data: "SomeChanges".data(using: .utf8) ?? Data())
+            let adjustmentData = PHAdjustmentData(formatIdentifier: "lifeboxPhotoEdit", formatVersion: "1.0.0", data: adjustmentInfo.data(using: .utf8) ?? Data())
             let output = PHContentEditingOutput(contentEditingInput: input)
             output.adjustmentData = adjustmentData
             
