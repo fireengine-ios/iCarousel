@@ -16,6 +16,19 @@ enum PhotoEditTabbarItemType {
     case filters
     case adjustments
     
+    var title: String {
+        guard Device.isIpad else {
+            return ""
+        }
+        
+        switch self {
+        case .filters:
+            return TextConstants.photoEditTabBarFilters
+        case .adjustments:
+            return TextConstants.photoEditTabBarAdjustments
+        }
+    }
+    
     private var templateImage: UIImage? {
         let imageName: String
         switch self {
@@ -44,6 +57,15 @@ private final class PhotoEditButtonItem: UIButton {
         button.setImage(type.normalImage, for: .normal)
         button.setImage(type.selectedImage, for: .highlighted)
         button.setImage(type.selectedImage, for: .selected)
+        button.setTitle(type.title, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(.lrTealish, for: .highlighted)
+        button.setTitleColor(.lrTealish, for: .selected)
+        button.titleLabel?.font = .TurkcellSaturaRegFont(size: 16)
+        
+        if Device.isIpad {
+            button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: -30)
+        }
         return button
     }
     
@@ -64,6 +86,7 @@ final class PhotoEditTabbar: UIView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = ColorConstants.photoEditBackgroundColor
+        heightAnchor.constraint(equalToConstant: Device.isIpad ? 60 : 44).activate()
     }
     
     func setup(with types: [PhotoEditTabbarItemType]) {

@@ -23,11 +23,6 @@ protocol  WrapItemFileOperations {
     
     func upload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse)
     
-    //basicaly reupload with same UUID if regular save, and with new UUID if save as.
-    func save(item: WrapData, imageData: Data?, success: @escaping FileOperationSucces, fail: @escaping FailResponse)
-    
-    func saveAs(item: WrapData, imageData: Data?, success: @escaping FileOperationSucces, fail: @escaping FailResponse)
-    
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?)
     
     func share(sharedFiles: [BaseDataSourceItem], success: SuccessShared?, fail: FailResponse?)
@@ -188,49 +183,7 @@ class WrapItemFileService: WrapItemFileOperations {
                                      success: success,
                                      fail: fail, returnedUploadOperation: { _ in})
     }
-    
-    //basicaly reupload with same UUID if regular save, and with new UUID if save as.
-    func save(item: WrapData, imageData: Data?, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
-        guard let itemToSave = prepareItemForSaving(item: item, imageData: imageData, asNew: false) else {
-            return
-        }
-        uploadService.uploadFileList(items: [itemToSave],
-                                     uploadType: .save,
-                                     uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
-                                     success: success,
-                                     fail: fail, returnedUploadOperation: { _ in})
-    }
-    
-    func saveAs(item: WrapData, imageData: Data?, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
-        guard let itemToSave = prepareItemForSaving(item: item, imageData: imageData, asNew: true) else {
-            return
-        }
-        uploadService.uploadFileList(items: [itemToSave],
-                                     uploadType: .saveAs,
-                                     uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
-                                     success: success,
-                                     fail: fail, returnedUploadOperation: { _ in})
-    }
-    
-    private func prepareItemForSaving(item: WrapData, imageData: Data?, asNew: Bool) -> WrapData? {
-        guard let data = imageData else {
-            return nil
-        }
-        let newItem = WrapData(imageData: data, isLocal: asNew)//
-        newItem.patchToPreview = .remoteUrl(nil)
-        newItem.localFileUrl = nil
-         newItem.uuid = item.uuid//since we dont have an asset pointer, we use original UUID to get local trimmed ID
-        if !asNew {
-            newItem.albums = item.albums
-            newItem.favorites = item.favorites
-            newItem.name = item.name
-        }
-        
-        return newItem
-    }
-    
+
     func cancellableUpload(items: [WrapData], toPath: String, success: @escaping FileOperationSucces, fail: @escaping FailResponse, returnedUploadOperations: @escaping ([UploadOperation]?) -> Void) {
         let localFiles = localWrapedData(files: items)
         

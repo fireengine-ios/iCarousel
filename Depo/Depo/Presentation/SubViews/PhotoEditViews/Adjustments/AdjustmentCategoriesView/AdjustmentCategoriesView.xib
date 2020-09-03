@@ -17,9 +17,6 @@
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="H6n-V9-GMn">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="77"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="77" id="2HT-Ua-uIO"/>
-                    </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TqK-F4-1w1">
                         <size key="itemSize" width="128" height="128"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -30,10 +27,11 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
+                <constraint firstItem="H6n-V9-GMn" firstAttribute="centerX" secondItem="JZw-SK-5Dm" secondAttribute="centerX" id="E9v-tZ-Ia3"/>
                 <constraint firstItem="H6n-V9-GMn" firstAttribute="bottom" secondItem="JZw-SK-5Dm" secondAttribute="bottom" id="Ot6-d7-dRv"/>
-                <constraint firstItem="H6n-V9-GMn" firstAttribute="trailing" secondItem="JZw-SK-5Dm" secondAttribute="trailing" id="dkM-b0-4Eb"/>
+                <constraint firstItem="H6n-V9-GMn" firstAttribute="trailing" secondItem="JZw-SK-5Dm" secondAttribute="trailing" priority="100" id="dkM-b0-4Eb"/>
                 <constraint firstItem="H6n-V9-GMn" firstAttribute="top" secondItem="JZw-SK-5Dm" secondAttribute="top" id="sh8-c9-ehN"/>
-                <constraint firstItem="H6n-V9-GMn" firstAttribute="leading" secondItem="JZw-SK-5Dm" secondAttribute="leading" id="wqL-Bx-gSw"/>
+                <constraint firstItem="H6n-V9-GMn" firstAttribute="leading" secondItem="JZw-SK-5Dm" secondAttribute="leading" priority="100" id="wqL-Bx-gSw"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="TS6-Os-q4o"/>

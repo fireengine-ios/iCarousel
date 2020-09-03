@@ -85,6 +85,10 @@ final class PhotoEditViewController: ViewController, NibInit {
         super.viewDidLayoutSubviews()
         uiManager.viewDidLayoutSubviews()
     }
+    
+    func saveImageComplete(saveAsCopy: Bool) {
+        trackChanges(saveAsCopy: saveAsCopy)
+    }
 
     private func setInitialState() {
         uiManager.showInitialState()
@@ -98,18 +102,20 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
     
     private func showMoreActionsMenu() {
-        let items = [TextConstants.photoEditSaveAsCopy, TextConstants.photoEditResetToOriginal]
-        let controller = SelectionMenuController.with(style: .simple, items: items, selectedIndex: nil) { [weak self] index in
-            guard let self = self else {
+        let controller = SelectionMenuController.photoEditMenu { [weak self] selectedOption in
+            guard let self = self, let selectedOption = selectedOption else {
                 return
             }
-            switch index {
-            case 0:
+            
+            switch selectedOption {
+            case .saveAsCopy:
                 self.saveAsCopy()
-            case 1:
+                
+            case .resetToOriginal:
                 self.resetToOriginal()
                 self.analytics.trackClickEvent(.resetToOriginal)
             default:
+                //cancelled
                 break
             }
         }
@@ -124,9 +130,6 @@ final class PhotoEditViewController: ViewController, NibInit {
                 return
             }
             self.finishedEditing?(self, .savedAs(image: self.sourceImage))
-            
-            //TODO: need track after finish save
-            self.trackChanges(saveAsCopy: true)
         }
         present(popup, animated: true)
     }
@@ -139,9 +142,6 @@ final class PhotoEditViewController: ViewController, NibInit {
                 return
             }
             self.finishedEditing?(self, .saved(image: self.sourceImage))
-            
-            //TODO: need track after finish save
-            self.trackChanges(saveAsCopy: false)
         }
         present(popup, animated: true)
     }

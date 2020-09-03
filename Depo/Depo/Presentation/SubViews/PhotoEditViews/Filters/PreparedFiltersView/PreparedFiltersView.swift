@@ -124,11 +124,11 @@ final class PreparedFiltersView: UIView, NibInit {
     
     private func setupCollectionView() {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: 64, height: 94)
-            layout.minimumInteritemSpacing = 16
-            layout.minimumLineSpacing = 16
+            layout.itemSize = CGSize(width: 64, height: 88)
+            layout.minimumLineSpacing = Device.isIpad ? 20 : 16
         }
-        collectionView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 8, right: 16)
+        collectionView.heightAnchor.constraint(equalToConstant: Device.isIpad ? 128 : 110).activate()
+        collectionView.contentInset = Device.isIpad ? UIEdgeInsets(topBottom: 20, rightLeft: 20) : UIEdgeInsets(top: 16, left: 16, bottom: 8, right: 16)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
