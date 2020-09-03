@@ -271,6 +271,9 @@ enum AnalyticsAppScreens {
     case mobilePaymentExplanation
     case eulaExplanation
     
+    case photoEditFilters
+    case photoEditAdjustments
+    
     var name: String {
         switch self {
         ///authorization
@@ -491,6 +494,10 @@ enum AnalyticsAppScreens {
             return "Mobile Payment Explanation"
         case .eulaExplanation:
             return "Eula Explanation"
+        case .photoEditFilters:
+            return "Filter Main Screen"
+        case .photoEditAdjustments:
+            return "Adjust Main Screen"
         }
     }
 }
@@ -603,7 +610,25 @@ enum GAEventCategory {
     case emailVerification
     case securityQuestion
     case campaign
+    case photoEdit(PhotoEditCategory)
 
+    enum PhotoEditCategory {
+        case main
+        case filters
+        case adjustments
+        
+        var text: String {
+            switch self {
+            case .main:
+                return "Photo Edit Analytics"
+            case .filters:
+                return "Filter Analytics"
+            case .adjustments:
+                return "Adjust Analytics"
+            }
+        }
+    }
+    
     var text: String {
         switch self {
         case .enhancedEcommerce:
@@ -624,6 +649,8 @@ enum GAEventCategory {
             return "Security Question"
         case .campaign:
             return "Campaign"
+        case .photoEdit(let category):
+            return category.text
         }
     }
 }
@@ -722,6 +749,9 @@ enum GAEventAction {
     
     case fileOperation(GAOperationType)
     case fileOperationPopup(GAOperationType)
+    case discardChanges
+    case save
+    case saveAsCopy
 
     var text: String {
         switch self {
@@ -892,6 +922,12 @@ enum GAEventAction {
             return "Open Mobile Payment Permission"
         case .deleteContactBackups:
             return "Delete Backup"
+        case .discardChanges:
+            return "Discart Changes"
+        case .save:
+            return "Save"
+        case .saveAsCopy:
+            return "Save as copy"
         }
     }
 }
@@ -1157,6 +1193,59 @@ enum GAEventLabel {
         
     }
     
+    enum PhotoEditEvent {
+        case save
+        case saveAsCopy
+        case resetToOriginal
+        case cancel
+        case keepEditing
+        case discard
+        case saveFilter(String)
+        case saveAdjustment(PhotoEditAdjustmentType)
+        
+        var text: String {
+            switch self {
+            case .save:
+                return "Save"
+            case .saveAsCopy:
+                return "Save as copy"
+            case .resetToOriginal:
+                return "Reset to original"
+            case .cancel, .discard:
+                return "Cancel"
+            case .keepEditing:
+                return "Keep editing"
+            case .saveFilter(let filterName):
+                return filterName
+            case .saveAdjustment(let type):
+                return type.text
+            }
+        }
+    }
+    
+    enum PhotoEditAdjustmentType {
+        case adjust
+        case light
+        case color
+        case hsl
+        case effect
+        
+        var text: String {
+            switch self {
+            case .adjust:
+                return "Adjust"
+            case .light:
+                return "Light"
+            case .color:
+                return "Color"
+            case .hsl:
+                return "Color-HSL"
+            case .effect:
+                return "Effect"
+            }
+        }
+    }
+    
     case empty
     case custom(String)
     
@@ -1255,6 +1344,7 @@ enum GAEventLabel {
     case dropbox
     case instagram
     case facebook
+    case photoEdit(PhotoEditEvent)
     
     var text: String {
         switch self {
@@ -1470,6 +1560,8 @@ enum GAEventLabel {
             return "Instagram"
         case .facebook:
             return "Facebook"
+        case .photoEdit(let event):
+            return event.text
         }
     }
     
@@ -1524,6 +1616,7 @@ enum GADementionsFields {
     case connectionStatus
     case statusType
     case usagePercentage
+    case photoEditFilterType
     
     var text: String {
         switch self {
@@ -1583,6 +1676,8 @@ enum GADementionsFields {
             return "statusType"
         case .usagePercentage:
             return "quotaStatus"
+        case .photoEditFilterType:
+            return "filterType"
         }
     }
     
