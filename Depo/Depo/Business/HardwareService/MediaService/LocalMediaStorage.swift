@@ -579,10 +579,11 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     @discardableResult
     func replaceInGallery(asset: PHAsset, imageData: Data, adjustmentInfo: String, handler: @escaping ResponseHandler<Void>) -> PHContentEditingInputRequestID? {
-        debugLog("LocalMediaStorage saveToGallery")
+        debugLog("LocalMediaStorage replaceInGallery")
 
         guard photoLibraryIsAvailible() else {
             handler(.failed(ErrorResponse.string("Photo library is unavailable")))
+            debugLog("PHOTOEDIT: Photo library is unavailable")
             return nil
         }
         
@@ -590,6 +591,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             guard let input = input else {
                 handler(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
                 assertionFailure("Can't create input")
+                debugLog("PHOTOEDIT: Can't create input")
                 return
             }
             
@@ -600,6 +602,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             do {
                 try imageData.write(to: output.renderedContentURL, options: .atomicWrite)
             } catch {
+                debugLog("PHOTOEDIT: Can't write image data to the renderedContentURL")
                 handler(.failed(ErrorResponse.string("Can't write image data to the renderedContentURL")))
             }
             
@@ -612,12 +615,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             }, completionHandler: { [weak self] success, error in
                 self?.passcodeStorage.systemCallOnScreen = false
                 
-                if let error = error  {
+                if let error = error {
+                    debugLog("PHOTOEDIT: performChanges error: \(error.description)")
                     handler(.failed(error))
                     return
                 }
                 
                 guard success else {
+                    debugLog("PHOTOEDIT: performChanges success == false")
                     handler(.failed(ErrorResponse.string(TextConstants.errorUnknown)))
                     return
                 }
