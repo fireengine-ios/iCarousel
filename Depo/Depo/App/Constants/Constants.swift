@@ -1996,4 +1996,7 @@ struct TextConstants {
     static let photoEditAdjustmentSharpness = NSLocalizedString("photo_edit_adjustment_sharpness", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photoEditAdjustmentBlur = NSLocalizedString("photo_edit_adjustment_blur", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photoEditAdjustmentVignette = NSLocalizedString("photo_edit_adjustment_vignette", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoEditRatioFree = NSLocalizedString("photo_edit_ratio_free", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditRatioOriginal = NSLocalizedString("photo_edit_ratio_original", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

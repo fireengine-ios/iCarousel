@@ -17,7 +17,14 @@ protocol PhotoEditViewUIManagerDelegate: class {
 final class PhotoEditViewUIManager: NSObject {
     
     @IBOutlet private weak var navBarContainer: UIView!
-    @IBOutlet private weak var imageScrollView: ImageScrollView! 
+    
+    @IBOutlet private weak var contentView: UIView! {
+        willSet {
+            newValue.backgroundColor = ColorConstants.photoEditBackgroundColor
+        }
+    }
+    
+    @IBOutlet private var imageScrollView: ImageScrollView!
     
     @IBOutlet private weak var filtersScrollView: UIScrollView! {
         willSet {
@@ -83,6 +90,7 @@ final class PhotoEditViewUIManager: NSObject {
     
     func showInitialState() {
         showTabBarItemView(tabbar.selectedType)
+        animator.showTransition(to: imageScrollView, on: contentView, animated: true)
         animator.showTransition(to: navBarView, on: navBarContainer, animated: true)
         animator.showTransition(to: tabbar, on: bottomBarContainer, animated: true)
     }
@@ -130,7 +138,16 @@ extension PhotoEditViewUIManager: AdjustmentCategoriesViewDelegate {
     
     func showView(type: PhotoEditViewType, view: UIView, changesBar: PhotoEditChangesBar) {
         currentPhotoEditViewType = type
-        animator.showTransition(to: view, on: filtersContainerView, animated: true)
+        
+        if case PhotoEditViewType.adjustmentView(let viewType) = type, viewType == .adjust {
+            animator.showTransition(to: view, on: contentView, animated: true)
+            let emptyView = UIView(frame: .zero)
+            emptyView.heightAnchor.constraint(equalToConstant: 0).activate()
+            animator.showTransition(to: emptyView, on: filtersContainerView, animated: true)
+        } else {
+            animator.showTransition(to: view, on: filtersContainerView, animated: true)
+        }
+
         animator.showTransition(to: changesBar, on: bottomBarContainer, animated: true)
         navBarView.state = .empty
     }

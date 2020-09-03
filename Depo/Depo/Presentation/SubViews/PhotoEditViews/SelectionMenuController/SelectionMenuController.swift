@@ -108,6 +108,10 @@ final class SelectionMenuController: UIViewController, NibInit {
         tableView.backgroundColor = ColorConstants.photoEditBackgroundColor
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = tableView.contentSize.height > tableView.frame.height
+        
+        if let row = selectedIndex {
+            tableView.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .none)
+        }
     }
     
     @objc private func onViewTap() {
@@ -145,21 +149,6 @@ extension SelectionMenuController: UITableViewDataSource {
 
 extension SelectionMenuController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if style == .simple {
-            close(with: indexPath.row)
-        } else {
-            if let selectedIndex = selectedIndex, let cell = tableView.cellForRow(at: IndexPath(row: selectedIndex, section: 0)) as? SelectionMenuCell {
-                cell.setSeleted(false)
-            }
-            
-            selectedIndex = indexPath.row
-            
-            if let cell = tableView.cellForRow(at: indexPath) as? SelectionMenuCell {
-                cell.setSeleted(true)
-            }
-            
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
+        close(with: indexPath.row)
     }
 }
