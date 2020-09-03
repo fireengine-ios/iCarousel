@@ -610,8 +610,25 @@ enum GAEventCategory {
     case emailVerification
     case securityQuestion
     case campaign
-    case photoEdit
+    case photoEdit(PhotoEditCategory)
 
+    enum PhotoEditCategory {
+        case main
+        case filters
+        case adjustments
+        
+        var text: String {
+            switch self {
+            case .main:
+                return "Photo Edit Analytics"
+            case .filters:
+                return "Filter Analytics"
+            case .adjustments:
+                return "Adjust Analytics"
+            }
+        }
+    }
+    
     var text: String {
         switch self {
         case .enhancedEcommerce:
@@ -632,8 +649,8 @@ enum GAEventCategory {
             return "Security Question"
         case .campaign:
             return "Campaign"
-        case .photoEdit:
-            return "Photo Edit Analytics"
+        case .photoEdit(let category):
+            return category.text
         }
     }
 }

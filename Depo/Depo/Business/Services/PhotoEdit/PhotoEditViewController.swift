@@ -442,7 +442,7 @@ private class PhotoEditAnalytics {
     private let analyticsService: AnalyticsService = factory.resolve()
     
     func trackClickEvent(_ event: GAEventLabel.PhotoEditEvent) {
-        analyticsService.trackPhotoEditEvent(eventAction: .click, eventLabel: .photoEdit(event))
+        analyticsService.trackPhotoEditEvent(category: .main, eventAction: .click, eventLabel: .photoEdit(event))
     }
     
     func trackScreen(_ screen: AnalyticsAppScreens) {
@@ -451,7 +451,7 @@ private class PhotoEditAnalytics {
     }
     
     func trackFilter(_ type: FilterType, action: GAEventAction) {
-        analyticsService.trackPhotoEditEvent(eventAction: action, eventLabel: .photoEdit(.saveFilter(type.title)))
+        analyticsService.trackPhotoEditEvent(category: .filters, eventAction: action, eventLabel: .photoEdit(.saveFilter(type.title)))
     }
     
     func trackAdjustments(_ parameters: [AdjustmentParameterType], action: GAEventAction) {
@@ -461,7 +461,8 @@ private class PhotoEditAnalytics {
         
         parameters.forEach { parameterType in
             if let adjustment = adjustmentType(for: parameterType) {
-                analyticsService.trackPhotoEditEvent(eventAction: action,
+                analyticsService.trackPhotoEditEvent(category: .adjustments,
+                                                     eventAction: action,
                                                      eventLabel: .photoEdit(.saveAdjustment(adjustment)),
                                                      filterType: parameterType.title)
             }
@@ -497,7 +498,8 @@ private class PhotoEditAnalytics {
         }
         
         changedParameters.forEach { parameter in
-            analyticsService.trackPhotoEditEvent(eventAction: action,
+            analyticsService.trackPhotoEditEvent(category: .adjustments,
+                                                 eventAction: action,
                                                  eventLabel: .photoEdit(.saveAdjustment(.adjust)),
                                                  filterType: parameter)
         }
