@@ -96,18 +96,21 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
     
     private func showMoreActionsMenu() {
-        let items = [TextConstants.photoEditSaveAsCopy, TextConstants.photoEditResetToOriginal]
-        let controller = SelectionMenuController.with(style: .simple, items: items, selectedIndex: nil) { [weak self] index in
-            guard let self = self else {
+        let controller = SelectionMenuController.photoEditMenu { [weak self] selectedOption in
+            guard let self = self, let selectedOption = selectedOption else {
                 return
             }
-            switch index {
-            case 0:
-                self.saveAsCopy()
-            case 1:
-                self.resetToOriginal()
-            default:
-                break
+            
+            switch selectedOption {
+                case .saveAsCopy:
+                    self.saveAsCopy()
+                
+                case .resetToOriginal:
+                    self.resetToOriginal()
+                
+                default:
+                    //cancelled
+                    break
             }
         }
         present(controller, animated: false)

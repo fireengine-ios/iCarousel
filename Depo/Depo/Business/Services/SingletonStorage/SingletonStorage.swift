@@ -67,7 +67,7 @@ class SingletonStorage {
                     
                     self?.resumableUploadInfoService.updateInfo {
                         ///remove user photo from cache on start application
-                        ImageDownloder().removeImageFromCache(url: resp.urlForPhoto, completion: {
+                        ImageDownloder.removeImageFromCache(url: resp.urlForPhoto, completion: {
                             DispatchQueue.toMain {
                                 success(resp)
                             }

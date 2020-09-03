@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -38,13 +38,17 @@
                 <constraint firstAttribute="bottom" secondItem="dMS-kK-eWA" secondAttribute="bottom" constant="10" id="6YA-gH-jch"/>
                 <constraint firstItem="dMS-kK-eWA" firstAttribute="top" secondItem="mpr-F4-0ZU" secondAttribute="top" constant="16" id="9R0-kX-7RI"/>
                 <constraint firstItem="dMS-kK-eWA" firstAttribute="leading" secondItem="mpr-F4-0ZU" secondAttribute="leading" id="JaU-BD-sER"/>
-                <constraint firstItem="dMS-kK-eWA" firstAttribute="trailing" secondItem="mpr-F4-0ZU" secondAttribute="trailing" id="mmA-8d-UOR"/>
+                <constraint firstAttribute="trailing" secondItem="dMS-kK-eWA" secondAttribute="trailing" id="mmA-8d-UOR"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="p2g-7K-P5r"/>
             <connections>
+                <outlet property="bottomConstraint" destination="6YA-gH-jch" id="fPt-zi-bV1"/>
                 <outlet property="colorAssets" destination="KLr-8g-F78" id="AVq-O9-QJu"/>
                 <outlet property="contentView" destination="dMS-kK-eWA" id="Rz4-Vs-3Ct"/>
+                <outlet property="leadingConstaint" destination="JaU-BD-sER" id="otR-sk-Spi"/>
+                <outlet property="topConstraint" destination="9R0-kX-7RI" id="MSd-ow-vo3"/>
+                <outlet property="trailingConstaint" destination="mmA-8d-UOR" id="VWn-ir-75B"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="66.964285714285708"/>
         </view>

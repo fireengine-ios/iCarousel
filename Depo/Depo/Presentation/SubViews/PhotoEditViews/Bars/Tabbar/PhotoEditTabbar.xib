@@ -16,9 +16,6 @@
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hSc-Fo-CEU">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="44" id="ixU-kw-0H1"/>
-                    </constraints>
                 </stackView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
