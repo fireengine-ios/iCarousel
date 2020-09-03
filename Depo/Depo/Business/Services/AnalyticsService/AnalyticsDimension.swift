@@ -44,6 +44,8 @@ struct AnalyticsDimension {
     
     let usagePercentage: Int?
     
+    let photoEditFilterType: String?
+    
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
         userPackagesNames.forEach {
@@ -113,6 +115,9 @@ struct AnalyticsDimension {
         }
         if let usagePercentage = usagePercentage {
             dimesionDictionary[GADementionsFields.usagePercentage.text] = usagePercentage
+        }
+        if let photoEditFilterType = photoEditFilterType {
+            dimesionDictionary[GADementionsFields.photoEditFilterType.text] = photoEditFilterType
         }
         return dimesionDictionary
     }

@@ -25,8 +25,12 @@ final class PhotoEditViewController: ViewController, NibInit {
             newValue.navBarView.delegate = self
         }
     }
+    
+    private let analytics = PhotoEditAnalytics()
+    
     private lazy var filterView = self.prepareFilterView()
     private var cropController: CropViewController?
+    private var transformation: Transformation?
     
     private lazy var adjustmentManager: AdjustmentManager = {
         let types = AdjustmentViewType.allCases.flatMap { $0.adjustmentTypes }
@@ -54,6 +58,8 @@ final class PhotoEditViewController: ViewController, NibInit {
     
     var presentedCallback: VoidHandler?
     var finishedEditing: PhotoEditCompletionHandler?
+    
+    private var applyFilter: FilterType?
     
     static func with(image: UIImage, presented: VoidHandler?, completion: PhotoEditCompletionHandler?) -> PhotoEditViewController {
         let controller = PhotoEditViewController.initFromNib()
@@ -102,6 +108,7 @@ final class PhotoEditViewController: ViewController, NibInit {
                 self.saveAsCopy()
             case 1:
                 self.resetToOriginal()
+                self.analytics.trackClickEvent(.resetToOriginal)
             default:
                 break
             }
@@ -110,21 +117,31 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
     
     private func saveAsCopy() {
+        analytics.trackClickEvent(.saveAsCopy)
+        
         let popup = PhotoEditViewFactory.alert(for: .saveAsCopy) { [weak self] in
             guard let self = self else {
                 return
             }
             self.finishedEditing?(self, .savedAs(image: self.sourceImage))
+            
+            //TODO: need track after finish save
+            self.trackChanges(saveAsCopy: true)
         }
         present(popup, animated: true)
     }
     
     private func saveWithModifyOriginal() {
+        analytics.trackClickEvent(.save)
+        
         let popup = PhotoEditViewFactory.alert(for: .modify) { [weak self] in
             guard let self = self else {
                 return
             }
             self.finishedEditing?(self, .saved(image: self.sourceImage))
+            
+            //TODO: need track after finish save
+            self.trackChanges(saveAsCopy: false)
         }
         present(popup, animated: true)
     }
@@ -135,6 +152,23 @@ final class PhotoEditViewController: ViewController, NibInit {
         tempOriginalImage = originalImage
         setInitialState()
         filterView.resetToOriginal()
+        applyFilter = nil
+        transformation = nil
+    }
+    
+    private func trackChanges(saveAsCopy: Bool) {
+        let action: GAEventAction = saveAsCopy ? .saveAsCopy : .save
+        
+        let parameters = adjustmentManager.adjustments.flatMap { $0.parameters.filter { $0.currentValue != $0.defaultValue } }.map { $0.type }
+        analytics.trackAdjustments(parameters, action: action)
+        
+        if let applyFilter = applyFilter {
+            analytics.trackFilter(applyFilter, action: action)
+        }
+        
+        if let transformation = transformation {
+            analytics.trackAdjustChanges(transformation, action: action)
+        }
     }
 }
 
@@ -238,19 +272,22 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
 
 extension PhotoEditViewController: PhotoEditNavbarDelegate {
     func onClose() {
-        let closeHandler: VoidHandler = { [weak self] in
-            guard let self = self else {
-                return
-            }
-            self.finishedEditing?(self, .canceled)
-        }
+        analytics.trackClickEvent(.cancel)
         
         if !hasChanges {
-            closeHandler()
+            finishedEditing?(self, .canceled)
             return
         }
         
-        let popup = PhotoEditViewFactory.alert(for: .close, rightButtonHandler: closeHandler)
+        let popup = PhotoEditViewFactory.alert(for: .close, leftButtonHandler: { [weak self] in
+            self?.analytics.trackClickEvent(.keepEditing)
+        }, rightButtonHandler: { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.analytics.trackClickEvent(.discard)
+            self.finishedEditing?(self, .canceled)
+        })
         present(popup, animated: true)
     }
     
@@ -274,6 +311,9 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
             let view = AdjustView.with(ratios: ratios, delegate: self)
             var config = Mantis.Config()
             config.showRotationDial = false
+            if let transformation = transformation {
+                config.presetTransformationType = .presetInfo(info: transformation)
+            }
             let controller = Mantis.cropCustomizableViewController(image: self.tempOriginalImage, config: config, cropToolbar: view)
             controller.delegate = self
             
@@ -303,6 +343,13 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     }
     
     func didSwitchTabBarItem(_ item: PhotoEditTabbarItemType) {
+        switch item {
+        case .filters:
+            analytics.trackScreen(.photoEditFilters)
+        case .adjustments:
+            analytics.trackScreen(.photoEditAdjustments)
+        }
+        
         tempOriginalImage = sourceImage
     }
 }
@@ -317,6 +364,7 @@ extension PhotoEditViewController: CropViewControllerDelegate {
     }
     
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
+        self.transformation = transformation
         sourceImage = cropped
         tempOriginalImage = cropped
         uiManager.image = cropped
@@ -332,6 +380,7 @@ extension PhotoEditViewController: PreparedFiltersViewDelegate {
     func didSelectOriginal() {
         sourceImage = originalImage
         setInitialState()
+        applyFilter = nil
     }
     
     func didSelectFilter(_ type: FilterType) {
@@ -358,6 +407,8 @@ extension PhotoEditViewController: PreparedFilterSliderViewDelegate {
     func didChangeFilter(_ filterType: FilterType, newValue: Float) {
         let filteredImage = filterManager.filter(image: tempOriginalImage, type: filterType, intensity: newValue)
         uiManager.image = filteredImage
+        
+        applyFilter = newValue > 0 ? filterType : nil
     }
 }
 
@@ -383,5 +434,72 @@ extension PhotoEditViewController: AdjustViewDelegate {
     
     func didChangeAngle(_ value: Float) {
         cropController?.manualRotate(rotateAngle: CGFloat(value))
+    }
+}
+
+private class PhotoEditAnalytics {
+    
+    private let analyticsService: AnalyticsService = factory.resolve()
+    
+    func trackClickEvent(_ event: GAEventLabel.PhotoEditEvent) {
+        analyticsService.trackPhotoEditEvent(eventAction: .click, eventLabel: .photoEdit(event))
+    }
+    
+    func trackScreen(_ screen: AnalyticsAppScreens) {
+        analyticsService.logScreen(screen: screen)
+        analyticsService.trackDimentionsEveryClickGA(screen: screen)
+    }
+    
+    func trackFilter(_ type: FilterType, action: GAEventAction) {
+        analyticsService.trackPhotoEditEvent(eventAction: action, eventLabel: .photoEdit(.saveFilter(type.title)))
+    }
+    
+    func trackAdjustments(_ parameters: [AdjustmentParameterType], action: GAEventAction) {
+        guard !parameters.isEmpty else {
+            return
+        }
+        
+        parameters.forEach { parameterType in
+            if let adjustment = adjustmentType(for: parameterType) {
+                analyticsService.trackPhotoEditEvent(eventAction: action,
+                                                     eventLabel: .photoEdit(.saveAdjustment(adjustment)),
+                                                     filterType: parameterType.title)
+            }
+        }
+    }
+    
+    private func adjustmentType(for type: AdjustmentParameterType) -> GAEventLabel.PhotoEditAdjustmentType? {
+        switch type {
+        case .brightness, .contrast, .exposure, .highlights, .shadows:
+            return .light
+        case .gamma, .temperature, .tint, .saturation:
+            return .color
+        case .hslHue, .hslLuminosity, .hslSaturation:
+            return .hsl
+        case .sharpness, .blurRadius, .vignetteRatio:
+            return .effect
+        default:
+            return nil
+        }
+    }
+    
+    func trackAdjustChanges(_ transformation: Transformation, action: GAEventAction) {
+        var changedParameters = [String]()
+        if transformation.rotation != 0 {
+            changedParameters.append("Rotate")
+        }
+        if transformation.manualZoomed || transformation.offset != .zero || transformation.scale != 0 {
+            changedParameters.append("Resize")
+        }
+        
+        guard !changedParameters.isEmpty else {
+            return
+        }
+        
+        changedParameters.forEach { parameter in
+            analyticsService.trackPhotoEditEvent(eventAction: action,
+                                                 eventLabel: .photoEdit(.saveAdjustment(.adjust)),
+                                                 filterType: parameter)
+        }
     }
 }
