@@ -202,7 +202,7 @@ final class AdjustmentManager {
     private func applyAdjustments(sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
         operationQueue.cancelAllOperations()
         
-        let relatedAdjustments = self.adjustments.filter { $0.modifed }
+        let relatedAdjustments = self.adjustments.filter { $0.modified }
         
         guard !relatedAdjustments.isEmpty else {
             onFinished(sourceImage)
