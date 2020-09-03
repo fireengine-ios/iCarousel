@@ -24,6 +24,7 @@ final class PhotoEditSaveService {
         checkLibraryAccessStatus { [weak self] isAvaliable in
             guard isAvaliable else {
                 self?.showAccessAlert()
+                debugLog("PHOTOEDIT: PH is not allowed")
                 completion(.failed(ErrorResponse.string(TextConstants.cameraAccessAlertText)))
                 return
             }
@@ -84,6 +85,9 @@ final class PhotoEditSaveService {
     
     
     private func save(imageData: Data, item: WrapData, completion: @escaping ResponseHandler<WrapData>) {
+        
+        debugLog("PHOTOEDIT: save")
+        
         let tmpLocation = prepareTmpDirectoy(name: item.name ?? UUID().uuidString)
         
         let didSaveLocalCompletion = { [weak self] (result: ResponseResult<WrapData>) in
@@ -100,6 +104,7 @@ final class PhotoEditSaveService {
                             guard let updatedRemote = remote else {
                                 completion(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
                                 assertionFailure("Can't find updated remote in the DB")
+                                debugLog("PHOTOEDIT: Can't find updated remote in the DB")
                                 return
                             }
                             //to show updated photo immediately
@@ -109,21 +114,34 @@ final class PhotoEditSaveService {
                         }
                         
                     case .failed(let error):
+                        debugLog("PHOTOEDIT: uploadItem error \(error.description)")
                         completion(.failed(error))
                         return
                     }
                 })
                 
             case .failed(let error):
+                debugLog("PHOTOEDIT: didSaveLocalCompletion error \(error.description)")
                 completion(.failed(error))
                 return
             }
         }
         
         if let asset = item.asset, asset.canPerform(.content) {
+            debugLog("PHOTOEDIT: replace local")
             replaceLocalItem(asset: asset, imageData: imageData, completion: didSaveLocalCompletion)
             
         } else {
+            debugLog("PHOTOEDIT: create local")
+            
+            do {
+                try imageData.write(to: tmpLocation)
+            } catch {
+                debugLog("PHOTOEDIT: Can't write data to the tmp directoy")
+                completion(.failed(ErrorResponse.string("Can't write data to the tmp directoy")))
+                return
+            }
+            
             let type = PHAssetMediaType.image
             createLocalItem(url: tmpLocation, type: type, completion: didSaveLocalCompletion)
         }
@@ -228,12 +246,14 @@ final class PhotoEditSaveService {
                     self?.replaceInDB(assetId: asset.localIdentifier, completion: completion)
                 
                 case .failed(let error):
+                    debugLog("PHOTOEDIT: replaceInGallery error \(error.description)")
                     completion(.failed(ErrorResponse.error(error)))
             }
         }
     }
     
     private func replaceInDB(assetId: String, completion: @escaping ResponseHandler<WrapData>) {
+        debugLog("PHOTOEDIT: replaceInDB")
         guard let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject else {
             completion(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
             assertionFailure("Can't find asset to replace local item in the DB")
@@ -246,6 +266,7 @@ final class PhotoEditSaveService {
         mediaItemService.mediaItems(by: asset.localIdentifier, context: context) { [weak self] mediaItems in
             guard let existedItem = mediaItems.first else {
                 assertionFailure("Can't find local item to replace in the DB")
+                debugLog("PHOTOEDIT: Can't find local item to replace in the DB")
                 completion(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
                 return
             }

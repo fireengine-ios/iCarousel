@@ -244,6 +244,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         controller.showSpinner()
                         
                         guard let data = UIImageJPEGRepresentation(newImage, 1.0) else {
+                            debugLog("PHOTOEDIT: Can't create UIImageJPEGRepresentation")
                             DispatchQueue.main.async {
                                 controller.hideSpinner()
                                 UIApplication.showErrorAlert(message: TextConstants.photoEditSaveImageErrorMessage)
@@ -274,12 +275,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         controller.showSpinner()
                         
                         guard let data = UIImageJPEGRepresentation(newImage, 1.0) else {
-                                DispatchQueue.main.async {
-                                    controller.hideSpinner()
-                                    UIApplication.showErrorAlert(message: TextConstants.photoEditSaveImageErrorMessage)
-                                }
-                                return
+                            debugLog("PHOTOEDIT: Can't create UIImageJPEGRepresentation")
+                            DispatchQueue.main.async {
+                                controller.hideSpinner()
+                                UIApplication.showErrorAlert(message: TextConstants.photoEditSaveImageErrorMessage)
                             }
+                            return
+                        }
                         
                         PhotoEditSaveService.shared.save(asCopy: false, imageData: data, item: item) { [weak self] result in
                             switch result {
