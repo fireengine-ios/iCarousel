@@ -253,10 +253,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         
                         PhotoEditSaveService.shared.save(asCopy: true, imageData: data, item: item) { [weak self] result in
                             switch result {
-                                case .success(_):
+                                case .success(let remote):
                                     DispatchQueue.main.async {
-                                        controller.dismiss(animated: true)
-                                        SnackbarManager.shared.show(type: .action, message: TextConstants.photoEditSaveAsCopySnackbarMessage)
+                                        controller.dismiss(animated: false) {
+                                            self?.showPhotoVideoPreview(item: remote) {
+                                                SnackbarManager.shared.show(type: .action, message: TextConstants.photoEditSaveAsCopySnackbarMessage)
+                                            }
+                                        }
                                 }
                                 
                                 case .failed(_):
@@ -309,6 +312,17 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }
             self.router.presentViewController(controller: vc)
         }
+    }
+    
+    private func showPhotoVideoPreview(item: WrapData, completion: @escaping VoidHandler) {
+        let detailModule = router.filesDetailModule(fileObject: item,
+                                                    items: [item],
+                                                    status: item.status,
+                                                    canLoadMoreItems: false,
+                                                    moduleOutput: nil)
+        
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        router.presentViewController(controller: nController, animated: true, completion: completion)
     }
 
         
