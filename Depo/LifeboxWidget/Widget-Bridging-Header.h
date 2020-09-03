@@ -11,3 +11,5 @@
 //#endif /* Widget_Bridging_Header_h */
 
 #import "ContactSyncSDK.h"
+#import "SyncSettings.h"
+#import "SyncStatus.h"

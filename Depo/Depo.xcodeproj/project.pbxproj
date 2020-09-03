@@ -5793,6 +5793,28 @@
 		B5315098246D868E00E94355 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5315095246D868D00E94355 /* GoogleService-Info-debug.plist */; };
 		B5358C6A25011B450005FCAD /* WidgetTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6925011B440005FCAD /* WidgetTokenService.swift */; };
 		B5358C6C25011DE10005FCAD /* WidgetPresentationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */; };
+		B5358C712501415C0005FCAD /* AbstractHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0624FE6DAA00515757 /* AbstractHelper.m */; };
+		B5358C75250141600005FCAD /* RestoreHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0724FE6DAA00515757 /* RestoreHelper.m */; };
+		B5358C76250141630005FCAD /* BackupHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0924FE6DAA00515757 /* BackupHelper.m */; };
+		B5358C77250141670005FCAD /* AnalyzeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEC24FE6DAA00515757 /* AnalyzeStatus.m */; };
+		B5358C782501416B0005FCAD /* BackupStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEB24FE6DAA00515757 /* BackupStats.m */; };
+		B5358C792501416F0005FCAD /* CNContactUnified.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0224FE6DAA00515757 /* CNContactUnified.m */; };
+		B5358C7A250141740005FCAD /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BE624FE6DAA00515757 /* Contact.m */; };
+		B5358C7B250141770005FCAD /* ContactAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BED24FE6DAA00515757 /* ContactAddress.m */; };
+		B5358C7C2501417B0005FCAD /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0F24FE6DAA00515757 /* ContactDevice.m */; };
+		B5358C7D2501417F0005FCAD /* ContactSyncSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF424FE6DAA00515757 /* ContactSyncSDK.m */; };
+		B5358C7E250141830005FCAD /* ContactUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0024FE6DAA00515757 /* ContactUtil.m */; };
+		B5358C7F250141870005FCAD /* DepoAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF024FE6DAA00515757 /* DepoAdapter.m */; };
+		B5358C802501418A0005FCAD /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BFA24FE6DAA00515757 /* GZIP.m */; };
+		B5358C812501418D0005FCAD /* PartialInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C1124FE6DAA00515757 /* PartialInfo.m */; };
+		B5358C82250141910005FCAD /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C1024FE6DAA00515757 /* SyncAdapter.m */; };
+		B5358C83250141950005FCAD /* SyncDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEF24FE6DAA00515757 /* SyncDB.m */; };
+		B5358C84250141990005FCAD /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0C24FE6DAA00515757 /* SyncDBUtils.m */; };
+		B5358C852501419E0005FCAD /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0124FE6DAA00515757 /* SyncLogger.m */; };
+		B5358C86250141A10005FCAD /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEE24FE6DAA00515757 /* SyncRecord.m */; };
+		B5358C87250141A50005FCAD /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0A24FE6DAA00515757 /* SyncSettings.m */; };
+		B5358C88250141A80005FCAD /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF224FE6DAA00515757 /* SyncStatus.m */; };
+		B5358C89250141AB0005FCAD /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF924FE6DAA00515757 /* Utils.m */; };
 		B5390D82216605F600A02002 /* CellImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D81216605F600A02002 /* CellImageManager.swift */; };
 		B5390D83216605F600A02002 /* CellImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D81216605F600A02002 /* CellImageManager.swift */; };
 		B53DCDC220E3A75400400DBA /* WKWebView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */; };
@@ -5874,27 +5896,27 @@
 		B558279624FE91600039DD11 /* ObjectRequestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278F24FE91600039DD11 /* ObjectRequestResponse.swift */; };
 		B558279724FE97030039DD11 /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
 		B558279824FE97530039DD11 /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
-		B558279924FE97AD0039DD11 /* AbstractHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032D72403FFC000F1D415 /* AbstractHelper.m */; };
-		B558279A24FE97B10039DD11 /* RestoreHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032D82403FFC000F1D415 /* RestoreHelper.m */; };
-		B558279B24FE97B40039DD11 /* BackupHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032DA2403FFC000F1D415 /* BackupHelper.m */; };
-		B558279C24FE97B80039DD11 /* AnalyzeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032BE2403FFC000F1D415 /* AnalyzeStatus.m */; };
-		B558279D24FE97BB0039DD11 /* BackupStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032BD2403FFC000F1D415 /* BackupStats.m */; };
-		B558279E24FE97C00039DD11 /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032B92403FFC000F1D415 /* Contact.m */; };
-		B558279F24FE97C30039DD11 /* ContactAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032BF2403FFC000F1D415 /* ContactAddress.m */; };
-		B55827A024FE97C60039DD11 /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032E02403FFC000F1D415 /* ContactDevice.m */; };
-		B55827A124FE97C90039DD11 /* ContactSyncSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032C62403FFC000F1D415 /* ContactSyncSDK.m */; };
-		B55827A224FE97D70039DD11 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032CB2403FFC000F1D415 /* Utils.m */; };
-		B55827A324FE97DA0039DD11 /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032C42403FFC000F1D415 /* SyncStatus.m */; };
-		B55827A424FE97DE0039DD11 /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032DB2403FFC000F1D415 /* SyncSettings.m */; };
-		B55827A524FE97E10039DD11 /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032C02403FFC000F1D415 /* SyncRecord.m */; };
-		B55827A624FE97E40039DD11 /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032D32403FFC000F1D415 /* SyncLogger.m */; };
-		B55827A724FE97E70039DD11 /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032DD2403FFC000F1D415 /* SyncDBUtils.m */; };
-		B55827A824FE97EA0039DD11 /* SyncDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032C12403FFC000F1D415 /* SyncDB.m */; };
-		B55827A924FE97ED0039DD11 /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032E12403FFC000F1D415 /* SyncAdapter.m */; };
-		B55827AA24FE97F10039DD11 /* PartialInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032E22403FFC000F1D415 /* PartialInfo.m */; };
-		B55827AB24FE97F40039DD11 /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032CC2403FFC000F1D415 /* GZIP.m */; };
-		B55827AC24FE97F70039DD11 /* DepoAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032C22403FFC000F1D415 /* DepoAdapter.m */; };
-		B55827AD24FE97FA0039DD11 /* ContactUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F032D22403FFC000F1D415 /* ContactUtil.m */; };
+		B558279924FE97AD0039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B558279A24FE97B10039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B558279B24FE97B40039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B558279C24FE97B80039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B558279D24FE97BB0039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B558279E24FE97C00039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B558279F24FE97C30039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B55827A024FE97C60039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B55827A124FE97C90039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B55827A224FE97D70039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B55827A324FE97DA0039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B55827A424FE97DE0039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B55827A524FE97E10039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B55827A624FE97E40039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B55827A724FE97E70039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B55827A824FE97EA0039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B55827A924FE97ED0039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B55827AA24FE97F10039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B55827AB24FE97F40039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B55827AC24FE97F70039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		B55827AD24FE97FA0039DD11 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		B5601AD723506349002E1D1E /* InitializingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5601AD623506348002E1D1E /* InitializingViewController.xib */; };
 		B5601AD823506349002E1D1E /* InitializingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5601AD623506348002E1D1E /* InitializingViewController.xib */; };
 		B5601ADB23506388002E1D1E /* InitializingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5601ADA23506388002E1D1E /* InitializingViewController.swift */; };
@@ -30986,61 +31008,83 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5358C75250141600005FCAD /* RestoreHelper.m in Sources */,
+				B5358C802501418A0005FCAD /* GZIP.m in Sources */,
+				B5358C7E250141830005FCAD /* ContactUtil.m in Sources */,
+				B5358C89250141AB0005FCAD /* Utils.m in Sources */,
+				B5358C87250141A50005FCAD /* SyncSettings.m in Sources */,
 				B546EE1324FC2A4E00C1713C /* RouteRequests.swift in Sources */,
 				B58936EC24FA906300E3FA9C /* PasscodeStorage.swift in Sources */,
 				B558276C24FE25610039DD11 /* WidgetEntries.swift in Sources */,
 				B5358C6C25011DE10005FCAD /* WidgetPresentationService.swift in Sources */,
 				B5B5E5BC24FBE38200146750 /* CellsConstant.swift in Sources */,
 				B546EE2124FD169C00C1713C /* Dictionary.swift in Sources */,
-				B55827A524FE97E10039DD11 /* SyncRecord.m in Sources */,
+				B55827A524FE97E10039DD11 /* (null) in Sources */,
 				B58936EE24FA90AF00E3FA9C /* NumericConstants.swift in Sources */,
 				B546EDA524FC19C300C1713C /* Error+Network.swift in Sources */,
 				B546EE2424FD1C1B00C1713C /* ResponseResult.swift in Sources */,
-				B55827A324FE97DA0039DD11 /* SyncStatus.m in Sources */,
+				B55827A324FE97DA0039DD11 /* (null) in Sources */,
 				B558278D24FE90C40039DD11 /* WidgetServerServcie.swift in Sources */,
 				B58936F824FA932A00E3FA9C /* SessionServiceExtension.swift in Sources */,
-				B55827A724FE97E70039DD11 /* SyncDBUtils.m in Sources */,
+				B55827A724FE97E70039DD11 /* (null) in Sources */,
 				B546EE2524FD1C5D00C1713C /* DispatchQueue+Main.swift in Sources */,
-				B55827A424FE97DE0039DD11 /* SyncSettings.m in Sources */,
-				B558279B24FE97B40039DD11 /* BackupHelper.m in Sources */,
-				B55827AC24FE97F70039DD11 /* DepoAdapter.m in Sources */,
-				B558279924FE97AD0039DD11 /* AbstractHelper.m in Sources */,
-				B558279F24FE97C30039DD11 /* ContactAddress.m in Sources */,
+				B55827A424FE97DE0039DD11 /* (null) in Sources */,
+				B558279B24FE97B40039DD11 /* (null) in Sources */,
+				B55827AC24FE97F70039DD11 /* (null) in Sources */,
+				B558279924FE97AD0039DD11 /* (null) in Sources */,
+				B5358C88250141A80005FCAD /* SyncStatus.m in Sources */,
+				B5358C83250141950005FCAD /* SyncDB.m in Sources */,
+				B5358C7F250141870005FCAD /* DepoAdapter.m in Sources */,
+				B558279F24FE97C30039DD11 /* (null) in Sources */,
 				B546EE1224FC27BE00C1713C /* RequestsKey.swift in Sources */,
 				B58936F324FA924B00E3FA9C /* BiometricsManager.swift in Sources */,
 				B58936E524FA8D9700E3FA9C /* TokenStorage.swift in Sources */,
-				B55827A924FE97ED0039DD11 /* SyncAdapter.m in Sources */,
-				B55827AD24FE97FA0039DD11 /* ContactUtil.m in Sources */,
+				B55827A924FE97ED0039DD11 /* (null) in Sources */,
+				B5358C86250141A10005FCAD /* SyncRecord.m in Sources */,
+				B5358C7A250141740005FCAD /* Contact.m in Sources */,
+				B55827AD24FE97FA0039DD11 /* (null) in Sources */,
+				B5358C76250141630005FCAD /* BackupHelper.m in Sources */,
 				B546EE2024FCFB3800C1713C /* Alamofire+Validate.swift in Sources */,
 				B58936ED24FA908F00E3FA9C /* Constants.swift in Sources */,
-				B55827A624FE97E40039DD11 /* SyncLogger.m in Sources */,
+				B55827A624FE97E40039DD11 /* (null) in Sources */,
 				B546EE1424FC2AD600C1713C /* URL+Path.swift in Sources */,
+				B5358C82250141910005FCAD /* SyncAdapter.m in Sources */,
 				B58936F724FA931E00E3FA9C /* DeviceExtension.swift in Sources */,
 				B558276F24FE259B0039DD11 /* WidgetProvider.swift in Sources */,
 				B58BF2DB24FB971A00CBE2A7 /* KeychainSwift+Optional.swift in Sources */,
 				B558278224FE67B50039DD11 /* PushNotificationServiceConstants.swift in Sources */,
 				B58936FC24FAA16100E3FA9C /* LifeboxWidget.swift in Sources */,
-				B558279C24FE97B80039DD11 /* AnalyzeStatus.m in Sources */,
+				B558279C24FE97B80039DD11 /* (null) in Sources */,
 				B5358C6A25011B450005FCAD /* WidgetTokenService.swift in Sources */,
-				B55827A124FE97C90039DD11 /* ContactSyncSDK.m in Sources */,
-				B558279E24FE97C00039DD11 /* Contact.m in Sources */,
+				B55827A124FE97C90039DD11 /* (null) in Sources */,
+				B5358C84250141990005FCAD /* SyncDBUtils.m in Sources */,
+				B5358C852501419E0005FCAD /* SyncLogger.m in Sources */,
+				B558279E24FE97C00039DD11 /* (null) in Sources */,
 				B58936F024FA90E700E3FA9C /* String+Subscript.swift in Sources */,
-				B55827AA24FE97F10039DD11 /* PartialInfo.m in Sources */,
-				B55827A224FE97D70039DD11 /* Utils.m in Sources */,
-				B55827A024FE97C60039DD11 /* ContactDevice.m in Sources */,
+				B55827AA24FE97F10039DD11 /* (null) in Sources */,
+				B5358C77250141670005FCAD /* AnalyzeStatus.m in Sources */,
+				B55827A224FE97D70039DD11 /* (null) in Sources */,
+				B55827A024FE97C60039DD11 /* (null) in Sources */,
+				B5358C7D2501417F0005FCAD /* ContactSyncSDK.m in Sources */,
 				B58936EB24FA905F00E3FA9C /* SharedConstants.swift in Sources */,
 				B58BF2D924FB95B700CBE2A7 /* TokenKeychainStorage.swift in Sources */,
+				B5358C712501415C0005FCAD /* AbstractHelper.m in Sources */,
+				B5358C782501416B0005FCAD /* BackupStats.m in Sources */,
 				B58936EF24FA90C500E3FA9C /* Device.swift in Sources */,
-				B558279D24FE97BB0039DD11 /* BackupStats.m in Sources */,
-				B558279A24FE97B10039DD11 /* RestoreHelper.m in Sources */,
+				B558279D24FE97BB0039DD11 /* (null) in Sources */,
+				B558279A24FE97B10039DD11 /* (null) in Sources */,
 				B5B5E5BD24FBE38200146750 /* DispatchQueueLabels.swift in Sources */,
 				B558279724FE97030039DD11 /* AuthorityType.swift in Sources */,
 				B558277224FE25CE0039DD11 /* WidgetView.swift in Sources */,
 				B558279824FE97530039DD11 /* Mapping.swift in Sources */,
-				B55827A824FE97EA0039DD11 /* SyncDB.m in Sources */,
-				B55827AB24FE97F40039DD11 /* GZIP.m in Sources */,
+				B55827A824FE97EA0039DD11 /* (null) in Sources */,
+				B55827AB24FE97F40039DD11 /* (null) in Sources */,
+				B5358C792501416F0005FCAD /* CNContactUnified.m in Sources */,
 				B558278524FE725E0039DD11 /* ButtonStyle.swift in Sources */,
+				B5358C812501418D0005FCAD /* PartialInfo.m in Sources */,
+				B5358C7B250141770005FCAD /* ContactAddress.m in Sources */,
 				B558279624FE91600039DD11 /* ObjectRequestResponse.swift in Sources */,
+				B5358C7C2501417B0005FCAD /* ContactDevice.m in Sources */,
 				B58936F124FA90F500E3FA9C /* Keys.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
