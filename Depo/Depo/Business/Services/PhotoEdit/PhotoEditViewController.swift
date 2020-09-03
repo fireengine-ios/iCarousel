@@ -219,7 +219,6 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
             case .hsl:
                 needShowAdjustmentView(for: .color)
                 uiManager.image = sourceImage
-                uiManager.navBarView.state = hasChanges ? .edit : .initial
                 
                 if let color = tempHSLValue {
                     adjustmentManager.updateHSLValue(color)
@@ -255,7 +254,6 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
                 cropController?.crop()
             case .hsl:
                 needShowAdjustmentView(for: .color)
-                uiManager.navBarView.state = .edit
             default:
                 setInitialState()
             }

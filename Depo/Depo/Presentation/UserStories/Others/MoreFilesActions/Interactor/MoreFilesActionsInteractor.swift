@@ -244,6 +244,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         controller.showSpinner()
                         
                         guard let data = UIImageJPEGRepresentation(newImage, 1.0) else {
+                            debugLog("PHOTOEDIT: Can't create UIImageJPEGRepresentation")
                             DispatchQueue.main.async {
                                 controller.hideSpinner()
                                 SnackbarManager.shared.show(type: .critical, message: TextConstants.photoEditModifySnackbarMessage, action: .ok, axis: .horizontal)
@@ -275,12 +276,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         controller.showSpinner()
                         
                         guard let data = UIImageJPEGRepresentation(newImage, 1.0) else {
-                                DispatchQueue.main.async {
-                                    controller.hideSpinner()
-                                    SnackbarManager.shared.show(type: .critical, message: TextConstants.photoEditModifySnackbarMessage, action: .ok, axis: .horizontal)
-                                }
-                                return
+                            debugLog("PHOTOEDIT: Can't create UIImageJPEGRepresentation")
+                            DispatchQueue.main.async {
+                                controller.hideSpinner()
+                                SnackbarManager.shared.show(type: .critical, message: TextConstants.photoEditModifySnackbarMessage, action: .ok, axis: .horizontal)
                             }
+                            return
+                        }
                         
                         PhotoEditSaveService.shared.save(asCopy: false, imageData: data, item: item) { [weak self] result in
                             switch result {
