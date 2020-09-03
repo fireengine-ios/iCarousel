@@ -59,8 +59,6 @@ final class PhotoEditViewController: ViewController, NibInit {
     var presentedCallback: VoidHandler?
     var finishedEditing: PhotoEditCompletionHandler?
     
-    private var applyFilter: FilterType?
-    
     static func with(image: UIImage, presented: VoidHandler?, completion: PhotoEditCompletionHandler?) -> PhotoEditViewController {
         let controller = PhotoEditViewController.initFromNib()
         controller.originalImage = image
@@ -152,8 +150,8 @@ final class PhotoEditViewController: ViewController, NibInit {
         tempOriginalImage = originalImage
         setInitialState()
         filterView.resetToOriginal()
-        applyFilter = nil
         transformation = nil
+        filterManager.resetAppliedFilter()
     }
     
     private func trackChanges(saveAsCopy: Bool) {
@@ -162,7 +160,7 @@ final class PhotoEditViewController: ViewController, NibInit {
         let parameters = adjustmentManager.adjustments.flatMap { $0.parameters.filter { $0.currentValue != $0.defaultValue } }.map { $0.type }
         analytics.trackAdjustments(parameters, action: action)
         
-        if let applyFilter = applyFilter {
+        if let applyFilter = filterManager.lastApplied {
             analytics.trackFilter(applyFilter, action: action)
         }
         
@@ -380,7 +378,7 @@ extension PhotoEditViewController: PreparedFiltersViewDelegate {
     func didSelectOriginal() {
         sourceImage = originalImage
         setInitialState()
-        applyFilter = nil
+        filterManager.resetAppliedFilter()
     }
     
     func didSelectFilter(_ type: FilterType) {
@@ -407,8 +405,6 @@ extension PhotoEditViewController: PreparedFilterSliderViewDelegate {
     func didChangeFilter(_ filterType: FilterType, newValue: Float) {
         let filteredImage = filterManager.filter(image: tempOriginalImage, type: filterType, intensity: newValue)
         uiManager.image = filteredImage
-        
-        applyFilter = newValue > 0 ? filterType : nil
     }
 }
 

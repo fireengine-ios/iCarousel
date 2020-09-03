@@ -68,7 +68,7 @@ final class FilterManager {
     
     
     let filters: [CustomFilterProtocol]
-    
+    private(set) var lastApplied: FilterType?
     
     init(types: [FilterType]) {
         filters = types.compactMap { FilterManager.filter(type: $0) }
@@ -107,6 +107,11 @@ final class FilterManager {
         }
         
         filter.parameter.set(value: intensity)
+        lastApplied = intensity > 0 ? type : nil
         return filter.apply(on: mtiImage)?.makeUIImage(scale: source.scale, orientation: source.imageOrientation)
+    }
+    
+    func resetAppliedFilter() {
+        lastApplied = nil
     }
 }
