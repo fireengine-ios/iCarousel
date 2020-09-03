@@ -2,6 +2,8 @@ platform :ios, '11.0'
 use_frameworks!
 inhibit_all_warnings!
 ENV['COCOAPODS_DISABLE_STATS'] = "true"
+ENV['SWIFT_VERSION'] = '5'
+
 
 def shared_pods
   pod 'Alamofire', '~> 4.8.1'
@@ -126,6 +128,10 @@ end
 
 target 'LifeboxFileProviderUI' do
   file_provider_ui_pods
+end
+
+target 'LifeboxWidgetExtension' do
+  shared_pods
 end
 
 #target 'autosync-widget' do

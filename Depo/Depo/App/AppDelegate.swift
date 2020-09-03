@@ -15,6 +15,7 @@ import Adjust
 import Netmera
 import UserNotifications
 import KeychainSwift
+import WidgetKit
 
 // the global reference to logging mechanism to be available in all files
 let log: XCGLogger = {
@@ -234,6 +235,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if tokenStorage.refreshToken != nil {
             SyncServiceManager.shared.update()
         }
+        
+        
         ContactSyncSDK.doPeriodicSync()
     }
     

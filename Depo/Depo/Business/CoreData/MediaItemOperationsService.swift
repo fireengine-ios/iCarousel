@@ -525,7 +525,7 @@ final class MediaItemOperationsService {
                     completion?()
                 })
             //TODO: uncomment for xcode 12
-            case .authorized://, .limited:
+            case .authorized, .limited:
                 self?.processLocalGallery(completion: completion)
             case .restricted, .notDetermined:
                 break

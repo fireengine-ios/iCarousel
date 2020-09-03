@@ -41,7 +41,7 @@ class CameraService {
         
         switch status {
         //TODO: uncomment for xcode 12
-        case .authorized://, .limited:
+        case .authorized, .limited:
             photoLibraryGranted(true, status)
         case .notDetermined, .restricted:
             passcodeStorage.systemCallOnScreen = true

@@ -8,6 +8,7 @@
 
 import UIKit
 import Typist
+import WidgetKit
 
 final class LoginViewController: ViewController {
 
@@ -158,7 +159,7 @@ final class LoginViewController: ViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        WidgetCenter.shared.reloadAllTimelines()
         prepareForDisappear()
     }
     
