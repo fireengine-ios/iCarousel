@@ -227,7 +227,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             guard
                 let self = self,
                 let image = image,
-                let previewImage = image.resizedImage(to: CGSize(width: image.size.width * 0.5, height: image.size.height * 0.5))
+                let previewData = UIImageJPEGRepresentation(image, 0.5),
+                let previewImage = UIImage(data: previewData)
             else {
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .failure))
                 UIApplication.showErrorAlert(message: TextConstants.errorServer)

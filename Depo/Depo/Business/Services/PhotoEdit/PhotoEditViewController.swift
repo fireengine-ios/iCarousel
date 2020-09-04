@@ -128,16 +128,12 @@ final class PhotoEditViewController: ViewController, NibInit {
                 return
             }
             
-            self.adjustmentManager.applyAll(sourceImage: self.originalImage) { [weak self] adjustedImage in
+            self.prepareOriginalImage { [weak self] image in
                 guard let self = self else {
                     return
                 }
                 
-                guard let filteredImage = self.filterManager.applyAll(image: adjustedImage) else {
-                    return
-                }
-                
-                self.finishedEditing?(self, .savedAs(image: filteredImage))
+                self.finishedEditing?(self, .savedAs(image: image))
             }
         }
         present(popup, animated: true)
@@ -151,19 +147,37 @@ final class PhotoEditViewController: ViewController, NibInit {
                 return
             }
             
-            self.adjustmentManager.applyAll(sourceImage: self.originalImage) { [weak self] adjustedImage in
+            self.prepareOriginalImage { [weak self] image in
                 guard let self = self else {
                     return
                 }
                 
-                guard let filteredImage = self.filterManager.applyAll(image: adjustedImage) else {
-                    return
-                }
-                
-                self.finishedEditing?(self, .saved(image: filteredImage))
+                self.finishedEditing?(self, .saved(image: image))
             }
         }
         present(popup, animated: true)
+    }
+    
+    private func prepareOriginalImage(completion: @escaping ValueHandler<UIImage>) {
+        adjustmentManager.applyAll(sourceImage: self.originalImage) { [weak self] adjustedImage in
+            guard let self = self else {
+                return
+            }
+            
+            guard let filteredImage = self.filterManager.applyAll(image: adjustedImage) else {
+                return
+            }
+            
+            var resultImage = filteredImage
+            if
+                let cropInfo = self.cropResult?.cropInfo,
+                let croppedImage = Mantis.getCroppedImage(byCropInfo: cropInfo, andImage: filteredImage)
+            {
+                resultImage = croppedImage
+            }
+            
+            completion(resultImage)
+        }
     }
     
     private func resetToOriginal() {
@@ -172,7 +186,6 @@ final class PhotoEditViewController: ViewController, NibInit {
         tempOriginalImage = originalPreviewImage
         setInitialState()
         filterView.resetToOriginal()
-
         filterManager.resetToOriginal()
         cropResult = nil
     }
