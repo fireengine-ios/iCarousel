@@ -131,7 +131,18 @@ final class PhotoEditViewController: ViewController, NibInit {
             guard let self = self else {
                 return
             }
-            self.finishedEditing?(self, .savedAs(image: self.sourceImage))
+            
+            self.adjustmentManager.applyAll(sourceImage: self.originalImage) { [weak self] adjustedImage in
+                guard let self = self else {
+                    return
+                }
+                
+                guard let filteredImage = self.filterManager.applyAll(image: adjustedImage) else {
+                    return
+                }
+                
+                self.finishedEditing?(self, .savedAs(image: filteredImage))
+            }
         }
         present(popup, animated: true)
     }
@@ -143,7 +154,18 @@ final class PhotoEditViewController: ViewController, NibInit {
             guard let self = self else {
                 return
             }
-            self.finishedEditing?(self, .saved(image: self.sourceImage))
+            
+            self.adjustmentManager.applyAll(sourceImage: self.originalImage) { [weak self] adjustedImage in
+                guard let self = self else {
+                    return
+                }
+                
+                guard let filteredImage = self.filterManager.applyAll(image: adjustedImage) else {
+                    return
+                }
+                
+                self.finishedEditing?(self, .saved(image: filteredImage))
+            }
         }
         present(popup, animated: true)
     }
@@ -155,7 +177,7 @@ final class PhotoEditViewController: ViewController, NibInit {
         setInitialState()
         filterView.resetToOriginal()
         transformation = nil
-        filterManager.resetAppliedFilter()
+        filterManager.resetToOriginal()
     }
     
     private func trackChanges(saveAsCopy: Bool) {
@@ -164,8 +186,8 @@ final class PhotoEditViewController: ViewController, NibInit {
         let parameters = adjustmentManager.adjustments.flatMap { $0.parameters.filter { $0.currentValue != $0.defaultValue } }.map { $0.type }
         analytics.trackAdjustments(parameters, action: action)
         
-        if let applyFilter = filterManager.lastApplied {
-            analytics.trackFilter(applyFilter, action: action)
+        if let appliedFilter = filterManager.lastApplied {
+            analytics.trackFilter(appliedFilter.type, action: action)
         }
         
         if let transformation = transformation {
@@ -346,7 +368,9 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
         switch item {
         case .filters:
             analytics.trackScreen(.photoEditFilters)
+            
         case .adjustments:
+            filterManager.saveHisory()
             analytics.trackScreen(.photoEditAdjustments)
         }
         
@@ -380,7 +404,7 @@ extension PhotoEditViewController: PreparedFiltersViewDelegate {
     func didSelectOriginal() {
         sourceImage = originalPreviewImage
         setInitialState()
-        filterManager.resetAppliedFilter()
+        filterManager.resetToOriginal()
     }
     
     func didSelectFilter(_ type: FilterType) {

@@ -199,6 +199,10 @@ final class AdjustmentManager {
         applyAdjustments(sourceImage: sourceImage, onFinished: onFinished)
     }
     
+    func applyAll(sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
+        self.applyAdjustments(sourceImage: sourceImage, onFinished: onFinished)
+    }
+    
     private func applyAdjustments(sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
         operationQueue.cancelAllOperations()
         

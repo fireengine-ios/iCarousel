@@ -66,9 +66,13 @@ final class FilterManager {
         }
     }
     
+    typealias FilterConfig = (type: FilterType, intensity: Float)
+    
     
     let filters: [CustomFilterProtocol]
-    private(set) var lastApplied: FilterType?
+    private(set) var lastApplied: FilterConfig?
+    private var isOriginal = true
+    private var appliedFilters = [FilterConfig]()
     
     init(types: [FilterType]) {
         filters = types.compactMap { FilterManager.filter(type: $0) }
@@ -96,6 +100,16 @@ final class FilterManager {
         return result
     }
     
+    func applyAll(image: UIImage?) -> UIImage?  {
+        var resultImage = image
+        
+        appliedFilters.forEach { filterConfig in
+            resultImage = self.filter(image: resultImage, type: filterConfig.type, intensity: filterConfig.intensity)
+        }
+        
+        return resultImage
+    }
+    
 
     func filter(image: UIImage?, type: FilterType, intensity: Float) -> UIImage? {
         guard let source = image, let filter = filters.first(where: { $0.type == type }) else {
@@ -107,11 +121,30 @@ final class FilterManager {
         }
         
         filter.parameter.set(value: intensity)
-        lastApplied = intensity > 0 ? type : nil
+        lastApplied = intensity > 0 ? (type, intensity) : nil
+        
+        if isOriginal, lastApplied != nil {
+            isOriginal = false
+        }
+        
         return filter.apply(on: mtiImage)?.makeUIImage(scale: source.scale, orientation: source.imageOrientation)
     }
     
-    func resetAppliedFilter() {
+    func saveHisory() {
+        guard !isOriginal else {
+            appliedFilters.removeAll()
+            return
+        }
+        
+        guard let applied = lastApplied else {
+            return
+        }
+        
+        appliedFilters.append(applied)
+    }
+    
+    func resetToOriginal() {
         lastApplied = nil
+        isOriginal = true
     }
 }
