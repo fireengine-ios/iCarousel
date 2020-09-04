@@ -10022,16 +10022,15 @@
 		CF8B6AF423CBC9D70021B021 /* UsageInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47863EE1F3F18FA00EFDC6D /* UsageInfoViewController.xib */; };
 		CF8B6AFB23CBC9D70021B021 /* PaymentPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AF2230EAAA700CED18C /* PaymentPopUpController.xib */; };
 		CF8B6AFC23CBC9D70021B021 /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
-		CF8B6B0123CBC9D70021B021 /* PhotoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoDetailCell.xib */; };
-		CF8B6AFD23CBC9D70021B021 /* cropy_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC7E2008AD6F003D8E05 /* cropy_icon@2x.png */; };
-		CF8B6AFE23CBC9D70021B021 /* Buyuk_Selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC4E2008AD6F003D8E05 /* Buyuk_Selected@3x.png */; };
-		CF8B6AFF23CBC9D70021B021 /* sag_ok@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD362008AD6F003D8E05 /* sag_ok@2x.png */; };
-		CF8B6B0023CBC9D70021B021 /* italic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACC22008AD6F003D8E05 /* italic@2x.png */; };
+		CF8B6AFD23CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6AFE23CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6AFF23CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6B0023CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		CF8B6B0123CBC9D70021B021 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
-		CF8B6B0223CBC9D70021B021 /* lookup_soft_elegance_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AEA02008AD6F003D8E05 /* lookup_soft_elegance_1.png */; };
-		CF8B6B0323CBC9D70021B021 /* sample_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD472008AD6F003D8E05 /* sample_yellow.png */; };
-		CF8B6B0423CBC9D70021B021 /* sample_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD432008AD6F003D8E05 /* sample_red@2x.png */; };
-		CF8B6B0523CBC9D70021B021 /* t_kucuk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD672008AD6F003D8E05 /* t_kucuk@2x.png */; };
+		CF8B6B0223CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6B0323CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6B0423CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6B0523CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		CF8B6B0623CBC9D70021B021 /* ProgressCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressCard.xib */; };
 		CF8B6B0823CBC9D70021B021 /* SetSecurityQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2E992338989B0014258A /* SetSecurityQuestionViewController.xib */; };
 		CF8B6B0D23CBC9D70021B021 /* MyStorageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92004B2521AD0F2100582C45 /* MyStorageViewController.xib */; };
@@ -23102,9 +23101,7 @@
 				CE7847F622A685FB00662219 /* Sources */,
 				CE784CA422A685FB00662219 /* Frameworks */,
 				CE784CC322A685FB00662219 /* Resources */,
-				CE784F0E22A685FB00662219 /* ShellScript */,
 				CE784F0F22A685FB00662219 /* [CP] Embed Pods Frameworks */,
-				CE784F1022A685FB00662219 /* ShellScript */,
 				CE784F1122A685FB00662219 /* Embed App Extensions */,
 				CE784F1622A685FB00662219 /* [CP] Copy Pods Resources */,
 				B549B6C224CF084400D39C44 /* Copy Files GPUImage */,
@@ -23201,8 +23198,6 @@
 				CF8B6B3D23CBCA280021B021 /* Sources */,
 				CF8B705223CBCA280021B021 /* Frameworks */,
 				CF8B707323CBCA280021B021 /* Resources */,
-				CF8B72E923CBCA280021B021 /* ShellScript */,
-				CF8B72EB23CBCA280021B021 /* ShellScript */,
 				CF8B72EC23CBCA280021B021 /* Embed App Extensions */,
 				9A5E0034017CE1E734F05FD4 /* [CP] Embed Pods Frameworks */,
 				52D19F592C13611B406FA7BD /* [CP] Copy Pods Resources */,
@@ -24235,18 +24230,10 @@
 				8C0E90691FDEBDFF00789C91 /* UsageInfoViewController.xib in Resources */,
 				CE634AF7230EAAA700CED18C /* PaymentPopUpController.xib in Resources */,
 				B5B6543122A7ACB2000E2FA9 /* SharedImages.xcassets in Resources */,
-				CEF41E9E2035B2DF0008FCD5 /* PhotoDetailCell.xib in Resources */,
-				982319C924F3A1E700FD16E2 /* AdjustmentCategoriesView.xib in Resources */,
-				CEF41E9E2035B2DF0008FCD5 /* PhotoDetailCell.xib in Resources */,
-				8C06AF532008AD70003D8E05 /* cropy_icon@2x.png in Resources */,
-				8C06AEF32008AD70003D8E05 /* Buyuk_Selected@3x.png in Resources */,
-				8C06B0C32008AD71003D8E05 /* sag_ok@2x.png in Resources */,
-				8C06AFDB2008AD71003D8E05 /* italic@2x.png in Resources */,
 				CEF41E9E2035B2DF0008FCD5 /* PhotoVideoDetailCell.xib in Resources */,
-				8C06B1C32008AD72003D8E05 /* lookup_soft_elegance_1.png in Resources */,
-				8C06B0E52008AD71003D8E05 /* sample_yellow.png in Resources */,
-				8C06B0DD2008AD71003D8E05 /* sample_red@2x.png in Resources */,
-				8C06B1252008AD72003D8E05 /* t_kucuk@2x.png in Resources */,
+				982319C924F3A1E700FD16E2 /* AdjustmentCategoriesView.xib in Resources */,
+				CEF41E9E2035B2DF0008FCD5 /* PhotoVideoDetailCell.xib in Resources */,
+				CEF41E9E2035B2DF0008FCD5 /* PhotoVideoDetailCell.xib in Resources */,
 				8C0E906D1FDEBDFF00789C91 /* ProgressCard.xib in Resources */,
 				737A2E9E2338989B0014258A /* SetSecurityQuestionViewController.xib in Resources */,
 				92004B3921AD0F2200582C45 /* MyStorageViewController.xib in Resources */,
@@ -24712,11 +24699,6 @@
 				9219B18C21ECA25800098021 /* InstaPickDetailViewController.xib in Resources */,
 				7C2F56FB1F1CC1CC0014870B /* ActionsMenuTableViewCell.xib in Resources */,
 				CE51AF921EF90853005DCEE0 /* IntroduceSubView.xib in Resources */,
-				8C06AF5E2008AD70003D8E05 /* daire_selected@2x.png in Resources */,
-				8C06B0502008AD71003D8E05 /* parlaklik@3x.png in Resources */,
-				8C06B0142008AD71003D8E05 /* kup@2x.png in Resources */,
-				8C06AEE82008AD70003D8E05 /* Buyuk.png in Resources */,
-				8C06AF842008AD70003D8E05 /* extraOptions.png in Resources */,
 				7CC11AB01FE276F500AF022D /* WaitingForWiFiPopUp.xib in Resources */,
 				890F737222EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
 				9823199824F3A1E700FD16E2 /* LightView.xib in Resources */,
@@ -25395,16 +25377,16 @@
 				CF8B6AF423CBC9D70021B021 /* UsageInfoViewController.xib in Resources */,
 				CF8B6AFB23CBC9D70021B021 /* PaymentPopUpController.xib in Resources */,
 				CF8B6AFC23CBC9D70021B021 /* SharedImages.xcassets in Resources */,
-				CF8B6B0123CBC9D70021B021 /* PhotoDetailCell.xib in Resources */,
-				CF8B6AFD23CBC9D70021B021 /* cropy_icon@2x.png in Resources */,
-				CF8B6AFE23CBC9D70021B021 /* Buyuk_Selected@3x.png in Resources */,
-				CF8B6AFF23CBC9D70021B021 /* sag_ok@2x.png in Resources */,
-				CF8B6B0023CBC9D70021B021 /* italic@2x.png in Resources */,
 				CF8B6B0123CBC9D70021B021 /* PhotoVideoDetailCell.xib in Resources */,
-				CF8B6B0223CBC9D70021B021 /* lookup_soft_elegance_1.png in Resources */,
-				CF8B6B0323CBC9D70021B021 /* sample_yellow.png in Resources */,
-				CF8B6B0423CBC9D70021B021 /* sample_red@2x.png in Resources */,
-				CF8B6B0523CBC9D70021B021 /* t_kucuk@2x.png in Resources */,
+				CF8B6AFD23CBC9D70021B021 /* (null) in Resources */,
+				CF8B6AFE23CBC9D70021B021 /* (null) in Resources */,
+				CF8B6AFF23CBC9D70021B021 /* (null) in Resources */,
+				CF8B6B0023CBC9D70021B021 /* (null) in Resources */,
+				CF8B6B0123CBC9D70021B021 /* PhotoVideoDetailCell.xib in Resources */,
+				CF8B6B0223CBC9D70021B021 /* (null) in Resources */,
+				CF8B6B0323CBC9D70021B021 /* (null) in Resources */,
+				CF8B6B0423CBC9D70021B021 /* (null) in Resources */,
+				CF8B6B0523CBC9D70021B021 /* (null) in Resources */,
 				CF8B6B0623CBC9D70021B021 /* ProgressCard.xib in Resources */,
 				CF8B6B0823CBC9D70021B021 /* SetSecurityQuestionViewController.xib in Resources */,
 				CF8B6B0D23CBC9D70021B021 /* MyStorageViewController.xib in Resources */,
@@ -26786,22 +26768,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CE784F0E22A685FB00662219 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#./Fabric.framework/run e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n\n\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		CE784F0F22A685FB00662219 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -26882,19 +26848,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Billo/Pods-Billo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CE784F1022A685FB00662219 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#\"${PODS_ROOT}/Fabric/run\" e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n";
-		};
 		CE784F1622A685FB00662219 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -26927,35 +26880,6 @@
 			shellScript = "#./Fabric.framework/run e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n";
 		};
 		CF8B6B2123CBC9D70021B021 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#\"${PODS_ROOT}/Fabric/run\" e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n";
-		};
-		CF8B72E923CBCA280021B021 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#./Fabric.framework/run e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n\n\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CF8B72EB23CBCA280021B021 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
