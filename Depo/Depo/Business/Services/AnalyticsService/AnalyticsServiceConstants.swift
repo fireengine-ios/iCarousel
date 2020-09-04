@@ -616,6 +616,7 @@ enum GAEventCategory {
         case main
         case filters
         case adjustments
+        case popup
         
         var text: String {
             switch self {
@@ -625,6 +626,8 @@ enum GAEventCategory {
                 return "Filter Analytics"
             case .adjustments:
                 return "Adjust Analytics"
+            case .popup:
+                return "POP UP"
             }
         }
     }

@@ -42,7 +42,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     
     private lazy var filterView = self.prepareFilterView()
     private var cropController: CropViewController?
-    private var transformation: Transformation?
+    private var cropResult: Mantis.CropResult?
     
     private lazy var adjustmentManager: AdjustmentManager = {
         let types = AdjustmentViewType.allCases.flatMap { $0.adjustmentTypes }
@@ -81,11 +81,7 @@ final class PhotoEditViewController: ViewController, NibInit {
         view.backgroundColor = .black
         setInitialState()
         presentedCallback?()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        uiManager.viewDidLayoutSubviews()
+        analytics.trackScreen(.photoEditFilters)
     }
     
     func saveImageComplete(saveAsCopy: Bool) {
@@ -176,8 +172,9 @@ final class PhotoEditViewController: ViewController, NibInit {
         tempOriginalImage = originalPreviewImage
         setInitialState()
         filterView.resetToOriginal()
-        transformation = nil
+
         filterManager.resetToOriginal()
+        cropResult = nil
     }
     
     private func trackChanges(saveAsCopy: Bool) {
@@ -190,7 +187,7 @@ final class PhotoEditViewController: ViewController, NibInit {
             analytics.trackFilter(appliedFilter.type, action: action)
         }
         
-        if let transformation = transformation {
+        if let transformation = cropResult?.transformation {
             analytics.trackAdjustChanges(transformation, action: action)
         }
     }
@@ -330,10 +327,10 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     
     func needShowAdjustmentView(for type: AdjustmentViewType) {
         guard type != .adjust else {
-            let view = AdjustView.with(ratios: ratios, delegate: self)
+            let view = AdjustView.with(ratios: ratios, transformation: cropResult?.transformation, delegate: self)
             var config = Mantis.Config()
             config.showRotationDial = false
-            if let transformation = transformation {
+            if let transformation = cropResult?.transformation {
                 config.presetTransformationType = .presetInfo(info: transformation)
             }
             let controller = Mantis.cropCustomizableViewController(image: self.tempOriginalImage, config: config, cropToolbar: view)
@@ -387,8 +384,12 @@ extension PhotoEditViewController: CropViewControllerDelegate {
         cropController = nil
     }
     
-    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
-        self.transformation = transformation
+    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropResult: CropResult) {
+        guard let cropped = cropResult.croppedImage else {
+            return
+        }
+        
+        self.cropResult = cropResult
         sourceImage = cropped
         tempOriginalImage = cropped
         uiManager.image = cropped
@@ -464,7 +465,15 @@ private class PhotoEditAnalytics {
     private let analyticsService: AnalyticsService = factory.resolve()
     
     func trackClickEvent(_ event: GAEventLabel.PhotoEditEvent) {
-        analyticsService.trackPhotoEditEvent(category: .main, eventAction: .click, eventLabel: .photoEdit(event))
+        switch event {
+        case .save, .saveAsCopy, .cancel:
+            analyticsService.trackPhotoEditEvent(category: .main, eventAction: .click, eventLabel: .photoEdit(event))
+        case .discard, .keepEditing:
+            analyticsService.trackPhotoEditEvent(category: .popup, eventAction: .discardChanges, eventLabel: .photoEdit(event))
+        default:
+            return
+        }
+        
     }
     
     func trackScreen(_ screen: AnalyticsAppScreens) {
