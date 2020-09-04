@@ -147,4 +147,8 @@ final class FilterManager {
         lastApplied = nil
         isOriginal = true
     }
+    
+    func resetLastApplied() {
+        lastApplied = nil
+    }
 }

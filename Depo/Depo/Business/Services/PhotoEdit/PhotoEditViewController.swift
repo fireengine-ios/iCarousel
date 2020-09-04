@@ -159,6 +159,8 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
     
     private func prepareOriginalImage(completion: @escaping ValueHandler<UIImage>) {
+        filterManager.saveHisory()
+        
         adjustmentManager.applyAll(sourceImage: self.originalImage) { [weak self] adjustedImage in
             guard let self = self else {
                 return
@@ -381,6 +383,7 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
             
         case .adjustments:
             filterManager.saveHisory()
+            filterManager.resetLastApplied()
             analytics.trackScreen(.photoEditAdjustments)
         }
         
