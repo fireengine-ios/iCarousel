@@ -112,8 +112,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.contentInsetAdjustmentBehavior = .never
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        collectionView.register(nibCell: PhotoDetailCell.self)
-        collectionView.register(nibCell: VideoPlayerCell.self)
+        collectionView.register(nibCell: PhotoVideoDetailCell.self)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsVerticalScrollIndicator = false
@@ -135,6 +134,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         OrientationManager.shared.lock(for: .all, rotateTo: .unknown)
         ItemOperationManager.default.startUpdateView(view: self)
         
+        onStopPlay()
         rootNavController(vizible: true)
         blackNavigationBarStyle()
         editingTabBar?.view.layoutIfNeeded()
@@ -151,6 +151,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         //editingTabBar.editingBar.layer.borderWidth = 0
         
         statusBarColor = .black
+        
+        NotificationCenter.default.post(name: .reusePlayer, object: self)
         
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
@@ -172,6 +174,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         
         visibleNavigationBarStyle()
         statusBarColor = .clear
+        
+        NotificationCenter.default.post(name: .deinitPlayer, object: self)
         
         output.viewWillDisappear()
         passThroughView?.disableGestures()
@@ -208,7 +212,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
             return
         }
         
-        let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? CellConfigurable })
+        let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoVideoDetailCell })
         cells.first?.setObject(object: objects[selectedIndex])
     }
     
@@ -429,6 +433,35 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         navigationItem.rightBarButtonItem?.isEnabled = isActive
     }
     
+    func play(item: AVPlayerItem) {
+        hideSpinnerIncludeNavigationBar()
+        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.VideoDisplayed())
+        
+        localPlayer?.replaceCurrentItem(with: item)
+        playerController = FixedAVPlayerViewController()
+        playerController?.player = localPlayer
+        ///needs to expend from everywhere
+        playerController?.delegate = RouterVC().rootViewController as? TabBarViewController
+        debugLog("about to play video item with isEmptyController \(playerController == nil) and \(playerController?.player == nil)")
+        present(playerController!, animated: true) { [weak self] in
+            UIApplication.setIdleTimerDisabled(true)
+            self?.playerController?.player?.play()
+            self?.output.videoStarted()
+            if Device.operationSystemVersionLessThen(11) {
+                self?.statusBarHidden = true
+            }
+        }
+    }
+    
+    func onStopPlay() {
+        UIApplication.setIdleTimerDisabled(false)
+        output.videoStoped()
+        if Device.operationSystemVersionLessThen(11) {
+            statusBarHidden = false
+        }
+    }
+    
     func updateItems(objectsArray: [Item], selectedIndex: Int) {
         self.selectedIndex = selectedIndex
         updateAllItems(with: objectsArray, updateCollection: true)
@@ -515,35 +548,29 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
     }
 }
 
-//MARK: - CollectionView Delegate
 extension PhotoVideoDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return objects.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        objects[indexPath.item].fileType == .video
-            ? collectionView.dequeue(cell: VideoPlayerCell.self, for: indexPath)
-            : collectionView.dequeue(cell: PhotoDetailCell.self, for: indexPath)
+        return collectionView.dequeue(cell: PhotoVideoDetailCell.self, for: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? CellConfigurable else {
+        guard let cell = cell as? PhotoVideoDetailCell else {
             return
         }
+        
         guard selectedIndex != nil else {
             return
         }
-        cell.responder = self
+        cell.delegate = self
         cell.setObject(object: objects[indexPath.row])
         
         if indexPath.row == objects.count - 1 {
             output.willDisplayLastCell()
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        (cell as? VideoPlayerCell)?.didEndDisplaying()
     }
 }
 
@@ -557,8 +584,8 @@ extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-//MARK: - PhotoVideoCellDelegate
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
+    
     func imageLoadingFinished() {
         hideSpinner()
     }
@@ -566,6 +593,68 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
     func tapOnCellForFullScreen() {
         isFullScreen.toggle()
     }
+    
+    func tapOnSelectedItem() {
+        guard let index = selectedIndex else {
+            return
+        }
+        
+        showSpinnerIncludeNavigationBar()
+        let file = objects[index]
+        if file.fileType == .video {
+            self.prepareToPlayVideo(file: file)
+        }
+    }
+    
+    private func prepareToPlayVideo(file: Item) {
+        let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
+        guard let url = preUrl else {
+            return
+        }
+        player.pause()
+        playerController?.player = nil
+        playerController?.removeFromParentViewController()
+        playerController = nil
+        localPlayer?.pause()
+        localPlayer = nil
+        localPlayer = AVPlayer()
+        
+        switch file.patchToPreview {
+        case let .localMediaContent(local):
+            guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
+                return
+            }
+            let option = PHVideoRequestOptions()
+            
+            output.startCreatingAVAsset()
+            debugLog("about to play local video item")
+            DispatchQueue.global(qos: .default).async { [weak self] in
+                PHImageManager.default().requestAVAsset(forVideo: local.asset, options: option) { [weak self] asset, _, _ in
+                    debugPrint("!!!! after local request")
+                    DispatchQueue.main.async {
+                        self?.output.stopCreatingAVAsset()
+                        guard let asset = asset else {
+                            return
+                        }
+                        let playerItem = AVPlayerItem(asset: asset)
+                        debugLog("playerItem created \(playerItem.asset.isPlayable)")
+                        self?.play(item: playerItem)
+                    }
+                }
+            }
+            
+        case .remoteUrl(_):
+            debugLog("about to play remote video item")
+            DispatchQueue.global(qos: .default).async { [weak self] in
+                let playerItem = AVPlayerItem(url: url)
+                debugLog("playerItem created \(playerItem.asset.isPlayable)")
+                DispatchQueue.main.async {
+                    self?.play(item: playerItem)
+                }
+            }
+        }
+    }
+    
 }
 
 extension PhotoVideoDetailViewController: UIScrollViewDelegate {
@@ -586,3 +675,16 @@ extension PhotoVideoDetailViewController: UIScrollViewDelegate {
         selectedIndex = currentPage
     }
 }
+
+///extension of different class( Need to expand picture-in-picture everywhere)
+extension TabBarViewController: AVPlayerViewControllerDelegate {
+
+    func playerViewController(_ playerViewController: AVPlayerViewController,
+                              restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
+        RouterVC().presentViewController(controller: playerViewController) {
+            playerViewController.allowsPictureInPicturePlayback = true
+            completionHandler(true)
+        }
+    }
+}
+

@@ -258,7 +258,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                 case .failed(_):
                                     DispatchQueue.main.async {
                                         controller.hideSpinner()
-                                        SnackbarManager.shared.show(type: .critical, message: TextConstants.photoEditModifySnackbarMessage, action: .ok, axis: .horizontal)
+                                        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
                                     }
                             }
                     }
@@ -290,7 +290,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                 case .failed(_):
                                     DispatchQueue.main.async {
                                         controller.hideSpinner()
-                                        SnackbarManager.shared.show(type: .critical, message: TextConstants.photoEditModifySnackbarMessage, action: .ok, axis: .horizontal)
+                                        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
                                 }
                             }
                     }
