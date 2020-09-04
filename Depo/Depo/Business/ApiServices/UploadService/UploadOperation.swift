@@ -475,10 +475,13 @@ final class UploadOperation: Operation {
                 self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
                 self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
                 
-                if let size = Int64(parameters.header[HeaderConstant.ContentLength] ?? ""), let item = self.outputItem, size != item.fileSize {
+                //TODO: remove this in the future
+                if let size = (parameters as? SimpleUpload)?.fileSize,
+                    let item = self.outputItem, size != item.fileSize {
                     Crashlytics.crashlytics().record(error: CustomErrors.text("UPLOAD: finishUploading -> uploadNotify sizes arent equal"))
                     debugLog("UPLOAD: finishUploading -> uploadNotify parSize \(size) newRemote size \(item.fileSize) param URL \(parameters.urlToLocalFile?.path ?? "nil")")
                 }
+                //--
                 
                 //case for upload photo from camera
                 if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
