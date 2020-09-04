@@ -19,6 +19,18 @@ typealias PhotoEditCompletionHandler = (_ controller: PhotoEditViewController, _
 
 final class PhotoEditViewController: ViewController, NibInit {
     
+    static func with(originalImage: UIImage, previewImage: UIImage, presented: VoidHandler?, completion: PhotoEditCompletionHandler?) -> PhotoEditViewController {
+        let controller = PhotoEditViewController.initFromNib()
+        controller.originalPreviewImage = previewImage
+        controller.tempOriginalImage = previewImage
+        controller.originalImage = originalImage
+        controller.sourceImage = previewImage
+        controller.presentedCallback = presented
+        controller.finishedEditing = completion
+        return controller
+    }
+    
+    
     @IBOutlet private var uiManager: PhotoEditViewUIManager! {
         willSet {
             newValue.delegate = self
@@ -43,6 +55,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     private var filterManager = FilterManager(types: FilterType.allCases)
     
     private var originalImage = UIImage()
+    private var originalPreviewImage = UIImage()
     private var sourceImage = UIImage() {
         didSet {
             let originalRatio = Double(sourceImage.size.width / sourceImage.size.height)
@@ -51,7 +64,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
     private var tempOriginalImage = UIImage()
     private var hasChanges: Bool {
-        originalImage != sourceImage
+        originalPreviewImage != sourceImage
     }
     
     private var ratios = [AdjustRatio]()
@@ -59,15 +72,6 @@ final class PhotoEditViewController: ViewController, NibInit {
     var presentedCallback: VoidHandler?
     var finishedEditing: PhotoEditCompletionHandler?
     
-    static func with(image: UIImage, presented: VoidHandler?, completion: PhotoEditCompletionHandler?) -> PhotoEditViewController {
-        let controller = PhotoEditViewController.initFromNib()
-        controller.originalImage = image
-        controller.tempOriginalImage = image
-        controller.sourceImage = image
-        controller.presentedCallback = presented
-        controller.finishedEditing = completion
-        return controller
-    }
     
     //MARK: - View lifecycle
     
@@ -91,7 +95,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
     
     private func prepareFilterView() -> PreparedFiltersView {
-        let previewImage = originalImage.resizedImage(to: CGSize(width: 100, height: 100)) ?? originalImage
+        let previewImage = originalPreviewImage.resizedImage(to: CGSize(width: 100, height: 100)) ?? originalPreviewImage
         return PreparedFiltersView.with(previewImage: previewImage, manager: filterManager, delegate: self)
     }
     
@@ -123,7 +127,14 @@ final class PhotoEditViewController: ViewController, NibInit {
             guard let self = self else {
                 return
             }
-            self.finishedEditing?(self, .savedAs(image: self.sourceImage))
+            
+            self.prepareOriginalImage { [weak self] image in
+                guard let self = self else {
+                    return
+                }
+                
+                self.finishedEditing?(self, .savedAs(image: image))
+            }
         }
         present(popup, animated: true)
     }
@@ -135,19 +146,50 @@ final class PhotoEditViewController: ViewController, NibInit {
             guard let self = self else {
                 return
             }
-            self.finishedEditing?(self, .saved(image: self.sourceImage))
+            
+            self.prepareOriginalImage { [weak self] image in
+                guard let self = self else {
+                    return
+                }
+                
+                self.finishedEditing?(self, .saved(image: image))
+            }
         }
         present(popup, animated: true)
     }
     
+    private func prepareOriginalImage(completion: @escaping ValueHandler<UIImage>) {
+        filterManager.saveHisory()
+        
+        adjustmentManager.applyAll(sourceImage: self.originalImage) { [weak self] adjustedImage in
+            guard let self = self else {
+                return
+            }
+            
+            guard let filteredImage = self.filterManager.applyAll(image: adjustedImage) else {
+                return
+            }
+            
+            var resultImage = filteredImage
+            if
+                let cropInfo = self.cropResult?.cropInfo,
+                let croppedImage = Mantis.getCroppedImage(byCropInfo: cropInfo, andImage: filteredImage)
+            {
+                resultImage = croppedImage
+            }
+            
+            completion(resultImage)
+        }
+    }
+    
     private func resetToOriginal() {
         adjustmentManager.resetValues()
-        sourceImage = originalImage
-        tempOriginalImage = originalImage
+        sourceImage = originalPreviewImage
+        tempOriginalImage = originalPreviewImage
         setInitialState()
         filterView.resetToOriginal()
+        filterManager.resetToOriginal()
         cropResult = nil
-        filterManager.resetAppliedFilter()
     }
     
     private func trackChanges(saveAsCopy: Bool) {
@@ -156,8 +198,8 @@ final class PhotoEditViewController: ViewController, NibInit {
         let parameters = adjustmentManager.adjustments.flatMap { $0.parameters.filter { $0.currentValue != $0.defaultValue } }.map { $0.type }
         analytics.trackAdjustments(parameters, action: action)
         
-        if let applyFilter = filterManager.lastApplied {
-            analytics.trackFilter(applyFilter, action: action)
+        if let appliedFilter = filterManager.lastApplied {
+            analytics.trackFilter(appliedFilter.type, action: action)
         }
         
         if let transformation = cropResult?.transformation {
@@ -338,7 +380,10 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
         switch item {
         case .filters:
             analytics.trackScreen(.photoEditFilters)
+            
         case .adjustments:
+            filterManager.saveHisory()
+            filterManager.resetLastApplied()
             analytics.trackScreen(.photoEditAdjustments)
         }
         
@@ -374,9 +419,9 @@ extension PhotoEditViewController: CropViewControllerDelegate {
 extension PhotoEditViewController: PreparedFiltersViewDelegate {
 
     func didSelectOriginal() {
-        sourceImage = originalImage
+        sourceImage = originalPreviewImage
         setInitialState()
-        filterManager.resetAppliedFilter()
+        filterManager.resetToOriginal()
     }
     
     func didSelectFilter(_ type: FilterType) {
