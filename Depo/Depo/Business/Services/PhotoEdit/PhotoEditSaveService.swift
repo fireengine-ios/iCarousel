@@ -20,7 +20,7 @@ final class PhotoEditSaveService {
     
     //MARK: - Public
     
-    func save(asCopy: Bool, imageData: Data, item: WrapData, completion: @escaping ResponseHandler<WrapData>) {
+    func save(asCopy: Bool, image: UIImage, item: WrapData, completion: @escaping ResponseHandler<WrapData>) {
         checkLibraryAccessStatus { [weak self] isAvaliable in
             guard isAvaliable else {
                 self?.showAccessAlert()
@@ -30,9 +30,16 @@ final class PhotoEditSaveService {
             }
             
             if asCopy {
+                guard let imageData = UIImageJPEGRepresentation(image, 1.0) else {
+                    debugLog("PHOTOEDIT: can't create UIImageJPEGRepresentation")
+                    completion(.failed(ErrorResponse.string(TextConstants.cameraAccessAlertText)))
+                    return
+                }
+                
                 self?.saveAsCopy(imageData: imageData, item: item, completion: completion)
+                
             } else {
-                self?.save(imageData: imageData, item: item, completion: completion)
+                self?.save(image: image, item: item, completion: completion)
             }
         }
     }
@@ -84,7 +91,7 @@ final class PhotoEditSaveService {
     }
     
     
-    private func save(imageData: Data, item: WrapData, completion: @escaping ResponseHandler<WrapData>) {
+    private func save(image: UIImage, item: WrapData, completion: @escaping ResponseHandler<WrapData>) {
         
         debugLog("PHOTOEDIT: save")
         
@@ -129,13 +136,13 @@ final class PhotoEditSaveService {
         
         if let asset = item.asset, asset.canPerform(.content) {
             debugLog("PHOTOEDIT: replace local")
-            replaceLocalItem(asset: asset, imageData: imageData, completion: didSaveLocalCompletion)
+            replaceLocalItem(asset: asset, image: image, completion: didSaveLocalCompletion)
             
         } else {
             debugLog("PHOTOEDIT: create local")
             
             do {
-                try imageData.write(to: tmpLocation)
+                try UIImageJPEGRepresentation(image, 1.0)?.write(to: tmpLocation)
             } catch {
                 debugLog("PHOTOEDIT: Can't write data to the tmp directoy")
                 completion(.failed(ErrorResponse.string("Can't write data to the tmp directoy")))
@@ -238,9 +245,9 @@ final class PhotoEditSaveService {
         }
     }
     
-    private func replaceLocalItem(asset: PHAsset, imageData: Data, completion: @escaping ResponseHandler<WrapData>) {
+    private func replaceLocalItem(asset: PHAsset, image: UIImage, completion: @escaping ResponseHandler<WrapData>) {
         //TODO: pass real adjustments and filters info
-        localMediaStorage.replaceInGallery(asset: asset, imageData: imageData, adjustmentInfo: "Some lifebox adjustments info") { [weak self] result in
+        localMediaStorage.replaceInGallery(asset: asset, image: image, adjustmentInfo: "Some lifebox adjustments info") { [weak self] result in
             switch result {
                 case .success:
                     self?.replaceInDB(assetId: asset.localIdentifier, completion: completion)

@@ -9,6 +9,7 @@
 import UIKit
 import Photos
 import SwiftyGif
+import CoreServices
 
 typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatus) -> Void
 
@@ -578,7 +579,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     }
     
     @discardableResult
-    func replaceInGallery(asset: PHAsset, imageData: Data, adjustmentInfo: String, handler: @escaping ResponseHandler<Void>) -> PHContentEditingInputRequestID? {
+    func replaceInGallery(asset: PHAsset, image: UIImage, adjustmentInfo: String, handler: @escaping ResponseHandler<Void>) -> PHContentEditingInputRequestID? {
         debugLog("LocalMediaStorage replaceInGallery")
 
         guard photoLibraryIsAvailible() else {
@@ -586,6 +587,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             debugLog("PHOTOEDIT: Photo library is unavailable")
             return nil
         }
+        
         
         let requestId = asset.requestContentEditingInput(with: nil) { [weak self] input, _ in
             guard let input = input else {
@@ -599,11 +601,12 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             let output = PHContentEditingOutput(contentEditingInput: input)
             output.adjustmentData = adjustmentData
             
-            do {
-                try imageData.write(to: output.renderedContentURL, options: .atomicWrite)
-            } catch {
-                debugLog("PHOTOEDIT: Can't write image data to the renderedContentURL")
-                handler(.failed(ErrorResponse.string("Can't write image data to the renderedContentURL")))
+            let isDataPrepared = self?.prepare(image: image, outputURL: output.renderedContentURL)
+            
+            guard isDataPrepared == true else {
+                handler(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
+                assertionFailure("Can't prepare image data")
+                return
             }
             
             self?.passcodeStorage.systemCallOnScreen = true
@@ -632,6 +635,23 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         
         return requestId
+    }
+    
+    private func prepare(image: UIImage, outputURL: URL) -> Bool {
+        let context = CIContext()
+        guard
+            let ciImage = CIImage(image: image),
+            let cgImage = context.createCGImage(ciImage, from: ciImage.extent),
+            let cgImageDestination = CGImageDestinationCreateWithURL(outputURL as CFURL, kUTTypeJPEG, 1, nil)
+        else {
+            return false
+        }
+        
+        CGImageDestinationAddImage(cgImageDestination, cgImage,
+                                   [kCGImageDestinationLossyCompressionQuality as String: 1.0] as CFDictionary)
+        CGImageDestinationFinalize(cgImageDestination)
+        
+        return true
     }
     
     var addAssetToCollectionQueue: OperationQueue = {
@@ -1068,7 +1088,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     semaphore.signal()
                     return
                 }
-                
                 
                 if let error = dict[PHImageErrorKey] as? NSError {
                     print(error.localizedDescription)
