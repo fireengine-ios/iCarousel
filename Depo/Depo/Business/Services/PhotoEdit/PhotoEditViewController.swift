@@ -77,6 +77,7 @@ final class PhotoEditViewController: ViewController, NibInit {
         view.backgroundColor = .black
         setInitialState()
         presentedCallback?()
+        analytics.trackScreen(.photoEditFilters)
     }
     
     func saveImageComplete(saveAsCopy: Bool) {
