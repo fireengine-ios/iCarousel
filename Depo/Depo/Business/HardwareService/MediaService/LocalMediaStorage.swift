@@ -601,9 +601,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             let output = PHContentEditingOutput(contentEditingInput: input)
             output.adjustmentData = adjustmentData
             
-            let orientation = input.fullSizeImageOrientation
-            
-            let isDataPrepared = self?.prepare(image: image, orientation: orientation, outputURL: output.renderedContentURL)
+            let isDataPrepared = self?.prepare(image: image, outputURL: output.renderedContentURL)
             
             guard isDataPrepared == true else {
                 handler(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
@@ -639,7 +637,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         return requestId
     }
     
-    private func prepare(image: UIImage, orientation: Int32, outputURL: URL) -> Bool {
+    private func prepare(image: UIImage, outputURL: URL) -> Bool {
         let context = CIContext()
         guard
             let ciImage = CIImage(image: image),
@@ -1090,7 +1088,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     semaphore.signal()
                     return
                 }
-                
                 
                 if let error = dict[PHImageErrorKey] as? NSError {
                     print(error.localizedDescription)
