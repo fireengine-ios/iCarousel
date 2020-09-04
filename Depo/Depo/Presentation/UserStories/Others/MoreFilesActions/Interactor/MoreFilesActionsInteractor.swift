@@ -243,9 +243,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         controller.showSpinner()
                         
                         guard let data = UIImageJPEGRepresentation(newImage, 1.0) else {
+                            debugLog("PHOTOEDIT: Can't create UIImageJPEGRepresentation")
                             DispatchQueue.main.async {
                                 controller.hideSpinner()
-                                UIApplication.showErrorAlert(message: TextConstants.photoEditSaveImageErrorMessage)
+                                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
                             }
                             return
                         }
@@ -254,9 +255,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                             switch result {
                                 case .success(let remote):
                                     DispatchQueue.main.async {
+                                        controller.saveImageComplete(saveAsCopy: true)
                                         controller.dismiss(animated: false) {
                                             self?.showPhotoVideoPreview(item: remote) {
-                                                SnackbarManager.shared.show(type: .action, message: TextConstants.photoEditSaveAsCopySnackbarMessage)
+                                                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveAsCopySnackbarMessage)
                                             }
                                         }
                                 }
@@ -264,7 +266,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                 case .failed(_):
                                     DispatchQueue.main.async {
                                         controller.hideSpinner()
-                                        UIApplication.showErrorAlert(message: TextConstants.photoEditSaveImageErrorMessage)
+                                        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
                                     }
                             }
                     }
@@ -273,12 +275,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         controller.showSpinner()
                         
                         guard let data = UIImageJPEGRepresentation(newImage, 1.0) else {
-                                DispatchQueue.main.async {
-                                    controller.hideSpinner()
-                                    UIApplication.showErrorAlert(message: TextConstants.photoEditSaveImageErrorMessage)
-                                }
-                                return
+                            debugLog("PHOTOEDIT: Can't create UIImageJPEGRepresentation")
+                            DispatchQueue.main.async {
+                                controller.hideSpinner()
+                                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
                             }
+                            return
+                        }
                         
                         PhotoEditSaveService.shared.save(asCopy: false, imageData: data, item: item) { [weak self] result in
                             switch result {
@@ -287,8 +290,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                     item.patchToPreview = updatedItem.patchToPreview
                                     let closeScreen = {
                                         DispatchQueue.main.async {
+                                            controller.saveImageComplete(saveAsCopy: false)
                                             controller.dismiss(animated: true)
-                                            SnackbarManager.shared.show(type: .action, message: TextConstants.photoEditModifySnackbarMessage)
+                                            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditModifySnackbarMessage)
                                         }
                                     }
                                     
@@ -303,7 +307,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                 case .failed(_):
                                     DispatchQueue.main.async {
                                         controller.hideSpinner()
-                                        UIApplication.showErrorAlert(message: TextConstants.photoEditSaveImageErrorMessage)
+                                        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
                                 }
                             }
                     }

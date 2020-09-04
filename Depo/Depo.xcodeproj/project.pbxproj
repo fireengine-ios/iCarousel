@@ -185,7 +185,7 @@
 		0303A0C02397D0D000907F42 /* SearchViewInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21661F3C7CBF00BAFE1E /* SearchViewInitializer.swift */; };
 		0303A0C12397D0D000907F42 /* TwoFactorChallengePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B015022DF168F00BCECBC /* TwoFactorChallengePresenter.swift */; };
 		0303A0C22397D0D000907F42 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
-		0303A0C32397D0D000907F42 /* PhotoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoDetailCell.swift */; };
+		0303A0C32397D0D000907F42 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
 		0303A0C42397D0D000907F42 /* InstaPickCampaignViewControllerDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC28235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift */; };
 		0303A0C52397D0D000907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A0C62397D0D000907F42 /* VisualMusicPlayerViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */; };
@@ -1343,7 +1343,7 @@
 		0303A5AB2397D0D000907F42 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF7CF48223103E1002DAF37 /* DropDownTableViewCell.xib */; };
 		0303A5AD2397D0D000907F42 /* InitializingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9853CD2E2361BD6F00E19BF7 /* InitializingViewController.xib */; };
 		0303A5AF2397D0D000907F42 /* CollectionViewHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */; };
-		0303A5B02397D0D000907F42 /* PhotoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoDetailCell.xib */; };
+		0303A5B02397D0D000907F42 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
 		0303A5B12397D0D000907F42 /* HomePage.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FAC1EFD4F0D00A405B2 /* HomePage.xib */; };
 		0303A5B22397D0D000907F42 /* AutoSyncSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */; };
 		0303A5B32397D0D000907F42 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
@@ -6068,8 +6068,6 @@
 		B5CDB34121787FEF006CFA50 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB32F21787FEF006CFA50 /* Message.m */; };
 		B5CDB3542179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */; };
 		B5CDB3552179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */; };
-		B5E3AB7024DA8F4A009E6D7F /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
-		B5E3AB7124DA8F4A009E6D7F /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
 		B5E74798208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E74799208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
@@ -6610,8 +6608,8 @@
 		CE654FB520454B3900232025 /* UICollectionView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB420454B3900232025 /* UICollectionView+Layout.swift */; };
 		CE654FB62045613A00232025 /* AuthorizationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */; };
 		CE654FB72045613F00232025 /* AuthorizationURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */; };
-		CE680BC5203186E6001A8DF6 /* PhotoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoDetailCell.swift */; };
-		CE680BC6203186E6001A8DF6 /* PhotoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoDetailCell.xib */; };
+		CE680BC5203186E6001A8DF6 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
+		CE680BC6203186E6001A8DF6 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
 		CE6A8F1720737E230001EB54 /* ServerMessageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6A8F1620737E230001EB54 /* ServerMessageError.swift */; };
 		CE6BD9CC1FBEF8D5008FA8A1 /* InsetsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6BD9CB1FBEF8D5008FA8A1 /* InsetsLabel.swift */; };
 		CE6DE7501FCBE84100C23CBD /* DropboxStatusValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE7441FCBE84100C23CBD /* DropboxStatusValue.swift */; };
@@ -6770,7 +6768,7 @@
 		CE78488922A685FB00662219 /* PlanType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F55F51F75515C00F49DA1 /* PlanType.swift */; };
 		CE78488A22A685FB00662219 /* SearchViewInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21661F3C7CBF00BAFE1E /* SearchViewInitializer.swift */; };
 		CE78488B22A685FB00662219 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
-		CE78488C22A685FB00662219 /* PhotoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoDetailCell.swift */; };
+		CE78488C22A685FB00662219 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
 		CE78488D22A685FB00662219 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CE78488E22A685FB00662219 /* VisualMusicPlayerViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */; };
 		CE78488F22A685FB00662219 /* AutoSyncModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8145D1EF7A93E001DFCF0 /* AutoSyncModuleInput.swift */; };
@@ -7773,7 +7771,7 @@
 		CE784D0E22A685FB00662219 /* CollageCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4F60A42019D0440033C58F /* CollageCard.xib */; };
 		CE784D1222A685FB00662219 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF7CF48223103E1002DAF37 /* DropDownTableViewCell.xib */; };
 		CE784D1522A685FB00662219 /* CollectionViewHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */; };
-		CE784D1722A685FB00662219 /* PhotoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoDetailCell.xib */; };
+		CE784D1722A685FB00662219 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
 		CE784D1822A685FB00662219 /* HomePage.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FAC1EFD4F0D00A405B2 /* HomePage.xib */; };
 		CE784D1922A685FB00662219 /* AutoSyncSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */; };
 		CE784D1A22A685FB00662219 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
@@ -8144,8 +8142,8 @@
 		CEF371B020887DAC007AD36E /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF371AB20887BAC007AD36E /* MD5.swift */; };
 		CEF41E9B2035B2BF0008FCD5 /* PreventCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF41E9A2035B2BF0008FCD5 /* PreventCollectionView.swift */; };
 		CEF41E9C2035B2DB0008FCD5 /* PreventCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF41E9A2035B2BF0008FCD5 /* PreventCollectionView.swift */; };
-		CEF41E9D2035B2DF0008FCD5 /* PhotoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoDetailCell.swift */; };
-		CEF41E9E2035B2DF0008FCD5 /* PhotoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoDetailCell.xib */; };
+		CEF41E9D2035B2DF0008FCD5 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
+		CEF41E9E2035B2DF0008FCD5 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
 		CEF619EC1F79222600BECF03 /* AccountType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF619EB1F79222600BECF03 /* AccountType.swift */; };
 		CEF69DDD1FB584CD00FCE6AB /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
 		CEF69DDF1FB584F700FCE6AB /* UploadResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDE1FB584F700FCE6AB /* UploadResponse.swift */; };
@@ -9578,7 +9576,7 @@
 		CF8B67A923CBC9D70021B021 /* PhotoVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C20863C228D4B2E000BEDAD /* PhotoVideoCell.swift */; };
 		CF8B67AA23CBC9D70021B021 /* SynchronizedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B520000B202492A90096D036 /* SynchronizedArray.swift */; };
 		CF8B67AB23CBC9D70021B021 /* PageForLanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CEE2720209C560500EF6C79 /* PageForLanding.swift */; };
-		CF8B67AC23CBC9D70021B021 /* PhotoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoDetailCell.swift */; };
+		CF8B67AC23CBC9D70021B021 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
 		CF8B67AD23CBC9D70021B021 /* MaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0750F520BD83A800FD1FA2 /* MaskService.swift */; };
 		CF8B67AF23CBC9D70021B021 /* UploadFilesSelectionViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3B6154994AE47621A34FDC /* UploadFilesSelectionViewInput.swift */; };
 		CF8B67B023CBC9D70021B021 /* UploadFilesSelectionViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F431A1D1626AA4CC06EFC9CA /* UploadFilesSelectionViewOutput.swift */; };
@@ -10034,15 +10032,16 @@
 		CF8B6AF423CBC9D70021B021 /* UsageInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D47863EE1F3F18FA00EFDC6D /* UsageInfoViewController.xib */; };
 		CF8B6AFB23CBC9D70021B021 /* PaymentPopUpController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE634AF2230EAAA700CED18C /* PaymentPopUpController.xib */; };
 		CF8B6AFC23CBC9D70021B021 /* SharedImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */; };
-		CF8B6AFD23CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF8B6AFE23CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF8B6AFF23CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF8B6B0023CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		CF8B6B0123CBC9D70021B021 /* PhotoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoDetailCell.xib */; };
-		CF8B6B0223CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF8B6B0323CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF8B6B0423CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		CF8B6B0523CBC9D70021B021 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		CF8B6AFD23CBC9D70021B021 /* cropy_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC7E2008AD6F003D8E05 /* cropy_icon@2x.png */; };
+		CF8B6AFE23CBC9D70021B021 /* Buyuk_Selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AC4E2008AD6F003D8E05 /* Buyuk_Selected@3x.png */; };
+		CF8B6AFF23CBC9D70021B021 /* sag_ok@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD362008AD6F003D8E05 /* sag_ok@2x.png */; };
+		CF8B6B0023CBC9D70021B021 /* italic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06ACC22008AD6F003D8E05 /* italic@2x.png */; };
+		CF8B6B0123CBC9D70021B021 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
+		CF8B6B0223CBC9D70021B021 /* lookup_soft_elegance_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AEA02008AD6F003D8E05 /* lookup_soft_elegance_1.png */; };
+		CF8B6B0323CBC9D70021B021 /* sample_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD472008AD6F003D8E05 /* sample_yellow.png */; };
+		CF8B6B0423CBC9D70021B021 /* sample_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD432008AD6F003D8E05 /* sample_red@2x.png */; };
+		CF8B6B0523CBC9D70021B021 /* t_kucuk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C06AD672008AD6F003D8E05 /* t_kucuk@2x.png */; };
 		CF8B6B0623CBC9D70021B021 /* ProgressCard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C1F89891F6FFE1100740177 /* ProgressCard.xib */; };
 		CF8B6B0823CBC9D70021B021 /* SetSecurityQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 737A2E992338989B0014258A /* SetSecurityQuestionViewController.xib */; };
 		CF8B6B0D23CBC9D70021B021 /* MyStorageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92004B2521AD0F2100582C45 /* MyStorageViewController.xib */; };
@@ -10217,7 +10216,7 @@
 		CF8B6BDE23CBCA280021B021 /* SearchViewInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCB21661F3C7CBF00BAFE1E /* SearchViewInitializer.swift */; };
 		CF8B6BDF23CBCA280021B021 /* TwoFactorChallengePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892B015022DF168F00BCECBC /* TwoFactorChallengePresenter.swift */; };
 		CF8B6BE023CBCA280021B021 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
-		CF8B6BE123CBCA280021B021 /* PhotoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoDetailCell.swift */; };
+		CF8B6BE123CBCA280021B021 /* PhotoVideoDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */; };
 		CF8B6BE223CBCA280021B021 /* InstaPickCampaignViewControllerDesigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7373EC28235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift */; };
 		CF8B6BE323CBCA280021B021 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CF8B6BE423CBCA280021B021 /* VisualMusicPlayerViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C77869B1F3F38EF005CB432 /* VisualMusicPlayerViewInput.swift */; };
@@ -11378,7 +11377,7 @@
 		CF8B70CD23CBCA280021B021 /* DropDownTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4BF7CF48223103E1002DAF37 /* DropDownTableViewCell.xib */; };
 		CF8B70CF23CBCA280021B021 /* InitializingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9853CD2E2361BD6F00E19BF7 /* InitializingViewController.xib */; };
 		CF8B70D123CBCA280021B021 /* CollectionViewHeaderWithText.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */; };
-		CF8B70D223CBCA280021B021 /* PhotoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoDetailCell.xib */; };
+		CF8B70D223CBCA280021B021 /* PhotoVideoDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */; };
 		CF8B70D323CBCA280021B021 /* HomePage.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAE3FAC1EFD4F0D00A405B2 /* HomePage.xib */; };
 		CF8B70D423CBCA280021B021 /* AutoSyncSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */; };
 		CF8B70D523CBCA280021B021 /* TermsAndServicesScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C4A9D0E1EEAD99B001D2465 /* TermsAndServicesScreen.xib */; };
@@ -11594,16 +11593,6 @@
 		CFACACAE247CF8AC00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
 		CFACACAF247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
 		CFACACB0247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
-		CFB6588324F3C03F0070E258 /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
-		CFB6588724F3C0400070E258 /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
-		CFB6588824F3C0410070E258 /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
-		CFB6588924F3C0420070E258 /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
-		CFB6588A24F3C0430070E258 /* VideoPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */; };
-		CFB6588B24F3C0470070E258 /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
-		CFB6588C24F3C0480070E258 /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
-		CFB6588D24F3C0490070E258 /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
-		CFB6588E24F3C04A0070E258 /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
-		CFB6588F24F3C04B0070E258 /* VideoPlayerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */; };
 		D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */; };
 		D42ED46420C9D9E600761645 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */; };
 		D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E01F3F18FA00EFDC6D /* UsageInfoConfigurator.swift */; };
@@ -13629,8 +13618,6 @@
 		B5CDB32E21787FEF006CFA50 /* UIAlertViewCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertViewCustom.h; sourceTree = "<group>"; };
 		B5CDB32F21787FEF006CFA50 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkcellUpdaterService.swift; sourceTree = "<group>"; };
-		B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerCell.swift; sourceTree = "<group>"; };
-		B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPlayerCell.xib; sourceTree = "<group>"; };
 		B5E74797208B3736003A7110 /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTaskService.swift; sourceTree = "<group>"; };
 		B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsModel.swift; sourceTree = "<group>"; };
@@ -13884,8 +13871,8 @@
 		CE654FB020454AAD00232025 /* URL+Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Video.swift"; sourceTree = "<group>"; };
 		CE654FB220454B2500232025 /* UIImage+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Size.swift"; sourceTree = "<group>"; };
 		CE654FB420454B3900232025 /* UICollectionView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Layout.swift"; sourceTree = "<group>"; };
-		CE680BC3203186E6001A8DF6 /* PhotoDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailCell.swift; sourceTree = "<group>"; };
-		CE680BC4203186E6001A8DF6 /* PhotoDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoDetailCell.xib; sourceTree = "<group>"; };
+		CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailCell.swift; sourceTree = "<group>"; };
+		CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoVideoDetailCell.xib; sourceTree = "<group>"; };
 		CE6A8F1620737E230001EB54 /* ServerMessageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMessageError.swift; sourceTree = "<group>"; };
 		CE6BD9CB1FBEF8D5008FA8A1 /* InsetsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetsLabel.swift; sourceTree = "<group>"; };
 		CE6DE7441FCBE84100C23CBD /* DropboxStatusValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropboxStatusValue.swift; sourceTree = "<group>"; };
@@ -21882,10 +21869,8 @@
 		CEF41E99203593BE0008FCD5 /* PhotoVideoDetailCell */ = {
 			isa = PBXGroup;
 			children = (
-				CE680BC3203186E6001A8DF6 /* PhotoDetailCell.swift */,
-				CE680BC4203186E6001A8DF6 /* PhotoDetailCell.xib */,
-				B5E3AB6E24DA8F4A009E6D7F /* VideoPlayerCell.swift */,
-				B5E3AB6F24DA8F4A009E6D7F /* VideoPlayerCell.xib */,
+				CE680BC3203186E6001A8DF6 /* PhotoVideoDetailCell.swift */,
+				CE680BC4203186E6001A8DF6 /* PhotoVideoDetailCell.xib */,
 			);
 			path = PhotoVideoDetailCell;
 			sourceTree = "<group>";
@@ -23647,7 +23632,7 @@
 				0303A5AD2397D0D000907F42 /* InitializingViewController.xib in Resources */,
 				0303A5AF2397D0D000907F42 /* CollectionViewHeaderWithText.xib in Resources */,
 				CF71468424B597A900D83E60 /* ContactSyncNoBackupView.xib in Resources */,
-				0303A5B02397D0D000907F42 /* PhotoDetailCell.xib in Resources */,
+				0303A5B02397D0D000907F42 /* PhotoVideoDetailCell.xib in Resources */,
 				0303A5B12397D0D000907F42 /* HomePage.xib in Resources */,
 				0303A5B22397D0D000907F42 /* AutoSyncSettingsTableViewCell.xib in Resources */,
 				0303A5B32397D0D000907F42 /* TermsAndServicesScreen.xib in Resources */,
@@ -23682,7 +23667,6 @@
 				985D87E124D0156B004BCDFF /* PhotoEditViewController.xib in Resources */,
 				0303A5EB2397D0D000907F42 /* FaceImagePhotosViewController.xib in Resources */,
 				0303A5ED2397D0D000907F42 /* TurkcellSaturaBol.ttf in Resources */,
-				CFB6588D24F3C0490070E258 /* VideoPlayerCell.xib in Resources */,
 				982319C524F3A1E700FD16E2 /* AdjustmentParameterSliderView.xib in Resources */,
 				9892229C240D0C3C004155A5 /* BecomePremiumView.xib in Resources */,
 				0303A5F22397D0D000907F42 /* SpotifyDeletePopup.xib in Resources */,
@@ -24204,7 +24188,6 @@
 				982319E124F3A1E700FD16E2 /* PhotoEditNavbar.xib in Resources */,
 				8C3930F22100668300C1D82D /* GoogleService-Info.plist in Resources */,
 				0302B73923701F000005D78F /* AnalyzeHistoryEmptyCell.xib in Resources */,
-				CFB6588B24F3C0470070E258 /* VideoPlayerCell.xib in Resources */,
 				982319F324F3A1E700FD16E2 /* PhotoEditTabbar.xib in Resources */,
 				730A997522D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.xib in Resources */,
 				735766E923AE1B34008589E9 /* StickerCollectionViewCell.xib in Resources */,
@@ -24270,6 +24253,15 @@
 				CEF41E9E2035B2DF0008FCD5 /* PhotoDetailCell.xib in Resources */,
 				982319C924F3A1E700FD16E2 /* AdjustmentCategoriesView.xib in Resources */,
 				CEF41E9E2035B2DF0008FCD5 /* PhotoDetailCell.xib in Resources */,
+				8C06AF532008AD70003D8E05 /* cropy_icon@2x.png in Resources */,
+				8C06AEF32008AD70003D8E05 /* Buyuk_Selected@3x.png in Resources */,
+				8C06B0C32008AD71003D8E05 /* sag_ok@2x.png in Resources */,
+				8C06AFDB2008AD71003D8E05 /* italic@2x.png in Resources */,
+				CEF41E9E2035B2DF0008FCD5 /* PhotoVideoDetailCell.xib in Resources */,
+				8C06B1C32008AD72003D8E05 /* lookup_soft_elegance_1.png in Resources */,
+				8C06B0E52008AD71003D8E05 /* sample_yellow.png in Resources */,
+				8C06B0DD2008AD71003D8E05 /* sample_red@2x.png in Resources */,
+				8C06B1252008AD72003D8E05 /* t_kucuk@2x.png in Resources */,
 				8C0E906D1FDEBDFF00789C91 /* ProgressCard.xib in Resources */,
 				737A2E9E2338989B0014258A /* SetSecurityQuestionViewController.xib in Resources */,
 				92004B3921AD0F2200582C45 /* MyStorageViewController.xib in Resources */,
@@ -24550,7 +24542,7 @@
 				4BF7CF4B223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */,
 				9823197424F3A1E600FD16E2 /* PreparedFiltersView.xib in Resources */,
 				9824FEDA20061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib in Resources */,
-				CE680BC6203186E6001A8DF6 /* PhotoDetailCell.xib in Resources */,
+				CE680BC6203186E6001A8DF6 /* PhotoVideoDetailCell.xib in Resources */,
 				CEAE3FB91EFD4F0D00A405B2 /* HomePage.xib in Resources */,
 				989BDE4922F47B1E001DDEB2 /* SpotifyAuthViewController.xib in Resources */,
 				B5C4C8A42049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */,
@@ -24740,8 +24732,11 @@
 				9219B18C21ECA25800098021 /* InstaPickDetailViewController.xib in Resources */,
 				7C2F56FB1F1CC1CC0014870B /* ActionsMenuTableViewCell.xib in Resources */,
 				CE51AF921EF90853005DCEE0 /* IntroduceSubView.xib in Resources */,
-				B5E3AB7124DA8F4A009E6D7F /* VideoPlayerCell.xib in Resources */,
-				B5E3AB7124DA8F4A009E6D7F /* VideoPlayerCell.xib in Resources */,
+				8C06AF5E2008AD70003D8E05 /* daire_selected@2x.png in Resources */,
+				8C06B0502008AD71003D8E05 /* parlaklik@3x.png in Resources */,
+				8C06B0142008AD71003D8E05 /* kup@2x.png in Resources */,
+				8C06AEE82008AD70003D8E05 /* Buyuk.png in Resources */,
+				8C06AF842008AD70003D8E05 /* extraOptions.png in Resources */,
 				7CC11AB01FE276F500AF022D /* WaitingForWiFiPopUp.xib in Resources */,
 				890F737222EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
 				9823199824F3A1E700FD16E2 /* LightView.xib in Resources */,
@@ -24879,7 +24874,7 @@
 				CE784D1222A685FB00662219 /* DropDownTableViewCell.xib in Resources */,
 				9853CD452361BDCA00E19BF7 /* InitializingViewController.xib in Resources */,
 				CE784D1522A685FB00662219 /* CollectionViewHeaderWithText.xib in Resources */,
-				CE784D1722A685FB00662219 /* PhotoDetailCell.xib in Resources */,
+				CE784D1722A685FB00662219 /* PhotoVideoDetailCell.xib in Resources */,
 				CE784D1822A685FB00662219 /* HomePage.xib in Resources */,
 				CE784D1922A685FB00662219 /* AutoSyncSettingsTableViewCell.xib in Resources */,
 				CE784D1A22A685FB00662219 /* TermsAndServicesScreen.xib in Resources */,
@@ -24986,7 +24981,6 @@
 				CF71468B24B597A900D83E60 /* ContactSyncAnalyzeProgressView.xib in Resources */,
 				CE784DFB22A685FB00662219 /* CollectionViewCellForPhoto.xib in Resources */,
 				CE784DFC22A685FB00662219 /* TurkcellSaturaDemIta.ttf in Resources */,
-				CFB6588E24F3C04A0070E258 /* VideoPlayerCell.xib in Resources */,
 				CF71460D24B597A800D83E60 /* ContactDetailHeader.xib in Resources */,
 				CF71467324B597A900D83E60 /* ContactSyncMainView.xib in Resources */,
 				89E51D4522CA110A007A7DBC /* CreateStoryPreviewViewController.xib in Resources */,
@@ -25271,7 +25265,6 @@
 				CF8B69B023CBC9D70021B021 /* inputCell.xib in Resources */,
 				17B9B0CD23F1F76900CAF5E1 /* FullQuotaWarningPopUp.xib in Resources */,
 				CF8B69B623CBC9D70021B021 /* PhotoVideoDetailViewController.xib in Resources */,
-				CFB6588C24F3C0480070E258 /* VideoPlayerCell.xib in Resources */,
 				CF7146E924B597A900D83E60 /* DeleteDuplicatesCell.xib in Resources */,
 				CF8B69B723CBC9D70021B021 /* SelectQuestionViewController.xib in Resources */,
 				CF8B69C023CBC9D70021B021 /* ActivityTimelineViewController.xib in Resources */,
@@ -25422,24 +25415,16 @@
 				CF8B6AF423CBC9D70021B021 /* UsageInfoViewController.xib in Resources */,
 				CF8B6AFB23CBC9D70021B021 /* PaymentPopUpController.xib in Resources */,
 				CF8B6AFC23CBC9D70021B021 /* SharedImages.xcassets in Resources */,
-				CF8B6AFD23CBC9D70021B021 /* (null) in Resources */,
-				CF8B6AFE23CBC9D70021B021 /* (null) in Resources */,
-				CF8B6AFF23CBC9D70021B021 /* (null) in Resources */,
-				CF8B6B0023CBC9D70021B021 /* (null) in Resources */,
 				CF8B6B0123CBC9D70021B021 /* PhotoDetailCell.xib in Resources */,
-				CF8B6B0223CBC9D70021B021 /* (null) in Resources */,
-				CF8B6B0323CBC9D70021B021 /* (null) in Resources */,
-				CF8B6B0423CBC9D70021B021 /* (null) in Resources */,
-				CF8B6B0523CBC9D70021B021 /* (null) in Resources */,
-				CF8B6AFD23CBC9D70021B021 /* (null) in Resources */,
-				CF8B6AFE23CBC9D70021B021 /* (null) in Resources */,
-				CF8B6AFF23CBC9D70021B021 /* (null) in Resources */,
-				CF8B6B0023CBC9D70021B021 /* (null) in Resources */,
-				CF8B6B0123CBC9D70021B021 /* PhotoDetailCell.xib in Resources */,
-				CF8B6B0223CBC9D70021B021 /* (null) in Resources */,
-				CF8B6B0323CBC9D70021B021 /* (null) in Resources */,
-				CF8B6B0423CBC9D70021B021 /* (null) in Resources */,
-				CF8B6B0523CBC9D70021B021 /* (null) in Resources */,
+				CF8B6AFD23CBC9D70021B021 /* cropy_icon@2x.png in Resources */,
+				CF8B6AFE23CBC9D70021B021 /* Buyuk_Selected@3x.png in Resources */,
+				CF8B6AFF23CBC9D70021B021 /* sag_ok@2x.png in Resources */,
+				CF8B6B0023CBC9D70021B021 /* italic@2x.png in Resources */,
+				CF8B6B0123CBC9D70021B021 /* PhotoVideoDetailCell.xib in Resources */,
+				CF8B6B0223CBC9D70021B021 /* lookup_soft_elegance_1.png in Resources */,
+				CF8B6B0323CBC9D70021B021 /* sample_yellow.png in Resources */,
+				CF8B6B0423CBC9D70021B021 /* sample_red@2x.png in Resources */,
+				CF8B6B0523CBC9D70021B021 /* t_kucuk@2x.png in Resources */,
 				CF8B6B0623CBC9D70021B021 /* ProgressCard.xib in Resources */,
 				CF8B6B0823CBC9D70021B021 /* SetSecurityQuestionViewController.xib in Resources */,
 				CF8B6B0D23CBC9D70021B021 /* MyStorageViewController.xib in Resources */,
@@ -25512,7 +25497,7 @@
 				CF8B70CD23CBCA280021B021 /* DropDownTableViewCell.xib in Resources */,
 				CF8B70CF23CBCA280021B021 /* InitializingViewController.xib in Resources */,
 				CF8B70D123CBCA280021B021 /* CollectionViewHeaderWithText.xib in Resources */,
-				CF8B70D223CBCA280021B021 /* PhotoDetailCell.xib in Resources */,
+				CF8B70D223CBCA280021B021 /* PhotoVideoDetailCell.xib in Resources */,
 				CF8B70D323CBCA280021B021 /* HomePage.xib in Resources */,
 				CF8B70D423CBCA280021B021 /* AutoSyncSettingsTableViewCell.xib in Resources */,
 				CF8B70D523CBCA280021B021 /* TermsAndServicesScreen.xib in Resources */,
@@ -25673,7 +25658,6 @@
 				982319E524F3A1E700FD16E2 /* PhotoEditNavbar.xib in Resources */,
 				0305A31F23D5C381004D1EC7 /* HiddenPhotosViewController.xib in Resources */,
 				CF8B724123CBCA280021B021 /* SpotifyImportedTracksViewController.xib in Resources */,
-				CFB6588F24F3C04B0070E258 /* VideoPlayerCell.xib in Resources */,
 				982319F724F3A1E700FD16E2 /* PhotoEditTabbar.xib in Resources */,
 				CF8B724223CBCA280021B021 /* PhotosOrderCollectionViewCell.xib in Resources */,
 				CF8B724423CBCA280021B021 /* LaunchScreen.storyboard in Resources */,
@@ -27378,7 +27362,7 @@
 				0303A0C02397D0D000907F42 /* SearchViewInitializer.swift in Sources */,
 				0303A0C12397D0D000907F42 /* TwoFactorChallengePresenter.swift in Sources */,
 				0303A0C22397D0D000907F42 /* OperationProgressService.swift in Sources */,
-				0303A0C32397D0D000907F42 /* PhotoDetailCell.swift in Sources */,
+				0303A0C32397D0D000907F42 /* PhotoVideoDetailCell.swift in Sources */,
 				0303A0C42397D0D000907F42 /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
 				0303A0C52397D0D000907F42 /* (null) in Sources */,
 				0303A0C62397D0D000907F42 /* VisualMusicPlayerViewInput.swift in Sources */,
@@ -28089,7 +28073,6 @@
 				171090E423FC8E350036A033 /* SmashActionService.swift in Sources */,
 				0303A3292397D0D000907F42 /* PhotoVideoController.swift in Sources */,
 				0303A32A2397D0D000907F42 /* FreeAppSpacePresenter.swift in Sources */,
-				CFB6588824F3C0410070E258 /* VideoPlayerCell.swift in Sources */,
 				0303A32B2397D0D000907F42 /* UploadFromLifeBoxAllFilesPresenter.swift in Sources */,
 				0303A32C2397D0D000907F42 /* DropboxParametrs.swift in Sources */,
 				0303A32D2397D0D000907F42 /* SingleThumbnailAlbumCell.swift in Sources */,
@@ -30096,7 +30079,7 @@
 				8C20865C228D4B2E000BEDAD /* PhotoVideoCell.swift in Sources */,
 				89104BC522CB9BDD005B3F58 /* SynchronizedArray.swift in Sources */,
 				7CEE2723209C560500EF6C79 /* PageForLanding.swift in Sources */,
-				CEF41E9D2035B2DF0008FCD5 /* PhotoDetailCell.swift in Sources */,
+				CEF41E9D2035B2DF0008FCD5 /* PhotoVideoDetailCell.swift in Sources */,
 				7C0750F720BD83A800FD1FA2 /* MaskService.swift in Sources */,
 				98F033082403FFC100F1D415 /* DepoAdapter.m in Sources */,
 				8C0E8F5C1FDEBDFF00789C91 /* UploadFilesSelectionViewInput.swift in Sources */,
@@ -30244,7 +30227,6 @@
 				CF71461624B597A800D83E60 /* ContactDetailHeader.swift in Sources */,
 				737A2EA22338A5200014258A /* SecurityQuestionView.swift in Sources */,
 				8CD7D8F92111ABA00019B4F3 /* FixedAVPlayerViewController.swift in Sources */,
-				CFB6588324F3C03F0070E258 /* VideoPlayerCell.swift in Sources */,
 				8C0E8FA11FDEBDFF00789C91 /* AlbumDetailViewController.swift in Sources */,
 				8C0E8FA21FDEBDFF00789C91 /* SingletonStorage.swift in Sources */,
 				CE0596F420385E950083D6FC /* ImageFormat.swift in Sources */,
@@ -31024,7 +31006,7 @@
 				0334575223C714C100FB6386 /* NetmeraScreenEvents.swift in Sources */,
 				8DCB21671F3C7CBF00BAFE1E /* SearchViewInitializer.swift in Sources */,
 				B5FB65761FDE6F6900A02FD7 /* OperationProgressService.swift in Sources */,
-				CE680BC5203186E6001A8DF6 /* PhotoDetailCell.swift in Sources */,
+				CE680BC5203186E6001A8DF6 /* PhotoVideoDetailCell.swift in Sources */,
 				8C7786A81F3F38F0005CB432 /* VisualMusicPlayerViewInput.swift in Sources */,
 				CE51ABB31EF90853005DCEE0 /* AutoSyncModuleInput.swift in Sources */,
 				CE00B2792204249C00A5A696 /* PhotoSelectionDataSourceProtocol.swift in Sources */,
@@ -31072,7 +31054,6 @@
 				98F0334F2403FFC100F1D415 /* ContactDevice.m in Sources */,
 				782E40B31FE7D0B9007F7838 /* RecentSearchesService.swift in Sources */,
 				A217E44021A5B0A80084AA37 /* LeavePremiumInteractor.swift in Sources */,
-				B5E3AB7024DA8F4A009E6D7F /* VideoPlayerCell.swift in Sources */,
 				CE51ABDC1EF90853005DCEE0 /* LoginInteractor.swift in Sources */,
 				B56FBB1F2122C3D9004F4A59 /* TermsOfUseInitializer.swift in Sources */,
 				7C1CB8F61F724E54000768E8 /* ProgressCardProtocol.swift in Sources */,
@@ -32604,7 +32585,7 @@
 				98F032F32403FFC000F1D415 /* AnalyzeStatus.m in Sources */,
 				739E2C31247BA92200C74757 /* UIView+ParentViewController.swift in Sources */,
 				CE78488B22A685FB00662219 /* OperationProgressService.swift in Sources */,
-				CE78488C22A685FB00662219 /* PhotoDetailCell.swift in Sources */,
+				CE78488C22A685FB00662219 /* PhotoVideoDetailCell.swift in Sources */,
 				7373EC2B235EE12800B150BA /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
 				982319B424F3A1E700FD16E2 /* HSLView.swift in Sources */,
 				98231A1424F3A1E700FD16E2 /* SelectionMenuCell.swift in Sources */,
@@ -33667,7 +33648,6 @@
 				CE784BF522A685FB00662219 /* PremiumViewInput.swift in Sources */,
 				CE784BF622A685FB00662219 /* SelectFolderViewController.swift in Sources */,
 				CE784BF722A685FB00662219 /* SelectFolderPresenter.swift in Sources */,
-				CFB6588924F3C0420070E258 /* VideoPlayerCell.swift in Sources */,
 				73A1833F235855AA0095719F /* CampaignCard.swift in Sources */,
 				CE784BF822A685FB00662219 /* Message.m in Sources */,
 				CE784BF922A685FB00662219 /* AlbumCollectionViewCell.swift in Sources */,
@@ -35130,7 +35110,7 @@
 				CF8B67A923CBC9D70021B021 /* PhotoVideoCell.swift in Sources */,
 				CF8B67AA23CBC9D70021B021 /* SynchronizedArray.swift in Sources */,
 				CF8B67AB23CBC9D70021B021 /* PageForLanding.swift in Sources */,
-				CF8B67AC23CBC9D70021B021 /* PhotoDetailCell.swift in Sources */,
+				CF8B67AC23CBC9D70021B021 /* PhotoVideoDetailCell.swift in Sources */,
 				CF8B67AD23CBC9D70021B021 /* MaskService.swift in Sources */,
 				CF8B67AF23CBC9D70021B021 /* UploadFilesSelectionViewInput.swift in Sources */,
 				CF8B67B023CBC9D70021B021 /* UploadFilesSelectionViewOutput.swift in Sources */,
@@ -35288,7 +35268,6 @@
 				CF8B683123CBC9D70021B021 /* AlbumDetailViewController.swift in Sources */,
 				CF8B683323CBC9D70021B021 /* SingletonStorage.swift in Sources */,
 				CF8B683423CBC9D70021B021 /* ImageFormat.swift in Sources */,
-				CFB6588724F3C0400070E258 /* VideoPlayerCell.swift in Sources */,
 				CF8B683523CBC9D70021B021 /* ContactService.swift in Sources */,
 				0305A33A23D5C4DC004D1EC7 /* SubscribedAlbumDetailPresenter.swift in Sources */,
 				CF8B683623CBC9D70021B021 /* TermsOfUseInteractorInput.swift in Sources */,
@@ -35588,7 +35567,7 @@
 				CF8B6BE023CBCA280021B021 /* OperationProgressService.swift in Sources */,
 				739E2C32247BA92200C74757 /* UIView+ParentViewController.swift in Sources */,
 				98F032F42403FFC000F1D415 /* AnalyzeStatus.m in Sources */,
-				CF8B6BE123CBCA280021B021 /* PhotoDetailCell.swift in Sources */,
+				CF8B6BE123CBCA280021B021 /* PhotoVideoDetailCell.swift in Sources */,
 				CF8B6BE223CBCA280021B021 /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
 				982319B524F3A1E700FD16E2 /* HSLView.swift in Sources */,
 				98231A1524F3A1E700FD16E2 /* SelectionMenuCell.swift in Sources */,
@@ -36651,7 +36630,6 @@
 				CF8B6F9223CBCA280021B021 /* AlbumCollectionViewCell.swift in Sources */,
 				CF8B6F9323CBCA280021B021 /* MyStorageInteractorInput.swift in Sources */,
 				CF8B6F9423CBCA280021B021 /* SelectFolderInitializer.swift in Sources */,
-				CFB6588A24F3C0430070E258 /* VideoPlayerCell.swift in Sources */,
 				CF8B6F9523CBCA280021B021 /* FreeUpSpacePopUp.swift in Sources */,
 				CF8B6F9623CBCA280021B021 /* VisualMusicPlayerInteractor.swift in Sources */,
 				CF8B6F9723CBCA280021B021 /* BaseFilesGreedModuleOutput.swift in Sources */,
@@ -40753,7 +40731,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d.2.4;
+				CURRENT_PROJECT_VERSION = d.2.5;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -40815,7 +40793,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d.2.4;
+				CURRENT_PROJECT_VERSION = d.2.5;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -40873,7 +40851,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d.2.4;
+				CURRENT_PROJECT_VERSION = d.2.5;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -40932,7 +40910,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d.2.4;
+				CURRENT_PROJECT_VERSION = d.2.5;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
