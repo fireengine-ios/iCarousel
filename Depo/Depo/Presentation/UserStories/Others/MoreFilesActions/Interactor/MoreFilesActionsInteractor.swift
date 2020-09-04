@@ -242,16 +242,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     case .savedAs(image: let newImage):
                         controller.showSpinner()
                         
-                        guard let data = UIImageJPEGRepresentation(newImage, 1.0) else {
-                            debugLog("PHOTOEDIT: Can't create UIImageJPEGRepresentation")
-                            DispatchQueue.main.async {
-                                controller.hideSpinner()
-                                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
-                            }
-                            return
-                        }
-                        
-                        PhotoEditSaveService.shared.save(asCopy: true, imageData: data, item: item) { [weak self] result in
+                        PhotoEditSaveService.shared.save(asCopy: true, image: newImage, item: item) { [weak self] result in
                             switch result {
                                 case .success(let remote):
                                     DispatchQueue.main.async {
@@ -274,16 +265,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     case .saved(image: let newImage):
                         controller.showSpinner()
                         
-                        guard let data = UIImageJPEGRepresentation(newImage, 1.0) else {
-                            debugLog("PHOTOEDIT: Can't create UIImageJPEGRepresentation")
-                            DispatchQueue.main.async {
-                                controller.hideSpinner()
-                                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
-                            }
-                            return
-                        }
-                        
-                        PhotoEditSaveService.shared.save(asCopy: false, imageData: data, item: item) { [weak self] result in
+                        PhotoEditSaveService.shared.save(asCopy: false, image: newImage, item: item) { [weak self] result in
                             switch result {
                                 case .success(let updatedItem):
                                     item.copyFileData(from: updatedItem)
