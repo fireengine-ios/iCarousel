@@ -79,11 +79,6 @@ final class PhotoEditViewController: ViewController, NibInit {
         presentedCallback?()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        uiManager.viewDidLayoutSubviews()
-    }
-    
     func saveImageComplete(saveAsCopy: Bool) {
         trackChanges(saveAsCopy: saveAsCopy)
     }
