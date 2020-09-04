@@ -436,7 +436,15 @@ private class PhotoEditAnalytics {
     private let analyticsService: AnalyticsService = factory.resolve()
     
     func trackClickEvent(_ event: GAEventLabel.PhotoEditEvent) {
-        analyticsService.trackPhotoEditEvent(category: .main, eventAction: .click, eventLabel: .photoEdit(event))
+        switch event {
+        case .save, .saveAsCopy, .cancel:
+            analyticsService.trackPhotoEditEvent(category: .main, eventAction: .click, eventLabel: .photoEdit(event))
+        case .discard, .keepEditing:
+            analyticsService.trackPhotoEditEvent(category: .popup, eventAction: .discardChanges, eventLabel: .photoEdit(event))
+        default:
+            return
+        }
+        
     }
     
     func trackScreen(_ screen: AnalyticsAppScreens) {
