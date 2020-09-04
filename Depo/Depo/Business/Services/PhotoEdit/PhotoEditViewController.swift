@@ -30,7 +30,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     
     private lazy var filterView = self.prepareFilterView()
     private var cropController: CropViewController?
-    private var transformation: Transformation?
+    private var cropResult: Mantis.CropResult?
     
     private lazy var adjustmentManager: AdjustmentManager = {
         let types = AdjustmentViewType.allCases.flatMap { $0.adjustmentTypes }
@@ -146,7 +146,7 @@ final class PhotoEditViewController: ViewController, NibInit {
         tempOriginalImage = originalImage
         setInitialState()
         filterView.resetToOriginal()
-        transformation = nil
+        cropResult = nil
         filterManager.resetAppliedFilter()
     }
     
@@ -160,7 +160,7 @@ final class PhotoEditViewController: ViewController, NibInit {
             analytics.trackFilter(applyFilter, action: action)
         }
         
-        if let transformation = transformation {
+        if let transformation = cropResult?.transformation {
             analytics.trackAdjustChanges(transformation, action: action)
         }
     }
@@ -303,7 +303,7 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
             let view = AdjustView.with(ratios: ratios, delegate: self)
             var config = Mantis.Config()
             config.showRotationDial = false
-            if let transformation = transformation {
+            if let transformation = cropResult?.transformation {
                 config.presetTransformationType = .presetInfo(info: transformation)
             }
             let controller = Mantis.cropCustomizableViewController(image: self.tempOriginalImage, config: config, cropToolbar: view)
@@ -355,8 +355,12 @@ extension PhotoEditViewController: CropViewControllerDelegate {
         cropController = nil
     }
     
-    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
-        self.transformation = transformation
+    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropResult: CropResult) {
+        guard let cropped = cropResult.croppedImage else {
+            return
+        }
+        
+        self.cropResult = cropResult
         sourceImage = cropped
         tempOriginalImage = cropped
         uiManager.image = cropped
