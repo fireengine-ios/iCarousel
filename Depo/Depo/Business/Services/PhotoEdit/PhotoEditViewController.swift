@@ -300,7 +300,7 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     
     func needShowAdjustmentView(for type: AdjustmentViewType) {
         guard type != .adjust else {
-            let view = AdjustView.with(ratios: ratios, delegate: self)
+            let view = AdjustView.with(ratios: ratios, transformation: cropResult?.transformation, delegate: self)
             var config = Mantis.Config()
             config.showRotationDial = false
             if let transformation = cropResult?.transformation {
