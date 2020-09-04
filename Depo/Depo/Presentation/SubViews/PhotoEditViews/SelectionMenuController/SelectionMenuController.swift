@@ -8,8 +8,35 @@
 
 import UIKit
 
+enum PhotoEditSaveMenu: Int, CaseIterable {
+    case saveAsCopy
+    case resetToOriginal
+    
+    var title: String {
+        switch self {
+            case .saveAsCopy:
+                return TextConstants.photoEditSaveAsCopy
+            case .resetToOriginal:
+                return TextConstants.photoEditResetToOriginal
+            default:
+                assertionFailure("Set title for the case")
+                return " "
+        }
+    }
+}
 
 final class SelectionMenuController: UIViewController, NibInit {
+    
+    static func photoEditMenu(onSelect: @escaping ValueHandler<PhotoEditSaveMenu?>) -> SelectionMenuController {
+        let items = PhotoEditSaveMenu.allCases.compactMap { $0.title }
+        return SelectionMenuController.with(style: .simple, items: items, selectedIndex: nil) { selectedIndex in
+            guard let index = selectedIndex, let option = PhotoEditSaveMenu(rawValue: index) else {
+                onSelect(nil)
+                return
+            }
+            onSelect(option)
+        }
+    }
     
     static func with(style: SelectionMenuCell.Style, items: [String], selectedIndex: Int?, handler: @escaping ValueHandler<Int?>) -> SelectionMenuController {
         let controller = SelectionMenuController.initFromNib()
@@ -41,7 +68,7 @@ final class SelectionMenuController: UIViewController, NibInit {
     private var selectedIndex: Int?
     private var handler: ValueHandler<Int?>?
     
-    private let cellHeight: CGFloat = 44
+    private let cellHeight: CGFloat = Device.isIpad ? 55 : 44
     private var tableViewHeight: CGFloat = 0
     
     //MARK: -
@@ -81,6 +108,10 @@ final class SelectionMenuController: UIViewController, NibInit {
         tableView.backgroundColor = ColorConstants.photoEditBackgroundColor
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = tableView.contentSize.height > tableView.frame.height
+        
+        if let row = selectedIndex {
+            tableView.selectRow(at: IndexPath(row: row, section: 0), animated: false, scrollPosition: .none)
+        }
     }
     
     @objc private func onViewTap() {
@@ -118,21 +149,6 @@ extension SelectionMenuController: UITableViewDataSource {
 
 extension SelectionMenuController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if style == .simple {
-            close(with: indexPath.row)
-        } else {
-            if let selectedIndex = selectedIndex, let cell = tableView.cellForRow(at: IndexPath(row: selectedIndex, section: 0)) as? SelectionMenuCell {
-                cell.setSeleted(false)
-            }
-            
-            selectedIndex = indexPath.row
-            
-            if let cell = tableView.cellForRow(at: indexPath) as? SelectionMenuCell {
-                cell.setSeleted(true)
-            }
-            
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
+        close(with: indexPath.row)
     }
 }

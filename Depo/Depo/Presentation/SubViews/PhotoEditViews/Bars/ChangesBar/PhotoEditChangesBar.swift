@@ -46,5 +46,6 @@ final class PhotoEditChangesBar: UIView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         backgroundColor = ColorConstants.photoEditBackgroundColor
+        heightAnchor.constraint(equalToConstant: Device.isIpad ? 60 : 44).activate()
     }
 }

@@ -1938,6 +1938,9 @@ struct TextConstants {
     static let photoEditSaveAsCopy = NSLocalizedString("photo_edit_save_as_copy", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photoEditResetToOriginal = NSLocalizedString("photo_edit_reset_to_original", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    static let photoEditTabBarFilters = NSLocalizedString("photo_edit_tabbar_filters", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditTabBarAdjustments = NSLocalizedString("photo_edit_tabbar_adjustments", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let photoEditCloseAlertTitle = NSLocalizedString("photo_edit_close_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photoEditCloseAlertMessage = NSLocalizedString("photo_edit_close_alert_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photoEditCloseAlertLeftButton = NSLocalizedString("photo_edit_close_alert_left_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1996,4 +1999,7 @@ struct TextConstants {
     static let photoEditAdjustmentSharpness = NSLocalizedString("photo_edit_adjustment_sharpness", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photoEditAdjustmentBlur = NSLocalizedString("photo_edit_adjustment_blur", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photoEditAdjustmentVignette = NSLocalizedString("photo_edit_adjustment_vignette", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let photoEditRatioFree = NSLocalizedString("photo_edit_ratio_free", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let photoEditRatioOriginal = NSLocalizedString("photo_edit_ratio_original", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

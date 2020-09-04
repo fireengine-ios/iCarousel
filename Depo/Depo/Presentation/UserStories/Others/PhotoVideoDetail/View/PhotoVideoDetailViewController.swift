@@ -162,6 +162,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
         output.viewIsReady(view: viewForBottomBar)
         passThroughView?.enableGestures()
+        updateFirstVisibleCell()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -200,6 +201,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
         if UIDevice.current.orientation.isLandscape {
             bottomDetailViewManager?.closeDetailView()
         }
+    }
+    
+    private func updateFirstVisibleCell() {
+        guard let selectedIndex = selectedIndex else {
+            return
+        }
+        
+        let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? CellConfigurable })
+        cells.first?.setObject(object: objects[selectedIndex])
     }
     
     func hideView() {

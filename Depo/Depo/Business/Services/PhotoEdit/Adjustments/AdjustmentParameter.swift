@@ -34,13 +34,13 @@ enum AdjustmentParameterType: String {
             case .brightness:
                 return (-0.5, 0.5, 0)
             case .contrast:
-                return (0, 4, 1)
+                return (0.6, 1.4, 1)
             case .exposure:
                 return (-3, 3, 0)
             case .saturation:
                 return (0, 2, 1)
             case .gamma:
-                return (0, 3, 1)
+                return (0.5, 2, 1)
             case .hue:
                 return (-180, 180, 0)
             case .temperature:
@@ -66,7 +66,7 @@ enum AdjustmentParameterType: String {
             case .hslSaturation:
                 return (0, 2, 1)
             case .hslLuminosity:
-                return (0, 1, 1)
+                return (0.5, 1.5, 1)
         }
     }
     

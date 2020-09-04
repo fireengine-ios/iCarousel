@@ -65,7 +65,7 @@ final class AnalyticsService: NSObject {
             filePath = Bundle.main.path(forResource: "GoogleService-Info-ent", ofType: "plist")
         #elseif APPSTORE
             filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")
-        #elseif DEBUG
+        #else
             filePath = Bundle.main.path(forResource: "GoogleService-Info-debug", ofType: "plist")
         #endif
         
@@ -139,6 +139,7 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackPhotopickAnalysis(eventLabel: GAEventLabel, dailyDrawleft: Int?, totalDraw: Int?)
     func trackSpotify(eventActions: GAEventAction, eventLabel: GAEventLabel, trackNumber: Int?, playlistNumber: Int?)
     func trackCustomGAEvent(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: String)
+    func trackPhotoEditEvent(category: GAEventCategory.PhotoEditCategory, eventAction: GAEventAction, eventLabel: GAEventLabel, filterType: String?)
 //    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
 }
 
@@ -172,6 +173,7 @@ extension AnalyticsService: AnalyticsGA {
                                             editFields: String? = nil,
                                             connectionStatus: Bool? = nil,
                                             statusType: String? = nil,
+                                            photoEditFilterType: String? = nil,
                                             parametrsCallback: @escaping (_ parametrs: [String: Any])->Void) {
         
         let tokenStorage: TokenStorage = factory.resolve()
@@ -265,7 +267,8 @@ extension AnalyticsService: AnalyticsGA {
                 editFields: editFields,
                 connectionStatus: connectionStatus,
                 statusType: statusType,
-                usagePercentage: usagePercentage).productParametrs)
+                usagePercentage: usagePercentage,
+                photoEditFilterType: photoEditFilterType).productParametrs)
         }
     }
     
@@ -706,6 +709,13 @@ extension AnalyticsService: AnalyticsGA {
                                              label: label)
 
             Analytics.logEvent(GACustomEventsType.event.key, parameters: parameters + dimentionParameters)
+        }
+    }
+    
+    func trackPhotoEditEvent(category: GAEventCategory.PhotoEditCategory, eventAction: GAEventAction, eventLabel: GAEventLabel, filterType: String? = nil) {
+        prepareDimentionsParametrs(screen: nil, photoEditFilterType: filterType) { dimentionParameters in
+            let eventParameters = self.parameters(category: .photoEdit(category), action: eventAction, label: eventLabel)
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: eventParameters + dimentionParameters)
         }
     }
     

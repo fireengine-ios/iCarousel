@@ -1,15 +1,8 @@
 {
   "images" : [
     {
-      "idiom" : "universal"
-    },
-    {
       "filename" : "16.pdf",
-      "idiom" : "iphone"
-    },
-    {
-      "filename" : "icons8Checkmark.pdf",
-      "idiom" : "ipad"
+      "idiom" : "universal"
     }
   ],
   "info" : {
