@@ -860,8 +860,6 @@ extension TabBarViewController: TabBarActionHandler {
             router.pushViewController(viewController: controller)
 
         case .upload:
-            debugLog("CRASH TIME!")
-            fatalError("FB test")
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .uploadFromPlus))
             guard !checkReadOnlyPermission() else { return }
             let controller = router.uploadPhotos()
