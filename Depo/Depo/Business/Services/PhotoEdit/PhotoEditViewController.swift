@@ -41,8 +41,6 @@ final class PhotoEditViewController: ViewController, NibInit {
     private let analytics = PhotoEditAnalytics()
     
     private lazy var filterView = self.prepareFilterView()
-    private var cropController: CropViewController?
-    private var cropResult: Mantis.CropResult?
     
     private lazy var adjustmentManager: AdjustmentManager = {
         let types = AdjustmentViewType.allCases.flatMap { $0.adjustmentTypes }
@@ -66,8 +64,13 @@ final class PhotoEditViewController: ViewController, NibInit {
     private var hasChanges: Bool {
         originalPreviewImage != sourceImage
     }
-    
+
+    //Adjust view
+    private var cropController: CropViewController?
+    private var cropResult: Mantis.CropResult?
     private var ratios = [AdjustRatio]()
+    private var ratio: AdjustRatio?
+    private var adjustView: AdjustView?
     
     var presentedCallback: VoidHandler?
     var finishedEditing: PhotoEditCompletionHandler?
@@ -190,6 +193,7 @@ final class PhotoEditViewController: ViewController, NibInit {
         filterView.resetToOriginal()
         filterManager.resetToOriginal()
         cropResult = nil
+        ratio = nil
     }
     
     private func trackChanges(saveAsCopy: Bool) {
@@ -342,7 +346,7 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     
     func needShowAdjustmentView(for type: AdjustmentViewType) {
         guard type != .adjust else {
-            let view = AdjustView.with(ratios: ratios, transformation: cropResult?.transformation, delegate: self)
+            let view = AdjustView.with(selectedRatio: ratio, ratios: ratios, transformation: cropResult?.transformation, delegate: self)
             var config = Mantis.Config()
             config.showRotationDial = false
             if let transformation = cropResult?.transformation {
@@ -354,7 +358,12 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
             let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
             uiManager.showView(type: .adjustmentView(type), view: controller.view, changesBar: changesBar)
             
+            if let ratio = ratio {
+                controller.setRatio(ratio.value)
+            }
+            
             cropController = controller
+            adjustView = view
             return
         }
         
@@ -398,6 +407,7 @@ extension PhotoEditViewController: CropViewControllerDelegate {
     
     func cropViewControllerDidFailToCrop(_ cropViewController: CropViewController, original: UIImage) {
         cropController = nil
+        adjustView = nil
     }
     
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropResult: CropResult) {
@@ -405,11 +415,13 @@ extension PhotoEditViewController: CropViewControllerDelegate {
             return
         }
         
+        ratio = adjustView?.selectedRatio
         self.cropResult = cropResult
         sourceImage = cropped
         tempOriginalImage = cropped
         uiManager.image = cropped
         cropController = nil
+        adjustView = nil
         setInitialState()
     }
 }
