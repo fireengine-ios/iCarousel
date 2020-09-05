@@ -96,6 +96,7 @@ final class PhotoEditViewUIManager: NSObject {
     
     private func showAdjustView(_ view: UIView) {
         adjustView = view
+        view.frame = contentView.bounds
         contentView.addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.pinToSuperviewEdges()
