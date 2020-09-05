@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseCrashlytics
 
 protocol ObjectFromRequestResponse: class {
     
@@ -189,13 +190,21 @@ class BaseRequestService {
     func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask? {
         var task: URLSessionTask?
 
-        if let localURL = param.urlToLocalFile {
-            task = requestService.uploadFileRequestTask(patch: param.patch,
-                                                            headerParametrs: param.header,
-                                                            fromFile: localURL,
-                                                            method: RequestMethod.Put,
-                                                            timeoutInterval: param.timeout,
-                                                            response: response)
+        if let localURL = param.urlToLocalFile, FileManager.default.fileExists(atPath: localURL.path) {
+            
+            if let fileData = FileManager.default.contents(atPath: localURL.path) {
+                   task = requestService.uploadFileRequestTask(path: param.patch,
+                   headerParametrs: param.header,
+                   fileData: fileData,
+                   method: RequestMethod.Put,
+                   timeoutInterval: param.timeout,
+                   response: response)
+            } else {
+                Crashlytics.crashlytics().record(error: CustomErrors.text("UPLOAD: executeUploadRequest no data found by local url or data provided in parametrs"))
+                debugLog("Upload: wrong parameters for \(param.fileName) url \(localURL.path)")
+                return nil
+            }
+            
         } else if let fileData = param.fileData {
             task = requestService.uploadFileRequestTask(path: param.patch,
                                                         headerParametrs: param.header,
@@ -204,7 +213,8 @@ class BaseRequestService {
                                                         timeoutInterval: param.timeout,
                                                         response: response)
         } else {
-            debugPrint("Upload: wrong parameters", param)
+             Crashlytics.crashlytics().record(error: CustomErrors.text("UPLOAD: executeUploadRequest no data found by local url or data provided in parametrs"))
+            debugLog("Upload: wrong parameters for \(param.fileName) url \(param.urlToLocalFile?.path)")
             return nil
         }
         

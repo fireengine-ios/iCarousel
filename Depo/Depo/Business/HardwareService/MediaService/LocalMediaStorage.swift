@@ -10,6 +10,7 @@ import UIKit
 import Photos
 import SwiftyGif
 import CoreServices
+import FirebaseCrashlytics
 
 typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatus) -> Void
 
@@ -941,13 +942,19 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let operation = GetOriginalImageOperation(photoManager: photoManager,
                                                   asset: asset) { data, string, orientation, dict in
                                                     let file = UUID().uuidString
+                                                    guard let data = data else {
+                                                        Crashlytics.crashlytics().record(error: CustomErrors.text("copyImageAsset: found nil data while trying to get it from asset(after GetOriginalImageOperation)"))
+                                                        debugLog("no asset's data found")
+                                                        semaphore.signal()
+                                                        return
+                                                    }
                                                     url = Device.tmpFolderUrl(withComponent: file)
                                                     do {
                                                         guard let url = url else {
                                                             semaphore.signal()
                                                             return
                                                         }
-                                                        try data?.write(to: url)
+                                                        try data.write(to: url)
                                                         semaphore.signal()
                                                     } catch {
                                                         debugLog(error.description)
@@ -959,7 +966,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         semaphore.wait()
         return url
     }
-
+    
     // MARK: Asset info
 
     
@@ -1396,7 +1403,13 @@ class GetOriginalImageOperation: Operation {
         options.deliveryMode = .highQualityFormat
 //        options.isSynchronous = true
         
-        photoManager.requestImageData(for: asset, options: options, resultHandler: callback)
+        photoManager.requestImageData(for: asset, options: options, resultHandler: { data, string, orientation, dict in
+            if data == nil, let error = dict?[PHImageErrorKey] as? Error {
+                Crashlytics.crashlytics().record(error: error)
+                debugLog("GetOriginalImageOperation: PHImageManager requestImageData no data error \(error.description)")
+            }
+            self.callback(data, string, orientation, dict)
+        })
     }
 }
 
