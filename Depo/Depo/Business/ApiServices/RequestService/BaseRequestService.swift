@@ -204,14 +204,7 @@ class BaseRequestService {
                 debugLog("Upload: wrong parameters for \(param.fileName) url \(localURL.path)")
                 return nil
             }
-               
-            //used to be by url
-//            task = requestService.uploadFileRequestTask(patch: param.patch,
-//                                                            headerParametrs: param.header,
-//                                                            fromFile: localURL,
-//                                                            method: RequestMethod.Put,
-//                                                            timeoutInterval: param.timeout,
-//                                                            response: response)
+            
         } else if let fileData = param.fileData {
             task = requestService.uploadFileRequestTask(path: param.patch,
                                                         headerParametrs: param.header,
