@@ -5341,6 +5341,12 @@
 		98BB909D24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */; };
 		98BB909E24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */; };
 		98BB909F24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */; };
+		98BBF0D525024D610038A31E /* PhotoEditImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BBF0D425024D610038A31E /* PhotoEditImageScrollView.swift */; };
+		98BBF0D625024D610038A31E /* PhotoEditImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BBF0D425024D610038A31E /* PhotoEditImageScrollView.swift */; };
+		98BBF0D725024D610038A31E /* PhotoEditImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BBF0D425024D610038A31E /* PhotoEditImageScrollView.swift */; };
+		98BBF0D825024D610038A31E /* PhotoEditImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BBF0D425024D610038A31E /* PhotoEditImageScrollView.swift */; };
+		98BBF0D925024D610038A31E /* PhotoEditImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BBF0D425024D610038A31E /* PhotoEditImageScrollView.swift */; };
+		98BBF0DA25024D610038A31E /* PhotoEditImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BBF0D425024D610038A31E /* PhotoEditImageScrollView.swift */; };
 		98BCD711224A615A0090C13D /* SmartAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCD70F224A61590090C13D /* SmartAlbumCell.swift */; };
 		98BCD712224A615A0090C13D /* SmartAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BCD70F224A61590090C13D /* SmartAlbumCell.swift */; };
 		98BCD713224A615A0090C13D /* SmartAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98BCD710224A615A0090C13D /* SmartAlbumCell.xib */; };
@@ -13314,6 +13320,7 @@
 		98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceConstants.swift; sourceTree = "<group>"; };
 		98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditViewUIManager.swift; sourceTree = "<group>"; };
+		98BBF0D425024D610038A31E /* PhotoEditImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditImageScrollView.swift; sourceTree = "<group>"; };
 		98BCD70F224A61590090C13D /* SmartAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartAlbumCell.swift; sourceTree = "<group>"; };
 		98BCD710224A615A0090C13D /* SmartAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmartAlbumCell.xib; sourceTree = "<group>"; };
 		98BE78A524517E4200B8864F /* SnackbarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SnackbarView.xib; sourceTree = "<group>"; };
@@ -18725,6 +18732,7 @@
 				9823192D24F3A1E600FD16E2 /* Adjustments */,
 				9823195124F3A1E600FD16E2 /* SelectionMenuController */,
 				9823195024F3A1E600FD16E2 /* SliderView.swift */,
+				98BBF0D425024D610038A31E /* PhotoEditImageScrollView.swift */,
 			);
 			path = PhotoEditViews;
 			sourceTree = "<group>";
@@ -27089,6 +27097,7 @@
 				985786F423E01F8800D35DDA /* SettingFooterView.swift in Sources */,
 				0303A0252397D0D000907F42 /* UserProfilePresenter.swift in Sources */,
 				0303A0262397D0D000907F42 /* MusicInteractorOutput.swift in Sources */,
+				98BBF0D825024D610038A31E /* PhotoEditImageScrollView.swift in Sources */,
 				0303A0272397D0D000907F42 /* PasscodeSettingsPresenter.swift in Sources */,
 				0303A0282397D0D000907F42 /* Bool+Init.swift in Sources */,
 				0303A0292397D0D000907F42 /* Router.swift in Sources */,
@@ -29153,6 +29162,7 @@
 				8CE20071207CD12900EF3483 /* ServerMessageError.swift in Sources */,
 				7C4F60A32019D0340033C58F /* CollageCard.swift in Sources */,
 				8C0E8D3E1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
+				98BBF0D625024D610038A31E /* PhotoEditImageScrollView.swift in Sources */,
 				B52BAC6823AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */,
 				CEF371A720887774007AD36E /* AppConfigurator.swift in Sources */,
 				8C0E8D3F1FDEBDFF00789C91 /* HomeViewTopView.swift in Sources */,
@@ -31755,6 +31765,7 @@
 				8C208641228D4B2E000BEDAD /* ScrollBarView.swift in Sources */,
 				730A998222D740130037ABA9 /* TwoFactorAuthenticationCell.swift in Sources */,
 				CE0808AA234720D900F1944F /* TBMatikCard.swift in Sources */,
+				98BBF0D525024D610038A31E /* PhotoEditImageScrollView.swift in Sources */,
 				B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */,
 				A1CEB018812ED0593B7A063B /* PhotoVideoDetailInteractorOutput.swift in Sources */,
 				73D723EA231D08A6006AE835 /* PackageOffer.swift in Sources */,
@@ -32704,6 +32715,7 @@
 				CE78493422A685FB00662219 /* BaseMediaContent.swift in Sources */,
 				CE78493522A685FB00662219 /* AuthenticationServiceResponseError.swift in Sources */,
 				CE78493622A685FB00662219 /* IntroduceSubView.swift in Sources */,
+				98BBF0D925024D610038A31E /* PhotoEditImageScrollView.swift in Sources */,
 				CE78493822A685FB00662219 /* LoginInteractorOutput.swift in Sources */,
 				CE78493922A685FB00662219 /* ImageFormat.swift in Sources */,
 				CE78493A22A685FB00662219 /* PremiumView.swift in Sources */,
@@ -34970,6 +34982,7 @@
 				CF8B677D23CBC9D70021B021 /* AlertFilesActionsSheetConfigurator.swift in Sources */,
 				CF8B677E23CBC9D70021B021 /* PremiumHeaderView.swift in Sources */,
 				CF8B677F23CBC9D70021B021 /* StoriesInitializer.swift in Sources */,
+				98BBF0D725024D610038A31E /* PhotoEditImageScrollView.swift in Sources */,
 				98435B7A23F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift in Sources */,
 				CF8B678023CBC9D70021B021 /* SplashConfigurator.swift in Sources */,
 				CF8B678123CBC9D70021B021 /* UsageInfoRouterInput.swift in Sources */,
@@ -35686,6 +35699,7 @@
 				CF8B6CA223CBCA280021B021 /* UsageInfoInitializer.swift in Sources */,
 				CF8B6CA323CBCA280021B021 /* PhoneVerificationDataStorage.swift in Sources */,
 				CF8B6CA423CBCA280021B021 /* FaceImagePhotosConfigurator.swift in Sources */,
+				98BBF0DA25024D610038A31E /* PhotoEditImageScrollView.swift in Sources */,
 				CF8B6CA523CBCA280021B021 /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				FA016FB823D30750008713ED /* FileInfoModuleOutput.swift in Sources */,
 				CF8B6CA623CBCA280021B021 /* PreventCollectionView.swift in Sources */,
@@ -40640,7 +40654,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d.2.5;
+				CURRENT_PROJECT_VERSION = d.2.7;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -40702,7 +40716,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d.2.5;
+				CURRENT_PROJECT_VERSION = d.2.7;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -40760,7 +40774,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d.2.5;
+				CURRENT_PROJECT_VERSION = d.2.7;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -40819,7 +40833,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d.2.5;
+				CURRENT_PROJECT_VERSION = d.2.7;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

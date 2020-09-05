@@ -31,11 +31,16 @@ struct AdjustRatio {
 
 final class AdjustView: UIView, NibInit, CropToolbarProtocol {
     
-    static func with(ratios: [AdjustRatio], delegate: AdjustViewDelegate?) -> AdjustView {
+    static func with(selectedRatio: AdjustRatio?, ratios: [AdjustRatio], transformation: Transformation?, delegate: AdjustViewDelegate?) -> AdjustView {
         let view = AdjustView.initFromNib()
         view.delegate = delegate
         view.ratios = ratios
-        if let ratio = view.ratios.first(where: { $0.name == TextConstants.photoEditRatioOriginal }) {
+        if let rotation = transformation?.rotation {
+            let value = Float(rotation / CGFloat.pi * 180.0).remainder(dividingBy: 90)
+            view.setCurrrentValue(rotation > 0 ? value : -value)
+        }
+        
+        if let ratio = selectedRatio ?? view.ratios.first(where: { $0.name == TextConstants.photoEditRatioOriginal }) {
             view.selectedRatio = ratio
         }
         return view
@@ -81,7 +86,7 @@ final class AdjustView: UIView, NibInit, CropToolbarProtocol {
     private weak var delegate: AdjustViewDelegate?
     
     private var ratios = [AdjustRatio]()
-    private var selectedRatio = AdjustRatio(name: "", value: nil)
+    private(set) var selectedRatio = AdjustRatio(name: "", value: nil)
     
     //MARK: - Setup
     
@@ -119,6 +124,12 @@ final class AdjustView: UIView, NibInit, CropToolbarProtocol {
     
     func updateRatio(_ value: AdjustRatio) {
         selectedRatio = value
+    }
+    
+    private func setCurrrentValue(_ value: Float) {
+        currentValue = value
+        currentValueLabel.text = "\(Int(value))"
+        slider.slider.value = CGFloat(value)
     }
     
     //MARK: - Actions
