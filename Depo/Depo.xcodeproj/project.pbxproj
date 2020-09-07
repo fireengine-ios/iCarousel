@@ -6078,6 +6078,12 @@
 		B5E74799208B3736003A7110 /* UploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E74797208B3736003A7110 /* UploadOperation.swift */; };
 		B5E7479B208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
 		B5E7479C208DC43F003A7110 /* BackgroundTaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */; };
+		B5ECA56F25063E0C00C290BA /* CIImage+CGConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECA56E25063E0C00C290BA /* CIImage+CGConvert.swift */; };
+		B5ECA57025063E0C00C290BA /* CIImage+CGConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECA56E25063E0C00C290BA /* CIImage+CGConvert.swift */; };
+		B5ECA57125063E0C00C290BA /* CIImage+CGConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECA56E25063E0C00C290BA /* CIImage+CGConvert.swift */; };
+		B5ECA57225063E0C00C290BA /* CIImage+CGConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECA56E25063E0C00C290BA /* CIImage+CGConvert.swift */; };
+		B5ECA57325063E0C00C290BA /* CIImage+CGConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECA56E25063E0C00C290BA /* CIImage+CGConvert.swift */; };
+		B5ECA57425063E0C00C290BA /* CIImage+CGConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5ECA56E25063E0C00C290BA /* CIImage+CGConvert.swift */; };
 		B5F40BB1204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
 		B5F40BB2204A80220011CB66 /* AutoSyncSettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */; };
 		B5FB65761FDE6F6900A02FD7 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
@@ -13626,6 +13632,7 @@
 		B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkcellUpdaterService.swift; sourceTree = "<group>"; };
 		B5E74797208B3736003A7110 /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
 		B5E7479A208DC43F003A7110 /* BackgroundTaskService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTaskService.swift; sourceTree = "<group>"; };
+		B5ECA56E25063E0C00C290BA /* CIImage+CGConvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+CGConvert.swift"; sourceTree = "<group>"; };
 		B5F40BB0204A80220011CB66 /* AutoSyncSettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsModel.swift; sourceTree = "<group>"; };
 		B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationProgressService.swift; sourceTree = "<group>"; };
 		B652E3FD76DE060B9DBD160F /* AlbumDetailViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumDetailViewController.swift; sourceTree = "<group>"; };
@@ -19895,6 +19902,7 @@
 		B549B6C924CF098200D39C44 /* PhotoEdit */ = {
 			isa = PBXGroup;
 			children = (
+				B5ECA56A25063DD300C290BA /* Extensions */,
 				B51D959E24D0105400FA2EA0 /* Adjustments */,
 				98231A2224F3A23400FD16E2 /* CustomFilters */,
 				985D87F024D0237D004BCDFF /* PhotoEditViewFactory.swift */,
@@ -20169,6 +20177,14 @@
 				B52BAC5B23AE1C3E0051E21D /* CoreDataMigrationStep.swift */,
 			);
 			path = Migration;
+			sourceTree = "<group>";
+		};
+		B5ECA56A25063DD300C290BA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B5ECA56E25063E0C00C290BA /* CIImage+CGConvert.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		B5FB65741FDE6F3E00A02FD7 /* OperationProgressService */ = {
@@ -27899,6 +27915,7 @@
 				0303A2932397D0D000907F42 /* AnalyzeHistoryViewController.swift in Sources */,
 				0303A2942397D0D000907F42 /* PhoneVerificationInteractorOutput.swift in Sources */,
 				0303A2952397D0D000907F42 /* PeriodicContactSyncDataStorage.swift in Sources */,
+				B5ECA57225063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
 				0303A2962397D0D000907F42 /* MyStorageRouterInput.swift in Sources */,
 				0303A2972397D0D000907F42 /* SmartTimerLabel.swift in Sources */,
 				0303A2982397D0D000907F42 /* LoginSettingsPresenter.swift in Sources */,
@@ -29138,6 +29155,7 @@
 				73FE51FD22CF5EC300270448 /* CreateStoryAudioItemCell.swift in Sources */,
 				FA33A7E3209451B1008F946C /* NavigationBarStyle.swift in Sources */,
 				C62239AE204973300043ED44 /* FaceImageChangeCoverRouterInput.swift in Sources */,
+				B5ECA57025063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
 				C62239A82049731B0043ED44 /* FaceImageChangeCoverInteractor.swift in Sources */,
 				8C0E8D031FDEBDFF00789C91 /* ProgressCardProtocol.swift in Sources */,
 				9809317823952CAC00ECFEF8 /* SmartAlbumsManager.swift in Sources */,
@@ -31651,6 +31669,7 @@
 				CEE1D1FA1F714DFE0008F4CF /* MediaItemsMetaData+CoreDataProperties.swift in Sources */,
 				486F7B5A208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift in Sources */,
 				CEE1D2001F714F370008F4CF /* PredicateRules.swift in Sources */,
+				B5ECA56F25063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
 				CE6DE7511FCBE84100C23CBD /* DropboxResponse.swift in Sources */,
 				CEADDA9D1F23491D001DDA8A /* FileService.swift in Sources */,
 				8C7E1F65207DF862005B19D9 /* DispatchQueueLabels.swift in Sources */,
@@ -33364,6 +33383,7 @@
 				CE784B0722A685FB00662219 /* ActionsMenuTableViewCell.swift in Sources */,
 				89E51D4822CA1111007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				9823196624F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
+				B5ECA57325063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
 				98F032ED2403FFC000F1D415 /* BackupStats.m in Sources */,
 				735766CF23AD1011008589E9 /* OverlayStickerViewControllerDesigner.swift in Sources */,
 				CF71461324B597A800D83E60 /* ContactDetailNoInfoCell.swift in Sources */,
@@ -34666,6 +34686,7 @@
 				CF8B661B23CBC9D70021B021 /* ImportFromInstagramPresenter.swift in Sources */,
 				CF8B661C23CBC9D70021B021 /* CheckBoxView.swift in Sources */,
 				CF8B661D23CBC9D70021B021 /* KeyboardHandler.swift in Sources */,
+				B5ECA57125063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
 				98231A4D24F3A23500FD16E2 /* LimeFilter.swift in Sources */,
 				CF8B661E23CBC9D70021B021 /* UsageInfoInteractorOutput.swift in Sources */,
 				CF8B661F23CBC9D70021B021 /* SyncServiceManager.swift in Sources */,
@@ -36348,6 +36369,7 @@
 				CF8B6E9123CBCA280021B021 /* BaseFilesGreedInitializer.swift in Sources */,
 				CF8B6E9223CBCA280021B021 /* SearchViewPresenter.swift in Sources */,
 				9823196724F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
+				B5ECA57425063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
 				98F032EE2403FFC000F1D415 /* BackupStats.m in Sources */,
 				CF8B6E9323CBCA280021B021 /* TermsOfUseModuleInput.swift in Sources */,
 				CF71461424B597A800D83E60 /* ContactDetailNoInfoCell.swift in Sources */,
