@@ -514,10 +514,11 @@ final class MediaItemOperationsService {
         let filetypePredicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.fileTypeValue) = %d AND \(MediaItem.PropertyNameKey.isLocalItemValue) = false", fileType.valueForCoreDataMapping())
         
         let takenDatePredicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.sortingDate) != Nil AND \(MediaItem.PropertyNameKey.sortingDate) <= %@ AND \(MediaItem.PropertyNameKey.sortingDate) >= %@", topInfo.date as NSDate, bottomInfo.date as NSDate)
-        let cretedDatePredicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.creationDateValue) != Nil AND \(MediaItem.PropertyNameKey.creationDateValue) <= %@ AND \(MediaItem.PropertyNameKey.creationDateValue) >= %@", topInfo.date as NSDate, bottomInfo.date as NSDate)
-        
-        let takenOrCreatedDatePredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [takenDatePredicate, cretedDatePredicate])
-        let finalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filetypePredicate, takenOrCreatedDatePredicate])
+        //TODO: check why Can has problems after prep
+//        let cretedDatePredicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.creationDateValue) != Nil AND \(MediaItem.PropertyNameKey.creationDateValue) <= %@ AND \(MediaItem.PropertyNameKey.creationDateValue) >= %@", topInfo.date as NSDate, bottomInfo.date as NSDate)
+//
+//        let takenOrCreatedDatePredicate = NSCompoundPredicate(orPredicateWithSubpredicates: [takenDatePredicate, cretedDatePredicate])
+        let finalPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [filetypePredicate, takenDatePredicate])
 
         let inIdRangePredicate: NSPredicate
         if topInfo.date != bottomInfo.date {
