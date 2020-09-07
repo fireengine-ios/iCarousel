@@ -640,6 +640,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     private func prepare(image: UIImage, outputURL: URL) -> Bool {
         let context = CIContext()
+        
         guard
             let ciImage = CIImage(image: image),
             let cgImage = context.createCGImage(ciImage, from: ciImage.extent),
@@ -649,7 +650,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         
         CGImageDestinationAddImage(cgImageDestination, cgImage,
-                                   [kCGImageDestinationLossyCompressionQuality as String: 1.0] as CFDictionary)
+                                   [kCGImageDestinationLossyCompressionQuality as String: 0.8] as CFDictionary)
         CGImageDestinationFinalize(cgImageDestination)
         
         return true
