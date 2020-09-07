@@ -223,6 +223,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         guard let item = item.first as? Item, let originalUrl = item.tmpDownloadUrl else {
             return
         }
+        
         ImageDownloder().getImage(patch: originalUrl) { [weak self] image in
             guard
                 let self = self,
@@ -247,6 +248,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             let previewImage = UIImage(cgImage: cgImage, scale: image.scale, orientation: image.imageOrientation)
             
             let vc = PhotoEditViewController.with(originalImage: image, previewImage: previewImage, presented: completion) { [weak self] controller, completionType in
+
                 switch completionType {
                     case .canceled:
                         controller.dismiss(animated: true)
