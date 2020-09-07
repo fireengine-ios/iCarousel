@@ -220,21 +220,35 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func edit(item: [BaseDataSourceItem], completion: VoidHandler?) {
-        guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
+        guard let item = item.first as? Item, let originalUrl = item.tmpDownloadUrl else {
             return
         }
         
-        ImageDownloder().getImage(patch: url) { [weak self] image in
+        ImageDownloder().getImage(patch: originalUrl) { [weak self] image in
             guard
                 let self = self,
                 let image = image
             else {
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .failure))
                 UIApplication.showErrorAlert(message: TextConstants.errorServer)
-                
+                completion?()
                 return
             }
-            let vc = PhotoEditViewController.with(originalImage: image, previewImage: image, presented: completion) { [weak self] controller, completionType in
+            
+            guard
+                let previewData = image.jpeg(.medium),
+                let ciImage = CIImage(data: previewData),
+                let cgImage = ciImage.toCGImage
+            else {
+                UIApplication.showErrorAlert(message: TextConstants.commonServiceError)
+                completion?()
+                return
+            }
+            
+            let previewImage = UIImage(cgImage: cgImage, scale: image.scale, orientation: image.imageOrientation)
+            
+            let vc = PhotoEditViewController.with(originalImage: image, previewImage: previewImage, presented: completion) { [weak self] controller, completionType in
+
                 switch completionType {
                     case .canceled:
                         controller.dismiss(animated: true)
