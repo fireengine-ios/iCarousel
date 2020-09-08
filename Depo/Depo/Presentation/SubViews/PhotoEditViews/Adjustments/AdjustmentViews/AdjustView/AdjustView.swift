@@ -16,10 +16,10 @@ protocol AdjustViewDelegate: class {
 
 struct AdjustRatio {
     let name: String
-    let value: Double?
+    let value: Double
     
     static func allValues(originalRatio: Double) -> [AdjustRatio] {
-        return [AdjustRatio(name: TextConstants.photoEditRatioFree, value: nil),
+        return [AdjustRatio(name: TextConstants.photoEditRatioFree, value: -1),
                 AdjustRatio(name: TextConstants.photoEditRatioOriginal, value: originalRatio),
                 AdjustRatio(name: "1 x 1", value: 1),
                 AdjustRatio(name: "16 x 9", value: 16/9),
@@ -31,14 +31,11 @@ struct AdjustRatio {
 
 final class AdjustView: UIView, NibInit, CropToolbarProtocol {
     
-    static func with(selectedRatio: AdjustRatio?, ratios: [AdjustRatio], transformation: Transformation?, delegate: AdjustViewDelegate?) -> AdjustView {
+    static func with(selectedRatio: AdjustRatio?, ratios: [AdjustRatio], transformation: Transformation?, rotateValue: Float, delegate: AdjustViewDelegate?) -> AdjustView {
         let view = AdjustView.initFromNib()
         view.delegate = delegate
         view.ratios = ratios
-        if let rotation = transformation?.rotation {
-            let value = Float(rotation / CGFloat.pi * 180.0).remainder(dividingBy: 90)
-            view.setCurrrentValue(rotation > 0 ? value : -value)
-        }
+        view.setCurrrentValue(rotateValue)
         
         if let ratio = selectedRatio ?? view.ratios.first(where: { $0.name == TextConstants.photoEditRatioOriginal }) {
             view.selectedRatio = ratio
@@ -48,7 +45,7 @@ final class AdjustView: UIView, NibInit, CropToolbarProtocol {
     
     private let minValue: Float = -45
     private let maxValue: Float = 45
-    private var currentValue: Float = 0
+    private(set) var currentValue: Float = 0
     private let defaultValue: Float = 0
     
     @IBOutlet private weak var sliderContentView: UIView!
@@ -86,7 +83,7 @@ final class AdjustView: UIView, NibInit, CropToolbarProtocol {
     private weak var delegate: AdjustViewDelegate?
     
     private var ratios = [AdjustRatio]()
-    private(set) var selectedRatio = AdjustRatio(name: "", value: nil)
+    private(set) var selectedRatio = AdjustRatio(name: "", value: 0)
     
     //MARK: - Setup
     
