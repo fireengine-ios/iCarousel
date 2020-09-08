@@ -16,6 +16,7 @@ extension UIImage {
         case low     = 0.25
         case medium  = 0.5
         case high    = 0.75
+        case higher  = 0.99
         case highest = 1
     }
     

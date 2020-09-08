@@ -30,8 +30,8 @@ final class PhotoEditSaveService {
             }
             
             if asCopy {
-                guard let imageData = image.jpeg(.high) else {
-                    debugLog("PHOTOEDIT: can't create UIImageJPEGRepresentation")
+                guard let imageData = image.jpeg(.higher) ?? UIImagePNGRepresentation(image) else {
+                    debugLog("PHOTOEDIT: can't create UIImage Representation")
                     completion(.failed(ErrorResponse.string(TextConstants.cameraAccessAlertText)))
                     return
                 }
@@ -142,7 +142,8 @@ final class PhotoEditSaveService {
             debugLog("PHOTOEDIT: create local")
             
             do {
-                try image.jpeg(.high)?.write(to: tmpLocation)
+                let data = image.jpeg(.higher) ?? UIImagePNGRepresentation(image)
+                try data?.write(to: tmpLocation)
             } catch {
                 debugLog("PHOTOEDIT: Can't write data to the tmp directoy")
                 completion(.failed(ErrorResponse.string("Can't write data to the tmp directoy")))
