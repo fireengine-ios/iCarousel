@@ -399,7 +399,7 @@ extension PhotoVideoDetailViewController: BottomDetailViewAnimationManagerDelega
     }
     
     func pullToDownEffect() {
-        hideView()
+        //hideView()
     }
 }
 
