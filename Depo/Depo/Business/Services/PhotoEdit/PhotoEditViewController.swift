@@ -53,13 +53,16 @@ final class PhotoEditViewController: ViewController, NibInit {
     private var filterManager = FilterManager(types: FilterType.allCases)
     
     private var originalImage = UIImage()
-    private var originalPreviewImage = UIImage()
-    private var sourceImage = UIImage() {
+    private var originalPreviewImage = UIImage() {
         didSet {
-            let originalRatio = Double(sourceImage.size.width / sourceImage.size.height)
+            let originalRatio = Double(originalPreviewImage.size.width / originalPreviewImage.size.height)
             ratios = AdjustRatio.allValues(originalRatio: originalRatio)
+            if ratio == nil {
+                ratio = ratios.first(where: { $0.name == TextConstants.photoEditRatioOriginal })
+            }
         }
     }
+    private var sourceImage = UIImage()
     private var tempOriginalImage = UIImage()
     private var hasChanges: Bool {
         originalPreviewImage != sourceImage
@@ -70,6 +73,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     private var cropResult: Mantis.CropResult?
     private var ratios = [AdjustRatio]()
     private var ratio: AdjustRatio?
+    private var rotateValue: Float = 0
     private var adjustView: AdjustView?
     
     var presentedCallback: VoidHandler?
@@ -185,6 +189,15 @@ final class PhotoEditViewController: ViewController, NibInit {
         }
     }
     
+    private func prepareAdjustImage(sourceImage: UIImage, completion: @escaping ValueHandler<UIImage?>) {
+        adjustmentManager.applyAll(sourceImage: sourceImage) { [weak self] adjustedImage in
+            let filteredImage = self?.filterManager.applyAll(image: adjustedImage)
+            DispatchQueue.main.async {
+                completion(filteredImage)
+            }
+        }
+    }
+    
     private func resetToOriginal() {
         adjustmentManager.resetValues()
         sourceImage = originalPreviewImage
@@ -194,6 +207,7 @@ final class PhotoEditViewController: ViewController, NibInit {
         filterManager.resetToOriginal()
         cropResult = nil
         ratio = nil
+        rotateValue = 0
     }
     
     private func trackChanges(saveAsCopy: Bool) {
@@ -346,24 +360,31 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     
     func needShowAdjustmentView(for type: AdjustmentViewType) {
         guard type != .adjust else {
-            let view = AdjustView.with(selectedRatio: ratio, ratios: ratios, transformation: cropResult?.transformation, delegate: self)
+            let view = AdjustView.with(selectedRatio: ratio, ratios: ratios, transformation: cropResult?.transformation, rotateValue: rotateValue, delegate: self)
             var config = Mantis.Config()
             config.showRotationDial = false
             if let transformation = cropResult?.transformation {
                 config.presetTransformationType = .presetInfo(info: transformation)
             }
-            let controller = Mantis.cropCustomizableViewController(image: self.tempOriginalImage, config: config, cropToolbar: view)
-            controller.delegate = self
-            
-            let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
-            uiManager.showView(type: .adjustmentView(type), view: controller.view, changesBar: changesBar)
-            
-            if let ratio = ratio {
-                controller.setRatio(ratio.value)
+            if let ratio = ratio, ratio.value != -1 {
+                config.presetFixedRatioType = .alwaysUsingOnePresetFixedRatio(ratio: ratio.value)
             }
             
-            cropController = controller
-            adjustView = view
+            prepareAdjustImage(sourceImage: self.originalPreviewImage) { [weak self] image in
+                guard let self = self, let image = image else {
+                    return
+                }
+                
+                let controller = Mantis.cropCustomizableViewController(image: image, config: config, cropToolbar: view)
+                controller.delegate = self
+                
+                let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
+                self.uiManager.showView(type: .adjustmentView(type), view: controller.view, changesBar: changesBar)
+                
+                self.cropController = controller
+                self.adjustView = view
+            }
+
             return
         }
         
@@ -416,6 +437,7 @@ extension PhotoEditViewController: CropViewControllerDelegate {
         }
         
         ratio = adjustView?.selectedRatio
+        rotateValue = adjustView?.currentValue ?? 0
         self.cropResult = cropResult
         sourceImage = cropped
         tempOriginalImage = cropped
@@ -472,7 +494,7 @@ extension PhotoEditViewController: AdjustViewDelegate {
         }
         
         let controller = SelectionMenuController.with(style: .checkmark, items: ratios.map { $0.name }, selectedIndex: selectedIndex) { [weak self] index in
-            guard let self = self, let index = index else {
+            guard let self = self, let index = index, selectedIndex != index else {
                 return
             }
             

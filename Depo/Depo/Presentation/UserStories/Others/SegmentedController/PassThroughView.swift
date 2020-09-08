@@ -62,7 +62,7 @@ final class PassThroughView: UIView {
 
         if let parentViewController = getTopViewController(), let bottomDetailView = parentViewController.bottomDetailView {
             if parentViewController.getBottomDetailViewState() != .collapsed {
-                if parentViewController.collapseDetailView.frame.contains(point) || bottomDetailView.frame.contains(point) {
+                if bottomDetailView.frame.contains(point) {
                     return nil
                 } else {
                     return hitView

@@ -17,7 +17,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var viewForBottomBar: UIView!
     @IBOutlet private weak var bottomBlackView: UIView!
-    @IBOutlet weak var collapseDetailView: UIView!
     
     @IBOutlet private weak var swipeUpContainerView: UIView!
     // Bottom detail view
@@ -333,13 +332,12 @@ final class PhotoVideoDetailViewController: BaseViewController {
             let managedView = bottomDetailView,
             let passThroughView = passThroughView,
             let collectionView = collectionView,
-            let collapsedView = collapseDetailView,
             let parentView = view
         else {
             assertionFailure()
             return
         }
-        bottomDetailViewManager = BottomDetailViewAnimationManager(managedView: managedView, passThrowView: passThroughView, collectionView: collectionView, collapseView: collapsedView, parentView: parentView, delegate: self)
+        bottomDetailViewManager = BottomDetailViewAnimationManager(managedView: managedView, passThrowView: passThroughView, collectionView: collectionView, parentView: parentView, delegate: self)
     }
     
     func getBottomDetailViewState() -> CardState {
@@ -401,7 +399,7 @@ extension PhotoVideoDetailViewController: BottomDetailViewAnimationManagerDelega
     }
     
     func pullToDownEffect() {
-        hideView()
+        //hideView()
     }
 }
 
