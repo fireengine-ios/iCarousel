@@ -14,6 +14,10 @@ extension MTIImage {
     func makeUIImage(scale: CGFloat, orientation: UIImageOrientation) -> UIImage? {
         return Transformation.shared?.uiImage(from: self, scale: scale, orientation: orientation)
     }
+    
+    func makeCGImage() -> CGImage? {
+        return Transformation.shared?.cgImage(from: self)
+    }
 }
 
 
@@ -39,12 +43,16 @@ private final class Transformation {
         }
     }
     
-    func uiImage(from mtiImage: MTIImage?, scale: CGFloat, orientation: UIImageOrientation) -> UIImage? {
+    func cgImage(from mtiImage: MTIImage?) -> CGImage? {
         guard let input = mtiImage else {
             return nil
         }
         
-        guard let cgImage = try? mpContext.makeCGImage(from: input) else {
+        return try? mpContext.makeCGImage(from: input)
+    }
+    
+    func uiImage(from mtiImage: MTIImage?, scale: CGFloat, orientation: UIImageOrientation) -> UIImage? {
+        guard let cgImage = cgImage(from: mtiImage) else {
             return nil
         }
         
