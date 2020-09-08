@@ -650,7 +650,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         
         CGImageDestinationAddImage(cgImageDestination, cgImage,
-                                   [kCGImageDestinationLossyCompressionQuality as String: 0.8] as CFDictionary)
+                                   [kCGImageDestinationLossyCompressionQuality as String: 0.99] as CFDictionary)
         CGImageDestinationFinalize(cgImageDestination)
         
         return true
