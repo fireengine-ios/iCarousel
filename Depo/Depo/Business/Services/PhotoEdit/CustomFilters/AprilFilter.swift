@@ -11,7 +11,6 @@ import MetalPetal
 
 
 final class MPAprilFilter: CustomFilterProtocol {
-    private var mpContext: MTIContext
     
     private lazy var toneFilter: MTIRGBToneCurveFilter = {
         let filter = MTIRGBToneCurveFilter()
@@ -30,20 +29,7 @@ final class MPAprilFilter: CustomFilterProtocol {
     }()
     
     
-    init?(parameter: FilterParameterProtocol) {
-        let options = MTIContextOptions()
-        
-        guard let device = MTLCreateSystemDefaultDevice() else {
-            return nil
-        }
-        
-        do {
-            mpContext = try MTIContext(device: device, options: options)
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
-        
+    init(parameter: FilterParameterProtocol) {
         self.parameter = parameter
     }
     
@@ -52,11 +38,11 @@ final class MPAprilFilter: CustomFilterProtocol {
     
     
     func apply(on image: MTIImage?) -> MTIImage? {
-        guard let inputImage = image, let cgImage = try? mpContext.makeCGImage(from: inputImage) else {
+        guard let inputImage = image?.makeCGImage() else {
             return nil
         }
         
-        let tmpImage = UIImage(cgImage: cgImage)
+        let tmpImage = UIImage(cgImage: inputImage)
         toneFilter.inputImage = tmpImage
             .adjusting(vignetteAlpha: 150).makeMTIImage()?
             .adjusting(contrast: 1.5)
