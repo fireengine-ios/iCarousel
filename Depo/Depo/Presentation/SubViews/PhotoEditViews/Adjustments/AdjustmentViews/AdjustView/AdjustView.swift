@@ -31,7 +31,7 @@ struct AdjustRatio {
 
 final class AdjustView: UIView, NibInit, CropToolbarProtocol {
     
-    static func with(selectedRatio: AdjustRatio?, ratios: [AdjustRatio], transformation: Transformation?, rotateValue: Float, delegate: AdjustViewDelegate?) -> AdjustView {
+    static func with(selectedRatio: AdjustRatio?, ratios: [AdjustRatio], rotateValue: Float, delegate: AdjustViewDelegate?) -> AdjustView {
         let view = AdjustView.initFromNib()
         view.delegate = delegate
         view.ratios = ratios

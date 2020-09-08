@@ -5159,6 +5159,12 @@
 		9864297022F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
 		9864297122F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
 		9864297222F99B460039811C /* CreateStoryPhotoSelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */; };
+		9868100925080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868100825080FCF0046483B /* PhotoEditAdjustManager.swift */; };
+		9868100A25080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868100825080FCF0046483B /* PhotoEditAdjustManager.swift */; };
+		9868100B25080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868100825080FCF0046483B /* PhotoEditAdjustManager.swift */; };
+		9868100C25080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868100825080FCF0046483B /* PhotoEditAdjustManager.swift */; };
+		9868100D25080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868100825080FCF0046483B /* PhotoEditAdjustManager.swift */; };
+		9868100E25080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9868100825080FCF0046483B /* PhotoEditAdjustManager.swift */; };
 		986B20622077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		986B20632077684C00E04B96 /* StreamReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986B20612077684B00E04B96 /* StreamReaderWriter.swift */; };
 		98732B3F2460168900E9D5D2 /* ElementTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98732B3E2460168900E9D5D2 /* ElementTypes.swift */; };
@@ -13281,6 +13287,7 @@
 		985E9BFB2493AFD6004D70BA /* UITextView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
 		9864296722F834F10039811C /* SpotifyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyResponse.swift; sourceTree = "<group>"; };
 		9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPhotoSelectionController.swift; sourceTree = "<group>"; };
+		9868100825080FCF0046483B /* PhotoEditAdjustManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditAdjustManager.swift; sourceTree = "<group>"; };
 		986B20612077684B00E04B96 /* StreamReaderWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamReaderWriter.swift; sourceTree = "<group>"; };
 		9870679A3B89B29A6A563C0A /* OTPViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewModuleInput.swift; sourceTree = "<group>"; };
 		98732B3E2460168900E9D5D2 /* ElementTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementTypes.swift; sourceTree = "<group>"; };
@@ -19910,6 +19917,7 @@
 				985D87BA24D0156A004BCDFF /* PhotoEditViewController.xib */,
 				985D87BB24D0156A004BCDFF /* PhotoEditViewController.swift */,
 				B5BBBE9924FCF0B100A719CB /* PhotoEditSaveService.swift */,
+				9868100825080FCF0046483B /* PhotoEditAdjustManager.swift */,
 			);
 			path = PhotoEdit;
 			sourceTree = "<group>";
@@ -27619,6 +27627,7 @@
 				0303A18E2397D0D000907F42 /* EmptyContainerNavVC.swift in Sources */,
 				9823198F24F3A1E700FD16E2 /* ColorView.swift in Sources */,
 				0303A18F2397D0D000907F42 /* PasscodeViewImp.swift in Sources */,
+				9868100C25080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */,
 				0303A1902397D0D000907F42 /* PeriodicContactSyncViewOutput.swift in Sources */,
 				0303A1912397D0D000907F42 /* FaceImageAddNameConfigurator.swift in Sources */,
 				0303A1922397D0D000907F42 /* AnalyzeHistoryTabBarPresenter.swift in Sources */,
@@ -29314,6 +29323,7 @@
 				89EA4F7A240902C400A2C543 /* PackagesTableViewCell.swift in Sources */,
 				8C0E8D6C1FDEBDFF00789C91 /* PackagesConfigurator.swift in Sources */,
 				8C0E8D6D1FDEBDFF00789C91 /* EmptyContainerNavVC.swift in Sources */,
+				9868100A25080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */,
 				8C0E8D6E1FDEBDFF00789C91 /* PasscodeViewImp.swift in Sources */,
 				C62239B9204976FD0043ED44 /* FaceImagePhotosInteractor.swift in Sources */,
 				8C0E8D711FDEBDFF00789C91 /* LoginInitializer.swift in Sources */,
@@ -32237,6 +32247,7 @@
 				9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */,
 				B56FBB252122C48C004F4A59 /* TermsOfUseRouter.swift in Sources */,
 				98F0333D2403FFC100F1D415 /* BackupHelper.m in Sources */,
+				9868100925080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */,
 				DB6E1B2B2651A46923CB165B /* FeedbackViewController.swift in Sources */,
 				EF2EE1EEC26868913C9251BD /* FeedbackViewModuleInput.swift in Sources */,
 				C1FD046A70F4C0DF7651095E /* FeedbackViewPresenter.swift in Sources */,
@@ -33825,6 +33836,7 @@
 				CE784C6922A685FB00662219 /* UIImage+Orientation.swift in Sources */,
 				B5B01A7423FA7CB900B03426 /* ResumableUploadInfoService.swift in Sources */,
 				985D87F524D0237D004BCDFF /* PhotoEditViewFactory.swift in Sources */,
+				9868100D25080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */,
 				8E26D9792306998B00D08123 /* MusicInteractor.swift in Sources */,
 				CE784C6B22A685FB00662219 /* FeedbackViewInteractorOutput.swift in Sources */,
 				CE784C6C22A685FB00662219 /* FeedbackViewInteractor.swift in Sources */,
@@ -34976,6 +34988,7 @@
 				CF8B671723CBC9D70021B021 /* EULAResponse.swift in Sources */,
 				CF8B671823CBC9D70021B021 /* CircleProgressView.swift in Sources */,
 				CF8B671A23CBC9D70021B021 /* SelectNameModuleOutput.swift in Sources */,
+				9868100B25080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */,
 				CF7145F324B597A800D83E60 /* ContactInfoView.swift in Sources */,
 				CF8B671B23CBC9D70021B021 /* Text+Size.swift in Sources */,
 				CF8B671C23CBC9D70021B021 /* PrivacyPolicyController.swift in Sources */,
@@ -36811,6 +36824,7 @@
 				B5B01A7523FA7CB900B03426 /* ResumableUploadInfoService.swift in Sources */,
 				CF8B701523CBCA280021B021 /* MusicInteractor.swift in Sources */,
 				985D87F624D0237D004BCDFF /* PhotoEditViewFactory.swift in Sources */,
+				9868100E25080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */,
 				CF8B701623CBCA280021B021 /* FeedbackViewInteractorOutput.swift in Sources */,
 				CF8B701723CBCA280021B021 /* FeedbackViewInteractor.swift in Sources */,
 				CF8B701823CBCA280021B021 /* FeedbackViewRouterInput.swift in Sources */,
