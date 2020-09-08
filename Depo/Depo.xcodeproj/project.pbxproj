@@ -11959,6 +11959,20 @@
 			remoteGlobalIDString = B58936C024FA773E00E3FA9C;
 			remoteInfo = LifeboxWidgetExtension;
 		};
+		B59B650E250764F4003F6BD6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B58936C024FA773E00E3FA9C;
+			remoteInfo = LifeboxWidgetExtension;
+		};
+		B59B651025076512003F6BD6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B58936C024FA773E00E3FA9C;
+			remoteInfo = LifeboxWidgetExtension;
+		};
 		CE79E4AA1F695DA200C1F151 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
@@ -13698,6 +13712,7 @@
 		B58BF2C224FAF1B100CBE2A7 /* LifeboxWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxWidgetExtension.entitlements; sourceTree = "<group>"; };
 		B592448D23C86BA70066CA57 /* HiddenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenService.swift; sourceTree = "<group>"; };
 		B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+TrimmedQuery.swift"; sourceTree = "<group>"; };
+		B59B650A25065808003F6BD6 /* LifeboxWidgetExtensionDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxWidgetExtensionDebug.entitlements; sourceTree = "<group>"; };
 		B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountSectionMediator.swift; sourceTree = "<group>"; };
 		B5A84522212DA314007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
 		B5A84524212DA325007EA795 /* images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = images.xcassets; sourceTree = "<group>"; };
@@ -14877,6 +14892,7 @@
 		051E1DEA19CAC2F900FD1E03 = {
 			isa = PBXGroup;
 			children = (
+				B59B650A25065808003F6BD6 /* LifeboxWidgetExtensionDebug.entitlements */,
 				B58BF2C224FAF1B100CBE2A7 /* LifeboxWidgetExtension.entitlements */,
 				051E1DFC19CAC2F900FD1E03 /* Depo */,
 				CE79E4A61F695DA200C1F151 /* Depo_LifeTechUITests */,
@@ -23012,6 +23028,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B59B650F250764F4003F6BD6 /* PBXTargetDependency */,
 				B549B6B124CF07B200D39C44 /* PBXTargetDependency */,
 				984B1EDB23685DEF009ACCFF /* PBXTargetDependency */,
 				7A3E0C07206273CE00F79A1C /* PBXTargetDependency */,
@@ -23409,6 +23426,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B59B651125076512003F6BD6 /* PBXTargetDependency */,
 				B549B6B624CF07D700D39C44 /* PBXTargetDependency */,
 				CF8B636B23CBC9D70021B021 /* PBXTargetDependency */,
 				CF8B636F23CBC9D70021B021 /* PBXTargetDependency */,
@@ -37309,6 +37327,16 @@
 			target = B58936C024FA773E00E3FA9C /* LifeboxWidgetExtension */;
 			targetProxy = B58936CC24FA773F00E3FA9C /* PBXContainerItemProxy */;
 		};
+		B59B650F250764F4003F6BD6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B58936C024FA773E00E3FA9C /* LifeboxWidgetExtension */;
+			targetProxy = B59B650E250764F4003F6BD6 /* PBXContainerItemProxy */;
+		};
+		B59B651125076512003F6BD6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B58936C024FA773E00E3FA9C /* LifeboxWidgetExtension */;
+			targetProxy = B59B651025076512003F6BD6 /* PBXContainerItemProxy */;
+		};
 		CE79E4AB1F695DA200C1F151 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CE51AAF51EF90853005DCEE0 /* Depo_LifeTech */;
@@ -40745,7 +40773,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = LifeboxWidgetExtensionDebug.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
