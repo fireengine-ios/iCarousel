@@ -11,22 +11,8 @@ import MetalPetal
 
 
 final class MPOldManFilter: CustomFilterProtocol {
-    private var mpContext: MTIContext
     
-    init?(parameter: FilterParameterProtocol) {
-        let options = MTIContextOptions()
-        
-        guard let device = MTLCreateSystemDefaultDevice() else {
-            return nil
-        }
-        
-        do {
-            mpContext = try MTIContext(device: device, options: options)
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
-        
+    init(parameter: FilterParameterProtocol) {
         self.parameter = parameter
     }
     
@@ -45,7 +31,7 @@ final class MPOldManFilter: CustomFilterProtocol {
             .adjusting(saturation: 0.8)
             .adjusting(contrast: 1.3)
         
-        guard let cgImage = try? mpContext.makeCGImage(from: tmpImage) else {
+        guard let cgImage = tmpImage.makeCGImage() else {
             return nil
         }
         
