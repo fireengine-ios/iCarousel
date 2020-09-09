@@ -247,7 +247,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             
             let previewImage = UIImage(cgImage: cgImage, scale: image.scale, orientation: image.imageOrientation)
             
-            let vc = PhotoEditViewController.with(originalImage: image, previewImage: previewImage, presented: completion) { [weak self] controller, completionType in
+            let vc = PhotoEditViewController.with(originalImage: image.imageWithFixedOrientation, previewImage: previewImage.imageWithFixedOrientation, presented: completion) { [weak self] controller, completionType in
 
                 switch completionType {
                     case .canceled:
