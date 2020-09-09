@@ -87,8 +87,8 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
 
     private func setInitialState() {
-        uiManager.showInitialState()
         uiManager.image = sourceImage
+        uiManager.showInitialState()
         uiManager.navBarView.state = hasChanges ? .edit : .initial
     }
     
@@ -168,14 +168,8 @@ final class PhotoEditViewController: ViewController, NibInit {
                 return
             }
             
-            var resultImage = filteredImage
-            if
-                let cropInfo = self.adjustManager.cropInfo,
-                let croppedImage = Mantis.getCroppedImage(byCropInfo: cropInfo, andImage: filteredImage)
-            {
-                resultImage = croppedImage
-            }
-            
+            let resultImage = self.adjustManager.getCroppedImage(for: filteredImage)
+
             completion(resultImage)
         }
     }
@@ -281,12 +275,17 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
     }
     
     func applyChanges() {
-        if let image = uiManager.image {
-            sourceImage = image
+        func updateSourceImage(resetToInitial: Bool = true) {
+            if let image = uiManager.image {
+                sourceImage = image
+            }
+            if resetToInitial {
+                setInitialState()
+            }
         }
         
         guard let currentPhotoEditViewType = uiManager.currentPhotoEditViewType else {
-            setInitialState()
+            updateSourceImage()
             return
         }
 
@@ -298,13 +297,14 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
             case .adjust:
                 adjustManager.crop()
             case .hsl:
+                updateSourceImage(resetToInitial: false)
                 needShowAdjustmentView(for: .color)
             default:
-                setInitialState()
+                updateSourceImage()
             }
             
         case .filterView(_):
-            setInitialState()
+            updateSourceImage()
         }
     }
 }
@@ -354,7 +354,7 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
                     return
                 }
                 
-                let cropController = self.adjustManager.prepareCropController(for: image)
+                let cropController = self.adjustManager.prepareCropController(for: image, sourceImage: self.originalPreviewImage)
                 let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
                 self.uiManager.showView(type: .adjustmentView(type), view: cropController.view, changesBar: changesBar)
             }
@@ -390,7 +390,21 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
             analytics.trackScreen(.photoEditAdjustments)
         }
         
-        tempOriginalImage = sourceImage
+        prepareTabImage(item) { [weak self] image in
+            self?.tempOriginalImage = image
+        }
+    }
+    
+    private func prepareTabImage(_ item: PhotoEditTabbarItemType, onFinished: @escaping ValueHandler<UIImage>) {
+        let croppedSourceImage = adjustManager.getCroppedImage(for: originalPreviewImage)
+        switch item {
+        case .filters:
+            adjustmentManager.applyAll(sourceImage: croppedSourceImage, onFinished: onFinished)
+            
+        case .adjustments:
+            let filteredImage = filterManager.applyAll(image: croppedSourceImage) ?? croppedSourceImage
+            onFinished(filteredImage)
+        }
     }
 }
 
@@ -398,10 +412,12 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
 
 extension PhotoEditViewController: PhotoEditAdjustManagerDelegate {
     
-    func didCropImage(_ cropped: UIImage) {
+    func didCropImage(_ cropped: UIImage, croppedSourceImage: UIImage) {
+        //prepare tempOriginalImage for adjustments page = crop + filters
+        if let filteredImage = filterManager.applyAll(image: croppedSourceImage) {
+            tempOriginalImage = filteredImage
+        }
         sourceImage = cropped
-        tempOriginalImage = cropped
-        uiManager.image = cropped
         setInitialState()
     }
     
@@ -415,7 +431,7 @@ extension PhotoEditViewController: PhotoEditAdjustManagerDelegate {
 extension PhotoEditViewController: PreparedFiltersViewDelegate {
 
     func didSelectOriginal() {
-        sourceImage = originalPreviewImage
+        sourceImage = tempOriginalImage
         setInitialState()
         filterManager.resetToOriginal()
     }

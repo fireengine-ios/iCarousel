@@ -10,7 +10,7 @@ import Mantis
 import UIKit
 
 protocol PhotoEditAdjustManagerDelegate: class {
-    func didCropImage(_ cropped: UIImage)
+    func didCropImage(_ cropped: UIImage, croppedSourceImage: UIImage)
     func needPresentRatioSelection(_ controller: SelectionMenuController)
 }
 
@@ -23,6 +23,8 @@ final class PhotoEditAdjustManager {
     private var ratio: AdjustRatio?
     private var rotateValue: Float = 0
     private var adjustView: AdjustView?
+
+    private var sourceImage: UIImage?
     
     private weak var delegate: PhotoEditAdjustManagerDelegate?
 
@@ -49,7 +51,9 @@ final class PhotoEditAdjustManager {
         }
     }
     
-    func prepareCropController(for image: UIImage) -> CropViewController {
+    func prepareCropController(for image: UIImage, sourceImage: UIImage) -> CropViewController {
+        self.sourceImage = sourceImage
+        
         if let cropController = cropController {
             cropController.updateImage(image)
             return cropController
@@ -70,6 +74,12 @@ final class PhotoEditAdjustManager {
         return controller
     }
     
+    func getCroppedImage(for sourceImage: UIImage) -> UIImage {
+        guard let cropInfo = cropInfo, let croppedImage = Mantis.getCroppedImage(byCropInfo: cropInfo, andImage: sourceImage) else {
+            return sourceImage
+        }
+        return croppedImage
+    }
 }
 
 //MARK: - CropViewControllerDelegate
@@ -81,22 +91,25 @@ extension PhotoEditAdjustManager: CropViewControllerDelegate {
 
     func cropViewControllerDidFailToCrop(_ cropViewController: CropViewController, original: UIImage) {
         adjustView = nil
+        sourceImage = nil
     }
 
     func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropResult: CropResult) {
-        guard let cropped = cropResult.croppedImage else {
+        guard let cropped = cropResult.croppedImage,
+            let sourceImage = sourceImage,
+            let croppedSourceImage = Mantis.getCroppedImage(byCropInfo: cropResult.cropInfo, andImage: sourceImage) else {
             return
         }
-        
+                
         cropController = cropViewController
         cropInfo = cropResult.cropInfo
         transformation = cropResult.transformation
         ratio = adjustView?.selectedRatio
         rotateValue = adjustView?.currentValue ?? 0
         adjustView = nil
-        delegate?.didCropImage(cropped)
+        self.sourceImage = nil
         
-        cropViewController.image = UIImage()
+        delegate?.didCropImage(cropped, croppedSourceImage: croppedSourceImage)
     }
 }
 
