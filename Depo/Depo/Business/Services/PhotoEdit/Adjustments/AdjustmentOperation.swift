@@ -59,13 +59,6 @@ final class AdjustmentOperation: Operation {
             }
             
             self.outputImage = output
-            
-            guard !self.isCancelled else {
-                self.outputImage = self.sourceImage
-                self.semaphore.signal()
-                return
-            }
-            
             self.applyNextAdjustment()
         }
     }

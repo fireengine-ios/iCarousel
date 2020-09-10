@@ -35,11 +35,7 @@ final class AdjustView: UIView, NibInit, CropToolbarProtocol {
         let view = AdjustView.initFromNib()
         view.delegate = delegate
         view.ratios = ratios
-        view.setCurrrentValue(rotateValue)
-        
-        if let ratio = selectedRatio ?? view.ratios.first(where: { $0.name == TextConstants.photoEditRatioOriginal }) {
-            view.selectedRatio = ratio
-        }
+        view.setup(selectedRatio: selectedRatio, rotateValue: rotateValue)
         return view
     }
     
@@ -98,6 +94,14 @@ final class AdjustView: UIView, NibInit, CropToolbarProtocol {
         trailingConstaint.constant = Device.isIpad ? 16 : 0
         
         setup()
+    }
+    
+    func setup(selectedRatio: AdjustRatio?, rotateValue: Float) {
+        setCurrrentValue(rotateValue)
+        
+        if let ratio = selectedRatio ?? ratios.first(where: { $0.name == TextConstants.photoEditRatioOriginal }) {
+            self.selectedRatio = ratio
+        }
     }
     
     private func setup() {

@@ -118,14 +118,24 @@ final class FilterManager {
         return result
     }
     
-    func applyAll(image: UIImage?) -> UIImage?  {
-        var resultImage = image
-        
-        appliedFilters.forEach { filterConfig in
-            resultImage = self.filter(image: resultImage, type: filterConfig.type, intensity: filterConfig.intensity)
+    func applyAll(image: UIImage) -> UIImage  {
+        //uncomment if need apply multi filters, now we use last one
+//        var resultImage = image
+//
+//        appliedFilters.forEach { filterConfig in
+//            resultImage = self.filter(image: resultImage, type: filterConfig.type, intensity: filterConfig.intensity)
+//        }
+//
+//        return resultImage
+        guard let lastApplied = lastApplied else {
+            return image
         }
         
-        return resultImage
+        if let filteredImage = filter(image: image, type: lastApplied.type, intensity: lastApplied.intensity) {
+            return filteredImage
+        }
+        assertionFailure("FilterManager Apply Image Error")
+        return image
     }
     
 

@@ -33,6 +33,7 @@ final class PhotoEditAdjustManager {
     }
     
     func reset() {
+        adjustView = nil
         cropController = nil
         cropInfo = nil
         transformation = nil
@@ -42,6 +43,17 @@ final class PhotoEditAdjustManager {
     
     func crop() {
         cropController?.crop()
+    }
+    
+    func cancelLastChanges() {
+        if let transformation = transformation {
+            cropController?.setTransformation(transformation)
+        }
+        if let ratio = ratio {
+            cropController?.setRatio(ratio.value)
+        }
+        adjustView?.setup(selectedRatio: ratio, rotateValue: rotateValue)
+        sourceImage = nil
     }
     
     func setupRatios(original: Double) {
@@ -70,6 +82,7 @@ final class PhotoEditAdjustManager {
         controller.delegate = self
         
         cropController = controller
+        adjustView = view
         
         return controller
     }
@@ -90,7 +103,6 @@ extension PhotoEditAdjustManager: CropViewControllerDelegate {
     func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) { }
 
     func cropViewControllerDidFailToCrop(_ cropViewController: CropViewController, original: UIImage) {
-        adjustView = nil
         sourceImage = nil
     }
 
@@ -106,7 +118,6 @@ extension PhotoEditAdjustManager: CropViewControllerDelegate {
         transformation = cropResult.transformation
         ratio = adjustView?.selectedRatio
         rotateValue = adjustView?.currentValue ?? 0
-        adjustView = nil
         self.sourceImage = nil
         
         delegate?.didCropImage(cropped, croppedSourceImage: croppedSourceImage)
