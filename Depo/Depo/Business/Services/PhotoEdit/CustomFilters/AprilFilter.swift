@@ -28,9 +28,12 @@ final class MPAprilFilter: CustomFilterProtocol {
         return filter
     }()
     
+    private let convert: MTIConvert
     
-    init(parameter: FilterParameterProtocol) {
+    
+    init(parameter: FilterParameterProtocol, convert: MTIConvert) {
         self.parameter = parameter
+        self.convert = convert
     }
     
     var type: FilterType = .april
@@ -38,16 +41,21 @@ final class MPAprilFilter: CustomFilterProtocol {
     
     
     func apply(on image: MTIImage?) -> MTIImage? {
-        guard let inputImage = image?.makeCGImage() else {
-            return nil
-        }
         
-        let tmpImage = UIImage(cgImage: inputImage)
-        toneFilter.inputImage = tmpImage
-            .adjusting(vignetteAlpha: 150).makeMTIImage()?
+        toneFilter.inputImage = image?
             .adjusting(contrast: 1.5)
             .adjusting(brightness: 5/255)
         
-        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
+        guard
+            let tempOutput = toneFilter.outputImage,
+            let output = convert.uiImage(from: tempOutput)
+            
+        else {
+            return nil
+        }
+        
+        let imageToBlend = output.adjusting(vignetteAlpha: 150).makeMTIImage()
+        
+        return blend(background: image, image: imageToBlend, intensity: parameter.currentValue)
     }
 }

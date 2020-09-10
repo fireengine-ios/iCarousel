@@ -235,17 +235,22 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 return
             }
             
+           let options = [
+            kCGImageSourceCreateThumbnailWithTransform: false,
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceThumbnailMaxPixelSize: 1024] as CFDictionary
+            
             guard
-                let previewData = image.jpeg(.medium),
-                let ciImage = CIImage(data: previewData),
-                let cgImage = ciImage.toCGImage
+                let previewData = image.jpeg(.low),
+                let source = CGImageSourceCreateWithData(previewData as CFData, options),
+                let imageReference = CGImageSourceCreateThumbnailAtIndex(source, 0, options)
             else {
                 UIApplication.showErrorAlert(message: TextConstants.commonServiceError)
                 completion?()
                 return
             }
             
-            let previewImage = UIImage(cgImage: cgImage, scale: image.scale, orientation: image.imageOrientation)
+            let previewImage = UIImage(cgImage: imageReference, scale: image.scale, orientation: image.imageOrientation)
             
             let vc = PhotoEditViewController.with(originalImage: image.imageWithFixedOrientation, previewImage: previewImage.imageWithFixedOrientation, presented: completion) { [weak self] controller, completionType in
 
