@@ -158,7 +158,7 @@ class Device {
             result["uuid"] = uuid
         }
 
-        if let appVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
+        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             result["appVersion"] = appVersion
         }
         
