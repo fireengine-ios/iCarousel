@@ -1,6 +1,6 @@
 //
-//  Transformation.swift
-//  InstaFilter
+//  MTIConvert.swift
+//  Depo_LifeTech
 //
 //  Created by Konstantin Studilin on 26.06.2020.
 //  Copyright © 2020 Konstantin. All rights reserved.
@@ -10,26 +10,14 @@ import Foundation
 import MetalPetal
 
 
-extension MTIImage {
-    func makeUIImage(scale: CGFloat, orientation: UIImageOrientation) -> UIImage? {
-        return Transformation.shared?.uiImage(from: self, scale: scale, orientation: orientation)
-    }
-    
-    func makeCGImage() -> CGImage? {
-        return Transformation.shared?.cgImage(from: self)
-    }
-}
-
-
-private final class Transformation {
-    static let shared = Transformation()
-    
+final class MTIConvert {
     
     private var mpContext: MTIContext
     
-
-    private init?() {
+    
+    init?() {
         let options = MTIContextOptions()
+        options.automaticallyReclaimResources = true
         
         guard let device = MTLCreateSystemDefaultDevice() else {
             return nil
@@ -38,10 +26,12 @@ private final class Transformation {
         do {
             mpContext = try MTIContext(device: device, options: options)
         } catch {
-            print(error.localizedDescription)
+            assertionFailure("Can't create MTIContext")
+            debugLog(error.description)
             return nil
         }
     }
+    
     
     func cgImage(from mtiImage: MTIImage?) -> CGImage? {
         guard let input = mtiImage else {
@@ -57,5 +47,13 @@ private final class Transformation {
         }
         
         return UIImage(cgImage: cgImage, scale: scale, orientation: orientation)
+    }
+    
+    func uiImage(from mtiImage: MTIImage?) -> UIImage? {
+        guard let cgImage = cgImage(from: mtiImage) else {
+            return nil
+        }
+        
+        return UIImage(cgImage: cgImage)
     }
 }

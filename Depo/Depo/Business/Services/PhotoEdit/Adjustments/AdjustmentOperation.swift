@@ -32,37 +32,42 @@ final class AdjustmentOperation: Operation {
     }
     
     override func main() {
-        let group = DispatchGroup()
-        
-        adjustments.forEach {
-            group.enter()
-            
-            $0.applyOn(image: outputImage) { [weak self] output in
-                guard let self = self else {
-                    group.leave()
-                    return
-                }
-                
-                self.outputImage = output
-                
-                guard !self.isCancelled else {
-                    self.outputImage = self.sourceImage
-                    self.semaphore.signal()
-                    return
-                }
-                
-                group.leave()
-            }
-        }
-        
-        
-        group.notify(queue: DispatchQueue.global()) { [weak self] in
-            self?.semaphore.signal()
-        }
+        applyNextAdjustment()
         
         semaphore.wait()
         
         completion(outputImage)
+    }
+    
+    private func applyNextAdjustment() {
+        guard !isCancelled else {
+            outputImage = sourceImage
+            semaphore.signal()
+            return
+        }
+        
+        guard !adjustments.isEmpty else {
+            self.semaphore.signal()
+            return
+        }
+        
+        let adjustment = adjustments.removeFirst()
+        
+        adjustment.applyOn(image: outputImage) { [weak self] output in
+            guard let self = self else {
+                return
+            }
+            
+            self.outputImage = output
+            
+            guard !self.isCancelled else {
+                self.outputImage = self.sourceImage
+                self.semaphore.signal()
+                return
+            }
+            
+            self.applyNextAdjustment()
+        }
     }
     
 }

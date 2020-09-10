@@ -8,7 +8,7 @@
 
 
 final class FilterManager {
-    private static func filter(type: FilterType) -> CustomFilterProtocol? {
+    private static func filter(type: FilterType, convert: MTIConvert?) -> CustomFilterProtocol? {
         let intensityParameter = FilterParameter(type: .filterIntensity)
         
         switch type {
@@ -28,7 +28,10 @@ final class FilterManager {
                 return MPAmazonFilter(parameter: intensityParameter)
             
             case .april:
-                return MPAprilFilter(parameter: intensityParameter)
+                guard let convert = convert else {
+                    return nil
+                }
+                return MPAprilFilter(parameter: intensityParameter, convert: convert)
             
             case .audrey:
                 return MPAudreyFilter(parameter: intensityParameter)
@@ -43,16 +46,25 @@ final class FilterManager {
                 return MPCruzFilter(parameter: intensityParameter)
             
             case .haan:
-                return MPHaanFilter(parameter: intensityParameter)
+                guard let convert = convert else {
+                    return nil
+                }
+                return MPHaanFilter(parameter: intensityParameter, convert: convert)
             
             case .mars:
                 return MPMarsFilter(parameter: intensityParameter)
             
             case .oldMan:
-                return MPOldManFilter(parameter: intensityParameter)
+                guard let convert = convert else {
+                    return nil
+                }
+                return MPOldManFilter(parameter: intensityParameter, convert: convert)
             
             case .rise:
-                return MPRiseFilter(parameter: intensityParameter)
+                guard let convert = convert else {
+                    return nil
+                }
+                return MPRiseFilter(parameter: intensityParameter, convert: convert)
             
             case .starlit:
                 return MPStartlitFilter(parameter: intensityParameter)
@@ -74,8 +86,13 @@ final class FilterManager {
     private var isOriginal = true
     private var appliedFilters = [FilterConfig]()
     
+    private let convert: MTIConvert?
+    
+    
     init(types: [FilterType]) {
-        filters = types.compactMap { FilterManager.filter(type: $0) }
+        let convertFromMTI = MTIConvert()
+        convert = convertFromMTI
+        filters = types.compactMap { FilterManager.filter(type: $0, convert: convertFromMTI) }
     }
     
     
@@ -90,10 +107,11 @@ final class FilterManager {
         guard let mtiImage = source.makeMTIImage(isOpaque: source.isOpaque) else {
             return result
         }
-        
+    
         filters.forEach {
-            if let filtered = $0.apply(on: mtiImage)?.makeUIImage(scale: source.scale, orientation: source.imageOrientation) {
-                result[$0.type] = filtered
+            let filtered = $0.apply(on: mtiImage)
+            if let output = convert?.uiImage(from: filtered, scale: source.scale, orientation: source.imageOrientation) {
+                result[$0.type] = output
             }
         }
         
@@ -127,7 +145,7 @@ final class FilterManager {
             isOriginal = false
         }
         
-        return filter.apply(on: mtiImage)?.makeUIImage(scale: source.scale, orientation: source.imageOrientation)
+        return convert?.uiImage(from: filter.apply(on: mtiImage), scale: source.scale, orientation: source.imageOrientation)
     }
     
     func saveHisory() {
