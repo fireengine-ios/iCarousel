@@ -53,12 +53,9 @@ final class PhotoEditViewUIManager: NSObject {
     weak var delegate: PhotoEditViewUIManagerDelegate?
     
     var image: UIImage? {
-        get {
-            imageScrollView.imageView.image
-        }
-        set {
-            DispatchQueue.toMain {
-                self.imageScrollView.imageView.image = newValue
+        didSet {
+            DispatchQueue.main.async {
+                self.imageScrollView.imageView.image = self.image
             }
         }
     }
@@ -95,6 +92,11 @@ final class PhotoEditViewUIManager: NSObject {
     }
     
     private func showAdjustView(_ view: UIView) {
+        if adjustView == view {
+            adjustView?.isHidden = false
+            return
+        }
+        
         adjustView = view
         view.frame = contentView.bounds
         contentView.addSubview(view)
@@ -103,8 +105,7 @@ final class PhotoEditViewUIManager: NSObject {
     }
     
     private func hideAdjustView() {
-        adjustView?.removeFromSuperview()
-        adjustView = nil
+        adjustView?.isHidden = true
     }
 }
 

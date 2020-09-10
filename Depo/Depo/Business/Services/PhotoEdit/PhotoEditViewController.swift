@@ -122,11 +122,7 @@ final class PhotoEditViewController: ViewController, NibInit {
         analytics.trackClickEvent(.saveAsCopy)
         
         let popup = PhotoEditViewFactory.alert(for: .saveAsCopy) { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            self.prepareOriginalImage { [weak self] image in
+            self?.prepareOriginalImage { [weak self] image in
                 guard let self = self else {
                     return
                 }
@@ -141,11 +137,7 @@ final class PhotoEditViewController: ViewController, NibInit {
         analytics.trackClickEvent(.save)
         
         let popup = PhotoEditViewFactory.alert(for: .modify) { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            self.prepareOriginalImage { [weak self] image in
+            self?.prepareOriginalImage { [weak self] image in
                 guard let self = self else {
                     return
                 }
@@ -159,28 +151,14 @@ final class PhotoEditViewController: ViewController, NibInit {
     private func prepareOriginalImage(completion: @escaping ValueHandler<UIImage>) {
         filterManager.saveHisory()
         
-        adjustmentManager.applyAll(sourceImage: self.originalImage) { [weak self] adjustedImage in
-            guard let self = self else {
-                return
-            }
-            
-            guard let filteredImage = self.filterManager.applyAll(image: adjustedImage) else {
-                return
-            }
-            
-            let resultImage = self.adjustManager.getCroppedImage(for: filteredImage)
-
-            completion(resultImage)
-        }
+        let croppedImage = adjustManager.getCroppedImage(for: originalImage)
+        let filteredImage = filterManager.applyAll(image: croppedImage)
+        adjustmentManager.applyAll(sourceImage: filteredImage, onFinished: completion)
     }
     
-    private func prepareAdjustImage(sourceImage: UIImage, completion: @escaping ValueHandler<UIImage?>) {
-        adjustmentManager.applyAll(sourceImage: sourceImage) { [weak self] adjustedImage in
-            let filteredImage = self?.filterManager.applyAll(image: adjustedImage)
-            DispatchQueue.main.async {
-                completion(filteredImage)
-            }
-        }
+    private func prepareAdjustImage(sourceImage: UIImage, completion: @escaping ValueHandler<UIImage>) {
+        let filteredImage = filterManager.applyAll(image: sourceImage)
+        adjustmentManager.applyAll(sourceImage: filteredImage, onFinished: completion)
     }
     
     private func resetToOriginal() {
@@ -221,21 +199,13 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
     
     func didChangeAdjustments(_ adjustments: [AdjustmentParameterValue]) {
         adjustmentManager.applyOnValueDidChange(adjustmentValues: adjustments, sourceImage: tempOriginalImage) { [weak self] outputImage in
-            guard let self = self else {
-                return
-            }
-            
-            self.uiManager.image = outputImage
+            self?.uiManager.image = outputImage
         }
     }
     
     func didChangeHSLColor(_ color: HSVMultibandColor) {
         adjustmentManager.applyOnHSLColorDidChange(value: color, sourceImage: tempOriginalImage) { [weak self] outputImage in
-            guard let self = self else {
-                return
-            }
-            
-            self.uiManager.image = outputImage
+            self?.uiManager.image = outputImage
         }
     }
 }
@@ -255,6 +225,9 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
             tempAdjustmentValues = []
             
             switch type {
+            case .adjust:
+                adjustManager.cancelLastChanges()
+                setInitialState()
             case .hsl:
                 needShowAdjustmentView(for: .color)
                 uiManager.image = sourceImage
@@ -350,13 +323,15 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     func needShowAdjustmentView(for type: AdjustmentViewType) {
         guard type != .adjust else {
             prepareAdjustImage(sourceImage: self.originalPreviewImage) { [weak self] image in
-                guard let self = self, let image = image else {
+                guard let self = self else {
                     return
                 }
                 
-                let cropController = self.adjustManager.prepareCropController(for: image, sourceImage: self.originalPreviewImage)
-                let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
-                self.uiManager.showView(type: .adjustmentView(type), view: cropController.view, changesBar: changesBar)
+                DispatchQueue.main.async {
+                    let cropController = self.adjustManager.prepareCropController(for: image, sourceImage: self.originalPreviewImage)
+                    let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
+                    self.uiManager.showView(type: .adjustmentView(type), view: cropController.view, changesBar: changesBar)
+                }
             }
             return
         }
@@ -385,8 +360,8 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
             analytics.trackScreen(.photoEditFilters)
             
         case .adjustments:
-            filterManager.saveHisory()
-            filterManager.resetLastApplied()
+//            filterManager.saveHisory()
+//            filterManager.resetLastApplied()
             analytics.trackScreen(.photoEditAdjustments)
         }
         
@@ -402,7 +377,7 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
             adjustmentManager.applyAll(sourceImage: croppedSourceImage, onFinished: onFinished)
             
         case .adjustments:
-            let filteredImage = filterManager.applyAll(image: croppedSourceImage) ?? croppedSourceImage
+            let filteredImage = filterManager.applyAll(image: croppedSourceImage)
             onFinished(filteredImage)
         }
     }
@@ -414,9 +389,7 @@ extension PhotoEditViewController: PhotoEditAdjustManagerDelegate {
     
     func didCropImage(_ cropped: UIImage, croppedSourceImage: UIImage) {
         //prepare tempOriginalImage for adjustments page = crop + filters
-        if let filteredImage = filterManager.applyAll(image: croppedSourceImage) {
-            tempOriginalImage = filteredImage
-        }
+        tempOriginalImage = filterManager.applyAll(image: croppedSourceImage)
         sourceImage = cropped
         setInitialState()
     }
