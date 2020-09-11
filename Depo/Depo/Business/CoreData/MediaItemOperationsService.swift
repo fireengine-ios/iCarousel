@@ -227,6 +227,18 @@ final class MediaItemOperationsService {
         }
     }
     
+    func localItemBy(trimmedId: String, context: NSManagedObjectContext? = nil, completion: @escaping WrapObjectCallBack) {
+        let context = context ?? coreDataStack.newChildBackgroundContext
+        let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.trimmedLocalFileID) = %@", trimmedId)
+        executeRequest(predicate: predicate, context: context) { items in
+            guard let item = items.first else {
+                completion(nil)
+                return
+            }
+            completion(WrapData(mediaItem: item))
+        }
+    }
+    
     // MARK: - MediaItemOperations
     
     //TODO: check the usefullness of it/or need of refactor

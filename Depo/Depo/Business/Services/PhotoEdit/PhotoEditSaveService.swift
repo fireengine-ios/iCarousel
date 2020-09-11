@@ -133,27 +133,32 @@ final class PhotoEditSaveService {
                 return
             }
         }
-        
-        if let asset = item.asset, asset.canPerform(.content) {
-            debugLog("PHOTOEDIT: replace local")
-            replaceLocalItem(asset: asset, image: image, completion: didSaveLocalCompletion)
-            
-        } else {
-            debugLog("PHOTOEDIT: create local")
-            
-            do {
-                let data = image.jpeg(.higher) ?? UIImagePNGRepresentation(image)
-                try data?.write(to: tmpLocation)
-            } catch {
-                debugLog("PHOTOEDIT: Can't write data to the tmp directoy")
-                completion(.failed(ErrorResponse.string("Can't write data to the tmp directoy")))
+    
+        mediaItemService.localItemBy(trimmedId: item.getTrimmedLocalID()) { [weak self] localItem in
+            guard let self = self else {
                 return
             }
             
-            let type = PHAssetMediaType.image
-            createLocalItem(url: tmpLocation, type: type, completion: didSaveLocalCompletion)
+            if let asset = localItem?.asset, asset.canPerform(.content) {
+                debugLog("PHOTOEDIT: replace local")
+                self.replaceLocalItem(asset: asset, image: image, completion: didSaveLocalCompletion)
+                
+            } else {
+                debugLog("PHOTOEDIT: create local")
+                
+                do {
+                    let data = image.jpeg(.higher) ?? UIImagePNGRepresentation(image)
+                    try data?.write(to: tmpLocation)
+                } catch {
+                    debugLog("PHOTOEDIT: Can't write data to the tmp directoy")
+                    completion(.failed(ErrorResponse.string("Can't write data to the tmp directoy")))
+                    return
+                }
+                
+                let type = PHAssetMediaType.image
+                self.createLocalItem(url: tmpLocation, type: type, completion: didSaveLocalCompletion)
+            }
         }
-        
     }
     
     
