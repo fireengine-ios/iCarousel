@@ -33,10 +33,14 @@ final class MPOldManFilter: CustomFilterProtocol {
             let output = convert.uiImage(from: tempOutput)
             
         else {
-            return nil
+            debugLog("Can't convert to uiImage")
+            return image
         }
         
-        let imageToBlend = output.adjusting(vignetteAlpha: 100).makeMTIImage()
+        guard let imageToBlend = output.adjusting(vignetteAlpha: 100).makeMTIImage() else {
+            debugLog("Can't get imageToBlend")
+            return tempOutput
+        }
         
         return blend(background: image, image: imageToBlend, intensity: parameter.currentValue)
     }
