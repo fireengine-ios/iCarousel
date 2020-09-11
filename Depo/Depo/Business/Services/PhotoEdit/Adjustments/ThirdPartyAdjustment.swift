@@ -76,4 +76,9 @@ final class GPUAdjustment: ThirdPartyAdjustmentProtocol {
         input --> operation
         input.processImage(synchronously: false)
     }
+    
+    deinit {
+        pictureOutput.imageAvailableCallback = nil
+        operation.removeAllTargets()
+    }
 }
