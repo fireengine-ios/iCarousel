@@ -166,7 +166,13 @@ extension PreparedFiltersView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeue(cell: PreparedFilterCell.self, for: indexPath)
+        return collectionView.dequeue(cell: PreparedFilterCell.self, for: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? PreparedFilterCell else {
+            return
+        }
         
         if indexPath.row == 0 {
             cell.setup(title: TextConstants.photoEditFilterOriginal, image: previewImage, isOriginal: true)
@@ -175,8 +181,6 @@ extension PreparedFiltersView: UICollectionViewDataSource {
             cell.setup(title: filter.title, image: image, isOriginal: false)
         }
         cell.isSelected = collectionView.indexPathsForSelectedItems?.first?.row == indexPath.row
-        
-        return cell
     }
 }
 

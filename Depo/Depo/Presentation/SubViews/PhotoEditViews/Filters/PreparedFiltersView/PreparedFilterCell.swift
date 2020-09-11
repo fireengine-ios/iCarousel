@@ -55,6 +55,13 @@ final class PreparedFilterCell: UICollectionViewCell {
         
         imageContentView.backgroundColor = ColorConstants.photoEditBackgroundColor
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        titleLabel.text = ""
+        imageView.image = nil
+        isOriginal = true
+    }
 
     func setup(title: String, image: UIImage?, isOriginal: Bool) {
         titleLabel.text = title
