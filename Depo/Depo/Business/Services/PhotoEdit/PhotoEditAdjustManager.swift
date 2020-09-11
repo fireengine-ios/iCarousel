@@ -46,11 +46,11 @@ final class PhotoEditAdjustManager {
     }
     
     func cancelLastChanges() {
+        if let ratio = ratio {
+            cropController?.setRatio(ratio.value, animated: false)
+        }
         if let transformation = transformation {
             cropController?.setTransformation(transformation)
-        }
-        if let ratio = ratio {
-            cropController?.setRatio(ratio.value)
         }
         adjustView?.setup(selectedRatio: ratio, rotateValue: rotateValue)
         sourceImage = nil
@@ -139,7 +139,7 @@ extension PhotoEditAdjustManager: AdjustViewDelegate {
             
             let newRatio = self.ratios[index]
             view.updateRatio(newRatio)
-            self.cropController?.setRatio(newRatio.value)
+            self.cropController?.setRatio(newRatio.value, animated: true)
         }
 
         delegate?.needPresentRatioSelection(controller)
