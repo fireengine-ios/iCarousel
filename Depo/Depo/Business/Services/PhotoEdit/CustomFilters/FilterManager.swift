@@ -101,10 +101,12 @@ final class FilterManager {
         
         guard let source = image else {
             assertionFailure("Pass a nonnil image")
+            debugLog("PhotoEdit: Pass a nonnil image")
             return result
         }
         
         guard let mtiImage = source.makeMTIImage(isOpaque: source.isOpaque) else {
+            debugLog("PhotoEdit: can't create MTI image")
             return result
         }
     
