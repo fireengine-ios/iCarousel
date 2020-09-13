@@ -49,6 +49,8 @@ final class PhotoEditViewController: ViewController, NibInit {
     
     private lazy var adjustManager = PhotoEditAdjustManager(delegate: self)
     
+    private var lastAdjustmentValues = [AdjustmentParameterValue]() //currently using for transaction from HSL back https://jira.turkcell.com.tr/browse/COF-269
+    
     private var tempAdjustmentValues = [AdjustmentParameterValue]()
     private var tempHSLValue: HSVMultibandColor?
     
@@ -198,6 +200,7 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
     }
     
     func didChangeAdjustments(_ adjustments: [AdjustmentParameterValue]) {
+        lastAdjustmentValues = adjustments
         adjustmentManager.applyOnValueDidChange(adjustmentValues: adjustments, sourceImage: tempOriginalImage) { [weak self] outputImage in
             self?.uiManager.image = outputImage
         }
@@ -221,20 +224,28 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
         
         switch currentPhotoEditViewType {
         case .adjustmentView(let type):
+
             adjustmentManager.updateValues(tempAdjustmentValues)
             tempAdjustmentValues = []
             
             switch type {
             case .adjust:
+                lastAdjustmentValues = []
                 adjustManager.cancelLastChanges()
                 setInitialState()
             case .hsl:
+                if !lastAdjustmentValues.isEmpty {
+                    adjustmentManager.updateValues(lastAdjustmentValues)
+                }
                 needShowAdjustmentView(for: .color)
-                uiManager.image = sourceImage
                 
-                if let color = tempHSLValue {
-                    adjustmentManager.updateHSLValue(color)
-                    tempHSLValue = nil
+                adjustmentManager.applyOnValueDidChange(adjustmentValues: lastAdjustmentValues, sourceImage: tempOriginalImage) { [weak self] outputImage in
+                    self?.lastAdjustmentValues = []
+                    self?.uiManager.image = outputImage
+                    if let color = self?.tempHSLValue {
+                        self?.adjustmentManager.updateHSLValue(color)
+                        self?.tempHSLValue = nil
+                    }
                 }
             default:
                 setInitialState()
