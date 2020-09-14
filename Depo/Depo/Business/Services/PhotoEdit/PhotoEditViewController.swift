@@ -206,6 +206,9 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
     func showHSLFilter() {
         lastColorAdjustmentValues = getCurrentColorValues()
         adjustmentManager.updateValues(tempAdjustmentValues)//initital values
+        if !lastColorAdjustmentValues.isEmpty {
+            adjustmentManager.updateValues(lastColorAdjustmentValues)
+        }
         needShowAdjustmentView(for: .hsl)
     }
     
