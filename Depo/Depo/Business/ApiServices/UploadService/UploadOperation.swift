@@ -8,7 +8,7 @@
 
 import Foundation
 import MBProgressHUD
-
+import FirebaseCrashlytics
 
 enum ResumableUploadStatus {
     case uploaded(bytes: Int)
@@ -76,7 +76,7 @@ final class UploadOperation: Operation {
     
     private func setupQualityOfService(uploadType: UploadType) {
         switch uploadType {
-        case .syncToUse:
+        case .syncToUse, .save, .saveAs:
             qualityOfService = .userInteractive
         case .upload:
             qualityOfService = .userInitiated
@@ -345,7 +345,7 @@ final class UploadOperation: Operation {
                     fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
                     return
                 }
-
+                
                 self.clearingAction = { [weak self] in
                     self?.removeTemporaryFile(at: parameters.urlToLocalFile)
                 }
@@ -425,7 +425,7 @@ final class UploadOperation: Operation {
             }
             
             let parameters: UploadRequestParametrs
-            
+
             if self.isResumable {
                 parameters = ResumableUpload(item: self.inputItem,
                                              empty: empty,
@@ -438,15 +438,14 @@ final class UploadOperation: Operation {
                                              isFavorite: self.isFavorites,
                                              uploadType: self.uploadType)
             } else {
-                parameters = SimpleUpload(item: self.inputItem,
-                                          destitantion: baseURL,
-                                          uploadStategy: self.uploadStategy,
-                                          uploadTo: self.uploadTo,
-                                          rootFolder: self.folder,
-                                          isFavorite: self.isFavorites,
-                                          uploadType: self.uploadType)
+                parameters = SimpleUpload.with(item: self.inputItem,
+                                               destitantion: baseURL,
+                                               uploadStategy: self.uploadStategy,
+                                               uploadTo: self.uploadTo,
+                                               rootFolder: self.folder,
+                                               isFavorite: self.isFavorites,
+                                               uploadType: self.uploadType)
             }
-            
             
             success(parameters)
         }
@@ -476,14 +475,31 @@ final class UploadOperation: Operation {
                 self.outputItem?.metaData?.takenDate = self.inputItem.metaDate
                 self.outputItem?.metaData?.duration = self.inputItem.metaData?.duration ?? Double(0.0)
                 
+                //TODO: remove this in the future
+                if let size = (parameters as? SimpleUpload)?.fileSize,
+                    let item = self.outputItem, size != item.fileSize {
+                    Crashlytics.crashlytics().record(error: CustomErrors.text("UPLOAD: finishUploading -> uploadNotify sizes arent equal"))
+                    debugLog("UPLOAD: finishUploading -> uploadNotify parSize \(size) newRemote size \(item.fileSize) param URL \(parameters.urlToLocalFile?.path ?? "nil")")
+                }
+                //--
+                
                 //case for upload photo from camera
                 if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
                     self.outputItem?.metaData?.mediumUrl = preview
                 }
-                self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
-                    self?.storageVars.lastUnsavedFileUUID = nil
-                    debugLog("_upload: sync status is updated for \(self?.inputItem.name ?? "") ")
-                    success()
+                
+                if self.uploadType == .save, let updatedRemote = self.outputItem {
+                    self.mediaItemsService.replaceItem(uuid: self.inputItem.uuid, with: updatedRemote) { [weak self] in
+                        self?.storageVars.lastUnsavedFileUUID = nil
+                        debugLog("_upload: item is updated \(self?.inputItem.name ?? "") ")
+                        success()
+                    }
+                } else {
+                    self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
+                        self?.storageVars.lastUnsavedFileUUID = nil
+                        debugLog("_upload: sync status is updated for \(self?.inputItem.name ?? "") ")
+                        success()
+                    }
                 }
                 
                 debugLog("_upload: notified about remote \(self.outputItem?.uuid ?? "_EMPTY_") ")

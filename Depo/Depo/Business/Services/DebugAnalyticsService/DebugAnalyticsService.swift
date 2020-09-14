@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import Crashlytics
-
+import FirebaseAnalytics
 
 enum DebugAnalyticsEvent: String {
     case zeroContentLength
@@ -20,6 +19,6 @@ enum DebugAnalyticsEvent: String {
 final class DebugAnalyticsService {
     
     static func log(event: DebugAnalyticsEvent, attributes: [String : Any] = [:]) {
-        Answers.logCustomEvent(withName: event.rawValue, customAttributes: attributes)
+        Analytics.logEvent(event.rawValue, parameters: attributes)
     }
 }

@@ -134,7 +134,7 @@ final class SubscriptionOfferView: UIView, NibInit {
         paragraphStyle.alignment = .center
         
         let priceAttributes: [NSAttributedString.Key: AnyObject] = [
-            .font: UIFont(name: "TurkcellSatura-Bold", size: 16)!,
+            .font: UIFont.TurkcellSaturaBolFont(size: 16),
             .foregroundColor: ColorConstants.marineTwo,
             .paragraphStyle: paragraphStyle
         ]

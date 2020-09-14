@@ -26,7 +26,7 @@ class AuthenticationUser: BaseRequestParametrs {
                                    LbRequestkeys.password   : password,
                                    LbRequestkeys.deviceInfo : Device.deviceInfo,
                                    LbRequestkeys.language   : Locale.current.languageCode ?? "",
-                                   LbRequestkeys.appVersion : AuthoritySingleton.shared.getBuildVersion(),
+                                   LbRequestkeys.appVersion : AuthoritySingleton.shared.getAppVersion(),
                                    LbRequestkeys.osVersion  : Device.systemVersion]
         return dict
     }

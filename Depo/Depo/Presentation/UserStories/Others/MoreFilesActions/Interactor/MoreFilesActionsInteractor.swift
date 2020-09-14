@@ -198,7 +198,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 self.router.presentViewController(controller: activityVC)
             }
             
-        }, fail: failAction(elementType: .share))
+            }, fail: failAction(elementType: .share))
     }
     
     func info(item: [BaseDataSourceItem], isRenameMode: Bool) {
@@ -213,42 +213,123 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         } else {
             router.pushOnPresentedView(viewController: infoController)
         }
-    
+        
         if isRenameMode {
             infoController.startRenaming()
         }
     }
     
-    
-    private var cropyController: CRYCropNavigationController?
-    
-    func edit(item: [BaseDataSourceItem], complition: VoidHandler?) {
-        
-        guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
+    func edit(item: [BaseDataSourceItem], completion: VoidHandler?) {
+        guard let item = item.first as? Item, let originalUrl = item.tmpDownloadUrl else {
             return
         }
-        ImageDownloder().getImage(patch: url) { [weak self] image in
+        
+        ImageDownloder().getImage(patch: originalUrl) { [weak self] image in
             guard
-                let `self` = self,
-                let image = image,
-                let vc = CRYCropNavigationController.startEdit(with: image, andUseCropPage: false)
-                else {
-                    AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .failure))
-                    UIApplication.showErrorAlert(message: TextConstants.errorServer)
-                    complition?()
-                    return
+                let self = self,
+                let image = image
+            else {
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .failure))
+                UIApplication.showErrorAlert(message: TextConstants.errorServer)
+                completion?()
+                return
             }
             
-            //vc.setShareEnabled(true)
-            //        vc.setCropDelegate(self)
-            vc.sharedDelegate = self
-            self.cropyController = vc
+           let options = [
+            kCGImageSourceCreateThumbnailWithTransform: false,
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceThumbnailMaxPixelSize: 1024] as CFDictionary
             
-            complition?()
+            guard
+                let previewData = image.jpeg(.low),
+                let source = CGImageSourceCreateWithData(previewData as CFData, options),
+                let imageReference = CGImageSourceCreateThumbnailAtIndex(source, 0, options)
+            else {
+                UIApplication.showErrorAlert(message: TextConstants.commonServiceError)
+                completion?()
+                return
+            }
+            
+            let previewImage = UIImage(cgImage: imageReference, scale: image.scale, orientation: image.imageOrientation)
+            
+            let vc = PhotoEditViewController.with(originalImage: image.imageWithFixedOrientation, previewImage: previewImage.imageWithFixedOrientation, presented: completion) { [weak self] controller, completionType in
+
+                switch completionType {
+                    case .canceled:
+                        controller.dismiss(animated: true)
+                    
+                    case .savedAs(image: let newImage):
+                        controller.showSpinner()
+                        
+                        PhotoEditSaveService.shared.save(asCopy: true, image: newImage, item: item) { [weak self] result in
+                            switch result {
+                                case .success(let remote):
+                                    DispatchQueue.main.async {
+                                        controller.saveImageComplete(saveAsCopy: true)
+                                        controller.dismiss(animated: false) {
+                                            self?.showPhotoVideoPreview(item: remote) {
+                                                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveAsCopySnackbarMessage)
+                                            }
+                                        }
+                                }
+                                
+                                case .failed(_):
+                                    DispatchQueue.main.async {
+                                        controller.hideSpinner()
+                                        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
+                                    }
+                            }
+                    }
+                    
+                    case .saved(image: let newImage):
+                        controller.showSpinner()
+                        
+                        PhotoEditSaveService.shared.save(asCopy: false, image: newImage, item: item) { [weak self] result in
+                            switch result {
+                                case .success(let updatedItem):
+                                    item.copyFileData(from: updatedItem)
+                                    item.patchToPreview = updatedItem.patchToPreview
+                                    let closeScreen = {
+                                        DispatchQueue.main.async {
+                                            controller.saveImageComplete(saveAsCopy: false)
+                                            controller.dismiss(animated: true)
+                                            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditModifySnackbarMessage)
+                                        }
+                                    }
+                                    
+                                    let urlsToClean = [item.metaData?.smalURl,
+                                                       item.metaData?.mediumUrl,
+                                                       item.metaData?.largeUrl,
+                                                       item.tmpDownloadUrl]
+                                    
+                                    ImageDownloder.removeImagesFromCache(urls: urlsToClean) {
+                                        closeScreen()
+                                }
+                                case .failed(_):
+                                    DispatchQueue.main.async {
+                                        controller.hideSpinner()
+                                        SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
+                                }
+                            }
+                    }
+                }
+            }
             self.router.presentViewController(controller: vc)
         }
     }
     
+    private func showPhotoVideoPreview(item: WrapData, completion: @escaping VoidHandler) {
+        let detailModule = router.filesDetailModule(fileObject: item,
+                                                    items: [item],
+                                                    status: item.status,
+                                                    canLoadMoreItems: false,
+                                                    moduleOutput: nil)
+        
+        let nController = NavigationController(rootViewController: detailModule.controller)
+        router.presentViewController(controller: nController, animated: true, completion: completion)
+    }
+
+        
     func smash(item: [BaseDataSourceItem], completion: VoidHandler?) {
         guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
             return
@@ -950,28 +1031,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
 }
 
 
-// MARK: - Cropy delegate
-/// https://wiki.life.com.by/pages/viewpage.action?spaceKey=LTFizy&title=Cropy
-/// https://stash.turkcell.com.tr/git/projects/CROP/repos/cropy-ios-sdk/browse
-extension MoreFilesActionsInteractor: TOCropViewControllerDelegate {
-    
-    @objc func getEditedImage(_ image: UIImage) {
-        
-        let vc = PopUpController.with(title: TextConstants.save, message: TextConstants.cropyMessage, image: .error, firstButtonTitle: TextConstants.cancel, secondButtonTitle: TextConstants.ok, secondAction: { [weak self] vc in
-            self?.save(image: image)
-            vc.close { [weak self] in
-                self?.cropyController?.dismiss(animated: true, completion: nil)
-            }
-        })
-        UIApplication.topController()?.present(vc, animated: false, completion: nil)
-    }
-    
-    private func save(image: UIImage) {
-        showSnackbar(elementType: .edit, relatedItems: [])
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .success))
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-    }
-}
 
 //MARK: - Actions
 

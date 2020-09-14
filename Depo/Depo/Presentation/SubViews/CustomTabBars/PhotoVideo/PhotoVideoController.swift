@@ -390,6 +390,7 @@ extension PhotoVideoController: UIScrollViewDelegate {
     }
     
     private func updateDB() {
+        debugLog("RangeAPI start")
         print("updateDB with direction: \(scrollDirectionManager.scrollDirection)")
         guard CacheManager.shared.isCacheActualized else {
             return
@@ -398,10 +399,14 @@ extension PhotoVideoController: UIScrollViewDelegate {
         guard
             let workaroundVisibleIndexes = self.collectionView?.indexPathsForVisibleItems.sorted(by: <)
         else {
+            debugLog("RangeAPI workaroundVisibleIndexes = self.collectionView?.indexPathsForVisibleItems.sorted(by: <) failed")
             return
         }
+        debugLog("RangeAPI first index \(workaroundVisibleIndexes.first) ")
         rangeAPIInfo(at: workaroundVisibleIndexes.first) { [weak self] topAPIInfo in
+            debugLog("RangeAPI top info  date \(topAPIInfo?.date) id \(topAPIInfo?.id)")
             self?.self.rangeAPIInfo(at: workaroundVisibleIndexes.last) { [weak self] bottomAPIInfo in
+                 debugLog("RangeAPI bottom info  date \(bottomAPIInfo?.date) id \(bottomAPIInfo?.id)")
                 guard let topAPIInfo = topAPIInfo,
                     let bottomAPIInfo = bottomAPIInfo else {
                     return
@@ -419,16 +424,23 @@ extension PhotoVideoController: UIScrollViewDelegate {
                     }
                     
                     let category: QuickScrollCategory = self.isPhoto ? .photos : .videos
+                    debugLog("RangeAPI category \(category)")
                     let fileType: FileType = self.isPhoto ? .image : .video
                     self.quickScrollService.requestListOfDateRange(startDate: topAPIInfo.date, endDate: bottomAPIInfo.date, startID: startId, endID: endId, category: category, pageSize: RequestSizeConstant.quickScrollRangeApiPageSize) { response in
+                        debugLog("RangeAPI response recieved")
                         switch response {
                         case .success(let quckScrollResponse):
+                            debugLog("RangeAPI response success")
+                            debugLog("RangeAPI response count \(quckScrollResponse.size) \(quckScrollResponse.files.count)")
+                            debugLog("RangeAPI first date \(quckScrollResponse.files.first?.metaDate) last date \(quckScrollResponse.files.last?.metaDate)")
                             self.dispatchQueue.async {
                                 MediaItemOperationsService.shared.updateRemoteItems(remoteItems: quckScrollResponse.files, fileType: fileType, topInfo: topAPIInfo, bottomInfo: bottomAPIInfo, completion: {
+                                    debugLog("RangeAPI DB UPDATED")
                                     debugPrint("appended and updated")
                                 })
                             }
                         case .failed(_):
+                            debugLog("RangeAPI response failed")
                             ///may be canceled request
                             break///TODO: popup here?
                         }

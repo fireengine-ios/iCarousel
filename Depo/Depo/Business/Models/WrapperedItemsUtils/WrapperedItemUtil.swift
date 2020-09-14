@@ -55,7 +55,7 @@ class WrapperedItemUtil: NSObject {
             case .pdf:
                 imageName = "fileIconPdf"
                 break
-            case .ppt:
+            case .ppt, .pptx:
                 imageName = "fileIconPpt"
                 break
             default:
@@ -110,7 +110,7 @@ class WrapperedItemUtil: NSObject {
             case .pdf:
                 imageName = "fileBigIconPdf"
                 break
-            case .ppt:
+            case .ppt, .pptx:
                 imageName = "fileBigIconPpt"
                 break
             default:
@@ -167,7 +167,7 @@ class WrapperedItemUtil: NSObject {
             case .pdf:
                 imageName = "fileIconSmallPdfNotSelected"
                 break
-            case .ppt:
+            case .ppt, .pptx:
                 imageName = "fileIconSmallPptNotSelected"
                 break
             default:

@@ -11,8 +11,6 @@ import SDWebImage
 import Alamofire
 import Adjust
 import KeychainSwift
-import Fabric
-import Crashlytics
 
 final class AppConfigurator {
     
@@ -23,7 +21,6 @@ final class AppConfigurator {
     static let analyticsService: AnalyticsService = factory.resolve()
 
     static func applicationStarted(with launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        Fabric.with([Crashlytics.self, Answers.self])
         
         /// force arabic language left to right
         UIView.appearance().semanticContentAttribute = .forceLeftToRight
@@ -37,7 +34,6 @@ final class AppConfigurator {
         prepareSessionManager()
         configureSDWebImage()
         setupIAPObserver()
-        setupCropy()
         dropboxManager.start()
         analyticsManager.start()
         
@@ -117,18 +113,6 @@ final class AppConfigurator {
         SDImageCache.shared().config.shouldCacheImagesInMemory = false
     }
     
-    private static func setupCropy() {
-        guard let cropyConfig = CRYConfiguration.sharedInstance() else { return }
-        cropyConfig.shareType = SharedTypeImage
-        cropyConfig.origin = "http://www.cropyioslifebox.com"
-        cropyConfig.apiKey = "57f38c7d-1762-43e7-9ade-545fed50dd04"
-        
-        cropyConfig.headerColor = UIColor.lrTealish
-        cropyConfig.headerTitleColor = UIColor.white
-        
-        cropyConfig.cropHeaderColor = UIColor.lrTealish
-        cropyConfig.cropHeaderTitleColor = UIColor.white
-    }
     
     // MARK: - settings bundle
     //Check original post here: https://medium.com/@abhimuralidharan/adding-settings-to-your-ios-app-cecef8c5497

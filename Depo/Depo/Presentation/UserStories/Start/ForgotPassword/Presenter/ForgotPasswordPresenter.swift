@@ -16,7 +16,9 @@ class ForgotPasswordPresenter: BasePresenter, ForgotPasswordModuleInput, ForgotP
     func viewIsReady() {
         interactor.trackScreen()
         view.setupVisableTexts()
-        checkLanguage()
+        #if LIFEBOX
+            checkLanguage()
+        #endif
     }
     
     private func checkLanguage() {

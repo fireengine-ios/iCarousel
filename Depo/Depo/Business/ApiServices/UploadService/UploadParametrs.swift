@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Crashlytics
 
 class UploadBaseURL: BaseRequestParametrs {
     override var requestParametrs: Any {
@@ -50,7 +49,7 @@ class SimpleUpload: UploadRequestParametrs {
         return item.fileData
     }
     
-    private var fileSize: Int64 {
+    var fileSize: Int64 {
         if let url = urlToLocalFile,
             let resources = try? url.resourceValues(forKeys:[.fileSizeKey]),
             let fileSize = resources.fileSize {
@@ -62,7 +61,11 @@ class SimpleUpload: UploadRequestParametrs {
     
     let tmpUUID: String
     
-    init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) {
+    static func with(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) -> SimpleUpload {
+        return SimpleUpload(item: item, destitantion: destitantion, uploadStategy: uploadStategy, uploadTo: uploadTo, rootFolder: rootFolder, isFavorite: isFavorite, uploadType: uploadType)
+    }
+    
+    private init(item: WrapData, destitantion: URL, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, rootFolder: String, isFavorite: Bool, uploadType: UploadType?) {
         
         self.item = item
         self.uploadType = uploadType
@@ -71,13 +74,21 @@ class SimpleUpload: UploadRequestParametrs {
         self.uploadTo = uploadTo
         self.destitantionURL = destitantion
         self.isFavorite = isFavorite
-
-        if item.isLocalItem {
-            self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
-        } else {
-            self.tmpUUID = UUID().uuidString
+        
+        switch uploadType {
+            case .save:
+                self.tmpUUID = item.uuid
+            case .saveAs:
+                self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
+            default:
+                if item.isLocalItem {
+                    self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
+                } else {
+                    self.tmpUUID = UUID().uuidString
+            }
         }
     }
+    
     
     var requestParametrs: Any {
         return Data()
@@ -128,6 +139,7 @@ class SimpleUpload: UploadRequestParametrs {
         return 2000.0
     }
 }
+
 
 final class ResumableUpload: UploadRequestParametrs {
     

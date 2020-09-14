@@ -9,7 +9,6 @@
 import UIKit
 import AVKit
 import AVFoundation
-import Photos
 
 final class PhotoVideoDetailViewController: BaseViewController {
     
@@ -18,7 +17,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var viewForBottomBar: UIView!
     @IBOutlet private weak var bottomBlackView: UIView!
-    @IBOutlet weak var collapseDetailView: UIView!
     
     @IBOutlet private weak var swipeUpContainerView: UIView!
     // Bottom detail view
@@ -103,6 +101,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     // MARK: Life cycle
     
+    deinit {
+        NotificationCenter.default.post(name: .deinitPlayer, object: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -116,9 +118,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isHidden = true
         
-        navigationItem.leftBarButtonItem = BackButtonItem { [weak self] in
-            self?.hideView()
-        }
+        navigationItem.leftBarButtonItem = BackButtonItem(action: hideView)
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackground(_:)), name: Notification.Name.UIApplicationDidEnterBackground, object: nil)
         showSpinner()
@@ -152,7 +152,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         statusBarColor = .black
         
         NotificationCenter.default.post(name: .reusePlayer, object: self)
-
+        
         let isFullScreen = self.isFullScreen
         self.isFullScreen = isFullScreen
         bottomDetailViewManager?.updatePassThroughViewDelegate(passThroughView: passThroughView)
@@ -163,6 +163,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
         setStatusBarHiddenForLandscapeIfNeed(isFullScreen)
         output.viewIsReady(view: viewForBottomBar)
         passThroughView?.enableGestures()
+        updateFirstVisibleCell()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -203,6 +204,15 @@ final class PhotoVideoDetailViewController: BaseViewController {
         if UIDevice.current.orientation.isLandscape {
             bottomDetailViewManager?.closeDetailView()
         }
+    }
+    
+    private func updateFirstVisibleCell() {
+        guard let selectedIndex = selectedIndex else {
+            return
+        }
+        
+        let cells = collectionView.indexPathsForVisibleItems.compactMap({ collectionView.cellForItem(at: $0) as? PhotoVideoDetailCell })
+        cells.first?.setObject(object: objects[selectedIndex])
     }
     
     func hideView() {
@@ -322,13 +332,12 @@ final class PhotoVideoDetailViewController: BaseViewController {
             let managedView = bottomDetailView,
             let passThroughView = passThroughView,
             let collectionView = collectionView,
-            let collapsedView = collapseDetailView,
             let parentView = view
         else {
             assertionFailure()
             return
         }
-        bottomDetailViewManager = BottomDetailViewAnimationManager(managedView: managedView, passThrowView: passThroughView, collectionView: collectionView, collapseView: collapsedView, parentView: parentView, delegate: self)
+        bottomDetailViewManager = BottomDetailViewAnimationManager(managedView: managedView, passThrowView: passThroughView, collectionView: collectionView, parentView: parentView, delegate: self)
     }
     
     func getBottomDetailViewState() -> CardState {
@@ -387,6 +396,10 @@ extension PhotoVideoDetailViewController: BottomDetailViewAnimationManagerDelega
         topViewController.view.addSubview(fileInfoView)
         bottomDetailView = fileInfoView
         setupBottomDetailViewManager()
+    }
+    
+    func pullToDownEffect() {
+        //hideView()
     }
 }
 
@@ -572,7 +585,7 @@ extension PhotoVideoDetailViewController: UICollectionViewDelegateFlowLayout {
 extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
     
     func imageLoadingFinished() {
-       hideSpinner()
+        hideSpinner()
     }
     
     func tapOnCellForFullScreen() {

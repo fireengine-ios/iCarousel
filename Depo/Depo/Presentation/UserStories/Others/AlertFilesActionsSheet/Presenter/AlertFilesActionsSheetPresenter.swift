@@ -182,7 +182,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
                     actionTypes.append(.moveToTrash)
                     
-                case .doc, .pdf, .txt, .ppt, .xls, .html:
+                case .doc, .pdf, .txt, .ppt, .xls, .html, .pptx:
                     actionTypes = [.move, .copy, .documentDetails]
                     actionTypes.append(item.favorites ? .removeFromFavorites : .addToFavorites)
                     actionTypes.append(.moveToTrash)
@@ -288,7 +288,7 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     action = UIAlertAction(title: TextConstants.actionSheetEdit, style: .default, handler: { _ in
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .edit))
                         UIApplication.topController()?.showSpinner()
-                        self.interactor.edit(item: currentItems, complition: {
+                        self.interactor.edit(item: currentItems, completion: {
                             UIApplication.topController()?.hideSpinner()
                         })
                     })
