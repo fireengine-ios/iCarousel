@@ -56,4 +56,9 @@ final class MTIConvert {
         
         return UIImage(cgImage: cgImage)
     }
+    
+    deinit {
+        mpContext.reclaimResources()
+        mpContext.coreImageContext.clearCaches()
+    }
 }
