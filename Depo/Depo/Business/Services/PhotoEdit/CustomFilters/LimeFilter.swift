@@ -34,7 +34,10 @@ final class MPLimeFilter: CustomFilterProtocol {
         }
         
         toneFilter.inputImage = inputImage
+        let filterdImage = toneFilter.outputImage
         
-        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
+        toneFilter.inputImage = nil
+        
+        return blend(background: image, image: filterdImage, intensity: parameter.currentValue)
     }
 }

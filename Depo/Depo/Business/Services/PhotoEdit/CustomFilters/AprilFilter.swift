@@ -45,21 +45,32 @@ final class MPAprilFilter: CustomFilterProtocol {
         toneFilter.inputImage = image?
             .adjusting(contrast: 1.5)
             .adjusting(brightness: 5/255)
+            .adjusting(vignetteAlpha: 150/255)
         
-        guard
-            let tempOutput = toneFilter.outputImage,
-            let output = convert.uiImage(from: tempOutput)
-            
-        else {
-            debugLog("Can't convert to uiImage")
-            return image
-        }
+//        guard
+//            let tempOutput = toneFilter.outputImage,
+//            let output = convert.uiImage(from: tempOutput)
+//
+//        else {
+//            debugLog("Can't convert to uiImage")
+//            return image
+//        }
+//
+//        toneFilter.inputImage = nil
+//
+//        let imageToBlend = MTIImage(image: output.adjusting(vignetteAlpha: 150/255), colorSpace: output.cgImage?.colorSpace, isOpaque: output.isOpaque)
         
-        guard let imageToBlend = output.adjusting(vignetteAlpha: 150).makeMTIImage() else {
-            debugLog("Can't convert to uiImage")
-            return tempOutput
-        }
         
-        return blend(background: image, image: imageToBlend, intensity: parameter.currentValue)
+        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
+    }
+}
+
+
+extension MTIImage {
+    func adjusting(vignetteAlpha: Float) -> MTIImage {
+        let filter = MTIVignetteFilter()
+        filter.inputImage = self
+        filter.color = MTIColor(red: 0, green: 0, blue: 0, alpha: vignetteAlpha)
+        return filter.outputImage!
     }
 }

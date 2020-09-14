@@ -39,21 +39,21 @@ final class MPHaanFilter: CustomFilterProtocol {
         toneFilter.inputImage = image?
             .adjusting(contrast: 1.3)
             .adjusting(brightness: 60/255)
+            .adjusting(vignetteAlpha: 200/255)
         
-        guard
-            let tempOutput = toneFilter.outputImage,
-            let output = convert.uiImage(from: tempOutput)
-            
-        else {
-            debugLog("Can't convert to uiImage")
-            return image
-        }
+//        guard
+//            let tempOutput = toneFilter.outputImage,
+//            let output = convert.uiImage(from: tempOutput)
+//
+//        else {
+//            debugLog("Can't convert to uiImage")
+//            return image
+//        }
+//
+//        toneFilter.inputImage = nil
+//
+//        let imageToBlend = MTIImage(image: output.adjusting(vignetteAlpha: 200/255), colorSpace: output.cgImage?.colorSpace, isOpaque: output.isOpaque)
         
-        guard let imageToBlend = output.adjusting(vignetteAlpha: 200).makeMTIImage() else {
-            debugLog("Can't convert to uiImage")
-            return tempOutput
-        }
-        
-        return blend(background: image, image: imageToBlend, intensity: parameter.currentValue)
+        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
     }
 }
