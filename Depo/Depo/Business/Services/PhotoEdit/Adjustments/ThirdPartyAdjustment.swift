@@ -74,7 +74,7 @@ final class GPUAdjustment: ThirdPartyAdjustmentProtocol {
         operation.removeSourceAtIndex(0)
         
         input --> operation
-        input.processImage(synchronously: false)
+        input.processImage(synchronously: true)
     }
     
     deinit {
