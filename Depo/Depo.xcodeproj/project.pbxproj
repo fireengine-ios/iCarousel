@@ -4961,12 +4961,6 @@
 		98231A7224F3A23500FD16E2 /* CruzFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98231A2C24F3A23400FD16E2 /* CruzFilter.swift */; };
 		98231A7324F3A23500FD16E2 /* CruzFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98231A2C24F3A23400FD16E2 /* CruzFilter.swift */; };
 		98231A7424F3A23500FD16E2 /* CruzFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98231A2C24F3A23400FD16E2 /* CruzFilter.swift */; };
-		98231A7524F3A23500FD16E2 /* UIImage+GPUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98231A2E24F3A23400FD16E2 /* UIImage+GPUImage.swift */; };
-		98231A7624F3A23500FD16E2 /* UIImage+GPUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98231A2E24F3A23400FD16E2 /* UIImage+GPUImage.swift */; };
-		98231A7724F3A23500FD16E2 /* UIImage+GPUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98231A2E24F3A23400FD16E2 /* UIImage+GPUImage.swift */; };
-		98231A7824F3A23500FD16E2 /* UIImage+GPUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98231A2E24F3A23400FD16E2 /* UIImage+GPUImage.swift */; };
-		98231A7924F3A23500FD16E2 /* UIImage+GPUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98231A2E24F3A23400FD16E2 /* UIImage+GPUImage.swift */; };
-		98231A7A24F3A23500FD16E2 /* UIImage+GPUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98231A2E24F3A23400FD16E2 /* UIImage+GPUImage.swift */; };
 		98231A8124F3A23500FD16E2 /* OldManFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98231A3024F3A23400FD16E2 /* OldManFilter.swift */; };
 		98231A8224F3A23500FD16E2 /* OldManFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98231A3024F3A23400FD16E2 /* OldManFilter.swift */; };
 		98231A8324F3A23500FD16E2 /* OldManFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98231A3024F3A23400FD16E2 /* OldManFilter.swift */; };
@@ -13230,7 +13224,6 @@
 		98231A2A24F3A23400FD16E2 /* HaanFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaanFilter.swift; sourceTree = "<group>"; };
 		98231A2B24F3A23400FD16E2 /* FilterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterManager.swift; sourceTree = "<group>"; };
 		98231A2C24F3A23400FD16E2 /* CruzFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CruzFilter.swift; sourceTree = "<group>"; };
-		98231A2E24F3A23400FD16E2 /* UIImage+GPUImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+GPUImage.swift"; sourceTree = "<group>"; };
 		98231A3024F3A23400FD16E2 /* OldManFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldManFilter.swift; sourceTree = "<group>"; };
 		98231A3124F3A23400FD16E2 /* MarsFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarsFilter.swift; sourceTree = "<group>"; };
 		98231A3224F3A23400FD16E2 /* AdeleFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdeleFilter.swift; sourceTree = "<group>"; };
@@ -18937,7 +18930,6 @@
 			children = (
 				B5DD3D77250FA9B300AFF934 /* CustomMetalPetal */,
 				B58D36A82509FF3900FFF101 /* MTIConvert.swift */,
-				98231A2D24F3A23400FD16E2 /* Extensions */,
 				98231A3224F3A23400FD16E2 /* AdeleFilter.swift */,
 				98231A3324F3A23400FD16E2 /* AmazonFilter.swift */,
 				98231A2824F3A23400FD16E2 /* AprilFilter.swift */,
@@ -18959,14 +18951,6 @@
 				98231A2524F3A23400FD16E2 /* WhisperFilter.swift */,
 			);
 			path = CustomFilters;
-			sourceTree = "<group>";
-		};
-		98231A2D24F3A23400FD16E2 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				98231A2E24F3A23400FD16E2 /* UIImage+GPUImage.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9826DB3D207F60BC00C00238 /* CustomScrollIndicator */ = {
@@ -27261,7 +27245,6 @@
 				0303A0412397D0D000907F42 /* UsageInfoPresenter.swift in Sources */,
 				98F032F22403FFC000F1D415 /* AnalyzeStatus.m in Sources */,
 				0303A0422397D0D000907F42 /* PasscodeEnterViewController.swift in Sources */,
-				98231A7824F3A23500FD16E2 /* UIImage+GPUImage.swift in Sources */,
 				0303A0432397D0D000907F42 /* UIImageView.swift in Sources */,
 				0303A0442397D0D000907F42 /* CreateStoryPreviewPresenter.swift in Sources */,
 				0303A0452397D0D000907F42 /* SubjectDetailsViewController.swift in Sources */,
@@ -29689,7 +29672,6 @@
 				CE634B00230ED6A500CED18C /* PaymentTypeView.swift in Sources */,
 				17035BAC226DABE000FE7362 /* ProfileFieldView.swift in Sources */,
 				8C0E8E2C1FDEBDFF00789C91 /* OffersService.swift in Sources */,
-				98231A7624F3A23500FD16E2 /* UIImage+GPUImage.swift in Sources */,
 				C62239B4204973CC0043ED44 /* FaceImagePhotosInitializer.swift in Sources */,
 				8C0E8E2D1FDEBDFF00789C91 /* LocalMediaStorage.swift in Sources */,
 				8C0E8E2E1FDEBDFF00789C91 /* BottomSelectionTabBarViewOutput.swift in Sources */,
@@ -32002,7 +31984,6 @@
 				4C625D18F465CC4F6D27A6B1 /* SettingsInteractor.swift in Sources */,
 				CF71461524B597A800D83E60 /* ContactDetailHeader.swift in Sources */,
 				A20CDBA3219D632D00CA9A67 /* PremiumListView.swift in Sources */,
-				98231A7524F3A23500FD16E2 /* UIImage+GPUImage.swift in Sources */,
 				D498865D1F3EFBE200F50C95 /* ImportPhotosRouter.swift in Sources */,
 				482509D92061A22A00210C68 /* AlbumsDataSourceForCollectionView.swift in Sources */,
 				890F736F22EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */,
@@ -33159,7 +33140,6 @@
 				CE784A2922A685FB00662219 /* InternetDataUsageCollectionViewCell.swift in Sources */,
 				730A997322D71D5A0037ABA9 /* TwoFactorAuthenticationViewController.swift in Sources */,
 				CE784A2A22A685FB00662219 /* PhoneVerificationViewOutput.swift in Sources */,
-				98231A7924F3A23500FD16E2 /* UIImage+GPUImage.swift in Sources */,
 				CE784A2B22A685FB00662219 /* TurkcellUpdaterService.swift in Sources */,
 				CE784A2C22A685FB00662219 /* PhoneVerificationViewController.swift in Sources */,
 				98F0330B2403FFC100F1D415 /* DepoAdapter.m in Sources */,
@@ -35193,7 +35173,6 @@
 				CF8B67B323CBC9D70021B021 /* UploadFilesSelectionViewController.swift in Sources */,
 				CF8B67B423CBC9D70021B021 /* String+Subscript.swift in Sources */,
 				CF8B67B523CBC9D70021B021 /* UploadFilesSelectionModuleInput.swift in Sources */,
-				98231A7724F3A23500FD16E2 /* UIImage+GPUImage.swift in Sources */,
 				CF8B67B623CBC9D70021B021 /* LeavePremiumViewController.swift in Sources */,
 				CF8B67B723CBC9D70021B021 /* TextEnterController.swift in Sources */,
 				CF8B67B823CBC9D70021B021 /* UploadFilesSelectionPresenter.swift in Sources */,
@@ -36151,7 +36130,6 @@
 				CF8B6DA823CBCA280021B021 /* TurkcellUpdaterService.swift in Sources */,
 				CF8B6DA923CBCA280021B021 /* PhoneVerificationViewController.swift in Sources */,
 				CF8B6DAA23CBCA280021B021 /* AnalyticsPackageProductObject.swift in Sources */,
-				98231A7A24F3A23500FD16E2 /* UIImage+GPUImage.swift in Sources */,
 				CF8B6DAB23CBCA280021B021 /* PhoneVerificationModuleInput.swift in Sources */,
 				CF8B6DAC23CBCA280021B021 /* SimpleSliderCell.swift in Sources */,
 				CF8B6DAD23CBCA280021B021 /* Alamofire+Response.swift in Sources */,

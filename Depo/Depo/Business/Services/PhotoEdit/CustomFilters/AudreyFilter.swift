@@ -39,6 +39,9 @@ final class MPAudreyFilter: CustomFilterProtocol {
             .adjusting(contrast: 1.3)
             .adjusting(brightness: 20/255)
         
-        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
+        let filteredImage = toneFilter.outputImage
+        toneFilter.inputImage = nil
+        
+        return blend(background: image, image: filteredImage, intensity: parameter.currentValue)
     }
 }
