@@ -49,9 +49,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     
     private lazy var adjustManager = PhotoEditAdjustManager(delegate: self)
     
-    private var lastColorAdjustmentValues = [AdjustmentParameterValue]() //currently using for transaction from HSL back https://jira.turkcell.com.tr/browse/COF-269
-    
-    private var tempAdjustmentValues = [AdjustmentParameterValue]()
+    private var tempAdjustmentValues = [AdjustmentViewType: [AdjustmentParameterValue]]()
     private var tempHSLValue: HSVMultibandColor?
     
     private var filterManager = FilterManager(types: FilterType.allCases)
@@ -167,6 +165,7 @@ final class PhotoEditViewController: ViewController, NibInit {
         adjustmentManager.resetValues()
         sourceImage = originalPreviewImage
         tempOriginalImage = originalPreviewImage
+        tempAdjustmentValues.removeAll()
         setInitialState()
         filterView.resetToOriginal()
         filterManager.resetToOriginal()
@@ -187,16 +186,6 @@ final class PhotoEditViewController: ViewController, NibInit {
             analytics.trackAdjustChanges(transformation, action: action)
         }
     }
-    
-    private func getCurrentColorValues() -> [AdjustmentParameterValue] {
-        return adjustmentManager.adjustmentValues.filter { switch $0.type {
-        case .temperature, .tint, .saturation, .gamma:
-            return true
-        default:
-            return false
-            }
-        }
-    }
 }
 
 //MARK: - AdjustmentsViewDelegate
@@ -204,13 +193,6 @@ final class PhotoEditViewController: ViewController, NibInit {
 extension PhotoEditViewController: AdjustmentsViewDelegate {
 
     func showHSLFilter() {
-        lastColorAdjustmentValues = getCurrentColorValues()
-        
-        if !lastColorAdjustmentValues.isEmpty {
-            adjustmentManager.updateValues(lastColorAdjustmentValues)
-        } else {
-            adjustmentManager.updateValues(tempAdjustmentValues)
-        }
         needShowAdjustmentView(for: .hsl)
     }
     
@@ -239,31 +221,33 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
         switch currentPhotoEditViewType {
         case .adjustmentView(let type):
 
-            adjustmentManager.updateValues(tempAdjustmentValues)
-            tempAdjustmentValues = []
+            if let tempValues = tempAdjustmentValues[type] {
+                adjustmentManager.updateValues(tempValues)
+                tempAdjustmentValues.removeValue(forKey: type)
+            }
             
             switch type {
             case .adjust:
-                lastColorAdjustmentValues = []
                 adjustManager.cancelLastChanges()
                 setInitialState()
             case .hsl:
-                if !lastColorAdjustmentValues.isEmpty {
-                    adjustmentManager.updateValues(lastColorAdjustmentValues)
+                if let hslValue = tempHSLValue {
+                    adjustmentManager.updateHSLValue(hslValue)
+                    tempHSLValue = nil
                 }
-                adjustmentManager.applyOnValueDidChange(adjustmentValues: lastColorAdjustmentValues, sourceImage: tempOriginalImage) { [weak self] outputImage in
-                    self?.lastColorAdjustmentValues = []
-                    self?.uiManager.image = outputImage
-                    if let color = self?.tempHSLValue {
-                        self?.adjustmentManager.updateHSLValue(color)
-                        self?.tempHSLValue = nil
-                    }
+                
+                adjustmentManager.applyAll(sourceImage: tempOriginalImage) { [weak self] image in
+                    self?.uiManager.image = image
                 }
+                
                 needShowAdjustmentView(for: .color)
             case .color:
-                lastColorAdjustmentValues.removeAll()
-                adjustmentManager.resetValues()
-                setInitialState()
+                adjustmentManager.applyAll(sourceImage: tempOriginalImage) { [weak self] image in
+                    DispatchQueue.main.async {
+                        self?.sourceImage = image
+                        self?.setInitialState()
+                    }
+                }
             default:
                 setInitialState()
             }
@@ -292,18 +276,15 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
 
         switch currentPhotoEditViewType {
         case .adjustmentView(let type):
-            tempAdjustmentValues = []
+            tempAdjustmentValues.removeValue(forKey: type)
             
             switch type {
             case .adjust:
                 adjustManager.crop()
             case .hsl:
+                tempHSLValue = nil
                 updateSourceImage(resetToInitial: false)
                 needShowAdjustmentView(for: .color)
-            case .color:
-                updateSourceImage()
-                lastColorAdjustmentValues.removeAll()
-                adjustmentManager.resetValues()
             default:
                 updateSourceImage()
             }
@@ -371,16 +352,18 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
         guard let view = PhotoEditViewFactory.generateView(for: type, adjustments: adjustmentManager.adjustments, delegate: self) else {
             return
         }
-        
+
+        if type == .color, let currentType = uiManager.currentPhotoEditViewType,
+            case PhotoEditViewType.adjustmentView(let viewType) = currentType, viewType == .hsl {
+            //we dont need to save temp values when we open color from hsl
+        } else {
+            tempAdjustmentValues[type] = adjustmentManager.value(for: type)
+        }
+
         if type == .hsl, let adjustment = adjustmentManager.adjustments.first(where: { $0.type == .hsl }) {
             tempHSLValue = adjustment.hslColorParameter?.currentValue
         }
-        else if type == .color {
-            lastColorAdjustmentValues.removeAll()
-        }
-        
-        tempAdjustmentValues = adjustmentManager.adjustmentValues
-        
+       
         let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
         uiManager.showView(type: .adjustmentView(type), view: view, changesBar: changesBar)
     }

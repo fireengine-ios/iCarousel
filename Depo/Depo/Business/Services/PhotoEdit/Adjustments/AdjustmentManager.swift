@@ -205,6 +205,22 @@ final class AdjustmentManager {
         self.applyAdjustments(sourceImage: sourceImage, onFinished: onFinished)
     }
     
+    func value(for type: AdjustmentViewType) -> [AdjustmentParameterValue] {
+        var parameterTypes = [AdjustmentParameterType]()
+        switch type {
+        case .adjust:
+            return []
+        case .color:
+            parameterTypes = [.temperature, .tint, .saturation, .gamma]
+        case .effect:
+            parameterTypes = [.sharpness, .blurRadius, .vignetteRatio]
+        case .hsl:
+            parameterTypes = [.hslHue, .hslLuminosity, .hslSaturation]
+        case .light:
+            parameterTypes = [.brightness, .contrast, .exposure, .highlights, .shadows]
+        }
+        return adjustmentValues.filter { parameterTypes.contains($0.type) }
+    }
     
     private func applyAdjustments(sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
         

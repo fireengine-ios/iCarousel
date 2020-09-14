@@ -74,6 +74,7 @@ final class PhotoEditViewUIManager: NSObject {
     }
     
     func showInitialState() {
+        currentPhotoEditViewType = nil
         showTabBarItemView(tabbar.selectedType)
         hideAdjustView()
         animator.showTransition(to: navBarView, on: navBarContainer, animated: true)
