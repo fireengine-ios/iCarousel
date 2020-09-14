@@ -189,12 +189,13 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
     
     private func getCurrentColorValues() -> [AdjustmentParameterValue] {
-        return adjustmentManager.adjustmentValues.filter{ switch $0.type {
+        return adjustmentManager.adjustmentValues.filter { switch $0.type {
         case .temperature, .tint, .saturation, .gamma:
             return true
         default:
             return false
-            } }
+            }
+        }
     }
 }
 
