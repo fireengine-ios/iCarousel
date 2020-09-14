@@ -55,7 +55,7 @@ final class MPAprilFilter: CustomFilterProtocol {
             return image
         }
         
-        guard let imageToBlend = output.adjusting(vignetteAlpha: 150).makeMTIImage() else {
+        guard let imageToBlend = output.adjusting(vignetteAlpha: 150/255).makeMTIImage() else {
             debugLog("Can't convert to uiImage")
             return tempOutput
         }

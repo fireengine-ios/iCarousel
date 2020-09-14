@@ -49,7 +49,7 @@ final class MPHaanFilter: CustomFilterProtocol {
             return image
         }
         
-        guard let imageToBlend = output.adjusting(vignetteAlpha: 200).makeMTIImage() else {
+        guard let imageToBlend = output.adjusting(vignetteAlpha: 200/255).makeMTIImage() else {
             debugLog("Can't convert to uiImage")
             return tempOutput
         }

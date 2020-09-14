@@ -37,7 +37,7 @@ final class MPOldManFilter: CustomFilterProtocol {
             return image
         }
         
-        guard let imageToBlend = output.adjusting(vignetteAlpha: 100).makeMTIImage() else {
+        guard let imageToBlend = output.adjusting(vignetteAlpha: 100/255).makeMTIImage() else {
             debugLog("Can't get imageToBlend")
             return tempOutput
         }
