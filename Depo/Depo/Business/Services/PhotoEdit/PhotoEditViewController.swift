@@ -49,7 +49,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     
     private lazy var adjustManager = PhotoEditAdjustManager(delegate: self)
     
-    private var lastAdjustmentValues = [AdjustmentParameterValue]() //currently using for transaction from HSL back https://jira.turkcell.com.tr/browse/COF-269
+    private var lastColorAdjustmentValues = [AdjustmentParameterValue]() //currently using for transaction from HSL back https://jira.turkcell.com.tr/browse/COF-269
     
     private var tempAdjustmentValues = [AdjustmentParameterValue]()
     private var tempHSLValue: HSVMultibandColor?
@@ -187,20 +187,28 @@ final class PhotoEditViewController: ViewController, NibInit {
             analytics.trackAdjustChanges(transformation, action: action)
         }
     }
+    
+    private func getCurrentColorValues() -> [AdjustmentParameterValue] {
+        return adjustmentManager.adjustmentValues.filter{ switch $0.type {
+        case .temperature, .tint, .saturation, .gamma:
+            return true
+        default:
+            return false
+            } }
+    }
 }
 
 //MARK: - AdjustmentsViewDelegate
 
 extension PhotoEditViewController: AdjustmentsViewDelegate {
-    
+
     func showHSLFilter() {
-        //cancel unsaved color adjustments
-        adjustmentManager.updateValues(tempAdjustmentValues)
+        lastColorAdjustmentValues = getCurrentColorValues()
+        adjustmentManager.updateValues(tempAdjustmentValues)//initital values
         needShowAdjustmentView(for: .hsl)
     }
     
     func didChangeAdjustments(_ adjustments: [AdjustmentParameterValue]) {
-        lastAdjustmentValues = adjustments
         adjustmentManager.applyOnValueDidChange(adjustmentValues: adjustments, sourceImage: tempOriginalImage) { [weak self] outputImage in
             self?.uiManager.image = outputImage
         }
@@ -230,23 +238,26 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
             
             switch type {
             case .adjust:
-                lastAdjustmentValues = []
+                lastColorAdjustmentValues = []
                 adjustManager.cancelLastChanges()
                 setInitialState()
             case .hsl:
-                if !lastAdjustmentValues.isEmpty {
-                    adjustmentManager.updateValues(lastAdjustmentValues)
+                if !lastColorAdjustmentValues.isEmpty {
+                    adjustmentManager.updateValues(lastColorAdjustmentValues)
                 }
-                needShowAdjustmentView(for: .color)
-                
-                adjustmentManager.applyOnValueDidChange(adjustmentValues: lastAdjustmentValues, sourceImage: tempOriginalImage) { [weak self] outputImage in
-                    self?.lastAdjustmentValues = []
+                adjustmentManager.applyOnValueDidChange(adjustmentValues: lastColorAdjustmentValues, sourceImage: tempOriginalImage) { [weak self] outputImage in
+                    self?.lastColorAdjustmentValues = []
                     self?.uiManager.image = outputImage
                     if let color = self?.tempHSLValue {
                         self?.adjustmentManager.updateHSLValue(color)
                         self?.tempHSLValue = nil
                     }
                 }
+                needShowAdjustmentView(for: .color)
+            case .color:
+                lastColorAdjustmentValues.removeAll()
+                adjustmentManager.resetValues()
+                setInitialState()
             default:
                 setInitialState()
             }
@@ -353,6 +364,9 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
         
         if type == .hsl, let adjustment = adjustmentManager.adjustments.first(where: { $0.type == .hsl }) {
             tempHSLValue = adjustment.hslColorParameter?.currentValue
+        }
+        else if type == .color {
+            lastColorAdjustmentValues.removeAll()
         }
         
         tempAdjustmentValues = adjustmentManager.adjustmentValues
