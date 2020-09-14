@@ -45,7 +45,7 @@ final class MPAprilFilter: CustomFilterProtocol {
         toneFilter.inputImage = image?
             .adjusting(contrast: 1.5)
             .adjusting(brightness: 5/255)
-            .adjusting(vignetteAlpha: 0.5)
+            .adjusting(vignetteAlpha: 150/255)
         
 //        guard
 //            let tempOutput = toneFilter.outputImage,
