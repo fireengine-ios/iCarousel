@@ -27,18 +27,19 @@ final class MPOldManFilter: CustomFilterProtocol {
             .adjusting(brightness: 30/255)
             .adjusting(saturation: 0.8)
             .adjusting(contrast: 1.3)
+            .adjusting(vignetteAlpha: 100/255)
         
-       guard
-            let tempOutput = tmpImage,
-            let output = convert.uiImage(from: tempOutput)
-            
-        else {
-            debugLog("Can't convert to uiImage")
-            return image
-        }
+//       guard
+//            let tempOutput = tmpImage,
+//            let output = convert.uiImage(from: tempOutput)
+//
+//        else {
+//            debugLog("Can't convert to uiImage")
+//            return image
+//        }
+//
+//        let imageToBlend = MTIImage(image: output.adjusting(vignetteAlpha: 100/255), colorSpace: output.cgImage?.colorSpace, isOpaque: output.isOpaque)
         
-        let imageToBlend = MTIImage(image: output.adjusting(vignetteAlpha: 100/255), colorSpace: output.cgImage?.colorSpace, isOpaque: output.isOpaque)
-        
-        return blend(background: image, image: imageToBlend, intensity: parameter.currentValue)
+        return blend(background: image, image: tmpImage, intensity: parameter.currentValue)
     }
 }
