@@ -9,6 +9,8 @@
 import UIKit
 import Photos
 import SwiftyGif
+import CoreServices
+import FirebaseCrashlytics
 
 typealias PhotoLibraryGranted = (_ granted: Bool, _ status: PHAuthorizationStatus) -> Void
 
@@ -547,7 +549,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         debugLog("LocalMediaStorage saveToGallery")
 
         guard photoLibraryIsAvailible() else {
-            handler(.failed(ErrorResponse.string("Photo libraryr is unavailable")))
+            handler(.failed(ErrorResponse.string("Photo library is unavailable")))
             return
         }
         
@@ -575,6 +577,83 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             handler(.success(assetPlaceholder))
         })
+    }
+    
+    @discardableResult
+    func replaceInGallery(asset: PHAsset, image: UIImage, adjustmentInfo: String, handler: @escaping ResponseHandler<Void>) -> PHContentEditingInputRequestID? {
+        debugLog("LocalMediaStorage replaceInGallery")
+
+        guard photoLibraryIsAvailible() else {
+            handler(.failed(ErrorResponse.string("Photo library is unavailable")))
+            debugLog("PHOTOEDIT: Photo library is unavailable")
+            return nil
+        }
+        
+        
+        let requestId = asset.requestContentEditingInput(with: nil) { [weak self] input, _ in
+            guard let input = input else {
+                handler(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
+                assertionFailure("Can't create input")
+                debugLog("PHOTOEDIT: Can't create input")
+                return
+            }
+            
+            let adjustmentData = PHAdjustmentData(formatIdentifier: "lifeboxPhotoEdit", formatVersion: "1.0.0", data: adjustmentInfo.data(using: .utf8) ?? Data())
+            let output = PHContentEditingOutput(contentEditingInput: input)
+            output.adjustmentData = adjustmentData
+            
+            let isDataPrepared = self?.prepare(image: image, outputURL: output.renderedContentURL)
+            
+            guard isDataPrepared == true else {
+                handler(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
+                assertionFailure("Can't prepare image data")
+                return
+            }
+            
+            self?.passcodeStorage.systemCallOnScreen = true
+            
+            PHPhotoLibrary.shared().performChanges({
+                let changeRequest = PHAssetChangeRequest(for: asset)
+                changeRequest.contentEditingOutput = output
+                
+            }, completionHandler: { [weak self] success, error in
+                self?.passcodeStorage.systemCallOnScreen = false
+                
+                if let error = error {
+                    debugLog("PHOTOEDIT: performChanges error: \(error.description)")
+                    handler(.failed(error))
+                    return
+                }
+                
+                guard success else {
+                    debugLog("PHOTOEDIT: performChanges success == false")
+                    handler(.failed(ErrorResponse.string(TextConstants.errorUnknown)))
+                    return
+                }
+                
+                handler(.success(()))
+            })
+        }
+        
+        return requestId
+    }
+    
+    private func prepare(image: UIImage, outputURL: URL) -> Bool {
+        let context = CIContext()
+        
+        guard
+            let ciImage = CIImage(image: image),
+            let cgImage = context.createCGImage(ciImage, from: ciImage.extent),
+            let cgImageDestination = CGImageDestinationCreateWithURL(outputURL as CFURL, kUTTypeJPEG, 1, nil)
+        else {
+            return false
+        }
+        
+        CGImageDestinationAddImage(cgImageDestination, cgImage,
+                                   [kCGImageDestinationLossyCompressionQuality as String: 0.99] as CFDictionary)
+        CGImageDestinationFinalize(cgImageDestination)
+        
+        return true
     }
     
     var addAssetToCollectionQueue: OperationQueue = {
@@ -864,13 +943,19 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let operation = GetOriginalImageOperation(photoManager: photoManager,
                                                   asset: asset) { data, string, orientation, dict in
                                                     let file = UUID().uuidString
+                                                    guard let data = data else {
+                                                        Crashlytics.crashlytics().record(error: CustomErrors.text("copyImageAsset: found nil data while trying to get it from asset(after GetOriginalImageOperation)"))
+                                                        debugLog("no asset's data found")
+                                                        semaphore.signal()
+                                                        return
+                                                    }
                                                     url = Device.tmpFolderUrl(withComponent: file)
                                                     do {
                                                         guard let url = url else {
                                                             semaphore.signal()
                                                             return
                                                         }
-                                                        try data?.write(to: url)
+                                                        try data.write(to: url)
                                                         semaphore.signal()
                                                     } catch {
                                                         debugLog(error.description)
@@ -882,7 +967,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         semaphore.wait()
         return url
     }
-
+    
     // MARK: Asset info
 
     
@@ -1011,7 +1096,6 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                     semaphore.signal()
                     return
                 }
-                
                 
                 if let error = dict[PHImageErrorKey] as? NSError {
                     print(error.localizedDescription)
@@ -1320,7 +1404,13 @@ class GetOriginalImageOperation: Operation {
         options.deliveryMode = .highQualityFormat
 //        options.isSynchronous = true
         
-        photoManager.requestImageData(for: asset, options: options, resultHandler: callback)
+        photoManager.requestImageData(for: asset, options: options, resultHandler: { data, string, orientation, dict in
+            if data == nil, let error = dict?[PHImageErrorKey] as? Error {
+                Crashlytics.crashlytics().record(error: error)
+                debugLog("GetOriginalImageOperation: PHImageManager requestImageData no data error \(error.description)")
+            }
+            self.callback(data, string, orientation, dict)
+        })
     }
 }
 

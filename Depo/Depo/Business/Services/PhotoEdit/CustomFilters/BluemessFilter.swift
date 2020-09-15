@@ -46,6 +46,8 @@ final class MPBluemessFilter: CustomFilterProtocol {
             .adjusting(brightness: 30/255)
             .adjusting(contrast: 1)
         
+        toneFilter.inputImage = nil
+        
         return blend(background: image, image: output, intensity: parameter.currentValue)
     }
 }

@@ -10,14 +10,14 @@ apps = [
             name: 'lifebox',// name will be the base filename of the app
             versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
             ictsContainerId: '743', // ICT Store
-            appleId: '665036334', // Apple ID property in the App Information section in App Store Connect,
             prodTeamID: '693N5K66ZJ',
 	    //xcodeSchema: 'TC_Depo_LifeTech',
             //xcodeTarget: 'TC_Depo_LifeTech',
             xcodeSchema: 'TC_Depo_LifeTech_Bundle',
             xcodeTarget: 'TC_Depo_LifeTech_Bundle',
             itcTeamId: '121548574',
-        ],
+        ]
+        ,
  [
             name: 'Billo',// name will be the base filename of the app
             versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
@@ -65,7 +65,7 @@ def flavors = [
 artifactory = Artifactory.server 'turkcell-artifactory'
 
 branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
-isDev = branchName == 'dev2_friendly'
+isDev = branchName == 'dev_friendly'
 echo "Branch Name: ${branchName}"
 
 def readVersion = { app ->
@@ -253,7 +253,7 @@ pipeline {
 
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
-                        sh "source ~/.bash_profile; cd Depo; pod install" // --repo-update occasionally
+                        sh "source ~/.bash_profile; cd Depo; pod update" // gem update cocoapods;// --repo-update occasionally
                         apps.each { app ->
                             runXcode(app, 'test')
                             publishToArtifactory(app, 'test')

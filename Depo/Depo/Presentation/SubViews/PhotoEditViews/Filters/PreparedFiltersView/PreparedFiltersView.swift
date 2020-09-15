@@ -124,11 +124,11 @@ final class PreparedFiltersView: UIView, NibInit {
     
     private func setupCollectionView() {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: 64, height: 94)
-            layout.minimumInteritemSpacing = 16
-            layout.minimumLineSpacing = 16
+            layout.itemSize = CGSize(width: 64, height: 88)
+            layout.minimumLineSpacing = Device.isIpad ? 20 : 16
         }
-        collectionView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 8, right: 16)
+        collectionView.heightAnchor.constraint(equalToConstant: Device.isIpad ? 128 : 110).activate()
+        collectionView.contentInset = Device.isIpad ? UIEdgeInsets(topBottom: 20, rightLeft: 20) : UIEdgeInsets(top: 16, left: 16, bottom: 8, right: 16)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
@@ -166,7 +166,13 @@ extension PreparedFiltersView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeue(cell: PreparedFilterCell.self, for: indexPath)
+        return collectionView.dequeue(cell: PreparedFilterCell.self, for: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? PreparedFilterCell else {
+            return
+        }
         
         if indexPath.row == 0 {
             cell.setup(title: TextConstants.photoEditFilterOriginal, image: previewImage, isOriginal: true)
@@ -175,8 +181,6 @@ extension PreparedFiltersView: UICollectionViewDataSource {
             cell.setup(title: filter.title, image: image, isOriginal: false)
         }
         cell.isSelected = collectionView.indexPathsForSelectedItems?.first?.row == indexPath.row
-        
-        return cell
     }
 }
 

@@ -20,7 +20,7 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nm0-7d-mhS">
                         <rect key="frame" x="18" y="17" width="29" height="29"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="29" id="eBB-eV-kvi"/>
+                            <constraint firstAttribute="width" secondItem="Nm0-7d-mhS" secondAttribute="height" multiplier="1:1" id="Zxh-oO-R51"/>
                             <constraint firstAttribute="width" constant="29" id="n25-lC-0Hb"/>
                         </constraints>
                     </imageView>
@@ -45,8 +45,11 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="113" height="113"/>
             <connections>
+                <outlet property="bottomOffset" destination="H5U-0U-XCd" id="lGd-C3-6Dd"/>
+                <outlet property="imageSide" destination="n25-lC-0Hb" id="nwd-fk-JoN"/>
                 <outlet property="imageView" destination="Nm0-7d-mhS" id="eAY-Xk-Ihp"/>
                 <outlet property="titleLabel" destination="RuU-P9-qsI" id="x4o-hw-IAl"/>
+                <outlet property="topOffset" destination="eIU-Xq-KC8" id="MtZ-kV-ErO"/>
             </connections>
             <point key="canvasLocation" x="-131" y="-2"/>
         </collectionViewCell>

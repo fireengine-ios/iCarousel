@@ -11,46 +11,35 @@ import MetalPetal
 
 
 final class MPOldManFilter: CustomFilterProtocol {
-    private var mpContext: MTIContext
-    
-    init?(parameter: FilterParameterProtocol) {
-        let options = MTIContextOptions()
-        
-        guard let device = MTLCreateSystemDefaultDevice() else {
-            return nil
-        }
-        
-        do {
-            mpContext = try MTIContext(device: device, options: options)
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
-        
-        self.parameter = parameter
-    }
-    
     let type: FilterType = .oldMan
     let parameter: FilterParameterProtocol
     
+    private let convert: MTIConvert
+    
+    
+    init(parameter: FilterParameterProtocol, convert: MTIConvert) {
+        self.parameter = parameter
+        self.convert = convert
+    }
     
     func apply(on image: MTIImage?) -> MTIImage? {
-        guard let inputImage = image else {
-            return nil
-        }
-    
-        
-        let tmpImage = inputImage
+        let tmpImage = image?
             .adjusting(brightness: 30/255)
             .adjusting(saturation: 0.8)
             .adjusting(contrast: 1.3)
+            .adjusting(vignetteAlpha: 100/255)
         
-        guard let cgImage = try? mpContext.makeCGImage(from: tmpImage) else {
-            return nil
-        }
+//       guard
+//            let tempOutput = tmpImage,
+//            let output = convert.uiImage(from: tempOutput)
+//
+//        else {
+//            debugLog("Can't convert to uiImage")
+//            return image
+//        }
+//
+//        let imageToBlend = MTIImage(image: output.adjusting(vignetteAlpha: 100/255), colorSpace: output.cgImage?.colorSpace, isOpaque: output.isOpaque)
         
-        let output = UIImage(cgImage: cgImage).adjusting(vignetteAlpha: 100).makeMTIImage()
-        
-        return blend(background: image, image: output, intensity: parameter.currentValue)
+        return blend(background: image, image: tmpImage, intensity: parameter.currentValue)
     }
 }

@@ -108,6 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.backgroundSyncService.registerLaunchHandlers()
             
         }
+        
         coreDataStack.setup { [weak self] in
             guard let self = self else {
                 return
@@ -276,7 +277,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         } else {
             showPasscode()
-        } 
+        }
     }
     
     private func showPasscode() {
