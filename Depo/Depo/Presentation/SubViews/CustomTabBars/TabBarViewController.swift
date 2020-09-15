@@ -862,7 +862,6 @@ extension TabBarViewController: TabBarActionHandler {
         case .upload:
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .uploadFromPlus))
             guard !checkReadOnlyPermission() else { return }
-            
             let controller = router.uploadPhotos()
             let navigation = NavigationController(rootViewController: controller)
             navigation.navigationBar.isHidden = false

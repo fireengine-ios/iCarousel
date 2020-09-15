@@ -1629,7 +1629,6 @@
 		0303A8472397D12100907F42 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
 		0303A8482397D12100907F42 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
 		0303A8492397D12100907F42 /* WormholePoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4D2826207E3CF0003AE4FB /* WormholePoster.swift */; };
-		0303A84D2397D12100907F42 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610F522BCD27C00108958 /* Info.plist */; };
 		0303A84E2397D12100907F42 /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
 		0303A84F2397D12100907F42 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
 		0303A8502397D12100907F42 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84522212DA314007EA795 /* images.xcassets */; };
@@ -1692,8 +1691,6 @@
 		0303A8932397D14900907F42 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		0303A8942397D14900907F42 /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
 		0303A8982397D14900907F42 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
-		0303A8992397D14900907F42 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610FF22BCD41700108958 /* Info.plist */; };
-		0303A89A2397D14900907F42 /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AFAB3762073ADCB00C54C9B /* InfoEnterprise.plist */; };
 		0303A89B2397D14900907F42 /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610FB22BCD41700108958 /* InfoEnterprise.plist */; };
 		0303A89C2397D14900907F42 /* InfoAppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610FC22BCD41700108958 /* InfoAppStore.plist */; };
 		0303A8A72397D15100907F42 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18CC8F204E87CE00FA3F44 /* L10n.swift */; };
@@ -1713,8 +1710,6 @@
 		0303A8B52397D15100907F42 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FB97AD2008CBA0000D8E2B /* TitleView.swift */; };
 		0303A8B62397D15100907F42 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
 		0303A8B72397D15100907F42 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
-		0303A8BB2397D15100907F42 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C86110922BCD46700108958 /* Info.plist */; };
-		0303A8BC2397D15100907F42 /* InfoEnterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AFAB37C2073AE3200C54C9B /* InfoEnterprise.plist */; };
 		0303A8BD2397D15100907F42 /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
 		0303A8BF2397D15100907F42 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
 		0303A8C02397D15100907F42 /* InfoAppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C86110622BCD46700108958 /* InfoAppStore.plist */; };
@@ -23146,9 +23141,7 @@
 				CE7847F622A685FB00662219 /* Sources */,
 				CE784CA422A685FB00662219 /* Frameworks */,
 				CE784CC322A685FB00662219 /* Resources */,
-				CE784F0E22A685FB00662219 /* ShellScript */,
 				CE784F0F22A685FB00662219 /* [CP] Embed Pods Frameworks */,
-				CE784F1022A685FB00662219 /* ShellScript */,
 				CE784F1122A685FB00662219 /* Embed App Extensions */,
 				CE784F1622A685FB00662219 /* [CP] Copy Pods Resources */,
 				B549B6C224CF084400D39C44 /* Copy Files GPUImage */,
@@ -23245,8 +23238,6 @@
 				CF8B6B3D23CBCA280021B021 /* Sources */,
 				CF8B705223CBCA280021B021 /* Frameworks */,
 				CF8B707323CBCA280021B021 /* Resources */,
-				CF8B72E923CBCA280021B021 /* ShellScript */,
-				CF8B72EB23CBCA280021B021 /* ShellScript */,
 				CF8B72EC23CBCA280021B021 /* Embed App Extensions */,
 				9A5E0034017CE1E734F05FD4 /* [CP] Embed Pods Frameworks */,
 				52D19F592C13611B406FA7BD /* [CP] Copy Pods Resources */,
@@ -23939,7 +23930,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0303A84D2397D12100907F42 /* Info.plist in Resources */,
 				0303A84E2397D12100907F42 /* TurkcellSaturaBol.ttf in Resources */,
 				0303A84F2397D12100907F42 /* TurkcellSaturaBolIta.ttf in Resources */,
 				0303A8502397D12100907F42 /* images.xcassets in Resources */,
@@ -23963,8 +23953,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0303A8982397D14900907F42 /* OurLocalizable.strings in Resources */,
-				0303A8992397D14900907F42 /* Info.plist in Resources */,
-				0303A89A2397D14900907F42 /* InfoEnterprise.plist in Resources */,
 				0303A89B2397D14900907F42 /* InfoEnterprise.plist in Resources */,
 				0303A89C2397D14900907F42 /* InfoAppStore.plist in Resources */,
 			);
@@ -23974,9 +23962,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0303A8BB2397D15100907F42 /* Info.plist in Resources */,
 				0309C38123992FBA0031DB5B /* images.xcassets in Resources */,
-				0303A8BC2397D15100907F42 /* InfoEnterprise.plist in Resources */,
 				0303A8BD2397D15100907F42 /* TurkcellSaturaBol.ttf in Resources */,
 				0303A8BF2397D15100907F42 /* TurkcellSaturaBolIta.ttf in Resources */,
 				0303A8C02397D15100907F42 /* InfoAppStore.plist in Resources */,
@@ -26823,22 +26809,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CE784F0E22A685FB00662219 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#./Fabric.framework/run e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n\n\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		CE784F0F22A685FB00662219 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -26919,19 +26889,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Billo/Pods-Billo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CE784F1022A685FB00662219 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#\"${PODS_ROOT}/Fabric/run\" e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n";
-		};
 		CE784F1622A685FB00662219 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -26964,35 +26921,6 @@
 			shellScript = "#./Fabric.framework/run e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n";
 		};
 		CF8B6B2123CBC9D70021B021 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#\"${PODS_ROOT}/Fabric/run\" e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n";
-		};
-		CF8B72E923CBCA280021B021 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleTagManager/TagManagerResources.bundle",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#./Fabric.framework/run e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n\n\"${PODS_ROOT}/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CF8B72EB23CBCA280021B021 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -38620,7 +38548,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
