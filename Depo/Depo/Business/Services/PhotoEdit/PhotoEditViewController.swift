@@ -99,7 +99,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     
     private func showMoreActionsMenu() {
         let controller = SelectionMenuController.photoEditMenu { [weak self] selectedOption in
-            guard let self = self, let selectedOption = selectedOption else {
+            guard let self = self else {
                 return
             }
             
@@ -110,26 +110,31 @@ final class PhotoEditViewController: ViewController, NibInit {
             case .resetToOriginal:
                 self.resetToOriginal()
                 self.analytics.trackClickEvent(.resetToOriginal)
+                self.uiManager.setHiddenBottomViews(false)
+            
             default:
-                //cancelled
-                break
+                self.uiManager.setHiddenBottomViews(false)
             }
         }
+        
+        uiManager.setHiddenBottomViews(true)
         present(controller, animated: false)
     }
     
     private func saveAsCopy() {
         analytics.trackClickEvent(.saveAsCopy)
         
-        let popup = PhotoEditViewFactory.alert(for: .saveAsCopy) { [weak self] in
+        let popup = PhotoEditViewFactory.alert(for: .saveAsCopy, leftButtonHandler: { [weak self] in
+            self?.uiManager.setHiddenBottomViews(false)
+        }, rightButtonHandler: { [weak self] in
             self?.prepareOriginalImage { [weak self] image in
                 guard let self = self else {
                     return
                 }
-                
+            
                 self.finishedEditing?(self, .savedAs(image: image))
             }
-        }
+        })
         present(popup, animated: true)
     }
     
