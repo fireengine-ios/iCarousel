@@ -81,6 +81,13 @@ final class PhotoEditViewUIManager: NSObject {
         animator.showTransition(to: tabbar, on: bottomBarContainer, animated: true)
     }
     
+    func setHiddenBottomViews(_ isHidden: Bool) {
+        UIView.animate(withDuration: NumericConstants.animationDuration) { [weak self] in
+            self?.tabbar.alpha = isHidden ? 0 : 1
+            self?.filtersContainerView.alpha = isHidden ? 0 : 1
+        }
+    }
+    
     private func showTabBarItemView(_ item: PhotoEditTabbarItemType) {
         switch item {
         case .filters:
