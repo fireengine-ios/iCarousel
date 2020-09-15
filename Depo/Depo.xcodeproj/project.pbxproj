@@ -37189,6 +37189,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -37247,6 +37248,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -37303,6 +37305,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -37360,6 +37363,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -38539,6 +38543,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -38596,6 +38601,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -38651,6 +38657,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -38707,6 +38714,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -41228,6 +41236,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -41284,6 +41293,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -41339,6 +41349,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -41394,6 +41405,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -41667,6 +41679,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -41724,6 +41737,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -41779,6 +41793,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -41835,6 +41850,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -41894,6 +41910,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -41950,6 +41967,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -42005,6 +42023,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -42060,6 +42079,7 @@
 					"$(PROJECT_DIR)/Depo/**",
 					"$(PROJECT_DIR)/Depo",
 				);
+				MTL_HEADER_SEARCH_PATHS = "${PODS_ROOT}/MetalPetal/Frameworks/MetalPetal/Shaders";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
