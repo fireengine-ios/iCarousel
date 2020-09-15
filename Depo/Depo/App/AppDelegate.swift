@@ -108,27 +108,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-        //DELETE ME
-        let dict = UserDefaults.standard.dictionary(forKey: "shownSpotlightsByUserID") as? [String: [Int]]
-        
-        debugLog("!USERDEFAULTS dict shownSpotlightsByUserID \(dict)")
-        
-        
-        debugLog("!USERDEFAULTS dict CurrentUserIDKey \(UserDefaults.standard.string(forKey: "CurrentUserIDKey"))")
-        
-        
-        debugLog("!USERDEFAULTS dict tsdk_unique_id \(UserDefaults.standard.object(forKey: "tsdk_unique_id"))")
-        
-        let newUUID = CFUUIDCreate(kCFAllocatorDefault)
-        if let tempoString = CFUUIDCreateString(kCFAllocatorDefault, newUUID)  {
-            let UUID = String(tempoString).replacingOccurrences(of: "-", with: "")
-            debugLog("!USERDEFAULTS dict tsdk_unique_id NEW \(UUID)")
-        }
-                
-        debugLog("!USERDEFAULTS dict isAppFirstLaunchKey \(UserDefaults.standard.object(forKey: "isAppFirstLaunchKey") as? Bool)")
-             
-        //DELETE ME
-        
         coreDataStack.setup { [weak self] in
             guard let self = self else {
                 return
