@@ -58,7 +58,9 @@ final class MPAweStruckFilter: CustomFilterProtocol {
         }
         
         toneFilter.inputImage = inputImage
+        let filteredImage = toneFilter.outputImage
+        toneFilter.inputImage = nil
         
-        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
+        return blend(background: image, image: filteredImage, intensity: parameter.currentValue)
     }
 }

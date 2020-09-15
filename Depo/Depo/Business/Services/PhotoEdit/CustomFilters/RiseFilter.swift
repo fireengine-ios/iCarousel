@@ -11,7 +11,6 @@ import MetalPetal
 
 
 final class MPRiseFilter: CustomFilterProtocol {
-    private var mpContext: MTIContext
     
     private lazy var toneFilter: MTIRGBToneCurveFilter = {
         let filter = MTIRGBToneCurveFilter()
@@ -30,37 +29,36 @@ final class MPRiseFilter: CustomFilterProtocol {
     }()
     
     
-    init?(parameter: FilterParameterProtocol) {
-        let options = MTIContextOptions()
-        
-        guard let device = MTLCreateSystemDefaultDevice() else {
-            return nil
-        }
-        
-        do {
-            mpContext = try MTIContext(device: device, options: options)
-        } catch {
-            print(error.localizedDescription)
-            return nil
-        }
-        
-        self.parameter = parameter
-    }
-    
     let type: FilterType = .rise
     let parameter: FilterParameterProtocol
     
+    private let convert: MTIConvert
     
+    
+    init(parameter: FilterParameterProtocol, convert: MTIConvert) {
+        self.parameter = parameter
+        self.convert = convert
+    }
+    
+
     func apply(on image: MTIImage?) -> MTIImage? {
-        guard let inputImage = image, let cgImage = try? mpContext.makeCGImage(from: inputImage) else {
-            return nil
-        }
-        
-        let tmpImage = UIImage(cgImage: cgImage)
-        toneFilter.inputImage = tmpImage
-            .adjusting(vignetteAlpha: 200).makeMTIImage()?
+        toneFilter.inputImage = image?
             .adjusting(contrast: 1.9)
             .adjusting(brightness: 60/255)
+            .adjusting(vignetteAlpha: 200/255)
+        
+//        guard
+//            let tempOutput = toneFilter.outputImage,
+//            let output = convert.uiImage(from: tempOutput)
+//
+//        else {
+//            debugLog("Can't convert to uiImage")
+//            return image
+//        }
+//
+//        toneFilter.inputImage = nil
+//
+//        let imageToBlend = MTIImage(image: output.adjusting(vignetteAlpha: 200/255), colorSpace: output.cgImage?.colorSpace, isOpaque: output.isOpaque)
         
         return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
     }

@@ -19,51 +19,57 @@ typealias PhotoEditCompletionHandler = (_ controller: PhotoEditViewController, _
 
 final class PhotoEditViewController: ViewController, NibInit {
     
+    static func with(originalImage: UIImage, previewImage: UIImage, presented: VoidHandler?, completion: PhotoEditCompletionHandler?) -> PhotoEditViewController {
+        let controller = PhotoEditViewController.initFromNib()
+        controller.originalPreviewImage = previewImage
+        controller.tempOriginalImage = previewImage
+        controller.originalImage = originalImage
+        controller.sourceImage = previewImage
+        controller.presentedCallback = presented
+        controller.finishedEditing = completion
+        return controller
+    }
+    
+    
     @IBOutlet private var uiManager: PhotoEditViewUIManager! {
         willSet {
             newValue.delegate = self
             newValue.navBarView.delegate = self
         }
     }
+    
+    private let analytics = PhotoEditAnalytics()
+    
     private lazy var filterView = self.prepareFilterView()
-    private var cropController: CropViewController?
     
     private lazy var adjustmentManager: AdjustmentManager = {
         let types = AdjustmentViewType.allCases.flatMap { $0.adjustmentTypes }
         return AdjustmentManager(types: types)
     }()
     
-    private var tempAdjustmentValues = [AdjustmentParameterValue]()
+    private lazy var adjustManager = PhotoEditAdjustManager(delegate: self)
+    
+    private var tempAdjustmentValues = [AdjustmentViewType: [AdjustmentParameterValue]]()
     private var tempHSLValue: HSVMultibandColor?
     
     private var filterManager = FilterManager(types: FilterType.allCases)
     
     private var originalImage = UIImage()
-    private var sourceImage = UIImage() {
+    private var originalPreviewImage = UIImage() {
         didSet {
-            let originalRatio = Double(sourceImage.size.width / sourceImage.size.height)
-            ratios = AdjustRatio.allValues(originalRatio: originalRatio)
+            let originalRatio = Double(originalPreviewImage.size.width / originalPreviewImage.size.height)
+            adjustManager.setupRatios(original: originalRatio)
         }
     }
+    private var sourceImage = UIImage()
     private var tempOriginalImage = UIImage()
     private var hasChanges: Bool {
-        originalImage != sourceImage
+        originalPreviewImage != sourceImage
     }
-    
-    private var ratios = [AdjustRatio]()
     
     var presentedCallback: VoidHandler?
     var finishedEditing: PhotoEditCompletionHandler?
     
-    static func with(image: UIImage, presented: VoidHandler?, completion: PhotoEditCompletionHandler?) -> PhotoEditViewController {
-        let controller = PhotoEditViewController.initFromNib()
-        controller.originalImage = image
-        controller.tempOriginalImage = image
-        controller.sourceImage = image
-        controller.presentedCallback = presented
-        controller.finishedEditing = completion
-        return controller
-    }
     
     //MARK: - View lifecycle
     
@@ -73,36 +79,39 @@ final class PhotoEditViewController: ViewController, NibInit {
         view.backgroundColor = .black
         setInitialState()
         presentedCallback?()
+        analytics.trackScreen(.photoEditFilters)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        uiManager.viewDidLayoutSubviews()
+    func saveImageComplete(saveAsCopy: Bool) {
+        trackChanges(saveAsCopy: saveAsCopy)
     }
 
     private func setInitialState() {
-        uiManager.showInitialState()
         uiManager.image = sourceImage
+        uiManager.showInitialState()
         uiManager.navBarView.state = hasChanges ? .edit : .initial
     }
     
     private func prepareFilterView() -> PreparedFiltersView {
-        let previewImage = originalImage.resizedImage(to: CGSize(width: 100, height: 100)) ?? originalImage
+        let previewImage = originalPreviewImage.resizedImage(to: CGSize(width: 100, height: 100)) ?? originalPreviewImage
         return PreparedFiltersView.with(previewImage: previewImage, manager: filterManager, delegate: self)
     }
     
     private func showMoreActionsMenu() {
-        let items = [TextConstants.photoEditSaveAsCopy, TextConstants.photoEditResetToOriginal]
-        let controller = SelectionMenuController.with(style: .simple, items: items, selectedIndex: nil) { [weak self] index in
-            guard let self = self else {
+        let controller = SelectionMenuController.photoEditMenu { [weak self] selectedOption in
+            guard let self = self, let selectedOption = selectedOption else {
                 return
             }
-            switch index {
-            case 0:
+            
+            switch selectedOption {
+            case .saveAsCopy:
                 self.saveAsCopy()
-            case 1:
+                
+            case .resetToOriginal:
                 self.resetToOriginal()
+                self.analytics.trackClickEvent(.resetToOriginal)
             default:
+                //cancelled
                 break
             }
         }
@@ -110,61 +119,92 @@ final class PhotoEditViewController: ViewController, NibInit {
     }
     
     private func saveAsCopy() {
+        analytics.trackClickEvent(.saveAsCopy)
+        
         let popup = PhotoEditViewFactory.alert(for: .saveAsCopy) { [weak self] in
-            guard let self = self else {
-                return
+            self?.prepareOriginalImage { [weak self] image in
+                guard let self = self else {
+                    return
+                }
+                
+                self.finishedEditing?(self, .savedAs(image: image))
             }
-            self.finishedEditing?(self, .savedAs(image: self.sourceImage))
         }
         present(popup, animated: true)
     }
     
     private func saveWithModifyOriginal() {
+        analytics.trackClickEvent(.save)
+        
         let popup = PhotoEditViewFactory.alert(for: .modify) { [weak self] in
-            guard let self = self else {
-                return
+            self?.prepareOriginalImage { [weak self] image in
+                guard let self = self else {
+                    return
+                }
+                
+                self.finishedEditing?(self, .saved(image: image))
             }
-            self.finishedEditing?(self, .saved(image: self.sourceImage))
         }
         present(popup, animated: true)
     }
     
+    private func prepareOriginalImage(completion: @escaping ValueHandler<UIImage>) {
+        filterManager.saveHisory()
+        
+        let croppedImage = adjustManager.getCroppedImage(for: originalImage)
+        let filteredImage = filterManager.applyAll(image: croppedImage)
+        adjustmentManager.applyAll(sourceImage: filteredImage, onFinished: completion)
+    }
+    
+    private func prepareAdjustImage(sourceImage: UIImage, completion: @escaping ValueHandler<UIImage>) {
+        let filteredImage = filterManager.applyAll(image: sourceImage)
+        adjustmentManager.applyAll(sourceImage: filteredImage, onFinished: completion)
+    }
+    
     private func resetToOriginal() {
         adjustmentManager.resetValues()
-        sourceImage = originalImage
-        tempOriginalImage = originalImage
+        sourceImage = originalPreviewImage
+        tempOriginalImage = originalPreviewImage
+        tempAdjustmentValues.removeAll()
         setInitialState()
         filterView.resetToOriginal()
+        filterManager.resetToOriginal()
+        adjustManager.reset()
+    }
+    
+    private func trackChanges(saveAsCopy: Bool) {
+        let action: GAEventAction = saveAsCopy ? .saveAsCopy : .save
+        
+        let parameters = adjustmentManager.adjustments.flatMap { $0.parameters.filter { $0.currentValue != $0.defaultValue } }.map { $0.type }
+        analytics.trackAdjustments(parameters, action: action)
+        
+        if let appliedFilter = filterManager.lastApplied {
+            analytics.trackFilter(appliedFilter.type, action: action)
+        }
+        
+        if let transformation = adjustManager.transformation {
+            analytics.trackAdjustChanges(transformation, action: action)
+        }
     }
 }
 
 //MARK: - AdjustmentsViewDelegate
 
 extension PhotoEditViewController: AdjustmentsViewDelegate {
-    
+
     func showHSLFilter() {
-        //cancel unsaved color adjustments
-        adjustmentManager.updateValues(tempAdjustmentValues)
         needShowAdjustmentView(for: .hsl)
     }
     
     func didChangeAdjustments(_ adjustments: [AdjustmentParameterValue]) {
         adjustmentManager.applyOnValueDidChange(adjustmentValues: adjustments, sourceImage: tempOriginalImage) { [weak self] outputImage in
-            guard let self = self else {
-                return
-            }
-            
-            self.uiManager.image = outputImage
+            self?.uiManager.image = outputImage
         }
     }
     
     func didChangeHSLColor(_ color: HSVMultibandColor) {
         adjustmentManager.applyOnHSLColorDidChange(value: color, sourceImage: tempOriginalImage) { [weak self] outputImage in
-            guard let self = self else {
-                return
-            }
-            
-            self.uiManager.image = outputImage
+            self?.uiManager.image = outputImage
         }
     }
 }
@@ -180,18 +220,33 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
         
         switch currentPhotoEditViewType {
         case .adjustmentView(let type):
-            adjustmentManager.updateValues(tempAdjustmentValues)
-            tempAdjustmentValues = []
+
+            if let tempValues = tempAdjustmentValues[type] {
+                adjustmentManager.updateValues(tempValues)
+                tempAdjustmentValues.removeValue(forKey: type)
+            }
             
             switch type {
+            case .adjust:
+                adjustManager.cancelLastChanges()
+                setInitialState()
             case .hsl:
-                needShowAdjustmentView(for: .color)
-                uiManager.image = sourceImage
-                uiManager.navBarView.state = hasChanges ? .edit : .initial
-                
-                if let color = tempHSLValue {
-                    adjustmentManager.updateHSLValue(color)
+                if let hslValue = tempHSLValue {
+                    adjustmentManager.updateHSLValue(hslValue)
                     tempHSLValue = nil
+                }
+                
+                adjustmentManager.applyAll(sourceImage: tempOriginalImage) { [weak self] image in
+                    self?.uiManager.image = image
+                }
+                
+                needShowAdjustmentView(for: .color)
+            case .color:
+                adjustmentManager.applyAll(sourceImage: tempOriginalImage) { [weak self] image in
+                    DispatchQueue.main.async {
+                        self?.sourceImage = image
+                        self?.setInitialState()
+                    }
                 }
             default:
                 setInitialState()
@@ -205,31 +260,37 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
     }
     
     func applyChanges() {
-        if let image = uiManager.image {
-            sourceImage = image
+        func updateSourceImage(resetToInitial: Bool = true) {
+            if let image = uiManager.image {
+                sourceImage = image
+            }
+            if resetToInitial {
+                setInitialState()
+            }
         }
         
         guard let currentPhotoEditViewType = uiManager.currentPhotoEditViewType else {
-            setInitialState()
+            updateSourceImage()
             return
         }
 
         switch currentPhotoEditViewType {
         case .adjustmentView(let type):
-            tempAdjustmentValues = []
+            tempAdjustmentValues.removeValue(forKey: type)
             
             switch type {
             case .adjust:
-                cropController?.crop()
+                adjustManager.crop()
             case .hsl:
+                tempHSLValue = nil
+                updateSourceImage(resetToInitial: false)
                 needShowAdjustmentView(for: .color)
-                uiManager.navBarView.state = .edit
             default:
-                setInitialState()
+                updateSourceImage()
             }
             
         case .filterView(_):
-            setInitialState()
+            updateSourceImage()
         }
     }
 }
@@ -238,19 +299,22 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
 
 extension PhotoEditViewController: PhotoEditNavbarDelegate {
     func onClose() {
-        let closeHandler: VoidHandler = { [weak self] in
-            guard let self = self else {
-                return
-            }
-            self.finishedEditing?(self, .canceled)
-        }
+        analytics.trackClickEvent(.cancel)
         
         if !hasChanges {
-            closeHandler()
+            finishedEditing?(self, .canceled)
             return
         }
         
-        let popup = PhotoEditViewFactory.alert(for: .close, rightButtonHandler: closeHandler)
+        let popup = PhotoEditViewFactory.alert(for: .close, leftButtonHandler: { [weak self] in
+            self?.analytics.trackClickEvent(.keepEditing)
+        }, rightButtonHandler: { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.analytics.trackClickEvent(.discard)
+            self.finishedEditing?(self, .canceled)
+        })
         present(popup, animated: true)
     }
     
@@ -271,29 +335,35 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     
     func needShowAdjustmentView(for type: AdjustmentViewType) {
         guard type != .adjust else {
-            let view = AdjustView.with(ratios: ratios, delegate: self)
-            var config = Mantis.Config()
-            config.showRotationDial = false
-            let controller = Mantis.cropCustomizableViewController(image: self.tempOriginalImage, config: config, cropToolbar: view)
-            controller.delegate = self
-            
-            let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
-            uiManager.showView(type: .adjustmentView(type), view: controller.view, changesBar: changesBar)
-            
-            cropController = controller
+            prepareAdjustImage(sourceImage: self.originalPreviewImage) { [weak self] image in
+                guard let self = self else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    let cropController = self.adjustManager.prepareCropController(for: image, sourceImage: self.originalPreviewImage)
+                    let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
+                    self.uiManager.showView(type: .adjustmentView(type), view: cropController.view, changesBar: changesBar)
+                }
+            }
             return
         }
         
         guard let view = PhotoEditViewFactory.generateView(for: type, adjustments: adjustmentManager.adjustments, delegate: self) else {
             return
         }
-        
+
+        if type == .color, let currentType = uiManager.currentPhotoEditViewType,
+            case PhotoEditViewType.adjustmentView(let viewType) = currentType, viewType == .hsl {
+            //we dont need to save temp values when we open color from hsl
+        } else {
+            tempAdjustmentValues[type] = adjustmentManager.value(for: type)
+        }
+
         if type == .hsl, let adjustment = adjustmentManager.adjustments.first(where: { $0.type == .hsl }) {
             tempHSLValue = adjustment.hslColorParameter?.currentValue
         }
-        
-        tempAdjustmentValues = adjustmentManager.adjustmentValues
-        
+       
         let changesBar = PhotoEditViewFactory.generateChangesBar(with: type.title, delegate: self)
         uiManager.showView(type: .adjustmentView(type), view: view, changesBar: changesBar)
     }
@@ -303,25 +373,47 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     }
     
     func didSwitchTabBarItem(_ item: PhotoEditTabbarItemType) {
-        tempOriginalImage = sourceImage
+        switch item {
+        case .filters:
+            analytics.trackScreen(.photoEditFilters)
+            
+        case .adjustments:
+//            filterManager.saveHisory()
+//            filterManager.resetLastApplied()
+            analytics.trackScreen(.photoEditAdjustments)
+        }
+        
+        prepareTabImage(item) { [weak self] image in
+            self?.tempOriginalImage = image
+        }
+    }
+    
+    private func prepareTabImage(_ item: PhotoEditTabbarItemType, onFinished: @escaping ValueHandler<UIImage>) {
+        let croppedSourceImage = adjustManager.getCroppedImage(for: originalPreviewImage)
+        switch item {
+        case .filters:
+            adjustmentManager.applyAll(sourceImage: croppedSourceImage, onFinished: onFinished)
+            
+        case .adjustments:
+            let filteredImage = filterManager.applyAll(image: croppedSourceImage)
+            onFinished(filteredImage)
+        }
     }
 }
 
-//MARK: - CropViewControllerDelegate
+//MARK: - PhotoEditAdjustManagerDelegate
 
-extension PhotoEditViewController: CropViewControllerDelegate {
-    func cropViewControllerDidCancel(_ cropViewController: CropViewController, original: UIImage) { }
+extension PhotoEditViewController: PhotoEditAdjustManagerDelegate {
     
-    func cropViewControllerDidFailToCrop(_ cropViewController: CropViewController, original: UIImage) {
-        cropController = nil
+    func didCropImage(_ cropped: UIImage, croppedSourceImage: UIImage) {
+        //prepare tempOriginalImage for adjustments page = crop + filters
+        tempOriginalImage = filterManager.applyAll(image: croppedSourceImage)
+        sourceImage = cropped
+        setInitialState()
     }
     
-    func cropViewControllerDidCrop(_ cropViewController: CropViewController, cropped: UIImage, transformation: Transformation) {
-        sourceImage = cropped
-        tempOriginalImage = cropped
-        uiManager.image = cropped
-        cropController = nil
-        setInitialState()
+    func needPresentRatioSelection(_ controller: SelectionMenuController) {
+        present(controller, animated: false)
     }
 }
 
@@ -330,8 +422,9 @@ extension PhotoEditViewController: CropViewControllerDelegate {
 extension PhotoEditViewController: PreparedFiltersViewDelegate {
 
     func didSelectOriginal() {
-        sourceImage = originalImage
+        sourceImage = tempOriginalImage
         setInitialState()
+        filterManager.resetToOriginal()
     }
     
     func didSelectFilter(_ type: FilterType) {
@@ -361,27 +454,79 @@ extension PhotoEditViewController: PreparedFilterSliderViewDelegate {
     }
 }
 
-//MARK: - AdjustViewDelegate
-
-extension PhotoEditViewController: AdjustViewDelegate {
-    func didShowRatioMenu(_ view: AdjustView, selectedRatio: AdjustRatio) {
-        guard let selectedIndex = ratios.firstIndex(where: { $0.name == selectedRatio.name }) else {
+private class PhotoEditAnalytics {
+    
+    private let analyticsService: AnalyticsService = factory.resolve()
+    
+    func trackClickEvent(_ event: GAEventLabel.PhotoEditEvent) {
+        switch event {
+        case .save, .saveAsCopy, .cancel:
+            analyticsService.trackPhotoEditEvent(category: .main, eventAction: .click, eventLabel: .photoEdit(event))
+        case .discard, .keepEditing:
+            analyticsService.trackPhotoEditEvent(category: .popup, eventAction: .discardChanges, eventLabel: .photoEdit(event))
+        default:
             return
         }
         
-        let controller = SelectionMenuController.with(style: .checkmark, items: ratios.map { $0.name }, selectedIndex: selectedIndex) { [weak self] index in
-            guard let self = self, let index = index else {
-                return
-            }
-            
-            let newRatio = self.ratios[index]
-            view.updateRatio(newRatio)
-            self.cropController?.setRatio(newRatio.value)
-        }
-        present(controller, animated: false)
     }
     
-    func didChangeAngle(_ value: Float) {
-        cropController?.manualRotate(rotateAngle: CGFloat(value))
+    func trackScreen(_ screen: AnalyticsAppScreens) {
+        analyticsService.logScreen(screen: screen)
+        analyticsService.trackDimentionsEveryClickGA(screen: screen)
+    }
+    
+    func trackFilter(_ type: FilterType, action: GAEventAction) {
+        analyticsService.trackPhotoEditEvent(category: .filters, eventAction: action, eventLabel: .photoEdit(.saveFilter(type.title)))
+    }
+    
+    func trackAdjustments(_ parameters: [AdjustmentParameterType], action: GAEventAction) {
+        guard !parameters.isEmpty else {
+            return
+        }
+        
+        parameters.forEach { parameterType in
+            if let adjustment = adjustmentType(for: parameterType) {
+                analyticsService.trackPhotoEditEvent(category: .adjustments,
+                                                     eventAction: action,
+                                                     eventLabel: .photoEdit(.saveAdjustment(adjustment)),
+                                                     filterType: parameterType.title)
+            }
+        }
+    }
+    
+    private func adjustmentType(for type: AdjustmentParameterType) -> GAEventLabel.PhotoEditAdjustmentType? {
+        switch type {
+        case .brightness, .contrast, .exposure, .highlights, .shadows:
+            return .light
+        case .gamma, .temperature, .tint, .saturation:
+            return .color
+        case .hslHue, .hslLuminosity, .hslSaturation:
+            return .hsl
+        case .sharpness, .blurRadius, .vignetteRatio:
+            return .effect
+        default:
+            return nil
+        }
+    }
+    
+    func trackAdjustChanges(_ transformation: Transformation, action: GAEventAction) {
+        var changedParameters = [String]()
+        if transformation.rotation != 0 {
+            changedParameters.append("Rotate")
+        }
+        if transformation.manualZoomed || transformation.offset != .zero || transformation.scale != 0 {
+            changedParameters.append("Resize")
+        }
+        
+        guard !changedParameters.isEmpty else {
+            return
+        }
+        
+        changedParameters.forEach { parameter in
+            analyticsService.trackPhotoEditEvent(category: .adjustments,
+                                                 eventAction: action,
+                                                 eventLabel: .photoEdit(.saveAdjustment(.adjust)),
+                                                 filterType: parameter)
+        }
     }
 }

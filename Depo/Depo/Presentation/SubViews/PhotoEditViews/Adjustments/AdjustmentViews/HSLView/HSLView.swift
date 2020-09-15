@@ -19,6 +19,11 @@ final class HSLView: AdjustmentsView, NibInit {
     @IBOutlet private weak var contentView: UIStackView!
     @IBOutlet private weak var colorAssets: UICollectionView!
     
+    @IBOutlet private weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var leadingConstaint: NSLayoutConstraint!
+    @IBOutlet private weak var trailingConstaint: NSLayoutConstraint!
+    
     private var colors = [HSVMultibandColor]()
     private var colorParameter: HSLColorAdjustmentParameterProtocol?
     
@@ -27,13 +32,30 @@ final class HSLView: AdjustmentsView, NibInit {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        topConstraint.constant = Device.isIpad ? 30 : 16
+        bottomConstraint.constant = Device.isIpad ? 40 : 16
+        leadingConstaint.constant = Device.isIpad ? 72 : 16
+        trailingConstaint.constant = Device.isIpad ? 72 : 16
+        contentView.spacing = Device.isIpad ? 22 : 6
+        
         setupCollectionView()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        //width alignment
+        if !colors.isEmpty, let layout = colorAssets.collectionViewLayout as? UICollectionViewFlowLayout {
+            let width = frame.width - leadingConstaint.constant - trailingConstaint.constant
+            let spacing = (width - layout.itemSize.width * CGFloat(colors.count))/CGFloat(colors.count - 1)
+            layout.minimumLineSpacing = spacing
+        }
     }
     
     private func setupCollectionView() {
         if let layout = colorAssets.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: 44, height: 44)
-            layout.minimumLineSpacing = 4
+            layout.itemSize = CGSize(width: Device.isIpad ? 44 : 32, height: 44)
+            layout.minimumLineSpacing = Device.isIpad ? 36 : 20
         }
         colorAssets.dataSource = self
         colorAssets.delegate = self
@@ -41,7 +63,6 @@ final class HSLView: AdjustmentsView, NibInit {
         colorAssets.showsHorizontalScrollIndicator = false
         colorAssets.backgroundColor = ColorConstants.photoEditBackgroundColor
         colorAssets.register(nibCell: ColorCell.self)
-        colorAssets.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: 8)
     }
     
     func setup(parameters: [AdjustmentParameterProtocol], colorParameter: HSLColorAdjustmentParameterProtocol, delegate: AdjustmentsViewDelegate?) {
