@@ -15,6 +15,12 @@ enum PhotoEditCompletion {
     case savedAs(image: UIImage)
 }
 
+private enum PhotoEditChangesType {
+    case none
+    case filter
+    case adjustments
+}
+
 typealias PhotoEditCompletionHandler = (_ controller: PhotoEditViewController, _ result: PhotoEditCompletion) -> Void
 
 final class PhotoEditViewController: ViewController, NibInit {
@@ -70,6 +76,7 @@ final class PhotoEditViewController: ViewController, NibInit {
     var presentedCallback: VoidHandler?
     var finishedEditing: PhotoEditCompletionHandler?
     
+    private var firstChanges = PhotoEditChangesType.none
     
     //MARK: - View lifecycle
     
@@ -157,16 +164,30 @@ final class PhotoEditViewController: ViewController, NibInit {
         filterManager.saveHisory()
         
         let croppedImage = adjustManager.getCroppedImage(for: originalImage)
-        let filteredImage = filterManager.applyAll(image: croppedImage)
-        adjustmentManager.applyAll(sourceImage: filteredImage, onFinished: completion)
+        prepareEditPhoto(sourceImage: croppedImage, completion: completion)
     }
     
-    private func prepareAdjustImage(sourceImage: UIImage, completion: @escaping ValueHandler<UIImage>) {
-        let filteredImage = filterManager.applyAll(image: sourceImage)
-        adjustmentManager.applyAll(sourceImage: filteredImage, onFinished: completion)
+    private func prepareEditPhoto(sourceImage: UIImage, completion: @escaping ValueHandler<UIImage>) {
+        switch firstChanges {
+        case .none:
+            completion(sourceImage)
+        case .adjustments:
+            adjustmentManager.applyAll(sourceImage: sourceImage) { [weak self] image in
+                guard let self = self else {
+                    return
+                }
+                
+                let filteredImage = self.filterManager.applyAll(image: image)
+                completion(filteredImage)
+            }
+        case .filter:
+            let filteredImage = filterManager.applyAll(image: sourceImage)
+            adjustmentManager.applyAll(sourceImage: filteredImage, onFinished: completion)
+        }
     }
     
     private func resetToOriginal() {
+        firstChanges = .none
         adjustmentManager.resetValues()
         sourceImage = originalPreviewImage
         tempOriginalImage = originalPreviewImage
@@ -203,14 +224,21 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
     
     func didChangeAdjustments(_ adjustments: [AdjustmentParameterValue]) {
         adjustmentManager.applyOnValueDidChange(adjustmentValues: adjustments, sourceImage: tempOriginalImage) { [weak self] outputImage in
-            self?.uiManager.image = outputImage
+            self?.uiManager.image = self?.applyFilterIfNeeded(to: outputImage)
         }
     }
     
     func didChangeHSLColor(_ color: HSVMultibandColor) {
         adjustmentManager.applyOnHSLColorDidChange(value: color, sourceImage: tempOriginalImage) { [weak self] outputImage in
-            self?.uiManager.image = outputImage
+            self?.uiManager.image = self?.applyFilterIfNeeded(to: outputImage)
         }
+    }
+    
+    private func applyFilterIfNeeded(to sourceImage: UIImage) -> UIImage {
+        if firstChanges == .filter {
+            return filterManager.applyAll(image: sourceImage)
+        }
+        return sourceImage
     }
 }
 
@@ -242,15 +270,19 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
                 }
                 
                 adjustmentManager.applyAll(sourceImage: tempOriginalImage) { [weak self] image in
-                    self?.uiManager.image = image
+                    self?.uiManager.image = self?.applyFilterIfNeeded(to: image)
                 }
                 
                 needShowAdjustmentView(for: .color)
             case .color:
                 adjustmentManager.applyAll(sourceImage: tempOriginalImage) { [weak self] image in
                     DispatchQueue.main.async {
-                        self?.sourceImage = image
-                        self?.setInitialState()
+                        guard let self = self else {
+                            return
+                        }
+                        
+                        self.sourceImage = self.applyFilterIfNeeded(to: image)
+                        self.setInitialState()
                     }
                 }
             default:
@@ -258,9 +290,11 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
             }
             
         case .filterView(let type):
-            setInitialState()
             let value = filterManager.filters.first(where: { $0.type == type })?.parameter.maxValue ?? 1
-            didChangeFilter(type, newValue: value)
+            applyFilter(type, newValue: value) { [weak self] image in
+                self?.sourceImage = image
+                self?.setInitialState()
+            }
         }
     }
     
@@ -294,8 +328,16 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
                 updateSourceImage()
             }
             
+            if firstChanges == .none {
+                firstChanges = .adjustments
+            }
+            
         case .filterView(_):
             updateSourceImage()
+            
+            if firstChanges == .none {
+                firstChanges = .filter
+            }
         }
     }
 }
@@ -340,7 +382,7 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     
     func needShowAdjustmentView(for type: AdjustmentViewType) {
         guard type != .adjust else {
-            prepareAdjustImage(sourceImage: self.originalPreviewImage) { [weak self] image in
+            prepareEditPhoto(sourceImage: self.originalPreviewImage) { [weak self] image in
                 guard let self = self else {
                     return
                 }
@@ -388,20 +430,35 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
             analytics.trackScreen(.photoEditAdjustments)
         }
         
-        prepareTabImage(item) { [weak self] image in
-            self?.tempOriginalImage = image
+        prepareTabImage(item) { [weak self] result in
+            self?.tempOriginalImage = result.tempOriginalImage
+            self?.sourceImage = result.sourceImage
         }
     }
     
-    private func prepareTabImage(_ item: PhotoEditTabbarItemType, onFinished: @escaping ValueHandler<UIImage>) {
+    private func prepareTabImage(_ item: PhotoEditTabbarItemType, onFinished: @escaping ValueHandler<(tempOriginalImage: UIImage, sourceImage: UIImage)>) {
         let croppedSourceImage = adjustManager.getCroppedImage(for: originalPreviewImage)
         switch item {
         case .filters:
-            adjustmentManager.applyAll(sourceImage: croppedSourceImage, onFinished: onFinished)
+            if firstChanges == .adjustments {
+                adjustmentManager.applyAll(sourceImage: croppedSourceImage) { [weak self] image in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    let sourceImage = self.filterManager.applyAll(image: image)
+                    onFinished((tempOriginalImage: image, sourceImage: sourceImage))
+                }
+            } else {
+                let sourceImage = self.filterManager.applyAll(image: croppedSourceImage)
+                onFinished((tempOriginalImage: croppedSourceImage, sourceImage: sourceImage))
+            }
             
         case .adjustments:
-            let filteredImage = filterManager.applyAll(image: croppedSourceImage)
-            onFinished(filteredImage)
+            let filteredImage = firstChanges == .filter ? filterManager.applyAll(image: croppedSourceImage) : croppedSourceImage
+            adjustmentManager.applyAll(sourceImage: filteredImage) { image in
+                onFinished((tempOriginalImage: filteredImage, sourceImage: image))
+            }
         }
     }
 }
@@ -412,7 +469,11 @@ extension PhotoEditViewController: PhotoEditAdjustManagerDelegate {
     
     func didCropImage(_ cropped: UIImage, croppedSourceImage: UIImage) {
         //prepare tempOriginalImage for adjustments page = crop + filters
-        tempOriginalImage = filterManager.applyAll(image: croppedSourceImage)
+        if firstChanges == .filter {
+            tempOriginalImage = filterManager.applyAll(image: croppedSourceImage)
+        } else {
+            tempOriginalImage = croppedSourceImage
+        }
         sourceImage = cropped
         setInitialState()
     }
@@ -427,16 +488,25 @@ extension PhotoEditViewController: PhotoEditAdjustManagerDelegate {
 extension PhotoEditViewController: PreparedFiltersViewDelegate {
 
     func didSelectOriginal() {
-        sourceImage = tempOriginalImage
-        setInitialState()
         filterManager.resetToOriginal()
+        if firstChanges == .filter {
+            adjustmentManager.applyAll(sourceImage: tempOriginalImage) { [weak self] image in
+                self?.sourceImage = image
+                self?.setInitialState()
+            }
+        } else {
+            sourceImage = tempOriginalImage
+            setInitialState()
+        }
     }
     
     func didSelectFilter(_ type: FilterType) {
         let value = filterManager.filters.first(where: { $0.type == type })?.parameter.currentValue ?? 1
-        didChangeFilter(type, newValue: value)
+        applyFilter(type, newValue: value) { [weak self] image in
+            self?.uiManager.image = image
+            self?.applyChanges()
+        }
         uiManager.navBarView.state = .edit
-        applyChanges()
     }
     
     func needOpenFilterSlider(for type: FilterType) {
@@ -454,8 +524,22 @@ extension PhotoEditViewController: PreparedFiltersViewDelegate {
 
 extension PhotoEditViewController: PreparedFilterSliderViewDelegate {
     func didChangeFilter(_ filterType: FilterType, newValue: Float) {
-        let filteredImage = filterManager.filter(image: tempOriginalImage, type: filterType, intensity: newValue)
-        uiManager.image = filteredImage
+        applyFilter(filterType, newValue: newValue) { [weak self] image in
+            self?.uiManager.image = image
+        }
+    }
+    
+    private func applyFilter(_ filterType: FilterType, newValue: Float, onFinished: @escaping ValueHandler<UIImage>) {
+        guard let filteredImage = filterManager.filter(image: tempOriginalImage, type: filterType, intensity: newValue)  else {
+            assertionFailure("Filters problem")
+            return
+        }
+        
+        if firstChanges == .filter {
+            adjustmentManager.applyAll(sourceImage: filteredImage, onFinished: onFinished)
+        } else {
+            onFinished(filteredImage)
+        }
     }
 }
 
