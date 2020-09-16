@@ -176,7 +176,7 @@ final class AuthoritySingleton {
     }
     
     // MARK: Utility methods
-    private func getAppVersion() -> String {
+    func getAppVersion() -> String {
         guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
             return ""
         }

@@ -50,7 +50,10 @@ class MPClarendonFilter: CustomFilterProtocol {
             .adjusting(brightness: -0.1)
             .adjusting(contrast: 1.0)
         
-        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
+        let filteredImage = toneFilter.outputImage
+        toneFilter.inputImage = nil
+        
+        return blend(background: image, image: filteredImage, intensity: parameter.currentValue)
     }
     
 }

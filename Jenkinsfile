@@ -10,14 +10,14 @@ apps = [
             name: 'lifebox',// name will be the base filename of the app
             versionInfoPath: 'Depo/Depo/App/Depo-AppStore-Info.plist',
             ictsContainerId: '743', // ICT Store
-            appleId: '665036334', // Apple ID property in the App Information section in App Store Connect,
             prodTeamID: '693N5K66ZJ',
 	    //xcodeSchema: 'TC_Depo_LifeTech',
             //xcodeTarget: 'TC_Depo_LifeTech',
             xcodeSchema: 'TC_Depo_LifeTech_Bundle',
             xcodeTarget: 'TC_Depo_LifeTech_Bundle',
             itcTeamId: '121548574',
-        ],
+        ]
+        ,
  [
             name: 'Billo',// name will be the base filename of the app
             versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
@@ -65,8 +65,10 @@ def flavors = [
 artifactory = Artifactory.server 'turkcell-artifactory'
 
 branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
-isDev = branchName == 'dev2_friendly'
+isDev = branchName == 'dev_friendly'
 echo "Branch Name: ${branchName}"
+
+isSkipApproval= branchName == 'dev2_friendly' || branchName == 'dev_friendly' || branchName == 'pre_release_v2'
 
 def readVersion = { app ->
     def infoFile = "${WORKSPACE}/${app.versionInfoPath}"
@@ -253,7 +255,7 @@ pipeline {
 
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
-                        sh "source ~/.bash_profile; cd Depo; pod install" // --repo-update occasionally
+                        sh "source ~/.bash_profile; cd Depo; pod update" // gem update cocoapods;// --repo-update occasionally
                         apps.each { app ->
                             runXcode(app, 'test')
                             publishToArtifactory(app, 'test')
@@ -271,6 +273,7 @@ pipeline {
         }
         stage('Approve Deploy to ICT Store') {
             options { timeout(time: 24, unit: 'HOURS') }
+            when { expression { !isSkipApproval } }
             steps {
                 script {
                     try {
@@ -289,7 +292,10 @@ pipeline {
         stage('Deploying to ICT Store') {
             when {
                 beforeAgent true
-                environment name: 'DEPLOY_TO', value: 'ICT Store'
+                anyOf{
+                    environment name: 'DEPLOY_TO', value: 'ICT Store'
+                    expression { isSkipApproval }
+                }
             }
             agent { label 'devops-dss-js-default' }
             options {
@@ -310,6 +316,7 @@ pipeline {
         }
         stage('Approve Build for Appstore') {
             options { timeout(time: 24, unit: 'HOURS') }
+            when { expression { !isSkipApproval } }
             steps {
                 script {
                     try {
@@ -328,7 +335,10 @@ pipeline {
         stage('Build for Appstore') {
             when {
                 beforeAgent true
-                environment name: 'BUILD_TARGET', value: 'Appstore'
+                anyOf{
+                    environment name: 'BUILD_TARGET', value: 'Appstore'
+                    expression { isSkipApproval }
+                }
             }
             agent { label agentName }
             options {
@@ -357,7 +367,10 @@ pipeline {
             options { timeout(time: 24, unit: 'HOURS') }
             when {
                 beforeAgent true
-                environment name: 'BUILD_TARGET', value: 'Appstore'
+                anyOf{
+                    expression { !isSkipApproval }
+                    environment name: 'BUILD_TARGET', value: 'Appstore'
+                }
             }
             steps {
                 script {
@@ -378,7 +391,10 @@ pipeline {
         stage('Deploy to Testflight') {
             when {
                 beforeAgent true
-                environment name: 'DEPLOY_TO', value: 'Testflight'
+                anyOf{
+                    environment name: 'BUILD_TARGET', value: 'Appstore'
+                    expression { isSkipApproval }
+                }
             }
             agent { label agentName }
             options {

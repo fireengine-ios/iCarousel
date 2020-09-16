@@ -49,7 +49,10 @@ final class MPWhisperFilter: CustomFilterProtocol {
         }
         
         toneFilter.inputImage = inputImage.adjusting(contrast: 1.5)
+        let filterdImage = toneFilter.outputImage
         
-        return blend(background: image, image: toneFilter.outputImage, intensity: parameter.currentValue)
+        toneFilter.inputImage = nil
+        
+        return blend(background: image, image: filterdImage, intensity: parameter.currentValue)
     }
 }

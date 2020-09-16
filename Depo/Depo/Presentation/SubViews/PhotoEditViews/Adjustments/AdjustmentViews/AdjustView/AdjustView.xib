@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -70,7 +70,7 @@
                 <constraint firstItem="CrV-2P-1R7" firstAttribute="leading" secondItem="mvn-X4-JpP" secondAttribute="trailing" constant="5" id="EG3-uE-uPN"/>
                 <constraint firstItem="CrV-2P-1R7" firstAttribute="centerY" secondItem="mvn-X4-JpP" secondAttribute="centerY" id="Kqv-rd-xEe"/>
                 <constraint firstAttribute="trailing" secondItem="CrV-2P-1R7" secondAttribute="trailing" id="QcF-mH-0nD"/>
-                <constraint firstItem="cgx-m3-Q6G" firstAttribute="leading" secondItem="H5M-Oy-Hjk" secondAttribute="leading" id="Rz4-A2-P3W"/>
+                <constraint firstItem="cgx-m3-Q6G" firstAttribute="leading" secondItem="iz6-KA-1la" secondAttribute="leading" id="Rz4-A2-P3W"/>
                 <constraint firstItem="mvn-X4-JpP" firstAttribute="leading" secondItem="cgx-m3-Q6G" secondAttribute="trailing" constant="5" id="SDi-vJ-qpl"/>
                 <constraint firstItem="N0W-dc-sO7" firstAttribute="centerY" secondItem="JFD-qw-fEd" secondAttribute="centerY" id="Xyc-iv-D6q"/>
                 <constraint firstItem="wdQ-f4-tlq" firstAttribute="centerX" secondItem="mvn-X4-JpP" secondAttribute="centerX" id="aBm-Cz-a5V"/>
@@ -85,12 +85,16 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="H5M-Oy-Hjk"/>
             <connections>
+                <outlet property="bottomConstraint" destination="vgS-ZI-eN2" id="UFO-9B-7Ch"/>
                 <outlet property="currentValueLabel" destination="wdQ-f4-tlq" id="Kz4-M8-gAV"/>
+                <outlet property="leadingConstaint" destination="Rz4-A2-P3W" id="er9-LI-4cX"/>
                 <outlet property="leftButton" destination="cgx-m3-Q6G" id="4FP-iI-HDA"/>
                 <outlet property="maxValueLabel" destination="N0W-dc-sO7" id="YzY-VQ-J5y"/>
                 <outlet property="minValueLabel" destination="JFD-qw-fEd" id="i8H-Fq-dVF"/>
                 <outlet property="rightButton" destination="CrV-2P-1R7" id="keO-d4-aAf"/>
                 <outlet property="sliderContentView" destination="mvn-X4-JpP" id="mfW-wD-8uY"/>
+                <outlet property="topConstraint" destination="mVA-io-8d2" id="l1L-9n-mL2"/>
+                <outlet property="trailingConstaint" destination="QcF-mH-0nD" id="b7o-g9-dqr"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="141.29464285714286"/>
         </view>

@@ -14,11 +14,15 @@ final class AdjustmentCategoryCell: UICollectionViewCell {
         willSet {
             newValue.textColor = .white
             newValue.textAlignment = .center
-            newValue.font = .TurkcellSaturaMedFont(size: 12)
+            newValue.font = Device.isIpad ? .TurkcellSaturaMedFont(size: 14) : .TurkcellSaturaMedFont(size: 12)
         }
     }
     
     @IBOutlet private weak var imageView: UIImageView!
+    
+    @IBOutlet private weak var imageSide: NSLayoutConstraint!
+    @IBOutlet private weak var topOffset: NSLayoutConstraint!
+    @IBOutlet private weak var bottomOffset: NSLayoutConstraint!
     
     override var isHighlighted: Bool {
         didSet {
@@ -36,6 +40,9 @@ final class AdjustmentCategoryCell: UICollectionViewCell {
         super.awakeFromNib()
         
         contentView.backgroundColor = ColorConstants.photoEditBackgroundColor
+        imageSide.constant = Device.isIpad ? 33 : 29
+        topOffset.constant = Device.isIpad ? 28 : 14
+        bottomOffset.constant = Device.isIpad ? 27 : 12
     }
     
     func setup(with title: String, image: UIImage?) {

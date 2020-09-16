@@ -15,20 +15,26 @@ final class SelectionMenuCell: UITableViewCell {
         case checkmark
     }
     
+    @IBOutlet private weak var stackView: UIStackView! {
+        willSet {
+            newValue.spacing = Device.isIpad ? 10 : 5
+        }
+    }
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = .TurkcellSaturaDemFont(size: 16)
+            newValue.font = .TurkcellSaturaMedFont(size: 16)
             newValue.textColor = .white
         }
     }
     
     @IBOutlet private weak var checkmarkImageView: UIImageView!
+    @IBOutlet private weak var leadingContraint: NSLayoutConstraint!
     
     private var style: Style = .simple
     
     override var isSelected: Bool {
         didSet {
-            checkmarkImageView.image = isSelected ? UIImage(named: "photo_edit_apply") : nil
+            checkmarkImageView.image = isSelected ? UIImage(named: "photo_edit_checkmark") : nil
         }
     }
     
@@ -36,6 +42,7 @@ final class SelectionMenuCell: UITableViewCell {
         super.awakeFromNib()
         
         backgroundColor = ColorConstants.photoEditBackgroundColor
+        leadingContraint.constant = Device.isIpad ? 20 : 16
     }
     
     func setup(style: Style, title: String, isSelected: Bool) {

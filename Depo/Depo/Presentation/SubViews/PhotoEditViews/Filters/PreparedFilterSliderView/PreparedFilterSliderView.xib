@@ -43,8 +43,13 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="bottomConstraint" destination="QfX-Gj-f7k" id="bbX-0b-8eM"/>
+                <outlet property="leadingConstaint" destination="exN-6V-Xud" id="Svm-kr-cyp"/>
                 <outlet property="sliderContentView" destination="Hfv-WU-IWO" id="eSE-1d-sch"/>
+                <outlet property="topConstraint" destination="0RH-Vj-nMH" id="oDr-eh-1Oo"/>
+                <outlet property="trailingConstaint" destination="ld6-Zy-1yJ" id="uI8-ln-sqo"/>
                 <outlet property="valueLabel" destination="qvC-BD-h5v" id="HiL-yM-lLk"/>
+                <outlet property="valueTrailingConstaint" destination="WjC-W2-kSy" id="ILg-HO-MjX"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="115.84821428571428"/>
         </view>
