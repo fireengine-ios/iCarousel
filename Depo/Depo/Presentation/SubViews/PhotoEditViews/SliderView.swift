@@ -16,6 +16,7 @@ final class SliderView: UIView {
         slider.isContinuous = true
         slider.isStatefulAPIEnabled = true
         slider.isThumbHollowAtStart = false
+        slider.thumbRadius = 10
         slider.setThumbColor(.white, for: .normal)
         slider.setTrackFillColor(.lrTealishTwo, for: .normal)
         slider.setTrackBackgroundColor(ColorConstants.photoEditSliderColor, for: .normal)
