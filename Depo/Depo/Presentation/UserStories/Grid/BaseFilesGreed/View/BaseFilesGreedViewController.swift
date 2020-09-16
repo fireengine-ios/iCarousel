@@ -28,7 +28,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     var subTitle: String = ""
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: QuickSelectCollectionView!
     
     @IBOutlet weak var noFilesView: UIView!
     

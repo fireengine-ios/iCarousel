@@ -1009,6 +1009,42 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
     }
     
+    func onSelectObjectWithQuickSelect(object: BaseDataSourceItem) {
+        if isObjctSelected(object: object) {
+            if let collectionView = collectionView as? QuickSelectCollectionView {
+                if !collectionView.isQuickSelecting {
+                    selectedItemsArray.remove(object)
+                }
+            } else {
+                selectedItemsArray.remove(object)
+            }
+        } else {
+            if maxSelectionCount >= 0 {
+                if selectedItemsArray.count >= maxSelectionCount {
+                    if canReselect {
+                        selectedItemsArray.removeFirst()
+                        updateVisibleCells()
+                    } else {
+                        delegate?.onMaxSelectionExeption()
+                        return
+                    }
+                }
+            }
+            selectedItemsArray.insert(object)
+        }
+        
+        for header in headers{
+            header.setSelectedState(selected: isHeaderSelected(section: header.selectionView.tag),
+                                    activateSelectionState: isSelectionStateActive && enableSelectionOnHeader)
+        }
+    }
+    
+    func onDeselectObject(object: BaseDataSourceItem) {
+        if isObjctSelected(object: object) {
+            selectedItemsArray.remove(object)
+        }
+    }
+    
     func isHeaderSelected(section: Int) -> Bool {
         guard section < allItems.count else {
             return false
@@ -1190,12 +1226,11 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             cellReUseID = CollectionViewCellsIdsConstant.baseMultiFileCell
         }
         
-        // ---------------------=======
         if cellReUseID == nil {
             debugLog("BaseDataSourceForCollectionViewDelegate cellForItemAt cellReUseID == nil")
-            cellReUseID = CollectionViewCellsIdsConstant.cellForImage// ---------------------=======
+            cellReUseID = CollectionViewCellsIdsConstant.cellForImage
         }
-        // ---------------------=======
+    
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReUseID!,
                                                       for: indexPath)
