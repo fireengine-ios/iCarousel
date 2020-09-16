@@ -289,8 +289,8 @@ pipeline {
         }
         stage('Deploying to ICT Store') {
             when {
+                beforeAgent true
                 anyOf{
-                    beforeAgent true
                     environment name: 'DEPLOY_TO', value: 'ICT Store'
                     expression { isSkipApproval }
                 }
@@ -332,8 +332,8 @@ pipeline {
         }
         stage('Build for Appstore') {
             when {
+                beforeAgent true
                 anyOf{
-                    beforeAgent true
                     environment name: 'BUILD_TARGET', value: 'Appstore'
                     expression { isSkipApproval }
                 }
@@ -364,9 +364,9 @@ pipeline {
         stage('Approve Deploy to Testflight') {
             options { timeout(time: 24, unit: 'HOURS') }
             when {
+                beforeAgent true
                 anyOf{
                     expression { !isSkipApproval }
-                    beforeAgent true
                     environment name: 'BUILD_TARGET', value: 'Appstore'
                 }
             }
@@ -388,8 +388,8 @@ pipeline {
         }
         stage('Deploy to Testflight') {
             when {
+                beforeAgent true
                 anyOf{
-                    beforeAgent true
                     environment name: 'BUILD_TARGET', value: 'Appstore'
                     expression { isSkipApproval }
                 }
