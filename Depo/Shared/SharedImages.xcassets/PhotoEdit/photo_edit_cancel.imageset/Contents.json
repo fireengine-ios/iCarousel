@@ -1,8 +1,16 @@
 {
   "images" : [
     {
-      "filename" : "20.pdf",
+      "filename" : "icons8Delete-1.pdf",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "20.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "icons8Delete.pdf",
+      "idiom" : "ipad"
     }
   ],
   "info" : {

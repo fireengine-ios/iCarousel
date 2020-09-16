@@ -21,14 +21,18 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="kXu-J2-Doj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9JU-8J-QTL"/>
-                <constraint firstItem="kXu-J2-Doj" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="HIE-BZ-ed5"/>
+                <constraint firstAttribute="trailing" secondItem="kXu-J2-Doj" secondAttribute="trailing" id="HIE-BZ-ed5"/>
                 <constraint firstAttribute="bottom" secondItem="kXu-J2-Doj" secondAttribute="bottom" constant="16" id="qi6-fr-SUb"/>
                 <constraint firstItem="kXu-J2-Doj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="uoy-ng-qE9"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="bottomConstraint" destination="qi6-fr-SUb" id="Bhc-OE-XaK"/>
                 <outlet property="contentView" destination="kXu-J2-Doj" id="XyM-PL-Qa2"/>
+                <outlet property="leadingConstaint" destination="9JU-8J-QTL" id="3gh-Ho-SZB"/>
+                <outlet property="topConstraint" destination="uoy-ng-qE9" id="G0O-lw-6ah"/>
+                <outlet property="trailingConstaint" destination="HIE-BZ-ed5" id="KUt-eX-nt8"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="137.27678571428569"/>
         </view>

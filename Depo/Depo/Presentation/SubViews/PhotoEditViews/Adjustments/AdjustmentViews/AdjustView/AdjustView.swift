@@ -16,10 +16,10 @@ protocol AdjustViewDelegate: class {
 
 struct AdjustRatio {
     let name: String
-    let value: Double?
+    let value: Double
     
     static func allValues(originalRatio: Double) -> [AdjustRatio] {
-        return [AdjustRatio(name: TextConstants.photoEditRatioFree, value: nil),
+        return [AdjustRatio(name: TextConstants.photoEditRatioFree, value: -1),
                 AdjustRatio(name: TextConstants.photoEditRatioOriginal, value: originalRatio),
                 AdjustRatio(name: "1 x 1", value: 1),
                 AdjustRatio(name: "16 x 9", value: 16/9),
@@ -31,19 +31,17 @@ struct AdjustRatio {
 
 final class AdjustView: UIView, NibInit, CropToolbarProtocol {
     
-    static func with(ratios: [AdjustRatio], delegate: AdjustViewDelegate?) -> AdjustView {
+    static func with(selectedRatio: AdjustRatio?, ratios: [AdjustRatio], rotateValue: Float, delegate: AdjustViewDelegate?) -> AdjustView {
         let view = AdjustView.initFromNib()
         view.delegate = delegate
         view.ratios = ratios
-        if let ratio = view.ratios.first(where: { $0.name == TextConstants.photoEditRatioOriginal }) {
-            view.selectedRatio = ratio
-        }
+        view.setup(selectedRatio: selectedRatio, rotateValue: rotateValue)
         return view
     }
     
     private let minValue: Float = -45
     private let maxValue: Float = 45
-    private var currentValue: Float = 0
+    private(set) var currentValue: Float = 0
     private let defaultValue: Float = 0
     
     @IBOutlet private weak var sliderContentView: UIView!
@@ -53,30 +51,35 @@ final class AdjustView: UIView, NibInit, CropToolbarProtocol {
     @IBOutlet private weak var minValueLabel: UILabel! {
         willSet {
             newValue.textColor = .white
-            newValue.font = .TurkcellSaturaMedFont(size: 12)
+            newValue.font = Device.isIpad ? .TurkcellSaturaRegFont(size: 16) : .TurkcellSaturaMedFont(size: 12)
         }
     }
     
     @IBOutlet private weak var maxValueLabel: UILabel! {
         willSet {
             newValue.textColor = .white
-            newValue.font = .TurkcellSaturaMedFont(size: 12)
+            newValue.font = Device.isIpad ? .TurkcellSaturaRegFont(size: 16) : .TurkcellSaturaMedFont(size: 12)
         }
     }
     
     @IBOutlet private weak var currentValueLabel: UILabel! {
         willSet {
             newValue.textColor = .white
-            newValue.font = .TurkcellSaturaMedFont(size: 12)
+            newValue.font = Device.isIpad ? .TurkcellSaturaRegFont(size: 16) : .TurkcellSaturaMedFont(size: 12)
         }
     }
+    
+    @IBOutlet private weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var leadingConstaint: NSLayoutConstraint!
+    @IBOutlet private weak var trailingConstaint: NSLayoutConstraint!
     
     private let slider = SliderView()
     
     private weak var delegate: AdjustViewDelegate?
     
     private var ratios = [AdjustRatio]()
-    private var selectedRatio = AdjustRatio(name: "", value: nil)
+    private(set) var selectedRatio = AdjustRatio(name: "", value: 0)
     
     //MARK: - Setup
     
@@ -85,10 +88,21 @@ final class AdjustView: UIView, NibInit, CropToolbarProtocol {
         backgroundColor = ColorConstants.photoEditBackgroundColor
         sliderContentView.backgroundColor = ColorConstants.photoEditBackgroundColor
         
+        topConstraint.constant = Device.isIpad ? 30 : 16
+        bottomConstraint.constant = Device.isIpad ? 40 : 16
+        leadingConstaint.constant = Device.isIpad ? 16 : 0
+        trailingConstaint.constant = Device.isIpad ? 16 : 0
+        
         setup()
     }
     
-    //MARK: - Setup
+    func setup(selectedRatio: AdjustRatio?, rotateValue: Float) {
+        setCurrrentValue(rotateValue)
+        
+        if let ratio = selectedRatio ?? ratios.first(where: { $0.name == TextConstants.photoEditRatioOriginal }) {
+            self.selectedRatio = ratio
+        }
+    }
     
     private func setup() {
         minValueLabel.text = "\(Int(minValue))"
@@ -111,6 +125,12 @@ final class AdjustView: UIView, NibInit, CropToolbarProtocol {
     
     func updateRatio(_ value: AdjustRatio) {
         selectedRatio = value
+    }
+    
+    private func setCurrrentValue(_ value: Float) {
+        currentValue = value
+        currentValueLabel.text = "\(Int(value))"
+        slider.slider.value = CGFloat(value)
     }
     
     //MARK: - Actions

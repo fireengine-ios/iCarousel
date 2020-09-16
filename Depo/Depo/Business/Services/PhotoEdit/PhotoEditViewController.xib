@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -22,7 +22,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eZv-Tg-bz2">
                     <rect key="frame" x="0.0" y="88" width="414" height="730"/>
                     <subviews>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SgF-7J-zsa" customClass="ImageScrollView" customModule="Billo" customModuleProvider="target">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SgF-7J-zsa" customClass="PhotoEditImageScrollView" customModule="Billo" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="730"/>
                         </scrollView>
                     </subviews>
@@ -98,7 +98,7 @@
                 <constraint firstItem="U8f-ha-09S" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="eY9-EN-LaD"/>
                 <constraint firstItem="nFk-JH-Rpa" firstAttribute="height" relation="lessThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.3" id="jIy-A0-pIH"/>
                 <constraint firstItem="eZv-Tg-bz2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="jhB-64-t1b"/>
-                <constraint firstItem="eZv-Tg-bz2" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="kjS-E1-uyw"/>
+                <constraint firstItem="eZv-Tg-bz2" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="kjS-E1-uyw"/>
                 <constraint firstItem="eZv-Tg-bz2" firstAttribute="top" secondItem="6eJ-04-lW6" secondAttribute="bottom" id="s9f-fM-fi5"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="BUf-nW-9bz" secondAttribute="trailing" id="uCb-zo-rfO"/>
                 <constraint firstItem="6eJ-04-lW6" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="vQ0-oZ-1Xk"/>

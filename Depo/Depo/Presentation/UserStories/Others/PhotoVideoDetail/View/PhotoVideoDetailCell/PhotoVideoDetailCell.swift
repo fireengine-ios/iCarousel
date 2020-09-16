@@ -9,18 +9,13 @@
 import UIKit
 import WebKit
 
-@objc protocol CellConfigurable {
-    var responder: PhotoVideoDetailCellDelegate? { get set }
-    func setObject(object: Item)
-}
-
-@objc protocol PhotoVideoDetailCellDelegate: AnyObject {
-    @objc optional func tapOnSelectedItem()
+protocol PhotoVideoDetailCellDelegate: class {
+    func tapOnSelectedItem()
     func tapOnCellForFullScreen()
     func imageLoadingFinished()
 }
 
-final class PhotoDetailCell: UICollectionViewCell {
+final class PhotoVideoDetailCell: UICollectionViewCell {
     
     @IBOutlet private weak var imageScrollView: ImageScrollView!
     @IBOutlet private weak var activity: UIActivityIndicatorView!
@@ -42,12 +37,7 @@ final class PhotoDetailCell: UICollectionViewCell {
     private var currentItemId = ""
     
     private var doubleTapWebViewGesture: UITapGestureRecognizer?
-
-    deinit {
-        webView.navigationDelegate = nil
-        webView.stopLoading()
-    }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         imageScrollView.imageViewDelegate = self
@@ -68,21 +58,27 @@ final class PhotoDetailCell: UICollectionViewCell {
         reset()
     }
     
+    deinit {
+        webView.navigationDelegate = nil
+        webView.stopLoading()
+    }
+    
     override func layoutSubviews() {
         /// fixed bug in iOS 11: setNavigationBarHidden calls cell layout
-        guard oldFrame != frame else {
-            return
+        if oldFrame != frame {
+            oldFrame = frame
+            super.layoutSubviews()
+            layoutIfNeeded()
+            webView.frame = contentView.frame
+            imageScrollView.updateZoom()
+            imageScrollView.adjustFrameToCenter()
         }
-        oldFrame = frame
-        super.layoutSubviews()
-        layoutIfNeeded()
-        webView.frame = contentView.frame
-        imageScrollView.updateZoom()
-        imageScrollView.adjustFrameToCenter()
+        
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
         reset()
     }
     
@@ -112,62 +108,6 @@ final class PhotoDetailCell: UICollectionViewCell {
         imageScrollView.isHidden = true
     }
     
-    @objc private func actionFullscreenTapGesture(_ gesture: UITapGestureRecognizer) {
-        delegate?.tapOnCellForFullScreen()
-    }
-    
-    @IBAction private func onPlayVideoButton() {
-        delegate?.tapOnSelectedItem?()
-    }
-
-}
-
-// MARK: - UIScrollViewDelegate
-
-extension PhotoDetailCell: UIScrollViewDelegate {
-    
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        if scrollView == webView.scrollView {
-            return webView.scrollView.subviews.first
-        }
-        return nil
-    }
-}
-
-// MARK: - WKNavigationDelegate
-
-extension PhotoDetailCell: WKNavigationDelegate {
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        webView.scrollView.delegate = self
-        self.webView = webView
-        delegate?.imageLoadingFinished()
-    }
-}
-
-// MARK: - UIGestureRecognizerDelegate
-
-extension PhotoDetailCell: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        (gestureRecognizer == tapGesture && otherGestureRecognizer == doubleTapWebViewGesture) == false
-    }
-}
-
-// MARK: - ImageScrollViewDelegate
-
-extension PhotoDetailCell: ImageScrollViewDelegate {
-    func imageViewFinishedLoading() {
-        delegate?.imageLoadingFinished()
-    }
-}
-
-// MARK: - CellConfigurable
-
-extension PhotoDetailCell: CellConfigurable {
-    var responder: PhotoVideoDetailCellDelegate? {
-        get { delegate }
-        set { delegate = newValue }
-    }
-
     func setObject(object: Item) {
         if isNeedToUpdateWebView, object.uuid == currentItemId {
             return
@@ -203,5 +143,47 @@ extension PhotoDetailCell: CellConfigurable {
                 webView.load(URLRequest(url: url))
             }
         }
+    }
+    
+    @objc private func actionFullscreenTapGesture(_ gesture: UITapGestureRecognizer) {
+        delegate?.tapOnCellForFullScreen()
+    }
+    
+    @IBAction private func onPlayVideoButton() {
+        delegate?.tapOnSelectedItem()
+    }
+
+}
+
+extension PhotoVideoDetailCell: UIScrollViewDelegate {
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        if scrollView == webView.scrollView {
+            return webView.scrollView.subviews.first
+        }
+        return nil
+    }
+}
+
+extension PhotoVideoDetailCell: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        webView.scrollView.delegate = self
+        self.webView = webView
+        delegate?.imageLoadingFinished()
+    }
+}
+
+extension PhotoVideoDetailCell: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer == tapGesture, otherGestureRecognizer == doubleTapWebViewGesture {
+            return false
+        }
+        return true
+    }
+}
+
+extension PhotoVideoDetailCell: ImageScrollViewDelegate {
+    func imageViewFinishedLoading() {
+        delegate?.imageLoadingFinished()
     }
 }

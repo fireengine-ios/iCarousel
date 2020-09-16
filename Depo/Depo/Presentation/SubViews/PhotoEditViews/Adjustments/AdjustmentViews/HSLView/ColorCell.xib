@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -20,6 +20,10 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPv-va-E4d">
                         <rect key="frame" x="106" y="60" width="24" height="24"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="24" id="HGC-AO-adH"/>
+                            <constraint firstAttribute="width" secondItem="hPv-va-E4d" secondAttribute="height" multiplier="1:1" id="rX4-ud-NA8"/>
+                        </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fV4-yh-olZ">
                         <rect key="frame" x="108" y="62" width="20" height="20"/>
@@ -34,15 +38,15 @@
                     <constraint firstItem="fV4-yh-olZ" firstAttribute="centerY" secondItem="909-nW-OGx" secondAttribute="centerY" id="6Rp-VE-iSc"/>
                     <constraint firstItem="hPv-va-E4d" firstAttribute="centerX" secondItem="fV4-yh-olZ" secondAttribute="centerX" id="N4A-uK-i1J"/>
                     <constraint firstItem="fV4-yh-olZ" firstAttribute="centerX" secondItem="909-nW-OGx" secondAttribute="centerX" id="V56-5H-wCa"/>
-                    <constraint firstItem="hPv-va-E4d" firstAttribute="width" secondItem="fV4-yh-olZ" secondAttribute="width" constant="4" id="WHc-kw-Azl"/>
                     <constraint firstItem="hPv-va-E4d" firstAttribute="centerY" secondItem="fV4-yh-olZ" secondAttribute="centerY" id="uKI-WT-DDr"/>
-                    <constraint firstItem="hPv-va-E4d" firstAttribute="height" secondItem="fV4-yh-olZ" secondAttribute="height" constant="4" id="wAf-fh-pOb"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="236" height="144"/>
             <connections>
+                <outlet property="borderSizeConstraint" destination="HGC-AO-adH" id="0r1-5a-cHd"/>
                 <outlet property="colorView" destination="fV4-yh-olZ" id="38V-gO-YYz"/>
                 <outlet property="selectedView" destination="hPv-va-E4d" id="HGf-nV-VCy"/>
+                <outlet property="sizeConstraint" destination="FPt-LI-m16" id="ntA-mH-NLE"/>
             </connections>
             <point key="canvasLocation" x="-143.47826086956522" y="115.84821428571428"/>
         </collectionViewCell>

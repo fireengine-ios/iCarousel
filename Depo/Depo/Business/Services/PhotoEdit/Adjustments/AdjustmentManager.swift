@@ -164,6 +164,8 @@ final class AdjustmentManager {
         return queue
     }()
     
+    private var awaitingOperation: AdjustmentOperation?
+    
     var adjustmentValues: [AdjustmentParameterValue] {
         let parameters = adjustments.flatMap { $0.parameters }
         return parameters.map { AdjustmentParameterValue(type: $0.type, value: $0.currentValue) }
@@ -199,38 +201,59 @@ final class AdjustmentManager {
         applyAdjustments(sourceImage: sourceImage, onFinished: onFinished)
     }
     
+    func applyAll(sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
+        self.applyAdjustments(sourceImage: sourceImage, onFinished: onFinished)
+    }
+    
+    func value(for type: AdjustmentViewType) -> [AdjustmentParameterValue] {
+        var parameterTypes = [AdjustmentParameterType]()
+        switch type {
+        case .adjust:
+            return []
+        case .color:
+            parameterTypes = [.temperature, .tint, .saturation, .gamma]
+        case .effect:
+            parameterTypes = [.sharpness, .blurRadius, .vignetteRatio]
+        case .hsl:
+            parameterTypes = [.hslHue, .hslLuminosity, .hslSaturation]
+        case .light:
+            parameterTypes = [.brightness, .contrast, .exposure, .highlights, .shadows]
+        }
+        return adjustmentValues.filter { parameterTypes.contains($0.type) }
+    }
+    
     private func applyAdjustments(sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
-        operationQueue.cancelAllOperations()
         
-        let relatedAdjustments = self.adjustments.filter { $0.modifed }
+        let relatedAdjustments = self.adjustments.filter { $0.modified }
         
         guard !relatedAdjustments.isEmpty else {
             onFinished(sourceImage)
             return
         }
         
-        AdjustmentOperation.sourceImage = sourceImage
-        
-        let operations: [AdjustmentOperation] = relatedAdjustments.map { adjustment in
-
-            let operation = AdjustmentOperation(adjustment: adjustment) { [weak self] output in
-                guard let self = self else {
-                    return
-                }
-                
-                AdjustmentOperation.sourceImage = output
-                
-                let unfinishedOperations = self.operationQueue.operations.filter { $0.isReady || $0.isExecuting }
-                let operationQueueIsEmpty = self.operationQueue.operations.isEmpty || unfinishedOperations.count <= 1
-                
-                if operationQueueIsEmpty {
-                    onFinished(output)
-                }
+        let operation = AdjustmentOperation(image: sourceImage, adjustments: relatedAdjustments, completion: { [weak self] output in
+            guard let self = self else {
+                onFinished(sourceImage)
+                return
             }
-            return operation
+            
+            if let lastOperation = self.awaitingOperation {
+                self.operationQueue.addOperations([lastOperation], waitUntilFinished: false)
+                self.awaitingOperation = nil
+            }
+            
+            onFinished(output)
+        })
+        
+        
+        let isLastOperationFinished = (operationQueue.operations.filter { $0.isReady || $0.isExecuting }).isEmpty
+
+        guard isLastOperationFinished else {
+            awaitingOperation = operation
+            return
         }
-    
-        operationQueue.addOperations(operations, waitUntilFinished: false)
+        
+        operationQueue.addOperations([operation], waitUntilFinished: false)
     }
     
     @discardableResult

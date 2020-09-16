@@ -8,22 +8,22 @@
 
 final class AdjustmentOperation: Operation {
     
-    static var sourceImage: UIImage?
+    private let sourceImage: UIImage
+    private var outputImage: UIImage
     
-    var adjustmentType: AdjustmentType {
-        return adjustment.type
-    }
-    
-    private let adjustment: AdjustmentProtocol!
+    private var adjustments = [AdjustmentProtocol]()
     private let completion: ValueHandler<UIImage>
     
     private let semaphore = DispatchSemaphore(value: 0)
     
     
-    init(adjustment: AdjustmentProtocol, completion: @escaping ValueHandler<UIImage>) {
-        self.adjustment = adjustment
+    init(image: UIImage, adjustments: [AdjustmentProtocol], completion: @escaping ValueHandler<UIImage>) {
+        self.sourceImage = image
+        self.outputImage = image
+        self.adjustments = adjustments
         self.completion = completion
     }
+    
     
     override func cancel() {
         super.cancel()
@@ -31,27 +31,36 @@ final class AdjustmentOperation: Operation {
         semaphore.signal()
     }
     
-    
     override func main() {
-        guard let image = AdjustmentOperation.sourceImage else {
+        applyNextAdjustment()
+        
+        semaphore.wait()
+        
+        completion(outputImage)
+    }
+    
+    private func applyNextAdjustment() {
+        guard !isCancelled else {
+            outputImage = sourceImage
+            semaphore.signal()
             return
         }
         
-        adjustment.applyOn(image: image) { [weak self] outputImage in
+        guard !adjustments.isEmpty else {
+            self.semaphore.signal()
+            return
+        }
+        
+        let adjustment = adjustments.removeFirst()
+        
+        adjustment.applyOn(image: outputImage) { [weak self] output in
             guard let self = self else {
                 return
             }
             
-            guard !self.isCancelled else {
-                self.semaphore.signal()
-                return
-            }
-    
-            self.completion(outputImage)
-            self.semaphore.signal()
+            self.outputImage = output
+            self.applyNextAdjustment()
         }
-        
-        semaphore.wait()
     }
     
 }

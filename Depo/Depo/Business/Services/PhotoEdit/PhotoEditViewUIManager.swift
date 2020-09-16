@@ -17,14 +17,8 @@ protocol PhotoEditViewUIManagerDelegate: class {
 final class PhotoEditViewUIManager: NSObject {
     
     @IBOutlet private weak var navBarContainer: UIView!
-    
-    @IBOutlet private weak var contentView: UIView! {
-        willSet {
-            newValue.backgroundColor = ColorConstants.photoEditBackgroundColor
-        }
-    }
-    
-    @IBOutlet private var imageScrollView: ImageScrollView!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var imageScrollView: PhotoEditImageScrollView!
     
     @IBOutlet private weak var filtersScrollView: UIScrollView! {
         willSet {
@@ -35,23 +29,11 @@ final class PhotoEditViewUIManager: NSObject {
         }
     }
 
-    @IBOutlet private weak var filtersContainerView: UIView! {
-        willSet {
-            newValue.backgroundColor = ColorConstants.photoEditBackgroundColor
-        }
-    }
-
-    @IBOutlet private weak var bottomSafeAreaView: UIView! {
-        willSet {
-            newValue.backgroundColor = ColorConstants.photoEditBackgroundColor
-        }
-    }
+    @IBOutlet private weak var filtersContainerView: UIView!
+    @IBOutlet private weak var bottomSafeAreaView: UIView!
+    @IBOutlet private weak var bottomBarContainer: UIView!
     
-    @IBOutlet private weak var bottomBarContainer: UIView! {
-        willSet {
-            newValue.backgroundColor = ColorConstants.photoEditBackgroundColor
-        }
-    }
+    private var adjustView: UIView?
     
     private(set) lazy var tabbar: PhotoEditTabbar = {
         let tabbar = PhotoEditTabbar.initFromNib()
@@ -71,28 +53,39 @@ final class PhotoEditViewUIManager: NSObject {
     weak var delegate: PhotoEditViewUIManagerDelegate?
     
     var image: UIImage? {
-        get {
-            imageScrollView.imageView.originalImage
-        }
-        set {
-            DispatchQueue.toMain {
-                self.imageScrollView.imageView.originalImage = newValue
+        didSet {
+            DispatchQueue.main.async {
+                self.imageScrollView.imageView.image = self.image
             }
         }
     }
     
     //MARK: -
     
-    func viewDidLayoutSubviews() {
-        imageScrollView.updateZoom()
-        imageScrollView.adjustFrameToCenter()
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        imageScrollView.imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1).activate()
+        imageScrollView.imageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 1).activate()
+        
+        contentView.backgroundColor = ColorConstants.photoEditBackgroundColor
+        filtersScrollView.backgroundColor = ColorConstants.photoEditBackgroundColor
+        bottomSafeAreaView.backgroundColor = ColorConstants.photoEditBackgroundColor
+        bottomBarContainer.backgroundColor = ColorConstants.photoEditBackgroundColor
     }
     
     func showInitialState() {
+        currentPhotoEditViewType = nil
         showTabBarItemView(tabbar.selectedType)
-        animator.showTransition(to: imageScrollView, on: contentView, animated: true)
+        hideAdjustView()
         animator.showTransition(to: navBarView, on: navBarContainer, animated: true)
         animator.showTransition(to: tabbar, on: bottomBarContainer, animated: true)
+    }
+    
+    func setHiddenBottomViews(_ isHidden: Bool) {
+        UIView.animate(withDuration: NumericConstants.animationDuration) { [weak self] in
+            self?.tabbar.alpha = isHidden ? 0 : 1
+            self?.filtersContainerView.alpha = isHidden ? 0 : 1
+        }
     }
     
     private func showTabBarItemView(_ item: PhotoEditTabbarItemType) {
@@ -104,6 +97,23 @@ final class PhotoEditViewUIManager: NSObject {
         case .adjustments:
             animator.showTransition(to: adjustmentCategoriesView, on: filtersContainerView, animated: true)
         }
+    }
+    
+    private func showAdjustView(_ view: UIView) {
+        if adjustView == view {
+            adjustView?.isHidden = false
+            return
+        }
+        
+        adjustView = view
+        view.frame = contentView.bounds
+        contentView.addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.pinToSuperviewEdges()
+    }
+    
+    private func hideAdjustView() {
+        adjustView?.isHidden = true
     }
 }
 
@@ -140,7 +150,7 @@ extension PhotoEditViewUIManager: AdjustmentCategoriesViewDelegate {
         currentPhotoEditViewType = type
         
         if case PhotoEditViewType.adjustmentView(let viewType) = type, viewType == .adjust {
-            animator.showTransition(to: view, on: contentView, animated: true)
+            showAdjustView(view)
             let emptyView = UIView(frame: .zero)
             emptyView.heightAnchor.constraint(equalToConstant: 0).activate()
             animator.showTransition(to: emptyView, on: filtersContainerView, animated: true)
