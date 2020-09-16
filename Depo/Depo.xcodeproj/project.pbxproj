@@ -32185,7 +32185,6 @@
 				B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */,
 				9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */,
 				B56FBB252122C48C004F4A59 /* TermsOfUseRouter.swift in Sources */,
-				98F0333D2403FFC100F1D415 /* BackupHelper.m in Sources */,
 				9868100925080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */,
 				DB6E1B2B2651A46923CB165B /* FeedbackViewController.swift in Sources */,
 				EF2EE1EEC26868913C9251BD /* FeedbackViewModuleInput.swift in Sources */,
@@ -33347,7 +33346,6 @@
 				89E51D4822CA1111007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				9823196624F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
 				B5ECA57325063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
-				98F032ED2403FFC000F1D415 /* BackupStats.m in Sources */,
 				735766CF23AD1011008589E9 /* OverlayStickerViewControllerDesigner.swift in Sources */,
 				CF71461324B597A800D83E60 /* ContactDetailNoInfoCell.swift in Sources */,
 				CE784B0822A685FB00662219 /* DropboxAccountConnectionCell.swift in Sources */,
@@ -35552,7 +35550,6 @@
 				CF8B6BDF23CBCA280021B021 /* TwoFactorChallengePresenter.swift in Sources */,
 				CF8B6BE023CBCA280021B021 /* OperationProgressService.swift in Sources */,
 				739E2C32247BA92200C74757 /* UIView+ParentViewController.swift in Sources */,
-				98F032F42403FFC000F1D415 /* AnalyzeStatus.m in Sources */,
 				CF8B6BE123CBCA280021B021 /* PhotoVideoDetailCell.swift in Sources */,
 				CF8B6BE223CBCA280021B021 /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
 				982319B524F3A1E700FD16E2 /* HSLView.swift in Sources */,
@@ -36341,7 +36338,6 @@
 				CF8B6E9223CBCA280021B021 /* SearchViewPresenter.swift in Sources */,
 				9823196724F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
 				B5ECA57425063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
-				98F032EE2403FFC000F1D415 /* BackupStats.m in Sources */,
 				CF8B6E9323CBCA280021B021 /* TermsOfUseModuleInput.swift in Sources */,
 				CF71461424B597A800D83E60 /* ContactDetailNoInfoCell.swift in Sources */,
 				CF8B6E9423CBCA280021B021 /* UIviewControlllerExtensions.swift in Sources */,
@@ -40733,7 +40729,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.2.3;
+				CURRENT_PROJECT_VERSION = d2.3.0;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -40796,7 +40792,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.2.3;
+				CURRENT_PROJECT_VERSION = d2.3.0;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -40855,7 +40851,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.2.3;
+				CURRENT_PROJECT_VERSION = d2.3.0;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -40915,7 +40911,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.2.3;
+				CURRENT_PROJECT_VERSION = d2.3.0;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
