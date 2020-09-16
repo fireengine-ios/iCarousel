@@ -48,18 +48,6 @@ final class SliderView: UIView {
         backgroundColor = ColorConstants.photoEditBackgroundColor
         addSubview(slider)
         slider.translatesAutoresizingMaskIntoConstraints = false
-        slider.subviews.first?.backgroundColor = .green
-//        slider.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .red
-        slider.subviews.first?.subviews.first?.backgroundColor = .yellow
-        self.backgroundColor = .yellow
-//        slider.subviews.first?.subviews.first?.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
-//        slider.subviews.first?.subviews.first?.subviews.first?.backgroundColor = .red
-//        slider.subviews.first?.subviews.first?.subviews.first?.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
-//        frame.width = 80
-//        frame.height = 80
-//        slider.insets
-//        slider.subviews.first?.subviews[1].backgroundColor = .red
-        slider.subviews.first?.subviews[2].backgroundColor = .purple
         slider.pinToSuperviewEdges()
         
         slider.minimumValue = CGFloat(minValue)
