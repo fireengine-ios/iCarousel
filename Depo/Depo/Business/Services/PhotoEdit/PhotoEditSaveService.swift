@@ -97,25 +97,30 @@ final class PhotoEditSaveService {
         
         let tmpLocation = prepareTmpDirectoy(name: item.name ?? UUID().uuidString)
         
-        let didSaveLocalCompletion = { [weak self] (result: ResponseResult<WrapData>) in
+        let hasUpdatedItemCompletion = { [weak self] (result: ResponseResult<WrapData>) in
             switch result {
-            case .success(let localItem):
-                localItem.uuid  = item.uuid
+            case .success(let updatedItem):
+                //updatedItem may be local or remote
+                let isLocalExisting = updatedItem.uuid != item.uuid
+                if isLocalExisting {
+                    updatedItem.uuid = item.uuid
+                }
                 
-                self?.uploadItem(item: localItem, asCopy: false, completion: { uploadResult in
+                self?.uploadItem(item: updatedItem, asCopy: false, completion: { uploadResult in
                     switch uploadResult {
                     case .success():
                         self?.removeImage(at: tmpLocation)
                         
                         self?.mediaItemService.itemByUUID(uuid: item.uuid) { [weak self] remote in
                             guard let updatedRemote = remote else {
+                                debugLog("PHOTOEDIT: Can't find updated remote in the DB")
                                 completion(.failed(ErrorResponse.string(TextConstants.commonServiceError)))
                                 assertionFailure("Can't find updated remote in the DB")
-                                debugLog("PHOTOEDIT: Can't find updated remote in the DB")
                                 return
                             }
+                            
                             //to show updated photo immediately
-                            updatedRemote.patchToPreview = localItem.patchToPreview
+                            updatedRemote.patchToPreview = updatedItem.patchToPreview
                             
                             completion(.success(updatedRemote))
                         }
@@ -141,22 +146,17 @@ final class PhotoEditSaveService {
             
             if let asset = localItem?.asset, asset.canPerform(.content) {
                 debugLog("PHOTOEDIT: replace local")
-                self.replaceLocalItem(asset: asset, image: image, completion: didSaveLocalCompletion)
+                self.replaceLocalItem(asset: asset, image: image, completion: hasUpdatedItemCompletion)
                 
             } else {
-                debugLog("PHOTOEDIT: create local")
+                debugLog("PHOTOEDIT: localItem doesn't exist or asset can't be edited")
                 
-                do {
-                    let data = image.jpeg(.higher) ?? UIImagePNGRepresentation(image)
-                    try data?.write(to: tmpLocation)
-                } catch {
-                    debugLog("PHOTOEDIT: Can't write data to the tmp directoy")
-                    completion(.failed(ErrorResponse.string("Can't write data to the tmp directoy")))
-                    return
-                }
+                let data = image.jpeg(.higher) ?? UIImagePNGRepresentation(image)
                 
-                let type = PHAssetMediaType.image
-                self.createLocalItem(url: tmpLocation, type: type, completion: didSaveLocalCompletion)
+                //saving data to upload updated remote
+                item.fileData = data
+                hasUpdatedItemCompletion(.success(item))
+                return
             }
         }
     }
