@@ -61,6 +61,51 @@ final class AdjustmentParameterSliderView: UIView, NibInit {
         
         setupSlider(parameter: parameter)
     }
+    private var isAvailableToReadTouch = false
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let currentPoint = touch.location(in: self)
+
+            guard let sliderThumb = slider.getThumbView() else {
+                return
+            }
+            
+            let relativeThumbFrame = convert(sliderThumb.frame, from: slider)
+            
+            let enlargedTouchFrame = CGRect(x: relativeThumbFrame.minX - 20, y: relativeThumbFrame.minY - 20, width: relativeThumbFrame.maxX + 20, height: relativeThumbFrame.maxY + 20)
+            if enlargedTouchFrame.contains(currentPoint) {
+                isAvailableToReadTouch = true
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard isAvailableToReadTouch else {
+            return
+        }
+        
+        let onePercentSlider = slider.frame.maxX / 100
+        
+        if let touch = touches.first {
+            let currentPoint = touch.location(in: self)
+            
+            if currentPoint.x <= slider.frame.minX {
+                slider.slider.setValue(0, animated: true)
+            } else if currentPoint.x >= slider.frame.maxX {
+                slider.slider.setValue(1.0, animated: true)
+            } else {
+                
+                let percentageValue = currentPoint.x / onePercentSlider
+                slider.slider.setValue(percentageValue/100, animated: false)
+            }
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if isAvailableToReadTouch {
+            isAvailableToReadTouch = false
+        }
+    }
     
     func setupGradient(startColor: UIColor, endColor: UIColor) {
         slider.setupGradient(startColor: startColor, endColor: endColor)

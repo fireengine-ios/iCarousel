@@ -30,6 +30,10 @@ final class SliderView: UIView {
     
     var changeValueHandler: ValueHandler<Float>?
     
+    func getThumbView() -> UIView? {
+        return slider.subviews.first?.subviews.first as? MDCThumbView
+    }
+    
     func add(to view: UIView) {
         guard superview == nil else {
             return
