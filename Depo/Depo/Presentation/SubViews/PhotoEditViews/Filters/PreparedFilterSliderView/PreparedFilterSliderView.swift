@@ -42,6 +42,9 @@ final class PreparedFilterSliderView: UIView, NibInit {
     private var filter: CustomFilterProtocol?
     
     private var isAvailableToReadTouch = false
+    private lazy var feedbackGenerator: UIImpactFeedbackGenerator = {
+        return UIImpactFeedbackGenerator(style: .light)
+    }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -94,6 +97,7 @@ extension PreparedFilterSliderView {
             
             let enlargedTouchFrame = CGRect(x: relativeThumbFrame.minX - 20, y: relativeThumbFrame.minY - 20, width: relativeThumbFrame.maxX + 20, height: relativeThumbFrame.maxY + 20)
             if enlargedTouchFrame.contains(currentPoint) {
+                feedbackGenerator.prepare()
                 isAvailableToReadTouch = true
             }
         }
@@ -111,8 +115,10 @@ extension PreparedFilterSliderView {
             
             if currentPoint.x <= slider.frame.minX {
                 slider.slider.setValue(0, animated: true)
+                feedbackGenerator.impactOccurred()
             } else if currentPoint.x >= slider.frame.maxX {
                 slider.slider.setValue(1.0, animated: true)
+                feedbackGenerator.impactOccurred()
             } else {
                 let percentageValue = currentPoint.x / onePercentSlider / 100
                 slider.slider.setValue(percentageValue, animated: false)
