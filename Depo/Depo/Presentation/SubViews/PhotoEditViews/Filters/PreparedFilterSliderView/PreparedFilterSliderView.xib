@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -15,10 +15,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hfv-WU-IWO">
-                    <rect key="frame" x="0.0" y="36" width="414" height="25"/>
+                    <rect key="frame" x="0.0" y="36" width="414" height="16"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="24q-cu-LvE"/>
+                    </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvC-BD-h5v">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qvC-BD-h5v">
                     <rect key="frame" x="356" y="16" width="42" height="16"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="16" id="SG2-H8-NXq"/>
@@ -31,7 +34,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="qvC-BD-h5v" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="0RH-Vj-nMH"/>
-                <constraint firstAttribute="bottom" secondItem="Hfv-WU-IWO" secondAttribute="bottom" constant="4" id="QfX-Gj-f7k"/>
+                <constraint firstAttribute="bottom" secondItem="Hfv-WU-IWO" secondAttribute="bottom" constant="13" id="QfX-Gj-f7k"/>
                 <constraint firstAttribute="trailing" secondItem="qvC-BD-h5v" secondAttribute="trailing" constant="16" id="WjC-W2-kSy"/>
                 <constraint firstItem="Hfv-WU-IWO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="exN-6V-Xud"/>
                 <constraint firstAttribute="trailing" secondItem="Hfv-WU-IWO" secondAttribute="trailing" id="ld6-Zy-1yJ"/>
