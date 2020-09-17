@@ -68,6 +68,8 @@ branchName = JOB_NAME.replaceAll('[^/]+/','').replaceAll('%2F','/')
 isDev = branchName == 'dev_friendly'
 echo "Branch Name: ${branchName}"
 
+isSkipApproval= branchName == 'dev2_friendly' || branchName == 'dev_friendly' || branchName == 'pre_release_v2'
+
 def readVersion = { app ->
     def infoFile = "${WORKSPACE}/${app.versionInfoPath}"
     // short version on apple store. Will be copied from source
@@ -271,6 +273,7 @@ pipeline {
         }
         stage('Approve Deploy to ICT Store') {
             options { timeout(time: 24, unit: 'HOURS') }
+            when { expression { !isSkipApproval } }
             steps {
                 script {
                     try {
@@ -289,7 +292,10 @@ pipeline {
         stage('Deploying to ICT Store') {
             when {
                 beforeAgent true
-                environment name: 'DEPLOY_TO', value: 'ICT Store'
+                anyOf{
+                    environment name: 'DEPLOY_TO', value: 'ICT Store'
+                    expression { isSkipApproval }
+                }
             }
             agent { label 'devops-dss-js-default' }
             options {
@@ -310,6 +316,7 @@ pipeline {
         }
         stage('Approve Build for Appstore') {
             options { timeout(time: 24, unit: 'HOURS') }
+            when { expression { !isSkipApproval } }
             steps {
                 script {
                     try {
@@ -328,7 +335,10 @@ pipeline {
         stage('Build for Appstore') {
             when {
                 beforeAgent true
-                environment name: 'BUILD_TARGET', value: 'Appstore'
+                anyOf{
+                    environment name: 'BUILD_TARGET', value: 'Appstore'
+                    expression { isSkipApproval }
+                }
             }
             agent { label agentName }
             options {
@@ -357,7 +367,10 @@ pipeline {
             options { timeout(time: 24, unit: 'HOURS') }
             when {
                 beforeAgent true
-                environment name: 'BUILD_TARGET', value: 'Appstore'
+                anyOf{
+                    expression { !isSkipApproval }
+                    environment name: 'BUILD_TARGET', value: 'Appstore'
+                }
             }
             steps {
                 script {
@@ -378,7 +391,10 @@ pipeline {
         stage('Deploy to Testflight') {
             when {
                 beforeAgent true
-                environment name: 'DEPLOY_TO', value: 'Testflight'
+                anyOf{
+                    environment name: 'BUILD_TARGET', value: 'Appstore'
+                    expression { isSkipApproval }
+                }
             }
             agent { label agentName }
             options {

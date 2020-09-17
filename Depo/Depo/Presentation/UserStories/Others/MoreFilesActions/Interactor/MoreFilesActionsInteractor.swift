@@ -220,7 +220,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func edit(item: [BaseDataSourceItem], completion: VoidHandler?) {
+        debugLog("PHOTOEDIT: start")
+        
         guard let item = item.first as? Item, let originalUrl = item.tmpDownloadUrl else {
+            debugLog("PHOTOEDIT: there's no item or originalUrl")
             return
         }
         
@@ -229,6 +232,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 let self = self,
                 let image = image
             else {
+                debugLog("PHOTOEDIT: can't get the original image")
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Edit(status: .failure))
                 UIApplication.showErrorAlert(message: TextConstants.errorServer)
                 completion?()
@@ -245,6 +249,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 let source = CGImageSourceCreateWithData(previewData as CFData, options),
                 let imageReference = CGImageSourceCreateThumbnailAtIndex(source, 0, options)
             else {
+                debugLog("PHOTOEDIT: can't create the preview image")
                 UIApplication.showErrorAlert(message: TextConstants.commonServiceError)
                 completion?()
                 return
@@ -252,6 +257,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             
             let previewImage = UIImage(cgImage: imageReference, scale: image.scale, orientation: image.imageOrientation)
             
+            debugLog("PHOTOEDIT: is about to create the controller")
             let vc = PhotoEditViewController.with(originalImage: image.imageWithFixedOrientation, previewImage: previewImage.imageWithFixedOrientation, presented: completion) { [weak self] controller, completionType in
 
                 switch completionType {
@@ -284,11 +290,34 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                     case .saved(image: let newImage):
                         controller.showSpinner()
                         
+                        var newThumbnails = [UIImage]()
+                        var urlsToReplace = [URL]()
+                        
+                        if let smallUrl = item.metaData?.smalURl {
+                            urlsToReplace.append(smallUrl)
+                            newThumbnails.append(newImage.resizedImage(to: CGSize(width: 64, height: 64)))
+                        }
+                        if let mediumUrl = item.metaData?.mediumUrl {
+                            urlsToReplace.append(mediumUrl)
+                            newThumbnails.append(newImage.resizedImage(to: CGSize(width: 128, height: 128)))
+                        }
+                        if let largeUrl = item.metaData?.largeUrl {
+                            urlsToReplace.append(largeUrl)
+                            newThumbnails.append(newImage.resizedImage(to: CGSize(width: 1024, height: 1024)))
+                        }
+                        if case .remoteUrl(let pathUrl) = item.patchToPreview, pathUrl != nil {
+                            urlsToReplace.append(pathUrl)
+                            newThumbnails.append(newImage.resizedImage(to: CGSize(width: 1024, height: 1024)))
+                        }
+                        
+                        
                         PhotoEditSaveService.shared.save(asCopy: false, image: newImage, item: item) { [weak self] result in
                             switch result {
                                 case .success(let updatedItem):
+                                    
                                     item.copyFileData(from: updatedItem)
                                     item.patchToPreview = updatedItem.patchToPreview
+                                    
                                     let closeScreen = {
                                         DispatchQueue.main.async {
                                             controller.saveImageComplete(saveAsCopy: false)
@@ -296,15 +325,11 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                             SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditModifySnackbarMessage)
                                         }
                                     }
+                                    ImageDownloder.removeImageFromCache(url: updatedItem.tmpDownloadUrl, completion: {
+                                        ImageDownloder.replaceImagesInCache(urls: urlsToReplace, images: newThumbnails, completion: closeScreen)
+                                    })
                                     
-                                    let urlsToClean = [item.metaData?.smalURl,
-                                                       item.metaData?.mediumUrl,
-                                                       item.metaData?.largeUrl,
-                                                       item.tmpDownloadUrl]
-                                    
-                                    ImageDownloder.removeImagesFromCache(urls: urlsToClean) {
-                                        closeScreen()
-                                }
+
                                 case .failed(_):
                                     DispatchQueue.main.async {
                                         controller.hideSpinner()
