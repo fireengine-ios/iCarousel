@@ -394,7 +394,7 @@ pipeline {
             when {
                 beforeAgent true
                 anyOf{
-                    environment name: 'BUILD_TARGET', value: 'Appstore'
+                	environment name: 'DEPLOY_TO', value: 'Testflight'
                     expression { isSkipApproval }
                 }
             }
@@ -413,12 +413,9 @@ pipeline {
                     sh returnStdout: true, script: 'rm -f ~/.itmstransporter/UploadTokens/*.token'
                     def failReasons = [:]
                     apps.each { app ->
-                        try {
-                            if (env.getProperty("DEPLOY_${app.name}") == 'true') {           
+                        try {         
                                 env.FASTLANE_ITC_TEAM_ID="${app.itcTeamId}"
                                 deployToTestflight app
-                            }
-
                         } catch (Exception e) {
                             failReasons[app.name] = e.message
                         }
