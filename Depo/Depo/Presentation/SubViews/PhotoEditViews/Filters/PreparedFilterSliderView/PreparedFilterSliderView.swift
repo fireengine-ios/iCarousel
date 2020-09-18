@@ -41,7 +41,7 @@ final class PreparedFilterSliderView: UIView, NibInit {
     
     private var filter: CustomFilterProtocol?
     
-    private var _isAvailableToReadTouch = false
+    private var isAvailableToReadTouch = false
     private lazy var feedbackGenerator: UIImpactFeedbackGenerator = {
         return UIImpactFeedbackGenerator(style: .light)
     }()
@@ -84,28 +84,62 @@ final class PreparedFilterSliderView: UIView, NibInit {
     }
 }
 
-//MARK: - ParametersSliderTouchProtocol
-///Basicaly protocol that works as a workaround for a MDCSlider native behavior
-extension PreparedFilterSliderView: ParametersSliderTouchProtocol {
-    var isAvailableToReadTouch: Bool {
-        get {
-            return _isAvailableToReadTouch
+extension PreparedFilterSliderView {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let currentPoint = touch.location(in: self)
+            
+            guard let sliderThumb = slider.getThumbView() else {
+                return
+            }
+            
+            let enlargedThumbFrame = CGRect(x: sliderThumb.frame.origin.x - 20, y: sliderThumb.frame.origin.y - 20, width: sliderThumb.frame.size.width + 20, height: sliderThumb.frame.size.height + 20)
+            
+            if enlargedThumbFrame.contains(currentPoint) {
+                feedbackGenerator.prepare()
+                isAvailableToReadTouch = true
+            }
         }
-        set {
-            _isAvailableToReadTouch = newValue
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard isAvailableToReadTouch else {
+            return
+        }
+        
+        let onePercentSlider = slider.frame.size.width / 100
+        
+        if let touch = touches.first {
+            let currentPoint = touch.location(in: self)
+            
+            if currentPoint.x <= slider.slider.frame.origin.x {
+                if slider.slider.value > 0 {
+                    feedbackGenerator.impactOccurred()
+                } else {
+                    return
+                }
+                valueLabel.text = String(format: "%.1f", 0)
+                slider.slider.setValue(0, animated: true)
+            } else if currentPoint.x >= slider.slider.frame.size.width {
+                if slider.slider.value < 1 {
+                    feedbackGenerator.impactOccurred()
+                } else {
+                    return
+                }
+                slider.slider.setValue(1.0, animated: true)
+                valueLabel.text = String(format: "%.1f", 1)
+                feedbackGenerator.impactOccurred()
+            } else {
+                let percentageValue = currentPoint.x / onePercentSlider / 100
+                slider.slider.setValue(percentageValue, animated: false)
+                valueLabel.text = String(format: "%.1f", percentageValue)
+            }
         }
     }
     
-    var mainFeedbackGenerator: UIImpactFeedbackGenerator {
-        return  feedbackGenerator
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if isAvailableToReadTouch {
+            isAvailableToReadTouch = false
+        }
     }
-    
-    var sliderView: SliderView {
-        return slider
-    }
-    
-    var valueLabelView: UILabel? {
-        return valueLabel
-    }
-
 }
