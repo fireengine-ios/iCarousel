@@ -11,11 +11,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AdjustmentParameterSliderView" customModule="Billo" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="41"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="9YI-81-AJM">
-                    <rect key="frame" x="0.0" y="8" width="414" height="36"/>
+                    <rect key="frame" x="0.0" y="8" width="414" height="33"/>
                     <subviews>
                         <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VfK-jy-K9Y">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="16"/>
@@ -46,10 +46,10 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dB0-I4-r1x">
-                            <rect key="frame" x="0.0" y="17" width="414" height="19"/>
+                            <rect key="frame" x="0.0" y="17" width="414" height="16"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="19" id="jhZ-pu-m1J"/>
+                                <constraint firstAttribute="height" constant="16" id="lYY-FR-020"/>
                             </constraints>
                         </view>
                     </subviews>
