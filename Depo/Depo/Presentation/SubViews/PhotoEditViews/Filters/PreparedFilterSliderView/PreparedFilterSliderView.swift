@@ -85,19 +85,24 @@ final class PreparedFilterSliderView: UIView, NibInit {
 }
 
 extension PreparedFilterSliderView {
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
+            
             let currentPoint = touch.location(in: self)
             
             guard let sliderThumb = slider.getThumbView() else {
                 return
             }
             
-            let enlargedThumbFrame = CGRect(x: sliderThumb.frame.origin.x - 35, y: sliderThumb.frame.origin.y - 30, width: sliderThumb.frame.size.width + 35, height: sliderThumb.frame.size.height + 30)
+            let convertedThumbFrame = convert(sliderThumb.frame, from: sliderContentView)
             
+            let enlargedThumbFrame = CGRect(x: convertedThumbFrame.origin.x - 30, y: convertedThumbFrame.origin.y - 30, width: convertedThumbFrame.size.width + 60, height: convertedThumbFrame.size.height + 60)
+        
             if enlargedThumbFrame.contains(currentPoint) {
                 feedbackGenerator.prepare()
                 isAvailableToReadTouch = true
+                touchesMoved(touches, with: event)
             }
         }
     }

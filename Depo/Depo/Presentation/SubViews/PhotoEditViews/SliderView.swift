@@ -41,7 +41,7 @@ final class SliderView: UIView {
         
         view.addSubview(self)
         translatesAutoresizingMaskIntoConstraints = false
-        pinToSuperviewEdges(offset: UIEdgeInsets(topBottom: 0, rightLeft: -4))
+        pinToSuperviewEdges(offset: UIEdgeInsets(topBottom: 0, rightLeft: 4))
     }
     
     func setup(minValue: Float, maxValue: Float, anchorValue: Float, currentValue: Float) {

@@ -83,7 +83,6 @@ final class AdjustmentParameterSliderView: UIView, NibInit {
     
     private func setupSlider(parameter: AdjustmentParameterProtocol) {
         slider.add(to: sliderContentView)
-        
         slider.setup(minValue: parameter.minValue,
                      maxValue: parameter.maxValue,
                      anchorValue: parameter.defaultValue,
@@ -97,6 +96,7 @@ final class AdjustmentParameterSliderView: UIView, NibInit {
 }
 
 extension AdjustmentParameterSliderView {
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             
@@ -105,12 +105,15 @@ extension AdjustmentParameterSliderView {
             guard let sliderThumb = slider.getThumbView() else {
                 return
             }
-
-            let enlargedThumbFrame = CGRect(x: sliderThumb.frame.origin.x - 35, y: sliderThumb.frame.origin.y - 30, width: sliderThumb.frame.size.width + 35, height: sliderThumb.frame.size.height + 30)
             
+            let convertedThumbFrame = convert(sliderThumb.frame, from: sliderContentView)
+            
+            let enlargedThumbFrame = CGRect(x: convertedThumbFrame.origin.x - 30, y: convertedThumbFrame.origin.y - 30, width: convertedThumbFrame.size.width + 60, height: convertedThumbFrame.size.height + 60)
+        
             if enlargedThumbFrame.contains(currentPoint) {
                 feedbackGenerator.prepare()
                 isAvailableToReadTouch = true
+                touchesMoved(touches, with: event)
             }
         }
     }
@@ -122,6 +125,8 @@ extension AdjustmentParameterSliderView {
         
         let onePercentSlider = slider.frame.size.width / 100
         
+        var newValue: CGFloat
+        
         if let touch = touches.first {
             let currentPoint = touch.location(in: self)
 
@@ -131,21 +136,27 @@ extension AdjustmentParameterSliderView {
                 } else {
                     return
                 }
-                valueLabel.text = String(format: "%.1f", 0)
-                slider.slider.setValue(0, animated: true)
+                newValue = 0
+//                valueLabel.text = String(format: "%.1f", 0)
+//                slider.slider.setValue(0, animated: true)
             } else if currentPoint.x >= slider.slider.frame.size.width {
                 if slider.slider.value < 1 {
                     feedbackGenerator.impactOccurred()
                 } else {
                     return
                 }
-                slider.slider.setValue(1.0, animated: true)
-                valueLabel.text = String(format: "%.1f", 1)
+                newValue = 1.0
+//                slider.slider.setValue(1.0, animated: true)
+//                valueLabel.text = String(format: "%.1f", 1)
                 feedbackGenerator.impactOccurred()
             } else {
-                let percentageValue = currentPoint.x / onePercentSlider / 100
-                slider.slider.setValue(percentageValue, animated: false)
-                valueLabel.text = String(format: "%.1f", percentageValue)
+                newValue = currentPoint.x / onePercentSlider / 100
+            }
+            
+            slider.slider.setValue(newValue, animated: false)
+            valueLabel.text = String(format: "%.1f", newValue)
+            if let type = type {
+                delegate?.sliderValueChanged(newValue: Float(newValue), type: type)
             }
         }
     }
