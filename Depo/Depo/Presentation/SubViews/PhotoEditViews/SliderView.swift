@@ -16,7 +16,6 @@ final class SliderView: UIView {
         slider.isContinuous = true
         slider.isStatefulAPIEnabled = true
         slider.isThumbHollowAtStart = false
-        slider.thumbRadius = 10
         slider.setThumbColor(.white, for: .normal)
         slider.setTrackFillColor(.lrTealishTwo, for: .normal)
         slider.setTrackBackgroundColor(ColorConstants.photoEditSliderColor, for: .normal)
@@ -31,6 +30,10 @@ final class SliderView: UIView {
     
     var changeValueHandler: ValueHandler<Float>?
     
+    func getThumbView() -> UIView? {
+        return slider.subviews.first?.subviews.first as? MDCThumbView
+    }
+    
     func add(to view: UIView) {
         guard superview == nil else {
             return
@@ -38,7 +41,7 @@ final class SliderView: UIView {
         
         view.addSubview(self)
         translatesAutoresizingMaskIntoConstraints = false
-        pinToSuperviewEdges(offset: UIEdgeInsets(topBottom: 0, rightLeft: -4))
+        pinToSuperviewEdges(offset: UIEdgeInsets(topBottom: 0, rightLeft: 4))
     }
     
     func setup(minValue: Float, maxValue: Float, anchorValue: Float, currentValue: Float) {
