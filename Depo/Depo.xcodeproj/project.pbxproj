@@ -8184,6 +8184,12 @@
 		CF01729723D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF01729323D00B9F00C0B0DE /* NetmeraCustomUser.swift */; };
 		CF01729823D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF01729323D00B9F00C0B0DE /* NetmeraCustomUser.swift */; };
 		CF01729923D00B9F00C0B0DE /* NetmeraCustomUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF01729323D00B9F00C0B0DE /* NetmeraCustomUser.swift */; };
+		CF4F5AB525148F5C00911CA0 /* ParametersSliderTouchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F5AB425148F5C00911CA0 /* ParametersSliderTouchProtocol.swift */; };
+		CF4F5AB625148F5C00911CA0 /* ParametersSliderTouchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F5AB425148F5C00911CA0 /* ParametersSliderTouchProtocol.swift */; };
+		CF4F5AB725148F5C00911CA0 /* ParametersSliderTouchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F5AB425148F5C00911CA0 /* ParametersSliderTouchProtocol.swift */; };
+		CF4F5AB825148F5C00911CA0 /* ParametersSliderTouchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F5AB425148F5C00911CA0 /* ParametersSliderTouchProtocol.swift */; };
+		CF4F5AB925148F5C00911CA0 /* ParametersSliderTouchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F5AB425148F5C00911CA0 /* ParametersSliderTouchProtocol.swift */; };
+		CF4F5ABA25148F5C00911CA0 /* ParametersSliderTouchProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F5AB425148F5C00911CA0 /* ParametersSliderTouchProtocol.swift */; };
 		CF703F4524E3CC49005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CF703F4624E3CC4A005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CF703F4724E3CC4B005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -14112,6 +14118,7 @@
 		CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedController.swift; sourceTree = "<group>"; };
 		CEFFA8F421B0089800B34F36 /* ViewSortStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSortStorage.swift; sourceTree = "<group>"; };
 		CF01729323D00B9F00C0B0DE /* NetmeraCustomUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraCustomUser.swift; sourceTree = "<group>"; };
+		CF4F5AB425148F5C00911CA0 /* ParametersSliderTouchProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersSliderTouchProtocol.swift; sourceTree = "<group>"; };
 		CF693179CA606AC2BA6BD04E /* Pods-LifeTech_BilloProviderUI.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloProviderUI.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_BilloProviderUI/Pods-LifeTech_BilloProviderUI.enterprise.xcconfig"; sourceTree = "<group>"; };
 		CF71458B24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayStickerDownloadManager.swift; sourceTree = "<group>"; };
 		CF7145A224B597A700D83E60 /* ContactListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListDetailViewController.swift; sourceTree = "<group>"; };
@@ -18754,6 +18761,7 @@
 				9823195124F3A1E600FD16E2 /* SelectionMenuController */,
 				9823195024F3A1E600FD16E2 /* SliderView.swift */,
 				98BBF0D425024D610038A31E /* PhotoEditImageScrollView.swift */,
+				CF4F5AB425148F5C00911CA0 /* ParametersSliderTouchProtocol.swift */,
 			);
 			path = PhotoEditViews;
 			sourceTree = "<group>";
@@ -27979,6 +27987,7 @@
 				0303A2FF2397D0D000907F42 /* PredicateRules.swift in Sources */,
 				0303A3002397D0D000907F42 /* DropboxResponse.swift in Sources */,
 				0303A3012397D0D000907F42 /* FileService.swift in Sources */,
+				CF4F5AB825148F5C00911CA0 /* ParametersSliderTouchProtocol.swift in Sources */,
 				0303A3022397D0D000907F42 /* DispatchQueueLabels.swift in Sources */,
 				0303A3032397D0D000907F42 /* OrientationManager.swift in Sources */,
 				0303A3042397D0D000907F42 /* CustomScrollIndicator.swift in Sources */,
@@ -29886,6 +29895,7 @@
 				89DCC5DA2403AC3F00488F1F /* SubscriptionFeaturesView.swift in Sources */,
 				8C0E8F111FDEBDFF00789C91 /* PrintModuleConfigurator.swift in Sources */,
 				92004B5821AD11EF00582C45 /* MyStorageViewOutput.swift in Sources */,
+				CF4F5AB625148F5C00911CA0 /* ParametersSliderTouchProtocol.swift in Sources */,
 				925B96DA21E79BB000B39415 /* RadialGradientableView.swift in Sources */,
 				486F7B5B208D38B5009EB73F /* PeriodicContactSyncRouterInput.swift in Sources */,
 				8C06AC0F20066641003D8E05 /* LoginSettingsInteractorIO.swift in Sources */,
@@ -32072,6 +32082,7 @@
 				463A9A904E22B54222190099 /* SelectNameInteractor.swift in Sources */,
 				9807260D203468D9004E1505 /* SearchDataSource.swift in Sources */,
 				CEB27350205F997700E1AE9C /* SavingAttemptsCounterByUnigueUserID.swift in Sources */,
+				CF4F5AB525148F5C00911CA0 /* ParametersSliderTouchProtocol.swift in Sources */,
 				54702BD5C12348C54DF56381 /* SelectNameRouterInput.swift in Sources */,
 				734CA120244D67860076F6A7 /* DocumentAlbumCardDesigner.swift in Sources */,
 				985E9BFC2493AFD6004D70BA /* UITextView+Extensions.swift in Sources */,
@@ -33217,6 +33228,7 @@
 				CE784AAF22A685FB00662219 /* PushNotificationService.swift in Sources */,
 				CE784AB022A685FB00662219 /* EmailEnterDesigner.swift in Sources */,
 				CE784AB122A685FB00662219 /* ContactService.swift in Sources */,
+				CF4F5AB925148F5C00911CA0 /* ParametersSliderTouchProtocol.swift in Sources */,
 				CE784AB222A685FB00662219 /* PopUpImage.swift in Sources */,
 				CE784AB322A685FB00662219 /* PrintViewController.swift in Sources */,
 				734CA124244D67860076F6A7 /* DocumentAlbumCardDesigner.swift in Sources */,
@@ -35034,6 +35046,7 @@
 				98BBF0D725024D610038A31E /* PhotoEditImageScrollView.swift in Sources */,
 				98435B7A23F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift in Sources */,
 				CF8B678023CBC9D70021B021 /* SplashConfigurator.swift in Sources */,
+				CF4F5AB725148F5C00911CA0 /* ParametersSliderTouchProtocol.swift in Sources */,
 				CF8B678123CBC9D70021B021 /* UsageInfoRouterInput.swift in Sources */,
 				CF8B678223CBC9D70021B021 /* CreateStoryPreviewRouter.swift in Sources */,
 				CF8B678323CBC9D70021B021 /* SplashInitializer.swift in Sources */,
@@ -36207,6 +36220,7 @@
 				CF8B6E3123CBCA280021B021 /* PushNotificationService.swift in Sources */,
 				0305A33023D5C44E004D1EC7 /* SmartAlbumWarningPopUpsFactory.swift in Sources */,
 				CF8B6E3223CBCA280021B021 /* EmailEnterDesigner.swift in Sources */,
+				CF4F5ABA25148F5C00911CA0 /* ParametersSliderTouchProtocol.swift in Sources */,
 				CF8B6E3323CBCA280021B021 /* ContactService.swift in Sources */,
 				CF8B6E3423CBCA280021B021 /* PopUpImage.swift in Sources */,
 				734CA125244D67860076F6A7 /* DocumentAlbumCardDesigner.swift in Sources */,
