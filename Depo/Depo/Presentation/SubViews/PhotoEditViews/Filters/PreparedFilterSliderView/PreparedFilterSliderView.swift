@@ -114,30 +114,35 @@ extension PreparedFilterSliderView {
         
         let onePercentSlider = slider.frame.size.width / 100
         
+        var newValue: CGFloat
+        
         if let touch = touches.first {
             let currentPoint = touch.location(in: self)
-            
+
             if currentPoint.x <= slider.slider.frame.origin.x {
                 if slider.slider.value > 0 {
                     feedbackGenerator.impactOccurred()
                 } else {
                     return
                 }
-                valueLabel.text = String(format: "%.1f", 0)
-                slider.slider.setValue(0, animated: true)
+                newValue = 0
             } else if currentPoint.x >= slider.slider.frame.size.width {
                 if slider.slider.value < 1 {
                     feedbackGenerator.impactOccurred()
                 } else {
                     return
                 }
-                slider.slider.setValue(1.0, animated: true)
-                valueLabel.text = String(format: "%.1f", 1)
+                newValue = 1.0
                 feedbackGenerator.impactOccurred()
             } else {
-                let percentageValue = currentPoint.x / onePercentSlider / 100
-                slider.slider.setValue(percentageValue, animated: false)
-                valueLabel.text = String(format: "%.1f", percentageValue)
+                newValue = currentPoint.x / onePercentSlider / 100
+            }
+            
+            slider.slider.setValue(newValue, animated: false)
+            valueLabel.text = String(format: "%.1f", newValue)
+
+            if let type = filter?.type {
+                delegate?.didChangeFilter(type, newValue: Float(newValue))
             }
         }
     }

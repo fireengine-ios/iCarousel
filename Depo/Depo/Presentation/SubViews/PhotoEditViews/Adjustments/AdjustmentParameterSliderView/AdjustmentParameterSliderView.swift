@@ -137,8 +137,6 @@ extension AdjustmentParameterSliderView {
                     return
                 }
                 newValue = 0
-//                valueLabel.text = String(format: "%.1f", 0)
-//                slider.slider.setValue(0, animated: true)
             } else if currentPoint.x >= slider.slider.frame.size.width {
                 if slider.slider.value < 1 {
                     feedbackGenerator.impactOccurred()
@@ -146,8 +144,6 @@ extension AdjustmentParameterSliderView {
                     return
                 }
                 newValue = 1.0
-//                slider.slider.setValue(1.0, animated: true)
-//                valueLabel.text = String(format: "%.1f", 1)
                 feedbackGenerator.impactOccurred()
             } else {
                 newValue = currentPoint.x / onePercentSlider / 100
