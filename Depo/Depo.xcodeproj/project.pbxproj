@@ -6060,7 +6060,6 @@
 		B589FC5423F1388D00DD528D /* DataChunkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B589FC4E23F1388D00DD528D /* DataChunkProvider.swift */; };
 		B58BF2D924FB95B700CBE2A7 /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
 		B58BF2DB24FB971A00CBE2A7 /* KeychainSwift+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4ECA7420889B5400AB91C6 /* KeychainSwift+Optional.swift */; };
-
 		B58D36A92509FF3A00FFF101 /* MTIConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D36A82509FF3900FFF101 /* MTIConvert.swift */; };
 		B58D36AA2509FF3A00FFF101 /* MTIConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D36A82509FF3900FFF101 /* MTIConvert.swift */; };
 		B58D36AB2509FF3A00FFF101 /* MTIConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D36A82509FF3900FFF101 /* MTIConvert.swift */; };
@@ -6128,6 +6127,27 @@
 		B5BBBE9D24FCF0B100A719CB /* PhotoEditSaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBBE9924FCF0B100A719CB /* PhotoEditSaveService.swift */; };
 		B5BBBE9E24FCF0B100A719CB /* PhotoEditSaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBBE9924FCF0B100A719CB /* PhotoEditSaveService.swift */; };
 		B5BBBE9F24FCF0B100A719CB /* PhotoEditSaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBBE9924FCF0B100A719CB /* PhotoEditSaveService.swift */; };
+		B5BF40B42514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF40B12514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift */; };
+		B5BF40FD2514AA0700B0EFEB /* PHPhotoLibrary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989686CA24C969FF00171375 /* PHPhotoLibrary+Extensions.swift */; };
+		B5BF41152514AA6100B0EFEB /* Equatable+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE274D601FB4806400CD53D7 /* Equatable+Contains.swift */; };
+		B5BF438A2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
+		B5BF438B2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
+		B5BF438C2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
+		B5BF438D2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
+		B5BF438E2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
+		B5BF438F2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
+		B5BF43902514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
+		B5BF43912514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
+		B5BF43DA2514D43A00B0EFEB /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208671228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift */; };
+		B5BF43DB2514D43A00B0EFEB /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208671228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift */; };
+		B5BF43F62514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
+		B5BF43F72514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
+		B5BF43F82514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
+		B5BF43F92514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
+		B5BF43FA2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
+		B5BF43FB2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
+		B5BF43FC2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
+		B5BF43FD2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
 		B5C4C8A22049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */; };
 		B5C4C8A32049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */; };
 		B5C4C8A42049272800886F21 /* AutoSyncSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */; };
@@ -12092,7 +12112,7 @@
 		};
 		8C0E90781FDEBDFF00789C91 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
@@ -12121,7 +12141,7 @@
 		};
 		B549AA6424CF03B700D39C44 /* Copy Files GPUImage */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
@@ -12132,7 +12152,7 @@
 		};
 		B549B6B324CF07BB00D39C44 /* Copy Files GPUImage */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
@@ -12143,7 +12163,7 @@
 		};
 		B549B6B824CF07DF00D39C44 /* Copy Files GPUImage */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
@@ -12201,7 +12221,7 @@
 		};
 		CF8B6B2223CBC9D70021B021 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
@@ -13746,6 +13766,9 @@
 		B5B6B1502170A01E00463260 /* PrepareQuickScroll.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrepareQuickScroll.xib; sourceTree = "<group>"; };
 		B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+JPEG.swift"; sourceTree = "<group>"; };
 		B5BBBE9924FCF0B100A719CB /* PhotoEditSaveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditSaveService.swift; sourceTree = "<group>"; };
+		B5BF40B12514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetPhotoLibraryObserver.swift; sourceTree = "<group>"; };
+		B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedGroupCoreDataStack.swift; sourceTree = "<group>"; };
+		B5BF43F52514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SharedGroupDBContainer.xcdatamodel; sourceTree = "<group>"; };
 		B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsTableViewCell.swift; sourceTree = "<group>"; };
 		B5C4C8A12049272800886F21 /* AutoSyncSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AutoSyncSettingsTableViewCell.xib; sourceTree = "<group>"; };
 		B5C4C8A6204928CC00886F21 /* AutoSyncSettingsOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncSettingsOptionView.swift; sourceTree = "<group>"; };
@@ -20026,6 +20049,7 @@
 				B5358C6925011B440005FCAD /* WidgetTokenService.swift */,
 				B558278B24FE90C40039DD11 /* WidgetServerServcie.swift */,
 				B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */,
+				B5BF40B12514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -20112,6 +20136,7 @@
 		B54BFF4A202C734C0018AF82 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				B5BF43F32514D59600B0EFEB /* CoreData */,
 				B54BFF4B202C73790018AF82 /* SharedConstants.swift */,
 				B54BFF4E202C74090018AF82 /* SharedEnums.swift */,
 				B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */,
@@ -20318,6 +20343,15 @@
 				B5B6B1502170A01E00463260 /* PrepareQuickScroll.xib */,
 			);
 			path = PrepareToQuickScroll;
+			sourceTree = "<group>";
+		};
+		B5BF43F32514D59600B0EFEB /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */,
+				B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		B5C7C57D211C6958006E94DB /* AugmentedReality */ = {
@@ -28483,6 +28517,8 @@
 				0303A3D32397D0D000907F42 /* HelpAndSupportViewInput.swift in Sources */,
 				98E4BA0723C722E8003A4631 /* TrashBinBottomBarManager.swift in Sources */,
 				0303A3D52397D0D000907F42 /* Watchdog.swift in Sources */,
+				B5BF43F92514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
+				B5BF438D2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				98435B7B23F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift in Sources */,
 				0303A3D62397D0D000907F42 /* MyStorageInteractorOutput.swift in Sources */,
 				0303A3D72397D0D000907F42 /* PrintInteractorInput.swift in Sources */,
@@ -29819,6 +29855,7 @@
 				7378051F23AB9D19001D57BD /* CreateOverlayStickerError.swift in Sources */,
 				486F7B54208CFD4E009EB73F /* PeriodicContactSyncSettingsOptionView.swift in Sources */,
 				8C65D18722C63B6F00CB1DBD /* String + Extension.swift in Sources */,
+				B5BF43F72514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
 				B5601ADC23506388002E1D1E /* InitializingViewController.swift in Sources */,
 				8C0E8E1B1FDEBDFF00789C91 /* ActivityTimelineTableBackView.swift in Sources */,
 				8C0B91AF20170ECC00A5BA81 /* ManageContactsModels.swift in Sources */,
@@ -30335,6 +30372,7 @@
 				8C0E8F691FDEBDFF00789C91 /* PasscodeSettingsRouterInput.swift in Sources */,
 				8CF6A9C6207C8CF9007DEF71 /* CollectionViewSpinnerFooter.swift in Sources */,
 				7C379F42202C37CF0050C055 /* UIView+Utils.swift in Sources */,
+				B5BF438B2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				98CB1C1324FE6DAB00515757 /* Contact.m in Sources */,
 				8E1E080F2423B0260054BF86 /* KeychainCleaner.swift in Sources */,
 				8C0E8F6A1FDEBDFF00789C91 /* PasscodeSettingsConfigurator.swift in Sources */,
@@ -30949,7 +30987,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5BF43FC2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
 				984B1EE023685FC8009ACCFF /* NotificationService.swift in Sources */,
+				B5BF43902514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
+				B5BF43DA2514D43A00B0EFEB /* NSManagedObjectContext+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -30996,6 +31037,7 @@
 				B558278D24FE90C40039DD11 /* WidgetServerServcie.swift in Sources */,
 				B58936F824FA932A00E3FA9C /* SessionServiceExtension.swift in Sources */,
 				B55827A724FE97E70039DD11 /* (null) in Sources */,
+				B5BF41152514AA6100B0EFEB /* Equatable+Contains.swift in Sources */,
 				B546EE2524FD1C5D00C1713C /* DispatchQueue+Main.swift in Sources */,
 				B55827A424FE97DE0039DD11 /* (null) in Sources */,
 				B558279B24FE97B40039DD11 /* (null) in Sources */,
@@ -31004,6 +31046,7 @@
 				B5358C88250141A80005FCAD /* SyncStatus.m in Sources */,
 				B5358C83250141950005FCAD /* SyncDB.m in Sources */,
 				B5358C7F250141870005FCAD /* DepoAdapter.m in Sources */,
+				B5BF43FD2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
 				B558279F24FE97C30039DD11 /* (null) in Sources */,
 				B546EE1224FC27BE00C1713C /* RequestsKey.swift in Sources */,
 				B58936F324FA924B00E3FA9C /* BiometricsManager.swift in Sources */,
@@ -31014,6 +31057,7 @@
 				B55827AD24FE97FA0039DD11 /* (null) in Sources */,
 				B5358C76250141630005FCAD /* BackupHelper.m in Sources */,
 				B546EE2024FCFB3800C1713C /* Alamofire+Validate.swift in Sources */,
+				B5BF40B42514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift in Sources */,
 				B58936ED24FA908F00E3FA9C /* Constants.swift in Sources */,
 				B55827A624FE97E40039DD11 /* (null) in Sources */,
 				B546EE1424FC2AD600C1713C /* URL+Path.swift in Sources */,
@@ -31026,6 +31070,7 @@
 				B558279C24FE97B80039DD11 /* (null) in Sources */,
 				B5358C6A25011B450005FCAD /* WidgetTokenService.swift in Sources */,
 				B55827A124FE97C90039DD11 /* (null) in Sources */,
+				B5BF43912514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				B5358C84250141990005FCAD /* SyncDBUtils.m in Sources */,
 				B5358C852501419E0005FCAD /* SyncLogger.m in Sources */,
 				B558279E24FE97C00039DD11 /* (null) in Sources */,
@@ -31039,6 +31084,7 @@
 				B58BF2D924FB95B700CBE2A7 /* TokenKeychainStorage.swift in Sources */,
 				B5358C712501415C0005FCAD /* AbstractHelper.m in Sources */,
 				B5358C782501416B0005FCAD /* BackupStats.m in Sources */,
+				B5BF43DB2514D43A00B0EFEB /* NSManagedObjectContext+Extensions.swift in Sources */,
 				B58936EF24FA90C500E3FA9C /* Device.swift in Sources */,
 				B558279D24FE97BB0039DD11 /* (null) in Sources */,
 				B558279A24FE97B10039DD11 /* (null) in Sources */,
@@ -31052,6 +31098,7 @@
 				B558278524FE725E0039DD11 /* ButtonStyle.swift in Sources */,
 				B5358C812501418D0005FCAD /* PartialInfo.m in Sources */,
 				B5358C7B250141770005FCAD /* ContactAddress.m in Sources */,
+				B5BF40FD2514AA0700B0EFEB /* PHPhotoLibrary+Extensions.swift in Sources */,
 				B558279624FE91600039DD11 /* ObjectRequestResponse.swift in Sources */,
 				B5358C7C2501417B0005FCAD /* ContactDevice.m in Sources */,
 				B58936F124FA90F500E3FA9C /* Keys.swift in Sources */,
@@ -31273,6 +31320,7 @@
 				CEAE3FF41EFD517300A405B2 /* TabBarViewController.swift in Sources */,
 				A217E44321A5B0B60084AA37 /* LeavePremiumInteractorInput.swift in Sources */,
 				7C121F0B20874BCE00AA585F /* AppMigrator.swift in Sources */,
+				B5BF438A2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				7C257B3D20174D7700CB56F8 /* ContactBackupEmpty.swift in Sources */,
 				CEE3B7C522573A1500B99FE7 /* KeyboardHandler.swift in Sources */,
 				CE51AB801EF90853005DCEE0 /* LoginRouter.swift in Sources */,
@@ -32049,6 +32097,7 @@
 				4ADE0887202DCFF50095346F /* FaceImagePhotosViewOutput.swift in Sources */,
 				B56FBB222122C3E7004F4A59 /* TermsOfUseConfigurator.swift in Sources */,
 				7378051923AB9789001D57BD /* OverlayStickerImageView.swift in Sources */,
+				B5BF43F62514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
 				CE4516A91F7D2EF1008B1F9A /* ServerStatusError.swift in Sources */,
 				CE4F4DC01F14AD2A00EF1F0C /* BaseRequestService.swift in Sources */,
 				981642FD233CE2D40070F8B9 /* TBMatikPhotosViewController.swift in Sources */,
@@ -32528,7 +32577,6 @@
 				B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */,
 				9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */,
 				B56FBB252122C48C004F4A59 /* TermsOfUseRouter.swift in Sources */,
-				98F0333D2403FFC100F1D415 /* BackupHelper.m in Sources */,
 				9868100925080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */,
 				DB6E1B2B2651A46923CB165B /* FeedbackViewController.swift in Sources */,
 				EF2EE1EEC26868913C9251BD /* FeedbackViewModuleInput.swift in Sources */,
@@ -33431,6 +33479,7 @@
 				CE784A3122A685FB00662219 /* PhoneVerificationPresenter.swift in Sources */,
 				CE784A3222A685FB00662219 /* LoginSettingsInteractorIO.swift in Sources */,
 				CE784A3322A685FB00662219 /* InstaPickProgressPopup.swift in Sources */,
+				B5BF43FA2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
 				CE784A3422A685FB00662219 /* PhoneVerificationInteractorInput.swift in Sources */,
 				CE784A3522A685FB00662219 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				CE784A3622A685FB00662219 /* AnalyzeHistoryViewController.swift in Sources */,
@@ -33691,7 +33740,6 @@
 				89E51D4822CA1111007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				9823196624F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
 				B5ECA57325063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
-				98F032ED2403FFC000F1D415 /* BackupStats.m in Sources */,
 				735766CF23AD1011008589E9 /* OverlayStickerViewControllerDesigner.swift in Sources */,
 				CF71461324B597A800D83E60 /* ContactDetailNoInfoCell.swift in Sources */,
 				CE784B0822A685FB00662219 /* DropboxAccountConnectionCell.swift in Sources */,
@@ -33997,6 +34045,7 @@
 				892B014A22DF158D00BCECBC /* TwoFactorChallengeConfigurator.swift in Sources */,
 				CE784C0A22A685FB00662219 /* ImageForDowload.swift in Sources */,
 				8C86111C22BCFDF200108958 /* PermissionsView.swift in Sources */,
+				B5BF438E2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				CE784C0C22A685FB00662219 /* ProfileTextPickerView.swift in Sources */,
 				CE784C0D22A685FB00662219 /* SelectNameInteractorInput.swift in Sources */,
 				B5BBBE9E24FCF0B100A719CB /* PhotoEditSaveService.swift in Sources */,
@@ -34583,6 +34632,7 @@
 				CF8B64B223CBC9D70021B021 /* CellsConstant.swift in Sources */,
 				CF8B64B323CBC9D70021B021 /* GradientView.swift in Sources */,
 				CF8B64B423CBC9D70021B021 /* ImportPhotosRouterInput.swift in Sources */,
+				B5BF438C2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				CF8B64B523CBC9D70021B021 /* ManageContactsConfigurator.swift in Sources */,
 				CF8B64B623CBC9D70021B021 /* SuggestionTableSectionHeader.swift in Sources */,
 				CF8B64B723CBC9D70021B021 /* NSLayoutConstraint+Extensions.swift in Sources */,
@@ -35362,6 +35412,7 @@
 				CF8B676523CBC9D70021B021 /* ManageContactsInteractorOutput.swift in Sources */,
 				CF8B676623CBC9D70021B021 /* GeneralFilesFiltration.swift in Sources */,
 				CF8B676723CBC9D70021B021 /* TermsCheckboxTextView.swift in Sources */,
+				B5BF43F82514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
 				0302079523D1D2D100BF8006 /* NetmeraService.swift in Sources */,
 				CF8B676823CBC9D70021B021 /* ControlTabBarProtocol.swift in Sources */,
 				CF8B676923CBC9D70021B021 /* SearchViewInteractorOutput.swift in Sources */,
@@ -35897,8 +35948,7 @@
 				CF8B6BDF23CBCA280021B021 /* TwoFactorChallengePresenter.swift in Sources */,
 				CF8B6BE023CBCA280021B021 /* OperationProgressService.swift in Sources */,
 				739E2C32247BA92200C74757 /* UIView+ParentViewController.swift in Sources */,
-				CF8B6BE123CBCA280021B021 /* PhotoDetailCell.swift in Sources */,
-				98F032F42403FFC000F1D415 /* AnalyzeStatus.m in Sources */,
+				CF8B6BE123CBCA280021B021 /* PhotoVideoDetailCell.swift in Sources */,
 				CF8B6BE223CBCA280021B021 /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
 				982319B524F3A1E700FD16E2 /* HSLView.swift in Sources */,
 				98231A1524F3A1E700FD16E2 /* SelectionMenuCell.swift in Sources */,
@@ -36427,6 +36477,7 @@
 				CF8B6DB023CBCA280021B021 /* InstaPickProgressPopup.swift in Sources */,
 				CF8B6DB123CBCA280021B021 /* PhoneVerificationInteractorInput.swift in Sources */,
 				CF8B6DB223CBCA280021B021 /* CollectionViewCellForStoryPhoto.swift in Sources */,
+				B5BF43FB2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
 				CF8B6DB323CBCA280021B021 /* AnalyzeHistoryViewController.swift in Sources */,
 				CF8B6DB423CBCA280021B021 /* PhoneVerificationInteractorOutput.swift in Sources */,
 				CF8B6DB523CBCA280021B021 /* PeriodicContactSyncDataStorage.swift in Sources */,
@@ -36687,7 +36738,6 @@
 				CF8B6E9223CBCA280021B021 /* SearchViewPresenter.swift in Sources */,
 				9823196724F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
 				B5ECA57425063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
-				98F032EE2403FFC000F1D415 /* BackupStats.m in Sources */,
 				CF8B6E9323CBCA280021B021 /* TermsOfUseModuleInput.swift in Sources */,
 				CF71461424B597A800D83E60 /* ContactDetailNoInfoCell.swift in Sources */,
 				CF8B6E9423CBCA280021B021 /* UIviewControlllerExtensions.swift in Sources */,
@@ -36993,6 +37043,7 @@
 				CF8B6FA723CBCA280021B021 /* ProfileTextPickerView.swift in Sources */,
 				CF8B6FA823CBCA280021B021 /* SelectNameInteractorInput.swift in Sources */,
 				CF8B6FA923CBCA280021B021 /* ImageScrollView.swift in Sources */,
+				B5BF438F2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				CF8B6FAA23CBCA280021B021 /* TermsDescriptionController.swift in Sources */,
 				CF8B6FAB23CBCA280021B021 /* SelectNameInteractorOutput.swift in Sources */,
 				B5BBBE9F24FCF0B100A719CB /* PhotoEditSaveService.swift in Sources */,
@@ -42904,6 +42955,16 @@
 			);
 			currentVersion = 989FDC152419091100F2F7D2 /* LifeBoxModel 5.xcdatamodel */;
 			path = LifeBoxModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B5BF43F52514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodel */,
+			);
+			currentVersion = B5BF43F52514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodel */;
+			path = SharedGroupDBContainer.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -41,6 +41,10 @@ struct WidgetSmallSizeView: View {
             
         case let entry as WidgetUserInfoEntry:
             WidgetPremiumSmallView(entry: entry)
+            
+        case let entry as WidgetAutoSyncEntry:
+            WidgetAutoSyncStatusSmall(entry: entry)
+            
         default:
             WidgetLoginRequiredSmallView()
         }
@@ -64,6 +68,9 @@ struct WidgetMediumSizeView: View {
             
         case let entry as WidgetUserInfoEntry:
             WidgetPremiumMediumView(entry: entry)
+            
+        case let entry as WidgetAutoSyncEntry:
+            WidgetAutoSyncStatusMeduium(entry: entry)
             
         default:
             WidgetLoginRequiredMediumView()
@@ -108,7 +115,7 @@ struct WidgetQuotaMediumView: View {
     
     var body: some View {
         WidgetEntryMediumView(imageName: "",
-                              title: "Your lifebox quota is neraly full",
+                              title: "Your lifebox quota is nearly full",
                               description: " It's time to upgrade your plan.",
                               titleButton: "Free up space",
                               percentage: CGFloat(entry.usedPercentage)/100)
@@ -474,5 +481,36 @@ struct PremiumPeopleAlbumsMeduium: View {
                     .overlay(Circle().stroke(Color.white, lineWidth: 2))
             }
         }
+    }
+}
+
+
+// MARK: - AutoSync status
+struct WidgetAutoSyncStatusSmall: View {
+    let entry: WidgetAutoSyncEntry
+    var body: some View {
+        let message = entry.isSyncEnabled ? TextConstants.widgetRule41SmallDetail : TextConstants.widgetRule42SmallDetail
+        let buttonTitle = entry.isSyncEnabled ? TextConstants.widgetRule41SmallButton : TextConstants.widgetRule42SmallButton
+        WidgetEntrySmallView(imageName: "widget_small_sync",
+                             title: "",
+                             description: message,
+                             titleButton: buttonTitle,
+                             percentage: nil,
+                             imagesNames: nil)
+    }
+}
+
+struct WidgetAutoSyncStatusMeduium: View {
+    let entry: WidgetAutoSyncEntry
+    var body: some View {
+        let message = entry.isSyncEnabled ? TextConstants.widgetRule41MediumDetail : TextConstants.widgetRule42MediumDetail
+        let buttonTitle = entry.isSyncEnabled ? TextConstants.widgetRule41MediumButton : TextConstants.widgetRule42MediumButton
+        WidgetEntryMediumView(imageName: "widget_medium_sync",
+                              title: "",
+                              description: message,
+                              titleButton: buttonTitle,
+                              percentage: nil,
+                              countSyncFiles: nil,
+                              imagesNames: nil)
     }
 }

@@ -272,6 +272,10 @@ final class MediaItemOperationsService {
                     }
                     savedItem.objectSyncStatus = NSSet(array: array)
                     
+                    if let identifier = savedItem.localFileID {
+                        SharedGroupCoreDataStack.shared.saveSynced(localIdentifiers: [identifier])
+                    }
+                    
                     //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
                 })
                 
@@ -861,6 +865,9 @@ final class MediaItemOperationsService {
             completion()
             return
         }
+        
+        SharedGroupCoreDataStack.shared.delete(localIdentifiers: assetIdList)
+        
         coreDataStack.performBackgroundTask { [weak self] context in
             guard let `self` = self else {
                 completion()
