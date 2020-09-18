@@ -106,7 +106,7 @@ extension AdjustmentParameterSliderView {
                 return
             }
 
-            let enlargedThumbFrame = CGRect(x: sliderThumb.frame.origin.x - 20, y: sliderThumb.frame.origin.y - 20, width: sliderThumb.frame.size.width + 20, height: sliderThumb.frame.size.height + 20)
+            let enlargedThumbFrame = CGRect(x: sliderThumb.frame.origin.x - 35, y: sliderThumb.frame.origin.y - 30, width: sliderThumb.frame.size.width + 35, height: sliderThumb.frame.size.height + 30)
             
             if enlargedThumbFrame.contains(currentPoint) {
                 feedbackGenerator.prepare()
