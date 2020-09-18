@@ -40,11 +40,11 @@ struct WidgetSmallSizeView: View {
             WidgetDeviceQuotaSmallView(entry: entry)
             
         case let entry as WidgetUserInfoEntry:
-            WidgetPremiumSmallView(entry: entry)
-            
+            WidgetFaceRecognitionSmallView(entry: entry)
+
         case let entry as WidgetAutoSyncEntry:
             WidgetAutoSyncStatusSmall(entry: entry)
-            
+
         default:
             WidgetLoginRequiredSmallView()
         }
@@ -67,7 +67,7 @@ struct WidgetMediumSizeView: View {
             WidgetDeviceQuotaMediumView(entry: entry)
             
         case let entry as WidgetUserInfoEntry:
-            WidgetPremiumMediumView(entry: entry)
+            WidgetFaceRecognitionMediumView(entry: entry)
             
         case let entry as WidgetAutoSyncEntry:
             WidgetAutoSyncStatusMeduium(entry: entry)
@@ -83,8 +83,8 @@ struct WidgetLoginRequiredSmallView: View {
     var body: some View {
         WidgetEntrySmallView(imageName: "sign_in",
                              title: "",
-                             description: "You are not signed in to lifebox",
-                             titleButton: "Sign in")
+                             description: TextConstants.widgetSmallSignInText,
+                             titleButton: TextConstants.widgetSmallSignInButton)
     }
 }
 
@@ -92,8 +92,8 @@ struct WidgetLoginRequiredMediumView: View {
     var body: some View {
         WidgetEntryMediumView(imageName: "sign_in",
                               title: "",
-                              description: "You are not signed in to lifebox",
-                              titleButton: "Sign in to lifebox")
+                              description: TextConstants.widgetMediumSignInText,
+                              titleButton: TextConstants.widgetMediumSignInButton)
     }
 }
 
@@ -103,9 +103,9 @@ struct WidgetQuotaSmallView: View {
     
     var body: some View {
         WidgetEntrySmallView(imageName: "",
-                             title: "Your quota is over \(entry.usedPercentage)%.",
-                             description: " Time to upgrade your plan.",
-                             titleButton: "View plan",
+                             title: String(format: TextConstants.widgetSmallQuotaTitle, entry.usedPercentage),
+                             description: TextConstants.widgetSmallQuotaSubtitle,
+                             titleButton: TextConstants.widgetSmallQuotaButton,
                              percentage: CGFloat(entry.usedPercentage)/100)
     }
 }
@@ -115,9 +115,9 @@ struct WidgetQuotaMediumView: View {
     
     var body: some View {
         WidgetEntryMediumView(imageName: "",
-                              title: "Your lifebox quota is nearly full",
-                              description: " It's time to upgrade your plan.",
-                              titleButton: "Free up space",
+                              title: TextConstants.widgetMediumQuotaTitle,
+                              description: TextConstants.widgetMediumQuotaSubtitle,
+                              titleButton: TextConstants.widgetMediumQuotaButton,
                               percentage: CGFloat(entry.usedPercentage)/100)
     }
 }
@@ -129,9 +129,9 @@ struct WidgetDeviceQuotaSmallView: View {
     
     var body: some View {
         WidgetEntrySmallView(imageName: "",
-                             title: "Device storage is \(entry.usedPersentage)% used.",
-                             description: " You need more space.",
-                             titleButton: "Free up space",
+                             title: String(format: TextConstants.widgetSmallDeviceStorageTitle, entry.usedPersentage),
+                             description: TextConstants.widgetSmallDeviceStorageSubtitle,
+                             titleButton: TextConstants.widgetSmallDeviceStorageButton,
                              percentage: CGFloat(entry.usedPersentage)/100)
     }
 }
@@ -141,9 +141,9 @@ struct WidgetDeviceQuotaMediumView: View {
     
     var body: some View {
         WidgetEntryMediumView(imageName: "",
-                              title: "Running out of device storage!",
-                              description: "You need space for new memories.",
-                              titleButton: "View Plans",
+                              title: TextConstants.widgetMediumDeviceStorageTitle,
+                              description: TextConstants.widgetMediumDeviceStorageSubtitle,
+                              titleButton: TextConstants.widgetMediumDeviceStorageButton,
                               percentage: CGFloat(entry.usedPersentage)/100)
     }
 }
@@ -158,15 +158,15 @@ struct WidgetContactBackedupSmallView: View {
             let components = Calendar.current.dateComponents([.weekOfYear, .month], from: backupDate, to: Date())
             if components.month! >= 1 {
                 WidgetEntrySmallView(imageName: "back_up_small",
-                                     title: "It's over 1 month",
-                                     description: " since your last contact backup",
-                                     titleButton: "Back up")
+                                     title: TextConstants.widgetSmallOldContactBackupTitle,
+                                     description: TextConstants.widgetSmallOldDeviceContactBackupSubtitle,
+                                     titleButton: TextConstants.widgetSmallOldContactBackupButton)
             }
         } else {
             WidgetEntrySmallView(imageName: "back_up_small",
-                                 title: "No backed up contacts.",
-                                 description: "",
-                                 titleButton: "Back up contacts")
+                                 title: TextConstants.widgetSmallNoContactBackupTitle,
+                                 description: TextConstants.widgetSmallNoContactBackupSubtitle,
+                                 titleButton: TextConstants.widgetSmallNoContactBackupButton)
         }
     }
 }
@@ -178,52 +178,70 @@ struct WidgetContactBackedupMediumView: View {
         if let backupDate = entry.backupDate {
             let components = Calendar.current.dateComponents([.weekOfYear, .month], from: backupDate, to: Date())
             if  components.month! >= 1 {
-                WidgetEntryMediumView(imageName: "back_up_medium", title: "It's over 1 month", description: " since your last contact backup", titleButton: "Back up")
+                WidgetEntryMediumView(imageName: "back_up_medium",
+                                      title: TextConstants.widgetMediumOldContactBackupTitle,
+                                      description: TextConstants.widgetMediumOldContactBackupSubtitle,
+                                      titleButton: TextConstants.widgetMediumOldContactBackupButton)
             }
         } else {
-            WidgetEntryMediumView(imageName: "back_up_medium", title: "No backed up contacts.", description: " Secure your contacts by backing them up.", titleButton: "Back up")
+            WidgetEntryMediumView(imageName: "back_up_medium",
+                                  title: TextConstants.widgetMediumNoContactBackupTitle,
+                                  description: TextConstants.widgetMediumNoContactBackupSubtitle,
+                                  titleButton: TextConstants.widgetMediumNoContactBackupButton)
         }
     }
 }
 
 
 //MARK: - WidgetPRemiumView
-struct WidgetPremiumSmallView: View {
+struct WidgetFaceRecognitionSmallView: View {
     let entry: WidgetUserInfoEntry
     var body: some View {
         if entry.isPremiumUser && entry.isFIREnabled {
-            WidgetEntrySmallView(imageName: "", title: "You have 7 people albums.", description: " Check them out", titleButton: "People albums", imagesNames: [
-                "test3", "test3", "test3"
-            ])
+            WidgetEntrySmallView(imageName: "",
+                                 title: TextConstants.widgetSmallFaceRecognitionTitle,
+                                 description: TextConstants.widgetSmallFaceRecognitionSubtitle,
+                                 titleButton: TextConstants.widgetSmallFaceRecognitionButton,
+                                 imagesNames: ["test3", "test3", "test3"])
             
         } else if entry.isPremiumUser && !entry.isFIREnabled {
-            WidgetEntrySmallView(imageName: "", title: "", description: "Group your photos easily by people!", titleButton: "Enable grouping", imagesNames: [
-                "test3", "test3", "test3"
-            ])
+            WidgetEntrySmallView(imageName: "",
+                                 title: TextConstants.widgetSmallFaceRecognitionDisabledFIRTitle,
+                                 description: TextConstants.widgetSmallFaceRecognitionDisabledFIRSubtitle,
+                                 titleButton: TextConstants.widgetSmallFaceRecognitionDisabledFIRButton,
+                                 imagesNames: ["test3", "test3", "test3"])
         } else {
-            WidgetEntrySmallView(imageName: "", title: "", description: "Become premium to see people albums!", titleButton: "Become premium", imagesNames: [
-                "test3", "test3", "test3"
-            ])
+            WidgetEntrySmallView(imageName: "",
+                                 title: TextConstants.widgetSmallFaceRecognitionNeedPremiumTitle,
+                                 description: TextConstants.widgetSmallFaceRecognitionNeedPremiumSubtitle,
+                                 titleButton: TextConstants.widgetSmallFaceRecognitionNeedPremiumButton,
+                                 imagesNames: ["test3", "test3", "test3"])
         }
     }
 }
 
-struct WidgetPremiumMediumView: View {
+struct WidgetFaceRecognitionMediumView: View {
     let entry: WidgetUserInfoEntry
     var body: some View {
         if entry.isPremiumUser && entry.isFIREnabled {
-            WidgetEntryMediumView(imageName: "", title: "You have 7 people albums.", description: " Check them out", titleButton: "See people albums", imagesNames: [
-                "test3", "test3", "test3"
-            ])
+            WidgetEntryMediumView(imageName: "",
+                                  title: TextConstants.widgetMediumFaceRecognitionTitle,
+                                  description: TextConstants.widgetMediumFaceRecognitionSubtitle,
+                                  titleButton: TextConstants.widgetMediumFaceRecognitionButton,
+                                  imagesNames: ["test3", "test3", "test3"])
             
         } else if entry.isPremiumUser && !entry.isFIREnabled {
-            WidgetEntryMediumView(imageName: "", title: "What about grouping your photos easily by people?", description: "", titleButton: "Enable face-image grouping", imagesNames: [
-                "test3", "test3", "test3"
-            ])
+            WidgetEntryMediumView(imageName: "",
+                                  title: TextConstants.widgetMediumFaceRecognitionDisabledFIRTitle,
+                                  description: TextConstants.widgetMediumFaceRecognitionDisabledFIRSubtitle,
+                                  titleButton: TextConstants.widgetMediumFaceRecognitionDisabledFIRButton,
+                                  imagesNames: ["test3", "test3", "test3"])
         } else {
-            WidgetEntryMediumView(imageName: "", title: "Become premium to see people albums!", description: "", titleButton: "Become premium", imagesNames: [
-                "test3", "test3", "test3"
-            ])
+            WidgetEntryMediumView(imageName: "",
+                                  title: TextConstants.widgetMediumFaceRecognitionNeedPremiumTitle,
+                                  description: TextConstants.widgetMediumFaceRecognitionNeedPremiumSubtitle,
+                                  titleButton: TextConstants.widgetMediumFaceRecognitionNeedPremiumButton,
+                                  imagesNames: ["test3", "test3", "test3"])
         }
     }
 }
@@ -241,8 +259,8 @@ struct WidgetEntrySmallView : View {
     
     var body: some View {
         let colors = [
-            Color(red: 0 / 255, green: 52 / 255, blue: 88 / 255),
-            Color(red: 62 / 255, green: 198 / 255, blue: 203 / 255)
+            Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
+            Color(red: 68 / 255, green: 205 / 255, blue: 208 / 255)
         ]
         GeometryReader { geo in
             VStack(alignment: .leading, spacing: nil) {
@@ -259,23 +277,23 @@ struct WidgetEntrySmallView : View {
                         Image(imageName)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(minWidth: 0, maxWidth: 25, minHeight: 0, maxHeight: 25, alignment: .leading)
+                            .frame(minWidth: 0, maxWidth: 27, minHeight: 0, maxHeight: 27, alignment: .leading)
                     }
                 }
                 
                 Text(title)
                     .foregroundColor(.white)
-                    .font(.system(size: 13, weight: .bold, design: .default)) +
+                    .font(.system(size: 13, weight: .semibold, design: .default)) +
                 Text(description)
                     .foregroundColor(.white)
-                    .font(.system(size: 13, weight: .light, design: .default))
+                    .font(.system(size: 13, weight: .regular, design: .default))
                 Spacer()
-                WidgetButton(title: titleButton, cornerRadius: 20)
-                    .frame(width: .infinity, height: 40, alignment: .center)
+                WidgetButton(title: titleButton, cornerRadius: 12)
+                    .frame(width: .infinity, height: 36, alignment: .center)
             }
-            .padding(.all, 20)
+            .padding(.all, 16)
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            .background(LinearGradient(gradient: Gradient(colors: colors), startPoint: UnitPoint(x: 0.0, y: 0.0), endPoint: UnitPoint(x: 0.9, y: 0.9)))
+            .background(LinearGradient(gradient: Gradient(colors: colors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
         }
     }
 }
@@ -290,18 +308,18 @@ struct WidgetEntryMediumView : View {
     var imagesNames: [String]?
     
     let colors = [
-        Color(red: 5 / 255, green: 82 / 255, blue: 122 / 255),
-        Color(red: 62 / 255, green: 198 / 255, blue: 203 / 255)
+        Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
+        Color(red: 68 / 255, green: 205 / 255, blue: 208 / 255)
     ]
     
     var body: some View {
         GeometryReader { geo in
             VStack(alignment: .leading, spacing: nil) {
-                HStack {
+                HStack(spacing: 8) {
                     if let percentage = percentage {
                         ProgressBarMedium(progress: percentage)
-                            .frame(width: 70, height: 70, alignment: .leading)
-                            .padding(.all, 10)
+                            .frame(width: 57, height: 57, alignment: .leading)
+//                            .padding(.all, 10)
                     } else {
                         if let imagesName = imagesNames {
                             PremiumPeopleAlbumsMeduium(imagesString: imagesName)
@@ -310,19 +328,16 @@ struct WidgetEntryMediumView : View {
                             Image(imageName)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(minWidth: 0, maxWidth: 80, minHeight: 0, maxHeight: 70, alignment: .leading)
-                                .padding(.all, 5)
-                                
-                                
+                                .frame(minWidth: 0, maxWidth: 54, minHeight: 0, maxHeight: 54, alignment: .leading)
                         }
                     }
                     VStack(alignment: .leading, spacing: nil) {
                         Text(title)
                             .foregroundColor(.white)
-                            .font(.system(size: 14, weight: .bold, design: .default)) +
+                            .font(.system(size: 14, weight: .semibold, design: .default)) +
                         Text(description)
                             .foregroundColor(.white)
-                            .font(.system(size: 14, weight: .light, design: .default))
+                            .font(.system(size: 14, weight: .regular, design: .default))
                         if let _ = countSyncFiles {
                             Text("See files")
                                 .foregroundColor(.white)
@@ -331,16 +346,17 @@ struct WidgetEntryMediumView : View {
                         }
                         Spacer()
                     }
+                    .padding(.top, 12)
                     
                     Spacer()
                 }
                 Spacer()
-                WidgetButton(title: titleButton, cornerRadius: 20)
-                    .frame(width: .infinity, height: 40, alignment: .leading)
+                WidgetButton(title: titleButton, cornerRadius: 12)
+                    .frame(width: .infinity, height: 44, alignment: .leading)
             }
-            .padding(.all, 20)
+            .padding(EdgeInsets(top: 8, leading: 16, bottom: 16, trailing: 16))
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            .background(LinearGradient(gradient: Gradient(colors: colors), startPoint: UnitPoint(x: 0.1, y: 0.1), endPoint: UnitPoint(x: 1.2, y: 1.2)))
+            .background(LinearGradient(gradient: Gradient(colors: colors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
         }
     }
 }
@@ -367,8 +383,8 @@ struct WidgetButton: View {
 struct CirclePercentageViewSmall: View {
     var percentage: Int
     let colors = [
-        Color(red: 5 / 255, green: 82 / 255, blue: 122 / 255),
-        Color(red: 62 / 255, green: 198 / 255, blue: 203 / 255)
+        Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
+        Color(red: 68 / 255, green: 205 / 255, blue: 208 / 255)
     ]
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var startAnimation = -500
@@ -421,12 +437,12 @@ struct ProgressBarMedium: View {
         GeometryReader { geometry in
             ZStack {
                 Circle()
-                    .stroke(lineWidth: 12.0)
+                    .stroke(lineWidth: 8.0)
                     .opacity(0.3)
                     .foregroundColor(Color.black)
                 Circle()
                     .trim(from: 0.0, to: progress)
-                    .stroke(style: StrokeStyle(lineWidth: 12.0, lineCap: .round, lineJoin: .round))
+                    .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
                     .foregroundColor(Color.white)
                     .rotationEffect(Angle(degrees: 270.0))
                     .rotation3DEffect(
@@ -434,9 +450,11 @@ struct ProgressBarMedium: View {
                         axis: /*@START_MENU_TOKEN@*/(x: 0.0, y: 1.0, z: 0.0)/*@END_MENU_TOKEN@*/
                     )
                     .animation(.linear)
-                Text(String(format: "%.0f%%", min(progress, 1.0)*100.0))
-                    .font(.title3)
-                    .bold()
+                Text(String(format: "%.0f", min(progress, 1.0)*100.0))
+                    .font(.system(size: 14, weight: .bold, design: .default))
+                    .foregroundColor(.white) +
+                Text("%")
+                    .font(.system(size: 10, weight: .regular, design: .default))
                     .foregroundColor(.white)
                 Image("signinicon")
                     .resizable()
