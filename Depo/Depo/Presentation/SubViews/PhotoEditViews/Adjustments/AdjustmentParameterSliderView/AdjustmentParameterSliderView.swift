@@ -99,16 +99,16 @@ final class AdjustmentParameterSliderView: UIView, NibInit {
 extension AdjustmentParameterSliderView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
+            
             let currentPoint = touch.location(in: self)
             
             guard let sliderThumb = slider.getThumbView() else {
                 return
             }
+
+            let enlargedThumbFrame = CGRect(x: sliderThumb.frame.origin.x - 20, y: sliderThumb.frame.origin.y - 20, width: sliderThumb.frame.size.width + 20, height: sliderThumb.frame.size.height + 20)
             
-            let relativeThumbFrame = convert(sliderThumb.frame, from: slider)
-            
-            let enlargedTouchFrame = CGRect(x: relativeThumbFrame.minX - 20, y: relativeThumbFrame.minY - 20, width: relativeThumbFrame.maxX + 20, height: relativeThumbFrame.maxY + 20)
-            if enlargedTouchFrame.contains(currentPoint) {
+            if enlargedThumbFrame.contains(currentPoint) {
                 feedbackGenerator.prepare()
                 isAvailableToReadTouch = true
             }
@@ -120,16 +120,27 @@ extension AdjustmentParameterSliderView {
             return
         }
         
-        let onePercentSlider = slider.frame.maxX / 100
+        let onePercentSlider = slider.frame.size.width / 100
         
         if let touch = touches.first {
             let currentPoint = touch.location(in: self)
-            
-            if currentPoint.x <= slider.frame.minX {
+
+            if currentPoint.x <= slider.slider.frame.origin.x {
+                if slider.slider.value > 0 {
+                    feedbackGenerator.impactOccurred()
+                } else {
+                    return
+                }
+                valueLabel.text = String(format: "%.1f", 0)
                 slider.slider.setValue(0, animated: true)
-                feedbackGenerator.impactOccurred()
-            } else if currentPoint.x >= slider.frame.maxX {
+            } else if currentPoint.x >= slider.slider.frame.size.width {
+                if slider.slider.value < 1 {
+                    feedbackGenerator.impactOccurred()
+                } else {
+                    return
+                }
                 slider.slider.setValue(1.0, animated: true)
+                valueLabel.text = String(format: "%.1f", 1)
                 feedbackGenerator.impactOccurred()
             } else {
                 let percentageValue = currentPoint.x / onePercentSlider / 100
