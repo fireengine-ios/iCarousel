@@ -76,8 +76,8 @@ struct WidgetLoginRequiredSmallView: View {
     var body: some View {
         WidgetEntrySmallView(imageName: "sign_in",
                              title: "",
-                             description: TextConstants.widgetSmallSignInText,
-                             titleButton: TextConstants.widgetSmallSignInButton)
+                             description: TextConstants.widgetRule0SmallDetail,
+                             titleButton: TextConstants.widgetRule0SmallButton)
     }
 }
 
@@ -85,8 +85,8 @@ struct WidgetLoginRequiredMediumView: View {
     var body: some View {
         WidgetEntryMediumView(imageName: "sign_in",
                               title: "",
-                              description: TextConstants.widgetMediumSignInText,
-                              titleButton: TextConstants.widgetMediumSignInButton)
+                              description: TextConstants.widgetRule0MediumDetail,
+                              titleButton: TextConstants.widgetRule0MediumButton)
     }
 }
 
@@ -96,9 +96,9 @@ struct WidgetQuotaSmallView: View {
     
     var body: some View {
         WidgetEntrySmallView(imageName: "",
-                             title: String(format: TextConstants.widgetSmallQuotaTitle, entry.usedPercentage),
-                             description: TextConstants.widgetSmallQuotaSubtitle,
-                             titleButton: TextConstants.widgetSmallQuotaButton,
+                             title: String(format: TextConstants.widgetRule1SmallTitle, entry.usedPercentage),
+                             description: TextConstants.widgetRule1SmallDetail,
+                             titleButton: TextConstants.widgetRule1SmallButton,
                              percentage: CGFloat(entry.usedPercentage)/100)
     }
 }
@@ -108,9 +108,9 @@ struct WidgetQuotaMediumView: View {
     
     var body: some View {
         WidgetEntryMediumView(imageName: "",
-                              title: TextConstants.widgetMediumQuotaTitle,
-                              description: TextConstants.widgetMediumQuotaSubtitle,
-                              titleButton: TextConstants.widgetMediumQuotaButton,
+                              title: TextConstants.widgetRule1MediumTitle,
+                              description: TextConstants.widgetRule1MediumDetail,
+                              titleButton: TextConstants.widgetRule1MediumButton,
                               percentage: CGFloat(entry.usedPercentage)/100)
     }
 }
@@ -122,9 +122,9 @@ struct WidgetDeviceQuotaSmallView: View {
     
     var body: some View {
         WidgetEntrySmallView(imageName: "",
-                             title: String(format: TextConstants.widgetSmallDeviceStorageTitle, entry.usedPersentage),
-                             description: TextConstants.widgetSmallDeviceStorageSubtitle,
-                             titleButton: TextConstants.widgetSmallDeviceStorageButton,
+                             title: String(format: TextConstants.widgetRule2SmallTitle, entry.usedPersentage),
+                             description: TextConstants.widgetRule2SmallDetail,
+                             titleButton: TextConstants.widgetRule2SmallButton,
                              percentage: CGFloat(entry.usedPersentage)/100)
     }
 }
@@ -134,9 +134,9 @@ struct WidgetDeviceQuotaMediumView: View {
     
     var body: some View {
         WidgetEntryMediumView(imageName: "",
-                              title: TextConstants.widgetMediumDeviceStorageTitle,
-                              description: TextConstants.widgetMediumDeviceStorageSubtitle,
-                              titleButton: TextConstants.widgetMediumDeviceStorageButton,
+                              title: TextConstants.widgetRule2MediumTitle,
+                              description: TextConstants.widgetRule2MediumDetail,
+                              titleButton: TextConstants.widgetRule2MediumButton,
                               percentage: CGFloat(entry.usedPersentage)/100)
     }
 }
@@ -151,15 +151,15 @@ struct WidgetContactBackedupSmallView: View {
             let components = Calendar.current.dateComponents([.weekOfYear, .month], from: backupDate, to: Date())
             if components.month! >= 1 {
                 WidgetEntrySmallView(imageName: "back_up_small",
-                                     title: TextConstants.widgetSmallOldContactBackupTitle,
-                                     description: TextConstants.widgetSmallOldDeviceContactBackupSubtitle,
-                                     titleButton: TextConstants.widgetSmallOldContactBackupButton)
+                                     title: TextConstants.widgetRule6SmallTitle,
+                                     description: TextConstants.widgetRule6SmallDetail,
+                                     titleButton: TextConstants.widgetRule6SmallButton)
             }
         } else {
             WidgetEntrySmallView(imageName: "back_up_small",
-                                 title: TextConstants.widgetSmallNoContactBackupTitle,
-                                 description: TextConstants.widgetSmallNoContactBackupSubtitle,
-                                 titleButton: TextConstants.widgetSmallNoContactBackupButton)
+                                 title: TextConstants.widgetRule5SmallDetail,
+                                 description: "",
+                                 titleButton: TextConstants.widgetRule5SmallButton)
         }
     }
 }
@@ -172,15 +172,15 @@ struct WidgetContactBackedupMediumView: View {
             let components = Calendar.current.dateComponents([.weekOfYear, .month], from: backupDate, to: Date())
             if  components.month! >= 1 {
                 WidgetEntryMediumView(imageName: "back_up_medium",
-                                      title: TextConstants.widgetMediumOldContactBackupTitle,
-                                      description: TextConstants.widgetMediumOldContactBackupSubtitle,
-                                      titleButton: TextConstants.widgetMediumOldContactBackupButton)
+                                      title: TextConstants.widgetRule6SmallTitle,
+                                      description: TextConstants.widgetRule6SmallDetail,
+                                      titleButton: TextConstants.widgetRule6SmallButton)
             }
         } else {
             WidgetEntryMediumView(imageName: "back_up_medium",
-                                  title: TextConstants.widgetMediumNoContactBackupTitle,
-                                  description: TextConstants.widgetMediumNoContactBackupSubtitle,
-                                  titleButton: TextConstants.widgetMediumNoContactBackupButton)
+                                  title: TextConstants.widgetRule5MediumTitle,
+                                  description: TextConstants.widgetRule5MediumDetail,
+                                  titleButton: TextConstants.widgetRule5MediumButton)
         }
     }
 }
@@ -191,24 +191,31 @@ struct WidgetFaceRecognitionSmallView: View {
     let entry: WidgetUserInfoEntry
     var body: some View {
         if entry.isPremiumUser && entry.isFIREnabled {
-            WidgetEntrySmallView(imageName: "",
-                                 title: TextConstants.widgetSmallFaceRecognitionTitle,
-                                 description: TextConstants.widgetSmallFaceRecognitionSubtitle,
-                                 titleButton: TextConstants.widgetSmallFaceRecognitionButton,
-                                 imagesNames: ["test3", "test3", "test3"])
-            
+            if entry.peopleInfos.count > 2 {
+                WidgetEntrySmallView(imageName: "",
+                                     title: TextConstants.widgetRule71SmallTitle,
+                                     description: TextConstants.widgetRule71SmallDetail,
+                                     titleButton: TextConstants.widgetRule71SmallButton,
+                                     imagesNames: ["user-3", "user-2", "user-1"])
+            } else {
+                WidgetEntrySmallView(imageName: "",
+                                     title: TextConstants.widgetRule72SmallTitle,
+                                     description: TextConstants.widgetRule72SmallDetail,
+                                     titleButton: TextConstants.widgetRule72SmallButton,
+                                     imagesNames: ["user-3", "user-2", "user-1"])
+            }
         } else if entry.isPremiumUser && !entry.isFIREnabled {
             WidgetEntrySmallView(imageName: "",
-                                 title: TextConstants.widgetSmallFaceRecognitionDisabledFIRTitle,
-                                 description: TextConstants.widgetSmallFaceRecognitionDisabledFIRSubtitle,
-                                 titleButton: TextConstants.widgetSmallFaceRecognitionDisabledFIRButton,
-                                 imagesNames: ["test3", "test3", "test3"])
+                                 title: "",
+                                 description: TextConstants.widgetRule73SmallDetail,
+                                 titleButton: TextConstants.widgetRule73SmallButton,
+                                 imagesNames: ["user-3", "user-2", "user-1"])
         } else {
             WidgetEntrySmallView(imageName: "",
-                                 title: TextConstants.widgetSmallFaceRecognitionNeedPremiumTitle,
-                                 description: TextConstants.widgetSmallFaceRecognitionNeedPremiumSubtitle,
-                                 titleButton: TextConstants.widgetSmallFaceRecognitionNeedPremiumButton,
-                                 imagesNames: ["test3", "test3", "test3"])
+                                 title: "",
+                                 description: TextConstants.widgetRule74SmallDetail,
+                                 titleButton: TextConstants.widgetRule74SmallButton,
+                                 imagesNames: ["user-3", "user-2", "user-1"])
         }
     }
 }
@@ -217,24 +224,31 @@ struct WidgetFaceRecognitionMediumView: View {
     let entry: WidgetUserInfoEntry
     var body: some View {
         if entry.isPremiumUser && entry.isFIREnabled {
-            WidgetEntryMediumView(imageName: "",
-                                  title: TextConstants.widgetMediumFaceRecognitionTitle,
-                                  description: TextConstants.widgetMediumFaceRecognitionSubtitle,
-                                  titleButton: TextConstants.widgetMediumFaceRecognitionButton,
-                                  imagesNames: ["test3", "test3", "test3"])
-            
+            if entry.peopleInfos.count > 2 {
+                WidgetEntrySmallView(imageName: "",
+                                     title: TextConstants.widgetRule71MediumTitle,
+                                     description: TextConstants.widgetRule71MediumDetail,
+                                     titleButton: TextConstants.widgetRule71MediumButton,
+                                     imagesNames: ["user-3", "user-2", "user-1"])
+            } else {
+                WidgetEntrySmallView(imageName: "",
+                                     title: TextConstants.widgetRule72MediumTitle,
+                                     description: TextConstants.widgetRule72MediumDetail,
+                                     titleButton: TextConstants.widgetRule72MediumButton,
+                                     imagesNames: ["user-3", "user-2", "user-1"])
+            }
         } else if entry.isPremiumUser && !entry.isFIREnabled {
             WidgetEntryMediumView(imageName: "",
-                                  title: TextConstants.widgetMediumFaceRecognitionDisabledFIRTitle,
-                                  description: TextConstants.widgetMediumFaceRecognitionDisabledFIRSubtitle,
-                                  titleButton: TextConstants.widgetMediumFaceRecognitionDisabledFIRButton,
-                                  imagesNames: ["test3", "test3", "test3"])
+                                  title: "",
+                                  description: TextConstants.widgetRule73MediumDetail,
+                                  titleButton: TextConstants.widgetRule73MediumButton,
+                                  imagesNames: ["user-3", "user-2", "user-1"])
         } else {
             WidgetEntryMediumView(imageName: "",
-                                  title: TextConstants.widgetMediumFaceRecognitionNeedPremiumTitle,
-                                  description: TextConstants.widgetMediumFaceRecognitionNeedPremiumSubtitle,
-                                  titleButton: TextConstants.widgetMediumFaceRecognitionNeedPremiumButton,
-                                  imagesNames: ["test3", "test3", "test3"])
+                                  title: "",
+                                  description: TextConstants.widgetRule74MediumDetail,
+                                  titleButton: TextConstants.widgetRule74MediumButton,
+                                  imagesNames: ["user-3", "user-2", "user-1"])
         }
     }
 }
@@ -467,13 +481,14 @@ struct PremiumPeopleAlbums: View {
     var imagesString: Array<String>
     var offset: CGFloat = 0
     var body: some View {
-        HStack(alignment: .center, spacing: -25) {
+        HStack(alignment: .center, spacing: -8) {
             ForEach(imagesString.indices, id: \.self) { index in
                 Image(imagesString[index])
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                    .frame(width: 24, height: 24, alignment: .center)
             }
         }
     }
@@ -483,13 +498,14 @@ struct PremiumPeopleAlbumsMeduium: View {
     var imagesString: Array<String>
     var offset: CGFloat = 0
     var body: some View {
-        HStack(alignment: .center, spacing: -80) {
+        HStack(alignment: .center, spacing: -25) {
             ForEach(imagesString.indices, id: \.self) { index in
                 Image(imagesString[index])
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .clipShape(Circle())
                     .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                    .frame(width: 57, height: 57, alignment: .center)
             }
         }
     }

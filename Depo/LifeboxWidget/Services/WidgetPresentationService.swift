@@ -11,8 +11,9 @@ import CoreGraphics
 import Alamofire
 
 class UserInfo {
-    var isFIREnabled: Bool = false
-    var isPremiumUser: Bool = false
+    var isFIREnabled = false
+    var isPremiumUser = false
+    var peopleInfos = [PeopleInfo]()
 }
 
 final class WidgetPresentationService {
@@ -70,6 +71,7 @@ final class WidgetPresentationService {
         
         group.enter()
         group.enter()
+        group.enter()
         
         group.notify(queue: .main) {
             completion(premuimDate)
@@ -82,6 +84,11 @@ final class WidgetPresentationService {
         
         getPremuimStatus { premium in
             premuimDate.isPremiumUser = premium
+            group.leave()
+        }
+        
+        getPeopleInfo { peopleInfos in
+            premuimDate.peopleInfos = peopleInfos
             group.leave()
         }
     }
@@ -104,6 +111,17 @@ final class WidgetPresentationService {
                 completion(response.hasPermissionFor(.premiumUser))
             case .failed:
                 completion(false)
+            }
+        }
+    }
+    
+    private func getPeopleInfo(completion: @escaping ValueHandler<[PeopleInfo]>) {
+        serverService.getPeopleInfo { result in
+            switch result {
+            case .success(let response):
+                completion(response.personInfos)
+            case .failed:
+                completion([])
             }
         }
     }

@@ -49,10 +49,12 @@ final class WidgetContactBackupEntry: WidgetBaseEntry {
 final class WidgetUserInfoEntry: WidgetBaseEntry {
     let isFIREnabled: Bool
     let isPremiumUser: Bool
+    let peopleInfos: [PeopleInfo]
 
-    init(isFIREnabled: Bool, isPremiumUser: Bool, date: Date) {
+    init(isFIREnabled: Bool, isPremiumUser: Bool, peopleInfos: [PeopleInfo], date: Date) {
         self.isFIREnabled = isFIREnabled
         self.isPremiumUser = isPremiumUser
+        self.peopleInfos = peopleInfos
         super.init(date: date)
     }
 }

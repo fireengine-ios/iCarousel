@@ -126,6 +126,25 @@ final class WidgetServerService {
             }
         }
     }
+    
+    func getPeopleInfo(handler: @escaping ResponseHandler<PeopleResponse>) {
+        sessionManager
+            .request("\(Self.baseShortUrlString)/api/person/page?pageSize=4&pageNumber=0")
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    do {
+                        let object = try JSONDecoder().decode(PeopleResponse.self, from: data)
+                        handler(.success(object))
+                    } catch let error {
+                        handler(.failed(error))
+                    }
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+            }
+    }
 }
 
 extension WidgetServerService: RequestAdapter {
@@ -144,6 +163,8 @@ typealias QuotaInfoResponse = ServerResponse.QuotaInfoResponse
 typealias PermissionsResponse = ServerResponse.PermissionsResponse
 typealias ContantBackupResponse = ServerResponse.ContantBackupResponse
 typealias SettingsInfoPermissionsResponse = ServerResponse.SettingsInfoPermissionsResponse
+typealias PeopleResponse = ServerResponse.PeopleResponse
+typealias PeopleInfo = ServerResponse.PeopleInfo
 
 struct ServerResponse {
     final class QuotaInfoResponse: ObjectRequestResponse {
@@ -224,5 +245,20 @@ struct ServerResponse {
         let duplicatesNumber: Int
         let deletedNumber: Int
         let date: Date?
+    }
+    
+    struct PeopleInfo: Codable {
+        var id: Int64?
+        var ugglaId: String?
+        var name: String?
+        var thumbnail: URL?
+        var visible: Bool?
+        var demo: Bool?
+        var rank: Int64?
+        var alternateThumbnail: URL?
+    }
+    
+    struct PeopleResponse: Codable {
+        var personInfos = [PeopleInfo]()
     }
 }

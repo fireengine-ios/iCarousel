@@ -159,7 +159,9 @@ final class LoginViewController: ViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        WidgetCenter.shared.reloadAllTimelines()
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
         prepareForDisappear()
     }
     
