@@ -1530,33 +1530,6 @@
 		0303A7C42397D0D000907F42 /* VisualMusicPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C77869A1F3F38EF005CB432 /* VisualMusicPlayerViewController.xib */; };
 		0303A7C52397D0D000907F42 /* InstaPickHashtagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9219B19921ECB7B900098021 /* InstaPickHashtagCell.xib */; };
 		0303A7C72397D0D000907F42 /* SpotlightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98570AF8208F7556002CCEBA /* SpotlightViewController.xib */; };
-		0303A7DB2397D0E900907F42 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
-		0303A7DC2397D0E900907F42 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
-		0303A7DD2397D0E900907F42 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
-		0303A7DE2397D0E900907F42 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
-		0303A7DF2397D0E900907F42 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
-		0303A7E02397D0E900907F42 /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
-		0303A7E12397D0E900907F42 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF33202B20250018AF82 /* TodayViewController.swift */; };
-		0303A7E22397D0E900907F42 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
-		0303A7E32397D0E900907F42 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
-		0303A7E42397D0E900907F42 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
-		0303A7E52397D0E900907F42 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
-		0303A7E62397D0E900907F42 /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
-		0303A7E72397D0E900907F42 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
-		0303A7E92397D0E900907F42 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C850A21ACD63F700F976DE /* NotificationCenter.framework */; };
-		0303A7EB2397D0E900907F42 /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
-		0303A7EC2397D0E900907F42 /* TurkcellSaturaDem.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE011F01E69B00CDF527 /* TurkcellSaturaDem.ttf */; };
-		0303A7ED2397D0E900907F42 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84524212DA325007EA795 /* images.xcassets */; };
-		0303A7EE2397D0E900907F42 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54BFF35202B20250018AF82 /* MainInterface.storyboard */; };
-		0303A7EF2397D0E900907F42 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610E722BCC07F00108958 /* Info-Enterprise.plist */; };
-		0303A7F02397D0E900907F42 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8610E622BCC07F00108958 /* Info-AppStore.plist */; };
-		0303A7F12397D0E900907F42 /* TurkcellSaturaIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE031F01E69B00CDF527 /* TurkcellSaturaIta.ttf */; };
-		0303A7F22397D0E900907F42 /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */; };
-		0303A7F32397D0E900907F42 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
-		0303A7F42397D0E900907F42 /* TurkcellSaturaMedIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE051F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf */; };
-		0303A7F52397D0E900907F42 /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */; };
-		0303A7F62397D0E900907F42 /* TurkcellSaturaDemIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE021F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf */; };
-		0303A7F72397D0E900907F42 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
 		0303A8022397D12100907F42 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9681FBC0F5A00487632 /* PasscodeView.swift */; };
 		0303A8032397D12100907F42 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
 		0303A8042397D12100907F42 /* ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0596F220385E940083D6FC /* ImageFormat.swift */; };
@@ -3814,9 +3787,6 @@
 		8C1E5BC822CB875F008FDA02 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
 		8C1E5BC922CB875F008FDA02 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
 		8C1E5BCA22CB875F008FDA02 /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
-		8C1E5BCB22CB8818008FDA02 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
-		8C1E5BCC22CB8831008FDA02 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
-		8C1E5BCD22CB8844008FDA02 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
 		8C1E5BCE22CB8935008FDA02 /* FileProviderWormholeListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9CE3AE229DA5A8004B5C73 /* FileProviderWormholeListener.swift */; };
 		8C1E5BCF22CB897B008FDA02 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAF120444493007F3F54 /* ShareViewController.swift */; };
 		8C1E5BD022CB8A1A008FDA02 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208672228D4FF1000BEDAD /* NSPersistentStoreCoordinator+Extensions.swift */; };
@@ -4195,32 +4165,6 @@
 		8C881BD41FCFFAFC00C86236 /* MailVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */; };
 		8C89254F22529CAD004BE02E /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */; };
 		8C89255022529CAD004BE02E /* SettingsBundleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */; };
-		8C8E924823154623000242E9 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
-		8C8E924923154623000242E9 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
-		8C8E924A23154623000242E9 /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
-		8C8E924B23154623000242E9 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
-		8C8E924C23154623000242E9 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
-		8C8E924D23154623000242E9 /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
-		8C8E924E23154623000242E9 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
-		8C8E924F23154623000242E9 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF33202B20250018AF82 /* TodayViewController.swift */; };
-		8C8E925023154623000242E9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
-		8C8E925123154623000242E9 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
-		8C8E925223154623000242E9 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
-		8C8E925323154623000242E9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
-		8C8E925423154623000242E9 /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
-		8C8E925623154623000242E9 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C850A21ACD63F700F976DE /* NotificationCenter.framework */; };
-		8C8E925A23154623000242E9 /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
-		8C8E925B23154623000242E9 /* TurkcellSaturaDem.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE011F01E69B00CDF527 /* TurkcellSaturaDem.ttf */; };
-		8C8E925C23154623000242E9 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84524212DA325007EA795 /* images.xcassets */; };
-		8C8E925D23154623000242E9 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54BFF35202B20250018AF82 /* MainInterface.storyboard */; };
-		8C8E925E23154623000242E9 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */; };
-		8C8E926023154623000242E9 /* TurkcellSaturaIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE031F01E69B00CDF527 /* TurkcellSaturaIta.ttf */; };
-		8C8E926123154623000242E9 /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */; };
-		8C8E926223154623000242E9 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
-		8C8E926323154623000242E9 /* TurkcellSaturaMedIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE051F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf */; };
-		8C8E926423154623000242E9 /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */; };
-		8C8E926523154623000242E9 /* TurkcellSaturaDemIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE021F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf */; };
-		8C8E926623154623000242E9 /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
 		8C8E927123154630000242E9 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9681FBC0F5A00487632 /* PasscodeView.swift */; };
 		8C8E927223154630000242E9 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
 		8C8E927323154630000242E9 /* ImageFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0596F220385E940083D6FC /* ImageFormat.swift */; };
@@ -4387,7 +4331,6 @@
 		8C8E933E23154756000242E9 /* LifeTech-LifeboxFileProviderUI.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8C8E93392315463F000242E9 /* LifeTech-LifeboxFileProviderUI.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8C8E934723154BC4000242E9 /* SpotifyAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077022E9BEDB0033D317 /* SpotifyAccountConnectionCell.xib */; };
 		8C8E934823154BC5000242E9 /* SpotifyAccountConnectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73B4077022E9BEDB0033D317 /* SpotifyAccountConnectionCell.xib */; };
-		8C8F352D23156BF300FF9BB9 /* Info-AppStore-LifeTech.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C8F352C23156BF300FF9BB9 /* Info-AppStore-LifeTech.plist */; };
 		8C975E13220DA24300AC3502 /* InstapickAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA623220B2072000EF616 /* InstapickAnalyze.swift */; };
 		8C975E14220DA25000AC3502 /* InstapickAnalyzesCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0EA621220B2048000EF616 /* InstapickAnalyzesCount.swift */; };
 		8C975E17220DC55000AC3502 /* ControlTabBarProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C975E16220DC55000AC3502 /* ControlTabBarProtocol.swift */; };
@@ -4408,8 +4351,6 @@
 		8CB83F68227192700020B6D4 /* CaptchaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE127E992268A025005A4214 /* CaptchaView.xib */; };
 		8CBD3A7F2306D4B3005FF1C9 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D21EF8F308005DCEE0 /* RequestService.swift */; };
 		8CBD3A802306D4B5005FF1C9 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D21EF8F308005DCEE0 /* RequestService.swift */; };
-		8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D520B6F80A006B8F88 /* Info-AppStore.plist */; };
-		8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CC163D620B6F80B006B8F88 /* Info-Enterprise.plist */; };
 		8CC301E822C0E9B9005EA404 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
 		8CC301E922C0E9C1005EA404 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		8CCA070520C4412800558AB0 /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
@@ -5844,19 +5785,12 @@
 		B549B6D524CF09D000D39C44 /* AdjustmentParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B549B6D124CF09D000D39C44 /* AdjustmentParameter.swift */; };
 		B549B6D624CF09D000D39C44 /* AdjustmentParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B549B6D124CF09D000D39C44 /* AdjustmentParameter.swift */; };
 		B549B6D724CF09D000D39C44 /* AdjustmentParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B549B6D124CF09D000D39C44 /* AdjustmentParameter.swift */; };
-		B54BFF31202B20250018AF82 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C850A21ACD63F700F976DE /* NotificationCenter.framework */; };
-		B54BFF34202B20250018AF82 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF33202B20250018AF82 /* TodayViewController.swift */; };
-		B54BFF37202B20250018AF82 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B54BFF35202B20250018AF82 /* MainInterface.storyboard */; };
 		B54BFF47202B43DF0018AF82 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		B54BFF4C202C73790018AF82 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
-		B54BFF4D202C73790018AF82 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		B54BFF4F202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
-		B54BFF50202C74090018AF82 /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
-		B54BFF5B202C8E180018AF82 /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
 		B54E09D2233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
 		B54E09D3233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
 		B54E09D4233252D100C3AB94 /* PaycellViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E09D1233252D100C3AB94 /* PaycellViewController.swift */; };
-		B5513AF9205BAED70016C344 /* L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5513AF8205BAED70016C344 /* L10n.swift */; };
 		B551D0D124614C5900B21970 /* LogoutDBCleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B551D0D024614C5900B21970 /* LogoutDBCleaner.swift */; };
 		B551D0D224614C5900B21970 /* LogoutDBCleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B551D0D024614C5900B21970 /* LogoutDBCleaner.swift */; };
 		B551D0D324614C5900B21970 /* LogoutDBCleaner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B551D0D024614C5900B21970 /* LogoutDBCleaner.swift */; };
@@ -5945,7 +5879,6 @@
 		B56E0DD820B414580082044D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B56E0DD620B414510082044D /* StoreKit.framework */; };
 		B56E0DDA20B44AFC0082044D /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
 		B56E0DDB20B44AFC0082044D /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
-		B56E0DDD20B45EE80082044D /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
 		B56E0DE920B5644D0082044D /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DE820B5644D0082044D /* NotificationName+Extensions.swift */; };
 		B56E0DEA20B5644D0082044D /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DE820B5644D0082044D /* NotificationName+Extensions.swift */; };
 		B56FBB1A2122C23D004F4A59 /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56FBB182122C23D004F4A59 /* TermsOfUseViewController.swift */; };
@@ -6060,7 +5993,6 @@
 		B589FC5423F1388D00DD528D /* DataChunkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B589FC4E23F1388D00DD528D /* DataChunkProvider.swift */; };
 		B58BF2D924FB95B700CBE2A7 /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
 		B58BF2DB24FB971A00CBE2A7 /* KeychainSwift+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4ECA7420889B5400AB91C6 /* KeychainSwift+Optional.swift */; };
-
 		B58D36A92509FF3A00FFF101 /* MTIConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D36A82509FF3900FFF101 /* MTIConvert.swift */; };
 		B58D36AA2509FF3A00FFF101 /* MTIConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D36A82509FF3900FFF101 /* MTIConvert.swift */; };
 		B58D36AB2509FF3A00FFF101 /* MTIConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D36A82509FF3900FFF101 /* MTIConvert.swift */; };
@@ -6076,7 +6008,6 @@
 		B59CCE812213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
 		B59CCE822213031F006A02AA /* SocialAccountSectionMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59CCE802213031F006A02AA /* SocialAccountSectionMediator.swift */; };
 		B5A84523212DA315007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84522212DA314007EA795 /* images.xcassets */; };
-		B5A84525212DA326007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84524212DA325007EA795 /* images.xcassets */; };
 		B5A84527212DA339007EA795 /* images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5A84526212DA339007EA795 /* images.xcassets */; };
 		B5AB2F062204356400E3AF23 /* InstaPickSmartAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB2F042204356400E3AF23 /* InstaPickSmartAlbumCell.swift */; };
 		B5AB2F072204356400E3AF23 /* InstaPickSmartAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AB2F042204356400E3AF23 /* InstaPickSmartAlbumCell.swift */; };
@@ -6119,8 +6050,6 @@
 		B5B6B1542170A01E00463260 /* PrepareQuickScroll.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5B6B1502170A01E00463260 /* PrepareQuickScroll.xib */; };
 		B5BA98762066827900CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
 		B5BA9877206682D300CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
-		B5BA98792066830A00CA3BF9 /* UIImage+JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BA98752066827900CA3BF9 /* UIImage+JPEG.swift */; };
-		B5BA987A206684B300CA3BF9 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		B5BA987B2068C6F200CA3BF9 /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		B5BBBE9A24FCF0B100A719CB /* PhotoEditSaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBBE9924FCF0B100A719CB /* PhotoEditSaveService.swift */; };
 		B5BBBE9B24FCF0B100A719CB /* PhotoEditSaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BBBE9924FCF0B100A719CB /* PhotoEditSaveService.swift */; };
@@ -6482,20 +6411,9 @@
 		CE4D27F1207E00D2003AE4FB /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		CE4D27F2207E00D3003AE4FB /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		CE4D27F3207E00D4003AE4FB /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
-		CE4D27F4207E00D6003AE4FB /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
-		CE4D27F5207E0249003AE4FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
 		CE4D27F6207E0249003AE4FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
 		CE4D27F7207E024A003AE4FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
 		CE4D27F8207E024B003AE4FB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
-		CE4D27F9207E0250003AE4FB /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
-		CE4D27FD207E0479003AE4FB /* TurkcellSaturaBol.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDDFF1F01E69B00CDF527 /* TurkcellSaturaBol.ttf */; };
-		CE4D27FE207E0479003AE4FB /* TurkcellSaturaBolIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE001F01E69B00CDF527 /* TurkcellSaturaBolIta.ttf */; };
-		CE4D27FF207E0479003AE4FB /* TurkcellSaturaDem.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE011F01E69B00CDF527 /* TurkcellSaturaDem.ttf */; };
-		CE4D2800207E0479003AE4FB /* TurkcellSaturaDemIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE021F01E69B00CDF527 /* TurkcellSaturaDemIta.ttf */; };
-		CE4D2801207E0479003AE4FB /* TurkcellSaturaIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE031F01E69B00CDF527 /* TurkcellSaturaIta.ttf */; };
-		CE4D2802207E0479003AE4FB /* TurkcellSaturaMed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE041F01E69B00CDF527 /* TurkcellSaturaMed.ttf */; };
-		CE4D2803207E0479003AE4FB /* TurkcellSaturaMedIta.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE051F01E69B00CDF527 /* TurkcellSaturaMedIta.ttf */; };
-		CE4D2804207E0479003AE4FB /* TurkcellSaturaReg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEBBDE061F01E69B00CDF527 /* TurkcellSaturaReg.ttf */; };
 		CE4D2805207E086A003AE4FB /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
 		CE4D2806207E086C003AE4FB /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
 		CE4D2807207E086D003AE4FB /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
@@ -12236,7 +12154,6 @@
 		023504848539E3C241742408 /* LBAlbumLikePreviewSliderModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderModuleInput.swift; sourceTree = "<group>"; };
 		0238298BF13B57E9E1FF2BD0 /* Pods-Billo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Billo/Pods-Billo.debug.xcconfig"; sourceTree = "<group>"; };
 		0303A7D72397D0D000907F42 /* LifeTech_Billo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeTech_Billo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0303A7FD2397D0E900907F42 /* LifeTech_Billo-widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LifeTech_Billo-widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0303A8622397D12100907F42 /* LifeTech_BilloShared.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeTech_BilloShared.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0303A8A22397D14900907F42 /* LifeTech_BilloFileProvider.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeTech_BilloFileProvider.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0303A8CF2397D15100907F42 /* LifeTech_BilloProviderUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeTech_BilloProviderUI.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -13143,7 +13060,6 @@
 		8C881BD11FCFFAF100C86236 /* MailVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailVerificationViewController.swift; sourceTree = "<group>"; };
 		8C881BD31FCFFAFC00C86236 /* MailVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MailVerificationViewController.xib; sourceTree = "<group>"; };
 		8C89254E22529CAD004BE02E /* SettingsBundleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBundleHelper.swift; sourceTree = "<group>"; };
-		8C8E926C23154623000242E9 /* LifeTech-autosync-widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LifeTech-autosync-widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8E92CF23154630000242E9 /* LifeTech-LifeboxShared.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LifeTech-LifeboxShared.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8E930D23154636000242E9 /* LifeTech-LifeboxFileProvider.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LifeTech-LifeboxFileProvider.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8E93392315463F000242E9 /* LifeTech-LifeboxFileProviderUI.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LifeTech-LifeboxFileProviderUI.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -13649,7 +13565,6 @@
 		B549AC4A24CF05D800D39C44 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GPUImage.xcodeproj; sourceTree = "<group>"; };
 		B549B6CA24CF099500D39C44 /* Adjustment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Adjustment.swift; sourceTree = "<group>"; };
 		B549B6D124CF09D000D39C44 /* AdjustmentParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentParameter.swift; sourceTree = "<group>"; };
-		B54BFF30202B20250018AF82 /* autosync-widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "autosync-widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B54BFF33202B20250018AF82 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		B54BFF36202B20250018AF82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		B54BFF38202B20250018AF82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -14479,14 +14394,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0303A7E82397D0E900907F42 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0303A7E92397D0E900907F42 /* NotificationCenter.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0303A84A2397D12100907F42 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -14598,14 +14505,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8C8E925523154623000242E9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8C8E925623154623000242E9 /* NotificationCenter.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8C8E92B923154630000242E9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -14644,14 +14543,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE83B4AA7D461B7F1BD60305 /* Pods_BilloNotificationService.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B54BFF2D202B20250018AF82 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B54BFF31202B20250018AF82 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14928,7 +14819,6 @@
 			children = (
 				CE51B0011EF90853005DCEE0 /* lifebox.app */,
 				CE79E4A51F695DA200C1F151 /* Depo_LifeTechUITests.xctest */,
-				B54BFF30202B20250018AF82 /* autosync-widget.appex */,
 				8C0E907E1FDEBE0000789C91 /* lifebox.app */,
 				CE58FAEF20444492007F3F54 /* LifeboxShared.appex */,
 				CE1BE922204831CD0074BDDC /* LifeboxFileProvider.appex */,
@@ -14940,14 +14830,12 @@
 				8C3BA33E22B3CC45006D901E /* BilloShared.appex */,
 				8C3BA37822B3CC49006D901E /* BilloFileProvider.appex */,
 				8C3BA3A222B3CC53006D901E /* BilloProviderUI.appex */,
-				8C8E926C23154623000242E9 /* LifeTech-autosync-widget.appex */,
 				8C8E92CF23154630000242E9 /* LifeTech-LifeboxShared.appex */,
 				8C8E930D23154636000242E9 /* LifeTech-LifeboxFileProvider.appex */,
 				8C8E93392315463F000242E9 /* LifeTech-LifeboxFileProviderUI.appex */,
 				984B1ED823685D7B009ACCFF /* LifeboxNotificationService.appex */,
 				984B1EE923685FC8009ACCFF /* BilloNotificationService.appex */,
 				0303A7D72397D0D000907F42 /* LifeTech_Billo.app */,
-				0303A7FD2397D0E900907F42 /* LifeTech_Billo-widget.appex */,
 				0303A8622397D12100907F42 /* LifeTech_BilloShared.appex */,
 				0303A8A22397D14900907F42 /* LifeTech_BilloFileProvider.appex */,
 				0303A8CF2397D15100907F42 /* LifeTech_BilloProviderUI.appex */,
@@ -22925,23 +22813,6 @@
 			productReference = 0303A7D72397D0D000907F42 /* LifeTech_Billo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0303A7D92397D0E900907F42 /* LifeTech_Billo-widget */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0303A7F82397D0E900907F42 /* Build configuration list for PBXNativeTarget "LifeTech_Billo-widget" */;
-			buildPhases = (
-				0303A7DA2397D0E900907F42 /* Sources */,
-				0303A7E82397D0E900907F42 /* Frameworks */,
-				0303A7EA2397D0E900907F42 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "LifeTech_Billo-widget";
-			productName = "autosync-widget";
-			productReference = 0303A7FD2397D0E900907F42 /* LifeTech_Billo-widget.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		0303A7FF2397D12100907F42 /* LifeTech_BilloShared */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0303A85D2397D12100907F42 /* Build configuration list for PBXNativeTarget "LifeTech_BilloShared" */;
@@ -23134,23 +23005,6 @@
 			productReference = 8C3BA3A222B3CC53006D901E /* BilloProviderUI.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		8C8E924523154623000242E9 /* LifeTech-autosync-widget */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8C8E926723154623000242E9 /* Build configuration list for PBXNativeTarget "LifeTech-autosync-widget" */;
-			buildPhases = (
-				8C8E924723154623000242E9 /* Sources */,
-				8C8E925523154623000242E9 /* Frameworks */,
-				8C8E925923154623000242E9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "LifeTech-autosync-widget";
-			productName = "autosync-widget";
-			productReference = 8C8E926C23154623000242E9 /* LifeTech-autosync-widget.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		8C8E926E23154630000242E9 /* LifeTech-LifeboxShared */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C8E92CA23154630000242E9 /* Build configuration list for PBXNativeTarget "LifeTech-LifeboxShared" */;
@@ -23239,23 +23093,6 @@
 			name = BilloNotificationService;
 			productName = NotificationService;
 			productReference = 984B1EE923685FC8009ACCFF /* BilloNotificationService.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
-		B54BFF2F202B20250018AF82 /* autosync-widget */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B54BFF40202B20260018AF82 /* Build configuration list for PBXNativeTarget "autosync-widget" */;
-			buildPhases = (
-				B54BFF2C202B20250018AF82 /* Sources */,
-				B54BFF2D202B20250018AF82 /* Frameworks */,
-				B54BFF2E202B20250018AF82 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "autosync-widget";
-			productName = "autosync-widget";
-			productReference = B54BFF30202B20250018AF82 /* autosync-widget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		B58936C024FA773E00E3FA9C /* LifeboxWidgetExtension */ = {
@@ -23502,10 +23339,6 @@
 						DevelopmentTeam = 7A7F3AW7RP;
 						ProvisioningStyle = Manual;
 					};
-					0303A7D92397D0E900907F42 = {
-						DevelopmentTeam = 7A7F3AW7RP;
-						ProvisioningStyle = Manual;
-					};
 					0303A7FF2397D12100907F42 = {
 						DevelopmentTeam = 7A7F3AW7RP;
 						ProvisioningStyle = Manual;
@@ -23595,10 +23428,6 @@
 							};
 						};
 					};
-					8C8E924523154623000242E9 = {
-						DevelopmentTeam = 7A7F3AW7RP;
-						ProvisioningStyle = Manual;
-					};
 					8C8E926E23154630000242E9 = {
 						DevelopmentTeam = 7A7F3AW7RP;
 						ProvisioningStyle = Manual;
@@ -23618,19 +23447,6 @@
 					984B1EDD23685FC8009ACCFF = {
 						DevelopmentTeam = 729CGH4BJD;
 						ProvisioningStyle = Manual;
-					};
-					B54BFF2F202B20250018AF82 = {
-						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = 7YZS5NTGYH;
-						ProvisioningStyle = Manual;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-							com.apple.Keychain = {
-								enabled = 1;
-							};
-						};
 					};
 					B58936C024FA773E00E3FA9C = {
 						CreatedOnToolsVersion = 12.0;
@@ -23774,22 +23590,20 @@
 			projectRoot = "";
 			targets = (
 				CE51AAF51EF90853005DCEE0 /* Depo_LifeTech */,
-				8C8E924523154623000242E9 /* LifeTech-autosync-widget */,
 				8C8E926E23154630000242E9 /* LifeTech-LifeboxShared */,
 				8C8E92D123154636000242E9 /* LifeTech-LifeboxFileProvider */,
 				8C8E930F2315463F000242E9 /* LifeTech-LifeboxFileProviderUI */,
 				78B2D349204AA5F500D096DC /* LifeTech-NotificationService */,
+				B58936C024FA773E00E3FA9C /* LifeboxWidgetExtension */,
 				CE79E4A41F695DA200C1F151 /* Depo_LifeTechUITests */,
 				8C0E8C611FDEBDFF00789C91 /* TC_Depo_LifeTech */,
 				CF8B636A23CBC9D70021B021 /* TC_Depo_LifeTech_Bundle */,
-				B54BFF2F202B20250018AF82 /* autosync-widget */,
 				CE58FAEE20444492007F3F54 /* LifeboxShared */,
 				CE1BE921204831CD0074BDDC /* LifeboxFileProvider */,
 				CE1BE92F204831CE0074BDDC /* LifeboxFileProviderUI */,
 				984B1ECC23685D7B009ACCFF /* LifeboxNotificationService */,
 				CEBA093F214BCC63007A0CE3 /* LifeboxUnitTests */,
 				0303A0132397D0D000907F42 /* LifeTech_Billo */,
-				0303A7D92397D0E900907F42 /* LifeTech_Billo-widget */,
 				0303A7FF2397D12100907F42 /* LifeTech_BilloShared */,
 				0303A8642397D14900907F42 /* LifeTech_BilloFileProvider */,
 				0303A8A42397D15100907F42 /* LifeTech_BilloProviderUI */,
@@ -23801,7 +23615,6 @@
 				8C3BA34022B3CC49006D901E /* BilloFileProvider */,
 				8C3BA37A22B3CC53006D901E /* BilloProviderUI */,
 				984B1EDD23685FC8009ACCFF /* BilloNotificationService */,
-				B58936C024FA773E00E3FA9C /* LifeboxWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -24138,26 +23951,6 @@
 				B57D854123D9EFC00057B5D6 /* Localizable.strings in Resources */,
 				0303A7C72397D0D000907F42 /* SpotlightViewController.xib in Resources */,
 				98A86D8423A7C87E00438225 /* EmptyView.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0303A7EA2397D0E900907F42 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0303A7EB2397D0E900907F42 /* TurkcellSaturaBol.ttf in Resources */,
-				0303A7EC2397D0E900907F42 /* TurkcellSaturaDem.ttf in Resources */,
-				0303A7ED2397D0E900907F42 /* images.xcassets in Resources */,
-				0303A7EE2397D0E900907F42 /* MainInterface.storyboard in Resources */,
-				0303A7EF2397D0E900907F42 /* Info-Enterprise.plist in Resources */,
-				0303A7F02397D0E900907F42 /* Info-AppStore.plist in Resources */,
-				0303A7F12397D0E900907F42 /* TurkcellSaturaIta.ttf in Resources */,
-				0303A7F22397D0E900907F42 /* TurkcellSaturaReg.ttf in Resources */,
-				0303A7F32397D0E900907F42 /* OurLocalizable.strings in Resources */,
-				0303A7F42397D0E900907F42 /* TurkcellSaturaMedIta.ttf in Resources */,
-				0303A7F52397D0E900907F42 /* TurkcellSaturaMed.ttf in Resources */,
-				0303A7F62397D0E900907F42 /* TurkcellSaturaDemIta.ttf in Resources */,
-				0303A7F72397D0E900907F42 /* TurkcellSaturaBolIta.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -24601,26 +24394,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8C8E925923154623000242E9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8C8E925A23154623000242E9 /* TurkcellSaturaBol.ttf in Resources */,
-				8C8E925B23154623000242E9 /* TurkcellSaturaDem.ttf in Resources */,
-				8C8F352D23156BF300FF9BB9 /* Info-AppStore-LifeTech.plist in Resources */,
-				8C8E925C23154623000242E9 /* images.xcassets in Resources */,
-				8C8E925D23154623000242E9 /* MainInterface.storyboard in Resources */,
-				8C8E925E23154623000242E9 /* Info-Enterprise.plist in Resources */,
-				8C8E926023154623000242E9 /* TurkcellSaturaIta.ttf in Resources */,
-				8C8E926123154623000242E9 /* TurkcellSaturaReg.ttf in Resources */,
-				8C8E926223154623000242E9 /* OurLocalizable.strings in Resources */,
-				8C8E926323154623000242E9 /* TurkcellSaturaMedIta.ttf in Resources */,
-				8C8E926423154623000242E9 /* TurkcellSaturaMed.ttf in Resources */,
-				8C8E926523154623000242E9 /* TurkcellSaturaDemIta.ttf in Resources */,
-				8C8E926623154623000242E9 /* TurkcellSaturaBolIta.ttf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8C8E92BC23154630000242E9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -24682,26 +24455,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B54BFF2E202B20250018AF82 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CE4D27FD207E0479003AE4FB /* TurkcellSaturaBol.ttf in Resources */,
-				CE4D27FF207E0479003AE4FB /* TurkcellSaturaDem.ttf in Resources */,
-				B5A84525212DA326007EA795 /* images.xcassets in Resources */,
-				B54BFF37202B20250018AF82 /* MainInterface.storyboard in Resources */,
-				8CC163D820B6F80B006B8F88 /* Info-Enterprise.plist in Resources */,
-				8CC163D720B6F80B006B8F88 /* Info-AppStore.plist in Resources */,
-				CE4D2801207E0479003AE4FB /* TurkcellSaturaIta.ttf in Resources */,
-				CE4D2804207E0479003AE4FB /* TurkcellSaturaReg.ttf in Resources */,
-				CE4D27F4207E00D6003AE4FB /* OurLocalizable.strings in Resources */,
-				CE4D2803207E0479003AE4FB /* TurkcellSaturaMedIta.ttf in Resources */,
-				CE4D2802207E0479003AE4FB /* TurkcellSaturaMed.ttf in Resources */,
-				CE4D2800207E0479003AE4FB /* TurkcellSaturaDemIta.ttf in Resources */,
-				CE4D27FE207E0479003AE4FB /* TurkcellSaturaBolIta.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -28876,26 +28629,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0303A7DA2397D0E900907F42 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0303A7DB2397D0E900907F42 /* Device.swift in Sources */,
-				0303A7DC2397D0E900907F42 /* Keys.swift in Sources */,
-				0303A7DD2397D0E900907F42 /* String+Subscript.swift in Sources */,
-				0303A7DE2397D0E900907F42 /* WidgetService.swift in Sources */,
-				0303A7DF2397D0E900907F42 /* UIImage+Size.swift in Sources */,
-				0303A7E02397D0E900907F42 /* AppResponsivenessService.swift in Sources */,
-				0303A7E12397D0E900907F42 /* TodayViewController.swift in Sources */,
-				0303A7E22397D0E900907F42 /* UIImage+JPEG.swift in Sources */,
-				0303A7E32397D0E900907F42 /* SharedEnums.swift in Sources */,
-				0303A7E42397D0E900907F42 /* L10n.swift in Sources */,
-				0303A7E52397D0E900907F42 /* Constants.swift in Sources */,
-				0303A7E62397D0E900907F42 /* NumericConstants.swift in Sources */,
-				0303A7E72397D0E900907F42 /* SharedConstants.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0303A8012397D12100907F42 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -30751,26 +30484,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8C8E924723154623000242E9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8C8E924823154623000242E9 /* Device.swift in Sources */,
-				8C8E924923154623000242E9 /* Keys.swift in Sources */,
-				8C8E924A23154623000242E9 /* String+Subscript.swift in Sources */,
-				8C8E924B23154623000242E9 /* WidgetService.swift in Sources */,
-				8C8E924C23154623000242E9 /* UIImage+Size.swift in Sources */,
-				8C8E924D23154623000242E9 /* AppResponsivenessService.swift in Sources */,
-				8C8E924E23154623000242E9 /* SharedConstants.swift in Sources */,
-				8C8E924F23154623000242E9 /* TodayViewController.swift in Sources */,
-				8C8E925023154623000242E9 /* UIImage+JPEG.swift in Sources */,
-				8C8E925123154623000242E9 /* SharedEnums.swift in Sources */,
-				8C8E925223154623000242E9 /* L10n.swift in Sources */,
-				8C8E925323154623000242E9 /* Constants.swift in Sources */,
-				8C8E925423154623000242E9 /* NumericConstants.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8C8E927023154630000242E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -30950,26 +30663,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				984B1EE023685FC8009ACCFF /* NotificationService.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B54BFF2C202B20250018AF82 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8C1E5BCB22CB8818008FDA02 /* Device.swift in Sources */,
-				8C1E5BCC22CB8831008FDA02 /* Keys.swift in Sources */,
-				8C1E5BCD22CB8844008FDA02 /* String+Subscript.swift in Sources */,
-				B54BFF5B202C8E180018AF82 /* WidgetService.swift in Sources */,
-				B5BA987A206684B300CA3BF9 /* UIImage+Size.swift in Sources */,
-				B56E0DDD20B45EE80082044D /* AppResponsivenessService.swift in Sources */,
-				B54BFF4D202C73790018AF82 /* SharedConstants.swift in Sources */,
-				B54BFF34202B20250018AF82 /* TodayViewController.swift in Sources */,
-				B5BA98792066830A00CA3BF9 /* UIImage+JPEG.swift in Sources */,
-				B54BFF50202C74090018AF82 /* SharedEnums.swift in Sources */,
-				B5513AF9205BAED70016C344 /* L10n.swift in Sources */,
-				CE4D27F5207E0249003AE4FB /* Constants.swift in Sources */,
-				CE4D27F9207E0250003AE4FB /* NumericConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32528,7 +32221,6 @@
 				B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */,
 				9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */,
 				B56FBB252122C48C004F4A59 /* TermsOfUseRouter.swift in Sources */,
-				98F0333D2403FFC100F1D415 /* BackupHelper.m in Sources */,
 				9868100925080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */,
 				DB6E1B2B2651A46923CB165B /* FeedbackViewController.swift in Sources */,
 				EF2EE1EEC26868913C9251BD /* FeedbackViewModuleInput.swift in Sources */,
@@ -33691,7 +33383,6 @@
 				89E51D4822CA1111007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				9823196624F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
 				B5ECA57325063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
-				98F032ED2403FFC000F1D415 /* BackupStats.m in Sources */,
 				735766CF23AD1011008589E9 /* OverlayStickerViewControllerDesigner.swift in Sources */,
 				CF71461324B597A800D83E60 /* ContactDetailNoInfoCell.swift in Sources */,
 				CE784B0822A685FB00662219 /* DropboxAccountConnectionCell.swift in Sources */,
@@ -35897,8 +35588,7 @@
 				CF8B6BDF23CBCA280021B021 /* TwoFactorChallengePresenter.swift in Sources */,
 				CF8B6BE023CBCA280021B021 /* OperationProgressService.swift in Sources */,
 				739E2C32247BA92200C74757 /* UIView+ParentViewController.swift in Sources */,
-				CF8B6BE123CBCA280021B021 /* PhotoDetailCell.swift in Sources */,
-				98F032F42403FFC000F1D415 /* AnalyzeStatus.m in Sources */,
+				CF8B6BE123CBCA280021B021 /* PhotoVideoDetailCell.swift in Sources */,
 				CF8B6BE223CBCA280021B021 /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
 				982319B524F3A1E700FD16E2 /* HSLView.swift in Sources */,
 				98231A1524F3A1E700FD16E2 /* SelectionMenuCell.swift in Sources */,
@@ -36687,7 +36377,6 @@
 				CF8B6E9223CBCA280021B021 /* SearchViewPresenter.swift in Sources */,
 				9823196724F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
 				B5ECA57425063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
-				98F032EE2403FFC000F1D415 /* BackupStats.m in Sources */,
 				CF8B6E9323CBCA280021B021 /* TermsOfUseModuleInput.swift in Sources */,
 				CF71461424B597A800D83E60 /* ContactDetailNoInfoCell.swift in Sources */,
 				CF8B6E9423CBCA280021B021 /* UIviewControlllerExtensions.swift in Sources */,
@@ -37678,158 +37367,6 @@
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Enterprise;
-		};
-		0303A7F92397D0E900907F42 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/LifeDrive/autosync-widget.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
-					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_SWIFT_FLAGS = "-DDEBUG \"-DLIFEDRIVE\"";
-				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "LifeDrive widget dev";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		0303A7FA2397D0E900907F42 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/LifeDrive/autosync-widget.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				CODE_SIGN_STYLE = Manual;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
-					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
-				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Billo widget AdHoc";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		0303A7FB2397D0E900907F42 /* AppStore */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/LifeDrive/autosync-widget-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 729CGH4BJD;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
-					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.todayext;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "billo today extension";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = AppStore;
-		};
-		0303A7FC2397D0E900907F42 /* Enterprise */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/LifeDrive/autosync-widget-enterprise.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = LA4DZFY7SY;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/MMWormhole\"",
-					"$(PROJECT_DIR)/Depo/App/VendorsFrameworks",
-				);
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/LifeDrive/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_SWIFT_FLAGS = "\"-DLIFEDRIVE\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.todayextension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Today Extension";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Enterprise;
 		};
@@ -39693,137 +39230,6 @@
 			};
 			name = Enterprise;
 		};
-		8C8E926823154623000242E9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
-				ENABLE_BITCODE = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "by.come.life.Lifebox.autosync-widget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3acea24-6e7a-4e13-9b40-e930c3d09038";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox autosync widget dev";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		8C8E926923154623000242E9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				CODE_SIGN_STYLE = Manual;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
-				ENABLE_BITCODE = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "by.come.life.Lifebox.autosync-widget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b8c9c5bb-95f0-46e6-9979-0d87b2e0444b";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox_autosync-widget_adhoc";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		8C8E926A23154623000242E9 /* AppStore */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				CODE_SIGN_STYLE = Manual;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
-				ENABLE_BITCODE = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/Info-AppStore-LifeTech.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = lifeBox_AutosyncWidget_appStore;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = AppStore;
-		};
-		8C8E926B23154623000242E9 /* Enterprise */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget-enterprise.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
-				CODE_SIGN_STYLE = Manual;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = LA4DZFY7SY;
-				ENABLE_BITCODE = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/autosync-widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.todayextension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Enterprise;
-		};
 		8C8E92CB23154630000242E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6F2FBB59B5B4809B3530331C /* Pods-LifeTech-LifeboxShared.debug.xcconfig */;
@@ -40606,137 +40012,6 @@
 			};
 			name = Enterprise;
 		};
-		B54BFF3C202B20260018AF82 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
-				CODE_SIGN_STYLE = Manual;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
-				ENABLE_BITCODE = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "autosync-widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3acea24-6e7a-4e13-9b40-e930c3d09038";
-				PROVISIONING_PROFILE_SPECIFIER = "LifeBox widget debug";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		B54BFF3D202B20260018AF82 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				CODE_SIGN_STYLE = Manual;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
-				ENABLE_BITCODE = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "autosync-widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "by.come.life.Lifebox.autosync-widget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b8c9c5bb-95f0-46e6-9979-0d87b2e0444b";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox_autosync-widget_adhoc";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		B54BFF3E202B20260018AF82 /* AppStore */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
-				CODE_SIGN_STYLE = Manual;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 693N5K66ZJ;
-				ENABLE_BITCODE = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "autosync-widget/Info-AppStore.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "akillidepo today extension";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = AppStore;
-		};
-		B54BFF3F202B20260018AF82 /* Enterprise */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = "autosync-widget/autosync-widget-enterprise.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Turkcell Iletisim Hizmetleri A. S.";
-				CODE_SIGN_STYLE = Manual;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = LA4DZFY7SY;
-				ENABLE_BITCODE = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "autosync-widget/Info-Enterprise.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.todayextension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Akilli Depo New Today Extension in House";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Enterprise;
-		};
 		B58936CF24FA773F00E3FA9C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A60AEA84595CC4B502AAD879 /* Pods-LifeboxWidgetExtension.debug.xcconfig */;
@@ -40766,7 +40041,7 @@
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -42571,17 +41846,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0303A7F82397D0E900907F42 /* Build configuration list for PBXNativeTarget "LifeTech_Billo-widget" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0303A7F92397D0E900907F42 /* Debug */,
-				0303A7FA2397D0E900907F42 /* Release */,
-				0303A7FB2397D0E900907F42 /* AppStore */,
-				0303A7FC2397D0E900907F42 /* Enterprise */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		0303A85D2397D12100907F42 /* Build configuration list for PBXNativeTarget "LifeTech_BilloShared" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -42703,17 +41967,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8C8E926723154623000242E9 /* Build configuration list for PBXNativeTarget "LifeTech-autosync-widget" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8C8E926823154623000242E9 /* Debug */,
-				8C8E926923154623000242E9 /* Release */,
-				8C8E926A23154623000242E9 /* AppStore */,
-				8C8E926B23154623000242E9 /* Enterprise */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		8C8E92CA23154630000242E9 /* Build configuration list for PBXNativeTarget "LifeTech-LifeboxShared" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -42765,17 +42018,6 @@
 				984B1EE623685FC8009ACCFF /* Release */,
 				984B1EE723685FC8009ACCFF /* AppStore */,
 				984B1EE823685FC8009ACCFF /* Enterprise */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B54BFF40202B20260018AF82 /* Build configuration list for PBXNativeTarget "autosync-widget" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B54BFF3C202B20260018AF82 /* Debug */,
-				B54BFF3D202B20260018AF82 /* Release */,
-				B54BFF3E202B20260018AF82 /* AppStore */,
-				B54BFF3F202B20260018AF82 /* Enterprise */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
