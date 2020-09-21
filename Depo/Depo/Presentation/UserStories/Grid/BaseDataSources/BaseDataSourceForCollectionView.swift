@@ -822,7 +822,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             guard let unwrapedObject = object else {
                 return
             }
-            cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
+            cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjectSelected(object: unwrapedObject))
             cell_.configureWithWrapper(wrappedObj: unwrapedObject)
             
             if let cell = cell as? BasicCollectionMultiFileCell {
@@ -962,13 +962,13 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             let object = itemForIndexPath(indexPath: path) {
             
             if !isSelectionStateActive {
-                if !isObjctSelected(object: object) {
+                if !isObjectSelected(object: object) {
                     onSelectObject(object: object)
                 }
                 
                 forwardDelegate.onLongPressInCell()
                 updateSelectionCount()
-            } else if !isObjctSelected(object: object) {
+            } else if !isObjectSelected(object: object) {
                 onSelectObject(object: object)
                 updateSelectionCount()
             }
@@ -981,12 +981,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         self.delegate?.onChangeSelectedItemsCount(selectedItemsCount: selectedItemsArray.count)
     }
     
-    func isObjctSelected(object: BaseDataSourceItem) -> Bool {
+    func isObjectSelected(object: BaseDataSourceItem) -> Bool {
         return selectedItemsArray.contains(object)
     }
     
     func onSelectObject(object: BaseDataSourceItem) {
-        if isObjctSelected(object: object) {
+        if isObjectSelected(object: object) {
             selectedItemsArray.remove(object)
         } else {
             if maxSelectionCount >= 0 {
@@ -1010,7 +1010,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func onSelectObjectWithQuickSelect(object: BaseDataSourceItem) {
-        if isObjctSelected(object: object) {
+        if isObjectSelected(object: object) {
             if let collectionView = collectionView as? QuickSelectCollectionView {
                 if !collectionView.isQuickSelecting {
                     selectedItemsArray.remove(object)
@@ -1040,7 +1040,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
     
     func onDeselectObject(object: BaseDataSourceItem) {
-        if isObjctSelected(object: object) {
+        if isObjectSelected(object: object) {
             selectedItemsArray.remove(object)
         }
     }
@@ -1084,7 +1084,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             
             cell_.setSelection(isSelectionActive: isSelectionStateActive,
-                               isSelected: isObjctSelected(object: object))
+                               isSelected: isObjectSelected(object: object))
             cell_.configureWithWrapper(wrappedObj: object)
             
         }
@@ -1109,7 +1109,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             guard let unwrapedObject = object else {
                 continue
             }
-            cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
+            cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjectSelected(object: unwrapedObject))
             cell_.set(name: unwrapedObject.name)
             ///TODO: confireWithWrapperd call may be meaningless because of isAlreadyConfigured flag inside
             cell_.configureWithWrapper(wrappedObj: unwrapedObject)
@@ -1251,7 +1251,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         }
         
         cell_.updating()
-        cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
+        cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjectSelected(object: unwrapedObject))
         cell_.configureWithWrapper(wrappedObj: unwrapedObject)
         cell_.setDelegateObject(delegateObject: self)
         
@@ -1361,7 +1361,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             guard let cell_ = cell as? CollectionViewCellDataProtocol else {
                 return
             }
-            cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjctSelected(object: unwrapedObject))
+            cell_.setSelection(isSelectionActive: isSelectionStateActive, isSelected: isObjectSelected(object: unwrapedObject))
             if  let forwardDelegate = self.delegate {
                 forwardDelegate.onItemSelectedActiveState(item: unwrapedObject)
             }
