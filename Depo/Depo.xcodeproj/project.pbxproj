@@ -5528,6 +5528,7 @@
 		98CB9A852202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */; };
 		98CB9A862202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */; };
 		98D3856D21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */; };
+		98D93AEA25189AE30031017C /* WidgetImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D93AE925189AE20031017C /* WidgetImageLoader.swift */; };
 		98DBC0462410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DBC0442410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift */; };
 		98DBC0472410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DBC0442410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift */; };
 		98DBC0482410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DBC0442410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift */; };
@@ -6060,7 +6061,6 @@
 		B589FC5423F1388D00DD528D /* DataChunkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B589FC4E23F1388D00DD528D /* DataChunkProvider.swift */; };
 		B58BF2D924FB95B700CBE2A7 /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
 		B58BF2DB24FB971A00CBE2A7 /* KeychainSwift+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4ECA7420889B5400AB91C6 /* KeychainSwift+Optional.swift */; };
-
 		B58D36A92509FF3A00FFF101 /* MTIConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D36A82509FF3900FFF101 /* MTIConvert.swift */; };
 		B58D36AA2509FF3A00FFF101 /* MTIConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D36A82509FF3900FFF101 /* MTIConvert.swift */; };
 		B58D36AB2509FF3A00FFF101 /* MTIConvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D36A82509FF3900FFF101 /* MTIConvert.swift */; };
@@ -13519,6 +13519,7 @@
 		98CB1C1124FE6DAA00515757 /* PartialInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartialInfo.m; sourceTree = "<group>"; };
 		98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceResponseError.swift; sourceTree = "<group>"; };
 		98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDataSource.swift; sourceTree = "<group>"; };
+		98D93AE925189AE20031017C /* WidgetImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetImageLoader.swift; sourceTree = "<group>"; };
 		98DBC0442410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		98DBC0452410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoSyncHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		98DBC0592410FB4F00926F40 /* AutoSyncAlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncAlbumTableViewCell.swift; sourceTree = "<group>"; };
@@ -20026,6 +20027,7 @@
 				B5358C6925011B440005FCAD /* WidgetTokenService.swift */,
 				B558278B24FE90C40039DD11 /* WidgetServerServcie.swift */,
 				B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */,
+				98D93AE925189AE20031017C /* WidgetImageLoader.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -31035,6 +31037,7 @@
 				B55827A224FE97D70039DD11 /* (null) in Sources */,
 				B55827A024FE97C60039DD11 /* (null) in Sources */,
 				B5358C7D2501417F0005FCAD /* ContactSyncSDK.m in Sources */,
+				98D93AEA25189AE30031017C /* WidgetImageLoader.swift in Sources */,
 				B58936EB24FA905F00E3FA9C /* SharedConstants.swift in Sources */,
 				B58BF2D924FB95B700CBE2A7 /* TokenKeychainStorage.swift in Sources */,
 				B5358C712501415C0005FCAD /* AbstractHelper.m in Sources */,
@@ -32528,7 +32531,6 @@
 				B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */,
 				9A81FCAA4207C751B3A60DEB /* FeedbackViewOutput.swift in Sources */,
 				B56FBB252122C48C004F4A59 /* TermsOfUseRouter.swift in Sources */,
-				98F0333D2403FFC100F1D415 /* BackupHelper.m in Sources */,
 				9868100925080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */,
 				DB6E1B2B2651A46923CB165B /* FeedbackViewController.swift in Sources */,
 				EF2EE1EEC26868913C9251BD /* FeedbackViewModuleInput.swift in Sources */,
@@ -33691,7 +33693,6 @@
 				89E51D4822CA1111007A7DBC /* CreateStoryPreviewRouterInput.swift in Sources */,
 				9823196624F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
 				B5ECA57325063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
-				98F032ED2403FFC000F1D415 /* BackupStats.m in Sources */,
 				735766CF23AD1011008589E9 /* OverlayStickerViewControllerDesigner.swift in Sources */,
 				CF71461324B597A800D83E60 /* ContactDetailNoInfoCell.swift in Sources */,
 				CE784B0822A685FB00662219 /* DropboxAccountConnectionCell.swift in Sources */,
@@ -35897,8 +35898,7 @@
 				CF8B6BDF23CBCA280021B021 /* TwoFactorChallengePresenter.swift in Sources */,
 				CF8B6BE023CBCA280021B021 /* OperationProgressService.swift in Sources */,
 				739E2C32247BA92200C74757 /* UIView+ParentViewController.swift in Sources */,
-				CF8B6BE123CBCA280021B021 /* PhotoDetailCell.swift in Sources */,
-				98F032F42403FFC000F1D415 /* AnalyzeStatus.m in Sources */,
+				CF8B6BE123CBCA280021B021 /* PhotoVideoDetailCell.swift in Sources */,
 				CF8B6BE223CBCA280021B021 /* InstaPickCampaignViewControllerDesigner.swift in Sources */,
 				982319B524F3A1E700FD16E2 /* HSLView.swift in Sources */,
 				98231A1524F3A1E700FD16E2 /* SelectionMenuCell.swift in Sources */,
@@ -36687,7 +36687,6 @@
 				CF8B6E9223CBCA280021B021 /* SearchViewPresenter.swift in Sources */,
 				9823196724F3A1E600FD16E2 /* PreparedFiltersView.swift in Sources */,
 				B5ECA57425063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
-				98F032EE2403FFC000F1D415 /* BackupStats.m in Sources */,
 				CF8B6E9323CBCA280021B021 /* TermsOfUseModuleInput.swift in Sources */,
 				CF71461424B597A800D83E60 /* ContactDetailNoInfoCell.swift in Sources */,
 				CF8B6E9423CBCA280021B021 /* UIviewControlllerExtensions.swift in Sources */,

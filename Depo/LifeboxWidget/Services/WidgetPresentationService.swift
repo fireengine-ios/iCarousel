@@ -6,9 +6,8 @@
 //  Copyright © 2020 LifeTech. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreGraphics
-import Alamofire
 
 class UserInfo {
     var isFIREnabled = false
@@ -21,12 +20,9 @@ final class WidgetPresentationService {
     
     var isAuthorized: Bool { serverService.isAuthorized }
 
-    private let serverService = WidgetServerService(
-        tokenStorage: TokenKeychainStorage(),
-        sessionManager: SessionManager.customDefault
-    )
+    private let serverService = WidgetServerService.shared
 
-    func getStorageQuota(completion: @escaping ((Int) -> ()), fail: @escaping VoidHandler) {
+    func getStorageQuota(completion: @escaping ValueHandler<Int>, fail: @escaping VoidHandler) {
         serverService.getQuotaInfo { response in
             switch response {
             case .success(let quota):
@@ -45,7 +41,7 @@ final class WidgetPresentationService {
         }
     }
     
-    func getDeviceStorageQuota(completion: @escaping ((Int) -> ())){
+    func getDeviceStorageQuota(completion: @escaping ValueHandler<Int>){
         let fileURL = URL(fileURLWithPath: NSHomeDirectory() as String)
         do {
             let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey, .volumeTotalCapacityKey])
@@ -61,7 +57,7 @@ final class WidgetPresentationService {
         }
     }
     
-    func getContactBackupStatus(completion: @escaping ((ContantBackupResponse) -> ()), fail: @escaping VoidHandler) {
+    func getContactBackupStatus(completion: @escaping ValueHandler<ContantBackupResponse>, fail: @escaping VoidHandler) {
         serverService.getBackUpStatus(completion: completion, fail: fail)
     }
     
@@ -93,7 +89,7 @@ final class WidgetPresentationService {
         }
     }
     
-    private func getFaceImageAllowance(completion: @escaping ((Bool) -> ())) {
+    private func getFaceImageAllowance(completion: @escaping BoolHandler) {
         serverService.getSettingsInfoPermissions { response in
             switch response {
             case .success(let response):
@@ -104,7 +100,7 @@ final class WidgetPresentationService {
         }
     }
     
-    private func getPremuimStatus(completion: @escaping ((Bool) -> ())) {
+    private func getPremuimStatus(completion: @escaping BoolHandler) {
         serverService.permissions { response in
             switch response {
             case .success(let response):

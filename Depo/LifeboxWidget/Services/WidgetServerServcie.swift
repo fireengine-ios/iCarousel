@@ -15,6 +15,12 @@ protocol RequestParameters {
 }
 
 final class WidgetServerService {
+    
+    static let shared = WidgetServerService(
+        tokenStorage: TokenKeychainStorage(),
+        sessionManager: SessionManager.customDefault
+    )
+    
     enum ServerEnvironment {
         case test
         case preProduction
@@ -129,7 +135,7 @@ final class WidgetServerService {
     
     func getPeopleInfo(handler: @escaping ResponseHandler<PeopleResponse>) {
         sessionManager
-            .request("\(Self.baseShortUrlString)/api/person/page?pageSize=4&pageNumber=0")
+            .request("\(Self.baseShortUrlString)/api/person/page?pageSize=3&pageNumber=0")
             .customValidate()
             .responseData { response in
                 switch response.result {
@@ -144,6 +150,25 @@ final class WidgetServerService {
                     handler(.failed(error))
                 }
             }
+    }
+    
+    func loadImage(url: URL?, completion: @escaping ValueHandler<UIImage?>) -> URLSessionTask? {
+        guard let trimmedURL = url?.byTrimmingQuery else {
+            completion(nil)
+            return nil
+        }
+        
+        return sessionManager
+                .request(trimmedURL)
+                .customValidate()
+                .responseData(completionHandler: { dataResponse in
+                    guard let data = dataResponse.value, let image = UIImage(data: data) else {
+                        completion(nil)
+                        return
+                    }
+                    completion(image)
+                })
+                .task
     }
 }
 
@@ -260,5 +285,18 @@ struct ServerResponse {
     
     struct PeopleResponse: Codable {
         var personInfos = [PeopleInfo]()
+    }
+}
+
+extension URL {
+    private static let tempURLExpirationDateKey = "temp_url_expires"
+    
+    
+    var byTrimmingQuery: URL? {
+        if let substring = absoluteString.split(separator: "?").first {
+            let stringValue = String(substring)
+            return URL(string: stringValue)
+        }
+        return nil
     }
 }
