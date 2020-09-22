@@ -62,18 +62,18 @@ struct WidgetProvider: TimelineProvider {
         }
         
         // unysnced items status enter
-        WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
-            if hasUnsynced {
-                //TODO: check if autosync is on/off in shared group user defaults
-                entries.append(WidgetAutoSyncEntry(hasUnsynced: true, isSyncEnabled: true, date: todayDate))
-            }
-            group.leave()
-        }
+//        WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
+//            if hasUnsynced {
+//                //TODO: check if autosync is on/off in shared group user defaults
+//                entries.append(WidgetAutoSyncEntry(hasUnsynced: true, isSyncEnabled: true, date: todayDate))
+//            }
+//            group.leave()
+//        }
 
         // user life capacity
         WidgetPresentationService.shared.getStorageQuota(
             completion: { usedPersentage in
-                if usedPersentage > 0 {
+                if usedPersentage >= 75 {
                     entries.append(WidgetQuotaEntry(usedPercentage: usedPersentage, date: todayDate))
                 }
                 group.leave()
@@ -82,7 +82,7 @@ struct WidgetProvider: TimelineProvider {
 
         // user device capactity
         WidgetPresentationService.shared.getDeviceStorageQuota { usedPersentage in
-            if usedPersentage > 50 {
+            if usedPersentage >= 75 {
                 let date = Calendar.current.date(byAdding: .minute, value: timeInterval, to: todayDate)!
                 entries.append(WidgetDeviceQuotaEntry(usedPersentage: usedPersentage, date: date))
                 timeInterval += Self.timeStep
