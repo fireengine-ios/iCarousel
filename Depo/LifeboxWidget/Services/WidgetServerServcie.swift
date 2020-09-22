@@ -15,6 +15,12 @@ protocol RequestParameters {
 }
 
 final class WidgetServerService {
+    
+    static let shared = WidgetServerService(
+        tokenStorage: TokenKeychainStorage(),
+        sessionManager: SessionManager.customDefault
+    )
+    
     enum ServerEnvironment {
         case test
         case preProduction
@@ -126,6 +132,39 @@ final class WidgetServerService {
             }
         }
     }
+    
+    func getPeopleInfo(handler: @escaping ResponseHandler<PeopleResponse>) {
+        sessionManager
+            .request("\(Self.baseShortUrlString)/api/person/page?pageSize=3&pageNumber=0")
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    do {
+                        let object = try JSONDecoder().decode(PeopleResponse.self, from: data)
+                        handler(.success(object))
+                    } catch let error {
+                        handler(.failed(error))
+                    }
+                case .failure(let error):
+                    handler(.failed(error))
+                }
+            }
+    }
+    
+    func loadImage(url: URL, completion: @escaping ValueHandler<UIImage?>) -> URLSessionTask? {
+        return sessionManager
+                .request(url)
+                .customValidate()
+                .responseData(completionHandler: { dataResponse in
+                    guard let data = dataResponse.value, let image = UIImage(data: data) else {
+                        completion(nil)
+                        return
+                    }
+                    completion(image)
+                })
+                .task
+    }
 }
 
 extension WidgetServerService: RequestAdapter {
@@ -144,6 +183,8 @@ typealias QuotaInfoResponse = ServerResponse.QuotaInfoResponse
 typealias PermissionsResponse = ServerResponse.PermissionsResponse
 typealias ContantBackupResponse = ServerResponse.ContantBackupResponse
 typealias SettingsInfoPermissionsResponse = ServerResponse.SettingsInfoPermissionsResponse
+typealias PeopleResponse = ServerResponse.PeopleResponse
+typealias PeopleInfo = ServerResponse.PeopleInfo
 
 struct ServerResponse {
     final class QuotaInfoResponse: ObjectRequestResponse {
@@ -224,5 +265,33 @@ struct ServerResponse {
         let duplicatesNumber: Int
         let deletedNumber: Int
         let date: Date?
+    }
+    
+    struct PeopleInfo: Codable {
+        var id: Int64?
+        var ugglaId: String?
+        var name: String?
+        var thumbnail: URL?
+        var visible: Bool?
+        var demo: Bool?
+        var rank: Int64?
+        var alternateThumbnail: URL?
+    }
+    
+    struct PeopleResponse: Codable {
+        var personInfos = [PeopleInfo]()
+    }
+}
+
+extension URL {
+    private static let tempURLExpirationDateKey = "temp_url_expires"
+    
+    
+    var byTrimmingQuery: URL? {
+        if let substring = absoluteString.split(separator: "?").first {
+            let stringValue = String(substring)
+            return URL(string: stringValue)
+        }
+        return nil
     }
 }

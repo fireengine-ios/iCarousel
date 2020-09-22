@@ -6,13 +6,13 @@
 //  Copyright © 2020 LifeTech. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreGraphics
-import Alamofire
 
 class UserInfo {
-    var isFIREnabled: Bool = false
-    var isPremiumUser: Bool = false
+    var isFIREnabled = false
+    var isPremiumUser = false
+    var images = [UIImage]()
 }
 
 final class WidgetPresentationService {
@@ -20,15 +20,10 @@ final class WidgetPresentationService {
     
     var isAuthorized: Bool { serverService.isAuthorized }
 
-    private let serverService = WidgetServerService(
-        tokenStorage: TokenKeychainStorage(),
-        sessionManager: SessionManager.customDefault
-    )
-    
+    private let serverService = WidgetServerService.shared
     private let photoLibraryService = WidgetPhotoLibraryObserver.shared
-    
 
-    func getStorageQuota(completion: @escaping ((Int) -> ()), fail: @escaping VoidHandler) {
+    func getStorageQuota(completion: @escaping ValueHandler<Int>, fail: @escaping VoidHandler) {
         serverService.getQuotaInfo { response in
             switch response {
             case .success(let quota):
@@ -47,7 +42,7 @@ final class WidgetPresentationService {
         }
     }
     
-    func getDeviceStorageQuota(completion: @escaping ((Int) -> ())){
+    func getDeviceStorageQuota(completion: @escaping ValueHandler<Int>){
         let fileURL = URL(fileURLWithPath: NSHomeDirectory() as String)
         do {
             let values = try fileURL.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey, .volumeTotalCapacityKey])
@@ -63,28 +58,44 @@ final class WidgetPresentationService {
         }
     }
     
-    func getContactBackupStatus(completion: @escaping ((ContantBackupResponse) -> ()), fail: @escaping VoidHandler) {
+    func getContactBackupStatus(completion: @escaping ValueHandler<ContantBackupResponse>, fail: @escaping VoidHandler) {
         serverService.getBackUpStatus(completion: completion, fail: fail)
     }
     
-    func getPremiumStatus(completion: @escaping ((UserInfo) -> ())) {
-        let premuimDate = UserInfo()
+    func getPremiumStatus(completion: @escaping ValueHandler<UserInfo>) {
+        let userInfo = UserInfo()
         let group = DispatchGroup()
         
         group.enter()
         group.enter()
         
-        group.notify(queue: .main) {
-            completion(premuimDate)
+        group.notify(queue: .global()) { [weak self] in
+            if userInfo.isPremiumUser && userInfo.isFIREnabled {
+                self?.getPeopleInfo { [weak self] peopleInfos in
+                    self?.loadImages(completion: { images in
+                        userInfo.images = images
+                        DispatchQueue.main.async {
+                            completion(userInfo)
+                        }
+                    })
+                }
+            } else {
+                //show only placeholders
+                userInfo.images = [UIImage(named: "user-3")!, UIImage(named: "user-2")!, UIImage(named: "user-1")!]
+                DispatchQueue.main.async {
+                    completion(userInfo)
+                }
+            }
+            
         }
 
         getFaceImageAllowance { face in
-            premuimDate.isFIREnabled = face
+            userInfo.isFIREnabled = face
             group.leave()
         }
         
         getPremuimStatus { premium in
-            premuimDate.isPremiumUser = premium
+            userInfo.isPremiumUser = premium
             group.leave()
         }
     }
@@ -104,7 +115,7 @@ final class WidgetPresentationService {
         }
     }
     
-    private func getPremuimStatus(completion: @escaping ((Bool) -> ())) {
+    private func getPremuimStatus(completion: @escaping BoolHandler) {
         serverService.permissions { response in
             switch response {
             case .success(let response):
@@ -112,6 +123,30 @@ final class WidgetPresentationService {
             case .failed:
                 completion(false)
             }
+        }
+    }
+    
+    private func getPeopleInfo(completion: @escaping ValueHandler<[PeopleInfo]>) {
+        serverService.getPeopleInfo { result in
+            switch result {
+            case .success(let response):
+                completion(response.personInfos)
+            case .failed:
+                completion([])
+            }
+        }
+    }
+    
+    private func loadImages(completion: @escaping ValueHandler<[UIImage]>) {
+        getPeopleInfo { peopleInfos in
+            //TODO: Need load thumbnails
+            if peopleInfos.count == 3 {
+                completion([UIImage(named: "user-3")!, UIImage(named: "user-2")!, UIImage(named: "user-1")!])
+            } else {
+                completion([UIImage(named: "user-3")!, UIImage(named: "user-2")!, UIImage(named: "plusIcon")!])
+            }
+//            let urls = peopleInfos.map { $0.thumbnail ?? $0.alternateThumbnail }
+//            WidgetImageLoader().loadImage(urls: urls, completion: completion)
         }
     }
 }

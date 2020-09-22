@@ -39,7 +39,7 @@ struct WidgetProvider: TimelineProvider {
         }
     }
     
-    private func refreshEntries(completion: @escaping (([WidgetBaseEntry]) -> ())){
+    private func refreshEntries(completion: @escaping (([WidgetBaseEntry]) -> ())) {
         let todayDate = Date()
         
         var entries: [WidgetBaseEntry] = []
@@ -73,7 +73,7 @@ struct WidgetProvider: TimelineProvider {
         // user life capacity
         WidgetPresentationService.shared.getStorageQuota(
             completion: { usedPersentage in
-                if usedPersentage > 0 {
+                if usedPersentage >= 75 {
                     entries.append(WidgetQuotaEntry(usedPercentage: usedPersentage, date: todayDate))
                 }
                 group.leave()
@@ -82,7 +82,7 @@ struct WidgetProvider: TimelineProvider {
 
         // user device capactity
         WidgetPresentationService.shared.getDeviceStorageQuota { usedPersentage in
-            if usedPersentage > 50 {
+            if usedPersentage >= 75 {
                 let date = Calendar.current.date(byAdding: .minute, value: timeInterval, to: todayDate)!
                 entries.append(WidgetDeviceQuotaEntry(usedPersentage: usedPersentage, date: date))
                 timeInterval += Self.timeStep
@@ -115,6 +115,7 @@ struct WidgetProvider: TimelineProvider {
             let entry = WidgetUserInfoEntry(
                 isFIREnabled: response.isFIREnabled,
                 isPremiumUser: response.isPremiumUser,
+                images: response.images,
                 date: date
             )
             entries.append(entry)

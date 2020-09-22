@@ -49,10 +49,12 @@ final class WidgetContactBackupEntry: WidgetBaseEntry {
 final class WidgetUserInfoEntry: WidgetBaseEntry {
     let isFIREnabled: Bool
     let isPremiumUser: Bool
+    let images: [UIImage]
 
-    init(isFIREnabled: Bool, isPremiumUser: Bool, date: Date) {
+    init(isFIREnabled: Bool, isPremiumUser: Bool, images: [UIImage], date: Date) {
         self.isFIREnabled = isFIREnabled
         self.isPremiumUser = isPremiumUser
+        self.images = images
         super.init(date: date)
     }
 }

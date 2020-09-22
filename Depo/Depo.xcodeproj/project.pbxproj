@@ -5239,6 +5239,7 @@
 		98AA104523585E0C00B12485 /* CampaignDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AA104423585E0C00B12485 /* CampaignDetailViewController.xib */; };
 		98AA104623585E0C00B12485 /* CampaignDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AA104423585E0C00B12485 /* CampaignDetailViewController.xib */; };
 		98AA104723585E0C00B12485 /* CampaignDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98AA104423585E0C00B12485 /* CampaignDetailViewController.xib */; };
+		98AE8B83251A1EDE002401F8 /* WidgetImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE8B7F251A1EDE002401F8 /* WidgetImageLoader.swift */; };
 		98B01C76206BCD7300DD78C7 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */; };
 		98B01C77206BCD7300DD78C7 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */; };
 		98B01C79206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */; };
@@ -13363,6 +13364,7 @@
 		98AA10402358549A00B12485 /* CampaignIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignIntroView.swift; sourceTree = "<group>"; };
 		98AA10422358597800B12485 /* CampaingnInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaingnInfoView.swift; sourceTree = "<group>"; };
 		98AA104423585E0C00B12485 /* CampaignDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CampaignDetailViewController.xib; sourceTree = "<group>"; };
+		98AE8B7F251A1EDE002401F8 /* WidgetImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetImageLoader.swift; sourceTree = "<group>"; };
 		98B01C75206BCD7300DD78C7 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		98B01C78206BD04600DD78C7 /* AnalyticsServiceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceConstants.swift; sourceTree = "<group>"; };
 		98BB909924D8274900C4D246 /* PhotoEditViewUIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditViewUIManager.swift; sourceTree = "<group>"; };
@@ -19901,6 +19903,7 @@
 				B558278B24FE90C40039DD11 /* WidgetServerServcie.swift */,
 				B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */,
 				B5BF40B12514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift */,
+				98AE8B7F251A1EDE002401F8 /* WidgetImageLoader.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -23422,7 +23425,7 @@
 					B58936C024FA773E00E3FA9C = {
 						CreatedOnToolsVersion = 12.0;
 						DevelopmentTeam = 7A7F3AW7RP;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					CE1BE921204831CD0074BDDC = {
 						CreatedOnToolsVersion = 9.2;
@@ -30671,6 +30674,7 @@
 				B5358C7D2501417F0005FCAD /* ContactSyncSDK.m in Sources */,
 				B58936EB24FA905F00E3FA9C /* SharedConstants.swift in Sources */,
 				B58BF2D924FB95B700CBE2A7 /* TokenKeychainStorage.swift in Sources */,
+				98AE8B83251A1EDE002401F8 /* WidgetImageLoader.swift in Sources */,
 				B5358C712501415C0005FCAD /* AbstractHelper.m in Sources */,
 				B5358C782501416B0005FCAD /* BackupStats.m in Sources */,
 				B5BF43DB2514D43A00B0EFEB /* NSManagedObjectContext+Extensions.swift in Sources */,
@@ -39830,7 +39834,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = d2.1.8;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
@@ -39843,6 +39847,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "lifebox widget dev";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
