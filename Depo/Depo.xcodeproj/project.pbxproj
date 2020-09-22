@@ -14165,6 +14165,7 @@
 		CEFFA8EE21AFC21400B34F36 /* SegmentedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedController.swift; sourceTree = "<group>"; };
 		CEFFA8F421B0089800B34F36 /* ViewSortStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSortStorage.swift; sourceTree = "<group>"; };
 		CF01729323D00B9F00C0B0DE /* NetmeraCustomUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraCustomUser.swift; sourceTree = "<group>"; };
+		CF57972A251A0A890085DDC1 /* LifeboxWidgetExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxWidgetExtensionRelease.entitlements; sourceTree = "<group>"; };
 		CF693179CA606AC2BA6BD04E /* Pods-LifeTech_BilloProviderUI.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloProviderUI.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_BilloProviderUI/Pods-LifeTech_BilloProviderUI.enterprise.xcconfig"; sourceTree = "<group>"; };
 		CF71458B24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayStickerDownloadManager.swift; sourceTree = "<group>"; };
 		CF7145A224B597A700D83E60 /* ContactListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListDetailViewController.swift; sourceTree = "<group>"; };
@@ -14783,8 +14784,6 @@
 		051E1DEA19CAC2F900FD1E03 = {
 			isa = PBXGroup;
 			children = (
-				B59B650A25065808003F6BD6 /* LifeboxWidgetExtensionDebug.entitlements */,
-				B58BF2C224FAF1B100CBE2A7 /* LifeboxWidgetExtension.entitlements */,
 				051E1DFC19CAC2F900FD1E03 /* Depo */,
 				CE79E4A61F695DA200C1F151 /* Depo_LifeTechUITests */,
 				B54BFF4A202C734C0018AF82 /* Shared */,
@@ -20122,6 +20121,9 @@
 		B58936C624FA773E00E3FA9C /* LifeboxWidget */ = {
 			isa = PBXGroup;
 			children = (
+				CF57972A251A0A890085DDC1 /* LifeboxWidgetExtensionRelease.entitlements */,
+				B59B650A25065808003F6BD6 /* LifeboxWidgetExtensionDebug.entitlements */,
+				B58BF2C224FAF1B100CBE2A7 /* LifeboxWidgetExtension.entitlements */,
 				B5358C6825011AB20005FCAD /* Helpers */,
 				B5358C6725011A910005FCAD /* Services */,
 				B558276624FE25420039DD11 /* WidgetConfiguration */,
@@ -39864,7 +39866,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = LifeboxWidgetExtensionRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_STYLE = Manual;
