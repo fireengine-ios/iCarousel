@@ -12,7 +12,7 @@ import CoreGraphics
 class UserInfo {
     var isFIREnabled = false
     var isPremiumUser = false
-    var peopleInfos = [PeopleInfo]()
+    var images = [UIImage?]()
 }
 
 final class WidgetPresentationService {
@@ -61,31 +61,44 @@ final class WidgetPresentationService {
         serverService.getBackUpStatus(completion: completion, fail: fail)
     }
     
-    func getPremiumStatus(completion: @escaping ((UserInfo) -> ())) {
-        let premuimDate = UserInfo()
+    func getPremiumStatus(completion: @escaping ValueHandler<UserInfo>) {
+        let userInfo = UserInfo()
         let group = DispatchGroup()
         
         group.enter()
         group.enter()
-        group.enter()
         
-        group.notify(queue: .main) {
-            completion(premuimDate)
+        group.notify(queue: .main) { [weak self] in
+            if userInfo.isPremiumUser && userInfo.isFIREnabled {
+                self?.getPeopleInfo { [weak self] peopleInfos in
+                    self?.loadImages(completion: { images in
+                        userInfo.images = images
+                        completion(userInfo)
+                    })
+                }
+            } else {
+                //show only placeholders
+                userInfo.images = [nil, nil, nil]
+                completion(userInfo)
+            }
+            
         }
 
         getFaceImageAllowance { face in
-            premuimDate.isFIREnabled = face
+            userInfo.isFIREnabled = face
             group.leave()
         }
         
         getPremuimStatus { premium in
-            premuimDate.isPremiumUser = premium
+            userInfo.isPremiumUser = premium
             group.leave()
         }
-        
+    }
+    
+    private func loadImages(completion: @escaping ValueHandler<[UIImage?]>) {
         getPeopleInfo { peopleInfos in
-            premuimDate.peopleInfos = peopleInfos
-            group.leave()
+            let urls = peopleInfos.map { $0.thumbnail ?? $0.alternateThumbnail }
+            WidgetImageLoader().loadImage(urls: urls, completion: completion)
         }
     }
     

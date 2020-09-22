@@ -39,7 +39,7 @@ struct WidgetProvider: TimelineProvider {
         }
     }
     
-    private func refreshEntries(completion: @escaping (([WidgetBaseEntry]) -> ())){
+    private func refreshEntries(completion: @escaping (([WidgetBaseEntry]) -> ())) {
         let todayDate = Date()
         
         var entries: [WidgetBaseEntry] = []
@@ -104,7 +104,7 @@ struct WidgetProvider: TimelineProvider {
             let entry = WidgetUserInfoEntry(
                 isFIREnabled: response.isFIREnabled,
                 isPremiumUser: response.isPremiumUser,
-                peopleInfos: response.peopleInfos,
+                images: response.images,
                 date: date
             )
             entries.append(entry)

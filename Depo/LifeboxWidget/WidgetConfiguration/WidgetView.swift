@@ -191,29 +191,31 @@ struct WidgetFaceRecognitionSmallView: View {
     let entry: WidgetUserInfoEntry
     var body: some View {
         if entry.isPremiumUser && entry.isFIREnabled {
-            if entry.peopleInfos.count > 2 {
+            if entry.images.count > 2 {
                 WidgetEntrySmallView(imageName: "",
                                      title: TextConstants.widgetRule71SmallTitle,
                                      description: TextConstants.widgetRule71SmallDetail,
                                      titleButton: TextConstants.widgetRule71SmallButton,
-                                     peopleInfos: entry.peopleInfos)
+                                     peopleThumbnails: entry.images)
             } else {
                 WidgetEntrySmallView(imageName: "",
                                      title: TextConstants.widgetRule72SmallTitle,
                                      description: TextConstants.widgetRule72SmallDetail,
                                      titleButton: TextConstants.widgetRule72SmallButton,
-                                     peopleInfos: entry.peopleInfos)
+                                     peopleThumbnails: entry.images)
             }
         } else if entry.isPremiumUser && !entry.isFIREnabled {
             WidgetEntrySmallView(imageName: "",
                                  title: "",
                                  description: TextConstants.widgetRule73SmallDetail,
-                                 titleButton: TextConstants.widgetRule73SmallButton)
+                                 titleButton: TextConstants.widgetRule73SmallButton,
+                                 peopleThumbnails: entry.images)
         } else {
             WidgetEntrySmallView(imageName: "",
                                  title: "",
                                  description: TextConstants.widgetRule74SmallDetail,
-                                 titleButton: TextConstants.widgetRule74SmallButton)
+                                 titleButton: TextConstants.widgetRule74SmallButton,
+                                 peopleThumbnails: entry.images)
         }
     }
 }
@@ -222,31 +224,31 @@ struct WidgetFaceRecognitionMediumView: View {
     let entry: WidgetUserInfoEntry
     var body: some View {
         if entry.isPremiumUser && entry.isFIREnabled {
-            if entry.peopleInfos.count > 2 {
+            if entry.images.count > 2 {
                 WidgetEntrySmallView(imageName: "",
                                      title: TextConstants.widgetRule71MediumTitle,
                                      description: TextConstants.widgetRule71MediumDetail,
                                      titleButton: TextConstants.widgetRule71MediumButton,
-                                     peopleInfos: entry.peopleInfos)
+                                     peopleThumbnails: entry.images)
             } else {
                 WidgetEntrySmallView(imageName: "",
                                      title: TextConstants.widgetRule72MediumTitle,
                                      description: TextConstants.widgetRule72MediumDetail,
                                      titleButton: TextConstants.widgetRule72MediumButton,
-                                     peopleInfos: entry.peopleInfos)
+                                     peopleThumbnails: entry.images)
             }
         } else if entry.isPremiumUser && !entry.isFIREnabled {
             WidgetEntryMediumView(imageName: "",
                                   title: "",
                                   description: TextConstants.widgetRule73MediumDetail,
                                   titleButton: TextConstants.widgetRule73MediumButton,
-                                  peopleInfos: nil)
+                                  peopleThumbnails: entry.images)
         } else {
             WidgetEntryMediumView(imageName: "",
                                   title: "",
                                   description: TextConstants.widgetRule74MediumDetail,
                                   titleButton: TextConstants.widgetRule74MediumButton,
-                                  peopleInfos: nil)
+                                  peopleThumbnails: entry.images)
         }
     }
 }
@@ -260,7 +262,7 @@ struct WidgetEntrySmallView : View {
     var description: String
     var titleButton: String
     var percentage: CGFloat?
-    var peopleInfos: [PeopleInfo]?
+    var peopleThumbnails: [UIImage?]?
     
     var body: some View {
         let colors = [
@@ -274,8 +276,8 @@ struct WidgetEntrySmallView : View {
                         .frame(height: 12, alignment: .center)
                     
                 } else {
-                    if let peopleInfos = peopleInfos {
-                        PremiumPeopleAlbums(peopleInfos: peopleInfos)
+                    if let thumbnails = peopleThumbnails {
+                        PremiumPeopleAlbums(thumbnails: thumbnails)
                             .frame(width: geo.size.height/7, height: geo.size.height/7, alignment: .leading)
                             .padding(.top, 5)
                     } else {
@@ -294,7 +296,7 @@ struct WidgetEntrySmallView : View {
                     .font(.system(size: 13, weight: .regular, design: .default))
                 Spacer()
                 WidgetButton(title: titleButton, cornerRadius: 12)
-                    .frame(width: .infinity, height: 36, alignment: .center)
+                    .frame(width: geo.size.width - 32, height: 36, alignment: .center)
             }
             .padding(.all, 16)
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
@@ -310,7 +312,7 @@ struct WidgetEntryMediumView : View {
     var titleButton: String
     var percentage: CGFloat?
     var countSyncFiles: Int?
-    var peopleInfos: [PeopleInfo]?
+    var peopleThumbnails: [UIImage?]?
     
     let colors = [
         Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
@@ -319,15 +321,15 @@ struct WidgetEntryMediumView : View {
     
     var body: some View {
         GeometryReader { geo in
-            VStack(alignment: .leading, spacing: nil) {
-                HStack(spacing: 8) {
+            VStack(alignment: .center, spacing: nil) {
+                HStack(spacing: peopleThumbnails == nil ? 8 : -30) {
                     if let percentage = percentage {
                         ProgressBarMedium(progress: percentage)
                             .frame(width: 57, height: 57, alignment: .leading)
 //                            .padding(.all, 10)
                     } else {
-                        if let peopleInfos = peopleInfos {
-                            PremiumPeopleAlbumsMedium(peopleInfos: peopleInfos)
+                        if let thumbnails = peopleThumbnails {
+                            PremiumPeopleAlbumsMedium(thumbnails: thumbnails)
                                 .frame(width: geo.size.height, height: geo.size.height / 2.5, alignment: .leading)
                         } else {
                             Image(imageName)
@@ -357,7 +359,7 @@ struct WidgetEntryMediumView : View {
                 }
                 Spacer()
                 WidgetButton(title: titleButton, cornerRadius: 12)
-                    .frame(width: .infinity, height: 44, alignment: .leading)
+                    .frame(width: geo.size.width - 32, height: 44, alignment: .leading)
             }
             .padding(EdgeInsets(top: 8, leading: 16, bottom: 16, trailing: 16))
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
@@ -477,88 +479,48 @@ struct ProgressBarMedium: View {
 // MARK: - PremiumPeopleAlbums
 struct PremiumPeopleAlbums: View {
     let placeholders = ["user-3", "user-2", "user-1"]
-    var peopleInfos: [PeopleInfo]?
+    var thumbnails = [UIImage?]()
     var body: some View {
         HStack(alignment: .center, spacing: -8) {
-            if let urls = peopleInfos?.map { $0.thumbnail ?? $0.alternateThumbnail } {
-                ForEach(urls.indices, id: \.self) { index in
-                    AsyncImage(url: urls[index],
-                               placeholder: Image(placeholders[index]),
-                               configuration: { $0.resizable() })
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.white, lineWidth: 1))
-                        .frame(width: 24, height: 24, alignment: .center)
-                    
-                }
-            } else {
-                ForEach(placeholders.indices, id: \.self) { index in
-                    Image(placeholders[index])
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.white, lineWidth: 1))
-                        .frame(width: 24, height: 24, alignment: .center)
-                }
+            ForEach(thumbnails.indices, id: \.self) { index in
+                image(for: thumbnails[index], placeholder: placeholders[index])
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                    .frame(width: 24, height: 24, alignment: .center)
             }
         }
+    }
+    
+    func image(for thumbnail: UIImage?, placeholder: String) -> Image {
+        if let thumbnail = thumbnail {
+            return Image(uiImage: thumbnail)
+        }
+        return Image(placeholder)
     }
 }
 
 struct PremiumPeopleAlbumsMedium: View {
     let placeholders = ["user-3", "user-2", "user-1"]
-    var peopleInfos: [PeopleInfo]?
+    var thumbnails = [UIImage?]()
     var body: some View {
         HStack(alignment: .center, spacing: -25) {
-            if let urls = peopleInfos?.map { $0.thumbnail ?? $0.alternateThumbnail } {
-                ForEach(urls.indices, id: \.self) { index in
-                    AsyncImage(url: urls[index],
-                               placeholder: Image(placeholders[index]),
-                               configuration: { $0.resizable() })
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                        .frame(width: 57, height: 57, alignment: .center)
-                    
-                }
-            } else {
-                ForEach(placeholders.indices, id: \.self) { index in
-                    Image(placeholders[index])
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(Circle())
-                        .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                        .frame(width: 57, height: 57, alignment: .center)
-                }
+            ForEach(thumbnails.indices, id: \.self) { index in
+                image(for: thumbnails[index], placeholder: placeholders[index])
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                    .frame(width: 57, height: 57, alignment: .center)
             }
         }
     }
-}
-
-struct AsyncImage<Placeholder: View>: View {
-    @ObservedObject private var loader: WidgetImageLoader
-    private let placeholder: Placeholder?
-    private let configuration: (Image) -> Image
     
-    init(url: URL?, placeholder: Placeholder? = nil, @ViewBuilder configuration: @escaping (Image) -> Image = { $0 }) {
-        loader = WidgetImageLoader(url: url)
-        self.placeholder = placeholder
-        self.configuration = configuration
-    }
-    
-    var body: some View {
-        image
-            .onAppear(perform: loader.load)
-            .onDisappear(perform: loader.cancel)
-    }
-    
-    private var image: some View {
-        Group {
-            if let image = loader.image {
-                configuration(Image(uiImage: image))
-            } else {
-                placeholder
-            }
+    func image(for thumbnail: UIImage?, placeholder: String) -> Image {
+        if let thumbnail = thumbnail {
+            return Image(uiImage: thumbnail)
         }
+        return Image(placeholder)
     }
 }

@@ -152,14 +152,9 @@ final class WidgetServerService {
             }
     }
     
-    func loadImage(url: URL?, completion: @escaping ValueHandler<UIImage?>) -> URLSessionTask? {
-        guard let trimmedURL = url?.byTrimmingQuery else {
-            completion(nil)
-            return nil
-        }
-        
+    func loadImage(url: URL, completion: @escaping ValueHandler<UIImage?>) -> URLSessionTask? {
         return sessionManager
-                .request(trimmedURL)
+                .request(url)
                 .customValidate()
                 .responseData(completionHandler: { dataResponse in
                     guard let data = dataResponse.value, let image = UIImage(data: data) else {
