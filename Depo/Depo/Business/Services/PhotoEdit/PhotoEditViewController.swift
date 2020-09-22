@@ -50,7 +50,10 @@ final class PhotoEditViewController: ViewController, NibInit {
     
     private lazy var adjustmentManager: AdjustmentManager = {
         let types = AdjustmentViewType.allCases.flatMap { $0.adjustmentTypes }
-        return AdjustmentManager(types: types)
+        let heightMultiplier = originalImage.size.height / originalPreviewImage.size.height
+        let widthMultiplier = originalImage.size.width / originalPreviewImage.size.width
+        let originalMultiplier = max(heightMultiplier, widthMultiplier)
+        return AdjustmentManager(types: types, originalMultiplier: Float(originalMultiplier))
     }()
     
     private lazy var adjustManager = PhotoEditAdjustManager(delegate: self)
@@ -225,15 +228,15 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
         filterManager.saveHisory()
         
         let croppedImage = adjustManager.getCroppedImage(for: originalImage)
-        prepareEditPhoto(sourceImage: croppedImage, completion: completion)
+        prepareEditPhoto(sourceImage: croppedImage, isOriginal: true, completion: completion)
     }
     
-    private func prepareEditPhoto(sourceImage: UIImage, completion: @escaping ValueHandler<UIImage>) {
+    private func prepareEditPhoto(sourceImage: UIImage, isOriginal: Bool, completion: @escaping ValueHandler<UIImage>) {
         switch firstChanges {
         case .none:
             completion(sourceImage)
         case .adjustments:
-            adjustmentManager.applyAll(sourceImage: sourceImage) { [weak self] image in
+            adjustmentManager.applyAll(sourceImage: sourceImage, isOriginal: isOriginal) { [weak self] image in
                 guard let self = self else {
                     return
                 }
@@ -254,7 +257,7 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     
     func needShowAdjustmentView(for type: AdjustmentViewType) {
         guard type != .adjust else {
-            prepareEditPhoto(sourceImage: self.originalPreviewImage) { [weak self] image in
+            prepareEditPhoto(sourceImage: self.originalPreviewImage, isOriginal: false) { [weak self] image in
                 guard let self = self else {
                     return
                 }

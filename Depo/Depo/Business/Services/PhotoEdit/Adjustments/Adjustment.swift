@@ -62,6 +62,7 @@ protocol AdjustmentProtocol {
     var modified: Bool { get }
     
     func applyOn(image: UIImage, onFinished: @escaping ValueHandler<UIImage>)
+    func updateCurrentValue(isOriginal: Bool)
 }
 
 
@@ -89,4 +90,7 @@ final class Adjustment: AdjustmentProtocol {
         thirdPartyAdjustment.applyOn(image: image, onFinished: onFinished)
     }
 
+    func updateCurrentValue(isOriginal: Bool) {
+        parameters.filter { $0.currentValue != $0.defaultValue }.forEach { $0.updateValue(isOriginal: isOriginal) }
+    }
 }
