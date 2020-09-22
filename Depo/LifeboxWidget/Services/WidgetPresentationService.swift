@@ -12,7 +12,7 @@ import CoreGraphics
 class UserInfo {
     var isFIREnabled = false
     var isPremiumUser = false
-    var images = [UIImage?]()
+    var images = [UIImage]()
 }
 
 final class WidgetPresentationService {
@@ -69,18 +69,22 @@ final class WidgetPresentationService {
         group.enter()
         group.enter()
         
-        group.notify(queue: .main) { [weak self] in
+        group.notify(queue: .global()) { [weak self] in
             if userInfo.isPremiumUser && userInfo.isFIREnabled {
                 self?.getPeopleInfo { [weak self] peopleInfos in
                     self?.loadImages(completion: { images in
                         userInfo.images = images
-                        completion(userInfo)
+                        DispatchQueue.main.async {
+                            completion(userInfo)
+                        }
                     })
                 }
             } else {
                 //show only placeholders
-                userInfo.images = [nil, nil, nil]
-                completion(userInfo)
+                userInfo.images = [UIImage(named: "user-3")!, UIImage(named: "user-2")!, UIImage(named: "user-1")!]
+                DispatchQueue.main.async {
+                    completion(userInfo)
+                }
             }
             
         }
@@ -133,10 +137,16 @@ final class WidgetPresentationService {
         }
     }
     
-    private func loadImages(completion: @escaping ValueHandler<[UIImage?]>) {
+    private func loadImages(completion: @escaping ValueHandler<[UIImage]>) {
         getPeopleInfo { peopleInfos in
-            let urls = peopleInfos.map { $0.thumbnail ?? $0.alternateThumbnail }
-            WidgetImageLoader().loadImage(urls: urls, completion: completion)
+            //TODO: Need load thumbnails
+            if peopleInfos.count == 3 {
+                completion([UIImage(named: "user-3")!, UIImage(named: "user-2")!, UIImage(named: "user-1")!])
+            } else {
+                completion([UIImage(named: "user-3")!, UIImage(named: "user-2")!, UIImage(named: "plusIcon")!])
+            }
+//            let urls = peopleInfos.map { $0.thumbnail ?? $0.alternateThumbnail }
+//            WidgetImageLoader().loadImage(urls: urls, completion: completion)
         }
     }
 }

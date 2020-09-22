@@ -269,7 +269,7 @@ struct WidgetEntrySmallView : View {
     var description: String
     var titleButton: String
     var percentage: CGFloat?
-    var peopleThumbnails: [UIImage?]?
+    var peopleThumbnails: [UIImage]?
     
     var body: some View {
         let colors = [
@@ -290,7 +290,7 @@ struct WidgetEntrySmallView : View {
                     } else {
                         Image(imageName)
                             .resizable()
-                            .aspectRatio(contentMode: .fill)
+                            .aspectRatio(contentMode: .fit)
                             .frame(minWidth: 0, maxWidth: 27, minHeight: 0, maxHeight: 27, alignment: .leading)
                     }
                 }
@@ -319,7 +319,7 @@ struct WidgetEntryMediumView : View {
     var titleButton: String
     var percentage: CGFloat?
     var countSyncFiles: Int?
-    var peopleThumbnails: [UIImage?]?
+    var peopleThumbnails: [UIImage]?
     
     let colors = [
         Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
@@ -345,7 +345,7 @@ struct WidgetEntryMediumView : View {
                                 .frame(minWidth: 0, maxWidth: 54, minHeight: 0, maxHeight: 54, alignment: .leading)
                         }
                     }
-                    VStack(alignment: .leading, spacing: nil) {
+                    VStack(alignment: .center, spacing: nil) {
                         Text(title)
                             .foregroundColor(.white)
                             .font(.system(size: 14, weight: .semibold, design: .default)) +
@@ -360,7 +360,7 @@ struct WidgetEntryMediumView : View {
                         }
                         Spacer()
                     }
-                    .padding(.top, 12)
+                    .padding(.top, 16)
                     
                     Spacer()
                 }
@@ -485,12 +485,11 @@ struct ProgressBarMedium: View {
 
 // MARK: - PremiumPeopleAlbums
 struct PremiumPeopleAlbums: View {
-    let placeholders = ["user-3", "user-2", "user-1"]
-    var thumbnails = [UIImage?]()
+    var thumbnails = [UIImage]()
     var body: some View {
         HStack(alignment: .center, spacing: -8) {
             ForEach(thumbnails.indices, id: \.self) { index in
-                image(for: thumbnails[index], placeholder: placeholders[index])
+                Image(uiImage: thumbnails[index])
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .clipShape(Circle())
@@ -499,22 +498,14 @@ struct PremiumPeopleAlbums: View {
             }
         }
     }
-    
-    func image(for thumbnail: UIImage?, placeholder: String) -> Image {
-        if let thumbnail = thumbnail {
-            return Image(uiImage: thumbnail)
-        }
-        return Image(placeholder)
-    }
 }
 
 struct PremiumPeopleAlbumsMedium: View {
-    let placeholders = ["user-3", "user-2", "user-1"]
-    var thumbnails = [UIImage?]()
+    var thumbnails = [UIImage]()
     var body: some View {
         HStack(alignment: .center, spacing: -25) {
             ForEach(thumbnails.indices, id: \.self) { index in
-                image(for: thumbnails[index], placeholder: placeholders[index])
+                Image(uiImage: thumbnails[index])
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .clipShape(Circle())
@@ -522,13 +513,6 @@ struct PremiumPeopleAlbumsMedium: View {
                     .frame(width: 57, height: 57, alignment: .center)
             }
         }
-    }
-    
-    func image(for thumbnail: UIImage?, placeholder: String) -> Image {
-        if let thumbnail = thumbnail {
-            return Image(uiImage: thumbnail)
-        }
-        return Image(placeholder)
     }
 }
 

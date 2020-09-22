@@ -62,13 +62,13 @@ struct WidgetProvider: TimelineProvider {
         }
         
         // unysnced items status enter
-//        WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
-//            if hasUnsynced {
-//                //TODO: check if autosync is on/off in shared group user defaults
-//                entries.append(WidgetAutoSyncEntry(hasUnsynced: true, isSyncEnabled: true, date: todayDate))
-//            }
-//            group.leave()
-//        }
+        WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
+            if hasUnsynced {
+                //TODO: check if autosync is on/off in shared group user defaults
+                entries.append(WidgetAutoSyncEntry(hasUnsynced: true, isSyncEnabled: true, date: todayDate))
+            }
+            group.leave()
+        }
 
         // user life capacity
         WidgetPresentationService.shared.getStorageQuota(

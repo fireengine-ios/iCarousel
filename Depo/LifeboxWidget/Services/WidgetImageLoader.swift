@@ -37,9 +37,9 @@ final class WidgetImageLoader {
     func loadImage(urls: [URL?], completion: @escaping ValueHandler<[UIImage?]>) {
         var images = [UIImage?]()
         urls.forEach { url in
-            let operation = WidgetImageOperation(url: url) { [weak self] image in
+            let operation = WidgetImageOperation(url: url) { image in
                 images.append(image)
-                if self?.operationQueue.operationCount == 0 {
+                if images.count == urls.count {
                     completion(images)
                 }
             }
