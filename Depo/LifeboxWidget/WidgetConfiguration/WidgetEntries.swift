@@ -58,3 +58,15 @@ final class WidgetUserInfoEntry: WidgetBaseEntry {
         super.init(date: date)
     }
 }
+
+final class WidgetAutoSyncEntry: WidgetBaseEntry {
+    let hasUnsynced: Bool
+    let isSyncEnabled: Bool
+    
+    init(hasUnsynced: Bool, isSyncEnabled: Bool, date: Date) {
+        self.hasUnsynced = hasUnsynced
+        self.isSyncEnabled = isSyncEnabled
+        
+        super.init(date: date)
+    }
+}

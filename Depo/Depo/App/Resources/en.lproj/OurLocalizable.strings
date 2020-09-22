@@ -1728,6 +1728,14 @@
 "digicel_feature_cancel_TO" = "Cancel or manage your Lifebox subscription in the My Digicel app";
 "digicel_feature_cancel_VU" = "Cancel or manage your Lifebox subscription in the My Digicel app";
 "digicel_feature_cancel_PG" = "Cancel or manage your Lifebox subscription in the My Digicel app";
+"widget_rule_4_1_small_button" = "Auto sync";
+"widget_rule_4_1_small_detail" = "You have files files wating for sync";
+"widget_rule_4_1_medium_button" = "Auto sync";
+"widget_rule_4_1_medium_detail" = "You have files files wating for sync";
+"widget_rule_4_2_small_button" = "Enable auto sync";
+"widget_rule_4_2_small_detail" = "You have files files wating for sync";
+"widget_rule_4_2_medium_button" = "Enable auto sync";
+"widget_rule_4_2_medium_detail" = "You have files files wating for sync";
 
 "widget_rule_0_small_detail" = "You are not signed in to lifebox";
 "widget_rule_0_small_button" = "Sign in";

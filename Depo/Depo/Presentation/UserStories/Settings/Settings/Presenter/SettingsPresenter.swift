@@ -73,9 +73,11 @@ extension SettingsPresenter: SettingsViewOutput {
                                                     self?.interactor.checkConnectedToNetwork()
                                                 }
         })
+        
         if #available(iOS 14.0, *) {
             WidgetCenter.shared.reloadAllTimelines()
-        } 
+        }
+        
         UIApplication.topController()?.present(controller, animated: false, completion: nil)
     }
     

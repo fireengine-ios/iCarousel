@@ -135,6 +135,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         print("Documents: \(documents)")
+        
+        SharedGroupCoreDataStack.shared.setup {
+            debugLog("SharedGroupCoreDataStack setup is completed")
+        }
     
         setupPushNotifications(with: options)
         AppConfigurator.applicationStarted(with: options)

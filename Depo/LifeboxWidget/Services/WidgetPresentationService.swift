@@ -21,6 +21,7 @@ final class WidgetPresentationService {
     var isAuthorized: Bool { serverService.isAuthorized }
 
     private let serverService = WidgetServerService.shared
+    private let photoLibraryService = WidgetPhotoLibraryObserver.shared
 
     func getStorageQuota(completion: @escaping ValueHandler<Int>, fail: @escaping VoidHandler) {
         serverService.getQuotaInfo { response in
@@ -95,14 +96,11 @@ final class WidgetPresentationService {
         }
     }
     
-    private func loadImages(completion: @escaping ValueHandler<[UIImage?]>) {
-        getPeopleInfo { peopleInfos in
-            let urls = peopleInfos.map { $0.thumbnail ?? $0.alternateThumbnail }
-            WidgetImageLoader().loadImage(urls: urls, completion: completion)
-        }
+    func hasUnsyncedItems(completion: @escaping (Bool) -> ()) {
+        photoLibraryService.hasUnsynced(completion: completion)
     }
     
-    private func getFaceImageAllowance(completion: @escaping BoolHandler) {
+    private func getFaceImageAllowance(completion: @escaping ((Bool) -> ())) {
         serverService.getSettingsInfoPermissions { response in
             switch response {
             case .success(let response):
@@ -132,6 +130,13 @@ final class WidgetPresentationService {
             case .failed:
                 completion([])
             }
+        }
+    }
+    
+    private func loadImages(completion: @escaping ValueHandler<[UIImage?]>) {
+        getPeopleInfo { peopleInfos in
+            let urls = peopleInfos.map { $0.thumbnail ?? $0.alternateThumbnail }
+            WidgetImageLoader().loadImage(urls: urls, completion: completion)
         }
     }
 }

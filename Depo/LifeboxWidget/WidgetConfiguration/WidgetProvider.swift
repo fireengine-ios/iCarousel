@@ -46,6 +46,8 @@ struct WidgetProvider: TimelineProvider {
         var timeInterval = 2
         
         let group = DispatchGroup()
+        // unysnced items status enter
+        group.enter()
         // user life capacity enter
         group.enter()
         // user device capactity enter
@@ -57,6 +59,15 @@ struct WidgetProvider: TimelineProvider {
 
         group.notify(queue: .main) {
             completion(entries)
+        }
+        
+        // unysnced items status enter
+        WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
+            if hasUnsynced {
+                //TODO: check if autosync is on/off in shared group user defaults
+                entries.append(WidgetAutoSyncEntry(hasUnsynced: true, isSyncEnabled: true, date: todayDate))
+            }
+            group.leave()
         }
 
         // user life capacity
