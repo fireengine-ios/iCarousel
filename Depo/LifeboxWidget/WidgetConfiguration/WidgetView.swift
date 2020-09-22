@@ -197,66 +197,66 @@ struct WidgetContactBackedupMediumView: View {
 struct WidgetFaceRecognitionSmallView: View {
     let entry: WidgetUserInfoEntry
     var body: some View {
+        let titles = data(for: entry)
+        WidgetEntrySmallView(imageName: "",
+                             title: titles.title,
+                             description: titles.description,
+                             titleButton: titles.titleButton,
+                             peopleThumbnails: entry.images)
+    }
+    
+    func data(for entry: WidgetUserInfoEntry) -> (title: String, description: String, titleButton: String) {
         if entry.isPremiumUser && entry.isFIREnabled {
             if entry.images.count > 2 {
-                WidgetEntrySmallView(imageName: "",
-                                     title: TextConstants.widgetRule71SmallTitle,
-                                     description: TextConstants.widgetRule71SmallDetail,
-                                     titleButton: TextConstants.widgetRule71SmallButton,
-                                     peopleThumbnails: entry.images)
+                return (title: TextConstants.widgetRule71SmallTitle,
+                        description: TextConstants.widgetRule71SmallDetail,
+                        titleButton: TextConstants.widgetRule71SmallButton)
             } else {
-                WidgetEntrySmallView(imageName: "",
-                                     title: TextConstants.widgetRule72SmallTitle,
-                                     description: TextConstants.widgetRule72SmallDetail,
-                                     titleButton: TextConstants.widgetRule72SmallButton,
-                                     peopleThumbnails: entry.images)
+                return (title: TextConstants.widgetRule72SmallTitle,
+                        description: TextConstants.widgetRule72SmallDetail,
+                        titleButton: TextConstants.widgetRule72SmallButton)
             }
         } else if entry.isPremiumUser && !entry.isFIREnabled {
-            WidgetEntrySmallView(imageName: "",
-                                 title: "",
-                                 description: TextConstants.widgetRule73SmallDetail,
-                                 titleButton: TextConstants.widgetRule73SmallButton,
-                                 peopleThumbnails: entry.images)
-        } else {
-            WidgetEntrySmallView(imageName: "",
-                                 title: "",
-                                 description: TextConstants.widgetRule74SmallDetail,
-                                 titleButton: TextConstants.widgetRule74SmallButton,
-                                 peopleThumbnails: entry.images)
+            return (title: "",
+                    description: TextConstants.widgetRule73SmallDetail,
+                    titleButton: TextConstants.widgetRule73SmallButton)
         }
+        return (title: "",
+                description: TextConstants.widgetRule74SmallDetail,
+                titleButton: TextConstants.widgetRule74SmallButton)
     }
 }
 
 struct WidgetFaceRecognitionMediumView: View {
     let entry: WidgetUserInfoEntry
     var body: some View {
+        let titles = data(for: entry)
+        WidgetEntryMediumView(imageName: "",
+                              title: titles.title,
+                              description: titles.description,
+                              titleButton: titles.titleButton,
+                              peopleThumbnails: entry.images)
+    }
+    
+    func data(for entry: WidgetUserInfoEntry) -> (title: String, description: String, titleButton: String) {
         if entry.isPremiumUser && entry.isFIREnabled {
             if entry.images.count > 2 {
-                WidgetEntrySmallView(imageName: "",
-                                     title: TextConstants.widgetRule71MediumTitle,
-                                     description: TextConstants.widgetRule71MediumDetail,
-                                     titleButton: TextConstants.widgetRule71MediumButton,
-                                     peopleThumbnails: entry.images)
+                return (title: TextConstants.widgetRule71MediumTitle,
+                        description: TextConstants.widgetRule71MediumDetail,
+                        titleButton: TextConstants.widgetRule71MediumButton)
             } else {
-                WidgetEntrySmallView(imageName: "",
-                                     title: TextConstants.widgetRule72MediumTitle,
-                                     description: TextConstants.widgetRule72MediumDetail,
-                                     titleButton: TextConstants.widgetRule72MediumButton,
-                                     peopleThumbnails: entry.images)
+                return (title: TextConstants.widgetRule72MediumTitle,
+                        description: TextConstants.widgetRule72MediumDetail,
+                        titleButton: TextConstants.widgetRule72MediumButton)
             }
         } else if entry.isPremiumUser && !entry.isFIREnabled {
-            WidgetEntryMediumView(imageName: "",
-                                  title: "",
-                                  description: TextConstants.widgetRule73MediumDetail,
-                                  titleButton: TextConstants.widgetRule73MediumButton,
-                                  peopleThumbnails: entry.images)
-        } else {
-            WidgetEntryMediumView(imageName: "",
-                                  title: "",
-                                  description: TextConstants.widgetRule74MediumDetail,
-                                  titleButton: TextConstants.widgetRule74MediumButton,
-                                  peopleThumbnails: entry.images)
+            return (title: "",
+                    description: TextConstants.widgetRule73MediumDetail,
+                    titleButton: TextConstants.widgetRule73MediumButton)
         }
+        return (title: "",
+                description: TextConstants.widgetRule74MediumDetail,
+                titleButton: TextConstants.widgetRule74MediumButton)
     }
 }
 
