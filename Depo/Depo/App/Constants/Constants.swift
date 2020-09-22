@@ -2027,6 +2027,18 @@ struct TextConstants {
     static let widgetRule2MediumDetail = NSLocalizedString("widget_rule_2_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetRule2MediumButton = NSLocalizedString("widget_rule_2_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    //HomeWidget Rule 4.1
+    static let widgetRule41SmallButton = NSLocalizedString("widget_rule_4_1_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule41SmallDetail = NSLocalizedString("widget_rule_4_1_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule41MediumButton = NSLocalizedString("widget_rule_4_1_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule41MediumDetail = NSLocalizedString("widget_rule_4_1_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 4.2
+    static let widgetRule42SmallButton = NSLocalizedString("widget_rule_4_2_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule42SmallDetail = NSLocalizedString("widget_rule_4_2_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule42MediumButton = NSLocalizedString("widget_rule_4_2_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule42MediumDetail = NSLocalizedString("widget_rule_4_2_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     //HomeWidget Rule 5
     
     static let widgetRule5SmallDetail = NSLocalizedString("widget_rule_5_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -2076,63 +2088,4 @@ struct TextConstants {
     
     static let widgetRule74MediumDetail = NSLocalizedString("widget_rule_7_4_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetRule74MediumButton = NSLocalizedString("widget_rule_7_4_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
-    //HomeWidget Rule 4.1
-    static let widgetRule41SmallButton = NSLocalizedString("widget_rule_4_1_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetRule41SmallDetail = NSLocalizedString("widget_rule_4_1_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetRule41MediumButton = NSLocalizedString("widget_rule_4_1_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetRule41MediumDetail = NSLocalizedString("widget_rule_4_1_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
-    //HomeWidget Rule 4.2
-    static let widgetRule42SmallButton = NSLocalizedString("widget_rule_4_2_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetRule42SmallDetail = NSLocalizedString("widget_rule_4_2_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetRule42MediumButton = NSLocalizedString("widget_rule_4_2_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetRule42MediumDetail = NSLocalizedString("widget_rule_4_2_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallSignInText = NSLocalizedString("widget_small_sign_in_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallSignInButton = NSLocalizedString("widget_small_sign_in_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallQuotaTitle = NSLocalizedString("widget_small_quota_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallQuotaSubtitle = NSLocalizedString("widget_small_quota_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallQuotaButton = NSLocalizedString("widget_small_quota_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallDeviceStorageTitle = NSLocalizedString("widget_small_device_storage_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallDeviceStorageSubtitle = NSLocalizedString("widget_small_device_storage_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallDeviceStorageButton = NSLocalizedString("widget_small_device_storage_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallOldContactBackupTitle = NSLocalizedString("widget_small_old_contact_backup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallOldDeviceContactBackupSubtitle = NSLocalizedString("widget_small_old_contact_backup_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallOldContactBackupButton = NSLocalizedString("widget_small_old_contact_backup_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallNoContactBackupTitle = NSLocalizedString("widget_small_no_contact_backup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallNoContactBackupSubtitle = NSLocalizedString("widget_small_no_contact_backup_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallNoContactBackupButton = NSLocalizedString("widget_small_no_contact_backup_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallFaceRecognitionTitle = NSLocalizedString("widget_small_face_recognition_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallFaceRecognitionSubtitle = NSLocalizedString("widget_small_face_recognition_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallFaceRecognitionButton = NSLocalizedString("widget_small_face_recognition_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallFaceRecognitionDisabledFIRTitle = NSLocalizedString("widget_small_face_recognition_disabled_fir_backup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallFaceRecognitionDisabledFIRSubtitle = NSLocalizedString("widget_small_face_recognition_disabled_fir_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallFaceRecognitionDisabledFIRButton = NSLocalizedString("widget_small_face_recognition_disabled_fir_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallFaceRecognitionNeedPremiumTitle = NSLocalizedString("widget_small_face_recognition_need_premium_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallFaceRecognitionNeedPremiumSubtitle = NSLocalizedString("widget_small_face_recognition_need_premium_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetSmallFaceRecognitionNeedPremiumButton = NSLocalizedString("widget_small_face_recognition_need_premium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
-    static let widgetMediumSignInText = NSLocalizedString("widget_medium_sign_in_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumSignInButton = NSLocalizedString("widget_medium_sign_in_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumQuotaTitle = NSLocalizedString("widget_medium_quota_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumQuotaSubtitle = NSLocalizedString("widget_medium_quota_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumQuotaButton = NSLocalizedString("widget_medium_quota_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumDeviceStorageTitle = NSLocalizedString("widget_medium_device_storage_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumDeviceStorageSubtitle = NSLocalizedString("widget_medium_device_storage_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumDeviceStorageButton = NSLocalizedString("widget_medium_device_storage_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumOldContactBackupTitle = NSLocalizedString("widget_medium_old_contact_backup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumOldContactBackupSubtitle = NSLocalizedString("widget_medium_old_contact_backup_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumOldContactBackupButton = NSLocalizedString("widget_medium_old_contact_backup_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumNoContactBackupTitle = NSLocalizedString("widget_medium_no_contact_backup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumNoContactBackupSubtitle = NSLocalizedString("widget_medium_no_contact_backup_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumNoContactBackupButton = NSLocalizedString("widget_medium_no_contact_backup_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumFaceRecognitionTitle = NSLocalizedString("widget_medium_face_recognition_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumFaceRecognitionSubtitle = NSLocalizedString("widget_medium_face_recognition_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumFaceRecognitionButton = NSLocalizedString("widget_medium_face_recognition_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumFaceRecognitionDisabledFIRTitle = NSLocalizedString("widget_medium_face_recognition_disabled_fir_backup_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumFaceRecognitionDisabledFIRSubtitle = NSLocalizedString("widget_medium_face_recognition_disabled_fir_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumFaceRecognitionDisabledFIRButton = NSLocalizedString("widget_medium_face_recognition_disabled_fir_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumFaceRecognitionNeedPremiumTitle = NSLocalizedString("widget_medium_face_recognition_need_premium_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumFaceRecognitionNeedPremiumSubtitle = NSLocalizedString("widget_medium_face_recognition_need_premium_subtitle", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetMediumFaceRecognitionNeedPremiumButton = NSLocalizedString("widget_medium_face_recognition_need_premium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
