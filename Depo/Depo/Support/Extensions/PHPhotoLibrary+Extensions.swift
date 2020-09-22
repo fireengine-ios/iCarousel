@@ -16,28 +16,28 @@ extension PHPhotoLibrary {
     }
     
     static func currentAuthorizationStatus() -> PHAuthorizationStatus {
-//        if #available(iOS 14, *) {
-//            return PHPhotoLibrary.authorizationStatus(for: .readWrite)
-//        } else {
+        if #available(iOS 14, *) {
+            return PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        } else {
             return PHPhotoLibrary.authorizationStatus()
-//        }
+        }
     }
     
     static func requestAuthorizationStatus(_ handler: @escaping (PHAuthorizationStatus) -> Void) {
-//        if #available(iOS 14, *) {
-//            PHPhotoLibrary.requestAuthorization(for: .readWrite, handler: handler)
-//        } else {
+        if #available(iOS 14, *) {
+            PHPhotoLibrary.requestAuthorization(for: .readWrite, handler: handler)
+        } else {
             PHPhotoLibrary.requestAuthorization(handler)
-//        }
+        }
     }
 }
 
 extension PHAuthorizationStatus {
     var isAccessible: Bool {
-//        if #available(iOS 14, *) {
-//            return isContained(in: [.authorized, .limited])
-//        } else {
+        if #available(iOS 14, *) {
+            return isContained(in: [.authorized, .limited])
+        } else {
             return self == .authorized
-//        }
+        }
     }
 }

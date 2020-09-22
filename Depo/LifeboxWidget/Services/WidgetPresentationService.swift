@@ -24,6 +24,9 @@ final class WidgetPresentationService {
         tokenStorage: TokenKeychainStorage(),
         sessionManager: SessionManager.customDefault
     )
+    
+    private let photoLibraryService = WidgetPhotoLibraryObserver.shared
+    
 
     func getStorageQuota(completion: @escaping ((Int) -> ()), fail: @escaping VoidHandler) {
         serverService.getQuotaInfo { response in
@@ -84,6 +87,10 @@ final class WidgetPresentationService {
             premuimDate.isPremiumUser = premium
             group.leave()
         }
+    }
+    
+    func hasUnsyncedItems(completion: @escaping (Bool) -> ()) {
+        photoLibraryService.hasUnsynced(completion: completion)
     }
     
     private func getFaceImageAllowance(completion: @escaping ((Bool) -> ())) {

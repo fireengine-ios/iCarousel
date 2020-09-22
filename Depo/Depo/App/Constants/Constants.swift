@@ -2003,6 +2003,18 @@ struct TextConstants {
     static let photoEditRatioFree = NSLocalizedString("photo_edit_ratio_free", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let photoEditRatioOriginal = NSLocalizedString("photo_edit_ratio_original", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    
+    //HomeWidget Rule 4.1
+    static let widgetRule41SmallButton = NSLocalizedString("widget_rule_4_1_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule41SmallDetail = NSLocalizedString("widget_rule_4_1_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule41MediumButton = NSLocalizedString("widget_rule_4_1_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule41MediumDetail = NSLocalizedString("widget_rule_4_1_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 4.2
+    static let widgetRule42SmallButton = NSLocalizedString("widget_rule_4_2_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule42SmallDetail = NSLocalizedString("widget_rule_4_2_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule42MediumButton = NSLocalizedString("widget_rule_4_2_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule42MediumDetail = NSLocalizedString("widget_rule_4_2_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetSmallSignInText = NSLocalizedString("widget_small_sign_in_text", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetSmallSignInButton = NSLocalizedString("widget_small_sign_in_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetSmallQuotaTitle = NSLocalizedString("widget_small_quota_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

@@ -24,9 +24,11 @@ class IntroduceViewController: ViewController, IntroduceViewInput, IntroduceData
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
         if #available(iOS 14.0, *) {
             WidgetCenter.shared.reloadAllTimelines()
         }
+
         scrollView.delegate = dataSource
         dataSource.scrollView = scrollView
         dataSource.pageControll = pageControll
