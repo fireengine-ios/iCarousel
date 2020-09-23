@@ -521,26 +521,107 @@ struct PremiumPeopleAlbumsMedium: View {
 struct WidgetAutoSyncStatusSmall: View {
     let entry: WidgetAutoSyncEntry
     var body: some View {
-        let message = entry.isSyncEnabled ? TextConstants.widgetRule41SmallDetail : TextConstants.widgetRule42SmallDetail
-        let buttonTitle = entry.isSyncEnabled ? TextConstants.widgetRule41SmallButton : TextConstants.widgetRule42SmallButton
-        WidgetEntrySmallView(imageName: "widget_small_sync",
-                             title: "",
-                             description: message,
-                             titleButton: buttonTitle,
-                             percentage: nil)
+        let title = entry.isSyncEnabled ? TextConstants.widgetRule42SmallTitle : ""
+        let detail = entry.isSyncEnabled ? TextConstants.widgetRule42SmallDetail : TextConstants.widgetRule41SmallDetail
+        let button = entry.isSyncEnabled ? TextConstants.widgetRule42SmallButton : TextConstants.widgetRule41SmallButton
+
+        WidgetSyncSmallView(imageName: "widget_small_sync",
+                             title: title,
+                             description: detail,
+                             titleButton: button)
+    }
+}
+
+struct WidgetSyncSmallView: View {
+    var imageName: String
+    var title: String
+    var description: String
+    var titleButton: String
+    
+    var body: some View {
+        let colors = [
+            Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
+            Color(red: 68 / 255, green: 205 / 255, blue: 208 / 255)
+        ]
+        GeometryReader { geo in
+            VStack(alignment: .leading) {
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(minWidth: 0, maxWidth: 16, minHeight: 0, maxHeight: 22, alignment: .leading)
+                
+                Spacer(minLength: 10)
+                
+                Text(title)
+                    .foregroundColor(.white)
+                    .font(.system(size: 13, weight: .medium, design: .default))
+                    .frame(width: .infinity, height: 19, alignment: .leading)
+                Text(description)
+                    .foregroundColor(.white)
+                    .font(.system(size: 13, weight: .regular, design: .default))
+                    .frame(width: .infinity, height: 19, alignment: .leading)
+
+                Spacer()
+                WidgetButton(title: titleButton, cornerRadius: 12)
+                    .frame(width: geo.size.width - 32, height: 36, alignment: .leading)
+            }
+            .padding(.all, 16)
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            .background(LinearGradient(gradient: Gradient(colors: colors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+        }
     }
 }
 
 struct WidgetAutoSyncStatusMeduium: View {
     let entry: WidgetAutoSyncEntry
     var body: some View {
-        let message = entry.isSyncEnabled ? TextConstants.widgetRule41MediumDetail : TextConstants.widgetRule42MediumDetail
-        let buttonTitle = entry.isSyncEnabled ? TextConstants.widgetRule41MediumButton : TextConstants.widgetRule42MediumButton
-        WidgetEntryMediumView(imageName: "widget_medium_sync",
-                              title: "",
-                              description: message,
-                              titleButton: buttonTitle,
-                              percentage: nil,
-                              countSyncFiles: nil)
+        let imageName = entry.isSyncEnabled ? "widget_medium_sync" : "widget_medium_synced"
+        let title = entry.isSyncEnabled ? TextConstants.widgetRule42MediumTitle : TextConstants.widgetRule41MediumDetail
+        let detail = entry.isSyncEnabled ? TextConstants.widgetRule42MediumDetail : TextConstants.widgetRule41MediumDetailButton
+        let button = entry.isSyncEnabled ? TextConstants.widgetRule42MediumButton : TextConstants.widgetRule41MediumButton
+        
+        WidgetSyncMediumView(imageName: imageName, title: title, description: detail, titleButton: button)
+    }
+}
+
+struct WidgetSyncMediumView: View {
+    var imageName: String
+    var title: String
+    var description: String
+    var titleButton: String
+    
+    var body: some View {
+        let colors = [
+            Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
+            Color(red: 68 / 255, green: 205 / 255, blue: 208 / 255)
+        ]
+        GeometryReader { geo in
+            VStack(alignment: .leading) {
+                HStack(spacing: 14) {
+                    Image(imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(minWidth: 0, maxWidth: 60, minHeight: 0, maxHeight: 40, alignment: .leading)
+                        
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(title)
+                            .foregroundColor(.white)
+                            .font(.system(size: 14, weight: .regular, design: .default))
+                            .lineLimit(2)
+                        Text(description)
+                            .foregroundColor(.white)
+                            .font(.system(size: 14, weight: .semibold, design: .default))
+                            .lineLimit(2)
+                    }
+                }
+                
+                Spacer()
+                WidgetButton(title: titleButton, cornerRadius: 12)
+                    .frame(width: geo.size.width - 32, height: 44, alignment: .leading)
+            }
+            .padding(EdgeInsets(top: 29, leading: 16, bottom: 16, trailing: 16))
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            .background(LinearGradient(gradient: Gradient(colors: colors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+        }
     }
 }
