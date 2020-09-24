@@ -58,7 +58,7 @@ final class SpotifySDKService: NSObject {
               let endIndexForClientID = urlString.range(of: "&response_type")?.lowerBound,
               let startIndexForRedirectUrl = urlString.range(of: "redirect_uri=https%3A%2F%2F")?.upperBound,
               let endIndexForRedirectUrl = urlString.range(of: "&scope")?.lowerBound else {
-                assertionFailure()
+//                assertionFailure()
                 return
         }
         let clientID = urlString[startIndexForClientID..<endIndexForClientID]

@@ -253,7 +253,6 @@ final class AdjustmentManager {
             onFinished(output)
         })
         
-        
         let isLastOperationFinished = (operationQueue.operations.filter { $0.isReady || $0.isExecuting }).isEmpty
 
         guard isLastOperationFinished else {

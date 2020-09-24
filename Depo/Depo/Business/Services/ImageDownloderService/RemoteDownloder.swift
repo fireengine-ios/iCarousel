@@ -31,7 +31,6 @@ class ImageDownloder {
         group.notify(queue: .main, execute: completion)
     }
     
-    
     static func replaceImagesInCache(urls: [URL], images: [UIImage], completion: @escaping VoidHandler) {
         guard !urls.isEmpty, urls.count == images.count else {
             completion()
@@ -58,7 +57,6 @@ class ImageDownloder {
             group.notify(queue: .main, execute: completion)
         }
     }
-    
     
     static func removeImageFromCache(url: URL?, completion: @escaping VoidHandler) {
         guard

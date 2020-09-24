@@ -9,13 +9,6 @@
 import Foundation
 import FirebaseCrashlytics
 
-protocol ObjectFromRequestResponse: class {
-    
-    init(json: Data?, headerResponse: HTTPURLResponse?)
-        
-    func mapping()
-}
-
 protocol RequestParametrs {
     
     var timeout: TimeInterval { get }

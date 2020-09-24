@@ -29,7 +29,7 @@ public extension DispatchQueue {
      Being on the main thread does not guarantee to be in the main queue.
      It means, if the current queue is not main, the execution will be moved to the main queue.
      */
-    public static func toMain(_ handler: @escaping VoidHandler) {
+    static func toMain(_ handler: @escaping VoidHandler) {
         if DispatchQueue.isMainQueue {
             handler()
         } else if Thread.isMainThread {

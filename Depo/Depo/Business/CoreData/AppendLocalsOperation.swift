@@ -102,10 +102,13 @@ final class AppendLocalsOperation: Operation {
                     self.localAlbumsCache.remove(assetId: $0.asset.localIdentifier)
                 }
                 
+                SharedGroupCoreDataStack.shared.saveInvalid(localIdentifiers: invalidAssetsInfo.compactMap { $0.asset.localIdentifier })
+                
                 let smartAssets = PHAssetCollection.smartAlbums.map { (album: $0, assets: $0.allAssets) }
                 
                 debugLog("page has \(validAssetsInfo.count) valid local items")
                 
+                var syncedLocalIdentifiers = [String]()
                 validAssetsInfo.forEach { element in
                     autoreleasepool {
                         if self.needCreateRelationships {
@@ -119,13 +122,18 @@ final class AppendLocalsOperation: Operation {
                         }
                         
                         let wrapedItem = WrapData(info: element)
-                        _ = MediaItem(wrapData: wrapedItem, context: context)
-                        
+                        let newMedia = MediaItem(wrapData: wrapedItem, context: context)
+                        if newMedia.syncStatusValue != SyncWrapperedStatus.notSynced.valueForCoreDataMapping() {
+                            syncedLocalIdentifiers.append(element.asset.localIdentifier)
+                        }
                         //                        debugLog("local_appended: \(wrapedItem.name ?? "_EMPTY_")")
                         
                         addedObjects.append(wrapedItem)
                     }
                 }
+                
+                SharedGroupCoreDataStack.shared.saveSynced(localIdentifiers: syncedLocalIdentifiers)
+                
                 self.coreDataStack.saveDataForContext(context: context, saveAndWait: true, savedCallBack: { [weak self] in
                     
                     debugLog("page is saved")

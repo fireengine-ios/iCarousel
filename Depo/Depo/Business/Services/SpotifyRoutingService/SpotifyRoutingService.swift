@@ -128,7 +128,7 @@ final class SpotifyRoutingService: NSObject {
     
     func onSpotifyAuthWebViewController() {
         guard let url = spotifyUrl else {
-            assertionFailure()
+//            assertionFailure()
             return
         }
         let controller = self.router.spotifyAuthWebViewController(url: url, delegate: self)

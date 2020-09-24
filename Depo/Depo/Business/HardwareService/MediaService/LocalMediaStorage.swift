@@ -185,7 +185,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let status = PHPhotoLibrary.currentAuthorizationStatus()
         switch status {
         //TODO: uncomment for xcode 12
-        case .authorized://, .limited:
+        case .authorized, .limited:
             photoLibrary.register(self)
             completion(true, status)
             AnalyticsPermissionNetmeraEvent.sendPhotoPermissionNetmeraEvents(true)

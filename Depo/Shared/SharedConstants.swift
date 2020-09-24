@@ -43,4 +43,7 @@ struct SharedConstants {
     static let mainAppSchemeResponsivenessDateKey = "mainAppSchemeResponsivenessDateKey"
     static let applicationQueriesSchemeShort = "akillidepo"
     static let applicationQueriesScheme = applicationQueriesSchemeShort + "://"
+    
+    static let sharedGroupDBContainerName = "SharedGroupDBContainer"
+    static let sharedGroupDBName = "SharedGroupDB"
 }

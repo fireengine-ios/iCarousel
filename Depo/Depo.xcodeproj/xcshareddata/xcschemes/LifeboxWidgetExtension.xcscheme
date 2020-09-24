@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
+   LastUpgradeVersion = "1200"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8C3BA2BC22B3CC32006D901E"
-               BuildableName = "Billo-widget.appex"
-               BlueprintName = "Billo-widget"
+               BlueprintIdentifier = "B58936C024FA773E00E3FA9C"
+               BuildableName = "LifeboxWidgetExtension.appex"
+               BlueprintName = "LifeboxWidgetExtension"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,9 +29,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CE7847EC22A685FB00662219"
-               BuildableName = "Billo.app"
-               BlueprintName = "Billo"
+               BlueprintIdentifier = "CE51AAF51EF90853005DCEE0"
+               BuildableName = "lifebox.app"
+               BlueprintName = "Depo_LifeTech"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,15 +42,6 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C3BA2BC22B3CC32006D901E"
-            BuildableName = "Billo-widget.appex"
-            BlueprintName = "Billo-widget"
-            ReferencedContainer = "container:Depo.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <Testables>
       </Testables>
    </TestAction>
@@ -66,16 +57,34 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.springboard">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE7847EC22A685FB00662219"
-            BuildableName = "Billo.app"
-            BlueprintName = "Billo"
+            BlueprintIdentifier = "B58936C024FA773E00E3FA9C"
+            BuildableName = "LifeboxWidgetExtension.appex"
+            BlueprintName = "LifeboxWidgetExtension"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "_XCWidgetKind"
+            value = ""
+            isEnabled = "NO">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "_XCWidgetDefaultView"
+            value = "timeline"
+            isEnabled = "NO">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "_XCWidgetFamily"
+            value = "medium"
+            isEnabled = "NO">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -84,16 +93,15 @@
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE7847EC22A685FB00662219"
-            BuildableName = "Billo.app"
-            BlueprintName = "Billo"
+            BlueprintIdentifier = "B58936C024FA773E00E3FA9C"
+            BuildableName = "LifeboxWidgetExtension.appex"
+            BlueprintName = "LifeboxWidgetExtension"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

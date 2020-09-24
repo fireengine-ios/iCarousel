@@ -256,8 +256,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }
             
             let previewImage = UIImage(cgImage: imageReference, scale: image.scale, orientation: image.imageOrientation)
-            
+
             debugLog("PHOTOEDIT: is about to create the controller")
+
             let vc = PhotoEditViewController.with(originalImage: image.imageWithFixedOrientation, previewImage: previewImage.imageWithFixedOrientation, presented: completion) { [weak self] controller, completionType in
 
                 switch completionType {
@@ -325,10 +326,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                             SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditModifySnackbarMessage)
                                         }
                                     }
+                                    
                                     ImageDownloder.removeImageFromCache(url: updatedItem.tmpDownloadUrl, completion: {
                                         ImageDownloder.replaceImagesInCache(urls: urlsToReplace, images: newThumbnails, completion: closeScreen)
                                     })
-                                    
 
                                 case .failed(_):
                                     DispatchQueue.main.async {

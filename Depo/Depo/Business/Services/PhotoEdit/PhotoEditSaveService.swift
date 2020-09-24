@@ -118,10 +118,8 @@ final class PhotoEditSaveService {
                                 assertionFailure("Can't find updated remote in the DB")
                                 return
                             }
-                            
                             //to show updated photo immediately
                             updatedRemote.patchToPreview = updatedItem.patchToPreview
-                            
                             completion(.success(updatedRemote))
                         }
                         

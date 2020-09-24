@@ -129,12 +129,12 @@ public class Camera: NSObject, ImageSource, AVCaptureVideoDataOutputSampleBuffer
 
         if captureAsYUV {
             supportsFullYUVRange = false
-            let supportedPixelFormats = videoOutput.availableVideoPixelFormatTypes
-            for currentPixelFormat in supportedPixelFormats {
-                if ((currentPixelFormat as NSNumber).int32Value == Int32(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)) {
-                    supportsFullYUVRange = true
-                }
-            }
+//            let supportedPixelFormats = videoOutput.availableVideoPixelFormatTypes
+//            for currentPixelFormat in supportedPixelFormats {
+//                if ((currentPixelFormat as NSNumber).int32Value == Int32(kCVPixelFormatType_420YpCbCr8BiPlanarFullRange)) {
+//                    supportsFullYUVRange = true
+//                }
+//            }
             
             if (supportsFullYUVRange) {
                 yuvConversionShader = crashOnShaderCompileFailure("Camera"){try sharedImageProcessingContext.programForVertexShader(defaultVertexShaderForInputs(2), fragmentShader:YUVConversionFullRangeFragmentShader)}
