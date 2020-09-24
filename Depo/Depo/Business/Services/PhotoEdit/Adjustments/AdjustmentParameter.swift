@@ -157,8 +157,10 @@ protocol AdjustmentParameterProtocol {
     var maxValue: Float { get }
     var defaultValue: Float { get }
     var currentValue: Float { get }
+    var originalMultiplier: Float { get }
     
     func set(value: Float)
+    func updateValue(isOriginal: Bool)
     
     @discardableResult
     func onValueDidChange(handler: @escaping ValueHandler<Float>) -> AdjustmentParameterProtocol
@@ -173,17 +175,19 @@ final class AdjustmentParameter: AdjustmentParameterProtocol {
     let maxValue: Float
     let defaultValue: Float
     private(set) var currentValue: Float
+    var originalMultiplier: Float = 1
     
     private let minMiddle: Float
     private let maxMiddle: Float
     private let middleValue: Float
     
-    private var realCurrentValue: Float {
+    private func realCurrentValue(isOriginal: Bool) -> Float {
         let real: Float
+        let maxCurrentValue = isOriginal ? maxMiddle * originalMultiplier : maxMiddle
         if currentValue <= defaultValue, minMiddle != 0 {
             real = middleValue - ((1 - currentValue / (defaultValue - minValue)) * minMiddle)
         } else {
-            real = middleValue + (((currentValue - defaultValue) / (maxValue - defaultValue)) * maxMiddle)
+            real = middleValue + (((currentValue - defaultValue) / (maxValue - defaultValue)) * maxCurrentValue)
         }
         
         return real
@@ -192,7 +196,7 @@ final class AdjustmentParameter: AdjustmentParameterProtocol {
     private var onValueDidChangeAction: ValueHandler<Float>?
     
     
-    required init(type: AdjustmentParameterType) {
+    required init(type: AdjustmentParameterType, originalMultiplier: Float = 1) {
         self.type = type
         
         let defaultValues = type.defaultValues
@@ -209,6 +213,7 @@ final class AdjustmentParameter: AdjustmentParameterProtocol {
         maxValue = 1
         defaultValue = middle
         currentValue = defaultValue
+        self.originalMultiplier = originalMultiplier
         
         //real values
         middleValue = defaultValues.default
@@ -219,7 +224,11 @@ final class AdjustmentParameter: AdjustmentParameterProtocol {
     
     func set(value: Float) {
         currentValue = value
-        onValueDidChangeAction?(realCurrentValue)
+        onValueDidChangeAction?(realCurrentValue(isOriginal: false))
+    }
+    
+    func updateValue(isOriginal: Bool) {
+        onValueDidChangeAction?(realCurrentValue(isOriginal: isOriginal))
     }
     
     @discardableResult
