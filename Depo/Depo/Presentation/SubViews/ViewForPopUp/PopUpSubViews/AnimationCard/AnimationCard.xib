@@ -7,11 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnimationCard" customModule="Billo" customModuleProvider="target">
-            <connections>
-                <outlet property="shareButton" destination="PlK-kk-NOo" id="Vvt-af-HF9"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnimationCard" customModule="Billo" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="nPL-YN-sbK" customClass="AnimationCard" customModule="Billo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="499"/>
@@ -114,7 +110,7 @@
                     <rect key="frame" x="258.5" y="459" width="46" height="30"/>
                     <state key="normal" title="Button"/>
                     <connections>
-                        <action selector="shareButtonTapped:" destination="-1" eventType="touchUpInside" id="GD3-cv-F4H"/>
+                        <action selector="shareButtonTapped:" destination="nPL-YN-sbK" eventType="touchUpInside" id="Frj-6K-TmY"/>
                     </connections>
                 </button>
             </subviews>
