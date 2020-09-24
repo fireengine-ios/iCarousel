@@ -482,12 +482,6 @@ final class UploadOperation: Operation {
                     debugLog("UPLOAD: finishUploading -> uploadNotify parSize \(size) newRemote size \(item.fileSize) param URL \(parameters.urlToLocalFile?.path ?? "nil")")
                 }
                 //--
-                
-                //case for upload photo from camera
-                if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
-                    self.outputItem?.metaData?.mediumUrl = preview
-                }
-                
                 if self.uploadType == .save, let updatedRemote = self.outputItem {
                     self.mediaItemsService.replaceItem(uuid: self.inputItem.uuid, with: updatedRemote) { [weak self] in
                         self?.storageVars.lastUnsavedFileUUID = nil
@@ -495,6 +489,10 @@ final class UploadOperation: Operation {
                         success()
                     }
                 } else {
+                    //case for upload photo from camera
+                    if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
+                        self.outputItem?.metaData?.mediumUrl = preview
+                    }
                     self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
                         self?.storageVars.lastUnsavedFileUUID = nil
                         debugLog("_upload: sync status is updated for \(self?.inputItem.name ?? "") ")

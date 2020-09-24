@@ -31,6 +31,33 @@ class ImageDownloder {
         group.notify(queue: .main, execute: completion)
     }
     
+    static func replaceImagesInCache(urls: [URL], images: [UIImage], completion: @escaping VoidHandler) {
+        guard !urls.isEmpty, urls.count == images.count else {
+            completion()
+            return
+        }
+        
+        removeImagesFromCache(urls: urls) {
+            let group = DispatchGroup()
+            
+            for i in 0..<urls.count {
+                group.enter()
+                guard let cachePath = urls[i].byTrimmingQuery?.absoluteString else {
+                    //TODO: check if it's possible that group will notify earlier
+                    group.leave()
+                    return
+                }
+                
+                let image = images[i]
+                SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: {
+                    group.leave()
+                })
+            }
+            
+            group.notify(queue: .main, execute: completion)
+        }
+    }
+    
     static func removeImageFromCache(url: URL?, completion: @escaping VoidHandler) {
         guard
             let trimmedUrl = url?.byTrimmingQuery?.absoluteString,

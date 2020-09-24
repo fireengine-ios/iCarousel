@@ -11,7 +11,7 @@ import GPUImage
 
 final class AdjustmentManager {
     
-    private static func adjustment(type: AdjustmentType) -> AdjustmentProtocol? {
+    private static func adjustment(type: AdjustmentType, originalMultiplier: Float) -> AdjustmentProtocol? {
         var parameters = [AdjustmentParameterProtocol]()
         var thirdPartyAdjustment: ThirdPartyAdjustmentProtocol?
         var hslParameterAdjustment: HSLColorAdjustmentParameterProtocol?
@@ -105,7 +105,7 @@ final class AdjustmentManager {
             
             case .blur:
                 let gpuOperation = GaussianBlur()
-                let blurRadiusParameter = AdjustmentParameter(type: .blurRadius).onValueDidChange { value in
+                let blurRadiusParameter = AdjustmentParameter(type: .blurRadius, originalMultiplier: originalMultiplier).onValueDidChange { value in
                     gpuOperation.blurRadiusInPixels = value
                 }
                 parameters = [blurRadiusParameter]
@@ -171,8 +171,8 @@ final class AdjustmentManager {
         return parameters.map { AdjustmentParameterValue(type: $0.type, value: $0.currentValue) }
     }
     
-    required init(types: [AdjustmentType]) {
-        adjustments = types.compactMap { AdjustmentManager.adjustment(type: $0) }
+    required init(types: [AdjustmentType], originalMultiplier: Float) {
+        adjustments = types.compactMap { AdjustmentManager.adjustment(type: $0, originalMultiplier: originalMultiplier) }
     }
     
     func updateValues(_ values: [AdjustmentParameterValue]) {
@@ -201,8 +201,8 @@ final class AdjustmentManager {
         applyAdjustments(sourceImage: sourceImage, onFinished: onFinished)
     }
     
-    func applyAll(sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
-        self.applyAdjustments(sourceImage: sourceImage, onFinished: onFinished)
+    func applyAll(sourceImage: UIImage, isOriginal: Bool = false, onFinished: @escaping ValueHandler<UIImage>) {
+        self.applyAdjustments(sourceImage: sourceImage, isOriginal: isOriginal, onFinished: onFinished)
     }
     
     func value(for type: AdjustmentViewType) -> [AdjustmentParameterValue] {
@@ -222,13 +222,17 @@ final class AdjustmentManager {
         return adjustmentValues.filter { parameterTypes.contains($0.type) }
     }
     
-    private func applyAdjustments(sourceImage: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
+    private func applyAdjustments(sourceImage: UIImage, isOriginal: Bool = false, onFinished: @escaping ValueHandler<UIImage>) {
         
         let relatedAdjustments = self.adjustments.filter { $0.modified }
         
         guard !relatedAdjustments.isEmpty else {
             onFinished(sourceImage)
             return
+        }
+        
+        if isOriginal {
+            relatedAdjustments.forEach { $0.updateCurrentValue(isOriginal: true) }
         }
         
         let operation = AdjustmentOperation(image: sourceImage, adjustments: relatedAdjustments, completion: { [weak self] output in
@@ -242,9 +246,12 @@ final class AdjustmentManager {
                 self.awaitingOperation = nil
             }
             
+            if isOriginal {
+                relatedAdjustments.forEach { $0.updateCurrentValue(isOriginal: false)}
+            }
+            
             onFinished(output)
         })
-        
         
         let isLastOperationFinished = (operationQueue.operations.filter { $0.isReady || $0.isExecuting }).isEmpty
 

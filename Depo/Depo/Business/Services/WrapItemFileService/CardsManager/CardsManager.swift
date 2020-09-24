@@ -345,6 +345,7 @@ class CardsManager: NSObject {
     class func cardViewForOperaion(type: OperationType) -> BaseCardView {
         let serverObject = CardsManager.default.serverOperationFor(type: type)
         let cardView: BaseCardView
+        debugLog("cardViewForOperaion: type is \(type.rawValue)")
         
         switch type {
         case .freeAppSpace:

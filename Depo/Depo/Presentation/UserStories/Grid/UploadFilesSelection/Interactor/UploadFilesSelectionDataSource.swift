@@ -11,7 +11,7 @@ class UploadFilesSelectionDataSource: ArrayDataSourceForCollectionView {
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         super.collectionView(collectionView, willDisplay: cell, forItemAt: indexPath)
         
-        if let `cell` = cell as? CollectionViewCellForPhoto {
+        if let cell = cell as? CollectionViewCellForPhoto  {
             cell.cloudStatusImage.isHidden = true
         }
     }
@@ -44,5 +44,31 @@ class UploadFilesSelectionDataSource: ArrayDataSourceForCollectionView {
                 collectionView.insertItems(at: indexPaths)
             }, completion: nil)
         }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard
+            let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCellForPhoto,
+            let unwrapedObject = itemForIndexPath(indexPath: indexPath)
+        else {
+            return
+        }
+        
+        onSelectObjectWithQuickSelect(object: unwrapedObject)
+        cell.setSelection(isSelectionActive: true, isSelected: true)
+        updateSelectionCount()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        guard
+            let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCellForPhoto,
+            let unwrapedObject = itemForIndexPath(indexPath: indexPath)
+        else {
+            return
+        }
+     
+        onDeselectObject(object: unwrapedObject)
+        cell.setSelection(isSelectionActive: true, isSelected: false)
+        updateSelectionCount()
     }
 }

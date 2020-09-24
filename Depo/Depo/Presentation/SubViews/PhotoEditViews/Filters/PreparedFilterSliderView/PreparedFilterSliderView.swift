@@ -41,6 +41,11 @@ final class PreparedFilterSliderView: UIView, NibInit {
     
     private var filter: CustomFilterProtocol?
     
+    private var isAvailableToReadTouch = false
+    private lazy var feedbackGenerator: UIImpactFeedbackGenerator = {
+        return UIImpactFeedbackGenerator(style: .light)
+    }()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -79,3 +84,72 @@ final class PreparedFilterSliderView: UIView, NibInit {
     }
 }
 
+extension PreparedFilterSliderView {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            
+            let currentPoint = touch.location(in: self)
+            
+            guard let sliderThumb = slider.getThumbView() else {
+                return
+            }
+            
+            let convertedThumbFrame = convert(sliderThumb.frame, from: sliderContentView)
+            
+            let enlargedThumbFrame = CGRect(x: convertedThumbFrame.origin.x - 30, y: convertedThumbFrame.origin.y - 30, width: convertedThumbFrame.size.width + 60, height: convertedThumbFrame.size.height + 60)
+        
+            if enlargedThumbFrame.contains(currentPoint) {
+                feedbackGenerator.prepare()
+                isAvailableToReadTouch = true
+                touchesMoved(touches, with: event)
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard isAvailableToReadTouch else {
+            return
+        }
+        
+        let onePercentSlider = slider.frame.size.width / 100
+        
+        var newValue: CGFloat
+        
+        if let touch = touches.first {
+            let currentPoint = touch.location(in: self)
+
+            if currentPoint.x <= slider.slider.frame.origin.x {
+                if slider.slider.value > 0 {
+                    feedbackGenerator.impactOccurred()
+                } else {
+                    return
+                }
+                newValue = 0
+            } else if currentPoint.x >= slider.slider.frame.size.width {
+                if slider.slider.value < 1 {
+                    feedbackGenerator.impactOccurred()
+                } else {
+                    return
+                }
+                newValue = 1.0
+                feedbackGenerator.impactOccurred()
+            } else {
+                newValue = currentPoint.x / onePercentSlider / 100
+            }
+            
+            slider.slider.setValue(newValue, animated: false)
+            valueLabel.text = String(format: "%.1f", newValue)
+
+            if let type = filter?.type {
+                delegate?.didChangeFilter(type, newValue: Float(newValue))
+            }
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if isAvailableToReadTouch {
+            isAvailableToReadTouch = false
+        }
+    }
+}

@@ -30,6 +30,10 @@ final class SliderView: UIView {
     
     var changeValueHandler: ValueHandler<Float>?
     
+    func getThumbView() -> UIView? {
+        return slider.subviews.first?.subviews.first as? MDCThumbView
+    }
+    
     func add(to view: UIView) {
         guard superview == nil else {
             return
@@ -37,7 +41,7 @@ final class SliderView: UIView {
         
         view.addSubview(self)
         translatesAutoresizingMaskIntoConstraints = false
-        pinToSuperviewEdges(offset: UIEdgeInsets(topBottom: 0, rightLeft: -4))
+        pinToSuperviewEdges(offset: UIEdgeInsets(topBottom: 0, rightLeft: 4))
     }
     
     func setup(minValue: Float, maxValue: Float, anchorValue: Float, currentValue: Float) {
