@@ -1734,14 +1734,14 @@
 "widget_rule_0_medium_detail" = "You are not signed in to lifebox";
 "widget_rule_0_medium_button" = "Sign in to lifebox";
 
-"widget_rule_1_small_title" = "Your quota is over %d%.";
+"widget_rule_1_small_title" = "Your quota is over %d%%.";
 "widget_rule_1_small_detail" = " Time to upgrade your plan.";
 "widget_rule_1_small_button" = "View plans";
 "widget_rule_1_medium_title" = "Your lifebox quota is nearly full.";
 "widget_rule_1_medium_detail" = "It’s time to upgrade your plan.";
 "widget_rule_1_medium_button" = "View plans";
 
-"widget_rule_2_small_title" = "Device storage is %d% used.";
+"widget_rule_2_small_title" = "Device storage is %d%% used.";
 "widget_rule_2_small_detail" = " You need more space.";
 "widget_rule_2_small_button" = "Free up space";
 "widget_rule_2_medium_title" = "Running out of device storage!";

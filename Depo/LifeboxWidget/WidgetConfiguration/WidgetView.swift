@@ -452,25 +452,28 @@ struct WidgetEntrySmallView : View {
     
     var body: some View {
         GeometryReader { geo in
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading) {
                 if let percentage = percentage {
                     ProgressBarSmall(imageName: imageName, progress: percentage)
                         .frame(height: 12, alignment: .center)
-                    
+                    Spacer(minLength: 16)
                 } else {
                     Image(imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(minWidth: 0, maxWidth: 27, minHeight: 0, maxHeight: 27, alignment: .leading)
+                        .frame(width: 27, height: 27, alignment: .center)
                 }
                 
-                Text(title)
-                    .foregroundColor(.white)
-                    .font(.system(size: 13, weight: .semibold, design: .default)) +
-                Text(description)
-                    .foregroundColor(.white)
-                    .font(.system(size: 13, weight: .regular, design: .default))
-                Spacer()
+                VStack(alignment: .leading) {
+                    Text(title)
+                        .foregroundColor(.white)
+                        .font(.system(size: 13, weight: .semibold, design: .default)) +
+                    Text(description)
+                        .foregroundColor(.white)
+                        .font(.system(size: 13, weight: .regular, design: .default))
+                    Spacer()
+                }
+
                 WidgetButton(title: titleButton, cornerRadius: 12)
                     .frame(width: .infinity, height: 36, alignment: .center)
             }
@@ -572,6 +575,7 @@ struct ProgressBarSmall: View {
     let imageName: String
     let progress: CGFloat
     var body: some View {
+        let imageSide: CGFloat = 25
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 Rectangle().frame(width: geometry.size.width , height: 6)
@@ -585,8 +589,8 @@ struct ProgressBarSmall: View {
                 Image(imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 25, height: 25, alignment: .center)
-                    .offset(x: min(CGFloat(progress)*geometry.size.width - 5, geometry.size.width), y: 0)
+                    .frame(width: imageSide, height: imageSide, alignment: .center)
+                    .offset(x: min(CGFloat(progress)*geometry.size.width - imageSide * 0.5, geometry.size.width), y: 0)
             }
         }
     }
