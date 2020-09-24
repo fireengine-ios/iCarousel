@@ -1774,18 +1774,14 @@
 "widget_rule_6_medium_detail" = " since your last contact backup.";
 "widget_rule_6_medium_button" = "Back up contacts";
 
-"widget_rule_7_1_small_title" = "You have 7 people albums.";
-"widget_rule_7_1_small_detail" = " Check them out";
+"widget_rule_7_1_small_detail" = "You have 7 people albums. Check them out!";
 "widget_rule_7_1_small_button" = "People albums";
-"widget_rule_7_1_medium_title" = "You have 7 people albums.";
-"widget_rule_7_1_medium_detail" = "Check them out";
+"widget_rule_7_1_medium_detail" = "You have 7 people albums. Check them out!";
 "widget_rule_7_1_medium_button" = "See people albums";
 
-"widget_rule_7_2_small_title" = "You have less than 3 people albums.";
-"widget_rule_7_2_small_detail" = " Upload more!";
+"widget_rule_7_2_small_detail" = "You have less than 3 people albums. Upload more!";
 "widget_rule_7_2_small_button" = "Upload photos";
-"widget_rule_7_2_medium_title" = "You have less than 3 people albums.";
-"widget_rule_7_2_medium_detail" = "Upload more!";
+"widget_rule_7_2_medium_detail" = "You have less than 3 people albums. Upload more!";
 "widget_rule_7_2_medium_button" = "Upload photos";
 
 "widget_rule_7_3_small_detail" = "Group your photos easily by people!";
@@ -1793,7 +1789,7 @@
 "widget_rule_7_3_medium_detail" = "What about grouping your photos easily by people?";
 "widget_rule_7_3_medium_button" = "Enable face-image grouping";
 
-"widget_rule_7_4_small_detail" = "Become premium to see people albums!";
-"widget_rule_7_4_small_button" = "Become premium";
-"widget_rule_7_4_medium_detail" = "Become premium tosee people albums!";
-"widget_rule_7_4_medium_button" = "Become premium";
+"widget_rule_7_4_small_detail" = "Open app to see your photos";
+"widget_rule_7_4_small_button" = "Open app";
+"widget_rule_7_4_medium_detail" = "Open app to see your photos";
+"widget_rule_7_4_medium_button" = "Open app";

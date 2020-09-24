@@ -115,6 +115,7 @@ struct WidgetProvider: TimelineProvider {
             let entry = WidgetUserInfoEntry(
                 isFIREnabled: response.isFIREnabled,
                 isPremiumUser: response.isPremiumUser,
+                peopleInfos: response.peopleInfos,
                 images: response.images,
                 date: date
             )

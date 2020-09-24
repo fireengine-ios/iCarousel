@@ -12,6 +12,7 @@ import CoreGraphics
 class UserInfo {
     var isFIREnabled = false
     var isPremiumUser = false
+    var peopleInfos = [PeopleInfo]()
     var images = [UIImage]()
 }
 
@@ -72,6 +73,7 @@ final class WidgetPresentationService {
         group.notify(queue: .global()) { [weak self] in
             if userInfo.isPremiumUser && userInfo.isFIREnabled {
                 self?.getPeopleInfo { [weak self] peopleInfos in
+                    userInfo.peopleInfos = peopleInfos
                     self?.loadImages(completion: { images in
                         userInfo.images = images
                         DispatchQueue.main.async {
