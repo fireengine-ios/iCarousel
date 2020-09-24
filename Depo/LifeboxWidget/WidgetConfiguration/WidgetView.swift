@@ -9,6 +9,11 @@
 import SwiftUI
 import WidgetKit
 
+private let gradientBackgroundColors = [
+    Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
+    Color(red: 68 / 255, green: 205 / 255, blue: 208 / 255)
+]
+
 struct WidgetView: View {
     @Environment(\.widgetFamily) var family
     
@@ -70,7 +75,7 @@ struct WidgetMediumSizeView: View {
             WidgetFaceRecognitionMediumView(entry: entry)
             
         case let entry as WidgetAutoSyncEntry:
-            WidgetAutoSyncStatusMeduium(entry: entry)
+            WidgetAutoSyncStatusMedium(entry: entry)
             
         default:
             WidgetLoginRequiredMediumView()
@@ -78,13 +83,14 @@ struct WidgetMediumSizeView: View {
     }
 }
 
-//MARK:- WidgetLoginRequiredView
+//MARK: - Rule 0 - WidgetLoginRequiredView
 struct WidgetLoginRequiredSmallView: View {
     var body: some View {
         WidgetEntrySmallView(imageName: "sign_in",
                              title: "",
                              description: TextConstants.widgetRule0SmallDetail,
-                             titleButton: TextConstants.widgetRule0SmallButton)
+                             titleButton: TextConstants.widgetRule0SmallButton,
+                             action: .widgetLogout)
     }
 }
 
@@ -93,20 +99,22 @@ struct WidgetLoginRequiredMediumView: View {
         WidgetEntryMediumView(imageName: "sign_in",
                               title: "",
                               description: TextConstants.widgetRule0MediumDetail,
-                              titleButton: TextConstants.widgetRule0MediumButton)
+                              titleButton: TextConstants.widgetRule0MediumButton,
+                              action: .widgetLogout)
     }
 }
 
-//MARK:- WidgetQuotaView
+//MARK:  - Rule 1 - WidgetQuotaView
 struct WidgetQuotaSmallView: View {
     var entry: WidgetQuotaEntry
     
     var body: some View {
-        WidgetEntrySmallView(imageName: "",
+        WidgetEntrySmallView(imageName: "cloud_storage",
                              title: String(format: TextConstants.widgetRule1SmallTitle, entry.usedPercentage),
                              description: TextConstants.widgetRule1SmallDetail,
                              titleButton: TextConstants.widgetRule1SmallButton,
-                             percentage: CGFloat(entry.usedPercentage)/100)
+                             percentage: CGFloat(entry.usedPercentage)/100,
+                             action: .widgetQuota)
     }
 }
 
@@ -114,25 +122,27 @@ struct WidgetQuotaMediumView: View {
     var entry: WidgetQuotaEntry
     
     var body: some View {
-        WidgetEntryMediumView(imageName: "",
+        WidgetEntryMediumView(imageName: "cloud_storage",
                               title: TextConstants.widgetRule1MediumTitle,
                               description: TextConstants.widgetRule1MediumDetail,
                               titleButton: TextConstants.widgetRule1MediumButton,
-                              percentage: CGFloat(entry.usedPercentage)/100)
+                              percentage: CGFloat(entry.usedPercentage)/100,
+                              action: .widgetQuota)
     }
 }
 
 
-//MARK:- WidgetDeviceQuotaView
+//MARK: - Rule 2 - WidgetDeviceQuotaView
 struct WidgetDeviceQuotaSmallView: View {
     var entry: WidgetDeviceQuotaEntry
     
     var body: some View {
-        WidgetEntrySmallView(imageName: "",
+        WidgetEntrySmallView(imageName: "device_storage",
                              title: String(format: TextConstants.widgetRule2SmallTitle, entry.usedPersentage),
                              description: TextConstants.widgetRule2SmallDetail,
                              titleButton: TextConstants.widgetRule2SmallButton,
-                             percentage: CGFloat(entry.usedPersentage)/100)
+                             percentage: CGFloat(entry.usedPersentage)/100,
+                             action: .widgetFreeUpSpace)
     }
 }
 
@@ -140,15 +150,93 @@ struct WidgetDeviceQuotaMediumView: View {
     var entry: WidgetDeviceQuotaEntry
     
     var body: some View {
-        WidgetEntryMediumView(imageName: "",
+        WidgetEntryMediumView(imageName: "device_storage",
                               title: TextConstants.widgetRule2MediumTitle,
                               description: TextConstants.widgetRule2MediumDetail,
                               titleButton: TextConstants.widgetRule2MediumButton,
-                              percentage: CGFloat(entry.usedPersentage)/100)
+                              percentage: CGFloat(entry.usedPersentage)/100,
+                              action: .widgetFreeUpSpace)
     }
 }
 
-//MARK: - WidgetBackedupContactsView
+// MARK: - Rule 3/4 AutoSync status
+
+struct WidgetAutoSyncStatusSmall: View {
+    let entry: WidgetAutoSyncEntry
+    var body: some View {
+        let imageName = "widget_small_sync"
+        let title = entry.isSyncEnabled ? TextConstants.widgetRule42SmallTitle : ""
+        let detail = entry.isSyncEnabled ? TextConstants.widgetRule42SmallDetail : TextConstants.widgetRule41SmallDetail
+        let titleButton = entry.isSyncEnabled ? TextConstants.widgetRule42SmallButton : TextConstants.widgetRule41SmallButton
+        let action: PushNotificationAction = entry.isSyncEnabled ? .widgetSyncInProgress : .widgetUnsyncedFiles
+
+        GeometryReader { geo in
+            VStack(alignment: .leading, spacing: 14) {
+                Image(imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 16, height: 22, alignment: .center)
+                
+                VStack(alignment: .leading, spacing: 8, content: {
+                    if !title.isEmpty {
+                        Text(title)
+                            .foregroundColor(.white)
+                            .font(.system(size: 13, weight: .medium, design: .default))
+                    }
+                    Text(detail)
+                        .foregroundColor(.white)
+                        .font(.system(size: 13, weight: .regular, design: .default))
+                })
+
+                Spacer()
+                WidgetButton(title: titleButton, cornerRadius: 12)
+                    .frame(width: .infinity, height: 36, alignment: .leading)
+            }
+            .padding(.all, 16)
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .widgetURL(URL(string: SharedConstants.applicationQueriesScheme + action.rawValue))
+        }
+    }
+}
+
+struct WidgetAutoSyncStatusMedium: View {
+    let entry: WidgetAutoSyncEntry
+    var body: some View {
+        let imageName = entry.isSyncEnabled ? "widget_medium_sync" : "widget_medium_synced"
+        let title = entry.isSyncEnabled ? TextConstants.widgetRule42MediumTitle : TextConstants.widgetRule41MediumDetail
+        let detail = entry.isSyncEnabled ? TextConstants.widgetRule42MediumDetail : TextConstants.widgetRule41MediumDetailButton
+        let titleButton = entry.isSyncEnabled ? TextConstants.widgetRule42MediumButton : TextConstants.widgetRule41MediumButton
+        let action: PushNotificationAction = entry.isSyncEnabled ? .widgetSyncInProgress : .widgetUnsyncedFiles
+        
+        GeometryReader { geo in
+            VStack(alignment: .leading) {
+                HStack(spacing: 14) {
+                    Image(imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(minWidth: 0, maxWidth: 60, minHeight: 0, maxHeight: 90, alignment: .top)
+                    WidgetMediumInfoView(title: title,
+                                         description: detail,
+                                         spacing: 4,
+                                         titleWeight: .regular,
+                                         descriptionWeight: .semibold)
+                }
+                .padding(.top, 8)
+                
+                Spacer()
+                WidgetButton(title: titleButton, cornerRadius: 12)
+                    .frame(width: .infinity, height: 44, alignment: .leading)
+            }
+            .padding(.all, 16)
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .widgetURL(URL(string: SharedConstants.applicationQueriesScheme + action.rawValue))
+        }
+    }
+}
+
+//MARK: - Rule 5/6 - WidgetBackedupContactsView
 
 struct WidgetContactBackedupSmallView: View {
     var entry: WidgetContactBackupEntry
@@ -160,13 +248,15 @@ struct WidgetContactBackedupSmallView: View {
                 WidgetEntrySmallView(imageName: "back_up_small",
                                      title: TextConstants.widgetRule6SmallTitle,
                                      description: TextConstants.widgetRule6SmallDetail,
-                                     titleButton: TextConstants.widgetRule6SmallButton)
+                                     titleButton: TextConstants.widgetRule6SmallButton,
+                                     action: .widgetOldBackup)
             }
         } else {
             WidgetEntrySmallView(imageName: "back_up_small",
                                  title: TextConstants.widgetRule5SmallDetail,
                                  description: "",
-                                 titleButton: TextConstants.widgetRule5SmallButton)
+                                 titleButton: TextConstants.widgetRule5SmallButton,
+                                 action: .widgetNoBackup)
         }
     }
 }
@@ -175,124 +265,203 @@ struct WidgetContactBackedupMediumView: View {
     var entry: WidgetContactBackupEntry
     
     var body: some View {
+        let imageName = "back_up_medium"
+        let data = entryData()
+        
+        GeometryReader { geo in
+            VStack(alignment: .leading) {
+                HStack(spacing: 16) {
+                    Image(imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(minWidth: 0, maxWidth: 48, minHeight: 0, maxHeight: 90, alignment: .top)
+                    WidgetMediumInfoView(title: data.title, description: data.description)
+                }
+                .padding(.leading, 8)
+                .padding(.top, 8)
+                
+                Spacer()
+                WidgetButton(title: data.titleButton, cornerRadius: 12)
+                    .frame(width: .infinity, height: 44, alignment: .leading)
+            }
+            .padding(.all, 16)
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .widgetURL(URL(string: SharedConstants.applicationQueriesScheme + data.action.rawValue))
+        }
+    }
+    
+    func entryData() -> (title: String, description: String, titleButton: String, action: PushNotificationAction) {
+        var title = TextConstants.widgetRule5MediumTitle
+        var description = TextConstants.widgetRule5MediumDetail
+        var titleButton = TextConstants.widgetRule5MediumButton
+        var action: PushNotificationAction = .widgetNoBackup
+        
         if let backupDate = entry.backupDate {
             let components = Calendar.current.dateComponents([.weekOfYear, .month], from: backupDate, to: Date())
-            if  components.month! >= 1 {
-                WidgetEntryMediumView(imageName: "back_up_medium",
-                                      title: TextConstants.widgetRule6SmallTitle,
-                                      description: TextConstants.widgetRule6SmallDetail,
-                                      titleButton: TextConstants.widgetRule6SmallButton)
+            if components.month! >= 1 {
+                title = TextConstants.widgetRule6MediumTitle
+                description = TextConstants.widgetRule6MediumDetail
+                titleButton = TextConstants.widgetRule6MediumButton
+                action = .widgetOldBackup
             }
-        } else {
-            WidgetEntryMediumView(imageName: "back_up_medium",
-                                  title: TextConstants.widgetRule5MediumTitle,
-                                  description: TextConstants.widgetRule5MediumDetail,
-                                  titleButton: TextConstants.widgetRule5MediumButton)
         }
+
+        return (title: title, description: description, titleButton: titleButton, action: action)
     }
 }
 
+//MARK: - Rule 7 - Face Image Recognition
 
-//MARK: - WidgetPRemiumView
 struct WidgetFaceRecognitionSmallView: View {
     let entry: WidgetUserInfoEntry
     var body: some View {
-        let titles = data(for: entry)
-        WidgetEntrySmallView(imageName: "",
-                             title: titles.title,
-                             description: titles.description,
-                             titleButton: titles.titleButton,
-                             peopleThumbnails: entry.images)
+        let data = entryData()
+        let imageSide: CGFloat = 24
+        
+        GeometryReader { geo in
+            VStack(alignment: .leading) {
+                HStack(alignment: .center, spacing: -10) {
+                    ForEach(entry.images.indices, id: \.self) { index in
+                        if index == 2 && entry.peopleInfos.count < 3 {
+                            Image(uiImage: entry.images[index])
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: imageSide, height: imageSide, alignment: .center)
+                        } else {
+                            Image(uiImage: entry.images[index])
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.white, lineWidth: 1))
+                                .frame(width: imageSide, height: imageSide, alignment: .center)
+                        }
+                    }
+                }
+
+                Text(data.description)
+                    .foregroundColor(.white)
+                    .font(.system(size: 13, weight: .regular, design: .default))
+                Spacer()
+                WidgetButton(title: data.titleButton, cornerRadius: 12)
+                    .frame(width: .infinity, height: 36, alignment: .center)
+            }
+            .padding(.all, 16)
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .widgetURL(URL(string: SharedConstants.applicationQueriesScheme + data.action.rawValue))
+        }
     }
     
-    func data(for entry: WidgetUserInfoEntry) -> (title: String, description: String, titleButton: String) {
+    func entryData() -> (description: String, titleButton: String, action: PushNotificationAction) {
         if entry.isPremiumUser && entry.isFIREnabled {
             if entry.images.count > 2 {
-                return (title: TextConstants.widgetRule71SmallTitle,
-                        description: TextConstants.widgetRule71SmallDetail,
-                        titleButton: TextConstants.widgetRule71SmallButton)
+                return (description: TextConstants.widgetRule71SmallDetail,
+                        titleButton: TextConstants.widgetRule71SmallButton,
+                        action: .widgetFIRLess3People)
             } else {
-                return (title: TextConstants.widgetRule72SmallTitle,
-                        description: TextConstants.widgetRule72SmallDetail,
-                        titleButton: TextConstants.widgetRule72SmallButton)
+                return (description: TextConstants.widgetRule72SmallDetail,
+                        titleButton: TextConstants.widgetRule72SmallButton,
+                        action: .widgetFIR)
             }
         } else if entry.isPremiumUser && !entry.isFIREnabled {
-            return (title: "",
-                    description: TextConstants.widgetRule73SmallDetail,
-                    titleButton: TextConstants.widgetRule73SmallButton)
+            return (description: TextConstants.widgetRule73SmallDetail,
+                    titleButton: TextConstants.widgetRule73SmallButton,
+                    action: .widgetFIRDisabled)
         }
-        return (title: "",
-                description: TextConstants.widgetRule74SmallDetail,
-                titleButton: TextConstants.widgetRule74SmallButton)
+        return (description: TextConstants.widgetRule74SmallDetail,
+                titleButton: TextConstants.widgetRule74SmallButton,
+                action: .widgetFIRStandart)
     }
 }
 
 struct WidgetFaceRecognitionMediumView: View {
     let entry: WidgetUserInfoEntry
     var body: some View {
-        let titles = data(for: entry)
-        WidgetEntryMediumView(imageName: "",
-                              title: titles.title,
-                              description: titles.description,
-                              titleButton: titles.titleButton,
-                              peopleThumbnails: entry.images)
+        let data = entryData()
+        let imageSide: CGFloat = 57
+        
+        GeometryReader { geo in
+            VStack(alignment: .center) {
+                HStack(spacing: 10) {
+                    HStack(spacing: -25) {
+                        ForEach(entry.images.indices, id: \.self) { index in
+                            if index == 2 && entry.peopleInfos.count < 3 {
+                                Image(uiImage: entry.images[index])
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: imageSide, height: imageSide, alignment: .center)
+                            } else {
+                                Image(uiImage: entry.images[index])
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .clipShape(Circle())
+                                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                                    .frame(width: imageSide, height: imageSide, alignment: .center)
+                            }
+                        }
+                    }
+                    .frame(width: .infinity, height: imageSide, alignment: .top)
+
+                    WidgetMediumInfoView(title: "", description: data.description)
+                        .frame(width: .infinity, height: imageSide, alignment: .top)
+                }
+                Spacer()
+                WidgetButton(title: data.titleButton, cornerRadius: 12)
+                    .frame(width: .infinity, height: 44, alignment: .leading)
+            }
+            .padding(.all, 16)
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .widgetURL(URL(string: SharedConstants.applicationQueriesScheme + data.action.rawValue))
+        }
     }
     
-    func data(for entry: WidgetUserInfoEntry) -> (title: String, description: String, titleButton: String) {
+    func entryData() -> (description: String, titleButton: String, action: PushNotificationAction) {
         if entry.isPremiumUser && entry.isFIREnabled {
-            if entry.images.count > 2 {
-                return (title: TextConstants.widgetRule71MediumTitle,
-                        description: TextConstants.widgetRule71MediumDetail,
-                        titleButton: TextConstants.widgetRule71MediumButton)
+            if entry.peopleInfos.count < 3 {
+                return (description: TextConstants.widgetRule71MediumDetail,
+                        titleButton: TextConstants.widgetRule71MediumButton,
+                        action: .widgetFIRLess3People)
             } else {
-                return (title: TextConstants.widgetRule72MediumTitle,
-                        description: TextConstants.widgetRule72MediumDetail,
-                        titleButton: TextConstants.widgetRule72MediumButton)
+                return (description: TextConstants.widgetRule72MediumDetail,
+                        titleButton: TextConstants.widgetRule72MediumButton,
+                        action: .widgetFIR)
             }
         } else if entry.isPremiumUser && !entry.isFIREnabled {
-            return (title: "",
-                    description: TextConstants.widgetRule73MediumDetail,
-                    titleButton: TextConstants.widgetRule73MediumButton)
+            return (description: TextConstants.widgetRule73MediumDetail,
+                    titleButton: TextConstants.widgetRule73MediumButton,
+                    action: .widgetFIRDisabled)
         }
-        return (title: "",
-                description: TextConstants.widgetRule74MediumDetail,
-                titleButton: TextConstants.widgetRule74MediumButton)
+        return (description: TextConstants.widgetRule74MediumDetail,
+                titleButton: TextConstants.widgetRule74MediumButton,
+                action: .widgetFIRStandart)
     }
 }
 
-
-
+// MARK: - Common Views
 // MARK: - WidgetEntrySmallView
+
 struct WidgetEntrySmallView : View {
     var imageName: String
     var title: String
     var description: String
     var titleButton: String
     var percentage: CGFloat?
-    var peopleThumbnails: [UIImage]?
+    let action: PushNotificationAction
     
     var body: some View {
-        let colors = [
-            Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
-            Color(red: 68 / 255, green: 205 / 255, blue: 208 / 255)
-        ]
         GeometryReader { geo in
-            VStack(alignment: .leading, spacing: nil) {
+            VStack(alignment: .leading, spacing: 12) {
                 if let percentage = percentage {
-                    ProgressBarSmall(progress: percentage)
+                    ProgressBarSmall(imageName: imageName, progress: percentage)
                         .frame(height: 12, alignment: .center)
                     
                 } else {
-                    if let thumbnails = peopleThumbnails {
-                        PremiumPeopleAlbums(thumbnails: thumbnails)
-                            .frame(width: geo.size.height/7, height: geo.size.height/7, alignment: .leading)
-                            .padding(.top, 5)
-                    } else {
-                        Image(imageName)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(minWidth: 0, maxWidth: 27, minHeight: 0, maxHeight: 27, alignment: .leading)
-                    }
+                    Image(imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(minWidth: 0, maxWidth: 27, minHeight: 0, maxHeight: 27, alignment: .leading)
                 }
                 
                 Text(title)
@@ -303,15 +472,18 @@ struct WidgetEntrySmallView : View {
                     .font(.system(size: 13, weight: .regular, design: .default))
                 Spacer()
                 WidgetButton(title: titleButton, cornerRadius: 12)
-                    .frame(width: geo.size.width - 32, height: 36, alignment: .center)
+                    .frame(width: .infinity, height: 36, alignment: .center)
             }
             .padding(.all, 16)
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            .background(LinearGradient(gradient: Gradient(colors: colors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .widgetURL(URL(string: SharedConstants.applicationQueriesScheme + action.rawValue))
         }
     }
 }
+
 //MARK: - WidgetEntryMediumView
+
 struct WidgetEntryMediumView : View {
     var imageName: String
     var title: String
@@ -319,64 +491,40 @@ struct WidgetEntryMediumView : View {
     var titleButton: String
     var percentage: CGFloat?
     var countSyncFiles: Int?
-    var peopleThumbnails: [UIImage]?
-    
-    let colors = [
-        Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
-        Color(red: 68 / 255, green: 205 / 255, blue: 208 / 255)
-    ]
+    let action: PushNotificationAction
     
     var body: some View {
         GeometryReader { geo in
-            VStack(alignment: .center, spacing: nil) {
-                HStack(spacing: peopleThumbnails == nil ? 8 : -30) {
+            VStack(alignment: .center) {
+                HStack(spacing: 16) {
                     if let percentage = percentage {
-                        ProgressBarMedium(progress: percentage)
+                        ProgressBarMedium(imageName: imageName, progress: percentage)
                             .frame(width: 57, height: 57, alignment: .leading)
-//                            .padding(.all, 10)
                     } else {
-                        if let thumbnails = peopleThumbnails {
-                            PremiumPeopleAlbumsMedium(thumbnails: thumbnails)
-                                .frame(width: geo.size.height, height: geo.size.height / 2.5, alignment: .leading)
-                        } else {
-                            Image(imageName)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(minWidth: 0, maxWidth: 54, minHeight: 0, maxHeight: 54, alignment: .leading)
-                        }
+                        Image(imageName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(minWidth: 0, maxWidth: 54, minHeight: 0, maxHeight: 90, alignment: .top)
                     }
-                    VStack(alignment: .center, spacing: nil) {
-                        Text(title)
-                            .foregroundColor(.white)
-                            .font(.system(size: 14, weight: .semibold, design: .default)) +
-                        Text(description)
-                            .foregroundColor(.white)
-                            .font(.system(size: 14, weight: .regular, design: .default))
-                        if let _ = countSyncFiles {
-                            Text("See files")
-                                .foregroundColor(.white)
-                                .font(Font.headline.weight(.bold))
-                                .frame(width: .infinity, alignment: .leading)
-                        }
-                        Spacer()
-                    }
-                    .padding(.top, 16)
-                    
-                    Spacer()
+
+                    WidgetMediumInfoView(title: title, description: description)
+                        .padding(.top, 8)
                 }
+                
                 Spacer()
                 WidgetButton(title: titleButton, cornerRadius: 12)
-                    .frame(width: geo.size.width - 32, height: 44, alignment: .leading)
+                    .frame(width: .infinity, height: 44, alignment: .leading)
             }
-            .padding(EdgeInsets(top: 8, leading: 16, bottom: 16, trailing: 16))
+            .padding(.all, 16)
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            .background(LinearGradient(gradient: Gradient(colors: colors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .widgetURL(URL(string: SharedConstants.applicationQueriesScheme + action.rawValue))
         }
     }
 }
 
-
 // MARK: - Custom Button
+
 struct WidgetButton: View {
     var title: String
     var cornerRadius: CGFloat
@@ -394,12 +542,10 @@ struct WidgetButton: View {
 }
 
 //MARK: - Text View
+
 struct CirclePercentageViewSmall: View {
     var percentage: Int
-    let colors = [
-        Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
-        Color(red: 68 / 255, green: 205 / 255, blue: 208 / 255)
-    ]
+
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var startAnimation = -500
     var body: some View {
@@ -415,14 +561,16 @@ struct CirclePercentageViewSmall: View {
                 }
 
         }
-        .background(LinearGradient(gradient: Gradient(colors: colors), startPoint: UnitPoint(x: 0.1, y: 0.1), endPoint: UnitPoint(x: 1.2, y: 1.2)))
+        .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: UnitPoint(x: 0.1, y: 0.1), endPoint: UnitPoint(x: 1.2, y: 1.2)))
         .frame(width: .infinity, height: .infinity, alignment: .center)
     }
 }
 
 // MARK: - ProgressBarSmall
+
 struct ProgressBarSmall: View {
-    var progress: CGFloat
+    let imageName: String
+    let progress: CGFloat
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
@@ -434,10 +582,10 @@ struct ProgressBarSmall: View {
                     .foregroundColor(Color(UIColor.white))
                     .animation(.linear)
                     .cornerRadius(3)
-                Image("signinicon")
+                Image(imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 12, height: 12, alignment: .center)
+                    .frame(width: 25, height: 25, alignment: .center)
                     .offset(x: min(CGFloat(progress)*geometry.size.width - 5, geometry.size.width), y: 0)
             }
         }
@@ -445,18 +593,20 @@ struct ProgressBarSmall: View {
 }
 
 // MARK: - ProgressBarMedium
+
 struct ProgressBarMedium: View {
-    var progress: CGFloat
+    let imageName: String
+    let progress: CGFloat
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 Circle()
-                    .stroke(lineWidth: 8.0)
+                    .stroke(lineWidth: 6)
                     .opacity(0.3)
                     .foregroundColor(Color.black)
                 Circle()
                     .trim(from: 0.0, to: progress)
-                    .stroke(style: StrokeStyle(lineWidth: 8.0, lineCap: .round, lineJoin: .round))
+                    .stroke(style: StrokeStyle(lineWidth: 6, lineCap: .round, lineJoin: .round))
                     .foregroundColor(Color.white)
                     .rotationEffect(Angle(degrees: 270.0))
                     .rotation3DEffect(
@@ -470,11 +620,11 @@ struct ProgressBarMedium: View {
                 Text("%")
                     .font(.system(size: 10, weight: .regular, design: .default))
                     .foregroundColor(.white)
-                Image("signinicon")
+                Image(imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 20, height: 20, alignment: .center)
-                    .offset(x: 0, y:  min(CGFloat(0.5) * geometry.size.width, geometry.size.width))
+                    .frame(width: 29, height: 29, alignment: .center)
+                    .offset(x: 0, y: min(CGFloat(0.5) * geometry.size.width, geometry.size.width))
                     .rotationEffect(Angle(degrees: 180))
                 
             }
@@ -482,146 +632,105 @@ struct ProgressBarMedium: View {
     }
 }
 
-
-// MARK: - PremiumPeopleAlbums
-struct PremiumPeopleAlbums: View {
-    var thumbnails = [UIImage]()
-    var body: some View {
-        HStack(alignment: .center, spacing: -8) {
-            ForEach(thumbnails.indices, id: \.self) { index in
-                Image(uiImage: thumbnails[index])
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 1))
-                    .frame(width: 24, height: 24, alignment: .center)
-            }
-        }
-    }
-}
-
-struct PremiumPeopleAlbumsMedium: View {
-    var thumbnails = [UIImage]()
-    var body: some View {
-        HStack(alignment: .center, spacing: -25) {
-            ForEach(thumbnails.indices, id: \.self) { index in
-                Image(uiImage: thumbnails[index])
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
-                    .frame(width: 57, height: 57, alignment: .center)
-            }
-        }
-    }
-}
-
-
-// MARK: - AutoSync status
-struct WidgetAutoSyncStatusSmall: View {
-    let entry: WidgetAutoSyncEntry
-    var body: some View {
-        let title = entry.isSyncEnabled ? TextConstants.widgetRule42SmallTitle : ""
-        let detail = entry.isSyncEnabled ? TextConstants.widgetRule42SmallDetail : TextConstants.widgetRule41SmallDetail
-        let button = entry.isSyncEnabled ? TextConstants.widgetRule42SmallButton : TextConstants.widgetRule41SmallButton
-
-        WidgetSyncSmallView(imageName: "widget_small_sync",
-                             title: title,
-                             description: detail,
-                             titleButton: button)
-    }
-}
-
-struct WidgetSyncSmallView: View {
-    var imageName: String
-    var title: String
-    var description: String
-    var titleButton: String
+struct WidgetMediumInfoView: View {
+    let title: String
+    let description: String
+    var spacing: CGFloat = 6
+    var titleWeight: Font.Weight = .semibold
+    var descriptionWeight: Font.Weight = .regular
     
     var body: some View {
-        let colors = [
-            Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
-            Color(red: 68 / 255, green: 205 / 255, blue: 208 / 255)
-        ]
-        GeometryReader { geo in
-            VStack(alignment: .leading) {
-                Image(imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(minWidth: 0, maxWidth: 16, minHeight: 0, maxHeight: 22, alignment: .leading)
-                
-                Spacer(minLength: 10)
-                
-                Text(title)
-                    .foregroundColor(.white)
-                    .font(.system(size: 13, weight: .medium, design: .default))
-                    .frame(width: .infinity, height: 19, alignment: .leading)
-                Text(description)
-                    .foregroundColor(.white)
-                    .font(.system(size: 13, weight: .regular, design: .default))
-                    .frame(width: .infinity, height: 19, alignment: .leading)
-
-                Spacer()
-                WidgetButton(title: titleButton, cornerRadius: 12)
-                    .frame(width: geo.size.width - 32, height: 36, alignment: .leading)
-            }
-            .padding(.all, 16)
-            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            .background(LinearGradient(gradient: Gradient(colors: colors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
-        }
-    }
-}
-
-struct WidgetAutoSyncStatusMeduium: View {
-    let entry: WidgetAutoSyncEntry
-    var body: some View {
-        let imageName = entry.isSyncEnabled ? "widget_medium_sync" : "widget_medium_synced"
-        let title = entry.isSyncEnabled ? TextConstants.widgetRule42MediumTitle : TextConstants.widgetRule41MediumDetail
-        let detail = entry.isSyncEnabled ? TextConstants.widgetRule42MediumDetail : TextConstants.widgetRule41MediumDetailButton
-        let button = entry.isSyncEnabled ? TextConstants.widgetRule42MediumButton : TextConstants.widgetRule41MediumButton
-        
-        WidgetSyncMediumView(imageName: imageName, title: title, description: detail, titleButton: button)
-    }
-}
-
-struct WidgetSyncMediumView: View {
-    var imageName: String
-    var title: String
-    var description: String
-    var titleButton: String
-    
-    var body: some View {
-        let colors = [
-            Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
-            Color(red: 68 / 255, green: 205 / 255, blue: 208 / 255)
-        ]
-        GeometryReader { geo in
-            VStack(alignment: .leading) {
-                HStack(spacing: 14) {
-                    Image(imageName)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(minWidth: 0, maxWidth: 60, minHeight: 0, maxHeight: 40, alignment: .leading)
-                        
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(title)
-                            .foregroundColor(.white)
-                            .font(.system(size: 14, weight: .regular, design: .default))
-                            .lineLimit(2)
-                        Text(description)
-                            .foregroundColor(.white)
-                            .font(.system(size: 14, weight: .semibold, design: .default))
-                            .lineLimit(2)
-                    }
+        GeometryReader { geometry in
+            VStack(alignment: .leading, spacing: spacing) {
+                if !title.isEmpty {
+                    Text(title)
+                        .foregroundColor(.white)
+                        .font(.system(size: 14, weight: titleWeight, design: .default))
                 }
-                
+                if !description.isEmpty {
+                    Text(description)
+                        .foregroundColor(.white)
+                        .font(.system(size: 14, weight: descriptionWeight, design: .default))
+                }
                 Spacer()
-                WidgetButton(title: titleButton, cornerRadius: 12)
-                    .frame(width: geo.size.width - 32, height: 44, alignment: .leading)
             }
-            .padding(EdgeInsets(top: 29, leading: 16, bottom: 16, trailing: 16))
-            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            .background(LinearGradient(gradient: Gradient(colors: colors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+        }
+    }
+}
+
+struct Widget_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            //Rule 0
+            
+//            WidgetLoginRequiredSmallView()
+//                .previewContext(WidgetPreviewContext(family: .systemSmall))
+//            WidgetLoginRequiredMediumView()
+//                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            
+            //Rule 1
+            
+//            let quotaEntry = WidgetQuotaEntry(usedPercentage: 75, date: Date())
+//            WidgetQuotaSmallView(entry: quotaEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemSmall))
+//            WidgetQuotaMediumView(entry: quotaEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            
+            //Rule 2
+
+//            let storageEntry = WidgetDeviceQuotaEntry(usedPersentage: 90, date: Date())
+//            WidgetDeviceQuotaSmallView(entry: storageEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemSmall))
+//            WidgetDeviceQuotaMediumView(entry: storageEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            
+            //Rule 4_1
+            
+//            let syncEntry = WidgetAutoSyncEntry(hasUnsynced: true, isSyncEnabled: false, date: Date())
+//            WidgetAutoSyncStatusSmall(entry: syncEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemSmall))
+//            WidgetAutoSyncStatusMedium(entry: syncEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            
+            //Rule 4_2
+            
+//            let autoSyncEntry = WidgetAutoSyncEntry(hasUnsynced: true, isSyncEnabled: true, date: Date())
+//            WidgetAutoSyncStatusSmall(entry: autoSyncEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemSmall))
+//            WidgetAutoSyncStatusMedium(entry: autoSyncEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            
+            //Rule 5
+            
+//            let backupEntry = WidgetContactBackupEntry(backupDate: nil, date: Date())
+//            WidgetContactBackedupSmallView(entry: backupEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemSmall))
+//            WidgetContactBackedupMediumView(entry: backupEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            
+            //Rule 6
+            
+//            let oldBackupEntry = WidgetContactBackupEntry(backupDate: Date().addingTimeInterval(-3000000),
+//                                                          date: Date())
+//            WidgetContactBackedupSmallView(entry: oldBackupEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemSmall))
+//            WidgetContactBackedupMediumView(entry: oldBackupEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemMedium))
+
+            //Rule 7
+            
+//            let userInfoEntry = WidgetUserInfoEntry(isFIREnabled: true,
+//                                                    isPremiumUser: true,
+//                                                    peopleInfos: [],
+//                                                    images: [UIImage(named: "user-3")!,
+//                                                             UIImage(named: "user-2")!,
+//                                                             UIImage(named: "plusIcon")!],
+//                                                    date: Date())
+//            WidgetFaceRecognitionSmallView(entry: userInfoEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemSmall))
+//
+//            WidgetFaceRecognitionMediumView(entry: userInfoEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemMedium))
         }
     }
 }
