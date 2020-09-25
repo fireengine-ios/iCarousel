@@ -23,6 +23,7 @@ final class WidgetPresentationService {
 
     private let serverService = WidgetServerService.shared
     private let photoLibraryService = WidgetPhotoLibraryObserver.shared
+    private lazy var imageLoader = WidgetImageLoader()
 
     func getStorageQuota(completion: @escaping ValueHandler<Int>, fail: @escaping VoidHandler) {
         serverService.getQuotaInfo { response in
@@ -63,7 +64,7 @@ final class WidgetPresentationService {
         serverService.getBackUpStatus(completion: completion, fail: fail)
     }
     
-    func getPremiumStatus(completion: @escaping ValueHandler<UserInfo>) {
+    func getPremiumStatus(completion: @escaping ValueHandler<(userInfo: UserInfo, isLoadingImages: Bool)>) {
         let userInfo = UserInfo()
         let group = DispatchGroup()
         
@@ -74,21 +75,16 @@ final class WidgetPresentationService {
             if userInfo.isPremiumUser && userInfo.isFIREnabled {
                 self?.getPeopleInfo { [weak self] peopleInfos in
                     userInfo.peopleInfos = peopleInfos
-                    self?.loadImages(completion: { images in
-                        userInfo.images = images
-                        DispatchQueue.main.async {
-                            completion(userInfo)
-                        }
+                    self?.loadImages(completion: { result in
+                        userInfo.images = result.images
+                        completion((userInfo, result.isLoadingImages))
                     })
                 }
             } else {
                 //show only placeholders
                 userInfo.images = [UIImage(named: "user-3")!, UIImage(named: "user-2")!, UIImage(named: "user-1")!]
-                DispatchQueue.main.async {
-                    completion(userInfo)
-                }
+                completion((userInfo, false))
             }
-            
         }
 
         getFaceImageAllowance { face in
@@ -139,16 +135,36 @@ final class WidgetPresentationService {
         }
     }
     
-    private func loadImages(completion: @escaping ValueHandler<[UIImage]>) {
-        getPeopleInfo { peopleInfos in
-            //TODO: Need load thumbnails
-            if peopleInfos.count == 3 {
-                completion([UIImage(named: "user-3")!, UIImage(named: "user-2")!, UIImage(named: "user-1")!])
-            } else {
-                completion([UIImage(named: "user-3")!, UIImage(named: "user-2")!, UIImage(named: "plusIcon")!])
+    private func loadImages(completion: @escaping ValueHandler<(images: [UIImage], isLoadingImages: Bool)>) {
+        getPeopleInfo { [weak self] peopleInfos in
+            let urls = peopleInfos.map { $0.thumbnail ?? $0.alternateThumbnail }
+            self?.imageLoader.loadImage(urls: urls) { loadingImages in
+                var images = [UIImage]()
+                var isLoadingImages = false
+                loadingImages.enumerated().forEach { index, image in
+                    if let image = image {
+                        images.append(image)
+                    } else {
+                        //prepare placeholders until loading real images
+                        switch index {
+                        case 0:
+                            images.append(UIImage(named: "user-3")!)
+                        case 1:
+                            images.append(UIImage(named: "user-2")!)
+                        case 2:
+                            if urls.count < 3 {
+                                images.append(UIImage(named: "plusIcon")!)
+                            } else {
+                                images.append(UIImage(named: "user-1")!)
+                            }
+                        default:
+                            images.append(UIImage(named: "user-3")!)
+                        }
+                        isLoadingImages = true
+                    }
+                }
+                completion((images, isLoadingImages))
             }
-//            let urls = peopleInfos.map { $0.thumbnail ?? $0.alternateThumbnail }
-//            WidgetImageLoader().loadImage(urls: urls, completion: completion)
         }
     }
 }

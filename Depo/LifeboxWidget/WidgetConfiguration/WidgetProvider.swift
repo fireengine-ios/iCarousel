@@ -111,12 +111,18 @@ struct WidgetProvider: TimelineProvider {
 
         // premium users
         WidgetPresentationService.shared.getPremiumStatus { response in
-            let date = Calendar.current.date(byAdding: .minute, value: timeInterval, to: todayDate)!
+            let date: Date
+            if response.isLoadingImages {
+                date = Calendar.current.date(byAdding: .second, value: 10, to: todayDate)!
+            } else {
+                date = Calendar.current.date(byAdding: .second, value: timeInterval, to: todayDate)!
+            }
+
             let entry = WidgetUserInfoEntry(
-                isFIREnabled: response.isFIREnabled,
-                isPremiumUser: response.isPremiumUser,
-                peopleInfos: response.peopleInfos,
-                images: response.images,
+                isFIREnabled: response.userInfo.isFIREnabled,
+                isPremiumUser: response.userInfo.isPremiumUser,
+                peopleInfos: response.userInfo.peopleInfos,
+                images: response.userInfo.images,
                 date: date
             )
             entries.append(entry)

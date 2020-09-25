@@ -86,6 +86,11 @@ def notification_pods
   pod 'iCarousel', '~> 1'
 end
 
+def widget_pods
+  shared_pods
+  pod 'SDWebImage', '~> 4'
+end
+
 target 'Depo_LifeTech' do
   core_pods
 end
@@ -131,7 +136,7 @@ target 'LifeboxFileProviderUI' do
 end
 
 target 'LifeboxWidgetExtension' do
-  shared_pods
+  widget_pods
 end
 
 #target 'autosync-widget' do

@@ -419,7 +419,7 @@ struct WidgetFaceRecognitionMediumView: View {
     
     func entryData() -> (description: String, titleButton: String, action: PushNotificationAction) {
         if entry.isPremiumUser && entry.isFIREnabled {
-            if entry.peopleInfos.count < 3 {
+            if entry.peopleInfos.count > 2 {
                 return (description: TextConstants.widgetRule71MediumDetail,
                         titleButton: TextConstants.widgetRule71MediumButton,
                         action: .widgetFIRLess3People)
