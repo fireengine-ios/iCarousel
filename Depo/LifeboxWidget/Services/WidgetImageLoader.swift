@@ -8,23 +8,46 @@
 
 import UIKit
 import Alamofire
+import WidgetKit
+import SDWebImage
 
 protocol ImageCache {
-    subscript(_ url: URL) -> UIImage? { get set }
+    subscript(_ url: URL?) -> UIImage? { get set }
 }
 
 struct WidgetImageCache: ImageCache {
     static let shared = WidgetImageCache()
-    private let cache = NSCache<NSURL, UIImage>()
+    private let cache = SDWebImageManager.shared().imageCache
 
-    subscript(_ key: URL) -> UIImage? {
-        get { cache.object(forKey: key as NSURL) }
-        set { newValue == nil ? cache.removeObject(forKey: key as NSURL) : cache.setObject(newValue!, forKey: key as NSURL) }
+    subscript(_ key: URL?) -> UIImage? {
+        get { getImage(for: key) }
+        set { save(image: newValue, url: key) }
+    }
+    
+    private func getImage(for url: URL?) -> UIImage? {
+        guard let path = url?.byTrimmingQuery?.absoluteString else {
+            return nil
+        }
+        
+        return cache?.imageFromCache(forKey: path)
+    }
+    
+    private func save(image: UIImage?, url: URL?) {
+        guard let path = url?.byTrimmingQuery?.absoluteString  else {
+            return
+        }
+        
+        if let image = image {
+            cache?.store(image, forKey: path, completion: nil)
+        } else {
+            cache?.removeImage(forKey: path, withCompletion: nil)
+        }
     }
 }
 
 final class WidgetImageLoader {
     
+    private let cache = WidgetImageCache.shared
     private let imageProcessingQueue = DispatchQueue(label: DispatchQueueLabels.widgetImageLoaderQueue)
     private lazy var operationQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -33,18 +56,37 @@ final class WidgetImageLoader {
         queue.underlyingQueue = imageProcessingQueue
         return queue
     }()
+    private var operations = [WidgetImageOperation]()
     
     func loadImage(urls: [URL?], completion: @escaping ValueHandler<[UIImage?]>) {
         var images = [UIImage?]()
         urls.forEach { url in
-            let operation = WidgetImageOperation(url: url) { image in
-                images.append(image)
-                if images.count == urls.count {
-                    completion(images)
+            if let url = url?.byTrimmingQuery {
+                if let image = cache[url] {
+                    images.append(image)
+                } else {
+                    images.append(nil)
+                    let operation = WidgetImageOperation(url: url) { [weak self] operation in
+                        guard let self = self else {
+                            return
+                        }
+                        
+                        if let index = self.operations.firstIndex(of: operation) {
+                            self.operations.remove(at: index)
+                        }
+                        
+                        if self.operations.isEmpty {
+                            WidgetCenter.shared.reloadAllTimelines()
+                        }
+                    }
+                    operations.append(operation)
+                    operationQueue.addOperation(operation)
                 }
+            } else {
+                images.append(nil)
             }
-            operationQueue.addOperation(operation)
         }
+        completion(images)
     }
 }
 
@@ -56,9 +98,10 @@ final class WidgetImageOperation: Operation {
     
     private var url: URL?
     private var task: URLSessionTask?
-    private var outputBlock: ValueHandler<UIImage?>?
+    private(set) var outputImage: UIImage?
+    private var outputBlock: ValueHandler<WidgetImageOperation>?
     
-    init(url: URL?, outputBlock: ValueHandler<UIImage?>?) {
+    init(url: URL?, outputBlock: ValueHandler<WidgetImageOperation>?) {
         self.url = url
         self.outputBlock = outputBlock
         super.init()
@@ -68,20 +111,18 @@ final class WidgetImageOperation: Operation {
         super.cancel()
     
         task?.cancel()
-        outputBlock?(nil)
+        outputBlock?(self)
     }
     
     override func main() {
-        guard let url = url?.byTrimmingQuery else {
-            outputBlock?(nil)
+        if let image = cache[url] {
+            outputImage = image
+            outputBlock?(self)
             return
         }
         
-        var outputImage: UIImage?
-        
-        if let image = cache[url] {
-            outputImage = image
-            outputBlock?(outputImage)
+        guard let url = url?.byTrimmingQuery else {
+            outputBlock?(self)
             return
         }
         
@@ -94,16 +135,13 @@ final class WidgetImageOperation: Operation {
                 return
             }
             
-            outputImage = image
-            if let image = image {
-                self.cache(image)
-            }
-
+            self.outputImage = image
+            self.cache[url] = image
             self.semaphore.signal()
         })
         
         semaphore.wait()
-        outputBlock?(outputImage)
+        outputBlock?(self)
     }
     
     private func cache(_ image: UIImage?) {
