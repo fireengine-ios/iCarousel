@@ -65,7 +65,9 @@ struct WidgetProvider: TimelineProvider {
         WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
             if hasUnsynced {
                 //TODO: check if autosync is on/off in shared group user defaults
-                entries.append(WidgetAutoSyncEntry(hasUnsynced: true, isSyncEnabled: true, date: todayDate))
+                //TODO: check hasUnsynced
+                //TODO: check isAppLaunched
+                entries.append(WidgetAutoSyncEntry(isSyncEnabled: true, isAppLaunched: true, date: todayDate))
             }
             group.leave()
         }

@@ -62,12 +62,30 @@ final class WidgetUserInfoEntry: WidgetBaseEntry {
 }
 
 final class WidgetAutoSyncEntry: WidgetBaseEntry {
-    let hasUnsynced: Bool
     let isSyncEnabled: Bool
+    let isAppLaunched: Bool
     
-    init(hasUnsynced: Bool, isSyncEnabled: Bool, date: Date) {
-        self.hasUnsynced = hasUnsynced
+    init(isSyncEnabled: Bool, isAppLaunched: Bool, date: Date) {
         self.isSyncEnabled = isSyncEnabled
+        self.isAppLaunched = isAppLaunched
+        
+        super.init(date: date)
+    }
+}
+
+final class WidgetSyncInProgressEntry: WidgetBaseEntry {
+    let uploadCount: Int
+    let totalCount: Int
+    let currentFileName: String
+    
+    var isSyncComplete: Bool {
+        uploadCount == totalCount
+    }
+    
+    init(uploadCount: Int, totalCount: Int, currentFileName: String, date: Date) {
+        self.uploadCount = uploadCount
+        self.totalCount = totalCount
+        self.currentFileName = currentFileName
         
         super.init(date: date)
     }
