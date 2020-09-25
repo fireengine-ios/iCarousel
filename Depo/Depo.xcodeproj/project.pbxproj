@@ -5509,6 +5509,9 @@
 		98E792D9203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E792D7203D6D06003A1CB3 /* RecentlySearchedFaceImageTableViewCell.swift */; };
 		98EAC9422080CBFF00AAD5B6 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EAC9412080CBFF00AAD5B6 /* ContactService.swift */; };
 		98EAC9432080CBFF00AAD5B6 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EAC9412080CBFF00AAD5B6 /* ContactService.swift */; };
+		98EC3EE0251E2EB40029A9DF /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
+		98EC3F9B251E2F770029A9DF /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
+		98EC3FB2251E2F870029A9DF /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
 		98F9C56E23584BDE008C5ECF /* CampaignDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F9C56D23584BDE008C5ECF /* CampaignDetailViewController.swift */; };
 		98F9C56F23584BDE008C5ECF /* CampaignDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F9C56D23584BDE008C5ECF /* CampaignDetailViewController.swift */; };
 		98F9C57023584BDE008C5ECF /* CampaignDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F9C56D23584BDE008C5ECF /* CampaignDetailViewController.swift */; };
@@ -30616,6 +30619,7 @@
 				B5358C802501418A0005FCAD /* GZIP.m in Sources */,
 				B5358C7E250141830005FCAD /* ContactUtil.m in Sources */,
 				B5358C89250141AB0005FCAD /* Utils.m in Sources */,
+				98EC3FB2251E2F870029A9DF /* UIImage+Size.swift in Sources */,
 				B5358C87250141A50005FCAD /* SyncSettings.m in Sources */,
 				B546EE1324FC2A4E00C1713C /* RouteRequests.swift in Sources */,
 				B58936EC24FA906300E3FA9C /* PasscodeStorage.swift in Sources */,
@@ -30634,6 +30638,7 @@
 				B5BF41152514AA6100B0EFEB /* Equatable+Contains.swift in Sources */,
 				B546EE2524FD1C5D00C1713C /* DispatchQueue+Main.swift in Sources */,
 				B55827A424FE97DE0039DD11 /* (null) in Sources */,
+				98EC3F9B251E2F770029A9DF /* SharedEnums.swift in Sources */,
 				B558279B24FE97B40039DD11 /* (null) in Sources */,
 				B55827AC24FE97F70039DD11 /* (null) in Sources */,
 				B558279924FE97AD0039DD11 /* (null) in Sources */,
@@ -30685,6 +30690,7 @@
 				B558279A24FE97B10039DD11 /* (null) in Sources */,
 				B5B5E5BD24FBE38200146750 /* DispatchQueueLabels.swift in Sources */,
 				B558279724FE97030039DD11 /* AuthorityType.swift in Sources */,
+				98EC3EE0251E2EB40029A9DF /* WidgetService.swift in Sources */,
 				B558277224FE25CE0039DD11 /* WidgetView.swift in Sources */,
 				B558279824FE97530039DD11 /* Mapping.swift in Sources */,
 				B55827A824FE97EA0039DD11 /* (null) in Sources */,

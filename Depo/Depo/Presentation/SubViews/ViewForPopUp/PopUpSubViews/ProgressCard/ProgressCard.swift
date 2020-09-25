@@ -111,13 +111,13 @@ final class ProgressCard: BaseCardView, ProgressCardProtocol {
 extension ProgressCard: LoadingImageViewDelegate {
     func onImageLoaded(image: UIImage?) {
         privateQueue.async {
-            WidgetService.shared.notifyWidgetAbout(currentImage: image)
+//            WidgetService.shared.notifyWidgetAbout(currentImage: image)
         }
     }
     
     func onLoadingImageCanceled() {
         privateQueue.async {
-            WidgetService.shared.notifyWidgetAbout(currentImage: nil)
+//            WidgetService.shared.notifyWidgetAbout(currentImage: nil)
         }
     }
 }

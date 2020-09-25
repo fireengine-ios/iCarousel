@@ -63,12 +63,21 @@ struct WidgetProvider: TimelineProvider {
         
         // unysnced items status enter
         WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
-            if hasUnsynced {
-                //TODO: check if autosync is on/off in shared group user defaults
-                //TODO: check hasUnsynced
-                //TODO: check isAppLaunched
-                entries.append(WidgetAutoSyncEntry(isSyncEnabled: true, isAppLaunched: true, date: todayDate))
+            let syncInfo = WidgetPresentationService.shared.getSyncInfo()
+            if syncInfo.syncStatus == .executing {
+                //TODO: need file name
+                entries.append(WidgetSyncInProgressEntry(uploadCount: syncInfo.uploadCount,
+                                                         totalCount: syncInfo.totalCount,
+                                                         currentFileName: "name_of_file",
+                                                         date: todayDate))
+            } else if hasUnsynced {
+                //TODO: need check syncStatus
+                let isSyncEnabled = !syncInfo.syncStatus.isContained(in: [.failed, .undetermined, .stoped])
+                entries.append(WidgetAutoSyncEntry(isSyncEnabled: isSyncEnabled,
+                                                   isAppLaunched: syncInfo.isAppLaunch,
+                                                   date: todayDate))
             }
+            
             group.leave()
         }
 
