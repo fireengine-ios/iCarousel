@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreGraphics
+import MMWormhole
 
 class UserInfo {
     var isFIREnabled = false
@@ -16,8 +17,16 @@ class UserInfo {
     var images = [UIImage]()
 }
 
+class SyncInfo {
+    var syncStatus: AutoSyncStatus = .undetermined
+    var isAppLaunch = false
+    var totalCount = 0
+    var uploadCount = 0
+}
+
 final class WidgetPresentationService {
     static let shared = WidgetPresentationService()
+    private let widgetService = WidgetService.shared
     
     var isAuthorized: Bool { serverService.isAuthorized }
 
@@ -25,6 +34,16 @@ final class WidgetPresentationService {
     private let photoLibraryService = WidgetPhotoLibraryObserver.shared
     private lazy var imageLoader = WidgetImageLoader()
 
+    init() {
+        setupWormhole()
+    }
+    
+    private func setupWormhole() {
+        widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeMessageIdentifier) { [weak self] messageObject in
+
+        }
+    }
+    
     func getStorageQuota(completion: @escaping ValueHandler<Int>, fail: @escaping VoidHandler) {
         serverService.getQuotaInfo { response in
             switch response {
@@ -100,6 +119,21 @@ final class WidgetPresentationService {
     
     func hasUnsyncedItems(completion: @escaping (Bool) -> ()) {
         photoLibraryService.hasUnsynced(completion: completion)
+    }
+    
+    func getSyncInfo() -> SyncInfo {
+        let syncInfo = SyncInfo()
+        syncInfo.syncStatus = widgetService.syncStatus
+        syncInfo.uploadCount = widgetService.finishedCount
+        syncInfo.totalCount = widgetService.totalCount
+        
+        if let date = widgetService.mainAppResponsivenessDate, date.timeIntervalSince(Date()) < NumericConstants.intervalInSecondsBetweenAppResponsivenessUpdate * 0.1 {
+            syncInfo.isAppLaunch = true
+        } else {
+            syncInfo.isAppLaunch = false
+        }
+        
+        return syncInfo
     }
     
     private func getFaceImageAllowance(completion: @escaping ((Bool) -> ())) {

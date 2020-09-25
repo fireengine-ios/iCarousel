@@ -78,7 +78,7 @@ final class WidgetService {
     }
     
     func notifyWidgetAbout(currentImage: UIImage?) {
-        currentImageData = currentImage?.jpeg(.low)
+//        currentImageData = currentImage?.jpeg(.low)
         wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeMessageIdentifier)
     }
     

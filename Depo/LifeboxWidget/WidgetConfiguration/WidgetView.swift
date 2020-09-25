@@ -48,7 +48,7 @@ struct WidgetSmallSizeView: View {
             WidgetFaceRecognitionSmallView(entry: entry)
 
         case let entry as WidgetAutoSyncEntry:
-            WidgetAutoSyncStatusSmall(entry: entry)
+            WidgetAutoSyncStatusSmallView(entry: entry)
 
         default:
             WidgetLoginRequiredSmallView()
@@ -75,7 +75,7 @@ struct WidgetMediumSizeView: View {
             WidgetFaceRecognitionMediumView(entry: entry)
             
         case let entry as WidgetAutoSyncEntry:
-            WidgetAutoSyncStatusMedium(entry: entry)
+            WidgetAutoSyncStatusMediumView(entry: entry)
             
         default:
             WidgetLoginRequiredMediumView()
@@ -159,17 +159,99 @@ struct WidgetDeviceQuotaMediumView: View {
     }
 }
 
-// MARK: - Rule 3/4 AutoSync status
+// MARK: - Rule 3 - Sync in progress
+// 3-1 - sync in progress
+// 3-2 - sync is complete
 
-struct WidgetAutoSyncStatusSmall: View {
+struct WidgetSyncInProgressSmallView: View {
+    let entry: WidgetSyncInProgressEntry
+
+    var body: some View {
+        if entry.isSyncComplete {
+            WidgetSyncSmallView(detail: TextConstants.widgetRule32SmallDetail,
+                                titleButton: TextConstants.widgetRule32SmallButton,
+                                action: .widgetSyncInProgress)
+        } else {
+            WidgetSyncSmallView(detail: String(format: TextConstants.widgetRule31SmallDetail, entry.uploadCount, entry.totalCount, entry.currentFileName),
+                                titleButton: TextConstants.widgetRule31SmallButton,
+                                action: .widgetSyncInProgress)
+        }
+    }
+}
+
+struct WidgetSyncInProgressMediumView: View {
+    let entry: WidgetSyncInProgressEntry
+    
+    var body: some View {
+        if entry.isSyncComplete {
+            WidgetSyncMediumView(imageName: "widget_medium_sync",
+                                 detail: TextConstants.widgetRule32MediumDetail,
+                                 titleButton: TextConstants.widgetRule32MediumButton,
+                                 action: .widgetSyncInProgress)
+        } else {
+            WidgetSyncMediumView(imageName: "widget_medium_sync",
+                                 detail: String(format: TextConstants.widgetRule31MediumDetail, entry.uploadCount, entry.totalCount, entry.currentFileName),
+                                 titleButton: TextConstants.widgetRule31MediumButton,
+                                 action: .widgetSyncInProgress)
+        }
+    }
+}
+
+// MARK: - Rule 4 AutoSync status
+// 4-1 - waiting for enable autosync
+// 4-2 - waiting for launch app
+
+struct WidgetAutoSyncStatusSmallView: View {
     let entry: WidgetAutoSyncEntry
     var body: some View {
-        let imageName = "widget_small_sync"
-        let title = entry.isSyncEnabled ? TextConstants.widgetRule42SmallTitle : ""
         let detail = entry.isSyncEnabled ? TextConstants.widgetRule42SmallDetail : TextConstants.widgetRule41SmallDetail
         let titleButton = entry.isSyncEnabled ? TextConstants.widgetRule42SmallButton : TextConstants.widgetRule41SmallButton
         let action: PushNotificationAction = entry.isSyncEnabled ? .widgetSyncInProgress : .widgetUnsyncedFiles
 
+        WidgetSyncSmallView(detail: detail,
+                            titleButton: titleButton,
+                            action: action)
+    }
+}
+
+struct WidgetAutoSyncStatusMediumView: View {
+    let entry: WidgetAutoSyncEntry
+    var body: some View {
+        let imageName = "widget_medium_synced"
+        let data = entryData()
+        
+        WidgetSyncMediumView(imageName: imageName,
+                             detail: data.description,
+                             titleButton: data.titleButton,
+                             action: data.action)
+    }
+    
+    func entryData() -> (description: String, titleButton: String, action: PushNotificationAction) {
+        var detail = ""
+        var titleButton = ""
+        var action: PushNotificationAction = .widgetAutoSyncDisabled
+        
+        if !entry.isSyncEnabled {
+            detail = TextConstants.widgetRule41MediumDetail
+            titleButton = TextConstants.widgetRule41MediumButton
+            action = .widgetAutoSyncDisabled
+        } else if !entry.isAppLaunched {
+            detail = TextConstants.widgetRule42MediumDetail
+            titleButton = TextConstants.widgetRule42MediumButton
+            action = .widgetUnsyncedFiles
+        }
+
+        return (description: detail, titleButton: titleButton, action: action)
+    }
+}
+
+struct WidgetSyncSmallView: View {
+    let imageName = "widget_small_sync"
+    let detail: String
+    let titleButton: String
+    let action: PushNotificationAction
+    
+    var body: some View {
         GeometryReader { geo in
             VStack(alignment: .leading, spacing: 14) {
                 Image(imageName)
@@ -178,17 +260,13 @@ struct WidgetAutoSyncStatusSmall: View {
                     .frame(width: 16, height: 22, alignment: .center)
                 
                 VStack(alignment: .leading, spacing: 8, content: {
-                    if !title.isEmpty {
-                        Text(title)
-                            .foregroundColor(.white)
-                            .font(.system(size: 13, weight: .medium, design: .default))
-                    }
                     Text(detail)
                         .foregroundColor(.white)
                         .font(.system(size: 13, weight: .regular, design: .default))
+                        .lineSpacing(3)
+                    Spacer()
                 })
 
-                Spacer()
                 WidgetButton(title: titleButton, cornerRadius: 12)
                     .frame(width: .infinity, height: 36, alignment: .leading)
             }
@@ -200,15 +278,13 @@ struct WidgetAutoSyncStatusSmall: View {
     }
 }
 
-struct WidgetAutoSyncStatusMedium: View {
-    let entry: WidgetAutoSyncEntry
+struct WidgetSyncMediumView: View {
+    let imageName: String
+    let detail: String
+    let titleButton: String
+    let action: PushNotificationAction
+    
     var body: some View {
-        let imageName = entry.isSyncEnabled ? "widget_medium_sync" : "widget_medium_synced"
-        let title = entry.isSyncEnabled ? TextConstants.widgetRule42MediumTitle : TextConstants.widgetRule41MediumDetail
-        let detail = entry.isSyncEnabled ? TextConstants.widgetRule42MediumDetail : TextConstants.widgetRule41MediumDetailButton
-        let titleButton = entry.isSyncEnabled ? TextConstants.widgetRule42MediumButton : TextConstants.widgetRule41MediumButton
-        let action: PushNotificationAction = entry.isSyncEnabled ? .widgetSyncInProgress : .widgetUnsyncedFiles
-        
         GeometryReader { geo in
             VStack(alignment: .leading) {
                 HStack(spacing: 14) {
@@ -216,11 +292,9 @@ struct WidgetAutoSyncStatusMedium: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(minWidth: 0, maxWidth: 60, minHeight: 0, maxHeight: 90, alignment: .top)
-                    WidgetMediumInfoView(title: title,
+                    WidgetMediumInfoView(title: "",
                                          description: detail,
-                                         spacing: 4,
-                                         titleWeight: .regular,
-                                         descriptionWeight: .semibold)
+                                         spacing: 4)
                 }
                 .padding(.top, 8)
                 
@@ -650,11 +724,13 @@ struct WidgetMediumInfoView: View {
                     Text(title)
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: titleWeight, design: .default))
+                        .lineSpacing(4)
                 }
                 if !description.isEmpty {
                     Text(description)
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: descriptionWeight, design: .default))
+                        .lineSpacing(4)
                 }
                 Spacer()
             }
@@ -688,20 +764,35 @@ struct Widget_Previews: PreviewProvider {
 //            WidgetDeviceQuotaMediumView(entry: storageEntry)
 //                .previewContext(WidgetPreviewContext(family: .systemMedium))
             
+            //Rule 3_1
+//            let syncInProgressEntry = WidgetSyncInProgressEntry(uploadCount: 4, totalCount: 20, currentFileName: "Temp_file.heic", date: Date())
+//            WidgetSyncInProgressSmallView(entry: syncInProgressEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemSmall))
+//            WidgetSyncInProgressMediumView(entry: syncInProgressEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            
+            //Rule 3_2
+            
+//            let syncCompleteEntry = WidgetSyncInProgressEntry(uploadCount: 20, totalCount: 20, currentFileName: "Temp_file.heic", date: Date())
+//            WidgetSyncInProgressSmallView(entry: syncCompleteEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemSmall))
+//            WidgetSyncInProgressMediumView(entry: syncCompleteEntry)
+//                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            
             //Rule 4_1
             
-//            let syncEntry = WidgetAutoSyncEntry(hasUnsynced: true, isSyncEnabled: false, date: Date())
-//            WidgetAutoSyncStatusSmall(entry: syncEntry)
+//            let syncEntry = WidgetAutoSyncEntry(isSyncEnabled: false, isAppLaunched: false, date: Date())
+//            WidgetAutoSyncStatusSmallView(entry: syncEntry)
 //                .previewContext(WidgetPreviewContext(family: .systemSmall))
-//            WidgetAutoSyncStatusMedium(entry: syncEntry)
+//            WidgetAutoSyncStatusMediumView(entry: syncEntry)
 //                .previewContext(WidgetPreviewContext(family: .systemMedium))
             
             //Rule 4_2
             
-//            let autoSyncEntry = WidgetAutoSyncEntry(hasUnsynced: true, isSyncEnabled: true, date: Date())
-//            WidgetAutoSyncStatusSmall(entry: autoSyncEntry)
+//            let autoSyncEntry = WidgetAutoSyncEntry(isSyncEnabled: true, isAppLaunched: false, date: Date())
+//            WidgetAutoSyncStatusSmallView(entry: autoSyncEntry)
 //                .previewContext(WidgetPreviewContext(family: .systemSmall))
-//            WidgetAutoSyncStatusMedium(entry: autoSyncEntry)
+//            WidgetAutoSyncStatusMediumView(entry: autoSyncEntry)
 //                .previewContext(WidgetPreviewContext(family: .systemMedium))
             
             //Rule 5

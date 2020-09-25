@@ -1748,18 +1748,25 @@
 "widget_rule_2_medium_detail" = "You need space for new memories.";
 "widget_rule_2_medium_button" = "Free up space";
 
+"widget_rule_3_1_small_button" = "See files";
+"widget_rule_3_1_small_detail" = "%d/%d files synced...\n%@";
+"widget_rule_3_1_medium_button" = "See files";
+"widget_rule_3_1_medium_detail" = "%d/%d files synced...\nSyncing: %@";
+
+"widget_rule_3_2_small_button" = "See files";
+"widget_rule_3_2_small_detail" = "Sync is completed";
+"widget_rule_3_2_medium_button" = "See files";
+"widget_rule_3_2_medium_detail" = "Sync is completed";
+
 "widget_rule_4_1_small_button" = "Auto sync";
 "widget_rule_4_1_small_detail" = "You have files wating for sync";
-"widget_rule_4_1_medium_button" = "Auto sync";
+"widget_rule_4_1_medium_button" = "Enable auto sync";
 "widget_rule_4_1_medium_detail" = "You have files wating for sync";
-"widget_rule_4_1_medium_detail_button" = "See files";
 
-"widget_rule_4_2_small_button" = "See files";
-"widget_rule_4_2_small_title" = "Files synced…";
-"widget_rule_4_2_small_detail" = "IMG_2020939.jpg";
-"widget_rule_4_2_medium_button" = "See files";
-"widget_rule_4_2_medium_title" = "Files synced…";
-"widget_rule_4_2_medium_detail" = "Syncing: IMG_2020939.jpg";
+"widget_rule_4_2_small_button" = "Launch App";
+"widget_rule_4_2_small_detail" = "You have files files wating for sync";
+"widget_rule_4_2_medium_button" = "Launch App";
+"widget_rule_4_2_medium_detail" = "You have files files wating for sync";
 
 "widget_rule_5_small_detail" = "No backed up contacts.";
 "widget_rule_5_small_button" = "Back up";

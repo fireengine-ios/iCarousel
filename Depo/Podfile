@@ -89,6 +89,7 @@ end
 def widget_pods
   shared_pods
   pod 'SDWebImage', '~> 4'
+  pod 'MMWormhole', '~> 2.0.0'
 end
 
 target 'Depo_LifeTech' do

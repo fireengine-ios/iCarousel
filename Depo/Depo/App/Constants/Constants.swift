@@ -2027,19 +2027,30 @@ struct TextConstants {
     static let widgetRule2MediumDetail = NSLocalizedString("widget_rule_2_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetRule2MediumButton = NSLocalizedString("widget_rule_2_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
+    //HomeWidget Rule 3.1
+    
+    static let widgetRule31SmallButton = NSLocalizedString("widget_rule_3_1_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule31SmallDetail = NSLocalizedString("widget_rule_3_1_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule31MediumButton = NSLocalizedString("widget_rule_3_1_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule31MediumDetail = NSLocalizedString("widget_rule_3_1_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    //HomeWidget Rule 3.2
+    
+    static let widgetRule32SmallButton = NSLocalizedString("widget_rule_3_2_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule32SmallDetail = NSLocalizedString("widget_rule_3_2_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule32MediumButton = NSLocalizedString("widget_rule_3_2_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule32MediumDetail = NSLocalizedString("widget_rule_3_2_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     //HomeWidget Rule 4.1
     static let widgetRule41SmallButton = NSLocalizedString("widget_rule_4_1_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetRule41SmallDetail = NSLocalizedString("widget_rule_4_1_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetRule41MediumButton = NSLocalizedString("widget_rule_4_1_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetRule41MediumDetail = NSLocalizedString("widget_rule_4_1_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetRule41MediumDetailButton = NSLocalizedString("widget_rule_4_1_medium_detail_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
     //HomeWidget Rule 4.2
     static let widgetRule42SmallButton = NSLocalizedString("widget_rule_4_2_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetRule42SmallTitle = NSLocalizedString("widget_rule_4_2_small_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetRule42SmallDetail = NSLocalizedString("widget_rule_4_2_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetRule42MediumButton = NSLocalizedString("widget_rule_4_2_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let widgetRule42MediumTitle = NSLocalizedString("widget_rule_4_2_medium_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetRule42MediumDetail = NSLocalizedString("widget_rule_4_2_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //HomeWidget Rule 5
