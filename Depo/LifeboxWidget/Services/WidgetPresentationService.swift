@@ -12,7 +12,7 @@ import MMWormhole
 
 class UserInfo {
     var isFIREnabled = false
-    var isPremiumUser = false
+    var hasFIRPermission = false
     var peopleInfos = [PeopleInfo]()
     var images = [UIImage]()
 }
@@ -91,7 +91,7 @@ final class WidgetPresentationService {
         group.enter()
         
         group.notify(queue: .global()) { [weak self] in
-            if userInfo.isPremiumUser && userInfo.isFIREnabled {
+            if userInfo.hasFIRPermission && userInfo.isFIREnabled {
                 self?.getPeopleInfo { [weak self] peopleInfos in
                     userInfo.peopleInfos = peopleInfos
                     self?.loadImages(completion: { result in
@@ -106,13 +106,13 @@ final class WidgetPresentationService {
             }
         }
 
-        getFaceImageAllowance { face in
+        getFaceImageEnabled { face in
             userInfo.isFIREnabled = face
             group.leave()
         }
         
-        getPremuimStatus { premium in
-            userInfo.isPremiumUser = premium
+        getFaceImageRecognitionStatus { hasFIRPermission in
+            userInfo.hasFIRPermission = hasFIRPermission
             group.leave()
         }
     }
@@ -136,7 +136,7 @@ final class WidgetPresentationService {
         return syncInfo
     }
     
-    private func getFaceImageAllowance(completion: @escaping ((Bool) -> ())) {
+    private func getFaceImageEnabled(completion: @escaping ((Bool) -> ())) {
         serverService.getSettingsInfoPermissions { response in
             switch response {
             case .success(let response):
@@ -147,11 +147,11 @@ final class WidgetPresentationService {
         }
     }
     
-    private func getPremuimStatus(completion: @escaping BoolHandler) {
+    private func getFaceImageRecognitionStatus(completion: @escaping BoolHandler) {
         serverService.permissions { response in
             switch response {
             case .success(let response):
-                completion(response.hasPermissionFor(.premiumUser))
+                completion(response.hasPermissionFor(.faceRecognition))
             case .failed:
                 completion(false)
             }
