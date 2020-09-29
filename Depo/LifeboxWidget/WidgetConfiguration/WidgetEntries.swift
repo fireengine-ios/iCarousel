@@ -10,6 +10,38 @@ import Foundation
 import SwiftUI
 import WidgetKit
 
+enum WidgetStateOrder: Int {
+    case login
+    case qouta
+    case freeUpSpace
+    case syncComplete
+    case syncInProgress
+    case autosync
+    case backup
+    case fir
+    
+    var score: Float {
+        Float(100 - rawValue)
+    }
+    
+    var duration: Double {
+        switch self {
+        case .syncComplete:
+            return 5
+        case .syncInProgress:
+            //1 hour
+            return 60 * 60
+        default:
+            //8 hours
+            return 60 * 60 * 8
+        }
+    }
+    
+    var relevance: TimelineEntryRelevance {
+        return TimelineEntryRelevance(score: score, duration: duration)
+    }
+}
+
 class WidgetBaseEntry: TimelineEntry {
     let date: Date
     init(date: Date) {

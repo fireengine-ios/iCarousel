@@ -337,6 +337,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         WidgetService.shared.notifyWidgetAbout(status: .stoped)
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
         
         UserDefaults.standard.synchronize()
         
