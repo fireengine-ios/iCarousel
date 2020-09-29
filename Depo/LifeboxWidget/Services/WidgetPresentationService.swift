@@ -14,7 +14,6 @@ class UserInfo {
     var isFIREnabled = false
     var hasFIRPermission = false
     var peopleInfos = [PeopleInfo]()
-    var images = [UIImage]()
 }
 
 class SyncInfo {
@@ -33,7 +32,28 @@ final class WidgetPresentationService {
     private let serverService = WidgetServerService.shared
     private let photoLibraryService = WidgetPhotoLibraryObserver.shared
     private lazy var imageLoader = WidgetImageLoader()
+    
+    private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
 
+    var lastWidgetEntry: WidgetBaseEntry? {
+        get {
+            if let typeString = lastWidgetEntryType, let type: WidgetBaseEntry.Type = NSClassFromString(typeString) as? WidgetBaseEntry.Type {
+                return try? defaults?.getObject(forKey: SharedConstants.lastWidgetEntryKey, castTo: type)
+            }
+            return try? defaults?.getObject(forKey: SharedConstants.lastWidgetEntryKey, castTo: WidgetBaseEntry.self) }
+        set {
+            if let object = newValue {
+                lastWidgetEntryType = String(describing: object.self)
+            }
+            try? defaults?.setObject(newValue, forKey: SharedConstants.lastWidgetEntryKey)
+        }
+    }
+    
+    private var lastWidgetEntryType: String? {
+        get { return defaults?.string(forKey: SharedConstants.lastWidgetEntryTypeKey) }
+        set { defaults?.set(newValue, forKey: SharedConstants.lastWidgetEntryTypeKey) }
+    }
+    
     init() {
         setupWormhole()
     }
@@ -83,7 +103,7 @@ final class WidgetPresentationService {
         serverService.getBackUpStatus(completion: completion, fail: fail)
     }
     
-    func getPremiumStatus(completion: @escaping ValueHandler<(userInfo: UserInfo, isLoadingImages: Bool)>) {
+    func getFIRStatus(completion: @escaping ValueHandler<(userInfo: UserInfo, isLoadingImages: Bool)>) {
         let userInfo = UserInfo()
         let group = DispatchGroup()
         
@@ -94,14 +114,11 @@ final class WidgetPresentationService {
             if userInfo.hasFIRPermission && userInfo.isFIREnabled {
                 self?.getPeopleInfo { [weak self] peopleInfos in
                     userInfo.peopleInfos = peopleInfos
-                    self?.loadImages(completion: { result in
-                        userInfo.images = result.images
-                        completion((userInfo, result.isLoadingImages))
-                    })
+                    self?.loadImages { isLoadingImages in
+                        completion((userInfo, isLoadingImages))
+                    }
                 }
             } else {
-                //show only placeholders
-                userInfo.images = [UIImage(named: "user-3")!, UIImage(named: "user-2")!, UIImage(named: "user-1")!]
                 completion((userInfo, false))
             }
         }
@@ -169,35 +186,11 @@ final class WidgetPresentationService {
         }
     }
     
-    private func loadImages(completion: @escaping ValueHandler<(images: [UIImage], isLoadingImages: Bool)>) {
+    private func loadImages(completion: @escaping ValueHandler<Bool>) {
         getPeopleInfo { [weak self] peopleInfos in
             let urls = peopleInfos.map { $0.thumbnail ?? $0.alternateThumbnail }
             self?.imageLoader.loadImage(urls: urls) { loadingImages in
-                var images = [UIImage]()
-                var isLoadingImages = false
-                loadingImages.enumerated().forEach { index, image in
-                    if let image = image {
-                        images.append(image)
-                    } else {
-                        //prepare placeholders until loading real images
-                        switch index {
-                        case 0:
-                            images.append(UIImage(named: "user-3")!)
-                        case 1:
-                            images.append(UIImage(named: "user-2")!)
-                        case 2:
-                            if urls.count < 3 {
-                                images.append(UIImage(named: "plusIcon")!)
-                            } else {
-                                images.append(UIImage(named: "user-1")!)
-                            }
-                        default:
-                            images.append(UIImage(named: "user-3")!)
-                        }
-                        isLoadingImages = true
-                    }
-                }
-                completion((images, isLoadingImages))
+                completion(loadingImages.firstIndex(where: { $0 == nil }) != nil)
             }
         }
     }

@@ -14,15 +14,29 @@ struct WidgetProvider: TimelineProvider {
     typealias Entry = WidgetBaseEntry
     private static let timeStep = 2
 
-    func placeholder(in context: Context) -> WidgetBaseEntry {
-        WidgetDeviceQuotaEntry(usedPersentage: 67, date: Date())
+    func placeholder(in context: Context) -> Self.Entry {
+        if let entry = WidgetPresentationService.shared.lastWidgetEntry {
+            return entry
+        }
+        return WidgetDeviceQuotaEntry(usedPercentage: 67, date: Date())
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (WidgetBaseEntry) -> Void) {
-        completion(WidgetQuotaEntry(usedPercentage: 50, date: Date()))
+    func getSnapshot(in context: Context, completion: @escaping (Self.Entry) -> Void) {
+        if let entry = WidgetPresentationService.shared.lastWidgetEntry {
+            completion(entry)
+            return
+        }
+        
+        getTimeline(in: context) { timeline in
+            if let entry = timeline.entries.first {
+                completion(entry)
+            } else {
+                completion(WidgetQuotaEntry(usedPercentage: 90, date: Date()))
+            }
+        }
     }
     
-    func getTimeline(in context: Context, completion: @escaping (Timeline<WidgetBaseEntry>) -> Void) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<Self.Entry>) -> Void) {
         let currentDate = Date()
         var mainEntries: [WidgetBaseEntry] = []
         if WidgetPresentationService.shared.isAuthorized {
@@ -30,13 +44,19 @@ struct WidgetProvider: TimelineProvider {
                 mainEntries.append(contentsOf: entries)
                 //let time = Calendar.current.date(byAdding: .minute, value: 10, to: currentDate)!
                 let timeline = Timeline(entries: mainEntries, policy: .atEnd)
+                save(entry: mainEntries.last)
                 completion(timeline)
             }
         } else {
             mainEntries.append(WidgetLoginRequiredEntry(date: currentDate))
             let timeline = Timeline(entries: mainEntries, policy: .never)
+            save(entry: mainEntries.last)
             completion(timeline)
         }
+    }
+    
+    private func save(entry: WidgetBaseEntry?) {
+        WidgetPresentationService.shared.lastWidgetEntry = entry
     }
     
     private func refreshEntries(completion: @escaping (([WidgetBaseEntry]) -> ())) {
@@ -95,7 +115,7 @@ struct WidgetProvider: TimelineProvider {
         WidgetPresentationService.shared.getDeviceStorageQuota { usedPersentage in
             if usedPersentage >= 75 {
                 let date = Calendar.current.date(byAdding: .minute, value: timeInterval, to: todayDate)!
-                entries.append(WidgetDeviceQuotaEntry(usedPersentage: usedPersentage, date: date))
+                entries.append(WidgetDeviceQuotaEntry(usedPercentage: usedPersentage, date: date))
                 timeInterval += Self.timeStep
             }
             group.leave()
@@ -121,7 +141,7 @@ struct WidgetProvider: TimelineProvider {
             fail: { group.leave() })
 
         // premium users
-        WidgetPresentationService.shared.getPremiumStatus { response in
+        WidgetPresentationService.shared.getFIRStatus { response in
             let date: Date
             if response.isLoadingImages {
                 date = Calendar.current.date(byAdding: .second, value: 10, to: todayDate)!
@@ -133,7 +153,6 @@ struct WidgetProvider: TimelineProvider {
                 isFIREnabled: response.userInfo.isFIREnabled,
                 hasFIRPermission: response.userInfo.hasFIRPermission,
                 peopleInfos: response.userInfo.peopleInfos,
-                images: response.userInfo.images,
                 date: date
             )
             entries.append(entry)

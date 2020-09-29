@@ -46,4 +46,7 @@ struct SharedConstants {
     
     static let sharedGroupDBContainerName = "SharedGroupDBContainer"
     static let sharedGroupDBName = "SharedGroupDB"
+    
+    static let lastWidgetEntryKey = "lastWidgetEntry"
+    static let lastWidgetEntryTypeKey = "lastWidgetEntryType"
 }
