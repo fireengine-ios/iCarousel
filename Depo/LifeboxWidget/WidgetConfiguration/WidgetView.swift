@@ -144,10 +144,10 @@ struct WidgetDeviceQuotaSmallView: View {
     
     var body: some View {
         WidgetEntrySmallView(imageName: "device_storage",
-                             title: String(format: TextConstants.widgetRule2SmallTitle, entry.usedPersentage),
+                             title: String(format: TextConstants.widgetRule2SmallTitle, entry.usedPercentage),
                              description: TextConstants.widgetRule2SmallDetail,
                              titleButton: TextConstants.widgetRule2SmallButton,
-                             percentage: CGFloat(entry.usedPersentage)/100,
+                             percentage: CGFloat(entry.usedPercentage)/100,
                              action: .widgetFreeUpSpace)
     }
 }
@@ -160,7 +160,7 @@ struct WidgetDeviceQuotaMediumView: View {
                               title: TextConstants.widgetRule2MediumTitle,
                               description: TextConstants.widgetRule2MediumDetail,
                               titleButton: TextConstants.widgetRule2MediumButton,
-                              percentage: CGFloat(entry.usedPersentage)/100,
+                              percentage: CGFloat(entry.usedPercentage)/100,
                               action: .widgetFreeUpSpace)
     }
 }
