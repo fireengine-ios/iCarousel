@@ -1800,3 +1800,6 @@
 "widget_rule_7_4_small_button" = "Open app";
 "widget_rule_7_4_medium_detail" = "Open app to see your photos";
 "widget_rule_7_4_medium_button" = "Open app";
+
+"widget_display_name" = "widget_display_name";
+"widget_description" = "widget_description";

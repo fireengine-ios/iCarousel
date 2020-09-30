@@ -2098,4 +2098,7 @@ struct TextConstants {
     
     static let widgetRule74MediumDetail = NSLocalizedString("widget_rule_7_4_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetRule74MediumButton = NSLocalizedString("widget_rule_7_4_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let widgetDisplayName = NSLocalizedString("widget_display_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetDescription = NSLocalizedString("widget_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

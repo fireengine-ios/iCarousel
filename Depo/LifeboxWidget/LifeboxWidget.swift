@@ -19,7 +19,7 @@ struct LIfeWidget: Widget {
             WidgetView(entry: entry)
         }
         .supportedFamilies([.systemSmall, .systemMedium])
-        .description("LifeBox")
-        .configurationDisplayName("Choose")
+        .description(TextConstants.widgetDescription)
+        .configurationDisplayName(TextConstants.widgetDisplayName)
     }
 }
