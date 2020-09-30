@@ -37,6 +37,7 @@ final class WidgetPresentationService {
     
     private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
 
+    //TODO: change to enum?
     var lastWidgetEntry: WidgetBaseEntry? {
         get {
             if let typeString = lastWidgetEntryType, let type: WidgetBaseEntry.Type = NSClassFromString(typeString) as? WidgetBaseEntry.Type {
@@ -67,8 +68,7 @@ final class WidgetPresentationService {
     }
     
     func messageEntryChanged(entry: WidgetStateOrder) {
-        //TODO: cnahge to passMessageObject
-        widgetService.wormhole.message(withIdentifier: SharedConstants.entryChangedKey)//passMessageObject(cadableObjecthere, identifier: SharedConstants.entryChangedKey)
+        widgetService.wormhole.message(withIdentifier: SharedConstants.entryChangedKey)
     }
     
     func getStorageQuota(completion: @escaping ValueHandler<Int>, fail: @escaping VoidHandler) {
