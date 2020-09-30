@@ -12,12 +12,13 @@ import WidgetKit
 
 enum WidgetStateOrder: Int {
     case login
-    case qouta
+    case quota
     case freeUpSpace
     case syncComplete
     case syncInProgress
     case autosync
-    case backup
+    case contactsNoBackup
+    case oldContactsBackup
     case fir
     
     var score: Float {
