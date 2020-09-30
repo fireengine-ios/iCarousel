@@ -56,6 +56,8 @@ extension WidgetProvider {
         //.oldContactsBackup, - already beaing checked in this .contactsNoBackup
         //.syncComplete - .syncInProgress already checks it
         
+        
+        
         DispatchQueue.global().async {
             let semaphore = DispatchSemaphore(value:1)
             var isTimelinePrepared = false
@@ -71,8 +73,17 @@ extension WidgetProvider {
                         save(entry: preparedEntry)
                         prepareTimeline(order: order, entry: preparedEntry) { preparedTimeline in
                             debugPrint("!!! order prepared timeline \(order)")
+                            
+//                            if order == .syncInProgress, WidgetService.shared.syncStatus == .synced {
+//
+//                            } else {
+//
+//                            }
                             timelineCallback(preparedTimeline)
                             isTimelinePrepared = true
+//                            if savedEntry != newEntry {
+//                                WidgetPresentationService.shared.messageEntryChanged(entry: order)
+//                            }
                             semaphore.signal()
                             return
                         }
@@ -173,6 +184,13 @@ extension WidgetProvider {
     ///Check if any sync is in progress (manaul, auto, background, upload to lifebox via native share)
     ///Please write 1/x, 2/x on the widget and file name during syncing and display this widget:  https://zpl.io/VYOxGPn
     private func checkSyncInProgres(entryCallback: @escaping WidgetBaseEntryCallback) {
+        guard
+            WidgetPresentationService.shared.isPreperationFinished,
+            WidgetPresentationService.shared.isPhotoLibriaryAvailable()
+        else {
+            entryCallback(nil)
+            return
+        }
         let syncInfo = WidgetPresentationService.shared.getSyncInfo()
         if syncInfo.syncStatus == .executing {
             //TODO: need file name
@@ -190,6 +208,13 @@ extension WidgetProvider {
     //ORDER-4 (Checking unsynced files)
     ///Check if there are unsynced files in device gallery and auto sync value ON or OFF.
     private func checkSyncStatus(entryCallback: @escaping WidgetBaseEntryCallback) {
+        guard
+            WidgetPresentationService.shared.isPreperationFinished,
+            WidgetPresentationService.shared.isPhotoLibriaryAvailable()
+        else {
+            entryCallback(nil)
+            return
+        }
         WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
             // unysnced items status enter
             let syncInfo = WidgetPresentationService.shared.getSyncInfo()

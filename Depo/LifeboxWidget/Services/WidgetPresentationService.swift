@@ -28,9 +28,11 @@ final class WidgetPresentationService {
     private let widgetService = WidgetService.shared
     
     var isAuthorized: Bool { serverService.isAuthorized }
-
+    var isPreperationFinished: Bool { widgetService.isPreperationFinished }
+    
     private let serverService = WidgetServerService.shared
     private let photoLibraryService = WidgetPhotoLibraryObserver.shared
+    
     private lazy var imageLoader = WidgetImageLoader()
     
     private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
@@ -62,6 +64,11 @@ final class WidgetPresentationService {
         widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeMessageIdentifier) { [weak self] messageObject in
 
         }
+    }
+    
+    func messageEntryChanged(entry: WidgetStateOrder) {
+        //TODO: cnahge to passMessageObject
+        widgetService.wormhole.message(withIdentifier: SharedConstants.entryChangedKey)//passMessageObject(cadableObjecthere, identifier: SharedConstants.entryChangedKey)
     }
     
     func getStorageQuota(completion: @escaping ValueHandler<Int>, fail: @escaping VoidHandler) {
@@ -193,5 +200,9 @@ final class WidgetPresentationService {
                 completion(loadingImages.firstIndex(where: { $0 == nil }) != nil)
             }
         }
+    }
+    
+    func isPhotoLibriaryAvailable() -> Bool {
+        return photoLibraryService.isPhotoLibriaryAccessable()
     }
 }
