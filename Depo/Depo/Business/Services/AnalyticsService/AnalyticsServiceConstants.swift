@@ -755,6 +755,9 @@ enum GAEventAction {
     case discardChanges
     case save
     case saveAsCopy
+    
+    case openWithWidget
+    case widgetOrder
 
     var text: String {
         switch self {
@@ -931,6 +934,10 @@ enum GAEventAction {
             return "Save"
         case .saveAsCopy:
             return "Save as copy"
+        case .openWithWidget:
+            return "Opened with Widget"
+        case .widgetOrder:
+            return "Widget Order"
         }
     }
 }
@@ -1249,6 +1256,48 @@ enum GAEventLabel {
         }
     }
     
+    enum WidgetOrder {
+        case logout
+        case quota
+        case freeUpSpace
+        case unsyncedFiles
+        case autoSyncDisabled
+        case syncInProgress
+        case noBackup
+        case oldBackup
+        case fir
+        case firLess3People
+        case firDisabled
+        case firStandart
+        
+        var text: String {
+            switch self {
+            case .logout:
+                return "Logout"
+            case .quota:
+                return "Quota"
+            case .freeUpSpace:
+                return "Free Up Space"
+            case .unsyncedFiles, .autoSyncDisabled:
+                return "Unsynced Files"
+            case .syncInProgress:
+                return "Sync in Progress"
+            case .noBackup:
+                return "No back up"
+            case .oldBackup:
+                return "Old back up"
+            case .fir:
+                return "Face Image - Prem and Enabled Faces"
+            case .firLess3People:
+                return "Face Image - Less than three faces"
+            case .firDisabled:
+                return "Face Image - Prem and Disabled Faces"
+            case .firStandart:
+                return "Face Image - Standard"
+            }
+        }
+    }
+    
     case empty
     case custom(String)
     
@@ -1348,6 +1397,7 @@ enum GAEventLabel {
     case instagram
     case facebook
     case photoEdit(PhotoEditEvent)
+    case widgetOrder(WidgetOrder)
     
     var text: String {
         switch self {
@@ -1565,6 +1615,8 @@ enum GAEventLabel {
             return "Facebook"
         case .photoEdit(let event):
             return event.text
+        case .widgetOrder(let order):
+            return order.text
         }
     }
     
