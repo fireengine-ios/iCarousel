@@ -53,9 +53,8 @@ extension WidgetProvider {
     private func calculateCurrentOrderTimeline(timelineCallback: @escaping WidgetTimeLineCallback) {
         
         let ordersCheckList: [WidgetStateOrder] = [.login, .quota, .freeUpSpace, .autosync, .contactsNoBackup, .fir]
-        //.syncComplete
         //.oldContactsBackup, - already beaing checked in this .contactsNoBackup
-        //.syncInProgress - .autosync already checks it
+        //.syncInProgress, .syncComplete - .autosync already checks it
         
         DispatchQueue.global().async {
             let semaphore = DispatchSemaphore(value:1)
