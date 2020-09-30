@@ -9,10 +9,32 @@
 import SwiftUI
 import WidgetKit
 
-private let gradientBackgroundColors = [
-    Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
-    Color(red: 68 / 255, green: 205 / 255, blue: 208 / 255)
-]
+fileprivate enum WidgetViewContants {
+    static let gradientBackgroundColors = [
+        Color(red: 0 / 255, green: 72 / 255, blue: 115 / 255),
+        Color(red: 68 / 255, green: 205 / 255, blue: 208 / 255)
+    ]
+    
+    static var smallButtonHeight: CGFloat {
+        !Device.isIpad && UIScreen.main.bounds.height > 700 ? 36 : 30
+    }
+    
+    static var mediumButtonHeight: CGFloat {
+        Device.isIphoneSmall ? 40 : 44
+    }
+    
+    static var smallImageSide: CGFloat {
+        Device.isIphoneSmall ? 22 : 27
+    }
+    
+    static var smallSyncImageSize: CGSize {
+        Device.isIphoneSmall ? CGSize(width: 12, height: 17) : CGSize(width: 16, height: 22)
+    }
+    
+    static var contentOffset: EdgeInsets {
+        Device.isIphoneSmall ? EdgeInsets(top: 12, leading: 12, bottom: 12, trailing: 12) : EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+    }
+}
 
 struct WidgetView: View {
     @Environment(\.widgetFamily) var family
@@ -259,26 +281,28 @@ struct WidgetSyncSmallView: View {
     
     var body: some View {
         GeometryReader { geo in
-            VStack(alignment: .leading, spacing: 14) {
+            VStack(alignment: .leading) {
                 Image(imageName)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 16, height: 22, alignment: .center)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: WidgetViewContants.smallSyncImageSize.width,
+                           height: WidgetViewContants.smallSyncImageSize.height,
+                           alignment: .center)
                 
-                VStack(alignment: .leading, spacing: 8, content: {
+                VStack(alignment: .leading, content: {
                     Text(detail)
                         .foregroundColor(.white)
                         .font(.system(size: 13, weight: .regular, design: .default))
                         .lineSpacing(3)
-                    Spacer()
+                    Spacer(minLength: 0)
                 })
-
+                
                 WidgetButton(title: titleButton, cornerRadius: 12)
-                    .frame(width: .infinity, height: 36, alignment: .leading)
+                    .frame(width: .infinity, height: WidgetViewContants.smallButtonHeight, alignment: .leading)
             }
-            .padding(.all, 16)
+            .padding(WidgetViewContants.contentOffset)
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .background(LinearGradient(gradient: Gradient(colors: WidgetViewContants.gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
             .widgetURL(URL(string: SharedConstants.applicationQueriesScheme + action.rawValue))
         }
     }
@@ -298,19 +322,16 @@ struct WidgetSyncMediumView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(minWidth: 0, maxWidth: 60, minHeight: 0, maxHeight: 90, alignment: .top)
-                    WidgetMediumInfoView(title: "",
-                                         description: detail,
-                                         spacing: 4)
+                    WidgetMediumInfoView(title: "", description: detail, spacing: 4)
                 }
-                .padding(.top, 8)
                 
-                Spacer()
+                Spacer(minLength: 0)
                 WidgetButton(title: titleButton, cornerRadius: 12)
-                    .frame(width: .infinity, height: 44, alignment: .leading)
+                    .frame(width: .infinity, height: WidgetViewContants.mediumButtonHeight, alignment: .leading)
             }
-            .padding(.all, 16)
+            .padding(WidgetViewContants.contentOffset)
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .background(LinearGradient(gradient: Gradient(colors: WidgetViewContants.gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
             .widgetURL(URL(string: SharedConstants.applicationQueriesScheme + action.rawValue))
         }
     }
@@ -355,18 +376,17 @@ struct WidgetContactBackedupMediumView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(minWidth: 0, maxWidth: 48, minHeight: 0, maxHeight: 90, alignment: .top)
+                        .padding(.top, 8)
                     WidgetMediumInfoView(title: data.title, description: data.description)
                 }
                 .padding(.leading, 8)
-                .padding(.top, 8)
                 
-                Spacer()
                 WidgetButton(title: data.titleButton, cornerRadius: 12)
-                    .frame(width: .infinity, height: 44, alignment: .leading)
+                    .frame(width: .infinity, height: WidgetViewContants.mediumButtonHeight, alignment: .leading)
             }
-            .padding(.all, 16)
+            .padding(WidgetViewContants.contentOffset)
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .background(LinearGradient(gradient: Gradient(colors: WidgetViewContants.gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
             .widgetURL(URL(string: SharedConstants.applicationQueriesScheme + data.action.rawValue))
         }
     }
@@ -424,11 +444,11 @@ struct WidgetFaceRecognitionSmallView: View {
                     .font(.system(size: 13, weight: .regular, design: .default))
                 Spacer()
                 WidgetButton(title: data.titleButton, cornerRadius: 12)
-                    .frame(width: .infinity, height: 36, alignment: .center)
+                    .frame(width: .infinity, height: WidgetViewContants.smallButtonHeight, alignment: .center)
             }
-            .padding(.all, 16)
+            .padding(WidgetViewContants.contentOffset)
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .background(LinearGradient(gradient: Gradient(colors: WidgetViewContants.gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
             .widgetURL(URL(string: SharedConstants.applicationQueriesScheme + data.action.rawValue))
         }
     }
@@ -470,7 +490,7 @@ struct WidgetFaceRecognitionMediumView: View {
         
         GeometryReader { geo in
             VStack(alignment: .center) {
-                HStack(spacing: 10) {
+                HStack(alignment: .top, spacing: 10) {
                     HStack(spacing: -25) {
                         ForEach(entry.images.indices, id: \.self) { index in
                             if index == 2 && entry.lessThen3Images {
@@ -491,15 +511,14 @@ struct WidgetFaceRecognitionMediumView: View {
                     .frame(width: .infinity, height: imageSide, alignment: .top)
 
                     WidgetMediumInfoView(title: "", description: data.description)
-                        .frame(width: .infinity, height: imageSide, alignment: .top)
                 }
                 Spacer()
                 WidgetButton(title: data.titleButton, cornerRadius: 12)
-                    .frame(width: .infinity, height: 44, alignment: .leading)
+                    .frame(width: .infinity, height: WidgetViewContants.mediumButtonHeight, alignment: .leading)
             }
-            .padding(.all, 16)
+            .padding(WidgetViewContants.contentOffset)
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .background(LinearGradient(gradient: Gradient(colors: WidgetViewContants.gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
             .widgetURL(URL(string: SharedConstants.applicationQueriesScheme + data.action.rawValue))
         }
     }
@@ -555,7 +574,7 @@ struct WidgetEntrySmallView : View {
                     Image(imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 27, height: 27, alignment: .center)
+                        .frame(width: WidgetViewContants.smallImageSide, height: WidgetViewContants.smallImageSide, alignment: .center)
                 }
                 
                 VStack(alignment: .leading) {
@@ -565,15 +584,15 @@ struct WidgetEntrySmallView : View {
                     Text(description)
                         .foregroundColor(.white)
                         .font(.system(size: 13, weight: .regular, design: .default))
-                    Spacer()
+                    Spacer(minLength: 0)
                 }
 
                 WidgetButton(title: titleButton, cornerRadius: 12)
-                    .frame(width: .infinity, height: 36, alignment: .center)
+                    .frame(width: .infinity, height: 30, alignment: .center)
             }
-            .padding(.all, 16)
+            .padding(WidgetViewContants.contentOffset)
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .background(LinearGradient(gradient: Gradient(colors: WidgetViewContants.gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
             .widgetURL(URL(string: SharedConstants.applicationQueriesScheme + action.rawValue))
         }
     }
@@ -605,16 +624,15 @@ struct WidgetEntryMediumView : View {
                     }
 
                     WidgetMediumInfoView(title: title, description: description)
-                        .padding(.top, 8)
                 }
                 
                 Spacer()
                 WidgetButton(title: titleButton, cornerRadius: 12)
-                    .frame(width: .infinity, height: 44, alignment: .leading)
+                    .frame(width: .infinity, height: WidgetViewContants.mediumButtonHeight, alignment: .leading)
             }
-            .padding(.all, 16)
+            .padding(WidgetViewContants.contentOffset)
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
-            .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
+            .background(LinearGradient(gradient: Gradient(colors: WidgetViewContants.gradientBackgroundColors), startPoint: .zero, endPoint: UnitPoint(x: 1, y: 1)))
             .widgetURL(URL(string: SharedConstants.applicationQueriesScheme + action.rawValue))
         }
     }
@@ -658,7 +676,7 @@ struct CirclePercentageViewSmall: View {
                 }
 
         }
-        .background(LinearGradient(gradient: Gradient(colors: gradientBackgroundColors), startPoint: UnitPoint(x: 0.1, y: 0.1), endPoint: UnitPoint(x: 1.2, y: 1.2)))
+        .background(LinearGradient(gradient: Gradient(colors: WidgetViewContants.gradientBackgroundColors), startPoint: UnitPoint(x: 0.1, y: 0.1), endPoint: UnitPoint(x: 1.2, y: 1.2)))
         .frame(width: .infinity, height: .infinity, alignment: .center)
     }
 }
@@ -744,15 +762,14 @@ struct WidgetMediumInfoView: View {
                     Text(title)
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: titleWeight, design: .default))
-                        .lineSpacing(4)
+                        .lineSpacing(3)
                 }
                 if !description.isEmpty {
                     Text(description)
                         .foregroundColor(.white)
                         .font(.system(size: 14, weight: descriptionWeight, design: .default))
-                        .lineSpacing(4)
+                        .lineSpacing(3)
                 }
-                Spacer()
             }
         }
     }
@@ -778,7 +795,7 @@ struct Widget_Previews: PreviewProvider {
             
             //Rule 2
 
-//            let storageEntry = WidgetDeviceQuotaEntry(usedPersentage: 90, date: Date())
+//            let storageEntry = WidgetDeviceQuotaEntry(usedPercentage: 90, date: Date())
 //            WidgetDeviceQuotaSmallView(entry: storageEntry)
 //                .previewContext(WidgetPreviewContext(family: .systemSmall))
 //            WidgetDeviceQuotaMediumView(entry: storageEntry)
@@ -835,15 +852,11 @@ struct Widget_Previews: PreviewProvider {
             //Rule 7
             
 //            let userInfoEntry = WidgetUserInfoEntry(isFIREnabled: true,
-//                                                    isPremiumUser: true,
+//                                                    hasFIRPermission: true,
 //                                                    peopleInfos: [],
-//                                                    images: [UIImage(named: "user-3")!,
-//                                                             UIImage(named: "user-2")!,
-//                                                             UIImage(named: "plusIcon")!],
 //                                                    date: Date())
 //            WidgetFaceRecognitionSmallView(entry: userInfoEntry)
 //                .previewContext(WidgetPreviewContext(family: .systemSmall))
-//
 //            WidgetFaceRecognitionMediumView(entry: userInfoEntry)
 //                .previewContext(WidgetPreviewContext(family: .systemMedium))
         }
