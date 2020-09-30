@@ -18,9 +18,13 @@ final class WidgetService {
     
     private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
     
+    var isPreperationFinished: Bool {
+        get { return defaults?.bool(forKey: SharedConstants.isPreparationFinished) ?? false }
+        set { defaults?.set(newValue, forKey: SharedConstants.isPreparationFinished)}
+    }
     
     var mainAppResponsivenessDate: Date? {
-        get { return defaults?.object(forKey: SharedConstants.mainAppSchemeResponsivenessDateKey) as? Date}
+        get { return defaults?.object(forKey: SharedConstants.mainAppSchemeResponsivenessDateKey) as? Date }
         set { defaults?.set(newValue, forKey: SharedConstants.mainAppSchemeResponsivenessDateKey)}
     }
     

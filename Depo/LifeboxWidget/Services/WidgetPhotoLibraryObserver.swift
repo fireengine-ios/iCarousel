@@ -33,6 +33,9 @@ final class WidgetPhotoLibraryObserver {
         coreDataStack.setup { }
     }
     
+    func isPhotoLibriaryAccessable() -> Bool {
+        return PHPhotoLibrary.isAccessibleAuthorizationStatus()
+    }
     
     func hasUnsynced(completion: @escaping (Bool)->()) {
         guard PHPhotoLibrary.isAccessibleAuthorizationStatus() else {

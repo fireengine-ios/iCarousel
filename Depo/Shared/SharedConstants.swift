@@ -49,4 +49,7 @@ struct SharedConstants {
     
     static let lastWidgetEntryKey = "lastWidgetEntry"
     static let lastWidgetEntryTypeKey = "lastWidgetEntryType"
+    
+    static let isPreparationFinished = "isPreparationFinished"
+    static let entryChangedKey = "entryChangedKey"
 }

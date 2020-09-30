@@ -32,7 +32,11 @@ final class CacheManager {
     private(set) var processingRemoteItems = false
     private(set) var processingLocalItems = false
     private(set) var isProcessing = false
-    private(set) var isCacheActualized = false
+    private(set) var isCacheActualized: Bool = false {
+        didSet {
+            WidgetService.shared.isPreperationFinished = isCacheActualized
+        }
+    }
     
     let delegates = MulticastDelegate<CacheManagerDelegate>()
     
