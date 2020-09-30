@@ -20,12 +20,26 @@ struct WidgetProvider: TimelineProvider {
     typealias Entry = WidgetBaseEntry
     private static let timeStep = 2
 
-    func placeholder(in context: Context) -> WidgetBaseEntry {
-        WidgetDeviceQuotaEntry(usedPersentage: 67, date: Date())
+    func placeholder(in context: Context) -> Self.Entry {
+        if let entry = WidgetPresentationService.shared.lastWidgetEntry {
+            return entry
+        }
+        return WidgetDeviceQuotaEntry(usedPercentage: 67, date: Date())
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (WidgetBaseEntry) -> Void) {
-        completion(WidgetQuotaEntry(usedPercentage: 50, date: Date()))
+    func getSnapshot(in context: Context, completion: @escaping (Self.Entry) -> Void) {
+        if let entry = WidgetPresentationService.shared.lastWidgetEntry {
+            completion(entry)
+            return
+        }
+        
+        getTimeline(in: context) { timeline in
+            if let entry = timeline.entries.first {
+                completion(entry)
+            } else {
+                completion(WidgetQuotaEntry(usedPercentage: 90, date: Date()))
+            }
+        }
     }
     
     func getTimeline(in context: Context, completion: @escaping WidgetTimeLineCallback) {
@@ -55,6 +69,7 @@ extension WidgetProvider {
                 checkOrder(order: order) { preparedEntry in
                     debugPrint("!!! order prepared entry \(order)")
                     if let preparedEntry = preparedEntry {
+                        save(entry: preparedEntry)
                         prepareTimeline(order: order, entry: preparedEntry) { preparedTimeline in
                             debugPrint("!!! order prepared timeline \(order)")
                             timelineCallback(preparedTimeline)
@@ -82,8 +97,12 @@ extension WidgetProvider {
         }
     }
     
+    private func save(entry: WidgetBaseEntry?) {
+        WidgetPresentationService.shared.lastWidgetEntry = entry
+    }
+    
     private func checkOrder(order: WidgetStateOrder, entryCallback: @escaping WidgetBaseEntryCallback) {
-        
+
         switch order {
         case .login:
             //ORDER-0
@@ -141,7 +160,7 @@ extension WidgetProvider {
         WidgetPresentationService.shared.getDeviceStorageQuota { usedPersentage in
             if usedPersentage >= 75 {
                 let date = Date()//Calendar.current.date(byAdding: .minute, value: 2, to: Date())!
-                entryCallback(WidgetDeviceQuotaEntry(usedPersentage: usedPersentage, date: date))
+                entryCallback(WidgetDeviceQuotaEntry(usedPercentage: usedPersentage, date: date))
             } else {
                 entryCallback(nil)
             }
@@ -207,21 +226,19 @@ extension WidgetProvider {
     ///Check if user has AUTH_FACE_IMAGE_LOCATION authority with calling authority API and check if user's face-image recognition is enabled or not
     private func checkFIRStatus(entryCallback: @escaping WidgetBaseEntryCallback) {
         //TODO: isFIREnabled - check if being created correctly
-        // premium users
-        WidgetPresentationService.shared.getPremiumStatus { response in
-            let todayDate = Date()
+        
+        WidgetPresentationService.shared.getFIRStatus { response in
             let date: Date
             if response.isLoadingImages {
-                date = Calendar.current.date(byAdding: .second, value: 10, to: todayDate)!
+                date = Calendar.current.date(byAdding: .second, value: 10, to: Date())!
             } else {
-                date = Calendar.current.date(byAdding: .second, value: 2, to: todayDate)!
+                date = Calendar.current.date(byAdding: .second, value: 2, to: Date())!
             }
 
             let entry = WidgetUserInfoEntry(
                 isFIREnabled: response.userInfo.isFIREnabled,
-                isPremiumUser: response.userInfo.isPremiumUser,
+                hasFIRPermission: response.userInfo.hasFIRPermission,
                 peopleInfos: response.userInfo.peopleInfos,
-                images: response.userInfo.images,
                 date: date
             )
             entryCallback(entry)

@@ -49,6 +49,9 @@ struct WidgetSmallSizeView: View {
 
         case let entry as WidgetAutoSyncEntry:
             WidgetAutoSyncStatusSmallView(entry: entry)
+            
+        case let entry as WidgetSyncInProgressEntry:
+            WidgetSyncInProgressSmallView(entry: entry)
 
         default:
             WidgetLoginRequiredSmallView()
@@ -76,6 +79,9 @@ struct WidgetMediumSizeView: View {
             
         case let entry as WidgetAutoSyncEntry:
             WidgetAutoSyncStatusMediumView(entry: entry)
+            
+        case let entry as WidgetSyncInProgressEntry:
+            WidgetSyncInProgressMediumView(entry: entry)
             
         default:
             WidgetLoginRequiredMediumView()
@@ -138,10 +144,10 @@ struct WidgetDeviceQuotaSmallView: View {
     
     var body: some View {
         WidgetEntrySmallView(imageName: "device_storage",
-                             title: String(format: TextConstants.widgetRule2SmallTitle, entry.usedPersentage),
+                             title: String(format: TextConstants.widgetRule2SmallTitle, entry.usedPercentage),
                              description: TextConstants.widgetRule2SmallDetail,
                              titleButton: TextConstants.widgetRule2SmallButton,
-                             percentage: CGFloat(entry.usedPersentage)/100,
+                             percentage: CGFloat(entry.usedPercentage)/100,
                              action: .widgetFreeUpSpace)
     }
 }
@@ -154,7 +160,7 @@ struct WidgetDeviceQuotaMediumView: View {
                               title: TextConstants.widgetRule2MediumTitle,
                               description: TextConstants.widgetRule2MediumDetail,
                               titleButton: TextConstants.widgetRule2MediumButton,
-                              percentage: CGFloat(entry.usedPersentage)/100,
+                              percentage: CGFloat(entry.usedPercentage)/100,
                               action: .widgetFreeUpSpace)
     }
 }
@@ -397,7 +403,7 @@ struct WidgetFaceRecognitionSmallView: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .center, spacing: -10) {
                     ForEach(entry.images.indices, id: \.self) { index in
-                        if index == 2 && entry.peopleInfos.count < 3 {
+                        if index == 2 && entry.lessThen3Images {
                             Image(uiImage: entry.images[index])
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
@@ -428,24 +434,31 @@ struct WidgetFaceRecognitionSmallView: View {
     }
     
     func entryData() -> (description: String, titleButton: String, action: PushNotificationAction) {
-        if entry.isPremiumUser && entry.isFIREnabled {
-            if entry.images.count > 2 {
-                return (description: TextConstants.widgetRule71SmallDetail,
-                        titleButton: TextConstants.widgetRule71SmallButton,
-                        action: .widgetFIRLess3People)
-            } else {
-                return (description: TextConstants.widgetRule72SmallDetail,
-                        titleButton: TextConstants.widgetRule72SmallButton,
-                        action: .widgetFIR)
-            }
-        } else if entry.isPremiumUser && !entry.isFIREnabled {
+        guard entry.hasFIRPermission else {
+            //7-4
+            return (description: TextConstants.widgetRule74SmallDetail,
+                    titleButton: TextConstants.widgetRule74SmallButton,
+                    action: .widgetFIRStandart)
+        }
+        
+        guard entry.isFIREnabled else {
+            //7-3
             return (description: TextConstants.widgetRule73SmallDetail,
                     titleButton: TextConstants.widgetRule73SmallButton,
                     action: .widgetFIRDisabled)
         }
-        return (description: TextConstants.widgetRule74SmallDetail,
-                titleButton: TextConstants.widgetRule74SmallButton,
-                action: .widgetFIRStandart)
+
+        if entry.images.count > 2 {
+            //7-1
+            return (description: TextConstants.widgetRule71SmallDetail,
+                    titleButton: TextConstants.widgetRule71SmallButton,
+                    action: .widgetFIRLess3People)
+        }
+        
+        //7-2
+        return (description: TextConstants.widgetRule72SmallDetail,
+                titleButton: TextConstants.widgetRule72SmallButton,
+                action: .widgetFIR)
     }
 }
 
@@ -460,7 +473,7 @@ struct WidgetFaceRecognitionMediumView: View {
                 HStack(spacing: 10) {
                     HStack(spacing: -25) {
                         ForEach(entry.images.indices, id: \.self) { index in
-                            if index == 2 && entry.peopleInfos.count < 3 {
+                            if index == 2 && entry.lessThen3Images {
                                 Image(uiImage: entry.images[index])
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -492,24 +505,31 @@ struct WidgetFaceRecognitionMediumView: View {
     }
     
     func entryData() -> (description: String, titleButton: String, action: PushNotificationAction) {
-        if entry.isPremiumUser && entry.isFIREnabled {
-            if entry.peopleInfos.count > 2 {
-                return (description: TextConstants.widgetRule71MediumDetail,
-                        titleButton: TextConstants.widgetRule71MediumButton,
-                        action: .widgetFIRLess3People)
-            } else {
-                return (description: TextConstants.widgetRule72MediumDetail,
-                        titleButton: TextConstants.widgetRule72MediumButton,
-                        action: .widgetFIR)
-            }
-        } else if entry.isPremiumUser && !entry.isFIREnabled {
+        guard entry.hasFIRPermission else {
+            //7-4
+            return (description: TextConstants.widgetRule74MediumDetail,
+                    titleButton: TextConstants.widgetRule74MediumButton,
+                    action: .widgetFIRStandart)
+        }
+        
+        guard entry.isFIREnabled else {
+            //7-3
             return (description: TextConstants.widgetRule73MediumDetail,
                     titleButton: TextConstants.widgetRule73MediumButton,
                     action: .widgetFIRDisabled)
         }
-        return (description: TextConstants.widgetRule74MediumDetail,
-                titleButton: TextConstants.widgetRule74MediumButton,
-                action: .widgetFIRStandart)
+        
+        if entry.peopleInfos.count > 2 {
+            //7-1
+            return (description: TextConstants.widgetRule71MediumDetail,
+                    titleButton: TextConstants.widgetRule71MediumButton,
+                    action: .widgetFIRLess3People)
+        }
+        
+        //7-2
+        return (description: TextConstants.widgetRule72MediumDetail,
+                titleButton: TextConstants.widgetRule72MediumButton,
+                action: .widgetFIR)
     }
 }
 
