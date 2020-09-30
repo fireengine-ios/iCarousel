@@ -52,9 +52,9 @@ extension WidgetProvider {
     
     private func calculateCurrentOrderTimeline(timelineCallback: @escaping WidgetTimeLineCallback) {
         
-        let ordersCheckList: [WidgetStateOrder] = [.login, .quota, .freeUpSpace, .autosync, .contactsNoBackup, .fir]
+        let ordersCheckList: [WidgetStateOrder] = [.login, .quota, .freeUpSpace, .syncInProgress, .autosync, .contactsNoBackup, .fir]
         //.oldContactsBackup, - already beaing checked in this .contactsNoBackup
-        //.syncInProgress, .syncComplete - .autosync already checks it
+        //.syncComplete - .syncInProgress already checks it
         
         DispatchQueue.global().async {
             let semaphore = DispatchSemaphore(value:1)
@@ -112,9 +112,11 @@ extension WidgetProvider {
         case .freeUpSpace:
             //ORDER-2
             checkStorageStatus(entryCallback: entryCallback)
-        case .autosync, .syncInProgress, .syncComplete:
+        case .syncInProgress, .syncComplete:
             //ORDER-3
             //sync complete related to ORDER -3
+            checkSyncInProgres(entryCallback: entryCallback)
+        case .autosync:
             //ORDER-4
             checkSyncStatus(entryCallback: entryCallback)
         case .contactsNoBackup, .oldContactsBackup:
@@ -170,25 +172,33 @@ extension WidgetProvider {
     //ORDER-3
     ///Check if any sync is in progress (manaul, auto, background, upload to lifebox via native share)
     ///Please write 1/x, 2/x on the widget and file name during syncing and display this widget:  https://zpl.io/VYOxGPn
+    private func checkSyncInProgres(entryCallback: @escaping WidgetBaseEntryCallback) {
+        let syncInfo = WidgetPresentationService.shared.getSyncInfo()
+        if syncInfo.syncStatus == .executing {
+            //TODO: need file name
+            entryCallback(WidgetSyncInProgressEntry(uploadCount: syncInfo.uploadCount,
+                                                    totalCount: syncInfo.totalCount,
+                                                    currentFileName: "name_of_file",
+                                                    date: Date()))
+            //TODO: should I  add another entry here for sync finisheD?
+        } else {
+            entryCallback(nil)
+        }
+        
+    }
+    
     //ORDER-4 (Checking unsynced files)
     ///Check if there are unsynced files in device gallery and auto sync value ON or OFF.
     private func checkSyncStatus(entryCallback: @escaping WidgetBaseEntryCallback) {
-        // unysnced items status enter
         WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
+            // unysnced items status enter
             let syncInfo = WidgetPresentationService.shared.getSyncInfo()
-            if syncInfo.syncStatus == .executing {
-                //TODO: need file name
-                entryCallback(WidgetSyncInProgressEntry(uploadCount: syncInfo.uploadCount,
-                                                         totalCount: syncInfo.totalCount,
-                                                         currentFileName: "name_of_file",
-                                                         date: Date()))
-                //TODO: should I  add another entry here for sync finisheD?
-            } else if hasUnsynced {
+            if hasUnsynced {
                 //TODO: need check syncStatus
                 let isSyncEnabled = !syncInfo.syncStatus.isContained(in: [.failed, .undetermined, .stoped])
                 entryCallback(WidgetAutoSyncEntry(isSyncEnabled: isSyncEnabled,
-                                                   isAppLaunched: syncInfo.isAppLaunch,
-                                                   date: Date()))
+                                                  isAppLaunched: syncInfo.isAppLaunch,
+                                                  date: Date()))
             } else  {
                 entryCallback(nil)
             }
@@ -243,9 +253,5 @@ extension WidgetProvider {
             entryCallback(entry)
         }
     }
-    
-//    private func syncFinishedStatus(entryCallback: @escaping WidgetBaseEntryCallback) {
-//
-//    }
 }
 
