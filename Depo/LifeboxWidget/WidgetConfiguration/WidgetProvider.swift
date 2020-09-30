@@ -223,6 +223,8 @@ extension WidgetProvider {
                                                     date: date))
                     } else if response.totalNumberOfContacts <= .zero {
                         entryCallback(WidgetContactBackupEntry(date: date))
+                    } else {
+                        entryCallback(nil)
                     }
                 }
             },
