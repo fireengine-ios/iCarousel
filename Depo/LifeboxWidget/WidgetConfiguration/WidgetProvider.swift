@@ -111,6 +111,10 @@ extension WidgetProvider {
     }
     
     private func save(entry: WidgetBaseEntry?) {
+        if let entry = entry, WidgetPresentationService.shared.lastWidgetEntry?.state != entry.state {
+            WidgetPresentationService.shared.notifyChangeWidgetState(entry.state)
+        }
+        
         WidgetPresentationService.shared.lastWidgetEntry = entry
     }
     
@@ -224,10 +228,13 @@ extension WidgetProvider {
             if hasUnsynced {
                 //TODO: need check syncStatus
                 let isSyncEnabled = !syncInfo.syncStatus.isContained(in: [.failed, .undetermined, .stoped])
-                entryCallback(WidgetAutoSyncEntry(isSyncEnabled: isSyncEnabled,
-                                                  isAppLaunched: syncInfo.isAppLaunch,
-                                                  date: Date()))
-            } else  {
+                if syncInfo.isAppLaunch && isSyncEnabled {
+                    //this case for order 3 - sync in progress
+                    entryCallback(nil)
+                }
+                
+                entryCallback(WidgetAutoSyncEntry(isSyncEnabled: isSyncEnabled, date: Date()))
+            } else {
                 entryCallback(nil)
             }
         }

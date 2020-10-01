@@ -195,7 +195,7 @@ struct WidgetSyncInProgressSmallView: View {
     let entry: WidgetSyncInProgressEntry
 
     var body: some View {
-        if entry.isSyncComplete {
+        if entry.state == .syncComplete {
             WidgetSyncSmallView(detail: TextConstants.widgetRule32SmallDetail,
                                 titleButton: TextConstants.widgetRule32SmallButton,
                                 action: .widgetSyncInProgress)
@@ -232,44 +232,32 @@ struct WidgetSyncInProgressMediumView: View {
 struct WidgetAutoSyncStatusSmallView: View {
     let entry: WidgetAutoSyncEntry
     var body: some View {
-        let detail = entry.isSyncEnabled ? TextConstants.widgetRule42SmallDetail : TextConstants.widgetRule41SmallDetail
-        let titleButton = entry.isSyncEnabled ? TextConstants.widgetRule42SmallButton : TextConstants.widgetRule41SmallButton
-        let action: PushNotificationAction = entry.isSyncEnabled ? .widgetSyncInProgress : .widgetUnsyncedFiles
-
-        WidgetSyncSmallView(detail: detail,
-                            titleButton: titleButton,
-                            action: action)
+        if entry.state == .autosyncDisable {
+            WidgetSyncSmallView(detail: TextConstants.widgetRule41SmallDetail,
+                                titleButton: TextConstants.widgetRule41SmallButton,
+                                action: .widgetAutoSyncDisabled)
+        } else {
+            WidgetSyncSmallView(detail: TextConstants.widgetRule42SmallDetail,
+                                titleButton: TextConstants.widgetRule42SmallButton,
+                                action: .widgetUnsyncedFiles)
+        }
     }
 }
 
 struct WidgetAutoSyncStatusMediumView: View {
     let entry: WidgetAutoSyncEntry
     var body: some View {
-        let imageName = "widget_medium_synced"
-        let data = entryData()
-        
-        WidgetSyncMediumView(imageName: imageName,
-                             detail: data.description,
-                             titleButton: data.titleButton,
-                             action: data.action)
-    }
-    
-    func entryData() -> (description: String, titleButton: String, action: PushNotificationAction) {
-        var detail = ""
-        var titleButton = ""
-        var action: PushNotificationAction = .widgetAutoSyncDisabled
-        
-        if !entry.isSyncEnabled {
-            detail = TextConstants.widgetRule41MediumDetail
-            titleButton = TextConstants.widgetRule41MediumButton
-            action = .widgetAutoSyncDisabled
-        } else if !entry.isAppLaunched {
-            detail = TextConstants.widgetRule42MediumDetail
-            titleButton = TextConstants.widgetRule42MediumButton
-            action = .widgetUnsyncedFiles
+        if entry.state == .autosyncDisable {
+            WidgetSyncMediumView(imageName: "widget_medium_synced",
+                                 detail: TextConstants.widgetRule41MediumDetail,
+                                 titleButton: TextConstants.widgetRule41MediumButton,
+                                 action: .widgetAutoSyncDisabled)
+        } else {
+            WidgetSyncMediumView(imageName: "widget_medium_synced",
+                                 detail: TextConstants.widgetRule42MediumDetail,
+                                 titleButton: TextConstants.widgetRule42MediumButton,
+                                 action: .widgetUnsyncedFiles)
         }
-
-        return (description: detail, titleButton: titleButton, action: action)
     }
 }
 
@@ -426,12 +414,12 @@ struct WidgetFaceRecognitionSmallView: View {
                         if index == 2 && entry.lessThen3Images {
                             Image(uiImage: entry.images[index])
                                 .resizable()
-                                .aspectRatio(contentMode: .fit)
+                                .aspectRatio(contentMode: .fill)
                                 .frame(width: imageSide, height: imageSide, alignment: .center)
                         } else {
                             Image(uiImage: entry.images[index])
                                 .resizable()
-                                .aspectRatio(contentMode: .fit)
+                                .aspectRatio(contentMode: .fill)
                                 .clipShape(Circle())
                                 .overlay(Circle().stroke(Color.white, lineWidth: 1))
                                 .frame(width: imageSide, height: imageSide, alignment: .center)
@@ -454,31 +442,24 @@ struct WidgetFaceRecognitionSmallView: View {
     }
     
     func entryData() -> (description: String, titleButton: String, action: PushNotificationAction) {
-        guard entry.hasFIRPermission else {
-            //7-4
+        switch entry.state {
+        case .fir:
+            return (description: TextConstants.widgetRule71SmallDetail,
+                    titleButton: TextConstants.widgetRule71SmallButton,
+                    action: .widgetFIRLess3People)
+        case .firLess3People:
+            return (description: TextConstants.widgetRule72SmallDetail,
+                    titleButton: TextConstants.widgetRule72SmallButton,
+                    action: .widgetFIR)
+        case .firDisabled:
+            return (description: TextConstants.widgetRule73SmallDetail,
+                    titleButton: TextConstants.widgetRule73SmallButton,
+                    action: .widgetFIRDisabled)
+        default:
             return (description: TextConstants.widgetRule74SmallDetail,
                     titleButton: TextConstants.widgetRule74SmallButton,
                     action: .widgetFIRStandart)
         }
-        
-        guard entry.isFIREnabled else {
-            //7-3
-            return (description: TextConstants.widgetRule73SmallDetail,
-                    titleButton: TextConstants.widgetRule73SmallButton,
-                    action: .widgetFIRDisabled)
-        }
-
-        if entry.images.count > 2 {
-            //7-1
-            return (description: TextConstants.widgetRule71SmallDetail,
-                    titleButton: TextConstants.widgetRule71SmallButton,
-                    action: .widgetFIRLess3People)
-        }
-        
-        //7-2
-        return (description: TextConstants.widgetRule72SmallDetail,
-                titleButton: TextConstants.widgetRule72SmallButton,
-                action: .widgetFIR)
     }
 }
 
@@ -501,7 +482,7 @@ struct WidgetFaceRecognitionMediumView: View {
                             } else {
                                 Image(uiImage: entry.images[index])
                                     .resizable()
-                                    .aspectRatio(contentMode: .fit)
+                                    .aspectRatio(contentMode: .fill)
                                     .clipShape(Circle())
                                     .overlay(Circle().stroke(Color.white, lineWidth: 2))
                                     .frame(width: imageSide, height: imageSide, alignment: .center)
@@ -524,31 +505,24 @@ struct WidgetFaceRecognitionMediumView: View {
     }
     
     func entryData() -> (description: String, titleButton: String, action: PushNotificationAction) {
-        guard entry.hasFIRPermission else {
-            //7-4
+        switch entry.state {
+        case .fir:
+            return (description: TextConstants.widgetRule71MediumDetail,
+                    titleButton: TextConstants.widgetRule71MediumButton,
+                    action: .widgetFIRLess3People)
+        case .firLess3People:
+            return (description: TextConstants.widgetRule72MediumDetail,
+                    titleButton: TextConstants.widgetRule72MediumButton,
+                    action: .widgetFIR)
+        case .firDisabled:
+            return (description: TextConstants.widgetRule73MediumDetail,
+                    titleButton: TextConstants.widgetRule73MediumButton,
+                    action: .widgetFIRDisabled)
+        default:
             return (description: TextConstants.widgetRule74MediumDetail,
                     titleButton: TextConstants.widgetRule74MediumButton,
                     action: .widgetFIRStandart)
         }
-        
-        guard entry.isFIREnabled else {
-            //7-3
-            return (description: TextConstants.widgetRule73MediumDetail,
-                    titleButton: TextConstants.widgetRule73MediumButton,
-                    action: .widgetFIRDisabled)
-        }
-        
-        if entry.peopleInfos.count > 2 {
-            //7-1
-            return (description: TextConstants.widgetRule71MediumDetail,
-                    titleButton: TextConstants.widgetRule71MediumButton,
-                    action: .widgetFIRLess3People)
-        }
-        
-        //7-2
-        return (description: TextConstants.widgetRule72MediumDetail,
-                titleButton: TextConstants.widgetRule72MediumButton,
-                action: .widgetFIR)
     }
 }
 

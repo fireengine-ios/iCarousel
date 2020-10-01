@@ -45,23 +45,49 @@ enum WidgetStateOrder: Int {
 
 class WidgetBaseEntry: TimelineEntry, Codable {
     let date: Date
-    init(date: Date) {
+    let state: WidgetState
+    init(date: Date, state: WidgetState) {
         self.date = date
+        self.state = state
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case date, state
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        date = try container.decodeIfPresent(Date.self, forKey: .date) ?? Date()
+        state = WidgetState(rawValue: try container.decodeIfPresent(Int.self, forKey: .state) ?? 0) ?? .login
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(date, forKey: .date)
+        try container.encode(state.rawValue, forKey: .state)
     }
 }
 
-final class WidgetLoginRequiredEntry: WidgetBaseEntry { }
+final class WidgetLoginRequiredEntry: WidgetBaseEntry {
+    init(date: Date) {
+        super.init(date: date, state: .login)
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+    }
+}
 
 final class WidgetQuotaEntry: WidgetBaseEntry {
     private(set) var usedPercentage: Int
     
     init(usedPercentage: Int, date: Date) {
         self.usedPercentage = usedPercentage
-        super.init(date: date)
+        super.init(date: date, state: .quota)
     }
     
     enum CodingKeys: String, CodingKey {
-        case date, usedPercentage
+        case usedPercentage
     }
     
     required init(from decoder: Decoder) throws {
@@ -76,7 +102,7 @@ final class WidgetDeviceQuotaEntry: WidgetBaseEntry {
     
     init(usedPercentage: Int, date: Date) {
         self.usedPercentage = usedPercentage
-        super.init(date: date)
+        super.init(date: date, state: .freeUpSpace)
     }
     
     enum CodingKeys: String, CodingKey {
@@ -95,7 +121,7 @@ final class WidgetContactBackupEntry: WidgetBaseEntry {
     
     init(backupDate: Date? = nil, date: Date) {
         self.backupDate = backupDate
-        super.init(date: date)
+        super.init(date: date, state: backupDate == nil ? .contactsNoBackup : .contactsOldBackup)
     }
     
     enum CodingKeys: String, CodingKey {
@@ -123,7 +149,19 @@ final class WidgetUserInfoEntry: WidgetBaseEntry {
         self.isFIREnabled = isFIREnabled
         self.hasFIRPermission = hasFIRPermission
         self.peopleInfos = peopleInfos
-        super.init(date: date)
+        
+        let state: WidgetState
+        if !hasFIRPermission {
+            state = .firStandart
+        } else if !isFIREnabled {
+            state = .firDisabled
+        } else if peopleInfos.count < 3 {
+            state = .firLess3People
+        } else {
+            state = .fir
+        }
+
+        super.init(date: date, state: state)
         
         setupImages()
     }
@@ -175,23 +213,20 @@ final class WidgetUserInfoEntry: WidgetBaseEntry {
 
 final class WidgetAutoSyncEntry: WidgetBaseEntry {
     private(set) var isSyncEnabled: Bool
-    private(set) var isAppLaunched: Bool
     
-    init(isSyncEnabled: Bool, isAppLaunched: Bool, date: Date) {
+    init(isSyncEnabled: Bool, date: Date) {
         self.isSyncEnabled = isSyncEnabled
-        self.isAppLaunched = isAppLaunched
         
-        super.init(date: date)
+        super.init(date: date, state: isSyncEnabled ? .autosyncAppNotLaunch : .autosyncDisable)
     }
     
     enum CodingKeys: String, CodingKey {
-        case isSyncEnabled, isAppLaunched
+        case isSyncEnabled
     }
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         isSyncEnabled = try container.decodeIfPresent(Bool.self, forKey: .isSyncEnabled) ?? false
-        isAppLaunched = try container.decodeIfPresent(Bool.self, forKey: .isAppLaunched) ?? false
         try super.init(from: decoder)
     }
 }
@@ -210,7 +245,7 @@ final class WidgetSyncInProgressEntry: WidgetBaseEntry {
         self.totalCount = totalCount
         self.currentFileName = currentFileName
         
-        super.init(date: date)
+        super.init(date: date, state: uploadCount == totalCount ? .syncComplete : .syncInProgress)
     }
     
     enum CodingKeys: String, CodingKey {
@@ -263,5 +298,50 @@ enum ObjectSavableError: String, LocalizedError {
     
     var errorDescription: String? {
         rawValue
+    }
+}
+
+enum WidgetState: Int {
+    case login = 0
+    case quota
+    case freeUpSpace
+    case syncComplete
+    case syncInProgress
+    case autosyncDisable
+    case autosyncAppNotLaunch
+    case contactsNoBackup
+    case contactsOldBackup
+    case fir
+    case firLess3People
+    case firDisabled
+    case firStandart
+    
+    var gaName: String {
+        switch self {
+        case .login:
+            return "Logout"
+        case .quota:
+            return "Quota"
+        case .freeUpSpace:
+            return "Free Up Space"
+        case .autosyncDisable, .autosyncAppNotLaunch:
+            return "Unsynced Files"
+        case .syncInProgress:
+            return "Sync in Progress"
+        case .syncComplete:
+            return "Sync completed"
+        case .contactsNoBackup:
+            return "No back up"
+        case .contactsOldBackup:
+            return "Old back up"
+        case .fir:
+            return "Face Image - Prem and Enabled Faces"
+        case .firLess3People:
+            return "Face Image - Less than three faces"
+        case .firDisabled:
+            return "Face Image - Prem and Disabled Faces"
+        case .firStandart:
+            return "Face Image - Standard"
+        }
     }
 }
