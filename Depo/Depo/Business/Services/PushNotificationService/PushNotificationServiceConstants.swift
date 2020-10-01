@@ -68,6 +68,21 @@ enum PushNotificationAction: String {
     case widgetFIRLess3People = "widget_fir_less_then_3_photos"
     case widgetFIRDisabled = "widget_fir_disabled"
     case widgetFIRStandart = "widget_fir_standart"
+    
+    var fromWidget: Bool {
+        isContained(in: [.widgetLogout,
+                         .widgetQuota,
+                         .widgetFreeUpSpace,
+                         .widgetUnsyncedFiles,
+                         .widgetAutoSyncDisabled,
+                         .widgetSyncInProgress,
+                         .widgetNoBackup,
+                         .widgetOldBackup,
+                         .widgetFIR,
+                         .widgetFIRLess3People,
+                         .widgetFIRDisabled,
+                         .widgetFIRStandart])
+    }
 }
 
 enum PushNotificationParameter: String {

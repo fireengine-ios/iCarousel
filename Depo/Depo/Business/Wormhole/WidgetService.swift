@@ -97,5 +97,9 @@ final class WidgetService {
         
         wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeMessageIdentifier)
     }
+    
+    func notifyAboutChangeWidgetState(_ newStateName: String) {
+        wormhole.passMessageObject(newStateName as NSString, identifier: SharedConstants.wormholeNewWidgetStateIdentifier)
+    }
 
 }

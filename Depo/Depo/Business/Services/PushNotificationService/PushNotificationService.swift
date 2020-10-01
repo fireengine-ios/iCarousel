@@ -432,4 +432,12 @@ final class PushNotificationService {
         let controller = router.hiddenPhotosViewController()
         pushTo(controller)
     }
+    
+    private func trackIfNeeded(action: PushNotificationAction) {
+        guard action.fromWidget else {
+            return
+        }
+        
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .openWithWidget, eventLabel: .success)
+    }
 }
