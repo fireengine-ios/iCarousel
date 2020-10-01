@@ -69,6 +69,9 @@ extension WidgetProvider {
                 }
                 checkOrder(order: order) { preparedEntry in
                     debugPrint("!!! order prepared entry \(order)")
+                    guard !isTimelinePrepared else {//this guard only for fixing contact SDK multiple callback status behaviour.
+                        return
+                    }
                     if let preparedEntry = preparedEntry {
                         save(entry: preparedEntry)
                         prepareTimeline(order: order, entry: preparedEntry) { preparedTimeline in
@@ -243,11 +246,11 @@ extension WidgetProvider {
                     let components = Calendar.current.dateComponents([.month], from: lastBackupDate, to: todayDate)
                     //Calendar.current.date(byAdding: .minute, value: timeInterval, to: todayDate)!
                     let date = todayDate
-                    if components.month! >= 1 && response.totalNumberOfContacts <= .zero {
+                    if response.totalNumberOfContacts <= .zero {
+                        entryCallback(WidgetContactBackupEntry(date: date))
+                    } else if components.month! >= 1 {
                         entryCallback(WidgetContactBackupEntry(backupDate: lastBackupDate,
                                                     date: date))
-                    } else if response.totalNumberOfContacts <= .zero {
-                        entryCallback(WidgetContactBackupEntry(date: date))
                     } else {
                         entryCallback(nil)
                     }
