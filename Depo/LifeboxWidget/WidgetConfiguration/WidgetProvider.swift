@@ -10,6 +10,12 @@ import Foundation
 import SwiftUI
 import WidgetKit
 
+
+typealias WidgetBaseEntriesCallback = ([WidgetBaseEntry]) -> ()
+typealias WidgetBaseEntryCallback = (WidgetBaseEntry?) -> ()
+typealias WidgetTimeLineCallback = (Timeline<WidgetBaseEntry>) -> Void
+
+//MARK:- widget general
 struct WidgetProvider: TimelineProvider {
     typealias Entry = WidgetBaseEntry
     private static let timeStep = 2
@@ -36,22 +42,68 @@ struct WidgetProvider: TimelineProvider {
         }
     }
     
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Self.Entry>) -> Void) {
-        let currentDate = Date()
-        var mainEntries: [WidgetBaseEntry] = []
-        if WidgetPresentationService.shared.isAuthorized {
-            refreshEntries { entries in
-                mainEntries.append(contentsOf: entries)
-                //let time = Calendar.current.date(byAdding: .minute, value: 10, to: currentDate)!
-                let timeline = Timeline(entries: mainEntries, policy: .atEnd)
-                save(entry: mainEntries.last)
-                completion(timeline)
+    func getTimeline(in context: Context, completion: @escaping WidgetTimeLineCallback) {
+        calculateCurrentOrderTimeline(timelineCallback: completion)
+    }
+}
+
+//MARK:- widget order check
+extension WidgetProvider {
+    
+    private func calculateCurrentOrderTimeline(timelineCallback: @escaping WidgetTimeLineCallback) {
+        
+        let ordersCheckList: [WidgetStateOrder] = [.login, .quota, .freeUpSpace, .syncInProgress, .autosync, .contactsNoBackup, .fir]
+        //.oldContactsBackup, - already beaing checked in this .contactsNoBackup
+        //.syncComplete - .syncInProgress already checks it
+        
+        
+        
+        DispatchQueue.global().async {
+            let semaphore = DispatchSemaphore(value:1)
+            var isTimelinePrepared = false
+            
+            //for now, only on entry is allowed
+            for order in ordersCheckList {
+                guard !isTimelinePrepared else {
+                    return
+                }
+                checkOrder(order: order) { preparedEntry in
+                    debugPrint("!!! order prepared entry \(order)")
+                    if let preparedEntry = preparedEntry {
+                        save(entry: preparedEntry)
+                        prepareTimeline(order: order, entry: preparedEntry) { preparedTimeline in
+                            debugPrint("!!! order prepared timeline \(order)")
+                            
+//                            if order == .syncInProgress, WidgetService.shared.syncStatus == .synced {
+//
+//                            } else {
+//
+//                            }
+                            timelineCallback(preparedTimeline)
+                            isTimelinePrepared = true
+//                            if savedEntry != newEntry {
+//                                WidgetPresentationService.shared.messageEntryChanged(entry: order)
+//                            }
+                            semaphore.signal()
+                            return
+                        }
+                    } else {
+                        semaphore.signal()
+                    }
+                }
+                debugPrint("!!! order for entry \(order)")
+                semaphore.wait()
             }
-        } else {
-            mainEntries.append(WidgetLoginRequiredEntry(date: currentDate))
-            let timeline = Timeline(entries: mainEntries, policy: .never)
-            save(entry: mainEntries.last)
-            completion(timeline)
+        }
+    }
+    
+    private func prepareTimeline(order: WidgetStateOrder, entry: WidgetBaseEntry, timelineCallback: @escaping WidgetTimeLineCallback) {
+        switch order {
+        case .login: //ORDER-0
+            let timeline = Timeline(entries: [entry], policy: .never)
+            timelineCallback(timeline)
+        case .quota, .freeUpSpace, .syncInProgress, .autosync, .contactsNoBackup, .oldContactsBackup, .fir, .syncComplete: //ORDER-1-7
+            timelineCallback(Timeline(entries: [entry], policy: .atEnd))
         }
     }
     
@@ -59,94 +111,164 @@ struct WidgetProvider: TimelineProvider {
         WidgetPresentationService.shared.lastWidgetEntry = entry
     }
     
-    private func refreshEntries(completion: @escaping (([WidgetBaseEntry]) -> ())) {
-        let todayDate = Date()
-        
-        var entries: [WidgetBaseEntry] = []
-        var timeInterval = 2
-        
-        let group = DispatchGroup()
-        // unysnced items status enter
-        group.enter()
-        // user life capacity enter
-        group.enter()
-        // user device capactity enter
-        group.enter()
-        // user contact backup enter
-        group.enter()
-        // user premium status enter
-        group.enter()
+    private func checkOrder(order: WidgetStateOrder, entryCallback: @escaping WidgetBaseEntryCallback) {
 
-        group.notify(queue: .main) {
-            completion(entries)
+        switch order {
+        case .login:
+            //ORDER-0
+            checkLoginStatus(entryCallback: entryCallback)
+        case .quota:
+            //ORDER-1
+            checkQuotaStatus(entryCallback: entryCallback)
+        case .freeUpSpace:
+            //ORDER-2
+            checkStorageStatus(entryCallback: entryCallback)
+        case .syncInProgress, .syncComplete:
+            //ORDER-3
+            //sync complete related to ORDER -3
+            checkSyncInProgres(entryCallback: entryCallback)
+        case .autosync:
+            //ORDER-4
+            checkSyncStatus(entryCallback: entryCallback)
+        case .contactsNoBackup, .oldContactsBackup:
+            //ORDER-5 (No contact backup):
+            //ORDER-6 (Last backup is older than 1 month):
+            checkContactBackupStatus(entryCallback: entryCallback)
+        case .fir:
+            //ORDER-7
+            checkFIRStatus(entryCallback: entryCallback)
         }
         
-        // unysnced items status enter
-        WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
-            let syncInfo = WidgetPresentationService.shared.getSyncInfo()
-            if syncInfo.syncStatus == .executing {
-                //TODO: need file name
-                entries.append(WidgetSyncInProgressEntry(uploadCount: syncInfo.uploadCount,
-                                                         totalCount: syncInfo.totalCount,
-                                                         currentFileName: "name_of_file",
-                                                         date: todayDate))
-            } else if hasUnsynced {
-                //TODO: need check syncStatus
-                let isSyncEnabled = !syncInfo.syncStatus.isContained(in: [.failed, .undetermined, .stoped])
-                entries.append(WidgetAutoSyncEntry(isSyncEnabled: isSyncEnabled,
-                                                   isAppLaunched: syncInfo.isAppLaunch,
-                                                   date: todayDate))
-            }
-            
-            group.leave()
-        }
+    }
+}
 
-        // user life capacity
+//MARK:- widget entry constraction
+extension WidgetProvider {
+
+    //ORDER-0
+    ///Check if the user is login to the app or not. If the user is not login, display this widget: https://zpl.io/brwelx1
+    private func checkLoginStatus(entryCallback: @escaping WidgetBaseEntryCallback) {
+        WidgetPresentationService.shared.isAuthorized ? entryCallback(nil) : entryCallback(WidgetLoginRequiredEntry(date: Date()))
+    }
+    
+    //ORDER-1
+    ///Check user's lifebox storage quota.
+    ///When a user's lifebox quota is (%75-%100) full, we will display this widget: https://zpl.io/VDyr45J
+    private func checkQuotaStatus(entryCallback: @escaping WidgetBaseEntryCallback) {
         WidgetPresentationService.shared.getStorageQuota(
             completion: { usedPersentage in
-                if usedPersentage >= 75 {
-                    entries.append(WidgetQuotaEntry(usedPercentage: usedPersentage, date: todayDate))
-                }
-                group.leave()
+                usedPersentage >= 75 ? entryCallback(WidgetQuotaEntry(usedPercentage: usedPersentage, date: Date())) : entryCallback(nil)
             },
-            fail: { group.leave() })
-
-        // user device capactity
+            fail: {
+                entryCallback(nil)
+                
+            })
+    }
+    
+    //ORDER-2
+    ///Check user's device storage.
+    ///When a user's device storage is (%75-%100) full, we will display this widget: https://zpl.io/V4W4QZ4
+    private func checkStorageStatus(entryCallback: @escaping WidgetBaseEntryCallback) {
         WidgetPresentationService.shared.getDeviceStorageQuota { usedPersentage in
             if usedPersentage >= 75 {
-                let date = Calendar.current.date(byAdding: .minute, value: timeInterval, to: todayDate)!
-                entries.append(WidgetDeviceQuotaEntry(usedPercentage: usedPersentage, date: date))
-                timeInterval += Self.timeStep
+                let date = Date()//Calendar.current.date(byAdding: .minute, value: 2, to: Date())!
+                entryCallback(WidgetDeviceQuotaEntry(usedPercentage: usedPersentage, date: date))
+            } else {
+                entryCallback(nil)
             }
-            group.leave()
-        }
 
-        // user contact backup
+        }
+    }
+    
+    //ORDER-3
+    ///Check if any sync is in progress (manaul, auto, background, upload to lifebox via native share)
+    ///Please write 1/x, 2/x on the widget and file name during syncing and display this widget:  https://zpl.io/VYOxGPn
+    private func checkSyncInProgres(entryCallback: @escaping WidgetBaseEntryCallback) {
+        guard
+            WidgetPresentationService.shared.isPreperationFinished,
+            WidgetPresentationService.shared.isPhotoLibriaryAvailable()
+        else {
+            entryCallback(nil)
+            return
+        }
+        let syncInfo = WidgetPresentationService.shared.getSyncInfo()
+        if syncInfo.syncStatus == .executing {
+            //TODO: need file name
+            entryCallback(WidgetSyncInProgressEntry(uploadCount: syncInfo.uploadCount,
+                                                    totalCount: syncInfo.totalCount,
+                                                    currentFileName: "name_of_file",
+                                                    date: Date()))
+            //TODO: should I  add another entry here for sync finisheD?
+        } else {
+            entryCallback(nil)
+        }
+        
+    }
+    
+    //ORDER-4 (Checking unsynced files)
+    ///Check if there are unsynced files in device gallery and auto sync value ON or OFF.
+    private func checkSyncStatus(entryCallback: @escaping WidgetBaseEntryCallback) {
+        guard
+            WidgetPresentationService.shared.isPreperationFinished,
+            WidgetPresentationService.shared.isPhotoLibriaryAvailable()
+        else {
+            entryCallback(nil)
+            return
+        }
+        WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
+            // unysnced items status enter
+            let syncInfo = WidgetPresentationService.shared.getSyncInfo()
+            if hasUnsynced {
+                //TODO: need check syncStatus
+                let isSyncEnabled = !syncInfo.syncStatus.isContained(in: [.failed, .undetermined, .stoped])
+                entryCallback(WidgetAutoSyncEntry(isSyncEnabled: isSyncEnabled,
+                                                  isAppLaunched: syncInfo.isAppLaunch,
+                                                  date: Date()))
+            } else  {
+                entryCallback(nil)
+            }
+        }
+    }
+    
+    //ORDER-5 (No contact backup):
+    ///Check if user has a a contact backup.
+    ///If user has no backup in lifebox, we will display this widget: https://zpl.io/2GZY9nj
+    //ORDER-6 (Last backup is older than 1 month)
+    ///Check if user has a contact backup and its date.
+    private func checkContactBackupStatus(entryCallback: @escaping WidgetBaseEntryCallback) { //no cantact backup or last backup older > 1 month
         WidgetPresentationService.shared.getContactBackupStatus(
             completion: { response in
                 if let lastBackupDate = response.date {
+                    let todayDate = Date()
                     let components = Calendar.current.dateComponents([.month], from: lastBackupDate, to: todayDate)
-                    let date = Calendar.current.date(byAdding: .minute, value: timeInterval, to: todayDate)!
+                    //Calendar.current.date(byAdding: .minute, value: timeInterval, to: todayDate)!
+                    let date = todayDate
                     if components.month! >= 1 && response.totalNumberOfContacts <= .zero {
-                        entries.append(WidgetContactBackupEntry(backupDate: lastBackupDate,
+                        entryCallback(WidgetContactBackupEntry(backupDate: lastBackupDate,
                                                     date: date))
-                        timeInterval += Self.timeStep
                     } else if response.totalNumberOfContacts <= .zero {
-                        entries.append(WidgetContactBackupEntry(date: date))
-                        timeInterval += Self.timeStep
+                        entryCallback(WidgetContactBackupEntry(date: date))
+                    } else {
+                        entryCallback(nil)
                     }
                 }
-                group.leave()
             },
-            fail: { group.leave() })
-
-        // premium users
+            fail: {
+                entryCallback(nil)
+            })
+    }
+    
+    //ORDER-7 (Face Recognition):
+    ///Check if user has AUTH_FACE_IMAGE_LOCATION authority with calling authority API and check if user's face-image recognition is enabled or not
+    private func checkFIRStatus(entryCallback: @escaping WidgetBaseEntryCallback) {
+        //TODO: isFIREnabled - check if being created correctly
+        
         WidgetPresentationService.shared.getFIRStatus { response in
             let date: Date
             if response.isLoadingImages {
-                date = Calendar.current.date(byAdding: .second, value: 10, to: todayDate)!
+                date = Calendar.current.date(byAdding: .second, value: 10, to: Date())!
             } else {
-                date = Calendar.current.date(byAdding: .second, value: timeInterval, to: todayDate)!
+                date = Calendar.current.date(byAdding: .second, value: 2, to: Date())!
             }
 
             let entry = WidgetUserInfoEntry(
@@ -155,9 +277,8 @@ struct WidgetProvider: TimelineProvider {
                 peopleInfos: response.userInfo.peopleInfos,
                 date: date
             )
-            entries.append(entry)
-            timeInterval += Self.timeStep
-            group.leave()
+            entryCallback(entry)
         }
     }
 }
+
