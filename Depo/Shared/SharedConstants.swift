@@ -29,6 +29,7 @@ struct SharedConstants {
     static let wormholeDirectoryIdentifier = "wormhole"
     static let wormholeMessageIdentifier = "wormholeMessageIdentifier"
     static let wormholeCurrentImageIdentifier = "wormholeCurrentImageIdentifier"
+    static let wormholeNewWidgetStateIdentifier = "wormholeNewWidgetStateIdentifier"
     
     static let finishedAutoSyncCountKey = "finishedAutoSyncCount"
     static let totalAutoSyncCountKey = "totalAutoSyncCount"

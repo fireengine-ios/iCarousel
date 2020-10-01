@@ -61,6 +61,10 @@ final class WidgetPresentationService {
         setupWormhole()
     }
     
+    func notifyChangeWidgetState(_ newState: WidgetState) {
+        widgetService.notifyAboutChangeWidgetState(newState.gaName)
+    }
+    
     private func setupWormhole() {
         widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeMessageIdentifier) { [weak self] messageObject in
 
