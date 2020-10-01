@@ -7,6 +7,7 @@
 //
 
 import Reachability
+import WebKit
 
 class SplashInteractor: SplashInteractorInput {
 
@@ -92,6 +93,9 @@ class SplashInteractor: SplashInteractorInput {
                         self?.isFirstLogin = true
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .turkcell))
                         CacheManager.shared.actualizeCache()
+                        if #available(iOS 14.0, *) {
+                            WidgetCenter.shared.reloadAllTimelines()
+                        }
                         self?.turkcellSuccessLogin()
                         self?.isTryingToLogin = false
                     }, fail: { [weak self] error in
@@ -134,6 +138,9 @@ class SplashInteractor: SplashInteractorInput {
                     SingletonStorage.shared.getOverQuotaStatus {
                         self?.successLogin()
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .rememberMe))
+                        if #available(iOS 14.0, *) {
+                            WidgetCenter.shared.reloadAllTimelines()
+                        }
                     }
                 }, fail: { [weak self] error in
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .rememberMe))

@@ -6,6 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import WebKit
+
 enum LoginFieldError {
     case loginIsNotValid
     case loginIsEmpty
@@ -222,6 +224,10 @@ class LoginInteractor: LoginInteractorInput {
         } else {
             self.analyticsService.trackLoginEvent(loginType: .gsm)
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .phone))
+        }
+        
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
         }
         
         self.loginRetries = 0
