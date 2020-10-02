@@ -331,15 +331,12 @@ struct WidgetContactBackedupSmallView: View {
     var entry: WidgetContactBackupEntry
     
     var body: some View {
-        if let backupDate = entry.backupDate {
-            let components = Calendar.current.dateComponents([.weekOfYear, .month], from: backupDate, to: Date())
-            if components.month! >= 1 {
-                WidgetEntrySmallView(imageName: "back_up_small",
-                                     title: TextConstants.widgetRule6SmallTitle,
-                                     description: TextConstants.widgetRule6SmallDetail,
-                                     titleButton: TextConstants.widgetRule6SmallButton,
-                                     action: .widgetOldBackup)
-            }
+        if entry.state == .contactsOldBackup {
+            WidgetEntrySmallView(imageName: "back_up_small",
+                                 title: TextConstants.widgetRule6SmallTitle,
+                                 description: TextConstants.widgetRule6SmallDetail,
+                                 titleButton: TextConstants.widgetRule6SmallButton,
+                                 action: .widgetOldBackup)
         } else {
             WidgetEntrySmallView(imageName: "back_up_small",
                                  title: TextConstants.widgetRule5SmallDetail,
@@ -380,22 +377,17 @@ struct WidgetContactBackedupMediumView: View {
     }
     
     func entryData() -> (title: String, description: String, titleButton: String, action: PushNotificationAction) {
-        var title = TextConstants.widgetRule5MediumTitle
-        var description = TextConstants.widgetRule5MediumDetail
-        var titleButton = TextConstants.widgetRule5MediumButton
-        var action: PushNotificationAction = .widgetNoBackup
-        
-        if let backupDate = entry.backupDate {
-            let components = Calendar.current.dateComponents([.weekOfYear, .month], from: backupDate, to: Date())
-            if components.month! >= 1 {
-                title = TextConstants.widgetRule6MediumTitle
-                description = TextConstants.widgetRule6MediumDetail
-                titleButton = TextConstants.widgetRule6MediumButton
-                action = .widgetOldBackup
-            }
+        if entry.state == .contactsOldBackup {
+            return (title: TextConstants.widgetRule6MediumTitle,
+                    description: TextConstants.widgetRule6MediumDetail,
+                    titleButton: TextConstants.widgetRule6MediumButton,
+                    action: .widgetOldBackup)
+        } else {
+            return (title: TextConstants.widgetRule5MediumTitle,
+                    description: TextConstants.widgetRule5MediumDetail,
+                    titleButton: TextConstants.widgetRule5MediumButton,
+                    action: .widgetNoBackup)
         }
-
-        return (title: title, description: description, titleButton: titleButton, action: action)
     }
 }
 
@@ -411,7 +403,7 @@ struct WidgetFaceRecognitionSmallView: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .center, spacing: -10) {
                     ForEach(entry.images.indices, id: \.self) { index in
-                        if index == 2 && entry.lessThen3Images {
+                        if index == 2 && entry.state == .firLess3People {
                             Image(uiImage: entry.images[index])
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
@@ -474,7 +466,7 @@ struct WidgetFaceRecognitionMediumView: View {
                 HStack(alignment: .top, spacing: 10) {
                     HStack(spacing: -25) {
                         ForEach(entry.images.indices, id: \.self) { index in
-                            if index == 2 && entry.lessThen3Images {
+                            if index == 2 && entry.state == .firLess3People {
                                 Image(uiImage: entry.images[index])
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)

@@ -117,37 +117,20 @@ final class WidgetDeviceQuotaEntry: WidgetBaseEntry {
 }
 
 final class WidgetContactBackupEntry: WidgetBaseEntry {
-    private(set) var backupDate: Date?
-    
     init(backupDate: Date? = nil, date: Date) {
-        self.backupDate = backupDate
         super.init(date: date, state: backupDate == nil ? .contactsNoBackup : .contactsOldBackup)
     }
-    
-    enum CodingKeys: String, CodingKey {
-        case backupDate
-    }
-    
+
     required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        backupDate = try container.decodeIfPresent(Date.self, forKey: .backupDate) ?? Date()
         try super.init(from: decoder)
     }
 }
 
 final class WidgetUserInfoEntry: WidgetBaseEntry {
-    private(set) var isFIREnabled: Bool
-    private(set) var hasFIRPermission: Bool
     private(set) var peopleInfos: [PeopleInfo]
     private(set) var images = [UIImage]()
-       
-    var lessThen3Images: Bool {
-        isFIREnabled && hasFIRPermission && peopleInfos.count < 3
-    }
     
     init(isFIREnabled: Bool, hasFIRPermission: Bool, peopleInfos: [PeopleInfo], date: Date) {
-        self.isFIREnabled = isFIREnabled
-        self.hasFIRPermission = hasFIRPermission
         self.peopleInfos = peopleInfos
         
         let state: WidgetState
@@ -172,8 +155,6 @@ final class WidgetUserInfoEntry: WidgetBaseEntry {
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        isFIREnabled = try container.decodeIfPresent(Bool.self, forKey: .isFIREnabled) ?? false
-        hasFIRPermission = try container.decodeIfPresent(Bool.self, forKey: .hasFIRPermission) ?? false
         peopleInfos = try container.decodeIfPresent([PeopleInfo].self, forKey: .peopleInfos) ?? []
         try super.init(from: decoder)
         setupImages()
@@ -199,7 +180,7 @@ final class WidgetUserInfoEntry: WidgetBaseEntry {
             case 1:
                 return UIImage(named: "user-2")!
             case 2:
-                if lessThen3Images {
+                if state == .firLess3People {
                     return UIImage(named: "plusIcon")!
                 } else {
                     return UIImage(named: "user-1")!
@@ -212,21 +193,12 @@ final class WidgetUserInfoEntry: WidgetBaseEntry {
 }
 
 final class WidgetAutoSyncEntry: WidgetBaseEntry {
-    private(set) var isSyncEnabled: Bool
     
     init(isSyncEnabled: Bool, date: Date) {
-        self.isSyncEnabled = isSyncEnabled
-        
         super.init(date: date, state: isSyncEnabled ? .autosyncAppNotLaunch : .autosyncDisable)
     }
     
-    enum CodingKeys: String, CodingKey {
-        case isSyncEnabled
-    }
-    
     required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        isSyncEnabled = try container.decodeIfPresent(Bool.self, forKey: .isSyncEnabled) ?? false
         try super.init(from: decoder)
     }
 }
