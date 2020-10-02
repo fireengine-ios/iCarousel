@@ -43,6 +43,7 @@ struct WidgetProvider: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping WidgetTimeLineCallback) {
+        debugPrint("!!! cpntext \(context.family)")
         calculateCurrentOrderTimeline(timelineCallback: completion)
     }
 }
@@ -105,11 +106,15 @@ extension WidgetProvider {
         case .login: //ORDER-0
             let timeline = Timeline(entries: [entry], policy: .never)
             timelineCallback(timeline)
-        case .quota:
+        case .quota, .freeUpSpace: //ORDER 1-2
             let currentDate = Date()
             let refreshDate = Calendar.current.date(byAdding: .hour, value: 8, to: currentDate) ?? currentDate
             timelineCallback(Timeline(entries: [entry], policy: .after(refreshDate)))
-        case  .freeUpSpace, .syncInProgress, .autosync, .contactsNoBackup, .oldContactsBackup, .fir, .syncComplete: //ORDER-1-7
+        case .syncInProgress:
+            let currentDate = Date()
+            let refreshDate = Calendar.current.date(byAdding: .hour, value: 1, to: currentDate) ?? currentDate
+            timelineCallback(Timeline(entries: [entry], policy: .after(refreshDate)))
+        case .autosync, .contactsNoBackup, .oldContactsBackup, .fir, .syncComplete: //ORDER-3-7
             timelineCallback(Timeline(entries: [entry], policy: .atEnd))
         }
     }
