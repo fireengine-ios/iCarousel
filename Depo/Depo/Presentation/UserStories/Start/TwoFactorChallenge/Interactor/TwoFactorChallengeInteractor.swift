@@ -6,7 +6,7 @@
 //  Copyright © 2019 LifeTech. All rights reserved.
 //
 
-import WebKit
+import WidgetKit
 
 final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
     

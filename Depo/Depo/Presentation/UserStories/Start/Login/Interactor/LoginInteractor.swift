@@ -6,7 +6,7 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
-import WebKit
+import WidgetKit
 
 enum LoginFieldError {
     case loginIsNotValid

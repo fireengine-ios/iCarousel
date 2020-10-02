@@ -7,7 +7,7 @@
 //
 
 import Reachability
-import WebKit
+import WidgetKit
 
 class SplashInteractor: SplashInteractorInput {
 
