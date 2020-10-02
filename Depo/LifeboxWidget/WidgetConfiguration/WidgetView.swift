@@ -333,14 +333,14 @@ struct WidgetContactBackedupSmallView: View {
     var body: some View {
         if entry.state == .contactsOldBackup {
             WidgetEntrySmallView(imageName: "back_up_small",
-                                 title: TextConstants.widgetRule6SmallTitle,
+                                 title: "",
                                  description: TextConstants.widgetRule6SmallDetail,
                                  titleButton: TextConstants.widgetRule6SmallButton,
                                  action: .widgetOldBackup)
         } else {
             WidgetEntrySmallView(imageName: "back_up_small",
-                                 title: TextConstants.widgetRule5SmallDetail,
-                                 description: "",
+                                 title: "",
+                                 description: TextConstants.widgetRule5SmallDetail,
                                  titleButton: TextConstants.widgetRule5SmallButton,
                                  action: .widgetNoBackup)
         }
@@ -378,7 +378,7 @@ struct WidgetContactBackedupMediumView: View {
     
     func entryData() -> (title: String, description: String, titleButton: String, action: PushNotificationAction) {
         if entry.state == .contactsOldBackup {
-            return (title: TextConstants.widgetRule6MediumTitle,
+            return (title: "",
                     description: TextConstants.widgetRule6MediumDetail,
                     titleButton: TextConstants.widgetRule6MediumButton,
                     action: .widgetOldBackup)
@@ -419,10 +419,15 @@ struct WidgetFaceRecognitionSmallView: View {
                     }
                 }
 
-                Text(data.description)
-                    .foregroundColor(.white)
-                    .font(.system(size: 13, weight: .regular, design: .default))
-                Spacer()
+                VStack(alignment: .leading) {
+                    Text(data.title)
+                        .foregroundColor(.white)
+                        .font(.system(size: 13, weight: .semibold, design: .default)) +
+                    Text(data.description)
+                        .foregroundColor(.white)
+                        .font(.system(size: 13, weight: .regular, design: .default))
+                    Spacer(minLength: 0)
+                }
                 WidgetButton(title: data.titleButton, cornerRadius: 12)
                     .frame(width: .infinity, height: WidgetViewContants.smallButtonHeight, alignment: .center)
             }
@@ -433,22 +438,26 @@ struct WidgetFaceRecognitionSmallView: View {
         }
     }
     
-    func entryData() -> (description: String, titleButton: String, action: PushNotificationAction) {
+    func entryData() -> (title: String, description: String, titleButton: String, action: PushNotificationAction) {
         switch entry.state {
         case .fir:
-            return (description: TextConstants.widgetRule71SmallDetail,
+            return (title: TextConstants.widgetRule71SmallTitle,
+                    description: TextConstants.widgetRule71SmallDetail,
                     titleButton: TextConstants.widgetRule71SmallButton,
                     action: .widgetFIRLess3People)
         case .firLess3People:
-            return (description: TextConstants.widgetRule72SmallDetail,
+            return (title: TextConstants.widgetRule72SmallTitle,
+                    description: TextConstants.widgetRule72SmallDetail,
                     titleButton: TextConstants.widgetRule72SmallButton,
                     action: .widgetFIR)
         case .firDisabled:
-            return (description: TextConstants.widgetRule73SmallDetail,
+            return (title: TextConstants.widgetRule73SmallTitle,
+                    description: TextConstants.widgetRule73SmallDetail,
                     titleButton: TextConstants.widgetRule73SmallButton,
                     action: .widgetFIRDisabled)
         default:
-            return (description: TextConstants.widgetRule74SmallDetail,
+            return (title: TextConstants.widgetRule74SmallTitle,
+                    description: TextConstants.widgetRule74SmallDetail,
                     titleButton: TextConstants.widgetRule74SmallButton,
                     action: .widgetFIRStandart)
         }
@@ -483,7 +492,7 @@ struct WidgetFaceRecognitionMediumView: View {
                     }
                     .frame(width: .infinity, height: imageSide, alignment: .top)
 
-                    WidgetMediumInfoView(title: "", description: data.description)
+                    WidgetMediumInfoView(title: data.title, description: data.description, inOneText: true)
                 }
                 Spacer()
                 WidgetButton(title: data.titleButton, cornerRadius: 12)
@@ -496,22 +505,26 @@ struct WidgetFaceRecognitionMediumView: View {
         }
     }
     
-    func entryData() -> (description: String, titleButton: String, action: PushNotificationAction) {
+    func entryData() -> (title: String, description: String, titleButton: String, action: PushNotificationAction) {
         switch entry.state {
         case .fir:
-            return (description: TextConstants.widgetRule71MediumDetail,
+            return (title: TextConstants.widgetRule71MediumTitle,
+                    description: TextConstants.widgetRule71MediumDetail,
                     titleButton: TextConstants.widgetRule71MediumButton,
                     action: .widgetFIRLess3People)
         case .firLess3People:
-            return (description: TextConstants.widgetRule72MediumDetail,
+            return (title: TextConstants.widgetRule72MediumTitle,
+                    description: TextConstants.widgetRule72MediumDetail,
                     titleButton: TextConstants.widgetRule72MediumButton,
                     action: .widgetFIR)
         case .firDisabled:
-            return (description: TextConstants.widgetRule73MediumDetail,
+            return (title: TextConstants.widgetRule73MediumTitle,
+                    description: TextConstants.widgetRule73MediumDetail,
                     titleButton: TextConstants.widgetRule73MediumButton,
                     action: .widgetFIRDisabled)
         default:
-            return (description: TextConstants.widgetRule74MediumDetail,
+            return (title: TextConstants.widgetRule74MediumTitle,
+                    description: TextConstants.widgetRule74MediumDetail,
                     titleButton: TextConstants.widgetRule74MediumButton,
                     action: .widgetFIRStandart)
         }
@@ -554,7 +567,7 @@ struct WidgetEntrySmallView : View {
                 }
 
                 WidgetButton(title: titleButton, cornerRadius: 12)
-                    .frame(width: .infinity, height: 30, alignment: .center)
+                    .frame(width: .infinity, height: WidgetViewContants.smallButtonHeight, alignment: .center)
             }
             .padding(WidgetViewContants.contentOffset)
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
@@ -720,21 +733,32 @@ struct WidgetMediumInfoView: View {
     var spacing: CGFloat = 6
     var titleWeight: Font.Weight = .semibold
     var descriptionWeight: Font.Weight = .regular
+    var inOneText: Bool = false
     
     var body: some View {
         GeometryReader { geometry in
-            VStack(alignment: .leading, spacing: spacing) {
-                if !title.isEmpty {
-                    Text(title)
-                        .foregroundColor(.white)
-                        .font(.system(size: 14, weight: titleWeight, design: .default))
-                        .lineSpacing(3)
-                }
-                if !description.isEmpty {
-                    Text(description)
-                        .foregroundColor(.white)
-                        .font(.system(size: 14, weight: descriptionWeight, design: .default))
-                        .lineSpacing(3)
+            if inOneText {
+                (Text(title)
+                    .font(.system(size: 14, weight: titleWeight, design: .default)) +
+                Text(description)
+                    .font(.system(size: 14, weight: descriptionWeight, design: .default)))
+                    .foregroundColor(.white)
+                    .lineSpacing(3)
+                
+            } else {
+                VStack(alignment: .leading, spacing: spacing) {
+                    if !title.isEmpty {
+                        Text(title)
+                            .foregroundColor(.white)
+                            .font(.system(size: 14, weight: titleWeight, design: .default))
+                            .lineSpacing(3)
+                    }
+                    if !description.isEmpty {
+                        Text(description)
+                            .foregroundColor(.white)
+                            .font(.system(size: 14, weight: descriptionWeight, design: .default))
+                            .lineSpacing(3)
+                    }
                 }
             }
         }
@@ -784,7 +808,7 @@ struct Widget_Previews: PreviewProvider {
             
             //Rule 4_1
             
-//            let syncEntry = WidgetAutoSyncEntry(isSyncEnabled: false, isAppLaunched: false, date: Date())
+//            let syncEntry = WidgetAutoSyncEntry(isSyncEnabled: false, date: Date())
 //            WidgetAutoSyncStatusSmallView(entry: syncEntry)
 //                .previewContext(WidgetPreviewContext(family: .systemSmall))
 //            WidgetAutoSyncStatusMediumView(entry: syncEntry)
@@ -792,7 +816,7 @@ struct Widget_Previews: PreviewProvider {
             
             //Rule 4_2
             
-//            let autoSyncEntry = WidgetAutoSyncEntry(isSyncEnabled: true, isAppLaunched: false, date: Date())
+//            let autoSyncEntry = WidgetAutoSyncEntry(isSyncEnabled: true, date: Date())
 //            WidgetAutoSyncStatusSmallView(entry: autoSyncEntry)
 //                .previewContext(WidgetPreviewContext(family: .systemSmall))
 //            WidgetAutoSyncStatusMediumView(entry: autoSyncEntry)
