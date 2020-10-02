@@ -178,7 +178,7 @@ extension WidgetProvider {
     ///When a user's lifebox quota is (%75-%100) full, we will display this widget: https://zpl.io/VDyr45J
     private func checkQuotaStatus(entryCallback: @escaping WidgetBaseEntryCallback) {
         WidgetPresentationService.shared.getStorageQuota { usedPercentage in
-            entryCallback(WidgetQuotaEntry(usedPercentage: usedPercentage, date: Date()))
+            entryCallback(usedPercentage >= 75 ? WidgetQuotaEntry(usedPercentage: usedPercentage, date: Date()) : nil)
         }
     }
     
@@ -187,7 +187,7 @@ extension WidgetProvider {
     ///When a user's device storage is (%75-%100) full, we will display this widget: https://zpl.io/V4W4QZ4
     private func checkStorageStatus(entryCallback: @escaping WidgetBaseEntryCallback) {
         WidgetPresentationService.shared.getDeviceStorageQuota { usedPercentage in
-            entryCallback(WidgetDeviceQuotaEntry(usedPercentage: usedPercentage, date: Date()))
+            entryCallback(usedPercentage >= 75 ? WidgetDeviceQuotaEntry(usedPercentage: usedPercentage, date: Date()) : nil)
         }
     }
     
@@ -256,7 +256,17 @@ extension WidgetProvider {
                 return
             }
             
-            entryCallback(WidgetContactBackupEntry(backupDate: response.date, date: Date()))
+            let todayDate = Date()
+            guard let backupDate = response.date else {
+                return entryCallback(WidgetContactBackupEntry(date: todayDate))
+            }
+            
+            let components = Calendar.current.dateComponents([.month], from: backupDate, to: todayDate)
+            if components.month! >= 1 {
+                entryCallback(WidgetContactBackupEntry(backupDate: response.date, date: todayDate))
+            } else {
+                entryCallback(nil)
+            }
         }
     }
     

@@ -81,11 +81,7 @@ final class WidgetLoginRequiredEntry: WidgetBaseEntry {
 final class WidgetQuotaEntry: WidgetBaseEntry {
     private(set) var usedPercentage: Int
     
-    init?(usedPercentage: Int, date: Date) {
-        if usedPercentage < 75 {
-            return nil
-        }
-        
+    init(usedPercentage: Int, date: Date) {
         self.usedPercentage = usedPercentage
         super.init(date: date, state: .quota)
     }
@@ -104,11 +100,7 @@ final class WidgetQuotaEntry: WidgetBaseEntry {
 final class WidgetDeviceQuotaEntry: WidgetBaseEntry {
     private(set) var usedPercentage: Int
     
-    init?(usedPercentage: Int, date: Date) {
-        if usedPercentage < 75 {
-            return nil
-        }
-        
+    init(usedPercentage: Int, date: Date) {
         self.usedPercentage = usedPercentage
         super.init(date: date, state: .freeUpSpace)
     }
@@ -125,17 +117,8 @@ final class WidgetDeviceQuotaEntry: WidgetBaseEntry {
 }
 
 final class WidgetContactBackupEntry: WidgetBaseEntry {
-    init?(backupDate: Date? = nil, date: Date) {
-        if let backupDate = backupDate {
-            let components = Calendar.current.dateComponents([.month], from: backupDate, to: date)
-            if components.month! >= 1 {
-                super.init(date: date, state: .contactsOldBackup)
-            } else {
-                return nil
-            }
-        } else {
-            super.init(date: date, state: .contactsNoBackup)
-        }
+    init(backupDate: Date? = nil, date: Date) {
+        super.init(date: date, state: backupDate == nil ? .contactsNoBackup : .contactsOldBackup)
     }
 
     required init(from decoder: Decoder) throws {
