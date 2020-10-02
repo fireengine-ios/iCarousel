@@ -6,6 +6,8 @@
 //  Copyright © 2018 LifeTech. All rights reserved.
 //
 
+import WidgetKit
+
 final class PremiumInteractor {
     
     weak var output: PremiumInteractorOutput!
@@ -143,7 +145,10 @@ extension PremiumInteractor: PremiumInteractorInput {
         }
         
         offersService.validateApplePurchase(with: receipt, productId: productId, success: { [weak self] response in
-            guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
+            guard
+                let response = response as? ValidateApplePurchaseResponse,
+                let status = response.status
+            else {
                 DispatchQueue.main.async {
                     self?.output.stopLoading()
                 }
@@ -155,6 +160,9 @@ extension PremiumInteractor: PremiumInteractorInput {
                 
                 if let product = self?.iapManager.product(for: productId) {
                     self?.analyticsService.trackPurchase(offer: product)
+                    if #available(iOS 14.0, *) {
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }
                 }
                 
                 DispatchQueue.toMain {
@@ -265,6 +273,9 @@ extension PremiumInteractor: PremiumInteractorInput {
                                   success: { [weak self] response in
                                     
                                     self?.analyticsService.trackPurchase(offer: offer)
+                                    if #available(iOS 14.0, *) {
+                                        WidgetCenter.shared.reloadAllTimelines()
+                                    }
                                     ///there is may be only one package for becoming premium so packageIndex == 1
                                     self?.analyticsService.trackProductPurchasedInnerGA(offer: offer, packageIndex: 1)
 
