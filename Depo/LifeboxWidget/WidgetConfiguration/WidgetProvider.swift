@@ -52,7 +52,7 @@ extension WidgetProvider {
     
     private func calculateCurrentOrderTimeline(timelineCallback: @escaping WidgetTimeLineCallback) {
         
-        let ordersCheckList: [WidgetStateOrder] = [.login, .quota, .freeUpSpace, .syncInProgress, .autosync, .contactsNoBackup, .fir]
+        let ordersCheckList: [WidgetStateOrder] = [.contactsNoBackup, .login, .quota, .freeUpSpace, .syncInProgress, .autosync, .fir]
         //.oldContactsBackup, - already beaing checked in this .contactsNoBackup
         //.syncComplete - .syncInProgress already checks it
         
@@ -105,7 +105,11 @@ extension WidgetProvider {
         case .login: //ORDER-0
             let timeline = Timeline(entries: [entry], policy: .never)
             timelineCallback(timeline)
-        case .quota, .freeUpSpace, .syncInProgress, .autosync, .contactsNoBackup, .oldContactsBackup, .fir, .syncComplete: //ORDER-1-7
+        case .quota:
+            let currentDate = Date()
+            let refreshDate = Calendar.current.date(byAdding: .hour, value: 8, to: currentDate) ?? currentDate
+            timelineCallback(Timeline(entries: [entry], policy: .after(refreshDate)))
+        case  .freeUpSpace, .syncInProgress, .autosync, .contactsNoBackup, .oldContactsBackup, .fir, .syncComplete: //ORDER-1-7
             timelineCallback(Timeline(entries: [entry], policy: .atEnd))
         }
     }
