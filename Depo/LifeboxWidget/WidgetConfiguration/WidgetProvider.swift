@@ -16,18 +16,21 @@ typealias WidgetBaseEntryCallback = (WidgetBaseEntry?) -> ()
 typealias WidgetTimeLineCallback = (Timeline<WidgetBaseEntry>) -> Void
 
 //MARK:- widget general
-struct WidgetProvider: TimelineProvider {
+final class WidgetProvider: TimelineProvider {
     typealias Entry = WidgetBaseEntry
     private static let timeStep = 2
+    
+    private var isTimelinePreparedSmall = true
+    private var isTimelinePreparedMedium = true
 
-    func placeholder(in context: Context) -> Self.Entry {
+    func placeholder(in context: Context) -> WidgetBaseEntry {
         if let entry = WidgetPresentationService.shared.lastWidgetEntry {
             return entry
         }
-        return WidgetDeviceQuotaEntry(usedPercentage: 67, date: Date())
+        return WidgetLoginRequiredEntry(date: Date())
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (Self.Entry) -> Void) {
+    func getSnapshot(in context: Context, completion: @escaping (WidgetBaseEntry) -> Void) {
         if let entry = WidgetPresentationService.shared.lastWidgetEntry {
             completion(entry)
             return
@@ -37,73 +40,89 @@ struct WidgetProvider: TimelineProvider {
             if let entry = timeline.entries.first {
                 completion(entry)
             } else {
-                completion(WidgetQuotaEntry(usedPercentage: 90, date: Date()))
+                completion(WidgetLoginRequiredEntry(date: Date()))
             }
         }
     }
     
     func getTimeline(in context: Context, completion: @escaping WidgetTimeLineCallback) {
-        calculateCurrentOrderTimeline(timelineCallback: completion)
+        switch context.family {
+        case .systemSmall:
+            if !isTimelinePreparedSmall {
+                return
+            }
+            isTimelinePreparedSmall = false
+            
+        case .systemMedium:
+            if !isTimelinePreparedMedium {
+                return
+            }
+            isTimelinePreparedMedium = false
+        default:
+            break
+        }
+
+        calculateCurrentOrderTimeline(family: context.family, timelineCallback: completion)
     }
 }
 
 //MARK:- widget order check
 extension WidgetProvider {
     
-    private func calculateCurrentOrderTimeline(timelineCallback: @escaping WidgetTimeLineCallback) {
+    private func calculateCurrentOrderTimeline(family: WidgetFamily, timelineCallback: @escaping WidgetTimeLineCallback) {
         
         let ordersCheckList: [WidgetStateOrder] = [.login, .quota, .freeUpSpace, .syncInProgress, .autosync, .contactsNoBackup, .fir]
         //.oldContactsBackup, - already beaing checked in this .contactsNoBackup
         //.syncComplete - .syncInProgress already checks it
         
-        
-        
         DispatchQueue.global().async {
-            let semaphore = DispatchSemaphore(value:1)
-            var isTimelinePrepared = false
+            let semaphore = DispatchSemaphore(value: 0)
+            var timeline: Timeline<WidgetBaseEntry>?
             
             //for now, only on entry is allowed
             for order in ordersCheckList {
-                guard !isTimelinePrepared else {
-                    return
-                }
-                checkOrder(order: order) { preparedEntry in
-                    debugPrint("!!! order prepared entry \(order)")
+                self.checkOrder(order: order) { preparedEntry in
+                    debugPrint("!!! \(family) order prepared entry \(order)")
                     if let preparedEntry = preparedEntry {
-                        save(entry: preparedEntry)
-                        prepareTimeline(order: order, entry: preparedEntry) { preparedTimeline in
-                            debugPrint("!!! order prepared timeline \(order)")
+                        self.save(entry: preparedEntry)
+                        timeline = self.prepareTimeline(order: order, entry: preparedEntry)
+                        debugPrint("!!! \(family) order prepared timeline \(order)")
                             
 //                            if order == .syncInProgress, WidgetService.shared.syncStatus == .synced {
 //
 //                            } else {
 //
 //                            }
-                            timelineCallback(preparedTimeline)
-                            isTimelinePrepared = true
-//                            if savedEntry != newEntry {
-//                                WidgetPresentationService.shared.messageEntryChanged(entry: order)
-//                            }
-                            semaphore.signal()
-                            return
+                            
+                        if family == .systemSmall {
+                            self.isTimelinePreparedSmall = true
+                        } else {
+                            self.isTimelinePreparedMedium = true
                         }
+                        semaphore.signal()
+                        
                     } else {
+                        debugPrint("!!! \(family) order is nil \(order)")
                         semaphore.signal()
                     }
                 }
-                debugPrint("!!! order for entry \(order)")
+                debugPrint("!!! \(family) order for entry \(order)")
                 semaphore.wait()
+                
+                if let timeline = timeline {
+                    timelineCallback(timeline)
+                    return
+                }
             }
         }
     }
     
-    private func prepareTimeline(order: WidgetStateOrder, entry: WidgetBaseEntry, timelineCallback: @escaping WidgetTimeLineCallback) {
+    private func prepareTimeline(order: WidgetStateOrder, entry: WidgetBaseEntry) -> Timeline<WidgetBaseEntry> {
         switch order {
         case .login: //ORDER-0
-            let timeline = Timeline(entries: [entry], policy: .never)
-            timelineCallback(timeline)
+            return Timeline(entries: [entry], policy: .never)
         case .quota, .freeUpSpace, .syncInProgress, .autosync, .contactsNoBackup, .oldContactsBackup, .fir, .syncComplete: //ORDER-1-7
-            timelineCallback(Timeline(entries: [entry], policy: .atEnd))
+            return Timeline(entries: [entry], policy: .atEnd)
         }
     }
     
@@ -116,7 +135,6 @@ extension WidgetProvider {
     }
     
     private func checkOrder(order: WidgetStateOrder, entryCallback: @escaping WidgetBaseEntryCallback) {
-
         switch order {
         case .login:
             //ORDER-0
@@ -159,28 +177,17 @@ extension WidgetProvider {
     ///Check user's lifebox storage quota.
     ///When a user's lifebox quota is (%75-%100) full, we will display this widget: https://zpl.io/VDyr45J
     private func checkQuotaStatus(entryCallback: @escaping WidgetBaseEntryCallback) {
-        WidgetPresentationService.shared.getStorageQuota(
-            completion: { usedPersentage in
-                usedPersentage >= 75 ? entryCallback(WidgetQuotaEntry(usedPercentage: usedPersentage, date: Date())) : entryCallback(nil)
-            },
-            fail: {
-                entryCallback(nil)
-                
-            })
+        WidgetPresentationService.shared.getStorageQuota { usedPercentage in
+            entryCallback(WidgetQuotaEntry(usedPercentage: usedPercentage, date: Date()))
+        }
     }
     
     //ORDER-2
     ///Check user's device storage.
     ///When a user's device storage is (%75-%100) full, we will display this widget: https://zpl.io/V4W4QZ4
     private func checkStorageStatus(entryCallback: @escaping WidgetBaseEntryCallback) {
-        WidgetPresentationService.shared.getDeviceStorageQuota { usedPersentage in
-            if usedPersentage >= 75 {
-                let date = Date()//Calendar.current.date(byAdding: .minute, value: 2, to: Date())!
-                entryCallback(WidgetDeviceQuotaEntry(usedPercentage: usedPersentage, date: date))
-            } else {
-                entryCallback(nil)
-            }
-
+        WidgetPresentationService.shared.getDeviceStorageQuota { usedPercentage in
+            entryCallback(WidgetDeviceQuotaEntry(usedPercentage: usedPercentage, date: Date()))
         }
     }
     
@@ -243,26 +250,14 @@ extension WidgetProvider {
     //ORDER-6 (Last backup is older than 1 month)
     ///Check if user has a contact backup and its date.
     private func checkContactBackupStatus(entryCallback: @escaping WidgetBaseEntryCallback) { //no cantact backup or last backup older > 1 month
-        WidgetPresentationService.shared.getContactBackupStatus(
-            completion: { response in
-                if let lastBackupDate = response.date {
-                    let todayDate = Date()
-                    let components = Calendar.current.dateComponents([.month], from: lastBackupDate, to: todayDate)
-                    //Calendar.current.date(byAdding: .minute, value: timeInterval, to: todayDate)!
-                    let date = todayDate
-                    if components.month! >= 1 && response.totalNumberOfContacts <= .zero {
-                        entryCallback(WidgetContactBackupEntry(backupDate: lastBackupDate,
-                                                    date: date))
-                    } else if response.totalNumberOfContacts <= .zero {
-                        entryCallback(WidgetContactBackupEntry(date: date))
-                    } else {
-                        entryCallback(nil)
-                    }
-                }
-            },
-            fail: {
+        WidgetPresentationService.shared.getContactBackupStatus { response in
+            guard let response = response else {
                 entryCallback(nil)
-            })
+                return
+            }
+            
+            entryCallback(WidgetContactBackupEntry(backupDate: response.date, date: Date()))
+        }
     }
     
     //ORDER-7 (Face Recognition):

@@ -94,7 +94,7 @@ final class WidgetServerService {
         }
     }
     
-    func getBackUpStatus(completion: @escaping (ContantBackupResponse) -> Void, fail: @escaping VoidHandler) {
+    func getBackUpStatus(completion: @escaping ValueHandler<ContantBackupResponse?>) {
         tokenService.refreshTokens { (_, accesToken, _) in
             SyncSettings.shared().token = accesToken
             SyncSettings.shared().url = RouteRequests.baseContactsUrl.absoluteString
@@ -117,7 +117,7 @@ final class WidgetServerService {
                     let deletedContactsAmount   = response["deleted"]   as? Int,
                     let time                    = response["timestamp"] as? TimeInterval
                 else {
-                    fail()
+                    completion(nil)
                     return
                 }
                 let date = Date(timeIntervalSince1970: time / 1000)

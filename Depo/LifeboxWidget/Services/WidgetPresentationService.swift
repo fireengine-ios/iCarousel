@@ -56,26 +56,18 @@ final class WidgetPresentationService {
         get { return defaults?.string(forKey: SharedConstants.lastWidgetEntryTypeKey) }
         set { defaults?.set(newValue, forKey: SharedConstants.lastWidgetEntryTypeKey) }
     }
-    
-    init() {
-        setupWormhole()
-    }
+
+    //MARK: -
     
     func notifyChangeWidgetState(_ newState: WidgetState) {
         widgetService.notifyAboutChangeWidgetState(newState.gaName)
-    }
-    
-    private func setupWormhole() {
-        widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeMessageIdentifier) { [weak self] messageObject in
-
-        }
     }
     
     func messageEntryChanged(entry: WidgetStateOrder) {
         widgetService.wormhole.message(withIdentifier: SharedConstants.entryChangedKey)
     }
     
-    func getStorageQuota(completion: @escaping ValueHandler<Int>, fail: @escaping VoidHandler) {
+    func getStorageQuota(completion: @escaping ValueHandler<Int>) {
         serverService.getQuotaInfo { response in
             switch response {
             case .success(let quota):
@@ -83,13 +75,13 @@ final class WidgetPresentationService {
                     let quotaBytes = quota.bytes,
                     let usedBytes = quota.bytesUsed
                 else {
-                    fail()
+                    completion(.zero)
                     return
                 }
                 let usagePercentage = CGFloat(usedBytes) / CGFloat(quotaBytes)
                 completion(Int(usagePercentage * 100))
             case .failed:
-                fail()
+                completion(.zero)
             }
         }
     }
@@ -110,8 +102,8 @@ final class WidgetPresentationService {
         }
     }
     
-    func getContactBackupStatus(completion: @escaping ValueHandler<ContantBackupResponse>, fail: @escaping VoidHandler) {
-        serverService.getBackUpStatus(completion: completion, fail: fail)
+    func getContactBackupStatus(completion: @escaping ValueHandler<ContantBackupResponse?>) {
+        serverService.getBackUpStatus(completion: completion)
     }
     
     func getFIRStatus(completion: @escaping ValueHandler<(userInfo: UserInfo, isLoadingImages: Bool)>) {
