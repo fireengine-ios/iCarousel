@@ -8,7 +8,7 @@
 
 import Foundation
 import MMWormhole
-
+import WidgetKit
 
 final class WidgetService {
     static let shared = WidgetService()
@@ -75,6 +75,11 @@ final class WidgetService {
     
     func notifyWidgetAbout(_ synced: Int, of total: Int) {
         finishedCount = synced
+        if total != totalCount {
+            if #available(iOS 14.0, *) {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
+        }
         totalCount = total
         lastSyncedDate = dateFormatter.string(from: Date())
         

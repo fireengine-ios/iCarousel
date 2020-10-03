@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import WidgetKit
 
 protocol ItemSyncService: class {
     var status: AutoSyncStatus { get }
@@ -136,7 +136,9 @@ class ItemSyncServiceImpl: ItemSyncService {
                     self.status = .synced
                     return
                 }
-                
+                if #available(iOS 14.0, *) {
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
                 self.upload(items: self.localItems)
             }
         }
