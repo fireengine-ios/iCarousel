@@ -18,6 +18,7 @@ class UserInfo {
 
 class SyncInfo {
     var syncStatus: AutoSyncStatus = .undetermined
+    var isAutoSyncEnabled = false
     var isAppLaunch = false
     var totalCount = 0
     var uploadCount = 0
@@ -144,6 +145,7 @@ final class WidgetPresentationService {
     func getSyncInfo() -> SyncInfo {
         let syncInfo = SyncInfo()
         syncInfo.syncStatus = widgetService.syncStatus
+        syncInfo.isAutoSyncEnabled = widgetService.isAutoSyncEnabled
         syncInfo.uploadCount = widgetService.finishedCount
         syncInfo.totalCount = widgetService.totalCount
         

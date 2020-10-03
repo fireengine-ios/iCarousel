@@ -36,6 +36,7 @@ struct SharedConstants {
     static let lastSyncDateKey = "lastSyncDate"
     static let syncStatusKey = "syncStatus"
     static let currentImageDataKey = "currentImageData"
+    static let autoSyncEnabledKey = "autoSyncEnabledKey"
     
     static let wormholeLogout = "wormholeLogout"
     static let wormholeDidLogout = "wormholeDidLogout"

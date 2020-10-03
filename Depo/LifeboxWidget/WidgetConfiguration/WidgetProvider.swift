@@ -243,14 +243,12 @@ extension WidgetProvider {
             // unysnced items status enter
             let syncInfo = WidgetPresentationService.shared.getSyncInfo()
             if hasUnsynced {
-                //TODO: need check syncStatus
-                let isSyncEnabled = !syncInfo.syncStatus.isContained(in: [.failed, .undetermined, .stoped])
-                if syncInfo.isAppLaunch && isSyncEnabled {
+                if syncInfo.isAppLaunch && syncInfo.isAutoSyncEnabled {
                     //this case for order 3 - sync in progress
                     entryCallback(nil)
                 }
                 
-                entryCallback(WidgetAutoSyncEntry(isSyncEnabled: isSyncEnabled, date: Date()))
+                entryCallback(WidgetAutoSyncEntry(isSyncEnabled: syncInfo.isAutoSyncEnabled, date: Date()))
             } else {
                 entryCallback(nil)
             }

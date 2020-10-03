@@ -51,6 +51,11 @@ final class WidgetService {
         set { defaults?.set(newValue.rawValue, forKey: SharedConstants.syncStatusKey) }
     }
     
+    private (set) var isAutoSyncEnabled: Bool {
+        get { defaults?.bool(forKey: SharedConstants.autoSyncEnabledKey) ?? false }
+        set { defaults?.set(newValue, forKey: SharedConstants.autoSyncEnabledKey) }
+    }
+    
     private var currentImageData: Data? {
         get { return defaults?.data(forKey: SharedConstants.currentImageDataKey) }
         set { defaults?.set(newValue, forKey: SharedConstants.currentImageDataKey) }
@@ -107,4 +112,8 @@ final class WidgetService {
         wormhole.passMessageObject(newStateName as NSString, identifier: SharedConstants.wormholeNewWidgetStateIdentifier)
     }
 
+    func notifyWidgetAbout(autoSyncEnabled: Bool) {
+        isAutoSyncEnabled = autoSyncEnabled
+    }
+    
 }
