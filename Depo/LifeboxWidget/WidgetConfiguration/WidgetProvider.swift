@@ -75,7 +75,14 @@ extension WidgetProvider {
         //.oldContactsBackup, - already beaing checked in this .contactsNoBackup
         //.syncComplete - .syncInProgress already checks it
         
-        DispatchQueue.global().async {
+        DispatchQueue.global().async { [weak self] in
+            
+            guard let self = self else {
+                assertionFailure()
+                timelineCallback(Timeline(entries: [], policy: .atEnd))
+                return
+            }
+            
             let semaphore = DispatchSemaphore(value: 0)
             var timeline: Timeline<WidgetBaseEntry>?
             

@@ -39,6 +39,9 @@ final class WidgetPresentationService {
     private lazy var imageLoader = WidgetImageLoader()
     
     private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
+    
+    private var lastQuotaUsagePercentage: Int?
+    private var lastQuotaUsageRequestDate: Date?
 
     //TODO: change to enum?
     var lastWidgetEntry: WidgetBaseEntry? {
@@ -71,7 +74,16 @@ final class WidgetPresentationService {
     }
     
     func getStorageQuota(completion: @escaping ValueHandler<Int>) {
-        serverService.getQuotaInfo { response in
+        
+        if let lastQuotaUsagePercentage = lastQuotaUsagePercentage,
+           let lastQuotaUsageRequestDate = lastQuotaUsageRequestDate,
+           let eghtHoursSinceLastQuotaRequest = Calendar.current.date(byAdding: .hour, value: 8, to: lastQuotaUsageRequestDate),
+           eghtHoursSinceLastQuotaRequest > Date()
+           {
+            completion(lastQuotaUsagePercentage)
+            return
+        }
+        serverService.getQuotaInfo { [weak self] response in
             switch response {
             case .success(let quota):
                 guard
@@ -82,7 +94,11 @@ final class WidgetPresentationService {
                     return
                 }
                 let usagePercentage = CGFloat(usedBytes) / CGFloat(quotaBytes)
-                completion(Int(usagePercentage * 100))
+                let quotaUsagePercentage = Int(usagePercentage * 100)
+                self?.lastQuotaUsagePercentage = quotaUsagePercentage
+                self?.lastQuotaUsageRequestDate = Date()
+                completion(quotaUsagePercentage)
+                
             case .failed:
                 completion(.zero)
             }
