@@ -208,16 +208,12 @@ final class WidgetSyncInProgressEntry: WidgetBaseEntry {
     private(set) var totalCount: Int
     private(set) var currentFileName: String
     
-    var isSyncComplete: Bool {
-        uploadCount == totalCount
-    }
-    
-    init(uploadCount: Int, totalCount: Int, currentFileName: String, date: Date) {
+    init(isSyncCompleted: Bool = false, uploadCount: Int = 0, totalCount: Int = 0, currentFileName: String = "", date: Date) {
         self.uploadCount = uploadCount
         self.totalCount = totalCount
         self.currentFileName = currentFileName
         
-        super.init(date: date, state: uploadCount == totalCount ? .syncComplete : .syncInProgress)
+        super.init(date: date, state: isSyncCompleted ? .syncComplete : .syncInProgress)
     }
     
     enum CodingKeys: String, CodingKey {

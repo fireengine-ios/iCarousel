@@ -33,9 +33,9 @@ final class TokenKeychainStorage: TokenStorage {
             /// You can use .accessibleAfterFirstUnlock if you need your app to access the keychain item while in the background. Note that it is less secure than the .accessibleWhenUnlocked option
             /// https://github.com/evgenyneu/keychain-swift#keychain_item_access
             keychain.set(newValue, forKey: accessTokenKey, withAccess: .accessibleAfterFirstUnlock)
-            if #available(iOS 14, *) {
-                WidgetCenter.shared.reloadAllTimelines()
-            }
+//            if #available(iOS 14, *) {
+//                WidgetCenter.shared.reloadAllTimelines()
+//            }
             savedAccessToken = newValue
         }
     }

@@ -103,6 +103,8 @@ final class UploadOperation: Operation {
         
         ItemOperationManager.default.startUploadFile(file: inputItem)
         
+        WidgetService.shared.notifyWidgetAbout(syncFileName: inputItem.name ?? "")
+        
         SingletonStorage.shared.progressDelegates.add(self)
         
         attemptUpload()

@@ -80,7 +80,7 @@ class ItemSyncServiceImpl: ItemSyncService {
         lastSyncedMD5s.removeAll()
         
         if status != .synced {
-            status = .stoped
+            status = .stopped
         }
     }
     
@@ -97,7 +97,7 @@ class ItemSyncServiceImpl: ItemSyncService {
             }
             
             if self.status == .waitingForWifi, !hasItemsToSync {
-                self.status = .stoped
+                self.status = .stopped
             }
         }
     }
@@ -136,9 +136,7 @@ class ItemSyncServiceImpl: ItemSyncService {
                     self.status = .synced
                     return
                 }
-                if #available(iOS 14.0, *) {
-                    WidgetCenter.shared.reloadAllTimelines()
-                }
+
                 self.upload(items: self.localItems)
             }
         }
@@ -148,7 +146,7 @@ class ItemSyncServiceImpl: ItemSyncService {
     private func upload(items: [WrapData]) {
         debugLog("ItemSyncServiceImpl upload")
 
-        guard !items.isEmpty, status != .stoped else {
+        guard !items.isEmpty, status != .stopped else {
             debugLog("ItemSyncServiceImpl status != .stoped")
             return
         }

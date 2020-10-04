@@ -17,11 +17,13 @@ class UserInfo {
 }
 
 class SyncInfo {
-    var syncStatus: AutoSyncStatus = .undetermined
+    var syncStatus: WidgetSyncStatus = .undetermined
     var isAutoSyncEnabled = false
     var isAppLaunch = false
     var totalCount = 0
     var uploadCount = 0
+    var currentSyncFileName = ""
+    var lastSyncedDate: Date?
 }
 
 final class WidgetPresentationService {
@@ -148,6 +150,8 @@ final class WidgetPresentationService {
         syncInfo.isAutoSyncEnabled = widgetService.isAutoSyncEnabled
         syncInfo.uploadCount = widgetService.finishedCount
         syncInfo.totalCount = widgetService.totalCount
+        syncInfo.currentSyncFileName = widgetService.currentSyncFileName
+        syncInfo.lastSyncedDate = widgetService.lastSyncedDate
         
         if let date = widgetService.mainAppResponsivenessDate, date.timeIntervalSince(Date()) < NumericConstants.intervalInSecondsBetweenAppResponsivenessUpdate * 0.1 {
             syncInfo.isAppLaunch = true

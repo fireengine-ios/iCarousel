@@ -36,7 +36,7 @@ class SyncServiceManager {
     
     
     private var isSyncStoped: Bool {
-        return (photoSyncService.status == .stoped && videoSyncService.status == .stoped)
+        return (photoSyncService.status == .stopped && videoSyncService.status == .stopped)
     }
     
     private var isSyncFailed: Bool {
@@ -48,7 +48,7 @@ class SyncServiceManager {
     }
     
     private var hasSyncStoped: Bool {
-        return (photoSyncService.status == .stoped || videoSyncService.status == .stoped)
+        return (photoSyncService.status == .stopped || videoSyncService.status == .stopped)
     }
     
     private var hasPrepairingSync: Bool {
@@ -143,7 +143,7 @@ class SyncServiceManager {
     func stopSync() {
         debugLog("SyncServiceManager stopSync")
         
-        WidgetService.shared.notifyWidgetAbout(status: .stoped)
+//        WidgetService.shared.notifyWidgetAbout(status: .stopped)
         stop(photo: true, video: true)
     }
     
@@ -339,7 +339,7 @@ extension SyncServiceManager {
     @objc private func onAutoSyncStatusDidChange() {
         
         if hasExecutingSync, self.reachabilityService.isReachable {
-            WidgetService.shared.notifyWidgetAbout(status: .executing)
+//            WidgetService.shared.notifyWidgetAbout(status: .executing)
 
             CardsManager.default.stopOperationWith(type: .waitingForWiFi)
             CardsManager.default.stopOperationWith(type: .prepareToAutoSync)
@@ -347,7 +347,7 @@ extension SyncServiceManager {
         }
         
         CardsManager.default.stopOperationWith(type: .sync)
-        WidgetService.shared.notifyWidgetAbout(status: .stoped)
+//        WidgetService.shared.notifyWidgetAbout(status: .stopped)
         
         if hasPrepairingSync {
 //            CardsManager.default.startOperationWith(type: .prepareToAutoSync, allOperations: nil, completedOperations: nil)
