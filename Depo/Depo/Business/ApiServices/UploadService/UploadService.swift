@@ -201,8 +201,7 @@ final class UploadService: BaseRequestService {
     }
     
     private func showSyncCardProgress() {
-        WidgetService.shared.notifyWidgetAbout(currentSyncOperationNumber, of: allSyncOperationsCount)
-        
+        widgetNotifySyncProgress(finishedCount: currentSyncOperationNumber, totalCount: allSyncOperationsCount)
         guard
             allSyncOperationsCount != 0,
             allSyncOperationsCount != finishedSyncOperationsCount,
@@ -225,6 +224,7 @@ final class UploadService: BaseRequestService {
             return
         }
         
+        widgetNotifySyncProgress(finishedCount: currentUploadOperationNumber, totalCount: allOperations)
         CardsManager.default.setProgressForOperationWith(type: .upload,
                                                          object: nil,
                                                          allOperations: allOperations,
@@ -259,7 +259,9 @@ final class UploadService: BaseRequestService {
                                                              object: firstObject,
                                                              allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
                                                              completedOperations: self.currentUploadOperationNumber)
-        
+        self.widgetNotifySyncExecute(finishedCount: self.currentUploadOperationNumber,
+                                     totalCount: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
+                                     firstFileName: firstObject.name ?? "")
             // change cells into inQueue state
             itemsToUpload.forEach { ItemOperationManager.default.startUploadFile(file: $0) }
             
@@ -279,6 +281,7 @@ final class UploadService: BaseRequestService {
                                 self.trackUploadItemsFinished(items: itemsToUpload)
                                 success()
                                 ItemOperationManager.default.syncFinished()
+                                self.widgetNotifySyncFinished()
                                 self.logSyncSettings(state: "FinishedSyncToUseFileList")
                                 return
                             }
@@ -360,7 +363,9 @@ final class UploadService: BaseRequestService {
                                                              object: firstObject,
                                                              allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
                                                              completedOperations: self.currentUploadOperationNumber)
-            
+        self.widgetNotifySyncExecute(finishedCount: self.currentUploadOperationNumber,
+                                     totalCount: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
+                                     firstFileName: firstObject.name ?? "")
             // change cells into inQueue state
             itemsToUpload.forEach { ItemOperationManager.default.startUploadFile(file: $0) }
             
@@ -379,6 +384,7 @@ final class UploadService: BaseRequestService {
                                 self.trackUploadItemsFinished(items: itemsToUpload)
                                 success()
                                 ItemOperationManager.default.syncFinished()
+                                self.widgetNotifySyncFinished()
                                 self.logSyncSettings(state: "FinishedUploadFileList")
                                 return
                             }

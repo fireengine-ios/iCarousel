@@ -38,9 +38,14 @@ final class WidgetService {
         set { defaults?.set(newValue, forKey: SharedConstants.finishedAutoSyncCountKey) }
     }
     
-    private (set) var lastSyncedDate: String {
-        get { return defaults?.string(forKey: SharedConstants.lastSyncDateKey) ?? "" }
-        set { defaults?.set(newValue, forKey: SharedConstants.lastSyncDateKey) }
+    private (set) var lastSyncedDate: Date? {
+        get {
+            if let timeinterval = defaults?.double(forKey: SharedConstants.lastSyncDateKey) {
+                return Date(timeIntervalSince1970: timeinterval)
+            }
+            return nil
+        }
+        set { defaults?.set(newValue?.timeIntervalSince1970, forKey: SharedConstants.lastSyncDateKey) }
     }
     
     private (set) var currentSyncFileName: String {
@@ -85,11 +90,11 @@ final class WidgetService {
     
     func notifyWidgetAbout(_ synced: Int, of total: Int) {
         finishedCount = synced
-        if total != totalCount {
-            if #available(iOS 14.0, *) {
-                WidgetCenter.shared.reloadAllTimelines()
-            }
-        }
+//        if total != totalCount {
+//            if #available(iOS 14.0, *) {
+//                WidgetCenter.shared.reloadAllTimelines()
+//            }
+//        }
         totalCount = total
         lastSyncedDate = Date()
         
@@ -132,7 +137,7 @@ final class WidgetService {
     func notifyAboutChangeWidgetState(_ newStateName: String) {
         wormhole.passMessageObject(newStateName as NSString, identifier: SharedConstants.wormholeNewWidgetStateIdentifier)
     }
-
+    
     func notifyWidgetAbout(autoSyncEnabled: Bool) {
         isAutoSyncEnabled = autoSyncEnabled
         
@@ -142,5 +147,5 @@ final class WidgetService {
             }
         }
     }
-    
+
 }
