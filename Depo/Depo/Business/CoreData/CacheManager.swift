@@ -108,6 +108,11 @@ final class CacheManager {
                                     debugLog("CacheManager cache is actualized")
                                     self.updatePreparation(isBegun: false)
                                     SyncServiceManager.shared.updateImmediately()
+                                    
+                                    MediaItemOperationsService.shared.allUnsyncedLocalIds { localIds in
+                                        SharedGroupCoreDataStack.shared.actualizeWithUnsynced(localIdentifiers: localIds)
+                                    }
+                                    
                                     self.delegates.invoke { $0.didCompleteCacheActualization() }
                                 }
                             })
@@ -129,6 +134,11 @@ final class CacheManager {
                                 debugLog("CacheManager cache is actualized")
                                 self.updatePreparation(isBegun: false)
                                 SyncServiceManager.shared.updateImmediately()
+                                
+                                MediaItemOperationsService.shared.allUnsyncedLocalIds { localIds in
+                                    SharedGroupCoreDataStack.shared.actualizeWithUnsynced(localIdentifiers: localIds)
+                                }
+                                
                                 self.delegates.invoke { $0.didCompleteCacheActualization() }
                             }
                         })

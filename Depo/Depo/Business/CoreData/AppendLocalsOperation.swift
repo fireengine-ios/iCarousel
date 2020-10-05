@@ -132,8 +132,6 @@ final class AppendLocalsOperation: Operation {
                     }
                 }
                 
-                SharedGroupCoreDataStack.shared.saveSynced(localIdentifiers: syncedLocalIdentifiers)
-                
                 self.coreDataStack.saveDataForContext(context: context, saveAndWait: true, savedCallBack: { [weak self] in
                     
                     debugLog("page is saved")

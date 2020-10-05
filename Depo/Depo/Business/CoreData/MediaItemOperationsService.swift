@@ -789,6 +789,7 @@ final class MediaItemOperationsService {
                         context.perform {
                             let invalidItems = info.filter { !$0.isValid }.map { $0.asset.localIdentifier }
                             printLog("iCloud: removing \(invalidItems.count) items")
+                            
                             self.removeLocalMediaItems(with: invalidItems, completion: {})
                         }
                     })
@@ -865,8 +866,6 @@ final class MediaItemOperationsService {
             completion()
             return
         }
-        
-        SharedGroupCoreDataStack.shared.delete(localIdentifiers: assetIdList)
         
         coreDataStack.performBackgroundTask { [weak self] context in
             guard let `self` = self else {
@@ -1092,6 +1091,17 @@ final class MediaItemOperationsService {
                 .compactMap { $0.wrapedObject }
             
             completion(AppMigrator.migrateSyncStatus(for: wrappedItems))
+        })
+    }
+    
+    func allUnsyncedLocalIds(completion: @escaping ValueHandler<[String]>) {
+        debugLog("allLocalItemsForSync")
+        getUnsyncedMediaItems(video: true, image: true, completion: { items in
+            let unsyncedLocalIds = items
+                .filter { $0.fileSizeValue < NumericConstants.fourGigabytes }
+                .compactMap { $0.localFileID }
+            
+            completion(unsyncedLocalIds)
         })
     }
     
