@@ -24,7 +24,7 @@ final class WidgetProvider: TimelineProvider {
     private var isTimelinePreparedSmall = true
     private var isTimelinePreparedMedium = true
 
-    
+    private let privateQueue = DispatchQueue(label: DispatchQueueLabels.widgetProviderQueue)
     
     func placeholder(in context: Context) -> WidgetBaseEntry {
         if let entry = WidgetPresentationService.shared.lastWidgetEntry {
@@ -73,7 +73,7 @@ final class WidgetProvider: TimelineProvider {
 extension WidgetProvider {
     
     private func calculateCurrentOrderTimeline(family: WidgetFamily, timelineCallback: @escaping WidgetTimeLineCallback) {
-        DispatchQueue.global().async { [weak self] in
+        privateQueue.async { [weak self] in
             guard let self = self else {
                 return
             }
@@ -81,42 +81,43 @@ extension WidgetProvider {
             let semaphore = DispatchSemaphore(value: 0)
             
             self.findFirstFittingEntry(orders: self.defaultOrdersCheckList) { [weak self] preparedEntry, order in
-            
-                guard
-                    let self = self,
-                    let preparedEntry = preparedEntry,
-                    let order = order
-                else {
-                    assertionFailure("there should be atleast one entry")
-                    return
-                }
-                
-                var entries = [WidgetBaseEntry]()
-                entries.append(preparedEntry)
-                
-                if order.isContained(in: [.syncInProgress, .syncComplete]),
-                   preparedEntry.state == .syncComplete,
-                   let slice = self.defaultOrdersCheckList.split(separator: order).last {
-                    
-                    let nextOrdersInLine: [WidgetStateOrder] = Array(slice)
-                    
-                    self.findFirstFittingEntry(orders: nextOrdersInLine, customCurrentDate: order.refreshDate) { (nextEntry, entryOrder) in
-                        if let newEntry = nextEntry {
-                            entries.append(newEntry)
-                        }
-                        semaphore.signal()
+                self?.privateQueue.async { [weak self] in
+                    guard
+                        let self = self,
+                        let preparedEntry = preparedEntry,
+                        let order = order
+                    else {
+                        assertionFailure("there should be atleast one entry")
+                        return
                     }
-                    semaphore.wait()
+                    
+                    var entries = [WidgetBaseEntry]()
+                    entries.append(preparedEntry)
+                    
+                    if order.isContained(in: [.syncInProgress, .syncComplete]),
+                       preparedEntry.state == .syncComplete,
+                       let slice = self.defaultOrdersCheckList.split(separator: order).last {
+                        
+                        let nextOrdersInLine: [WidgetStateOrder] = Array(slice)
+                        
+                        self.findFirstFittingEntry(orders: nextOrdersInLine, customCurrentDate: order.refreshDate) { (nextEntry, entryOrder) in
+                            if let newEntry = nextEntry {
+                                entries.append(newEntry)
+                            }
+                            semaphore.signal()
+                        }
+                        semaphore.wait()
+                    }
+                    
+                    if family == .systemSmall {
+                        self.isTimelinePreparedSmall = true
+                    } else {
+                        self.isTimelinePreparedMedium = true
+                    }
+                    self.save(entry: entries.last)
+                    
+                    timelineCallback(self.prepareTimeline(order: order, entries: entries))
                 }
-                
-                if family == .systemSmall {
-                    self.isTimelinePreparedSmall = true
-                } else {
-                    self.isTimelinePreparedMedium = true
-                }
-                self.save(entry: entries.last)
-                
-                timelineCallback(self.prepareTimeline(order: order, entries: entries))
             }
         }
     }
