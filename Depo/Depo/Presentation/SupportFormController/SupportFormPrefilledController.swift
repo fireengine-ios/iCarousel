@@ -222,24 +222,40 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         if problems.isEmpty {
             
             getUserInfo { quota, quotaUsed, packages, feedbackEmail in
-                let versionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
                 
-                let emailBody = problem + "\n\n" +
-                    String(format: TextConstants.feedbackMailTextFormat,
-                           versionString,
-                           fullPhoneNumber,
-                           CoreTelephonyService().operatorName() ?? "",
-                           UIDevice.current.modelName,
-                           UIDevice.current.systemVersion,
-                           Device.locale,
-                           ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN",
-                           packages,
-                           quota,
-                           quotaUsed,
-                           name,
-                           surname,
-                           email,
-                           subject)
+                #if LIFEDRIVE
+                    let versionString = SettingsBundleHelper.appVersion()
+                    let emailBody = TextConstants.supportFormBilloTopText + "\n\n" + problem + "\n\n" +
+                        String(format: TextConstants.supportFormEmailBody,
+                               name,
+                               surname,
+                               email,
+                               fullPhoneNumber,
+                               versionString,
+                               CoreTelephonyService().operatorName() ?? "",
+                               UIDevice.current.modelName,
+                               UIDevice.current.systemVersion,
+                               Device.locale,
+                               ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN")
+                #else
+                    let versionString = SettingsBundleHelper.appBuild()
+                    let emailBody = problem + "\n\n" +
+                        String(format: TextConstants.feedbackMailTextFormat,
+                               versionString,
+                               fullPhoneNumber,
+                               CoreTelephonyService().operatorName() ?? "",
+                               UIDevice.current.modelName,
+                               UIDevice.current.systemVersion,
+                               Device.locale,
+                               ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN",
+                               packages,
+                               quota,
+                               quotaUsed,
+                               name,
+                               surname,
+                               email,
+                               subject)
+                #endif
                 
                 let subjectWithAppName = TextConstants.NotLocalized.appNameMailSubject + subject
                 let emailSubject: String

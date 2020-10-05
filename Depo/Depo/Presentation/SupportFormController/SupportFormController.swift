@@ -191,21 +191,28 @@ final class SupportFormController: ViewController, KeyboardHandler {
         
         
         if problems.isEmpty {
-            let versionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
             let fullPhoneNumber = "\(phoneCode)\(phoneNumber)"
             
-            let emailBody = problem + "\n\n" +
+            #if LIFEDRIVE
+                let versionString = SettingsBundleHelper.appVersion()
+                var emailBody = TextConstants.supportFormBilloTopText + "\n\n"
+            #else
+                let versionString = SettingsBundleHelper.appBuild()
+                var emailBody = ""
+            #endif
+            
+            emailBody += problem + "\n\n" +
                 String(format: TextConstants.supportFormEmailBody,
                        name,
                        surname,
                        email,
                        fullPhoneNumber,
-                        versionString,
-                        CoreTelephonyService().operatorName() ?? "",
-                        UIDevice.current.modelName,
-                        UIDevice.current.systemVersion,
-                        Device.locale,
-                        ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN")
+                       versionString,
+                       CoreTelephonyService().operatorName() ?? "",
+                       UIDevice.current.modelName,
+                       UIDevice.current.systemVersion,
+                       Device.locale,
+                       ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN")
             
             let subjectWithAppName = TextConstants.NotLocalized.appNameMailSubject + subject
             let emailSubject: String
