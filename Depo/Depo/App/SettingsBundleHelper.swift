@@ -103,6 +103,14 @@ final class SettingsBundleHelper: NSObject {
         }
     }
     
+    static func appVersion() -> String {
+        UserDefaults.standard.string(forKey: BundleKeys.version) ?? ""
+    }
+    
+    static func appBuild() -> String {
+        UserDefaults.standard.string(forKey: BundleKeys.buildVersion) ?? ""
+    }
+    
     private static var isDebugBundleEnabled: Bool {
         #if DEBUG_BUNDLE_ENABLED
         return true
