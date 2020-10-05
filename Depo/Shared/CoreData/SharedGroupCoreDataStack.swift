@@ -73,11 +73,11 @@ final class SharedGroupCoreDataStack {
 
 extension SharedGroupCoreDataStack {
     func unsynced(from assetLocalIdentifier: [String], completion: @escaping (Set<String>) -> ()) {
-        let predicate = NSPredicate(format: "isSynced == true OR isValid == false", assetLocalIdentifier)
-        executeRequest(predicate: predicate, context: mainContext) { [weak self] syncedItems in
-            let syncedIdentifiers = syncedItems.compactMap { $0.localIdentifier }
+        let predicate = NSPredicate(format: "isValidForSync == false")
+        executeRequest(predicate: predicate, context: mainContext) { [weak self] invalidItems in
+            let invalidIdentifiers = invalidItems.compactMap { $0.localIdentifier }
             
-            completion(Set(assetLocalIdentifier).subtracting(syncedIdentifiers))
+            completion(Set(assetLocalIdentifier).subtracting(invalidIdentifiers))
         }
     }
     
@@ -96,8 +96,7 @@ extension SharedGroupCoreDataStack {
                 
                 //update assets
                 syncedItems.forEach {
-                    $0.isSynced = true
-                    $0.isValid = true
+                    $0.isValidForSync = false
                 }
                 
                 guard !newSynced.isEmpty else {
@@ -108,8 +107,69 @@ extension SharedGroupCoreDataStack {
                 newSynced.forEach {
                     let newAsset = LocalAsset(context: context)
                     newAsset.localIdentifier = $0
-                    newAsset.isSynced = true
-                    newAsset.isValid = true
+                    newAsset.isValidForSync = false
+                }
+                
+                self?.saveData(for: context, completion: nil)
+            }
+        }
+    }
+    
+    func actualizeWithUnsynced(localIdentifiers: [String]) {
+        guard !localIdentifiers.isEmpty else {
+            return
+        }
+        
+        performBackgroundTask { [weak self] context in
+            let predicate = NSPredicate(format: "localIdentifier IN %@", localIdentifiers)
+            
+            self?.executeRequest(predicate: predicate, context: context) { [weak self] unsyncedItems in
+                let syncedIdentifiers = unsyncedItems.compactMap { $0.localIdentifier }
+                let newUnsynced = Set(localIdentifiers).subtracting(syncedIdentifiers)
+                
+                //update assets
+                unsyncedItems.forEach {
+                    $0.isValidForSync = true
+                }
+                
+                guard !newUnsynced.isEmpty else {
+                    self?.saveData(for: context, completion: nil)
+                    return
+                }
+                
+                //create new assets
+                newUnsynced.forEach {
+                    let newAsset = LocalAsset(context: context)
+                    newAsset.localIdentifier = $0
+                    newAsset.isValidForSync = true
+                }
+                
+                self?.saveData(for: context, completion: nil)
+            }
+        }
+        
+        performBackgroundTask { [weak self] context in
+            let predicate = NSPredicate(format: "NOT(localIdentifier IN %@)", localIdentifiers)
+            
+            self?.executeRequest(predicate: predicate, context: context) { [weak self] unsyncedItems in
+                let syncedIdentifiers = unsyncedItems.compactMap { $0.localIdentifier }
+                let newUnsynced = Set(localIdentifiers).subtracting(syncedIdentifiers)
+                
+                //update assets
+                unsyncedItems.forEach {
+                    $0.isValidForSync = false
+                }
+                
+                guard !newUnsynced.isEmpty else {
+                    self?.saveData(for: context, completion: nil)
+                    return
+                }
+                
+                //create new assets
+                newUnsynced.forEach {
+                    let newAsset = LocalAsset(context: context)
+                    newAsset.localIdentifier = $0
+                    newAsset.isValidForSync = false
                 }
                 
                 self?.saveData(for: context, completion: nil)
@@ -134,8 +194,7 @@ extension SharedGroupCoreDataStack {
                 
                 //update assets
                 invalidItems.forEach {
-                    $0.isSynced = false
-                    $0.isValid = false
+                    $0.isValidForSync = false
                 }
                 
                 guard !newInvalid.isEmpty else {
@@ -146,8 +205,7 @@ extension SharedGroupCoreDataStack {
                 newInvalid.forEach {
                     let newAsset = LocalAsset(context: context)
                     newAsset.localIdentifier = $0
-                    newAsset.isSynced = false
-                    newAsset.isValid = false
+                    newAsset.isValidForSync = false
                 }
                 
                 self?.saveData(for: context, completion: nil)
@@ -167,6 +225,41 @@ extension SharedGroupCoreDataStack {
         }
     }
     
+//    func deleteAll() {
+//        performBackgroundTask { [weak self] context in
+//            guard let self = self else {
+//                return
+//            }
+//            
+//            do {
+//                let _ = try [LocalAsset.self]
+//                    .compactMap { $0.entityDescription(context: context) }
+//                    .compactMap { self.batchDeleteRequest(for: $0, predicate: nil) }
+//                    .compactMap { try context.execute($0) as? NSBatchDeleteResult }
+//                    .compactMap { $0.result as? [NSManagedObjectID] }
+//                    .flatMap { $0 }
+//                debugLog("successfull shared DB cleaning")
+//            } catch {
+//                debugLog("error during the shared DB cleaning: \(error.description)")
+//            }
+//        }
+//    }
+//    
+//    
+//    private func batchDeleteRequest(for entityDescription: NSEntityDescription, predicate: NSPredicate?) -> NSBatchDeleteRequest {
+//        let deleteFetchRequest = NSFetchRequest<NSFetchRequestResult>()
+//        deleteFetchRequest.entity = entityDescription
+//        deleteFetchRequest.predicate = predicate
+//        deleteFetchRequest.includesPropertyValues = false
+//        deleteFetchRequest.returnsObjectsAsFaults = false
+//        deleteFetchRequest.resultType = .managedObjectIDResultType
+//        
+//        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetchRequest)
+//        batchDeleteRequest.resultType = .resultTypeObjectIDs
+//        
+//        return batchDeleteRequest
+//    }
+//    
     private func executeRequest(predicate: NSPredicate, limit: Int = 0, context: NSManagedObjectContext, completion: @escaping ([LocalAsset])->()) {
         let request = NSFetchRequest<LocalAsset>(entityName: "LocalAsset")
         request.fetchLimit = limit

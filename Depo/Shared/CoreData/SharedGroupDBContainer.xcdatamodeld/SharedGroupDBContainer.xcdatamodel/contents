@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="LocalAsset" representedClassName="LocalAsset" syncable="YES" codeGenerationType="class">
-        <attribute name="isSynced" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="isValid" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="isValidForSync" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="localIdentifier" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="LocalAsset" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="LocalAsset" positionX="-63" positionY="-18" width="128" height="73"/>
     </elements>
 </model>
