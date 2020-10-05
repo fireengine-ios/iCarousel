@@ -94,7 +94,7 @@ extension WidgetProvider {
                 var entries = [WidgetBaseEntry]()
                 entries.append(preparedEntry)
                 
-                if (order == .syncInProgress ||  order == .syncComplete),
+                if order.isContained(in: [.syncInProgress, .syncComplete]),
                    preparedEntry.state == .syncComplete,
                    let slice = self.defaultOrdersCheckList.split(separator: order).last {
                     
