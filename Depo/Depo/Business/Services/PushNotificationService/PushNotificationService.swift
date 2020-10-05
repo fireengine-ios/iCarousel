@@ -162,8 +162,17 @@ final class PushNotificationService {
         }
         
         DispatchQueue.main.async {
-            if self.router.topNavigationController?.presentedViewController != nil {
-                self.router.pushOnPresentedView(viewController: controller)
+            if let navigationController = self.router.topNavigationController {
+                if navigationController.presentedViewController != nil {
+                    self.router.pushOnPresentedView(viewController: controller)
+                } else if let existController = navigationController.viewControllers.first(where: { type(of: $0) == type(of: controller) }) {
+                    if existController == navigationController.viewControllers.last {
+                        return
+                    }
+                    navigationController.popToViewController(existController, animated: false)
+                } else {
+                    self.router.pushViewController(viewController: controller)
+                }
             } else {
                 self.router.pushViewController(viewController: controller)
             }
