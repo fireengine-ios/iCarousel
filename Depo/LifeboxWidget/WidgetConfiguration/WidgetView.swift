@@ -211,7 +211,7 @@ struct WidgetSyncInProgressMediumView: View {
     let entry: WidgetSyncInProgressEntry
     
     var body: some View {
-        if entry.isSyncComplete {
+        if entry.state == .syncComplete {
             WidgetSyncMediumView(imageName: "widget_medium_sync",
                                  detail: TextConstants.widgetRule32MediumDetail,
                                  titleButton: TextConstants.widgetRule32MediumButton,

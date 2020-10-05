@@ -39,4 +39,8 @@ final class AppResponsivenessService {
         widgetService.mainAppResponsivenessDate = Date()
     }
     
+    func applicationWillTerminate() {
+        widgetService.mainAppResponsivenessDate = nil
+    }
+    
 }
