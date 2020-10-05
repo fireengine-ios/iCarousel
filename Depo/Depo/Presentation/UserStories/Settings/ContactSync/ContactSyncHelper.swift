@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WidgetKit
 
 protocol ContactSyncHelperDelegate: class {
     func didUpdateBackupStatus()
@@ -403,6 +404,9 @@ extension ContactSyncHelperDelegate where Self: ContactSyncControllerProtocol {
     func didBackup(result: ContactSync.SyncResponse) {
         showResultView(type: .backUp(result), result: .success)
         finishOperation(operationType: .backUp(result))
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
     }
     
     func didDeleteDuplicates() {

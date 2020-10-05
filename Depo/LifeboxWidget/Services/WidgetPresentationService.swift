@@ -17,10 +17,13 @@ class UserInfo {
 }
 
 class SyncInfo {
-    var syncStatus: AutoSyncStatus = .undetermined
+    var syncStatus: WidgetSyncStatus = .undetermined
+    var isAutoSyncEnabled = false
     var isAppLaunch = false
     var totalCount = 0
     var uploadCount = 0
+    var currentSyncFileName = ""
+    var lastSyncedDate: Date?
 }
 
 final class WidgetPresentationService {
@@ -36,6 +39,9 @@ final class WidgetPresentationService {
     private lazy var imageLoader = WidgetImageLoader()
     
     private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
+    
+    private var lastQuotaUsagePercentage: Int?
+    private var lastQuotaUsageRequestDate: Date?
 
     //TODO: change to enum?
     var lastWidgetEntry: WidgetBaseEntry? {
@@ -68,7 +74,16 @@ final class WidgetPresentationService {
     }
     
     func getStorageQuota(completion: @escaping ValueHandler<Int>) {
-        serverService.getQuotaInfo { response in
+        
+        if let lastQuotaUsagePercentage = lastQuotaUsagePercentage,
+           let lastQuotaUsageRequestDate = lastQuotaUsageRequestDate,
+           let eghtHoursSinceLastQuotaRequest = Calendar.current.date(byAdding: .hour, value: 8, to: lastQuotaUsageRequestDate),
+           eghtHoursSinceLastQuotaRequest > Date()
+           {
+            completion(lastQuotaUsagePercentage)
+            return
+        }
+        serverService.getQuotaInfo { [weak self] response in
             switch response {
             case .success(let quota):
                 guard
@@ -79,7 +94,11 @@ final class WidgetPresentationService {
                     return
                 }
                 let usagePercentage = CGFloat(usedBytes) / CGFloat(quotaBytes)
-                completion(Int(usagePercentage * 100))
+                let quotaUsagePercentage = Int(usagePercentage * 100)
+                self?.lastQuotaUsagePercentage = quotaUsagePercentage
+                self?.lastQuotaUsageRequestDate = Date()
+                completion(quotaUsagePercentage)
+                
             case .failed:
                 completion(.zero)
             }
@@ -144,8 +163,11 @@ final class WidgetPresentationService {
     func getSyncInfo() -> SyncInfo {
         let syncInfo = SyncInfo()
         syncInfo.syncStatus = widgetService.syncStatus
+        syncInfo.isAutoSyncEnabled = widgetService.isAutoSyncEnabled
         syncInfo.uploadCount = widgetService.finishedCount
         syncInfo.totalCount = widgetService.totalCount
+        syncInfo.currentSyncFileName = widgetService.currentSyncFileName
+        syncInfo.lastSyncedDate = widgetService.lastSyncedDate
         
         if let date = widgetService.mainAppResponsivenessDate, date.timeIntervalSince(Date()) < NumericConstants.intervalInSecondsBetweenAppResponsivenessUpdate * 0.1 {
             syncInfo.isAppLaunch = true

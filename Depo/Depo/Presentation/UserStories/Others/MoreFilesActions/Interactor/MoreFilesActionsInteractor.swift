@@ -6,6 +6,8 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
+import WidgetKit
+
 enum DivorseItems {
     case items
     case albums
@@ -1449,6 +1451,11 @@ extension MoreFilesActionsInteractor {
     private func deleteSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
         analyticsService.trackFileOperationGAEvent(operationType: .delete, items: items)
         fileService.delete(items: items, success: { [weak self] in
+            if #available(iOS 14.0, *) {
+                if !SyncServiceManager.shared.hasExecutingSync, CacheManager.shared.isCacheActualized {
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+            }
             self?.removeItemsFromPlayer(items: items)
             success()
         }, fail: fail)

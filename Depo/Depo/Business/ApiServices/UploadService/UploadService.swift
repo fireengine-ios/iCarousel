@@ -201,7 +201,7 @@ final class UploadService: BaseRequestService {
     }
     
     private func showSyncCardProgress() {
-        WidgetService.shared.notifyWidgetAbout(currentSyncOperationNumber, of: allSyncOperationsCount)
+        widgetNotifySyncProgress(finishedCount: currentSyncOperationNumber, totalCount: allSyncOperationsCount)
         
         guard
             allSyncOperationsCount != 0,
@@ -225,6 +225,7 @@ final class UploadService: BaseRequestService {
             return
         }
         
+        widgetNotifySyncProgress(finishedCount: currentUploadOperationNumber, totalCount: allOperations)
         CardsManager.default.setProgressForOperationWith(type: .upload,
                                                          object: nil,
                                                          allOperations: allOperations,
@@ -260,6 +261,10 @@ final class UploadService: BaseRequestService {
                                                              allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
                                                              completedOperations: self.currentUploadOperationNumber)
         
+            self.widgetNotifySyncExecute(finishedCount: self.currentUploadOperationNumber,
+                                         totalCount: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
+                                         firstFileName: firstObject.name ?? "")
+
             // change cells into inQueue state
             itemsToUpload.forEach { ItemOperationManager.default.startUploadFile(file: $0) }
             
@@ -279,6 +284,7 @@ final class UploadService: BaseRequestService {
                                 self.trackUploadItemsFinished(items: itemsToUpload)
                                 success()
                                 ItemOperationManager.default.syncFinished()
+                                self.widgetNotifySyncFinished()
                                 self.logSyncSettings(state: "FinishedSyncToUseFileList")
                                 return
                             }
@@ -360,7 +366,11 @@ final class UploadService: BaseRequestService {
                                                              object: firstObject,
                                                              allOperations: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
                                                              completedOperations: self.currentUploadOperationNumber)
-            
+        
+            self.widgetNotifySyncExecute(finishedCount: self.currentUploadOperationNumber,
+                                         totalCount: self.allSyncToUseOperationsCount + self.allUploadOperationsCount + itemsToUpload.count,
+                                         firstFileName: firstObject.name ?? "")
+        
             // change cells into inQueue state
             itemsToUpload.forEach { ItemOperationManager.default.startUploadFile(file: $0) }
             
@@ -379,6 +389,7 @@ final class UploadService: BaseRequestService {
                                 self.trackUploadItemsFinished(items: itemsToUpload)
                                 success()
                                 ItemOperationManager.default.syncFinished()
+                                self.widgetNotifySyncFinished()
                                 self.logSyncSettings(state: "FinishedUploadFileList")
                                 return
                             }
@@ -455,7 +466,10 @@ final class UploadService: BaseRequestService {
                                                              object: firstObject,
                                                              allOperations: self.allSyncOperationsCount + itemsToSync.count,
                                                              completedOperations: self.currentSyncOperationNumber)
-            WidgetService.shared.notifyWidgetAbout(self.currentSyncOperationNumber, of: self.allSyncOperationsCount + itemsToSync.count)
+
+            self.widgetNotifySyncExecute(finishedCount: self.currentSyncOperationNumber,
+                                         totalCount: self.allSyncOperationsCount + itemsToSync.count,
+                                         firstFileName: firstObject.name ?? "")
 
             // change cells into inQueue state
             itemsToSync.forEach { ItemOperationManager.default.startUploadFile(file: $0) }
@@ -479,6 +493,7 @@ final class UploadService: BaseRequestService {
                                 self.stopTracking()
                                 success()
                                 ItemOperationManager.default.syncFinished()
+                                self.widgetNotifySyncFinished()
                                 self.logSyncSettings(state: "FinishedSyncFileList")
                                 return
                             }
@@ -565,6 +580,8 @@ final class UploadService: BaseRequestService {
         CardsManager.default.stopOperationWith(type: .upload)
         CardsManager.default.stopOperationWith(type: .sync)
         ItemOperationManager.default.syncFinished()
+        
+        widgetNotifySyncStopped()
     }
     
     func cancelSyncToUseOperations() {
@@ -880,6 +897,27 @@ extension UploadService {
     }
 }
 
+//Home widget notifications
+
+extension UploadService {
+    func widgetNotifySyncProgress(finishedCount: Int, totalCount: Int) {
+        WidgetService.shared.notifyWidgetAbout(finishedCount, of: totalCount)
+    }
+    
+    func widgetNotifySyncExecute(finishedCount: Int, totalCount: Int, firstFileName: String) {
+        widgetNotifySyncProgress(finishedCount: finishedCount, totalCount: totalCount)
+        WidgetService.shared.notifyWidgetAbout(syncFileName: firstFileName)
+        WidgetService.shared.notifyWidgetAbout(status: .executing)
+    }
+    
+    func widgetNotifySyncFinished() {
+        WidgetService.shared.notifyWidgetAbout(status: .synced)
+    }
+    
+    func widgetNotifySyncStopped() {
+        WidgetService.shared.notifyWidgetAbout(status: .stopped)
+    }
+}
 
 private extension String {
     func lastNonEmptyHalf(after separator: Character) -> String? {

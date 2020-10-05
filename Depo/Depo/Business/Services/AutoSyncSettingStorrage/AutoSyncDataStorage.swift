@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WidgetKit
 
 final class AutoSyncDataStorage {
     
@@ -43,6 +44,8 @@ final class AutoSyncDataStorage {
             PopUpService.shared.checkIsNeedShowUploadOffPopUp()
             LocationManager.shared.stopUpdateLocation()
         }
+        
+        WidgetService.shared.notifyWidgetAbout(autoSyncEnabled: autoSyncSettings.isAutoSyncEnabled)
     }
     
     func clear() {
