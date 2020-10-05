@@ -47,9 +47,10 @@ enum WidgetStateOrder: Int {
             let refreshDate: Date
             
             if Bundle.main.bundleIdentifier == "by.come.life.Lifebox" || Bundle.main.bundleIdentifier ==  "by.come.life.Lifebox.widget" {
-                refreshDate = Calendar.current.date(byAdding: .hour, value: 8, to: currentDate) ?? currentDate
-            } else {
                 refreshDate = Calendar.current.date(byAdding: .minute, value: 1, to: currentDate) ?? currentDate
+            } else {
+                refreshDate = Calendar.current.date(byAdding: .hour, value: 8, to: currentDate) ?? currentDate
+                
             }
              
             return  refreshDate
