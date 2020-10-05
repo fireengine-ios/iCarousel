@@ -38,6 +38,27 @@ enum WidgetStateOrder: Int {
         }
     }
     
+    var refreshDate: Date? {
+        let currentDate = Date()
+        switch self {
+        case .login: //ORDER-0
+            return nil
+        case .quota, .freeUpSpace, .autosync, .contactsNoBackup, .oldContactsBackup, .fir:  //ORDER 1-2 //ORDER-4-7:
+            let refreshDate: Date
+            
+            if Bundle.main.bundleIdentifier == "by.come.life.Lifebox" || Bundle.main.bundleIdentifier ==  "by.come.life.Lifebox.widget" {
+                refreshDate = Calendar.current.date(byAdding: .hour, value: 8, to: currentDate) ?? currentDate
+            } else {
+                refreshDate = Calendar.current.date(byAdding: .minute, value: 1, to: currentDate) ?? currentDate
+            }
+             
+            return  refreshDate
+        case .syncInProgress, .syncComplete://ORDER-3-4
+            let refreshDate = Calendar.current.date(byAdding: .second, value: 5, to: currentDate) ?? currentDate
+            return refreshDate
+        }
+    }
+    
     var relevance: TimelineEntryRelevance {
         return TimelineEntryRelevance(score: score, duration: duration)
     }
