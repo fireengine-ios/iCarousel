@@ -291,7 +291,7 @@ extension WidgetProvider {
             }
             
             let todayDate = Date()
-            guard let backupDate = response.date else {
+            guard let backupDate = response.date, response.totalNumberOfContacts > 0 else {
                 return entryCallback(WidgetContactBackupEntry(date: startDate))
             }
             

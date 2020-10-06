@@ -109,18 +109,21 @@ final class WidgetServerService {
             }
 
             ContactSyncSDK.getBackupStatus { result in
-                guard
-                    let response                = result                as? [String: Any],
-                    let contactsAmount          = response["contacts"]  as? Int,
-                    let updatedContactsAmount   = response["updated"]   as? Int,
-                    let createdContactsAmount   = response["created"]   as? Int,
-                    let deletedContactsAmount   = response["deleted"]   as? Int,
-                    let time                    = response["timestamp"] as? TimeInterval
-                else {
+                guard let response = result as? [String: Any] else {
                     completion(nil)
                     return
                 }
-                let date = Date(timeIntervalSince1970: time / 1000)
+                
+                let contactsAmount = response["contacts"] as? Int ?? 0
+                let updatedContactsAmount = response["updated"] as? Int ?? 0
+                let createdContactsAmount = response["created"] as? Int ?? 0
+                let deletedContactsAmount = response["deleted"] as? Int ?? 0
+
+                var date: Date?
+                if let time = response["timestamp"] as? TimeInterval {
+                    date = Date(timeIntervalSince1970: time / 1000)
+                }
+
                 let syncModel = ContantBackupResponse(
                     totalNumberOfContacts: contactsAmount,
                     newContactsNumber: createdContactsAmount,
