@@ -77,9 +77,16 @@ final class PushNotificationService {
             return
         }
         
+        trackIfNeeded(action: action)
+        
         let isLoggedIn = tokenStorage.accessToken != nil
         if !isLoggedIn && !action.isContained(in: [.supportFormLogin, .supportFormSignup]) {
             action = .login
+        }
+        
+        if isLoggedIn && action.isContained(in: [.login, .widgetLogout]) {
+            clear()
+            return
         }
                 
         switch action {
@@ -215,6 +222,10 @@ final class PushNotificationService {
     //MARK: - Actions
     
     private func openLogin() {
+        if let navigationController = router.topNavigationController, navigationController.viewControllers.contains(where: { $0 is RegistrationViewController }) {
+            return
+        }
+        
         pushTo(router.loginScreen)
     }
     
