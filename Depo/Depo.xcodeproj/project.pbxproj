@@ -5922,6 +5922,13 @@
 		B57AB753237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
 		B57AB754237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
 		B57AB755237989F600467573 /* NSLocking+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57AB752237989F600467573 /* NSLocking+Extension.swift */; };
+		B57BC175252C89630083B5CD /* PHAsset+FetchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */; };
+		B57BC176252C89630083B5CD /* PHAsset+FetchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */; };
+		B57BC177252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */; };
+		B57BC178252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */; };
+		B57BC179252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */; };
+		B57BC17A252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */; };
+		B57BC17B252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */; };
 		B57D854023D9EFBE0057B5D6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5CDB31D21787FEF006CFA50 /* Localizable.strings */; };
 		B57D854123D9EFC00057B5D6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5CDB31D21787FEF006CFA50 /* Localizable.strings */; };
 		B57D854223D9EFC10057B5D6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B5CDB31D21787FEF006CFA50 /* Localizable.strings */; };
@@ -6044,7 +6051,6 @@
 		B5BF438D2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
 		B5BF438E2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
 		B5BF438F2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
-		B5BF43902514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
 		B5BF43912514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
 		B5BF43DA2514D43A00B0EFEB /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208671228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift */; };
 		B5BF43DB2514D43A00B0EFEB /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208671228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift */; };
@@ -6054,7 +6060,6 @@
 		B5BF43F92514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
 		B5BF43FA2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
 		B5BF43FB2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
-		B5BF43FC2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
 		B5BF43FD2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
 		B5C4C8A22049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */; };
 		B5C4C8A32049272800886F21 /* AutoSyncSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */; };
@@ -13619,6 +13624,7 @@
 		B579E8181FE288A500F47B0A /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
 		B579E81A1FE2892200F47B0A /* VideoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncService.swift; sourceTree = "<group>"; };
 		B57AB752237989F600467573 /* NSLocking+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLocking+Extension.swift"; sourceTree = "<group>"; };
+		B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PHAsset+FetchAll.swift"; sourceTree = "<group>"; };
 		B57D854423DAD11E0057B5D6 /* MigrationModel_3_4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MigrationModel_3_4.xcmappingmodel; sourceTree = "<group>"; };
 		B57FE7FC212D73990060BD6E /* AugmentedRealityInitializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AugmentedRealityInitializer.swift; sourceTree = "<group>"; };
 		B58533182397DD6000867B5B /* DebugAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugAnalyticsService.swift; sourceTree = "<group>"; };
@@ -19998,6 +20004,7 @@
 				B54BFF4B202C73790018AF82 /* SharedConstants.swift */,
 				B54BFF4E202C74090018AF82 /* SharedEnums.swift */,
 				B5B6542F22A7ACB2000E2FA9 /* SharedImages.xcassets */,
+				B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -28194,6 +28201,7 @@
 				0303A3D32397D0D000907F42 /* HelpAndSupportViewInput.swift in Sources */,
 				98E4BA0723C722E8003A4631 /* TrashBinBottomBarManager.swift in Sources */,
 				0303A3D52397D0D000907F42 /* Watchdog.swift in Sources */,
+				B57BC179252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */,
 				B5BF43F92514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
 				B5BF438D2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				98435B7B23F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift in Sources */,
@@ -29991,6 +29999,7 @@
 				98CB1C3124FE6DAB00515757 /* SyncDB.m in Sources */,
 				8E26D9932306B49D00D08123 /* MusicInteractorInput.swift in Sources */,
 				8C0E8F551FDEBDFF00789C91 /* UsageInfoRouter.swift in Sources */,
+				B57BC177252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */,
 				7C121F01208742A800AA585F /* TokenKeychainStorage.swift in Sources */,
 				8C0E8F561FDEBDFF00789C91 /* ActionSheetPredetermendConfigs.swift in Sources */,
 				8C0E8F571FDEBDFF00789C91 /* FileInfoConfigurator.swift in Sources */,
@@ -30604,9 +30613,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5BF43FC2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
 				984B1EE023685FC8009ACCFF /* NotificationService.swift in Sources */,
-				B5BF43902514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				B5BF43DA2514D43A00B0EFEB /* NSManagedObjectContext+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -30617,6 +30624,7 @@
 			files = (
 				B5358C75250141600005FCAD /* RestoreHelper.m in Sources */,
 				B5358C802501418A0005FCAD /* GZIP.m in Sources */,
+				B57BC176252C89630083B5CD /* PHAsset+FetchAll.swift in Sources */,
 				B5358C7E250141830005FCAD /* ContactUtil.m in Sources */,
 				B5358C89250141AB0005FCAD /* Utils.m in Sources */,
 				98EC3FB2251E2F870029A9DF /* UIImage+Size.swift in Sources */,
@@ -31041,6 +31049,7 @@
 				892B015122DF168F00BCECBC /* TwoFactorChallengePresenter.swift in Sources */,
 				CE1E26E320174DC600F49E41 /* MappingError.swift in Sources */,
 				7CCAC5311FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
+				B57BC175252C89630083B5CD /* PHAsset+FetchAll.swift in Sources */,
 				CE2976E11FD58E2000350F3A /* LocalAlbumInteractor.swift in Sources */,
 				D498865C1F3EFBE200F50C95 /* ImportPhotosPresenter.swift in Sources */,
 				8C06AC1420066641003D8E05 /* LoginSettingsRouter.swift in Sources */,
@@ -33153,6 +33162,7 @@
 				CE784A6F22A685FB00662219 /* OffersService.swift in Sources */,
 				CE784A7022A685FB00662219 /* LocalMediaStorage.swift in Sources */,
 				CE784A7122A685FB00662219 /* FaceImageChangeCoverPresenter.swift in Sources */,
+				B57BC17A252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */,
 				CE784A7222A685FB00662219 /* BottomSelectionTabBarViewOutput.swift in Sources */,
 				CE784A7322A685FB00662219 /* CustomCheckBox.swift in Sources */,
 				CE784A7422A685FB00662219 /* NavigationController.swift in Sources */,
@@ -34589,6 +34599,7 @@
 				CF8B65EA23CBC9D70021B021 /* PrintInteractor.swift in Sources */,
 				CF8B65EB23CBC9D70021B021 /* PhoneVerificationRouterInput.swift in Sources */,
 				CF8B65EC23CBC9D70021B021 /* PhoneVerificationRouter.swift in Sources */,
+				B57BC178252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */,
 				CF8B65ED23CBC9D70021B021 /* PhoneVerificationConfigurator.swift in Sources */,
 				CF8B65EE23CBC9D70021B021 /* PhoneVerificationInitializer.swift in Sources */,
 				CF8B65EF23CBC9D70021B021 /* PeriodicContactSyncSettingsTableViewCell.swift in Sources */,
@@ -36151,6 +36162,7 @@
 				CF8B6DF023CBCA280021B021 /* FaceImageChangeCoverPresenter.swift in Sources */,
 				CF8B6DF123CBCA280021B021 /* BottomSelectionTabBarViewOutput.swift in Sources */,
 				CF8B6DF223CBCA280021B021 /* CustomCheckBox.swift in Sources */,
+				B57BC17B252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */,
 				CF8B6DF323CBCA280021B021 /* NavigationController.swift in Sources */,
 				CF8B6DF423CBCA280021B021 /* ActivityTimelineServiceResponse.swift in Sources */,
 				CF8B6DF523CBCA280021B021 /* ImportFromInstagramPresenter.swift in Sources */,
