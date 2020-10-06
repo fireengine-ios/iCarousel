@@ -35,20 +35,10 @@ final class WidgetPhotoLibraryObserver {
             return
         }
         
-        var allLocalIdentifiers = [String]()
-        PHAsset.fetchAllAssets().enumerateObjects { (asset, _, _) in
-            allLocalIdentifiers.append(asset.localIdentifier)
-        }
+        let allLocalIdentifiers = PHAsset.getAllAssets().compactMap { $0.localIdentifier }
         coreDataStack.unsynced(from: allLocalIdentifiers) { [weak self] unsynced in
             completion(!unsynced.isEmpty)
         }
-    }
-}
-
-extension PHAsset {
-    static func fetchAllAssets() -> PHFetchResult<PHAsset> {
-        let options = PHFetchOptions()
-        return PHAsset.fetchAssets(with: options)
     }
 }
 

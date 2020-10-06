@@ -109,8 +109,10 @@ final class CacheManager {
                                     self.updatePreparation(isBegun: false)
                                     SyncServiceManager.shared.updateImmediately()
                                     
-                                    MediaItemOperationsService.shared.allUnsyncedLocalIds { localIds in
-                                        SharedGroupCoreDataStack.shared.actualizeWithUnsynced(localIdentifiers: localIds)
+                                    MediaItemOperationsService.shared.allUnsyncedLocalIds { unsyncedLocalIds in
+                                        let allAssetsIds = PHAsset.getAllAssets().compactMap { $0.localIdentifier }
+                                        let syncedLocalIds = Set(allAssetsIds).subtracting(unsyncedLocalIds)
+                                        SharedGroupCoreDataStack.shared.actualizeWith(synced: Array(syncedLocalIds), unsynced: unsyncedLocalIds)
                                     }
                                     
                                     self.delegates.invoke { $0.didCompleteCacheActualization() }
@@ -135,8 +137,10 @@ final class CacheManager {
                                 self.updatePreparation(isBegun: false)
                                 SyncServiceManager.shared.updateImmediately()
                                 
-                                MediaItemOperationsService.shared.allUnsyncedLocalIds { localIds in
-                                    SharedGroupCoreDataStack.shared.actualizeWithUnsynced(localIdentifiers: localIds)
+                                MediaItemOperationsService.shared.allUnsyncedLocalIds { unsyncedLocalIds in
+                                    let allAssetsIds = PHAsset.getAllAssets().compactMap { $0.localIdentifier }
+                                    let syncedLocalIds = Set(allAssetsIds).subtracting(unsyncedLocalIds)
+                                    SharedGroupCoreDataStack.shared.actualizeWith(synced: Array(syncedLocalIds), unsynced: unsyncedLocalIds)
                                 }
                                 
                                 self.delegates.invoke { $0.didCompleteCacheActualization() }
