@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import Photos
 
 
 final class SharedGroupCoreDataStack {
@@ -115,17 +116,18 @@ extension SharedGroupCoreDataStack {
         }
     }
     
-    func actualizeWithUnsynced(localIdentifiers: [String]) {
-        guard !localIdentifiers.isEmpty else {
+    func actualizeWith(synced: [String], unsynced: [String]) {
+        
+        guard !synced.isEmpty || !unsynced.isEmpty else {
             return
         }
         
         performBackgroundTask { [weak self] context in
-            let predicate = NSPredicate(format: "localIdentifier IN %@", localIdentifiers)
+            let predicate = NSPredicate(format: "localIdentifier IN %@", unsynced)
             
             self?.executeRequest(predicate: predicate, context: context) { [weak self] unsyncedItems in
-                let syncedIdentifiers = unsyncedItems.compactMap { $0.localIdentifier }
-                let newUnsynced = Set(localIdentifiers).subtracting(syncedIdentifiers)
+                let unsyncedIdentifiers = unsyncedItems.compactMap { $0.localIdentifier }
+                let newUnsynced = Set(unsynced).subtracting(unsyncedIdentifiers)
                 
                 //update assets
                 unsyncedItems.forEach {
@@ -149,24 +151,24 @@ extension SharedGroupCoreDataStack {
         }
         
         performBackgroundTask { [weak self] context in
-            let predicate = NSPredicate(format: "NOT(localIdentifier IN %@)", localIdentifiers)
+            let predicate = NSPredicate(format: "localIdentifier IN %@", synced)
             
-            self?.executeRequest(predicate: predicate, context: context) { [weak self] unsyncedItems in
-                let syncedIdentifiers = unsyncedItems.compactMap { $0.localIdentifier }
-                let newUnsynced = Set(localIdentifiers).subtracting(syncedIdentifiers)
+            self?.executeRequest(predicate: predicate, context: context) { [weak self] syncedItems in
+                let syncedIdentifiers = syncedItems.compactMap { $0.localIdentifier }
+                let newSynced = Set(synced).subtracting(syncedIdentifiers)
                 
                 //update assets
-                unsyncedItems.forEach {
+                syncedItems.forEach {
                     $0.isValidForSync = false
                 }
                 
-                guard !newUnsynced.isEmpty else {
+                guard !newSynced.isEmpty else {
                     self?.saveData(for: context, completion: nil)
                     return
                 }
                 
                 //create new assets
-                newUnsynced.forEach {
+                newSynced.forEach {
                     let newAsset = LocalAsset(context: context)
                     newAsset.localIdentifier = $0
                     newAsset.isValidForSync = false

@@ -67,6 +67,13 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
             printLog("photoLibraryDidChange - changed \(changedAssets.count) assets")
             
             MediaItemOperationsService.shared.update(localMediaItems: changedAssets) {
+                
+                MediaItemOperationsService.shared.allUnsyncedLocalIds { unsyncedLocalIds in
+                    let allAssetsIds = PHAsset.getAllAssets().compactMap { $0.localIdentifier }
+                    let syncedLocalIds = Set(allAssetsIds).subtracting(unsyncedLocalIds)
+                    SharedGroupCoreDataStack.shared.actualizeWith(synced: Array(syncedLocalIds), unsynced: unsyncedLocalIds)
+                }
+                
                 notify()
             }
         }
