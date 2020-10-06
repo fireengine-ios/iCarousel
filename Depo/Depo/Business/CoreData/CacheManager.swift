@@ -109,10 +109,11 @@ final class CacheManager {
                                     self.updatePreparation(isBegun: false)
                                     SyncServiceManager.shared.updateImmediately()
                                     
-                                    MediaItemOperationsService.shared.allUnsyncedLocalIds { unsyncedLocalIds in
-                                        let allAssetsIds = PHAsset.getAllAssets().compactMap { $0.localIdentifier }
-                                        let syncedLocalIds = Set(allAssetsIds).subtracting(unsyncedLocalIds)
-                                        SharedGroupCoreDataStack.shared.actualizeWith(synced: Array(syncedLocalIds), unsynced: unsyncedLocalIds)
+                                    let mediaService = MediaItemOperationsService.shared
+                                    mediaService.allUnsyncedLocalIds { unsyncedLocalIds in
+                                        mediaService.allLocalIds(subtractingIds: unsyncedLocalIds) { syncedLocalIds in
+                                            SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds)
+                                        }
                                     }
                                     
                                     self.delegates.invoke { $0.didCompleteCacheActualization() }
@@ -137,10 +138,11 @@ final class CacheManager {
                                 self.updatePreparation(isBegun: false)
                                 SyncServiceManager.shared.updateImmediately()
                                 
-                                MediaItemOperationsService.shared.allUnsyncedLocalIds { unsyncedLocalIds in
-                                    let allAssetsIds = PHAsset.getAllAssets().compactMap { $0.localIdentifier }
-                                    let syncedLocalIds = Set(allAssetsIds).subtracting(unsyncedLocalIds)
-                                    SharedGroupCoreDataStack.shared.actualizeWith(synced: Array(syncedLocalIds), unsynced: unsyncedLocalIds)
+                                let mediaService = MediaItemOperationsService.shared
+                                mediaService.allUnsyncedLocalIds { unsyncedLocalIds in
+                                    mediaService.allLocalIds(subtractingIds: unsyncedLocalIds) { syncedLocalIds in
+                                        SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds)
+                                    }
                                 }
                                 
                                 self.delegates.invoke { $0.didCompleteCacheActualization() }

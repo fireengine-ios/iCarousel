@@ -1105,6 +1105,18 @@ final class MediaItemOperationsService {
         })
     }
     
+    func allLocalIds(subtractingIds: [String], completion: @escaping ValueHandler<[String]>) {
+        let filesTypesArray = [FileType.video.valueForCoreDataMapping(), FileType.image.valueForCoreDataMapping()]
+        
+        coreDataStack.performBackgroundTask { [weak self] context in
+            let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.fileTypeValue) IN %@ AND NOT(\(MediaItem.PropertyNameKey.localFileID) IN %@)", filesTypesArray, subtractingIds)
+            
+            self?.executeRequest(predicate: predicate, context: context) { mediaItems in
+                completion(mediaItems.compactMap { $0.localFileID })
+            }
+        }
+    }
+    
     private func getUnsyncedMediaItems(video: Bool, image: Bool, completion: @escaping MediaItemsCallBack) {
         debugLog("getUnsyncedMediaItems")
         let assetList = LocalMediaStorage.default.getAllImagesAndVideoAssets()
