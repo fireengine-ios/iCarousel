@@ -444,12 +444,12 @@ struct WidgetFaceRecognitionSmallView: View {
             return (title: TextConstants.widgetRule71SmallTitle,
                     description: TextConstants.widgetRule71SmallDetail,
                     titleButton: TextConstants.widgetRule71SmallButton,
-                    action: .widgetFIRLess3People)
+                    action: .widgetFIR)
         case .firLess3People:
             return (title: TextConstants.widgetRule72SmallTitle,
                     description: TextConstants.widgetRule72SmallDetail,
                     titleButton: TextConstants.widgetRule72SmallButton,
-                    action: .widgetFIR)
+                    action: .widgetFIRLess3People)
         case .firDisabled:
             return (title: "",
                     description: TextConstants.widgetRule73SmallDetail,
@@ -511,12 +511,12 @@ struct WidgetFaceRecognitionMediumView: View {
             return (title: TextConstants.widgetRule71MediumTitle,
                     description: TextConstants.widgetRule71MediumDetail,
                     titleButton: TextConstants.widgetRule71MediumButton,
-                    action: .widgetFIRLess3People)
+                    action: .widgetFIR)
         case .firLess3People:
             return (title: TextConstants.widgetRule72MediumTitle,
                     description: TextConstants.widgetRule72MediumDetail,
                     titleButton: TextConstants.widgetRule72MediumButton,
-                    action: .widgetFIR)
+                    action: .widgetFIRLess3People)
         case .firDisabled:
             return (title: "",
                     description: TextConstants.widgetRule73MediumDetail,
