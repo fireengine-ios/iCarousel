@@ -215,6 +215,10 @@ final class PushNotificationService {
     //MARK: - Actions
     
     private func openLogin() {
+        if let navigationController = router.topNavigationController, navigationController.viewControllers.contains(where: { $0 is RegistrationViewController }) {
+            return
+        }
+        
         pushTo(router.loginScreen)
     }
     
