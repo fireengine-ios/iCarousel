@@ -8,14 +8,6 @@
 
 import Photos
 
-enum PhotoLibraryChangeType: String {
-    case added = "added"
-    case removed = "removed"
-    case changed = "changed"
-}
-
-typealias PhotoLibraryItemsChanges = [PhotoLibraryChangeType: [PHAsset]]
-
 
 final class WidgetPhotoLibraryObserver {
     
@@ -29,9 +21,9 @@ final class WidgetPhotoLibraryObserver {
     
     
     private init() {
-        //TODO: Somehow wait for CoreData to load
-        coreDataStack.setup { }
+        coreDataStack.setup {}
     }
+
     
     func isPhotoLibriaryAccessable() -> Bool {
         return PHPhotoLibrary.isAccessibleAuthorizationStatus()
@@ -53,7 +45,24 @@ final class WidgetPhotoLibraryObserver {
     }
 }
 
+extension PHAsset {
+    static func fetchAllAssets() -> PHFetchResult<PHAsset> {
+        let options = PHFetchOptions()
+        return PHAsset.fetchAssets(with: options)
+    }
+}
+
+
+
 //If we need to observe changes
+
+//enum PhotoLibraryChangeType: String {
+//    case added = "added"
+//    case removed = "removed"
+//    case changed = "changed"
+//}
+
+//typealias PhotoLibraryItemsChanges = [PhotoLibraryChangeType: [PHAsset]]
 
 //extension WidgetPhotoLibraryObserver: NSObject, PHPhotoLibraryChangeObserver {
 //
@@ -102,18 +111,8 @@ final class WidgetPhotoLibraryObserver {
 //}
 
 
+//extension Notification.Name {
+//    public static let notificationPhotoLibraryDidChange = Notification.Name("notificationPhotoLibraryDidChange")
+//}
 
-//TODO: move extensions into separate files or add some of them into the target, together with the main app
-
-extension Notification.Name {
-    public static let notificationPhotoLibraryDidChange = Notification.Name("notificationPhotoLibraryDidChange")
-}
-
-
-extension PHAsset {
-    static func fetchAllAssets() -> PHFetchResult<PHAsset> {
-        let options = PHFetchOptions()
-        return PHAsset.fetchAssets(with: options)
-    }
-}
 

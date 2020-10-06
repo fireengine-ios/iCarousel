@@ -8,6 +8,7 @@
 
 import Foundation
 import Photos
+import WidgetKit
 
 
 enum PhotoLibraryChangeType: String {
@@ -48,6 +49,9 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         var phChanges = PhotoLibraryItemsChanges()
         
         func notify() {
+            if #available(iOS 14.0, *) {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
             NotificationCenter.default.post(name: .notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
         }
         
