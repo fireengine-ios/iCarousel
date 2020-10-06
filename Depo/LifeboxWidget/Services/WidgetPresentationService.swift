@@ -9,6 +9,7 @@
 import UIKit
 import CoreGraphics
 import MMWormhole
+import WidgetKit
 
 class UserInfo {
     var isFIREnabled = false
@@ -64,6 +65,22 @@ final class WidgetPresentationService {
     }
 
     //MARK: -
+    
+    init() {
+        setupWormhole()
+    }
+    
+    private func setupWormhole() {
+        widgetService.wormhole.listenForMessage(withIdentifier: SharedConstants.wormholeDidLogout) { [weak self] _ in
+            self?.didLogout()
+        }
+    }
+    
+    private func didLogout() {
+        lastQuotaUsagePercentage = nil
+        lastQuotaUsageRequestDate = nil
+        WidgetCenter.shared.reloadAllTimelines()
+    }
     
     func notifyChangeWidgetState(_ newState: WidgetState) {
         widgetService.notifyAboutChangeWidgetState(newState.gaName)
