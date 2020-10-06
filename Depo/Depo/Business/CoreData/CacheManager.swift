@@ -112,7 +112,7 @@ final class CacheManager {
                                     let mediaService = MediaItemOperationsService.shared
                                     mediaService.allUnsyncedLocalIds { unsyncedLocalIds in
                                         mediaService.allLocalIds(subtractingIds: unsyncedLocalIds) { syncedLocalIds in
-                                            SharedGroupCoreDataStack.shared.actualizeWith(synced: Array(syncedLocalIds), unsynced: unsyncedLocalIds)
+                                            SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds)
                                         }
                                     }
                                     
@@ -141,7 +141,7 @@ final class CacheManager {
                                 let mediaService = MediaItemOperationsService.shared
                                 mediaService.allUnsyncedLocalIds { unsyncedLocalIds in
                                     mediaService.allLocalIds(subtractingIds: unsyncedLocalIds) { syncedLocalIds in
-                                        SharedGroupCoreDataStack.shared.actualizeWith(synced: Array(syncedLocalIds), unsynced: unsyncedLocalIds)
+                                        SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds)
                                     }
                                 }
                                 
