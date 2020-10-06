@@ -77,9 +77,16 @@ final class PushNotificationService {
             return
         }
         
+        trackIfNeeded(action: action)
+        
         let isLoggedIn = tokenStorage.accessToken != nil
         if !isLoggedIn && !action.isContained(in: [.supportFormLogin, .supportFormSignup]) {
             action = .login
+        }
+        
+        if isLoggedIn && action.isContained(in: [.login, .widgetLogout]) {
+            clear()
+            return
         }
                 
         switch action {
