@@ -143,7 +143,7 @@ final class NetmeraService {
         }
         #endif
         
-//        Netmera.start()
+        Netmera.start()
         
         #if DEBUG
         Netmera.setLogLevel(.debug)
@@ -162,7 +162,7 @@ final class NetmeraService {
         #if LIFEBOX
         switch RouteRequests.currentServerEnvironment {
         case .production:
-            return "3PJRHrXDiqa-pwWScAq1P0EZlUhu5fwe1catUdvjEuqWPsPWXcYdlQ"
+            return "3PJRHrXDiqa-pwWScAq1P-7ZjPWA5mWdKHyMpdBrYMFMU4XzrPkaoQ"
         case .preProduction, .test:
             return "3PJRHrXDiqakWjtB7quX9jhybzZjSWI4tfk7QNeg9wF6ZWP9p5QxPQ"
         }
