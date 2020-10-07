@@ -1787,3 +1787,5 @@
 "widget_rule_3_2_medium_detail" = "Rezervimi është plotësuar.";
 "widget_display_name" = "Ruajtja Personale";
 "widget_description" = "Ti mund t'i mbash kujtimet e tua dhe telefonin tënd në mënyrë  të sigurt duke marrë njoftime në lidhje me kujtesën tënd të pajisjes dhe hapësirën tënd të ruajtjes  lifebox.";
+"widget_rule_6_small_detail_plural" = "Nuk e ke rezervuar librin tënd  teleonik paktën %d muaj.";
+"widget_rule_6_medium_detail_plural" = "Nuk e ke rezervuar librin tënd teleonik për herë të fundit %d muaj më parë. Eja  në lifebox tani, Siguroje librin tënd teleonik .";

@@ -2065,9 +2065,11 @@ struct TextConstants {
     
     //HomeWidget Rule 6
     static let widgetRule6SmallDetail = NSLocalizedString("widget_rule_6_small_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule6SmallDetailPlural = NSLocalizedString("widget_rule_6_small_detail_plural", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetRule6SmallButton = NSLocalizedString("widget_rule_6_small_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let widgetRule6MediumDetail = NSLocalizedString("widget_rule_6_medium_detail", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let widgetRule6MediumDetailPlural = NSLocalizedString("widget_rule_6_medium_detail_plural", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetRule6MediumButton = NSLocalizedString("widget_rule_6_medium_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     //HomeWidget Rule 7.1

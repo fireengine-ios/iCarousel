@@ -332,9 +332,10 @@ struct WidgetContactBackedupSmallView: View {
     
     var body: some View {
         if entry.state == .contactsOldBackup {
+            let format = entry.monthSinceLastBackup == 1 ? TextConstants.widgetRule6SmallDetail : TextConstants.widgetRule6SmallDetailPlural
             WidgetEntrySmallView(imageName: "back_up_small",
                                  title: "",
-                                 description: TextConstants.widgetRule6SmallDetail,
+                                 description: String(format: format, entry.monthSinceLastBackup),
                                  titleButton: TextConstants.widgetRule6SmallButton,
                                  action: .widgetOldBackup)
         } else {
@@ -378,8 +379,9 @@ struct WidgetContactBackedupMediumView: View {
     
     func entryData() -> (title: String, description: String, titleButton: String, action: PushNotificationAction) {
         if entry.state == .contactsOldBackup {
+            let format = entry.monthSinceLastBackup == 1 ? TextConstants.widgetRule6MediumDetail : TextConstants.widgetRule6SmallDetailPlural
             return (title: "",
-                    description: TextConstants.widgetRule6MediumDetail,
+                    description: String(format: format, entry.monthSinceLastBackup),
                     titleButton: TextConstants.widgetRule6MediumButton,
                     action: .widgetOldBackup)
         } else {

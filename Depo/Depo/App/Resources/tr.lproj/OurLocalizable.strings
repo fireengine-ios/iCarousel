@@ -1726,8 +1726,8 @@
 "widget_rule_7_1_small_title" = "Fotoğraflarındaki yüzlere göre özel albümler oluşturduk.";
 "widget_rule_7_1_small_detail" = "İncele ve paylaş!";
 "widget_rule_7_1_small_button" = "Görüntüle";
-"widget_rule_7_1_medium_title" = "Anılarını kişilere göre gruplandırıp özel albümler oluşturduk.";
-"widget_rule_7_1_medium_detail" = "Şimdi keşfet ve paylaş!";
+"widget_rule_7_1_medium_title" = "Anılarını kişilere göre gruplandırıp";
+"widget_rule_7_1_medium_detail" = " özel albümler oluşturduk.";
 "widget_rule_7_1_medium_button" = "Albümleri Keşfet";
 "widget_rule_7_2_small_title" = "Daha çok fotoğraf ";
 "widget_rule_7_2_small_detail" = " daha doğru yüz gruplama sağlar.";
@@ -1735,13 +1735,13 @@
 "widget_rule_7_2_medium_title" = "Daha çok fotoğraf daha doğru yüz gruplama sağlar.";
 "widget_rule_7_2_medium_detail" = "Fotoğraf yükle";
 "widget_rule_7_2_medium_button" = "Yükle";
-"widget_rule_7_3_small_detail" = "Anılarını kişilere göre kolayca gruplayabilirsin.";
+"widget_rule_7_3_small_detail" = "Anılarını kişilere göre grupla.";
 "widget_rule_7_3_small_button" = "Gruplamayı Aç";
-"widget_rule_7_3_medium_detail" = "Anılarını kişi ve nesnelere göre kolayca kategorize etmeye ne dersin?";
+"widget_rule_7_3_medium_detail" = "Anılarını kişilere göre kategorize etmeye ne dersin?";
 "widget_rule_7_3_medium_button" = "Yüz&Nesne Gruplamayı Aç";
 "widget_rule_7_4_small_detail" = "Anılarını kişilere göre kolayca gruplayabilirsin.";
 "widget_rule_7_4_small_button" = "Keşfet";
-"widget_rule_7_4_medium_detail" = "Anılarını kişi ve nesnelere göre kolayca kategorize etmeye ne dersin?";
+"widget_rule_7_4_medium_detail" = "Anılarını kişilere göre kategorize etmeye ne dersin?";
 "widget_rule_7_4_medium_button" = "Keşfet";
 "billo_contactus_top_text" = "\"Bizi tercih ettiğin için teşekkürler. Talebini Digicel destek ekibi ile paylaşacağız. Digicel, Billo uygulaması için anlaşmalı çalıştığımız operatördür. Talebinle ilgili detaylı analiz yapıp hızlı çözüm sağlanabilmesi için varsa talebinde belirttiğin kişisel verilerin yanı sıra, cihaz bilgilerin, Billo kullanım bilgilerin ve iletişim bilgilerin de Digicel ile paylaşılacak.\"";
 "widget_rule_3_1_small_button" = "Görüntüle";
@@ -1754,3 +1754,5 @@
 "widget_rule_3_2_medium_detail" = "Yedekleme tamamlandı.";
 "widget_display_name" = "Kişisel Depolama";
 "widget_description" = "Cihaz hafızan ve lifebox saklama alanınla ilgili bildirimleri alarak anılarını ve telefonuna güvende tutabilirsin.";
+"widget_rule_6_small_detail_plural" = "Rehberini en az %d aydır yedeklemedin.";
+"widget_rule_6_medium_detail_plural" = "Rehberini en son %d ay önce yedekledin. Hemen lifebox'a gel, rehberini güvenceye al.";

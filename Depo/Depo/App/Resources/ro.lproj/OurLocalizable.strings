@@ -1744,3 +1744,5 @@
 "widget_rule_3_2_medium_detail" = "Backup-ul a fost finalizat.";
 "widget_display_name" = "Stocare Personală";
 "widget_description" = "Îți poţi păstra amintirile și telefonul în siguranță primind notificări despre memoria dispozitivului și spațiul de stocare al lifebox-ului.";
+"widget_rule_6_small_detail_plural" = "Nu ai făcut backup agendei tale de contacte de cel puțin %d luni.";
+"widget_rule_6_medium_detail_plural" = "Ai făcut ultima dată backup agendei tale de contacte acum %d luni. Vin-o imediat în lifebox, asigură-ţi agenta de contacte.";
