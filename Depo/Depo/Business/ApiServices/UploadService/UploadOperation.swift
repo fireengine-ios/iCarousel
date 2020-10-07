@@ -30,6 +30,7 @@ final class UploadOperation: Operation {
     private let mediaItemsService = MediaItemOperationsService.shared
     private let mediaAlbumsService = MediaItemsAlbumOperationService.shared
     private let remoteAlbumsService = PhotosAlbumService()
+    private lazy var analyticsService: AnalyticsService = factory.resolve()
     
     let inputItem: WrapData
     private(set) var outputItem: WrapData?
@@ -49,6 +50,8 @@ final class UploadOperation: Operation {
     private let resumableInfoService: ResumableUploadInfoService = factory.resolve()
     private let interruptedId: String?
     private let isResumable: Bool
+    private var wasInterrupted: Bool = false
+    
     private lazy var storageVars: StorageVars = factory.resolve()
     
     //MARK: - Init
@@ -214,6 +217,11 @@ final class UploadOperation: Operation {
                                 case .uploaded(bytes: let bytesToSkip):
                                     debugLog("resumable_upload: bytes to skip \(bytesToSkip)")
                                     
+                                    if bytesToSkip > 0 {
+                                        self.wasInterrupted = true
+                                        self.trackResumableUploadWasInterrrupted()
+                                    }
+                                    
                                     guard let nextChunk = self.chunker?.nextChunk(skipping: bytesToSkip) else {
                                         fail(ErrorResponse.string(TextConstants.commonServiceError))
                                         return
@@ -302,6 +310,11 @@ final class UploadOperation: Operation {
                 
                 switch status {
                 case .completed:
+                    
+                    if self.wasInterrupted {
+                        self.trackInterractedResumableUploadCompletedSyccessfully()
+                    }
+                    
                     self.showToast(message: "Resumable upload completed")
                     self.finishUploading(parameters: parameters, success: success, fail: fail)
                     
@@ -600,5 +613,19 @@ extension UploadOperation: OperationProgressServiceDelegate {
 //
 //            hud.hide(animated: true, afterDelay: 2.0)
 //        }
+    }
+}
+
+extension UploadOperation {
+    private func trackResumableUploadWasInterrrupted() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                            eventActions: .uploadProcess,
+                                            eventLabel: .restart)
+    }
+    
+    private func trackInterractedResumableUploadCompletedSyccessfully() {
+        analyticsService.trackCustomGAEvent(eventCategory: .functions,
+                                            eventActions: .uploadProcess,
+                                            eventLabel: .success)
     }
 }

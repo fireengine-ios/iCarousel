@@ -694,6 +694,7 @@ enum GAEventAction {
     case importFrom
     case print
     case uploadFile
+    case uploadProcess
     case story
     case freeUpSpace
     case faceRecognition
@@ -805,6 +806,8 @@ enum GAEventAction {
             return "Print"
         case .uploadFile:
             return "Upload File"
+        case .uploadProcess:
+            return "Upload Process"
         case .story:
             return "Story"
         case .freeUpSpace:
@@ -1356,6 +1359,7 @@ enum GAEventLabel {
     case facebook
     case photoEdit(PhotoEditEvent)
     case widgetOrder(String)
+    case restart
     
     var text: String {
         switch self {
@@ -1575,6 +1579,8 @@ enum GAEventLabel {
             return event.text
         case .widgetOrder(let orderName):
             return orderName
+        case .restart:
+            return "Restart"
         }
     }
     
