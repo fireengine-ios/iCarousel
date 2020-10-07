@@ -192,12 +192,10 @@ final class SupportFormController: ViewController, KeyboardHandler {
         
         if problems.isEmpty {
             let fullPhoneNumber = "\(phoneCode)\(phoneNumber)"
-            
+            let versionString = SettingsBundleHelper.appVersion()
             #if LIFEDRIVE
-                let versionString = SettingsBundleHelper.appVersion()
                 var emailBody = TextConstants.supportFormBilloTopText + "\n\n"
             #else
-                let versionString = SettingsBundleHelper.appBuild()
                 var emailBody = ""
             #endif
             
