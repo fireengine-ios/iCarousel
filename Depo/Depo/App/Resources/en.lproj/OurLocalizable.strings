@@ -1757,9 +1757,9 @@
 "widget_rule_5_medium_title" = "You have not backed up your contacts";
 "widget_rule_5_medium_detail" = "Secure your contacts with lifebox.";
 "widget_rule_5_medium_button" = "Back Up Contacts";
-"widget_rule_6_small_detail" = "It's over 1 month since your last contact backup.";
+"widget_rule_6_small_detail" = "It's over %d month(s) since last contact backup.";
 "widget_rule_6_small_button" = "Back Up";
-"widget_rule_6_medium_detail" = "It's over 1 month since your last contact backup.";
+"widget_rule_6_medium_detail" = "It's over %d month(s) since last contact backup.";
 "widget_rule_6_medium_button" = "Back Up Contacts";
 "widget_rule_7_1_small_title" = "Group your photos and find them easily!";
 "widget_rule_7_1_small_detail" = " View and share!";
