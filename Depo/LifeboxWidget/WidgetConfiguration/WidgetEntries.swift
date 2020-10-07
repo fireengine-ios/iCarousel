@@ -139,7 +139,19 @@ final class WidgetDeviceQuotaEntry: WidgetBaseEntry {
 }
 
 final class WidgetContactBackupEntry: WidgetBaseEntry {
+    private var backupDate: Date?
+    
+    var monthSinceLastBackup: Int {
+        guard let backupDate = backupDate else {
+            return 0
+        }
+        
+        let components = Calendar.current.dateComponents([.month], from: backupDate, to: Date())
+        return components.month ?? 0
+    }
+    
     init(backupDate: Date? = nil, date: Date) {
+        self.backupDate = backupDate
         super.init(date: date, state: backupDate == nil ? .contactsNoBackup : .contactsOldBackup)
     }
 

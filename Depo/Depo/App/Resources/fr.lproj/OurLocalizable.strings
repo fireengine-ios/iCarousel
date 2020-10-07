@@ -2050,3 +2050,5 @@ Please check I have understood the intended command here*/
 "widget_rule_3_2_medium_detail" = "La sauvegarde est terminée.";
 "widget_display_name" = "Stockage Personnel";
 "widget_description" = "Vous pouvez protéger vos souvenirs et votre téléphone en recevant des notifications concernant la mémoire de votre appareil et l'espace de stockage de la lifebox.";
+"widget_rule_6_small_detail_plural" = "Vous avez sauvegardé vos contacts pour la dernière fois il y a %d mois. Accédez à lifebox dès maintenant, sécurisez votre contacts.";
+"widget_rule_6_medium_detail_plural" = "Vous n'avez pas sauvegardé vos contacts depuis au moins %d mois.";
