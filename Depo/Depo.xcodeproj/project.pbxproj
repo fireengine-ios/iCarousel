@@ -11624,6 +11624,16 @@
 		CFACACAE247CF8AC00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
 		CFACACAF247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
 		CFACACB0247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
+		CFB308B2252DFB0D000D3255 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB308AC252DFB0B000D3255 /* Info-AppStore.plist */; };
+		CFB308B3252DFB0D000D3255 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB308AC252DFB0B000D3255 /* Info-AppStore.plist */; };
+		CFB308B4252DFB0D000D3255 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB308B0252DFB0C000D3255 /* Info.plist */; };
+		CFB308B5252DFB0D000D3255 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB308B0252DFB0C000D3255 /* Info.plist */; };
+		CFB308B6252DFB0D000D3255 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB308B1252DFB0D000D3255 /* Info-Enterprise.plist */; };
+		CFB308B7252DFB0D000D3255 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB308B1252DFB0D000D3255 /* Info-Enterprise.plist */; };
+		CFB308BE252DFB2C000D3255 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB308B8252DFB2A000D3255 /* Info.plist */; };
+		CFB308BF252DFB2C000D3255 /* Info-Enterprise.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB308B9252DFB2A000D3255 /* Info-Enterprise.plist */; };
+		CFB308C0252DFB2C000D3255 /* Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB308BB252DFB2B000D3255 /* Info-AppStore.plist */; };
+		CFB308C1252DFB2C000D3255 /* Info-AppStore-LifeTech.plist in Resources */ = {isa = PBXBuildFile; fileRef = CFB308BC252DFB2B000D3255 /* Info-AppStore-LifeTech.plist */; };
 		CFE4E5FD252D9EE200F165AD /* RestoreHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0724FE6DAA00515757 /* RestoreHelper.m */; };
 		CFE4E5FE252D9EE200F165AD /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BFA24FE6DAA00515757 /* GZIP.m */; };
 		CFE4E5FF252D9EE200F165AD /* PHAsset+FetchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */; };
@@ -14524,13 +14534,22 @@
 		CF8B6B2E23CBC9D70021B021 /* TC_Depo_LifeTech_Bundle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TC_Depo_LifeTech_Bundle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF8B72F823CBCA280021B021 /* Billo_Bundle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Billo_Bundle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraExtensionService.swift; sourceTree = "<group>"; };
+		CFB308AC252DFB0B000D3255 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
+		CFB308AD252DFB0B000D3255 /* autosync-widget.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "autosync-widget.entitlements"; sourceTree = "<group>"; };
+		CFB308AE252DFB0C000D3255 /* autosync-widget-enterprise.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "autosync-widget-enterprise.entitlements"; sourceTree = "<group>"; };
+		CFB308AF252DFB0C000D3255 /* autosync-widget-appstore.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "autosync-widget-appstore.entitlements"; sourceTree = "<group>"; };
+		CFB308B0252DFB0C000D3255 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFB308B1252DFB0D000D3255 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
+		CFB308B8252DFB2A000D3255 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFB308B9252DFB2A000D3255 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
+		CFB308BA252DFB2B000D3255 /* autosync-widget-enterprise.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "autosync-widget-enterprise.entitlements"; sourceTree = "<group>"; };
+		CFB308BB252DFB2B000D3255 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
+		CFB308BC252DFB2B000D3255 /* Info-AppStore-LifeTech.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore-LifeTech.plist"; sourceTree = "<group>"; };
+		CFB308BD252DFB2C000D3255 /* autosync-widget-appstore.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "autosync-widget-appstore.entitlements"; sourceTree = "<group>"; };
 		CFC97990A9F9F470648ADD6B /* Pods-LifeboxUnitTests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.enterprise.xcconfig"; sourceTree = "<group>"; };
 		CFE4E662252D9EE200F165AD /* LifeTech_BilloWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeTech_BilloWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		CFE4E663252D9EE200F165AD /* LifeboxWidgetExtension copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LifeboxWidgetExtension copy-Info.plist"; path = "/Users/pestriakovaleksandr/repo/stash/lifebox-ios-new/Depo/LifeboxWidgetExtension copy-Info.plist"; sourceTree = "<absolute>"; };
 		CFE4E71C252D9F2300F165AD /* LifeboxWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeboxWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		CFE4E71D252D9F2300F165AD /* LifeTech-LifeboxWidgetExtension copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LifeTech-LifeboxWidgetExtension copy-Info.plist"; path = "/Users/pestriakovaleksandr/repo/stash/lifebox-ios-new/Depo/LifeTech-LifeboxWidgetExtension copy-Info.plist"; sourceTree = "<absolute>"; };
 		CFE4E7B0252D9F3B00F165AD /* BilloWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BilloWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		CFE4E7B1252D9F3B00F165AD /* LifeTech_BilloWidgetExtension copy copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "LifeTech_BilloWidgetExtension copy copy-Info.plist"; path = "/Users/pestriakovaleksandr/repo/stash/lifebox-ios-new/Depo/LifeTech_BilloWidgetExtension copy copy-Info.plist"; sourceTree = "<absolute>"; };
 		D07372B64C00468A227C63A7 /* TermsAndServicesConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesConfigurator.swift; sourceTree = "<group>"; };
 		D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extensions.swift"; sourceTree = "<group>"; };
 		D47258744D443C841AC3A4A0 /* RegistrationInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationInteractor.swift; sourceTree = "<group>"; };
@@ -15128,9 +15147,6 @@
 				051E1DF519CAC2F900FD1E03 /* Frameworks */,
 				051E1DF419CAC2F900FD1E03 /* Products */,
 				FA9ABBCB19DCF3FFE7B413C8 /* Pods */,
-				CFE4E663252D9EE200F165AD /* LifeboxWidgetExtension copy-Info.plist */,
-				CFE4E71D252D9F2300F165AD /* LifeTech-LifeboxWidgetExtension copy-Info.plist */,
-				CFE4E7B1252D9F3B00F165AD /* LifeTech_BilloWidgetExtension copy copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -20459,6 +20475,8 @@
 		B58936C624FA773E00E3FA9C /* LifeboxWidget */ = {
 			isa = PBXGroup;
 			children = (
+				CFB3087F252DF31C000D3255 /* Billo */,
+				CFB3087E252DF2E9000D3255 /* LifeboxTC */,
 				CF57972A251A0A890085DDC1 /* LifeboxWidgetExtensionRelease.entitlements */,
 				B59B650A25065808003F6BD6 /* LifeboxWidgetExtensionDebug.entitlements */,
 				B58BF2C224FAF1B100CBE2A7 /* LifeboxWidgetExtension.entitlements */,
@@ -22554,6 +22572,32 @@
 				CF83CF2E243F1630009DF60F /* BackgroundSyncOperation.swift */,
 			);
 			path = Operations;
+			sourceTree = "<group>";
+		};
+		CFB3087E252DF2E9000D3255 /* LifeboxTC */ = {
+			isa = PBXGroup;
+			children = (
+				CFB308BD252DFB2C000D3255 /* autosync-widget-appstore.entitlements */,
+				CFB308BA252DFB2B000D3255 /* autosync-widget-enterprise.entitlements */,
+				CFB308BC252DFB2B000D3255 /* Info-AppStore-LifeTech.plist */,
+				CFB308BB252DFB2B000D3255 /* Info-AppStore.plist */,
+				CFB308B9252DFB2A000D3255 /* Info-Enterprise.plist */,
+				CFB308B8252DFB2A000D3255 /* Info.plist */,
+			);
+			path = LifeboxTC;
+			sourceTree = "<group>";
+		};
+		CFB3087F252DF31C000D3255 /* Billo */ = {
+			isa = PBXGroup;
+			children = (
+				CFB308AF252DFB0C000D3255 /* autosync-widget-appstore.entitlements */,
+				CFB308AE252DFB0C000D3255 /* autosync-widget-enterprise.entitlements */,
+				CFB308AD252DFB0B000D3255 /* autosync-widget.entitlements */,
+				CFB308AC252DFB0B000D3255 /* Info-AppStore.plist */,
+				CFB308B1252DFB0D000D3255 /* Info-Enterprise.plist */,
+				CFB308B0252DFB0C000D3255 /* Info.plist */,
+			);
+			path = Billo;
 			sourceTree = "<group>";
 		};
 		D00A82528405045A46751159 /* Configurator */ = {
@@ -26103,7 +26147,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFB308B4252DFB0D000D3255 /* Info.plist in Resources */,
 				CFE4E65B252D9EE200F165AD /* OurLocalizable.strings in Resources */,
+				CFB308B2252DFB0D000D3255 /* Info-AppStore.plist in Resources */,
+				CFB308B6252DFB0D000D3255 /* Info-Enterprise.plist in Resources */,
 				CFE4E65C252D9EE200F165AD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -26113,7 +26160,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFE4E715252D9F2300F165AD /* OurLocalizable.strings in Resources */,
+				CFB308BF252DFB2C000D3255 /* Info-Enterprise.plist in Resources */,
+				CFB308C1252DFB2C000D3255 /* Info-AppStore-LifeTech.plist in Resources */,
+				CFB308C0252DFB2C000D3255 /* Info-AppStore.plist in Resources */,
 				CFE4E716252D9F2300F165AD /* Assets.xcassets in Resources */,
+				CFB308BE252DFB2C000D3255 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -26121,7 +26172,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFB308B5252DFB0D000D3255 /* Info.plist in Resources */,
 				CFE4E7A9252D9F3B00F165AD /* OurLocalizable.strings in Resources */,
+				CFB308B3252DFB0D000D3255 /* Info-AppStore.plist in Resources */,
+				CFB308B7252DFB0D000D3255 /* Info-Enterprise.plist in Resources */,
 				CFE4E7AA252D9F3B00F165AD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -42700,11 +42754,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = d2.1.8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "LifeTech-LifeboxWidgetExtension copy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -42712,8 +42766,9 @@
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

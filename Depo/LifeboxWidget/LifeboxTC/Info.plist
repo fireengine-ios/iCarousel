@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>LifeboxWidget</string>
+	<string>lifebox</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,15 +15,33 @@
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
-	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
+	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<string>1</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<false/>
+	</dict>
 	<key>NSExtension</key>
 	<dict>
+		<key>NSExtensionMainStoryboard</key>
+		<string>MainInterface</string>
 		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.widgetkit-extension</string>
+		<string>com.apple.widget-extension</string>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>TurkcellSaturaReg.ttf</string>
+		<string>TurkcellSaturaMedIta.ttf</string>
+		<string>TurkcellSaturaMed.ttf</string>
+		<string>TurkcellSaturaIta.ttf</string>
+		<string>TurkcellSaturaDemIta.ttf</string>
+		<string>TurkcellSaturaDem.ttf</string>
+		<string>TurkcellSaturaBol.ttf</string>
+		<string>TurkcellSaturaBolIta.ttf</string>
+	</array>
 </dict>
 </plist>
