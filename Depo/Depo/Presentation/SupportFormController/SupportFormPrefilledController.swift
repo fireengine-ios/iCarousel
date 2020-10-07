@@ -222,9 +222,8 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
         if problems.isEmpty {
             
             getUserInfo { quota, quotaUsed, packages, feedbackEmail in
-                
+                let versionString = SettingsBundleHelper.appVersion()
                 #if LIFEDRIVE
-                    let versionString = SettingsBundleHelper.appVersion()
                     let emailBody = TextConstants.supportFormBilloTopText + "\n\n" + problem + "\n\n" +
                         String(format: TextConstants.supportFormEmailBody,
                                name,
@@ -238,7 +237,6 @@ final class SupportFormPrefilledController: ViewController, KeyboardHandler {
                                Device.locale,
                                ReachabilityService.shared.isReachableViaWiFi ? "WIFI" : "WWAN")
                 #else
-                    let versionString = SettingsBundleHelper.appBuild()
                     let emailBody = problem + "\n\n" +
                         String(format: TextConstants.feedbackMailTextFormat,
                                versionString,
