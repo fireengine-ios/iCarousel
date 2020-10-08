@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B58936C024FA773E00E3FA9C"
-               BuildableName = "LifeboxWidgetExtension.appex"
-               BlueprintName = "LifeboxWidgetExtension"
+               BuildableName = "LifeTech-LifeboxWidgetExtension.appex"
+               BlueprintName = "LifeTech-LifeboxWidgetExtension"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -63,8 +63,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B58936C024FA773E00E3FA9C"
-            BuildableName = "LifeboxWidgetExtension.appex"
-            BlueprintName = "LifeboxWidgetExtension"
+            BuildableName = "LifeTech-LifeboxWidgetExtension.appex"
+            BlueprintName = "LifeTech-LifeboxWidgetExtension"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
@@ -97,8 +97,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B58936C024FA773E00E3FA9C"
-            BuildableName = "LifeboxWidgetExtension.appex"
-            BlueprintName = "LifeboxWidgetExtension"
+            BuildableName = "LifeTech-LifeboxWidgetExtension.appex"
+            BlueprintName = "LifeTech-LifeboxWidgetExtension"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

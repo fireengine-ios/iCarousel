@@ -109,9 +109,9 @@ target 'LifeTech-LifeboxFileProviderUI' do
   file_provider_ui_pods
 end
 
-#target 'LifeTech-autosync-widget' do
-#  autosync_widget_pods
-#end
+target 'LifeTech-LifeboxWidgetExtension' do
+  widget_pods
+end
 
 target "LifeTech-NotificationService" do
   notification_pods
@@ -177,6 +177,10 @@ end
 #  autosync_widget_pods
 #end
 
+target 'BilloWidgetExtension' do
+  widget_pods
+end
+
 target 'BilloNotificationService' do
   notification_pods
 end
@@ -200,6 +204,10 @@ end
 #target 'LifeTech_Billo-widget' do
 #  autosync_widget_pods
 #end
+
+target 'LifeTech_BilloWidgetExtension' do
+  widget_pods
+end
 
 target 'LifeTech_BilloNotificationService' do
   notification_pods

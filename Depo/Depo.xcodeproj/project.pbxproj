@@ -1985,6 +1985,7 @@
 		2BA37C3E202837C800660394 /* FaceImageChangeCoverConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C3C202837C800660394 /* FaceImageChangeCoverConfigurator.swift */; };
 		2BA37C40202883BF00660394 /* FaceImagePhotosRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA37C3F202883BF00660394 /* FaceImagePhotosRouterInput.swift */; };
 		2D620A893121CE2330C18858 /* FeedbackViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9561EA6AFBC184BF853C98 /* FeedbackViewRouter.swift */; };
+		2E5767A686D5564E443EDA14 /* Pods_LifeTech_BilloWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2BF26206968C3A6CF739F8 /* Pods_LifeTech_BilloWidgetExtension.framework */; };
 		2EA03B3FBEC8D2ED563D175D /* ActionsMenuViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC29E5867A0B1232EF8B56B8 /* ActionsMenuViewInput.swift */; };
 		2EB5EE9DB087C1F0CEAF1343 /* BaseFilesGreedInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BCBDB527895B614215B1EC /* BaseFilesGreedInteractor.swift */; };
 		2EF733E89FE2194E3B6817BA /* FeedbackViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B86902F4B6DCEC18002C23 /* FeedbackViewConfigurator.swift */; };
@@ -2497,6 +2498,7 @@
 		73FE51FF22CF5EC300270448 /* CreateStoryAudioItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51FB22CF5EC200270448 /* CreateStoryAudioItemCell.xib */; };
 		73FE520022CF5EC300270448 /* CreateStoryAudioItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51FB22CF5EC200270448 /* CreateStoryAudioItemCell.xib */; };
 		73FE520122CF5EC300270448 /* CreateStoryAudioItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FE51FB22CF5EC200270448 /* CreateStoryAudioItemCell.xib */; };
+		758E5F49D57AD9F24BF934D9 /* Pods_LifeboxWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D6728C0F66A82733B0BD151 /* Pods_LifeboxWidgetExtension.framework */; };
 		759BB6DB00ECA61DBDBBB0B9 /* OTPViewInteractorIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7C949A95C197C80ACC503C /* OTPViewInteractorIO.swift */; };
 		766F7C491E77AB6EAA0B0AF1 /* Pods_LifeboxFileProviderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE5B5E1D20C146FE00D91112 /* Pods_LifeboxFileProviderUI.framework */; };
 		7764E006C922DEA29D9C0744 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5BEC48C5ED3B8650FB2FB3 /* SettingsViewController.swift */; };
@@ -4449,6 +4451,7 @@
 		8E802E1A246C42A200D24561 /* PeopleSliderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E802E14246C42A200D24561 /* PeopleSliderDataSource.swift */; };
 		8E98CA3A230562200050D7DD /* MusicPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98CA39230562200050D7DD /* MusicPresenter.swift */; };
 		8E98CA3C2305627E0050D7DD /* MusicViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98CA3B2305627E0050D7DD /* MusicViewInput.swift */; };
+		8E9A82E1A7D8F3925CBA6705 /* Pods_LifeTech_LifeboxWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B82E5ADBBC25E213DF0A2E0D /* Pods_LifeTech_LifeboxWidgetExtension.framework */; };
 		8E9D184C24602CB500480CC2 /* FileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9D184A24602CB500480CC2 /* FileInfoView.swift */; };
 		8E9D184D24602CB500480CC2 /* FileInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E9D184B24602CB500480CC2 /* FileInfoView.xib */; };
 		9065EE336B9F1D044DBD3944 /* AlbumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B652E3FD76DE060B9DBD160F /* AlbumDetailViewController.swift */; };
@@ -5595,6 +5598,7 @@
 		A2EF976821ECC3DE00EC7DE7 /* ConnectWithInstaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF976621ECC3DE00EC7DE7 /* ConnectWithInstaView.swift */; };
 		A2EF976B21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976A21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib */; };
 		A2EF976C21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2EF976A21ECC5EE00EC7DE7 /* ConnectWithInstaView.xib */; };
+		A6ECAD3B64C8508C86828BA5 /* Pods_BilloWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61549FC288E87FAA3493F2FB /* Pods_BilloWidgetExtension.framework */; };
 		A705E3C423A21698005E8274 /* CarouselPagerReusableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705E3C223A21698005E8274 /* CarouselPagerReusableViewController.swift */; };
 		A705E3C523A21698005E8274 /* CarouselPagerReusableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A705E3C323A21698005E8274 /* CarouselPagerReusableViewController.xib */; };
 		A705E3C623A217C1005E8274 /* CarouselPagerReusableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A705E3C223A21698005E8274 /* CarouselPagerReusableViewController.swift */; };
@@ -5669,7 +5673,8 @@
 		B51D959C24D00E4300FA2EA0 /* AdjustmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D959724D00E4300FA2EA0 /* AdjustmentManager.swift */; };
 		B51D959D24D00E4300FA2EA0 /* AdjustmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D959724D00E4300FA2EA0 /* AdjustmentManager.swift */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
-		B526A42B252F0EA800E1EC8C /* DebugLogsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */; };
+		B526A3EB252EE43C00E1EC8C /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
+		B526A53F252F138F00E1EC8C /* DebugLogsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */; };
 		B527CF8B2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527CF892420C66C00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift */; };
 		B527CF8C2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527CF892420C66C00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift */; };
 		B527CF8D2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527CF892420C66C00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift */; };
@@ -5958,7 +5963,7 @@
 		B58936C324FA773E00E3FA9C /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58936C224FA773E00E3FA9C /* WidgetKit.framework */; };
 		B58936C524FA773E00E3FA9C /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58936C424FA773E00E3FA9C /* SwiftUI.framework */; };
 		B58936CA24FA773F00E3FA9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B58936C924FA773F00E3FA9C /* Assets.xcassets */; };
-		B58936CE24FA773F00E3FA9C /* LifeboxWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B58936C124FA773E00E3FA9C /* LifeboxWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B58936CE24FA773F00E3FA9C /* LifeTech-LifeboxWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B58936C124FA773E00E3FA9C /* LifeTech-LifeboxWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B58936E524FA8D9700E3FA9C /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
 		B58936EB24FA905F00E3FA9C /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
 		B58936EC24FA906300E3FA9C /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
@@ -6121,7 +6126,6 @@
 		B5FB65761FDE6F6900A02FD7 /* OperationProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FB65751FDE6F6900A02FD7 /* OperationProgressService.swift */; };
 		B7E371A4D0FFEFC85648EF2B /* Pods_LifeboxShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */; };
 		B89728CAE994F4F93C31E016 /* LBAlbumLikePreviewSliderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350E5B07CCA1DEE8EE3F7BCD /* LBAlbumLikePreviewSliderPresenter.swift */; };
-		B8A6B92C0471B800533E2CD5 /* Pods_LifeboxWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBBE02BF533F9298BBCCD00 /* Pods_LifeboxWidgetExtension.framework */; };
 		BA527EDC7876722B487A0428 /* FileInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F2AB0A215CE40568819D5 /* FileInfoPresenter.swift */; };
 		BF3D0A80B95F61A2403CF0F6 /* Pods_LifeTech_BilloShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F777AB3F977CA7E2EB6BD4B /* Pods_LifeTech_BilloShared.framework */; };
 		C116353E0B4CB7B653684344 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BCF2B48577C5A8E5B52F4F /* SplashInteractor.swift */; };
@@ -11625,6 +11629,291 @@
 		CFACACAE247CF8AC00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
 		CFACACAF247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
 		CFACACB0247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
+		CFE4E5FD252D9EE200F165AD /* RestoreHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0724FE6DAA00515757 /* RestoreHelper.m */; };
+		CFE4E5FE252D9EE200F165AD /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BFA24FE6DAA00515757 /* GZIP.m */; };
+		CFE4E5FF252D9EE200F165AD /* PHAsset+FetchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */; };
+		CFE4E600252D9EE200F165AD /* ContactUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0024FE6DAA00515757 /* ContactUtil.m */; };
+		CFE4E601252D9EE200F165AD /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF924FE6DAA00515757 /* Utils.m */; };
+		CFE4E602252D9EE200F165AD /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
+		CFE4E603252D9EE200F165AD /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0A24FE6DAA00515757 /* SyncSettings.m */; };
+		CFE4E604252D9EE200F165AD /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
+		CFE4E605252D9EE200F165AD /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
+		CFE4E606252D9EE200F165AD /* WidgetEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558276A24FE25610039DD11 /* WidgetEntries.swift */; };
+		CFE4E607252D9EE200F165AD /* WidgetPresentationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */; };
+		CFE4E608252D9EE200F165AD /* CellsConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */; };
+		CFE4E609252D9EE200F165AD /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECB81F11D1D0003D1A75 /* Dictionary.swift */; };
+		CFE4E60A252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E60B252D9EE200F165AD /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
+		CFE4E60C252D9EE200F165AD /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
+		CFE4E60D252D9EE200F165AD /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
+		CFE4E60E252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E60F252D9EE200F165AD /* WidgetServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278B24FE90C40039DD11 /* WidgetServerService.swift */; };
+		CFE4E610252D9EE200F165AD /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
+		CFE4E611252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E612252D9EE200F165AD /* Equatable+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE274D601FB4806400CD53D7 /* Equatable+Contains.swift */; };
+		CFE4E613252D9EE200F165AD /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
+		CFE4E614252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E615252D9EE200F165AD /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
+		CFE4E616252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E617252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E618252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E619252D9EE200F165AD /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF224FE6DAA00515757 /* SyncStatus.m */; };
+		CFE4E61A252D9EE200F165AD /* SyncDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEF24FE6DAA00515757 /* SyncDB.m */; };
+		CFE4E61B252D9EE200F165AD /* DepoAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF024FE6DAA00515757 /* DepoAdapter.m */; };
+		CFE4E61C252D9EE200F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
+		CFE4E61D252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E61E252D9EE200F165AD /* RequestsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB996CE1F0770470074E264 /* RequestsKey.swift */; };
+		CFE4E61F252D9EE200F165AD /* BiometricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */; };
+		CFE4E620252D9EE200F165AD /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
+		CFE4E621252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E622252D9EE200F165AD /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEE24FE6DAA00515757 /* SyncRecord.m */; };
+		CFE4E623252D9EE200F165AD /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BE624FE6DAA00515757 /* Contact.m */; };
+		CFE4E624252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E625252D9EE200F165AD /* BackupHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0924FE6DAA00515757 /* BackupHelper.m */; };
+		CFE4E626252D9EE200F165AD /* Alamofire+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CE2045734200812544 /* Alamofire+Validate.swift */; };
+		CFE4E627252D9EE200F165AD /* WidgetPhotoLibraryObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF40B12514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift */; };
+		CFE4E628252D9EE200F165AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
+		CFE4E629252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E62A252D9EE200F165AD /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
+		CFE4E62B252D9EE200F165AD /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C1024FE6DAA00515757 /* SyncAdapter.m */; };
+		CFE4E62C252D9EE200F165AD /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
+		CFE4E62D252D9EE200F165AD /* WidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558276D24FE259B0039DD11 /* WidgetProvider.swift */; };
+		CFE4E62E252D9EE200F165AD /* KeychainSwift+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4ECA7420889B5400AB91C6 /* KeychainSwift+Optional.swift */; };
+		CFE4E62F252D9EE200F165AD /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
+		CFE4E630252D9EE200F165AD /* LifeboxWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58936C724FA773E00E3FA9C /* LifeboxWidget.swift */; };
+		CFE4E631252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E632252D9EE200F165AD /* WidgetTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6925011B440005FCAD /* WidgetTokenService.swift */; };
+		CFE4E633252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E634252D9EE200F165AD /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
+		CFE4E635252D9EE200F165AD /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0C24FE6DAA00515757 /* SyncDBUtils.m */; };
+		CFE4E636252D9EE200F165AD /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0124FE6DAA00515757 /* SyncLogger.m */; };
+		CFE4E637252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E638252D9EE200F165AD /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
+		CFE4E639252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E63A252D9EE200F165AD /* AnalyzeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEC24FE6DAA00515757 /* AnalyzeStatus.m */; };
+		CFE4E63B252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E63C252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E63D252D9EE200F165AD /* ContactSyncSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF424FE6DAA00515757 /* ContactSyncSDK.m */; };
+		CFE4E63F252D9EE200F165AD /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
+		CFE4E640252D9EE200F165AD /* WidgetImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE8B7F251A1EDE002401F8 /* WidgetImageLoader.swift */; };
+		CFE4E641252D9EE200F165AD /* AbstractHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0624FE6DAA00515757 /* AbstractHelper.m */; };
+		CFE4E642252D9EE200F165AD /* BackupStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEB24FE6DAA00515757 /* BackupStats.m */; };
+		CFE4E643252D9EE200F165AD /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208671228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift */; };
+		CFE4E644252D9EE200F165AD /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
+		CFE4E645252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E646252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E647252D9EE200F165AD /* DispatchQueueLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */; };
+		CFE4E648252D9EE200F165AD /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
+		CFE4E649252D9EE200F165AD /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
+		CFE4E64A252D9EE200F165AD /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558277024FE25CE0039DD11 /* WidgetView.swift */; };
+		CFE4E64B252D9EE200F165AD /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
+		CFE4E64C252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E64D252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E64E252D9EE200F165AD /* CNContactUnified.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0224FE6DAA00515757 /* CNContactUnified.m */; };
+		CFE4E64F252D9EE200F165AD /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278424FE725E0039DD11 /* ButtonStyle.swift */; };
+		CFE4E650252D9EE200F165AD /* PartialInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C1124FE6DAA00515757 /* PartialInfo.m */; };
+		CFE4E651252D9EE200F165AD /* ContactAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BED24FE6DAA00515757 /* ContactAddress.m */; };
+		CFE4E652252D9EE200F165AD /* PHPhotoLibrary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989686CA24C969FF00171375 /* PHPhotoLibrary+Extensions.swift */; };
+		CFE4E653252D9EE200F165AD /* ObjectRequestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278F24FE91600039DD11 /* ObjectRequestResponse.swift */; };
+		CFE4E654252D9EE200F165AD /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0F24FE6DAA00515757 /* ContactDevice.m */; };
+		CFE4E655252D9EE200F165AD /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
+		CFE4E657252D9EE200F165AD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58936C424FA773E00E3FA9C /* SwiftUI.framework */; };
+		CFE4E658252D9EE200F165AD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58936C224FA773E00E3FA9C /* WidgetKit.framework */; };
+		CFE4E65B252D9EE200F165AD /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
+		CFE4E65C252D9EE200F165AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B58936C924FA773F00E3FA9C /* Assets.xcassets */; };
+		CFE4E6B7252D9F2300F165AD /* RestoreHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0724FE6DAA00515757 /* RestoreHelper.m */; };
+		CFE4E6B8252D9F2300F165AD /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BFA24FE6DAA00515757 /* GZIP.m */; };
+		CFE4E6B9252D9F2300F165AD /* PHAsset+FetchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */; };
+		CFE4E6BA252D9F2300F165AD /* ContactUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0024FE6DAA00515757 /* ContactUtil.m */; };
+		CFE4E6BB252D9F2300F165AD /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF924FE6DAA00515757 /* Utils.m */; };
+		CFE4E6BC252D9F2300F165AD /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
+		CFE4E6BD252D9F2300F165AD /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0A24FE6DAA00515757 /* SyncSettings.m */; };
+		CFE4E6BE252D9F2300F165AD /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
+		CFE4E6BF252D9F2300F165AD /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
+		CFE4E6C0252D9F2300F165AD /* WidgetEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558276A24FE25610039DD11 /* WidgetEntries.swift */; };
+		CFE4E6C1252D9F2300F165AD /* WidgetPresentationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */; };
+		CFE4E6C2252D9F2300F165AD /* CellsConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */; };
+		CFE4E6C3252D9F2300F165AD /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECB81F11D1D0003D1A75 /* Dictionary.swift */; };
+		CFE4E6C4252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6C5252D9F2300F165AD /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
+		CFE4E6C6252D9F2300F165AD /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
+		CFE4E6C7252D9F2300F165AD /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
+		CFE4E6C8252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6C9252D9F2300F165AD /* WidgetServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278B24FE90C40039DD11 /* WidgetServerService.swift */; };
+		CFE4E6CA252D9F2300F165AD /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
+		CFE4E6CB252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6CC252D9F2300F165AD /* Equatable+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE274D601FB4806400CD53D7 /* Equatable+Contains.swift */; };
+		CFE4E6CD252D9F2300F165AD /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
+		CFE4E6CE252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6CF252D9F2300F165AD /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
+		CFE4E6D0252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6D1252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6D2252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6D3252D9F2300F165AD /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF224FE6DAA00515757 /* SyncStatus.m */; };
+		CFE4E6D4252D9F2300F165AD /* SyncDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEF24FE6DAA00515757 /* SyncDB.m */; };
+		CFE4E6D5252D9F2300F165AD /* DepoAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF024FE6DAA00515757 /* DepoAdapter.m */; };
+		CFE4E6D6252D9F2300F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
+		CFE4E6D7252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6D8252D9F2300F165AD /* RequestsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB996CE1F0770470074E264 /* RequestsKey.swift */; };
+		CFE4E6D9252D9F2300F165AD /* BiometricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */; };
+		CFE4E6DA252D9F2300F165AD /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
+		CFE4E6DB252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6DC252D9F2300F165AD /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEE24FE6DAA00515757 /* SyncRecord.m */; };
+		CFE4E6DD252D9F2300F165AD /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BE624FE6DAA00515757 /* Contact.m */; };
+		CFE4E6DE252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6DF252D9F2300F165AD /* BackupHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0924FE6DAA00515757 /* BackupHelper.m */; };
+		CFE4E6E0252D9F2300F165AD /* Alamofire+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CE2045734200812544 /* Alamofire+Validate.swift */; };
+		CFE4E6E1252D9F2300F165AD /* WidgetPhotoLibraryObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF40B12514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift */; };
+		CFE4E6E2252D9F2300F165AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
+		CFE4E6E3252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6E4252D9F2300F165AD /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
+		CFE4E6E5252D9F2300F165AD /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C1024FE6DAA00515757 /* SyncAdapter.m */; };
+		CFE4E6E6252D9F2300F165AD /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
+		CFE4E6E7252D9F2300F165AD /* WidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558276D24FE259B0039DD11 /* WidgetProvider.swift */; };
+		CFE4E6E8252D9F2300F165AD /* KeychainSwift+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4ECA7420889B5400AB91C6 /* KeychainSwift+Optional.swift */; };
+		CFE4E6E9252D9F2300F165AD /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
+		CFE4E6EA252D9F2300F165AD /* LifeboxWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58936C724FA773E00E3FA9C /* LifeboxWidget.swift */; };
+		CFE4E6EB252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6EC252D9F2300F165AD /* WidgetTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6925011B440005FCAD /* WidgetTokenService.swift */; };
+		CFE4E6ED252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6EE252D9F2300F165AD /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
+		CFE4E6EF252D9F2300F165AD /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0C24FE6DAA00515757 /* SyncDBUtils.m */; };
+		CFE4E6F0252D9F2300F165AD /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0124FE6DAA00515757 /* SyncLogger.m */; };
+		CFE4E6F1252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6F2252D9F2300F165AD /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
+		CFE4E6F3252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6F4252D9F2300F165AD /* AnalyzeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEC24FE6DAA00515757 /* AnalyzeStatus.m */; };
+		CFE4E6F5252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6F6252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E6F7252D9F2300F165AD /* ContactSyncSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF424FE6DAA00515757 /* ContactSyncSDK.m */; };
+		CFE4E6F8252D9F2300F165AD /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4B202C73790018AF82 /* SharedConstants.swift */; };
+		CFE4E6F9252D9F2300F165AD /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
+		CFE4E6FA252D9F2300F165AD /* WidgetImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE8B7F251A1EDE002401F8 /* WidgetImageLoader.swift */; };
+		CFE4E6FB252D9F2300F165AD /* AbstractHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0624FE6DAA00515757 /* AbstractHelper.m */; };
+		CFE4E6FC252D9F2300F165AD /* BackupStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEB24FE6DAA00515757 /* BackupStats.m */; };
+		CFE4E6FD252D9F2300F165AD /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208671228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift */; };
+		CFE4E6FE252D9F2300F165AD /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
+		CFE4E6FF252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E700252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E701252D9F2300F165AD /* DispatchQueueLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */; };
+		CFE4E702252D9F2300F165AD /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
+		CFE4E703252D9F2300F165AD /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
+		CFE4E704252D9F2300F165AD /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558277024FE25CE0039DD11 /* WidgetView.swift */; };
+		CFE4E705252D9F2300F165AD /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
+		CFE4E706252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E707252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E708252D9F2300F165AD /* CNContactUnified.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0224FE6DAA00515757 /* CNContactUnified.m */; };
+		CFE4E709252D9F2300F165AD /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278424FE725E0039DD11 /* ButtonStyle.swift */; };
+		CFE4E70A252D9F2300F165AD /* PartialInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C1124FE6DAA00515757 /* PartialInfo.m */; };
+		CFE4E70B252D9F2300F165AD /* ContactAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BED24FE6DAA00515757 /* ContactAddress.m */; };
+		CFE4E70C252D9F2300F165AD /* PHPhotoLibrary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989686CA24C969FF00171375 /* PHPhotoLibrary+Extensions.swift */; };
+		CFE4E70D252D9F2300F165AD /* ObjectRequestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278F24FE91600039DD11 /* ObjectRequestResponse.swift */; };
+		CFE4E70E252D9F2300F165AD /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0F24FE6DAA00515757 /* ContactDevice.m */; };
+		CFE4E70F252D9F2300F165AD /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
+		CFE4E711252D9F2300F165AD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58936C424FA773E00E3FA9C /* SwiftUI.framework */; };
+		CFE4E712252D9F2300F165AD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58936C224FA773E00E3FA9C /* WidgetKit.framework */; };
+		CFE4E713252D9F2300F165AD /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		CFE4E715252D9F2300F165AD /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
+		CFE4E716252D9F2300F165AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B58936C924FA773F00E3FA9C /* Assets.xcassets */; };
+		CFE4E74B252D9F3B00F165AD /* RestoreHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0724FE6DAA00515757 /* RestoreHelper.m */; };
+		CFE4E74C252D9F3B00F165AD /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BFA24FE6DAA00515757 /* GZIP.m */; };
+		CFE4E74D252D9F3B00F165AD /* PHAsset+FetchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */; };
+		CFE4E74E252D9F3B00F165AD /* ContactUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0024FE6DAA00515757 /* ContactUtil.m */; };
+		CFE4E74F252D9F3B00F165AD /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF924FE6DAA00515757 /* Utils.m */; };
+		CFE4E750252D9F3B00F165AD /* UIImage+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE654FB220454B2500232025 /* UIImage+Size.swift */; };
+		CFE4E751252D9F3B00F165AD /* SyncSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0A24FE6DAA00515757 /* SyncSettings.m */; };
+		CFE4E752252D9F3B00F165AD /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
+		CFE4E753252D9F3B00F165AD /* PasscodeStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED96B1FBC0F5A00487632 /* PasscodeStorage.swift */; };
+		CFE4E754252D9F3B00F165AD /* WidgetEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558276A24FE25610039DD11 /* WidgetEntries.swift */; };
+		CFE4E755252D9F3B00F165AD /* WidgetPresentationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */; };
+		CFE4E756252D9F3B00F165AD /* CellsConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC8144F1EF41AE0001DFCF0 /* CellsConstant.swift */; };
+		CFE4E757252D9F3B00F165AD /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECB81F11D1D0003D1A75 /* Dictionary.swift */; };
+		CFE4E758252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E759252D9F3B00F165AD /* NumericConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDA44D8207CA9E600E653DD /* NumericConstants.swift */; };
+		CFE4E75A252D9F3B00F165AD /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
+		CFE4E75B252D9F3B00F165AD /* ResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DDC1FB584CD00FCE6AB /* ResponseResult.swift */; };
+		CFE4E75C252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E75D252D9F3B00F165AD /* WidgetServerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278B24FE90C40039DD11 /* WidgetServerService.swift */; };
+		CFE4E75E252D9F3B00F165AD /* SessionServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCA070420C4412800558AB0 /* SessionServiceExtension.swift */; };
+		CFE4E75F252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E760252D9F3B00F165AD /* Equatable+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE274D601FB4806400CD53D7 /* Equatable+Contains.swift */; };
+		CFE4E761252D9F3B00F165AD /* DispatchQueue+Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */; };
+		CFE4E762252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E763252D9F3B00F165AD /* SharedEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF4E202C74090018AF82 /* SharedEnums.swift */; };
+		CFE4E764252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E765252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E766252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E767252D9F3B00F165AD /* SyncStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF224FE6DAA00515757 /* SyncStatus.m */; };
+		CFE4E768252D9F3B00F165AD /* SyncDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEF24FE6DAA00515757 /* SyncDB.m */; };
+		CFE4E769252D9F3B00F165AD /* DepoAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF024FE6DAA00515757 /* DepoAdapter.m */; };
+		CFE4E76A252D9F3B00F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43F42514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld */; };
+		CFE4E76B252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E76C252D9F3B00F165AD /* RequestsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB996CE1F0770470074E264 /* RequestsKey.swift */; };
+		CFE4E76D252D9F3B00F165AD /* BiometricsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0ED9631FBC0F5A00487632 /* BiometricsManager.swift */; };
+		CFE4E76E252D9F3B00F165AD /* TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE91FC8404600440CA0 /* TokenStorage.swift */; };
+		CFE4E76F252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E770252D9F3B00F165AD /* SyncRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEE24FE6DAA00515757 /* SyncRecord.m */; };
+		CFE4E771252D9F3B00F165AD /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BE624FE6DAA00515757 /* Contact.m */; };
+		CFE4E772252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E773252D9F3B00F165AD /* BackupHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0924FE6DAA00515757 /* BackupHelper.m */; };
+		CFE4E774252D9F3B00F165AD /* Alamofire+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CE2045734200812544 /* Alamofire+Validate.swift */; };
+		CFE4E775252D9F3B00F165AD /* WidgetPhotoLibraryObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF40B12514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift */; };
+		CFE4E776252D9F3B00F165AD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C032B811EEFE465006532C8 /* Constants.swift */; };
+		CFE4E777252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E778252D9F3B00F165AD /* URL+Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDEC1FC8415600440CA0 /* URL+Path.swift */; };
+		CFE4E779252D9F3B00F165AD /* SyncAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C1024FE6DAA00515757 /* SyncAdapter.m */; };
+		CFE4E77A252D9F3B00F165AD /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
+		CFE4E77B252D9F3B00F165AD /* WidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558276D24FE259B0039DD11 /* WidgetProvider.swift */; };
+		CFE4E77C252D9F3B00F165AD /* KeychainSwift+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4ECA7420889B5400AB91C6 /* KeychainSwift+Optional.swift */; };
+		CFE4E77D252D9F3B00F165AD /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
+		CFE4E77E252D9F3B00F165AD /* LifeboxWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58936C724FA773E00E3FA9C /* LifeboxWidget.swift */; };
+		CFE4E77F252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E780252D9F3B00F165AD /* WidgetTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6925011B440005FCAD /* WidgetTokenService.swift */; };
+		CFE4E781252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E782252D9F3B00F165AD /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
+		CFE4E783252D9F3B00F165AD /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0C24FE6DAA00515757 /* SyncDBUtils.m */; };
+		CFE4E784252D9F3B00F165AD /* SyncLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0124FE6DAA00515757 /* SyncLogger.m */; };
+		CFE4E785252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E786252D9F3B00F165AD /* String+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AD15E31FD678B800DE97DB /* String+Subscript.swift */; };
+		CFE4E787252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E788252D9F3B00F165AD /* AnalyzeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEC24FE6DAA00515757 /* AnalyzeStatus.m */; };
+		CFE4E789252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E78A252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E78B252D9F3B00F165AD /* ContactSyncSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BF424FE6DAA00515757 /* ContactSyncSDK.m */; };
+		CFE4E78D252D9F3B00F165AD /* TokenKeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C121EFF208742A800AA585F /* TokenKeychainStorage.swift */; };
+		CFE4E78E252D9F3B00F165AD /* WidgetImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AE8B7F251A1EDE002401F8 /* WidgetImageLoader.swift */; };
+		CFE4E78F252D9F3B00F165AD /* AbstractHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0624FE6DAA00515757 /* AbstractHelper.m */; };
+		CFE4E790252D9F3B00F165AD /* BackupStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BEB24FE6DAA00515757 /* BackupStats.m */; };
+		CFE4E791252D9F3B00F165AD /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208671228D4FF1000BEDAD /* NSManagedObjectContext+Extensions.swift */; };
+		CFE4E792252D9F3B00F165AD /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3318E01EFCF9D600E25989 /* Device.swift */; };
+		CFE4E793252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E794252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E795252D9F3B00F165AD /* DispatchQueueLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7E1F64207DF862005B19D9 /* DispatchQueueLabels.swift */; };
+		CFE4E796252D9F3B00F165AD /* AuthorityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224936721BC14890086CB6A /* AuthorityType.swift */; };
+		CFE4E797252D9F3B00F165AD /* WidgetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54BFF46202B43DF0018AF82 /* WidgetService.swift */; };
+		CFE4E798252D9F3B00F165AD /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558277024FE25CE0039DD11 /* WidgetView.swift */; };
+		CFE4E799252D9F3B00F165AD /* Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E26E420174DF200F49E41 /* Mapping.swift */; };
+		CFE4E79A252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E79B252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
+		CFE4E79C252D9F3B00F165AD /* CNContactUnified.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0224FE6DAA00515757 /* CNContactUnified.m */; };
+		CFE4E79D252D9F3B00F165AD /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278424FE725E0039DD11 /* ButtonStyle.swift */; };
+		CFE4E79E252D9F3B00F165AD /* PartialInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C1124FE6DAA00515757 /* PartialInfo.m */; };
+		CFE4E79F252D9F3B00F165AD /* ContactAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BED24FE6DAA00515757 /* ContactAddress.m */; };
+		CFE4E7A0252D9F3B00F165AD /* PHPhotoLibrary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 989686CA24C969FF00171375 /* PHPhotoLibrary+Extensions.swift */; };
+		CFE4E7A1252D9F3B00F165AD /* ObjectRequestResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B558278F24FE91600039DD11 /* ObjectRequestResponse.swift */; };
+		CFE4E7A2252D9F3B00F165AD /* ContactDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0F24FE6DAA00515757 /* ContactDevice.m */; };
+		CFE4E7A3252D9F3B00F165AD /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5A612E2060F8AE00793EB0 /* Keys.swift */; };
+		CFE4E7A5252D9F3B00F165AD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58936C424FA773E00E3FA9C /* SwiftUI.framework */; };
+		CFE4E7A6252D9F3B00F165AD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B58936C224FA773E00E3FA9C /* WidgetKit.framework */; };
+		CFE4E7A9252D9F3B00F165AD /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
+		CFE4E7AA252D9F3B00F165AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B58936C924FA773F00E3FA9C /* Assets.xcassets */; };
+		CFEB1B55252E8DB70008A2A9 /* LifeboxWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFE4E71C252D9F2300F165AD /* LifeboxWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFEB1B6E252E8EFA0008A2A9 /* LifeboxWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFE4E71C252D9F2300F165AD /* LifeboxWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFEB1B87252E8FEA0008A2A9 /* LifeTech_BilloWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFE4E662252D9EE200F165AD /* LifeTech_BilloWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFEB1B8A252E905D0008A2A9 /* BilloWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFE4E7B0252D9F3B00F165AD /* BilloWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFEB1B8D252E90810008A2A9 /* BilloWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFE4E7B0252D9F3B00F165AD /* BilloWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFEB1C1F252E9F220008A2A9 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
+		CFEB1C37252E9F250008A2A9 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
 		D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */; };
 		D42ED46420C9D9E600761645 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */; };
 		D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E01F3F18FA00EFDC6D /* UsageInfoConfigurator.swift */; };
@@ -11891,20 +12180,6 @@
 			remoteGlobalIDString = B58936C024FA773E00E3FA9C;
 			remoteInfo = LifeboxWidgetExtension;
 		};
-		B59B650E250764F4003F6BD6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B58936C024FA773E00E3FA9C;
-			remoteInfo = LifeboxWidgetExtension;
-		};
-		B59B651025076512003F6BD6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B58936C024FA773E00E3FA9C;
-			remoteInfo = LifeboxWidgetExtension;
-		};
 		CE79E4AA1F695DA200C1F151 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
@@ -11996,6 +12271,41 @@
 			remoteGlobalIDString = 8C3BA2E122B3CC45006D901E;
 			remoteInfo = LifeDriveShared;
 		};
+		CFEB1B53252E8DA40008A2A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFE4E6B4252D9F2300F165AD;
+			remoteInfo = LifeboxWidgetExtension;
+		};
+		CFEB1B6C252E8EDA0008A2A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFE4E6B4252D9F2300F165AD;
+			remoteInfo = LifeboxWidgetExtension;
+		};
+		CFEB1B85252E8FC10008A2A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFE4E5FA252D9EE200F165AD;
+			remoteInfo = LifeTech_BilloWidgetExtension;
+		};
+		CFEB1B88252E904E0008A2A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFE4E748252D9F3B00F165AD;
+			remoteInfo = BilloWidgetExtension;
+		};
+		CFEB1B8B252E906F0008A2A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFE4E748252D9F3B00F165AD;
+			remoteInfo = BilloWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -12005,6 +12315,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				CFEB1B87252E8FEA0008A2A9 /* LifeTech_BilloWidgetExtension.appex in Embed App Extensions */,
 				0303A8EA2397F0B000907F42 /* LifeTech_BilloShared.appex in Embed App Extensions */,
 				0303A8EB2397F0B000907F42 /* LifeTech_BilloFileProvider.appex in Embed App Extensions */,
 				0303A8EC2397F0B000907F42 /* LifeTech_BilloProviderUI.appex in Embed App Extensions */,
@@ -12019,6 +12330,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				CFEB1B55252E8DB70008A2A9 /* LifeboxWidgetExtension.appex in Embed App Extensions */,
 				0302B73B2370234C0005D78F /* LifeboxNotificationService.appex in Embed App Extensions */,
 				7A3E0C0B206273CE00F79A1C /* LifeboxFileProviderUI.appex in Embed App Extensions */,
 				7A3E0C05206273CE00F79A1C /* LifeboxShared.appex in Embed App Extensions */,
@@ -12035,7 +12347,7 @@
 			files = (
 				0302B73A237023370005D78F /* LifeTech-NotificationService.appex in Embed App Extensions */,
 				8C8E933E23154756000242E9 /* LifeTech-LifeboxFileProviderUI.appex in Embed App Extensions */,
-				B58936CE24FA773F00E3FA9C /* LifeboxWidgetExtension.appex in Embed App Extensions */,
+				B58936CE24FA773F00E3FA9C /* LifeTech-LifeboxWidgetExtension.appex in Embed App Extensions */,
 				8C8E933D23154752000242E9 /* LifeTech-LifeboxFileProvider.appex in Embed App Extensions */,
 				8C8E933C2315474E000242E9 /* LifeTech-LifeboxShared.appex in Embed App Extensions */,
 			);
@@ -12114,6 +12426,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				CFEB1B8A252E905D0008A2A9 /* BilloWidgetExtension.appex in Embed App Extensions */,
 				0308BB90239001130066F409 /* BilloNotificationService.appex in Embed App Extensions */,
 				8C3BA3AD22B3CE24006D901E /* BilloShared.appex in Embed App Extensions */,
 				8C3BA3AE22B3CE24006D901E /* BilloFileProvider.appex in Embed App Extensions */,
@@ -12128,6 +12441,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				CFEB1B6E252E8EFA0008A2A9 /* LifeboxWidgetExtension.appex in Embed App Extensions */,
 				CF8B6B2323CBC9D70021B021 /* LifeboxNotificationService.appex in Embed App Extensions */,
 				CF8B6B2523CBC9D70021B021 /* LifeboxFileProviderUI.appex in Embed App Extensions */,
 				CF8B6B2623CBC9D70021B021 /* LifeboxShared.appex in Embed App Extensions */,
@@ -12142,6 +12456,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				CFEB1B8D252E90810008A2A9 /* BilloWidgetExtension.appex in Embed App Extensions */,
 				CF8B72EE23CBCA280021B021 /* BilloNotificationService.appex in Embed App Extensions */,
 				CF8B72EF23CBCA280021B021 /* BilloShared.appex in Embed App Extensions */,
 				CF8B72F023CBCA280021B021 /* BilloFileProvider.appex in Embed App Extensions */,
@@ -12206,6 +12521,7 @@
 		094E8EB45148F901AC01702F /* FeedbackViewInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInitializer.swift; sourceTree = "<group>"; };
 		097F4E84C509D07D9BC4F909 /* SettingsConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsConfigurator.swift; sourceTree = "<group>"; };
 		09A6A5A047D25FE5E736FC54 /* LBAlbumLikePreviewSliderInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderInitializer.swift; sourceTree = "<group>"; };
+		0A66CF3676997017CA1E4D81 /* Pods-BilloWidgetExtension.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BilloWidgetExtension.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-BilloWidgetExtension/Pods-BilloWidgetExtension.appstore.xcconfig"; sourceTree = "<group>"; };
 		0AEEA430A2A4A92D35185388 /* AlbumsInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumsInitializer.swift; sourceTree = "<group>"; };
 		0E1CC5DC67F2371ACE4EC131 /* UserInfoSubViewInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewInteractorInput.swift; sourceTree = "<group>"; };
 		0F1FF28B20122B510C14A5A2 /* ActivityTimelineInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInteractorInput.swift; sourceTree = "<group>"; };
@@ -12249,6 +12565,7 @@
 		1D08B0BBD68707B9F9CFACEF /* Pods-BilloNotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BilloNotificationService.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BilloNotificationService/Pods-BilloNotificationService.debug.xcconfig"; sourceTree = "<group>"; };
 		1D1CD71B8B0755767B1DEDFB /* Pods_BilloProviderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BilloProviderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D4FA6CF573F7FC0686303EE /* Pods-Billo.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billo.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-Billo/Pods-Billo.enterprise.xcconfig"; sourceTree = "<group>"; };
+		1D6728C0F66A82733B0BD151 /* Pods_LifeboxWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DD2AA43BAA21AC841D69157 /* Pods-LifeTech-NotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-NotificationService.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech-NotificationService/Pods-LifeTech-NotificationService.debug.xcconfig"; sourceTree = "<group>"; };
 		1F2006D5B99A0C32651CC0D9 /* Pods-LifeboxFileProvider.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProvider.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProvider/Pods-LifeboxFileProvider.enterprise.xcconfig"; sourceTree = "<group>"; };
 		1FB7C07A080A85C63EAA4DC4 /* Pods-Depo_LifeTech-autosync-widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech-autosync-widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech-autosync-widget/Pods-Depo_LifeTech-autosync-widget.debug.xcconfig"; sourceTree = "<group>"; };
@@ -12284,6 +12601,7 @@
 		2BA37C3C202837C800660394 /* FaceImageChangeCoverConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageChangeCoverConfigurator.swift; sourceTree = "<group>"; };
 		2BA37C3F202883BF00660394 /* FaceImagePhotosRouterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceImagePhotosRouterInput.swift; sourceTree = "<group>"; };
 		2BA4E6DA8C620A2D616D435F /* Pods-LifeboxFileProviderUI.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProviderUI.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProviderUI/Pods-LifeboxFileProviderUI.enterprise.xcconfig"; sourceTree = "<group>"; };
+		2BCAFA3ABDF7DFD163BC9237 /* Pods-BilloWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BilloWidgetExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-BilloWidgetExtension/Pods-BilloWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
 		2C08D49DCF0B32ED4A1C207E /* Pods-LifeTech_lifedrive.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_lifedrive.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_lifedrive/Pods-LifeTech_lifedrive.appstore.xcconfig"; sourceTree = "<group>"; };
 		2DF9D08099FB05F8D4D4C40B /* Pods-LifeDriveFileProvider.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveFileProvider.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveFileProvider/Pods-LifeDriveFileProvider.enterprise.xcconfig"; sourceTree = "<group>"; };
 		2E4ED294D26FD4587085C802 /* Pods-LifeTech_BilloNotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloNotificationService.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_BilloNotificationService/Pods-LifeTech_BilloNotificationService.release.xcconfig"; sourceTree = "<group>"; };
@@ -12429,6 +12747,7 @@
 		500FD60599D9796DD89EAC01 /* Pods-LifeboxShared.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.release.xcconfig"; sourceTree = "<group>"; };
 		5047D2D77F166BBE66169F8E /* PhotoVideoDetailInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInteractorOutput.swift; sourceTree = "<group>"; };
 		51B73FE0148359D56DBAC42C /* SplashViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashViewOutput.swift; sourceTree = "<group>"; };
+		5312E3523DF98AF4963A6E1A /* Pods-LifeTech_BilloWidgetExtension.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloWidgetExtension.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_BilloWidgetExtension/Pods-LifeTech_BilloWidgetExtension.enterprise.xcconfig"; sourceTree = "<group>"; };
 		536B87BE9C6EA2601A4F42F3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		5570CF3888592E7C4D788AA3 /* ActivityTimelineViewOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineViewOutput.swift; sourceTree = "<group>"; };
 		55FDC258391B71A927972967 /* Pods-lifedrive.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lifedrive.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-lifedrive/Pods-lifedrive.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -12438,6 +12757,7 @@
 		5972C1527D3AC05E1DB65B4B /* SelectNameInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameInteractorOutput.swift; sourceTree = "<group>"; };
 		5A790A17A1745A0D85ECB596 /* FileInfoConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoConfigurator.swift; sourceTree = "<group>"; };
 		5AAEBE1A76149DDF9869754A /* Pods-Depo_LifeTech-autosync-widget.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Depo_LifeTech-autosync-widget.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Depo_LifeTech-autosync-widget/Pods-Depo_LifeTech-autosync-widget.appstore.xcconfig"; sourceTree = "<group>"; };
+		5B8F4E26FB1B4539F4159A4C /* Pods-LifeTech-LifeboxWidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxWidgetExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech-LifeboxWidgetExtension/Pods-LifeTech-LifeboxWidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		5BAD821E7B8A7A4BEDB93ED5 /* Pods-LifeboxUnitTests.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.appstore.xcconfig"; sourceTree = "<group>"; };
 		5C1481F6939E81618738C7DE /* ForgotPasswordViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewInput.swift; sourceTree = "<group>"; };
 		5C58EB76B3E755EF8CB5B029 /* SplashInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashInteractorOutput.swift; sourceTree = "<group>"; };
@@ -12446,8 +12766,10 @@
 		5D8C3E84F201AAADD8FC1ADD /* Pods-LifeTech-LifeboxFileProviderUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxFileProviderUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech-LifeboxFileProviderUI/Pods-LifeTech-LifeboxFileProviderUI.release.xcconfig"; sourceTree = "<group>"; };
 		5D98FA6676880774156BB995 /* FeedbackViewInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewInteractorInput.swift; sourceTree = "<group>"; };
 		5DA23BA709900F6EF8480710 /* FeedbackViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewModuleInput.swift; sourceTree = "<group>"; };
+		5F2BF26206968C3A6CF739F8 /* Pods_LifeTech_BilloWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeTech_BilloWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F61FFA4CACEC5E1F355ED7F /* Pods-TC_Depo_LifeTech_Bundle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TC_Depo_LifeTech_Bundle.release.xcconfig"; path = "Pods/Target Support Files/Pods-TC_Depo_LifeTech_Bundle/Pods-TC_Depo_LifeTech_Bundle.release.xcconfig"; sourceTree = "<group>"; };
 		5F7E2D395BBA8DC5D0612F29 /* LBAlbumLikePreviewSliderInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LBAlbumLikePreviewSliderInteractorOutput.swift; sourceTree = "<group>"; };
+		61549FC288E87FAA3493F2FB /* Pods_BilloWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BilloWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61985FCC0EFA34A322F32AB7 /* Pods-LifeTech_lifedrive.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_lifedrive.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_lifedrive/Pods-LifeTech_lifedrive.enterprise.xcconfig"; sourceTree = "<group>"; };
 		6277EBCA2908E42E49F5BC7A /* Pods-LifeboxFileProviderUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProviderUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProviderUI/Pods-LifeboxFileProviderUI.debug.xcconfig"; sourceTree = "<group>"; };
 		6284E1749C93873CAF739DA6 /* Pods_LifeTech_NotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeTech_NotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -12885,6 +13207,7 @@
 		89EA4F77240902C400A2C543 /* PackagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesTableViewCell.swift; sourceTree = "<group>"; };
 		89EA4F78240902C400A2C543 /* PackagesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PackagesTableViewCell.xib; sourceTree = "<group>"; };
 		8A4620DB4814DE9B2BF69415 /* SplashModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashModuleInput.swift; sourceTree = "<group>"; };
+		8A90942C9084FD033FF2532E /* Pods-LifeTech_BilloWidgetExtension.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloWidgetExtension.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_BilloWidgetExtension/Pods-LifeTech_BilloWidgetExtension.appstore.xcconfig"; sourceTree = "<group>"; };
 		8ACB18A67C5CBB40E87DBA64 /* UploadFilesSelectionModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UploadFilesSelectionModuleInput.swift; sourceTree = "<group>"; };
 		8AE369B2C07D755F2883043F /* RegistrationRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationRouter.swift; sourceTree = "<group>"; };
 		8C00970D1F6BDA0A00FA069C /* MoreFilesActionsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreFilesActionsPresenter.swift; sourceTree = "<group>"; };
@@ -13183,9 +13506,12 @@
 		9308A9A544DF5D8923C800E0 /* AlbumsPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AlbumsPresenter.swift; sourceTree = "<group>"; };
 		931900C1D8314FD173F701DC /* TermsAndServicesRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesRouterInput.swift; sourceTree = "<group>"; };
 		9373EA2411B8180CA5FE65D7 /* SelectNameConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectNameConfigurator.swift; sourceTree = "<group>"; };
+		94AA6F4D3F67769A4F78E801 /* Pods-LifeTech_BilloWidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloWidgetExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_BilloWidgetExtension/Pods-LifeTech_BilloWidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		94CD6148B2870929E217B783 /* Pods-LifeTech-LifeboxWidgetExtension.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxWidgetExtension.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech-LifeboxWidgetExtension/Pods-LifeTech-LifeboxWidgetExtension.enterprise.xcconfig"; sourceTree = "<group>"; };
 		94E5A70D0BAB72F0D8679BB8 /* TermsAndServicesInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesInteractor.swift; sourceTree = "<group>"; };
 		95383081F9605943122914E0 /* ForgotPasswordInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordInteractorInput.swift; sourceTree = "<group>"; };
 		96158F7F1AB74A2D8C67DADA /* BaseFilesGreedInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractorInput.swift; sourceTree = "<group>"; };
+		9615D3F3B78DCEC6ED514031 /* Pods-LifeTech-LifeboxWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxWidgetExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech-LifeboxWidgetExtension/Pods-LifeTech-LifeboxWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
 		97604D2835EA04E60222C769 /* Pods-LifeTech-LifeboxFileProvider.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxFileProvider.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech-LifeboxFileProvider/Pods-LifeTech-LifeboxFileProvider.appstore.xcconfig"; sourceTree = "<group>"; };
 		977AD220B6C4EC2279F4FA8F /* Pods-LifeDriveNotificationService.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveNotificationService.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveNotificationService/Pods-LifeDriveNotificationService.enterprise.xcconfig"; sourceTree = "<group>"; };
 		9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -13439,6 +13765,7 @@
 		98CB1C1024FE6DAA00515757 /* SyncAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncAdapter.m; sourceTree = "<group>"; };
 		98CB1C1124FE6DAA00515757 /* PartialInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartialInfo.m; sourceTree = "<group>"; };
 		98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceResponseError.swift; sourceTree = "<group>"; };
+		98D1BBF957BB47B367181C22 /* Pods-BilloWidgetExtension.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BilloWidgetExtension.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-BilloWidgetExtension/Pods-BilloWidgetExtension.enterprise.xcconfig"; sourceTree = "<group>"; };
 		98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDataSource.swift; sourceTree = "<group>"; };
 		98DBC0442410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		98DBC0452410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoSyncHeaderTableViewCell.xib; sourceTree = "<group>"; };
@@ -13633,7 +13960,7 @@
 		B585331E2397E74100867B5B /* WrapData+DebugAnalyticsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WrapData+DebugAnalyticsExtension.swift"; sourceTree = "<group>"; };
 		B585741024BDD90000A71EAD /* AnimatedCircularLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedCircularLoader.swift; sourceTree = "<group>"; };
 		B586A5A821EC7164009B07CF /* InstaPickProgressPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstaPickProgressPopup.swift; sourceTree = "<group>"; };
-		B58936C124FA773E00E3FA9C /* LifeboxWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeboxWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B58936C124FA773E00E3FA9C /* LifeTech-LifeboxWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LifeTech-LifeboxWidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B58936C224FA773E00E3FA9C /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		B58936C424FA773E00E3FA9C /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		B58936C724FA773E00E3FA9C /* LifeboxWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeboxWidget.swift; sourceTree = "<group>"; };
@@ -13710,6 +14037,7 @@
 		B761C517C5341FD74BF00DF5 /* ForgotPasswordRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordRouterInput.swift; sourceTree = "<group>"; };
 		B805AABB556A5907BDD0C1FB /* Pods-LifeTech_BilloProviderUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloProviderUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_BilloProviderUI/Pods-LifeTech_BilloProviderUI.release.xcconfig"; sourceTree = "<group>"; };
 		B82D89618225F753C7AEEF59 /* SplashViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SplashViewInput.swift; sourceTree = "<group>"; };
+		B82E5ADBBC25E213DF0A2E0D /* Pods_LifeTech_LifeboxWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeTech_LifeboxWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B889664B5BCF5EDBAC69D0C0 /* PhotoVideoDetailInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailInteractor.swift; sourceTree = "<group>"; };
 		B8AE89F708D1ADDEB03BE70E /* BaseFilesGreedInteractorOutput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInteractorOutput.swift; sourceTree = "<group>"; };
 		B9236DC1C7FC40C8B6C2DBD1 /* Pods-LifeTech_Billo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_Billo.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_Billo/Pods-LifeTech_Billo.release.xcconfig"; sourceTree = "<group>"; };
@@ -13719,6 +14047,7 @@
 		BB3D81D8F4441B332E687B17 /* BaseFilesGreedInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseFilesGreedInitializer.swift; sourceTree = "<group>"; };
 		BB4E6C13860708D616CF4B75 /* Pods_LifeboxNotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxNotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB8DE4160DD052B7FC7C3B0F /* SettingsInteractorInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SettingsInteractorInput.swift; sourceTree = "<group>"; };
+		BB94013AD533A94E1B8A2473 /* Pods-LifeTech-LifeboxWidgetExtension.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxWidgetExtension.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech-LifeboxWidgetExtension/Pods-LifeTech-LifeboxWidgetExtension.appstore.xcconfig"; sourceTree = "<group>"; };
 		BBB98FBD5D9F6A807D3E5698 /* PhoneVerificationPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PhoneVerificationPresenter.swift; sourceTree = "<group>"; };
 		BC20761014D10901F86933BF /* Pods-LifeTech-LifeboxFileProvider.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxFileProvider.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech-LifeboxFileProvider/Pods-LifeTech-LifeboxFileProvider.release.xcconfig"; sourceTree = "<group>"; };
 		BC29E5867A0B1232EF8B56B8 /* ActionsMenuViewInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActionsMenuViewInput.swift; sourceTree = "<group>"; };
@@ -13743,13 +14072,13 @@
 		C652BD5847C176C6493C93C4 /* ActivityTimelineInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ActivityTimelineInitializer.swift; sourceTree = "<group>"; };
 		C8BB952B985A9557512DC031 /* Pods-LifeboxShared.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxShared.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxShared/Pods-LifeboxShared.appstore.xcconfig"; sourceTree = "<group>"; };
 		CA57D3BE3543D61BBADB1780 /* Pods-LifeTech_BilloProviderUI.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloProviderUI.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_BilloProviderUI/Pods-LifeTech_BilloProviderUI.appstore.xcconfig"; sourceTree = "<group>"; };
+		CA6DD3554EA083439FFDC8D0 /* Pods-BilloWidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BilloWidgetExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BilloWidgetExtension/Pods-BilloWidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		CB4BCE425BAA49DA8EBEEA39 /* SelectFolderInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SelectFolderInitializer.swift; sourceTree = "<group>"; };
 		CBF0B3F0018BAF98A072C67E /* Pods-DepoTests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DepoTests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-DepoTests/Pods-DepoTests.enterprise.xcconfig"; sourceTree = "<group>"; };
 		CBF9B9785CB91B71D6E10883 /* OTPViewConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OTPViewConfigurator.swift; sourceTree = "<group>"; };
 		CC55EC0735060540CE5E23E4 /* FileInfoRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoRouter.swift; sourceTree = "<group>"; };
 		CCA63E7B6E690A95D2168BB1 /* Pods-BilloFileProvider.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BilloFileProvider.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-BilloFileProvider/Pods-BilloFileProvider.enterprise.xcconfig"; sourceTree = "<group>"; };
 		CD80CEB97E85BA37E721D389 /* FeedbackViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
-		CDBBE02BF533F9298BBCCD00 /* Pods_LifeboxWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDFFF80AD607CB90108A1537 /* FeedbackViewRouterInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeedbackViewRouterInput.swift; sourceTree = "<group>"; };
 		CE00B24721F5A79400A5A696 /* PhotoSelectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectionController.swift; sourceTree = "<group>"; };
 		CE00B24921F5A7B000A5A696 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
@@ -14244,7 +14573,22 @@
 		CF8B6B2E23CBC9D70021B021 /* TC_Depo_LifeTech_Bundle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TC_Depo_LifeTech_Bundle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF8B72F823CBCA280021B021 /* Billo_Bundle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Billo_Bundle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraExtensionService.swift; sourceTree = "<group>"; };
+		CFB308AC252DFB0B000D3255 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
+		CFB308AD252DFB0B000D3255 /* autosync-widget.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "autosync-widget.entitlements"; sourceTree = "<group>"; };
+		CFB308AE252DFB0C000D3255 /* autosync-widget-enterprise.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "autosync-widget-enterprise.entitlements"; sourceTree = "<group>"; };
+		CFB308AF252DFB0C000D3255 /* autosync-widget-appstore.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "autosync-widget-appstore.entitlements"; sourceTree = "<group>"; };
+		CFB308B0252DFB0C000D3255 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFB308B1252DFB0D000D3255 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
+		CFB308B8252DFB2A000D3255 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFB308B9252DFB2A000D3255 /* Info-Enterprise.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-Enterprise.plist"; sourceTree = "<group>"; };
+		CFB308BA252DFB2B000D3255 /* autosync-widget-enterprise.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "autosync-widget-enterprise.entitlements"; sourceTree = "<group>"; };
+		CFB308BB252DFB2B000D3255 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
+		CFB308BC252DFB2B000D3255 /* Info-AppStore-LifeTech.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore-LifeTech.plist"; sourceTree = "<group>"; };
+		CFB308BD252DFB2C000D3255 /* autosync-widget-appstore.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "autosync-widget-appstore.entitlements"; sourceTree = "<group>"; };
 		CFC97990A9F9F470648ADD6B /* Pods-LifeboxUnitTests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxUnitTests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxUnitTests/Pods-LifeboxUnitTests.enterprise.xcconfig"; sourceTree = "<group>"; };
+		CFE4E662252D9EE200F165AD /* LifeTech_BilloWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeTech_BilloWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFE4E71C252D9F2300F165AD /* LifeboxWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeboxWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFE4E7B0252D9F3B00F165AD /* BilloWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BilloWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D07372B64C00468A227C63A7 /* TermsAndServicesConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesConfigurator.swift; sourceTree = "<group>"; };
 		D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extensions.swift"; sourceTree = "<group>"; };
 		D47258744D443C841AC3A4A0 /* RegistrationInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationInteractor.swift; sourceTree = "<group>"; };
@@ -14341,6 +14685,7 @@
 		F64007ACBE141535B47058DF /* IntroduceViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IntroduceViewController.swift; sourceTree = "<group>"; };
 		F669E65CFFD6F28F9C6A7A59 /* Pods-LifeboxFileProvider.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeboxFileProvider.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeboxFileProvider/Pods-LifeboxFileProvider.appstore.xcconfig"; sourceTree = "<group>"; };
 		F7A3077F02ED54E20D070D6C /* Pods_LifeTech_LifeboxShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeTech_LifeboxShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8A0DEE831391FE2E20870F4 /* Pods-LifeTech_BilloWidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloWidgetExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_BilloWidgetExtension/Pods-LifeTech_BilloWidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
 		F8FA8222855A41A6E1DA96CC /* Pods-LifeTech_lifedrive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_lifedrive.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_lifedrive/Pods-LifeTech_lifedrive.debug.xcconfig"; sourceTree = "<group>"; };
 		F9490A7550A6D3619929A250 /* UserInfoSubViewModuleInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserInfoSubViewModuleInput.swift; sourceTree = "<group>"; };
 		F96CB1C3C9928A6AA7F97841 /* FileInfoInitializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FileInfoInitializer.swift; sourceTree = "<group>"; };
@@ -14555,7 +14900,7 @@
 			files = (
 				B58936C524FA773E00E3FA9C /* SwiftUI.framework in Frameworks */,
 				B58936C324FA773E00E3FA9C /* WidgetKit.framework in Frameworks */,
-				B8A6B92C0471B800533E2CD5 /* Pods_LifeboxWidgetExtension.framework in Frameworks */,
+				8E9A82E1A7D8F3925CBA6705 /* Pods_LifeTech_LifeboxWidgetExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14752,6 +15097,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CFE4E656252D9EE200F165AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFE4E657252D9EE200F165AD /* SwiftUI.framework in Frameworks */,
+				CFE4E658252D9EE200F165AD /* WidgetKit.framework in Frameworks */,
+				2E5767A686D5564E443EDA14 /* Pods_LifeTech_BilloWidgetExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFE4E710252D9F2300F165AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFE4E711252D9F2300F165AD /* SwiftUI.framework in Frameworks */,
+				CFE4E712252D9F2300F165AD /* WidgetKit.framework in Frameworks */,
+				CFE4E713252D9F2300F165AD /* (null) in Frameworks */,
+				758E5F49D57AD9F24BF934D9 /* Pods_LifeboxWidgetExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFE4E7A4252D9F3B00F165AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFE4E7A5252D9F3B00F165AD /* SwiftUI.framework in Frameworks */,
+				CFE4E7A6252D9F3B00F165AD /* WidgetKit.framework in Frameworks */,
+				A6ECAD3B64C8508C86828BA5 /* Pods_BilloWidgetExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -14842,7 +15218,10 @@
 				0303A8DD2397D15800907F42 /* LifeTech_BilloNotificationService.appex */,
 				CF8B6B2E23CBC9D70021B021 /* TC_Depo_LifeTech_Bundle.app */,
 				CF8B72F823CBCA280021B021 /* Billo_Bundle.app */,
-				B58936C124FA773E00E3FA9C /* LifeboxWidgetExtension.appex */,
+				B58936C124FA773E00E3FA9C /* LifeTech-LifeboxWidgetExtension.appex */,
+				CFE4E662252D9EE200F165AD /* LifeTech_BilloWidgetExtension.appex */,
+				CFE4E71C252D9F2300F165AD /* LifeboxWidgetExtension.appex */,
+				CFE4E7B0252D9F3B00F165AD /* BilloWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -14909,7 +15288,10 @@
 				2F777AB3F977CA7E2EB6BD4B /* Pods_LifeTech_BilloShared.framework */,
 				B58936C224FA773E00E3FA9C /* WidgetKit.framework */,
 				B58936C424FA773E00E3FA9C /* SwiftUI.framework */,
-				CDBBE02BF533F9298BBCCD00 /* Pods_LifeboxWidgetExtension.framework */,
+				61549FC288E87FAA3493F2FB /* Pods_BilloWidgetExtension.framework */,
+				B82E5ADBBC25E213DF0A2E0D /* Pods_LifeTech_LifeboxWidgetExtension.framework */,
+				5F2BF26206968C3A6CF739F8 /* Pods_LifeTech_BilloWidgetExtension.framework */,
+				1D6728C0F66A82733B0BD151 /* Pods_LifeboxWidgetExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -20138,6 +20520,8 @@
 		B58936C624FA773E00E3FA9C /* LifeboxWidget */ = {
 			isa = PBXGroup;
 			children = (
+				CFB3087F252DF31C000D3255 /* Billo */,
+				CFB3087E252DF2E9000D3255 /* LifeboxTC */,
 				CF57972A251A0A890085DDC1 /* LifeboxWidgetExtensionRelease.entitlements */,
 				B59B650A25065808003F6BD6 /* LifeboxWidgetExtensionDebug.entitlements */,
 				B58BF2C224FAF1B100CBE2A7 /* LifeboxWidgetExtension.entitlements */,
@@ -22235,6 +22619,32 @@
 			path = Operations;
 			sourceTree = "<group>";
 		};
+		CFB3087E252DF2E9000D3255 /* LifeboxTC */ = {
+			isa = PBXGroup;
+			children = (
+				CFB308BD252DFB2C000D3255 /* autosync-widget-appstore.entitlements */,
+				CFB308BA252DFB2B000D3255 /* autosync-widget-enterprise.entitlements */,
+				CFB308BC252DFB2B000D3255 /* Info-AppStore-LifeTech.plist */,
+				CFB308BB252DFB2B000D3255 /* Info-AppStore.plist */,
+				CFB308B9252DFB2A000D3255 /* Info-Enterprise.plist */,
+				CFB308B8252DFB2A000D3255 /* Info.plist */,
+			);
+			path = LifeboxTC;
+			sourceTree = "<group>";
+		};
+		CFB3087F252DF31C000D3255 /* Billo */ = {
+			isa = PBXGroup;
+			children = (
+				CFB308AF252DFB0C000D3255 /* autosync-widget-appstore.entitlements */,
+				CFB308AE252DFB0C000D3255 /* autosync-widget-enterprise.entitlements */,
+				CFB308AD252DFB0B000D3255 /* autosync-widget.entitlements */,
+				CFB308AC252DFB0B000D3255 /* Info-AppStore.plist */,
+				CFB308B1252DFB0D000D3255 /* Info-Enterprise.plist */,
+				CFB308B0252DFB0C000D3255 /* Info.plist */,
+			);
+			path = Billo;
+			sourceTree = "<group>";
+		};
 		D00A82528405045A46751159 /* Configurator */ = {
 			isa = PBXGroup;
 			children = (
@@ -22793,6 +23203,18 @@
 				121969E5CD233D35E592295C /* Pods-LifeboxWidgetExtension.release.xcconfig */,
 				A24D895C0CE11D673F66F8D2 /* Pods-LifeboxWidgetExtension.appstore.xcconfig */,
 				05D84D2C9D0CD08E4269A438 /* Pods-LifeboxWidgetExtension.enterprise.xcconfig */,
+				CA6DD3554EA083439FFDC8D0 /* Pods-BilloWidgetExtension.debug.xcconfig */,
+				2BCAFA3ABDF7DFD163BC9237 /* Pods-BilloWidgetExtension.release.xcconfig */,
+				0A66CF3676997017CA1E4D81 /* Pods-BilloWidgetExtension.appstore.xcconfig */,
+				98D1BBF957BB47B367181C22 /* Pods-BilloWidgetExtension.enterprise.xcconfig */,
+				5B8F4E26FB1B4539F4159A4C /* Pods-LifeTech-LifeboxWidgetExtension.debug.xcconfig */,
+				9615D3F3B78DCEC6ED514031 /* Pods-LifeTech-LifeboxWidgetExtension.release.xcconfig */,
+				BB94013AD533A94E1B8A2473 /* Pods-LifeTech-LifeboxWidgetExtension.appstore.xcconfig */,
+				94CD6148B2870929E217B783 /* Pods-LifeTech-LifeboxWidgetExtension.enterprise.xcconfig */,
+				94AA6F4D3F67769A4F78E801 /* Pods-LifeTech_BilloWidgetExtension.debug.xcconfig */,
+				F8A0DEE831391FE2E20870F4 /* Pods-LifeTech_BilloWidgetExtension.release.xcconfig */,
+				8A90942C9084FD033FF2532E /* Pods-LifeTech_BilloWidgetExtension.appstore.xcconfig */,
+				5312E3523DF98AF4963A6E1A /* Pods-LifeTech_BilloWidgetExtension.enterprise.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -22819,6 +23241,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CFEB1B86252E8FC10008A2A9 /* PBXTargetDependency */,
 				CF0F45DC24EB3C760081BD8B /* PBXTargetDependency */,
 				0303A8E22397F0A600907F42 /* PBXTargetDependency */,
 				0303A8E42397F0A600907F42 /* PBXTargetDependency */,
@@ -22939,7 +23362,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				B59B650F250764F4003F6BD6 /* PBXTargetDependency */,
+				CFEB1B54252E8DA40008A2A9 /* PBXTargetDependency */,
 				B549B6B124CF07B200D39C44 /* PBXTargetDependency */,
 				984B1EDB23685DEF009ACCFF /* PBXTargetDependency */,
 				7A3E0C07206273CE00F79A1C /* PBXTargetDependency */,
@@ -23095,9 +23518,9 @@
 			productReference = 984B1EE923685FC8009ACCFF /* BilloNotificationService.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		B58936C024FA773E00E3FA9C /* LifeboxWidgetExtension */ = {
+		B58936C024FA773E00E3FA9C /* LifeTech-LifeboxWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B58936D624FA773F00E3FA9C /* Build configuration list for PBXNativeTarget "LifeboxWidgetExtension" */;
+			buildConfigurationList = B58936D624FA773F00E3FA9C /* Build configuration list for PBXNativeTarget "LifeTech-LifeboxWidgetExtension" */;
 			buildPhases = (
 				387315A36EF6D019D82FF4BA /* [CP] Check Pods Manifest.lock */,
 				B58936BD24FA773E00E3FA9C /* Sources */,
@@ -23108,9 +23531,9 @@
 			);
 			dependencies = (
 			);
-			name = LifeboxWidgetExtension;
+			name = "LifeTech-LifeboxWidgetExtension";
 			productName = LifeboxWidgetExtension;
-			productReference = B58936C124FA773E00E3FA9C /* LifeboxWidgetExtension.appex */;
+			productReference = B58936C124FA773E00E3FA9C /* LifeTech-LifeboxWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		CE1BE921204831CD0074BDDC /* LifeboxFileProvider */ = {
@@ -23215,6 +23638,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CFEB1B89252E904E0008A2A9 /* PBXTargetDependency */,
 				CF0F45E124EB3C8E0081BD8B /* PBXTargetDependency */,
 				0308BB8F239000FA0066F409 /* PBXTargetDependency */,
 				8C3BA3AB22B3CDC4006D901E /* PBXTargetDependency */,
@@ -23284,7 +23708,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				B59B651125076512003F6BD6 /* PBXTargetDependency */,
+				CFEB1B6D252E8EDA0008A2A9 /* PBXTargetDependency */,
 				B549B6B624CF07D700D39C44 /* PBXTargetDependency */,
 				CF8B636B23CBC9D70021B021 /* PBXTargetDependency */,
 				CF8B636F23CBC9D70021B021 /* PBXTargetDependency */,
@@ -23313,6 +23737,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CFEB1B8C252E906F0008A2A9 /* PBXTargetDependency */,
 				CF0F45E324EB3CB00081BD8B /* PBXTargetDependency */,
 				CF8B6B3323CBCA280021B021 /* PBXTargetDependency */,
 				CF8B6B3523CBCA280021B021 /* PBXTargetDependency */,
@@ -23323,6 +23748,60 @@
 			productName = Depo;
 			productReference = CF8B72F823CBCA280021B021 /* Billo_Bundle.app */;
 			productType = "com.apple.product-type.application";
+		};
+		CFE4E5FA252D9EE200F165AD /* LifeTech_BilloWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFE4E65D252D9EE200F165AD /* Build configuration list for PBXNativeTarget "LifeTech_BilloWidgetExtension" */;
+			buildPhases = (
+				CFE4E5FB252D9EE200F165AD /* [CP] Check Pods Manifest.lock */,
+				CFE4E5FC252D9EE200F165AD /* Sources */,
+				CFE4E656252D9EE200F165AD /* Frameworks */,
+				CFE4E65A252D9EE200F165AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LifeTech_BilloWidgetExtension;
+			productName = LifeboxWidgetExtension;
+			productReference = CFE4E662252D9EE200F165AD /* LifeTech_BilloWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		CFE4E6B4252D9F2300F165AD /* LifeboxWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFE4E717252D9F2300F165AD /* Build configuration list for PBXNativeTarget "LifeboxWidgetExtension" */;
+			buildPhases = (
+				CFE4E6B5252D9F2300F165AD /* [CP] Check Pods Manifest.lock */,
+				CFE4E6B6252D9F2300F165AD /* Sources */,
+				CFE4E710252D9F2300F165AD /* Frameworks */,
+				CFE4E714252D9F2300F165AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LifeboxWidgetExtension;
+			productName = LifeboxWidgetExtension;
+			productReference = CFE4E71C252D9F2300F165AD /* LifeboxWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		CFE4E748252D9F3B00F165AD /* BilloWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFE4E7AB252D9F3B00F165AD /* Build configuration list for PBXNativeTarget "BilloWidgetExtension" */;
+			buildPhases = (
+				CFE4E749252D9F3B00F165AD /* [CP] Check Pods Manifest.lock */,
+				CFE4E74A252D9F3B00F165AD /* Sources */,
+				CFE4E7A4252D9F3B00F165AD /* Frameworks */,
+				CFE4E7A8252D9F3B00F165AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BilloWidgetExtension;
+			productName = LifeboxWidgetExtension;
+			productReference = CFE4E7B0252D9F3B00F165AD /* BilloWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -23538,6 +24017,18 @@
 						DevelopmentTeam = 729CGH4BJD;
 						ProvisioningStyle = Manual;
 					};
+					CFE4E5FA252D9EE200F165AD = {
+						DevelopmentTeam = 7A7F3AW7RP;
+						ProvisioningStyle = Manual;
+					};
+					CFE4E6B4252D9F2300F165AD = {
+						DevelopmentTeam = 7YZS5NTGYH;
+						ProvisioningStyle = Manual;
+					};
+					CFE4E748252D9F3B00F165AD = {
+						DevelopmentTeam = 729CGH4BJD;
+						ProvisioningStyle = Manual;
+					};
 				};
 			};
 			buildConfigurationList = 051E1DEE19CAC2F900FD1E03 /* Build configuration list for PBXProject "Depo" */;
@@ -23582,7 +24073,7 @@
 				8C8E92D123154636000242E9 /* LifeTech-LifeboxFileProvider */,
 				8C8E930F2315463F000242E9 /* LifeTech-LifeboxFileProviderUI */,
 				78B2D349204AA5F500D096DC /* LifeTech-NotificationService */,
-				B58936C024FA773E00E3FA9C /* LifeboxWidgetExtension */,
+				B58936C024FA773E00E3FA9C /* LifeTech-LifeboxWidgetExtension */,
 				CE79E4A41F695DA200C1F151 /* Depo_LifeTechUITests */,
 				8C0E8C611FDEBDFF00789C91 /* TC_Depo_LifeTech */,
 				CF8B636A23CBC9D70021B021 /* TC_Depo_LifeTech_Bundle */,
@@ -23590,18 +24081,21 @@
 				CE1BE921204831CD0074BDDC /* LifeboxFileProvider */,
 				CE1BE92F204831CE0074BDDC /* LifeboxFileProviderUI */,
 				984B1ECC23685D7B009ACCFF /* LifeboxNotificationService */,
+				CFE4E6B4252D9F2300F165AD /* LifeboxWidgetExtension */,
 				CEBA093F214BCC63007A0CE3 /* LifeboxUnitTests */,
 				0303A0132397D0D000907F42 /* LifeTech_Billo */,
 				0303A7FF2397D12100907F42 /* LifeTech_BilloShared */,
 				0303A8642397D14900907F42 /* LifeTech_BilloFileProvider */,
 				0303A8A42397D15100907F42 /* LifeTech_BilloProviderUI */,
 				0303A8D12397D15800907F42 /* LifeTech_BilloNotificationService */,
+				CFE4E5FA252D9EE200F165AD /* LifeTech_BilloWidgetExtension */,
 				CE7847EC22A685FB00662219 /* Billo */,
 				CF8B6B3023CBCA280021B021 /* Billo_Bundle */,
 				8C3BA2E122B3CC45006D901E /* BilloShared */,
 				8C3BA34022B3CC49006D901E /* BilloFileProvider */,
 				8C3BA37A22B3CC53006D901E /* BilloProviderUI */,
 				984B1EDD23685FC8009ACCFF /* BilloNotificationService */,
+				CFE4E748252D9F3B00F165AD /* BilloWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -25709,6 +26203,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CFE4E65A252D9EE200F165AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFE4E65B252D9EE200F165AD /* OurLocalizable.strings in Resources */,
+				CFE4E65C252D9EE200F165AD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFE4E714252D9F2300F165AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFE4E715252D9F2300F165AD /* OurLocalizable.strings in Resources */,
+				CFE4E716252D9F2300F165AD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFE4E7A8252D9F3B00F165AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFE4E7A9252D9F3B00F165AD /* OurLocalizable.strings in Resources */,
+				CFE4E7AA252D9F3B00F165AD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -25818,7 +26339,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LifeboxWidgetExtension-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-LifeTech-LifeboxWidgetExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -26918,6 +27439,72 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#\"${PODS_ROOT}/Fabric/run\" e0f104faa90cee1ef51529e825b7fed7cd31f0fe 6df4d95778ffa58e255e196a94a66ac9acbb1e189f86835e38260d9c6013cd00\n";
+		};
+		CFE4E5FB252D9EE200F165AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LifeTech_BilloWidgetExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CFE4E6B5252D9F2300F165AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LifeboxWidgetExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CFE4E749252D9F3B00F165AD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BilloWidgetExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 		D5C963CD9D99F1A9B08F55B3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -30637,7 +31224,6 @@
 				B558276C24FE25610039DD11 /* WidgetEntries.swift in Sources */,
 				B5358C6C25011DE10005FCAD /* WidgetPresentationService.swift in Sources */,
 				B5B5E5BC24FBE38200146750 /* CellsConstant.swift in Sources */,
-				B526A42B252F0EA800E1EC8C /* DebugLogsService.swift in Sources */,
 				B546EE2124FD169C00C1713C /* Dictionary.swift in Sources */,
 				B55827A524FE97E10039DD11 /* (null) in Sources */,
 				B58936EE24FA90AF00E3FA9C /* NumericConstants.swift in Sources */,
@@ -30648,6 +31234,7 @@
 				B58936F824FA932A00E3FA9C /* SessionServiceExtension.swift in Sources */,
 				B55827A724FE97E70039DD11 /* (null) in Sources */,
 				B5BF41152514AA6100B0EFEB /* Equatable+Contains.swift in Sources */,
+				B526A3EB252EE43C00E1EC8C /* AppResponsivenessService.swift in Sources */,
 				B546EE2524FD1C5D00C1713C /* DispatchQueue+Main.swift in Sources */,
 				B55827A424FE97DE0039DD11 /* (null) in Sources */,
 				98EC3F9B251E2F770029A9DF /* SharedEnums.swift in Sources */,
@@ -30663,6 +31250,7 @@
 				B58936F324FA924B00E3FA9C /* BiometricsManager.swift in Sources */,
 				B58936E524FA8D9700E3FA9C /* TokenStorage.swift in Sources */,
 				B55827A924FE97ED0039DD11 /* (null) in Sources */,
+				B526A53F252F138F00E1EC8C /* DebugLogsService.swift in Sources */,
 				B5358C86250141A10005FCAD /* SyncRecord.m in Sources */,
 				B5358C7A250141740005FCAD /* Contact.m in Sources */,
 				B55827AD24FE97FA0039DD11 /* (null) in Sources */,
@@ -36863,6 +37451,294 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CFE4E5FC252D9EE200F165AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFE4E5FD252D9EE200F165AD /* RestoreHelper.m in Sources */,
+				CFE4E5FE252D9EE200F165AD /* GZIP.m in Sources */,
+				CFE4E5FF252D9EE200F165AD /* PHAsset+FetchAll.swift in Sources */,
+				CFE4E600252D9EE200F165AD /* ContactUtil.m in Sources */,
+				CFE4E601252D9EE200F165AD /* Utils.m in Sources */,
+				CFE4E602252D9EE200F165AD /* UIImage+Size.swift in Sources */,
+				CFE4E603252D9EE200F165AD /* SyncSettings.m in Sources */,
+				CFE4E604252D9EE200F165AD /* RouteRequests.swift in Sources */,
+				CFE4E605252D9EE200F165AD /* PasscodeStorage.swift in Sources */,
+				CFE4E606252D9EE200F165AD /* WidgetEntries.swift in Sources */,
+				CFE4E607252D9EE200F165AD /* WidgetPresentationService.swift in Sources */,
+				CFE4E608252D9EE200F165AD /* CellsConstant.swift in Sources */,
+				CFE4E609252D9EE200F165AD /* Dictionary.swift in Sources */,
+				CFE4E60A252D9EE200F165AD /* (null) in Sources */,
+				CFE4E60B252D9EE200F165AD /* NumericConstants.swift in Sources */,
+				CFE4E60C252D9EE200F165AD /* Error+Network.swift in Sources */,
+				CFE4E60D252D9EE200F165AD /* ResponseResult.swift in Sources */,
+				CFE4E60E252D9EE200F165AD /* (null) in Sources */,
+				CFE4E60F252D9EE200F165AD /* WidgetServerService.swift in Sources */,
+				CFE4E610252D9EE200F165AD /* SessionServiceExtension.swift in Sources */,
+				CFE4E611252D9EE200F165AD /* (null) in Sources */,
+				CFE4E612252D9EE200F165AD /* Equatable+Contains.swift in Sources */,
+				CFE4E613252D9EE200F165AD /* DispatchQueue+Main.swift in Sources */,
+				CFE4E614252D9EE200F165AD /* (null) in Sources */,
+				CFE4E615252D9EE200F165AD /* SharedEnums.swift in Sources */,
+				CFE4E616252D9EE200F165AD /* (null) in Sources */,
+				CFE4E617252D9EE200F165AD /* (null) in Sources */,
+				CFE4E618252D9EE200F165AD /* (null) in Sources */,
+				CFE4E619252D9EE200F165AD /* SyncStatus.m in Sources */,
+				CFE4E61A252D9EE200F165AD /* SyncDB.m in Sources */,
+				CFE4E61B252D9EE200F165AD /* DepoAdapter.m in Sources */,
+				CFE4E61C252D9EE200F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */,
+				CFE4E61D252D9EE200F165AD /* (null) in Sources */,
+				CFE4E61E252D9EE200F165AD /* RequestsKey.swift in Sources */,
+				CFE4E61F252D9EE200F165AD /* BiometricsManager.swift in Sources */,
+				CFE4E620252D9EE200F165AD /* TokenStorage.swift in Sources */,
+				CFE4E621252D9EE200F165AD /* (null) in Sources */,
+				CFE4E622252D9EE200F165AD /* SyncRecord.m in Sources */,
+				CFE4E623252D9EE200F165AD /* Contact.m in Sources */,
+				CFE4E624252D9EE200F165AD /* (null) in Sources */,
+				CFE4E625252D9EE200F165AD /* BackupHelper.m in Sources */,
+				CFE4E626252D9EE200F165AD /* Alamofire+Validate.swift in Sources */,
+				CFE4E627252D9EE200F165AD /* WidgetPhotoLibraryObserver.swift in Sources */,
+				CFE4E628252D9EE200F165AD /* Constants.swift in Sources */,
+				CFE4E629252D9EE200F165AD /* (null) in Sources */,
+				CFE4E62A252D9EE200F165AD /* URL+Path.swift in Sources */,
+				CFEB1C1F252E9F220008A2A9 /* SharedConstants.swift in Sources */,
+				CFE4E62B252D9EE200F165AD /* SyncAdapter.m in Sources */,
+				CFE4E62C252D9EE200F165AD /* DeviceExtension.swift in Sources */,
+				CFE4E62D252D9EE200F165AD /* WidgetProvider.swift in Sources */,
+				CFE4E62E252D9EE200F165AD /* KeychainSwift+Optional.swift in Sources */,
+				CFE4E62F252D9EE200F165AD /* PushNotificationServiceConstants.swift in Sources */,
+				CFE4E630252D9EE200F165AD /* LifeboxWidget.swift in Sources */,
+				CFE4E631252D9EE200F165AD /* (null) in Sources */,
+				CFE4E632252D9EE200F165AD /* WidgetTokenService.swift in Sources */,
+				CFE4E633252D9EE200F165AD /* (null) in Sources */,
+				CFE4E634252D9EE200F165AD /* SharedGroupCoreDataStack.swift in Sources */,
+				CFE4E635252D9EE200F165AD /* SyncDBUtils.m in Sources */,
+				CFE4E636252D9EE200F165AD /* SyncLogger.m in Sources */,
+				CFE4E637252D9EE200F165AD /* (null) in Sources */,
+				CFE4E638252D9EE200F165AD /* String+Subscript.swift in Sources */,
+				CFE4E639252D9EE200F165AD /* (null) in Sources */,
+				CFE4E63A252D9EE200F165AD /* AnalyzeStatus.m in Sources */,
+				CFE4E63B252D9EE200F165AD /* (null) in Sources */,
+				CFE4E63C252D9EE200F165AD /* (null) in Sources */,
+				CFE4E63D252D9EE200F165AD /* ContactSyncSDK.m in Sources */,
+				CFE4E63F252D9EE200F165AD /* TokenKeychainStorage.swift in Sources */,
+				CFE4E640252D9EE200F165AD /* WidgetImageLoader.swift in Sources */,
+				CFE4E641252D9EE200F165AD /* AbstractHelper.m in Sources */,
+				CFE4E642252D9EE200F165AD /* BackupStats.m in Sources */,
+				CFE4E643252D9EE200F165AD /* NSManagedObjectContext+Extensions.swift in Sources */,
+				CFE4E644252D9EE200F165AD /* Device.swift in Sources */,
+				CFE4E645252D9EE200F165AD /* (null) in Sources */,
+				CFE4E646252D9EE200F165AD /* (null) in Sources */,
+				CFE4E647252D9EE200F165AD /* DispatchQueueLabels.swift in Sources */,
+				CFE4E648252D9EE200F165AD /* AuthorityType.swift in Sources */,
+				CFE4E649252D9EE200F165AD /* WidgetService.swift in Sources */,
+				CFE4E64A252D9EE200F165AD /* WidgetView.swift in Sources */,
+				CFE4E64B252D9EE200F165AD /* Mapping.swift in Sources */,
+				CFE4E64C252D9EE200F165AD /* (null) in Sources */,
+				CFE4E64D252D9EE200F165AD /* (null) in Sources */,
+				CFE4E64E252D9EE200F165AD /* CNContactUnified.m in Sources */,
+				CFE4E64F252D9EE200F165AD /* ButtonStyle.swift in Sources */,
+				CFE4E650252D9EE200F165AD /* PartialInfo.m in Sources */,
+				CFE4E651252D9EE200F165AD /* ContactAddress.m in Sources */,
+				CFE4E652252D9EE200F165AD /* PHPhotoLibrary+Extensions.swift in Sources */,
+				CFE4E653252D9EE200F165AD /* ObjectRequestResponse.swift in Sources */,
+				CFE4E654252D9EE200F165AD /* ContactDevice.m in Sources */,
+				CFE4E655252D9EE200F165AD /* Keys.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFE4E6B6252D9F2300F165AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFE4E6B7252D9F2300F165AD /* RestoreHelper.m in Sources */,
+				CFE4E6B8252D9F2300F165AD /* GZIP.m in Sources */,
+				CFE4E6B9252D9F2300F165AD /* PHAsset+FetchAll.swift in Sources */,
+				CFE4E6BA252D9F2300F165AD /* ContactUtil.m in Sources */,
+				CFE4E6BB252D9F2300F165AD /* Utils.m in Sources */,
+				CFE4E6BC252D9F2300F165AD /* UIImage+Size.swift in Sources */,
+				CFE4E6BD252D9F2300F165AD /* SyncSettings.m in Sources */,
+				CFE4E6BE252D9F2300F165AD /* RouteRequests.swift in Sources */,
+				CFE4E6BF252D9F2300F165AD /* PasscodeStorage.swift in Sources */,
+				CFE4E6C0252D9F2300F165AD /* WidgetEntries.swift in Sources */,
+				CFE4E6C1252D9F2300F165AD /* WidgetPresentationService.swift in Sources */,
+				CFE4E6C2252D9F2300F165AD /* CellsConstant.swift in Sources */,
+				CFE4E6C3252D9F2300F165AD /* Dictionary.swift in Sources */,
+				CFE4E6C4252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6C5252D9F2300F165AD /* NumericConstants.swift in Sources */,
+				CFE4E6C6252D9F2300F165AD /* Error+Network.swift in Sources */,
+				CFE4E6C7252D9F2300F165AD /* ResponseResult.swift in Sources */,
+				CFE4E6C8252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6C9252D9F2300F165AD /* WidgetServerService.swift in Sources */,
+				CFE4E6CA252D9F2300F165AD /* SessionServiceExtension.swift in Sources */,
+				CFE4E6CB252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6CC252D9F2300F165AD /* Equatable+Contains.swift in Sources */,
+				CFE4E6CD252D9F2300F165AD /* DispatchQueue+Main.swift in Sources */,
+				CFE4E6CE252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6CF252D9F2300F165AD /* SharedEnums.swift in Sources */,
+				CFE4E6D0252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6D1252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6D2252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6D3252D9F2300F165AD /* SyncStatus.m in Sources */,
+				CFE4E6D4252D9F2300F165AD /* SyncDB.m in Sources */,
+				CFE4E6D5252D9F2300F165AD /* DepoAdapter.m in Sources */,
+				CFE4E6D6252D9F2300F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */,
+				CFE4E6D7252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6D8252D9F2300F165AD /* RequestsKey.swift in Sources */,
+				CFE4E6D9252D9F2300F165AD /* BiometricsManager.swift in Sources */,
+				CFE4E6DA252D9F2300F165AD /* TokenStorage.swift in Sources */,
+				CFE4E6DB252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6DC252D9F2300F165AD /* SyncRecord.m in Sources */,
+				CFE4E6DD252D9F2300F165AD /* Contact.m in Sources */,
+				CFE4E6DE252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6DF252D9F2300F165AD /* BackupHelper.m in Sources */,
+				CFE4E6E0252D9F2300F165AD /* Alamofire+Validate.swift in Sources */,
+				CFE4E6E1252D9F2300F165AD /* WidgetPhotoLibraryObserver.swift in Sources */,
+				CFE4E6E2252D9F2300F165AD /* Constants.swift in Sources */,
+				CFE4E6E3252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6E4252D9F2300F165AD /* URL+Path.swift in Sources */,
+				CFE4E6E5252D9F2300F165AD /* SyncAdapter.m in Sources */,
+				CFE4E6E6252D9F2300F165AD /* DeviceExtension.swift in Sources */,
+				CFE4E6E7252D9F2300F165AD /* WidgetProvider.swift in Sources */,
+				CFE4E6E8252D9F2300F165AD /* KeychainSwift+Optional.swift in Sources */,
+				CFE4E6E9252D9F2300F165AD /* PushNotificationServiceConstants.swift in Sources */,
+				CFE4E6EA252D9F2300F165AD /* LifeboxWidget.swift in Sources */,
+				CFE4E6EB252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6EC252D9F2300F165AD /* WidgetTokenService.swift in Sources */,
+				CFE4E6ED252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6EE252D9F2300F165AD /* SharedGroupCoreDataStack.swift in Sources */,
+				CFE4E6EF252D9F2300F165AD /* SyncDBUtils.m in Sources */,
+				CFE4E6F0252D9F2300F165AD /* SyncLogger.m in Sources */,
+				CFE4E6F1252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6F2252D9F2300F165AD /* String+Subscript.swift in Sources */,
+				CFE4E6F3252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6F4252D9F2300F165AD /* AnalyzeStatus.m in Sources */,
+				CFE4E6F5252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6F6252D9F2300F165AD /* (null) in Sources */,
+				CFE4E6F7252D9F2300F165AD /* ContactSyncSDK.m in Sources */,
+				CFE4E6F8252D9F2300F165AD /* SharedConstants.swift in Sources */,
+				CFE4E6F9252D9F2300F165AD /* TokenKeychainStorage.swift in Sources */,
+				CFE4E6FA252D9F2300F165AD /* WidgetImageLoader.swift in Sources */,
+				CFE4E6FB252D9F2300F165AD /* AbstractHelper.m in Sources */,
+				CFE4E6FC252D9F2300F165AD /* BackupStats.m in Sources */,
+				CFE4E6FD252D9F2300F165AD /* NSManagedObjectContext+Extensions.swift in Sources */,
+				CFE4E6FE252D9F2300F165AD /* Device.swift in Sources */,
+				CFE4E6FF252D9F2300F165AD /* (null) in Sources */,
+				CFE4E700252D9F2300F165AD /* (null) in Sources */,
+				CFE4E701252D9F2300F165AD /* DispatchQueueLabels.swift in Sources */,
+				CFE4E702252D9F2300F165AD /* AuthorityType.swift in Sources */,
+				CFE4E703252D9F2300F165AD /* WidgetService.swift in Sources */,
+				CFE4E704252D9F2300F165AD /* WidgetView.swift in Sources */,
+				CFE4E705252D9F2300F165AD /* Mapping.swift in Sources */,
+				CFE4E706252D9F2300F165AD /* (null) in Sources */,
+				CFE4E707252D9F2300F165AD /* (null) in Sources */,
+				CFE4E708252D9F2300F165AD /* CNContactUnified.m in Sources */,
+				CFE4E709252D9F2300F165AD /* ButtonStyle.swift in Sources */,
+				CFE4E70A252D9F2300F165AD /* PartialInfo.m in Sources */,
+				CFE4E70B252D9F2300F165AD /* ContactAddress.m in Sources */,
+				CFE4E70C252D9F2300F165AD /* PHPhotoLibrary+Extensions.swift in Sources */,
+				CFE4E70D252D9F2300F165AD /* ObjectRequestResponse.swift in Sources */,
+				CFE4E70E252D9F2300F165AD /* ContactDevice.m in Sources */,
+				CFE4E70F252D9F2300F165AD /* Keys.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFE4E74A252D9F3B00F165AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFE4E74B252D9F3B00F165AD /* RestoreHelper.m in Sources */,
+				CFE4E74C252D9F3B00F165AD /* GZIP.m in Sources */,
+				CFE4E74D252D9F3B00F165AD /* PHAsset+FetchAll.swift in Sources */,
+				CFE4E74E252D9F3B00F165AD /* ContactUtil.m in Sources */,
+				CFE4E74F252D9F3B00F165AD /* Utils.m in Sources */,
+				CFE4E750252D9F3B00F165AD /* UIImage+Size.swift in Sources */,
+				CFE4E751252D9F3B00F165AD /* SyncSettings.m in Sources */,
+				CFE4E752252D9F3B00F165AD /* RouteRequests.swift in Sources */,
+				CFE4E753252D9F3B00F165AD /* PasscodeStorage.swift in Sources */,
+				CFE4E754252D9F3B00F165AD /* WidgetEntries.swift in Sources */,
+				CFE4E755252D9F3B00F165AD /* WidgetPresentationService.swift in Sources */,
+				CFE4E756252D9F3B00F165AD /* CellsConstant.swift in Sources */,
+				CFE4E757252D9F3B00F165AD /* Dictionary.swift in Sources */,
+				CFE4E758252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E759252D9F3B00F165AD /* NumericConstants.swift in Sources */,
+				CFE4E75A252D9F3B00F165AD /* Error+Network.swift in Sources */,
+				CFE4E75B252D9F3B00F165AD /* ResponseResult.swift in Sources */,
+				CFE4E75C252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E75D252D9F3B00F165AD /* WidgetServerService.swift in Sources */,
+				CFE4E75E252D9F3B00F165AD /* SessionServiceExtension.swift in Sources */,
+				CFE4E75F252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E760252D9F3B00F165AD /* Equatable+Contains.swift in Sources */,
+				CFE4E761252D9F3B00F165AD /* DispatchQueue+Main.swift in Sources */,
+				CFE4E762252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E763252D9F3B00F165AD /* SharedEnums.swift in Sources */,
+				CFE4E764252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E765252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E766252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E767252D9F3B00F165AD /* SyncStatus.m in Sources */,
+				CFE4E768252D9F3B00F165AD /* SyncDB.m in Sources */,
+				CFE4E769252D9F3B00F165AD /* DepoAdapter.m in Sources */,
+				CFE4E76A252D9F3B00F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */,
+				CFE4E76B252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E76C252D9F3B00F165AD /* RequestsKey.swift in Sources */,
+				CFE4E76D252D9F3B00F165AD /* BiometricsManager.swift in Sources */,
+				CFE4E76E252D9F3B00F165AD /* TokenStorage.swift in Sources */,
+				CFE4E76F252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E770252D9F3B00F165AD /* SyncRecord.m in Sources */,
+				CFE4E771252D9F3B00F165AD /* Contact.m in Sources */,
+				CFE4E772252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E773252D9F3B00F165AD /* BackupHelper.m in Sources */,
+				CFE4E774252D9F3B00F165AD /* Alamofire+Validate.swift in Sources */,
+				CFE4E775252D9F3B00F165AD /* WidgetPhotoLibraryObserver.swift in Sources */,
+				CFE4E776252D9F3B00F165AD /* Constants.swift in Sources */,
+				CFE4E777252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E778252D9F3B00F165AD /* URL+Path.swift in Sources */,
+				CFEB1C37252E9F250008A2A9 /* SharedConstants.swift in Sources */,
+				CFE4E779252D9F3B00F165AD /* SyncAdapter.m in Sources */,
+				CFE4E77A252D9F3B00F165AD /* DeviceExtension.swift in Sources */,
+				CFE4E77B252D9F3B00F165AD /* WidgetProvider.swift in Sources */,
+				CFE4E77C252D9F3B00F165AD /* KeychainSwift+Optional.swift in Sources */,
+				CFE4E77D252D9F3B00F165AD /* PushNotificationServiceConstants.swift in Sources */,
+				CFE4E77E252D9F3B00F165AD /* LifeboxWidget.swift in Sources */,
+				CFE4E77F252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E780252D9F3B00F165AD /* WidgetTokenService.swift in Sources */,
+				CFE4E781252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E782252D9F3B00F165AD /* SharedGroupCoreDataStack.swift in Sources */,
+				CFE4E783252D9F3B00F165AD /* SyncDBUtils.m in Sources */,
+				CFE4E784252D9F3B00F165AD /* SyncLogger.m in Sources */,
+				CFE4E785252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E786252D9F3B00F165AD /* String+Subscript.swift in Sources */,
+				CFE4E787252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E788252D9F3B00F165AD /* AnalyzeStatus.m in Sources */,
+				CFE4E789252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E78A252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E78B252D9F3B00F165AD /* ContactSyncSDK.m in Sources */,
+				CFE4E78D252D9F3B00F165AD /* TokenKeychainStorage.swift in Sources */,
+				CFE4E78E252D9F3B00F165AD /* WidgetImageLoader.swift in Sources */,
+				CFE4E78F252D9F3B00F165AD /* AbstractHelper.m in Sources */,
+				CFE4E790252D9F3B00F165AD /* BackupStats.m in Sources */,
+				CFE4E791252D9F3B00F165AD /* NSManagedObjectContext+Extensions.swift in Sources */,
+				CFE4E792252D9F3B00F165AD /* Device.swift in Sources */,
+				CFE4E793252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E794252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E795252D9F3B00F165AD /* DispatchQueueLabels.swift in Sources */,
+				CFE4E796252D9F3B00F165AD /* AuthorityType.swift in Sources */,
+				CFE4E797252D9F3B00F165AD /* WidgetService.swift in Sources */,
+				CFE4E798252D9F3B00F165AD /* WidgetView.swift in Sources */,
+				CFE4E799252D9F3B00F165AD /* Mapping.swift in Sources */,
+				CFE4E79A252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E79B252D9F3B00F165AD /* (null) in Sources */,
+				CFE4E79C252D9F3B00F165AD /* CNContactUnified.m in Sources */,
+				CFE4E79D252D9F3B00F165AD /* ButtonStyle.swift in Sources */,
+				CFE4E79E252D9F3B00F165AD /* PartialInfo.m in Sources */,
+				CFE4E79F252D9F3B00F165AD /* ContactAddress.m in Sources */,
+				CFE4E7A0252D9F3B00F165AD /* PHPhotoLibrary+Extensions.swift in Sources */,
+				CFE4E7A1252D9F3B00F165AD /* ObjectRequestResponse.swift in Sources */,
+				CFE4E7A2252D9F3B00F165AD /* ContactDevice.m in Sources */,
+				CFE4E7A3252D9F3B00F165AD /* Keys.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -36963,18 +37839,8 @@
 		};
 		B58936CD24FA773F00E3FA9C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B58936C024FA773E00E3FA9C /* LifeboxWidgetExtension */;
+			target = B58936C024FA773E00E3FA9C /* LifeTech-LifeboxWidgetExtension */;
 			targetProxy = B58936CC24FA773F00E3FA9C /* PBXContainerItemProxy */;
-		};
-		B59B650F250764F4003F6BD6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B58936C024FA773E00E3FA9C /* LifeboxWidgetExtension */;
-			targetProxy = B59B650E250764F4003F6BD6 /* PBXContainerItemProxy */;
-		};
-		B59B651125076512003F6BD6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B58936C024FA773E00E3FA9C /* LifeboxWidgetExtension */;
-			targetProxy = B59B651025076512003F6BD6 /* PBXContainerItemProxy */;
 		};
 		CE79E4AB1F695DA200C1F151 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -37040,6 +37906,31 @@
 			isa = PBXTargetDependency;
 			target = 8C3BA2E122B3CC45006D901E /* BilloShared */;
 			targetProxy = CF8B6B3A23CBCA280021B021 /* PBXContainerItemProxy */;
+		};
+		CFEB1B54252E8DA40008A2A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFE4E6B4252D9F2300F165AD /* LifeboxWidgetExtension */;
+			targetProxy = CFEB1B53252E8DA40008A2A9 /* PBXContainerItemProxy */;
+		};
+		CFEB1B6D252E8EDA0008A2A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFE4E6B4252D9F2300F165AD /* LifeboxWidgetExtension */;
+			targetProxy = CFEB1B6C252E8EDA0008A2A9 /* PBXContainerItemProxy */;
+		};
+		CFEB1B86252E8FC10008A2A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFE4E5FA252D9EE200F165AD /* LifeTech_BilloWidgetExtension */;
+			targetProxy = CFEB1B85252E8FC10008A2A9 /* PBXContainerItemProxy */;
+		};
+		CFEB1B89252E904E0008A2A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFE4E748252D9F3B00F165AD /* BilloWidgetExtension */;
+			targetProxy = CFEB1B88252E904E0008A2A9 /* PBXContainerItemProxy */;
+		};
+		CFEB1B8C252E906F0008A2A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFE4E748252D9F3B00F165AD /* BilloWidgetExtension */;
+			targetProxy = CFEB1B8B252E906F0008A2A9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -39841,7 +40732,7 @@
 		};
 		B58936CF24FA773F00E3FA9C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A60AEA84595CC4B502AAD879 /* Pods-LifeboxWidgetExtension.debug.xcconfig */;
+			baseConfigurationReference = 5B8F4E26FB1B4539F4159A4C /* Pods-LifeTech-LifeboxWidgetExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -39883,7 +40774,7 @@
 		};
 		B58936D024FA773F00E3FA9C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 121969E5CD233D35E592295C /* Pods-LifeboxWidgetExtension.release.xcconfig */;
+			baseConfigurationReference = 9615D3F3B78DCEC6ED514031 /* Pods-LifeTech-LifeboxWidgetExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -39924,7 +40815,7 @@
 		};
 		B58936D124FA773F00E3FA9C /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A24D895C0CE11D673F66F8D2 /* Pods-LifeboxWidgetExtension.appstore.xcconfig */;
+			baseConfigurationReference = BB94013AD533A94E1B8A2473 /* Pods-LifeTech-LifeboxWidgetExtension.appstore.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -39964,7 +40855,7 @@
 		};
 		B58936D224FA773F00E3FA9C /* Enterprise */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 05D84D2C9D0CD08E4269A438 /* Pods-LifeboxWidgetExtension.enterprise.xcconfig */;
+			baseConfigurationReference = 94CD6148B2870929E217B783 /* Pods-LifeTech-LifeboxWidgetExtension.enterprise.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -40360,7 +41251,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.2;
+				CURRENT_PROJECT_VERSION = d2.5.3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -40424,7 +41315,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.2;
+				CURRENT_PROJECT_VERSION = d2.5.3;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -40484,7 +41375,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.2;
+				CURRENT_PROJECT_VERSION = d2.5.3;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -40545,7 +41436,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.2;
+				CURRENT_PROJECT_VERSION = d2.5.3;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -41665,6 +42556,499 @@
 			};
 			name = Enterprise;
 		};
+		CFE4E65E252D9EE200F165AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 94AA6F4D3F67769A4F78E801 /* Pods-LifeTech_BilloWidgetExtension.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = d2.1.8;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxWidget/Billo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "lifebox widget dev";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CFE4E65F252D9EE200F165AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8A0DEE831391FE2E20870F4 /* Pods-LifeTech_BilloWidgetExtension.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = d2.1.8;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxWidget/Billo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Billo widget AdHoc";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CFE4E660252D9EE200F165AD /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A90942C9084FD033FF2532E /* Pods-LifeTech_BilloWidgetExtension.appstore.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = d2.1.8;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxWidget/Billo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = AppStore;
+		};
+		CFE4E661252D9EE200F165AD /* Enterprise */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5312E3523DF98AF4963A6E1A /* Pods-LifeTech_BilloWidgetExtension.enterprise.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = d2.1.8;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxWidget/Billo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Enterprise;
+		};
+		CFE4E718252D9F2300F165AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A60AEA84595CC4B502AAD879 /* Pods-LifeboxWidgetExtension.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LifeboxWidget/LifeboxWidgetExtensionDebug.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = d2.1.8;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "LifeboxWidget/LifeboxTC/LifeTech-LifeboxWidgetExtension copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "lifebox widget dev";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CFE4E719252D9F2300F165AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 121969E5CD233D35E592295C /* Pods-LifeboxWidgetExtension.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = LifeboxWidget/LifeboxWidgetExtensionRelease.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = d2.1.8;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = LifeboxWidget/LifeboxTC/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "lifebox widget adhoc";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CFE4E71A252D9F2300F165AD /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A24D895C0CE11D673F66F8D2 /* Pods-LifeboxWidgetExtension.appstore.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/LifeboxTC/autosync-widget-appstore.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = d2.1.8;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "LifeboxWidget/LifeboxTC/Info-AppStore.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "akillidepo today extension";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = AppStore;
+		};
+		CFE4E71B252D9F2300F165AD /* Enterprise */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05D84D2C9D0CD08E4269A438 /* Pods-LifeboxWidgetExtension.enterprise.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/LifeboxTC/autosync-widget-enterprise.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = d2.1.8;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "LifeboxWidget/LifeboxTC/Info-Enterprise.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.todayextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Akilli Depo New Today Extension in House";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Enterprise;
+		};
+		CFE4E7AC252D9F3B00F165AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA6DD3554EA083439FFDC8D0 /* Pods-BilloWidgetExtension.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget-appstore.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = d2.1.8;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "LifeboxWidget/Billo/Info-AppStore.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.todayext;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Billo Today Ext - Dev";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CFE4E7AD252D9F3B00F165AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2BCAFA3ABDF7DFD163BC9237 /* Pods-BilloWidgetExtension.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget-appstore.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = d2.1.8;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 729CGH4BJD;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "LifeboxWidget/Billo/Info-AppStore.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.todayext;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "lifebox widget adhoc";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CFE4E7AE252D9F3B00F165AD /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A66CF3676997017CA1E4D81 /* Pods-BilloWidgetExtension.appstore.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget-appstore.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = d2.1.8;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 729CGH4BJD;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "LifeboxWidget/Billo/Info-AppStore.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.todayext;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "billo today extension";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = AppStore;
+		};
+		CFE4E7AF252D9F3B00F165AD /* Enterprise */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 98D1BBF957BB47B367181C22 /* Pods-BilloWidgetExtension.enterprise.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget-enterprise.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = d2.1.8;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = LA4DZFY7SY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "LifeboxWidget/Billo/Info-Enterprise.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.todayextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Today Extension";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Enterprise;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -41844,7 +43228,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B58936D624FA773F00E3FA9C /* Build configuration list for PBXNativeTarget "LifeboxWidgetExtension" */ = {
+		B58936D624FA773F00E3FA9C /* Build configuration list for PBXNativeTarget "LifeTech-LifeboxWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B58936CF24FA773F00E3FA9C /* Debug */,
@@ -41950,6 +43334,39 @@
 				CF8B72F523CBCA280021B021 /* Release */,
 				CF8B72F623CBCA280021B021 /* AppStore */,
 				CF8B72F723CBCA280021B021 /* Enterprise */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFE4E65D252D9EE200F165AD /* Build configuration list for PBXNativeTarget "LifeTech_BilloWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFE4E65E252D9EE200F165AD /* Debug */,
+				CFE4E65F252D9EE200F165AD /* Release */,
+				CFE4E660252D9EE200F165AD /* AppStore */,
+				CFE4E661252D9EE200F165AD /* Enterprise */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFE4E717252D9F2300F165AD /* Build configuration list for PBXNativeTarget "LifeboxWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFE4E718252D9F2300F165AD /* Debug */,
+				CFE4E719252D9F2300F165AD /* Release */,
+				CFE4E71A252D9F2300F165AD /* AppStore */,
+				CFE4E71B252D9F2300F165AD /* Enterprise */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFE4E7AB252D9F3B00F165AD /* Build configuration list for PBXNativeTarget "BilloWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFE4E7AC252D9F3B00F165AD /* Debug */,
+				CFE4E7AD252D9F3B00F165AD /* Release */,
+				CFE4E7AE252D9F3B00F165AD /* AppStore */,
+				CFE4E7AF252D9F3B00F165AD /* Enterprise */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

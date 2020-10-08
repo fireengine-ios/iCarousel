@@ -43,4 +43,18 @@ struct SharedConstants {
     static let mainAppSchemeResponsivenessDateKey = "mainAppSchemeResponsivenessDateKey"
     static let applicationQueriesSchemeShort = "billo"
     static let applicationQueriesScheme = applicationQueriesSchemeShort + "://"
+    
+    static let sharedGroupDBContainerName = "SharedGroupDBContainer"
+    static let sharedGroupDBName = "SharedGroupDB"
+    
+    static let lastWidgetEntryKey = "lastWidgetEntry"
+    static let lastWidgetEntryTypeKey = "lastWidgetEntryType"
+    
+    static let isPreparationFinished = "isPreparationFinished"
+    static let entryChangedKey = "entryChangedKey"
+    
+    static let autoSyncEnabledKey = "autoSyncEnabledKey"
+    static let currentSyncFileNameKey = "currentSyncFileName"
+    
+    static let wormholeNewWidgetStateIdentifier = "wormholeNewWidgetStateIdentifier"
 }
