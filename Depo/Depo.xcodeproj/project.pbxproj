@@ -11916,6 +11916,11 @@
 		CFE4E7A7252D9F3B00F165AD /* Pods_LifeboxWidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDBBE02BF533F9298BBCCD00 /* Pods_LifeboxWidgetExtension.framework */; };
 		CFE4E7A9252D9F3B00F165AD /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
 		CFE4E7AA252D9F3B00F165AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B58936C924FA773F00E3FA9C /* Assets.xcassets */; };
+		CFEB1B55252E8DB70008A2A9 /* LifeboxWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFE4E71C252D9F2300F165AD /* LifeboxWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFEB1B6E252E8EFA0008A2A9 /* LifeboxWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFE4E71C252D9F2300F165AD /* LifeboxWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFEB1B87252E8FEA0008A2A9 /* LifeTech_BilloWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFE4E662252D9EE200F165AD /* LifeTech_BilloWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFEB1B8A252E905D0008A2A9 /* BilloWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFE4E7B0252D9F3B00F165AD /* BilloWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFEB1B8D252E90810008A2A9 /* BilloWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFE4E7B0252D9F3B00F165AD /* BilloWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */; };
 		D42ED46420C9D9E600761645 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */; };
 		D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E01F3F18FA00EFDC6D /* UsageInfoConfigurator.swift */; };
@@ -12182,20 +12187,6 @@
 			remoteGlobalIDString = B58936C024FA773E00E3FA9C;
 			remoteInfo = LifeboxWidgetExtension;
 		};
-		B59B650E250764F4003F6BD6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B58936C024FA773E00E3FA9C;
-			remoteInfo = LifeboxWidgetExtension;
-		};
-		B59B651025076512003F6BD6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B58936C024FA773E00E3FA9C;
-			remoteInfo = LifeboxWidgetExtension;
-		};
 		CE79E4AA1F695DA200C1F151 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
@@ -12287,6 +12278,41 @@
 			remoteGlobalIDString = 8C3BA2E122B3CC45006D901E;
 			remoteInfo = LifeDriveShared;
 		};
+		CFEB1B53252E8DA40008A2A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFE4E6B4252D9F2300F165AD;
+			remoteInfo = LifeboxWidgetExtension;
+		};
+		CFEB1B6C252E8EDA0008A2A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFE4E6B4252D9F2300F165AD;
+			remoteInfo = LifeboxWidgetExtension;
+		};
+		CFEB1B85252E8FC10008A2A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFE4E5FA252D9EE200F165AD;
+			remoteInfo = LifeTech_BilloWidgetExtension;
+		};
+		CFEB1B88252E904E0008A2A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFE4E748252D9F3B00F165AD;
+			remoteInfo = BilloWidgetExtension;
+		};
+		CFEB1B8B252E906F0008A2A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 051E1DEB19CAC2F900FD1E03 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFE4E748252D9F3B00F165AD;
+			remoteInfo = BilloWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -12296,6 +12322,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				CFEB1B87252E8FEA0008A2A9 /* LifeTech_BilloWidgetExtension.appex in Embed App Extensions */,
 				0303A8EA2397F0B000907F42 /* LifeTech_BilloShared.appex in Embed App Extensions */,
 				0303A8EB2397F0B000907F42 /* LifeTech_BilloFileProvider.appex in Embed App Extensions */,
 				0303A8EC2397F0B000907F42 /* LifeTech_BilloProviderUI.appex in Embed App Extensions */,
@@ -12310,6 +12337,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				CFEB1B55252E8DB70008A2A9 /* LifeboxWidgetExtension.appex in Embed App Extensions */,
 				0302B73B2370234C0005D78F /* LifeboxNotificationService.appex in Embed App Extensions */,
 				7A3E0C0B206273CE00F79A1C /* LifeboxFileProviderUI.appex in Embed App Extensions */,
 				7A3E0C05206273CE00F79A1C /* LifeboxShared.appex in Embed App Extensions */,
@@ -12405,6 +12433,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				CFEB1B8A252E905D0008A2A9 /* BilloWidgetExtension.appex in Embed App Extensions */,
 				0308BB90239001130066F409 /* BilloNotificationService.appex in Embed App Extensions */,
 				8C3BA3AD22B3CE24006D901E /* BilloShared.appex in Embed App Extensions */,
 				8C3BA3AE22B3CE24006D901E /* BilloFileProvider.appex in Embed App Extensions */,
@@ -12419,6 +12448,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				CFEB1B6E252E8EFA0008A2A9 /* LifeboxWidgetExtension.appex in Embed App Extensions */,
 				CF8B6B2323CBC9D70021B021 /* LifeboxNotificationService.appex in Embed App Extensions */,
 				CF8B6B2523CBC9D70021B021 /* LifeboxFileProviderUI.appex in Embed App Extensions */,
 				CF8B6B2623CBC9D70021B021 /* LifeboxShared.appex in Embed App Extensions */,
@@ -12433,6 +12463,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				CFEB1B8D252E90810008A2A9 /* BilloWidgetExtension.appex in Embed App Extensions */,
 				CF8B72EE23CBCA280021B021 /* BilloNotificationService.appex in Embed App Extensions */,
 				CF8B72EF23CBCA280021B021 /* BilloShared.appex in Embed App Extensions */,
 				CF8B72F023CBCA280021B021 /* BilloFileProvider.appex in Embed App Extensions */,
@@ -23184,6 +23215,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CFEB1B86252E8FC10008A2A9 /* PBXTargetDependency */,
 				CF0F45DC24EB3C760081BD8B /* PBXTargetDependency */,
 				0303A8E22397F0A600907F42 /* PBXTargetDependency */,
 				0303A8E42397F0A600907F42 /* PBXTargetDependency */,
@@ -23304,7 +23336,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				B59B650F250764F4003F6BD6 /* PBXTargetDependency */,
+				CFEB1B54252E8DA40008A2A9 /* PBXTargetDependency */,
 				B549B6B124CF07B200D39C44 /* PBXTargetDependency */,
 				984B1EDB23685DEF009ACCFF /* PBXTargetDependency */,
 				7A3E0C07206273CE00F79A1C /* PBXTargetDependency */,
@@ -23580,6 +23612,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CFEB1B89252E904E0008A2A9 /* PBXTargetDependency */,
 				CF0F45E124EB3C8E0081BD8B /* PBXTargetDependency */,
 				0308BB8F239000FA0066F409 /* PBXTargetDependency */,
 				8C3BA3AB22B3CDC4006D901E /* PBXTargetDependency */,
@@ -23649,7 +23682,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				B59B651125076512003F6BD6 /* PBXTargetDependency */,
+				CFEB1B6D252E8EDA0008A2A9 /* PBXTargetDependency */,
 				B549B6B624CF07D700D39C44 /* PBXTargetDependency */,
 				CF8B636B23CBC9D70021B021 /* PBXTargetDependency */,
 				CF8B636F23CBC9D70021B021 /* PBXTargetDependency */,
@@ -23678,6 +23711,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CFEB1B8C252E906F0008A2A9 /* PBXTargetDependency */,
 				CF0F45E324EB3CB00081BD8B /* PBXTargetDependency */,
 				CF8B6B3323CBCA280021B021 /* PBXTargetDependency */,
 				CF8B6B3523CBCA280021B021 /* PBXTargetDependency */,
@@ -23962,11 +23996,11 @@
 						ProvisioningStyle = Manual;
 					};
 					CFE4E6B4252D9F2300F165AD = {
-						DevelopmentTeam = 7A7F3AW7RP;
+						DevelopmentTeam = 7YZS5NTGYH;
 						ProvisioningStyle = Manual;
 					};
 					CFE4E748252D9F3B00F165AD = {
-						DevelopmentTeam = 7A7F3AW7RP;
+						DevelopmentTeam = 729CGH4BJD;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -37790,16 +37824,6 @@
 			target = B58936C024FA773E00E3FA9C /* LifeTech-LifeboxWidgetExtension */;
 			targetProxy = B58936CC24FA773F00E3FA9C /* PBXContainerItemProxy */;
 		};
-		B59B650F250764F4003F6BD6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B58936C024FA773E00E3FA9C /* LifeTech-LifeboxWidgetExtension */;
-			targetProxy = B59B650E250764F4003F6BD6 /* PBXContainerItemProxy */;
-		};
-		B59B651125076512003F6BD6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B58936C024FA773E00E3FA9C /* LifeTech-LifeboxWidgetExtension */;
-			targetProxy = B59B651025076512003F6BD6 /* PBXContainerItemProxy */;
-		};
 		CE79E4AB1F695DA200C1F151 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CE51AAF51EF90853005DCEE0 /* Depo_LifeTech */;
@@ -37864,6 +37888,31 @@
 			isa = PBXTargetDependency;
 			target = 8C3BA2E122B3CC45006D901E /* BilloShared */;
 			targetProxy = CF8B6B3A23CBCA280021B021 /* PBXContainerItemProxy */;
+		};
+		CFEB1B54252E8DA40008A2A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFE4E6B4252D9F2300F165AD /* LifeboxWidgetExtension */;
+			targetProxy = CFEB1B53252E8DA40008A2A9 /* PBXContainerItemProxy */;
+		};
+		CFEB1B6D252E8EDA0008A2A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFE4E6B4252D9F2300F165AD /* LifeboxWidgetExtension */;
+			targetProxy = CFEB1B6C252E8EDA0008A2A9 /* PBXContainerItemProxy */;
+		};
+		CFEB1B86252E8FC10008A2A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFE4E5FA252D9EE200F165AD /* LifeTech_BilloWidgetExtension */;
+			targetProxy = CFEB1B85252E8FC10008A2A9 /* PBXContainerItemProxy */;
+		};
+		CFEB1B89252E904E0008A2A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFE4E748252D9F3B00F165AD /* BilloWidgetExtension */;
+			targetProxy = CFEB1B88252E904E0008A2A9 /* PBXContainerItemProxy */;
+		};
+		CFEB1B8C252E906F0008A2A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFE4E748252D9F3B00F165AD /* BilloWidgetExtension */;
+			targetProxy = CFEB1B8B252E906F0008A2A9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -42504,7 +42553,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxWidget/LifeboxWidgetExtensionDebug.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
@@ -42513,13 +42562,13 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxWidgetExtension copy-Info.plist";
+				INFOPLIST_FILE = LifeboxWidget/Billo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "lifebox widget dev";
 				SKIP_INSTALL = YES;
@@ -42546,7 +42595,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxWidget/LifeboxWidgetExtensionRelease.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
@@ -42556,15 +42605,15 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxWidgetExtension copy-Info.plist";
+				INFOPLIST_FILE = LifeboxWidget/Billo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox widget adhoc";
+				PROVISIONING_PROFILE_SPECIFIER = "Billo widget AdHoc";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -42587,23 +42636,23 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxWidget/LifeboxWidgetExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = d2.1.8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxWidgetExtension copy-Info.plist";
+				INFOPLIST_FILE = LifeboxWidget/Billo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
@@ -42627,23 +42676,23 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxWidget/LifeboxWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = d2.1.8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxWidgetExtension copy-Info.plist";
+				INFOPLIST_FILE = LifeboxWidget/Billo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
@@ -42674,15 +42723,15 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = d2.1.8;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeTech-LifeboxWidgetExtension copy-Info.plist";
+				INFOPLIST_FILE = "LifeboxWidget/LifeboxTC/LifeTech-LifeboxWidgetExtension copy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "lifebox widget dev";
 				SKIP_INSTALL = YES;
@@ -42719,7 +42768,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeTech-LifeboxWidgetExtension copy-Info.plist";
+				INFOPLIST_FILE = LifeboxWidget/LifeboxTC/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
@@ -42750,17 +42799,17 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxWidget/LifeboxWidgetExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/LifeboxTC/autosync-widget-appstore.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = d2.1.8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeTech-LifeboxWidgetExtension copy-Info.plist";
+				INFOPLIST_FILE = "LifeboxWidget/LifeboxTC/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
@@ -42768,7 +42817,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "akillidepo today extension";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -42791,24 +42840,25 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxWidget/LifeboxWidgetExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/LifeboxTC/autosync-widget-enterprise.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = d2.1.8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeTech-LifeboxWidgetExtension copy-Info.plist";
+				INFOPLIST_FILE = "LifeboxWidget/LifeboxTC/Info-Enterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillideponew.ent.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Akilli Depo New Today Extension in House";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -42831,24 +42881,24 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxWidget/LifeboxWidgetExtensionDebug.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget-appstore.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = d2.1.8;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeTech_BilloWidgetExtension copy copy-Info.plist";
+				INFOPLIST_FILE = "LifeboxWidget/Billo/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.todayext;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox widget dev";
+				PROVISIONING_PROFILE_SPECIFIER = "Billo Today Ext - Dev";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
@@ -42873,23 +42923,23 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxWidget/LifeboxWidgetExtensionRelease.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = d2.1.8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeTech_BilloWidgetExtension copy copy-Info.plist";
+				INFOPLIST_FILE = "LifeboxWidget/Billo/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.todayext;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "lifebox widget adhoc";
 				SKIP_INSTALL = YES;
@@ -42914,24 +42964,25 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxWidget/LifeboxWidgetExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget-appstore.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = d2.1.8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = 729CGH4BJD;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeTech_BilloWidgetExtension copy copy-Info.plist";
+				INFOPLIST_FILE = "LifeboxWidget/Billo/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lcv.billo.todayext;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "billo today extension";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -42954,24 +43005,25 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxWidget/LifeboxWidgetExtension.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/Billo/autosync-widget-enterprise.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = d2.1.8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 7A7F3AW7RP;
+				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeTech_BilloWidgetExtension copy copy-Info.plist";
+				INFOPLIST_FILE = "LifeboxWidget/Billo/Info-Enterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.lifedrive.ent.todayextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Today Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
