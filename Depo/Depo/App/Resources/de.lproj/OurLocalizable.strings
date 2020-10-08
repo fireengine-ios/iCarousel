@@ -1744,5 +1744,5 @@
 "widget_rule_3_2_medium_detail" = "Die Sicherung ist abgeschlossen.";
 "widget_display_name" = "Persönliche Aufbewahrung";
 "widget_description" = "Sie können Ihre Erinnerungen und Ihr Telefon schützen, indem Sie Benachrichtigungen über den Speicher Ihres Geräts und den Speicherplatz der Lifebox erhalten.";
-"widget_rule_6_small_detail_plural" = "Sie haben Ihre Kontakte zuletzt vor %d Monate gesichert. Kommen Sie jetzt zur Lifebox und sichern Sie Ihre Kontakte.";
-"widget_rule_6_medium_detail_plural" = "Sie haben Ihre Kontakte seit mindestens %d Monate nicht mehr gesichert.";
+"widget_rule_6_small_detail_plural" = "Sie haben Ihre Kontakte seit mindestens %d Monate nicht mehr gesichert.";
+"widget_rule_6_medium_detail_plural" = "Sie haben Ihre Kontakte zuletzt vor %d Monate gesichert. Kommen Sie jetzt zur Lifebox und sichern Sie Ihre Kontakte.";
