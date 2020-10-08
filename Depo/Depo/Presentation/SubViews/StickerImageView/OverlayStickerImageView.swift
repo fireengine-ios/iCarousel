@@ -10,9 +10,37 @@ import UIKit
 import YYImage
 import ImageIO
 
-enum AttachedEntityType {
+enum AttachedEntityType: CaseIterable {
     case gif
-    case image
+    case sticker
+    
+    var title: String {
+        switch self {
+        case .gif:
+            return "Gif"
+        case .sticker:
+            return "Sticker"
+        }
+    }
+    
+    private var templateImage: UIImage? {
+        let imageName: String
+        switch self {
+        case .gif:
+            imageName = "gif"
+        case .sticker:
+            imageName = "sticker"
+        }
+        return UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+    }
+    
+    var normalImage: UIImage? {
+        templateImage?.mask(with: .white)
+    }
+    
+    var selectedImage: UIImage? {
+        templateImage?.mask(with: .lrTealish)
+    }
 }
 
 enum CreateOverlayResultType {
@@ -33,8 +61,6 @@ struct CreateOverlayStickersSuccessResult {
     let url: URL
     let type: CreateOverlayResultType
 }
-
-typealias CreateOverlayStickersResult = Result<CreateOverlayStickersSuccessResult, CreateOverlayStickerError>
 
 protocol OverlayStickerImageViewDelegate: class {
     func makeTopAndBottomBarsIsHidden(isHidden: Bool)

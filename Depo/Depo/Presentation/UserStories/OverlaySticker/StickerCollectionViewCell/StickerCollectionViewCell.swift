@@ -14,8 +14,8 @@ final class StickerCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var previewImageView: UIImageView! {
         willSet {
-            newValue.layer.borderColor = ColorConstants.stickerBorderColor.cgColor
-            newValue.layer.borderWidth = 1
+//            newValue.layer.borderColor = ColorConstants.stickerBorderColor.cgColor
+//            newValue.layer.borderWidth = 1
             newValue.contentMode = .scaleAspectFit
             newValue.isUserInteractionEnabled = false
         }
