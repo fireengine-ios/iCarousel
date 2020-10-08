@@ -5674,6 +5674,7 @@
 		B51D959D24D00E4300FA2EA0 /* AdjustmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D959724D00E4300FA2EA0 /* AdjustmentManager.swift */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
 		B526A3EB252EE43C00E1EC8C /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
+		B526A53F252F138F00E1EC8C /* DebugLogsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */; };
 		B527CF8B2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527CF892420C66C00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift */; };
 		B527CF8C2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527CF892420C66C00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift */; };
 		B527CF8D2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527CF892420C66C00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift */; };
@@ -13881,6 +13882,7 @@
 		B51D959724D00E4300FA2EA0 /* AdjustmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentManager.swift; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B520000B202492A90096D036 /* SynchronizedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedArray.swift; sourceTree = "<group>"; };
+		B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugLogsService.swift; sourceTree = "<group>"; };
 		B527CF892420C66C00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaItemsLocalAlbum+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B527CF8A2420C66D00293E3E /* MediaItemsLocalAlbum+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaItemsLocalAlbum+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
@@ -20299,6 +20301,7 @@
 				B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */,
 				B5BF40B12514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift */,
 				98AE8B7F251A1EDE002401F8 /* WidgetImageLoader.swift */,
+				B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -31250,6 +31253,7 @@
 				B58936F324FA924B00E3FA9C /* BiometricsManager.swift in Sources */,
 				B58936E524FA8D9700E3FA9C /* TokenStorage.swift in Sources */,
 				B55827A924FE97ED0039DD11 /* (null) in Sources */,
+				B526A53F252F138F00E1EC8C /* DebugLogsService.swift in Sources */,
 				B5358C86250141A10005FCAD /* SyncRecord.m in Sources */,
 				B5358C7A250141740005FCAD /* Contact.m in Sources */,
 				B55827AD24FE97FA0039DD11 /* (null) in Sources */,

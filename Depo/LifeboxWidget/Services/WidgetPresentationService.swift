@@ -33,7 +33,7 @@ final class WidgetPresentationService {
     private lazy var mainAppResponsivenessService = AppResponsivenessService.shared
     
     var isAuthorized: Bool { serverService.isAuthorized }
-    var isPreperationFinished: Bool { widgetService.isPreperationFinished }
+    var isPreparationFinished: Bool { widgetService.isPreparationFinished }
     
     private let serverService = WidgetServerService.shared
     private let photoLibraryService = WidgetPhotoLibraryObserver.shared

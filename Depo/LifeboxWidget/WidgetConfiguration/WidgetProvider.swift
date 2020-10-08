@@ -73,6 +73,9 @@ final class WidgetProvider: TimelineProvider {
 extension WidgetProvider {
     
     private func calculateCurrentOrderTimeline(family: WidgetFamily, timelineCallback: @escaping WidgetTimeLineCallback) {
+        
+        DebugLogService.debugLog("Calculating order TIMELINE, family: \(family.debugDescription)")
+        
         privateQueue.async { [weak self] in
             guard let self = self else {
                 return
@@ -87,6 +90,7 @@ extension WidgetProvider {
                         let preparedEntry = preparedEntry,
                         let order = order
                     else {
+                        DebugLogService.debugLog("there should be atleast one entry, family: \(family.debugDescription)")
                         assertionFailure("there should be atleast one entry")
                         return
                     }
@@ -103,6 +107,7 @@ extension WidgetProvider {
                         self.findFirstFittingEntry(orders: nextOrdersInLine, customCurrentDate: order.refreshDate) { (nextEntry, entryOrder) in
                             if let newEntry = nextEntry {
                                 entries.append(newEntry)
+                                DebugLogService.debugLog("found first fitting entry \(entryOrder.debugDescription), family\(family.debugDescription)")
                             }
                             semaphore.signal()
                         }
@@ -152,6 +157,9 @@ extension WidgetProvider {
     }
     
     private func checkOrder(order: WidgetStateOrder, customCurrentDate: Date? = nil, entryCallback: @escaping WidgetBaseEntryCallback) {
+        
+        DebugLogService.debugLog("Checking ORDER: \(order)")
+        
         switch order {
         case .login:
             //ORDER-0
@@ -224,7 +232,7 @@ extension WidgetProvider {
     ///Please write 1/x, 2/x on the widget and file name during syncing and display this widget:  https://zpl.io/VYOxGPn
     private func checkSyncInProgres(customCurrentDate: Date? = nil, entryCallback: @escaping WidgetBaseEntryCallback) {
         guard
-            WidgetPresentationService.shared.isPreperationFinished,
+            WidgetPresentationService.shared.isPreparationFinished,
             WidgetPresentationService.shared.isPhotoLibriaryAvailable()
         else {
             entryCallback(nil)
@@ -251,20 +259,28 @@ extension WidgetProvider {
     ///Check if there are unsynced files in device gallery and auto sync value ON or OFF.
     private func checkSyncStatus(customCurrentDate: Date? = nil, entryCallback: @escaping WidgetBaseEntryCallback) {
         guard
-            WidgetPresentationService.shared.isPreperationFinished,
+            WidgetPresentationService.shared.isPreparationFinished,
             WidgetPresentationService.shared.isPhotoLibriaryAvailable()
         else {
+            DebugLogService.debugLog("ORDER 4: gallery is unavailable")
             entryCallback(nil)
             return
         }
+        
+        DebugLogService.debugLog("ORDER 4: preparation is finished \(WidgetPresentationService.shared.isPreparationFinished)")
+        
         let startDate = customCurrentDate ?? Date()
         WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
+            DebugLogService.debugLog("ORDER 4: hasUnsynced \(hasUnsynced)")
             let syncInfo = WidgetPresentationService.shared.getSyncInfo()
             
             guard hasUnsynced, syncInfo.syncStatus != .executing else {
+                DebugLogService.debugLog("ORDER 4: sync is executing")
                 entryCallback(nil)
                 return
             }
+            
+            DebugLogService.debugLog("ORDER 4: isAutoSyncEnabled \(syncInfo.isAutoSyncEnabled)")
             
             entryCallback(WidgetAutoSyncEntry(isSyncEnabled: syncInfo.isAutoSyncEnabled, date: startDate))
         }

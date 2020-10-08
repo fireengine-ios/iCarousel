@@ -13,6 +13,9 @@
  //
  */
 
+import WidgetKit
+
+
 protocol CacheManagerDelegate: class {
     func didCompleteCacheActualization()
 }
@@ -34,7 +37,7 @@ final class CacheManager {
     private(set) var isProcessing = false
     private(set) var isCacheActualized: Bool = false {
         didSet {
-            WidgetService.shared.isPreperationFinished = isCacheActualized
+            WidgetService.shared.isPreparationFinished = isCacheActualized
         }
     }
     
@@ -112,7 +115,13 @@ final class CacheManager {
                                     let mediaService = MediaItemOperationsService.shared
                                     mediaService.allUnsyncedLocalIds { unsyncedLocalIds in
                                         mediaService.allLocalIds(subtractingIds: unsyncedLocalIds) { syncedLocalIds in
-                                            SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds)
+                                            SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds) {
+                                                if #available(iOS 14.0, *) {
+                                                    if !SyncServiceManager.shared.hasExecutingSync {
+                                                        WidgetCenter.shared.reloadAllTimelines()
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                     
@@ -141,7 +150,13 @@ final class CacheManager {
                                 let mediaService = MediaItemOperationsService.shared
                                 mediaService.allUnsyncedLocalIds { unsyncedLocalIds in
                                     mediaService.allLocalIds(subtractingIds: unsyncedLocalIds) { syncedLocalIds in
-                                        SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds)
+                                        SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds) {
+                                            if #available(iOS 14.0, *) {
+                                                if !SyncServiceManager.shared.hasExecutingSync {
+                                                    WidgetCenter.shared.reloadAllTimelines()
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                                 

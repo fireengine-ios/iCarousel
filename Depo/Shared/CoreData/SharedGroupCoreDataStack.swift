@@ -78,6 +78,10 @@ extension SharedGroupCoreDataStack {
         executeRequest(predicate: predicate, context: mainContext) { [weak self] invalidItems in
             let invalidIdentifiers = invalidItems.compactMap { $0.localIdentifier }
             
+            #if MAIN_APP
+            debugLog("WIDGET: got invalidItems \(invalidIdentifiers.count) out of \(assetLocalIdentifier.count) gallery items")
+            #endif
+            
             completion(Set(assetLocalIdentifier).subtracting(invalidIdentifiers))
         }
     }
@@ -86,6 +90,10 @@ extension SharedGroupCoreDataStack {
         guard !localIdentifiers.isEmpty else {
             return
         }
+        
+        #if MAIN_APP
+        debugLog("WIDGET: save synced locals \(localIdentifiers.count)")
+        #endif
         
         performBackgroundTask { [weak self] context in
             //TODO: kind of Range API updateDB logic is required to filter added/changed assets
@@ -116,11 +124,20 @@ extension SharedGroupCoreDataStack {
         }
     }
     
-    func actualizeWith(synced: [String], unsynced: [String]) {
+    func actualizeWith(synced: [String], unsynced: [String], completion: @escaping VoidHandler) {
+        
+        #if MAIN_APP
+        debugLog("WIDGET: actualize with synced \(synced.count), unsynced \(unsynced.count)")
+        #endif
         
         guard !synced.isEmpty || !unsynced.isEmpty else {
+            completion()
             return
         }
+        
+        let group = DispatchGroup()
+        group.enter()
+        group.enter()
         
         performBackgroundTask { [weak self] context in
             let predicate = NSPredicate(format: "localIdentifier IN %@", unsynced)
@@ -135,7 +152,9 @@ extension SharedGroupCoreDataStack {
                 }
                 
                 guard !newUnsynced.isEmpty else {
-                    self?.saveData(for: context, completion: nil)
+                    self?.saveData(for: context, completion: {
+                        group.leave()
+                    })
                     return
                 }
                 
@@ -146,7 +165,9 @@ extension SharedGroupCoreDataStack {
                     newAsset.isValidForSync = true
                 }
                 
-                self?.saveData(for: context, completion: nil)
+                self?.saveData(for: context, completion: {
+                    group.leave()
+                })
             }
         }
         
@@ -163,7 +184,9 @@ extension SharedGroupCoreDataStack {
                 }
                 
                 guard !newSynced.isEmpty else {
-                    self?.saveData(for: context, completion: nil)
+                    self?.saveData(for: context, completion:  {
+                        group.leave()
+                    })
                     return
                 }
                 
@@ -174,14 +197,24 @@ extension SharedGroupCoreDataStack {
                     newAsset.isValidForSync = false
                 }
                 
-                self?.saveData(for: context, completion: nil)
+                self?.saveData(for: context, completion: {
+                    group.leave()
+                })
             }
+        }
+        
+        group.notify(queue: .main) {
+            completion()
         }
     }
     
     
     //saving invalid (mostly iCloud) assets as not synced
     func saveInvalid(localIdentifiers: [String]) {
+        #if MAIN_APP
+        debugLog("WIDGET: save invalid \(localIdentifiers.count)")
+        #endif
+        
         guard !localIdentifiers.isEmpty else {
             return
         }
