@@ -18,7 +18,7 @@ final class WidgetService {
     
     private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
     
-    var isPreperationFinished: Bool {
+    var isPreparationFinished: Bool {
         get { return defaults?.bool(forKey: SharedConstants.isPreparationFinished) ?? false }
         set { defaults?.set(newValue, forKey: SharedConstants.isPreparationFinished)}
     }
