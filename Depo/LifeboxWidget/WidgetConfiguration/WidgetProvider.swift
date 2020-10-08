@@ -259,15 +259,8 @@ extension WidgetProvider {
         }
         let startDate = customCurrentDate ?? Date()
         WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
-            //TODO: need to check case if deleted remotes after sync
             if hasUnsynced {
                 let syncInfo = WidgetPresentationService.shared.getSyncInfo()
-                if syncInfo.isAppLaunch && syncInfo.isAutoSyncEnabled {
-                    //this case for order 3 - sync in progress
-                    entryCallback(nil)
-                    return
-                }
-                
                 entryCallback(WidgetAutoSyncEntry(isSyncEnabled: syncInfo.isAutoSyncEnabled, date: startDate))
             } else {
                 entryCallback(nil)
