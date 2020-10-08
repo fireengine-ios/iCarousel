@@ -5673,6 +5673,7 @@
 		B51D959C24D00E4300FA2EA0 /* AdjustmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D959724D00E4300FA2EA0 /* AdjustmentManager.swift */; };
 		B51D959D24D00E4300FA2EA0 /* AdjustmentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D959724D00E4300FA2EA0 /* AdjustmentManager.swift */; };
 		B51FD63B1FD19064000344BD /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B51FD63A1FD19063000344BD /* CoreBluetooth.framework */; };
+		B526A3EB252EE43C00E1EC8C /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
 		B527CF8B2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527CF892420C66C00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift */; };
 		B527CF8C2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527CF892420C66C00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift */; };
 		B527CF8D2420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527CF892420C66C00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift */; };
@@ -31230,6 +31231,7 @@
 				B58936F824FA932A00E3FA9C /* SessionServiceExtension.swift in Sources */,
 				B55827A724FE97E70039DD11 /* (null) in Sources */,
 				B5BF41152514AA6100B0EFEB /* Equatable+Contains.swift in Sources */,
+				B526A3EB252EE43C00E1EC8C /* AppResponsivenessService.swift in Sources */,
 				B546EE2524FD1C5D00C1713C /* DispatchQueue+Main.swift in Sources */,
 				B55827A424FE97DE0039DD11 /* (null) in Sources */,
 				98EC3F9B251E2F770029A9DF /* SharedEnums.swift in Sources */,

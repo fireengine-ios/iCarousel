@@ -30,6 +30,7 @@ class SyncInfo {
 final class WidgetPresentationService {
     static let shared = WidgetPresentationService()
     private let widgetService = WidgetService.shared
+    private lazy var mainAppResponsivenessService = AppResponsivenessService.shared
     
     var isAuthorized: Bool { serverService.isAuthorized }
     var isPreperationFinished: Bool { widgetService.isPreperationFinished }
@@ -185,12 +186,7 @@ final class WidgetPresentationService {
         syncInfo.totalCount = widgetService.totalCount
         syncInfo.currentSyncFileName = widgetService.currentSyncFileName
         syncInfo.lastSyncedDate = widgetService.lastSyncedDate
-        
-        if let date = widgetService.mainAppResponsivenessDate, date.timeIntervalSince(Date()) < NumericConstants.intervalInSecondsBetweenAppResponsivenessUpdate * 0.1 {
-            syncInfo.isAppLaunch = true
-        } else {
-            syncInfo.isAppLaunch = false
-        }
+        syncInfo.isAppLaunch = mainAppResponsivenessService.isMainAppResponsive()
         
         return syncInfo
     }
