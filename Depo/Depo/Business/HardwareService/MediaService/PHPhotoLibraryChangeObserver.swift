@@ -49,9 +49,6 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         var phChanges = PhotoLibraryItemsChanges()
         
         func notify() {
-            if #available(iOS 14.0, *) {
-                WidgetCenter.shared.reloadAllTimelines()
-            }
             NotificationCenter.default.post(name: .notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
         }
         
@@ -70,7 +67,13 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
             mediaService.update(localMediaItems: changedAssets) {
                 mediaService.allUnsyncedLocalIds { unsyncedLocalIds in
                     mediaService.allLocalIds(subtractingIds: unsyncedLocalIds) { syncedLocalIds in
-                        SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds)
+                        SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds) {
+                            if #available(iOS 14.0, *) {
+                                if !SyncServiceManager.shared.hasExecutingSync {
+                                    WidgetCenter.shared.reloadAllTimelines()
+                                }
+                            }
+                        }
                     }
                 }
                 
