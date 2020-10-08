@@ -259,12 +259,14 @@ extension WidgetProvider {
         }
         let startDate = customCurrentDate ?? Date()
         WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
-            if hasUnsynced {
-                let syncInfo = WidgetPresentationService.shared.getSyncInfo()
-                entryCallback(WidgetAutoSyncEntry(isSyncEnabled: syncInfo.isAutoSyncEnabled, date: startDate))
-            } else {
+            let syncInfo = WidgetPresentationService.shared.getSyncInfo()
+            
+            guard hasUnsynced, syncInfo.syncStatus != .executing else {
                 entryCallback(nil)
+                return
             }
+            
+            entryCallback(WidgetAutoSyncEntry(isSyncEnabled: syncInfo.isAutoSyncEnabled, date: startDate))
         }
     }
     
