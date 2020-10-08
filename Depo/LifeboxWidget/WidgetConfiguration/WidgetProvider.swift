@@ -262,17 +262,22 @@ extension WidgetProvider {
             WidgetPresentationService.shared.isPreperationFinished,
             WidgetPresentationService.shared.isPhotoLibriaryAvailable()
         else {
+            DebugLogService.debugLog("OREDER 4: preparation isn't finished or gallery is unavailable")
             entryCallback(nil)
             return
         }
         let startDate = customCurrentDate ?? Date()
         WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
+            DebugLogService.debugLog("OREDER 4: hasUnsynced \(hasUnsynced)")
             let syncInfo = WidgetPresentationService.shared.getSyncInfo()
             
             guard hasUnsynced, syncInfo.syncStatus != .executing else {
+                DebugLogService.debugLog("OREDER 4: sync is executing")
                 entryCallback(nil)
                 return
             }
+            
+            DebugLogService.debugLog("OREDER 4: isAutoSyncEnabled \(syncInfo.isAutoSyncEnabled)")
             
             entryCallback(WidgetAutoSyncEntry(isSyncEnabled: syncInfo.isAutoSyncEnabled, date: startDate))
         }

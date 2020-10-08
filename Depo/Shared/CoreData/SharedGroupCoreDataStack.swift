@@ -78,6 +78,10 @@ extension SharedGroupCoreDataStack {
         executeRequest(predicate: predicate, context: mainContext) { [weak self] invalidItems in
             let invalidIdentifiers = invalidItems.compactMap { $0.localIdentifier }
             
+            #if MAIN_APP
+            debugLog("WIDGET: got invalidItems \(invalidIdentifiers.count) out of \(assetLocalIdentifier.count) gallery items")
+            #endif
+            
             completion(Set(assetLocalIdentifier).subtracting(invalidIdentifiers))
         }
     }
@@ -86,6 +90,10 @@ extension SharedGroupCoreDataStack {
         guard !localIdentifiers.isEmpty else {
             return
         }
+        
+        #if MAIN_APP
+        debugLog("WIDGET: save synced locals \(localIdentifiers.count)")
+        #endif
         
         performBackgroundTask { [weak self] context in
             //TODO: kind of Range API updateDB logic is required to filter added/changed assets
@@ -117,6 +125,10 @@ extension SharedGroupCoreDataStack {
     }
     
     func actualizeWith(synced: [String], unsynced: [String]) {
+        
+        #if MAIN_APP
+        debugLog("WIDGET: actualize with synced \(synced.count), unsynced \(unsynced.count)")
+        #endif
         
         guard !synced.isEmpty || !unsynced.isEmpty else {
             return
@@ -182,6 +194,10 @@ extension SharedGroupCoreDataStack {
     
     //saving invalid (mostly iCloud) assets as not synced
     func saveInvalid(localIdentifiers: [String]) {
+        #if MAIN_APP
+        debugLog("WIDGET: save invalid \(localIdentifiers.count)")
+        #endif
+        
         guard !localIdentifiers.isEmpty else {
             return
         }
