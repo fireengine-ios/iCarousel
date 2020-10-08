@@ -232,7 +232,7 @@ extension WidgetProvider {
     ///Please write 1/x, 2/x on the widget and file name during syncing and display this widget:  https://zpl.io/VYOxGPn
     private func checkSyncInProgres(customCurrentDate: Date? = nil, entryCallback: @escaping WidgetBaseEntryCallback) {
         guard
-            WidgetPresentationService.shared.isPreperationFinished,
+            WidgetPresentationService.shared.isPreparationFinished,
             WidgetPresentationService.shared.isPhotoLibriaryAvailable()
         else {
             entryCallback(nil)
@@ -259,25 +259,28 @@ extension WidgetProvider {
     ///Check if there are unsynced files in device gallery and auto sync value ON or OFF.
     private func checkSyncStatus(customCurrentDate: Date? = nil, entryCallback: @escaping WidgetBaseEntryCallback) {
         guard
-            WidgetPresentationService.shared.isPreperationFinished,
+            WidgetPresentationService.shared.isPreparationFinished,
             WidgetPresentationService.shared.isPhotoLibriaryAvailable()
         else {
-            DebugLogService.debugLog("OREDER 4: preparation isn't finished or gallery is unavailable")
+            DebugLogService.debugLog("ORDER 4: gallery is unavailable")
             entryCallback(nil)
             return
         }
+        
+        DebugLogService.debugLog("ORDER 4: preparation is finished \(WidgetPresentationService.shared.isPreparationFinished)")
+        
         let startDate = customCurrentDate ?? Date()
         WidgetPresentationService.shared.hasUnsyncedItems { hasUnsynced in
-            DebugLogService.debugLog("OREDER 4: hasUnsynced \(hasUnsynced)")
+            DebugLogService.debugLog("ORDER 4: hasUnsynced \(hasUnsynced)")
             let syncInfo = WidgetPresentationService.shared.getSyncInfo()
             
             guard hasUnsynced, syncInfo.syncStatus != .executing else {
-                DebugLogService.debugLog("OREDER 4: sync is executing")
+                DebugLogService.debugLog("ORDER 4: sync is executing")
                 entryCallback(nil)
                 return
             }
             
-            DebugLogService.debugLog("OREDER 4: isAutoSyncEnabled \(syncInfo.isAutoSyncEnabled)")
+            DebugLogService.debugLog("ORDER 4: isAutoSyncEnabled \(syncInfo.isAutoSyncEnabled)")
             
             entryCallback(WidgetAutoSyncEntry(isSyncEnabled: syncInfo.isAutoSyncEnabled, date: startDate))
         }
