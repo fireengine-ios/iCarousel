@@ -11913,6 +11913,9 @@
 		CFEB1B8D252E90810008A2A9 /* BilloWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CFE4E7B0252D9F3B00F165AD /* BilloWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CFEB1C1F252E9F220008A2A9 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
 		CFEB1C37252E9F250008A2A9 /* SharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1E72ED22BEB65300DC57B6 /* SharedConstants.swift */; };
+		CFEB1D7D252F4C230008A2A9 /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
+		CFEB1D81252F4C250008A2A9 /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
+		CFEB1D82252F4C270008A2A9 /* AppResponsivenessService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56E0DD920B44AFC0082044D /* AppResponsivenessService.swift */; };
 		D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */; };
 		D42ED46420C9D9E600761645 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */; };
 		D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E01F3F18FA00EFDC6D /* UsageInfoConfigurator.swift */; };
@@ -37473,6 +37476,7 @@
 				CFE4E610252D9EE200F165AD /* SessionServiceExtension.swift in Sources */,
 				CFE4E611252D9EE200F165AD /* (null) in Sources */,
 				CFE4E612252D9EE200F165AD /* Equatable+Contains.swift in Sources */,
+				CFEB1D81252F4C250008A2A9 /* AppResponsivenessService.swift in Sources */,
 				CFE4E613252D9EE200F165AD /* DispatchQueue+Main.swift in Sources */,
 				CFE4E614252D9EE200F165AD /* (null) in Sources */,
 				CFE4E615252D9EE200F165AD /* SharedEnums.swift in Sources */,
@@ -37569,6 +37573,7 @@
 				CFE4E6CA252D9F2300F165AD /* SessionServiceExtension.swift in Sources */,
 				CFE4E6CB252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6CC252D9F2300F165AD /* Equatable+Contains.swift in Sources */,
+				CFEB1D7D252F4C230008A2A9 /* AppResponsivenessService.swift in Sources */,
 				CFE4E6CD252D9F2300F165AD /* DispatchQueue+Main.swift in Sources */,
 				CFE4E6CE252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6CF252D9F2300F165AD /* SharedEnums.swift in Sources */,
@@ -37665,6 +37670,7 @@
 				CFE4E75E252D9F3B00F165AD /* SessionServiceExtension.swift in Sources */,
 				CFE4E75F252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E760252D9F3B00F165AD /* Equatable+Contains.swift in Sources */,
+				CFEB1D82252F4C270008A2A9 /* AppResponsivenessService.swift in Sources */,
 				CFE4E761252D9F3B00F165AD /* DispatchQueue+Main.swift in Sources */,
 				CFE4E762252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E763252D9F3B00F165AD /* SharedEnums.swift in Sources */,
