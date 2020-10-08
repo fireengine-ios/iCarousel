@@ -73,6 +73,9 @@ final class WidgetProvider: TimelineProvider {
 extension WidgetProvider {
     
     private func calculateCurrentOrderTimeline(family: WidgetFamily, timelineCallback: @escaping WidgetTimeLineCallback) {
+        
+        DebugLogService.debugLog("Calculating order TIMELINE, family: \(family.debugDescription)")
+        
         privateQueue.async { [weak self] in
             guard let self = self else {
                 return
@@ -87,6 +90,7 @@ extension WidgetProvider {
                         let preparedEntry = preparedEntry,
                         let order = order
                     else {
+                        DebugLogService.debugLog("there should be atleast one entry, family: \(family.debugDescription)")
                         assertionFailure("there should be atleast one entry")
                         return
                     }
@@ -103,6 +107,7 @@ extension WidgetProvider {
                         self.findFirstFittingEntry(orders: nextOrdersInLine, customCurrentDate: order.refreshDate) { (nextEntry, entryOrder) in
                             if let newEntry = nextEntry {
                                 entries.append(newEntry)
+                                DebugLogService.debugLog("found first fitting entry \(entryOrder.debugDescription), family\(family.debugDescription)")
                             }
                             semaphore.signal()
                         }
@@ -152,6 +157,9 @@ extension WidgetProvider {
     }
     
     private func checkOrder(order: WidgetStateOrder, customCurrentDate: Date? = nil, entryCallback: @escaping WidgetBaseEntryCallback) {
+        
+        DebugLogService.debugLog("Checking ORDER: \(order)")
+        
         switch order {
         case .login:
             //ORDER-0
