@@ -143,7 +143,7 @@ final class NetmeraService {
         }
         #endif
         
-//        Netmera.start()
+        Netmera.start()
         
         #if DEBUG
         Netmera.setLogLevel(.debug)
@@ -162,18 +162,18 @@ final class NetmeraService {
         #if LIFEBOX
         switch RouteRequests.currentServerEnvironment {
         case .production:
-            return "3PJRHrXDiqbDyulzKSM_m59cpbYT9LezJOwQ9zsHAkjMSBUVQ92OWw"
+            return "3PJRHrXDiqakWjtB7quX9jhybzZjSWI4tfk7QNeg9wF6ZWP9p5QxPQ"
         case .preProduction, .test:
-            return "3PJRHrXDiqa-pwWScAq1P0zUMUefELashtuA8DKjAJninSbeaRHk7A"
+            return "3PJRHrXDiqa-pwWScAq1P-7ZjPWA5mWdKHyMpdBrYMFMU4XzrPkaoQ"
         }
         #endif
         
         #if LIFEDRIVE
         switch RouteRequests.currentServerEnvironment {
         case .production:
-            return "LINA4LCdpz44QTLXQBpw_aczLfB3nyWqit1C9oeYa1nzrgct0J5WOQ"
+            return "LINA4LCdpz6st8QajRsXvZ3eUwV5ENwJTbzrhSufrxjRWv-pvzwmZw"
         case .preProduction, .test:
-            return "6l30TJ05YeluVSpiY3Al8xcpW3mTkldj6_KWcwS8iNrRTgBKe1166A"
+            return "6l30TJ05YenQKefUTBw81SZPwBa404aJoAhPAsmZEdyxLJVO90Q8Rw"
         }
         #endif
         
