@@ -50,60 +50,6 @@ final class OverlayStickerSaveManager {
         }
     }
     
-//    private func saveResult(result: CreateOverlayStickersResult) {
-//        
-//        checkLibraryAccessStatus { [weak self] libraryIsAvailable in
-//            
-//            if libraryIsAvailable == true {
-//                
-//                let commonCompletionHandler: (WrapData?, Error?)->() = { [weak self] remoteItem, error in
-//                    DispatchQueue.main.async {
-////                        self?.hideSpinnerIncludeNavigationBar()
-////                        self?.close { [weak self] in
-////                            if let itemToShow = remoteItem {
-////                                self?.showPhotoVideoPreview(item: itemToShow)
-////                                self?.analyticsService.logScreen(screen: .smashPreview)
-////                            }  else if error?.isOutOfSpaceError == true {
-////                                self?.onOutOfSpaceError()
-////                            }
-////                        }
-//                    }
-//                }
-//                
-//                switch result {
-//                case .success(let result):
-//                    self?.saveLocalyItem(url: result.url, type: result.type, completion: { [weak self] saveResult in
-//                        switch saveResult {
-//                        case .success(let localItem):
-//                            self?.uploadItem(item: localItem, completion: { uploadResult in
-//                                switch uploadResult {
-//                                case .success(let remote):
-//                                    self?.removeImage(at: result.url)
-//                                    remote?.patchToPreview = localItem.patchToPreview
-//                                    commonCompletionHandler(remote, nil)
-//                                    
-//                                case .failed(let error):
-//                                    commonCompletionHandler(nil, error)
-//                                }
-//                            })
-//                            
-//                        case .failed(let error):
-//                            commonCompletionHandler(nil, error)
-//                        }
-//                    })
-//                    
-//                case .failure(let error):
-////                    self?.hideSpinnerIncludeNavigationBar()
-//                    UIApplication.showErrorAlert(message: error.description)
-//                }
-//            } else {
-//                result(.failure(CreateOverlayStickerError.deniedPhotoAccess))
-//                //Show popup about getting access to photo library
-////                self?.hideSpinnerIncludeNavigationBar()
-//            }
-//        }
-//    }
-    
     private func uploadItem(item: WrapData, completion: @escaping ResponseHandler<WrapData?>) {
         var uploadOperation: UploadOperation?
         uploadService.uploadFileList(items: [item],
