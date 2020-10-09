@@ -116,6 +116,63 @@ class ImageDownloder {
         tokenList = tokenList + [path : downloadItem]
     }
     
+    
+    func getImageResponseByTrimming(url: URL?, completion: @escaping ResponseHandler<UIImage>) {
+        guard let url = url else {
+            let errorMessage = "getImageByTrimming failed - invalid url"
+            logError(message: errorMessage)
+            
+            DispatchQueue.main.async {
+                completion(.failed(ErrorResponse.string(errorMessage)))
+            }
+            return
+        }
+        
+        guard let trimmedUrl = url.byTrimmingQuery else {
+            let errorMessage = "getImageByTrimming failed - invalid trimmed url"
+            logError(message: errorMessage)
+            
+            DispatchQueue.main.async {
+                completion(.failed(ErrorResponse.string(errorMessage)))
+            }
+            return
+        }
+        
+        let cachePath = trimmedUrl.absoluteString
+        
+        if let image = SDWebImageManager.shared().imageCache?.imageFromCache(forKey: cachePath) {
+            DispatchQueue.main.async {
+                completion(.success(image))
+            }
+            return
+        }
+        
+        let operation = ImageDownloadOperation(url: trimmedUrl, queue: DispatchQueue.global(), isErrorLogEnabled: isErrorLogEnabled)
+        operation.outputBlock = { [weak self] image, _ in
+            guard let self = self else {
+                completion(.failed(ErrorResponse.string("self is nil")))
+                return
+            }
+            
+            self.tokenList[trimmedUrl] = nil
+            
+            guard let image = image as? UIImage else {
+                completion(.failed(ErrorResponse.string("image is nil")))
+                return
+            }
+            
+            SDWebImageManager.shared().imageCache?.store(image, forKey: cachePath, completion: nil)
+            completion(.success(image))
+        }
+        
+        tokenList = tokenList + [trimmedUrl : operation]
+        
+        DispatchQueue.toBackground {
+            operation.start()
+        }
+    }
+    
+    
     func getImageData(url: URL?, completeData:@escaping RemoteData) {
         
         guard let path = url else {

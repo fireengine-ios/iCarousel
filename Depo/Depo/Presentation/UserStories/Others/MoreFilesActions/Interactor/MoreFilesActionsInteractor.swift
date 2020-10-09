@@ -221,6 +221,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         }
     }
     
+    
+    private lazy var photoEditImageDownloader = PhotoEditImageDownloader()
+    
     func edit(item: [BaseDataSourceItem], completion: VoidHandler?) {
         debugLog("PHOTOEDIT: start")
         
@@ -229,7 +232,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        ImageDownloder().getImage(patch: originalUrl) { [weak self] image in
+        photoEditImageDownloader.download(url: originalUrl, attempts: 2) { [weak self] image in
             guard
                 let self = self,
                 let image = image

@@ -5660,6 +5660,12 @@
 		B51805EE234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
 		B51805EF234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
 		B51805F0234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
+		B519A673253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
+		B519A674253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
+		B519A675253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
+		B519A676253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
+		B519A677253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
+		B519A678253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
 		B51D958E24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D958D24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift */; };
 		B51D958F24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D958D24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift */; };
 		B51D959024D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D958D24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift */; };
@@ -13881,6 +13887,7 @@
 		B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsDataSource.swift; sourceTree = "<group>"; };
 		B51205C82305350D007EB951 /* AppendLocalsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendLocalsOperation.swift; sourceTree = "<group>"; };
 		B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrator.swift; sourceTree = "<group>"; };
+		B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditImageDownloader.swift; sourceTree = "<group>"; };
 		B51D958D24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyAdjustment.swift; sourceTree = "<group>"; };
 		B51D959724D00E4300FA2EA0 /* AdjustmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentManager.swift; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -22231,6 +22238,7 @@
 			isa = PBXGroup;
 			children = (
 				CECA95941F1610590054BDC0 /* RemoteDownloder.swift */,
+				B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */,
 			);
 			path = ImageDownloderService;
 			sourceTree = "<group>";
@@ -28430,6 +28438,7 @@
 				0303A2932397D0D000907F42 /* AnalyzeHistoryViewController.swift in Sources */,
 				0303A2942397D0D000907F42 /* PhoneVerificationInteractorOutput.swift in Sources */,
 				0303A2952397D0D000907F42 /* PeriodicContactSyncDataStorage.swift in Sources */,
+				B519A676253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				B5ECA57225063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
 				0303A2962397D0D000907F42 /* MyStorageRouterInput.swift in Sources */,
 				0303A2972397D0D000907F42 /* SmartTimerLabel.swift in Sources */,
@@ -30665,6 +30674,7 @@
 				8C0E8F771FDEBDFF00789C91 /* PackagesViewInput.swift in Sources */,
 				8C0E8F781FDEBDFF00789C91 /* SelectNameViewOutput.swift in Sources */,
 				8C0E8F791FDEBDFF00789C91 /* SelectNameViewController.swift in Sources */,
+				B519A674253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				8C0E8F7A1FDEBDFF00789C91 /* SelectNameModuleInput.swift in Sources */,
 				98A86D6923A246A700438225 /* HiddenPhotosDataSource.swift in Sources */,
 				8C208658228D4B2E000BEDAD /* PhotoVideoThreeDotMenuManager.swift in Sources */,
@@ -32574,6 +32584,7 @@
 				3027A2E14F67F63A1600AE42 /* FileInfoViewController.swift in Sources */,
 				9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */,
 				03056AC123BA23C000F6D57A /* NetmeraService.swift in Sources */,
+				B519A673253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				98C19F4F2485097800527D76 /* ContactSyncApiService.swift in Sources */,
 				73FE51FC22CF5EC300270448 /* CreateStoryAudioItemCell.swift in Sources */,
 				CEBAB15B2094803C002824C6 /* InsetsButton.swift in Sources */,
@@ -33874,6 +33885,7 @@
 				CE784ACB22A685FB00662219 /* CustomErrors.swift in Sources */,
 				CE784ACC22A685FB00662219 /* CircleYellowButton.swift in Sources */,
 				CE784ACD22A685FB00662219 /* PushPopAnimator.swift in Sources */,
+				B519A677253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				CE784ACE22A685FB00662219 /* HomeCardResponse.swift in Sources */,
 				CE784ACF22A685FB00662219 /* Alamofire+Request.swift in Sources */,
 				CE784AD022A685FB00662219 /* AugmentedRealityDataSource.swift in Sources */,
@@ -35376,6 +35388,7 @@
 				CF8B668223CBC9D70021B021 /* SubscriptionPlan.swift in Sources */,
 				CF8B668323CBC9D70021B021 /* CreateStoryPreviewConfigurator.swift in Sources */,
 				CF8B668423CBC9D70021B021 /* PhotoVideoCollectionViewLayout.swift in Sources */,
+				B519A675253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				CF8B668523CBC9D70021B021 /* TermsOfUseConfigurator.swift in Sources */,
 				CF8B668623CBC9D70021B021 /* BaseFilesGreedViewController.swift in Sources */,
 				CF8B668723CBC9D70021B021 /* FaceImageDisplayManager.swift in Sources */,
@@ -36874,6 +36887,7 @@
 				CF8B6E4F23CBCA280021B021 /* CircleYellowButton.swift in Sources */,
 				CF8B6E5023CBCA280021B021 /* PushPopAnimator.swift in Sources */,
 				CF8B6E5123CBCA280021B021 /* HomeCardResponse.swift in Sources */,
+				B519A678253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				985786F623E01F8800D35DDA /* SettingFooterView.swift in Sources */,
 				CF8B6E5223CBCA280021B021 /* Alamofire+Request.swift in Sources */,
 				CF8B6E5323CBCA280021B021 /* AugmentedRealityDataSource.swift in Sources */,
