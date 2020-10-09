@@ -116,7 +116,6 @@ class ImageDownloder {
         tokenList = tokenList + [path : downloadItem]
     }
     
-    
     func getImageData(url: URL?, completeData:@escaping RemoteData) {
         
         guard let path = url else {
