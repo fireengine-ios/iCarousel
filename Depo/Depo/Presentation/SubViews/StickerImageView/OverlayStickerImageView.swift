@@ -17,9 +17,9 @@ enum AttachedEntityType: CaseIterable {
     var title: String {
         switch self {
         case .gif:
-            return "Gif"
+            return TextConstants.funGif
         case .sticker:
-            return "Sticker"
+            return TextConstants.funSticker
         }
     }
     
@@ -64,6 +64,7 @@ struct CreateOverlayStickersSuccessResult {
 
 protocol OverlayStickerImageViewDelegate: class {
     func makeTopAndBottomBarsIsHidden(isHidden: Bool)
+    func didDeleteAttachments(_ attachments: [SmashStickerResponse])
 }
 
 final class OverlayStickerImageView: UIImageView {
@@ -95,6 +96,10 @@ final class OverlayStickerImageView: UIImageView {
     private let downloader = ImageDownloder()
     private lazy var impactFeedbackgenerator = UIImpactFeedbackGenerator(style: .medium)
     private var isImpactOccurred: Bool =  false
+    
+    var hasStickers: Bool {
+        !attachments.isEmpty
+    }
     
     private let trashBinLayer: CALayer = {
         let trashBinLayer = CALayer()
@@ -265,8 +270,10 @@ final class OverlayStickerImageView: UIImageView {
                 UIView.animate(withDuration: 0.2, delay: 0.1, options: .curveEaseIn, animations: {
                     selectedSticker.alpha = 0
                 }) { [weak self] _ in
+                    let deletedAttachments = self?.attachments.filter { $0.imageView === selectedSticker }.map { $0.item } ?? []
                     self?.attachments.removeAll(where: { $0.imageView === selectedSticker })
                     selectedSticker.removeFromSuperview()
+                    self?.stickersDelegate?.didDeleteAttachments(deletedAttachments)
                 }
             }
             

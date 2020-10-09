@@ -52,7 +52,7 @@ final class OverlayStickerViewControllerDataSource: NSObject {
     private func setupCollectionView() {
         stickersCollectionView.backgroundColor = ColorConstants.photoEditBackgroundColor
         let inset: CGFloat = Device.isIpad ? 20 : 16
-        stickersCollectionView.contentInset = UIEdgeInsets(topBottom: inset, rightLeft: inset)
+        stickersCollectionView.contentInset = UIEdgeInsets(topBottom: 0, rightLeft: inset)
         stickersCollectionView.register(nibCell: StickerCollectionViewCell.self)
         if let layout = stickersCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal

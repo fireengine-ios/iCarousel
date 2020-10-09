@@ -19,6 +19,7 @@ final class OverlayStickerViewController: UIViewController {
     @IBOutlet private weak var changesBar: FunChangesBar!
     @IBOutlet private weak var stickersContainerView: UIView!
     @IBOutlet private weak var stickersCollectionView: UICollectionView!
+    @IBOutlet private weak var safeAreaBottomView: UIView!
 
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var router = RouterVC()
@@ -26,7 +27,6 @@ final class OverlayStickerViewController: UIViewController {
     private lazy var dataSource = OverlayStickerViewControllerDataSource(collectionView: stickersCollectionView, delegate: self)
     
     private var isFullScreen = false
-    private var hasChanges = false
     private var lastAttachments = [SmashStickerResponse]()
     
     weak var selectedImage: UIImage? {
@@ -49,6 +49,8 @@ final class OverlayStickerViewController: UIViewController {
     
     private func setup() {
         view.backgroundColor = .black
+        stickersContainerView.backgroundColor = ColorConstants.photoEditBackgroundColor
+        safeAreaBottomView.backgroundColor = ColorConstants.photoEditBackgroundColor
         statusBarColor = .black
         
         funNavBar.state = .initial
@@ -65,7 +67,6 @@ final class OverlayStickerViewController: UIViewController {
         }
         
         loadViewIfNeeded()
-//        view.backgroundColor = .black
         
         overlayingStickerImageView.stickersDelegate = self
         dataSource.setStateForSelectedType(type: .gif)
@@ -208,7 +209,34 @@ final class OverlayStickerViewController: UIViewController {
         isFullScreen = !isFullScreen
         makeTopAndBottomBarsIsHidden(hide: isFullScreen)
     }
+    
+    private func updateNavBarState() {
+        if tabBar.isHidden {
+            funNavBar.state = lastAttachments.isEmpty ? .empty : .modify
+        } else {
+            funNavBar.state = overlayingStickerImageView.hasStickers ? .edited : .initial
+        }
+    }
+    
+    private func showClosePopup(confirmation: @escaping VoidHandler) {
+        let popup = PopUpController.with(title: TextConstants.funCloseAlertTitle,
+                                         message: TextConstants.funCloseAlertMessage,
+                                         image: .question,
+                                         firstButtonTitle: TextConstants.funCloseAlertLeftButton,
+                                         secondButtonTitle: TextConstants.funCloseAlertRightButton,
+                                         firstAction: { vc in
+                                            vc.close()
+                                         },
+                                         secondAction: { vc in
+                                            vc.close {
+                                                confirmation()
+                                            }
+                                         })
+        router.presentViewController(controller: popup)
+    }
 }
+
+//MARK: - OverlayStickerImageViewDelegate
 
 extension OverlayStickerViewController: OverlayStickerImageViewDelegate {
     func makeTopAndBottomBarsIsHidden(isHidden: Bool) {
@@ -217,15 +245,24 @@ extension OverlayStickerViewController: OverlayStickerImageViewDelegate {
         }
         makeTopAndBottomBarsIsHidden(hide: isHidden)
     }
+    
+    func didDeleteAttachments(_ attachments: [SmashStickerResponse]) {
+        attachments.forEach { lastAttachments.remove($0) }
+        updateNavBarState()
+    }
 }
+
+//MARK: - OverlayStickerViewControllerDataSourceDelegate
 
 extension OverlayStickerViewController: OverlayStickerViewControllerDataSourceDelegate {
     
     func didSelectItem(item: SmashStickerResponse, attachmentType: AttachedEntityType) {       
         showSpinner()
+        lastAttachments.append(item)
         overlayingStickerImageView.addAttachment(item: item, attachmentType: attachmentType, completion: { [weak self] in
             self?.hideSpinner()
         })
+        updateNavBarState()
     }
 }
 
@@ -246,11 +283,13 @@ extension OverlayStickerViewController: FunTabBarDelegate {
 extension OverlayStickerViewController: FunNavBarDelegate {
     
     func funNavBarDidCloseTapped() {
-        if !hasChanges {
+        if !overlayingStickerImageView.hasStickers {
             confirmClose()
         }
         
-        //TODO: add popup and close 
+        showClosePopup { [weak self] in
+            self?.confirmClose()
+        }
     }
     
     private func confirmClose() {
@@ -264,7 +303,9 @@ extension OverlayStickerViewController: FunNavBarDelegate {
     }
     
     func funNavBarDidUndoTapped() {
+        lastAttachments.removeLast()
         overlayingStickerImageView.removeLast()
+        updateNavBarState()
     }
 }
 
@@ -276,12 +317,17 @@ extension OverlayStickerViewController: FunChangesBarDelegate {
         stickersContainerView.isHidden = true
         tabBar.isHidden = false
         
+        for _ in 0..<lastAttachments.count {
+            overlayingStickerImageView.removeLast()
+        }
         
+        updateNavBarState()
     }
     
     func applyChanges() {
         stickersContainerView.isHidden = true
         tabBar.isHidden = false
         lastAttachments = []
+        updateNavBarState()
     }
 }

@@ -16161,12 +16161,12 @@
 		7378053223ABC0E7001D57BD /* OverlaySticker */ = {
 			isa = PBXGroup;
 			children = (
+				735766EC23AE1B48008589E9 /* StickerCollectionViewCell */,
 				98AC47F6252DFBCF003EB6C5 /* Views */,
 				CF71458B24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift */,
 				7378053323ABC130001D57BD /* OverlayStickerViewController.swift */,
 				73B623DF23C07D7900839C47 /* OverlayStickerViewControllerDataSource.swift */,
 				7378053423ABC130001D57BD /* OverlayStickerViewController.xib */,
-				735766EC23AE1B48008589E9 /* StickerCollectionViewCell */,
 				730F8ABD23CDEE6000798B61 /* OptimizingGifService.swift */,
 				984A8B08252F05A8002FB400 /* OverlayStickerSaveManager.swift */,
 			);

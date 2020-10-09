@@ -14,6 +14,7 @@
                 <outlet property="changesBar" destination="iVs-YP-6iP" id="Qum-fB-emw"/>
                 <outlet property="funNavBar" destination="Tnf-Yg-CVd" id="O0r-DL-Sbc"/>
                 <outlet property="overlayingStickerImageView" destination="dv4-cf-xPu" id="ZKI-am-050"/>
+                <outlet property="safeAreaBottomView" destination="cjU-Ad-bUI" id="fpZ-mf-efu"/>
                 <outlet property="stickersCollectionView" destination="nq6-ZB-8bJ" id="Dyz-Ab-KaT"/>
                 <outlet property="stickersContainerView" destination="CXu-Dq-C9Z" id="3VS-vy-1Sk"/>
                 <outlet property="tabBar" destination="5Uc-Gl-YOw" id="sXg-ug-Pr7"/>
@@ -43,7 +44,7 @@
                             </connections>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="ofS-JI-gZW">
-                            <rect key="frame" x="329" y="0.0" width="85" height="44"/>
+                            <rect key="frame" x="313" y="0.0" width="85" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dNC-w2-sSR">
                                     <rect key="frame" x="0.0" y="0.0" width="34" height="44"/>
@@ -68,7 +69,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="ofS-JI-gZW" secondAttribute="trailing" id="53c-r5-CmG"/>
+                        <constraint firstAttribute="trailing" secondItem="ofS-JI-gZW" secondAttribute="trailing" constant="16" id="53c-r5-CmG"/>
                         <constraint firstItem="ofS-JI-gZW" firstAttribute="top" secondItem="Tnf-Yg-CVd" secondAttribute="top" id="L8s-VL-3jW"/>
                         <constraint firstItem="yvQ-VH-rwL" firstAttribute="leading" secondItem="Tnf-Yg-CVd" secondAttribute="leading" id="LxA-Tq-qTF"/>
                         <constraint firstAttribute="bottom" secondItem="ofS-JI-gZW" secondAttribute="bottom" id="Qdf-cn-Xlv"/>
@@ -82,6 +83,10 @@
                         <outlet property="undoButton" destination="tCF-2O-zjM" id="QR3-RZ-4FY"/>
                     </connections>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cjU-Ad-bUI">
+                    <rect key="frame" x="0.0" y="862" width="414" height="34"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BSQ-bf-eea">
                     <rect key="frame" x="0.0" y="641" width="414" height="221"/>
                     <subviews>
@@ -89,12 +94,10 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
                             <subviews>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="nq6-ZB-8bJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+                                    <rect key="frame" x="0.0" y="16" width="414" height="64"/>
                                     <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="96" id="808-BL-O9I">
-                                            <variation key="heightClass=regular-widthClass=regular" constant="104"/>
-                                        </constraint>
+                                        <constraint firstAttribute="height" constant="64" id="808-BL-O9I"/>
                                     </constraints>
                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wPB-K3-M1W">
                                         <size key="itemSize" width="35" height="35"/>
@@ -158,7 +161,9 @@
                             </subviews>
                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="iVs-YP-6iP" firstAttribute="top" secondItem="nq6-ZB-8bJ" secondAttribute="bottom" id="0Yu-x1-iaC"/>
+                                <constraint firstItem="iVs-YP-6iP" firstAttribute="top" secondItem="nq6-ZB-8bJ" secondAttribute="bottom" constant="16" id="0Yu-x1-iaC">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                </constraint>
                                 <constraint firstAttribute="trailing" secondItem="iVs-YP-6iP" secondAttribute="trailing" id="8G7-MF-EYb"/>
                                 <constraint firstItem="nq6-ZB-8bJ" firstAttribute="leading" secondItem="CXu-Dq-C9Z" secondAttribute="leading" id="8Ri-qX-82g"/>
                                 <constraint firstAttribute="trailing" secondItem="nq6-ZB-8bJ" secondAttribute="trailing" id="BKc-P0-cnX"/>
@@ -166,7 +171,9 @@
                                 <constraint firstAttribute="height" constant="140" id="I1T-ZP-xew">
                                     <variation key="heightClass=regular-widthClass=regular" constant="164"/>
                                 </constraint>
-                                <constraint firstItem="nq6-ZB-8bJ" firstAttribute="top" secondItem="CXu-Dq-C9Z" secondAttribute="top" id="KsS-og-lKT"/>
+                                <constraint firstItem="nq6-ZB-8bJ" firstAttribute="top" secondItem="CXu-Dq-C9Z" secondAttribute="top" constant="16" id="KsS-og-lKT">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                </constraint>
                                 <constraint firstItem="iVs-YP-6iP" firstAttribute="leading" secondItem="CXu-Dq-C9Z" secondAttribute="leading" id="SOP-YB-Yku"/>
                             </constraints>
                         </view>
@@ -184,9 +191,13 @@
             <color key="backgroundColor" red="0.019607843137254902" green="0.098039215686274508" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="BSQ-bf-eea" secondAttribute="trailing" id="11U-Co-V4n"/>
+                <constraint firstAttribute="bottom" secondItem="cjU-Ad-bUI" secondAttribute="bottom" id="5xF-9F-LYB"/>
+                <constraint firstItem="cjU-Ad-bUI" firstAttribute="top" secondItem="BSQ-bf-eea" secondAttribute="bottom" id="7Hk-mO-bbU"/>
                 <constraint firstItem="dv4-cf-xPu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Bio-r9-msj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Tnf-Yg-CVd" secondAttribute="trailing" id="D67-Uq-NSC"/>
+                <constraint firstItem="cjU-Ad-bUI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JZy-kv-kgR"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="BSQ-bf-eea" secondAttribute="bottom" id="QwN-Rn-8TI"/>
+                <constraint firstAttribute="trailing" secondItem="cjU-Ad-bUI" secondAttribute="trailing" id="XWP-7I-89v"/>
                 <constraint firstItem="dv4-cf-xPu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="44" id="a53-A6-bar" customClass="TopSafeAreaConstraint" customModule="lifebox"/>
                 <constraint firstAttribute="trailing" secondItem="dv4-cf-xPu" secondAttribute="trailing" id="dgq-Q0-Gfq"/>
                 <constraint firstItem="BSQ-bf-eea" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fJr-Xl-XnL"/>

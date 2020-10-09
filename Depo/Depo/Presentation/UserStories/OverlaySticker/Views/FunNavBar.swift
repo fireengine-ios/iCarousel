@@ -18,8 +18,9 @@ final class FunNavBar: UIView {
     
     enum FunState {
         case initial
-        case edit
+        case edited
         case modify
+        case empty
     }
     
     @IBOutlet private weak var closeButton: UIButton!
@@ -42,7 +43,7 @@ final class FunNavBar: UIView {
                 saveButton.isHidden = true
                 undoButton.isHidden = true
                 
-            case .edit:
+            case .edited:
                 closeButton.isHidden = false
                 saveButton.isHidden = false
                 undoButton.isHidden = true
@@ -51,6 +52,11 @@ final class FunNavBar: UIView {
                 closeButton.isHidden = true
                 saveButton.isHidden = true
                 undoButton.isHidden = false
+                
+            case .empty:
+                closeButton.isHidden = true
+                saveButton.isHidden = true
+                undoButton.isHidden = true
             }
         }
     }

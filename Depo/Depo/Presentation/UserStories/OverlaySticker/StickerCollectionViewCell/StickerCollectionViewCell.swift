@@ -14,10 +14,10 @@ final class StickerCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var previewImageView: UIImageView! {
         willSet {
-//            newValue.layer.borderColor = ColorConstants.stickerBorderColor.cgColor
-//            newValue.layer.borderWidth = 1
             newValue.contentMode = .scaleAspectFit
             newValue.isUserInteractionEnabled = false
+            newValue.sd_setShowActivityIndicatorView(true)
+            newValue.sd_setIndicatorStyle(.white)
         }
     }
     

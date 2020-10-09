@@ -2106,4 +2106,12 @@ struct TextConstants {
     
     static let widgetDisplayName = NSLocalizedString("widget_display_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetDescription = NSLocalizedString("widget_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let funGif = NSLocalizedString("fun_gif", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let funSticker = NSLocalizedString("fun_sticker", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let funCloseAlertTitle = NSLocalizedString("fun_close_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let funCloseAlertMessage = NSLocalizedString("fun_close_alert_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let funCloseAlertLeftButton = NSLocalizedString("fun_close_alert_left_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let funCloseAlertRightButton = NSLocalizedString("fun_close_alert_right_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
