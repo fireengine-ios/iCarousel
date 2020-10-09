@@ -2019,14 +2019,11 @@ Please check I have understood the intended command here*/
 "widget_rule_6_small_button" = "Sauvegardez";
 "widget_rule_6_medium_detail" = "Vous avez sauvegardé vos contacts pour la dernière fois il y a 1 mois. Accédez à lifebox dès maintenant, sécurisez votre contacts.";
 "widget_rule_6_medium_button" = "Sauvegardez vos Contacts";
-"widget_rule_7_1_small_title" = "Nous avons créé des albums spéciaux basés sur les visages de vos photos.";
-"widget_rule_7_1_small_detail" = "Révisez et partagez!";
+"widget_rule_7_1_small_detail" = "Nous avons regroupé vos photos par visages.";
 "widget_rule_7_1_small_button" = "Vue";
-"widget_rule_7_1_medium_title" = "Nous avons regroupé ses souvenirs en fonction des personnes et créé des albums spéciaux.";
-"widget_rule_7_1_medium_detail" = "Découvrez et partagez maintenant!";
+"widget_rule_7_1_medium_detail" = "Nous avons regroupé ses souvenirs en fonction des personnes et créé des albums spéciaux.";
 "widget_rule_7_1_medium_button" = "Découvrez les Albums";
-"widget_rule_7_2_small_title" = "Plus de photos ";
-"widget_rule_7_2_small_detail" = " Il fournit un regroupement des visages plus précis.";
+"widget_rule_7_2_small_detail" = "Plus de photos offrent un regroupement plus précis des visages.";
 "widget_rule_7_2_small_button" = "Télécharger les Photos";
 "widget_rule_7_2_medium_title" = "Plus de photos offrent un regroupement plus précis des visages.";
 "widget_rule_7_2_medium_detail" = "Téléchargez le photos";

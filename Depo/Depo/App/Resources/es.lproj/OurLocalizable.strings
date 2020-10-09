@@ -1755,14 +1755,11 @@
 "widget_rule_6_small_button" = "Respaldo";
 "widget_rule_6_medium_detail" = "Ha pasado un 1 mes desde tu último respaldo de contactos";
 "widget_rule_6_medium_button" = "Respalda tus contactos";
-"widget_rule_7_1_small_title" = "¡Agrupa tus fotos y encontralas fácilmente! ";
-"widget_rule_7_1_small_detail" = "¡Observa y comparte!";
+"widget_rule_7_1_small_detail" = "Hemos agrupado tus fotos por rostro.";
 "widget_rule_7_1_small_button" = "Ver";
-"widget_rule_7_1_medium_title" = "Recuerdos con tus seres queridos agrupados en álbumes especiales";
-"widget_rule_7_1_medium_detail" = "Miralos y comparte!";
+"widget_rule_7_1_medium_detail" = "Recuerdos con tus seres queridos agrupados en álbumes especiales";
 "widget_rule_7_1_medium_button" = "Ver álbumes de personas";
-"widget_rule_7_2_small_title" = "Más fotos significa una agrupación de rostros más fácil";
-"widget_rule_7_2_small_detail" = "Sube más!";
+"widget_rule_7_2_small_detail" = "Más fotos significa agrupación de rostros más fácil";
 "widget_rule_7_2_small_button" = "Subir";
 "widget_rule_7_2_medium_title" = "Más fotos significa agrupación de rostros más fácil";
 "widget_rule_7_2_medium_detail" = "¿Porqué no subir más fotos?";

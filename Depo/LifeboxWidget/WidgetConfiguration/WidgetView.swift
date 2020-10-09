@@ -443,12 +443,12 @@ struct WidgetFaceRecognitionSmallView: View {
     func entryData() -> (title: String, description: String, titleButton: String, action: PushNotificationAction) {
         switch entry.state {
         case .fir:
-            return (title: TextConstants.widgetRule71SmallTitle,
+            return (title: "",
                     description: TextConstants.widgetRule71SmallDetail,
                     titleButton: TextConstants.widgetRule71SmallButton,
                     action: .widgetFIR)
         case .firLess3People:
-            return (title: TextConstants.widgetRule72SmallTitle,
+            return (title: "",
                     description: TextConstants.widgetRule72SmallDetail,
                     titleButton: TextConstants.widgetRule72SmallButton,
                     action: .widgetFIRLess3People)
@@ -510,7 +510,7 @@ struct WidgetFaceRecognitionMediumView: View {
     func entryData() -> (title: String, description: String, titleButton: String, action: PushNotificationAction) {
         switch entry.state {
         case .fir:
-            return (title: TextConstants.widgetRule71MediumTitle,
+            return (title: "",
                     description: TextConstants.widgetRule71MediumDetail,
                     titleButton: TextConstants.widgetRule71MediumButton,
                     action: .widgetFIR)
