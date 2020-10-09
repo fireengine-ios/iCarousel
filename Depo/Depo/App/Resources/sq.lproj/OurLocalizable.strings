@@ -1756,14 +1756,11 @@
 "widget_rule_6_small_button" = "Rezervo";
 "widget_rule_6_medium_detail" = "Nuk e ke rezervuar librin tënd teleonik për herë të fundit 1 muaj më parë. Eja  në lifebox tani, Siguroje librin tënd teleonik .";
 "widget_rule_6_medium_button" = "Rezervoje Librin Tënd Teleonik";
-"widget_rule_7_1_small_title" = "Ne krijuam albume speciale bazuar në fytyrat  që janë në fotot  e tua.";
-"widget_rule_7_1_small_detail" = "Shqyrto dhe ndaje!";
+"widget_rule_7_1_small_detail" = "Ne i grupuam fotot e tua sipas fytyrave.";
 "widget_rule_7_1_small_button" = "Shfaqe";
-"widget_rule_7_1_medium_title" = "Ne i grupuam kujtimet e tua sipas  personave dhe krijuam albume të veçanta.";
-"widget_rule_7_1_medium_detail" = "Zbulo dhe ndaie tani!";
+"widget_rule_7_1_medium_detail" = "Ne i grupuam kujtimet e tua sipas personave dhe krijuam albume të veçanta.";
 "widget_rule_7_1_medium_button" = "Zbuloji Albumet";
-"widget_rule_7_2_small_title" = "Më shumë foto ";
-"widget_rule_7_2_small_detail" = " siguron grupimin më të saktë të fytyrës.";
+"widget_rule_7_2_small_detail" = "Siguron  më shumë fotografi dhe një grupim më të saktë të fytyrës.";
 "widget_rule_7_2_small_button" = "Ngarko Foto";
 "widget_rule_7_2_medium_title" = "Siguron më shumë fotografi dhe një grupim më të saktë të fytyrës.";
 "widget_rule_7_2_medium_detail" = "Ngarko foto";

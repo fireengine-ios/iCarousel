@@ -1713,14 +1713,11 @@
 "widget_rule_6_small_button" = "Fă backup";
 "widget_rule_6_medium_detail" = "Ai făcut ultima dată backup agendei tale de contacte acum 1 luna. Vin-o imediat în lifebox, asigură-ţi agenta de contacte.";
 "widget_rule_6_medium_button" = "Fă backup Agendei tale de Contacte";
-"widget_rule_7_1_small_title" = "Am creat albume speciale după din fotografiile tale.";
-"widget_rule_7_1_small_detail" = "Examinează şi partajează!";
+"widget_rule_7_1_small_detail" = "Am grupat fotografiile după fețele din fotografii.";
 "widget_rule_7_1_small_button" = "Afișează";
-"widget_rule_7_1_medium_title" = "Am grupat amintirile în funcție de persoanele de contact și am creat albume speciale.";
-"widget_rule_7_1_medium_detail" = "Descoperă acum şi partajează!";
+"widget_rule_7_1_medium_detail" = "Am grupat amintirile în funcție de persoanele de contact și am creat albume speciale.";
 "widget_rule_7_1_medium_button" = "Descoperă-ţi Albumele";
-"widget_rule_7_2_small_title" = "Mai multe fotografii ";
-"widget_rule_7_2_small_detail" = " oferă o grupare mai precisă a fețelor.";
+"widget_rule_7_2_small_detail" = "Mai multe fotografii oferă o grupare mai precisă a feţelor.";
 "widget_rule_7_2_small_button" = "Încarcă Fotografia";
 "widget_rule_7_2_medium_title" = "Mai multe fotografii oferă o grupare mai precisă a fețelor.";
 "widget_rule_7_2_medium_detail" = "Încarcă Fotografia";

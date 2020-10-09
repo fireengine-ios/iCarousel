@@ -1725,14 +1725,11 @@
 "widget_rule_6_small_button" = "انسخ احتياطيا";
 "widget_rule_6_medium_detail" = "اجريت اخرنسخ احتياطي لجهات الاتصال الخاصة بك قبل شهرا.احضر إلى لايف بوكس سريعا,واجعل جهات الاتصال الخاصة بك تحت الحماية.";
 "widget_rule_6_medium_button" = "انسخ جهات اتصالك احتياطيا";
-"widget_rule_7_1_small_title" = "قد قمنا بتكوين ألبومات خاصة وفقا للوجوه التي في صوركم.";
-"widget_rule_7_1_small_detail" = "افحص وشارك!";
+"widget_rule_7_1_small_detail" = "قمنا بتجميع الصور العائدة إليكم وفقا للوجوه.اكتشف الألبومات وشاركها!";
 "widget_rule_7_1_small_button" = "اعرض";
-"widget_rule_7_1_medium_title" = "قمنا بتجميع الذكريات العائدة إليكم وفقا لجهات الاتصال وقمنا بتكوين ألبومات خاصة.";
-"widget_rule_7_1_medium_detail" = "اكتشف الان وشاركها!";
+"widget_rule_7_1_medium_detail" = "قمنا بتجميع الذكريات العائدة إليكم وفقا لجهات الاتصال وقمنا بتكوين ألبومات خاصة.اكتشف الألبومات الان وشاركها!";
 "widget_rule_7_1_medium_button" = "اكتشف الألبومات";
-"widget_rule_7_2_small_title" = "المزيد من الصور";
-"widget_rule_7_2_small_detail" = "يوفر تصنيفًا أكثر دقة للوجه.";
+"widget_rule_7_2_small_detail" = "توفر المزيد من الصور تصنيفًا أكثر دقة للوجه.";
 "widget_rule_7_2_small_button" = "حمل الصورة";
 "widget_rule_7_2_medium_title" = "توفر المزيد من الصور تصنيفًا أكثر دقة للوجه.";
 "widget_rule_7_2_medium_detail" = "حمل الصورة";

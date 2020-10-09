@@ -1723,14 +1723,11 @@
 "widget_rule_6_small_button" = "Yedekle";
 "widget_rule_6_medium_detail" = "Rehberini en son 1 ay önce yedekledin. Hemen lifebox'a gel, rehberini güvenceye al.";
 "widget_rule_6_medium_button" = "Rehberini Yedekle";
-"widget_rule_7_1_small_title" = "Fotoğraflarındaki yüzlere göre özel albümler oluşturduk.";
-"widget_rule_7_1_small_detail" = "İncele ve paylaş!";
+"widget_rule_7_1_small_detail" = "Fotoğraflarını yüzlere göre grupladık.";
 "widget_rule_7_1_small_button" = "Görüntüle";
-"widget_rule_7_1_medium_title" = "Anılarını kişilere göre gruplandırıp";
-"widget_rule_7_1_medium_detail" = " özel albümler oluşturduk.";
+"widget_rule_7_1_medium_detail" = "Anılarını kişilere göre gruplandırıp özel albümler oluşturduk.";
 "widget_rule_7_1_medium_button" = "Albümleri Keşfet";
-"widget_rule_7_2_small_title" = "Daha çok fotoğraf ";
-"widget_rule_7_2_small_detail" = " daha doğru yüz gruplama sağlar.";
+"widget_rule_7_2_small_detail" = "Daha çok fotoğraf daha doğru yüz gruplama sağlar.";
 "widget_rule_7_2_small_button" = "Fotoğraf Yükle";
 "widget_rule_7_2_medium_title" = "Daha çok fotoğraf daha doğru yüz gruplama sağlar.";
 "widget_rule_7_2_medium_detail" = "Fotoğraf yükle";
