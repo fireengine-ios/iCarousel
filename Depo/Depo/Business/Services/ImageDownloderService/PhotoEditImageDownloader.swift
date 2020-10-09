@@ -31,7 +31,7 @@ final class PhotoEditImageDownloader {
         
         debugLog("attempts left: \(attempts)")
         
-        getImage(url: url) { [weak self] image in
+        imageDownloader.getImageByTrimming(url: url) { [weak self] image in
             guard let self = self else {
                 completion(nil)
                 return
@@ -44,19 +44,6 @@ final class PhotoEditImageDownloader {
         
             DispatchQueue.main.async {
                 completion(image)
-            }
-        }
-    }
-    
-    private func getImage(url: URL?, completion: @escaping RemoteImage) {
-        imageDownloader.getImageResponseByTrimming(url: url) { imageResult in
-            switch imageResult {
-                case .success(let image):
-                    completion(image)
-                    
-                case .failed(let error):
-                    debugLog("error: \(error.description)")
-                    completion(nil)
             }
         }
     }
