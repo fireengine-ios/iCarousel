@@ -164,11 +164,13 @@ final class WidgetPresentationService {
         }
 
         getFaceImageEnabled { face in
+            DebugLogService.debugLog("ORDER 7: isFIREnabled == \(face)")
             userInfo.isFIREnabled = face
             group.leave()
         }
         
         getFaceImageRecognitionStatus { hasFIRPermission in
+            DebugLogService.debugLog("ORDER 7: hasFIRPermission == \(hasFIRPermission)")
             userInfo.hasFIRPermission = hasFIRPermission
             group.leave()
         }

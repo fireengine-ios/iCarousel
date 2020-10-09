@@ -107,7 +107,7 @@ extension WidgetProvider {
                         self.findFirstFittingEntry(orders: nextOrdersInLine, customCurrentDate: order.refreshDate) { (nextEntry, entryOrder) in
                             if let newEntry = nextEntry {
                                 entries.append(newEntry)
-                                DebugLogService.debugLog("found first fitting entry \(entryOrder.debugDescription), family\(family.debugDescription)")
+                                DebugLogService.debugLog("found first fitting entry \(newEntry.state.gaName), family\(family.debugDescription)")
                             }
                             semaphore.signal()
                         }
