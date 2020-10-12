@@ -29,7 +29,7 @@ final class OverlayStickerSaveManager {
                 self?.saveLocalyItem(url: result.url, type: result.type, completion: { [weak self] saveResult in
                     switch saveResult {
                     case .success(let localItem):
-                        self?.uploadItem(item: localItem, completion: { uploadResult in
+                        self?.uploadItem(item: localItem, completion: { [weak self] uploadResult in
                             switch uploadResult {
                             case .success(let remote):
                                 self?.removeImage(at: result.url)

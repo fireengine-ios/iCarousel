@@ -367,7 +367,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         controller.smashActionService = self.smashActionService
         let navVC = NavigationController(rootViewController: controller)
         navVC.navigationBar.isHidden = true
-        router.presentViewController(controller: navVC, animated: true) {
+        router.presentViewController(controller: navVC, animated: true) { [weak self] in
             ImageDownloder().getImage(patch: url) { [weak self] image in
                 guard let self = self, let image = image else {
                     if !ReachabilityService.shared.isReachable {
@@ -384,12 +384,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 controller.imageName = item.name
                 completion?()
                 
-                self.trackEvent(elementType: .smash)
+                self?.trackEvent(elementType: .smash)
             }
         }
-//        self.router.presentViewController(controller: navVC)
-        
-        
     }
     
     func moveToTrash(items: [BaseDataSourceItem]) {
