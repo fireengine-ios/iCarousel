@@ -161,18 +161,18 @@ final class WidgetContactBackupEntry: WidgetBaseEntry {
 }
 
 final class WidgetUserInfoEntry: WidgetBaseEntry {
-    private(set) var peopleInfos: [PeopleInfo]
+    private(set) var imageUrls: [URL?]
     private(set) var images = [UIImage]()
     
-    init(isFIREnabled: Bool, hasFIRPermission: Bool, peopleInfos: [PeopleInfo], date: Date) {
-        self.peopleInfos = peopleInfos
+    init(isFIREnabled: Bool, hasFIRPermission: Bool, imageUrls: [URL?], date: Date) {
+        self.imageUrls = imageUrls
         
         let state: WidgetState
         if !hasFIRPermission {
             state = .firStandart
         } else if !isFIREnabled {
             state = .firDisabled
-        } else if peopleInfos.count < 3 {
+        } else if imageUrls.count < 3 {
             state = .firLess3People
         } else {
             state = .fir
@@ -184,26 +184,25 @@ final class WidgetUserInfoEntry: WidgetBaseEntry {
     }
     
     enum CodingKeys: String, CodingKey {
-        case isFIREnabled, hasFIRPermission, peopleInfos, imagePaths
+        case isFIREnabled, hasFIRPermission, imageUrls, imagePaths
     }
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        peopleInfos = try container.decodeIfPresent([PeopleInfo].self, forKey: .peopleInfos) ?? []
+        imageUrls = try container.decodeIfPresent([URL?].self, forKey: .imageUrls) ?? []
         try super.init(from: decoder)
         setupImages()
     }
     
     private func setupImages() {
-        guard !peopleInfos.isEmpty else {
+        guard !imageUrls.isEmpty else {
             images = [UIImage(named: "user-3")!, UIImage(named: "user-2")!, UIImage(named: "user-1")!]
             return
         }
         
         let cache = WidgetImageCache.shared
-        let urls = peopleInfos.map { $0.thumbnail ?? $0.alternateThumbnail }
-        
-        images = urls.enumerated().map { index, url -> UIImage in
+
+        images = imageUrls.enumerated().map { index, url -> UIImage in
             if let url = url, let image = cache[url] {
                 return image
             }

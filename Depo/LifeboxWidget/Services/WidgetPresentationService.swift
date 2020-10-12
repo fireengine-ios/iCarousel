@@ -15,6 +15,7 @@ class UserInfo {
     var isFIREnabled = false
     var hasFIRPermission = false
     var peopleInfos = [PeopleInfo]()
+    var imageUrls = [URL?]()
 }
 
 class SyncInfo {
@@ -150,17 +151,31 @@ final class WidgetPresentationService {
         
         group.enter()
         group.enter()
+        group.enter()
         
         group.notify(queue: .global()) { [weak self] in
-            if userInfo.hasFIRPermission && userInfo.isFIREnabled {
-                self?.getPeopleInfo { [weak self] peopleInfos in
-                    userInfo.peopleInfos = peopleInfos
-                    self?.loadImages { isLoadingImages in
-                        completion((userInfo, isLoadingImages))
-                    }
-                }
-            } else {
+            if userInfo.hasFIRPermission && !userInfo.isFIREnabled {
+                //for 7.3 display placeholders
                 completion((userInfo, false))
+                return
+            }
+            
+            func load(urls: [URL?]) {
+                userInfo.imageUrls = urls
+                self?.loadImages(urls: urls, completion: { isLoadingImages in
+                    completion((userInfo, isLoadingImages))
+                })
+            }
+            
+            if userInfo.hasFIRPermission && userInfo.isFIREnabled {
+                //for 7.1,7.2 display people avatars
+                let urls = userInfo.peopleInfos.map { $0.thumbnail ?? $0.alternateThumbnail }
+                load(urls: urls)
+            } else {
+                //for 7.4 display last uploads
+                self?.serverService.lastUploads { lastUploadsUrls in
+                    load(urls: lastUploadsUrls)
+                }
             }
         }
 
@@ -171,6 +186,11 @@ final class WidgetPresentationService {
         
         getFaceImageRecognitionStatus { hasFIRPermission in
             userInfo.hasFIRPermission = hasFIRPermission
+            group.leave()
+        }
+        
+        getPeopleInfo { peopleInfos in
+            userInfo.peopleInfos = Array(peopleInfos.prefix(3))
             group.leave()
         }
     }
@@ -232,12 +252,9 @@ final class WidgetPresentationService {
         }
     }
     
-    private func loadImages(completion: @escaping ValueHandler<Bool>) {
-        getPeopleInfo { [weak self] peopleInfos in
-            let urls = peopleInfos.map { $0.thumbnail ?? $0.alternateThumbnail }
-            self?.imageLoader.loadImage(urls: urls) { loadingImages in
-                completion(loadingImages.firstIndex(where: { $0 == nil }) != nil)
-            }
+    private func loadImages(urls: [URL?], completion: @escaping ValueHandler<Bool>) {
+        imageLoader.loadImage(urls: urls) { loadingImages in
+            completion(loadingImages.firstIndex(where: { $0 == nil }) != nil)
         }
     }
     
