@@ -55,4 +55,6 @@ struct SharedConstants {
     
     static let isPreparationFinished = "isPreparationFinished"
     static let entryChangedKey = "entryChangedKey"
+    
+    static let isAppFirstLaunchKey = "isAppFirstLaunchKey"
 }

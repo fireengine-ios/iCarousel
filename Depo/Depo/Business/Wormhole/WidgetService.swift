@@ -18,6 +18,23 @@ final class WidgetService {
     
     private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
     
+    init() {
+        syncAppFirstLaunchFlags()
+    }
+    
+    private func syncAppFirstLaunchFlags() {
+        //sync isAppFirstLaunch flag for first widget install
+        let storageIsAppFirstLaunch = UserDefaults.standard.object(forKey: SharedConstants.isAppFirstLaunchKey) as? Bool ?? true
+        if isAppFirstLaunch && !storageIsAppFirstLaunch {
+            isAppFirstLaunch = storageIsAppFirstLaunch
+        }
+    }
+    
+    var isAppFirstLaunch: Bool {
+        get { return defaults?.object(forKey: SharedConstants.isAppFirstLaunchKey) as? Bool ?? true }
+        set { defaults?.set(newValue, forKey: SharedConstants.isAppFirstLaunchKey) }
+    }
+    
     var isPreparationFinished: Bool {
         get { return defaults?.bool(forKey: SharedConstants.isPreparationFinished) ?? false }
         set { defaults?.set(newValue, forKey: SharedConstants.isPreparationFinished)}
