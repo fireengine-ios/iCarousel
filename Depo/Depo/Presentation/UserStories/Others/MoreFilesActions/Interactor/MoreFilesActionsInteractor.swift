@@ -285,6 +285,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                 
                                 case .failed(_):
                                     DispatchQueue.main.async {
+                                        controller.saveImageFailure(saveAsCopy: true)
                                         controller.hideSpinner()
                                         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
                                     }
@@ -336,6 +337,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
 
                                 case .failed(_):
                                     DispatchQueue.main.async {
+                                        controller.saveImageFailure(saveAsCopy: false)
                                         controller.hideSpinner()
                                         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
                                 }

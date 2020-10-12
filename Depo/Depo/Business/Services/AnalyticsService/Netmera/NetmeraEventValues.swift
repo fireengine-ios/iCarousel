@@ -576,4 +576,74 @@ enum NetmeraEventValues {
         }
     }
     
+    enum PhotoEditAdjustmentType {
+        case adjust
+        case light
+        case color
+        case hsl
+        case effect
+        
+        var text: String {
+            switch self {
+            case .adjust:
+                return "Adjust"
+            case .light:
+                return "Light"
+            case .color:
+                return "Color"
+            case .hsl:
+                return "Color-HSL"
+            case .effect:
+                return "Effect"
+            }
+        }
+    }
+    
+    enum PhotoEditActionType {
+        case save
+        case saveAsCopy
+        
+        var text: String {
+            switch self {
+            case .save:
+                return "Save"
+            case .saveAsCopy:
+                return "Save as copy"
+            }
+        }
+    }
+    
+    enum PhotoEditType {
+        case filter
+        case adjustment
+        
+        var text: String {
+            switch self {
+            case .filter:
+                return "Filter"
+            case .adjustment:
+                return "Adjust"
+            }
+        }
+    }
+    
+    enum PhotoEditButton {
+        case save
+        case saveAsCopy
+        case resetToOriginal
+        case cancel
+        
+        var text: String {
+            switch self {
+            case .save:
+                return "Save"
+            case .saveAsCopy:
+                return "Save as copy"
+            case .resetToOriginal:
+                return "Reset to original"
+            case .cancel:
+                return "Cancel"
+            }
+        }
+    }
 }

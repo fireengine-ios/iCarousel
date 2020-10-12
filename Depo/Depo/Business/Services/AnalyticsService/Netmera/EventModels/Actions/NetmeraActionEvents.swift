@@ -1219,4 +1219,81 @@ extension NetmeraEvents.Actions {
             return key
         }
     }
+    
+    final class PhotoEditApplyAdjustment: NetmeraEvent {
+        private let key = "mov"
+        @objc var selection = ""
+        @objc var filterType = ""
+        @objc var action = ""
+
+        convenience init(selection: NetmeraEventValues.PhotoEditAdjustmentType, filterType: String, action: NetmeraEventValues.PhotoEditActionType) {
+            self.init()
+            self.selection = selection.text
+            self.filterType = filterType
+            self.action = action.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(selection),
+                "eb" : #keyPath(filterType),
+                "ee" : #keyPath(action)
+            ]
+        }
+    }
+    
+    final class PhotoEditApplyFilter: NetmeraEvent {
+        private let key = "cdw"
+        @objc var filterType = ""
+        @objc var action = ""
+
+        convenience init(filterType: String, action: NetmeraEventValues.PhotoEditActionType) {
+            self.init()
+            self.filterType = filterType
+            self.action = action.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(filterType),
+                "eb" : #keyPath(action)
+            ]
+        }
+    }
+    
+    final class PhotoEditComplete: NetmeraEvent {
+        private let key = "nsg"
+        @objc var status = ""
+        @objc var selection = ""
+
+        convenience init(status: NetmeraEventValues.GeneralStatus, selection: NetmeraEventValues.PhotoEditType) {
+            self.init()
+            self.status = status.text
+            self.selection = selection.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(status),
+                "eb" : #keyPath(selection)
+            ]
+        }
+    }
+    
+    final class PhotoEditButtonAction: NetmeraEvent {
+        private let key = "jpj"
+        @objc var buttonName = ""
+
+        convenience init(buttonName: NetmeraEventValues.PhotoEditButton) {
+            self.init()
+            self.buttonName = buttonName.text
+        }
+        
+        override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
+            return[
+                "ea" : #keyPath(buttonName)
+            ]
+        }
+    }
+
 }
