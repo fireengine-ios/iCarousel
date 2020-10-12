@@ -9,8 +9,6 @@
 import Foundation
 import SwiftUI
 import WidgetKit
-import MMWormhole
-
 
 typealias WidgetBaseEntriesCallback = ([WidgetBaseEntry]) -> ()
 typealias WidgetBaseEntryCallback = (WidgetBaseEntry?) -> ()
