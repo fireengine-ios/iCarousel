@@ -1713,14 +1713,11 @@
 "widget_rule_6_small_button" = "Backup";
 "widget_rule_6_medium_detail" = "Sie haben Ihre Kontakte zuletzt vor 1 Monat gesichert. Kommen Sie jetzt zur Lifebox und sichern Sie Ihre Kontakte.";
 "widget_rule_6_medium_button" = "Sichern Sie Ihre Kontakte";
-"widget_rule_7_1_small_title" = "Wir haben spezielle Alben basierend auf den Gesichtern in Ihren Fotos erstellt.";
-"widget_rule_7_1_small_detail" = "Überprüfen und teilen!";
+"widget_rule_7_1_small_detail" = "Wir haben Ihre Fotos nach Gesichtern gruppiert.";
 "widget_rule_7_1_small_button" = "Ansehen";
-"widget_rule_7_1_medium_title" = "Wir haben Erinnerungen nach Menschen gruppiert und spezielle Alben erstellt.";
-"widget_rule_7_1_medium_detail" = "Jetzt entdecken und teilen!";
+"widget_rule_7_1_medium_detail" = "Erinnerungen in speziellen Alben gruppiert";
 "widget_rule_7_1_medium_button" = "Entdecken Sie Alben";
-"widget_rule_7_2_small_title" = "Mehr Fotos ";
-"widget_rule_7_2_small_detail" = " bietet eine genauere Gesichtsgruppierung.";
+"widget_rule_7_2_small_detail" = "Mehr Fotos bieten eine genauere Gesichtsgruppierung.";
 "widget_rule_7_2_small_button" = "Ein Foto laden";
 "widget_rule_7_2_medium_title" = "Mehr Fotos bieten eine genauere Gesichtsgruppierung.";
 "widget_rule_7_2_medium_detail" = "Ein Foto laden";

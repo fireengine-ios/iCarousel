@@ -86,40 +86,41 @@ extension SharedGroupCoreDataStack {
         }
     }
     
-    func saveSynced(localIdentifiers: [String]) {
+    func save(isSynced: Bool, localIdentifiers: [String], completion: @escaping VoidHandler) {
         guard !localIdentifiers.isEmpty else {
+            completion()
             return
         }
         
         #if MAIN_APP
-        debugLog("WIDGET: save synced locals \(localIdentifiers.count)")
+        debugLog("WIDGET: save locals \(localIdentifiers.count) as isSynced \(isSynced)")
         #endif
         
         performBackgroundTask { [weak self] context in
-            //TODO: kind of Range API updateDB logic is required to filter added/changed assets
             let predicate = NSPredicate(format: "localIdentifier IN %@", localIdentifiers)
             
-            self?.executeRequest(predicate: predicate, context: context) { [weak self] syncedItems in
-                let syncedIdentifiers = syncedItems.compactMap { $0.localIdentifier }
-                let newSynced = Set(localIdentifiers).subtracting(syncedIdentifiers)
+            self?.executeRequest(predicate: predicate, context: context) { [weak self] existedItems in
+                let existedIdentifiers = existedItems.compactMap { $0.localIdentifier }
+                let newIdentifiers = Set(localIdentifiers).subtracting(existedIdentifiers)
                 
                 //update assets
-                syncedItems.forEach {
-                    $0.isValidForSync = false
+                existedItems.forEach {
+                    $0.isValidForSync = !isSynced
                 }
                 
-                guard !newSynced.isEmpty else {
-                    self?.saveData(for: context, completion: nil)
+                guard !newIdentifiers.isEmpty else {
+                    self?.saveData(for: context, completion: completion)
                     return
                 }
                 
-                newSynced.forEach {
+                //create new assets
+                newIdentifiers.forEach {
                     let newAsset = LocalAsset(context: context)
                     newAsset.localIdentifier = $0
-                    newAsset.isValidForSync = false
+                    newAsset.isValidForSync = !isSynced
                 }
                 
-                self?.saveData(for: context, completion: nil)
+                self?.saveData(for: context, completion: completion)
             }
         }
     }
@@ -127,7 +128,7 @@ extension SharedGroupCoreDataStack {
     func actualizeWith(synced: [String], unsynced: [String], completion: @escaping VoidHandler) {
         
         #if MAIN_APP
-        debugLog("WIDGET: actualize with synced \(synced.count), unsynced \(unsynced.count)")
+        debugLog("WIDGET: actualizing with synced \(synced.count), unsynced \(unsynced.count)")
         #endif
         
         guard !synced.isEmpty || !unsynced.isEmpty else {
@@ -135,82 +136,35 @@ extension SharedGroupCoreDataStack {
             return
         }
         
-        let group = DispatchGroup()
-        group.enter()
-        group.enter()
-        
-        performBackgroundTask { [weak self] context in
-            let predicate = NSPredicate(format: "localIdentifier IN %@", unsynced)
-            
-            self?.executeRequest(predicate: predicate, context: context) { [weak self] unsyncedItems in
-                let unsyncedIdentifiers = unsyncedItems.compactMap { $0.localIdentifier }
-                let newUnsynced = Set(unsynced).subtracting(unsyncedIdentifiers)
-                
-                //update assets
-                unsyncedItems.forEach {
-                    $0.isValidForSync = true
-                }
-                
-                guard !newUnsynced.isEmpty else {
-                    self?.saveData(for: context, completion: {
-                        group.leave()
-                    })
-                    return
-                }
-                
-                //create new assets
-                newUnsynced.forEach {
-                    let newAsset = LocalAsset(context: context)
-                    newAsset.localIdentifier = $0
-                    newAsset.isValidForSync = true
-                }
-                
-                self?.saveData(for: context, completion: {
-                    group.leave()
-                })
+        deleteAllExcept(localIdentifiers: synced + unsynced) { [weak self] in
+            self?.save(isSynced: false, localIdentifiers: unsynced) {
+                self?.save(isSynced: true, localIdentifiers: synced, completion: completion)
             }
         }
         
+    }
+    
+    private func deleteAllExcept(localIdentifiers: [String], completion: @escaping VoidHandler) {
+        
+        #if MAIN_APP
+        debugLog("WIDGET: deleting \(localIdentifiers.count)")
+        #endif
+        
         performBackgroundTask { [weak self] context in
-            let predicate = NSPredicate(format: "localIdentifier IN %@", synced)
-            
+            let predicate = NSPredicate(format: "NOT(localIdentifier IN %@)", localIdentifiers)
             self?.executeRequest(predicate: predicate, context: context) { [weak self] syncedItems in
-                let syncedIdentifiers = syncedItems.compactMap { $0.localIdentifier }
-                let newSynced = Set(synced).subtracting(syncedIdentifiers)
-                
-                //update assets
                 syncedItems.forEach {
-                    $0.isValidForSync = false
+                    context.delete($0)
                 }
-                
-                guard !newSynced.isEmpty else {
-                    self?.saveData(for: context, completion:  {
-                        group.leave()
-                    })
-                    return
-                }
-                
-                //create new assets
-                newSynced.forEach {
-                    let newAsset = LocalAsset(context: context)
-                    newAsset.localIdentifier = $0
-                    newAsset.isValidForSync = false
-                }
-                
-                self?.saveData(for: context, completion: {
-                    group.leave()
-                })
+                self?.saveData(for: context, completion: completion)
             }
-        }
-        
-        group.notify(queue: .main) {
-            completion()
         }
     }
     
     
     //saving invalid (mostly iCloud) assets as not synced
     func saveInvalid(localIdentifiers: [String]) {
+        
         #if MAIN_APP
         debugLog("WIDGET: save invalid \(localIdentifiers.count)")
         #endif
@@ -220,7 +174,6 @@ extension SharedGroupCoreDataStack {
         }
         
         performBackgroundTask { [weak self] context in
-            //TODO: kind of Range API updateDB logic is required to filter added/changed assets
             let predicate = NSPredicate(format: "localIdentifier IN %@", localIdentifiers)
             
             self?.executeRequest(predicate: predicate, context: context) { [weak self] invalidItems in
@@ -248,14 +201,14 @@ extension SharedGroupCoreDataStack {
         }
     }
     
-    func delete(localIdentifiers: [String]) {
+    func delete(localIdentifiers: [String], completion: @escaping VoidHandler) {
         performBackgroundTask { [weak self] context in
             let predicate = NSPredicate(format: "localIdentifier IN %@", localIdentifiers)
             self?.executeRequest(predicate: predicate, context: context) { [weak self] syncedItems in
                 syncedItems.forEach {
                     context.delete($0)
                 }
-                self?.saveData(for: context, completion: nil)
+                self?.saveData(for: context, completion: completion)
             }
         }
     }

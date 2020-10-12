@@ -32,6 +32,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var hideActionService: HideActionServiceProtocol = HideActionService()
     private lazy var smashActionService: SmashActionServiceProtocol = SmashActionService()
+    private lazy var photoEditImageDownloader = PhotoEditImageDownloader()
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
@@ -229,7 +230,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        ImageDownloder().getImage(patch: originalUrl) { [weak self] image in
+        photoEditImageDownloader.download(url: originalUrl, attempts: 2) { [weak self] image in
             guard
                 let self = self,
                 let image = image

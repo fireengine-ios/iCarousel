@@ -1727,14 +1727,11 @@
 "widget_rule_6_small_button" = "Резервное Копирование";
 "widget_rule_6_medium_detail" = "С момента создания последней резервной копии контактов прошло больше месяца. Прямо сейчас, в lifebox, обезопасте свои контакты.";
 "widget_rule_6_medium_button" = "Резервное Копирование Контактов";
-"widget_rule_7_1_small_title" = "Мы создали специальные альбомы по лицам на ваших фотографиях. ";
-"widget_rule_7_1_small_detail" = "Смотрите и делитесь!";
+"widget_rule_7_1_small_detail" = "Мы сгруппировали ваши фотографии по лицам.";
 "widget_rule_7_1_small_button" = "Просмотреть";
-"widget_rule_7_1_medium_title" = "Мы сгруппировали ваши воспоминания по людям и создали специальные альбомы.";
-"widget_rule_7_1_medium_detail" = "Смотрите и делитесь ими!";
+"widget_rule_7_1_medium_detail" = "Мы сгруппировали ваши воспоминания по людям и создали специальные альбомы.";
 "widget_rule_7_1_medium_button" = "Просмотреть Альбомы";
-"widget_rule_7_2_small_title" = "Чем больше фотографий ";
-"widget_rule_7_2_small_detail" = " тем проще группировка лиц.";
+"widget_rule_7_2_small_detail" = "Чем больше фотографий, тем точнее группировка лиц.";
 "widget_rule_7_2_small_button" = "Загрузить Фото";
 "widget_rule_7_2_medium_title" = "Чем больше фотографий, тем точнее группировка лиц.";
 "widget_rule_7_2_medium_detail" = "Загрузить фото";

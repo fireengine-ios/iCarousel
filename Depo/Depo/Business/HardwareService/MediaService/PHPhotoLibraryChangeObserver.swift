@@ -49,8 +49,11 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         var phChanges = PhotoLibraryItemsChanges()
         
         func notify() {
+            updateHomeWidget()
+            
             NotificationCenter.default.post(name: .notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
         }
+        
         
         func checkChangedObjects() {
             let changedAssets = changes.changedObjects
@@ -63,20 +66,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
             phChanges[.changed] = changedAssets
             printLog("photoLibraryDidChange - changed \(changedAssets.count) assets")
             
-            let mediaService = MediaItemOperationsService.shared
-            mediaService.update(localMediaItems: changedAssets) {
-                mediaService.allUnsyncedLocalIds { unsyncedLocalIds in
-                    mediaService.allLocalIds(subtractingIds: unsyncedLocalIds) { syncedLocalIds in
-                        SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds) {
-                            if #available(iOS 14.0, *) {
-                                if !SyncServiceManager.shared.hasExecutingSync {
-                                    WidgetCenter.shared.reloadAllTimelines()
-                                }
-                            }
-                        }
-                    }
-                }
-                
+            MediaItemOperationsService.shared.update(localMediaItems: changedAssets) {
                 notify()
             }
         }
@@ -118,6 +108,26 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         
         checkInsertedObjects()
     }
+    
+    private func updateHomeWidget() {
+        let mediaService = MediaItemOperationsService.shared
+        mediaService.allUnsyncedLocalIds { unsyncedLocalIds in
+            mediaService.allLocalIds(subtractingIds: unsyncedLocalIds) { syncedLocalIds in
+                SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds) {
+                    debugLog("SharedGroupCoreDataStack is actualized")
+                    if #available(iOS 14.0, *) {
+                        guard !SyncServiceManager.shared.hasExecutingSync else {
+                            debugLog("Widgets reload will not be called. hasExecutingSync")
+                            return
+                        }
+                        debugLog("Widgets reload is called")
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }
+                }
+            }
+        }
+    }
+    
     
     private func processAlbumsChanges(_ changeInstance: PHChange) {
         guard fetchAlbumResult != nil, let changes = changeInstance.changeDetails(for: fetchAlbumResult) else {

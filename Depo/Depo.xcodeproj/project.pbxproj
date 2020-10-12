@@ -5110,6 +5110,38 @@
 		9886113A240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98861138240FF4DB00A49C5B /* BecomePremiumViewSourceType.swift */; };
 		9886113B240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98861138240FF4DB00A49C5B /* BecomePremiumViewSourceType.swift */; };
 		9886113C240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98861138240FF4DB00A49C5B /* BecomePremiumViewSourceType.swift */; };
+		98876CCA253429FF000B440D /* ShareConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CA2045633D00812544 /* ShareConfigurator.swift */; };
+		98876CE425342A03000B440D /* ShareConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CA2045633D00812544 /* ShareConfigurator.swift */; };
+		98876CE525342A05000B440D /* ShareConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CA2045633D00812544 /* ShareConfigurator.swift */; };
+		98876CE625342A06000B440D /* ShareConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1458CA2045633D00812544 /* ShareConfigurator.swift */; };
+		98876CFD25342A28000B440D /* AuthorizationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */; };
+		98876D1425342A29000B440D /* AuthorizationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */; };
+		98876D1525342A2B000B440D /* AuthorizationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */; };
+		98876D1625342A2C000B440D /* AuthorizationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE31FC8403B00440CA0 /* AuthorizationRepository.swift */; };
+		98876D2D25342A54000B440D /* AuthorizationURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */; };
+		98876D4425342A56000B440D /* AuthorizationURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */; };
+		98876D4525342A57000B440D /* AuthorizationURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */; };
+		98876D4625342A59000B440D /* AuthorizationURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE08BDE21FC8403B00440CA0 /* AuthorizationURLs.swift */; };
+		98876D5D25342AC2000B440D /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33DFFE1F0296C000706C40 /* RequestHeader.swift */; };
+		98876D7425342AC4000B440D /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33DFFE1F0296C000706C40 /* RequestHeader.swift */; };
+		98876D7525342AC5000B440D /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33DFFE1F0296C000706C40 /* RequestHeader.swift */; };
+		98876D7625342AC6000B440D /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33DFFE1F0296C000706C40 /* RequestHeader.swift */; };
+		98876D8D25342ADE000B440D /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
+		98876DA425342ADF000B440D /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
+		98876DA525342AE0000B440D /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
+		98876DA625342AE1000B440D /* URL+TrimmedQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A63DE2167923E00C90FBD /* URL+TrimmedQuery.swift */; };
+		98876DBD25342B1D000B440D /* SharedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAFF20444524007F3F54 /* SharedFactory.swift */; };
+		98876DD425342B1E000B440D /* SharedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAFF20444524007F3F54 /* SharedFactory.swift */; };
+		98876DD525342B20000B440D /* SharedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAFF20444524007F3F54 /* SharedFactory.swift */; };
+		98876DD625342B21000B440D /* SharedFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58FAFF20444524007F3F54 /* SharedFactory.swift */; };
+		98876DED25342B47000B440D /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA01F10C77E003D1A75 /* DateExtension.swift */; };
+		98876E0425342B49000B440D /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA01F10C77E003D1A75 /* DateExtension.swift */; };
+		98876E0525342B4A000B440D /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA01F10C77E003D1A75 /* DateExtension.swift */; };
+		98876E0625342B4B000B440D /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFECA01F10C77E003D1A75 /* DateExtension.swift */; };
+		98876E1D25342B61000B440D /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208680228D5117000BEDAD /* Double+Extensions.swift */; };
+		98876E3425342B62000B440D /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208680228D5117000BEDAD /* Double+Extensions.swift */; };
+		98876E3525342B63000B440D /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208680228D5117000BEDAD /* Double+Extensions.swift */; };
+		98876E3625342B64000B440D /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208680228D5117000BEDAD /* Double+Extensions.swift */; };
 		98922292240D0C0E004155A5 /* BecomePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98922291240D0C0D004155A5 /* BecomePremiumView.swift */; };
 		98922293240D0C0E004155A5 /* BecomePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98922291240D0C0D004155A5 /* BecomePremiumView.swift */; };
 		98922294240D0C0E004155A5 /* BecomePremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98922291240D0C0D004155A5 /* BecomePremiumView.swift */; };
@@ -5660,6 +5692,12 @@
 		B51805EE234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
 		B51805EF234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
 		B51805F0234DCF5200DC2E82 /* CoreDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */; };
+		B519A673253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
+		B519A674253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
+		B519A675253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
+		B519A676253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
+		B519A677253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
+		B519A678253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
 		B51D958E24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D958D24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift */; };
 		B51D958F24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D958D24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift */; };
 		B51D959024D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D958D24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift */; };
@@ -5707,7 +5745,6 @@
 		B5315096246D868E00E94355 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5315095246D868D00E94355 /* GoogleService-Info-debug.plist */; };
 		B5315097246D868E00E94355 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5315095246D868D00E94355 /* GoogleService-Info-debug.plist */; };
 		B5315098246D868E00E94355 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5315095246D868D00E94355 /* GoogleService-Info-debug.plist */; };
-		B5358C6A25011B450005FCAD /* WidgetTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6925011B440005FCAD /* WidgetTokenService.swift */; };
 		B5358C6C25011DE10005FCAD /* WidgetPresentationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */; };
 		B5358C712501415C0005FCAD /* AbstractHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0624FE6DAA00515757 /* AbstractHelper.m */; };
 		B5358C75250141600005FCAD /* RestoreHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0724FE6DAA00515757 /* RestoreHelper.m */; };
@@ -11682,7 +11719,6 @@
 		CFE4E62F252D9EE200F165AD /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
 		CFE4E630252D9EE200F165AD /* LifeboxWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58936C724FA773E00E3FA9C /* LifeboxWidget.swift */; };
 		CFE4E631252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E632252D9EE200F165AD /* WidgetTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6925011B440005FCAD /* WidgetTokenService.swift */; };
 		CFE4E633252D9EE200F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CFE4E634252D9EE200F165AD /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
 		CFE4E635252D9EE200F165AD /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0C24FE6DAA00515757 /* SyncDBUtils.m */; };
@@ -11774,7 +11810,6 @@
 		CFE4E6E9252D9F2300F165AD /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
 		CFE4E6EA252D9F2300F165AD /* LifeboxWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58936C724FA773E00E3FA9C /* LifeboxWidget.swift */; };
 		CFE4E6EB252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E6EC252D9F2300F165AD /* WidgetTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6925011B440005FCAD /* WidgetTokenService.swift */; };
 		CFE4E6ED252D9F2300F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CFE4E6EE252D9F2300F165AD /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
 		CFE4E6EF252D9F2300F165AD /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0C24FE6DAA00515757 /* SyncDBUtils.m */; };
@@ -11868,7 +11903,6 @@
 		CFE4E77D252D9F3B00F165AD /* PushNotificationServiceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808A060206A88B00022376D /* PushNotificationServiceConstants.swift */; };
 		CFE4E77E252D9F3B00F165AD /* LifeboxWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58936C724FA773E00E3FA9C /* LifeboxWidget.swift */; };
 		CFE4E77F252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
-		CFE4E780252D9F3B00F165AD /* WidgetTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5358C6925011B440005FCAD /* WidgetTokenService.swift */; };
 		CFE4E781252D9F3B00F165AD /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CFE4E782252D9F3B00F165AD /* SharedGroupCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BF43892514CCA400B0EFEB /* SharedGroupCoreDataStack.swift */; };
 		CFE4E783252D9F3B00F165AD /* SyncDBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0C24FE6DAA00515757 /* SyncDBUtils.m */; };
@@ -13897,6 +13931,7 @@
 		B50B4A73220C598C0056FC86 /* ConnectedAccountsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedAccountsDataSource.swift; sourceTree = "<group>"; };
 		B51205C82305350D007EB951 /* AppendLocalsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendLocalsOperation.swift; sourceTree = "<group>"; };
 		B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrator.swift; sourceTree = "<group>"; };
+		B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditImageDownloader.swift; sourceTree = "<group>"; };
 		B51D958D24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyAdjustment.swift; sourceTree = "<group>"; };
 		B51D959724D00E4300FA2EA0 /* AdjustmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentManager.swift; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -13911,7 +13946,6 @@
 		B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Resource.swift"; sourceTree = "<group>"; };
 		B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncOperation.swift; sourceTree = "<group>"; };
 		B5315095246D868D00E94355 /* GoogleService-Info-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-debug.plist"; sourceTree = "<group>"; };
-		B5358C6925011B440005FCAD /* WidgetTokenService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetTokenService.swift; sourceTree = "<group>"; };
 		B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetPresentationService.swift; sourceTree = "<group>"; };
 		B5390D81216605F600A02002 /* CellImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellImageManager.swift; sourceTree = "<group>"; };
 		B53A6501D09587A6DE4B5B8F /* Pods-Billo.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billo.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Billo/Pods-Billo.appstore.xcconfig"; sourceTree = "<group>"; };
@@ -20320,7 +20354,6 @@
 			isa = PBXGroup;
 			children = (
 				CFEB21BE2533A6800008A2A9 /* Factories */,
-				B5358C6925011B440005FCAD /* WidgetTokenService.swift */,
 				B558278B24FE90C40039DD11 /* WidgetServerService.swift */,
 				B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */,
 				B5BF40B12514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift */,
@@ -22252,6 +22285,7 @@
 			isa = PBXGroup;
 			children = (
 				CECA95941F1610590054BDC0 /* RemoteDownloder.swift */,
+				B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */,
 			);
 			path = ImageDownloderService;
 			sourceTree = "<group>";
@@ -28462,6 +28496,7 @@
 				0303A2932397D0D000907F42 /* AnalyzeHistoryViewController.swift in Sources */,
 				0303A2942397D0D000907F42 /* PhoneVerificationInteractorOutput.swift in Sources */,
 				0303A2952397D0D000907F42 /* PeriodicContactSyncDataStorage.swift in Sources */,
+				B519A676253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				B5ECA57225063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
 				0303A2962397D0D000907F42 /* MyStorageRouterInput.swift in Sources */,
 				0303A2972397D0D000907F42 /* SmartTimerLabel.swift in Sources */,
@@ -30697,6 +30732,7 @@
 				8C0E8F771FDEBDFF00789C91 /* PackagesViewInput.swift in Sources */,
 				8C0E8F781FDEBDFF00789C91 /* SelectNameViewOutput.swift in Sources */,
 				8C0E8F791FDEBDFF00789C91 /* SelectNameViewController.swift in Sources */,
+				B519A674253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				8C0E8F7A1FDEBDFF00789C91 /* SelectNameModuleInput.swift in Sources */,
 				98A86D6923A246A700438225 /* HiddenPhotosDataSource.swift in Sources */,
 				8C208658228D4B2E000BEDAD /* PhotoVideoThreeDotMenuManager.swift in Sources */,
@@ -31251,6 +31287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5358C75250141600005FCAD /* RestoreHelper.m in Sources */,
+				98876CFD25342A28000B440D /* AuthorizationRepository.swift in Sources */,
 				B5358C802501418A0005FCAD /* GZIP.m in Sources */,
 				B57BC176252C89630083B5CD /* PHAsset+FetchAll.swift in Sources */,
 				B5358C7E250141830005FCAD /* ContactUtil.m in Sources */,
@@ -31271,8 +31308,10 @@
 				B55827A324FE97DA0039DD11 /* (null) in Sources */,
 				B558278D24FE90C40039DD11 /* WidgetServerService.swift in Sources */,
 				CFEB1FFA25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */,
+				98876D7625342AC6000B440D /* RequestHeader.swift in Sources */,
 				B58936F824FA932A00E3FA9C /* SessionServiceExtension.swift in Sources */,
 				B55827A724FE97E70039DD11 /* (null) in Sources */,
+				98876D8D25342ADE000B440D /* URL+TrimmedQuery.swift in Sources */,
 				B5BF41152514AA6100B0EFEB /* Equatable+Contains.swift in Sources */,
 				B526A3EB252EE43C00E1EC8C /* AppResponsivenessService.swift in Sources */,
 				B546EE2524FD1C5D00C1713C /* DispatchQueue+Main.swift in Sources */,
@@ -31283,6 +31322,7 @@
 				B558279924FE97AD0039DD11 /* (null) in Sources */,
 				B5358C88250141A80005FCAD /* SyncStatus.m in Sources */,
 				CFEB1FDF25304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */,
+				98876D2D25342A54000B440D /* AuthorizationURLs.swift in Sources */,
 				B5358C83250141950005FCAD /* SyncDB.m in Sources */,
 				B5358C7F250141870005FCAD /* DepoAdapter.m in Sources */,
 				B5BF43FD2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
@@ -31294,11 +31334,13 @@
 				B55827A924FE97ED0039DD11 /* (null) in Sources */,
 				B526A53F252F138F00E1EC8C /* DebugLogsService.swift in Sources */,
 				B5358C86250141A10005FCAD /* SyncRecord.m in Sources */,
+				98876CE625342A06000B440D /* ShareConfigurator.swift in Sources */,
 				B5358C7A250141740005FCAD /* Contact.m in Sources */,
 				B55827AD24FE97FA0039DD11 /* (null) in Sources */,
 				B5358C76250141630005FCAD /* BackupHelper.m in Sources */,
 				B546EE2024FCFB3800C1713C /* Alamofire+Validate.swift in Sources */,
 				B5BF40B42514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift in Sources */,
+				98876DD625342B21000B440D /* SharedFactory.swift in Sources */,
 				B58936ED24FA908F00E3FA9C /* Constants.swift in Sources */,
 				B55827A624FE97E40039DD11 /* (null) in Sources */,
 				B546EE1424FC2AD600C1713C /* URL+Path.swift in Sources */,
@@ -31309,7 +31351,6 @@
 				B558278224FE67B50039DD11 /* PushNotificationServiceConstants.swift in Sources */,
 				B58936FC24FAA16100E3FA9C /* LifeboxWidget.swift in Sources */,
 				B558279C24FE97B80039DD11 /* (null) in Sources */,
-				B5358C6A25011B450005FCAD /* WidgetTokenService.swift in Sources */,
 				B55827A124FE97C90039DD11 /* (null) in Sources */,
 				B5BF43912514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				B5358C84250141990005FCAD /* SyncDBUtils.m in Sources */,
@@ -31323,6 +31364,7 @@
 				B5358C7D2501417F0005FCAD /* ContactSyncSDK.m in Sources */,
 				B58936EB24FA905F00E3FA9C /* SharedConstants.swift in Sources */,
 				B58BF2D924FB95B700CBE2A7 /* TokenKeychainStorage.swift in Sources */,
+				98876E3625342B64000B440D /* Double+Extensions.swift in Sources */,
 				98AE8B83251A1EDE002401F8 /* WidgetImageLoader.swift in Sources */,
 				B5358C712501415C0005FCAD /* AbstractHelper.m in Sources */,
 				B5358C782501416B0005FCAD /* BackupStats.m in Sources */,
@@ -31333,6 +31375,7 @@
 				B5B5E5BD24FBE38200146750 /* DispatchQueueLabels.swift in Sources */,
 				B558279724FE97030039DD11 /* AuthorityType.swift in Sources */,
 				98EC3EE0251E2EB40029A9DF /* WidgetService.swift in Sources */,
+				98876E0625342B4B000B440D /* DateExtension.swift in Sources */,
 				B558277224FE25CE0039DD11 /* WidgetView.swift in Sources */,
 				B558279824FE97530039DD11 /* Mapping.swift in Sources */,
 				B55827A824FE97EA0039DD11 /* (null) in Sources */,
@@ -32610,6 +32653,7 @@
 				3027A2E14F67F63A1600AE42 /* FileInfoViewController.swift in Sources */,
 				9B7D4F1273F59B2A4EE63B7D /* FileInfoModuleInput.swift in Sources */,
 				03056AC123BA23C000F6D57A /* NetmeraService.swift in Sources */,
+				B519A673253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				98C19F4F2485097800527D76 /* ContactSyncApiService.swift in Sources */,
 				73FE51FC22CF5EC300270448 /* CreateStoryAudioItemCell.swift in Sources */,
 				CEBAB15B2094803C002824C6 /* InsetsButton.swift in Sources */,
@@ -33910,6 +33954,7 @@
 				CE784ACB22A685FB00662219 /* CustomErrors.swift in Sources */,
 				CE784ACC22A685FB00662219 /* CircleYellowButton.swift in Sources */,
 				CE784ACD22A685FB00662219 /* PushPopAnimator.swift in Sources */,
+				B519A677253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				CE784ACE22A685FB00662219 /* HomeCardResponse.swift in Sources */,
 				CE784ACF22A685FB00662219 /* Alamofire+Request.swift in Sources */,
 				CE784AD022A685FB00662219 /* AugmentedRealityDataSource.swift in Sources */,
@@ -35412,6 +35457,7 @@
 				CF8B668223CBC9D70021B021 /* SubscriptionPlan.swift in Sources */,
 				CF8B668323CBC9D70021B021 /* CreateStoryPreviewConfigurator.swift in Sources */,
 				CF8B668423CBC9D70021B021 /* PhotoVideoCollectionViewLayout.swift in Sources */,
+				B519A675253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				CF8B668523CBC9D70021B021 /* TermsOfUseConfigurator.swift in Sources */,
 				CF8B668623CBC9D70021B021 /* BaseFilesGreedViewController.swift in Sources */,
 				CF8B668723CBC9D70021B021 /* FaceImageDisplayManager.swift in Sources */,
@@ -36910,6 +36956,7 @@
 				CF8B6E4F23CBCA280021B021 /* CircleYellowButton.swift in Sources */,
 				CF8B6E5023CBCA280021B021 /* PushPopAnimator.swift in Sources */,
 				CF8B6E5123CBCA280021B021 /* HomeCardResponse.swift in Sources */,
+				B519A678253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				985786F623E01F8800D35DDA /* SettingFooterView.swift in Sources */,
 				CF8B6E5223CBCA280021B021 /* Alamofire+Request.swift in Sources */,
 				CF8B6E5323CBCA280021B021 /* AugmentedRealityDataSource.swift in Sources */,
@@ -37498,6 +37545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFE4E5FD252D9EE200F165AD /* RestoreHelper.m in Sources */,
+				98876D1525342A2B000B440D /* AuthorizationRepository.swift in Sources */,
 				CFE4E5FE252D9EE200F165AD /* GZIP.m in Sources */,
 				CFE4E5FF252D9EE200F165AD /* PHAsset+FetchAll.swift in Sources */,
 				CFE4E600252D9EE200F165AD /* ContactUtil.m in Sources */,
@@ -37518,8 +37566,10 @@
 				CFE4E60E252D9EE200F165AD /* (null) in Sources */,
 				CFE4E60F252D9EE200F165AD /* WidgetServerService.swift in Sources */,
 				CFEB1FFC25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */,
+				98876D7425342AC4000B440D /* RequestHeader.swift in Sources */,
 				CFE4E610252D9EE200F165AD /* SessionServiceExtension.swift in Sources */,
 				CFE4E611252D9EE200F165AD /* (null) in Sources */,
+				98876DA525342AE0000B440D /* URL+TrimmedQuery.swift in Sources */,
 				CFE4E612252D9EE200F165AD /* Equatable+Contains.swift in Sources */,
 				CFEB1D81252F4C250008A2A9 /* AppResponsivenessService.swift in Sources */,
 				CFE4E613252D9EE200F165AD /* DispatchQueue+Main.swift in Sources */,
@@ -37530,6 +37580,7 @@
 				CFE4E618252D9EE200F165AD /* (null) in Sources */,
 				CFE4E619252D9EE200F165AD /* SyncStatus.m in Sources */,
 				CFEB1FE125304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */,
+				98876D4525342A57000B440D /* AuthorizationURLs.swift in Sources */,
 				CFE4E61A252D9EE200F165AD /* SyncDB.m in Sources */,
 				CFE4E61B252D9EE200F165AD /* DepoAdapter.m in Sources */,
 				CFE4E61C252D9EE200F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */,
@@ -37541,11 +37592,13 @@
 				CFE4E621252D9EE200F165AD /* (null) in Sources */,
 				CFEB1E4E252F63650008A2A9 /* DebugLogsService.swift in Sources */,
 				CFE4E622252D9EE200F165AD /* SyncRecord.m in Sources */,
+				98876CCA253429FF000B440D /* ShareConfigurator.swift in Sources */,
 				CFE4E623252D9EE200F165AD /* Contact.m in Sources */,
 				CFE4E624252D9EE200F165AD /* (null) in Sources */,
 				CFE4E625252D9EE200F165AD /* BackupHelper.m in Sources */,
 				CFE4E626252D9EE200F165AD /* Alamofire+Validate.swift in Sources */,
 				CFE4E627252D9EE200F165AD /* WidgetPhotoLibraryObserver.swift in Sources */,
+				98876DD425342B1E000B440D /* SharedFactory.swift in Sources */,
 				CFE4E628252D9EE200F165AD /* Constants.swift in Sources */,
 				CFE4E629252D9EE200F165AD /* (null) in Sources */,
 				CFE4E62A252D9EE200F165AD /* URL+Path.swift in Sources */,
@@ -37557,7 +37610,6 @@
 				CFE4E62F252D9EE200F165AD /* PushNotificationServiceConstants.swift in Sources */,
 				CFE4E630252D9EE200F165AD /* LifeboxWidget.swift in Sources */,
 				CFE4E631252D9EE200F165AD /* (null) in Sources */,
-				CFE4E632252D9EE200F165AD /* WidgetTokenService.swift in Sources */,
 				CFE4E633252D9EE200F165AD /* (null) in Sources */,
 				CFE4E634252D9EE200F165AD /* SharedGroupCoreDataStack.swift in Sources */,
 				CFE4E635252D9EE200F165AD /* SyncDBUtils.m in Sources */,
@@ -37570,6 +37622,7 @@
 				CFE4E63C252D9EE200F165AD /* (null) in Sources */,
 				CFE4E63D252D9EE200F165AD /* ContactSyncSDK.m in Sources */,
 				CFE4E63F252D9EE200F165AD /* TokenKeychainStorage.swift in Sources */,
+				98876E3425342B62000B440D /* Double+Extensions.swift in Sources */,
 				CFE4E640252D9EE200F165AD /* WidgetImageLoader.swift in Sources */,
 				CFE4E641252D9EE200F165AD /* AbstractHelper.m in Sources */,
 				CFE4E642252D9EE200F165AD /* BackupStats.m in Sources */,
@@ -37580,6 +37633,7 @@
 				CFE4E647252D9EE200F165AD /* DispatchQueueLabels.swift in Sources */,
 				CFE4E648252D9EE200F165AD /* AuthorityType.swift in Sources */,
 				CFE4E649252D9EE200F165AD /* WidgetService.swift in Sources */,
+				98876E0425342B49000B440D /* DateExtension.swift in Sources */,
 				CFE4E64A252D9EE200F165AD /* WidgetView.swift in Sources */,
 				CFE4E64B252D9EE200F165AD /* Mapping.swift in Sources */,
 				CFE4E64C252D9EE200F165AD /* (null) in Sources */,
@@ -37600,6 +37654,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFE4E6B7252D9F2300F165AD /* RestoreHelper.m in Sources */,
+				98876D1425342A29000B440D /* AuthorizationRepository.swift in Sources */,
 				CFE4E6B8252D9F2300F165AD /* GZIP.m in Sources */,
 				CFE4E6B9252D9F2300F165AD /* PHAsset+FetchAll.swift in Sources */,
 				CFE4E6BA252D9F2300F165AD /* ContactUtil.m in Sources */,
@@ -37620,8 +37675,10 @@
 				CFE4E6C8252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6C9252D9F2300F165AD /* WidgetServerService.swift in Sources */,
 				CFEB1FFB25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */,
+				98876D7525342AC5000B440D /* RequestHeader.swift in Sources */,
 				CFE4E6CA252D9F2300F165AD /* SessionServiceExtension.swift in Sources */,
 				CFE4E6CB252D9F2300F165AD /* (null) in Sources */,
+				98876DA425342ADF000B440D /* URL+TrimmedQuery.swift in Sources */,
 				CFE4E6CC252D9F2300F165AD /* Equatable+Contains.swift in Sources */,
 				CFEB1D7D252F4C230008A2A9 /* AppResponsivenessService.swift in Sources */,
 				CFE4E6CD252D9F2300F165AD /* DispatchQueue+Main.swift in Sources */,
@@ -37632,6 +37689,7 @@
 				CFE4E6D2252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6D3252D9F2300F165AD /* SyncStatus.m in Sources */,
 				CFEB1FE025304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */,
+				98876D4625342A59000B440D /* AuthorizationURLs.swift in Sources */,
 				CFE4E6D4252D9F2300F165AD /* SyncDB.m in Sources */,
 				CFE4E6D5252D9F2300F165AD /* DepoAdapter.m in Sources */,
 				CFE4E6D6252D9F2300F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */,
@@ -37643,11 +37701,13 @@
 				CFE4E6DB252D9F2300F165AD /* (null) in Sources */,
 				CFEB1E4A252F63630008A2A9 /* DebugLogsService.swift in Sources */,
 				CFE4E6DC252D9F2300F165AD /* SyncRecord.m in Sources */,
+				98876CE525342A05000B440D /* ShareConfigurator.swift in Sources */,
 				CFE4E6DD252D9F2300F165AD /* Contact.m in Sources */,
 				CFE4E6DE252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6DF252D9F2300F165AD /* BackupHelper.m in Sources */,
 				CFE4E6E0252D9F2300F165AD /* Alamofire+Validate.swift in Sources */,
 				CFE4E6E1252D9F2300F165AD /* WidgetPhotoLibraryObserver.swift in Sources */,
+				98876DD525342B20000B440D /* SharedFactory.swift in Sources */,
 				CFE4E6E2252D9F2300F165AD /* Constants.swift in Sources */,
 				CFE4E6E3252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6E4252D9F2300F165AD /* URL+Path.swift in Sources */,
@@ -37658,7 +37718,6 @@
 				CFE4E6E9252D9F2300F165AD /* PushNotificationServiceConstants.swift in Sources */,
 				CFE4E6EA252D9F2300F165AD /* LifeboxWidget.swift in Sources */,
 				CFE4E6EB252D9F2300F165AD /* (null) in Sources */,
-				CFE4E6EC252D9F2300F165AD /* WidgetTokenService.swift in Sources */,
 				CFE4E6ED252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6EE252D9F2300F165AD /* SharedGroupCoreDataStack.swift in Sources */,
 				CFE4E6EF252D9F2300F165AD /* SyncDBUtils.m in Sources */,
@@ -37672,6 +37731,7 @@
 				CFE4E6F7252D9F2300F165AD /* ContactSyncSDK.m in Sources */,
 				CFE4E6F8252D9F2300F165AD /* SharedConstants.swift in Sources */,
 				CFE4E6F9252D9F2300F165AD /* TokenKeychainStorage.swift in Sources */,
+				98876E3525342B63000B440D /* Double+Extensions.swift in Sources */,
 				CFE4E6FA252D9F2300F165AD /* WidgetImageLoader.swift in Sources */,
 				CFE4E6FB252D9F2300F165AD /* AbstractHelper.m in Sources */,
 				CFE4E6FC252D9F2300F165AD /* BackupStats.m in Sources */,
@@ -37682,6 +37742,7 @@
 				CFE4E701252D9F2300F165AD /* DispatchQueueLabels.swift in Sources */,
 				CFE4E702252D9F2300F165AD /* AuthorityType.swift in Sources */,
 				CFE4E703252D9F2300F165AD /* WidgetService.swift in Sources */,
+				98876E0525342B4A000B440D /* DateExtension.swift in Sources */,
 				CFE4E704252D9F2300F165AD /* WidgetView.swift in Sources */,
 				CFE4E705252D9F2300F165AD /* Mapping.swift in Sources */,
 				CFE4E706252D9F2300F165AD /* (null) in Sources */,
@@ -37702,6 +37763,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFE4E74B252D9F3B00F165AD /* RestoreHelper.m in Sources */,
+				98876D1625342A2C000B440D /* AuthorizationRepository.swift in Sources */,
 				CFE4E74C252D9F3B00F165AD /* GZIP.m in Sources */,
 				CFE4E74D252D9F3B00F165AD /* PHAsset+FetchAll.swift in Sources */,
 				CFE4E74E252D9F3B00F165AD /* ContactUtil.m in Sources */,
@@ -37722,8 +37784,10 @@
 				CFE4E75C252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E75D252D9F3B00F165AD /* WidgetServerService.swift in Sources */,
 				CFEB1FFD25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */,
+				98876D5D25342AC2000B440D /* RequestHeader.swift in Sources */,
 				CFE4E75E252D9F3B00F165AD /* SessionServiceExtension.swift in Sources */,
 				CFE4E75F252D9F3B00F165AD /* (null) in Sources */,
+				98876DA625342AE1000B440D /* URL+TrimmedQuery.swift in Sources */,
 				CFE4E760252D9F3B00F165AD /* Equatable+Contains.swift in Sources */,
 				CFEB1D82252F4C270008A2A9 /* AppResponsivenessService.swift in Sources */,
 				CFE4E761252D9F3B00F165AD /* DispatchQueue+Main.swift in Sources */,
@@ -37734,6 +37798,7 @@
 				CFE4E766252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E767252D9F3B00F165AD /* SyncStatus.m in Sources */,
 				CFEB1FE225304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */,
+				98876D4425342A56000B440D /* AuthorizationURLs.swift in Sources */,
 				CFE4E768252D9F3B00F165AD /* SyncDB.m in Sources */,
 				CFE4E769252D9F3B00F165AD /* DepoAdapter.m in Sources */,
 				CFE4E76A252D9F3B00F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */,
@@ -37745,11 +37810,13 @@
 				CFE4E76F252D9F3B00F165AD /* (null) in Sources */,
 				CFEB1E4F252F63660008A2A9 /* DebugLogsService.swift in Sources */,
 				CFE4E770252D9F3B00F165AD /* SyncRecord.m in Sources */,
+				98876CE425342A03000B440D /* ShareConfigurator.swift in Sources */,
 				CFE4E771252D9F3B00F165AD /* Contact.m in Sources */,
 				CFE4E772252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E773252D9F3B00F165AD /* BackupHelper.m in Sources */,
 				CFE4E774252D9F3B00F165AD /* Alamofire+Validate.swift in Sources */,
 				CFE4E775252D9F3B00F165AD /* WidgetPhotoLibraryObserver.swift in Sources */,
+				98876DBD25342B1D000B440D /* SharedFactory.swift in Sources */,
 				CFE4E776252D9F3B00F165AD /* Constants.swift in Sources */,
 				CFE4E777252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E778252D9F3B00F165AD /* URL+Path.swift in Sources */,
@@ -37761,7 +37828,6 @@
 				CFE4E77D252D9F3B00F165AD /* PushNotificationServiceConstants.swift in Sources */,
 				CFE4E77E252D9F3B00F165AD /* LifeboxWidget.swift in Sources */,
 				CFE4E77F252D9F3B00F165AD /* (null) in Sources */,
-				CFE4E780252D9F3B00F165AD /* WidgetTokenService.swift in Sources */,
 				CFE4E781252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E782252D9F3B00F165AD /* SharedGroupCoreDataStack.swift in Sources */,
 				CFE4E783252D9F3B00F165AD /* SyncDBUtils.m in Sources */,
@@ -37774,6 +37840,7 @@
 				CFE4E78A252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E78B252D9F3B00F165AD /* ContactSyncSDK.m in Sources */,
 				CFE4E78D252D9F3B00F165AD /* TokenKeychainStorage.swift in Sources */,
+				98876E1D25342B61000B440D /* Double+Extensions.swift in Sources */,
 				CFE4E78E252D9F3B00F165AD /* WidgetImageLoader.swift in Sources */,
 				CFE4E78F252D9F3B00F165AD /* AbstractHelper.m in Sources */,
 				CFE4E790252D9F3B00F165AD /* BackupStats.m in Sources */,
@@ -37784,6 +37851,7 @@
 				CFE4E795252D9F3B00F165AD /* DispatchQueueLabels.swift in Sources */,
 				CFE4E796252D9F3B00F165AD /* AuthorityType.swift in Sources */,
 				CFE4E797252D9F3B00F165AD /* WidgetService.swift in Sources */,
+				98876DED25342B47000B440D /* DateExtension.swift in Sources */,
 				CFE4E798252D9F3B00F165AD /* WidgetView.swift in Sources */,
 				CFE4E799252D9F3B00F165AD /* Mapping.swift in Sources */,
 				CFE4E79A252D9F3B00F165AD /* (null) in Sources */,
@@ -41311,7 +41379,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.3;
+				CURRENT_PROJECT_VERSION = d2.5.5;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -41375,7 +41443,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.3;
+				CURRENT_PROJECT_VERSION = d2.5.5;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -41435,7 +41503,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.3;
+				CURRENT_PROJECT_VERSION = d2.5.5;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -41496,7 +41564,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.3;
+				CURRENT_PROJECT_VERSION = d2.5.5;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

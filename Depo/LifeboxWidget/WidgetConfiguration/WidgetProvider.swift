@@ -25,11 +25,8 @@ final class WidgetProvider: TimelineProvider {
     private let timelineManager = WidgetTimelineManager()
     private let privateQueue = DispatchQueue(label: DispatchQueueLabels.widgetProviderQueue)
     
-    
-    
     init() {
-        WidgetPresentationService.shared.dropDelegate()
-        WidgetPresentationService.shared.assignDelegate(delegated: self)
+        WidgetPresentationService.shared.delegate = self
     }
     
     func placeholder(in context: Context) -> WidgetBaseEntry {

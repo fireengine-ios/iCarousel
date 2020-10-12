@@ -60,7 +60,7 @@ final class WidgetTimelineManager {
                         }
                         if let newEntry = nextEntry {
                             newEntries.append(newEntry)
-                            DebugLogService.debugLog("found first fitting entry \(entryOrder.debugDescription), family\(family.debugDescription)")
+                            DebugLogService.debugLog("found first fitting entry \(newEntry.state.gaName), family\(family.debugDescription)")
                         }
                         semaphore.signal()
                     }

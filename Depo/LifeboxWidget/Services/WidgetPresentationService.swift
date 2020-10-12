@@ -49,15 +49,7 @@ final class WidgetPresentationService {
     private var lastQuotaUsagePercentage: Int?
     private var lastQuotaUsageRequestDate: Date?
 
-    private weak var delegate: WidgetPresentationServiceDelegate?
-    
-    func assignDelegate(delegated: WidgetPresentationServiceDelegate) {
-        delegate = delegated
-    }
-    
-    func dropDelegate() {
-        delegate = nil
-    }
+    weak var delegate: WidgetPresentationServiceDelegate?
     
     //TODO: change to enum?
     var lastWidgetEntry: WidgetBaseEntry? {
@@ -132,7 +124,8 @@ final class WidgetPresentationService {
                 self?.lastQuotaUsageRequestDate = Date()
                 completion(quotaUsagePercentage)
                 
-            case .failed:
+            case .failed(let error):
+                DebugLogService.debugLog("ORDER 1: getQuotaInfo failed - \(error.localizedDescription)")
                 completion(.zero)
             }
         }
@@ -210,8 +203,11 @@ final class WidgetPresentationService {
         serverService.getSettingsInfoPermissions { response in
             switch response {
             case .success(let response):
-                completion(response.isFaceImageAllowed == true)
-            case .failed:
+                let isFIREnabled = response.isFaceImageAllowed == true
+                DebugLogService.debugLog("ORDER 7: isFIREnabled == \(isFIREnabled)")
+                completion(isFIREnabled)
+            case .failed(let error):
+                DebugLogService.debugLog("ORDER 7: get FIR enabled failed - \(error.localizedDescription)")
                 completion(false)
             }
         }
@@ -221,8 +217,11 @@ final class WidgetPresentationService {
         serverService.permissions { response in
             switch response {
             case .success(let response):
-                completion(response.hasPermissionFor(.faceRecognition))
-            case .failed:
+                let hasFIRPermission = response.hasPermissionFor(.faceRecognition)
+                DebugLogService.debugLog("ORDER 7: hasFIRPermission == \(hasFIRPermission)")
+                completion(hasFIRPermission)
+            case .failed(let error):
+                DebugLogService.debugLog("ORDER 7: get FIR permission failed - \(error.localizedDescription)")
                 completion(false)
             }
         }
@@ -233,7 +232,8 @@ final class WidgetPresentationService {
             switch result {
             case .success(let response):
                 completion(response.personInfos)
-            case .failed:
+            case .failed(let error):
+                DebugLogService.debugLog("ORDER 7: getPeopleInfo failed - \(error.localizedDescription)")
                 completion([])
             }
         }

@@ -178,7 +178,7 @@ extension WidgetEntryConstructionOperation {
             let syncInfo = WidgetPresentationService.shared.getSyncInfo()
             
             guard hasUnsynced, syncInfo.syncStatus != .executing else {
-                DebugLogService.debugLog("ORDER 4: sync is executing")
+                DebugLogService.debugLog("ORDER 4: sync status \(syncInfo.syncStatus)")
                 entryCallback(nil)
                 return
             }
