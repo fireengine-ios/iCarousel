@@ -228,7 +228,7 @@ final class FileInfoView: UIView, FromNib {
             setWith(albumItem: album)
         }
         
-        if let createdDate = object.creationDate {
+        if let createdDate = object.creationDate, !object.isLocalItem {
             uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
             uploadDateStackView.isHidden = false
         }
@@ -319,7 +319,7 @@ final class FileInfoView: UIView, FromNib {
             uploadDateLabel.text = creationDate.getDateInFormat(format: "dd MMMM yyyy")
             uploadDateStackView.isHidden = false
             
-            if !wrapData.isLocalItem, let takenDate = wrapData.metaData?.takenDate, creationDate != takenDate {
+            if let takenDate = wrapData.metaData?.takenDate, creationDate != takenDate {
                 takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
                 takenDateStackView.isHidden = false
             }
