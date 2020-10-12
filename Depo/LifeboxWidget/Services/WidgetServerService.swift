@@ -16,11 +16,8 @@ protocol RequestParameters {
 
 final class WidgetServerService {
     
-    static let shared = WidgetServerService(
-        tokenStorage: TokenKeychainStorage(),
-        sessionManager: SessionManager.customDefault
-    )
-    
+    static let shared = WidgetServerService()
+
     enum ServerEnvironment {
         case test
         case preProduction
@@ -37,16 +34,23 @@ final class WidgetServerService {
     }()
 
     private let sessionManager: SessionManager
-    private let tokenStorage: TokenStorage
+    private lazy var auth: AuthorizationRepository = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
 
-    private lazy var tokenService = WidgetTokenService(tokenStorage: tokenStorage)
+    var isAuthorized: Bool { tokenStorage.accessToken != nil }
     
-    var isAuthorized: Bool { tokenService.isAuthorized }
-
-    init(tokenStorage: TokenStorage, sessionManager: SessionManager) {
-        self.tokenStorage = tokenStorage
+    init(sessionManager: SessionManager = factory.resolve()) {
         self.sessionManager = sessionManager
-        self.sessionManager.adapter = self
+        ShareConfigurator().setup()
+        checkFirstLaunch()
+    }
+    
+    private func checkFirstLaunch() {
+        //widget can send request before main app clear tokens
+        if WidgetService.shared.isAppFirstLaunch {
+            WidgetService.shared.isAppFirstLaunch = false
+            tokenStorage.clearTokens()
+        }
     }
 
     func getQuotaInfo(handler: @escaping ResponseHandler<QuotaInfoResponse>) {
@@ -95,8 +99,8 @@ final class WidgetServerService {
     }
     
     func getBackUpStatus(completion: @escaping ValueHandler<ContantBackupResponse?>) {
-        tokenService.refreshTokens { (_, accesToken, _) in
-            SyncSettings.shared().token = accesToken
+        auth.refreshTokens { (_, accessToken, _) in
+            SyncSettings.shared().token = accessToken
             SyncSettings.shared().url = RouteRequests.baseContactsUrl.absoluteString
             SyncSettings.shared().depo_URL = RouteRequests.baseShortUrlString
             switch RouteRequests.currentServerEnvironment {
@@ -167,18 +171,6 @@ final class WidgetServerService {
                     completion(image)
                 })
                 .task
-    }
-}
-
-extension WidgetServerService: RequestAdapter {
-    func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
-        guard
-            urlRequest.url?.absoluteString != nil,
-            let accessToken = tokenStorage.accessToken
-            else { return urlRequest }
-        var urlRequest = urlRequest
-        urlRequest.setValue(accessToken, forHTTPHeaderField: WidgetHeaderConstant.AuthToken)
-        return urlRequest
     }
 }
 
@@ -283,18 +275,5 @@ struct ServerResponse {
     
     struct PeopleResponse: Codable {
         var personInfos = [PeopleInfo]()
-    }
-}
-
-extension URL {
-    private static let tempURLExpirationDateKey = "temp_url_expires"
-    
-    
-    var byTrimmingQuery: URL? {
-        if let substring = absoluteString.split(separator: "?").first {
-            let stringValue = String(substring)
-            return URL(string: stringValue)
-        }
-        return nil
     }
 }
