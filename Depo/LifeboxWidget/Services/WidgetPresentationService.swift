@@ -27,6 +27,10 @@ class SyncInfo {
     var lastSyncedDate: Date?
 }
 
+protocol WidgetPresentationServiceDelegate: class {
+    func didLogout()
+}
+
 final class WidgetPresentationService {
     static let shared = WidgetPresentationService()
     private let widgetService = WidgetService.shared
@@ -45,6 +49,16 @@ final class WidgetPresentationService {
     private var lastQuotaUsagePercentage: Int?
     private var lastQuotaUsageRequestDate: Date?
 
+    private weak var delegate: WidgetPresentationServiceDelegate?
+    
+    func assignDelegate(delegated: WidgetPresentationServiceDelegate) {
+        delegate = delegated
+    }
+    
+    func dropDelegate() {
+        delegate = nil
+    }
+    
     //TODO: change to enum?
     var lastWidgetEntry: WidgetBaseEntry? {
         get {
