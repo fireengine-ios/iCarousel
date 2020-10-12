@@ -94,6 +94,7 @@ final class WidgetPresentationService {
     private func didLogout() {
         lastQuotaUsagePercentage = nil
         lastQuotaUsageRequestDate = nil
+        delegate?.didLogout()
         WidgetCenter.shared.reloadAllTimelines()
     }
     
