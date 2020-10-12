@@ -95,10 +95,9 @@ final class WidgetTimelineManager {
         WidgetPresentationService.shared.lastWidgetEntry = entry
     }
     
-    func cancellAll() {
+    func cancelAll() {
         isCancelled = true
         timelinesCreationQueue.cancelAllOperations()
         entriesFactory.cancellAll()
     }
-    
 }

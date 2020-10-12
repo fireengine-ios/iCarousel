@@ -73,6 +73,6 @@ extension WidgetProvider {
 
 extension WidgetProvider: WidgetPresentationServiceDelegate {
     func didLogout() {
-        timelineManager.cancellAll()
+        timelineManager.cancelAll()
     }
 }
