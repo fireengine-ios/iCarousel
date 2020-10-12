@@ -33,6 +33,8 @@ final class WidgetServerService {
         }
     }()
 
+    private let firItemsCount = 3
+    
     private let sessionManager: SessionManager
     private lazy var auth: AuthorizationRepository = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
@@ -142,7 +144,7 @@ final class WidgetServerService {
     
     func getPeopleInfo(handler: @escaping ResponseHandler<PeopleResponse>) {
         sessionManager
-            .request("\(Self.baseShortUrlString)/api/person/page?pageSize=3&pageNumber=0")
+            .request("\(Self.baseShortUrlString)/api/person/page?pageSize=\(firItemsCount)&pageNumber=0")
             .customValidate()
             .responseData { response in
                 switch response.result {
@@ -175,7 +177,7 @@ final class WidgetServerService {
     
     func lastUploads(completion: @escaping ValueHandler<[URL?]>) {
         sessionManager
-            .request("\(Self.baseShortUrlString)/api/search/byField?fieldName=content_type&fieldValue=image&sortBy=metadata.Image-DateTime&sortOrder=DESC&page=0&size=3")
+            .request("\(Self.baseShortUrlString)/api/search/byField?fieldName=content_type&fieldValue=image&sortBy=metadata.Image-DateTime&sortOrder=DESC&page=0&size=\(firItemsCount)")
             .customValidate()
             .responseData { response in
                 switch response.result {
