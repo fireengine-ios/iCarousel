@@ -26,18 +26,30 @@ final class WidgetEntriesFactory {
         return operationQueue
     }()
     
-    func findFirstFittingEntry(family: WidgetFamily, orders: [WidgetStateOrder], customCurrentDate: Date? = nil, entryCallback: @escaping WidgetBaseEntryAndOrderCallback) {
+    func findFirstFittingEntry(family: WidgetFamily, orders: [WidgetStateOrder], customCurrentDate: Date? = nil, entryCallback: @escaping EntryCreationResultCallback) {
         
         setCancelledStatus(family: family, status: false)
         
-        let entriesConstructionOperation = WidgetEntryConstructionOperation(ordersCehckList: orders) { [weak self] entry, order in
+        let entriesConstructionOperation = WidgetEntryConstructionOperation(ordersCehckList: orders) { [weak self] result in
             guard
                 let self = self,
                 !self.isFamilyTimelineCancelled(family: family)
             else {
+                entryCallback(.failure(.cancel))
                 return
             }
-            entryCallback(entry, order)
+            
+            switch result {
+            case .success((let entry, let order)):
+                entryCallback(.success((entry, order)))
+            case .failure(let failStatus):
+                switch failStatus {
+                case .cancel:
+                    entryCallback(.failure(.cancel))
+                case .error(let error):
+                    entryCallback(.failure(.error(error)))
+                }
+            }  
         }
         getOperationQueue(family: family)?.addOperation(entriesConstructionOperation)
     }

@@ -12,10 +12,10 @@ final class WidgetEntryConstructionOperation: Operation {
     
     private let semaphore = DispatchSemaphore(value: 0)
     let ordersCehckList: [WidgetStateOrder]
-    let callback: WidgetBaseEntryAndOrderCallback
+    let callback: EntryCreationResultCallback
     var customCurrentDate: Date?
     
-    init(ordersCehckList: [WidgetStateOrder], customCurrentDate: Date? = nil, callback: @escaping WidgetBaseEntryAndOrderCallback) {
+    init(ordersCehckList: [WidgetStateOrder], customCurrentDate: Date? = nil, callback: @escaping EntryCreationResultCallback) {
         self.callback = callback
         self.ordersCehckList = ordersCehckList
         self.customCurrentDate = customCurrentDate
@@ -23,6 +23,7 @@ final class WidgetEntryConstructionOperation: Operation {
     
     override func main() {
         guard !isCancelled else {
+            self.callback(.failure(.cancel))
             return
         }
         findFirstFittingEntry(orders: ordersCehckList, customCurrentDate: customCurrentDate) { [weak self] (entry, order) in
@@ -30,10 +31,11 @@ final class WidgetEntryConstructionOperation: Operation {
                 return
             }
             guard !self.isCancelled else {
+                self.callback(.failure(.cancel))
                 self.semaphore.signal()
                 return
             }
-            self.callback(entry,order)
+            self.callback(.success((entry,order)))
             self.semaphore.signal()
         }
         semaphore.wait()
@@ -51,6 +53,7 @@ final class WidgetEntryConstructionOperation: Operation {
                 }
                 guard !self.isCancelled else {
                     self.semaphore.signal()
+                    self.callback(.failure(.cancel))
                     return
                 }
                 guard let preparedEntry = preparedEntry else {
@@ -67,6 +70,7 @@ final class WidgetEntryConstructionOperation: Operation {
     
     private func checkOrder(order: WidgetStateOrder, customCurrentDate: Date? = nil, entryCallback: @escaping WidgetBaseEntryCallback) {
         guard !self.isCancelled else {
+            self.callback(.failure(.cancel))
             self.semaphore.signal()
             return
         }

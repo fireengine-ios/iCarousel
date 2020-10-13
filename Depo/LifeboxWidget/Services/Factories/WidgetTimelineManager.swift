@@ -39,69 +39,96 @@ final class WidgetTimelineManager {
         return operationQueue
     }()
     
-    func provideTimeline(family: WidgetFamily, orders: [WidgetStateOrder], timelineCallback: @escaping WidgetTimeLineCallback) {
+    func provideTimeline(family: WidgetFamily, orders: [WidgetStateOrder], timelineCallback: @escaping TimelineCreationResultCallback) {
 
         setCancelledStatus(family: family, status: false)
         
         var newEntries = [WidgetBaseEntry]()
         let semaphore = DispatchSemaphore(value: 0)
-        entriesFactory.findFirstFittingEntry(family: family, orders: orders) { [weak self] entry, order  in
-            
+        entriesFactory.findFirstFittingEntry(family: family, orders: orders) { [weak self] result in
+
             guard
                 let self = self,
                 !self.isFamilyTimelineCancelled(family: family)
             else {
+                timelineCallback(.failure(.cancel))
                 return
             }
-            self.getQueue(family: family)?.async { [weak self] in
-                guard
-                    let self = self,
-                    !self.isFamilyTimelineCancelled(family: family),
-                    let preparedEntry = entry,
-                    let order = order
-                else {
-                    return
-                }
-                newEntries.append(preparedEntry)
-                //if found sync successful need to add next one
-                if order.isContained(in: [.syncInProgress, .syncComplete]),
-                   preparedEntry.state == .syncComplete,
-                   let slice = orders.split(separator: order).last {
+            
+            switch result {
+            case .success((let entry, let order)):
+                self.getQueue(family: family)?.async { [weak self] in
+                    guard
+                        let self = self,
+                        !self.isFamilyTimelineCancelled(family: family),
+                        let preparedEntry = entry,
+                        let order = order
+                    else {
+                        timelineCallback(.failure(.cancel))
+                        return
+                    }
+                    newEntries.append(preparedEntry)
+                    //if found sync successful need to add next one
+                    if order.isContained(in: [.syncInProgress, .syncComplete]),
+                       preparedEntry.state == .syncComplete,
+                       let slice = orders.split(separator: order).last {
+                        
+                        let nextOrdersInLine: [WidgetStateOrder] = Array(slice)
+                        
+                        self.entriesFactory.findFirstFittingEntry(family: family, orders: nextOrdersInLine, customCurrentDate: order.refreshDate) { [weak self] result in
+    
+                            guard
+                                let self = self,
+                                !self.isFamilyTimelineCancelled(family: family)
+                            else {
+                                semaphore.signal()
+                                timelineCallback(.failure(.cancel))
+                                return
+                            }
+                            
+                            switch result {
+                            case .success((let nextEntry, _)):
+                                if let newEntry = nextEntry {
+                                    newEntries.append(newEntry)
+                                    DebugLogService.debugLog("found first fitting entry \(newEntry.state.gaName), family\(family.debugDescription)")
+                                }
+                            case .failure(let failStatus):
+                                switch failStatus {
+                                case .cancel:
+                                    timelineCallback(.failure(.cancel))
+                                case .error(let error):
+                                    timelineCallback(.failure(.error(error)))
+                                }
+                            }
+                            semaphore.signal()
+                        }
+                        semaphore.wait()
+                    }
+                    guard !self.isFamilyTimelineCancelled(family: family) else {
+                        return
+                    }
                     
-                    let nextOrdersInLine: [WidgetStateOrder] = Array(slice)
-                    
-                    self.entriesFactory.findFirstFittingEntry(family: family, orders: nextOrdersInLine, customCurrentDate: order.refreshDate) { [weak self] (nextEntry, entryOrder) in
+                    let timelineOperation = WidgetTimelineConstructionOperation(entries: newEntries, order: order) { [weak self] timeline in
                         guard
                             let self = self,
                             !self.isFamilyTimelineCancelled(family: family)
                         else {
-                            semaphore.signal()
+                            timelineCallback(.failure(.cancel))
                             return
                         }
-                        if let newEntry = nextEntry {
-                            newEntries.append(newEntry)
-                            DebugLogService.debugLog("found first fitting entry \(newEntry.state.gaName), family\(family.debugDescription)")
-                        }
-                        semaphore.signal()
+                        timelineCallback(.success(timeline))
                     }
-                    semaphore.wait()
+                    
+                    self.save(entry: newEntries.last)
+                    self.getOperationQueue(family: family)?.addOperation(timelineOperation)
                 }
-                guard !self.isFamilyTimelineCancelled(family: family) else {
-                    return
+            case .failure(let failStatus):
+                switch failStatus {
+                case .cancel:
+                    timelineCallback(.failure(.cancel))
+                case .error(let error):
+                    timelineCallback(.failure(.error(error)))
                 }
-                
-                let timelineOperation = WidgetTimelineConstructionOperation(entries: newEntries, order: order) { [weak self] timeline in
-                    guard
-                        let self = self,
-                        !self.isFamilyTimelineCancelled(family: family)
-                    else {
-                        return
-                    }
-                    timelineCallback(timeline)
-                }
-                
-                self.save(entry: newEntries.last)
-                self.getOperationQueue(family: family)?.addOperation(timelineOperation)
             }
         }
     }

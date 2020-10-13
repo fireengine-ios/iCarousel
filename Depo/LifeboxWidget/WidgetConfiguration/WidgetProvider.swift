@@ -64,8 +64,19 @@ extension WidgetProvider {
             guard let self = self else {
                 return
             }
-            self.timelineManager.provideTimeline(family: family, orders: self.defaultOrdersCheckList
-                                            , timelineCallback: timelineCallback)
+            self.timelineManager.provideTimeline(family: family, orders: self.defaultOrdersCheckList) { result in
+                switch result {
+                case .success(let timeline):
+                    timelineCallback(timeline)
+                case .failure(let failStatus):
+                    switch failStatus {
+                    case .cancel:
+                        DebugLogService.debugLog("Timeline cancelled for \(family.debugDescription)")
+                    case .error(let error):
+                        DebugLogService.debugLog("Timeline got error \(error.localizedDescription) for \(family.debugDescription)")
+                    }
+                }
+            }
         }
     }
 }
