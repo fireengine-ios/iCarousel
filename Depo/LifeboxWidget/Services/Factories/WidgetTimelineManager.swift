@@ -9,34 +9,54 @@
 import Foundation
 import WidgetKit
 
+enum EntryError: Error {
+    case cancel
+    case error(Error)
+}
+
+typealias EntryCreationResult = Result<(WidgetBaseEntry?, WidgetStateOrder?), EntryError>
+typealias TimelineCreationResult = Result<Timeline<WidgetBaseEntry>, EntryError>
+typealias EntryCreationResultCallback = (EntryCreationResult) -> Void
+typealias TimelineCreationResultCallback = (TimelineCreationResult) -> Void
+
 final class WidgetTimelineManager {
     
-    private let privateQueue = DispatchQueue(label: DispatchQueueLabels.widgetProviderQueue)
+    private let privateSmallQueue = DispatchQueue(label: DispatchQueueLabels.widgetSmallProviderQueue)
+    private let privateMediumQueue = DispatchQueue(label: DispatchQueueLabels.widgetMediumProviderQueue)
     private let entriesFactory = WidgetEntriesFactory()
-    private var isCancelled = false
+    private var isSmallCancelled = false
+    private var isMediumCancelled = false
     
-    private let timelinesCreationQueue: OperationQueue = {
+    private let timelinesMediumWidgetQueue: OperationQueue = {
+        let operationQueue = OperationQueue()
+        operationQueue.maxConcurrentOperationCount = 1
+        return operationQueue
+    }()
+    
+    private let timelinesSmallWidgetQueue: OperationQueue = {
         let operationQueue = OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
         return operationQueue
     }()
     
     func provideTimeline(family: WidgetFamily, orders: [WidgetStateOrder], timelineCallback: @escaping WidgetTimeLineCallback) {
-        isCancelled = false
+
+        setCancelledStatus(family: family, status: false)
         
         var newEntries = [WidgetBaseEntry]()
         let semaphore = DispatchSemaphore(value: 0)
-        entriesFactory.findFirstFittingEntry(orders: orders) { [weak self] entry, order  in
+        entriesFactory.findFirstFittingEntry(family: family, orders: orders) { [weak self] entry, order  in
+            
             guard
                 let self = self,
-                !self.isCancelled
+                !self.isFamilyTimelineCancelled(family: family)
             else {
                 return
             }
-            self.privateQueue.async { [weak self] in
+            self.getQueue(family: family)?.async { [weak self] in
                 guard
                     let self = self,
-                    !self.isCancelled,
+                    !self.isFamilyTimelineCancelled(family: family),
                     let preparedEntry = entry,
                     let order = order
                 else {
@@ -50,10 +70,10 @@ final class WidgetTimelineManager {
                     
                     let nextOrdersInLine: [WidgetStateOrder] = Array(slice)
                     
-                    self.entriesFactory.findFirstFittingEntry(orders: nextOrdersInLine, customCurrentDate: order.refreshDate) { [weak self] (nextEntry, entryOrder) in
+                    self.entriesFactory.findFirstFittingEntry(family: family, orders: nextOrdersInLine, customCurrentDate: order.refreshDate) { [weak self] (nextEntry, entryOrder) in
                         guard
                             let self = self,
-                            !self.isCancelled
+                            !self.isFamilyTimelineCancelled(family: family)
                         else {
                             semaphore.signal()
                             return
@@ -66,14 +86,14 @@ final class WidgetTimelineManager {
                     }
                     semaphore.wait()
                 }
-                guard !self.isCancelled else {
+                guard !self.isFamilyTimelineCancelled(family: family) else {
                     return
                 }
                 
                 let timelineOperation = WidgetTimelineConstructionOperation(entries: newEntries, order: order) { [weak self] timeline in
                     guard
                         let self = self,
-                        !self.isCancelled
+                        !self.isFamilyTimelineCancelled(family: family)
                     else {
                         return
                     }
@@ -81,9 +101,46 @@ final class WidgetTimelineManager {
                 }
                 
                 self.save(entry: newEntries.last)
-                self.timelinesCreationQueue.addOperation(timelineOperation)
-                
+                self.getOperationQueue(family: family)?.addOperation(timelineOperation)
             }
+        }
+    }
+    
+    private func isFamilyTimelineCancelled(family: WidgetFamily) -> Bool {
+        if family == .systemMedium {
+            return isMediumCancelled
+        } else if family == .systemSmall {
+            return isSmallCancelled
+        } else {
+            return true
+        }
+    }
+    
+    private func setCancelledStatus(family: WidgetFamily, status: Bool) {
+        if family == .systemMedium {
+            isMediumCancelled = status
+        } else if family == .systemSmall {
+            isSmallCancelled = status
+        }
+    }
+    
+    func getQueue(family: WidgetFamily) -> DispatchQueue? {
+        if family == .systemMedium {
+            return privateMediumQueue
+        } else if family == .systemSmall {
+            return privateSmallQueue
+        } else {
+            return nil
+        }
+    }
+    
+    private func getOperationQueue(family: WidgetFamily) -> OperationQueue? {
+        if family == .systemMedium {
+            return timelinesMediumWidgetQueue
+        } else if family == .systemSmall {
+            return timelinesSmallWidgetQueue
+        } else {
+            return nil
         }
     }
     
@@ -96,8 +153,10 @@ final class WidgetTimelineManager {
     }
     
     func cancelAll() {
-        isCancelled = true
-        timelinesCreationQueue.cancelAllOperations()
+        isSmallCancelled = true
+        isMediumCancelled = true
+        timelinesMediumWidgetQueue.cancelAllOperations()
+        timelinesSmallWidgetQueue.cancelAllOperations()
         entriesFactory.cancellAll()
     }
 }

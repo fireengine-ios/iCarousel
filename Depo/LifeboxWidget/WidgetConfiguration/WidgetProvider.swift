@@ -21,7 +21,6 @@ final class WidgetProvider: TimelineProvider {
     let defaultOrdersCheckList: [WidgetStateOrder] = [.login, .quota, .freeUpSpace, .syncInProgress, .autosync, .contactsNoBackup, .fir]
 
     private let timelineManager = WidgetTimelineManager()
-    private let privateQueue = DispatchQueue(label: DispatchQueueLabels.widgetProviderQueue)
     
     init() {
         WidgetPresentationService.shared.delegate = self
@@ -61,7 +60,7 @@ extension WidgetProvider {
         
         DebugLogService.debugLog("Calculating order TIMELINE, family: \(family.debugDescription)")
         
-        privateQueue.async { [weak self] in
+        timelineManager.getQueue(family: family)?.async { [weak self] in
             guard let self = self else {
                 return
             }
