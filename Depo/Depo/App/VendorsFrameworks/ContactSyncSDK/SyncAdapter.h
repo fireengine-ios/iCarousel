@@ -23,6 +23,7 @@ typedef enum {
 + (void)getUpdatedContacts:(NSNumber *)lastSyncTime deviceId:(NSString *)deviceId callback:(void (^)(id, BOOL))callback;
 + (void)partialBackup:(NSString *)key deviceId:(NSString *)deviceId dirtyContacts:(NSArray*)dirtyContacts deletedContacts:(NSArray *)deletedContacts duplicates:(NSArray *)duplicates step:(NSNumber *)step totalStep:(NSNumber *)totalStep callback:(void (^)(id, BOOL))callback;
 + (void)restoreContactsWithTimestamp:(long long)timestamp deviceId:(NSString *)deviceId callback:(void(^)(id, BOOL))callback;
++ (void)getBackupVersionList:(void (^)(id, BOOL))callback;
 + (void)deleteContact:(NSNumber*)contactId callback:(void (^)(id, BOOL))callback;
 + (void)deleteContact:(NSNumber*)contactId permanent:(BOOL)permanent callback:(void (^)(id, BOOL))callback;
 + (void)getServerTime:(void (^)(id, BOOL))callback;

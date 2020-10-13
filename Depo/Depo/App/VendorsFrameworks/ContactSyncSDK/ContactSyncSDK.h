@@ -70,6 +70,8 @@
 + (void)hasContactForBackup:(void(^)(SYNCResultType))callback;
 
 + (void)getBackupStatus:(void (^)(id))callback;
+
++ (void)getBackupVersionList:(void (^)(id, BOOL))callback;
 #pragma mark -
 
 @end
