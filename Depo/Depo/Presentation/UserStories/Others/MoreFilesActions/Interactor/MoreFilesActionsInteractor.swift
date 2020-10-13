@@ -369,25 +369,26 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         let controller = OverlayStickerViewController()
         controller.smashActionService = self.smashActionService
         let navVC = NavigationController(rootViewController: controller)
-        self.router.presentViewController(controller: navVC)
-        
-        ImageDownloder().getImage(patch: url) { [weak self] image in
-            guard let self = self, let image = image else {
-                if !ReachabilityService.shared.isReachable {
-                    controller.dismiss(animated: false) {
-                         UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+        navVC.navigationBar.isHidden = true
+        router.presentViewController(controller: navVC, animated: true) { [weak self] in
+            ImageDownloder().getImage(patch: url) { [weak self] image in
+                guard let self = self, let image = image else {
+                    if !ReachabilityService.shared.isReachable {
+                        controller.dismiss(animated: false) {
+                             UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+                        }
                     }
+            
+                    completion?()
+                    return
                 }
-        
+                
+                controller.selectedImage = image
+                controller.imageName = item.name
                 completion?()
-                return
+                
+                self?.trackEvent(elementType: .smash)
             }
-            
-            controller.selectedImage = image
-            controller.imageName = item.name
-            completion?()
-            
-            self.trackEvent(elementType: .smash)
         }
     }
     

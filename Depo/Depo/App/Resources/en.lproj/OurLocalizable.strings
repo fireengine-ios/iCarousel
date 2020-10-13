@@ -1791,3 +1791,10 @@
 "widget_description" = "Get notified about your device storage and lifebox quota and keep track of your memories.";
 "widget_rule_6_small_detail_plural" = "It's over %d months since last contact backup.";
 "widget_rule_6_medium_detail_plural" = "It's over %d months since your last contact backup.";
+
+"fun_gif" = "Gif";
+"fun_sticker" = "Sticker";
+"fun_close_alert_title" = "Discard Changes?";
+"fun_close_alert_message" = "Your photo edits will be discarded.";
+"fun_close_alert_left_button" = "Keep editing";
+"fun_close_alert_right_button" = "Discard";
