@@ -11,13 +11,13 @@ import Foundation
 final class WidgetEntryConstructionOperation: Operation {
     
     private let semaphore = DispatchSemaphore(value: 0)
-    let ordersCehckList: [WidgetStateOrder]
+    let ordersCheckList: [WidgetStateOrder]
     let callback: EntryCreationResultCallback
     var customCurrentDate: Date?
     
-    init(ordersCehckList: [WidgetStateOrder], customCurrentDate: Date? = nil, callback: @escaping EntryCreationResultCallback) {
+    init(ordersCheckList: [WidgetStateOrder], customCurrentDate: Date? = nil, callback: @escaping EntryCreationResultCallback) {
         self.callback = callback
-        self.ordersCehckList = ordersCehckList
+        self.ordersCheckList = ordersCheckList
         self.customCurrentDate = customCurrentDate
     }
     
@@ -26,7 +26,7 @@ final class WidgetEntryConstructionOperation: Operation {
             self.callback(.failure(.cancel))
             return
         }
-        findFirstFittingEntry(orders: ordersCehckList, customCurrentDate: customCurrentDate) { [weak self] (entry, order) in
+        findFirstFittingEntry(orders: ordersCheckList, customCurrentDate: customCurrentDate) { [weak self] (entry, order) in
             guard let self = self else {
                 return
             }

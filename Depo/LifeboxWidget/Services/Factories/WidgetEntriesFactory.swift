@@ -30,7 +30,7 @@ final class WidgetEntriesFactory {
         
         setCancelledStatus(family: family, status: false)
         
-        let entriesConstructionOperation = WidgetEntryConstructionOperation(ordersCehckList: orders) { [weak self] result in
+        let entriesConstructionOperation = WidgetEntryConstructionOperation(ordersCheckList: orders) { [weak self] result in
             guard
                 let self = self,
                 !self.isFamilyTimelineCancelled(family: family)
