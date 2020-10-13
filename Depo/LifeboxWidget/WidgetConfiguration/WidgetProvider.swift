@@ -238,21 +238,36 @@ extension WidgetProvider {
             entryCallback(nil)
             return
         }
+        
         let startDate = customCurrentDate ?? Date()
         let syncInfo = WidgetPresentationService.shared.getSyncInfo()
-        if syncInfo.syncStatus == .executing {
-            entryCallback(WidgetSyncInProgressEntry(uploadCount: syncInfo.uploadCount,
-                                                    totalCount: syncInfo.totalCount,
-                                                    currentFileName: syncInfo.currentSyncFileName,
-                                                    date: startDate))
-        } else if syncInfo.syncStatus == .synced,
-                  let lastSyncDate = syncInfo.lastSyncedDate,
-                  lastSyncDate.timeIntervalSince(Date()) < 20 {
-            entryCallback(WidgetSyncInProgressEntry(isSyncCompleted: true, date: startDate))
-        } else {
-            entryCallback(nil)
+        
+        switch syncInfo.syncStatus {
+            case .executing:
+                entryCallback(WidgetSyncInProgressEntry(uploadCount: syncInfo.uploadCount,
+                                                        totalCount: syncInfo.totalCount,
+                                                        currentFileName: syncInfo.currentSyncFileName,
+                                                        date: startDate))
+            case .synced:
+                
+                guard syncInfo.syncStatus == syncInfo.shownSyncStatus else {
+                    entryCallback(WidgetSyncInProgressEntry(isSyncCompleted: true, date: startDate))
+                    WidgetPresentationService.shared.save(shownSyncStatus: syncInfo.syncStatus)
+                    return
+                }
+                
+                //allows to show isSyncCompleted for some time after it's completed
+                if let lastSyncDate = syncInfo.lastSyncedDate, Date().timeIntervalSince(lastSyncDate) < 8 {
+                    entryCallback(WidgetSyncInProgressEntry(isSyncCompleted: true, date: startDate))
+                } else {
+                    entryCallback(nil)
+                }
+                
+            default:
+                entryCallback(nil)
         }
         
+        WidgetPresentationService.shared.save(shownSyncStatus: syncInfo.syncStatus)
     }
     
     //ORDER-4 (Checking unsynced files)
