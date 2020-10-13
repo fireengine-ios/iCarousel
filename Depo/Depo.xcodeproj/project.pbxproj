@@ -22529,9 +22529,9 @@
 		CF7145C124B597A700D83E60 /* ContactsBackupHistory */ = {
 			isa = PBXGroup;
 			children = (
+				CF7145C424B597A700D83E60 /* View */,
 				CF7145C224B597A700D83E60 /* ContactBackupDataManager.swift */,
 				CF7145C324B597A700D83E60 /* ContactsBackupHistoryController.swift */,
-				CF7145C424B597A700D83E60 /* View */,
 				CF7145C824B597A700D83E60 /* ContactBackupHistoryPopupFactory.swift */,
 				CF7145C924B597A700D83E60 /* ContactBackupCell */,
 			);

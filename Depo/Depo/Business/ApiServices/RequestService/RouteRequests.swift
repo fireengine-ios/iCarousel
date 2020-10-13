@@ -226,6 +226,8 @@ struct RouteRequests {
         static let contactAPI = baseContactsUrlShort +/ "ttyapi"
         static let contact = contactAPI +/ "contact"
         static let search = contactAPI +/ "search"
+        static let backup = contactAPI +/ "backup_version"
+        static let backupContacts = baseShortUrlString + "ttyapi/backup_version/%d"
     }
     
     // MARK: - Quick Scroll

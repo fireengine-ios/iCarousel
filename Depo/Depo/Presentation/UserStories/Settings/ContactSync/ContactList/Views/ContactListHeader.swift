@@ -76,20 +76,20 @@ final class ContactListHeader: UIView, NibInit {
         backgroundColor = ColorConstants.toolbarTintColor
     }
     
-    func setup(with backUpInfo: ContactSync.SyncResponse?) {
+    func setup(with backUpInfo: ContactBackupItem?) {
         guard let backUpInfo = backUpInfo else {
             return
         }
         
-        let date = backUpInfo.date ?? Date()
+        let date = backUpInfo.modified ?? backUpInfo.created ?? Date()
         let dateString = dateFormatter.string(from: date)
         
-        let string = String(format: TextConstants.contactListInfo, backUpInfo.totalNumberOfContacts, dateString)
+        let string = String(format: TextConstants.contactListInfo, backUpInfo.total, dateString)
         let attributedString = NSMutableAttributedString(string: string,
                                                          attributes: [.font: UIFont.TurkcellSaturaMedFont(size: 16),
                                                                       .foregroundColor: ColorConstants.duplicatesGray])
         
-        let countRange = (string as NSString).range(of: "\(backUpInfo.totalNumberOfContacts)")
+        let countRange = (string as NSString).range(of: "\(backUpInfo.total)")
         attributedString.addAttribute(.font, value: UIFont.TurkcellSaturaBolFont(size: 16), range: countRange)
         
         let dateRange = (string as NSString).range(of: dateString)

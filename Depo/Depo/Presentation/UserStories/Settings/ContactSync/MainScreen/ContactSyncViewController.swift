@@ -158,16 +158,12 @@ extension ContactSyncViewController: ContactSyncMainViewDelegate {
             return
         }
         
-        let contactList = router.contactList(backUpInfo: info, delegate: nil)
-        router.pushViewController(viewController: contactList)
+//        let contactList = router.contactList(backUpInfo: info, delegate: nil)
+//        router.pushViewController(viewController: contactList)
     }
     
     func showBackups() {
-        guard let info = contactSyncHelper.syncResponse else {
-            return
-        }
-        
-        let backupList = router.backupHistory(backUpInfo: info)
+        let backupList = router.backupHistory()
         router.pushViewController(viewController: backupList)
     }
     

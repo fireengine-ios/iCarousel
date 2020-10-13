@@ -31,7 +31,7 @@ final class ContactListViewController: BaseViewController {
     private lazy var router = RouterVC()
     private let animator = ContentViewAnimator()
     
-    private var backUpInfo: ContactSync.SyncResponse?
+    private var backUpInfo: ContactBackupItem?
     
     private var currentPage = 1
     private var numberOfPages = Int.max
@@ -44,7 +44,7 @@ final class ContactListViewController: BaseViewController {
     
     private weak var delegate: ContactListViewDelegate?
     
-    static func with(backUpInfo: ContactSync.SyncResponse, delegate: ContactListViewDelegate?) -> ContactListViewController {
+    static func with(backUpInfo: ContactBackupItem, delegate: ContactListViewDelegate?) -> ContactListViewController {
         let controller = ContactListViewController()
         controller.backUpInfo = backUpInfo
         controller.delegate = delegate
@@ -165,6 +165,8 @@ private extension ContactListViewController {
         
         if let query = lastQuery {
             currentTask = contactsSyncService.searchContacts(query: query, page: currentPage, handler: handler)
+        } else if let backupId = backUpInfo?.id, backupId != -1 {
+            currentTask = contactsSyncService.getContacts(backupId: backupId, page: currentPage, handler: handler)
         } else {
             currentTask = contactsSyncService.getContacts(page: currentPage, handler: handler)
         }
@@ -227,7 +229,7 @@ extension ContactListViewController: ContactSyncControllerProtocol, ContactSyncH
             }
         case .deleteAllContacts:
             if let backUpInfo = backUpInfo {
-                delegate?.didDeleteContacts(for: backUpInfo)
+//                delegate?.didDeleteContacts(for: backUpInfo)
             }
             
             //TODO: need to delete in future

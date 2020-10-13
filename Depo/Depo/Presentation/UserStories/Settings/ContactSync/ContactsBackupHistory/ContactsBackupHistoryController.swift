@@ -17,21 +17,16 @@ final class ContactsBackupHistoryController: BaseViewController {
     }()
     var progressView: ContactOperationProgressView?
     
-    private var dataManager: ContactBackupHistoryDataManagerProtocol?
+    private lazy var dataManager = ContactBackupHistoryDataManager(tableView: contactHistoryView.tableView, delegate: self)
     private let router = RouterVC()
     private let animator = ContentViewAnimator()
     private let contactSyncHelper = ContactSyncHelper.shared
     private lazy var contactsSyncService = ContactSyncApiService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private var task: URLSessionTask?
     
-    init(with backup: ContactBackupItem) {
-        super.init(nibName: nil, bundle: nil)
-        dataManager = ContactBackupHistoryDataManager(tableView: contactHistoryView.tableView, delegate: self)
-        dataManager?.appendItemsForPresent(items: [backup])
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+    deinit {
+        task?.cancel()
     }
     
     override func viewDidLoad() {
@@ -43,6 +38,8 @@ final class ContactsBackupHistoryController: BaseViewController {
         backButtonForNavigationItem(title: TextConstants.backTitle)
         
         showRelatedView()
+        
+        loadBackups(needShowSpinner: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,10 +54,31 @@ final class ContactsBackupHistoryController: BaseViewController {
         analyticsService.logScreen(screen: .contactSyncBackupsScreen)
         analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackupsScreen)
     }
+    
+    private func loadBackups(needShowSpinner: Bool) {
+        if needShowSpinner {
+            showSpinner()
+        }
+        
+        task = contactsSyncService.getBackups { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
+            self.hideSpinner()
+            
+            switch result {
+            case .success(let response):
+                self.dataManager.setup(with: response.list)
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
+    }
 }
 
 extension ContactsBackupHistoryController: ContactBackupHistoryDataManagerDelegate {
-    func showDetailsForBuckupItem(item: ContactBackupItem) {
+    func showDetailsForBackupItem(item: ContactBackupItem) {
         let controller = router.contactList(backUpInfo: item, delegate: self)
         router.pushViewController(viewController: controller)
     }
@@ -99,10 +117,10 @@ extension ContactsBackupHistoryController: ContactSyncControllerProtocol, Contac
 extension ContactsBackupHistoryController: ContactListViewDelegate {
 
     func didCreateNewBackup(_ backup: ContactSync.SyncResponse) {
-        //TODO: - add new backup
+        loadBackups(needShowSpinner: false)
     }
     
     func didDeleteContacts(for backup: ContactSync.SyncResponse) {
-        //TODO: - remove backup from list
+        loadBackups(needShowSpinner: false)
     }
 }
