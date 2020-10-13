@@ -19,6 +19,7 @@ class UserInfo {
 }
 
 class SyncInfo {
+    var shownSyncStatus: WidgetSyncStatus = .undetermined
     var syncStatus: WidgetSyncStatus = .undetermined
     var isAutoSyncEnabled = false
     var isAppLaunch = false
@@ -201,6 +202,7 @@ final class WidgetPresentationService {
     
     func getSyncInfo() -> SyncInfo {
         let syncInfo = SyncInfo()
+        syncInfo.shownSyncStatus = widgetService.widgetShownSyncStatus
         syncInfo.syncStatus = widgetService.syncStatus
         syncInfo.isAutoSyncEnabled = widgetService.isAutoSyncEnabled
         syncInfo.uploadCount = widgetService.finishedCount
@@ -210,6 +212,10 @@ final class WidgetPresentationService {
         syncInfo.isAppLaunch = mainAppResponsivenessService.isMainAppResponsive()
         
         return syncInfo
+    }
+    
+    func save(shownSyncStatus: WidgetSyncStatus) {
+        widgetService.notifyAbout(shownSyncStatus: shownSyncStatus)
     }
     
     private func getFaceImageEnabled(completion: @escaping ((Bool) -> ())) {
