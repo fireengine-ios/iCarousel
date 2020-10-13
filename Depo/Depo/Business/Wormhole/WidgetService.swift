@@ -70,6 +70,14 @@ final class WidgetService {
         set { defaults?.set(newValue, forKey: SharedConstants.currentSyncFileNameKey) }
     }
     
+    private (set) var widgetShownSyncStatus: WidgetSyncStatus {
+        get {
+            let statusValue = defaults?.string(forKey: SharedConstants.widgetShownSyncStatusKey) ?? ""
+            return WidgetSyncStatus(rawValue: statusValue) ?? .undetermined
+        }
+        set { defaults?.set(newValue.rawValue, forKey: SharedConstants.widgetShownSyncStatusKey) }
+    }
+    
     private (set) var syncStatus: WidgetSyncStatus {
         get {
             let statusValue = defaults?.string(forKey: SharedConstants.syncStatusKey) ?? ""
@@ -166,4 +174,11 @@ final class WidgetService {
         }
     }
 
+    func notifyAbout(shownSyncStatus: WidgetSyncStatus) {
+        guard widgetShownSyncStatus != shownSyncStatus else {
+            return
+        }
+        
+        widgetShownSyncStatus = shownSyncStatus
+    }
 }
