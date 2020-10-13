@@ -33,6 +33,8 @@ final class WidgetServerService {
         }
     }()
 
+    private let firItemsCount = 3
+    
     private let sessionManager: SessionManager
     private lazy var auth: AuthorizationRepository = factory.resolve()
     private lazy var tokenStorage: TokenStorage = factory.resolve()
@@ -142,7 +144,7 @@ final class WidgetServerService {
     
     func getPeopleInfo(handler: @escaping ResponseHandler<PeopleResponse>) {
         sessionManager
-            .request("\(Self.baseShortUrlString)/api/person/page?pageSize=3&pageNumber=0")
+            .request("\(Self.baseShortUrlString)/api/person/page?pageSize=\(firItemsCount)&pageNumber=0")
             .customValidate()
             .responseData { response in
                 switch response.result {
@@ -172,6 +174,27 @@ final class WidgetServerService {
                 })
                 .task
     }
+    
+    func lastUploads(completion: @escaping ValueHandler<[URL?]>) {
+        sessionManager
+            .request("\(Self.baseShortUrlString)/api/search/byField?fieldName=content_type&fieldValue=image&sortBy=metadata.Image-DateTime&sortOrder=DESC&page=0&size=\(firItemsCount)")
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    do {
+                        let items = try JSONDecoder().decode([SearchItem].self, from: data)
+                        let urls = items.map { $0.metadata?.url }
+                        completion(urls)
+                    } catch {
+                        completion([])
+                    }
+                case .failure:
+                    completion([])
+                }
+            
+            }
+    }
 }
 
 typealias QuotaInfoResponse = ServerResponse.QuotaInfoResponse
@@ -180,6 +203,7 @@ typealias ContantBackupResponse = ServerResponse.ContantBackupResponse
 typealias SettingsInfoPermissionsResponse = ServerResponse.SettingsInfoPermissionsResponse
 typealias PeopleResponse = ServerResponse.PeopleResponse
 typealias PeopleInfo = ServerResponse.PeopleInfo
+typealias SearchItem = ServerResponse.SearchItem
 
 struct ServerResponse {
     final class QuotaInfoResponse: ObjectRequestResponse {
@@ -276,4 +300,38 @@ struct ServerResponse {
     struct PeopleResponse: Codable {
         var personInfos = [PeopleInfo]()
     }
+    
+    struct SearchItem: Codable {
+        var id: Int64?
+        var metadata: Metadata?
+    }
+    
+    struct Metadata: Codable {
+        var largeUrl: URL?
+        var mediumUrl: URL?
+        var smallUrl: URL?
+        var url: URL? {
+            smallUrl ?? mediumUrl ?? largeUrl
+        }
+        
+        private enum CodingKeys: String, CodingKey {
+            case largeUrl = "Thumbnail-Large"
+            case mediumUrl = "Thumbnail-Medium"
+            case smallUrl = "Thumbnail-Small"
+        }
+        
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            if let string = try container.decodeIfPresent(String.self, forKey: .largeUrl) {
+                largeUrl = URL(string: string)
+            }
+            if let string = try container.decodeIfPresent(String.self, forKey: .mediumUrl) {
+                mediumUrl = URL(string: string)
+            }
+            if let string = try container.decodeIfPresent(String.self, forKey: .smallUrl) {
+                smallUrl = URL(string: string)
+            }
+        }
+    }
+
 }

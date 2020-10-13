@@ -147,18 +147,33 @@ extension WidgetEntryConstructionOperation {
         }
         let startDate = customCurrentDate ?? Date()
         let syncInfo = WidgetPresentationService.shared.getSyncInfo()
-        if syncInfo.syncStatus == .executing {
+        
+        switch syncInfo.syncStatus {
+        case .executing:
             entryCallback(WidgetSyncInProgressEntry(uploadCount: syncInfo.uploadCount,
                                                     totalCount: syncInfo.totalCount,
                                                     currentFileName: syncInfo.currentSyncFileName,
                                                     date: startDate))
-        } else if syncInfo.syncStatus == .synced,
-                  let lastSyncDate = syncInfo.lastSyncedDate,
-                  lastSyncDate.timeIntervalSince(Date()) < 20 {
-            entryCallback(WidgetSyncInProgressEntry(isSyncCompleted: true, date: startDate))
-        } else {
+        case .synced:
+            
+            guard syncInfo.syncStatus == syncInfo.shownSyncStatus else {
+                entryCallback(WidgetSyncInProgressEntry(isSyncCompleted: true, date: startDate))
+                WidgetPresentationService.shared.save(shownSyncStatus: syncInfo.syncStatus)
+                return
+            }
+            
+            //allows to show isSyncCompleted for some time after it's completed
+            if let lastSyncDate = syncInfo.lastSyncedDate, Date().timeIntervalSince(lastSyncDate) < 8 {
+                entryCallback(WidgetSyncInProgressEntry(isSyncCompleted: true, date: startDate))
+            } else {
+                entryCallback(nil)
+            }
+            
+        default:
             entryCallback(nil)
         }
+        
+        WidgetPresentationService.shared.save(shownSyncStatus: syncInfo.syncStatus)
         
     }
     
@@ -236,11 +251,11 @@ extension WidgetEntryConstructionOperation {
             } else {
                 date = Calendar.current.date(byAdding: .second, value: 2, to: startDate) ?? startDate
             }
-
+            
             let entry = WidgetUserInfoEntry(
                 isFIREnabled: response.userInfo.isFIREnabled,
                 hasFIRPermission: response.userInfo.hasFIRPermission,
-                peopleInfos: response.userInfo.peopleInfos,
+                imageUrls: response.userInfo.imageUrls,
                 date: date
             )
             entryCallback(entry)

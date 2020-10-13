@@ -35,6 +35,7 @@ struct SharedConstants {
     static let totalAutoSyncCountKey = "totalAutoSyncCount"
     static let lastSyncDateKey = "lastSyncDate"
     static let syncStatusKey = "syncStatus"
+    static let widgetShownSyncStatusKey = "widgetShownSyncStatus"
     static let currentImageDataKey = "currentImageData"
     static let autoSyncEnabledKey = "autoSyncEnabledKey"
     static let currentSyncFileNameKey = "currentSyncFileName"
