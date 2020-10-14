@@ -65,6 +65,7 @@ final class NetmeraService {
             
             group.enter()
             var countryCode: String = "Null"
+            var regionCode: String = "Null"
             var userName: Int = 0
             var userSurname: Int = 0
             var email: Int = 0
@@ -77,6 +78,7 @@ final class NetmeraService {
                     return
                 }
                 
+                regionCode = accountInfo.msisdnRegion ?? "Null"
                 countryCode = accountInfo.countryCode ?? "Null"
                 userName = (accountInfo.username ?? "").isEmpty ? 0 : 1
                 userSurname = (accountInfo.surname ?? "").isEmpty ? 0 : 1
@@ -116,6 +118,7 @@ final class NetmeraService {
                                              turkcellPassword: turkcellPassword,
                                              buildNumber: buildNumber,
                                              countryCode: countryCode,
+                                             regionCode: regionCode,
                                              isUserName: userName,
                                              isUserSurname: userSurname,
                                              isEmail: email,
@@ -200,7 +203,7 @@ extension NetmeraService {
         let user = NetmeraCustomUser(deviceStorage: 0, photopickLeftAnalysis: "Null", lifeboxStorage: 0, faceImageGrouping: "Null", accountType: "Null",
                                      twoFactorAuthentication: "Null", autosync: "Null", emailVerification: "Null",
                                      autosyncPhotos: "Null", autosyncVideos: "Null", packages: ["Null"],
-                                     autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null", isUserName: 0,
+                                     autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null", regionCode: "Null", isUserName: 0,
                                      isUserSurname: 0, isEmail: 0, isPhoneNumber: 0, isAddress: 0, isBirthDay: 0)
         user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
         DispatchQueue.toMain {
