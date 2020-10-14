@@ -11666,6 +11666,11 @@
 		CFACACAE247CF8AC00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
 		CFACACAF247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
 		CFACACB0247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
+		CFBD0047253645380055726C /* DebugLogsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */; };
+		CFBD007425370D1E0055726C /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
+		CFBD008B25370D220055726C /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
+		CFBD008C25370D240055726C /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
+		CFBD008D25370D250055726C /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
 		CFE4E5FD252D9EE200F165AD /* RestoreHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0724FE6DAA00515757 /* RestoreHelper.m */; };
 		CFE4E5FE252D9EE200F165AD /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BFA24FE6DAA00515757 /* GZIP.m */; };
 		CFE4E5FF252D9EE200F165AD /* PHAsset+FetchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */; };
@@ -11954,6 +11959,22 @@
 		CFEB1E4A252F63630008A2A9 /* DebugLogsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */; };
 		CFEB1E4E252F63650008A2A9 /* DebugLogsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */; };
 		CFEB1E4F252F63660008A2A9 /* DebugLogsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */; };
+		CFEB1FA6252FFF700008A2A9 /* WidgetTimelineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FA5252FFF700008A2A9 /* WidgetTimelineManager.swift */; };
+		CFEB1FA7252FFF700008A2A9 /* WidgetTimelineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FA5252FFF700008A2A9 /* WidgetTimelineManager.swift */; };
+		CFEB1FA8252FFF700008A2A9 /* WidgetTimelineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FA5252FFF700008A2A9 /* WidgetTimelineManager.swift */; };
+		CFEB1FA9252FFF700008A2A9 /* WidgetTimelineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FA5252FFF700008A2A9 /* WidgetTimelineManager.swift */; };
+		CFEB1FC4252FFF940008A2A9 /* WidgetEntriesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FC3252FFF940008A2A9 /* WidgetEntriesFactory.swift */; };
+		CFEB1FC5252FFF940008A2A9 /* WidgetEntriesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FC3252FFF940008A2A9 /* WidgetEntriesFactory.swift */; };
+		CFEB1FC6252FFF940008A2A9 /* WidgetEntriesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FC3252FFF940008A2A9 /* WidgetEntriesFactory.swift */; };
+		CFEB1FC7252FFF940008A2A9 /* WidgetEntriesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FC3252FFF940008A2A9 /* WidgetEntriesFactory.swift */; };
+		CFEB1FDF25304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FDE25304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift */; };
+		CFEB1FE025304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FDE25304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift */; };
+		CFEB1FE125304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FDE25304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift */; };
+		CFEB1FE225304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FDE25304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift */; };
+		CFEB1FFA25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FF925304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift */; };
+		CFEB1FFB25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FF925304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift */; };
+		CFEB1FFC25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FF925304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift */; };
+		CFEB1FFD25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEB1FF925304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift */; };
 		D143F1B72DFAC4DD04CF11B7 /* OTPViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CCC54F08E7CC06501222ED /* OTPViewRouterInput.swift */; };
 		D42ED46420C9D9E600761645 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */; };
 		D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47863E01F3F18FA00EFDC6D /* UsageInfoConfigurator.swift */; };
@@ -14629,6 +14650,10 @@
 		CFE4E662252D9EE200F165AD /* LifeTech_BilloWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeTech_BilloWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFE4E71C252D9F2300F165AD /* LifeboxWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LifeboxWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFE4E7B0252D9F3B00F165AD /* BilloWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BilloWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFEB1FA5252FFF700008A2A9 /* WidgetTimelineManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetTimelineManager.swift; sourceTree = "<group>"; };
+		CFEB1FC3252FFF940008A2A9 /* WidgetEntriesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntriesFactory.swift; sourceTree = "<group>"; };
+		CFEB1FDE25304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntryConstructionOperation.swift; sourceTree = "<group>"; };
+		CFEB1FF925304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetTimelineConstructionOperation.swift; sourceTree = "<group>"; };
 		D07372B64C00468A227C63A7 /* TermsAndServicesConfigurator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TermsAndServicesConfigurator.swift; sourceTree = "<group>"; };
 		D42ED46320C9D9E600761645 /* UIBarButtonItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extensions.swift"; sourceTree = "<group>"; };
 		D47258744D443C841AC3A4A0 /* RegistrationInteractor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RegistrationInteractor.swift; sourceTree = "<group>"; };
@@ -20333,6 +20358,7 @@
 		B5358C6725011A910005FCAD /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CFEB21BE2533A6800008A2A9 /* Factories */,
 				B558278B24FE90C40039DD11 /* WidgetServerService.swift */,
 				B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */,
 				B5BF40B12514A42C00B0EFEB /* WidgetPhotoLibraryObserver.swift */,
@@ -22683,6 +22709,17 @@
 				CFB308B0252DFB0C000D3255 /* Info.plist */,
 			);
 			path = Billo;
+			sourceTree = "<group>";
+		};
+		CFEB21BE2533A6800008A2A9 /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				CFEB1FA5252FFF700008A2A9 /* WidgetTimelineManager.swift */,
+				CFEB1FF925304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift */,
+				CFEB1FC3252FFF940008A2A9 /* WidgetEntriesFactory.swift */,
+				CFEB1FDE25304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift */,
+			);
+			path = Factories;
 			sourceTree = "<group>";
 		};
 		D00A82528405045A46751159 /* Configurator */ = {
@@ -31268,12 +31305,14 @@
 				B5358C6C25011DE10005FCAD /* WidgetPresentationService.swift in Sources */,
 				B5B5E5BC24FBE38200146750 /* CellsConstant.swift in Sources */,
 				B546EE2124FD169C00C1713C /* Dictionary.swift in Sources */,
+				CFEB1FA6252FFF700008A2A9 /* WidgetTimelineManager.swift in Sources */,
 				B55827A524FE97E10039DD11 /* (null) in Sources */,
 				B58936EE24FA90AF00E3FA9C /* NumericConstants.swift in Sources */,
 				B546EDA524FC19C300C1713C /* Error+Network.swift in Sources */,
 				B546EE2424FD1C1B00C1713C /* ResponseResult.swift in Sources */,
 				B55827A324FE97DA0039DD11 /* (null) in Sources */,
 				B558278D24FE90C40039DD11 /* WidgetServerService.swift in Sources */,
+				CFEB1FFA25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */,
 				98876D7625342AC6000B440D /* RequestHeader.swift in Sources */,
 				B58936F824FA932A00E3FA9C /* SessionServiceExtension.swift in Sources */,
 				B55827A724FE97E70039DD11 /* (null) in Sources */,
@@ -31287,10 +31326,12 @@
 				B55827AC24FE97F70039DD11 /* (null) in Sources */,
 				B558279924FE97AD0039DD11 /* (null) in Sources */,
 				B5358C88250141A80005FCAD /* SyncStatus.m in Sources */,
+				CFEB1FDF25304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */,
 				98876D2D25342A54000B440D /* AuthorizationURLs.swift in Sources */,
 				B5358C83250141950005FCAD /* SyncDB.m in Sources */,
 				B5358C7F250141870005FCAD /* DepoAdapter.m in Sources */,
 				B5BF43FD2514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
+				CFEB1FC4252FFF940008A2A9 /* WidgetEntriesFactory.swift in Sources */,
 				B558279F24FE97C30039DD11 /* (null) in Sources */,
 				B546EE1224FC27BE00C1713C /* RequestsKey.swift in Sources */,
 				B58936F324FA924B00E3FA9C /* BiometricsManager.swift in Sources */,
@@ -31335,6 +31376,7 @@
 				B5BF43DB2514D43A00B0EFEB /* NSManagedObjectContext+Extensions.swift in Sources */,
 				B58936EF24FA90C500E3FA9C /* Device.swift in Sources */,
 				B558279D24FE97BB0039DD11 /* (null) in Sources */,
+				CFBD007425370D1E0055726C /* CustomErrors.swift in Sources */,
 				B558279A24FE97B10039DD11 /* (null) in Sources */,
 				B5B5E5BD24FBE38200146750 /* DispatchQueueLabels.swift in Sources */,
 				B558279724FE97030039DD11 /* AuthorityType.swift in Sources */,
@@ -31579,6 +31621,7 @@
 				4ADE0872202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */,
 				17B9B0C523F1F76900CAF5E1 /* FullQuotaWarningPopUp.swift in Sources */,
 				CE51AB811EF90853005DCEE0 /* LoginModuleInput.swift in Sources */,
+				CFBD0047253645380055726C /* DebugLogsService.swift in Sources */,
 				7C355E631F0123E0003B004C /* HomeCollectionViewLayout.swift in Sources */,
 				B5B01A7023FA7CB900B03426 /* ResumableUploadInfoService.swift in Sources */,
 				CE51AB871EF90853005DCEE0 /* LoginViewInput.swift in Sources */,
@@ -37522,12 +37565,14 @@
 				CFE4E607252D9EE200F165AD /* WidgetPresentationService.swift in Sources */,
 				CFE4E608252D9EE200F165AD /* CellsConstant.swift in Sources */,
 				CFE4E609252D9EE200F165AD /* Dictionary.swift in Sources */,
+				CFEB1FA8252FFF700008A2A9 /* WidgetTimelineManager.swift in Sources */,
 				CFE4E60A252D9EE200F165AD /* (null) in Sources */,
 				CFE4E60B252D9EE200F165AD /* NumericConstants.swift in Sources */,
 				CFE4E60C252D9EE200F165AD /* Error+Network.swift in Sources */,
 				CFE4E60D252D9EE200F165AD /* ResponseResult.swift in Sources */,
 				CFE4E60E252D9EE200F165AD /* (null) in Sources */,
 				CFE4E60F252D9EE200F165AD /* WidgetServerService.swift in Sources */,
+				CFEB1FFC25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */,
 				98876D7425342AC4000B440D /* RequestHeader.swift in Sources */,
 				CFE4E610252D9EE200F165AD /* SessionServiceExtension.swift in Sources */,
 				CFE4E611252D9EE200F165AD /* (null) in Sources */,
@@ -37541,10 +37586,12 @@
 				CFE4E617252D9EE200F165AD /* (null) in Sources */,
 				CFE4E618252D9EE200F165AD /* (null) in Sources */,
 				CFE4E619252D9EE200F165AD /* SyncStatus.m in Sources */,
+				CFEB1FE125304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */,
 				98876D4525342A57000B440D /* AuthorizationURLs.swift in Sources */,
 				CFE4E61A252D9EE200F165AD /* SyncDB.m in Sources */,
 				CFE4E61B252D9EE200F165AD /* DepoAdapter.m in Sources */,
 				CFE4E61C252D9EE200F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */,
+				CFEB1FC6252FFF940008A2A9 /* WidgetEntriesFactory.swift in Sources */,
 				CFE4E61D252D9EE200F165AD /* (null) in Sources */,
 				CFE4E61E252D9EE200F165AD /* RequestsKey.swift in Sources */,
 				CFE4E61F252D9EE200F165AD /* BiometricsManager.swift in Sources */,
@@ -37589,6 +37636,7 @@
 				CFE4E643252D9EE200F165AD /* NSManagedObjectContext+Extensions.swift in Sources */,
 				CFE4E644252D9EE200F165AD /* Device.swift in Sources */,
 				CFE4E645252D9EE200F165AD /* (null) in Sources */,
+				CFBD008D25370D250055726C /* CustomErrors.swift in Sources */,
 				CFE4E646252D9EE200F165AD /* (null) in Sources */,
 				CFE4E647252D9EE200F165AD /* DispatchQueueLabels.swift in Sources */,
 				CFE4E648252D9EE200F165AD /* AuthorityType.swift in Sources */,
@@ -37627,12 +37675,14 @@
 				CFE4E6C1252D9F2300F165AD /* WidgetPresentationService.swift in Sources */,
 				CFE4E6C2252D9F2300F165AD /* CellsConstant.swift in Sources */,
 				CFE4E6C3252D9F2300F165AD /* Dictionary.swift in Sources */,
+				CFEB1FA7252FFF700008A2A9 /* WidgetTimelineManager.swift in Sources */,
 				CFE4E6C4252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6C5252D9F2300F165AD /* NumericConstants.swift in Sources */,
 				CFE4E6C6252D9F2300F165AD /* Error+Network.swift in Sources */,
 				CFE4E6C7252D9F2300F165AD /* ResponseResult.swift in Sources */,
 				CFE4E6C8252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6C9252D9F2300F165AD /* WidgetServerService.swift in Sources */,
+				CFEB1FFB25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */,
 				98876D7525342AC5000B440D /* RequestHeader.swift in Sources */,
 				CFE4E6CA252D9F2300F165AD /* SessionServiceExtension.swift in Sources */,
 				CFE4E6CB252D9F2300F165AD /* (null) in Sources */,
@@ -37646,10 +37696,12 @@
 				CFE4E6D1252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6D2252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6D3252D9F2300F165AD /* SyncStatus.m in Sources */,
+				CFEB1FE025304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */,
 				98876D4625342A59000B440D /* AuthorizationURLs.swift in Sources */,
 				CFE4E6D4252D9F2300F165AD /* SyncDB.m in Sources */,
 				CFE4E6D5252D9F2300F165AD /* DepoAdapter.m in Sources */,
 				CFE4E6D6252D9F2300F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */,
+				CFEB1FC5252FFF940008A2A9 /* WidgetEntriesFactory.swift in Sources */,
 				CFE4E6D7252D9F2300F165AD /* (null) in Sources */,
 				CFE4E6D8252D9F2300F165AD /* RequestsKey.swift in Sources */,
 				CFE4E6D9252D9F2300F165AD /* BiometricsManager.swift in Sources */,
@@ -37694,6 +37746,7 @@
 				CFE4E6FD252D9F2300F165AD /* NSManagedObjectContext+Extensions.swift in Sources */,
 				CFE4E6FE252D9F2300F165AD /* Device.swift in Sources */,
 				CFE4E6FF252D9F2300F165AD /* (null) in Sources */,
+				CFBD008B25370D220055726C /* CustomErrors.swift in Sources */,
 				CFE4E700252D9F2300F165AD /* (null) in Sources */,
 				CFE4E701252D9F2300F165AD /* DispatchQueueLabels.swift in Sources */,
 				CFE4E702252D9F2300F165AD /* AuthorityType.swift in Sources */,
@@ -37732,12 +37785,14 @@
 				CFE4E755252D9F3B00F165AD /* WidgetPresentationService.swift in Sources */,
 				CFE4E756252D9F3B00F165AD /* CellsConstant.swift in Sources */,
 				CFE4E757252D9F3B00F165AD /* Dictionary.swift in Sources */,
+				CFEB1FA9252FFF700008A2A9 /* WidgetTimelineManager.swift in Sources */,
 				CFE4E758252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E759252D9F3B00F165AD /* NumericConstants.swift in Sources */,
 				CFE4E75A252D9F3B00F165AD /* Error+Network.swift in Sources */,
 				CFE4E75B252D9F3B00F165AD /* ResponseResult.swift in Sources */,
 				CFE4E75C252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E75D252D9F3B00F165AD /* WidgetServerService.swift in Sources */,
+				CFEB1FFD25304ED10008A2A9 /* WidgetTimelineConstructionOperation.swift in Sources */,
 				98876D5D25342AC2000B440D /* RequestHeader.swift in Sources */,
 				CFE4E75E252D9F3B00F165AD /* SessionServiceExtension.swift in Sources */,
 				CFE4E75F252D9F3B00F165AD /* (null) in Sources */,
@@ -37751,10 +37806,12 @@
 				CFE4E765252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E766252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E767252D9F3B00F165AD /* SyncStatus.m in Sources */,
+				CFEB1FE225304EBA0008A2A9 /* WidgetEntryConstructionOperation.swift in Sources */,
 				98876D4425342A56000B440D /* AuthorizationURLs.swift in Sources */,
 				CFE4E768252D9F3B00F165AD /* SyncDB.m in Sources */,
 				CFE4E769252D9F3B00F165AD /* DepoAdapter.m in Sources */,
 				CFE4E76A252D9F3B00F165AD /* SharedGroupDBContainer.xcdatamodeld in Sources */,
+				CFEB1FC7252FFF940008A2A9 /* WidgetEntriesFactory.swift in Sources */,
 				CFE4E76B252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E76C252D9F3B00F165AD /* RequestsKey.swift in Sources */,
 				CFE4E76D252D9F3B00F165AD /* BiometricsManager.swift in Sources */,
@@ -37799,6 +37856,7 @@
 				CFE4E791252D9F3B00F165AD /* NSManagedObjectContext+Extensions.swift in Sources */,
 				CFE4E792252D9F3B00F165AD /* Device.swift in Sources */,
 				CFE4E793252D9F3B00F165AD /* (null) in Sources */,
+				CFBD008C25370D240055726C /* CustomErrors.swift in Sources */,
 				CFE4E794252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E795252D9F3B00F165AD /* DispatchQueueLabels.swift in Sources */,
 				CFE4E796252D9F3B00F165AD /* AuthorityType.swift in Sources */,
@@ -41331,7 +41389,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.5;
+				CURRENT_PROJECT_VERSION = d2.5.8;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -41395,7 +41453,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.5;
+				CURRENT_PROJECT_VERSION = d2.5.8;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -41455,7 +41513,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.5;
+				CURRENT_PROJECT_VERSION = d2.5.8;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -41516,7 +41574,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.5;
+				CURRENT_PROJECT_VERSION = d2.5.8;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
