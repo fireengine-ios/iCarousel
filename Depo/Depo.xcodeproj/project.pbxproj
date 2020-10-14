@@ -11671,6 +11671,11 @@
 		CFBD008B25370D220055726C /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
 		CFBD008C25370D240055726C /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
 		CFBD008D25370D250055726C /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
+		CFBD0114253737AF0055726C /* DebugLogsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */; };
+		CFBD0145253737B30055726C /* DebugLogsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */; };
+		CFBD0146253737B40055726C /* DebugLogsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */; };
+		CFBD0147253737B50055726C /* DebugLogsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */; };
+		CFBD0148253737B60055726C /* DebugLogsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */; };
 		CFE4E5FD252D9EE200F165AD /* RestoreHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0724FE6DAA00515757 /* RestoreHelper.m */; };
 		CFE4E5FE252D9EE200F165AD /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BFA24FE6DAA00515757 /* GZIP.m */; };
 		CFE4E5FF252D9EE200F165AD /* PHAsset+FetchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */; };
@@ -28909,6 +28914,7 @@
 				0303A3F82397D0D000907F42 /* CreateStoryPreviewConfigurator.swift in Sources */,
 				0303A3F92397D0D000907F42 /* SettingsRouter.swift in Sources */,
 				0303A3FA2397D0D000907F42 /* SettingsConfigurator.swift in Sources */,
+				CFBD0146253737B40055726C /* DebugLogsService.swift in Sources */,
 				B589FC5223F1388D00DD528D /* DataChunkProvider.swift in Sources */,
 				0303A3FB2397D0D000907F42 /* NavigationBarStyle.swift in Sources */,
 				0303A3FC2397D0D000907F42 /* SettingsInitializer.swift in Sources */,
@@ -30110,6 +30116,7 @@
 				A225690C21E8B30E00A9D147 /* IntrinsicTextView.swift in Sources */,
 				8E26D97F2306999800D08123 /* MusicViewInput.swift in Sources */,
 				CEC94E42238FA6F4000BBB80 /* UserProfileViewController.swift in Sources */,
+				CFBD0114253737AF0055726C /* DebugLogsService.swift in Sources */,
 				985D87E524D0156B004BCDFF /* PhotoEditViewController.swift in Sources */,
 				C4A38BA321EE1F4B00ECCCEA /* TransparentGradientView.swift in Sources */,
 				A217E42F21A5B0220084AA37 /* LeavePremiumViewInput.swift in Sources */,
@@ -34127,6 +34134,7 @@
 				8E802E19246C42A200D24561 /* PeopleSliderDataSource.swift in Sources */,
 				CE784B5A22A685FB00662219 /* FBService.swift in Sources */,
 				734CA12B244D753C0076F6A7 /* DocumentsAlbumCardResponce.swift in Sources */,
+				CFBD0147253737B50055726C /* DebugLogsService.swift in Sources */,
 				CE784B5B22A685FB00662219 /* PasscodeSettingsInitializer.swift in Sources */,
 				B592449123C86BA70066CA57 /* HiddenService.swift in Sources */,
 				CE784B5E22A685FB00662219 /* UserProfileViewInput.swift in Sources */,
@@ -34802,6 +34810,7 @@
 				98231A0C24F3A1E700FD16E2 /* SelectionMenuController.swift in Sources */,
 				CF8B644323CBC9D70021B021 /* SettingsTableViewCell.swift in Sources */,
 				CF8B644423CBC9D70021B021 /* UIEdgeInsets+Extensions.swift in Sources */,
+				CFBD0145253737B30055726C /* DebugLogsService.swift in Sources */,
 				CFACACA5247CF65300645B40 /* NetmeraExtensionService.swift in Sources */,
 				03135F4823F3E0900088E8BB /* ApplicationStateHelper.swift in Sources */,
 				0305A32A23D5C3C1004D1EC7 /* HiddenPhotosThreeDotMenuManager.swift in Sources */,
@@ -37129,6 +37138,7 @@
 				734CA12C244D753C0076F6A7 /* DocumentsAlbumCardResponce.swift in Sources */,
 				CF8B6EEB23CBCA280021B021 /* PackagesInteractorInput.swift in Sources */,
 				0305A35723D5C5E4004D1EC7 /* CoreDataMigrationVersion.swift in Sources */,
+				CFBD0148253737B60055726C /* DebugLogsService.swift in Sources */,
 				CF8B6EEC23CBCA280021B021 /* PrintModuleConfigurator.swift in Sources */,
 				0309F94123D57F3C001DB5FA /* NetmeraEvents.swift in Sources */,
 				CF8B6EEE23CBCA280021B021 /* ConnectedAccountsViewController.swift in Sources */,
@@ -42881,7 +42891,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7YZS5NTGYH;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxWidget/LifeboxTC/LifeTech-LifeboxWidgetExtension copy-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxWidget/LifeboxTC/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
@@ -42924,7 +42934,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = LifeboxWidget/LifeboxTC/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxWidget/LifeboxTC/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
@@ -42965,7 +42975,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxWidget/LifeboxTC/Info-AppStore.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxWidget/LifeboxTC/Info-AppStore.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
@@ -43006,7 +43016,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = LA4DZFY7SY;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "LifeboxWidget/LifeboxTC/Info-Enterprise.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxWidget/LifeboxTC/Info-Enterprise.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
