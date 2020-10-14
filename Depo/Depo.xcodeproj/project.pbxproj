@@ -11666,6 +11666,11 @@
 		CFACACAE247CF8AC00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
 		CFACACAF247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
 		CFACACB0247CF8AF00645B40 /* NetmeraExtensionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */; };
+		CFBD0047253645380055726C /* DebugLogsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B526A42A252F0EA800E1EC8C /* DebugLogsService.swift */; };
+		CFBD007425370D1E0055726C /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
+		CFBD008B25370D220055726C /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
+		CFBD008C25370D240055726C /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
+		CFBD008D25370D250055726C /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF69DE21FB585E800FCE6AB /* CustomErrors.swift */; };
 		CFE4E5FD252D9EE200F165AD /* RestoreHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1C0724FE6DAA00515757 /* RestoreHelper.m */; };
 		CFE4E5FE252D9EE200F165AD /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 98CB1BFA24FE6DAA00515757 /* GZIP.m */; };
 		CFE4E5FF252D9EE200F165AD /* PHAsset+FetchAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC174252C89630083B5CD /* PHAsset+FetchAll.swift */; };
@@ -31371,6 +31376,7 @@
 				B5BF43DB2514D43A00B0EFEB /* NSManagedObjectContext+Extensions.swift in Sources */,
 				B58936EF24FA90C500E3FA9C /* Device.swift in Sources */,
 				B558279D24FE97BB0039DD11 /* (null) in Sources */,
+				CFBD007425370D1E0055726C /* CustomErrors.swift in Sources */,
 				B558279A24FE97B10039DD11 /* (null) in Sources */,
 				B5B5E5BD24FBE38200146750 /* DispatchQueueLabels.swift in Sources */,
 				B558279724FE97030039DD11 /* AuthorityType.swift in Sources */,
@@ -31615,6 +31621,7 @@
 				4ADE0872202D90CE0095346F /* FaceImageAddNameRouterInput.swift in Sources */,
 				17B9B0C523F1F76900CAF5E1 /* FullQuotaWarningPopUp.swift in Sources */,
 				CE51AB811EF90853005DCEE0 /* LoginModuleInput.swift in Sources */,
+				CFBD0047253645380055726C /* DebugLogsService.swift in Sources */,
 				7C355E631F0123E0003B004C /* HomeCollectionViewLayout.swift in Sources */,
 				B5B01A7023FA7CB900B03426 /* ResumableUploadInfoService.swift in Sources */,
 				CE51AB871EF90853005DCEE0 /* LoginViewInput.swift in Sources */,
@@ -37629,6 +37636,7 @@
 				CFE4E643252D9EE200F165AD /* NSManagedObjectContext+Extensions.swift in Sources */,
 				CFE4E644252D9EE200F165AD /* Device.swift in Sources */,
 				CFE4E645252D9EE200F165AD /* (null) in Sources */,
+				CFBD008D25370D250055726C /* CustomErrors.swift in Sources */,
 				CFE4E646252D9EE200F165AD /* (null) in Sources */,
 				CFE4E647252D9EE200F165AD /* DispatchQueueLabels.swift in Sources */,
 				CFE4E648252D9EE200F165AD /* AuthorityType.swift in Sources */,
@@ -37738,6 +37746,7 @@
 				CFE4E6FD252D9F2300F165AD /* NSManagedObjectContext+Extensions.swift in Sources */,
 				CFE4E6FE252D9F2300F165AD /* Device.swift in Sources */,
 				CFE4E6FF252D9F2300F165AD /* (null) in Sources */,
+				CFBD008B25370D220055726C /* CustomErrors.swift in Sources */,
 				CFE4E700252D9F2300F165AD /* (null) in Sources */,
 				CFE4E701252D9F2300F165AD /* DispatchQueueLabels.swift in Sources */,
 				CFE4E702252D9F2300F165AD /* AuthorityType.swift in Sources */,
@@ -37847,6 +37856,7 @@
 				CFE4E791252D9F3B00F165AD /* NSManagedObjectContext+Extensions.swift in Sources */,
 				CFE4E792252D9F3B00F165AD /* Device.swift in Sources */,
 				CFE4E793252D9F3B00F165AD /* (null) in Sources */,
+				CFBD008C25370D240055726C /* CustomErrors.swift in Sources */,
 				CFE4E794252D9F3B00F165AD /* (null) in Sources */,
 				CFE4E795252D9F3B00F165AD /* DispatchQueueLabels.swift in Sources */,
 				CFE4E796252D9F3B00F165AD /* AuthorityType.swift in Sources */,
@@ -41379,7 +41389,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.6;
+				CURRENT_PROJECT_VERSION = s.5.7;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -41443,7 +41453,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.6;
+				CURRENT_PROJECT_VERSION = s.5.7;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -41503,7 +41513,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.6;
+				CURRENT_PROJECT_VERSION = s.5.7;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -41564,7 +41574,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.5.6;
+				CURRENT_PROJECT_VERSION = s.5.7;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

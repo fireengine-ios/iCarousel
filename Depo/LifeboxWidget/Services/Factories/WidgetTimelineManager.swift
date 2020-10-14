@@ -14,7 +14,13 @@ enum EntryError: Error {
     case error(Error)
 }
 
-typealias EntryCreationResult = Result<(WidgetBaseEntry?, WidgetStateOrder?), EntryError>
+enum EntryCreationError: Error {
+    case noEntryFound
+    case cancel
+    case error(Error)
+}
+
+typealias EntryCreationResult = Result<(WidgetBaseEntry, WidgetStateOrder), EntryCreationError>
 typealias TimelineCreationResult = Result<Timeline<WidgetBaseEntry>, EntryError>
 typealias EntryCreationResultCallback = (EntryCreationResult) -> Void
 typealias TimelineCreationResultCallback = (TimelineCreationResult) -> Void
@@ -41,12 +47,12 @@ final class WidgetTimelineManager {
     
     func provideTimeline(family: WidgetFamily, orders: [WidgetStateOrder], timelineCallback: @escaping TimelineCreationResultCallback) {
 
-        setCancelledStatus(family: family, status: false)
+        setIsCancelled(family: family, status: false)
         
         var newEntries = [WidgetBaseEntry]()
         let semaphore = DispatchSemaphore(value: 0)
         entriesFactory.findFirstFittingEntry(family: family, orders: orders) { [weak self] result in
-
+            
             guard
                 let self = self,
                 !self.isFamilyTimelineCancelled(family: family)
@@ -57,20 +63,19 @@ final class WidgetTimelineManager {
             
             switch result {
             case .success((let entry, let order)):
+                DebugLogService.debugLog("Widget: first fitting \(family.debugDescription) is order \(order) and info count \(WidgetPresentationService.shared.getSyncInfo().uploadCount) ")
                 self.getQueue(family: family)?.async { [weak self] in
                     guard
                         let self = self,
-                        !self.isFamilyTimelineCancelled(family: family),
-                        let preparedEntry = entry,
-                        let order = order
+                        !self.isFamilyTimelineCancelled(family: family)
                     else {
                         timelineCallback(.failure(.cancel))
                         return
                     }
-                    newEntries.append(preparedEntry)
+                    newEntries.append(entry)
                     //if found sync successful need to add next one
                     if order.isContained(in: [.syncInProgress, .syncComplete]),
-                       preparedEntry.state == .syncComplete,
+                       entry.state == .syncComplete,
                        let slice = orders.split(separator: order).last {
                         
                         let nextOrdersInLine: [WidgetStateOrder] = Array(slice)
@@ -88,16 +93,17 @@ final class WidgetTimelineManager {
                             
                             switch result {
                             case .success((let nextEntry, _)):
-                                if let newEntry = nextEntry {
-                                    newEntries.append(newEntry)
-                                    DebugLogService.debugLog("found first fitting entry \(newEntry.state.gaName), family\(family.debugDescription)")
-                                }
+                                newEntries.append(nextEntry)
+                                DebugLogService.debugLog("Widget: found first fitting entry \(nextEntry.state.gaName), family\(family.debugDescription)")
                             case .failure(let failStatus):
                                 switch failStatus {
                                 case .cancel:
                                     timelineCallback(.failure(.cancel))
                                 case .error(let error):
                                     timelineCallback(.failure(.error(error)))
+                                case .noEntryFound:
+                                    DebugLogService.debugLog("Widget: ERROR: no Entry found sub ORDER 3")
+                                    timelineCallback(.failure(.error(CustomErrors.text("Widget ERROR: no Entry found"))))
                                 }
                             }
                             semaphore.signal()
@@ -128,6 +134,9 @@ final class WidgetTimelineManager {
                     timelineCallback(.failure(.cancel))
                 case .error(let error):
                     timelineCallback(.failure(.error(error)))
+                case .noEntryFound:
+                    DebugLogService.debugLog("Widget: ERROR: no Entry found")
+                    timelineCallback(.failure(.error(CustomErrors.text("Widget: ERROR: no Entry found"))))
                 }
             }
         }
@@ -143,7 +152,7 @@ final class WidgetTimelineManager {
         }
     }
     
-    private func setCancelledStatus(family: WidgetFamily, status: Bool) {
+    private func setIsCancelled(family: WidgetFamily, status: Bool) {
         if family == .systemMedium {
             isMediumCancelled = status
         } else if family == .systemSmall {

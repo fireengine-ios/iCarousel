@@ -18,7 +18,8 @@ typealias WidgetTimeLineCallback = (Timeline<WidgetBaseEntry>) -> Void
 //MARK:- widget general
 final class WidgetProvider: TimelineProvider {
     typealias Entry = WidgetBaseEntry
-    let defaultOrdersCheckList: [WidgetStateOrder] = [.login, .quota, .freeUpSpace, .syncInProgress, .autosync, .contactsNoBackup, .fir]
+
+    let defaultOrdersCheckList: [WidgetStateOrder] = [.login, .quota, .freeUpSpace, .autosync, .contactsNoBackup, .fir]
 
     private let timelineManager = WidgetTimelineManager()
     
@@ -49,7 +50,11 @@ final class WidgetProvider: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping WidgetTimeLineCallback) {
-        calculateCurrentOrderTimeline(family: context.family, timelineCallback: completion)
+        DebugLogService.debugLog("Widget: getTimeline \(context.family.debugDescription)")
+        calculateCurrentOrderTimeline(family: context.family, timelineCallback: { result in
+            DebugLogService.debugLog("Widget: getTimeline ready \(context.family.debugDescription)")
+            completion(result)
+        })
     }
 }
 
@@ -57,8 +62,6 @@ final class WidgetProvider: TimelineProvider {
 extension WidgetProvider {
     
     private func calculateCurrentOrderTimeline(family: WidgetFamily, timelineCallback: @escaping WidgetTimeLineCallback) {
-        
-        DebugLogService.debugLog("Calculating order TIMELINE, family: \(family.debugDescription)")
         
         timelineManager.getQueue(family: family)?.async { [weak self] in
             guard let self = self else {
@@ -71,9 +74,9 @@ extension WidgetProvider {
                 case .failure(let failStatus):
                     switch failStatus {
                     case .cancel:
-                        DebugLogService.debugLog("Timeline cancelled for \(family.debugDescription)")
+                        DebugLogService.debugLog("Widget: Timeline cancelled for \(family.debugDescription)")
                     case .error(let error):
-                        DebugLogService.debugLog("Timeline got error \(error.localizedDescription) for \(family.debugDescription)")
+                        DebugLogService.debugLog("Widget: Timeline got error \(error.localizedDescription) for \(family.debugDescription)")
                     }
                 }
             }

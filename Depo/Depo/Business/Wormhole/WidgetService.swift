@@ -115,10 +115,13 @@ final class WidgetService {
     
     func notifyWidgetAbout(_ synced: Int, of total: Int) {
         finishedCount = synced
-        
-        if #available(iOS 14.0, *) {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
+            ///rule 3 for widget is currently disabled, because of clearance of  widget reload quota
+//        if #available(iOS 14.0, *) {
+//            debugPrint("!!! sync notifyWidgetAbout \(synced)")
+//            DebugLogService.debugLog("SYNCDEBUG: notify main app \(synced)")
+//
+//            WidgetCenter.shared.reloadAllTimelines()
+//        }
         
         totalCount = total
         lastSyncedDate = Date()
