@@ -15,9 +15,11 @@ class UserInfo {
     var isFIREnabled = false
     var hasFIRPermission = false
     var peopleInfos = [PeopleInfo]()
+    var imageUrls = [URL?]()
 }
 
 class SyncInfo {
+    var shownSyncStatus: WidgetSyncStatus = .undetermined
     var syncStatus: WidgetSyncStatus = .undetermined
     var isAutoSyncEnabled = false
     var isAppLaunch = false
@@ -25,6 +27,10 @@ class SyncInfo {
     var uploadCount = 0
     var currentSyncFileName = ""
     var lastSyncedDate: Date?
+}
+
+protocol WidgetPresentationServiceDelegate: class {
+    func didLogout()
 }
 
 final class WidgetPresentationService {
@@ -45,6 +51,8 @@ final class WidgetPresentationService {
     private var lastQuotaUsagePercentage: Int?
     private var lastQuotaUsageRequestDate: Date?
 
+    weak var delegate: WidgetPresentationServiceDelegate?
+    
     //TODO: change to enum?
     var lastWidgetEntry: WidgetBaseEntry? {
         get {
@@ -80,6 +88,7 @@ final class WidgetPresentationService {
     private func didLogout() {
         lastQuotaUsagePercentage = nil
         lastQuotaUsageRequestDate = nil
+        delegate?.didLogout()
         WidgetCenter.shared.reloadAllTimelines()
     }
     
@@ -117,7 +126,8 @@ final class WidgetPresentationService {
                 self?.lastQuotaUsageRequestDate = Date()
                 completion(quotaUsagePercentage)
                 
-            case .failed:
+            case .failed(let error):
+                DebugLogService.debugLog("ORDER 1: getQuotaInfo failed - \(error.localizedDescription)")
                 completion(.zero)
             }
         }
@@ -149,29 +159,46 @@ final class WidgetPresentationService {
         
         group.enter()
         group.enter()
+        group.enter()
         
         group.notify(queue: .global()) { [weak self] in
-            if userInfo.hasFIRPermission && userInfo.isFIREnabled {
-                self?.getPeopleInfo { [weak self] peopleInfos in
-                    userInfo.peopleInfos = peopleInfos
-                    self?.loadImages { isLoadingImages in
-                        completion((userInfo, isLoadingImages))
-                    }
-                }
-            } else {
+            if userInfo.hasFIRPermission && !userInfo.isFIREnabled {
+                //for 7.3 display placeholders
                 completion((userInfo, false))
+                return
+            }
+            
+            func load(urls: [URL?]) {
+                userInfo.imageUrls = urls
+                self?.loadImages(urls: urls, completion: { isLoadingImages in
+                    completion((userInfo, isLoadingImages))
+                })
+            }
+            
+            if userInfo.hasFIRPermission && userInfo.isFIREnabled {
+                //for 7.1,7.2 display people avatars
+                let urls = userInfo.peopleInfos.map { $0.thumbnail ?? $0.alternateThumbnail }
+                load(urls: urls)
+            } else {
+                //for 7.4 display last uploads
+                self?.serverService.lastUploads { lastUploadsUrls in
+                    load(urls: lastUploadsUrls)
+                }
             }
         }
 
         getFaceImageEnabled { face in
-            DebugLogService.debugLog("ORDER 7: isFIREnabled == \(face)")
             userInfo.isFIREnabled = face
             group.leave()
         }
         
         getFaceImageRecognitionStatus { hasFIRPermission in
-            DebugLogService.debugLog("ORDER 7: hasFIRPermission == \(hasFIRPermission)")
             userInfo.hasFIRPermission = hasFIRPermission
+            group.leave()
+        }
+        
+        getPeopleInfo { peopleInfos in
+            userInfo.peopleInfos = Array(peopleInfos.prefix(3))
             group.leave()
         }
     }
@@ -182,6 +209,7 @@ final class WidgetPresentationService {
     
     func getSyncInfo() -> SyncInfo {
         let syncInfo = SyncInfo()
+        syncInfo.shownSyncStatus = widgetService.widgetShownSyncStatus
         syncInfo.syncStatus = widgetService.syncStatus
         syncInfo.isAutoSyncEnabled = widgetService.isAutoSyncEnabled
         syncInfo.uploadCount = widgetService.finishedCount
@@ -193,12 +221,19 @@ final class WidgetPresentationService {
         return syncInfo
     }
     
+    func save(shownSyncStatus: WidgetSyncStatus) {
+        widgetService.notifyAbout(shownSyncStatus: shownSyncStatus)
+    }
+    
     private func getFaceImageEnabled(completion: @escaping ((Bool) -> ())) {
         serverService.getSettingsInfoPermissions { response in
             switch response {
             case .success(let response):
-                completion(response.isFaceImageAllowed == true)
-            case .failed:
+                let isFIREnabled = response.isFaceImageAllowed == true
+                DebugLogService.debugLog("ORDER 7: isFIREnabled == \(isFIREnabled)")
+                completion(isFIREnabled)
+            case .failed(let error):
+                DebugLogService.debugLog("ORDER 7: get FIR enabled failed - \(error.localizedDescription)")
                 completion(false)
             }
         }
@@ -208,8 +243,11 @@ final class WidgetPresentationService {
         serverService.permissions { response in
             switch response {
             case .success(let response):
-                completion(response.hasPermissionFor(.faceRecognition))
-            case .failed:
+                let hasFIRPermission = response.hasPermissionFor(.faceRecognition)
+                DebugLogService.debugLog("ORDER 7: hasFIRPermission == \(hasFIRPermission)")
+                completion(hasFIRPermission)
+            case .failed(let error):
+                DebugLogService.debugLog("ORDER 7: get FIR permission failed - \(error.localizedDescription)")
                 completion(false)
             }
         }
@@ -220,18 +258,16 @@ final class WidgetPresentationService {
             switch result {
             case .success(let response):
                 completion(response.personInfos)
-            case .failed:
+            case .failed(let error):
+                DebugLogService.debugLog("ORDER 7: getPeopleInfo failed - \(error.localizedDescription)")
                 completion([])
             }
         }
     }
     
-    private func loadImages(completion: @escaping ValueHandler<Bool>) {
-        getPeopleInfo { [weak self] peopleInfos in
-            let urls = peopleInfos.map { $0.thumbnail ?? $0.alternateThumbnail }
-            self?.imageLoader.loadImage(urls: urls) { loadingImages in
-                completion(loadingImages.firstIndex(where: { $0 == nil }) != nil)
-            }
+    private func loadImages(urls: [URL?], completion: @escaping ValueHandler<Bool>) {
+        imageLoader.loadImage(urls: urls) { loadingImages in
+            completion(loadingImages.firstIndex(where: { $0 == nil }) != nil)
         }
     }
     

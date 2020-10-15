@@ -16,11 +16,8 @@ protocol RequestParameters {
 
 final class WidgetServerService {
     
-    static let shared = WidgetServerService(
-        tokenStorage: TokenKeychainStorage(),
-        sessionManager: SessionManager.customDefault
-    )
-    
+    static let shared = WidgetServerService()
+
     enum ServerEnvironment {
         case test
         case preProduction
@@ -36,17 +33,26 @@ final class WidgetServerService {
         }
     }()
 
-    private let sessionManager: SessionManager
-    private let tokenStorage: TokenStorage
-
-    private lazy var tokenService = WidgetTokenService(tokenStorage: tokenStorage)
+    private let firItemsCount = 3
     
-    var isAuthorized: Bool { tokenService.isAuthorized }
+    private let sessionManager: SessionManager
+    private lazy var auth: AuthorizationRepository = factory.resolve()
+    private lazy var tokenStorage: TokenStorage = factory.resolve()
 
-    init(tokenStorage: TokenStorage, sessionManager: SessionManager) {
-        self.tokenStorage = tokenStorage
+    var isAuthorized: Bool { tokenStorage.accessToken != nil }
+    
+    init(sessionManager: SessionManager = factory.resolve()) {
         self.sessionManager = sessionManager
-        self.sessionManager.adapter = self
+        ShareConfigurator().setup()
+        checkFirstLaunch()
+    }
+    
+    private func checkFirstLaunch() {
+        //widget can send request before main app clear tokens
+        if WidgetService.shared.isAppFirstLaunch {
+            WidgetService.shared.isAppFirstLaunch = false
+            tokenStorage.clearTokens()
+        }
     }
 
     func getQuotaInfo(handler: @escaping ResponseHandler<QuotaInfoResponse>) {
@@ -95,8 +101,8 @@ final class WidgetServerService {
     }
     
     func getBackUpStatus(completion: @escaping ValueHandler<ContantBackupResponse?>) {
-        tokenService.refreshTokens { (_, accesToken, _) in
-            SyncSettings.shared().token = accesToken
+        auth.refreshTokens { (_, accessToken, _) in
+            SyncSettings.shared().token = accessToken
             SyncSettings.shared().url = RouteRequests.baseContactsUrl.absoluteString
             SyncSettings.shared().depo_URL = RouteRequests.baseShortUrlString
             switch RouteRequests.currentServerEnvironment {
@@ -138,7 +144,7 @@ final class WidgetServerService {
     
     func getPeopleInfo(handler: @escaping ResponseHandler<PeopleResponse>) {
         sessionManager
-            .request("\(Self.baseShortUrlString)/api/person/page?pageSize=3&pageNumber=0")
+            .request("\(Self.baseShortUrlString)/api/person/page?pageSize=\(firItemsCount)&pageNumber=0")
             .customValidate()
             .responseData { response in
                 switch response.result {
@@ -168,17 +174,26 @@ final class WidgetServerService {
                 })
                 .task
     }
-}
-
-extension WidgetServerService: RequestAdapter {
-    func adapt(_ urlRequest: URLRequest) throws -> URLRequest {
-        guard
-            urlRequest.url?.absoluteString != nil,
-            let accessToken = tokenStorage.accessToken
-            else { return urlRequest }
-        var urlRequest = urlRequest
-        urlRequest.setValue(accessToken, forHTTPHeaderField: WidgetHeaderConstant.AuthToken)
-        return urlRequest
+    
+    func lastUploads(completion: @escaping ValueHandler<[URL?]>) {
+        sessionManager
+            .request("\(Self.baseShortUrlString)/api/search/byField?fieldName=content_type&fieldValue=image&sortBy=metadata.Image-DateTime&sortOrder=DESC&page=0&size=\(firItemsCount)")
+            .customValidate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    do {
+                        let items = try JSONDecoder().decode([SearchItem].self, from: data)
+                        let urls = items.map { $0.metadata?.url }
+                        completion(urls)
+                    } catch {
+                        completion([])
+                    }
+                case .failure:
+                    completion([])
+                }
+            
+            }
     }
 }
 
@@ -188,6 +203,7 @@ typealias ContantBackupResponse = ServerResponse.ContantBackupResponse
 typealias SettingsInfoPermissionsResponse = ServerResponse.SettingsInfoPermissionsResponse
 typealias PeopleResponse = ServerResponse.PeopleResponse
 typealias PeopleInfo = ServerResponse.PeopleInfo
+typealias SearchItem = ServerResponse.SearchItem
 
 struct ServerResponse {
     final class QuotaInfoResponse: ObjectRequestResponse {
@@ -284,17 +300,38 @@ struct ServerResponse {
     struct PeopleResponse: Codable {
         var personInfos = [PeopleInfo]()
     }
-}
-
-extension URL {
-    private static let tempURLExpirationDateKey = "temp_url_expires"
     
-    
-    var byTrimmingQuery: URL? {
-        if let substring = absoluteString.split(separator: "?").first {
-            let stringValue = String(substring)
-            return URL(string: stringValue)
-        }
-        return nil
+    struct SearchItem: Codable {
+        var id: Int64?
+        var metadata: Metadata?
     }
+    
+    struct Metadata: Codable {
+        var largeUrl: URL?
+        var mediumUrl: URL?
+        var smallUrl: URL?
+        var url: URL? {
+            smallUrl ?? mediumUrl ?? largeUrl
+        }
+        
+        private enum CodingKeys: String, CodingKey {
+            case largeUrl = "Thumbnail-Large"
+            case mediumUrl = "Thumbnail-Medium"
+            case smallUrl = "Thumbnail-Small"
+        }
+        
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            if let string = try container.decodeIfPresent(String.self, forKey: .largeUrl) {
+                largeUrl = URL(string: string)
+            }
+            if let string = try container.decodeIfPresent(String.self, forKey: .mediumUrl) {
+                mediumUrl = URL(string: string)
+            }
+            if let string = try container.decodeIfPresent(String.self, forKey: .smallUrl) {
+                smallUrl = URL(string: string)
+            }
+        }
+    }
+
 }

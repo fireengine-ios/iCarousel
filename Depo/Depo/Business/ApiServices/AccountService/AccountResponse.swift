@@ -47,6 +47,7 @@ struct AccountJSONConstants {
     static let securitySettingsTurkcellPassword = "turkcellPasswordAuthEnabled"
     static let securitySettingsMobileNetwor = "mobileNetworkAuthEnabled"
     static let twoFactorAuthEnabled = "twoFactorAuthEnabled"
+    static let msisdnRegion = "msisdnRegion"
 }
 
 class AccountInfoResponse: ObjectRequestResponse {
@@ -74,6 +75,7 @@ class AccountInfoResponse: ObjectRequestResponse {
     var address: String?
     var emailVerificationRemainingDays: Int?
     var isUpdateMobilePaymentPermissionRequired: Bool?
+    var msisdnRegion: String?
     
     var fullPhoneNumber: String {
         if let code = countryCode, let number = phoneNumber {
@@ -114,6 +116,7 @@ class AccountInfoResponse: ObjectRequestResponse {
         emailVerificationRemainingDays = json?[AccountJSONConstants.emailVerificationRemainingDays].int
         address = json?[AccountJSONConstants.address].string
         isUpdateMobilePaymentPermissionRequired = json?[AccountJSONConstants.isUpdateMobilePaymentPermissionRequired].bool
+        msisdnRegion = json?[AccountJSONConstants.msisdnRegion].string
     }
 }
 

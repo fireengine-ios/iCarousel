@@ -7,40 +7,27 @@
 //
 
 import UIKit
-import YYImage
 
 ///Static parameters for UI elements set up in OverlayStickerViewControllerDesigner
 final class OverlayStickerViewController: UIViewController {
 
     @IBOutlet private weak var overlayingStickerImageView: OverlayStickerImageView!
-    @IBOutlet private weak var gifButton: UIButton!
-    @IBOutlet private weak var stickerButton: UIButton!
+    @IBOutlet private weak var funNavBar: FunNavBar!
+    
+    @IBOutlet private weak var bottomContentView: UIStackView!
+    @IBOutlet private weak var tabBar: FunTabBar!
+    @IBOutlet private weak var changesBar: FunChangesBar!
+    @IBOutlet private weak var stickersContainerView: UIView!
     @IBOutlet private weak var stickersCollectionView: UICollectionView!
-    @IBOutlet private weak var stickersView: UIView!
-    @IBOutlet private var overlayStickerViewControllerDataSource: OverlayStickerViewControllerDataSource!
-    
-    private let uploadService = UploadService()
-    private lazy var coreDataStack: CoreDataStack = factory.resolve()
+    @IBOutlet private weak var safeAreaBottomView: UIView!
+
     private lazy var analyticsService: AnalyticsService = factory.resolve()
-    private let stickerService = SmashServiceImpl()
-    private lazy var overlayAnimationService = OverlayAnimationService()
     private lazy var router = RouterVC()
-    
-    private lazy var applyButton: UIBarButtonItem = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
-        button.setImage(UIImage(named: "applyIcon"), for: .normal)
-        button.addTarget(self, action: #selector(applyIconTapped), for: .touchUpInside)
-        return UIBarButtonItem(customView: button)
-    }()
-    
-    private lazy var closeButton: UIBarButtonItem = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
-        button.setImage(UIImage(named: "removeCircle"), for: .normal)
-        button.addTarget(self, action: #selector(closeIconTapped), for: .touchUpInside)
-        return UIBarButtonItem(customView: button)
-    }()
+    private lazy var saveManager = OverlayStickerSaveManager()
+    private lazy var dataSource = OverlayStickerViewControllerDataSource(collectionView: stickersCollectionView, delegate: self)
     
     private var isFullScreen = false
+    private var lastAttachments = [SmashStickerResponse]()
     
     weak var selectedImage: UIImage? {
         didSet {
@@ -55,28 +42,43 @@ final class OverlayStickerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+    }
+    
+    //MARK: - Setup
+    
+    private func setup() {
         view.backgroundColor = .black
+        stickersContainerView.backgroundColor = ColorConstants.photoEditBackgroundColor
+        safeAreaBottomView.backgroundColor = ColorConstants.photoEditBackgroundColor
         statusBarColor = .black
+        
+        funNavBar.state = .initial
+        funNavBar.delegate = self
+        tabBar.delegate = self
+        changesBar.delegate = self
+        stickersContainerView.isHidden = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupNavigationBar()
+    private func setupEnvironment() {
+        guard let selectedImage = selectedImage else {
+            assertionFailure()
+            return
+        }
+        
+        loadViewIfNeeded()
+        
+        overlayingStickerImageView.stickersDelegate = self
+        dataSource.setStateForSelectedType(type: .gif)
+        dataSource.delegate = self
+        dataSource.loadNext()
+        overlayingStickerImageView.image = selectedImage
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionFullscreenTapGesture))
+        overlayingStickerImageView.addGestureRecognizer(tapGesture)
     }
     
-    @IBAction private func gifButtonTapped(_ sender: Any) {
-        selectStickerType(type: .gif)
-    }
-    
-    @IBAction private func imageButton(_ sender: Any) {
-        selectStickerType(type: .image)
-    }
-    
-    @IBAction private func undoButtonTapped(_ sender: Any) {
-        overlayingStickerImageView.removeLast()
-    }
-    
-    @objc private func applyIconTapped() {
+    private func save() {
         
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
             showAccessAlert()
@@ -104,43 +106,51 @@ final class OverlayStickerViewController: UIViewController {
                                                         gifId: gifsToStickersIds.gifsIDs)
             AnalyticsService.sendNetmeraEvent(event: event)
             
-            if isConfirmed {
-                self.showSpinnerIncludeNavigationBar()
+            guard isConfirmed else {
+                return
+            }
+            
+            self.showSpinnerIncludeNavigationBar()
+            
+            guard let (originalImage, attachments) = self.overlayingStickerImageView.getCondition() else {
+                assertionFailure()
+                return
+            }
+            
+            self.saveManager.saveImage(resultName: self.imageName ?? self.defaultName,
+                                       originalImage: originalImage,
+                                       attachments: attachments,
+                                       stickerImageView: self.overlayingStickerImageView) { [weak self] result in
                 
-                guard let (originalImage, attachments) = self.overlayingStickerImageView.getCondition() else {
-                    assertionFailure()
+                guard let self = self else {
                     return
                 }
                 
-                self.overlayStickers(resultName: self.imageName ?? self.defaultName,
-                                     originalImage: originalImage,
-                                     attachments: attachments) { [weak self] result in
-                                        self?.saveResult(result: result)
+                self.hideSpinnerIncludeNavigationBar()
+                
+                switch result {
+                case .success(let remote):
+                    
+                    DispatchQueue.main.async {
+                        self.close { [weak self] in
+                            guard let remote = remote else {
+                                return
+                            }
+                            self?.showPhotoVideoPreview(item: remote)
+                            self?.analyticsService.logScreen(screen: .smashPreview)
+                        }
+                    }
+                    
+                case .failed(let error):
+                    if let error = error as? CreateOverlayStickerError, error == .deniedPhotoAccess {
+                        self.showAccessAlert()
+                    } else if error.isOutOfSpaceError {
+                        self.onOutOfSpaceError()
+                    } else {
+                        UIApplication.showErrorAlert(message: error.description)
+                    }
                 }
             }
-        }
-    }
-    
-    private func addTapGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(actionFullscreenTapGesture))
-        overlayingStickerImageView.addGestureRecognizer(tapGesture)
-    }
-    
-    private func selectStickerType(type: AttachedEntityType) {
-        
-        overlayStickerViewControllerDataSource.setStateForSelectedType(type: type)
-        
-        switch type {
-        case .gif:
-            gifButton.tintColor = UIColor.yellow
-            gifButton.setTitleColor(UIColor.yellow, for: .normal)
-            stickerButton.tintColor = UIColor.gray
-            stickerButton.setTitleColor(UIColor.gray, for: .normal)
-        case .image:
-            stickerButton.tintColor = UIColor.yellow
-            stickerButton.setTitleColor(UIColor.yellow, for: .normal)
-            gifButton.tintColor = UIColor.gray
-            gifButton.setTitleColor(UIColor.gray, for: .normal)
         }
     }
     
@@ -179,125 +189,54 @@ final class OverlayStickerViewController: UIViewController {
         
         showCompletionPopUp()
     }
-
-    private func saveResult(result: CreateOverlayStickersResult) {
-        
-        checkLibraryAccessStatus { [weak self] libraryIsAvailable in
-            
-            if libraryIsAvailable == true {
-                
-                let commonCompletionHandler: (WrapData?, Error?)->() = { [weak self] remoteItem, error in
-                    DispatchQueue.main.async {
-                        self?.hideSpinnerIncludeNavigationBar()
-                        self?.close { [weak self] in
-                            if let itemToShow = remoteItem {
-                                self?.showPhotoVideoPreview(item: itemToShow)
-                                self?.analyticsService.logScreen(screen: .smashPreview)
-                            }  else if error?.isOutOfSpaceError == true {
-                                self?.onOutOfSpaceError()
-                            }
-                        }
-                    }
-                }
-                
-                switch result {
-                case .success(let result):
-                    self?.saveLocalyItem(url: result.url, type: result.type, completion: { [weak self] saveResult in
-                        switch saveResult {
-                        case .success(let localItem):
-                            self?.uploadItem(item: localItem, completion: { uploadResult in
-                                switch uploadResult {
-                                case .success(let remote):
-                                    self?.removeImage(at: result.url)
-                                    remote?.patchToPreview = localItem.patchToPreview
-                                    commonCompletionHandler(remote, nil)
-                                    
-                                case .failed(let error):
-                                    commonCompletionHandler(nil, error)
-                                }
-                            })
-                            
-                        case .failed(let error):
-                            commonCompletionHandler(nil, error)
-                        }
-                    })
-                    
-                case .failure(let error):
-                    self?.hideSpinnerIncludeNavigationBar()
-                    UIApplication.showErrorAlert(message: error.description)
-                }
-            } else {
-                //Show popup about getting access to photo library
-                self?.hideSpinnerIncludeNavigationBar()
-            }
-        }
-    }
     
-    @objc private func closeIconTapped() {
-        let gifsToStickersIds = self.overlayingStickerImageView.getAttachmentGifStickersIDs()
-        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SmashSave(action: .cancel, stickerId: gifsToStickersIds.gifsIDs, gifId: gifsToStickersIds.stickersIDs))   
-        close()
-    }
-    
-    @objc private func close(completion: VoidHandler? = nil) {
+    private func close(completion: VoidHandler? = nil) {
         DispatchQueue.toMain {
             self.dismiss(animated: false, completion: completion)
         }
     }
     
     private func onOutOfSpaceError() {
-        RouterVC().showFullQuotaPopUp()
-    }
-    
-    private func setupEnvironment() {
-        guard let selectedImage = selectedImage else {
-            assertionFailure()
-            return
-        }
-        
-        loadView()
-        view.backgroundColor = .black
-        
-        selectStickerType(type: .gif)
-        
-        overlayingStickerImageView.stickersDelegate = self
-        overlayStickerViewControllerDataSource.delegate = self
-        overlayStickerViewControllerDataSource.loadNext()
-        overlayingStickerImageView.image = selectedImage
-        addTapGesture()
-    }
-    
-    private func setupNavigationBar() {
-        title = TextConstants.smashScreenTitle
-        navigationBarWithGradientStyle()
-        navigationItem.leftBarButtonItem = closeButton
-        navigationItem.rightBarButtonItem = applyButton
-        navigationController?.navigationBar.isTranslucent = true
+        router.showFullQuotaPopUp()
     }
     
     private func makeTopAndBottomBarsIsHidden(hide: Bool) {
-        
-        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
-            self.navigationController?.setNavigationBarHidden(hide, animated: true)
-            self.stickersView.isHidden = hide
-        })
+        funNavBar.isHidden = hide
+        bottomContentView.isHidden = hide
     }
     
     @objc private func actionFullscreenTapGesture() {
         isFullScreen = !isFullScreen
         makeTopAndBottomBarsIsHidden(hide: isFullScreen)
     }
-
-    private func checkLibraryAccessStatus(completion: @escaping BoolHandler) {
-        if PHPhotoLibrary.isAccessibleAuthorizationStatus() {
-            completion(true)
+    
+    private func updateNavBarState() {
+        if tabBar.isHidden {
+            funNavBar.state = lastAttachments.isEmpty ? .empty : .modify
         } else {
-            PHPhotoLibrary.requestAuthorizationStatus { status in
-                completion(status.isAccessible)
-            }
+            funNavBar.state = overlayingStickerImageView.hasStickers ? .edited : .initial
         }
     }
+    
+    private func showClosePopup(confirmation: @escaping VoidHandler) {
+        let popup = PopUpController.with(title: TextConstants.funCloseAlertTitle,
+                                         message: TextConstants.funCloseAlertMessage,
+                                         image: .question,
+                                         firstButtonTitle: TextConstants.funCloseAlertLeftButton,
+                                         secondButtonTitle: TextConstants.funCloseAlertRightButton,
+                                         firstAction: { vc in
+                                            vc.close()
+                                         },
+                                         secondAction: { vc in
+                                            vc.close {
+                                                confirmation()
+                                            }
+                                         })
+        router.presentViewController(controller: popup)
+    }
 }
+
+//MARK: - OverlayStickerImageViewDelegate
 
 extension OverlayStickerViewController: OverlayStickerImageViewDelegate {
     func makeTopAndBottomBarsIsHidden(isHidden: Bool) {
@@ -306,129 +245,89 @@ extension OverlayStickerViewController: OverlayStickerImageViewDelegate {
         }
         makeTopAndBottomBarsIsHidden(hide: isHidden)
     }
+    
+    func didDeleteAttachments(_ attachments: [SmashStickerResponse]) {
+        attachments.forEach { lastAttachments.remove($0) }
+        updateNavBarState()
+    }
 }
+
+//MARK: - OverlayStickerViewControllerDataSourceDelegate
 
 extension OverlayStickerViewController: OverlayStickerViewControllerDataSourceDelegate {
     
     func didSelectItem(item: SmashStickerResponse, attachmentType: AttachedEntityType) {       
         showSpinner()
+        lastAttachments.append(item)
         overlayingStickerImageView.addAttachment(item: item, attachmentType: attachmentType, completion: { [weak self] in
             self?.hideSpinner()
         })
+        updateNavBarState()
     }
 }
 
+//MARK: - FunTabBarDelegate
 
-//MARK: - Saving
-
-extension OverlayStickerViewController {
-    private func uploadItem(item: WrapData, completion: @escaping ResponseHandler<WrapData?>) {
-        var uploadOperation: UploadOperation?
-        uploadService.uploadFileList(items: [item],
-                                     uploadType: .syncToUse,
-                                     uploadStategy: .WithoutConflictControl,
-                                     uploadTo: .MOBILE_UPLOAD,
-                                     success: {
-                                        completion(.success(uploadOperation?.outputItem)) },
-                                     fail: { errorResponce in
-                                        completion(.failed(errorResponce)) },
-                                     returnedUploadOperation: { operations in
-                                        uploadOperation = operations?.first
-        })
-    }
-
-    private func saveLocalyItem(url: URL, type: CreateOverlayResultType, completion: @escaping ResponseHandler<WrapData>) {
-        LocalMediaStorage.default.saveToGallery(fileUrl: url, type: type.toPHMediaType) { [weak self] result in
-            switch result {
-            case .success(let placeholder):
-                guard
-                    let assetIdentifier = placeholder?.localIdentifier,
-                    let asset = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil).firstObject
-                else {
-                    assertionFailure()
-                    completion(.failed(ErrorResponse.string(TextConstants.errorUnknown)))
-                    return
-                }
-                
-                self?.saveToDB(asset: asset, completion: completion)
-                
-            case .failed(_):
-                completion(.failed(ErrorResponse.string(TextConstants.errorUnknown)))
-            }
-        }
-    }
-    
-    private func saveToDB(asset: PHAsset, completion: @escaping ResponseHandler<WrapData>) {
-        let mediaItemService = MediaItemOperationsService.shared
-        LocalMediaStorage.default.assetsCache.append(list: [asset])
-        mediaItemService.append(localMediaItems: [asset]) { [weak self] in
-            guard let self = self else {
-                return
-            }
-            
-            let context = self.coreDataStack.newChildBackgroundContext
-            mediaItemService.mediaItems(by: asset.localIdentifier, context: context, mediaItemsCallBack: { items in
-                guard let savedLocalItem = items.first else {
-                    assertionFailure()
-                    completion(.failed(ErrorResponse.string(TextConstants.errorUnknown)))
-                    return
-                }
-                
-                let wrapData = WrapData(mediaItem: savedLocalItem, asset: asset)
-                completion(.success(wrapData))
-            })
-        }
+extension OverlayStickerViewController: FunTabBarDelegate {
+    func didSelectItem(_ type: AttachedEntityType) {
+        changesBar.setup(with: type.title)
+        dataSource.setStateForSelectedType(type: type)
+        
+        stickersContainerView.isHidden = false
+        tabBar.isHidden = true
     }
 }
 
-extension OverlayStickerViewController {
+//MARK: - FunNavBarDelegate
+
+extension OverlayStickerViewController: FunNavBarDelegate {
     
-    private func overlayStickers(resultName: String, originalImage: UIImage, attachments: [UIImageView], completion: @escaping (CreateOverlayStickersResult) -> ()) {
+    func funNavBarDidCloseTapped() {
+        if !overlayingStickerImageView.hasStickers {
+            confirmClose()
+        }
         
-        if attachments.contains(where: { $0 is YYAnimatedImageView}) {
-        overlayAnimationService.combine(attachments: attachments, resultName: resultName, originalImage: originalImage, completion: completion)
-            
-        } else {
-            
-            guard let image = UIImage.imageWithView(view: overlayingStickerImageView) else {
-                completion(.failure(.unknown))
-                return
-            }
-            saveImage(image: image, fileName: resultName, completion: completion)
+        showClosePopup { [weak self] in
+            self?.confirmClose()
         }
     }
     
-    private func saveImage(image: UIImage, fileName: String, completion: (CreateOverlayStickersResult) -> ()) {
-        guard let data = image.jpeg(.highest) ?? UIImagePNGRepresentation(image) else {
-            completion(.failure(.unknown))
-            return
-        }
-        
-        let format = ImageFormat.get(from: data) == .jpg ? ".jpg" : ".png"
-        
-        guard let directory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false) as NSURL else {
-            completion(.failure(.unknown))
-            return
-        }
-        
-        do {
-            guard let path = directory.appendingPathComponent(fileName + format) else {
-                assertionFailure()
-                completion(.failure(.unknown))
-                return
-            }
-            try data.write(to: path)
-            completion(.success(CreateOverlayStickersSuccessResult(url: path, type: .image)))
-        } catch {
-            completion(.failure(.unknown))
-        }
+    private func confirmClose() {
+        let gifsToStickersIds = self.overlayingStickerImageView.getAttachmentGifStickersIDs()
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SmashSave(action: .cancel, stickerId: gifsToStickersIds.gifsIDs, gifId: gifsToStickersIds.stickersIDs))
+        close()
     }
     
-    private func removeImage(at url: URL) {
-        do {
-            try FileManager.default.removeItem(at: url)
-        } catch {
-            print(error.description)
+    func funNavBarDidSaveTapped() {
+        save()
+    }
+    
+    func funNavBarDidUndoTapped() {
+        lastAttachments.removeLast()
+        overlayingStickerImageView.removeLast()
+        updateNavBarState()
+    }
+}
+
+//MARK: - FunChangesBarDelegate
+
+extension OverlayStickerViewController: FunChangesBarDelegate {
+    
+    func cancelChanges() {
+        stickersContainerView.isHidden = true
+        tabBar.isHidden = false
+        
+        for _ in 0..<lastAttachments.count {
+            overlayingStickerImageView.removeLast()
         }
+        
+        updateNavBarState()
+    }
+    
+    func applyChanges() {
+        stickersContainerView.isHidden = true
+        tabBar.isHidden = false
+        lastAttachments = []
+        updateNavBarState()
     }
 }
