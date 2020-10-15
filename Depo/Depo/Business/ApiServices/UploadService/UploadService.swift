@@ -200,6 +200,12 @@ final class UploadService: BaseRequestService {
         }
     }
     
+    private func hideSyncCardIfNeeded() {
+        if uploadOperations.filter({ $0.uploadType?.isContained(in: [.autoSync]) ?? false }).count == 0 {
+            CardsManager.default.stopOperationWith(type: .sync)
+        }
+    }
+    
     private func showSyncCardProgress() {
         widgetNotifySyncProgress(finishedCount: currentSyncOperationNumber, totalCount: allSyncOperationsCount)
         
@@ -494,6 +500,7 @@ final class UploadService: BaseRequestService {
                                 success()
                                 ItemOperationManager.default.syncFinished()
                                 self.widgetNotifySyncFinished()
+                                self.hideSyncCardIfNeeded()
                                 self.logSyncSettings(state: "FinishedSyncFileList")
                                 return
                             }
