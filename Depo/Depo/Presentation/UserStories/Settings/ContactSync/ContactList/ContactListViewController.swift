@@ -165,10 +165,9 @@ private extension ContactListViewController {
         
         if let query = lastQuery {
             currentTask = contactsSyncService.searchContacts(query: query, page: currentPage, handler: handler)
-        } else if let backupId = backUpInfo?.id, backupId != -1 {
-            currentTask = contactsSyncService.getContacts(backupId: backupId, page: currentPage, handler: handler)
         } else {
-            currentTask = contactsSyncService.getContacts(page: currentPage, handler: handler)
+            let backupId = backUpInfo?.id ?? -1
+            currentTask = contactsSyncService.getContacts(backupId: backupId, page: currentPage, handler: handler)
         }
     }
 }
@@ -250,7 +249,7 @@ extension ContactListViewController: ContactSyncControllerProtocol, ContactSyncH
 extension ContactListViewController: ContactListMainViewDelegate {
     
     func onRestoreTapped() {
-        showPopup(type: .restoreContacts)
+        showPopup(type: .restoreContacts, backup: backUpInfo)
     }
     
     func onReloadData() {

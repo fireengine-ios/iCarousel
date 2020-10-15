@@ -21,7 +21,6 @@ final class ContactsBackupHistoryController: BaseViewController {
     private let router = RouterVC()
     private let animator = ContentViewAnimator()
     private let contactSyncHelper = ContactSyncHelper.shared
-    private lazy var contactsSyncService = ContactSyncApiService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private var task: URLSessionTask?
     
@@ -37,9 +36,8 @@ final class ContactsBackupHistoryController: BaseViewController {
         setNavigationTitle(title: TextConstants.contactBackupHistoryNavbarTitle)
         backButtonForNavigationItem(title: TextConstants.backTitle)
         
+        reloadBackups()
         showRelatedView()
-        
-        loadBackups(needShowSpinner: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,31 +47,14 @@ final class ContactsBackupHistoryController: BaseViewController {
         navigationBarWithGradientStyle()
     }
     
+    private func reloadBackups() {
+        dataManager.setup(with: contactSyncHelper.backups)
+    }
+    
     private func trackScreen() {
         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.BackupsScreen())
         analyticsService.logScreen(screen: .contactSyncBackupsScreen)
         analyticsService.trackDimentionsEveryClickGA(screen: .contactSyncBackupsScreen)
-    }
-    
-    private func loadBackups(needShowSpinner: Bool) {
-        if needShowSpinner {
-            showSpinner()
-        }
-        
-        task = contactsSyncService.getBackups { [weak self] result in
-            guard let self = self else {
-                return
-            }
-            
-            self.hideSpinner()
-            
-            switch result {
-            case .success(let response):
-                self.dataManager.setup(with: response.list)
-            case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
-            }
-        }
     }
 }
 
@@ -88,11 +69,11 @@ extension ContactsBackupHistoryController: ContactBackupHistoryDataManagerDelega
 
 extension ContactsBackupHistoryController: ContactsBackupHistoryViewDelegate {
     func restoreBackupTapped() {
-        showPopup(type: .restoreBackup)
+        showPopup(type: .restoreBackup, backup: dataManager.selectedBackup)
     }
     
     func deleteBackupTapped() {
-        showPopup(type: .deleteBackup)
+        showPopup(type: .deleteBackup, backup: dataManager.selectedBackup)
     }
 }
 
@@ -110,17 +91,17 @@ extension ContactsBackupHistoryController: ContactSyncControllerProtocol, Contac
     }
     
     func didFinishOperation(operationType: ContactsOperationType) { }
+    
+    func didUpdateBackupList() {
+        reloadBackups()
+    }
 }
 
 //MARK: - ContactListViewDelegate
 
 extension ContactsBackupHistoryController: ContactListViewDelegate {
 
-    func didCreateNewBackup(_ backup: ContactSync.SyncResponse) {
-        loadBackups(needShowSpinner: false)
-    }
+    func didCreateNewBackup(_ backup: ContactSync.SyncResponse) { }
     
-    func didDeleteContacts(for backup: ContactSync.SyncResponse) {
-        loadBackups(needShowSpinner: false)
-    }
+    func didDeleteContacts(for backup: ContactSync.SyncResponse) { }
 }

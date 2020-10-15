@@ -30,7 +30,7 @@ final class ContactBackupHistoryDataManager: NSObject, ContactBackupHistoryDataM
     }
     
     private var contactBackups = [ContactBackupItem]()
-    private var selectedBackup: ContactBackupItem?
+    private(set) var selectedBackup: ContactBackupItem?
     
     func setup(with items: [ContactBackupItem]) {
         contactBackups = items
@@ -48,8 +48,8 @@ final class ContactBackupHistoryDataManager: NSObject, ContactBackupHistoryDataM
     private func prepareInfoForCellPresenting(for item: ContactBackupItem) -> (title: String, description: String) {
         let title = TextConstants.contactBackupHistoryCellContactList
         let description: String
-        if let date = item.modified ?? item.created {
-            description = "\(item.total) \(TextConstants.contactBackupHistoryCellTitle) |  \(String(describing: date.getDateInFormat(format: "dd MMM yyyy")))"
+        if let date = item.date {
+            description = "\(item.total) \(TextConstants.contactBackupHistoryCellTitle) | \(String(describing: date.getDateInFormat(format: "dd MMM yyyy '|' HH:mm")))"
         } else {
             description = "\(item.total) \(TextConstants.contactBackupHistoryCellTitle)"
         }
