@@ -86,6 +86,7 @@ extension WidgetProvider {
 
 extension WidgetProvider: WidgetPresentationServiceDelegate {
     func didLogout() {
+        WidgetPresentationService.shared.lastWidgetEntry = nil
         timelineManager.cancelAll()
     }
 }
