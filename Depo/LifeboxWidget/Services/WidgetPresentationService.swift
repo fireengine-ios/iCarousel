@@ -54,19 +54,20 @@ final class WidgetPresentationService {
     weak var delegate: WidgetPresentationServiceDelegate?
     
     //TODO: change to enum?
-    var lastWidgetEntry: WidgetBaseEntry? {
-        get {
-            if let typeString = lastWidgetEntryType, let type: WidgetBaseEntry.Type = NSClassFromString(typeString) as? WidgetBaseEntry.Type {
-                return try? defaults?.getObject(forKey: SharedConstants.lastWidgetEntryKey, castTo: type)
-            }
-            return try? defaults?.getObject(forKey: SharedConstants.lastWidgetEntryKey, castTo: WidgetBaseEntry.self) }
-        set {
-            if let object = newValue {
-                lastWidgetEntryType = String(describing: object.self)
-            }
-            try? defaults?.setObject(newValue, forKey: SharedConstants.lastWidgetEntryKey)
-        }
-    }
+    var lastWidgetEntry: WidgetBaseEntry?
+//    {
+//        get {
+//            if let typeString = lastWidgetEntryType, let type: WidgetBaseEntry.Type = NSClassFromString(typeString) as? WidgetBaseEntry.Type {
+//                return try? defaults?.getObject(forKey: SharedConstants.lastWidgetEntryKey, castTo: type)
+//            }
+//            return try? defaults?.getObject(forKey: SharedConstants.lastWidgetEntryKey, castTo: WidgetBaseEntry.self) }
+//        set {
+//            if let object = newValue {
+//                lastWidgetEntryType = String(describing: object.self)
+//            }
+//            try? defaults?.setObject(newValue, forKey: SharedConstants.lastWidgetEntryKey)
+//        }
+//    }
     
     private var lastWidgetEntryType: String? {
         get { return defaults?.string(forKey: SharedConstants.lastWidgetEntryTypeKey) }
