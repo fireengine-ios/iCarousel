@@ -372,7 +372,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         navVC.navigationBar.isHidden = true
         router.presentViewController(controller: navVC, animated: true) { [weak self] in
             ImageDownloder().getImage(patch: url) { [weak self] image in
-                guard let self = self, let image = image else {
+                guard
+                    let self = self,
+                    let image = image
+                else {
                     if !ReachabilityService.shared.isReachable {
                         controller.dismiss(animated: false) {
                              UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
@@ -387,7 +390,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                 controller.imageName = item.name
                 completion?()
                 
-                self?.trackEvent(elementType: .smash)
+                self.trackEvent(elementType: .smash)
             }
         }
     }
