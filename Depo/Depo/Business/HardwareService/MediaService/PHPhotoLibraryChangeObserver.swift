@@ -114,10 +114,14 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         mediaService.allUnsyncedLocalIds { unsyncedLocalIds in
             mediaService.allLocalIds(subtractingIds: unsyncedLocalIds) { syncedLocalIds in
                 SharedGroupCoreDataStack.shared.actualizeWith(synced: syncedLocalIds, unsynced: unsyncedLocalIds) {
+                    debugLog("SharedGroupCoreDataStack is actualized")
                     if #available(iOS 14.0, *) {
-                        if !SyncServiceManager.shared.hasExecutingSync {
-                            WidgetCenter.shared.reloadAllTimelines()
+                        guard !SyncServiceManager.shared.hasExecutingSync else {
+                            debugLog("Widgets reload will not be called. hasExecutingSync")
+                            return
                         }
+                        debugLog("Widgets reload is called")
+                        WidgetCenter.shared.reloadAllTimelines()
                     }
                 }
             }

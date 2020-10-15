@@ -18,6 +18,23 @@ final class WidgetService {
     
     private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
     
+    init() {
+        syncAppFirstLaunchFlags()
+    }
+    
+    private func syncAppFirstLaunchFlags() {
+        //sync isAppFirstLaunch flag for first widget install
+        let storageIsAppFirstLaunch = UserDefaults.standard.object(forKey: SharedConstants.isAppFirstLaunchKey) as? Bool ?? true
+        if isAppFirstLaunch && !storageIsAppFirstLaunch {
+            isAppFirstLaunch = storageIsAppFirstLaunch
+        }
+    }
+    
+    var isAppFirstLaunch: Bool {
+        get { return defaults?.object(forKey: SharedConstants.isAppFirstLaunchKey) as? Bool ?? true }
+        set { defaults?.set(newValue, forKey: SharedConstants.isAppFirstLaunchKey) }
+    }
+    
     var isPreparationFinished: Bool {
         get { return defaults?.bool(forKey: SharedConstants.isPreparationFinished) ?? false }
         set { defaults?.set(newValue, forKey: SharedConstants.isPreparationFinished)}
@@ -51,6 +68,14 @@ final class WidgetService {
     private (set) var currentSyncFileName: String {
         get { return defaults?.string(forKey: SharedConstants.currentSyncFileNameKey) ?? "" }
         set { defaults?.set(newValue, forKey: SharedConstants.currentSyncFileNameKey) }
+    }
+    
+    private (set) var widgetShownSyncStatus: WidgetSyncStatus {
+        get {
+            let statusValue = defaults?.string(forKey: SharedConstants.widgetShownSyncStatusKey) ?? ""
+            return WidgetSyncStatus(rawValue: statusValue) ?? .undetermined
+        }
+        set { defaults?.set(newValue.rawValue, forKey: SharedConstants.widgetShownSyncStatusKey) }
     }
     
     private (set) var syncStatus: WidgetSyncStatus {
@@ -90,12 +115,14 @@ final class WidgetService {
     
     func notifyWidgetAbout(_ synced: Int, of total: Int) {
         finishedCount = synced
-        //TODO: remove count check after queue is implemented
-        if total != totalCount {
-            if #available(iOS 14.0, *) {
-                WidgetCenter.shared.reloadAllTimelines()
-            }
-        }
+            ///rule 3 for widget is currently disabled, because of clearance of  widget reload quota
+//        if #available(iOS 14.0, *) {
+//            debugPrint("!!! sync notifyWidgetAbout \(synced)")
+//            DebugLogService.debugLog("SYNCDEBUG: notify main app \(synced)")
+//
+//            WidgetCenter.shared.reloadAllTimelines()
+//        }
+        
         totalCount = total
         lastSyncedDate = Date()
         
@@ -141,12 +168,18 @@ final class WidgetService {
     
     func notifyWidgetAbout(autoSyncEnabled: Bool) {
         isAutoSyncEnabled = autoSyncEnabled
-        //TODO: remove it after queue is implemented
-        if autoSyncEnabled {
-            if #available(iOS 14.0, *) {
-                WidgetCenter.shared.reloadAllTimelines()
-            }
+        
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
         }
+        
     }
 
+    func notifyAbout(shownSyncStatus: WidgetSyncStatus) {
+        guard widgetShownSyncStatus != shownSyncStatus else {
+            return
+        }
+        
+        widgetShownSyncStatus = shownSyncStatus
+    }
 }

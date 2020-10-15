@@ -273,7 +273,7 @@ final class MediaItemOperationsService {
                     savedItem.objectSyncStatus = NSSet(array: array)
                     
                     if let identifier = savedItem.localFileID {
-                        SharedGroupCoreDataStack.shared.saveSynced(localIdentifiers: [identifier])
+                        SharedGroupCoreDataStack.shared.save(isSynced: true, localIdentifiers: [identifier], completion: {/*updated somwhere else*/})
                     }
                     
                     //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
