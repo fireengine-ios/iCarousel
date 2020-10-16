@@ -97,7 +97,7 @@
                                     <rect key="frame" x="0.0" y="16" width="414" height="64"/>
                                     <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="64" id="808-BL-O9I"/>
+                                        <constraint firstAttribute="height" priority="250" constant="64" id="808-BL-O9I"/>
                                     </constraints>
                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wPB-K3-M1W">
                                         <size key="itemSize" width="35" height="35"/>
@@ -168,7 +168,7 @@
                                 <constraint firstItem="nq6-ZB-8bJ" firstAttribute="leading" secondItem="CXu-Dq-C9Z" secondAttribute="leading" id="8Ri-qX-82g"/>
                                 <constraint firstAttribute="trailing" secondItem="nq6-ZB-8bJ" secondAttribute="trailing" id="BKc-P0-cnX"/>
                                 <constraint firstAttribute="bottom" secondItem="iVs-YP-6iP" secondAttribute="bottom" id="Hp7-xq-YCt"/>
-                                <constraint firstAttribute="height" constant="140" id="I1T-ZP-xew">
+                                <constraint firstAttribute="height" priority="250" constant="140" id="I1T-ZP-xew">
                                     <variation key="heightClass=regular-widthClass=regular" constant="164"/>
                                 </constraint>
                                 <constraint firstItem="nq6-ZB-8bJ" firstAttribute="top" secondItem="CXu-Dq-C9Z" secondAttribute="top" constant="16" id="KsS-og-lKT">

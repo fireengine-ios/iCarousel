@@ -363,6 +363,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
     func smash(item: [BaseDataSourceItem], completion: VoidHandler?) {
         guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
+            completion?()
             return
         }
         
