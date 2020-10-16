@@ -15,7 +15,7 @@
 
 @property (strong) NSMutableArray* records;
 @property (strong) NSMutableArray* objectIds;
- 
+
 @end
 
 @implementation ContactUtil
@@ -63,18 +63,18 @@
     NSMutableArray *contactsArray=[[NSMutableArray alloc] init];
     CNContactStore *store = [[CNContactStore alloc] init];
     NSMutableArray *contacts = [NSMutableArray array];
-
+    
     NSError *fetchError;
-
+    
     CNContactFetchRequest *request = [[CNContactFetchRequest alloc] initWithKeysToFetch:@[[CNContactVCardSerialization descriptorForRequiredKeys], [CNContactFormatter descriptorForRequiredKeysForStyle:CNContactFormatterStyleFullName]]];
-
+    
     BOOL success = [store enumerateContactsWithFetchRequest:request error:&fetchError usingBlock:^(CNContact *contact, BOOL *stop) {
         [contacts addObject:contact];
     }];
     if (!success) {
         SYNC_Log(@"error = %@", fetchError);
     }
-
+    
     NSUInteger totalCount = [contacts count];
     int ok = 0;
     for (CNContact *contact in contacts) {
@@ -85,16 +85,16 @@
             SYNC_Log(@"VCF: %d", ok);
         }
     }
-
+    
     NSError *error;
     NSData *vcardString =[CNContactVCardSerialization dataWithContacts:contactsArray error:&error];
-
+    
     NSString* vcardStr = [[NSString alloc] initWithData:vcardString encoding:NSUTF8StringEncoding];
     return vcardStr;
 }
 
 -(void)releaseCNStore {
-
+    
 }
 
 -(void)fetchCNContact{
@@ -154,7 +154,26 @@
     if(!SYNC_STRING_IS_NULL_OR_EMPTY(contact.company)){
         cnContact.organizationName = contact.company;
     }
-
+//    if(!SYNC_STRING_IS_NULL_OR_EMPTY(contact.note)){
+//        cnContact.note = contact.note;
+//    }
+    if(!SYNC_STRING_IS_NULL_OR_EMPTY(contact.birthday)){
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat :@"yyyy/MM/dd"];
+        NSDate * date = [formatter dateFromString:contact.birthday];
+        
+        NSCalendar *gregorian = [NSCalendar currentCalendar];
+        
+        NSDateComponents *dateComponents =
+        [gregorian components:(NSYearCalendarUnit  |
+                               NSMonthCalendarUnit |
+                               NSDayCalendarUnit   ) fromDate:date];
+        
+        cnContact.birthday= dateComponents;
+        
+    }
+    
     NSMutableArray *phones = [NSMutableArray new];
     NSMutableArray *emails = [NSMutableArray new];
     if (!SYNC_ARRAY_IS_NULL_OR_EMPTY(contact.devices)){
@@ -210,7 +229,7 @@
         Contact* c = [updateContacts objectForKey:cn.identifier];
         [finalList addObject:[self save:c cnContact:[cn mutableCopy]]];
     }
-  
+    
     int counter = 0;
     CNSaveRequest* saveRequest = [[CNSaveRequest alloc] init];
     for (CNMutableContact *cnContact in finalList){
@@ -263,7 +282,7 @@
     }
     NSError *error;
     NSMutableArray* unified = [NSMutableArray new];
-
+    
     NSArray *containers = [_store containersMatchingPredicate:nil error:&error];
     [unified addObjectsFromArray:[self getCNContacts:containers fetchType:fetchType]];
     
@@ -282,8 +301,7 @@
             if (!_store) {
                 break;
             }
-            @try
-            {
+            @try {
                 CNContactUnified* u = [unified objectAtIndex:index];
                 CNContact *cnContact = u.cnContact;
                 
@@ -300,14 +318,12 @@
                 } else {
                     contact.hasName = NO;
                 }
-
+                
                 [self fetchNumbers:contact cnContact:cnContact];
                 [self fetchEmails:contact cnContact:cnContact];
                 [self fetchAddresses:contact cnContact:cnContact];
                 [ret addObject:contact];
-            }
-            @catch (NSException *exception)
-            {
+            } @catch (NSException *exception) {
                 NSLog(@"EXCEPTION IN CONTACTS :: %@", exception.description);
             }
         }
@@ -321,9 +337,9 @@
     NSError *error;
     CNContactFetchRequest *request = [[CNContactFetchRequest alloc] initWithKeysToFetch:@[]];
     BOOL success = [_store enumerateContactsWithFetchRequest:request error:&error
-                                                 usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
-        contactsCount += 1;
-    }];
+                                                  usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
+                                                      contactsCount += 1;
+                                                  }];
     if (!success || error) {
         SYNC_Log(@"error counting all contacts, error - %@", error.localizedDescription);
     }
@@ -461,6 +477,13 @@
         if (SYNC_STRING_IS_NULL_OR_EMPTY(masterContact.nickName) && !SYNC_STRING_IS_NULL_OR_EMPTY(c.nickName)){
             masterContact.nickName = c.nickName;
         }
+//        if (SYNC_STRING_IS_NULL_OR_EMPTY(masterContact.note) && !SYNC_STRING_IS_NULL_OR_EMPTY(c.note)){
+//            masterContact.note = c.note;
+//        }
+        if (SYNC_STRING_IS_NULL_OR_EMPTY(masterContact.birthday) && !SYNC_STRING_IS_NULL_OR_EMPTY(c.birthday)){
+            masterContact.birthday = c.birthday;
+        }
+        
     }
 }
 
@@ -481,7 +504,8 @@
 }
 
 -(NSArray *)getCNContactKeys {
-    return @[CNContactGivenNameKey, CNContactMiddleNameKey, CNContactFamilyNameKey, CNContactNicknameKey, CNContactOrganizationNameKey, CNContactPhoneNumbersKey, CNContactEmailAddressesKey, CNContactPostalAddressesKey];
+    return @[CNContactGivenNameKey, CNContactMiddleNameKey, CNContactFamilyNameKey, CNContactNicknameKey, CNContactOrganizationNameKey, CNContactPhoneNumbersKey, CNContactEmailAddressesKey, CNContactPostalAddressesKey,CNContactBirthdayKey];
+    //CNContactNoteKey
 }
 
 -(CNContact*) getCNContact:(NSString*)identifier{

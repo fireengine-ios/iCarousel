@@ -17,7 +17,7 @@ protocol ContactListMainViewDelegate: class {
 
 final class ContactListMainView: UIView, NibInit {
 
-    static func with(backUpInfo: ContactSync.SyncResponse?, delegate: ContactListMainViewDelegate?) -> ContactListMainView {
+    static func with(backUpInfo: ContactBackupItem?, delegate: ContactListMainViewDelegate?) -> ContactListMainView {
         let view = ContactListMainView.initFromNib()
         view.backUpInfo = backUpInfo
         view.delegate = delegate
@@ -46,7 +46,7 @@ final class ContactListMainView: UIView, NibInit {
     }
     
     private weak var delegate: ContactListMainViewDelegate?
-    private var backUpInfo: ContactSync.SyncResponse?
+    private var backUpInfo: ContactBackupItem?
     
     override func awakeFromNib() {
         super.awakeFromNib()
