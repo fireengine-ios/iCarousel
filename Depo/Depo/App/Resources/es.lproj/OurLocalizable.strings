@@ -1727,10 +1727,10 @@
 "widget_rule_0_medium_detail" = "Quedate registrado para obtener lo mejor de lifebox";
 "widget_rule_0_medium_button" = "Registrate";
 "widget_rule_1_small_title" = "Tu almacenamiento es casi %d%%";
-"widget_rule_1_small_detail" = "Es hora de mejorar tu plan";
+"widget_rule_1_small_detail" = " Es hora de mejorar tu plan";
 "widget_rule_1_small_button" = "Ver planes";
 "widget_rule_1_medium_title" = "Tu almacenamiento de lifebox está casi lleno";
-"widget_rule_1_medium_detail" = "Es hora de mejorar tu plan";
+"widget_rule_1_medium_detail" = " Es hora de mejorar tu plan";
 "widget_rule_1_medium_button" = "Ver Planes";
 "widget_rule_2_small_title" = "Se terminó el almacenamiento del dispositivo %d%%";
 "widget_rule_2_small_detail" = "¡Necesitas más espacio!";

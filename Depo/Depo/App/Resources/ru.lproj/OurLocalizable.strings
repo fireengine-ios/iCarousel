@@ -1699,10 +1699,10 @@
 "widget_rule_0_medium_detail" = "Войдите в систему для доступа к новейшим функциям lifebox и непрерывного резервного копирования.";
 "widget_rule_0_medium_button" = "Войти в Систему";
 "widget_rule_1_small_title" = "Ваша квота lifebox превысила %d%%.";
-"widget_rule_1_small_detail" = "Пришло время обновить свой план.";
+"widget_rule_1_small_detail" = " Пришло время обновить свой план.";
 "widget_rule_1_small_button" = "Ознакомиться";
 "widget_rule_1_medium_title" = "Ваша квота lifebox превысила %d%%.";
-"widget_rule_1_medium_detail" = "Пришло время обновить свой план.";
+"widget_rule_1_medium_detail" = " Пришло время обновить свой план.";
 "widget_rule_1_medium_button" = "Ознакомиться с Планами Подписки";
 "widget_rule_2_small_title" = "Память вашего устройства почти заполнена.";
 "widget_rule_2_small_detail" = "Вам необходимо пространство.";

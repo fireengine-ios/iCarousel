@@ -1697,7 +1697,7 @@
 "widget_rule_1_small_title" = "lifebox kotan %d%% üzerinde.";
 "widget_rule_1_small_detail" = " Üst pakete geçmenin tam zamanı.";
 "widget_rule_1_small_button" = "İncele";
-"widget_rule_1_medium_title" = "lifebox kotan %d%% üzerinde.";
+"widget_rule_1_medium_title" = "lifebox kotan neredeyse dolu!";
 "widget_rule_1_medium_detail" = " Bir üst pakete geçmenin tam zamanı.";
 "widget_rule_1_medium_button" = "Abonelikleri İncele";
 "widget_rule_2_small_title" = "Cihaz hafızan dolmak üzere.";
