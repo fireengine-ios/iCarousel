@@ -49,7 +49,7 @@ final class WidgetServerService {
     
     private func checkFirstLaunch() {
         //widget can send request before main app clear tokens
-        if WidgetService.shared.isAppFirstLaunch {
+        if WidgetService.shared.isAppFirstLaunch == true {
             WidgetService.shared.isAppFirstLaunch = false
             tokenStorage.clearTokens()
         }

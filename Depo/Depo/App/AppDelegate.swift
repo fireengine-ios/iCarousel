@@ -336,7 +336,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AutoSyncDataStorage().clear()
         }
         
-        AppResponsivenessService.shared.applicationWillTerminate()
         WidgetService.shared.notifyWidgetAbout(status: .stopped)
         if #available(iOS 14.0, *) {
             WidgetCenter.shared.reloadAllTimelines()
