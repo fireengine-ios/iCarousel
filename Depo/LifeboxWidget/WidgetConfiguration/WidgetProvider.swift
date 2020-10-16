@@ -24,6 +24,7 @@ final class WidgetProvider: TimelineProvider {
     private let timelineManager = WidgetTimelineManager()
     
     init() {
+        DebugLogService.debugLog("WIDGET: WidgetProvider init")
         WidgetPresentationService.shared.delegate = self
     }
     
@@ -86,7 +87,9 @@ extension WidgetProvider {
 
 extension WidgetProvider: WidgetPresentationServiceDelegate {
     func didLogout() {
+        DebugLogService.debugLog("WIDGET: WidgetProvider delegate did call logout")
         WidgetPresentationService.shared.lastWidgetEntry = nil
+        WidgetServerService.shared.clearToken()
         timelineManager.cancelAll()
     }
 }

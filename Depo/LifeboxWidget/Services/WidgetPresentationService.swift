@@ -63,6 +63,7 @@ final class WidgetPresentationService {
     //MARK: -
     
     init() {
+        DebugLogService.debugLog("WIDGET: WidgetPresentationService init")
         setupWormhole()
     }
     
@@ -94,6 +95,7 @@ final class WidgetPresentationService {
            let eghtHoursSinceLastQuotaRequest = Calendar.current.date(byAdding: .hour, value: 8, to: lastQuotaUsageRequestDate),
            eghtHoursSinceLastQuotaRequest > Date()
            {
+            DebugLogService.debugLog("WIDGET: PresentationService ORDER 1 - OLD values are not dead")
             completion(lastQuotaUsagePercentage)
             return
         }

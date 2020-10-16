@@ -55,6 +55,11 @@ final class WidgetServerService {
         }
     }
 
+    func clearToken() {
+        DebugLogService.debugLog("WIDGET: WidgetProvider Clear tokens")
+        tokenStorage.clearTokens()
+    }
+    
     func getQuotaInfo(handler: @escaping ResponseHandler<QuotaInfoResponse>) {
         sessionManager
             .request("\(Self.baseShortUrlString)api/account/quotaInfo")
