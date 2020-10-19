@@ -28,6 +28,58 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         processSmartAlbumsChanges(changeInstance)
         
     }
+    
+    private func processAssetAccessLevel(changes: PHFetchResultChangeDetails<PHAsset>) {
+        if #available(iOS 14.0, *) {
+            var hasChanges = false
+            
+            var before = [PHAsset]()
+            var after = [PHAsset]()
+            
+            changes.fetchResultBeforeChanges.enumerateObjects { asset, _, _ in
+                before.append(asset)
+            }
+            changes.fetchResultAfterChanges.enumerateObjects { asset, _, _ in
+                after.append(asset)
+            }
+            
+            debugLog("PHASSETS before: \(before.count), PHASSETS after: \(after.count)")
+            
+            if before.count == after.count {
+                hasChanges = !before.elementsEqual(after) { (assetBefore, assetAfter) -> Bool in
+                    assetBefore == assetAfter
+                }
+            } else {
+                hasChanges = true
+            }
+            
+            guard hasChanges else {
+                printLog("PHASSETS doesn't have changes")
+                return
+            }
+            
+            let newSelectedAssets = Array(Set(after).subtracting(before))
+            let deselectedAssets = Array(Set(before).subtracting(after))
+            
+            var phChanges = PhotoLibraryItemsChanges()
+            
+            phChanges[.added] = newSelectedAssets
+            phChanges[.removed] = deselectedAssets
+            
+            debugLog("PHASSETS newSelectedAssets: \(newSelectedAssets.count),\nPHASSETS deselectedAssets: \(deselectedAssets.count)")
+            
+            MediaItemOperationsService.shared.append(localMediaItems: newSelectedAssets, needCreateRelationships: true) { [weak self] in
+                MediaItemOperationsService.shared.remove(localMediaItems: deselectedAssets) {
+                    self?.updateHomeWidget()
+                    
+                    NotificationCenter.default.post(name: .notificationPhotoLibraryDidChange, object: nil, userInfo: phChanges)
+                }
+            }
+        }
+        
+        debugLog("PHASSETS inserted: \(changes.insertedObjects.count),\nPHASSETS removed: \(changes.removedObjects.count),\nPHASSETS changed: \(changes.changedObjects.count)")
+    }
+    
     private func processAssetChanges(_ changeInstance: PHChange) {
         guard fetchResult != nil else {
             printLog("photoLibraryDidChange - fetchResult is nil")
@@ -42,10 +94,11 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         fetchResult = changes.fetchResultAfterChanges
 
         guard changes.hasIncrementalChanges else {
+            processAssetAccessLevel(changes: changes)
             printLog("photoLibraryDidChange - no incremental changes")
             return
         }
-            
+          
         var phChanges = PhotoLibraryItemsChanges()
         
         func notify() {

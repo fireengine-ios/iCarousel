@@ -1085,7 +1085,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         let operation = GetCompactImageOperation(photoManager: photoManager, asset: asset) { data, string, orientation, dict in
             self.dispatchQueue.async {
                 let failCompletion = {
-                    print("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
+                    debugLog("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is invalid")
                     assetInfo.isValid = false
                     semaphore.signal()
                     return
