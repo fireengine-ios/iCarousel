@@ -697,10 +697,16 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         LocalMediaStorage.default.assetsCache.append(list: [asset])
         
         // call append to get the completion and to be sure that local item is saved in our db
-        mediaItemService.append(localMediaItems: [asset]) {
+        mediaItemService.append(localMediaItems: [asset]) { [weak self] in
+            guard let self = self else {
+                assertionFailure()
+                fail?(.failResponse(nil))
+                return
+            }
+            
             let context = self.coreDataStack.newChildBackgroundContext
-            mediaItemService.mediaItems(by: asset.localIdentifier, context: context, mediaItemsCallBack: { items in
-                guard let savedLocalItem = items.first else {
+            mediaItemService.mediaItems(by: asset.localIdentifier, context: context, mediaItemsCallBack: { [weak self] items in
+                guard let self = self, let savedLocalItem = items.first else {
                     assertionFailure()
                     fail?(.failResponse(nil))
                     return
@@ -716,12 +722,19 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 if let unwrapedSet = savedLocalItem.objectSyncStatus as? Set<MediaItemsObjectSyncStatus> {
                     userObjectSyncStatus = unwrapedSet
                 }
-                SingletonStorage.shared.getUniqueUserID(success: {
-                    currentUserID in
+                SingletonStorage.shared.getUniqueUserID(success: {currentUserID in
                     context.perform {
                         savedLocalItem.objectSyncStatus = NSSet(set: userObjectSyncStatus)
                         userObjectSyncStatus.insert(MediaItemsObjectSyncStatus(userID: currentUserID, context: context))
-                        MediaItemOperationsService.shared.updateRelationsAfterMerge(with: item.uuid, localItem: savedLocalItem, context: context, completion: {
+                        
+                        MediaItemOperationsService.shared.updateRelationsAfterMerge(with: item.uuid, localItem: savedLocalItem, context: context, completion: {  [weak self] in
+                            
+                            guard let self = self else {
+                                assertionFailure()
+                                fail?(.failResponse(nil))
+                                return
+                            }
+                            
                             self.coreDataStack.saveDataForContext(context: context, saveAndWait: true, savedCallBack: {
                                 success?()
                             })
@@ -1011,7 +1024,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         let semaphore = DispatchSemaphore(value: 0)
         
-        let operation = GetCompactVideoOperation(photoManager: photoManager, asset: asset) { avAsset, aVAudioMix, dict in
+        let operation = GetCompactVideoOperation(photoManager: photoManager, asset: asset) { [weak self] avAsset, aVAudioMix, dict in
+            
+            guard let self = self else {
+                assertionFailure()
+                assetInfo.isValid = false
+                semaphore.signal()
+                return
+            }
             
             self.dispatchQueue.async {
                 let failCompletion = {
@@ -1082,7 +1102,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         
         let semaphore = DispatchSemaphore(value: 0)
-        let operation = GetCompactImageOperation(photoManager: photoManager, asset: asset) { data, string, orientation, dict in
+        let operation = GetCompactImageOperation(photoManager: photoManager, asset: asset) { [weak self] data, string, orientation, dict in
+            
+            guard let self = self else {
+                assetInfo.isValid = false
+                semaphore.signal()
+                return
+            }
+            
             self.dispatchQueue.async {
                 let failCompletion = {
                     print("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
@@ -1158,7 +1185,13 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         
         let semaphore = DispatchSemaphore(value: 0)
         
-        let operation = GetOriginalVideoOperation(photoManager: photoManager, asset: asset) { avAsset, aVAudioMix, dict in
+        let operation = GetOriginalVideoOperation(photoManager: photoManager, asset: asset) { [weak self] avAsset, aVAudioMix, dict in
+            
+            guard let self = self else {
+                assetInfo.isValid = false
+                semaphore.signal()
+                return
+            }
             
             self.dispatchQueue.async {
                 let failCompletion = {
@@ -1236,7 +1269,14 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
         }
         
         let semaphore = DispatchSemaphore(value: 0)
-        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset) { data, string, orientation, dict in
+        let operation = GetOriginalImageOperation(photoManager: photoManager, asset: asset) { [weak self] data, string, orientation, dict in
+            
+            guard let self = self else {
+                assetInfo.isValid = false
+                semaphore.signal()
+                return
+            }
+            
             self.dispatchQueue.async {
                 let failCompletion = {
                     print("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
@@ -1404,11 +1444,16 @@ class GetOriginalImageOperation: Operation {
         options.deliveryMode = .highQualityFormat
 //        options.isSynchronous = true
         
-        photoManager.requestImageData(for: asset, options: options, resultHandler: { data, string, orientation, dict in
+        photoManager.requestImageData(for: asset, options: options, resultHandler: { [weak self] data, string, orientation, dict in
             if data == nil, let error = dict?[PHImageErrorKey] as? Error {
                 Crashlytics.crashlytics().record(error: error)
                 debugLog("GetOriginalImageOperation: PHImageManager requestImageData no data error \(error.description)")
             }
+            
+            guard let self = self, !self.isCancelled else {
+                return
+            }
+            
             self.callback(data, string, orientation, dict)
         })
     }
@@ -1533,10 +1578,12 @@ class AddAssetToCollectionOperation: AsyncOperation {
             markFinished()
         } else {
             mediaStorage.createAlbum(albumName, completion: { [weak self] collection in
-                if let collection = collection, let `self` = self {
-                    self.mediaStorage.add(asset: self.assetIdentifier, to: collection)
-                    self.markFinished()
+                guard let self = self, let collection = collection else {
+                    return
                 }
+                
+                self.mediaStorage.add(asset: self.assetIdentifier, to: collection)
+                self.markFinished()
             })
         }
     }
