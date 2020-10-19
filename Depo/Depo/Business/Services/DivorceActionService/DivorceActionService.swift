@@ -21,6 +21,7 @@ protocol DivorceActionRoutingProtocol {
     func onOpenPremium()
     func onOpenPeopleAlbum()
     func onOpenFaceImageGrouping()
+    func onShare()
 }
 
 @objc protocol DivorceActionAnalyticsProtocol {
@@ -49,8 +50,8 @@ class CommonDivorceActionService {
     private lazy var completionPopUpFactory = HSCompletionPopUpsFactory()
     private lazy var albumWarningPopUpsFactory = SmartAlbumWarningPopUpsFactory()
 
-    private var faceImageGrouping: SettingsInfoPermissionsResponse?
-    private var permissions: PermissionsResponse?
+    private(set) var faceImageGrouping: SettingsInfoPermissionsResponse?
+    private(set) var permissions: PermissionsResponse?
     private var group: DispatchGroup?
 }
 
@@ -97,7 +98,7 @@ extension CommonDivorceActionService: DivorceActionPopUpPresentProtocol {
         case .bottomBarHideCompleted, .hideAlbumsCompleted:
             return false
             
-        case .smashCompleted:
+        case .smashCompletedPremium, .smashCompletedStandart:
             return true
         }
     }
@@ -133,6 +134,8 @@ extension CommonDivorceActionService: DivorceActionStateProtocol {
             openFaceImageGrouping()
         }
     }
+    
+    func onShare() { }
 }
 
 //MARK: - DivorceActionRoutingProtocol
