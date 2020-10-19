@@ -1733,10 +1733,10 @@
 "widget_rule_0_medium_detail" = "Stay signed in to get the most out of lifebox.";
 "widget_rule_0_medium_button" = "Sign In";
 "widget_rule_1_small_title" = "Your quota is over %d%%";
-"widget_rule_1_small_detail" = "Time to upgrade your plan.";
+"widget_rule_1_small_detail" = " Time to upgrade your plan.";
 "widget_rule_1_small_button" = "View Plans";
 "widget_rule_1_medium_title" = "Your lifebox quota is almost full.";
-"widget_rule_1_medium_detail" = "It’s time to upgrade your plan.";
+"widget_rule_1_medium_detail" = " It’s time to upgrade your plan.";
 "widget_rule_1_medium_button" = "View Plans";
 "widget_rule_2_small_title" = "Device storage is over %d%%";
 "widget_rule_2_small_detail" = "You need more space.";

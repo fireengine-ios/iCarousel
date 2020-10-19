@@ -1991,10 +1991,10 @@ Please check I have understood the intended command here*/
 "widget_rule_0_medium_detail" = "Restez connecté pour profiter au maximum de lifebox.";
 "widget_rule_0_medium_button" = "Connectez-vous";
 "widget_rule_1_small_title" = "Vous avez atteint %d%% de votre quota";
-"widget_rule_1_small_detail" = "Passez à l'offre supérieure";
+"widget_rule_1_small_detail" = " Passez à l'offre supérieure";
 "widget_rule_1_small_button" = "Voir les offres";
 "widget_rule_1_medium_title" = "Votre quota est quasiment atteint";
-"widget_rule_1_medium_detail" = "Il est temps de passer au top pack suivant.";
+"widget_rule_1_medium_detail" = " Il est temps de passer au top pack suivant.";
 "widget_rule_1_medium_button" = "Affichez les Abonnements";
 "widget_rule_2_small_title" = "La mémoire de votre appareil est presque pleine.";
 "widget_rule_2_small_detail" = "Vous avez besoin d'espace.";

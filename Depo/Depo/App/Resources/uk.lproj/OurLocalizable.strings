@@ -1687,10 +1687,10 @@
 "widget_rule_0_medium_detail" = "Увійдіть, щоб отримати найновіші функції резервного копіювання та lifebox.";
 "widget_rule_0_medium_button" = "Увійти";
 "widget_rule_1_small_title" = "Квота lifebox перевищує %d%%.";
-"widget_rule_1_small_detail" = "Настав час оновити верхні пакети.";
+"widget_rule_1_small_detail" = " Настав час оновити верхні пакети.";
 "widget_rule_1_small_button" = "Огляд";
 "widget_rule_1_medium_title" = "Квота lifebox перевищує %d%%.";
-"widget_rule_1_medium_detail" = "Настав час оновити верхні пакети.";
+"widget_rule_1_medium_detail" = " Настав час оновити верхні пакети.";
 "widget_rule_1_medium_button" = "Переглянути Підписки";
 "widget_rule_2_small_title" = "Пам'ять пристрою майже заповнена.";
 "widget_rule_2_small_detail" = "Вам потрібен простір.";

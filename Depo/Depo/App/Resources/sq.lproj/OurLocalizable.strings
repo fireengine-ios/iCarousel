@@ -1728,10 +1728,10 @@
 "widget_rule_0_medium_detail" = "Bëje një hyrje për tiparet më të fundit në lidhje me rezervimin të pandërprerë.dhe lifebox-in";
 "widget_rule_0_medium_button" = "Bëje një hyrje";
 "widget_rule_1_small_title" = "Kuota jote lifebox është mbi %d%%.";
-"widget_rule_1_small_detail" = "Është koha e duhur  për të kaluar   në paketën  e lartë.";
+"widget_rule_1_small_detail" = " Është koha e duhur  për të kaluar   në paketën  e lartë.";
 "widget_rule_1_small_button" = "Shqyrto";
 "widget_rule_1_medium_title" = "Kuota jote lifebox është mbi %d%%.";
-"widget_rule_1_medium_detail" = "Është koha e duhur për të kaluar në paketën e lartë.";
+"widget_rule_1_medium_detail" = " Është koha e duhur për të kaluar në paketën e lartë.";
 "widget_rule_1_medium_button" = "Shqyrtoji Abonimet";
 "widget_rule_2_small_title" = "Kujtesa e pajisjes tënde është pothuajse e plotë.";
 "widget_rule_2_small_detail" = "Ke nevojë hapësirën.";

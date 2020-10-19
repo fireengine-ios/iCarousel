@@ -1685,10 +1685,10 @@
 "widget_rule_0_medium_detail" = "Melden Sie sich an, um die neuesten Funktionen für Backup und Lifebox zu erhalten.";
 "widget_rule_0_medium_button" = "Einloggen";
 "widget_rule_1_small_title" = "Lifebox liegt über Quote %d%%.";
-"widget_rule_1_small_detail" = "Es ist Zeit für ein Upgrade auf das Top Pack.";
+"widget_rule_1_small_detail" = " Es ist Zeit für ein Upgrade auf das Top Pack.";
 "widget_rule_1_small_button" = "Untersuche";
 "widget_rule_1_medium_title" = "Lifebox liegt über Quote %d%%.";
-"widget_rule_1_medium_detail" = "Es ist Zeit, auf das nächste Paket zu aktualisieren.";
+"widget_rule_1_medium_detail" = " Es ist Zeit, auf das nächste Paket zu aktualisieren.";
 "widget_rule_1_medium_button" = "Abonnements Anzeigen";
 "widget_rule_2_small_title" = "Ihr Gerätespeicher ist fast voll.";
 "widget_rule_2_small_detail" = "Du brauchst Platz.";

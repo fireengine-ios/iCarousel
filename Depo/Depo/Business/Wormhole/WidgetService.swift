@@ -24,14 +24,13 @@ final class WidgetService {
     
     private func syncAppFirstLaunchFlags() {
         //sync isAppFirstLaunch flag for first widget install
-        let storageIsAppFirstLaunch = UserDefaults.standard.object(forKey: SharedConstants.isAppFirstLaunchKey) as? Bool ?? true
-        if isAppFirstLaunch && !storageIsAppFirstLaunch {
-            isAppFirstLaunch = storageIsAppFirstLaunch
+        if isAppFirstLaunch == nil {
+            isAppFirstLaunch = mainAppResponsivenessDate == nil
         }
     }
     
-    var isAppFirstLaunch: Bool {
-        get { return defaults?.object(forKey: SharedConstants.isAppFirstLaunchKey) as? Bool ?? true }
+    var isAppFirstLaunch: Bool? {
+        get { return defaults?.object(forKey: SharedConstants.isAppFirstLaunchKey) as? Bool }
         set { defaults?.set(newValue, forKey: SharedConstants.isAppFirstLaunchKey) }
     }
     

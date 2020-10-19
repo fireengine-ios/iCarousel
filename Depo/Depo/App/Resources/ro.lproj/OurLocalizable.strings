@@ -1685,10 +1685,10 @@
 "widget_rule_0_medium_detail" = "Pentru un backup continuu şi cele mai recente funcții în legătură cu lifebox trebuie să te autentifici.";
 "widget_rule_0_medium_button" = "Autentifică-te";
 "widget_rule_1_small_title" = "Cota ta lifebox este peste %d%%.";
-"widget_rule_1_small_detail" = "Este timpul potrivit să treci la pachetul superior.";
+"widget_rule_1_small_detail" = " Este timpul potrivit să treci la pachetul superior.";
 "widget_rule_1_small_button" = "Examinează";
 "widget_rule_1_medium_title" = "Cota ta lifebox este peste %d%%.";
-"widget_rule_1_medium_detail" = "Este timpul potrivit să treci la pachetul superior.";
+"widget_rule_1_medium_detail" = " Este timpul potrivit să treci la pachetul superior.";
 "widget_rule_1_medium_button" = "Examinează Abonamentele";
 "widget_rule_2_small_title" = "Memoria dispozitivului este aproape plină.";
 "widget_rule_2_small_detail" = "Ai nevoie de spațiu.";

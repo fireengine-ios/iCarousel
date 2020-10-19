@@ -49,12 +49,17 @@ final class WidgetServerService {
     
     private func checkFirstLaunch() {
         //widget can send request before main app clear tokens
-        if WidgetService.shared.isAppFirstLaunch {
+        if WidgetService.shared.isAppFirstLaunch == true {
             WidgetService.shared.isAppFirstLaunch = false
             tokenStorage.clearTokens()
         }
     }
 
+    func clearToken() {
+        DebugLogService.debugLog("WIDGET: WidgetProvider Clear tokens")
+        tokenStorage.clearTokens()
+    }
+    
     func getQuotaInfo(handler: @escaping ResponseHandler<QuotaInfoResponse>) {
         sessionManager
             .request("\(Self.baseShortUrlString)api/account/quotaInfo")
