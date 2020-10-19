@@ -79,9 +79,14 @@ final class FunTabBarItem: UIButton {
     
     private(set) var type: AttachedEntityType = .gif
     
+    private var oldFrame = CGRect.zero
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        centerVertically()
+        if oldFrame != frame {
+            oldFrame = frame
+            centerVertically()
+        }
     }
     
     func setup(with type: AttachedEntityType) {
