@@ -1112,7 +1112,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             self.dispatchQueue.async {
                 let failCompletion = {
-                    print("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
+                    debugLog("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is invalid")
                     assetInfo.isValid = false
                     semaphore.signal()
                     return

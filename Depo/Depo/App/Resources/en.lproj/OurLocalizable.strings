@@ -1365,7 +1365,7 @@
 "smash_successed_alert_title" = "Saved successfully to your device gallery and uploaded on lifebox!";
 "smash_successed_alert_second_title" = "Have Fun? What's Next?";
 "smash_successed_alert_description" = "Now you can share the edited photo with your friends.\nAlso you can get rid off the undesirable memories by hiding or deleting with one click in the People Album.";
-
+"smash_successed_alert_share" = "Share";
 /*smash_successed_alert_title  key'inden farkı ne?*/
 "smash_successed_simple_alert_title" = "Saved successfully to your device gallery and uploaded on lifebox!";
 "smash_successed_simple_alert_description" = "Now you can share the edited photo with your friends.\nAlso you can get rid off the undesirable memories by hiding or deleting with one click in the People Album.";

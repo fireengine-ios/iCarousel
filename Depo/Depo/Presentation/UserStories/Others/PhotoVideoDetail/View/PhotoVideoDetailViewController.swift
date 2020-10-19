@@ -351,6 +351,14 @@ final class PhotoVideoDetailViewController: BaseViewController {
     func showBottomDetailView() {
         bottomDetailViewManager?.showDetailView()
     }
+    
+    func shareCurrentItem() {
+        guard let shareTabIndex = output.tabIndex(type: .share),
+              let tabBarItem = editingTabBar.editingBar.items?[shareTabIndex] else {
+            return
+        }
+        editingTabBar.tabBar(editingTabBar.editingBar, didSelect: tabBarItem)
+    }
 }
 
 
