@@ -1240,6 +1240,10 @@ extension NetmeraEvents.Actions {
                 "ee" : #keyPath(action)
             ]
         }
+        
+        override var eventKey : String {
+            return key
+        }
     }
     
     final class PhotoEditApplyFilter: NetmeraEvent {
@@ -1258,6 +1262,10 @@ extension NetmeraEvents.Actions {
                 "ea" : #keyPath(filterType),
                 "eb" : #keyPath(action)
             ]
+        }
+        
+        override var eventKey : String {
+            return key
         }
     }
     
@@ -1278,6 +1286,10 @@ extension NetmeraEvents.Actions {
                 "eb" : #keyPath(selection)
             ]
         }
+        
+        override var eventKey : String {
+            return key
+        }
     }
     
     final class PhotoEditButtonAction: NetmeraEvent {
@@ -1293,6 +1305,10 @@ extension NetmeraEvents.Actions {
             return[
                 "ea" : #keyPath(buttonName)
             ]
+        }
+        
+        override var eventKey : String {
+            return key
         }
     }
 
