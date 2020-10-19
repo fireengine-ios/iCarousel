@@ -15,7 +15,8 @@ final class HSCompletionPopUpsFactory {
         case bottomBarHideCompleted
         case actionSheetHideCompleted
         case hideAlbumsCompleted
-        case smashCompleted
+        case smashCompletedPremium
+        case smashCompletedStandart
     }
 
     private var storageVars: StorageVars = factory.resolve()
@@ -41,7 +42,7 @@ final class HSCompletionPopUpsFactory {
         case .hideAlbumsCompleted:
             return HSCompletionPopUp(mode: .hiddenAlbums, photosCount: itemsCount, delegate: delegate)
             
-        case .smashCompleted:
+        case .smashCompletedPremium, .smashCompletedStandart:
             if isDoNotShowAgainButtonPressed(for: state) {
                 return PopUpController.with(title: TextConstants.smashSuccessedSimpleAlertTitle,
                                             message: TextConstants.smashSuccessedSimpleAlertDescription,
@@ -49,7 +50,7 @@ final class HSCompletionPopUpsFactory {
                                             buttonTitle: TextConstants.ok)
                 
             } else {
-                return HSCompletionPopUp(mode: .smash, photosCount: itemsCount, delegate: delegate)
+                return HSCompletionPopUp(mode: state == .smashCompletedStandart ? .smashStandart : .smashPremium, photosCount: itemsCount, delegate: delegate)
             }
         }
     }
@@ -61,7 +62,7 @@ final class HSCompletionPopUpsFactory {
         case .actionSheetHideCompleted:
             isDoNotShowAgainButtonPressed = storageVars.hiddenPhotoInPeopleAlbumPopUpCheckBox
             
-        case .smashCompleted:
+        case .smashCompletedPremium, .smashCompletedStandart:
             isDoNotShowAgainButtonPressed = storageVars.smashPhotoPopUpCheckBox
             
         case .hideAlbumsCompleted, .bottomBarHideCompleted:
