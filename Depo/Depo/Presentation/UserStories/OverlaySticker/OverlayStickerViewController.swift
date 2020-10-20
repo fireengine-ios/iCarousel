@@ -130,17 +130,18 @@ final class OverlayStickerViewController: UIViewController {
                 
                 switch result {
                 case .success(let remote):
-                    
-                    DispatchQueue.main.async {
-                        self.close { [weak self] in
-                            guard let remote = remote else {
-                                return
+                    self.smashActionService?.getUserInfo { [weak self] in
+                        DispatchQueue.main.async { [weak self] in
+                            self?.close { [weak self] in
+                                guard let remote = remote else {
+                                    return
+                                }
+                                self?.showPhotoVideoPreview(item: remote)
+                                self?.analyticsService.logScreen(screen: .smashPreview)
                             }
-                            self?.showPhotoVideoPreview(item: remote)
-                            self?.analyticsService.logScreen(screen: .smashPreview)
                         }
                     }
-                    
+
                 case .failed(let error):
                     if let error = error as? CreateOverlayStickerError, error == .deniedPhotoAccess {
                         self.showAccessAlert()
