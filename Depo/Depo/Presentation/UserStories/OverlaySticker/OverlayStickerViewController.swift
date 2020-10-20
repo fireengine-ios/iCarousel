@@ -130,9 +130,9 @@ final class OverlayStickerViewController: UIViewController {
                 
                 switch result {
                 case .success(let remote):
-                    self.smashActionService?.getUserInfo {
-                        DispatchQueue.main.async {
-                            self.close { [weak self] in
+                    self.smashActionService?.getUserInfo { [weak self] in
+                        DispatchQueue.main.async { [weak self] in
+                            self?.close { [weak self] in
                                 guard let remote = remote else {
                                     return
                                 }
