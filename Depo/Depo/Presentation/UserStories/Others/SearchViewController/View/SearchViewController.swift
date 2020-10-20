@@ -64,11 +64,6 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         configureTableView()
         subscribeToNotifications()
         configureNavigationBar()
-        
-        if let topBarVc = UIApplication.topController() as? TabBarViewController {
-            topBarVc.statusBarStyle = .default
-        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
