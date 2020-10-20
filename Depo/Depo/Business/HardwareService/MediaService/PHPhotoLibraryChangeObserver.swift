@@ -96,7 +96,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
         fetchResult = changes.fetchResultAfterChanges
 
         guard changes.hasIncrementalChanges else {
-//            processAssetAccessLevel(changes: changes)
+            processAssetAccessLevel(changes: changes)
             printLog("photoLibraryDidChange - no incremental changes")
             return
         }
@@ -259,7 +259,7 @@ extension LocalMediaStorage: PHPhotoLibraryChangeObserver {
     private func processAlbums(_ changes: PHFetchResultChangeDetails<PHAssetCollection>) {
         guard changes.hasIncrementalChanges else {
             debugLog("PHCOLLECTIONS no IncrementalChanges")
-//            processAssetAlbumsAccessLevel(changes: changes)
+            processAssetAlbumsAccessLevel(changes: changes)
             return
         }
         
