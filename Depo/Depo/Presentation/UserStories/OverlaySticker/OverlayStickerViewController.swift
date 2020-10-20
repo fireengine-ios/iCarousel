@@ -204,6 +204,7 @@ final class OverlayStickerViewController: UIViewController {
     private func makeTopAndBottomBarsIsHidden(hide: Bool) {
         funNavBar.isHidden = hide
         bottomContentView.isHidden = hide
+        safeAreaBottomView.isHidden = hide
     }
     
     @objc private func actionFullscreenTapGesture() {
