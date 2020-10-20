@@ -47,10 +47,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @IBOutlet weak var mainContentView: UIView!
     
-    @IBOutlet weak var bottomBGView: UIView!
-    
-    @IBOutlet weak var statusBarBG: UIImageView!
-    
     @IBOutlet weak var plusButtonHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var musicBarHeightConstraint: NSLayoutConstraint!
@@ -59,10 +55,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @IBOutlet weak var musicBar: MusicBar!
     
-    @IBOutlet weak var topConstraint: NSLayoutConstraint!
-    
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    
     static let notificationHidePlusTabBar = "HideMainTabBarPlusNotification"
     static let notificationShowPlusTabBar = "ShowMainTabBarPlusNotification"
     static let notificationHideTabBar = "HideMainTabBarNotification"
@@ -70,8 +62,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     static let notificationMusicDrop = "MusicDrop"
     static let notificationPhotosScreen = "PhotosScreenOn"
     static let notificationVideoScreen = "VideoScreenOn"
-    static let notificationFullScreenOn = "FullScreenOn"
-    static let notificationFullScreenOff = "FullScreenOff"
     static let notificationUpdateThreeDots = "UpdateThreeDots"
     
     fileprivate var photoBtn: SubPlussButtonView!
@@ -225,16 +215,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                                                selector: #selector(showVideosScreen),
                                                name: NSNotification.Name(rawValue: TabBarViewController.notificationVideoScreen),
                                                object: nil)
-        
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(fullScreenOn),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationFullScreenOn),
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(fullScreenOff),
-                                               name: NSNotification.Name(rawValue: TabBarViewController.notificationFullScreenOff),
-                                               object: nil)
-        
     }
     
     func showAndScrollPhotosScreen(scrollTo item: Item? = nil) {
@@ -326,28 +306,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         }
     }
     
-    @objc func fullScreenOn() {
-        if topConstraint.constant >= 0 {
-            topConstraint.constant = -statusBarBG.frame.size.height
-            bottomConstraint.constant = bottomBGView.frame.size.height
-            debugLog("TabBarVC fullScreenOn about to layout")
-            view.layoutSubviews()
-        }
-    }
-    
-    @objc func fullScreenOff() {
-        if topConstraint.constant != 0 {
-            topConstraint.constant = 0
-            bottomConstraint.constant = 0
-            debugLog("TabBarVC fullScreenOff about to layout")
-            view.layoutSubviews()
-        }
-    }
-    
     @objc private func showTabBar(_ sender: Any) {
         changeTabBarStatus(hidden: false)
-        if (self.bottomTabBarConstraint.constant < 0) {
-            bottomBGView.isHidden = false
+        if self.bottomTabBarConstraint.constant < 0 {
             if !musicBar.isHidden {
                 musicBar.alpha = 1
                 musicBar.isUserInteractionEnabled = true
@@ -368,8 +329,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @objc private func hideTabBar(_ sender: Any) {
         changeTabBarStatus(hidden: true)
-        if (bottomTabBarConstraint.constant >= 0) {
-            let bottomConstraintConstant = -self.tabBar.frame.height
+        if bottomTabBarConstraint.constant >= 0 {
+            let bottomConstraintConstant = -tabBar.frame.height - view.safeAreaInsets.bottom
             UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
                 self.bottomTabBarConstraint.constant = bottomConstraintConstant
                 self.musicBarHeightConstraint.constant = 0
@@ -377,7 +338,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 self.view.layoutIfNeeded()
             }, completion: { _ in
                 self.tabBar.isHidden = true
-                self.bottomBGView.isHidden = true
             })
         }
     }
