@@ -40,6 +40,7 @@ protocol DivorceActionRoutingProtocol {
     
     func startOperation()
     func showSuccessPopUp()
+    func getUserInfo(completion: @escaping VoidHandler)
 }
 
 class CommonDivorceActionService {
@@ -101,6 +102,23 @@ extension CommonDivorceActionService: DivorceActionPopUpPresentProtocol {
         case .smashCompletedPremium, .smashCompletedStandart:
             return true
         }
+    }
+    
+    func getUserInfo(completion: @escaping VoidHandler) {
+        let group = DispatchGroup()
+        let requiredPreparations = [getPermissions, getFaceImageGroupingStatus]
+        
+        requiredPreparations.forEach {
+            group.enter()
+            $0()
+        }
+        
+        group.notify(queue: DispatchQueue.main) { [weak self] in
+            self?.group = nil
+            completion()
+        }
+        
+        self.group = group
     }
 }
 
@@ -283,20 +301,9 @@ private extension CommonDivorceActionService {
 //MARK: - On people album tap processing
 private extension CommonDivorceActionService {
     func preparePeopleAlbumOpenning() {
-        let group = DispatchGroup()
-        let requiredPreparations = [getPermissions, getFaceImageGroupingStatus]
-        
-        requiredPreparations.forEach {
-            group.enter()
-            $0()
-        }
-        
-        group.notify(queue: DispatchQueue.main) { [weak self] in
-            self?.group = nil
+        getUserInfo { [weak self] in
             self?.didObtainPeopleAlbumInfo()
         }
-        
-        self.group = group
     }
     
     func didObtainPeopleAlbumInfo() {
