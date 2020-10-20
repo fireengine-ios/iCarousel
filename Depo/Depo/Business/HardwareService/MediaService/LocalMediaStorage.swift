@@ -1417,17 +1417,31 @@ class GetImageOperation: Operation {
 class GetOriginalImageOperation: Operation {
     
     let photoManager: PHImageManager
-    
     let callback: PhotoManagerOriginalCallBack
-    
     let asset: PHAsset
+    
+    private let semaphore = DispatchSemaphore(value: 0)
+    private var requestId: PHImageRequestID?
+    
     
     init(photoManager: PHImageManager, asset: PHAsset, callback: @escaping PhotoManagerOriginalCallBack) {
         
         self.photoManager = photoManager
         self.callback = callback
         self.asset = asset
+        
         super.init()
+    }
+    
+    override func cancel() {
+        super.cancel()
+        
+        guard let requestId = requestId else {
+            return
+        }
+        
+        photoManager.cancelImageRequest(requestId)
+        semaphore.signal()
     }
     
     override func main() {
@@ -1435,6 +1449,7 @@ class GetOriginalImageOperation: Operation {
             callback(nil, nil, .down, nil)
             return
         }
+        
         if isCancelled {
             return
         }
@@ -1442,36 +1457,42 @@ class GetOriginalImageOperation: Operation {
         let options = PHImageRequestOptions()
         options.version = .current
         options.deliveryMode = .highQualityFormat
-//        options.isSynchronous = true
         
-        photoManager.requestImageData(for: asset, options: options, resultHandler: { [weak self] data, string, orientation, dict in
+        requestId = photoManager.requestImageData(for: asset, options: options, resultHandler: { [weak self] data, string, orientation, dict in
             if data == nil, let error = dict?[PHImageErrorKey] as? Error {
                 Crashlytics.crashlytics().record(error: error)
                 debugLog("GetOriginalImageOperation: PHImageManager requestImageData no data error \(error.description)")
             }
+            guard let self = self else {
+                return
+            }
             
-            guard let self = self, !self.isCancelled else {
+            guard !self.isCancelled else {
+                self.semaphore.signal()
                 return
             }
             
             self.callback(data, string, orientation, dict)
+            self.semaphore.signal()
         })
+        
+        semaphore.wait()
     }
 }
 
 class GetOriginalVideoOperation: Operation {
     
     let photoManager: PHImageManager
-    
     let callback: PhotoManagerOriginalVideoCallBack
-    
     let asset: PHAsset
+    
     
     init(photoManager: PHImageManager, asset: PHAsset, callback: @escaping PhotoManagerOriginalVideoCallBack) {
         
         self.photoManager = photoManager
         self.callback = callback
         self.asset = asset
+        
         super.init()
     }
     
