@@ -485,7 +485,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             subButton.translatesAutoresizingMaskIntoConstraints = false
             
             subButton.bottomConstraint = NSLayoutConstraint(item: subButton, attribute: .bottom, relatedBy: .equal, toItem: mainContentView, attribute: .bottom, multiplier: 1, constant: 0)
-            subButton.bottomConstraintOriginalConstant = 0
+            subButton.bottomConstraintOriginalConstant = -(UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
             
             subButton.centerXConstraint = NSLayoutConstraint(item: subButton, attribute: .centerX, relatedBy: .equal, toItem: mainContentView, attribute: .centerX, multiplier: 1, constant: 0)
             subButton.centerXConstraintOriginalConstant = 0
@@ -549,7 +549,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         return buttonsArray
     }
     
-    static let bottomSpace: CGFloat = 7
+    static let bottomSpace: CGFloat = 7 + (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
     static let spaceBeetwenbuttons: CGFloat = 3
     
     private func showButtonRainbow() {

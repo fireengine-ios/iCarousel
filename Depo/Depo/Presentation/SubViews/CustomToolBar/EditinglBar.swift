@@ -144,8 +144,9 @@ class EditinglBar: CustomTabBar {
                 sourceView.bringSubview(toFront: self)
                 let sourceViewSize = sourceView.frame.size
                 self.frame = CGRect(x: self.originalX, y: sourceViewSize.height - self.originalY, width: sourceViewSize.width, height: self.tabBarHeight)
+                let newY = sourceViewSize.height - self.tabBarHeight - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
                 if withAnimation {
-                    self.animateAppearance(with: sourceViewSize.height - self.tabBarHeight, completionBlock: { [weak self] in
+                    self.animateAppearance(with: newY, completionBlock: { [weak self] in
                         guard let `self` = self else {
                             return
                         }
@@ -153,7 +154,7 @@ class EditinglBar: CustomTabBar {
                         self.nextAnimation()
                     })
                 } else {
-                    self.frame.origin = CGPoint(x: 0, y: sourceViewSize.height - self.tabBarHeight)
+                    self.frame.origin = CGPoint(x: 0, y: newY)
                     self.nextAnimation()
                 }
             } else {
