@@ -661,6 +661,19 @@ class WrapData: BaseDataSourceItem, Wrappered {
                 return mimeType(from: type) ?? "video/\(type)"
             }
             return "video/mp4"
+            
+        case .audio:
+            if let type = urlToFile?.mimeType {
+                return "audio/\(type)"
+            }
+            return "audio/mp3"
+            
+            case .application(_), .allDocs:
+            if let type = urlToFile?.mimeType {
+                return type
+            }
+            return "application/octet-stream"
+            
         default:
             return "unknown"
         }
@@ -1107,6 +1120,26 @@ class WrapData: BaseDataSourceItem, Wrappered {
         if let isVideoSlideshow = mediaItem.metadata?.isVideoSlideshow {
             metaData?.isVideoSlideshow = isVideoSlideshow
         }
+    }
+    
+    init(importedDocumentURL: URL) {
+        
+        let fileManager = FileManager.default
+
+        fileSize = fileManager.fileSize(at: importedDocumentURL) ?? 0
+        let creationDate = fileManager.creationDate(at: importedDocumentURL) ?? Date()
+        
+        favorites = false
+        patchToPreview = .remoteUrl(nil)
+        status = .unknown
+        tmpDownloadUrl = importedDocumentURL
+        localFileUrl = importedDocumentURL
+        
+        let fileName = importedDocumentURL.lastPathComponent
+        let fileType = FileType(type: fileManager.fileType(at: importedDocumentURL), fileName: fileName)
+        super.init(uuid: nil, name: fileName, creationDate: creationDate, lastModifiDate: creationDate, fileType: fileType, syncStatus: .notSynced, isLocalItem: true)
+        
+        md5 = "\(fileName)\(fileSize)"
     }
     
     func copyFileData(from item: WrapData) {

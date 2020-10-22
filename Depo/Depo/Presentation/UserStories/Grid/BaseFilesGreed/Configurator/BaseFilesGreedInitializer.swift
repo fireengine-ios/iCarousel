@@ -50,7 +50,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeDocumentsViewController(with nibName: String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto])
+        viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles])
         viewController.scrollablePopUpView.isEnable = false
         viewController.segmentImage = .documents
         

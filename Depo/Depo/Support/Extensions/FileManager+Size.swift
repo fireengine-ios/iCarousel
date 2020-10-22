@@ -11,6 +11,16 @@ import Foundation
 extension FileManager {
     func fileSize(at url: URL) -> Int64? {
         let attributes = try? FileManager.default.attributesOfItem(atPath: url.path)
-        return attributes?[FileAttributeKey.size] as? Int64
+        return attributes?[.size] as? Int64
+    }
+    
+    func creationDate(at url: URL) -> Date? {
+        let attributes = try? FileManager.default.attributesOfItem(atPath: url.path)
+        return attributes?[.creationDate] as? Date
+    }
+    
+    func fileType(at url: URL) -> String? {
+        let attributes = try? FileManager.default.attributesOfItem(atPath: url.path)
+        return attributes?[.type] as? String
     }
 }

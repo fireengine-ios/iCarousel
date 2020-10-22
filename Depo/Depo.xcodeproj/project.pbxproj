@@ -5858,6 +5858,12 @@
 		B52BAC6923AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */; };
 		B52BAC6A23AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */; };
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
+		B5307047254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */; };
+		B5307048254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */; };
+		B5307049254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */; };
+		B530704A254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */; };
+		B530704B254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */; };
+		B530704C254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */; };
 		B5315096246D868E00E94355 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5315095246D868D00E94355 /* GoogleService-Info-debug.plist */; };
 		B5315097246D868E00E94355 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5315095246D868D00E94355 /* GoogleService-Info-debug.plist */; };
 		B5315098246D868E00E94355 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5315095246D868D00E94355 /* GoogleService-Info-debug.plist */; };
@@ -13988,6 +13994,7 @@
 		B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Compatible.swift"; sourceTree = "<group>"; };
 		B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Resource.swift"; sourceTree = "<group>"; };
 		B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncOperation.swift; sourceTree = "<group>"; };
+		B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalFileUploadService.swift; sourceTree = "<group>"; };
 		B5315095246D868D00E94355 /* GoogleService-Info-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-debug.plist"; sourceTree = "<group>"; };
 		B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetPresentationService.swift; sourceTree = "<group>"; };
 		B5390D81216605F600A02002 /* CellImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellImageManager.swift; sourceTree = "<group>"; };
@@ -17659,6 +17666,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				B53070422540688A000EA9F4 /* FileUpload */,
 				B549B6C924CF098200D39C44 /* PhotoEdit */,
 				17FBD51723FB2C3200979F39 /* DivorceActionService */,
 				7378052223AB9E22001D57BD /* OverlayStickerService */,
@@ -20404,6 +20412,14 @@
 				B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */,
 			);
 			path = NSManagedObjectModel;
+			sourceTree = "<group>";
+		};
+		B53070422540688A000EA9F4 /* FileUpload */ = {
+			isa = PBXGroup;
+			children = (
+				B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */,
+			);
+			path = FileUpload;
 			sourceTree = "<group>";
 		};
 		B5358C6725011A910005FCAD /* Services */ = {
@@ -27874,6 +27890,7 @@
 				0303A04A2397D0D000907F42 /* UIEdgeInsets+Extensions.swift in Sources */,
 				0303A04B2397D0D000907F42 /* MD5.swift in Sources */,
 				0303A04C2397D0D000907F42 /* BottomSelectionMusicTabBarRouter.swift in Sources */,
+				B530704A254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */,
 				0303A04D2397D0D000907F42 /* FaceImageItemsInteractorOutput.swift in Sources */,
 				0303A04E2397D0D000907F42 /* ActivityTimelineTimeCell.swift in Sources */,
 				0303A04F2397D0D000907F42 /* NSLayoutConstraint+Extensions.swift in Sources */,
@@ -29783,6 +29800,7 @@
 				982319ED24F3A1E700FD16E2 /* PhotoEditTabbar.swift in Sources */,
 				CEEFB8DC2361C64800200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */,
 				73FE51FD22CF5EC300270448 /* CreateStoryAudioItemCell.swift in Sources */,
+				B5307048254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */,
 				FA33A7E3209451B1008F946C /* NavigationBarStyle.swift in Sources */,
 				C62239AE204973300043ED44 /* FaceImageChangeCoverRouterInput.swift in Sources */,
 				B5ECA57025063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
@@ -32791,6 +32809,7 @@
 				2BA37C322028376500660394 /* FaceImageChangeCoverRouterInput.swift in Sources */,
 				986DD49A25388F3400C38AD4 /* ContactDevice.m in Sources */,
 				CE4CFEBF1F78F18700FB4C3D /* ResizableTableView.swift in Sources */,
+				B5307047254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */,
 				B51205C92305350D007EB951 /* AppendLocalsOperation.swift in Sources */,
 				591DE1155E5210C187678E0B /* UploadFilesSelectionInteractor.swift in Sources */,
 				CEDFDF0F1FBEE616006BFCAE /* FirstResponder.swift in Sources */,
@@ -33209,6 +33228,7 @@
 				CE78483E22A685FB00662219 /* ValidationService.swift in Sources */,
 				98732B432460168900E9D5D2 /* ElementTypes.swift in Sources */,
 				897B8F3B2338B7400028C690 /* HomePagePopUpsService.swift in Sources */,
+				B530704B254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */,
 				CE78483F22A685FB00662219 /* FaceImageDisplayManager.swift in Sources */,
 				CE78484022A685FB00662219 /* MyStorageViewController.swift in Sources */,
 				98C298412302AD1100C9811E /* BlurBackgroundPopup.swift in Sources */,
@@ -35221,6 +35241,7 @@
 				CF8B657123CBC9D70021B021 /* InstapickAnalysisCell.swift in Sources */,
 				CF8B657223CBC9D70021B021 /* FaceImageAddNameRouter.swift in Sources */,
 				CF8B657323CBC9D70021B021 /* AudioSelectionCollectionViewCell.swift in Sources */,
+				B5307049254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */,
 				CF8B657423CBC9D70021B021 /* TermsAndServicesPresenter.swift in Sources */,
 				CF8B657523CBC9D70021B021 /* YearsView.swift in Sources */,
 				CF8B657623CBC9D70021B021 /* SuggestionTableViewCell.swift in Sources */,
@@ -36221,6 +36242,7 @@
 				CF8B6B8823CBCA280021B021 /* SpotifyService.swift in Sources */,
 				98732B442460168900E9D5D2 /* ElementTypes.swift in Sources */,
 				CF8B6B8923CBCA280021B021 /* ValidationService.swift in Sources */,
+				B530704C254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */,
 				CF8B6B8A23CBCA280021B021 /* HomePagePopUpsService.swift in Sources */,
 				CF8B6B8B23CBCA280021B021 /* FaceImageDisplayManager.swift in Sources */,
 				CF8B6B8C23CBCA280021B021 /* MyStorageViewController.swift in Sources */,

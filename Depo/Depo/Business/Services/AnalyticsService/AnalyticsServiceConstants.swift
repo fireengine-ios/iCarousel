@@ -1488,7 +1488,8 @@ enum GAEventLabel {
                 return "Create Story"
             case .takePhoto:
                 return "Use Camera"
-            case .upload:
+             //FIXME: separate uploadFiles
+            case .upload, .uploadFiles:
                 return "Upload"
             case .uploadFromApp:
                 return "Upload from \(TextConstants.NotLocalized.appName)"

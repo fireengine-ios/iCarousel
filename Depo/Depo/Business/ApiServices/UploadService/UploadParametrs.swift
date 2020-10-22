@@ -40,6 +40,8 @@ class SimpleUpload: UploadRequestParametrs {
     lazy var urlToLocalFile: URL? = {
         if let asset = self.item.asset {
             return LocalMediaStorage.default.copyAssetToDocument(asset: asset)
+        } else if let localUrl = item.localFileUrl {
+            return localUrl
         }
         
         return nil
