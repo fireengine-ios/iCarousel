@@ -125,11 +125,7 @@ final class PushNotificationService {
             clear()
         case .search: openSearch()
         case .freeUpSpace, .widgetFreeUpSpace:
-            if FreeAppSpace.session.state == .finished && CacheManager.shared.isCacheActualized {
-                openFreeUpSpace()
-            } else {
-                openMain()
-            }
+            openMain()
         case .settings: openSettings()
         case .profileEdit: openProfileEdit()
         case .changePassword: openChangePassword()
