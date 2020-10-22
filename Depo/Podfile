@@ -2,6 +2,8 @@ platform :ios, '11.0'
 use_frameworks!
 inhibit_all_warnings!
 ENV['COCOAPODS_DISABLE_STATS'] = "true"
+ENV['SWIFT_VERSION'] = '5'
+
 
 def shared_pods
   pod 'Alamofire', '~> 4.8.1'
@@ -84,6 +86,13 @@ def notification_pods
   pod 'iCarousel', '~> 1'
 end
 
+def widget_pods
+  shared_pods
+  pod 'SDWebImage', '~> 4'
+  pod 'MMWormhole', '~> 2.0.0'
+  pod 'XCGLogger', '~> 7'
+end
+
 target 'Depo_LifeTech' do
   core_pods
 end
@@ -100,9 +109,9 @@ target 'LifeTech-LifeboxFileProviderUI' do
   file_provider_ui_pods
 end
 
-#target 'LifeTech-autosync-widget' do
-#  autosync_widget_pods
-#end
+target 'LifeTech-LifeboxWidgetExtension' do
+  widget_pods
+end
 
 target "LifeTech-NotificationService" do
   notification_pods
@@ -126,6 +135,10 @@ end
 
 target 'LifeboxFileProviderUI' do
   file_provider_ui_pods
+end
+
+target 'LifeboxWidgetExtension' do
+  widget_pods
 end
 
 #target 'autosync-widget' do
@@ -164,6 +177,10 @@ end
 #  autosync_widget_pods
 #end
 
+target 'BilloWidgetExtension' do
+  widget_pods
+end
+
 target 'BilloNotificationService' do
   notification_pods
 end
@@ -187,6 +204,10 @@ end
 #target 'LifeTech_Billo-widget' do
 #  autosync_widget_pods
 #end
+
+target 'LifeTech_BilloWidgetExtension' do
+  widget_pods
+end
 
 target 'LifeTech_BilloNotificationService' do
   notification_pods

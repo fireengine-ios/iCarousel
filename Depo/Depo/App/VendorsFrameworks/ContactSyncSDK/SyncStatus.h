@@ -46,7 +46,7 @@ typedef NS_ENUM(NSUInteger, SYNCStep) {
 
 @property SYNCInfoStateType state;
 @property (strong) NSString *name;
-@property (strong) NSNumber *localId;
+@property (strong) NSString *localId;
 @property (strong) NSNumber *remoteId;
 
 - (instancetype)initWithContact:(Contact*)contact andState:(SYNCInfoStateType)state;

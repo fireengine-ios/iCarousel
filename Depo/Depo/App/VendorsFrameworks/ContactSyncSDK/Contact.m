@@ -13,66 +13,42 @@
 
 @implementation Contact
 
-/**
- * Use this constructor to convert address book records
- *
- * @param ref
- */
-- (instancetype)initWithRecordRef:(ABRecordRef)ref
-{
+- (instancetype)initWithCNContact:(CNContact *)cnContact {
     self = [super init];
-    if (self){
-        _recordRef = ref;
+    if (self) {
         
-        CFTypeRef cFirstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
-        CFTypeRef cMiddleName = ABRecordCopyValue(ref, kABPersonMiddleNameProperty);
-        CFTypeRef cLastName = ABRecordCopyValue(ref, kABPersonLastNameProperty);
-        CFTypeRef cNickName = ABRecordCopyValue(ref, kABPersonNicknameProperty);
-        CFTypeRef cCompany = ABRecordCopyValue(ref, kABPersonOrganizationProperty);
-//        CFTypeRef cModifDate = ABRecordCopyValue(ref, kABPersonModificationDateProperty);
+        NSString *cFirstName = cnContact.givenName;
+        NSString *cMiddleName = cnContact.middleName;
+        NSString *cLastName = cnContact.familyName;
+        NSString *cNickName = cnContact.nickname;
+        NSString *cCompany = cnContact.organizationName;
         
-        _objectId = [NSNumber numberWithInt:ABRecordGetRecordID(_recordRef)];
+        _objectIdentifier = cnContact.identifier;
         
-        if (cFirstName!=NULL){
-            _firstName=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cFirstName)];
+        if (!SYNC_IS_NULL(cFirstName)) {
+            _firstName=[NSString stringWithFormat:@"%@", cFirstName];
         }
-        if (cMiddleName!=NULL){
-            _middleName=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cMiddleName)];
+        if (!SYNC_IS_NULL(cMiddleName)){
+            _middleName=[NSString stringWithFormat:@"%@", cMiddleName];
         }
-        if (cLastName!=NULL){
-            _lastName=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cLastName)];
+        if (!SYNC_IS_NULL(cLastName)){
+            _lastName=[NSString stringWithFormat:@"%@", cLastName];
         }
-        if (cNickName!=NULL){
-            _nickName=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cNickName)];
+        if (!SYNC_IS_NULL(cNickName)){
+            _nickName=[NSString stringWithFormat:@"%@", cNickName];
         }
-        if (cCompany!=NULL){
-            _company=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cCompany)];
+        if (!SYNC_IS_NULL(cCompany)){
+            _company=[NSString stringWithFormat:@"%@", cCompany];
         }
-//        if (cModifDate!=NULL){
-//            cModifDate=nil;
-//            _localUpdateDate = SYNC_DATE_AS_NUMBER((NSDate *) CFBridgingRelease(cModifDate));
-//        }
-        _localUpdateDate = [NSNumber numberWithInt:0];
-        
-        ABRecordRef source = ABPersonCopySource(ref);
-        CFNumberRef cSourceType = ABRecordCopyValue(source, kABSourceTypeProperty);
-        NSNumber *sourceTypeRef = (NSNumber *) CFBridgingRelease(cSourceType);
-        int sourceType = [sourceTypeRef intValue];
-                                                        
-        if (sourceType == kABSourceTypeLocal || sourceType == kABSourceTypeCardDAV) {
-            _defaultAccount = true;
-        }
-        if (source != NULL) {
-            CFRelease(source);
-        }
-        
-        SYNC_Log(@"Source: %d Last Modified Date : %@ %@ %@", sourceType, _objectId, _localUpdateDate, _localUpdateDate);
+
+        SYNC_Log(@"Identifier: %@", _objectIdentifier);
         
         _devices = [NSMutableArray new];
         _addresses = [NSMutableArray new];
     }
     return self;
 }
+
 /**
  * Use this constructor to convert remote records
  *
@@ -83,7 +59,7 @@
     self = [super init];
     if (self){
         if(!SYNC_IS_NULL(json[@"localId"])){
-            _objectId = json[@"localId"];
+            _objectIdentifier = json[@"localId"];
         }
         _remoteId = json[@"id"];
         _firstName = json[@"firstname"];
@@ -132,7 +108,7 @@
 - (instancetype)initWithCopy:(NSDictionary*)json
 {
     if (self = [super init]){
-        _objectId = [json[@"localId"] copy];
+        _objectIdentifier = [json[@"localId"] copy];
         _remoteId = [json[@"id"] copy];
         _firstName = [json[@"firstname"] copy];
         _middleName = [json[@"middlename"] copy];
@@ -165,7 +141,7 @@
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.lastName, @"lastname");
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.company, @"company");
     if(isNewContact)
-        SYNC_SET_DICT_IF_NOT_NIL(dict, self.objectId, @"localId");
+        SYNC_SET_DICT_IF_NOT_NIL(dict, self.objectIdentifier, @"localId");
     
     NSMutableArray *array = [NSMutableArray new];
     for (ContactDevice *device in _devices){
@@ -428,7 +404,7 @@
 
 -(void)deepCopy:(Contact *)contact
 {
-    _objectId = contact.objectId;
+    _objectIdentifier = contact.objectIdentifier;
     _remoteId = contact.remoteId;
     _firstName = contact.firstName;
     _middleName = contact.middleName;
@@ -475,7 +451,7 @@
 - (id)copyWithZone:(NSZone *)zone {
 
     NSDictionary *data = [[NSDictionary alloc] initWithObjectsAndKeys:
-                          _objectId ?: [NSNull null], @"localId",
+                          _objectIdentifier ?: [NSNull null], @"localId",
                           _remoteId ?: [NSNull null], @"id",
                           _firstName ?: [NSNull null], @"firstname",
                           _middleName ?: [NSNull null], @"middlename",
@@ -491,7 +467,6 @@
                           nil];
 
     Contact *contact = [self initWithCopy:data];
-    contact.recordRef = _recordRef;
 
     return contact;
 }

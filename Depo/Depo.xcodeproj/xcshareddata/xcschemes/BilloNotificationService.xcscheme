@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1010"
-   wasCreatedForAppExtension = "YES"
+   LastUpgradeVersion = "1200"
    version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8C3BA2BC22B3CC32006D901E"
-               BuildableName = "Billo-widget.appex"
-               BlueprintName = "Billo-widget"
+               BlueprintIdentifier = "984B1EDD23685FC8009ACCFF"
+               BuildableName = "BilloNotificationService.appex"
+               BlueprintName = "BilloNotificationService"
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -35,6 +34,20 @@
                ReferencedContainer = "container:Depo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CF8B6B3023CBCA280021B021"
+               BuildableName = "Billo_Bundle.app"
+               BlueprintName = "Billo_Bundle"
+               ReferencedContainer = "container:Depo.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -42,15 +55,6 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C3BA2BC22B3CC32006D901E"
-            BuildableName = "Billo-widget.appex"
-            BlueprintName = "Billo-widget"
-            ReferencedContainer = "container:Depo.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <Testables>
       </Testables>
    </TestAction>
@@ -66,16 +70,6 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE7847EC22A685FB00662219"
-            BuildableName = "Billo.app"
-            BlueprintName = "Billo"
-            ReferencedContainer = "container:Depo.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -84,16 +78,15 @@
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CE7847EC22A685FB00662219"
-            BuildableName = "Billo.app"
-            BlueprintName = "Billo"
+            BlueprintIdentifier = "984B1EDD23685FC8009ACCFF"
+            BuildableName = "BilloNotificationService.appex"
+            BlueprintName = "BilloNotificationService"
             ReferencedContainer = "container:Depo.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -25,6 +25,7 @@ final class NetmeraCustomUser: NetmeraUser {
     @objc var turkcellPassword = ""
     @objc var buildNumber = ""
     @objc var countryCode = ""
+    @objc var regionCode = ""
     @objc var isUserName: Int = 0
     @objc var isUserSurname: Int = 0
     @objc var isEmail: Int = 0
@@ -38,7 +39,7 @@ final class NetmeraCustomUser: NetmeraUser {
                      autosync: NetmeraEventValues.OnOffSettings, emailVerification: NetmeraEventValues.OnOffSettings,
                      autosyncPhotos: NetmeraEventValues.AutoSyncState, autosyncVideos: NetmeraEventValues.AutoSyncState,
                      packages: [String], autoLogin: NetmeraEventValues.OnOffSettings,
-                     turkcellPassword: NetmeraEventValues.OnOffSettings, buildNumber: String, countryCode: String,
+                     turkcellPassword: NetmeraEventValues.OnOffSettings, buildNumber: String, countryCode: String, regionCode: String,
                      isUserName: Int, isUserSurname: Int, isEmail: Int, isPhoneNumber: Int, isAddress: Int,
                      isBirthDay: Int) {
         self.init()
@@ -57,6 +58,7 @@ final class NetmeraCustomUser: NetmeraUser {
         self.turkcellPassword = turkcellPassword.text
         self.buildNumber = buildNumber
         self.countryCode = countryCode
+        self.regionCode = regionCode
         self.isUserName = isUserName
         self.isUserSurname = isUserSurname
         self.isEmail = isEmail
@@ -73,10 +75,10 @@ final class NetmeraCustomUser: NetmeraUser {
                      autosyncPhotos: String, autosyncVideos: String,
                      packages: [String], autoLogin: String,
                      turkcellPassword: String, buildNumber: String,
-                     countryCode: String, isUserName: Int,
-                     isUserSurname: Int, isEmail: Int,
-                     isPhoneNumber: Int, isAddress: Int,
-                     isBirthDay: Int) {
+                     countryCode: String, regionCode: String,
+                     isUserName: Int, isUserSurname: Int,
+                     isEmail: Int, isPhoneNumber: Int,
+                     isAddress: Int, isBirthDay: Int) {
         self.init()
         self.deviceStorage = deviceStorage
         self.photopickLeftAnalysis = photopickLeftAnalysis
@@ -93,6 +95,7 @@ final class NetmeraCustomUser: NetmeraUser {
         self.turkcellPassword = turkcellPassword
         self.buildNumber = buildNumber
         self.countryCode = countryCode
+        self.regionCode = regionCode
         self.isUserName = isUserName
         self.isUserSurname = isUserSurname
         self.isEmail = isEmail
@@ -117,6 +120,7 @@ final class NetmeraCustomUser: NetmeraUser {
             "pce" : #keyPath(autosyncVideos),
             "pdf" : #keyPath(turkcellPassword),
             "pdi" : #keyPath(countryCode),
+            "zh"  : #keyPath(regionCode),
             "pca" : #keyPath(buildNumber),
             "ped" : #keyPath(isUserName),
             "pec" : #keyPath(isUserSurname),

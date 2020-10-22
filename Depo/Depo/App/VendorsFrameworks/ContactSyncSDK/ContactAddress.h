@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "SyncConstants.h"
+#import <Contacts/CNMutablePostalAddress.h>
+#import <Contacts/CNLabeledValue.h>
 
 typedef NS_ENUM(NSUInteger, SYNCAddressType) {
     CADDRESS_HOME,
@@ -23,25 +25,21 @@ typedef NS_ENUM(NSUInteger, SYNCAddressType) {
 @property (strong) NSString *district;
 @property (strong) NSString *city;
 @property (strong) NSString *country;
-@property (strong) NSNumber *contactId;
+@property (strong) NSString *contactIdentifier;
 @property BOOL deleted;
 @property SYNCAddressType type;
 
-/**
- * Use this contructor to init with device contact data
- */
-- (instancetype)initWithValue:(NSString*)street postalCode:(NSString *)postalCode district:(NSString *)district city:(NSString *)city country:(NSString *)country andType:(NSString*)type contactId:(NSNumber*)contactId;
 /**
  * Use this contructor to init with remote contact data
  */
 - (instancetype)initWithDictionary:(NSDictionary*)json;
 
-- (instancetype)initWithRef:(NSDictionary*)dict type:(NSString*)type contactId:(NSNumber*)contactId;
+- (instancetype)initWithCNPostalAddress:(CNPostalAddress*)postalAddress type:(NSString*)type contactIdentifier:(NSString*)contactIdentifier;
 - (NSDictionary*) toJSON;
 
 + (ContactAddress*)createFromJSON:(NSDictionary*)json;
 
-- (CFStringRef)addressTypeLabel;
+- (NSString*)addressTypeLabel;
 - (NSString*)addressKey;
 - (NSString*)prettyAddress;
 - (NSString*)valueForCompare;

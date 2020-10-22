@@ -7,30 +7,8 @@
 //
 
 #import "ContactAddress.h"
-#import <AddressBook/ABPerson.h>
 
 @implementation ContactAddress
-
-- (instancetype)initWithValue:(NSString*)street postalCode:(NSString *)postalCode district:(NSString *)district city:(NSString *)city country:(NSString *)country andType:(NSString*)type contactId:(NSNumber*)contactId
-{
-    self = [super init];
-    if (self){
-        self.street = street;
-        self.postalCode = postalCode;
-        self.district = district;
-        self.city = city;
-        self.country = country;
-        self.contactId = contactId;
-        if ([type isEqualToString:(__bridge NSString*)kABHomeLabel]){
-            self.type = CADDRESS_HOME;
-        } else if ([type isEqualToString:(__bridge NSString*)kABWorkLabel]){
-            self.type = CADDRESS_WORK;
-        } else {
-            self.type = CADDRESS_OTHER;
-        }
-    }
-    return self;
-}
 
 - (instancetype)initWithDictionary:(NSDictionary*)json
 {
@@ -61,20 +39,20 @@
     return self;
 }
 
-- (instancetype)initWithRef:(NSDictionary*)dict type:(NSString*)type contactId:(NSNumber*)contactId
+- (instancetype)initWithCNPostalAddress:(CNPostalAddress*)postalAddress type:(NSString*)type contactIdentifier:(NSString*)contactIdentifier
 {
     self = [super init];
     if (self){
-        self.street = [dict objectForKey:(__bridge NSString *)kABPersonAddressStreetKey];
-        self.postalCode = [dict objectForKey:(__bridge NSString *)kABPersonAddressZIPKey];
-        self.district = [dict objectForKey:(__bridge NSString *)kABPersonAddressStateKey];
-        self.city = [dict objectForKey:(__bridge NSString *)kABPersonAddressCityKey];
-        self.country = [dict objectForKey:(__bridge NSString *)kABPersonAddressCountryKey];
-        self.contactId = contactId;
+        self.street = [NSString stringWithFormat:@"%@", postalAddress.street];
+        self.postalCode = [NSString stringWithFormat:@"%@", postalAddress.postalCode];
+        self.district = [NSString stringWithFormat:@"%@", postalAddress.state];
+        self.city = [NSString stringWithFormat:@"%@", postalAddress.city];
+        self.country = [NSString stringWithFormat:@"%@", postalAddress.country];
+        self.contactIdentifier = contactIdentifier;
         if (type != nil){
-            if([type isEqualToString:(__bridge NSString*)kABHomeLabel]){
+            if([type isEqualToString:CNLabelHome]){
                 self.type = CADDRESS_HOME;
-            }else if([type isEqualToString:(__bridge NSString*)kABWorkLabel]){
+            }else if([type isEqualToString:CNLabelWork]){
                 self.type = CADDRESS_WORK;
             }else{
                 self.type = CADDRESS_OTHER;
@@ -96,15 +74,15 @@
     return value;
 }
 
-- (CFStringRef)addressTypeLabel
+- (NSString*)addressTypeLabel
 {
     switch (_type) {
         case CADDRESS_HOME:
-            return kABHomeLabel;
+            return CNLabelHome;
         case CADDRESS_WORK:
-            return kABWorkLabel;
+            return CNLabelWork;
         default:
-            return kABOtherLabel;
+            return CNLabelOther;
     }
 }
 
@@ -197,7 +175,7 @@
     [copy setDistrict: self.district];
     [copy setCity: self.city];
     [copy setCountry: self.country];
-    [copy setContactId: self.contactId];
+    [copy setContactIdentifier: self.contactIdentifier];
     [copy setDeleted: self.deleted];
     [copy setType: self.type];
     return copy;

@@ -36,7 +36,7 @@ typedef NS_ENUM(NSUInteger, AnalyzeStep) {
 
 @property AnalyzeStateType state;
 @property (strong) NSString *name;
-@property (strong) NSNumber *localId;
+@property (strong) NSString *localId;
 
 - (instancetype)initWithContact:(Contact*)contact andState:(AnalyzeStateType)state;
 

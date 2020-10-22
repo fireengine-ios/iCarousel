@@ -17,19 +17,19 @@ apps = [
             //xcodeTarget: 'TC_Depo_LifeTech_Bundle',
             itcTeamId: '121548574',
         ]
-        ,
- [
-            name: 'Billo',// name will be the base filename of the app
-            versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
-            ictsContainerId: '966', // ICT Store
-            appleId: '1488914348',
-            prodTeamID: '729CGH4BJD',
-            itcTeamId: '118347642',
+,
+[
+           name: 'Billo',// name will be the base filename of the app
+           versionInfoPath: 'Depo/Lifedrive/LifeDrive-AppStore-Info.plist',
+          ictsContainerId: '966', // ICT Store
+           appleId: '1488914348',
+           prodTeamID: '729CGH4BJD',
+           itcTeamId: '118347642',
 	    //xcodeSchema: // Defaults to app name
-            //xcodeTarget: // Defaults to app name
-            //xcodeSchema: 'Billo_Bundle', 
-            //xcodeTarget: 'Billo_Bundle'  
-        ]
+           //xcodeTarget: // Defaults to app name
+           // xcodeSchema: 'Billo_Bundle', 
+           // xcodeTarget: 'Billo_Bundle'  
+       ]
 ]
 derivedDir = 'lifebox'
 
@@ -40,10 +40,10 @@ ictsDeployers = "EXT02D9926" // To enable, uncomment submitters in approval stag
 testFlightDeployers = "TCUSER" // To enable, uncomment submitters in approval stage code
 
 // Email notification
-devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;can.kucukakdag@turkcell.com.tr"
+devTeamEmails = "ozgur.oktay@consultant.turkcell.com.tr;can.kucukakdag@turkcell.com.tr;Aleksandr.Pestriakov@life.com.by"
 
 xcodeParams = [
-        xcodeApp: '11.6',
+        xcodeApp: '12.0',
         workspaceFile: 'Depo/Depo'
 ]
 
@@ -85,6 +85,13 @@ def readVersion = { app ->
 
     echo "Building app: ${app.name} version: ${app.version}"
 }
+
+// def testBuild = {
+// 	echo "!!!!test build"
+//     //sh "rm -f '${WORKSPACE}/${app.name}-logs/*'"
+// 	sh "xcodebuild -workspace "Depo.xcworkspace" -scheme "TC_Depo_LifeTech_Bundle""
+// 	echo "target ${app.xcodeTarget}"
+// }
 
 def runXcode = { app, flavorId ->
     def flavor = flavors[flavorId]
@@ -215,7 +222,7 @@ def deployToTestflight = { app ->
 
     sh """
         export FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD=${TESTFLIGHT_UPLOAD_PSW}
-        ~/.fastlane/bin/fastlane ${uploadCommand} ipa:"${ipaFile}" username:"${TESTFLIGHT_UPLOAD_USR}"
+        source ~/.bash_profile; fastlane ${uploadCommand} ipa:"${ipaFile}" username:"${TESTFLIGHT_UPLOAD_USR}"
     """
 }
 
@@ -257,8 +264,9 @@ pipeline {
 
                         // sh "gem install cocoapods-art --user-install"
                         // sh 'pod repo-art add CocoaPods "https://artifactory.turkcell.com.tr/artifactory/api/pods/CocoaPods"'
-                        sh "source ~/.bash_profile; cd Depo; pod update" // gem update cocoapods;// --repo-update occasionally
+                        sh "source ~/.bash_profile; cd Depo; pod install" // gem update cocoapods;// --repo-update occasionally
                         apps.each { app ->
+				// testBuild()
                             runXcode(app, 'test')
                             publishToArtifactory(app, 'test')
                         }
@@ -305,7 +313,7 @@ pipeline {
             }
             steps {
                 script {
-                    apps.each deployToIctStore
+                   // apps.each deployToIctStore
                 }
             }
 			post {
@@ -352,6 +360,7 @@ pipeline {
             steps {
                 script {
                     apps.each { app ->
+			// testBuild()
                         runXcode(app, 'prod')
                         publishToArtifactory(app, 'prod')
                     }

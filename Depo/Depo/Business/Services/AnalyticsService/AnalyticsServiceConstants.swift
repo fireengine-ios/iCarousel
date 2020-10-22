@@ -694,6 +694,7 @@ enum GAEventAction {
     case importFrom
     case print
     case uploadFile
+    case uploadProcess
     case story
     case freeUpSpace
     case faceRecognition
@@ -755,6 +756,9 @@ enum GAEventAction {
     case discardChanges
     case save
     case saveAsCopy
+    
+    case openWithWidget
+    case widgetOrder
 
     var text: String {
         switch self {
@@ -802,6 +806,8 @@ enum GAEventAction {
             return "Print"
         case .uploadFile:
             return "Upload File"
+        case .uploadProcess:
+            return "Upload Process"
         case .story:
             return "Story"
         case .freeUpSpace:
@@ -931,6 +937,10 @@ enum GAEventAction {
             return "Save"
         case .saveAsCopy:
             return "Save as copy"
+        case .openWithWidget:
+            return "Opened with Widget"
+        case .widgetOrder:
+            return "Widget Order"
         }
     }
 }
@@ -1348,6 +1358,8 @@ enum GAEventLabel {
     case instagram
     case facebook
     case photoEdit(PhotoEditEvent)
+    case widgetOrder(String)
+    case restart
     
     var text: String {
         switch self {
@@ -1565,6 +1577,10 @@ enum GAEventLabel {
             return "Facebook"
         case .photoEdit(let event):
             return event.text
+        case .widgetOrder(let orderName):
+            return orderName
+        case .restart:
+            return "Restart"
         }
     }
     

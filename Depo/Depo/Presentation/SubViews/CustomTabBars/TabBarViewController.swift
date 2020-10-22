@@ -134,9 +134,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             selectedViewController?.view.frame = contentView.bounds
             contentView.addSubview(selectedViewController!.view)
             selectedViewController?.didMove(toParentViewController: self)
-            if let navigationController = selectedViewController as? UINavigationController {
-                navigationController.popToRootViewController(animated: true)
-            }
+            popToRootCurrentNavigationController(animated: true)
         }
     }
     
@@ -280,6 +278,13 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         changeVisibleStatus(hidden: true)
         musicBarHeightConstraint.constant = 0
         mainContentView.layoutIfNeeded()
+    }
+    
+    func popToRootCurrentNavigationController(animated: Bool) {
+        guard let navigationController = selectedViewController as? UINavigationController else {
+            return
+        }
+        navigationController.popToRootViewController(animated: animated)
     }
     
     private func scrollPhotoPage(scrollTo item: Item) {

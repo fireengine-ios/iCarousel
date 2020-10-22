@@ -20,11 +20,11 @@
     NSMutableDictionary *nameMap = [NSMutableDictionary new];
     for (id contact in contactList) {
         if (contact != nil && SYNC_STRING_IS_NULL_OR_EMPTY([contact displayName])) {
-            SYNC_Log(@"Contact %@", [contact objectId]);
+            SYNC_Log(@"Contact %@", [contact objectIdentifier]);
 
             NSString *name = [contact nameForCompare];
             if ([nameMap objectForKey:name] != nil) {
-                SYNC_Log(@"Found name duplicate for : %@ %@", [[nameMap objectForKey:name][0] objectId], [contact objectId]);
+                SYNC_Log(@"Found name duplicate for : %@ %@", [[nameMap objectForKey:name][0] objectIdentifier], [contact objectIdentifier]);
                 [[nameMap objectForKey:name] addObject:contact];
             } else {
                 NSMutableArray *arr = [NSMutableArray new];
@@ -57,17 +57,17 @@
         if ([contacts count] > 1) {
             Contact *masterContact = [self getMasterContact:contacts];
             for (Contact *contact in contacts) {
-                if ([masterContact.objectId isEqualToNumber:contact.objectId]) {
+                if ([masterContact.objectIdentifier isEqualToString:contact.objectIdentifier]) {
                     continue;
                 }
                 if ([contact containsSameDevice:masterContact]) {
-                    SYNC_Log(@"Name and devices are equals. Contact: %@ Master: %@", contact.objectId, masterContact.objectId);
+                    SYNC_Log(@"Name and devices are equals. Contact: %@ Master: %@", contact.objectIdentifier, masterContact.objectIdentifier);
                     [self mergeDetail:masterContact contact:contact];
                 } else if ([secondMap objectForKey:contact.nameForCompare] != nil) {
-                    SYNC_Log(@"Name and devices are not equals. Adding to second check. Contact: %@ Master: %@", contact.objectId, masterContact.objectId);
+                    SYNC_Log(@"Name and devices are not equals. Adding to second check. Contact: %@ Master: %@", contact.objectIdentifier, masterContact.objectIdentifier);
                     [[secondMap objectForKey:contact.nameForCompare] addObject:contact];
                 } else {
-                    SYNC_Log(@"Name and devices are not equals. Creating second check. Contact: %@ Master: %@", contact.objectId, masterContact.objectId);
+                    SYNC_Log(@"Name and devices are not equals. Creating second check. Contact: %@ Master: %@", contact.objectIdentifier, masterContact.objectIdentifier);
                     NSMutableArray *arr = [NSMutableArray new];
                     [arr addObject:contact];
                     [secondMap setObject:arr forKey: [contact nameForCompare]];
@@ -75,7 +75,7 @@
             }
             [self addContact:finalList contact:masterContact];
         } else if ([contacts count] == 1) {
-            SYNC_Log(@"There is no duplicate for this contact. Contact: %@", [contacts[0] objectId]);
+            SYNC_Log(@"There is no duplicate for this contact. Contact: %@", [contacts[0] objectIdentifier]);
             [self addContact:finalList contact:contacts[0]];
         } else {
             SYNC_Log(@"Contact list is null");
@@ -155,9 +155,9 @@
 
         if (add) {
             ContactDevice *d = [device copy];
-            if ([device contactId] == nil || ![masterContact.objectId isEqualToNumber:[device contactId]]) {
+            if ([device contactIdentifier] == nil || ![masterContact.objectIdentifier isEqualToString:[device contactIdentifier]]) {
                 masterContact.dirty = true;
-                d.contactId = masterContact.objectId;
+                d.contactIdentifier = masterContact.objectIdentifier;
             }
             [devices addObject:d];
         }
@@ -186,9 +186,9 @@
 
         if (add) {
             ContactAddress *d = [address copy];
-            if ([address contactId] == nil || ![masterContact.objectId isEqualToNumber:[address contactId]]) {
+            if ([address contactIdentifier] == nil || ![masterContact.objectIdentifier isEqualToString:[address contactIdentifier]]) {
                 masterContact.dirty = true;
-                d.contactId = masterContact.objectId;
+                d.contactIdentifier = masterContact.objectIdentifier;
             }
             [addresses addObject:d];
         }

@@ -6,6 +6,8 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
+import WidgetKit
+
 enum DivorseItems {
     case items
     case albums
@@ -30,6 +32,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var hideActionService: HideActionServiceProtocol = HideActionService()
     private lazy var smashActionService: SmashActionServiceProtocol = SmashActionService()
+    private lazy var photoEditImageDownloader = PhotoEditImageDownloader()
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
@@ -227,7 +230,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        ImageDownloder().getImage(patch: originalUrl) { [weak self] image in
+        photoEditImageDownloader.download(url: originalUrl, attempts: 2) { [weak self] image in
             guard
                 let self = self,
                 let image = image
@@ -256,8 +259,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }
             
             let previewImage = UIImage(cgImage: imageReference, scale: image.scale, orientation: image.imageOrientation)
-            
+
             debugLog("PHOTOEDIT: is about to create the controller")
+
             let vc = PhotoEditViewController.with(originalImage: image.imageWithFixedOrientation, previewImage: previewImage.imageWithFixedOrientation, presented: completion) { [weak self] controller, completionType in
 
                 switch completionType {
@@ -325,10 +329,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                             SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditModifySnackbarMessage)
                                         }
                                     }
+                                    
                                     ImageDownloder.removeImageFromCache(url: updatedItem.tmpDownloadUrl, completion: {
                                         ImageDownloder.replaceImagesInCache(urls: urlsToReplace, images: newThumbnails, completion: closeScreen)
                                     })
-                                    
 
                                 case .failed(_):
                                     DispatchQueue.main.async {
@@ -1448,6 +1452,11 @@ extension MoreFilesActionsInteractor {
     private func deleteSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
         analyticsService.trackFileOperationGAEvent(operationType: .delete, items: items)
         fileService.delete(items: items, success: { [weak self] in
+            if #available(iOS 14.0, *) {
+                if !SyncServiceManager.shared.hasExecutingSync, CacheManager.shared.isCacheActualized {
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+            }
             self?.removeItemsFromPlayer(items: items)
             success()
         }, fail: fail)

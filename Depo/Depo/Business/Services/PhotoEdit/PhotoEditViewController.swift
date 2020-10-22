@@ -202,7 +202,6 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
                 guard let self = self else {
                     return
                 }
-            
                 self.finishedEditing?(self, .savedAs(image: image))
             }
         })
@@ -430,7 +429,6 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
             
         case .filterView(_):
             updateSourceImage()
-            
             if firstChanges == .none {
                 firstChanges = .filter
             }
@@ -464,6 +462,7 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
         }
         return sourceImage
     }
+
 }
 
 //MARK: - PreparedFiltersViewDelegate

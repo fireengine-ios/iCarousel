@@ -47,7 +47,7 @@ final class MediaItemsAlbumOperationService {
             case .denied:
                 completion()
             //TODO: uncomment for xcode 12
-            case .authorized://, .limited:
+            case .authorized, .limited:
                 self?.processLocalGallery(completion: completion)
             case .restricted, .notDetermined:
                 break

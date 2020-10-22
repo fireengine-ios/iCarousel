@@ -46,7 +46,7 @@ final class PushNotificationService {
         }
                 
         guard let notificationAction = PushNotificationAction(rawValue: actionString) else {
-            assertionFailure("unowned push type")
+            //assertionFailure("unowned push type")
             debugLog("PushNotificationService received deepLink with unowned type \(String(describing: actionString))")
             return false
         }
@@ -77,24 +77,31 @@ final class PushNotificationService {
             return
         }
         
+        trackIfNeeded(action: action)
+        
         let isLoggedIn = tokenStorage.accessToken != nil
         if !isLoggedIn && !action.isContained(in: [.supportFormLogin, .supportFormSignup]) {
             action = .login
         }
+        
+        if isLoggedIn && action.isContained(in: [.login, .widgetLogout]) {
+            clear()
+            return
+        }
                 
         switch action {
         case .main, .home: openMain()
-        case .syncSettings: openSyncSettings()
+        case .syncSettings, .widgetAutoSyncDisabled: openSyncSettings()
         case .floatingMenu: openFloatingMenu()
-        case .packages: openPackages()
-        case .photos: openPhotos()
+        case .packages, .widgetQuota: openPackages()
+        case .photos, .widgetSyncInProgress, .widgetUnsyncedFiles, .widgetFIRLess3People, .widgetFIRStandart: openPhotos()
         case .videos: openVideos()
         case .albums: openAlbums()
         case .stories: openStories()
         case .allFiles: openAllFiles()
         case .music: openMusic()
         case .documents: openDocuments()
-        case .contactSync: openContactSync()
+        case .contactSync, .widgetNoBackup, .widgetOldBackup: openContactSync()
         case .periodicContactSync: openPeriodicContactSync()
         case .favorites: openFavorites()
         case .createStory: openCreateStory()
@@ -108,16 +115,17 @@ final class PushNotificationService {
         case .faq: openFaq()
         case .passcode: openPasscode()
         case .loginSettings: openLoginSettings()
-        case .faceImageRecognition: openFaceImageRecognition()
-        case .people: openPeople()
+        case .faceImageRecognition, .widgetFIRDisabled: openFaceImageRecognition()
+        case .people, .widgetFIR: openPeople()
         case .things: openThings()
         case .places: openPlaces()
         case .http: openURL(notificationParameters)
-        case .login:
+        case .login, .widgetLogout:
             openLogin()
             clear()
         case .search: openSearch()
-        case .freeUpSpace: break
+        case .freeUpSpace, .widgetFreeUpSpace:
+            openMain()
         case .settings: openSettings()
         case .profileEdit: openProfileEdit()
         case .changePassword: openChangePassword()
@@ -162,8 +170,17 @@ final class PushNotificationService {
         }
         
         DispatchQueue.main.async {
-            if self.router.topNavigationController?.presentedViewController != nil {
-                self.router.pushOnPresentedView(viewController: controller)
+            if let navigationController = self.router.topNavigationController {
+                if navigationController.presentedViewController != nil {
+                    self.router.pushOnPresentedView(viewController: controller)
+                } else if let existController = navigationController.viewControllers.first(where: { type(of: $0) == type(of: controller) }) {
+                    if existController == navigationController.viewControllers.last {
+                        return
+                    }
+                    navigationController.popToViewController(existController, animated: false)
+                } else {
+                    self.router.pushViewController(viewController: controller)
+                }
             } else {
                 self.router.pushViewController(viewController: controller)
             }
@@ -200,12 +217,18 @@ final class PushNotificationService {
             case .photosScreenIndex:
                 tabBarVC.showPhotoScreen()
             }
+        } else {
+            tabBarVC.popToRootCurrentNavigationController(animated: true)
         }
     }
     
     //MARK: - Actions
     
     private func openLogin() {
+        if let navigationController = router.topNavigationController, navigationController.viewControllers.contains(where: { $0 is RegistrationViewController }) {
+            return
+        }
+        
         pushTo(router.loginScreen)
     }
     
@@ -431,5 +454,13 @@ final class PushNotificationService {
     private func openHiddenBin() {
         let controller = router.hiddenPhotosViewController()
         pushTo(controller)
+    }
+    
+    private func trackIfNeeded(action: PushNotificationAction) {
+        guard action.fromWidget else {
+            return
+        }
+        
+        analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .openWithWidget, eventLabel: .success)
     }
 }

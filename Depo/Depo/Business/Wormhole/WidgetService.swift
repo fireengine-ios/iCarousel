@@ -8,7 +8,7 @@
 
 import Foundation
 import MMWormhole
-
+import WidgetKit
 
 final class WidgetService {
     static let shared = WidgetService()
@@ -18,9 +18,29 @@ final class WidgetService {
     
     private lazy var defaults = UserDefaults(suiteName: SharedConstants.groupIdentifier)
     
+    init() {
+        syncAppFirstLaunchFlags()
+    }
+    
+    private func syncAppFirstLaunchFlags() {
+        //sync isAppFirstLaunch flag for first widget install
+        if isAppFirstLaunch == nil {
+            isAppFirstLaunch = mainAppResponsivenessDate == nil
+        }
+    }
+    
+    var isAppFirstLaunch: Bool? {
+        get { return defaults?.object(forKey: SharedConstants.isAppFirstLaunchKey) as? Bool }
+        set { defaults?.set(newValue, forKey: SharedConstants.isAppFirstLaunchKey) }
+    }
+    
+    var isPreparationFinished: Bool {
+        get { return defaults?.bool(forKey: SharedConstants.isPreparationFinished) ?? false }
+        set { defaults?.set(newValue, forKey: SharedConstants.isPreparationFinished)}
+    }
     
     var mainAppResponsivenessDate: Date? {
-        get { return defaults?.object(forKey: SharedConstants.mainAppSchemeResponsivenessDateKey) as? Date}
+        get { return defaults?.object(forKey: SharedConstants.mainAppSchemeResponsivenessDateKey) as? Date }
         set { defaults?.set(newValue, forKey: SharedConstants.mainAppSchemeResponsivenessDateKey)}
     }
     
@@ -34,17 +54,40 @@ final class WidgetService {
         set { defaults?.set(newValue, forKey: SharedConstants.finishedAutoSyncCountKey) }
     }
     
-    private (set) var lastSyncedDate: String {
-        get { return defaults?.string(forKey: SharedConstants.lastSyncDateKey) ?? "" }
-        set { defaults?.set(newValue, forKey: SharedConstants.lastSyncDateKey) }
+    private (set) var lastSyncedDate: Date? {
+        get {
+            if let timeinterval = defaults?.double(forKey: SharedConstants.lastSyncDateKey) {
+                return Date(timeIntervalSince1970: timeinterval)
+            }
+            return nil
+        }
+        set { defaults?.set(newValue?.timeIntervalSince1970, forKey: SharedConstants.lastSyncDateKey) }
     }
     
-    private (set) var syncStatus: AutoSyncStatus {
+    private (set) var currentSyncFileName: String {
+        get { return defaults?.string(forKey: SharedConstants.currentSyncFileNameKey) ?? "" }
+        set { defaults?.set(newValue, forKey: SharedConstants.currentSyncFileNameKey) }
+    }
+    
+    private (set) var widgetShownSyncStatus: WidgetSyncStatus {
+        get {
+            let statusValue = defaults?.string(forKey: SharedConstants.widgetShownSyncStatusKey) ?? ""
+            return WidgetSyncStatus(rawValue: statusValue) ?? .undetermined
+        }
+        set { defaults?.set(newValue.rawValue, forKey: SharedConstants.widgetShownSyncStatusKey) }
+    }
+    
+    private (set) var syncStatus: WidgetSyncStatus {
         get {
             let statusValue = defaults?.string(forKey: SharedConstants.syncStatusKey) ?? ""
-            return AutoSyncStatus(rawValue: statusValue) ?? .undetermined
+            return WidgetSyncStatus(rawValue: statusValue) ?? .undetermined
         }
         set { defaults?.set(newValue.rawValue, forKey: SharedConstants.syncStatusKey) }
+    }
+    
+    private (set) var isAutoSyncEnabled: Bool {
+        get { defaults?.bool(forKey: SharedConstants.autoSyncEnabledKey) ?? false }
+        set { defaults?.set(newValue, forKey: SharedConstants.autoSyncEnabledKey) }
     }
     
     private var currentImageData: Data? {
@@ -71,27 +114,71 @@ final class WidgetService {
     
     func notifyWidgetAbout(_ synced: Int, of total: Int) {
         finishedCount = synced
+            ///rule 3 for widget is currently disabled, because of clearance of  widget reload quota
+//        if #available(iOS 14.0, *) {
+//            debugPrint("!!! sync notifyWidgetAbout \(synced)")
+//            DebugLogService.debugLog("SYNCDEBUG: notify main app \(synced)")
+//
+//            WidgetCenter.shared.reloadAllTimelines()
+//        }
+        
         totalCount = total
-        lastSyncedDate = dateFormatter.string(from: Date())
+        lastSyncedDate = Date()
         
         wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeMessageIdentifier)
     }
     
+    func notifyWidgetAbout(syncFileName: String) {
+        currentSyncFileName = syncFileName
+    }
+    
     func notifyWidgetAbout(currentImage: UIImage?) {
-        currentImageData = currentImage?.jpeg(.low)
+//        currentImageData = currentImage?.jpeg(.low)
         wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeMessageIdentifier)
     }
     
-    func notifyWidgetAbout(status: AutoSyncStatus) {
+    func notifyWidgetAbout(status: WidgetSyncStatus) {
+        guard syncStatus != status else {
+            return
+        }
+        
         syncStatus = status
         
         if syncStatus != .executing {
             finishedCount = 0
             totalCount = 0
             currentImageData = nil
+            currentSyncFileName = ""
+        }
+        
+        if syncStatus != .undetermined {
+            //TODO: maybe not need to reload on stopped state
+            if #available(iOS 14.0, *) {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
         }
         
         wormhole.passMessageObject(nil, identifier: SharedConstants.wormholeMessageIdentifier)
     }
+    
+    func notifyAboutChangeWidgetState(_ newStateName: String) {
+        wormhole.passMessageObject(newStateName as NSString, identifier: SharedConstants.wormholeNewWidgetStateIdentifier)
+    }
+    
+    func notifyWidgetAbout(autoSyncEnabled: Bool) {
+        isAutoSyncEnabled = autoSyncEnabled
+        
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+        
+    }
 
+    func notifyAbout(shownSyncStatus: WidgetSyncStatus) {
+        guard widgetShownSyncStatus != shownSyncStatus else {
+            return
+        }
+        
+        widgetShownSyncStatus = shownSyncStatus
+    }
 }
