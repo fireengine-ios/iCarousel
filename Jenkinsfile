@@ -312,9 +312,9 @@ pipeline {
                 skipDefaultCheckout true
             }
             steps {
-                // script {
-                //    // apps.each deployToIctStore
-                // }
+                script {
+                   apps.each deployToIctStore
+                }
             }
 			post {
 				always {
