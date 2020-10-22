@@ -1015,7 +1015,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             self.dispatchQueue.async {
                 let failCompletion = {
-                    printLog("VIDEO_LOCAL_ITEM: \(asset.localIdentifier) is invalid")                    assetInfo.isValid = false
+                    printLog("VIDEO_LOCAL_ITEM: \(asset.localIdentifier) is invalid")
+                    assetInfo.isValid = false
                     semaphore.signal()
                 }
                 
