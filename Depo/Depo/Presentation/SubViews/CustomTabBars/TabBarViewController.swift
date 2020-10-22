@@ -462,10 +462,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         folderBtn = createSubButton(withText: TextConstants.newFolder, imageName: "NewFolder", asLeft: false)
         folderBtn?.changeVisability(toHidden: true)
         
-        uploadFromLifebox = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "NewFolder", asLeft: false)
+        uploadFromLifebox = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "Upload", asLeft: false)
         uploadFromLifebox?.changeVisability(toHidden: true)
         
-        uploadFromLifeboxFavorites = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "NewFolder", asLeft: false)
+        uploadFromLifeboxFavorites = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "Upload", asLeft: false)
         uploadFromLifeboxFavorites?.changeVisability(toHidden: true)
         
         albumBtn = createSubButton(withText: TextConstants.createAlbum, imageName: "NewFolder", asLeft: false)
