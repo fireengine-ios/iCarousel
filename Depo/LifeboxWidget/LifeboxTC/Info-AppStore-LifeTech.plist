@@ -41,7 +41,7 @@
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>
-		<string>сom.apple.widgetkit-extension</string>
+		<string>com.apple.widgetkit-extension</string>
 	</dict>
 </dict>
 </plist>
