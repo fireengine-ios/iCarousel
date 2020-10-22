@@ -90,7 +90,7 @@ final class PushNotificationService {
         }
                 
         switch action {
-        case .main, .home, .widgetFreeUpSpace: openMain()
+        case .main, .home: openMain()
         case .syncSettings, .widgetAutoSyncDisabled: openSyncSettings()
         case .floatingMenu: openFloatingMenu()
         case .packages, .widgetQuota: openPackages()
@@ -124,7 +124,12 @@ final class PushNotificationService {
             openLogin()
             clear()
         case .search: openSearch()
-        case .freeUpSpace: break
+        case .freeUpSpace, .widgetFreeUpSpace:
+            if FreeAppSpace.session.state == .finished && CacheManager.shared.isCacheActualized {
+                openFreeUpSpace()
+            } else {
+                openMain()
+            }
         case .settings: openSettings()
         case .profileEdit: openProfileEdit()
         case .changePassword: openChangePassword()
@@ -216,6 +221,8 @@ final class PushNotificationService {
             case .photosScreenIndex:
                 tabBarVC.showPhotoScreen()
             }
+        } else {
+            tabBarVC.popToRootCurrentNavigationController(animated: true)
         }
     }
     
