@@ -86,16 +86,16 @@ extension UIImage {
     public func applyBlur(radius blurRadius: CGFloat, tintColor: UIColor?, saturationDeltaFactor: CGFloat, maskImage: UIImage? = nil) -> UIImage? {
         func preconditionsValid() -> Bool {
             if size.width < 1 || size.height < 1 {
-                print("error: invalid image size: (\(size.width, size.height). Both width and height must >= 1)")
+                assertionFailure("error: invalid image size: (\(size.width, size.height). Both width and height must >= 1)")
                 return false
             }
             if cgImage == nil {
-                print("error: image must be backed by a CGImage")
+                assertionFailure("error: image must be backed by a CGImage")
                 return false
             }
             if let maskImage = maskImage {
                 if maskImage.cgImage == nil {
-                    print("error: effectMaskImage must be backed by a CGImage")
+                    assertionFailure("error: effectMaskImage must be backed by a CGImage")
                     return false
                 }
             }
@@ -140,7 +140,7 @@ extension UIImage {
 
             let error = vImageBuffer_InitWithCGImage(&effectInBuffer, &format, nil, inputCGImage, vImage_Flags(kvImagePrintDiagnosticsToConsole))
             if error != kvImageNoError {
-                print("error: vImageBuffer_InitWithCGImage returned error code \(error)")
+                assertionFailure("error: vImageBuffer_InitWithCGImage returned error code \(error)")
                 UIGraphicsEndImageContext()
                 return nil
             }
