@@ -5620,6 +5620,12 @@
 		98DBC0642410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98DBC05A2410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib */; };
 		98DBC0652410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98DBC05A2410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib */; };
 		98DBC0662410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98DBC05A2410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib */; };
+		98DD03F62542E634006DE0BD /* UIImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DD03F52542E634006DE0BD /* UIImageEffects.swift */; };
+		98DD03F72542E635006DE0BD /* UIImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DD03F52542E634006DE0BD /* UIImageEffects.swift */; };
+		98DD03F82542E635006DE0BD /* UIImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DD03F52542E634006DE0BD /* UIImageEffects.swift */; };
+		98DD03F92542E635006DE0BD /* UIImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DD03F52542E634006DE0BD /* UIImageEffects.swift */; };
+		98DD03FA2542E635006DE0BD /* UIImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DD03F52542E634006DE0BD /* UIImageEffects.swift */; };
+		98DD03FB2542E635006DE0BD /* UIImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DD03F52542E634006DE0BD /* UIImageEffects.swift */; };
 		98E4B9EC23C6FF32003A4631 /* TrashBinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */; };
 		98E4B9ED23C6FF32003A4631 /* TrashBinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */; };
 		98E4B9EE23C6FF32003A4631 /* TrashBinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */; };
@@ -13870,6 +13876,7 @@
 		98DBC0452410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoSyncHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		98DBC0592410FB4F00926F40 /* AutoSyncAlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncAlbumTableViewCell.swift; sourceTree = "<group>"; };
 		98DBC05A2410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoSyncAlbumTableViewCell.xib; sourceTree = "<group>"; };
+		98DD03F52542E634006DE0BD /* UIImageEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageEffects.swift; sourceTree = "<group>"; };
 		98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinViewController.swift; sourceTree = "<group>"; };
 		98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrashBinViewController.xib; sourceTree = "<group>"; };
 		98E4B9F523C71EEC003A4631 /* TrashBinSortingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinSortingManager.swift; sourceTree = "<group>"; };
@@ -17624,6 +17631,7 @@
 				CE9CB665210F2D7500342EEE /* FixedAVPlayerViewController.swift */,
 				03135F4423F3E0900088E8BB /* ApplicationStateHelper.swift */,
 				8E1E08092423B0130054BF86 /* KeychainCleaner.swift */,
+				98DD03F52542E634006DE0BD /* UIImageEffects.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -28351,6 +28359,7 @@
 				0303A1E62397D0D000907F42 /* MediaItemOperationsService.swift in Sources */,
 				0303A1E72397D0D000907F42 /* InstaPickHashtagCell.swift in Sources */,
 				0303A1E82397D0D000907F42 /* SearchServiceResponse.swift in Sources */,
+				98DD03F92542E635006DE0BD /* UIImageEffects.swift in Sources */,
 				0303A1E92397D0D000907F42 /* UIStackView+Extensions.swift in Sources */,
 				0303A1EA2397D0D000907F42 /* TermsOfUseViewOutput.swift in Sources */,
 				0303A1EB2397D0D000907F42 /* AugmentedRealityFileProvider.swift in Sources */,
@@ -30836,6 +30845,7 @@
 				98231A4624F3A23500FD16E2 /* WhisperFilter.swift in Sources */,
 				8C0E8F8B1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewController.swift in Sources */,
 				8C0B91A220170E7B00A5BA81 /* ManageContactTableViewCell.swift in Sources */,
+				98DD03F72542E635006DE0BD /* UIImageEffects.swift in Sources */,
 				890F737022EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */,
 				8C0E8F8C1FDEBDFF00789C91 /* GridListTopBarSortingTableCell.swift in Sources */,
 				B5B6B1522170A01E00463260 /* PrepareQuickScroll.swift in Sources */,
@@ -32641,6 +32651,7 @@
 				8E7659842333745A00D728A5 /* CredsUpdateCheckPopUp.swift in Sources */,
 				D49886611F3EFBE200F50C95 /* ImportPhotosViewInput.swift in Sources */,
 				8C0097161F6BDA8B00FA069C /* MoreFilesActionsModuleInput.swift in Sources */,
+				98DD03F62542E634006DE0BD /* UIImageEffects.swift in Sources */,
 				98185BA0248A709E0013929C /* WarningPopupController.swift in Sources */,
 				98B01C79206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */,
 				73A1833D235855AA0095719F /* CampaignCard.swift in Sources */,
@@ -34562,6 +34573,7 @@
 				9809317C23952CAC00ECFEF8 /* PeopleAlbumsManager.swift in Sources */,
 				CE784C7722A685FB00662219 /* ActivityTimelineViewController.swift in Sources */,
 				CE784C7822A685FB00662219 /* ActivityTimelineModuleInput.swift in Sources */,
+				98DD03FA2542E635006DE0BD /* UIImageEffects.swift in Sources */,
 				CF7146D924B597A900D83E60 /* DeleteDuplicatesMainView.swift in Sources */,
 				CE784C7A22A685FB00662219 /* ActivityTimelinePresenter.swift in Sources */,
 				CE784C7B22A685FB00662219 /* ActivityTimelineInteractorInput.swift in Sources */,
@@ -34996,6 +35008,7 @@
 				734CA129244D753C0076F6A7 /* DocumentsAlbumCardResponce.swift in Sources */,
 				98BB909C24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */,
 				CF8B64B023CBC9D70021B021 /* BottomSelectionTabBarPresenter.swift in Sources */,
+				98DD03F82542E635006DE0BD /* UIImageEffects.swift in Sources */,
 				CF8B64B123CBC9D70021B021 /* SharedService.swift in Sources */,
 				CF8B64B223CBC9D70021B021 /* CellsConstant.swift in Sources */,
 				CF8B64B323CBC9D70021B021 /* GradientView.swift in Sources */,
@@ -37574,6 +37587,7 @@
 				CF8B702323CBCA280021B021 /* ActivityTimelineViewController.swift in Sources */,
 				CF8B702423CBCA280021B021 /* ActivityTimelineModuleInput.swift in Sources */,
 				CF8B702523CBCA280021B021 /* ActivityTimelinePresenter.swift in Sources */,
+				98DD03FB2542E635006DE0BD /* UIImageEffects.swift in Sources */,
 				CF7146DA24B597A900D83E60 /* DeleteDuplicatesMainView.swift in Sources */,
 				CF8B702623CBCA280021B021 /* ActivityTimelineInteractorInput.swift in Sources */,
 				CF8B702723CBCA280021B021 /* PremiumFeaturesView.swift in Sources */,
