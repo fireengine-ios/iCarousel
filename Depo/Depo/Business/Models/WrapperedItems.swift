@@ -172,6 +172,15 @@ enum FileType: Hashable, Equatable {
         return applicationType.isContained(in: [.doc, .txt, .html, .xls, .pdf, .ppt, .pptx, .usdz])
     }
     
+    var isDocumentPageItem: Bool {
+        switch self {
+        case .application(_):
+            return true
+        default:
+            return false
+        }
+    }
+    
     var  isSupportedOpenType: Bool {
         
         return  self != .application(.zip) &&

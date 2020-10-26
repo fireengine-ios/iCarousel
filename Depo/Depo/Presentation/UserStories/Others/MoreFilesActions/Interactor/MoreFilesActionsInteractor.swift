@@ -57,7 +57,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func selectShareType(sourceRect: CGRect?) {
         
-        if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocument && $0.fileType != .audio}) {
+        if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
             self.shareViaLink(sourceRect: sourceRect)
         } else if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video }){
             showSharingMenu(types: [.original, .link], sourceRect: sourceRect)
