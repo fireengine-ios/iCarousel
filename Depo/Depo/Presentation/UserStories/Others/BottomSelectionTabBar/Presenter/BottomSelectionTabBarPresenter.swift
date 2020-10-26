@@ -232,15 +232,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                         return
                 }
                 
-                let onlyLink = selectedItems.contains(where: {
-                    $0.fileType != .image && $0.fileType != .video
-                })
-                
-                if onlyLink {
-                    self.interactor.shareViaLink(item: selectedItems, sourceRect: self.middleTabBarRect)
-                } else {
-                    self.interactor.share(item: selectedItems, sourceRect: self.middleTabBarRect)
-                }
+                self.interactor.share(item: selectedItems, sourceRect: self.middleTabBarRect)
             case .sync:
                 self.basePassingPresenter?.stopModeSelected()
                 self.interactor.sync(item: selectedItems)
