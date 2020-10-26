@@ -57,15 +57,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func selectShareType(sourceRect: CGRect?) {
         
-        
-        if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video && $0.fileType != .allDocs && $0.fileType != .audio}) {
+        if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocument && $0.fileType != .audio}) {
             self.shareViaLink(sourceRect: sourceRect)
+        } else if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video }){
+            showSharingMenu(types: [.original, .link], sourceRect: sourceRect)
         } else {
             showSharingMenu(types: [.small, .original, .link], sourceRect: sourceRect)
-//            self.showSharingMenu(sourceRect: sourceRect)
         }
-        
-//
     }
     
     private func showSharingMenu(types: [ShareTypes], sourceRect: CGRect?) {
@@ -96,14 +94,21 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private func getAction(shareType: ShareTypes, sourceRect: CGRect?) -> UIAlertAction {
         switch shareType {
         case .link:
-            return UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
+            if self.sharingItems.contains(where: { $0.isLocalItem }) {
                 
-                self?.sync(items: self?.sharingItems, action: { [weak self] in
+                return UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
+                    
+                    self?.sync(items: self?.sharingItems, action: { [weak self] in
+                        self?.shareViaLink(sourceRect: sourceRect)
+                    }, fail: { errorResponse in
+                        debugLog("sync(items: \(errorResponse.description)")
+                        UIApplication.showErrorAlert(message: errorResponse.description)
+                    })
+                }
+            } else {
+                return UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
                     self?.shareViaLink(sourceRect: sourceRect)
-                }, fail: { errorResponse in
-                    debugLog("sync(items: \(errorResponse.description)")
-                    UIApplication.showErrorAlert(message: errorResponse.description)
-                })
+                }
             }
         case .original:
             return UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
