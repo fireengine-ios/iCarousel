@@ -57,4 +57,7 @@ struct SharedConstants {
     static let currentSyncFileNameKey = "currentSyncFileName"
     
     static let wormholeNewWidgetStateIdentifier = "wormholeNewWidgetStateIdentifier"
+    
+    static let isAppFirstLaunchKey = "isAppFirstLaunchKey"
+    static let widgetShownSyncStatusKey = "widgetShownSyncStatus"
 }

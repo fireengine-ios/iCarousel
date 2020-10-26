@@ -1035,7 +1035,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             self.dispatchQueue.async {
                 let failCompletion = {
-                    print("VIDEO_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
+                    printLog("VIDEO_LOCAL_ITEM: \(asset.localIdentifier) is invalid")
                     assetInfo.isValid = false
                     semaphore.signal()
                 }
@@ -1047,7 +1047,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }
                 
                 if let error = dict[PHImageErrorKey] as? NSError {
-                    print(error.localizedDescription)
+                    printLog("VIDEO_LOCAL_ITEM: error \(error.domain) \(error.code) \(error.localizedFailureReason) \(error.description)")
                     failCompletion()
                     return
                 }
@@ -1112,7 +1112,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             self.dispatchQueue.async {
                 let failCompletion = {
-                    debugLog("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is invalid")
+                    printLog("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is invalid")
                     assetInfo.isValid = false
                     semaphore.signal()
                     return
@@ -1125,12 +1125,13 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }
                 
                 if let error = dict[PHImageErrorKey] as? NSError {
-                    print(error.localizedDescription)
+                    printLog("IMAGE_LOCAL_ITEM: error \(error.domain) \(error.code) \(error.localizedFailureReason) \(error.description)")
                     failCompletion()
                     return
                 }
                 
                 if let inCloud = dict[PHImageResultIsInCloudKey] as? NSNumber, inCloud.boolValue {
+                    printLog("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
                     failCompletion()
                     return
                 }
@@ -1207,7 +1208,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 }
                 
                 if let error = dict[PHImageErrorKey] as? NSError {
-                    print(error.localizedDescription)
+                    printLog("VIDEO_LOCAL_ITEM: error \(error.domain) \(error.code) \(error.localizedFailureReason) \(error.description)")
                     failCompletion()
                     return
                 }
@@ -1279,7 +1280,7 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
             
             self.dispatchQueue.async {
                 let failCompletion = {
-                    print("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
+                    printLog("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is invalid")
                     assetInfo.isValid = false
                     semaphore.signal()
                     return
@@ -1293,12 +1294,13 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 
                 
                 if let error = dict[PHImageErrorKey] as? NSError {
-                    print(error.localizedDescription)
+                    printLog("IMAGE_LOCAL_ITEM: error \(error.domain) \(error.code) \(error.localizedFailureReason) \(error.description)")
                     failCompletion()
                     return
                 }
                 
                 if let inCloud = dict[PHImageResultIsInCloudKey] as? NSNumber, inCloud.boolValue {
+                    printLog("IMAGE_LOCAL_ITEM: \(asset.localIdentifier) is in iCloud")
                     failCompletion()
                     return
                 }
@@ -1461,7 +1463,7 @@ class GetOriginalImageOperation: Operation {
         requestId = photoManager.requestImageData(for: asset, options: options, resultHandler: { [weak self] data, string, orientation, dict in
             if data == nil, let error = dict?[PHImageErrorKey] as? Error {
                 Crashlytics.crashlytics().record(error: error)
-                debugLog("GetOriginalImageOperation: PHImageManager requestImageData no data error \(error.description)")
+                debugLog("GetOriginalImageOperation: PHImageManager requestImageData no data error \(error)")
             }
             guard let self = self else {
                 return
