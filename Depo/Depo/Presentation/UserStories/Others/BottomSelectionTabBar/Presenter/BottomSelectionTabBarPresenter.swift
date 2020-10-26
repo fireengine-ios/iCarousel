@@ -232,14 +232,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                         return
                 }
                 
-//                if selectedItems.contains(where: {
-//                    $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocument && $0.fileType != .audio }) {
-//                    self.interactor.shareViaLink(item: selectedItems, sourceRect: self.middleTabBarRect)
-//                } else if selectedItems.contains(where: { !$0.fileType.isDocument && $0.fileType != .audio }) {
-//
-//                } else {
-                    self.interactor.share(item: selectedItems, sourceRect: self.middleTabBarRect)
-//                }
+                self.interactor.share(item: selectedItems, sourceRect: self.middleTabBarRect)
             case .sync:
                 self.basePassingPresenter?.stopModeSelected()
                 self.interactor.sync(item: selectedItems)
