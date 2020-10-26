@@ -19,7 +19,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         return controller
     }
     
-    static func with(items: [Item]) -> TBMatikPhotosViewController {
+    static func with(items: [Item], selectedIndex: Int) -> TBMatikPhotosViewController {
         
         var itemsDict = [String: Item]()
         for item in items {
@@ -33,6 +33,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         controller.modalPresentationStyle = .overFullScreen
         controller.items = itemsDict
         controller.uuids = uuids
+        controller.selectedIndex = selectedIndex
         return controller
     }
     
@@ -119,6 +120,8 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
             return nil
         }
     }
+    
+    private var selectedIndex: Int = 0
     
     // MARK: - View lifecycle
     
@@ -209,6 +212,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     
     private func reloadData() {
         carousel.reloadData()
+        carousel.scrollToItem(at: selectedIndex, animated: false)
         carousel.isHidden = false
         updateTitle()
     }
