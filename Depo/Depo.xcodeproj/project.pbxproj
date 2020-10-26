@@ -4928,6 +4928,12 @@
 		9826DB40207F60F900C00238 /* CustomScrollIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */; };
 		9826DB42207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
 		9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
+		982705152546BD9A00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
+		9827052C2546BD9B00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
+		9827052D2546BD9B00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
+		9827052E2546BD9D00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
+		9827052F2546BD9D00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
+		982705302546BD9E00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
 		982E17C32417A67200B07707 /* AutoSyncCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E17C22417A67200B07707 /* AutoSyncCheckBox.swift */; };
 		982E17C42417A67200B07707 /* AutoSyncCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E17C22417A67200B07707 /* AutoSyncCheckBox.swift */; };
 		982E17C52417A67200B07707 /* AutoSyncCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E17C22417A67200B07707 /* AutoSyncCheckBox.swift */; };
@@ -13659,6 +13665,7 @@
 		9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderWithText.xib; sourceTree = "<group>"; };
 		9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollIndicator.swift; sourceTree = "<group>"; };
 		9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomScrollIndicator.xib; sourceTree = "<group>"; };
+		982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadFilesSelectionViewController.xib; sourceTree = "<group>"; };
 		982E17C22417A67200B07707 /* AutoSyncCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncCheckBox.swift; sourceTree = "<group>"; };
 		983A397A2409357700418F5E /* SubscriptionsPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsPolicyView.swift; sourceTree = "<group>"; };
 		9840C62120AEAD6B00A8634F /* CheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBoxView.xib; sourceTree = "<group>"; };
@@ -22988,6 +22995,7 @@
 				9B3B6154994AE47621A34FDC /* UploadFilesSelectionViewInput.swift */,
 				F431A1D1626AA4CC06EFC9CA /* UploadFilesSelectionViewOutput.swift */,
 				0F6EB6455E73609F1B5249AF /* UploadFilesSelectionViewController.swift */,
+				982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -24331,6 +24339,7 @@
 				0303A6212397D0D000907F42 /* InstagramAuthViewController.xib in Resources */,
 				0303A6222397D0D000907F42 /* CollectionViewCellForFaceImage.xib in Resources */,
 				0303A6232397D0D000907F42 /* CampaignCard.xib in Resources */,
+				982705302546BD9E00810BB5 /* UploadFilesSelectionViewController.xib in Resources */,
 				17B9B0CE23F1F76A00CAF5E1 /* FullQuotaWarningPopUp.xib in Resources */,
 				0303A6272397D0D000907F42 /* TermsOfUseViewController.xib in Resources */,
 				982319A724F3A1E700FD16E2 /* ColorCell.xib in Resources */,
@@ -24727,6 +24736,7 @@
 				CEFAF31A23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */,
 				CF71471E24B597AA00D83E60 /* ContactListHeader.xib in Resources */,
 				9816430A233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */,
+				9827052C2546BD9B00810BB5 /* UploadFilesSelectionViewController.xib in Resources */,
 				4BF7CF4C223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */,
 				98185BA7248A709E0013929C /* WarningPopupController.xib in Resources */,
 				7373EC26235EE0F100B150BA /* InstaPickCampaignViewController.xib in Resources */,
@@ -25233,6 +25243,7 @@
 				CEFFA8EF21AFC21400B34F36 /* SegmentedController.xib in Resources */,
 				CE51AF5F1EF90853005DCEE0 /* IntroduceViewController.xib in Resources */,
 				7378053923ABC130001D57BD /* OverlayStickerViewController.xib in Resources */,
+				982705152546BD9A00810BB5 /* UploadFilesSelectionViewController.xib in Resources */,
 				CECD4E4D1FDFD69500978BE7 /* PopUpController.xib in Resources */,
 				989BDE3A22F47B1E001DDEB2 /* SpotifyPlaylistsViewController.xib in Resources */,
 				9823195624F3A1E600FD16E2 /* PreparedFilterSliderView.xib in Resources */,
@@ -25503,6 +25514,7 @@
 				CE784DCD22A685FB00662219 /* PhotoVideoDetailViewController.xib in Resources */,
 				CE784DD022A685FB00662219 /* ActivityTimelineViewController.xib in Resources */,
 				983BF7CD2361C33D004FFBDB /* SharedImages.xcassets in Resources */,
+				9827052E2546BD9D00810BB5 /* UploadFilesSelectionViewController.xib in Resources */,
 				CE784DD222A685FB00662219 /* CollectionViewCellForAudio.xib in Resources */,
 				8934DD6F23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */,
 				CE784DD422A685FB00662219 /* SupportFormController.xib in Resources */,
@@ -25876,6 +25888,7 @@
 				CF8B6A5A23CBC9D70021B021 /* ManageContactTableViewCell.xib in Resources */,
 				CF8B6A5C23CBC9D70021B021 /* CollectionViewStoryReorderView.xib in Resources */,
 				CF71465924B597A800D83E60 /* ContactSyncSmallCardView.xib in Resources */,
+				9827052D2546BD9B00810BB5 /* UploadFilesSelectionViewController.xib in Resources */,
 				CF71464124B597A800D83E60 /* ContactSyncProgressView.xib in Resources */,
 				CF8B6A5F23CBC9D70021B021 /* OurLocalizable.strings in Resources */,
 				981EA2E8247D4CA700A51B7D /* ContactsOperationView.xib in Resources */,
@@ -26145,6 +26158,7 @@
 				CF8B71C723CBCA280021B021 /* CreateStoryPreviewViewController.xib in Resources */,
 				CF8B71C823CBCA280021B021 /* SpotifyImportViewController.xib in Resources */,
 				0305A33C23D5C543004D1EC7 /* TrashBinViewController.xib in Resources */,
+				9827052F2546BD9D00810BB5 /* UploadFilesSelectionViewController.xib in Resources */,
 				CF8B71CA23CBCA280021B021 /* InfoPlist.strings in Resources */,
 				CF8B71CD23CBCA280021B021 /* BasicCollectionMultiFileCell.xib in Resources */,
 				CF8B71CE23CBCA280021B021 /* DropboxAccountConnectionCell.xib in Resources */,
