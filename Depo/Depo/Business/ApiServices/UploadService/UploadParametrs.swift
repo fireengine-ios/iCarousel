@@ -53,7 +53,7 @@ class SimpleUpload: UploadRequestParametrs {
     
     var fileSize: Int64 {
         if let url = urlToLocalFile,
-            let resources = try? url.resourceValues(forKeys:[.fileSizeKey]),
+           let resources = try? url.resourceValues(forKeys:[.fileSizeKey]),
             let fileSize = resources.fileSize {
             return Int64(fileSize)
         }

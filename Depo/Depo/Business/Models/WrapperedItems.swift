@@ -668,7 +668,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
             }
             return "audio/mp3"
             
-            case .application(_), .allDocs:
+        case .application(_), .allDocs:
             if let type = urlToFile?.mimeType {
                 return type
             }
@@ -1136,7 +1136,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
         localFileUrl = importedDocumentURL
         
         let fileName = importedDocumentURL.lastPathComponent
-        let fileType = FileType(type: fileManager.fileType(at: importedDocumentURL), fileName: fileName)
+        let type = importedDocumentURL.mimeType
+        let fileType = FileType(type: type, fileName: fileName)
+        
         super.init(uuid: nil, name: fileName, creationDate: creationDate, lastModifiDate: creationDate, fileType: fileType, syncStatus: .notSynced, isLocalItem: true)
         
         md5 = "\(fileName)\(fileSize)"

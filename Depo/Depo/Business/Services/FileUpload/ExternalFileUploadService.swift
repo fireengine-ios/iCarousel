@@ -11,34 +11,23 @@ import UIKit
 import CoreServices
 
 
-enum ExternalUploadFileType {
-    case document
-    case music
-    case any
-}
-
 final class ExternalFileUploadService: NSObject {
     
     private let uploadService = UploadService.default
+    private var isFavorites = false
     
     
-    func viewController(fileType: ExternalUploadFileType) -> UIDocumentPickerViewController {
-        let utTypes: [String]
+    func showViewController(router: RouterVC, fromFavorites: Bool) {
         
-        switch fileType {
-            case .document:
-                utTypes = [kUTTypeCompositeContent as String]
-            case .music:
-                utTypes = [kUTTypeAudio as String]
-            default:
-                utTypes = [kUTTypeContent as String]
-        }
+        isFavorites = fromFavorites
+        
+        let utTypes = [kUTTypeContent as String]
         
         let controller = UIDocumentPickerViewController(documentTypes: utTypes, in: .import)
         controller.delegate = self
         controller.allowsMultipleSelection = true
         
-        return controller
+        router.presentViewController(controller: controller, animated: true, completion: nil)
     }
 }
 
@@ -53,14 +42,25 @@ extension ExternalFileUploadService: UIDocumentPickerDelegate {
         
         let wrapDataItems = urls.compactMap { WrapData(importedDocumentURL: $0) }
         
-        //TODO: replace with the real parameters
-        uploadService.uploadFileList(items: wrapDataItems, uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: "", isFavorites: false, isFromAlbum: false, isFromCamera: false) {
-            
-        } fail: { (error) in
-            
-        } returnedUploadOperation: { operations in
-            
+        upload(items: wrapDataItems)
+    }
+    
+    private func upload(items: [WrapData]) {
+        guard !items.isEmpty else {
+            return
         }
-
+        
+        //TODO: replace with the real parameters
+        uploadService.uploadFileList(items: items,
+                                     uploadType: .upload,
+                                     uploadStategy: .WithoutConflictControl,
+                                     uploadTo: .MOBILE_UPLOAD,
+                                     folder: "",
+                                     isFavorites: isFavorites,
+                                     isFromAlbum: false,
+                                     isFromCamera: false,
+                                     success: {},
+                                     fail: { _ in },
+                                     returnedUploadOperation: { _ in})
     }
 }
