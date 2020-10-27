@@ -1144,9 +1144,10 @@ extension NetmeraEvents.Actions {
                 netmeraPussButtonAction = .newFolder
             case .createStory:
                 netmeraPussButtonAction = .createStory
-            //FIXME: separate uploadFiles
-            case .upload, .uploadFiles:
+            case .upload:
                 netmeraPussButtonAction = .upload
+            case .uploadFiles:
+                netmeraPussButtonAction = .uploadFiles
             case .createAlbum:
                 netmeraPussButtonAction = .createAlbum
             case .uploadFromApp:
