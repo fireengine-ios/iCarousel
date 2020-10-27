@@ -460,8 +460,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         uploadBtn = createSubButton(withText: TextConstants.upload, imageName: "Upload", asLeft: true)
         uploadBtn?.changeVisability(toHidden: true)
         
-        //FIXME: change icon and text
-        uploadFilesBtn = createSubButton(withText: TextConstants.upload, imageName: "Upload", asLeft: true)
+        uploadFilesBtn = createSubButton(withText: TextConstants.uploadFiles, imageName: "Upload", asLeft: true)
         uploadFilesBtn?.changeVisability(toHidden: true)
         
         storyBtn = createSubButton(withText: TextConstants.createStory, imageName: "CreateAStory", asLeft: false)
