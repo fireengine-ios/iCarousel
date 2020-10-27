@@ -1141,6 +1141,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         super.init(uuid: nil, name: fileName, creationDate: creationDate, lastModifiDate: creationDate, fileType: fileType, syncStatus: .notSynced, isLocalItem: true)
         
+        mimeType = type
         md5 = "\(fileName)\(fileSize)"
     }
     

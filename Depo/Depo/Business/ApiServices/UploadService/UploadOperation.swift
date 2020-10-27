@@ -67,7 +67,7 @@ final class UploadOperation: Operation {
         self.isFavorites = isFavorites
         self.isPhotoAlbum = isFromAlbum
         
-        if item.fileType.isContained(in: [.video, .image]), resumableInfoService.isResumableUploadAllowed(with: item.fileSize.intValue) {
+        if item.fileType.isContained(in: [.video]), resumableInfoService.isResumableUploadAllowed(with: item.fileSize.intValue) {
             self.isResumable = true
         } else {
             self.isResumable = false
