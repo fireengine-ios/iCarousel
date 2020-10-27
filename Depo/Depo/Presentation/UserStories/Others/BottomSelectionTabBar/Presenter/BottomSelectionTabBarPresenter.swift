@@ -161,7 +161,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     UIApplication.showErrorAlert(message: text)
                 }
             case .unhide:
-                //TODO: will be another task to implement analytics calls
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .unhide))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {

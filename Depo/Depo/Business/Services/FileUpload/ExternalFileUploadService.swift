@@ -15,11 +15,15 @@ final class ExternalFileUploadService: NSObject {
     
     private let uploadService = UploadService.default
     private var isFavorites = false
+    private var folderUUID = ""
+    private var isFromAlbum = false
     
     
-    func showViewController(router: RouterVC, fromFavorites: Bool) {
+    func showViewController(router: RouterVC) {
         
-        isFavorites = fromFavorites
+        isFavorites = router.isOnFavoritesView()
+        folderUUID = router.getParentUUID()
+        isFromAlbum = router.isRootViewControllerAlbumDetail()
         
         let utTypes = [kUTTypeContent as String]
         
@@ -50,14 +54,13 @@ extension ExternalFileUploadService: UIDocumentPickerDelegate {
             return
         }
         
-        //TODO: replace with the real parameters
         uploadService.uploadFileList(items: items,
                                      uploadType: .upload,
                                      uploadStategy: .WithoutConflictControl,
                                      uploadTo: .MOBILE_UPLOAD,
-                                     folder: "",
+                                     folder: folderUUID,
                                      isFavorites: isFavorites,
-                                     isFromAlbum: false,
+                                     isFromAlbum: isFromAlbum,
                                      isFromCamera: false,
                                      success: {},
                                      fail: { _ in },

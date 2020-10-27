@@ -849,7 +849,7 @@ extension TabBarViewController: TabBarActionHandler {
                 return
             }
             
-            externalFileUploadService.showViewController(router: router, fromFavorites: false)
+            externalFileUploadService.showViewController(router: router)
             
         case .createAlbum:
             let controller = router.createNewAlbum()
