@@ -43,7 +43,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
         }
     }
     
-    private var resentlyUploadedObjectUUIDs = Set<String>()
+    private var resentlyUploadedObjectUUIDs = SynchronizedSet<String>()
     
     private lazy var navBarManager = PhotoVideoNavBarManager(delegate: self)
     private lazy var collectionViewManager = PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
