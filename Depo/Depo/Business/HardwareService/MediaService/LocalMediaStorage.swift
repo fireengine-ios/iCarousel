@@ -113,6 +113,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     var assetsCache = AssetsCache()
     private(set) var localAlbumsCache = LocalAlbumsCache.shared
     
+    private(set) var galleryPermission: GalleryAuthorizationStatus = .notDetermined
+    
+    
     private override init() {
         queue.maxConcurrentOperationCount = 1
         
@@ -183,6 +186,9 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
     
     func askPermissionForPhotoFramework(redirectToSettings: Bool, completion: @escaping PhotoLibraryGranted) {
         let status = PHPhotoLibrary.currentAuthorizationStatus()
+        
+        galleryPermission = status.toGalleryAuthorizationStatus()
+        
         switch status {
         //TODO: uncomment for xcode 12
         case .authorized, .limited:
@@ -196,6 +202,8 @@ class LocalMediaStorage: NSObject, LocalMediaStorageProtocol {
                 guard let self = self else {
                     return
                 }
+                
+                self.galleryPermission = authStatus.toGalleryAuthorizationStatus()
                 
                 self.passcodeStorage.systemCallOnScreen = false
                 let isAuthorized = authStatus.isAccessible
