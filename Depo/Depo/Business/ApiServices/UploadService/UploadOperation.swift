@@ -369,7 +369,9 @@ final class UploadOperation: Operation {
                     self?.removeTemporaryFile(at: parameters.urlToLocalFile)
                 }
                 
-                self.storageVars.lastUnsavedFileUUID = parameters.tmpUUID
+                if self.inputItem.fileType.isContained(in: [.image, .video]) {
+                    self.storageVars.lastUnsavedFileUUID = parameters.tmpUUID
+                }
                 
                 self.requestObject = self.upload(uploadParam: parameters, success: { [weak self] in
                     debugLog("simple_upload: uploaded")
