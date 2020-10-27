@@ -18,6 +18,7 @@ enum FloatingButtonsType {
     case uploadFromLifebox
     case uploadFromLifeboxFavorites
     case importFromSpotify
+    case uploadFiles
 }
 
 enum TabScreenIndex: Int {
@@ -67,6 +68,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     fileprivate var photoBtn: SubPlussButtonView!
     fileprivate var importFromSpotifyBtn: SubPlussButtonView!
     fileprivate var uploadBtn: SubPlussButtonView!
+    fileprivate var uploadFilesBtn: SubPlussButtonView!
     fileprivate var storyBtn: SubPlussButtonView!
     fileprivate var folderBtn: SubPlussButtonView!
     fileprivate var albumBtn: SubPlussButtonView!
@@ -75,6 +77,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     fileprivate var importFromSpotify: SubPlussButtonView!
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var spotifyRoutingService: SpotifyRoutingService = factory.resolve()
+    private lazy var externalFileUploadService = ExternalFileUploadService()
+    
     
     //    let musicBar = MusicBar.initFromXib()
     lazy var player: MediaPlayer = factory.resolve()
@@ -461,6 +465,9 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         uploadBtn = createSubButton(withText: TextConstants.upload, imageName: "Upload", asLeft: true)
         uploadBtn?.changeVisability(toHidden: true)
         
+        uploadFilesBtn = createSubButton(withText: TextConstants.uploadFiles, imageName: "Upload", asLeft: true)
+        uploadFilesBtn?.changeVisability(toHidden: true)
+        
         storyBtn = createSubButton(withText: TextConstants.createStory, imageName: "CreateAStory", asLeft: false)
         storyBtn?.changeVisability(toHidden: true)
         
@@ -531,6 +538,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 buttonsArray.append(uploadFromLifeboxFavorites)
             case .importFromSpotify:
                 buttonsArray.append(importFromSpotify)
+            case .uploadFiles:
+                buttonsArray.append(uploadFilesBtn)
             }
         }
         
@@ -548,6 +557,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         buttonsArray.append(folderBtn)
         buttonsArray.append(photoBtn)
         buttonsArray.append(uploadBtn)
+        buttonsArray.append(uploadFilesBtn)
         buttonsArray.append(uploadFromLifebox)
         buttonsArray.append(uploadFromLifeboxFavorites)
         buttonsArray.append(importFromSpotify)
@@ -712,6 +722,8 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             action = .uploadFromAppFavorites
         case importFromSpotify:
             action = .importFromSpotify
+        case uploadFilesBtn:
+            action = .uploadFiles
         default:
             return
         }
@@ -791,6 +803,7 @@ extension TabBarViewController: MediaPlayerDelegate {
     func didStopMediaPlayer(_ mediaPlayer: MediaPlayer) {}
 }
 
+import CoreServices
 extension TabBarViewController: TabBarActionHandler {
     
     func canHandleTabBarAction(_ action: TabBarViewController.Action) -> Bool {
@@ -826,11 +839,22 @@ extension TabBarViewController: TabBarActionHandler {
 
         case .upload:
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .uploadFromPlus))
-            guard !checkReadOnlyPermission() else { return }
+            
+            guard !checkReadOnlyPermission() else {
+                return
+            }
+            
             let controller = router.uploadPhotos()
             let navigation = NavigationController(rootViewController: controller)
             navigation.navigationBar.isHidden = false
             router.presentViewController(controller: navigation)
+            
+        case .uploadFiles:
+            guard !checkReadOnlyPermission() else {
+                return
+            }
+            
+            externalFileUploadService.showViewController(router: router)
             
         case .createAlbum:
             let controller = router.createNewAlbum()

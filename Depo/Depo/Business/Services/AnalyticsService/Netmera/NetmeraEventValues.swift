@@ -533,6 +533,7 @@ enum NetmeraEventValues {
     enum PlusButtonAction {
         case useCamera
         case upload
+        case uploadFiles
         case createStory
         case newFolder
         case createAlbum
@@ -545,6 +546,8 @@ enum NetmeraEventValues {
                 return "Use Camera"
             case .upload:
                 return "Upload"
+            case .uploadFiles:
+                return "Upload Files"
             case .createStory:
                 return "Create Story"
             case .newFolder:
