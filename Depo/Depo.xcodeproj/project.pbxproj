@@ -4928,6 +4928,12 @@
 		9827052E2546BD9D00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
 		9827052F2546BD9D00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
 		982705302546BD9E00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
+		982706F12548470400810BB5 /* SynchronizedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982706F02548470400810BB5 /* SynchronizedSet.swift */; };
+		982706F22548470400810BB5 /* SynchronizedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982706F02548470400810BB5 /* SynchronizedSet.swift */; };
+		982706F32548470400810BB5 /* SynchronizedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982706F02548470400810BB5 /* SynchronizedSet.swift */; };
+		982706F42548470400810BB5 /* SynchronizedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982706F02548470400810BB5 /* SynchronizedSet.swift */; };
+		982706F52548470400810BB5 /* SynchronizedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982706F02548470400810BB5 /* SynchronizedSet.swift */; };
+		982706F62548470400810BB5 /* SynchronizedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982706F02548470400810BB5 /* SynchronizedSet.swift */; };
 		982E17C32417A67200B07707 /* AutoSyncCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E17C22417A67200B07707 /* AutoSyncCheckBox.swift */; };
 		982E17C42417A67200B07707 /* AutoSyncCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E17C22417A67200B07707 /* AutoSyncCheckBox.swift */; };
 		982E17C52417A67200B07707 /* AutoSyncCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E17C22417A67200B07707 /* AutoSyncCheckBox.swift */; };
@@ -13711,6 +13717,7 @@
 		9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollIndicator.swift; sourceTree = "<group>"; };
 		9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomScrollIndicator.xib; sourceTree = "<group>"; };
 		982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadFilesSelectionViewController.xib; sourceTree = "<group>"; };
+		982706F02548470400810BB5 /* SynchronizedSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedSet.swift; sourceTree = "<group>"; };
 		982E17C22417A67200B07707 /* AutoSyncCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncCheckBox.swift; sourceTree = "<group>"; };
 		983A397A2409357700418F5E /* SubscriptionsPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsPolicyView.swift; sourceTree = "<group>"; };
 		9840C62120AEAD6B00A8634F /* CheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBoxView.xib; sourceTree = "<group>"; };
@@ -16867,6 +16874,7 @@
 				7809A32C1FED09EF00954A5F /* AsyncOperation.swift */,
 				B520000B202492A90096D036 /* SynchronizedArray.swift */,
 				0340456F240794FD0024135B /* SynchronizedDictionary.swift */,
+				982706F02548470400810BB5 /* SynchronizedSet.swift */,
 			);
 			path = Concurrency;
 			sourceTree = "<group>";
@@ -28827,6 +28835,7 @@
 				0303A3542397D0D000907F42 /* InstaPickSmartAlbumCell.swift in Sources */,
 				0303A3552397D0D000907F42 /* KeyboardHideManager.swift in Sources */,
 				0303A3562397D0D000907F42 /* BaseFilesGreedPresenter.swift in Sources */,
+				982706F42548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				0303A3572397D0D000907F42 /* AdjustsFontSizeInsetsButton.swift in Sources */,
 				0303A3582397D0D000907F42 /* UIImage+Color.swift in Sources */,
 				0303A3592397D0D000907F42 /* InstapickService.swift in Sources */,
@@ -30125,6 +30134,7 @@
 				8C0E8DC51FDEBDFF00789C91 /* RegistrationInitializer.swift in Sources */,
 				8C0B91A420170E9900A5BA81 /* ManageContactsViewController.swift in Sources */,
 				CF71468E24B597A900D83E60 /* ContactBackupDataManager.swift in Sources */,
+				982706F22548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				8C20867F228D5021000BEDAD /* MediaItemOperationsService.swift in Sources */,
 				B52BAC5D23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */,
 				8C0E8DC61FDEBDFF00789C91 /* HelpAndSupportInteractorInput.swift in Sources */,
@@ -32615,6 +32625,7 @@
 				9864296822F834F10039811C /* SpotifyResponse.swift in Sources */,
 				D47863FA1F3F18FA00EFDC6D /* UsageInfoViewController.swift in Sources */,
 				8244D12DB4B058CBAB05E1A9 /* PhotoVideoDetailViewInput.swift in Sources */,
+				982706F12548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				DEE642813D2C3E1B9FDC7D3C /* PhotoVideoDetailViewOutput.swift in Sources */,
 				36F1269830911DA792B987AA /* PhotoVideoDetailViewController.swift in Sources */,
 				065212E5C2E83D762D0B4492 /* PhotoVideoDetailModuleInput.swift in Sources */,
@@ -34412,6 +34423,7 @@
 				9864296A22F834F10039811C /* SpotifyResponse.swift in Sources */,
 				CF7146BB24B597A900D83E60 /* DeleteDuplicatesViewController.swift in Sources */,
 				8C1E5BEB22CB8D03008FDA02 /* ProfileTextViewEnterView.swift in Sources */,
+				982706F52548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				A74ADA4E23A38362007DD192 /* CarouselPageModel.swift in Sources */,
 				CE784BDA22A685FB00662219 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				CE784BDB22A685FB00662219 /* FaceImageAddNameInitializer.swift in Sources */,
@@ -35361,6 +35373,7 @@
 				CF8B65B723CBC9D70021B021 /* UsageInfoViewOutput.swift in Sources */,
 				CF8B65B823CBC9D70021B021 /* AnimationCard.swift in Sources */,
 				CF8B65B923CBC9D70021B021 /* FreeAppSpaceRouter.swift in Sources */,
+				982706F32548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				CF8B65BA23CBC9D70021B021 /* IntroduceInitializer.swift in Sources */,
 				0305A33423D5C4A4004D1EC7 /* NSManagedObjectModel+Compatible.swift in Sources */,
 				CF8B65BB23CBC9D70021B021 /* CreateStoryViewController.swift in Sources */,
@@ -37431,6 +37444,7 @@
 				CF8B6F7123CBCA280021B021 /* FaceImageAddNameInitializer.swift in Sources */,
 				CF7146BC24B597A900D83E60 /* DeleteDuplicatesViewController.swift in Sources */,
 				CF8B6F7223CBCA280021B021 /* UploadFilesSelectionViewInput.swift in Sources */,
+				982706F62548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				CF8B6F7323CBCA280021B021 /* UploadFilesSelectionViewOutput.swift in Sources */,
 				CF8B6F7423CBCA280021B021 /* SubscriptionPlanBaseResponse.swift in Sources */,
 				CF8B6F7523CBCA280021B021 /* UploadFilesSelectionViewController.swift in Sources */,
@@ -41540,7 +41554,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d3.6.0;
+				CURRENT_PROJECT_VERSION = d3.6.1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -41604,7 +41618,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d3.6.0;
+				CURRENT_PROJECT_VERSION = d3.6.1;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -41664,7 +41678,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d3.6.0;
+				CURRENT_PROJECT_VERSION = d3.6.1;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -41725,7 +41739,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d3.6.0;
+				CURRENT_PROJECT_VERSION = d3.6.1;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
