@@ -98,7 +98,7 @@ final class NetmeraService {
             let netmeraAutoSyncStatusVideo = photoVideoAutosyncStatus.video
             let verifiedEmailStatus = getVerifiedEmailStatus()
             let buildNumber = getBuildNumber()
-            
+            let galleryAccessPermission = LocalMediaStorage.default.galleryPermission.analyticsValue
             
             
             
@@ -124,7 +124,8 @@ final class NetmeraService {
                                              isEmail: email,
                                              isPhoneNumber: phoneNumber,
                                              isAddress: address,
-                                             isBirthDay: birthday)
+                                             isBirthDay: birthday,
+                                             galleryAccessPermission: galleryAccessPermission)
                 
                 user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
                 DispatchQueue.toMain {
@@ -204,7 +205,7 @@ extension NetmeraService {
                                      twoFactorAuthentication: "Null", autosync: "Null", emailVerification: "Null",
                                      autosyncPhotos: "Null", autosyncVideos: "Null", packages: ["Null"],
                                      autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null", regionCode: "Null", isUserName: 0,
-                                     isUserSurname: 0, isEmail: 0, isPhoneNumber: 0, isAddress: 0, isBirthDay: 0)
+                                     isUserSurname: 0, isEmail: 0, isPhoneNumber: 0, isAddress: 0, isBirthDay: 0, galleryAccessPermission: "Null")
         user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
         DispatchQueue.toMain {
             Netmera.update(user)

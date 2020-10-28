@@ -5981,6 +5981,12 @@
 		B5601ADD23506388002E1D1E /* InitializingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5601ADA23506388002E1D1E /* InitializingViewController.swift */; };
 		B5624791212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
 		B5624792212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
+		B563200D254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */; };
+		B563200E254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */; };
+		B563200F254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */; };
+		B5632010254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */; };
+		B5632011254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */; };
+		B5632012254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */; };
 		B56524E92418DA6A0014FCA5 /* Int64+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBB2DD71F7678DA00D725F0 /* Int64+Bytes.swift */; };
 		B56524EA2418DA6B0014FCA5 /* Int64+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBB2DD71F7678DA00D725F0 /* Int64+Bytes.swift */; };
 		B56524EB2418DA6E0014FCA5 /* Int64+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBB2DD71F7678DA00D725F0 /* Int64+Bytes.swift */; };
@@ -14041,6 +14047,7 @@
 		B5601AD623506348002E1D1E /* InitializingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InitializingViewController.xib; sourceTree = "<group>"; };
 		B5601ADA23506388002E1D1E /* InitializingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializingViewController.swift; sourceTree = "<group>"; };
 		B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AugmentedRealityDataSource.swift; sourceTree = "<group>"; };
+		B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryAuthorizationStatus.swift; sourceTree = "<group>"; };
 		B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationPolicy_1_3.swift; sourceTree = "<group>"; };
 		B56921FA23ACEDA300E255C4 /* MigrationModel_1_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MigrationModel_1_3.xcmappingmodel; sourceTree = "<group>"; };
 		B569563124D98A7F00B7B336 /* AdjustmentOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentOperation.swift; sourceTree = "<group>"; };
@@ -22050,6 +22057,7 @@
 				CEE005751F7B846C004FA8DE /* PHPhotoLibraryChangeObserver.swift */,
 				CE907A301F94D49900D2F8CE /* MediaPlayer.swift */,
 				B501EF2D2421FF6100DEA9B4 /* LocalAlbumsCache.swift */,
+				B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */,
 			);
 			path = MediaService;
 			sourceTree = "<group>";
@@ -28841,6 +28849,7 @@
 				0303A3642397D0D000907F42 /* BaseFilesGreedInteractor.swift in Sources */,
 				CF7146A224B597A900D83E60 /* ContactsBackupHistoryView.swift in Sources */,
 				986DD46325388F3400C38AD4 /* CNContactUnified.m in Sources */,
+				B5632010254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
 				0303A3652397D0D000907F42 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
 				98E4BA1123C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */,
 				0303A3672397D0D000907F42 /* CardsManagerViewProtocol.swift in Sources */,
@@ -30822,6 +30831,7 @@
 				8C0E8F711FDEBDFF00789C91 /* SelectFolderInitializer.swift in Sources */,
 				98231A8E24F3A23500FD16E2 /* AdeleFilter.swift in Sources */,
 				8C0E8F721FDEBDFF00789C91 /* FreeUpSpacePopUp.swift in Sources */,
+				B563200E254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
 				A217E44A21A5B0D00084AA37 /* LeavePremiumConfigurator.swift in Sources */,
 				8C0E8F731FDEBDFF00789C91 /* VisualMusicPlayerInteractor.swift in Sources */,
 				8C0E8F741FDEBDFF00789C91 /* SelectNameViewInput.swift in Sources */,
@@ -32169,6 +32179,7 @@
 				8C208649228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift in Sources */,
 				8C26009E22919DCC0063E913 /* ProfileTextViewEnterView.swift in Sources */,
 				A2079902219F131B00AD5037 /* PremiumViewController.swift in Sources */,
+				B563200D254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
 				7C6E2FA31F32FCD900536DB6 /* AudioSelectionCollectionViewCell.swift in Sources */,
 				CE51ACD51EF90853005DCEE0 /* TermsAndServicesPresenter.swift in Sources */,
 				CE51ACD61EF90853005DCEE0 /* TermsAndServicesInteractorInput.swift in Sources */,
@@ -34543,6 +34554,7 @@
 				CE784C4522A685FB00662219 /* SingletonStorage.swift in Sources */,
 				CE784C4622A685FB00662219 /* HelpAndSupportViewOutput.swift in Sources */,
 				98C2984C2302B12900C9811E /* SpotifyCancelImportPopup.swift in Sources */,
+				B5632011254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
 				CF71474524B597AA00D83E60 /* ContactSyncHelper.swift in Sources */,
 				CE784C4722A685FB00662219 /* ViewController.swift in Sources */,
 				CE784C4822A685FB00662219 /* AlbumDetailPresenter.swift in Sources */,
@@ -35395,6 +35407,7 @@
 				CF8B65DB23CBC9D70021B021 /* StoriesDataSourceForCollectionView.swift in Sources */,
 				CF8B65DC23CBC9D70021B021 /* PhoneVerificationInteractorInput.swift in Sources */,
 				CF8B65DD23CBC9D70021B021 /* AppendLocalsOperation.swift in Sources */,
+				B563200F254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
 				CF8B65DE23CBC9D70021B021 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				CF8B65DF23CBC9D70021B021 /* SpotifyImportViewController.swift in Sources */,
 				CF8B65E123CBC9D70021B021 /* PhoneVerificationInteractorOutput.swift in Sources */,
@@ -37559,6 +37572,7 @@
 				CF8B6FED23CBCA280021B021 /* ViewController.swift in Sources */,
 				0305A36223D5C659004D1EC7 /* CarouselPageView.swift in Sources */,
 				CF8B6FEE23CBCA280021B021 /* AlbumDetailPresenter.swift in Sources */,
+				B5632012254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
 				CF71474624B597AA00D83E60 /* ContactSyncHelper.swift in Sources */,
 				CF8B6FEF23CBCA280021B021 /* InitializingViewController.swift in Sources */,
 				B589FC5423F1388D00DD528D /* DataChunkProvider.swift in Sources */,
