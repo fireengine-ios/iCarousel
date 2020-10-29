@@ -776,6 +776,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                            fail: failAction(elementType: .sync))
     }
     
+    func downloadDocument(item: [BaseDataSourceItem]) {
+    }
     
     func download(item: [BaseDataSourceItem]) {
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {

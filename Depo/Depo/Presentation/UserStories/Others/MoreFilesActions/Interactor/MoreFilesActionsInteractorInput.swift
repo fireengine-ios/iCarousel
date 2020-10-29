@@ -32,6 +32,8 @@ protocol MoreFilesActionsInteractorInput {
     
     func download(item: [BaseDataSourceItem])
     
+    func downloadDocument(item: [BaseDataSourceItem])
+    
     func restore(items: [BaseDataSourceItem])
     
     // MARK: Actions Sheet
