@@ -137,7 +137,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         rootNavController(vizible: true)
         blackNavigationBarStyle()
         editingTabBar?.view.layoutIfNeeded()
-        editingTabBar.view.backgroundColor = UIColor.black
+        editingTabBar.view.backgroundColor = .black
+        viewForBottomBar.backgroundColor = .black
         setupTitle()
         
         if hideTreeDotButton {
