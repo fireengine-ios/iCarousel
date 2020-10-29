@@ -77,7 +77,7 @@ class CustomTabBar: UITabBar {
             }
             
             ///at iOS13 tabBatItems without insets looks like tabBatItems with insets at other iOS versions
-            if !Device.isIpad && !Device.isIOS13 {
+            if !Device.isIpad && Device.operationSystemVersionLessThen(13) {
                 tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
             }
             
