@@ -22,6 +22,8 @@
         NSString *cLastName = cnContact.familyName;
         NSString *cNickName = cnContact.nickname;
         NSString *cCompany = cnContact.organizationName;
+//        NSString *cNote= cnContact.note;
+        NSDateComponents *cBirthday = cnContact.birthday;
         
         _objectIdentifier = cnContact.identifier;
         
@@ -40,7 +42,35 @@
         if (!SYNC_IS_NULL(cCompany)){
             _company=[NSString stringWithFormat:@"%@", cCompany];
         }
-
+//        if (!SYNC_IS_NULL(cNote)){
+//            _note=[NSString stringWithFormat:@"%@", cNote];
+//        }
+        if (!SYNC_IS_NULL(cBirthday)){
+            
+            NSCalendar* calendar = [NSCalendar  currentCalendar];
+            NSDate* date = [calendar dateFromComponents:cBirthday];
+            NSDateComponents *dateComponents =
+            [calendar components:(NSYearCalendarUnit  |
+                                  NSMonthCalendarUnit |
+                                  NSDayCalendarUnit   ) fromDate:date];
+            
+            NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+            
+            if(dateComponents.year<1800){
+                
+                dateComponents.year=components.year;
+            }
+            
+            NSDate *currentYearDate=[calendar dateFromComponents:dateComponents];
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateFormat = @"yyyy/MM/dd";
+            NSString *dateString = [dateFormatter stringFromDate:currentYearDate];
+            
+            _birthday=[NSString stringWithFormat:@"%@",dateString ];
+            
+        }
+        
         SYNC_Log(@"Identifier: %@", _objectIdentifier);
         
         _devices = [NSMutableArray new];
@@ -68,6 +98,8 @@
         _nickName = json[@"nickname"];
         _displayName = json[@"displayname"];
         _company = json[@"company"];
+//        _note = json[@"note"];
+        _birthday = json[@"birthday"];
         
         _remoteUpdateDate = json[@"modified"];
         
@@ -121,6 +153,9 @@
         _hasPhoneNumber = [json[@"hasNumber"] boolValue];
         _devices = [json[@"devices"] mutableCopy];
         _addresses = [json[@"addresses"] mutableCopy];
+        
+//        _note = [json[@"note"] copy];
+        _birthday =[json[@"birthday"] copy];
     }
     return self;
 }
@@ -134,12 +169,14 @@
     if (!SYNC_IS_NULL(self.remoteId) && [self.remoteId integerValue]>0){
         dict[@"id"] = self.remoteId;
     }
-
+    
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.firstName, @"firstname");
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.middleName, @"middlename");
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.nickName, @"nickname");
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.lastName, @"lastname");
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.company, @"company");
+//    SYNC_SET_DICT_IF_NOT_NIL(dict, self.note, @"note");
+    SYNC_SET_DICT_IF_NOT_NIL(dict, self.birthday, @"birthday");
     if(isNewContact)
         SYNC_SET_DICT_IF_NOT_NIL(dict, self.objectIdentifier, @"localId");
     
@@ -171,6 +208,10 @@
     SYNC_APPEND_STRING_IF_NOT_NIL(value, self.lastName);
     SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
     SYNC_APPEND_STRING_IF_NOT_NIL(value, self.company);
+    SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
+//    SYNC_APPEND_STRING_IF_NOT_NIL(value, self.note);
+//    SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
+    SYNC_APPEND_STRING_IF_NOT_NIL(value, self.birthday);
     SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
     
     NSMutableArray *ary = [NSMutableArray arrayWithArray:_devices];
@@ -268,10 +309,26 @@
     } else if (![_company isEqualToString:other.company]){
         return NO;
     }
+//    if (SYNC_IS_NULL(_note)){
+//        if (!SYNC_IS_NULL(other.note) && other.note.length!=0){
+//            return NO;
+//        }
+//    } else if (![_note isEqualToString:other.note]){
+//        return NO;
+//    }
+    
+    if (SYNC_IS_NULL(_birthday)){
+        if (!SYNC_IS_NULL(other.birthday) && other.birthday.length!=0){
+            return NO;
+        }
+    } else if (![_birthday isEqualToString:other.birthday]){
+        return NO;
+    }
+    
     return YES;
 }
 
-- (BOOL)isEqual:(id)object
+- (BOOL)isEqual:(id)object 
 {
     if (self == object){
         return YES;
@@ -390,6 +447,8 @@
     _nickName = contact.nickName;
     _lastName = contact.lastName;
     _company = contact.company;
+//    _note = contact.note;
+    _birthday =contact.birthday;
     for (ContactDevice *d in contact.devices){
         if (![_devices containsObject:d]){
             [_devices addObject:d];
@@ -417,6 +476,8 @@
     _hasPhoneNumber = contact.hasPhoneNumber;
     _devices = contact.devices;
     _addresses = contact.addresses;
+//    _note = contact.note;
+    _birthday = contact.birthday;
 }
 
 -(BOOL)isDeviceSizeEqual:(Contact*)other{
@@ -449,7 +510,7 @@
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-
+    
     NSDictionary *data = [[NSDictionary alloc] initWithObjectsAndKeys:
                           _objectIdentifier ?: [NSNull null], @"localId",
                           _remoteId ?: [NSNull null], @"id",
@@ -464,10 +525,13 @@
                           _addresses ?: [NSNull null], @"addresses",
                           @(_hasName) ?: [NSNull null], @"hasName",
                           @(_hasPhoneNumber) ?: [NSNull null], @"hasNumber",
+//                          _note ?: [NSNull null], @"note",
+                          _birthday ?: [NSNull null], @"birthday",
+                          
                           nil];
-
+    
     Contact *contact = [self initWithCopy:data];
-
+    
     return contact;
 }
 
@@ -501,7 +565,7 @@
             }
         }
     }
-
+    
     return false;
 }
 

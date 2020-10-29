@@ -137,7 +137,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         rootNavController(vizible: true)
         blackNavigationBarStyle()
         editingTabBar?.view.layoutIfNeeded()
-        editingTabBar.view.backgroundColor = UIColor.black
+        editingTabBar.view.backgroundColor = .black
+        viewForBottomBar.backgroundColor = .black
         setupTitle()
         
         if hideTreeDotButton {
@@ -350,6 +351,14 @@ final class PhotoVideoDetailViewController: BaseViewController {
     
     func showBottomDetailView() {
         bottomDetailViewManager?.showDetailView()
+    }
+    
+    func shareCurrentItem() {
+        guard let shareTabIndex = output.tabIndex(type: .share),
+              let tabBarItem = editingTabBar.editingBar.items?[shareTabIndex] else {
+            return
+        }
+        editingTabBar.tabBar(editingTabBar.editingBar, didSelect: tabBarItem)
     }
 }
 

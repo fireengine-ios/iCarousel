@@ -310,23 +310,5 @@ extension InstaPickSelectionSegmentedController: InstapickAlbumSelectionDelegate
 extension InstaPickSelectionSegmentedController {
     static func controllerToPresent() -> UIViewController {
         return InstaPickSelectionSegmentedController()
-        
-        //TODO: remove if Sprint 34 regression test is completed
-//        let navVC = NavigationController(rootViewController: vc)
-//
-//        let navigationTextColor = UIColor.white
-//        let navigationBar = navVC.navigationBar
-//
-//        let textAttributes: [NSAttributedString.Key: AnyHashable] = [
-//            .foregroundColor: navigationTextColor,
-//            .font: UIFont.TurkcellSaturaDemFont(size: 19)
-//        ]
-//
-//        navigationBar.titleTextAttributes = textAttributes
-//        navigationBar.barStyle = .black
-//        navigationBar.isTranslucent = false
-//        navigationBar.tintColor = navigationTextColor
-//
-//        return navVC
     }
 }

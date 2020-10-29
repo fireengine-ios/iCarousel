@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabBarViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabBarViewController" customModule="Billo" customModuleProvider="target">
             <connections>
-                <outlet property="bottomBGView" destination="a7w-UJ-tHf" id="cMl-yI-8Wd"/>
-                <outlet property="bottomConstraint" destination="DYb-pY-0Zn" id="Qd2-B4-GXU"/>
                 <outlet property="bottomTabBarConstraint" destination="Nv2-yE-i9E" id="iIg-GK-gy1"/>
                 <outlet property="contentView" destination="i0i-at-wPy" id="UmC-zb-APO"/>
                 <outlet property="mainContentView" destination="FJl-Cl-AGP" id="bHk-JG-24y"/>
@@ -20,7 +18,6 @@
                 <outlet property="plusButtonHeightConstraint" destination="eNR-wi-msA" id="BjE-qO-7Pk"/>
                 <outlet property="plussButton" destination="HTg-Qb-BHM" id="xi3-JD-RNS"/>
                 <outlet property="tabBar" destination="Pdh-iF-uTx" id="M3i-be-cg9"/>
-                <outlet property="topConstraint" destination="Yvj-PI-e9N" id="HkE-3N-khs"/>
                 <outlet property="view" destination="iN0-l3-epB" id="mau-IS-hKw"/>
             </connections>
         </placeholder>
@@ -30,20 +27,20 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FJl-Cl-AGP">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0i-at-wPy" userLabel="Contenst View">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0f-ko-odc" customClass="MusicBar" customModule="lifebox" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W0f-ko-odc" customClass="MusicBar" customModule="Billo" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="813" width="414" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" id="oLW-8y-KOm"/>
                             </constraints>
                         </view>
-                        <tabBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdh-iF-uTx" customClass="CustomTabBar" customModule="lifebox" customModuleProvider="target">
+                        <tabBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdh-iF-uTx" customClass="CustomTabBar" customModule="Billo" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="813" width="414" height="49"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.90461793664383561" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -68,6 +65,7 @@
                             </connections>
                         </button>
                     </subviews>
+                    <viewLayoutGuide key="safeArea" id="ero-vK-F2b"/>
                     <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="W0f-ko-odc" secondAttribute="trailing" id="2vE-tf-F6n"/>
@@ -83,28 +81,19 @@
                         <constraint firstItem="W0f-ko-odc" firstAttribute="top" secondItem="i0i-at-wPy" secondAttribute="bottom" id="rlX-hu-WYO"/>
                         <constraint firstItem="Pdh-iF-uTx" firstAttribute="leading" secondItem="FJl-Cl-AGP" secondAttribute="leading" id="uSv-rF-MBk"/>
                     </constraints>
-                    <viewLayoutGuide key="safeArea" id="ero-vK-F2b"/>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7w-UJ-tHf">
-                    <rect key="frame" x="0.0" y="862" width="414" height="34"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="znv-0S-e61"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="a7w-UJ-tHf" firstAttribute="top" secondItem="FJl-Cl-AGP" secondAttribute="bottom" id="6Tz-je-hFR"/>
-                <constraint firstAttribute="bottom" secondItem="a7w-UJ-tHf" secondAttribute="bottom" id="88e-iQ-tFi"/>
                 <constraint firstItem="FJl-Cl-AGP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9wa-HG-Fvr"/>
                 <constraint firstItem="FJl-Cl-AGP" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="COT-s0-gxJ"/>
-                <constraint firstItem="FJl-Cl-AGP" firstAttribute="bottom" secondItem="znv-0S-e61" secondAttribute="bottom" id="DYb-pY-0Zn"/>
+                <constraint firstItem="FJl-Cl-AGP" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="DYb-pY-0Zn"/>
                 <constraint firstItem="FJl-Cl-AGP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yvj-PI-e9N"/>
-                <constraint firstItem="a7w-UJ-tHf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kG4-NC-nhH"/>
-                <constraint firstAttribute="trailing" secondItem="a7w-UJ-tHf" secondAttribute="trailing" id="wAP-cW-Kg3"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
-            <viewLayoutGuide key="safeArea" id="znv-0S-e61"/>
-            <point key="canvasLocation" x="46.5" y="100.5"/>
+            <point key="canvasLocation" x="46.376811594202906" y="100.44642857142857"/>
         </view>
     </objects>
     <resources>

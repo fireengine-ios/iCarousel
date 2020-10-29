@@ -458,6 +458,18 @@ extension NetmeraEvents.Screens {
             return "bgh"
         }
     }
+    
+    final class PhotoEditFiltersScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "yop"
+        }
+    }
+    
+    final class PhotoEditAdjustmentScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "cqg"
+        }
+    }
 }
 
 

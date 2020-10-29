@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="1hH-31-UT2" id="tpf-st-dHZ"/>
                 <outlet property="floatingHeaderContainerHeightConstraint" destination="pMc-9l-rlR" id="MeZ-qO-blL"/>
@@ -30,15 +28,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fez-f4-D1W">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GtK-K9-Uw7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
                     <blurEffect style="dark"/>
                 </visualEffectView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XDt-9i-CGy">
-                    <rect key="frame" x="0.0" y="64" width="375" height="0.0"/>
+                    <rect key="frame" x="0.0" y="44" width="375" height="0.0"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" id="pMc-9l-rlR"/>
@@ -52,7 +50,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="35" sectionFooterHeight="32" translatesAutoresizingMaskIntoConstraints="NO" id="Xpp-j0-kcB">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="separatorColor" red="0.8168148398399353" green="0.81743925809860229" blue="0.81691151857376099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -62,10 +60,10 @@
                     </connections>
                 </tableView>
                 <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ve5-7k-qJd">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cgl-0D-wIj">
-                            <rect key="frame" x="0.0" y="195.5" width="375" height="212"/>
+                            <rect key="frame" x="0.0" y="205.5" width="375" height="212"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tpr-ro-tFS">
                                     <rect key="frame" x="8" y="106" width="359" height="0.0"/>
@@ -91,7 +89,7 @@
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="1hH-31-UT2">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1It-GS-cYE">
                         <size key="itemSize" width="50" height="50"/>
@@ -101,10 +99,11 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yf5-b9-3WQ">
-                    <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="AnL-pq-9wJ"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Xpp-j0-kcB" firstAttribute="leading" secondItem="AnL-pq-9wJ" secondAttribute="leading" id="4SK-YP-BE6"/>
@@ -131,11 +130,10 @@
                 <constraint firstItem="fez-f4-D1W" firstAttribute="top" secondItem="AnL-pq-9wJ" secondAttribute="top" id="gJs-25-8yl"/>
                 <constraint firstItem="ve5-7k-qJd" firstAttribute="bottom" secondItem="AnL-pq-9wJ" secondAttribute="bottom" id="jzl-25-seU"/>
                 <constraint firstItem="XDt-9i-CGy" firstAttribute="top" secondItem="AnL-pq-9wJ" secondAttribute="top" id="m24-BQ-qcq"/>
-                <constraint firstItem="fez-f4-D1W" firstAttribute="bottom" secondItem="AnL-pq-9wJ" secondAttribute="bottom" id="oye-8J-bBB"/>
+                <constraint firstItem="fez-f4-D1W" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="oye-8J-bBB"/>
                 <constraint firstItem="Xpp-j0-kcB" firstAttribute="trailing" secondItem="AnL-pq-9wJ" secondAttribute="trailing" id="uFV-wZ-a1T"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <viewLayoutGuide key="safeArea" id="AnL-pq-9wJ"/>
             <point key="canvasLocation" x="42.5" y="89.5"/>
         </view>
     </objects>

@@ -295,6 +295,16 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
         }
     }
     
+    func tabIndex(type: ElementTypes) -> Int? {
+        guard let index = interactor.currentItemIndex else {
+            return nil
+        }
+        
+        let item = interactor.allItems[index]
+        let types = prepareBarConfigForFileTypes(fileTypes: [item.fileType], selectedIndex: index)
+        return types.elementsConfig.firstIndex(of: type)
+    }
+    
     func updated() {
         asyncOperationSuccess()
     }

@@ -13,7 +13,8 @@ final class HSCompletionPopUp: BasePopUpController {
     enum Mode {
         case showOpenSmartAlbumButton
         case showBottomCloseButton
-        case smash
+        case smashPremium
+        case smashStandart
         case hiddenAlbums
     }
 
@@ -224,7 +225,10 @@ final class HSCompletionPopUp: BasePopUpController {
             smartAlbumsAdditionsParentView.isHidden = true
             closeButton.isHidden = true
 
-        case .smash:
+        case .smashPremium:
+            viewPeopleAlbumButton.setTitle(TextConstants.smashSuccessedAlertShareButton, for: .normal)
+            fallthrough
+        case .smashStandart:
             statusImageView.image = PopUpImage.success.image
             
             hiddenAlbumParentView.arrangedSubviews.forEach { $0.isHidden = true }
@@ -276,9 +280,15 @@ final class HSCompletionPopUp: BasePopUpController {
     }
 
     @IBAction private func onOpenPeopleAlbumTap(_ sender: Any) {
-        trackOpenPeopleAlbumEvent(isCanceled: false)
-        close(isFinalStep: false) {
-            self.delegate?.onOpenPeopleAlbum()
+        if mode == .smashPremium {
+            close(isFinalStep: false) {
+                self.delegate?.onShare()
+            }
+        } else {
+            trackOpenPeopleAlbumEvent(isCanceled: false)
+            close(isFinalStep: false) {
+                self.delegate?.onOpenPeopleAlbum()
+            }
         }
     }
 
@@ -297,7 +307,7 @@ final class HSCompletionPopUp: BasePopUpController {
     
     private func trackOpenPeopleAlbumEvent(isCanceled: Bool) {
         switch mode {
-        case .smash:
+        case .smashStandart:
             analyticsService.trackCustomGAEvent(eventCategory: .popUp,
                                                 eventActions: .smashSuccessPopUp,
                                                 eventLabel: isCanceled ? .cancel : .viewPeopleAlbum)
@@ -313,7 +323,7 @@ final class HSCompletionPopUp: BasePopUpController {
     
     private func trackScreenEvents() {
         switch mode {
-        case .smash:
+        case .smashStandart, .smashPremium:
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SaveSmashSuccessfullyPopUp())
         case .hiddenAlbums, .showBottomCloseButton, .showOpenSmartAlbumButton:
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.SaveHiddenSuccessfullyPopUp())
@@ -330,7 +340,7 @@ extension HSCompletionPopUp {
         case .showOpenSmartAlbumButton:
             storageVars.hiddenPhotoInPeopleAlbumPopUpCheckBox = isHidden
 
-        case .smash:
+        case .smashPremium, .smashStandart:
             storageVars.smashPhotoPopUpCheckBox = isHidden
         }
     }

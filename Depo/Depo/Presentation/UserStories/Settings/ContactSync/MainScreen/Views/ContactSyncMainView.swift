@@ -99,8 +99,8 @@ final class ContactSyncMainView: UIView, NibInit {
     
     //MARK:- Public
     
-    func update(with model: ContactSync.SyncResponse, periodicSyncOption: PeriodicContactsSyncOption) {
-        bigInfoCard.set(numberOfContacts: model.totalNumberOfContacts)
+    func update(with model: ContactBackupItem, periodicSyncOption: PeriodicContactsSyncOption) {
+        bigInfoCard.set(numberOfContacts: model.total)
         bigInfoCard.set(periodicSyncOption: periodicSyncOption)
         
         if let date = model.date {
