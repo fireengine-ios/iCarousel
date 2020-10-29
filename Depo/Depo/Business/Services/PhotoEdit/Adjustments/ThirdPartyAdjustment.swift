@@ -67,16 +67,12 @@ final class GPUAdjustment: ThirdPartyAdjustmentProtocol {
     
     func applyOn(image: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
 
-        guard let ciImage = CIImage(image: image) else {
-            debugLog("PHOTO EDIT: applyOn ciimage is nil")
+        guard let cgImage = image.cgImage ?? getConvertedCGImage(image: image) else {
+            debugLog("PHOTO EDIT: applyOn unable to get cgImage")
             onFinished(image)
             return
         }
-        guard let cgImage = convertCIImageToCGImage(inputImage: ciImage) else {
-            debugLog("PHOTO EDIT: applyOn cgimage is nil")
-            onFinished(image)
-            return
-        }
+        
         let input = PictureInput(image: cgImage)
         
         pictureOutput.imageAvailableCallback = onFinished
@@ -91,6 +87,19 @@ final class GPUAdjustment: ThirdPartyAdjustmentProtocol {
     deinit {
         pictureOutput.imageAvailableCallback = nil
         operation.removeAllTargets()
+    }
+    
+    private func getConvertedCGImage(image: UIImage) -> CGImage? {
+        guard let ciImage = CIImage(image: image) else {
+            debugLog("PHOTO EDIT: getConvertedCGImage ciimage is nil")
+            return nil
+        }
+        guard let cgImage = convertCIImageToCGImage(inputImage: ciImage) else {
+            debugLog("PHOTO EDIT: getConvertedCGImage cgimage is nil")
+            return nil
+        }
+        
+        return cgImage
     }
     
     private func convertCIImageToCGImage(inputImage: CIImage) -> CGImage? {
