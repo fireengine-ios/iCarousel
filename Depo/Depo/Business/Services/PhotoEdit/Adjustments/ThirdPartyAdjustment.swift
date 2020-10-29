@@ -66,7 +66,13 @@ final class GPUAdjustment: ThirdPartyAdjustmentProtocol {
     
     
     func applyOn(image: UIImage, onFinished: @escaping ValueHandler<UIImage>) {
-        let input = PictureInput(image: image)
+
+        guard let cgImage = image.cgImage else {
+            debugLog("PHOTO EDIT: applyOn cgimage is nil")
+            return
+        }
+        
+        let input = PictureInput(image: cgImage)
         
         pictureOutput.imageAvailableCallback = onFinished
         
