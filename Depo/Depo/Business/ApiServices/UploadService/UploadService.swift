@@ -402,7 +402,7 @@ final class UploadService: BaseRequestService {
                         }
                         
                         if let error = error {
-                            print("AUTOSYNC: \(error.description)")
+                            print("UPLOAD: \(error.description)")
                             if finishedOperation.isCancelled {
                                 //operation was cancelled - not an actual error
                                 self.showUploadCardProgress()

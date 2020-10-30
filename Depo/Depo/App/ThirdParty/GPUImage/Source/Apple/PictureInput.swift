@@ -96,8 +96,15 @@ public class PictureInput: ImageSource {
         } else {
             // Access the raw image bytes directly
             dataFromImageDataProvider = image.dataProvider?.data
+
+            NSLog("PHOTO EDIT TEST: dataFromImageDataProvider is %i", dataFromImageDataProvider?.hashValue ?? -1)
 #if os(iOS)
+            if dataFromImageDataProvider == nil {
+                NSLog("PHOTO EDIT TEST: dataFromImageDataProvider is NIL")
+            }
+
             imageData = UnsafeMutablePointer<GLubyte>(mutating:CFDataGetBytePtr(dataFromImageDataProvider))
+            NSLog("PHOTO EDIT TEST: imageData is %i", imageData?.hashValue ?? -1)
 #else
             imageData = UnsafeMutablePointer<GLubyte>(mutating:CFDataGetBytePtr(dataFromImageDataProvider)!)
 #endif

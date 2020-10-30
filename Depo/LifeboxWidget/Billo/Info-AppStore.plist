@@ -20,8 +20,6 @@
 	<string>20.142</string>
 	<key>CFBundleVersion</key>
 	<string>2.35</string>
-	<key>GroupBundleId</key>
-	<string>group.com.lcv.billo</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -29,10 +27,8 @@
 	</dict>
 	<key>NSExtension</key>
 	<dict>
-		<key>NSExtensionMainStoryboard</key>
-		<string>MainInterface</string>
 		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.widget-extension</string>
+		<string>com.apple.widgetkit-extension</string>
 	</dict>
 	<key>UIAppFonts</key>
 	<array>

@@ -4922,6 +4922,18 @@
 		9826DB40207F60F900C00238 /* CustomScrollIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */; };
 		9826DB42207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
 		9826DB43207F6E7200C00238 /* CustomScrollIndicator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */; };
+		982705152546BD9A00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
+		9827052C2546BD9B00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
+		9827052D2546BD9B00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
+		9827052E2546BD9D00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
+		9827052F2546BD9D00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
+		982705302546BD9E00810BB5 /* UploadFilesSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */; };
+		982706F12548470400810BB5 /* SynchronizedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982706F02548470400810BB5 /* SynchronizedSet.swift */; };
+		982706F22548470400810BB5 /* SynchronizedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982706F02548470400810BB5 /* SynchronizedSet.swift */; };
+		982706F32548470400810BB5 /* SynchronizedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982706F02548470400810BB5 /* SynchronizedSet.swift */; };
+		982706F42548470400810BB5 /* SynchronizedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982706F02548470400810BB5 /* SynchronizedSet.swift */; };
+		982706F52548470400810BB5 /* SynchronizedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982706F02548470400810BB5 /* SynchronizedSet.swift */; };
+		982706F62548470400810BB5 /* SynchronizedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982706F02548470400810BB5 /* SynchronizedSet.swift */; };
 		982E17C32417A67200B07707 /* AutoSyncCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E17C22417A67200B07707 /* AutoSyncCheckBox.swift */; };
 		982E17C42417A67200B07707 /* AutoSyncCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E17C22417A67200B07707 /* AutoSyncCheckBox.swift */; };
 		982E17C52417A67200B07707 /* AutoSyncCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982E17C22417A67200B07707 /* AutoSyncCheckBox.swift */; };
@@ -5620,6 +5632,12 @@
 		98DBC0642410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98DBC05A2410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib */; };
 		98DBC0652410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98DBC05A2410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib */; };
 		98DBC0662410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98DBC05A2410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib */; };
+		98DD03F62542E634006DE0BD /* UIImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DD03F52542E634006DE0BD /* UIImageEffects.swift */; };
+		98DD03F72542E635006DE0BD /* UIImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DD03F52542E634006DE0BD /* UIImageEffects.swift */; };
+		98DD03F82542E635006DE0BD /* UIImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DD03F52542E634006DE0BD /* UIImageEffects.swift */; };
+		98DD03F92542E635006DE0BD /* UIImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DD03F52542E634006DE0BD /* UIImageEffects.swift */; };
+		98DD03FA2542E635006DE0BD /* UIImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DD03F52542E634006DE0BD /* UIImageEffects.swift */; };
+		98DD03FB2542E635006DE0BD /* UIImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DD03F52542E634006DE0BD /* UIImageEffects.swift */; };
 		98E4B9EC23C6FF32003A4631 /* TrashBinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */; };
 		98E4B9ED23C6FF32003A4631 /* TrashBinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */; };
 		98E4B9EE23C6FF32003A4631 /* TrashBinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */; };
@@ -5858,6 +5876,12 @@
 		B52BAC6923AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */; };
 		B52BAC6A23AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */; };
 		B52FB44220316885008A9AC3 /* ItemSyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */; };
+		B5307047254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */; };
+		B5307048254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */; };
+		B5307049254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */; };
+		B530704A254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */; };
+		B530704B254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */; };
+		B530704C254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */; };
 		B5315096246D868E00E94355 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5315095246D868D00E94355 /* GoogleService-Info-debug.plist */; };
 		B5315097246D868E00E94355 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5315095246D868D00E94355 /* GoogleService-Info-debug.plist */; };
 		B5315098246D868E00E94355 /* GoogleService-Info-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5315095246D868D00E94355 /* GoogleService-Info-debug.plist */; };
@@ -5963,6 +5987,12 @@
 		B5601ADD23506388002E1D1E /* InitializingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5601ADA23506388002E1D1E /* InitializingViewController.swift */; };
 		B5624791212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
 		B5624792212D780300704CEC /* AugmentedRealityDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */; };
+		B563200D254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */; };
+		B563200E254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */; };
+		B563200F254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */; };
+		B5632010254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */; };
+		B5632011254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */; };
+		B5632012254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */; };
 		B56524E92418DA6A0014FCA5 /* Int64+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBB2DD71F7678DA00D725F0 /* Int64+Bytes.swift */; };
 		B56524EA2418DA6B0014FCA5 /* Int64+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBB2DD71F7678DA00D725F0 /* Int64+Bytes.swift */; };
 		B56524EB2418DA6E0014FCA5 /* Int64+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBB2DD71F7678DA00D725F0 /* Int64+Bytes.swift */; };
@@ -13686,6 +13716,8 @@
 		9824FED920061B0B00B3BFC6 /* CollectionViewHeaderWithText.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewHeaderWithText.xib; sourceTree = "<group>"; };
 		9826DB3E207F60F900C00238 /* CustomScrollIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScrollIndicator.swift; sourceTree = "<group>"; };
 		9826DB41207F6E7200C00238 /* CustomScrollIndicator.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomScrollIndicator.xib; sourceTree = "<group>"; };
+		982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadFilesSelectionViewController.xib; sourceTree = "<group>"; };
+		982706F02548470400810BB5 /* SynchronizedSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedSet.swift; sourceTree = "<group>"; };
 		982E17C22417A67200B07707 /* AutoSyncCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncCheckBox.swift; sourceTree = "<group>"; };
 		983A397A2409357700418F5E /* SubscriptionsPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsPolicyView.swift; sourceTree = "<group>"; };
 		9840C62120AEAD6B00A8634F /* CheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBoxView.xib; sourceTree = "<group>"; };
@@ -13870,6 +13902,7 @@
 		98DBC0452410FB1900926F40 /* AutoSyncHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoSyncHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		98DBC0592410FB4F00926F40 /* AutoSyncAlbumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncAlbumTableViewCell.swift; sourceTree = "<group>"; };
 		98DBC05A2410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoSyncAlbumTableViewCell.xib; sourceTree = "<group>"; };
+		98DD03F52542E634006DE0BD /* UIImageEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageEffects.swift; sourceTree = "<group>"; };
 		98E4B9EB23C6FF32003A4631 /* TrashBinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinViewController.swift; sourceTree = "<group>"; };
 		98E4B9F023C6FF70003A4631 /* TrashBinViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrashBinViewController.xib; sourceTree = "<group>"; };
 		98E4B9F523C71EEC003A4631 /* TrashBinSortingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBinSortingManager.swift; sourceTree = "<group>"; };
@@ -13988,6 +14021,7 @@
 		B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Compatible.swift"; sourceTree = "<group>"; };
 		B52BAC6623AE20190051E21D /* NSManagedObjectModel+Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Resource.swift"; sourceTree = "<group>"; };
 		B52FB44120316885008A9AC3 /* ItemSyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSyncOperation.swift; sourceTree = "<group>"; };
+		B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalFileUploadService.swift; sourceTree = "<group>"; };
 		B5315095246D868D00E94355 /* GoogleService-Info-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-debug.plist"; sourceTree = "<group>"; };
 		B5358C6B25011DE10005FCAD /* WidgetPresentationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetPresentationService.swift; sourceTree = "<group>"; };
 		B5390D81216605F600A02002 /* CellImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellImageManager.swift; sourceTree = "<group>"; };
@@ -14020,6 +14054,7 @@
 		B5601AD623506348002E1D1E /* InitializingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InitializingViewController.xib; sourceTree = "<group>"; };
 		B5601ADA23506388002E1D1E /* InitializingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializingViewController.swift; sourceTree = "<group>"; };
 		B5624790212D780300704CEC /* AugmentedRealityDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AugmentedRealityDataSource.swift; sourceTree = "<group>"; };
+		B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryAuthorizationStatus.swift; sourceTree = "<group>"; };
 		B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MigrationPolicy_1_3.swift; sourceTree = "<group>"; };
 		B56921FA23ACEDA300E255C4 /* MigrationModel_1_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MigrationModel_1_3.xcmappingmodel; sourceTree = "<group>"; };
 		B569563124D98A7F00B7B336 /* AdjustmentOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentOperation.swift; sourceTree = "<group>"; };
@@ -16839,6 +16874,7 @@
 				7809A32C1FED09EF00954A5F /* AsyncOperation.swift */,
 				B520000B202492A90096D036 /* SynchronizedArray.swift */,
 				0340456F240794FD0024135B /* SynchronizedDictionary.swift */,
+				982706F02548470400810BB5 /* SynchronizedSet.swift */,
 			);
 			path = Concurrency;
 			sourceTree = "<group>";
@@ -17624,6 +17660,7 @@
 				CE9CB665210F2D7500342EEE /* FixedAVPlayerViewController.swift */,
 				03135F4423F3E0900088E8BB /* ApplicationStateHelper.swift */,
 				8E1E08092423B0130054BF86 /* KeychainCleaner.swift */,
+				98DD03F52542E634006DE0BD /* UIImageEffects.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -17659,6 +17696,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				B53070422540688A000EA9F4 /* FileUpload */,
 				B549B6C924CF098200D39C44 /* PhotoEdit */,
 				17FBD51723FB2C3200979F39 /* DivorceActionService */,
 				7378052223AB9E22001D57BD /* OverlayStickerService */,
@@ -20406,6 +20444,14 @@
 			path = NSManagedObjectModel;
 			sourceTree = "<group>";
 		};
+		B53070422540688A000EA9F4 /* FileUpload */ = {
+			isa = PBXGroup;
+			children = (
+				B5307046254068B3000EA9F4 /* ExternalFileUploadService.swift */,
+			);
+			path = FileUpload;
+			sourceTree = "<group>";
+		};
 		B5358C6725011A910005FCAD /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -22019,6 +22065,7 @@
 				CEE005751F7B846C004FA8DE /* PHPhotoLibraryChangeObserver.swift */,
 				CE907A301F94D49900D2F8CE /* MediaPlayer.swift */,
 				B501EF2D2421FF6100DEA9B4 /* LocalAlbumsCache.swift */,
+				B563200C254861F90006865B /* GalleryAuthorizationStatus.swift */,
 			);
 			path = MediaService;
 			sourceTree = "<group>";
@@ -23034,6 +23081,7 @@
 				9B3B6154994AE47621A34FDC /* UploadFilesSelectionViewInput.swift */,
 				F431A1D1626AA4CC06EFC9CA /* UploadFilesSelectionViewOutput.swift */,
 				0F6EB6455E73609F1B5249AF /* UploadFilesSelectionViewController.swift */,
+				982704FE2546BD8300810BB5 /* UploadFilesSelectionViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -23973,7 +24021,7 @@
 						};
 					};
 					8C0E8C611FDEBDFF00789C91 = {
-						DevelopmentTeam = 7YZS5NTGYH;
+						DevelopmentTeam = 693N5K66ZJ;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -24036,7 +24084,7 @@
 						ProvisioningStyle = Manual;
 					};
 					984B1ECC23685D7B009ACCFF = {
-						DevelopmentTeam = 7YZS5NTGYH;
+						DevelopmentTeam = 693N5K66ZJ;
 						ProvisioningStyle = Manual;
 					};
 					984B1EDD23685FC8009ACCFF = {
@@ -24050,7 +24098,7 @@
 					};
 					CE1BE921204831CD0074BDDC = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = 7YZS5NTGYH;
+						DevelopmentTeam = 693N5K66ZJ;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -24063,7 +24111,7 @@
 					};
 					CE1BE92F204831CE0074BDDC = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = 7YZS5NTGYH;
+						DevelopmentTeam = 693N5K66ZJ;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -24100,7 +24148,7 @@
 					};
 					CE58FAEE20444492007F3F54 = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = 7YZS5NTGYH;
+						DevelopmentTeam = 693N5K66ZJ;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -24138,7 +24186,7 @@
 						TestTargetID = CE51AAF51EF90853005DCEE0;
 					};
 					CF8B636A23CBC9D70021B021 = {
-						DevelopmentTeam = 7YZS5NTGYH;
+						DevelopmentTeam = 693N5K66ZJ;
 						ProvisioningStyle = Manual;
 					};
 					CF8B6B3023CBCA280021B021 = {
@@ -24150,7 +24198,7 @@
 						ProvisioningStyle = Manual;
 					};
 					CFE4E6B4252D9F2300F165AD = {
-						DevelopmentTeam = 7YZS5NTGYH;
+						DevelopmentTeam = 693N5K66ZJ;
 						ProvisioningStyle = Manual;
 					};
 					CFE4E748252D9F3B00F165AD = {
@@ -24377,6 +24425,7 @@
 				0303A6212397D0D000907F42 /* InstagramAuthViewController.xib in Resources */,
 				0303A6222397D0D000907F42 /* CollectionViewCellForFaceImage.xib in Resources */,
 				0303A6232397D0D000907F42 /* CampaignCard.xib in Resources */,
+				982705302546BD9E00810BB5 /* UploadFilesSelectionViewController.xib in Resources */,
 				17B9B0CE23F1F76A00CAF5E1 /* FullQuotaWarningPopUp.xib in Resources */,
 				0303A6272397D0D000907F42 /* TermsOfUseViewController.xib in Resources */,
 				982319A724F3A1E700FD16E2 /* ColorCell.xib in Resources */,
@@ -24773,6 +24822,7 @@
 				CEFAF31A23213C67004A157C /* PhotoSelectionNoFilesView.xib in Resources */,
 				CF71471E24B597AA00D83E60 /* ContactListHeader.xib in Resources */,
 				9816430A233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */,
+				9827052C2546BD9B00810BB5 /* UploadFilesSelectionViewController.xib in Resources */,
 				4BF7CF4C223103E2002DAF37 /* DropDownTableViewCell.xib in Resources */,
 				98185BA7248A709E0013929C /* WarningPopupController.xib in Resources */,
 				7373EC26235EE0F100B150BA /* InstaPickCampaignViewController.xib in Resources */,
@@ -25279,6 +25329,7 @@
 				CEFFA8EF21AFC21400B34F36 /* SegmentedController.xib in Resources */,
 				CE51AF5F1EF90853005DCEE0 /* IntroduceViewController.xib in Resources */,
 				7378053923ABC130001D57BD /* OverlayStickerViewController.xib in Resources */,
+				982705152546BD9A00810BB5 /* UploadFilesSelectionViewController.xib in Resources */,
 				CECD4E4D1FDFD69500978BE7 /* PopUpController.xib in Resources */,
 				989BDE3A22F47B1E001DDEB2 /* SpotifyPlaylistsViewController.xib in Resources */,
 				9823195624F3A1E600FD16E2 /* PreparedFilterSliderView.xib in Resources */,
@@ -25549,6 +25600,7 @@
 				CE784DCD22A685FB00662219 /* PhotoVideoDetailViewController.xib in Resources */,
 				CE784DD022A685FB00662219 /* ActivityTimelineViewController.xib in Resources */,
 				983BF7CD2361C33D004FFBDB /* SharedImages.xcassets in Resources */,
+				9827052E2546BD9D00810BB5 /* UploadFilesSelectionViewController.xib in Resources */,
 				CE784DD222A685FB00662219 /* CollectionViewCellForAudio.xib in Resources */,
 				8934DD6F23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */,
 				CE784DD422A685FB00662219 /* SupportFormController.xib in Resources */,
@@ -25922,6 +25974,7 @@
 				CF8B6A5A23CBC9D70021B021 /* ManageContactTableViewCell.xib in Resources */,
 				CF8B6A5C23CBC9D70021B021 /* CollectionViewStoryReorderView.xib in Resources */,
 				CF71465924B597A800D83E60 /* ContactSyncSmallCardView.xib in Resources */,
+				9827052D2546BD9B00810BB5 /* UploadFilesSelectionViewController.xib in Resources */,
 				CF71464124B597A800D83E60 /* ContactSyncProgressView.xib in Resources */,
 				CF8B6A5F23CBC9D70021B021 /* OurLocalizable.strings in Resources */,
 				981EA2E8247D4CA700A51B7D /* ContactsOperationView.xib in Resources */,
@@ -26191,6 +26244,7 @@
 				CF8B71C723CBCA280021B021 /* CreateStoryPreviewViewController.xib in Resources */,
 				CF8B71C823CBCA280021B021 /* SpotifyImportViewController.xib in Resources */,
 				0305A33C23D5C543004D1EC7 /* TrashBinViewController.xib in Resources */,
+				9827052F2546BD9D00810BB5 /* UploadFilesSelectionViewController.xib in Resources */,
 				CF8B71CA23CBCA280021B021 /* InfoPlist.strings in Resources */,
 				CF8B71CD23CBCA280021B021 /* BasicCollectionMultiFileCell.xib in Resources */,
 				CF8B71CE23CBCA280021B021 /* DropboxAccountConnectionCell.xib in Resources */,
@@ -27874,6 +27928,7 @@
 				0303A04A2397D0D000907F42 /* UIEdgeInsets+Extensions.swift in Sources */,
 				0303A04B2397D0D000907F42 /* MD5.swift in Sources */,
 				0303A04C2397D0D000907F42 /* BottomSelectionMusicTabBarRouter.swift in Sources */,
+				B530704A254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */,
 				0303A04D2397D0D000907F42 /* FaceImageItemsInteractorOutput.swift in Sources */,
 				0303A04E2397D0D000907F42 /* ActivityTimelineTimeCell.swift in Sources */,
 				0303A04F2397D0D000907F42 /* NSLayoutConstraint+Extensions.swift in Sources */,
@@ -28351,6 +28406,7 @@
 				0303A1E62397D0D000907F42 /* MediaItemOperationsService.swift in Sources */,
 				0303A1E72397D0D000907F42 /* InstaPickHashtagCell.swift in Sources */,
 				0303A1E82397D0D000907F42 /* SearchServiceResponse.swift in Sources */,
+				98DD03F92542E635006DE0BD /* UIImageEffects.swift in Sources */,
 				0303A1E92397D0D000907F42 /* UIStackView+Extensions.swift in Sources */,
 				0303A1EA2397D0D000907F42 /* TermsOfUseViewOutput.swift in Sources */,
 				0303A1EB2397D0D000907F42 /* AugmentedRealityFileProvider.swift in Sources */,
@@ -28779,6 +28835,7 @@
 				0303A3542397D0D000907F42 /* InstaPickSmartAlbumCell.swift in Sources */,
 				0303A3552397D0D000907F42 /* KeyboardHideManager.swift in Sources */,
 				0303A3562397D0D000907F42 /* BaseFilesGreedPresenter.swift in Sources */,
+				982706F42548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				0303A3572397D0D000907F42 /* AdjustsFontSizeInsetsButton.swift in Sources */,
 				0303A3582397D0D000907F42 /* UIImage+Color.swift in Sources */,
 				0303A3592397D0D000907F42 /* InstapickService.swift in Sources */,
@@ -28801,6 +28858,7 @@
 				0303A3642397D0D000907F42 /* BaseFilesGreedInteractor.swift in Sources */,
 				CF7146A224B597A900D83E60 /* ContactsBackupHistoryView.swift in Sources */,
 				986DD46325388F3400C38AD4 /* CNContactUnified.m in Sources */,
+				B5632010254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
 				0303A3652397D0D000907F42 /* NSPersistentStoreCoordinator+Extensions.swift in Sources */,
 				98E4BA1123C7230D003A4631 /* TrashBinThreeDotMenuManager.swift in Sources */,
 				0303A3672397D0D000907F42 /* CardsManagerViewProtocol.swift in Sources */,
@@ -29783,6 +29841,7 @@
 				982319ED24F3A1E700FD16E2 /* PhotoEditTabbar.swift in Sources */,
 				CEEFB8DC2361C64800200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */,
 				73FE51FD22CF5EC300270448 /* CreateStoryAudioItemCell.swift in Sources */,
+				B5307048254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */,
 				FA33A7E3209451B1008F946C /* NavigationBarStyle.swift in Sources */,
 				C62239AE204973300043ED44 /* FaceImageChangeCoverRouterInput.swift in Sources */,
 				B5ECA57025063E0C00C290BA /* CIImage+CGConvert.swift in Sources */,
@@ -30075,6 +30134,7 @@
 				8C0E8DC51FDEBDFF00789C91 /* RegistrationInitializer.swift in Sources */,
 				8C0B91A420170E9900A5BA81 /* ManageContactsViewController.swift in Sources */,
 				CF71468E24B597A900D83E60 /* ContactBackupDataManager.swift in Sources */,
+				982706F22548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				8C20867F228D5021000BEDAD /* MediaItemOperationsService.swift in Sources */,
 				B52BAC5D23AE1C3E0051E21D /* CoreDataMigrationStep.swift in Sources */,
 				8C0E8DC61FDEBDFF00789C91 /* HelpAndSupportInteractorInput.swift in Sources */,
@@ -30781,6 +30841,7 @@
 				8C0E8F711FDEBDFF00789C91 /* SelectFolderInitializer.swift in Sources */,
 				98231A8E24F3A23500FD16E2 /* AdeleFilter.swift in Sources */,
 				8C0E8F721FDEBDFF00789C91 /* FreeUpSpacePopUp.swift in Sources */,
+				B563200E254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
 				A217E44A21A5B0D00084AA37 /* LeavePremiumConfigurator.swift in Sources */,
 				8C0E8F731FDEBDFF00789C91 /* VisualMusicPlayerInteractor.swift in Sources */,
 				8C0E8F741FDEBDFF00789C91 /* SelectNameViewInput.swift in Sources */,
@@ -30836,6 +30897,7 @@
 				98231A4624F3A23500FD16E2 /* WhisperFilter.swift in Sources */,
 				8C0E8F8B1FDEBDFF00789C91 /* LBAlbumLikePreviewSliderViewController.swift in Sources */,
 				8C0B91A220170E7B00A5BA81 /* ManageContactTableViewCell.swift in Sources */,
+				98DD03F72542E635006DE0BD /* UIImageEffects.swift in Sources */,
 				890F737022EEFA3E00BA0020 /* VerifyEmailPopUp.swift in Sources */,
 				8C0E8F8C1FDEBDFF00789C91 /* GridListTopBarSortingTableCell.swift in Sources */,
 				B5B6B1522170A01E00463260 /* PrepareQuickScroll.swift in Sources */,
@@ -32127,6 +32189,7 @@
 				8C208649228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift in Sources */,
 				8C26009E22919DCC0063E913 /* ProfileTextViewEnterView.swift in Sources */,
 				A2079902219F131B00AD5037 /* PremiumViewController.swift in Sources */,
+				B563200D254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
 				7C6E2FA31F32FCD900536DB6 /* AudioSelectionCollectionViewCell.swift in Sources */,
 				CE51ACD51EF90853005DCEE0 /* TermsAndServicesPresenter.swift in Sources */,
 				CE51ACD61EF90853005DCEE0 /* TermsAndServicesInteractorInput.swift in Sources */,
@@ -32562,6 +32625,7 @@
 				9864296822F834F10039811C /* SpotifyResponse.swift in Sources */,
 				D47863FA1F3F18FA00EFDC6D /* UsageInfoViewController.swift in Sources */,
 				8244D12DB4B058CBAB05E1A9 /* PhotoVideoDetailViewInput.swift in Sources */,
+				982706F12548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				DEE642813D2C3E1B9FDC7D3C /* PhotoVideoDetailViewOutput.swift in Sources */,
 				36F1269830911DA792B987AA /* PhotoVideoDetailViewController.swift in Sources */,
 				065212E5C2E83D762D0B4492 /* PhotoVideoDetailModuleInput.swift in Sources */,
@@ -32641,6 +32705,7 @@
 				8E7659842333745A00D728A5 /* CredsUpdateCheckPopUp.swift in Sources */,
 				D49886611F3EFBE200F50C95 /* ImportPhotosViewInput.swift in Sources */,
 				8C0097161F6BDA8B00FA069C /* MoreFilesActionsModuleInput.swift in Sources */,
+				98DD03F62542E634006DE0BD /* UIImageEffects.swift in Sources */,
 				98185BA0248A709E0013929C /* WarningPopupController.swift in Sources */,
 				98B01C79206BD04600DD78C7 /* AnalyticsServiceConstants.swift in Sources */,
 				73A1833D235855AA0095719F /* CampaignCard.swift in Sources */,
@@ -32791,6 +32856,7 @@
 				2BA37C322028376500660394 /* FaceImageChangeCoverRouterInput.swift in Sources */,
 				986DD49A25388F3400C38AD4 /* ContactDevice.m in Sources */,
 				CE4CFEBF1F78F18700FB4C3D /* ResizableTableView.swift in Sources */,
+				B5307047254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */,
 				B51205C92305350D007EB951 /* AppendLocalsOperation.swift in Sources */,
 				591DE1155E5210C187678E0B /* UploadFilesSelectionInteractor.swift in Sources */,
 				CEDFDF0F1FBEE616006BFCAE /* FirstResponder.swift in Sources */,
@@ -33209,6 +33275,7 @@
 				CE78483E22A685FB00662219 /* ValidationService.swift in Sources */,
 				98732B432460168900E9D5D2 /* ElementTypes.swift in Sources */,
 				897B8F3B2338B7400028C690 /* HomePagePopUpsService.swift in Sources */,
+				B530704B254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */,
 				CE78483F22A685FB00662219 /* FaceImageDisplayManager.swift in Sources */,
 				CE78484022A685FB00662219 /* MyStorageViewController.swift in Sources */,
 				98C298412302AD1100C9811E /* BlurBackgroundPopup.swift in Sources */,
@@ -34356,6 +34423,7 @@
 				9864296A22F834F10039811C /* SpotifyResponse.swift in Sources */,
 				CF7146BB24B597A900D83E60 /* DeleteDuplicatesViewController.swift in Sources */,
 				8C1E5BEB22CB8D03008FDA02 /* ProfileTextViewEnterView.swift in Sources */,
+				982706F52548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				A74ADA4E23A38362007DD192 /* CarouselPageModel.swift in Sources */,
 				CE784BDA22A685FB00662219 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				CE784BDB22A685FB00662219 /* FaceImageAddNameInitializer.swift in Sources */,
@@ -34498,6 +34566,7 @@
 				CE784C4522A685FB00662219 /* SingletonStorage.swift in Sources */,
 				CE784C4622A685FB00662219 /* HelpAndSupportViewOutput.swift in Sources */,
 				98C2984C2302B12900C9811E /* SpotifyCancelImportPopup.swift in Sources */,
+				B5632011254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
 				CF71474524B597AA00D83E60 /* ContactSyncHelper.swift in Sources */,
 				CE784C4722A685FB00662219 /* ViewController.swift in Sources */,
 				CE784C4822A685FB00662219 /* AlbumDetailPresenter.swift in Sources */,
@@ -34562,6 +34631,7 @@
 				9809317C23952CAC00ECFEF8 /* PeopleAlbumsManager.swift in Sources */,
 				CE784C7722A685FB00662219 /* ActivityTimelineViewController.swift in Sources */,
 				CE784C7822A685FB00662219 /* ActivityTimelineModuleInput.swift in Sources */,
+				98DD03FA2542E635006DE0BD /* UIImageEffects.swift in Sources */,
 				CF7146D924B597A900D83E60 /* DeleteDuplicatesMainView.swift in Sources */,
 				CE784C7A22A685FB00662219 /* ActivityTimelinePresenter.swift in Sources */,
 				CE784C7B22A685FB00662219 /* ActivityTimelineInteractorInput.swift in Sources */,
@@ -34996,6 +35066,7 @@
 				734CA129244D753C0076F6A7 /* DocumentsAlbumCardResponce.swift in Sources */,
 				98BB909C24D8274900C4D246 /* PhotoEditViewUIManager.swift in Sources */,
 				CF8B64B023CBC9D70021B021 /* BottomSelectionTabBarPresenter.swift in Sources */,
+				98DD03F82542E635006DE0BD /* UIImageEffects.swift in Sources */,
 				CF8B64B123CBC9D70021B021 /* SharedService.swift in Sources */,
 				CF8B64B223CBC9D70021B021 /* CellsConstant.swift in Sources */,
 				CF8B64B323CBC9D70021B021 /* GradientView.swift in Sources */,
@@ -35221,6 +35292,7 @@
 				CF8B657123CBC9D70021B021 /* InstapickAnalysisCell.swift in Sources */,
 				CF8B657223CBC9D70021B021 /* FaceImageAddNameRouter.swift in Sources */,
 				CF8B657323CBC9D70021B021 /* AudioSelectionCollectionViewCell.swift in Sources */,
+				B5307049254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */,
 				CF8B657423CBC9D70021B021 /* TermsAndServicesPresenter.swift in Sources */,
 				CF8B657523CBC9D70021B021 /* YearsView.swift in Sources */,
 				CF8B657623CBC9D70021B021 /* SuggestionTableViewCell.swift in Sources */,
@@ -35301,6 +35373,7 @@
 				CF8B65B723CBC9D70021B021 /* UsageInfoViewOutput.swift in Sources */,
 				CF8B65B823CBC9D70021B021 /* AnimationCard.swift in Sources */,
 				CF8B65B923CBC9D70021B021 /* FreeAppSpaceRouter.swift in Sources */,
+				982706F32548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				CF8B65BA23CBC9D70021B021 /* IntroduceInitializer.swift in Sources */,
 				0305A33423D5C4A4004D1EC7 /* NSManagedObjectModel+Compatible.swift in Sources */,
 				CF8B65BB23CBC9D70021B021 /* CreateStoryViewController.swift in Sources */,
@@ -35347,6 +35420,7 @@
 				CF8B65DB23CBC9D70021B021 /* StoriesDataSourceForCollectionView.swift in Sources */,
 				CF8B65DC23CBC9D70021B021 /* PhoneVerificationInteractorInput.swift in Sources */,
 				CF8B65DD23CBC9D70021B021 /* AppendLocalsOperation.swift in Sources */,
+				B563200F254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
 				CF8B65DE23CBC9D70021B021 /* CollectionViewCellForStoryPhoto.swift in Sources */,
 				CF8B65DF23CBC9D70021B021 /* SpotifyImportViewController.swift in Sources */,
 				CF8B65E123CBC9D70021B021 /* PhoneVerificationInteractorOutput.swift in Sources */,
@@ -36221,6 +36295,7 @@
 				CF8B6B8823CBCA280021B021 /* SpotifyService.swift in Sources */,
 				98732B442460168900E9D5D2 /* ElementTypes.swift in Sources */,
 				CF8B6B8923CBCA280021B021 /* ValidationService.swift in Sources */,
+				B530704C254068B3000EA9F4 /* ExternalFileUploadService.swift in Sources */,
 				CF8B6B8A23CBCA280021B021 /* HomePagePopUpsService.swift in Sources */,
 				CF8B6B8B23CBCA280021B021 /* FaceImageDisplayManager.swift in Sources */,
 				CF8B6B8C23CBCA280021B021 /* MyStorageViewController.swift in Sources */,
@@ -37369,6 +37444,7 @@
 				CF8B6F7123CBCA280021B021 /* FaceImageAddNameInitializer.swift in Sources */,
 				CF7146BC24B597A900D83E60 /* DeleteDuplicatesViewController.swift in Sources */,
 				CF8B6F7223CBCA280021B021 /* UploadFilesSelectionViewInput.swift in Sources */,
+				982706F62548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				CF8B6F7323CBCA280021B021 /* UploadFilesSelectionViewOutput.swift in Sources */,
 				CF8B6F7423CBCA280021B021 /* SubscriptionPlanBaseResponse.swift in Sources */,
 				CF8B6F7523CBCA280021B021 /* UploadFilesSelectionViewController.swift in Sources */,
@@ -37510,6 +37586,7 @@
 				CF8B6FED23CBCA280021B021 /* ViewController.swift in Sources */,
 				0305A36223D5C659004D1EC7 /* CarouselPageView.swift in Sources */,
 				CF8B6FEE23CBCA280021B021 /* AlbumDetailPresenter.swift in Sources */,
+				B5632012254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
 				CF71474624B597AA00D83E60 /* ContactSyncHelper.swift in Sources */,
 				CF8B6FEF23CBCA280021B021 /* InitializingViewController.swift in Sources */,
 				B589FC5423F1388D00DD528D /* DataChunkProvider.swift in Sources */,
@@ -37574,6 +37651,7 @@
 				CF8B702323CBCA280021B021 /* ActivityTimelineViewController.swift in Sources */,
 				CF8B702423CBCA280021B021 /* ActivityTimelineModuleInput.swift in Sources */,
 				CF8B702523CBCA280021B021 /* ActivityTimelinePresenter.swift in Sources */,
+				98DD03FB2542E635006DE0BD /* UIImageEffects.swift in Sources */,
 				CF7146DA24B597A900D83E60 /* DeleteDuplicatesMainView.swift in Sources */,
 				CF8B702623CBCA280021B021 /* ActivityTimelineInteractorInput.swift in Sources */,
 				CF8B702723CBCA280021B021 /* PremiumFeaturesView.swift in Sources */,
@@ -39442,11 +39520,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
+				CODE_SIGN_IDENTITY = "Apple Development: Mehmet Altıparmak (2FCVKSSY8B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Mehmet Altıparmak (2FCVKSSY8B)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -39481,7 +39559,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = lifebox;
 				PROVISIONING_PROFILE = "be80acf2-5982-42ee-b336-8cb2367342ec";
-				PROVISIONING_PROFILE_SPECIFIER = "LifeBox debug";
+				PROVISIONING_PROFILE_SPECIFIER = "Lifebox iOS App";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -40697,11 +40775,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "NotificationService/Lifebox/NotificationService-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
+				CODE_SIGN_IDENTITY = "Apple Development: Mehmet Altıparmak (2FCVKSSY8B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Mehmet Altıparmak (2FCVKSSY8B)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = NotificationService/Lifebox/Info.plist;
@@ -40710,7 +40788,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.pushimage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "LifeBox notification debug";
+				PROVISIONING_PROFILE_SPECIFIER = "Lifebox iOS Notification Service Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "NotificationService/NotificationService-Bridging-Header.h";
@@ -41029,6 +41107,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "lifebox widget adhoc";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -41069,6 +41148,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -41109,6 +41189,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.come.life.Lifebox.LifeboxWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -41126,11 +41207,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProvider/LifeboxFileProvider-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
+				CODE_SIGN_IDENTITY = "Apple Development: Mehmet Altıparmak (2FCVKSSY8B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Mehmet Altıparmak (2FCVKSSY8B)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -41148,7 +41229,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.files;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b4c90355-f149-4574-9699-754432dedc4a";
-				PROVISIONING_PROFILE_SPECIFIER = "LifeBox files debug";
+				PROVISIONING_PROFILE_SPECIFIER = "Lifebox iOS File Provider Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -41298,11 +41379,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxFileProviderUI/LifeboxFileProviderUI-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
+				CODE_SIGN_IDENTITY = "Apple Development: Mehmet Altıparmak (2FCVKSSY8B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Mehmet Altıparmak (2FCVKSSY8B)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -41320,7 +41401,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.filesui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5b7534af-e91e-45f0-863c-4ef32654c718";
-				PROVISIONING_PROFILE_SPECIFIER = "LifeBox filesUI debug";
+				PROVISIONING_PROFILE_SPECIFIER = "Lifebox iOS File Provider UI Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -41473,7 +41554,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d3.5.8;
+				CURRENT_PROJECT_VERSION = d2.6.2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -41537,7 +41618,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d3.5.8;
+				CURRENT_PROJECT_VERSION = d2.6.2;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -41597,7 +41678,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d3.5.8;
+				CURRENT_PROJECT_VERSION = d2.6.2;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -41658,7 +41739,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d3.5.8;
+				CURRENT_PROJECT_VERSION = d2.6.2;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -41716,11 +41797,11 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_ENTITLEMENTS = "LifeboxShared/LifeboxShared-appstore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
+				CODE_SIGN_IDENTITY = "Apple Development: Mehmet Altıparmak (2FCVKSSY8B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Mehmet Altıparmak (2FCVKSSY8B)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -41738,7 +41819,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.shareextension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8b7e0199-968b-4d57-b6f3-356e454a654b";
-				PROVISIONING_PROFILE_SPECIFIER = "LifeBox share debug";
+				PROVISIONING_PROFILE_SPECIFIER = "Lifebox iOS Share Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
@@ -42331,11 +42412,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Depo/App/Depo-AppStore.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: CAN KÜÇÜKAKDAĞ (B26VMJ9RF6)";
+				CODE_SIGN_IDENTITY = "Apple Development: Mehmet Altıparmak (2FCVKSSY8B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Mehmet Altıparmak (2FCVKSSY8B)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -42370,7 +42451,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "be80acf2-5982-42ee-b336-8cb2367342ec";
-				PROVISIONING_PROFILE_SPECIFIER = "LifeBox debug";
+				PROVISIONING_PROFILE_SPECIFIER = "Lifebox iOS App";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG MAIN_APP";
 				SWIFT_OBJC_BRIDGING_HEADER = "Depo/App/Depo-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
@@ -42855,6 +42936,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Billo widget AdHoc";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -42895,6 +42977,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -42935,6 +43018,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = by.com.life.LifeDrive.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -42956,24 +43040,24 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = LifeboxWidget/LifeboxWidgetExtensionDebug.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "LifeboxWidget/LifeboxTC/autosync-widget-appstore.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = YES;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = d2.1.8;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 7YZS5NTGYH;
+				DEVELOPMENT_TEAM = 693N5K66ZJ;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = "$(SRCROOT)/LifeboxWidget/LifeboxTC/Info-AppStore.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LifeboxWidget/LifeboxTC/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.todayextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turkcell.akillidepo.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "lifebox widget dev";
+				PROVISIONING_PROFILE_SPECIFIER = "Lifebox iOS Home Page Widget Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
@@ -43018,6 +43102,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "lifebox widget adhoc";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -43059,6 +43144,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "akillidepo today extension";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -43100,6 +43186,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Akilli Depo New Today Extension in House";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -43183,6 +43270,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "lifebox widget adhoc";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = RELEASE;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -43224,6 +43312,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "billo today extension";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -43265,6 +43354,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "lifedrive ent Today Extension";
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = ENTERPRISE;
 				SWIFT_OBJC_BRIDGING_HEADER = "LifeboxWidget/Widget-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

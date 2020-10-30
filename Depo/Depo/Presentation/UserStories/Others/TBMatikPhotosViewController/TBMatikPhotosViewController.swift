@@ -19,7 +19,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         return controller
     }
     
-    static func with(items: [Item]) -> TBMatikPhotosViewController {
+    static func with(items: [Item], selectedIndex: Int) -> TBMatikPhotosViewController {
         
         var itemsDict = [String: Item]()
         for item in items {
@@ -33,6 +33,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         controller.modalPresentationStyle = .overFullScreen
         controller.items = itemsDict
         controller.uuids = uuids
+        controller.selectedIndex = selectedIndex
         return controller
     }
     
@@ -43,17 +44,6 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     // MARK: - IBOutlets
-    
-    private lazy var gradientView: GradientView! = {
-        let gradientView = GradientView()
-        gradientView.alpha = 0.8
-        gradientView.setup(withFrame: view.bounds,
-                           startColor: ColorConstants.tealBlue,
-                           endColoer: ColorConstants.seaweed,
-                           startPoint: .zero,
-                           endPoint: CGPoint(x: 0, y: 1))
-        return gradientView
-    }()
     
     @IBOutlet private weak var backgroundImageView: UIImageView!
     
@@ -131,6 +121,8 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         }
     }
     
+    private var selectedIndex: Int = 0
+    
     // MARK: - View lifecycle
     
     deinit {
@@ -161,6 +153,10 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         
         carouselItemFrameWidth = carousel.bounds.width - Constants.leftOffset - Constants.rightOffset
         carouselItemFrameHeight = carousel.bounds.height
+        
+        if let currentView = carousel.currentItemView as? TBMatikPhotoView, currentView.image != nil {
+            updateBackground(with: currentView.image)
+        }
     }
     
     private func track(screen: AnalyticsAppScreens) {
@@ -169,8 +165,9 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     private func configure() {
-        view.insertSubview(gradientView, aboveSubview: backgroundImageView)
-            
+        backgroundImageView.backgroundColor = ColorConstants.tbMatikBlurColor
+        backgroundImageView.contentMode = .scaleAspectFill
+        
         pageControl.numberOfPages = uuids.count
         setupCarousel()
         updateTitle()
@@ -215,6 +212,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     
     private func reloadData() {
         carousel.reloadData()
+        carousel.scrollToItem(at: selectedIndex, animated: false)
         carousel.isHidden = false
         updateTitle()
     }
@@ -254,6 +252,15 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         tabbarController.showAndScrollPhotosScreen(scrollTo: item)        
         dismiss(animated: true)
     }
+    
+    private func updateBackground(with image: UIImage?) {
+        guard let blurImage = image?.applyBlur(radius: 20,
+                                               tintColor: ColorConstants.tbMatikBlurColor.withAlphaComponent(0.6),
+                                               saturationDeltaFactor: 1.8) else {
+            return
+        }
+        backgroundImageView.image = blurImage
+    }
 }
 
 // MARK: - iCarouselDataSource
@@ -275,6 +282,7 @@ extension TBMatikPhotosViewController: iCarouselDataSource {
         
         itemView.setImageHandler = { [weak self] in
             self?.updateButtonsState(for: itemView)
+            self?.updateBackground(with: itemView.image)
         }
         
         return itemView
@@ -320,6 +328,7 @@ extension TBMatikPhotosViewController: iCarouselDelegate {
         
         if let currentView = carousel.currentItemView as? TBMatikPhotoView {
             updateButtonsState(for: currentView)
+            updateBackground(with: currentView.image)
         }
     }
 }

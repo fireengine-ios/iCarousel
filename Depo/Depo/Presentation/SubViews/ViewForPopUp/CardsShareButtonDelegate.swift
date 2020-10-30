@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ShareType {
+enum CardShareType {
     case link
     case origin
     
@@ -18,6 +18,6 @@ enum ShareType {
 }
 
 protocol CardsShareButtonDelegate: class {
-    func share(item: BaseDataSourceItem, type: ShareType)
+    func share(item: BaseDataSourceItem, type: CardShareType)
 }
 

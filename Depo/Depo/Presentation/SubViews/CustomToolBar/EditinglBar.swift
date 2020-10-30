@@ -91,7 +91,7 @@ class EditinglBar: CustomTabBar {
                        PreDetermendTypes.hide.0,
                        PreDetermendTypes.unhide.0,
                        PreDetermendTypes.restore.0:
-                      image = image?.withRenderingMode(.alwaysOriginal)
+                      image = image?.withRenderingMode(.alwaysTemplate)
                   case PreDetermendTypes.syncInProgress.0:
                       image = nil
                       syncInProgress = true
