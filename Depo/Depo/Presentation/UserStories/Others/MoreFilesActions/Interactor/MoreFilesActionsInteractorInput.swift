@@ -32,7 +32,7 @@ protocol MoreFilesActionsInteractorInput {
     
     func download(item: [BaseDataSourceItem])
     
-    func downloadDocument(item: [BaseDataSourceItem])
+    func downloadDocument(items: [WrapData]?)
     
     func restore(items: [BaseDataSourceItem])
     

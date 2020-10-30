@@ -39,6 +39,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private lazy var hideActionService: HideActionServiceProtocol = HideActionService()
     private lazy var smashActionService: SmashActionServiceProtocol = SmashActionService()
     private lazy var photoEditImageDownloader = PhotoEditImageDownloader()
+    private lazy var downloadDocumentService = DocumentDownloadService()
+    
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
@@ -776,7 +778,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                            fail: failAction(elementType: .sync))
     }
     
-    func downloadDocument(item: [BaseDataSourceItem]) {
+    func downloadDocument(items: [WrapData]?) {
+        guard let items = items, !items.isEmpty else {
+            return
+        }
+        
+        downloadDocumentService.saveLocaly(remoteItems: items)
     }
     
     func download(item: [BaseDataSourceItem]) {

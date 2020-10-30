@@ -215,7 +215,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
                     self.basePassingPresenter?.stopModeSelected()
-                    self.interactor.downloadDocument(item: selectedItems)
+                    self.interactor.downloadDocument(items: selectedItems as? [WrapData])
                 } else {
                     let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
@@ -412,7 +412,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     })
                 case .downloadDocument:
                     action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
-                        self.interactor.downloadDocument(item: currentItems)
+                        self.interactor.downloadDocument(items: currentItems)
                     })
                 case .delete:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
