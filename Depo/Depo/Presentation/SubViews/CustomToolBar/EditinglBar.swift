@@ -23,7 +23,7 @@ class EditinglBar: CustomTabBar {
         static let makeCover = ("MoveButtonIcon", TextConstants.tabAlbumCoverAlbumLabel, "")
         static let removeFromAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveLabel, "")//from album
         static let removeFromFaceImageAlbum = ("DeleteShareButton", TextConstants.tabBarRemoveLabel, "")//from album
-        static let sync = ("cloudUpload", TextConstants.tabBarSyncLabel, "")
+        static let sync = ("tabbarSync", TextConstants.tabBarSyncLabel, "")
         static let syncInProgress = ("", TextConstants.tabBarSyncLabel, "")
         static let download = ("downloadTB", TextConstants.tabBarDownloadLabel, "")
         static let hide = ("HideButtonIcon", TextConstants.tabBarHideLabel, "")
@@ -91,7 +91,7 @@ class EditinglBar: CustomTabBar {
                        PreDetermendTypes.hide.0,
                        PreDetermendTypes.unhide.0,
                        PreDetermendTypes.restore.0:
-                      image = image?.withRenderingMode(.alwaysOriginal)
+                      image = image?.withRenderingMode(.alwaysTemplate)
                   case PreDetermendTypes.syncInProgress.0:
                       image = nil
                       syncInProgress = true

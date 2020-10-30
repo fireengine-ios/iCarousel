@@ -38,7 +38,7 @@ class BottomSelectionTabBarViewController: UIViewController, BottomSelectionTabB
         if let tintColor = tintColor {
             editingBar.tintColor = tintColor
         } else {
-            editingBar.tintColor = ColorConstants.selectedBottomBarButtonColor
+            editingBar.tintColor = ColorConstants.blueColor
         }
         if let style = style, style != .default {
             editingBar.backgroundImage = UIImage()

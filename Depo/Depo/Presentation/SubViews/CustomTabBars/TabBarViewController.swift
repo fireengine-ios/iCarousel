@@ -474,10 +474,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         folderBtn = createSubButton(withText: TextConstants.newFolder, imageName: "NewFolder", asLeft: false)
         folderBtn?.changeVisability(toHidden: true)
         
-        uploadFromLifebox = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "NewFolder", asLeft: false)
+        uploadFromLifebox = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "Upload", asLeft: false)
         uploadFromLifebox?.changeVisability(toHidden: true)
         
-        uploadFromLifeboxFavorites = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "NewFolder", asLeft: false)
+        uploadFromLifeboxFavorites = createSubButton(withText: TextConstants.uploadFromLifebox, imageName: "Upload", asLeft: false)
         uploadFromLifeboxFavorites?.changeVisability(toHidden: true)
         
         albumBtn = createSubButton(withText: TextConstants.createAlbum, imageName: "NewFolder", asLeft: false)
@@ -564,63 +564,32 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         return buttonsArray
     }
     
-    static let bottomSpace: CGFloat = 7 + (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
-    static let spaceBeetwenbuttons: CGFloat = 3
-    
     private func showButtonRainbow() {
+        
+        let bottomOffset = tabBar.frame.size.height + 7 + (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
+        let radius: CGFloat = 100
         
         let buttonsArray = getFloatingButtonsArray()
         let count = buttonsArray.count
         
-        if count == 1 {
-            let obj0 = buttonsArray[0]
-            obj0.centerXConstraint!.constant = 0
-            obj0.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace
+        let angles: [Double]
+        switch count {
+        case 1:
+            angles = [90]
+        case 2:
+            angles = [135, 45]
+        case 3:
+            angles = [150, 90, 30]
+        case 4:
+            angles = [165, 115, 65, 15]
+        default:
+            angles = []
         }
         
-        if count == 2 {
-            let obj0 = buttonsArray[0]
-            let obj1 = buttonsArray[1]
-            
-            obj0.centerXConstraint!.constant = -obj0.frame.size.width * 0.75
-            obj0.bottomConstraint!.constant = -obj0.frame.size.height * 0.75 - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
-            
-            obj1.centerXConstraint!.constant = obj0.frame.size.width * 0.75
-            obj1.bottomConstraint!.constant = -obj0.frame.size.height * 0.75 - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
-        }
-        
-        if count == 3 {
-            let obj0 = buttonsArray[0]
-            let obj1 = buttonsArray[1]
-            let obj2 = buttonsArray[2]
-            
-            obj0.centerXConstraint!.constant = -obj0.frame.size.width
-            obj0.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
-            
-            obj1.centerXConstraint!.constant = 0
-            obj1.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
-            
-            obj2.centerXConstraint!.constant = obj0.frame.size.width
-            obj2.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
-        }
-        
-        if count == 4 {
-            let obj0 = buttonsArray[0]
-            let obj1 = buttonsArray[1]
-            let obj2 = buttonsArray[2]
-            let obj3 = buttonsArray[3]
-            
-            obj0.centerXConstraint!.constant = -obj0.frame.size.width
-            obj0.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
-            
-            obj1.centerXConstraint!.constant = -obj0.frame.size.width * 0.55
-            obj1.bottomConstraint!.constant = -obj0.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
-            
-            obj2.centerXConstraint!.constant = obj0.frame.size.width * 0.55
-            obj2.bottomConstraint!.constant = -obj3.frame.size.height - tabBar.frame.size.height - TabBarViewController.bottomSpace - TabBarViewController.spaceBeetwenbuttons
-            
-            obj3.centerXConstraint!.constant = obj0.frame.size.width
-            obj3.bottomConstraint!.constant = -tabBar.frame.size.height - TabBarViewController.bottomSpace
+        buttonsArray.enumerated().forEach { index, button in
+            let radians = angles[index] * Double.pi / 180
+            button.centerXConstraint?.constant = radius * CGFloat(cos(radians))
+            button.bottomConstraint?.constant = -(radius * CGFloat(sin(radians)) - button.frame.height * 0.5 + bottomOffset)
         }
         
         changeButtonsAppearance(toHidden: false, withAnimation: true, forButtons: buttonsArray)
