@@ -6,6 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import WidgetKit
+
 class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
     
     private lazy var tokenStorage: TokenStorage = factory.resolve()
@@ -126,6 +128,10 @@ class PhoneVerificationInteractor: PhoneVerificationInteractorInput {
                                       attachedCaptcha: atachedCaptcha)
         
         authenticationService.login(user: user, sucess: { [weak self] _ in
+            debugLog("Phone Verefication: authificate login successfull")
+            if #available(iOS 14.0, *) {
+                WidgetCenter.shared.reloadAllTimelines()
+            }
             self?.onSuccessLogin()
         }, fail: { [weak self] errorResponse  in
             guard let `self` = self else {
