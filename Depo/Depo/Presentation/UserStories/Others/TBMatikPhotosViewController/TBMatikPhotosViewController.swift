@@ -187,6 +187,10 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         carousel.delegate = self
         carousel.dataSource = self
         carousel.isPagingEnabled = true
+        
+        // limit scroll in boundary values
+        // with 0 works incorrectly
+        carousel.bounceDistance = 0.000001
     }
     
     private func loadItemsByUuids() {
@@ -254,12 +258,17 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     private func updateBackground(with image: UIImage?) {
-        guard let blurImage = image?.applyBlur(radius: 20,
-                                               tintColor: ColorConstants.tbMatikBlurColor.withAlphaComponent(0.6),
-                                               saturationDeltaFactor: 1.8) else {
-            return
+        DispatchQueue.global().async { [weak self] in
+            guard let blurImage = image?.applyBlur(radius: 20,
+                                                   tintColor: ColorConstants.tbMatikBlurColor.withAlphaComponent(0.6),
+                                                   saturationDeltaFactor: 1.8) else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.backgroundImageView.image = blurImage
+            }
         }
-        backgroundImageView.image = blurImage
     }
 }
 
