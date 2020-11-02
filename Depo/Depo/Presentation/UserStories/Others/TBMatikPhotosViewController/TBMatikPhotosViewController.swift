@@ -187,10 +187,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         carousel.delegate = self
         carousel.dataSource = self
         carousel.isPagingEnabled = true
-        
-        // limit scroll in boundary values
-        // with 0 works incorrectly
-        carousel.bounceDistance = 0.000001
+        carousel.bounces = false
     }
     
     private func loadItemsByUuids() {
