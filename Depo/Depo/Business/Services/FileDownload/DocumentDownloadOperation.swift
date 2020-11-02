@@ -81,7 +81,7 @@ extension DocumentDownloadOperation: OperationProgressServiceDelegate {
             return
         }
         
-        if item.urlToFile == url {
+        if item.urlToFile?.byTrimmingQuery == url {
             CardsManager.default.setProgress(ratio: ratio, operationType: .download, object: item)
 //            ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
         }

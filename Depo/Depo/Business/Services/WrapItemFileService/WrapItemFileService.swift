@@ -38,11 +38,8 @@ protocol  WrapItemFileOperations {
 class WrapItemFileService: WrapItemFileOperations {
     
     let remoteFileService = FileService.shared
-    
     let sharedFileService = SharedService()
-    
     let uploadService = UploadService.default
-    
     private let hiddenService = HiddenService()
     
     
@@ -223,6 +220,12 @@ class WrapItemFileService: WrapItemFileOperations {
         }, returnedUploadOperation: { operations in
             syncOperations(operations)
         })
+    }
+    
+    func downloadDocuments(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
+        let downloadItems = remoteWrapDataItems(files: items)
+        
+        remoteFileService.downloadDocument(items: downloadItems, success: success, fail: fail)
     }
     
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {

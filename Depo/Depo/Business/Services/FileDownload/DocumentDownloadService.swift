@@ -19,9 +19,9 @@ final class DocumentDownloadService {
     }()
     
     
-    func saveLocaly(remoteItems: [Item]) {
+    func saveLocaly(remoteItems: [Item], onDownload: @escaping VoidHandler, onCompletion: @escaping ValueHandler<[URL]>) -> Int {
         guard !remoteItems.isEmpty else {
-            return
+            return 0
         }
         
         var localURLs = [URL]()
@@ -35,21 +35,18 @@ final class DocumentDownloadService {
                 if let url = localURL {
                     localURLs.append(url)
                 }
+                onDownload()
                 group.leave()
             }
             operations.append(operation)
         }
-        
         operationQueue.addOperations(operations, waitUntilFinished: false)
         
         group.notify(queue: .main) {
-            self.showDocumentPicker(urls: localURLs)
+            onCompletion(localURLs)
         }
-    }
-    
-    private func showDocumentPicker(urls: [URL]) {
-        let picker = UIDocumentPickerViewController(urls: urls, in: .exportToService)
-        RouterVC().presentViewController(controller: picker)
+         
+        return operations.count
     }
 }
 
