@@ -180,7 +180,7 @@ private extension ContactListViewController {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let deleteAllAction = UIAlertAction(title: TextConstants.contactListDeleteAll, style: .default) { [weak self] _ in
-            self?.showPopup(type: .deleteAllContacts)
+            self?.showPopup(type: .deleteAllContacts, backup: self?.backUpInfo)
         }
         actionSheet.addAction(deleteAllAction)
         
