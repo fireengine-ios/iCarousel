@@ -50,7 +50,7 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIe-nx-Ucd" customClass="iCarousel">
-                    <rect key="frame" x="0.0" y="131" width="375" height="522"/>
+                    <rect key="frame" x="0.0" y="143" width="375" height="518"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lge-oI-I7M" customClass="TimelineButton" customModule="Billo" customModuleProvider="target">
@@ -81,12 +81,12 @@
                 <constraint firstItem="zlC-hj-dcw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="4wz-rc-7Yq"/>
                 <constraint firstItem="Lge-oI-I7M" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="14" id="7BT-v8-Ed2"/>
                 <constraint firstItem="ZDf-lG-9Th" firstAttribute="leading" secondItem="Lge-oI-I7M" secondAttribute="trailing" constant="9" id="BSu-Iy-NU8"/>
-                <constraint firstItem="bIe-nx-Ucd" firstAttribute="top" secondItem="ugr-WK-tJf" secondAttribute="bottom" constant="4" id="Evo-lQ-ryU"/>
+                <constraint firstItem="bIe-nx-Ucd" firstAttribute="top" secondItem="ugr-WK-tJf" secondAttribute="bottom" constant="16" id="Evo-lQ-ryU"/>
                 <constraint firstItem="ugr-WK-tJf" firstAttribute="top" secondItem="d8W-rB-aKw" secondAttribute="bottom" constant="-5" id="G3e-AN-7CO"/>
                 <constraint firstAttribute="bottom" secondItem="zlC-hj-dcw" secondAttribute="bottom" id="JA6-O8-WW6"/>
                 <constraint firstItem="ZDf-lG-9Th" firstAttribute="width" secondItem="Lge-oI-I7M" secondAttribute="width" id="MCU-jN-cCd"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Lge-oI-I7M" secondAttribute="bottom" constant="23" id="Pie-gS-CWx"/>
-                <constraint firstItem="Lge-oI-I7M" firstAttribute="top" secondItem="bIe-nx-Ucd" secondAttribute="bottom" constant="58" id="RV9-gi-ZGI"/>
+                <constraint firstItem="Lge-oI-I7M" firstAttribute="top" secondItem="bIe-nx-Ucd" secondAttribute="bottom" constant="50" id="RV9-gi-ZGI"/>
                 <constraint firstItem="Lge-oI-I7M" firstAttribute="height" secondItem="ZDf-lG-9Th" secondAttribute="height" id="TXx-rA-0Mo"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="d8W-rB-aKw" secondAttribute="trailing" constant="8" id="ceW-e3-A8u"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ZDf-lG-9Th" secondAttribute="trailing" constant="14" id="iSl-2O-7P4"/>
