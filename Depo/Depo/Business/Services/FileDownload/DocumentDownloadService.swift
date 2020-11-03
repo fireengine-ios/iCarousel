@@ -12,40 +12,25 @@ import UIKit
 
 final class DocumentDownloadService {
     
-    private let operationQueue: OperationQueue = {
+    static let operationQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         return queue
     }()
     
     
-    func saveLocaly(remoteItems: [Item], onDownload: @escaping VoidHandler, onCompletion: @escaping ValueHandler<[URL]>) -> Int {
+    func saveLocaly(remoteItems: [Item], onDownload: @escaping VoidHandler) -> Int {
         guard !remoteItems.isEmpty else {
             return 0
         }
         
-        var localURLs = [URL]()
         var operations = [DocumentDownloadOperation]()
         
-        let group = DispatchGroup()
-        
-        remoteItems.forEach {
-            group.enter()
-            let operation = DocumentDownloadOperation(item: $0) { localURL in
-                if let url = localURL {
-                    localURLs.append(url)
-                }
-                onDownload()
-                group.leave()
-            }
-            operations.append(operation)
+        let operation = DocumentDownloadOperation(items: remoteItems) {
+            onDownload()
         }
-        operationQueue.addOperations(operations, waitUntilFinished: false)
-        
-        group.notify(queue: .main) {
-            onCompletion(localURLs)
-        }
-         
+        operations.append(operation)
+        DocumentDownloadService.operationQueue.addOperations(operations, waitUntilFinished: false)
         return operations.count
     }
 }

@@ -111,6 +111,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles, .upload, .uploadFromLifeboxFavorites])
+        viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.upload, .download])
+        viewController.scrollablePopUpView.isEnable = true
         viewController.isFavorites = true
         viewController.segmentImage = .favorites
         

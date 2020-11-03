@@ -354,6 +354,7 @@ class FileService: BaseRequestService {
     func downloadDocument(items: [WrapData], success: FileOperation?, fail: FailResponse?) {
         let itemsToDownload = downloadDocumentService.saveLocaly(remoteItems: items) { [weak self] in
             guard let self = self else {
+                success?()
                 return
             }
             
@@ -361,20 +362,13 @@ class FileService: BaseRequestService {
             CardsManager.default.setProgressForOperationWith(type: .download,
                                                              allOperations: self.allOperationsCount,
                                                              completedOperations: self.completedOperationsCount)
-        } onCompletion: { [weak self] urls in
-            guard let self = self else {
-                return
-            }
             
             if self.allOperationsCount == self.completedOperationsCount {
                 self.trackDownloaded(lastQueueItems: items)
                 CardsManager.default.stopOperationWith(type: .download)
+                success?()
             }
-            let router = RouterVC()
-            let picker = UIDocumentPickerViewController(urls: urls, in: .exportToService)
-            router.presentViewController(controller: picker)
         }
-
         
         allOperationsCount += itemsToDownload
         CardsManager.default.startOperationWith(type: .download,

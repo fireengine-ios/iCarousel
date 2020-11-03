@@ -782,7 +782,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        fileService.downloadDocuments(items: items, success: nil, fail: failAction(elementType: .downloadDocument))
+        fileService.downloadDocuments(items: items, success: successAction(elementType: .downloadDocument), fail: failAction(elementType: .downloadDocument))
     }
     
     func download(item: [BaseDataSourceItem]) {

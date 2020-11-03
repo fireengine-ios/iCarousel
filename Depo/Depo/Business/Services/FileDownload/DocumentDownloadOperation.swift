@@ -7,19 +7,24 @@
 //
 
 
+
+/*
+ * tasks and items are arrays, but only one download task is supported for now
+ */
+
 final class DocumentDownloadOperation: Operation {
-    
+
     private let semaphore = DispatchSemaphore(value: 0)
-    private var task: URLSessionTask?
-    private let item: Item
-    private let completion: ValueHandler<URL?>
-    private var outputURL: URL?
+    private var tasks = [URLSessionTask?]()
+    private let items: [Item]
+    private let completion: VoidHandler
+    private var outputURLs = [URL]()
     
     
     //MARK: - Init
     
-    init(item: Item, completion: @escaping ValueHandler<URL?>) {
-        self.item = item
+    init(items: [Item], completion: @escaping VoidHandler) {
+        self.items = items
         self.completion = completion
         
         super.init()
@@ -33,7 +38,7 @@ final class DocumentDownloadOperation: Operation {
     override func cancel() {
         super.cancel()
         
-        task?.cancel()
+        tasks.forEach { $0?.cancel() }
         
         semaphore.signal()
     }
@@ -43,44 +48,77 @@ final class DocumentDownloadOperation: Operation {
         
         download()
         semaphore.wait()
-        
+
         SingletonStorage.shared.progressDelegates.remove(self)
         
-        completion(outputURL)
+        completion()
     }
     
     
     //MARK: - Private
     
     private func download() {
-        guard let url = item.urlToFile?.byTrimmingQuery, let name = item.name else {
-            semaphore.signal()
-            return
+        let group = DispatchGroup()
+        items.forEach {
+            guard let url = $0.urlToFile?.byTrimmingQuery, let name = $0.name else {
+                return
+            }
+            
+            group.enter()
+            
+            let parameters = BaseDownloadRequestParametrs(urlToFile: url, fileName: name, contentType: $0.fileType)
+            let task = FileService.shared.executeDownloadRequest(param: parameters) { [weak self] localUrl, _, error in
+                defer {
+                    group.leave()
+                }
+                
+                guard let self = self else {
+                    return
+                }
+                
+                guard !self.isCancelled else {
+                    return
+                }
+                
+                self.outputURLs.append(localUrl)
+            }
+            tasks.append(task)
         }
         
-        let parameters = BaseDownloadRequestParametrs(urlToFile: url, fileName: name, contentType: item.fileType)
-        task = FileService.shared.executeDownloadRequest(param: parameters) { [weak self] localUrl, _, error in
-            guard let self = self else {
-                return
-            }
-            
+        group.notify(queue: .main) {
             guard !self.isCancelled else {
+                //semaphore.signal() is in func cancel()
                 return
             }
             
-            self.outputURL = localUrl
-            
-            self.semaphore.signal()
+            self.saveDownloaded(urls: self.outputURLs)
         }
+    }
+    
+    private func saveDownloaded(urls: [URL]) {
+        let router = RouterVC()
+        let picker = UIDocumentPickerViewController(urls: urls, in: .exportToService)
+        picker.delegate = self
+        router.presentViewController(controller: picker)
+    }
+}
+
+extension DocumentDownloadOperation: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        semaphore.signal()
+    }
+    
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        semaphore.signal()
     }
 }
 
 extension DocumentDownloadOperation: OperationProgressServiceDelegate {
     func didSend(ratio: Float, bytes: Int, for url: URL) {
-        guard isExecuting else {
+        guard isExecuting, let item = items.first else {
             return
         }
-        
+
         if item.urlToFile?.byTrimmingQuery == url {
             CardsManager.default.setProgress(ratio: ratio, operationType: .download, object: item)
 //            ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
