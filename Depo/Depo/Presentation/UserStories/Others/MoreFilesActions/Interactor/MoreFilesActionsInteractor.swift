@@ -40,6 +40,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private lazy var smashActionService: SmashActionServiceProtocol = SmashActionService()
     private lazy var photoEditImageDownloader = PhotoEditImageDownloader()
     
+    
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
     var sharingItems = [BaseDataSourceItem]()
@@ -776,6 +777,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                            fail: failAction(elementType: .sync))
     }
     
+    func downloadDocument(items: [WrapData]?) {
+        guard let items = items, !items.isEmpty else {
+            return
+        }
+        
+        fileService.downloadDocuments(items: items, success: successAction(elementType: .downloadDocument), fail: failAction(elementType: .downloadDocument))
+    }
     
     func download(item: [BaseDataSourceItem]) {
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {

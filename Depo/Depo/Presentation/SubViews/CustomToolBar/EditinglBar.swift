@@ -26,6 +26,7 @@ class EditinglBar: CustomTabBar {
         static let sync = ("tabbarSync", TextConstants.tabBarSyncLabel, "")
         static let syncInProgress = ("", TextConstants.tabBarSyncLabel, "")
         static let download = ("downloadTB", TextConstants.tabBarDownloadLabel, "")
+        static let downloadDocument = ("downloadTB", TextConstants.tabBarDownloadLabel, "")
         static let hide = ("HideButtonIcon", TextConstants.tabBarHideLabel, "")
         static let unhide = ("UnhideButtonIcon", TextConstants.tabBarUnhideLabel, "")
         static let smash = ("SmashButtonIcon", TextConstants.tabBarSmashLabel, "")

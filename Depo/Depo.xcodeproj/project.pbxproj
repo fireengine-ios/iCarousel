@@ -5832,6 +5832,12 @@
 		B519A676253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
 		B519A677253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
 		B519A678253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */; };
+		B51B8195254AECEB0072C6FA /* DocumentDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51B8194254AECEB0072C6FA /* DocumentDownloadService.swift */; };
+		B51B8196254AECEB0072C6FA /* DocumentDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51B8194254AECEB0072C6FA /* DocumentDownloadService.swift */; };
+		B51B8197254AECEB0072C6FA /* DocumentDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51B8194254AECEB0072C6FA /* DocumentDownloadService.swift */; };
+		B51B8198254AECEC0072C6FA /* DocumentDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51B8194254AECEB0072C6FA /* DocumentDownloadService.swift */; };
+		B51B8199254AECEC0072C6FA /* DocumentDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51B8194254AECEB0072C6FA /* DocumentDownloadService.swift */; };
+		B51B819A254AECEC0072C6FA /* DocumentDownloadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51B8194254AECEB0072C6FA /* DocumentDownloadService.swift */; };
 		B51D958E24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D958D24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift */; };
 		B51D958F24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D958D24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift */; };
 		B51D959024D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51D958D24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift */; };
@@ -6260,6 +6266,12 @@
 		B5CDB34121787FEF006CFA50 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB32F21787FEF006CFA50 /* Message.m */; };
 		B5CDB3542179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */; };
 		B5CDB3552179B7E9006CFA50 /* TurkcellUpdaterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */; };
+		B5D42C23254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D42C22254C00B7002E4997 /* DocumentDownloadOperation.swift */; };
+		B5D42C24254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D42C22254C00B7002E4997 /* DocumentDownloadOperation.swift */; };
+		B5D42C25254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D42C22254C00B7002E4997 /* DocumentDownloadOperation.swift */; };
+		B5D42C26254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D42C22254C00B7002E4997 /* DocumentDownloadOperation.swift */; };
+		B5D42C27254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D42C22254C00B7002E4997 /* DocumentDownloadOperation.swift */; };
+		B5D42C28254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D42C22254C00B7002E4997 /* DocumentDownloadOperation.swift */; };
 		B5DD3D67250F830F00AFF934 /* MTIVignetteFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD3D66250F830F00AFF934 /* MTIVignetteFilter.swift */; };
 		B5DD3D68250F830F00AFF934 /* MTIVignetteFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD3D66250F830F00AFF934 /* MTIVignetteFilter.swift */; };
 		B5DD3D69250F830F00AFF934 /* MTIVignetteFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DD3D66250F830F00AFF934 /* MTIVignetteFilter.swift */; };
@@ -14008,6 +14020,7 @@
 		B51205C82305350D007EB951 /* AppendLocalsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppendLocalsOperation.swift; sourceTree = "<group>"; };
 		B51805ED234DCF5200DC2E82 /* CoreDataMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrator.swift; sourceTree = "<group>"; };
 		B519A672253043BB00427F14 /* PhotoEditImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditImageDownloader.swift; sourceTree = "<group>"; };
+		B51B8194254AECEB0072C6FA /* DocumentDownloadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDownloadService.swift; sourceTree = "<group>"; };
 		B51D958D24D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdPartyAdjustment.swift; sourceTree = "<group>"; };
 		B51D959724D00E4300FA2EA0 /* AdjustmentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustmentManager.swift; sourceTree = "<group>"; };
 		B51FD63A1FD19063000344BD /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -14159,6 +14172,7 @@
 		B5CDB32E21787FEF006CFA50 /* UIAlertViewCustom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertViewCustom.h; sourceTree = "<group>"; };
 		B5CDB32F21787FEF006CFA50 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		B5CDB3532179B7E9006CFA50 /* TurkcellUpdaterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkcellUpdaterService.swift; sourceTree = "<group>"; };
+		B5D42C22254C00B7002E4997 /* DocumentDownloadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDownloadOperation.swift; sourceTree = "<group>"; };
 		B5DD3D66250F830F00AFF934 /* MTIVignetteFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTIVignetteFilter.swift; sourceTree = "<group>"; };
 		B5DD3D78250FA9EC00AFF934 /* VignetteShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = VignetteShader.metal; sourceTree = "<group>"; };
 		B5E74797208B3736003A7110 /* UploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadOperation.swift; sourceTree = "<group>"; };
@@ -17696,6 +17710,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				B51B818F254AECB20072C6FA /* FileDownload */,
 				B53070422540688A000EA9F4 /* FileUpload */,
 				B549B6C924CF098200D39C44 /* PhotoEdit */,
 				17FBD51723FB2C3200979F39 /* DivorceActionService */,
@@ -20409,6 +20424,15 @@
 				B56921EF23ACECD600E255C4 /* MigrationPolicy_1_3.swift */,
 			);
 			path = Policies;
+			sourceTree = "<group>";
+		};
+		B51B818F254AECB20072C6FA /* FileDownload */ = {
+			isa = PBXGroup;
+			children = (
+				B51B8194254AECEB0072C6FA /* DocumentDownloadService.swift */,
+				B5D42C22254C00B7002E4997 /* DocumentDownloadOperation.swift */,
+			);
+			path = FileDownload;
 			sourceTree = "<group>";
 		};
 		B51D959E24D0105400FA2EA0 /* Adjustments */ = {
@@ -28015,6 +28039,7 @@
 				0303A0992397D0D000907F42 /* FeedbackService.swift in Sources */,
 				0303A09A2397D0D000907F42 /* FaceImageAddNameRouterInput.swift in Sources */,
 				0303A09B2397D0D000907F42 /* LoginModuleInput.swift in Sources */,
+				B5D42C26254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */,
 				98231A0D24F3A1E700FD16E2 /* SelectionMenuController.swift in Sources */,
 				0303A09C2397D0D000907F42 /* HomeCollectionViewLayout.swift in Sources */,
 				0303A09D2397D0D000907F42 /* LoginViewInput.swift in Sources */,
@@ -28737,6 +28762,7 @@
 				0303A2FE2397D0D000907F42 /* PeriodicContactSyncRouterInput.swift in Sources */,
 				0303A2FF2397D0D000907F42 /* PredicateRules.swift in Sources */,
 				0303A3002397D0D000907F42 /* DropboxResponse.swift in Sources */,
+				B51B8198254AECEC0072C6FA /* DocumentDownloadService.swift in Sources */,
 				0303A3012397D0D000907F42 /* FileService.swift in Sources */,
 				0303A3022397D0D000907F42 /* DispatchQueueLabels.swift in Sources */,
 				0303A3032397D0D000907F42 /* OrientationManager.swift in Sources */,
@@ -29999,6 +30025,7 @@
 				989BDE4D22F47B1E001DDEB2 /* SpotifyOverwritePopup.swift in Sources */,
 				8C0E8D681FDEBDFF00789C91 /* AlertFilesActionsSheetInteractorInput.swift in Sources */,
 				89EA4F7A240902C400A2C543 /* PackagesTableViewCell.swift in Sources */,
+				B5D42C24254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */,
 				8C0E8D6C1FDEBDFF00789C91 /* PackagesConfigurator.swift in Sources */,
 				8C0E8D6D1FDEBDFF00789C91 /* EmptyContainerNavVC.swift in Sources */,
 				9868100A25080FCF0046483B /* PhotoEditAdjustManager.swift in Sources */,
@@ -31002,6 +31029,7 @@
 				8C0E8FBA1FDEBDFF00789C91 /* FeedbackViewRouterInput.swift in Sources */,
 				8C0E8FBB1FDEBDFF00789C91 /* FeedbackViewRouter.swift in Sources */,
 				92004B5B21AD136400582C45 /* MyStorageViewInput.swift in Sources */,
+				B51B8196254AECEB0072C6FA /* DocumentDownloadService.swift in Sources */,
 				A74ADA4C23A38360007DD192 /* CarouselPageModel.swift in Sources */,
 				9809317F23952D8200ECFEF8 /* UpdatePasswordErrorResponse.swift in Sources */,
 				8C0E8FBC1FDEBDFF00789C91 /* FeedbackViewConfigurator.swift in Sources */,
@@ -31853,6 +31881,7 @@
 				CE51ABEA1EF90853005DCEE0 /* BaseCellModel.swift in Sources */,
 				89CC89F323AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */,
 				4A3F4119203B03170068D5B5 /* FaceImagePhotosInteractorOutput.swift in Sources */,
+				B5D42C23254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */,
 				892B015122DF168F00BCECBC /* TwoFactorChallengePresenter.swift in Sources */,
 				CE1E26E320174DC600F49E41 /* MappingError.swift in Sources */,
 				7CCAC5311FD82654001B315F /* MediaItemsObjectSyncStatus+CoreDataClass.swift in Sources */,
@@ -32357,6 +32386,7 @@
 				4ADE0881202DC8370095346F /* FaceImageItemsModuleOutput.swift in Sources */,
 				CE51ACF81EF90853005DCEE0 /* ForgotPasswordViewController.swift in Sources */,
 				737A2E9A2338989B0014258A /* SetSecurityQuestionViewController.swift in Sources */,
+				B51B8195254AECEB0072C6FA /* DocumentDownloadService.swift in Sources */,
 				CF71464B24B597A800D83E60 /* ContactSyncBaseCardView.swift in Sources */,
 				A2268EBF21A68BD3002F2611 /* LeavePremiumHeaderView.swift in Sources */,
 				CE51ACF91EF90853005DCEE0 /* ForgotPasswordModuleInput.swift in Sources */,
@@ -33376,6 +33406,7 @@
 				98A86D6B23A246A700438225 /* HiddenPhotosDataSource.swift in Sources */,
 				CE78488522A685FB00662219 /* AnalyticsService.swift in Sources */,
 				CE78488622A685FB00662219 /* CustomProgressHUD.swift in Sources */,
+				B51B8199254AECEC0072C6FA /* DocumentDownloadService.swift in Sources */,
 				CE78488722A685FB00662219 /* GSMCodeModel.swift in Sources */,
 				CE78488822A685FB00662219 /* FaceImagePhotosModuleOutput.swift in Sources */,
 				CE78488922A685FB00662219 /* PlanType.swift in Sources */,
@@ -34187,6 +34218,7 @@
 				CE784B1422A685FB00662219 /* AlbumItem.swift in Sources */,
 				CE784B1522A685FB00662219 /* UserProfileRouter.swift in Sources */,
 				CE784B1622A685FB00662219 /* SelectionImageView.swift in Sources */,
+				B5D42C27254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */,
 				CE784B1722A685FB00662219 /* SupportFormController.swift in Sources */,
 				CE784B1822A685FB00662219 /* Int64+Bytes.swift in Sources */,
 				CE784B1922A685FB00662219 /* PeriodContactsSyncModel.swift in Sources */,
@@ -34991,11 +35023,13 @@
 				CF8B646E23CBC9D70021B021 /* LocalAlbumModuleInitializer.swift in Sources */,
 				CF8B646F23CBC9D70021B021 /* ActivityTimelineService.swift in Sources */,
 				CF8B647023CBC9D70021B021 /* SearchViewInput.swift in Sources */,
+				B5D42C25254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */,
 				CF8B647123CBC9D70021B021 /* HelpAndSupportRouterInput.swift in Sources */,
 				CF8B647223CBC9D70021B021 /* SmartAlbumCell.swift in Sources */,
 				CF8B647323CBC9D70021B021 /* DarkPopUpController.swift in Sources */,
 				CF8B647423CBC9D70021B021 /* AutoSyncDataStorage.swift in Sources */,
 				B569578324DD72D900B7B336 /* HSVMultiband.swift in Sources */,
+				B51B8197254AECEB0072C6FA /* DocumentDownloadService.swift in Sources */,
 				CF8B647523CBC9D70021B021 /* PrintInitializer.swift in Sources */,
 				CF8B647623CBC9D70021B021 /* UserProfileInitializer.swift in Sources */,
 				CF8B647723CBC9D70021B021 /* BaseCellModel.swift in Sources */,
@@ -36396,6 +36430,7 @@
 				CF8B6BD823CBCA280021B021 /* HomePageModuleInput.swift in Sources */,
 				CF8B6BD923CBCA280021B021 /* AnalyticsService.swift in Sources */,
 				CF8B6BDA23CBCA280021B021 /* CustomProgressHUD.swift in Sources */,
+				B51B819A254AECEC0072C6FA /* DocumentDownloadService.swift in Sources */,
 				CF8B6BDB23CBCA280021B021 /* GSMCodeModel.swift in Sources */,
 				CF8B6BDC23CBCA280021B021 /* FaceImagePhotosModuleOutput.swift in Sources */,
 				CF8B6BDD23CBCA280021B021 /* PlanType.swift in Sources */,
@@ -37207,6 +37242,7 @@
 				CF8B6E9B23CBCA280021B021 /* SelectionImageView.swift in Sources */,
 				CF8B6E9C23CBCA280021B021 /* SupportFormController.swift in Sources */,
 				CF8B6E9D23CBCA280021B021 /* Int64+Bytes.swift in Sources */,
+				B5D42C28254C00B7002E4997 /* DocumentDownloadOperation.swift in Sources */,
 				CF8B6E9E23CBCA280021B021 /* PeriodContactsSyncModel.swift in Sources */,
 				CF8B6E9F23CBCA280021B021 /* InstaPickCampaignService.swift in Sources */,
 				CF8B6EA023CBCA280021B021 /* PhotoVideoSegmentedController.swift in Sources */,

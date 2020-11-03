@@ -36,6 +36,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             case .download:
                 itemTupple.append(EditinglBar.PreDetermendTypes.download)
+            case .downloadDocument:
+                itemTupple.append(EditinglBar.PreDetermendTypes.downloadDocument)
             case .edit:
                 itemTupple.append(EditinglBar.PreDetermendTypes.edit)
             case .info:
@@ -204,6 +206,16 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 if selectedItems.count <= allowedNumberLimit {
                     self.basePassingPresenter?.stopModeSelected()
                     self.interactor.download(item: selectedItems)
+                } else {
+                    let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
+                    UIApplication.showErrorAlert(message: text)
+                }
+            case .downloadDocument:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
+                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                if selectedItems.count <= allowedNumberLimit {
+                    self.basePassingPresenter?.stopModeSelected()
+                    self.interactor.downloadDocument(items: selectedItems as? [WrapData])
                 } else {
                     let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
@@ -397,6 +409,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 case .download:
                     action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
                         self.interactor.download(item: currentItems)
+                    })
+                case .downloadDocument:
+                    action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
+                        self.interactor.downloadDocument(items: currentItems)
                     })
                 case .delete:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in
