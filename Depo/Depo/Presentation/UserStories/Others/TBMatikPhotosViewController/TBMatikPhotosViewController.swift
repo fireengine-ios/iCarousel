@@ -58,12 +58,6 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     @IBOutlet private weak var carousel: iCarousel!
-    @IBOutlet private weak var pageControl: UIPageControl! {
-        willSet {
-            newValue.currentPageIndicatorTintColor = .white
-            newValue.pageIndicatorTintColor = UIColor.white.withAlphaComponent(0.5)
-        }
-    }
     
     @IBOutlet private weak var topConstraint: NSLayoutConstraint! {
         willSet {
@@ -168,7 +162,6 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         backgroundImageView.backgroundColor = ColorConstants.tbMatikBlurColor
         backgroundImageView.contentMode = .scaleAspectFill
         
-        pageControl.numberOfPages = uuids.count
         setupCarousel()
         updateTitle()
         
@@ -321,7 +314,6 @@ extension TBMatikPhotosViewController: iCarouselDelegate {
     }
     
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
-        pageControl.currentPage = carousel.currentItemIndex
         updateTitle()
 
         track(screen: .tbmatikSwipePhoto(carousel.currentItemIndex + 1))
