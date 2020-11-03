@@ -148,7 +148,7 @@ final class TBMatikCard: BaseCardView {
             
             self.imageView1.image = self.images.first
             
-            if self.images.count > 1 {
+            if !self.images.isEmpty {
                 self.startZoomAnimation()
             }
         }
