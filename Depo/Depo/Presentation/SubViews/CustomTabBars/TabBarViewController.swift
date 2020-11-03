@@ -42,7 +42,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @IBOutlet weak var plussButton: UIButton!
     
-    var curtainView = UIView()
+    @IBOutlet weak var curtainView: UIView!
     
     @IBOutlet weak var contentView: UIView!
     
@@ -427,30 +427,22 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             return
         }
             
-        if let navigationViewController = (currentViewController as? SearchViewController)?.navigationController {
+        if let searchController = currentViewController as? SearchViewController, let navigationViewController = searchController.navigationController {
             currentViewController = navigationViewController
+            searchController.tabBarPlusMenu(isShown: show)
+        } else {
+            currentViewController.navigationItem.hidesBackButton = show
         }
         
         currentViewController.navigationItem.rightBarButtonItems?.forEach {
             $0.isEnabled = !show
         }
         
-        if show {
-            let container = currentViewController.navigationController ?? currentViewController
-            curtainView.frame = container.view.bounds
-            container.view.addSubview(curtainView)
-            container.view.bringSubview(toFront: curtainView)
-        } else {
+        if !show {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationUpdateThreeDots), object: nil)
-            curtainView.removeFromSuperview()
         }
         
-        
-        if let searchController = currentViewController as? SearchViewController {
-            searchController.setEnabledSearchBar(!show)
-        } else {
-            currentViewController.navigationItem.hidesBackButton = show
-        }
+        curtainView.isHidden = !show
     }
     
     @objc func closeCurtainView() {
@@ -664,6 +656,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
 //            }
 
             selectedIndex = tabbarSelectedIndex
+            
+            showCurtainView(show: false)
         }
     }
 }

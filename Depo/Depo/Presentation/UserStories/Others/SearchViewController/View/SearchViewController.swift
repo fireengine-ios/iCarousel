@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewInput, MusicBarDelegate, TabBarActionHandlerContainer {
+class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewInput, TabBarActionHandlerContainer {
 
     // MARK: - Outlets
     
@@ -20,19 +20,14 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     
     @IBOutlet weak var noFilesView: UIView!
     @IBOutlet weak var noFilesLabel: UILabel!
-    @IBOutlet weak var noFilesImage: UIImageView!
-    @IBOutlet weak var startCreatingFilesButton: BlueButtonWithWhiteText!
     
     @IBOutlet weak var topBarContainer: UIView!
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var musicBarContainer: UIView!
-    @IBOutlet weak var musicBarContainerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var musicBar: MusicBar!
     
     private let underNavBarBarHeight: CGFloat = 53
     private let searchSectionCount = 6
-    private let minRectFotMusicBar = CGRect(x: 0, y: 0, width: 300, height: 70)
-    private lazy var musicBar = MusicBar(frame: minRectFotMusicBar)
     
     // MARK: - Variables
     var underNavBarBar: GridListTopBar?
@@ -101,6 +96,7 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
             statusBarColor = .white
         }
         
+        setNeedsStatusBarAppearanceUpdate()
         navigationController?.delegate = nil
     }
     
@@ -141,24 +137,17 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     private func setupMusicBar() {
-        musicBarContainer.addSubview(musicBar)
-        let horisontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[item1]-(0)-|",
-                                                                   options: [], metrics: nil,
-                                                                   views: ["item1" : musicBar])
-        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(0)-[item1]-(0)-|",
-                                                                 options: [], metrics: nil,
-                                                                 views: ["item1" : musicBar])
-        
-        musicBarContainer.addConstraints(horisontalConstraints + verticalConstraints)
-        changeVisibleStatus(hidden: true)
-        musicBar.delegate = self
+        if musicBar.player.isPlaying {
+            showMusicBar()
+        } else {
+            changeVisibleStatus(hidden: true)
+        }
     }
-    
     
     func showMusicBar() {
         musicBar.configurateFromPLayer()
         changeVisibleStatus(hidden: false)
-        collectionView.contentInset.bottom = musicBarContainerHeightConstraint.constant
+        collectionView.contentInset.bottom = musicBar.frame.height
     }
     
     @objc func hideMusicBar(_ sender: Any) {
@@ -168,8 +157,8 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
     }
     
     private func changeVisibleStatus(hidden: Bool) {
-        musicBarContainer.isHidden = hidden
-        musicBarContainer.isUserInteractionEnabled = !hidden
+        musicBar.isHidden = hidden
+        musicBar.isUserInteractionEnabled = !hidden
     }
     
     // MARK: - Configuration
@@ -403,9 +392,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         navigationItem.rightBarButtonItem?.isEnabled = isActive
     }
     
-    func setEnabledSearchBar(_ isEnabled: Bool) {
-        searchBar.isUserInteractionEnabled = isEnabled
-        searchBar.alpha = isEnabled ? 1 : 0.5
+    func tabBarPlusMenu(isShown: Bool) {
+        searchBar.isUserInteractionEnabled = !isShown
+        searchBar.alpha = isShown ? 0.5 : 1
+        statusBarColor = isShown ? .clear : .white
     }
     
     func setVisibleTabBar(_ isVisible: Bool) {
@@ -569,11 +559,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             searchBar.text = item.text?.removingPercentEncoding ?? item.text
             search(text: searchBar.text, forItem: item)
         }
-    }
-    
-    func musicBarZoomWillOpen() {
-        output.willDismissController()
-        dismissController(animated: true)
     }
 }
 
