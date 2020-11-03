@@ -13,7 +13,6 @@
                 <outlet property="backgroundImageView" destination="zlC-hj-dcw" id="kbR-3L-iD4"/>
                 <outlet property="carousel" destination="bIe-nx-Ucd" id="Ohx-x6-CzP"/>
                 <outlet property="closeButton" destination="d8W-rB-aKw" id="f45-dg-F5f"/>
-                <outlet property="pageControl" destination="yIL-73-ADG" id="1OH-ao-ujk"/>
                 <outlet property="shareButton" destination="ZDf-lG-9Th" id="U10-DB-jnC"/>
                 <outlet property="timelineButton" destination="Lge-oI-I7M" id="zZz-ee-aYp"/>
                 <outlet property="titleLabel" destination="ugr-WK-tJf" id="D2w-iT-PyI"/>
@@ -51,12 +50,9 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIe-nx-Ucd" customClass="iCarousel">
-                    <rect key="frame" x="0.0" y="131" width="375" height="514.66666666666663"/>
+                    <rect key="frame" x="0.0" y="131" width="375" height="522"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="yIL-73-ADG">
-                    <rect key="frame" x="127" y="664.66666666666663" width="121.33333333333331" height="27.333333333333371"/>
-                </pageControl>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lge-oI-I7M" customClass="TimelineButton" customModule="Billo" customModuleProvider="target">
                     <rect key="frame" x="14" y="711" width="169" height="44"/>
                     <constraints>
@@ -86,12 +82,11 @@
                 <constraint firstItem="Lge-oI-I7M" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="14" id="7BT-v8-Ed2"/>
                 <constraint firstItem="ZDf-lG-9Th" firstAttribute="leading" secondItem="Lge-oI-I7M" secondAttribute="trailing" constant="9" id="BSu-Iy-NU8"/>
                 <constraint firstItem="bIe-nx-Ucd" firstAttribute="top" secondItem="ugr-WK-tJf" secondAttribute="bottom" constant="4" id="Evo-lQ-ryU"/>
-                <constraint firstItem="Lge-oI-I7M" firstAttribute="top" secondItem="yIL-73-ADG" secondAttribute="bottom" constant="19" id="Fz7-Kn-BEY"/>
                 <constraint firstItem="ugr-WK-tJf" firstAttribute="top" secondItem="d8W-rB-aKw" secondAttribute="bottom" constant="-5" id="G3e-AN-7CO"/>
                 <constraint firstAttribute="bottom" secondItem="zlC-hj-dcw" secondAttribute="bottom" id="JA6-O8-WW6"/>
                 <constraint firstItem="ZDf-lG-9Th" firstAttribute="width" secondItem="Lge-oI-I7M" secondAttribute="width" id="MCU-jN-cCd"/>
-                <constraint firstItem="yIL-73-ADG" firstAttribute="top" secondItem="bIe-nx-Ucd" secondAttribute="bottom" constant="19" id="Mlf-S1-Oi9"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Lge-oI-I7M" secondAttribute="bottom" constant="23" id="Pie-gS-CWx"/>
+                <constraint firstItem="Lge-oI-I7M" firstAttribute="top" secondItem="bIe-nx-Ucd" secondAttribute="bottom" constant="58" id="RV9-gi-ZGI"/>
                 <constraint firstItem="Lge-oI-I7M" firstAttribute="height" secondItem="ZDf-lG-9Th" secondAttribute="height" id="TXx-rA-0Mo"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="d8W-rB-aKw" secondAttribute="trailing" constant="8" id="ceW-e3-A8u"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ZDf-lG-9Th" secondAttribute="trailing" constant="14" id="iSl-2O-7P4"/>
@@ -99,7 +94,6 @@
                 <constraint firstItem="bIe-nx-Ucd" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="mWS-ic-uQt"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bIe-nx-Ucd" secondAttribute="trailing" id="pni-yx-t4D"/>
                 <constraint firstItem="d8W-rB-aKw" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="y6I-sw-jQk"/>
-                <constraint firstItem="yIL-73-ADG" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="yQ7-6p-jcB"/>
             </constraints>
             <point key="canvasLocation" x="138" y="140"/>
         </view>
