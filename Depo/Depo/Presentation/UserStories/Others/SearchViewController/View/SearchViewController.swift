@@ -403,9 +403,10 @@ class SearchViewController: BaseViewController, UISearchBarDelegate, SearchViewI
         navigationItem.rightBarButtonItem?.isEnabled = isActive
     }
     
-    func setEnabledSearchBar(_ isEnabled: Bool) {
-        searchBar.isUserInteractionEnabled = isEnabled
-        searchBar.alpha = isEnabled ? 1 : 0.5
+    func tabBarPlusMenu(isShown: Bool) {
+        searchBar.isUserInteractionEnabled = !isShown
+        searchBar.alpha = isShown ? 0.5 : 1
+        statusBarColor = isShown ? .clear : .white
     }
     
     func setVisibleTabBar(_ isVisible: Bool) {
