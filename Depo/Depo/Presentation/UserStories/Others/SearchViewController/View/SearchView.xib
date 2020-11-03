@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,8 +12,7 @@
             <connections>
                 <outlet property="collectionView" destination="1hH-31-UT2" id="tpf-st-dHZ"/>
                 <outlet property="floatingHeaderContainerHeightConstraint" destination="pMc-9l-rlR" id="MeZ-qO-blL"/>
-                <outlet property="musicBarContainer" destination="KvD-De-0PR" id="1ek-CL-FKi"/>
-                <outlet property="musicBarContainerHeightConstraint" destination="m4J-tT-zr0" id="Ana-4k-E7C"/>
+                <outlet property="musicBar" destination="KvD-De-0PR" id="VNE-2u-nqS"/>
                 <outlet property="noFilesLabel" destination="tpr-ro-tFS" id="dxm-Tn-e7a"/>
                 <outlet property="noFilesView" destination="ve5-7k-qJd" id="Nd2-jD-VQX"/>
                 <outlet property="outputView" destination="yf5-b9-3WQ" id="7W8-48-qp1"/>
@@ -42,13 +41,6 @@
                         <constraint firstAttribute="height" id="pMc-9l-rlR"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KvD-De-0PR">
-                    <rect key="frame" x="0.0" y="597" width="375" height="70"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="70" id="m4J-tT-zr0"/>
-                    </constraints>
-                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="35" sectionFooterHeight="32" translatesAutoresizingMaskIntoConstraints="NO" id="Xpp-j0-kcB">
                     <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -59,6 +51,13 @@
                         <outlet property="delegate" destination="-1" id="CYz-bB-zt0"/>
                     </connections>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KvD-De-0PR" customClass="MusicBar" customModule="Billo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="597" width="375" height="70"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="m4J-tT-zr0"/>
+                    </constraints>
+                </view>
                 <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ve5-7k-qJd">
                     <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                     <subviews>

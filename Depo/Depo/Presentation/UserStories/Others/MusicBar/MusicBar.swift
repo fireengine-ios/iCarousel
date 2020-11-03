@@ -6,15 +6,9 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
-protocol MusicBarDelegate: class {
-    func musicBarZoomWillOpen()
-}
-
 class MusicBar: UIView {
     
     lazy var player: MediaPlayer = factory.resolve()
-    
-    weak var delegate: MusicBarDelegate?
 
     @IBOutlet weak var gradientView: GradientView!
     @IBOutlet weak var artistLabel: UILabel!
@@ -22,14 +16,12 @@ class MusicBar: UIView {
     @IBOutlet weak var musicNameLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var progressViewContainer: GradientView!
-    @IBOutlet weak var progressView: UIView!
+    @IBOutlet weak var progressConstraint: NSLayoutConstraint!
     @IBOutlet var contentView: UIView!
     
     var status: ItemStatus = .active
     
     @IBAction func actionZoomUpButton(_ sender: UIButton) {
-        delegate?.musicBarZoomWillOpen()
-        
         let router = RouterVC()
         let controller = router.musicPlayer(status: status)
         let navigation = NavigationController(rootViewController: controller)
@@ -87,9 +79,7 @@ class MusicBar: UIView {
     }
     
     private func makeProgress(value: Float) {
-        progressView.isHidden = value == 0
-
-        progressView.frame = CGRect(x: 0, y: 0, width: progressViewContainer.bounds.width * CGFloat(value), height: progressViewContainer.bounds.height)
+        progressConstraint.constant = progressViewContainer.bounds.width * CGFloat(value)
     }
 
     deinit {
