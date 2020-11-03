@@ -116,6 +116,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     private var selectedIndex: Int = 0
+    private var isConfiguredCarousel = false
     
     // MARK: - View lifecycle
     
@@ -130,8 +131,6 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         
         if items.isEmpty {
             loadItemsByUuids()
-        } else {
-            reloadData()
         }
     }
     
@@ -145,8 +144,16 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        carouselItemFrameWidth = carousel.bounds.width - Constants.leftOffset - Constants.rightOffset
-        carouselItemFrameHeight = carousel.bounds.height
+        if !isConfiguredCarousel {
+            carouselItemFrameWidth = carousel.bounds.width - Constants.leftOffset - Constants.rightOffset
+            carouselItemFrameHeight = carousel.bounds.height
+            
+            if !items.isEmpty {
+                reloadData()
+            }
+            
+            isConfiguredCarousel = true
+        }
         
         if let currentView = carousel.currentItemView as? TBMatikPhotoView, currentView.image != nil {
             updateBackground(with: currentView.image)
