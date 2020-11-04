@@ -284,6 +284,7 @@ extension TBMatikPhotosViewController: iCarouselDataSource {
         
         let uuid = uuids[index]
         itemView.setup(with: items[uuid])
+        itemView.tag = index
         
         itemView.setImageHandler = { [weak self] in
             self?.updateButtonsState(for: itemView)
