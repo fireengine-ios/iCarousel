@@ -103,6 +103,34 @@ class RequestService {
         return sessionRequest.task!
     }
     
+    public func downloadFileRequestTask(parameters: BaseDownloadRequestParametrs,
+                                        body: Data?,
+                                        method: RequestMethod,
+                                        timeoutInterval: TimeInterval,
+                                        response: @escaping RequestFileDownloadResponse ) -> URLSessionTask {
+        
+        let path = parameters.patch
+        var request: URLRequest = URLRequest(url: path)
+        request.timeoutInterval = timeoutInterval
+        request.httpMethod = method.rawValue
+        request.allHTTPHeaderFields = parameters.header
+        
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            let tempDirectoryURL = Device.tmpFolderUrl(withComponent: parameters.fileName)
+            return (tempDirectoryURL, [.createIntermediateDirectories, .removePreviousFile])
+        }
+        
+        let sessionRequest = SessionManager.customDefault.download(request, to: destination)
+            .customValidate()
+            .response { requestResponse in
+                response(requestResponse.destinationURL, requestResponse.response, requestResponse.error)
+        }
+        sessionRequest.downloadProgress { [weak self] progress in
+            self?.requestProgressHander(progress, request: request)
+        }
+        return sessionRequest.task!
+    }
+    
     public func uploadFileRequestTask(patch: URL,
                                   headerParametrs: RequestHeaderParametrs,
                                   fromFile: URL,

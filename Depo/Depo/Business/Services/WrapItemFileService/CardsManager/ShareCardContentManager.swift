@@ -23,7 +23,7 @@ final class ShareCardContentManager {
         self.delegate = delegate
     }
     
-    func presentSharingMenu(item: BaseDataSourceItem, type: ShareType) {
+    func presentSharingMenu(item: BaseDataSourceItem, type: CardShareType) {
         
         let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         controler.view.tintColor = ColorConstants.darkBlueColor

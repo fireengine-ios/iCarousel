@@ -263,6 +263,7 @@ struct TextConstants {
     // MARK: - Home page subButtons Lables
     static let takePhoto = NSLocalizedString("Take Photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let upload = NSLocalizedString("Upload", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let uploadFiles = NSLocalizedString("Upload Files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStory = NSLocalizedString("Create a Story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let newFolder = NSLocalizedString("New Folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createAlbum = NSLocalizedString("Create album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -1741,7 +1742,7 @@ struct TextConstants {
     static let smashSuccessedAlertTitle = NSLocalizedString("smash_successed_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let smashSuccessedAlertSecondTitle = NSLocalizedString("smash_successed_alert_second_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let smashSuccessedAlertDescription = NSLocalizedString("smash_successed_alert_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
+    static let smashSuccessedAlertShareButton = NSLocalizedString("smash_successed_alert_share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let smashSuccessedSimpleAlertTitle = NSLocalizedString("smash_successed_simple_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let smashSuccessedSimpleAlertDescription = NSLocalizedString("smash_successed_simple_alert_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
@@ -2103,4 +2104,12 @@ struct TextConstants {
     
     static let widgetDisplayName = NSLocalizedString("widget_display_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let widgetDescription = NSLocalizedString("widget_description", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let funGif = NSLocalizedString("fun_gif", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let funSticker = NSLocalizedString("fun_sticker", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let funCloseAlertTitle = NSLocalizedString("fun_close_alert_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let funCloseAlertMessage = NSLocalizedString("fun_close_alert_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let funCloseAlertLeftButton = NSLocalizedString("fun_close_alert_left_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let funCloseAlertRightButton = NSLocalizedString("fun_close_alert_right_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

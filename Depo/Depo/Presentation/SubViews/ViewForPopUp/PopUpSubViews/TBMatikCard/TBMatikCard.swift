@@ -2,37 +2,36 @@ import UIKit
 
 final class TBMatikCard: BaseCardView {
     
-    @IBOutlet private weak var imagesStackView: UIStackView! {
+    @IBOutlet private weak var imagesContainer: UIView! {
         willSet {
-            newValue.spacing = 10
-            newValue.alignment = .bottom
-            newValue.axis = .horizontal
-            newValue.distribution = .fill
+            newValue.clipsToBounds = true
+        }
+    }
+    
+    @IBOutlet private weak var imageView1: UIImageView! {
+        willSet {
+            newValue.contentMode = .scaleAspectFill
+        }
+    }
+    
+    @IBOutlet private weak var imageView2: UIImageView! {
+        willSet {
+            newValue.contentMode = .scaleAspectFill
         }
     }
     
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 18)
+            newValue.font = .TurkcellSaturaFont(size: 18)
             newValue.textColor = ColorConstants.whiteColor
             newValue.numberOfLines = 0
             newValue.text = TextConstants.tbMatiHomeCardTitle
         }
     }
     
-    @IBOutlet private weak var subTitleLabel: UILabel! {
-        willSet {
-            newValue.font = UIFont.TurkcellSaturaDemFont(size: 14)
-            newValue.textColor = ColorConstants.whiteColor
-            newValue.numberOfLines = 0
-            newValue.text = TextConstants.tbMatiHomeCardSubtitle
-        }
-    }
-    
     @IBOutlet private weak var dateLabel: UILabel! {
         willSet {
-            newValue.textAlignment = .center
-            newValue.font = UIFont.TurkcellSaturaRegFont(size: 12)
+            newValue.font = .TurkcellSaturaRegFont(size: 14)
             newValue.numberOfLines = 0
             newValue.textColor = ColorConstants.whiteColor
             newValue.text = " "
@@ -47,8 +46,6 @@ final class TBMatikCard: BaseCardView {
         }
     }
     
-    private lazy var imageHeight: CGFloat = imagesStackView.bounds.height
-    
     private let imageDownloder = ImageDownloder()
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
@@ -59,22 +56,13 @@ final class TBMatikCard: BaseCardView {
     private var isCardSetuped = false
     
     private var items = [Item]()
+    private var images = [UIImage]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         analyticsService.logScreen(screen: .tbmatikHomePageCard)
         analyticsService.trackDimentionsEveryClickGA(screen: .tbmatikHomePageCard)
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        let height = actionButton.frame.origin.y + actionButton.frame.size.height
-        if calculatedH != height {
-            calculatedH = height
-            layoutIfNeeded()
-        }
     }
     
     override func set(object: HomeCardResponse?) {
@@ -139,17 +127,16 @@ final class TBMatikCard: BaseCardView {
     }
     
     private func setupImages(by urls: [URL]) {
-        var images = [UIImage]()
         let group = DispatchGroup()
         
         urls.forEach { url in
             group.enter()
-            imageDownloder.getImageByTrimming(url: url) { image in
+            imageDownloder.getImageByTrimming(url: url) { [weak self] image in
                 guard let image = image else {
                     group.leave()
                     return
                 }
-                images.append(image)
+                self?.images.append(image)
                 group.leave()
             }
         }
@@ -159,9 +146,11 @@ final class TBMatikCard: BaseCardView {
                 return
             }
             
-            images
-                .compactMap { self.createImageView(with: $0) }
-                .forEach { self.imagesStackView.addArrangedSubview($0) }
+            self.imageView1.image = self.images.first
+            
+            if !self.images.isEmpty {
+                self.startZoomAnimation()
+            }
         }
     }
     
@@ -170,34 +159,45 @@ final class TBMatikCard: BaseCardView {
         addGestureRecognizer(recognizer)
     }
     
-    private func createImageView(with image: UIImage) -> UIImageView {
-        let width = image.size.width
-        let height = image.size.height
-        let scaleFactor = width / height
-        let imageViewWidth = imageHeight * scaleFactor
+    private func startZoomAnimation() {
+        imageView2.alpha = 0
+        if let image = imageView1.image, let index = images.firstIndex(of: image) {
+            imageView2.image = images[safe: index + 1] ?? images.first
+        }
         
-        let imageView = UIImageView(image: image)
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.widthAnchor.constraint(equalToConstant: imageViewWidth).activate()
-        imageView.heightAnchor.constraint(equalToConstant: imageHeight).activate()
-        imageHeight -= 10
-        
-        imageView.layer.shadowColor = UIColor.black.cgColor
-        imageView.layer.shadowRadius = 2
-        imageView.layer.shadowOpacity = 0.3
-        imageView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        
-        return imageView
+        imageView1.transform = .identity
+        UIView.animate(withDuration: 4) { [weak self] in
+            self?.imageView1.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        } completion: { [weak self] _ in
+            self?.startDissolveAnimation()
+        }
     }
     
+    private func startDissolveAnimation() {
+        imageView2.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        
+        UIView.animate(withDuration: 2, delay: 0, options: .curveLinear) { [weak self] in
+            self?.imageView2.transform = .identity
+            self?.imageView2.alpha = 1
+        } completion: { [weak self] _ in
+            self?.imageView1.image = self?.imageView2.image
+            self?.startZoomAnimation()
+        }
+    }
+
     @IBAction private func onActionButton(_ sender: UIButton) {
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .tbmatik, eventLabel: .tbmatik(.letsSee))
         
         guard items.hasItems else {
             return
         }
-        let vc = TBMatikPhotosViewController.with(items: items)
+        
+        var selectedIndex = 0
+        if let image = imageView1.image, let index = images.firstIndex(of: image) {
+            selectedIndex = index
+        }
+        
+        let vc = TBMatikPhotosViewController.with(items: items, selectedIndex: selectedIndex)
         RouterVC().presentViewController(controller: vc)
     }
     

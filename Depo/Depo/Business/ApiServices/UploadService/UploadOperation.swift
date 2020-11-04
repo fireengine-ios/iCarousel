@@ -67,7 +67,11 @@ final class UploadOperation: Operation {
         self.isFavorites = isFavorites
         self.isPhotoAlbum = isFromAlbum
         
-        self.isResumable = resumableInfoService.isResumableUploadAllowed(with: item.fileSize.intValue)
+        if item.fileType.isContained(in: [.video]), resumableInfoService.isResumableUploadAllowed(with: item.fileSize.intValue) {
+            self.isResumable = true
+        } else {
+            self.isResumable = false
+        }
         
         let trimmedLocalId = self.inputItem.getTrimmedLocalID()
         self.interruptedId = resumableInfoService.getInterruptedId(for: trimmedLocalId)
@@ -365,7 +369,9 @@ final class UploadOperation: Operation {
                     self?.removeTemporaryFile(at: parameters.urlToLocalFile)
                 }
                 
-                self.storageVars.lastUnsavedFileUUID = parameters.tmpUUID
+                if self.inputItem.fileType.isContained(in: [.image, .video]) {
+                    self.storageVars.lastUnsavedFileUUID = parameters.tmpUUID
+                }
                 
                 self.requestObject = self.upload(uploadParam: parameters, success: { [weak self] in
                     debugLog("simple_upload: uploaded")
@@ -508,9 +514,14 @@ final class UploadOperation: Operation {
                     if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
                         self.outputItem?.metaData?.mediumUrl = preview
                     }
-                    self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
-                        self?.storageVars.lastUnsavedFileUUID = nil
-                        debugLog("_upload: sync status is updated for \(self?.inputItem.name ?? "") ")
+                    if self.inputItem.fileType.isContained(in: [.image, .video]) {
+                        self.mediaItemsService.updateLocalItemSyncStatus(item: self.inputItem, newRemote: self.outputItem) { [weak self] in
+                            self?.storageVars.lastUnsavedFileUUID = nil
+                            debugLog("_upload: sync status is updated for \(self?.inputItem.name ?? "") ")
+                            success()
+                        }
+                    } else {
+                        self.storageVars.lastUnsavedFileUUID = nil
                         success()
                     }
                 }

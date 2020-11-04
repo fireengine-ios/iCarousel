@@ -17,6 +17,7 @@ enum ElementTypes {
     case sync
     case syncInProgress
     case download
+    case downloadDocument
     case undetermend
     case rename
     case removeAlbum
@@ -255,6 +256,9 @@ enum ElementTypes {
         case .download:
             let format = TextConstants.snackbarMessageDownloadedFilesFormat
             return String(format: format, relatedItems.count)
+        case .downloadDocument:
+            let format = TextConstants.snackbarMessageDownloadedFilesFormat
+            return String(format: format, relatedItems.count)
         case .edit:
             return TextConstants.snackbarMessageEditSaved
         case .emptyTrashBin:
@@ -279,6 +283,8 @@ enum ElementTypes {
         
         switch self {
         case .download:
+            return TextConstants.popUpDownloadComplete
+        case .downloadDocument:
             return TextConstants.popUpDownloadComplete
         case .emptyTrashBin:
             return TextConstants.trashBinDeleteAllComplete

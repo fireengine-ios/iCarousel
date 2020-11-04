@@ -257,11 +257,16 @@ typealias UpdateFileOperation = (WrapData) -> Void
 class FileService: BaseRequestService {
     
     static let shared = FileService()
-    let downloadOperation = OperationQueue()
+    
+    
+    private let downloadOperation = OperationQueue()
     private let dispatchQueue = DispatchQueue(label: DispatchQueueLabels.download)
-    var allOperationsCount : Int = 0
-    var completedOperationsCount : Int = 0
+    private var allOperationsCount : Int = 0
+    private var completedOperationsCount : Int = 0
+    
+    private lazy var downloadDocumentService = DocumentDownloadService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    
     
     override init() {
         super.init()
@@ -345,6 +350,33 @@ class FileService: BaseRequestService {
             UIApplication.topController()?.present(controller, animated: false, completion: nil)
         }
     }
+    
+    func downloadDocument(items: [WrapData], success: FileOperation?, fail: FailResponse?) {
+        let itemsToDownload = downloadDocumentService.saveLocaly(remoteItems: items) { [weak self] in
+            guard let self = self else {
+                success?()
+                return
+            }
+            
+            self.completedOperationsCount += 1
+            CardsManager.default.setProgressForOperationWith(type: .download,
+                                                             allOperations: self.allOperationsCount,
+                                                             completedOperations: self.completedOperationsCount)
+            
+            if self.allOperationsCount == self.completedOperationsCount {
+                self.trackDownloaded(lastQueueItems: items)
+                CardsManager.default.stopOperationWith(type: .download)
+                success?()
+            }
+        }
+        
+        allOperationsCount += itemsToDownload
+        CardsManager.default.startOperationWith(type: .download,
+                                                allOperations: allOperationsCount,
+                                                completedOperations: completedOperationsCount)
+        
+    }
+
     
     func download(items: [WrapData], album: AlbumItem? = nil, success: FileOperation?, fail: FailResponse?) {
         debugLog("FileService download")

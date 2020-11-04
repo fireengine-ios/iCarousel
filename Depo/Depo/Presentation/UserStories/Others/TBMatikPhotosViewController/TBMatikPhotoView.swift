@@ -68,6 +68,10 @@ final class TBMatikPhotoView: UIView, NibInit {
         return imageView.image != nil
     }
     
+    var image: UIImage? {
+        imageView.image
+    }
+    
     var setImageHandler: VoidHandler?
     
     private var cellImageManager: CellImageManager?

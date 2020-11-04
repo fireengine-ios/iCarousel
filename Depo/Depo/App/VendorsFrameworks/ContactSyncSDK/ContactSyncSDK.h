@@ -17,6 +17,7 @@
 #import "BackupHelper.h"
 #import "RestoreHelper.h"
 #import "DepoAdapter.h"
+#import "BackupVersion.h"
 
 @interface ContactSyncSDK : NSObject
 
@@ -70,6 +71,8 @@
 + (void)hasContactForBackup:(void(^)(SYNCResultType))callback;
 
 + (void)getBackupStatus:(void (^)(id))callback;
+
++ (void)getBackupVersionList:(void (^)(id, BOOL))callback;
 #pragma mark -
 
 @end

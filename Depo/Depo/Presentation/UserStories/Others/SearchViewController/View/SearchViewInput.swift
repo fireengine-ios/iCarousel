@@ -28,6 +28,6 @@ protocol SearchViewInput: class {
     func showSpiner()
     func hideSpiner()
     
-    func setEnabledSearchBar(_ isEnabled: Bool)
+    func tabBarPlusMenu(isShown: Bool)
     func setVisibleTabBar(_ isVisible: Bool)
 }

@@ -91,6 +91,8 @@ typedef NS_ENUM(NSUInteger, SYNCType) {
 
 @property (nonatomic, copy) void (^analyzeProgressCallback)();
 
+@property NSString *backupVersion;
+
 + (SYNC_INSTANCETYPE) shared;
 
 /**

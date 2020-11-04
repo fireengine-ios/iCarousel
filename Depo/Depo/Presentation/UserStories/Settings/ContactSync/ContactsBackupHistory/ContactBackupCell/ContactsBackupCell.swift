@@ -10,9 +10,9 @@ import UIKit
 
 protocol ContactsBackupCellProtocol {
     var delegate: ContactsBackupCellDelegate? { get set }
+    var isCellSelected: Bool { get set }
     
-    func setupCell(title: String, detail: String)
-    func manageSelectionState(isCellSelected: Bool)
+    func setupCell(title: String, detail: String, isSelected: Bool)
 }
 
 protocol ContactsBackupCellDelegate: class {
@@ -21,28 +21,37 @@ protocol ContactsBackupCellDelegate: class {
 
 final class ContactsBackupCell: UITableViewCell, ContactsBackupCellProtocol {
     
-    @IBOutlet private weak var selectButton: ExtendedTapAreaButton!
+    @IBOutlet private weak var selectButton: ExtendedTapAreaButton! {
+        willSet {
+            newValue.setImage(UIImage(named: "notSelected"), for: .normal)
+            newValue.setImage(UIImage(named: "selected_by_point"), for: .highlighted)
+            newValue.setImage(UIImage(named: "selected_by_point"), for: .selected)
+        }
+    }
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var detailLabel: UILabel!
     
     weak var delegate: ContactsBackupCellDelegate?
+    
+    var isCellSelected: Bool = false {
+        didSet {
+            selectButton.isSelected = isCellSelected
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         accessoryType = .disclosureIndicator
     }
     
-    func setupCell(title: String, detail: String) {
+    func setupCell(title: String, detail: String, isSelected: Bool) {
         titleLabel.text = title
         detailLabel.text = detail
-    }
-    
-    func manageSelectionState(isCellSelected: Bool) {
-        let image = isCellSelected ? UIImage(named: "selected_by_point") : UIImage(named: "notSelected")
-        selectButton.setImage(image, for: .normal)
+        isCellSelected = isSelected
     }
     
     @IBAction private func selectButtonTapped(_ sender: UIButton) {
         delegate?.selectCellButtonTapped(for: self)
+        isCellSelected = true
     }
 }
