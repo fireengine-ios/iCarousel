@@ -1492,6 +1492,10 @@ enum GAEventLabel {
                 return "Upload"
             case .uploadFiles:
                 return "Upload Files"
+            case .uploadDocuments:
+                return "Upload Files"
+            case .uploadMusic:
+                return "Upload Music"
             case .uploadFromApp:
                 return "Upload from \(TextConstants.NotLocalized.appName)"
             case .uploadFromAppFavorites:
