@@ -74,8 +74,7 @@ final class TBMatikCard: BaseCardView {
         
         isCardSetuped = true
         
-        let requirementItemsNumber = 3
-        guard let jsonArray = object?.details?.array?.cutFirstItems(itemsNumber: requirementItemsNumber) else {
+        guard let jsonArray = object?.details?.array else {
             assertionFailure()
             return
         }
