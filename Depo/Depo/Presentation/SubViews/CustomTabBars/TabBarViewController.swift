@@ -19,6 +19,8 @@ enum FloatingButtonsType {
     case uploadFromLifeboxFavorites
     case importFromSpotify
     case uploadFiles
+    case uploadDocuments
+    case uploadMusic
 }
 
 enum TabScreenIndex: Int {
@@ -69,6 +71,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     fileprivate var importFromSpotifyBtn: SubPlussButtonView!
     fileprivate var uploadBtn: SubPlussButtonView!
     fileprivate var uploadFilesBtn: SubPlussButtonView!
+    fileprivate var uploadDocumentsBtn: SubPlussButtonView!
+    fileprivate var uploadMusicBtn: SubPlussButtonView!
     fileprivate var storyBtn: SubPlussButtonView!
     fileprivate var folderBtn: SubPlussButtonView!
     fileprivate var albumBtn: SubPlussButtonView!
@@ -367,6 +371,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     }
     
     @IBAction func plussBtnAction(_ sender: Any) {
+        guard !getFloatingButtonsArray().isEmpty else {
+            return
+        }
+        
         changeViewState(state: !plussButton.isSelected)
     }
     
@@ -460,6 +468,12 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         uploadFilesBtn = createSubButton(withText: TextConstants.uploadFiles, imageName: "Upload", asLeft: true)
         uploadFilesBtn?.changeVisability(toHidden: true)
         
+        uploadDocumentsBtn = createSubButton(withText: TextConstants.uploadFiles, imageName: "Upload", asLeft: true)
+        uploadDocumentsBtn?.changeVisability(toHidden: true)
+        
+        uploadMusicBtn = createSubButton(withText: TextConstants.uploadMusic, imageName: "Upload", asLeft: true)
+        uploadMusicBtn?.changeVisability(toHidden: true)
+        
         storyBtn = createSubButton(withText: TextConstants.createStory, imageName: "CreateAStory", asLeft: false)
         storyBtn?.changeVisability(toHidden: true)
         
@@ -532,6 +546,10 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
                 buttonsArray.append(importFromSpotify)
             case .uploadFiles:
                 buttonsArray.append(uploadFilesBtn)
+            case .uploadDocuments:
+                buttonsArray.append(uploadDocumentsBtn)
+            case .uploadMusic:
+                buttonsArray.append(uploadMusicBtn)
             }
         }
         
@@ -550,6 +568,8 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         buttonsArray.append(photoBtn)
         buttonsArray.append(uploadBtn)
         buttonsArray.append(uploadFilesBtn)
+        buttonsArray.append(uploadDocumentsBtn)
+        buttonsArray.append(uploadMusicBtn)
         buttonsArray.append(uploadFromLifebox)
         buttonsArray.append(uploadFromLifeboxFavorites)
         buttonsArray.append(importFromSpotify)
@@ -687,6 +707,10 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
             action = .importFromSpotify
         case uploadFilesBtn:
             action = .uploadFiles
+        case uploadDocumentsBtn:
+            action = .uploadDocuments
+        case uploadMusicBtn:
+            action = .uploadMusic
         default:
             return
         }
@@ -817,8 +841,22 @@ extension TabBarViewController: TabBarActionHandler {
                 return
             }
             
-            externalFileUploadService.showViewController(router: router)
+            externalFileUploadService.showViewController(router: router, externalFileType: .any)
             
+        case .uploadDocuments:
+            guard !checkReadOnlyPermission() else {
+                return
+            }
+            
+            externalFileUploadService.showViewController(router: router, externalFileType: .documents)
+            
+        case .uploadMusic:
+            guard !checkReadOnlyPermission() else {
+                return
+            }
+            
+            externalFileUploadService.showViewController(router: router, externalFileType: .audio)
+                
         case .createAlbum:
             let controller = router.createNewAlbum()
             let nController = NavigationController(rootViewController: controller)
