@@ -21,37 +21,37 @@ class BaseFilesGreedModuleInitializer: NSObject {
         return [.AlphaBetricAZ, .AlphaBetricZA, .lastModifiedTimeNewOld, .lastModifiedTimeOldNew, .Largest, .Smallest]
     }
     
-    class func initializeMusicViewController(with nibName: String) -> UIViewController {
-        let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
-        viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles, .importFromSpotify])
-        viewController.scrollablePopUpView.isEnable = true
-        viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.upload, .download])
-        let configurator = BaseFilesGreedModuleConfigurator()
-        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
-                                               style: .default, tintColor: nil)
-        let gridListTopBarConfig = GridListTopBarConfig(
-            defaultGridListViewtype: .Grid,
-            availableSortTypes: baseSortTypes,
-            defaultSortType: .TimeNewOld,
-            availableFilter: false,
-            showGridListButton: true
-        )
-        configurator.configure(viewController: viewController, remoteServices: MusicService(requestSize: 100),
-                               fileFilters: [.fileType(.audio)],
-                               bottomBarConfig: bottomBarConfig,
-                               topBarConfig: gridListTopBarConfig,
-                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
-                                                                                     selectionModeTypes: []))
-        viewController.mainTitle = ""
-        viewController.title = TextConstants.music
-        return viewController
-    }
+//    class func initializeMusicViewController(with nibName: String) -> UIViewController {
+//        let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
+//        viewController.needToShowTabBar = true
+//        viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles, .importFromSpotify])
+//        viewController.scrollablePopUpView.isEnable = true
+//        viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.upload, .download])
+//        let configurator = BaseFilesGreedModuleConfigurator()
+//        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
+//                                               style: .default, tintColor: nil)
+//        let gridListTopBarConfig = GridListTopBarConfig(
+//            defaultGridListViewtype: .Grid,
+//            availableSortTypes: baseSortTypes,
+//            defaultSortType: .TimeNewOld,
+//            availableFilter: false,
+//            showGridListButton: true
+//        )
+//        configurator.configure(viewController: viewController, remoteServices: MusicService(requestSize: 100),
+//                               fileFilters: [.fileType(.audio)],
+//                               bottomBarConfig: bottomBarConfig,
+//                               topBarConfig: gridListTopBarConfig,
+//                               alertSheetConfig: AlertFilesActionsSheetInitialConfig(initialTypes: [.select],
+//                                                                                     selectionModeTypes: []))
+//        viewController.mainTitle = ""
+//        viewController.title = TextConstants.music
+//        return viewController
+//    }
     
     class func initializeDocumentsViewController(with nibName: String) -> UIViewController {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles])
+        viewController.floatingButtonsArray.append(contentsOf: [.uploadDocuments])
         viewController.scrollablePopUpView.isEnable = true
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.upload, .download])
         viewController.segmentImage = .documents
@@ -80,7 +80,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeAllFilesViewController(with nibName: String, moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder])
+        viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles, .newFolder])
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
         viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
@@ -110,7 +110,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeFavoritesViewController(with nibName: String, moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles, .upload, .uploadFromLifeboxFavorites])
+        viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles, .uploadFromLifeboxFavorites])
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.upload, .download])
         viewController.scrollablePopUpView.isEnable = true
         viewController.isFavorites = true
@@ -144,7 +144,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeFilesFromFolderViewController(with nibName: String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .newFolder, .uploadFromLifebox])
+        viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles, .newFolder, .uploadFromLifebox])
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
         viewController.scrollablePopUpView.isEnable = true
         viewController.status = status
