@@ -14,9 +14,11 @@ typealias DocumentDownloadHandler = (_ isSaved: Bool, _ error: Error?) -> ()
 final class DocumentDownloadOperation: Operation {
 
     private let semaphore = DispatchSemaphore(value: 0)
-    private var tasks = [URLSessionTask?]()
-    private let items: [Item]
-    private let completion: DocumentDownloadHandler
+    private var task: URLSessionTask?
+    private var items: [Item]
+    private var currentItem: Item?
+    private let onCompletion: DocumentDownloadHandler
+    private let onDownload: VoidHandler
     private var outputURLs = [URL]()
     private var isSaved = false
     private var lastError: Error?
@@ -24,9 +26,10 @@ final class DocumentDownloadOperation: Operation {
     
     //MARK: - Init
     
-    init(items: [Item], completion: @escaping DocumentDownloadHandler) {
+    init(items: [Item], onDownload: @escaping VoidHandler, onCompletion: @escaping DocumentDownloadHandler) {
         self.items = items
-        self.completion = completion
+        self.onCompletion = onCompletion
+        self.onDownload = onDownload
         
         super.init()
         
@@ -39,7 +42,7 @@ final class DocumentDownloadOperation: Operation {
     override func cancel() {
         super.cancel()
         
-        tasks.forEach { $0?.cancel() }
+        task?.cancel()
         
         semaphore.signal()
     }
@@ -47,62 +50,62 @@ final class DocumentDownloadOperation: Operation {
     override func main() {
         SingletonStorage.shared.progressDelegates.add(self)
         
-        download()
+        downloadNext()
         semaphore.wait()
 
         SingletonStorage.shared.progressDelegates.remove(self)
         
-        completion(isSaved, lastError)
+        onCompletion(isSaved, lastError)
     }
     
     
     //MARK: - Private
     
-    private func download() {
-        let group = DispatchGroup()
-        items.forEach {
-            guard let url = $0.urlToFile?.byTrimmingQuery, let name = $0.name else {
-                return
-            }
-            
-            group.enter()
-            
-            let parameters = BaseDownloadRequestParametrs(urlToFile: url, fileName: name, contentType: $0.fileType)
-            let task = FileService.shared.executeDownloadRequest(param: parameters) { [weak self] localUrl, _, error in
-                defer {
-                    group.leave()
-                }
-                
-                guard let self = self else {
-                    return
-                }
-                
-                guard !self.isCancelled else {
-                    return
-                }
-                
-                if let error = error {
-                    self.lastError = error
-                }
-
-                self.outputURLs.append(localUrl)
-            }
-            tasks.append(task)
+    private func downloadNext() {
+        guard !isCancelled else {
+            return
         }
         
-        group.notify(queue: .main) {
-            guard !self.isCancelled else {
-                //semaphore.signal() is in func cancel()
+        guard !items.isEmpty else {
+            saveDownloadedUrls()
+            return
+        }
+        
+        currentItem = items.removeFirst()
+        
+        guard let nextItem = currentItem, let url = currentItem?.urlToFile?.byTrimmingQuery, let name = nextItem.name else {
+            downloadNext()
+            return
+        }
+        
+        let parameters = BaseDownloadRequestParametrs(urlToFile: url, fileName: name, contentType: nextItem.fileType)
+        task = FileService.shared.executeDownloadRequest(param: parameters) { [weak self] localUrl, _, error in
+            defer {
+                self?.currentItem = nil
+                self?.downloadNext()
+            }
+            
+            guard let self = self else {
                 return
             }
             
-            self.saveDownloaded(urls: self.outputURLs)
+            guard !self.isCancelled else {
+                return
+            }
+            
+            if let error = error {
+                self.lastError = error
+            }
+            
+            self.onDownload()
+            self.outputURLs.append(localUrl)
         }
+
     }
     
-    private func saveDownloaded(urls: [URL]) {
+    private func saveDownloadedUrls() {
         let router = RouterVC()
-        let picker = UIDocumentPickerViewController(urls: urls, in: .exportToService)
+        let picker = UIDocumentPickerViewController(urls: outputURLs, in: .exportToService)
         picker.delegate = self
         router.presentViewController(controller: picker)
     }
@@ -121,7 +124,7 @@ extension DocumentDownloadOperation: UIDocumentPickerDelegate {
 
 extension DocumentDownloadOperation: OperationProgressServiceDelegate {
     func didSend(ratio: Float, bytes: Int, for url: URL) {
-        guard isExecuting, let item = items.first(where: { $0.urlToFile?.byTrimmingQuery == url }) else {
+        guard isExecuting, let item = currentItem, item.urlToFile?.byTrimmingQuery == url else {
             return
         }
 
