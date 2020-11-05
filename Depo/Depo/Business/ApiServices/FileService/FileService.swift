@@ -371,10 +371,10 @@ class FileService: BaseRequestService {
                 self.allOperationsCount = 0
                 self.completedOperationsCount = 0
                 
-                if let error = error {
-                    fail?(ErrorResponse.error(error))
-                } else if isSaved {
+                if isSaved {
                     success?()
+                } else if let error = error {
+                    fail?(ErrorResponse.error(error))
                 }
             }
         }
