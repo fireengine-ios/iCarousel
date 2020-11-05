@@ -352,7 +352,7 @@ class FileService: BaseRequestService {
     }
     
     func downloadDocument(items: [WrapData], success: FileOperation?, fail: FailResponse?) {
-        let itemsToDownload = downloadDocumentService.saveLocaly(remoteItems: items) { [weak self] in
+        let itemsToDownload = downloadDocumentService.saveLocaly(remoteItems: items) { [weak self] isSaved, error in
             guard let self = self else {
                 success?()
                 return
@@ -363,10 +363,19 @@ class FileService: BaseRequestService {
                                                              allOperations: self.allOperationsCount,
                                                              completedOperations: self.completedOperationsCount)
             
+            
             if self.allOperationsCount == self.completedOperationsCount {
                 self.trackDownloaded(lastQueueItems: items)
                 CardsManager.default.stopOperationWith(type: .download)
-                success?()
+                
+                self.allOperationsCount = 0
+                self.completedOperationsCount = 0
+                
+                if let error = error {
+                    fail?(ErrorResponse.error(error))
+                } else if isSaved {
+                    success?()
+                }
             }
         }
         

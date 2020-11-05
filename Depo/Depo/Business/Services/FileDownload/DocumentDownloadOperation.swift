@@ -8,22 +8,23 @@
 
 
 
-/*
- * tasks and items are arrays, but only one download task is supported for now
- */
+typealias DocumentDownloadHandler = (_ isSaved: Bool, _ error: Error?) -> ()
+
 
 final class DocumentDownloadOperation: Operation {
 
     private let semaphore = DispatchSemaphore(value: 0)
     private var tasks = [URLSessionTask?]()
     private let items: [Item]
-    private let completion: VoidHandler
+    private let completion: DocumentDownloadHandler
     private var outputURLs = [URL]()
+    private var isSaved = false
+    private var lastError: Error?
     
     
     //MARK: - Init
     
-    init(items: [Item], completion: @escaping VoidHandler) {
+    init(items: [Item], completion: @escaping DocumentDownloadHandler) {
         self.items = items
         self.completion = completion
         
@@ -51,7 +52,7 @@ final class DocumentDownloadOperation: Operation {
 
         SingletonStorage.shared.progressDelegates.remove(self)
         
-        completion()
+        completion(isSaved, lastError)
     }
     
     
@@ -80,6 +81,10 @@ final class DocumentDownloadOperation: Operation {
                     return
                 }
                 
+                if let error = error {
+                    self.lastError = error
+                }
+
                 self.outputURLs.append(localUrl)
             }
             tasks.append(task)
@@ -105,6 +110,7 @@ final class DocumentDownloadOperation: Operation {
 
 extension DocumentDownloadOperation: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        isSaved = true
         semaphore.signal()
     }
     
@@ -115,13 +121,11 @@ extension DocumentDownloadOperation: UIDocumentPickerDelegate {
 
 extension DocumentDownloadOperation: OperationProgressServiceDelegate {
     func didSend(ratio: Float, bytes: Int, for url: URL) {
-        guard isExecuting, let item = items.first else {
+        guard isExecuting, let item = items.first(where: { $0.urlToFile?.byTrimmingQuery == url }) else {
             return
         }
 
-        if item.urlToFile?.byTrimmingQuery == url {
-            CardsManager.default.setProgress(ratio: ratio, operationType: .download, object: item)
-//            ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
-        }
+        CardsManager.default.setProgress(ratio: ratio, operationType: .download, object: item)
+        //            ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
     }
 }
