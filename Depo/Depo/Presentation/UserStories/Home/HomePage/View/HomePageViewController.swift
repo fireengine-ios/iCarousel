@@ -74,7 +74,7 @@ final class HomePageViewController: BaseViewController {
         
         output.viewWillAppear()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         

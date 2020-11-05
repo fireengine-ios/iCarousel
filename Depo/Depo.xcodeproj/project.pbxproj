@@ -5865,6 +5865,12 @@
 		B527CF942420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527CF8A2420C66D00293E3E /* MediaItemsLocalAlbum+CoreDataProperties.swift */; };
 		B527CF952420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527CF8A2420C66D00293E3E /* MediaItemsLocalAlbum+CoreDataProperties.swift */; };
 		B527CF962420C66E00293E3E /* MediaItemsLocalAlbum+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B527CF8A2420C66D00293E3E /* MediaItemsLocalAlbum+CoreDataProperties.swift */; };
+		B528DF842552CED8002D9718 /* LocalContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B528DF832552CED8002D9718 /* LocalContactsService.swift */; };
+		B528DF852552CED8002D9718 /* LocalContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B528DF832552CED8002D9718 /* LocalContactsService.swift */; };
+		B528DF862552CED8002D9718 /* LocalContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B528DF832552CED8002D9718 /* LocalContactsService.swift */; };
+		B528DF872552CED8002D9718 /* LocalContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B528DF832552CED8002D9718 /* LocalContactsService.swift */; };
+		B528DF882552CED8002D9718 /* LocalContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B528DF832552CED8002D9718 /* LocalContactsService.swift */; };
+		B528DF892552CED8002D9718 /* LocalContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B528DF832552CED8002D9718 /* LocalContactsService.swift */; };
 		B52BAC5723AE1BE60051E21D /* CoreDataConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */; };
 		B52BAC5823AE1BE60051E21D /* CoreDataConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */; };
 		B52BAC5923AE1BE60051E21D /* CoreDataConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */; };
@@ -5896,6 +5902,12 @@
 		B5390D83216605F600A02002 /* CellImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5390D81216605F600A02002 /* CellImageManager.swift */; };
 		B53DCDC220E3A75400400DBA /* WKWebView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */; };
 		B53DCDC320E3A75400400DBA /* WKWebView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */; };
+		B53EAC562553F5F400802244 /* LocalContactsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53EAC552553F5F400802244 /* LocalContactsStorage.swift */; };
+		B53EAC572553F5F400802244 /* LocalContactsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53EAC552553F5F400802244 /* LocalContactsStorage.swift */; };
+		B53EAC582553F5F400802244 /* LocalContactsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53EAC552553F5F400802244 /* LocalContactsStorage.swift */; };
+		B53EAC592553F5F400802244 /* LocalContactsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53EAC552553F5F400802244 /* LocalContactsStorage.swift */; };
+		B53EAC5A2553F5F400802244 /* LocalContactsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53EAC552553F5F400802244 /* LocalContactsStorage.swift */; };
+		B53EAC5B2553F5F400802244 /* LocalContactsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53EAC552553F5F400802244 /* LocalContactsStorage.swift */; };
 		B546EDA524FC19C300C1713C /* Error+Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA524BD2046EB860036FCEA /* Error+Network.swift */; };
 		B546EE1224FC27BE00C1713C /* RequestsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB996CE1F0770470074E264 /* RequestsKey.swift */; };
 		B546EE1324FC2A4E00C1713C /* RouteRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE51A0D41EF8F44D005DCEE0 /* RouteRequests.swift */; };
@@ -14029,6 +14041,7 @@
 		B527CF892420C66C00293E3E /* MediaItemsLocalAlbum+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaItemsLocalAlbum+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B527CF8A2420C66D00293E3E /* MediaItemsLocalAlbum+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaItemsLocalAlbum+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B528C5E30EE44682526AD182 /* ForgotPasswordPresenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ForgotPasswordPresenter.swift; sourceTree = "<group>"; };
+		B528DF832552CED8002D9718 /* LocalContactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalContactsService.swift; sourceTree = "<group>"; };
 		B52BAC5623AE1BE60051E21D /* CoreDataConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataConfig.swift; sourceTree = "<group>"; };
 		B52BAC5B23AE1C3E0051E21D /* CoreDataMigrationStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMigrationStep.swift; sourceTree = "<group>"; };
 		B52BAC6023AE1F830051E21D /* NSManagedObjectModel+Compatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectModel+Compatible.swift"; sourceTree = "<group>"; };
@@ -14040,6 +14053,7 @@
 		B5390D81216605F600A02002 /* CellImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellImageManager.swift; sourceTree = "<group>"; };
 		B53A6501D09587A6DE4B5B8F /* Pods-Billo.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Billo.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Billo/Pods-Billo.appstore.xcconfig"; sourceTree = "<group>"; };
 		B53DCDC120E3A75400400DBA /* WKWebView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKWebView+Extensions.swift"; sourceTree = "<group>"; };
+		B53EAC552553F5F400802244 /* LocalContactsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalContactsStorage.swift; sourceTree = "<group>"; };
 		B54844BF209C86DC006270A1 /* XCGLogger+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCGLogger+Extension.swift"; sourceTree = "<group>"; };
 		B549AC4A24CF05D800D39C44 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = GPUImage.xcodeproj; sourceTree = "<group>"; };
 		B549B6CA24CF099500D39C44 /* Adjustment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Adjustment.swift; sourceTree = "<group>"; };
@@ -17710,6 +17724,7 @@
 		7CA6C69B1EF1811100D21EBE /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				B528DF7F2552CEB0002D9718 /* Contacts */,
 				B51B818F254AECB20072C6FA /* FileDownload */,
 				B53070422540688A000EA9F4 /* FileUpload */,
 				B549B6C924CF098200D39C44 /* PhotoEdit */,
@@ -20457,6 +20472,15 @@
 				B5AB2F0D2204941B00E3AF23 /* InstaPickCircularLoader.xib */,
 			);
 			path = InstaPickProgressView;
+			sourceTree = "<group>";
+		};
+		B528DF7F2552CEB0002D9718 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				B528DF832552CED8002D9718 /* LocalContactsService.swift */,
+				B53EAC552553F5F400802244 /* LocalContactsStorage.swift */,
+			);
+			path = Contacts;
 			sourceTree = "<group>";
 		};
 		B52BAC6523AE1FFD0051E21D /* NSManagedObjectModel */ = {
@@ -29135,6 +29159,7 @@
 				0303A4452397D0D000907F42 /* ActionSheetPredetermendConfigs.swift in Sources */,
 				0303A4462397D0D000907F42 /* BackButton.swift in Sources */,
 				8E1E08152423B02F0054BF86 /* KeychainCleaner.swift in Sources */,
+				B528DF872552CED8002D9718 /* LocalContactsService.swift in Sources */,
 				0303A4472397D0D000907F42 /* FileInfoConfigurator.swift in Sources */,
 				0303A4482397D0D000907F42 /* CreateStoryPreviewViewIO.swift in Sources */,
 				0303A4492397D0D000907F42 /* LeavePremiumViewOutput.swift in Sources */,
@@ -29391,6 +29416,7 @@
 				0303A5242397D0D000907F42 /* LargeFullOfQuotaPopUp.swift in Sources */,
 				0303A5252397D0D000907F42 /* OTPViewRouter.swift in Sources */,
 				0303A5262397D0D000907F42 /* OTPViewRouterInput.swift in Sources */,
+				B53EAC592553F5F400802244 /* LocalContactsStorage.swift in Sources */,
 				0303A5272397D0D000907F42 /* OTPViewConfigurator.swift in Sources */,
 				0303A5282397D0D000907F42 /* OTPViewInitializer.swift in Sources */,
 				0303A5292397D0D000907F42 /* FileManager+Size.swift in Sources */,
@@ -29622,6 +29648,7 @@
 				98E4B9ED23C6FF32003A4631 /* TrashBinViewController.swift in Sources */,
 				98A86D9223A8BD4F00438225 /* AlbumCell.swift in Sources */,
 				CFACACA0247CF58E00645B40 /* NetmeraActionEvents.swift in Sources */,
+				B528DF852552CED8002D9718 /* LocalContactsService.swift in Sources */,
 				CE292C1E21BE5DE9004FC745 /* PremiumConfigurator.swift in Sources */,
 				CE292C1F21BE5DE9004FC745 /* PremiumInitializer.swift in Sources */,
 				CEE3B7D0225791D900B99FE7 /* ChangePasswordController.swift in Sources */,
@@ -30522,6 +30549,7 @@
 				8C26008822919AAD0063E913 /* SecurityCodeTextField.swift in Sources */,
 				B569578224DD72D800B7B336 /* HSVMultiband.swift in Sources */,
 				8C0E8EC01FDEBDFF00789C91 /* DateExtension.swift in Sources */,
+				B53EAC572553F5F400802244 /* LocalContactsStorage.swift in Sources */,
 				8E3B6B4B2462E43D00BCB052 /* FileInfoView.swift in Sources */,
 				B5AB5B5721F9A92B003AABB4 /* ConnectedAccountsViewController.swift in Sources */,
 				8C0E8EC11FDEBDFF00789C91 /* BaseFilesGreedRouter.swift in Sources */,
@@ -32003,6 +32031,7 @@
 				7C233CD01FD51E290013CCA0 /* UploadFromLifeBoxInitializer.swift in Sources */,
 				CE51AC471EF90853005DCEE0 /* DataStorage.swift in Sources */,
 				73FE51F122CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.swift in Sources */,
+				B528DF842552CED8002D9718 /* LocalContactsService.swift in Sources */,
 				CEEF22AA2063D6E000CE3949 /* CALayer+Animation.swift in Sources */,
 				4A56D5B2202AF529003A4624 /* FaceImageAddNameRouter.swift in Sources */,
 				CE51AC481EF90853005DCEE0 /* BaseUserInputCellView.swift in Sources */,
@@ -32914,6 +32943,7 @@
 				986DD3DC25388F3400C38AD4 /* BackupStats.m in Sources */,
 				8734DA0D1FD846DF00977752 /* BaseFilesGreedModuleOutput.swift in Sources */,
 				08ACDB1ED67EACE17FB518FA /* SelectNameViewInput.swift in Sources */,
+				B53EAC562553F5F400802244 /* LocalContactsStorage.swift in Sources */,
 				CE2F55FE1F7551CD00F49DA1 /* AccountParameters.swift in Sources */,
 				8C208665228D4B61000BEDAD /* EmptyDataView.swift in Sources */,
 				EFA74FB21FBF378F00CF946E /* PrintViewOutput.swift in Sources */,
@@ -34608,6 +34638,7 @@
 				CF71473924B597AA00D83E60 /* ContactSyncScheduleCard.swift in Sources */,
 				CE784C4B22A685FB00662219 /* GradientOrangeView.swift in Sources */,
 				CE784C4C22A685FB00662219 /* AlbumDetailInteractor.swift in Sources */,
+				B528DF882552CED8002D9718 /* LocalContactsService.swift in Sources */,
 				CE784C4D22A685FB00662219 /* PasscodeSettingsInteractor.swift in Sources */,
 				CE784C4F22A685FB00662219 /* PeriodicContactSyncViewController.swift in Sources */,
 				CE784C5022A685FB00662219 /* PackagesRouter.swift in Sources */,
@@ -34665,6 +34696,7 @@
 				CE784C7822A685FB00662219 /* ActivityTimelineModuleInput.swift in Sources */,
 				98DD03FA2542E635006DE0BD /* UIImageEffects.swift in Sources */,
 				CF7146D924B597A900D83E60 /* DeleteDuplicatesMainView.swift in Sources */,
+				B53EAC5A2553F5F400802244 /* LocalContactsStorage.swift in Sources */,
 				CE784C7A22A685FB00662219 /* ActivityTimelinePresenter.swift in Sources */,
 				CE784C7B22A685FB00662219 /* ActivityTimelineInteractorInput.swift in Sources */,
 				CE784C7C22A685FB00662219 /* PremiumFeaturesView.swift in Sources */,
@@ -36010,11 +36042,13 @@
 				CF8B67C623CBC9D70021B021 /* UIView+Utils.swift in Sources */,
 				CF8B67C723CBC9D70021B021 /* PasscodeSettingsConfigurator.swift in Sources */,
 				CF8B67C823CBC9D70021B021 /* FullscreenTextController.swift in Sources */,
+				B528DF862552CED8002D9718 /* LocalContactsService.swift in Sources */,
 				B57D854723DAD11E0057B5D6 /* MigrationModel_3_4.xcmappingmodel in Sources */,
 				98231A3B24F3A23500FD16E2 /* CustomFilter.swift in Sources */,
 				CF8B67C923CBC9D70021B021 /* UploadFilesSelectionRouterInput.swift in Sources */,
 				CF8B67CA23CBC9D70021B021 /* UploadFilesSelectionRouter.swift in Sources */,
 				CF8B67CB23CBC9D70021B021 /* Message.m in Sources */,
+				B53EAC582553F5F400802244 /* LocalContactsStorage.swift in Sources */,
 				CF8B67CC23CBC9D70021B021 /* UploadFilesSelectionInitializer.swift in Sources */,
 				CF8B67CD23CBC9D70021B021 /* UIColor+Adjust.swift in Sources */,
 				CF8B67CE23CBC9D70021B021 /* UIBarButtonItem+Extensions.swift in Sources */,
@@ -37632,6 +37666,7 @@
 				CF71473A24B597AA00D83E60 /* ContactSyncScheduleCard.swift in Sources */,
 				CF8B6FF323CBCA280021B021 /* AlbumDetailInteractor.swift in Sources */,
 				CF8B6FF423CBCA280021B021 /* PasscodeSettingsInteractor.swift in Sources */,
+				B528DF892552CED8002D9718 /* LocalContactsService.swift in Sources */,
 				CF8B6FF623CBCA280021B021 /* PeriodicContactSyncViewController.swift in Sources */,
 				CF8B6FF723CBCA280021B021 /* PackagesRouter.swift in Sources */,
 				CF8B6FF823CBCA280021B021 /* AlbumDetailRouter.swift in Sources */,
@@ -37689,6 +37724,7 @@
 				CF8B702523CBCA280021B021 /* ActivityTimelinePresenter.swift in Sources */,
 				98DD03FB2542E635006DE0BD /* UIImageEffects.swift in Sources */,
 				CF7146DA24B597A900D83E60 /* DeleteDuplicatesMainView.swift in Sources */,
+				B53EAC5B2553F5F400802244 /* LocalContactsStorage.swift in Sources */,
 				CF8B702623CBCA280021B021 /* ActivityTimelineInteractorInput.swift in Sources */,
 				CF8B702723CBCA280021B021 /* PremiumFeaturesView.swift in Sources */,
 				CF8B702823CBCA280021B021 /* ActivityTimelineInteractorOutput.swift in Sources */,
