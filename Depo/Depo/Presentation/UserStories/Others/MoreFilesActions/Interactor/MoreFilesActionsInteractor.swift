@@ -15,9 +15,9 @@ enum DivorseItems {
 }
 
 enum ShareTypes {
-    case small
     case original
     case link
+    case `private`
 }
 
 class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
@@ -57,13 +57,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func selectShareType(sourceRect: CGRect?) {
-        
-        if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
-            self.shareViaLink(sourceRect: sourceRect)
-        } else if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video }){
-            showSharingMenu(types: [.original, .link], sourceRect: sourceRect)
+        if sharingItems.contains(where: { $0.fileType == .folder}) {
+            showSharingMenu(types: [.link, .private], sourceRect: sourceRect)
+        } else if sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
+            shareViaLink(sourceRect: sourceRect)
         } else {
-            showSharingMenu(types: [.small, .original, .link], sourceRect: sourceRect)
+            showSharingMenu(types: [.original, .link, .private], sourceRect: sourceRect)
         }
     }
     
@@ -75,7 +74,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         if sharingItems.count > NumericConstants.numberOfSelectedItemsBeforeLimits {
             shareTypes.remove(.original)
-            shareTypes.remove(.small)
         }
         
         shareTypes.forEach {
@@ -119,61 +117,15 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         UIApplication.showErrorAlert(message: errorResponse.description)
                 })
             }
-        case .small:
-            return UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
-                self?.sync(items: self?.sharingItems, action: { [weak self] in
-                    self?.shareSmallSize(sourceRect: sourceRect)
-                }, fail: { errorResponse in
-                    UIApplication.showErrorAlert(message: errorResponse.description)
-                })
+        case .private:
+            return UIAlertAction(title: TextConstants.actionSheetSharePrivate, style: .default) { [weak self] _ in
+                self?.privateShare(sourceRect: sourceRect)
             }
         }
     }
     
-    func showSharingMenu(sourceRect: CGRect?) {
-        let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        controler.view.tintColor = ColorConstants.darkBlueColor
-        
-        if sharingItems.count <= NumericConstants.numberOfSelectedItemsBeforeLimits {
-            let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
-                self?.sync(items: self?.sharingItems, action: { [weak self] in
-                    self?.shareSmallSize(sourceRect: sourceRect)
-                    }, fail: { errorResponse in
-                        UIApplication.showErrorAlert(message: errorResponse.description)
-                })
-            }
-            
-            controler.addAction(smallAction)
-            
-            let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
-                self?.sync(items: self?.sharingItems, action: { [weak self] in
-                    self?.shareOrignalSize(sourceRect: sourceRect)
-                    }, fail: { errorResponse in
-                        UIApplication.showErrorAlert(message: errorResponse.description)
-                })
-            }
-            controler.addAction(originalAction)
-        }
-        
-        let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
-            
-            self?.sync(items: self?.sharingItems, action: { [weak self] in
-                self?.shareViaLink(sourceRect: sourceRect)
-            }, fail: { errorResponse in
-                debugLog("sync(items: \(errorResponse.description)")
-                UIApplication.showErrorAlert(message: errorResponse.description)
-            })
-        }
-        controler.addAction(shareViaLinkAction)
-        
-        let cancelAction = UIAlertAction(title: TextConstants.actionSheetShareCancel, style: .cancel, handler: nil)
-        controler.addAction(cancelAction)
-        
-        if let tempoRect = sourceRect {//if ipad
-            controler.popoverPresentationController?.sourceRect = tempoRect
-        }
-        
-        router.presentViewController(controller: controler)
+    func privateShare(sourceRect: CGRect?) {
+        //TODO: COF-520 open private share controller
     }
     
     func shareSmallSize(sourceRect: CGRect?) {
