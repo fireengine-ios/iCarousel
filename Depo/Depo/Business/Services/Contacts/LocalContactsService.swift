@@ -53,6 +53,7 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
                     })
                     
                 } catch {
+                    assertionFailure()
                     printLog("Failed to enumerate contacts. \(error)")
                 }
                 
@@ -71,6 +72,7 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
     private func checkAuthorization(completion: @escaping BoolHandler) {
         contactStore.requestAccess(for: .contacts) { isAllowed, error in
             if let error = error {
+                assertionFailure()
                 printLog("Contacts auth error: \(error)")
             }
             
