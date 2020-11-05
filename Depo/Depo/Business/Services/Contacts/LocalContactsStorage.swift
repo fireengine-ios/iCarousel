@@ -10,7 +10,6 @@ import Foundation
 import Contacts
 
 
-
 enum LocalContactSuggestionSource {
     case name
     case phone
