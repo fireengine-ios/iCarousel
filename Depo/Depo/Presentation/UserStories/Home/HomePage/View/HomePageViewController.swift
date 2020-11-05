@@ -74,6 +74,8 @@ final class HomePageViewController: BaseViewController {
         
         output.viewWillAppear()
     }
+    
+    let local = ContactsSuggestionServiceImpl()
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -95,6 +97,11 @@ final class HomePageViewController: BaseViewController {
             requestShowSpotlight()
         } else {
             isNeedShowSpotlight = true
+        }
+        
+        local.fetchAllContacts {
+            let sug = self.local.suggestContacts(for: "123")
+            print(sug)
         }
         
         output.viewIsReadyForPopUps()
