@@ -119,13 +119,18 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }
         case .private:
             return UIAlertAction(title: TextConstants.actionSheetSharePrivate, style: .default) { [weak self] _ in
-                self?.privateShare(sourceRect: sourceRect)
+                self?.privateShare()
             }
         }
     }
     
-    func privateShare(sourceRect: CGRect?) {
-        //TODO: COF-520 open private share controller
+    func privateShare() {
+        guard let items = sharingItems as? [WrapData] else {
+            return
+        }
+        
+        let controller = router.privateShare(items: items)
+        router.presentViewController(controller: controller)
     }
     
     func shareSmallSize(sourceRect: CGRect?) {

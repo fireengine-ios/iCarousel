@@ -260,6 +260,13 @@ struct RouteRequests {
     static let campaignApi = baseUrl +/ "campaign"
     static let campaignPhotopick = campaignApi +/ "photopick"
     
+    
+    //MARK: - Private Share
+    
+    enum PrivateShare {
+        static let suggestions = baseUrl +/ "invitees"
+    }
+    
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {

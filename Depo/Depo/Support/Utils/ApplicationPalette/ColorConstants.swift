@@ -138,6 +138,10 @@ extension UIColor {
         return UIColor(red: 68.0 / 255.0, green: 205.0 / 255.0, blue: 208.0 / 255.0, alpha: 1.0)
     }
     
+    class var lrTealishFour: UIColor {
+        return UIColor(red: 64.0 / 255.0, green: 204.0 / 255.0, blue: 208.0 / 255.0, alpha: 1.0)
+    }
+    
     class var lrMintGreen: UIColor {
         return UIColor(red: 41.0 / 255.0, green: 240.0 / 255.0, blue: 135.0 / 255.0, alpha: 1.0)
     }
