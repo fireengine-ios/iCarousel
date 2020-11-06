@@ -73,22 +73,46 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func getSuggestions() {
-        showApiSuggestions(contacts: SuggestedApiContact.testContacts())
-        return
+        let group = DispatchGroup()
+        
+        group.enter()
+        group.enter()
+        
+        var hasAccess = false
+        var apiContacts = [SuggestedApiContact]()
+        
+        localContactsService.fetchAllContacts { isAuthorized in
+            hasAccess = isAuthorized
+            group.leave()
+        }
             
-//        shareApiService.getSuggestions { [weak self] result in
-//            switch result {
-//            case .success(let contacts):
-//                self?.showApiSuggestions(contacts: contacts)
-//            case .failed(let error):
-//                UIApplication.showErrorAlert(message: error.description)
-//            }
-//        }
+        shareApiService.getSuggestions { result in
+            switch result {
+            case .success(let contacts):
+                apiContacts = contacts
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+            group.leave()
+        }
+        
+        group.notify(queue: .main) { [weak self] in
+            self?.showApiSuggestions(contacts: apiContacts, hasAccess: hasAccess)
+        }
     }
     
-    private func showApiSuggestions(contacts: [SuggestedApiContact]) {
+    private func showApiSuggestions(contacts: [SuggestedApiContact], hasAccess: Bool) {
+        let suggestedContacts = contacts.map { contact -> SuggestedContact in
+            if hasAccess {
+                let names = self.localContactsService.getContactName(for: contact.username ?? "", email: contact.email ?? "")
+                return SuggestedContact(with: contact, names: names)
+            } else {
+                return SuggestedContact(with: contact)
+            }
+        }
+        
         contentView.arrangedSubviews.dropFirst().forEach { $0.removeFromSuperview() }
-        let view = PrivateShareSuggestionsView.with(contacts: contacts, delegate: self)
+        let view = PrivateShareSuggestionsView.with(contacts: suggestedContacts, delegate: self)
         contentView.addArrangedSubview(view)
     }
     

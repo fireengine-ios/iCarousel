@@ -14,33 +14,45 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="136"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhl-EW-2px">
-                    <rect key="frame" x="16" y="16" width="382" height="16"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="16" id="9nW-BD-ER2"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tmO-pc-9rc">
-                    <rect key="frame" x="0.0" y="37" width="414" height="91"/>
+                    <rect key="frame" x="0.0" y="16" width="414" height="112"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wji-ww-wcm">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="112"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhl-EW-2px">
+                                    <rect key="frame" x="16" y="0.0" width="382" height="16"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="16" id="9nW-BD-ER2"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="dhl-EW-2px" secondAttribute="bottom" id="C8n-eY-JbJ"/>
+                                <constraint firstItem="dhl-EW-2px" firstAttribute="top" secondItem="Wji-ww-wcm" secondAttribute="top" id="Qpx-uv-lMd"/>
+                                <constraint firstAttribute="trailing" secondItem="dhl-EW-2px" secondAttribute="trailing" constant="16" id="Z57-Ka-TSC"/>
+                                <constraint firstItem="dhl-EW-2px" firstAttribute="leading" secondItem="Wji-ww-wcm" secondAttribute="leading" constant="16" id="q2R-GB-2aY"/>
+                            </constraints>
+                        </view>
+                    </subviews>
                 </stackView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="tmO-pc-9rc" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="3tg-yi-j0o"/>
-                <constraint firstAttribute="trailing" secondItem="dhl-EW-2px" secondAttribute="trailing" constant="16" id="46I-hs-gYq"/>
-                <constraint firstItem="dhl-EW-2px" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Dsc-hK-8hX"/>
+                <constraint firstItem="tmO-pc-9rc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="Q9f-pz-NMb"/>
                 <constraint firstItem="tmO-pc-9rc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="e8P-gs-fmf"/>
                 <constraint firstAttribute="bottom" secondItem="tmO-pc-9rc" secondAttribute="bottom" constant="8" id="nXn-Jl-NFq"/>
-                <constraint firstItem="dhl-EW-2px" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="pNQ-bT-ktV"/>
-                <constraint firstItem="tmO-pc-9rc" firstAttribute="top" secondItem="dhl-EW-2px" secondAttribute="bottom" constant="5" id="xgO-y4-14z"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="itemsStackView" destination="tmO-pc-9rc" id="DIi-7K-Bgl"/>
                 <outlet property="nameLabel" destination="dhl-EW-2px" id="XIz-Og-Ggq"/>
+                <outlet property="nameView" destination="Wji-ww-wcm" id="eSI-7D-I8g"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="184.82142857142856"/>
         </view>

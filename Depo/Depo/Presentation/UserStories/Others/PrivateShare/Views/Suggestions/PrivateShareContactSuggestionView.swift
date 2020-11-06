@@ -14,12 +14,14 @@ protocol PrivateShareContactSuggestionViewDelegate: class {
 
 final class PrivateShareContactSuggestionView: UIView, NibInit {
     
-    static func with(contact: SuggestedApiContact, delegate: PrivateShareContactSuggestionViewDelegate?) -> PrivateShareContactSuggestionView {
+    static func with(contact: SuggestedContact, delegate: PrivateShareContactSuggestionViewDelegate?) -> PrivateShareContactSuggestionView {
         let view = PrivateShareContactSuggestionView.initFromNib()
         view.delegate = delegate
         view.setup(with: contact)
         return view
     }
+    
+    @IBOutlet private weak var nameView: UIView!
     
     @IBOutlet private weak var nameLabel: UILabel! {
         willSet {
@@ -33,15 +35,17 @@ final class PrivateShareContactSuggestionView: UIView, NibInit {
     
     private weak var delegate: PrivateShareContactSuggestionViewDelegate?
     
-    private func setup(with contact: SuggestedApiContact) {
-        nameLabel.text = contact.name ?? ""
-        
-        if let phone = contact.username {
-            itemsStackView.addArrangedSubview(PrivateShareSuggestionItemView.with(text: phone, delegate: self))
+    private func setup(with contact: SuggestedContact) {
+        nameLabel.text = contact.displayName
+        if !contact.displayName.isEmpty {
+            nameView.isHidden = false
+        } else {
+            nameView.isHidden = true
         }
-        
-        if let email = contact.email {
-            itemsStackView.addArrangedSubview(PrivateShareSuggestionItemView.with(text: email, delegate: self))
+
+        let items = contact.phones + contact.emails
+        items.forEach { item in
+            itemsStackView.addArrangedSubview(PrivateShareSuggestionItemView.with(text: item, delegate: self))
         }
     }
 }

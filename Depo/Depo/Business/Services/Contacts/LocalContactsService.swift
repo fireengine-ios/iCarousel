@@ -11,8 +11,9 @@ import Contacts
 
 
 protocol ContactsSuggestionService {
-    func fetchAllContacts(completion: VoidHandler?)
+    func fetchAllContacts(completion: BoolHandler?)
     func suggestContacts(for stringToSearch: String) -> [SuggestedContact]
+    func getContactName(for phone: String, email: String) -> LocalContactNames
 }
 
 
@@ -23,23 +24,22 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
     private let contactsStorage = LocalContactsStorage.shared
     
     
-    //add BoolHandler if needed
-    func fetchAllContacts(completion: VoidHandler?) {
+    func fetchAllContacts(completion: BoolHandler?) {
         checkAuthorization { [weak self] isAuthorized in
             guard let self = self else {
-                completion?()
+                completion?(false)
                 return
             }
             
             guard isAuthorized else {
                 printLog("Local Contacts. Access denied.")
-                completion?()
+                completion?(false)
                 return
             }
             
             self.queue.async { [weak self] in
                 guard let self = self else {
-                    completion?()
+                    completion?(false)
                     return
                 }
                 
@@ -59,7 +59,7 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
                 
                 self.contactsStorage.cache(contacts: contacts)
                 
-                completion?()
+                completion?(true)
             }
         }
     }
@@ -68,6 +68,9 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
         contactsStorage.getContacts(containing: stringToSearch)
     }
     
+    func getContactName(for phone: String, email: String) -> LocalContactNames {
+        contactsStorage.getContactName(for: phone, email: email)
+    }
     
     private func checkAuthorization(completion: @escaping BoolHandler) {
         contactStore.requestAccess(for: .contacts) { isAllowed, error in

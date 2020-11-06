@@ -14,7 +14,7 @@ protocol PrivateShareSuggestionsViewDelegate: class {
 
 final class PrivateShareSuggestionsView: UIView, NibInit {
     
-    static func with(contacts: [SuggestedApiContact], delegate: PrivateShareSuggestionsViewDelegate?) -> PrivateShareSuggestionsView {
+    static func with(contacts: [SuggestedContact], delegate: PrivateShareSuggestionsViewDelegate?) -> PrivateShareSuggestionsView {
         let view = PrivateShareSuggestionsView.initFromNib()
         view.delegate = delegate
         view.setup(with: contacts)
@@ -33,7 +33,7 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
     
     private weak var delegate: PrivateShareSuggestionsViewDelegate?
     
-    private func setup(with contacts: [SuggestedApiContact]) {
+    private func setup(with contacts: [SuggestedContact]) {
         guard !contacts.isEmpty else {
             return
         }
