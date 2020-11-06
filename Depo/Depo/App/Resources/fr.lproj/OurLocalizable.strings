@@ -1603,7 +1603,7 @@ Please check I have understood the intended command here*/
 "confirmation_popup_message_hide_single_album" = "L'album sélectionné ne sera disponible que dans l'album \"Masqué\" Vous pouvez les restaurer à tout moment. Êtes-vous sûr de continuer ?";
 "smash_screen_title" = "Effet Amusant";
 "smash_popup_message" = "Cette photo modifiée sera enregistrée dans la galerie de l'appareil et téléchargée sur lifebox comme un nouvel élément.";
-"Smash" = "Drôle";
+"Smash" = "Gif";
 "photos_hide_success_message" = "Photo(s) masquée(s) avec succès.";
 "Unhide" = "Afficher";
 "smart_album_hidden" = "Masqué";
@@ -2049,3 +2049,11 @@ Please check I have understood the intended command here*/
 "widget_description" = "Vous pouvez protéger vos souvenirs et votre téléphone en recevant des notifications concernant la mémoire de votre appareil et l'espace de stockage de la lifebox.";
 "widget_rule_6_small_detail_plural" = "Vous n'avez pas sauvegardé vos contacts depuis au moins %d mois.";
 "widget_rule_6_medium_detail_plural" = "Vous avez sauvegardé vos contacts pour la dernière fois il y a %d mois. Accédez à lifebox dès maintenant, sécurisez votre contacts.";
+"smash_successed_alert_share" = "Partager";
+"fun_gif" = "Gif";
+"fun_sticker" = "Autocollant";
+"fun_close_alert_title" = "Voulez-vous renoncer aux retouches?";
+"fun_close_alert_message" = "Les retouches sur la photo seront annulées.";
+"fun_close_alert_left_button" = "Continuer les retouches";
+"fun_close_alert_right_button" = "Annuler";
+"Upload Music" = "Télécharger des Fichiers";

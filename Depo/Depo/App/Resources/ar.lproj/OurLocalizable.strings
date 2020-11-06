@@ -1755,3 +1755,11 @@
 "widget_description" = "يمكنك الاحتفاظ بذكرياتك بهاتفك بأمان من خلال تلقي الإشعارات المتعلقة بذاكرة جهازك ومساحة تخزين لايف بوكسLİFEBOX.";
 "widget_rule_6_small_detail_plural" = "لم تقم بالنسخ الاحتياطي لجهات الاتصال الخاصة بك منذ شهرا على الأقل.";
 "widget_rule_6_medium_detail_plural" = "اجريت اخرنسخ احتياطي لجهات الاتصال الخاصة بك قبل شهرا.احضر إلى لايف بوكس سريعا,واجعل جهات الاتصال الخاصة بك تحت الحماية.";
+"smash_successed_alert_share" = "مشاركة";
+"fun_gif" = "تنسيق تبادل الرسومات";
+"fun_sticker" = "ملصقات";
+"fun_close_alert_title" = "هل تريد التراجع عن التعديلات؟";
+"fun_close_alert_message" = "سيتم إلغاء التعديلات في الصورة.";
+"fun_close_alert_left_button" = "واصل التعديل";
+"fun_close_alert_right_button" = "إلغاء";
+"Upload Music" = "تحميل ملفات";

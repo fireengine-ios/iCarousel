@@ -1297,7 +1297,7 @@
 "confirmation_popup_message_hide_single_album" = "Albumele (albumele) selectate vor fi disponibile doar în albumul „ascuns”. Le puteți restaura oricând. Ești sigur că vrei să continui?";
 "smash_screen_title" = "Efect distractiv";
 "smash_popup_message" = "Această fotografie editată va fi salvată ca fotografie nouă în galeria dispozitivului";
-"Smash" = "Distracţie";
+"Smash" = "Gif";
 "photos_hide_success_message" = "Articolele sunt ascunse cu succes";
 "Unhide" = "Afișați";
 "smart_album_hidden" = "Ascuns";
@@ -1743,3 +1743,11 @@
 "widget_description" = "Îți poţi păstra amintirile și telefonul în siguranță primind notificări despre memoria dispozitivului și spațiul de stocare al lifebox-ului.";
 "widget_rule_6_small_detail_plural" = "Nu ai făcut backup agendei tale de contacte de cel puțin %d luni.";
 "widget_rule_6_medium_detail_plural" = "Ai făcut ultima dată backup agendei tale de contacte acum %d luni. Vin-o imediat în lifebox, asigură-ţi agenta de contacte.";
+"smash_successed_alert_share" = "Împărtășește";
+"fun_gif" = "GIF";
+"fun_sticker" = "Abțibild";
+"fun_close_alert_title" = "Dorești să anulezi editările?";
+"fun_close_alert_message" = "Editările din fotografie vor fi anulate.";
+"fun_close_alert_left_button" = "Anulează";
+"fun_close_alert_right_button" = "Anulare";
+"Upload Music" = "Încarcă fișierele";

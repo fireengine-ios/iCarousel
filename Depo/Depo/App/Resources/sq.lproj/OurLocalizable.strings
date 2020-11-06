@@ -116,7 +116,7 @@
 "Copy" = "Kopjoni ";
 "Create a Story" = "Krijoni një histori ";
 "Share Via Link" = "Shpërndajeni nëpërmjet linkut";
-"Original Size" = "Madhësia Origjinale ";
+"Original Size" = "Madhësia Origjinale";
 "Small Size" = "Përmasa e Vogël ";
 "Download" = "Shkarkoni";
 "Sync" = "Sinkronizoni ";
@@ -1340,7 +1340,7 @@
 "confirmation_popup_message_hide_single_album" = "Albumi i përzgjedhur do të jetë vetëm në albumin \"Të Fshehura\". Ju mund ta riktheni në cdo kohë. Dëshironi të vazhdoni?";
 "smash_screen_title" = "Efekt argëtues";
 "smash_popup_message" = "Fotot e ndryshuara do të ruhen në galerinë e pajisjes dhe do të ngarkohen në lifebox si një njësi e re.";
-"Smash" = "Argëtim";
+"Smash" = "Gif";
 "photos_hide_success_message" = "Fotot u fshehën me sukses.";
 "Unhide" = "Zbulo";
 "smart_album_hidden" = "Të fshehura";
@@ -1786,3 +1786,11 @@
 "widget_description" = "Ti mund t'i mbash kujtimet e tua dhe telefonin tënd në mënyrë  të sigurt duke marrë njoftime në lidhje me kujtesën tënd të pajisjes dhe hapësirën tënd të ruajtjes  lifebox.";
 "widget_rule_6_small_detail_plural" = "Nuk e ke rezervuar librin tënd  teleonik paktën %d muaj.";
 "widget_rule_6_medium_detail_plural" = "Nuk e ke rezervuar librin tënd teleonik për herë të fundit %d muaj më parë. Eja  në lifebox tani, Siguroje librin tënd teleonik .";
+"smash_successed_alert_share" = "Shpërndani";
+"fun_gif" = "GIF";
+"fun_sticker" = "Sticker";
+"fun_close_alert_title" = "Dëshiron të heqësh dorë nga ndryshimet?";
+"fun_close_alert_message" = "Redaktimet në foto do të anulohen.";
+"fun_close_alert_left_button" = "Vazhdo redaktimin.";
+"fun_close_alert_right_button" = "Anullim";
+"Upload Music" = "Ngarkoni Skedarët";
