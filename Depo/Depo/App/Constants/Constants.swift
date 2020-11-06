@@ -2119,6 +2119,7 @@ struct TextConstants {
     static let privateShareStartPageShareButton = NSLocalizedString("private_share_start_page_share_button", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareStartPagePeopleSelectionTitle = NSLocalizedString("private_share_start_page_people_selection_section_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareStartPageEnterUserPlaceholder = NSLocalizedString("private_share_start_page_enter_user_field", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageSuggestionsTitle = NSLocalizedString("private_share_start_page_suggestions_section", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")    
     static let privateShareStartPageSharedWithTitle = NSLocalizedString("private_share_start_page_shared_with_section", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareStartPageAddMessageTitle = NSLocalizedString("private_share_start_page_add_message_section_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareStartPageMessagePlaceholder = NSLocalizedString("private_share_start_page_add_messge_field", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

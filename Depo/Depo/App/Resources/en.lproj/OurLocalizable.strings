@@ -1804,6 +1804,7 @@
 "private_share_start_page_name" = "Share";
 "private_share_start_page_people_selection_section_name" = "Select people to share";
 "private_share_start_page_enter_user_field" = "Enter e-mail or GSM number";
+"private_share_start_page_suggestions_section" = "Suggestions";
 "private_share_start_page_shared_with_section" = "Shared with";
 "private_share_start_page_add_message_section_name" = "Add a message";
 "private_share_start_page_add_messge_field" = "Your message (optional)";

@@ -59,7 +59,6 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         navigationItem.leftBarButtonItem = closeButton
         
         addSelectionPeopleView()
-        getSuggestions()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -74,9 +73,27 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func getSuggestions() {
-        shareApiService.getSuggestions { result in
+        showApiSuggestions(contacts: SuggestedApiContact.testContacts())
+        return
             
-        }
+//        shareApiService.getSuggestions { [weak self] result in
+//            switch result {
+//            case .success(let contacts):
+//                self?.showApiSuggestions(contacts: contacts)
+//            case .failed(let error):
+//                UIApplication.showErrorAlert(message: error.description)
+//            }
+//        }
+    }
+    
+    private func showApiSuggestions(contacts: [SuggestedApiContact]) {
+        contentView.arrangedSubviews.dropFirst().forEach { $0.removeFromSuperview() }
+        let view = PrivateShareSuggestionsView.with(contacts: contacts, delegate: self)
+        contentView.addArrangedSubview(view)
+    }
+    
+    private func searchSuggestions(query: String) {
+        //TODO: implement search controller and needed logic
     }
     
     private func updateShareButtonIfNeeded() {
@@ -101,7 +118,11 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     
     func startEditing(text: String) {
-        
+        if text.count < 2 {
+            getSuggestions()
+        } else {
+            searchSuggestions(query: text)
+        }
     }
     
     func addContact(_ contact: Contact) {
@@ -115,4 +136,10 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     func onEditorTapped() {
         
     }
+}
+
+//MARK: - PrivateShareSuggestionsViewDelegate
+
+extension PrivateShareViewController: PrivateShareSuggestionsViewDelegate {
+    
 }

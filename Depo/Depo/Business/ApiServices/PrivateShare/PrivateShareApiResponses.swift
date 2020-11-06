@@ -15,4 +15,17 @@ struct SuggestedApiContact: Codable {
     let email: String?
     let name: String?
     let picture: URL?
+    
+    static func testContacts() -> [SuggestedApiContact] {
+        var contacts = [SuggestedApiContact]()
+        for index in 1...5 {
+            contacts.append(SuggestedApiContact(type: "USER",
+                                                identifier: "user_\(index)",
+                                                username: "\(index)5555555",
+                                                email: "email_\(index)@gmail.com",
+                                                name: "user_\(index)",
+                                                picture: nil))
+        }
+        return contacts
+    }
 }
