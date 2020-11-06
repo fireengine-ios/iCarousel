@@ -65,6 +65,7 @@ final class NetmeraService {
             
             group.enter()
             var countryCode: String = "Null"
+            var regionCode: String = "Null"
             var userName: Int = 0
             var userSurname: Int = 0
             var email: Int = 0
@@ -77,6 +78,7 @@ final class NetmeraService {
                     return
                 }
                 
+                regionCode = accountInfo.msisdnRegion ?? "Null"
                 countryCode = accountInfo.countryCode ?? "Null"
                 userName = (accountInfo.username ?? "").isEmpty ? 0 : 1
                 userSurname = (accountInfo.surname ?? "").isEmpty ? 0 : 1
@@ -96,7 +98,7 @@ final class NetmeraService {
             let netmeraAutoSyncStatusVideo = photoVideoAutosyncStatus.video
             let verifiedEmailStatus = getVerifiedEmailStatus()
             let buildNumber = getBuildNumber()
-            
+            let galleryAccessPermission = LocalMediaStorage.default.galleryPermission.analyticsValue
             
             
             
@@ -116,12 +118,14 @@ final class NetmeraService {
                                              turkcellPassword: turkcellPassword,
                                              buildNumber: buildNumber,
                                              countryCode: countryCode,
+                                             regionCode: regionCode,
                                              isUserName: userName,
                                              isUserSurname: userSurname,
                                              isEmail: email,
                                              isPhoneNumber: phoneNumber,
                                              isAddress: address,
-                                             isBirthDay: birthday)
+                                             isBirthDay: birthday,
+                                             galleryAccessPermission: galleryAccessPermission)
                 
                 user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
                 DispatchQueue.toMain {
@@ -162,9 +166,9 @@ final class NetmeraService {
         #if LIFEBOX
         switch RouteRequests.currentServerEnvironment {
         case .production:
-            return "3PJRHrXDiqa-pwWScAq1P-7ZjPWA5mWdKHyMpdBrYMFMU4XzrPkaoQ"
-        case .preProduction, .test:
             return "3PJRHrXDiqakWjtB7quX9jhybzZjSWI4tfk7QNeg9wF6ZWP9p5QxPQ"
+        case .preProduction, .test:
+            return "3PJRHrXDiqa-pwWScAq1P-7ZjPWA5mWdKHyMpdBrYMFMU4XzrPkaoQ"
         }
         #endif
         
@@ -200,8 +204,8 @@ extension NetmeraService {
         let user = NetmeraCustomUser(deviceStorage: 0, photopickLeftAnalysis: "Null", lifeboxStorage: 0, faceImageGrouping: "Null", accountType: "Null",
                                      twoFactorAuthentication: "Null", autosync: "Null", emailVerification: "Null",
                                      autosyncPhotos: "Null", autosyncVideos: "Null", packages: ["Null"],
-                                     autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null", isUserName: 0,
-                                     isUserSurname: 0, isEmail: 0, isPhoneNumber: 0, isAddress: 0, isBirthDay: 0)
+                                     autoLogin: "Null", turkcellPassword: "Null", buildNumber: "Null", countryCode: "Null", regionCode: "Null", isUserName: 0,
+                                     isUserSurname: 0, isEmail: 0, isPhoneNumber: 0, isAddress: 0, isBirthDay: 0, galleryAccessPermission: "Null")
         user.userId = SingletonStorage.shared.accountInfo?.gapId ?? ""
         DispatchQueue.toMain {
             Netmera.update(user)

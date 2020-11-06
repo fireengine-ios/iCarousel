@@ -7,12 +7,11 @@
 
 #import "ContactDevice.h"
 #import "ContactUtil.h"
-#import <AddressBook/ABPerson.h>
 #import "SyncSettings.h"
 
 @implementation ContactDevice
 
-- (instancetype)initWithValue:(NSString*)value andType:(NSString*)type contactId:(NSNumber *)contactId
+- (instancetype)initWithValue:(NSString*)value andType:(NSString*)type contactIdentifier:(NSString *)contactIdentifier
 {
     return nil;
 }
@@ -33,18 +32,18 @@
     return value;
 }
 
-- (CFStringRef)deviceTypeLabel
+- (NSString*)deviceTypeLabel
 {
     switch (_type) {
         case CDEVICE_HOME:
-            return kABHomeLabel;
+            return CNLabelHome;
         case CDEVICE_MOBILE:
         case CDEVICE_WORK_MOBILE:
-            return kABPersonPhoneMobileLabel;
+            return CNLabelPhoneNumberMobile;
         case CDEVICE_WORK:
-            return kABWorkLabel;
+            return CNLabelWork;
         default:
-            return kABOtherLabel;
+            return CNLabelOther;
     }
 }
 
@@ -106,7 +105,7 @@
     [copy setRemoteId: self.remoteId];
     [copy setValue: self.value];
     [copy setDeleted: self.deleted];
-    [copy setContactId: self.contactId];
+    [copy setContactIdentifier:self.contactIdentifier];
     [copy setType: self.type];
     return copy;
 }
@@ -115,17 +114,16 @@
 
 @implementation  ContactPhone
 
-- (instancetype)initWithValue:(NSString*)value andType:(NSString*)type contactId:(NSNumber*)contactId
-{
+- (instancetype)initWithValue:(NSString*)value andType:(NSString*)type contactIdentifier:(NSString *)contactIdentifier {
     self = [super init];
     if (self){
         self.value = value;
-        self.contactId = contactId;
-        if ([type isEqualToString:(__bridge NSString*)kABHomeLabel]){
+        self.contactIdentifier = contactIdentifier;
+        if ([type isEqualToString:CNLabelHome]){
             self.type = CDEVICE_HOME;
-        } else if ([type isEqualToString:(__bridge NSString*)kABPersonPhoneMobileLabel]){
+        } else if ([type isEqualToString:CNLabelPhoneNumberMobile]){
             self.type = CDEVICE_MOBILE;
-        } else if ([type isEqualToString:(__bridge NSString*)kABWorkLabel])
+        } else if ([type isEqualToString:CNLabelWork])
         {
             self.type = CDEVICE_WORK;
         } else
@@ -251,7 +249,7 @@
     [copy setRemoteId: self.remoteId];
     [copy setValue: self.value];
     [copy setDeleted: self.deleted];
-    [copy setContactId: self.contactId];
+    [copy setContactIdentifier: self.contactIdentifier];
     [copy setType: self.type];
     return copy;
 }
@@ -260,15 +258,14 @@
 
 @implementation ContactEmail
 
-- (instancetype)initWithValue:(NSString*)value andType:(NSString*)type contactId:(NSNumber*)contactId
-{
+- (instancetype)initWithValue:(NSString*)value andType:(NSString*)type contactIdentifier:(NSString *)contactIdentifier {
     self = [super init];
     if (self){
         self.value = value;
-        self.contactId = contactId;
-        if ([type isEqualToString:(__bridge NSString*)kABHomeLabel]){
+        self.contactIdentifier = contactIdentifier;
+        if ([type isEqualToString:CNLabelHome]){
             self.type = CDEVICE_HOME;
-        } else if ([type isEqualToString:(__bridge NSString*)kABWorkLabel])
+        } else if ([type isEqualToString:CNLabelWork])
         {
             self.type = CDEVICE_WORK;
         } else
@@ -343,7 +340,7 @@
     [copy setRemoteId: self.remoteId];
     [copy setValue: self.value];
     [copy setDeleted: self.deleted];
-    [copy setContactId: self.contactId];
+    [copy setContactIdentifier: self.contactIdentifier];
     [copy setType: self.type];
     return copy;
 }

@@ -22,13 +22,14 @@ typedef NS_ENUM(NSUInteger, SYNCDeviceType) {
 @property (strong) NSNumber *remoteId;
 @property (strong) NSString *value;
 @property BOOL deleted;
-@property (strong) NSNumber *contactId;
+@property (strong) NSString *contactIdentifier;
 @property SYNCDeviceType type;
 
 /**
  * Use this contructor to init with device contact data
  */
-- (instancetype)initWithValue:(NSString*)value andType:(NSString*)type contactId:(NSNumber*)contactId;
+- (instancetype)initWithValue:(NSString*)value andType:(NSString*)type contactIdentifier:(NSString *)contactIdentifier;
+
 /**
  * Use this contructor to init with remote contact data
  */
@@ -37,7 +38,7 @@ typedef NS_ENUM(NSUInteger, SYNCDeviceType) {
 
 + (ContactDevice*)createFromJSON:(NSDictionary*)json;
 
-- (CFStringRef)deviceTypeLabel;
+- (NSString*)deviceTypeLabel;
 - (NSString*)deviceKey;
 - (NSString*)valueForCompare;
 

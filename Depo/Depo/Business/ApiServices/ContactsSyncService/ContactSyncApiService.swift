@@ -78,4 +78,51 @@ final class ContactSyncApiService {
             .responseVoid(handler)
             .task
     }
+    
+    @discardableResult
+    func getBackups(handler: @escaping ResponseHandler<ContactsBackupResponse>) -> URLSessionTask? {
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.ContactSync.backup)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    @discardableResult
+    func getContacts(backupId: Int64, page: Int, pageSize: Int = 32, sortField: SortField = .firstname, sortOrder: SortOrder = .asc, handler: @escaping ContactSyncResponseHandler) -> URLSessionTask? {
+        guard let url = URL(string: String(format: RouteRequests.ContactSync.backupContacts, backupId)) else {
+            assertionFailure()
+            handler(.failed(ErrorResponse.string("Incorrect URL")))
+            return nil
+        }
+        
+        let parameters: [String : Any] = ["currentPage": page,
+                                          "maxResult": pageSize,
+                                          "sortField": sortField.rawValue,
+                                          "sortOrder": sortOrder.rawValue]
+        
+        return SessionManager
+            .customDefault
+            .request(url, parameters: parameters)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    @discardableResult
+    func deleteBackup(id: Int64, handler: @escaping ResponseVoid) -> URLSessionTask? {
+        guard let url = URL(string: String(format: RouteRequests.ContactSync.backupContacts, id)) else {
+            assertionFailure()
+            handler(.failed(ErrorResponse.string("Incorrect URL")))
+            return nil
+        }
+        
+        return SessionManager
+            .customDefault
+            .request(url, method: .delete)
+            .customValidate()
+            .responseVoid(handler)
+            .task
+    }
 }

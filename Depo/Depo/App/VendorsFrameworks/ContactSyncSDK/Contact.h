@@ -7,12 +7,11 @@
 
 #import <Foundation/Foundation.h>
 #import "SyncConstants.h"
-#import <AddressBook/ABRecord.h>
-#import <AddressBook/ABPerson.h>
+#import <Contacts/CNContact.h>
 
 @interface Contact : NSObject<NSCopying>
 
-@property (strong) NSNumber *objectId;
+@property (strong) NSString *objectIdentifier;
 @property (strong) NSNumber *remoteId;
 @property (strong) NSNumber *remoteUpdateDate;
 @property (strong) NSNumber *localUpdateDate;
@@ -23,6 +22,8 @@
 @property (strong) NSString *nickName;
 @property (strong) NSString *displayName;
 @property (strong) NSString *company;
+//@property (strong) NSString *note;
+@property (strong) NSString* birthday;  
 
 @property BOOL dirty;
 @property BOOL defaultAccount;
@@ -33,10 +34,8 @@
 @property BOOL hasName;
 @property BOOL hasPhoneNumber;
 
-@property ABRecordRef recordRef;
-
-- (instancetype)initWithRecordRef:(ABRecordRef)ref;
 - (instancetype)initWithDictionary:(NSDictionary*)json;
+- (instancetype)initWithCNContact:(CNContact*)json;
 - (NSDictionary*) toJSON:(BOOL)isNewContact;
 - (NSString*) toStringValue;
 - (NSString*) toMD5;

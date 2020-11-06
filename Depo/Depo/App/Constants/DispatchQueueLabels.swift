@@ -23,6 +23,7 @@ struct DispatchQueueLabels {
     static let assetCache = "com.lifebox.assetCache"
     static let localMediaStorage = "com.lifebox.local_media_storage"
     static let syncronizedArray = "com.lifebox.SynchronizedArray"
+    static let syncronizedSet = "com.lifebox.SynchronizedSet"
     static let serialStopUpdateItemManager = "com.lifebox.serialStopUpdateItemManager"
     static let freeAppSpace = "com.lifebox.freeAppSpace"
     static let privateConcurentQueue = "privateConcurentQueue"
@@ -43,4 +44,7 @@ struct DispatchQueueLabels {
     static let backgroundTaskSyncQueue = "com.lifebox.backgroundTaskSyncQueue"
     static let localAlbumsCacheQueue = "com.lifebox.localAlbumsCacheQueue"
     static let gifOptimizationQueue = "com.lifebox.gifOptimizationQueue"
+    static let widgetImageLoaderQueue = "com.lifebox.widgetImageLoadingQueue"
+    static let widgetSmallProviderQueue = "com.lifebox.widgetSmallProviderQueue"
+    static let widgetMediumProviderQueue = "com.lifebox.widgetMediumProviderQueue"
 }

@@ -74,7 +74,10 @@ final class RemoteContact: ObjectRequestResponse {
         static let id = "id"
         static let name = "displayname"
         static let lastname = "lastname"
+        static let middlename = "middlename"
         static let firstname = "firstname"
+        static let displayname = "displayname"
+        static let nickname = "nickname"
         static let devices = "devices"
         static let birthDate = "birthDate"
         static let addresses = "addresses"
@@ -86,6 +89,9 @@ final class RemoteContact: ObjectRequestResponse {
     var name = ""
     var firstname = ""
     var lastname = ""
+    var middlename = ""
+    var displayname = ""
+    var nickname = ""
     var devices = [RemoteContactDevice]()
     var birthDate = ""
     var addresses = [RemoteContactAddress]()
@@ -114,6 +120,9 @@ final class RemoteContact: ObjectRequestResponse {
         name = json?[JsonKey.name].string ?? ""
         firstname = json?[JsonKey.firstname].string ?? ""
         lastname = json?[JsonKey.lastname].string ?? ""
+        middlename = json?[JsonKey.middlename].string ?? ""
+        displayname = json?[JsonKey.displayname].string ?? ""
+        nickname = json?[JsonKey.nickname].string ?? ""
         birthDate = json?[JsonKey.birthDate].string ?? ""
         notes = json?[JsonKey.notes].string ?? ""
         company = json?[JsonKey.company].string ?? ""
@@ -149,5 +158,47 @@ final class ContactsResponse: ObjectRequestResponse, Map {
             return
         }
         contacts = list.compactMap { RemoteContact(withJSON: $0) }
+    }
+}
+
+final class ContactsBackupResponse: ObjectRequestResponse, Map {
+    
+    var list: [ContactBackupItem] = []
+    
+    override func mapping() {
+        if let result = json?["data"].array?.compactMap({ ContactBackupItem(withJSON: $0) }) {
+            list = result
+        }
+    }
+}
+
+final class ContactBackupItem: ObjectRequestResponse {
+    private struct JsonKeys {
+        static let id = "id"
+        static let created = "created"
+        static let modified = "modified"
+        static let isDeleted = "deleted"
+        static let key = "key"
+        static let total = "total"
+    }
+    
+    var id: Int64 = 0
+    var created: Date?
+    var modified: Date?
+    var isDeleted = false
+    var key = ""
+    var total = 0
+    
+    var date: Date? {
+        modified ?? created
+    }
+    
+    override func mapping() {
+        id = json?[JsonKeys.id].int64 ?? -1
+        created = json?[JsonKeys.created].date
+        modified = json?[JsonKeys.modified].date
+        isDeleted = json?[JsonKeys.isDeleted].bool ?? false
+        key = json?[JsonKeys.key].string ?? ""
+        total = json?[JsonKeys.total].int ?? 0
     }
 }

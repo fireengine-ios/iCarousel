@@ -6,6 +6,8 @@
 //  Copyright © 2017 LifeTech. All rights reserved.
 //
 
+import WidgetKit
+
 class PackagesInteractor {
     weak var output: PackagesInteractorOutput!
     
@@ -122,6 +124,9 @@ extension PackagesInteractor: PackagesInteractorInput {
                 
                 if let offer = offer {
                     self?.analyticsService.trackPurchase(offer: offer)
+                    if #available(iOS 14.0, *) {
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }
                     self?.analyticsService.trackProductPurchasedInnerGA(offer: offer, packageIndex: planIndex)
                     self?.analyticsService.trackDimentionsEveryClickGA(screen: .packages, downloadsMetrics: nil, uploadsMetrics: nil, isPaymentMethodNative: false)
                     self?.analyticsService.trackCustomGAEvent(eventCategory: .enhancedEcommerce, eventActions: .purchase, eventLabel: .success)
@@ -230,12 +235,18 @@ extension PackagesInteractor: PackagesInteractorInput {
         }
         
         offersService.validateApplePurchase(with: receipt, productId: productId, success: { [weak self] response in
-            guard let response = response as? ValidateApplePurchaseResponse, let status = response.status else {
+            guard
+                let response = response as? ValidateApplePurchaseResponse,
+                let status = response.status
+            else {
                 self?.output.refreshPackages()
                 return
             }
             
             if status == .success {
+                if #available(iOS 14.0, *) {
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
                 DispatchQueue.toMain {
                     self?.output.refreshPackages()
                 }

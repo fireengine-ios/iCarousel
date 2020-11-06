@@ -19,7 +19,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         return controller
     }
     
-    static func with(items: [Item]) -> TBMatikPhotosViewController {
+    static func with(items: [Item], selectedIndex: Int) -> TBMatikPhotosViewController {
         
         var itemsDict = [String: Item]()
         for item in items {
@@ -33,27 +33,18 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         controller.modalPresentationStyle = .overFullScreen
         controller.items = itemsDict
         controller.uuids = uuids
+        controller.selectedIndex = selectedIndex
         return controller
     }
     
     enum Constants {
         static let leftOffset: CGFloat = 32
         static let rightOffset: CGFloat = 32
-        static let itemSpacing: CGFloat = 8
+        static let itemSpacing: CGFloat = 0.62
+        static let itemScaleFactor: CGFloat = 0.3
     }
     
     // MARK: - IBOutlets
-    
-    private lazy var gradientView: GradientView! = {
-        let gradientView = GradientView()
-        gradientView.alpha = 0.8
-        gradientView.setup(withFrame: view.bounds,
-                           startColor: ColorConstants.tealBlue,
-                           endColoer: ColorConstants.seaweed,
-                           startPoint: .zero,
-                           endPoint: CGPoint(x: 0, y: 1))
-        return gradientView
-    }()
     
     @IBOutlet private weak var backgroundImageView: UIImageView!
     
@@ -68,12 +59,6 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     @IBOutlet private weak var carousel: iCarousel!
-    @IBOutlet private weak var pageControl: UIPageControl! {
-        willSet {
-            newValue.currentPageIndicatorTintColor = .white
-            newValue.pageIndicatorTintColor = UIColor.white.withAlphaComponent(0.5)
-        }
-    }
     
     @IBOutlet private weak var topConstraint: NSLayoutConstraint! {
         willSet {
@@ -131,6 +116,9 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         }
     }
     
+    private var selectedIndex: Int = 0
+    private var isConfiguredCarousel = false
+    
     // MARK: - View lifecycle
     
     deinit {
@@ -144,8 +132,6 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         
         if items.isEmpty {
             loadItemsByUuids()
-        } else {
-            reloadData()
         }
     }
     
@@ -159,8 +145,20 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        carouselItemFrameWidth = carousel.bounds.width - Constants.leftOffset - Constants.rightOffset
-        carouselItemFrameHeight = carousel.bounds.height
+        if !isConfiguredCarousel {
+            carouselItemFrameWidth = carousel.bounds.width - Constants.leftOffset - Constants.rightOffset
+            carouselItemFrameHeight = carousel.bounds.height
+            
+            if !items.isEmpty {
+                reloadData()
+            }
+            
+            isConfiguredCarousel = true
+        }
+        
+        if let currentView = carousel.currentItemView as? TBMatikPhotoView, currentView.image != nil {
+            updateBackground(with: currentView.image)
+        }
     }
     
     private func track(screen: AnalyticsAppScreens) {
@@ -169,9 +167,9 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     }
     
     private func configure() {
-        view.insertSubview(gradientView, aboveSubview: backgroundImageView)
-            
-        pageControl.numberOfPages = uuids.count
+        backgroundImageView.backgroundColor = ColorConstants.tbMatikBlurColor
+        backgroundImageView.contentMode = .scaleAspectFill
+        
         setupCarousel()
         updateTitle()
         
@@ -190,6 +188,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         carousel.delegate = self
         carousel.dataSource = self
         carousel.isPagingEnabled = true
+        carousel.bounces = false
     }
     
     private func loadItemsByUuids() {
@@ -215,6 +214,7 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     
     private func reloadData() {
         carousel.reloadData()
+        carousel.scrollToItem(at: selectedIndex, animated: false)
         carousel.isHidden = false
         updateTitle()
     }
@@ -254,6 +254,20 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
         tabbarController.showAndScrollPhotosScreen(scrollTo: item)        
         dismiss(animated: true)
     }
+    
+    private func updateBackground(with image: UIImage?) {
+        DispatchQueue.global().async { [weak self] in
+            guard let blurImage = image?.applyBlur(radius: 20,
+                                                   tintColor: ColorConstants.tbMatikBlurColor.withAlphaComponent(0.6),
+                                                   saturationDeltaFactor: 1.8) else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.backgroundImageView.image = blurImage
+            }
+        }
+    }
 }
 
 // MARK: - iCarouselDataSource
@@ -270,11 +284,11 @@ extension TBMatikPhotosViewController: iCarouselDataSource {
         
         let uuid = uuids[index]
         itemView.setup(with: items[uuid])
-        itemView.needShowShadow = index == carousel.currentItemIndex
         itemView.tag = index
         
         itemView.setImageHandler = { [weak self] in
             self?.updateButtonsState(for: itemView)
+            self?.updateBackground(with: itemView.image)
         }
         
         return itemView
@@ -301,25 +315,20 @@ extension TBMatikPhotosViewController: iCarouselDataSource {
 extension TBMatikPhotosViewController: iCarouselDelegate {
 
     func carousel(_ carousel: iCarousel, itemTransformForOffset offset: CGFloat, baseTransform transform: CATransform3D) -> CATransform3D {
-        let spacing = 1 + Constants.itemSpacing / carousel.bounds.width
-        let x = offset * spacing * carousel.itemWidth
-        return CATransform3DTranslate(transform, x, 0, 0)
+        let clampedOffset = max(-1, min(1, offset))
+        let x = (clampedOffset * 0.5 + offset * Constants.itemSpacing) * carousel.itemWidth
+        let z = fabs(clampedOffset) * -carousel.itemWidth * Constants.itemScaleFactor
+        return CATransform3DTranslate(transform, x, 0, z)
     }
     
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
-        pageControl.currentPage = carousel.currentItemIndex
         updateTitle()
 
         track(screen: .tbmatikSwipePhoto(carousel.currentItemIndex + 1))
         
-        carousel.visibleItemViews.forEach { view in
-            if let itemView = view as? TBMatikPhotoView {
-                itemView.needShowShadow = itemView.tag == carousel.currentItemIndex
-            }
-        }
-        
         if let currentView = carousel.currentItemView as? TBMatikPhotoView {
             updateButtonsState(for: currentView)
+            updateBackground(with: currentView.image)
         }
     }
 }

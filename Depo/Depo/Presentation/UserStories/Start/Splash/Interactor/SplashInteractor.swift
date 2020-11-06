@@ -7,6 +7,7 @@
 //
 
 import Reachability
+import WidgetKit
 
 class SplashInteractor: SplashInteractorInput {
 
@@ -82,19 +83,24 @@ class SplashInteractor: SplashInteractorInput {
             } else if reachabilityService.isReachableViaWWAN {
                 authenticationService.turkcellAuth(success: { [weak self] in
                     AccountService().updateBrandType()
-                    
+                    debugLog("SPLASH: tc login")
                     AuthoritySingleton.shared.setLoginAlready(isLoginAlready: true)
                     self?.tokenStorage.isRememberMe = true
                     
                     SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
-                        
+                        debugLog("SPLASH: tc login successfull")
                         SingletonStorage.shared.isJustRegistered = false
                         self?.isFirstLogin = true
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .turkcell))
                         CacheManager.shared.actualizeCache()
+                        if #available(iOS 14.0, *) {
+                            debugLog("SPLASH: tc login widget reload")
+                            WidgetCenter.shared.reloadAllTimelines()
+                        }
                         self?.turkcellSuccessLogin()
                         self?.isTryingToLogin = false
                     }, fail: { [weak self] error in
+                        debugLog("SPLASH: tc login fail")
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .turkcell))
                         self?.isTryingToLogin = false
                         let loginError = LoginResponseError(with: error)
@@ -107,6 +113,7 @@ class SplashInteractor: SplashInteractorInput {
                         }
                     })
                 }, fail: { [weak self] response in
+                    debugLog("SPLASH: tc login fail")
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .turkcell))
                     let loginError = LoginResponseError(with: response)
                     self?.analyticsService.trackLoginEvent(loginType: .turkcellGSM, error: loginError)
@@ -134,6 +141,9 @@ class SplashInteractor: SplashInteractorInput {
                     SingletonStorage.shared.getOverQuotaStatus {
                         self?.successLogin()
                         AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: .rememberMe))
+                        if #available(iOS 14.0, *) {
+                            WidgetCenter.shared.reloadAllTimelines()
+                        }
                     }
                 }, fail: { [weak self] error in
                     AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .failure, loginType: .rememberMe))

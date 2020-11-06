@@ -6,10 +6,18 @@
 //  Copyright © 2017 com.igones. All rights reserved.
 //
 
+import WidgetKit
+
 enum DivorseItems {
     case items
     case albums
     case folders
+}
+
+enum ShareTypes {
+    case small
+    case original
+    case link
 }
 
 class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
@@ -30,6 +38,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var hideActionService: HideActionServiceProtocol = HideActionService()
     private lazy var smashActionService: SmashActionServiceProtocol = SmashActionService()
+    private lazy var photoEditImageDownloader = PhotoEditImageDownloader()
+    
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
     
@@ -47,10 +57,76 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func selectShareType(sourceRect: CGRect?) {
-        if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video }) {
+        
+        if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
             self.shareViaLink(sourceRect: sourceRect)
+        } else if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video }){
+            showSharingMenu(types: [.original, .link], sourceRect: sourceRect)
         } else {
-            self.showSharingMenu(sourceRect: sourceRect)
+            showSharingMenu(types: [.small, .original, .link], sourceRect: sourceRect)
+        }
+    }
+    
+    private func showSharingMenu(types: [ShareTypes], sourceRect: CGRect?) {
+        let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        controler.view.tintColor = ColorConstants.darkBlueColor
+        
+        var shareTypes = types
+        
+        if sharingItems.count > NumericConstants.numberOfSelectedItemsBeforeLimits {
+            shareTypes.remove(.original)
+            shareTypes.remove(.small)
+        }
+        
+        shareTypes.forEach {
+            controler.addAction(getAction(shareType: $0, sourceRect: sourceRect))
+        }
+        
+        let cancelAction = UIAlertAction(title: TextConstants.actionSheetShareCancel, style: .cancel, handler: nil)
+        controler.addAction(cancelAction)
+        
+        if let tempoRect = sourceRect {//if ipad
+            controler.popoverPresentationController?.sourceRect = tempoRect
+        }
+        
+        router.presentViewController(controller: controler)
+    }
+    
+    private func getAction(shareType: ShareTypes, sourceRect: CGRect?) -> UIAlertAction {
+        switch shareType {
+        case .link:
+            if self.sharingItems.contains(where: { $0.isLocalItem }) {
+                
+                return UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
+                    
+                    self?.sync(items: self?.sharingItems, action: { [weak self] in
+                        self?.shareViaLink(sourceRect: sourceRect)
+                    }, fail: { errorResponse in
+                        debugLog("sync(items: \(errorResponse.description)")
+                        UIApplication.showErrorAlert(message: errorResponse.description)
+                    })
+                }
+            } else {
+                return UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
+                    self?.shareViaLink(sourceRect: sourceRect)
+                }
+            }
+        case .original:
+            return UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
+                self?.sync(items: self?.sharingItems, action: { [weak self] in
+                    self?.shareOrignalSize(sourceRect: sourceRect)
+                    }, fail: { errorResponse in
+                        UIApplication.showErrorAlert(message: errorResponse.description)
+                })
+            }
+        case .small:
+            return UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
+                self?.sync(items: self?.sharingItems, action: { [weak self] in
+                    self?.shareSmallSize(sourceRect: sourceRect)
+                }, fail: { errorResponse in
+                    UIApplication.showErrorAlert(message: errorResponse.description)
+                })
+            }
         }
     }
     
@@ -227,7 +303,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        ImageDownloder().getImage(patch: originalUrl) { [weak self] image in
+        photoEditImageDownloader.download(url: originalUrl, attempts: 2) { [weak self] image in
             guard
                 let self = self,
                 let image = image
@@ -256,8 +332,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             }
             
             let previewImage = UIImage(cgImage: imageReference, scale: image.scale, orientation: image.imageOrientation)
-            
+
             debugLog("PHOTOEDIT: is about to create the controller")
+
             let vc = PhotoEditViewController.with(originalImage: image.imageWithFixedOrientation, previewImage: previewImage.imageWithFixedOrientation, presented: completion) { [weak self] controller, completionType in
 
                 switch completionType {
@@ -281,6 +358,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                 
                                 case .failed(_):
                                     DispatchQueue.main.async {
+                                        controller.saveImageFailure(saveAsCopy: true)
                                         controller.hideSpinner()
                                         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
                                     }
@@ -325,13 +403,14 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                             SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditModifySnackbarMessage)
                                         }
                                     }
+                                    
                                     ImageDownloder.removeImageFromCache(url: updatedItem.tmpDownloadUrl, completion: {
                                         ImageDownloder.replaceImagesInCache(urls: urlsToReplace, images: newThumbnails, completion: closeScreen)
                                     })
-                                    
 
                                 case .failed(_):
                                     DispatchQueue.main.async {
+                                        controller.saveImageFailure(saveAsCopy: false)
                                         controller.hideSpinner()
                                         SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.photoEditSaveImageErrorMessage)
                                 }
@@ -357,31 +436,36 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
     func smash(item: [BaseDataSourceItem], completion: VoidHandler?) {
         guard let item = item.first as? Item, let url = item.metaData?.largeUrl ?? item.tmpDownloadUrl else {
+            completion?()
             return
         }
         
         let controller = OverlayStickerViewController()
         controller.smashActionService = self.smashActionService
         let navVC = NavigationController(rootViewController: controller)
-        self.router.presentViewController(controller: navVC)
-        
-        ImageDownloder().getImage(patch: url) { [weak self] image in
-            guard let self = self, let image = image else {
-                if !ReachabilityService.shared.isReachable {
-                    controller.dismiss(animated: false) {
-                         UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+        navVC.navigationBar.isHidden = true
+        router.presentViewController(controller: navVC, animated: true) { [weak self] in
+            ImageDownloder().getImage(patch: url) { [weak self] image in
+                guard
+                    let self = self,
+                    let image = image
+                else {
+                    if !ReachabilityService.shared.isReachable {
+                        controller.dismiss(animated: false) {
+                             UIApplication.showErrorAlert(message: TextConstants.errorConnectedToNetwork)
+                        }
                     }
+            
+                    completion?()
+                    return
                 }
-        
+                
+                controller.selectedImage = image
+                controller.imageName = item.name
                 completion?()
-                return
+                
+                self.trackEvent(elementType: .smash)
             }
-            
-            controller.selectedImage = image
-            controller.imageName = item.name
-            completion?()
-            
-            self.trackEvent(elementType: .smash)
         }
     }
     
@@ -693,6 +777,13 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                            fail: failAction(elementType: .sync))
     }
     
+    func downloadDocument(items: [WrapData]?) {
+        guard let items = items, !items.isEmpty else {
+            return
+        }
+        
+        fileService.downloadDocuments(items: items, success: successAction(elementType: .downloadDocument), fail: failAction(elementType: .downloadDocument))
+    }
     
     func download(item: [BaseDataSourceItem]) {
         guard LocalMediaStorage.default.photoLibraryIsAvailible() else {
@@ -1448,6 +1539,11 @@ extension MoreFilesActionsInteractor {
     private func deleteSelectedItems(_ items: [Item], success: @escaping FileOperation, fail: @escaping ((Error) -> Void)) {
         analyticsService.trackFileOperationGAEvent(operationType: .delete, items: items)
         fileService.delete(items: items, success: { [weak self] in
+            if #available(iOS 14.0, *) {
+                if !SyncServiceManager.shared.hasExecutingSync, CacheManager.shared.isCacheActualized {
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+            }
             self?.removeItemsFromPlayer(items: items)
             success()
         }, fail: fail)

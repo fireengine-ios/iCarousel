@@ -9,13 +9,6 @@
 import Foundation
 import FirebaseCrashlytics
 
-protocol ObjectFromRequestResponse: class {
-    
-    init(json: Data?, headerResponse: HTTPURLResponse?)
-        
-    func mapping()
-}
-
 protocol RequestParametrs {
     
     var timeout: TimeInterval { get }
@@ -185,6 +178,17 @@ class BaseRequestService {
                                                            timeoutInterval: param.timeout,
                                                            response: response)
         task.resume()
+    }
+    
+    @discardableResult
+    func executeDownloadRequest(param: BaseDownloadRequestParametrs, response:@escaping RequestFileDownloadResponse) -> URLSessionTask {
+        let task = requestService.downloadFileRequestTask(parameters: param,
+                                                          body: nil,
+                                                          method: RequestMethod.Get,
+                                                          timeoutInterval: param.timeout,
+                                                          response: response)
+        task.resume()
+        return task
     }
     
     func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask? {

@@ -53,6 +53,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 //            if fileTypes.contains(.video), let infoIndex = actionTypes.index(of: .info) {
 //                actionTypes.remove(at: infoIndex)
 //            }
+            if fileTypes.contains(where: { $0.isDocumentPageItem || $0 == .audio }) {
+                if let downloadIndex = actionTypes.index(of: .download) {
+                    actionTypes.remove(at: downloadIndex)
+                    actionTypes.insert(.downloadDocument, at: downloadIndex)
+                }
+            }
             barConfig = EditingBarConfig(elementsConfig: actionTypes,
                                          style: barConfig.style,
                                          tintColor: barConfig.tintColor)
@@ -293,6 +299,16 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
                 self.view.appendItems(items)
             }
         }
+    }
+    
+    func tabIndex(type: ElementTypes) -> Int? {
+        guard let index = interactor.currentItemIndex else {
+            return nil
+        }
+        
+        let item = interactor.allItems[index]
+        let types = prepareBarConfigForFileTypes(fileTypes: [item.fileType], selectedIndex: index)
+        return types.elementsConfig.firstIndex(of: type)
     }
     
     func updated() {

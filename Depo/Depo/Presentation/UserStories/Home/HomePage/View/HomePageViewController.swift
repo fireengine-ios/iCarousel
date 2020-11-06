@@ -169,7 +169,7 @@ extension HomePageViewController: HomeCollectionViewDataSourceDelegate {
     
     //MARK: CardsShareButtonDelegate
     
-    func share(item: BaseDataSourceItem, type: ShareType) {
+    func share(item: BaseDataSourceItem, type: CardShareType) {
         shareCardContentManager.presentSharingMenu(item: item, type: type)
     }
     

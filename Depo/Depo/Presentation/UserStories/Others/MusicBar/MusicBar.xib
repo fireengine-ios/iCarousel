@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina3_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MusicBar" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MusicBar" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="artistLabel" destination="hRl-4f-gjc" id="z9q-Eh-K35"/>
                 <outlet property="contentView" destination="7TD-Km-mkZ" id="CLE-8O-0lS"/>
                 <outlet property="gradientView" destination="CYb-oQ-PdE" id="pfa-Kn-rco"/>
                 <outlet property="musicNameLabel" destination="hjb-dB-NHk" id="BQz-xn-OMs"/>
                 <outlet property="playPauseButton" destination="rGm-wJ-sPn" id="olt-R2-xKG"/>
-                <outlet property="progressView" destination="X22-16-emb" id="93A-ea-XRY"/>
+                <outlet property="progressConstraint" destination="pla-nx-je0" id="Knn-ce-2em"/>
                 <outlet property="progressViewContainer" destination="AwS-bS-X3J" id="Sb6-Ra-jXP"/>
                 <outlet property="zoomUpButton" destination="7Qv-7Z-1M5" id="gxT-e0-djG"/>
             </connections>
@@ -29,7 +27,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6c-hM-A1c" userLabel="view">
                     <rect key="frame" x="0.0" y="0.0" width="378" height="70"/>
                     <subviews>
-                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CYb-oQ-PdE" customClass="GradientView" customModule="lifebox" customModuleProvider="target">
+                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CYb-oQ-PdE" customClass="GradientView" customModule="Billo" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="378" height="70"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="750" text="Artist" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRl-4f-gjc">
@@ -39,7 +37,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Qv-7Z-1M5">
-                            <rect key="frame" x="8" y="14.5" width="40" height="40"/>
+                            <rect key="frame" x="8" y="15" width="40" height="40"/>
                             <accessibility key="accessibilityConfiguration" label="Zoom"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Xja-N5-yKT"/>
@@ -90,7 +88,7 @@
                         <constraint firstItem="hRl-4f-gjc" firstAttribute="top" secondItem="hjb-dB-NHk" secondAttribute="bottom" id="uyI-F8-t4O"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AwS-bS-X3J" customClass="GradientView" customModule="lifebox" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AwS-bS-X3J" customClass="GradientView" customModule="Billo" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="378" height="6"/>
                     <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -98,10 +96,11 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X22-16-emb">
-                    <rect key="frame" x="0.0" y="0.0" width="378" height="6"/>
+                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="6"/>
                     <color key="backgroundColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="6" id="Rwk-Dc-hO7"/>
+                        <constraint firstAttribute="width" priority="999" id="pla-nx-je0"/>
                     </constraints>
                 </view>
             </subviews>
@@ -111,7 +110,7 @@
                 <constraint firstAttribute="trailing" secondItem="O6c-hM-A1c" secondAttribute="trailing" id="6VZ-r1-J7k"/>
                 <constraint firstItem="O6c-hM-A1c" firstAttribute="leading" secondItem="7TD-Km-mkZ" secondAttribute="leading" id="Jb5-m3-hQQ"/>
                 <constraint firstItem="AwS-bS-X3J" firstAttribute="top" secondItem="7TD-Km-mkZ" secondAttribute="top" id="Qzi-zH-co4"/>
-                <constraint firstAttribute="trailing" secondItem="X22-16-emb" secondAttribute="trailing" id="RLP-fh-C5J"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="X22-16-emb" secondAttribute="trailing" id="RLP-fh-C5J"/>
                 <constraint firstItem="AwS-bS-X3J" firstAttribute="leading" secondItem="7TD-Km-mkZ" secondAttribute="leading" id="YlP-A9-fES"/>
                 <constraint firstAttribute="bottom" secondItem="O6c-hM-A1c" secondAttribute="bottom" id="hii-yB-ogt"/>
                 <constraint firstItem="X22-16-emb" firstAttribute="top" secondItem="7TD-Km-mkZ" secondAttribute="top" id="mbI-DX-XpU"/>

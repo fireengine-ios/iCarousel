@@ -49,7 +49,7 @@ class UploadFilesSelectionModuleInitializer: NSObject {
     class func initializeUploadPhotosViewController(rootUUID: String,
                                                     getItems: LocalAlbumPresenter.PassBaseDataSourceItemsHandler?,
                                                     saveItems: LocalAlbumPresenter.ReturnBaseDataSourceItemsHandler?) -> UIViewController {
-        let viewController = UploadFilesSelectionViewController(nibName: "BaseFilesGreedViewController", bundle: nil)
+        let viewController = UploadFilesSelectionViewController(nibName: "UploadFilesSelectionViewController", bundle: nil)
         let configurator = BaseFilesGreedModuleConfigurator()
         let service = LocalPhotoAndVideoService()
         let interactor = UploadFilesSelectionInteractor(remoteItems: service)

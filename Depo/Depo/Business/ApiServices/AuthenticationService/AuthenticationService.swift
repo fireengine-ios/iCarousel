@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import Alamofire
+import WidgetKit
 
 typealias SuccessResponse = (_ value: ObjectFromRequestResponse? ) -> Void
 typealias FailResponse = (_ value: ErrorResponse) -> Void
@@ -376,6 +377,10 @@ class AuthenticationService: BaseRequestService {
                             
                             SingletonStorage.shared.isTwoFactorAuthEnabled = false
                             
+                            if #available(iOS 14.0, *) {
+                                WidgetCenter.shared.reloadAllTimelines()
+                            }
+                            
                             self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
                                 sucess?(headers)
                             })
@@ -408,6 +413,11 @@ class AuthenticationService: BaseRequestService {
                 self.tokenStorage.refreshToken = refreshToken
                 SingletonStorage.shared.getAccountInfoForUser(success: { [weak self] _ in
                     CacheManager.shared.actualizeCache()
+                    
+                    if #available(iOS 14.0, *) {
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }
+                    
                     self?.accountReadOnlyPopUpHandler(headers: headers, completion: {
                         sucess?()
                     })
@@ -476,6 +486,9 @@ class AuthenticationService: BaseRequestService {
             CacheManager.shared.logout {
                 debugLog("logout success")
                 WormholePoster().didLogout()
+                if #available(iOS 14.0, *) {
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
                 success?()
             }
         }
@@ -747,6 +760,10 @@ class AuthenticationService: BaseRequestService {
                             let error = ServerError(code: response.response?.statusCode ?? -1, data: response.data)
                             handler(.failed(error))
                             return
+                        }
+                        
+                        if #available(iOS 14.0, *) {
+                            WidgetCenter.shared.reloadAllTimelines()
                         }
                         
                         handler(.success(headers))

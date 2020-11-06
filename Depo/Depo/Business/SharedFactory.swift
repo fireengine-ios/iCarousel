@@ -14,6 +14,7 @@ protocol SharedFactory {
     func resolve() -> SessionManager
     func resolve() -> PasscodeStorage
     func resolve() -> BiometricsManager
+    func resolve() -> AuthorizationRepository
 }
 
 open class FactoryBase: SharedFactory {
@@ -35,5 +36,13 @@ open class FactoryBase: SharedFactory {
     private static let biometricsManager = BiometricsManagerImp()
     func resolve() -> BiometricsManager {
         return FactoryBase.biometricsManager
+    }
+    
+    private static let authorizationRepository: AuthorizationRepository = {
+        let urls: AuthorizationURLs = AuthorizationURLsImp()
+        return AuthorizationRepositoryImp(urls: urls, tokenStorage: factory.resolve())
+    }()
+    func resolve() -> AuthorizationRepository {
+        return FactoryBase.authorizationRepository
     }
 }

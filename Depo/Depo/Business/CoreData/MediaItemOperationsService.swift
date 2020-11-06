@@ -272,6 +272,10 @@ final class MediaItemOperationsService {
                     }
                     savedItem.objectSyncStatus = NSSet(array: array)
                     
+                    if let identifier = savedItem.localFileID {
+                        SharedGroupCoreDataStack.shared.save(isSynced: true, localIdentifiers: [identifier], completion: {/*updated somwhere else*/})
+                    }
+                    
                     //savedItem.objectSyncStatus?.addingObjects(from: item.syncStatuses)
                 })
                 
@@ -592,7 +596,7 @@ final class MediaItemOperationsService {
                     completion?()
                 })
             //TODO: uncomment for xcode 12
-            case .authorized://, .limited:
+            case .authorized, .limited:
                 self?.processLocalGallery(completion: completion)
             case .restricted, .notDetermined:
                 break
@@ -785,6 +789,7 @@ final class MediaItemOperationsService {
                         context.perform {
                             let invalidItems = info.filter { !$0.isValid }.map { $0.asset.localIdentifier }
                             printLog("iCloud: removing \(invalidItems.count) items")
+                            
                             self.removeLocalMediaItems(with: invalidItems, completion: {})
                         }
                     })
@@ -861,6 +866,7 @@ final class MediaItemOperationsService {
             completion()
             return
         }
+        
         coreDataStack.performBackgroundTask { [weak self] context in
             guard let `self` = self else {
                 completion()
@@ -1086,6 +1092,29 @@ final class MediaItemOperationsService {
             
             completion(AppMigrator.migrateSyncStatus(for: wrappedItems))
         })
+    }
+    
+    func allUnsyncedLocalIds(completion: @escaping ValueHandler<[String]>) {
+        debugLog("allLocalItemsForSync")
+        getUnsyncedMediaItems(video: true, image: true, completion: { items in
+            let unsyncedLocalIds = items
+                .filter { $0.fileSizeValue < NumericConstants.fourGigabytes }
+                .compactMap { $0.localFileID }
+            
+            completion(unsyncedLocalIds)
+        })
+    }
+    
+    func allLocalIds(subtractingIds: [String], completion: @escaping ValueHandler<[String]>) {
+        let filesTypesArray = [FileType.video.valueForCoreDataMapping(), FileType.image.valueForCoreDataMapping()]
+        
+        coreDataStack.performBackgroundTask { [weak self] context in
+            let predicate = NSPredicate(format: "\(MediaItem.PropertyNameKey.isLocalItemValue) = true AND \(MediaItem.PropertyNameKey.fileTypeValue) IN %@ AND NOT(\(MediaItem.PropertyNameKey.localFileID) IN %@)", filesTypesArray, subtractingIds)
+            
+            self?.executeRequest(predicate: predicate, context: context) { mediaItems in
+                completion(mediaItems.compactMap { $0.localFileID })
+            }
+        }
     }
     
     private func getUnsyncedMediaItems(video: Bool, image: Bool, completion: @escaping MediaItemsCallBack) {

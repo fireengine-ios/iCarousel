@@ -89,11 +89,15 @@ final class PhotoEditViewController: ViewController, NibInit {
         view.backgroundColor = .black
         setInitialState()
         presentedCallback?()
-        analytics.trackScreen(.photoEditFilters)
+        analytics.trackFilterScreen()
     }
     
     func saveImageComplete(saveAsCopy: Bool) {
-        trackChanges(saveAsCopy: saveAsCopy)
+        trackChanges(saveAsCopy: saveAsCopy, success: true)
+    }
+    
+    func saveImageFailure(saveAsCopy: Bool) {
+        trackChanges(saveAsCopy: saveAsCopy, success: false)
     }
 
     private func setInitialState() {
@@ -107,18 +111,28 @@ final class PhotoEditViewController: ViewController, NibInit {
         return PreparedFiltersView.with(previewImage: previewImage, manager: filterManager, delegate: self)
     }
     
-    private func trackChanges(saveAsCopy: Bool) {
+    private func trackChanges(saveAsCopy: Bool, success: Bool) {
         let action: GAEventAction = saveAsCopy ? .saveAsCopy : .save
+        let netmeraAction: NetmeraEventValues.PhotoEditActionType = saveAsCopy ? .saveAsCopy : .save
         
         let parameters = adjustmentManager.adjustments.flatMap { $0.parameters.filter { $0.currentValue != $0.defaultValue } }.map { $0.type }
-        analytics.trackAdjustments(parameters, action: action)
-        
-        if let appliedFilter = filterManager.lastApplied {
-            analytics.trackFilter(appliedFilter.type, action: action)
+        if success {
+            analytics.trackAdjustments(parameters, action: action, netmeraAction: netmeraAction)
         }
         
-        if let transformation = adjustManager.transformation {
-            analytics.trackAdjustChanges(transformation, action: action)
+        if let appliedFilter = filterManager.lastApplied {
+            if success {
+                analytics.trackFilter(appliedFilter.type, action: action, netmeraAction: netmeraAction)
+            }
+            analytics.trackEditPhoto(success: success, type: .filter)
+        }
+        
+        if success, let transformation = adjustManager.transformation {
+            analytics.trackAdjustChanges(transformation, action: action, netmeraAction: netmeraAction)
+        }
+        
+        if !parameters.isEmpty || adjustManager.transformation != nil {
+            analytics.trackEditPhoto(success: success, type: .adjustment)
         }
     }
 }
@@ -128,6 +142,7 @@ final class PhotoEditViewController: ViewController, NibInit {
 extension PhotoEditViewController: PhotoEditNavbarDelegate {
     func onClose() {
         analytics.trackClickEvent(.cancel)
+        analytics.trackClickNetmeraEvent(.cancel)
         
         if !hasChanges {
             finishedEditing?(self, .canceled)
@@ -169,6 +184,7 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
             case .resetToOriginal:
                 self.resetToOriginal()
                 self.analytics.trackClickEvent(.resetToOriginal)
+                self.analytics.trackClickNetmeraEvent(.resetToOriginal)
                 self.uiManager.setHiddenBottomViews(false)
             
             default:
@@ -194,6 +210,7 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
     
     private func saveAsCopy() {
         analytics.trackClickEvent(.saveAsCopy)
+        analytics.trackClickNetmeraEvent(.saveAsCopy)
         
         let popup = PhotoEditViewFactory.alert(for: .saveAsCopy, leftButtonHandler: { [weak self] in
             self?.uiManager.setHiddenBottomViews(false)
@@ -202,7 +219,6 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
                 guard let self = self else {
                     return
                 }
-            
                 self.finishedEditing?(self, .savedAs(image: image))
             }
         })
@@ -211,6 +227,7 @@ extension PhotoEditViewController: PhotoEditNavbarDelegate {
     
     private func saveWithModifyOriginal() {
         analytics.trackClickEvent(.save)
+        analytics.trackClickNetmeraEvent(.save)
         
         let popup = PhotoEditViewFactory.alert(for: .modify) { [weak self] in
             self?.prepareOriginalImage { [weak self] image in
@@ -297,12 +314,12 @@ extension PhotoEditViewController: PhotoEditViewUIManagerDelegate {
     func didSwitchTabBarItem(_ item: PhotoEditTabbarItemType) {
         switch item {
         case .filters:
-            analytics.trackScreen(.photoEditFilters)
+            analytics.trackFilterScreen()
             
         case .adjustments:
 //            filterManager.saveHisory()
 //            filterManager.resetLastApplied()
-            analytics.trackScreen(.photoEditAdjustments)
+            analytics.trackAdjustmentScreen()
         }
         
         prepareTabImage(item) { [weak self] result in
@@ -430,7 +447,6 @@ extension PhotoEditViewController: PhotoEditChangesBarDelegate {
             
         case .filterView(_):
             updateSourceImage()
-            
             if firstChanges == .none {
                 firstChanges = .filter
             }
@@ -464,6 +480,7 @@ extension PhotoEditViewController: AdjustmentsViewDelegate {
         }
         return sourceImage
     }
+
 }
 
 //MARK: - PreparedFiltersViewDelegate
@@ -563,19 +580,36 @@ private class PhotoEditAnalytics {
         default:
             return
         }
-        
     }
     
-    func trackScreen(_ screen: AnalyticsAppScreens) {
+    func trackClickNetmeraEvent(_ button: NetmeraEventValues.PhotoEditButton) {
+        let event = NetmeraEvents.Actions.PhotoEditButtonAction(buttonName: button)
+        AnalyticsService.sendNetmeraEvent(event: event)
+    }
+    
+    func trackFilterScreen() {
+        trackScreen(.photoEditFilters)
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PhotoEditFiltersScreen())
+    }
+    
+    func trackAdjustmentScreen() {
+        trackScreen(.photoEditAdjustments)
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.PhotoEditAdjustmentScreen())
+    }
+    
+    private func trackScreen(_ screen: AnalyticsAppScreens) {
         analyticsService.logScreen(screen: screen)
         analyticsService.trackDimentionsEveryClickGA(screen: screen)
     }
     
-    func trackFilter(_ type: FilterType, action: GAEventAction) {
+    func trackFilter(_ type: FilterType, action: GAEventAction, netmeraAction: NetmeraEventValues.PhotoEditActionType) {
         analyticsService.trackPhotoEditEvent(category: .filters, eventAction: action, eventLabel: .photoEdit(.saveFilter(type.title)))
+        
+        let event = NetmeraEvents.Actions.PhotoEditApplyFilter(filterType: type.title, action: netmeraAction)
+        AnalyticsService.sendNetmeraEvent(event: event)
     }
     
-    func trackAdjustments(_ parameters: [AdjustmentParameterType], action: GAEventAction) {
+    func trackAdjustments(_ parameters: [AdjustmentParameterType], action: GAEventAction, netmeraAction: NetmeraEventValues.PhotoEditActionType) {
         guard !parameters.isEmpty else {
             return
         }
@@ -586,6 +620,13 @@ private class PhotoEditAnalytics {
                                                      eventAction: action,
                                                      eventLabel: .photoEdit(.saveAdjustment(adjustment)),
                                                      filterType: parameterType.title)
+            }
+            
+            if let adjustment = adjustmentNetmeraType(for: parameterType) {
+                let event = NetmeraEvents.Actions.PhotoEditApplyAdjustment(selection: adjustment,
+                                                                           filterType: parameterType.title,
+                                                                           action: netmeraAction)
+                AnalyticsService.sendNetmeraEvent(event: event)
             }
         }
     }
@@ -605,7 +646,22 @@ private class PhotoEditAnalytics {
         }
     }
     
-    func trackAdjustChanges(_ transformation: Transformation, action: GAEventAction) {
+    private func adjustmentNetmeraType(for type: AdjustmentParameterType) -> NetmeraEventValues.PhotoEditAdjustmentType? {
+        switch type {
+        case .brightness, .contrast, .exposure, .highlights, .shadows:
+            return .light
+        case .gamma, .temperature, .tint, .saturation:
+            return .color
+        case .hslHue, .hslLuminosity, .hslSaturation:
+            return .hsl
+        case .sharpness, .blurRadius, .vignetteRatio:
+            return .effect
+        default:
+            return nil
+        }
+    }
+    
+    func trackAdjustChanges(_ transformation: Transformation, action: GAEventAction, netmeraAction: NetmeraEventValues.PhotoEditActionType) {
         var changedParameters = [String]()
         if transformation.rotation != 0 {
             changedParameters.append("Rotate")
@@ -623,6 +679,17 @@ private class PhotoEditAnalytics {
                                                  eventAction: action,
                                                  eventLabel: .photoEdit(.saveAdjustment(.adjust)),
                                                  filterType: parameter)
+            
+            let event = NetmeraEvents.Actions.PhotoEditApplyAdjustment(selection: .adjust,
+                                                                       filterType: parameter,
+                                                                       action: netmeraAction)
+            AnalyticsService.sendNetmeraEvent(event: event)
         }
+    }
+    
+    func trackEditPhoto(success: Bool, type: NetmeraEventValues.PhotoEditType) {
+        let netmeraStatus: NetmeraEventValues.GeneralStatus = success ? .success : .failure
+        let event = NetmeraEvents.Actions.PhotoEditComplete(status: netmeraStatus, selection: type)
+        AnalyticsService.sendNetmeraEvent(event: event)
     }
 }

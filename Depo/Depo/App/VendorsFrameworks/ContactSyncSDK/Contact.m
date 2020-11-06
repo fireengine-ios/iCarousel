@@ -13,66 +13,72 @@
 
 @implementation Contact
 
-/**
- * Use this constructor to convert address book records
- *
- * @param ref
- */
-- (instancetype)initWithRecordRef:(ABRecordRef)ref
-{
+- (instancetype)initWithCNContact:(CNContact *)cnContact {
     self = [super init];
-    if (self){
-        _recordRef = ref;
+    if (self) {
         
-        CFTypeRef cFirstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
-        CFTypeRef cMiddleName = ABRecordCopyValue(ref, kABPersonMiddleNameProperty);
-        CFTypeRef cLastName = ABRecordCopyValue(ref, kABPersonLastNameProperty);
-        CFTypeRef cNickName = ABRecordCopyValue(ref, kABPersonNicknameProperty);
-        CFTypeRef cCompany = ABRecordCopyValue(ref, kABPersonOrganizationProperty);
-//        CFTypeRef cModifDate = ABRecordCopyValue(ref, kABPersonModificationDateProperty);
+        NSString *cFirstName = cnContact.givenName;
+        NSString *cMiddleName = cnContact.middleName;
+        NSString *cLastName = cnContact.familyName;
+        NSString *cNickName = cnContact.nickname;
+        NSString *cCompany = cnContact.organizationName;
+//        NSString *cNote= cnContact.note;
+        NSDateComponents *cBirthday = cnContact.birthday;
         
-        _objectId = [NSNumber numberWithInt:ABRecordGetRecordID(_recordRef)];
+        _objectIdentifier = cnContact.identifier;
         
-        if (cFirstName!=NULL){
-            _firstName=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cFirstName)];
+        if (!SYNC_IS_NULL(cFirstName)) {
+            _firstName=[NSString stringWithFormat:@"%@", cFirstName];
         }
-        if (cMiddleName!=NULL){
-            _middleName=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cMiddleName)];
+        if (!SYNC_IS_NULL(cMiddleName)){
+            _middleName=[NSString stringWithFormat:@"%@", cMiddleName];
         }
-        if (cLastName!=NULL){
-            _lastName=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cLastName)];
+        if (!SYNC_IS_NULL(cLastName)){
+            _lastName=[NSString stringWithFormat:@"%@", cLastName];
         }
-        if (cNickName!=NULL){
-            _nickName=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cNickName)];
+        if (!SYNC_IS_NULL(cNickName)){
+            _nickName=[NSString stringWithFormat:@"%@", cNickName];
         }
-        if (cCompany!=NULL){
-            _company=[NSString stringWithFormat:@"%@", (NSString *) CFBridgingRelease(cCompany)];
+        if (!SYNC_IS_NULL(cCompany)){
+            _company=[NSString stringWithFormat:@"%@", cCompany];
         }
-//        if (cModifDate!=NULL){
-//            cModifDate=nil;
-//            _localUpdateDate = SYNC_DATE_AS_NUMBER((NSDate *) CFBridgingRelease(cModifDate));
+//        if (!SYNC_IS_NULL(cNote)){
+//            _note=[NSString stringWithFormat:@"%@", cNote];
 //        }
-        _localUpdateDate = [NSNumber numberWithInt:0];
-        
-        ABRecordRef source = ABPersonCopySource(ref);
-        CFNumberRef cSourceType = ABRecordCopyValue(source, kABSourceTypeProperty);
-        NSNumber *sourceTypeRef = (NSNumber *) CFBridgingRelease(cSourceType);
-        int sourceType = [sourceTypeRef intValue];
-                                                        
-        if (sourceType == kABSourceTypeLocal || sourceType == kABSourceTypeCardDAV) {
-            _defaultAccount = true;
+        if (!SYNC_IS_NULL(cBirthday)){
+            
+            NSCalendar* calendar = [NSCalendar  currentCalendar];
+            NSDate* date = [calendar dateFromComponents:cBirthday];
+            NSDateComponents *dateComponents =
+            [calendar components:(NSYearCalendarUnit  |
+                                  NSMonthCalendarUnit |
+                                  NSDayCalendarUnit   ) fromDate:date];
+            
+            NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+            
+            if(dateComponents.year<1800){
+                
+                dateComponents.year=components.year;
+            }
+            
+            NSDate *currentYearDate=[calendar dateFromComponents:dateComponents];
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            dateFormatter.dateFormat = @"yyyy/MM/dd";
+            NSString *dateString = [dateFormatter stringFromDate:currentYearDate];
+            
+            _birthday=[NSString stringWithFormat:@"%@",dateString ];
+            
         }
-        if (source != NULL) {
-            CFRelease(source);
-        }
         
-        SYNC_Log(@"Source: %d Last Modified Date : %@ %@ %@", sourceType, _objectId, _localUpdateDate, _localUpdateDate);
+        SYNC_Log(@"Identifier: %@", _objectIdentifier);
         
         _devices = [NSMutableArray new];
         _addresses = [NSMutableArray new];
     }
     return self;
 }
+
 /**
  * Use this constructor to convert remote records
  *
@@ -83,7 +89,7 @@
     self = [super init];
     if (self){
         if(!SYNC_IS_NULL(json[@"localId"])){
-            _objectId = json[@"localId"];
+            _objectIdentifier = json[@"localId"];
         }
         _remoteId = json[@"id"];
         _firstName = json[@"firstname"];
@@ -92,6 +98,8 @@
         _nickName = json[@"nickname"];
         _displayName = json[@"displayname"];
         _company = json[@"company"];
+//        _note = json[@"note"];
+        _birthday = json[@"birthday"];
         
         _remoteUpdateDate = json[@"modified"];
         
@@ -132,7 +140,7 @@
 - (instancetype)initWithCopy:(NSDictionary*)json
 {
     if (self = [super init]){
-        _objectId = [json[@"localId"] copy];
+        _objectIdentifier = [json[@"localId"] copy];
         _remoteId = [json[@"id"] copy];
         _firstName = [json[@"firstname"] copy];
         _middleName = [json[@"middlename"] copy];
@@ -145,6 +153,9 @@
         _hasPhoneNumber = [json[@"hasNumber"] boolValue];
         _devices = [json[@"devices"] mutableCopy];
         _addresses = [json[@"addresses"] mutableCopy];
+        
+//        _note = [json[@"note"] copy];
+        _birthday =[json[@"birthday"] copy];
     }
     return self;
 }
@@ -158,14 +169,16 @@
     if (!SYNC_IS_NULL(self.remoteId) && [self.remoteId integerValue]>0){
         dict[@"id"] = self.remoteId;
     }
-
+    
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.firstName, @"firstname");
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.middleName, @"middlename");
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.nickName, @"nickname");
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.lastName, @"lastname");
     SYNC_SET_DICT_IF_NOT_NIL(dict, self.company, @"company");
+//    SYNC_SET_DICT_IF_NOT_NIL(dict, self.note, @"note");
+    SYNC_SET_DICT_IF_NOT_NIL(dict, self.birthday, @"birthday");
     if(isNewContact)
-        SYNC_SET_DICT_IF_NOT_NIL(dict, self.objectId, @"localId");
+        SYNC_SET_DICT_IF_NOT_NIL(dict, self.objectIdentifier, @"localId");
     
     NSMutableArray *array = [NSMutableArray new];
     for (ContactDevice *device in _devices){
@@ -195,6 +208,10 @@
     SYNC_APPEND_STRING_IF_NOT_NIL(value, self.lastName);
     SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
     SYNC_APPEND_STRING_IF_NOT_NIL(value, self.company);
+    SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
+//    SYNC_APPEND_STRING_IF_NOT_NIL(value, self.note);
+//    SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
+    SYNC_APPEND_STRING_IF_NOT_NIL(value, self.birthday);
     SYNC_APPEND_STRING_IF_NOT_NIL(value, @";");
     
     NSMutableArray *ary = [NSMutableArray arrayWithArray:_devices];
@@ -292,10 +309,26 @@
     } else if (![_company isEqualToString:other.company]){
         return NO;
     }
+//    if (SYNC_IS_NULL(_note)){
+//        if (!SYNC_IS_NULL(other.note) && other.note.length!=0){
+//            return NO;
+//        }
+//    } else if (![_note isEqualToString:other.note]){
+//        return NO;
+//    }
+    
+    if (SYNC_IS_NULL(_birthday)){
+        if (!SYNC_IS_NULL(other.birthday) && other.birthday.length!=0){
+            return NO;
+        }
+    } else if (![_birthday isEqualToString:other.birthday]){
+        return NO;
+    }
+    
     return YES;
 }
 
-- (BOOL)isEqual:(id)object
+- (BOOL)isEqual:(id)object 
 {
     if (self == object){
         return YES;
@@ -414,6 +447,8 @@
     _nickName = contact.nickName;
     _lastName = contact.lastName;
     _company = contact.company;
+//    _note = contact.note;
+    _birthday =contact.birthday;
     for (ContactDevice *d in contact.devices){
         if (![_devices containsObject:d]){
             [_devices addObject:d];
@@ -428,7 +463,7 @@
 
 -(void)deepCopy:(Contact *)contact
 {
-    _objectId = contact.objectId;
+    _objectIdentifier = contact.objectIdentifier;
     _remoteId = contact.remoteId;
     _firstName = contact.firstName;
     _middleName = contact.middleName;
@@ -441,6 +476,8 @@
     _hasPhoneNumber = contact.hasPhoneNumber;
     _devices = contact.devices;
     _addresses = contact.addresses;
+//    _note = contact.note;
+    _birthday = contact.birthday;
 }
 
 -(BOOL)isDeviceSizeEqual:(Contact*)other{
@@ -473,9 +510,9 @@
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-
+    
     NSDictionary *data = [[NSDictionary alloc] initWithObjectsAndKeys:
-                          _objectId ?: [NSNull null], @"localId",
+                          _objectIdentifier ?: [NSNull null], @"localId",
                           _remoteId ?: [NSNull null], @"id",
                           _firstName ?: [NSNull null], @"firstname",
                           _middleName ?: [NSNull null], @"middlename",
@@ -488,11 +525,13 @@
                           _addresses ?: [NSNull null], @"addresses",
                           @(_hasName) ?: [NSNull null], @"hasName",
                           @(_hasPhoneNumber) ?: [NSNull null], @"hasNumber",
+//                          _note ?: [NSNull null], @"note",
+                          _birthday ?: [NSNull null], @"birthday",
+                          
                           nil];
-
+    
     Contact *contact = [self initWithCopy:data];
-    contact.recordRef = _recordRef;
-
+    
     return contact;
 }
 
@@ -526,7 +565,7 @@
             }
         }
     }
-
+    
     return false;
 }
 

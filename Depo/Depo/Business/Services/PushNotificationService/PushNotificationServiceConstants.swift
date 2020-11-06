@@ -55,6 +55,34 @@ enum PushNotificationAction: String {
     case supportFormSignup = "support_form_signup"
     case trashBin = "trash_bin"
     case hiddenBin = "hidden_bin"
+    
+    case widgetLogout = "widget_logout"
+    case widgetQuota = "widget_quota"
+    case widgetFreeUpSpace = "widget_free_up_space"
+    case widgetUnsyncedFiles = "widget_unsynced_files"
+    case widgetAutoSyncDisabled = "widget_autosync_disabled"
+    case widgetSyncInProgress = "widget_sync_in_progress"
+    case widgetNoBackup = "widget_no_backup"
+    case widgetOldBackup = "widget_old_backup"
+    case widgetFIR = "widget_fir"
+    case widgetFIRLess3People = "widget_fir_less_then_3_photos"
+    case widgetFIRDisabled = "widget_fir_disabled"
+    case widgetFIRStandart = "widget_fir_standart"
+    
+    var fromWidget: Bool {
+        isContained(in: [.widgetLogout,
+                         .widgetQuota,
+                         .widgetFreeUpSpace,
+                         .widgetUnsyncedFiles,
+                         .widgetAutoSyncDisabled,
+                         .widgetSyncInProgress,
+                         .widgetNoBackup,
+                         .widgetOldBackup,
+                         .widgetFIR,
+                         .widgetFIRLess3People,
+                         .widgetFIRDisabled,
+                         .widgetFIRStandart])
+    }
 }
 
 enum PushNotificationParameter: String {

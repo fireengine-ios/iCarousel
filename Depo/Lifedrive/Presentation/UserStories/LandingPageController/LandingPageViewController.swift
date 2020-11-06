@@ -15,8 +15,13 @@ final class LandingPageViewController: ViewController {
         willSet {
             newValue.numberOfPages = NumericConstants.langingPageCount
             newValue.currentPageIndicatorTintColor = ColorConstants.billoBlue
-            newValue.pageIndicatorTintColor = .clear
-            newValue.borderColor = ColorConstants.billoBlue
+            
+            if #available(iOS 14.0, *) {
+                newValue.pageIndicatorTintColor = ColorConstants.billoBlue.withAlphaComponent(0.3)
+            } else {
+                newValue.pageIndicatorTintColor = .clear
+                newValue.borderColor = ColorConstants.billoBlue
+            }
         }
     }
     

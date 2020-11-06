@@ -12,6 +12,7 @@ enum CreateOverlayStickerError {
     case unknown
     case special
     case emptyAttachment
+    case deniedPhotoAccess
 }
 
 extension CreateOverlayStickerError: LocalizedError {
@@ -24,6 +25,8 @@ extension CreateOverlayStickerError: LocalizedError {
             return "Special error occure"
         case .emptyAttachment:
             return "You don't add any effects"
+        case .deniedPhotoAccess:
+            return "Need access to gallery"
         }
     }
 }
