@@ -49,7 +49,7 @@
                     </constraints>
                     <state key="normal" title="Editor" image="arrow_right"/>
                     <connections>
-                        <action selector="onEditorTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="d4p-se-d5T"/>
+                        <action selector="onUserRoleTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="5vR-Ey-wjU"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LXP-cJ-nFo">
@@ -80,9 +80,9 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="addButton" destination="ZIB-f0-CdR" id="v5x-kE-VK2"/>
-                <outlet property="editorButton" destination="isl-T6-jQX" id="NTJ-vw-Dv6"/>
                 <outlet property="textField" destination="fXb-f8-n9k" id="AUL-NW-sfv"/>
                 <outlet property="titleLabel" destination="BYw-yg-kxF" id="J9E-5d-KWi"/>
+                <outlet property="userRoleButton" destination="isl-T6-jQX" id="HOC-po-RyY"/>
             </connections>
             <point key="canvasLocation" x="-246.37681159420291" y="-152.67857142857142"/>
         </view>
