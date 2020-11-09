@@ -11,7 +11,7 @@ import UIKit
 protocol PrivateShareSelectPeopleViewDelegate: class {
     func startEditing(text: String)
     func addShareContact(string: String)
-    func onEditorTapped()
+    func onUserRoleTapped()
 }
 
 final class PrivateShareSelectPeopleView: UIView, NibInit {
@@ -46,7 +46,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
         }
     }
     
-    @IBOutlet private weak var editorButton: UIButton! {
+    @IBOutlet private weak var userRoleButton: UIButton! {
         willSet {
             newValue.setTitle(TextConstants.privateShareStartPageEditorButton, for: .normal)
             newValue.setTitleColor(.lrTealishFour, for: .normal)
@@ -74,8 +74,8 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
         setText("")
     }
     
-    @IBAction private func onEditorTapped(_ sender: UIButton) {
-        delegate?.onEditorTapped()
+    @IBAction private func onUserRoleTapped(_ sender: UIButton) {
+        delegate?.onUserRoleTapped()
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
@@ -85,7 +85,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     private func validate(text: String) {
         let isValid = true //TODO: need implement logic
         addButton.isEnabled = isValid
-        editorButton.isHidden = !isValid
+        userRoleButton.isHidden = !isValid
     }
 }
 

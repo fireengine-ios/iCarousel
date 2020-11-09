@@ -37,11 +37,7 @@ final class PrivateShareContactSuggestionView: UIView, NibInit {
     
     private func setup(with contact: SuggestedContact) {
         nameLabel.text = contact.displayName
-        if !contact.displayName.isEmpty {
-            nameView.isHidden = false
-        } else {
-            nameView.isHidden = true
-        }
+        nameView.isHidden = contact.displayName.isEmpty
 
         let items = contact.phones + contact.emails
         items.forEach { item in

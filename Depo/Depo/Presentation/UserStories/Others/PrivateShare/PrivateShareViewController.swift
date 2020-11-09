@@ -47,6 +47,8 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     
     private lazy var selectPeopleView = PrivateShareSelectPeopleView.with(delegate: self)
     
+    private let minSearchLength = 2
+    
     private var items = [WrapData]()
     
     private lazy var shareApiService = PrivateShareApiServiceImpl()
@@ -142,7 +144,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     
     func startEditing(text: String) {
-        if text.count < 2 {
+        if text.count < minSearchLength {
             getSuggestions()
         } else {
             searchSuggestions(query: text)
@@ -153,8 +155,8 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
         //TODO: add to Share with section
     }
     
-    func onEditorTapped() {
-        //TODO: open editor controller
+    func onUserRoleTapped() {
+        //TODO: open user roles controller
     }
 }
 
