@@ -1297,7 +1297,7 @@
 "confirmation_popup_message_hide_single_album" = "Das ausgewählte Album und die Inhalte werden ausgeblendet und sind nur über das Album \"Ausgeblendet\" zugänglich. Relevante Inhalte werden nicht in Lifebox-Listen oder Erinnerungen angezeigt. Du kannst es jederzeit wiederherstellen. Möchtest Du fortfahren?";
 "smash_screen_title" = "Habe Spaß";
 "smash_popup_message" = "Das von Dir bearbeitete Foto wird automatisch sowohl in der Telefongalerie als auch in der Lifebox gespeichert.";
-"Smash" = "Habe Spaß";
+"Smash" = "Gif";
 "photos_hide_success_message" = "Das/die ausgewählte/n Foto/s wurden ausgeblendet.";
 "Unhide" = "Lade zurück";
 "smart_album_hidden" = "Ausgeblendet";
@@ -1743,3 +1743,11 @@
 "widget_description" = "Sie können Ihre Erinnerungen und Ihr Telefon schützen, indem Sie Benachrichtigungen über den Speicher Ihres Geräts und den Speicherplatz der Lifebox erhalten.";
 "widget_rule_6_small_detail_plural" = "Sie haben Ihre Kontakte seit mindestens %d Monate nicht mehr gesichert.";
 "widget_rule_6_medium_detail_plural" = "Sie haben Ihre Kontakte zuletzt vor %d Monate gesichert. Kommen Sie jetzt zur Lifebox und sichern Sie Ihre Kontakte.";
+"smash_successed_alert_share" = "Aktie";
+"fun_gif" = "GIF";
+"fun_sticker" = "Sticker";
+"fun_close_alert_title" = "Möchten Sie auf die Änderungen verzichten?";
+"fun_close_alert_message" = "Die Änderungen auf dem Foto werden abgebrochen.";
+"fun_close_alert_left_button" = "Bearbeiten Sie weiter";
+"fun_close_alert_right_button" = "Stornieren";
+"Upload Music" = "Daten hochladen";

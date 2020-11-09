@@ -56,14 +56,19 @@
     if(operation != nil){
         [mutableData setObject:operation forKey:@"operation"];
     }
-
+    
     [SyncAdapter request:[self buildURL:@"stats"] params:mutableData headers:nil method:POST callback:callback];
 }
 
 +(void)restoreContactsWithTimestamp:(long long)timestamp deviceId:(NSString *)deviceId callback:(void (^)(id, BOOL))callback{
     NSNumber *timestampNS = [NSNumber numberWithLongLong:timestamp];
-    NSDictionary *restoreData = @{@"timestamp":timestampNS, @"deviceId":deviceId};
+    
+    NSDictionary *restoreData = @{@"timestamp":timestampNS, @"deviceId":deviceId,@"backupVersion":[SyncSettings shared].backupVersion};
     [SyncAdapter request:[self buildURL:@"restore"] params:restoreData headers:nil method:POST callback:callback];
+}
+
++(void)getBackupVersionList:(void (^)(id, BOOL))callback{
+    [SyncAdapter request:[self buildURL:@"backup_version"] params:nil headers:nil method:GET callback:callback];
 }
 
 + (void)partialBackup:(NSString*)key deviceId:(NSString *)deviceId dirtyContacts:(NSArray*)dirtyContacts deletedContacts:(NSArray *)deletedContacts duplicates:(NSArray *)duplicates step:(NSNumber *)step totalStep:(NSNumber *)totalStep callback:(void (^)(id, BOOL))callback
@@ -110,7 +115,7 @@
     }
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
-                                                    options:0
+                                                       options:0
                                                          error:&error];
     /*
      * This line can be used to print post body data with JSon object.
@@ -280,7 +285,7 @@
     
     void (^fail)(id responseObject, NSError *error) = ^(id responseObject, NSError *error){
         SYNC_Log(@"Error: %@", error);
-
+        
         dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [SyncStatus handleNSError:error];
             
@@ -367,27 +372,27 @@
         if ([value isKindOfClass:[NSDictionary class]]) {
             for (NSString *subKey in value) {
                 NSString* escaped_value = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,
-                                                                                              (CFStringRef)[value objectForKey:subKey],
-                                                                                              NULL,
-                                                                                              (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                              kCFStringEncodingUTF8));
+                                                                                                                (CFStringRef)[value objectForKey:subKey],
+                                                                                                                NULL,
+                                                                                                                (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                                                kCFStringEncodingUTF8));
                 [pairs addObject:[NSString stringWithFormat:@"%@[%@]=%@", key, subKey, escaped_value]];
             }
         } else if ([value isKindOfClass:[NSArray class]]) {
             for (NSString *subValue in value) {
                 NSString* escaped_value = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,
-                                                                                              (CFStringRef)subValue,
-                                                                                              NULL,
-                                                                                              (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                              kCFStringEncodingUTF8));
+                                                                                                                (CFStringRef)subValue,
+                                                                                                                NULL,
+                                                                                                                (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                                                kCFStringEncodingUTF8));
                 [pairs addObject:[NSString stringWithFormat:@"%@[]=%@", key, escaped_value]];
             }
         } else {
             NSString* escaped_value = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,
-                    (CFStringRef)SYNC_AS_STRING(params[key]),
-                        NULL,
-                            (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                kCFStringEncodingUTF8));
+                                                                                                            (CFStringRef)SYNC_AS_STRING(params[key]),
+                                                                                                            NULL,
+                                                                                                            (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                                            kCFStringEncodingUTF8));
             [pairs addObject:[NSString stringWithFormat:@"%@=%@", key, escaped_value]];
         }
     }

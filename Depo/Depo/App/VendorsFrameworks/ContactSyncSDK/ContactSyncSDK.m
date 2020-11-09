@@ -11,6 +11,7 @@
 #import <sys/utsname.h>
 #import "PartialInfo.h"
 #import "BackupStats.h"
+#import "BackupVersion.h"
 
 @interface SyncHelper : NSObject
 
@@ -99,16 +100,16 @@
 @implementation AnalyzeHelper
 
 + (SYNC_INSTANCETYPE) shared {
-
+    
     static dispatch_once_t once;
-
+    
     static id instance;
-
+    
     dispatch_once(&once, ^{
         AnalyzeHelper *obj = [self new];
         instance = obj;
     });
-
+    
     return instance;
 }
 
@@ -136,19 +137,19 @@
     }
     [[SyncHelper shared] setSyncing:YES];
     [[AnalyzeHelper shared] reset];
-
+    
     [[SyncStatus shared] reset];
     [[SyncLogger shared] startLogging:
      [NSString stringWithFormat:@"%@-%@",[SyncSettings shared].token,@"ANALYZE"]];
-
+    
     [self notifyProgress:@0];
-
+    
     [[ContactUtil shared] reset];
     self.initialContactCount = -1;
     self.initialDuplicateCount = -1;
     self.updateId = nil;
     self.CANCELLED = false;
-
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     /*
      * deviceID check. If it is not in the defaults then generate and save it into the deafults.
@@ -160,13 +161,13 @@
         [defaults synchronize];
     }
     SYNC_Log(@"UUID [Device ID]:%@", _deviceId);
-
+    
     struct utsname systemInfo;
     uname(&systemInfo);
-
+    
     SYNC_Log(@"Device Info:%@", [NSString stringWithCString:systemInfo.machine
                                                    encoding:NSUTF8StringEncoding]);
-
+    
     /*
      * MSISDN value should be defined here. checkStatus request msisdn value.
      */
@@ -191,7 +192,7 @@
 {
     AnalyzeStatus *status = [AnalyzeStatus shared];
     status.progress = [self calculateProgress:progress];
-
+    
     void (^callback)(void) = [SyncSettings shared].analyzeProgressCallback;
     if (callback){
         callback();
@@ -234,7 +235,7 @@
 - (void)findNameDuplicateContacts{
     self.nameMap = [NSMutableDictionary new];
     self.nameDuplicateMap = [NSMutableDictionary new];
-
+    
     [self notifyProgress:ANALYZE_STEP_FIND_DUPLICATES progress:@(0)];
     
     if (self.CANCELLED){
@@ -245,7 +246,7 @@
         return;
     }
     self.initialContactCount = [contacts count];
-
+    
     if (!SYNC_IS_NULL(contacts) && [contacts count]>0){
         SYNC_Log(@"Count: %ld", (long)[contacts count]);
         NSInteger counter = 0;
@@ -289,13 +290,13 @@
         return;
     }
     [self notifyProgress:ANALYZE_STEP_PROCESS_DUPLICATES progress:@(0)];
-
+    
     self.mergeMap = [NSMutableDictionary new];
     self.willMerge = [NSMutableArray new];
     self.willDelete = [NSMutableArray new];
-
+    
     self.initialDuplicateCount = [self.nameDuplicateMap count];
-
+    
     if (self.initialDuplicateCount > 0){
         SYNC_Log(@"Name duplicates count: %ld", (long)self.initialDuplicateCount);
         NSInteger counter = 0;
@@ -316,7 +317,7 @@
                     masterContactDeviceCount = [contact.devices count];
                 }
             }
-
+            
             NSMutableSet<ContactDevice*> *masterDeviceSet = [NSMutableSet new];
             for (ContactDevice *device in masterContact.devices) {
                 [masterDeviceSet addObject:device];
@@ -365,7 +366,7 @@
     }
     [self notifyProgress:ANALYZE_STEP_CLEAR_DUPLICATES progress:@(0)];
     NSInteger initialDuplicateCount = [self.mergeMap count];
-
+    
     if (initialDuplicateCount > 0) {
         SYNC_Log(@"Will Merge Duplicates Count : %ld" ,(long)initialDuplicateCount);
         NSInteger counter = 0;
@@ -379,7 +380,7 @@
             [contact.devices addObjectsFromArray:[[self.mergeMap objectForKey:contact] allObjects]];
             [contacts addObject:contact];
         }
-
+        
         [[ContactUtil shared] saveList:contacts];
     }
     [self.willDelete addObjectsFromArray:self.willMerge];
@@ -387,7 +388,7 @@
     SYNC_Log(@"Will Delete Duplicates Count : %ld", (long)[self.willDelete count]);
     [[ContactUtil shared] deleteContacts:self.willDelete];
     [self notifyProgress:@(100)];
-
+    
     [self endOfAnalyzeCycle:SUCCESS];
 }
 
@@ -427,11 +428,11 @@
     if ([SyncSettings shared].analyzeCompleteCallback != nil) {
         [self onComplete];
     }
-
+    
     // consuming too much time. we need a better solution
-//    NSMutableArray *localContacts = [[ContactUtil shared] fetchLocalContacts];
-//    NSInteger finalLocalCount = [localContacts count];
-//    SYNC_Log(@"Final Local Contact count => %ld", (long)finalLocalCount);
+    //    NSMutableArray *localContacts = [[ContactUtil shared] fetchLocalContacts];
+    //    NSInteger finalLocalCount = [localContacts count];
+    //    SYNC_Log(@"Final Local Contact count => %ld", (long)finalLocalCount);
     
     NSString *errorCode = nil;
     for (id item in messages)
@@ -464,7 +465,7 @@
     _willDelete = nil;
     
     [[SyncLogger shared] stopLogging];
-
+    
     [[ContactUtil shared] releaseCNStore];
 }
 
@@ -475,16 +476,16 @@
 static bool syncing = false;
 
 + (SYNC_INSTANCETYPE) shared {
-
+    
     static dispatch_once_t once;
-
+    
     static id instance;
-
+    
     dispatch_once(&once, ^{
         SyncHelper *obj = [self new];
         instance = obj;
     });
-
+    
     return instance;
 }
 
@@ -493,7 +494,7 @@ static bool syncing = false;
     self = [super init];
     if (self){
         _db = [SyncDBUtils shared];
-    }    
+    }
     return self;
 }
 
@@ -524,10 +525,10 @@ static bool syncing = false;
     uname(&systemInfo);
     
     SYNC_Log(@"Device Info:%@", [NSString stringWithCString:systemInfo.machine
-                                                  encoding:NSUTF8StringEncoding]);
+                                                   encoding:NSUTF8StringEncoding]);
     
     self.initialContactCount = [[ContactUtil shared] getContactCount];
-
+    
     _partialInfo = [[PartialInfo alloc] initWithCount:self.initialContactCount mode:_mode];
     [[SyncStatus shared] notifyProgress:[self partialInfo] step:SYNC_STEP_INITIAL progress: 50];
     SYNC_Log(@"%@", [_partialInfo print]);
@@ -547,7 +548,7 @@ static bool syncing = false;
     [[SyncStatus shared] notifyProgress:[self partialInfo] step:SYNC_STEP_INITIAL progress: 60];
     
     if (_mode == SYNCBackup){
-//        [[ContactUtil shared] deleteContacts:[[ContactUtil shared] fetchContacts]];
+        //        [[ContactUtil shared] deleteContacts:[[ContactUtil shared] fetchContacts]];
         [self resolveMsisdn];
         return;
     } else {
@@ -758,21 +759,21 @@ static bool syncing = false;
                     NSNumber *created = stats[@"created"];
                     NSNumber *deleted = stats[@"deleted"];
                     NSNumber *updated = stats[@"updated"];
-
+                    
                     [[SyncStatus shared] notifyProgress:[self partialInfo] step:SYNC_STEP_PROCESSING_RESPONSE progress: 60];
                     
                     [[SyncStatus shared] addEmpty:created state:SYNC_INFO_NEW_CONTACT_ON_SERVER];
                     [[SyncStatus shared] addEmpty:deleted state:SYNC_INFO_DELETED_ON_SERVER];
                     [[SyncStatus shared] addEmpty:updated state:SYNC_INFO_UPDATED_ON_SERVER];
-
+                    
                     [SyncStatus shared].totalContactOnServer = totalCount;
                     [SyncStatus shared].totalContactOnClient = [NSNumber numberWithInteger:0];
-
+                    
                     if (!SYNC_NUMBER_IS_NULL_OR_ZERO(timestamp)){
                         [ContactSyncSDK setLastSyncTime:timestamp]; // Store client last sync time
                     }
                     SYNC_Log(@"%@ %@", @"SUCCESS", status);
-
+                    
                     [[SyncStatus shared] notifyProgress:[self partialInfo] step:SYNC_STEP_PROCESSING_RESPONSE progress: 100];
                     if ([_partialInfo isLastStep] && [@"BULK_COMPLETED" isEqualToString:status]) {
                         dispatch_async( dispatch_get_main_queue(), ^{
@@ -838,7 +839,7 @@ static bool syncing = false;
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             if(!SYNC_STRING_IS_NULL_OR_EMPTY(data))
                 [defaults setObject:data forKey:SYNC_KEY_CHECK_UPDATE];
-
+            
             [defaults synchronize];
             [self checkProgressStatusForRestore];
         } else {
@@ -918,7 +919,7 @@ static bool syncing = false;
                     [[SyncStatus shared] notifyProgress:[self partialInfo] step:SYNC_STEP_ANALYZE progress: 100];
                     
                     [[ContactUtil shared] reset];
-
+                    
                     SYNC_Log(@"%@", @"SUCCESS");
                     [self endOfSyncCycle:SYNC_RESULT_SUCCESS];
                 } else {
@@ -993,14 +994,14 @@ static bool syncing = false;
         }
     }
     [SyncStatus shared].status = result;
-
+    
     if ([ContactSyncSDK shared].type == SYNCPeriod){
         if (result == SYNC_RESULT_SUCCESS){
             //Periodic Backup is successful set last periodic sync time
             [ContactSyncSDK setLastPeriodicSyncTime:[NSDate date]];
         }
     }
-
+    
     NSInteger finalCount = [[ContactUtil shared] getContactCount];
     
     NSString *errorCode = nil;
@@ -1016,31 +1017,31 @@ static bool syncing = false;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *key = self.updateId == nil ? [defaults objectForKey:SYNC_KEY_CHECK_UPDATE]: self.updateId;
     [SyncAdapter sendStats:key start:self.initialContactCount
-                                result:finalCount
-                                created:[[SyncStatus shared].createdContactsReceived count]
-                                updated:[[SyncStatus shared].updatedContactsReceived count]
-                                deleted:[[SyncStatus shared].deletedContactsOnDevice count]
-                                status: (result == SYNC_RESULT_SUCCESS ? 1 : 0)
-                                errorCode: errorCode
-          errorMsg:(result == SYNC_RESULT_SUCCESS ? nil : [[SyncStatus shared] resultTypeToString:result]) callback:^(id response, BOOL success) {
-              if (success){
-                  SYNC_Log(@"Stats success");
-                  if (!SYNC_IS_NULL(response[@"data"])) {
-                      BackupStats *stats = [[BackupStats alloc] initWithDictionary:response[@"data"]];
-                      [SyncStatus shared].deletedOnServer = stats.deletedOnServer;
-                      [SyncStatus shared].createdOnServer = stats.createdOnServer;
-                      [SyncStatus shared].updatedOnServer = stats.updatedOnServer;
-                      [SyncStatus shared].mergedOnServer = stats.mergedOnServer;
-                  }
-                  
-                  if ([self.partialInfo isLastStep] || !SYNC_IS_NULL(messages) || !syncing){
-                      [self callStats:messages];
-                  }
-              } else {
-                  SYNC_Log(@"Stats failed");
-                  [self callStats:messages];
-              }
-    }];
+                    result:finalCount
+                   created:[[SyncStatus shared].createdContactsReceived count]
+                   updated:[[SyncStatus shared].updatedContactsReceived count]
+                   deleted:[[SyncStatus shared].deletedContactsOnDevice count]
+                    status: (result == SYNC_RESULT_SUCCESS ? 1 : 0)
+                 errorCode: errorCode
+                  errorMsg:(result == SYNC_RESULT_SUCCESS ? nil : [[SyncStatus shared] resultTypeToString:result]) callback:^(id response, BOOL success) {
+                      if (success){
+                          SYNC_Log(@"Stats success");
+                          if (!SYNC_IS_NULL(response[@"data"])) {
+                              BackupStats *stats = [[BackupStats alloc] initWithDictionary:response[@"data"]];
+                              [SyncStatus shared].deletedOnServer = stats.deletedOnServer;
+                              [SyncStatus shared].createdOnServer = stats.createdOnServer;
+                              [SyncStatus shared].updatedOnServer = stats.updatedOnServer;
+                              [SyncStatus shared].mergedOnServer = stats.mergedOnServer;
+                          }
+                          
+                          if ([self.partialInfo isLastStep] || !SYNC_IS_NULL(messages) || !syncing){
+                              [self callStats:messages];
+                          }
+                      } else {
+                          SYNC_Log(@"Stats failed");
+                          [self callStats:messages];
+                      }
+                  }];
     
     if (self.startNewSync){
         self.startNewSync = NO;
@@ -1054,12 +1055,11 @@ static bool syncing = false;
             [[SyncLogger shared] stopLogging];
             [[SyncStatus shared] notifyProgress:[self partialInfo] step:SYNC_STEP_UPLOAD_LOG progress: 100];
             [[ContactUtil shared] releaseCNStore];
+            [SyncSettings shared].backupVersion=nil;
         } else {
             [self runNextPartBackup];
         }
     }
-    
-    
 }
 
 - (void)callStats:(id)messages
@@ -1124,7 +1124,7 @@ static bool syncing = false;
                 [defaults setObject:[SyncSettings shared].token forKey:SYNC_KEY_PERIODIC_TOKEN];
                 [defaults setObject:[SyncSettings shared].url forKey:SYNC_KEY_PERIODIC_URL];
                 [defaults synchronize];
-
+                
                 SyncHelper *helper = [SyncHelper shared];
                 [helper startSyncing:mode];
             } else {
@@ -1159,7 +1159,7 @@ static bool syncing = false;
     }
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDate *lastPeriodic = [ContactSyncSDK lastPeriodicSyncTime];
-
+    
     //If periodic option is not selected, do not proceed
     if (SYNC_IS_NULL([defaults objectForKey:SYNC_KEY_PERIODIC_OPTION]) || (SYNCPeriodic)[[defaults objectForKey:SYNC_KEY_PERIODIC_OPTION] integerValue] == SYNCNone) {
         return;
@@ -1169,19 +1169,19 @@ static bool syncing = false;
     if (![self isValidPeriodicBackup:period lastTime:lastPeriodic]){
         return;
     }
-
+    
     //If token and url is not saved, do not proceed
     if (SYNC_STRING_IS_NULL_OR_EMPTY([defaults objectForKey:SYNC_KEY_PERIODIC_TOKEN]) || SYNC_STRING_IS_NULL_OR_EMPTY([defaults objectForKey:SYNC_KEY_PERIODIC_URL])){
         return;
     }
-
+    
     SYNC_Log(@"Periodic selection is: %@. Last periodic backup time is: %@", [[SyncSettings shared] periodToString:period], SYNC_IS_NULL(lastPeriodic) ? @"None" : lastPeriodic);
-
+    
     SYNC_Log(@"%@",[[SyncSettings shared] endpointUrl]);
-
+    
     [SyncSettings shared].token = [defaults objectForKey:SYNC_KEY_PERIODIC_TOKEN];
     [SyncSettings shared].url = [defaults objectForKey:SYNC_KEY_PERIODIC_URL];
-
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //Period checks
         [ContactSyncSDK hasContactForBackup:^(SYNCResultType result) {
@@ -1189,7 +1189,7 @@ static bool syncing = false;
                 ContactSyncSDK *sdk = [ContactSyncSDK shared];
                 sdk.mode = SYNCBackup;
                 sdk.type = SYNCPeriod;
-
+                
                 SYNC_Log(@"%@", @"Periodic backup has started on the background.");
                 SyncHelper *helper = [SyncHelper shared];
                 [helper startSyncing:SYNCBackup];
@@ -1335,6 +1335,24 @@ static bool syncing = false;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:time forKey:SYNC_GET_KEY_PLAIN(SYNC_KEY_LAST_PERIODIC_SYNC_TIME)];
     [defaults synchronize];
+}
+
++ (void)getBackupVersionList:(void (^)(id, BOOL))callback {
+    [SyncAdapter getBackupVersionList:^(id response, BOOL isSuccess) {
+        if (isSuccess){
+            
+            NSMutableArray *backupVersionsMutable = [[NSMutableArray alloc]init];
+            if (!SYNC_IS_NULL(response[@"data"])){
+                for (NSDictionary *item in response[@"data"]){
+                    
+                    [backupVersionsMutable addObject: [[BackupVersion alloc]initWithDictionary:item]];
+                }
+            }
+            callback([backupVersionsMutable copy], YES);
+        } else {
+            callback(response, NO);
+        }
+    }];
 }
 
 @end

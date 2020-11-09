@@ -114,6 +114,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
             
             if item.fileType == .image || item.fileType == .video {
                 types.append(.download)
+            } else if item.fileType == .audio || item.fileType.isDocumentPageItem {
+                types.append(.downloadDocument)
             }
             
             constractActions(with: types, for: [item], sender: sender) { [weak self] actions in
@@ -214,6 +216,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     filteredActionTypes.remove(at: addToFavoritesIndex)
                 }
                 
+                if !remoteItems.contains(where: { !($0.fileType.isDocumentPageItem || $0.fileType == .audio) }) {
+                    if !filteredActionTypes.contains(.downloadDocument) {
+                        filteredActionTypes.append(.downloadDocument)
+                    }
+                }
+                
                 if remoteItems.contains(where: { $0.favorites }) {
                     if !filteredActionTypes.contains(.removeFromFavorites) {
                         filteredActionTypes.append(.removeFromFavorites)
@@ -298,6 +306,18 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                         if currentItems.count <= allowedNumberLimit {
                             self.interactor.download(item: currentItems)
+                            self.basePassingPresenter?.stopModeSelected()
+                        } else {
+                            let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
+                            UIApplication.showErrorAlert(message: text)
+                        }
+                    })
+                case .downloadDocument:
+                    action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
+                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                        if currentItems.count <= allowedNumberLimit {
+                            self.interactor.downloadDocument(items: currentItems as? [WrapData])
                             self.basePassingPresenter?.stopModeSelected()
                         } else {
                             let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)

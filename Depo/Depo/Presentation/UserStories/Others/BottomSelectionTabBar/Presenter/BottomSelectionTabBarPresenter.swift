@@ -36,6 +36,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             case .download:
                 itemTupple.append(EditinglBar.PreDetermendTypes.download)
+            case .downloadDocument:
+                itemTupple.append(EditinglBar.PreDetermendTypes.downloadDocument)
             case .edit:
                 itemTupple.append(EditinglBar.PreDetermendTypes.edit)
             case .info:
@@ -161,7 +163,6 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     UIApplication.showErrorAlert(message: text)
                 }
             case .unhide:
-                //TODO: will be another task to implement analytics calls
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .unhide))
                 let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
                 if selectedItems.count <= allowedNumberLimit {
@@ -209,6 +210,16 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                     let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
                     UIApplication.showErrorAlert(message: text)
                 }
+            case .downloadDocument:
+                AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .download))
+                let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                if selectedItems.count <= allowedNumberLimit {
+                    self.basePassingPresenter?.stopModeSelected()
+                    self.interactor.downloadDocument(items: selectedItems as? [WrapData])
+                } else {
+                    let text = String(format: TextConstants.downloadLimitAllert, allowedNumberLimit)
+                    UIApplication.showErrorAlert(message: text)
+                }
             case .edit:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .edit))
                 RouterVC().getViewControllerForPresent()?.showSpinner()
@@ -232,15 +243,7 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                         return
                 }
                 
-                let onlyLink = selectedItems.contains(where: {
-                    $0.fileType != .image && $0.fileType != .video
-                })
-                
-                if onlyLink {
-                    self.interactor.shareViaLink(item: selectedItems, sourceRect: self.middleTabBarRect)
-                } else {
-                    self.interactor.share(item: selectedItems, sourceRect: self.middleTabBarRect)
-                }
+                self.interactor.share(item: selectedItems, sourceRect: self.middleTabBarRect)
             case .sync:
                 self.basePassingPresenter?.stopModeSelected()
                 self.interactor.sync(item: selectedItems)
@@ -406,6 +409,10 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 case .download:
                     action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
                         self.interactor.download(item: currentItems)
+                    })
+                case .downloadDocument:
+                    action = UIAlertAction(title: TextConstants.actionSheetDownload, style: .default, handler: { _ in
+                        self.interactor.downloadDocument(items: currentItems)
                     })
                 case .delete:
                     action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { _ in

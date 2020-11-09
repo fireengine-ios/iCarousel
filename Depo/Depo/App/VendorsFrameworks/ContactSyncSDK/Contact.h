@@ -22,6 +22,8 @@
 @property (strong) NSString *nickName;
 @property (strong) NSString *displayName;
 @property (strong) NSString *company;
+//@property (strong) NSString *note;
+@property (strong) NSString* birthday;  
 
 @property BOOL dirty;
 @property BOOL defaultAccount;

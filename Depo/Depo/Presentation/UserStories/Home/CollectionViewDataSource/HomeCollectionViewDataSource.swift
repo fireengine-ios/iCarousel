@@ -14,7 +14,7 @@ protocol HomeCollectionViewDataSourceDelegate: class {
     func collectionView(collectionView: UICollectionView, heightForHeaderinSection section: Int) -> CGFloat
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
     func didReloadCollectionView(_ collectionView: UICollectionView)
-    func share(item: BaseDataSourceItem, type: ShareType)
+    func share(item: BaseDataSourceItem, type: CardShareType)
 }
 
 final class HomeCollectionViewDataSource: NSObject, BaseCollectionViewCellWithSwipeDelegate {
@@ -594,7 +594,7 @@ extension HomeCollectionViewDataSource: CollectionViewLayoutDelegate {
 
 extension HomeCollectionViewDataSource: CardsShareButtonDelegate {
     
-    func share(item: BaseDataSourceItem, type: ShareType) {
+    func share(item: BaseDataSourceItem, type: CardShareType) {
         delegate?.share(item: item, type: type)
     }
 }

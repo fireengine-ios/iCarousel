@@ -1325,7 +1325,7 @@
 "confirmation_popup_message_hide_single_album" = "Selected album will only be available in \"Hidden\" Album. You can restore them any time. Are you sure to continue?";
 "smash_screen_title" = "Fun Effect";
 "smash_popup_message" = "This edited photo will be saved to device gallery and uploaded on lifebox as a new item.";
-"Smash" = "Fun";
+"Smash" = "Gif";
 "photos_hide_success_message" = "Photo(s) hidden successfully.";
 "Unhide" = "Unhide";
 "smart_album_hidden" = "Hidden";
@@ -1791,3 +1791,11 @@
 "widget_description" = "Get notified about your device storage and lifebox quota and keep track of your memories.";
 "widget_rule_6_small_detail_plural" = "It's over %d months since last contact backup.";
 "widget_rule_6_medium_detail_plural" = "It's over %d months since your last contact backup.";
+"smash_successed_alert_share" = "Share";
+"fun_gif" = "Gif";
+"fun_sticker" = "Sticker";
+"fun_close_alert_title" = "Discard Changes?";
+"fun_close_alert_message" = "Your photo edits will be discarded.";
+"fun_close_alert_left_button" = "Keep editing";
+"fun_close_alert_right_button" = "Discard";
+"Upload Music" = "Upload Files";

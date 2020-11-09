@@ -180,6 +180,17 @@ class BaseRequestService {
         task.resume()
     }
     
+    @discardableResult
+    func executeDownloadRequest(param: BaseDownloadRequestParametrs, response:@escaping RequestFileDownloadResponse) -> URLSessionTask {
+        let task = requestService.downloadFileRequestTask(parameters: param,
+                                                          body: nil,
+                                                          method: RequestMethod.Get,
+                                                          timeoutInterval: param.timeout,
+                                                          response: response)
+        task.resume()
+        return task
+    }
+    
     func executeUploadRequest(param: UploadRequestParametrs, response:@escaping RequestFileUploadResponse) -> URLSessionTask? {
         var task: URLSessionTask?
 

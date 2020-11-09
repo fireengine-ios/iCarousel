@@ -1339,7 +1339,7 @@
 "confirmation_popup_message_hide_single_album" = "El álbum y sus contenidos seleccionados se ocultarán y se accederán por medio del álbum de \"Oculto\". Puedes restaurar los ocultados cuando desees. Quieres continuar ?";
 "smash_screen_title" = "Efecto divertido";
 "smash_popup_message" = "La foto editada se guardará automáticamente en la galería de fotos y del teléfono.";
-"Smash" = "Diviértete";
+"Smash" = "Gif";
 "photos_hide_success_message" = "La foto(s) ocultada exitosamente";
 "Unhide" = "Restaurar";
 "smart_album_hidden" = "Oculto";
@@ -1785,3 +1785,11 @@
 "widget_description" = "Puedes mantener tus recuerdos y teléfono seguros recibiendo las notificaciones sobre la memoria de tu dispositivo y el espacio de almacenamiento de lifebox.";
 "widget_rule_6_small_detail_plural" = "Ha pasado un %d meses desde tu último respaldo de contactos";
 "widget_rule_6_medium_detail_plural" = "Ha pasado un %d meses desde tu último respaldo de contactos";
+"smash_successed_alert_share" = "Compartir";
+"fun_gif" = "GIF";
+"fun_sticker" = "Sticker";
+"fun_close_alert_title" = "¿Quiere renunciar a las ediciones?";
+"fun_close_alert_message" = "Se cancelarán las ediciones en la foto.";
+"fun_close_alert_left_button" = "Continua editando";
+"fun_close_alert_right_button" = "";
+"Upload Music" = "Cargar archivos";

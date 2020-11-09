@@ -21,6 +21,7 @@ protocol DivorceActionRoutingProtocol {
     func onOpenPremium()
     func onOpenPeopleAlbum()
     func onOpenFaceImageGrouping()
+    func onShare()
 }
 
 @objc protocol DivorceActionAnalyticsProtocol {
@@ -39,6 +40,7 @@ protocol DivorceActionRoutingProtocol {
     
     func startOperation()
     func showSuccessPopUp()
+    func getUserInfo(completion: @escaping VoidHandler)
 }
 
 class CommonDivorceActionService {
@@ -49,8 +51,8 @@ class CommonDivorceActionService {
     private lazy var completionPopUpFactory = HSCompletionPopUpsFactory()
     private lazy var albumWarningPopUpsFactory = SmartAlbumWarningPopUpsFactory()
 
-    private var faceImageGrouping: SettingsInfoPermissionsResponse?
-    private var permissions: PermissionsResponse?
+    private(set) var faceImageGrouping: SettingsInfoPermissionsResponse?
+    private(set) var permissions: PermissionsResponse?
     private var group: DispatchGroup?
 }
 
@@ -97,9 +99,26 @@ extension CommonDivorceActionService: DivorceActionPopUpPresentProtocol {
         case .bottomBarHideCompleted, .hideAlbumsCompleted:
             return false
             
-        case .smashCompleted:
+        case .smashCompletedPremium, .smashCompletedStandart:
             return true
         }
+    }
+    
+    func getUserInfo(completion: @escaping VoidHandler) {
+        let group = DispatchGroup()
+        let requiredPreparations = [getPermissions, getFaceImageGroupingStatus]
+        
+        requiredPreparations.forEach {
+            group.enter()
+            $0()
+        }
+        
+        group.notify(queue: DispatchQueue.main) { [weak self] in
+            self?.group = nil
+            completion()
+        }
+        
+        self.group = group
     }
 }
 
@@ -133,6 +152,8 @@ extension CommonDivorceActionService: DivorceActionStateProtocol {
             openFaceImageGrouping()
         }
     }
+    
+    func onShare() { }
 }
 
 //MARK: - DivorceActionRoutingProtocol
@@ -280,20 +301,9 @@ private extension CommonDivorceActionService {
 //MARK: - On people album tap processing
 private extension CommonDivorceActionService {
     func preparePeopleAlbumOpenning() {
-        let group = DispatchGroup()
-        let requiredPreparations = [getPermissions, getFaceImageGroupingStatus]
-        
-        requiredPreparations.forEach {
-            group.enter()
-            $0()
-        }
-        
-        group.notify(queue: DispatchQueue.main) { [weak self] in
-            self?.group = nil
+        getUserInfo { [weak self] in
             self?.didObtainPeopleAlbumInfo()
         }
-        
-        self.group = group
     }
     
     func didObtainPeopleAlbumInfo() {

@@ -1305,7 +1305,7 @@
 "confirmation_popup_message_hide_single_album" = "Seçilen albüm ve içerikleri gizlenerek sadece \"Gizli\" albümünden erişilebilecek. lifebox listelerinde ya da hatırlatmalarında ilgili içerikler gelmeyecek. İstediğin zaman geri yükleyebilirsin. Devam etmek istiyor musun?";
 "smash_screen_title" = "Eğlen";
 "smash_popup_message" = "Düzenlediğin fotoğraf hem telefon galerine hem de lifebox'a otomatik olarak kaydedilecek.";
-"Smash" = "Eğlen";
+"Smash" = "Gif";
 "photos_hide_success_message" = "Seçilen fotoğraf(lar) gizlendi.";
 "Unhide" = "Geri Yükle";
 "smart_album_hidden" = "Gizli";
@@ -1753,3 +1753,11 @@
 "widget_description" = "Cihaz hafızan ve lifebox saklama alanınla ilgili bildirimleri alarak anılarını ve telefonuna güvende tutabilirsin.";
 "widget_rule_6_small_detail_plural" = "Rehberini en az %d aydır yedeklemedin.";
 "widget_rule_6_medium_detail_plural" = "Rehberini en son %d ay önce yedekledin. Hemen lifebox'a gel, rehberini güvenceye al.";
+"smash_successed_alert_share" = "Paylaş";
+"fun_gif" = "GIF";
+"fun_sticker" = "Sticker";
+"fun_close_alert_title" = "Değişikliklerden vazgeçmek istiyor musun?";
+"fun_close_alert_message" = "Fotoğraftaki düzenlemeler iptal edilecek.";
+"fun_close_alert_left_button" = "Düzenlemeye devam et";
+"fun_close_alert_right_button" = "Vazgeç";
+"Upload Music" = "Dosyaları yükleyin";

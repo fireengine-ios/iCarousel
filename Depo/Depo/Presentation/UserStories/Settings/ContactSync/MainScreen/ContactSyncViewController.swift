@@ -48,8 +48,8 @@ final class ContactSyncViewController: BaseViewController, NibInit {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private let contactSyncHelper = ContactSyncHelper.shared
     
-    private var syncModel: ContactSync.SyncResponse? {
-        return contactSyncHelper.syncResponse
+    private var syncModel: ContactBackupItem? {
+        return contactSyncHelper.lastBackup
     }
     
     private lazy var router = RouterVC()
@@ -123,7 +123,7 @@ final class ContactSyncViewController: BaseViewController, NibInit {
             return
         }
         
-        guard let model = syncModel, model.totalNumberOfContacts != 0 else {
+        guard let model = syncModel, model.total != 0 else {
             show(view: noBackupView, animated: true)
             return
         }
@@ -154,7 +154,7 @@ extension ContactSyncViewController: ContactsBackupActionProviderProtocol {
 extension ContactSyncViewController: ContactSyncMainViewDelegate {
     
     func showContacts() {
-        guard let info = contactSyncHelper.syncResponse else {
+        guard let info = contactSyncHelper.lastBackup else {
             return
         }
         
@@ -163,11 +163,7 @@ extension ContactSyncViewController: ContactSyncMainViewDelegate {
     }
     
     func showBackups() {
-        guard let info = contactSyncHelper.syncResponse else {
-            return
-        }
-        
-        let backupList = router.backupHistory(backUpInfo: info)
+        let backupList = router.backupHistory()
         router.pushViewController(viewController: backupList)
     }
     
@@ -215,7 +211,7 @@ extension ContactSyncViewController: ContactSyncHelperDelegate {
     
     func didDeleteDuplicates() { }
    
-    func didUpdateBackupStatus() {
+    func didUpdateBackupList() {
         hideSpinner()
         showRelatedView()
     }
