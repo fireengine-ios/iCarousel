@@ -1205,4 +1205,12 @@ class RouterVC: NSObject {
             switchToTrashBin()
         }
     }
+    
+    func privateShare(items: [WrapData]) -> UIViewController {
+        let shareController = PrivateShareViewController.with(items: items)
+        let navigationController = NavigationController(rootViewController: shareController)
+        navigationController.modalTransitionStyle = .coverVertical
+        navigationController.modalPresentationStyle = .fullScreen
+        return navigationController
+    }
 }

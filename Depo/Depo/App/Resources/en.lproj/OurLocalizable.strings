@@ -1800,3 +1800,22 @@
 "fun_close_alert_message" = "Your photo edits will be discarded.";
 "fun_close_alert_left_button" = "Keep editing";
 "fun_close_alert_right_button" = "Discard";
+
+"private_share_start_page_name" = "Share";
+"private_share_start_page_people_selection_section_name" = "Select people to share";
+"private_share_start_page_enter_user_field" = "Enter e-mail or GSM number";
+"private_share_start_page_suggestions_section" = "Suggestions";
+"private_share_start_page_shared_with_section" = "Shared with";
+"private_share_start_page_add_message_section_name" = "Add a message";
+"private_share_start_page_add_messge_field" = "Your message (optional)";
+"private_share_start_page_share_duration_section_name" = "Share duration";
+"private_share_start_page_share_duration_1" = "No duration";
+"private_share_start_page_share_duration_2" = "One hour";
+"private_share_start_page_share_duration_3" = "One day";
+"private_share_start_page_share_duration_4" = "One week";
+"private_share_start_page_share_duration_5" = "One month";
+"private_share_start_page_share_duration_6" = "One year";
+"private_share_start_page_share_button" = "Share";
+"private_share_start_page_cancel_button" = "Cancel";
+"private_share_start_page_role_1" = "Editor";
+"private_share_start_page_role_2" = "Viewer";
