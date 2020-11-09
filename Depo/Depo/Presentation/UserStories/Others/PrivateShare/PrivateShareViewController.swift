@@ -45,6 +45,8 @@ final class PrivateShareViewController: BaseViewController, NibInit {
                                                    target: self,
                                                    selector: #selector(onCancelTapped))
     
+    private lazy var selectPeopleView = PrivateShareSelectPeopleView.with(delegate: self)
+    
     private var items = [WrapData]()
     
     private lazy var shareApiService = PrivateShareApiServiceImpl()
@@ -58,18 +60,13 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         title = TextConstants.actionSheetShare
         navigationItem.leftBarButtonItem = closeButton
         
-        addSelectionPeopleView()
+        contentView.addArrangedSubview(selectPeopleView)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationBarWithGradientStyle()
-    }
-    
-    private func addSelectionPeopleView() {
-        let view = PrivateShareSelectPeopleView.with(delegate: self)
-        contentView.addArrangedSubview(view)
     }
     
     private func getSuggestions() {
@@ -102,6 +99,10 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func showApiSuggestions(contacts: [SuggestedApiContact], hasAccess: Bool) {
+        guard !contacts.isEmpty else {
+            return
+        }
+        
         let suggestedContacts = contacts.map { contact -> SuggestedContact in
             if hasAccess {
                 let names = self.localContactsService.getContactName(for: contact.username ?? "", email: contact.email ?? "")
@@ -132,9 +133,8 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
 
     @IBAction private func onShareTapped(_ sender: Any) {
-        
+        //TODO: continue sharing
     }
-    
 }
 
 //MARK: - PrivateShareSelectPeopleViewDelegate
@@ -149,21 +149,27 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
         }
     }
     
-    func addContact(_ contact: Contact) {
-        
-    }
-    
-    func addShare(text: String) {
-        
+    func addShareContact(string: String) {
+        //TODO: add to Share with section
     }
     
     func onEditorTapped() {
-        
+        //TODO: open editor controller
     }
 }
 
 //MARK: - PrivateShareSuggestionsViewDelegate
 
 extension PrivateShareViewController: PrivateShareSuggestionsViewDelegate {
-    
+    func selectContact(string: String) {
+        selectPeopleView.setText(string)
+        
+        if let suggestionsView = contentView.arrangedSubviews.first(where: { $0 is PrivateShareSuggestionsView }) {
+            suggestionsView.removeFromSuperview()
+        }
+        
+        view.endEditing(true)
+        
+        //TODO: close search suggestions controller
+    }
 }

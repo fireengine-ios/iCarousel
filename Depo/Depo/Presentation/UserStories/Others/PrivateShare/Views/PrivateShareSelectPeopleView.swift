@@ -10,8 +10,7 @@ import UIKit
 
 protocol PrivateShareSelectPeopleViewDelegate: class {
     func startEditing(text: String)
-    func addContact(_ contact: Contact)
-    func addShare(text: String)
+    func addShareContact(string: String)
     func onEditorTapped()
 }
 
@@ -55,20 +54,24 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
             newValue.tintColor = .lrTealishFour
             newValue.forceImageToRightSide()
             newValue.imageEdgeInsets.left = -10
+            newValue.isHidden = true
         }
     }
     
-    var contact: Contact?
     private weak var delegate: PrivateShareSelectPeopleViewDelegate?
     
-    //MARK: -
+    //MARK: - Public methods
+    
+    func setText(_ text: String) {
+        textField.text = text
+        validate(text: text)
+    }
+    
+    //MARK: - Private methods
     
     @IBAction private func onAddTapped(_ sender: UIButton) {
-        if let contact = contact {
-            delegate?.addContact(contact)
-        } else {
-            delegate?.addShare(text: textField.text ?? "")
-        }
+        delegate?.addShareContact(string: textField.text ?? "")
+        setText("")
     }
     
     @IBAction private func onEditorTapped(_ sender: UIButton) {
@@ -82,6 +85,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     private func validate(text: String) {
         let isValid = true //TODO: need implement logic
         addButton.isEnabled = isValid
+        editorButton.isHidden = !isValid
     }
 }
 
