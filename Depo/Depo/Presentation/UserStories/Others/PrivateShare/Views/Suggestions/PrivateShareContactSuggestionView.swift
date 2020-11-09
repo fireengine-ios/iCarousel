@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PrivateShareContactSuggestionViewDelegate: class {
-    func selectContact(string: String)
+    func selectContact(displayName: String, username: String)
 }
 
 final class PrivateShareContactSuggestionView: UIView, NibInit {
@@ -43,11 +43,12 @@ final class PrivateShareContactSuggestionView: UIView, NibInit {
         items.forEach { item in
             itemsStackView.addArrangedSubview(PrivateShareSuggestionItemView.with(text: item, delegate: self))
         }
+        layoutIfNeeded()
     }
 }
 
 extension PrivateShareContactSuggestionView: PrivateShareSuggestionItemViewDelegate {
     func addItem(string: String) {
-        delegate?.selectContact(string: string)
+        delegate?.selectContact(displayName: nameLabel.text ?? "", username: string)
     }
 }

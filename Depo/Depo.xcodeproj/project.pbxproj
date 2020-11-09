@@ -4528,6 +4528,10 @@
 		956BFA2BDBD060B8C046A081 /* UserInfoSubViewRouterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F9CA614F6A1DD5CFEFFAFD /* UserInfoSubViewRouterInput.swift */; };
 		971A783D6859B6D41781991D /* Pods_LifeTech_NotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6284E1749C93873CAF739DA6 /* Pods_LifeTech_NotificationService.framework */; };
 		97E245036F6119CDFA534B88 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD920B02D55872C2278EC4BE /* SplashViewController.swift */; };
+		980481C125592BE500BD8D9F /* PrivateShareDurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980481BF25592BE500BD8D9F /* PrivateShareDurationCell.swift */; };
+		980481C225592BE500BD8D9F /* PrivateShareDurationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 980481C025592BE500BD8D9F /* PrivateShareDurationCell.xib */; };
+		9804821E25592D3700BD8D9F /* PrivateShareWithContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9804821D25592D3700BD8D9F /* PrivateShareWithContactView.swift */; };
+		9804823625592D3D00BD8D9F /* PrivateShareWithContactView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9804823525592D3D00BD8D9F /* PrivateShareWithContactView.xib */; };
 		980488D421EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */; };
 		980488D521EDC983004DB091 /* AnalyzeHistoryTabBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */; };
 		9807260D203468D9004E1505 /* SearchDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9807260C203468D9004E1505 /* SearchDataSource.swift */; };
@@ -5025,6 +5029,12 @@
 		9845489A22FBFF4100D7F29C /* SpotifyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845489622FBFF4000D7F29C /* SpotifyStatusView.swift */; };
 		9845489B22FBFF4100D7F29C /* SpotifyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845489622FBFF4000D7F29C /* SpotifyStatusView.swift */; };
 		9845489C22FBFF4100D7F29C /* SpotifyStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845489622FBFF4000D7F29C /* SpotifyStatusView.swift */; };
+		98495F58255975810093B2C2 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98495F57255975810093B2C2 /* PlaceholderTextView.swift */; };
+		98495F59255975810093B2C2 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98495F57255975810093B2C2 /* PlaceholderTextView.swift */; };
+		98495F5A255975810093B2C2 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98495F57255975810093B2C2 /* PlaceholderTextView.swift */; };
+		98495F5B255975810093B2C2 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98495F57255975810093B2C2 /* PlaceholderTextView.swift */; };
+		98495F5C255975810093B2C2 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98495F57255975810093B2C2 /* PlaceholderTextView.swift */; };
+		98495F5D255975810093B2C2 /* PlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98495F57255975810093B2C2 /* PlaceholderTextView.swift */; };
 		9849B5B621FF49400059F9A9 /* InstapickFreeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9849B5B521FF49400059F9A9 /* InstapickFreeCell.swift */; };
 		9849B5B721FF49400059F9A9 /* InstapickFreeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9849B5B521FF49400059F9A9 /* InstapickFreeCell.swift */; };
 		9849B5B921FF49630059F9A9 /* InstapickFreeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9849B5B821FF49630059F9A9 /* InstapickFreeCell.xib */; };
@@ -13760,6 +13770,10 @@
 		97604D2835EA04E60222C769 /* Pods-LifeTech-LifeboxFileProvider.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech-LifeboxFileProvider.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech-LifeboxFileProvider/Pods-LifeTech-LifeboxFileProvider.appstore.xcconfig"; sourceTree = "<group>"; };
 		977AD220B6C4EC2279F4FA8F /* Pods-LifeDriveNotificationService.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeDriveNotificationService.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeDriveNotificationService/Pods-LifeDriveNotificationService.enterprise.xcconfig"; sourceTree = "<group>"; };
 		9794C2498443B8FE7910286B /* Pods_LifeboxShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeboxShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		980481BF25592BE500BD8D9F /* PrivateShareDurationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateShareDurationCell.swift; sourceTree = "<group>"; };
+		980481C025592BE500BD8D9F /* PrivateShareDurationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrivateShareDurationCell.xib; sourceTree = "<group>"; };
+		9804821D25592D3700BD8D9F /* PrivateShareWithContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateShareWithContactView.swift; sourceTree = "<group>"; };
+		9804823525592D3D00BD8D9F /* PrivateShareWithContactView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrivateShareWithContactView.xib; sourceTree = "<group>"; };
 		980488D321EDC981004DB091 /* AnalyzeHistoryTabBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryTabBarPresenter.swift; sourceTree = "<group>"; };
 		9807260C203468D9004E1505 /* SearchDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataSource.swift; sourceTree = "<group>"; };
 		98072618203C33EB004E1505 /* SuggestionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuggestionTableViewCell.xib; sourceTree = "<group>"; };
@@ -13859,6 +13873,7 @@
 		98435B7723F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailModuleOuput.swift; sourceTree = "<group>"; };
 		9845489522FBFF4000D7F29C /* SpotifyStatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotifyStatusView.xib; sourceTree = "<group>"; };
 		9845489622FBFF4000D7F29C /* SpotifyStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyStatusView.swift; sourceTree = "<group>"; };
+		98495F57255975810093B2C2 /* PlaceholderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTextView.swift; sourceTree = "<group>"; };
 		9849B5B521FF49400059F9A9 /* InstapickFreeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstapickFreeCell.swift; sourceTree = "<group>"; };
 		9849B5B821FF49630059F9A9 /* InstapickFreeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstapickFreeCell.xib; sourceTree = "<group>"; };
 		984A511A21E72C18004525F5 /* AnalyzeHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryViewController.swift; sourceTree = "<group>"; };
@@ -17306,6 +17321,7 @@
 				170EB21022783E9D008588C1 /* QuickDismissPlaceholderTextField.swift */,
 				9853CD222361BD5600E19BF7 /* BorderDotsPageControl.swift */,
 				7326801324855248007E2CDF /* ExtandedTapAreaButton.swift */,
+				98495F57255975810093B2C2 /* PlaceholderTextView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -19403,6 +19419,28 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		980481D925592CD400BD8D9F /* ShareWith */ = {
+			isa = PBXGroup;
+			children = (
+				988BA12E255924150086E4BE /* PrivateShareWithView.swift */,
+				988BA14E255924210086E4BE /* PrivateShareWithView.xib */,
+				9804821D25592D3700BD8D9F /* PrivateShareWithContactView.swift */,
+				9804823525592D3D00BD8D9F /* PrivateShareWithContactView.xib */,
+			);
+			path = ShareWith;
+			sourceTree = "<group>";
+		};
+		980481F025592D0200BD8D9F /* Duration */ = {
+			isa = PBXGroup;
+			children = (
+				988BA1A5255924800086E4BE /* PrivateShareDurationView.swift */,
+				988BA1C32559248C0086E4BE /* PrivateShareDurationView.xib */,
+				980481BF25592BE500BD8D9F /* PrivateShareDurationCell.swift */,
+				980481C025592BE500BD8D9F /* PrivateShareDurationCell.xib */,
+			);
+			path = Duration;
+			sourceTree = "<group>";
+		};
 		9808A05C206A88090022376D /* PushNotificationService */ = {
 			isa = PBXGroup;
 			children = (
@@ -19426,14 +19464,12 @@
 			isa = PBXGroup;
 			children = (
 				9808B40A25540DF4002B0032 /* Suggestions */,
+				980481D925592CD400BD8D9F /* ShareWith */,
+				980481F025592D0200BD8D9F /* Duration */,
 				9808B3962553EE4D002B0032 /* PrivateShareSelectPeopleView.swift */,
 				9808B3B32553EE59002B0032 /* PrivateShareSelectPeopleView.xib */,
-				988BA12E255924150086E4BE /* PrivateShareWithView.swift */,
-				988BA14E255924210086E4BE /* PrivateShareWithView.xib */,
 				988BA1812559245F0086E4BE /* PrivateShareAddMessageView.swift */,
 				988BA188255924670086E4BE /* PrivateShareAddMessageView.xib */,
-				988BA1A5255924800086E4BE /* PrivateShareDurationView.swift */,
-				988BA1C32559248C0086E4BE /* PrivateShareDurationView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -25400,6 +25436,7 @@
 				7C4485031F0FC87A003AF631 /* SettingHeaderView.xib in Resources */,
 				B5AB5B5821F9A92B003AABB4 /* ConnectedAccountsViewController.xib in Resources */,
 				CE1966DD2359B8A700599638 /* InstapickCampaignCell.xib in Resources */,
+				980481C225592BE500BD8D9F /* PrivateShareDurationCell.xib in Resources */,
 				CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */,
 				98164309233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */,
 				98AA104523585E0C00B12485 /* CampaignDetailViewController.xib in Resources */,
@@ -25599,6 +25636,7 @@
 				CE2F561F1F7552A900F49DA1 /* PackagesViewController.xib in Resources */,
 				8C3930F12100668300C1D82D /* GoogleService-Info.plist in Resources */,
 				CF71472F24B597AA00D83E60 /* ContactSyncScheduleCard.xib in Resources */,
+				9804823625592D3D00BD8D9F /* PrivateShareWithContactView.xib in Resources */,
 				873204F11FCC121B004DEB31 /* LocalAlbumCollectionViewCell.xib in Resources */,
 				8930DDB022C8C8C8003CE856 /* CreateStoryViewController.xib in Resources */,
 				B5B6B1532170A01E00463260 /* PrepareQuickScroll.xib in Resources */,
@@ -28250,6 +28288,7 @@
 				0303A0822397D0D000907F42 /* UIColor+Adjust.swift in Sources */,
 				0303A0832397D0D000907F42 /* AppResponsivenessService.swift in Sources */,
 				0303A0842397D0D000907F42 /* InstapickCampaignCell.swift in Sources */,
+				98495F5B255975810093B2C2 /* PlaceholderTextView.swift in Sources */,
 				0303A0852397D0D000907F42 /* AutoSyncViewInput.swift in Sources */,
 				0303A0862397D0D000907F42 /* SpotifyPlaylistsNavbarManager.swift in Sources */,
 				0303A0872397D0D000907F42 /* VisualMusicPlayerRouter.swift in Sources */,
@@ -30087,6 +30126,7 @@
 				4A6DBE8421A6F8DC0003D1B4 /* PackageInfoView.swift in Sources */,
 				B5BA9877206682D300CA3BF9 /* UIImage+JPEG.swift in Sources */,
 				8C0E8CE91FDEBDFF00789C91 /* HelpAndSupportModuleInput.swift in Sources */,
+				98495F59255975810093B2C2 /* PlaceholderTextView.swift in Sources */,
 				CE49E8FB2099BD83007F05A6 /* UIButton+Font.swift in Sources */,
 				B5AB5B6521F9B01B003AABB4 /* DropboxAccountConnectionCell.swift in Sources */,
 				98A86D5723A238E700438225 /* AlbumsSliderCell.swift in Sources */,
@@ -32184,6 +32224,7 @@
 				7C1F89921F70FFDF00740177 /* CardsContainerView.swift in Sources */,
 				CE6DE7561FCBE84100C23CBD /* InstagramParametrs.swift in Sources */,
 				9823198C24F3A1E700FD16E2 /* ColorView.swift in Sources */,
+				9804821E25592D3700BD8D9F /* PrivateShareWithContactView.swift in Sources */,
 				B5CDB33A21787FEF006CFA50 /* UIAlertViewCustom.m in Sources */,
 				7859299F20060E9C003F8AB3 /* ManageContactsConfigurator.swift in Sources */,
 				B5CDB33221787FEF006CFA50 /* UpdaterController.m in Sources */,
@@ -32902,6 +32943,7 @@
 				CEBB2DD81F7678DA00D725F0 /* Int64+Bytes.swift in Sources */,
 				4AD1A81E208A2F2100930112 /* PeriodContactsSyncModel.swift in Sources */,
 				B5CDB33821787FEF006CFA50 /* UpdateCheck.m in Sources */,
+				98495F58255975810093B2C2 /* PlaceholderTextView.swift in Sources */,
 				8C6EF87D1F348B5C002AC795 /* BottomSelectionTabBarModuleInput.swift in Sources */,
 				8CFF86971F0FA84A00520D18 /* ContactsSyncService.swift in Sources */,
 				CE1E26E520174DF200F49E41 /* Mapping.swift in Sources */,
@@ -33213,6 +33255,7 @@
 				986DD46825388F3400C38AD4 /* AbstractHelper.m in Sources */,
 				B52BAC6723AE20190051E21D /* NSManagedObjectModel+Resource.swift in Sources */,
 				09FD2371EC56726F74576DD7 /* LBAlbumLikePreviewSliderViewInput.swift in Sources */,
+				980481C125592BE500BD8D9F /* PrivateShareDurationCell.swift in Sources */,
 				7829FEBDBF0B8DD3EEBBC34A /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
 				98DBC05B2410FB4F00926F40 /* AutoSyncAlbumTableViewCell.swift in Sources */,
 				CEB27348205BE3DC00E1AE9C /* EmailEnterController.swift in Sources */,
@@ -34125,6 +34168,7 @@
 				CE7849E822A685FB00662219 /* TermsAndServicesConfigurator.swift in Sources */,
 				CE7849E922A685FB00662219 /* FaceImageItemsViewInput.swift in Sources */,
 				CE7849EA22A685FB00662219 /* TermsAndServicesInitializer.swift in Sources */,
+				98495F5C255975810093B2C2 /* PlaceholderTextView.swift in Sources */,
 				CE7849EB22A685FB00662219 /* UIButton+Font.swift in Sources */,
 				CE7849EC22A685FB00662219 /* IntroduceViewInput.swift in Sources */,
 				CE7849ED22A685FB00662219 /* IntroduceViewOutput.swift in Sources */,
@@ -36455,6 +36499,7 @@
 				CF8B684D23CBC9D70021B021 /* FeedbackViewPresenter.swift in Sources */,
 				CF8B684E23CBC9D70021B021 /* AsyncOperation.swift in Sources */,
 				982319AC24F3A1E700FD16E2 /* ColorCell.swift in Sources */,
+				98495F5A255975810093B2C2 /* PlaceholderTextView.swift in Sources */,
 				B569563424D98A7F00B7B336 /* AdjustmentOperation.swift in Sources */,
 				CF8B684F23CBC9D70021B021 /* LBAlbumLikePreviewSliderDataSource.swift in Sources */,
 				CF8B685023CBC9D70021B021 /* AppWormholeListener.swift in Sources */,
@@ -37169,6 +37214,7 @@
 				CF8B6D5E23CBCA280021B021 /* TermsAndServicesInitializer.swift in Sources */,
 				CF8B6D5F23CBCA280021B021 /* UIButton+Font.swift in Sources */,
 				CF8B6D6023CBCA280021B021 /* IntroduceViewInput.swift in Sources */,
+				98495F5D255975810093B2C2 /* PlaceholderTextView.swift in Sources */,
 				CF8B6D6123CBCA280021B021 /* IntroduceViewOutput.swift in Sources */,
 				CF8B6D6223CBCA280021B021 /* IntroduceModuleInput.swift in Sources */,
 				CF8B6D6323CBCA280021B021 /* TermsOfUseInteractorOutput.swift in Sources */,

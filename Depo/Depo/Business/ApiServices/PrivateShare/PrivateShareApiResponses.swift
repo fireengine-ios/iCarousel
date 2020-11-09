@@ -32,3 +32,66 @@ struct SuggestedApiContact: Codable {
         return contacts
     }
 }
+
+struct PrivateShareObject {
+    let items: [String]
+    var message: String?
+    var invitees: [PrivateShareContact]
+    let type: PrivateShareType
+    var duration: PrivateShareDuration
+}
+
+struct PrivateShareContact: Equatable {
+    let displayName: String
+    let username: String
+    var role: PrivateShareUserRole
+    
+    static func == (lhs: PrivateShareContact, rhs: PrivateShareContact) -> Bool {
+        return lhs.username == rhs.username
+    }
+}
+
+enum PrivateShareUserRole: String {
+    case editor = "EDITOR"
+    case viewer = "VIEWER"
+    
+    var title: String {
+        switch self {
+        case .editor:
+            return TextConstants.privateShareStartPageEditorButton
+        case .viewer:
+            return TextConstants.privateShareStartPageViewerButton
+        }
+    }
+}
+
+enum PrivateShareType: String {
+    case file = "FILE"
+    case folder = "FOLDER"
+}
+
+enum PrivateShareDuration: String, CaseIterable {
+    case no = "NO_DURATION"
+    case hour = "ONE_HOUR"
+    case day = "ONE_DAY"
+    case week = "ONE_WEEK"
+    case month = "ONE_MONTH"
+    case year = "ONE_YEAR"
+    
+    var title: String {
+        switch self {
+        case .no:
+            return TextConstants.privateShareStartPageDurationNo
+        case .hour:
+            return TextConstants.privateShareStartPageDurationHour
+        case .day:
+            return TextConstants.privateShareStartPageDurationDay
+        case .week:
+            return TextConstants.privateShareStartPageDurationWeek
+        case .month:
+            return TextConstants.privateShareStartPageDurationMonth
+        case .year:
+            return TextConstants.privateShareStartPageDurationYear
+        }
+    }
+}

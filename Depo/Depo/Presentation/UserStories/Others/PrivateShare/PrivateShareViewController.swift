@@ -16,7 +16,12 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         return controller
     }
     
-    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollView: UIScrollView! {
+        willSet {
+            newValue.keyboardDismissMode = .interactive
+        }
+    }
+    
     @IBOutlet private weak var contentView: UIStackView!
     
     @IBOutlet private weak var bottomView: UIView! {
@@ -46,6 +51,9 @@ final class PrivateShareViewController: BaseViewController, NibInit {
                                                    selector: #selector(onCancelTapped))
     
     private lazy var selectPeopleView = PrivateShareSelectPeopleView.with(delegate: self)
+    private lazy var shareWithView = PrivateShareWithView.with(contacts: [], delegate: self)
+    private lazy var messageView = PrivateShareAddMessageView.initFromNib()
+    private lazy var durationView = PrivateShareDurationView.initFromNib()
     
     private let minSearchLength = 2
     
@@ -114,7 +122,6 @@ final class PrivateShareViewController: BaseViewController, NibInit {
             }
         }
         
-        contentView.arrangedSubviews.dropFirst().forEach { $0.removeFromSuperview() }
         let view = PrivateShareSuggestionsView.with(contacts: suggestedContacts, delegate: self)
         contentView.addArrangedSubview(view)
     }
@@ -128,8 +135,19 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         shareButton.isEnabled = needEnable
         shareButton.backgroundColor = needEnable ? ColorConstants.navy : .lightGray
     }
+    
+    private func showShareViews() {
+        contentView.insertArrangedSubview(shareWithView, at: 1)
+        contentView.insertArrangedSubview(messageView, at: 2)
+        contentView.insertArrangedSubview(durationView, at: 3)
+    }
+    
+    private func hideShareViews() {
+        contentView.arrangedSubviews.dropFirst().forEach { $0.removeFromSuperview() }
+    }
 
     //MARK: - Actions
+    
     @objc private func onCancelTapped(_ sender: Any) {
         dismiss(animated: true)
     }
@@ -149,10 +167,14 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
         } else {
             searchSuggestions(query: text)
         }
+        hideShareViews()
     }
     
-    func addShareContact(string: String) {
-        //TODO: add to Share with section
+    func addShareContact(_ contact: PrivateShareContact) {
+        shareWithView.add(contact: contact)
+        if shareWithView.superview == nil {
+            showShareViews()
+        }
     }
     
     func onUserRoleTapped() {
@@ -163,8 +185,8 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
 //MARK: - PrivateShareSuggestionsViewDelegate
 
 extension PrivateShareViewController: PrivateShareSuggestionsViewDelegate {
-    func selectContact(string: String) {
-        selectPeopleView.setText(string)
+    func selectContact(displayName: String, username: String) {
+        selectPeopleView.setContact(displayName: displayName, username: username)
         
         if let suggestionsView = contentView.arrangedSubviews.first(where: { $0 is PrivateShareSuggestionsView }) {
             suggestionsView.removeFromSuperview()
@@ -173,5 +195,18 @@ extension PrivateShareViewController: PrivateShareSuggestionsViewDelegate {
         view.endEditing(true)
         
         //TODO: close search suggestions controller
+    }
+}
+
+//MARK: - PrivateShareWithViewDelegate
+
+extension PrivateShareViewController: PrivateShareWithViewDelegate {
+    
+    func shareListDidEmpty() {
+        hideShareViews()
+    }
+    
+    func onUserRoleTapped(contact: PrivateShareContact, sender: Any) {
+        //TODO: open user roles controller and observe selections
     }
 }

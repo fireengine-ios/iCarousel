@@ -10,7 +10,7 @@ import UIKit
 
 protocol PrivateShareSelectPeopleViewDelegate: class {
     func startEditing(text: String)
-    func addShareContact(string: String)
+    func addShareContact(_ contact: PrivateShareContact)
     func onUserRoleTapped()
 }
 
@@ -59,19 +59,23 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     }
     
     private weak var delegate: PrivateShareSelectPeopleViewDelegate?
+    private var displayName = ""
+    private var role = PrivateShareUserRole.editor
     
     //MARK: - Public methods
     
-    func setText(_ text: String) {
-        textField.text = text
-        validate(text: text)
+    func setContact(displayName: String, username: String) {
+        self.displayName = displayName
+        textField.text = username
+        validate(text: username)
     }
     
     //MARK: - Private methods
     
     @IBAction private func onAddTapped(_ sender: UIButton) {
-        delegate?.addShareContact(string: textField.text ?? "")
-        setText("")
+        let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", role: role)
+        delegate?.addShareContact(shareContact)
+        setContact(displayName: "", username: "")
     }
     
     @IBAction private func onUserRoleTapped(_ sender: UIButton) {

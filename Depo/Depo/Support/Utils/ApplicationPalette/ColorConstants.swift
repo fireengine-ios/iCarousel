@@ -114,6 +114,8 @@ struct ColorConstants {
     
     static let greenyBlue = UIColor(red: 65 / 255.0, green: 196 / 255.0, blue: 199 / 255.0, alpha: 1)
     static let tbMatikBlurColor = UIColor(red: 5 / 255.0, green: 52 / 255.0, blue: 79 / 255.0, alpha: 1)
+    
+    static let aquaMarineTwo = UIColor(red: 85 / 255.0, green: 223 / 255.0, blue: 223 / 255.0, alpha: 1)
 }
 
 extension UIColor {

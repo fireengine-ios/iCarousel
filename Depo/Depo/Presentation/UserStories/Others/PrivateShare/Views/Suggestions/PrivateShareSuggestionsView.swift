@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PrivateShareSuggestionsViewDelegate: class {
-    func selectContact(string: String)
+    func selectContact(displayName: String, username: String)
 }
 
 final class PrivateShareSuggestionsView: UIView, NibInit {
@@ -67,7 +67,7 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
 }
 
 extension PrivateShareSuggestionsView: PrivateShareContactSuggestionViewDelegate {
-    func selectContact(string: String) {
-        delegate?.selectContact(string: string)
+    func selectContact(displayName: String, username: String) {
+        delegate?.selectContact(displayName: displayName, username: username)
     }
 }
