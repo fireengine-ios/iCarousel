@@ -11891,6 +11891,16 @@
 		CF9B1F6D24C0A93E002CE8E9 /* EmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208661228D4B60000BEDAD /* EmptyDataView.swift */; };
 		CF9B1F6E24C0A940002CE8E9 /* EmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208661228D4B60000BEDAD /* EmptyDataView.swift */; };
 		CF9B1F6F24C0A940002CE8E9 /* EmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208661228D4B60000BEDAD /* EmptyDataView.swift */; };
+		CFA9D3FD2559EB3600C8F25D /* PrivateShareApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808B4F8255439C3002B0032 /* PrivateShareApiService.swift */; };
+		CFA9D4012559EB3700C8F25D /* PrivateShareApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808B4F8255439C3002B0032 /* PrivateShareApiService.swift */; };
+		CFA9D4182559EB3800C8F25D /* PrivateShareApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808B4F8255439C3002B0032 /* PrivateShareApiService.swift */; };
+		CFA9D42F2559EB3900C8F25D /* PrivateShareApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808B4F8255439C3002B0032 /* PrivateShareApiService.swift */; };
+		CFA9D4302559EB3A00C8F25D /* PrivateShareApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808B4F8255439C3002B0032 /* PrivateShareApiService.swift */; };
+		CFA9D4312559EB3E00C8F25D /* PrivateShareApiResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808B51025543E61002B0032 /* PrivateShareApiResponses.swift */; };
+		CFA9D4322559EB3E00C8F25D /* PrivateShareApiResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808B51025543E61002B0032 /* PrivateShareApiResponses.swift */; };
+		CFA9D4332559EB4000C8F25D /* PrivateShareApiResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808B51025543E61002B0032 /* PrivateShareApiResponses.swift */; };
+		CFA9D4342559EB4100C8F25D /* PrivateShareApiResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808B51025543E61002B0032 /* PrivateShareApiResponses.swift */; };
+		CFA9D4352559EB4200C8F25D /* PrivateShareApiResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808B51025543E61002B0032 /* PrivateShareApiResponses.swift */; };
 		CFACAC8A247C62D400645B40 /* NetmeraEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309F93823D57F3B001DB5FA /* NetmeraEvents.swift */; };
 		CFACAC8B247C62D800645B40 /* NetmeraEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309F93823D57F3B001DB5FA /* NetmeraEvents.swift */; };
 		CFACAC8C247C62D900645B40 /* NetmeraEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309F93823D57F3B001DB5FA /* NetmeraEvents.swift */; };
@@ -29067,6 +29077,7 @@
 				0303A3362397D0D000907F42 /* CardsManager.swift in Sources */,
 				0303A3372397D0D000907F42 /* BytesType.swift in Sources */,
 				981691AA23C860C7005A768E /* TrashBinRouter.swift in Sources */,
+				CFA9D4182559EB3800C8F25D /* PrivateShareApiService.swift in Sources */,
 				988BA1A9255924800086E4BE /* PrivateShareDurationView.swift in Sources */,
 				0303A3382397D0D000907F42 /* PeriodicContactSyncInteractorInput.swift in Sources */,
 				0303A3392397D0D000907F42 /* PrepareToAutoSync.swift in Sources */,
@@ -29261,6 +29272,7 @@
 				0303A3DA2397D0D000907F42 /* ImportPhotosViewInput.swift in Sources */,
 				0303A3DB2397D0D000907F42 /* MoreFilesActionsModuleInput.swift in Sources */,
 				0303A3DC2397D0D000907F42 /* LandingCollectionViewCell.swift in Sources */,
+				CFA9D4332559EB4000C8F25D /* PrivateShareApiResponses.swift in Sources */,
 				0303A3DD2397D0D000907F42 /* AnalyticsServiceConstants.swift in Sources */,
 				0303A3DE2397D0D000907F42 /* FaceImagePhotosViewController.swift in Sources */,
 				0303A3E12397D0D000907F42 /* ManageContactsViewInput.swift in Sources */,
@@ -29952,6 +29964,7 @@
 				8C0E8C871FDEBDFF00789C91 /* UIImageView.swift in Sources */,
 				B5C7C580211C699F006E94DB /* AugmentedRealityController.swift in Sources */,
 				8C0E8C881FDEBDFF00789C91 /* PHPhotoLibraryChangeObserver.swift in Sources */,
+				CFA9D3FD2559EB3600C8F25D /* PrivateShareApiService.swift in Sources */,
 				8C0E8C891FDEBDFF00789C91 /* UserProfileModuleInput.swift in Sources */,
 				8C0E8C8B1FDEBDFF00789C91 /* BottomSelectionMusicTabBarRouter.swift in Sources */,
 				8C0E8C8C1FDEBDFF00789C91 /* ActivityTimelineTimeCell.swift in Sources */,
@@ -30785,6 +30798,7 @@
 				89DA5D0323ACF635000FA31D /* SmartAlbumWarningPopUpsFactory.swift in Sources */,
 				8C0E8EC21FDEBDFF00789C91 /* BaseFilesGreedConfigurator.swift in Sources */,
 				4A56D5B9202AF547003A4624 /* FaceImageAddNameInteractor.swift in Sources */,
+				CFA9D4312559EB3E00C8F25D /* PrivateShareApiResponses.swift in Sources */,
 				8C06AC2A2008AB9F003D8E05 /* FreeAppSpaceInteractor.swift in Sources */,
 				B56E0DDB20B44AFC0082044D /* AppResponsivenessService.swift in Sources */,
 				8C20866F228D4C6A000BEDAD /* TextInsetsLabel.swift in Sources */,
@@ -34058,6 +34072,7 @@
 				CE7849AE22A685FB00662219 /* GradientLoadingIndicator.swift in Sources */,
 				98231A9D24F3A23500FD16E2 /* ClarendonFilter.swift in Sources */,
 				CE7849AF22A685FB00662219 /* VisualMusicPlayerPresenter.swift in Sources */,
+				CFA9D42F2559EB3900C8F25D /* PrivateShareApiService.swift in Sources */,
 				CE7849B022A685FB00662219 /* IntrinsicTextView.swift in Sources */,
 				9845489C22FBFF4100D7F29C /* SpotifyStatusView.swift in Sources */,
 				CE7849B122A685FB00662219 /* AuthenticationServiceResponse.swift in Sources */,
@@ -34709,6 +34724,7 @@
 				73D723EE231D08D0006AE835 /* PaymentModels.swift in Sources */,
 				737A2EA32338A5200014258A /* SecurityQuestionView.swift in Sources */,
 				CE784BC522A685FB00662219 /* FileInfoInteractorOutput.swift in Sources */,
+				CFA9D4342559EB4100C8F25D /* PrivateShareApiResponses.swift in Sources */,
 				CE784BC622A685FB00662219 /* FileInfoInteractor.swift in Sources */,
 				CE784BC722A685FB00662219 /* SearchViewRouterInput.swift in Sources */,
 				CE784BC822A685FB00662219 /* FileInfoRouterInput.swift in Sources */,
@@ -36333,6 +36349,7 @@
 				CF8B67E623CBC9D70021B021 /* FaceImageItemsInteractorOutput.swift in Sources */,
 				CF8B67E723CBC9D70021B021 /* CampaingnInfoView.swift in Sources */,
 				CF8B67E823CBC9D70021B021 /* BaseCardView.swift in Sources */,
+				CFA9D4322559EB3E00C8F25D /* PrivateShareApiResponses.swift in Sources */,
 				17FBD51B23FB2C6200979F39 /* DivorceActionService.swift in Sources */,
 				984A8ADE252EF95C002FB400 /* FunNavBar.swift in Sources */,
 				CF8B67E923CBC9D70021B021 /* ImageForDowload.swift in Sources */,
@@ -36372,6 +36389,7 @@
 				98732B5C2461459300E9D5D2 /* APILogger.swift in Sources */,
 				CF8B680523CBC9D70021B021 /* ManageContactTableViewCell.swift in Sources */,
 				CF8B680623CBC9D70021B021 /* VerifyEmailPopUp.swift in Sources */,
+				CFA9D4012559EB3700C8F25D /* PrivateShareApiService.swift in Sources */,
 				CF8B680723CBC9D70021B021 /* GridListTopBarSortingTableCell.swift in Sources */,
 				CF8B680823CBC9D70021B021 /* PrepareQuickScroll.swift in Sources */,
 				734CA114244D64000076F6A7 /* DocumentsAlbumCard.swift in Sources */,
@@ -37102,6 +37120,7 @@
 				CF8B6D2523CBCA280021B021 /* AuthenticationServiceResponse.swift in Sources */,
 				98231A9E24F3A23500FD16E2 /* ClarendonFilter.swift in Sources */,
 				CF8B6D2623CBCA280021B021 /* FullscreenTextController.swift in Sources */,
+				CFA9D4302559EB3A00C8F25D /* PrivateShareApiService.swift in Sources */,
 				CF8B6D2723CBCA280021B021 /* RegistrationInteractor.swift in Sources */,
 				CF8B6D2823CBCA280021B021 /* BottomSelectionTabBarInteractor.swift in Sources */,
 				CF8B6D2923CBCA280021B021 /* RegistrationRouterInput.swift in Sources */,
@@ -37753,6 +37772,7 @@
 				CF8B6F5823CBCA280021B021 /* SecurityQuestionView.swift in Sources */,
 				CF8B6F5923CBCA280021B021 /* FileInfoInteractorOutput.swift in Sources */,
 				CF8B6F5A23CBCA280021B021 /* FileInfoInteractor.swift in Sources */,
+				CFA9D4352559EB4200C8F25D /* PrivateShareApiResponses.swift in Sources */,
 				CF8B6F5B23CBCA280021B021 /* SearchViewRouterInput.swift in Sources */,
 				CF8B6F5C23CBCA280021B021 /* FileInfoRouterInput.swift in Sources */,
 				CF8B6F5D23CBCA280021B021 /* DocumentsGreedPresenter.swift in Sources */,

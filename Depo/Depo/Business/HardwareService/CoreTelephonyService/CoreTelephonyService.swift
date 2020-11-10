@@ -92,5 +92,21 @@ import CoreTelephony
         return ["BY", "RU", "UA"]
     }
     
+    func getColumnedCountryCode() -> String {
+        var phoneCode = getCountryCode()
+        
+        phoneCode.insert("(", at: phoneCode.index(after: phoneCode.startIndex))
+        phoneCode.insert(")", at: phoneCode.endIndex)
+        return phoneCode
+    }
     
+    func getCountryCode() -> String {
+        var phoneCode = callingCountryCode()
+        
+        let names = ["iPad Pro 12.9 Inch 2. Generation", "iPad Pro 10.5 Inch", "iPad Pro 9.7 Inch"]
+        if phoneCode == "" || names.contains(UIDevice.current.modelName) {
+            phoneCode = countryCodeByLang()
+        }
+        return phoneCode
+    }
 }

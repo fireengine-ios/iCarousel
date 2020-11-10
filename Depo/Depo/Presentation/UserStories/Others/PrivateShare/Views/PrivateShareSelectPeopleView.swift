@@ -64,7 +64,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     
     func setText(_ text: String) {
         textField.text = text
-        validate(text: text)
+        changeButtonEnebledIfNeeded(text: text)
     }
     
     //MARK: - Private methods
@@ -79,11 +79,12 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        validate(text: textField.text ?? "")
+        delegate?.startEditing(text: textField.text ?? "")
+        changeButtonEnebledIfNeeded(text: textField.text ?? "")
     }
     
-    private func validate(text: String) {
-        let isValid = true //TODO: need implement logic
+    private func changeButtonEnebledIfNeeded(text: String) {
+        let isValid = text.count > 0
         addButton.isEnabled = isValid
         userRoleButton.isHidden = !isValid
     }
@@ -96,4 +97,27 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         delegate?.startEditing(text: textField.text ?? "")
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        guard string != " " else {
+            return false
+        }
+        
+        if string == "0" {
+            return false
+        }
+        
+        if let text = textField.text, text.count == 0,
+           (string == "+" || string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil)
+        {
+            let code = CoreTelephonyService().getCountryCode()
+            let countryCode = code.isEmpty ? "+" : code
+            textField.text = countryCode
+            return string == "+" ? false : true
+        }
+        
+        return true
+    }
+    
 }
