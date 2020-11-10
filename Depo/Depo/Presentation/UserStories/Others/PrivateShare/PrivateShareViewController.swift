@@ -61,6 +61,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
+    private lazy var router = RouterVC()
     
     //MARK: - View lifecycle
     
@@ -69,6 +70,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 
         title = TextConstants.actionSheetShare
         navigationItem.leftBarButtonItem = closeButton
+        needCheckModalPresentationStyle = false
         
         contentView.addArrangedSubview(selectPeopleView)
     }
@@ -188,10 +190,6 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
             showShareViews()
         }
     }
-    
-    func onUserRoleTapped() {
-        //TODO: open user roles controller
-    }
 }
 
 //MARK: - PrivateShareSuggestionsViewDelegate
@@ -219,6 +217,7 @@ extension PrivateShareViewController: PrivateShareWithViewDelegate {
     }
     
     func onUserRoleTapped(contact: PrivateShareContact, sender: Any) {
-        //TODO: open user roles controller and observe selections
+        let userRoleController = PrivateShareUserRoleViewController.with(contact: contact, delegate: sender as? PrivateShareUserRoleViewControllerDelegate)
+        present(userRoleController, animated: true)
     }
 }

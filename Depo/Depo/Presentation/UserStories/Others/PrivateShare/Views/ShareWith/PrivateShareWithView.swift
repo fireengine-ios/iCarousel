@@ -89,3 +89,12 @@ extension PrivateShareWithView: PrivateShareWithContactViewDelegate {
         delegate?.onUserRoleTapped(contact: contact, sender: self)
     }
 }
+
+//MARK: - PrivateShareUserRoleViewControllerDelegate
+
+extension PrivateShareWithView: PrivateShareUserRoleViewControllerDelegate {
+    
+    func contactRoleDidChange(_ contact: PrivateShareContact) {
+        update(contact: contact)
+    }
+}

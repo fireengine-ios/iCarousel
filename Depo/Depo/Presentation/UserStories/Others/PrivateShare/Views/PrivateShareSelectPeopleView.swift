@@ -11,7 +11,7 @@ import UIKit
 protocol PrivateShareSelectPeopleViewDelegate: class {
     func startEditing(text: String)
     func addShareContact(_ contact: PrivateShareContact)
-    func onUserRoleTapped()
+    func onUserRoleTapped(contact: PrivateShareContact, sender: Any)
 }
 
 final class PrivateShareSelectPeopleView: UIView, NibInit {
@@ -60,7 +60,11 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     
     private weak var delegate: PrivateShareSelectPeopleViewDelegate?
     private var displayName = ""
-    private var role = PrivateShareUserRole.editor
+    private var role = PrivateShareUserRole.editor {
+        didSet {
+            userRoleButton.setTitle(role.title, for: .normal)
+        }
+    }
     
     //MARK: - Public methods
     
@@ -79,7 +83,8 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     }
     
     @IBAction private func onUserRoleTapped(_ sender: UIButton) {
-        delegate?.onUserRoleTapped()
+        let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", role: role)
+        delegate?.onUserRoleTapped(contact: shareContact, sender: self)
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
@@ -99,5 +104,14 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         delegate?.startEditing(text: textField.text ?? "")
+    }
+}
+
+//MARK: - PrivateShareUserRoleViewControllerDelegate
+
+extension PrivateShareSelectPeopleView: PrivateShareUserRoleViewControllerDelegate {
+    
+    func contactRoleDidChange(_ contact: PrivateShareContact) {
+        role = contact.role
     }
 }

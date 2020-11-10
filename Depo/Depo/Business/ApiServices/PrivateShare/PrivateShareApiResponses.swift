@@ -51,7 +51,7 @@ struct PrivateShareContact: Equatable {
     }
 }
 
-enum PrivateShareUserRole: String {
+enum PrivateShareUserRole: String, CaseIterable {
     case editor = "EDITOR"
     case viewer = "VIEWER"
     
@@ -61,6 +61,15 @@ enum PrivateShareUserRole: String {
             return TextConstants.privateShareStartPageEditorButton
         case .viewer:
             return TextConstants.privateShareStartPageViewerButton
+        }
+    }
+    
+    var selectionTitle: String {
+        switch self {
+        case .editor:
+            return TextConstants.privateShareRoleSelectionEditor
+        case .viewer:
+            return TextConstants.privateShareRoleSelectionViewer
         }
     }
 }

@@ -2132,4 +2132,8 @@ struct TextConstants {
     static let privateShareStartPageDurationYear = NSLocalizedString("private_share_start_page_share_duration_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareStartPageEditorButton = NSLocalizedString("private_share_start_page_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareStartPageViewerButton = NSLocalizedString("private_share_start_page_role_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let privateShareRoleSelectionTitle = NSLocalizedString("private_share_role_selection_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareRoleSelectionEditor = NSLocalizedString("private_share_role_selection_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareRoleSelectionViewer = NSLocalizedString("private_share_role_selection_role_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
