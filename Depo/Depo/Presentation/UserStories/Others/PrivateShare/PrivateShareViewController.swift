@@ -23,6 +23,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     @IBOutlet private weak var contentView: UIStackView!
+    @IBOutlet private weak var searchSuggestionsContainer: UIView!
     
     @IBOutlet private weak var bottomView: UIView! {
         willSet {
@@ -54,10 +55,12 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     private lazy var shareWithView = PrivateShareWithView.with(contacts: [], delegate: self)
     private lazy var messageView = PrivateShareAddMessageView.initFromNib()
     private lazy var durationView = PrivateShareDurationView.initFromNib()
+    private lazy var searchSuggestionController = PrivateShareLocalSuggestionsViewController.with(delegate: self)
     
     private let minSearchLength = 2
     
     private var items = [WrapData]()
+    private var remoteSuggestions = [SuggestedApiContact]()
     
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
@@ -81,7 +84,13 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         navigationBarWithGradientStyle()
     }
     
-    private func getSuggestions() {
+    private func getRemoteSuggestions() {
+        //load remote suggestion once
+        if !remoteSuggestions.isEmpty {
+            showApiSuggestions(contacts: remoteSuggestions, hasAccess: true)
+            return
+        }
+        
         let group = DispatchGroup()
         
         group.enter()
@@ -115,6 +124,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
             return
         }
         
+        remoteSuggestions = contacts
         let suggestedContacts = contacts.map { contact -> SuggestedContact in
             if hasAccess {
                 let names = self.localContactsService.getContactName(for: contact.username ?? "", email: contact.email ?? "")
@@ -128,8 +138,12 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         contentView.addArrangedSubview(view)
     }
     
-    private func searchSuggestions(query: String) {
-        //TODO: implement search controller and needed logic
+    private func searchLocalSuggestions(query: String) {
+        if let suggestionsView = contentView.arrangedSubviews.first(where: { $0 is PrivateShareSuggestionsView }) {
+            suggestionsView.removeFromSuperview()
+        }
+        
+        searchSuggestionController.update(with: query)
     }
     
     private func updateShareButtonIfNeeded() {
@@ -147,6 +161,30 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     private func hideShareViews() {
         contentView.arrangedSubviews.dropFirst().forEach { $0.removeFromSuperview() }
     }
+    
+    private func showSearchLocalContactsViewIfNeeded() {
+        guard searchSuggestionsContainer.isHidden else {
+            return
+        }
+        
+        scrollView.contentOffset = .zero
+        if searchSuggestionController.contentView.superview == nil {
+            searchSuggestionsContainer.addSubview(searchSuggestionController.contentView)
+            searchSuggestionController.contentView.translatesAutoresizingMaskIntoConstraints = false
+            searchSuggestionController.contentView.pinToSuperviewEdges()
+        }
+        searchSuggestionsContainer.isHidden = false
+    }
+    
+    private func endSearchContacts() {
+        if let suggestionsView = contentView.arrangedSubviews.first(where: { $0 is PrivateShareSuggestionsView }) {
+            suggestionsView.removeFromSuperview()
+        }
+        
+        view.endEditing(true)
+        searchSuggestionController.update(with: "")
+        searchSuggestionsContainer.isHidden = true
+    }
 
     //MARK: - Actions
     
@@ -155,6 +193,8 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
 
     @IBAction private func onShareTapped(_ sender: Any) {
+        remoteSuggestions = []
+        
         let type: PrivateShareType
         if items.contains(where: { $0.isFolder == true }) {
             type = .folder
@@ -176,12 +216,18 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     
     func startEditing(text: String) {
-        if text.count < minSearchLength {
-            getSuggestions()
-        } else {
-            searchSuggestions(query: text)
-        }
         hideShareViews()
+        searchTextDidChange(text: text)
+    }
+    
+    func searchTextDidChange(text: String) {
+        if text.count < minSearchLength {
+            getRemoteSuggestions()
+            searchSuggestionsContainer.isHidden = true
+        } else {
+            showSearchLocalContactsViewIfNeeded()
+            searchLocalSuggestions(query: text)
+        }
     }
     
     func addShareContact(_ contact: PrivateShareContact) {
@@ -189,22 +235,7 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
         if shareWithView.superview == nil {
             showShareViews()
         }
-    }
-}
-
-//MARK: - PrivateShareSuggestionsViewDelegate
-
-extension PrivateShareViewController: PrivateShareSuggestionsViewDelegate {
-    func selectContact(displayName: String, username: String) {
-        selectPeopleView.setContact(displayName: displayName, username: username)
-        
-        if let suggestionsView = contentView.arrangedSubviews.first(where: { $0 is PrivateShareSuggestionsView }) {
-            suggestionsView.removeFromSuperview()
-        }
-        
-        view.endEditing(true)
-        
-        //TODO: close search suggestions controller
+        endSearchContacts()
     }
 }
 
@@ -214,10 +245,22 @@ extension PrivateShareViewController: PrivateShareWithViewDelegate {
     
     func shareListDidEmpty() {
         hideShareViews()
+        updateShareButtonIfNeeded()
     }
     
     func onUserRoleTapped(contact: PrivateShareContact, sender: Any) {
         let userRoleController = PrivateShareUserRoleViewController.with(contact: contact, delegate: sender as? PrivateShareUserRoleViewControllerDelegate)
         present(userRoleController, animated: true)
+    }
+}
+
+//MARK: - PrivateShareSelectSuggestionsDelegate
+
+extension PrivateShareViewController: PrivateShareSelectSuggestionsDelegate {
+    
+    func didSelect(contactInfo: ContactInfo) {
+        selectPeopleView.setContact(info: contactInfo)
+        endSearchContacts()
+        updateShareButtonIfNeeded()
     }
 }

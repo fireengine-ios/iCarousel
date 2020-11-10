@@ -14,6 +14,7 @@
                 <outlet property="bottomView" destination="ui7-rz-0Ps" id="hgu-ma-RTh"/>
                 <outlet property="contentView" destination="fFh-DE-Z2K" id="zf9-Ht-Ri7"/>
                 <outlet property="scrollView" destination="kEE-p6-0hz" id="O1O-9e-Tih"/>
+                <outlet property="searchSuggestionsContainer" destination="2mQ-Dg-Efm" id="XCZ-XA-Ddt"/>
                 <outlet property="shareButton" destination="r31-rU-1Pz" id="YVX-cZ-mPp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -37,6 +38,10 @@
                         <constraint firstAttribute="trailing" secondItem="fFh-DE-Z2K" secondAttribute="trailing" id="ZTe-Ca-aPw"/>
                     </constraints>
                 </scrollView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2mQ-Dg-Efm">
+                    <rect key="frame" x="0.0" y="114" width="414" height="656"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ui7-rz-0Ps">
                     <rect key="frame" x="0.0" y="770" width="414" height="126"/>
                     <subviews>
@@ -62,6 +67,8 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2mQ-Dg-Efm" secondAttribute="trailing" id="ADc-im-Fxp"/>
+                <constraint firstItem="2mQ-Dg-Efm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="70" id="BSe-jp-cqI"/>
                 <constraint firstItem="ui7-rz-0Ps" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="F5Y-cB-Q0t"/>
                 <constraint firstItem="ui7-rz-0Ps" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="Obk-jm-2Q1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kEE-p6-0hz" secondAttribute="trailing" id="TUk-Ov-bMj"/>
@@ -69,6 +76,8 @@
                 <constraint firstItem="kEE-p6-0hz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eTY-ha-tW3"/>
                 <constraint firstItem="kEE-p6-0hz" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="f6r-Lt-9Ox"/>
                 <constraint firstItem="ui7-rz-0Ps" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="jY5-oH-u7v"/>
+                <constraint firstItem="2mQ-Dg-Efm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="jmW-4B-Sxk"/>
+                <constraint firstItem="ui7-rz-0Ps" firstAttribute="top" secondItem="2mQ-Dg-Efm" secondAttribute="bottom" id="mAk-tO-3Pu"/>
                 <constraint firstItem="ui7-rz-0Ps" firstAttribute="topMargin" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-84" id="pCN-mt-rTH"/>
                 <constraint firstItem="fFh-DE-Z2K" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="zoy-ry-Sko"/>
             </constraints>

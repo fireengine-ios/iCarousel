@@ -8,13 +8,9 @@
 
 import UIKit
 
-protocol PrivateShareSuggestionsViewDelegate: class {
-    func selectContact(displayName: String, username: String)
-}
-
 final class PrivateShareSuggestionsView: UIView, NibInit {
     
-    static func with(contacts: [SuggestedContact], delegate: PrivateShareSuggestionsViewDelegate?) -> PrivateShareSuggestionsView {
+    static func with(contacts: [SuggestedContact], delegate: PrivateShareSelectSuggestionsDelegate?) -> PrivateShareSuggestionsView {
         let view = PrivateShareSuggestionsView.initFromNib()
         view.delegate = delegate
         view.setup(with: contacts)
@@ -31,7 +27,7 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
     
     @IBOutlet private weak var suggestionsView: UIStackView!
     
-    private weak var delegate: PrivateShareSuggestionsViewDelegate?
+    private weak var delegate: PrivateShareSelectSuggestionsDelegate?
     
     private func setup(with contacts: [SuggestedContact]) {
         guard !contacts.isEmpty else {
@@ -67,7 +63,7 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
 }
 
 extension PrivateShareSuggestionsView: PrivateShareContactSuggestionViewDelegate {
-    func selectContact(displayName: String, username: String) {
-        delegate?.selectContact(displayName: displayName, username: username)
+    func selectContact(info: ContactInfo) {
+        delegate?.didSelect(contactInfo: info)
     }
 }

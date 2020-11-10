@@ -10,6 +10,7 @@ import UIKit
 
 protocol PrivateShareSelectPeopleViewDelegate: class {
     func startEditing(text: String)
+    func searchTextDidChange(text: String)
     func addShareContact(_ contact: PrivateShareContact)
     func onUserRoleTapped(contact: PrivateShareContact, sender: Any)
 }
@@ -68,10 +69,10 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     
     //MARK: - Public methods
     
-    func setContact(displayName: String, username: String) {
-        self.displayName = displayName
-        textField.text = username
-        validate(text: username)
+    func setContact(info: ContactInfo) {
+        displayName = info.name
+        textField.text = info.value
+        validate(text: info.value)
     }
     
     //MARK: - Private methods
@@ -79,7 +80,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     @IBAction private func onAddTapped(_ sender: UIButton) {
         let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", role: role)
         delegate?.addShareContact(shareContact)
-        setContact(displayName: "", username: "")
+        setContact(info: ContactInfo(name: "", value: ""))
     }
     
     @IBAction private func onUserRoleTapped(_ sender: UIButton) {
@@ -89,6 +90,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
         validate(text: textField.text ?? "")
+        delegate?.searchTextDidChange(text: textField.text ?? "")
     }
     
     private func validate(text: String) {
