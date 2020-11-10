@@ -21,7 +21,6 @@ final class PrivateShareLocalContactCell: UITableViewCell {
     private var contactInfoView: PrivateShareContactSuggestionView?
     private var currentContact: SuggestedContact?
 
-    
     //MARK - Public
     
     func update(with contact: SuggestedContact) {
@@ -36,7 +35,6 @@ final class PrivateShareLocalContactCell: UITableViewCell {
     //MARK - Private
     
     private func setupInfoView() {
-        
         contactInfoView?.removeFromSuperview()
         
         guard let contact = currentContact else {

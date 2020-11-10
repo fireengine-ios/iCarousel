@@ -50,7 +50,6 @@ final class PrivateShareLocalSuggestionsViewController: UIViewController, NibIni
     private let localContactsService = ContactsSuggestionServiceImpl()
     private var currentSuggestions = [SuggestedContact]()
     
-    
     //MARK: - Override
     
     override func viewDidLoad() {
@@ -69,7 +68,6 @@ final class PrivateShareLocalSuggestionsViewController: UIViewController, NibIni
     }
     
     //MARK: - Private
-    
     
     private func getContact(with searchString: String) -> [SuggestedContact] {
         return localContactsService.suggestContacts(for: searchString)
