@@ -1819,3 +1819,4 @@
 "private_share_start_page_cancel_button" = "Cancel";
 "private_share_start_page_role_1" = "Editor";
 "private_share_start_page_role_2" = "Viewer";
+"private_share_msisdn_format" = "msisdn format is invalid";

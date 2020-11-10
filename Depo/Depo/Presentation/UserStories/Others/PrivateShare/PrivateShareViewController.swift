@@ -144,6 +144,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     
     func startEditing(text: String) {
+        
         if text.count < minSearchLength {
             getSuggestions()
         } else {
@@ -152,11 +153,22 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     }
     
     func addShareContact(string: String) {
-        //TODO: add to Share with section
+        if isValidContact(text: string) {
+            //TODO: add to Share with section
+        } else {
+            UIApplication.showErrorAlert(message: TextConstants.privateShareValidationFailPopUpText)
+        }
     }
     
     func onUserRoleTapped() {
         //TODO: open user roles controller
+    }
+    
+    private func isValidContact(text: String) -> Bool {
+        if Validator.isValid(email: text) || Validator.isValid(phone: text) {
+            return true
+        }
+        return false
     }
 }
 
