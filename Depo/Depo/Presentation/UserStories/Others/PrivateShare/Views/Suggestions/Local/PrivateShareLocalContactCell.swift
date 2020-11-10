@@ -54,7 +54,7 @@ final class PrivateShareLocalContactCell: UITableViewCell {
 
 
 extension PrivateShareLocalContactCell: PrivateShareContactSuggestionViewDelegate {
-    func selectContact(string: String) {
-        delegate?.didSelect(contactInfo: ContactInfo(name: currentContact?.displayName ?? "", value: string))
+    func selectContact(info: ContactInfo) {
+        delegate?.didSelect(contactInfo: info)
     }
 }

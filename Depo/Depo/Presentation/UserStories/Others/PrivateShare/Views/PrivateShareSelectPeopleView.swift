@@ -10,8 +10,9 @@ import UIKit
 
 protocol PrivateShareSelectPeopleViewDelegate: class {
     func startEditing(text: String)
-    func addShareContact(string: String)
-    func onUserRoleTapped()
+    func searchTextDidChange(text: String)
+    func addShareContact(_ contact: PrivateShareContact)
+    func onUserRoleTapped(contact: PrivateShareContact, sender: Any)
 }
 
 final class PrivateShareSelectPeopleView: UIView, NibInit {
@@ -37,6 +38,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
             newValue.font = .TurkcellSaturaFont(size: 18)
             newValue.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
             newValue.delegate = self
+            newValue.returnKeyType = .done
         }
     }
     
@@ -59,31 +61,44 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     }
     
     private weak var delegate: PrivateShareSelectPeopleViewDelegate?
+    private var displayName = ""
+    private var role = PrivateShareUserRole.editor {
+        didSet {
+            userRoleButton.setTitle(role.title, for: .normal)
+        }
+    }
     
     //MARK: - Public methods
     
-    func setText(_ text: String) {
-        textField.text = text
-        changeButtonEnebledIfNeeded(text: text)
+    func setContact(info: ContactInfo) {
+        displayName = info.name
+        textField.text = info.value
+        changeButtonEnabledIfNeeded(text: info.value)
+    }
+    
+    func clear() {
+        setContact(info: ContactInfo(name: "", value: ""))
+        role = .editor
     }
     
     //MARK: - Private methods
     
     @IBAction private func onAddTapped(_ sender: UIButton) {
-        delegate?.addShareContact(string: textField.text ?? "")
-        setText("")
+        let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", role: role)
+        delegate?.addShareContact(shareContact)
     }
     
     @IBAction private func onUserRoleTapped(_ sender: UIButton) {
-        delegate?.onUserRoleTapped()
+        let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", role: role)
+        delegate?.onUserRoleTapped(contact: shareContact, sender: self)
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        delegate?.startEditing(text: textField.text ?? "")
-        changeButtonEnebledIfNeeded(text: textField.text ?? "")
+        delegate?.searchTextDidChange(text: textField.text ?? "")
+        changeButtonEnabledIfNeeded(text: textField.text ?? "")
     }
     
-    private func changeButtonEnebledIfNeeded(text: String) {
+    private func changeButtonEnabledIfNeeded(text: String) {
         let isValid = text.count > 0
         addButton.isEnabled = isValid
         userRoleButton.isHidden = !isValid
@@ -98,13 +113,18 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
         delegate?.startEditing(text: textField.text ?? "")
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         guard string != " " else {
             return false
         }
         
-        if string == "0" {
+        if string == "0", textField.text?.isEmpty == true {
             return false
         }
         
@@ -119,5 +139,13 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
         
         return true
     }
+}
+
+//MARK: - PrivateShareUserRoleViewControllerDelegate
+
+extension PrivateShareSelectPeopleView: PrivateShareUserRoleViewControllerDelegate {
     
+    func contactRoleDidChange(_ contact: PrivateShareContact) {
+        role = contact.role
+    }
 }

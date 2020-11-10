@@ -4,22 +4,68 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PrivateShareAddMessageView" customModule="Billo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="81"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oe6-Aa-Uls">
+                    <rect key="frame" x="16" y="16" width="382" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="rgG-yf-RZ3"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4OC-a4-HJX" customClass="PlaceholderTextView" customModule="Billo" customModuleProvider="target">
+                    <rect key="frame" x="16" y="45" width="382" height="20"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="MJl-OS-JbM"/>
+                    </constraints>
+                    <color key="textColor" systemColor="labelColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YNt-pp-hqy">
+                    <rect key="frame" x="16" y="80" width="382" height="1"/>
+                    <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="0.29726012323943668" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="qnc-eP-8Qb"/>
+                    </constraints>
+                </view>
+            </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-            <point key="canvasLocation" x="139" y="98"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="YNt-pp-hqy" secondAttribute="trailing" constant="16" id="0q8-ue-o5f"/>
+                <constraint firstAttribute="trailing" secondItem="4OC-a4-HJX" secondAttribute="trailing" constant="16" id="4Im-Vk-ITU"/>
+                <constraint firstItem="YNt-pp-hqy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Bxv-cY-wur"/>
+                <constraint firstAttribute="bottom" secondItem="4OC-a4-HJX" secondAttribute="bottom" constant="16" id="Ecw-hQ-QEW"/>
+                <constraint firstAttribute="trailing" secondItem="oe6-Aa-Uls" secondAttribute="trailing" constant="16" id="IQs-6a-sfR"/>
+                <constraint firstItem="oe6-Aa-Uls" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="krY-kJ-h4Q"/>
+                <constraint firstAttribute="bottom" secondItem="YNt-pp-hqy" secondAttribute="bottom" id="u5V-kq-DgQ"/>
+                <constraint firstItem="oe6-Aa-Uls" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="uy1-5i-BBK"/>
+                <constraint firstItem="4OC-a4-HJX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="v5c-kC-n89"/>
+                <constraint firstItem="4OC-a4-HJX" firstAttribute="top" secondItem="oe6-Aa-Uls" secondAttribute="bottom" constant="14" id="vl1-nK-N8Y"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="textView" destination="4OC-a4-HJX" id="V10-uE-g7X"/>
+                <outlet property="titleLabel" destination="oe6-Aa-Uls" id="oPD-aU-uSh"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="226.00446428571428"/>
         </view>
     </objects>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

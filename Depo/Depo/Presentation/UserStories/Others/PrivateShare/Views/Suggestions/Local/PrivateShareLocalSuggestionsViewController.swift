@@ -15,20 +15,26 @@ struct ContactInfo {
 }
 
 
-protocol PrivateShareLocalSuggestionsViewControllerDelegate: class {
+protocol PrivateShareSelectSuggestionsDelegate: class {
     func didSelect(contactInfo: ContactInfo)
 }
 
 
 protocol PrivateShareSuggestionsViewController {
-    var delegate: PrivateShareLocalSuggestionsViewControllerDelegate? { get set }
-    
+    var delegate: PrivateShareSelectSuggestionsDelegate? { get set }
+    var contentView: UIView { get }
     func update(with searchString: String)
 }
 
 
 final class PrivateShareLocalSuggestionsViewController: UIViewController, NibInit, PrivateShareSuggestionsViewController {
 
+    static func with(delegate: PrivateShareSelectSuggestionsDelegate?) -> PrivateShareSuggestionsViewController {
+        let controller = PrivateShareLocalSuggestionsViewController.initFromNib()
+        controller.delegate = delegate
+        return controller
+    }
+    
     @IBOutlet private weak var tableView: UITableView! {
         willSet {
             newValue.register(nibCell: PrivateShareLocalContactCell.self)
@@ -45,7 +51,11 @@ final class PrivateShareLocalSuggestionsViewController: UIViewController, NibIni
         }
     }
     
-    weak var delegate: PrivateShareLocalSuggestionsViewControllerDelegate?
+    var contentView: UIView {
+        return view
+    }
+    
+    weak var delegate: PrivateShareSelectSuggestionsDelegate?
 
     private let localContactsService = ContactsSuggestionServiceImpl()
     private var currentSuggestions = [SuggestedContact]()
@@ -53,8 +63,12 @@ final class PrivateShareLocalSuggestionsViewController: UIViewController, NibIni
     //MARK: - Public
     
     func update(with searchString: String) {
-        currentSuggestions = localContactsService.suggestContacts(for: searchString)
-        
+        if searchString.isEmpty {
+            currentSuggestions = []
+        } else {
+            currentSuggestions = localContactsService.suggestContacts(for: searchString)
+        }
+
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
