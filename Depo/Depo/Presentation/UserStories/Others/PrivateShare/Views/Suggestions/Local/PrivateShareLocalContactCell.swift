@@ -46,11 +46,7 @@ final class PrivateShareLocalContactCell: UITableViewCell {
         if let contactInfoView = contactInfoView {
             contentView.addSubview(contactInfoView)
             contactInfoView.translatesAutoresizingMaskIntoConstraints = false
-            
-            contactInfoView.topAnchor.constraint(equalTo: contentView.topAnchor).activate()
-            contactInfoView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).activate()
-            contactInfoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).activate()
-            contactInfoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).activate()
+            contactInfoView.pinToSuperviewEdges()
         }
         layoutIfNeeded()
     }

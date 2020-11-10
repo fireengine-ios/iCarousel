@@ -49,13 +49,6 @@ final class PrivateShareLocalSuggestionsViewController: UIViewController, NibIni
 
     private let localContactsService = ContactsSuggestionServiceImpl()
     private var currentSuggestions = [SuggestedContact]()
-    
-    //MARK: - Override
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        //
-    }
 
     //MARK: - Public
     
