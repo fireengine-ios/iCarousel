@@ -15,6 +15,7 @@
                 <outlet property="contentView" destination="fFh-DE-Z2K" id="zf9-Ht-Ri7"/>
                 <outlet property="scrollView" destination="kEE-p6-0hz" id="O1O-9e-Tih"/>
                 <outlet property="searchSuggestionsContainer" destination="2mQ-Dg-Efm" id="XCZ-XA-Ddt"/>
+                <outlet property="searchSuggestionsContainerBottomOffset" destination="mAk-tO-3Pu" id="ugQ-aJ-E2K"/>
                 <outlet property="shareButton" destination="r31-rU-1Pz" id="YVX-cZ-mPp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

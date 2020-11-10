@@ -38,6 +38,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
             newValue.font = .TurkcellSaturaFont(size: 18)
             newValue.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
             newValue.delegate = self
+            newValue.returnKeyType = .done
         }
     }
     
@@ -80,7 +81,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     @IBAction private func onAddTapped(_ sender: UIButton) {
         let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", role: role)
         delegate?.addShareContact(shareContact)
-        setContact(info: ContactInfo(name: "", value: ""))
+        reset()
     }
     
     @IBAction private func onUserRoleTapped(_ sender: UIButton) {
@@ -98,6 +99,11 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
         addButton.isEnabled = isValid
         userRoleButton.isHidden = !isValid
     }
+    
+    private func reset() {
+        setContact(info: ContactInfo(name: "", value: ""))
+        role = .editor
+    }
 }
 
 //MARK: - UITextFieldDelegate
@@ -106,6 +112,11 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         delegate?.startEditing(text: textField.text ?? "")
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 

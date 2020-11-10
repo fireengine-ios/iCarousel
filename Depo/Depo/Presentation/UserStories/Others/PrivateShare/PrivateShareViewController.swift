@@ -24,6 +24,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     
     @IBOutlet private weak var contentView: UIStackView!
     @IBOutlet private weak var searchSuggestionsContainer: UIView!
+    @IBOutlet private weak var searchSuggestionsContainerBottomOffset: NSLayoutConstraint!
     
     @IBOutlet private weak var bottomView: UIView! {
         willSet {
@@ -65,6 +66,12 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
     private lazy var router = RouterVC()
+    
+    override var keyboardHeight: CGFloat {
+        didSet {
+            searchSuggestionsContainerBottomOffset.constant = max(0, keyboardHeight - bottomView.frame.height)
+        }
+    }
     
     //MARK: - View lifecycle
     
@@ -182,8 +189,10 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         }
         
         view.endEditing(true)
-        searchSuggestionController.update(with: "")
-        searchSuggestionsContainer.isHidden = true
+        if !searchSuggestionsContainer.isHidden {
+            searchSuggestionController.update(with: "")
+            searchSuggestionsContainer.isHidden = true
+        }
     }
 
     //MARK: - Actions
@@ -236,6 +245,7 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
             showShareViews()
         }
         endSearchContacts()
+        updateShareButtonIfNeeded()
     }
 }
 
@@ -261,6 +271,5 @@ extension PrivateShareViewController: PrivateShareSelectSuggestionsDelegate {
     func didSelect(contactInfo: ContactInfo) {
         selectPeopleView.setContact(info: contactInfo)
         endSearchContacts()
-        updateShareButtonIfNeeded()
     }
 }
