@@ -342,27 +342,9 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     func findCoutryPhoneCode(plus: Bool) {
-        let telephonyService = CoreTelephonyService()
-        var phoneCode = telephonyService.callingCountryCode()
-        
-        let names = ["iPad Pro 12.9 Inch 2. Generation", "iPad Pro 10.5 Inch", "iPad Pro 9.7 Inch"]
-        if phoneCode == "" || names.contains(UIDevice.current.modelName) {
-            phoneCode = telephonyService.countryCodeByLang()
-        }
-        
-        phoneCode.insert("(", at: phoneCode.index(after: phoneCode.startIndex))
-        phoneCode.insert(")", at: phoneCode.endIndex)
+        let phoneCode = CoreTelephonyService().getColumnedCountryCode()
         output?.foundCoutryPhoneCode(code: phoneCode, plus: plus)
     }
-    
-//    func approveEULA(eulaId: Int, etkAuth: Bool, globalPermAuth: Bool) {
-//        eulaService.eulaApprove(eulaId: eulaId, etkAuth: etkAuth, globalPermAuth: globalPermAuth, success: { [weak self] successResponse in
-//            //TODO:
-//        }) { [weak self] failResponse in {
-//            //TODO:
-//            }
-//        }
-//    }
     
     func checkEULA() {
         eulaService.eulaCheck(success: { [weak self] successResponse in

@@ -94,7 +94,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     private func getRemoteSuggestions() {
         //load remote suggestion once
         if !remoteSuggestions.isEmpty {
-            showApiSuggestions(contacts: remoteSuggestions, hasAccess: true)
+            showRemoteSuggestions(hasAccess: true)
             return
         }
         
@@ -104,17 +104,16 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         group.enter()
         
         var hasAccess = false
-        var apiContacts = [SuggestedApiContact]()
         
         localContactsService.fetchAllContacts { isAuthorized in
             hasAccess = isAuthorized
             group.leave()
         }
             
-        shareApiService.getSuggestions { result in
+        shareApiService.getSuggestions { [weak self] result in
             switch result {
             case .success(let contacts):
-                apiContacts = contacts
+                self?.remoteSuggestions = contacts
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
             }
@@ -122,17 +121,16 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         }
         
         group.notify(queue: .main) { [weak self] in
-            self?.showApiSuggestions(contacts: apiContacts, hasAccess: hasAccess)
+            self?.showRemoteSuggestions(hasAccess: hasAccess)
         }
     }
     
-    private func showApiSuggestions(contacts: [SuggestedApiContact], hasAccess: Bool) {
-        guard !contacts.isEmpty else {
+    private func showRemoteSuggestions(hasAccess: Bool) {
+        guard !remoteSuggestions.isEmpty else {
             return
         }
         
-        remoteSuggestions = contacts
-        let suggestedContacts = contacts.map { contact -> SuggestedContact in
+        let suggestedContacts = remoteSuggestions.map { contact -> SuggestedContact in
             if hasAccess {
                 let names = self.localContactsService.getContactName(for: contact.username ?? "", email: contact.email ?? "")
                 return SuggestedContact(with: contact, names: names)
@@ -240,6 +238,12 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     }
     
     func addShareContact(_ contact: PrivateShareContact) {
+        guard isValidContact(text: contact.username) else {
+            UIApplication.showErrorAlert(message: TextConstants.privateShareValidationFailPopUpText)
+            return
+        }
+        
+        selectPeopleView.clear()
         shareWithView.add(contact: contact)
         if shareWithView.superview == nil {
             showShareViews()
@@ -261,6 +265,13 @@ extension PrivateShareViewController: PrivateShareWithViewDelegate {
     func onUserRoleTapped(contact: PrivateShareContact, sender: Any) {
         let userRoleController = PrivateShareUserRoleViewController.with(contact: contact, delegate: sender as? PrivateShareUserRoleViewControllerDelegate)
         present(userRoleController, animated: true)
+    }
+    
+    private func isValidContact(text: String) -> Bool {
+        if Validator.isValid(email: text) || Validator.isValid(phone: text) {
+            return true
+        }
+        return false
     }
 }
 

@@ -73,7 +73,12 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     func setContact(info: ContactInfo) {
         displayName = info.name
         textField.text = info.value
-        validate(text: info.value)
+        changeButtonEnabledIfNeeded(text: info.value)
+    }
+    
+    func clear() {
+        setContact(info: ContactInfo(name: "", value: ""))
+        role = .editor
     }
     
     //MARK: - Private methods
@@ -81,7 +86,6 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     @IBAction private func onAddTapped(_ sender: UIButton) {
         let shareContact = PrivateShareContact(displayName: displayName, username: textField.text ?? "", role: role)
         delegate?.addShareContact(shareContact)
-        reset()
     }
     
     @IBAction private func onUserRoleTapped(_ sender: UIButton) {
@@ -90,19 +94,14 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        validate(text: textField.text ?? "")
         delegate?.searchTextDidChange(text: textField.text ?? "")
+        changeButtonEnabledIfNeeded(text: textField.text ?? "")
     }
     
-    private func validate(text: String) {
-        let isValid = true //TODO: need implement logic
+    private func changeButtonEnabledIfNeeded(text: String) {
+        let isValid = text.count > 0
         addButton.isEnabled = isValid
         userRoleButton.isHidden = !isValid
-    }
-    
-    private func reset() {
-        setContact(info: ContactInfo(name: "", value: ""))
-        role = .editor
     }
 }
 
@@ -116,6 +115,28 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        guard string != " " else {
+            return false
+        }
+        
+        if string == "0", textField.text?.isEmpty == true {
+            return false
+        }
+        
+        if let text = textField.text, text.count == 0,
+           (string == "+" || string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil)
+        {
+            let code = CoreTelephonyService().getCountryCode()
+            let countryCode = code.isEmpty ? "+" : code
+            textField.text = countryCode
+            return string == "+" ? false : true
+        }
+        
         return true
     }
 }
