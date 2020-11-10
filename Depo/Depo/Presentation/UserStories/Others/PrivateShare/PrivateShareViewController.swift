@@ -131,7 +131,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func updateShareButtonIfNeeded() {
-        let needEnable = true //TODO: need to implement check logic
+        let needEnable = !shareWithView.contacts.isEmpty
         shareButton.isEnabled = needEnable
         shareButton.backgroundColor = needEnable ? ColorConstants.navy : .lightGray
     }
@@ -153,6 +153,18 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
 
     @IBAction private func onShareTapped(_ sender: Any) {
+        let type: PrivateShareType
+        if items.contains(where: { $0.isFolder == true }) {
+            type = .folder
+        } else {
+            type = .file
+        }
+        
+        var shareObject = PrivateShareObject(items: items.compactMap { $0.uuid },
+                                             message: messageView.message,
+                                             invitees: shareWithView.contacts,
+                                             type: type,
+                                             duration: durationView.duration)
         //TODO: continue sharing
     }
 }

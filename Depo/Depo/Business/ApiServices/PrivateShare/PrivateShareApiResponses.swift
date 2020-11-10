@@ -35,10 +35,10 @@ struct SuggestedApiContact: Codable {
 
 struct PrivateShareObject {
     let items: [String]
-    var message: String?
+    let message: String?
     var invitees: [PrivateShareContact]
     let type: PrivateShareType
-    var duration: PrivateShareDuration
+    let duration: PrivateShareDuration
 }
 
 struct PrivateShareContact: Equatable {
