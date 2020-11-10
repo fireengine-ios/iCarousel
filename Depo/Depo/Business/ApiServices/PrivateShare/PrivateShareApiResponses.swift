@@ -32,3 +32,34 @@ struct SuggestedApiContact: Codable {
         return contacts
     }
 }
+
+
+struct SharedFileInfo: Codable {
+    let createdDate: Date?
+    let lastModifiedDate: Date?
+    let id: Int64?
+    let hash: String?
+    let name: String?
+    let uuid: String?
+    let bytes: Int64?
+    let folder: Bool?
+    let childCount: Int64?
+    let status: String? // enum
+    let uploaderDeviceType: String? //enum
+    let ugglaId: String?
+    let content_type: String?
+    //        "metadata": {},
+    let album: [String]?
+    //        "location": {},
+    let permissions: [SharedItemPermission]?
+    let sharedBy: [SuggestedApiContact]?
+}
+
+//struct SharedFileInfoMetadata: Codable {
+//
+//}
+
+struct SharedItemPermission: Codable {
+    let granted: [String]?
+    let bitmask: Int64?
+}

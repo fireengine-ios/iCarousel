@@ -28,4 +28,24 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .task
     }
     
+    @discardableResult
+    func getSharedByMe(handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask? {
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.PrivateShare.sharedByMe)
+            .customValidate()
+            .responseArray(handler)
+            .task
+    }
+    
+    @discardableResult
+    func getSharedWithMe(handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask? {
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.PrivateShare.sharedWithMe)
+            .customValidate()
+            .responseArray(handler)
+            .task
+    }
+    
 }
