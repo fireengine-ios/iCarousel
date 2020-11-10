@@ -87,7 +87,7 @@ struct LocalContactsStorage {
             }
 
             let msisdns = contact.phoneNumbers.compactMap { $0.value }
-            if msisdns.first(where: { $0.stringValue.contains(stringToSearch) }) != nil {
+            if msisdns.first(where: { $0.stringValue.digits.contains(stringToSearch.digits) }) != nil {
                 result.append(SuggestedContact(with: contact, source: .phone))
                 return
             }
