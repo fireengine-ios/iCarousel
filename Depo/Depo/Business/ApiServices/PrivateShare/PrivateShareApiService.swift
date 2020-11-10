@@ -16,10 +16,6 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func getSuggestions(handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask? {
-        //TODO: remove when API will working
-        handler(.success(SuggestedApiContact.testContacts()))
-        return nil
-        
         return SessionManager
             .customDefault
             .request(RouteRequests.PrivateShare.suggestions)
