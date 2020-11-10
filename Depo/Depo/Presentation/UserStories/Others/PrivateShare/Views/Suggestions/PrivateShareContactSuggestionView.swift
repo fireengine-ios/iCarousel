@@ -43,6 +43,7 @@ final class PrivateShareContactSuggestionView: UIView, NibInit {
         items.forEach { item in
             itemsStackView.addArrangedSubview(PrivateShareSuggestionItemView.with(text: item, delegate: self))
         }
+        layoutIfNeeded()
     }
 }
 

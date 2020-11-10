@@ -17,7 +17,7 @@ enum LocalContactSuggestionSource {
 }
 
 
-struct SuggestedContact {
+struct SuggestedContact: Equatable {
     let source: LocalContactSuggestionSource
     let name: String
     let familyName: String
