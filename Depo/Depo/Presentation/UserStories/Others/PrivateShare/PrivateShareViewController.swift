@@ -158,9 +158,8 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func showShareViews() {
-        contentView.insertArrangedSubview(shareWithView, at: 1)
-        contentView.insertArrangedSubview(messageView, at: 2)
-        contentView.insertArrangedSubview(durationView, at: 3)
+        let orderedViews = [shareWithView, messageView, durationView]
+        orderedViews.forEach { contentView.addArrangedSubview($0) }
     }
     
     private func hideShareViews() {

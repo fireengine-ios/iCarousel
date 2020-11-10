@@ -11,16 +11,6 @@ import UIKit
 @IBDesignable
 open class PlaceholderTextView: UITextView {
     
-    private struct Constants {
-        static let defaultiOSPlaceholderColor: UIColor = {
-            if #available(iOS 13.0, *) {
-                return .systemGray3
-            }
-            
-            return UIColor(red: 0.0, green: 0.0, blue: 0.0980392, alpha: 0.22)
-        }()
-    }
-    
     public let placeholderLabel: UILabel = UILabel()
     
     private var placeholderLabelConstraints = [NSLayoutConstraint]()
@@ -31,7 +21,7 @@ open class PlaceholderTextView: UITextView {
         }
     }
     
-    @IBInspectable open var placeholderColor: UIColor = PlaceholderTextView.Constants.defaultiOSPlaceholderColor {
+    @IBInspectable open var placeholderColor = UIColor.black.withAlphaComponent(0.3) {
         didSet {
             placeholderLabel.textColor = placeholderColor
         }
@@ -145,13 +135,4 @@ open class PlaceholderTextView: UITextView {
         super.layoutSubviews()
         placeholderLabel.preferredMaxLayoutWidth = textContainer.size.width - textContainer.lineFragmentPadding * 2.0
     }
-    
-    deinit {
-        let notificationName = NSNotification.Name.UITextViewTextDidChange
-        
-        NotificationCenter.default.removeObserver(self,
-                                                  name: notificationName,
-                                                  object: nil)
-    }
-    
 }
