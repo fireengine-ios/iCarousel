@@ -19425,6 +19425,7 @@
 		9808B37F2553DEE9002B0032 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B54501E9255A82FD004DBD41 /* Shared */,
 				9808B40A25540DF4002B0032 /* Suggestions */,
 				9808B3962553EE4D002B0032 /* PrivateShareSelectPeopleView.swift */,
 				9808B3B32553EE59002B0032 /* PrivateShareSelectPeopleView.xib */,
@@ -20692,6 +20693,13 @@
 				B5390D81216605F600A02002 /* CellImageManager.swift */,
 			);
 			path = QuickScrollImageLoader;
+			sourceTree = "<group>";
+		};
+		B54501E9255A82FD004DBD41 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		B549AA5124CF037900D39C44 /* ThirdParty */ = {
