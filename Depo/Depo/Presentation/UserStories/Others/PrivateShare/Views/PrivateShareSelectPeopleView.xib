@@ -24,9 +24,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fXb-f8-n9k">
-                    <rect key="frame" x="16" y="48" width="348" height="20"/>
+                    <rect key="frame" x="16" y="42" width="348" height="32"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="rs5-gE-PrV"/>
+                        <constraint firstAttribute="height" constant="32" id="rs5-gE-PrV"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
@@ -66,10 +66,10 @@
                 <constraint firstAttribute="bottom" secondItem="isl-T6-jQX" secondAttribute="bottom" constant="11" id="5Mq-lV-BPp"/>
                 <constraint firstItem="fXb-f8-n9k" firstAttribute="leading" secondItem="BYw-yg-kxF" secondAttribute="leading" id="5XQ-co-N47"/>
                 <constraint firstAttribute="trailing" secondItem="BYw-yg-kxF" secondAttribute="trailing" constant="16" id="CWs-Az-LXQ"/>
-                <constraint firstItem="isl-T6-jQX" firstAttribute="top" secondItem="fXb-f8-n9k" secondAttribute="bottom" constant="6" id="JJb-sv-SlZ"/>
+                <constraint firstItem="isl-T6-jQX" firstAttribute="top" secondItem="fXb-f8-n9k" secondAttribute="bottom" id="JJb-sv-SlZ"/>
                 <constraint firstAttribute="trailing" secondItem="ZIB-f0-CdR" secondAttribute="trailing" constant="6" id="KHd-SG-3i3"/>
                 <constraint firstItem="isl-T6-jQX" firstAttribute="leading" secondItem="BYw-yg-kxF" secondAttribute="leading" id="Rul-FJ-Cdj"/>
-                <constraint firstItem="fXb-f8-n9k" firstAttribute="top" secondItem="BYw-yg-kxF" secondAttribute="bottom" constant="14" id="Y2P-SP-cZz"/>
+                <constraint firstItem="fXb-f8-n9k" firstAttribute="top" secondItem="BYw-yg-kxF" secondAttribute="bottom" constant="8" id="Y2P-SP-cZz"/>
                 <constraint firstItem="ZIB-f0-CdR" firstAttribute="centerY" secondItem="fXb-f8-n9k" secondAttribute="centerY" id="om9-qH-L93"/>
                 <constraint firstItem="LXP-cJ-nFo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oq1-Nd-HS9"/>
                 <constraint firstAttribute="bottom" secondItem="LXP-cJ-nFo" secondAttribute="bottom" id="p6D-HX-gvx"/>

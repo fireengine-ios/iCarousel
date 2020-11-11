@@ -94,6 +94,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     }
     
     @objc private func textFieldDidChange(_ textField: UITextField) {
+        displayName = ""
         delegate?.searchTextDidChange(text: textField.text ?? "")
         changeButtonEnabledIfNeeded(text: textField.text ?? "")
     }

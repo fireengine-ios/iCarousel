@@ -71,21 +71,15 @@ final class PrivateShareWithView: UIView, NibInit {
 
 extension PrivateShareWithView: PrivateShareWithContactViewDelegate {
     
-    func onDeleteTapped(with username: String) {
-        if let index = contacts.firstIndex(where: { $0.username == username }) {
-            contacts.remove(at: index)
-        }
+    func onDeleteTapped(contact: PrivateShareContact) {
+        contacts.remove(contact)
         
         if contacts.isEmpty {
             delegate?.shareListDidEmpty()
         }
     }
     
-    func onUserRoleTapped(username: String) {
-        guard let contact = contacts.first(where: { $0.username == username }) else {
-            return
-        }
-        
+    func onUserRoleTapped(contact: PrivateShareContact) {
         delegate?.onUserRoleTapped(contact: contact, sender: self)
     }
 }
