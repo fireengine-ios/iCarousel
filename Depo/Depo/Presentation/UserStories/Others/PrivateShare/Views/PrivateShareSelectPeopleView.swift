@@ -125,17 +125,14 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
             return false
         }
         
-        if string == "0", textField.text?.isEmpty == true {
-            return false
-        }
-        
         if let text = textField.text, text.count == 0,
-           (string == "+" || string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil)
+           (string == "+" || string == "0" || string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil)
         {
             let code = CoreTelephonyService().getCountryCode()
             let countryCode = code.isEmpty ? "+" : code
+            let isReplacableString = string == "+" || string == "0"
             textField.text = countryCode
-            return string == "+" ? false : true
+            return isReplacableString ? false : true
         }
         
         return true
