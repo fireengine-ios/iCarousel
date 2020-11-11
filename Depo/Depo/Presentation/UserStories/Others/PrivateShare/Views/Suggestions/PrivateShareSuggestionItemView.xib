@@ -41,7 +41,7 @@
                 <constraint firstItem="fih-oI-16i" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MsT-hN-zgd"/>
                 <constraint firstItem="fih-oI-16i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="PBB-Z9-BY0"/>
                 <constraint firstItem="d7j-DG-Q51" firstAttribute="leading" secondItem="fih-oI-16i" secondAttribute="trailing" id="aXq-U8-I8a"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="d7j-DG-Q51" secondAttribute="bottom" id="bdH-Pi-pfU"/>
+                <constraint firstAttribute="bottom" secondItem="d7j-DG-Q51" secondAttribute="bottom" id="bdH-Pi-pfU"/>
                 <constraint firstItem="d7j-DG-Q51" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qXD-HQ-zyV"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

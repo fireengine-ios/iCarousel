@@ -8,13 +8,9 @@
 
 import UIKit
 
-protocol PrivateShareSuggestionsViewDelegate: class {
-    func selectContact(string: String)
-}
-
 final class PrivateShareSuggestionsView: UIView, NibInit {
     
-    static func with(contacts: [SuggestedContact], delegate: PrivateShareSuggestionsViewDelegate?) -> PrivateShareSuggestionsView {
+    static func with(contacts: [SuggestedContact], delegate: PrivateShareSelectSuggestionsDelegate?) -> PrivateShareSuggestionsView {
         let view = PrivateShareSuggestionsView.initFromNib()
         view.delegate = delegate
         view.setup(with: contacts)
@@ -31,7 +27,7 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
     
     @IBOutlet private weak var suggestionsView: UIStackView!
     
-    private weak var delegate: PrivateShareSuggestionsViewDelegate?
+    private weak var delegate: PrivateShareSelectSuggestionsDelegate?
     
     private func setup(with contacts: [SuggestedContact]) {
         guard !contacts.isEmpty else {
@@ -42,11 +38,9 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
             let view = PrivateShareContactSuggestionView.with(contact: contact, delegate: self)
             suggestionsView.addArrangedSubview(view)
             
-            if index != contacts.count - 1 {
-                let separator = makeSeparator()
-                suggestionsView.addArrangedSubview(separator)
-                separator.heightAnchor.constraint(equalToConstant: 1).activate()
-            }
+            let separator = makeSeparator()
+            suggestionsView.addArrangedSubview(separator)
+            separator.heightAnchor.constraint(equalToConstant: 1).activate()
         }
     }
     
@@ -67,7 +61,7 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
 }
 
 extension PrivateShareSuggestionsView: PrivateShareContactSuggestionViewDelegate {
-    func selectContact(string: String) {
-        delegate?.selectContact(string: string)
+    func selectContact(info: ContactInfo) {
+        delegate?.didSelect(contactInfo: info)
     }
 }

@@ -1822,3 +1822,8 @@
 "private_share_details_page_name" = "Shared Items";
 "private_share_shared_by_me_tab" = "Shared by me";
 "private_share_shared_with_me_tab" = "Shared with me";
+
+"private_share_role_selection_page_name" = "Access";
+"private_share_role_selection_role_1" = "Can edit";
+"private_share_role_selection_role_2" = "Can view";
+"private_share_msisdn_format" = "msisdn format is invalid";

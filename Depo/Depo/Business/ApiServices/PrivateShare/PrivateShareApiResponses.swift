@@ -70,3 +70,75 @@ struct SharedItemPermission: Codable {
     let granted: [String]?
     let bitmask: Int64?
 }
+
+struct PrivateShareObject {
+    let items: [String]
+    let message: String?
+    var invitees: [PrivateShareContact]
+    let type: PrivateShareItemType
+    let duration: PrivateShareDuration
+}
+
+struct PrivateShareContact: Equatable {
+    let displayName: String
+    let username: String
+    var role: PrivateShareUserRole
+    
+    static func == (lhs: PrivateShareContact, rhs: PrivateShareContact) -> Bool {
+        return lhs.username == rhs.username
+    }
+}
+
+enum PrivateShareUserRole: String, CaseIterable {
+    case editor = "EDITOR"
+    case viewer = "VIEWER"
+    
+    var title: String {
+        switch self {
+        case .editor:
+            return TextConstants.privateShareStartPageEditorButton
+        case .viewer:
+            return TextConstants.privateShareStartPageViewerButton
+        }
+    }
+    
+    var selectionTitle: String {
+        switch self {
+        case .editor:
+            return TextConstants.privateShareRoleSelectionEditor
+        case .viewer:
+            return TextConstants.privateShareRoleSelectionViewer
+        }
+    }
+}
+
+enum PrivateShareItemType: String {
+    case file = "FILE"
+    case folder = "FOLDER"
+}
+
+enum PrivateShareDuration: String, CaseIterable {
+    case no = "NO_DURATION"
+    case hour = "ONE_HOUR"
+    case day = "ONE_DAY"
+    case week = "ONE_WEEK"
+    case month = "ONE_MONTH"
+    case year = "ONE_YEAR"
+    
+    var title: String {
+        switch self {
+        case .no:
+            return TextConstants.privateShareStartPageDurationNo
+        case .hour:
+            return TextConstants.privateShareStartPageDurationHour
+        case .day:
+            return TextConstants.privateShareStartPageDurationDay
+        case .week:
+            return TextConstants.privateShareStartPageDurationWeek
+        case .month:
+            return TextConstants.privateShareStartPageDurationMonth
+        case .year:
+            return TextConstants.privateShareStartPageDurationYear
+        }
+    }
+}
