@@ -150,7 +150,23 @@ final class PrivateShareViewController: BaseViewController, NibInit {
             suggestionsView.removeFromSuperview()
         }
         
-        searchSuggestionController.update(with: query)
+        let preparedQuery = prepare(searchQuery: query)
+        searchSuggestionController.update(with: preparedQuery)
+    }
+    
+    //workaround to support search without +9 for turkish msisdn
+    private func prepare(searchQuery: String) -> String {
+        let prefixToCheck = "+90" //Turkey country code
+        let numberOfCharsToSearch = searchQuery.count - prefixToCheck.count + 1
+        
+        guard
+            numberOfCharsToSearch >= minSearchLength,
+            searchQuery.hasPrefix(prefixToCheck)
+        else {
+            return searchQuery
+        }
+        
+        return String(searchQuery.suffix(numberOfCharsToSearch))
     }
     
     private func updateShareButtonIfNeeded() {
