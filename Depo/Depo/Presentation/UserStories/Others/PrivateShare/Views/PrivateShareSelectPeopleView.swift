@@ -132,7 +132,7 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
             let countryCode = code.isEmpty ? "+" : code
             let isReplacableString = string == "+" || string == "0"
             textField.text = countryCode
-            return isReplacableString ? false : true
+            return !isReplacableString
         }
         
         return true
