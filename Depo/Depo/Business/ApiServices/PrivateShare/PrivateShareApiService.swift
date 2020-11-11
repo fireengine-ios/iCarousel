@@ -24,4 +24,14 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .task
     }
     
+    @discardableResult
+    func privateShare(object: PrivateShareObject, handler: @escaping ResponseVoid) -> URLSessionTask? {
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.PrivateShare.share, method: .post, parameters: object.parameters, encoding: JSONEncoding.default)
+            .customValidate()
+            .responseVoid(handler)
+            .task
+    }
+    
 }
