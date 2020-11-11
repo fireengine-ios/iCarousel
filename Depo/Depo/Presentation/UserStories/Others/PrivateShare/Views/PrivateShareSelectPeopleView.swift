@@ -121,10 +121,6 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        guard string != " " else {
-            return false
-        }
-        
         if let text = textField.text, text.count == 0,
            (string == "+" || string == "0" || string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil)
         {
