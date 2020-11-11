@@ -80,8 +80,9 @@ struct LocalContactsStorage {
     
     func getContacts(containing stringToSearch: String) -> [SuggestedContact] {
         var result = [SuggestedContact]()
+        let lowercasedString = stringToSearch.lowercased()
         cachedContacts.forEach { contact in
-            if contact.givenName.contains(stringToSearch) || contact.familyName.contains(stringToSearch)  {
+            if contact.givenName.lowercased().contains(lowercasedString) || contact.familyName.lowercased().contains(lowercasedString)  {
                 result.append(SuggestedContact(with: contact, source: .name))
                 return
             }
@@ -92,8 +93,8 @@ struct LocalContactsStorage {
                 return
             }
             
-            let emails = contact.emailAddresses.compactMap { $0.value }
-            if emails.first(where: { $0.contains(stringToSearch) }) != nil {
+            let emails = contact.emailAddresses.compactMap { $0.value.lowercased }
+            if emails.first(where: { $0.contains(stringToSearch.lowercased()) }) != nil {
                 result.append(SuggestedContact(with: contact, source: .email))
                 return
             }
