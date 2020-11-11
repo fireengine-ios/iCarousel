@@ -27,5 +27,9 @@ final class PrivateShareSharedFilesViewController: BaseViewController, NibInit {
         super.viewDidLoad()
         
         collectionManager.setup()
+        
+        title = TextConstants.privateShareSharedByMeTab
+        needToShowTabBar = true
+        homePageNavigationBarStyle()
     }
 }

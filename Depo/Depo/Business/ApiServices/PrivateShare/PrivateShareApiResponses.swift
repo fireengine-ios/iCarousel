@@ -62,9 +62,6 @@ struct SharedFileInfo: Codable {
     }
 }
 
-//struct SharedFileInfoMetadata: Codable {
-//
-//}
 
 struct SharedItemPermission: Codable {
     let granted: [String]?
