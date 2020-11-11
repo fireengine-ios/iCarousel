@@ -917,7 +917,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         DispatchQueue.toMain {
             CellImageManager.clear()
             self.collectionView?.reloadData()
-            let firstVisibleIndexPath = self.self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
+            let firstVisibleIndexPath = self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
                 return first < second
             })
 

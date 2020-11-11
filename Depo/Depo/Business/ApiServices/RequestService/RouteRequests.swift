@@ -268,8 +268,8 @@ struct RouteRequests {
         
         enum Shared {
             private static let baseShares = baseUrl.absoluteString + "shares"
-            static let withMe =  baseShares + "?sharedWith=me&size=%@&page=%@&objectType=FILE"
-            static let byMe = baseShares + "?sharedBy=me&size=%@&page=%@&objectType=FILE"
+            static let withMe = baseShares + "?sharedWith=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE"
+            static let byMe = "https://run.mocky.io/v3/ea6a0f4a-a059-4138-8167-0b11b36064d1"//baseShares + "?sharedBy=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE"
         }
     }
     

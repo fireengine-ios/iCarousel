@@ -10,6 +10,12 @@ import Alamofire
 
 protocol PrivateShareApiService {
     func getSuggestions(handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask?
+    
+    @discardableResult
+    func getSharedByMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask?
+    
+    @discardableResult
+    func getSharedWithMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask?
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
@@ -29,8 +35,8 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     }
     
     @discardableResult
-    func getSharedByMe(size: Int, page: Int, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask? {
-        let url = String(format: RouteRequests.PrivateShare.Shared.byMe, size, page)
+    func getSharedByMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask? {
+        let url = String(format: RouteRequests.PrivateShare.Shared.byMe, size, page, sortBy.description, sortOrder.description)
         
         return SessionManager
             .customDefault
@@ -41,8 +47,8 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     }
     
     @discardableResult
-    func getSharedWithMe(size: Int, page: Int, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask? {
-        let url = String(format: RouteRequests.PrivateShare.Shared.withMe, size, page)
+    func getSharedWithMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask? {
+        let url = String(format: RouteRequests.PrivateShare.Shared.withMe, size, page, sortBy.description, sortOrder.description)
         
         return SessionManager
             .customDefault
