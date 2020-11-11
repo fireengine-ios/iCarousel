@@ -105,6 +105,7 @@ struct LocalContactsStorage {
     
     func getContactName(for phone: String, email: String) -> LocalContactNames {
         var searchContact: CNContact?
+        let lowercasedEmail = email.lowercased()
         cachedContacts.forEach { contact in
             let msisdns = contact.phoneNumbers.compactMap { $0.value }
             
@@ -113,8 +114,8 @@ struct LocalContactsStorage {
                 return
             }
             
-            let emails = contact.emailAddresses.compactMap { $0.value as String }
-            if emails.first(where: { $0 == email }) != nil {
+            let emails = contact.emailAddresses.compactMap { $0.value.lowercased as String }
+            if emails.first(where: { $0 == lowercasedEmail }) != nil {
                 searchContact = contact
                 return
             }
