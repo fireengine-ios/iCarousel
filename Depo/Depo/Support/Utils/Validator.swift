@@ -24,6 +24,17 @@ final class Validator {
         if !phone.contains("+") {
             phoneNumber = "+" + phoneNumber
         }
+        let phoneRegEx = "^((\\+)|(00))[0-9]{4,18}$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegEx)
+        let result = phoneTest.evaluate(with: phoneNumber)
+        return result
+    }
+
+    static func isValid(contactsPhone: String) -> Bool {
+        var phoneNumber = contactsPhone.filter { $0 != "(" && $0 != ")" }
+        if !contactsPhone.contains("+") {
+            phoneNumber = "+" + phoneNumber
+        }
         let phoneRegEx = "^((\\+)|(00))[0-9, ' ']{4,18}$"
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegEx)
         let result = phoneTest.evaluate(with: phoneNumber)
