@@ -33,15 +33,19 @@ struct SuggestedApiContact: Codable {
     }
 }
 
-struct PrivateShareObject {
+struct PrivateShareObject: Encodable {
     let items: [String]
-    let message: String?
+    let invitationMessage: String?
     var invitees: [PrivateShareContact]
     let type: PrivateShareType
     let duration: PrivateShareDuration
+    
+    var parameters: [String: Any] {
+        dictionary
+    }
 }
 
-struct PrivateShareContact: Equatable {
+struct PrivateShareContact: Equatable, Encodable {
     let displayName: String
     let username: String
     var role: PrivateShareUserRole
@@ -49,9 +53,19 @@ struct PrivateShareContact: Equatable {
     static func == (lhs: PrivateShareContact, rhs: PrivateShareContact) -> Bool {
         return lhs.username == rhs.username
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case username, role
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(username, forKey: .username)
+        try container.encode(role.rawValue, forKey: .role)
+    }
 }
 
-enum PrivateShareUserRole: String, CaseIterable {
+enum PrivateShareUserRole: String, CaseIterable, Encodable {
     case editor = "EDITOR"
     case viewer = "VIEWER"
     
@@ -74,13 +88,13 @@ enum PrivateShareUserRole: String, CaseIterable {
     }
 }
 
-enum PrivateShareType: String {
+enum PrivateShareType: String, Encodable {
     case file = "FILE"
-    case folder = "FOLDER"
+    case album = "ALBUM"
 }
 
-enum PrivateShareDuration: String, CaseIterable {
-    case no = "NO_DURATION"
+enum PrivateShareDuration: String, CaseIterable, Encodable {
+    case no = "NO_EXPIRE"
     case hour = "ONE_HOUR"
     case day = "ONE_DAY"
     case week = "ONE_WEEK"
