@@ -9,8 +9,8 @@
 import UIKit
 
 protocol PrivateShareWithContactViewDelegate: class {
-    func onDeleteTapped(with username: String)
-    func onUserRoleTapped(username: String)
+    func onDeleteTapped(contact: PrivateShareContact)
+    func onUserRoleTapped(contact: PrivateShareContact)
 }
 
 final class PrivateShareWithContactView: UIView, NibInit {
@@ -56,22 +56,33 @@ final class PrivateShareWithContactView: UIView, NibInit {
     }
     
     private weak var delegate: PrivateShareWithContactViewDelegate?
+    private var contact: PrivateShareContact?
     
     //MARK: - Public
     
     func setup(with contact: PrivateShareContact) {
-        titleLabel.text = contact.username
+        self.contact = contact
+        if contact.displayName.isEmpty {
+            titleLabel.text = contact.username
+        } else {
+            titleLabel.text = contact.displayName
+        }
+        
         userRoleButton.setTitle(contact.role.title, for: .normal)
     }
     
     //MARK: - Private
     
     @IBAction private func onDeleteTapped(_ sender: UIButton) {
-        delegate?.onDeleteTapped(with: titleLabel.text ?? "")
+        if let contact = contact {
+            delegate?.onDeleteTapped(contact: contact)
+        }
         removeFromSuperview()
     }
     
     @IBAction private func onUserRoleTapped(_ sender: UIButton) {
-        delegate?.onUserRoleTapped(username: titleLabel.text ?? "")
+        if let contact = contact {
+            delegate?.onUserRoleTapped(contact: contact)
+        }
     }
 }

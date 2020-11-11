@@ -139,8 +139,10 @@ final class PrivateShareViewController: BaseViewController, NibInit {
             }
         }
         
-        let view = PrivateShareSuggestionsView.with(contacts: suggestedContacts, delegate: self)
-        contentView.addArrangedSubview(view)
+        if !contentView.arrangedSubviews.contains(where: { $0 is PrivateShareSuggestionsView }) {
+            let view = PrivateShareSuggestionsView.with(contacts: suggestedContacts, delegate: self)
+            contentView.insertArrangedSubview(view, at: 1)
+        }
     }
     
     private func searchLocalSuggestions(query: String) {
@@ -163,7 +165,8 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func hideShareViews() {
-        contentView.arrangedSubviews.dropFirst().forEach { $0.removeFromSuperview() }
+        let orderedViews = [shareWithView, messageView, durationView]
+        orderedViews.forEach { $0.removeFromSuperview() }
     }
     
     private func showSearchLocalContactsViewIfNeeded() {
@@ -222,7 +225,6 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     
     func startEditing(text: String) {
-        hideShareViews()
         searchTextDidChange(text: text)
     }
     
