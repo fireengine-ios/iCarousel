@@ -251,8 +251,11 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
             getRemoteSuggestions()
             searchSuggestionsContainer.isHidden = true
         } else {
+            
+            //we need this trimming for prepare(), so our +90 logic would work with whitespaces
+            let trimmedText = text.filter{ $0 != " " }
             showSearchLocalContactsViewIfNeeded()
-            searchLocalSuggestions(query: text)
+            searchLocalSuggestions(query: trimmedText)
         }
     }
     
@@ -261,7 +264,6 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
             UIApplication.showErrorAlert(message: TextConstants.privateShareValidationFailPopUpText)
             return
         }
-        
         selectPeopleView.clear()
         shareWithView.add(contact: contact)
         if shareWithView.superview == nil {
@@ -270,6 +272,7 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
         endSearchContacts()
         updateShareButtonIfNeeded()
     }
+    
 }
 
 //MARK: - PrivateShareWithViewDelegate
