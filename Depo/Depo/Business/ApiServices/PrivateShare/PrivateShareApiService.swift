@@ -16,6 +16,8 @@ protocol PrivateShareApiService {
     
     @discardableResult
     func getSharedWithMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask?
+    
+    func privateShare(object: PrivateShareObject, handler: @escaping ResponseVoid) -> URLSessionTask?
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
@@ -54,4 +56,12 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .task
     }
     
+    func privateShare(object: PrivateShareObject, handler: @escaping ResponseVoid) -> URLSessionTask? {
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.PrivateShare.share, method: .post, parameters: object.parameters, encoding: JSONEncoding.default)
+            .customValidate()
+            .responseVoid(handler)
+            .task
+    }
 }

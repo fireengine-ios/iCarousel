@@ -146,11 +146,38 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func searchLocalSuggestions(query: String) {
+        removeRemoteSuggestionsView()
+        
+        let preparedQuery = prepare(searchQuery: query)
+        searchSuggestionController.update(with: preparedQuery)
+    }
+    
+    private func removeRemoteSuggestionsView() {
         if let suggestionsView = contentView.arrangedSubviews.first(where: { $0 is PrivateShareSuggestionsView }) {
             suggestionsView.removeFromSuperview()
         }
+    }
+    
+    private func removeLocalSuggestionsView() {
+        if !searchSuggestionsContainer.isHidden {
+            searchSuggestionController.update(with: "")
+            searchSuggestionsContainer.isHidden = true
+        }
+    }
+    
+    //workaround to support search without +9 for turkish msisdn
+    private func prepare(searchQuery: String) -> String {
+        let prefixToCheck = "+90" //Turkey country code
+        let numberOfCharsToSearch = searchQuery.count - prefixToCheck.count + 1
         
-        searchSuggestionController.update(with: query)
+        guard
+            numberOfCharsToSearch >= minSearchLength,
+            searchQuery.hasPrefix(prefixToCheck)
+        else {
+            return searchQuery
+        }
+        
+        return String(searchQuery.suffix(numberOfCharsToSearch))
     }
     
     private func updateShareButtonIfNeeded() {
@@ -184,15 +211,9 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func endSearchContacts() {
-        if let suggestionsView = contentView.arrangedSubviews.first(where: { $0 is PrivateShareSuggestionsView }) {
-            suggestionsView.removeFromSuperview()
-        }
-        
         view.endEditing(true)
-        if !searchSuggestionsContainer.isHidden {
-            searchSuggestionController.update(with: "")
-            searchSuggestionsContainer.isHidden = true
-        }
+        removeRemoteSuggestionsView()
+        removeLocalSuggestionsView()
     }
 
     //MARK: - Actions
@@ -203,20 +224,21 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 
     @IBAction private func onShareTapped(_ sender: Any) {
         remoteSuggestions = []
-        
-        let type: PrivateShareItemType
-        if items.contains(where: { $0.isFolder == true }) {
-            type = .folder
-        } else {
-            type = .file
-        }
-        
-        var shareObject = PrivateShareObject(items: items.compactMap { $0.uuid },
-                                             message: messageView.message,
+        let shareObject = PrivateShareObject(items: items.compactMap { $0.uuid },
+                                             invitationMessage: messageView.message,
                                              invitees: shareWithView.contacts,
-                                             type: type,
+                                             type: .file,
                                              duration: durationView.duration)
-        //TODO: continue sharing
+   
+        shareApiService.privateShare(object: shareObject) { [weak self] result in
+            switch result {
+            case .success:
+                self?.dismiss(animated: true)
+                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareStartPageSuccess)
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
     }
 }
 
@@ -225,10 +247,6 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     
     func startEditing(text: String) {
-        searchTextDidChange(text: text)
-    }
-    
-    func searchTextDidChange(text: String) {
         if text.count < minSearchLength {
             getRemoteSuggestions()
             searchSuggestionsContainer.isHidden = true
@@ -238,12 +256,23 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
         }
     }
     
+    func searchTextDidChange(text: String) {
+        if text.count < minSearchLength {
+            removeLocalSuggestionsView()
+        } else {
+            
+            //we need this trimming for prepare(), so our +90 logic would work with whitespaces
+            let trimmedText = text.filter{ $0 != " " }
+            showSearchLocalContactsViewIfNeeded()
+            searchLocalSuggestions(query: trimmedText)
+        }
+    }
+    
     func addShareContact(_ contact: PrivateShareContact) {
         guard isValidContact(text: contact.username) else {
             UIApplication.showErrorAlert(message: TextConstants.privateShareValidationFailPopUpText)
             return
         }
-        
         selectPeopleView.clear()
         shareWithView.add(contact: contact)
         if shareWithView.superview == nil {
@@ -252,6 +281,7 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
         endSearchContacts()
         updateShareButtonIfNeeded()
     }
+    
 }
 
 //MARK: - PrivateShareWithViewDelegate
@@ -269,7 +299,7 @@ extension PrivateShareViewController: PrivateShareWithViewDelegate {
     }
     
     private func isValidContact(text: String) -> Bool {
-        if Validator.isValid(email: text) || Validator.isValid(phone: text) {
+        if Validator.isValid(email: text) || Validator.isValid(contactsPhone: text) {
             return true
         }
         return false

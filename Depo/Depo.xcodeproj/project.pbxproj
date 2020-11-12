@@ -5168,6 +5168,12 @@
 		985E9BFF2493AFD6004D70BA /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985E9BFB2493AFD6004D70BA /* UITextView+Extensions.swift */; };
 		985E9C002493AFD6004D70BA /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985E9BFB2493AFD6004D70BA /* UITextView+Extensions.swift */; };
 		985E9C012493AFD6004D70BA /* UITextView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985E9BFB2493AFD6004D70BA /* UITextView+Extensions.swift */; };
+		985FF9E7255BE477001AA845 /* Codable+Extesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985FF9E6255BE477001AA845 /* Codable+Extesions.swift */; };
+		985FF9E8255BE478001AA845 /* Codable+Extesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985FF9E6255BE477001AA845 /* Codable+Extesions.swift */; };
+		985FF9E9255BE478001AA845 /* Codable+Extesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985FF9E6255BE477001AA845 /* Codable+Extesions.swift */; };
+		985FF9EA255BE478001AA845 /* Codable+Extesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985FF9E6255BE477001AA845 /* Codable+Extesions.swift */; };
+		985FF9EB255BE478001AA845 /* Codable+Extesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985FF9E6255BE477001AA845 /* Codable+Extesions.swift */; };
+		985FF9EC255BE478001AA845 /* Codable+Extesions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 985FF9E6255BE477001AA845 /* Codable+Extesions.swift */; };
 		9864296822F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
 		9864296922F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
 		9864296A22F834F10039811C /* SpotifyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9864296722F834F10039811C /* SpotifyResponse.swift */; };
@@ -14014,6 +14020,7 @@
 		985E6975255A61FB006F6CD7 /* PrivateShareRoleCheckmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateShareRoleCheckmarkView.swift; sourceTree = "<group>"; };
 		985E69A8255A6203006F6CD7 /* PrivateShareRoleCheckmarkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrivateShareRoleCheckmarkView.xib; sourceTree = "<group>"; };
 		985E9BFB2493AFD6004D70BA /* UITextView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Extensions.swift"; sourceTree = "<group>"; };
+		985FF9E6255BE477001AA845 /* Codable+Extesions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Codable+Extesions.swift"; sourceTree = "<group>"; };
 		9864296722F834F10039811C /* SpotifyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyResponse.swift; sourceTree = "<group>"; };
 		9864296F22F99B390039811C /* CreateStoryPhotoSelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryPhotoSelectionController.swift; sourceTree = "<group>"; };
 		9868100825080FCF0046483B /* PhotoEditAdjustManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditAdjustManager.swift; sourceTree = "<group>"; };
@@ -21800,6 +21807,7 @@
 				CE00B255220334D800A5A696 /* BackButtonActions.swift */,
 				CE343601224B92BB00AFAABB /* Bool+Init.swift */,
 				CEEF22A92063D6E000CE3949 /* CALayer+Animation.swift */,
+				985FF9E6255BE477001AA845 /* Codable+Extesions.swift */,
 				8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */,
 				CEEB7A9720A4755B0070FDC2 /* DispatchQueue+Main.swift */,
 				8C208680228D5117000BEDAD /* Double+Extensions.swift */,
@@ -28533,6 +28541,7 @@
 				0303A0BC2397D0D000907F42 /* CustomProgressHUD.swift in Sources */,
 				0303A0BD2397D0D000907F42 /* GSMCodeModel.swift in Sources */,
 				0303A0BE2397D0D000907F42 /* FaceImagePhotosModuleOutput.swift in Sources */,
+				985FF9EA255BE478001AA845 /* Codable+Extesions.swift in Sources */,
 				0303A0BF2397D0D000907F42 /* PlanType.swift in Sources */,
 				0303A0C02397D0D000907F42 /* SearchViewInitializer.swift in Sources */,
 				0303A0C12397D0D000907F42 /* TwoFactorChallengePresenter.swift in Sources */,
@@ -30929,6 +30938,7 @@
 				921E7C382201EAAA00341F75 /* InstaPickBigPhotoView.swift in Sources */,
 				8C0E8E761FDEBDFF00789C91 /* LoadingImageView.swift in Sources */,
 				8C0E8E771FDEBDFF00789C91 /* PasscodeSettingsViewIO.swift in Sources */,
+				985FF9E8255BE478001AA845 /* Codable+Extesions.swift in Sources */,
 				CE4851F12018B03A006B8854 /* FilterPhotoCard.swift in Sources */,
 				986DD41025388F3400C38AD4 /* DepoAdapter.m in Sources */,
 				4AC68931202C5153003400D0 /* FaceImageAddNameViewOutput.swift in Sources */,
@@ -33493,6 +33503,7 @@
 				B5711DFF20C13F4200E72A9D /* String+ShareActivity.swift in Sources */,
 				49C978332403047E00943F67 /* MobilePaymentPermissionView.swift in Sources */,
 				64E35594735C9449EB20343F /* AlbumsPresenter.swift in Sources */,
+				985FF9E7255BE477001AA845 /* Codable+Extesions.swift in Sources */,
 				17E9B7122250AF6C00C0FE70 /* MediaUsageInfoView.swift in Sources */,
 				EB0329F2FE28E1F8F2F7ABAE /* AlbumsInteractor.swift in Sources */,
 				98792DE222FD5CD9000A77E5 /* SpotifyImportedPlaylistsNavbarManager.swift in Sources */,
@@ -34507,6 +34518,7 @@
 				B51205CB2305350D007EB951 /* AppendLocalsOperation.swift in Sources */,
 				CE784A5B22A685FB00662219 /* LeavePremiumHeaderView.swift in Sources */,
 				73DFEEC724E65D19009D925D /* ShareCardContentManager.swift in Sources */,
+				985FF9EB255BE478001AA845 /* Codable+Extesions.swift in Sources */,
 				CE784A5C22A685FB00662219 /* ForgotPasswordModuleInput.swift in Sources */,
 				CE784A5D22A685FB00662219 /* EditingBarConfig.swift in Sources */,
 				CFACACA7247CF65400645B40 /* NetmeraExtensionService.swift in Sources */,
@@ -35349,6 +35361,7 @@
 				CF8B63BE23CBC9D70021B021 /* FaceImageItemsInitializer.swift in Sources */,
 				CF8B63BF23CBC9D70021B021 /* OrientationManager.swift in Sources */,
 				CF8B63C023CBC9D70021B021 /* SupportFormBannerView.swift in Sources */,
+				985FF9E9255BE478001AA845 /* Codable+Extesions.swift in Sources */,
 				CF8B63C123CBC9D70021B021 /* CodeTextField.swift in Sources */,
 				CF8B63C223CBC9D70021B021 /* MovieCard.swift in Sources */,
 				CF8B63C323CBC9D70021B021 /* Constants.swift in Sources */,
@@ -37573,6 +37586,7 @@
 				CF8B6DD823CBCA280021B021 /* ForgotPasswordModuleInput.swift in Sources */,
 				CF8B6DD923CBCA280021B021 /* EditingBarConfig.swift in Sources */,
 				73DFEEC824E65D19009D925D /* ShareCardContentManager.swift in Sources */,
+				985FF9EC255BE478001AA845 /* Codable+Extesions.swift in Sources */,
 				CF8B6DDA23CBCA280021B021 /* DeviceExtension.swift in Sources */,
 				CF8B6DDB23CBCA280021B021 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				CFACACA8247CF65400645B40 /* NetmeraExtensionService.swift in Sources */,
@@ -42162,7 +42176,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.7.1;
+				CURRENT_PROJECT_VERSION = d2.7.2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -42226,7 +42240,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.7.1;
+				CURRENT_PROJECT_VERSION = d2.7.2;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -42286,7 +42300,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.7.1;
+				CURRENT_PROJECT_VERSION = d2.7.2;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -42347,7 +42361,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.7.1;
+				CURRENT_PROJECT_VERSION = d2.7.2;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
