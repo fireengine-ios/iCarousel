@@ -126,7 +126,7 @@ class MoreActionsConfig {
         }
     }
     
-    enum SortRullesType: CustomStringConvertible {
+    enum SortRullesType: CustomStringConvertible, CaseIterable {
         case AlphaBetricAZ
         case AlphaBetricZA
         case LettersAZ

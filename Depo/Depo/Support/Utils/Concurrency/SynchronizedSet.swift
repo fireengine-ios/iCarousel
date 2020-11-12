@@ -40,3 +40,13 @@ final class SynchronizedSet<T: Hashable> {
     }
     
 }
+
+
+extension SynchronizedSet {
+    // The number of elements in the array.
+    var count: Int {
+        var result = 0
+        queue.sync { result = self.storage.count }
+        return result
+    }
+}

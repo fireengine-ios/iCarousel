@@ -29,10 +29,11 @@ final class PrivateShareFileInfoManager {
     private let queue = DispatchQueue(label: DispatchQueueLabels.privateShareFileInfoManagerQueue)
     private let pageSize = 100
     private var pageLoaded = 0
-    private var sorting: SortType = .date
+    private var sorting: SortedRules = .timeUp
+    private var isPageLoading = false
     
-    private(set) var loadedItems = SynchronizedArray<SharedFileInfo>()
-    
+    private(set) var loadedItems = SynchronizedArray<WrapData>()
+    private(set) var selectedItems = SynchronizedSet<WrapData>()
     
     //MARK: - Life cycle
     
@@ -40,8 +41,13 @@ final class PrivateShareFileInfoManager {
     
     //MARK: - Public
     
-    func loadNext(completion: @escaping BoolHandler) {
+    func loadNext(completion: @escaping ValueHandler<[IndexPath]>) {
+        guard !isPageLoading else {
+            return
+        }
+        
         queue.async(flags: .barrier) { [weak self] in
+            self?.isPageLoading = true
             self?.loadNextPage { result in
                 guard let self = self else {
                     return
@@ -50,32 +56,67 @@ final class PrivateShareFileInfoManager {
                 switch result {
                     case .success(let filesInfo):
                         self.pageLoaded += 1
-                        self.loadedItems.append(filesInfo)
-                        completion(!filesInfo.isEmpty)
+                        
+                        let firstRowToAdd = self.loadedItems.count
+                        let sortedItems = self.sorted(items: filesInfo.compactMap { WrapData(privateShareFileInfo: $0) })
+                        self.loadedItems.append(sortedItems)
+                        
+                        //TODO: sections
+                        var indexPathes = [IndexPath]()
+                        for i in 0..<filesInfo.count {
+                            indexPathes.append(IndexPath(row: firstRowToAdd+i, section: 0))
+                        }
+                        completion(indexPathes)
                         
                     case .failed(_):
-                        completion(false)
+                        completion([])
                 }
+                self.isPageLoading = false
             }
         }
     }
     
-    func reload(completion: @escaping BoolHandler) {
+    func reload(completion: @escaping ValueHandler<[IndexPath]>) {
         queue.sync {
+            selectedItems.removeAll()
             loadedItems.removeAll()
             pageLoaded = 0
             loadNext(completion: completion)
         }
     }
     
-    func change(sortBy: SortType, completion: @escaping BoolHandler) {
-        guard sortBy != sorting else {
-            completion(true)
+    func change(sortingRules: SortedRules, completion: @escaping VoidHandler) {
+        guard sorting != sortingRules else {
             return
         }
         
-        sorting = sortBy
-        reload(completion: completion)
+        sorting = sortingRules
+        loadedItems.modify { [weak self] array in
+            guard let self = self else {
+                completion()
+                return []
+            }
+            completion()
+            return self.sorted(items: array)
+        }
+    }
+    
+    func selectItem(at indexPath: IndexPath) {
+        //TODO: sections
+        if let item = loadedItems[indexPath.row] {
+            selectedItems.insert(item)
+        }
+    }
+    
+    func deselectItem(at indexPath: IndexPath) {
+        //TODO: sections
+        if let item = loadedItems[indexPath.row] {
+            selectedItems.remove(item)
+        }
+    }
+    
+    func deselectAll() {
+        selectedItems.removeAll()
     }
     
     //MARK: - Private
@@ -83,9 +124,13 @@ final class PrivateShareFileInfoManager {
     private func loadNextPage(completion: @escaping ResponseArrayHandler<SharedFileInfo>) {
         switch type {
             case .byMe:
-                privateShareAPIService.getSharedByMe(size: pageSize, page: pageLoaded, sortBy: sorting, sortOrder: .asc, handler: completion)
+                privateShareAPIService.getSharedByMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
             case .withMe:
-                privateShareAPIService.getSharedByMe(size: pageSize, page: pageLoaded, sortBy: sorting, sortOrder: .asc, handler: completion)
+                privateShareAPIService.getSharedByMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
         }
+    }
+    
+    private func sorted(items: [WrapData]) -> [WrapData] {
+        return WrapDataSorting.sort(items: items, sortType: sorting)
     }
 }
