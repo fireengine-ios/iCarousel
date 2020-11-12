@@ -32,30 +32,12 @@ final class FileInfoView: UIView, FromNib {
         }
     }
     
+    @IBOutlet private weak var contentView: UIStackView!
+    
     private lazy var tapGestureRecognizer: UITapGestureRecognizer = {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizerHandler))
         return gesture
     }()
-    
-    // file name
-    @IBOutlet private weak var fileNameTitleLabel: UILabel! {
-        willSet {
-            newValue.text = TextConstants.fileInfoFileNameTitle
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            newValue.textColor = ColorConstants.marineTwo
-        }
-    }
-    
-    @IBOutlet private weak var fileNameTextField: UITextField! {
-        willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
-            newValue.textColor = ColorConstants.closeIconButtonColor
-        }
-    }
-    
-    @IBOutlet private weak var editNameButton: UIButton!
-    @IBOutlet private weak var saveNameButton: UIButton!
-    @IBOutlet private weak var cancelRenamingButton: UIButton!
     
     // file info
     @IBOutlet private weak var fileInfoLabel: UILabel! {
@@ -188,11 +170,11 @@ final class FileInfoView: UIView, FromNib {
         }
     }
     
+    private lazy var fileNameView = FileNameView.with(delegate: self)
+//    private lazy var fileInfoView = 
+    
     // MARK: Private Properties
     
-    private var oldName: String?
-    private var fileExtension: String?
-    private var isEditable: Bool?
     private let formatter = ByteCountFormatter()
     private var fileType: FileType = .application(.unknown)
     private var status: ItemStatus = .unknown
@@ -216,7 +198,7 @@ final class FileInfoView: UIView, FromNib {
     
     func setObject(_ object: BaseDataSourceItem, completion: VoidHandler?) {
         resetUI()
-        fileNameTextField.text = object.name
+        fileNameView.name = object.name
         fileType = object.fileType
         
         if let obj = object as? WrapData {
@@ -238,23 +220,11 @@ final class FileInfoView: UIView, FromNib {
     }
     
     func show(name: String) {
-        fileExtension = (name as NSString).pathExtension
-        if fileNameTextField.isFirstResponder {
-            fileNameTextField.text = (name as NSString).deletingPathExtension
-        } else {
-            fileNameTextField.text = name
-        }
+        fileNameView.name = name
     }
     
     func showValidateNameSuccess() {
-        fileNameTextField.resignFirstResponder()
-        guard
-            let text = fileNameTextField.text?.nonEmptyString,
-            let fileExtension = fileExtension?.nonEmptyString
-        else {
-            return
-        }
-        fileNameTextField.text = text.makeFileName(with: fileExtension)
+        fileNameView.showValidateNameSuccess()
     }
     
     func reloadCollection(with items: [PeopleOnPhotoItemResponse]) {
@@ -300,7 +270,7 @@ final class FileInfoView: UIView, FromNib {
         fileSizeLabel.text = formatter.string(fromByteCount: wrapData.fileSize)
         
         if wrapData.fileType == .folder {
-            fileNameTitleLabel.text = TextConstants.fileInfoFolderNameTitle
+            fileNameView.title = TextConstants.fileInfoFolderNameTitle
             fileInfoLabel.text = TextConstants.fileInfoFolderInfoTitle
             fileSizeTitleLabel.text = TextConstants.fileInfoAlbumSizeTitle
             fileSizeLabel.text = String(wrapData.childCount ?? 0)
@@ -330,7 +300,7 @@ final class FileInfoView: UIView, FromNib {
         uploadDateTitleLabel.text = TextConstants.fileInfoCreationDateTitle
         
         fileSizeTitleLabel.text = TextConstants.fileInfoAlbumSizeTitle
-        fileNameTitleLabel.text = TextConstants.fileInfoAlbumNameTitle
+        fileNameView.title = TextConstants.fileInfoAlbumNameTitle
         fileInfoLabel.text = TextConstants.fileInfoAlbumInfoTitle
         
         var count = 0
@@ -339,9 +309,7 @@ final class FileInfoView: UIView, FromNib {
         count += albumItem.videoCount ?? 0
         fileSizeLabel.text = String(count)
         
-        if albumItem.readOnly == true {
-            fileNameTextField.isEnabled = false
-        }
+        fileNameView.isReadOnly = albumItem.readOnly ?? false
         
         if albumItem.fileType.isFaceImageAlbum {
             setupEditableState(for: albumItem)
@@ -349,43 +317,22 @@ final class FileInfoView: UIView, FromNib {
     }
     
     func hideKeyboard() {
-        changeEditStatus(false)
-        fileNameTextField.isUserInteractionEnabled = false
-        if let name = oldName, !name.isEmpty {
-            fileNameTextField.text = oldName
-            oldName = nil
-        }
-        showValidateNameSuccess()
-        changeEditButtonsVisibility(isHidden: isEditable == false)
+        fileNameView.hideKeyboard()
     }
     
     // MARK: Private Methods
     
     private func setup() {
         layer.masksToBounds = true
-        fileNameTextField.delegate = self
-        fileNameTextField.isUserInteractionEnabled = false
+        contentView.insertArrangedSubview(fileNameView, at: 0)
+        
         tapGestureRecognizer.delegate = self
-        changeEditStatus(false)
         addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    private func changeEditStatus(_ isEditing: Bool) {
-        editNameButton.isHidden = isEditing
-        saveNameButton.isHidden = !isEditing
-        cancelRenamingButton.isHidden = !isEditing
-    }
-    
-    private func changeEditButtonsVisibility(isHidden: Bool) {
-        fileNameTextField.isEnabled = !isHidden
-        editNameButton.isHidden = isHidden
     }
     
     private func setupEditableState(for item: BaseDataSourceItem) {
         let isHidden = (item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum) && item.syncStatus != .synced
-        isEditable = !isHidden
-        changeEditStatus(false)
-        changeEditButtonsVisibility(isHidden: isHidden)
+        fileNameView.isEditable = !isHidden
     }
     
     private func resetUI() {
@@ -398,7 +345,7 @@ final class FileInfoView: UIView, FromNib {
     
     private func resetTitleNames() {
         fileInfoLabel.text = TextConstants.fileInfoFileInfoTitle
-        fileNameTitleLabel.text = TextConstants.fileInfoFileNameTitle
+        fileNameView.title = TextConstants.fileInfoFileNameTitle
         
         durationTitleLabel.text = TextConstants.fileInfoDurationTitle
         
@@ -424,31 +371,6 @@ final class FileInfoView: UIView, FromNib {
     
     // MARK: Actions
     
-    @IBAction private func onSaveNameDidTap() {
-        changeEditStatus(false)
-        fileNameTextField.isUserInteractionEnabled = false
-        guard
-            let text = fileNameTextField.text?.nonEmptyString,
-            let fileExtension = fileExtension?.nonEmptyString
-        else { return }
-        output.onRename(newName: text.makeFileName(with: fileExtension))
-        oldName = nil
-    }
-    
-    @IBAction private func onEditNameDidTap() {
-        changeEditStatus(true)
-        fileNameTextField.isUserInteractionEnabled = true
-        fileNameTextField.becomeFirstResponder()
-        oldName = fileNameTextField.text
-    }
-    
-    @IBAction private func onCancelRenamingDidTap() {
-        changeEditStatus(false)
-        fileNameTextField.isUserInteractionEnabled = false
-        fileNameTextField.text = oldName
-        showValidateNameSuccess()
-    }
-    
     @IBAction private func onEnableTapped(_ sender: Any) {
         output.onEnableFaceRecognitionDidTap()
     }
@@ -456,33 +378,6 @@ final class FileInfoView: UIView, FromNib {
     @IBAction private func onPremiumTapped(_ sender: Any) {
         output.onBecomePremiumDidTap()
     }
-}
-
-// MARK: UITextFieldDelegate
-
-extension FileInfoView: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        
-        if let text = textField.text {
-            output.onRename(newName: text)
-        }
-        
-        return true
-    }
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if let text = textField.text {
-            textField.text = (text as NSString).deletingPathExtension
-            if fileExtension == nil {
-                fileExtension = (text as NSString).pathExtension
-            }
-        }
-        
-        return true
-    }
-    
 }
 
 extension FileInfoView: PeopleSliderDataSourceDelegate {
@@ -517,5 +412,14 @@ extension FileInfoView: FaceImageItemsModuleOutput {
             
         dataSource.deleteItem(at: index)
         reloadCollection(with: dataSource.items)
+    }
+}
+
+//MARK: - FileNameViewDelegate
+
+extension FileInfoView: FileNameViewDelegate {
+    
+    func onRename(newName: String) {
+        output.onRename(newName: newName)
     }
 }
