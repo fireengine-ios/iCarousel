@@ -146,12 +146,23 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func searchLocalSuggestions(query: String) {
-        if let suggestionsView = contentView.arrangedSubviews.first(where: { $0 is PrivateShareSuggestionsView }) {
-            suggestionsView.removeFromSuperview()
-        }
+        removeRemoteSuggestionsView()
         
         let preparedQuery = prepare(searchQuery: query)
         searchSuggestionController.update(with: preparedQuery)
+    }
+    
+    private func removeRemoteSuggestionsView() {
+        if let suggestionsView = contentView.arrangedSubviews.first(where: { $0 is PrivateShareSuggestionsView }) {
+            suggestionsView.removeFromSuperview()
+        }
+    }
+    
+    private func removeLocalSuggestionsView() {
+        if !searchSuggestionsContainer.isHidden {
+            searchSuggestionController.update(with: "")
+            searchSuggestionsContainer.isHidden = true
+        }
     }
     
     //workaround to support search without +9 for turkish msisdn
@@ -200,15 +211,9 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func endSearchContacts() {
-        if let suggestionsView = contentView.arrangedSubviews.first(where: { $0 is PrivateShareSuggestionsView }) {
-            suggestionsView.removeFromSuperview()
-        }
-        
         view.endEditing(true)
-        if !searchSuggestionsContainer.isHidden {
-            searchSuggestionController.update(with: "")
-            searchSuggestionsContainer.isHidden = true
-        }
+        removeRemoteSuggestionsView()
+        removeLocalSuggestionsView()
     }
 
     //MARK: - Actions
@@ -243,13 +248,18 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     
     func startEditing(text: String) {
-        searchTextDidChange(text: text)
+        if text.count < minSearchLength {
+            getRemoteSuggestions()
+            searchSuggestionsContainer.isHidden = true
+        } else {
+            showSearchLocalContactsViewIfNeeded()
+            searchLocalSuggestions(query: text)
+        }
     }
     
     func searchTextDidChange(text: String) {
         if text.count < minSearchLength {
-            getRemoteSuggestions()
-            searchSuggestionsContainer.isHidden = true
+            removeLocalSuggestionsView()
         } else {
             showSearchLocalContactsViewIfNeeded()
             searchLocalSuggestions(query: text)
