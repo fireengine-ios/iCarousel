@@ -65,6 +65,7 @@ class BaseViewController: ViewController {
     }
     
     @objc func hideKeyboard() {
+        keyboardHeight = 0
     }
     
     func searchActiveTextField(view: UIView) -> UITextField? {

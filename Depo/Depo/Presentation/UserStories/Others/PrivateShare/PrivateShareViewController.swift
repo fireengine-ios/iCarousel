@@ -225,8 +225,8 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         if shareWithView.contacts.isEmpty {
             dismiss(animated: true)
         } else {
-            let popup = PopUpController.with(title: TextConstants.privateShareStartPageClosePopupMessage,
-                                             message: nil,
+            let popup = PopUpController.with(title: nil,
+                                             message: TextConstants.privateShareStartPageClosePopupMessage,
                                              image: .question,
                                              firstButtonTitle: TextConstants.cancel,
                                              secondButtonTitle: TextConstants.ok,
