@@ -44,9 +44,11 @@ final class PrivateShareContactSuggestionView: UIView, NibInit {
             itemsStackView.addArrangedSubview(item)
         }
         
-        contact.emails.forEach { item in
-            let item = PrivateShareSuggestionItemView.with(text: item, type: .email, delegate: self)
-            itemsStackView.addArrangedSubview(item)
+        if contact.isLocal {
+            contact.emails.forEach { item in
+                let item = PrivateShareSuggestionItemView.with(text: item, type: .email, delegate: self)
+                itemsStackView.addArrangedSubview(item)
+            }
         }
         
         layoutIfNeeded()
