@@ -71,7 +71,7 @@ struct LocalContactsStorage {
     static let shared = LocalContactsStorage()
     
     private var cachedContacts = SynchronizedArray<CNContact>()
-    
+    private let maxNumberOfCompareDigits = 10
     
     private init() {}
     
@@ -110,12 +110,12 @@ struct LocalContactsStorage {
     func getContactName(for phone: String, email: String) -> LocalContactNames {
         var searchContact: CNContact?
         let lowercasedEmail = email.lowercased()
-        let searchPhone = phone.digits.suffix(10)
+        let searchPhone = phone.digits.suffix(maxNumberOfCompareDigits)
             
         cachedContacts.forEach { contact in
             let msisdns = contact.phoneNumbers.compactMap { $0.value }
             
-            let phones = msisdns.filter { $0.stringValue.digits.suffix(10) == searchPhone }
+            let phones = msisdns.filter { $0.stringValue.digits.suffix(maxNumberOfCompareDigits) == searchPhone }
             if phones.count == 1 {
                 searchContact = contact
                 return
