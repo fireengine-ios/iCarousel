@@ -19,6 +19,10 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     @IBOutlet private weak var scrollView: UIScrollView! {
         willSet {
             newValue.keyboardDismissMode = .interactive
+            let dismissKeyboardGuesture = UITapGestureRecognizer(target: self,
+                                                                 action: #selector(stopEditing))
+            newValue.addGestureRecognizer(dismissKeyboardGuesture)
+            newValue.delaysContentTouches = false
         }
     }
     
@@ -241,6 +245,11 @@ final class PrivateShareViewController: BaseViewController, NibInit {
             }
         }
     }
+    
+    @objc private func stopEditing() {
+        self.view.endEditing(true)
+    }
+    
 }
 
 //MARK: - PrivateShareSelectPeopleViewDelegate
