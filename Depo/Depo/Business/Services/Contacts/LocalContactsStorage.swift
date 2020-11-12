@@ -23,6 +23,7 @@ struct SuggestedContact: Equatable {
     let familyName: String
     let phones: [String]
     let emails: [String]
+    let isLocal: Bool
     
     var displayName: String {
         if !name.isEmpty, !familyName.isEmpty {
@@ -40,6 +41,7 @@ struct SuggestedContact: Equatable {
         familyName = contact.familyName
         phones = contact.phoneNumbers.compactMap { $0.value.stringValue }
         emails = contact.emailAddresses.compactMap { $0.value as String }
+        isLocal = true
     }
     
     init(with contact: SuggestedApiContact, names: LocalContactNames = ("", "")) {
@@ -58,6 +60,8 @@ struct SuggestedContact: Equatable {
         } else {
             emails = []
         }
+        
+        isLocal = false
     }
 }
 
@@ -106,10 +110,13 @@ struct LocalContactsStorage {
     func getContactName(for phone: String, email: String) -> LocalContactNames {
         var searchContact: CNContact?
         let lowercasedEmail = email.lowercased()
+        let searchPhone = phone.digits.suffix(10)
+            
         cachedContacts.forEach { contact in
             let msisdns = contact.phoneNumbers.compactMap { $0.value }
             
-            if msisdns.first(where: { $0.stringValue.digits == phone.digits }) != nil {
+            let phones = msisdns.filter { $0.stringValue.digits.suffix(10) == searchPhone }
+            if phones.count == 1 {
                 searchContact = contact
                 return
             }
