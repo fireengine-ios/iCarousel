@@ -39,84 +39,6 @@ final class FileInfoView: UIView, FromNib {
         return gesture
     }()
     
-    // file info
-    @IBOutlet private weak var fileInfoLabel: UILabel! {
-        willSet {
-            newValue.text = TextConstants.fileInfoFileInfoTitle
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            newValue.textColor = ColorConstants.marineTwo
-        }
-    }
-    
-    // file size
-    @IBOutlet private weak var fileSizeTitleLabel: UILabel! {
-        willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
-            newValue.textColor = ColorConstants.closeIconButtonColor
-        }
-    }
-    
-    @IBOutlet private weak var fileSizeLabel: UILabel! {
-        willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
-            newValue.textColor = ColorConstants.closeIconButtonColor
-        }
-    }
-    
-    // duration
-    @IBOutlet private weak var durationStackView: UIStackView!
-    
-    @IBOutlet private weak var durationTitleLabel: UILabel! {
-        willSet {
-            newValue.text = TextConstants.fileInfoDurationTitle
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
-            newValue.textColor = ColorConstants.closeIconButtonColor
-        }
-    }
-    
-    @IBOutlet private weak var durationLabel: UILabel! {
-        willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
-            newValue.textColor = ColorConstants.closeIconButtonColor
-        }
-    }
-    
-    // upload date
-    @IBOutlet private weak var uploadDateStackView: UIStackView!
-    
-    @IBOutlet private weak var uploadDateTitleLabel: UILabel! {
-        willSet {
-            newValue.text = TextConstants.fileInfoUploadDateTitle
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
-            newValue.textColor = ColorConstants.closeIconButtonColor
-        }
-    }
-    
-    @IBOutlet private weak var uploadDateLabel: UILabel! {
-        willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
-            newValue.textColor = ColorConstants.closeIconButtonColor
-        }
-    }
-    
-    // taken date
-    @IBOutlet private weak var takenDateStackView: UIStackView!
-    
-    @IBOutlet private weak var takenDateTitleLabel: UILabel! {
-        willSet {
-            newValue.text = TextConstants.fileInfoTakenDateTitle
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
-            newValue.textColor = ColorConstants.closeIconButtonColor
-        }
-    }
-    
-    @IBOutlet private weak var takenDateLabel: UILabel! {
-        willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
-            newValue.textColor = ColorConstants.closeIconButtonColor
-        }
-    }
-    
     // people
     
     @IBOutlet private weak var peopleStackView: UIStackView!
@@ -171,11 +93,10 @@ final class FileInfoView: UIView, FromNib {
     }
     
     private lazy var fileNameView = FileNameView.with(delegate: self)
-//    private lazy var fileInfoView = 
+    private lazy var fileInfoView = FileMetaInfoView.view()
     
     // MARK: Private Properties
     
-    private let formatter = ByteCountFormatter()
     private var fileType: FileType = .application(.unknown)
     private var status: ItemStatus = .unknown
     private lazy var dataSource = PeopleSliderDataSource(collectionView: peopleCollectionView, delegate: self)
@@ -209,10 +130,9 @@ final class FileInfoView: UIView, FromNib {
         if let album = object as? AlbumItem {
             setWith(albumItem: album)
         }
-        
+
         if let createdDate = object.creationDate, !object.isLocalItem {
-            uploadDateLabel.text = createdDate.getDateInFormat(format: "dd MMMM yyyy")
-            uploadDateStackView.isHidden = false
+            fileInfoView.set(createdDate: createdDate)
         }
         
         layoutIfNeeded()
@@ -261,55 +181,24 @@ final class FileInfoView: UIView, FromNib {
     }
     
     func setWith(wrapData: WrapData) {
-        if wrapData.fileType.typeWithDuration {
-            durationLabel.text = wrapData.duration
-            durationStackView.isHidden = false
-        }
-                    
-        formatter.countStyle = .binary
-        fileSizeLabel.text = formatter.string(fromByteCount: wrapData.fileSize)
-        
         if wrapData.fileType == .folder {
             fileNameView.title = TextConstants.fileInfoFolderNameTitle
-            fileInfoLabel.text = TextConstants.fileInfoFolderInfoTitle
-            fileSizeTitleLabel.text = TextConstants.fileInfoAlbumSizeTitle
-            fileSizeLabel.text = String(wrapData.childCount ?? 0)
-            uploadDateTitleLabel.text = TextConstants.fileInfoCreationDateTitle
         } else {
-            fileSizeTitleLabel.text = TextConstants.fileInfoFileSizeTitle
             setupEditableState(for: wrapData)
         }
+        
+        fileInfoView.setup(with: wrapData)
         
         if wrapData.fileType == .video {
             peopleStackView.isHidden = true
             premiumStackView.isHidden = true
         }
-        
-        if let creationDate = wrapData.creationDate, !wrapData.isLocalItem {
-            uploadDateLabel.text = creationDate.getDateInFormat(format: "dd MMMM yyyy")
-            uploadDateStackView.isHidden = false
-            
-            if let takenDate = wrapData.metaData?.takenDate, creationDate != takenDate {
-                takenDateLabel.text = takenDate.getDateInFormat(format: "dd MMMM yyyy")
-                takenDateStackView.isHidden = false
-            }
-        }
     }
         
     func setWith(albumItem: AlbumItem) {
-        uploadDateTitleLabel.text = TextConstants.fileInfoCreationDateTitle
-        
-        fileSizeTitleLabel.text = TextConstants.fileInfoAlbumSizeTitle
         fileNameView.title = TextConstants.fileInfoAlbumNameTitle
-        fileInfoLabel.text = TextConstants.fileInfoAlbumInfoTitle
-        
-        var count = 0
-        count += albumItem.audioCount ?? 0
-        count += albumItem.imageCount ?? 0
-        count += albumItem.videoCount ?? 0
-        fileSizeLabel.text = String(count)
-        
         fileNameView.isReadOnly = albumItem.readOnly ?? false
+        fileInfoView.setup(with: albumItem)
         
         if albumItem.fileType.isFaceImageAlbum {
             setupEditableState(for: albumItem)
@@ -324,7 +213,16 @@ final class FileInfoView: UIView, FromNib {
     
     private func setup() {
         layer.masksToBounds = true
-        contentView.insertArrangedSubview(fileNameView, at: 0)
+        let views: [UIView] = [fileNameView, fileInfoView]
+        
+        var index = 0
+        views.forEach { view in
+            contentView.insertArrangedSubview(view, at: index)
+            index += 1
+            let separator = UIView.makeSeparator(width: contentView.frame.width, offset: 0)
+            contentView.insertArrangedSubview(separator, at: index)
+            index += 1
+        }
         
         tapGestureRecognizer.delegate = self
         addGestureRecognizer(tapGestureRecognizer)
@@ -336,26 +234,10 @@ final class FileInfoView: UIView, FromNib {
     }
     
     private func resetUI() {
-        resetTitleNames()
-        hideInfoDateLabels()
-        dataSource.reset()
-        durationStackView.isHidden = true
-        peopleCollectionView.isHidden = true
-    }
-    
-    private func resetTitleNames() {
-        fileInfoLabel.text = TextConstants.fileInfoFileInfoTitle
         fileNameView.title = TextConstants.fileInfoFileNameTitle
-        
-        durationTitleLabel.text = TextConstants.fileInfoDurationTitle
-        
-        uploadDateTitleLabel.text = TextConstants.fileInfoUploadDateTitle
-        takenDateTitleLabel.text = TextConstants.fileInfoTakenDateTitle
-    }
-    
-    private func hideInfoDateLabels() {
-        takenDateStackView.isHidden = true
-        uploadDateStackView.isHidden = true
+        fileInfoView.reset()
+        dataSource.reset()
+        peopleCollectionView.isHidden = true
     }
     
     private func setHiddenPeopleLabel() {

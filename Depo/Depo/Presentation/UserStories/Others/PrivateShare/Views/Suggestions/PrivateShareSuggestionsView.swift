@@ -38,25 +38,10 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
             let view = PrivateShareContactSuggestionView.with(contact: contact, delegate: self)
             suggestionsView.addArrangedSubview(view)
             
-            let separator = makeSeparator()
+            let separator = UIView.makeSeparator(width: suggestionsView.frame.width, offset: 16)
             suggestionsView.addArrangedSubview(separator)
             separator.heightAnchor.constraint(equalToConstant: 1).activate()
         }
-    }
-    
-    private func makeSeparator() -> UIView {
-        var frame = CGRect(origin: .zero, size: CGSize(width: suggestionsView.frame.width, height: 1))
-        let view = UIView(frame: frame)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        let offset: CGFloat = 16
-        frame.origin.x = offset
-        frame.size.width -= offset * 2
-        let separator = UIView(frame: frame)
-        separator.backgroundColor = ColorConstants.darkBorder.withAlphaComponent(0.3)
-        view.addSubview(separator)
-        separator.autoresizingMask = [.flexibleWidth]
-        return view
     }
 }
 
