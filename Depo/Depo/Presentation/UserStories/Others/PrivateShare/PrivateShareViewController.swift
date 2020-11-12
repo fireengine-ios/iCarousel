@@ -150,7 +150,23 @@ final class PrivateShareViewController: BaseViewController, NibInit {
             suggestionsView.removeFromSuperview()
         }
         
-        searchSuggestionController.update(with: query)
+        let preparedQuery = prepare(searchQuery: query)
+        searchSuggestionController.update(with: preparedQuery)
+    }
+    
+    //workaround to support search without +9 for turkish msisdn
+    private func prepare(searchQuery: String) -> String {
+        let prefixToCheck = "+90" //Turkey country code
+        let numberOfCharsToSearch = searchQuery.count - prefixToCheck.count + 1
+        
+        guard
+            numberOfCharsToSearch >= minSearchLength,
+            searchQuery.hasPrefix(prefixToCheck)
+        else {
+            return searchQuery
+        }
+        
+        return String(searchQuery.suffix(numberOfCharsToSearch))
     }
     
     private func updateShareButtonIfNeeded() {
@@ -204,19 +220,21 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     @IBAction private func onShareTapped(_ sender: Any) {
         remoteSuggestions = []
         
-        let type: PrivateShareType
-        if items.contains(where: { $0.isFolder == true }) {
-            type = .folder
-        } else {
-            type = .file
-        }
-        
-        var shareObject = PrivateShareObject(items: items.compactMap { $0.uuid },
-                                             message: messageView.message,
+        let shareObject = PrivateShareObject(items: items.compactMap { $0.uuid },
+                                             invitationMessage: messageView.message,
                                              invitees: shareWithView.contacts,
-                                             type: type,
+                                             type: .file,
                                              duration: durationView.duration)
-        //TODO: continue sharing
+   
+        shareApiService.privateShare(object: shareObject) { [weak self] result in
+            switch result {
+            case .success:
+                self?.dismiss(animated: true)
+                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareStartPageSuccess)
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
     }
 }
 

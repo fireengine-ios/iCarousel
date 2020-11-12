@@ -39,10 +39,16 @@ final class PrivateShareContactSuggestionView: UIView, NibInit {
         nameLabel.text = contact.displayName
         nameView.isHidden = contact.displayName.isEmpty
 
-        let items = contact.phones + contact.emails
-        items.forEach { item in
-            itemsStackView.addArrangedSubview(PrivateShareSuggestionItemView.with(text: item, delegate: self))
+        contact.phones.forEach { item in
+            let item = PrivateShareSuggestionItemView.with(text: item, type: .phone, delegate: self)
+            itemsStackView.addArrangedSubview(item)
         }
+        
+        contact.emails.forEach { item in
+            let item = PrivateShareSuggestionItemView.with(text: item, type: .email, delegate: self)
+            itemsStackView.addArrangedSubview(item)
+        }
+        
         layoutIfNeeded()
     }
 }

@@ -265,6 +265,7 @@ struct RouteRequests {
     
     enum PrivateShare {
         static let suggestions = baseUrl +/ "invitees"
+        static let share = baseUrl +/ "shares"
     }
     
     //MARK: - Turkcell Updater
