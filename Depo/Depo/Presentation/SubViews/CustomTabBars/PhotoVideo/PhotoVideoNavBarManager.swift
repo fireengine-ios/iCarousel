@@ -46,8 +46,8 @@ final class PhotoVideoNavBarManager {
         delegate?.setRightBarButtonItems([threeDotsButton], animated: false)
     }
     
-    func setDefaultMode() {
-        delegate?.setTitle("")
+    func setDefaultMode(title: String = "") {
+        delegate?.setTitle(title)
         delegate?.setRightBarButtonItems([threeDotsButton, searchButton], animated: false)
         delegate?.setLeftBarButtonItems(nil, animated: true)
         threeDotsButton.isEnabled = true

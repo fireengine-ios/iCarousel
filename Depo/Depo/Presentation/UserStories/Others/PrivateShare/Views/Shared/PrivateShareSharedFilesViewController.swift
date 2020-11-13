@@ -16,6 +16,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         switch shareType {
             case .byMe: title = TextConstants.privateShareSharedByMeTab
             case .withMe: title = TextConstants.privateShareSharedWithMeTab
+            case .innerFolder(_, let name): title = name
         }
         controller.title = title
         controller.shareType = shareType
@@ -23,7 +24,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
 
     
-    @IBOutlet weak var topBarContainer: UIView!
+    @IBOutlet weak var collectionViewBarContainer: UIView!
     @IBOutlet private weak var collectionView: QuickSelectCollectionView!
     
     private lazy var gridListBar: GridListTopBar = {
@@ -43,29 +44,51 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }()
     
     private lazy var navBarManager = PhotoVideoNavBarManager(delegate: self)
+    private lazy var bottomBarManager = PhotoVideoBottomBarManager(delegate: self)
+    
+    private let router = RouterVC()
     
     //MARK: - Override
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setTitle(title ?? "")
         collectionManager.setup()
         setupBars()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        bottomBarManager.editingTabBar?.view.layoutIfNeeded()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setupNavigationBar(editingMode: false)
+        
+        let selectedItems = collectionManager.selectedItems()
+        if !selectedItems.isEmpty {
+            setupNavigationBar(editingMode: true)
+            show(selectedItemsCount: selectedItems.count)
+            bottomBarManager.update(for: selectedItems)
+        }
     }
     
     //MARK: - Private
     
     private func setupBars() {
         needToShowTabBar = true
+        navBarManager.setDefaultMode(title: title ?? "")
         navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
-        setupTopBar()
+        setupCollectionViewBar()
+        bottomBarManager.setup()
     }
     
-    private func setupTopBar() {
-        
+    private func setupCollectionViewBar() {
         gridListBar.view.translatesAutoresizingMaskIntoConstraints = false
-        topBarContainer.addSubview(gridListBar.view)
+        collectionViewBarContainer.addSubview(gridListBar.view)
         gridListBar.view.pinToSuperviewEdges()
         
         let sortingTypes: [MoreActionsConfig.SortRullesType] = [.AlphaBetricAZ, .AlphaBetricZA, .TimeNewOld, .TimeOldNew, .Largest, .Smallest]
@@ -82,7 +105,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
 //MARK: - GridListTopBarDelegate
 extension PrivateShareSharedFilesViewController: GridListTopBarDelegate {
     func filterChanged(filter: MoreActionsConfig.MoreActionsFileType) {
-        //disabled
+        //disabled by availableFilter: false
     }
     
     func sortingRuleChanged(rule: MoreActionsConfig.SortRullesType) {
@@ -97,34 +120,52 @@ extension PrivateShareSharedFilesViewController: GridListTopBarDelegate {
 //MARK: - PrivateShareSharedFilesCollectionManagerDelegate
 extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollectionManagerDelegate {
     func didStartSelection(selected: Int) {
-        setupNavigationBar(editingMode: true)
+        updateBars(isSelecting: true)
     }
     
-    func didChangeSelection(selected: Int) {
-        update(selectedItemsCount: selected)
-//        updateBarsForSelectedObjects()
+    func didEndSelection() {
+        updateBars(isSelecting: false)
     }
     
+    func didChangeSelection(selectedItems: [WrapData]) {
+        show(selectedItemsCount: selectedItems.count)
+        bottomBarManager.update(for: selectedItems)
+    }
     
     //MARK: Helpers
     
-    private func update(selectedItemsCount: Int) {
+    private func show(selectedItemsCount: Int) {
         DispatchQueue.main.async {
             self.setTitle("\(selectedItemsCount) \(TextConstants.accessibilitySelected)")
         }
     }
     
-    private func setupNavigationBar(editingMode: Bool) {
-        /// don't let vc to change navBar if vc is not visible at this moment
-        guard viewIfLoaded?.window != nil else {
-            return
+    private func updateBars(isSelecting: Bool) {
+        DispatchQueue.main.async {
+            self.setupNavigationBar(editingMode: isSelecting)
+            if isSelecting {
+                self.bottomBarManager.show()
+            } else {
+                self.bottomBarManager.hide()
+            }
         }
-        
-        /// be sure to configure navbar items after setup navigation bar
-        if editingMode {
-            navBarManager.setSelectionMode()
-        } else {
-            navBarManager.setDefaultMode()
+    }
+
+    private func setupNavigationBar(editingMode: Bool) {
+        DispatchQueue.main.async {
+            /// don't let vc to change navBar if vc is not visible at this moment
+            guard self.viewIfLoaded?.window != nil else {
+                return
+            }
+            
+            /// be sure to configure navbar items after setup navigation bar
+            if editingMode {
+                self.navigationBarWithGradientStyle()
+                self.navBarManager.setSelectionMode()
+            } else {
+                self.navBarManager.setDefaultMode(title: self.title ?? "")
+                self.navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
+            }
         }
     }
 }
@@ -133,7 +174,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
 //MARK: - PhotoVideoNavBarManagerDelegate
 extension PrivateShareSharedFilesViewController: PhotoVideoNavBarManagerDelegate {
     func onCancelSelectionButton() {
-        collectionManager.cancelSelection()
+        collectionManager.endSelection()
     }
     
     func onThreeDotsButton() {
@@ -141,6 +182,42 @@ extension PrivateShareSharedFilesViewController: PhotoVideoNavBarManagerDelegate
     }
     
     func onSearchButton() {
-        //TODO:
+        showSearchScreen()
     }
+    
+    //MARK: Helpers
+    private func showSearchScreen() {
+        let controller = router.searchView(navigationController: navigationController)
+        router.pushViewController(viewController: controller)
+    }
+}
+
+
+extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
+    
+    func selectModeSelected() {
+        collectionManager.startSelection()
+    }
+    
+    func stopModeSelected() {
+        collectionManager.endSelection()
+    }
+    
+    func getSelectedItems(selectedItemsCallback: @escaping BaseDataSourceItems) {
+        selectedItemsCallback(collectionManager.selectedItems())
+    }
+    
+    func operationFinished(withType type: ElementTypes, response: Any?) { }
+    
+    func operationFailed(withType type: ElementTypes) {}
+    
+    func selectAllModeSelected() {}
+    
+    func deSelectAll() {}
+    
+    func printSelected() {}
+    
+    func changeCover() {}
+    
+    func openInstaPick() {}
 }

@@ -47,9 +47,9 @@ struct SharedFileInfo: Codable {
     let status: String? // enum
     let uploaderDeviceType: String? //enum
     let ugglaId: String?
-    let content_type: String?
+    let contentType: String?
     //        "metadata": {},
-    let album: [String]?
+    let album: [FileAlbum]?
     //        "location": {},
     let permissions: SharedItemPermission?
     let sharedBy: [SuggestedApiContact]?
@@ -58,26 +58,35 @@ struct SharedFileInfo: Codable {
         guard let timeInterval = createdDateValue else {
             return Date()
         }
-        return Date(timeIntervalSince1970: timeInterval)
+        return Date.from(millisecondsSince1970: timeInterval)
     }
     
     var lastModifiedDate: Date {
         guard let timeInterval = lastModifiedDateValue else {
             return Date()
         }
-        return Date(timeIntervalSince1970: timeInterval)
+        return Date.from(millisecondsSince1970: timeInterval)
     }
     
     var fileType: FileType {
-        return FileType(type: content_type, fileName: name)
+        return FileType(type: contentType, fileName: name)
     }
     
     enum CodingKeys: String, CodingKey {
         case createdDateValue = "createdDate"
         case lastModifiedDateValue = "lastModifiedDate"
         
-        case id, hash, name, uuid, bytes, folder, childCount, status, uploaderDeviceType, ugglaId, content_type, album, permissions, sharedBy
+        case id, hash, name, uuid, bytes, folder, childCount, status, uploaderDeviceType, ugglaId, contentType, album, permissions, sharedBy
     }
+}
+
+struct FileAlbum: Codable {
+    
+}
+
+struct FileSystem: Codable {
+    let parentFolderList: [SharedFileInfo]
+    let fileList: [SharedFileInfo]
 }
 
 

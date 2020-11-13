@@ -12,6 +12,7 @@ import Foundation
 enum PrivateShareType {
     case byMe
     case withMe
+    case innerFolder(id: String, name: String)
 }
 
 
@@ -32,8 +33,9 @@ final class PrivateShareFileInfoManager {
     private var sorting: SortedRules = .timeUp
     private var isPageLoading = false
     
-    private(set) var loadedItems = SynchronizedArray<WrapData>()
+    private(set) var sortedItems = SynchronizedArray<WrapData>()
     private(set) var selectedItems = SynchronizedSet<WrapData>()
+    private(set) var splittedItems = SynchronizedArray<[WrapData]>()
     
     //MARK: - Life cycle
     
@@ -55,23 +57,31 @@ final class PrivateShareFileInfoManager {
                 
                 switch result {
                     case .success(let filesInfo):
+                        
+                        let newItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0) }
+                        
+                        guard !newItems.isEmpty else {
+                            self.isPageLoading = false
+                            completion([])
+                            return
+                        }
+                        
                         self.pageLoaded += 1
                         
-                        let firstRowToAdd = self.loadedItems.count
-                        let sortedItems = self.sorted(items: filesInfo.compactMap { WrapData(privateShareFileInfo: $0) })
-                        self.loadedItems.append(sortedItems)
+                        let sorted = self.sortedItems.getArray() + self.sorted(items: newItems)
+                        self.sortedItems.replace(with: sorted, completion: nil)
                         
-                        //TODO: sections
-                        var indexPathes = [IndexPath]()
-                        for i in 0..<filesInfo.count {
-                            indexPathes.append(IndexPath(row: firstRowToAdd+i, section: 0))
+                        let splitted = self.splitted(sortedArray: sorted)
+                        
+                        self.splittedItems.replace(with: splitted) { [weak self] in
+                            self?.isPageLoading = false
+                            completion([])
                         }
-                        completion(indexPathes)
                         
                     case .failed(_):
+                        self.isPageLoading = false
                         completion([])
                 }
-                self.isPageLoading = false
             }
         }
     }
@@ -79,7 +89,8 @@ final class PrivateShareFileInfoManager {
     func reload(completion: @escaping ValueHandler<[IndexPath]>) {
         queue.sync {
             selectedItems.removeAll()
-            loadedItems.removeAll()
+            sortedItems.removeAll()
+            splittedItems.removeAll()
             pageLoaded = 0
             loadNext(completion: completion)
         }
@@ -91,26 +102,25 @@ final class PrivateShareFileInfoManager {
         }
         
         sorting = sortingRules
-        loadedItems.modify { [weak self] array in
-            guard let self = self else {
-                completion()
-                return []
-            }
+        
+        let changedSorted = sorted(items: sortedItems.getArray())
+        sortedItems.replace(with: changedSorted, completion: nil)
+        
+        let changedSplitted = splitted(sortedArray: changedSorted)
+        
+        splittedItems.replace(with: changedSplitted) {
             completion()
-            return self.sorted(items: array)
         }
     }
     
     func selectItem(at indexPath: IndexPath) {
-        //TODO: sections
-        if let item = loadedItems[indexPath.row] {
+        if let item = splittedItems[indexPath.section]?[safe:indexPath.row]{
             selectedItems.insert(item)
         }
     }
     
     func deselectItem(at indexPath: IndexPath) {
-        //TODO: sections
-        if let item = loadedItems[indexPath.row] {
+        if let item = splittedItems[indexPath.section]?[safe:indexPath.row] {
             selectedItems.remove(item)
         }
     }
@@ -125,12 +135,51 @@ final class PrivateShareFileInfoManager {
         switch type {
             case .byMe:
                 privateShareAPIService.getSharedByMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
+                
             case .withMe:
-                privateShareAPIService.getSharedByMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
+                privateShareAPIService.getSharedWithMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
+                
+            case .innerFolder(let folderUuid, _):
+                privateShareAPIService.getFiles(folderUUID: folderUuid, size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { response in
+                    switch response {
+                        case .success(let fileSystem):
+                            completion(.success(fileSystem.fileList))
+                        case .failed(let error):
+                            completion(.failed(error))
+                    }
+                }
         }
     }
     
     private func sorted(items: [WrapData]) -> [WrapData] {
         return WrapDataSorting.sort(items: items, sortType: sorting)
+    }
+    
+    private func splitted(sortedArray: [WrapData]) -> [[WrapData]]  {
+        let grouped: [String : [WrapData]]
+        switch sorting {
+        case .timeUp, .timeUpWithoutSection, .lastModifiedTimeUp, .timeDown, .timeDownWithoutSection, .lastModifiedTimeDown:
+            grouped = Dictionary(grouping: sortedArray, by: { $0.creationDate?.getDateForSortingOfCollectionView() ?? Date().getDateForSortingOfCollectionView()
+            })
+            
+        case .lettersAZ, .albumlettersAZ, .lettersZA, .albumlettersZA:
+            grouped = Dictionary(grouping: sortedArray, by: { $0.name?.firstLetter ?? "" })
+            
+        case .sizeAZ, .sizeZA:
+            grouped = Dictionary(grouping: sortedArray, by: { $0.fileSize.bytesString })
+            
+        case .metaDataTimeUp, .metaDataTimeDown:
+            grouped = Dictionary(grouping: sortedArray, by: { $0.creationDate?.getDateForSortingOfCollectionView() ?? Date().getDateForSortingOfCollectionView()
+            })
+        }
+        
+        let splitted: [[WrapData]]
+        if grouped.isEmpty {
+            splitted = [sortedArray]
+        } else {
+            splitted = grouped.sorted(by: { $0.0 > $1.0 }).compactMap { $0.value }
+        }
+        
+        return splitted
     }
 }

@@ -49,4 +49,20 @@ extension SynchronizedSet {
         queue.sync { result = self.storage.count }
         return result
     }
+    
+    func getSet() -> Set<T> {
+        var result = Set<T>()
+        queue.sync {
+            result = storage
+        }
+        return result
+    }
+    
+    func getArray() -> [T] {
+        var result = [T]()
+        queue.sync {
+            result = Array(storage)
+        }
+        return result
+    }
 }

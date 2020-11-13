@@ -367,6 +367,11 @@ struct RouteRequests {
         static let emptyTrash = baseUrl +/ "trash/empty"
         static let hide = baseUrl +/ (filesystemBase + "hide")
         static let recover = (baseUrl +/ filesystemBase) +/ "recover"
+        
+        enum Version_2 {
+            private static let baseV2Url = baseUrl +/ "v2/files"
+            static let filesFromFolder = baseV2Url.absoluteString + "?size=%d&page=%d&sortBy=%@&sortOrder=%@&parentFolderUuid=%@"
+        }
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"

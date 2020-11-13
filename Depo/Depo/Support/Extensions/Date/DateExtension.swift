@@ -73,4 +73,8 @@ extension Date: Components {
         return Date(timeIntervalSince1970: timeInterval)
     }
     
+    static func from(millisecondsSince1970: Double) -> Date {
+        return Date(timeIntervalSince1970: millisecondsSince1970 / 1000.0)
+    }
+    
 }

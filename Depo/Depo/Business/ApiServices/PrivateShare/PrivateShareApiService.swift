@@ -9,6 +9,7 @@
 import Alamofire
 
 protocol PrivateShareApiService {
+    @discardableResult
     func getSuggestions(handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask?
     
     @discardableResult
@@ -16,6 +17,9 @@ protocol PrivateShareApiService {
     
     @discardableResult
     func getSharedWithMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask?
+    
+    @discardableResult
+    func getFiles(folderUUID: String, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseHandler<FileSystem>) -> URLSessionTask?
     
     func privateShare(object: PrivateShareObject, handler: @escaping ResponseVoid) -> URLSessionTask?
 }
@@ -53,6 +57,18 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .request(url)
             .customValidate()
             .responseArray(handler)
+            .task
+    }
+    
+    @discardableResult
+    func getFiles(folderUUID: String, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseHandler<FileSystem>) -> URLSessionTask? {
+        let url = String(format: RouteRequests.FileSystem.Version_2.filesFromFolder, size, page, sortBy.description, sortOrder.description, folderUUID)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseObject(handler)
             .task
     }
     

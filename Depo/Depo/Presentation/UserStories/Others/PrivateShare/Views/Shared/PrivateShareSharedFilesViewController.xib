@@ -12,7 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PrivateShareSharedFilesViewController" customModule="Billo" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="c4H-7I-uCm" id="0SW-6d-QDm"/>
-                <outlet property="topBarContainer" destination="tdo-YS-avN" id="2Og-C4-b8l"/>
+                <outlet property="collectionViewBarContainer" destination="tdo-YS-avN" id="lTq-HO-qxo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

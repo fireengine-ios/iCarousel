@@ -1173,6 +1173,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         id = privateShareFileInfo.id
         isFolder = privateShareFileInfo.folder
+        if isFolder == true {
+            fileType = .folder
+        }
         childCount = privateShareFileInfo.childCount
     }
     
