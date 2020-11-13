@@ -63,7 +63,12 @@ final class PrivateShareWithContactView: UIView, NibInit {
     func setup(with contact: PrivateShareContact) {
         self.contact = contact
         if contact.displayName.isEmpty {
-            titleLabel.text = contact.username
+            if contact.username.contains("@") {
+                titleLabel.text = contact.username
+            } else {
+                let allowedCharacterSet = CharacterSet.decimalDigits.union(CharacterSet(charactersIn: "+()"))
+                titleLabel.text = contact.username.components(separatedBy: allowedCharacterSet.inverted).joined()
+            }
         } else {
             titleLabel.text = contact.displayName
         }

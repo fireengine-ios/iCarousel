@@ -22,7 +22,7 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LhF-tu-UDl">
-                    <rect key="frame" x="16" y="0.0" width="46" height="50"/>
+                    <rect key="frame" x="16" y="0.0" width="398" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="knV-S9-BoQ"/>
                     </constraints>
@@ -36,7 +36,7 @@
             <constraints>
                 <constraint firstItem="LhF-tu-UDl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Afv-o1-akV"/>
                 <constraint firstItem="qhr-aS-EPK" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ZR3-xs-bkG"/>
-                <constraint firstItem="qhr-aS-EPK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LhF-tu-UDl" secondAttribute="trailing" constant="8" id="mYr-jc-I5T"/>
+                <constraint firstAttribute="trailing" secondItem="LhF-tu-UDl" secondAttribute="trailing" id="mYr-jc-I5T"/>
                 <constraint firstAttribute="trailing" secondItem="qhr-aS-EPK" secondAttribute="trailing" constant="25" id="pCu-BU-ruK"/>
                 <constraint firstItem="LhF-tu-UDl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uZg-uH-vbA"/>
                 <constraint firstAttribute="bottom" secondItem="LhF-tu-UDl" secondAttribute="bottom" id="wcZ-aX-gWO"/>
