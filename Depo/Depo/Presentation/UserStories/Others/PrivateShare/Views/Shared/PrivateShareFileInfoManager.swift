@@ -176,8 +176,9 @@ final class PrivateShareFileInfoManager {
         let splitted: [[WrapData]]
         if grouped.isEmpty {
             splitted = [sortedArray]
+            
         } else {
-            splitted = grouped.sorted(by: { $0.0 > $1.0 }).compactMap { $0.value }
+            splitted = grouped.sorted(by: { sorting.sortOder == .asc ? ($0.0 > $1.0) : ($0.0 < $1.0) }).compactMap { $0.value }
         }
         
         return splitted

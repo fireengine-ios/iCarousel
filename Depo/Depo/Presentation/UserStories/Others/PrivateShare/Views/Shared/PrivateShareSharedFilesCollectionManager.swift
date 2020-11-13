@@ -86,6 +86,8 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     private func setupCollection() {
         collectionView?.register(nibCell: BasicCollectionMultiFileCell.self)
+        collectionView?.register(nibSupplementaryView: CollectionViewSimpleHeaderWithText.self,
+                                 kind: UICollectionElementKindSectionHeader)
         
         collectionView?.alwaysBounceVertical = true
         
@@ -326,6 +328,17 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: NumericConstants.iPhoneGreedInset, bottom: 0, right: NumericConstants.iPhoneGreedInset)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let height: CGFloat =  50
+        return CGSize(width: collectionView.contentSize.width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let sectionHeader = collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
+        sectionHeader.setText(text: "")
+        return sectionHeader
     }
 }
 
