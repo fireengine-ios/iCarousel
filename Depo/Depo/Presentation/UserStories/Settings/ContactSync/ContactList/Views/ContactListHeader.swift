@@ -81,7 +81,7 @@ final class ContactListHeader: UIView, NibInit {
             return
         }
         
-        let date = backUpInfo.date ?? Date()
+        let date = backUpInfo.created ?? Date()
         let dateString = dateFormatter.string(from: date)
         
         let string = String(format: TextConstants.contactListInfo, backUpInfo.total, dateString)
