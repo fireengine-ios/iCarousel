@@ -189,10 +189,6 @@ final class ContactBackupItem: ObjectRequestResponse {
     var key = ""
     var total = 0
     
-    var date: Date? {
-        modified ?? created
-    }
-    
     override func mapping() {
         id = json?[JsonKeys.id].int64 ?? -1
         created = json?[JsonKeys.created].date
