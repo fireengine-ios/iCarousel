@@ -38,68 +38,12 @@ final class FileInfoView: UIView, FromNib {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizerHandler))
         return gesture
     }()
-    
-    // people
-    
-    @IBOutlet private weak var peopleStackView: UIStackView!
-    
-    @IBOutlet private weak var peopleTitleLabel: UILabel! {
-        willSet {
-            newValue.text = TextConstants.myStreamPeopleTitle
-            newValue.font = UIFont.TurkcellSaturaBolFont(size: 14)
-            newValue.textColor = ColorConstants.marineTwo
-        }
-    }
 
-    @IBOutlet private weak var peopleCollectionView: UICollectionView!
-
-    // enableFIR
-    @IBOutlet private weak var enableFIRStackView: UIStackView!
-    @IBOutlet private weak var enableFIRTextLabel: UILabel! {
-        willSet {
-            newValue.text = TextConstants.fileInfoPeople
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
-            newValue.textColor = ColorConstants.closeIconButtonColor
-        }
-    }
-    
-    @IBOutlet private weak var enableFIRButton: RoundedInsetsButton! {
-        willSet {
-            newValue.setTitleColor(.white, for: UIControl.State())
-            newValue.insets = UIEdgeInsets(topBottom: 0, rightLeft: 12)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 16)
-            newValue.backgroundColor = ColorConstants.marineTwo
-            newValue.setTitle(TextConstants.passcodeEnable, for: UIControl.State())
-            newValue.adjustsFontSizeToFitWidth()
-        }
-    }
-    
-    // premium
-    @IBOutlet private weak var premiumStackView: UIStackView!
-    
-    @IBOutlet private weak var premiumTextLabel: UILabel! {
-        willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
-            newValue.textColor = ColorConstants.closeIconButtonColor
-        }
-    }
-    
-    @IBOutlet private weak var premiumButton: GradientPremiumButton! {
-        willSet {
-            newValue.titleEdgeInsets = UIEdgeInsetsMake(6, 14, 6, 14)
-            newValue.setTitle(TextConstants.becomePremium, for: .normal)
-            newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 15)
-        }
-    }
+    // MARK: Private Properties
     
     private lazy var fileNameView = FileNameView.with(delegate: self)
     private lazy var fileInfoView = FileMetaInfoView.view()
-    
-    // MARK: Private Properties
-    
-    private var fileType: FileType = .application(.unknown)
-    private var status: ItemStatus = .unknown
-    private lazy var dataSource = PeopleSliderDataSource(collectionView: peopleCollectionView, delegate: self)
+    private lazy var peopleView = FileInfoPeopleView.with(delegate: self)
     
     // MARK: Life cycle
     
@@ -120,10 +64,10 @@ final class FileInfoView: UIView, FromNib {
     func setObject(_ object: BaseDataSourceItem, completion: VoidHandler?) {
         resetUI()
         fileNameView.name = object.name
-        fileType = object.fileType
+        peopleView.fileType = object.fileType
         
         if let obj = object as? WrapData {
-            status = obj.status
+            peopleView.status = obj.status
             setWith(wrapData: obj)
         }
         
@@ -148,36 +92,15 @@ final class FileInfoView: UIView, FromNib {
     }
     
     func reloadCollection(with items: [PeopleOnPhotoItemResponse]) {
-        let isHidden = peopleCollectionView.isHidden
-        switch status {
-        case .deleted, .trashed, .hidden:
-            peopleCollectionView.isHidden = true
-        default:
-            peopleCollectionView.isHidden = items.isEmpty
-        }
-        premiumTextLabel.text = items.isEmpty
-            ? TextConstants.noPeopleBecomePremiumText
-            : TextConstants.allPeopleBecomePremiumText
-        dataSource.reloadCollection(with: items)
-        setHiddenPeopleLabel()
-        isHidden != items.isEmpty ? layoutIfNeeded() : ()
+        peopleView.reload(with: items)
     }
     
     func setHiddenPeoplePlaceholder(isHidden: Bool) {
-        enableFIRStackView.isHidden = isHidden
-        peopleCollectionView.isHidden = !isHidden
+        peopleView.setHiddenPeoplePlaceholder(isHidden: isHidden)
     }
     
     func setHiddenPremiumStackView(isHidden: Bool) {
-        var isPremiumHidden: Bool
-        switch status {
-        case .deleted, .trashed, .hidden:
-            isPremiumHidden = true
-        default:
-            isPremiumHidden = fileType == .image ? isHidden : true
-        }
-        premiumStackView.isHidden = isPremiumHidden
-        setHiddenPeopleLabel()
+        peopleView.setHiddenPremiumStackView(isHidden: isHidden)
     }
     
     func setWith(wrapData: WrapData) {
@@ -190,8 +113,7 @@ final class FileInfoView: UIView, FromNib {
         fileInfoView.setup(with: wrapData)
         
         if wrapData.fileType == .video {
-            peopleStackView.isHidden = true
-            premiumStackView.isHidden = true
+            peopleView.isHidden = true
         }
     }
         
@@ -213,7 +135,7 @@ final class FileInfoView: UIView, FromNib {
     
     private func setup() {
         layer.masksToBounds = true
-        let views: [UIView] = [fileNameView, fileInfoView]
+        let views: [UIView] = [fileNameView, fileInfoView, peopleView]
         
         var index = 0
         views.forEach { view in
@@ -236,35 +158,11 @@ final class FileInfoView: UIView, FromNib {
     private func resetUI() {
         fileNameView.title = TextConstants.fileInfoFileNameTitle
         fileInfoView.reset()
-        dataSource.reset()
-        peopleCollectionView.isHidden = true
-    }
-    
-    private func setHiddenPeopleLabel() {
-        peopleTitleLabel.isHidden =
-            premiumStackView.isHidden
-            && peopleCollectionView.isHidden
-            && enableFIRStackView.isHidden
+        peopleView.reset()
     }
     
     @objc private func tapGestureRecognizerHandler(_ gestureRecognizer: UITapGestureRecognizer) {
         output?.tapGesture(recognizer: gestureRecognizer)
-    }
-    
-    // MARK: Actions
-    
-    @IBAction private func onEnableTapped(_ sender: Any) {
-        output.onEnableFaceRecognitionDidTap()
-    }
-    
-    @IBAction private func onPremiumTapped(_ sender: Any) {
-        output.onBecomePremiumDidTap()
-    }
-}
-
-extension FileInfoView: PeopleSliderDataSourceDelegate {
-    func didSelect(item: PeopleOnPhotoItemResponse) {
-        output.onPeopleAlbumDidTap(item)
     }
 }
 
@@ -273,7 +171,7 @@ extension FileInfoView: UIGestureRecognizerDelegate {
         if let gestureView = gestureRecognizer.view {
             let tapLocation = gestureRecognizer.location(in: gestureView)
             let subview = hitTest(tapLocation, with: nil)
-            return subview == peopleCollectionView
+            return subview == peopleView.collectionView
         }
         return true
     }
@@ -286,14 +184,7 @@ extension FileInfoView: FaceImageItemsModuleOutput {
     func didReloadData() {}
     
     func delete(item: Item) {
-        guard let peopleItem = item as? PeopleItem,
-            let index = dataSource.items.firstIndex(where: { $0.personInfoId == peopleItem.id })
-        else {
-            return
-        }
-            
-        dataSource.deleteItem(at: index)
-        reloadCollection(with: dataSource.items)
+        peopleView.delete(item: item)
     }
 }
 
@@ -303,5 +194,22 @@ extension FileInfoView: FileNameViewDelegate {
     
     func onRename(newName: String) {
         output.onRename(newName: newName)
+    }
+}
+
+//MARK: - FileInfoPeopleViewDelegate
+
+extension FileInfoView: FileInfoPeopleViewDelegate {
+    
+    func onPeopleAlbumDidTap(item: PeopleOnPhotoItemResponse) {
+        output.onPeopleAlbumDidTap(item)
+    }
+    
+    func onEnableFaceRecognitionDidTap() {
+        output.onEnableFaceRecognitionDidTap()
+    }
+    
+    func onBecomePremiumDidTap() {
+        output.onBecomePremiumDidTap()
     }
 }
