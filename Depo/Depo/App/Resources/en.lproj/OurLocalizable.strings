@@ -1820,6 +1820,7 @@
 "private_share_start_page_role_1" = "Editor";
 "private_share_start_page_role_2" = "Viewer";
 "private_share_start_page_share_success" = "Share is successful";
+"private_share_cancel_confirm" = "Are you sure you want to quit?";
 
 "private_share_role_selection_page_name" = "Access";
 "private_share_role_selection_role_1" = "Can edit";

@@ -11,6 +11,7 @@ import UIKit
 protocol PrivateShareSelectPeopleViewDelegate: class {
     func startEditing(text: String)
     func searchTextDidChange(text: String)
+    func hideKeyboard(text: String)
     func addShareContact(_ contact: PrivateShareContact)
     func onUserRoleTapped(contact: PrivateShareContact, sender: Any)
 }
@@ -116,26 +117,20 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        delegate?.hideKeyboard(text: textField.text ?? "")
         return true
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        guard string != " " else {
-            return false
-        }
-        
-        if string == "0", textField.text?.isEmpty == true {
-            return false
-        }
-        
         if let text = textField.text, text.count == 0,
-           (string == "+" || string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil)
+           (string == "+" || string == "0" || string.rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil)
         {
             let code = CoreTelephonyService().getCountryCode()
             let countryCode = code.isEmpty ? "+" : code
+            let isReplacableString = string == "+" || string == "0"
             textField.text = countryCode
-            return string == "+" ? false : true
+            return !isReplacableString
         }
         
         return true
