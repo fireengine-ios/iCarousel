@@ -416,4 +416,24 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
     func tapGesture(recognizer: UITapGestureRecognizer) {
         view.closeDetailViewIfNeeded()
     }
+    
+    func onSelectSharedContact(_ contact: SharedContact) {
+        //TODO: COF-585 - open role view/update page
+    }
+        
+    func onAddNewShare() {
+        guard let index = interactor.currentItemIndex else {
+            return
+        }
+        let currentItem = interactor.allItems[index]
+        router.openPrivateShare(for: currentItem) { [weak self] success in
+            if success {
+                self?.view.updateBottomDetailView()
+            }
+        }
+    }
+    
+    func showWhoHasAccess() {
+        //TODO: COF-535 - open Who has access page
+    }
 }

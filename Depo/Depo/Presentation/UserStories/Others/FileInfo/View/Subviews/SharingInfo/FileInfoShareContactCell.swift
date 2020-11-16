@@ -48,6 +48,14 @@ final class FileInfoShareContactCell: UICollectionViewCell {
     private var contact: SharedContact?
     weak var delegate: FileInfoShareContactCellDelegate?
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        button.setTitle("", for: .normal)
+        button.setImage(nil, for: .normal)
+        circleView.layer.borderWidth = 0
+    }
+    
     func setup(type: FileInfoShareContactCellType, contact: SharedContact?, count: Int?, index: Int) {
         self.type = type
         self.contact = contact
@@ -57,29 +65,24 @@ final class FileInfoShareContactCell: UICollectionViewCell {
             if let initials = contact?.initials, !initials.isEmpty {
                 button.setTitle(initials, for: .normal)
                 button.backgroundColor = color(for: index)
-                button.setImage(nil, for: .normal)
             } else {
                 button.setImage(UIImage(named: "contact_placeholder"), for: .normal)
             }
             
             button.setTitleColor(.white, for: .normal)
-            button.layer.borderWidth = 0
             roleLabel.text = contact?.role.infoMenuTitle ?? ""
             
         case .additionalCount:
             if let count = count {
                 button.setTitle("+\(count)", for: .normal)
-            } else {
-                button.setTitle("", for: .normal)
             }
+            
             button.setTitleColor(ColorConstants.marineFour, for: .normal)
             circleView.layer.borderWidth = 2
             circleView.layer.borderColor = ColorConstants.marineFour.cgColor
             
         case .plusButton:
-            button.setTitle("", for: .normal)
             button.setImage(UIImage(named: "plus_large"), for: .normal)
-            circleView.layer.borderWidth = 0
         }
     }
     

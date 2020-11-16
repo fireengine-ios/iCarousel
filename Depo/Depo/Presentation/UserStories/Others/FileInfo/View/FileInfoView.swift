@@ -14,6 +14,9 @@ protocol PhotoInfoViewControllerOutput {
     func onBecomePremiumDidTap()
     func onPeopleAlbumDidTap(_ album: PeopleOnPhotoItemResponse)
     func tapGesture(recognizer: UITapGestureRecognizer)
+    func onSelectSharedContact(_ contact: SharedContact)
+    func onAddNewShare()
+    func showWhoHasAccess()
 }
 
 final class FileInfoView: UIView, FromNib {
@@ -48,9 +51,8 @@ final class FileInfoView: UIView, FromNib {
     
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
     private lazy var shareApiService = PrivateShareApiServiceImpl()
-    private lazy var router = RouterVC()
     
-    private var item: BaseDataSourceItem?
+    private var uuid = ""
     
     // MARK: Life cycle
     
@@ -69,8 +71,7 @@ final class FileInfoView: UIView, FromNib {
     // MARK: Public Methods
     
     func setObject(_ object: BaseDataSourceItem, completion: VoidHandler?) {
-        item = object
-        
+        uuid = object.uuid
         resetUI()
         fileNameView.name = object.name
         peopleView.fileType = object.fileType
@@ -140,6 +141,10 @@ final class FileInfoView: UIView, FromNib {
     
     func hideKeyboard() {
         fileNameView.hideKeyboard()
+    }
+    
+    func updateShareInfo() {
+        getSharingInfo(uuid: uuid)
     }
     
     // MARK: Private Methods
@@ -281,22 +286,14 @@ extension FileInfoView: FileInfoPeopleViewDelegate {
 extension FileInfoView: FileInfoShareViewDelegate {
     
     func didSelect(contact: SharedContact) {
-        //TODO: COF-585 - open role view/update page
+        output.onSelectSharedContact(contact)
     }
     
     func didTappedPlusButton() {
-        //TODO: add sharing for albums
-        if let item = item as? WrapData {
-            let controller = router.privateShare(items: [item]) { [weak self] success in
-                if success {
-                    self?.getSharingInfo(uuid: item.uuid)
-                }
-            }
-            router.presentViewController(controller: controller)
-        }
+        output.onAddNewShare()
     }
     
-    func didTappedArrowButton() {
-        //TODO: COF-535 - open Who has access page
+    func didTappedArrowButton() {        
+        output.showWhoHasAccess()
     }
 }

@@ -360,6 +360,10 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         editingTabBar.tabBar(editingTabBar.editingBar, didSelect: tabBarItem)
     }
+    
+    func updateBottomDetailView() {
+        bottomDetailView?.updateShareInfo()
+    }
 }
 
 
