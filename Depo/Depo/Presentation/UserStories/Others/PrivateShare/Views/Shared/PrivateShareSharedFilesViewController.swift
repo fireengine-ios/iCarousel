@@ -43,7 +43,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         return manager
     }()
     
-    private lazy var navBarManager = PrivateShareSharedFilesNavBarManager(delegate: self)
+    private lazy var navBarManager = SegmentedChildNavBarManager(delegate: self)
     private lazy var bottomBarManager = PrivateShareSharedFilesBottomBarManager(delegate: self)
     
     private let router = RouterVC()
@@ -186,8 +186,8 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
 }
 
 
-//MARK: - PrivateShareSharedFilesNavBarManagerDelegate
-extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesNavBarManagerDelegate {
+//MARK: - SegmentedChildNavBarManagerDelegate
+extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDelegate {
     func onCancelSelectionButton() {
         collectionManager.endSelection()
     }
