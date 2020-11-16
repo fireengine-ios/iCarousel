@@ -298,13 +298,12 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     }
     
     func addShareContact(_ contact: PrivateShareContact) {
-        if contact.username.contains("@"), !Validator.isValid(email: contact.username) {
-            UIApplication.showErrorAlert(message: TextConstants.privateShareEmailValidationFailPopUpText)
-            return
-        }
-        
-        guard Validator.isValid(contactsPhone: contact.username) else {
-            UIApplication.showErrorAlert(message: TextConstants.privateSharePhoneValidationFailPopUpText)
+        guard isValidContact(text: contact.username) else {
+            if contact.username.contains("@") {
+                UIApplication.showErrorAlert(message: TextConstants.privateShareEmailValidationFailPopUpText)
+            } else {
+                UIApplication.showErrorAlert(message: TextConstants.privateSharePhoneValidationFailPopUpText)
+            }
             return
         }
         
@@ -317,6 +316,12 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
         updateShareButtonIfNeeded()
     }
     
+    private func isValidContact(text: String) -> Bool {
+        if Validator.isValid(email: text) || Validator.isValid(contactsPhone: text) {
+            return true
+        }
+        return false
+    }
 }
 
 //MARK: - PrivateShareWithViewDelegate
