@@ -1162,8 +1162,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         patchToPreview = .remoteUrl(nil)
         status = .active
         
-        //FIXME: uncomment
-        super.init(uuid: UUID().uuidString, //privateShareFileInfo.uuid,
+        super.init(uuid: privateShareFileInfo.uuid,
                    name: privateShareFileInfo.name,
                    creationDate: privateShareFileInfo.creationDate,
                    lastModifiDate: privateShareFileInfo.lastModifiedDate,
