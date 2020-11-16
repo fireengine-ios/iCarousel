@@ -16,12 +16,9 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         return controller
     }
     
-    @IBOutlet private weak var scrollView: UIScrollView! {
+    @IBOutlet private weak var scrollView: DismissKeyboardScrollView! {
         willSet {
             newValue.keyboardDismissMode = .interactive
-            let dismissKeyboardGuesture = UITapGestureRecognizer(target: self,
-                                                                 action: #selector(stopEditing))
-            newValue.addGestureRecognizer(dismissKeyboardGuesture)
             newValue.delaysContentTouches = false
         }
     }
@@ -82,7 +79,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         title = TextConstants.actionSheetShare
         navigationItem.leftBarButtonItem = closeButton
         needCheckModalPresentationStyle = false
@@ -260,10 +257,6 @@ final class PrivateShareViewController: BaseViewController, NibInit {
                 UIApplication.showErrorAlert(message: error.description)
             }
         }
-    }
-    
-    @objc private func stopEditing() {
-        self.view.endEditing(true)
     }
     
 }
