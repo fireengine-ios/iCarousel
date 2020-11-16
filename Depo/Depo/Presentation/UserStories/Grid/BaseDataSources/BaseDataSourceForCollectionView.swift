@@ -917,14 +917,14 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         DispatchQueue.toMain {
             CellImageManager.clear()
             self.collectionView?.reloadData()
-            let firstVisibleIndexPath = self.self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
+            let firstVisibleIndexPath = self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
                 return first < second
             })
 
             if let firstVisibleIndexPath = firstVisibleIndexPath {
                 if firstVisibleIndexPath.row == 0, firstVisibleIndexPath.section == 0 {
                     self.collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .centeredVertically, animated: false)
-                } else{
+                } else {
                     self.collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .top, animated: false)
                 }
             }

@@ -241,7 +241,6 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 
     @IBAction private func onShareTapped(_ sender: Any) {
         remoteSuggestions = []
-        
         let shareObject = PrivateShareObject(items: items.compactMap { $0.uuid },
                                              invitationMessage: messageView.message,
                                              invitees: shareWithView.contacts,

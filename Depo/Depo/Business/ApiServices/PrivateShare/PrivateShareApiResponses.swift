@@ -33,11 +33,74 @@ struct SuggestedApiContact: Codable {
     }
 }
 
+
+struct SharedFileInfo: Codable {
+    let createdDateValue: Double?
+    let lastModifiedDateValue: Double?
+    let id: Int64
+    let hash: String?
+    let name: String?
+    let uuid: String
+    let bytes: Int64?
+    let folder: Bool?
+    let childCount: Int64?
+    let status: String? // enum
+    let uploaderDeviceType: String? //enum
+    let ugglaId: String?
+    let contentType: String?
+    //        "metadata": {},
+    let album: [FileAlbum]?
+    //        "location": {},
+    let permissions: SharedItemPermission?
+    let sharedBy: [SuggestedApiContact]?
+    
+    var creationDate: Date {
+        guard let timeInterval = createdDateValue else {
+            return Date()
+        }
+        return Date.from(millisecondsSince1970: timeInterval)
+    }
+    
+    var lastModifiedDate: Date {
+        guard let timeInterval = lastModifiedDateValue else {
+            return Date()
+        }
+        return Date.from(millisecondsSince1970: timeInterval)
+    }
+    
+    var fileType: FileType {
+        return FileType(type: contentType, fileName: name)
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case createdDateValue = "createdDate"
+        case lastModifiedDateValue = "lastModifiedDate"
+        
+        case id, hash, name, uuid, bytes, folder, childCount, status, uploaderDeviceType, ugglaId, contentType, album, permissions, sharedBy
+    }
+}
+
+struct FileAlbum: Codable {
+    
+}
+
+struct FileSystem: Codable {
+    let parentFolderList: [SharedFileInfo]
+    let fileList: [SharedFileInfo]
+}
+
+
+struct SharedItemPermission: Codable {
+    let granted: [String]?
+    let bitmask: Int64?
+}
+
+
 struct PrivateShareObject: Encodable {
     let items: [String]
     let invitationMessage: String?
     var invitees: [PrivateShareContact]
-    let type: PrivateShareType
+    let type: PrivateShareItemType
     let duration: PrivateShareDuration
     
     var parameters: [String: Any] {
@@ -88,7 +151,7 @@ enum PrivateShareUserRole: String, CaseIterable, Encodable {
     }
 }
 
-enum PrivateShareType: String, Encodable {
+enum PrivateShareItemType: String, Encodable {
     case file = "FILE"
     case album = "ALBUM"
 }

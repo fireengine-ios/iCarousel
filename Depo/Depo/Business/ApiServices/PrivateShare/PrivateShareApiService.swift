@@ -9,7 +9,19 @@
 import Alamofire
 
 protocol PrivateShareApiService {
+    @discardableResult
     func getSuggestions(handler: @escaping ResponseArrayHandler<SuggestedApiContact>) -> URLSessionTask?
+    
+    @discardableResult
+    func getSharedByMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask?
+    
+    @discardableResult
+    func getSharedWithMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask?
+    
+    @discardableResult
+    func getFiles(folderUUID: String, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseHandler<FileSystem>) -> URLSessionTask?
+    
+    func privateShare(object: PrivateShareObject, handler: @escaping ResponseVoid) -> URLSessionTask?
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
@@ -25,6 +37,41 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     }
     
     @discardableResult
+    func getSharedByMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask? {
+        let url = String(format: RouteRequests.PrivateShare.Shared.byMe, size, page, sortBy.description, sortOrder.description)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseArray(handler)
+            .task
+    }
+    
+    @discardableResult
+    func getSharedWithMe(size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseArrayHandler<SharedFileInfo>) -> URLSessionTask? {
+        let url = String(format: RouteRequests.PrivateShare.Shared.withMe, size, page, sortBy.description, sortOrder.description)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseArray(handler)
+            .task
+    }
+    
+    @discardableResult
+    func getFiles(folderUUID: String, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseHandler<FileSystem>) -> URLSessionTask? {
+        let url = String(format: RouteRequests.FileSystem.Version_2.filesFromFolder, size, page, sortBy.description, sortOrder.description, folderUUID)
+        
+        return SessionManager
+            .customDefault
+            .request(url)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
     func privateShare(object: PrivateShareObject, handler: @escaping ResponseVoid) -> URLSessionTask? {
         return SessionManager
             .customDefault
@@ -33,5 +80,4 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .responseVoid(handler)
             .task
     }
-    
 }

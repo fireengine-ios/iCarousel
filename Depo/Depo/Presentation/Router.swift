@@ -583,12 +583,30 @@ class RouterVC: NSObject {
     }
     
     var segmentedFiles: UIViewController? {
+        return sharedFiles
+        
         guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
             assertionFailure()
             return SegmentedController()
         }
         let controllers = [allFiles, documents, musics, favorites, trashBin]
         return SegmentedController.initWithControllers(controllers, alignment: .adjustToWidth)
+    }
+    
+    var sharedFiles: UIViewController {
+        return SegmentedController.initWithControllers([sharedByMe, sharedWithMe], alignment: .center)
+    }
+    
+    var sharedWithMe: UIViewController {
+        return PrivateShareSharedFilesViewController.with(shareType: .withMe)
+    }
+    
+    var sharedByMe: UIViewController {
+        return PrivateShareSharedFilesViewController.with(shareType: .byMe)
+    }
+    
+    func sharedFolder(folderUuid: String, name: String) -> UIViewController {
+        return PrivateShareSharedFilesViewController.with(shareType: .innerFolder(uuid: folderUuid, name: name))
     }
     
     // MARK: Music Player
