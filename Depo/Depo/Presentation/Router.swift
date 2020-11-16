@@ -605,8 +605,8 @@ class RouterVC: NSObject {
         return PrivateShareSharedFilesViewController.with(shareType: .byMe)
     }
     
-    func sharedFolder(folderId: Int64, name: String) -> UIViewController {
-        return PrivateShareSharedFilesViewController.with(shareType: .innerFolder(id: folderId.bytesString, name: name))
+    func sharedFolder(folderUuid: String, name: String) -> UIViewController {
+        return PrivateShareSharedFilesViewController.with(shareType: .innerFolder(uuid: folderUuid, name: name))
     }
     
     // MARK: Music Player

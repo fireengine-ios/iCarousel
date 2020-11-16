@@ -55,6 +55,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         collectionManager.setup()
         setupBars()
+        showSpinner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,11 +80,21 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     //MARK: - Private
     
     private func setupBars() {
-        needToShowTabBar = true
+        setDefaultTabBarState()
         navBarManager.setDefaultMode(title: title ?? "")
         navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
         setupCollectionViewBar()
         bottomBarManager.setup()
+    }
+    
+    private func setDefaultTabBarState() {
+        switch shareType {
+            case .byMe, .withMe:
+                needToShowTabBar = true
+                
+            case .innerFolder(uuid: _, name: _):
+                needToShowTabBar = false
+        }
     }
     
     private func setupCollectionViewBar() {
@@ -130,6 +141,10 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     func didChangeSelection(selectedItems: [WrapData]) {
         show(selectedItemsCount: selectedItems.count)
         bottomBarManager.update(for: selectedItems)
+    }
+    
+    func didEndReload() {
+        hideSpinner()
     }
     
     //MARK: Helpers

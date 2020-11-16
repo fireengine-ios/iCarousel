@@ -12,7 +12,7 @@ import Foundation
 enum PrivateShareType {
     case byMe
     case withMe
-    case innerFolder(id: String, name: String)
+    case innerFolder(uuid: String, name: String)
 }
 
 
@@ -25,13 +25,14 @@ final class PrivateShareFileInfoManager {
         return service
     }
     
+    private let queue = DispatchQueue(label: DispatchQueueLabels.privateShareFileInfoManagerQueue)
     private var privateShareAPIService: PrivateShareApiService!
     private var type: PrivateShareType = .byMe
-    private let queue = DispatchQueue(label: DispatchQueueLabels.privateShareFileInfoManagerQueue)
-    private let pageSize = 100
+    private let pageSize = Device.isIpad ? 64 : 32
     private var pageLoaded = 0
-    private var sorting: SortedRules = .timeUp
     private var isPageLoading = false
+    
+    private(set) var sorting: SortedRules = .timeUp
     
     private(set) var sortedItems = SynchronizedArray<WrapData>()
     private(set) var selectedItems = SynchronizedSet<WrapData>()
@@ -166,7 +167,7 @@ final class PrivateShareFileInfoManager {
             grouped = Dictionary(grouping: sortedArray, by: { $0.name?.firstLetter ?? "" })
             
         case .sizeAZ, .sizeZA:
-            grouped = Dictionary(grouping: sortedArray, by: { $0.fileSize.bytesString })
+            grouped = ["plain" : sortedArray]//Dictionary(grouping: sortedArray, by: { $0.fileSize.bytesString })
             
         case .metaDataTimeUp, .metaDataTimeDown:
             grouped = Dictionary(grouping: sortedArray, by: { $0.creationDate?.getDateForSortingOfCollectionView() ?? Date().getDateForSortingOfCollectionView()

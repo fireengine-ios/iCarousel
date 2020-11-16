@@ -13,6 +13,8 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     func didStartSelection(selected: Int)
     func didEndSelection()
     func didChangeSelection(selectedItems: [WrapData])
+    
+    func didEndReload()
 }
 
 final class PrivateShareSharedFilesCollectionManager: NSObject {
@@ -81,6 +83,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         DispatchQueue.main.async {
             self.collectionView?.refreshControl?.endRefreshing()
             self.collectionView?.reloadData()
+            self.delegate?.didEndReload()
         }
     }
     
@@ -271,17 +274,17 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             return
         }
         
-        if item.isFolder == true, let folderId = item.id, let name = item.name ?? "" {
-            openFolder(with: folderId, name: name)
+        if item.isFolder == true {
+            openFolder(with: item.uuid, name: item.name ?? "")
             
         } else if let items = fileInfoManager?.sortedItems.getArray().filter({ !($0.isFolder ?? false) }) {
             openPreview(for: item, with: items)
         }
     }
     
-    private func openFolder(with folderId: Int64, name: String) {
+    private func openFolder(with folderUuid: String, name: String) {
         DispatchQueue.toMain {
-            let controller = self.router.sharedFolder(folderId: folderId, name: name)
+            let controller = self.router.sharedFolder(folderUuid: folderUuid, name: name)
             self.router.pushViewController(viewController: controller)
         }
     }
@@ -350,8 +353,32 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let sectionHeader = collectionView.dequeue(supplementaryView: CollectionViewSimpleHeaderWithText.self, kind: kind, for: indexPath)
-        sectionHeader.setText(text: "")
+        
+        let title = headerTitle(for: indexPath.section)
+        sectionHeader.setText(text: title)
         return sectionHeader
+    }
+    
+    //MARK: Helpers
+    private func headerTitle(for section: Int) -> String {
+        let furstSectionItemIndexPath = IndexPath(row: 0, section: section)
+        guard let sorting = fileInfoManager?.sorting, let item = item(at: furstSectionItemIndexPath) else {
+            return ""
+        }
+        
+        switch sorting {
+            case .timeUp, .timeUpWithoutSection, .lastModifiedTimeUp, .timeDown, .timeDownWithoutSection, .lastModifiedTimeDown:
+                return (item.creationDate ?? Date()).getDateInTextForCollectionViewHeader()
+                
+            case .lettersAZ, .albumlettersAZ, .lettersZA, .albumlettersZA:
+                return item.name?.firstLetter ?? ""
+                
+            case .sizeAZ, .sizeZA:
+                return ""
+                
+            case .metaDataTimeUp, .metaDataTimeDown:
+                return (item.creationDate ?? Date()).getDateInTextForCollectionViewHeader()
+        }
     }
 }
 
