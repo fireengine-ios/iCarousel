@@ -33,6 +33,7 @@ struct SuggestedApiContact: Codable {
     }
 }
 
+//model for requests
 struct PrivateShareObject: Encodable {
     let items: [String]
     let invitationMessage: String?
@@ -45,6 +46,7 @@ struct PrivateShareObject: Encodable {
     }
 }
 
+//model for requests
 struct PrivateShareContact: Equatable, Encodable {
     let displayName: String
     let username: String
@@ -65,7 +67,7 @@ struct PrivateShareContact: Equatable, Encodable {
     }
 }
 
-enum PrivateShareUserRole: String, CaseIterable, Encodable {
+enum PrivateShareUserRole: String, CaseIterable, Codable {
     case editor = "EDITOR"
     case viewer = "VIEWER"
     
@@ -93,7 +95,7 @@ enum PrivateShareType: String, Encodable {
     case album = "ALBUM"
 }
 
-enum PrivateShareDuration: String, CaseIterable, Encodable {
+enum PrivateShareDuration: String, CaseIterable, Codable {
     case no = "NO_EXPIRE"
     case hour = "ONE_HOUR"
     case day = "ONE_DAY"
@@ -117,4 +119,80 @@ enum PrivateShareDuration: String, CaseIterable, Encodable {
             return TextConstants.privateShareStartPageDurationYear
         }
     }
+}
+
+struct ShareContact: Codable {
+    let subject: SuggestedApiContact?
+    let permissions: SharedItemPermission?
+    let role: PrivateShareUserRole
+    
+    var displayName: String {
+        subject?.name ?? subject?.username ?? ""
+    }
+}
+
+struct SharedFileInfo: Codable {
+    let createdDateValue: Double?
+    let lastModifiedDateValue: Double?
+    let id: Int64
+    let hash: String?
+    let name: String?
+    let uuid: String
+    let bytes: Int64?
+    let folder: Bool?
+    let childCount: Int64?
+    let status: String? // enum
+    let uploaderDeviceType: String? //enum
+    let ugglaId: String?
+    let contentType: String?
+    //        "metadata": {},
+    let album: [String]?
+    //        "location": {},
+    let permissions: SharedItemPermission?
+    let sharedBy: [SuggestedApiContact]?
+    let members: [ShareContact]?
+    
+    var creationDate: Date {
+        guard let timeInterval = createdDateValue else {
+            return Date()
+        }
+        return Date(timeIntervalSince1970: timeInterval)
+    }
+    
+    var lastModifiedDate: Date {
+        guard let timeInterval = lastModifiedDateValue else {
+            return Date()
+        }
+        return Date(timeIntervalSince1970: timeInterval)
+    }
+    
+    var fileType: FileType {
+        return FileType(type: contentType, fileName: name)
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case createdDateValue = "createdDate"
+        case lastModifiedDateValue = "lastModifiedDate"
+        
+        case id, hash, name, uuid, bytes, folder, childCount, status, uploaderDeviceType, ugglaId, contentType, album, permissions, sharedBy, members
+    }
+}
+
+
+struct SharedItemPermission: Codable {
+    let granted: [PrivateSharePermission]?
+    let bitmask: Int64?
+}
+
+enum PrivateSharePermission: String, Codable {
+    case read = "READ"
+    case preview = "PREVIEW"
+    case list = "LIST"
+    case create = "CREATE"
+    case delete = "DELETE"
+    case setAttribute = "SET_ATTRIBUTE"
+    case update = "UPDATE"
+    case comment = "COMMENT"
+    case writeAcl = "WRITE_ACL"
+    case readAcl = "READ_ACL"
 }

@@ -50,7 +50,7 @@ final class FileInfoPeopleView: UIView, NibInit, FileInfoPeopleViewProtocol {
     @IBOutlet private weak var enableFIRTextLabel: UILabel! {
         willSet {
             newValue.text = TextConstants.fileInfoPeople
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
+            newValue.font = .TurkcellSaturaFont(size: 18)
             newValue.textColor = ColorConstants.closeIconButtonColor
         }
     }
@@ -70,7 +70,7 @@ final class FileInfoPeopleView: UIView, NibInit, FileInfoPeopleViewProtocol {
     
     @IBOutlet private weak var premiumTextLabel: UILabel! {
         willSet {
-            newValue.font = UIFont.TurkcellSaturaMedFont(size: 19)
+            newValue.font = .TurkcellSaturaFont(size: 18)
             newValue.textColor = ColorConstants.closeIconButtonColor
         }
     }

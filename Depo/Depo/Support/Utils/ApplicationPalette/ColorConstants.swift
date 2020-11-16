@@ -184,6 +184,22 @@ extension UIColor {
     class var lrPeach: UIColor {
         return UIColor(red: 254.0 / 255.0, green: 171.0 / 255.0, blue: 143.0 / 255.0, alpha: 1.0)
     }
+    
+    class var lrDarkSkyBlue: UIColor {
+        return UIColor(red: 65 / 255.0, green: 180 / 255.0, blue: 224 / 255.0, alpha: 1.0)
+    }
+    
+    class var lrOrange: UIColor {
+        return UIColor(red: 245 / 255.0, green: 115 / 255.0, blue: 14 / 255.0, alpha: 1.0)
+    }
+    
+    class var lrButterScotch: UIColor {
+        return UIColor(red: 255 / 255.0, green: 198 / 255.0, blue: 75 / 255.0, alpha: 1.0)
+    }
+    
+    class var lrFadedRed: UIColor {
+        return UIColor(red: 217 / 255.0, green: 58 / 255.0, blue: 71 / 255.0, alpha: 1.0)
+    }
 }
 
 // Text Font

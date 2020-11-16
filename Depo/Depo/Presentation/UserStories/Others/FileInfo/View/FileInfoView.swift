@@ -44,6 +44,10 @@ final class FileInfoView: UIView, FromNib {
     private lazy var fileNameView = FileNameView.with(delegate: self)
     private lazy var fileInfoView = FileMetaInfoView.view()
     private lazy var peopleView = FileInfoPeopleView.with(delegate: self)
+    private lazy var sharingInfoView = FileInfoShareView.with(delegate: self)
+    
+    private lazy var localContactsService = ContactsSuggestionServiceImpl()
+    private lazy var shareApiService = PrivateShareApiServiceImpl()
     
     // MARK: Life cycle
     
@@ -78,6 +82,8 @@ final class FileInfoView: UIView, FromNib {
         if let createdDate = object.creationDate, !object.isLocalItem {
             fileInfoView.set(createdDate: createdDate)
         }
+        
+        getSharingInfo(uuid: object.uuid)
         
         layoutIfNeeded()
         completion?()
@@ -135,16 +141,11 @@ final class FileInfoView: UIView, FromNib {
     
     private func setup() {
         layer.masksToBounds = true
-        let views: [UIView] = [fileNameView, fileInfoView, peopleView]
+        let views: [UIView] = [fileNameView, fileInfoView, sharingInfoView, peopleView]
         
-        var index = 0
-        views.forEach { view in
-            contentView.insertArrangedSubview(view, at: index)
-            index += 1
-            let separator = UIView.makeSeparator(width: contentView.frame.width, offset: 0)
-            contentView.insertArrangedSubview(separator, at: index)
-            index += 1
-        }
+        sharingInfoView.isHidden = true
+        
+        views.forEach { contentView.addArrangedSubview($0) }
         
         tapGestureRecognizer.delegate = self
         addGestureRecognizer(tapGestureRecognizer)
@@ -163,6 +164,47 @@ final class FileInfoView: UIView, FromNib {
     
     @objc private func tapGestureRecognizerHandler(_ gestureRecognizer: UITapGestureRecognizer) {
         output?.tapGesture(recognizer: gestureRecognizer)
+    }
+    
+    private func getSharingInfo(uuid: String) {
+        let group = DispatchGroup()
+        
+        group.enter()
+        group.enter()
+        
+        var hasAccess = false
+        var sharingInfo: SharedFileInfo?
+        
+        localContactsService.fetchAllContacts { isAuthorized in
+            hasAccess = isAuthorized
+            group.leave()
+        }
+            
+        shareApiService.getSharingInfo(uuid: uuid) { result in
+            switch result {
+            case .success(let info):
+                sharingInfo = info
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+            group.leave()
+        }
+        
+        group.notify(queue: .main) { [weak self] in
+            if let sharingInfo = sharingInfo {
+                self?.setupSharingInfoView(sharingInfo: sharingInfo, hasAccess: hasAccess)
+            }
+        }
+    }
+    
+    private func setupSharingInfoView(sharingInfo: SharedFileInfo, hasAccess: Bool) {
+        let needShow = sharingInfo.members?.isEmpty == false
+        
+        if needShow {
+            sharingInfoView.setup(with: sharingInfo)
+        }
+        
+        sharingInfoView.isHidden = !needShow
     }
 }
 
@@ -212,4 +254,10 @@ extension FileInfoView: FileInfoPeopleViewDelegate {
     func onBecomePremiumDidTap() {
         output.onBecomePremiumDidTap()
     }
+}
+
+//MARK: - FileInfoShareViewDelegate
+
+extension FileInfoView: FileInfoShareViewDelegate {
+    
 }

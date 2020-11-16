@@ -42,8 +42,8 @@ final class FileNameView: UIView, NibInit, FileNameViewProtocol {
     
     @IBOutlet private weak var fileNameTextField: UITextField! {
         willSet {
-            newValue.font = .TurkcellSaturaMedFont(size: 19)
-            newValue.textColor = ColorConstants.closeIconButtonColor
+            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.textColor = .lrBrownishGrey
             newValue.delegate = self
             newValue.isUserInteractionEnabled = false
         }
