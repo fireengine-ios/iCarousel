@@ -144,7 +144,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeFilesFromFolderViewController(with nibName: String, folder: Item, type: MoreActionsConfig.ViewType, sortType: MoreActionsConfig.SortRullesType, status: ItemStatus, moduleOutput: BaseFilesGreedModuleOutput?, alertSheetExcludeTypes: [ElementTypes]? = nil) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .newFolder, .uploadFromLifebox])
+        viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .newFolder])
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
         viewController.scrollablePopUpView.isEnable = true
         viewController.status = status
