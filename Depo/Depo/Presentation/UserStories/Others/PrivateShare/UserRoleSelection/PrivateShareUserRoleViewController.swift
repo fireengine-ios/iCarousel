@@ -23,7 +23,7 @@ final class PrivateShareUserRoleViewController: BaseViewController, NibInit {
     
     @IBOutlet private weak var backButton: UIButton! {
         willSet {
-            newValue.setTitle(TextConstants.cancel, for: .normal)
+            newValue.setTitle(TextConstants.backTitle, for: .normal)
             newValue.setTitleColor(ColorConstants.marineFour, for: .normal)
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 19)
             

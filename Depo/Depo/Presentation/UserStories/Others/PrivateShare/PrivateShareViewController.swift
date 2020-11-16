@@ -17,12 +17,9 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         return controller
     }
     
-    @IBOutlet private weak var scrollView: UIScrollView! {
+    @IBOutlet private weak var scrollView: DismissKeyboardScrollView! {
         willSet {
             newValue.keyboardDismissMode = .interactive
-            let dismissKeyboardGuesture = UITapGestureRecognizer(target: self,
-                                                                 action: #selector(stopEditing))
-            newValue.addGestureRecognizer(dismissKeyboardGuesture)
             newValue.delaysContentTouches = false
         }
     }
@@ -85,7 +82,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         title = TextConstants.actionSheetShare
         navigationItem.leftBarButtonItem = closeButton
         needCheckModalPresentationStyle = false
@@ -203,7 +200,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func showSearchLocalContactsViewIfNeeded() {
-        guard hasAccess, searchSuggestionsContainer.isHidden else {
+        guard searchSuggestionsContainer.isHidden else {
             return
         }
         
@@ -265,10 +262,6 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         }
     }
     
-    @objc private func stopEditing() {
-        self.view.endEditing(true)
-    }
-    
     private func dismiss(success: Bool) {
         dismiss(animated: true) {
             self.completion?(success)
@@ -284,21 +277,25 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
         if text.count < minSearchLength {
             getRemoteSuggestions()
             searchSuggestionsContainer.isHidden = true
-        } else {
+        } else if hasAccess {
             showSearchLocalContactsViewIfNeeded()
             searchLocalSuggestions(query: text)
+        } else {
+            removeRemoteSuggestionsView()
         }
     }
     
     func searchTextDidChange(text: String) {
         if text.count < minSearchLength {
             removeLocalSuggestionsView()
-        } else {
+        } else if hasAccess {
             
             //we need this trimming for prepare(), so our +90 logic would work with whitespaces
             let trimmedText = text.filter{ $0 != " " }
             showSearchLocalContactsViewIfNeeded()
             searchLocalSuggestions(query: trimmedText)
+        } else {
+            removeRemoteSuggestionsView()
         }
     }
     
