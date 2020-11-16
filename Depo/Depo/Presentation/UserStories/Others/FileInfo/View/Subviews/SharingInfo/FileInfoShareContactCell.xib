@@ -21,48 +21,46 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWg-4s-ve8">
                         <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgH-Lr-ooH">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McC-As-BDa">
                                 <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <connections>
+                                    <action selector="onButtonTapped" destination="gTV-IL-0wX" eventType="touchUpInside" id="Gqe-f5-Dyy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="McC-As-BDa" secondAttribute="trailing" id="0ca-zP-GXH"/>
+                            <constraint firstItem="McC-As-BDa" firstAttribute="leading" secondItem="iWg-4s-ve8" secondAttribute="leading" id="5n1-F4-aiE"/>
+                            <constraint firstItem="McC-As-BDa" firstAttribute="top" secondItem="iWg-4s-ve8" secondAttribute="top" id="FEH-gp-Jwm"/>
                             <constraint firstAttribute="height" constant="45" id="FFB-0a-LpN"/>
-                            <constraint firstAttribute="trailing" secondItem="FgH-Lr-ooH" secondAttribute="trailing" id="Hz9-Wh-KJ3"/>
                             <constraint firstAttribute="width" constant="45" id="JsB-Lp-qfk"/>
-                            <constraint firstAttribute="bottom" secondItem="FgH-Lr-ooH" secondAttribute="bottom" id="LGV-ea-zab"/>
-                            <constraint firstItem="FgH-Lr-ooH" firstAttribute="leading" secondItem="iWg-4s-ve8" secondAttribute="leading" id="dHE-el-T5q"/>
-                            <constraint firstItem="FgH-Lr-ooH" firstAttribute="top" secondItem="iWg-4s-ve8" secondAttribute="top" id="yhk-Jk-YcS"/>
+                            <constraint firstAttribute="bottom" secondItem="McC-As-BDa" secondAttribute="bottom" id="r0U-oH-fnJ"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McC-As-BDa">
-                        <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="45" id="32N-t4-j9p"/>
-                        </constraints>
-                        <state key="normal" title="Button"/>
-                        <connections>
-                            <action selector="onButtonTapped" destination="gTV-IL-0wX" eventType="touchUpInside" id="Tdy-40-9uT"/>
-                        </connections>
-                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgH-Lr-ooH">
+                        <rect key="frame" x="0.0" y="46.5" width="45" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="McC-As-BDa" secondAttribute="trailing" id="3pw-vg-m1O"/>
+                <constraint firstItem="FgH-Lr-ooH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CUJ-4L-5Vr"/>
                 <constraint firstItem="iWg-4s-ve8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Cb5-Yc-TOf"/>
                 <constraint firstAttribute="trailing" secondItem="iWg-4s-ve8" secondAttribute="trailing" id="KS1-mu-2vD"/>
-                <constraint firstItem="McC-As-BDa" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="NiT-R8-A2t"/>
+                <constraint firstAttribute="trailing" secondItem="FgH-Lr-ooH" secondAttribute="trailing" id="Tn3-Ua-O2N"/>
                 <constraint firstItem="iWg-4s-ve8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dDu-RG-2RX"/>
-                <constraint firstItem="McC-As-BDa" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dQe-zP-jom"/>
+                <constraint firstItem="FgH-Lr-ooH" firstAttribute="top" secondItem="iWg-4s-ve8" secondAttribute="bottom" constant="1.5" id="fC0-RH-afa"/>
+                <constraint firstAttribute="bottom" secondItem="FgH-Lr-ooH" secondAttribute="bottom" id="kuC-tI-NGI"/>
             </constraints>
             <size key="customSize" width="430" height="87"/>
             <connections>
                 <outlet property="button" destination="McC-As-BDa" id="hmI-gr-5x1"/>
                 <outlet property="circleView" destination="iWg-4s-ve8" id="p7f-jC-aN2"/>
+                <outlet property="roleLabel" destination="FgH-Lr-ooH" id="KtS-3Y-ZMZ"/>
             </connections>
             <point key="canvasLocation" x="261.59420289855075" y="104.12946428571428"/>
         </collectionViewCell>

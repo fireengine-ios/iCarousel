@@ -15,10 +15,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="evj-aP-cxe">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                    <rect key="frame" x="20" y="0.0" width="374" height="55"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixh-FU-z1G">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
+                            <rect key="frame" x="0.0" y="0.0" width="374" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="Gek-db-EEA"/>
                             </constraints>
@@ -27,15 +27,15 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Wr5-ng-8pn">
-                            <rect key="frame" x="0.0" y="30" width="414" height="25"/>
+                            <rect key="frame" x="0.0" y="30" width="374" height="25"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="8Kq-M8-Vkm">
-                                    <rect key="frame" x="0.0" y="0.0" width="303" height="25"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="263" height="25"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CMg-V1-qhI">
-                                    <rect key="frame" x="315" y="0.0" width="25" height="25"/>
+                                    <rect key="frame" x="275" y="0.0" width="25" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="CMg-V1-qhI" secondAttribute="height" multiplier="1:1" id="pQm-X9-eHW"/>
                                     </constraints>
@@ -45,7 +45,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T8M-fd-BJW">
-                                    <rect key="frame" x="352" y="0.0" width="25" height="25"/>
+                                    <rect key="frame" x="312" y="0.0" width="25" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="T8M-fd-BJW" secondAttribute="height" multiplier="1:1" id="TYa-9y-vAY"/>
                                     </constraints>
@@ -55,7 +55,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0o-AR-6YE">
-                                    <rect key="frame" x="389" y="0.0" width="25" height="25"/>
+                                    <rect key="frame" x="349" y="0.0" width="25" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="z0o-AR-6YE" secondAttribute="height" multiplier="1:1" id="jlj-4u-Le2"/>
                                     </constraints>
@@ -84,10 +84,10 @@
                 <constraint firstItem="evj-aP-cxe" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="3lp-X0-yoo"/>
                 <constraint firstItem="m7Q-aI-nJj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5Bm-rG-P7Q"/>
                 <constraint firstItem="m7Q-aI-nJj" firstAttribute="top" secondItem="evj-aP-cxe" secondAttribute="bottom" constant="16" id="SuI-PF-ci9"/>
-                <constraint firstItem="evj-aP-cxe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="XYA-cy-XLE"/>
+                <constraint firstItem="evj-aP-cxe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="XYA-cy-XLE"/>
                 <constraint firstAttribute="bottom" secondItem="m7Q-aI-nJj" secondAttribute="bottom" id="Z2D-rG-Oig"/>
                 <constraint firstAttribute="trailing" secondItem="m7Q-aI-nJj" secondAttribute="trailing" id="eXd-je-hPZ"/>
-                <constraint firstAttribute="trailing" secondItem="evj-aP-cxe" secondAttribute="trailing" id="iIK-Gv-ivV"/>
+                <constraint firstAttribute="trailing" secondItem="evj-aP-cxe" secondAttribute="trailing" constant="20" id="iIK-Gv-ivV"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

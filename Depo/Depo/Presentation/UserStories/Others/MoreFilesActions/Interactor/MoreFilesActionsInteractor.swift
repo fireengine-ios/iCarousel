@@ -129,7 +129,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        let controller = router.privateShare(items: items)
+        let controller = router.privateShare(items: items, competion: nil)
         router.presentViewController(controller: controller)
     }
     

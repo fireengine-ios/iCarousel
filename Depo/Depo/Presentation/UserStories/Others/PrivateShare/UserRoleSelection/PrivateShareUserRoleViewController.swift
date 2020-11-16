@@ -73,7 +73,7 @@ final class PrivateShareUserRoleViewController: BaseViewController, NibInit {
     }
     
     private func setupRolesStackView() {
-        let roles = PrivateShareUserRole.allCases
+        let roles: [PrivateShareUserRole] = [.editor, .viewer]
         roles.enumerated().forEach { index, role in
             let view = PrivateShareRoleCheckmarkView.with(role: role, delegate: self)
             view.isSelected = contact?.role == role

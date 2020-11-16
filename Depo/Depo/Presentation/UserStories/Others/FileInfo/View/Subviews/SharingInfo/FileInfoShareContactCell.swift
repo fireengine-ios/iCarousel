@@ -15,7 +15,7 @@ enum FileInfoShareContactCellType {
 }
 
 protocol FileInfoShareContactCellDelegate: class {
-    func didSelect(contact: ShareContact)
+    func didSelect(contact: SharedContact)
     func didTappedPlusButton()
 }
 
@@ -28,47 +28,59 @@ final class FileInfoShareContactCell: UICollectionViewCell {
         }
     }
     
-    @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var button: UIButton! {
         willSet {
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 18)
+            newValue.titleLabel?.textAlignment = .center
+        }
+    }
+    
+    @IBOutlet private weak var roleLabel: UILabel! {
+        willSet {
+            newValue.text = ""
+            newValue.textColor = .greyishBrownThree
+            newValue.font = .TurkcellSaturaRegFont(size: 14)
+            newValue.textAlignment = .center
         }
     }
     
     private var type: FileInfoShareContactCellType = .contact
-    private var contact: ShareContact?
+    private var contact: SharedContact?
     weak var delegate: FileInfoShareContactCellDelegate?
     
-    func setup(type: FileInfoShareContactCellType, contact: ShareContact?, count: Int?, index: Int) {
+    func setup(type: FileInfoShareContactCellType, contact: SharedContact?, count: Int?, index: Int) {
         self.type = type
         self.contact = contact
 
         switch type {
         case .contact:
-            button.setTitle(contact?.displayName ?? "", for: .normal)
+            if let initials = contact?.initials, !initials.isEmpty {
+                button.setTitle(initials, for: .normal)
+                button.backgroundColor = color(for: index)
+                button.setImage(nil, for: .normal)
+            } else {
+                button.setImage(UIImage(named: "contact_placeholder"), for: .normal)
+            }
+            
             button.setTitleColor(.white, for: .normal)
             button.layer.borderWidth = 0
-            button.backgroundColor = color(for: index)
+            roleLabel.text = contact?.role.infoMenuTitle ?? ""
             
         case .additionalCount:
             if let count = count {
-                button.setTitle("\(count)", for: .normal)
+                button.setTitle("+\(count)", for: .normal)
             } else {
                 button.setTitle("", for: .normal)
             }
             button.setTitleColor(ColorConstants.marineFour, for: .normal)
-            button.layer.borderWidth = 2
-            button.layer.borderColor = ColorConstants.marineFour.cgColor
+            circleView.layer.borderWidth = 2
+            circleView.layer.borderColor = ColorConstants.marineFour.cgColor
             
         case .plusButton:
             button.setTitle("", for: .normal)
-            button.setImage(UIImage(named: ""), for: .normal)
-            button.layer.borderWidth = 0
+            button.setImage(UIImage(named: "plus_large"), for: .normal)
+            circleView.layer.borderWidth = 0
         }
-    }
-    
-    private func loadAvatar(url: URL) {
-        
     }
     
     @IBAction private func onButtonTapped() {

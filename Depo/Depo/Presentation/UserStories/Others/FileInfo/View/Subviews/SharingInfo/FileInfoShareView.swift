@@ -13,19 +13,24 @@ protocol FileInfoShareViewProtocol: UIView {
 }
 
 protocol FileInfoShareViewDelegate: class {
-    
+    func didSelect(contact: SharedContact)
+    func didTappedPlusButton()
+    func didTappedArrowButton()
 }
 
 final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     
+    private typealias MembersInfo = (displayContacts: [SharedContact], totalCount: Int, additionalCount: Int)
+    
     static func with(delegate: FileInfoShareViewDelegate?) -> FileInfoShareViewProtocol {
         let view = FileInfoShareView.initFromNib()
+        view.delegate = delegate
         return view
     }
 
     @IBOutlet private weak var titleLabel: UILabel! {
         willSet {
-            newValue.text = "Sharing Info"
+            newValue.text = TextConstants.privateShareInfoMenuSectionTitle
             newValue.textColor = ColorConstants.marineTwo
             newValue.font = .TurkcellSaturaBolFont(size: 14)
         }
@@ -47,15 +52,19 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     
     @IBOutlet private weak var arrowButton: UIButton!
     
+    private weak var delegate: FileInfoShareViewDelegate?
+    
     private var info: SharedFileInfo?
+    private var membersInfo: MembersInfo = ([], 0, 0)
     
     //MARK: - FileInfoShareViewProtocol
     
     func setup(with info: SharedFileInfo) {
         self.info = info
         
-        let count = info.members?.count ?? 0
-        subtitleLabel.text = "Shared with \(count) people"
+        membersInfo = getMembersInfo()
+        
+        subtitleLabel.text = String(format: TextConstants.privateShareInfoMenuNumberOfPeople, membersInfo.totalCount)
         contactsCollectionView.reloadData()
     }
     
@@ -70,38 +79,74 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
             layout.minimumLineSpacing = 10
         }
     }
+    
+    private func getMembersInfo() -> MembersInfo {
+        guard let members = info?.members, !members.isEmpty else {
+            return ([], 0, 0)
+        }
+        
+        var result = [SharedContact]()
+        
+        let sortedRoles: [PrivateShareUserRole] = [.owner, .editor, .viewer]
+        sortedRoles.forEach { role in
+            if let contact = members.first(where: { $0.role == role }) {
+                result.append(contact)
+            }
+        }
+        
+        return (result, members.count, members.count - result.count)
+    }
+    
+    @IBAction private func onArrowTapped() {
+        delegate?.didTappedArrowButton()
+    }
 }
 
 //MARK: - UICollectionViewDataSource
 
 extension FileInfoShareView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if var contactsCount = info?.members?.count {
-            if contactsCount > 3 {
-                //increment for +N circle
-                contactsCount += 1
-            }
-            //increment for add button
-            return contactsCount + 1
+        var itemsCount = membersInfo.displayContacts.count
+        if membersInfo.additionalCount > 0 {
+            //increment for +N circle
+            itemsCount += 1
         }
-        return 0
+        if itemsCount > 0 {
+            //increment for add button
+            itemsCount += 1
+        }
+        return itemsCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(cell: FileInfoShareContactCell.self, for: indexPath)
+        
         let type: FileInfoShareContactCellType
-        let contactsCount = info?.members?.count ?? 0
-        let contact = info?.members?[safe: indexPath.item]
+        let contact = membersInfo.displayContacts[safe: indexPath.item]
         
         if indexPath.item == collectionView.numberOfItems(inSection: indexPath.section) - 1 {
             type = .plusButton
-        } else if contactsCount > 3, indexPath.item >= 3 {
+        } else if indexPath.item == membersInfo.displayContacts.count, membersInfo.additionalCount > 0 {
             type = .additionalCount
         } else {
             type = .contact
         }
         
-        cell.setup(type: type, contact: contact, count: contactsCount - 3, index: indexPath.item)
+        cell.setup(type: type, contact: contact, count: membersInfo.additionalCount, index: indexPath.item)
+        cell.delegate = self
         return cell
+    }
+}
+
+//MARK: - FileInfoShareContactCellDelegate
+
+extension FileInfoShareView: FileInfoShareContactCellDelegate {
+    
+    func didSelect(contact: SharedContact) {
+        delegate?.didSelect(contact: contact)
+    }
+    
+    func didTappedPlusButton() {
+        delegate?.didTappedPlusButton()
     }
 }

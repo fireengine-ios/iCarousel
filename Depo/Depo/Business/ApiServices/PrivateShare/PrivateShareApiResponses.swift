@@ -13,7 +13,7 @@ struct SuggestedApiContact: Codable {
     let identifier: String?
     let username: String?
     let email: String?
-    let name: String?
+    var name: String?
     let picture: URL?
     
     static func testContacts() -> [SuggestedApiContact] {
@@ -70,6 +70,7 @@ struct PrivateShareContact: Equatable, Encodable {
 enum PrivateShareUserRole: String, CaseIterable, Codable {
     case editor = "EDITOR"
     case viewer = "VIEWER"
+    case owner = "OWNER"
     
     var title: String {
         switch self {
@@ -77,6 +78,8 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareStartPageEditorButton
         case .viewer:
             return TextConstants.privateShareStartPageViewerButton
+        case .owner:
+            return ""
         }
     }
     
@@ -86,6 +89,19 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareRoleSelectionEditor
         case .viewer:
             return TextConstants.privateShareRoleSelectionViewer
+        case .owner:
+            return ""
+        }
+    }
+    
+    var infoMenuTitle: String {
+        switch self {
+        case .editor:
+            return TextConstants.privateShareInfoMenuEditor
+        case .viewer:
+            return TextConstants.privateShareInfoMenuViewer
+        case .owner:
+            return TextConstants.privateShareInfoMenuOwner
         }
     }
 }
@@ -121,13 +137,22 @@ enum PrivateShareDuration: String, CaseIterable, Codable {
     }
 }
 
-struct ShareContact: Codable {
-    let subject: SuggestedApiContact?
+struct SharedContact: Codable {
+    var subject: SuggestedApiContact?
     let permissions: SharedItemPermission?
     let role: PrivateShareUserRole
     
     var displayName: String {
         subject?.name ?? subject?.username ?? ""
+    }
+    
+    var initials: String {
+        if let name = subject?.name {
+            let characters = name.split(separator: " ").prefix(2).compactMap { $0.first }
+            return characters.map { String($0) }.joined().uppercased()
+        } else {
+            return ""
+        }
     }
 }
 
@@ -150,7 +175,7 @@ struct SharedFileInfo: Codable {
     //        "location": {},
     let permissions: SharedItemPermission?
     let sharedBy: [SuggestedApiContact]?
-    let members: [ShareContact]?
+    var members: [SharedContact]?
     
     var creationDate: Date {
         guard let timeInterval = createdDateValue else {

@@ -48,6 +48,9 @@ final class FileInfoView: UIView, FromNib {
     
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
     private lazy var shareApiService = PrivateShareApiServiceImpl()
+    private lazy var router = RouterVC()
+    
+    private var item: BaseDataSourceItem?
     
     // MARK: Life cycle
     
@@ -66,6 +69,8 @@ final class FileInfoView: UIView, FromNib {
     // MARK: Public Methods
     
     func setObject(_ object: BaseDataSourceItem, completion: VoidHandler?) {
+        item = object
+        
         resetUI()
         fileNameView.name = object.name
         peopleView.fileType = object.fileType
@@ -201,10 +206,25 @@ final class FileInfoView: UIView, FromNib {
         let needShow = sharingInfo.members?.isEmpty == false
         
         if needShow {
-            sharingInfoView.setup(with: sharingInfo)
+            var info = sharingInfo
+            info.members?.enumerated().forEach { index, member in
+                let localContactNames = localContactsService.getContactName(for: member.subject?.username ?? "", email: member.subject?.email ?? "")
+                info.members?[index].subject?.name = displayName(from: localContactNames)
+            }
+            sharingInfoView.setup(with: info)
         }
         
         sharingInfoView.isHidden = !needShow
+    }
+    
+    private func displayName(from localNames: LocalContactNames) -> String {
+        if !localNames.givenName.isEmpty, !localNames.familyName.isEmpty {
+            return "\(localNames.givenName) \(localNames.familyName)"
+        } else if !localNames.givenName.isEmpty {
+            return localNames.givenName
+        } else {
+            return localNames.familyName
+        }
     }
 }
 
@@ -260,4 +280,23 @@ extension FileInfoView: FileInfoPeopleViewDelegate {
 
 extension FileInfoView: FileInfoShareViewDelegate {
     
+    func didSelect(contact: SharedContact) {
+        //TODO: COF-585 - open role view/update page
+    }
+    
+    func didTappedPlusButton() {
+        //TODO: add sharing for albums
+        if let item = item as? WrapData {
+            let controller = router.privateShare(items: [item]) { [weak self] success in
+                if success {
+                    self?.getSharingInfo(uuid: item.uuid)
+                }
+            }
+            router.presentViewController(controller: controller)
+        }
+    }
+    
+    func didTappedArrowButton() {
+        //TODO: COF-535 - open Who has access page
+    }
 }

@@ -31,7 +31,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rkc-vj-8Hh">
-                    <rect key="frame" x="20" y="46" width="394" height="18"/>
+                    <rect key="frame" x="20" y="46" width="374" height="18"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="ufD-6w-RQa"/>
                     </constraints>
@@ -59,12 +59,15 @@
                         <constraint firstAttribute="width" constant="45" id="UaF-IU-SUZ"/>
                     </constraints>
                     <state key="normal" image="Arrow"/>
+                    <connections>
+                        <action selector="onArrowTapped" destination="iN0-l3-epB" eventType="touchUpInside" id="rJT-Qr-9Yh"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="6Im-ez-OTx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="26P-ZU-hVz"/>
-                <constraint firstAttribute="trailing" secondItem="Rkc-vj-8Hh" secondAttribute="trailing" id="4dP-5S-tGR"/>
+                <constraint firstAttribute="trailing" secondItem="Rkc-vj-8Hh" secondAttribute="trailing" constant="20" id="4dP-5S-tGR"/>
                 <constraint firstItem="6Im-ez-OTx" firstAttribute="top" secondItem="Rkc-vj-8Hh" secondAttribute="bottom" constant="14" id="9Q8-uL-zpo"/>
                 <constraint firstItem="NNg-u4-bc2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="CP9-Pu-tK9"/>
                 <constraint firstItem="ZlV-IR-S5u" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KfZ-HC-zm6"/>
