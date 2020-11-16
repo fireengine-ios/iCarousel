@@ -23,7 +23,7 @@ final class PrivateShareUserRoleViewController: BaseViewController, NibInit {
     
     @IBOutlet private weak var backButton: UIButton! {
         willSet {
-            newValue.setTitle(TextConstants.cancel, for: .normal)
+            newValue.setTitle(TextConstants.backTitle, for: .normal)
             newValue.setTitleColor(ColorConstants.marineFour, for: .normal)
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 19)
             
@@ -43,6 +43,20 @@ final class PrivateShareUserRoleViewController: BaseViewController, NibInit {
         }
     }
     
+    @IBOutlet private weak var displayNameLabel: UILabel! {
+        willSet {
+            newValue.font = .TurkcellSaturaMedFont(size: 16)
+            newValue.textColor = .lrBrownishGrey
+        }
+    }
+    
+    @IBOutlet private weak var userNameLabel: UILabel! {
+        willSet {
+            newValue.font = .TurkcellSaturaFont(size: 18)
+            newValue.textColor = .black
+        }
+    }
+    
     @IBOutlet private weak var roleStackView: UIStackView!
     
     private(set) var contact: PrivateShareContact?
@@ -52,6 +66,9 @@ final class PrivateShareUserRoleViewController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        displayNameLabel.text = contact?.displayName
+        userNameLabel.text = contact?.username
         setupRolesStackView()
     }
     

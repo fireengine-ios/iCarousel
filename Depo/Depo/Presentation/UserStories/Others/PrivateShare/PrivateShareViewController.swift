@@ -16,9 +16,10 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         return controller
     }
     
-    @IBOutlet private weak var scrollView: UIScrollView! {
+    @IBOutlet private weak var scrollView: DismissKeyboardScrollView! {
         willSet {
             newValue.keyboardDismissMode = .interactive
+            newValue.delaysContentTouches = false
         }
     }
     
@@ -62,6 +63,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     
     private var items = [WrapData]()
     private var remoteSuggestions = [SuggestedApiContact]()
+    private var hasAccess = false
     
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
@@ -77,7 +79,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         title = TextConstants.actionSheetShare
         navigationItem.leftBarButtonItem = closeButton
         needCheckModalPresentationStyle = false
@@ -94,7 +96,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     private func getRemoteSuggestions() {
         //load remote suggestion once
         if !remoteSuggestions.isEmpty {
-            showRemoteSuggestions(hasAccess: true)
+            showRemoteSuggestions()
             return
         }
         
@@ -103,10 +105,8 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         group.enter()
         group.enter()
         
-        var hasAccess = false
-        
-        localContactsService.fetchAllContacts { isAuthorized in
-            hasAccess = isAuthorized
+        localContactsService.fetchAllContacts { [weak self] isAuthorized in
+            self?.hasAccess = isAuthorized
             group.leave()
         }
             
@@ -121,11 +121,11 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         }
         
         group.notify(queue: .main) { [weak self] in
-            self?.showRemoteSuggestions(hasAccess: hasAccess)
+            self?.showRemoteSuggestions()
         }
     }
     
-    private func showRemoteSuggestions(hasAccess: Bool) {
+    private func showRemoteSuggestions() {
         guard !remoteSuggestions.isEmpty else {
             return
         }
@@ -219,7 +219,24 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     //MARK: - Actions
     
     @objc private func onCancelTapped(_ sender: Any) {
-        dismiss(animated: true)
+        if shareWithView.contacts.isEmpty {
+            dismiss(animated: true)
+        } else {
+            let popup = PopUpController.with(title: nil,
+                                             message: TextConstants.privateShareStartPageClosePopupMessage,
+                                             image: .question,
+                                             firstButtonTitle: TextConstants.cancel,
+                                             secondButtonTitle: TextConstants.ok,
+                                             firstAction: { vc in
+                                                vc.close()
+                                             },
+                                             secondAction: { [weak self] vc in
+                                                vc.close { [weak self] in
+                                                    self?.dismiss(animated: true)
+                                                }
+                                             })
+            router.presentViewController(controller: popup)
+        }
     }
 
     @IBAction private func onShareTapped(_ sender: Any) {
@@ -240,6 +257,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
             }
         }
     }
+    
 }
 
 //MARK: - PrivateShareSelectPeopleViewDelegate
@@ -250,21 +268,31 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
         if text.count < minSearchLength {
             getRemoteSuggestions()
             searchSuggestionsContainer.isHidden = true
-        } else {
+        } else if hasAccess {
             showSearchLocalContactsViewIfNeeded()
             searchLocalSuggestions(query: text)
+        } else {
+            removeRemoteSuggestionsView()
         }
     }
     
     func searchTextDidChange(text: String) {
         if text.count < minSearchLength {
             removeLocalSuggestionsView()
-        } else {
+        } else if hasAccess {
             
             //we need this trimming for prepare(), so our +90 logic would work with whitespaces
             let trimmedText = text.filter{ $0 != " " }
             showSearchLocalContactsViewIfNeeded()
             searchLocalSuggestions(query: trimmedText)
+        } else {
+            removeRemoteSuggestionsView()
+        }
+    }
+    
+    func hideKeyboard(text: String) {
+        if text.count < minSearchLength {
+            removeRemoteSuggestionsView()
         }
     }
     
@@ -313,5 +341,10 @@ extension PrivateShareViewController: PrivateShareSelectSuggestionsDelegate {
     func didSelect(contactInfo: ContactInfo) {
         selectPeopleView.setContact(info: contactInfo)
         endSearchContacts()
+    }
+    
+    func contactListDidUpdate(isEmpty: Bool) {
+        //display container only if local suggestions count > 0
+        searchSuggestionsContainer.isHidden = isEmpty
     }
 }

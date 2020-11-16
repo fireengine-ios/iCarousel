@@ -11,6 +11,7 @@ import UIKit
 protocol PrivateShareSelectPeopleViewDelegate: class {
     func startEditing(text: String)
     func searchTextDidChange(text: String)
+    func hideKeyboard(text: String)
     func addShareContact(_ contact: PrivateShareContact)
     func onUserRoleTapped(contact: PrivateShareContact, sender: Any)
 }
@@ -116,6 +117,7 @@ extension PrivateShareSelectPeopleView: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        delegate?.hideKeyboard(text: textField.text ?? "")
         return true
     }
     

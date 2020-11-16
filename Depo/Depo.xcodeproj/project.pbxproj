@@ -12007,6 +12007,12 @@
 		CFA9D4332559EB4000C8F25D /* PrivateShareApiResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808B51025543E61002B0032 /* PrivateShareApiResponses.swift */; };
 		CFA9D4342559EB4100C8F25D /* PrivateShareApiResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808B51025543E61002B0032 /* PrivateShareApiResponses.swift */; };
 		CFA9D4352559EB4200C8F25D /* PrivateShareApiResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9808B51025543E61002B0032 /* PrivateShareApiResponses.swift */; };
+		CFA9D6D02562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9D6CF2562062C00C8F25D /* DismissKeyboardScrollView.swift */; };
+		CFA9D6D12562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9D6CF2562062C00C8F25D /* DismissKeyboardScrollView.swift */; };
+		CFA9D6D22562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9D6CF2562062C00C8F25D /* DismissKeyboardScrollView.swift */; };
+		CFA9D6D32562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9D6CF2562062C00C8F25D /* DismissKeyboardScrollView.swift */; };
+		CFA9D6D42562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9D6CF2562062C00C8F25D /* DismissKeyboardScrollView.swift */; };
+		CFA9D6D52562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA9D6CF2562062C00C8F25D /* DismissKeyboardScrollView.swift */; };
 		CFACAC8A247C62D400645B40 /* NetmeraEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309F93823D57F3B001DB5FA /* NetmeraEvents.swift */; };
 		CFACAC8B247C62D800645B40 /* NetmeraEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309F93823D57F3B001DB5FA /* NetmeraEvents.swift */; };
 		CFACAC8C247C62D900645B40 /* NetmeraEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0309F93823D57F3B001DB5FA /* NetmeraEvents.swift */; };
@@ -14987,6 +14993,7 @@
 		CF83CF2E243F1630009DF60F /* BackgroundSyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundSyncOperation.swift; sourceTree = "<group>"; };
 		CF8B6B2E23CBC9D70021B021 /* TC_Depo_LifeTech_Bundle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TC_Depo_LifeTech_Bundle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF8B72F823CBCA280021B021 /* Billo_Bundle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Billo_Bundle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFA9D6CF2562062C00C8F25D /* DismissKeyboardScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissKeyboardScrollView.swift; sourceTree = "<group>"; };
 		CFACACA2247CF65300645B40 /* NetmeraExtensionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraExtensionService.swift; sourceTree = "<group>"; };
 		CFB308AC252DFB0B000D3255 /* Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-AppStore.plist"; sourceTree = "<group>"; };
 		CFB308AD252DFB0B000D3255 /* autosync-widget.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "autosync-widget.entitlements"; sourceTree = "<group>"; };
@@ -17437,6 +17444,7 @@
 				CE6BD9CB1FBEF8D5008FA8A1 /* InsetsLabel.swift */,
 				CE47D1FB1FD147BA00888D2E /* InsetsTextField.swift */,
 				174F99E4243D448800986C8B /* ControlContainableScrollView.swift */,
+				CFA9D6CF2562062C00C8F25D /* DismissKeyboardScrollView.swift */,
 				A225690A21E8B30E00A9D147 /* IntrinsicTextView.swift */,
 				CEBAB15A2094803C002824C6 /* InsetsButton.swift */,
 				8C20866D228D4C6A000BEDAD /* TextInsetsLabel.swift */,
@@ -29012,6 +29020,7 @@
 				0303A2432397D0D000907F42 /* IntroduceModuleInput.swift in Sources */,
 				89D1EBED23EC3BF000092031 /* UIApplication+Display.swift in Sources */,
 				0303A2442397D0D000907F42 /* TermsOfUseInteractorOutput.swift in Sources */,
+				CFA9D6D32562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */,
 				0303A2452397D0D000907F42 /* FreeAppSpaceViewController.swift in Sources */,
 				0303A2462397D0D000907F42 /* VisualMusicPlayerInteractorOutput.swift in Sources */,
 				0303A2482397D0D000907F42 /* UserProfileInteractorOutput.swift in Sources */,
@@ -30865,6 +30874,7 @@
 				8C0E8E291FDEBDFF00789C91 /* AutoSyncViewOutput.swift in Sources */,
 				89E51D5022CA111F007A7DBC /* CreateStoryPreviewModuleInput.swift in Sources */,
 				8C0E8E2A1FDEBDFF00789C91 /* ImportFromInstagramInteractor.swift in Sources */,
+				CFA9D6D12562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */,
 				98AC47FC252DFC05003EB6C5 /* FunTabBar.swift in Sources */,
 				CF71458D24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift in Sources */,
 				9823198D24F3A1E700FD16E2 /* ColorView.swift in Sources */,
@@ -32821,6 +32831,7 @@
 				C4A38BA221EE1F2300ECCCEA /* TransparentGradientView.swift in Sources */,
 				CEDFECA71F10C77E003D1A75 /* UINavigationBarExtension.swift in Sources */,
 				D47863FD1F3F18FA00EFDC6D /* UsageInfoViewOutput.swift in Sources */,
+				CFA9D6D02562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */,
 				9809317723952CAC00ECFEF8 /* SmartAlbumsManager.swift in Sources */,
 				CE51ACE81EF90853005DCEE0 /* IntroduceInitializer.swift in Sources */,
 				CE00B2512202FBCE00A5A696 /* InstapickAlbumSelectionDataSource.swift in Sources */,
@@ -34406,6 +34417,7 @@
 				CE7849EB22A685FB00662219 /* UIButton+Font.swift in Sources */,
 				CE7849EC22A685FB00662219 /* IntroduceViewInput.swift in Sources */,
 				CE7849ED22A685FB00662219 /* IntroduceViewOutput.swift in Sources */,
+				CFA9D6D42562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */,
 				CE7849EF22A685FB00662219 /* IntroduceModuleInput.swift in Sources */,
 				CE7849F022A685FB00662219 /* TermsOfUseInteractorOutput.swift in Sources */,
 				B585331C2397DD6000867B5B /* DebugAnalyticsService.swift in Sources */,
@@ -35865,6 +35877,7 @@
 				986DD47F25388F3400C38AD4 /* BackupHelper.m in Sources */,
 				CF8B655223CBC9D70021B021 /* RegistrationRouterInput.swift in Sources */,
 				CF8B655323CBC9D70021B021 /* PaymentModels.swift in Sources */,
+				CFA9D6D22562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */,
 				CF8B655423CBC9D70021B021 /* RegistrationRouter.swift in Sources */,
 				CF8B655523CBC9D70021B021 /* SpringLabel.swift in Sources */,
 				CF8B655623CBC9D70021B021 /* BottomSelectionTabBarViewInput.swift in Sources */,
@@ -37478,6 +37491,7 @@
 				CF8B6D6123CBCA280021B021 /* IntroduceViewOutput.swift in Sources */,
 				CF8B6D6223CBCA280021B021 /* IntroduceModuleInput.swift in Sources */,
 				CF8B6D6323CBCA280021B021 /* TermsOfUseInteractorOutput.swift in Sources */,
+				CFA9D6D52562062D00C8F25D /* DismissKeyboardScrollView.swift in Sources */,
 				CF8B6D6423CBCA280021B021 /* DebugAnalyticsService.swift in Sources */,
 				CF8B6D6523CBCA280021B021 /* FreeAppSpaceViewController.swift in Sources */,
 				CF8B6D6623CBCA280021B021 /* VisualMusicPlayerInteractorOutput.swift in Sources */,
@@ -42204,7 +42218,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.7.2;
+				CURRENT_PROJECT_VERSION = d2.7.5;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
@@ -42268,7 +42282,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.7.2;
+				CURRENT_PROJECT_VERSION = d2.7.5;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -42328,7 +42342,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.7.2;
+				CURRENT_PROJECT_VERSION = d2.7.5;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -42389,7 +42403,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Belorusskaya Set Kommunikatsi ZAO (7A7F3AW7RP)";
 				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = d2.7.2;
+				CURRENT_PROJECT_VERSION = d2.7.5;
 				DEVELOPMENT_TEAM = 7A7F3AW7RP;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

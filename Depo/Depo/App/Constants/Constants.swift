@@ -2136,6 +2136,7 @@ struct TextConstants {
     static let privateShareSharedByMeTab = NSLocalizedString("private_share_shared_by_me_tab", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareSharedWithMeTab = NSLocalizedString("private_share_shared_with_me_tab", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareStartPageSuccess = NSLocalizedString("private_share_start_page_share_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareStartPageClosePopupMessage = NSLocalizedString("private_share_cancel_confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let privateShareRoleSelectionTitle = NSLocalizedString("private_share_role_selection_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareRoleSelectionEditor = NSLocalizedString("private_share_role_selection_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

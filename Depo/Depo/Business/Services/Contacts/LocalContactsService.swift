@@ -23,6 +23,12 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
     private let queue = DispatchQueue(label: DispatchQueueLabels.localContactsServiceQueue)
     private let contactsStorage = LocalContactsStorage.shared
     
+    init() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(onContactStoreDidChange),
+                                               name: .CNContactStoreDidChange,
+                                               object: nil)
+    }
     
     func fetchAllContacts(completion: BoolHandler?) {
         checkAuthorization { [weak self] isAuthorized in
@@ -37,7 +43,7 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
                 return
             }
             
-            self.queue.async { [weak self] in
+            self.queue.async(flags: .barrier) { [weak self] in
                 guard let self = self else {
                     completion?(false)
                     return
@@ -72,6 +78,7 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
         contactsStorage.getContactName(for: phone, email: email)
     }
     
+    //MARK - Private
     private func checkAuthorization(completion: @escaping BoolHandler) {
         contactStore.requestAccess(for: .contacts) { isAllowed, error in
             if let error = error {
@@ -81,5 +88,10 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
             
             completion(isAllowed)
         }
+    }
+    
+    @objc
+    private func onContactStoreDidChange() {
+        fetchAllContacts(completion: nil)
     }
 }

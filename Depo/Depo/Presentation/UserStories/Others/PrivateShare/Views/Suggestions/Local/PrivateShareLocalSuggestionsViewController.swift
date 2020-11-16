@@ -17,6 +17,7 @@ struct ContactInfo {
 
 protocol PrivateShareSelectSuggestionsDelegate: class {
     func didSelect(contactInfo: ContactInfo)
+    func contactListDidUpdate(isEmpty: Bool)
 }
 
 
@@ -67,6 +68,7 @@ final class PrivateShareLocalSuggestionsViewController: UIViewController, NibIni
             currentSuggestions = []
         } else {
             currentSuggestions = localContactsService.suggestContacts(for: searchString)
+            delegate?.contactListDidUpdate(isEmpty: currentSuggestions.isEmpty)
         }
 
         DispatchQueue.main.async {
