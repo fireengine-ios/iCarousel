@@ -200,7 +200,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
     
     private func showSearchLocalContactsViewIfNeeded() {
-        guard hasAccess, searchSuggestionsContainer.isHidden else {
+        guard searchSuggestionsContainer.isHidden else {
             return
         }
         
@@ -276,21 +276,25 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
         if text.count < minSearchLength {
             getRemoteSuggestions()
             searchSuggestionsContainer.isHidden = true
-        } else {
+        } else if hasAccess {
             showSearchLocalContactsViewIfNeeded()
             searchLocalSuggestions(query: text)
+        } else {
+            removeRemoteSuggestionsView()
         }
     }
     
     func searchTextDidChange(text: String) {
         if text.count < minSearchLength {
             removeLocalSuggestionsView()
-        } else {
+        } else if hasAccess {
             
             //we need this trimming for prepare(), so our +90 logic would work with whitespaces
             let trimmedText = text.filter{ $0 != " " }
             showSearchLocalContactsViewIfNeeded()
             searchLocalSuggestions(query: trimmedText)
+        } else {
+            removeRemoteSuggestionsView()
         }
     }
     
