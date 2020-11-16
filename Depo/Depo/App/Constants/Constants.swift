@@ -2138,6 +2138,6 @@ struct TextConstants {
     static let privateShareRoleSelectionTitle = NSLocalizedString("private_share_role_selection_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareRoleSelectionEditor = NSLocalizedString("private_share_role_selection_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareRoleSelectionViewer = NSLocalizedString("private_share_role_selection_role_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    static let privateShareValidationFailPopUpText = NSLocalizedString("private_share_msisdn_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-        
+    static let privateSharePhoneValidationFailPopUpText = NSLocalizedString("private_share_msisdn_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareEmailValidationFailPopUpText = NSLocalizedString("private_share_email_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
