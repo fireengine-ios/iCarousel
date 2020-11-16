@@ -90,6 +90,12 @@ struct LocalContactsStorage {
                 result.append(SuggestedContact(with: contact, source: .name))
                 return
             }
+            
+            let displayNameWithoutWhitespaces = "\(contact.givenName)\(contact.familyName)".lowercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            if displayNameWithoutWhitespaces.contains(lowercasedString) {
+                result.append(SuggestedContact(with: contact, source: .name))
+                return
+            }
 
             let msisdns = contact.phoneNumbers.compactMap { $0.value }
             if msisdns.first(where: { $0.stringValue.digits.contains(stringToSearch.digits) }) != nil {
