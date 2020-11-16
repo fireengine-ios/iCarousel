@@ -153,7 +153,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
             if let firstVisibleIndexPath = firstVisibleIndexPath {
                 if firstVisibleIndexPath.row == 0, firstVisibleIndexPath.section == 0 {
                     self.collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .centeredVertically, animated: false)
-                } else{
+                } else {
                     self.collectionView?.scrollToItem(at: firstVisibleIndexPath, at: .top, animated: false)
                 }
             }
