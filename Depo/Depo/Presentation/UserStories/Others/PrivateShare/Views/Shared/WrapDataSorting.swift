@@ -18,9 +18,9 @@ final class WrapDataSorting {
         case .timeDown, .timeDownWithoutSection, .lastModifiedTimeDown:
             tempoArray.sort{$0.creationDate! < $1.creationDate!}
         case .lettersAZ, .albumlettersAZ:
-            tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
-        case .lettersZA, .albumlettersZA:
             tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
+        case .lettersZA, .albumlettersZA:
+            tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
         case .sizeAZ:
             tempoArray.sort{$0.fileSize > $1.fileSize}
         case .sizeZA:

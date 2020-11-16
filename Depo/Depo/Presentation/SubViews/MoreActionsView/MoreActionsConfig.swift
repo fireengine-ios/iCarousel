@@ -163,9 +163,9 @@ class MoreActionsConfig {
         var sortedRulesConveted: SortedRules {
             switch self {
             case .AlphaBetricAZ, .LettersAZ:
-                return .lettersZA
-            case .AlphaBetricZA, .LettersZA:
                 return .lettersAZ
+            case .AlphaBetricZA, .LettersZA:
+                return .lettersZA
             case .TimeNewOld:
                 return .timeUp
             case .TimeOldNew:
