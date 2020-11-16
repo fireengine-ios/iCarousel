@@ -244,7 +244,6 @@ final class PrivateShareViewController: BaseViewController, NibInit {
 
     @IBAction private func onShareTapped(_ sender: Any) {
         remoteSuggestions = []
-        
         let shareObject = PrivateShareObject(items: items.compactMap { $0.uuid },
                                              invitationMessage: messageView.message,
                                              invitees: shareWithView.contacts,
@@ -307,9 +306,14 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     
     func addShareContact(_ contact: PrivateShareContact) {
         guard isValidContact(text: contact.username) else {
-            UIApplication.showErrorAlert(message: TextConstants.privateShareValidationFailPopUpText)
+            if contact.username.contains("@") {
+                UIApplication.showErrorAlert(message: TextConstants.privateShareEmailValidationFailPopUpText)
+            } else {
+                UIApplication.showErrorAlert(message: TextConstants.privateSharePhoneValidationFailPopUpText)
+            }
             return
         }
+        
         selectPeopleView.clear()
         shareWithView.add(contact: contact)
         if shareWithView.superview == nil {
@@ -318,7 +322,6 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
         endSearchContacts()
         updateShareButtonIfNeeded()
     }
-    
 }
 
 //MARK: - PrivateShareWithViewDelegate

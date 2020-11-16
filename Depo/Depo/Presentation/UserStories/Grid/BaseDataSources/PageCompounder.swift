@@ -367,26 +367,7 @@ final class PageCompounder {
     
     // MARK: - sorting
     fileprivate func sortByCurrentType(items: [WrapData], sortType: SortedRules) -> [WrapData] {
-        var tempoArray = items
-        switch sortType {
-        case .timeUp, .timeUpWithoutSection, .lastModifiedTimeUp:
-            tempoArray.sort{$0.creationDate! > $1.creationDate!}
-        case .timeDown, .timeDownWithoutSection, .lastModifiedTimeDown:
-            tempoArray.sort{$0.creationDate! < $1.creationDate!}
-        case .lettersAZ, .albumlettersAZ:
-            tempoArray.sort{String($0.name!.first!).uppercased() > String($1.name!.first!).uppercased()}
-        case .lettersZA, .albumlettersZA:
-            tempoArray.sort{String($0.name!.first!).uppercased() < String($1.name!.first!).uppercased()}
-        case .sizeAZ:
-            tempoArray.sort{$0.fileSize > $1.fileSize}
-        case .sizeZA:
-            tempoArray.sort{$0.fileSize < $1.fileSize}
-        case .metaDataTimeUp:
-            tempoArray.sort{$0.metaDate > $1.metaDate}
-        case .metaDataTimeDown:
-            tempoArray.sort{$0.metaDate < $1.metaDate}
-        }
-        return tempoArray
+        return WrapDataSorting.sort(items: items, sortType: sortType)
     }
     
     private func getFilteringPredicate(md5s: Set<String>, localIDs: Set<String>, sizeLimit: UInt64 = NumericConstants.fourGigabytes) -> NSCompoundPredicate {

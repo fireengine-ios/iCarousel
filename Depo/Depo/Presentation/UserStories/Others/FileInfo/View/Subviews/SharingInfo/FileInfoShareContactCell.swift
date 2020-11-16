@@ -53,6 +53,7 @@ final class FileInfoShareContactCell: UICollectionViewCell {
         
         button.setTitle("", for: .normal)
         button.setImage(nil, for: .normal)
+        button.backgroundColor = .clear
         circleView.layer.borderWidth = 0
     }
     

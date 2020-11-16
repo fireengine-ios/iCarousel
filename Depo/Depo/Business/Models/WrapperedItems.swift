@@ -1154,6 +1154,30 @@ class WrapData: BaseDataSourceItem, Wrappered {
         md5 = "\(fileName)\(fileSize)"
     }
     
+    init(privateShareFileInfo: SharedFileInfo) {
+        //TODO: status to enum in SharedFileInfo
+        
+        fileSize = privateShareFileInfo.bytes ?? 0
+        favorites = false
+        patchToPreview = .remoteUrl(nil)
+        status = .active
+        
+        super.init(uuid: privateShareFileInfo.uuid,
+                   name: privateShareFileInfo.name,
+                   creationDate: privateShareFileInfo.creationDate,
+                   lastModifiDate: privateShareFileInfo.lastModifiedDate,
+                   fileType: privateShareFileInfo.fileType,
+                   syncStatus: .synced,
+                   isLocalItem: false)
+        
+        id = privateShareFileInfo.id
+        isFolder = privateShareFileInfo.folder
+        if isFolder == true {
+            fileType = .folder
+        }
+        childCount = privateShareFileInfo.childCount
+    }
+    
     func copyFileData(from item: WrapData) {
         uuid = item.uuid
         id = item.id

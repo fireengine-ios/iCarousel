@@ -267,6 +267,13 @@ struct RouteRequests {
         static let suggestions = baseUrl +/ "invitees"
         static let share = baseUrl +/ "shares"
         static let sharingInfo = baseShortUrlString + "api/v2/files/%@"
+        
+        enum Shared {
+            private static let baseShares = share.absoluteString
+            static let withMe = baseShares + "?sharedWith=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE"
+            static let byMe = baseShares + "?sharedBy=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE"
+            //"https://run.mocky.io/v3/8d9274fb-3149-452b-9d7f-ef8b1ea20195"//
+        }
     }
     
     //MARK: - Turkcell Updater
@@ -362,6 +369,11 @@ struct RouteRequests {
         static let emptyTrash = baseUrl +/ "trash/empty"
         static let hide = baseUrl +/ (filesystemBase + "hide")
         static let recover = (baseUrl +/ filesystemBase) +/ "recover"
+        
+        enum Version_2 {
+            private static let baseV2Url = baseUrl +/ "v2/files"
+            static let filesFromFolder = baseV2Url.absoluteString + "?size=%d&page=%d&sortBy=%@&sortOrder=%@&parentFolderUuid=%@"
+        }
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"

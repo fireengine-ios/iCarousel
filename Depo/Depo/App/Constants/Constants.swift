@@ -2132,6 +2132,9 @@ struct TextConstants {
     static let privateShareStartPageDurationYear = NSLocalizedString("private_share_start_page_share_duration_6", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareStartPageEditorButton = NSLocalizedString("private_share_start_page_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareStartPageViewerButton = NSLocalizedString("private_share_start_page_role_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareDetailsPageName = NSLocalizedString("private_share_details_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareSharedByMeTab = NSLocalizedString("private_share_shared_by_me_tab", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareSharedWithMeTab = NSLocalizedString("private_share_shared_with_me_tab", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareStartPageSuccess = NSLocalizedString("private_share_start_page_share_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareStartPageClosePopupMessage = NSLocalizedString("private_share_cancel_confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
@@ -2145,4 +2148,6 @@ struct TextConstants {
     static let privateShareInfoMenuOwner = NSLocalizedString("private_share_info_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareInfoMenuEditor = NSLocalizedString("private_share_info_role_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareInfoMenuViewer = NSLocalizedString("private_share_info_role_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharePhoneValidationFailPopUpText = NSLocalizedString("private_share_msisdn_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareEmailValidationFailPopUpText = NSLocalizedString("private_share_email_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

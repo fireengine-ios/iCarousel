@@ -1,5 +1,5 @@
 //
-//  PhotoVideoNavBarManager.swift
+//  SegmentedChildNavBarManager.swift
 //  Depo_LifeTech
 //
 //  Created by Bondar Yaroslav on 8/22/18.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol PhotoVideoNavBarManagerDelegate: SegmentedChildController {
+protocol SegmentedChildNavBarManagerDelegate: SegmentedChildController {
     func onCancelSelectionButton()
     func onThreeDotsButton()
     func onSearchButton()
 }
 
-final class PhotoVideoNavBarManager {
+final class SegmentedChildNavBarManager {
     
     private lazy var cancelSelectionButton = UIBarButtonItem(
         title: TextConstants.cancelSelectionButtonTitle,
@@ -35,9 +35,9 @@ final class PhotoVideoNavBarManager {
         target: self,
         action: #selector(onSearchButton))
     
-    private weak var delegate: PhotoVideoNavBarManagerDelegate?
+    private weak var delegate: SegmentedChildNavBarManagerDelegate?
     
-    init(delegate: PhotoVideoNavBarManagerDelegate?) {
+    init(delegate: SegmentedChildNavBarManagerDelegate?) {
         self.delegate = delegate
     }
     
@@ -46,8 +46,8 @@ final class PhotoVideoNavBarManager {
         delegate?.setRightBarButtonItems([threeDotsButton], animated: false)
     }
     
-    func setDefaultMode() {
-        delegate?.setTitle("")
+    func setDefaultMode(title: String = "") {
+        delegate?.setTitle(title)
         delegate?.setRightBarButtonItems([threeDotsButton, searchButton], animated: false)
         delegate?.setLeftBarButtonItems(nil, animated: true)
         threeDotsButton.isEnabled = true
