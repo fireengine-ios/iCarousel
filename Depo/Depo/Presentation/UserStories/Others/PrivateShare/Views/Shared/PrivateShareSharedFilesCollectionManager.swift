@@ -107,9 +107,13 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     
     @objc
     private func reload() {
-        fileInfoManager?.reload { [weak self] _ in
+        fileInfoManager?.reload { [weak self] itmesLoadedCount in
             self?.changeSelection(isActive: false)
             self?.reloadCollection()
+            
+            if itmesLoadedCount == 0 {
+                self?.showEmptyScreen()
+            }
         }
         
     }
@@ -121,19 +125,20 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         })
     }
     
-    private func append(indexes: [IndexPath]) {
-        guard !indexes.isEmpty else {
-            return
-        }
-        
-        DispatchQueue.main.async {
-            self.collectionView?.performBatchUpdates({
-                self.collectionView?.insertItems(at: indexes)
-            }, completion: { (_) in
-                //
-            })
-        }
-    }
+    //TODO: maybe later
+//    private func append(indexes: [IndexPath]) {
+//        guard !indexes.isEmpty else {
+//            return
+//        }
+//
+//        DispatchQueue.main.async {
+//            self.collectionView?.performBatchUpdates({
+//                self.collectionView?.insertItems(at: indexes)
+//            }, completion: { (_) in
+//                //
+//            })
+//        }
+//    }
     
     private func updateLayout() {
         DispatchQueue.toMain {
@@ -180,6 +185,12 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
             self.collectionView?.reloadItems(at: visibleCells)
         }
     }
+    
+    private func showEmptyScreen() {
+        DispatchQueue.main.async {
+            //TOOD:?
+        }
+    }
 }
 
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource
@@ -204,9 +215,11 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             return
         }
         
+        let isSelectedCell = isSelected(item: item)
         cell.updating()
-        cell.setSelection(isSelectionActive: isSelecting, isSelected: isSelected(item: item))
+        cell.setSelection(isSelectionActive: isSelecting, isSelected: isSelectedCell)
         cell.configureWithWrapper(wrappedObj: item)
+        cell.isSelected = isSelectedCell
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -377,7 +390,7 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollec
     }
     
     func morebuttonGotPressed(sender: Any, itemModel: Item?) {
-        //TODO:
+        //TODO: another jira task
     }
 }
 

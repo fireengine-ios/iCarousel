@@ -43,8 +43,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         return manager
     }()
     
-    private lazy var navBarManager = PhotoVideoNavBarManager(delegate: self)
-    private lazy var bottomBarManager = PhotoVideoBottomBarManager(delegate: self)
+    private lazy var navBarManager = PrivateShareSharedFilesNavBarManager(delegate: self)
+    private lazy var bottomBarManager = PrivateShareSharedFilesBottomBarManager(delegate: self)
     
     private let router = RouterVC()
     
@@ -60,7 +60,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        bottomBarManager.editingTabBar?.view.layoutIfNeeded()
+        bottomBarManager.updateLayout()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -171,14 +171,14 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
 }
 
 
-//MARK: - PhotoVideoNavBarManagerDelegate
-extension PrivateShareSharedFilesViewController: PhotoVideoNavBarManagerDelegate {
+//MARK: - PrivateShareSharedFilesNavBarManagerDelegate
+extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesNavBarManagerDelegate {
     func onCancelSelectionButton() {
         collectionManager.endSelection()
     }
     
     func onThreeDotsButton() {
-        //TODO:
+        //TODO: another jira task
     }
     
     func onSearchButton() {

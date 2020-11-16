@@ -43,7 +43,7 @@ final class PrivateShareFileInfoManager {
     
     //MARK: - Public
     
-    func loadNext(completion: @escaping ValueHandler<[IndexPath]>) {
+    func loadNext(completion: @escaping ValueHandler<Int>) {
         guard !isPageLoading else {
             return
         }
@@ -62,7 +62,7 @@ final class PrivateShareFileInfoManager {
                         
                         guard !newItems.isEmpty else {
                             self.isPageLoading = false
-                            completion([])
+                            completion(0)
                             return
                         }
                         
@@ -75,18 +75,18 @@ final class PrivateShareFileInfoManager {
                         
                         self.splittedItems.replace(with: splitted) { [weak self] in
                             self?.isPageLoading = false
-                            completion([])
+                            completion(newItems.count)
                         }
                         
                     case .failed(_):
                         self.isPageLoading = false
-                        completion([])
+                        completion(0)
                 }
             }
         }
     }
     
-    func reload(completion: @escaping ValueHandler<[IndexPath]>) {
+    func reload(completion: @escaping ValueHandler<Int>) {
         queue.sync {
             selectedItems.removeAll()
             sortedItems.removeAll()
