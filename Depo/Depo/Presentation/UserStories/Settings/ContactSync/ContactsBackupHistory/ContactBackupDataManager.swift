@@ -48,7 +48,7 @@ final class ContactBackupHistoryDataManager: NSObject, ContactBackupHistoryDataM
     private func prepareInfoForCellPresenting(for item: ContactBackupItem) -> (title: String, description: String) {
         let title = TextConstants.contactBackupHistoryCellContactList
         let description: String
-        if let date = item.date {
+        if let date = item.created {
             description = "\(item.total) \(TextConstants.contactBackupHistoryCellTitle) | \(String(describing: date.getDateInFormat(format: "dd MMM yyyy '|' HH:mm")))"
         } else {
             description = "\(item.total) \(TextConstants.contactBackupHistoryCellTitle)"

@@ -1148,6 +1148,10 @@ extension NetmeraEvents.Actions {
                 netmeraPussButtonAction = .upload
             case .uploadFiles:
                 netmeraPussButtonAction = .uploadFiles
+            case .uploadDocuments:
+                netmeraPussButtonAction = .uploadFiles
+            case .uploadMusic:
+                netmeraPussButtonAction = .uploadMusic
             case .createAlbum:
                 netmeraPussButtonAction = .createAlbum
             case .uploadFromApp:

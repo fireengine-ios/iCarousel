@@ -534,6 +534,7 @@ enum NetmeraEventValues {
         case useCamera
         case upload
         case uploadFiles
+        case uploadMusic
         case createStory
         case newFolder
         case createAlbum
@@ -548,6 +549,8 @@ enum NetmeraEventValues {
                 return "Upload"
             case .uploadFiles:
                 return "Upload Files"
+            case .uploadMusic:
+                return "Upload Music"
             case .createStory:
                 return "Create Story"
             case .newFolder:

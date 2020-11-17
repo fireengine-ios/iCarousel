@@ -486,6 +486,9 @@ class AuthenticationService: BaseRequestService {
             CacheManager.shared.logout {
                 debugLog("logout success")
                 WormholePoster().didLogout()
+                if #available(iOS 14.0, *) {
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
                 success?()
             }
         }
