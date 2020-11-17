@@ -314,13 +314,7 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
         endSearchContacts()
         updateShareButtonIfNeeded()
     }
-    
-    private func isValidContact(text: String) -> Bool {
-        if Validator.isValid(email: text) || Validator.isValid(contactsPhone: text) {
-            return true
-        }
-        return false
-    }
+
 }
 
 //MARK: - PrivateShareWithViewDelegate
