@@ -14,4 +14,5 @@ protocol FileInfoInteractorInput {
     func onRename(newName: String)
     func getAlbum(for item: BaseDataSourceItem)
     func onValidateName(newName: String)
+    func getSharingInfo()
 }

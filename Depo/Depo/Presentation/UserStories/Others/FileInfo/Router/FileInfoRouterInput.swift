@@ -9,5 +9,9 @@
 import Foundation
 
 protocol FileInfoRouterInput {
+    func openPrivateShare(for item: Item)
+}
 
+protocol FileInfoRouterOutput: class {
+    func updateSharingInfo()
 }

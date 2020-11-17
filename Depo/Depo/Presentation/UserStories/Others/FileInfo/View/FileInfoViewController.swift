@@ -26,57 +26,25 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
     @IBOutlet weak var takenDateTitle: UILabel!
     @IBOutlet weak var takenDateLabel: UILabel!
     
+    @IBOutlet private weak var shareInfoContainer: UIView!
+    private lazy var sharingInfoView = FileInfoShareView.with(delegate: self)
+    
     var output: FileInfoViewOutput!
     var interactor: FileInfoInteractor!
     private var fileType: FileType = .unknown
     
+    private let sectionFont = UIFont.TurkcellSaturaBolFont(size: 14)
+    private let sectionColor = ColorConstants.marineTwo
+    private let infoFont = UIFont.TurkcellSaturaFont(size: 18)
+    private let titleColor = UIColor.lrBrownishGrey
+    private let infoColor = ColorConstants.closeIconButtonColor
+    
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupUI()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        
-        fileNameTitle.text = TextConstants.fileInfoFileNameTitle
-        fileNameTitle.textColor = ColorConstants.blueColor
-        fileNameTitle.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        
-        fileName.textColor = ColorConstants.textGrayColor
-        fileName.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        fileInfoTitle.text = TextConstants.fileInfoFileInfoTitle
-        fileInfoTitle.textColor = ColorConstants.blueColor
-        fileInfoTitle.font = UIFont.TurkcellSaturaBolFont(size: 14)
-        
-        folderSizeTitle.textColor = ColorConstants.textGrayColor
-        folderSizeTitle.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        folderSizeLabel.textColor = ColorConstants.textGrayColor
-        folderSizeLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        durationTitle.text = TextConstants.fileInfoDurationTitle
-        durationTitle.textColor = ColorConstants.textGrayColor
-        durationTitle.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        durationLabel.textColor = ColorConstants.textGrayColor
-        durationLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        moreFileInfoLabel.textColor = ColorConstants.textGrayColor
-        moreFileInfoLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        uploadDateTitle.text = TextConstants.fileInfoUploadDateTitle
-        uploadDateTitle.textColor = ColorConstants.textGrayColor
-        uploadDateTitle.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        uploadDateLabel.textColor = ColorConstants.textGrayColor
-        uploadDateLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        
-        takenDateTitle.text = TextConstants.fileInfoTakenDateTitle
-        takenDateTitle.textColor = ColorConstants.textGrayColor
-        takenDateTitle.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
-        takenDateLabel.textColor = ColorConstants.textGrayColor
-        takenDateLabel.font = UIFont.TurkcellSaturaRegFont(size: 19)
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: TextConstants.fileInfoSave,
                                                             target: self,
                                                             selector: #selector(onSave))
@@ -88,6 +56,35 @@ final class FileInfoViewController: BaseViewController, ActivityIndicator, Error
         super.viewWillAppear(animated)
         
         navigationBarWithGradientStyleWithoutInsets()
+    }
+    
+    private func setupUI() {
+        let sectionTitles = [fileNameTitle, fileInfoTitle]
+        sectionTitles.forEach {
+            $0?.textColor = sectionColor
+            $0?.font = sectionFont
+        }
+        
+        let infoTitles = [folderSizeTitle, durationTitle, uploadDateTitle, takenDateTitle]
+        infoTitles.forEach {
+            $0?.textColor = titleColor
+            $0?.font = infoFont
+        }
+        
+        let infoFields = [folderSizeLabel, durationLabel, moreFileInfoLabel, uploadDateLabel, takenDateLabel]
+        infoFields.forEach {
+            $0?.textColor = infoColor
+            $0?.font = infoFont
+        }
+        
+        fileName.textColor = titleColor
+        fileName.font = infoFont
+        
+        fileNameTitle.text = TextConstants.fileInfoFileNameTitle
+        fileInfoTitle.text = TextConstants.fileInfoFileInfoTitle
+        durationTitle.text = TextConstants.fileInfoDurationTitle
+        uploadDateTitle.text = TextConstants.fileInfoUploadDateTitle
+        takenDateTitle.text = TextConstants.fileInfoTakenDateTitle
     }
 
     private func addReturnIfNeed(string: inout String) {
@@ -274,6 +271,15 @@ extension FileInfoViewController: FileInfoViewInput {
         view.subviews.forEach { $0.isHidden = false }
     }
     
+    func showSharingInfo(_ sharingInfo: SharedFileInfo) {
+        if sharingInfoView.superview == nil {
+            shareInfoContainer.addSubview(sharingInfoView)
+            sharingInfoView.translatesAutoresizingMaskIntoConstraints = false
+            sharingInfoView.pinToSuperviewEdges()
+        }
+        
+        sharingInfoView.setup(with: sharingInfo)
+    }
 }
 
 // MARK: UITextFieldDelegate
@@ -301,4 +307,21 @@ extension FileInfoViewController: UITextFieldDelegate {
         return true
     }
     
+}
+
+//MARK: - FileInfoShareViewDelegate
+
+extension FileInfoViewController: FileInfoShareViewDelegate {
+    
+    func didSelect(contact: SharedContact) {
+        //TODO: COF-585 - open role view/update page
+    }
+    
+    func didTappedPlusButton() {
+        output.shareItem()
+    }
+    
+    func didTappedArrowButton() {
+        //TODO: COF-535 - open Who has access page
+    }
 }
