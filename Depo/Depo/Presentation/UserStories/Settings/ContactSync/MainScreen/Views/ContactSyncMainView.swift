@@ -103,7 +103,7 @@ final class ContactSyncMainView: UIView, NibInit {
         bigInfoCard.set(numberOfContacts: model.total)
         bigInfoCard.set(periodicSyncOption: periodicSyncOption)
         
-        if let date = model.date {
+        if let date = model.created {
             showBackupCard.update(type: .showBackup(date: date))
         }
     }

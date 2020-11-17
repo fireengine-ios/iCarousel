@@ -180,7 +180,7 @@ def publishToArtifactory = { app, classifier ->
     def uploadSpec = """{
         "files": [
             {
-            "pattern": "${outputsDir}/${app.name}-*.ipa",
+            "pattern": "${outputsDir}/${app.name}*.ipa",
             "target": "${artifactPath}/${artifactName}.ipa"
             },
             {

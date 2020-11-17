@@ -19,19 +19,16 @@ final class DocumentDownloadService {
     }()
     
     
-    func saveLocaly(remoteItems: [Item], onDownload: @escaping VoidHandler) -> Int {
+    func saveLocaly(remoteItems: [Item], onEachDownload: @escaping VoidHandler, onCompletion: @escaping DocumentDownloadHandler) {
         guard !remoteItems.isEmpty else {
-            return 0
+            return
         }
         
         var operations = [DocumentDownloadOperation]()
         
-        let operation = DocumentDownloadOperation(items: remoteItems) {
-            onDownload()
-        }
+        let operation = DocumentDownloadOperation(items: remoteItems, onDownload: onEachDownload, onCompletion: onCompletion)
         operations.append(operation)
         DocumentDownloadService.operationQueue.addOperations(operations, waitUntilFinished: false)
-        return operations.count
     }
 }
 

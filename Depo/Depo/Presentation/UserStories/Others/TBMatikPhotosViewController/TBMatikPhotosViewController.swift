@@ -40,7 +40,8 @@ final class TBMatikPhotosViewController: ViewController, NibInit {
     enum Constants {
         static let leftOffset: CGFloat = 32
         static let rightOffset: CGFloat = 32
-        static let itemSpacing: CGFloat = 8
+        static let itemSpacing: CGFloat = 0.62
+        static let itemScaleFactor: CGFloat = 0.3
     }
     
     // MARK: - IBOutlets
@@ -283,7 +284,6 @@ extension TBMatikPhotosViewController: iCarouselDataSource {
         
         let uuid = uuids[index]
         itemView.setup(with: items[uuid])
-        itemView.needShowShadow = index == carousel.currentItemIndex
         itemView.tag = index
         
         itemView.setImageHandler = { [weak self] in
@@ -315,21 +315,16 @@ extension TBMatikPhotosViewController: iCarouselDataSource {
 extension TBMatikPhotosViewController: iCarouselDelegate {
 
     func carousel(_ carousel: iCarousel, itemTransformForOffset offset: CGFloat, baseTransform transform: CATransform3D) -> CATransform3D {
-        let spacing = 1 + Constants.itemSpacing / carousel.bounds.width
-        let x = offset * spacing * carousel.itemWidth
-        return CATransform3DTranslate(transform, x, 0, 0)
+        let clampedOffset = max(-1, min(1, offset))
+        let x = (clampedOffset * 0.5 + offset * Constants.itemSpacing) * carousel.itemWidth
+        let z = fabs(clampedOffset) * -carousel.itemWidth * Constants.itemScaleFactor
+        return CATransform3DTranslate(transform, x, 0, z)
     }
     
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
         updateTitle()
 
         track(screen: .tbmatikSwipePhoto(carousel.currentItemIndex + 1))
-        
-        carousel.visibleItemViews.forEach { view in
-            if let itemView = view as? TBMatikPhotoView {
-                itemView.needShowShadow = itemView.tag == carousel.currentItemIndex
-            }
-        }
         
         if let currentView = carousel.currentItemView as? TBMatikPhotoView {
             updateButtonsState(for: currentView)

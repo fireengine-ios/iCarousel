@@ -375,6 +375,7 @@ class ContactsSyncService: BaseRequestService {
     }
     
     func updateAccessToken() {
+        debugLog("CONTACT SYNC: updateAccessToken")
         let tokenStorage: TokenStorage = factory.resolve()
         SyncSettings.shared().token = tokenStorage.accessToken
     }
