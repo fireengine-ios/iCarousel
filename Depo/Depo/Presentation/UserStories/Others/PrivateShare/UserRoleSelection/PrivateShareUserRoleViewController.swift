@@ -73,14 +73,14 @@ final class PrivateShareUserRoleViewController: BaseViewController, NibInit {
     }
     
     private func setupRolesStackView() {
-        let roles = PrivateShareUserRole.allCases
+        let roles: [PrivateShareUserRole] = [.editor, .viewer]
         roles.enumerated().forEach { index, role in
             let view = PrivateShareRoleCheckmarkView.with(role: role, delegate: self)
             view.isSelected = contact?.role == role
             roleStackView.addArrangedSubview(view)
             
             let offset: CGFloat = index == roles.count - 1 ? 0 : 16
-            let separator = makeSeparator(offset: offset)
+            let separator = UIView.makeSeparator(width: roleStackView.frame.width, offset: offset)
             roleStackView.addArrangedSubview(separator)
             separator.heightAnchor.constraint(equalToConstant: 1).activate()
         }
@@ -88,20 +88,6 @@ final class PrivateShareUserRoleViewController: BaseViewController, NibInit {
     
     @IBAction private func onBackTapped(_ sender: UIButton) {
         dismiss(animated: true)
-    }
-    
-    private func makeSeparator(offset: CGFloat) -> UIView {
-        var frame = CGRect(origin: .zero, size: CGSize(width: roleStackView.frame.width, height: 1))
-        let view = UIView(frame: frame)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        frame.origin.x = offset
-        frame.size.width -= offset * 2
-        let separator = UIView(frame: frame)
-        separator.backgroundColor = ColorConstants.darkBorder.withAlphaComponent(0.3)
-        view.addSubview(separator)
-        separator.autoresizingMask = [.flexibleWidth]
-        return view
     }
 }
 

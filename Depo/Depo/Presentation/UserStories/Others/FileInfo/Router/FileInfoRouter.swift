@@ -7,5 +7,16 @@
 //
 
 class FileInfoRouter: FileInfoRouterInput {
-
+    
+    weak var output: FileInfoRouterOutput?
+    private lazy var router = RouterVC()
+    
+    func openPrivateShare(for item: Item) {
+        let controller = router.privateShare(items: [item]) { [weak self] success in
+            if success {
+                self?.output?.updateSharingInfo()
+            }
+        }
+        router.presentViewController(controller: controller)
+    }
 }

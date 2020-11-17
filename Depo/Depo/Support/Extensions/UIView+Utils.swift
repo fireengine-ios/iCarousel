@@ -115,4 +115,17 @@ extension UIView {
                                        verticalFittingPriority: .defaultLow)
     }
     
+    static func makeSeparator(width: CGFloat, offset: CGFloat) -> UIView {
+        var frame = CGRect(origin: .zero, size: CGSize(width: width, height: 1))
+        let view = UIView(frame: frame)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        frame.origin.x = offset
+        frame.size.width -= offset * 2
+        let separator = UIView(frame: frame)
+        separator.backgroundColor = ColorConstants.darkBorder.withAlphaComponent(0.3)
+        view.addSubview(separator)
+        separator.autoresizingMask = [.flexibleWidth]
+        return view
+    }
 }

@@ -24,6 +24,7 @@ class FileInfoModuleConfigurator {
         let presenter = FileInfoPresenter()
         presenter.view = viewController
         presenter.router = router
+        router.output = presenter
 
         let interactor = FileInfoInteractor()
         interactor.output = presenter

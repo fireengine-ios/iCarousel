@@ -59,6 +59,11 @@ final class GradientPremiumButton: UIButton {
         setTitleColor(.white, for: .selected)
         
         titleLabel?.adjustsFontSizeToFitWidth()
+        setDefaultTitleEdgeInsets()
+    }
+    
+    private func setDefaultTitleEdgeInsets() {
+        titleEdgeInsets = UIEdgeInsetsMake(6, 14, 6, 14)
     }
     
     private func addGradient() {

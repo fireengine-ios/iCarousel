@@ -13,6 +13,8 @@ final class FileInfoInteractor {
     var item: BaseDataSourceItem?
     private let albumService = PhotosAlbumService()
 
+    private lazy var localContactsService = ContactsSuggestionServiceImpl()
+    private lazy var shareApiService = PrivateShareApiServiceImpl()
 }
 
 // MARK: FileInfoInteractorInput
@@ -24,6 +26,7 @@ extension FileInfoInteractor: FileInfoInteractorInput {
             return
         }
         output.setObject(object: item)
+        getSharingInfo()
         AnalyticsService().logScreen(screen: .info(item.fileType))
     }
     
@@ -91,6 +94,64 @@ extension FileInfoInteractor: FileInfoInteractorInput {
             }
         } else {
             output.didValidateNameSuccess()
+        }
+    }
+    
+    func getSharingInfo() {
+        guard let uuid = item?.uuid else {
+            return
+        }
+        
+        let group = DispatchGroup()
+        
+        group.enter()
+        group.enter()
+        
+        var hasAccess = false
+        var sharingInfo: SharedFileInfo?
+        
+        localContactsService.fetchAllContacts { isAuthorized in
+            hasAccess = isAuthorized
+            group.leave()
+        }
+            
+        shareApiService.getSharingInfo(uuid: uuid) { result in
+            switch result {
+            case .success(let info):
+                sharingInfo = info
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+            group.leave()
+        }
+        
+        group.notify(queue: .main) { [weak self] in
+            if let sharingInfo = sharingInfo {
+                self?.setupSharingInfoView(sharingInfo: sharingInfo, hasAccess: hasAccess)
+            }
+        }
+    }
+    
+    private func setupSharingInfoView(sharingInfo: SharedFileInfo, hasAccess: Bool) {
+        let needShow = sharingInfo.members?.isEmpty == false
+        
+        if needShow {
+            var info = sharingInfo
+            info.members?.enumerated().forEach { index, member in
+                let localContactNames = localContactsService.getContactName(for: member.subject?.username ?? "", email: member.subject?.email ?? "")
+                info.members?[index].subject?.name = displayName(from: localContactNames)
+            }
+            output.displayShareInfo(info)
+        }
+    }
+    
+    private func displayName(from localNames: LocalContactNames) -> String {
+        if !localNames.givenName.isEmpty, !localNames.familyName.isEmpty {
+            return "\(localNames.givenName) \(localNames.familyName)"
+        } else if !localNames.givenName.isEmpty {
+            return localNames.givenName
+        } else {
+            return localNames.familyName
         }
     }
     
