@@ -67,14 +67,19 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        setupNavigationBar(editingMode: false)
-        
-        let selectedItems = collectionManager.selectedItems()
-        if !selectedItems.isEmpty {
-            setupNavigationBar(editingMode: true)
+        let isSelecting = collectionManager.isSelecting
+        updateBars(isSelecting: isSelecting)
+        if isSelecting {
+            let selectedItems = collectionManager.selectedItems()
             show(selectedItemsCount: selectedItems.count)
             bottomBarManager.update(for: selectedItems)
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        updateBars(isSelecting: false)
     }
     
     //MARK: - Private
