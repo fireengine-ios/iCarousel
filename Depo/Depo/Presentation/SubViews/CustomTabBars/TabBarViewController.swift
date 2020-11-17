@@ -372,15 +372,15 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     func setupCustomNavControllers() {
         let router = RouterVC()
-        guard let syncContactsVC = router.syncContacts as? ContactSyncViewController else {
-            assertionFailure()
-            return
-        }
-        syncContactsVC.setTabBar(isVisible: true)
+//        guard let syncContactsVC = router.syncContacts as? ContactSyncViewController else {
+//            assertionFailure()
+//            return
+//        }
+//        syncContactsVC.setTabBar(isVisible: true)
         
         let list = [router.homePageScreen,
                     router.segmentedMedia(),
-                    syncContactsVC,
+                    router.sharedFiles,
                     router.segmentedFiles]
         customNavigationControllers = list.compactMap { NavigationController(rootViewController: $0!) }
     }

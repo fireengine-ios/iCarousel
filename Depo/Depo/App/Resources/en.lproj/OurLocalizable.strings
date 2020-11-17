@@ -1830,3 +1830,6 @@
 "private_share_role_selection_role_2" = "Can view";
 "private_share_msisdn_format" = "msisdn format is invalid";
 "private_share_email_format" = "email format is invalid";
+"private_share_shared_with_me_empty_page" = "No files are shared with you up to now";
+"private_share_shared_by_me_empty_page" = "You haven't shared any files yet";
+"private_share_inner_folder_empty_page" = "";

@@ -13,6 +13,17 @@ enum PrivateShareType {
     case byMe
     case withMe
     case innerFolder(uuid: String, name: String)
+    
+    var emptyViewType: EmptyView.ViewType {
+        switch self {
+            case .byMe:
+                return .sharedBy
+            case .withMe:
+                return .sharedWith
+            case .innerFolder(uuid: _, name: _):
+                return .sharedInnerFolder
+        }
+    }
 }
 
 
@@ -27,13 +38,12 @@ final class PrivateShareFileInfoManager {
     
     private let queue = DispatchQueue(label: DispatchQueueLabels.privateShareFileInfoManagerQueue)
     private var privateShareAPIService: PrivateShareApiService!
-    private var type: PrivateShareType = .byMe
     private let pageSize = Device.isIpad ? 64 : 32
     private var pageLoaded = 0
     private var isPageLoading = false
     
     private(set) var sorting: SortedRules = .timeUp
-    
+    private(set) var type: PrivateShareType = .byMe
     private(set) var sortedItems = SynchronizedArray<WrapData>()
     private(set) var selectedItems = SynchronizedSet<WrapData>()
     private(set) var splittedItems = SynchronizedArray<[WrapData]>()
