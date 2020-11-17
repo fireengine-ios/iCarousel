@@ -20,22 +20,37 @@ final class EmptyView: UIView, NibInit {
     enum ViewType {
         case hiddenBin
         case trashBin
+        case sharedBy
+        case sharedWith
+        case sharedInnerFolder
         
         var title: String {
             switch self {
-            case .hiddenBin:
-                return TextConstants.hiddenBinEmpty
-            case .trashBin:
-                return TextConstants.trashBinEmpty
+                case .hiddenBin:
+                    return TextConstants.hiddenBinEmpty
+                case .trashBin:
+                    return TextConstants.trashBinEmpty
+                case .sharedBy:
+                    return TextConstants.privateSharedByMeEmptyText
+                case .sharedWith:
+                    return TextConstants.privateSharedWithMeEmptyText
+                case .sharedInnerFolder:
+                    return TextConstants.privateSharedInnerFolderEmptyText
             }
         }
         
         var image: UIImage? {
             switch self {
-            case .hiddenBin:
-                return UIImage(named: "hidden_big")
-            case .trashBin:
-                return UIImage(named: "trash_big")
+                case .hiddenBin:
+                    return UIImage(named: "hidden_big")
+                case .trashBin:
+                    return UIImage(named: "trash_big")
+                case .sharedBy:
+                    return nil
+                case .sharedWith:
+                    return nil
+                case .sharedInnerFolder:
+                    return nil
             }
         }
     }

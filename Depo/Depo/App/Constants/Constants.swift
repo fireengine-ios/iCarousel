@@ -2141,6 +2141,16 @@ struct TextConstants {
     static let privateShareRoleSelectionTitle = NSLocalizedString("private_share_role_selection_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareRoleSelectionEditor = NSLocalizedString("private_share_role_selection_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareRoleSelectionViewer = NSLocalizedString("private_share_role_selection_role_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareValidationFailPopUpText = NSLocalizedString("private_share_msisdn_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let privateShareInfoMenuSectionTitle = NSLocalizedString("private_share_info_section_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareInfoMenuNumberOfPeople = NSLocalizedString("private_share_info_number_of_people", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareInfoMenuOwner = NSLocalizedString("private_share_info_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareInfoMenuEditor = NSLocalizedString("private_share_info_role_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareInfoMenuViewer = NSLocalizedString("private_share_info_role_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharePhoneValidationFailPopUpText = NSLocalizedString("private_share_msisdn_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareEmailValidationFailPopUpText = NSLocalizedString("private_share_email_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedWithMeEmptyText = NSLocalizedString("private_share_shared_with_me_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedByMeEmptyText = NSLocalizedString("private_share_shared_by_me_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedInnerFolderEmptyText = NSLocalizedString("private_share_inner_folder_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }

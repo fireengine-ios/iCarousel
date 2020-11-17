@@ -583,8 +583,6 @@ class RouterVC: NSObject {
     }
     
     var segmentedFiles: UIViewController? {
-        return sharedFiles
-        
         guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
             assertionFailure()
             return SegmentedController()
@@ -1224,8 +1222,8 @@ class RouterVC: NSObject {
         }
     }
     
-    func privateShare(items: [WrapData]) -> UIViewController {
-        let shareController = PrivateShareViewController.with(items: items)
+    func privateShare(items: [WrapData], competion: BoolHandler?) -> UIViewController {
+        let shareController = PrivateShareViewController.with(items: items, completion: competion)
         let navigationController = NavigationController(rootViewController: shareController)
         navigationController.modalTransitionStyle = .coverVertical
         navigationController.modalPresentationStyle = .fullScreen

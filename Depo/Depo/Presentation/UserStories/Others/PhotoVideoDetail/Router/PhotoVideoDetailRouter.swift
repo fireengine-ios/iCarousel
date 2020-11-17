@@ -49,4 +49,9 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
         let vc = router.imageFacePhotosController(album: album, item: item, status: .active, moduleOutput: moduleOutput)
         router.pushViewController(viewController: vc)
     }
+    
+    func openPrivateShare(for item: Item, completion: @escaping BoolHandler) {
+        let controller = router.privateShare(items: [item], competion: completion)
+        router.presentViewController(controller: controller)
+    }
 }

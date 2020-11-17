@@ -19,5 +19,6 @@ protocol PhotoVideoDetailRouterInput {
     func goToPremium()
     
     func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem, moduleOutput: FaceImageItemsModuleOutput?)
-    
+ 
+    func openPrivateShare(for item: Item, completion: @escaping BoolHandler)
 }

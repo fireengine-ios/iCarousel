@@ -36,6 +36,11 @@ extension FileInfoPresenter: FileInfoViewOutput {
         interactor.onRename(newName: newName)
     }
     
+    func shareItem() {
+        if let item = interactor.item as? WrapData {
+            router.openPrivateShare(for: item)
+        }
+    }
 }
 
 // MARK: FileInfoInteractorOutput
@@ -83,6 +88,9 @@ extension FileInfoPresenter: FileInfoInteractorOutput {
         view.showValidateNameSuccess()
     }
     
+    func displayShareInfo(_ sharingInfo: SharedFileInfo) {
+        view.showSharingInfo(sharingInfo)
+    }
 }
 
 // MARK: FileInfoModuleInput
@@ -91,4 +99,12 @@ extension FileInfoPresenter: FileInfoModuleInput {
 
 }
 
+//MARK: - FileInfoRouterOutput
+
+extension FileInfoPresenter: FileInfoRouterOutput {
+    
+    func updateSharingInfo() {
+        interactor.getSharingInfo()
+    }
+}
 

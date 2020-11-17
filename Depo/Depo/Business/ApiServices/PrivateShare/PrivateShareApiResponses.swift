@@ -13,7 +13,7 @@ struct SuggestedApiContact: Codable {
     let identifier: String?
     let username: String?
     let email: String?
-    let name: String?
+    var name: String?
     let picture: URL?
     
     static func testContacts() -> [SuggestedApiContact] {
@@ -32,7 +32,6 @@ struct SuggestedApiContact: Codable {
         return contacts
     }
 }
-
 
 struct SharedFileInfo: Codable {
     let createdDateValue: Double?
@@ -53,6 +52,7 @@ struct SharedFileInfo: Codable {
     //        "location": {},
     let permissions: SharedItemPermission?
     let sharedBy: [SuggestedApiContact]?
+    var members: [SharedContact]?
     
     var creationDate: Date {
         guard let timeInterval = createdDateValue else {
@@ -76,7 +76,7 @@ struct SharedFileInfo: Codable {
         case createdDateValue = "createdDate"
         case lastModifiedDateValue = "lastModifiedDate"
         
-        case id, hash, name, uuid, bytes, folder, childCount, status, uploaderDeviceType, ugglaId, contentType, album, permissions, sharedBy
+        case id, hash, name, uuid, bytes, folder, childCount, status, uploaderDeviceType, ugglaId, contentType, album, permissions, sharedBy, members
     }
 }
 
@@ -108,6 +108,7 @@ struct PrivateShareObject: Encodable {
     }
 }
 
+//model for requests
 struct PrivateShareContact: Equatable, Encodable {
     let displayName: String
     let username: String
@@ -128,9 +129,10 @@ struct PrivateShareContact: Equatable, Encodable {
     }
 }
 
-enum PrivateShareUserRole: String, CaseIterable, Encodable {
+enum PrivateShareUserRole: String, CaseIterable, Codable {
     case editor = "EDITOR"
     case viewer = "VIEWER"
+    case owner = "OWNER"
     
     var title: String {
         switch self {
@@ -138,6 +140,8 @@ enum PrivateShareUserRole: String, CaseIterable, Encodable {
             return TextConstants.privateShareStartPageEditorButton
         case .viewer:
             return TextConstants.privateShareStartPageViewerButton
+        case .owner:
+            return ""
         }
     }
     
@@ -147,6 +151,19 @@ enum PrivateShareUserRole: String, CaseIterable, Encodable {
             return TextConstants.privateShareRoleSelectionEditor
         case .viewer:
             return TextConstants.privateShareRoleSelectionViewer
+        case .owner:
+            return ""
+        }
+    }
+    
+    var infoMenuTitle: String {
+        switch self {
+        case .editor:
+            return TextConstants.privateShareInfoMenuEditor
+        case .viewer:
+            return TextConstants.privateShareInfoMenuViewer
+        case .owner:
+            return TextConstants.privateShareInfoMenuOwner
         }
     }
 }
@@ -156,7 +173,7 @@ enum PrivateShareItemType: String, Encodable {
     case album = "ALBUM"
 }
 
-enum PrivateShareDuration: String, CaseIterable, Encodable {
+enum PrivateShareDuration: String, CaseIterable, Codable {
     case no = "NO_EXPIRE"
     case hour = "ONE_HOUR"
     case day = "ONE_DAY"
@@ -180,4 +197,36 @@ enum PrivateShareDuration: String, CaseIterable, Encodable {
             return TextConstants.privateShareStartPageDurationYear
         }
     }
+}
+
+struct SharedContact: Codable {
+    var subject: SuggestedApiContact?
+    let permissions: SharedItemPermission?
+    let role: PrivateShareUserRole
+    
+    var displayName: String {
+        subject?.name ?? subject?.username ?? ""
+    }
+    
+    var initials: String {
+        if let name = subject?.name {
+            let characters = name.split(separator: " ").prefix(2).compactMap { $0.first }
+            return characters.map { String($0) }.joined().uppercased()
+        } else {
+            return ""
+        }
+    }
+}
+
+enum PrivateSharePermission: String, Codable {
+    case read = "READ"
+    case preview = "PREVIEW"
+    case list = "LIST"
+    case create = "CREATE"
+    case delete = "DELETE"
+    case setAttribute = "SET_ATTRIBUTE"
+    case update = "UPDATE"
+    case comment = "COMMENT"
+    case writeAcl = "WRITE_ACL"
+    case readAcl = "READ_ACL"
 }

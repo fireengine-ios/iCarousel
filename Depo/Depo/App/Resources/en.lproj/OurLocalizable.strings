@@ -121,10 +121,9 @@
 "Add to Favorites" = "Add to favorites";
 "Copy" = "Copy";
 "Create a Story" = "Create a Story";
-"Share Via Link" = "Share via link";
-"Original Size" = "Original Size";
+"Share Via Link" = "Copy Link";
+"Original Size" = "Send a copy";
 "Small Size" = "Small Size";
-"private_share_option" = "Private Share";
 "Download" = "Download";
 "Sync" = "Sync";
 "Move" = "Move";
@@ -203,7 +202,6 @@
 "Items Selected" = "Items Selected";
 "Item Selected" = "Item Selected";
 "Upload" = "Upload";
-"Upload Files" = "Upload Files";
 "You can change the sequence " = "You can change the sequence of photos ";
 "Save" = "Save";
 "Add Music" = "Add Music";
@@ -1327,7 +1325,7 @@
 "confirmation_popup_message_hide_single_album" = "Selected album will only be available in \"Hidden\" Album. You can restore them any time. Are you sure to continue?";
 "smash_screen_title" = "Fun Effect";
 "smash_popup_message" = "This edited photo will be saved to device gallery and uploaded on lifebox as a new item.";
-"Smash" = "Fun";
+"Smash" = "Gif";
 "photos_hide_success_message" = "Photo(s) hidden successfully.";
 "Unhide" = "Unhide";
 "smart_album_hidden" = "Hidden";
@@ -1367,7 +1365,7 @@
 "smash_successed_alert_title" = "Saved successfully to your device gallery and uploaded on lifebox!";
 "smash_successed_alert_second_title" = "Have Fun? What's Next?";
 "smash_successed_alert_description" = "Now you can share the edited photo with your friends.\nAlso you can get rid off the undesirable memories by hiding or deleting with one click in the People Album.";
-"smash_successed_alert_share" = "Share";
+
 /*smash_successed_alert_title  key'inden farkı ne?*/
 "smash_successed_simple_alert_title" = "Saved successfully to your device gallery and uploaded on lifebox!";
 "smash_successed_simple_alert_description" = "Now you can share the edited photo with your friends.\nAlso you can get rid off the undesirable memories by hiding or deleting with one click in the People Album.";
@@ -1793,14 +1791,15 @@
 "widget_description" = "Get notified about your device storage and lifebox quota and keep track of your memories.";
 "widget_rule_6_small_detail_plural" = "It's over %d months since last contact backup.";
 "widget_rule_6_medium_detail_plural" = "It's over %d months since your last contact backup.";
-
+"smash_successed_alert_share" = "Share";
 "fun_gif" = "Gif";
 "fun_sticker" = "Sticker";
 "fun_close_alert_title" = "Discard Changes?";
 "fun_close_alert_message" = "Your photo edits will be discarded.";
 "fun_close_alert_left_button" = "Keep editing";
 "fun_close_alert_right_button" = "Discard";
-
+"Upload Music" = "Upload Files";
+"private_share_option" = "Private Share";
 "private_share_start_page_name" = "Share";
 "private_share_start_page_people_selection_section_name" = "Select people to share";
 "private_share_start_page_enter_user_field" = "Enter e-mail or GSM number";
@@ -1819,14 +1818,21 @@
 "private_share_start_page_cancel_button" = "Cancel";
 "private_share_start_page_role_1" = "Editor";
 "private_share_start_page_role_2" = "Viewer";
-"private_share_details_page_name" = "Shared Items";
-"private_share_shared_by_me_tab" = "Shared by me";
-"private_share_shared_with_me_tab" = "Shared with me";
-"private_share_start_page_share_success" = "Share is successful";
-"private_share_cancel_confirm" = "Are you sure you want to quit?";
-
 "private_share_role_selection_page_name" = "Access";
 "private_share_role_selection_role_1" = "Can edit";
 "private_share_role_selection_role_2" = "Can view";
 "private_share_msisdn_format" = "msisdn format is invalid";
+"private_share_start_page_share_success" = "Share is successful";
+"private_share_cancel_confirm" = "Are you sure you want to quit?";
+"private_share_details_page_name" = "Shared Items";
+"private_share_shared_by_me_tab" = "Shared by me";
+"private_share_shared_with_me_tab" = "Shared with me";
+"private_share_info_section_name" = "Sharing Info";
+"private_share_info_number_of_people" = "Shared with %d people";
+"private_share_info_role_1" = "Owner";
+"private_share_info_role_2" = "Editor";
+"private_share_info_role_3" = "Viewer";
 "private_share_email_format" = "email format is invalid";
+"private_share_shared_with_me_empty_page" = "No files are shared with you up to now";
+"private_share_shared_by_me_empty_page" = "You haven't shared any files yet";
+"private_share_inner_folder_empty_page" = "";

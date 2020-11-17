@@ -47,9 +47,7 @@ class ViewController: UIViewController {
     }
     
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
-        if needCheckModalPresentationStyle {
-            viewControllerToPresent.checkModalPresentationStyle()
-        }
+        viewControllerToPresent.checkModalPresentationStyle()
         super.present(viewControllerToPresent, animated: flag, completion: completion)
     }
     
@@ -65,6 +63,10 @@ class ViewController: UIViewController {
 extension UIViewController {
     func checkModalPresentationStyle() {
         guard #available(iOS 13.0, *) else {
+            return
+        }
+        
+        if (self as? ViewController)?.needCheckModalPresentationStyle == false {
             return
         }
         
