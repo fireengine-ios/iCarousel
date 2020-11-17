@@ -46,7 +46,7 @@ struct SharedFileInfo: Codable {
     let status: String? // enum
     let uploaderDeviceType: String? //enum
     let ugglaId: String?
-    let contentType: String?
+    let content_type: String?
     //        "metadata": {},
     let album: [FileAlbum]?
     //        "location": {},
@@ -69,14 +69,14 @@ struct SharedFileInfo: Codable {
     }
     
     var fileType: FileType {
-        return FileType(type: contentType, fileName: name)
+        return FileType(type: content_type, fileName: name)
     }
     
     enum CodingKeys: String, CodingKey {
         case createdDateValue = "createdDate"
         case lastModifiedDateValue = "lastModifiedDate"
         
-        case id, hash, name, uuid, bytes, folder, childCount, status, uploaderDeviceType, ugglaId, contentType, album, permissions, sharedBy, members
+        case id, hash, name, uuid, bytes, folder, childCount, status, uploaderDeviceType, ugglaId, content_type, album, permissions, sharedBy, members
     }
 }
 

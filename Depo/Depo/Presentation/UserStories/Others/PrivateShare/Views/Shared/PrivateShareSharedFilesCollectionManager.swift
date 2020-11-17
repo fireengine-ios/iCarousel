@@ -33,7 +33,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private var fileInfoManager: PrivateShareFileInfoManager!
     
     private(set) var currentCollectionViewType: MoreActionsConfig.ViewType = .List
-    private var isSelecting = false
+    private(set) var isSelecting = false
     
     
     //MARK: -
@@ -144,7 +144,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
 //    }
     
     private func updateLayout() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             self.collectionView?.reloadData()
             let firstVisibleIndexPath = self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
                 return first < second
@@ -219,10 +219,10 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         }
         
         let isSelectedCell = isSelected(item: item)
+        cell.isSelected = isSelectedCell
         cell.updating()
         cell.setSelection(isSelectionActive: isSelecting, isSelected: isSelectedCell)
         cell.configureWithWrapper(wrappedObj: item)
-        cell.isSelected = isSelectedCell
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -284,14 +284,14 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     }
     
     private func openFolder(with folderUuid: String, name: String) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             let controller = self.router.sharedFolder(folderUuid: folderUuid, name: name)
             self.router.pushViewController(viewController: controller)
         }
     }
     
     private func openPreview(for item: WrapData, with items: [WrapData]) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             let detailModule = self.router.filesDetailModule(fileObject: item,
                                                         items: items,
                                                         status: .active,
