@@ -54,16 +54,6 @@ final class TBMatikPhotoView: UIView, NibInit {
     
     @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
     
-    private var shadowView: UIView?
-    
-    var needShowShadow = false {
-        didSet {
-            if !loadingIndicator.isAnimating {
-                checkShadow()
-            }
-        }
-    }
-    
     var hasImage: Bool {
         return imageView.image != nil
     }
@@ -138,59 +128,6 @@ final class TBMatikPhotoView: UIView, NibInit {
             noImageBackgroundView.isHidden = false
             imageView.isHidden = true
         }
-        checkShadow()
         setImageHandler?()
-    }
-    
-    private func checkShadow() {
-        if needShowShadow {
-            addContentShadow()
-        } else {
-            removeContentShadow()
-        }
-    }
-    
-    private func addContentShadow() {
-        removeContentShadow()
-        
-        layoutIfNeeded()
-        if let image = imageView.image {
-            // calculate shadow frame around image
-            let height: CGFloat
-            if imageView.contentMode == .scaleAspectFill {
-                height = imageView.bounds.height
-            } else {
-                height = image.size.height * imageView.bounds.width / image.size.width
-            }
-            
-            let frame = CGRect(x: imageView.frame.origin.x,
-                               y: imageView.frame.origin.y + (imageView.bounds.height - height) * 0.5,
-                               width: imageView.bounds.width,
-                               height: height)
-            
-            shadowView = newShadowView(frame: frame)
-        } else {
-            shadowView = newShadowView(frame: noImageBackgroundView.frame)
-        }
-        
-        addSubview(shadowView!)
-        sendSubview(toBack: shadowView!)
-    }
-    
-    private func removeContentShadow() {
-        shadowView?.removeFromSuperview()
-        shadowView = nil
-    }
-    
-    private func newShadowView(frame: CGRect) -> UIView {
-        let shadowView = UIView(frame: frame)
-        shadowView.layer.masksToBounds = false
-        shadowView.layer.cornerRadius = 4
-        shadowView.layer.shadowRadius = 8
-        shadowView.layer.shadowOpacity = 0.5
-        shadowView.layer.shadowColor = UIColor.white.cgColor
-        shadowView.layer.shadowOffset = .zero
-        shadowView.layer.shadowPath = UIBezierPath(rect: shadowView.bounds).cgPath
-        return shadowView
     }
 }

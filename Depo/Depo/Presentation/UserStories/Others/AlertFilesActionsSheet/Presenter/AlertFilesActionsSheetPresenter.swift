@@ -216,6 +216,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     filteredActionTypes.remove(at: addToFavoritesIndex)
                 }
                 
+                if !remoteItems.contains(where: { !($0.fileType.isDocumentPageItem || $0.fileType == .audio) }) {
+                    if !filteredActionTypes.contains(.downloadDocument) {
+                        filteredActionTypes.append(.downloadDocument)
+                    }
+                }
+                
                 if remoteItems.contains(where: { $0.favorites }) {
                     if !filteredActionTypes.contains(.removeFromFavorites) {
                         filteredActionTypes.append(.removeFromFavorites)

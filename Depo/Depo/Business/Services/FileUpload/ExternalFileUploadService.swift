@@ -11,6 +11,30 @@ import UIKit
 import CoreServices
 
 
+enum ExternalFileType {
+    case any
+    case documents
+    case audio
+    
+    var allowedUTITypes: [String] {
+        switch self {
+            case .any:
+                return [kUTTypeItem]  as [String]
+                
+            case .documents:
+                return [kUTTypeCompositeContent, kUTTypeText, kUTTypeArchive] as [String]
+                
+            case .audio:
+                return [kUTTypeAudio] as [String]
+            
+            default:
+                assertionFailure("return realted UTIs")
+                return [kUTTypeItem] as [String]
+        }
+    }
+}
+
+
 final class ExternalFileUploadService: NSObject {
     
     private let uploadService = UploadService.default
@@ -19,13 +43,13 @@ final class ExternalFileUploadService: NSObject {
     private var isFromAlbum = false
     
     
-    func showViewController(router: RouterVC) {
+    func showViewController(router: RouterVC, externalFileType: ExternalFileType) {
         
         isFavorites = router.isOnFavoritesView()
         folderUUID = router.getParentUUID()
         isFromAlbum = router.isRootViewControllerAlbumDetail()
         
-        let utTypes = [kUTTypeContent as String]
+        let utTypes = externalFileType.allowedUTITypes
         
         let controller = UIDocumentPickerViewController(documentTypes: utTypes, in: .import)
         controller.delegate = self

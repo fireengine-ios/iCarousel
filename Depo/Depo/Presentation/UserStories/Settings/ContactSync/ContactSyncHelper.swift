@@ -183,7 +183,9 @@ final class ContactSyncHelper {
     }
     
     private func start(operationType: SyncOperationType, backup: ContactBackupItem? = nil) {
+    debugLog("CONTACT SYNC: start")
         updateAccessToken { [weak self] result in
+            debugLog("CONTACT SYNC: start updateAccessToken")
             guard let self = self else {
                 return
             }
@@ -329,6 +331,7 @@ final class ContactSyncHelper {
     
     private func updateAccessToken(complition: @escaping ResponseVoid) {
         auth.refreshTokens { [weak self] _, accessToken, error  in
+            debugLog("CONTACT SYNC: updateAccessToken refreshTokens")
             guard let accessToken = accessToken else {
                 let syncError: SyncOperationErrors = error?.isNetworkError == true ? .networkError : .failed
                 complition(.failed(syncError))

@@ -23,7 +23,7 @@ class PhotoVideoDetailModuleConfigurator {
                       presenter: presenter,
                       moduleOutput: moduleOutput,
                       bottomBarConfig: bottomBarConfig,
-                      alertSheetExcludeTypes: [.moveToTrash],
+                      alertSheetExcludeTypes: [.moveToTrash, .downloadDocument],
                       photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions,
                       selecetedItem: selecetedItem,
                       allItems: allItems, status: status, viewType: .details,
