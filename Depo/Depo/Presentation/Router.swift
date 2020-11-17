@@ -583,8 +583,6 @@ class RouterVC: NSObject {
     }
     
     var segmentedFiles: UIViewController? {
-        return sharedFiles
-        
         guard let musics = musics, let documents = documents, let favorites = favorites, let allFiles = allFiles, let trashBin = trashBin else {
             assertionFailure()
             return SegmentedController()

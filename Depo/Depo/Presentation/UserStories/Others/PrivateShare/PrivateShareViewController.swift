@@ -336,13 +336,6 @@ extension PrivateShareViewController: PrivateShareWithViewDelegate {
         let userRoleController = PrivateShareUserRoleViewController.with(contact: contact, delegate: sender as? PrivateShareUserRoleViewControllerDelegate)
         present(userRoleController, animated: true)
     }
-    
-    private func isValidContact(text: String) -> Bool {
-        if Validator.isValid(email: text) || Validator.isValid(contactsPhone: text) {
-            return true
-        }
-        return false
-    }
 }
 
 //MARK: - PrivateShareSelectSuggestionsDelegate
