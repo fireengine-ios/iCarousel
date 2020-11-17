@@ -10,6 +10,8 @@ import UIKit
 
 protocol FileInfoShareViewProtocol: UIView {
     func setup(with info: SharedFileInfo)
+    
+    var info: SharedFileInfo? { get }
 }
 
 protocol FileInfoShareViewDelegate: class {
@@ -54,7 +56,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     
     private weak var delegate: FileInfoShareViewDelegate?
     
-    private var info: SharedFileInfo?
+    private(set) var info: SharedFileInfo?
     private var membersInfo: MembersInfo = ([], 0, 0)
     
     //MARK: - FileInfoShareViewProtocol
@@ -148,5 +150,9 @@ extension FileInfoShareView: FileInfoShareContactCellDelegate {
     
     func didTappedPlusButton() {
         delegate?.didTappedPlusButton()
+    }
+    
+    func didTappedOnShowAllContacts() {
+        delegate?.didTappedArrowButton()
     }
 }

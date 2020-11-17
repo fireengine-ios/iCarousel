@@ -17,6 +17,7 @@ enum FileInfoShareContactCellType {
 protocol FileInfoShareContactCellDelegate: class {
     func didSelect(contact: SharedContact)
     func didTappedPlusButton()
+    func didTappedOnShowAllContacts()
 }
 
 final class FileInfoShareContactCell: UICollectionViewCell {
@@ -38,7 +39,7 @@ final class FileInfoShareContactCell: UICollectionViewCell {
     @IBOutlet private weak var roleLabel: UILabel! {
         willSet {
             newValue.text = ""
-            newValue.textColor = .greyishBrownThree
+            newValue.textColor = .lrGreyishBrownThree
             newValue.font = .TurkcellSaturaRegFont(size: 14)
             newValue.textAlignment = .center
         }
@@ -65,7 +66,7 @@ final class FileInfoShareContactCell: UICollectionViewCell {
         case .contact:
             if let initials = contact?.initials, !initials.isEmpty {
                 button.setTitle(initials, for: .normal)
-                button.backgroundColor = color(for: index)
+                button.backgroundColor = contact?.color(for: index) ?? .clear
             } else {
                 button.setImage(UIImage(named: "contact_placeholder"), for: .normal)
             }
@@ -94,28 +95,9 @@ final class FileInfoShareContactCell: UICollectionViewCell {
                 delegate?.didSelect(contact: contact)
             }
         case .additionalCount:
-            break
+            delegate?.didTappedOnShowAllContacts()
         case .plusButton:
             delegate?.didTappedPlusButton()
-        }
-    }
-    
-    private func color(for index: Int) -> UIColor? {
-        switch index.remainderReportingOverflow(dividingBy: 6).partialValue {
-        case 0:
-            return .lrTealishTwo
-        case 1:
-            return ColorConstants.marineFour
-        case 2:
-            return .lrDarkSkyBlue
-        case 3:
-            return .lrOrange
-        case 4:
-            return .lrButterScotch
-        case 5:
-            return .lrFadedRed
-        default:
-            return nil
         }
     }
 }

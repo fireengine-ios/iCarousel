@@ -5017,6 +5017,30 @@
 		9840C62320AEAD6B00A8634F /* CheckBoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9840C62120AEAD6B00A8634F /* CheckBoxView.xib */; };
 		9840C62520AEAD8100A8634F /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9840C62420AEAD8100A8634F /* CheckBoxView.swift */; };
 		9840C62620AEAD8100A8634F /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9840C62420AEAD8100A8634F /* CheckBoxView.swift */; };
+		9842FB862563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842FB842563D25700B07606 /* PrivateShareContactsViewController.swift */; };
+		9842FB872563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842FB842563D25700B07606 /* PrivateShareContactsViewController.swift */; };
+		9842FB882563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842FB842563D25700B07606 /* PrivateShareContactsViewController.swift */; };
+		9842FB892563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842FB842563D25700B07606 /* PrivateShareContactsViewController.swift */; };
+		9842FB8A2563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842FB842563D25700B07606 /* PrivateShareContactsViewController.swift */; };
+		9842FB8B2563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842FB842563D25700B07606 /* PrivateShareContactsViewController.swift */; };
+		9842FB8C2563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9842FB852563D25700B07606 /* PrivateShareContactsViewController.xib */; };
+		9842FB8D2563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9842FB852563D25700B07606 /* PrivateShareContactsViewController.xib */; };
+		9842FB8E2563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9842FB852563D25700B07606 /* PrivateShareContactsViewController.xib */; };
+		9842FB8F2563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9842FB852563D25700B07606 /* PrivateShareContactsViewController.xib */; };
+		9842FB902563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9842FB852563D25700B07606 /* PrivateShareContactsViewController.xib */; };
+		9842FB912563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9842FB852563D25700B07606 /* PrivateShareContactsViewController.xib */; };
+		9842FC0F2563D34800B07606 /* PrivateShareContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842FC0D2563D34800B07606 /* PrivateShareContactCell.swift */; };
+		9842FC102563D34800B07606 /* PrivateShareContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842FC0D2563D34800B07606 /* PrivateShareContactCell.swift */; };
+		9842FC112563D34800B07606 /* PrivateShareContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842FC0D2563D34800B07606 /* PrivateShareContactCell.swift */; };
+		9842FC122563D34800B07606 /* PrivateShareContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842FC0D2563D34800B07606 /* PrivateShareContactCell.swift */; };
+		9842FC132563D34800B07606 /* PrivateShareContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842FC0D2563D34800B07606 /* PrivateShareContactCell.swift */; };
+		9842FC142563D34800B07606 /* PrivateShareContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842FC0D2563D34800B07606 /* PrivateShareContactCell.swift */; };
+		9842FC152563D34800B07606 /* PrivateShareContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9842FC0E2563D34800B07606 /* PrivateShareContactCell.xib */; };
+		9842FC162563D34800B07606 /* PrivateShareContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9842FC0E2563D34800B07606 /* PrivateShareContactCell.xib */; };
+		9842FC172563D34800B07606 /* PrivateShareContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9842FC0E2563D34800B07606 /* PrivateShareContactCell.xib */; };
+		9842FC182563D34800B07606 /* PrivateShareContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9842FC0E2563D34800B07606 /* PrivateShareContactCell.xib */; };
+		9842FC192563D34800B07606 /* PrivateShareContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9842FC0E2563D34800B07606 /* PrivateShareContactCell.xib */; };
+		9842FC1A2563D34800B07606 /* PrivateShareContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9842FC0E2563D34800B07606 /* PrivateShareContactCell.xib */; };
 		98435B7823F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98435B7723F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift */; };
 		98435B7923F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98435B7723F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift */; };
 		98435B7A23F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98435B7723F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift */; };
@@ -14036,6 +14060,10 @@
 		983A397A2409357700418F5E /* SubscriptionsPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsPolicyView.swift; sourceTree = "<group>"; };
 		9840C62120AEAD6B00A8634F /* CheckBoxView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckBoxView.xib; sourceTree = "<group>"; };
 		9840C62420AEAD8100A8634F /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
+		9842FB842563D25700B07606 /* PrivateShareContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateShareContactsViewController.swift; sourceTree = "<group>"; };
+		9842FB852563D25700B07606 /* PrivateShareContactsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrivateShareContactsViewController.xib; sourceTree = "<group>"; };
+		9842FC0D2563D34800B07606 /* PrivateShareContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateShareContactCell.swift; sourceTree = "<group>"; };
+		9842FC0E2563D34800B07606 /* PrivateShareContactCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrivateShareContactCell.xib; sourceTree = "<group>"; };
 		98435B7723F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoVideoDetailModuleOuput.swift; sourceTree = "<group>"; };
 		9845489522FBFF4000D7F29C /* SpotifyStatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotifyStatusView.xib; sourceTree = "<group>"; };
 		9845489622FBFF4000D7F29C /* SpotifyStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyStatusView.swift; sourceTree = "<group>"; };
@@ -19647,6 +19675,7 @@
 		9808B3082553DE94002B0032 /* PrivateShare */ = {
 			isa = PBXGroup;
 			children = (
+				9842FB802563D20E00B07606 /* SharedContacts */,
 				985E6974255A61AF006F6CD7 /* UserRoleSelection */,
 				9808B37F2553DEE9002B0032 /* Views */,
 				9808B30C2553DEBD002B0032 /* PrivateShareViewController.swift */,
@@ -19975,6 +20004,17 @@
 				9840C62420AEAD8100A8634F /* CheckBoxView.swift */,
 			);
 			path = CheckBoxView;
+			sourceTree = "<group>";
+		};
+		9842FB802563D20E00B07606 /* SharedContacts */ = {
+			isa = PBXGroup;
+			children = (
+				9842FB842563D25700B07606 /* PrivateShareContactsViewController.swift */,
+				9842FB852563D25700B07606 /* PrivateShareContactsViewController.xib */,
+				9842FC0D2563D34800B07606 /* PrivateShareContactCell.swift */,
+				9842FC0E2563D34800B07606 /* PrivateShareContactCell.xib */,
+			);
+			path = SharedContacts;
 			sourceTree = "<group>";
 		};
 		9845489422FBFF4000D7F29C /* SpotifyStatusView */ = {
@@ -24924,6 +24964,7 @@
 				0303A5DF2397D0D000907F42 /* PrintViewController.xib in Resources */,
 				CF71472024B597AA00D83E60 /* ContactListHeader.xib in Resources */,
 				0303A5E02397D0D000907F42 /* CaptchaViewController.xib in Resources */,
+				9842FC182563D34800B07606 /* PrivateShareContactCell.xib in Resources */,
 				A74ADA3E23A2AC3F007DD192 /* DivorceCard.xib in Resources */,
 				0303A5E62397D0D000907F42 /* AutoSyncViewController.xib in Resources */,
 				985D87E124D0156B004BCDFF /* PhotoEditViewController.xib in Resources */,
@@ -25007,6 +25048,7 @@
 				734CA11C244D64150076F6A7 /* DocumentsAlbumCard.xib in Resources */,
 				0303A68D2397D0D000907F42 /* GoogleService-Info-ent.plist in Resources */,
 				CF71462424B597A800D83E60 /* ContactListDetailViewController.xib in Resources */,
+				9842FB8F2563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */,
 				0303A6912397D0D000907F42 /* PremiumInfoCard.xib in Resources */,
 				0303A6962397D0D000907F42 /* SuggestionTableViewCell.xib in Resources */,
 				0303A6982397D0D000907F42 /* GridListTopBar.xib in Resources */,
@@ -25298,6 +25340,7 @@
 				8C0E90181FDEBDFF00789C91 /* CollectionViewCellForController.xib in Resources */,
 				8C0E90191FDEBDFF00789C91 /* LoginPhoneMailCell.xib in Resources */,
 				73FE51EF22CF5D8800270448 /* CreateStoryAudioSelectionItemViewController.xib in Resources */,
+				9842FC162563D34800B07606 /* PrivateShareContactCell.xib in Resources */,
 				CF8B72FB23CBD1D70021B021 /* SettingsTC.bundle in Resources */,
 				8C0E901A1FDEBDFF00789C91 /* AudioSelectionCollectionViewCell.xib in Resources */,
 				CF71465224B597A800D83E60 /* ContactSyncBigCardView.xib in Resources */,
@@ -25441,6 +25484,7 @@
 				890F737322EEFA3E00BA0020 /* VerifyEmailPopUp.xib in Resources */,
 				8C2600A42291E2320063E913 /* PhoneVerificationScreen.xib in Resources */,
 				8CD2B3B51FE7B42E00280547 /* AutoUploadIsOffPopUp.xib in Resources */,
+				9842FB8D2563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */,
 				17589F792276336800A5DB37 /* SupportFormController.xib in Resources */,
 				CEE3B7D1225791D900B99FE7 /* PasswordView.xib in Resources */,
 				9823197B24F3A1E600FD16E2 /* AdjustView.xib in Resources */,
@@ -25735,6 +25779,7 @@
 				CE1353392004F1530004CBBE /* TextEnterController.xib in Resources */,
 				98164309233CE2D40070F8B9 /* TBMatikPhotoView.xib in Resources */,
 				98AA104523585E0C00B12485 /* CampaignDetailViewController.xib in Resources */,
+				9842FC152563D34800B07606 /* PrivateShareContactCell.xib in Resources */,
 				73B4077222E9BEDB0033D317 /* SpotifyAccountConnectionCell.xib in Resources */,
 				8CF87D5D1F4AF3AC001FDB19 /* LBAlbumLikePreviewSliderViewController.xib in Resources */,
 				98792DD222FD4848000A77E5 /* SpotifyImportedPlaylistsViewController.xib in Resources */,
@@ -25829,6 +25874,7 @@
 				8934DD6D23069599006B0998 /* EmailVerifiedPopUp.xib in Resources */,
 				CEACBEA31F6C1110003BE328 /* ActivityTimelineTableBackView.xib in Resources */,
 				CF71462D24B597A800D83E60 /* ContactSyncViewController.xib in Resources */,
+				9842FB8C2563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */,
 				98792DDA22FD486F000A77E5 /* SpotifyImportedTracksViewController.xib in Resources */,
 				982319A424F3A1E700FD16E2 /* ColorCell.xib in Resources */,
 				98E792D5203D6CF4003A1CB3 /* RecentlySearchedFaceImageTableViewCell.xib in Resources */,
@@ -26114,6 +26160,7 @@
 				CE784D2E22A685FB00662219 /* CollectionViewCellForStoryPhoto.xib in Resources */,
 				CE784D2F22A685FB00662219 /* FaceImageViewController.xib in Resources */,
 				CE784D3122A685FB00662219 /* FreeAppSpaceViewCotroller.xib in Resources */,
+				9842FC192563D34800B07606 /* PrivateShareContactCell.xib in Resources */,
 				CE784D3322A685FB00662219 /* CollectionViewCellForFaceImageAddName.xib in Resources */,
 				989BDE3C22F47B1E001DDEB2 /* SpotifyPlaylistsViewController.xib in Resources */,
 				A74ADA3F23A2AC40007DD192 /* DivorceCard.xib in Resources */,
@@ -26257,6 +26304,7 @@
 				989BDE5D22F47B1E001DDEB2 /* SpotifyPlaylistViewController.xib in Resources */,
 				CE784E4F22A685FB00662219 /* FaceImageAddNameViewController.xib in Resources */,
 				CF71460124B597A800D83E60 /* ContactDetailCell.xib in Resources */,
+				9842FB902563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */,
 				CE784E5422A685FB00662219 /* TurkcellSaturaDem.ttf in Resources */,
 				890F737A22EEFB0000BA0020 /* ChangeEmailPopUp.xib in Resources */,
 				CE784E5822A685FB00662219 /* FolderSelectionCollectionViewCell.xib in Resources */,
@@ -26564,6 +26612,7 @@
 				CF8B6A2723CBC9D70021B021 /* SpotifyOverwritePopup.xib in Resources */,
 				CF8B6A2E23CBC9D70021B021 /* SegmentedController.xib in Resources */,
 				CF8B6A3123CBC9D70021B021 /* FileInfoViewController.xib in Resources */,
+				9842FB8E2563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */,
 				CF8B6A3223CBC9D70021B021 /* ChangePasswordController.xib in Resources */,
 				CF8B6A3523CBC9D70021B021 /* LeavePremiumHeaderView.xib in Resources */,
 				CF8B6A3823CBC9D70021B021 /* FaceImagePhotosViewController.xib in Resources */,
@@ -26577,6 +26626,7 @@
 				CF8B6A4623CBC9D70021B021 /* CampaignDetailViewController.xib in Resources */,
 				988BA18B255924670086E4BE /* PrivateShareAddMessageView.xib in Resources */,
 				CF8B6A4F23CBC9D70021B021 /* FolderSelectionCollectionViewCell.xib in Resources */,
+				9842FC172563D34800B07606 /* PrivateShareContactCell.xib in Resources */,
 				CF7145FF24B597A800D83E60 /* ContactDetailCell.xib in Resources */,
 				0305A34F23D5C5A6004D1EC7 /* HSCompletionPopUp.xib in Resources */,
 				9808B3F025540D6C002B0032 /* PrivateShareSuggestionsView.xib in Resources */,
@@ -26738,6 +26788,7 @@
 				CF8B70A423CBCA280021B021 /* SettingHeaderView.xib in Resources */,
 				CF8B70A623CBCA280021B021 /* ConnectedAccountsViewController.xib in Resources */,
 				CF8B70A823CBCA280021B021 /* TextEnterController.xib in Resources */,
+				9842FC1A2563D34800B07606 /* PrivateShareContactCell.xib in Resources */,
 				CF71462024B597A800D83E60 /* ContactInfoView.xib in Resources */,
 				CF8B70AF23CBCA280021B021 /* PaymentPopUpController.xib in Resources */,
 				CF8B70B023CBCA280021B021 /* SubjectDetailsViewController.xib in Resources */,
@@ -26832,6 +26883,7 @@
 				988BA1C92559248C0086E4BE /* PrivateShareDurationView.xib in Resources */,
 				CF8B717C23CBCA280021B021 /* CollectionViewCellForVideo.xib in Resources */,
 				CF8B718023CBCA280021B021 /* CustomScrollIndicator.xib in Resources */,
+				9842FB912563D25700B07606 /* PrivateShareContactsViewController.xib in Resources */,
 				17B9B0D023F1F76A00CAF5E1 /* FullQuotaWarningPopUp.xib in Resources */,
 				982319A924F3A1E700FD16E2 /* ColorCell.xib in Resources */,
 				CF8B718223CBCA280021B021 /* ContactBackupEmpty.xib in Resources */,
@@ -29441,6 +29493,7 @@
 				982319A124F3A1E700FD16E2 /* LightView.swift in Sources */,
 				0303A32E2397D0D000907F42 /* CustomErrors.swift in Sources */,
 				0303A32F2397D0D000907F42 /* CircleYellowButton.swift in Sources */,
+				9842FC122563D34800B07606 /* PrivateShareContactCell.swift in Sources */,
 				0303A3302397D0D000907F42 /* PushPopAnimator.swift in Sources */,
 				0303A3312397D0D000907F42 /* HomeCardResponse.swift in Sources */,
 				0303A3322397D0D000907F42 /* Alamofire+Request.swift in Sources */,
@@ -29453,6 +29506,7 @@
 				CFA9D4182559EB3800C8F25D /* PrivateShareApiService.swift in Sources */,
 				988BA1A9255924800086E4BE /* PrivateShareDurationView.swift in Sources */,
 				0303A3382397D0D000907F42 /* PeriodicContactSyncInteractorInput.swift in Sources */,
+				9842FB892563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */,
 				0303A3392397D0D000907F42 /* PrepareToAutoSync.swift in Sources */,
 				0303A33A2397D0D000907F42 /* FaceImagePhotosViewOutput.swift in Sources */,
 				981EA2EF247D4CA700A51B7D /* ContactsOperationView.swift in Sources */,
@@ -30577,6 +30631,7 @@
 				B56FBB292122C4BA004F4A59 /* TermsOfUseRouterInput.swift in Sources */,
 				8CEE8D26214A473200150996 /* FaceImageDesigner.swift in Sources */,
 				CE00B24F2202FB4600A5A696 /* PhotoCell.swift in Sources */,
+				9842FC102563D34800B07606 /* PrivateShareContactCell.swift in Sources */,
 				9862BBC0255E6BD800D7945E /* FileInfoPeopleView.swift in Sources */,
 				8C0E8D211FDEBDFF00789C91 /* HomePageInteractorInput.swift in Sources */,
 				B5CDB33F21787FEF006CFA50 /* Configuration.m in Sources */,
@@ -30685,6 +30740,7 @@
 				4A0AC1572087395E00032CC7 /* PeriodicContactSyncViewOutput.swift in Sources */,
 				8C0E8D731FDEBDFF00789C91 /* UploadFromLifeBoxRouterInput.swift in Sources */,
 				8C0E8D741FDEBDFF00789C91 /* HelpAndSupportInteractorOutput.swift in Sources */,
+				9842FB872563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */,
 				8C0E8D751FDEBDFF00789C91 /* MoreFilesActionsInteractorOutput.swift in Sources */,
 				9808A05F206A88580022376D /* PushNotificationService.swift in Sources */,
 				B5CDB33721787FEF006CFA50 /* Controller.m in Sources */,
@@ -33116,6 +33172,7 @@
 				7378052923AB9EF7001D57BD /* GifToMP4Formatter.swift in Sources */,
 				CEB996CF1F0770470074E264 /* RequestsKey.swift in Sources */,
 				7CAC23BC1F45718700607660 /* RemoteService.swift in Sources */,
+				9842FB862563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */,
 				D47863F11F3F18FA00EFDC6D /* UsageInfoConfigurator.swift in Sources */,
 				A74ADA3A23A2ABBF007DD192 /* DivorceCard.swift in Sources */,
 				CE292C3021C2419C004FC745 /* PassThroughView.swift in Sources */,
@@ -33650,6 +33707,7 @@
 				8C208681228D5118000BEDAD /* Double+Extensions.swift in Sources */,
 				8743AB471FDA8AB0005B3589 /* UploadFilesSelectionDataSource.swift in Sources */,
 				8C5408471F62AD6400D4717A /* GridListTopBarSortingTableCell.swift in Sources */,
+				9842FC0F2563D34800B07606 /* PrivateShareContactCell.swift in Sources */,
 				F80A68F35B5CBF5C9E6E0288 /* LBAlbumLikePreviewSliderModuleInput.swift in Sources */,
 				CE6DE7501FCBE84100C23CBD /* DropboxStatusValue.swift in Sources */,
 				8C208647228D4B2E000BEDAD /* ThresholdBlockService.swift in Sources */,
@@ -34332,6 +34390,7 @@
 				98BBF0D925024D610038A31E /* PhotoEditImageScrollView.swift in Sources */,
 				CE78493822A685FB00662219 /* LoginInteractorOutput.swift in Sources */,
 				CE78493922A685FB00662219 /* ImageFormat.swift in Sources */,
+				9842FB8A2563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */,
 				CE78493A22A685FB00662219 /* PremiumView.swift in Sources */,
 				98C298462302B0F800C9811E /* SpotifyDeletePopup.swift in Sources */,
 				CE78493B22A685FB00662219 /* UsageInfoInitializer.swift in Sources */,
@@ -35250,6 +35309,7 @@
 				CE784C0F22A685FB00662219 /* SelectNameInteractorOutput.swift in Sources */,
 				CE784C1022A685FB00662219 /* SelectNameInteractor.swift in Sources */,
 				CE784C1122A685FB00662219 /* SearchDataSource.swift in Sources */,
+				9842FC132563D34800B07606 /* PrivateShareContactCell.swift in Sources */,
 				CE784C1322A685FB00662219 /* SavingAttemptsCounterByUnigueUserID.swift in Sources */,
 				98164302233CE2D40070F8B9 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				CE784C1422A685FB00662219 /* SelectNameRouterInput.swift in Sources */,
@@ -36294,6 +36354,7 @@
 				CF8B662F23CBC9D70021B021 /* SelectQuestionViewController.swift in Sources */,
 				CF8B663023CBC9D70021B021 /* ForgotPasswordConfigurator.swift in Sources */,
 				CF8B663123CBC9D70021B021 /* CaptchaView.swift in Sources */,
+				9842FC112563D34800B07606 /* PrivateShareContactCell.swift in Sources */,
 				CF8B663223CBC9D70021B021 /* PeriodicContactSyncConfigurator.swift in Sources */,
 				CF8B663323CBC9D70021B021 /* ForgotPasswordInitializer.swift in Sources */,
 				CF8B663423CBC9D70021B021 /* PasscodeView.swift in Sources */,
@@ -36806,6 +36867,7 @@
 				986DD44D25388F3400C38AD4 /* ContactUtil.m in Sources */,
 				CF8B67EC23CBC9D70021B021 /* SelectNameInteractor.swift in Sources */,
 				CF8B67ED23CBC9D70021B021 /* AppMigrator.swift in Sources */,
+				9842FB882563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */,
 				B501EF302421FF6100DEA9B4 /* LocalAlbumsCache.swift in Sources */,
 				CF8B67EE23CBC9D70021B021 /* SelectNameRouterInput.swift in Sources */,
 				CF8B67EF23CBC9D70021B021 /* PackagesRouterInput.swift in Sources */,
@@ -37414,6 +37476,7 @@
 				98BBF0DA25024D610038A31E /* PhotoEditImageScrollView.swift in Sources */,
 				CF8B6CA523CBCA280021B021 /* AlertFilesActionsSheetModuleInput.swift in Sources */,
 				FA016FB823D30750008713ED /* FileInfoModuleOutput.swift in Sources */,
+				9842FB8B2563D25700B07606 /* PrivateShareContactsViewController.swift in Sources */,
 				CF8B6CA623CBCA280021B021 /* PreventCollectionView.swift in Sources */,
 				CF8B6CA723CBCA280021B021 /* BottomSelectionTabBarViewController.swift in Sources */,
 				0305A30E23D5C310004D1EC7 /* EmptyView.swift in Sources */,
@@ -38332,6 +38395,7 @@
 				CF8B6FAF23CBCA280021B021 /* SavingAttemptsCounterByUnigueUserID.swift in Sources */,
 				CF8B6FB023CBCA280021B021 /* TBMatikPhotosBottomBarManager.swift in Sources */,
 				CF8B6FB123CBCA280021B021 /* SelectNameRouterInput.swift in Sources */,
+				9842FC142563D34800B07606 /* PrivateShareContactCell.swift in Sources */,
 				CF8B6FB223CBCA280021B021 /* PackagesRouterInput.swift in Sources */,
 				CF8B6FB323CBCA280021B021 /* SelectNameRouter.swift in Sources */,
 				CF8B6FB423CBCA280021B021 /* CreateStoryPreviewRouter.swift in Sources */,

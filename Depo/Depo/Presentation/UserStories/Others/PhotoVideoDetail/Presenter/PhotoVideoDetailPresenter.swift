@@ -426,14 +426,23 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
             return
         }
         let currentItem = interactor.allItems[index]
-        router.openPrivateShare(for: currentItem) { [weak self] success in
-            if success {
-                self?.view.updateBottomDetailView()
-            }
-        }
+        router.openPrivateShare(for: currentItem)
     }
     
-    func showWhoHasAccess() {
-        //TODO: COF-535 - open Who has access page
+    func showWhoHasAccess(shareInfo: SharedFileInfo) {
+        router.openPrivateShareContacts(with: shareInfo)
+    }
+}
+
+//MARK: - PhotoVideoDetailRouterOutput
+
+extension PhotoVideoDetailPresenter: PhotoVideoDetailRouterOutput {
+    
+    func updateShareInfo() {
+        view.updateBottomDetailView()
+    }
+    
+    func deleteShareInfo() {
+        view.deleteShareInfo()
     }
 }

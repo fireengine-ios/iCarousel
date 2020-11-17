@@ -94,7 +94,7 @@ class PhotoVideoDetailModuleConfigurator {
                            viewType: DetailViewType,
                            canLoadMoreItems: Bool) {
         let router = PhotoVideoDetailRouter()
-
+        router.output = presenter
         presenter.view = viewController
         presenter.router = router
         presenter.alertSheetExcludeTypes = alertSheetExcludeTypes

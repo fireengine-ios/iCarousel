@@ -7,6 +7,8 @@
 //
 
 class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
+    weak var output: PhotoVideoDetailRouterOutput?
+    
     let router = RouterVC()
 
     func onInfo(object: Item) {
@@ -50,8 +52,19 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
         router.pushViewController(viewController: vc)
     }
     
-    func openPrivateShare(for item: Item, completion: @escaping BoolHandler) {
-        let controller = router.privateShare(items: [item], competion: completion)
+    func openPrivateShare(for item: Item) {
+        let controller = router.privateShare(items: [item]) { [weak self] success in
+            if success {
+                self?.output?.updateShareInfo()
+            }
+        }
         router.presentViewController(controller: controller)
+    }
+    
+    func openPrivateShareContacts(with shareInfo: SharedFileInfo) {
+        let controller = router.privateShareContacts(with: shareInfo) { [weak self] in
+            self?.output?.deleteShareInfo()
+        }
+        router.pushViewController(viewController: controller)
     }
 }

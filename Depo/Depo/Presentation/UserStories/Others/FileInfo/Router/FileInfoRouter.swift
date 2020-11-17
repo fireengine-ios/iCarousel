@@ -19,4 +19,11 @@ class FileInfoRouter: FileInfoRouterInput {
         }
         router.presentViewController(controller: controller)
     }
+    
+    func openPrivateShareContacts(with shareInfo: SharedFileInfo) {
+        let controller = router.privateShareContacts(with: shareInfo) { [weak self] in
+            self?.output?.deleteSharingInfo()
+        }
+        router.pushViewController(viewController: controller)
+    }
 }
