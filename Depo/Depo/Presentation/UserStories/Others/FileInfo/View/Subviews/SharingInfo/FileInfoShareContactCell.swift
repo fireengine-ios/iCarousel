@@ -55,6 +55,7 @@ final class FileInfoShareContactCell: UICollectionViewCell {
         button.setImage(nil, for: .normal)
         button.backgroundColor = .clear
         circleView.layer.borderWidth = 0
+        roleLabel.text = ""
     }
     
     func setup(type: FileInfoShareContactCellType, contact: SharedContact?, count: Int?, index: Int) {
