@@ -378,7 +378,7 @@ final class OverlayStickerImageView: UIImageView {
             msg.append("\(items.count)")
             if key.type == .gif {
                 msg.append("G")
-            } else{
+            } else {
                 msg.append("S")
             }
             msg.append("\(key.id)")

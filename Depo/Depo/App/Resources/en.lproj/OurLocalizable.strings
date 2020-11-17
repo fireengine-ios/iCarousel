@@ -1819,6 +1819,9 @@
 "private_share_start_page_cancel_button" = "Cancel";
 "private_share_start_page_role_1" = "Editor";
 "private_share_start_page_role_2" = "Viewer";
+"private_share_details_page_name" = "Shared Items";
+"private_share_shared_by_me_tab" = "Shared by me";
+"private_share_shared_with_me_tab" = "Shared with me";
 "private_share_start_page_share_success" = "Share is successful";
 "private_share_cancel_confirm" = "Are you sure you want to quit?";
 
@@ -1826,3 +1829,4 @@
 "private_share_role_selection_role_1" = "Can edit";
 "private_share_role_selection_role_2" = "Can view";
 "private_share_msisdn_format" = "msisdn format is invalid";
+"private_share_email_format" = "email format is invalid";
