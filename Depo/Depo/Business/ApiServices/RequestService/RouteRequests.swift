@@ -267,7 +267,7 @@ struct RouteRequests {
         static let suggestions = baseUrl +/ "invitees"
         static let share = baseUrl +/ "shares"
         static let sharingInfo = baseShortUrlString + "api/v2/files/%@"
-        static let shareAcls = baseShortUrlString + "/api/v2/files/%@}/acls"
+        static let shareAcls = baseShortUrlString + "api/v2/files/%@/acls"
         
         enum Shared {
             private static let baseShares = share.absoluteString
