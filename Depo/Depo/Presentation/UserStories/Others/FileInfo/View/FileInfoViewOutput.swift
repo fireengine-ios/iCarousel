@@ -11,4 +11,5 @@ protocol FileInfoViewOutput {
     func onRename(newName: String)
     func validateName(newName: String)
     func shareItem()
+    func showWhoHasAccess(shareInfo: SharedFileInfo)
 }

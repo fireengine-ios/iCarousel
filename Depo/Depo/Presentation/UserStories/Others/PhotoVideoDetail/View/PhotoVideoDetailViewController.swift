@@ -360,10 +360,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
         }
         editingTabBar.tabBar(editingTabBar.editingBar, didSelect: tabBarItem)
     }
-    
-    func updateBottomDetailView() {
-        bottomDetailView?.updateShareInfo()
-    }
 }
 
 
@@ -510,6 +506,14 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     
     func closeDetailViewIfNeeded() {
         bottomDetailViewManager?.closeDetailView()
+    }
+    
+    func updateBottomDetailView() {
+        bottomDetailView?.updateShareInfo()
+    }
+    
+    func deleteShareInfo() {
+        bottomDetailView?.setHiddenShareInfoView(isHidden: true)
     }
 }
 

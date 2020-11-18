@@ -43,4 +43,6 @@ protocol PhotoVideoDetailViewInput: class, ActivityIndicator, ErrorPresenter {
     func showBottomDetailView()
     
     func updateBottomDetailView()
+    
+    func deleteShareInfo()
 }

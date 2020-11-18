@@ -280,6 +280,10 @@ extension FileInfoViewController: FileInfoViewInput {
         
         sharingInfoView.setup(with: sharingInfo)
     }
+    
+    func deleteSharingInfo() {
+        sharingInfoView.removeFromSuperview()
+    }
 }
 
 // MARK: UITextFieldDelegate
@@ -322,6 +326,8 @@ extension FileInfoViewController: FileInfoShareViewDelegate {
     }
     
     func didTappedArrowButton() {
-        //TODO: COF-535 - open Who has access page
+        if let info = sharingInfoView.info {
+            output.showWhoHasAccess(shareInfo: info)
+        }
     }
 }
