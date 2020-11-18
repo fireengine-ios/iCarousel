@@ -10,6 +10,8 @@ import UIKit
 
 protocol FileInfoShareViewProtocol: UIView {
     func setup(with info: SharedFileInfo)
+    
+    var info: SharedFileInfo? { get }
 }
 
 protocol FileInfoShareViewDelegate: class {
@@ -54,8 +56,10 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
     
     private weak var delegate: FileInfoShareViewDelegate?
     
-    private var info: SharedFileInfo?
+    private(set) var info: SharedFileInfo?
     private var membersInfo: MembersInfo = ([], 0, 0)
+    
+    private let maxDisplayMembers = 3
     
     //MARK: - FileInfoShareViewProtocol
     
@@ -87,7 +91,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
         
         var result = [SharedContact]()
         
-        if members.count <= 3 {
+        if members.count <= maxDisplayMembers {
             result = members
         } else {
             let sortedRoles: [PrivateShareUserRole] = [.owner, .editor, .viewer]
@@ -96,7 +100,7 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
                     result.append(contact)
                 }
             }
-            while result.count < 3 {
+            while result.count < maxDisplayMembers {
                 if let contact = members.first(where: { !result.contains($0) }) {
                     result.append(contact)
                 }
@@ -158,5 +162,9 @@ extension FileInfoShareView: FileInfoShareContactCellDelegate {
     
     func didTappedPlusButton() {
         delegate?.didTappedPlusButton()
+    }
+    
+    func didTappedOnShowAllContacts() {
+        delegate?.didTappedArrowButton()
     }
 }

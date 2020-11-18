@@ -91,7 +91,7 @@ struct FileSystem: Codable {
 
 
 struct SharedItemPermission: Codable {
-    let granted: [String]?
+    let granted: [PrivateSharePermission]?
     let bitmask: Int64?
 }
 
@@ -167,6 +167,17 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
         }
     }
     
+    var whoHasAccessTitle: String {
+        switch self {
+        case .editor:
+            return TextConstants.privateShareWhoHasAccessEditor
+        case .viewer:
+            return TextConstants.privateShareWhoHasAccessViewer
+        case .owner:
+            return TextConstants.privateShareWhoHasAccessOwner
+        }
+    }
+    
     var order: Int {
         switch self {
         case .owner:
@@ -233,6 +244,25 @@ struct SharedContact: Codable, Equatable {
             return lusername == rusername
         }
         return lhs.subject?.email == rhs.subject?.email
+    }
+    
+    func color(for index: Int) -> UIColor? {
+        switch index.remainderReportingOverflow(dividingBy: 6).partialValue {
+        case 0:
+            return .lrTealishTwo
+        case 1:
+            return ColorConstants.marineFour
+        case 2:
+            return .lrDarkSkyBlue
+        case 3:
+            return .lrOrange
+        case 4:
+            return .lrButterScotch
+        case 5:
+            return .lrFadedRed
+        default:
+            return nil
+        }
     }
 }
 

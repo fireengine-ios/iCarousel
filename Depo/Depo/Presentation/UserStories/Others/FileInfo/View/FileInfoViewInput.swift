@@ -15,4 +15,5 @@ protocol FileInfoViewInput: class, ActivityIndicator, ErrorPresenter {
     func show(name: String)
     func showValidateNameSuccess()
     func showSharingInfo(_ sharingInfo: SharedFileInfo)
+    func deleteSharingInfo()
 }
