@@ -62,9 +62,9 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
     private func setupTableView() {
         contactsTableView.register(nibCell: PrivateShareContactCell.self)
         contactsTableView.dataSource = self
+        contactsTableView.delegate = self
         contactsTableView.tableFooterView = UIView()
         contactsTableView.separatorInset = UIEdgeInsets(topBottom: 0, rightLeft: 16)
-        contactsTableView.allowsSelection = false
     }
     
     @IBAction private func onEndShare() {
@@ -129,11 +129,21 @@ extension PrivateShareContactsViewController: UITableViewDataSource {
     }
 }
 
+//MARK: - UITableViewDelegate
+
+extension PrivateShareContactsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        onRoleTapped(index: indexPath.row)
+    }
+}
+
 //MARK: - PrivateShareContactCellDelegate
 
 extension PrivateShareContactsViewController: PrivateShareContactCellDelegate {
     func onRoleTapped(index: Int) {
-        guard let contact = contacts[safe: index] else {
+        guard let contact = contacts[safe: index], contact.role != .owner else {
             return
         }
         //TODO: COF-585 open access page
