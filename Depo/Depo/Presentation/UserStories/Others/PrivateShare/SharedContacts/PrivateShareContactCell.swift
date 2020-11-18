@@ -55,6 +55,8 @@ final class PrivateShareContactCell: UITableViewCell {
     private var index = 0
     weak var delegate: PrivateShareContactCellDelegate?
     
+    private let imageDownloder = ImageDownloder()
+    
     //MARK: -
     
     func setup(with contact: SharedContact, index: Int) {
@@ -62,13 +64,26 @@ final class PrivateShareContactCell: UITableViewCell {
         nameLabel.text = contact.subject?.name
         usernameLabel.text = contact.subject?.username
         
-        if let url = contact.subject?.picture {
-            //TODO: load image from url
-        } else if contact.initials.isEmpty {
+        func setupInitials() {
+            if contact.initials.isEmpty {
+                avatarImageView.image = UIImage(named: "contact_placeholder")
+            } else {
+                initialsLabel.text = contact.initials
+                avatarImageView.backgroundColor = contact.color(for: index)
+            }
+        }
+        
+        if let url = contact.subject?.picture?.byTrimmingQuery {
             avatarImageView.image = UIImage(named: "contact_placeholder")
+            imageDownloder.getImageByTrimming(url: url) { [weak self] image in
+                if image == nil {
+                    setupInitials()
+                } else {
+                    self?.avatarImageView.image = image
+                }
+            }
         } else {
-            initialsLabel.text = contact.initials
-            avatarImageView.backgroundColor = contact.color(for: index)
+            setupInitials()
         }
         
         roleButton.setTitle(contact.role.whoHasAccessTitle, for: .normal)

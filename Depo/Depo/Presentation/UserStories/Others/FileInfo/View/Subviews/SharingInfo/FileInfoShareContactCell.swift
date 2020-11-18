@@ -48,6 +48,9 @@ final class FileInfoShareContactCell: UICollectionViewCell {
     private var type: FileInfoShareContactCellType = .contact
     private var contact: SharedContact?
     weak var delegate: FileInfoShareContactCellDelegate?
+    private let imageDownloder = ImageDownloder()
+    
+    //MARK: -
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -65,11 +68,27 @@ final class FileInfoShareContactCell: UICollectionViewCell {
 
         switch type {
         case .contact:
-            if let initials = contact?.initials, !initials.isEmpty {
-                button.setTitle(initials, for: .normal)
-                button.backgroundColor = contact?.color(for: index) ?? .clear
-            } else {
+            
+            func setupInitials() {
+                if let initials = contact?.initials, !initials.isEmpty {
+                    button.setTitle(initials, for: .normal)
+                    button.backgroundColor = contact?.color(for: index) ?? .clear
+                } else {
+                    button.setImage(UIImage(named: "contact_placeholder"), for: .normal)
+                }
+            }
+            
+            if let url = contact?.subject?.picture?.byTrimmingQuery {
                 button.setImage(UIImage(named: "contact_placeholder"), for: .normal)
+                imageDownloder.getImageByTrimming(url: url) { [weak self] image in
+                    if image == nil {
+                        setupInitials()
+                    } else {
+                        self?.button.setImage(image, for: .normal)
+                    }
+                }
+            } else {
+                setupInitials()
             }
             
             button.setTitleColor(.white, for: .normal)

@@ -64,6 +64,7 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
         contactsTableView.dataSource = self
         contactsTableView.tableFooterView = UIView()
         contactsTableView.separatorInset = UIEdgeInsets(topBottom: 0, rightLeft: 16)
+        contactsTableView.allowsSelection = false
     }
     
     @IBAction private func onEndShare() {
