@@ -552,6 +552,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     action = UIAlertAction(title: TextConstants.newInstaPick, style: .default, handler: { _ in
                         self.basePassingPresenter?.openInstaPick()
                     })
+                case .endSharing:
+                    action = UIAlertAction(title: TextConstants.privateSharedEndSharingActionTitle, style: .default, handler: { _ in
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .endSharing))
+                        //currently only for one file is supported
+                        self.interactor.endSharing(item: currentItems.first)
+                    })
                 }
                 return action
             })

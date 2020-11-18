@@ -1836,3 +1836,6 @@
 "private_share_shared_with_me_empty_page" = "No files are shared with you up to now";
 "private_share_shared_by_me_empty_page" = "You haven't shared any files yet";
 "private_share_inner_folder_empty_page" = "";
+"private_share_end_sharing_success" = "Sharing ended";
+"private_share_end_sharing_confirm" = "Are you sure you want to end sharing?";
+"private_share_end_sharing_action_title" = "End Sharing";

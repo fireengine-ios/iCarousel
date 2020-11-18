@@ -60,6 +60,8 @@ enum ElementTypes {
     case albumDetails
     //instaPick
     case instaPick
+    //private share
+    case endSharing
     
     static var trashState: [ElementTypes] = [.restore, .delete]
     static var hiddenState: [ElementTypes] = [.unhide, .moveToTrash]
@@ -271,6 +273,8 @@ enum ElementTypes {
             return TextConstants.snackbarMessageRemovedFromAlbum
         case .removeFromFavorites:
             return TextConstants.snackbarMessageRemovedFromFavorites
+        case .endSharing:
+            return TextConstants.privateSharedEndSharingActionSuccess
         default:
             return nil
         }
