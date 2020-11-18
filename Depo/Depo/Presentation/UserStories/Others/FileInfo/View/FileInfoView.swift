@@ -170,6 +170,7 @@ final class FileInfoView: UIView, FromNib {
         fileNameView.title = TextConstants.fileInfoFileNameTitle
         fileInfoView.reset()
         peopleView.reset()
+        sharingInfoView.isHidden = true
     }
     
     @objc private func tapGestureRecognizerHandler(_ gestureRecognizer: UITapGestureRecognizer) {

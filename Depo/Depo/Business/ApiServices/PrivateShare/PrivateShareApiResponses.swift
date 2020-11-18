@@ -166,6 +166,17 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareInfoMenuOwner
         }
     }
+    
+    var order: Int {
+        switch self {
+        case .owner:
+            return 0
+        case .editor:
+            return 1
+        case .viewer:
+            return 2
+        }
+    }
 }
 
 enum PrivateShareItemType: String, Encodable {
@@ -199,7 +210,7 @@ enum PrivateShareDuration: String, CaseIterable, Codable {
     }
 }
 
-struct SharedContact: Codable {
+struct SharedContact: Codable, Equatable {
     var subject: SuggestedApiContact?
     let permissions: SharedItemPermission?
     let role: PrivateShareUserRole
@@ -215,6 +226,13 @@ struct SharedContact: Codable {
         } else {
             return ""
         }
+    }
+    
+    static func == (lhs: SharedContact, rhs: SharedContact) -> Bool {
+        if let lusername = lhs.subject?.username, let rusername = rhs.subject?.username {
+            return lusername == rusername
+        }
+        return lhs.subject?.email == rhs.subject?.email
     }
 }
 

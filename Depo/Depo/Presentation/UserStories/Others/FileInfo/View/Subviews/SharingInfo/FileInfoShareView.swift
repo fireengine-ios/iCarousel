@@ -87,13 +87,23 @@ final class FileInfoShareView: UIView, NibInit, FileInfoShareViewProtocol {
         
         var result = [SharedContact]()
         
-        let sortedRoles: [PrivateShareUserRole] = [.owner, .editor, .viewer]
-        sortedRoles.forEach { role in
-            if let contact = members.first(where: { $0.role == role }) {
-                result.append(contact)
+        if members.count <= 3 {
+            result = members
+        } else {
+            let sortedRoles: [PrivateShareUserRole] = [.owner, .editor, .viewer]
+            sortedRoles.forEach { role in
+                if let contact = members.first(where: { $0.role == role }) {
+                    result.append(contact)
+                }
             }
+            while result.count < 3 {
+                if let contact = members.first(where: { !result.contains($0) }) {
+                    result.append(contact)
+                }
+            }
+            result.sort(by: { $0.role.order < $1.role.order })
         }
-        
+
         return (result, members.count, members.count - result.count)
     }
     
