@@ -41,6 +41,7 @@ class WrapItemFileService: WrapItemFileOperations {
     let sharedFileService = SharedService()
     let uploadService = UploadService.default
     private let hiddenService = HiddenService()
+    private lazy var privateShareApiService = PrivateShareApiServiceImpl()
     
     
     func createsFolder(createFolder: CreatesFolder, success: FolderOperation?, fail: FailResponse?) {
@@ -111,6 +112,18 @@ class WrapItemFileService: WrapItemFileOperations {
             
         } else {
             success?()
+        }
+    }
+    
+    func endSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
+        privateShareApiService.endShare(uuid: file.uuid) { response in
+            switch response {
+                case .success(()):
+                    success?()
+                    
+                case .failed(let error):
+                    fail?(ErrorResponse.error(error))
+            }
         }
     }
     

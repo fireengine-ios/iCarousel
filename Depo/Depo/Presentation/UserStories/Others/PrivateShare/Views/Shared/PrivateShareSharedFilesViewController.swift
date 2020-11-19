@@ -16,7 +16,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         switch shareType {
             case .byMe: title = TextConstants.privateShareSharedByMeTab
             case .withMe: title = TextConstants.privateShareSharedWithMeTab
-            case .innerFolder(_, let name): title = name
+            case .innerFolder(_, _, let name): title = name
         }
         controller.title = title
         controller.shareType = shareType
@@ -33,7 +33,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         return bar
     }()
     
-    private var shareType: PrivateShareType = .byMe
+    private(set) var shareType: PrivateShareType = .byMe
     
     private lazy var collectionManager: PrivateShareSharedFilesCollectionManager = {
         let apiService = PrivateShareApiServiceImpl()
@@ -45,6 +45,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private lazy var navBarManager = SegmentedChildNavBarManager(delegate: self)
     private lazy var bottomBarManager = PrivateShareSharedFilesBottomBarManager(delegate: self)
+    private lazy var threeDotsManager = PrivateShareSharedWithThreeDotsManager(delegate: self)
+    private lazy var itemThreeDotsManager = PrivateShareSharedItemThreeDotsManager(delegate: self)
     
     private let router = RouterVC()
     
@@ -55,6 +57,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         collectionManager.setup()
         setupBars()
+        setupPlusButton()
         showSpinner()
     }
     
@@ -92,14 +95,30 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         bottomBarManager.setup()
     }
     
-    private func setDefaultTabBarState() {
+    private func setupPlusButton() {
         switch shareType {
-            case .byMe, .withMe:
-                needToShowTabBar = true
+            case .byMe:
+                floatingButtonsArray = []
                 
-            case .innerFolder(uuid: _, name: _):
-                needToShowTabBar = false
+            case .withMe:
+                floatingButtonsArray = []
+                
+            case .innerFolder(type: let type, uuid: _, name: _):
+                switch type {
+                    case .byMe:
+                        floatingButtonsArray = [.newFolder, .upload, .uploadFiles]
+                        
+                    case .withMe:
+                        floatingButtonsArray = []
+                        
+                    default:
+                        floatingButtonsArray = []
+                }
         }
+    }
+    
+    private func setDefaultTabBarState() {
+        needToShowTabBar = true
     }
     
     private func setupCollectionViewBar() {
@@ -145,11 +164,25 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     
     func didChangeSelection(selectedItems: [WrapData]) {
         show(selectedItemsCount: selectedItems.count)
-        bottomBarManager.update(for: selectedItems)
+        if !collectionView.isQuickSelecting {
+            bottomBarManager.update(for: selectedItems)
+            
+            if selectedItems.isEmpty {
+                navBarManager.threeDotsButton.isEnabled = false
+                bottomBarManager.hide()
+            } else {
+                navBarManager.threeDotsButton.isEnabled = true
+                bottomBarManager.show()
+            }
+        }
     }
     
     func didEndReload() {
         hideSpinner()
+    }
+    
+    func showActions(for item: WrapData) {
+        itemThreeDotsManager.showActions(for: shareType, item: item, sender: self)
     }
     
     //MARK: Helpers
@@ -163,6 +196,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     private func updateBars(isSelecting: Bool) {
         DispatchQueue.main.async {
             self.setupNavigationBar(editingMode: isSelecting)
+            self.navBarManager.threeDotsButton.isEnabled = !isSelecting
             if isSelecting {
                 self.bottomBarManager.show()
             } else {
@@ -198,7 +232,11 @@ extension PrivateShareSharedFilesViewController: SegmentedChildNavBarManagerDele
     }
     
     func onThreeDotsButton() {
-        //TODO: another jira task
+        if collectionManager.isSelecting {
+            threeDotsManager.showActions(for: shareType, selectedItems: collectionManager.selectedItems(), sender: self)
+        } else {
+            threeDotsManager.showActions(for: shareType, sender: self)
+        }
     }
     
     func onSearchButton() {
@@ -227,7 +265,11 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
         selectedItemsCallback(collectionManager.selectedItems())
     }
     
-    func operationFinished(withType type: ElementTypes, response: Any?) { }
+    func operationFinished(withType type: ElementTypes, response: Any?) {
+        if type == .endSharing {
+            collectionManager.reloadAfterAction()
+        }
+    }
     
     func operationFailed(withType type: ElementTypes) {}
     

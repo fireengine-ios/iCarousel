@@ -9,10 +9,10 @@
 import Foundation
 
 
-enum PrivateShareType {
+indirect enum PrivateShareType {
     case byMe
     case withMe
-    case innerFolder(uuid: String, name: String)
+    case innerFolder(type: PrivateShareType, uuid: String, name: String)
     
     var emptyViewType: EmptyView.ViewType {
         switch self {
@@ -20,7 +20,7 @@ enum PrivateShareType {
                 return .sharedBy
             case .withMe:
                 return .sharedWith
-            case .innerFolder(uuid: _, name: _):
+            case .innerFolder(type: _, uuid: _, name: _):
                 return .sharedInnerFolder
         }
     }
@@ -150,7 +150,7 @@ final class PrivateShareFileInfoManager {
             case .withMe:
                 privateShareAPIService.getSharedWithMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
                 
-            case .innerFolder(let folderUuid, _):
+            case .innerFolder(type: _, let folderUuid, name: _):
                 privateShareAPIService.getFiles(folderUUID: folderUuid, size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { response in
                     switch response {
                         case .success(let fileSystem):
