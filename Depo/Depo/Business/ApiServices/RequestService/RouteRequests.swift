@@ -26,7 +26,7 @@ struct RouteRequests {
     
     // MARK: Environment
     
-    static var currentServerEnvironment = ServerEnvironment.production
+    static var currentServerEnvironment = ServerEnvironment.test
     private static let applicationTarget = TextConstants.NotLocalized.appName
     
     static let baseShortUrlString: String = {
@@ -372,7 +372,7 @@ struct RouteRequests {
         enum Version_2 {
             private static let baseV2Url = baseUrl +/ "v2/files"
             private static let baseV2UrlString = baseV2Url.absoluteString
-            private static let baseV2UrlBulk = baseUrl +/ "_bulk"
+            private static let baseV2UrlBulk = baseV2Url +/ "_bulk"
             
             static let filesFromFolder = baseV2UrlString + "?size=%d&page=%d&sortBy=%@&sortOrder=%@&parentFolderUuid=%@"
             static let sharingInfo = baseV2UrlString + "/%@"

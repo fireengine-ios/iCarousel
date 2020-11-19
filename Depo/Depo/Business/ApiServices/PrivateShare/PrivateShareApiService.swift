@@ -30,7 +30,7 @@ protocol PrivateShareApiService {
     func endShare(uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask?
     
     @discardableResult
-    func createDownloadUrl(uuids: [String], handler: @escaping ResponseHandler<URL>) -> URLSessionTask?
+    func createDownloadUrl(uuids: [String], handler: @escaping ResponseHandler<UrlToDownload>) -> URLSessionTask?
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
@@ -121,7 +121,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     }
     
     @discardableResult
-    func createDownloadUrl(uuids: [String], handler: @escaping ResponseHandler<URL>) -> URLSessionTask? {
+    func createDownloadUrl(uuids: [String], handler: @escaping ResponseHandler<UrlToDownload>) -> URLSessionTask? {
         guard !uuids.isEmpty else {
             handler(.failed(ErrorResponse.string("UUIDs are empty")))
             return nil
@@ -131,7 +131,10 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
         
         return SessionManager
             .customDefault
-            .request(RouteRequests.FileSystem.Version_2.createDownloadUrl, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .request(RouteRequests.FileSystem.Version_2.createDownloadUrl,
+                     method: .post,
+                     parameters: parameters,
+                     encoding: ArrayEncoding())
             .customValidate()
             .responseObject(handler)
             .task
