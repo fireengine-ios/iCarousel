@@ -28,6 +28,9 @@ protocol PrivateShareApiService {
     
     @discardableResult
     func endShare(uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask?
+    
+    @discardableResult
+    func createDownloadUrl(uuids: [String], handler: @escaping ResponseHandler<URL>) -> URLSessionTask?
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
@@ -89,7 +92,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func getSharingInfo(uuid: String, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.PrivateShare.sharingInfo, uuid)) else {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.sharingInfo, uuid)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
@@ -104,7 +107,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func endShare(uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.PrivateShare.shareAcls, uuid)) else {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.shareAcls, uuid)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
@@ -114,6 +117,23 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .request(url, method: .delete)
             .customValidate()
             .responseVoid(handler)
+            .task
+    }
+    
+    @discardableResult
+    func createDownloadUrl(uuids: [String], handler: @escaping ResponseHandler<URL>) -> URLSessionTask? {
+        gurad !uuids.isEmpty else {
+            handler(.failed(ErrorResponse.string("UUIDs are empty")))
+            return
+        }
+        
+        let parameters = uuids.asParameters()
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.FileSystem.Version_2.createDownloadUrl, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .customValidate()
+            .responseObject(handler)
             .task
     }
 }
