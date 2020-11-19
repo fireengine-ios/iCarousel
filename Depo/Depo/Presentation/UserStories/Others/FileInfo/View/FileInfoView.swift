@@ -16,7 +16,7 @@ protocol PhotoInfoViewControllerOutput {
     func tapGesture(recognizer: UITapGestureRecognizer)
     func onSelectSharedContact(_ contact: SharedContact)
     func onAddNewShare()
-    func showWhoHasAccess()
+    func showWhoHasAccess(shareInfo: SharedFileInfo)
 }
 
 final class FileInfoView: UIView, FromNib {
@@ -145,6 +145,10 @@ final class FileInfoView: UIView, FromNib {
     
     func updateShareInfo() {
         getSharingInfo(uuid: uuid)
+    }
+    
+    func setHiddenShareInfoView(isHidden: Bool) {
+        sharingInfoView.isHidden = isHidden
     }
     
     // MARK: Private Methods
@@ -293,7 +297,9 @@ extension FileInfoView: FileInfoShareViewDelegate {
         output.onAddNewShare()
     }
     
-    func didTappedArrowButton() {        
-        output.showWhoHasAccess()
+    func didTappedArrowButton() {
+        if let shareInfo = sharingInfoView.info {
+            output.showWhoHasAccess(shareInfo: shareInfo)
+        }
     }
 }

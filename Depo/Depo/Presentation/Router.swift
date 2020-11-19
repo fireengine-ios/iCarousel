@@ -1229,4 +1229,8 @@ class RouterVC: NSObject {
         navigationController.modalPresentationStyle = .fullScreen
         return navigationController
     }
+    
+    func privateShareContacts(with shareInfo: SharedFileInfo, endShareHandler: VoidHandler?) -> UIViewController {
+        PrivateShareContactsViewController.with(shareInfo: shareInfo, endShareHandler: endShareHandler)
+    }
 }

@@ -41,6 +41,10 @@ extension FileInfoPresenter: FileInfoViewOutput {
             router.openPrivateShare(for: item)
         }
     }
+    
+    func showWhoHasAccess(shareInfo: SharedFileInfo) {
+        router.openPrivateShareContacts(with: shareInfo)
+    }
 }
 
 // MARK: FileInfoInteractorOutput
@@ -105,6 +109,10 @@ extension FileInfoPresenter: FileInfoRouterOutput {
     
     func updateSharingInfo() {
         interactor.getSharingInfo()
+    }
+    
+    func deleteSharingInfo() {
+        view.deleteSharingInfo()
     }
 }
 
