@@ -122,7 +122,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func createDownloadUrl(uuids: [String], handler: @escaping ResponseHandler<URL>) -> URLSessionTask? {
-        gurad !uuids.isEmpty else {
+        guard !uuids.isEmpty else {
             handler(.failed(ErrorResponse.string("UUIDs are empty")))
             return
         }
