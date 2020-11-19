@@ -2163,4 +2163,13 @@ struct TextConstants {
     static let privateShareWhoHasAccessPopupMessage = NSLocalizedString("private_share_end_sharing_confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareEndShareSuccess = NSLocalizedString("private_share_end_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 
+    static let privateShareAccessEditor = NSLocalizedString("private_share_access_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessViewer = NSLocalizedString("private_share_access_role_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessRemove = NSLocalizedString("private_share_access_role_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessTitle = NSLocalizedString("private_share_access_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessFromFolder = NSLocalizedString("private_share_access_from_folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessExpiresDate = NSLocalizedString("private_share_expire_date", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessRoleChangeSuccess = NSLocalizedString("private_share_access_role_change_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareAccessDeleteUserSuccess = NSLocalizedString("private_share_access_remove_confirmation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
 }

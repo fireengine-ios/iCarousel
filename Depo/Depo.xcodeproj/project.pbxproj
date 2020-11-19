@@ -5546,6 +5546,18 @@
 		987E2181236037F900D45AEA /* CampaignIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA10402358549A00B12485 /* CampaignIntroView.swift */; };
 		987E21822360380100D45AEA /* CampaingnInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA10422358597800B12485 /* CampaingnInfoView.swift */; };
 		987E21832360380200D45AEA /* CampaingnInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA10422358597800B12485 /* CampaingnInfoView.swift */; };
+		98849387256636CE00C04B5B /* PrivateShateAccessListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98849385256636CE00C04B5B /* PrivateShateAccessListViewController.swift */; };
+		98849388256636CE00C04B5B /* PrivateShateAccessListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98849385256636CE00C04B5B /* PrivateShateAccessListViewController.swift */; };
+		98849389256636CE00C04B5B /* PrivateShateAccessListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98849385256636CE00C04B5B /* PrivateShateAccessListViewController.swift */; };
+		9884938A256636CE00C04B5B /* PrivateShateAccessListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98849385256636CE00C04B5B /* PrivateShateAccessListViewController.swift */; };
+		9884938B256636CE00C04B5B /* PrivateShateAccessListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98849385256636CE00C04B5B /* PrivateShateAccessListViewController.swift */; };
+		9884938C256636CE00C04B5B /* PrivateShateAccessListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98849385256636CE00C04B5B /* PrivateShateAccessListViewController.swift */; };
+		9884938D256636CE00C04B5B /* PrivateShateAccessListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98849386256636CE00C04B5B /* PrivateShateAccessListViewController.xib */; };
+		9884938E256636CE00C04B5B /* PrivateShateAccessListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98849386256636CE00C04B5B /* PrivateShateAccessListViewController.xib */; };
+		9884938F256636CE00C04B5B /* PrivateShateAccessListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98849386256636CE00C04B5B /* PrivateShateAccessListViewController.xib */; };
+		98849390256636CE00C04B5B /* PrivateShateAccessListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98849386256636CE00C04B5B /* PrivateShateAccessListViewController.xib */; };
+		98849391256636CE00C04B5B /* PrivateShateAccessListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98849386256636CE00C04B5B /* PrivateShateAccessListViewController.xib */; };
+		98849392256636CE00C04B5B /* PrivateShateAccessListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98849386256636CE00C04B5B /* PrivateShateAccessListViewController.xib */; };
 		98861139240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98861138240FF4DB00A49C5B /* BecomePremiumViewSourceType.swift */; };
 		9886113A240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98861138240FF4DB00A49C5B /* BecomePremiumViewSourceType.swift */; };
 		9886113B240FF4DC00A49C5B /* BecomePremiumViewSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98861138240FF4DB00A49C5B /* BecomePremiumViewSourceType.swift */; };
@@ -5829,6 +5841,18 @@
 		98CB9A852202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */; };
 		98CB9A862202DE4900E861D1 /* AuthenticationServiceResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */; };
 		98CD8DD6251C9E9900A46920 /* OurLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C73CDF3200356B6000824AA /* OurLocalizable.strings */; };
+		98CF35E72566539600A70658 /* PrivateShareAccessListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CF35E52566539600A70658 /* PrivateShareAccessListCell.swift */; };
+		98CF35E82566539600A70658 /* PrivateShareAccessListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CF35E52566539600A70658 /* PrivateShareAccessListCell.swift */; };
+		98CF35E92566539600A70658 /* PrivateShareAccessListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CF35E52566539600A70658 /* PrivateShareAccessListCell.swift */; };
+		98CF35EA2566539600A70658 /* PrivateShareAccessListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CF35E52566539600A70658 /* PrivateShareAccessListCell.swift */; };
+		98CF35EB2566539600A70658 /* PrivateShareAccessListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CF35E52566539600A70658 /* PrivateShareAccessListCell.swift */; };
+		98CF35EC2566539600A70658 /* PrivateShareAccessListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CF35E52566539600A70658 /* PrivateShareAccessListCell.swift */; };
+		98CF35ED2566539600A70658 /* PrivateShareAccessListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CF35E62566539600A70658 /* PrivateShareAccessListCell.xib */; };
+		98CF35EE2566539600A70658 /* PrivateShareAccessListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CF35E62566539600A70658 /* PrivateShareAccessListCell.xib */; };
+		98CF35EF2566539600A70658 /* PrivateShareAccessListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CF35E62566539600A70658 /* PrivateShareAccessListCell.xib */; };
+		98CF35F02566539600A70658 /* PrivateShareAccessListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CF35E62566539600A70658 /* PrivateShareAccessListCell.xib */; };
+		98CF35F12566539600A70658 /* PrivateShareAccessListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CF35E62566539600A70658 /* PrivateShareAccessListCell.xib */; };
+		98CF35F22566539600A70658 /* PrivateShareAccessListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 98CF35E62566539600A70658 /* PrivateShareAccessListCell.xib */; };
 		98D3856D21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */; };
 		98DBC0462410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DBC0442410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift */; };
 		98DBC0472410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DBC0442410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift */; };
@@ -14194,6 +14218,8 @@
 		98792DDD22FD4D11000A77E5 /* SpotifySortingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifySortingManager.swift; sourceTree = "<group>"; };
 		98792DE122FD5CD9000A77E5 /* SpotifyImportedPlaylistsNavbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyImportedPlaylistsNavbarManager.swift; sourceTree = "<group>"; };
 		98792DE522FD83BF000A77E5 /* SpotifyImportedTracksNavbarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyImportedTracksNavbarManager.swift; sourceTree = "<group>"; };
+		98849385256636CE00C04B5B /* PrivateShateAccessListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateShateAccessListViewController.swift; sourceTree = "<group>"; };
+		98849386256636CE00C04B5B /* PrivateShateAccessListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrivateShateAccessListViewController.xib; sourceTree = "<group>"; };
 		98861138240FF4DB00A49C5B /* BecomePremiumViewSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BecomePremiumViewSourceType.swift; sourceTree = "<group>"; };
 		988BA12E255924150086E4BE /* PrivateShareWithView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateShareWithView.swift; sourceTree = "<group>"; };
 		988BA14E255924210086E4BE /* PrivateShareWithView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrivateShareWithView.xib; sourceTree = "<group>"; };
@@ -14260,6 +14286,8 @@
 		98C878252074E1C100374177 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		98C8D6A424F3A4E60061A1B0 /* BasicFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicFilter.swift; sourceTree = "<group>"; };
 		98CB9A842202DE4900E861D1 /* AuthenticationServiceResponseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceResponseError.swift; sourceTree = "<group>"; };
+		98CF35E52566539600A70658 /* PrivateShareAccessListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateShareAccessListCell.swift; sourceTree = "<group>"; };
+		98CF35E62566539600A70658 /* PrivateShareAccessListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrivateShareAccessListCell.xib; sourceTree = "<group>"; };
 		98D1BBF957BB47B367181C22 /* Pods-BilloWidgetExtension.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BilloWidgetExtension.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-BilloWidgetExtension/Pods-BilloWidgetExtension.enterprise.xcconfig"; sourceTree = "<group>"; };
 		98D3856C21E8D665001CFE9D /* AnalyzeHistoryDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyzeHistoryDataSource.swift; sourceTree = "<group>"; };
 		98DBC0442410FB1900926F40 /* AutoSyncHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSyncHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -19675,6 +19703,7 @@
 		9808B3082553DE94002B0032 /* PrivateShare */ = {
 			isa = PBXGroup;
 			children = (
+				988493812566369D00C04B5B /* AccessList */,
 				9842FB802563D20E00B07606 /* SharedContacts */,
 				985E6974255A61AF006F6CD7 /* UserRoleSelection */,
 				9808B37F2553DEE9002B0032 /* Views */,
@@ -20298,6 +20327,17 @@
 				98792DE522FD83BF000A77E5 /* SpotifyImportedTracksNavbarManager.swift */,
 			);
 			path = ImportedTracks;
+			sourceTree = "<group>";
+		};
+		988493812566369D00C04B5B /* AccessList */ = {
+			isa = PBXGroup;
+			children = (
+				98849385256636CE00C04B5B /* PrivateShateAccessListViewController.swift */,
+				98849386256636CE00C04B5B /* PrivateShateAccessListViewController.xib */,
+				98CF35E52566539600A70658 /* PrivateShareAccessListCell.swift */,
+				98CF35E62566539600A70658 /* PrivateShareAccessListCell.xib */,
+			);
+			path = AccessList;
 			sourceTree = "<group>";
 		};
 		989BDE2622F47B1E001DDEB2 /* Spotify */ = {
@@ -24880,6 +24920,7 @@
 				985FFB05255C1EE0001AA845 /* FileNameView.xib in Resources */,
 				0303A5542397D0D000907F42 /* EmptyDataView.xib in Resources */,
 				0303A5552397D0D000907F42 /* PremiumListView.xib in Resources */,
+				98CF35F02566539600A70658 /* PrivateShareAccessListCell.xib in Resources */,
 				0303A55A2397D0D000907F42 /* InstapickAnalysisCell.xib in Resources */,
 				8E3B6B4F2462E44900BCB052 /* FileInfoView.xib in Resources */,
 				0303A55C2397D0D000907F42 /* HomeViewTopView.xib in Resources */,
@@ -25052,6 +25093,7 @@
 				0303A6912397D0D000907F42 /* PremiumInfoCard.xib in Resources */,
 				0303A6962397D0D000907F42 /* SuggestionTableViewCell.xib in Resources */,
 				0303A6982397D0D000907F42 /* GridListTopBar.xib in Resources */,
+				98849390256636CE00C04B5B /* PrivateShateAccessListViewController.xib in Resources */,
 				9823197D24F3A1E700FD16E2 /* AdjustView.xib in Resources */,
 				98A86D6023A2415D00438225 /* AlbumsSliderCell.xib in Resources */,
 				0303A69F2397D0D000907F42 /* CollectionViewCellForPhoto.xib in Resources */,
@@ -25293,6 +25335,7 @@
 				CE3E4D11201B69A900173045 /* PVViewerController.xib in Resources */,
 				9807261A203C33EB004E1505 /* SuggestionTableViewCell.xib in Resources */,
 				984A514121E734D2004525F5 /* AnalyzeHistoryViewController.xib in Resources */,
+				98CF35EE2566539600A70658 /* PrivateShareAccessListCell.xib in Resources */,
 				8C0E90021FDEBDFF00789C91 /* AppRater.bundle in Resources */,
 				CF71461C24B597A800D83E60 /* ContactInfoView.xib in Resources */,
 				4B857864233908B400F378AB /* SubjectDetailsViewController.xib in Resources */,
@@ -25538,6 +25581,7 @@
 				8930DDB122C8C8C8003CE856 /* CreateStoryViewController.xib in Resources */,
 				8C0E90611FDEBDFF00789C91 /* ActionsMenuTableViewCell.xib in Resources */,
 				9840C62320AEAD6B00A8634F /* CheckBoxView.xib in Resources */,
+				9884938E256636CE00C04B5B /* PrivateShateAccessListViewController.xib in Resources */,
 				9240C04E21B805AF005E710C /* PremiumFooterCollectionReusableView.xib in Resources */,
 				7C4F60B4201C675F0033C58F /* MovieCard.xib in Resources */,
 				7C257B3B20174D3C00CB56F8 /* ContactBackupOld.xib in Resources */,
@@ -25754,6 +25798,7 @@
 				2BA37C2E2028374E00660394 /* FaceImageChangeCoverViewController.xib in Resources */,
 				98A86D4D23A2208800438225 /* HiddenPhotosViewController.xib in Resources */,
 				7CEA863E1FDE84D900F17D9D /* AutoUploadIsOffPopUp.xib in Resources */,
+				9884938D256636CE00C04B5B /* PrivateShateAccessListViewController.xib in Resources */,
 				7CD92DBB20750A4400010BFA /* AnimationCard.xib in Resources */,
 				CEAE3F931EFD4D7C00A405B2 /* SubPlusButtons.xib in Resources */,
 				CE5921D822564465005882CE /* PasswordView.xib in Resources */,
@@ -25964,6 +26009,7 @@
 				7C83B6F11F3B0E99006D05E3 /* FolderSelectionCollectionViewCell.xib in Resources */,
 				B5315096246D868E00E94355 /* GoogleService-Info-debug.plist in Resources */,
 				7C4F60AC2019E2BC0033C58F /* AlbumCard.xib in Resources */,
+				98CF35ED2566539600A70658 /* PrivateShareAccessListCell.xib in Resources */,
 				CF71472924B597AA00D83E60 /* ContactSyncOperationResultController.xib in Resources */,
 				9823197A24F3A1E600FD16E2 /* AdjustView.xib in Resources */,
 				989BDE5522F47B1E001DDEB2 /* SpotifyImportViewController.xib in Resources */,
@@ -26113,6 +26159,7 @@
 				98231A0224F3A1E700FD16E2 /* PhotoEditChangesBar.xib in Resources */,
 				CE784CDE22A685FB00662219 /* AppRater.bundle in Resources */,
 				CE784CE422A685FB00662219 /* BottomSelectionTabBarViewController.xib in Resources */,
+				98CF35F12566539600A70658 /* PrivateShareAccessListCell.xib in Resources */,
 				CE784CE622A685FB00662219 /* EmailEnterController.xib in Resources */,
 				8E7659892333745A00D728A5 /* CredsUpdateCheckPopUp.xib in Resources */,
 				9823197E24F3A1E700FD16E2 /* AdjustView.xib in Resources */,
@@ -26358,6 +26405,7 @@
 				CE784EAD22A685FB00662219 /* ForgotPasswordViewController.xib in Resources */,
 				CE784EB022A685FB00662219 /* SettingsViewController.xib in Resources */,
 				9892229D240D0C3C004155A5 /* BecomePremiumView.xib in Resources */,
+				98849391256636CE00C04B5B /* PrivateShateAccessListViewController.xib in Resources */,
 				98164305233CE2D40070F8B9 /* TBMatikPhotosViewController.xib in Resources */,
 				CE784EB422A685FB00662219 /* PackagePremiumView.xib in Resources */,
 				8C8E934823154BC5000242E9 /* SpotifyAccountConnectionCell.xib in Resources */,
@@ -26472,6 +26520,7 @@
 				CF8B68F723CBC9D70021B021 /* StorageCard.xib in Resources */,
 				CF8B68FD23CBC9D70021B021 /* AutoSyncSwitcherTableViewCell.xib in Resources */,
 				CF8B690123CBC9D70021B021 /* TitleView.xib in Resources */,
+				98CF35EF2566539600A70658 /* PrivateShareAccessListCell.xib in Resources */,
 				CF8B690323CBC9D70021B021 /* SettingHeaderView.xib in Resources */,
 				CF8B690523CBC9D70021B021 /* AnimationCard.xib in Resources */,
 				CF8B690723CBC9D70021B021 /* LoginSettingsViewController.xib in Resources */,
@@ -26689,6 +26738,7 @@
 				985E6957255A6045006F6CD7 /* PrivateShareUserRoleViewController.xib in Resources */,
 				CF8B6AC323CBC9D70021B021 /* SearchView.xib in Resources */,
 				CF8B6AC423CBC9D70021B021 /* CreateStoryPreviewViewController.xib in Resources */,
+				9884938F256636CE00C04B5B /* PrivateShateAccessListViewController.xib in Resources */,
 				98BE78AA24517E4300B8864F /* SnackbarView.xib in Resources */,
 				CF8B6AC623CBC9D70021B021 /* InitializingViewController.xib in Resources */,
 				985FFB04255C1EE0001AA845 /* FileNameView.xib in Resources */,
@@ -26763,6 +26813,7 @@
 				CF8B707F23CBCA280021B021 /* LoginViewController.xib in Resources */,
 				CF8B708223CBCA280021B021 /* LandingCollectionViewCell.xib in Resources */,
 				CF7146C224B597A900D83E60 /* BackUpContactsCard.xib in Resources */,
+				98849392256636CE00C04B5B /* PrivateShateAccessListViewController.xib in Resources */,
 				98DBC0662410FB4F00926F40 /* AutoSyncAlbumTableViewCell.xib in Resources */,
 				B5450210255A863C004DBD41 /* PrivateShareSharedFilesViewController.xib in Resources */,
 				CF8B708623CBCA280021B021 /* UserProfileViewController.xib in Resources */,
@@ -26973,6 +27024,7 @@
 				CF8B722F23CBCA280021B021 /* CollectionViewStoryReorderView.xib in Resources */,
 				981EA2EB247D4CA700A51B7D /* ContactsOperationView.xib in Resources */,
 				CF8B723123CBCA280021B021 /* lifedrive.plist in Resources */,
+				98CF35F22566539600A70658 /* PrivateShareAccessListCell.xib in Resources */,
 				CF8B723323CBCA280021B021 /* InstapickAnalyzeHistoryPhotoCell.xib in Resources */,
 				9823197F24F3A1E700FD16E2 /* AdjustView.xib in Resources */,
 				CF8B723523CBCA280021B021 /* PermissionsView.xib in Resources */,
@@ -28899,6 +28951,7 @@
 				0303A13A2397D0D000907F42 /* FaceImagePhotosInteractor.swift in Sources */,
 				89DAB3E023AB513700D4337D /* HSCompletionPopUp.swift in Sources */,
 				A74ADA4123A2AC44007DD192 /* DivorceCard.swift in Sources */,
+				98CF35EA2566539600A70658 /* PrivateShareAccessListCell.swift in Sources */,
 				0303A13B2397D0D000907F42 /* LocalAlbumPresenter.swift in Sources */,
 				0303A13C2397D0D000907F42 /* CaptchaViewController.swift in Sources */,
 				0303A13D2397D0D000907F42 /* CollectionSortingRules.swift in Sources */,
@@ -29174,6 +29227,7 @@
 				0303A2252397D0D000907F42 /* YearsView.swift in Sources */,
 				0303A2262397D0D000907F42 /* SynchronizedArray.swift in Sources */,
 				0303A2272397D0D000907F42 /* PremiumViewController.swift in Sources */,
+				9884938A256636CE00C04B5B /* PrivateShateAccessListViewController.swift in Sources */,
 				0303A2282397D0D000907F42 /* AudioSelectionCollectionViewCell.swift in Sources */,
 				490222C32403F9B300B120BA /* MobilePaymentPermissionViewInput.swift in Sources */,
 				0303A2292397D0D000907F42 /* SetSecurityQuestionViewController.swift in Sources */,
@@ -30566,6 +30620,7 @@
 				8C0E8CFF1FDEBDFF00789C91 /* CollectionViewCellForPhoto.swift in Sources */,
 				8C0E8D001FDEBDFF00789C91 /* LoginInteractor.swift in Sources */,
 				9808B3D225540D61002B0032 /* PrivateShareSuggestionsView.swift in Sources */,
+				98849388256636CE00C04B5B /* PrivateShateAccessListViewController.swift in Sources */,
 				982319ED24F3A1E700FD16E2 /* PhotoEditTabbar.swift in Sources */,
 				CEEFB8DC2361C64800200A7F /* AnalyzeHistoryEmptyCell.swift in Sources */,
 				73FE51FD22CF5EC300270448 /* CreateStoryAudioItemCell.swift in Sources */,
@@ -31490,6 +31545,7 @@
 				8C0E8F411FDEBDFF00789C91 /* AlertFilesActionsSheetConfigurator.swift in Sources */,
 				4A6DBE8B21A6F92C0003D1B4 /* PremiumHeaderView.swift in Sources */,
 				8C0B91BC2017106C00A5BA81 /* StoriesInitializer.swift in Sources */,
+				98CF35E82566539600A70658 /* PrivateShareAccessListCell.swift in Sources */,
 				8C0E8F421FDEBDFF00789C91 /* SplashConfigurator.swift in Sources */,
 				8C0E8F431FDEBDFF00789C91 /* UsageInfoRouterInput.swift in Sources */,
 				89E51D4B22CA1115007A7DBC /* CreateStoryPreviewRouter.swift in Sources */,
@@ -32417,6 +32473,7 @@
 				174F99E5243D448900986C8B /* ControlContainableScrollView.swift in Sources */,
 				CE8F44F71F6BB0DD0062C2E0 /* ActivityTimelineTimeCell.swift in Sources */,
 				CE00B253220332F000A5A696 /* NSLayoutConstraint+Extensions.swift in Sources */,
+				98849387256636CE00C04B5B /* PrivateShateAccessListViewController.swift in Sources */,
 				49E9529E2400013E00E2ABCD /* MobilePaymentPermissionViewController.swift in Sources */,
 				8C7786881F3F38D9005CB432 /* MusicBar.swift in Sources */,
 				CEAE3FF21EFD517300A405B2 /* CustomTabBarItem.swift in Sources */,
@@ -33657,6 +33714,7 @@
 				8C208657228D4B2E000BEDAD /* PhotoVideoThreeDotMenuManager.swift in Sources */,
 				92004B6921AD197800582C45 /* MyStorageInteractorInput.swift in Sources */,
 				34EB62653F5454C7AC298EE3 /* SelectFolderInitializer.swift in Sources */,
+				98CF35E72566539600A70658 /* PrivateShareAccessListCell.swift in Sources */,
 				7CE825BE1F823D9700356AD2 /* FreeUpSpacePopUp.swift in Sources */,
 				8C77869F1F3F38EF005CB432 /* VisualMusicPlayerInteractor.swift in Sources */,
 				73B623D623BF5CB600839C47 /* SmashService.swift in Sources */,
@@ -34239,6 +34297,7 @@
 				982319AE24F3A1E700FD16E2 /* ColorCell.swift in Sources */,
 				CE7848C422A685FB00662219 /* HelpAndSupportRouterInput.swift in Sources */,
 				CE7848C522A685FB00662219 /* InstapickAlbumSelectionViewController.swift in Sources */,
+				98CF35EB2566539600A70658 /* PrivateShareAccessListCell.swift in Sources */,
 				CE7848C622A685FB00662219 /* LeavePremiumPresenter.swift in Sources */,
 				CE7848C722A685FB00662219 /* AutoSyncDataStorage.swift in Sources */,
 				CE7848C822A685FB00662219 /* PrintInitializer.swift in Sources */,
@@ -35237,6 +35296,7 @@
 				CF7146BB24B597A900D83E60 /* DeleteDuplicatesViewController.swift in Sources */,
 				8C1E5BEB22CB8D03008FDA02 /* ProfileTextViewEnterView.swift in Sources */,
 				982706F52548470400810BB5 /* SynchronizedSet.swift in Sources */,
+				9884938B256636CE00C04B5B /* PrivateShateAccessListViewController.swift in Sources */,
 				A74ADA4E23A38362007DD192 /* CarouselPageModel.swift in Sources */,
 				CE784BDA22A685FB00662219 /* PeriodicContactsSyncSettingsModel.swift in Sources */,
 				CE784BDB22A685FB00662219 /* FaceImageAddNameInitializer.swift in Sources */,
@@ -36200,6 +36260,7 @@
 				CF8B65B023CBC9D70021B021 /* UserProfileViewController.swift in Sources */,
 				CF8B65B123CBC9D70021B021 /* TransparentGradientView.swift in Sources */,
 				CF8B65B223CBC9D70021B021 /* LeavePremiumViewInput.swift in Sources */,
+				98849389256636CE00C04B5B /* PrivateShateAccessListViewController.swift in Sources */,
 				CF8B65B323CBC9D70021B021 /* ActivityTimelineHeader.swift in Sources */,
 				CF8B65B423CBC9D70021B021 /* PrintViewInput.swift in Sources */,
 				CF8B65B523CBC9D70021B021 /* UINavigationBarExtension.swift in Sources */,
@@ -36603,6 +36664,7 @@
 				0305A30023D5C2A1004D1EC7 /* OverlayStickerViewControllerDataSource.swift in Sources */,
 				CF8B670123CBC9D70021B021 /* LeavePremiumInteractor.swift in Sources */,
 				CF8B670223CBC9D70021B021 /* BasePresentor.swift in Sources */,
+				98CF35E92566539600A70658 /* PrivateShareAccessListCell.swift in Sources */,
 				CF8B670323CBC9D70021B021 /* UploadHelpers.swift in Sources */,
 				98231A8924F3A23500FD16E2 /* MarsFilter.swift in Sources */,
 				CF8B670423CBC9D70021B021 /* UserProfileRouterInput.swift in Sources */,
@@ -37325,6 +37387,7 @@
 				982319AF24F3A1E700FD16E2 /* ColorCell.swift in Sources */,
 				CF8B6C1B23CBCA280021B021 /* LeavePremiumPresenter.swift in Sources */,
 				CF8B6C1C23CBCA280021B021 /* AutoSyncDataStorage.swift in Sources */,
+				98CF35EC2566539600A70658 /* PrivateShareAccessListCell.swift in Sources */,
 				CF8B6C1D23CBCA280021B021 /* PrintInitializer.swift in Sources */,
 				CF8B6C1E23CBCA280021B021 /* UserProfileInitializer.swift in Sources */,
 				CF8B6C2023CBCA280021B021 /* BaseCellModel.swift in Sources */,
@@ -38323,6 +38386,7 @@
 				CF8B6F7123CBCA280021B021 /* FaceImageAddNameInitializer.swift in Sources */,
 				CF7146BC24B597A900D83E60 /* DeleteDuplicatesViewController.swift in Sources */,
 				CF8B6F7223CBCA280021B021 /* UploadFilesSelectionViewInput.swift in Sources */,
+				9884938C256636CE00C04B5B /* PrivateShateAccessListViewController.swift in Sources */,
 				982706F62548470400810BB5 /* SynchronizedSet.swift in Sources */,
 				CF8B6F7323CBCA280021B021 /* UploadFilesSelectionViewOutput.swift in Sources */,
 				CF8B6F7423CBCA280021B021 /* SubscriptionPlanBaseResponse.swift in Sources */,

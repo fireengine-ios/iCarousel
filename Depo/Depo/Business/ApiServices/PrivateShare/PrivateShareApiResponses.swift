@@ -9,28 +9,12 @@
 import Foundation
 
 struct SuggestedApiContact: Codable {
-    let type: String?
+    let type: PrivateShareSubjectType?
     let identifier: String?
     let username: String?
     let email: String?
     var name: String?
     let picture: URL?
-    
-    static func testContacts() -> [SuggestedApiContact] {
-        var contacts = [SuggestedApiContact]()
-        
-        let phones = ["8885555512", "5555228243", "5556106679", "5557664823", "5555648583"]
-        
-        for index in 1...5 {
-            contacts.append(SuggestedApiContact(type: "USER",
-                                                identifier: "user_\(index)",
-                                                username: phones[index-1],
-                                                email: "email_\(index)@gmail.com",
-                                                name: "user_\(index)",
-                                                picture: nil))
-        }
-        return contacts
-    }
 }
 
 struct SharedFileInfo: Codable {
@@ -221,6 +205,12 @@ enum PrivateShareDuration: String, CaseIterable, Codable {
     }
 }
 
+enum PrivateShareSubjectType: String, Codable {
+    case user = "USER"
+    case group = "USER_GROUP"
+    case knownName = "KNOWN_NAME"
+}
+
 struct SharedContact: Codable {
     var subject: SuggestedApiContact?
     let permissions: SharedItemPermission?
@@ -270,4 +260,35 @@ enum PrivateSharePermission: String, Codable {
     case comment = "COMMENT"
     case writeAcl = "WRITE_ACL"
     case readAcl = "READ_ACL"
+}
+
+enum PrivateShareAccessListObjectType: String, Codable {
+    case file = "file"
+}
+
+struct PrivateShareAccessListObject: Codable {
+    let type: PrivateShareAccessListObjectType
+    let uuid: String
+    let name: String
+}
+
+enum PrivateShareAccessListType: String, Codable {
+    case allow = "ALLOW"
+    case deny = "DENY"
+}
+
+struct PrivateShareAccessListInfo: Codable {
+    let id: Int64
+    let type: PrivateShareAccessListType
+    let object: PrivateShareAccessListObject
+    let subject: SuggestedApiContact
+    let permissions: SharedItemPermission
+    let role: PrivateShareUserRole
+    let expirationDate: Date
+    let conditions: [String]? //unknown array type
+}
+
+struct PrivateSharePermissionList: Codable {
+    let permissions: SharedItemPermission?
+    let role: PrivateShareUserRole
 }
