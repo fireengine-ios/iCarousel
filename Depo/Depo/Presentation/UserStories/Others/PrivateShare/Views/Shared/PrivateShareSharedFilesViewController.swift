@@ -57,6 +57,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         collectionManager.setup()
         setupBars()
+        setupPlusButton()
         showSpinner()
     }
     
@@ -94,14 +95,30 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         bottomBarManager.setup()
     }
     
-    private func setDefaultTabBarState() {
+    private func setupPlusButton() {
         switch shareType {
-            case .byMe, .withMe:
-                needToShowTabBar = true
+            case .byMe:
+                floatingButtonsArray = []
                 
-            case .innerFolder(type: _, uuid: _, name: _):
-                needToShowTabBar = false
+            case .withMe:
+                floatingButtonsArray = []
+                
+            case .innerFolder(type: let type, uuid: _, name: _):
+                switch type {
+                    case .byMe:
+                        floatingButtonsArray = [.newFolder, .upload, .uploadFiles]
+                        
+                    case .withMe:
+                        floatingButtonsArray = []
+                        
+                    default:
+                        floatingButtonsArray = []
+                }
         }
+    }
+    
+    private func setDefaultTabBarState() {
+        needToShowTabBar = true
     }
     
     private func setupCollectionViewBar() {
