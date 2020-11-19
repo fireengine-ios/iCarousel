@@ -124,7 +124,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     func createDownloadUrl(uuids: [String], handler: @escaping ResponseHandler<URL>) -> URLSessionTask? {
         guard !uuids.isEmpty else {
             handler(.failed(ErrorResponse.string("UUIDs are empty")))
-            return
+            return nil
         }
         
         let parameters = uuids.asParameters()
