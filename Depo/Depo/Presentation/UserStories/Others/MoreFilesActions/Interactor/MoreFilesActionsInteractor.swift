@@ -963,6 +963,38 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                      fail: failAction(elementType: .deleteDeviceOriginal))
     }
     
+    func endSharing(item: BaseDataSourceItem?) {
+        guard let item = item as? WrapData else {
+            return
+        }
+        let successAction = { [weak self] in
+            self?.output?.operationFinished(type: .endSharing)
+            self?.successAction(elementType: .endSharing)()
+        }
+        
+        let failAction = { [weak self] (error: ErrorResponse) in
+            self?.output?.operationFailed(type: .endSharing, message: error.description)
+            self?.failAction(elementType: .endSharing)(error)
+        }
+        
+        
+        let popup = PopUpController.with(title: TextConstants.privateSharedEndSharingActionTitle,
+                                         message: TextConstants.privateSharedEndSharingActionConfirmation,
+                                         image: .question,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstAction: { vc in
+                                            vc.close()
+                                         },
+                                         secondAction: { [weak self] vc in
+                                            vc.close {
+                                                self?.fileService.endSharing(file: item, success: successAction, fail: failAction)
+                                            }
+                                         })
+        
+        router.presentViewController(controller: popup, animated: false)
+    }
+    
     func removeAlbums(items: [BaseDataSourceItem]) {
         let okHandler: PopUpButtonHandler = { [weak self] vc in
             self?.output?.operationStarted(type: .moveToTrash)

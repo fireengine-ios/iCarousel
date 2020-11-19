@@ -15,6 +15,8 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     func didChangeSelection(selectedItems: [WrapData])
     
     func didEndReload()
+    
+    func showActions(for item: WrapData)
 }
 
 final class PrivateShareSharedFilesCollectionManager: NSObject {
@@ -73,6 +75,10 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         reloadVisibleCells()
     }
     
+    func reloadAfterAction() {
+        reload()
+    }
+    
     func selectedItems() -> [WrapData] {
         return fileInfoManager.selectedItems.getArray()
     }
@@ -124,7 +130,9 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private func loadNextPage() {
         fileInfoManager.loadNext(completion: { [weak self] itemsLoaded in
 //            self?.append(indexes: itemsLoaded)
-            self?.reloadCollection()
+            if itemsLoaded != 0 {
+                self?.reloadCollection()
+            }
         })
     }
     
@@ -285,7 +293,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     
     private func openFolder(with folderUuid: String, name: String) {
         DispatchQueue.main.async {
-            let controller = self.router.sharedFolder(folderUuid: folderUuid, name: name)
+            let controller = self.router.sharedFolder(rootShareType: self.fileInfoManager.type, folderUuid: folderUuid, name: name)
             self.router.pushViewController(viewController: controller)
         }
     }
@@ -419,15 +427,21 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollec
     }
     
     func morebuttonGotPressed(sender: Any, itemModel: Item?) {
-        //TODO: another jira task
+        guard let item = itemModel else {
+            return
+        }
+        
+        delegate?.showActions(for: item)
     }
 }
 
 //MARK: - QuickSelectCollectionViewDelegate
 extension PrivateShareSharedFilesCollectionManager: QuickSelectCollectionViewDelegate {
     func didLongPress(at indexPath: IndexPath?) {
-        changeSelection(isActive: true)
-        reloadVisibleCells()
+        if !isSelecting {
+            changeSelection(isActive: true)
+            reloadVisibleCells()
+        }
     }
     
     func didEndLongPress(at indexPath: IndexPath?) {
