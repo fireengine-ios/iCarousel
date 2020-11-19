@@ -33,7 +33,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         return bar
     }()
     
-    private var shareType: PrivateShareType = .byMe
+    private(set) var shareType: PrivateShareType = .byMe
     
     private lazy var collectionManager: PrivateShareSharedFilesCollectionManager = {
         let apiService = PrivateShareApiServiceImpl()
@@ -167,7 +167,7 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         if !collectionView.isQuickSelecting {
             bottomBarManager.update(for: selectedItems)
             
-            if selectedItems.count == 0 {
+            if selectedItems.isEmpty {
                 navBarManager.threeDotsButton.isEnabled = false
                 bottomBarManager.hide()
             } else {

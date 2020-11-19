@@ -15,6 +15,13 @@ class SelectNameRouter: SelectNameRouterInput {
     }
     
     func moveToFolderPage(presenter: SelectNamePresenter, item: Item, isSubFolder: Bool) {
+        if let tabBarVC = router.defaultTopController as? TabBarViewController,
+           let controller = tabBarVC.activeNavigationController?.topViewController as? PrivateShareSharedFilesViewController {
+            let newController = router.sharedFolder(rootShareType: controller.shareType, folderUuid: item.uuid, name: item.name ?? "")
+            router.pushViewController(viewController: newController)
+            return
+        }
+        
         let folderVC = router.filesFromFolder(folder: item, type: .Grid, sortType: .None, status: .active, moduleOutput: presenter)
 
         if
@@ -23,9 +30,12 @@ class SelectNameRouter: SelectNameRouterInput {
             let homePage = navVC.topViewController as? HomePageViewController
         {
             homePage.isNeedShowSpotlight = false
-        } else {
-            assertionFailure("Сondition not match expectations, homePage's spotlight must be delayed")
         }
+//        else {
+//            assertionFailure("Сondition not match expectations, homePage's spotlight must be delayed")
+//        }
+        
+        
         
         if !isSubFolder {
             let allFilesVC = router.allFiles(moduleOutput: presenter,

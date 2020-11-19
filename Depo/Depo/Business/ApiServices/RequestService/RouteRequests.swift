@@ -266,8 +266,6 @@ struct RouteRequests {
     enum PrivateShare {
         static let suggestions = baseUrl +/ "invitees"
         static let share = baseUrl +/ "shares"
-        static let sharingInfo = baseShortUrlString + "api/v2/files/%@"
-        static let shareAcls = baseShortUrlString + "api/v2/files/%@/acls"
         
         enum Shared {
             private static let baseShares = share.absoluteString
@@ -373,7 +371,17 @@ struct RouteRequests {
         
         enum Version_2 {
             private static let baseV2Url = baseUrl +/ "v2/files"
-            static let filesFromFolder = baseV2Url.absoluteString + "?size=%d&page=%d&sortBy=%@&sortOrder=%@&parentFolderUuid=%@"
+            private static let baseV2UrlString = baseV2Url.absoluteString
+            private static let baseV2UrlBulk = baseUrl +/ "_bulk"
+            
+            static let filesFromFolder = baseV2UrlString + "?size=%d&page=%d&sortBy=%@&sortOrder=%@&parentFolderUuid=%@"
+            static let sharingInfo = baseV2UrlString + "/%@"
+            static let shareAcls = baseV2UrlString + "/%@/acls"
+            
+            static let createDownloadUrl = baseV2UrlBulk +/ "create-download-url"
+            static let move = baseV2UrlBulk +/ "move"
+            static let delete = baseV2UrlBulk +/ "delete"
+            static let trash = baseV2UrlBulk +/ "trash"
         }
     }
 
