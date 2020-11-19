@@ -34,8 +34,8 @@ struct SuggestedApiContact: Codable {
 }
 
 struct SharedFileInfo: Codable {
-    let createdDateValue: Double?
-    let lastModifiedDateValue: Double?
+    let createdDate: Date?
+    let lastModifiedDate: Date?
     let id: Int64
     let hash: String?
     let name: String?
@@ -54,29 +54,9 @@ struct SharedFileInfo: Codable {
     let sharedBy: [SuggestedApiContact]?
     var members: [SharedContact]?
     
-    var creationDate: Date {
-        guard let timeInterval = createdDateValue else {
-            return Date()
-        }
-        return Date.from(millisecondsSince1970: timeInterval)
-    }
-    
-    var lastModifiedDate: Date {
-        guard let timeInterval = lastModifiedDateValue else {
-            return Date()
-        }
-        return Date.from(millisecondsSince1970: timeInterval)
-    }
     
     var fileType: FileType {
         return FileType(type: content_type, fileName: name)
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case createdDateValue = "createdDate"
-        case lastModifiedDateValue = "lastModifiedDate"
-        
-        case id, hash, name, uuid, bytes, folder, childCount, status, uploaderDeviceType, ugglaId, content_type, album, permissions, sharedBy, members
     }
 }
 

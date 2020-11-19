@@ -58,7 +58,7 @@ extension Alamofire.DataRequest {
             switch response.result {
             case .success(let data):
                 do {
-                    let object = try JSONDecoder().decode(T.self, from: data)
+                    let object = try JSONDecoder.withMillisecondsDate().decode(T.self, from: data)
                     handler(.success(object))
                 } catch let error {
                     handler(.failed(error))
@@ -77,7 +77,7 @@ extension Alamofire.DataRequest {
             switch response.result {
             case .success(let data):
                 do {
-                    let objects = try JSONDecoder().decode([T].self, from: data)
+                    let objects = try JSONDecoder.withMillisecondsDate().decode([T].self, from: data)
                     handler(.success(objects))
                 } catch let error {
                     handler(.failed(error))
@@ -88,5 +88,14 @@ extension Alamofire.DataRequest {
                 handler(ResponseResult.failed(backendError ?? error))
             }
         }
+    }
+}
+
+
+extension JSONDecoder {
+    static func withMillisecondsDate() -> JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .millisecondsSince1970
+        return decoder
     }
 }
