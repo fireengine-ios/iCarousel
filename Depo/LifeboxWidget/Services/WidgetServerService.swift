@@ -49,7 +49,9 @@ final class WidgetServerService {
     
     private func checkFirstLaunch() {
         //widget can send request before main app clear tokens
+        DebugLogService.debugLog("WIDGET: checkFirstLaunch")
         if WidgetService.shared.isAppFirstLaunch == true {
+            DebugLogService.debugLog("WIDGET: checkFirstLaunch isAppFirstLaunch true, clearing tokens")
             WidgetService.shared.isAppFirstLaunch = false
             tokenStorage.clearTokens()
         }
@@ -57,7 +59,7 @@ final class WidgetServerService {
 
     func clearToken() {
         DebugLogService.debugLog("WIDGET: WidgetProvider Clear tokens")
-        tokenStorage.clearTokens()
+//        tokenStorage.clearTokens()
     }
     
     func getQuotaInfo(handler: @escaping ResponseHandler<QuotaInfoResponse>) {

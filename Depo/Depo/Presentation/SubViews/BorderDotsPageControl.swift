@@ -23,7 +23,11 @@ final class BorderDotsPageControl: UIPageControl {
     }
 
     func updateBorderColor() {
-        subviews.enumerated().forEach { index, subview in
+        guard Device.operationSystemVersionLessThen(14) else {
+            return
+        }
+        
+        subviews.forEach { subview in
             subview.layer.borderColor = borderColor.cgColor
             subview.layer.borderWidth = 1
         }

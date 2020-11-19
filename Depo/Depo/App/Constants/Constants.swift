@@ -264,6 +264,7 @@ struct TextConstants {
     static let takePhoto = NSLocalizedString("Take Photo", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let upload = NSLocalizedString("Upload", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let uploadFiles = NSLocalizedString("Upload Files", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let uploadMusic = NSLocalizedString("Upload Music", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createStory = NSLocalizedString("Create a Story", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let newFolder = NSLocalizedString("New Folder", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let createAlbum = NSLocalizedString("Create album", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
@@ -2153,4 +2154,16 @@ struct TextConstants {
     static let privateSharedWithMeEmptyText = NSLocalizedString("private_share_shared_with_me_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharedByMeEmptyText = NSLocalizedString("private_share_shared_by_me_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharedInnerFolderEmptyText = NSLocalizedString("private_share_inner_folder_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedEndSharingActionSuccess = NSLocalizedString("private_share_end_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedEndSharingActionConfirmation = NSLocalizedString("private_share_end_sharing_confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedEndSharingActionTitle = NSLocalizedString("private_share_end_sharing_action_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let privateShareWhoHasAccessTitle = NSLocalizedString("private_share_who_has_access_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareWhoHasAccessOwner = NSLocalizedString("private_share_who_has_access_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareWhoHasAccessEditor = NSLocalizedString("private_share_who_has_access_role_2", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareWhoHasAccessViewer = NSLocalizedString("private_share_who_has_access_role_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareWhoHasAccessEndShare = NSLocalizedString("private_share_who_has_access_end_share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareWhoHasAccessPopupMessage = NSLocalizedString("private_share_end_sharing_confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareEndShareSuccess = NSLocalizedString("private_share_end_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+
 }

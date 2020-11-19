@@ -23,7 +23,7 @@ class PhotoVideoDetailModuleConfigurator {
                       presenter: presenter,
                       moduleOutput: moduleOutput,
                       bottomBarConfig: bottomBarConfig,
-                      alertSheetExcludeTypes: [.moveToTrash],
+                      alertSheetExcludeTypes: [.moveToTrash, .downloadDocument],
                       photoDetailMoreMenu: ActionSheetPredetermendConfigs.photoVideoDetailActions,
                       selecetedItem: selecetedItem,
                       allItems: allItems, status: status, viewType: .details,
@@ -94,7 +94,7 @@ class PhotoVideoDetailModuleConfigurator {
                            viewType: DetailViewType,
                            canLoadMoreItems: Bool) {
         let router = PhotoVideoDetailRouter()
-
+        router.output = presenter
         presenter.view = viewController
         presenter.router = router
         presenter.alertSheetExcludeTypes = alertSheetExcludeTypes

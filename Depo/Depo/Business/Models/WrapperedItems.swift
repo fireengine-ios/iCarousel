@@ -1164,7 +1164,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         super.init(uuid: privateShareFileInfo.uuid,
                    name: privateShareFileInfo.name,
-                   creationDate: privateShareFileInfo.creationDate,
+                   creationDate: privateShareFileInfo.createdDate,
                    lastModifiDate: privateShareFileInfo.lastModifiedDate,
                    fileType: privateShareFileInfo.fileType,
                    syncStatus: .synced,

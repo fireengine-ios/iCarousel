@@ -10,8 +10,10 @@ import Foundation
 
 protocol FileInfoRouterInput {
     func openPrivateShare(for item: Item)
+    func openPrivateShareContacts(with shareInfo: SharedFileInfo)
 }
 
 protocol FileInfoRouterOutput: class {
     func updateSharingInfo()
+    func deleteSharingInfo()
 }

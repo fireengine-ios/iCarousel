@@ -15,6 +15,8 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     func didChangeSelection(selectedItems: [WrapData])
     
     func didEndReload()
+    
+    func showActions(for item: WrapData)
 }
 
 final class PrivateShareSharedFilesCollectionManager: NSObject {
@@ -33,7 +35,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private var fileInfoManager: PrivateShareFileInfoManager!
     
     private(set) var currentCollectionViewType: MoreActionsConfig.ViewType = .List
-    private var isSelecting = false
+    private(set) var isSelecting = false
     
     
     //MARK: -
@@ -71,6 +73,10 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     func endSelection() {
         changeSelection(isActive: false)
         reloadVisibleCells()
+    }
+    
+    func reloadAfterAction() {
+        reload()
     }
     
     func selectedItems() -> [WrapData] {
@@ -124,7 +130,9 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private func loadNextPage() {
         fileInfoManager.loadNext(completion: { [weak self] itemsLoaded in
 //            self?.append(indexes: itemsLoaded)
-            self?.reloadCollection()
+            if itemsLoaded != 0 {
+                self?.reloadCollection()
+            }
         })
     }
     
@@ -144,7 +152,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
 //    }
     
     private func updateLayout() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             self.collectionView?.reloadData()
             let firstVisibleIndexPath = self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
                 return first < second
@@ -219,10 +227,10 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         }
         
         let isSelectedCell = isSelected(item: item)
+        cell.isSelected = isSelectedCell
         cell.updating()
         cell.setSelection(isSelectionActive: isSelecting, isSelected: isSelectedCell)
         cell.configureWithWrapper(wrappedObj: item)
-        cell.isSelected = isSelectedCell
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -284,14 +292,14 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     }
     
     private func openFolder(with folderUuid: String, name: String) {
-        DispatchQueue.toMain {
-            let controller = self.router.sharedFolder(folderUuid: folderUuid, name: name)
+        DispatchQueue.main.async {
+            let controller = self.router.sharedFolder(rootShareType: self.fileInfoManager.type, folderUuid: folderUuid, name: name)
             self.router.pushViewController(viewController: controller)
         }
     }
     
     private func openPreview(for item: WrapData, with items: [WrapData]) {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             let detailModule = self.router.filesDetailModule(fileObject: item,
                                                         items: items,
                                                         status: .active,
@@ -419,15 +427,21 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollec
     }
     
     func morebuttonGotPressed(sender: Any, itemModel: Item?) {
-        //TODO: another jira task
+        guard let item = itemModel else {
+            return
+        }
+        
+        delegate?.showActions(for: item)
     }
 }
 
 //MARK: - QuickSelectCollectionViewDelegate
 extension PrivateShareSharedFilesCollectionManager: QuickSelectCollectionViewDelegate {
     func didLongPress(at indexPath: IndexPath?) {
-        changeSelection(isActive: true)
-        reloadVisibleCells()
+        if !isSelecting {
+            changeSelection(isActive: true)
+            reloadVisibleCells()
+        }
     }
     
     func didEndLongPress(at indexPath: IndexPath?) {

@@ -216,6 +216,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     filteredActionTypes.remove(at: addToFavoritesIndex)
                 }
                 
+                if !remoteItems.contains(where: { !($0.fileType.isDocumentPageItem || $0.fileType == .audio) }) {
+                    if !filteredActionTypes.contains(.downloadDocument) {
+                        filteredActionTypes.append(.downloadDocument)
+                    }
+                }
+                
                 if remoteItems.contains(where: { $0.favorites }) {
                     if !filteredActionTypes.contains(.removeFromFavorites) {
                         filteredActionTypes.append(.removeFromFavorites)
@@ -545,6 +551,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                 case .instaPick:
                     action = UIAlertAction(title: TextConstants.newInstaPick, style: .default, handler: { _ in
                         self.basePassingPresenter?.openInstaPick()
+                    })
+                case .endSharing:
+                    action = UIAlertAction(title: TextConstants.privateSharedEndSharingActionTitle, style: .default, handler: { _ in
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .endSharing))
+                        //currently only for one file is supported
+                        self.interactor.endSharing(item: currentItems.first)
                     })
                 }
                 return action

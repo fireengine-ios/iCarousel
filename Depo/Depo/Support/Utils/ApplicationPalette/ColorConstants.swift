@@ -201,8 +201,12 @@ extension UIColor {
         return UIColor(red: 217 / 255.0, green: 58 / 255.0, blue: 71 / 255.0, alpha: 1.0)
     }
     
-    class var greyishBrownThree: UIColor {
+    class var lrGreyishBrownThree: UIColor {
         return UIColor(red: 74 / 255.0, green: 74 / 255.0, blue: 74 / 255.0, alpha: 1.0)
+    }
+
+    class var lrGreyish: UIColor {
+        return UIColor(red: 178 / 255.0, green: 178 / 255.0, blue: 178 / 255.0, alpha: 1.0)
     }
 }
 

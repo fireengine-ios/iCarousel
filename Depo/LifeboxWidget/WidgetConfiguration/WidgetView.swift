@@ -114,7 +114,13 @@ struct WidgetMediumSizeView: View {
 //MARK: - Rule 0 - WidgetLoginRequiredView
 struct WidgetLoginRequiredSmallView: View {
     var body: some View {
-        WidgetEntrySmallView(imageName: "sign_in",
+        #if LIFEDRIVE
+            let imageName = "sign_in_billo"
+        #else
+            let imageName = "sign_in"
+        #endif
+        
+        WidgetEntrySmallView(imageName: imageName,
                              title: "",
                              description: TextConstants.widgetRule0SmallDetail,
                              titleButton: TextConstants.widgetRule0SmallButton,
@@ -124,7 +130,13 @@ struct WidgetLoginRequiredSmallView: View {
 
 struct WidgetLoginRequiredMediumView: View {
     var body: some View {
-        WidgetEntryMediumView(imageName: "sign_in",
+        #if LIFEDRIVE
+            let imageName = "sign_in_billo"
+        #else
+            let imageName = "sign_in"
+        #endif
+        
+        WidgetEntryMediumView(imageName: imageName,
                               title: "",
                               description: TextConstants.widgetRule0MediumDetail,
                               titleButton: TextConstants.widgetRule0MediumButton,

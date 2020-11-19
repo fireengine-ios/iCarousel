@@ -21,10 +21,14 @@ protocol PrivateShareApiService {
     @discardableResult
     func getFiles(folderUUID: String, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseHandler<FileSystem>) -> URLSessionTask?
     
+    @discardableResult
     func privateShare(object: PrivateShareObject, handler: @escaping ResponseVoid) -> URLSessionTask?
     
     @discardableResult
     func getSharingInfo(uuid: String, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask?
+    
+    @discardableResult
+    func endShare(uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask?
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
@@ -75,6 +79,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .task
     }
     
+    @discardableResult
     func privateShare(object: PrivateShareObject, handler: @escaping ResponseVoid) -> URLSessionTask? {
         return SessionManager
             .customDefault
@@ -96,6 +101,21 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .request(url)
             .customValidate()
             .responseObject(handler)
+            .task
+    }
+    
+    @discardableResult
+    func endShare(uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
+        guard let url = URL(string: String(format: RouteRequests.PrivateShare.shareAcls, uuid)) else {
+            handler(.failed(ErrorResponse.string("Incorrect URL")))
+            return nil
+        }
+        
+        return SessionManager
+            .customDefault
+            .request(url, method: .delete)
+            .customValidate()
+            .responseVoid(handler)
             .task
     }
 }

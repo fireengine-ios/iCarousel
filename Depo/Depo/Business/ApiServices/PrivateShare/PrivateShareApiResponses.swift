@@ -34,8 +34,8 @@ struct SuggestedApiContact: Codable {
 }
 
 struct SharedFileInfo: Codable {
-    let createdDateValue: Double?
-    let lastModifiedDateValue: Double?
+    let createdDate: Date?
+    let lastModifiedDate: Date?
     let id: Int64
     let hash: String?
     let name: String?
@@ -46,7 +46,7 @@ struct SharedFileInfo: Codable {
     let status: String? // enum
     let uploaderDeviceType: String? //enum
     let ugglaId: String?
-    let contentType: String?
+    let content_type: String?
     //        "metadata": {},
     let album: [FileAlbum]?
     //        "location": {},
@@ -54,29 +54,9 @@ struct SharedFileInfo: Codable {
     let sharedBy: [SuggestedApiContact]?
     var members: [SharedContact]?
     
-    var creationDate: Date {
-        guard let timeInterval = createdDateValue else {
-            return Date()
-        }
-        return Date.from(millisecondsSince1970: timeInterval)
-    }
-    
-    var lastModifiedDate: Date {
-        guard let timeInterval = lastModifiedDateValue else {
-            return Date()
-        }
-        return Date.from(millisecondsSince1970: timeInterval)
-    }
     
     var fileType: FileType {
-        return FileType(type: contentType, fileName: name)
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case createdDateValue = "createdDate"
-        case lastModifiedDateValue = "lastModifiedDate"
-        
-        case id, hash, name, uuid, bytes, folder, childCount, status, uploaderDeviceType, ugglaId, contentType, album, permissions, sharedBy, members
+        return FileType(type: content_type, fileName: name)
     }
 }
 
@@ -91,7 +71,7 @@ struct FileSystem: Codable {
 
 
 struct SharedItemPermission: Codable {
-    let granted: [String]?
+    let granted: [PrivateSharePermission]?
     let bitmask: Int64?
 }
 
@@ -166,6 +146,28 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareInfoMenuOwner
         }
     }
+    
+    var whoHasAccessTitle: String {
+        switch self {
+        case .editor:
+            return TextConstants.privateShareWhoHasAccessEditor
+        case .viewer:
+            return TextConstants.privateShareWhoHasAccessViewer
+        case .owner:
+            return TextConstants.privateShareWhoHasAccessOwner
+        }
+    }
+    
+    var order: Int {
+        switch self {
+        case .owner:
+            return 0
+        case .editor:
+            return 1
+        case .viewer:
+            return 2
+        }
+    }
 }
 
 enum PrivateShareItemType: String, Encodable {
@@ -199,7 +201,7 @@ enum PrivateShareDuration: String, CaseIterable, Codable {
     }
 }
 
-struct SharedContact: Codable {
+struct SharedContact: Codable, Equatable {
     var subject: SuggestedApiContact?
     let permissions: SharedItemPermission?
     let role: PrivateShareUserRole
@@ -214,6 +216,32 @@ struct SharedContact: Codable {
             return characters.map { String($0) }.joined().uppercased()
         } else {
             return ""
+        }
+    }
+    
+    static func == (lhs: SharedContact, rhs: SharedContact) -> Bool {
+        if let lusername = lhs.subject?.username, let rusername = rhs.subject?.username {
+            return lusername == rusername
+        }
+        return lhs.subject?.email == rhs.subject?.email
+    }
+    
+    func color(for index: Int) -> UIColor? {
+        switch index.remainderReportingOverflow(dividingBy: 6).partialValue {
+        case 0:
+            return .lrTealishTwo
+        case 1:
+            return ColorConstants.marineFour
+        case 2:
+            return .lrDarkSkyBlue
+        case 3:
+            return .lrOrange
+        case 4:
+            return .lrButterScotch
+        case 5:
+            return .lrFadedRed
+        default:
+            return nil
         }
     }
 }

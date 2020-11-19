@@ -53,6 +53,12 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
 //            if fileTypes.contains(.video), let infoIndex = actionTypes.index(of: .info) {
 //                actionTypes.remove(at: infoIndex)
 //            }
+            if fileTypes.contains(where: { $0.isDocumentPageItem || $0 == .audio }) {
+                if let downloadIndex = actionTypes.index(of: .download) {
+                    actionTypes.remove(at: downloadIndex)
+                    actionTypes.insert(.downloadDocument, at: downloadIndex)
+                }
+            }
             barConfig = EditingBarConfig(elementsConfig: actionTypes,
                                          style: barConfig.style,
                                          tintColor: barConfig.tintColor)
@@ -426,14 +432,23 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
             return
         }
         let currentItem = interactor.allItems[index]
-        router.openPrivateShare(for: currentItem) { [weak self] success in
-            if success {
-                self?.view.updateBottomDetailView()
-            }
-        }
+        router.openPrivateShare(for: currentItem)
     }
     
-    func showWhoHasAccess() {
-        //TODO: COF-535 - open Who has access page
+    func showWhoHasAccess(shareInfo: SharedFileInfo) {
+        router.openPrivateShareContacts(with: shareInfo)
+    }
+}
+
+//MARK: - PhotoVideoDetailRouterOutput
+
+extension PhotoVideoDetailPresenter: PhotoVideoDetailRouterOutput {
+    
+    func updateShareInfo() {
+        view.updateBottomDetailView()
+    }
+    
+    func deleteShareInfo() {
+        view.deleteShareInfo()
     }
 }

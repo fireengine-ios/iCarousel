@@ -31,7 +31,7 @@ final class PrivateShareSharedFilesBottomBarManager {
     }
     
     func updateLayout() {
-        DispatchQueue.toMain {
+        DispatchQueue.main.async {
             self.editingTabBar?.view.layoutIfNeeded()
         }
     }

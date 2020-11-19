@@ -176,9 +176,8 @@ final class TwoFactorChallengeInteractor: PhoneVerificationInteractor {
                 self.output.verificationSucces()
             }
             
-            if #available(iOS 14.0, *) {
-                WidgetCenter.shared.reloadAllTimelines()
-            }
+            debugLog("TWO FACTOR: verification verified")
+
             AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.Login(status: .success, loginType: loginNetmeraType))
             self.analyticsService.trackLoginEvent(loginType: loginType, error: nil)
             self.analyticsService.trackCustomGAEvent(eventCategory: .twoFactorAuthentication,
