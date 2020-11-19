@@ -729,9 +729,15 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
     }
     
     func getFolderUUID() -> String? {
-        if let viewConroller = currentViewController as? BaseFilesGreedViewController {
-            return viewConroller.getFolder()?.uuid
+        if let controller = currentViewController as? BaseFilesGreedViewController {
+            return controller.getFolder()?.uuid
         }
+        
+        if let controller = currentViewController as? PrivateShareSharedFilesViewController,
+           case let PrivateShareType.innerFolder(type: _, uuid: folderUuid, name: _) = controller.shareType {
+            return folderUuid
+        }
+        
         return nil
     }
     
