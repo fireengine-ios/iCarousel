@@ -221,7 +221,7 @@ enum PrivateShareDuration: String, CaseIterable, Codable {
     }
 }
 
-struct SharedContact: Codable {
+struct SharedContact: Codable, Equatable {
     var subject: SuggestedApiContact?
     let permissions: SharedItemPermission?
     let role: PrivateShareUserRole
@@ -237,6 +237,13 @@ struct SharedContact: Codable {
         } else {
             return ""
         }
+    }
+    
+    static func == (lhs: SharedContact, rhs: SharedContact) -> Bool {
+        if let lusername = lhs.subject?.username, let rusername = rhs.subject?.username {
+            return lusername == rusername
+        }
+        return lhs.subject?.email == rhs.subject?.email
     }
     
     func color(for index: Int) -> UIColor? {

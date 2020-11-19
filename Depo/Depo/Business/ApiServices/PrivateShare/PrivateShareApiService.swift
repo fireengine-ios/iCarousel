@@ -21,6 +21,7 @@ protocol PrivateShareApiService {
     @discardableResult
     func getFiles(folderUUID: String, size: Int, page: Int, sortBy: SortType, sortOrder: SortOrder, handler: @escaping ResponseHandler<FileSystem>) -> URLSessionTask?
     
+    @discardableResult
     func privateShare(object: PrivateShareObject, handler: @escaping ResponseVoid) -> URLSessionTask?
     
     @discardableResult
@@ -78,6 +79,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .task
     }
     
+    @discardableResult
     func privateShare(object: PrivateShareObject, handler: @escaping ResponseVoid) -> URLSessionTask? {
         return SessionManager
             .customDefault
