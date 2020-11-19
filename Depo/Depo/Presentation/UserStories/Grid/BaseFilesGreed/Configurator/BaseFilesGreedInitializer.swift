@@ -80,7 +80,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
     class func initializeAllFilesViewController(with nibName: String, moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
-        viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles, .newFolder])
+        viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder])
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
         viewController.scrollablePopUpView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
@@ -145,7 +145,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
         if status == .active {
-            viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles, .newFolder])
+            viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder])
         }
         viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
         viewController.scrollablePopUpView.isEnable = true
