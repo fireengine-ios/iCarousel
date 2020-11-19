@@ -149,6 +149,8 @@ final class PushNotificationService {
         case .trashBin:
             openTabBarItem(index: .documentsScreenIndex, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
         case .hiddenBin: openHiddenBin()
+        case .sharedWithMe: openSharedWithMe()
+        case .sharedByMe: openShareByMe()
         }
         
         
@@ -466,5 +468,23 @@ final class PushNotificationService {
         }
         
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .openWithWidget, eventLabel: .success)
+    }
+    
+    private func openSharedWithMe() {
+        openSharedController(type: .withMe)
+    }
+    
+    private func openShareByMe() {
+        openSharedController(type: .byMe)
+    }
+    
+    private func openSharedController(type: PrivateShareType) {
+        guard let controller = router.sharedFiles as? SegmentedController,
+              let index = controller.viewControllers.firstIndex(where: { ($0 as? PrivateShareSharedFilesViewController)?.shareType == type }) else {
+            return
+        }
+        controller.loadViewIfNeeded()
+        controller.switchSegment(to: index)
+        pushTo(controller)
     }
 }

@@ -69,6 +69,9 @@ enum PushNotificationAction: String {
     case widgetFIRDisabled = "widget_fir_disabled"
     case widgetFIRStandart = "widget_fir_standart"
     
+    case sharedWithMe = "shared_with_me"
+    case sharedByMe = "shared_by_me"
+    
     var fromWidget: Bool {
         isContained(in: [.widgetLogout,
                          .widgetQuota,
