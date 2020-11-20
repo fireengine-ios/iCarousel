@@ -74,7 +74,9 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     
     override var keyboardHeight: CGFloat {
         didSet {
-            searchSuggestionsContainerBottomOffset.constant = max(0, keyboardHeight - bottomView.frame.height)
+            let offset = max(0, keyboardHeight - bottomView.frame.height)
+            searchSuggestionsContainerBottomOffset.constant = offset
+            scrollView.contentInset.bottom = offset
         }
     }
     

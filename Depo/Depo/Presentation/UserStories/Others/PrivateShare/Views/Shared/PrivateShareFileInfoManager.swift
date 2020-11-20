@@ -9,7 +9,7 @@
 import Foundation
 
 
-indirect enum PrivateShareType {
+indirect enum PrivateShareType: Equatable {
     case byMe
     case withMe
     case innerFolder(type: PrivateShareType, uuid: String, name: String)

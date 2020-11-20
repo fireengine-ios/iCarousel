@@ -44,6 +44,10 @@ struct SharedFileInfo: Codable {
     }
 }
 
+struct UrlToDownload: Codable {
+    let url: URL?
+}
+
 struct FileAlbum: Codable {
     
 }
