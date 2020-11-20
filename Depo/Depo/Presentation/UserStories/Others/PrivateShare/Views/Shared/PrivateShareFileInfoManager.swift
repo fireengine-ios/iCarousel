@@ -74,7 +74,7 @@ indirect enum PrivateShareType: Equatable {
     }
     
     private func veryRootType(for type: PrivateShareType) -> PrivateShareType {
-        switch self {
+        switch type {
             case .byMe, .withMe:
                 return self
                 
