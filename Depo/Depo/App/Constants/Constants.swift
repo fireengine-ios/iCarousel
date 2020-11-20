@@ -2151,12 +2151,18 @@ struct TextConstants {
     static let privateShareInfoMenuViewer = NSLocalizedString("private_share_info_role_3", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharePhoneValidationFailPopUpText = NSLocalizedString("private_share_msisdn_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareEmailValidationFailPopUpText = NSLocalizedString("private_share_email_format", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareNonTurkishMsisdnPopUpText = NSLocalizedString("private_share_non_turkish_msisdn_warning", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharedWithMeEmptyText = NSLocalizedString("private_share_shared_with_me_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharedByMeEmptyText = NSLocalizedString("private_share_shared_by_me_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharedInnerFolderEmptyText = NSLocalizedString("private_share_inner_folder_empty_page", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
     static let privateSharedEndSharingActionSuccess = NSLocalizedString("private_share_end_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharedEndSharingActionConfirmation = NSLocalizedString("private_share_end_sharing_confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharedEndSharingActionTitle = NSLocalizedString("private_share_end_sharing_action_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
+    static let privateSharedLeaveSharingActionSuccess = NSLocalizedString("private_share_leave_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedLeaveSharingActionConfirmation = NSLocalizedString("private_leave_sharing_confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharedLeaveSharingActionTitle = NSLocalizedString("private_share_leave_sharing_action_title", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     
     static let privateShareWhoHasAccessTitle = NSLocalizedString("private_share_who_has_access_page_name", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareWhoHasAccessOwner = NSLocalizedString("private_share_who_has_access_role_1", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")

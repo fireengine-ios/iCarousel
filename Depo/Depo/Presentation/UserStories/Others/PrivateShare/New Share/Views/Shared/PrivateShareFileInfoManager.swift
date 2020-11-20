@@ -14,14 +14,72 @@ indirect enum PrivateShareType: Equatable {
     case withMe
     case innerFolder(type: PrivateShareType, uuid: String, name: String)
     
+    var rootType: PrivateShareType {
+        return veryRootType(for: self)
+    }
+    
     var emptyViewType: EmptyView.ViewType {
         switch self {
             case .byMe:
                 return .sharedBy
             case .withMe:
                 return .sharedWith
-            case .innerFolder(type: _, uuid: _, name: _):
+            case .innerFolder:
                 return .sharedInnerFolder
+        }
+    }
+    
+    //isSelectionAllowed is predefined by the veryRootType only
+    var isSelectionAllowed: Bool {
+        switch self {
+            case .byMe:
+                return true
+                
+            case .withMe:
+                return false
+                
+            case .innerFolder:
+                return veryRootType(for: self).isSelectionAllowed
+        }
+    }
+    
+    //floatingButtonTypes is predefined by the veryRootType + type itself
+    var floatingButtonTypes: [FloatingButtonsType] {
+        let typeAndRoot = (self, veryRootType(for: self))
+        
+        switch typeAndRoot {
+            case (.byMe, _):
+                return []
+                
+            case (.withMe, _):
+                return []
+                
+            case (.innerFolder, let veryRootType):
+                return floatingButtonTypes(innerFolderVeryRootType: veryRootType)
+        }
+    }
+    
+    private func floatingButtonTypes(innerFolderVeryRootType: PrivateShareType) -> [FloatingButtonsType] {
+        switch innerFolderVeryRootType {
+            case .byMe:
+                return [.newFolder, .upload, .uploadFiles]
+                
+            case .withMe:
+                return []
+                
+            case .innerFolder:
+                assertionFailure("should not be the case, innerFolderVeryRootType must not be the innerFolder")
+                return []
+        }
+    }
+    
+    private func veryRootType(for type: PrivateShareType) -> PrivateShareType {
+        switch type {
+            case .byMe, .withMe:
+                return type
+                
+            case .innerFolder(type: let rootType, uuid: _, name: _):
+                return veryRootType(for: rootType)
         }
     }
 }
@@ -151,7 +209,10 @@ final class PrivateShareFileInfoManager {
                 privateShareAPIService.getSharedWithMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
                 
             case .innerFolder(type: _, let folderUuid, name: _):
-                privateShareAPIService.getFiles(folderUUID: folderUuid, size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { response in
+                guard let projectId = SingletonStorage.shared.accountInfo?.projectID else {
+                    return
+                }
+                privateShareAPIService.getFiles(projectId: projectId, folderUUID: folderUuid, size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { response in
                     switch response {
                         case .success(let fileSystem):
                             completion(.success(fileSystem.fileList))

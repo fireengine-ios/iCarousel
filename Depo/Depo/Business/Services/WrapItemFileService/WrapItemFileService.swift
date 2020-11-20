@@ -116,7 +116,29 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func endSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
-        privateShareApiService.endShare(uuid: file.uuid) { response in
+        guard let projectId = file.projectId else {
+            fail?(ErrorResponse.string("don't have projectId"))
+            return
+        }
+        
+        privateShareApiService.endShare(projectId: projectId, uuid: file.uuid) { response in
+            switch response {
+                case .success(()):
+                    success?()
+                    
+                case .failed(let error):
+                    fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func leaveSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
+        guard let projectId = file.projectId, let subjectId = SingletonStorage.shared.accountInfo?.projectID else {
+            fail?(ErrorResponse.string("don't have projectId or subjectId"))
+            return
+        }
+        
+        privateShareApiService.leaveShare(projectId: projectId, uuid: file.uuid, subjectId: subjectId) { response in
             switch response {
                 case .success(()):
                     success?()
@@ -251,8 +273,12 @@ class WrapItemFileService: WrapItemFileOperations {
                 remoteFileService.download(items: downloadItems, success: success, fail: fail)
                 
             case 1:
-                let firstItem = itemsWithoutUrl[0]
-                privateShareApiService.createDownloadUrl(uuids: [firstItem.uuid]) { [weak self] response in
+                guard let firstItem = itemsWithoutUrl.first, let projectId = firstItem.projectId else {
+                    remoteFileService.download(items: downloadItems, success: success, fail: fail)
+                    return
+                }
+                
+                privateShareApiService.createDownloadUrl(projectId: projectId, uuid: firstItem.uuid) { [weak self] response in
                     if case let ResponseResult.success(urlToDownload) = response {
                         firstItem.tmpDownloadUrl = urlToDownload.url
                     }

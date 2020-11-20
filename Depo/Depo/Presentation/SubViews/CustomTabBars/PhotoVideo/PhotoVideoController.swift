@@ -51,7 +51,7 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     private lazy var bottomBarManager = PhotoVideoBottomBarManager(delegate: self)
     private lazy var dataSource = PhotoVideoDataSource(collectionView: self.collectionView, delegate: self)
     private lazy var analyticsManager: AnalyticsService = factory.resolve()
-    private lazy var scrollDirectionManager = PhotoVideoScrollDirectionManager()
+    private lazy var scrollDirectionManager = ScrollDirectionManager()
     private lazy var instaPickRoutingService = InstaPickRoutingService()
 
     private lazy var assetsFileCacheManager = AssetFileCacheManager()

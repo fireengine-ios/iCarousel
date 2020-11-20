@@ -245,8 +245,13 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     }
 
     @IBAction private func onShareTapped(_ sender: Any) {
+        guard let projectId = SingletonStorage.shared.accountInfo?.projectID else {
+            return
+        }
+        
         remoteSuggestions = []
-        let shareObject = PrivateShareObject(items: items.compactMap { $0.uuid },
+        let sharedItems = items.compactMap { PrivateShareObjectItem(projectId: projectId, uuid: $0.uuid) }
+        let shareObject = PrivateShareObject(items: sharedItems,
                                              invitationMessage: messageView.message,
                                              invitees: shareWithView.contacts,
                                              type: .file,
@@ -308,11 +313,6 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     
     func addShareContact(_ contact: PrivateShareContact) {
         guard isValidContact(text: contact.username) else {
-            if contact.username.contains("@") {
-                UIApplication.showErrorAlert(message: TextConstants.privateShareEmailValidationFailPopUpText)
-            } else {
-                UIApplication.showErrorAlert(message: TextConstants.privateSharePhoneValidationFailPopUpText)
-            }
             return
         }
         
@@ -325,12 +325,35 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
         updateShareButtonIfNeeded()
     }
     
-     private func isValidContact(text: String) -> Bool {
-         if Validator.isValid(email: text) || Validator.isValid(contactsPhone: text) {
-             return true
-         }
-         return false
-     }
+    private func isValidContact(text: String) -> Bool {
+        if text.contains("@") {
+            if Validator.isValid(email: text) {
+                return true
+            } else {
+                UIApplication.showErrorAlert(message: TextConstants.privateShareEmailValidationFailPopUpText)
+                return false
+            }
+        }
+        
+        if !Validator.isValid(contactsPhone: text) {
+            UIApplication.showErrorAlert(message: TextConstants.privateSharePhoneValidationFailPopUpText)
+            return false
+        }
+        
+        if !text.contains("+") {
+            let digits = text.digits
+            if digits.count == 10, digits.first == "5" {
+                return true
+            } else if digits.count == 11, digits.prefix(2) == "05" {
+                return true
+            } else {
+                UIApplication.showErrorAlert(message: TextConstants.privateShareNonTurkishMsisdnPopUpText)
+                return false
+            }
+        }
+        
+        return true
+    }
 
 }
 
