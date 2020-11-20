@@ -273,8 +273,12 @@ class WrapItemFileService: WrapItemFileOperations {
                 remoteFileService.download(items: downloadItems, success: success, fail: fail)
                 
             case 1:
-                let firstItem = itemsWithoutUrl[0]
-                privateShareApiService.createDownloadUrl(uuids: [firstItem.uuid]) { [weak self] response in
+                guard let firstItem = itemsWithoutUrl.first, let projectId = firstItem.projectId else {
+                    remoteFileService.download(items: downloadItems, success: success, fail: fail)
+                    return
+                }
+                
+                privateShareApiService.createDownloadUrl(projectId: projectId, uuid: firstItem.uuid) { [weak self] response in
                     if case let ResponseResult.success(urlToDownload) = response {
                         firstItem.tmpDownloadUrl = urlToDownload.url
                     }
