@@ -34,6 +34,8 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private let router = RouterVC()
     private var fileInfoManager: PrivateShareFileInfoManager!
     
+    private let scrollDirectionManager = ScrollDirectionManager()
+    
     private(set) var currentCollectionViewType: MoreActionsConfig.ViewType = .List
     private(set) var isSelecting = false
     
@@ -393,14 +395,36 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
 }
 
 //MARK: - UIScrollView
-extension PrivateShareSharedFilesCollectionManager {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if isNearTheNextPage(scrollView) {
+extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollDirectionManager.handleScrollBegin(with: scrollView.contentOffset)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            handleScrollEnd(with: scrollView)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        handleScrollEnd(with: scrollView)
+    }
+    
+    /// if scroll programmatically
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        handleScrollEnd(with: scrollView)
+    }
+    
+    //MARK: Helpers
+    private func handleScrollEnd(with scrollView: UIScrollView) {
+        scrollDirectionManager.handleScrollEnd(with: scrollView.contentOffset)
+        
+        if scrollDirectionManager.scrollDirection == .down, isNearTheNextPage(scrollView) {
             loadNextPage()
         }
     }
     
-    //MARK: Helpers
     private func isNearTheNextPage(_ scrollView: UIScrollView) -> Bool {
         let nearTheNextPageValue = scrollView.bounds.height / 2.0
         
