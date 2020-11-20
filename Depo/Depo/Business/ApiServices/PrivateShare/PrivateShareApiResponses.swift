@@ -82,6 +82,7 @@ struct SharedItemPermission: Codable {
 
 
 struct PrivateShareObject: Encodable {
+    let projectId: String
     let items: [String]
     let invitationMessage: String?
     var invitees: [PrivateShareContact]
