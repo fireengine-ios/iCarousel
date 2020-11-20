@@ -248,8 +248,8 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         }
         
         remoteSuggestions = []
-        let shareObject = PrivateShareObject(projectId: projectId,
-                                             items: items.compactMap { $0.uuid },
+        let sharedItems = items.compactMap { PrivateShareObjectItem(projectId: projectId, uuid: $0.uuid) }
+        let shareObject = PrivateShareObject(items: sharedItems,
                                              invitationMessage: messageView.message,
                                              invitees: shareWithView.contacts,
                                              type: .file,

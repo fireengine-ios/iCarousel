@@ -80,10 +80,14 @@ struct SharedItemPermission: Codable {
     let bitmask: Int64?
 }
 
+struct PrivateShareObjectItem: Encodable {
+    let projectId: String
+    let uuid: String
+}
+
 
 struct PrivateShareObject: Encodable {
-    let projectId: String
-    let items: [String]
+    let items: [PrivateShareObjectItem]
     let invitationMessage: String?
     var invitees: [PrivateShareContact]
     let type: PrivateShareItemType
