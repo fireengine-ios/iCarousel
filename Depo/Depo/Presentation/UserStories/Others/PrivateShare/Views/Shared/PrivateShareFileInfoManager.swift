@@ -9,10 +9,14 @@
 import Foundation
 
 
-indirect enum PrivateShareType {
+indirect enum PrivateShareType: Equatable {
     case byMe
     case withMe
     case innerFolder(type: PrivateShareType, uuid: String, name: String)
+    
+    var rootType: PrivateShareType {
+        return veryRootType(for: self)
+    }
     
     var emptyViewType: EmptyView.ViewType {
         switch self {
@@ -20,8 +24,62 @@ indirect enum PrivateShareType {
                 return .sharedBy
             case .withMe:
                 return .sharedWith
-            case .innerFolder(type: _, uuid: _, name: _):
+            case .innerFolder:
                 return .sharedInnerFolder
+        }
+    }
+    
+    //isSelectionAllowed is predefined by the veryRootType only
+    var isSelectionAllowed: Bool {
+        switch self {
+            case .byMe:
+                return true
+                
+            case .withMe:
+                return false
+                
+            case .innerFolder:
+                return veryRootType(for: self).isSelectionAllowed
+        }
+    }
+    
+    //floatingButtonTypes is predefined by the veryRootType + type itself
+    var floatingButtonTypes: [FloatingButtonsType] {
+        let typeAndRoot = (self, veryRootType(for: self))
+        
+        switch typeAndRoot {
+            case (.byMe, _):
+                return []
+                
+            case (.withMe, _):
+                return []
+                
+            case (.innerFolder, let veryRootType):
+                return floatingButtonTypes(innerFolderVeryRootType: veryRootType)
+        }
+    }
+    
+    private func floatingButtonTypes(innerFolderVeryRootType: PrivateShareType) -> [FloatingButtonsType] {
+        switch innerFolderVeryRootType {
+            case .byMe:
+                return [.newFolder, .upload, .uploadFiles]
+                
+            case .withMe:
+                return []
+                
+            case .innerFolder:
+                assertionFailure("should not be the case, innerFolderVeryRootType must not be the innerFolder")
+                return []
+        }
+    }
+    
+    private func veryRootType(for type: PrivateShareType) -> PrivateShareType {
+        switch self {
+            case .byMe, .withMe:
+                return self
+                
+            case .innerFolder(type: let rootType, uuid: _, name: _):
+                return veryRootType(for: rootType)
         }
     }
 }

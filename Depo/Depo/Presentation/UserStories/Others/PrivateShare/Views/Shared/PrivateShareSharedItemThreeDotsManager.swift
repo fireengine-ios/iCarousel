@@ -40,9 +40,16 @@ final class PrivateShareSharedItemThreeDotsManager {
     
     
     private func rootScreenActionTypes(for shareType: PrivateShareType, item: WrapData) -> [ElementTypes] {
-        var types = innerFolderActionTypes(for: shareType, item:  item)
+        var types = innerFolderActionTypes(for: shareType.rootType, item:  item)
         
-        types.append(.endSharing)
+        switch shareType {
+            case .byMe:
+                types.append(.endSharing)
+                
+            default:
+                break
+        }
+        
         
         return types
     }
@@ -66,7 +73,11 @@ final class PrivateShareSharedItemThreeDotsManager {
                 
                 return types
                 
-            default:
+            case .withMe:
+                return []
+
+            case .innerFolder:
+                assertionFailure("should not be the case")
                 return []
         }
         

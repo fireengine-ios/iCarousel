@@ -100,7 +100,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         
         collectionView?.alwaysBounceVertical = true
         
-        collectionView?.isQuickSelectAllowed = true
+        collectionView?.isQuickSelectAllowed = false
         
         collectionView?.backgroundView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
         collectionView?.backgroundView?.isHidden = true
@@ -438,6 +438,10 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollec
 //MARK: - QuickSelectCollectionViewDelegate
 extension PrivateShareSharedFilesCollectionManager: QuickSelectCollectionViewDelegate {
     func didLongPress(at indexPath: IndexPath?) {
+        guard fileInfoManager.type.isSelectionAllowed else {
+            return
+        }
+        
         if !isSelecting {
             changeSelection(isActive: true)
             reloadVisibleCells()
@@ -445,6 +449,10 @@ extension PrivateShareSharedFilesCollectionManager: QuickSelectCollectionViewDel
     }
     
     func didEndLongPress(at indexPath: IndexPath?) {
+        guard fileInfoManager.type.isSelectionAllowed else {
+            return
+        }
+        
         if isSelecting {
             delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
         }
