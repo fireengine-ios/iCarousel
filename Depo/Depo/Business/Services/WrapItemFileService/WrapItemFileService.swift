@@ -244,7 +244,25 @@ class WrapItemFileService: WrapItemFileOperations {
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {
         let downloadItems = remoteWrapDataItems(files: items)
         
-        remoteFileService.download(items: downloadItems, success: success, fail: fail)
+        let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil }
+        
+        switch itemsWithoutUrl.count {
+            case 0:
+                remoteFileService.download(items: downloadItems, success: success, fail: fail)
+                
+            case 1:
+                let firstItem = itemsWithoutUrl[0]
+                privateShareApiService.createDownloadUrl(uuids: [firstItem.uuid]) { [weak self] response in
+                    if case let ResponseResult.success(urlToDownload) = response {
+                        firstItem.tmpDownloadUrl = urlToDownload.url
+                    }
+                    self?.remoteFileService.download(items: downloadItems, success: success, fail: fail)
+                }
+                
+            default:
+                assertionFailure("Call createDownloadUrl differently, depending on a case")
+                fail?(ErrorResponse.string("can't handle"))
+        }
     }
     
     func download(itemsByAlbums: [AlbumItem: [Item]], success: FileOperationSucces?, fail: FailResponse?) {
