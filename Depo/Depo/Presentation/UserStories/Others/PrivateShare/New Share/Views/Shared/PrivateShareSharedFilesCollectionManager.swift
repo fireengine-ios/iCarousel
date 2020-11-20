@@ -34,6 +34,8 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private let router = RouterVC()
     private var fileInfoManager: PrivateShareFileInfoManager!
     
+    private let scrollDirectionManager = ScrollDirectionManager()
+    
     private(set) var currentCollectionViewType: MoreActionsConfig.ViewType = .List
     private(set) var isSelecting = false
     
@@ -100,7 +102,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         
         collectionView?.alwaysBounceVertical = true
         
-        collectionView?.isQuickSelectAllowed = true
+        collectionView?.isQuickSelectAllowed = false
         
         collectionView?.backgroundView = EmptyView.view(with: fileInfoManager.type.emptyViewType)
         collectionView?.backgroundView?.isHidden = true
@@ -393,14 +395,36 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
 }
 
 //MARK: - UIScrollView
-extension PrivateShareSharedFilesCollectionManager {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if isNearTheNextPage(scrollView) {
+extension PrivateShareSharedFilesCollectionManager: UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollDirectionManager.handleScrollBegin(with: scrollView.contentOffset)
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            handleScrollEnd(with: scrollView)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        handleScrollEnd(with: scrollView)
+    }
+    
+    /// if scroll programmatically
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        handleScrollEnd(with: scrollView)
+    }
+    
+    //MARK: Helpers
+    private func handleScrollEnd(with scrollView: UIScrollView) {
+        scrollDirectionManager.handleScrollEnd(with: scrollView.contentOffset)
+        
+        if scrollDirectionManager.scrollDirection == .down, isNearTheNextPage(scrollView) {
             loadNextPage()
         }
     }
     
-    //MARK: Helpers
     private func isNearTheNextPage(_ scrollView: UIScrollView) -> Bool {
         let nearTheNextPageValue = scrollView.bounds.height / 2.0
         
@@ -438,6 +462,10 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollec
 //MARK: - QuickSelectCollectionViewDelegate
 extension PrivateShareSharedFilesCollectionManager: QuickSelectCollectionViewDelegate {
     func didLongPress(at indexPath: IndexPath?) {
+        guard fileInfoManager.type.isSelectionAllowed else {
+            return
+        }
+        
         if !isSelecting {
             changeSelection(isActive: true)
             reloadVisibleCells()
@@ -445,6 +473,10 @@ extension PrivateShareSharedFilesCollectionManager: QuickSelectCollectionViewDel
     }
     
     func didEndLongPress(at indexPath: IndexPath?) {
+        guard fileInfoManager.type.isSelectionAllowed else {
+            return
+        }
+        
         if isSelecting {
             delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
         }

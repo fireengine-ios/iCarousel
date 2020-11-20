@@ -89,32 +89,17 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     private func setupBars() {
         setDefaultTabBarState()
-        navBarManager.setDefaultMode(title: title ?? "")
-        navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
+        setupNavBar()
         setupCollectionViewBar()
         bottomBarManager.setup()
     }
     
+    private func setupNavBar() {
+        setupNavigationBar(editingMode: false)
+    }
+    
     private func setupPlusButton() {
-        switch shareType {
-            case .byMe:
-                floatingButtonsArray = []
-                
-            case .withMe:
-                floatingButtonsArray = []
-                
-            case .innerFolder(type: let type, uuid: _, name: _):
-                switch type {
-                    case .byMe:
-                        floatingButtonsArray = [.newFolder, .upload, .uploadFiles]
-                        
-                    case .withMe:
-                        floatingButtonsArray = []
-                        
-                    default:
-                        floatingButtonsArray = []
-                }
-        }
+        floatingButtonsArray = shareType.floatingButtonTypes
     }
     
     private func setDefaultTabBarState() {
@@ -196,7 +181,11 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
     private func updateBars(isSelecting: Bool) {
         DispatchQueue.main.async {
             self.setupNavigationBar(editingMode: isSelecting)
-            self.navBarManager.threeDotsButton.isEnabled = !isSelecting
+            
+            if self.shareType.isSelectionAllowed {
+                self.navBarManager.threeDotsButton.isEnabled = !isSelecting
+            }
+            
             if isSelecting {
                 self.bottomBarManager.show()
             } else {
@@ -213,11 +202,17 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
             }
             
             /// be sure to configure navbar items after setup navigation bar
-            if editingMode {
+            let isSelectionAllowed = self.shareType.isSelectionAllowed
+            
+            if editingMode, isSelectionAllowed{
                 self.navigationBarWithGradientStyle()
                 self.navBarManager.setSelectionMode()
             } else {
-                self.navBarManager.setDefaultMode(title: self.title ?? "")
+                if !isSelectionAllowed {
+                    self.navBarManager.setDefaultModeWithoutThreeDot(title: self.title ?? "")
+                } else {
+                    self.navBarManager.setDefaultMode(title: self.title ?? "")
+                }
                 self.navigationBarWithGradientStyle(isHidden: false, hideLogo: true)
             }
         }
@@ -266,7 +261,7 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     }
     
     func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type == .endSharing {
+        if type.isContained(in: [.endSharing, .leaveSharing]) {
             collectionManager.reloadAfterAction()
         }
     }

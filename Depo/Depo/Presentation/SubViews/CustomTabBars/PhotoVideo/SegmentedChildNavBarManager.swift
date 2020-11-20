@@ -53,6 +53,12 @@ final class SegmentedChildNavBarManager {
         threeDotsButton.isEnabled = true
     }
     
+    func setDefaultModeWithoutThreeDot(title: String = "") {
+        delegate?.setTitle(title)
+        delegate?.setRightBarButtonItems([searchButton], animated: false)
+        delegate?.setLeftBarButtonItems(nil, animated: true)
+    }
+    
     @objc private func onCancelSelectionButton() {
         delegate?.onCancelSelectionButton()
     }

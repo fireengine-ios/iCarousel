@@ -465,6 +465,7 @@ enum NetmeraEventValues {
         case hiddenBin
         case trashBin
         case endSharing
+        case leaveSharing
    
         var text: String {
             switch self {
@@ -512,6 +513,8 @@ enum NetmeraEventValues {
                 return "Trash bin"
             case .endSharing:
                 return "End sharing"
+            case .leaveSharing:
+                return "Leave sharing"
             }
         }
     }

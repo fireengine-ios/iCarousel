@@ -53,6 +53,7 @@ final class FileInfoView: UIView, FromNib {
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     
     private var uuid = ""
+    private var projectId: String?
     
     // MARK: Life cycle
     
@@ -72,6 +73,8 @@ final class FileInfoView: UIView, FromNib {
     
     func setObject(_ object: BaseDataSourceItem, completion: VoidHandler?) {
         uuid = object.uuid
+        projectId = object.projectId
+        
         resetUI()
         fileNameView.name = object.name
         peopleView.fileType = object.fileType
@@ -89,7 +92,9 @@ final class FileInfoView: UIView, FromNib {
             fileInfoView.set(createdDate: createdDate)
         }
         
-        getSharingInfo(uuid: object.uuid)
+        if let projectId = projectId {
+            getSharingInfo(projectId: projectId, uuid: object.uuid)
+        }
         
         layoutIfNeeded()
         completion?()
@@ -144,7 +149,10 @@ final class FileInfoView: UIView, FromNib {
     }
     
     func updateShareInfo() {
-        getSharingInfo(uuid: uuid)
+        guard let projectId = projectId else {
+            return
+        }
+        getSharingInfo(projectId: projectId, uuid: uuid)
     }
     
     func setHiddenShareInfoView(isHidden: Bool) {
@@ -181,7 +189,7 @@ final class FileInfoView: UIView, FromNib {
         output?.tapGesture(recognizer: gestureRecognizer)
     }
     
-    private func getSharingInfo(uuid: String) {
+    private func getSharingInfo(projectId: String, uuid: String) {
         let group = DispatchGroup()
         
         group.enter()
@@ -195,7 +203,7 @@ final class FileInfoView: UIView, FromNib {
             group.leave()
         }
             
-        shareApiService.getSharingInfo(uuid: uuid) { result in
+        shareApiService.getSharingInfo(projectId: projectId, uuid: uuid) { result in
             switch result {
             case .success(let info):
                 sharingInfo = info

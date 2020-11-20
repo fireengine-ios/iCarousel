@@ -27,9 +27,10 @@ final class PrivateShareSharedWithThreeDotsManager {
                 alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
                 
             case .withMe:
-                alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
+                return
                 
             case .innerFolder(type: _, uuid: _, name: _):
+                //TODO:
                 alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
         }
     }
@@ -41,16 +42,17 @@ final class PrivateShareSharedWithThreeDotsManager {
                 alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
                 
             case .withMe:
-                let types = actionTypes(for: selectedItems)
-                alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
+                return
                 
             case .innerFolder(type: _, uuid: _, name: _):
+                //TODO:
                 let types = actionTypes(for: selectedItems)
                 alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)
         }
     }
     
     private func actionTypes(for items: [WrapData]) -> [ElementTypes] {
+        //TODO:
         return []
     }
 }

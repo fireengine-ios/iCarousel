@@ -370,13 +370,14 @@ struct RouteRequests {
         static let recover = (baseUrl +/ filesystemBase) +/ "recover"
         
         enum Version_2 {
-            private static let baseV2Url = baseUrl +/ "v2/files"
+            private static let baseV2Url = baseUrl +/ "v2/files/%@"
             private static let baseV2UrlString = baseV2Url.absoluteString
-            private static let baseV2UrlBulk = baseV2Url +/ "_bulk"
+            private static let baseV2UrlBulk = baseUrl +/ "v2/files/_bulk"
             
             static let filesFromFolder = baseV2UrlString + "?size=%d&page=%d&sortBy=%@&sortOrder=%@&parentFolderUuid=%@"
             static let sharingInfo = baseV2UrlString + "/%@"
             static let shareAcls = baseV2UrlString + "/%@/acls"
+            static let leaveShare = baseV2UrlString + "/%@/acls?subjectType=USER&subjectId=%@"
             
             static let createDownloadUrl = baseV2UrlBulk +/ "create-download-url"
             static let move = baseV2UrlBulk +/ "move"

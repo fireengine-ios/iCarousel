@@ -98,7 +98,7 @@ extension FileInfoInteractor: FileInfoInteractorInput {
     }
     
     func getSharingInfo() {
-        guard let uuid = item?.uuid else {
+        guard let projectId = item?.projectId , let uuid = item?.uuid else {
             return
         }
         
@@ -115,7 +115,7 @@ extension FileInfoInteractor: FileInfoInteractorInput {
             group.leave()
         }
             
-        shareApiService.getSharingInfo(uuid: uuid) { result in
+        shareApiService.getSharingInfo(projectId: projectId, uuid: uuid) { result in
             switch result {
             case .success(let info):
                 sharingInfo = info
