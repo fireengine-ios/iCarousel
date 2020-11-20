@@ -12,6 +12,8 @@ class BaseDataSourceItem: NSObject {
 
     var uuid: String
     
+    var projectId: String?
+    
     var name: String?
     
     var creationDate: Date?

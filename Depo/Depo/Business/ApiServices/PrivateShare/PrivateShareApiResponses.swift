@@ -37,6 +37,7 @@ struct SharedFileInfo: Codable {
     let createdDate: Date?
     let lastModifiedDate: Date?
     let id: Int64
+    let projectId: String
     let hash: String?
     let name: String?
     let uuid: String

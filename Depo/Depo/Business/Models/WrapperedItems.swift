@@ -1171,6 +1171,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
                    isLocalItem: false)
         
         id = privateShareFileInfo.id
+        projectId = privateShareFileInfo.projectId
         isFolder = privateShareFileInfo.folder
         if isFolder == true {
             fileType = .folder

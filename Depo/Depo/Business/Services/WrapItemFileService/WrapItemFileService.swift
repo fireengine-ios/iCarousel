@@ -116,7 +116,12 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func endSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
-        privateShareApiService.endShare(uuid: file.uuid) { response in
+        guard let projectId = file.projectId else {
+            fail?(ErrorResponse.string("don't have projectId or subjectId"))
+            return
+        }
+        
+        privateShareApiService.endShare(projectId: projectId, uuid: file.uuid) { response in
             switch response {
                 case .success(()):
                     success?()
@@ -128,7 +133,12 @@ class WrapItemFileService: WrapItemFileOperations {
     }
     
     func leaveSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
-        privateShareApiService.leaveShare(uuid: file.uuid) { response in
+        guard let projectId = file.projectId, let subjectId = SingletonStorage.shared.accountInfo?.projectID else {
+            fail?(ErrorResponse.string("don't have projectId or subjectId"))
+            return
+        }
+        
+        privateShareApiService.leaveShare(projectId: projectId, uuid: file.uuid, subjectId: subjectId) { response in
             switch response {
                 case .success(()):
                     success?()

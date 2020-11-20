@@ -89,13 +89,13 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
     }
     
     private func endShare() {
-        guard let uuid = shareInfo?.uuid else {
+        guard let uuid = shareInfo?.uuid, let projectId = shareInfo?.projectId else {
             return
         }
         
         showSpinner()
         
-        privateShareApiService.endShare(uuid: uuid) { [weak self] result in
+        privateShareApiService.endShare(projectId: projectId, uuid: uuid) { [weak self] result in
             guard let self = self else {
                 return
             }
