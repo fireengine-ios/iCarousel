@@ -672,7 +672,7 @@
 		0303A2B92397D0D000907F42 /* EditingBarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8891F348B77002AC795 /* EditingBarConfig.swift */; };
 		0303A2BA2397D0D000907F42 /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
 		0303A2BB2397D0D000907F42 /* AutoSyncSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */; };
-		0303A2BC2397D0D000907F42 /* PhotoVideoScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208633228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift */; };
+		0303A2BC2397D0D000907F42 /* ScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208633228D4B2E000BEDAD /* ScrollDirectionManager.swift */; };
 		0303A2BD2397D0D000907F42 /* AccountWarningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B144722F99F6000FAAC97 /* AccountWarningService.swift */; };
 		0303A2BE2397D0D000907F42 /* MyStorageModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6221AD18E100582C45 /* MyStorageModuleInput.swift */; };
 		0303A2BF2397D0D000907F42 /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F560E1F7552A900F49DA1 /* PackagesViewController.swift */; };
@@ -3794,7 +3794,7 @@
 		8C1E5BDF22CB8C1D008FDA02 /* PhotoVideoBottomBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208636228D4B2E000BEDAD /* PhotoVideoBottomBarManager.swift */; };
 		8C1E5BE022CB8C20008FDA02 /* SegmentedChildNavBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208635228D4B2E000BEDAD /* SegmentedChildNavBarManager.swift */; };
 		8C1E5BE122CB8C23008FDA02 /* PhotoVideoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C208634228D4B2E000BEDAD /* PhotoVideoController.xib */; };
-		8C1E5BE222CB8C26008FDA02 /* PhotoVideoScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208633228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift */; };
+		8C1E5BE222CB8C26008FDA02 /* ScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208633228D4B2E000BEDAD /* ScrollDirectionManager.swift */; };
 		8C1E5BE322CB8C29008FDA02 /* ThresholdBlockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208632228D4B2E000BEDAD /* ThresholdBlockService.swift */; };
 		8C1E5BE422CB8C2C008FDA02 /* PhotoVideoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208631228D4B2E000BEDAD /* PhotoVideoDataSource.swift */; };
 		8C1E5BE522CB8C2E008FDA02 /* PhotoVideoCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208630228D4B2E000BEDAD /* PhotoVideoCollectionViewLayout.swift */; };
@@ -3819,8 +3819,8 @@
 		8C208646228D4B2E000BEDAD /* PhotoVideoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208631228D4B2E000BEDAD /* PhotoVideoDataSource.swift */; };
 		8C208647228D4B2E000BEDAD /* ThresholdBlockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208632228D4B2E000BEDAD /* ThresholdBlockService.swift */; };
 		8C208648228D4B2E000BEDAD /* ThresholdBlockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208632228D4B2E000BEDAD /* ThresholdBlockService.swift */; };
-		8C208649228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208633228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift */; };
-		8C20864A228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208633228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift */; };
+		8C208649228D4B2E000BEDAD /* ScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208633228D4B2E000BEDAD /* ScrollDirectionManager.swift */; };
+		8C20864A228D4B2E000BEDAD /* ScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208633228D4B2E000BEDAD /* ScrollDirectionManager.swift */; };
 		8C20864B228D4B2E000BEDAD /* PhotoVideoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C208634228D4B2E000BEDAD /* PhotoVideoController.xib */; };
 		8C20864C228D4B2E000BEDAD /* PhotoVideoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C208634228D4B2E000BEDAD /* PhotoVideoController.xib */; };
 		8C20864D228D4B2E000BEDAD /* SegmentedChildNavBarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208635228D4B2E000BEDAD /* SegmentedChildNavBarManager.swift */; };
@@ -9982,7 +9982,7 @@
 		CF8B673323CBC9D70021B021 /* LeavePremiumInteractorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A217E44521A5B0C10084AA37 /* LeavePremiumInteractorOutput.swift */; };
 		CF8B673423CBC9D70021B021 /* ImportPhotosViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49886551F3EFBE200F50C95 /* ImportPhotosViewInput.swift */; };
 		CF8B673623CBC9D70021B021 /* MoreFilesActionsModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0097151F6BDA8B00FA069C /* MoreFilesActionsModuleInput.swift */; };
-		CF8B673723CBC9D70021B021 /* PhotoVideoScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208633228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift */; };
+		CF8B673723CBC9D70021B021 /* ScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208633228D4B2E000BEDAD /* ScrollDirectionManager.swift */; };
 		CF8B673A23CBC9D70021B021 /* CampaignIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA10402358549A00B12485 /* CampaignIntroView.swift */; };
 		CF8B673C23CBC9D70021B021 /* SettingsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8831E41C046C33B2DA7E6FFE /* SettingsViewInput.swift */; };
 		CF8B673D23CBC9D70021B021 /* DropboxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DE7461FCBE84100C23CBD /* DropboxService.swift */; };
@@ -11220,7 +11220,7 @@
 		CF8B6DD923CBCA280021B021 /* EditingBarConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6EF8891F348B77002AC795 /* EditingBarConfig.swift */; };
 		CF8B6DDA23CBCA280021B021 /* DeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EA13E20B593E600FED3A2 /* DeviceExtension.swift */; };
 		CF8B6DDB23CBCA280021B021 /* AutoSyncSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4C8A02049272700886F21 /* AutoSyncSettingsTableViewCell.swift */; };
-		CF8B6DDC23CBCA280021B021 /* PhotoVideoScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208633228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift */; };
+		CF8B6DDC23CBCA280021B021 /* ScrollDirectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C208633228D4B2E000BEDAD /* ScrollDirectionManager.swift */; };
 		CF8B6DDD23CBCA280021B021 /* AccountWarningService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173B144722F99F6000FAAC97 /* AccountWarningService.swift */; };
 		CF8B6DDE23CBCA280021B021 /* MyStorageModuleInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92004B6221AD18E100582C45 /* MyStorageModuleInput.swift */; };
 		CF8B6DDF23CBCA280021B021 /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2F560E1F7552A900F49DA1 /* PackagesViewController.swift */; };
@@ -13721,7 +13721,7 @@
 		8C208630228D4B2E000BEDAD /* PhotoVideoCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoVideoCollectionViewLayout.swift; sourceTree = "<group>"; };
 		8C208631228D4B2E000BEDAD /* PhotoVideoDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoVideoDataSource.swift; sourceTree = "<group>"; };
 		8C208632228D4B2E000BEDAD /* ThresholdBlockService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThresholdBlockService.swift; sourceTree = "<group>"; };
-		8C208633228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoVideoScrollDirectionManager.swift; sourceTree = "<group>"; };
+		8C208633228D4B2E000BEDAD /* ScrollDirectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollDirectionManager.swift; sourceTree = "<group>"; };
 		8C208634228D4B2E000BEDAD /* PhotoVideoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoVideoController.xib; sourceTree = "<group>"; };
 		8C208635228D4B2E000BEDAD /* SegmentedChildNavBarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedChildNavBarManager.swift; sourceTree = "<group>"; };
 		8C208636228D4B2E000BEDAD /* PhotoVideoBottomBarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoVideoBottomBarManager.swift; sourceTree = "<group>"; };
@@ -18903,7 +18903,7 @@
 				8C208630228D4B2E000BEDAD /* PhotoVideoCollectionViewLayout.swift */,
 				8C208631228D4B2E000BEDAD /* PhotoVideoDataSource.swift */,
 				8C208632228D4B2E000BEDAD /* ThresholdBlockService.swift */,
-				8C208633228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift */,
+				8C208633228D4B2E000BEDAD /* ScrollDirectionManager.swift */,
 				8C208634228D4B2E000BEDAD /* PhotoVideoController.xib */,
 				8C208635228D4B2E000BEDAD /* SegmentedChildNavBarManager.swift */,
 				8C208636228D4B2E000BEDAD /* PhotoVideoBottomBarManager.swift */,
@@ -29378,7 +29378,7 @@
 				0303A2B92397D0D000907F42 /* EditingBarConfig.swift in Sources */,
 				0303A2BA2397D0D000907F42 /* DeviceExtension.swift in Sources */,
 				0303A2BB2397D0D000907F42 /* AutoSyncSettingsTableViewCell.swift in Sources */,
-				0303A2BC2397D0D000907F42 /* PhotoVideoScrollDirectionManager.swift in Sources */,
+				0303A2BC2397D0D000907F42 /* ScrollDirectionManager.swift in Sources */,
 				0303A2BD2397D0D000907F42 /* AccountWarningService.swift in Sources */,
 				0303A2BE2397D0D000907F42 /* MyStorageModuleInput.swift in Sources */,
 				0303A2BF2397D0D000907F42 /* PackagesViewController.swift in Sources */,
@@ -31428,7 +31428,7 @@
 				A217E44721A5B0C10084AA37 /* LeavePremiumInteractorOutput.swift in Sources */,
 				8C0E8F171FDEBDFF00789C91 /* ImportPhotosViewInput.swift in Sources */,
 				8C0E8F181FDEBDFF00789C91 /* MoreFilesActionsModuleInput.swift in Sources */,
-				8C20864A228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift in Sources */,
+				8C20864A228D4B2E000BEDAD /* ScrollDirectionManager.swift in Sources */,
 				89CC89F423AA1308003C58BB /* HSSmartAlbumWarningPopUp.swift in Sources */,
 				987E2180236037F900D45AEA /* CampaignIntroView.swift in Sources */,
 				0305A32323D5C390004D1EC7 /* HiddenPhotosDataLoader.swift in Sources */,
@@ -32973,7 +32973,7 @@
 				98231A9324F3A23500FD16E2 /* AmazonFilter.swift in Sources */,
 				CE39D3E6216B756E004AB6D7 /* YearsView.swift in Sources */,
 				985FFAE5255C1ED2001AA845 /* FileNameView.swift in Sources */,
-				8C208649228D4B2E000BEDAD /* PhotoVideoScrollDirectionManager.swift in Sources */,
+				8C208649228D4B2E000BEDAD /* ScrollDirectionManager.swift in Sources */,
 				8C26009E22919DCC0063E913 /* ProfileTextViewEnterView.swift in Sources */,
 				A2079902219F131B00AD5037 /* PremiumViewController.swift in Sources */,
 				B563200D254861F90006865B /* GalleryAuthorizationStatus.swift in Sources */,
@@ -34790,7 +34790,7 @@
 				CFACACA7247CF65400645B40 /* NetmeraExtensionService.swift in Sources */,
 				CE784A5E22A685FB00662219 /* DeviceExtension.swift in Sources */,
 				CE784A5F22A685FB00662219 /* AutoSyncSettingsTableViewCell.swift in Sources */,
-				8C1E5BE222CB8C26008FDA02 /* PhotoVideoScrollDirectionManager.swift in Sources */,
+				8C1E5BE222CB8C26008FDA02 /* ScrollDirectionManager.swift in Sources */,
 				173B144A22F99F6100FAAC97 /* AccountWarningService.swift in Sources */,
 				CE784A6022A685FB00662219 /* MyStorageModuleInput.swift in Sources */,
 				CE784A6122A685FB00662219 /* PackagesViewController.swift in Sources */,
@@ -36678,7 +36678,7 @@
 				986DD3D525388F3400C38AD4 /* Contact.m in Sources */,
 				CF8B673423CBC9D70021B021 /* ImportPhotosViewInput.swift in Sources */,
 				CF8B673623CBC9D70021B021 /* MoreFilesActionsModuleInput.swift in Sources */,
-				CF8B673723CBC9D70021B021 /* PhotoVideoScrollDirectionManager.swift in Sources */,
+				CF8B673723CBC9D70021B021 /* ScrollDirectionManager.swift in Sources */,
 				CF8B673A23CBC9D70021B021 /* CampaignIntroView.swift in Sources */,
 				CF8B673C23CBC9D70021B021 /* SettingsViewInput.swift in Sources */,
 				CF8B673D23CBC9D70021B021 /* DropboxService.swift in Sources */,
@@ -37878,7 +37878,7 @@
 				CF8B6DDA23CBCA280021B021 /* DeviceExtension.swift in Sources */,
 				CF8B6DDB23CBCA280021B021 /* AutoSyncSettingsTableViewCell.swift in Sources */,
 				CFACACA8247CF65400645B40 /* NetmeraExtensionService.swift in Sources */,
-				CF8B6DDC23CBCA280021B021 /* PhotoVideoScrollDirectionManager.swift in Sources */,
+				CF8B6DDC23CBCA280021B021 /* ScrollDirectionManager.swift in Sources */,
 				CF8B6DDD23CBCA280021B021 /* AccountWarningService.swift in Sources */,
 				CF8B6DDE23CBCA280021B021 /* MyStorageModuleInput.swift in Sources */,
 				CF8B6DDF23CBCA280021B021 /* PackagesViewController.swift in Sources */,
