@@ -117,7 +117,7 @@ class WrapItemFileService: WrapItemFileOperations {
     
     func endSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
         guard let projectId = file.projectId else {
-            fail?(ErrorResponse.string("don't have projectId or subjectId"))
+            fail?(ErrorResponse.string("don't have projectId"))
             return
         }
         
