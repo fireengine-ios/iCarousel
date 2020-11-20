@@ -19689,11 +19689,9 @@
 		9808B3082553DE94002B0032 /* PrivateShare */ = {
 			isa = PBXGroup;
 			children = (
+				98CF36F52567A58200A70658 /* New Share */,
 				9842FB802563D20E00B07606 /* SharedContacts */,
 				985E6974255A61AF006F6CD7 /* UserRoleSelection */,
-				9808B37F2553DEE9002B0032 /* Views */,
-				9808B30C2553DEBD002B0032 /* PrivateShareViewController.swift */,
-				9808B30D2553DEBD002B0032 /* PrivateShareViewController.xib */,
 			);
 			path = PrivateShare;
 			sourceTree = "<group>";
@@ -20477,6 +20475,16 @@
 				98C298492302B12900C9811E /* SpotifyCancelImportPopup.swift */,
 			);
 			path = CancelImportPopup;
+			sourceTree = "<group>";
+		};
+		98CF36F52567A58200A70658 /* New Share */ = {
+			isa = PBXGroup;
+			children = (
+				9808B37F2553DEE9002B0032 /* Views */,
+				9808B30C2553DEBD002B0032 /* PrivateShareViewController.swift */,
+				9808B30D2553DEBD002B0032 /* PrivateShareViewController.xib */,
+			);
+			path = "New Share";
 			sourceTree = "<group>";
 		};
 		98E4B9EA23C6FEF3003A4631 /* TrashBin */ = {

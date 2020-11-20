@@ -1833,6 +1833,7 @@
 "private_share_info_role_2" = "Editor";
 "private_share_info_role_3" = "Viewer";
 "private_share_email_format" = "email format is invalid";
+"private_share_non_turkish_msisdn_warning" = "You need to add a GSM number starting with + character and country code";
 "private_share_shared_with_me_empty_page" = "No files are shared with you up to now";
 "private_share_shared_by_me_empty_page" = "You haven't shared any files yet";
 "private_share_inner_folder_empty_page" = "Folder is Empty";
