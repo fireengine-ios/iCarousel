@@ -558,6 +558,12 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         //currently only for one file is supported
                         self.interactor.endSharing(item: currentItems.first)
                     })
+                case .leaveSharing:
+                    action = UIAlertAction(title: TextConstants.privateSharedLeaveSharingActionTitle, style: .default, handler: { _ in
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .leaveSharing))
+                        //currently only for one file is supported
+                        self.interactor.leaveSharing(item: currentItems.first)
+                    })
                 }
                 return action
             })

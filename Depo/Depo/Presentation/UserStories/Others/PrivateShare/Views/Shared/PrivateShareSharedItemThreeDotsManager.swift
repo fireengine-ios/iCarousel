@@ -45,7 +45,6 @@ final class PrivateShareSharedItemThreeDotsManager {
         switch shareType {
             case .byMe:
                 types.append(.endSharing)
-                
             default:
                 break
         }
@@ -74,7 +73,7 @@ final class PrivateShareSharedItemThreeDotsManager {
                 return types
                 
             case .withMe:
-                return []
+                return [.leaveSharing]
 
             case .innerFolder:
                 assertionFailure("should not be the case")

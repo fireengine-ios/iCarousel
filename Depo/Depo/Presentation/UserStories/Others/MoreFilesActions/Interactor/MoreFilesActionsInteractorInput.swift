@@ -89,4 +89,6 @@ protocol MoreFilesActionsInteractorInput {
     func emptyTrashBin()
     
     func endSharing(item: BaseDataSourceItem?)
+    
+    func leaveSharing(item: BaseDataSourceItem?)
 }

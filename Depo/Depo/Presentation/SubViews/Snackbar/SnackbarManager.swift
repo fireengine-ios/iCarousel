@@ -87,6 +87,7 @@ enum SnackbarType {
              .restore,
              .unhide,
              .endSharing:
+             .leaveSharing:
             self = .nonCritical
             
         case .hide,
