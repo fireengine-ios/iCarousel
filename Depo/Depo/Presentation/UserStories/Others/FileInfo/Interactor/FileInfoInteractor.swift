@@ -11,6 +11,7 @@ final class FileInfoInteractor {
     weak var output: FileInfoInteractorOutput!
     
     var item: BaseDataSourceItem?
+    private(set) var sharingInfo: SharedFileInfo?
     private let albumService = PhotosAlbumService()
 
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
@@ -141,6 +142,7 @@ extension FileInfoInteractor: FileInfoInteractorInput {
                 let localContactNames = localContactsService.getContactName(for: member.subject?.username ?? "", email: member.subject?.email ?? "")
                 info.members?[index].subject?.name = displayName(from: localContactNames)
             }
+            self.sharingInfo = info
             output.displayShareInfo(info)
         }
     }

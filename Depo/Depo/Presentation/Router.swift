@@ -1222,16 +1222,16 @@ class RouterVC: NSObject {
         }
     }
     
-    func privateShare(items: [WrapData], competion: BoolHandler?) -> UIViewController {
-        let shareController = PrivateShareViewController.with(items: items, completion: competion)
+    func privateShare(items: [WrapData]) -> UIViewController {
+        let shareController = PrivateShareViewController.with(items: items)
         let navigationController = NavigationController(rootViewController: shareController)
         navigationController.modalTransitionStyle = .coverVertical
         navigationController.modalPresentationStyle = .fullScreen
         return navigationController
     }
     
-    func privateShareContacts(with shareInfo: SharedFileInfo, endShareHandler: VoidHandler?) -> UIViewController {
-        PrivateShareContactsViewController.with(shareInfo: shareInfo, endShareHandler: endShareHandler)
+    func privateShareContacts(with shareInfo: SharedFileInfo) -> UIViewController {
+        PrivateShareContactsViewController.with(shareInfo: shareInfo)
     }
     
     func privateShareAccessList(projectId: String, uuid: String, contact: SharedContact, fileType: FileType) -> UIViewController {

@@ -224,7 +224,7 @@ enum PrivateShareSubjectType: String, Codable {
 struct SharedContact: Codable, Equatable {
     var subject: SuggestedApiContact?
     let permissions: SharedItemPermission?
-    let role: PrivateShareUserRole
+    var role: PrivateShareUserRole
     
     var displayName: String {
         subject?.name ?? subject?.username ?? ""

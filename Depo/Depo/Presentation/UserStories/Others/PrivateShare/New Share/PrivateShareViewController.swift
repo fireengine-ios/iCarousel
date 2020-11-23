@@ -10,10 +10,9 @@ import UIKit
 
 final class PrivateShareViewController: BaseViewController, NibInit {
 
-    static func with(items: [WrapData], completion: BoolHandler?) -> PrivateShareViewController {
+    static func with(items: [WrapData]) -> PrivateShareViewController {
         let controller = PrivateShareViewController.initFromNib()
         controller.items = items
-        controller.completion = completion
         return controller
     }
     
@@ -65,8 +64,6 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     private var items = [WrapData]()
     private var remoteSuggestions = [SuggestedApiContact]()
     private var hasAccess = false
-    
-    private var completion: BoolHandler?
     
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
@@ -225,7 +222,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     
     @objc private func onCancelTapped(_ sender: Any) {
         if shareWithView.contacts.isEmpty {
-            dismiss(success: false)
+           dismiss(animated: true)
         } else {
             let popup = PopUpController.with(title: nil,
                                              message: TextConstants.privateShareStartPageClosePopupMessage,
@@ -237,7 +234,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
                                              },
                                              secondAction: { [weak self] vc in
                                                 vc.close { [weak self] in
-                                                    self?.dismiss(success: false)
+                                                    self?.dismiss(animated: true)
                                                 }
                                              })
             router.presentViewController(controller: popup)
@@ -260,17 +257,14 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         shareApiService.privateShare(object: shareObject) { [weak self] result in
             switch result {
             case .success:
-                self?.dismiss(success: true)
+                if let items = self?.items {
+                    ItemOperationManager.default.didShare(items: items)
+                }
                 SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareStartPageSuccess)
+                self?.dismiss(animated: true)
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
             }
-        }
-    }
-    
-    private func dismiss(success: Bool) {
-        dismiss(animated: true) {
-            self.completion?(success)
         }
     }
 }

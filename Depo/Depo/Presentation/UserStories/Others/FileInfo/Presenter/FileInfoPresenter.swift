@@ -127,3 +127,35 @@ extension FileInfoPresenter: FileInfoRouterOutput {
     }
 }
 
+//MARK: - ItemOperationManagerViewProtocol
+
+extension FileInfoPresenter: ItemOperationManagerViewProtocol {
+    
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        object === self
+    }
+    
+    func didShare(items: [BaseDataSourceItem]) {
+        if let uuid = interactor.item?.uuid, items.first(where: { $0.uuid == uuid }) != nil {
+            updateSharingInfo()
+        }
+    }
+    
+    func didEndShareItem(uuid: String) {
+        if uuid == interactor.item?.uuid {
+            updateSharingInfo()
+        }
+    }
+    
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact) {
+        if interactor.sharingInfo?.members?.contains(contact) == true {
+            updateSharingInfo()
+        }
+    }
+    
+    func didRemove(contact: SharedContact, fromItem uuid: String) {
+        if interactor.sharingInfo?.members?.contains(contact) == true {
+            updateSharingInfo()
+        }
+    }
+}

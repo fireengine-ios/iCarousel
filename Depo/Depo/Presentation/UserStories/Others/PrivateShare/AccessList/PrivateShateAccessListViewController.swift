@@ -177,7 +177,11 @@ private extension PrivateShateAccessListViewController {
             switch result {
             case .success():
                 SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareAccessRoleChangeSuccess)
-                //After successful response, we need to refresh the page because other folders role may be affected
+                
+                if let contact = self.contact {
+                    ItemOperationManager.default.didChangeRole(newRole, contact: contact)
+                }
+                
                 self.updateAccessList()
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
@@ -198,10 +202,13 @@ private extension PrivateShateAccessListViewController {
             switch result {
             case .success():
                 SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareAccessDeleteUserSuccess)
+                if let contact = self.contact {
+                    ItemOperationManager.default.didRemove(contact: contact, fromItem: self.uuid)
+                }
+                
                 if self.objects.count == 1 {
                     self.navigationController?.popViewController(animated: true)
                 } else {
-                    //After successful response, we need to refresh the page because other folders may be affected
                     self.updateAccessList()
                 }
             case .failed(let error):

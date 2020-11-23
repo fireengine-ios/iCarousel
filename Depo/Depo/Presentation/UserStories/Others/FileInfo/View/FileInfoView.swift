@@ -57,6 +57,10 @@ final class FileInfoView: UIView, FromNib {
     
     // MARK: Life cycle
     
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupFromNib()
@@ -171,6 +175,7 @@ final class FileInfoView: UIView, FromNib {
         
         tapGestureRecognizer.delegate = self
         addGestureRecognizer(tapGestureRecognizer)
+        ItemOperationManager.default.startUpdateView(view: self)
     }
     
     private func setupEditableState(for item: BaseDataSourceItem) {
@@ -309,6 +314,39 @@ extension FileInfoView: FileInfoShareViewDelegate {
     func didTappedArrowButton() {
         if let shareInfo = sharingInfoView.info {
             output.showWhoHasAccess(shareInfo: shareInfo)
+        }
+    }
+}
+
+//MARK: - ItemOperationManagerViewProtocol
+
+extension FileInfoView: ItemOperationManagerViewProtocol {
+    
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        object === self
+    }
+    
+    func didShare(items: [BaseDataSourceItem]) {
+        if items.first(where: { $0.uuid == uuid }) != nil {
+            updateShareInfo()
+        }
+    }
+    
+    func didEndShareItem(uuid: String) {
+        if uuid == self.uuid {
+            updateShareInfo()
+        }
+    }
+    
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact) {
+        if sharingInfoView.info?.members?.contains(contact) == true {
+            updateShareInfo()
+        }
+    }
+    
+    func didRemove(contact: SharedContact, fromItem uuid: String) {
+        if sharingInfoView.info?.members?.contains(contact) == true {
+            updateShareInfo()
         }
     }
 }
