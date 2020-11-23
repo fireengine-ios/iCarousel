@@ -19780,12 +19780,12 @@
 		9808B7B62567EB0F001DEF2E /* AccessList */ = {
 			isa = PBXGroup;
 			children = (
+				9808B7BB2567EB0F001DEF2E /* PrivateShateAccessListViewController.swift */,
 				9808B7B72567EB0F001DEF2E /* PrivateShateAccessListViewController.xib */,
-				9808B7B82567EB0F001DEF2E /* PrivateShareAccessListHeader.xib */,
 				9808B7B92567EB0F001DEF2E /* PrivateShareAccessListCell.swift */,
 				9808B7BA2567EB0F001DEF2E /* PrivateShareAccessListCell.xib */,
-				9808B7BB2567EB0F001DEF2E /* PrivateShateAccessListViewController.swift */,
 				9808B7BC2567EB0F001DEF2E /* PrivateShareAccessListHeader.swift */,
+				9808B7B82567EB0F001DEF2E /* PrivateShareAccessListHeader.xib */,
 			);
 			path = AccessList;
 			sourceTree = "<group>";

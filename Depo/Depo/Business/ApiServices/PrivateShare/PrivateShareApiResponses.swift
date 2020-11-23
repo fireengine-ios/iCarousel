@@ -164,7 +164,7 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
     }
 }
 
-enum PrivateShareItemType: String, Encodable {
+enum PrivateShareItemType: String, Codable {
     case file = "FILE"
     case album = "ALBUM"
 }
@@ -259,12 +259,8 @@ enum PrivateSharePermission: String, Codable {
     case readAcl = "READ_ACL"
 }
 
-enum PrivateShareAccessListObjectType: String, Codable {
-    case file = "file"
-}
-
 struct PrivateShareAccessListObject: Codable {
-    let type: PrivateShareAccessListObjectType
+    let type: PrivateShareItemType
     let uuid: String
     let name: String
 }

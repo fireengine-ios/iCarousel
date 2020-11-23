@@ -10,8 +10,9 @@ import UIKit
 
 final class PrivateShateAccessListViewController: BaseViewController, NibInit {
 
-    static func with(uuid: String, contact: SharedContact) -> PrivateShateAccessListViewController {
+    static func with(projectId: String, uuid: String, contact: SharedContact) -> PrivateShateAccessListViewController {
         let controller = PrivateShateAccessListViewController.initFromNib()
+        controller.projectId = projectId
         controller.uuid = uuid
         controller.contact = contact
         return controller
@@ -48,6 +49,7 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
     
     private lazy var privateShareApiService = PrivateShareApiServiceImpl()
     
+    private var projectId = ""
     private var uuid = ""
     private var contact: SharedContact?
     private var objects = [PrivateShareAccessListInfo]()
@@ -60,6 +62,12 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
         setTitle(withString: TextConstants.privateShareAccessTitle)
         setupTableView()
         updateAccessList()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationBarWithGradientStyle()
     }
     
     override func viewDidLayoutSubviews() {
@@ -79,6 +87,7 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
         tableView.dataSource = self
         tableView.allowsSelection = false
         tableView.separatorInset = UIEdgeInsets(topBottom: 0, rightLeft: 16)
+        tableView.tableFooterView = UIView()
     }
     
     private func showRoleSelectionMenu(sender: UIButton, handler: @escaping ValueHandler<SelectionRole>) {
@@ -110,7 +119,7 @@ private extension PrivateShateAccessListViewController {
         
         showSpinner()
         
-        privateShareApiService.getAccessList(uuid: uuid, subjectId: subjectId) { [weak self] result in
+        privateShareApiService.getAccessList(projectId: projectId, uuid: uuid, subjectId: subjectId) { [weak self] result in
             guard let self = self else {
                 return
             }
@@ -134,7 +143,7 @@ private extension PrivateShateAccessListViewController {
     func updateUserRole(aclId: Int64) {
         showSpinner()
         
-        privateShareApiService.updateAclRole(uuid: uuid, aclId: aclId) { [weak self] result in
+        privateShareApiService.updateAclRole(projectId: projectId, uuid: uuid, aclId: aclId) { [weak self] result in
             guard let self = self else {
                 return
             }
@@ -154,7 +163,7 @@ private extension PrivateShateAccessListViewController {
     func deleteUser(aclId: Int64) {
         showSpinner()
         
-        privateShareApiService.deleteAclUser(uuid: uuid, aclId: aclId) { [weak self] result in
+        privateShareApiService.deleteAclUser(projectId: projectId, uuid: uuid, aclId: aclId) { [weak self] result in
             guard let self = self else {
                 return
             }

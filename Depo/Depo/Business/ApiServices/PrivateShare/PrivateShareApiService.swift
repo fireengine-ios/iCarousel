@@ -31,13 +31,13 @@ protocol PrivateShareApiService {
     func endShare(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask?
     
     @discardableResult
-    func getAccessList(uuid: String, subjectType: PrivateShareSubjectType, subjectId: String, handler: @escaping ResponseArrayHandler<PrivateShareAccessListInfo>) -> URLSessionTask?
+    func getAccessList(projectId: String, uuid: String, subjectType: PrivateShareSubjectType, subjectId: String, handler: @escaping ResponseArrayHandler<PrivateShareAccessListInfo>) -> URLSessionTask?
     
     @discardableResult
-    func updateAclRole(uuid: String, aclId: Int64, handler: @escaping ResponseHandler<PrivateSharePermissionList>) -> URLSessionTask?
+    func updateAclRole(projectId: String, uuid: String, aclId: Int64, handler: @escaping ResponseHandler<PrivateSharePermissionList>) -> URLSessionTask?
     
     @discardableResult
-    func deleteAclUser(uuid: String, aclId: Int64, handler: @escaping ResponseVoid) -> URLSessionTask?
+    func deleteAclUser(projectId: String, uuid: String, aclId: Int64, handler: @escaping ResponseVoid) -> URLSessionTask?
 
     func leaveShare(projectId: String, uuid: String, subjectId: String, handler: @escaping ResponseVoid) -> URLSessionTask?
     
@@ -134,8 +134,8 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     }
     
     @discardableResult
-    func getAccessList(uuid: String, subjectType: PrivateShareSubjectType = .user, subjectId: String, handler: @escaping ResponseArrayHandler<PrivateShareAccessListInfo>) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.shareAcls, uuid)) else {
+    func getAccessList(projectId: String, uuid: String, subjectType: PrivateShareSubjectType = .user, subjectId: String, handler: @escaping ResponseArrayHandler<PrivateShareAccessListInfo>) -> URLSessionTask? {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.shareAcls, projectId, uuid)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
@@ -152,8 +152,8 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     }
     
     @discardableResult
-    func updateAclRole(uuid: String, aclId: Int64, handler: @escaping ResponseHandler<PrivateSharePermissionList>) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.shareAcl, uuid, aclId)) else {
+    func updateAclRole(projectId: String, uuid: String, aclId: Int64, handler: @escaping ResponseHandler<PrivateSharePermissionList>) -> URLSessionTask? {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.shareAcl, projectId, uuid, aclId)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
@@ -167,8 +167,8 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     }
     
     @discardableResult
-    func deleteAclUser(uuid: String, aclId: Int64, handler: @escaping ResponseVoid) -> URLSessionTask? {
-        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.shareAcl, uuid, aclId)) else {
+    func deleteAclUser(projectId: String, uuid: String, aclId: Int64, handler: @escaping ResponseVoid) -> URLSessionTask? {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.shareAcl, projectId, uuid, aclId)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }

@@ -67,4 +67,9 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
         }
         router.pushViewController(viewController: controller)
     }
+    
+    func openPrivateShareAccessList(projectId: String, uuid: String, contact: SharedContact) {
+        let controller = router.privateShareAccessList(projectId: projectId, uuid: uuid, contact: contact)
+        router.pushViewController(viewController: controller)
+    }
 }

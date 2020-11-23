@@ -424,7 +424,11 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
     }
     
     func onSelectSharedContact(_ contact: SharedContact) {
-        //TODO: COF-585 - open role view/update page
+        guard let index = interactor.currentItemIndex else {
+            return
+        }
+        let currentItem = interactor.allItems[index]
+        router.openPrivateShareAccessList(projectId: currentItem.projectId ?? "", uuid: currentItem.uuid, contact: contact)
     }
         
     func onAddNewShare() {
