@@ -24,7 +24,7 @@ protocol PhotoVideoDetailRouterInput {
     
     func openPrivateShareContacts(with shareInfo: SharedFileInfo)
     
-    func openPrivateShareAccessList(projectId: String, uuid: String, contact: SharedContact)
+    func openPrivateShareAccessList(projectId: String, uuid: String, contact: SharedContact, fileType: FileType)
 }
 
 protocol PhotoVideoDetailRouterOutput: class {

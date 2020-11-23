@@ -31,11 +31,21 @@
                         </label>
                     </subviews>
                 </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEf-ax-IgA">
+                    <rect key="frame" x="0.0" y="89" width="414" height="1"/>
+                    <color key="backgroundColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Lh7-fH-v5H"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="bEf-ax-IgA" secondAttribute="bottom" id="6wB-4u-D66"/>
+                <constraint firstItem="bEf-ax-IgA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="D5D-6c-iVA"/>
                 <constraint firstItem="kPw-GA-D13" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="FhH-ET-mjm"/>
                 <constraint firstItem="kPw-GA-D13" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Ha3-PZ-fqS"/>
+                <constraint firstAttribute="trailing" secondItem="bEf-ax-IgA" secondAttribute="trailing" id="P4r-uz-Y8k"/>
                 <constraint firstAttribute="bottom" secondItem="kPw-GA-D13" secondAttribute="bottom" constant="20" id="izo-zD-FIe"/>
                 <constraint firstAttribute="trailing" secondItem="kPw-GA-D13" secondAttribute="trailing" constant="20" id="kk5-fw-dtk"/>
             </constraints>

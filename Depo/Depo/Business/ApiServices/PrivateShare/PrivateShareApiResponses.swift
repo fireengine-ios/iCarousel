@@ -107,6 +107,7 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
     case editor = "EDITOR"
     case viewer = "VIEWER"
     case owner = "OWNER"
+    case varying = "VARYING"
     
     var title: String {
         switch self {
@@ -114,7 +115,7 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareStartPageEditorButton
         case .viewer:
             return TextConstants.privateShareStartPageViewerButton
-        case .owner:
+        case .owner, .varying:
             return ""
         }
     }
@@ -125,7 +126,7 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareRoleSelectionEditor
         case .viewer:
             return TextConstants.privateShareRoleSelectionViewer
-        case .owner:
+        case .owner, .varying:
             return ""
         }
     }
@@ -138,6 +139,8 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareInfoMenuViewer
         case .owner:
             return TextConstants.privateShareInfoMenuOwner
+        case .varying:
+            return TextConstants.privateShareInfoMenuVarying
         }
     }
     
@@ -149,6 +152,21 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareWhoHasAccessViewer
         case .owner:
             return TextConstants.privateShareWhoHasAccessOwner
+        case .varying:
+            return TextConstants.privateShareWhoHasAccessVarying
+        }
+    }
+    
+    var accessListTitle: String {
+        switch self {
+        case .editor:
+            return TextConstants.privateShareAccessEditor
+        case .viewer:
+            return TextConstants.privateShareAccessViewer
+        case .varying:
+            return TextConstants.privateShareAccessVarying
+        case .owner:
+            return ""
         }
     }
     
@@ -160,6 +178,8 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return 1
         case .viewer:
             return 2
+        case .varying:
+            return 3
         }
     }
 }
@@ -279,9 +299,4 @@ struct PrivateShareAccessListInfo: Codable {
     let role: PrivateShareUserRole
     let expirationDate: Date
     let conditions: [String]? //unknown array type
-}
-
-struct PrivateSharePermissionList: Codable {
-    let permissions: SharedItemPermission?
-    let role: PrivateShareUserRole
 }

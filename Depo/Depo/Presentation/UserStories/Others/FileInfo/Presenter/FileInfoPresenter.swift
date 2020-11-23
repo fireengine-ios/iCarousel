@@ -45,6 +45,17 @@ extension FileInfoPresenter: FileInfoViewOutput {
     func showWhoHasAccess(shareInfo: SharedFileInfo) {
         router.openPrivateShareContacts(with: shareInfo)
     }
+    
+    func openShareAccessList(contact: SharedContact) {
+        guard let item = interactor.item, let projectId = item.projectId else {
+            return
+        }
+        
+        router.openPrivateShareAccessList(projectId: projectId,
+                                          uuid: item.uuid,
+                                          contact: contact,
+                                          fileType: item.fileType)
+    }
 }
 
 // MARK: FileInfoInteractorOutput

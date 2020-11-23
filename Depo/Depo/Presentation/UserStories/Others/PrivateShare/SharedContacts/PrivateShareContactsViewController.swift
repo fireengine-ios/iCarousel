@@ -143,9 +143,16 @@ extension PrivateShareContactsViewController: UITableViewDelegate {
 
 extension PrivateShareContactsViewController: PrivateShareContactCellDelegate {
     func onRoleTapped(index: Int) {
-        guard let contact = contacts[safe: index], contact.role != .owner else {
+        guard let contact = contacts[safe: index],
+              contact.role.isContained(in: [.editor, .viewer]),
+              let projectId = shareInfo?.projectId,
+              let uuid = shareInfo?.uuid,
+              let fileType = shareInfo?.fileType
+        else {
             return
         }
-        //TODO: COF-585 open access page
+        
+        let controller = router.privateShareAccessList(projectId: projectId, uuid: uuid, contact: contact, fileType: fileType)
+        router.pushViewController(viewController: controller)
     }
 }

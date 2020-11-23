@@ -377,7 +377,7 @@ struct RouteRequests {
             static let filesFromFolder = baseV2UrlString + "?size=%d&page=%d&sortBy=%@&sortOrder=%@&parentFolderUuid=%@"
             static let sharingInfo = baseV2UrlString + "/%@"
             static let shareAcls = baseV2UrlString + "/%@/acls"
-            static let shareAcl = shareAcls + "/%@"
+            static let shareAcl = shareAcls + "/%d"
             static let leaveShare = baseV2UrlString + "/%@/acls?subjectType=USER&subjectId=%@"
             
             static let createDownloadUrl = baseV2UrlBulk +/ "create-download-url"

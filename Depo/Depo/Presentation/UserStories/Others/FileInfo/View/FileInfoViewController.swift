@@ -318,7 +318,7 @@ extension FileInfoViewController: UITextFieldDelegate {
 extension FileInfoViewController: FileInfoShareViewDelegate {
     
     func didSelect(contact: SharedContact) {
-        //TODO: COF-585 - open role view/update page
+        output.openShareAccessList(contact: contact)
     }
     
     func didTappedPlusButton() {

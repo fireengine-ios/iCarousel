@@ -10,11 +10,12 @@ import UIKit
 
 final class PrivateShateAccessListViewController: BaseViewController, NibInit {
 
-    static func with(projectId: String, uuid: String, contact: SharedContact) -> PrivateShateAccessListViewController {
+    static func with(projectId: String, uuid: String, contact: SharedContact, fileType: FileType) -> PrivateShateAccessListViewController {
         let controller = PrivateShateAccessListViewController.initFromNib()
         controller.projectId = projectId
         controller.uuid = uuid
         controller.contact = contact
+        controller.fileType = fileType
         return controller
     }
     
@@ -48,10 +49,12 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
     @IBOutlet private weak var tableView: UITableView!
     
     private lazy var privateShareApiService = PrivateShareApiServiceImpl()
+    private lazy var router = RouterVC()
     
     private var projectId = ""
     private var uuid = ""
     private var contact: SharedContact?
+    private var fileType: FileType = .unknown
     private var objects = [PrivateShareAccessListInfo]()
     
     //MARK: - View lifecycle
@@ -73,7 +76,7 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        if tableView.tableHeaderView == nil {
+        if tableView.tableHeaderView == nil, contact?.subject?.name?.isEmpty == false || contact?.subject?.username?.isEmpty == false {
             let header = PrivateShareAccessListHeader.with(name: contact?.subject?.name, username: contact?.subject?.username)
             let size = header.sizeToFit(width: tableView.bounds.width)
             header.frame.size = size
@@ -105,6 +108,27 @@ final class PrivateShateAccessListViewController: BaseViewController, NibInit {
         actionSheet.popoverPresentationController?.sourceView = sender
 
         present(actionSheet, animated: true)
+    }
+    
+    private func showDeleteConfirmationPopup(handler: @escaping BoolHandler) {
+        func close(controller: PopUpController, result: Bool) {
+            controller.close {
+                handler(result)
+            }
+        }
+        
+        let popup = PopUpController.with(title: nil,
+                                         message: TextConstants.privateShareAccessDeleteConfirmPopupMessage,
+                                         image: .question,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstAction: { vc in
+                                            close(controller: vc, result: false)
+                                         },
+                                         secondAction: { vc in
+                                            close(controller: vc, result: true)
+                                         })
+        router.presentViewController(controller: popup)
     }
 }
 
@@ -140,10 +164,10 @@ private extension PrivateShateAccessListViewController {
         }
     }
     
-    func updateUserRole(aclId: Int64) {
+    func updateUserRole(newRole: PrivateShareUserRole, aclId: Int64) {
         showSpinner()
         
-        privateShareApiService.updateAclRole(projectId: projectId, uuid: uuid, aclId: aclId) { [weak self] result in
+        privateShareApiService.updateAclRole(newRole: newRole, projectId: projectId, uuid: uuid, aclId: aclId) { [weak self] result in
             guard let self = self else {
                 return
             }
@@ -151,7 +175,8 @@ private extension PrivateShateAccessListViewController {
             self.hideSpinner()
             
             switch result {
-            case .success(_):
+            case .success():
+                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareAccessRoleChangeSuccess)
                 //After successful response, we need to refresh the page because other folders role may be affected
                 self.updateAccessList()
             case .failed(let error):
@@ -172,8 +197,13 @@ private extension PrivateShateAccessListViewController {
             
             switch result {
             case .success():
-                //After successful response, we need to refresh the page because other folders may be affected
-                self.updateAccessList()
+                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareAccessDeleteUserSuccess)
+                if self.objects.count == 1 {
+                    self.navigationController?.popViewController(animated: true)
+                } else {
+                    //After successful response, we need to refresh the page because other folders may be affected
+                    self.updateAccessList()
+                }
             case .failed(let error):
                 UIApplication.showErrorAlert(message: error.description)
             }
@@ -191,7 +221,14 @@ extension PrivateShateAccessListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(reusable: PrivateShareAccessListCell.self, for: indexPath)
-        cell.setup(with: objects[indexPath.row])
+        
+        let object = objects[indexPath.row]
+        if object.object.uuid == uuid {
+            cell.setup(with: object, fileType: fileType, isRootItem: true)
+        } else {
+            cell.setup(with: object, fileType: .folder, isRootItem: false)
+        }
+        
         cell.delegate = self
         return cell
     }
@@ -206,14 +243,18 @@ extension PrivateShateAccessListViewController: PrivateShareAccessListCellDelega
             switch role {
             case .editor:
                 if info.role != .editor {
-                    self?.updateUserRole(aclId: info.id)
+                    self?.updateUserRole(newRole: .editor, aclId: info.id)
                 }
             case .viewer:
                 if info.role != .viewer {
-                    self?.updateUserRole(aclId: info.id)
+                    self?.updateUserRole(newRole: .viewer, aclId: info.id)
                 }
             case .delete:
-                self?.deleteUser(aclId: info.id)
+                self?.showDeleteConfirmationPopup { [weak self] isConfirm in
+                    if isConfirm {
+                        self?.deleteUser(aclId: info.id)
+                    }
+                }
             }
         }
     }

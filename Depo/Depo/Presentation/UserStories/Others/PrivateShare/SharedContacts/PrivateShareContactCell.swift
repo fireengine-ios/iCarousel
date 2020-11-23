@@ -92,7 +92,7 @@ final class PrivateShareContactCell: UITableViewCell {
             roleButton.setImage(nil, for: .normal)
             roleButton.tintColor = .lrGreyish
             roleButton.isUserInteractionEnabled = false
-        case .editor, .viewer:
+        case .editor, .viewer, .varying:
             roleButton.setTitleColor(.lrTealishFour, for: .normal)
             roleButton.tintColor = .lrTealishFour
             roleButton.setImage(UIImage(named: "arrow_right"), for: .normal)

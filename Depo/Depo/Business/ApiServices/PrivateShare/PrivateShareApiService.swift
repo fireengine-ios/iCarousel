@@ -34,7 +34,8 @@ protocol PrivateShareApiService {
     func getAccessList(projectId: String, uuid: String, subjectType: PrivateShareSubjectType, subjectId: String, handler: @escaping ResponseArrayHandler<PrivateShareAccessListInfo>) -> URLSessionTask?
     
     @discardableResult
-    func updateAclRole(projectId: String, uuid: String, aclId: Int64, handler: @escaping ResponseHandler<PrivateSharePermissionList>) -> URLSessionTask?
+    func updateAclRole(newRole: PrivateShareUserRole, projectId: String, uuid: String, aclId: Int64, handler: @escaping ResponseVoid
+    ) -> URLSessionTask?
     
     @discardableResult
     func deleteAclUser(projectId: String, uuid: String, aclId: Int64, handler: @escaping ResponseVoid) -> URLSessionTask?
@@ -145,24 +146,32 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
         
         return SessionManager
             .customDefault
-            .request(url, method: .get, parameters: parameters, encoding: URLEncoding.default)
+            .request(url,
+                     method: .get,
+                     parameters: parameters,
+                     encoding: URLEncoding.default)
             .customValidate()
             .responseArray(handler)
             .task
     }
     
     @discardableResult
-    func updateAclRole(projectId: String, uuid: String, aclId: Int64, handler: @escaping ResponseHandler<PrivateSharePermissionList>) -> URLSessionTask? {
+    func updateAclRole(newRole: PrivateShareUserRole, projectId: String, uuid: String, aclId: Int64, handler: @escaping ResponseVoid) -> URLSessionTask? {
         guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.shareAcl, projectId, uuid, aclId)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil
         }
         
+        let parameters = ["role": newRole.rawValue]
+        
         return SessionManager
             .customDefault
-            .request(url)
+            .request(url,
+                     method: .put,
+                     parameters: parameters,
+                     encoding: JSONEncoding.default)
             .customValidate()
-            .responseObject(handler)
+            .responseVoid(handler)
             .task
     }
     

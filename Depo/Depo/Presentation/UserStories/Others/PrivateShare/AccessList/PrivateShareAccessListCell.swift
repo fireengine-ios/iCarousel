@@ -42,28 +42,65 @@ final class PrivateShareAccessListCell: UITableViewCell {
     private var info: PrivateShareAccessListInfo?
     weak var delegate: PrivateShareAccessListCellDelegate?
     
-    func setup(with info: PrivateShareAccessListInfo) {
+    func setup(with info: PrivateShareAccessListInfo, fileType: FileType, isRootItem: Bool) {
         self.info = info
-        switch info.object.type {
-        case .file:
-            nameLabel.text = info.object.name
-//            typeImageView.image =
-        default:
-            //for folders
-            nameLabel.text = String(format: TextConstants.privateShareAccessFromFolder, info.object.name)
-//            typeImageView.image =
-        }
         
-        typeImageView.image = UIImage(named: "AF_PS_Unknown")
+        if isRootItem {
+            nameLabel.text = info.object.name
+        } else {
+            nameLabel.text = String(format: TextConstants.privateShareAccessFromFolder, info.object.name)
+        }
+        typeImageView.image = getIcon(for: fileType)
         
         let dateString = info.expirationDate.getDateInFormat(format: "dd MMMM yyyy")
         dateLabel.text = String(format: TextConstants.privateShareAccessExpiresDate, dateString)
-        roleButton.setTitle(info.role.title, for: .normal)
+        roleButton.setTitle(info.role.accessListTitle, for: .normal)
+        
+        switch info.role {
+        case .owner, .varying:
+            roleButton.setImage(nil, for: .normal)
+            roleButton.isUserInteractionEnabled = false
+        case .viewer, .editor:
+            roleButton.setImage(UIImage(named: "downArrow"), for: .normal)
+            roleButton.isUserInteractionEnabled = true
+        }
     }
     
     @IBAction private func onRoleTapped(sender: UIButton) {
         if let info = info {
             delegate?.onRoleTapped(sender: sender, info: info)
+        }
+    }
+    
+    private func getIcon(for fileType: FileType) -> UIImage? {
+        switch fileType {
+        case .folder:
+            return UIImage(named: "AF_PS_folder")
+        case .image:
+            return UIImage(named: "AF_PS_photo")
+        case .video:
+            return UIImage(named: "AF_PS_video")
+        case .audio:
+            return UIImage(named: "AF_PS_audio")
+        case .application(let subType):
+            switch subType {
+            case .doc:
+                return UIImage(named: "AF_PS_DOC")
+            case .pdf:
+                return UIImage(named: "AF_PS_PDF")
+            case .ppt, .pptx:
+                return UIImage(named: "AF_PS_PPT")
+            case .xls:
+                return UIImage(named: "AF_PS_XLS")
+            case .zip:
+                return UIImage(named: "AF_PS_ZIP")
+            default:
+                //unknown
+                return UIImage(named: "AF_PS_Unknown")
+            }
+        default:
+            //unknown
+            return UIImage(named: "AF_PS_Unknown")
         }
     }
 }

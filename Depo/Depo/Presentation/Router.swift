@@ -1233,4 +1233,8 @@ class RouterVC: NSObject {
     func privateShareContacts(with shareInfo: SharedFileInfo, endShareHandler: VoidHandler?) -> UIViewController {
         PrivateShareContactsViewController.with(shareInfo: shareInfo, endShareHandler: endShareHandler)
     }
+    
+    func privateShareAccessList(projectId: String, uuid: String, contact: SharedContact, fileType: FileType) -> UIViewController {
+        PrivateShateAccessListViewController.with(projectId: projectId, uuid: uuid, contact: contact, fileType: fileType)
+    }
 }

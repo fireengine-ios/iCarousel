@@ -26,4 +26,12 @@ class FileInfoRouter: FileInfoRouterInput {
         }
         router.pushViewController(viewController: controller)
     }
+    
+    func openPrivateShareAccessList(projectId: String, uuid: String, contact: SharedContact, fileType: FileType) {
+        let controller = router.privateShareAccessList(projectId: projectId,
+                                                       uuid: uuid,
+                                                       contact: contact,
+                                                       fileType: fileType)
+        router.pushViewController(viewController: controller)
+    }
 }
