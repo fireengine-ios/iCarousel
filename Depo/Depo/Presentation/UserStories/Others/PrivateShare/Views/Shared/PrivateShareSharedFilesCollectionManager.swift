@@ -233,6 +233,14 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         cell.updating()
         cell.setSelection(isSelectionActive: isSelecting, isSelected: isSelectedCell)
         cell.configureWithWrapper(wrappedObj: item)
+          
+        if case PathForItem.remoteUrl(let url) = item.patchToPreview {
+            if let url = url {
+                cell.setImage(with: url)
+            } else {
+                cell.setPlaceholderImage(fileType: item.fileType)
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

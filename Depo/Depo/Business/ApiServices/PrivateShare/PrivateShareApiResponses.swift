@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 struct SuggestedApiContact: Codable {
     let type: String?
@@ -48,7 +49,7 @@ struct SharedFileInfo: Codable {
     let uploaderDeviceType: String? //enum
     let ugglaId: String?
     let content_type: String?
-    //        "metadata": {},
+    let metadata: SharedFileInfoMetaData
     let album: [FileAlbum]?
     //        "location": {},
     let permissions: SharedItemPermission?
@@ -58,6 +59,65 @@ struct SharedFileInfo: Codable {
     
     var fileType: FileType {
         return FileType(type: content_type, fileName: name)
+    }
+}
+
+struct SharedFileInfoMetaData: Codable {
+    let isFavourite: Bool?
+    
+    let thumbnailLarge: URL?
+    let thumbnailMedium: URL?
+    let thumbnailSmall: URL?
+    
+    let originalHash: String?
+    let originalBytes: Int64?
+    
+    let imageHeight: Int?
+    let imageWidth: Int?
+    let imageOrientation: Int? //enum?
+    let imageDateTime: Date?
+    
+    let latitude: Double?
+    let longitude: Double?
+    
+    private enum CodingKeys: String, CodingKey {
+        case isFavourite = "X-Object-Meta-Favourite"
+        case thumbnailLarge = "Thumbnail-Large"
+        case thumbnailMedium = "Thumbnail-Medium"
+        case thumbnailSmall = "Thumbnail-Small"
+        
+        case originalHash = "X-Object-Meta-Ios-Metadata-Hash"
+        case originalBytes = "Original-Bytes"
+        
+        case imageHeight = "Image-Height"
+        case imageWidth = "Image-Width"
+        case imageOrientation = "Image-Orientation"
+        case imageDateTime = "Image-DateTime"
+        
+        case latitude = "Latitude"
+        case longitude = "Longitude"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        originalBytes = JSON(try container.decodeIfPresent(String.self, forKey: .originalBytes) ?? "").int64
+        isFavourite = JSON(try container.decodeIfPresent(String.self, forKey: .isFavourite) ?? "").boolFromString
+        
+        thumbnailLarge = JSON(try container.decodeIfPresent(String.self, forKey: .thumbnailLarge) ?? "").url
+        thumbnailMedium = JSON(try container.decodeIfPresent(String.self, forKey: .thumbnailMedium) ?? "").url
+        thumbnailSmall = JSON(try container.decodeIfPresent(String.self, forKey: .thumbnailSmall) ?? "").url
+        
+        originalHash = try container.decodeIfPresent(String.self, forKey: .originalHash)
+        
+        imageHeight = JSON(try container.decodeIfPresent(String.self, forKey: .imageHeight) ?? "").int
+        imageWidth = JSON(try container.decodeIfPresent(String.self, forKey: .imageWidth) ?? "").int
+        imageOrientation = JSON(try container.decodeIfPresent(String.self, forKey: .imageOrientation) ?? "").int
+        
+        imageDateTime = JSON(try container.decodeIfPresent(String.self, forKey: .imageDateTime) ?? "").date
+        
+        latitude = JSON(try container.decodeIfPresent(String.self, forKey: .latitude) ?? "").double
+        longitude = JSON(try container.decodeIfPresent(String.self, forKey: .longitude) ?? "").double
     }
 }
 
