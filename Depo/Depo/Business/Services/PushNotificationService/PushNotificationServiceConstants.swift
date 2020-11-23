@@ -95,3 +95,18 @@ enum PushNotificationParameter: String {
     case netmeraParameters = "prms"
 }
 
+enum UniversalLinkPath: String {
+ 
+    case sharedWithMe = "shared/with-me"
+    case sharedByMe = "shared/by-me"
+    
+    var action: PushNotificationAction {
+        switch self {
+        case .sharedWithMe:
+            return .sharedWithMe
+        case .sharedByMe:
+            return .sharedByMe
+        }
+    }
+    
+}
