@@ -49,7 +49,7 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
         
         ItemOperationManager.default.startUpdateView(view: self)
         
-        //uncomment in future
+        //due to a problem in logic, we need to remove END SHARING button from who has access page for now. In the futur we will add this button with another logic
         endSharingButton.isHidden = false
 //        if shareInfo?.permissions?.granted?.contains(.writeAcl) == true {
 //            endSharingButton.isHidden = false
