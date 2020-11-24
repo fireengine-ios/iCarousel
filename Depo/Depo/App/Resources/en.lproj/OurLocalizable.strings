@@ -1853,3 +1853,5 @@
 "private_share_who_has_access_end_share" = "End Sharing";
 "private_share_end_sharing_confirm" = "Are you sure you want to end sharing?";
 "private_share_end_sharing_success" = "Sharing ended";
+
+"private_share_plus_button_no_action" = "There is no action for plus button in this level";

@@ -372,6 +372,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @IBAction func plussBtnAction(_ sender: Any) {
         guard !getFloatingButtonsArray().isEmpty else {
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateSharePlusButtonNoAction)
             return
         }
         

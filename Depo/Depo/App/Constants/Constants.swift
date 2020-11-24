@@ -2171,5 +2171,5 @@ struct TextConstants {
     static let privateShareWhoHasAccessEndShare = NSLocalizedString("private_share_who_has_access_end_share", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareWhoHasAccessPopupMessage = NSLocalizedString("private_share_end_sharing_confirm", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareEndShareSuccess = NSLocalizedString("private_share_end_sharing_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-
+    static let privateSharePlusButtonNoAction = NSLocalizedString("private_share_plus_button_no_action", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
