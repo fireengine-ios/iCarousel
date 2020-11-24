@@ -49,12 +49,14 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
         
         ItemOperationManager.default.startUpdateView(view: self)
         
-        if shareInfo?.permissions?.granted?.contains(.writeAcl) == true {
-            endSharingButton.isHidden = false
-            contactsTableView.contentInset.bottom = view.frame.height - endSharingButton.frame.minY
-        } else {
-            endSharingButton.isHidden = true
-        }
+        //uncomment in future
+        endSharingButton.isHidden = false
+//        if shareInfo?.permissions?.granted?.contains(.writeAcl) == true {
+//            endSharingButton.isHidden = false
+//            contactsTableView.contentInset.bottom = view.frame.height - endSharingButton.frame.minY
+//        } else {
+//            endSharingButton.isHidden = true
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
