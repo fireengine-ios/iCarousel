@@ -564,6 +564,17 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                         //currently only for one file is supported
                         self.interactor.leaveSharing(item: currentItems.first)
                     })
+                case .moveToTrashShared:
+                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default) { _ in
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
+                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                        if selectedItems.count <= allowedNumberLimit {
+                            self.interactor.moveToTrashShared(items: currentItems)
+                        } else {
+                            let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
+                            UIApplication.showErrorAlert(message: text)
+                        }
+                    }
                 }
                 return action
             })

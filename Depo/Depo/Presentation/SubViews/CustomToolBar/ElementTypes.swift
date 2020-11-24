@@ -63,6 +63,7 @@ enum ElementTypes {
     //private share
     case endSharing
     case leaveSharing
+    case moveToTrashShared
     
     static var trashState: [ElementTypes] = [.restore, .delete]
     static var hiddenState: [ElementTypes] = [.unhide, .moveToTrash]

@@ -643,6 +643,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var fileData: Data?
     
+    var privateSharePermission: SharedItemPermission?
+    
     var asset: PHAsset? {
         switch patchToPreview {
         case let .localMediaContent(local):
@@ -1187,6 +1189,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
             fileType = .folder
         }
         childCount = privateShareFileInfo.childCount
+        privateSharePermission = privateShareFileInfo.permissions
     }
     
     func copyFileData(from item: WrapData) {

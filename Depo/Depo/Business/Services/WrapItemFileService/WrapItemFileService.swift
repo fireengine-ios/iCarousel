@@ -149,6 +149,23 @@ class WrapItemFileService: WrapItemFileOperations {
         }
     }
     
+    func moveToTrashShared(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
+        guard let projectId = file.projectId else {
+            fail?(ErrorResponse.string("don't have projectId"))
+            return
+        }
+        
+        privateShareApiService.moveToTrash(projectId: projectId, uuid: file.uuid) { response in
+            switch response {
+                case .success(()):
+                    success?()
+                    
+                case .failed(let error):
+                    fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
     func hide(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let wrappedSuccessOperation: FileOperationSucces = {
             MediaItemOperationsService.shared.hide(items, completion: {
