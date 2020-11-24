@@ -12,7 +12,7 @@ import Foundation
 indirect enum PrivateShareType: Equatable {
     case byMe
     case withMe
-    case innerFolder(type: PrivateShareType, uuid: String, name: String)
+    case innerFolder(type: PrivateShareType, permissions: [PrivateSharePermission], uuid: String, name: String)
     
     var rootType: PrivateShareType {
         return veryRootType(for: self)
@@ -54,17 +54,20 @@ indirect enum PrivateShareType: Equatable {
             case (.withMe, _):
                 return []
                 
-            case (.innerFolder, let veryRootType):
-                return floatingButtonTypes(innerFolderVeryRootType: veryRootType)
+            case (.innerFolder(_, let permissions, _, _), let veryRootType):
+                return floatingButtonTypes(innerFolderVeryRootType: veryRootType, permissions: permissions)
         }
     }
     
-    private func floatingButtonTypes(innerFolderVeryRootType: PrivateShareType) -> [FloatingButtonsType] {
+    private func floatingButtonTypes(innerFolderVeryRootType: PrivateShareType, permissions: [PrivateSharePermission]) -> [FloatingButtonsType] {
         switch innerFolderVeryRootType {
             case .byMe:
                 return [.newFolder, .upload, .uploadFiles]
                 
             case .withMe:
+                if permissions.contains(.create) {
+                    return [.newFolder, .uploadFiles]
+                }
                 return []
                 
             case .innerFolder:
@@ -78,7 +81,7 @@ indirect enum PrivateShareType: Equatable {
             case .byMe, .withMe:
                 return type
                 
-            case .innerFolder(type: let rootType, uuid: _, name: _):
+            case .innerFolder(type: let rootType, _, _, _):
                 return veryRootType(for: rootType)
         }
     }
@@ -208,7 +211,7 @@ final class PrivateShareFileInfoManager {
             case .withMe:
                 privateShareAPIService.getSharedWithMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
                 
-            case .innerFolder(type: _, let folderUuid, name: _):
+            case .innerFolder(type: _, _, let folderUuid, name: _):
                 guard let projectId = SingletonStorage.shared.accountInfo?.projectID else {
                     return
                 }

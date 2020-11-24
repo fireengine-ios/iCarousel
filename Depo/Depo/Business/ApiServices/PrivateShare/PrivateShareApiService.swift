@@ -44,6 +44,9 @@ protocol PrivateShareApiService {
     
     @discardableResult
     func createDownloadUrl(projectId: String, uuid: String, handler: @escaping ResponseHandler<UrlToDownload>) -> URLSessionTask?
+    
+    @discardableResult
+    func moveToTrash(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask?
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
@@ -217,6 +220,22 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
                      encoding: ArrayEncoding())
             .customValidate()
             .responseObject(handler)
+            .task
+    }
+    
+    @discardableResult
+    func moveToTrash(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
+        
+        let parameters = [["projectId" : projectId, "uuid" : uuid]].asParameters()
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.FileSystem.Version_2.trash,
+                     method: .post,
+                     parameters: parameters,
+                     encoding: ArrayEncoding())
+            .customValidate()
+            .responseVoid(handler)
             .task
     }
 }

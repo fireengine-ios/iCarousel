@@ -2184,4 +2184,5 @@ struct TextConstants {
     static let privateShareAccessRoleChangeSuccess = NSLocalizedString("private_share_access_role_change_success", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareAccessDeleteConfirmPopupMessage = NSLocalizedString("private_share_access_remove_confirmation", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareAccessDeleteUserSuccess = NSLocalizedString("private_share_info_access_role_remove", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharePlusButtonNoAction = NSLocalizedString("private_share_plus_button_no_action", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
