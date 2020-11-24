@@ -100,6 +100,9 @@ final class FileInfoView: UIView, FromNib {
             getSharingInfo(projectId: projectId, uuid: object.uuid)
         }
         
+        let isOwner = projectId == SingletonStorage.shared.accountInfo?.projectID
+        fileNameView.isReadOnly = !isOwner
+        
         layoutIfNeeded()
         completion?()
     }
@@ -235,6 +238,10 @@ final class FileInfoView: UIView, FromNib {
                 info.members?[index].subject?.name = displayName(from: localContactNames)
             }
             sharingInfoView.setup(with: info)
+        }
+        
+        if sharingInfo.projectId != SingletonStorage.shared.accountInfo?.projectID, sharingInfo.permissions?.granted?.contains(.setAttribute) == true {
+            fileNameView.isReadOnly = false
         }
         
         sharingInfoView.isHidden = !needShow

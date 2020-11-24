@@ -379,6 +379,7 @@ struct RouteRequests {
             static let shareAcls = baseV2UrlString + "/%@/acls"
             static let shareAcl = shareAcls + "/%d"
             static let leaveShare = baseV2UrlString + "/%@/acls?subjectType=USER&subjectId=%@"
+            static let rename = sharingInfo + "/name"
             
             static let createDownloadUrl = baseV2UrlBulk +/ "create-download-url"
             static let move = baseV2UrlBulk +/ "move"
