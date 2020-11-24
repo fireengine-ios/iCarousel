@@ -16,7 +16,7 @@ class UploadFromLifeBoxViewController: BaseFilesGreedChildrenViewController, Upl
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        scrollablePopUpView.isEnable = false
+        scrollablePopUpsMediator.cardProtocolSupportedView.isEnable = false
         super.viewDidAppear(animated)
     }
     

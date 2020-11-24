@@ -25,7 +25,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
 //        let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
 //        viewController.needToShowTabBar = true
 //        viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles, .importFromSpotify])
-//        viewController.scrollablePopUpView.isEnable = true
+//        viewController.scrollablePopUpView.cardProtocolSupportedView.isEnable = true
 //        viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.upload, .download])
 //        let configurator = BaseFilesGreedModuleConfigurator()
 //        let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
@@ -52,8 +52,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let viewController = BaseFilesGreedViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.uploadDocuments])
-        viewController.scrollablePopUpView.isEnable = true
-        viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.upload, .download])
+        viewController.scrollablePopUpsMediator.cardProtocolSupportedView.isEnable = true
+        viewController.scrollablePopUpsMediator.cardProtocolSupportedView.addPermittedPopUpViewTypes(types: [.upload, .download])
         viewController.segmentImage = .documents
         
         let configurator = BaseFilesGreedModuleConfigurator()
@@ -79,10 +79,11 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializeAllFilesViewController(with nibName: String, moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
+        viewController.scrollablePopUpsMediator = AllFilesSectionSliderMediator(isAllFiles: true)
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder])
-        viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
-        viewController.scrollablePopUpView.isEnable = true
+        viewController.scrollablePopUpsMediator.cardProtocolSupportedView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
+        viewController.scrollablePopUpsMediator.cardProtocolSupportedView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .move, .moveToTrash],
                                                style: .default, tintColor: nil)
@@ -111,8 +112,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.uploadFiles, .uploadFromLifeboxFavorites])
-        viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.upload, .download])
-        viewController.scrollablePopUpView.isEnable = true
+        viewController.scrollablePopUpsMediator.cardProtocolSupportedView.addPermittedPopUpViewTypes(types: [.upload, .download])
+        viewController.scrollablePopUpsMediator.cardProtocolSupportedView.isEnable = true
         viewController.isFavorites = true
         viewController.segmentImage = .favorites
         
@@ -147,8 +148,8 @@ class BaseFilesGreedModuleInitializer: NSObject {
         if status == .active {
             viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder])
         }
-        viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
-        viewController.scrollablePopUpView.isEnable = true
+        viewController.scrollablePopUpsMediator.cardProtocolSupportedView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])
+        viewController.scrollablePopUpsMediator.cardProtocolSupportedView.isEnable = true
         viewController.status = status
         
         let configurator = BaseFilesGreedModuleConfigurator()

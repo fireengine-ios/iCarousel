@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zKR-Lk-LO2" customClass="SharedFilesCollectionSliderView" customModule="Billo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="661" height="334"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIu-13-OA3">
+                    <rect key="frame" x="16" y="16" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BJ9-pW-mRq">
+                    <rect key="frame" x="599" y="11.5" width="46" height="30"/>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="showAll:" destination="zKR-Lk-LO2" eventType="touchUpInside" id="np1-l8-gEQ"/>
+                    </connections>
+                </button>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZJp-wS-6c1">
+                    <rect key="frame" x="0.0" y="53" width="661" height="275"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iue-IP-DMT">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ZJp-wS-6c1" secondAttribute="trailing" id="1lr-B5-IcO"/>
+                <constraint firstItem="JIu-13-OA3" firstAttribute="leading" secondItem="zKR-Lk-LO2" secondAttribute="leading" constant="16" id="4a5-Av-xDa"/>
+                <constraint firstAttribute="bottom" secondItem="ZJp-wS-6c1" secondAttribute="bottom" constant="6" id="9bD-IK-QcU"/>
+                <constraint firstItem="ZJp-wS-6c1" firstAttribute="top" secondItem="JIu-13-OA3" secondAttribute="bottom" constant="16" id="CPn-kB-HM0"/>
+                <constraint firstItem="ZJp-wS-6c1" firstAttribute="leading" secondItem="zKR-Lk-LO2" secondAttribute="leading" id="Cco-hJ-fbY"/>
+                <constraint firstItem="BJ9-pW-mRq" firstAttribute="centerY" secondItem="JIu-13-OA3" secondAttribute="centerY" id="Kdt-7O-Bcg"/>
+                <constraint firstAttribute="trailing" secondItem="BJ9-pW-mRq" secondAttribute="trailing" constant="16" id="NLX-LS-nqn"/>
+                <constraint firstItem="JIu-13-OA3" firstAttribute="top" secondItem="zKR-Lk-LO2" secondAttribute="top" constant="16" id="c9L-27-QzG"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="collectionView" destination="ZJp-wS-6c1" id="s3C-NP-O5k"/>
+                <outlet property="showAllButton" destination="BJ9-pW-mRq" id="DyN-Lc-ood"/>
+                <outlet property="sliderLabel" destination="JIu-13-OA3" id="csY-fH-aAp"/>
+            </connections>
+            <point key="canvasLocation" x="129.71014492753625" y="473.4375"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

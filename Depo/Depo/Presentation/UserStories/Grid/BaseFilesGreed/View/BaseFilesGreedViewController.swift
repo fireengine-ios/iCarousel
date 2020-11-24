@@ -44,7 +44,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var noFilesTopLabel: UILabel?
     
-    var scrollablePopUpView = CardsContainerView()
+    var scrollablePopUpsMediator = AllFilesSectionSliderMediator()
     
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
     
@@ -119,8 +119,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         if let searchController = navigationController?.topViewController as? SearchViewController {
             searchController.dismissController(animated: false)
         }
-        scrollablePopUpView.isActive = true
-        CardsManager.default.updateAllProgressesInCardsForView(view: scrollablePopUpView)
+        scrollablePopUpsMediator.cardProtocolSupportedView.isActive = true
+        CardsManager.default.updateAllProgressesInCardsForView(view: scrollablePopUpsMediator.cardProtocolSupportedView)
         output.needToReloadVisibleCells()
         configurateNavigationBar()
     }
@@ -132,12 +132,12 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        scrollablePopUpView.isActive = false
+        scrollablePopUpsMediator.cardProtocolSupportedView.isActive = false
         super.viewDidDisappear(animated)
     }
     
     func configurateViewForPopUp() {
-        CardsManager.default.addViewForNotification(view: scrollablePopUpView)
+        CardsManager.default.addViewForNotification(view: scrollablePopUpsMediator.cardProtocolSupportedView)
     }
     
     func configurateNavigationBar() {
@@ -151,7 +151,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     deinit {
-         CardsManager.default.removeViewForNotification(view: scrollablePopUpView)
+        CardsManager.default.removeViewForNotification(view: scrollablePopUpsMediator.cardProtocolSupportedView)
          NotificationCenter.default.removeObserver(self)
     }
     
@@ -304,7 +304,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func showNoFilesTop(text: String) {
         noFilesTopLabel?.text = text
-        noFilesTopLabel?.isHidden = !scrollablePopUpView.viewsArray.isEmpty
+        noFilesTopLabel?.isHidden = !scrollablePopUpsMediator.cardProtocolSupportedView.viewsArray.isEmpty
         topBarContainer.isHidden = true
         floatingHeaderContainerHeightConstraint.constant = 0
         view.layoutIfNeeded()
@@ -368,7 +368,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     private func setupSlider(sliderController: LBAlbumLikePreviewSliderViewController) {
         contentSlider = sliderController
 
-        let height = scrollablePopUpView.frame.size.height + BaseFilesGreedViewController.sliderH
+        let height = scrollablePopUpsMediator.containerView.frame.size.height + BaseFilesGreedViewController.sliderH
         
         let subView = UIView(frame: CGRect(x: 0, y: -height, width: collectionView.frame.size.width, height: BaseFilesGreedViewController.sliderH))
         subView.addSubview(sliderController.view)
@@ -385,7 +385,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         subView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        let relatedView = scrollablePopUpView
+        let relatedView = scrollablePopUpsMediator
         
         var constraintsArray = [NSLayoutConstraint]()
         constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .top, relatedBy: .equal, toItem: relatedView, attribute: .bottom, multiplier: 1, constant: 0))
@@ -408,21 +408,21 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     private func setupViewForPopUp() {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        collectionView.addSubview(scrollablePopUpView)
+        collectionView.addSubview(scrollablePopUpsMediator.containerView)
         
-        scrollablePopUpView.translatesAutoresizingMaskIntoConstraints = false
+        scrollablePopUpsMediator.containerView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         var constraintsArray = [NSLayoutConstraint]()
-        contentSliderTopY = NSLayoutConstraint(item: scrollablePopUpView, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: 0)
+        contentSliderTopY = NSLayoutConstraint(item: scrollablePopUpsMediator.containerView, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: 0)
         constraintsArray.append(contentSliderTopY!)
-        constraintsArray.append(NSLayoutConstraint(item: scrollablePopUpView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
-        constraintsArray.append(NSLayoutConstraint(item: scrollablePopUpView, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
-        contentSliderH = NSLayoutConstraint(item: scrollablePopUpView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
+        constraintsArray.append(NSLayoutConstraint(item: scrollablePopUpsMediator.containerView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: scrollablePopUpsMediator.containerView, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
+        contentSliderH = NSLayoutConstraint(item: scrollablePopUpsMediator.containerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
         constraintsArray.append(contentSliderH!)
         
         NSLayoutConstraint.activate(constraintsArray)
-        scrollablePopUpView.delegate = self
+        scrollablePopUpsMediator.cardProtocolSupportedView.delegate = self
     }
     
     // MARK: ViewForPopUpDelegate

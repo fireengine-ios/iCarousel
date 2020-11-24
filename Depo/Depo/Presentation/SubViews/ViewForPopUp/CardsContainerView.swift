@@ -12,9 +12,10 @@ import UIKit
     func onUpdateViewForPopUpH(h: CGFloat)
 }
 
-class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, SwipeableCardCellDelegate, CardsManagerViewProtocol {
-
+class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, SwipeableCardCellDelegate, CardsManagerViewProtocol, AllFilesSectionSliderMediatorProtocol {
+    
     var hConstraint: NSLayoutConstraint?
+    
     weak var delegate: CardsContainerViewDelegate?
     
     var tableView: UITableView = UITableView()
@@ -30,6 +31,14 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
     var isActive = false
     
     let lock = NSLock()
+    
+    var cardProtocolSupportedView: CardsContainerView {
+        return self
+    }
+    
+    var containerView: UIView {
+        return self
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

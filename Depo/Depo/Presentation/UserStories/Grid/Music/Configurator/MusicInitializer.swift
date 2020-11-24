@@ -19,8 +19,8 @@ final class MusicInitializer {
         
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.uploadMusic, .importFromSpotify])
-        viewController.scrollablePopUpView.isEnable = true
-        viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.upload, .download])
+        viewController.scrollablePopUpsMediator.cardProtocolSupportedView.isEnable = true
+        viewController.scrollablePopUpsMediator.cardProtocolSupportedView.addPermittedPopUpViewTypes(types: [.upload, .download])
         viewController.segmentImage = .music
         
         let configurator = MusicConfigurator()

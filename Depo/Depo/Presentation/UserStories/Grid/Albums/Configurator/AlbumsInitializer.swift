@@ -18,8 +18,8 @@ class AlbumsModuleInitializer: NSObject {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.takePhoto, .upload, .createAStory, .createAlbum])
-        viewController.scrollablePopUpView.addPermittedPopUpViewTypes(types: [.sync, .upload])
-        viewController.scrollablePopUpView.isEnable = true
+        viewController.scrollablePopUpsMediator.cardProtocolSupportedView.cardProtocolSupportedView.addPermittedPopUpViewTypes(types: [.sync, .upload])
+        viewController.scrollablePopUpsMediator.cardProtocolSupportedView.isEnable = true
         let configurator = BaseFilesGreedModuleConfigurator()
         let bottomBarConfig = EditingBarConfig(elementsConfig: [.share, .download] + ElementTypes.activeState,
                                                style: .default, tintColor: nil)
