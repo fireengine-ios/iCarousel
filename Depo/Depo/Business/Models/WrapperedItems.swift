@@ -979,7 +979,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
             case .little : url = metaData?.smalURl
             case .medium : url = metaData?.mediumUrl
             case .large  : url = metaData?.largeUrl
-            } case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places), .photoAlbum:
+            }
+        case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places), .photoAlbum:
             if let mediumUrl = metaData?.mediumUrl {
                 url = mediumUrl
             } else if let smallUrl = metaData?.smalURl {
@@ -1161,9 +1162,18 @@ class WrapData: BaseDataSourceItem, Wrappered {
     init(privateShareFileInfo: SharedFileInfo) {
         //TODO: status to enum in SharedFileInfo
         
+        metaData = BaseMetaData(with: privateShareFileInfo.metadata)
+        
         fileSize = privateShareFileInfo.bytes ?? 0
         favorites = false
-        patchToPreview = .remoteUrl(nil)
+//        let localStorage = LocalMediaStorage.default
+//        if let assetId = privateShareFileInfo.metadata.originalHash,
+//           localStorage.photoLibraryIsAvailible(),
+//           let asset = localStorage.assetsCache.assetBy(identifier: assetId) ?? PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject {
+//
+//        } else {
+            patchToPreview = .remoteUrl(metaData?.mediumUrl)
+//        }
         status = .active
         
         super.init(uuid: privateShareFileInfo.uuid,
