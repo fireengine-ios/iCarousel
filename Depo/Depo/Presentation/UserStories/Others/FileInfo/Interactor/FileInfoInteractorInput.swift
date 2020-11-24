@@ -10,6 +10,7 @@ import Foundation
 
 protocol FileInfoInteractorInput {
     var item: BaseDataSourceItem? { get set }
+    var sharingInfo: SharedFileInfo? { get }
     func viewIsReady()
     func onRename(newName: String)
     func getAlbum(for item: BaseDataSourceItem)

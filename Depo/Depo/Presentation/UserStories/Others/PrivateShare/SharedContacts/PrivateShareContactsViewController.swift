@@ -10,11 +10,10 @@ import UIKit
 
 final class PrivateShareContactsViewController: BaseViewController, NibInit {
 
-    static func with(shareInfo: SharedFileInfo, endShareHandler: VoidHandler?) -> PrivateShareContactsViewController {
+    static func with(shareInfo: SharedFileInfo) -> PrivateShareContactsViewController {
         let controller = PrivateShareContactsViewController.initFromNib()
         controller.shareInfo = shareInfo
         controller.contacts = (shareInfo.members ?? []).sorted(by: { $0.role.order < $1.role.order })
-        controller.endShareHandler = endShareHandler
         return controller
     }
     
@@ -30,7 +29,6 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
         }
     }
     
-    private var endShareHandler: VoidHandler?
     private var shareInfo: SharedFileInfo?
     private var contacts = [SharedContact]()
     
@@ -39,11 +37,17 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
     
     //MARK: - View lifecycle
     
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setTitle(withString: TextConstants.privateShareWhoHasAccessTitle)
         setupTableView()
+        
+        ItemOperationManager.default.startUpdateView(view: self)
         
         if shareInfo?.permissions?.granted?.contains(.writeAcl) == true {
             endSharingButton.isHidden = false
@@ -103,7 +107,7 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
             self.hideSpinner()
             switch result {
             case .success:
-                self.endShareHandler?()
+                ItemOperationManager.default.didEndShareItem(uuid: uuid)
                 self.router.popViewController()
                 SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareEndShareSuccess)
             case .failed(let error):
@@ -143,9 +147,37 @@ extension PrivateShareContactsViewController: UITableViewDelegate {
 
 extension PrivateShareContactsViewController: PrivateShareContactCellDelegate {
     func onRoleTapped(index: Int) {
-        guard let contact = contacts[safe: index], contact.role != .owner else {
+        guard let contact = contacts[safe: index],
+              contact.role.isContained(in: [.editor, .viewer]),
+              let projectId = shareInfo?.projectId,
+              let uuid = shareInfo?.uuid,
+              let fileType = shareInfo?.fileType
+        else {
             return
         }
-        //TODO: COF-585 open access page
+        
+        let controller = router.privateShareAccessList(projectId: projectId, uuid: uuid, contact: contact, fileType: fileType)
+        router.pushViewController(viewController: controller)
+    }
+}
+
+//MARK: - ItemOperationManagerViewProtocol
+
+extension PrivateShareContactsViewController: ItemOperationManagerViewProtocol {
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        object === self
+    }
+    
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact) {
+        if let index = contacts.firstIndex(where: { $0 == contact }) {
+            contacts[index].role = role
+            contacts.sort(by: { $0.role.order < $1.role.order })
+        }
+        contactsTableView.reloadData()
+    }
+    
+    func didRemove(contact: SharedContact, fromItem uuid: String) {
+        contacts.remove(contact)
+        contactsTableView.reloadData()
     }
 }

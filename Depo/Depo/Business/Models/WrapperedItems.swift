@@ -875,6 +875,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         super.init(uuid: remote.uuid)
         md5 = remote.itemHash ?? "not hash "
         
+        projectId = SingletonStorage.shared.accountInfo?.projectID
+        
         albums = remote.albums
         
         name = remote.name
@@ -947,6 +949,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         md5 = searchResponse[SearchJsonKey.hash].string ?? "not hash"
         name = searchResponse[SearchJsonKey.name].string
         uuid = fileUUID
+        projectId = SingletonStorage.shared.accountInfo?.projectID
         
         mimeType = searchResponse[SearchJsonKey.content_type].string
         fileType = FileType(type: mimeType, fileName: name)
@@ -1077,6 +1080,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         super.init()
         parent = mediaItem.parent
         md5 = mediaItem.md5Value ?? "not md5"
+        projectId = SingletonStorage.shared.accountInfo?.projectID
         
         if let mediaItemUuid = mediaItem.uuid {
             uuid = mediaItemUuid
