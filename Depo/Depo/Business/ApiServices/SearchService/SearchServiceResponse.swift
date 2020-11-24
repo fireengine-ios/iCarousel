@@ -193,6 +193,21 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         aCoder.encode(specialFolderMeta, forKey: SearchJsonKey.specialFolderMeta)
 //        aCoder.encode(videoHLSPreview, forKey: SearchJsonKey.VideoHLSPreview)
     }
+    
+    init(with sharedFileMetaData: SharedFileInfoMetaData) {
+        super.init()
+        
+        favourite = sharedFileMetaData.isFavourite
+        
+        takenDate = sharedFileMetaData.imageDateTime
+        
+        smalURl = sharedFileMetaData.thumbnailSmall
+        mediumUrl = sharedFileMetaData.thumbnailMedium
+        largeUrl = sharedFileMetaData.thumbnailLarge
+        
+        height = sharedFileMetaData.imageHeight ?? 0
+        width = sharedFileMetaData.imageWidth ?? 0
+    }
 }
 
 extension BaseMetaData {
