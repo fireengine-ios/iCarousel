@@ -42,22 +42,18 @@ extension FileInfoInteractor: FileInfoInteractorInput {
             return
         }
         
-        if let file = item as? Item {
-            let renameFile = RenameFile(uuid: file.uuid, newName: newName)
-            FileService().rename(rename: renameFile, success: { [weak self] in
-                DispatchQueue.main.async {
-                    self?.item?.name = newName
+        if let item = item as? Item, let projectId = item.projectId {
+            shareApiService.renameItem(projectId: projectId, uuid: item.uuid, name: newName) { [weak self] result in
+                switch result {
+                case .success():
+                    item.name = newName
                     self?.output.updated()
+                    ItemOperationManager.default.didRenameItem(item)
                     
-                    if let item = self?.item {
-                        ItemOperationManager.default.didRenameItem(item)
-                    }
+                case .failed(let error):
+                    self?.output.failedUpdate(error: error)
                 }
-                }, fail: { [weak self] error in
-                    DispatchQueue.main.async {
-                        self?.output.failedUpdate(error: error)
-                    }
-            })
+            }
         }
         
         if let album = item as? AlbumItem {
