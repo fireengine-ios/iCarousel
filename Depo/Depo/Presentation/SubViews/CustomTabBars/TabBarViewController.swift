@@ -335,8 +335,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             }, completion: { _ in
                 
             })
-            
-            
         }
     }
     
@@ -735,7 +733,7 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         }
         
         if let controller = currentViewController as? PrivateShareSharedFilesViewController,
-           case let PrivateShareType.innerFolder(type: _, uuid: folderUuid, name: _) = controller.shareType {
+           case let PrivateShareType.innerFolder(_, _, folderUuid, _) = controller.shareType {
             return folderUuid
         }
         

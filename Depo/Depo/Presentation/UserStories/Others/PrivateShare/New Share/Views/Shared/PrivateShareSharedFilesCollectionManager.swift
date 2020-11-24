@@ -293,7 +293,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         }
         
         if item.isFolder == true {
-            openFolder(with: item.uuid, name: item.name ?? "")
+            openFolder(with: item.uuid, permissions: item.privateSharePermission?.granted ?? [], name: item.name ?? "")
             
         } else {
             let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
@@ -301,9 +301,9 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         }
     }
     
-    private func openFolder(with folderUuid: String, name: String) {
+    private func openFolder(with folderUuid: String, permissions: [PrivateSharePermission], name: String) {
         DispatchQueue.main.async {
-            let controller = self.router.sharedFolder(rootShareType: self.fileInfoManager.type, folderUuid: folderUuid, name: name)
+            let controller = self.router.sharedFolder(rootShareType: self.fileInfoManager.type, permissions: permissions, folderUuid: folderUuid, name: name)
             self.router.pushViewController(viewController: controller)
         }
     }

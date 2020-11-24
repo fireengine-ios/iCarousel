@@ -29,7 +29,7 @@ final class PrivateShareSharedWithThreeDotsManager {
             case .withMe:
                 return
                 
-            case .innerFolder(type: _, uuid: _, name: _):
+            case .innerFolder:
                 //TODO:
                 alert.show(with: [.select], for: [], presentedBy: sender, onSourceView: nil, viewController: nil)
         }
@@ -44,7 +44,7 @@ final class PrivateShareSharedWithThreeDotsManager {
             case .withMe:
                 return
                 
-            case .innerFolder(type: _, uuid: _, name: _):
+            case .innerFolder:
                 //TODO:
                 let types = actionTypes(for: selectedItems)
                 alert.show(with: types, for: selectedItems, presentedBy: sender, onSourceView: nil, viewController: nil)

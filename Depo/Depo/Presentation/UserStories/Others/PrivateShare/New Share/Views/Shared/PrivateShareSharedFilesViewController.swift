@@ -16,7 +16,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         switch shareType {
             case .byMe: title = TextConstants.privateShareSharedByMeTab
             case .withMe: title = TextConstants.privateShareSharedWithMeTab
-            case .innerFolder(_, _, let name): title = name
+            case .innerFolder(_, _, _, let name): title = name
         }
         controller.title = title
         controller.shareType = shareType
