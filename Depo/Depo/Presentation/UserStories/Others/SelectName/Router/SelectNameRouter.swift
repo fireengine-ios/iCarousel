@@ -17,7 +17,7 @@ class SelectNameRouter: SelectNameRouterInput {
     func moveToFolderPage(presenter: SelectNamePresenter, item: Item, isSubFolder: Bool) {
         if let tabBarVC = router.defaultTopController as? TabBarViewController,
            let controller = tabBarVC.activeNavigationController?.topViewController as? PrivateShareSharedFilesViewController {
-            let newController = router.sharedFolder(rootShareType: controller.shareType, folderUuid: item.uuid, name: item.name ?? "")
+            let newController = router.sharedFolder(rootShareType: controller.shareType, permissions: item.privateSharePermission?.granted ?? [], folderUuid: item.uuid, name: item.name ?? "")
             router.pushViewController(viewController: newController)
             return
         }

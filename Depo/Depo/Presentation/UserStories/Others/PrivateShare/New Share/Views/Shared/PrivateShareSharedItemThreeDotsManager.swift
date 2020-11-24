@@ -32,7 +32,7 @@ final class PrivateShareSharedItemThreeDotsManager {
                 let types = rootScreenActionTypes(for: privateShareType, item: item)
                 alert.show(with: types, for: [item], presentedBy: sender, onSourceView: nil, viewController: nil)
                 
-            case .innerFolder(type: let shareType, uuid: _, name: _):
+            case .innerFolder(type: let shareType, _, _, _):
                 let types = innerFolderActionTypes(for: shareType, item: item)
                 alert.show(with: types, for: [item], presentedBy: sender, onSourceView: nil, viewController: nil)
         }
@@ -45,6 +45,10 @@ final class PrivateShareSharedItemThreeDotsManager {
         switch shareType {
             case .byMe:
                 types.append(.endSharing)
+                
+            case .withMe:
+                types.append(.leaveSharing)
+                
             default:
                 break
         }
@@ -73,7 +77,24 @@ final class PrivateShareSharedItemThreeDotsManager {
                 return types
                 
             case .withMe:
-                return [.leaveSharing]
+                var types: [ElementTypes] = [.info]
+                
+                if let grantedPermissions = item.privateSharePermission?.granted {
+                    if grantedPermissions.contains(.read) {
+                        if item.fileType.isContained(in: [.image, .video]) {
+                            types.append(.download)
+                        } else {
+                            types.append(.downloadDocument)
+                        }
+                        
+                        if grantedPermissions.contains(.delete) {
+                            if !item.isReadOnlyFolder {
+                                types.append(.moveToTrashShared)
+                            }
+                        }
+                    }
+                }
+                    return types
 
             case .innerFolder:
                 assertionFailure("should not be the case")

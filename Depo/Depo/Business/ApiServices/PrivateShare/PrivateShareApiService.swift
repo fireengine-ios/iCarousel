@@ -46,6 +46,8 @@ protocol PrivateShareApiService {
     
     @discardableResult
     func renameItem(projectId: String, uuid: String, name: String, handler: @escaping ResponseVoid) -> URLSessionTask?
+
+    func moveToTrash(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask?
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
@@ -237,6 +239,21 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
                      method: .post,
                      parameters: parameters,
                      encoding: JSONEncoding.default)
+            .customValidate()
+            .responseVoid(handler)
+            .task
+    }
+        
+    func moveToTrash(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
+        
+        let parameters = [["projectId" : projectId, "uuid" : uuid]].asParameters()
+        
+        return SessionManager
+            .customDefault
+            .request(RouteRequests.FileSystem.Version_2.trash,
+                     method: .post,
+                     parameters: parameters,
+                     encoding: ArrayEncoding())
             .customValidate()
             .responseVoid(handler)
             .task
