@@ -33,7 +33,7 @@ struct SharedFileInfo: Codable {
     let uploaderDeviceType: String? //enum
     let ugglaId: String?
     let content_type: String?
-    let metadata: SharedFileInfoMetaData
+    let metadata: SharedFileInfoMetaData?
     let album: [FileAlbum]?
     //        "location": {},
     let permissions: SharedItemPermission?
@@ -119,7 +119,7 @@ struct FileSystem: Codable {
 }
 
 
-struct SharedItemPermission: Codable {
+struct SharedItemPermission: Codable, Equatable {
     let granted: [PrivateSharePermission]?
     let bitmask: Int64?
 }
@@ -326,7 +326,7 @@ struct SharedContact: Codable, Equatable {
     }
 }
 
-enum PrivateSharePermission: String, Codable {
+enum PrivateSharePermission: String, Codable, Equatable {
     case read = "READ"
     case preview = "PREVIEW"
     case list = "LIST"
@@ -337,6 +337,25 @@ enum PrivateSharePermission: String, Codable {
     case comment = "COMMENT"
     case writeAcl = "WRITE_ACL"
     case readAcl = "READ_ACL"
+}
+
+struct CreateFolderResquestItem: Encodable {
+    let uuid: String
+    let folder: Bool = true
+    let name: String
+    let sizeInBytes: Int64 = 0
+    let mimeType: String = "application/directory"
+    
+    var parameters: [String: Any] {
+        dictionary
+    }
+}
+
+struct PrivateSharedFolderItem: Equatable {
+    let projectId: String
+    let uuid: String
+    let name: String
+    let permissions: SharedItemPermission
 }
 
 struct PrivateShareAccessListObject: Codable {

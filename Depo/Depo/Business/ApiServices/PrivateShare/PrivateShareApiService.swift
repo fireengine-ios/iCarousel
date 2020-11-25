@@ -48,6 +48,9 @@ protocol PrivateShareApiService {
     func renameItem(projectId: String, uuid: String, name: String, handler: @escaping ResponseVoid) -> URLSessionTask?
 
     func moveToTrash(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask?
+    
+    @discardableResult
+    func createFolder(projectId: String, parentFolderUuid: String, requestItem: CreateFolderResquestItem, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask?
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
@@ -256,6 +259,25 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
                      encoding: ArrayEncoding())
             .customValidate()
             .responseVoid(handler)
+            .task
+    }
+    
+    @discardableResult
+    func createFolder(projectId: String, parentFolderUuid: String, requestItem: CreateFolderResquestItem, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask? {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.baseV2UrlString, projectId)) else {
+            handler(.failed(ErrorResponse.string("Incorrect URL")))
+            return nil
+        }
+        
+        let parameters = ["file": requestItem.parameters] + ["parentFolderUuid": parentFolderUuid]
+        
+        return SessionManager
+            .customDefault
+            .request(url, method: .post,
+                     parameters: parameters,
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .responseObject(handler)
             .task
     }
 }

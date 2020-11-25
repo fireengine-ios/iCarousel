@@ -1164,7 +1164,9 @@ class WrapData: BaseDataSourceItem, Wrappered {
     init(privateShareFileInfo: SharedFileInfo) {
         //TODO: status to enum in SharedFileInfo
         
-        metaData = BaseMetaData(with: privateShareFileInfo.metadata)
+        if let metadata = privateShareFileInfo.metadata {
+            metaData = BaseMetaData(with: metadata)
+        }
         
         fileSize = privateShareFileInfo.bytes ?? 0
         favorites = false

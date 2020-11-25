@@ -12,7 +12,7 @@ import Foundation
 indirect enum PrivateShareType: Equatable {
     case byMe
     case withMe
-    case innerFolder(type: PrivateShareType, permissions: [PrivateSharePermission], uuid: String, name: String)
+    case innerFolder(type: PrivateShareType, folderItem: PrivateSharedFolderItem)
     
     var rootType: PrivateShareType {
         return veryRootType(for: self)
@@ -54,8 +54,8 @@ indirect enum PrivateShareType: Equatable {
             case (.withMe, _):
                 return []
                 
-            case (.innerFolder(_, let permissions, _, _), let veryRootType):
-                return floatingButtonTypes(innerFolderVeryRootType: veryRootType, permissions: permissions)
+            case (.innerFolder(_, let folder), let veryRootType):
+                return floatingButtonTypes(innerFolderVeryRootType: veryRootType, permissions: folder.permissions.granted ?? [])
         }
     }
     
@@ -81,7 +81,7 @@ indirect enum PrivateShareType: Equatable {
             case .byMe, .withMe:
                 return type
                 
-            case .innerFolder(type: let rootType, _, _, _):
+            case .innerFolder(type: let rootType, _):
                 return veryRootType(for: rootType)
         }
     }
@@ -211,11 +211,8 @@ final class PrivateShareFileInfoManager {
             case .withMe:
                 privateShareAPIService.getSharedWithMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
                 
-            case .innerFolder(type: _, _, let folderUuid, name: _):
-                guard let projectId = SingletonStorage.shared.accountInfo?.projectID else {
-                    return
-                }
-                privateShareAPIService.getFiles(projectId: projectId, folderUUID: folderUuid, size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { response in
+            case .innerFolder(_, let folder):
+                privateShareAPIService.getFiles(projectId: folder.projectId, folderUUID: folder.uuid, size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { response in
                     switch response {
                         case .success(let fileSystem):
                             completion(.success(fileSystem.fileList))

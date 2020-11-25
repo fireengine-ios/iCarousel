@@ -733,8 +733,8 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         }
         
         if let controller = currentViewController as? PrivateShareSharedFilesViewController,
-           case let PrivateShareType.innerFolder(_, _, folderUuid, _) = controller.shareType {
-            return folderUuid
+           case let PrivateShareType.innerFolder(_, folder) = controller.shareType {
+            return folder.uuid
         }
         
         return nil
@@ -820,7 +820,14 @@ extension TabBarViewController: TabBarActionHandler {
                 folderUUID = ""
             }
             
-            let controller = router.createNewFolder(rootFolderID: folderUUID, isFavorites: isFavorites)
+            let controller: UIViewController
+            if let sharedFolder = router.sharedFolderItem {
+                let parameters = CreateFolderSharedWithMeParameters(projectId: sharedFolder.projectId, rootFolderUuid: sharedFolder.uuid)
+                controller = router.createNewFolderSharedWithMe(parameters: parameters)
+            } else {
+                controller = router.createNewFolder(rootFolderID: folderUUID, isFavorites: isFavorites)
+            }
+            
             let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
             
