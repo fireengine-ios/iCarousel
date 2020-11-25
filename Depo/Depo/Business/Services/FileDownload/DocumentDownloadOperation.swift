@@ -73,7 +73,15 @@ final class DocumentDownloadOperation: Operation {
         
         currentItem = items.removeFirst()
         
-        guard let nextItem = currentItem, let url = currentItem?.urlToFile?.byTrimmingQuery, let name = nextItem.name else {
+        
+        guard let nextItem = currentItem, let urlToFile = nextItem.urlToFile, let name = nextItem.name else {
+            downloadNext()
+            return
+        }
+        
+        let urlToDownload = urlToFile.isExpired ? urlToFile.byTrimmingQuery : urlToFile
+        
+        guard let url = urlToDownload else {
             downloadNext()
             return
         }
