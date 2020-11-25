@@ -212,10 +212,7 @@ final class PrivateShareFileInfoManager {
                 privateShareAPIService.getSharedWithMe(size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder, handler: completion)
                 
             case .innerFolder(_, let folder):
-                guard let projectId = SingletonStorage.shared.accountInfo?.projectID else {
-                    return
-                }
-                privateShareAPIService.getFiles(projectId: projectId, folderUUID: folder.uuid, size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { response in
+                privateShareAPIService.getFiles(projectId: folder.projectId, folderUUID: folder.uuid, size: pageSize, page: pageLoaded, sortBy: sorting.sortingRules, sortOrder: sorting.sortOder) { response in
                     switch response {
                         case .success(let fileSystem):
                             completion(.success(fileSystem.fileList))
