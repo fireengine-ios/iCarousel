@@ -13,7 +13,7 @@ protocol SharedFilesCollectionSliderDelegate: class {
     
 }
 
-final class SharedFilesCollectionSliderView: UIView {
+final class SharedFilesCollectionSliderView: UIView, NibInit {
     
     @IBOutlet private weak var sliderLabel: UILabel! {
         willSet {
@@ -23,7 +23,6 @@ final class SharedFilesCollectionSliderView: UIView {
         }
     }
 
-//    static let privateShareAllFilesMyFiles
     @IBOutlet private weak var showAllButton: UIButton! {
         willSet {
             newValue.titleLabel?.text = TextConstants.privateShareAllFilesSeeAll
@@ -33,8 +32,11 @@ final class SharedFilesCollectionSliderView: UIView {
         }
     }
     
-    @IBOutlet private weak var collectionView: UICollectionView!
-    
+    @IBOutlet private weak var collectionView: UICollectionView! {
+        willSet {
+            newValue.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        }
+    }
 
     weak var delegate: SharedFilesCollectionSliderDelegate?
     
@@ -45,14 +47,21 @@ final class SharedFilesCollectionSliderView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionView.register(SharedFilesSliderCell.self, forCellWithReuseIdentifier: "SharedFilesSliderCell")
-//        collectionView.delegate = self
     }
     
     func setup(sliderCollectionDelegate: SharedFilesCollectionSliderDelegate?, collectionDataSource: UICollectionViewDataSource?, collectitonDelegate: UICollectionViewDelegate?) {
         delegate = sliderCollectionDelegate
         collectionView.dataSource = collectionDataSource
         collectionView.delegate = collectitonDelegate
+//        collectionView.collectionViewLayout.
         collectionView.reloadData()
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 
+}
+
+extension SharedFilesCollectionSliderView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 90, height: 112)
+    }
 }

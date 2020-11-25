@@ -79,7 +79,11 @@ class BaseFilesGreedModuleInitializer: NSObject {
     
     class func initializeAllFilesViewController(with nibName: String, moduleOutput: BaseFilesGreedModuleOutput?, sortType: MoreActionsConfig.SortRullesType, viewType: MoreActionsConfig.ViewType) -> UIViewController {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
-        viewController.scrollablePopUpsMediator = AllFilesSectionSliderMediator(isAllFiles: true)
+        let sliderMediator = AllFilesSectionSliderMediator(isAllFiles: true)
+        viewController.scrollablePopUpsMediator = sliderMediator
+        if let sharedSlider = sliderMediator.containerView as? SharedFilesCollectionManager {
+            sharedSlider.delegate = viewController
+        }
         viewController.needToShowTabBar = true
         viewController.floatingButtonsArray.append(contentsOf: [.upload, .uploadFiles, .newFolder])
         viewController.scrollablePopUpsMediator.cardProtocolSupportedView.addPermittedPopUpViewTypes(types: [.sync, .upload, .download])

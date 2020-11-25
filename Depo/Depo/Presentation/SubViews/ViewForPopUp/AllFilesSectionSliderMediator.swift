@@ -29,7 +29,7 @@ final class AllFilesSectionSliderMediator {//Strategy? or factory like?
     
     init(isAllFiles: Bool = false) {
         isAllFilesSegment = isAllFiles
-        sliderContainer = isAllFiles ? CardsContainerView() : SharedFilesCollectionManager()
+        sliderContainer = isAllFiles ? SharedFilesCollectionManager() : CardsContainerView()
     }
     
 }

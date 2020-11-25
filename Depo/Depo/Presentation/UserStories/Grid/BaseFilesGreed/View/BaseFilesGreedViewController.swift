@@ -368,7 +368,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     private func setupSlider(sliderController: LBAlbumLikePreviewSliderViewController) {
         contentSlider = sliderController
 
-        let height = scrollablePopUpsMediator.containerView.frame.size.height + BaseFilesGreedViewController.sliderH
+        let height = scrollablePopUpsMediator.containerView.frame.size.height + BaseFilesGreedViewController.sliderH + 300
         
         let subView = UIView(frame: CGRect(x: 0, y: -height, width: collectionView.frame.size.width, height: BaseFilesGreedViewController.sliderH))
         subView.addSubview(sliderController.view)
@@ -385,7 +385,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         subView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        let relatedView = scrollablePopUpsMediator
+        let relatedView = scrollablePopUpsMediator.containerView
         
         var constraintsArray = [NSLayoutConstraint]()
         constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .top, relatedBy: .equal, toItem: relatedView, attribute: .bottom, multiplier: 1, constant: 0))
@@ -537,5 +537,15 @@ extension BaseFilesGreedViewController {
     
     private func scrollIndicator(set topOffset: CGFloat) {
         scrollIndicator?.titleOffset = topOffset
+    }
+}
+
+extension BaseFilesGreedViewController: SharedFilesCollectionManagerDelegate {
+    func showAll() {
+        output.openPrivateShareFiles()
+    }
+    
+    func open(entity: WrapData, allEnteties: [WrapData]) {
+        output.openPrivateSharedItem(entity: entity, sharedEnteties: allEnteties)
     }
 }
