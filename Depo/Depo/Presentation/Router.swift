@@ -679,7 +679,12 @@ class RouterVC: NSObject {
     // MARK: Create Folder
     
     func createNewFolder(rootFolderID: String?, isFavorites: Bool = false) -> UIViewController {
-        let controller = SelectNameModuleInitializer.initializeViewController(with: "SelectNameViewController", viewType: .selectFolderName, rootFolderID: rootFolderID, isFavorites: isFavorites)
+        let controller = SelectNameModuleInitializer.initializeViewController(with: .selectFolderName, rootFolderID: rootFolderID, isFavorites: isFavorites)
+        return controller
+    }
+    
+    func createNewFolderSharedWithMe(parameters: CreateFolderSharedWithMeParameters) -> UIViewController {
+        let controller = SelectNameModuleInitializer.with(parameters: parameters)
         return controller
     }
     
@@ -687,7 +692,7 @@ class RouterVC: NSObject {
     // MARK: Create Album
     
     func createNewAlbum(moduleOutput: SelectNameModuleOutput? = nil) -> UIViewController {
-        let controller = SelectNameModuleInitializer.initializeViewController(with: "SelectNameViewController", viewType: .selectAlbumName, moduleOutput: moduleOutput)
+        let controller = SelectNameModuleInitializer.initializeViewController(with: .selectAlbumName, moduleOutput: moduleOutput)
         return controller
     }
     

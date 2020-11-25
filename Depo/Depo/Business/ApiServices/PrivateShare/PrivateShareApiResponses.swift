@@ -49,7 +49,7 @@ struct SharedFileInfo: Codable {
     let uploaderDeviceType: String? //enum
     let ugglaId: String?
     let content_type: String?
-    let metadata: SharedFileInfoMetaData
+    let metadata: SharedFileInfoMetaData?
     let album: [FileAlbum]?
     //        "location": {},
     let permissions: SharedItemPermission?
@@ -327,4 +327,17 @@ enum PrivateSharePermission: String, Codable {
     case comment = "COMMENT"
     case writeAcl = "WRITE_ACL"
     case readAcl = "READ_ACL"
+}
+
+
+struct CreateFolderResquestItem: Encodable {
+    let uuid: String
+    let folder: Bool = true
+    let name: String
+    let sizeInBytes: Int64 = 0
+    let mimeType: String
+    
+    var parameters: [String: Any] {
+        dictionary
+    }
 }

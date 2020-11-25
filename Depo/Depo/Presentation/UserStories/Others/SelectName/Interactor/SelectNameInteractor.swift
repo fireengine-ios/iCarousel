@@ -19,9 +19,13 @@ class SelectNameInteractor: SelectNameInteractorInput {
     var moduleType: SelectNameScreenType = .selectAlbumName
     
     private let albumService = PhotosAlbumService()
+    private lazy var privateShareService = PrivateShareApiServiceImpl()
     
     var rootFolderID: String?
     var isFavorite: Bool?
+    var isPrivateShare: Bool = false
+    var projectId: String?
+    
     
     func getTitle() -> String {
         switch moduleType {
@@ -103,6 +107,40 @@ class SelectNameInteractor: SelectNameInteractorInput {
     }
     
     private func onCreateFolderWithName(name: String) {
+        if isPrivateShare {
+            createFolderOnSharedWithMe(with: name)
+        } else {
+            createFolderOnAllFiles(with: name)
+        }
+    }
+    
+    private func createFolderOnSharedWithMe(with name: String) {
+        guard let projectId = projectId, let parentFolderUuid = rootFolderID else {
+            return
+        }
+
+        let requestItem = CreateFolderResquestItem(uuid: UUID().uuidString, name: name, mimeType: "application/directory")
+        privateShareService.createFolder(projectId: projectId, parentFolderUuid: parentFolderUuid, requestItem: requestItem) { [weak self] response in
+            switch response {
+                case .success(let createdFolder):
+                    DispatchQueue.main.async {
+                        if let self = self {
+                            let isSubfolder = self.rootFolderID != nil
+                            let wrapDataItem = WrapData(privateShareFileInfo: createdFolder)
+                            self.output.operationSuccess(operation: self.moduleType, item: wrapDataItem, isSubFolder: isSubfolder)
+                            ItemOperationManager.default.newFolderCreated()
+                        }
+                    }
+                    
+                case .failed(let error):
+                    DispatchQueue.main.async {
+                        self?.output.operationFailedWithError(errorMessage: error.description)
+                    }
+            }
+        }
+    }
+    
+    private func createFolderOnAllFiles(with name: String) {
         let createfolderParam = CreatesFolder(folderName: name,
                                               rootFolderName: rootFolderID ?? "",
                                               isFavourite: isFavorite ?? false)
