@@ -130,9 +130,9 @@ extension FileInfoInteractor: FileInfoInteractorInput {
     }
     
     private func setupSharingInfoView(sharingInfo: SharedFileInfo, hasAccess: Bool) {
-        let needShow = sharingInfo.members?.isEmpty == false
+        let hasMembers = sharingInfo.members?.isEmpty == false
         
-        if needShow {
+        if hasMembers {
             var info = sharingInfo
             info.members?.enumerated().forEach { index, member in
                 let localContactNames = localContactsService.getContactName(for: member.subject?.username ?? "", email: member.subject?.email ?? "")
@@ -140,6 +140,8 @@ extension FileInfoInteractor: FileInfoInteractorInput {
             }
             self.sharingInfo = info
             output.displayShareInfo(info)
+        } else {
+            output.displayShareInfo(sharingInfo)
         }
     }
     

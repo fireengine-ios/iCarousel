@@ -213,6 +213,7 @@ extension FileInfoViewController: FileInfoViewInput {
             } else {
                 hideInfoDateLabels()
             }
+            checkCanEdit(item: object, projectId: object.projectId, permission: nil)
             return
         }
         
@@ -277,7 +278,9 @@ extension FileInfoViewController: FileInfoViewInput {
     }
     
     func showSharingInfo(_ sharingInfo: SharedFileInfo) {
-        if sharingInfoView.superview == nil {
+        if sharingInfo.members == nil || sharingInfo.members?.isEmpty == true {
+            sharingInfoView.isHidden = true
+        } else if sharingInfoView.superview == nil {
             shareInfoContainer.addSubview(sharingInfoView)
             sharingInfoView.translatesAutoresizingMaskIntoConstraints = false
             sharingInfoView.pinToSuperviewEdges()
