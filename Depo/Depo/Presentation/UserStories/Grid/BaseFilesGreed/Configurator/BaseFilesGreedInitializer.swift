@@ -81,7 +81,7 @@ class BaseFilesGreedModuleInitializer: NSObject {
         let viewController = BaseFilesGreedChildrenViewController(nibName: nibName, bundle: nil)
         let sliderMediator = AllFilesSectionSliderMediator(isAllFiles: true)
         viewController.scrollablePopUpsMediator = sliderMediator
-        if let sharedSlider = sliderMediator.containerView as? SharedFilesCollectionManager {
+        if let sharedSlider = sliderMediator.sliderContainer as? SharedFilesCollectionManager {
             sharedSlider.delegate = viewController
         }
         viewController.needToShowTabBar = true
