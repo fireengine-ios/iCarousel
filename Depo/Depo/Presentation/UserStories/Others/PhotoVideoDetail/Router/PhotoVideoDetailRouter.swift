@@ -53,18 +53,20 @@ class PhotoVideoDetailRouter: PhotoVideoDetailRouterInput {
     }
     
     func openPrivateShare(for item: Item) {
-        let controller = router.privateShare(items: [item]) { [weak self] success in
-            if success {
-                self?.output?.updateShareInfo()
-            }
-        }
+        let controller = router.privateShare(items: [item])
         router.presentViewController(controller: controller)
     }
     
     func openPrivateShareContacts(with shareInfo: SharedFileInfo) {
-        let controller = router.privateShareContacts(with: shareInfo) { [weak self] in
-            self?.output?.deleteShareInfo()
-        }
+        let controller = router.privateShareContacts(with: shareInfo)
+        router.pushViewController(viewController: controller)
+    }
+    
+    func openPrivateShareAccessList(projectId: String, uuid: String, contact: SharedContact, fileType: FileType) {
+        let controller = router.privateShareAccessList(projectId: projectId,
+                                                       uuid: uuid,
+                                                       contact: contact,
+                                                       fileType: fileType)
         router.pushViewController(viewController: controller)
     }
 }

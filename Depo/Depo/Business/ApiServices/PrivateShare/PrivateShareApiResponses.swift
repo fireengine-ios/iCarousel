@@ -10,28 +10,12 @@ import Foundation
 import SwiftyJSON
 
 struct SuggestedApiContact: Codable {
-    let type: String?
+    let type: PrivateShareSubjectType?
     let identifier: String?
     let username: String?
     let email: String?
     var name: String?
     let picture: URL?
-    
-    static func testContacts() -> [SuggestedApiContact] {
-        var contacts = [SuggestedApiContact]()
-        
-        let phones = ["8885555512", "5555228243", "5556106679", "5557664823", "5555648583"]
-        
-        for index in 1...5 {
-            contacts.append(SuggestedApiContact(type: "USER",
-                                                identifier: "user_\(index)",
-                                                username: phones[index-1],
-                                                email: "email_\(index)@gmail.com",
-                                                name: "user_\(index)",
-                                                picture: nil))
-        }
-        return contacts
-    }
 }
 
 struct SharedFileInfo: Codable {
@@ -183,6 +167,7 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
     case editor = "EDITOR"
     case viewer = "VIEWER"
     case owner = "OWNER"
+    case varying = "VARYING"
     
     var title: String {
         switch self {
@@ -190,7 +175,7 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareStartPageEditorButton
         case .viewer:
             return TextConstants.privateShareStartPageViewerButton
-        case .owner:
+        case .owner, .varying:
             return ""
         }
     }
@@ -201,7 +186,7 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareRoleSelectionEditor
         case .viewer:
             return TextConstants.privateShareRoleSelectionViewer
-        case .owner:
+        case .owner, .varying:
             return ""
         }
     }
@@ -214,6 +199,8 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareInfoMenuViewer
         case .owner:
             return TextConstants.privateShareInfoMenuOwner
+        case .varying:
+            return TextConstants.privateShareInfoMenuVarying
         }
     }
     
@@ -225,6 +212,21 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareWhoHasAccessViewer
         case .owner:
             return TextConstants.privateShareWhoHasAccessOwner
+        case .varying:
+            return TextConstants.privateShareWhoHasAccessVarying
+        }
+    }
+    
+    var accessListTitle: String {
+        switch self {
+        case .editor:
+            return TextConstants.privateShareAccessEditor
+        case .viewer:
+            return TextConstants.privateShareAccessViewer
+        case .varying:
+            return TextConstants.privateShareAccessVarying
+        case .owner:
+            return ""
         }
     }
     
@@ -236,11 +238,13 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return 1
         case .viewer:
             return 2
+        case .varying:
+            return 3
         }
     }
 }
 
-enum PrivateShareItemType: String, Encodable {
+enum PrivateShareItemType: String, Codable {
     case file = "FILE"
     case album = "ALBUM"
 }
@@ -271,10 +275,16 @@ enum PrivateShareDuration: String, CaseIterable, Codable {
     }
 }
 
+enum PrivateShareSubjectType: String, Codable {
+    case user = "USER"
+    case group = "USER_GROUP"
+    case knownName = "KNOWN_NAME"
+}
+
 struct SharedContact: Codable, Equatable {
     var subject: SuggestedApiContact?
     let permissions: SharedItemPermission?
-    let role: PrivateShareUserRole
+    var role: PrivateShareUserRole
     
     var displayName: String {
         subject?.name ?? subject?.username ?? ""
@@ -329,7 +339,6 @@ enum PrivateSharePermission: String, Codable {
     case readAcl = "READ_ACL"
 }
 
-
 struct CreateFolderResquestItem: Encodable {
     let uuid: String
     let folder: Bool = true
@@ -340,4 +349,26 @@ struct CreateFolderResquestItem: Encodable {
     var parameters: [String: Any] {
         dictionary
     }
+}
+
+struct PrivateShareAccessListObject: Codable {
+    let type: PrivateShareItemType
+    let uuid: String
+    let name: String
+}
+
+enum PrivateShareAccessListType: String, Codable {
+    case allow = "ALLOW"
+    case deny = "DENY"
+}
+
+struct PrivateShareAccessListInfo: Codable {
+    let id: Int64
+    let type: PrivateShareAccessListType
+    let object: PrivateShareAccessListObject
+    let subject: SuggestedApiContact
+    let permissions: SharedItemPermission
+    let role: PrivateShareUserRole
+    let expirationDate: Date
+    let conditions: [String]? //unknown array type
 }

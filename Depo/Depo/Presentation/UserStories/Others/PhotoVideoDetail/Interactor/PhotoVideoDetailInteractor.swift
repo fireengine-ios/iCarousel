@@ -28,6 +28,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     private lazy var analyticsService: AnalyticsService = factory.resolve()
     private lazy var accountService = AccountService()
     private let authorityStorage = AuthoritySingleton.shared
+    private lazy var shareApiService = PrivateShareApiServiceImpl()
     
     var setupedMoreMenuConfig: [ElementTypes] {
         return moreMenuConfig
@@ -138,18 +139,20 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             return
         }
         
-            let renameFile = RenameFile(uuid: item.uuid, newName: newName)
-            FileService().rename(rename: renameFile, success: { [weak self] in
-                DispatchQueue.main.async {
-                    item.name = newName
-                    self?.output.updated()
-                    ItemOperationManager.default.didRenameItem(item)
-                }
-                }, fail: { [weak self] error in
-                    DispatchQueue.main.async {
-                        self?.output.failedUpdate(error: error)
-                    }
-            })
+        guard let projectId = item.projectId else {
+            return
+        }
+        
+        shareApiService.renameItem(projectId: projectId, uuid: item.uuid, name: newName) { [weak self] result in
+            switch result {
+            case .success():
+                item.name = newName
+                self?.output.updated()
+                ItemOperationManager.default.didRenameItem(item)
+            case .failed(let error):
+                self?.output.failedUpdate(error: error)
+            }
+        }
     }
     
     func onValidateName(newName: String) {

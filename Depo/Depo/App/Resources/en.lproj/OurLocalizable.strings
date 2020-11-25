@@ -1832,6 +1832,7 @@
 "private_share_info_role_1" = "Owner";
 "private_share_info_role_2" = "Editor";
 "private_share_info_role_3" = "Viewer";
+"private_share_info_role_4" = "Varies";
 "private_share_email_format" = "email format is invalid";
 "private_share_non_turkish_msisdn_warning" = "You need to add a GSM number starting with + character and country code";
 "private_share_shared_with_me_empty_page" = "No files are shared with you up to now";
@@ -1850,8 +1851,19 @@
 "private_share_who_has_access_role_1" = "Owner";
 "private_share_who_has_access_role_2" = "Editor";
 "private_share_who_has_access_role_3" = "Viewer";
+"private_share_who_has_access_role_4" = "Varies";
 "private_share_who_has_access_end_share" = "End Sharing";
 "private_share_end_sharing_confirm" = "Are you sure you want to end sharing?";
 "private_share_end_sharing_success" = "Sharing ended";
 
+"private_share_access_role_1" = "Editor";
+"private_share_access_role_2" = "Viewer";
+"private_share_access_role_3" = "Remove";
+"private_share_access_role_4" = "Varies";
+"private_share_access_page_name" = "Access";
+"private_share_access_from_folder" = "From %@";
+"private_share_expire_date" = "Expires on: %@";
+"private_share_access_role_change_success" = "Role is updated";
+"private_share_access_remove_confirmation" = "Are you sure you want to remove user from the share?";
+"private_share_info_access_role_remove" = "User is removed from share";
 "private_share_plus_button_no_action" = "There is no action for plus button in this level";
