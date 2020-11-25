@@ -389,6 +389,22 @@ class RouterVC: NSObject {
         return false
     }
     
+    
+    var sharedFolderItem: PrivateSharedFolderItem? {
+        guard
+            let tabBarVC = defaultTopController as? TabBarViewController,
+            let controller = tabBarVC.activeNavigationController?.topViewController as? PrivateShareSharedFilesViewController
+        else {
+            return nil
+        }
+
+        if case let PrivateShareType.innerFolder(type: _, folderItem: folder) = controller.shareType {
+            return folder
+        }
+        
+        return nil
+    }
+    
     // MARK: Splash
     
     var splash: UIViewController? {
@@ -603,8 +619,8 @@ class RouterVC: NSObject {
         return PrivateShareSharedFilesViewController.with(shareType: .byMe)
     }
     
-    func sharedFolder(rootShareType: PrivateShareType, permissions: [PrivateSharePermission], folderUuid: String, name: String) -> UIViewController {
-        return PrivateShareSharedFilesViewController.with(shareType: .innerFolder(type: rootShareType, permissions: permissions, uuid: folderUuid, name: name))
+    func sharedFolder(rootShareType: PrivateShareType, folder: PrivateSharedFolderItem) -> UIViewController {
+        return PrivateShareSharedFilesViewController.with(shareType: .innerFolder(type: rootShareType, folderItem: folder))
     }
     
     // MARK: Music Player

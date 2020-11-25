@@ -32,7 +32,7 @@ final class PrivateShareSharedItemThreeDotsManager {
                 let types = rootScreenActionTypes(for: privateShareType, item: item)
                 alert.show(with: types, for: [item], presentedBy: sender, onSourceView: nil, viewController: nil)
                 
-            case .innerFolder(type: let shareType, _, _, _):
+            case .innerFolder(let shareType, _):
                 let types = innerFolderActionTypes(for: shareType, item: item)
                 alert.show(with: types, for: [item], presentedBy: sender, onSourceView: nil, viewController: nil)
         }

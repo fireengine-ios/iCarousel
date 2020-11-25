@@ -38,8 +38,7 @@ class SelectNameModuleInitializer: NSObject {
         let configurator = SelectNameModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController,
                                                  viewType: .selectFolderName,
-                                                 rootFolderID: parameters.rootFolderUuid,
-                                                 isFavorites: false,
+                                                 parameters: parameters,
                                                  moduleOutput: nil)
 
         return viewController

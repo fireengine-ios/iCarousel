@@ -119,7 +119,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
             return
         }
 
-        let requestItem = CreateFolderResquestItem(uuid: UUID().uuidString, name: name, mimeType: "application/directory")
+        let requestItem = CreateFolderResquestItem(uuid: UUID().uuidString, name: name)
         privateShareService.createFolder(projectId: projectId, parentFolderUuid: parentFolderUuid, requestItem: requestItem) { [weak self] response in
             switch response {
                 case .success(let createdFolder):

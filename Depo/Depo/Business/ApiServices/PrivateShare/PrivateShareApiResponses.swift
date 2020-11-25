@@ -119,7 +119,7 @@ struct FileSystem: Codable {
 }
 
 
-struct SharedItemPermission: Codable {
+struct SharedItemPermission: Codable, Equatable {
     let granted: [PrivateSharePermission]?
     let bitmask: Int64?
 }
@@ -326,7 +326,7 @@ struct SharedContact: Codable, Equatable {
     }
 }
 
-enum PrivateSharePermission: String, Codable {
+enum PrivateSharePermission: String, Codable, Equatable {
     case read = "READ"
     case preview = "PREVIEW"
     case list = "LIST"
@@ -344,11 +344,18 @@ struct CreateFolderResquestItem: Encodable {
     let folder: Bool = true
     let name: String
     let sizeInBytes: Int64 = 0
-    let mimeType: String
+    let mimeType: String = "application/directory"
     
     var parameters: [String: Any] {
         dictionary
     }
+}
+
+struct PrivateSharedFolderItem: Equatable {
+    let projectId: String
+    let uuid: String
+    let name: String
+    let permissions: SharedItemPermission
 }
 
 struct PrivateShareAccessListObject: Codable {
