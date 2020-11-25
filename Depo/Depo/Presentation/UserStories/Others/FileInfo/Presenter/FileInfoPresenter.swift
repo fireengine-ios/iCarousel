@@ -12,6 +12,10 @@ final class FileInfoPresenter: BasePresenter {
     var interactor: FileInfoInteractorInput!
     var router: FileInfoRouterInput!
     
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
+    }
+    
     // MARK : BasePresenter
     
     override func outputView() -> Waiting? {
@@ -25,6 +29,7 @@ extension FileInfoPresenter: FileInfoViewOutput {
     
     func viewIsReady() {
         interactor.viewIsReady()
+        ItemOperationManager.default.startUpdateView(view: self)
     }
     
     func validateName(newName: String) {
