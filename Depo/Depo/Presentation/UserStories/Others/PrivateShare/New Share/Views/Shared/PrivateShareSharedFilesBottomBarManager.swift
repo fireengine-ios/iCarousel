@@ -11,7 +11,7 @@ import Foundation
 final class PrivateShareSharedFilesBottomBarManager {
     
     private let barConfig = EditingBarConfig(
-        elementsConfig:  [.share, .download, .sync, .hide, .moveToTrash],
+        elementsConfig:  [.share, .move, .moveToTrash],
         style: .blackOpaque, tintColor: nil)
     
     private var editingTabBar: BottomSelectionTabBarViewController?
