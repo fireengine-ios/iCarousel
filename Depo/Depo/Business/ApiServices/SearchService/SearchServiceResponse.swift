@@ -207,6 +207,8 @@ final class BaseMetaData: ObjectRequestResponse, NSCoding {
         
         height = sharedFileMetaData.imageHeight ?? 0
         width = sharedFileMetaData.imageWidth ?? 0
+        
+        specialFolderMeta = sharedFileMetaData.specialFolderMeta
     }
 }
 
