@@ -515,6 +515,31 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     func deleteShareInfo() {
         bottomDetailView?.setHiddenShareInfoView(isHidden: true)
     }
+    
+    func updateExpiredItem(_ item: WrapData) {
+        guard let indexToChange = objects.firstIndex(where: { !$0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }),
+              objects[indexToChange].hasExpiredPreviewUrl() else {
+            return
+        }
+        update(item: item, at: indexToChange)
+    }
+    
+    
+    func updateItem(_ item: WrapData) {
+        guard let index = objects.firstIndex(where: { $0 == item }) else {
+            return
+        }
+        update(item: item, at: index)
+    }
+    
+    private func update(item: Item, at index: Int) {
+        objects[index] = item
+        
+        if let indexPath = collectionView.indexPathsForVisibleItems.first(where: { $0.item == index }),
+           let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoDetailCell {
+            cell.setObject(object: item)
+        }
+    }
 }
 
 extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
@@ -670,6 +695,9 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
         }
     }
     
+    func didExpireUrl() {
+        output.createNewUrl()
+    }
 }
 
 extension PhotoVideoDetailViewController: UIScrollViewDelegate {

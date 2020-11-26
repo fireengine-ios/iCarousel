@@ -1271,6 +1271,16 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         return false
     }
+    
+    func hasExpiredPreviewUrl() -> Bool {
+        let urlsToCheck = [tmpDownloadUrl, metaData?.largeUrl, metaData?.mediumUrl, metaData?.smalURl]
+        for url in urlsToCheck {
+            if let url = url, url.isExpired {
+                return true
+            }
+        }
+        return false
+    }
 }
 
 extension WrapData {

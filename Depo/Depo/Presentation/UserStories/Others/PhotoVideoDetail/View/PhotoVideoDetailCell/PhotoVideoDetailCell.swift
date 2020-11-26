@@ -13,6 +13,7 @@ protocol PhotoVideoDetailCellDelegate: class {
     func tapOnSelectedItem()
     func tapOnCellForFullScreen()
     func imageLoadingFinished()
+    func didExpireUrl()
 }
 
 final class PhotoVideoDetailCell: UICollectionViewCell {
@@ -124,8 +125,6 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             playVideoButton.isHidden = (object.fileType != .video)
             tapGesture.isEnabled = (object.fileType != .video)
         } else if object.fileType != .audio, object.fileType.isSupportedOpenType {
-            isNeedToUpdateWebView = true
-            
             webView.isHidden = false
             webView.navigationDelegate = self
             webView.clearPage()
@@ -139,8 +138,11 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
                 loadURL = nil
             }
             
-            if let url = loadURL {
+            if let url = loadURL, object.isOwner || !url.isExpired {
+                isNeedToUpdateWebView = true
                 webView.load(URLRequest(url: url))
+            } else {
+                delegate?.didExpireUrl()
             }
         }
     }

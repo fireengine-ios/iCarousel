@@ -59,8 +59,6 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         } else if let index = items.firstIndex(where: { $0.uuid == fileObject.uuid }) {
             selectedIndex = index
         }
-        
-        
     }
     
     func onViewIsReady() {
@@ -100,6 +98,12 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
         if let indexToChange = array.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) {
             item.isLocalItem = false
             array[indexToChange] = item
+        }
+    }
+    
+    func updateExpiredItem(_ item: WrapData) {
+        if let index = allItems.firstIndex(where: { $0 == item && $0.hasExpiredPreviewUrl() }) {
+            array[index] = item
         }
     }
     
@@ -244,6 +248,33 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 self?.output.updatePeople(items: [])
                     completion?()
             }
+        }
+    }
+    
+    func createNewUrl() {
+        guard let index = currentItemIndex,
+              let item = allItems[safe: index],
+              let projectId = item.projectId else {
+            return
+        }
+        
+        shareApiService.createDownloadUrl(projectId: projectId, uuid: item.uuid) { [weak self] result in
+            switch result {
+            case .success(let object):
+                if let url = object.url {
+                    item.tmpDownloadUrl = url
+                    self?.updateItem(item)
+                    self?.output.updateItem(item)
+                }
+            case .failed(let error):
+                UIApplication.showErrorAlert(message: error.description)
+            }
+        }
+    }
+    
+    private func updateItem(_ item: Item) {
+        if let index = allItems.firstIndex(where: { $0 == item }) {
+            array[index] = item
         }
     }
 }
