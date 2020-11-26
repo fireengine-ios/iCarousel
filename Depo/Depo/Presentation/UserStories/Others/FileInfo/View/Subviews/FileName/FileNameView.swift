@@ -19,7 +19,6 @@ protocol FileNameViewProtocol: UIView {
     
     var title: String? { get set }
     var name: String? { get set }
-    var isReadOnly: Bool { get set }
     var isEditable: Bool { get set }
     var isEditing: Bool { get set }
 }
@@ -70,16 +69,10 @@ final class FileNameView: UIView, NibInit, FileNameViewProtocol {
         set { set(name: newValue) }
     }
     
-    var isReadOnly: Bool = false {
-        didSet {
-            fileNameTextField.isEnabled = !isReadOnly
-        }
-    }
-    
     var isEditable: Bool = false {
         didSet {
             isEditing = false
-            changeEditButtonsVisibility(isHidden: isEditing)
+            changeEditButtonsVisibility(isHidden: !isEditable)
         }
     }
     
@@ -124,8 +117,7 @@ final class FileNameView: UIView, NibInit, FileNameViewProtocol {
     //MARK: - Private
     
     private func initialSetup() {
-        fileNameTextField.isUserInteractionEnabled = false
-        isEditing = false
+        isEditable = false
     }
     
     private func set(name: String?) {

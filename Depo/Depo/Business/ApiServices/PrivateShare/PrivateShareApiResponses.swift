@@ -64,6 +64,8 @@ struct SharedFileInfoMetaData: Codable {
     let latitude: Double?
     let longitude: Double?
     
+    let specialFolderMeta: String?
+    
     private enum CodingKeys: String, CodingKey {
         case isFavourite = "X-Object-Meta-Favourite"
         case thumbnailLarge = "Thumbnail-Large"
@@ -80,6 +82,8 @@ struct SharedFileInfoMetaData: Codable {
         
         case latitude = "Latitude"
         case longitude = "Longitude"
+        case specialFolderMeta = "X-Object-Meta-Special-Folder"
+
     }
     
     init(from decoder: Decoder) throws {
@@ -93,6 +97,7 @@ struct SharedFileInfoMetaData: Codable {
         thumbnailSmall = JSON(try container.decodeIfPresent(String.self, forKey: .thumbnailSmall) ?? "").url
         
         originalHash = try container.decodeIfPresent(String.self, forKey: .originalHash)
+        specialFolderMeta = try container.decodeIfPresent(String.self, forKey: .specialFolderMeta)
         
         imageHeight = JSON(try container.decodeIfPresent(String.self, forKey: .imageHeight) ?? "").int
         imageWidth = JSON(try container.decodeIfPresent(String.self, forKey: .imageWidth) ?? "").int
@@ -105,7 +110,7 @@ struct SharedFileInfoMetaData: Codable {
     }
 }
 
-struct UrlToDownload: Codable {
+struct WrappedUrl: Codable {
     let url: URL?
 }
 

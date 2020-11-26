@@ -44,7 +44,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet weak var noFilesTopLabel: UILabel?
     
-    var scrollablePopUpView = CardsContainerView()
+    var cardsContainerView = CardsContainerView()
     
     @IBOutlet weak var floatingHeaderContainerHeightConstraint: NSLayoutConstraint!
     
@@ -119,8 +119,8 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         if let searchController = navigationController?.topViewController as? SearchViewController {
             searchController.dismissController(animated: false)
         }
-        scrollablePopUpView.isActive = true
-        CardsManager.default.updateAllProgressesInCardsForView(view: scrollablePopUpView)
+        cardsContainerView.isActive = true
+        CardsManager.default.updateAllProgressesInCardsForView(view: cardsContainerView)
         output.needToReloadVisibleCells()
         configurateNavigationBar()
     }
@@ -132,12 +132,12 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        scrollablePopUpView.isActive = false
+        cardsContainerView.isActive = false
         super.viewDidDisappear(animated)
     }
     
     func configurateViewForPopUp() {
-        CardsManager.default.addViewForNotification(view: scrollablePopUpView)
+        CardsManager.default.addViewForNotification(view: cardsContainerView)
     }
     
     func configurateNavigationBar() {
@@ -151,7 +151,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     }
     
     deinit {
-         CardsManager.default.removeViewForNotification(view: scrollablePopUpView)
+        CardsManager.default.removeViewForNotification(view: cardsContainerView)
          NotificationCenter.default.removeObserver(self)
     }
     
@@ -304,7 +304,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     func showNoFilesTop(text: String) {
         noFilesTopLabel?.text = text
-        noFilesTopLabel?.isHidden = !scrollablePopUpView.viewsArray.isEmpty
+        noFilesTopLabel?.isHidden = !cardsContainerView.viewsArray.isEmpty
         topBarContainer.isHidden = true
         floatingHeaderContainerHeightConstraint.constant = 0
         view.layoutIfNeeded()
@@ -368,7 +368,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     private func setupSlider(sliderController: LBAlbumLikePreviewSliderViewController) {
         contentSlider = sliderController
 
-        let height = scrollablePopUpView.frame.size.height + BaseFilesGreedViewController.sliderH
+        let height = cardsContainerView.frame.size.height + BaseFilesGreedViewController.sliderH
         
         let subView = UIView(frame: CGRect(x: 0, y: -height, width: collectionView.frame.size.width, height: BaseFilesGreedViewController.sliderH))
         subView.addSubview(sliderController.view)
@@ -385,7 +385,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         subView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        let relatedView = scrollablePopUpView
+        let relatedView = cardsContainerView
         
         var constraintsArray = [NSLayoutConstraint]()
         constraintsArray.append(NSLayoutConstraint(item: subView, attribute: .top, relatedBy: .equal, toItem: relatedView, attribute: .bottom, multiplier: 1, constant: 0))
@@ -406,23 +406,24 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesViewCenterOffsetConstraint.constant = BaseFilesGreedViewController.sliderH / 2
     }
     
+    //setupCardsView
     private func setupViewForPopUp() {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
-        collectionView.addSubview(scrollablePopUpView)
+        collectionView.addSubview(cardsContainerView)
         
-        scrollablePopUpView.translatesAutoresizingMaskIntoConstraints = false
+        cardsContainerView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         var constraintsArray = [NSLayoutConstraint]()
-        contentSliderTopY = NSLayoutConstraint(item: scrollablePopUpView, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: 0)
+        contentSliderTopY = NSLayoutConstraint(item: cardsContainerView, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: 0)
         constraintsArray.append(contentSliderTopY!)
-        constraintsArray.append(NSLayoutConstraint(item: scrollablePopUpView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
-        constraintsArray.append(NSLayoutConstraint(item: scrollablePopUpView, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
-        contentSliderH = NSLayoutConstraint(item: scrollablePopUpView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
+        constraintsArray.append(NSLayoutConstraint(item: cardsContainerView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: cardsContainerView, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
+        contentSliderH = NSLayoutConstraint(item: cardsContainerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
         constraintsArray.append(contentSliderH!)
         
         NSLayoutConstraint.activate(constraintsArray)
-        scrollablePopUpView.delegate = self
+        cardsContainerView.delegate = self
     }
     
     // MARK: ViewForPopUpDelegate
@@ -537,5 +538,15 @@ extension BaseFilesGreedViewController {
     
     private func scrollIndicator(set topOffset: CGFloat) {
         scrollIndicator?.titleOffset = topOffset
+    }
+}
+
+extension BaseFilesGreedViewController: SharedFilesCollectionManagerDelegate {
+    func showAll() {
+        output.openPrivateShareFiles()
+    }
+    
+    func open(entity: WrapData, allEnteties: [WrapData]) {
+        output.openPrivateSharedItem(entity: entity, sharedEnteties: allEnteties)
     }
 }

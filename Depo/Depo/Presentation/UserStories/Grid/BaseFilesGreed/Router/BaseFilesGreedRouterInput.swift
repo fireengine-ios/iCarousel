@@ -22,6 +22,8 @@ protocol BaseFilesGreedRouterInput {
     
     func openNeededInstaPick(viewController: UIViewController)
     
+    func openSharedFilesController()
+    
     func back(to vc: UIViewController?)
 }
 

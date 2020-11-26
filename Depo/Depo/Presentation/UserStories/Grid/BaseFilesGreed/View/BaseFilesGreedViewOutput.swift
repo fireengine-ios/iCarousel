@@ -57,4 +57,8 @@ protocol BaseFilesGreedViewOutput {
     func updateNoFilesView()
     
     func showOnlySyncedItems(_ value: Bool)
+    
+    func openPrivateShareFiles()
+    
+    func openPrivateSharedItem(entity: BaseDataSourceItem, sharedEnteties: [BaseDataSourceItem])
 }

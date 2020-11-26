@@ -13,8 +13,9 @@ import UIKit
 }
 
 class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, SwipeableCardCellDelegate, CardsManagerViewProtocol {
-
+    
     var hConstraint: NSLayoutConstraint?
+    
     weak var delegate: CardsContainerViewDelegate?
     
     var tableView: UITableView = UITableView()

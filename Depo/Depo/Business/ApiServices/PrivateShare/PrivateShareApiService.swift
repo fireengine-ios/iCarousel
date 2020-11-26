@@ -42,7 +42,7 @@ protocol PrivateShareApiService {
     func leaveShare(projectId: String, uuid: String, subjectId: String, handler: @escaping ResponseVoid) -> URLSessionTask?
     
     @discardableResult
-    func createDownloadUrl(projectId: String, uuid: String, handler: @escaping ResponseHandler<UrlToDownload>) -> URLSessionTask?
+    func createDownloadUrl(projectId: String, uuid: String, handler: @escaping ResponseHandler<WrappedUrl>) -> URLSessionTask?
     
     @discardableResult
     func renameItem(projectId: String, uuid: String, name: String, handler: @escaping ResponseVoid) -> URLSessionTask?
@@ -212,7 +212,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     }
     
     @discardableResult
-    func createDownloadUrl(projectId: String, uuid: String, handler: @escaping ResponseHandler<UrlToDownload>) -> URLSessionTask? {
+    func createDownloadUrl(projectId: String, uuid: String, handler: @escaping ResponseHandler<WrappedUrl>) -> URLSessionTask? {
         
         let parameters = [["projectId" : projectId, "uuid" : uuid]].asParameters()
         
