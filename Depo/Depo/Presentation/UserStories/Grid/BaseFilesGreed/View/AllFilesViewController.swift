@@ -23,7 +23,9 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
             }
             switch result {
             case .success(_):
-                self.addPrivateShareSlider()
+                DispatchQueue.main.async {
+                    self.addPrivateShareSlider()
+                }
             case .failed(_):
                 break
             }
@@ -40,19 +42,14 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-//        containerView.layoutSubviews()
-        self.view.layoutSubviews()
-        
         var constraintsArray = [NSLayoutConstraint]()
-        let privateShareSliderTopY = NSLayoutConstraint(item: containerView, attribute: .top, relatedBy: .equal, toItem: cardsContainerView, attribute: .bottom, multiplier: 1, constant: 0)
-        
+
         let height = cardsContainerView.frame.size.height + containerView.frame.size.height + BaseFilesGreedViewController.sliderH
-        if let yConstr = self.contentSliderTopY {
+        if let yConstr = contentSliderTopY {
             yConstr.constant = -height
         }
         collectionView.updateConstraints()
-        
-        constraintsArray.append(privateShareSliderTopY)
+
         constraintsArray.append(NSLayoutConstraint(item: containerView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
         constraintsArray.append(NSLayoutConstraint(item: containerView, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
         
@@ -61,9 +58,10 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
         
         noFilesViewCenterOffsetConstraint.constant = BaseFilesGreedViewController.sliderH / 2
         
-        
         NSLayoutConstraint.activate(constraintsArray)
         sharedFilesManager.delegate = self
+        
+        view.layoutSubviews()
     }
     
 }

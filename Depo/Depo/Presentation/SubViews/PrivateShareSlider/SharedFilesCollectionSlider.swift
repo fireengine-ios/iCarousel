@@ -34,14 +34,13 @@ final class SharedFilesCollectionSliderView: UIView, NibInit {
     
     @IBOutlet private weak var showAllButton: UIButton! {
         willSet {
+            newValue.setImage(UIImage(named: "privateSharePeople"), for: .normal)
             newValue.setTitle(TextConstants.privateShareAllFilesSeeAll, for: .normal)
             newValue.setTitleColor(ColorConstants.textGrayColor, for: .normal)
-            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 18)
+            newValue.titleLabel?.font = .TurkcellSaturaRegFont(size: 18)      
             
-            newValue.titleEdgeInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 0)
-            
-            newValue.setImage(UIImage(named: "privateSharePeople"), for: .normal)
-            newValue.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 60)
+            newValue.forceImageToRightSide()
+            newValue.imageEdgeInsets.left = -10
         }
     }
     

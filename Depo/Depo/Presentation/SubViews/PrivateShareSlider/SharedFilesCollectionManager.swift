@@ -31,18 +31,18 @@ final class SharedFilesCollectionManager {
                 return
             }
             switch sharedFilesResult {
-                case .success(let filesInfo):
-                    let newItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0) }
-                    guard !newItems.isEmpty else {
-                        callBack(.failed(CustomErrors.text("no valid items")))
-                        return
-                    }
-                    DispatchQueue.main.async {
-                        self.datasource.setup(files: newItems, delegate: self)
-                        self.sharedFilesSlider.setup(sliderCollectionDelegate: self, collectionDataSource: self.datasource, collectitonDelegate: self.datasource)
-                        callBack(.success(()))
-                    }
-                    
+            case .success(let filesInfo):
+                let newItems = filesInfo.compactMap { WrapData(privateShareFileInfo: $0) }
+                guard !newItems.isEmpty else {
+                    callBack(.failed(CustomErrors.text("no valid items")))
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.datasource.setup(files: newItems, delegate: self)
+                    self.sharedFilesSlider.setup(sliderCollectionDelegate: self, collectionDataSource: self.datasource, collectitonDelegate: self.datasource)
+                    callBack(.success(()))
+                }
+                
             case .failed(let error):
                 callBack(.failed(error))
             }
