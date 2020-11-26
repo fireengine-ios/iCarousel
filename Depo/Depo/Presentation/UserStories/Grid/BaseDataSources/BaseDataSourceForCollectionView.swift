@@ -2081,7 +2081,6 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
     }
 }
 
-
 extension BaseDataSourceForCollectionView {
     
     private var itemProviderClosure: ItemProviderClosure {

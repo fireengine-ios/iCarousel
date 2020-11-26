@@ -69,6 +69,10 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         router.pushViewController(viewController: vc)
     }
     
+    func openSharedFilesController() {
+        router.pushViewController(viewController: router.sharedFiles)
+    }
+    
     func showBack() {
         view.dismiss(animated: true, completion: {})
     }
