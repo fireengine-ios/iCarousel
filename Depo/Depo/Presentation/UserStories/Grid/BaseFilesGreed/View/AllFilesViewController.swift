@@ -9,11 +9,25 @@
 final class AllFilesViewController: BaseFilesGreedChildrenViewController {
     
     private let sharedFilesManager = SharedFilesCollectionManager()
-    private let sharedSliderHeight: CGFloat = 168
+    private let sharedSliderHeight: CGFloat = 224
     
     override func setupInitialState() {
         super.setupInitialState()
-        addPrivateShareSlider()
+        checkPrivateShareSliderAvailability()
+    }
+    
+    private func checkPrivateShareSliderAvailability() {
+        sharedFilesManager.checkSharedWithMe { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            switch result {
+            case .success(_):
+                self.addPrivateShareSlider()
+            case .failed(_):
+                break
+            }
+        }
     }
     
     private func addPrivateShareSlider() {
@@ -25,6 +39,9 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+//        containerView.layoutSubviews()
+        self.view.layoutSubviews()
         
         var constraintsArray = [NSLayoutConstraint]()
         let privateShareSliderTopY = NSLayoutConstraint(item: containerView, attribute: .top, relatedBy: .equal, toItem: cardsContainerView, attribute: .bottom, multiplier: 1, constant: 0)
@@ -38,9 +55,6 @@ final class AllFilesViewController: BaseFilesGreedChildrenViewController {
         constraintsArray.append(privateShareSliderTopY)
         constraintsArray.append(NSLayoutConstraint(item: containerView, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
         constraintsArray.append(NSLayoutConstraint(item: containerView, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
-//        contentSliderH = NSLayoutConstraint(item: scrollablePopUpsMediator.containerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
-//        constraintsArray.append(contentSliderH!)
-        
         
         refresherY =  -height + 30
         updateRefresher()

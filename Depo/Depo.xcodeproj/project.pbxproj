@@ -8735,12 +8735,6 @@
 		CF048323256C9335007DAA79 /* SharedFilesCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04831F256C9335007DAA79 /* SharedFilesCollectionDataSource.swift */; };
 		CF048324256C9335007DAA79 /* SharedFilesCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04831F256C9335007DAA79 /* SharedFilesCollectionDataSource.swift */; };
 		CF048325256C9335007DAA79 /* SharedFilesCollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04831F256C9335007DAA79 /* SharedFilesCollectionDataSource.swift */; };
-		CF04833D256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04833C256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift */; };
-		CF04833E256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04833C256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift */; };
-		CF04833F256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04833C256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift */; };
-		CF048340256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04833C256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift */; };
-		CF048341256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04833C256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift */; };
-		CF048342256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04833C256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift */; };
 		CF1BF0EC256E25A200C11E63 /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BF0EB256E25A200C11E63 /* AllFilesViewController.swift */; };
 		CF1BF0ED256E25A200C11E63 /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BF0EB256E25A200C11E63 /* AllFilesViewController.swift */; };
 		CF1BF0EE256E25A200C11E63 /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BF0EB256E25A200C11E63 /* AllFilesViewController.swift */; };
@@ -15126,7 +15120,6 @@
 		CF01729323D00B9F00C0B0DE /* NetmeraCustomUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetmeraCustomUser.swift; sourceTree = "<group>"; };
 		CF0482EB256BDA5B007DAA79 /* SharedFilesCollectionSliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharedFilesCollectionSliderView.xib; sourceTree = "<group>"; };
 		CF04831F256C9335007DAA79 /* SharedFilesCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFilesCollectionDataSource.swift; sourceTree = "<group>"; };
-		CF04833C256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilesSectionSliderMediator.swift; sourceTree = "<group>"; };
 		CF1BF0EB256E25A200C11E63 /* AllFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilesViewController.swift; sourceTree = "<group>"; };
 		CF57972A251A0A890085DDC1 /* LifeboxWidgetExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxWidgetExtensionRelease.entitlements; sourceTree = "<group>"; };
 		CF693179CA606AC2BA6BD04E /* Pods-LifeTech_BilloProviderUI.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloProviderUI.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_BilloProviderUI/Pods-LifeTech_BilloProviderUI.enterprise.xcconfig"; sourceTree = "<group>"; };
@@ -17723,7 +17716,6 @@
 			isa = PBXGroup;
 			children = (
 				7CE825B81F823CAD00356AD2 /* PopUpSubViews */,
-				CF04833C256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift */,
 				7C1F89911F70FFDF00740177 /* CardsContainerView.swift */,
 				734C271B24E578960067F337 /* CardsShareButtonDelegate.swift */,
 				CE99AC77201CB778003DD3B7 /* CardActionType.swift */,
@@ -29881,7 +29873,6 @@
 				B5450208255A863C004DBD41 /* PrivateShareSharedFilesViewController.swift in Sources */,
 				0303A3D52397D0D000907F42 /* Watchdog.swift in Sources */,
 				B57BC179252C89640083B5CD /* PHAsset+FetchAll.swift in Sources */,
-				CF048340256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */,
 				B5BF43F92514D5CF00B0EFEB /* SharedGroupDBContainer.xcdatamodeld in Sources */,
 				B5BF438D2514CCA500B0EFEB /* SharedGroupCoreDataStack.swift in Sources */,
 				98435B7B23F52D0900FADE6B /* PhotoVideoDetailModuleOuput.swift in Sources */,
@@ -31805,7 +31796,6 @@
 				8C0E8F771FDEBDFF00789C91 /* PackagesViewInput.swift in Sources */,
 				8C0E8F781FDEBDFF00789C91 /* SelectNameViewOutput.swift in Sources */,
 				8C0E8F791FDEBDFF00789C91 /* SelectNameViewController.swift in Sources */,
-				CF04833E256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */,
 				B519A674253043BB00427F14 /* PhotoEditImageDownloader.swift in Sources */,
 				8C0E8F7A1FDEBDFF00789C91 /* SelectNameModuleInput.swift in Sources */,
 				98A86D6923A246A700438225 /* HiddenPhotosDataSource.swift in Sources */,
@@ -33912,7 +33902,6 @@
 				09FD2371EC56726F74576DD7 /* LBAlbumLikePreviewSliderViewInput.swift in Sources */,
 				980481C125592BE500BD8D9F /* PrivateShareDurationCell.swift in Sources */,
 				7829FEBDBF0B8DD3EEBBC34A /* LBAlbumLikePreviewSliderViewOutput.swift in Sources */,
-				CF04833D256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */,
 				98DBC05B2410FB4F00926F40 /* AutoSyncAlbumTableViewCell.swift in Sources */,
 				CEB27348205BE3DC00E1AE9C /* EmailEnterController.swift in Sources */,
 				921E7C3A2201ED8B00341F75 /* InstaPickSmallPhotoView.swift in Sources */,
@@ -34945,7 +34934,6 @@
 				986DD41F25388F3400C38AD4 /* SyncStatus.m in Sources */,
 				CE784A3F22A685FB00662219 /* ManageContactsViewController.swift in Sources */,
 				CE784A4022A685FB00662219 /* ProfileBirthdayFieldView.swift in Sources */,
-				CF048341256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */,
 				CE784A4122A685FB00662219 /* WKWebView+Extensions.swift in Sources */,
 				CE784A4222A685FB00662219 /* PhoneVerificationInteractor.swift in Sources */,
 				CE784A4322A685FB00662219 /* RoundedProgressView.swift in Sources */,
@@ -36727,7 +36715,6 @@
 				CF8B66A623CBC9D70021B021 /* UIviewControlllerExtensions.swift in Sources */,
 				CF8B66A723CBC9D70021B021 /* Dictionary.swift in Sources */,
 				0305A31C23D5C374004D1EC7 /* AlbumsSliderDataSource.swift in Sources */,
-				CF04833F256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */,
 				CF8B66A823CBC9D70021B021 /* UsageInfoInteractor.swift in Sources */,
 				CF8B66A923CBC9D70021B021 /* LocalAlbumCollectionViewCell.swift in Sources */,
 				98BE78B624517E4300B8864F /* SnackbarView.swift in Sources */,
@@ -38053,7 +38040,6 @@
 				986DD42025388F3400C38AD4 /* SyncStatus.m in Sources */,
 				CF8B6DBC23CBCA280021B021 /* WKWebView+Extensions.swift in Sources */,
 				CF8B6DBD23CBCA280021B021 /* PhoneVerificationInteractor.swift in Sources */,
-				CF048342256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */,
 				CF8B6DBE23CBCA280021B021 /* RoundedProgressView.swift in Sources */,
 				CF8B6DBF23CBCA280021B021 /* PushNotificationServiceConstants.swift in Sources */,
 				CF8B6DC023CBCA280021B021 /* FaceImagePhotosRouterInput.swift in Sources */,

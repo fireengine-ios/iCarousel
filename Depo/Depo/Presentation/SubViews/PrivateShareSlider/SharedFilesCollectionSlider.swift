@@ -23,12 +23,25 @@ final class SharedFilesCollectionSliderView: UIView, NibInit {
         }
     }
 
+    @IBOutlet weak var myFilesLabel: UILabel! {
+        willSet {
+            newValue.font = .TurkcellSaturaMedFont(size: 18)
+            newValue.text = TextConstants.privateShareAllFilesMyFiles
+            newValue.adjustsFontSizeToFitWidth = true
+        }
+    }
+    
+    
     @IBOutlet private weak var showAllButton: UIButton! {
         willSet {
-            newValue.titleLabel?.text = TextConstants.privateShareAllFilesSeeAll
-            newValue.titleEdgeInsets = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 0)
+            newValue.setTitle(TextConstants.privateShareAllFilesSeeAll, for: .normal)
+            newValue.setTitleColor(ColorConstants.textGrayColor, for: .normal)
+            newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 18)
             
-            newValue.setImage(UIImage(named: "people"), for: .normal)
+            newValue.titleEdgeInsets = UIEdgeInsets(top: 0, left: -30, bottom: 0, right: 0)
+            
+            newValue.setImage(UIImage(named: "privateSharePeople"), for: .normal)
+            newValue.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 60)
         }
     }
     
@@ -53,7 +66,6 @@ final class SharedFilesCollectionSliderView: UIView, NibInit {
         delegate = sliderCollectionDelegate
         collectionView.dataSource = collectionDataSource
         collectionView.delegate = collectitonDelegate
-//        collectionView.collectionViewLayout.
         collectionView.reloadData()
         collectionView.collectionViewLayout.invalidateLayout()
     }

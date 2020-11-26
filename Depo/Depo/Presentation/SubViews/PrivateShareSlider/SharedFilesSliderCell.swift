@@ -23,12 +23,7 @@ final class SharedFilesSliderCell: UICollectionViewCell {
             fileLabel.text = text
         }
     }
-    
-//    static func isSupportedType(fileType: FileType) -> Bool {
-//
-//        return false
-//    }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
