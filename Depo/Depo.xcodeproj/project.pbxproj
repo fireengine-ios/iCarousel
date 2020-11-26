@@ -8705,6 +8705,12 @@
 		CF048340256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04833C256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift */; };
 		CF048341256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04833C256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift */; };
 		CF048342256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04833C256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift */; };
+		CF1BF0EC256E25A200C11E63 /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BF0EB256E25A200C11E63 /* AllFilesViewController.swift */; };
+		CF1BF0ED256E25A200C11E63 /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BF0EB256E25A200C11E63 /* AllFilesViewController.swift */; };
+		CF1BF0EE256E25A200C11E63 /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BF0EB256E25A200C11E63 /* AllFilesViewController.swift */; };
+		CF1BF0EF256E25A200C11E63 /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BF0EB256E25A200C11E63 /* AllFilesViewController.swift */; };
+		CF1BF0F0256E25A200C11E63 /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BF0EB256E25A200C11E63 /* AllFilesViewController.swift */; };
+		CF1BF0F1256E25A200C11E63 /* AllFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BF0EB256E25A200C11E63 /* AllFilesViewController.swift */; };
 		CF703F4524E3CC49005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CF703F4624E3CC4A005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CF703F4724E3CC4B005EFFFD /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -15079,6 +15085,7 @@
 		CF0482EB256BDA5B007DAA79 /* SharedFilesCollectionSliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SharedFilesCollectionSliderView.xib; sourceTree = "<group>"; };
 		CF04831F256C9335007DAA79 /* SharedFilesCollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFilesCollectionDataSource.swift; sourceTree = "<group>"; };
 		CF04833C256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilesSectionSliderMediator.swift; sourceTree = "<group>"; };
+		CF1BF0EB256E25A200C11E63 /* AllFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFilesViewController.swift; sourceTree = "<group>"; };
 		CF57972A251A0A890085DDC1 /* LifeboxWidgetExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeboxWidgetExtensionRelease.entitlements; sourceTree = "<group>"; };
 		CF693179CA606AC2BA6BD04E /* Pods-LifeTech_BilloProviderUI.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTech_BilloProviderUI.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-LifeTech_BilloProviderUI/Pods-LifeTech_BilloProviderUI.enterprise.xcconfig"; sourceTree = "<group>"; };
 		CF71458B24B4D02A00D83E60 /* OverlayStickerDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayStickerDownloadManager.swift; sourceTree = "<group>"; };
@@ -17674,8 +17681,8 @@
 			isa = PBXGroup;
 			children = (
 				7CE825B81F823CAD00356AD2 /* PopUpSubViews */,
-				7C1F89911F70FFDF00740177 /* CardsContainerView.swift */,
 				CF04833C256CA56E007DAA79 /* AllFilesSectionSliderMediator.swift */,
+				7C1F89911F70FFDF00740177 /* CardsContainerView.swift */,
 				734C271B24E578960067F337 /* CardsShareButtonDelegate.swift */,
 				CE99AC77201CB778003DD3B7 /* CardActionType.swift */,
 				7C1F89931F7140AF00740177 /* SwipeableCardCell.swift */,
@@ -23681,6 +23688,7 @@
 			isa = PBXGroup;
 			children = (
 				CEAFCF651F2AD7DE00ECA8D1 /* BaseFilesGreedChildrenViewController.swift */,
+				CF1BF0EB256E25A200C11E63 /* AllFilesViewController.swift */,
 				46D21B416D68E0EDD1E1DB16 /* BaseFilesGreedViewInput.swift */,
 				08BC2716CA43EB44D104F6F6 /* BaseFilesGreedViewOutput.swift */,
 				F43F31D403CF3A25954AE0EF /* BaseFilesGreedViewController.swift */,
@@ -28921,6 +28929,7 @@
 				0303A0F62397D0D000907F42 /* ProgressCardProtocol.swift in Sources */,
 				0303A0F72397D0D000907F42 /* LocalAlbumModuleInitializer.swift in Sources */,
 				B51D959124D00D9F00FA2EA0 /* ThirdPartyAdjustment.swift in Sources */,
+				CF1BF0EF256E25A200C11E63 /* AllFilesViewController.swift in Sources */,
 				0303A0F82397D0D000907F42 /* ContactSyncParametrs.swift in Sources */,
 				986DD48125388F3400C38AD4 /* BackupHelper.m in Sources */,
 				0303A0F92397D0D000907F42 /* ActivityTimelineService.swift in Sources */,
@@ -30786,6 +30795,7 @@
 				8C0E8D3D1FDEBDFF00789C91 /* HomeCollectionViewDataSource.swift in Sources */,
 				4BF3A68622B23F4F0082130F /* PermissionViewController.swift in Sources */,
 				8CE20071207CD12900EF3483 /* ServerMessageError.swift in Sources */,
+				CF1BF0ED256E25A200C11E63 /* AllFilesViewController.swift in Sources */,
 				7C4F60A32019D0340033C58F /* CollageCard.swift in Sources */,
 				8C0E8D3E1FDEBDFF00789C91 /* CollectionViewSimpleHeaderWithText.swift in Sources */,
 				98BBF0D625024D610038A31E /* PhotoEditImageScrollView.swift in Sources */,
@@ -33022,6 +33032,7 @@
 				787F4B221FDAC2A700378F73 /* AlbumDetailModuleOutput.swift in Sources */,
 				98F9C56E23584BDE008C5ECF /* CampaignDetailViewController.swift in Sources */,
 				7378051E23AB9D19001D57BD /* CreateOverlayStickerError.swift in Sources */,
+				CF1BF0EC256E25A200C11E63 /* AllFilesViewController.swift in Sources */,
 				8CD8F4F41F1E202600F1257B /* GradientLoadingIndicator.swift in Sources */,
 				8C7786A31F3F38F0005CB432 /* VisualMusicPlayerPresenter.swift in Sources */,
 				8C20868B228D5386000BEDAD /* QuickScrollItems.swift in Sources */,
@@ -35238,6 +35249,7 @@
 				CE784B7B22A685FB00662219 /* BaseItemPassingProtocol.swift in Sources */,
 				CE784B7C22A685FB00662219 /* SettingsViewOutput.swift in Sources */,
 				B501EF322421FF6100DEA9B4 /* LocalAlbumsCache.swift in Sources */,
+				CF1BF0F0256E25A200C11E63 /* AllFilesViewController.swift in Sources */,
 				CE784B7D22A685FB00662219 /* SmartAlbumCell.swift in Sources */,
 				CE784B7E22A685FB00662219 /* SettingsViewController.swift in Sources */,
 				CE784B7F22A685FB00662219 /* PasscodeInputView.swift in Sources */,
@@ -35698,6 +35710,7 @@
 				CF8B639D23CBC9D70021B021 /* HomePagePopUpsService.swift in Sources */,
 				CF8B639F23CBC9D70021B021 /* ManageContactsRouterInput.swift in Sources */,
 				CF8B63A023CBC9D70021B021 /* AutoSyncSettingsOptionView.swift in Sources */,
+				CF1BF0EE256E25A200C11E63 /* AllFilesViewController.swift in Sources */,
 				CF8B63A123CBC9D70021B021 /* AssetFileCacheManager.swift in Sources */,
 				CF8B63A223CBC9D70021B021 /* ActivityFileType.swift in Sources */,
 				CF8B63A323CBC9D70021B021 /* QuickSelectCollectionView.swift in Sources */,
@@ -38338,6 +38351,7 @@
 				CF8B6F0623CBCA280021B021 /* BaseItemPassingProtocol.swift in Sources */,
 				CF8B6F0723CBCA280021B021 /* SettingsViewOutput.swift in Sources */,
 				CF8B6F0823CBCA280021B021 /* SmartAlbumCell.swift in Sources */,
+				CF1BF0F1256E25A200C11E63 /* AllFilesViewController.swift in Sources */,
 				B501EF332421FF6100DEA9B4 /* LocalAlbumsCache.swift in Sources */,
 				CF8B6F0923CBCA280021B021 /* SettingsViewController.swift in Sources */,
 				CF8B6F0A23CBCA280021B021 /* PasscodeInputView.swift in Sources */,

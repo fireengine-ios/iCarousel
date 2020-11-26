@@ -31,7 +31,7 @@ final class MusicViewController: BaseFilesGreedViewController {
     // MARK: Private methods
     
     private func refreshSpotifyStatusView(isHidden: Bool) {
-        scrollablePopUpsMediator.cardProtocolSupportedView.setFooter(view: isHidden ? nil : spotifyStatusView)
+        cardsContainerView.setFooter(view: isHidden ? nil : spotifyStatusView)
     }
 }
 

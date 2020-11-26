@@ -34,7 +34,7 @@ final class SharedFilesCollectionSliderView: UIView, NibInit {
     
     @IBOutlet private weak var collectionView: UICollectionView! {
         willSet {
-            newValue.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+            newValue.contentInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32)
         }
     }
 
@@ -58,10 +58,4 @@ final class SharedFilesCollectionSliderView: UIView, NibInit {
         collectionView.collectionViewLayout.invalidateLayout()
     }
 
-}
-
-extension SharedFilesCollectionSliderView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 90, height: 112)
-    }
 }

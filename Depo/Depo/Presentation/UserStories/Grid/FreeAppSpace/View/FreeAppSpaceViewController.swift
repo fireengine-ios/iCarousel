@@ -15,7 +15,7 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
     override func viewDidLoad() {
         
         
-        scrollablePopUpsMediator.cardProtocolSupportedView.isEnable = false
+        cardsContainerView.isEnable = false
         
         duplicatesTextLabel.textColor = ColorConstants.darkText
         duplicatesTextLabel.font = UIFont.TurkcellSaturaDemFont(size: 14)
@@ -38,7 +38,7 @@ class FreeAppSpaceViewController: BaseFilesGreedViewController {
             }
             self_.output.onNextButton()
         }
-        CardsManager.default.addViewForNotification(view: scrollablePopUpsMediator.cardProtocolSupportedView)
+        CardsManager.default.addViewForNotification(view: cardsContainerView)
     }
     
     override func startSelection(with numberOfItems: Int) {
