@@ -29,8 +29,7 @@ extension SharedFilesCollectionDataSource: UICollectionViewDelegate {
         guard
             let cell = cell as? SharedFilesSliderCell,
             let relatedEntity = files[safe: indexPath.row] //this is one section collection
-        else
-        {
+        else {
             return
         }
         
@@ -40,8 +39,7 @@ extension SharedFilesCollectionDataSource: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard
             let relatedEntity = files[safe: indexPath.row] //this is one section collection
-        else
-        {
+        else {
             return
         }
         delegate?.cellTouched(withModel: relatedEntity)
