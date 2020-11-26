@@ -52,8 +52,7 @@ final class FileInfoView: UIView, FromNib {
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     
-    private var uuid = ""
-    private var projectId: String?
+    private var object: BaseDataSourceItem?
     
     // MARK: Life cycle
     
@@ -76,9 +75,7 @@ final class FileInfoView: UIView, FromNib {
     // MARK: Public Methods
     
     func setObject(_ object: BaseDataSourceItem, completion: VoidHandler?) {
-        uuid = object.uuid
-        projectId = object.projectId
-        
+        self.object = object
         resetUI()
         fileNameView.name = object.name
         peopleView.fileType = object.fileType
@@ -96,12 +93,9 @@ final class FileInfoView: UIView, FromNib {
             fileInfoView.set(createdDate: createdDate)
         }
         
-        if let projectId = projectId {
-            getSharingInfo(projectId: projectId, uuid: object.uuid)
-        }
+        updateShareInfo()
         
-        let isOwner = projectId == SingletonStorage.shared.accountInfo?.projectID
-        fileNameView.isReadOnly = !isOwner
+        setupEditableState(for: object, projectId: object.projectId, permissions: nil)
         
         layoutIfNeeded()
         completion?()
@@ -130,8 +124,6 @@ final class FileInfoView: UIView, FromNib {
     func setWith(wrapData: WrapData) {
         if wrapData.fileType == .folder {
             fileNameView.title = TextConstants.fileInfoFolderNameTitle
-        } else {
-            setupEditableState(for: wrapData)
         }
         
         fileInfoView.setup(with: wrapData)
@@ -143,12 +135,8 @@ final class FileInfoView: UIView, FromNib {
         
     func setWith(albumItem: AlbumItem) {
         fileNameView.title = TextConstants.fileInfoAlbumNameTitle
-        fileNameView.isReadOnly = albumItem.readOnly ?? false
+        fileNameView.isEditable = albumItem.readOnly ?? false
         fileInfoView.setup(with: albumItem)
-        
-        if albumItem.fileType.isFaceImageAlbum {
-            setupEditableState(for: albumItem)
-        }
     }
     
     func hideKeyboard() {
@@ -156,7 +144,7 @@ final class FileInfoView: UIView, FromNib {
     }
     
     func updateShareInfo() {
-        guard let projectId = projectId else {
+        guard let projectId = object?.projectId, let uuid = object?.uuid else {
             return
         }
         getSharingInfo(projectId: projectId, uuid: uuid)
@@ -181,9 +169,17 @@ final class FileInfoView: UIView, FromNib {
         ItemOperationManager.default.startUpdateView(view: self)
     }
     
-    private func setupEditableState(for item: BaseDataSourceItem) {
-        let isHidden = (item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum) && item.syncStatus != .synced
-        fileNameView.isEditable = !isHidden
+    private func setupEditableState(for item: BaseDataSourceItem, projectId: String?, permissions: SharedItemPermission?) {
+        var canEdit = true
+        if projectId != SingletonStorage.shared.accountInfo?.projectID {
+            canEdit = permissions?.granted?.contains(.setAttribute) == true
+        }
+        
+        if (item.isLocalItem || item.fileType.isFaceImageType || item.fileType.isFaceImageAlbum) && item.syncStatus != .synced {
+            canEdit = false
+        }
+
+        fileNameView.isEditable = canEdit
     }
     
     private func resetUI() {
@@ -240,8 +236,8 @@ final class FileInfoView: UIView, FromNib {
             sharingInfoView.setup(with: info)
         }
         
-        if sharingInfo.projectId != SingletonStorage.shared.accountInfo?.projectID, sharingInfo.permissions?.granted?.contains(.setAttribute) == true {
-            fileNameView.isReadOnly = false
+        if let object = object {
+            setupEditableState(for: object, projectId: sharingInfo.projectId, permissions: sharingInfo.permissions)
         }
         
         sharingInfoView.isHidden = !needShow
@@ -334,13 +330,13 @@ extension FileInfoView: ItemOperationManagerViewProtocol {
     }
     
     func didShare(items: [BaseDataSourceItem]) {
-        if items.first(where: { $0.uuid == uuid }) != nil {
+        if items.first(where: { $0.uuid == object?.uuid }) != nil {
             updateShareInfo()
         }
     }
     
     func didEndShareItem(uuid: String) {
-        if uuid == self.uuid {
+        if uuid == object?.uuid {
             updateShareInfo()
         }
     }
