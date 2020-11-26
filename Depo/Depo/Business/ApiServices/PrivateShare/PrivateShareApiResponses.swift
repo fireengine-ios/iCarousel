@@ -7,30 +7,15 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 struct SuggestedApiContact: Codable {
-    let type: String?
+    let type: PrivateShareSubjectType?
     let identifier: String?
     let username: String?
     let email: String?
     var name: String?
     let picture: URL?
-    
-    static func testContacts() -> [SuggestedApiContact] {
-        var contacts = [SuggestedApiContact]()
-        
-        let phones = ["8885555512", "5555228243", "5556106679", "5557664823", "5555648583"]
-        
-        for index in 1...5 {
-            contacts.append(SuggestedApiContact(type: "USER",
-                                                identifier: "user_\(index)",
-                                                username: phones[index-1],
-                                                email: "email_\(index)@gmail.com",
-                                                name: "user_\(index)",
-                                                picture: nil))
-        }
-        return contacts
-    }
 }
 
 struct SharedFileInfo: Codable {
@@ -48,7 +33,7 @@ struct SharedFileInfo: Codable {
     let uploaderDeviceType: String? //enum
     let ugglaId: String?
     let content_type: String?
-    //        "metadata": {},
+    let metadata: SharedFileInfoMetaData?
     let album: [FileAlbum]?
     //        "location": {},
     let permissions: SharedItemPermission?
@@ -58,6 +43,65 @@ struct SharedFileInfo: Codable {
     
     var fileType: FileType {
         return FileType(type: content_type, fileName: name)
+    }
+}
+
+struct SharedFileInfoMetaData: Codable {
+    let isFavourite: Bool?
+    
+    let thumbnailLarge: URL?
+    let thumbnailMedium: URL?
+    let thumbnailSmall: URL?
+    
+    let originalHash: String?
+    let originalBytes: Int64?
+    
+    let imageHeight: Int?
+    let imageWidth: Int?
+    let imageOrientation: Int? //enum?
+    let imageDateTime: Date?
+    
+    let latitude: Double?
+    let longitude: Double?
+    
+    private enum CodingKeys: String, CodingKey {
+        case isFavourite = "X-Object-Meta-Favourite"
+        case thumbnailLarge = "Thumbnail-Large"
+        case thumbnailMedium = "Thumbnail-Medium"
+        case thumbnailSmall = "Thumbnail-Small"
+        
+        case originalHash = "X-Object-Meta-Ios-Metadata-Hash"
+        case originalBytes = "Original-Bytes"
+        
+        case imageHeight = "Image-Height"
+        case imageWidth = "Image-Width"
+        case imageOrientation = "Image-Orientation"
+        case imageDateTime = "Image-DateTime"
+        
+        case latitude = "Latitude"
+        case longitude = "Longitude"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        originalBytes = JSON(try container.decodeIfPresent(String.self, forKey: .originalBytes) ?? "").int64
+        isFavourite = JSON(try container.decodeIfPresent(String.self, forKey: .isFavourite) ?? "").boolFromString
+        
+        thumbnailLarge = JSON(try container.decodeIfPresent(String.self, forKey: .thumbnailLarge) ?? "").url
+        thumbnailMedium = JSON(try container.decodeIfPresent(String.self, forKey: .thumbnailMedium) ?? "").url
+        thumbnailSmall = JSON(try container.decodeIfPresent(String.self, forKey: .thumbnailSmall) ?? "").url
+        
+        originalHash = try container.decodeIfPresent(String.self, forKey: .originalHash)
+        
+        imageHeight = JSON(try container.decodeIfPresent(String.self, forKey: .imageHeight) ?? "").int
+        imageWidth = JSON(try container.decodeIfPresent(String.self, forKey: .imageWidth) ?? "").int
+        imageOrientation = JSON(try container.decodeIfPresent(String.self, forKey: .imageOrientation) ?? "").int
+        
+        imageDateTime = JSON(try container.decodeIfPresent(String.self, forKey: .imageDateTime) ?? "").date
+        
+        latitude = JSON(try container.decodeIfPresent(String.self, forKey: .latitude) ?? "").double
+        longitude = JSON(try container.decodeIfPresent(String.self, forKey: .longitude) ?? "").double
     }
 }
 
@@ -75,7 +119,7 @@ struct FileSystem: Codable {
 }
 
 
-struct SharedItemPermission: Codable {
+struct SharedItemPermission: Codable, Equatable {
     let granted: [PrivateSharePermission]?
     let bitmask: Int64?
 }
@@ -123,6 +167,7 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
     case editor = "EDITOR"
     case viewer = "VIEWER"
     case owner = "OWNER"
+    case varying = "VARYING"
     
     var title: String {
         switch self {
@@ -130,7 +175,7 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareStartPageEditorButton
         case .viewer:
             return TextConstants.privateShareStartPageViewerButton
-        case .owner:
+        case .owner, .varying:
             return ""
         }
     }
@@ -141,7 +186,7 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareRoleSelectionEditor
         case .viewer:
             return TextConstants.privateShareRoleSelectionViewer
-        case .owner:
+        case .owner, .varying:
             return ""
         }
     }
@@ -154,6 +199,8 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareInfoMenuViewer
         case .owner:
             return TextConstants.privateShareInfoMenuOwner
+        case .varying:
+            return TextConstants.privateShareInfoMenuVarying
         }
     }
     
@@ -165,6 +212,21 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return TextConstants.privateShareWhoHasAccessViewer
         case .owner:
             return TextConstants.privateShareWhoHasAccessOwner
+        case .varying:
+            return TextConstants.privateShareWhoHasAccessVarying
+        }
+    }
+    
+    var accessListTitle: String {
+        switch self {
+        case .editor:
+            return TextConstants.privateShareAccessEditor
+        case .viewer:
+            return TextConstants.privateShareAccessViewer
+        case .varying:
+            return TextConstants.privateShareAccessVarying
+        case .owner:
+            return ""
         }
     }
     
@@ -176,11 +238,13 @@ enum PrivateShareUserRole: String, CaseIterable, Codable {
             return 1
         case .viewer:
             return 2
+        case .varying:
+            return 3
         }
     }
 }
 
-enum PrivateShareItemType: String, Encodable {
+enum PrivateShareItemType: String, Codable {
     case file = "FILE"
     case album = "ALBUM"
 }
@@ -211,10 +275,16 @@ enum PrivateShareDuration: String, CaseIterable, Codable {
     }
 }
 
+enum PrivateShareSubjectType: String, Codable {
+    case user = "USER"
+    case group = "USER_GROUP"
+    case knownName = "KNOWN_NAME"
+}
+
 struct SharedContact: Codable, Equatable {
     var subject: SuggestedApiContact?
     let permissions: SharedItemPermission?
-    let role: PrivateShareUserRole
+    var role: PrivateShareUserRole
     
     var displayName: String {
         subject?.name ?? subject?.username ?? ""
@@ -256,7 +326,7 @@ struct SharedContact: Codable, Equatable {
     }
 }
 
-enum PrivateSharePermission: String, Codable {
+enum PrivateSharePermission: String, Codable, Equatable {
     case read = "READ"
     case preview = "PREVIEW"
     case list = "LIST"
@@ -267,4 +337,45 @@ enum PrivateSharePermission: String, Codable {
     case comment = "COMMENT"
     case writeAcl = "WRITE_ACL"
     case readAcl = "READ_ACL"
+}
+
+struct CreateFolderResquestItem: Encodable {
+    let uuid: String
+    let folder: Bool = true
+    let name: String
+    let sizeInBytes: Int64 = 0
+    let mimeType: String = "application/directory"
+    
+    var parameters: [String: Any] {
+        dictionary
+    }
+}
+
+struct PrivateSharedFolderItem: Equatable {
+    let projectId: String
+    let uuid: String
+    let name: String
+    let permissions: SharedItemPermission
+}
+
+struct PrivateShareAccessListObject: Codable {
+    let type: PrivateShareItemType
+    let uuid: String
+    let name: String
+}
+
+enum PrivateShareAccessListType: String, Codable {
+    case allow = "ALLOW"
+    case deny = "DENY"
+}
+
+struct PrivateShareAccessListInfo: Codable {
+    let id: Int64
+    let type: PrivateShareAccessListType
+    let object: PrivateShareAccessListObject
+    let subject: SuggestedApiContact
+    let permissions: SharedItemPermission
+    let role: PrivateShareUserRole
+    let expirationDate: Date
+    let conditions: [String]? //unknown array type
 }

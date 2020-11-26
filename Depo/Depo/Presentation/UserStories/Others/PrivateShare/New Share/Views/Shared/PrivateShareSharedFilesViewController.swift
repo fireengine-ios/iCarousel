@@ -16,7 +16,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         switch shareType {
             case .byMe: title = TextConstants.privateShareSharedByMeTab
             case .withMe: title = TextConstants.privateShareSharedWithMeTab
-            case .innerFolder(_, _, let name): title = name
+            case .innerFolder(_, let folder): title = folder.name
         }
         controller.title = title
         controller.shareType = shareType
@@ -261,7 +261,7 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     }
     
     func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type.isContained(in: [.endSharing, .leaveSharing]) {
+        if type.isContained(in: [.endSharing, .leaveSharing, .moveToTrashShared]) {
             collectionManager.reloadAfterAction()
         }
     }

@@ -389,6 +389,22 @@ class RouterVC: NSObject {
         return false
     }
     
+    
+    var sharedFolderItem: PrivateSharedFolderItem? {
+        guard
+            let tabBarVC = defaultTopController as? TabBarViewController,
+            let controller = tabBarVC.activeNavigationController?.topViewController as? PrivateShareSharedFilesViewController
+        else {
+            return nil
+        }
+
+        if case let PrivateShareType.innerFolder(type: _, folderItem: folder) = controller.shareType {
+            return folder
+        }
+        
+        return nil
+    }
+    
     // MARK: Splash
     
     var splash: UIViewController? {
@@ -603,8 +619,8 @@ class RouterVC: NSObject {
         return PrivateShareSharedFilesViewController.with(shareType: .byMe)
     }
     
-    func sharedFolder(rootShareType: PrivateShareType, folderUuid: String, name: String) -> UIViewController {
-        return PrivateShareSharedFilesViewController.with(shareType: .innerFolder(type: rootShareType, uuid: folderUuid, name: name))
+    func sharedFolder(rootShareType: PrivateShareType, folder: PrivateSharedFolderItem) -> UIViewController {
+        return PrivateShareSharedFilesViewController.with(shareType: .innerFolder(type: rootShareType, folderItem: folder))
     }
     
     // MARK: Music Player
@@ -679,7 +695,12 @@ class RouterVC: NSObject {
     // MARK: Create Folder
     
     func createNewFolder(rootFolderID: String?, isFavorites: Bool = false) -> UIViewController {
-        let controller = SelectNameModuleInitializer.initializeViewController(with: "SelectNameViewController", viewType: .selectFolderName, rootFolderID: rootFolderID, isFavorites: isFavorites)
+        let controller = SelectNameModuleInitializer.initializeViewController(with: .selectFolderName, rootFolderID: rootFolderID, isFavorites: isFavorites)
+        return controller
+    }
+    
+    func createNewFolderSharedWithMe(parameters: CreateFolderSharedWithMeParameters) -> UIViewController {
+        let controller = SelectNameModuleInitializer.with(parameters: parameters)
         return controller
     }
     
@@ -687,7 +708,7 @@ class RouterVC: NSObject {
     // MARK: Create Album
     
     func createNewAlbum(moduleOutput: SelectNameModuleOutput? = nil) -> UIViewController {
-        let controller = SelectNameModuleInitializer.initializeViewController(with: "SelectNameViewController", viewType: .selectAlbumName, moduleOutput: moduleOutput)
+        let controller = SelectNameModuleInitializer.initializeViewController(with: .selectAlbumName, moduleOutput: moduleOutput)
         return controller
     }
     
@@ -1222,15 +1243,19 @@ class RouterVC: NSObject {
         }
     }
     
-    func privateShare(items: [WrapData], competion: BoolHandler?) -> UIViewController {
-        let shareController = PrivateShareViewController.with(items: items, completion: competion)
+    func privateShare(items: [WrapData]) -> UIViewController {
+        let shareController = PrivateShareViewController.with(items: items)
         let navigationController = NavigationController(rootViewController: shareController)
         navigationController.modalTransitionStyle = .coverVertical
         navigationController.modalPresentationStyle = .fullScreen
         return navigationController
     }
     
-    func privateShareContacts(with shareInfo: SharedFileInfo, endShareHandler: VoidHandler?) -> UIViewController {
-        PrivateShareContactsViewController.with(shareInfo: shareInfo, endShareHandler: endShareHandler)
+    func privateShareContacts(with shareInfo: SharedFileInfo) -> UIViewController {
+        PrivateShareContactsViewController.with(shareInfo: shareInfo)
+    }
+    
+    func privateShareAccessList(projectId: String, uuid: String, contact: SharedContact, fileType: FileType) -> UIViewController {
+        PrivateShateAccessListViewController.with(projectId: projectId, uuid: uuid, contact: contact, fileType: fileType)
     }
 }

@@ -59,6 +59,14 @@ final class PrivateShareContactCell: UITableViewCell {
     
     //MARK: -
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        avatarImageView.image = nil
+        initialsLabel.text = ""
+        nameLabel.text = ""
+        usernameLabel.text = ""
+    }
+    
     func setup(with contact: SharedContact, index: Int) {
         self.index = index
         nameLabel.text = contact.subject?.name
@@ -92,7 +100,7 @@ final class PrivateShareContactCell: UITableViewCell {
             roleButton.setImage(nil, for: .normal)
             roleButton.tintColor = .lrGreyish
             roleButton.isUserInteractionEnabled = false
-        case .editor, .viewer:
+        case .editor, .viewer, .varying:
             roleButton.setTitleColor(.lrTealishFour, for: .normal)
             roleButton.tintColor = .lrTealishFour
             roleButton.setImage(UIImage(named: "arrow_right"), for: .normal)

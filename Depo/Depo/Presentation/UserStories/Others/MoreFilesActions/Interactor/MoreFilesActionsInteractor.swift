@@ -129,7 +129,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        let controller = router.privateShare(items: items, competion: nil)
+        let controller = router.privateShare(items: items)
         router.presentViewController(controller: controller)
     }
     
@@ -1027,6 +1027,40 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         router.presentViewController(controller: popup, animated: false)
     }
     
+    
+    func moveToTrashShared(items: [BaseDataSourceItem]) {
+        guard let items = items as? [WrapData] else {
+            return
+        }
+        
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .cancel)
+            vc.close()
+        }
+        
+        let okHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .ok)
+            self?.output?.operationStarted(type: .moveToTrashShared)
+            vc.close { [weak self] in
+                self?.moveToTrashShared(items)
+            }
+        }
+        
+        trackScreen(.fileOperationConfirmPopup(.trash))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteConfirmPopUp())
+        
+        let popup = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                         message: TextConstants.deleteFilesText,
+                                         image: .delete,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstAction: cancelHandler,
+                                         secondAction: okHandler)
+        
+        router.presentViewController(controller: popup, animated: false)
+    }
+    
+    
     func removeAlbums(items: [BaseDataSourceItem]) {
         let okHandler: PopUpButtonHandler = { [weak self] vc in
             self?.output?.operationStarted(type: .moveToTrash)
@@ -1533,6 +1567,28 @@ extension MoreFilesActionsInteractor {
             analyticsService.trackFileOperationGAEvent(operationType: .trash, itemsType: .places, itemsCount: items.count)
             fileService.deletePlaces(items: items, success: success, fail: fail)
         }
+    }
+    
+    private func moveToTrashShared(_ items: [Item]) {
+        //only one is allowed for now
+        guard let item = items.first else {
+            return
+        }
+        
+        let successAction = { [weak self] in
+            self?.output?.operationFinished(type: .moveToTrashShared)
+            self?.removeItemsFromPlayer(items: items)
+            self?.successAction(elementType: .moveToTrashShared)()
+        }
+        
+        let failAction = { [weak self] (error: ErrorResponse) in
+            self?.output?.operationFailed(type: .moveToTrashShared, message: error.description)
+            self?.failAction(elementType: .moveToTrashShared)(error)
+        }
+        
+        analyticsService.trackFileOperationGAEvent(operationType: .trash, items: items)
+        
+        fileService.moveToTrashShared(file: item, success: successAction, fail: failAction)
     }
 }
 

@@ -335,8 +335,6 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
             }, completion: { _ in
                 
             })
-            
-            
         }
     }
     
@@ -372,6 +370,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
     
     @IBAction func plussBtnAction(_ sender: Any) {
         guard !getFloatingButtonsArray().isEmpty else {
+            SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateSharePlusButtonNoAction)
             return
         }
         
@@ -734,8 +733,8 @@ extension TabBarViewController: SubPlussButtonViewDelegate, UIImagePickerControl
         }
         
         if let controller = currentViewController as? PrivateShareSharedFilesViewController,
-           case let PrivateShareType.innerFolder(type: _, uuid: folderUuid, name: _) = controller.shareType {
-            return folderUuid
+           case let PrivateShareType.innerFolder(_, folder) = controller.shareType {
+            return folder.uuid
         }
         
         return nil
@@ -821,7 +820,14 @@ extension TabBarViewController: TabBarActionHandler {
                 folderUUID = ""
             }
             
-            let controller = router.createNewFolder(rootFolderID: folderUUID, isFavorites: isFavorites)
+            let controller: UIViewController
+            if let sharedFolder = router.sharedFolderItem {
+                let parameters = CreateFolderSharedWithMeParameters(projectId: sharedFolder.projectId, rootFolderUuid: sharedFolder.uuid)
+                controller = router.createNewFolderSharedWithMe(parameters: parameters)
+            } else {
+                controller = router.createNewFolder(rootFolderID: folderUUID, isFavorites: isFavorites)
+            }
+            
             let nController = NavigationController(rootViewController: controller)
             router.presentViewController(controller: nController)
             

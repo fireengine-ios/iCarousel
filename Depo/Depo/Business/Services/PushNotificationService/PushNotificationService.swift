@@ -56,6 +56,15 @@ final class PushNotificationService {
         return true
     }
     
+    func assignUniversalLink(url: URL) -> Bool {
+        guard let path = url.absoluteString.components(separatedBy: "#!/").last, let action = UniversalLinkPath(rawValue: path)?.action else {
+            return false
+        }
+        debugLog("PushNotificationService received universal link with type \(action.rawValue)")
+        parse(options: nil, action: action)
+        return true
+    }
+    
     private func parse(options: [AnyHashable: Any]?, action: PushNotificationAction) {
         self.notificationAction = action
         

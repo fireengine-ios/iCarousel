@@ -233,6 +233,14 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         cell.updating()
         cell.setSelection(isSelectionActive: isSelecting, isSelected: isSelectedCell)
         cell.configureWithWrapper(wrappedObj: item)
+          
+        if case PathForItem.remoteUrl(let url) = item.patchToPreview {
+            if let url = url {
+                cell.setImage(with: url)
+            } else {
+                cell.setPlaceholderImage(fileType: item.fileType)
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -285,7 +293,10 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         }
         
         if item.isFolder == true {
-            openFolder(with: item.uuid, name: item.name ?? "")
+            if let projectId = item.projectId, let name = item.name, let permissions = item.privateSharePermission  {
+                let sharedFolder = PrivateSharedFolderItem(projectId: projectId, uuid: item.uuid, name: name, permissions: permissions)
+                openFolder(with: sharedFolder)
+            }
             
         } else {
             let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
@@ -293,9 +304,9 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         }
     }
     
-    private func openFolder(with folderUuid: String, name: String) {
+    private func openFolder(with folder: PrivateSharedFolderItem) {
         DispatchQueue.main.async {
-            let controller = self.router.sharedFolder(rootShareType: self.fileInfoManager.type, folderUuid: folderUuid, name: name)
+            let controller = self.router.sharedFolder(rootShareType: self.fileInfoManager.type, folder: folder)
             self.router.pushViewController(viewController: controller)
         }
     }

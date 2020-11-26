@@ -643,6 +643,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
     
     var fileData: Data?
     
+    var privateSharePermission: SharedItemPermission?
+    
     var asset: PHAsset? {
         switch patchToPreview {
         case let .localMediaContent(local):
@@ -875,6 +877,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
         super.init(uuid: remote.uuid)
         md5 = remote.itemHash ?? "not hash "
         
+        projectId = SingletonStorage.shared.accountInfo?.projectID
+        
         albums = remote.albums
         
         name = remote.name
@@ -947,6 +951,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         md5 = searchResponse[SearchJsonKey.hash].string ?? "not hash"
         name = searchResponse[SearchJsonKey.name].string
         uuid = fileUUID
+        projectId = SingletonStorage.shared.accountInfo?.projectID
         
         mimeType = searchResponse[SearchJsonKey.content_type].string
         fileType = FileType(type: mimeType, fileName: name)
@@ -976,7 +981,8 @@ class WrapData: BaseDataSourceItem, Wrappered {
             case .little : url = metaData?.smalURl
             case .medium : url = metaData?.mediumUrl
             case .large  : url = metaData?.largeUrl
-            } case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places), .photoAlbum:
+            }
+        case .faceImageAlbum(.things), .faceImageAlbum(.people), .faceImageAlbum(.places), .photoAlbum:
             if let mediumUrl = metaData?.mediumUrl {
                 url = mediumUrl
             } else if let smallUrl = metaData?.smalURl {
@@ -1076,6 +1082,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         super.init()
         parent = mediaItem.parent
         md5 = mediaItem.md5Value ?? "not md5"
+        projectId = SingletonStorage.shared.accountInfo?.projectID
         
         if let mediaItemUuid = mediaItem.uuid {
             uuid = mediaItemUuid
@@ -1157,9 +1164,20 @@ class WrapData: BaseDataSourceItem, Wrappered {
     init(privateShareFileInfo: SharedFileInfo) {
         //TODO: status to enum in SharedFileInfo
         
+        if let metadata = privateShareFileInfo.metadata {
+            metaData = BaseMetaData(with: metadata)
+        }
+        
         fileSize = privateShareFileInfo.bytes ?? 0
         favorites = false
-        patchToPreview = .remoteUrl(nil)
+//        let localStorage = LocalMediaStorage.default
+//        if let assetId = privateShareFileInfo.metadata.originalHash,
+//           localStorage.photoLibraryIsAvailible(),
+//           let asset = localStorage.assetsCache.assetBy(identifier: assetId) ?? PHAsset.fetchAssets(withLocalIdentifiers: [assetId], options: nil).firstObject {
+//
+//        } else {
+            patchToPreview = .remoteUrl(metaData?.mediumUrl)
+//        }
         status = .active
         
         super.init(uuid: privateShareFileInfo.uuid,
@@ -1177,6 +1195,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
             fileType = .folder
         }
         childCount = privateShareFileInfo.childCount
+        privateSharePermission = privateShareFileInfo.permissions
     }
     
     func copyFileData(from item: WrapData) {

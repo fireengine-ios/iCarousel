@@ -57,6 +57,10 @@ final class FileInfoView: UIView, FromNib {
     
     // MARK: Life cycle
     
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupFromNib()
@@ -95,6 +99,9 @@ final class FileInfoView: UIView, FromNib {
         if let projectId = projectId {
             getSharingInfo(projectId: projectId, uuid: object.uuid)
         }
+        
+        let isOwner = projectId == SingletonStorage.shared.accountInfo?.projectID
+        fileNameView.isReadOnly = !isOwner
         
         layoutIfNeeded()
         completion?()
@@ -171,6 +178,7 @@ final class FileInfoView: UIView, FromNib {
         
         tapGestureRecognizer.delegate = self
         addGestureRecognizer(tapGestureRecognizer)
+        ItemOperationManager.default.startUpdateView(view: self)
     }
     
     private func setupEditableState(for item: BaseDataSourceItem) {
@@ -230,6 +238,10 @@ final class FileInfoView: UIView, FromNib {
                 info.members?[index].subject?.name = displayName(from: localContactNames)
             }
             sharingInfoView.setup(with: info)
+        }
+        
+        if sharingInfo.projectId != SingletonStorage.shared.accountInfo?.projectID, sharingInfo.permissions?.granted?.contains(.setAttribute) == true {
+            fileNameView.isReadOnly = false
         }
         
         sharingInfoView.isHidden = !needShow
@@ -309,6 +321,39 @@ extension FileInfoView: FileInfoShareViewDelegate {
     func didTappedArrowButton() {
         if let shareInfo = sharingInfoView.info {
             output.showWhoHasAccess(shareInfo: shareInfo)
+        }
+    }
+}
+
+//MARK: - ItemOperationManagerViewProtocol
+
+extension FileInfoView: ItemOperationManagerViewProtocol {
+    
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        object === self
+    }
+    
+    func didShare(items: [BaseDataSourceItem]) {
+        if items.first(where: { $0.uuid == uuid }) != nil {
+            updateShareInfo()
+        }
+    }
+    
+    func didEndShareItem(uuid: String) {
+        if uuid == self.uuid {
+            updateShareInfo()
+        }
+    }
+    
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact) {
+        if sharingInfoView.info?.members?.contains(contact) == true {
+            updateShareInfo()
+        }
+    }
+    
+    func didRemove(contact: SharedContact, fromItem uuid: String) {
+        if sharingInfoView.info?.members?.contains(contact) == true {
+            updateShareInfo()
         }
     }
 }
