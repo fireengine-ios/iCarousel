@@ -46,7 +46,7 @@ final class SharedFilesCollectionSliderView: UIView, NibInit {
     
     @IBOutlet private weak var collectionView: UICollectionView! {
         willSet {
-            newValue.contentInset = UIEdgeInsets(top: 0, left: 32, bottom: 0, right: 32)
+            newValue.contentInset = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 22)
         }
     }
 
