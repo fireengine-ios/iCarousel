@@ -14,6 +14,10 @@ class BaseDataSourceItem: NSObject {
     
     var projectId: String?
     
+    var isOwner: Bool {
+        return projectId == nil || projectId == SingletonStorage.shared.accountInfo?.projectID
+    }
+    
     var name: String?
     
     var creationDate: Date?

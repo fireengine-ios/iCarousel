@@ -103,15 +103,21 @@ final class DocumentDownloadOperation: Operation {
             
             if let error = error {
                 self.lastError = error
+            } else {
+                self.outputURLs.append(localUrl)
             }
             
             self.onDownload()
-            self.outputURLs.append(localUrl)
         }
 
     }
     
     private func saveDownloadedUrls() {
+        guard !outputURLs.isEmpty else {
+            semaphore.signal()
+            return
+        }
+        
         let router = RouterVC()
         let picker = UIDocumentPickerViewController(urls: outputURLs, in: .exportToService)
         picker.delegate = self
