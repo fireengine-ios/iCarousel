@@ -277,35 +277,43 @@ class WrapItemFileService: WrapItemFileOperations {
     func downloadDocuments(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let downloadItems = remoteWrapDataItems(files: items)
         
-        remoteFileService.downloadDocument(items: downloadItems, success: success, fail: fail)
+        let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil || (!$0.isOwner && $0.tmpDownloadUrl?.isExpired == true) }
+        
+        createDownloadUrls(for: itemsWithoutUrl) { [weak self] in
+            self?.remoteFileService.downloadDocument(items: downloadItems, success: success, fail: fail)
+        }
     }
     
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {
         let downloadItems = remoteWrapDataItems(files: items)
         
-        let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil }
+        let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil || (!$0.isOwner && $0.tmpDownloadUrl?.isExpired == true) }
         
-        switch itemsWithoutUrl.count {
-            case 0:
-                remoteFileService.download(items: downloadItems, success: success, fail: fail)
-                
-            case 1:
-                guard let firstItem = itemsWithoutUrl.first, let projectId = firstItem.projectId else {
-                    remoteFileService.download(items: downloadItems, success: success, fail: fail)
-                    return
-                }
-                
-                privateShareApiService.createDownloadUrl(projectId: projectId, uuid: firstItem.uuid) { [weak self] response in
-                    if case let ResponseResult.success(urlToDownload) = response {
-                        firstItem.tmpDownloadUrl = urlToDownload.url
-                    }
-                    self?.remoteFileService.download(items: downloadItems, success: success, fail: fail)
-                }
-                
-            default:
-                assertionFailure("Call createDownloadUrl differently, depending on a case")
-                fail?(ErrorResponse.string("can't handle"))
+        createDownloadUrls(for: itemsWithoutUrl) { [weak self] in
+            self?.remoteFileService.download(items: downloadItems, success: success, fail: fail)
         }
+    }
+    
+    private func createDownloadUrls(for items: [WrapData], completion: @escaping VoidHandler) {
+        let group = DispatchGroup()
+        
+        items.forEach { item in
+            group.enter()
+            
+            guard let projectId = item.projectId else {
+                group.leave()
+                return
+            }
+            
+            privateShareApiService.createDownloadUrl(projectId: projectId, uuid: item.uuid) { response in
+                if case let ResponseResult.success(urlToDownload) = response {
+                    item.tmpDownloadUrl = urlToDownload.url
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main, execute: completion)
     }
     
     func download(itemsByAlbums: [AlbumItem: [Item]], success: FileOperationSucces?, fail: FailResponse?) {

@@ -105,7 +105,7 @@ struct SharedFileInfoMetaData: Codable {
     }
 }
 
-struct UrlToDownload: Codable {
+struct WrappedUrl: Codable {
     let url: URL?
 }
 
