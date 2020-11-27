@@ -36,10 +36,6 @@ class BaseDataSourceItem: NSObject {
     
     var parent: String?
     
-    var isOwner: Bool {
-        return projectId == nil || projectId == SingletonStorage.shared.accountInfo?.projectID
-    }
-    
     func getCellReUseID() -> String {
         return CollectionViewCellsIdsConstant.cellForImage
     }

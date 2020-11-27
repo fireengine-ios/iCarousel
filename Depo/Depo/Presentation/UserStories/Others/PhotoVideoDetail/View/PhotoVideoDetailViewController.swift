@@ -259,7 +259,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         if status == .hidden {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
         } else if let selectedItem = selectedItem {
-            navigationItem.rightBarButtonItem?.customView?.isHidden = selectedItem.isLocalItem
+            //hide 3 dots button for shared or local items
+            navigationItem.rightBarButtonItem?.customView?.isHidden = selectedItem.isLocalItem || !selectedItem.isOwner
         } else {
             navigationItem.rightBarButtonItem?.customView?.isHidden = true
         }

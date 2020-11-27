@@ -21,6 +21,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     @IBOutlet private weak var imageScrollView: ImageScrollView!
     @IBOutlet private weak var activity: UIActivityIndicatorView!
     @IBOutlet private weak var playVideoButton: UIButton!
+    @IBOutlet private weak var placeholderImageView: UIImageView!
     
     private lazy var webView = WKWebView(frame: .zero)
     
@@ -36,6 +37,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     private var isNeedToUpdateWebView = true
     private var oldFrame = CGRect.zero
     private var currentItemId = ""
+    private var fileType: FileType = .unknown
     
     private var doubleTapWebViewGesture: UITapGestureRecognizer?
     
@@ -89,6 +91,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
     
     private func reset() {
         currentItemId = ""
+        fileType = .unknown
         isNeedToUpdateWebView = true
 
         tapGesture.isEnabled = true
@@ -107,6 +110,7 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         
         playVideoButton.isHidden = true
         imageScrollView.isHidden = true
+        placeholderImageView.isHidden = true
     }
     
     func setObject(object: Item) {
@@ -117,20 +121,22 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
         isNeedToUpdateWebView = false
         
         currentItemId = object.uuid
+        fileType = object.fileType
+        placeholderImageView.isHidden = true
         
-        if object.fileType == .video || object.fileType == .image {
+        if fileType == .video || fileType == .image {
             imageScrollView.isHidden = false
             imageScrollView.imageView.loadImageIncludingGif(with: object)
             imageScrollView.adjustFrameToCenter()
-            playVideoButton.isHidden = (object.fileType != .video)
-            tapGesture.isEnabled = (object.fileType != .video)
-        } else if object.fileType != .audio, object.fileType.isSupportedOpenType {
+            playVideoButton.isHidden = (fileType != .video)
+            tapGesture.isEnabled = (fileType != .video)
+        } else if fileType != .audio, fileType.isSupportedOpenType {
             webView.isHidden = false
             webView.navigationDelegate = self
             webView.clearPage()
 
             let loadURL: URL?
-            if object.fileType.isDocument, let preview = object.metaData?.documentPreviewURL {
+            if fileType.isDocument, let preview = object.metaData?.documentPreviewURL {
                 loadURL = preview
             } else if let url = object.urlToFile {
                 loadURL = url
@@ -144,6 +150,8 @@ final class PhotoVideoDetailCell: UICollectionViewCell {
             } else {
                 delegate?.didExpireUrl()
             }
+        } else {
+            setPlaceholder()
         }
     }
     
@@ -187,5 +195,21 @@ extension PhotoVideoDetailCell: UIGestureRecognizerDelegate {
 extension PhotoVideoDetailCell: ImageScrollViewDelegate {
     func imageViewFinishedLoading() {
         delegate?.imageLoadingFinished()
+    }
+    
+    func onImageLoaded(image: UIImage?) {
+        if image == nil, fileType != .video {
+            setPlaceholder()
+        } else {
+            placeholderImageView.isHidden = true
+            imageScrollView.isHidden = !(fileType == .video || fileType == .image)
+        }
+    }
+    
+    private func setPlaceholder() {
+        placeholderImageView.image = WrapperedItemUtil.privateSharePlaceholderImage(fileType: fileType)
+        imageScrollView.isHidden = true
+        webView.isHidden = true
+        placeholderImageView.isHidden = false
     }
 }
