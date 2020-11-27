@@ -261,7 +261,7 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     }
     
     func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type.isContained(in: [.endSharing, .leaveSharing, .moveToTrashShared]) {
+        if type.isContained(in: [.endSharing, .leaveSharing, .moveToTrash, .moveToTrashShared, .rename, .move, .share]) {
             collectionManager.reloadAfterAction()
         }
     }
