@@ -98,8 +98,17 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         let uploadItems = items as! [WrapData]
         let router = RouterVC()
         let isFavorites = router.isOnFavoritesView()
-        let rooutUUID = router.getParentUUID()
         let isFromAlbum = router.isRootViewControllerAlbumDetail()
+        
+        let projectId: String?
+        let rooutUUID: String
+        if let sharedFolderInfo = router.sharedFolderItem {
+            rooutUUID = sharedFolderInfo.uuid
+            projectId = sharedFolderInfo.projectId
+        } else {
+            rooutUUID = router.getParentUUID()
+            projectId = nil
+        }
         
         if isFromAlbum {
             ItemOperationManager.default.startUploadFilesToAlbum(files: uploadItems)
@@ -112,7 +121,8 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         
         uploadOutput?.addToUploadStarted()
         
-        UploadService.default.uploadFileList(items: uploadItems, uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, success: { [weak self] in
+        //pass uploadType .shared if upload from gallery is allowed
+        UploadService.default.uploadFileList(items: uploadItems, uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, projectId: projectId, success: { [weak self] in
 
             DispatchQueue.main.async {
                 self?.uploadOutput?.addToUploadSuccessed()

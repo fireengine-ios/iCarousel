@@ -39,6 +39,7 @@ protocol PrivateShareApiService {
     @discardableResult
     func deleteAclUser(projectId: String, uuid: String, aclId: Int64, handler: @escaping ResponseVoid) -> URLSessionTask?
 
+    @discardableResult
     func leaveShare(projectId: String, uuid: String, subjectId: String, handler: @escaping ResponseVoid) -> URLSessionTask?
     
     @discardableResult
@@ -47,10 +48,14 @@ protocol PrivateShareApiService {
     @discardableResult
     func renameItem(projectId: String, uuid: String, name: String, handler: @escaping ResponseVoid) -> URLSessionTask?
 
+    @discardableResult
     func moveToTrash(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask?
     
     @discardableResult
     func createFolder(projectId: String, parentFolderUuid: String, requestItem: CreateFolderResquestItem, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask?
+    
+    @discardableResult
+    func getUrlToUpload(projectId: String, parentFolderUuid: String, requestItem: UploadFileRequestItem, handler: @escaping ResponseHandler<WrappedUrl>) -> URLSessionTask?
 }
 
 final class PrivateShareApiServiceImpl: PrivateShareApiService {
@@ -197,6 +202,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .task
     }
     
+    @discardableResult
     func leaveShare(projectId: String, uuid: String, subjectId: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
         guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.leaveShare, projectId, uuid, subjectId)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
@@ -247,6 +253,7 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
             .task
     }
         
+    @discardableResult
     func moveToTrash(projectId: String, uuid: String, handler: @escaping ResponseVoid) -> URLSessionTask? {
         
         let parameters = [["projectId" : projectId, "uuid" : uuid]].asParameters()
@@ -264,6 +271,25 @@ final class PrivateShareApiServiceImpl: PrivateShareApiService {
     
     @discardableResult
     func createFolder(projectId: String, parentFolderUuid: String, requestItem: CreateFolderResquestItem, handler: @escaping ResponseHandler<SharedFileInfo>) -> URLSessionTask? {
+        guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.baseV2UrlString, projectId)) else {
+            handler(.failed(ErrorResponse.string("Incorrect URL")))
+            return nil
+        }
+        
+        let parameters = ["file": requestItem.parameters] + ["parentFolderUuid": parentFolderUuid]
+        
+        return SessionManager
+            .customDefault
+            .request(url, method: .post,
+                     parameters: parameters,
+                     encoding: JSONEncoding.prettyPrinted)
+            .customValidate()
+            .responseObject(handler)
+            .task
+    }
+    
+    @discardableResult
+    func getUrlToUpload(projectId: String, parentFolderUuid: String, requestItem: UploadFileRequestItem, handler: @escaping ResponseHandler<WrappedUrl>) -> URLSessionTask? {
         guard let url = URL(string: String(format: RouteRequests.FileSystem.Version_2.baseV2UrlString, projectId)) else {
             handler(.failed(ErrorResponse.string("Incorrect URL")))
             return nil

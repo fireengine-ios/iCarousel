@@ -78,7 +78,7 @@ class SimpleUpload: UploadRequestParametrs {
         self.isFavorite = isFavorite
         
         switch uploadType {
-            case .save:
+            case .save, .shared:
                 self.tmpUUID = item.uuid
             case .saveAs:
                 self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
@@ -132,9 +132,15 @@ class SimpleUpload: UploadRequestParametrs {
     }
     
     var patch: URL {
-        return URL(string: destitantionURL.absoluteString
-            .appending("/")
-            .appending(tmpUUID))!
+        switch uploadType {
+            case .shared:
+                return destitantionURL
+                
+            default:
+                return URL(string: destitantionURL.absoluteString
+                    .appending("/")
+                    .appending(tmpUUID))!
+        }
     }
     
     var timeout: TimeInterval {
@@ -248,10 +254,17 @@ final class ResumableUpload: UploadRequestParametrs {
     }
     
     var patch: URL {
-        return URL(string: destitantionURL.absoluteString
-            .appending("/")
-            .appending(tmpUUID)
-            .appending("?upload-type=resumable"))!
+        switch uploadType {
+            case .shared:
+                return URL(string: destitantionURL.absoluteString
+                    .appending("&upload-type=resumable"))!
+                
+            default:
+                return URL(string: destitantionURL.absoluteString
+                    .appending("/")
+                    .appending(tmpUUID)
+                    .appending("?upload-type=resumable"))!
+        }
     }
     
     var timeout: TimeInterval {
