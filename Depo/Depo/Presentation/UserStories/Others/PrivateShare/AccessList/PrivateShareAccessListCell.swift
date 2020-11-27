@@ -52,8 +52,13 @@ final class PrivateShareAccessListCell: UITableViewCell {
         }
         typeImageView.image = getIcon(for: fileType)
         
-        let dateString = info.expirationDate.getDateInFormat(format: "dd MMMM yyyy")
-        dateLabel.text = String(format: TextConstants.privateShareAccessExpiresDate, dateString)
+        if let expirationDate = info.expirationDate {
+            let dateString = expirationDate.getDateInFormat(format: "dd MMMM yyyy")
+            dateLabel.text = String(format: TextConstants.privateShareAccessExpiresDate, dateString)
+        } else {
+            dateLabel.text = ""
+        }
+        
         roleButton.setTitle(info.role.accessListTitle, for: .normal)
         
         switch info.role {
