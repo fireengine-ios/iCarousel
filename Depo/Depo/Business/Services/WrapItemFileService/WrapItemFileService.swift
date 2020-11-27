@@ -277,7 +277,7 @@ class WrapItemFileService: WrapItemFileOperations {
     func downloadDocuments(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let downloadItems = remoteWrapDataItems(files: items)
         
-        let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil || (!$0.isOwner && $0.tmpDownloadUrl?.isExpired == true) }
+        let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil || !$0.isOwner }
         
         createDownloadUrls(for: itemsWithoutUrl) { [weak self] in
             self?.remoteFileService.downloadDocument(items: downloadItems, success: success, fail: fail)
@@ -287,7 +287,7 @@ class WrapItemFileService: WrapItemFileOperations {
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {
         let downloadItems = remoteWrapDataItems(files: items)
         
-        let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil || (!$0.isOwner && $0.tmpDownloadUrl?.isExpired == true) }
+        let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil || !$0.isOwner }
         
         createDownloadUrls(for: itemsWithoutUrl) { [weak self] in
             self?.remoteFileService.download(items: downloadItems, success: success, fail: fail)
