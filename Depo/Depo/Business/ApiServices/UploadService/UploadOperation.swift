@@ -53,6 +53,13 @@ final class UploadOperation: Operation {
     private let interruptedId: String?
     private let isResumable: Bool
     private var wasInterrupted: Bool = false
+    private var fileSize: Int64 {
+        if isResumable {
+            return Int64(chunker?.fileSize ?? 0)
+        } else {
+            return inputItem.fileSize
+        }
+    }
     
     private lazy var storageVars: StorageVars = factory.resolve()
     
@@ -569,7 +576,7 @@ final class UploadOperation: Operation {
     
     private func baseUrl(success: @escaping ValueHandler<URL?>, fail: FailResponse?) -> URLSessionTask {
         if uploadType == .shared, let projectId = projectId {
-            let requestItem = UploadFileRequestItem(uuid: inputItem.uuid, name: inputItem.name ?? "", sizeInBytes: inputItem.fileSize, mimeType: inputItem.uploadContentType)
+            let requestItem = UploadFileRequestItem(uuid: inputItem.uuid, name: inputItem.name ?? "", sizeInBytes: fileSize, mimeType: inputItem.uploadContentType)
             
             return privateShareService.getUrlToUpload(projectId: projectId, parentFolderUuid: folder, requestItem: requestItem) { [weak self] response in
                 switch response {
