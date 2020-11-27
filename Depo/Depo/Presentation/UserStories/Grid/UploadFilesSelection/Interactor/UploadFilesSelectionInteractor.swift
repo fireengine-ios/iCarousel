@@ -121,6 +121,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         
         uploadOutput?.addToUploadStarted()
         
+        //pass uploadType .shared if upload from gallery is allowed
         UploadService.default.uploadFileList(items: uploadItems, uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, projectId: projectId, success: { [weak self] in
 
             DispatchQueue.main.async {
