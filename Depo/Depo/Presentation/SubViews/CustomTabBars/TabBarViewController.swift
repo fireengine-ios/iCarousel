@@ -387,7 +387,7 @@ final class TabBarViewController: ViewController, UITabBarDelegate {
         
         let list = [router.homePageScreen,
                     router.segmentedMedia(),
-                    router.sharedFiles,
+                    router.syncContacts,
                     router.segmentedFiles]
         customNavigationControllers = list.compactMap { NavigationController(rootViewController: $0!) }
     }
