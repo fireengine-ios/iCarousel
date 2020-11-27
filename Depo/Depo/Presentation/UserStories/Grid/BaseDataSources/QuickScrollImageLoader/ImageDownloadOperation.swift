@@ -12,7 +12,7 @@ import SDWebImage
 
 
 final class ImageDownloadOperation: Operation, SDWebImageOperation {
-    typealias ImageDownloadOperationCallback = ((AnyObject?, Data?) -> Void)
+    typealias ImageDownloadOperationCallback = ((UIImage?, Data?) -> Void)
     var outputBlock: ImageDownloadOperationCallback?
     
     private let semaphore = DispatchSemaphore(value: 0)

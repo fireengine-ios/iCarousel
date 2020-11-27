@@ -166,7 +166,7 @@ final class CellImageManager {
         
         ///prepare download operation for url
         let downloadImage = { [weak self] in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
             guard let url = isOwner ? url?.byTrimmingQuery : url else {
                 self.completionBlock?(nil, false, false, self.uniqueId)
@@ -176,9 +176,14 @@ final class CellImageManager {
             let downloadOperation = ImageDownloadOperation(url: url, queue: self.processingQueue)
             //DEVELOP let downloadOperation = ImageDownloadOperation(url: url, queue: self.dispatchQueue)
             downloadOperation.outputBlock = { [weak self] outputImage, _ in
-                guard let `self` = self, let outputImage = outputImage as? UIImage else { return }
+                guard let self = self else {
+                    return
+                }
                 
-                self.cache(image: outputImage, url: url)
+                if let outputImage = outputImage {
+                    self.cache(image: outputImage, url: url.byTrimmingQuery)
+                }
+                
                 self.completionBlock?(outputImage, false, false, self.uniqueId)
             }
             
@@ -205,7 +210,7 @@ final class CellImageManager {
                 return
             }
 
-            self.cache(image: outputImage, url: thumbnail)
+            self.cache(image: outputImage, url: thumbnail.byTrimmingQuery)
             self.completionBlock?(outputImage, false, true, self.uniqueId)
 
             downloadImage()

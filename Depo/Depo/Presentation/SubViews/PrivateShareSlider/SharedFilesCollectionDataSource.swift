@@ -33,7 +33,7 @@ extension SharedFilesCollectionDataSource: UICollectionViewDelegate {
             return
         }
         
-        cell.setup(text: relatedEntity.name ?? "", fileType: relatedEntity.fileType)
+        cell.setup(item: relatedEntity)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
