@@ -19,8 +19,8 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BJ9-pW-mRq">
-                    <rect key="frame" x="603" y="11.5" width="46" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BJ9-pW-mRq">
+                    <rect key="frame" x="595" y="9.5" width="54" height="34"/>
                     <state key="normal" title="Button"/>
                     <connections>
                         <action selector="showAll:" destination="zKR-Lk-LO2" eventType="touchUpInside" id="np1-l8-gEQ"/>
@@ -50,7 +50,7 @@
                 <constraint firstItem="ZJp-wS-6c1" firstAttribute="top" secondItem="JIu-13-OA3" secondAttribute="bottom" constant="16" id="CPn-kB-HM0"/>
                 <constraint firstItem="ZJp-wS-6c1" firstAttribute="leading" secondItem="zKR-Lk-LO2" secondAttribute="leading" id="Cco-hJ-fbY"/>
                 <constraint firstItem="BJ9-pW-mRq" firstAttribute="centerY" secondItem="JIu-13-OA3" secondAttribute="centerY" id="Kdt-7O-Bcg"/>
-                <constraint firstAttribute="height" constant="224" id="LTC-PP-9iB"/>
+                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="224" id="LTC-PP-9iB"/>
                 <constraint firstAttribute="trailing" secondItem="BJ9-pW-mRq" secondAttribute="trailing" constant="16" id="NLX-LS-nqn"/>
                 <constraint firstAttribute="bottom" secondItem="xyt-Iv-qh8" secondAttribute="bottom" constant="6" id="Ph5-EC-12V"/>
                 <constraint firstItem="xyt-Iv-qh8" firstAttribute="top" secondItem="ZJp-wS-6c1" secondAttribute="bottom" constant="18" id="an4-M8-E4a"/>
