@@ -47,6 +47,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     @IBOutlet weak var bigSelectionView: UIView!
     @IBOutlet weak var topFavoritesStar: UIImageView!
     @IBOutlet weak var bottomFavoritesStar: UIImageView!
+    @IBOutlet weak var sharedIcon: UIImageView!
     
     
     override weak var delegate: LBCellsDelegate? {
@@ -186,8 +187,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         bottomFavoritesStar.isHidden = !wrappered.favorites
         if isBigSize() {
             bottomFavoritesStar.isHidden = true
+            sharedIcon.isHidden = true
         } else {
             topFavoritesStar.isHidden = true
+            sharedIcon.isHidden = !wrappered.isShared
         }
     
         
@@ -299,6 +302,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         
         configureSmallSelectionImageView()
         setSelectionSmallSelectionImageView(false, isHidden: true)
+        
+        sharedIcon.isHidden = true
     }
     
     override func updating() {

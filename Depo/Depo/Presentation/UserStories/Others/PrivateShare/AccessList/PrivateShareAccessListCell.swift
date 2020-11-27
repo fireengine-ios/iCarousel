@@ -62,10 +62,10 @@ final class PrivateShareAccessListCell: UITableViewCell {
         roleButton.setTitle(info.role.accessListTitle, for: .normal)
         
         switch info.role {
-        case .owner, .varying:
+        case .owner:
             roleButton.setImage(nil, for: .normal)
             roleButton.isUserInteractionEnabled = false
-        case .viewer, .editor:
+        case .viewer, .editor, .varying:
             roleButton.setImage(UIImage(named: "downArrow"), for: .normal)
             roleButton.isUserInteractionEnabled = true
         }
