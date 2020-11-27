@@ -31,6 +31,7 @@ final class UploadOperation: Operation {
     private let mediaAlbumsService = MediaItemsAlbumOperationService.shared
     private let remoteAlbumsService = PhotosAlbumService()
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var privateShareService = PrivateShareApiServiceImpl()
     
     let inputItem: WrapData
     private(set) var outputItem: WrapData?
@@ -38,6 +39,7 @@ final class UploadOperation: Operation {
     private let uploadStategy: MetaStrategy
     private let uploadTo: MetaSpesialFolder
     private let folder: String
+    private let projectId: String?
     private var requestObject: URLSessionTask?
     private let handler: UploadOperationHandler?
     private var isFavorites: Bool = false
@@ -56,12 +58,13 @@ final class UploadOperation: Operation {
     
     //MARK: - Init
     
-    init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, handler: @escaping UploadOperationHandler) {
+    init(item: WrapData, uploadType: UploadType, uploadStategy: MetaStrategy, uploadTo: MetaSpesialFolder, folder: String = "", isFavorites: Bool = false, isFromAlbum: Bool = false, projectId: String? = nil, handler: @escaping UploadOperationHandler) {
         self.inputItem = item
         self.uploadType = uploadType
         self.uploadTo = uploadTo
         self.uploadStategy = uploadStategy
         self.folder = folder
+        self.projectId = projectId
         self.handler = handler
         self.semaphore = DispatchSemaphore(value: 0)
         self.isFavorites = isFavorites
@@ -83,7 +86,7 @@ final class UploadOperation: Operation {
     
     private func setupQualityOfService(uploadType: UploadType) {
         switch uploadType {
-        case .syncToUse, .save, .saveAs:
+            case .syncToUse, .save, .saveAs, .shared:
             qualityOfService = .userInteractive
         case .upload:
             qualityOfService = .userInitiated
@@ -161,13 +164,13 @@ final class UploadOperation: Operation {
                     let bufferCapacity = self.resumableInfoService.chunkSize
                     self.chunker = DataChunkProviderFactory.createWithSource(source: localUrl, bufferCapacity: bufferCapacity)
                     
-                    self.requestObject = self.baseUrl(success: { [weak self] baseurlResponse in
+                    self.requestObject = self.baseUrl(success: { [weak self] baseUrl in
                         guard let self = self, !self.isCancelled else {
                             fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
                             return
                         }
                         
-                        guard let baseURL = baseurlResponse?.url else {
+                        guard let baseURL = baseUrl else {
                             fail(ErrorResponse.string(TextConstants.commonServiceError))
                             return
                         }
@@ -348,13 +351,13 @@ final class UploadOperation: Operation {
     
     //MARK: - Simple
     private func attemptSimpleUpload(success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
-        requestObject = baseUrl(success: { [weak self] baseurlResponse in
+        requestObject = baseUrl(success: { [weak self] baseUrl in
             guard let self = self, !self.isCancelled else {
                 fail(ErrorResponse.string(TextConstants.canceledOperationTextError))
                 return
             }
             
-            guard let baseURL = baseurlResponse?.url else {
+            guard let baseURL = baseUrl else {
                 fail(ErrorResponse.string(TextConstants.commonServiceError))
                 return
             }
@@ -503,12 +506,18 @@ final class UploadOperation: Operation {
                     debugLog("UPLOAD: finishUploading -> uploadNotify parSize \(size) newRemote size \(item.fileSize) param URL \(parameters.urlToLocalFile?.path ?? "nil")")
                 }
                 //--
-                if self.uploadType == .save, let updatedRemote = self.outputItem {
+                
+                if self.uploadType == .shared {
+                    self.storageVars.lastUnsavedFileUUID = nil
+                    success()
+                    
+                } else if self.uploadType == .save, let updatedRemote = self.outputItem {
                     self.mediaItemsService.replaceItem(uuid: self.inputItem.uuid, with: updatedRemote) { [weak self] in
                         self?.storageVars.lastUnsavedFileUUID = nil
                         debugLog("_upload: item is updated \(self?.inputItem.name ?? "") ")
                         success()
                     }
+                    
                 } else {
                     //case for upload photo from camera
                     if case let PathForItem.remoteUrl(preview) = self.inputItem.patchToPreview {
@@ -558,8 +567,23 @@ final class UploadOperation: Operation {
     
     //MARK: - Requests
     
-    private func baseUrl(success: @escaping UploadServiceBaseUrlResponse, fail: FailResponse?) -> URLSessionTask {
-        return UploadService.default.baseUrl(success: success, fail: fail)
+    private func baseUrl(success: @escaping ValueHandler<URL?>, fail: FailResponse?) -> URLSessionTask {
+        if uploadType == .shared, let projectId = projectId {
+            let requestItem = UploadFileRequestItem(uuid: inputItem.uuid, name: inputItem.name ?? "", sizeInBytes: inputItem.fileSize, mimeType: inputItem.uploadContentType)
+            
+            return privateShareService.getUrlToUpload(projectId: projectId, parentFolderUuid: folder, requestItem: requestItem) { [weak self] response in
+                switch response {
+                    case .success(let wrappedUrl):
+                        success(wrappedUrl.url)
+                        
+                    case .failed(let error):
+                        fail?(ErrorResponse.error(error))
+                }
+            } ?? URLSessionTask()
+            
+        } else {
+            return UploadService.default.baseUrl(success: success, fail: fail)
+        }
     }
     
     private func upload(uploadParam: UploadRequestParametrs, success: FileOperationSucces?, fail: FailResponse? ) -> URLSessionTask? {

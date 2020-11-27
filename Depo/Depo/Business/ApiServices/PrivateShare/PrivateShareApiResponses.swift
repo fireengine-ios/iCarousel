@@ -123,7 +123,6 @@ struct FileSystem: Codable {
     let fileList: [SharedFileInfo]
 }
 
-
 struct SharedItemPermission: Codable, Equatable {
     let granted: [PrivateSharePermission]?
     let bitmask: Int64?
@@ -133,7 +132,6 @@ struct PrivateShareObjectItem: Encodable {
     let projectId: String
     let uuid: String
 }
-
 
 struct PrivateShareObject: Encodable {
     let items: [PrivateShareObjectItem]
@@ -350,6 +348,18 @@ struct CreateFolderResquestItem: Encodable {
     let name: String
     let sizeInBytes: Int64 = 0
     let mimeType: String = "application/directory"
+    
+    var parameters: [String: Any] {
+        dictionary
+    }
+}
+
+struct UploadFileRequestItem: Encodable {
+    let uuid: String
+    let folder: Bool = false
+    let name: String
+    let sizeInBytes: Int64
+    let mimeType: String
     
     var parameters: [String: Any] {
         dictionary

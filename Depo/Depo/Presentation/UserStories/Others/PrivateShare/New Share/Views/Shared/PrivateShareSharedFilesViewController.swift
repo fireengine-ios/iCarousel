@@ -52,6 +52,10 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     
     //MARK: - Override
     
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,6 +63,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         setupBars()
         setupPlusButton()
         showSpinner()
+        ItemOperationManager.default.startUpdateView(view: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -277,4 +282,15 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     func changeCover() {}
     
     func openInstaPick() {}
+}
+
+
+extension PrivateShareSharedFilesViewController: ItemOperationManagerViewProtocol {
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        return self === object
+    }
+    
+    func finishedUploadFile(file: WrapData) {
+        collectionManager.reloadAfterAction()
+    }
 }

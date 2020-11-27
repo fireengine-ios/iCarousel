@@ -20,6 +20,7 @@ enum UploadType {
     case syncToUse
     case save
     case saveAs
+    case shared
 }
 
 enum MetaStrategy: String {
