@@ -1281,6 +1281,25 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
         return false
     }
+    
+    func imageUrl(size: ImageSize) -> URL? {
+        switch size {
+        case .small:
+            return metaData?.smalURl
+        case .medium:
+            return metaData?.mediumUrl
+        case .large:
+            return metaData?.largeUrl
+        case .original:
+            return urlToFile
+        case .preview:
+            if case PathForItem.remoteUrl(let url) = patchToPreview {
+                return url
+            } else {
+                return nil
+            }
+        }
+    }
 }
 
 extension WrapData {

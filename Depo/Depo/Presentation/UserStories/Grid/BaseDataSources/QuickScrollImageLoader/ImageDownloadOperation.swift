@@ -52,7 +52,7 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
             return
         }
         
-        guard let trimmedURL = url?.byTrimmingQuery else {
+        guard let url = url else {
             outputBlock?(nil, nil)
             return
         }
@@ -60,7 +60,7 @@ final class ImageDownloadOperation: Operation, SDWebImageOperation {
         var outputImage: UIImage?
         var outputData: Data?
         
-        task = SessionManager.customDefault.request(trimmedURL)
+        task = SessionManager.customDefault.request(url)
             .customValidate()
             .responseData(queue: queue, completionHandler: { [weak self] dataResponse in
                 guard let self = self else {

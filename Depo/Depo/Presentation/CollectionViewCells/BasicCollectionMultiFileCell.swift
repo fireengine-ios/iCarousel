@@ -374,6 +374,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     }
     
     override func setImage(with url: URL) {
+        guard let item = itemModel else {
+            return
+        }
+        
         let cacheKey = url.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         uuid = cellImageManager?.uniqueId
@@ -387,7 +391,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             }
         }
         
-        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
+        cellImageManager?.loadImage(item: item, thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
         
         isAlreadyConfigured = true
     }
