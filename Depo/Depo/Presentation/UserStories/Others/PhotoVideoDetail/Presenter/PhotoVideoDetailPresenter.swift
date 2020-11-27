@@ -445,6 +445,20 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
     func showWhoHasAccess(shareInfo: SharedFileInfo) {
         router.openPrivateShareContacts(with: shareInfo)
     }
+    
+    func didUpdateSharingInfo(_ sharingInfo: SharedFileInfo) {
+        let item = WrapData(privateShareFileInfo: sharingInfo)
+        view.updateExpiredItem(item)
+        interactor.updateExpiredItem(item)
+    }
+    
+    func updateItem(_ item: WrapData) {
+        view.updateItem(item)
+    }
+    
+    func createNewUrl() {
+        interactor.createNewUrl()
+    }
 }
 
 //MARK: - PhotoVideoDetailRouterOutput
