@@ -36,7 +36,7 @@ final class WrapDataUpdater {
             return
         }
         
-        privateShareApiService.getSharingInfo(projectId: projectId, uuid: item.uuid) { result in
+        task = privateShareApiService.getSharingInfo(projectId: projectId, uuid: item.uuid) { result in
             switch result {
             case .success(let info):
                 let item = WrapData(privateShareFileInfo: info)
