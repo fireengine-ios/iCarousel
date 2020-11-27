@@ -22,22 +22,38 @@ final class SharedFilesSliderCell: UICollectionViewCell {
         }
     }
     
-    private var fileType: FileType = .unknown
-    private var text: String? {
-        didSet {
-            fileLabel.text = text
+    @IBOutlet private weak var thumbnailImageView: UIImageView! {
+        willSet {
+            newValue.contentMode = .scaleAspectFill
         }
     }
+    
+    private var fileType: FileType = .unknown
+    
+    private var cellImageManager: CellImageManager?
+    private var uuid: String?
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    //MARK: -
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        cellImageManager?.cancelImageLoading()
+        thumbnailImageView.image = nil
+        fileBGImage.image = nil
+        fileImage.image = nil
+        uuid = nil
     }
     
-    func setup(text: String, fileType: FileType) {
-        self.fileType = fileType
-        self.text = text
+    func setup(item: Item) {
+        self.fileType = item.fileType
+        fileLabel.text = item.name
         
         setImage(fileType: fileType)
+        
+        if case PathForItem.remoteUrl(let url) = item.patchToPreview, let imageUrl = url {
+            loadImage(with: item, url: imageUrl)
+        }
     }
     
     private func setImage(fileType: FileType) {
@@ -83,4 +99,26 @@ final class SharedFilesSliderCell: UICollectionViewCell {
         }
     }
     
+    private func loadImage(with item: Item, url: URL) {
+        let cacheKey = url.byTrimmingQuery
+        cellImageManager = CellImageManager.instance(by: cacheKey)
+        uuid = cellImageManager?.uniqueId
+        
+        let imageSetBlock: CellImageManagerOperationsFinished = { [weak self] image, cached, shouldBeBlurred, uniqueId in
+            DispatchQueue.main.async {
+                guard let self = self else {
+                    return
+                }
+                
+                guard let image = image, self.uuid == uniqueId else {
+                    self.setImage(fileType: self.fileType)
+                    return
+                }
+                
+                self.thumbnailImageView.image = image
+            }
+        }
+        
+        cellImageManager?.loadImage(item: item, thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
+    }
 }
