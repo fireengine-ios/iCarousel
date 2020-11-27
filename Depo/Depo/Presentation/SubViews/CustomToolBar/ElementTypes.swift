@@ -279,6 +279,8 @@ enum ElementTypes {
             return TextConstants.privateSharedEndSharingActionSuccess
         case .leaveSharing:
             return TextConstants.privateSharedLeaveSharingActionSuccess
+        case .moveToTrashShared:
+            return TextConstants.moveToTrashItemsSuccessText
         default:
             return nil
         }
