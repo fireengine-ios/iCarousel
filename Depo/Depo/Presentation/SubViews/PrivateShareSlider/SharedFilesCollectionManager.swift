@@ -14,14 +14,20 @@ protocol SharedFilesCollectionManagerDelegate: class {
 }
 
 final class SharedFilesCollectionManager {
-
+    let sharedSliderHeight: CGFloat = 224
+    
     private let shareApiService = PrivateShareApiServiceImpl()
     private lazy var datasource = SharedFilesCollectionDataSource()
-    lazy var sharedFilesSlider = SharedFilesCollectionSliderView.initFromNib()
+    let sharedFilesSlider = SharedFilesCollectionSliderView.initFromNib()
     
     private let numberOfDisplayedSharedItems: Int = 5
     
     weak var delegate: SharedFilesCollectionManagerDelegate?
+    
+    init() {
+        self.datasource.delegate = self
+        self.sharedFilesSlider.setup(sliderCollectionDelegate: self, collectionDataSource: self.datasource, collectitonDelegate: self.datasource)
+    }
     
     func checkSharedWithMe(callBack: @escaping ResponseVoid) {
 
@@ -38,8 +44,8 @@ final class SharedFilesCollectionManager {
                     return
                 }
                 DispatchQueue.main.async {
-                    self.datasource.setup(files: newItems, delegate: self)
-                    self.sharedFilesSlider.setup(sliderCollectionDelegate: self, collectionDataSource: self.datasource, collectitonDelegate: self.datasource)
+                    self.datasource.setup(files: newItems)
+                    self.sharedFilesSlider.reloadData()
                     callBack(.success(()))
                 }
                 
@@ -47,6 +53,16 @@ final class SharedFilesCollectionManager {
                 callBack(.failed(error))
             }
         }
+    }
+    
+    func changeSliderVisability(isHidden: Bool) {
+        let height = isHidden ? 0 : sharedSliderHeight
+        sharedFilesSlider.frame = CGRect(origin: sharedFilesSlider.frame.origin, size: CGSize(width: sharedFilesSlider.frame.width, height: height))
+        sharedFilesSlider.isHidden = isHidden
+    }
+    
+    func reloadData(callBack: @escaping ResponseVoid) {
+        checkSharedWithMe(callBack: callBack)
     }
 }
 

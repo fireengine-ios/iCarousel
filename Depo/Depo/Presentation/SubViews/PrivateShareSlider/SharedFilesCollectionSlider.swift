@@ -61,12 +61,15 @@ final class SharedFilesCollectionSliderView: UIView, NibInit {
         collectionView.register(nibCell: SharedFilesSliderCell.self)
     }
     
+    func reloadData() {
+        collectionView.reloadData()
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     func setup(sliderCollectionDelegate: SharedFilesCollectionSliderDelegate?, collectionDataSource: UICollectionViewDataSource?, collectitonDelegate: UICollectionViewDelegate?) {
         delegate = sliderCollectionDelegate
         collectionView.dataSource = collectionDataSource
         collectionView.delegate = collectitonDelegate
-        collectionView.reloadData()
-        collectionView.collectionViewLayout.invalidateLayout()
+        reloadData()
     }
-
 }

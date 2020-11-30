@@ -18,9 +18,8 @@ final class SharedFilesCollectionDataSource: NSObject {
     
     private(set) var files = [WrapData]()
     
-    func setup(files: [WrapData], delegate: SharedFilesCollectionDataSourceDelegate?) {
+    func setup(files: [WrapData]) {
         self.files = files
-        self.delegate = delegate
     }
 }
 

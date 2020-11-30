@@ -64,7 +64,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
     
     @IBOutlet private weak var scrollIndicator: CustomScrollIndicator?
     
-    private var isRefreshAllowed = true
+    var isRefreshAllowed = true
     
     var status: ItemStatus = .active
     
