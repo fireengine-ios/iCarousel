@@ -184,7 +184,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
     }
     
-    func cleanCell() {
+    override func cleanCell() {
         cancelImageLoading()
         
         DispatchQueue.main.async {

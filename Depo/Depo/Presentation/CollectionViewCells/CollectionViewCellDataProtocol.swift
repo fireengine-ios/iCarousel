@@ -31,5 +31,7 @@ protocol CollectionViewCellDataProtocol {
     func updating()
     
     func set(name: String?)
+    
+    func cleanCell()
 
 }
