@@ -934,6 +934,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         
         patchToPreview = .remoteUrl(url)
         id = remote.id
+        isShared = remote.isShared
     }
     
     init(searchResponse: JSON) {
