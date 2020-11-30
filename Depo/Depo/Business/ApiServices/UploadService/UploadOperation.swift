@@ -77,8 +77,12 @@ final class UploadOperation: Operation {
         self.isFavorites = isFavorites
         self.isPhotoAlbum = isFromAlbum
         
-        if item.fileType.isContained(in: [.video]), resumableInfoService.isResumableUploadAllowed(with: item.fileSize.intValue) {
-            self.isResumable = true
+        if uploadType != .sharedWithMe {
+            if item.fileType.isContained(in: [.video]), resumableInfoService.isResumableUploadAllowed(with: item.fileSize.intValue) {
+                self.isResumable = true
+            } else {
+                self.isResumable = false
+            }
         } else {
             self.isResumable = false
         }
@@ -93,7 +97,7 @@ final class UploadOperation: Operation {
     
     private func setupQualityOfService(uploadType: UploadType) {
         switch uploadType {
-            case .syncToUse, .save, .saveAs, .shared:
+            case .syncToUse, .save, .saveAs, .sharedWithMe:
             qualityOfService = .userInteractive
         case .upload:
             qualityOfService = .userInitiated
@@ -483,6 +487,14 @@ final class UploadOperation: Operation {
     }
     
     private func finishUploading(parameters: UploadRequestParametrs, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
+        
+        guard uploadType != .sharedWithMe else {
+            storageVars.lastUnsavedFileUUID = nil
+//            outputItem =
+            success()
+            return
+        }
+        
         let uploadNotifParam = UploadNotify(parentUUID: parameters.rootFolder,
                                             fileUUID: parameters.tmpUUID )
         
@@ -514,11 +526,7 @@ final class UploadOperation: Operation {
                 }
                 //--
                 
-                if self.uploadType == .shared {
-                    self.storageVars.lastUnsavedFileUUID = nil
-                    success()
-                    
-                } else if self.uploadType == .save, let updatedRemote = self.outputItem {
+                if self.uploadType == .save, let updatedRemote = self.outputItem {
                     self.mediaItemsService.replaceItem(uuid: self.inputItem.uuid, with: updatedRemote) { [weak self] in
                         self?.storageVars.lastUnsavedFileUUID = nil
                         debugLog("_upload: item is updated \(self?.inputItem.name ?? "") ")
@@ -575,7 +583,7 @@ final class UploadOperation: Operation {
     //MARK: - Requests
     
     private func baseUrl(success: @escaping ValueHandler<URL?>, fail: FailResponse?) -> URLSessionTask {
-        if uploadType == .shared, let projectId = projectId {
+        if uploadType == .sharedWithMe, let projectId = projectId {
             let requestItem = UploadFileRequestItem(uuid: inputItem.uuid, name: inputItem.name ?? "", sizeInBytes: fileSize, mimeType: inputItem.uploadContentType)
             
             return privateShareService.getUrlToUpload(projectId: projectId, parentFolderUuid: folder, requestItem: requestItem) { [weak self] response in

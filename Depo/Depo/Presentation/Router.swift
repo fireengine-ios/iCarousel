@@ -392,7 +392,7 @@ class RouterVC: NSObject {
     
     var sharedFolderItem: PrivateSharedFolderItem? {
         guard
-            let tabBarVC = defaultTopController as? TabBarViewController,
+            let tabBarVC = tabBarController,
             let navVC = tabBarVC.activeNavigationController,
             let controller = navVC.topViewController as? PrivateShareSharedFilesViewController
         else {

@@ -37,7 +37,6 @@ struct SharedFileInfo: Codable {
     let album: [FileAlbum]?
     //        "location": {},
     let permissions: SharedItemPermission?
-    let sharedBy: [SuggestedApiContact]?
     var members: [SharedContact]?
     
     
