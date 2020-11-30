@@ -78,7 +78,7 @@ class SimpleUpload: UploadRequestParametrs {
         self.isFavorite = isFavorite
         
         switch uploadType {
-            case .save, .shared:
+            case .save, .sharedWithMe:
                 self.tmpUUID = item.uuid
             case .saveAs:
                 self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
@@ -133,7 +133,7 @@ class SimpleUpload: UploadRequestParametrs {
     
     var patch: URL {
         switch uploadType {
-            case .shared:
+            case .sharedWithMe:
                 return destitantionURL
                 
             default:
@@ -255,7 +255,9 @@ final class ResumableUpload: UploadRequestParametrs {
     
     var patch: URL {
         switch uploadType {
-            case .shared:
+            case .sharedWithMe:
+                //Currenly is not supported by BE
+                assertionFailure()
                 return URL(string: destitantionURL.absoluteString
                     .appending("&upload-type=resumable"))!
                 

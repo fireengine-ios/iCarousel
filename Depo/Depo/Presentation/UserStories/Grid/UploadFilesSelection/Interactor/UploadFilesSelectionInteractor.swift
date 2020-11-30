@@ -102,12 +102,15 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         
         let projectId: String?
         let rooutUUID: String
+        let uploadType: UploadType
         if let sharedFolderInfo = router.sharedFolderItem {
             rooutUUID = sharedFolderInfo.uuid
             projectId = sharedFolderInfo.projectId
+            uploadType = projectId == SingletonStorage.shared.accountInfo?.projectID ? .upload : .sharedWithMe
         } else {
             rooutUUID = router.getParentUUID()
             projectId = nil
+            uploadType = .upload
         }
         
         if isFromAlbum {
@@ -121,8 +124,7 @@ class UploadFilesSelectionInteractor: BaseFilesGreedInteractor {
         
         uploadOutput?.addToUploadStarted()
         
-        //pass uploadType .shared if upload from gallery is allowed
-        UploadService.default.uploadFileList(items: uploadItems, uploadType: .upload, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, projectId: projectId, success: { [weak self] in
+        UploadService.default.uploadFileList(items: uploadItems, uploadType: uploadType, uploadStategy: .WithoutConflictControl, uploadTo: .MOBILE_UPLOAD, folder: rooutUUID, isFavorites: isFavorites, isFromAlbum: isFromAlbum, projectId: projectId, success: { [weak self] in
 
             DispatchQueue.main.async {
                 self?.uploadOutput?.addToUploadSuccessed()

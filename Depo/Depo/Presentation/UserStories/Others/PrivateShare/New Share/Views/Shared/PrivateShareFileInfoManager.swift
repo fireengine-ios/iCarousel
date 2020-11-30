@@ -66,7 +66,7 @@ indirect enum PrivateShareType: Equatable {
                 
             case .withMe:
                 if permissions.contains(.create) {
-                    return [.newFolder, .uploadFiles]
+                    return [.newFolder, .upload, .uploadFiles]
                 }
                 return []
                 
