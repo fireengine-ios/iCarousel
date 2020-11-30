@@ -33,13 +33,25 @@ class BaseFilesGreedRouter: BaseFilesGreedRouterInput {
         switch selectedItem.fileType {
         
         case .folder:
-            let controller = router.filesFromFolder(folder: wrapperedItem,
-                                                    type: type,
-                                                    sortType: sortType,
-                                                    status: view.status,
-                                                    moduleOutput: moduleOutput,
-                                                    alertSheetExcludeTypes: presenter.alertSheetExcludeTypes)
-            router.pushViewControllertoTableViewNavBar(viewController: controller)
+            if wrapperedItem.isOwner {
+                let controller = router.filesFromFolder(folder: wrapperedItem,
+                                                        type: type,
+                                                        sortType: sortType,
+                                                        status: view.status,
+                                                        moduleOutput: moduleOutput,
+                                                        alertSheetExcludeTypes: presenter.alertSheetExcludeTypes)
+                router.pushViewControllertoTableViewNavBar(viewController: controller)
+                
+            } else {
+                guard let projectId = wrapperedItem.projectId, let name = wrapperedItem.name, let permissions = wrapperedItem.privateSharePermission else {
+                    return
+                }
+                
+                let sharedFolder = PrivateSharedFolderItem(projectId: projectId, uuid: selectedItem.uuid, name: name, permissions: permissions)
+                let controller = router.sharedFolder(rootShareType: .withMe, folder: sharedFolder)
+                router.pushViewControllertoTableViewNavBar(viewController: controller)
+            }
+            
         case .audio:
             player.play(list: wrapperedArray, startAt: wrapperedArray.index(of: wrapperedItem) ?? 0)
             
