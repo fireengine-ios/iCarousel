@@ -488,12 +488,12 @@ final class UploadOperation: Operation {
     
     private func finishUploading(parameters: UploadRequestParametrs, success: @escaping FileOperationSucces, fail: @escaping FailResponse) {
         
-        guard uploadType != .sharedWithMe else {
-            storageVars.lastUnsavedFileUUID = nil
-//            outputItem =
-            success()
-            return
-        }
+        //TODO: uncomment if BE behaviour is changed
+//        guard uploadType != .sharedWithMe else {
+//            storageVars.lastUnsavedFileUUID = nil
+//            success()
+//            return
+//        }
         
         let uploadNotifParam = UploadNotify(parentUUID: parameters.rootFolder,
                                             fileUUID: parameters.tmpUUID )
@@ -504,6 +504,12 @@ final class UploadOperation: Operation {
         uploadNotify(param: uploadNotifParam, success: { [weak self] baseurlResponse in
             self?.dispatchQueue.async { [weak self] in
                 guard let self = self else {
+                    return
+                }
+                
+                guard self.uploadType != .sharedWithMe else {
+                    self.storageVars.lastUnsavedFileUUID = nil
+                    success()
                     return
                 }
                 

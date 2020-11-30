@@ -82,7 +82,13 @@ extension ExternalFileUploadService: UIDocumentPickerDelegate {
             return
         }
         
-        let uploadType: UploadType = projectId == SingletonStorage.shared.accountInfo?.projectID ? .upload : .sharedWithMe
+        let uploadType: UploadType
+        if projectId != nil {
+            uploadType = projectId == SingletonStorage.shared.accountInfo?.projectID ? .upload : .sharedWithMe
+        } else {
+            uploadType = .upload
+        }
+        
         
         uploadService.uploadFileList(items: items,
                                      uploadType: uploadType,
