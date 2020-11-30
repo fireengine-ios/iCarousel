@@ -111,7 +111,7 @@ final class TBMatikPhotoView: UIView, NibInit {
             }
         }
         
-        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
+        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, isOwner: true, completionBlock: imageSetBlock)
     }
 
     private func setImage(_ image: UIImage?) {

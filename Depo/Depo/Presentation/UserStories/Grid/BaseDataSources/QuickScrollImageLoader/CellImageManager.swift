@@ -12,6 +12,46 @@ import SDWebImage
 
 typealias CellImageManagerOperationsFinished = (_ image: UIImage?, _ cached: Bool, _ shouldBeBlurred: Bool, _ uuid: String?)->Void
 
+enum ImageSize {
+    case small
+    case medium
+    case large
+    case original
+    case preview
+}
+
+final class WrapDataUpdater {
+    
+    private let privateShareApiService = PrivateShareApiServiceImpl()
+    
+    private var task: URLSessionTask?
+    
+    deinit {
+        task?.cancel()
+    }
+    
+    func updateItem(_ item: Item, handler: @escaping ValueHandler<Item?>) {
+        guard let projectId = item.projectId else {
+            handler(nil)
+            return
+        }
+        
+        task = privateShareApiService.getSharingInfo(projectId: projectId, uuid: item.uuid) { result in
+            switch result {
+            case .success(let info):
+                let item = WrapData(privateShareFileInfo: info)
+                handler(item)
+            case .failed(_):
+                handler(nil)
+            }
+        }
+    }
+    
+    func cancel() {
+        task?.cancel()
+    }
+    
+}
 
 final class CellImageManager {
     
@@ -56,7 +96,7 @@ final class CellImageManager {
     private var isCancelled = false
     
     private let imageCache = SDWebImageManager.shared().imageCache
-    
+    private lazy var itemUpdater = WrapDataUpdater()
     private var completionBlock: CellImageManagerOperationsFinished?
     
     
@@ -66,16 +106,47 @@ final class CellImageManager {
         uniqueId = key.absoluteString
     }
     
-    func loadImage(thumbnailUrl: URL?, url: URL?, completionBlock: @escaping CellImageManagerOperationsFinished) {
+    func loadImage(item: Item, thumbnailUrl: URL?, url: URL?, completionBlock: @escaping CellImageManagerOperationsFinished) {
+        if item.isOwner {
+            loadImage(thumbnailUrl: thumbnailUrl, url: url, isOwner: item.isOwner, completionBlock: completionBlock)
+        } else {
+            let thumbnaiSize = getImageSizeFor(url: thumbnailUrl, item: item)
+            if let imageSize = getImageSizeFor(url: url, item: item) {
+                loadImage(item: item, thumbnaiSize: thumbnaiSize, imageSize: imageSize, completionBlock: completionBlock)
+            } else {
+                completionBlock(nil, false, false, uniqueId)
+            }
+        }
+    }
+    
+    func loadImage(item: Item, thumbnaiSize: ImageSize?, imageSize: ImageSize, completionBlock: @escaping CellImageManagerOperationsFinished) {
+        let url = item.imageUrl(size: imageSize)
+
+        if item.isOwner || url?.isExpired == false {
+            let thumbnailUrl = thumbnaiSize != nil ? item.imageUrl(size: thumbnaiSize!) : nil
+            loadImage(thumbnailUrl: thumbnailUrl, url: url, isOwner: item.isOwner, completionBlock: completionBlock)
+        } else {
+            itemUpdater.updateItem(item) { [weak self] item in
+                if let item = item {
+                    let thumbnailUrl = thumbnaiSize != nil ? item.imageUrl(size: thumbnaiSize!) : nil
+                    let url = item.imageUrl(size: imageSize)
+                    self?.loadImage(thumbnailUrl: thumbnailUrl, url: url, isOwner: item.isOwner, completionBlock: completionBlock)
+                }
+            }
+        }
+    }
+    
+    func loadImage(thumbnailUrl: URL?, url: URL?, isOwner: Bool, completionBlock: @escaping CellImageManagerOperationsFinished) {
         isCancelled = false
         dispatchQueue.async { [weak self] in
             self?.completionBlock = completionBlock
-            self?.setupOperations(thumbnail: thumbnailUrl, url: url)
+            self?.setupOperations(thumbnail: thumbnailUrl, url: url, isOwner: isOwner)
         }
     }
     
     func cancelImageLoading() {
         isCancelled = true
+        itemUpdater.cancel()
         
         dispatchQueue.async { [weak self] in
             self?.currentOperation?.cancel()
@@ -86,7 +157,7 @@ final class CellImageManager {
     
     //MARK: - Private
     
-    private func setupOperations(thumbnail: URL?, url: URL?) {
+    private func setupOperations(thumbnail: URL?, url: URL?, isOwner: Bool) {
         ///check if image is already downloaded with url
         if let image = getImageFromCache(url: url) {
             completionBlock?(image, true, false, uniqueId)
@@ -95,9 +166,9 @@ final class CellImageManager {
         
         ///prepare download operation for url
         let downloadImage = { [weak self] in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
 
-            guard let url = url else {
+            guard let url = isOwner ? url?.byTrimmingQuery : url else {
                 self.completionBlock?(nil, false, false, self.uniqueId)
                 return
             }
@@ -105,9 +176,14 @@ final class CellImageManager {
             let downloadOperation = ImageDownloadOperation(url: url, queue: self.processingQueue)
             //DEVELOP let downloadOperation = ImageDownloadOperation(url: url, queue: self.dispatchQueue)
             downloadOperation.outputBlock = { [weak self] outputImage, _ in
-                guard let `self` = self, let outputImage = outputImage as? UIImage else { return }
+                guard let self = self else {
+                    return
+                }
                 
-                self.cache(image: outputImage, url: url)
+                if let outputImage = outputImage {
+                    self.cache(image: outputImage, url: url.byTrimmingQuery)
+                }
+                
                 self.completionBlock?(outputImage, false, false, self.uniqueId)
             }
             
@@ -115,7 +191,7 @@ final class CellImageManager {
         }
         
         ///check if image is already downloaded with thumbnail url
-        guard let thumbnail = thumbnail else {
+        guard let thumbnail = isOwner ? thumbnail?.byTrimmingQuery : thumbnail else {
             downloadImage()
             return
         }
@@ -134,7 +210,7 @@ final class CellImageManager {
                 return
             }
 
-            self.cache(image: outputImage, url: thumbnail)
+            self.cache(image: outputImage, url: thumbnail.byTrimmingQuery)
             self.completionBlock?(outputImage, false, true, self.uniqueId)
 
             downloadImage()
@@ -149,6 +225,23 @@ final class CellImageManager {
         }
         currentOperation = operation
         operationQueue.addOperation(operation)
+    }
+    
+    //MARK: - Helper
+    
+    private func getImageSizeFor(url: URL?, item: Item) -> ImageSize? {
+        if url == item.metaData?.largeUrl {
+            return .large
+        } else if url == item.metaData?.mediumUrl {
+            return .medium
+        } else if url == item.metaData?.smalURl {
+            return .small
+        } else if url == item.urlToFile {
+            return .original
+        } else if case PathForItem.remoteUrl(let remoteUrl) = item.patchToPreview, remoteUrl == url {
+            return .preview
+        }
+        return nil
     }
 }
 

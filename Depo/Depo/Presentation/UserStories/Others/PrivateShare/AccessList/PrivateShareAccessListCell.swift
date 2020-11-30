@@ -50,17 +50,22 @@ final class PrivateShareAccessListCell: UITableViewCell {
         } else {
             nameLabel.text = String(format: TextConstants.privateShareAccessFromFolder, info.object.name)
         }
-        typeImageView.image = getIcon(for: fileType)
+        typeImageView.image = WrapperedItemUtil.privateSharePlaceholderImage(fileType: fileType)
         
-        let dateString = info.expirationDate.getDateInFormat(format: "dd MMMM yyyy")
-        dateLabel.text = String(format: TextConstants.privateShareAccessExpiresDate, dateString)
+        if let expirationDate = info.expirationDate {
+            let dateString = expirationDate.getDateInFormat(format: "dd MMMM yyyy")
+            dateLabel.text = String(format: TextConstants.privateShareAccessExpiresDate, dateString)
+        } else {
+            dateLabel.text = ""
+        }
+        
         roleButton.setTitle(info.role.accessListTitle, for: .normal)
         
         switch info.role {
-        case .owner, .varying:
+        case .owner:
             roleButton.setImage(nil, for: .normal)
             roleButton.isUserInteractionEnabled = false
-        case .viewer, .editor:
+        case .viewer, .editor, .varying:
             roleButton.setImage(UIImage(named: "downArrow"), for: .normal)
             roleButton.isUserInteractionEnabled = true
         }
@@ -69,38 +74,6 @@ final class PrivateShareAccessListCell: UITableViewCell {
     @IBAction private func onRoleTapped(sender: UIButton) {
         if let info = info {
             delegate?.onRoleTapped(sender: sender, info: info)
-        }
-    }
-    
-    private func getIcon(for fileType: FileType) -> UIImage? {
-        switch fileType {
-        case .folder:
-            return UIImage(named: "AF_PS_folder")
-        case .image:
-            return UIImage(named: "AF_PS_photo")
-        case .video:
-            return UIImage(named: "AF_PS_video")
-        case .audio:
-            return UIImage(named: "AF_PS_audio")
-        case .application(let subType):
-            switch subType {
-            case .doc:
-                return UIImage(named: "AF_PS_DOC")
-            case .pdf:
-                return UIImage(named: "AF_PS_PDF")
-            case .ppt, .pptx:
-                return UIImage(named: "AF_PS_PPT")
-            case .xls:
-                return UIImage(named: "AF_PS_XLS")
-            case .zip:
-                return UIImage(named: "AF_PS_ZIP")
-            default:
-                //unknown
-                return UIImage(named: "AF_PS_Unknown")
-            }
-        default:
-            //unknown
-            return UIImage(named: "AF_PS_Unknown")
         }
     }
 }

@@ -115,6 +115,17 @@ enum ElementTypes {
             }
         }
         
+        if let sharedPermissions = item.privateSharePermission?.granted, !item.isOwner {
+            if !sharedPermissions.contains(.read) && !sharedPermissions.contains(.delete) {
+                result.removeAll()
+            } else if !sharedPermissions.contains(.read) {
+                result.remove(.download)
+                result.remove(.downloadDocument)
+            } else if !sharedPermissions.contains(.delete) {
+                result.remove(.moveToTrashShared)
+            }
+        }
+        
         return result
     }
     

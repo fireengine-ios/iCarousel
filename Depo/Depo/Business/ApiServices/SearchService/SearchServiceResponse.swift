@@ -31,6 +31,7 @@ struct SearchJsonKey {
     static let location = "location"
     static let foundItems = "found_items"
     static let foundItemsCount = "found_items_count"
+    static let shared = "shared"
     
     //Album
     static let albumName = "label"
@@ -279,6 +280,7 @@ final class SearchItemResponse: ObjectRequestResponse {
     var subordinates: Array<JSON>?
     var location: Any? // TODO Add!
     var childCount: Int64?
+    var isShared = false
     
     override func mapping() {
         // it upload date
@@ -299,6 +301,7 @@ final class SearchItemResponse: ObjectRequestResponse {
         subordinates = json?[SearchJsonKey.subordinates].array
         albums = json?[SearchJsonKey.album].array?.compactMap { $0.string }
         childCount = json?[SearchJsonKey.ChildCount].int64
+        isShared = json?[SearchJsonKey.shared].bool ?? false
     }
 }
 

@@ -17,6 +17,7 @@ protocol PhotoInfoViewControllerOutput {
     func onSelectSharedContact(_ contact: SharedContact)
     func onAddNewShare()
     func showWhoHasAccess(shareInfo: SharedFileInfo)
+    func didUpdateSharingInfo(_ sharingInfo: SharedFileInfo)
 }
 
 final class FileInfoView: UIView, FromNib {
@@ -241,6 +242,7 @@ final class FileInfoView: UIView, FromNib {
         }
         
         sharingInfoView.isHidden = !needShow
+        output.didUpdateSharingInfo(sharingInfo)
     }
     
     private func displayName(from localNames: LocalContactNames) -> String {

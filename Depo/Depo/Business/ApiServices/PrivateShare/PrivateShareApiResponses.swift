@@ -390,6 +390,6 @@ struct PrivateShareAccessListInfo: Codable {
     let subject: SuggestedApiContact
     let permissions: SharedItemPermission
     let role: PrivateShareUserRole
-    let expirationDate: Date
+    let expirationDate: Date?
     let conditions: [String]? //unknown array type
 }
