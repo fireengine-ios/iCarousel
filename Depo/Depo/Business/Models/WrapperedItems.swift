@@ -706,6 +706,19 @@ class WrapData: BaseDataSourceItem, Wrappered {
         return Date()
     }
     
+    var hasPreviewUrl: Bool {
+        //based on func getImageData(item: Item, completeData: @escaping RemoteData) -> URL?
+        if case let PathForItem.remoteUrl(url) = patchToPreview, url != nil {
+            return true
+        }
+        
+        if case PathForItem.localMediaContent = patchToPreview {
+            return true
+        }
+        
+        return metaData?.largeUrl != nil
+    }
+    
     @available(*, deprecated: 1.0, message: "Use convenience init(info: AssetInfo) instead")
     convenience init(asset: PHAsset) {
         let info = LocalMediaStorage.default.fullInfoAboutAsset(asset: asset)
@@ -1170,7 +1183,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
         
         fileSize = privateShareFileInfo.bytes ?? 0
-        favorites = false
+        favorites = privateShareFileInfo.metadata?.isFavourite ?? false
 //        let localStorage = LocalMediaStorage.default
 //        if let assetId = privateShareFileInfo.metadata.originalHash,
 //           localStorage.photoLibraryIsAvailible(),

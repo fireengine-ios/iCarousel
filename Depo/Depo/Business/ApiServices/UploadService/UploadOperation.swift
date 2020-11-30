@@ -490,7 +490,6 @@ final class UploadOperation: Operation {
         
         guard uploadType != .sharedWithMe else {
             storageVars.lastUnsavedFileUUID = nil
-//            outputItem =
             success()
             return
         }

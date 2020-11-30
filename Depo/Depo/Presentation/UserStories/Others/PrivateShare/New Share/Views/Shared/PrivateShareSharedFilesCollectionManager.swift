@@ -261,8 +261,8 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             cell.setSelection(isSelectionActive: isSelecting, isSelected: true)
             delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
             
-        } else {
-            showDetailView(for: indexPath)
+        } else if let item = item(at: indexPath), checkIfCanShowDetail(for: item) {
+            showDetailView(for: item)
         }
     }
     
@@ -287,11 +287,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         return fileInfoManager.selectedItems.contains(item)
     }
     
-    private func showDetailView(for indexPath: IndexPath) {
-        guard let item = item(at: indexPath) else {
-            return
-        }
-        
+    private func showDetailView(for item: WrapData) {
         if item.isFolder == true {
             if let projectId = item.projectId, let name = item.name, let permissions = item.privateSharePermission  {
                 let sharedFolder = PrivateSharedFolderItem(projectId: projectId, uuid: item.uuid, name: name, permissions: permissions)
@@ -302,6 +298,21 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
             openPreview(for: item, with: items)
         }
+    }
+    
+    private func checkIfCanShowDetail(for item: WrapData) -> Bool {
+        guard item.isFolder == false else {
+            return true
+        }
+        
+        let isSharedWithMe = fileInfoManager.type == .withMe || fileInfoManager.type.rootType == .withMe
+        
+        if isSharedWithMe, item.fileType.isContained(in: [.image, .video]), !item.hasPreviewUrl {
+            SnackbarManager.shared.show(type: SnackbarType.action, message: TextConstants.privateSharePreviewNotReady)
+            return false
+        }
+
+        return true
     }
     
     private func openFolder(with folder: PrivateSharedFolderItem) {
