@@ -1870,3 +1870,4 @@
 "private_share_access_remove_confirmation" = "Are you sure you want to remove user from the share?";
 "private_share_info_access_role_remove" = "User is removed from share";
 "private_share_plus_button_no_action" = "There is no action for plus button in this level";
+"private_share_preview_not_ready" = "We can't preview this file now. Please try again later.";

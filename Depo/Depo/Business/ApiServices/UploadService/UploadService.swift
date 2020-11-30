@@ -391,7 +391,7 @@ final class UploadService: BaseRequestService {
                         }
                         
                         let checkIfFinished = {
-                            if self.uploadOperations.filter({ $0.uploadType.isContained(in: [.upload]) }).isEmpty {
+                            if self.uploadOperations.filter({ $0.uploadType.isContained(in: [uploadType]) }).isEmpty {
                                 self.trackUploadItemsFinished(items: itemsToUpload)
                                 success()
                                 ItemOperationManager.default.syncFinished()
