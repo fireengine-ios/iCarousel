@@ -1183,7 +1183,7 @@ class WrapData: BaseDataSourceItem, Wrappered {
         }
         
         fileSize = privateShareFileInfo.bytes ?? 0
-        favorites = false
+        favorites = privateShareFileInfo.metadata?.isFavourite ?? false
 //        let localStorage = LocalMediaStorage.default
 //        if let assetId = privateShareFileInfo.metadata.originalHash,
 //           localStorage.photoLibraryIsAvailible(),
