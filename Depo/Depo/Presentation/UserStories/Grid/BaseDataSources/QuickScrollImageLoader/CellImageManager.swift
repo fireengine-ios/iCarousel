@@ -31,7 +31,7 @@ final class WrapDataUpdater {
     }
     
     func updateItem(_ item: Item, handler: @escaping ValueHandler<Item?>) {
-        guard let projectId = item.projectId else {
+        guard !item.isLocalItem, let projectId = item.projectId else {
             handler(nil)
             return
         }

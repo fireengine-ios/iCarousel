@@ -95,7 +95,7 @@ extension FileInfoInteractor: FileInfoInteractorInput {
     }
     
     func getSharingInfo() {
-        guard let projectId = item?.projectId , let uuid = item?.uuid else {
+        guard item?.isLocalItem == false, let projectId = item?.projectId , let uuid = item?.uuid else {
             return
         }
         
