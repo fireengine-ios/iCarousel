@@ -78,9 +78,9 @@ class SimpleUpload: UploadRequestParametrs {
         self.isFavorite = isFavorite
         
         switch uploadType {
-            case .save, .sharedWithMe:
+            case .save:
                 self.tmpUUID = item.uuid
-            case .saveAs:
+            case .saveAs, .sharedWithMe:
                 self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
             default:
                 if item.isLocalItem {

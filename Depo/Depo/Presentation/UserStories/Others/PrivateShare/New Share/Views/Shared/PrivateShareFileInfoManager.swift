@@ -168,6 +168,18 @@ final class PrivateShareFileInfoManager {
         }
     }
     
+    func reloadCurrentPages(completion: @escaping ValueHandler<Int>) {
+        queue.sync {
+            let pagesToLoad = pageLoaded
+            
+            sortedItems.removeAll()
+            splittedItems.removeAll()
+            pageLoaded = 0
+            
+            loadPages(till: pagesToLoad, alreadyLoadedItems: 0, completion: completion)
+        }
+    }
+    
     func change(sortingRules: SortedRules, completion: @escaping VoidHandler) {
         guard sorting != sortingRules else {
             return
@@ -186,7 +198,10 @@ final class PrivateShareFileInfoManager {
     }
     
     func selectItem(at indexPath: IndexPath) {
-        if let item = splittedItems[indexPath.section]?[safe:indexPath.row]{
+        if let item = splittedItems[indexPath.section]?[safe:indexPath.row] {
+            if let alreadySelected = selectedItems.getSet().first(where: { $0.uuid == item.uuid }) {
+                selectedItems.remove(alreadySelected)
+            }
             selectedItems.insert(item)
         }
     }
@@ -220,6 +235,20 @@ final class PrivateShareFileInfoManager {
                             completion(.failed(error))
                     }
                 }
+        }
+    }
+    
+    private func loadPages(till page: Int, alreadyLoadedItems: Int, completion: @escaping ValueHandler<Int>) {
+        loadNext { [weak self] itemsCount in
+            guard let self = self else {
+                return
+            }
+            let loadedItemsCount = alreadyLoadedItems + itemsCount
+            if self.pageLoaded < page, itemsCount != 0 {
+                self.loadPages(till: page, alreadyLoadedItems: loadedItemsCount, completion: completion)
+            } else {
+                completion(loadedItemsCount)
+            }
         }
     }
     
