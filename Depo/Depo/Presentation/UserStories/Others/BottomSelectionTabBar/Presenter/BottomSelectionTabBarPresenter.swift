@@ -66,6 +66,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
                 itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             case .restore:
                 itemTupple.append(EditinglBar.PreDetermendTypes.restore)
+            case .moveToTrashShared:
+                itemTupple.append(EditinglBar.PreDetermendTypes.delete)
             default:
                 break
             }
@@ -266,6 +268,8 @@ class BottomSelectionTabBarPresenter: MoreFilesActionsPresenter, BottomSelection
             case .removeAlbum:
                 AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
                 self.interactor.removeAlbums(items: selectedItems)
+            case .moveToTrashShared:
+                self.interactor.moveToTrashShared(items: selectedItems)
             default:
                 break
             }
