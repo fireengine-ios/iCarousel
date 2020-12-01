@@ -172,7 +172,6 @@ final class PrivateShareFileInfoManager {
         queue.sync {
             let pagesToLoad = pageLoaded
             
-            selectedItems.removeAll()
             sortedItems.removeAll()
             splittedItems.removeAll()
             pageLoaded = 0
@@ -202,7 +201,10 @@ final class PrivateShareFileInfoManager {
     }
     
     func selectItem(at indexPath: IndexPath) {
-        if let item = splittedItems[indexPath.section]?[safe:indexPath.row]{
+        if let item = splittedItems[indexPath.section]?[safe:indexPath.row] {
+            if let alreadySelected = selectedItems.getSet().first(where: { $0.uuid == item.uuid }) {
+                selectedItems.remove(alreadySelected)
+            }
             selectedItems.insert(item)
         }
     }

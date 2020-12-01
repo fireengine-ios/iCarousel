@@ -306,7 +306,7 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     }
     
     private func isSelected(item: WrapData) -> Bool {
-        return fileInfoManager.selectedItems.contains(item)
+        return fileInfoManager.selectedItems.getSet().contains(where: { $0.uuid == item.uuid })
     }
     
     private func showDetailView(for item: WrapData) {
