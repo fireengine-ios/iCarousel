@@ -260,7 +260,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             if self.isDropedData || array.isEmpty {
                 DispatchQueue.main.async {
                     if self.needReloadData {
-                        CellImageManager.clear()
+                        self.cancelImageRequests()
                         self.collectionView?.reloadData()
                     }
                     self.isLocalFilesRequested = false
@@ -291,7 +291,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
                
                 
                     collectionView.collectionViewLayout.invalidateLayout()
-                    CellImageManager.clear()
+                    self.cancelImageRequests()
                     collectionView.reloadData()
                     collectionView.performBatchUpdates(nil, completion: { [weak self] _ in
                             guard let `self` = self else {
@@ -894,7 +894,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             debugLog("BaseDataSourceForCollectionViewDelegate reloadData")
             debugPrint("BaseDataSourceForCollectionViewDelegate reloadData")
             
-            CellImageManager.clear()
+            self.cancelImageRequests()
             collectionView.reloadData()
             
             if self.numberOfSections(in: collectionView) == 0 {
@@ -915,7 +915,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         
         debugPrint("Reload updateDisplayngType")
         DispatchQueue.toMain {
-            CellImageManager.clear()
+            self.cancelImageRequests()
             self.collectionView?.reloadData()
             let firstVisibleIndexPath = self.collectionView?.indexPathsForVisibleItems.min(by: { first, second -> Bool in
                 return first < second
@@ -1799,7 +1799,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
             
             DispatchQueue.toMain {
-                CellImageManager.clear()
+                self.cancelImageRequests()
                 self.emptyMetaItems = emptyMetaItems
                 self.allItems = newArray
                 self.allMediaItems = newArray.flatMap { $0 }
@@ -1879,7 +1879,7 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
             }
         }
         DispatchQueue.main.async {
-            CellImageManager.clear()
+            self.cancelImageRequests()
             self.collectionView?.reloadData()
         }
     }
@@ -2077,6 +2077,12 @@ UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ItemOperationMan
         //Maybe need merge in the future
         DispatchQueue.main.async {
             self.delegate?.needReloadData()
+        }
+    }
+    
+    private func cancelImageRequests() {
+        collectionView?.visibleCells.forEach { cell in
+            (cell as? CollectionViewCellDataProtocol)?.cleanCell()
         }
     }
 }

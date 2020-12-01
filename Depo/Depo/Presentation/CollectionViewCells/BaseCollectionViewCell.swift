@@ -107,5 +107,7 @@ class BaseCollectionViewCell: UICollectionViewCell, CollectionViewCellDataProtoc
     }
     
     func set(name: String?) { }
+    
+    func cleanCell() {}
 
 }
