@@ -343,14 +343,14 @@ extension FileInfoView: ItemOperationManagerViewProtocol {
         }
     }
     
-    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact) {
-        if sharingInfoView.info?.members?.contains(contact) == true {
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String) {
+        if uuid == object?.uuid, sharingInfoView.info?.members?.contains(contact) == true {
             updateShareInfo()
         }
     }
     
     func didRemove(contact: SharedContact, fromItem uuid: String) {
-        if sharingInfoView.info?.members?.contains(contact) == true {
+        if uuid == object?.uuid, sharingInfoView.info?.members?.contains(contact) == true {
             updateShareInfo()
         }
     }
