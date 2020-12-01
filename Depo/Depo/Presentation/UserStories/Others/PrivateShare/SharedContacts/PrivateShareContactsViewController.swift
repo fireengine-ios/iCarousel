@@ -64,6 +64,14 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
         
         navigationBarWithGradientStyle()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if contacts.isEmpty {
+            navigationController?.popViewController(animated: true)
+        }
+    }
 
     private func setupTableView() {
         contactsTableView.register(nibCell: PrivateShareContactCell.self)
@@ -170,7 +178,11 @@ extension PrivateShareContactsViewController: ItemOperationManagerViewProtocol {
         object === self
     }
     
-    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact) {
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String) {
+        guard shareInfo?.uuid == uuid else {
+            return
+        }
+        
         if let index = contacts.firstIndex(where: { $0 == contact }) {
             contacts[index].role = role
             contacts.sort(by: { $0.role.order < $1.role.order })
@@ -179,11 +191,11 @@ extension PrivateShareContactsViewController: ItemOperationManagerViewProtocol {
     }
     
     func didRemove(contact: SharedContact, fromItem uuid: String) {
+        guard shareInfo?.uuid == uuid else {
+            return
+        }
+        
         contacts.remove(contact)
         contactsTableView.reloadData()
-        
-        if contacts.isEmpty {
-            navigationController?.popViewController(animated: true)
-        }
     }
 }

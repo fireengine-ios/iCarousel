@@ -164,7 +164,7 @@ private extension PrivateShateAccessListViewController {
         }
     }
     
-    func updateUserRole(newRole: PrivateShareUserRole, aclId: Int64) {
+    func updateUserRole(newRole: PrivateShareUserRole, aclId: Int64, uuid: String) {
         showSpinner()
         
         privateShareApiService.updateAclRole(newRole: newRole, projectId: projectId, uuid: uuid, aclId: aclId) { [weak self] result in
@@ -179,7 +179,7 @@ private extension PrivateShateAccessListViewController {
                 SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareAccessRoleChangeSuccess)
                 
                 if let contact = self.contact {
-                    ItemOperationManager.default.didChangeRole(newRole, contact: contact)
+                    ItemOperationManager.default.didChangeRole(newRole, contact: contact, uuid: uuid)
                 }
                 
                 self.updateAccessList()
@@ -189,7 +189,7 @@ private extension PrivateShateAccessListViewController {
         }
     }
     
-    func deleteUser(aclId: Int64) {
+    func deleteUser(aclId: Int64, uuid: String) {
         showSpinner()
         
         privateShareApiService.deleteAclUser(projectId: projectId, uuid: uuid, aclId: aclId) { [weak self] result in
@@ -203,7 +203,7 @@ private extension PrivateShateAccessListViewController {
             case .success():
                 SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareAccessDeleteUserSuccess)
                 if let contact = self.contact {
-                    ItemOperationManager.default.didRemove(contact: contact, fromItem: self.uuid)
+                    ItemOperationManager.default.didRemove(contact: contact, fromItem: uuid)
                 }
                 
                 if self.objects.count == 1 {
@@ -250,16 +250,16 @@ extension PrivateShateAccessListViewController: PrivateShareAccessListCellDelega
             switch role {
             case .editor:
                 if info.role != .editor {
-                    self?.updateUserRole(newRole: .editor, aclId: info.id)
+                    self?.updateUserRole(newRole: .editor, aclId: info.id, uuid: info.object.uuid)
                 }
             case .viewer:
                 if info.role != .viewer {
-                    self?.updateUserRole(newRole: .viewer, aclId: info.id)
+                    self?.updateUserRole(newRole: .viewer, aclId: info.id, uuid: info.object.uuid)
                 }
             case .delete:
                 self?.showDeleteConfirmationPopup { [weak self] isConfirm in
                     if isConfirm {
-                        self?.deleteUser(aclId: info.id)
+                        self?.deleteUser(aclId: info.id, uuid: info.object.uuid)
                     }
                 }
             }
