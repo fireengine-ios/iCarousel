@@ -216,6 +216,23 @@ final class PrivateShareFileInfoManager {
         selectedItems.removeAll()
     }
     
+    func createDownloadUrl(item: WrapData, completion: @escaping ValueHandler<URL?>) {
+        guard let projectId = item.projectId else {
+            completion(nil)
+            return
+        }
+        
+        privateShareAPIService.createDownloadUrl(projectId: projectId, uuid: item.uuid) { response in
+            switch response {
+                case .success(let urlWrapper):
+                    completion(urlWrapper.url)
+                    
+                case .failed(_):
+                    completion(nil)
+            }
+        }
+    }
+    
     //MARK: - Private
     
     private func loadNextPage(completion: @escaping ResponseArrayHandler<SharedFileInfo>) {

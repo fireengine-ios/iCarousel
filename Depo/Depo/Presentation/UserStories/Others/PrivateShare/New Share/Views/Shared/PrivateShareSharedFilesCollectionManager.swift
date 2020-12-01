@@ -333,7 +333,10 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
     
     private func showAudioPlayer(with item: WrapData) {
         if item.urlToFile == nil || item.urlToFile?.isExpired == true {
-            createDownloadUrl(item: item) { [weak self] newUrl in
+            delegate?.needToShowSpinner()
+            fileInfoManager.createDownloadUrl(item: item) { [weak self] newUrl in
+                self?.delegate?.needToHideSpinner()
+                
                 guard let url = newUrl else {
                     return
                 }
@@ -343,25 +346,6 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             }
         } else {
             mediaPlayer.play(list: [item], startAt: 0)
-        }
-    }
-    
-    private func createDownloadUrl(item: WrapData, completion: @escaping ValueHandler<URL?>) {
-        guard let projectId = item.projectId else {
-            completion(nil)
-            return
-        }
-        
-        delegate?.needToShowSpinner()
-        PrivateShareApiServiceImpl().createDownloadUrl(projectId: projectId, uuid: item.uuid) { [weak self] response in
-            self?.delegate?.needToHideSpinner()
-            switch response {
-                case .success(let urlWrapper):
-                    completion(urlWrapper.url)
-                    
-                case .failed(_):
-                    completion(nil)
-            }
         }
     }
     
