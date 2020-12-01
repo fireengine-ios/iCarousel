@@ -11,6 +11,8 @@ import UIKit
 protocol SharedFilesCollectionManagerDelegate: class {
     func showAll()
     func open(entity: WrapData, allEnteties: [WrapData])
+    func startAsyncOperation()
+    func completeAsyncOperation()
 }
 
 final class SharedFilesCollectionManager {
@@ -64,11 +66,42 @@ final class SharedFilesCollectionManager {
     func reloadData(callBack: @escaping ResponseVoid) {
         checkSharedWithMe(callBack: callBack)
     }
+    
+    private func createNewUrl(for item: Item, completion: @escaping ValueHandler<URL?>) {
+        guard let projectId = item.projectId else {
+            completion(nil)
+            return
+        }
+        
+        shareApiService.createDownloadUrl(projectId: projectId, uuid: item.uuid) { result in
+            switch result {
+            case .success(let response):
+                completion(response.url)
+            case .failed(_):
+                completion(nil)
+            }
+        }
+    }
 }
 
 extension SharedFilesCollectionManager: SharedFilesCollectionDataSourceDelegate {
     func cellTouched(withModel: WrapData) {
-        delegate?.open(entity: withModel, allEnteties: datasource.files)
+        if withModel.fileType == .audio {
+            if withModel.urlToFile == nil || withModel.urlToFile?.isExpired == true {
+                delegate?.startAsyncOperation()
+                createNewUrl(for: withModel) { [weak self] newUrl in
+                    if newUrl != nil {
+                        withModel.tmpDownloadUrl = newUrl
+                        self?.delegate?.open(entity: withModel, allEnteties: [withModel])
+                    }
+                    self?.delegate?.completeAsyncOperation()
+                }
+            } else {
+                delegate?.open(entity: withModel, allEnteties: [withModel])
+            }
+        } else {
+            delegate?.open(entity: withModel, allEnteties: datasource.files)
+        }
     }
 }
 

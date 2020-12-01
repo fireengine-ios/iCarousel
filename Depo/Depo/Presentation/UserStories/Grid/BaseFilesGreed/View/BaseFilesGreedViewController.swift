@@ -549,4 +549,12 @@ extension BaseFilesGreedViewController: SharedFilesCollectionManagerDelegate {
     func open(entity: WrapData, allEnteties: [WrapData]) {
         output.openPrivateSharedItem(entity: entity, sharedEnteties: allEnteties)
     }
+    
+    func startAsyncOperation() {
+        showSpinner()
+    }
+    
+    func completeAsyncOperation() {
+        hideSpinner()
+    }
 }
