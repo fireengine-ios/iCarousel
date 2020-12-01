@@ -77,6 +77,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         setCardsContainer(isActive: true)
         bottomBarManager.updateLayout()
+        collectionManager.reload(type: .onViewAppear)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -306,8 +307,19 @@ extension PrivateShareSharedFilesViewController: BaseItemInputPassingProtocol {
     }
     
     func operationFinished(withType type: ElementTypes, response: Any?) {
-        if type.isContained(in: [.endSharing, .leaveSharing, .moveToTrash, .moveToTrashShared, .rename, .move, .share]) {
-            collectionManager.reloadAfterAction()
+        switch shareType.rootType {
+            case .withMe:
+                if type.isContained(in: [.leaveSharing, .moveToTrashShared, .rename, .move, .share]) {
+                    collectionManager.reload(type: .onOperationFinished)
+                }
+                
+            case .byMe:
+                if type.isContained(in: [.endSharing, .moveToTrash, .rename, .move, .share, .addToFavorites, .removeFromFavorites]) {
+                    collectionManager.reload(type: .onOperationFinished)
+                }
+                
+            default:
+                assertionFailure()
         }
     }
     
@@ -330,8 +342,8 @@ extension PrivateShareSharedFilesViewController: ItemOperationManagerViewProtoco
         return self === object
     }
     
-    func finishedUploadFile(file: WrapData) {
-        collectionManager.reloadAfterAction()
+    func syncFinished() {
+        collectionManager.reload(type: .onOperationFinished)
     }
 }
 

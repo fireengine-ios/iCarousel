@@ -8,6 +8,12 @@
 
 import Foundation
 import UIKit
+
+enum ReloadType {
+    case full
+    case onOperationFinished
+    case onViewAppear
+}
  
 protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     func didStartSelection(selected: Int)
@@ -49,7 +55,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     func setup() {
         setupCollection()
         setupRefresher()
-        reload()
+        fullReload()
     }
     
     func change(viewType: MoreActionsConfig.ViewType) {
@@ -77,10 +83,16 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
         reloadVisibleCells()
     }
     
-    func reloadAfterAction() {
-        return fileInfoManager.reloadCurerntPages { [weak self] itemsLoadedCount in
-            self?.reloadCollection()
-            self?.setEmptyScreen(isHidden: itemsLoadedCount != 0)
+    func reload(type: ReloadType) {
+        switch type {
+            case .full:
+                fullReload()
+                
+            case .onOperationFinished:
+                reloadAfterOperation()
+                
+            case .onViewAppear:
+                reloadAfterOperation()
         }
     }
     
@@ -118,18 +130,25 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private func setupRefresher() {
         let refresher = UIRefreshControl()
         refresher.tintColor = ColorConstants.blueColor
-        refresher.addTarget(self, action: #selector(reload), for: .valueChanged)
+        refresher.addTarget(self, action: #selector(fullReload), for: .valueChanged)
         collectionView?.refreshControl = refresher
     }
     
     @objc
-    private func reload() {
+    private func fullReload() {
         fileInfoManager.reload { [weak self] itmesLoadedCount in
             self?.changeSelection(isActive: false)
             self?.reloadCollection()
             self?.setEmptyScreen(isHidden: itmesLoadedCount != 0)
         }
         
+    }
+    
+    private func reloadAfterOperation() {
+        return fileInfoManager.reloadCurerntPages { [weak self] itemsLoadedCount in
+            self?.reloadCollection()
+            self?.setEmptyScreen(isHidden: itemsLoadedCount != 0)
+        }
     }
     
     private func loadNextPage() {
