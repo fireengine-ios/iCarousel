@@ -211,7 +211,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             interactor.deleteSelectedItem(type: type)
         case .removeFromFavorites, .addToFavorites:
             interactor.onViewIsReady()
-        case .hide, .unhide, .moveToTrash, .restore:
+        case .hide, .unhide, .moveToTrash, .restore, .moveToTrashShared:
             interactor.deleteSelectedItem(type: type)
         default:
             break
