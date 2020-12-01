@@ -10,7 +10,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
     weak var output: PhotoVideoDetailInteractorOutput!
     
-    private var array = [Item]()
+    private var array = SynchronizedArray<Item>()//[Item]()
     
     var albumUUID: String?
     
@@ -44,12 +44,12 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     }
     
     var allItems: [Item] {
-        return array
+        return array.getArray()
     }
     
     func onSelectItem(fileObject: Item, from items: [Item]) {
         array.removeAll()
-        array.append(contentsOf: items)
+        array.append(items)
         
         if fileObject.isLocalItem {
             let localId = fileObject.getLocalID()
@@ -66,11 +66,13 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             return
         }
         
-        output.onShowSelectedItem(at: index, from: array)
+        output.onShowSelectedItem(at: index, from: array.getArray())
     }
 
     func bottomBarConfig(for selectedIndex: Int) -> EditingBarConfig {
-        let selectedItem = array[selectedIndex]
+        guard let selectedItem = array[selectedIndex] else {
+            return EditingBarConfig(elementsConfig: [], style: .black, tintColor: nil)
+        }
         let elementsConfig = ElementTypes.detailsElementsConfig(for: selectedItem, status: status, viewType: viewType)
         return EditingBarConfig(elementsConfig: elementsConfig, style: .black, tintColor: nil)
     }
@@ -80,7 +82,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
             return
         }
         
-        array.remove(at: index)
+        array.safeRemove(at: index)
 
         if index >= array.count {
             selectedIndex = array.count - 1
@@ -88,7 +90,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                 
         if !array.isEmpty {
             let nextIndex = index == array.count ? array.count - 1 : index
-            output.updateItems(objects: array, selectedIndex: nextIndex)
+            output.updateItems(objects: array.getArray(), selectedIndex: nextIndex)
         } else {
             output.onLastRemoved()
         }
@@ -124,7 +126,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     }
     
     func appendItems(_ items: [Item]) {
-        array.append(contentsOf: items)
+        array.append( items)
     }
     
     func onRename(newName: String) {
