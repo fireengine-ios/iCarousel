@@ -81,9 +81,10 @@ enum SortedRules: Int {
     
     var sortOder: SortOrder {
         switch self {
-        case .timeUp, .timeUpWithoutSection, .lettersAZ, .sizeAZ, .albumlettersAZ, .metaDataTimeUp, .lastModifiedTimeUp:
+        case .timeUp, .timeUpWithoutSection, .lettersZA, .sizeAZ, .albumlettersZA, .metaDataTimeUp, .lastModifiedTimeUp:
             return .desc
-        case .timeDown, .timeDownWithoutSection, .lettersZA, .sizeZA, .albumlettersZA, .metaDataTimeDown, .lastModifiedTimeDown:
+            
+        case .timeDown, .timeDownWithoutSection, .lettersAZ, .sizeZA, .albumlettersAZ, .metaDataTimeDown, .lastModifiedTimeDown:
             return .asc
         }
     }

@@ -81,13 +81,9 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             let selectedItems = collectionManager.selectedItems()
             show(selectedItemsCount: selectedItems.count)
             bottomBarManager.update(for: selectedItems)
+        } else {
+            updateBars(isSelecting: false)
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        updateBars(isSelecting: false)
     }
     
     //MARK: - Private
