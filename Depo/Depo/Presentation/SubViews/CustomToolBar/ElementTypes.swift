@@ -70,7 +70,27 @@ enum ElementTypes {
     static var activeState: [ElementTypes] = [.hide, .moveToTrash]
 
     static func detailsElementsConfig(for item: Item, status: ItemStatus, viewType: DetailViewType) -> [ElementTypes] {
-        var result: [ElementTypes]
+        var result = [ElementTypes]()
+        
+        if !item.isOwner {
+            //shared with me items
+            if let grantedPermissions = item.privateSharePermission?.granted {
+                if grantedPermissions.contains(.read) {
+                    if item.fileType.isContained(in: [.image, .video]) {
+                        result.append(.download)
+                    } else {
+                        result.append(.downloadDocument)
+                    }
+                }
+                
+                if grantedPermissions.contains(.delete) {
+                    if !item.isReadOnlyFolder {
+                        result.append(.moveToTrashShared)
+                    }
+                }
+            }
+            return result
+        }
         
         switch status {
         case .hidden:
@@ -112,17 +132,6 @@ enum ElementTypes {
                         result.append(.removeFromFaceImageAlbum)
                     }
                 }
-            }
-        }
-        
-        if let sharedPermissions = item.privateSharePermission?.granted, !item.isOwner {
-            if !sharedPermissions.contains(.read) && !sharedPermissions.contains(.delete) {
-                result.removeAll()
-            } else if !sharedPermissions.contains(.read) {
-                result.remove(.download)
-                result.remove(.downloadDocument)
-            } else if !sharedPermissions.contains(.delete) {
-                result.remove(.moveToTrashShared)
             }
         }
         
