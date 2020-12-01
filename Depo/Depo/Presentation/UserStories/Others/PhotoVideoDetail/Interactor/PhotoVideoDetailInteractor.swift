@@ -267,7 +267,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
                     self?.output.updateItem(item)
                 }
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
+                self?.output.failedUpdate(error: error)
             }
         }
     }

@@ -99,6 +99,8 @@ final class PhotoVideoDetailViewController: BaseViewController {
         return UIBarButtonItem(customView: button)
     }()
     
+    private var waitVideoPreviewURL = false
+    
     // MARK: Life cycle
     
     deinit {
@@ -539,6 +541,10 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
         if let indexPath = collectionView.indexPathsForVisibleItems.first(where: { $0.item == index }),
            let cell = collectionView.cellForItem(at: indexPath) as? PhotoVideoDetailCell {
             cell.setObject(object: item)
+            if item.fileType == .video && waitVideoPreviewURL {
+                tapOnSelectedItem()
+                waitVideoPreviewURL = false
+            }
         }
     }
 }
@@ -649,7 +655,18 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailCellDelegate {
     
     private func prepareToPlayVideo(file: Item) {
         let preUrl = file.metaData?.videoPreviewURL ?? file.urlToFile
+
+        if !waitVideoPreviewURL, preUrl == nil || preUrl?.isExpired == true {
+            waitVideoPreviewURL = true
+            output.createNewUrl()
+            return
+        }
+        
         guard let url = preUrl else {
+            hideSpinnerIncludeNavigationBar()
+            if !file.isOwner {
+                SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateSharePreviewNotReady)
+            }
             return
         }
         player.pause()
