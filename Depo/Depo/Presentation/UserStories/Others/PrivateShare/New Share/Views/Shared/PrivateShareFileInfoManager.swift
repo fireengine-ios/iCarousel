@@ -168,6 +168,22 @@ final class PrivateShareFileInfoManager {
         }
     }
     
+    func reloadCurerntPages(completion: @escaping ValueHandler<Int>) {
+        queue.sync {
+            let pagesToLoad = pageLoaded
+            
+            selectedItems.removeAll()
+            sortedItems.removeAll()
+            splittedItems.removeAll()
+            pageLoaded = 0
+            
+            let operationQueue = OperationQueue()
+            operationQueue.maxConcurrentOperationCount = 1
+                
+            loadPages(till: pagesToLoad, alreadyLoadedItems: 0, completion: completion)
+        }
+    }
+    
     func change(sortingRules: SortedRules, completion: @escaping VoidHandler) {
         guard sorting != sortingRules else {
             return
@@ -220,6 +236,20 @@ final class PrivateShareFileInfoManager {
                             completion(.failed(error))
                     }
                 }
+        }
+    }
+    
+    private func loadPages(till page: Int, alreadyLoadedItems: Int, completion: @escaping ValueHandler<Int>) {
+        loadNext { [weak self] itemsCount in
+            guard let self = self else {
+                return
+            }
+            let loadedItemsCount = alreadyLoadedItems + itemsCount
+            if self.pageLoaded < page, itemsCount != 0 {
+                self.loadPages(till: page, alreadyLoadedItems: loadedItemsCount, completion: completion)
+            } else {
+                completion(loadedItemsCount)
+            }
         }
     }
     

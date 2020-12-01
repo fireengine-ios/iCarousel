@@ -78,7 +78,10 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     func reloadAfterAction() {
-        reload()
+        return fileInfoManager.reloadCurerntPages { [weak self] itemsLoadedCount in
+            self?.reloadCollection()
+            self?.setEmptyScreen(isHidden: itemsLoadedCount != 0)
+        }
     }
     
     func selectedItems() -> [WrapData] {
