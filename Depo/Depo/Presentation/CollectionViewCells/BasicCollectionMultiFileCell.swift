@@ -99,8 +99,9 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.bigContentImageView.sd_cancelCurrentImageLoad()
-        self.smallContentImageView.sd_cancelCurrentImageLoad()
+        bigContentImageView.sd_cancelCurrentImageLoad()
+        smallContentImageView.sd_cancelCurrentImageLoad()
+        cellImageManager?.cancelImageLoading()
     }
     
     override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
@@ -399,5 +400,9 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         cellImageManager?.loadImage(item: item, thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
         
         isAlreadyConfigured = true
+    }
+    
+    override func cleanCell() {
+        cellImageManager?.cancelImageLoading()
     }
 }

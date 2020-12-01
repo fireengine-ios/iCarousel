@@ -95,7 +95,7 @@ protocol ItemOperationManagerViewProtocol: class {
     
     func didShare(items: [BaseDataSourceItem])
     func didEndShareItem(uuid: String)
-    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact)
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String)
     func didRemove(contact: SharedContact, fromItem uuid: String)
 }
 
@@ -192,7 +192,7 @@ extension ItemOperationManagerViewProtocol {
     
     func didShare(items: [BaseDataSourceItem]) {}
     func didEndShareItem(uuid: String) {}
-    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact) {}
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String) {}
     func didRemove(contact: SharedContact, fromItem uuid: String) {}
 }
 
@@ -557,9 +557,9 @@ class ItemOperationManager: NSObject {
         }
     }
     
-    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact) {
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String) {
         DispatchQueue.main.async {
-            self.views.invoke { $0.didChangeRole(role, contact: contact) }
+            self.views.invoke { $0.didChangeRole(role, contact: contact, uuid: uuid) }
         }
     }
     

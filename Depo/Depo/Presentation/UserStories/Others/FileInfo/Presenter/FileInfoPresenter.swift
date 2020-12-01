@@ -152,14 +152,14 @@ extension FileInfoPresenter: ItemOperationManagerViewProtocol {
         }
     }
     
-    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact) {
-        if interactor.sharingInfo?.members?.contains(contact) == true {
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String) {
+        if uuid == interactor.item?.uuid, interactor.sharingInfo?.members?.contains(contact) == true {
             updateSharingInfo()
         }
     }
     
     func didRemove(contact: SharedContact, fromItem uuid: String) {
-        if interactor.sharingInfo?.members?.contains(contact) == true {
+        if uuid == interactor.item?.uuid, interactor.sharingInfo?.members?.contains(contact) == true {
             updateSharingInfo()
         }
     }
