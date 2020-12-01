@@ -145,7 +145,7 @@ final class FileInfoView: UIView, FromNib {
     }
     
     func updateShareInfo() {
-        guard let projectId = object?.projectId, let uuid = object?.uuid else {
+        guard object?.isLocalItem == false, let projectId = object?.projectId, let uuid = object?.uuid else {
             return
         }
         getSharingInfo(projectId: projectId, uuid: uuid)
