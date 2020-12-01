@@ -145,7 +145,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     }
     
     private func reloadAfterOperation() {
-        return fileInfoManager.reloadCurerntPages { [weak self] itemsLoadedCount in
+        return fileInfoManager.reloadCurrentPages { [weak self] itemsLoadedCount in
             self?.reloadCollection()
             self?.setEmptyScreen(isHidden: itemsLoadedCount != 0)
         }

@@ -168,7 +168,7 @@ final class PrivateShareFileInfoManager {
         }
     }
     
-    func reloadCurerntPages(completion: @escaping ValueHandler<Int>) {
+    func reloadCurrentPages(completion: @escaping ValueHandler<Int>) {
         queue.sync {
             let pagesToLoad = pageLoaded
             
