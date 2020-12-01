@@ -95,7 +95,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidDisappear(animated)
         
         setCardsContainer(isActive: false)
     }
