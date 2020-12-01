@@ -27,6 +27,10 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     @IBOutlet weak var collectionViewBarContainer: UIView!
     @IBOutlet private weak var collectionView: QuickSelectCollectionView!
     
+    private let cardsContainer = CardsContainerView()
+    private var contentSliderTopY: NSLayoutConstraint?
+    private var contentSliderH: NSLayoutConstraint?
+    
     private lazy var gridListBar: GridListTopBar = {
         let bar = GridListTopBar.initFromXib()
         bar.delegate = self
@@ -53,6 +57,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     //MARK: - Override
     
     deinit {
+        CardsManager.default.removeViewForNotification(view: cardsContainer)
         ItemOperationManager.default.stopUpdateView(view: self)
     }
     
@@ -61,6 +66,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         
         collectionManager.setup()
         setupBars()
+        setupCardsContainer()
         setupPlusButton()
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
@@ -69,6 +75,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        setCardsContainer(isActive: true)
         bottomBarManager.updateLayout()
     }
     
@@ -82,6 +89,12 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
             show(selectedItemsCount: selectedItems.count)
             bottomBarManager.update(for: selectedItems)
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        setCardsContainer(isActive: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -123,6 +136,37 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
                                           availableFilter: false,
                                           showGridListButton: true)
         gridListBar.setupWithConfig(config: config)
+    }
+    
+    private func setupCardsContainer() {
+        CardsManager.default.addViewForNotification(view: cardsContainer)
+        
+        cardsContainer.delegate = self
+        cardsContainer.isEnable = true
+        
+        cardsContainer.addPermittedPopUpViewTypes(types: [.upload, .download])
+        
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
+        collectionView.addSubview(cardsContainer)
+        
+        cardsContainer.translatesAutoresizingMaskIntoConstraints = false
+        
+        var constraintsArray = [NSLayoutConstraint]()
+        contentSliderTopY = NSLayoutConstraint(item: cardsContainer, attribute: .top, relatedBy: .equal, toItem: collectionView, attribute: .top, multiplier: 1, constant: 0)
+        constraintsArray.append(contentSliderTopY!)
+        constraintsArray.append(NSLayoutConstraint(item: cardsContainer, attribute: .centerX, relatedBy: .equal, toItem: collectionView, attribute: .centerX, multiplier: 1, constant: 0))
+        constraintsArray.append(NSLayoutConstraint(item: cardsContainer, attribute: .width, relatedBy: .equal, toItem: collectionView, attribute: .width, multiplier: 1, constant: 0))
+        contentSliderH = NSLayoutConstraint(item: cardsContainer, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
+        constraintsArray.append(contentSliderH!)
+        
+        NSLayoutConstraint.activate(constraintsArray)
+    }
+    
+    private func setCardsContainer(isActive: Bool) {
+        cardsContainer.isActive = isActive
+        if isActive {
+            CardsManager.default.updateAllProgressesInCardsForView(view: cardsContainer)
+        }
     }
 }
 
@@ -292,5 +336,30 @@ extension PrivateShareSharedFilesViewController: ItemOperationManagerViewProtoco
     
     func finishedUploadFile(file: WrapData) {
         collectionManager.reloadAfterAction()
+    }
+}
+
+
+extension PrivateShareSharedFilesViewController: CardsContainerViewDelegate {
+    func onUpdateViewForPopUpH(h: CGFloat) {
+        UIView.animate(withDuration: NumericConstants.animationDuration, animations: {
+            if let yConstr = self.contentSliderTopY {
+                yConstr.constant = -h
+            }
+            if let hConstr = self.contentSliderH {
+                hConstr.constant = h
+            }
+
+            self.collectionView.superview?.layoutIfNeeded()
+            self.collectionView.contentInset = UIEdgeInsets(top: h, left: 0, bottom: 25, right: 0)
+        }, completion: { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+
+            if self.collectionView.contentOffset.y < 1 {
+                self.collectionView.contentOffset = CGPoint(x: 0.0, y: -self.collectionView.contentInset.top)
+            }
+        })
     }
 }
