@@ -216,6 +216,14 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         itemThreeDotsManager.showActions(for: shareType, item: item, sender: self)
     }
     
+    func needToHideSpinner() {
+        hideSpinner()
+    }
+    
+    func needToShowSpinner() {
+        showSpinner()
+    }
+    
     //MARK: Helpers
     
     private func show(selectedItemsCount: Int) {

@@ -23,6 +23,9 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     func didEndReload()
     
     func showActions(for item: WrapData)
+    
+    func needToShowSpinner()
+    func needToHideSpinner()
 }
 
 final class PrivateShareSharedFilesCollectionManager: NSObject {
@@ -45,6 +48,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     private(set) var currentCollectionViewType: MoreActionsConfig.ViewType = .List
     private(set) var isSelecting = false
     
+    private lazy var mediaPlayer: MediaPlayer = factory.resolve()
     
     //MARK: -
     
@@ -53,6 +57,7 @@ final class PrivateShareSharedFilesCollectionManager: NSObject {
     //MARK: - Public
     
     func setup() {
+        
         setupCollection()
         setupRefresher()
         fullReload()
@@ -284,7 +289,11 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
             delegate?.didChangeSelection(selectedItems: fileInfoManager.selectedItems.getArray())
             
         } else if let item = item(at: indexPath), checkIfCanShowDetail(for: item) {
-            showDetailView(for: item)
+            if item.fileType == .audio {
+                showAudioPlayer(with: item)
+            } else {
+                showDetailView(for: item)
+            }
         }
     }
     
@@ -319,6 +328,24 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         } else {
             let items = fileInfoManager.sortedItems.getArray().filter({ !($0.isFolder ?? false) })
             openPreview(for: item, with: items)
+        }
+    }
+    
+    private func showAudioPlayer(with item: WrapData) {
+        if item.urlToFile == nil || item.urlToFile?.isExpired == true {
+            delegate?.needToShowSpinner()
+            fileInfoManager.createDownloadUrl(item: item) { [weak self] newUrl in
+                self?.delegate?.needToHideSpinner()
+                
+                guard let url = newUrl else {
+                    return
+                }
+                
+                item.tmpDownloadUrl = url
+                self?.mediaPlayer.play(list: [item], startAt: 0)
+            }
+        } else {
+            mediaPlayer.play(list: [item], startAt: 0)
         }
     }
     
