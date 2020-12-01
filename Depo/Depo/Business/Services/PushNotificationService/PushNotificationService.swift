@@ -188,7 +188,8 @@ final class PushNotificationService {
             if let navigationController = self.router.topNavigationController {
                 if navigationController.presentedViewController != nil {
                     self.router.pushOnPresentedView(viewController: controller)
-                } else if let existController = navigationController.viewControllers.first(where: { type(of: $0) == type(of: controller) }) {
+                } else if !(controller is SegmentedController), let existController = navigationController.viewControllers.first(where: { type(of: $0) == type(of: controller) }) {
+                    //TODO: add check child segments and refresh data protocol for update pages
                     if existController == navigationController.viewControllers.last {
                         return
                     }
