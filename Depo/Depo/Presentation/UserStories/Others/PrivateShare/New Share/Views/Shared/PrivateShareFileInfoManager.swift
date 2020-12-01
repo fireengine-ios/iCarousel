@@ -176,9 +176,6 @@ final class PrivateShareFileInfoManager {
             splittedItems.removeAll()
             pageLoaded = 0
             
-            let operationQueue = OperationQueue()
-            operationQueue.maxConcurrentOperationCount = 1
-                
             loadPages(till: pagesToLoad, alreadyLoadedItems: 0, completion: completion)
         }
     }
