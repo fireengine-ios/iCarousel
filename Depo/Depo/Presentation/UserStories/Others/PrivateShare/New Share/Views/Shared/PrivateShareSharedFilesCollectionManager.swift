@@ -353,8 +353,8 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegate, UI
         }
         
         delegate?.needToShowSpinner()
-        PrivateShareApiServiceImpl().createDownloadUrl(projectId: projectId, uuid: item.uuid) { response in
-            delegate?.needToHideSpinner()
+        PrivateShareApiServiceImpl().createDownloadUrl(projectId: projectId, uuid: item.uuid) { [weak self] response in
+            self?.delegate?.needToHideSpinner()
             switch response {
                 case .success(let urlWrapper):
                     completion(urlWrapper.url)
