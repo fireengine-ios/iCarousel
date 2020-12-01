@@ -10,7 +10,7 @@ class PhotoVideoDetailInteractor: NSObject, PhotoVideoDetailInteractorInput {
     
     weak var output: PhotoVideoDetailInteractorOutput!
     
-    private var array = SynchronizedArray<Item>()//[Item]()
+    private var array = SynchronizedArray<Item>()
     
     var albumUUID: String?
     
