@@ -118,7 +118,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
             }
         }
         
-        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
+        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, isOwner: true, completionBlock: imageSetBlock)
         
         isAlreadyConfigured = true
         
@@ -139,7 +139,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
             }
         }
 
-        cellImageManager?.loadImage(thumbnailUrl: metaData.smalURl, url: metaData.mediumUrl, completionBlock: imageSetBlock)
+        cellImageManager?.loadImage(thumbnailUrl: metaData.smalURl, url: metaData.mediumUrl, isOwner: true, completionBlock: imageSetBlock)
 
         isAlreadyConfigured = true
     }
@@ -184,7 +184,7 @@ class CollectionViewCellForPhoto: BaseCollectionViewCell {
         }
     }
     
-    func cleanCell() {
+    override func cleanCell() {
         cancelImageLoading()
         
         DispatchQueue.main.async {

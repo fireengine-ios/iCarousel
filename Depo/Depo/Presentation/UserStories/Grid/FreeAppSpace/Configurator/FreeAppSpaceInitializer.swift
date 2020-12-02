@@ -13,7 +13,7 @@ class FreeAppSpaceModuleInitializer: NSObject {
     class func initializeFreeAppSpaceViewController(with nibName: String) -> UIViewController {
         let viewController = FreeAppSpaceViewController(nibName: nibName, bundle: nil)
         
-        viewController.scrollablePopUpView.isEnable = false
+        viewController.cardsContainerView.isEnable = false
         
         let configurator = FreeAppSpaceModuleConfigurator()
         

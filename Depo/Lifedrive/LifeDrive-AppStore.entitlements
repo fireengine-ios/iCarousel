@@ -7,6 +7,7 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:4wxe.adj.st</string>
+		<string>applinks:mybilloapp.com</string>
 	</array>
 	<key>com.apple.security.application-groups</key>
 	<array>

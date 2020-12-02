@@ -15,9 +15,9 @@ enum DivorseItems {
 }
 
 enum ShareTypes {
-    case small
     case original
     case link
+    case `private`
 }
 
 class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
@@ -57,13 +57,12 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     }
     
     func selectShareType(sourceRect: CGRect?) {
-        
-        if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
-            self.shareViaLink(sourceRect: sourceRect)
-        } else if self.sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video }){
-            showSharingMenu(types: [.original, .link], sourceRect: sourceRect)
+        if sharingItems.contains(where: { $0.fileType == .folder}) {
+            showSharingMenu(types: [.link, .private], sourceRect: sourceRect)
+        } else if sharingItems.contains(where: { return $0.fileType != .image && $0.fileType != .video && !$0.fileType.isDocumentPageItem && $0.fileType != .audio}) {
+            shareViaLink(sourceRect: sourceRect)
         } else {
-            showSharingMenu(types: [.small, .original, .link], sourceRect: sourceRect)
+            showSharingMenu(types: [.original, .link, .private], sourceRect: sourceRect)
         }
     }
     
@@ -75,7 +74,6 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         if sharingItems.count > NumericConstants.numberOfSelectedItemsBeforeLimits {
             shareTypes.remove(.original)
-            shareTypes.remove(.small)
         }
         
         shareTypes.forEach {
@@ -119,61 +117,20 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                         UIApplication.showErrorAlert(message: errorResponse.description)
                 })
             }
-        case .small:
-            return UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
-                self?.sync(items: self?.sharingItems, action: { [weak self] in
-                    self?.shareSmallSize(sourceRect: sourceRect)
-                }, fail: { errorResponse in
-                    UIApplication.showErrorAlert(message: errorResponse.description)
-                })
+        case .private:
+            return UIAlertAction(title: TextConstants.actionSheetSharePrivate, style: .default) { [weak self] _ in
+                self?.privateShare()
             }
         }
     }
     
-    func showSharingMenu(sourceRect: CGRect?) {
-        let controler = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        controler.view.tintColor = ColorConstants.darkBlueColor
-        
-        if sharingItems.count <= NumericConstants.numberOfSelectedItemsBeforeLimits {
-            let smallAction = UIAlertAction(title: TextConstants.actionSheetShareSmallSize, style: .default) { [weak self] action in
-                self?.sync(items: self?.sharingItems, action: { [weak self] in
-                    self?.shareSmallSize(sourceRect: sourceRect)
-                    }, fail: { errorResponse in
-                        UIApplication.showErrorAlert(message: errorResponse.description)
-                })
-            }
-            
-            controler.addAction(smallAction)
-            
-            let originalAction = UIAlertAction(title: TextConstants.actionSheetShareOriginalSize, style: .default) { [weak self] action in
-                self?.sync(items: self?.sharingItems, action: { [weak self] in
-                    self?.shareOrignalSize(sourceRect: sourceRect)
-                    }, fail: { errorResponse in
-                        UIApplication.showErrorAlert(message: errorResponse.description)
-                })
-            }
-            controler.addAction(originalAction)
+    func privateShare() {
+        guard let items = sharingItems as? [WrapData] else {
+            return
         }
         
-        let shareViaLinkAction = UIAlertAction(title: TextConstants.actionSheetShareShareViaLink, style: .default) { [weak self] action in
-            
-            self?.sync(items: self?.sharingItems, action: { [weak self] in
-                self?.shareViaLink(sourceRect: sourceRect)
-            }, fail: { errorResponse in
-                debugLog("sync(items: \(errorResponse.description)")
-                UIApplication.showErrorAlert(message: errorResponse.description)
-            })
-        }
-        controler.addAction(shareViaLinkAction)
-        
-        let cancelAction = UIAlertAction(title: TextConstants.actionSheetShareCancel, style: .cancel, handler: nil)
-        controler.addAction(cancelAction)
-        
-        if let tempoRect = sourceRect {//if ipad
-            controler.popoverPresentationController?.sourceRect = tempoRect
-        }
-        
-        router.presentViewController(controller: controler)
+        let controller = router.privateShare(items: items)
+        router.presentViewController(controller: controller)
     }
     
     func shareSmallSize(sourceRect: CGRect?) {
@@ -1006,6 +963,106 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
                                      fail: failAction(elementType: .deleteDeviceOriginal))
     }
     
+    func endSharing(item: BaseDataSourceItem?) {
+        guard let item = item as? WrapData else {
+            return
+        }
+        let successAction = { [weak self] in
+            self?.output?.operationFinished(type: .endSharing)
+            self?.successAction(elementType: .endSharing)()
+        }
+        
+        let failAction = { [weak self] (error: ErrorResponse) in
+            self?.output?.operationFailed(type: .endSharing, message: error.description)
+            self?.failAction(elementType: .endSharing)(error)
+        }
+        
+        
+        let popup = PopUpController.with(title: TextConstants.privateSharedEndSharingActionTitle,
+                                         message: TextConstants.privateSharedEndSharingActionConfirmation,
+                                         image: .question,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstAction: { vc in
+                                            vc.close()
+                                         },
+                                         secondAction: { [weak self] vc in
+                                            vc.close {
+                                                self?.fileService.endSharing(file: item, success: successAction, fail: failAction)
+                                            }
+                                         })
+        
+        router.presentViewController(controller: popup, animated: false)
+    }
+    
+    func leaveSharing(item: BaseDataSourceItem?) {
+        guard let item = item as? WrapData else {
+            return
+        }
+        let successAction = { [weak self] in
+            self?.output?.operationFinished(type: .leaveSharing)
+            self?.successAction(elementType: .leaveSharing)()
+        }
+        
+        let failAction = { [weak self] (error: ErrorResponse) in
+            self?.output?.operationFailed(type: .leaveSharing, message: error.description)
+            self?.failAction(elementType: .leaveSharing)(error)
+        }
+        
+        
+        let popup = PopUpController.with(title: TextConstants.privateSharedLeaveSharingActionTitle,
+                                         message: TextConstants.privateSharedLeaveSharingActionConfirmation,
+                                         image: .question,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstAction: { vc in
+                                            vc.close()
+                                         },
+                                         secondAction: { [weak self] vc in
+                                            vc.close {
+                                                self?.fileService.leaveSharing(file: item, success: successAction, fail: failAction)
+                                            }
+                                         })
+        
+        router.presentViewController(controller: popup, animated: false)
+    }
+    
+    
+    func moveToTrashShared(items: [BaseDataSourceItem]) {
+        guard let items = items as? [WrapData] else {
+            return
+        }
+        
+        let cancelHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .cancel)
+            vc.close()
+        }
+        
+        let okHandler: PopUpButtonHandler = { [weak self] vc in
+            self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .ok)
+            self?.output?.operationStarted(type: .moveToTrashShared)
+            vc.close { [weak self] in
+                self?.moveToTrashShared(items)
+            }
+        }
+        
+        trackScreen(.fileOperationConfirmPopup(.trash))
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Screens.DeleteConfirmPopUp())
+        
+        let message = items.allSatisfy { $0.isOwner } ? TextConstants.deleteFilesText : TextConstants.privateShareMoveToTrashSharedWithMeMessage
+        
+        let popup = PopUpController.with(title: TextConstants.actionSheetDelete,
+                                         message: message,
+                                         image: .delete,
+                                         firstButtonTitle: TextConstants.cancel,
+                                         secondButtonTitle: TextConstants.ok,
+                                         firstAction: cancelHandler,
+                                         secondAction: okHandler)
+        
+        router.presentViewController(controller: popup, animated: false)
+    }
+    
+    
     func removeAlbums(items: [BaseDataSourceItem]) {
         let okHandler: PopUpButtonHandler = { [weak self] vc in
             self?.output?.operationStarted(type: .moveToTrash)
@@ -1512,6 +1569,28 @@ extension MoreFilesActionsInteractor {
             analyticsService.trackFileOperationGAEvent(operationType: .trash, itemsType: .places, itemsCount: items.count)
             fileService.deletePlaces(items: items, success: success, fail: fail)
         }
+    }
+    
+    private func moveToTrashShared(_ items: [Item]) {
+        //only one is allowed for now
+        guard let item = items.first else {
+            return
+        }
+        
+        let successAction = { [weak self] in
+            self?.output?.operationFinished(type: .moveToTrashShared)
+            self?.removeItemsFromPlayer(items: items)
+            self?.successAction(elementType: .moveToTrashShared)()
+        }
+        
+        let failAction = { [weak self] (error: ErrorResponse) in
+            self?.output?.operationFailed(type: .moveToTrashShared, message: error.description)
+            self?.failAction(elementType: .moveToTrashShared)(error)
+        }
+        
+        analyticsService.trackFileOperationGAEvent(operationType: .trash, items: items)
+        
+        fileService.moveToTrashShared(file: item, success: successAction, fail: failAction)
     }
 }
 

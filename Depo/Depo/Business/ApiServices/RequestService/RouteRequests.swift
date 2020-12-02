@@ -260,6 +260,21 @@ struct RouteRequests {
     static let campaignApi = baseUrl +/ "campaign"
     static let campaignPhotopick = campaignApi +/ "photopick"
     
+    
+    //MARK: - Private Share
+    
+    enum PrivateShare {
+        static let suggestions = baseUrl +/ "invitees"
+        static let share = baseUrl +/ "shares"
+        
+        enum Shared {
+            private static let baseShares = share.absoluteString
+            static let withMe = baseShares + "?sharedWith=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE"
+            static let byMe = baseShares + "?sharedBy=me&size=%d&page=%d&sortBy=%@&sortOrder=%@&objectType=FILE"
+            //"https://run.mocky.io/v3/8d9274fb-3149-452b-9d7f-ef8b1ea20195"//
+        }
+    }
+    
     //MARK: - Turkcell Updater
     
     static func updaterUrl() -> String {
@@ -353,6 +368,24 @@ struct RouteRequests {
         static let emptyTrash = baseUrl +/ "trash/empty"
         static let hide = baseUrl +/ (filesystemBase + "hide")
         static let recover = (baseUrl +/ filesystemBase) +/ "recover"
+        
+        enum Version_2 {
+            private static let baseV2Url = baseUrl +/ "v2/files/%@"
+            static let baseV2UrlString = baseV2Url.absoluteString
+            private static let baseV2UrlBulk = baseUrl +/ "v2/files/_bulk"
+            
+            static let filesFromFolder = baseV2UrlString + "?size=%d&page=%d&sortBy=%@&sortOrder=%@&parentFolderUuid=%@"
+            static let sharingInfo = baseV2UrlString + "/%@"
+            static let shareAcls = baseV2UrlString + "/%@/acls"
+            static let shareAcl = shareAcls + "/%d"
+            static let leaveShare = baseV2UrlString + "/%@/acls?subjectType=USER&subjectId=%@"
+            static let rename = sharingInfo + "/name"
+            
+            static let createDownloadUrl = baseV2UrlBulk +/ "create-download-url"
+            static let move = baseV2UrlBulk +/ "move"
+            static let delete = baseV2UrlBulk +/ "delete"
+            static let trash = baseV2UrlBulk +/ "trash"
+        }
     }
 
     static let launchCampaignImage = baseUrl.deletingLastPathComponent() +/ "assets/images/campaign/lansmanm1.jpg"

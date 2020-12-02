@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectNameViewController: BaseViewController, SelectNameViewInput {
+class SelectNameViewController: BaseViewController, SelectNameViewInput, NibInit {
     
     var output: SelectNameViewOutput!
     

@@ -80,6 +80,7 @@ struct ColorConstants {
     
     static let charcoalGrey = UIColor(red: 56 / 255.0, green: 59 / 255.0, blue: 65 / 255.0, alpha: 1.0)
     static let marineTwo = UIColor(red: 6 / 255.0, green: 44 / 255.0, blue: 67 / 255.0, alpha: 1.0)
+    static let marineFour = UIColor(red: 6 / 255.0, green: 63 / 255.0, blue: 98 / 255.0, alpha: 1.0)
     static let tealishThree = UIColor(red: 40 / 255.0, green: 169 / 255.0, blue: 173 / 255.0, alpha: 1.0)
     
     static let popUpBackground = UIColor(red: 0, green: 0, blue: 0, alpha: 0.33)
@@ -114,6 +115,8 @@ struct ColorConstants {
     
     static let greenyBlue = UIColor(red: 65 / 255.0, green: 196 / 255.0, blue: 199 / 255.0, alpha: 1)
     static let tbMatikBlurColor = UIColor(red: 5 / 255.0, green: 52 / 255.0, blue: 79 / 255.0, alpha: 1)
+    
+    static let aquaMarineTwo = UIColor(red: 85 / 255.0, green: 223 / 255.0, blue: 223 / 255.0, alpha: 1)
 }
 
 extension UIColor {
@@ -136,6 +139,10 @@ extension UIColor {
     
     class var lrTealishTwo: UIColor {
         return UIColor(red: 68.0 / 255.0, green: 205.0 / 255.0, blue: 208.0 / 255.0, alpha: 1.0)
+    }
+    
+    class var lrTealishFour: UIColor {
+        return UIColor(red: 64.0 / 255.0, green: 204.0 / 255.0, blue: 208.0 / 255.0, alpha: 1.0)
     }
     
     class var lrMintGreen: UIColor {
@@ -176,6 +183,30 @@ extension UIColor {
     
     class var lrPeach: UIColor {
         return UIColor(red: 254.0 / 255.0, green: 171.0 / 255.0, blue: 143.0 / 255.0, alpha: 1.0)
+    }
+    
+    class var lrDarkSkyBlue: UIColor {
+        return UIColor(red: 65 / 255.0, green: 180 / 255.0, blue: 224 / 255.0, alpha: 1.0)
+    }
+    
+    class var lrOrange: UIColor {
+        return UIColor(red: 245 / 255.0, green: 115 / 255.0, blue: 14 / 255.0, alpha: 1.0)
+    }
+    
+    class var lrButterScotch: UIColor {
+        return UIColor(red: 255 / 255.0, green: 198 / 255.0, blue: 75 / 255.0, alpha: 1.0)
+    }
+    
+    class var lrFadedRed: UIColor {
+        return UIColor(red: 217 / 255.0, green: 58 / 255.0, blue: 71 / 255.0, alpha: 1.0)
+    }
+    
+    class var lrGreyishBrownThree: UIColor {
+        return UIColor(red: 74 / 255.0, green: 74 / 255.0, blue: 74 / 255.0, alpha: 1.0)
+    }
+
+    class var lrGreyish: UIColor {
+        return UIColor(red: 178 / 255.0, green: 178 / 255.0, blue: 178 / 255.0, alpha: 1.0)
     }
 }
 

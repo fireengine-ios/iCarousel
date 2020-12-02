@@ -12,6 +12,12 @@ class BaseDataSourceItem: NSObject {
 
     var uuid: String
     
+    var projectId: String?
+    
+    var isOwner: Bool {
+        return projectId == nil || projectId == SingletonStorage.shared.accountInfo?.projectID
+    }
+    
     var name: String?
     
     var creationDate: Date?
@@ -29,6 +35,8 @@ class BaseDataSourceItem: NSObject {
     var md5: String = ""
     
     var parent: String?
+    
+    var isShared = false
     
     func getCellReUseID() -> String {
         return CollectionViewCellsIdsConstant.cellForImage

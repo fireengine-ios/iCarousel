@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="FileInfoShareContactCell" customModule="Billo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="45" height="67"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="45" height="67"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWg-4s-ve8">
+                        <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McC-As-BDa">
+                                <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                <connections>
+                                    <action selector="onButtonTapped" destination="gTV-IL-0wX" eventType="touchUpInside" id="Gqe-f5-Dyy"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="McC-As-BDa" secondAttribute="trailing" id="0ca-zP-GXH"/>
+                            <constraint firstItem="McC-As-BDa" firstAttribute="leading" secondItem="iWg-4s-ve8" secondAttribute="leading" id="5n1-F4-aiE"/>
+                            <constraint firstItem="McC-As-BDa" firstAttribute="top" secondItem="iWg-4s-ve8" secondAttribute="top" id="FEH-gp-Jwm"/>
+                            <constraint firstAttribute="height" constant="45" id="FFB-0a-LpN"/>
+                            <constraint firstAttribute="width" constant="45" id="JsB-Lp-qfk"/>
+                            <constraint firstAttribute="bottom" secondItem="McC-As-BDa" secondAttribute="bottom" id="r0U-oH-fnJ"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgH-Lr-ooH">
+                        <rect key="frame" x="0.0" y="46.5" width="45" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="FgH-Lr-ooH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CUJ-4L-5Vr"/>
+                <constraint firstItem="iWg-4s-ve8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Cb5-Yc-TOf"/>
+                <constraint firstAttribute="trailing" secondItem="iWg-4s-ve8" secondAttribute="trailing" id="KS1-mu-2vD"/>
+                <constraint firstAttribute="trailing" secondItem="FgH-Lr-ooH" secondAttribute="trailing" id="Tn3-Ua-O2N"/>
+                <constraint firstItem="iWg-4s-ve8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dDu-RG-2RX"/>
+                <constraint firstItem="FgH-Lr-ooH" firstAttribute="top" secondItem="iWg-4s-ve8" secondAttribute="bottom" constant="1.5" id="fC0-RH-afa"/>
+                <constraint firstAttribute="bottom" secondItem="FgH-Lr-ooH" secondAttribute="bottom" id="kuC-tI-NGI"/>
+            </constraints>
+            <size key="customSize" width="430" height="87"/>
+            <connections>
+                <outlet property="button" destination="McC-As-BDa" id="hmI-gr-5x1"/>
+                <outlet property="circleView" destination="iWg-4s-ve8" id="p7f-jC-aN2"/>
+                <outlet property="roleLabel" destination="FgH-Lr-ooH" id="KtS-3Y-ZMZ"/>
+            </connections>
+            <point key="canvasLocation" x="261.59420289855075" y="104.12946428571428"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

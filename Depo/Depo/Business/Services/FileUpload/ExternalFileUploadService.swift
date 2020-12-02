@@ -26,10 +26,6 @@ enum ExternalFileType {
                 
             case .audio:
                 return [kUTTypeAudio] as [String]
-            
-            default:
-                assertionFailure("return realted UTIs")
-                return [kUTTypeItem] as [String]
         }
     }
 }
@@ -40,14 +36,22 @@ final class ExternalFileUploadService: NSObject {
     private let uploadService = UploadService.default
     private var isFavorites = false
     private var folderUUID = ""
+    private var projectId: String?
     private var isFromAlbum = false
     
     
     func showViewController(router: RouterVC, externalFileType: ExternalFileType) {
         
         isFavorites = router.isOnFavoritesView()
-        folderUUID = router.getParentUUID()
         isFromAlbum = router.isRootViewControllerAlbumDetail()
+        
+        if let sharedFolderInfo = router.sharedFolderItem {
+            folderUUID = sharedFolderInfo.uuid
+            projectId = sharedFolderInfo.projectId
+        } else {
+            folderUUID = router.getParentUUID()
+            projectId = nil
+        }
         
         let utTypes = externalFileType.allowedUTITypes
         
@@ -78,14 +82,23 @@ extension ExternalFileUploadService: UIDocumentPickerDelegate {
             return
         }
         
+        let uploadType: UploadType
+        if projectId != nil {
+            uploadType = projectId == SingletonStorage.shared.accountInfo?.projectID ? .upload : .sharedWithMe
+        } else {
+            uploadType = .upload
+        }
+        
+        
         uploadService.uploadFileList(items: items,
-                                     uploadType: .upload,
+                                     uploadType: uploadType,
                                      uploadStategy: .WithoutConflictControl,
                                      uploadTo: .MOBILE_UPLOAD,
                                      folder: folderUUID,
                                      isFavorites: isFavorites,
                                      isFromAlbum: isFromAlbum,
                                      isFromCamera: false,
+                                     projectId: projectId,
                                      success: {},
                                      fail: { _ in },
                                      returnedUploadOperation: { _ in})

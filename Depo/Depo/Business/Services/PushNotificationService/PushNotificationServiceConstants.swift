@@ -69,6 +69,9 @@ enum PushNotificationAction: String {
     case widgetFIRDisabled = "widget_fir_disabled"
     case widgetFIRStandart = "widget_fir_standart"
     
+    case sharedWithMe = "shared_with_me"
+    case sharedByMe = "shared_by_me"
+    
     var fromWidget: Bool {
         isContained(in: [.widgetLogout,
                          .widgetQuota,
@@ -92,3 +95,18 @@ enum PushNotificationParameter: String {
     case netmeraParameters = "prms"
 }
 
+enum UniversalLinkPath: String {
+ 
+    case sharedWithMe = "shared/with-me"
+    case sharedByMe = "shared/by-me"
+    
+    var action: PushNotificationAction {
+        switch self {
+        case .sharedWithMe:
+            return .sharedWithMe
+        case .sharedByMe:
+            return .sharedByMe
+        }
+    }
+    
+}

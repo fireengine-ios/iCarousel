@@ -60,13 +60,37 @@ enum ElementTypes {
     case albumDetails
     //instaPick
     case instaPick
+    //private share
+    case endSharing
+    case leaveSharing
+    case moveToTrashShared
     
     static var trashState: [ElementTypes] = [.restore, .delete]
     static var hiddenState: [ElementTypes] = [.unhide, .moveToTrash]
     static var activeState: [ElementTypes] = [.hide, .moveToTrash]
 
     static func detailsElementsConfig(for item: Item, status: ItemStatus, viewType: DetailViewType) -> [ElementTypes] {
-        var result: [ElementTypes]
+        var result = [ElementTypes]()
+        
+        if !item.isOwner {
+            //shared with me items
+            if let grantedPermissions = item.privateSharePermission?.granted {
+                if grantedPermissions.contains(.read) {
+                    if item.fileType.isContained(in: [.image, .video]) {
+                        result.append(.download)
+                    } else {
+                        result.append(.downloadDocument)
+                    }
+                }
+                
+                if grantedPermissions.contains(.delete) {
+                    if !item.isReadOnlyFolder {
+                        result.append(.moveToTrashShared)
+                    }
+                }
+            }
+            return result
+        }
         
         switch status {
         case .hidden:
@@ -271,6 +295,12 @@ enum ElementTypes {
             return TextConstants.snackbarMessageRemovedFromAlbum
         case .removeFromFavorites:
             return TextConstants.snackbarMessageRemovedFromFavorites
+        case .endSharing:
+            return TextConstants.privateSharedEndSharingActionSuccess
+        case .leaveSharing:
+            return TextConstants.privateSharedLeaveSharingActionSuccess
+        case .moveToTrashShared:
+            return TextConstants.moveToTrashItemsSuccessText
         default:
             return nil
         }

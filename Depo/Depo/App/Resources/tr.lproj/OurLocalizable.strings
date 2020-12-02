@@ -117,8 +117,8 @@
 "Add to Favorites" = "Favorilere ekle";
 "Copy" = "Kopyala";
 "Create a Story" = "Hikaye Oluştur";
-"Share Via Link" = "Bağlantı yoluyla paylaş";
-"Original Size" = "Orijinal Boyut";
+"Share Via Link" = "Bağlantıyı Kopyala";
+"Original Size" = "Kopyasını Gönder";
 "Small Size" = "Küçük Boyut";
 "Download" = "İndir";
 "Sync" = "Yedekle";
@@ -187,7 +187,7 @@
 "Back" = "Geri";
 "Fail while uploading from LifeBox" = "lifebox’tan yükleme sırasında hata oluştu";
 "Sorry, but photos not selected" = "Fotoğraflar seçili değil.";
-"Upload from lifebox" = "lifebox’tan yükle";
+"Upload from lifebox" = "lifebox’tan ekle";
 "Upload failed" = "Yükleme başarısız";
 "Upload was successful" = "Başarıyla yüklendi";
 "Nothing to upload" = "Yüklenecek birşey yok";
@@ -1013,7 +1013,7 @@
 
 /*Settings page*/
 "Permissions" = "İzinler";
-"NSContactsUsageDescription" = "lifebox'un rehberine erişip yedeklemesi için kontaklarını lifebox sunucularına yüklemesi gerekir.";
+"NSContactsUsageDescription" = "Dosya paylaşımı sırasında rehber önerilerini görebilmek ve rehberini lifebox sunucularında yedekleyip yönetebilmek için lifebox'a izin ver.";
 "import_from_spotify" = "Spotify'dan Taşı";
 "import_from_spotify_btn" = "Spotify'dan Taşı";
 "import_from_spotify_title" = "Spotify'a Bağlan";
@@ -1761,3 +1761,78 @@
 "fun_close_alert_left_button" = "Düzenlemeye devam et";
 "fun_close_alert_right_button" = "Vazgeç";
 "Upload Music" = "Dosyaları yükleyin";
+
+/*"Erişim İzni Ver" ya da "Erişime Aç" nasıl olur?*/
+"private_share_option" = "Kişiyle Paylaş";
+"private_share_start_page_name" = "Paylaş";
+"private_share_start_page_people_selection_section_name" = "Kişileri ekle";
+
+/*Çeviriler tamamlandıktan sonra türkçe çeviriden zorunlu olmadığı için ülke kodunun çıkarılacağını konuşmuştuk.*/
+"private_share_start_page_enter_user_field" = "E-Posta veya GSM Numarası Gir";
+"private_share_start_page_suggestions_section" = "Önerilenler";
+"private_share_start_page_shared_with_section" = "Paylaşılan kişiler";
+"private_share_start_page_add_message_section_name" = "Mesaj Ekle";
+"private_share_start_page_add_messge_field" = "(Opsiyonel)";
+"private_share_start_page_share_duration_section_name" = "Geçerlilik Süresi";
+"private_share_start_page_share_duration_1" = "Süresiz";
+"private_share_start_page_share_duration_2" = "1 saat";
+"private_share_start_page_share_duration_3" = "1 gün";
+"private_share_start_page_share_duration_4" = "1 hafta";
+"private_share_start_page_share_duration_5" = "1 ay";
+"private_share_start_page_share_duration_6" = "1 yıl";
+"private_share_start_page_share_button" = "Paylaş";
+"private_share_start_page_cancel_button" = "İptal Et";
+"private_share_start_page_role_1" = "Düzenleyen";
+"private_share_start_page_role_2" = "Görüntüleyen";
+"private_share_role_selection_page_name" = "Erişim";
+"private_share_role_selection_role_1" = "Düzenleyen";
+"private_share_role_selection_role_2" = "Görüntüleyen";
+"private_share_msisdn_format" = "Lütfen geçerli bir GSM numarası gir.";
+"private_share_start_page_share_success" = "Paylaşım başarılı.";
+"private_share_cancel_confirm" = "Çıkmak istediğinden emin misin?";
+"private_share_details_page_name" = "Paylaşılan Ögeler";
+"private_share_shared_by_me_tab" = "Paylaştıklarım";
+"private_share_shared_with_me_tab" = "Paylaşılanlar";
+"private_share_info_section_name" = "Paylaşım Bilgisi";
+"private_share_info_number_of_people" = "%d kişi ile paylaşıldı.";
+
+/*"Paylaşan" daha mı özet olur? Hangi alandaydı bu bilgi? comboboxta mı gelecek?*/
+"private_share_info_role_1" = "Paylaşan";
+"private_share_info_role_2" = "Düzenleyen";
+"private_share_info_role_3" = "Görüntüleyen";
+"private_share_email_format" = "Lütfen geçerli bir e-posta adresi gir.";
+"private_share_shared_with_me_empty_page" = "Henüz seninle paylaşılan dosya yok.";
+"private_share_shared_by_me_empty_page" = "Henüz paylaştığın dosyan yok.";
+"private_share_end_sharing_success" = "Paylaşım durduruldu.";
+"private_share_end_sharing_confirm" = "Paylaşımı durdurmak istediğine emin misin?";
+"private_share_end_sharing_action_title" = "Paylaşımı Durdur";
+"private_share_who_has_access_page_name" = "Erişimi Olanlar";
+
+/*alternatif ne denebilir tek kelimelik? Paylaşan?*/
+"private_share_who_has_access_role_1" = "Paylaşan";
+"private_share_who_has_access_role_2" = "Düzenleyen";
+"private_share_who_has_access_role_3" = "Görüntüleyen";
+"private_share_who_has_access_end_share" = "Paylaşımı Durdur";
+"private_share_inner_folder_empty_page" = "Klasör boş";
+"private_share_info_role_4" = "Diğer";
+"private_share_non_turkish_msisdn_warning" = "Lütfen GSM numarasını (+)Ülke Kodu ile Gir";
+"private_share_leave_sharing_success" = "Paylaşımdan Ayrıldın";
+"private_leave_sharing_confirm" = "Paylaşımdan ayrılmak istediğine emin misin?";
+"private_share_leave_sharing_action_title" = "Paylaşımdan Ayrıl";
+"private_share_who_has_access_role_4" = "Diğer";
+"private_share_all_files_section_1" = "Paylaşılanlar";
+"private_share_all_files_section_1_see_all" = "Tümünü gör";
+"private_share_all_files_section_2" = "Dosyalarım";
+"private_share_access_role_1" = "Düzenleyen";
+"private_share_access_role_2" = "Görüntüleyen";
+"private_share_access_role_3" = "Kaldır";
+"private_share_access_role_4" = "Diğer";
+"private_share_access_page_name" = "Erişim";
+"private_share_access_from_folder" = "%@ Klasöründen";
+"private_share_expire_date" = "Bitiş tarihi: %@";
+"private_share_access_role_change_success" = "Rol Değiştirildi";
+"private_share_access_remove_confirmation" = "Kullanıcıyı çıkarmak istediğinden emin misin?";
+"private_share_info_access_role_remove" = "Paylaşımdan Çıkarıldı";
+"private_share_plus_button_no_action" = "Bu sayfada yeni dosya yüklenemez";
+"private_share_confirm_trash_items" = "Silmek istediğinden emin misin?";
+"private_share_preview_not_ready" = "Önizleme gerçekleştirilemiyor. Lütfen daha sonra tekrar deneyiniz.";
