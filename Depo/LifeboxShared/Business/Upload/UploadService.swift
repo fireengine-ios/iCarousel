@@ -286,12 +286,14 @@ final class UploadService {
     
     
     private func commonHeaders(name: String, contentType: String, fileSize: Int64) -> HTTPHeaders {
+        let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
+        
         return [
             HeaderConstant.XObjectMetaFavorites: "false",
             HeaderConstant.XMetaStrategy: MetaStrategy.WithoutConflictControl.rawValue,
             HeaderConstant.Expect: "100-continue",
             HeaderConstant.XObjectMetaParentUuid: "",
-            HeaderConstant.XObjectMetaFileName: name,
+            HeaderConstant.XObjectMetaFileName: encodedName,
             HeaderConstant.ContentType: contentType,
             HeaderConstant.XObjectMetaSpecialFolder: MetaSpesialFolder.MOBILE_UPLOAD.rawValue,
             HeaderConstant.ContentLength: String(fileSize),
