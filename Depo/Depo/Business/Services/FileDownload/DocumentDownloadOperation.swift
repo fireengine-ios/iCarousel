@@ -73,11 +73,8 @@ final class DocumentDownloadOperation: Operation {
         
         currentItem = items.removeFirst()
         
-        guard
-            let nextItem = currentItem,
-            let urlToFile = nextItem.urlToFile,
-            let name = nextItem.name
-        else {
+        
+        guard let nextItem = currentItem, let urlToFile = nextItem.urlToFile, let name = nextItem.name else {
             downloadNext()
             return
         }
