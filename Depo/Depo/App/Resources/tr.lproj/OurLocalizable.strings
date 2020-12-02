@@ -1766,7 +1766,9 @@
 "private_share_option" = "Kişiyle Paylaş";
 "private_share_start_page_name" = "Paylaş";
 "private_share_start_page_people_selection_section_name" = "Kişileri ekle";
-"private_share_start_page_enter_user_field" = "E-Posta veya GSM Numarası Gir (Ülke Kodu ile)";
+
+/*Çeviriler tamamlandıktan sonra türkçe çeviriden zorunlu olmadığı için ülke kodunun çıkarılacağını konuşmuştuk.*/
+"private_share_start_page_enter_user_field" = "E-Posta veya GSM Numarası Gir";
 "private_share_start_page_suggestions_section" = "Önerilenler";
 "private_share_start_page_shared_with_section" = "Paylaşılan kişiler";
 "private_share_start_page_add_message_section_name" = "Mesaj Ekle";
@@ -1802,7 +1804,7 @@
 "private_share_shared_with_me_empty_page" = "Henüz seninle paylaşılan dosya yok.";
 "private_share_shared_by_me_empty_page" = "Henüz paylaştığın dosyan yok.";
 "private_share_end_sharing_success" = "Paylaşım durduruldu.";
-"private_share_end_sharing_confirm" = "Paylaşımı durdurmak istediğinden emin misin?";
+"private_share_end_sharing_confirm" = "Paylaşımı durdurmak istediğine emin misin?";
 "private_share_end_sharing_action_title" = "Paylaşımı Durdur";
 "private_share_who_has_access_page_name" = "Erişimi Olanlar";
 
@@ -1812,19 +1814,19 @@
 "private_share_who_has_access_role_3" = "Görüntüleyen";
 "private_share_who_has_access_end_share" = "Paylaşımı Durdur";
 "private_share_inner_folder_empty_page" = "Klasör boş";
-"private_share_info_role_4" = "";
+"private_share_info_role_4" = "Diğer";
 "private_share_non_turkish_msisdn_warning" = "Lütfen GSM numarasını (+)Ülke Kodu ile Gir";
 "private_share_leave_sharing_success" = "Paylaşımdan Ayrıldın";
 "private_leave_sharing_confirm" = "Paylaşımdan ayrılmak istediğine emin misin?";
 "private_share_leave_sharing_action_title" = "Paylaşımdan Ayrıl";
-"private_share_who_has_access_role_4" = "";
+"private_share_who_has_access_role_4" = "Diğer";
 "private_share_all_files_section_1" = "Paylaşılanlar";
 "private_share_all_files_section_1_see_all" = "Tümünü gör";
 "private_share_all_files_section_2" = "Dosyalarım";
 "private_share_access_role_1" = "Düzenleyen";
 "private_share_access_role_2" = "Görüntüleyen";
 "private_share_access_role_3" = "Kaldır";
-"private_share_access_role_4" = "";
+"private_share_access_role_4" = "Diğer";
 "private_share_access_page_name" = "Erişim";
 "private_share_access_from_folder" = "%@ Klasöründen";
 "private_share_expire_date" = "Bitiş tarihi: %@";
@@ -1833,4 +1835,4 @@
 "private_share_info_access_role_remove" = "Paylaşımdan Çıkarıldı";
 "private_share_plus_button_no_action" = "Bu sayfada yeni dosya yüklenemez";
 "private_share_confirm_trash_items" = "Silmek istediğinden emin misin?";
-"private_share_preview_not_ready" = "";
+"private_share_preview_not_ready" = "Önizleme gerçekleştirilemiyor. Lütfen daha sonra tekrar deneyiniz.";
