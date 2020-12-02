@@ -8,14 +8,19 @@
 
 import UIKit
 
+struct CreateFolderSharedWithMeParameters {
+    let projectId: String
+    let rootFolderUuid: String?
+}
+
 class SelectNameModuleInitializer: NSObject {
 
     //Connect with object on storyboard
     @IBOutlet weak var selectnameViewController: SelectNameViewController!
 
-    class func initializeViewController(with nibName: String, viewType: SelectNameScreenType, rootFolderID: String? = nil, isFavorites: Bool = false, moduleOutput: SelectNameModuleOutput? = nil) -> UIViewController {
+    class func initializeViewController(with viewType: SelectNameScreenType, rootFolderID: String? = nil, isFavorites: Bool = false, moduleOutput: SelectNameModuleOutput? = nil) -> UIViewController {
 
-        let viewController = SelectNameViewController(nibName: nibName, bundle: nil)
+        let viewController = SelectNameViewController.initFromNib()
         viewController.needToShowTabBar = true
         let configurator = SelectNameModuleConfigurator()
         configurator.configureModuleForViewInput(viewInput: viewController,
@@ -27,5 +32,16 @@ class SelectNameModuleInitializer: NSObject {
         return viewController
     }
 
+    class func with(parameters: CreateFolderSharedWithMeParameters) -> UIViewController {
+        let viewController = SelectNameViewController.initFromNib()
+        viewController.needToShowTabBar = true
+        let configurator = SelectNameModuleConfigurator()
+        configurator.configureModuleForViewInput(viewInput: viewController,
+                                                 viewType: .selectFolderName,
+                                                 parameters: parameters,
+                                                 moduleOutput: nil)
+
+        return viewController
+    }
     
 }

@@ -92,6 +92,11 @@ protocol ItemOperationManagerViewProtocol: class {
     func putBackFromTrashThings(items: [ThingsItem])
     
     func didEmptyTrashBin()
+    
+    func didShare(items: [BaseDataSourceItem])
+    func didEndShareItem(uuid: String)
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String)
+    func didRemove(contact: SharedContact, fromItem uuid: String)
 }
 
 extension ItemOperationManagerViewProtocol {
@@ -184,6 +189,11 @@ extension ItemOperationManagerViewProtocol {
     func putBackFromTrashThings(items: [ThingsItem]) {}
     
     func didEmptyTrashBin() {}
+    
+    func didShare(items: [BaseDataSourceItem]) {}
+    func didEndShareItem(uuid: String) {}
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String) {}
+    func didRemove(contact: SharedContact, fromItem uuid: String) {}
 }
 
 
@@ -532,6 +542,30 @@ class ItemOperationManager: NSObject {
     func didEmptyTrashBin() {
         DispatchQueue.main.async {
             self.views.invoke { $0.didEmptyTrashBin() }
+        }
+    }
+    
+    func didShare(items: [BaseDataSourceItem]) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didShare(items: items) }
+        }
+    }
+    
+    func didEndShareItem(uuid: String) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didEndShareItem(uuid: uuid) }
+        }
+    }
+    
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didChangeRole(role, contact: contact, uuid: uuid) }
+        }
+    }
+    
+    func didRemove(contact: SharedContact, fromItem uuid: String) {
+        DispatchQueue.main.async {
+            self.views.invoke { $0.didRemove(contact: contact, fromItem: uuid) }
         }
     }
 }

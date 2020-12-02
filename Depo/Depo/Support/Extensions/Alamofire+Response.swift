@@ -52,4 +52,50 @@ extension Alamofire.DataRequest {
         }
     }
     
+    @discardableResult
+    func responseObject<T: Codable>(_ handler: @escaping ResponseHandler<T>) -> Self {
+        return responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let object = try JSONDecoder.withMillisecondsDate().decode(T.self, from: data)
+                    handler(.success(object))
+                } catch let error {
+                    handler(.failed(error))
+                }
+            case .failure(let error):
+                let backendError = ResponseParser.getBackendError(data: response.data,
+                                                                  response: response.response)
+                handler(ResponseResult.failed(backendError ?? error))
+            }
+        }
+    }
+    
+    @discardableResult
+    func responseArray<T: Codable>(_ handler: @escaping ResponseArrayHandler<T>) -> Self {
+        return responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let objects = try JSONDecoder.withMillisecondsDate().decode([T].self, from: data)
+                    handler(.success(objects))
+                } catch let error {
+                    handler(.failed(error))
+                }
+            case .failure(let error):
+                let backendError = ResponseParser.getBackendError(data: response.data,
+                                                                  response: response.response)
+                handler(ResponseResult.failed(backendError ?? error))
+            }
+        }
+    }
+}
+
+
+extension JSONDecoder {
+    static func withMillisecondsDate() -> JSONDecoder {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .millisecondsSince1970
+        return decoder
+    }
 }

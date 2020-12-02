@@ -552,6 +552,29 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
                     action = UIAlertAction(title: TextConstants.newInstaPick, style: .default, handler: { _ in
                         self.basePassingPresenter?.openInstaPick()
                     })
+                case .endSharing:
+                    action = UIAlertAction(title: TextConstants.privateSharedEndSharingActionTitle, style: .default, handler: { _ in
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .endSharing))
+                        //currently only for one file is supported
+                        self.interactor.endSharing(item: currentItems.first)
+                    })
+                case .leaveSharing:
+                    action = UIAlertAction(title: TextConstants.privateSharedLeaveSharingActionTitle, style: .default, handler: { _ in
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .leaveSharing))
+                        //currently only for one file is supported
+                        self.interactor.leaveSharing(item: currentItems.first)
+                    })
+                case .moveToTrashShared:
+                    action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default) { _ in
+                        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.ButtonClick(buttonName: .delete))
+                        let allowedNumberLimit = NumericConstants.numberOfSelectedItemsBeforeLimits
+                        if selectedItems.count <= allowedNumberLimit {
+                            self.interactor.moveToTrashShared(items: currentItems)
+                        } else {
+                            let text = String(format: TextConstants.deleteLimitAllert, allowedNumberLimit)
+                            UIApplication.showErrorAlert(message: text)
+                        }
+                    }
                 }
                 return action
             })

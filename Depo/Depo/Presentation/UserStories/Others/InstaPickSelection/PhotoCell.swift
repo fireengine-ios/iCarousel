@@ -142,7 +142,7 @@ final class PhotoCell: UICollectionViewCell {
             }
         }
         
-        cellImageManager?.loadImage(thumbnailUrl: metadata.smalURl, url: metadata.mediumUrl, completionBlock: imageSetBlock)
+        cellImageManager?.loadImage(thumbnailUrl: metadata.smalURl, url: metadata.mediumUrl, isOwner: true, completionBlock: imageSetBlock)
     }
     
     func setup(by item: Item) {
@@ -180,7 +180,7 @@ final class PhotoCell: UICollectionViewCell {
                 }
             }
 
-            cellImageManager?.loadImage(thumbnailUrl: smallURL, url: mediumURL, completionBlock: imageSetBlock)
+            cellImageManager?.loadImage(item: item, thumbnaiSize: .small, imageSize: .medium, completionBlock: imageSetBlock)
         }
     }
     

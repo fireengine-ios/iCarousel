@@ -19,5 +19,15 @@ protocol PhotoVideoDetailRouterInput {
     func goToPremium()
     
     func openFaceImageItemPhotosWith(_ item: Item, album: AlbumItem, moduleOutput: FaceImageItemsModuleOutput?)
+ 
+    func openPrivateShare(for item: Item)
     
+    func openPrivateShareContacts(with shareInfo: SharedFileInfo)
+    
+    func openPrivateShareAccessList(projectId: String, uuid: String, contact: SharedContact, fileType: FileType)
+}
+
+protocol PhotoVideoDetailRouterOutput: class {
+    func updateShareInfo()
+    func deleteShareInfo()
 }

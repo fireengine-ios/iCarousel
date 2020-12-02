@@ -235,6 +235,13 @@ public extension SynchronizedArray {
             self.array = handler(self.array)
         }
     }
+    
+    func replace(with array: [Element], completion: (() -> Void)?) {
+        queue.async(flags: .barrier) {
+            self.array = array
+            completion?()
+        }
+    }
 }
 
 public extension SynchronizedArray {

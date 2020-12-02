@@ -80,7 +80,7 @@ class SimpleUpload: UploadRequestParametrs {
         switch uploadType {
             case .save:
                 self.tmpUUID = item.uuid
-            case .saveAs:
+            case .saveAs, .sharedWithMe:
                 self.tmpUUID = "\(item.getTrimmedLocalID())~\(UUID().uuidString)"
             default:
                 if item.isLocalItem {
@@ -132,9 +132,15 @@ class SimpleUpload: UploadRequestParametrs {
     }
     
     var patch: URL {
-        return URL(string: destitantionURL.absoluteString
-            .appending("/")
-            .appending(tmpUUID))!
+        switch uploadType {
+            case .sharedWithMe:
+                return destitantionURL
+                
+            default:
+                return URL(string: destitantionURL.absoluteString
+                    .appending("/")
+                    .appending(tmpUUID))!
+        }
     }
     
     var timeout: TimeInterval {
@@ -248,10 +254,19 @@ final class ResumableUpload: UploadRequestParametrs {
     }
     
     var patch: URL {
-        return URL(string: destitantionURL.absoluteString
-            .appending("/")
-            .appending(tmpUUID)
-            .appending("?upload-type=resumable"))!
+        switch uploadType {
+            case .sharedWithMe:
+                //Currenly is not supported by BE
+                assertionFailure()
+                return URL(string: destitantionURL.absoluteString
+                    .appending("&upload-type=resumable"))!
+                
+            default:
+                return URL(string: destitantionURL.absoluteString
+                    .appending("/")
+                    .appending(tmpUUID)
+                    .appending("?upload-type=resumable"))!
+        }
     }
     
     var timeout: TimeInterval {

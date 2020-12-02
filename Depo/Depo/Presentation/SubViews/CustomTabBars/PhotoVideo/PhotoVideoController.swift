@@ -45,13 +45,13 @@ final class PhotoVideoController: BaseViewController, NibInit, SegmentedChildCon
     
     private var resentlyUploadedObjectUUIDs = SynchronizedSet<String>()
     
-    private lazy var navBarManager = PhotoVideoNavBarManager(delegate: self)
+    private lazy var navBarManager = SegmentedChildNavBarManager(delegate: self)
     private lazy var collectionViewManager = PhotoVideoCollectionViewManager(collectionView: self.collectionView, delegate: self)
     private lazy var threeDotMenuManager = PhotoVideoThreeDotMenuManager(delegate: self)
     private lazy var bottomBarManager = PhotoVideoBottomBarManager(delegate: self)
     private lazy var dataSource = PhotoVideoDataSource(collectionView: self.collectionView, delegate: self)
     private lazy var analyticsManager: AnalyticsService = factory.resolve()
-    private lazy var scrollDirectionManager = PhotoVideoScrollDirectionManager()
+    private lazy var scrollDirectionManager = ScrollDirectionManager()
     private lazy var instaPickRoutingService = InstaPickRoutingService()
 
     private lazy var assetsFileCacheManager = AssetFileCacheManager()
@@ -632,8 +632,8 @@ extension PhotoVideoController: BaseItemInputPassingProtocol {
     func changeCover() {}
 }
 
-// MARK: - PhotoVideoNavBarManagerDelegate
-extension PhotoVideoController: PhotoVideoNavBarManagerDelegate {
+// MARK: - SegmentedChildNavBarManagerDelegate
+extension PhotoVideoController: SegmentedChildNavBarManagerDelegate {
     
     func onCancelSelectionButton() {
         stopEditingMode()

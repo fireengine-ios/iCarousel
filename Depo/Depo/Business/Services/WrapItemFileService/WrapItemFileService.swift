@@ -41,6 +41,7 @@ class WrapItemFileService: WrapItemFileOperations {
     let sharedFileService = SharedService()
     let uploadService = UploadService.default
     private let hiddenService = HiddenService()
+    private lazy var privateShareApiService = PrivateShareApiServiceImpl()
     
     
     func createsFolder(createFolder: CreatesFolder, success: FolderOperation?, fail: FailResponse?) {
@@ -111,6 +112,57 @@ class WrapItemFileService: WrapItemFileOperations {
             
         } else {
             success?()
+        }
+    }
+    
+    func endSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
+        guard let projectId = file.projectId else {
+            fail?(ErrorResponse.string("don't have projectId"))
+            return
+        }
+        
+        privateShareApiService.endShare(projectId: projectId, uuid: file.uuid) { response in
+            switch response {
+                case .success(()):
+                    success?()
+                    
+                case .failed(let error):
+                    fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func leaveSharing(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
+        guard let projectId = file.projectId, let subjectId = SingletonStorage.shared.accountInfo?.projectID else {
+            fail?(ErrorResponse.string("don't have projectId or subjectId"))
+            return
+        }
+        
+        privateShareApiService.leaveShare(projectId: projectId, uuid: file.uuid, subjectId: subjectId) { response in
+            switch response {
+                case .success(()):
+                    success?()
+                    
+                case .failed(let error):
+                    fail?(ErrorResponse.error(error))
+            }
+        }
+    }
+    
+    func moveToTrashShared(file: WrapData, success: FileOperationSucces?, fail: FailResponse?) {
+        guard let projectId = file.projectId else {
+            fail?(ErrorResponse.string("don't have projectId"))
+            return
+        }
+        
+        privateShareApiService.moveToTrash(projectId: projectId, uuid: file.uuid) { response in
+            switch response {
+                case .success(()):
+                    success?()
+                    
+                case .failed(let error):
+                    fail?(ErrorResponse.error(error))
+            }
         }
     }
     
@@ -225,13 +277,43 @@ class WrapItemFileService: WrapItemFileOperations {
     func downloadDocuments(items: [WrapData], success: FileOperationSucces?, fail: FailResponse?) {
         let downloadItems = remoteWrapDataItems(files: items)
         
-        remoteFileService.downloadDocument(items: downloadItems, success: success, fail: fail)
+        let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil || !$0.isOwner }
+        
+        createDownloadUrls(for: itemsWithoutUrl) { [weak self] in
+            self?.remoteFileService.downloadDocument(items: downloadItems, success: success, fail: fail)
+        }
     }
     
     func download(items: [WrapData], toPath: String, success: FileOperationSucces?, fail: FailResponse?) {
         let downloadItems = remoteWrapDataItems(files: items)
         
-        remoteFileService.download(items: downloadItems, success: success, fail: fail)
+        let itemsWithoutUrl = items.filter { $0.tmpDownloadUrl == nil || !$0.isOwner }
+        
+        createDownloadUrls(for: itemsWithoutUrl) { [weak self] in
+            self?.remoteFileService.download(items: downloadItems, success: success, fail: fail)
+        }
+    }
+    
+    private func createDownloadUrls(for items: [WrapData], completion: @escaping VoidHandler) {
+        let group = DispatchGroup()
+        
+        items.forEach { item in
+            group.enter()
+            
+            guard let projectId = item.projectId else {
+                group.leave()
+                return
+            }
+            
+            privateShareApiService.createDownloadUrl(projectId: projectId, uuid: item.uuid) { response in
+                if case let ResponseResult.success(urlToDownload) = response {
+                    item.tmpDownloadUrl = urlToDownload.url
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main, execute: completion)
     }
     
     func download(itemsByAlbums: [AlbumItem: [Item]], success: FileOperationSucces?, fail: FailResponse?) {

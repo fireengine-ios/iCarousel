@@ -33,6 +33,9 @@ class ViewController: UIViewController {
     var preferredNavigationBarStyle: NavigationBarStyle {
         return .clear
     }
+    
+    var needCheckModalPresentationStyle = true
+    
     // MARK: - Helpers
     
     func setStatusBarHiddenForLandscapeIfNeed(_ hidden: Bool) {
@@ -60,6 +63,10 @@ class ViewController: UIViewController {
 extension UIViewController {
     func checkModalPresentationStyle() {
         guard #available(iOS 13.0, *) else {
+            return
+        }
+        
+        if (self as? ViewController)?.needCheckModalPresentationStyle == false {
             return
         }
         

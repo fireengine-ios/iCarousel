@@ -211,7 +211,7 @@ class PhotoVideoDetailPresenter: BasePresenter, PhotoVideoDetailModuleInput, Pho
             interactor.deleteSelectedItem(type: type)
         case .removeFromFavorites, .addToFavorites:
             interactor.onViewIsReady()
-        case .hide, .unhide, .moveToTrash, .restore:
+        case .hide, .unhide, .moveToTrash, .restore, .moveToTrashShared:
             interactor.deleteSelectedItem(type: type)
         default:
             break
@@ -421,5 +421,55 @@ extension PhotoVideoDetailPresenter: PhotoInfoViewControllerOutput {
     
     func tapGesture(recognizer: UITapGestureRecognizer) {
         view.closeDetailViewIfNeeded()
+    }
+    
+    func onSelectSharedContact(_ contact: SharedContact) {
+        guard let index = interactor.currentItemIndex else {
+            return
+        }
+        let currentItem = interactor.allItems[index]
+        router.openPrivateShareAccessList(projectId: currentItem.projectId ?? "",
+                                          uuid: currentItem.uuid,
+                                          contact: contact,
+                                          fileType: currentItem.fileType)
+    }
+        
+    func onAddNewShare() {
+        guard let index = interactor.currentItemIndex else {
+            return
+        }
+        let currentItem = interactor.allItems[index]
+        router.openPrivateShare(for: currentItem)
+    }
+    
+    func showWhoHasAccess(shareInfo: SharedFileInfo) {
+        router.openPrivateShareContacts(with: shareInfo)
+    }
+    
+    func didUpdateSharingInfo(_ sharingInfo: SharedFileInfo) {
+        let item = WrapData(privateShareFileInfo: sharingInfo)
+        view.updateExpiredItem(item)
+        interactor.updateExpiredItem(item)
+    }
+    
+    func updateItem(_ item: WrapData) {
+        view.updateItem(item)
+    }
+    
+    func createNewUrl() {
+        interactor.createNewUrl()
+    }
+}
+
+//MARK: - PhotoVideoDetailRouterOutput
+
+extension PhotoVideoDetailPresenter: PhotoVideoDetailRouterOutput {
+    
+    func updateShareInfo() {
+        view.updateBottomDetailView()
+    }
+    
+    func deleteShareInfo() {
+        view.deleteShareInfo()
     }
 }

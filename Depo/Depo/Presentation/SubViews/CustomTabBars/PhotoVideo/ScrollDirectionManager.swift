@@ -1,5 +1,5 @@
 //
-//  PhotoVideoScrollDirectionManager.swift
+//  ScrollDirectionManager.swift
 //  Depo
 //
 //  Created by Konstantin on 9/17/18.
@@ -26,7 +26,7 @@ enum ScrollDirection {
 }
 
 
-class PhotoVideoScrollDirectionManager {
+final class ScrollDirectionManager {
 
     private (set) var scrollDirection: ScrollDirection = .none
     private var lastContentOffset: CGPoint = .zero

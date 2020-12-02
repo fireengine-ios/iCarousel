@@ -85,3 +85,9 @@ extension String {
         [fileName, fileExtension].joined(separator: ".")
     }
 }
+
+extension String {
+    var digits: String {
+        return components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+    }
+}

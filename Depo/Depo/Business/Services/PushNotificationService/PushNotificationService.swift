@@ -56,6 +56,15 @@ final class PushNotificationService {
         return true
     }
     
+    func assignUniversalLink(url: URL) -> Bool {
+        guard let path = url.absoluteString.components(separatedBy: "#!/").last, let action = UniversalLinkPath(rawValue: path)?.action else {
+            return false
+        }
+        debugLog("PushNotificationService received universal link with type \(action.rawValue)")
+        parse(options: nil, action: action)
+        return true
+    }
+    
     private func parse(options: [AnyHashable: Any]?, action: PushNotificationAction) {
         self.notificationAction = action
         
@@ -149,6 +158,8 @@ final class PushNotificationService {
         case .trashBin:
             openTabBarItem(index: .documentsScreenIndex, segmentIndex: DocumentsScreenSegmentIndex.trashBin.rawValue)
         case .hiddenBin: openHiddenBin()
+        case .sharedWithMe: openSharedWithMe()
+        case .sharedByMe: openShareByMe()
         }
         
         
@@ -177,7 +188,8 @@ final class PushNotificationService {
             if let navigationController = self.router.topNavigationController {
                 if navigationController.presentedViewController != nil {
                     self.router.pushOnPresentedView(viewController: controller)
-                } else if let existController = navigationController.viewControllers.first(where: { type(of: $0) == type(of: controller) }) {
+                } else if !(controller is SegmentedController), let existController = navigationController.viewControllers.first(where: { type(of: $0) == type(of: controller) }) {
+                    //TODO: add check child segments and refresh data protocol for update pages
                     if existController == navigationController.viewControllers.last {
                         return
                     }
@@ -466,5 +478,23 @@ final class PushNotificationService {
         }
         
         analyticsService.trackCustomGAEvent(eventCategory: .functions, eventActions: .openWithWidget, eventLabel: .success)
+    }
+    
+    private func openSharedWithMe() {
+        openSharedController(type: .withMe)
+    }
+    
+    private func openShareByMe() {
+        openSharedController(type: .byMe)
+    }
+    
+    private func openSharedController(type: PrivateShareType) {
+        guard let controller = router.sharedFiles as? SegmentedController,
+              let index = controller.viewControllers.firstIndex(where: { ($0 as? PrivateShareSharedFilesViewController)?.shareType == type }) else {
+            return
+        }
+        controller.loadViewIfNeeded()
+        controller.switchSegment(to: index)
+        pushTo(controller)
     }
 }
