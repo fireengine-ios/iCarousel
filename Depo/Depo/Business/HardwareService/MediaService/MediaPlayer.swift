@@ -279,7 +279,10 @@ final class MediaPlayer: NSObject {
     
     func play(list: [Item], startAt index: Int) {
         self.list = list
-        let newUrls = list.flatMap { $0.urlToFile }
+        let newUrls = list.compactMap { $0.urlToFile }
+        guard !newUrls.isEmpty else {
+            return
+        }
         play(urls: newUrls, startAt: index)
     }
     

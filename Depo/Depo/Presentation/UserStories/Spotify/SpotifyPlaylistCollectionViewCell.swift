@@ -145,7 +145,7 @@ final class SpotifyPlaylistCollectionViewCell: BaseCollectionViewCell {
                 }
             }
             
-            cellImageManager?.loadImage(thumbnailUrl: nil, url: imagePathUrl, completionBlock: imageSetBlock)
+            cellImageManager?.loadImage(thumbnailUrl: nil, url: imagePathUrl, isOwner: true, completionBlock: imageSetBlock)
         } else {
             imageView.image = placeholder
         }

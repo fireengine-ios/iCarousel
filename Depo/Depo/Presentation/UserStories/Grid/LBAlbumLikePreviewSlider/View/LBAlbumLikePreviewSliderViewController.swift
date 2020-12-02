@@ -13,7 +13,7 @@ final class LBAlbumLikePreviewSliderViewController: ViewController {
     
     @IBOutlet weak var collectionView: UICollectionView! {
         willSet {
-            newValue.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+            newValue.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         }
     }
     

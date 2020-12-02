@@ -12,6 +12,10 @@ final class FileInfoPresenter: BasePresenter {
     var interactor: FileInfoInteractorInput!
     var router: FileInfoRouterInput!
     
+    deinit {
+        ItemOperationManager.default.stopUpdateView(view: self)
+    }
+    
     // MARK : BasePresenter
     
     override func outputView() -> Waiting? {
@@ -25,6 +29,7 @@ extension FileInfoPresenter: FileInfoViewOutput {
     
     func viewIsReady() {
         interactor.viewIsReady()
+        ItemOperationManager.default.startUpdateView(view: self)
     }
     
     func validateName(newName: String) {
@@ -36,6 +41,26 @@ extension FileInfoPresenter: FileInfoViewOutput {
         interactor.onRename(newName: newName)
     }
     
+    func shareItem() {
+        if let item = interactor.item as? WrapData {
+            router.openPrivateShare(for: item)
+        }
+    }
+    
+    func showWhoHasAccess(shareInfo: SharedFileInfo) {
+        router.openPrivateShareContacts(with: shareInfo)
+    }
+    
+    func openShareAccessList(contact: SharedContact) {
+        guard let item = interactor.item, let projectId = item.projectId else {
+            return
+        }
+        
+        router.openPrivateShareAccessList(projectId: projectId,
+                                          uuid: item.uuid,
+                                          contact: contact,
+                                          fileType: item.fileType)
+    }
 }
 
 // MARK: FileInfoInteractorOutput
@@ -83,6 +108,9 @@ extension FileInfoPresenter: FileInfoInteractorOutput {
         view.showValidateNameSuccess()
     }
     
+    func displayShareInfo(_ sharingInfo: SharedFileInfo) {
+        view.showSharingInfo(sharingInfo)
+    }
 }
 
 // MARK: FileInfoModuleInput
@@ -91,4 +119,48 @@ extension FileInfoPresenter: FileInfoModuleInput {
 
 }
 
+//MARK: - FileInfoRouterOutput
 
+extension FileInfoPresenter: FileInfoRouterOutput {
+    
+    func updateSharingInfo() {
+        interactor.getSharingInfo()
+    }
+    
+    func deleteSharingInfo() {
+        view.deleteSharingInfo()
+    }
+}
+
+//MARK: - ItemOperationManagerViewProtocol
+
+extension FileInfoPresenter: ItemOperationManagerViewProtocol {
+    
+    func isEqual(object: ItemOperationManagerViewProtocol) -> Bool {
+        object === self
+    }
+    
+    func didShare(items: [BaseDataSourceItem]) {
+        if let uuid = interactor.item?.uuid, items.first(where: { $0.uuid == uuid }) != nil {
+            updateSharingInfo()
+        }
+    }
+    
+    func didEndShareItem(uuid: String) {
+        if uuid == interactor.item?.uuid {
+            updateSharingInfo()
+        }
+    }
+    
+    func didChangeRole(_ role: PrivateShareUserRole, contact: SharedContact, uuid: String) {
+        if uuid == interactor.item?.uuid, interactor.sharingInfo?.members?.contains(contact) == true {
+            updateSharingInfo()
+        }
+    }
+    
+    func didRemove(contact: SharedContact, fromItem uuid: String) {
+        if uuid == interactor.item?.uuid, interactor.sharingInfo?.members?.contains(contact) == true {
+            updateSharingInfo()
+        }
+    }
+}

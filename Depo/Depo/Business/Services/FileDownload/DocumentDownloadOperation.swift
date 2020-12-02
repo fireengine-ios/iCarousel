@@ -73,7 +73,18 @@ final class DocumentDownloadOperation: Operation {
         
         currentItem = items.removeFirst()
         
-        guard let nextItem = currentItem, let url = currentItem?.urlToFile?.byTrimmingQuery, let name = nextItem.name else {
+        guard
+            let nextItem = currentItem,
+            let urlToFile = nextItem.urlToFile,
+            let name = nextItem.name
+        else {
+            downloadNext()
+            return
+        }
+        
+        let urlToDownload = urlToFile.isExpired ? urlToFile.byTrimmingQuery : urlToFile
+        
+        guard let url = urlToDownload else {
             downloadNext()
             return
         }
@@ -95,15 +106,21 @@ final class DocumentDownloadOperation: Operation {
             
             if let error = error {
                 self.lastError = error
+            } else {
+                self.outputURLs.append(localUrl)
             }
             
             self.onDownload()
-            self.outputURLs.append(localUrl)
         }
 
     }
     
     private func saveDownloadedUrls() {
+        guard !outputURLs.isEmpty else {
+            semaphore.signal()
+            return
+        }
+        
         let router = RouterVC()
         let picker = UIDocumentPickerViewController(urls: outputURLs, in: .exportToService)
         picker.delegate = self

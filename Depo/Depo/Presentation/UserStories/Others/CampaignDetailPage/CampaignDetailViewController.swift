@@ -169,7 +169,7 @@ final class CampaignDetailViewController: BaseViewController, NibInit {
             }
         }
         
-        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
+        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, isOwner: true, completionBlock: imageSetBlock)
     }
 
     private func updateImageConstraint() {

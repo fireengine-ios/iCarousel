@@ -16,4 +16,5 @@ protocol FileInfoInteractorOutput: class {
     func failedUpdate(error: Error)
     func cancelSave(use name: String)
     func didValidateNameSuccess()
+    func displayShareInfo(_ sharingInfo: SharedFileInfo)
 }

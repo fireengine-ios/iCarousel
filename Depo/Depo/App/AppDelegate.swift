@@ -398,6 +398,11 @@ extension AppDelegate {
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
+            if PushNotificationService.shared.assignUniversalLink(url: url) {
+                PushNotificationService.shared.openActionScreen()
+                return true
+            }
+            
             Adjust.appWillOpen(url)
                 
             if let oldURL = Adjust.convertUniversalLink(url, scheme: SharedConstants.applicationQueriesSchemeShort) {

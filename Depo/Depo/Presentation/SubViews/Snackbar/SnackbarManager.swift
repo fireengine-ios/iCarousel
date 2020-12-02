@@ -85,7 +85,10 @@ enum SnackbarType {
              .removeFromFaceImageAlbum,
              .removeFromFavorites,
              .restore,
-             .unhide:
+             .unhide,
+             .endSharing,
+             .leaveSharing,
+             .moveToTrashShared:
             self = .nonCritical
             
         case .hide,
