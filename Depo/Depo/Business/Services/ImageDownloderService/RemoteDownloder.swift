@@ -116,6 +116,39 @@ class ImageDownloder {
         tokenList = tokenList + [path : downloadItem]
     }
     
+    func getImageData(patch: URL?, completeData: @escaping RemoteData) {
+        
+        guard let path = patch, let cachePath = path.byTrimmingQuery?.absoluteString else {
+            DispatchQueue.main.async {
+                completeData(nil)
+            }
+            return
+        }
+
+        if let imageData = SDWebImageManager.shared().imageCache?.diskImageData(forKey: cachePath) {
+            DispatchQueue.main.async {
+                completeData(imageData)
+            }
+            return
+        }
+        
+        let item = downloder.downloadImage(with: patch,
+                                           options: [.lowPriority/*,.useNSURLCache*/],
+                                           progress: nil) { image, data, error, bool in
+                                            if let data = data {
+                                                SDWebImageManager.shared().imageCache?.storeImageData(toDisk: data, forKey: cachePath)
+                                            }
+                                            
+                                            completeData(data)
+        }
+        
+        guard let downloadItem = item else {
+            return
+        }
+        
+        tokenList = tokenList + [path : downloadItem]
+    }
+    
     func getImageData(url: URL?, completeData:@escaping RemoteData) {
         
         guard let path = url else {
@@ -296,7 +329,6 @@ class ImageDownloder {
             })
         }
     }
-
     
     func cancelRequest(path: URL) {
         if let item = tokenList[path] {

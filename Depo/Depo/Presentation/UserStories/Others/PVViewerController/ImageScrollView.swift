@@ -10,6 +10,7 @@ import UIKit
 
 protocol ImageScrollViewDelegate: class {
     func imageViewFinishedLoading()
+    func onImageLoaded(image: UIImage?)
 }
 
 final class ImageScrollView: UIScrollView {
@@ -145,6 +146,7 @@ extension ImageScrollView: LoadingImageViewDelegate {
     func onImageLoaded(image: UIImage?) {
         setupFrame(for: image)
         updateZoom()
+        imageViewDelegate?.onImageLoaded(image: image)
     }
 }
 

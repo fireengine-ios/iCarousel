@@ -47,6 +47,7 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     @IBOutlet weak var bigSelectionView: UIView!
     @IBOutlet weak var topFavoritesStar: UIImageView!
     @IBOutlet weak var bottomFavoritesStar: UIImageView!
+    @IBOutlet weak var sharedIcon: UIImageView!
     
     
     override weak var delegate: LBCellsDelegate? {
@@ -98,8 +99,9 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.bigContentImageView.sd_cancelCurrentImageLoad()
-        self.smallContentImageView.sd_cancelCurrentImageLoad()
+        bigContentImageView.sd_cancelCurrentImageLoad()
+        smallContentImageView.sd_cancelCurrentImageLoad()
+        cellImageManager?.cancelImageLoading()
     }
     
     override func configureWithWrapper(wrappedObj: BaseDataSourceItem) {
@@ -186,8 +188,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         bottomFavoritesStar.isHidden = !wrappered.favorites
         if isBigSize() {
             bottomFavoritesStar.isHidden = true
+            sharedIcon.isHidden = true
         } else {
             topFavoritesStar.isHidden = true
+            sharedIcon.isHidden = !wrappered.isShared
         }
     
         
@@ -299,6 +303,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
         
         configureSmallSelectionImageView()
         setSelectionSmallSelectionImageView(false, isHidden: true)
+        
+        sharedIcon.isHidden = true
     }
     
     override func updating() {
@@ -374,6 +380,10 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     }
     
     override func setImage(with url: URL) {
+        guard let item = itemModel else {
+            return
+        }
+        
         let cacheKey = url.byTrimmingQuery
         cellImageManager = CellImageManager.instance(by: cacheKey)
         uuid = cellImageManager?.uniqueId
@@ -387,8 +397,12 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             }
         }
         
-        cellImageManager?.loadImage(thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
+        cellImageManager?.loadImage(item: item, thumbnailUrl: nil, url: url, completionBlock: imageSetBlock)
         
         isAlreadyConfigured = true
+    }
+    
+    override func cleanCell() {
+        cellImageManager?.cancelImageLoading()
     }
 }

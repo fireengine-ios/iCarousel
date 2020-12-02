@@ -84,7 +84,6 @@ final class HSSmartAlbumWarningPopUp: BasePopUpController {
 
     @IBOutlet private weak var premiumButton: GradientPremiumButton! {
         willSet {
-            newValue.titleEdgeInsets = UIEdgeInsetsMake(6, 14, 6, 14)
             newValue.setTitle(TextConstants.becomePremium, for: .normal)
 
             newValue.titleLabel?.font = UIFont.TurkcellSaturaBolFont(size: 18)

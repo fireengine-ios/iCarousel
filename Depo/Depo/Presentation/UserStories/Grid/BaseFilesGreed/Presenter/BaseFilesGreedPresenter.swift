@@ -335,6 +335,15 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         }
     }
     
+    func openPrivateShareFiles() {
+        router.openSharedFilesController()
+    }
+    
+    func openPrivateSharedItem(entity: BaseDataSourceItem, sharedEnteties: [BaseDataSourceItem]) {
+        onItemSelected(item: entity, from: [sharedEnteties])
+    }
+    
+    
     //MARK : BasePresenter
     
     override func outputView() -> Waiting? {
