@@ -1785,8 +1785,8 @@
 "private_share_start_page_role_1" = "Редактор";
 "private_share_start_page_role_2" = "Просмотревшие";
 "private_share_role_selection_page_name" = "Доступ";
-"private_share_role_selection_role_1" = "Имеющие возможность редактировать";
-"private_share_role_selection_role_2" = "Имеющие доступ к просмотру";
+"private_share_role_selection_role_1" = "Редактор";
+"private_share_role_selection_role_2" = "Просматривающие";
 "private_share_msisdn_format" = "Пожалуйста, введите действующий номер GSM";
 "private_share_start_page_share_success" = "Публикация отправлена успешно.";
 "private_share_cancel_confirm" = "Вы уверены, что хотите выйти?";

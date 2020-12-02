@@ -1771,8 +1771,8 @@
 "private_share_start_page_role_1" = "Vorbereitet von";
 "private_share_start_page_role_2" = "Bildanzeiger";
 "private_share_role_selection_page_name" = "Zugriff";
-"private_share_role_selection_role_1" = "Kann bearbeiten";
-"private_share_role_selection_role_2" = "Kann anzeigen";
+"private_share_role_selection_role_1" = "Vorbereitet von";
+"private_share_role_selection_role_2" = "Bildanzeiger";
 "private_share_msisdn_format" = "Bitte geben Sie eine gültige GSM-Nummer ein.";
 "private_share_start_page_share_success" = "Teilen ist erfolgreich.";
 "private_share_cancel_confirm" = "Sind Sie sicher, dass Sie aufhören wollen?";

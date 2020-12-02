@@ -115,8 +115,6 @@
 "Add to Favorites" = "Shtoni tek preferencat ";
 "Copy" = "Kopjoni ";
 "Create a Story" = "Krijoni një histori ";
-"Share Via Link" = "Shpërndajeni nëpërmjet linkut";
-"Original Size" = "Madhësia Origjinale";
 "Share Via Link" = "Kopjo Lidhjen";
 "Original Size" = "Dërgo kopjen e tij/saj";
 "Small Size" = "Përmasa e Vogël ";
@@ -1816,8 +1814,8 @@
 "private_share_start_page_role_1" = "Përpilues";
 "private_share_start_page_role_2" = "Imazhues";
 "private_share_role_selection_page_name" = "Qasje";
-"private_share_role_selection_role_1" = "Mund të përpilojë";
-"private_share_role_selection_role_2" = "Mund të imazhojë";
+"private_share_role_selection_role_1" = "Përpilues";
+"private_share_role_selection_role_2" = "Imazhues";
 "private_share_msisdn_format" = "Ju lutemi, fute (shkruaje) një numër të vlefshëm GSM.";
 "private_share_start_page_share_success" = "Ndarja është e suksesshme.";
 "private_share_cancel_confirm" = "Je i sigurt që dëshiron të dalësh?";

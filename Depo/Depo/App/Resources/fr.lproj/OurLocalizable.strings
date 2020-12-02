@@ -2077,8 +2077,8 @@ Please check I have understood the intended command here*/
 "private_share_start_page_role_1" = "Organisateur";
 "private_share_start_page_role_2" = "Spectateurs";
 "private_share_role_selection_page_name" = "Accès";
-"private_share_role_selection_role_1" = "Il peut organiser";
-"private_share_role_selection_role_2" = "Il peut voir";
+"private_share_role_selection_role_1" = "Organisateur";
+"private_share_role_selection_role_2" = "Spectateurs";
 "private_share_msisdn_format" = "Entrez un numéro de GSM valide s'il vous plaît!";
 "private_share_start_page_share_success" = "Le partage est réussi.";
 "private_share_cancel_confirm" = "Êtes-vous sûr de vouloir quitter?";

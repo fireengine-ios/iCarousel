@@ -1819,8 +1819,8 @@
 "private_share_start_page_role_1" = "Editor";
 "private_share_start_page_role_2" = "Viewer";
 "private_share_role_selection_page_name" = "Access";
-"private_share_role_selection_role_1" = "Can edit";
-"private_share_role_selection_role_2" = "Can view";
+"private_share_role_selection_role_1" = "Editor";
+"private_share_role_selection_role_2" = "Viewer";
 "private_share_msisdn_format" = "Please enter valid GSM number";
 "private_share_start_page_share_success" = "Shared Successfully";
 "private_share_cancel_confirm" = "Are you sure to quit?";
