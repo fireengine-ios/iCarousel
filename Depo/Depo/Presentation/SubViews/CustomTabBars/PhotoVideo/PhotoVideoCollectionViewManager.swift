@@ -146,7 +146,7 @@ final class PhotoVideoCollectionViewManager {
         scrolliblePopUpView.delegate = self
         scrolliblePopUpView.isEnable = true
         
-        scrolliblePopUpView.addNotPermittedCardViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning])
+        scrolliblePopUpView.addNotPermittedCardViewTypes(types: [.waitingForWiFi, .autoUploadIsOff, .freeAppSpace, .freeAppSpaceLocalWarning, .sharedWithMeUpload])
         
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(scrolliblePopUpView)

@@ -221,7 +221,7 @@ class CardsContainerView: UIView, UITableViewDelegate, UITableViewDataSource, Sw
             
             let view = getViewForOperation(operation: type)
             
-            if type == .sync || type == .upload || type == .prepareToAutoSync {
+            if type.isContained(in: [.sync, .upload, .prepareToAutoSync, .sharedWithMeUpload]) {
                 view.shouldScrollToTop = true
             }
             
