@@ -213,7 +213,8 @@ final class FileInfoView: UIView, FromNib {
             case .success(let info):
                 sharingInfo = info
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
+//                UIApplication.showErrorAlert(message: error.description)
+                break
             }
             group.leave()
         }
