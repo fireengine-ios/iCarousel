@@ -51,7 +51,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     
     @IBOutlet private weak var userRoleButton: UIButton! {
         willSet {
-            newValue.setTitle(TextConstants.privateShareStartPageEditorButton, for: .normal)
+            newValue.setTitle(TextConstants.privateShareStartPageViewerButton, for: .normal)
             newValue.setTitleColor(.lrTealishFour, for: .normal)
             newValue.titleLabel?.font = .TurkcellSaturaDemFont(size: 18)
             newValue.tintColor = .lrTealishFour
@@ -63,7 +63,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     
     private weak var delegate: PrivateShareSelectPeopleViewDelegate?
     private var displayName = ""
-    private var role = PrivateShareUserRole.editor {
+    private var role = PrivateShareUserRole.viewer {
         didSet {
             userRoleButton.setTitle(role.title, for: .normal)
         }
@@ -79,7 +79,7 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     
     func clear() {
         setContact(info: ContactInfo(name: "", value: ""))
-        role = .editor
+        role = .viewer
     }
     
     //MARK: - Private methods

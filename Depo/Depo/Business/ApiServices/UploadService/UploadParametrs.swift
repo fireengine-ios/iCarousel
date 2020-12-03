@@ -110,7 +110,10 @@ class SimpleUpload: UploadRequestParametrs {
         let appopriateUploadType = (uploadType == .autoSync) ? "AUTO_SYNC" : "MANUAL"
         let lifecycleState = ApplicationStateHelper.shared.isBackground ? "BG": "FG"
         let connectionStatus = ReachabilityService.shared.uploadConnectionTypeName
-
+        
+        let name = item.name ?? tmpUUID
+        let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
+        
         header = header + [
             HeaderConstant.connectionType        : connectionStatus,
             HeaderConstant.uploadType            : appopriateUploadType,
@@ -119,7 +122,7 @@ class SimpleUpload: UploadRequestParametrs {
             HeaderConstant.XMetaStrategy         : uploadStrategy.rawValue,
             HeaderConstant.objecMetaDevice       : Device.deviceId ?? "",
 //            HeaderConstant.XMetaRecentServerHash : "s",
-            HeaderConstant.XObjectMetaFileName   : item.name ?? tmpUUID,
+            HeaderConstant.XObjectMetaFileName   : encodedName,
             HeaderConstant.XObjectMetaFavorites  : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
             HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
@@ -214,6 +217,9 @@ final class ResumableUpload: UploadRequestParametrs {
         let lifecycleState = ApplicationStateHelper.shared.isBackground ? "BG": "FG"
         let connectionType = ReachabilityService.shared.uploadConnectionTypeName
         
+        let name = item.name ?? tmpUUID
+        let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
+        
         header = header + [
             HeaderConstant.connectionType : connectionType,
             HeaderConstant.uploadType : currentUploadType,
@@ -221,7 +227,7 @@ final class ResumableUpload: UploadRequestParametrs {
             HeaderConstant.ContentType : item.uploadContentType,
             HeaderConstant.XMetaStrategy : uploadStrategy.rawValue,
             HeaderConstant.objecMetaDevice : Device.deviceId ?? "",
-            HeaderConstant.XObjectMetaFileName : item.name ?? tmpUUID,
+            HeaderConstant.XObjectMetaFileName : encodedName,
             HeaderConstant.XObjectMetaFavorites : isFavorite ? "true" : "false",
             HeaderConstant.XObjectMetaParentUuid : rootFolder,
             HeaderConstant.XObjectMetaSpecialFolder : uploadTo.rawValue,
