@@ -141,10 +141,10 @@ extension DocumentDownloadOperation: UIDocumentPickerDelegate {
 
 extension DocumentDownloadOperation: OperationProgressServiceDelegate {
     func didSend(ratio: Float, bytes: Int, for url: URL) {
-        guard isExecuting, let item = currentItem, item.urlToFile?.byTrimmingQuery == url else {
+        guard isExecuting, let item = currentItem, (item.urlToFile == url || item.urlToFile?.byTrimmingQuery == url) else {
             return
         }
-
+       
         CardsManager.default.setProgress(ratio: ratio, operationType: .download, object: item)
         //            ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
     }
