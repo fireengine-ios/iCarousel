@@ -51,6 +51,7 @@ struct SharedFileInfoMetaData: Codable {
     let thumbnailLarge: URL?
     let thumbnailMedium: URL?
     let thumbnailSmall: URL?
+    let videoPreview: URL?
     
     let originalHash: String?
     let originalBytes: Int64?
@@ -70,6 +71,7 @@ struct SharedFileInfoMetaData: Codable {
         case thumbnailLarge = "Thumbnail-Large"
         case thumbnailMedium = "Thumbnail-Medium"
         case thumbnailSmall = "Thumbnail-Small"
+        case videoPreview = "Video-Preview"
         
         case originalHash = "X-Object-Meta-Ios-Metadata-Hash"
         case originalBytes = "Original-Bytes"
@@ -94,6 +96,7 @@ struct SharedFileInfoMetaData: Codable {
         thumbnailLarge = JSON(try container.decodeIfPresent(String.self, forKey: .thumbnailLarge) ?? "").url
         thumbnailMedium = JSON(try container.decodeIfPresent(String.self, forKey: .thumbnailMedium) ?? "").url
         thumbnailSmall = JSON(try container.decodeIfPresent(String.self, forKey: .thumbnailSmall) ?? "").url
+        videoPreview = JSON(try container.decodeIfPresent(String.self, forKey: .videoPreview) ?? "").url
         
         originalHash = try container.decodeIfPresent(String.self, forKey: .originalHash)
         specialFolderMeta = try container.decodeIfPresent(String.self, forKey: .specialFolderMeta)
