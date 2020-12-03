@@ -23,6 +23,10 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McC-As-BDa">
                                 <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="3By-Ty-TFb"/>
+                                    <constraint firstAttribute="height" constant="45" id="NYO-4j-XhT"/>
+                                </constraints>
                                 <connections>
                                     <action selector="onButtonTapped" destination="gTV-IL-0wX" eventType="touchUpInside" id="Gqe-f5-Dyy"/>
                                 </connections>
@@ -30,11 +34,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="McC-As-BDa" secondAttribute="trailing" id="0ca-zP-GXH"/>
-                            <constraint firstItem="McC-As-BDa" firstAttribute="leading" secondItem="iWg-4s-ve8" secondAttribute="leading" id="5n1-F4-aiE"/>
                             <constraint firstItem="McC-As-BDa" firstAttribute="top" secondItem="iWg-4s-ve8" secondAttribute="top" id="FEH-gp-Jwm"/>
                             <constraint firstAttribute="height" constant="45" id="FFB-0a-LpN"/>
                             <constraint firstAttribute="width" constant="45" id="JsB-Lp-qfk"/>
+                            <constraint firstItem="McC-As-BDa" firstAttribute="centerX" secondItem="iWg-4s-ve8" secondAttribute="centerX" id="fV4-II-NPw"/>
                             <constraint firstAttribute="bottom" secondItem="McC-As-BDa" secondAttribute="bottom" id="r0U-oH-fnJ"/>
                         </constraints>
                     </view>
