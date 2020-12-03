@@ -59,6 +59,7 @@ final class PrivateShareLocalSuggestionsViewController: UIViewController, NibIni
     weak var delegate: PrivateShareSelectSuggestionsDelegate?
 
     private let localContactsService = ContactsSuggestionServiceImpl()
+    private lazy var analytics = PrivateShareAnalytics()
     private var currentSuggestions = [SuggestedContact]()
 
     //MARK: - Public
@@ -109,6 +110,7 @@ extension PrivateShareLocalSuggestionsViewController: UITableViewDelegate, UITab
 
 extension PrivateShareLocalSuggestionsViewController: PrivateShareLocalContactCellDelegate {
     func didSelect(contactInfo: ContactInfo) {
+        analytics.addPhonebookSuggestion()
         delegate?.didSelect(contactInfo: contactInfo)
     }
 }

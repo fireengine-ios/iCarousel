@@ -46,6 +46,8 @@ struct AnalyticsDimension {
     
     let photoEditFilterType: String?
     
+    let shareParameters: [String: Int]?
+    
     var productParametrs: [String: Any] {
         var userOwnedPackages = ""
         userPackagesNames.forEach {
@@ -118,6 +120,9 @@ struct AnalyticsDimension {
         }
         if let photoEditFilterType = photoEditFilterType {
             dimesionDictionary[GADementionsFields.photoEditFilterType.text] = photoEditFilterType
+        }
+        if let shareParameters = shareParameters {
+            shareParameters.forEach { dimesionDictionary[$0.key] = $0.value }
         }
         return dimesionDictionary
     }

@@ -39,6 +39,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     private lazy var hideActionService: HideActionServiceProtocol = HideActionService()
     private lazy var smashActionService: SmashActionServiceProtocol = SmashActionService()
     private lazy var photoEditImageDownloader = PhotoEditImageDownloader()
+    private lazy var privateShareAnalytics = PrivateShareAnalytics()
     
     
     typealias FailResponse = (_ value: ErrorResponse) -> Void
@@ -128,6 +129,8 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         guard let items = sharingItems as? [WrapData] else {
             return
         }
+        
+        privateShareAnalytics.openPrivateShare()
         
         let controller = router.privateShare(items: items)
         router.presentViewController(controller: controller)
@@ -739,7 +742,14 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         
-        fileService.downloadDocuments(items: items, success: successAction(elementType: .downloadDocument), fail: failAction(elementType: .downloadDocument))
+        let successAction = { [weak self] in
+            if items.allSatisfy ({ !$0.isOwner }) {
+                self?.privateShareAnalytics.sharedWithMe(action: .download, on: items.first)
+            }
+            self?.successAction(elementType: .downloadDocument)()
+        }
+        
+        fileService.downloadDocuments(items: items, success: successAction, fail: failAction(elementType: .downloadDocument))
     }
     
     func download(item: [BaseDataSourceItem]) {
@@ -758,8 +768,15 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             if let item = item.first, item.fileType.isFaceImageAlbum || item.fileType.isFaceImageType {
                 downloadFaceImageAlbum(item: item)
             } else {
+                let successAction = { [weak self] in
+                    if item.allSatisfy ({ !$0.isOwner }) {
+                        self?.privateShareAnalytics.sharedWithMe(action: .download, on: item.first)
+                    }
+                    self?.successAction(elementType: .download, relatedItems: item)()
+                }
+                
                 fileService.download(items: item, toPath: "",
-                                     success: successAction(elementType: .download, relatedItems: item),
+                                     success: successAction,
                                      fail: failAction(elementType: .download))
             }
         } else if let albums = item as? [AlbumItem] {
@@ -968,6 +985,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         let successAction = { [weak self] in
+            self?.privateShareAnalytics.endShare(item: item)
             self?.output?.operationFinished(type: .endSharing)
             self?.successAction(elementType: .endSharing)()
         }
@@ -1000,6 +1018,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             return
         }
         let successAction = { [weak self] in
+            self?.privateShareAnalytics.leaveShare(item: item)
             self?.output?.operationFinished(type: .leaveSharing)
             self?.successAction(elementType: .leaveSharing)()
         }
@@ -1040,6 +1059,9 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         
         let okHandler: PopUpButtonHandler = { [weak self] vc in
             self?.analyticsService.trackFileOperationPopupGAEvent(operationType: .trash, label: .ok)
+            if items.allSatisfy({ !$0.isOwner }) {
+                self?.privateShareAnalytics.sharedWithMe(action: .delete, on: items.first)
+            }
             self?.output?.operationStarted(type: .moveToTrashShared)
             vc.close { [weak self] in
                 self?.moveToTrashShared(items)

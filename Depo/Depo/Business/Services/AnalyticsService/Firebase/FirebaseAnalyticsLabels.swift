@@ -323,6 +323,10 @@ enum GAEventLabel {
     enum PrivateShareEvent {
         case seeAll
         case privateShare
+        case apiSuggestion
+        case phonebookSuggestion
+        case contactPermission(PrivateShareAnalytics.ContactsPermissionType)
+        case duration(PrivateShareDuration)
         
         var text: String {
             switch self {
@@ -330,6 +334,34 @@ enum GAEventLabel {
                 return "See All"
             case .privateShare:
                 return "Private Share"
+            case .apiSuggestion:
+                return "API Suggestion"
+            case .phonebookSuggestion:
+                return "Phonebook Suggestion"
+            case .contactPermission(let type):
+                switch type {
+                case .allowed:
+                    return "allow"
+                case .denied:
+                    return "do not allow"
+                case .notAskAgain:
+                    return "do not ask again"
+                }
+            case .duration(let duration):
+                switch duration {
+                case .no:
+                    return "no duration"
+                case .hour:
+                    return "one hour"
+                case .day:
+                    return "one day"
+                case .week:
+                    return "one week"
+                case .month:
+                    return "one month"
+                case .year:
+                    return "one year"
+                }
             }
         }
     }

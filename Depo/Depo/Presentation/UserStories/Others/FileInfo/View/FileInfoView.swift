@@ -52,6 +52,7 @@ final class FileInfoView: UIView, FromNib {
     
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
     private lazy var shareApiService = PrivateShareApiServiceImpl()
+    private lazy var analytics = PrivateShareAnalytics()
     
     private var object: BaseDataSourceItem?
     
@@ -239,6 +240,10 @@ final class FileInfoView: UIView, FromNib {
         
         if let object = object {
             setupEditableState(for: object, projectId: sharingInfo.projectId, permissions: sharingInfo.permissions)
+        }
+        
+        if sharingInfoView.isHidden && needShow {
+            analytics.trackScreen(.shareInfo)
         }
         
         sharingInfoView.isHidden = !needShow

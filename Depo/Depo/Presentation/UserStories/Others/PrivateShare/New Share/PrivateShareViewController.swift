@@ -68,6 +68,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
     private lazy var shareApiService = PrivateShareApiServiceImpl()
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
     private lazy var router = RouterVC()
+    private lazy var analytics = PrivateShareAnalytics()
     
     override var keyboardHeight: CGFloat {
         didSet {
@@ -259,6 +260,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
             case .success:
                 if let items = self?.items {
                     ItemOperationManager.default.didShare(items: items)
+                    self?.analytics.successShare(items: items, duration: shareObject.duration, message: shareObject.invitationMessage)
                 }
                 SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareStartPageSuccess)
                 self?.dismiss(animated: true)

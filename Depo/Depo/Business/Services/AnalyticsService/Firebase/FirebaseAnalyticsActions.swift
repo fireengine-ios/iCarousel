@@ -107,6 +107,19 @@ enum GAEventAction {
     
     case openWithWidget
     case widgetOrder
+    
+    case endShare
+    case leaveShare
+    case contactPermission
+    case rename
+    case createNewFolder
+    case upload
+    case preview
+    case removeUser
+    case changeRoleFromEditorToViewer
+    case changeRoleFromViewerToEditor
+    case duration
+    case message
 
     var text: String {
         switch self {
@@ -289,6 +302,30 @@ enum GAEventAction {
             return "Opened with Widget"
         case .widgetOrder:
             return "Widget Order"
+        case .endShare:
+            return "End Share"
+        case .leaveShare:
+            return "Leave Share"
+        case .contactPermission:
+            return "Contact Permission"
+        case .rename:
+            return "Rename"
+        case .createNewFolder:
+            return "Create New Folder"
+        case .upload:
+            return "Upload"
+        case .preview:
+            return "Preview"
+        case .removeUser:
+            return "Remove User"
+        case .changeRoleFromViewerToEditor:
+            return "Role Change from Viever to Editor"
+        case .changeRoleFromEditorToViewer:
+            return "Role Change from Editor to Viewer"
+        case .duration:
+            return "Duration"
+        case .message:
+            return "Message"
         }
     }
 }

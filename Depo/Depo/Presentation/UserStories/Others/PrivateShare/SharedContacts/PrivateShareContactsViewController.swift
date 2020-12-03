@@ -34,6 +34,7 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
     
     private lazy var router = RouterVC()
     private lazy var privateShareApiService = PrivateShareApiServiceImpl()
+    private let analytics = PrivateShareAnalytics()
     
     //MARK: - View lifecycle
     
@@ -48,6 +49,7 @@ final class PrivateShareContactsViewController: BaseViewController, NibInit {
         setupTableView()
         
         ItemOperationManager.default.startUpdateView(view: self)
+        analytics.trackScreen(.whoHasAccess)
         
         //due to a problem in logic, we need to remove END SHARING button from who has access page for now. In the futur we will add this button with another logic
         endSharingButton.isHidden = true
