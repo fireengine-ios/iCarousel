@@ -39,8 +39,8 @@ struct SuggestedContact: Equatable {
         self.source = source
         name = contact.givenName
         familyName = contact.familyName
-        phones = contact.phoneNumbers.compactMap { $0.value.stringValue }
-        emails = contact.emailAddresses.compactMap { $0.value as String }
+        phones = contact.phoneNumbers.compactMap { $0.value.stringValue }.filter { Validator.isValid(contactsPhone: $0) || Validator.isValid(turkcellPhone: $0) }
+        emails = contact.emailAddresses.compactMap { $0.value as String }.filter { Validator.isValid(email: $0) }
         isLocal = true
     }
     
@@ -86,7 +86,7 @@ struct LocalContactsStorage {
         var result = [SuggestedContact]()
         let lowercasedString = stringToSearch.lowercased()
         cachedContacts.forEach { contact in
-            if contact.givenName.lowercased().contains(lowercasedString) || contact.familyName.lowercased().contains(lowercasedString)  {
+            if contact.givenName.lowercased().contains(lowercasedString) || contact.familyName.lowercased().contains(lowercasedString) {
                 result.append(SuggestedContact(with: contact, source: .name))
                 return
             }
@@ -110,7 +110,7 @@ struct LocalContactsStorage {
             }
         }
         
-        return result
+        return result.filter { !$0.phones.isEmpty || !$0.emails.isEmpty }
     }
     
     func getContactName(for phone: String, email: String) -> LocalContactNames {

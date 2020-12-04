@@ -256,6 +256,7 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
         debugLog("PHOTOEDIT: start")
         
         guard let item = item.first as? Item, let originalUrl = item.tmpDownloadUrl else {
+            completion?()
             debugLog("PHOTOEDIT: there's no item or originalUrl")
             return
         }
