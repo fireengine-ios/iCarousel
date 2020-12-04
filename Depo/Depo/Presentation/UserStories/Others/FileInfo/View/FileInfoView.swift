@@ -75,7 +75,7 @@ final class FileInfoView: UIView, FromNib {
     
     // MARK: Public Methods
     
-    func setObject(_ object: BaseDataSourceItem, completion: VoidHandler?) {
+    func setObject(_ object: BaseDataSourceItem, didSync: Bool, completion: VoidHandler?) {
         self.object = object
         resetUI()
         fileNameView.name = object.name
@@ -94,7 +94,7 @@ final class FileInfoView: UIView, FromNib {
             fileInfoView.set(createdDate: createdDate)
         }
         
-        updateShareInfo()
+        updateShareInfo(didSync: didSync)
         
         setupEditableState(for: object, projectId: object.projectId, permissions: nil)
         
@@ -144,8 +144,11 @@ final class FileInfoView: UIView, FromNib {
         fileNameView.hideKeyboard()
     }
     
-    func updateShareInfo() {
-        guard object?.isLocalItem == false, let projectId = object?.projectId, let uuid = object?.uuid else {
+    func updateShareInfo(didSync: Bool = false) {
+        guard !didSync,
+              object?.isLocalItem == false,
+              let projectId = object?.projectId,
+              let uuid = object?.uuid else {
             return
         }
         getSharingInfo(projectId: projectId, uuid: uuid)
@@ -213,8 +216,7 @@ final class FileInfoView: UIView, FromNib {
             case .success(let info):
                 sharingInfo = info
             case .failed(let error):
-//                UIApplication.showErrorAlert(message: error.description)
-                break
+                UIApplication.showErrorAlert(message: error.description)
             }
             group.leave()
         }
