@@ -294,7 +294,7 @@ class WrapItemFileService: WrapItemFileOperations {
         }
     }
     
-    private func createDownloadUrls(for items: [WrapData], completion: @escaping VoidHandler) {
+    func createDownloadUrls(for items: [WrapData], completion: @escaping VoidHandler) {
         let group = DispatchGroup()
         
         items.forEach { item in
@@ -341,10 +341,12 @@ class WrapItemFileService: WrapItemFileOperations {
         
         /// photo, video, files, folders
         if let sharedItems = sharedFiles as? [WrapData], !sharedItems.isEmpty {
-            
-            let remoteUUIDs = uuidsOfItemsThatHaveRemoteURL(files: sharedItems)
-            let folderUUIDs = remoteFoldersUUIDs(files: sharedItems)
-            uuidsToShare = remoteUUIDs + folderUUIDs
+
+            let downloadUrlUuids = uuidsOfItemsThatHaveRemoteURL(files: sharedItems)
+            let folderUuids = remoteFoldersUUIDs(files: sharedItems)
+            let remoteUuids = remoteItemsUUID(files: sharedItems)
+            let combined = Set(downloadUrlUuids + folderUuids + remoteUuids)
+            uuidsToShare = Array(combined)
             
         /// albums
         } else {
