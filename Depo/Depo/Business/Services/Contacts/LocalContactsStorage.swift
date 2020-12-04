@@ -39,7 +39,7 @@ struct SuggestedContact: Equatable {
         self.source = source
         name = contact.givenName
         familyName = contact.familyName
-        phones = contact.phoneNumbers.compactMap { $0.value.stringValue }.filter { Validator.isValid(contactsPhone: $0) }
+        phones = contact.phoneNumbers.compactMap { $0.value.stringValue }.filter { Validator.isValid(contactsPhone: $0) || Validator.isValid(turkcellPhone: $0) }
         emails = contact.emailAddresses.compactMap { $0.value as String }.filter { Validator.isValid(email: $0) }
         isLocal = true
     }
