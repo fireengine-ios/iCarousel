@@ -2189,7 +2189,6 @@ struct TextConstants {
     static let privateShareAccessDeleteUserSuccess = NSLocalizedString("private_share_info_access_role_remove", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharePlusButtonNoAction = NSLocalizedString("private_share_plus_button_no_action", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateSharePreviewNotReady = NSLocalizedString("private_share_preview_not_ready", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
-    
-    
     static let privateShareMoveToTrashSharedWithMeMessage = NSLocalizedString("private_share_confirm_trash_items", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareMaxNumberOfUsersMessageFormat = NSLocalizedString("private_share_start_max_number_of_users", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
 }
