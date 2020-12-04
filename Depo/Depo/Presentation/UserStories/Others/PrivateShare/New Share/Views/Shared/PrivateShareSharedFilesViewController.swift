@@ -141,7 +141,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         cardsContainer.delegate = self
         cardsContainer.isEnable = true
         
-        cardsContainer.addPermittedPopUpViewTypes(types: [.upload, .download])
+        let permittedTypes: [OperationType] = shareType.rootType == .byMe ? [.upload, .download] : [.sharedWithMeUpload, .download]
+        cardsContainer.addPermittedPopUpViewTypes(types: permittedTypes)
         
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(cardsContainer)
