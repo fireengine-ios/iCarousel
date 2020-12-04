@@ -23,10 +23,6 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McC-As-BDa">
                                 <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="45" id="3By-Ty-TFb"/>
-                                    <constraint firstAttribute="height" constant="45" id="NYO-4j-XhT"/>
-                                </constraints>
                                 <connections>
                                     <action selector="onButtonTapped" destination="gTV-IL-0wX" eventType="touchUpInside" id="Gqe-f5-Dyy"/>
                                 </connections>
@@ -34,11 +30,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="McC-As-BDa" firstAttribute="top" secondItem="iWg-4s-ve8" secondAttribute="top" id="FEH-gp-Jwm"/>
-                            <constraint firstAttribute="height" constant="45" id="FFB-0a-LpN"/>
-                            <constraint firstAttribute="width" constant="45" id="JsB-Lp-qfk"/>
-                            <constraint firstItem="McC-As-BDa" firstAttribute="centerX" secondItem="iWg-4s-ve8" secondAttribute="centerX" id="fV4-II-NPw"/>
+                            <constraint firstAttribute="trailing" secondItem="McC-As-BDa" secondAttribute="trailing" id="Ero-Gy-9Ow"/>
+                            <constraint firstAttribute="width" constant="45" id="kez-yI-bV0"/>
+                            <constraint firstItem="McC-As-BDa" firstAttribute="leading" secondItem="iWg-4s-ve8" secondAttribute="leading" id="nzr-zH-BuI"/>
+                            <constraint firstItem="McC-As-BDa" firstAttribute="top" secondItem="iWg-4s-ve8" secondAttribute="top" id="qy8-Mb-qLe"/>
                             <constraint firstAttribute="bottom" secondItem="McC-As-BDa" secondAttribute="bottom" id="r0U-oH-fnJ"/>
+                            <constraint firstAttribute="height" constant="45" id="tKt-uH-wPw"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgH-Lr-ooH">
@@ -52,12 +49,11 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="FgH-Lr-ooH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CUJ-4L-5Vr"/>
-                <constraint firstItem="iWg-4s-ve8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Cb5-Yc-TOf"/>
-                <constraint firstAttribute="trailing" secondItem="iWg-4s-ve8" secondAttribute="trailing" id="KS1-mu-2vD"/>
                 <constraint firstAttribute="trailing" secondItem="FgH-Lr-ooH" secondAttribute="trailing" id="Tn3-Ua-O2N"/>
                 <constraint firstItem="iWg-4s-ve8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dDu-RG-2RX"/>
                 <constraint firstItem="FgH-Lr-ooH" firstAttribute="top" secondItem="iWg-4s-ve8" secondAttribute="bottom" constant="1.5" id="fC0-RH-afa"/>
                 <constraint firstAttribute="bottom" secondItem="FgH-Lr-ooH" secondAttribute="bottom" id="kuC-tI-NGI"/>
+                <constraint firstItem="iWg-4s-ve8" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="lkq-oV-2FY"/>
             </constraints>
             <size key="customSize" width="430" height="87"/>
             <connections>
