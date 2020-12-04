@@ -22,7 +22,7 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     
     func didEndReload()
     
-    func showActions(for item: WrapData)
+    func showActions(for item: WrapData, sender: Any)
     
     func needToShowSpinner()
     func needToHideSpinner()
@@ -526,7 +526,7 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollec
             return
         }
         
-        delegate?.showActions(for: item)
+        delegate?.showActions(for: item, sender: sender)
     }
 }
 
