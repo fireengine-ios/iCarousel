@@ -76,6 +76,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             shareTypes.remove(.original)
         }
         
+        if sharingItems.contains(where: { $0.isLocalItem }) {
+            shareTypes.remove(.private)
+        }
+        
         shareTypes.forEach {
             controler.addAction(getAction(shareType: $0, sourceRect: sourceRect))
         }
