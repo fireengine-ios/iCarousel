@@ -84,7 +84,6 @@ final class PhotoVideoDetailViewController: BaseViewController {
     }
     
     private(set) var objects = [Item]()
-    private(set) var syncedUuids = [String]()
     
     private var selectedItem: Item? {
         guard let index = selectedIndex else {
@@ -276,8 +275,7 @@ final class PhotoVideoDetailViewController: BaseViewController {
     private func updateFileInfo() {
         guard let selectedItem = selectedItem else { return }
         
-        let didSync = syncedUuids.contains(selectedItem.uuid)
-        bottomDetailView?.setObject(selectedItem, didSync: didSync) {
+        bottomDetailView?.setObject(selectedItem) {
             self.output.getPersonsForSelectedPhoto(completion: nil)
         }
     }
@@ -515,12 +513,7 @@ extension PhotoVideoDetailViewController: PhotoVideoDetailViewInput {
     }
     
     func updateBottomDetailView() {
-        guard let selectedItem = selectedItem else {
-            return
-        }
-
-        let didSync = syncedUuids.contains(selectedItem.uuid)
-        bottomDetailView?.updateShareInfo(didSync: didSync)
+        bottomDetailView?.updateShareInfo()
     }
     
     func deleteShareInfo() {
@@ -587,8 +580,6 @@ extension PhotoVideoDetailViewController: ItemOperationManagerViewProtocol {
         guard let indexToChange = objects.index(where: { $0.isLocalItem && $0.getTrimmedLocalID() == item.getTrimmedLocalID() }) else {
             return
         }
-        
-        syncedUuids.append(item.uuid)
         
         //need for display local image
         item.patchToPreview = objects[indexToChange].patchToPreview
