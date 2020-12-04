@@ -90,11 +90,21 @@ final class ShareCardContentManager {
     }
     
     private func shareOrignalSize(item: BaseDataSourceItem) {
-        guard let item = item as? WrapData, let file = FileForDownload(forMediumURL: item) else {
-            assertionFailure()
-            return
+        if let item = item as? WrapData {
+            if item.tmpDownloadUrl == nil {
+                fileService.createDownloadUrls(for: [item]) { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    if let file = FileForDownload(forOriginalURL: item) {
+                        self.shareFiles(filesForDownload: [file], sourceRect: nil, shareType: .originalSize)
+                    }
+                }
+            } else if let file = FileForDownload(forOriginalURL: item) {
+                shareFiles(filesForDownload: [file], sourceRect: nil, shareType: .originalSize)
+            }
         }
-        shareFiles(filesForDownload: [file], sourceRect: nil, shareType: .originalSize)
     }
     
     private func shareFiles(filesForDownload: [FileForDownload], sourceRect: CGRect?, shareType: NetmeraEventValues.ShareMethodType) {
