@@ -1792,7 +1792,7 @@
 "private_share_cancel_confirm" = "Вы уверены, что хотите выйти?";
 "private_share_details_page_name" = "Опубликованные Элементы";
 "private_share_shared_by_me_tab" = "Опубликованное Мной";
-"private_share_shared_with_me_tab" = "Отправленные Публикации";
+"private_share_shared_with_me_tab" = "Общие файлы";
 "private_share_info_section_name" = "Информация о Публикации";
 "private_share_info_number_of_people" = "Публикация доступна %d людям.";
 "private_share_info_role_1" = "Публикатор";
@@ -1816,7 +1816,7 @@
 "private_leave_sharing_confirm" = "Вы уверены, что хотите выйти из общего доступа?";
 "private_share_leave_sharing_action_title" = "Покинуть Общий Доступ";
 "private_share_who_has_access_role_4" = "Другие";
-"private_share_all_files_section_1" = "Публикации Общего Доступа";
+"private_share_all_files_section_1" = "Общие файлы";
 "private_share_all_files_section_1_see_all" = "Просмотреть все";
 "private_share_all_files_section_2" = "Мои Файлы";
 "private_share_access_role_1" = "Редактор";
