@@ -42,6 +42,8 @@ final class FileInfoShareContactCell: UICollectionViewCell {
             newValue.textColor = .lrGreyishBrownThree
             newValue.font = .TurkcellSaturaRegFont(size: 14)
             newValue.textAlignment = .center
+            newValue.adjustsFontSizeToFitWidth = true
+            newValue.minimumScaleFactor = 0.7
         }
     }
     

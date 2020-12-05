@@ -2060,7 +2060,7 @@ Please check I have understood the intended command here*/
 "private_share_option" = "Partagez avec une personne";
 "private_share_start_page_name" = "Partagez";
 "private_share_start_page_people_selection_section_name" = "Ajoutez les contacts";
-"private_share_start_page_enter_user_field" = "Entrez votre e-mail ou votre numéro GSM (avec le Code du Pays)";
+"private_share_start_page_enter_user_field" = "Entrez e-mail ou numéro de GSM (avec le code du pays)";
 "private_share_start_page_suggestions_section" = "Contacts recommandés";
 "private_share_start_page_shared_with_section" = "Contacts partagés";
 "private_share_start_page_add_message_section_name" = "Ajoutez un message";
@@ -2077,8 +2077,8 @@ Please check I have understood the intended command here*/
 "private_share_start_page_role_1" = "Organisateur";
 "private_share_start_page_role_2" = "Spectateurs";
 "private_share_role_selection_page_name" = "Accès";
-"private_share_role_selection_role_1" = "Il peut organiser";
-"private_share_role_selection_role_2" = "Il peut voir";
+"private_share_role_selection_role_1" = "Organisateur";
+"private_share_role_selection_role_2" = "Spectateurs";
 "private_share_msisdn_format" = "Entrez un numéro de GSM valide s'il vous plaît!";
 "private_share_start_page_share_success" = "Le partage est réussi.";
 "private_share_cancel_confirm" = "Êtes-vous sûr de vouloir quitter?";

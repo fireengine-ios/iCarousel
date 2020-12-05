@@ -1785,8 +1785,8 @@
 "private_share_start_page_role_1" = "Düzenleyen";
 "private_share_start_page_role_2" = "Görüntüleyen";
 "private_share_role_selection_page_name" = "Erişim";
-"private_share_role_selection_role_1" = "Düzenleyebilir";
-"private_share_role_selection_role_2" = "Görüntüleyebilir";
+"private_share_role_selection_role_1" = "Düzenleyen";
+"private_share_role_selection_role_2" = "Görüntüleyen";
 "private_share_msisdn_format" = "Lütfen geçerli bir GSM numarası gir.";
 "private_share_start_page_share_success" = "Paylaşım başarılı.";
 "private_share_cancel_confirm" = "Çıkmak istediğinden emin misin?";

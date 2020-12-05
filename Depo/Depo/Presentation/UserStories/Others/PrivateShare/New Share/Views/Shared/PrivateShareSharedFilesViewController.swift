@@ -213,8 +213,8 @@ extension PrivateShareSharedFilesViewController: PrivateShareSharedFilesCollecti
         hideSpinner()
     }
     
-    func showActions(for item: WrapData) {
-        itemThreeDotsManager.showActions(for: shareType, item: item, sender: self)
+    func showActions(for item: WrapData, sender: Any) {
+        itemThreeDotsManager.showActions(for: shareType, item: item, sender: sender)
     }
     
     func needToHideSpinner() {

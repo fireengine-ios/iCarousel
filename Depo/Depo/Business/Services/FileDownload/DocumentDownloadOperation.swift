@@ -23,6 +23,8 @@ final class DocumentDownloadOperation: Operation {
     private var isSaved = false
     private var lastError: Error?
     
+    private var fakeRatio: Float = 0.0
+    
     
     //MARK: - Init
     
@@ -62,6 +64,8 @@ final class DocumentDownloadOperation: Operation {
     //MARK: - Private
     
     private func downloadNext() {
+        fakeRatio = 0
+        
         guard !isCancelled else {
             return
         }
@@ -138,11 +142,19 @@ extension DocumentDownloadOperation: UIDocumentPickerDelegate {
 
 extension DocumentDownloadOperation: OperationProgressServiceDelegate {
     func didSend(ratio: Float, bytes: Int, for url: URL) {
-        guard isExecuting, let item = currentItem, item.urlToFile?.byTrimmingQuery == url else {
+        guard isExecuting, let item = currentItem, (item.urlToFile == url || item.urlToFile?.byTrimmingQuery == url) else {
             return
         }
-
-        CardsManager.default.setProgress(ratio: ratio, operationType: .download, object: item)
+       
+        let ratioToShow: Float
+        if item.isFolder == true {
+            fakeRatio = fakeRatio < 1.0 ? fakeRatio + 0.001 : 0
+            ratioToShow = fakeRatio
+        } else {
+            ratioToShow = ratio
+        }
+        
+        CardsManager.default.setProgress(ratio: ratioToShow, operationType: .download, object: item)
         //            ItemOperationManager.default.setProgressForDownloadingFile(file: item, progress: ratio)
     }
 }
