@@ -40,4 +40,20 @@ final class Validator {
         let result = phoneTest.evaluate(with: phoneNumber)
         return result
     }
+    
+    static func isValid(turkcellPhone: String) -> Bool {
+        guard !turkcellPhone.contains("+") else {
+            return false
+        }
+        
+        let digits = turkcellPhone.digits
+        if digits.count == 10, digits.first == "5" {
+            return true
+        } else if digits.count == 11, digits.prefix(2) == "05" {
+            return true
+        } else {
+            return false
+        }
+        
+    }
 }

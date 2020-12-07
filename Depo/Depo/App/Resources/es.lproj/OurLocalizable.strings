@@ -1813,8 +1813,8 @@
 "private_share_start_page_role_1" = "Editor";
 "private_share_start_page_role_2" = "Personas que han visto";
 "private_share_role_selection_page_name" = "Acceso";
-"private_share_role_selection_role_1" = "Puede editar";
-"private_share_role_selection_role_2" = "Puede visualizar";
+"private_share_role_selection_role_1" = "Editor";
+"private_share_role_selection_role_2" = "Personas que han visto";
 "private_share_msisdn_format" = "Por favor, introduce un número de GSM válido!";
 "private_share_start_page_share_success" = "La compartición lograda.";
 "private_share_cancel_confirm" = "¿Estás seguro de que quieres salir?";

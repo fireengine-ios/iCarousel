@@ -1771,8 +1771,8 @@
 "private_share_start_page_role_1" = "Editat de";
 "private_share_start_page_role_2" = "Vizualizat de";
 "private_share_role_selection_page_name" = "Acces";
-"private_share_role_selection_role_1" = "Poate fi editat";
-"private_share_role_selection_role_2" = "Poate fi vizualizat";
+"private_share_role_selection_role_1" = "Editat de";
+"private_share_role_selection_role_2" = "Vizualizat de";
 "private_share_msisdn_format" = "Te rugăm să introduci un număr GSM valabil.";
 "private_share_start_page_share_success" = "Partajare Reușită.";
 "private_share_cancel_confirm" = "Ești sigur ca vrei să ieși?";

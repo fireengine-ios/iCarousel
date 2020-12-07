@@ -1773,14 +1773,14 @@
 "private_share_start_page_role_1" = "Користувачі, що мають доступ до редагування";
 "private_share_start_page_role_2" = "Користувачі, що мають доступ до перегляду";
 "private_share_role_selection_page_name" = "Доступ";
-"private_share_role_selection_role_1" = "Дозвіл на редагування";
-"private_share_role_selection_role_2" = "Дозвіл на перегляд";
+"private_share_role_selection_role_1" = "Користувачі, що мають доступ до редагування";
+"private_share_role_selection_role_2" = "Користувачі, що мають доступ до перегляду";
 "private_share_msisdn_format" = "Будь ласка, введіть дійсний номер мобільного телефону.";
 "private_share_start_page_share_success" = "Надання доступу пройшло успішно.";
 "private_share_cancel_confirm" = "Ви дійсно хочеш вийти?";
 "private_share_details_page_name" = "Елементи у спільному доступі";
-"private_share_shared_by_me_tab" = "Файли у спільному доступі";
-"private_share_shared_with_me_tab" = "Користувачі, що мають доступ";
+"private_share_shared_by_me_tab" = "Ділиться мною";
+"private_share_shared_with_me_tab" = "Поділився зі мною";
 "private_share_info_section_name" = "Інформація про спільний доступ";
 "private_share_info_number_of_people" = "Спільний доступ мають %d користувачів.";
 "private_share_info_role_1" = "Власник інформації";
@@ -1804,7 +1804,7 @@
 "private_leave_sharing_confirm" = "Ви впевнені, що бажаєте вийти із спільного користування?";
 "private_share_leave_sharing_action_title" = "Вийти зі спільного користування";
 "private_share_who_has_access_role_4" = "Інший";
-"private_share_all_files_section_1" = "Користувачі спільного користування";
+"private_share_all_files_section_1" = "Поділився зі мною";
 "private_share_all_files_section_1_see_all" = "Переглянути все";
 "private_share_all_files_section_2" = "Мої файли";
 "private_share_access_role_1" = "Відредаговані";

@@ -214,7 +214,8 @@ final class FileInfoView: UIView, FromNib {
             case .success(let info):
                 sharingInfo = info
             case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
+                //we can't show alert here because BE always return error after manual sync photo from preview
+                debugPrint("getSharingInfo error - \(error.description)")
             }
             group.leave()
         }

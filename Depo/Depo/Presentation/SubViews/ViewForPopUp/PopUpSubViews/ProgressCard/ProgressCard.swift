@@ -98,6 +98,11 @@ final class ProgressCard: BaseCardView, ProgressCardProtocol {
             titleLabel.text = TextConstants.popUpDownload
             imageView.image = iconImage
             
+        case .sharedWithMeUpload:
+            operationLabel.text = ""
+            titleLabel.text = String(format: TextConstants.popUpUploading, networkType)
+            imageView.image = iconImage
+            
         default:
             operationLabel.text = ""
             titleLabel.text = ""

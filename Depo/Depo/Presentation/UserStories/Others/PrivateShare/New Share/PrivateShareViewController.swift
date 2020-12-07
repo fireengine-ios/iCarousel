@@ -336,16 +336,9 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
             return false
         }
         
-        if !text.contains("+") {
-            let digits = text.digits
-            if digits.count == 10, digits.first == "5" {
-                return true
-            } else if digits.count == 11, digits.prefix(2) == "05" {
-                return true
-            } else {
-                UIApplication.showErrorAlert(message: TextConstants.privateShareNonTurkishMsisdnPopUpText)
-                return false
-            }
+        if !text.contains("+"), !Validator.isValid(turkcellPhone: text) {
+            UIApplication.showErrorAlert(message: TextConstants.privateShareNonTurkishMsisdnPopUpText)
+            return false
         }
         
         return true

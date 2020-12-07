@@ -77,6 +77,10 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
             shareTypes.remove(.original)
         }
         
+        if sharingItems.contains(where: { $0.isLocalItem }) {
+            shareTypes.remove(.private)
+        }
+        
         shareTypes.forEach {
             controler.addAction(getAction(shareType: $0, sourceRect: sourceRect))
         }
@@ -146,8 +150,15 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     
     func shareOrignalSize(sourceRect: CGRect?) {
         if let items = sharingItems as? [WrapData] {
-            let files: [FileForDownload] = items.compactMap { FileForDownload(forOriginalURL: $0) }
-            shareFiles(filesForDownload: files, sourceRect: sourceRect, shareType: .originalSize)
+            let filesWithoutUrl = items.filter { $0.tmpDownloadUrl == nil }
+            fileService.createDownloadUrls(for: filesWithoutUrl) { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                let files: [FileForDownload] = items.compactMap { FileForDownload(forOriginalURL: $0) }
+                self.shareFiles(filesForDownload: files, sourceRect: sourceRect, shareType: .originalSize)
+            }
         }
     }
     
@@ -258,12 +269,31 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func edit(item: [BaseDataSourceItem], completion: VoidHandler?) {
         debugLog("PHOTOEDIT: start")
         
-        guard let item = item.first as? Item, let originalUrl = item.tmpDownloadUrl else {
-            debugLog("PHOTOEDIT: there's no item or originalUrl")
+        guard let item = item.first as? Item else {
+            completion?()
+            debugLog("PHOTOEDIT: there's no item")
             return
         }
         
-        photoEditImageDownloader.download(url: originalUrl, attempts: 2) { [weak self] image in
+        if let originalUrl = item.tmpDownloadUrl {
+            downloadEditImage(item: item, url: originalUrl, completion: completion)
+        } else {
+            fileService.createDownloadUrls(for: [item]) { [weak self] in
+                guard
+                    let self = self,
+                    let originalUrl = item.tmpDownloadUrl
+                else {
+                    completion?()
+                    debugLog("PHOTOEDIT: there's no url for private")
+                    return
+                }
+                self.downloadEditImage(item: item, url: originalUrl, completion: completion)
+            }
+        }
+    }
+    
+    private func downloadEditImage(item: WrapData, url: URL, completion: VoidHandler?) {
+        photoEditImageDownloader.download(url: url, attempts: 2) { [weak self] image in
             guard
                 let self = self,
                 let image = image
