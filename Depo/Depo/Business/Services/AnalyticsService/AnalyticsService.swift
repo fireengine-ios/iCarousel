@@ -141,6 +141,8 @@ protocol AnalyticsGA {///GA = GoogleAnalytics
     func trackCustomGAEvent(eventCategory: GAEventCategory, eventActions: GAEventAction, eventLabel: String)
     func trackPhotoEditEvent(category: GAEventCategory.PhotoEditCategory, eventAction: GAEventAction, eventLabel: GAEventLabel, filterType: String?)
 //    func trackDimentionsPaymentGA(screen: AnalyticsAppScreens, isPaymentMethodNative: Bool)//native = inApp apple
+    func trackStartShare(label: String, shareParameters: [String: Int])
+    func trackUploadShareWithMeItems(shareParameters: [String: Int])
 }
 
 extension AnalyticsService: AnalyticsGA {
@@ -726,6 +728,16 @@ extension AnalyticsService: AnalyticsGA {
             let parametrs = self.parameters(category: .sharedFolder,
                                             action: .share,
                                             label: .custom(label))
+
+            Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
+        }
+    }
+    
+    func trackUploadShareWithMeItems(shareParameters: [String: Int]) {
+        prepareDimentionsParametrs(screen: nil, shareParameters: shareParameters) { dimentionParametrs in
+            let parametrs = self.parameters(category: .sharedFolder,
+                                            action: .upload,
+                                            label: .empty)
 
             Analytics.logEvent(GACustomEventsType.event.key, parameters: parametrs + dimentionParametrs)
         }

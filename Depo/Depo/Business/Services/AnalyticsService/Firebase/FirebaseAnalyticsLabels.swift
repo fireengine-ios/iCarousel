@@ -348,20 +348,7 @@ enum GAEventLabel {
                     return "do not ask again"
                 }
             case .duration(let duration):
-                switch duration {
-                case .no:
-                    return "no duration"
-                case .hour:
-                    return "one hour"
-                case .day:
-                    return "one day"
-                case .week:
-                    return "one week"
-                case .month:
-                    return "one month"
-                case .year:
-                    return "one year"
-                }
+                return duration.rawValue
             }
         }
     }

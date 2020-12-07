@@ -183,7 +183,8 @@ final class PrivateShareAnalytics {
     }
     
     func sharedWithMeUploadedItems(count: Int) {
-        analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder, eventActions: .upload)
+        let shareParameters = ["sharedUploadCount": count]
+        analyticsService.trackUploadShareWithMeItems(shareParameters: shareParameters)
     }
     
     func removeFromShare() {
