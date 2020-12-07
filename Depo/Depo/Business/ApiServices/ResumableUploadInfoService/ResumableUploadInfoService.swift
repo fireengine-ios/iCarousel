@@ -11,7 +11,7 @@ import Alamofire
 
 
 protocol ResumableUploadInfoService {
-    func updateInfo(handler: @escaping VoidHandler)
+    func updateInfo(handler: @escaping ValueHandler<FeaturesResponse?>)
     func isResumableUploadAllowed(with fileSize: Int) -> Bool
     
     func getInterruptedId(for trimmedLocalId: String) -> String?
@@ -29,7 +29,7 @@ final class ResumableUploadInfoServiceImpl: ResumableUploadInfoService {
     private lazy var accountService = AccountService()
     
 
-    func updateInfo(handler: @escaping VoidHandler) {
+    func updateInfo(handler: @escaping ValueHandler<FeaturesResponse?>) {
         debugLog("update resumable upload info")
         
         accountService.getFeatures { [weak self] result in
@@ -40,13 +40,13 @@ final class ResumableUploadInfoServiceImpl: ResumableUploadInfoService {
             case .success(let response):
                 self?.userDefaults.isResumableUploadEnabled = response.isResumableUploadEnabled ?? currentUploadIsEnabled
                 self?.userDefaults.resumableUploadChunkSize = response.resumableUploadChunkSize ?? currentChunkSize
+                handler(response)
                 
             case .failed(let error):
                 debugLog(error.description)
+                handler(nil)
                 /// error is silenced
             }
-            
-            handler()
         }
     }
     
