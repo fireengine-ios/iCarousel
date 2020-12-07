@@ -264,8 +264,8 @@ final class PrivateShareViewController: BaseViewController, NibInit {
                 }
                 SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareStartPageSuccess)
                 self?.dismiss(animated: true)
-            case .failed(let error):
-                UIApplication.showErrorAlert(message: error.description)
+            case .failed(_):
+                UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
             }
         }
     }
@@ -308,6 +308,12 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     }
     
     func addShareContact(_ contact: PrivateShareContact) {
+        if let maxInviteeCount = SingletonStorage.shared.featuresInfo?.maxSharingInviteeCount,
+            shareWithView.contacts.count > maxInviteeCount {
+            UIApplication.showErrorAlert(message: String(format: TextConstants.privateShareMaxNumberOfUsersMessageFormat, maxInviteeCount))
+            return
+        }
+        
         guard isValidContact(text: contact.username) else {
             return
         }
