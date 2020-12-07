@@ -16,6 +16,7 @@ final class FileInfoInteractor {
 
     private lazy var localContactsService = ContactsSuggestionServiceImpl()
     private lazy var shareApiService = PrivateShareApiServiceImpl()
+    private lazy var analytics = PrivateShareAnalytics()
 }
 
 // MARK: FileInfoInteractorInput
@@ -48,6 +49,9 @@ extension FileInfoInteractor: FileInfoInteractorInput {
                 case .success():
                     item.name = newName
                     self?.output.updated()
+                    if !item.isOwner {
+                        self?.analytics.sharedWithMe(action: .rename, on: item)
+                    }
                     ItemOperationManager.default.didRenameItem(item)
                     
                 case .failed(let error):

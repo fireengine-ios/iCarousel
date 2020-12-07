@@ -22,6 +22,7 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
     private let contactStore = CNContactStore()
     private let queue = DispatchQueue(label: DispatchQueueLabels.localContactsServiceQueue)
     private let contactsStorage = LocalContactsStorage.shared
+    private lazy var analytics = PrivateShareAnalytics()
     
     init() {
         NotificationCenter.default.addObserver(self,
@@ -31,13 +32,15 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
     }
     
     func fetchAllContacts(completion: BoolHandler?) {
-        checkAuthorization { [weak self] isAuthorized in
+        checkAuthorization { [weak self] result in
             guard let self = self else {
                 completion?(false)
                 return
             }
             
-            guard isAuthorized else {
+            self.analytics.sendContactPermission(result: result)
+            
+            guard result.isAllowed else {
                 printLog("Local Contacts. Access denied.")
                 completion?(false)
                 return
@@ -79,14 +82,20 @@ final class ContactsSuggestionServiceImpl: ContactsSuggestionService {
     }
     
     //MARK - Private
-    private func checkAuthorization(completion: @escaping BoolHandler) {
+    private func checkAuthorization(completion: @escaping ValueHandler<(isAllowed: Bool, askedPermissions: Bool)>) {
+        let currentStatus = CNContactStore.authorizationStatus(for: .contacts)
+        if currentStatus.isContained(in: [.authorized, .denied]) {
+            completion((currentStatus == .authorized, false))
+            return
+        }
+        
         contactStore.requestAccess(for: .contacts) { isAllowed, error in
             if let error = error {
                 assertionFailure()
                 printLog("Contacts auth error: \(error)")
             }
             
-            completion(isAllowed)
+            completion((isAllowed, true))
         }
     }
     

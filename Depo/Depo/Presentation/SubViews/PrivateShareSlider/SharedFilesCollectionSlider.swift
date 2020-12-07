@@ -52,8 +52,11 @@ final class SharedFilesCollectionSliderView: UIView, NibInit {
 
     weak var delegate: SharedFilesCollectionSliderDelegate?
     
+    private lazy var analytics = PrivateShareAnalytics()
+    
     @IBAction private func showAll(_ sender: Any) {
         delegate?.showAllPressed()
+        analytics.openAllSharedFiles()
     }
     
     override func awakeFromNib() {

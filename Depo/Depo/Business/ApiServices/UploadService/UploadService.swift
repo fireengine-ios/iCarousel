@@ -21,6 +21,7 @@ final class UploadService: BaseRequestService {
     private var uploadOperations = SynchronizedArray<UploadOperation>()
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
+    private lazy var privateShareAnalytics = PrivateShareAnalytics()
     private lazy var autoSyncStorage = AutoSyncDataStorage()
     private lazy var reachabilityService = ReachabilityService.shared
     
@@ -450,8 +451,11 @@ final class UploadService: BaseRequestService {
                         }
                         
                         let checkIfFinished = {
-                            if self.uploadOperations.filter({ $0.uploadType.isContained(in: [.upload]) }).isEmpty {
+                            if self.uploadOperations.filter({ $0.uploadType.isContained(in: [uploadType]) }).isEmpty {
                                 self.trackUploadItemsFinished(items: itemsToUpload)
+                                if uploadType == .sharedWithMe {
+                                    self.trackUploadSharedWithMeItems(count: self.finishedSharedWithMeUploadOperationsCount)
+                                }
                                 success()
                                 ItemOperationManager.default.syncFinished()
                                 self.widgetNotifySyncFinished()
@@ -635,6 +639,12 @@ final class UploadService: BaseRequestService {
                     break
                 }
             }
+        }
+    }
+    
+    private func trackUploadSharedWithMeItems(count: Int) {
+        if count > 0 {
+            privateShareAnalytics.sharedWithMeUploadedItems(count: count)
         }
     }
     
