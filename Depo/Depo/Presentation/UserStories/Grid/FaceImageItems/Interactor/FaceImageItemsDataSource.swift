@@ -33,7 +33,7 @@ final class FaceImageItemsDataSource: BaseDataSourceForCollectionView {
             if faceImageType == .people && kind == UICollectionElementKindSectionHeader {
                 let carouselView = collectionView.dequeue(supplementaryView: CarouselPagerReusableViewController.self, kind: kind, for: indexPath)
                 carouselView.maxHeight = carouselViewHeight
-                carouselView.layoutIfNeeded()
+                carouselView.setup()
                 return carouselView
             }
             return super.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
