@@ -266,12 +266,31 @@ class MoreFilesActionsInteractor: NSObject, MoreFilesActionsInteractorInput {
     func edit(item: [BaseDataSourceItem], completion: VoidHandler?) {
         debugLog("PHOTOEDIT: start")
         
-        guard let item = item.first as? Item, let originalUrl = item.tmpDownloadUrl else {
-            debugLog("PHOTOEDIT: there's no item or originalUrl")
+        guard let item = item.first as? Item else {
+            completion?()
+            debugLog("PHOTOEDIT: there's no item")
             return
         }
         
-        photoEditImageDownloader.download(url: originalUrl, attempts: 2) { [weak self] image in
+        if let originalUrl = item.tmpDownloadUrl {
+            downloadEditImage(item: item, url: originalUrl, completion: completion)
+        } else {
+            fileService.createDownloadUrls(for: [item]) { [weak self] in
+                guard
+                    let self = self,
+                    let originalUrl = item.tmpDownloadUrl
+                else {
+                    completion?()
+                    debugLog("PHOTOEDIT: there's no url for private")
+                    return
+                }
+                self.downloadEditImage(item: item, url: originalUrl, completion: completion)
+            }
+        }
+    }
+    
+    private func downloadEditImage(item: WrapData, url: URL, completion: VoidHandler?) {
+        photoEditImageDownloader.download(url: url, attempts: 2) { [weak self] image in
             guard
                 let self = self,
                 let image = image
