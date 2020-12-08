@@ -71,6 +71,14 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     
     //MARK: - Public methods
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        textField.layoutIfNeeded()
+        textField.placeholderLabel?.adjustsFontSizeToFitWidth = true
+        textField.placeholderLabel?.minimumScaleFactor = 0.5
+    }
+    
     func setContact(info: ContactInfo) {
         displayName = info.name
         textField.text = info.value
