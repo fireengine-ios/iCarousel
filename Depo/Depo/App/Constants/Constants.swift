@@ -2191,4 +2191,7 @@ struct TextConstants {
     static let privateSharePreviewNotReady = NSLocalizedString("private_share_preview_not_ready", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareMoveToTrashSharedWithMeMessage = NSLocalizedString("private_share_confirm_trash_items", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
     static let privateShareMaxNumberOfUsersMessageFormat = NSLocalizedString("private_share_start_max_number_of_users", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateShareMessageLimit = NSLocalizedString("private_share_long_message", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    static let privateSharePhoneOrMailLimit = NSLocalizedString("private_share_long_emailmsisdn", tableName: "OurLocalizable", bundle: .main, value: "", comment: "")
+    
 }

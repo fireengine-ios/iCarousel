@@ -264,8 +264,16 @@ final class PrivateShareViewController: BaseViewController, NibInit {
                 }
                 SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareStartPageSuccess)
                 self?.dismiss(animated: true)
-            case .failed(_):
-                UIApplication.showErrorAlert(message: TextConstants.temporaryErrorOccurredTryAgainLater)
+            case .failed(let error):
+                var errorMessage = ""
+                if error.description == "Invalid sharing message" {
+                    errorMessage = TextConstants.privateShareMessageLimit
+                } else if error.description == "Invalid sharing subject" {
+                    errorMessage = TextConstants.privateSharePhoneOrMailLimit
+                } else {
+                    errorMessage = TextConstants.temporaryErrorOccurredTryAgainLater
+                }
+                UIApplication.showErrorAlert(message: errorMessage)
             }
         }
     }
