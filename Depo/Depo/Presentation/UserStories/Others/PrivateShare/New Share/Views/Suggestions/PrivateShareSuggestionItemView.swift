@@ -22,8 +22,15 @@ final class PrivateShareSuggestionItemView: UIView, NibInit {
     static func with(text: String, type: SuggestionItemType, delegate: PrivateShareSuggestionItemViewDelegate?) -> PrivateShareSuggestionItemView {
         let view = PrivateShareSuggestionItemView.initFromNib()
         view.delegate = delegate
-        view.titleLabel.text = text
         view.type = type
+        
+        if type == .phone {
+            let allowedCharacterSet = CharacterSet.decimalDigits.union(CharacterSet(charactersIn: "+()"))
+            view.titleLabel.text = text.components(separatedBy: allowedCharacterSet.inverted).joined()
+        } else {
+            view.titleLabel.text = text
+        }
+
         return view
     }
     
@@ -40,12 +47,7 @@ final class PrivateShareSuggestionItemView: UIView, NibInit {
     private var type: SuggestionItemType = .phone
     
     @IBAction private func onAddTapped(_ sender: UIButton) {
-        var value = titleLabel.text ?? ""
-        if type == .phone {
-            let allowedCharacterSet = CharacterSet.decimalDigits.union(CharacterSet(charactersIn: "+()"))
-            value = value.components(separatedBy: allowedCharacterSet.inverted).joined()
-        }
-        delegate?.addItem(string: value)
+        delegate?.addItem(string: titleLabel.text ?? "")
     }
     
 }

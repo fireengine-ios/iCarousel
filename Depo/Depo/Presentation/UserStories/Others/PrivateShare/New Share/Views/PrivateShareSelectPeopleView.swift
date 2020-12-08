@@ -75,6 +75,11 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
         displayName = info.name
         textField.text = info.value
         changeButtonEnabledIfNeeded(text: info.value)
+        
+        //add contact to shared with section
+        if !info.value.isEmpty {
+            onAddTapped(addButton)
+        }
     }
     
     func clear() {
