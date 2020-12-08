@@ -2124,3 +2124,6 @@ Please check I have understood the intended command here*/
 "private_share_plus_button_no_action" = "Le nouveau fichier ne peut pas être téléchargé sur cette page";
 "private_share_confirm_trash_items" = "Etes-vous sûr que vous voulez supprimer?";
 "private_share_preview_not_ready" = "Le fichier ne peut pas être prévisualisé maintenant. Veuillez réessayer plus tard.";
+"private_share_long_message" = "";
+"private_share_long_emailmsisdn" = "";
+"private_share_start_max_number_of_users" = "";

@@ -1818,3 +1818,6 @@
 "private_share_plus_button_no_action" = "Neue Dateien können auf dieser Seite nicht hochgeladen werden";
 "private_share_confirm_trash_items" = "Sind Sie sicher, dass Sie löschen möchten?";
 "private_share_preview_not_ready" = "Datei kann jetzt nicht in der Vorschau angezeigt werden. Bitte versuchen Sie es später noch einmal.";
+"private_share_long_message" = "";
+"private_share_long_emailmsisdn" = "";
+"private_share_start_max_number_of_users" = "";

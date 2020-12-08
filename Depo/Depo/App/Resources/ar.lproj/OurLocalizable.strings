@@ -1830,3 +1830,6 @@
 "private_share_plus_button_no_action" = "لا يمكن تحميل ملف جديد في هذه الصفحة";
 "private_share_confirm_trash_items" = "هل أنت متأكد من أنك ترغب في المسح؟";
 "private_share_preview_not_ready" = "لا يمكن معاينة الملف الآن. الرجاء معاودة المحاولة في وقت لاحق.";
+"private_share_long_message" = "";
+"private_share_long_emailmsisdn" = "";
+"private_share_start_max_number_of_users" = "";
