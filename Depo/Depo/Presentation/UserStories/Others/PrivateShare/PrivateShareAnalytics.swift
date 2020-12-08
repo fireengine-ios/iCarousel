@@ -6,8 +6,6 @@
 //  Copyright © 2020 LifeTech. All rights reserved.
 //
 
-import Foundation
-
 final class PrivateShareAnalytics {
     
     private lazy var analyticsService: AnalyticsService = factory.resolve()
@@ -50,26 +48,35 @@ final class PrivateShareAnalytics {
         analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
                                             eventActions: .click,
                                             eventLabel: .privateShare(.seeAll))
+        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.SeeAllSharedEvent())
     }
     
     func trackScreen(_ screen: SharedScreen) {
         let gaScreen: AnalyticsAppScreens
+        let netmeraScreen: NetmeraScreenEventTemplate
         
         switch screen {
         case .sharedWithMe:
             gaScreen = .sharedWithMe
+            netmeraScreen = NetmeraEvents.Screens.SharedWithMeScreen()
         case .sharedByMe:
             gaScreen = .sharedByMe
+            netmeraScreen = NetmeraEvents.Screens.SharedByMeScreen()
         case .whoHasAccess:
             gaScreen = .whoHasAccess
+            netmeraScreen = NetmeraEvents.Screens.WhoHasAccessScreen()
         case .sharedAccess:
             gaScreen = .sharedAccess
+            netmeraScreen = NetmeraEvents.Screens.SharedAccessScreenScreen()
         case .shareInfo:
             gaScreen = .shareInfo
+            netmeraScreen = NetmeraEvents.Screens.PrivateShareInfoScreen()
         }
         
         analyticsService.logScreen(screen: gaScreen)
         analyticsService.trackDimentionsEveryClickGA(screen: gaScreen)
+        AnalyticsService.sendNetmeraEvent(event: netmeraScreen)
     }
     
     func openPrivateShare() {
@@ -118,6 +125,9 @@ final class PrivateShareAnalytics {
         analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
                                             eventActions: .message,
                                             eventLabel: messageLabel)
+        
+        let netmeraShareEvent = NetmeraEvents.Actions.Share(method: .private, channelType: "", duration: duration)
+        AnalyticsService.sendNetmeraEvent(event: netmeraShareEvent)
     }
     
     func endShare(item: BaseDataSourceItem) {
@@ -125,6 +135,8 @@ final class PrivateShareAnalytics {
         analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
                                             eventActions: .endShare,
                                             eventLabel: .fileTypeOperation(gaFileType))
+        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.EndShareEvent())
     }
     
     func leaveShare(item: BaseDataSourceItem) {
@@ -132,6 +144,8 @@ final class PrivateShareAnalytics {
         analyticsService.trackCustomGAEvent(eventCategory: .sharedFolder,
                                             eventActions: .leaveShare,
                                             eventLabel: .fileTypeOperation(gaFileType))
+        
+        AnalyticsService.sendNetmeraEvent(event: NetmeraEvents.Actions.LeaveShareEvent())
     }
     
     func addApiSuggestion() {
