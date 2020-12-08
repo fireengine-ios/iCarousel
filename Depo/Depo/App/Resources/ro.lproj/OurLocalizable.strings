@@ -1818,3 +1818,6 @@
 "private_share_plus_button_no_action" = "Pe această pagină nu poate fi încărcat fișier nou";
 "private_share_confirm_trash_items" = "Ești sigur că vrei să ștergi?";
 "private_share_preview_not_ready" = "Fișierul nu poate fi previzualizat acum. Vă rugăm să încercați din nou mai târziu.";
+"private_share_long_message" = "";
+"private_share_long_emailmsisdn" = "";
+"private_share_start_max_number_of_users" = "";

@@ -1832,3 +1832,6 @@
 "private_share_plus_button_no_action" = "Новый файл невозможно загрузить на этой странице";
 "private_share_confirm_trash_items" = "Вы уверены, что хотите удалить?";
 "private_share_preview_not_ready" = "Предварительный просмотр файла сейчас невозможен. Пожалуйста, повторите попытку позже.";
+"private_share_long_message" = "";
+"private_share_long_emailmsisdn" = "";
+"private_share_start_max_number_of_users" = "";

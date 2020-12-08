@@ -1866,3 +1866,6 @@
 "private_share_plus_button_no_action" = "New item(s) can not be uploaded in this page";
 "private_share_confirm_trash_items" = "Are you sure to delete item(s)?";
 "private_share_preview_not_ready" = "File can not be previewed now. Please try again later.";
+"private_share_long_message" = "Your message is too long. Please shorten your message and try again";
+"private_share_long_emailmsisdn" = "Your email or msisdn is too long. Please shorten it and try again";
+"private_share_start_max_number_of_users" = "You can not add more than %d people to share.";
