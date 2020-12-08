@@ -470,6 +470,36 @@ extension NetmeraEvents.Screens {
             return "cqg"
         }
     }
+    
+    final class SharedByMeScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "ruk"
+        }
+    }
+    
+    final class SharedWithMeScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "upm"
+        }
+    }
+    
+    final class WhoHasAccessScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "guu"
+        }
+    }
+    
+    final class SharedAccessScreenScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "zuk"
+        }
+    }
+    
+    final class PrivateShareInfoScreen: NetmeraScreenEventTemplate {
+        override var key: String {
+            return "hcv"
+        }
+    }
 }
 
 
