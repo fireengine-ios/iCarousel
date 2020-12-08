@@ -35,12 +35,18 @@ final class CarouselPagerReusableViewController: UICollectionReusableView, UIScr
         }
     }
     
-    override func layoutIfNeeded() {
-        super.layoutIfNeeded()
-        setup()
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        updateLayoutIfNeeded()
     }
     
-    private func setup() {
+    func setup() {
+        guard carouselPageModels.isEmpty else {
+            return
+        }
+        
+        layoutIfNeeded()
         scrollView.delegate = self
         
         carouselPageModels = CarouselPagerDataSource.getCarouselPageModels()
@@ -64,6 +70,24 @@ final class CarouselPagerReusableViewController: UICollectionReusableView, UIScr
         
         pageControl.isHidden = (carouselPageModels.count <= 1)
         
+    }
+    
+    private func updateLayoutIfNeeded() {
+        guard let pageView = scrollView.subviews.first else {
+            return
+        }
+        
+        let width = scrollView.frame.width
+        
+        if pageView.frame.width != width || pageView.frame.height != maxHeight {
+            var x: CGFloat = 0
+            let size = CGSize(width: width, height: maxHeight)
+            scrollView.subviews.forEach {
+                $0.frame = CGRect(origin: CGPoint(x: x, y: 0), size: size)
+                x = x + width
+                $0.layoutIfNeeded()
+            }
+        }
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
