@@ -62,7 +62,7 @@ final class LandingPageCollectionViewDataSource: NSObject {
         var image: UIImage?
         switch indexPath.row {
         case 0:
-            image = UIImage(named: "LandingImage0")
+            image = UIImage(named: "LandingImage4")
         case 1:
             image = UIImage(named: "LandingImage3")
         case 2:
