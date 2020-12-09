@@ -40,7 +40,7 @@
                     </constraints>
                 </scrollView>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2mQ-Dg-Efm">
-                    <rect key="frame" x="0.0" y="114" width="414" height="664"/>
+                    <rect key="frame" x="0.0" y="116" width="414" height="662"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ui7-rz-0Ps">
@@ -69,7 +69,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2mQ-Dg-Efm" secondAttribute="trailing" id="ADc-im-Fxp"/>
-                <constraint firstItem="2mQ-Dg-Efm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="70" id="BSe-jp-cqI"/>
+                <constraint firstItem="2mQ-Dg-Efm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="72" id="BSe-jp-cqI"/>
                 <constraint firstItem="ui7-rz-0Ps" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="F5Y-cB-Q0t"/>
                 <constraint firstItem="ui7-rz-0Ps" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-84" id="Obk-jm-2Q1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kEE-p6-0hz" secondAttribute="trailing" id="TUk-Ov-bMj"/>
