@@ -4,5 +4,5 @@ NSPhotoLibraryAddUsageDescription = "Për të treguar fotot dhe videot tuaja në
 NSPhotoLibraryUsageDescription = "Për të treguar fotot dhe videot tuaja në aplikacion dhe për të mbështetur ato, lifebox ka nevojë për aksesin tuaj të bibliotekës së fotove.";
 NSLocationAlwaysAndWhenInUseUsageDescription = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit dhe për organizimin dhe kërkimin e fotove tuaja.";
 NSCameraUsageDescription = "Për të marrë fotografi me aparatin tuaj dhe për të mbështetur ato në kutinë e jetës, leja e qasjes në kamera është e nevojshme";
-NSContactsUsageDescription = "lifebox duhet të ketë qasje dhe të ngarkojë kontaktet tuaja në serverat e kutisë së jetës për t'i kopjuar dhe menaxhuar ato.";
+NSContactsUsageDescription = "Lejo lifebox-in  për të jetë e mundur ti shikosh sugjerimet udhëzuese gjatë ndarjes së skedarëve dhe të rezervosh librin tënd telefonik  në serverat e lifebox-it dhe të  menaxhosh atë.";
 NSLocationWhenInUseUsageDescription = "Vendndodhja juaj do të përdoret për sinkronizimin e sfondit dhe për organizimin dhe kërkimin e fotove tuaja.";
