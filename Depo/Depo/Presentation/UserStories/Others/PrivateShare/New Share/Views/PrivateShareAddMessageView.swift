@@ -71,13 +71,6 @@ extension PrivateShareAddMessageView: UITextViewDelegate {
         }
         
         let changedText = textView.text.replacingCharacters(in: stringRange, with: text)
-        if changedText.utf16.count > messageLengthLimit {
-            //insert the maximum possible number of letters
-            let index = String.Index(utf16Offset: messageLengthLimit, in: changedText)
-            textView.text = String(changedText[...index])
-            return false
-        }
-        
-        return true
+        return changedText.count <= messageLengthLimit
     }
 }
