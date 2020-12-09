@@ -30,6 +30,14 @@ final class PrivateShareAddMessageView: UIView, NibInit {
         }
     }
     
+    @IBOutlet private weak var counterLabel: UILabel! {
+        willSet {
+            newValue.text = "0/\(messageLengthLimit)"
+            newValue.textColor = UIColor.black.withAlphaComponent(0.3)
+            newValue.font = .TurkcellSaturaDemFont(size: 16)
+        }
+    }
+    
     private lazy var toolbar: UIToolbar = {
         let toolbar = UIToolbar()
         toolbar.isOpaque = true
@@ -61,6 +69,10 @@ final class PrivateShareAddMessageView: UIView, NibInit {
     @objc private func hideKeyboard() {
         textView.resignFirstResponder()
     }
+    
+    private func updateCounter(count: Int) {
+        counterLabel.text = "\(count)/\(messageLengthLimit)"
+    }
 }
 
 extension PrivateShareAddMessageView: UITextViewDelegate {
@@ -72,5 +84,9 @@ extension PrivateShareAddMessageView: UITextViewDelegate {
         
         let changedText = textView.text.replacingCharacters(in: stringRange, with: text)
         return changedText.count <= messageLengthLimit
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        updateCounter(count: textView.text.count)
     }
 }
