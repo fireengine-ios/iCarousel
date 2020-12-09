@@ -1785,8 +1785,8 @@
 "private_share_start_page_role_1" = "Düzenleyen";
 "private_share_start_page_role_2" = "Görüntüleyen";
 "private_share_role_selection_page_name" = "Erişim";
-"private_share_role_selection_role_1" = "Düzenleyen";
-"private_share_role_selection_role_2" = "Görüntüleyen";
+"private_share_role_selection_role_1" = "Düzenleyebilir";
+"private_share_role_selection_role_2" = "Görüntüleyebilir";
 "private_share_msisdn_format" = "Lütfen geçerli bir GSM numarası gir.";
 "private_share_start_page_share_success" = "Paylaşım başarılı.";
 "private_share_cancel_confirm" = "Çıkmak istediğinden emin misin?";
@@ -1836,3 +1836,6 @@
 "private_share_plus_button_no_action" = "Bu sayfada yeni dosya yüklenemez";
 "private_share_confirm_trash_items" = "Silmek istediğinden emin misin?";
 "private_share_preview_not_ready" = "Önizleme gerçekleştirilemiyor. Lütfen daha sonra tekrar deneyiniz.";
+"private_share_long_message" = "";
+"private_share_long_emailmsisdn" = "";
+"private_share_start_max_number_of_users" = "";
