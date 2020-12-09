@@ -46,18 +46,20 @@ extension ServerMessageError: LocalizedError {
 
 //MARK: - private share related
 extension ServerMessageError {
-    func getPrivateShareError() -> String? {
+    func getPrivateShareError() -> String {
         if let customErrorCode = customErrorCode {
             switch customErrorCode {
             case 4115:
                 return TextConstants.privateShareMessageLimit
             case 4114:
                 return TextConstants.privateSharePhoneOrMailLimit
-            default:
+            case 4116:
                 return TextConstants.temporaryErrorOccurredTryAgainLater
+            default:
+                return errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
             }
         } else {
-            return errorDescription
+            return errorDescription ?? TextConstants.temporaryErrorOccurredTryAgainLater
         }
     }
 }

@@ -265,12 +265,7 @@ final class PrivateShareViewController: BaseViewController, NibInit {
                 SnackbarManager.shared.show(type: .nonCritical, message: TextConstants.privateShareStartPageSuccess)
                 self?.dismiss(animated: true)
             case .failed(let error):
-                var errorMessage = TextConstants.temporaryErrorOccurredTryAgainLater
-
-                if let error = error as? ServerMessageError,
-                   let message = error.getPrivateShareError() {
-                    errorMessage = message
-                }
+                let errorMessage = (error as? ServerMessageError)?.getPrivateShareError() ?? TextConstants.temporaryErrorOccurredTryAgainLater
                 UIApplication.showErrorAlert(message: errorMessage)
             }
         }
