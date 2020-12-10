@@ -310,7 +310,7 @@ extension PrivateShareViewController: PrivateShareSelectPeopleViewDelegate {
     
     func addShareContact(_ contact: PrivateShareContact) {
         if let maxInviteeCount = SingletonStorage.shared.featuresInfo?.maxSharingInviteeCount,
-            shareWithView.contacts.count > maxInviteeCount {
+            shareWithView.contacts.count >= maxInviteeCount {
             UIApplication.showErrorAlert(message: String(format: TextConstants.privateShareMaxNumberOfUsersMessageFormat, maxInviteeCount))
             return
         }
