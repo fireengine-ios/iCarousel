@@ -10,6 +10,7 @@ import UIKit
 
 protocol BasicCollectionMultiFileCellActionDelegate: class {
     func morebuttonGotPressed(sender: Any, itemModel: Item?)
+    func onSelectMoreAction(type: ElementTypes, itemModel: Item?, sender: Any?)
 }
 
 class BasicCollectionMultiFileCell: BaseCollectionViewCell {
@@ -202,6 +203,8 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
             }
             setSelectionSmallSelectionImageView(isSelected, isHidden: isHidden)
         }
+        
+        configureMoreActinButton()
     }
     
     override func setSelection(isSelectionActive: Bool, isSelected: Bool) {
@@ -404,5 +407,22 @@ class BasicCollectionMultiFileCell: BaseCollectionViewCell {
     
     override func cleanCell() {
         cellImageManager?.cancelImageLoading()
+    }
+    
+    private func configureMoreActinButton() {
+        if #available(iOS 14.0, *) {
+            moreButton.showsMenuAsPrimaryAction = true
+
+            guard let item = itemModel else {
+                return
+            }
+            
+            let menu = MenuItemsFabric.generateMenu(for: item, status: item.status) { [weak self] actionType in
+                self?.actionDelegate?.onSelectMoreAction(type: actionType, itemModel: self?.itemModel, sender: self?.moreButton)
+            }
+            moreButton.menu = menu
+        } else {
+            moreButton.addTarget(self, action: #selector(moreButtonAction(_:)), for: .touchUpInside)
+        }
     }
 }

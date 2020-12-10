@@ -615,6 +615,10 @@ extension TrashBinDataSource: LBCellsDelegate, BasicCollectionMultiFileCellActio
             delegate?.onMoreButtonTapped(sender: sender, item: item)
         }
     }
+    
+    func onSelectMoreAction(type: ElementTypes, itemModel: Item?, sender: Any?) {
+        //implement UIMenu logic if needed
+    }
 }
 
 //MARK: - AlbumsSliderCellDelegate

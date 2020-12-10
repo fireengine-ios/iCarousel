@@ -379,6 +379,14 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath) { }
     
+    func didSelectAction(type: ElementTypes, on item: Item?, sender: Any?) {
+        guard let item = item else {
+            return
+        }
+        
+        alertSheetModule?.handleAction(type: type, items: [item], sender: sender)
+    }
+    
     private func getSameTypeItems(fileType: FileType, items: [BaseDataSourceItem]) -> [BaseDataSourceItem] {
         if fileType.isDocument {
             return items.filter { $0.fileType.isDocument }
