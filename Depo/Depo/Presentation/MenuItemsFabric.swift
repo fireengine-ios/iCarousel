@@ -31,7 +31,6 @@ final class MenuItemsFabric {
         }
         
         return UIMenu(title: "",
-                      identifier: .file,
                       options: .displayInline,
                       children: items)
     }
@@ -52,7 +51,6 @@ final class MenuItemsFabric {
             }
             return UIMenu(title: ElementTypes.share.actionTitle(),
                           image: ElementTypes.share.menuImage,
-                          identifier: .share,
                           children: items)
         }
     }
