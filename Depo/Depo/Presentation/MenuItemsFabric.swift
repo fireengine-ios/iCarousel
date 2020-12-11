@@ -30,7 +30,7 @@ final class MenuItemsFabric {
             }
         }
         
-        return UIMenu(title: item.name ?? "",
+        return UIMenu(title: "",
                       identifier: .file,
                       options: .displayInline,
                       children: items)
