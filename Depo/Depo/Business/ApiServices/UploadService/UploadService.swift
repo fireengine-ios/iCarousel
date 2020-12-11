@@ -451,11 +451,13 @@ final class UploadService: BaseRequestService {
                     let checkIfFinished = {
                         if self.uploadOperations.filter({ $0.uploadType.isContained(in: [uploadType]) }).isEmpty {
                             
-                            success()
-                            
                             if uploadType == .sharedWithMe {
                                 self.trackUploadSharedWithMeItems(count: self.finishedSharedWithMeUploadOperationsCount)
-                            } else {
+                            }
+                            
+                            success()
+                            
+                            if uploadType != .sharedWithMe {
                                 self.trackUploadItemsFinished(items: itemsToUpload)
                                 self.widgetNotifySyncFinished()
                             }
