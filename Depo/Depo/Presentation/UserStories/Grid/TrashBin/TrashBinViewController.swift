@@ -212,6 +212,10 @@ extension TrashBinViewController: TrashBinDataSourceDelegate {
     func onMoreButtonTapped(sender: Any, item: Item) {
         threeDotsManager.showActions(item: item, sender: sender)
     }
+    
+    func didSelectActionInMenu(action: ActionType, item: Item) {
+        threeDotsManager.handleAction(type: action, item: item)
+    }
 }
 
 //MARK: - TrashBinSortingManagerDelegate

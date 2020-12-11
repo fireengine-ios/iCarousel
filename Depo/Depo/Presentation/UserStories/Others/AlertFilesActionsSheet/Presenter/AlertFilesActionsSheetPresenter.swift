@@ -620,6 +620,10 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
     }
     
+    func handleShare(type: ShareTypes, sourceRect: CGRect?, items: [BaseDataSourceItem]) {
+        interactor.handleShare(type: type, sourceRect: sourceRect, items: items)
+    }
+    
     private func trackNetmeraAction(type: ElementTypes) {
         var button: NetmeraEventValues.ButtonName?
         

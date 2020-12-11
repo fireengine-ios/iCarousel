@@ -38,8 +38,13 @@ final class PrivateShareSharedItemThreeDotsManager {
         }
     }
     
-    func handleAction(type: ElementTypes, item: Item, sender: Any?) {
-        alert.handleAction(type: type, items: [item], sender: sender)
+    func handleAction(type: ActionType, item: Item, sender: Any?) {
+        switch type {
+        case .elementType(let elementType):
+            alert.handleAction(type: elementType, items: [item], sender: sender)
+        case .shareType(let shareType):
+            alert.handleShare(type: shareType, sourceRect: nil, items: [item])
+        }
     }
     
     private func rootScreenActionTypes(for shareType: PrivateShareType, item: WrapData) -> [ElementTypes] {

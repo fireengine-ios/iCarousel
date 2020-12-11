@@ -23,7 +23,7 @@ protocol PrivateShareSharedFilesCollectionManagerDelegate: class {
     func didEndReload()
     
     func showActions(for item: WrapData, sender: Any)
-    func didSelectAction(type: ElementTypes, on item: Item, sender: Any?)
+    func didSelectAction(type: ActionType, on item: Item, sender: Any?)
     
     func needToShowSpinner()
     func needToHideSpinner()
@@ -535,7 +535,7 @@ extension PrivateShareSharedFilesCollectionManager: LBCellsDelegate, BasicCollec
         delegate?.showActions(for: item, sender: sender)
     }
     
-    func onSelectMoreAction(type: ElementTypes, itemModel: Item?, sender: Any?) {
+    func onSelectMoreAction(type: ActionType, itemModel: Item?, sender: Any?) {
         guard let item = itemModel else {
             return
         }

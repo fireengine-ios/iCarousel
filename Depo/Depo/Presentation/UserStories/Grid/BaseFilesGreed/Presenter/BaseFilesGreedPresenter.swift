@@ -379,12 +379,17 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
     
     func onSelectedFaceImageDemoCell(with indexPath: IndexPath) { }
     
-    func didSelectAction(type: ElementTypes, on item: Item?, sender: Any?) {
+    func didSelectAction(type: ActionType, on item: Item?, sender: Any?) {
         guard let item = item else {
             return
         }
         
-        alertSheetModule?.handleAction(type: type, items: [item], sender: sender)
+        switch type {
+        case .elementType(let elementType):
+            alertSheetModule?.handleAction(type: elementType, items: [item], sender: sender)
+        case .shareType(let shareType):
+            alertSheetModule?.handleShare(type: shareType, sourceRect: nil, items: [item])
+        }
     }
     
     private func getSameTypeItems(fileType: FileType, items: [BaseDataSourceItem]) -> [BaseDataSourceItem] {
