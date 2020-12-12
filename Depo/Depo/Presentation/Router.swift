@@ -609,7 +609,7 @@ class RouterVC: NSObject {
     }
     
     var sharedFiles: UIViewController {
-        return SegmentedController.initWithControllers([sharedByMe, sharedWithMe], alignment: .center)
+        return SegmentedController.initWithControllers([sharedWithMe, sharedByMe], alignment: .center)
     }
     
     var sharedWithMe: UIViewController {

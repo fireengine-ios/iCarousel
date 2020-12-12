@@ -32,6 +32,7 @@ class StorageCard: BaseCardView {
         subTileLabel.textColor = ColorConstants.whiteColor
             
         backgroundView.clipsToBounds = true
+        canSwipe = false
     }
     
     override func layoutSublayers(of layer: CALayer) {
@@ -68,10 +69,6 @@ class StorageCard: BaseCardView {
         if let operationType = operationType, operationType == .freeAppSpaceLocalWarning {
             onBottomButton()
         }
-    }
-    
-    @IBAction func onCloseButton() {
-        deleteCard()
     }
     
     override func deleteCard() {

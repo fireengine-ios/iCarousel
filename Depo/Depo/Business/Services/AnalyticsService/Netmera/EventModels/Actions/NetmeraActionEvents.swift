@@ -183,22 +183,25 @@ extension NetmeraEvents.Actions {
         
         @objc var method = ""
         @objc var channelType = ""
+        @objc var duration = ""
         
-        convenience init(method: NetmeraEventValues.ShareMethodType, channelType: String) {
+        convenience init(method: NetmeraEventValues.ShareMethodType, channelType: String, duration: PrivateShareDuration? = nil) {
             
-            self.init(method: method.text, channelType: channelType)
+            self.init(method: method.text, channelType: channelType, duration: duration)
         }
         
-        convenience init(method: String, channelType: String) {
+        convenience init(method: String, channelType: String, duration: PrivateShareDuration? = nil) {
             self.init()
             self.method = method
             self.channelType = channelType
+            self.duration = duration?.rawValue ?? ""
         }
         
         override class func keyPathPropertySelectorMapping() -> [AnyHashable: Any] {
             return [
                 "ea" : #keyPath(method),
                 "eb" : #keyPath(channelType),
+                "ee" : #keyPath(duration)
             ]
         }
         
@@ -1312,6 +1315,30 @@ extension NetmeraEvents.Actions {
                 "ea" : #keyPath(buttonName)
             ]
         }
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class SeeAllSharedEvent: NetmeraEvent {
+        private let key = "wpr"
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class EndShareEvent: NetmeraEvent {
+        private let key = "xay"
+        
+        override var eventKey : String {
+            return key
+        }
+    }
+    
+    final class LeaveShareEvent: NetmeraEvent {
+        private let key = "zvw"
         
         override var eventKey : String {
             return key

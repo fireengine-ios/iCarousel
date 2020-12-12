@@ -44,7 +44,7 @@ final class PrivateShareRoleCheckmarkView: UIView, NibInit {
     }
     
     private weak var delegate: PrivateShareRoleCheckmarkViewDelegate?
-    private(set) var role: PrivateShareUserRole = .editor
+    private(set) var role: PrivateShareUserRole = .viewer
 
     private func setup(with role: PrivateShareUserRole) {
         button.setTitle(role.selectionTitle, for: .normal)

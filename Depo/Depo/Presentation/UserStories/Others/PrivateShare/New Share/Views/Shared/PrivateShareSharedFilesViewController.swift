@@ -53,6 +53,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
     private lazy var itemThreeDotsManager = PrivateShareSharedItemThreeDotsManager(delegate: self)
     
     private let router = RouterVC()
+    private let analytics = PrivateShareAnalytics()
     
     //MARK: - Override
     
@@ -70,6 +71,7 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         setupPlusButton()
         showSpinner()
         ItemOperationManager.default.startUpdateView(view: self)
+        trackScreen()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -141,7 +143,8 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         cardsContainer.delegate = self
         cardsContainer.isEnable = true
         
-        cardsContainer.addPermittedPopUpViewTypes(types: [.upload, .download])
+        let permittedTypes: [OperationType] = shareType.rootType == .byMe ? [.upload, .download] : [.sharedWithMeUpload, .download]
+        cardsContainer.addPermittedPopUpViewTypes(types: permittedTypes)
         
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 25, right: 0)
         collectionView.addSubview(cardsContainer)
@@ -163,6 +166,17 @@ final class PrivateShareSharedFilesViewController: BaseViewController, Segmented
         cardsContainer.isActive = isActive
         if isActive {
             CardsManager.default.updateAllProgressesInCardsForView(view: cardsContainer)
+        }
+    }
+    
+    private func trackScreen() {
+        switch shareType {
+        case .byMe:
+            analytics.trackScreen(.sharedByMe)
+        case .withMe:
+            analytics.trackScreen(.sharedWithMe)
+        default:
+            break
         }
     }
 }

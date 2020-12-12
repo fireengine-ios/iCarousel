@@ -28,6 +28,7 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
     @IBOutlet private weak var suggestionsView: UIStackView!
     
     private weak var delegate: PrivateShareSelectSuggestionsDelegate?
+    private lazy var analytics = PrivateShareAnalytics()
     
     private func setup(with contacts: [SuggestedContact]) {
         guard !contacts.isEmpty else {
@@ -47,6 +48,7 @@ final class PrivateShareSuggestionsView: UIView, NibInit {
 
 extension PrivateShareSuggestionsView: PrivateShareContactSuggestionViewDelegate {
     func selectContact(info: ContactInfo) {
+        analytics.addApiSuggestion()
         delegate?.didSelect(contactInfo: info)
     }
 }

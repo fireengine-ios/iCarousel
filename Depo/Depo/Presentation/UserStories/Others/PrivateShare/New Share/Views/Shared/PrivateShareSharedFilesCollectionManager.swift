@@ -429,8 +429,13 @@ extension PrivateShareSharedFilesCollectionManager: UICollectionViewDelegateFlow
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let sortingRule = fileInfoManager.sorting.sortingRules
+        guard sortingRule != .size else {
+            return CGSize.zero
+        }
+        
         let sectionIsEmpty = fileInfoManager.splittedItems[section]?.isEmpty ?? true
-        let height: CGFloat =  sectionIsEmpty ? 0 : 50
+        let height: CGFloat = sectionIsEmpty ? 0 : 50
         return CGSize(width: collectionView.contentSize.width, height: height)
     }
     
