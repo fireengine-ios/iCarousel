@@ -92,6 +92,24 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     
     private let textFieldColor = UIColor.black
     
+    private lazy var datePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        
+        datePicker.addTarget(self, action: #selector(dateDidChanged), for: .valueChanged)
+        datePicker.maximumDate = Date()
+        datePicker.datePickerMode = .date
+        datePicker.isOpaque = true
+        
+        if #available(iOS 13.4, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
+        
+        return datePicker
+    }()
+    
+    
+    //MARK: -
+    
     override var isEditState: Bool {
         willSet {
             textField.isUserInteractionEnabled = newValue
@@ -158,6 +176,10 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
         textField.delegate = delegate
         monthTextField.delegate = delegate
         yearTextField.delegate = delegate
+        
+        if let dateString = text, let date = dateFormatter.date(from: dateString) {
+            datePicker.setDate(date, animated: false)
+        }
     }
     
     @objc private func dateDidChanged(_ datePicker: UIDatePicker) {
@@ -176,13 +198,6 @@ final class ProfileBirthdayFieldView: ProfileFieldView {
     }
     
     private func prepareTextFields() {
-        let datePicker = UIDatePicker()
-        
-        datePicker.addTarget(self, action: #selector(dateDidChanged), for: .valueChanged)
-        datePicker.maximumDate = Date()
-        datePicker.datePickerMode = .date
-        datePicker.isOpaque = true
-        
         let toolbar = UIToolbar()
         toolbar.isOpaque = true
         toolbar.barStyle = .default

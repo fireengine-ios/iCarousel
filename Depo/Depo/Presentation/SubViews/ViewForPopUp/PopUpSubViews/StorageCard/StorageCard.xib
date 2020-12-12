@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="StorageCard" customModule="lifebox" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="StorageCard" customModule="Billo" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="505" height="129"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -43,25 +41,12 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHh-wG-6sD">
-                            <rect key="frame" x="472" y="0.0" width="33" height="33"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="33" id="BDE-DO-egr"/>
-                                <constraint firstAttribute="width" constant="33" id="meu-vs-dGY"/>
-                            </constraints>
-                            <state key="normal" image="CloseCardIconWhite"/>
-                            <connections>
-                                <action selector="onCloseButton" destination="iN0-l3-epB" eventType="touchUpInside" id="XVj-sa-6Md"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="kHh-wG-6sD" firstAttribute="top" secondItem="Oa9-hs-Yj6" secondAttribute="top" id="7pq-ux-mCJ"/>
                         <constraint firstItem="Qe9-qo-i3A" firstAttribute="top" secondItem="Oa9-hs-Yj6" secondAttribute="top" id="HjR-ew-rAw"/>
                         <constraint firstAttribute="trailing" secondItem="9eJ-8T-ehP" secondAttribute="trailing" constant="40" id="IXI-SC-cqx"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="85" id="J2M-FK-LVW"/>
-                        <constraint firstAttribute="trailing" secondItem="kHh-wG-6sD" secondAttribute="trailing" id="LY3-Zl-WWE"/>
                         <constraint firstItem="9eJ-8T-ehP" firstAttribute="leading" secondItem="Oa9-hs-Yj6" secondAttribute="leading" constant="14" id="NUe-x4-Uo2"/>
                         <constraint firstAttribute="bottom" secondItem="mY8-Qy-c8h" secondAttribute="bottom" constant="14" id="cIC-3j-z7I"/>
                         <constraint firstAttribute="trailing" secondItem="Qe9-qo-i3A" secondAttribute="trailing" id="eWd-Gl-F3u"/>
@@ -71,13 +56,13 @@
                         <constraint firstItem="9eJ-8T-ehP" firstAttribute="top" secondItem="Oa9-hs-Yj6" secondAttribute="top" constant="14" id="rmT-AD-UXD"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bid-hb-HoW">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bid-hb-HoW">
                     <rect key="frame" x="0.0" y="85" width="505" height="44"/>
                     <connections>
                         <action selector="onBigButton" destination="iN0-l3-epB" eventType="touchUpInside" id="vr9-Sx-Nle"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M5S-bt-Nck">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M5S-bt-Nck">
                     <rect key="frame" x="14" y="85" width="46" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="u7J-qc-bop"/>
@@ -113,7 +98,4 @@
             <point key="canvasLocation" x="89.5" y="-217.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="CloseCardIconWhite" width="14" height="14"/>
-    </resources>
 </document>

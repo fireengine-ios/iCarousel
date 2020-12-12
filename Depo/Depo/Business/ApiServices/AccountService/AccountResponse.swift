@@ -452,6 +452,7 @@ final class FeaturesResponse: ObjectRequestResponse {
         static let autoSyncDisabled = "auto-sync-disabled"
         static let isResumableUploadEnabled = "resumable-upload-enabled"
         static let resumableUploadChunkSize = "resumable-upload-chunk-size-in-bytes"
+        static let maxSharingInviteeCount = "max-sharing-invitee-count"
     }
     
     var isNonTcellPaycellSubscription: Bool?
@@ -464,6 +465,7 @@ final class FeaturesResponse: ObjectRequestResponse {
     var isAutoSyncDisabled: Bool?
     var isResumableUploadEnabled: Bool?
     var resumableUploadChunkSize: Int?
+    var maxSharingInviteeCount: Int?
 
     override func mapping() {
         isNonTcellPaycellSubscription = json?[ResponseKey.nonTcellPaycellSubscription].bool
@@ -476,6 +478,7 @@ final class FeaturesResponse: ObjectRequestResponse {
         isAutoSyncDisabled = json?[ResponseKey.autoSyncDisabled].bool
         isResumableUploadEnabled = json?[ResponseKey.isResumableUploadEnabled].bool
         resumableUploadChunkSize = json?[ResponseKey.resumableUploadChunkSize].int
+        maxSharingInviteeCount = json?[ResponseKey.maxSharingInviteeCount].int
     }
     
 }

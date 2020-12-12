@@ -20,6 +20,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
     
     private let albumService = PhotosAlbumService()
     private lazy var privateShareService = PrivateShareApiServiceImpl()
+    private lazy var analytics = PrivateShareAnalytics()
     
     var rootFolderID: String?
     var isFavorite: Bool?
@@ -129,6 +130,7 @@ class SelectNameInteractor: SelectNameInteractorInput {
                             let wrapDataItem = WrapData(privateShareFileInfo: createdFolder)
                             self.output.operationSuccess(operation: self.moduleType, item: wrapDataItem, isSubFolder: isSubfolder)
                             ItemOperationManager.default.newFolderCreated()
+                            self.analytics.sharedWithMe(action: .createFolder, on: nil)
                         }
                     }
                     

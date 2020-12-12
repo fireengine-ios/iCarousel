@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,10 +15,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oe6-Aa-Uls">
-                    <rect key="frame" x="16" y="16" width="382" height="15"/>
+                    <rect key="frame" x="16" y="16" width="332" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="rgG-yf-RZ3"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAZ-p2-Dn1">
+                    <rect key="frame" x="356" y="13" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -45,17 +51,20 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="YNt-pp-hqy" secondAttribute="trailing" constant="16" id="0q8-ue-o5f"/>
                 <constraint firstAttribute="trailing" secondItem="4OC-a4-HJX" secondAttribute="trailing" constant="16" id="4Im-Vk-ITU"/>
+                <constraint firstAttribute="trailing" secondItem="cAZ-p2-Dn1" secondAttribute="trailing" constant="16" id="A5e-h0-6nf"/>
                 <constraint firstItem="YNt-pp-hqy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Bxv-cY-wur"/>
                 <constraint firstAttribute="bottom" secondItem="4OC-a4-HJX" secondAttribute="bottom" constant="16" id="Ecw-hQ-QEW"/>
-                <constraint firstAttribute="trailing" secondItem="oe6-Aa-Uls" secondAttribute="trailing" constant="16" id="IQs-6a-sfR"/>
+                <constraint firstItem="cAZ-p2-Dn1" firstAttribute="leading" secondItem="oe6-Aa-Uls" secondAttribute="trailing" constant="8" id="ceW-pg-yHX"/>
                 <constraint firstItem="oe6-Aa-Uls" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="krY-kJ-h4Q"/>
                 <constraint firstAttribute="bottom" secondItem="YNt-pp-hqy" secondAttribute="bottom" id="u5V-kq-DgQ"/>
                 <constraint firstItem="oe6-Aa-Uls" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="uy1-5i-BBK"/>
+                <constraint firstItem="cAZ-p2-Dn1" firstAttribute="centerY" secondItem="oe6-Aa-Uls" secondAttribute="centerY" id="v4k-kK-GNy"/>
                 <constraint firstItem="4OC-a4-HJX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="v5c-kC-n89"/>
                 <constraint firstItem="4OC-a4-HJX" firstAttribute="top" secondItem="oe6-Aa-Uls" secondAttribute="bottom" constant="14" id="vl1-nK-N8Y"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="counterLabel" destination="cAZ-p2-Dn1" id="ift-Je-edi"/>
                 <outlet property="textView" destination="4OC-a4-HJX" id="V10-uE-g7X"/>
                 <outlet property="titleLabel" destination="oe6-Aa-Uls" id="oPD-aU-uSh"/>
             </connections>

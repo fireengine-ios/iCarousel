@@ -32,7 +32,7 @@ enum ResponseParser {
         } else if let status = JSON(data: data)["status"].string {
             return ServerStatusError(status: status, code: statusCode)
         } else if let message = JSON(data: data)["errorMsg"].string {
-            return ServerMessageError(message: message, code: statusCode)
+            return ServerMessageError(message: message, code: statusCode, customErrorCode: JSON(data: data)["errorCode"].int)
         } else {
             return nil
         }

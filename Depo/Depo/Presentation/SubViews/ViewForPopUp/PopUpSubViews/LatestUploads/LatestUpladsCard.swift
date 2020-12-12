@@ -46,7 +46,7 @@ class LatestUpladsCard: BaseCardView {
         viewAllPhotosButton.adjustsFontSizeToFitWidth()
         
         collectionView.register(nibCell: LatestUploadCardCell.self)
-        
+        canSwipe = false
     }
     
     override func layoutSubviews() {
@@ -114,10 +114,6 @@ class LatestUpladsCard: BaseCardView {
     
     @IBAction func onViewAllPhotosButton() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: TabBarViewController.notificationPhotosScreen), object: nil, userInfo: nil)
-    }
-    
-    @IBAction func onCloseButton() {
-        deleteCard()
     }
     
     override func deleteCard() {
