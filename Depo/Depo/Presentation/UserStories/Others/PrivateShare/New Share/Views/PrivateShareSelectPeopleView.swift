@@ -71,8 +71,8 @@ final class PrivateShareSelectPeopleView: UIView, NibInit {
     
     //MARK: - Public methods
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
         textField.layoutIfNeeded()
         textField.placeholderLabel?.adjustsFontSizeToFitWidth = true

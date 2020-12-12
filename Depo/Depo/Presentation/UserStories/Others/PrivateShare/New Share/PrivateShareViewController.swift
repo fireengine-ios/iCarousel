@@ -96,6 +96,11 @@ final class PrivateShareViewController: BaseViewController, NibInit {
         navigationBarWithGradientStyle()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        selectPeopleView.layoutSubviews()
+    }
+    
     private func getRemoteSuggestions() {
         //load remote suggestion once
         if !remoteSuggestions.isEmpty {
