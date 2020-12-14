@@ -620,7 +620,8 @@ class AlertFilesActionsSheetPresenter: MoreFilesActionsPresenter, AlertFilesActi
         }
     }
     
-    func handleShare(type: ShareTypes, sourceRect: CGRect?, items: [BaseDataSourceItem]) {
+    func handleShare(type: ShareTypes, items: [BaseDataSourceItem], sender: Any?) {
+        let sourceRect = getSourceRect(sender: sender, controller: nil)
         interactor.handleShare(type: type, sourceRect: sourceRect, items: items)
     }
     
