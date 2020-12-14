@@ -112,7 +112,8 @@ class SimpleUpload: UploadRequestParametrs {
         let connectionStatus = ReachabilityService.shared.uploadConnectionTypeName
         
         let name = item.name ?? tmpUUID
-        let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
+        let fixed = name.precomposedStringWithCanonicalMapping
+        let encodedName = fixed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
         
         header = header + [
             HeaderConstant.connectionType        : connectionStatus,
@@ -218,7 +219,8 @@ final class ResumableUpload: UploadRequestParametrs {
         let connectionType = ReachabilityService.shared.uploadConnectionTypeName
         
         let name = item.name ?? tmpUUID
-        let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
+        let fixed = name.precomposedStringWithCanonicalMapping
+        let encodedName = fixed.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
         
         header = header + [
             HeaderConstant.connectionType : connectionType,
