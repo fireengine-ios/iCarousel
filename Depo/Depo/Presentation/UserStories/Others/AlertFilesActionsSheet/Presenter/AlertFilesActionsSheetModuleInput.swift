@@ -25,5 +25,5 @@ protocol AlertFilesActionsSheetModuleInput: class {
     
     func handleAction(type: ElementTypes, items: [BaseDataSourceItem], sender: Any?)
     
-    func handleShare(type: ShareTypes, sourceRect: CGRect?, items: [BaseDataSourceItem])
+    func handleShare(type: ShareTypes, items: [BaseDataSourceItem], sender: Any?)
 }

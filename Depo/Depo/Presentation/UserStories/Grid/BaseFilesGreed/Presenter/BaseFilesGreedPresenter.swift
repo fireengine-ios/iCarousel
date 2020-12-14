@@ -388,7 +388,7 @@ class BaseFilesGreedPresenter: BasePresenter, BaseFilesGreedModuleInput, BaseFil
         case .elementType(let elementType):
             alertSheetModule?.handleAction(type: elementType, items: [item], sender: sender)
         case .shareType(let shareType):
-            alertSheetModule?.handleShare(type: shareType, sourceRect: nil, items: [item])
+            alertSheetModule?.handleShare(type: shareType, items: [item], sender: sender)
         }
     }
     
