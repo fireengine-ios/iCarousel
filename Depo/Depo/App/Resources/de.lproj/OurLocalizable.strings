@@ -1819,5 +1819,5 @@
 "private_share_confirm_trash_items" = "Sind Sie sicher, dass Sie löschen möchten?";
 "private_share_preview_not_ready" = "Datei kann jetzt nicht in der Vorschau angezeigt werden. Bitte versuchen Sie es später noch einmal.";
 "private_share_long_message" = "";
-"private_share_long_emailmsisdn" = "";
-"private_share_start_max_number_of_users" = "";
+"private_share_long_emailmsisdn" = "E-Mail oder Mobilnummer übersteigt die Anzahl der zulässigen Charakter.";
+"private_share_start_max_number_of_users" = "Es kann maximal mit %d Personen geteilt werden.";

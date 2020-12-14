@@ -1821,7 +1821,7 @@
 "private_share_leave_sharing_action_title" = "Paylaşımdan Ayrıl";
 "private_share_who_has_access_role_4" = "Diğer";
 "private_share_all_files_section_1" = "Paylaşılanlar";
-"private_share_all_files_section_1_see_all" = "Tümünü gör";
+"private_share_all_files_section_1_see_all" = "Paylaşımlı Dosyalar";
 "private_share_all_files_section_2" = "Dosyalarım";
 "private_share_access_role_1" = "Düzenleyen";
 "private_share_access_role_2" = "Görüntüleyen";
@@ -1837,5 +1837,5 @@
 "private_share_confirm_trash_items" = "Silmek istediğinden emin misin?";
 "private_share_preview_not_ready" = "Önizleme gerçekleştirilemiyor. Lütfen daha sonra tekrar deneyiniz.";
 "private_share_long_message" = "";
-"private_share_long_emailmsisdn" = "";
-"private_share_start_max_number_of_users" = "";
+"private_share_long_emailmsisdn" = "E-Posta veya GSM numarası karakter limitini aşıyor.";
+"private_share_start_max_number_of_users" = "Maksimum %d kişi ile paylaşım yapılabilir.";
