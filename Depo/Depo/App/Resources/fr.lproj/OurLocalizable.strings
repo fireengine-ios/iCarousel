@@ -1708,6 +1708,8 @@ Please check I have understood the intended command here*/
 "mobile_payment_close_popup_description_bold_range" = "532";
 "mobile_payment_open_popup_title" = "Cadeau Internet hebdomadaire de 2 Go!";
 "mobile_payment_open_popup_description" = "Vous pouvez gagner 2 Go d'Internet hebdomadaire en activant l'autorisation de paiement mobile. Pour gagner un accès Internet hebdomadaire unique de 2 Go, vous pouvez confirmer votre paiement mobile en cliquant sur le bouton Continuer.\n\nVous pouvez trouver les détails de la campagne sur l’adresse internet www.turkcell.com.tr.";
+
+/*do not translate*/
 "mobile_payment_open_popup_description_bold_range" = "";
 "mobile_payment_open_popup_later_button" = "Plus Tard";
 "mobile_payment_open_popup_continue_button" = "Continuer";
@@ -2125,5 +2127,5 @@ Please check I have understood the intended command here*/
 "private_share_confirm_trash_items" = "Etes-vous sûr que vous voulez supprimer?";
 "private_share_preview_not_ready" = "Le fichier ne peut pas être prévisualisé maintenant. Veuillez réessayer plus tard.";
 "private_share_long_message" = "";
-"private_share_long_emailmsisdn" = "";
-"private_share_start_max_number_of_users" = "";
+"private_share_long_emailmsisdn" = "Le numéro de courrier électronique ou de GSM dépasse la limite de caractères.";
+"private_share_start_max_number_of_users" = "Le partage peut être effectué avec un maximum de %d personnes.";

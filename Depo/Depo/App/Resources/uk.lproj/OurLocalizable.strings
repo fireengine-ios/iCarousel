@@ -1821,5 +1821,5 @@
 "private_share_confirm_trash_items" = "Ви впевнені, що хочете видалити?";
 "private_share_preview_not_ready" = "Файл не можна попередньо переглянути. Будь-ласка спробуйте пізніше.";
 "private_share_long_message" = "";
-"private_share_long_emailmsisdn" = "";
-"private_share_start_max_number_of_users" = "";
+"private_share_long_emailmsisdn" = "Номер GSM або електронна пошта перевищує ліміт символів.";
+"private_share_start_max_number_of_users" = "Спільне використання може здійснюватися не більше ніж з %d людиною.";
