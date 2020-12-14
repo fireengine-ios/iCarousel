@@ -147,9 +147,6 @@
                                                             <constraint firstAttribute="height" constant="39" id="m8N-oZ-fVC"/>
                                                         </constraints>
                                                         <state key="normal" image="more-1"/>
-                                                        <connections>
-                                                            <action selector="moreButtonAction:" destination="jCE-Fv-hOx" eventType="touchUpInside" id="r0q-rQ-Tpc"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>

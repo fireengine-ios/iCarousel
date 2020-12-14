@@ -36,6 +36,15 @@ final class TrashBinThreeDotMenuManager {
         let types = [.info] + ElementTypes.trashState
         showAlertSheet(with: types, item: item, sender: sender)
     }
+    
+    func handleAction(type: ActionType, item: Item) {
+        switch type {
+        case .elementType(let elementType):
+            handleAction(type: elementType, item: item)
+        case .shareType:
+            break
+        }
+    }
 
     private func showAlertSheet(with types: [ElementTypes], item: Item?, sender: Any) {
         guard let controller = RouterVC().getViewControllerForPresent() else {
@@ -48,25 +57,9 @@ final class TrashBinThreeDotMenuManager {
         types.forEach { type in
             let action: UIAlertAction?
             switch type {
-            case .restore:
-                action = UIAlertAction(title: TextConstants.actionSheetRestore, style: .default, handler: { [weak self] _ in
-                    self?.delegate.onThreeDotsManagerRestore(item: item)
-                })
-            case .select:
-                action = UIAlertAction(title: TextConstants.actionSheetSelect, style: .default, handler: { [weak self] _ in
-                    self?.delegate.onThreeDotsManagerSelect()
-                })
-            case .delete:
-                action = UIAlertAction(title: TextConstants.actionSheetDelete, style: .default, handler: { [weak self] _ in
-                    self?.delegate.onThreeDotsManagerDelete(item: item)
-                })
-            case .emptyTrashBin:
-                action = UIAlertAction(title: TextConstants.actionSheetEmptyTrashBin, style: .default, handler: { [weak self] _ in
-                    self?.delegate.onThreeDotsManagerDeleteAll()
-                })
-            case .info:
-                action = UIAlertAction(title: TextConstants.actionSheetInfo, style: .default, handler: { [weak self] _ in
-                    self?.delegate.onThreeDotsManagerInfo(item: item)
+            case .restore, .select, .delete, .emptyTrashBin, .info:
+                action = UIAlertAction(title: type.actionTitle(), style: .default, handler: { [weak self] _ in
+                    self?.handleAction(type: type, item: item)
                 })
             default:
                 assertionFailure("unowned action")
@@ -95,5 +88,22 @@ final class TrashBinThreeDotMenuManager {
         actionSheetVC.popoverPresentationController?.permittedArrowDirections = .up
         
         controller.present(actionSheetVC, animated: true)
+    }
+    
+    private func handleAction(type: ElementTypes, item: Item?) {
+        switch type {
+        case .restore:
+            delegate.onThreeDotsManagerRestore(item: item)
+        case .select:
+            delegate.onThreeDotsManagerSelect()
+        case .delete:
+            delegate.onThreeDotsManagerDelete(item: item)
+        case .emptyTrashBin:
+            delegate.onThreeDotsManagerDeleteAll()
+        case .info:
+            delegate.onThreeDotsManagerInfo(item: item)
+        default:
+            break
+        }
     }
 }

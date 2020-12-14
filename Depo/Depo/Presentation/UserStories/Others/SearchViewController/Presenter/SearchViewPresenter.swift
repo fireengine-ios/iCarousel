@@ -396,6 +396,19 @@ class SearchViewPresenter: BasePresenter, SearchViewOutput, SearchViewInteractor
         router.openAlbum(item: album)
     }
     
+    func didSelectAction(type: ActionType, on item: Item?, sender: Any?) {
+        guard let item = item else {
+            return
+        }
+        
+        switch type {
+        case .elementType(let elementType):
+            alertSheetModule?.handleAction(type: elementType, items: [item], sender: sender)
+        case .shareType(let shareType):
+            alertSheetModule?.handleShare(type: shareType, sourceRect: nil, items: [item])
+        }
+    }
+    
     // MARK: - Spinner
     
     private func showSpinner() {
