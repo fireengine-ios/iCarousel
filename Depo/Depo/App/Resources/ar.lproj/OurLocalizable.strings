@@ -1771,7 +1771,7 @@
 "private_share_start_page_shared_with_section" = "جهات الاتصال المشاركة";
 "private_share_start_page_add_message_section_name" = "أضف رسالة";
 "private_share_start_page_add_messge_field" = "(اختياري)";
-"private_share_start_page_share_duration_section_name" = "فترة الصلاحية";
+"private_share_start_page_share_duration_section_name" = "فترة الصلاحية\n";
 "private_share_start_page_share_duration_1" = "بدون مدة محددة";
 "private_share_start_page_share_duration_2" = "ساعة";
 "private_share_start_page_share_duration_3" = "يوم";
@@ -1831,5 +1831,5 @@
 "private_share_confirm_trash_items" = "هل أنت متأكد من أنك ترغب في المسح؟";
 "private_share_preview_not_ready" = "لا يمكن معاينة الملف الآن. الرجاء معاودة المحاولة في وقت لاحق.";
 "private_share_long_message" = "";
-"private_share_long_emailmsisdn" = "";
-"private_share_start_max_number_of_users" = "";
+"private_share_long_emailmsisdn" = "يتعدى البريد الإلكتروني أو رقم GSM  حد الحروف .";
+"private_share_start_max_number_of_users" = "يمكن القيام بمشاركة معd% شخص كحد أقصى.";

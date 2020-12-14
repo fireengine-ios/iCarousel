@@ -1851,7 +1851,7 @@
 "private_share_leave_sharing_action_title" = "Leave Sharing";
 "private_share_who_has_access_role_4" = "Other";
 "private_share_all_files_section_1" = "Shared with me";
-"private_share_all_files_section_1_see_all" = "See all";
+"private_share_all_files_section_1_see_all" = "All Shared Files";
 "private_share_all_files_section_2" = "My Files";
 "private_share_access_role_1" = "Editor";
 "private_share_access_role_2" = "Viewer";
@@ -1866,9 +1866,8 @@
 "private_share_plus_button_no_action" = "New item(s) can not be uploaded in this page";
 "private_share_confirm_trash_items" = "Are you sure to delete item(s)?";
 "private_share_preview_not_ready" = "File can not be previewed now. Please try again later.";
-"private_share_start_max_number_of_users" = "You can not add more than %d people to share.";
+
+/*We can remove this tag since we will limit the text area with 500 characters*/
 "private_share_long_message" = "private_share_long_message";
-"private_share_long_emailmsisdn" = "private_share_long_emailmsisdn";
-"private_share_long_message" = "Your message is too long. Please shorten your message and try again";
-"private_share_long_emailmsisdn" = "Your email or msisdn is too long. Please shorten it and try again";
-"private_share_start_max_number_of_users" = "You can not add more than %d people to share.";
+"private_share_long_emailmsisdn" = "Your E-mail or GSM number exceeds character limitation.";
+"private_share_start_max_number_of_users" = "You can not share with more than %d people.";
