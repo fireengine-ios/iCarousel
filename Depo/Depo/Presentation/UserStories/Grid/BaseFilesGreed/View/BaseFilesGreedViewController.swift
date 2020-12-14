@@ -541,7 +541,7 @@ extension BaseFilesGreedViewController {
     }
 }
 
-extension BaseFilesGreedViewController: SharedFilesCollectionManagerDelegate {
+extension BaseFilesGreedViewController: PrivateShareSliderFilesCollectionManagerDelegate {
     func showAll() {
         output.openPrivateShareFiles()
     }

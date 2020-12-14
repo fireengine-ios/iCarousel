@@ -8,23 +8,23 @@
 
 import UIKit
 
-protocol SharedFilesCollectionManagerDelegate: class {
+protocol PrivateShareSliderFilesCollectionManagerDelegate: class {
     func showAll()
     func open(entity: WrapData, allEnteties: [WrapData])
     func startAsyncOperation()
     func completeAsyncOperation()
 }
 
-final class SharedFilesCollectionManager {
+final class PrivateShareSliderFilesCollectionManager {
     let sharedSliderHeight: CGFloat = 224
     
     private let shareApiService = PrivateShareApiServiceImpl()
     private lazy var datasource = SharedFilesCollectionDataSource()
     let sharedFilesSlider = SharedFilesCollectionSliderView.initFromNib()
     
-    private let numberOfDisplayedSharedItems: Int = 5
+    private let numberOfDisplayedSharedItems: Int = 20
     
-    weak var delegate: SharedFilesCollectionManagerDelegate?
+    weak var delegate: PrivateShareSliderFilesCollectionManagerDelegate?
     
     init() {
         self.datasource.delegate = self
@@ -84,7 +84,7 @@ final class SharedFilesCollectionManager {
     }
 }
 
-extension SharedFilesCollectionManager: SharedFilesCollectionDataSourceDelegate {
+extension PrivateShareSliderFilesCollectionManager: SharedFilesCollectionDataSourceDelegate {
     func cellTouched(withModel: WrapData) {
         if withModel.fileType == .audio {
             if withModel.urlToFile == nil || withModel.urlToFile?.isExpired == true {
@@ -105,7 +105,7 @@ extension SharedFilesCollectionManager: SharedFilesCollectionDataSourceDelegate 
     }
 }
 
-extension SharedFilesCollectionManager: SharedFilesCollectionSliderDelegate {
+extension PrivateShareSliderFilesCollectionManager: SharedFilesCollectionSliderDelegate {
     func showAllPressed() {
         delegate?.showAll()
     }
