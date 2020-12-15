@@ -306,7 +306,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesTopLabel?.text = text
         noFilesTopLabel?.isHidden = !cardsContainerView.viewsArray.isEmpty
         topBarContainer.isHidden = true
-        floatingHeaderContainerHeightConstraint.constant = 0
+        floatingHeaderContainerHeightConstraint?.constant = 0
         view.layoutIfNeeded()
     }
     
@@ -314,7 +314,7 @@ class BaseFilesGreedViewController: BaseViewController, BaseFilesGreedViewInput,
         noFilesView.isHidden = true
         noFilesTopLabel?.isHidden = true
         topBarContainer.isHidden = false
-        floatingHeaderContainerHeightConstraint.constant = calculatedUnderNavBarBarHeight
+        floatingHeaderContainerHeightConstraint?.constant = calculatedUnderNavBarBarHeight
         view.layoutIfNeeded()
     }
     

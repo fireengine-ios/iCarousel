@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GridListTopBar" customModule="lifebox" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GridListTopBar" customModule="Billo" customModuleProvider="target">
             <connections>
+                <outlet property="centerYConstraint" destination="ZD4-gp-yMM" id="ae1-Xx-5QO"/>
                 <outlet property="gridListButton" destination="2hB-ca-1KW" id="HEf-Ig-rtV"/>
                 <outlet property="segmentFilter" destination="wal-TA-Zbe" id="hOT-Cp-UMb"/>
                 <outlet property="sortByButton" destination="R7m-go-R4c" id="FSg-j0-lRy"/>
@@ -62,19 +61,19 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="wal-TA-Zbe" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="5" id="TFZ-iF-xwc"/>
-                <constraint firstItem="2hB-ca-1KW" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="5" id="Ymo-to-PQY"/>
+                <constraint firstItem="2hB-ca-1KW" firstAttribute="centerY" secondItem="R7m-go-R4c" secondAttribute="centerY" id="CG9-nI-DEH"/>
                 <constraint firstItem="R7m-go-R4c" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="5" id="ZD4-gp-yMM"/>
                 <constraint firstItem="wal-TA-Zbe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R7m-go-R4c" secondAttribute="trailing" constant="8" id="ZWt-3B-set"/>
                 <constraint firstItem="R7m-go-R4c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="hsT-5L-dXY"/>
                 <constraint firstItem="wal-TA-Zbe" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="lWj-2g-ibL"/>
+                <constraint firstItem="wal-TA-Zbe" firstAttribute="centerY" secondItem="R7m-go-R4c" secondAttribute="centerY" id="p6X-9N-zV0"/>
                 <constraint firstAttribute="trailing" secondItem="2hB-ca-1KW" secondAttribute="trailing" constant="10" id="z7H-O7-FVO"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-48.5" y="-202.5"/>
+            <point key="canvasLocation" x="-48.799999999999997" y="-202.84857571214394"/>
         </view>
     </objects>
     <resources>
