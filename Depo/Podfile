@@ -16,6 +16,7 @@ def core_pods
   pod 'Firebase/Core', '~> 6'
   pod 'Firebase/Crashlytics', '~> 6'
   pod 'Firebase/Analytics', '~> 6'
+  pod 'Firebase/RemoteConfig', '~> 6'
   pod 'FBSDKCoreKit', '~> 7'
   pod 'FBSDKLoginKit', '~> 7'
   pod 'FBSDKShareKit', '~> 7'

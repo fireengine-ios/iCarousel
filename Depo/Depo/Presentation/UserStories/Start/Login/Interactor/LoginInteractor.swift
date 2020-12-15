@@ -41,11 +41,7 @@ class LoginInteractor: LoginInteractorInput {
     
     private var loginRetries = 0 {
         didSet {
-            if loginRetries == NumericConstants.showFAQViewAttempts {
-                output?.showFAQView()
-            } else if loginRetries >= NumericConstants.showSupportViewAttempts {
-                output?.showSupportView()
-            }
+            showRelatedHelperView()
         }
     }
     
@@ -73,6 +69,29 @@ class LoginInteractor: LoginInteractorInput {
     }
     
     //MARK: Utility Methods(private)
+    
+    private func showRelatedHelperView() {
+        if loginRetries == NumericConstants.showFAQViewAttempts {
+            output?.showFAQView()
+        } else {
+            #if LIFEBOX
+            FirebaseRemoteConfig.shared.fetchAttemptsBeforeSupportOnLogin { [weak self] attempts in
+                guard let self = self else {
+                    return
+                }
+                
+                if self.loginRetries >= attempts {
+                    self.output?.showSupportView()
+                }
+            }
+            #else
+            if loginRetries >= NumericConstants.showSupportViewAttempts {
+                output?.showSupportView()
+            }
+            #endif
+        }
+    }
+    
     private func hasEmptyPhone(accountWarning: String) -> Bool {
         return accountWarning == HeaderConstant.emptyMSISDN
     }
